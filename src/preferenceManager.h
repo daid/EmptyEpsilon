@@ -10,7 +10,7 @@ private:
 public:
     static void set(string key, string value);
     static string get(string key, string default_value="");
-    
+
     static void load(string filename);
     static void save(string filename);
 };

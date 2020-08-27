@@ -7,7 +7,7 @@ class GuiBeamFrequencySelector : public GuiSelector
 {
 public:
     GuiBeamFrequencySelector(GuiContainer* owner, string id);
-    
+
     virtual void onHotkey(const HotkeyResult& key) override;
 };
 

@@ -13,7 +13,7 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 void GuiSignalQualityIndicator::onDraw(sf::RenderTarget& window)
 {
     drawStretchedHV(window, rect, 25.0f, "gui/PanelBackground");
-    
+
     sf::VertexArray r(sf::LinesStrip, rect.width / 4 - 1);
     sf::VertexArray g(sf::LinesStrip, rect.width / 4 - 1);
     sf::VertexArray b(sf::LinesStrip, rect.width / 4 - 1);
@@ -30,7 +30,7 @@ void GuiSignalQualityIndicator::onDraw(sf::RenderTarget& window)
     for(unsigned int n=0; n<r.getVertexCount(); n++)
     {
         float f;
-        
+
         f = sin(float(n) * freq[0] + phase[0]);
         f = (1.0 - noise[0]) * f + noise[0] * random(-1.0, 1.0);
         r[n].position.x = rect.left + 4.0 + n * 4;

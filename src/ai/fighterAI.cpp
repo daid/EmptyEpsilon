@@ -66,7 +66,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         if (distance < 500 + target->getRadius())
         {
             aggression += random(0, 0.05);
-            
+
             attack_state = evade;
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
 

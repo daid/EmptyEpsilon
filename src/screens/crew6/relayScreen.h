@@ -33,6 +33,7 @@ private:
     GuiKeyValueDisplay* info_faction;
 
     GuiKeyValueDisplay* info_reputation;
+    GuiKeyValueDisplay* info_clock;
     GuiAutoLayout* option_buttons;
     GuiButton* hack_target_button;
     GuiToggleButton* link_to_science_button;
@@ -44,12 +45,12 @@ private:
 
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
-    
+
     GuiHackingDialog* hacking_dialog;
 
     sf::Vector2f mouse_down_position;
 public:
-    RelayScreen(GuiContainer* owner);
+    RelayScreen(GuiContainer* owner, bool allow_comms);
 
     virtual void onDraw(sf::RenderTarget& window);
 };

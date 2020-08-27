@@ -8,6 +8,7 @@ Nuke::Nuke()
 : MissileWeapon("Nuke", MissileWeaponData::getDataFor(MW_Nuke))
 {
     avoid_area_added = false;
+    setRadarSignatureInfo(0.0, 0.7, 0.1);
 }
 
 void Nuke::explode()
@@ -20,6 +21,7 @@ void Nuke::explode()
     e->setPosition(getPosition());
     e->setOnRadar(true);
     e->setExplosionSound("sfx/nuke_explosion.wav");
+    setRadarSignatureInfo(0.0, 0.7, 1.0);
 }
 
 void Nuke::hitObject(P<SpaceObject> object)

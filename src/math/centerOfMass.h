@@ -42,14 +42,14 @@ template<typename T> bool insidePolygon(const std::vector<sf::Vector2<T>>& path,
 {
     if (path.size() < 1)
         return false;
-    
+
     int crossings = 0;
     sf::Vector2i p = sf::Vector2i(point);
     sf::Vector2i p0 = sf::Vector2i(path[path.size()-1]);
     for(unsigned int n=0; n<path.size(); n++)
     {
         sf::Vector2i p1 = sf::Vector2i(path[n]);
-        
+
         if ((p0.y >= p.y && p1.y < p.y) || (p1.y > p.y && p0.y <= p.y))
         {
             int64_t x = p0.x + (p1.x - p0.x) * (p.y - p0.y) / (p1.y - p0.y);

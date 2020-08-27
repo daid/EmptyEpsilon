@@ -18,13 +18,26 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHull);
     /// Set the maximum amount of hull for this station. Stations never repair hull damage, so this only effects the percentage displays
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setHullMax);
-    /// Set if the object can be destroyed or not. true or false
+    /// Set whether the object can be destroyed.
+    /// Requires a Boolean value.
+    /// Example: ship:setCanBeDestroyed(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setCanBeDestroyed);
-    /// Get if the object can be destroyed or not. true or false
+    /// Get whether the object can be destroyed.
+    /// Returns a Boolean value.
+    /// Example: ship:getCanBeDestroyed()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getCanBeDestroyed);
-    /// Get the current shield level, stations only have a single shield, unlike ships that have a front&back shield
+    /// Get the specified shield's current level.
+    /// Requires an integer index value.
+    /// Returns a float value.
+    /// Example to get shield level on front shields of a ship with two shields:
+    ///     ship:getShieldLevel(0)
+    /// Rear shields: ship:getShieldLevel(1)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldLevel);
-    /// Get the amount of shields fit on this object.
+    /// Get the number of shields on this object.
+    /// For example, a ship with 1 shield count has a single shield covering
+    /// all angles, a ship with 2 covers front and back, etc.
+    /// Returns an integer count.
+    /// Example: ship:getShieldCount()
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldCount);
     /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
@@ -33,9 +46,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// Set the maximum shield level. Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
     /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
-    /// Set the icon to be used for this station on the radar.
+    /// Set the icon to be used for this object on the radar.
     /// For example, station:setRadarTrace("RadarArrow.png") will show an arrow instead of a dot for this station.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
+    /// Set the sound file to be used for this object's impulse engines.
+    /// Requires a string for a filename relative to the resources path.
+    /// Example: setImpulseSoundFile("engine.wav")
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setImpulseSoundFile);
     /// Are the shields online or not. Currently always returns true except for player ships, as only players can turn off shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldsActive);
 
@@ -45,6 +62,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRepairDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksScanProbes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksScanProbes);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksMissilesDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksMissilesDocked);
 
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
@@ -94,16 +113,17 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
     registerMemberReplication(&radar_trace);
+    registerMemberReplication(&impulse_sound_file);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
-    
+
     can_be_destroyed = true;
     registerMemberReplication(&can_be_destroyed);
 }
 
-void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels)
+void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels)
 {
     if (!getShieldsActive())
         return;
@@ -112,9 +132,9 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "shield_circle.png");
         objectSprite.setPosition(position);
-        
+
         objectSprite.setScale(sprite_scale * 0.25f * 1.5f, sprite_scale * 0.25f * 1.5f);
-        
+
         sf::Color color = sf::Color(255, 255, 255, 64);
         if (show_levels)
         {
@@ -126,12 +146,12 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
             color = Tween<sf::Color>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
         }
         objectSprite.setColor(color);
-        
+
         window.draw(objectSprite);
     }else if (shield_count > 1) {
-        float rotation = getRotation();
+        float direction = getRotation()-rotation;
         float arc = 360.0f / float(shield_count);
-        
+
         for(int n=0; n<shield_count; n++)
         {
             sf::Color color = sf::Color(255, 255, 255, 64);
@@ -145,9 +165,9 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
                 color = Tween<sf::Color>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
             }
             sf::VertexArray a(sf::TrianglesFan, 4);
-            sf::Vector2f delta_a = sf::vector2FromAngle(rotation - arc / 2.0f);
-            sf::Vector2f delta_b = sf::vector2FromAngle(rotation);
-            sf::Vector2f delta_c = sf::vector2FromAngle(rotation + arc / 2.0f);
+            sf::Vector2f delta_a = sf::vector2FromAngle(direction - arc / 2.0f);
+            sf::Vector2f delta_b = sf::vector2FromAngle(direction);
+            sf::Vector2f delta_c = sf::vector2FromAngle(direction + arc / 2.0f);
             a[0].position = position + delta_b * sprite_scale * 32.0f * 0.05f;
             a[1].position = a[0].position + delta_a * sprite_scale * 32.0f * 1.5f;
             a[2].position = a[0].position + delta_b * sprite_scale * 32.0f * 1.5f;
@@ -162,7 +182,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
             a[3].color = color;
             window.draw(a, textureManager.getTexture("shield_circle.png"));
 
-            rotation += arc;
+            direction += arc;
         }
     }
 }
@@ -172,7 +192,7 @@ void ShipTemplateBasedObject::draw3DTransparent()
 {
     if (shield_count < 1)
         return;
-    
+
     float angle = 0.0;
     float arc = 360.0f / shield_count;
     for(int n = 0; n<shield_count; n++)
@@ -248,7 +268,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         float arc = 360.0f / float(shield_count);
         int shield_index = int((angle + arc / 2.0f) / arc);
         shield_index %= shield_count;
-        
+
         float shield_damage = damage_amount * getShieldDamageFactor(info, shield_index);
         damage_amount -= shield_level[shield_index];
         shield_level[shield_index] -= shield_damage;
@@ -263,7 +283,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
             damage_amount = 0.0;
         }
     }
-    
+
     if (info.type != DT_EMP && damage_amount > 0.0)
     {
         takeHullDamage(damage_amount, info);
@@ -329,6 +349,7 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
 
     radar_trace = ship_template->radar_trace;
+    impulse_sound_file = ship_template->impulse_sound_file;
 
     shares_energy_with_docked = ship_template->shares_energy_with_docked;
     repair_docked = ship_template->repair_docked;

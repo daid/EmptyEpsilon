@@ -18,9 +18,9 @@ private:
     GuiToggleButton* camera_lock_toggle;
 public:
     TopDownScreen();
-    
+
     virtual void update(float delta) override;
-    
+
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 

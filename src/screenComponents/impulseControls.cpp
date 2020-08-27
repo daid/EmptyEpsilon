@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "impulseControls.h"
@@ -13,10 +14,10 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
             my_spaceship->commandImpulse(value);
     });
     slider->addSnapValue(0.0, 0.1)->setPosition(0, 0, ATopLeft)->setSize(50, GuiElement::GuiSizeMax);
-    
-    label = new GuiKeyValueDisplay(this, id, 0.5, "Impulse", "0%");
+
+    label = new GuiKeyValueDisplay(this, id, 0.5, tr("slider", "Impulse"), "0%");
     label->setTextSize(30)->setPosition(50, 0, ATopLeft)->setSize(40, GuiElement::GuiSizeMax);
-    
+
     (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Impulse, ATopCenter))->setSize(50, GuiElement::GuiSizeMax);
 }
 

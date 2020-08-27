@@ -14,14 +14,6 @@
     }
 #endif
 
-UDMXDevice::UDMXDevice()
-{
-}
-
-UDMXDevice::~UDMXDevice()
-{
-}
-
 //Configure the device.
 bool UDMXDevice::configure(std::unordered_map<string, string> settings)
 {
@@ -56,14 +48,14 @@ bool UDMXDevice::configure(std::unordered_map<string, string> settings)
         LOG(ERROR) << "Failed to find ChannelsSet function in uDMX.dll";
         return false;
     }
-    
+
     if (!UDMX_Connected())
     {
         LOG(ERROR) << "uDMX.dll reported device is not connected.";
         LOG(ERROR) << "But resuming to use it anyhow.";
         //return false;
     }
-    
+
     return true;
 #else
     LOG(ERROR) << "uDMX hardware not supported on this OS yet.";

@@ -9,7 +9,7 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     target_angle = 0;
     category_modifier = 1;
     lifetime = data.lifetime;
-    
+
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
     registerMemberReplication(&category_modifier);
@@ -17,13 +17,13 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     launch_sound_played = false;
 }
 
-void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (long_range) return;
 
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarArrow.png");
-    object_sprite.setRotation(getRotation());
+    object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     object_sprite.setColor(data.color);
     object_sprite.setScale(0.25 + 0.25 * category_modifier, 0.25 + 0.25 * category_modifier);
@@ -33,7 +33,7 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
 void MissileWeapon::update(float delta)
 {
     updateMovement();
-    
+
     // Small missiles have a larger speed & rotational speed, large ones are slower and turn less fast
     float size_speed_modifier = 1 / category_modifier;
 
@@ -42,7 +42,7 @@ void MissileWeapon::update(float delta)
         soundManager->playSound(data.fire_sound, getPosition(), 200.0, 1.0, 1.0f + random(-0.2f, 0.2f));
         launch_sound_played = true;
     }
-    
+
     // Since we do want the range to remain the same, ensure that slow missiles don't die down as fast.
     lifetime -= delta * size_speed_modifier;
     if (lifetime < 0)

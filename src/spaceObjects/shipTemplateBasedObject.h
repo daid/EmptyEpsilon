@@ -18,7 +18,7 @@ public:
     string template_name;
     string type_name;
     string radar_trace;
-    string impulse_sound_file = "engine.wav";
+    string impulse_sound_file;
     P<ShipTemplate> ship_template;
 
     int shield_count;
@@ -31,6 +31,7 @@ public:
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
     bool restocks_scan_probes;
+    bool restocks_missiles_docked;        //only restocks cpuships; playerships should use comms
 
     ScriptSimpleCallback on_destruction;
     ScriptSimpleCallback on_taking_damage;
@@ -40,10 +41,11 @@ public:
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
-    virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float sprite_scale, bool show_levels);
+    virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
+    virtual bool canRestockMissiles() override { return restocks_missiles_docked; }
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
     virtual bool hasShield() override;
     virtual string getCallSign() override { return callsign; }
@@ -51,10 +53,10 @@ public:
     virtual void takeHullDamage(float damage_amount, DamageInfo& info);
     virtual void destroyedByDamage(DamageInfo& info) = 0;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index);
-    
+
     void setCanBeDestroyed(bool enabled) { can_be_destroyed = enabled; }
     bool getCanBeDestroyed(){ return can_be_destroyed; }
-    
+
     virtual void applyTemplateValues() = 0;
     virtual float getShieldRechargeRate(int shield_index);
 
@@ -90,6 +92,7 @@ public:
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
 
     void setRadarTrace(string trace) { radar_trace = trace; }
+    void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
 
     bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }
     void setSharesEnergyWithDocked(bool enabled) { shares_energy_with_docked = enabled; }
@@ -97,6 +100,8 @@ public:
     void setRepairDocked(bool enabled) { repair_docked = enabled; }
     bool getRestocksScanProbes() { return restocks_scan_probes; }
     void setRestocksScanProbes(bool enabled) { restocks_scan_probes = enabled; }
+    bool getRestocksMissilesDocked() { return restocks_missiles_docked; }
+    void setRestocksMissilesDocked(bool enabled) { restocks_missiles_docked = enabled; }
 
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);

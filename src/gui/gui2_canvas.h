@@ -4,23 +4,22 @@
 #include "engine.h"
 #include "gui2_container.h"
 
-class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandler
+class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandler, private JoystickEventHandler
 {
 private:
     GuiElement* click_element;
     GuiElement* focus_element;
     sf::Vector2f previous_mouse_position;
-    sf::Vector2f previous_joystick_xy_position;
-    float previous_joystick_z_position;
-    float previous_joystick_r_position;
     bool enable_debug_rendering;
 public:
     GuiCanvas();
     virtual ~GuiCanvas();
 
-    virtual void render(sf::RenderTarget& window);
-    virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode);
-    
+    virtual void render(sf::RenderTarget& window) override;
+    virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode) override;
+    virtual void handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position) override;
+    virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
+
     virtual void onClick(sf::Vector2f mouse_position);
     virtual void onHotkey(const HotkeyResult& key);
     virtual void onKey(sf::Event::KeyEvent key, int unicode);

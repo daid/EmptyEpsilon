@@ -14,6 +14,8 @@
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 : GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", colorConfig.background)
 {
+    selected_system = SYS_None;
+
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(285, 40);
     coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, "Coolant", "");
@@ -33,7 +35,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].box = box;
         box->setSize(290, 400);
 
-        (new GuiLabel(box, "", getSystemName(ESystem(n)), 30))->addBackground()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
+        (new GuiLabel(box, "", getLocaleSystemName(ESystem(n)), 30))->addBackground()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
         (new GuiLabel(box, "", "Power", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Coolant", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", "Heat", 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);
@@ -65,6 +67,8 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;
     previous_energy_measurement = 0.0;
+
+    // TODO: Hotkey help overlay
 }
 
 void PowerManagementScreen::onDraw(sf::RenderTarget& window)
@@ -107,4 +111,117 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
             systems[n].coolant_bar->setValue(coolant)->setColor(sf::Color(0,128,255));
         }
     }
+}
+
+void PowerManagementScreen::onHotkey(const HotkeyResult& key)
+{
+    if (key.category == "ENGINEERING" && my_spaceship)
+    {
+        if (key.hotkey == "SELECT_REACTOR") selected_system = SYS_Reactor;
+        if (key.hotkey == "SELECT_BEAM_WEAPONS") selected_system = SYS_BeamWeapons;
+        if (key.hotkey == "SELECT_MISSILE_SYSTEM") selected_system = SYS_MissileSystem;
+        if (key.hotkey == "SELECT_MANEUVER") selected_system = SYS_Maneuver;
+        if (key.hotkey == "SELECT_IMPULSE") selected_system = SYS_Impulse;
+        if (key.hotkey == "SELECT_WARP") selected_system = SYS_Warp;
+        if (key.hotkey == "SELECT_JUMP_DRIVE") selected_system = SYS_JumpDrive;
+        if (key.hotkey == "SELECT_FRONT_SHIELDS") selected_system = SYS_FrontShield;
+        if (key.hotkey == "SELECT_REAR_SHIELDS") selected_system = SYS_RearShield;
+
+        // Don't act if the selected system doesn't exist.
+        if (!my_spaceship->hasSystem(selected_system))
+            return;
+
+        // If we selected a system, check for the power/coolant modifier.
+        if (selected_system != SYS_None)
+        {
+            GuiSlider* power_slider = systems[selected_system].power_slider;
+
+            // Note the code duplication with crew6/engineeringScreen
+            if (key.hotkey == "SET_POWER_000")
+            {
+                power_slider->setValue(0.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_030")
+            {
+                power_slider->setValue(0.3f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_050")
+            {
+                power_slider->setValue(0.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_100")
+            {
+                power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_150")
+            {
+                power_slider->setValue(1.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_200")
+            {
+                power_slider->setValue(2.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_250")
+            {
+                power_slider->setValue(2.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_300")
+            {
+                power_slider->setValue(3.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "INCREASE_POWER")
+            {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                return;
+            } else if (key.hotkey == "DECREASE_POWER") {
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request - 0.1f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                return;
+            }
+
+            GuiSlider* coolant_slider = systems[selected_system].coolant_slider;
+
+            if (key.hotkey == "INCREASE_COOLANT")
+            {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                return;
+            } else if (key.hotkey == "DECREASE_COOLANT") {
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request - 0.5f);
+                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                return;
+            }
+        }
+    }
+}
+
+bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
+    if(my_spaceship){
+        if (axisAction.category == "ENGINEERING"){
+            for(int n=0; n<SYS_COUNT; n++)
+            {
+                ESystem system = ESystem(n);
+                if (axisAction.action == std::string("POWER_") + getSystemName(system)){
+                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
+                    my_spaceship->commandSetSystemPowerRequest(system, systems[n].power_slider->getValue());
+                    return true;
+                }
+                if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
+                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
+                    my_spaceship->commandSetSystemCoolantRequest(system, systems[n].coolant_slider->getValue());
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }

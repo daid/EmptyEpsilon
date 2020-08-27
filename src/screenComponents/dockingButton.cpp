@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
@@ -26,6 +27,11 @@ void GuiDockingButton::click()
     }
 }
 
+void GuiDockingButton::onUpdate()
+{
+    setVisible(my_spaceship && my_spaceship->getCanDock());
+}
+
 void GuiDockingButton::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
@@ -33,7 +39,7 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
         switch(my_spaceship->docking_state)
         {
         case DS_NotDocking:
-            setText("Request Dock");
+            setText(tr("Request Dock"));
             if (my_spaceship->canStartDocking() && findDockingTarget())
             {
                 enable();
@@ -42,11 +48,11 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
             }
             break;
         case DS_Docking:
-            setText("Cancel Docking");
+            setText(tr("Cancel Docking"));
             enable();
             break;
         case DS_Docked:
-            setText("Undock");
+            setText(tr("Undock"));
             enable();
             break;
         }
@@ -89,7 +95,7 @@ P<SpaceObject> GuiDockingButton::findDockingTarget()
     foreach(Collisionable, obj, obj_list)
     {
         dock_object = obj;
-        if (dock_object && dock_object->canBeDockedBy(my_spaceship) && (dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
+        if (dock_object && dock_object != my_spaceship && dock_object->canBeDockedBy(my_spaceship) && (dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
             break;
         dock_object = NULL;
     }

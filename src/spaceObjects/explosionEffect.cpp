@@ -20,9 +20,14 @@ ExplosionEffect::ExplosionEffect()
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
         particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
-    
+
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
+}
+
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+ExplosionEffect::~ExplosionEffect()
+{
 }
 
 #if FEATURE_3D_RENDERING
@@ -38,11 +43,11 @@ void ExplosionEffect::draw3DTransparent()
         scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 1.0f, 1.3f);
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
-    
+
     glPushMatrix();
     glScalef(scale * size, scale * size, scale * size);
     glColor3f(alpha, alpha, alpha);
-    
+
     sf::Vector3f v1 = sf::Vector3f(-1, -1, 0);
     sf::Vector3f v2 = sf::Vector3f( 1, -1, 0);
     sf::Vector3f v3 = sf::Vector3f( 1,  1, 0);
@@ -67,8 +72,8 @@ void ExplosionEffect::draw3DTransparent()
     glVertex3f(v4.x, v4.y, v4.z);
     glEnd();
     glPopMatrix();
-    
-    
+
+
     ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("particle.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 5.0f);
@@ -93,7 +98,7 @@ void ExplosionEffect::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (!on_radar)
         return;

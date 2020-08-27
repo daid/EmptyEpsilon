@@ -5,6 +5,8 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A warp jammer.
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
@@ -30,11 +32,16 @@ WarpJammer::WarpJammer()
     setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
-    
+
     model_info.setData("shield_generator");
 }
 
-void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+// Due to a suspected compiler bug this desconstructor needs to be explicity defined
+WarpJammer::~WarpJammer()
+{
+}
+
+void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");
@@ -54,7 +61,10 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         range_circle.setOrigin(range * scale, range * scale);
         range_circle.setPosition(position);
         range_circle.setFillColor(sf::Color::Transparent);
-        range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
+        if (my_spaceship && my_spaceship->isEnemy(this))
+            range_circle.setOutlineColor(sf::Color(255, 0, 0, 64));
+        else
+            range_circle.setOutlineColor(sf::Color(200, 150, 100, 64));
         range_circle.setOutlineThickness(2.0);
         window.draw(range_circle);
     }
@@ -70,6 +80,7 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
+        e->setRadarSignatureInfo(0.5, 0.5, 0.1);
 
         if (on_destruction.isSet())
         {

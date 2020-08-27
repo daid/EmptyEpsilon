@@ -32,8 +32,7 @@ if(NOT SFML_ROOT)
         file(MAKE_DIRECTORY "${WIN32_BASE}/openal_build")
 # TOFIX: DXSDK_DIR is set to a hardcoded path, as openal cannot seem to find dsound.h on my linux system.
         execute_process_ex(
-            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/openal-soft-1.19.1" "-G" "${CMAKE_GENERATOR}"
-                "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/openal-soft-1.19.1"
                 "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
                 "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
                 "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
@@ -43,7 +42,7 @@ if(NOT SFML_ROOT)
                 "-DDXSDK_DIR=/usr/i686-w64-mingw32"
             WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
         execute_process_ex(
-            COMMAND "${CMAKE_MAKE_PROGRAM}" "-j4" "install"
+            COMMAND "make" "-j4" "install"
             WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
     endif()
 
@@ -54,8 +53,7 @@ if(NOT SFML_ROOT)
     if(NOT IS_DIRECTORY "${CMAKE_SYSROOT}/include/SFML")
         file(MAKE_DIRECTORY "${WIN32_BASE}/SFML_build")
         execute_process_ex(
-            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/SFML-2.5.1" "-G" "${CMAKE_GENERATOR}"
-                "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+            COMMAND "${CMAKE_COMMAND}" "${WIN32_BASE}/SFML-2.5.1"
                 "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
                 "-DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}"
                 "-DCMAKE_SYSTEM_NAME=${CMAKE_SYSTEM_NAME}"
@@ -66,16 +64,16 @@ if(NOT SFML_ROOT)
                 "-DOPENAL_LIBRARY=${CMAKE_SYSROOT}/bin/OpenAL32.dll"
             WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
         execute_process_ex(
-            COMMAND "${CMAKE_MAKE_PROGRAM}" "install"
+            COMMAND "make" "install"
             WORKING_DIRECTORY "${WIN32_BASE}/SFML_build")
     endif()
     
     set(SFML_ROOT "${CMAKE_SYSROOT}")
 
     set(ENABLE_CRASH_LOGGER ON)
-    set(DRMINGW_ROOT "${WIN32_BASE}/drmingw-0.9.2-win32")
+    set(DRMINGW_ROOT "${WIN32_BASE}/drmingw-0.8.2-win32")
     if(NOT IS_DIRECTORY "${DRMINGW_ROOT}")
-        file(DOWNLOAD https://github.com/jrfonseca/drmingw/releases/download/0.9.2/drmingw-0.9.2-win32.7z ${WIN32_BASE}/drmingw.7z SHOW_PROGRESS)
+        file(DOWNLOAD https://github.com/jrfonseca/drmingw/releases/download/0.8.2/drmingw-0.8.2-win32.7z ${WIN32_BASE}/drmingw.7z SHOW_PROGRESS)
         execute_process_ex(
             COMMAND "7z" "x" "drmingw.7z"
             WORKING_DIRECTORY ${WIN32_BASE})

@@ -3,6 +3,7 @@
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setName);
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setLocaleName);
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setGMColor);
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
@@ -57,7 +58,7 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
         LOG(WARNING) << "Tried to set a an undefined faction to friendly with " << name;
         return;
     }
-        
+
     int id1 = -1;
     int id2 = -1;
     for(unsigned int n = 0; n < factionInfo.size(); n++)

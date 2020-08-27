@@ -14,21 +14,21 @@ private:
 
     sf::Thread update_thread;
     sf::UdpSocket socket;
-    
+
     bool run_thread;
     int channel_count;
     uint8_t channel_data[512];
-    
+
     int resend_delay;
     bool multicast;
-    
+
     int universe;
     uint8_t uuid[16];
     uint8_t source_name[64];
 public:
     StreamingAcnDMXDevice();
     virtual ~StreamingAcnDMXDevice();
-    
+
     //Configure the device.
     // Parameter: "channels" amount of output channels used (default: 512)
     // Parameter: "universe" which sACN universe to broadcast in. Default "1"
@@ -38,7 +38,7 @@ public:
 
     //Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
     virtual void setChannelData(int channel, float value);
-    
+
     //Return the number of output channels supported by this device.
     virtual int getChannelCount();
 

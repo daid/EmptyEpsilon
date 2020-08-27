@@ -26,7 +26,7 @@ Asteroid::Asteroid()
 
     registerMemberReplication(&z);
     registerMemberReplication(&size);
-    
+
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 }
 
@@ -48,7 +48,7 @@ void Asteroid::draw3D()
 #endif//FEATURE_3D_RENDERING
 }
 
-void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (size != getRadius())
         setRadius(size);
@@ -79,11 +79,13 @@ void Asteroid::collide(Collisionable* target, float force)
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
+    e->setRadarSignatureInfo(0.0, 0.1, 0.2);
     destroy();
 }
 
 void Asteroid::setSize(float size)
 {
+    this->size = size;
     setRadius(size);
 }
 
@@ -131,6 +133,7 @@ void VisualAsteroid::draw3D()
 
 void VisualAsteroid::setSize(float size)
 {
+    this->size = size;
     setRadius(size);
     while(fabs(z) < size * 2)
         z *= random(1.2, 2.0);

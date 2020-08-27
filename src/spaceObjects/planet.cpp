@@ -97,7 +97,9 @@ REGISTER_SCRIPT_SUBCLASS(Planet, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetAtmosphereTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetSurfaceTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudTexture);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Planet, getPlanetRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetRadius);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Planet, getCollisionSize);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setPlanetCloudRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setDistanceFromMovementPlane);
     REGISTER_SCRIPT_CLASS_FUNCTION(Planet, setAxialRotationTime);
@@ -114,6 +116,7 @@ Planet::Planet()
     cloud_texture = "";
     atmosphere_texture = "";
     atmosphere_color = sf::Color(0, 0, 0);
+    atmosphere_size = 0;
     distance_from_movement_plane = 0;
     axial_rotation_time = 0.0;
     orbit_target_id = -1;
@@ -122,7 +125,7 @@ Planet::Planet()
 
     collision_size = -2.0f;
 
-    setRadarSignatureInfo(0.5, 0, 0);
+    setRadarSignatureInfo(0.5, 0, 0.3);
 
     registerMemberReplication(&planet_size);
     registerMemberReplication(&cloud_size);
@@ -158,6 +161,16 @@ void Planet::setPlanetSurfaceTexture(string texture_name)
 void Planet::setPlanetCloudTexture(string texture_name)
 {
     cloud_texture = texture_name;
+}
+
+float Planet::getPlanetRadius()
+{
+    return planet_size;
+}
+
+float Planet::getCollisionSize()
+{
+    return collision_size;
 }
 
 void Planet::setPlanetRadius(float size)
@@ -302,7 +315,7 @@ void Planet::draw3DTransparent()
 }
 #endif
 
-void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     if (collision_size > 0)
     {
@@ -314,7 +327,7 @@ void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     }
 }
 
-void Planet::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Planet::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::CircleShape radar_radius(planet_size * scale);
     radar_radius.setOrigin(planet_size * scale, planet_size * scale);
@@ -344,4 +357,24 @@ void Planet::updateCollisionSize()
         setCollisionRadius(collision_size);
         setCollisionPhysics(true, true);
     }
+}
+
+string Planet::getExportLine()
+{
+    string ret="Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setPlanetRadius(" + string(getPlanetRadius(), 0) + ")";
+    if (atmosphere_color.r != 0 || atmosphere_color.g != 0 || atmosphere_color.b != 0)
+    {
+        ret += ":setPlanetAtmosphereColor(" + string(atmosphere_color.r/255.0f) + "," + string(atmosphere_color.g/255.0f) + "," + string(atmosphere_color.b/255.0f) + ")";
+    }
+    if (distance_from_movement_plane!=0)
+    {
+        ret += ":setDistanceFromMovementPlane("  + string(distance_from_movement_plane) + ")";
+    }
+    //TODO setPlanetAtmosphereTexture
+    //TODO setPlanetSurfaceTexture
+    //TODO setPlanetCloudTexture
+    //TODO setPlanetCloudRadius
+    //TODO setAxialRotationTime
+    //TODO setOrbit
+    return ret;
 }

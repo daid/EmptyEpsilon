@@ -11,7 +11,7 @@ class EMPMissile : public MissileWeapon
     bool avoid_area_added;
 public:
     EMPMissile();
-    
+
     virtual void hitObject(P<SpaceObject> object);
     void explode();
     void lifeEnded();

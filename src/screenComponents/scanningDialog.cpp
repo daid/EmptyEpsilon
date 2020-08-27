@@ -14,19 +14,19 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     scan_depth = 0;
 
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     box = new GuiPanel(this, id + "_BOX");
     box->setSize(500, 545)->setPosition(0, 0, ACenter);
-    
+
     signal_label = new GuiLabel(box, id + "_LABEL", "Electric signature", 30);
     signal_label->addBackground()->setPosition(0, 20, ATopCenter)->setSize(450, 50);
-    
+
     signal_quality = new GuiSignalQualityIndicator(box, id + "_SIGNAL");
     signal_quality->setPosition(0, 80, ATopCenter)->setSize(450, 100);
-    
+
     locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", "LOCKED", 50);
     locked_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     for(int n=0; n<max_sliders; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
@@ -44,7 +44,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 void GuiScanningDialog::onDraw(sf::RenderTarget& window)
 {
     updateSignal();
-    
+
     if (my_spaceship)
     {
         if (my_spaceship->scanning_delay > 0.0 && my_spaceship->scanning_complexity > 0)
@@ -55,7 +55,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                 scan_depth = 0;
                 setupParameters();
             }
-            
+
             if (locked && engine->getElapsedTime() - lock_start_time > lock_delay)
             {
                 scan_depth += 1;
@@ -67,7 +67,7 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
                     setupParameters();
                 }
             }
-            
+
             if (locked && engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
             {
                 locked_label->show();
@@ -79,12 +79,26 @@ void GuiScanningDialog::onDraw(sf::RenderTarget& window)
         }
     }
 }
+bool GuiScanningDialog::onJoystickAxis(const AxisAction& axisAction){
+    if(my_spaceship){
+        if (axisAction.category == "SCIENCE"){
+            for(int n=0; n<max_sliders; n++) {
+                if (axisAction.action == std::string("SCAN_PARAM_") + string(n+1)){
+                    sliders[n]->setValue((axisAction.value + 1) / 2.0);
+                    updateSignal();
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 
 void GuiScanningDialog::setupParameters()
 {
     if (!my_spaceship)
         return;
-    
+
     for(int n=0; n<max_sliders; n++)
     {
         if (n < my_spaceship->scanning_complexity)
@@ -102,7 +116,7 @@ void GuiScanningDialog::setupParameters()
             sliders[n]->setValue(random(0.0, 1.0));
     }
     updateSignal();
-    
+
     string label = "[" + string(scan_depth + 1) + "/" + string(my_spaceship->scanning_depth) + "] ";
     switch(irandom(0, 10))
     {
@@ -156,7 +170,7 @@ void GuiScanningDialog::updateSignal()
     }else{
         locked = false;
     }
-    
+
     signal_quality->setNoiseError(noise);
     signal_quality->setPeriodError(period);
     signal_quality->setPhaseError(phase);

@@ -22,6 +22,11 @@ RepairCrew::RepairCrew()
     repairCrewList.push_back(this);
 }
 
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+RepairCrew::~RepairCrew()
+{
+}
+
 /* struct PathNode
 {
     ERepairCrewDirection arrive_direction;
@@ -30,41 +35,41 @@ RepairCrew::RepairCrew()
 */
 
 class PathMap {
-	class PathNode {
-	public:
-		ERepairCrewDirection arrive_direction;
-		bool right, down;
+    class PathNode {
+    public:
+        ERepairCrewDirection arrive_direction;
+        bool right, down;
         PathNode() : arrive_direction(RC_None), right(false), down(false) { };
-	};
+    };
 private:
-	std::vector<PathNode> pathMap;
+    std::vector<PathNode> pathMap;
 public:
-	int width;
-	int height;
+    int width;
+    int height;
 
-	PathMap(const sf::Vector2i &size) : pathMap(size.x*size.y), width(size.x), height(size.y) {
-		// init all interior down/right doors (not right or bottom edge)
-		for (int x = 0; x < width-1; x++) {
-			for (int y = 0; y < height-1; y++) {
-				Node(x, y).down = true;
-				Node(x, y).right = true;
-			}
-		}
-	}
+    PathMap(const sf::Vector2i &size) : pathMap(size.x*size.y), width(size.x), height(size.y) {
+        // init all interior down/right doors (not right or bottom edge)
+        for (int x = 0; x < width-1; x++) {
+            for (int y = 0; y < height-1; y++) {
+                Node(x, y).down = true;
+                Node(x, y).right = true;
+            }
+        }
+    }
 
-	inline PathNode& Node(int x, int y) {
-		assert(x >= 0 && x < width && y >= 0 && y < height);
-		return pathMap[y*width + x];
-	}
+    inline PathNode& Node(int x, int y) {
+        assert(x >= 0 && x < width && y >= 0 && y < height);
+        return pathMap[y*width + x];
+    }
 };
 
 ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P<ShipTemplate> t)
 {
-	PathMap map(t->interiorSize());
+    PathMap map(t->interiorSize());
 
     for(unsigned int n=0; n<t->rooms.size(); n++)
     {
-		const ShipRoomTemplate &room = t->rooms[n];
+        const ShipRoomTemplate &room = t->rooms[n];
         for(int x=0; x<room.size.x; x++)
         {
             map.Node(room.position.x + x,room.position.y - 1).down = false;
@@ -78,7 +83,7 @@ ERepairCrewDirection pathFind(sf::Vector2i start_pos, sf::Vector2i target_pos, P
     }
     for(unsigned int n=0; n<t->doors.size(); n++)
     {
-		const ShipDoorTemplate &door = t->doors[n];
+        const ShipDoorTemplate &door = t->doors[n];
         if (door.horizontal)
         {
             map.Node(door.position.x,door.position.y - 1).down = true;
@@ -179,6 +184,9 @@ void RepairCrew::update(float delta)
                 ship->systems[system].health += repair_per_second * delta;
                 if (ship->systems[system].health > 1.0)
                     ship->systems[system].health = 1.0;
+                ship->systems[system].hacked_level -= repair_per_second * delta;
+                if (ship->systems[system].hacked_level < 0.0)
+                    ship->systems[system].hacked_level = 0.0;
             }
             if (ship->auto_repair_enabled && pos == target_position && (system == SYS_None || !ship->hasSystem(system) || ship->systems[system].health == 1.0))
             {
