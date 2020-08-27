@@ -94,19 +94,9 @@ void AimLock::onMouseDrag(sf::Vector2f position)
     float new_value = ((sf::vector2ToAngle(diff) + 90.0f) + view_rotation) / 360.0f;
     if (new_value < 0.0f)
         new_value += 1.0f;
+    if (new_value > 1.0f)
+        new_value -= 1.0f;
     new_value = min_value + (max_value - min_value) * new_value;
-    if (min_value < max_value)
-    {
-        if (new_value < min_value)
-            new_value = min_value;
-        if (new_value > max_value)
-            new_value = max_value;
-    }else{
-        if (new_value > min_value)
-            new_value = min_value;
-        if (new_value < max_value)
-            new_value = max_value;
-    }
     if (value != new_value)
     {
         value = new_value;
