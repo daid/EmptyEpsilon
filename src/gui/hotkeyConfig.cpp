@@ -119,6 +119,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELECT_JUMP_DRIVE", std::make_tuple("Select jump drive system", "Num7"));
     newKey("SELECT_FRONT_SHIELDS", std::make_tuple("Select front shields system", "Num8"));
     newKey("SELECT_REAR_SHIELDS", std::make_tuple("Select rear shields system", "Num9"));
+    newKey("SELECT_PREVIOUS_SYSTEM", std::make_tuple("Select previous system", "LBracket"));
+    newKey("SELECT_NEXT_SYSTEM", std::make_tuple("Select next system", "RBracket"));
+    newKey("RESET_SYSTEMS", std::make_tuple("Reset all systems setting", ""));
     newKey("SET_POWER_000", std::make_tuple("Set system power to 0%", ""));
     newKey("SET_POWER_030", std::make_tuple("Set system power to 30%", ""));
     newKey("SET_POWER_050", std::make_tuple("Set system power to 50%", ""));
