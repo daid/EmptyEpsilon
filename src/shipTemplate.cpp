@@ -74,8 +74,29 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
+    /// Add an empty room to a ship template.
+    /// Rooms are shown on the engineering and damcon screens.
+    /// If a system room isn't accessible via other rooms connected by doors, that system
+    /// might not be repairable.
+    /// Rooms are placed on an integer x/y grid. The minimum size for a room is 1x1.
+    /// Accepts four parameters: the room's x coordinate, y coordinate, width, and height.
+    /// Example: template:addRoom(1, 2, 3, 4)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
+    /// Add a room containing a ship system to a ship template.
+    /// Rooms are shown on the engineering and damcon screens.
+    /// If a system doesn't have a room, or repair crews can't reach a system's room, it
+    /// might not be repairable.
+    /// Accepts five parameters: the room's x coordinate, y coordinate, width, height, and
+    /// the ship system as the string equivalent of an ESystem value.
+    /// Example: template:addRoomSystem(1, 2, 3, 4, "Reactor")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
+    /// Add a door between rooms in a ship template.
+    /// Rooms are shown on the engineering and damcon screens.
+    /// If a system room doesn't have a door connecting it to other rooms, repair crews
+    /// might not be able to reach it for repairs.
+    /// Accepts three parameters: the door's x coordinate, y coordinate, and a Boolean
+    /// value for whether it's horizontal (true) or vertical (false).
+    /// Example: template:addDoor(2, 2, false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
