@@ -23,7 +23,19 @@ HotKeyMenu::HotKeyMenu()
     (new GuiSelector(this, "Category", [this](int index, string value)
     {
         HotKeyMenu::setCategory(index);
-    }))->setOptions(category_list)->setSelectionIndex(category_index)->setPosition(-50, 50, ATopRight)->setSize(300, 50);
+    }))->setOptions(category_list)->setSelectionIndex(category_index)->setPosition(0, 50, ATopCenter)->setSize(300, 50);
+
+    // Page selector
+    previous_page = new GuiButton(this, "PAGE_LEFT", "<-", [this]()
+    {
+        HotKeyMenu::pageHotkeys(1);
+    });
+    previous_page->setPosition(-100, 50, ATopRight)->setSize(50, 50)->disable();
+    next_page = new GuiButton(this, "PAGE_RIGHT", "->", [this]()
+    {
+        HotKeyMenu::pageHotkeys(-1);
+    });
+    next_page->setPosition(-50, 50, ATopRight)->setSize(50, 50)->disable();
 
     // frame with keys
     frame = new GuiPanel(this, "HELP_FRAME");
@@ -51,16 +63,6 @@ HotKeyMenu::HotKeyMenu()
     {
         HotKeyMenu::updateHotKeys();
     }))->setPosition(200, -50, ABottomLeft)->setSize(150, 50);
-
-    // Page through hotkey options
-    (new GuiButton(this, "PAGE_LEFT", "<-", [this]()
-    {
-        HotKeyMenu::pageHotkeys(1);
-    }))->setPosition(-200, -50, ABottomRight)->setSize(150, 50);
-    (new GuiButton(this, "PAGE_RIGHT", "->", [this]()
-    {
-        HotKeyMenu::pageHotkeys(-1);
-    }))->setPosition(-50, -50, ABottomRight)->setSize(150, 50);
 }
 
 void HotKeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
@@ -110,18 +112,28 @@ void HotKeyMenu::setCategory(int cat)
     for (std::pair<string,string> item : hotkey_list) {
 
         label_entries.push_back(new GuiLabel(frame, "NAME_LABEL", item.first.append(" = "), 30));
-        label_entries.back()->setPosition(left, top, ATopLeft)->setSize(300, 50);
+        label_entries.back()->setAlignment(ACenterRight)->setPosition(left, top, ATopLeft)->setSize(400, 50);
 
         text_entries.push_back(new GuiTextEntry(frame, "HotKey_Entry", item.second));
-        text_entries.back()->setTextSize(30)->setPosition(left + 300, top, ATopLeft)->setSize(200, 50);
+        text_entries.back()->setTextSize(30)->setPosition(left + 400, top, ATopLeft)->setSize(100, 50);
         top += 50;
 
         // This keeps adding columns even if they don't fit on the screen
         if (top > 650) {
             left = left + 550;
-            top = 25;
+            top = FRAME_PADDING;
             frame_width = frame_width + 550;
             frame->setSize(frame_width, FRAME_HEIGHT);
+        }
+
+        // Enable pagination buttons if pagination is necessary
+        // TODO: Detect viewport width instead of hardcoding breakpoint at 1200
+        if (frame_width >= 1200) {
+            previous_page->enable();
+            next_page->enable();
+        } else {
+            previous_page->disable();
+            next_page->disable();
         }
     }
 }

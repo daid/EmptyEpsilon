@@ -23,8 +23,8 @@ private:
 
     std::vector<GuiTextEntry*> text_entries;
     std::vector<GuiLabel*> label_entries;
-    // TODO: This label is redundant with the category selector
-    //GuiLabel* category_label;
+    GuiButton* previous_page;
+    GuiButton* next_page;
     GuiOverlay* error_window;
 
     string category = "";
@@ -33,7 +33,7 @@ private:
     std::vector<std::pair<string, string>> hotkey_list;
 
     void setCategory(int cat);
-    void setHotkeysPage(int page);
+    void pageHotkeys(int direction);
     void updateHotKeys();
 public:
     HotKeyMenu();
