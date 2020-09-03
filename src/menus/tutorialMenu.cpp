@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "engine.h"
 #include "tutorialMenu.h"
 #include "main.h"
@@ -37,8 +38,6 @@ TutorialMenu::TutorialMenu()
         ScenarioInfo info(filename);
         tutorial_list->addEntry(info.name, filename);
     }
-    // Select the first scenario in the list by default.
-    tutorial_list->setSelectionIndex(0);
 
 
         // Show the scenario description text.
@@ -47,22 +46,30 @@ TutorialMenu::TutorialMenu()
     tutorial_description = new GuiScrollText(panel, "TUTORIAL_DESCRIPTION", "");
     tutorial_description->setTextSize(24)->setMargins(15)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiButton(this, "START_TUTORIAL", "Start Tutorial", [this]() {
+    start_tutorial_button = new GuiButton(this, "START_TUTORIAL", tr("Start Tutorial"), [this]() {
         destroy();
         new TutorialGame(false,selected_tutorial_filename);
-    }))->setPosition(0, -50, ABottomRight)->setSize(300, 50);
+    });
+    start_tutorial_button->setEnable(false)->setPosition(0, -50, ABottomRight)->setSize(300, 50);
     // Bottom GUI.
     // Back button.
-    (new GuiButton(this, "BACK", "Back", [this]()
+    (new GuiButton(this, "BACK", tr("Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+
+    // Select the first scenario in the list by default.
+    if (!tutorial_filenames.empty()) {
+        tutorial_list->setSelectionIndex(0);
+        selectTutorial(tutorial_filenames.front());
+    }
 }
 void TutorialMenu::selectTutorial(string filename)
 {
     selected_tutorial_filename = filename;
+    start_tutorial_button->setEnable(true);
     ScenarioInfo info(filename);
     tutorial_description->setText("");
     tutorial_description->setText(info.description);

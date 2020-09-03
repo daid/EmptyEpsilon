@@ -5,13 +5,15 @@
 
 class GuiPanel;
 class GuiCanvas;
+class GuiOverlay;
 
 class GuiShipDestroyedPopup : public GuiElement
 {
 private:
-    GuiPanel* frame;
+    GuiOverlay* ship_destroyed_overlay;
     GuiCanvas* owner;
     sf::Clock show_timeout;
+
 public:
     GuiShipDestroyedPopup(GuiCanvas* owner);
 

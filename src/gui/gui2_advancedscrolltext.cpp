@@ -14,15 +14,15 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
     entries.back().prefix = prefix;
     entries.back().text = text;
     entries.back().color = color;
-    return this; 
+    return this;
 }
 
-unsigned int GuiAdvancedScrollText::getEntryCount()
+unsigned int GuiAdvancedScrollText::getEntryCount() const
 {
     return entries.size();
 }
 
-string GuiAdvancedScrollText::getEntryText(int index)
+string GuiAdvancedScrollText::getEntryText(int index) const
 {
     if (index < 0 || index >= int(getEntryCount()))
         return "";
@@ -59,10 +59,10 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         }
         max_prefix_width = std::max(max_prefix_width, width);
     }
-    
+
     //Calculate how many lines we can display properly
     int max_lines = rect.height / line_spacing;
-    
+
     //Draw the visible entries
     int draw_offset = -scrollbar->getValue();
     for(Entry& e : entries)

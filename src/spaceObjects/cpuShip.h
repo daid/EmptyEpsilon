@@ -8,6 +8,7 @@ enum EAIOrder
 {
     AI_Idle,            //Don't do anything, don't even attack.
     AI_Roaming,         //Fly around and engage at will, without a clear target
+    AI_Retreat,         //Dock on [order_target] that can restore our weapons. Find one if neccessary. Continue roaming after our missiles are restocked, or no target is found.
     AI_StandGround,     //Keep current position, do not fly away, but attack nearby targets.
     AI_DefendLocation,  //Defend against enemies getting close to [order_target_location]
     AI_DefendTarget,    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
@@ -42,6 +43,7 @@ public:
     void orderIdle();
     void orderRoaming();
     void orderRoamingAt(sf::Vector2f position);
+    void orderRetreat(P<SpaceObject> object);
     void orderStandGround();
     void orderDefendLocation(sf::Vector2f position);
     void orderDefendTarget(P<SpaceObject> object);
@@ -55,15 +57,15 @@ public:
     sf::Vector2f getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
 
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
     virtual std::unordered_map<string, string> getGMInfo() override;
 
     virtual string getExportLine() override;
 
-    friend class GameMasterUI;
-
     float missile_resupply;
 };
 string getAIOrderString(EAIOrder order);
+
+template<> int convert<EAIOrder>::returnType(lua_State* L, EAIOrder o);
 
 #endif//CPU_SHIP_H

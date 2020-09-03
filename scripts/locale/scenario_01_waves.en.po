@@ -1,0 +1,12 @@
+# Scenario name
+msgid "Waves"
+msgstr ""
+
+# Scenario description
+msgid "Waves of increasingly difficult enemies."
+msgstr ""
+
+#: scripts/scenario_01_waves.lua:177
+#, lua-format
+msgid "Wave %d"
+msgstr ""

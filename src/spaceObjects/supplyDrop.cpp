@@ -5,10 +5,15 @@
 #include "main.h"
 
 #include "scriptInterface.h"
+
+/// A supply drop.
 REGISTER_SCRIPT_SUBCLASS(SupplyDrop, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, setWeaponStorage);
+    /// Set a function that will be called if a player picks up the supply drop.
+    /// First argument given to the function will be the supply drop, the second the player.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SupplyDrop, onPickUp);
 }
 
 REGISTER_MULTIPLAYER_CLASS(SupplyDrop, "SupplyDrop");
@@ -25,7 +30,7 @@ SupplyDrop::SupplyDrop()
     model_info.setData("ammo_box");
 }
 
-void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");
@@ -62,9 +67,34 @@ void SupplyDrop::collide(Collisionable* target, float force)
                 picked_up = true;
             }
         }
+        if (on_pickup_callback.isSet())
+        {
+            on_pickup_callback.call(P<SupplyDrop>(this), player);
+            picked_up = true;
+        }
 
         if (picked_up)
             destroy();
+    }
+}
+
+void SupplyDrop::onPickUp(ScriptSimpleCallback callback)
+{
+    this->on_pickup_callback = callback;
+}
+
+void SupplyDrop::setEnergy(float amount)
+{
+    energy = amount;
+    setRadarSignatureInfo(getRadarSignatureGravity(), getRadarSignatureElectrical() + (amount / 1000.0f), getRadarSignatureBiological());
+}
+
+void SupplyDrop::setWeaponStorage(EMissileWeapons weapon, int amount)
+{
+    if (weapon != MW_None)
+    {
+        weapon_storage[weapon] = amount;
+        setRadarSignatureInfo(getRadarSignatureGravity() + (0.05f * amount), getRadarSignatureElectrical(), getRadarSignatureBiological());
     }
 }
 

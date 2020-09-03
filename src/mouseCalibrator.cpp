@@ -10,7 +10,7 @@ MouseCalibrator::MouseCalibrator(string filename)
 {
     state = 0;
     InputHandler::mouse_transform = sf::Transform();
-    
+
     (new GuiLabel(this, "MAIN_LABEL", "Touch Calibration", 50))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
     screen_box[0] = new GuiPanel(this, "BOX_0");
     screen_box[0]->setPosition(50, 50, ATopLeft)->setSize(50, 50);
@@ -26,7 +26,7 @@ MouseCalibrator::MouseCalibrator(string filename)
 
     test_box = new GuiImage(this, "TEST", "gui/PanelBackground");
     test_box->setPosition(0, 0, ATopLeft)->setSize(50, 50);
-    
+
     screen_box[1]->hide();
     screen_box[2]->hide();
     test_box->hide();
@@ -69,7 +69,7 @@ void MouseCalibrator::calculateMatrix()
     {
         screen_point[n] = screen_box[n]->getCenterPoint();
     }
-    
+
     float Q = ((mouse_point[0].x - mouse_point[2].x) * (mouse_point[1].y - mouse_point[2].y)) - ((mouse_point[1].x - mouse_point[2].x) * (mouse_point[0].y - mouse_point[2].y));
 
     if( Q == 0.0 )
@@ -82,7 +82,7 @@ void MouseCalibrator::calculateMatrix()
     float F = (mouse_point[2].x * screen_point[1].y - mouse_point[1].x * screen_point[2].y) * mouse_point[0].y + (mouse_point[0].x * screen_point[2].y - mouse_point[2].x * screen_point[0].y) * mouse_point[1].y + (mouse_point[1].x * screen_point[0].y - mouse_point[0].x * screen_point[1].y) * mouse_point[2].y;
 
     InputHandler::mouse_transform = sf::Transform(A/Q, B/Q, C/Q, D/Q, E/Q, F/Q, 0, 0, 1);
-    
+
     FILE* f = fopen(filename.c_str(), "w");
     if (f)
     {

@@ -35,7 +35,7 @@ public:
 
     void setCycleTime(float cycle_time);
     float getCycleTime();
-    
+
     void setDamage(float damage);
     float getDamage();
 
@@ -47,12 +47,12 @@ public:
 
     void setPosition(sf::Vector3f position);
     sf::Vector3f getPosition();
-    
+
     void setBeamTexture(string beam_texture);
     string getBeamTexture();
 
     float getCooldown();
-    
+
     void update(float delta);
 protected:
     sf::Vector3f position;//Visual position on the 3D model where this beam is fired from.

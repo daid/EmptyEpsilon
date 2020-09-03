@@ -6,11 +6,12 @@
 class SpaceObject;
 class SpaceShip;
 class SpaceStation;
+class Planet;
 class JSONGenerator;
 /*
  * The GameStateLogger logs the current state of the game to a log file.
  * It does this every X seconds.
- * This logged data can be used to analize the game afterwards.
+ * This logged data can be used to analyze the game afterwards.
  *
  * The resulting log contains 2 types of records:
  * 1) Periodic game data, update of all the objects in the game with all states.
@@ -21,10 +22,10 @@ class GameStateLogger : public Updatable
 public:
     GameStateLogger();
     virtual ~GameStateLogger();
-    
+
     void start();
     void stop();
-    
+
     virtual void update(float delta);
 
 private:
@@ -39,6 +40,7 @@ private:
     void writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj);
     void writeShipEntry(JSONGenerator& json, P<SpaceShip> obj);
     void writeStationEntry(JSONGenerator& json, P<SpaceStation> obj);
+    void writePlanetEntry(JSONGenerator& json, P<Planet> obj);
 };
 
 #endif//GAME_STATE_LOGGER_H

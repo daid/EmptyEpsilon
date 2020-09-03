@@ -6,7 +6,7 @@
 
 #include "scriptInterface.h"
 
-// Nebulae block long-range radar in a 5U range.
+/// Nebulae block long-range radar in a 5U range.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
 {
 }
@@ -23,9 +23,9 @@ Nebula::Nebula()
     setRotation(random(0, 360));
     radar_visual = irandom(1, 3);
     setRadarSignatureInfo(0.0, 0.8, -1.0);
-    
+
     registerMemberReplication(&radar_visual);
-    
+
     for(int n=0; n<cloud_count; n++)
     {
         clouds[n].size = random(512, 1024 * 2);
@@ -34,7 +34,7 @@ Nebula::Nebula()
         float dist_max = getRadius() - clouds[n].size;
         clouds[n].offset = sf::vector2FromAngle(float(n * 360 / cloud_count)) * random(dist_min, dist_max);
     }
-    
+
     nebula_list.push_back(this);
 }
 
@@ -49,13 +49,13 @@ void Nebula::draw3DTransparent()
 
         sf::Vector3f position = sf::Vector3f(getPosition().x, getPosition().y, 0) + sf::Vector3f(cloud.offset.x, cloud.offset.y, 0);
         float size = cloud.size;
-        
+
         float distance = sf::length(camera_position - position);
         float alpha = 1.0 - (distance / 10000.0f);
         if (alpha < 0.0)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glBegin(GL_QUADS);
         glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
@@ -72,11 +72,11 @@ void Nebula::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "Nebula" + string(radar_visual) + ".png");
-    object_sprite.setRotation(getRotation());
+    object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
     object_sprite.setScale(size, size);
@@ -84,7 +84,7 @@ void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     window.draw(object_sprite, sf::BlendAdd);
 }
 
-void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::CircleShape range_circle(getRadius() * scale);
     range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
@@ -111,7 +111,7 @@ bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end)
     float startEndLength = sf::length(startEndDiff);
     if (startEndLength < 5000.0f)
         return false;
-    
+
     foreach(Nebula, n, nebula_list)
     {
         //Calculate point q, which is a point on the line start-end that is closest to n->getPosition
@@ -154,7 +154,7 @@ sf::Vector2f Nebula::getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f en
     }
     if (!first_nebula)
         return end;
-    
+
     float d = sf::length(first_nebula_q - first_nebula->getPosition());
     return first_nebula_q + sf::normalize(start - end) * sqrtf(first_nebula->getRadius() * first_nebula->getRadius() - d * d);
 }

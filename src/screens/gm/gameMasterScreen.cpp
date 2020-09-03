@@ -1,11 +1,14 @@
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "gameMasterScreen.h"
+#include "objectCreationView.h"
+#include "globalMessageEntryView.h"
 #include "tweak.h"
 #include "chatDialog.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
+#include "spaceObjects/zone.h"
 
 #include "screenComponents/radarView.h"
 
@@ -30,7 +33,7 @@ GameMasterScreen::GameMasterScreen()
     );
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", sf::Color(255, 255, 255, 32));
     box_selection_overlay->hide();
-    
+
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
         if (!value)
             engine->setGameSpeed(1.0f);
@@ -43,7 +46,7 @@ GameMasterScreen::GameMasterScreen()
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
-    
+
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -51,9 +54,9 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getName(), info->getName());
+        faction_selector->addEntry(info->getLocaleName(), info->getName());
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
-    
+
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
         global_message_entry->show();
     });
@@ -69,7 +72,7 @@ GameMasterScreen::GameMasterScreen()
     player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
-        object_creation_screen->show();
+        object_creation_view->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
@@ -83,11 +86,10 @@ GameMasterScreen::GameMasterScreen()
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
-    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
-        create_button->show();
-        cancel_create_button->hide();
+    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+        gameGlobalInfo->on_gm_click = nullptr;
     });
-    cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -101,6 +103,14 @@ GameMasterScreen::GameMasterScreen()
             {
                 ship_tweak_dialog->open(obj);
                 break;
+            }
+            else if (P<SpaceStation>(obj))
+            {
+                station_tweak_dialog->open(obj);
+            }
+            else if (P<WarpJammer>(obj))
+            {
+                jammer_tweak_dialog->open(obj);
             }
             else
             {
@@ -125,7 +135,10 @@ GameMasterScreen::GameMasterScreen()
 
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
-    
+
+    info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Clock"), "");
+    info_clock->setSize(GuiElement::GuiSizeMax, 30);
+
     gm_script_options = new GuiListbox(this, "GM_SCRIPT_OPTIONS", [this](int index, string value)
     {
         gm_script_options->setSelectionIndex(-1);
@@ -141,31 +154,31 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
-    
-    order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
+    order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalBottomToTop);
+    order_layout->setPosition(-20, -90, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderIdle();
-    }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderRoaming();
+                P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand ground", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderStandGround();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
+    (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
+                P<CpuShip>(obj)->orderRoaming();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
+        for(P<SpaceObject> obj : targets.getTargets())
+            if (P<CpuShip>(obj))
+                P<CpuShip>(obj)->orderIdle();
+    }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
 
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -181,11 +194,34 @@ GameMasterScreen::GameMasterScreen()
     ship_tweak_dialog->hide();
     object_tweak_dialog = new GuiObjectTweak(this, TW_Object);
     object_tweak_dialog->hide();
+    station_tweak_dialog = new GuiObjectTweak(this, TW_Station);
+    station_tweak_dialog->hide();
+    jammer_tweak_dialog = new GuiObjectTweak(this, TW_Jammer);
+    jammer_tweak_dialog->hide();
 
-    global_message_entry = new GuiGlobalMessageEntry(this);
+    global_message_entry = new GuiGlobalMessageEntryView(this);
     global_message_entry->hide();
-    object_creation_screen = new GuiObjectCreationScreen(this);
-    object_creation_screen->hide();
+    object_creation_view = new GuiObjectCreationView(this);
+    object_creation_view->hide();
+
+    message_frame = new GuiPanel(this, "");
+    message_frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+
+    message_text = new GuiScrollText(message_frame, "", "");
+    message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
+    message_close_button = new GuiButton(message_frame, "", "Close", [this]() {
+        if (!gameGlobalInfo->gm_messages.empty())
+        {
+            gameGlobalInfo->gm_messages.pop_front();
+        }
+
+    });
+    message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
+}
+
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+GameMasterScreen::~GameMasterScreen()
+{
 }
 
 void GameMasterScreen::update(float delta)
@@ -204,7 +240,7 @@ void GameMasterScreen::update(float delta)
         else
             main_radar->longRange();
     }
-    
+
     bool has_object = false;
     bool has_cpu_ship = false;
     bool has_player_ship = false;
@@ -217,7 +253,7 @@ void GameMasterScreen::update(float delta)
         {
             if (player_ship_selector->indexByValue(string(n)) == -1)
                 player_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
-            
+
             if (ship->isCommsBeingHailedByGM() || ship->isCommsChatOpenToGM())
             {
                 if (!chat_dialog_per_ship[n]->isVisible())
@@ -248,9 +284,11 @@ void GameMasterScreen::update(float delta)
     tweak_button->setVisible(has_object);
 
     order_layout->setVisible(has_cpu_ship);
-    gm_script_options->setVisible(!has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
-    
+
+    // Update mission clock
+    info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
+
     std::unordered_map<string, string> selection_info;
 
     // For each selected object, determine and report their type.
@@ -274,7 +312,7 @@ void GameMasterScreen::update(float delta)
     {
         selection_info["Position"] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
     }
-    
+
     unsigned int cnt = 0;
     for(std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
     {
@@ -310,6 +348,27 @@ void GameMasterScreen::update(float delta)
             gm_script_options->addEntry(callback.name, callback.name);
         }
     }
+
+    if (!gameGlobalInfo->gm_messages.empty())
+    {
+        GMMessage* message = &gameGlobalInfo->gm_messages.front();
+        message_text->setText(message->text);
+        message_frame->show();
+    } else {
+        message_frame->hide();
+    }
+
+    if (gameGlobalInfo->on_gm_click)
+    {
+        create_button->hide();
+        object_creation_view->hide();
+        cancel_action_button->show();
+    }
+    else
+    {
+        create_button->show();
+        cancel_action_button->hide();
+    }
 }
 
 void GameMasterScreen::onMouseDown(sf::Vector2f position)
@@ -322,14 +381,14 @@ void GameMasterScreen::onMouseDown(sf::Vector2f position)
     }
     else
     {
-        if (cancel_create_button->isVisible())
+        if (gameGlobalInfo->on_gm_click)
         {
-            object_creation_screen->createObject(position);
+            gameGlobalInfo->on_gm_click(position);
         }else{
             click_and_drag_state = CD_BoxSelect;
-            
+
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
-            
+
             for(P<SpaceObject> obj : targets.getTargets())
             {
                 if ((obj->getPosition() - position) < std::max(min_drag_distance, obj->getRadius()))
@@ -395,7 +454,7 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 P<CpuShip> cpu_ship = obj;
                 if (!cpu_ship)
                     continue;
-                
+
                 lower_bound.x = std::min(lower_bound.x, obj->getPosition().x);
                 lower_bound.y = std::min(lower_bound.y, obj->getPosition().y);
                 upper_bound.x = std::max(upper_bound.x, obj->getPosition().x);
@@ -431,20 +490,40 @@ void GameMasterScreen::onMouseUp(sf::Vector2f position)
                 {
                     wormhole->setTargetPosition(position);
                 }
-                
-                
+
+
             }
         }
         break;
     case CD_BoxSelect:
         {
+            bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);
+            //Using sf::Keyboard::isKeyPressed, as CTRL does not seem to generate keydown/key up events in SFML.
+            bool ctrl_down = sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::RControl);
+            bool alt_down = InputHandler::keyboardIsDown(sf::Keyboard::LAlt) || InputHandler::keyboardIsDown(sf::Keyboard::RAlt);
             PVector<Collisionable> objects = CollisionManager::queryArea(drag_start_position, position);
             PVector<SpaceObject> space_objects;
             foreach(Collisionable, c, objects)
             {
+                if (P<Zone>(c))
+                    continue;
+                if (ctrl_down && !P<ShipTemplateBasedObject>(c))
+                    continue;
+                if (alt_down && (!P<SpaceObject>(c) || (int)(P<SpaceObject>(c))->getFactionId() != faction_selector->getSelectionIndex()))
+                    continue;
                 space_objects.push_back(c);
             }
-            targets.set(space_objects);
+            if (shift_down)
+            {
+                foreach(SpaceObject, s, space_objects)
+                {
+                    targets.add(s);
+                }
+            } else {
+                targets.set(space_objects);
+            }
+
+
             if (space_objects.size() > 0)
                 faction_selector->setSelectionIndex(space_objects[0]->getFactionId());
         }
@@ -501,7 +580,7 @@ string GameMasterScreen::getScriptExport(bool selected_only)
     }else{
         objs = space_object_list;
     }
-    
+
     foreach(SpaceObject, obj, objs)
     {
         string line = obj->getExportLine();
@@ -510,129 +589,4 @@ string GameMasterScreen::getScriptExport(bool selected_only)
         output += "    " + line + "\n";
     }
     return output;
-}
-
-GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
-: GuiOverlay(owner, "GLOBAL_MESSAGE_ENTRY", sf::Color(0, 0, 0, 128))
-{
-    GuiPanel* box = new GuiPanel(this, "FRAME");
-    box->setPosition(0, 0, ACenter)->setSize(800, 150);
-    
-    message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
-    message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
-    
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
-        this->hide();
-    }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
-
-    (new GuiButton(box, "SEND_BUTTON", "Send", [this]() {
-        string message = message_entry->getText();
-        if (message.length() > 0)
-        {
-            gameGlobalInfo->global_message = message;
-            gameGlobalInfo->global_message_timeout = 5.0;
-        }
-        this->hide();
-    }))->setPosition(-20, -20, ABottomRight)->setSize(300, 50);
-}
-
-bool GuiGlobalMessageEntry::onMouseDown(sf::Vector2f position)
-{   //Catch clicks.
-    return true;
-}
-
-GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
-: GuiOverlay(gm_screen, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
-{
-    this->gm_screen = gm_screen;
-    
-    GuiPanel* box = new GuiPanel(this, "FRAME");
-    box->setPosition(0, 0, ACenter)->setSize(1000, 500);
-
-    faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
-    for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getName(), info->getName());
-    faction_selector->setSelectionIndex(0);
-    faction_selector->setPosition(20, 20, ATopLeft)->setSize(300, 50);
-    
-    float y = 20;
-    std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
-    std::sort(template_names.begin(), template_names.end());
-    for(string template_name : template_names)
-    {
-        (new GuiButton(box, "CREATE_STATION_" + template_name, template_name, [this, template_name]() {
-            setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
-        }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-        y += 30;
-    }
-    
-    (new GuiButton(box, "CREATE_WARP_JAMMER", "Warp Jammer", [this]() {
-        setCreateScript("WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {
-        setCreateScript("Mine():setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    // Default supply drop values copied from scripts/supply_drop.lua
-    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Supply Drop", [this]() {
-        setCreateScript("SupplyDrop():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1)");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_ASTEROID", "Asteroid", [this]() {
-        setCreateScript("Asteroid()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
-        setCreateScript("BlackHole()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_NEBULA", "Nebula", [this]() {
-        setCreateScript("Nebula()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
-        setCreateScript("WormHole()");
-    }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-    y += 30;
-    y = 20;
-    template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
-    std::sort(template_names.begin(), template_names.end());
-    GuiListbox* listbox = new GuiListbox(box, "CREATE_SHIPS", [this](int index, string value)
-    {
-        setCreateScript("CpuShip():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + value + "\"):orderRoaming()");
-    });
-    listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
-    for(string template_name : template_names)
-    {
-        listbox->addEntry(template_name, template_name);
-    }
-    
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
-        create_script = "";
-        this->hide();
-    }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
-}
-
-bool GuiObjectCreationScreen::onMouseDown(sf::Vector2f position)
-{   //Catch clicks.
-    return true;
-}
-
-void GuiObjectCreationScreen::setCreateScript(string script)
-{
-    create_script = script;
-    gm_screen->create_button->hide();
-    gm_screen->cancel_create_button->show();
-    hide();
-}
-
-void GuiObjectCreationScreen::createObject(sf::Vector2f position)
-{
-    if (create_script == "")
-        return;
-    
-    P<ScriptObject> so = new ScriptObject();
-    so->runCode(create_script + ":setPosition("+string(position.x)+","+string(position.y)+")");
-    so->destroy();
 }

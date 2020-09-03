@@ -4,6 +4,7 @@
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
 #include "spaceObjects/scanProbe.h"
+#include "playerInfo.h"
 
 class GuiListbox;
 class GuiRadarView;
@@ -59,9 +60,10 @@ public:
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
 public:
-    ScienceScreen(GuiContainer* owner);
+    ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SCIENCE_SCREEN_H

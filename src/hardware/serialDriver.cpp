@@ -6,10 +6,12 @@
     //Including ioctl or termios conflicts with asm/termios.h which we need for TCGETS2. So locally define the ioctl and tcsendbreak functions. Yes, it's dirty, but it works.
     //#include <sys/ioctl.h>
     //#include <termios.h>
+#ifndef ANDROID
     extern "C" {
     extern int ioctl (int __fd, unsigned long int __request, ...) __THROW;
     extern int tcsendbreak (int __fd, int __duration) __THROW;
     }
+#endif
     #include <asm/termios.h>
     #include <fcntl.h>
     #include <unistd.h>
@@ -167,12 +169,11 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     struct termios2 tio;
     ioctl(handle, TCGETS2, &tio);
 
-	// Clear handshake, parity, stopbits and size
-    tio.c_cflag |= CLOCAL;
-	tio.c_cflag &= ~CRTSCTS;
-	tio.c_cflag &= ~PARENB;
-	tio.c_cflag &= ~CSTOPB;
-	tio.c_cflag &= ~CSIZE;
+    // Clear handshake, parity, stopbits and size
+    tio.c_cflag = CLOCAL;
+    tio.c_iflag = 0;
+    tio.c_oflag = 0;
+    tio.c_lflag = 0;
 
     // Set the baudrate
     tio.c_cflag &= ~CBAUD;
@@ -180,25 +181,25 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     tio.c_ispeed = baudrate;
     tio.c_ospeed = baudrate;
 
-	// Enable the receiver
-	tio.c_cflag |= CREAD;
+    // Enable the receiver
+    tio.c_cflag |= CREAD;
 
     switch (databits)
-	{
-	case 5:
-		tio.c_cflag |= CS5;
-		break;
-	case 6:
-		tio.c_cflag |= CS6;
-		break;
-	case 7:
-		tio.c_cflag |= CS7;
-		break;
-	default:
-	case 8:
-		tio.c_cflag |= CS8;
-		break;
-	}
+    {
+    case 5:
+        tio.c_cflag |= CS5;
+        break;
+    case 6:
+        tio.c_cflag |= CS6;
+        break;
+    case 7:
+        tio.c_cflag |= CS7;
+        break;
+    default:
+    case 8:
+        tio.c_cflag |= CS8;
+        break;
+    }
 
     switch(parity)
     {
@@ -232,32 +233,31 @@ void SerialPort::configure(int baudrate, int databits, EParity parity, EStopBits
     struct termios tio;
     tcgetattr(handle, &tio);
 
-	// Clear handshake, parity, stopbits and size
-    tio.c_cflag |= CLOCAL;
-	tio.c_cflag &= ~CRTSCTS;
-	tio.c_cflag &= ~PARENB;
-	tio.c_cflag &= ~CSTOPB;
-	tio.c_cflag &= ~CSIZE;
+    // Clear handshake, parity, stopbits and size
+    tio.c_cflag = CLOCAL;
+    tio.c_iflag = 0;
+    tio.c_oflag = 0;
+    tio.c_lflag = 0;
 
-	// Enable the receiver
-	tio.c_cflag |= CREAD;
+    // Enable the receiver
+    tio.c_cflag |= CREAD;
 
     switch (databits)
-	{
-	case 5:
-		tio.c_cflag |= CS5;
-		break;
-	case 6:
-		tio.c_cflag |= CS6;
-		break;
-	case 7:
-		tio.c_cflag |= CS7;
-		break;
-	default:
-	case 8:
-		tio.c_cflag |= CS8;
-		break;
-	}
+    {
+    case 5:
+        tio.c_cflag |= CS5;
+        break;
+    case 6:
+        tio.c_cflag |= CS6;
+        break;
+    case 7:
+        tio.c_cflag |= CS7;
+        break;
+    default:
+    case 8:
+        tio.c_cflag |= CS8;
+        break;
+    }
 
     switch(parity)
     {
@@ -425,7 +425,7 @@ void SerialPort::sendBreak()
     Sleep(1);
     ClearCommBreak(handle);
 #endif
-#if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
+#if (defined(__gnu_linux__) && !defined(ANDROID)) || (defined(__APPLE__) && defined(__MACH__))
     tcsendbreak(handle, 0);
 #endif
 }
@@ -518,7 +518,7 @@ string SerialPort::getPseudoDriverName(string port)
     char buffer[128];
     buffer[127] = '\0';
     if (!fgets(buffer, 127, f))
-	buffer[0] = '\0';
+    buffer[0] = '\0';
     fclose(f);
     return string(buffer);
 #endif
@@ -529,7 +529,7 @@ string SerialPort::getPseudoDriverName(string port)
     char buffer[128];
     buffer[127] = '\0';
     if (!fgets(buffer, 127, f))
-	buffer[0] = '\0';
+    buffer[0] = '\0';
     fclose(f);
     return string(buffer);
 #endif

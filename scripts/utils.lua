@@ -50,7 +50,7 @@ function distance(a, b, c, d)
         x2, y2 = b, c
     elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
         -- Assume distance(x, y, obj)
-        x1, y1 = a, b:getPosition()
+        x1, y1 = a, b
         x2, y2 = c:getPosition()
     elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
         -- a and b are both tables.
@@ -94,7 +94,7 @@ end
 -- at a heading of 45 degrees, run
 --   setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
 function setCirclePos(obj, x, y, angle, distance)
-    dx, dy = vectorFromAngle(angle, distance)
+    local dx, dy = vectorFromAngle(angle, distance)
     return obj:setPosition(x + dx, y + dy)
 end
 
@@ -149,6 +149,65 @@ function mergeTables(table_a, table_b)
             table_a[key] = value
         elseif type(table_a[key]) == "table" and type(value) then
             mergeTables(table_a[key], value)
+        end
+    end
+end
+
+-- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
+function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
+    for n=1,amount do
+        local r = random(0, 360)
+        local distance = random(dist_min, dist_max)
+        local x = x0 + math.cos(r / 180 * math.pi) * distance
+        local y = y0 + math.sin(r / 180 * math.pi) * distance
+        object_type():setPosition(x, y)
+    end
+end
+
+-- Place semi-random object_types around point (x,y) in a (x_grids by y_grids) area
+-- Perlin Noise is used to create a sort of natural look to the created objects.
+-- Use the perlin_z-parameter together with density to control amound of placed objects
+-- Sensible values for perlin_z are in a range of {0.1 .. 0.5}
+--
+-- Example:
+--
+--   -- Creates a 10x10 grid space filled with some asteroids and nebulas
+--   placeRandomObjects(Asteroid, 30, 0.3, 0, 0, 10, 10)
+--   placeRandomObjects(VisualAsteroid, 30, 0.3, 0, 0, 10, 10)
+--   placeRandomObjects(Nebula, 15, 0.3, 0, 0, 10, 10)
+function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_grids)
+    -- Prepare the Perlin Noise generator (if needed)
+    require("perlin_noise.lua")
+    perlin:load()
+
+    -- Size of EE grid
+    local grid_size = 20000
+
+    -- Z-axis of Perlin distribution.
+    local perlin_magic_z = perlin_z
+
+    -- Perlin noise is not random, so we'll pick a random spot in its distribution
+    local perlin_section_i = random(0, 1000)
+    local perlin_section_j = random(0, 1000)
+
+    -- Create a XY intensity map
+    for i=1,x_grids do
+        for j=1,y_grids do
+
+            -- Get intensity from perlin distribution, and do a very rough normalization to {0 .. 0.6}
+            local intensity = (perlin:noise(i+perlin_section_i, j+perlin_section_j, perlin_magic_z) + perlin_magic_z)
+
+            -- Cube it to get blobs of objects
+            intensity = intensity * intensity * intensity
+
+            -- Use it to fill patches of space with randomly placed objects
+            if (intensity > 0) then
+                local nr_of_objects = intensity * density
+                local x_start = ((i-x_grids/2) * grid_size) + x
+                local y_start = ((j-x_grids/2) * grid_size ) + y
+
+                placeRandomAroundPoint(object_type, nr_of_objects, 0, grid_size/1.5, x_start, y_start)
+            end
         end
     end
 end

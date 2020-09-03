@@ -5,7 +5,7 @@
 
 class FighterAI : public ShipAI
 {
-    enum 
+    enum
     {
         dive,
         evade,

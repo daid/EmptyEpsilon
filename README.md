@@ -42,4 +42,4 @@ There is no clear goal where this game is going. This means that there is no for
 
 ## Building
 
-See https://github.com/daid/EmptyEpsilon/wiki/Build-from-sources
+See https://github.com/daid/EmptyEpsilon/wiki/Build

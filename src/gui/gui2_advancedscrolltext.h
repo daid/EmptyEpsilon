@@ -14,22 +14,22 @@ protected:
         string text;
         sf::Color color;
     };
-    
+
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
     float text_size;
     bool auto_scroll_down;
 public:
     GuiAdvancedScrollText(GuiContainer* owner, string id);
-    
+
     GuiAdvancedScrollText* enableAutoScrollDown() { auto_scroll_down = true; return this; }
     GuiAdvancedScrollText* disableAutoScrollDown() { auto_scroll_down = false; return this; }
 
     GuiAdvancedScrollText* addEntry(string prefix, string text, sf::Color color);
     GuiAdvancedScrollText* setTextSize(float text_size) { this->text_size = text_size; return this; }
-    
-    unsigned int getEntryCount();
-    string getEntryText(int index);
+
+    unsigned int getEntryCount() const;
+    string getEntryText(int index) const;
     GuiAdvancedScrollText* removeEntry(int index);
     GuiAdvancedScrollText* clearEntries();
 

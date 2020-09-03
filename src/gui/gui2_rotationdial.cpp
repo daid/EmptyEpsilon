@@ -13,7 +13,7 @@ void GuiRotationDial::onDraw(sf::RenderTarget& window)
 {
     sf::Vector2f center = getCenterPoint();
     float radius = std::min(rect.width, rect.height) / 2.0f;
-    
+
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "dial_background.png");
     sprite.setPosition(center);
@@ -31,13 +31,13 @@ bool GuiRotationDial::onMouseDown(sf::Vector2f position)
 {
     sf::Vector2f center = getCenterPoint();
     float radius = std::min(rect.width, rect.height) / 2.0f;
-    
+
     sf::Vector2f diff = position - center;
     if (diff > radius)
         return false;
     if (diff < radius * 0.875f)
         return false;
-    
+
     onMouseDrag(position);
     return true;
 }
@@ -45,7 +45,7 @@ bool GuiRotationDial::onMouseDown(sf::Vector2f position)
 void GuiRotationDial::onMouseDrag(sf::Vector2f position)
 {
     sf::Vector2f center = getCenterPoint();
-    
+
     sf::Vector2f diff = position - center;
 
     float new_value = (sf::vector2ToAngle(diff) + 90.0f) / 360.0f;
@@ -94,7 +94,7 @@ GuiRotationDial* GuiRotationDial::setValue(float value)
     return this;
 }
 
-float GuiRotationDial::getValue()
+float GuiRotationDial::getValue() const
 {
     return value;
 }

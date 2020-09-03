@@ -46,48 +46,49 @@ public:
     GuiElement(GuiContainer* owner, string id);
     virtual ~GuiElement();
 
+    virtual void onUpdate() {}
     virtual void onDraw(sf::RenderTarget& window) {}
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onKey(sf::Event::KeyEvent key, int unicode);
     virtual void onHotkey(const HotkeyResult& key);
-    virtual bool onJoystickXYMove(sf::Vector2f position);
-    virtual bool onJoystickZMove(float position);
-    virtual bool onJoystickRMove(float position);
-    
+    virtual bool onJoystickAxis(const AxisAction& axisAction);
+    virtual void onFocusGained() {}
+    virtual void onFocusLost() {}
+
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
-    sf::Vector2f getSize();
+    sf::Vector2f getSize() const;
     GuiElement* setMargins(float n);
     GuiElement* setMargins(float x, float y);
     GuiElement* setMargins(float left, float top, float right, float bottom);
     GuiElement* setPosition(float x, float y, EGuiAlign alignment = ATopLeft);
     GuiElement* setPosition(sf::Vector2f position, EGuiAlign alignment = ATopLeft);
-    sf::Vector2f getPositionOffset();
+    sf::Vector2f getPositionOffset() const;
     GuiElement* setVisible(bool visible);
     GuiElement* hide();
     GuiElement* show();
-    bool isVisible();
+    bool isVisible() const;
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
     GuiElement* setActive(bool active);
-    bool isActive();
+    bool isActive() const;
     sf::FloatRect getRect() const { return rect; }
-    bool isEnabled();
-    
+    bool isEnabled() const;
+
     void moveToFront();
     void moveToBack();
-    
-    sf::Vector2f getCenterPoint();
-    
+
+    sf::Vector2f getCenterPoint() const;
+
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
-    
+
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();
-    
+
     friend class GuiContainer;
     friend class GuiCanvas;
 private:
@@ -116,16 +117,16 @@ protected:
 
     void draw9Cut(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
     void draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float height_factor = 1.0);
-    
+
     void drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color=sf::Color::White);
-    
+
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
-    
-    sf::Color selectColor(ColorSet& color_set);
-    
+
+    sf::Color selectColor(ColorSet& color_set) const;
+
     class LineWrapResult
     {
     public:

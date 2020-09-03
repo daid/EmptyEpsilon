@@ -5,7 +5,7 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 {
     selected_color = sf::Color::White;
     unselected_color = sf::Color(192, 192, 192, 255);
-    
+
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
         entriesChanged();
     });
@@ -33,10 +33,10 @@ void GuiListbox::onDraw(sf::RenderTarget& window)
 void GuiListbox::entriesChanged()
 {
     last_rect = rect;
-    
+
     int max_buttons = rect.height / button_height;
     float button_width = rect.width - button_height;
-    
+
     scroll->setSize(button_height, rect.height);
     scroll->setValueSize(max_buttons);
     scroll->setRange(0, entries.size());
@@ -66,7 +66,7 @@ void GuiListbox::entriesChanged()
         buttons.back()->destroy();
         buttons.erase(buttons.begin() + buttons.size() - 1);
     }
-    
+
     for(int n=0; n<(int)buttons.size(); n++)
     {
         buttons[n]->setText(entries[n + scroll->getValue()].name);

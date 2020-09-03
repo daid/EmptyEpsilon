@@ -19,9 +19,9 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     GuiRotationDial* setValue(float value);
-    float getValue();
+    float getValue() const;
 };
 
 #endif//GUI2_ROTATIONDIAL_H

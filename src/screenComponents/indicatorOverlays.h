@@ -26,9 +26,9 @@ private:
 public:
     GuiIndicatorOverlays(GuiContainer* owner);
     virtual ~GuiIndicatorOverlays();
-    
+
     virtual void onDraw(sf::RenderTarget& window);
-    
+
     virtual bool onMouseDown(sf::Vector2f position);
 private:
     void drawAlertLevel(sf::RenderTarget& window);

@@ -28,7 +28,7 @@ public:
 
     void setDirection(float direction);
     float getDirection();
-    
+
     /*!
      * Load a missile tube.
      * \param type Weapon type that is loaded.
@@ -45,9 +45,12 @@ public:
     bool canOnlyLoad(EMissileWeapons type);
     void allowLoadOf(EMissileWeapons type);
     void disallowLoadOf(EMissileWeapons type);
-    
+
+    void setSize(EMissileSizes size);
+    EMissileSizes getSize();
+
     void forceUnload();
-    
+
     void update(float delta);
 
     bool isEmpty();
@@ -55,12 +58,12 @@ public:
     bool isLoading();
     bool isUnloading();
     bool isFiring();
-    
+
     float getLoadProgress();
     float getUnloadProgress();
 
     EMissileWeapons getLoadType();
-    
+
     string getTubeName(); //Get the tube name based on the direction of the tube.
 
     //Calculate a possible firing solution towards the target for this missile tube.
@@ -72,7 +75,7 @@ private:
 
     SpaceShip* parent;
     int tube_index;
-    
+
     //Configuration
     float load_time;
     uint32_t type_allowed_mask;
@@ -80,6 +83,9 @@ private:
 
     //Runtime state
     EMissileWeapons type_loaded;
+
+    EMissileSizes size;
+    float getSizeCategoryModifier();
     EWeaponTubeState state;
     float delay;
     int fire_count;

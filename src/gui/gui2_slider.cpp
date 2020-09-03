@@ -3,8 +3,124 @@
 #include "gui2_slider.h"
 #include "preferenceManager.h"
 
-GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
+GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
+{
+}
+
+void GuiBasicSlider::onDraw(sf::RenderTarget& window)
+{
+    drawStretched(window, rect, "gui/SliderBackground", selectColor(colorConfig.slider.background));
+
+    sf::Color color = selectColor(colorConfig.slider.forground);
+
+    if (rect.width > rect.height)
+    {
+        float x;
+        x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
+
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "gui/SliderKnob");
+        sprite.setOrigin(0, 0);
+        sprite.setPosition(x, rect.top);
+        sprite.setScale(rect.height / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().width);
+        sprite.setColor(color);
+        window.draw(sprite);
+    }else{
+        float y;
+        y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
+
+        sf::Sprite sprite;
+        textureManager.setTexture(sprite, "gui/SliderKnob");
+        sprite.setOrigin(0, 0);
+        sprite.setPosition(rect.left, y);
+        sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().width);
+        sprite.setColor(color);
+        window.draw(sprite);
+    }
+}
+
+bool GuiBasicSlider::onMouseDown(sf::Vector2f position)
+{
+    onMouseDrag(position);
+    return true;
+}
+
+void GuiBasicSlider::onMouseDrag(sf::Vector2f position)
+{
+    float new_value;
+    if (rect.width > rect.height)
+        new_value = (position.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+    else
+        new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+    new_value = min_value + (max_value - min_value) * new_value;
+    if (min_value < max_value)
+    {
+        if (new_value < min_value)
+            new_value = min_value;
+        if (new_value > max_value)
+            new_value = max_value;
+    }else{
+        if (new_value > min_value)
+            new_value = min_value;
+        if (new_value < max_value)
+            new_value = max_value;
+    }
+    if (value != new_value)
+    {
+        value = new_value;
+        if (func)
+        {
+            func_t f = func;
+            f(value);
+        }
+    }
+}
+
+void GuiBasicSlider::onMouseUp(sf::Vector2f position)
+{
+}
+
+GuiBasicSlider* GuiBasicSlider::setValue(float value)
+{
+    if (min_value < max_value)
+    {
+        if (value < min_value)
+            value = min_value;
+        if (value > max_value)
+            value = max_value;
+    }else{
+        if (value > min_value)
+            value = min_value;
+        if (value < max_value)
+            value = max_value;
+    }
+    this->value = value;
+    return this;
+}
+
+GuiBasicSlider* GuiBasicSlider::setRange(float min, float max)
+{
+    this->min_value = min;
+    this->max_value = max;
+    setValue(this->value);
+    return this;
+}
+
+float GuiBasicSlider::getValue() const
+{
+    return value;
+}
+
+
+
+
+
+
+
+
+GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
+: GuiBasicSlider(owner, id, min_value, max_value, start_value, func)
 {
     overlay_label = nullptr;
 }
@@ -64,7 +180,7 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
         sprite.setColor(color);
         window.draw(sprite);
     }
-    
+
     if (overlay_label)
     {
         overlay_label->setText(string(value, 0));
@@ -131,32 +247,6 @@ GuiSlider* GuiSlider::addSnapValue(float value, float range)
     return this;
 }
 
-GuiSlider* GuiSlider::setValue(float value)
-{
-    if (min_value < max_value)
-    {
-        if (value < min_value)
-            value = min_value;
-        if (value > max_value)
-            value = max_value;
-    }else{
-        if (value > min_value)
-            value = min_value;
-        if (value < max_value)
-            value = max_value;
-    }
-    this->value = value;
-    return this;
-}
-
-GuiSlider* GuiSlider::setRange(float min, float max)
-{
-    this->min_value = min;
-    this->max_value = max;
-    setValue(this->value);
-    return this;
-}
-
 GuiSlider* GuiSlider::addOverlay()
 {
     if (!overlay_label)
@@ -167,10 +257,13 @@ GuiSlider* GuiSlider::addOverlay()
     return this;
 }
 
-float GuiSlider::getValue()
-{
-    return value;
-}
+
+
+
+
+
+
+
 
 GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, sf::Vector2f min_value, sf::Vector2f max_value, sf::Vector2f start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)

@@ -81,7 +81,13 @@ class SpaceObject : public Collisionable, public MultiplayerObject
 {
     float object_radius;
     uint8_t faction_id;
-    string object_description;
+    struct
+    {
+        string not_scanned;
+        string friend_of_foe_identified;
+        string simple_scan;
+        string full_scan;
+    } object_description;
     RawRadarSignatureInfo radar_signature;
 
     /*!
@@ -101,6 +107,7 @@ public:
     string callsign;
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
+    virtual ~SpaceObject();
 
     float getRadius() { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
@@ -112,23 +119,64 @@ public:
     float getRadarSignatureElectrical() { return radar_signature.electrical; }
     float getRadarSignatureBiological() { return radar_signature.biological; }
 
-    string getDescription() { return object_description; }
-    void setDescription(string description) { object_description = description; }
+    string getDescription(EScannedState state)
+    {
+        switch(state)
+        {
+        case SS_NotScanned: return object_description.not_scanned;
+        case SS_FriendOrFoeIdentified: return object_description.friend_of_foe_identified;
+        case SS_SimpleScan: return object_description.simple_scan;
+        case SS_FullScan: return object_description.full_scan;
+        }
+        return object_description.full_scan;
+    }
+
+    void setDescriptionForScanState(EScannedState state, string description)
+    {
+        switch(state)
+        {
+        case SS_NotScanned: object_description.not_scanned = description; break;
+        case SS_FriendOrFoeIdentified: object_description.friend_of_foe_identified = description; break;
+        case SS_SimpleScan: object_description.simple_scan = description; break;
+        case SS_FullScan: object_description.full_scan = description; break;
+        }
+    }
+    void setDescription(string description)
+    {
+        setDescriptions(description, description);
+    }
+
+    void setDescriptions(string unscanned_description, string scanned_description)
+    {
+        object_description.not_scanned = unscanned_description;
+        object_description.friend_of_foe_identified = unscanned_description;
+        object_description.simple_scan = scanned_description;
+        object_description.full_scan = scanned_description;
+    }
+
+    string getDescriptionFor(P<SpaceObject> obj)
+    {
+        return getDescription(getScannedStateFor(obj));
+    }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
     void setHeading(float heading) { setRotation(heading - 90); }
 
-#if FEATURE_3D_RENDERING
+    void onDestroyed(ScriptSimpleCallback callback)
+    {
+        on_destroyed = callback;
+    }
+
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-#endif//FEATURE_3D_RENDERING
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool longRange);
+    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
+    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void destroy();
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }
     virtual bool canBeDockedBy(P<SpaceObject> obj) { return false; }
+    virtual bool canRestockMissiles() { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(P<SpaceObject> other);
@@ -160,6 +208,7 @@ public:
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
     string getFaction() { return factionInfo[this->faction_id]->getName(); }
+    string getLocaleFaction() { return factionInfo[this->faction_id]->getLocaleName(); }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
     void setReputationPoints(float amount);
@@ -175,7 +224,7 @@ public:
     bool openCommsTo(P<PlayerSpaceship> target);
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
 
-    ScriptCallback onDestroyed;
+    ScriptSimpleCallback on_destroyed;
 
 protected:
     ModelInfo model_info;
@@ -183,5 +232,7 @@ protected:
 
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
+// Function to convert a lua parameter to a scan state.
+template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedState& ss);
 
 #endif//SPACE_OBJECT_H

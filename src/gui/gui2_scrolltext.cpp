@@ -15,7 +15,7 @@ GuiScrollText* GuiScrollText::setText(string text)
     return this;
 }
 
-string GuiScrollText::getText()
+string GuiScrollText::getText() const
 {
     return text;
 }
@@ -29,7 +29,7 @@ GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
 void GuiScrollText::onDraw(sf::RenderTarget& window)
 {
     LineWrapResult wrap = doLineWrap(this->text, text_size, rect.width - scrollbar->getSize().x);
-    
+
     int start_pos = 0;
     for(int n=0; n<scrollbar->getValue(); n++)
     {
@@ -52,7 +52,7 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
         if (end_pos > 0)
             wrap.text = wrap.text.substr(0, end_pos);
     }
-    
+
     if (scrollbar->getMax() != wrap.line_count)
     {
         int diff = wrap.line_count - scrollbar->getMax();
@@ -60,6 +60,15 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
         scrollbar->setValueSize(max_lines);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
+    }
+
+    if (max_lines >= wrap.line_count)
+    {
+        scrollbar->hide();
+    }
+    else
+    {
+        scrollbar->show();
     }
 
     drawText(window, sf::FloatRect(rect.left, rect.top, rect.width - scrollbar->getSize().x, rect.height), wrap.text, ATopLeft, text_size, main_font, selectColor(colorConfig.textbox.forground));

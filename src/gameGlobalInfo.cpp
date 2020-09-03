@@ -1,5 +1,7 @@
+#include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "scienceDatabase.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -12,11 +14,13 @@ GameGlobalInfo::GameGlobalInfo()
     callsign_counter = 0;
     victory_faction = -1;
     gameGlobalInfo = this;
+
     for(int n=0; n<max_player_ships; n++)
     {
         playerShipId[n] = -1;
         registerMemberReplication(&playerShipId[n]);
     }
+
     for(int n=0; n<max_nebulas; n++)
     {
         nebula_info[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
@@ -28,28 +32,39 @@ GameGlobalInfo::GameGlobalInfo()
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
-    long_range_radar_range = 30000;
+    hacking_difficulty = 2;
+    hacking_games = HG_All;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
-    
+    gm_control_code = "";
+    elapsed_time = 0.0f;
+
     intercept_all_comms_to_gm = false;
 
     registerMemberReplication(&scanning_complexity);
+    registerMemberReplication(&hacking_difficulty);
+    registerMemberReplication(&hacking_games);
     registerMemberReplication(&global_message);
     registerMemberReplication(&global_message_timeout, 1.0);
     registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
-    registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&use_beam_shield_frequencies);
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
+    registerMemberReplication(&gm_control_code);
+    registerMemberReplication(&elapsed_time, 0.1);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
     registerMemberReplication(&reputation_points, 1.0);
+}
+
+//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+GameGlobalInfo::~GameGlobalInfo()
+{
 }
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
@@ -109,6 +124,7 @@ void GameGlobalInfo::update(float delta)
                 my_spaceship = game_client->getObjectById(my_player_info->ship_id);
         }
     }
+    elapsed_time += delta;
 }
 
 string GameGlobalInfo::getNextShipCallsign()
@@ -139,6 +155,8 @@ void GameGlobalInfo::addScript(P<Script> script)
 void GameGlobalInfo::reset()
 {
     gm_callback_functions.clear();
+    gm_messages.clear();
+    on_gm_click = nullptr;
 
     foreach(GameEntity, e, entityList)
         e->destroy();
@@ -153,13 +171,26 @@ void GameGlobalInfo::reset()
     }
     for(unsigned int n=0; n<reputation_points.size(); n++)
         reputation_points[n] = 0;
+    elapsed_time = 0.0f;
     callsign_counter = 0;
     victory_faction = -1;
+    allow_new_player_ships = true;
 }
 
 void GameGlobalInfo::startScenario(string filename)
 {
     reset();
+
+    i18n::reset();
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+
+    flushDatabaseData();
+    fillDefaultDatabaseData();
+
+    P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
+    if (scienceInfoScript->getError() != "") exit(1);
+    scienceInfoScript->destroy();
 
     P<ScriptObject> script = new ScriptObject();
     script->run(filename);
@@ -207,7 +238,7 @@ string getSectorName(sf::Vector2f position)
     if (sector_y >= 0)
         y = string(char('A' + (sector_y)));
     else
-        y = string(char('z' + sector_y / 20)) + string(char('z' + 1 + (sector_y % 26)));
+        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
     if (sector_x >= 0)
         x = string(sector_x);
     else
@@ -235,6 +266,7 @@ static int globalMessage(lua_State* L)
 }
 /// globalMessage(string)
 /// Show a global message on the main screens of all active player ships.
+/// The message is shown for 5 sec; new messages replace the old immediately.
 REGISTER_SCRIPT_FUNCTION(globalMessage);
 
 static int setBanner(lua_State* L)
@@ -245,6 +277,15 @@ static int setBanner(lua_State* L)
 /// setBanner(string)
 /// Show a scrolling banner containing this text on the cinematic and top down views.
 REGISTER_SCRIPT_FUNCTION(setBanner);
+
+static int getScenarioTime(lua_State* L)
+{
+    lua_pushnumber(L, gameGlobalInfo->elapsed_time);
+    return 1;
+}
+/// getScenarioTime()
+/// Return the elapsed time of the scenario.
+REGISTER_SCRIPT_FUNCTION(getScenarioTime);
 
 static int getPlayerShip(lua_State* L)
 {
@@ -318,7 +359,7 @@ public:
     : script_name(script_name), variation(variation)
     {
     }
-    
+
     virtual void update(float delta)
     {
         gameGlobalInfo->variation = variation;
@@ -354,10 +395,47 @@ static int shutdownGame(lua_State* L)
 /// Calling this function will close the game. Mainly usefull for a headless server setup.
 REGISTER_SCRIPT_FUNCTION(shutdownGame);
 
-static int getLongRangeRadarRange(lua_State* L)
+static int pauseGame(lua_State* L)
 {
-    lua_pushnumber(L, gameGlobalInfo->long_range_radar_range);
-    return 1;
+    engine->setGameSpeed(0.0);
+    return 0;
 }
-/// Return the long range radar range, normally 30.000, but can be configured per game.
-REGISTER_SCRIPT_FUNCTION(getLongRangeRadarRange);
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup.
+REGISTER_SCRIPT_FUNCTION(pauseGame);
+
+static int unpauseGame(lua_State* L)
+{
+    engine->setGameSpeed(1.0);
+    return 0;
+}
+/// Pause the game
+/// Calling this function will pause the game. Mainly usefull for a headless server setup. As the scenario functions are not called when paused.
+REGISTER_SCRIPT_FUNCTION(unpauseGame);
+
+static int playSoundFile(lua_State* L)
+{
+    soundManager->playSound(luaL_checkstring(L, 1));
+    return 0;
+}
+/// Play a sound file on the server. Will work with any file supported by SFML (.wav, .ogg, .flac)
+/// Note that the sound is only played on the server. Not on any of the clients.
+REGISTER_SCRIPT_FUNCTION(playSoundFile);
+
+static int onNewPlayerShip(lua_State* L)
+{
+    int idx = 1;
+    convert<ScriptSimpleCallback>::param(L, idx, gameGlobalInfo->on_new_player_ship);
+    return 0;
+}
+/// Register a callback function that is called when a new ship is created on the ship selection screen.
+REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
+
+static int allowNewPlayerShips(lua_State* L)
+{
+    gameGlobalInfo->allow_new_player_ships = lua_toboolean(L, 1);
+    return 0;
+}
+/// Set if the server is allowed to create new player ships from the ship creation screen.
+/// allowNewPlayerShip(false) -- disallow new player ships to be created
+REGISTER_SCRIPT_FUNCTION(allowNewPlayerShips);

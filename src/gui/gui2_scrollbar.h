@@ -12,7 +12,7 @@ protected:
     int value;
     int value_size;
     func_t func;
-    
+
     bool drag_scrollbar;
     float drag_select_offset;
 public:
@@ -22,15 +22,15 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     void setRange(int min_value, int max_value);
     void setValueSize(int size);
-    
+
     void setValue(int value);
-    int getValue();
-    
-    int getMax();
-    int getMin();
+    int getValue() const;
+
+    int getMax() const;
+    int getMin() const;
 };
 
 #endif//GUI2_SCROLLBAR_H
