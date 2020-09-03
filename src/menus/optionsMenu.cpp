@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "engine.h"
 #include "optionsMenu.h"
+#include "hotKeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
 
@@ -13,7 +14,6 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
-#include "hotKeyMenu.h"
 
 OptionsMenu::OptionsMenu() {
     P<WindowManager> windowManager = engine->getObject("windowManager");
@@ -159,9 +159,9 @@ OptionsMenu::OptionsMenu() {
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Hotkey Options: set Keys
-    (new GuiLabel(interface_page, "HELP_KEY_OPTIONS_LABEL", "Help Key Options", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(interface_page, "HOTKEY_OPTIONS_LABEL", tr("Hotkey Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
-    (new GuiButton(interface_page, "SET_HOTKEYS", " HotKeys Menu", [this]() {
+    (new GuiButton(interface_page, "SET_HOTKEYS", tr("Configure Hotkeys"), [this]() {
         new HotKeyMenu();
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);

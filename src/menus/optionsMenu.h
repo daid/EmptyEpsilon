@@ -23,7 +23,7 @@ private:
     GuiLabel* sound_volume_overlay_label;
     GuiLabel* music_volume_overlay_label;
 
-    std::vector<string> HotKeyCategories;
+    std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;
 public:
     OptionsMenu();

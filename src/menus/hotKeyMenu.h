@@ -1,5 +1,5 @@
-#ifndef EMPTYEPSILON_HOTKEYMENU_H
-#define EMPTYEPSILON_HOTKEYMENU_H
+#ifndef HOTKEYMENU_H
+#define HOTKEYMENU_H
 
 #include <gui/gui2_entrylist.h>
 #include "gui/gui2_canvas.h"
@@ -16,17 +16,24 @@ class GuiTextEntry;
 class HotKeyMenu : public GuiCanvas
 {
 private:
+    const int FRAME_TOP = 100;
+    const int FRAME_HEIGHT = 700;
+    const int FRAME_INITIAL_WIDTH = 550;
+    const int FRAME_PADDING = 25;
+
     std::vector<GuiTextEntry*> text_entries;
     std::vector<GuiLabel*> label_entries;
-    GuiLabel* Cat_label;
+    // TODO: This label is redundant with the category selector
+    //GuiLabel* category_label;
     GuiOverlay* error_window;
 
     string category = "";
-    int    cat_index = 1;
-    std::vector<string> CategoryList;
-    std::vector<std::pair<string, string>> HotKeyList;
+    int category_index = 1;
+    std::vector<string> category_list;
+    std::vector<std::pair<string, string>> hotkey_list;
 
     void setCategory(int cat);
+    void setHotkeysPage(int page);
     void updateHotKeys();
 public:
     HotKeyMenu();
@@ -35,4 +42,4 @@ public:
     void onKey(sf::Event::KeyEvent key, int unicode);
 };
 
-#endif //EMPTYEPSILON_HOTKEYMENU_H
+#endif //HOTKEYMENU_H
