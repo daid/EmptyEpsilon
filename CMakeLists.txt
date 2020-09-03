@@ -114,6 +114,7 @@ set(SOURCES
 	src/menus/optionsMenu.cpp
 	src/menus/shipSelectionScreen.cpp
 	src/menus/autoConnectScreen.cpp
+	src/menus/hotKeyMenu.cpp
 	src/screens/cinematicViewScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
