@@ -159,12 +159,12 @@ OptionsMenu::OptionsMenu() {
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Hotkey Options: set Keys
-    (new GuiLabel(this, "HELP_KEY_OPTIONS_LABEL", "Help Key Options", 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
+    (new GuiLabel(interface_page, "HELP_KEY_OPTIONS_LABEL", "Help Key Options", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
-    (new GuiButton(this, "SET_HOTKEYS", " HotKeys Menu", [this]() {
+    (new GuiButton(interface_page, "SET_HOTKEYS", " HotKeys Menu", [this]() {
         new HotKeyMenu();
         destroy();
-    }))->setPosition(50, top , ATopLeft)->setSize(300, 50);
+    }))->setSize(GuiElement::GuiSizeMax, 50);
 
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.
