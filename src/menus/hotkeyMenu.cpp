@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "hotkeyMenu.h"
 
+#include "gui/hotkeyBinder.h"
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
@@ -98,7 +99,7 @@ void HotkeyMenu::setCategory(int cat)
 {
     // Display a list of hotkeys to bind from the given hotkey category
     // Remove old hotkey entries
-    for (GuiTextEntry* text : text_entries)
+    for (GuiHotkeyBinder* text : text_entries)
     {
         text->destroy();
     }
@@ -144,7 +145,7 @@ void HotkeyMenu::setCategory(int cat)
         label_entries.push_back(new GuiLabel(rebinding_ui, "HOTKEY_LABEL", item.first, 30));
         label_entries.back()->setAlignment(ACenterRight)->setPosition(left, top, ATopLeft)->setSize(KEY_LABEL_WIDTH, ROW_HEIGHT);
 
-        text_entries.push_back(new GuiTextEntry(rebinding_ui, "HOTKEY_VALUE", item.second));
+        text_entries.push_back(new GuiHotkeyBinder(rebinding_ui, "HOTKEY_VALUE", item.second));
         text_entries.back()->setTextSize(30)->setPosition(left + KEY_LABEL_WIDTH + KEY_LABEL_MARGIN, top, ATopLeft)->setSize(KEY_FIELD_WIDTH, ROW_HEIGHT);
 
         // Enable pagination buttons if pagination is necessary.
@@ -188,7 +189,7 @@ void HotkeyMenu::saveHotkeys()
     for (std::pair<string,string> item : hotkey_list)
     {
         text = text_entries[i]->getText();
-        hotkey_exists = hotkeys.setHotKey(category, item, text);
+        hotkey_exists = hotkeys.setHotkey(category, item, text);
 
         if (!hotkey_exists)
         {

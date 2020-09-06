@@ -5,6 +5,7 @@
 #include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
+#include "gui/hotkeyBinder.h"
 
 class GuiArrowButton;
 class GuiAutoLayout;
@@ -14,7 +15,7 @@ class GuiLabel;
 class GuiCanvas;
 class GuiPanel;
 class GuiScrollText;
-class GuiTextEntry;
+class GuiHotkeyBinder;
 
 class HotkeyMenu : public GuiCanvas
 {
@@ -35,7 +36,7 @@ private:
     GuiPanel* rebinding_ui;
     GuiElement* bottom_row;
 
-    std::vector<GuiTextEntry*> text_entries;
+    std::vector<GuiHotkeyBinder*> text_entries;
     std::vector<GuiLabel*> label_entries;
     GuiArrowButton* previous_page;
     GuiArrowButton* next_page;

@@ -120,7 +120,6 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_START", std::make_tuple("Start self-destruct", ""));
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
-
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
@@ -226,6 +225,19 @@ static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
     {"F15", sf::Keyboard::F15},
     {"Pause", sf::Keyboard::Pause},
 };
+
+string HotkeyConfig::getStringForKey(sf::Keyboard::Key key)
+{
+    for(auto key_name : sfml_key_names)
+    {
+        if (key_name.second == key)
+        {
+            return key_name.first;
+        }
+    }
+
+    return "";
+}
 
 void HotkeyConfig::load()
 {
@@ -369,20 +381,21 @@ void HotkeyConfigItem::load(string key_config)
     }
 }
 
-bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key, string new_value)
+bool HotkeyConfig::setHotkey(std::string work_cat, std::pair<string,string> key, string new_value)
 {
-
     // test if new_value is part of the sfml_list
     for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names)
     {
-        if ((sfml_key.first.lower() == new_value.lower()) || new_value == "") {
-
-            for (HotkeyConfigCategory &cat : categories) {
-                if (cat.name == work_cat) {
-
-                    for (HotkeyConfigItem &item : cat.hotkeys) {
-                        if (key.first == std::get<0>(item.value)) {
-
+        if ((sfml_key.first.lower() == new_value.lower()) || new_value == "")
+        {
+            for (HotkeyConfigCategory &cat : categories)
+            {
+                if (cat.name == work_cat)
+                {
+                    for (HotkeyConfigItem &item : cat.hotkeys)
+                    {
+                        if (key.first == std::get<0>(item.value))
+                        {
                             item.load(new_value);
                             item.value = std::make_tuple(std::get<0>(item.value), new_value);
 
@@ -395,5 +408,6 @@ bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key,
             }
         }
     }
+
     return false;
 }

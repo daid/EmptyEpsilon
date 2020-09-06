@@ -188,6 +188,7 @@ set(SOURCES
 	src/screenComponents/mineSweeper.cpp
 	src/screenComponents/impulseSound.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyBinder.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp
 	src/gui/mouseRenderer.cpp

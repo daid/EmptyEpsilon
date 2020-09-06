@@ -47,7 +47,8 @@ public:
     std::vector<std::pair<string, string>> listAllHotkeysByCategory(string hotkey_category);
 
     std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
-    bool setHotKey(std::string work_cat, std::pair<string,string> key, string new_value);
+    bool setHotkey(std::string work_cat, std::pair<string,string> key, string new_value);
+    string getStringForKey(sf::Keyboard::Key key);
 private:
     std::vector<HotkeyConfigCategory> categories;
 
