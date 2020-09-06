@@ -15,7 +15,8 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
-OptionsMenu::OptionsMenu() {
+OptionsMenu::OptionsMenu()
+{
     P<WindowManager> windowManager = engine->getObject("windowManager");
 
     new GuiOverlay(this, "", colorConfig.background);
@@ -158,10 +159,12 @@ OptionsMenu::OptionsMenu() {
         PreferencesManager::set("operations_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Hotkey Options: set Keys
-    (new GuiLabel(interface_page, "HOTKEY_OPTIONS_LABEL", tr("Hotkey Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    // Control configuration
+    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
-    (new GuiButton(interface_page, "SET_HOTKEYS", tr("Configure Hotkeys"), [this]() {
+    // Keyboard config (hotkeys/keybindings)
+    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard"), [this]()
+    {
         new HotkeyMenu();
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
