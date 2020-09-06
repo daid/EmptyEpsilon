@@ -1,10 +1,12 @@
 #ifndef HOTKEYMENU_H
 #define HOTKEYMENU_H
 
+#include "gui/gui2_arrowbutton.h"
 #include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
 
+class GuiArrowButton;
 class GuiAutoLayout;
 class GuiOverlay;
 class GuiSlider;
@@ -26,6 +28,7 @@ private:
     const int KEY_ROW_COUNT = 10;
     const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
     const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
+    const int PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
 
     GuiElement* container;
     GuiElement* top_row;
@@ -34,8 +37,8 @@ private:
 
     std::vector<GuiTextEntry*> text_entries;
     std::vector<GuiLabel*> label_entries;
-    GuiButton* previous_page;
-    GuiButton* next_page;
+    GuiArrowButton* previous_page;
+    GuiArrowButton* next_page;
     GuiOverlay* error_window;
 
     string category = "";

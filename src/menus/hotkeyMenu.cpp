@@ -45,17 +45,17 @@ HotkeyMenu::HotkeyMenu()
 
     // Page navigation
     // TODO: Use real arrow buttons, or a GuiSelector that counts pages
-    previous_page = new GuiButton(top_row, "PAGE_LEFT", "<-", [this]()
+    previous_page = new GuiArrowButton(container, "PAGE_LEFT", 0, [this]()
     {
         HotkeyMenu::pageHotkeys(1);
     });
-    previous_page->setPosition(-50, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax)->disable();
+    previous_page->setPosition(0, 0, ACenterLeft)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
 
-    next_page = new GuiButton(top_row, "PAGE_RIGHT", "->", [this]()
+    next_page = new GuiArrowButton(container, "PAGE_RIGHT", 180, [this]()
     {
         HotkeyMenu::pageHotkeys(-1);
     });
-    next_page->setPosition(0, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax)->disable();
+    next_page->setPosition(0, 0, ACenterRight)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
 
     // Middle: Rebinding UI frame
     // Show category 1 ("General")
@@ -150,7 +150,7 @@ void HotkeyMenu::setCategory(int cat)
         // Enable pagination buttons if pagination is necessary.
         // TODO: Detect viewport width instead of hardcoding breakpoint at
         // two columns
-        if (rebinding_ui_width >= KEY_COLUMN_WIDTH * 2)
+        if (rebinding_ui_width >= PAGER_BREAKPOINT)
         {
             previous_page->enable();
             next_page->enable();
