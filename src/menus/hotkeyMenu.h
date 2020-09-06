@@ -13,7 +13,7 @@ class GuiPanel;
 class GuiScrollText;
 class GuiTextEntry;
 
-class HotKeyMenu : public GuiCanvas
+class HotkeyMenu : public GuiCanvas
 {
 private:
     const int FRAME_TOP = 100;
@@ -36,7 +36,7 @@ private:
     void pageHotkeys(int direction);
     void updateHotKeys();
 public:
-    HotKeyMenu();
+    HotkeyMenu();
     GuiPanel* frame;
 
     void onKey(sf::Event::KeyEvent key, int unicode);

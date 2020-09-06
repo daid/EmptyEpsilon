@@ -1,6 +1,6 @@
 #include <i18n.h>
 #include "engine.h"
-#include "hotKeyMenu.h"
+#include "hotkeyMenu.h"
 
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
@@ -8,7 +8,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 
-HotKeyMenu::HotKeyMenu()
+HotkeyMenu::HotkeyMenu()
 {
     P<WindowManager> windowManager = engine->getObject("windowManager");
 
@@ -22,18 +22,18 @@ HotKeyMenu::HotKeyMenu()
     category_list = hotkeys.getCategories();
     (new GuiSelector(this, "Category", [this](int index, string value)
     {
-        HotKeyMenu::setCategory(index);
+        HotkeyMenu::setCategory(index);
     }))->setOptions(category_list)->setSelectionIndex(category_index)->setPosition(0, 50, ATopCenter)->setSize(300, 50);
 
     // Page selector
     previous_page = new GuiButton(this, "PAGE_LEFT", "<-", [this]()
     {
-        HotKeyMenu::pageHotkeys(1);
+        HotkeyMenu::pageHotkeys(1);
     });
     previous_page->setPosition(-100, 50, ATopRight)->setSize(50, 50)->disable();
     next_page = new GuiButton(this, "PAGE_RIGHT", "->", [this]()
     {
-        HotKeyMenu::pageHotkeys(-1);
+        HotkeyMenu::pageHotkeys(-1);
     });
     next_page->setPosition(-50, 50, ATopRight)->setSize(50, 50)->disable();
 
@@ -46,7 +46,7 @@ HotKeyMenu::HotKeyMenu()
     // category_label->addBackground()->setPosition(50, 10, ATopLeft)->setSize(500, 50);
 
     // initial category listing
-    HotKeyMenu::setCategory(1);
+    HotkeyMenu::setCategory(1);
 
     // Bottom GUI.
     // Back button.
@@ -61,11 +61,11 @@ HotKeyMenu::HotKeyMenu()
     // Update Hotkey Values
     (new GuiButton(this, "UPDATE", tr("options", "Save"), [this]()
     {
-        HotKeyMenu::updateHotKeys();
+        HotkeyMenu::updateHotKeys();
     }))->setPosition(200, -50, ABottomLeft)->setSize(150, 50);
 }
 
-void HotKeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void HotkeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
 {
     switch(key.code)
     {
@@ -80,7 +80,7 @@ void HotKeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
     }
 }
 
-void HotKeyMenu::setCategory(int cat)
+void HotkeyMenu::setCategory(int cat)
 {
     // remove old entries
     for (GuiTextEntry* text : text_entries){
@@ -138,7 +138,7 @@ void HotKeyMenu::setCategory(int cat)
     }
 }
 
-void HotKeyMenu::updateHotKeys()
+void HotkeyMenu::updateHotKeys()
 {
     int i = 0;
     std::string text = "";
@@ -180,7 +180,7 @@ void HotKeyMenu::updateHotKeys()
     }
 }
 
-void HotKeyMenu::pageHotkeys(int direction)
+void HotkeyMenu::pageHotkeys(int direction)
 {
     sf::Vector2f frame_position = frame->getPositionOffset();
     sf::Vector2f frame_size = frame->getSize();

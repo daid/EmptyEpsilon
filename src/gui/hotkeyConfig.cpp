@@ -373,7 +373,8 @@ bool HotkeyConfig::setHotKey(std::string work_cat, std::pair<string,string> key,
 {
 
     // test if new_value is part of the sfml_list
-    for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names) {
+    for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names)
+    {
         if ((sfml_key.first.lower() == new_value.lower()) || new_value == "") {
 
             for (HotkeyConfigCategory &cat : categories) {

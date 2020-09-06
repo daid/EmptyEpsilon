@@ -1,7 +1,7 @@
 #include <i18n.h>
 #include "engine.h"
 #include "optionsMenu.h"
-#include "hotKeyMenu.h"
+#include "hotkeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
 
@@ -162,7 +162,7 @@ OptionsMenu::OptionsMenu() {
     (new GuiLabel(interface_page, "HOTKEY_OPTIONS_LABEL", tr("Hotkey Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     (new GuiButton(interface_page, "SET_HOTKEYS", tr("Configure Hotkeys"), [this]() {
-        new HotKeyMenu();
+        new HotkeyMenu();
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
