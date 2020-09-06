@@ -5,6 +5,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
 
+class GuiAutoLayout;
 class GuiOverlay;
 class GuiSlider;
 class GuiLabel;
@@ -16,10 +17,20 @@ class GuiTextEntry;
 class HotkeyMenu : public GuiCanvas
 {
 private:
-    const int FRAME_TOP = 100;
-    const int FRAME_HEIGHT = 700;
-    const int FRAME_INITIAL_WIDTH = 550;
-    const int FRAME_PADDING = 25;
+    const int ROW_HEIGHT = 50;
+    const int FRAME_MARGIN = 50;
+    const int KEY_LABEL_WIDTH = 400;
+    const int KEY_FIELD_WIDTH = 100;
+    const int KEY_LABEL_MARGIN = 25;
+    const int KEY_COLUMN_TOP = ROW_HEIGHT * 2;
+    const int KEY_ROW_COUNT = 10;
+    const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
+    const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
+
+    GuiElement* container;
+    GuiElement* top_row;
+    GuiPanel* rebinding_ui;
+    GuiElement* bottom_row;
 
     std::vector<GuiTextEntry*> text_entries;
     std::vector<GuiLabel*> label_entries;
@@ -33,11 +44,10 @@ private:
     std::vector<std::pair<string, string>> hotkey_list;
 
     void setCategory(int cat);
+    void saveHotkeys();
     void pageHotkeys(int direction);
-    void updateHotKeys();
 public:
     HotkeyMenu();
-    GuiPanel* frame;
 
     void onKey(sf::Event::KeyEvent key, int unicode);
 };
