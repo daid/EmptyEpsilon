@@ -1,7 +1,7 @@
 #ifndef HOTKEYMENU_H
 #define HOTKEYMENU_H
 
-#include <gui/gui2_entrylist.h>
+#include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
 
