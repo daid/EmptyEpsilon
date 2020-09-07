@@ -36,6 +36,9 @@ private:
     GuiPanel* rebinding_ui;
     GuiElement* bottom_row;
 
+    GuiAutoLayout* rebinding_container;
+    std::vector<GuiAutoLayout*> rebinding_columns;
+    std::vector<GuiAutoLayout*> rebinding_rows;
     std::vector<GuiHotkeyBinder*> text_entries;
     std::vector<GuiLabel*> label_entries;
     GuiArrowButton* previous_page;

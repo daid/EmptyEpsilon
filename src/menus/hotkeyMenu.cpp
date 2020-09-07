@@ -18,7 +18,7 @@ HotkeyMenu::HotkeyMenu()
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     // TODO: Figure out how to make this an AutoLayout.
-    container = new GuiElement(this, "CONTAINER");
+    container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");
     container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft)->setMargins(FRAME_MARGIN);
 
     top_row = new GuiElement(container, "TOP_ROW_CONTAINER");
@@ -45,7 +45,6 @@ HotkeyMenu::HotkeyMenu()
     }))->setOptions(category_list)->setSelectionIndex(category_index)->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopCenter);
 
     // Page navigation
-    // TODO: Use real arrow buttons, or a GuiSelector that counts pages
     previous_page = new GuiArrowButton(container, "PAGE_LEFT", 0, [this]()
     {
         HotkeyMenu::pageHotkeys(1);
@@ -59,29 +58,31 @@ HotkeyMenu::HotkeyMenu()
     next_page->setPosition(0, 0, ACenterRight)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
 
     // Middle: Rebinding UI frame
+    rebinding_container = new GuiAutoLayout(rebinding_ui, "HOTKEY_CONFIG_CONTAINER", GuiAutoLayout::ELayoutMode::LayoutHorizontalLeftToRight);
+    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft)->setMargins(FRAME_MARGIN);
+
     // Show category 1 ("General")
     HotkeyMenu::setCategory(1);
 
     // Bottom: Menu navigation
-    // Cancel button to return to the Options menu
-    (new GuiButton(bottom_row, "CANCEL", tr("options", "CANCEL"), [this]()
+    // Back button to return to the Options menu
+    (new GuiButton(bottom_row, "BACK", tr("options", "BACK"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
         returnToOptionMenu();
-    }))->setPosition(0, 0, ABottomLeft)->setSize(150, ROW_HEIGHT);
+    }))->setPosition(0, 0, ABottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 
     // Save hotkey values
     (new GuiButton(bottom_row, "SAVE", tr("options", "Save"), [this]()
     {
         HotkeyMenu::saveHotkeys();
-    }))->setPosition(150, 0, ABottomLeft)->setSize(150, ROW_HEIGHT);
+    }))->setPosition(150, 0, ABottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 }
 
 void HotkeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
 {
-    // TODO: Reuse for binding a hotkey value upon onKey
     switch(key.code)
     {
         //TODO: This is more generic code and is duplicated.
@@ -95,10 +96,10 @@ void HotkeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
     }
 }
 
+// Display a list of hotkeys to bind from the given hotkey category.
 void HotkeyMenu::setCategory(int cat)
 {
-    // Display a list of hotkeys to bind from the given hotkey category
-    // Remove old hotkey entries
+    // Remove any previous category's hotkey entries.
     for (GuiHotkeyBinder* text : text_entries)
     {
         text->destroy();
@@ -111,6 +112,18 @@ void HotkeyMenu::setCategory(int cat)
     }
     label_entries.clear();
 
+    for (GuiAutoLayout* row : rebinding_rows)
+    {
+        row->destroy();
+    }
+    rebinding_rows.clear();
+
+    for (GuiAutoLayout* column : rebinding_columns)
+    {
+        column->destroy();
+    }
+    rebinding_columns.clear();
+
     // Reset the hotkey frame size and position
     int rebinding_ui_width = KEY_COLUMN_WIDTH;
     rebinding_ui->setPosition(0, KEY_COLUMN_TOP, ATopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * (KEY_ROW_COUNT + 2));
@@ -119,46 +132,51 @@ void HotkeyMenu::setCategory(int cat)
     category_index = cat;
     category = category_list[cat];
 
-    // TODO: At least this can be an autolayout? Right?
-    int top = 0;
-    int left = 0;
+    // Initialize column row count so we can split columns.
+    int column_row_count = 0;
 
+    // Get all hotkeys in this category.
     hotkey_list = hotkeys.listAllHotkeysByCategory(category);
 
-    // Begin filling hotkey listing for category
+    // Begin rendering hotkey rebinding fields for this category.
     for (std::pair<string, string> item : hotkey_list)
     {
-        // TODO: AutoLayout
-        top += ROW_HEIGHT;
-
-        // This keeps adding columns even if they don't fit on the screen.
-        // The user will move the frame around with the pagination buttons to
-        // see off-screen options.
-        if (top > ROW_HEIGHT * KEY_ROW_COUNT)
+        // If we've filled a column, or don't have any rows yet, make a new column.
+        if (rebinding_rows.size() == 0 || column_row_count >= KEY_ROW_COUNT)
         {
-            top = ROW_HEIGHT;
-            left += KEY_COLUMN_WIDTH;
-            rebinding_ui_width += KEY_COLUMN_WIDTH;
-            rebinding_ui->setSize(rebinding_ui_width + FRAME_MARGIN, KEY_COLUMN_HEIGHT);
+            column_row_count = 0;
+            rebinding_columns.push_back(new GuiAutoLayout(rebinding_container, "", GuiAutoLayout::ELayoutMode::LayoutVerticalTopToBottom));
+            rebinding_columns.back()->setSize(KEY_COLUMN_WIDTH, KEY_COLUMN_HEIGHT)->setMargins(0, 50);
         }
 
-        label_entries.push_back(new GuiLabel(rebinding_ui, "HOTKEY_LABEL", item.first, 30));
-        label_entries.back()->setAlignment(ACenterRight)->setPosition(left, top, ATopLeft)->setSize(KEY_LABEL_WIDTH, ROW_HEIGHT);
+        // Add a rebinding row to the current column.
+        column_row_count += 1;
+        rebinding_rows.push_back(new GuiAutoLayout(rebinding_columns.back(), "", GuiAutoLayout::ELayoutMode::LayoutHorizontalLeftToRight));
+        rebinding_rows.back()->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
 
-        text_entries.push_back(new GuiHotkeyBinder(rebinding_ui, "HOTKEY_VALUE", item.second));
-        text_entries.back()->setTextSize(30)->setPosition(left + KEY_LABEL_WIDTH + KEY_LABEL_MARGIN, top, ATopLeft)->setSize(KEY_FIELD_WIDTH, ROW_HEIGHT);
+        // Add a label to the current row.
+        label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item.first, item.first, 30));
+        label_entries.back()->setAlignment(ACenterRight)->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
 
-        // Enable pagination buttons if pagination is necessary.
-        // TODO: Detect viewport width instead of hardcoding breakpoint at
-        // two columns
-        if (rebinding_ui_width >= PAGER_BREAKPOINT)
-        {
-            previous_page->enable();
-            next_page->enable();
-        } else {
-            previous_page->disable();
-            next_page->disable();
-        }
+        // Add a hotkey rebinding field to the current row.
+        text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_VALUE_" + item.first, item.second));
+        text_entries.back()->setTextSize(30)->setSize(KEY_FIELD_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
+    }
+
+    // Resize the rendering UI panel based on the number of columns.
+    rebinding_ui_width = KEY_COLUMN_WIDTH * rebinding_columns.size() + FRAME_MARGIN;
+    rebinding_ui->setSize(rebinding_ui_width, KEY_COLUMN_HEIGHT);
+
+    // Enable pagination buttons if pagination is necessary.
+    // TODO: Detect viewport width instead of hardcoding breakpoint at
+    // two columns
+    if (rebinding_columns.size() > 2)
+    {
+        previous_page->enable();
+        next_page->enable();
+    } else {
+        previous_page->disable();
+        next_page->disable();
     }
 }
 
