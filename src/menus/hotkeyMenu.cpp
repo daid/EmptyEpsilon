@@ -113,7 +113,7 @@ void HotkeyMenu::setCategory(int cat)
 
     // Reset the hotkey frame size and position
     int rebinding_ui_width = KEY_COLUMN_WIDTH;
-    rebinding_ui->setPosition(0, KEY_COLUMN_TOP, ATopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * 12);
+    rebinding_ui->setPosition(0, KEY_COLUMN_TOP, ATopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * (KEY_ROW_COUNT + 2));
 
     // Get the chosen category
     category_index = cat;
