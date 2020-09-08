@@ -137,8 +137,12 @@ OptionsMenu::OptionsMenu()
     impulse_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Interface options
+    // Radar rotation lock settings.
+    (new GuiLabel(interface_page, "ROTATION_LOCK_LABEL", tr("Radar Rotation"), 30)
+    )->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+
     // Helms rotation lock.
-    (new GuiToggleButton(interface_page, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    (new GuiToggleButton(interface_page, "HELMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
     {
         PreferencesManager::set("helms_radar_lock", value ? "1" : "");
         PreferencesManager::set("tactical_radar_lock", value ? "1" : "");
@@ -157,6 +161,16 @@ OptionsMenu::OptionsMenu()
         PreferencesManager::set("science_radar_lock", value ? "1" : "");
         PreferencesManager::set("operations_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Logging settings.
+    (new GuiLabel(interface_page, "LOGGING_LABEL", tr("Logging"), 30)
+    )->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Game state logging.
+    (new GuiToggleButton(interface_page, "GAME_STATE_LOGGING", tr("Game State Logging"), [](bool value)
+    {
+        PreferencesManager::set("game_logs", value ? "1" : "");
+    }))->setValue(PreferencesManager::get("game_logs", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.
