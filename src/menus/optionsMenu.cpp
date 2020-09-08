@@ -167,6 +167,8 @@ OptionsMenu::OptionsMenu()
     )->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     // Game state logging.
+    // TODO: Move this to server settings/scenario selection, or move server
+    // settings to the options screen. This does nothing if set by a client.
     (new GuiToggleButton(interface_page, "GAME_STATE_LOGGING", tr("Game State Logging"), [](bool value)
     {
         PreferencesManager::set("game_state_logs", value ? "1" : "");
