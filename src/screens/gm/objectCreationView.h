@@ -19,7 +19,7 @@ public:
 
     virtual void onDraw(sf::RenderTarget& window) override;
 
-    virtual bool onMouseDown(sf::Vector2f position);
+    virtual bool onMouseDown(sf::Vector2f position) override;
 
     void setCreateScript(const string create, const string configure = "");
 };
