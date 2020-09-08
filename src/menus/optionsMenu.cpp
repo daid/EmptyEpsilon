@@ -169,8 +169,8 @@ OptionsMenu::OptionsMenu()
     // Game state logging.
     (new GuiToggleButton(interface_page, "GAME_STATE_LOGGING", tr("Game State Logging"), [](bool value)
     {
-        PreferencesManager::set("game_logs", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("game_logs", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
+        PreferencesManager::set("game_state_logs", value ? "1" : "");
+    }))->setValue(PreferencesManager::get("game_state_logs", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.

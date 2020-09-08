@@ -197,10 +197,16 @@ void GameGlobalInfo::startScenario(string filename)
     engine->registerObject("scenario", script);
 
     // If game state logging is enabled, start logging now.
-    if (PreferencesManager::get("game_logs", "0").toInt())
+    if (PreferencesManager::get("game_state_logs", "0").toInt())
     {
         state_logger = new GameStateLogger();
         state_logger->start();
+    }
+
+    // Deprecate the game_logs setting.
+    if (PreferencesManager::get("game_logs", "0").toInt())
+    {
+        LOG(WARNING) << "The game_logs setting is deprecated. To record game state logs, set game_state_logs=1 or use the Options menu.";
     }
 }
 
