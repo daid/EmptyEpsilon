@@ -196,7 +196,8 @@ void GameGlobalInfo::startScenario(string filename)
     script->run(filename);
     engine->registerObject("scenario", script);
 
-    if (PreferencesManager::get("game_logs", "1").toInt())
+    // If game state logging is enabled, start logging now.
+    if (PreferencesManager::get("game_logs", "0").toInt())
     {
         state_logger = new GameStateLogger();
         state_logger->start();
