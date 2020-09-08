@@ -116,10 +116,8 @@ private:
 };
 
 GameStateLogger::GameStateLogger()
+: log_dir("logs/"), log_file(nullptr), logging_interval(1.0), logging_delay(0.0)
 {
-    log_file = nullptr;
-    logging_interval = 1.0;
-    logging_delay = 0.0;
 }
 
 GameStateLogger::~GameStateLogger()
@@ -133,7 +131,16 @@ void GameStateLogger::start()
     char filename_buffer[128];
 
     rawtime = time(nullptr);
-    strftime(filename_buffer, sizeof(filename_buffer), "logs/game_log_%d-%m-%Y_%H.%M.%S.txt", localtime(&rawtime));
+
+    // If there's a home directory, put the logs in its .emptyepsilon directory
+    // instead of a relative logs path.
+    // Otherwise they wind up in weird places (like in the app bundle on macOS)
+    if(getenv("HOME"))
+    {
+        log_dir = string(getenv("HOME")) + "/.emptyepsilon/";
+    }
+
+    strftime(filename_buffer, sizeof(filename_buffer), string(log_dir + "game_log_%d-%m-%Y_%H.%M.%S.txt").c_str(), localtime(&rawtime));
     log_file = fopen(filename_buffer, "wt");
     if (log_file)
         LOG(INFO) << "Opened game state log: " << filename_buffer;

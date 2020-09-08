@@ -29,6 +29,7 @@ public:
     virtual void update(float delta);
 
 private:
+    string log_dir;
     FILE* log_file;
     float logging_interval;
     float logging_delay;
