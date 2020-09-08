@@ -9,8 +9,27 @@ void PreferencesManager::set(string key, string value)
 
 string PreferencesManager::get(string key, string default_value)
 {
+    // Return the preference's value.
+    // If it doesn't have one, set the value to the given default.
+    // This getter is a setter too!
     if (preference.find(key) == preference.end())
+    {
         preference[key] = default_value;
+    }
+
+    return preference[key];
+}
+
+string PreferencesManager::getOnly(string key)
+{
+    // Return the preference's value.
+    // If it doesn't have one, return an empty string.
+    // This getter only gets! 
+    if (preference.find(key) == preference.end())
+    {
+        return "";
+    }
+
     return preference[key];
 }
 
