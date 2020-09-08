@@ -107,9 +107,17 @@ int main(int argc, char** argv)
     PreferencesManager::load(CONFIG_DIR "options.ini");
 #endif
     if (getenv("HOME"))
+    {
+        // Create .emptyepsilon in the homedir if it doesn't already exist.
+#ifdef __WIN32__
+        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+#else
+        mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+#endif//__WIN32__
         PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-    else
+    } else {
         PreferencesManager::load("options.ini");
+    }
 
     for(int n=1; n<argc; n++)
     {
@@ -342,14 +350,9 @@ int main(int argc, char** argv)
         // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
-#ifdef __WIN32__
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
-#else
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#endif
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-        }else
-#endif
+        } else
+#endif//_MSC_VER
         {
             PreferencesManager::save("options.ini");
         }
