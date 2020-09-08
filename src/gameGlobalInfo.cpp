@@ -204,9 +204,9 @@ void GameGlobalInfo::startScenario(string filename)
     }
 
     // Deprecate the game_logs setting.
-    if (PreferencesManager::get("game_logs", "0").toInt())
+    if (PreferencesManager::getOnly("game_logs") == "1")
     {
-        LOG(WARNING) << "The game_logs setting is deprecated. To record game state logs, set game_state_logs=1 or use the Options menu.";
+        LOG(WARNING) << "The game_logs setting is deprecated. To enable game state logging, set game_state_logs=1 or use the Options menu.";
     }
 }
 
