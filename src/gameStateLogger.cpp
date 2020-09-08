@@ -133,8 +133,8 @@ void GameStateLogger::start()
     rawtime = time(nullptr);
 
     // If there's a home directory, put the logs in its .emptyepsilon directory
-    // instead of a relative logs path.
-    // Otherwise they wind up in weird places (like in the app bundle on macOS)
+    // instead of a relative path.
+    // Otherwise logs wind up in weird places, like in the app bundle on macOS
     if(getenv("HOME"))
     {
         log_dir = string(getenv("HOME")) + "/.emptyepsilon/";
@@ -142,10 +142,14 @@ void GameStateLogger::start()
 
     strftime(filename_buffer, sizeof(filename_buffer), string(log_dir + "game_log_%d-%m-%Y_%H.%M.%S.txt").c_str(), localtime(&rawtime));
     log_file = fopen(filename_buffer, "wt");
+
     if (log_file)
+    {
         LOG(INFO) << "Opened game state log: " << filename_buffer;
-    else
+    } else {
         LOG(WARNING) << "Failed to open game state log file: " << filename_buffer;
+    }
+
     start_time = engine->getElapsedTime();
 }
 
