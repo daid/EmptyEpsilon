@@ -198,8 +198,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Draw the zoom slider.
     zoom_slider = new GuiSlider(radar_view, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, my_spaceship ? my_spaceship->getShortRangeRadarRange() : 5000.0f, my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, [this](float value)
     {
-        if (my_spaceship)
-            zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / value, 1)}}));
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
@@ -223,23 +221,17 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     GuiOverlay::onDraw(window);
     P<ScanProbe> probe;
 
-    // Handle mouse wheel
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0 && my_spaceship)
-    {
-        float view_distance = science_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
-        if (view_distance > my_spaceship->getLongRangeRadarRange())
-            view_distance = my_spaceship->getLongRangeRadarRange();
-        if (view_distance < my_spaceship->getShortRangeRadarRange())
-            view_distance = my_spaceship->getShortRangeRadarRange();
-        science_radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
-        zoom_slider->setValue(view_distance);
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / view_distance, 1)}}));
-    }
-
     if (!my_spaceship)
         return;
+
+    float view_distance = science_radar->getDistance();
+    view_distance *= (1.0 - (InputHandler::getMouseWheelDelta() * 0.1f));
+    view_distance = std::min(view_distance,my_spaceship->getLongRangeRadarRange());
+    view_distance = std::max(view_distance,my_spaceship->getShortRangeRadarRange());
+    science_radar->setDistance(view_distance);
+    // Keep the zoom slider in sync.
+    zoom_slider->setValue(view_distance)->setRange(my_spaceship->getLongRangeRadarRange(),my_spaceship->getShortRangeRadarRange());
+    zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / view_distance, 1)}}));
 
     if (game_server)
         probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
