@@ -3,6 +3,8 @@
 
 #include "gui/gui2_canvas.h"
 
+class GuiAutoLayout;
+class GuiElement;
 class GuiSlider;
 class GuiLabel;
 class GuiScrollText;
@@ -11,11 +13,15 @@ class GuiButton;
 class TutorialMenu : public GuiCanvas
 {
     string selected_tutorial_filename;
+
+    GuiAutoLayout* container;
+    GuiElement* bottom_row;
     GuiScrollText* tutorial_description;
     GuiButton* start_tutorial_button;
-private:
 
+private:
     void selectTutorial(string filename);
+
 public:
     TutorialMenu();
 
