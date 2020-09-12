@@ -20,13 +20,13 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
         minimize(value);
     });
     minimize_button->setSize(50, GuiElement::GuiSizeMax);
-    
+
     title_bar = new GuiLabel(title_bar_layout, "", title, 20);
     title_bar->addBackground()->setAlignment(ACenterLeft)->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     contents = new GuiElement(this, "");
     contents->setPosition(resize_icon_size / 2.0, title_bar_height, ATopLeft);
-    
+
     min_size = sf::Vector2f(200, title_bar_height + resize_icon_size);
     minimized = false;
 }
@@ -62,9 +62,9 @@ void GuiResizableDialog::setTitle(string title)
 void GuiResizableDialog::onDraw(sf::RenderTarget& window)
 {
     GuiPanel::onDraw(window);
-    
+
     contents->setSize(rect.width - resize_icon_size, rect.height - title_bar_height - resize_icon_size / 2.0f);
-    
+
     if (rect.left < -50)
         setPosition(-50, getPositionOffset().y);
     if (rect.top < -(title_bar_height / 2.0f))
@@ -73,10 +73,10 @@ void GuiResizableDialog::onDraw(sf::RenderTarget& window)
         setPosition(window.getView().getSize().x - 50, getPositionOffset().y);
     if (rect.top > window.getView().getSize().y - title_bar_height)
         setPosition(getPositionOffset().x, window.getView().getSize().y - title_bar_height);
-    
+
     if (minimized)
         return;
-    
+
     sf::Sprite image;
     textureManager.setTexture(image, "gui/ResizeDialogCorner");
     image.setPosition(rect.left + rect.width - resize_icon_size / 2.0, rect.top + rect.height - resize_icon_size / 2.0);

@@ -112,7 +112,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
             my_spaceship->commandCloseTextComm();
     });
     chat_comms_close_button->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
-    
+
     if (!engine->getObject("mouseRenderer")) //If we are a touch screen, add a on screen keyboard.
     {
         OnScreenKeyboardControl* keyboard = new OnScreenKeyboardControl(chat_comms_box, chat_comms_message_entry);
@@ -128,7 +128,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 
     script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
     script_comms_text->setPosition(20, 30, ATopLeft)->setSize(760, 500);
-    
+
     // List possible responses to a scripted communication.
     script_comms_options = new GuiListbox(script_comms_box, "COMMS_SCRIPT_LIST", [this](int index, string value) {
         script_comms_options->setOptions({});
@@ -152,18 +152,18 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
     {
         opening_box->setVisible(my_spaceship->isCommsOpening());
         opening_progress->setValue(my_spaceship->getCommsOpeningDelay());
-        
+
         hailed_box->setVisible(my_spaceship->isCommsBeingHailed());
         hailed_label->setText("Hailed by " + my_spaceship->getCommsTargetName());
-        
+
         no_response_box->setVisible(my_spaceship->isCommsFailed());
 
         broken_box->setVisible(my_spaceship->isCommsBroken());
         closed_box->setVisible(my_spaceship->isCommsClosed());
-        
+
         chat_comms_box->setVisible(my_spaceship->isCommsChatOpen());
         chat_comms_text->setText(my_spaceship->getCommsIncommingMessage());
-        
+
         script_comms_box->setVisible(my_spaceship->isCommsScriptOpen());
         script_comms_text->setText(my_spaceship->getCommsIncommingMessage());
 

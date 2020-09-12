@@ -8,7 +8,7 @@ template<typename T> class Triangulate
 {
 public:
     typedef std::vector<sf::Vector2<T>> Path;
-    
+
     static bool process(const Path& input, Path& output)
     {
         int n = input.size();
@@ -87,7 +87,7 @@ private:
         sf::Vector2<T> cb = c - b;
         sf::Vector2<T> ac = a - c;
         sf::Vector2<T> ba = b - a;
-        
+
         sf::Vector2<T> pa = p - a;
         sf::Vector2<T> pb = p - b;
         sf::Vector2<T> pc = p - c;
@@ -97,7 +97,7 @@ private:
         T cross_c = ac.x * pc.y - ac.y * pc.x;
         return cross_a >= 0.0f && cross_b >= 0.0f && cross_c >= 0.0f;
     }
-    
+
     static bool snip(const Path &input, int u, int v, int w, int n, int* indexes)
     {
         sf::Vector2<T> a = input[indexes[u]];

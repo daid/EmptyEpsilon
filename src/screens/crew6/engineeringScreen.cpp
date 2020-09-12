@@ -59,6 +59,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.button->setSize(300, GuiElement::GuiSizeMax);
         info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0, 1.0, 0.0);
         info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
+        info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
+        info.damage_icon->setColor(colorConfig.overlay_damaged)->setPosition(0, 0, ACenterRight)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0, 1.0, 0.0);
@@ -79,6 +81,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.coolant_bar->setColor(sf::Color(32, 128, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage){
             info.damage_bar->hide();
+            info.health_max_bar->hide();
             info.heat_bar->setSize(150, GuiElement::GuiSizeMax);
             info.power_bar->setSize(150, GuiElement::GuiSizeMax);
             info.coolant_bar->setSize(150, GuiElement::GuiSizeMax);
@@ -194,6 +197,11 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             else
                 info.damage_bar->setValue(health)->setColor(sf::Color(64, 128 * health, 64 * health, 192));
             info.damage_label->setText(string(int(health * 100)) + "%");
+            float health_max = my_spaceship->systems[n].health_max;
+            if (health_max < 1.0)
+                info.damage_icon->show();
+            else
+                info.damage_icon->hide();
 
             float heat = my_spaceship->systems[n].heat_level;
             info.heat_bar->setValue(heat)->setColor(sf::Color(128, 32 + 96 * (1.0 - heat), 32, 192));
@@ -224,6 +232,9 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 
             system_effects_index = 0;
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
+            float health_max = my_spaceship->getSystemHealthMax(selected_system);
+            if (health_max < 1.0)
+                addSystemEffect("Maximal health", string(int(health_max * 100)) + "%");
             switch(selected_system)
             {
             case SYS_Reactor:
@@ -285,7 +296,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - 
+                    float damage_negate = 1.0f -
 my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     if (damage_negate < 0.0)
                         addSystemEffect(tr("Extra damage"), string(int(-damage_negate * 100)) + "%");
@@ -311,12 +322,12 @@ bool EngineeringScreen::onJoystickAxis(const AxisAction& axisAction){
                     power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
                     my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
                     return true;
-                } 
+                }
                 if (axisAction.action == "COOLANT" || axisAction.action == std::string("COOLANT_") + getSystemName(selected_system)){
                     coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
                     my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
                     return true;
-                } 
+                }
             } else {
                 for(int n=0; n<SYS_COUNT; n++)
                 {
@@ -324,7 +335,7 @@ bool EngineeringScreen::onJoystickAxis(const AxisAction& axisAction){
                     if (axisAction.action == std::string("POWER_") + getSystemName(system)){
                         my_spaceship->commandSetSystemPowerRequest(system, (axisAction.value + 1) * 3.0 / 2.0);
                         return true;
-                    } 
+                    }
                     if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
                         my_spaceship->commandSetSystemCoolantRequest(system, (axisAction.value + 1) * 10.0 / 2.0);
                         return true;
@@ -349,9 +360,50 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
         if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
         if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
-        
+
         if (selected_system != SYS_None)
         {
+            // Note the code duplication with extra/powerManagement
+            if (key.hotkey == "SET_POWER_000")
+            {
+                power_slider->setValue(0.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_030")
+            {
+                power_slider->setValue(0.3f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_050")
+            {
+                power_slider->setValue(0.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_100")
+            {
+                power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_150")
+            {
+                power_slider->setValue(1.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_200")
+            {
+                power_slider->setValue(2.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_250")
+            {
+                power_slider->setValue(2.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_300")
+            {
+                power_slider->setValue(3.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
             if (key.hotkey == "INCREASE_POWER")
             {
                 power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
@@ -380,7 +432,7 @@ void EngineeringScreen::selectSystem(ESystem system)
 {
     if (my_spaceship && !my_spaceship->hasSystem(system))
         return;
-    
+
     for(int idx=0; idx<SYS_COUNT; idx++)
     {
         system_rows[idx].button->setValue(idx == system);

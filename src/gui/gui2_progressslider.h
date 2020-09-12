@@ -20,7 +20,7 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     GuiProgressSlider* setText(string text);
     GuiProgressSlider* setColor(sf::Color color);
     GuiProgressSlider* setDrawBackground(bool drawBackground);

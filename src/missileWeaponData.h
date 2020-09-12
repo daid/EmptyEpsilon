@@ -21,6 +21,7 @@ enum EMissileSizes
     MS_Large = 2,
 };
 REGISTER_MULTIPLAYER_ENUM(EMissileSizes);
+string getMissileSizeString(EMissileSizes size);
 
 /* Define script conversion function for the EMissileWeapons enum. */
 template<> void convert<EMissileWeapons>::param(lua_State* L, int& idx, EMissileWeapons& es);
@@ -34,14 +35,14 @@ class MissileWeaponData
 {
 public:
     MissileWeaponData(float speed, float turnrate, float lifetime, sf::Color color, float homing_range, string fire_sound);
-    
+
     float speed; //meter/sec
     float turnrate; //deg/sec
 
     float lifetime; //sec
     sf::Color color;
     float homing_range;
-    
+
     string fire_sound;
 
     static const MissileWeaponData& getDataFor(EMissileWeapons type);

@@ -63,14 +63,14 @@ REGISTER_SCRIPT_CLASS(ScriptStorage)
     /// Requires the key as a string.
     /// Returns the value as a JSON string.
     /// Returns nothing if the key is not found.
-    /// Example: storage = getScriptStorage();
-    ///          storage.get('key');
+    /// Example: storage = getScriptStorage()
+    ///          storage:get('key')
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, get);
     /// Set a value in persistent script storage.
     /// Requires the key and value as strings.
     /// Creates scriptstorage.json if it doesn't exist.
-    /// Example: storage = getScriptStorage();
-    ///          storage.set('key', 'value');
+    /// Example: storage = getScriptStorage()
+    ///          storage:set('key', 'value')
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, set);
 }
 

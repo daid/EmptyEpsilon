@@ -8,6 +8,7 @@ enum EAIOrder
 {
     AI_Idle,            //Don't do anything, don't even attack.
     AI_Roaming,         //Fly around and engage at will, without a clear target
+    AI_Retreat,         //Dock on [order_target] that can restore our weapons. Find one if neccessary. Continue roaming after our missiles are restocked, or no target is found.
     AI_StandGround,     //Keep current position, do not fly away, but attack nearby targets.
     AI_DefendLocation,  //Defend against enemies getting close to [order_target_location]
     AI_DefendTarget,    //Defend against enemies getting close to [order_target] (falls back to AI_Roaming if the target is destroyed)
@@ -42,6 +43,7 @@ public:
     void orderIdle();
     void orderRoaming();
     void orderRoamingAt(sf::Vector2f position);
+    void orderRetreat(P<SpaceObject> object);
     void orderStandGround();
     void orderDefendLocation(sf::Vector2f position);
     void orderDefendTarget(P<SpaceObject> object);

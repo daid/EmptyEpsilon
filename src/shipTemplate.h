@@ -92,13 +92,14 @@ public:
     bool shares_energy_with_docked;
     bool repair_docked;
     bool restocks_scan_probes;
+    bool restocks_missiles_docked;
     bool can_scan = true;
     bool can_hack = true;
     bool can_dock = true;
     bool can_combat_maneuver = true;
     bool can_self_destruct = true;
     bool can_launch_probe = true;
-    
+
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
@@ -137,6 +138,7 @@ public:
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
     void setRestocksScanProbes(bool enabled);
+    void setRestocksMissilesDocked(bool enabled);
     void setCanScan(bool enabled) { can_scan = enabled; }
     void setCanHack(bool enabled) { can_hack = enabled; }
     void setCanDock(bool enabled) { can_dock = enabled; }
@@ -164,7 +166,7 @@ public:
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setTubeSize(int index, EMissileSizes size);
-    
+
     void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);

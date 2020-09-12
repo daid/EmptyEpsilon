@@ -37,7 +37,7 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponHeatPerFire);
-    
+
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
@@ -46,13 +46,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponTubeExclusiveFor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeDirection);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeSize);
-    
+
     /// Set the amount of starting hull
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setHull);
     /// Set the shield levels, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields)
     /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
+    /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
@@ -60,8 +61,12 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
     /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergyWithDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
+    /// Set if this ship repairs docked ships. Example: template:setRepairDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairDocked);
     /// Set if this ship restocks scan probes on docked ships. Example: template:setRestocksScanProbes(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksScanProbes);
+    /// Set if this ship restores missiles on docked cpuships. Example template:setRestocksMissilesDocked(false)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRestocksMissilesDocked);
     /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
     /// Set this ship's minimum and maximum jump drive distances.
@@ -69,8 +74,29 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
+    /// Add an empty room to a ship template.
+    /// Rooms are shown on the engineering and damcon screens.
+    /// If a system room isn't accessible via other rooms connected by doors, that system
+    /// might not be repairable.
+    /// Rooms are placed on an integer x/y grid. The minimum size for a room is 1x1.
+    /// Accepts four parameters: the room's x coordinate, y coordinate, width, and height.
+    /// Example: template:addRoom(1, 2, 3, 4)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
+    /// Add a room containing a ship system to a ship template.
+    /// Rooms are shown on the engineering and damcon screens.
+    /// If a system doesn't have a room, or repair crews can't reach a system's room, it
+    /// might not be repairable.
+    /// Accepts five parameters: the room's x coordinate, y coordinate, width, height, and
+    /// the ship system as the string equivalent of an ESystem value.
+    /// Example: template:addRoomSystem(1, 2, 3, 4, "Reactor")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoomSystem);
+    /// Add a door between rooms in a ship template.
+    /// Rooms are shown on the engineering and damcon screens.
+    /// If a system room doesn't have a door connecting it to other rooms, repair crews
+    /// might not be able to reach it for repairs.
+    /// Accepts three parameters: the door's x coordinate, y coordinate, and a Boolean
+    /// value for whether it's horizontal (true) or vertical (false).
+    /// Example: template:addDoor(2, 2, false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addDoor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRadarTrace);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLongRangeRadarRange);
@@ -92,13 +118,14 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 ShipTemplate::ShipTemplate()
 {
     if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
-    
+
     type = Ship;
     class_name = tr("No class");
     sub_class_name = tr("No sub-class");
     shares_energy_with_docked = true;
     repair_docked = false;
     restocks_scan_probes = false;
+    restocks_missiles_docked = false;
     energy_storage_amount = 1000;
     repair_crew_count = 3;
     weapon_tube_count = 0;
@@ -414,6 +441,11 @@ void ShipTemplate::setRestocksScanProbes(bool enabled)
     restocks_scan_probes = enabled;
 }
 
+void ShipTemplate::setRestocksMissilesDocked(bool enabled)
+{
+    restocks_missiles_docked = enabled;
+}
+
 void ShipTemplate::setJumpDrive(bool enabled)
 {
     has_jump_drive = enabled;
@@ -512,6 +544,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->shares_energy_with_docked = shares_energy_with_docked;
     result->repair_docked = repair_docked;
     result->restocks_scan_probes = restocks_scan_probes;
+    result->restocks_missiles_docked = restocks_missiles_docked;
     result->has_jump_drive = has_jump_drive;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)
@@ -520,7 +553,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
 
     result->rooms = rooms;
     result->doors = doors;
-    
+
     return result;
 }
 

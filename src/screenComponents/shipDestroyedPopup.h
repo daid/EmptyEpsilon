@@ -13,7 +13,7 @@ private:
     GuiOverlay* ship_destroyed_overlay;
     GuiCanvas* owner;
     sf::Clock show_timeout;
-    
+
 public:
     GuiShipDestroyedPopup(GuiCanvas* owner);
 

@@ -21,7 +21,7 @@ private:
     GuiButton* connect_button;
     GuiListbox* server_list;
     GuiSelector* lan_internet_selector;
-    
+
     P<ServerScanner> scanner;
 public:
     ServerBrowserMenu(SearchSource source);

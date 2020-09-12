@@ -19,6 +19,7 @@ SpaceStation::SpaceStation()
 : ShipTemplateBasedObject(300, "SpaceStation")
 {
     restocks_scan_probes = true;
+    restocks_missiles_docked = true;
     comms_script_name = "comms_station.lua";
     setRadarSignatureInfo(0.2, 0.5, 0.5);
 
@@ -64,7 +65,7 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     e->setSize(getRadius());
     e->setPosition(getPosition());
     e->setRadarSignatureInfo(0.0, 0.4, 0.4);
-    
+
     if (info.instigator)
     {
         float points = 0;

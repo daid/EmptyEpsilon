@@ -62,6 +62,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         }
     );
+    radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
 
     // Ship stats and combat maneuver at bottom right corner of left panel.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
@@ -77,7 +78,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.
-    missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
+    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 700);
@@ -103,7 +104,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     // Missile lock button near top right of left panel.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 70, ATopCenter)->setSize(130, 50);
-    
+
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 

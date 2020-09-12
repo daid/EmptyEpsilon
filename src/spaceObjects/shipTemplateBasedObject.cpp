@@ -62,6 +62,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRepairDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksScanProbes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksScanProbes);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksMissilesDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksMissilesDocked);
 
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
@@ -116,7 +118,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&hull_max);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
-    
+
     can_be_destroyed = true;
     registerMemberReplication(&can_be_destroyed);
 }
@@ -130,9 +132,9 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
         sf::Sprite objectSprite;
         textureManager.setTexture(objectSprite, "shield_circle.png");
         objectSprite.setPosition(position);
-        
+
         objectSprite.setScale(sprite_scale * 0.25f * 1.5f, sprite_scale * 0.25f * 1.5f);
-        
+
         sf::Color color = sf::Color(255, 255, 255, 64);
         if (show_levels)
         {
@@ -144,12 +146,12 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
             color = Tween<sf::Color>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
         }
         objectSprite.setColor(color);
-        
+
         window.draw(objectSprite);
     }else if (shield_count > 1) {
         float direction = getRotation()-rotation;
         float arc = 360.0f / float(shield_count);
-        
+
         for(int n=0; n<shield_count; n++)
         {
             sf::Color color = sf::Color(255, 255, 255, 64);
@@ -190,7 +192,7 @@ void ShipTemplateBasedObject::draw3DTransparent()
 {
     if (shield_count < 1)
         return;
-    
+
     float angle = 0.0;
     float arc = 360.0f / shield_count;
     for(int n = 0; n<shield_count; n++)
@@ -266,7 +268,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         float arc = 360.0f / float(shield_count);
         int shield_index = int((angle + arc / 2.0f) / arc);
         shield_index %= shield_count;
-        
+
         float shield_damage = damage_amount * getShieldDamageFactor(info, shield_index);
         damage_amount -= shield_level[shield_index];
         shield_level[shield_index] -= shield_damage;
@@ -281,7 +283,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
             damage_amount = 0.0;
         }
     }
-    
+
     if (info.type != DT_EMP && damage_amount > 0.0)
     {
         takeHullDamage(damage_amount, info);

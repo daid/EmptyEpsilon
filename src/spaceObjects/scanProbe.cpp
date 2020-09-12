@@ -28,7 +28,7 @@ ScanProbe::ScanProbe()
     registerMemberReplication(&target_position);
     registerMemberReplication(&lifetime, 60.0);
     setRadarSignatureInfo(0.0, 0.2, 0.0);
-    
+
     switch(irandom(1, 3))
     {
     case 1:
@@ -129,4 +129,3 @@ void ScanProbe::onExpiration(ScriptSimpleCallback callback)
 {
     this->on_expiration = callback;
 }
-

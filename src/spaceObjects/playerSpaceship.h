@@ -52,7 +52,7 @@ public:
     constexpr static int max_self_destruct_codes = 3;
     // Subsystem effectiveness base rates
     static float system_power_user_factor[];
-    
+
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
     // Content of a line in the ship's log
@@ -69,7 +69,7 @@ public:
 
         bool operator!=(const ShipLogEntry& e) { return prefix != e.prefix || text != e.text || color != e.color; }
     };
-    
+
     class CustomShipFunction
     {
     public:
@@ -84,7 +84,7 @@ public:
         string caption;
         ECrewPosition crew_position;
         ScriptSimpleCallback callback;
-        
+
         bool operator!=(const CustomShipFunction& csf) { return type != csf.type || name != csf.name || caption != csf.caption || crew_position != csf.crew_position; }
     };
 
@@ -102,6 +102,7 @@ public:
     string control_code;
 
 private:
+    bool on_new_player_ship_called=false;
     // Comms variables
     ECommsState comms_state;
     float comms_open_delay;
@@ -166,7 +167,7 @@ public:
 
     EAlertLevel alert_level;
 
-    int32_t linked_science_probe_id;
+    int32_t linked_science_probe_id = -1;
 
     PlayerSpaceship();
     virtual ~PlayerSpaceship();
@@ -247,7 +248,7 @@ public:
     void commandSetScienceLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
-    void commandFireTube(int8_t tubeNumber, float missile_target_angle);    
+    void commandFireTube(int8_t tubeNumber, float missile_target_angle);
     void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
@@ -302,7 +303,7 @@ public:
     virtual void update(float delta) override;
     virtual bool useEnergy(float amount) override;
     virtual void addHeat(ESystem system, float amount) override;
-    
+
     // Call on the server to play a sound on the main screen.
     void playSoundOnMainScreen(string sound_name);
 
@@ -327,7 +328,7 @@ public:
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 
     // Ship control code/password setter
-    void setControlCode(string code) { control_code = code; }
+    void setControlCode(string code) { control_code = code.upper(); }
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;

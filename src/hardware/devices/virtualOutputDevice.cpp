@@ -9,7 +9,7 @@ public:
     : Renderable(mouseLayer), device(device)
     {
     }
-    
+
     virtual void render(sf::RenderTarget& window)
     {
         device->render(window);
@@ -109,7 +109,7 @@ void VirtualOutputDevice::render(sf::RenderTarget& window)
                 break;
             }
         }
-    
+
         sf::RectangleShape rect(sf::Vector2f(32, 32));
         rect.setPosition((location % 32) * 32 + 64, (location / 32) * 32 + 64);
         rect.setFillColor(color);

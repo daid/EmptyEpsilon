@@ -13,7 +13,7 @@ private:
     GuiTextEntry* message_entry;
 public:
     GuiGlobalMessageEntryView(GuiContainer* owner);
-    
+
     virtual bool onMouseDown(sf::Vector2f position);
 };
 

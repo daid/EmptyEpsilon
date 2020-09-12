@@ -30,6 +30,9 @@ if(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
  string(TIMESTAMP CPACK_PACKAGE_VERSION_PATCH "%d")
 endif(NOT DEFINED CPACK_PACKAGE_VERSION_MAJOR)
 
+set(VERSION_NUMBER ${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+message(STATUS "EmptyEpsilon Version = ${VERSION_NUMBER}")
+
 # Set our optimization flags.
 set(OPTIMIZER_FLAGS)
 if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
@@ -102,7 +105,7 @@ set(SOURCES
 	src/GMScriptCallback.cpp
 	src/GMMessage.cpp
 	src/tutorialGame.cpp
-    src/scriptDataStorage.cpp
+	src/scriptDataStorage.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
@@ -255,6 +258,7 @@ set(SOURCES
 	src/hardware/devices/virtualOutputDevice.cpp
 	src/hardware/devices/philipsHueDevice.cpp
 )
+
 if(WIN32)
     list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
 endif()
@@ -374,7 +378,7 @@ foreach(SP_SOURCE
 endforeach()
 
 add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
-add_definitions(-DVERSION_NUMBER=${CPACK_PACKAGE_VERSION_MAJOR}${CPACK_PACKAGE_VERSION_MINOR}${CPACK_PACKAGE_VERSION_PATCH})
+add_definitions(-DVERSION_NUMBER=${VERSION_NUMBER})
 if(ENABLE_CRASH_LOGGER)
   add_definitions(-DENABLE_CRASH_LOGGER)
   if(WIN32)

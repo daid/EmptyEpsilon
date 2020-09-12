@@ -15,7 +15,7 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
 void GuiScrollbar::onDraw(sf::RenderTarget& window)
 {
     drawStretched(window, rect, "gui/ScrollbarBackground");
-    
+
     int range = (max_value - min_value);
     float arrow_size = rect.width / 2.0;
     float move_height = (rect.height - arrow_size * 2);
@@ -54,11 +54,11 @@ void GuiScrollbar::onMouseDrag(sf::Vector2f position)
         float bar_size = move_height * value_size / range;
         if (bar_size > move_height)
             bar_size = move_height;
-        
+
         float target_y_offset = position.y - drag_select_offset - (rect.top + arrow_size);
         target_y_offset = std::max(target_y_offset, 0.0f);
         target_y_offset = std::min(target_y_offset, move_height - bar_size);
-        
+
         if (bar_size < move_height)
             setValue(int(target_y_offset / move_height * range + 0.5f));
     }
@@ -74,11 +74,11 @@ void GuiScrollbar::onMouseUp(sf::Vector2f position)
         float bar_size = move_height * value_size / range;
         if (bar_size > move_height)
             bar_size = move_height;
-        
+
         float target_y_offset = position.y - bar_size / 2.0f - (rect.top + arrow_size);
         target_y_offset = std::max(target_y_offset, 0.0f);
         target_y_offset = std::min(target_y_offset, move_height - bar_size);
-        
+
         if (bar_size < move_height)
             setValue(int(target_y_offset / move_height * range + 0.5f));
     }
@@ -105,7 +105,7 @@ void GuiScrollbar::setValue(int value)
         value = min_value;
     if (this->value == value)
         return;
-    
+
     this->value = value;
     if (func)
         func(value);

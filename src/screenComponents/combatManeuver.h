@@ -13,11 +13,11 @@ private:
     GuiProgressbar* charge_bar;
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
-    
+
     virtual void onUpdate() override;
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
-    
+
     void setBoostValue(float value);
     void setStrafeValue(float value);
 };

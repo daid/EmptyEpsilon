@@ -20,7 +20,7 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     GuiBasicSlider* setValue(float value);
     GuiBasicSlider* setRange(float min, float max);
     float getValue() const;
@@ -45,7 +45,7 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     GuiSlider* setValueSnapped(float value);
     GuiSlider* clearSnapValues();
     GuiSlider* addSnapValue(float value, float range);
@@ -75,7 +75,7 @@ public:
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     GuiSlider2D* clearSnapValues();
     GuiSlider2D* addSnapValue(sf::Vector2f value, sf::Vector2f range);
     GuiSlider2D* setValue(sf::Vector2f value);

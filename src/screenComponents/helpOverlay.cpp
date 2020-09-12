@@ -10,10 +10,10 @@ GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string title, string content
 : GuiElement(owner, "HELP_OVERLAY")
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     frame = new GuiPanel(this, "HELP_FRAME");
     frame->setPosition(0, 0, ACenter)->setSize(500, 700)->hide();
-    
+
     (new GuiLabel(frame, "HELP_LABEL", title, 50))->setPosition(0, 25, ATopCenter)->setSize(GuiElement::GuiSizeMax, 60);
 
     text = new GuiScrollText(frame, "HELP_TEXT", contents);

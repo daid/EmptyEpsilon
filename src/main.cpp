@@ -1,3 +1,4 @@
+#include <memory>
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
@@ -157,18 +158,18 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
     PackResourceProvider::addPackResourcesForDirectory("packs");
-#ifdef RESOURCE_BASE_DIR
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
-#endif
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
     }
+#ifdef RESOURCE_BASE_DIR
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
+    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
+#endif
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
@@ -338,7 +339,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") == "")
     {
 #ifndef _MSC_VER
-		// MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
+        // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
 #ifdef __WIN32__
@@ -349,7 +350,7 @@ int main(int argc, char** argv)
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
         }else
 #endif
-		{
+        {
             PreferencesManager::save("options.ini");
         }
     }

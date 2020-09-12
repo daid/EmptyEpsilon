@@ -15,9 +15,9 @@ public:
     std::tuple<string, string> value;
     unsigned int joystickId;
     unsigned int button;
-    
+
     ButtonConfigItem(string key, std::tuple<string, string> value);
-    
+
     void load(string key_config);
 };
 
@@ -30,9 +30,9 @@ public:
     sf::Joystick::Axis axis;
     bool reversed;
     bool defined;
-    
+
     AxisConfigItem(string key, std::tuple<string, string>);
-    
+
     void load(string key_config);
 };
 
@@ -72,13 +72,13 @@ public:
     void load();
     std::vector<string> getCategories();
     std::vector<std::pair<string, string>> listJoystickByCategory(string hotkey_category);
-    
+
     std::vector<AxisAction> getAxisAction(unsigned int joystickId, sf::Joystick::Axis axis, float position);
     std::vector<HotkeyResult> getButtonAction(unsigned int joystickId, unsigned int button);
 
 private:
     std::vector<JoystickConfigCategory> categories;
-    
+
     void newCategory(string key, string name);
     JoystickConfigCategory& getCategory(string key, string name);
     void newAxis(string key, std::tuple<string, string>);

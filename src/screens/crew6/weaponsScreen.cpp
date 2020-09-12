@@ -189,7 +189,7 @@ bool WeaponsScreen::onJoystickAxis(const AxisAction& axisAction){
             missile_aim->setValue(axisAction.value * 180);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
             return true;
-        } 
+        }
     }
     return false;
 }

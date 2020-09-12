@@ -22,6 +22,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
@@ -34,8 +35,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getEnergy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasSystem);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHackedLevel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHackedLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealth);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealth);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHealthMax);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealthMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
@@ -46,10 +52,19 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getAcceleration);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setAcceleration);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
+    /// sets the current jump range charged.
+    /// ships will be able to jump when this is equal to their max jump drive range.
+    /// Example ship:setJumpCharge(50000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveCharge);
+    /// returns the current amount of jump charged.
+    /// Example ship:getJumpCharge()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDriveCharge);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
     /// Set the warp speed for this ship's warp level 1.
@@ -87,6 +102,12 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Returns the size of the tube
     /// Example: local size = ship:getTubeSize(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeSize);
+    // Returns the time for a tube load
+    // Example: load_time = ship:getTubeLoadTime(0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTubeLoadTime);
+    // Sets the load time for a tube
+    // Example ship:setTubeLoadTime(0, 15)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeLoadTime);
     /// Set the icon to be used for this ship on the radar.
     /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
@@ -177,6 +198,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].health = 1.0;
+        systems[n].health_max = 1.0;
         systems[n].power_level = 1.0;
         systems[n].power_request = 1.0;
         systems[n].coolant_level = 0.0;
@@ -185,6 +207,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         systems[n].hacked_level = 0.0;
 
         registerMemberReplication(&systems[n].health, 0.1);
+        registerMemberReplication(&systems[n].health_max, 0.1);
         registerMemberReplication(&systems[n].hacked_level, 0.1);
     }
 
@@ -765,6 +788,7 @@ void SpaceShip::update(float delta)
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
+        systems[n].health = std::min(systems[n].health,systems[n].health_max);
     }
 
     model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
@@ -815,7 +839,8 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     P<SpaceShip> ship = obj;
     if (!ship || !ship->ship_template)
         return false;
-    return ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) > 0;
+    return (ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) +
+	   ship_template->can_be_docked_by_class.count(ship->ship_template->getSubClass())) > 0;
 }
 
 void SpaceShip::collide(Collisionable* other, float force)
@@ -1152,7 +1177,7 @@ bool SpaceShip::hasSystem(ESystem system)
 float SpaceShip::getSystemEffectiveness(ESystem system)
 {
     float power = systems[system].power_level;
-    
+
     // Substract the hacking from the power, making double hacked systems run at 25% efficiency.
     power = std::max(0.0f, power - systems[system].hacked_level * 0.75f);
 
@@ -1254,6 +1279,22 @@ EMissileSizes SpaceShip::getTubeSize(int index)
     return weapon_tube[index].getSize();
 }
 
+float SpaceShip::getTubeLoadTime(int index)
+{
+    if (index < 0 || index >= max_weapon_tubes) {
+        return 0;
+    }
+    return weapon_tube[index].getLoadTimeConfig();
+}
+
+void SpaceShip::setTubeLoadTime(int index, float time)
+{
+    if (index < 0 || index >= max_weapon_tubes) {
+        return;
+    }
+    weapon_tube[index].setLoadTimeConfig(time);
+}
+
 void SpaceShip::addBroadcast(int threshold, string message)
 {
     if ((threshold < 0) || (threshold > 2))     //if an invalid threshold is defined, alert and default to ally only
@@ -1312,7 +1353,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     // If traits don't differ from the ship template, don't bother exporting
     // them.
     if (getTypeName() != ship_template->getName())
-        ret += ":setTypeName(" + getTypeName() + ")";
+        ret += ":setTypeName(\"" + getTypeName() + "\")";
     if (hull_max != ship_template->hull)
         ret += ":setHullMax(" + string(hull_max, 0) + ")";
     if (hull_strength != ship_template->hull)
@@ -1387,10 +1428,17 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     for(int n=0; n<weapon_tube_count; n++)
     {
         WeaponTube& tube = weapon_tube[n];
-        if (tube.getDirection() != ship_template->weapon_tube[n].direction)
+        auto& template_tube = ship_template->weapon_tube[n];
+        if (tube.getDirection() != template_tube.direction)
+        {
             ret += ":setWeaponTubeDirection(" + string(n) + ", " + string(tube.getDirection(), 0) + ")";
+        }
         //TODO: Weapon tube "type_allowed_mask"
         //TODO: Weapon tube "load_time"
+        if (tube.getSize() != template_tube.size)
+        {
+            ret += ":setTubeSize(" + string(n) + ",\"" + getMissileSizeString(tube.getSize()) + "\")";
+        }
     }
     for(int n=0; n<MW_Count; n++)
     {

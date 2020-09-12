@@ -14,7 +14,7 @@ JoystickConfig joystick;
 
 JoystickConfig::JoystickConfig()
 {  // this list includes all Hotkeys and their standard configuration
-    
+
     newCategory("HELMS", "Helms");
     newAxis("IMPULSE", std::make_tuple("Change impulse", "-Z"));
     newAxis("ROTATE", std::make_tuple("Turn left or right", "R"));
@@ -23,11 +23,11 @@ JoystickConfig::JoystickConfig()
 
     newCategory("WEAPONS", "Weapons");
     newAxis("AIM_MISSILE", std::make_tuple("Turn missile aim", ""));
-    
+
     newCategory("SCIENCE", "Science");
     for(int n=0; n<4; n++)
         newAxis(std::string("SCAN_PARAM_") + string(n+1), std::make_tuple(std::string("Scanning parameter ") + string(n+1), ""));
-   
+
     newCategory("ENGINEERING", "Engineering");
     newAxis("POWER", std::make_tuple("Change power of selected system", ""));
     newAxis("COOLANT", std::make_tuple("Change coolant of selected system", ""));
@@ -201,7 +201,7 @@ AxisConfigItem::AxisConfigItem(string key, std::tuple<string, string> value)
 }
 
 void AxisConfigItem::load(string key_config)
-{    
+{
     std::smatch matches;
     for(string& config : key_config.split(";"))
     {
@@ -216,7 +216,7 @@ void AxisConfigItem::load(string key_config)
                 if (key_name.first == config)
                 {
                     axis = key_name.second;
-                    
+
                     defined = true;
                     break;
                 }

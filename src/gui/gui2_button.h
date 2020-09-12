@@ -7,7 +7,7 @@ class GuiButton : public GuiElement
 {
 public:
     typedef std::function<void()> func_t;
-    
+
 protected:
     string text;
     float text_size;
@@ -23,7 +23,7 @@ public:
     virtual void onDraw(sf::RenderTarget& window);
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
-    
+
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
     GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation = 0);

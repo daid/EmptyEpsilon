@@ -464,7 +464,6 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             if (!my_spaceship->weapon_tube[n].isLoaded())
                 continue;
             sf::Vector2f fire_position = my_spaceship->getPosition() + sf::rotateVector(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
-            sf::Vector2f fire_draw_position = worldToScreen(fire_position);
 
             const MissileWeaponData& data = MissileWeaponData::getDataFor(my_spaceship->weapon_tube[n].getLoadType());
             float fire_angle = my_spaceship->weapon_tube[n].getDirection() + (my_spaceship->getRotation());
@@ -498,13 +497,13 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             float length_after_turn = data.speed * lifetime_after_turn;
 
             sf::VertexArray a(sf::LinesStrip, 13);
-            a[0].position = fire_draw_position;
+            a[0].position = fire_position;
             for(int cnt=0; cnt<10; cnt++)
-                a[cnt + 1].position = fire_draw_position + (turn_center + sf::vector2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius) * scale;
-            a[11].position = fire_draw_position + turn_exit * scale;
-            a[12].position = fire_draw_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * length_after_turn) * scale;
+                a[cnt + 1].position = fire_position + (turn_center + sf::vector2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius);
+            a[11].position = fire_position + turn_exit;
+            a[12].position = fire_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * length_after_turn);
             for(int cnt=0; cnt<13; cnt++) {
-                a[cnt].position = sf::rotateVector(a[cnt].position-radar_screen_center, -view_rotation)+radar_screen_center;
+                a[cnt].position = worldToScreen(a[cnt].position);
                 a[cnt].color = sf::Color(255, 255, 255, 128);
             }
             window.draw(a);
@@ -517,14 +516,16 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                 if (offset < turn_distance)
                 {
                     n = sf::vector2FromAngle(fire_angle - (angle_diff * offset / turn_distance) - left_or_right);
-                    p = (turn_center + n * turn_radius) * scale;
+                    p = worldToScreen(fire_position + (turn_center + n * turn_radius));
                 }else{
-                    p = (turn_exit + sf::vector2FromAngle(missile_target_angle) * (offset - turn_distance)) * scale;
+                    p = worldToScreen(fire_position + (turn_exit + sf::vector2FromAngle(missile_target_angle) * (offset - turn_distance)));
                     n = sf::vector2FromAngle(missile_target_angle + 90.0f);
                 }
+                n = sf::rotateVector(n, -view_rotation);
+                n = sf::normalize(n);
                 sf::VertexArray a(sf::Lines, 2);
-                a[0].position = sf::rotateVector((fire_draw_position + p - n * 10.0f)-radar_screen_center, -view_rotation)+radar_screen_center;
-                a[1].position = sf::rotateVector((fire_draw_position + p + n * 10.0f)-radar_screen_center, -view_rotation)+radar_screen_center;
+                a[0].position = p - n * 10.0f;
+                a[1].position = p + n * 10.0f;
                 window.draw(a);
 
                 offset += seconds_per_distance_tick * data.speed;
@@ -570,7 +571,7 @@ void GuiRadarView::drawMissileTubes(sf::RenderTarget& window)
             sf::Vector2f fire_draw_position = worldToScreen(fire_position);
 
             float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection() - view_rotation;
-            
+
             a[n * 2].position = fire_draw_position;
             a[n * 2 + 1].position = fire_draw_position + (sf::vector2FromAngle(fire_angle) * 1000.0f) * scale;
             a[n * 2].color = sf::Color(128, 128, 128, 128);
@@ -772,7 +773,7 @@ sf::Vector2f GuiRadarView::screenToWorld(sf::Vector2f screen_position)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
-    
+
     sf::Vector2f radar_position = sf::rotateVector((screen_position - radar_screen_center) / scale, view_rotation);
     return view_position + radar_position;
 }

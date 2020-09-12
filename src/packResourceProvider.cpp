@@ -35,7 +35,7 @@ PackResourceProvider::PackResourceProvider(string filename)
     FILE* f = fopen(filename.c_str(), "rb");
     if (!f)
         return;
-    
+
     int version = readInt(f);
     if (version == 0)
     {
@@ -70,7 +70,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
     DIR* dir = opendir(directory.c_str());
     if (!dir)
         return;
-    
+
     struct dirent *entry;
     while ((entry = readdir(dir)) != nullptr)
     {

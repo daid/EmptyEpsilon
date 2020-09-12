@@ -16,11 +16,11 @@ void GuiCanvas::render(sf::RenderTarget& window)
 {
     sf::Vector2f window_size = window.getView().getSize();
     sf::FloatRect window_rect(0, 0, window_size.x, window_size.y);
-    
+
     sf::Vector2f mouse_position = InputHandler::getMousePos();
-    
+
     drawElements(window_rect, window);
-    
+
     if (enable_debug_rendering)
     {
         drawDebugElements(window_rect, window);

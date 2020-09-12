@@ -116,6 +116,7 @@ Planet::Planet()
     cloud_texture = "";
     atmosphere_texture = "";
     atmosphere_color = sf::Color(0, 0, 0);
+    atmosphere_size = 0;
     distance_from_movement_plane = 0;
     axial_rotation_time = 0.0;
     orbit_target_id = -1;

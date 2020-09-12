@@ -26,7 +26,7 @@ private:
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiCombatManeuver* combat_maneuver;
-    
+
     TargetsContainer targets;
     GuiRadarView* radar;
     GuiRotationDial* missile_aim;
@@ -34,7 +34,7 @@ private:
     GuiToggleButton* lock_aim;
 public:
     SinglePilotScreen(GuiContainer* owner);
-    
+
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual bool onJoystickAxis(const AxisAction& axisAction) override;

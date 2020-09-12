@@ -32,7 +32,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
-    
+
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
@@ -63,7 +63,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
         }
     );
     radar->setAutoRotating(PreferencesManager::get("helms_radar_lock","0")=="1");
-    
+
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(ACenter)->setSize(0, 0);
 
@@ -73,13 +73,13 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
     velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
     velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    
+
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(20, -100, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 300);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
-    
+
     docking_button = new GuiDockingButton(this, "DOCKING");
     docking_button->setPosition(20, -20, ABottomLeft)->setSize(280, 50)->setVisible(my_spaceship && my_spaceship->getCanDock());
 
@@ -94,7 +94,7 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
-        
+
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
     }

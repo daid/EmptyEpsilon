@@ -136,6 +136,47 @@ void PowerManagementScreen::onHotkey(const HotkeyResult& key)
         {
             GuiSlider* power_slider = systems[selected_system].power_slider;
 
+            // Note the code duplication with crew6/engineeringScreen
+            if (key.hotkey == "SET_POWER_000")
+            {
+                power_slider->setValue(0.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_030")
+            {
+                power_slider->setValue(0.3f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_050")
+            {
+                power_slider->setValue(0.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_100")
+            {
+                power_slider->setValue(1.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_150")
+            {
+                power_slider->setValue(1.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_200")
+            {
+                power_slider->setValue(2.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_250")
+            {
+                power_slider->setValue(2.5f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
+            if (key.hotkey == "SET_POWER_300")
+            {
+                power_slider->setValue(3.0f);
+                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+            }
             if (key.hotkey == "INCREASE_POWER")
             {
                 power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
@@ -173,7 +214,7 @@ bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
                     systems[n].power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
                     my_spaceship->commandSetSystemPowerRequest(system, systems[n].power_slider->getValue());
                     return true;
-                } 
+                }
                 if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
                     systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
                     my_spaceship->commandSetSystemCoolantRequest(system, systems[n].coolant_slider->getValue());
