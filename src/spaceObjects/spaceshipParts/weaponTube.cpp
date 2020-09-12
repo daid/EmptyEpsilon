@@ -95,13 +95,13 @@ void WeaponTube::fire(float target_angle)
     if (type_loaded == MW_HVLI)
     {
         fire_count = 5;
-        state = WTS_Firing;
-        delay = 0.0;
+        delay = 1.5;
+        if (game_server) spawnProjectile(0);
     }else{
+        fire_count = 1;
         spawnProjectile(target_angle);
-        state = WTS_Empty;
-        type_loaded = MW_None;
     }
+    state = WTS_Firing;
 }
 
 float WeaponTube::getSizeCategoryModifier()
@@ -118,7 +118,6 @@ float WeaponTube::getSizeCategoryModifier()
             return 1.0;
     }
 }
-
 
 void WeaponTube::spawnProjectile(float target_angle)
 {
@@ -242,20 +241,14 @@ void WeaponTube::update(float delta)
             type_loaded = MW_None;
             break;
         case WTS_Firing:
-            if (game_server)
+            fire_count -= 1;
+            if (fire_count > 0)
             {
-                spawnProjectile(0);
-
-                fire_count -= 1;
-                if (fire_count > 0)
-                {
-                    delay = 1.5;
-                }
-                else
-                {
-                    state = WTS_Empty;
-                    type_loaded = MW_None;
-                }
+                if (game_server) spawnProjectile(0);
+                if (fire_count > 1) delay = 1.5;
+            }else{
+                state = WTS_Empty;
+                type_loaded = MW_None;
             }
             break;
         default:
