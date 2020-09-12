@@ -338,7 +338,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 info_type->setValue(ship->getTypeName());
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
-                info_hull->setValue(int(ship->getHull()));
+                info_hull->setValue(int(ceil(ship->getHull())));
             }
 
             // On a full scan, show tactical and systems data (if any), and its
@@ -417,7 +417,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             {
                 info_type->setValue(station->template_name);
                 info_shields->setValue(station->getShieldDataString());
-                info_hull->setValue(int(station->getHull()));
+                info_hull->setValue(int(ceil(station->getHull())));
             }
         }
     }
