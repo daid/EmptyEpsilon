@@ -25,6 +25,11 @@ template:setWeaponStorage("Homing", 6)
 template:setTubeDirection(0, -1)
 template:setTubeDirection(1,  1)
 
+variation = template:copy("Elara P2"):setLocaleName(_("Elara P2"))
+variation:setDescription(_([[Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the addition of a warp drive and stronger front shields, the Elara P2 poses a greater threat than the Phobos]]))
+variation:setWarpSpeed(800)
+variation:setShields(70, 40)
+
 variation = template:copy("Phobos M3"):setLocaleName(_("Phobos M3")):setModel("AtlasHeavyFighterRed")
 variation:setDescription(_([[The Phobos M3 is one of the most common variants of the Phobos T3. It adds a mine-laying tube, but the extra storage required for the mines slows this ship down slightly.]]))
 variation:setTubes(3, 60.0)
@@ -97,6 +102,16 @@ variation:setBeamWeapon(1, 90,  15, 1200, 2.9, 1)
 variation:setBeamWeapon(2, 90,  50, 1200, 2.9, 1)
 variation:setBeamWeapon(3, 90, -50, 1200, 2.9, 1)
 variation:setSpeed(70, 15, 10)
+
+variation = template:copy("Nirvana R3"):setLocaleName(_("Nirvana R3"))
+variation:setDescription(_([[One of the earliest mass produced Nirvana models, the Nirvana R3 is designed to be used against fighters. It's got several fast, low damage, point defense beam weapons. Compared to the later, more common Nirvana R5, it has shorter beams, weaker shields and hull and a slower impulse drive.]]))
+variation:setBeamWeapon(0, 90, -15, 1000.0, 3, 1)
+variation:setBeamWeapon(1, 90,  15, 1000.0, 3, 1)
+variation:setBeamWeapon(2, 90, -50, 1000.0, 3, 1)
+variation:setBeamWeapon(3, 90,  50, 1000.0, 3, 1)
+variation:setHull(60)
+variation:setShields(40, 30)
+variation:setSpeed(65, 12, 10)
 
 template = ShipTemplate():setName("Storm"):setLocaleName(_("Storm")):setClass(_("Frigate"), _("Cruiser: Heavy Artillery")):setModel("HeavyCorvetteYellow")	--Yellow, Green, Blue, White, Red
 template:setRadarTrace("radar_piranha.png")
@@ -264,10 +279,22 @@ template:setWarpSpeed(700)
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
 
+variation = template:copy("Stalker Q5"):setLocaleName(_("Stalker Q5"))
+variation:setDescription(_([[The stalker Q5 predates the Stalker Q7. Like the Q7, the Q5 is designed to swoop into battle, deal damage quickly and retreat. Compared to the Q7, the Q5 has weaker shields and hull, but a faster turn speed]]))
+variation:setHull(45)
+variation:setShields(50,50)
+variation:setSpeed(70, 15, 12)
+
 variation = template:copy("Stalker R7"):setLocaleName(_("Stalker R7"))
 variation:setDescription(_([[The Stalker is a strike ship designed to swoop into battle, deal damage quickly, and get out fast. The R7 model is fitted with a jump drive.]]))
 variation:setWarpSpeed(0)
 variation:setJumpDrive(true)
+
+var2 = variation:copy("Stalker R5"):setLocaleName(_("Stalker R5"))
+var2:setDescription(_([[The stalker R5 predates the Stalker R7. Like the R7, the R5 is designed to swoop into battle, deal damage quickly and retreat. Compared to the R7, the R5 has weaker shields and hull, but a faster turn speed]]))
+variation:setHull(45)
+variation:setShields(50,50)
+variation:setSpeed(70, 15, 12)
 
 template = ShipTemplate():setName("Ranus U"):setLocaleName(_("Ranus U")):setClass(_("Frigate"), _("Cruiser: Sniper")):setModel("MissileCorvetteGreen")
 template:setRadarTrace("radar_cruiser.png")
@@ -383,6 +410,33 @@ template:addDoor( 7, 3, false)
 template:addDoor( 7, 1, false)
 template:addDoor( 8, 3, true)
 template:addDoor(10, 2, false)
+
+template = ShipTemplate():setName("Fiend G3"):setLocaleName(_("Fiend G3")):setModel("battleship_destroyer_4_upgraded"):setClass(_("Frigate"),_("Gunship"))
+template:setRadarTrace("radar_adv_gunship.png")
+template:setDescription(_([[The Fiend G3 was the first model produced by Conversions R Us. They got a good deal on a number of used Gunships. They added a cheap jump drive to the Gunship and viola! they made the Fiend G3. Like the Gunship, it has a homing missile tube and beams to readily take down weaker ships. With the jump drive, it becomes quite a bit more dangerous than the stock Gunship.]]))
+--                 Arc, Dir,  Range,  CycleTime, Dmg
+template:setBeam(0, 50, -15, 1000.0,		6.0, 8)
+template:setBeam(1, 50,  15, 1000.0,		6.0, 8)
+template:setTubes(1, 8.0)
+template:setHull(100)
+template:setShields(100, 80, 80)
+template:setSpeed(60, 5, 10)
+template:setWeaponStorage("Homing", 4)
+template:setJumpDrive(true)
+template:setJumpDriveRange(5000,35000)
+
+variation = template:copy("Fiend G4"):setLocaleName(_("Fiend G4"))
+variation:setDescription(_([[The Fiend G4 was among the first models produced by Conversions R Us. They got a good deal on a number of used Gunships. They added a cheap warp drive to the Gunship and viola! they made the Fiend G4. Like the Gunship, it has a homing missile tube and beams to readily take down weaker ships. With the warp drive, it becomes quite a bit more dangerous than the stock Gunship.]]))
+variation:setJumpDrive(false)
+variation:setWarpSpeed(800)
+
+variation = variation:copy("Fiend G6"):setLocaleName(_("Fiend G6"))
+variation:setDescription(_([[With the success of the Fiend G3 and G4 models, Conversions R Us continued their streak with the Fiend G6. They acquired some used Advanced Gunships and added cheap warp drives to them and made the Fiend G6. Like the Advanced Gunship, it has two homing missile tubes and beams to readily take down weaker ships. The warp drive makes it all the more dangerous.]]))
+variation:setTubes(2, 8.0) -- Amount of torpedo tubes
+
+variation = template:copy("Fiend G5"):setLocaleName(_("Fiend G5"))
+variation:setDescription(_([[With the success of the Fiend G3 and G4 models, Conversions R Us continued their streak with the Fiend G5. They acquired some used Advanced Gunships and added cheap jump drives to them and made the Fiend G5. Like the Advanced Gunship, it has two homing missile tubes and beams to readily take down weaker ships. The jump drive makes it all the more dangerous.]]))
+variation:setTubes(2, 8.0) -- Amount of torpedo tubes
 
 --Support: mine layer
 --Support: mine sweeper
