@@ -12,7 +12,7 @@ private:
         Left,
         Right
     };
-    
+
     FlankPosition flank_position;
 public:
     MissileVolleyAI(CpuShip* owner);

@@ -1,4 +1,7 @@
+#include <memory>
 #include <string.h>
+#include <i18n.h>
+#include <multiplayer_proxy.h>
 #ifndef _MSC_VER
 #include <unistd.h>
 #include <sys/stat.h>
@@ -8,6 +11,7 @@
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
 #include "gui/hotkeyConfig.h"
+#include "gui/joystickConfig.h"
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
@@ -16,7 +20,6 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "packResourceProvider.h"
-#include "scienceDatabase.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
@@ -25,6 +28,9 @@
 #include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
+#ifdef __WIN32__
+#include "discord.h"
+#endif
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -115,6 +121,27 @@ int main(int argc, char** argv)
 
     new Engine();
 
+    if (PreferencesManager::get("proxy") != "")
+    {
+        int port = defaultServerPort;
+        string password = "";
+        int listenPort = defaultServerPort;
+        auto parts = PreferencesManager::get("proxy").split(":");
+        string host = parts[0];
+        if (parts.size() > 1) port = parts[1].toInt();
+        if (parts.size() > 2) password = parts[2].upper();
+        if (parts.size() > 3) listenPort = parts[3].toInt();
+        if (host == "listen")
+            new GameServerProxy(password, listenPort);
+        else
+            new GameServerProxy(host, port, password, listenPort);
+        engine->runMainLoop();
+        return 0;
+    }
+
+    if (PreferencesManager::get("headless") != "")
+        textureManager.setDisabled(true);
+
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
@@ -127,26 +154,27 @@ int main(int argc, char** argv)
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
 
-#ifdef RESOURCE_BASE_DIR
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
-#endif
+    new DirectoryResourceProvider("resources/");
+    new DirectoryResourceProvider("scripts/");
+    new DirectoryResourceProvider("packs/SolCommand/");
+    PackResourceProvider::addPackResourcesForDirectory("packs");
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
     }
-    new DirectoryResourceProvider("resources/");
-    new DirectoryResourceProvider("scripts/");
-    new DirectoryResourceProvider("packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory("packs");
+#ifdef RESOURCE_BASE_DIR
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
+    PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
+#endif
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1)); //Setup the sprite mapping.
+    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
@@ -162,6 +190,15 @@ int main(int argc, char** argv)
 
     colorConfig.load();
     hotkeys.load();
+    joystick.load();
+
+    if (PreferencesManager::get("username", "") == "")
+    {
+        if (getenv("USERNAME"))
+            PreferencesManager::set("username", getenv("USERNAME"));
+        else if (getenv("USER"))
+            PreferencesManager::set("username", getenv("USER"));
+    }
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -189,6 +226,8 @@ int main(int argc, char** argv)
                 fsaa = 2;
         }
         P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
+        if (PreferencesManager::get("instance_name") != "")
+            window_manager->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         window_manager->setAllowVirtualResize(true);
         engine->registerObject("windowManager", window_manager);
     }
@@ -242,12 +281,6 @@ int main(int argc, char** argv)
         if (factionInfoScript->getError() != "") exit(1);
         factionInfoScript->destroy();
 
-        fillDefaultDatabaseData();
-
-        P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
-        if (scienceInfoScript->getError() != "") exit(1);
-        scienceInfoScript->destroy();
-
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;
         for(string template_name : ShipTemplate::getAllTemplateNames())
@@ -260,6 +293,9 @@ int main(int argc, char** argv)
             }
         }
     }
+    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+    nar->addKeyActivation(sf::Keyboard::Key::Tilde, 0);
+    nar->addKeyActivation(sf::Keyboard::Key::BackSpace, 1);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR
@@ -269,6 +305,10 @@ int main(int argc, char** argv)
         hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
     else
         hardware_controller->loadConfiguration("hardware.ini");
+
+#ifdef __WIN32__
+    new DiscordRichPresence();
+#endif
 
     returnToMainMenu();
     engine->runMainLoop();
@@ -281,13 +321,17 @@ int main(int argc, char** argv)
         PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
     }
 
-    // Set the default music_volume and sound_volume to the current volume.
+    // Set the default music_, sound_, and engine_volume to the current volume.
     PreferencesManager::set("music_volume", soundManager->getMusicVolume());
     PreferencesManager::set("sound_volume", soundManager->getMasterSoundVolume());
+    PreferencesManager::set("engine_volume", PreferencesManager::get("engine_volume", "50"));
 
-    // Enable music on the main screen only by default.
+    // Enable music and engine sounds on the main screen only by default.
     if (PreferencesManager::get("music_enabled").empty())
         PreferencesManager::set("music_enabled", "2");
+
+    if (PreferencesManager::get("engine_enabled").empty())
+        PreferencesManager::set("engine_enabled", "2");
 
     // Set shaders to default.
     PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
@@ -295,7 +339,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") == "")
     {
 #ifndef _MSC_VER
-		// MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
+        // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
 #ifdef __WIN32__
@@ -306,7 +350,7 @@ int main(int argc, char** argv)
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
         }else
 #endif
-		{
+        {
             PreferencesManager::save("options.ini");
         }
     }
@@ -322,12 +366,13 @@ void returnToMainMenu()
     {
         new EpsilonServer();
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
-        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password"));
-        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer("http://daid.eu/ee/register.php");
+        if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
+        if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
         if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
-        engine->setGameSpeed(1.0);
+        if (PreferencesManager::get("startpaused") != "1")
+            engine->setGameSpeed(1.0);
     }
     else if (PreferencesManager::get("autoconnect").toInt())
     {

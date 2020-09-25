@@ -11,11 +11,11 @@ void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
 {
     if (!my_spaceship)
         return;
-    
+
     sf::Color color;
     string text;
     float text_size;
-    
+
     switch(my_spaceship->alert_level)
     {
     case AL_RedAlert:

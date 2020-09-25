@@ -39,7 +39,7 @@ public:
     CpuShip* owner;
 
     ShipAI(CpuShip* owner);
-    virtual ~ShipAI();
+    virtual ~ShipAI() = default;
 
     /**!
      * Run is called every frame to update the AI state and let the AI take actions.
@@ -77,6 +77,7 @@ protected:
      * Used for missiles, as they require some intelligence to fire.
      */
     float calculateFiringSolution(P<SpaceObject> target, int tube_index);
+    P<SpaceObject> findBestMissileRestockTarget(sf::Vector2f position, float radius);
 };
 
 #endif//AI_H

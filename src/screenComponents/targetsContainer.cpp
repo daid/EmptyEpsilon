@@ -16,7 +16,7 @@ void TargetsContainer::clear()
 
 void TargetsContainer::add(P<SpaceObject> obj)
 {
-    if (obj)
+    if (obj && !entries.has(obj))
         entries.push_back(obj);
 }
 
@@ -70,8 +70,8 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
                 target = spaceObject;
         }
     }
-    
-    
+
+
     if (my_spaceship && allow_waypoint_selection)
     {
         for(int n=0; n<my_spaceship->getWaypointCount(); n++)

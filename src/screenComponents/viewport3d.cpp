@@ -35,9 +35,9 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
-    window.pushGLStates();
+    window.popGLStates();
 
-    ShaderManager::getShader("billboardShader")->setParameter("camera_position", camera_position);
+    ShaderManager::getShader("billboardShader")->setUniform("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
@@ -55,7 +55,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    
+
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
     glRotatef(-camera_pitch, 1, 0, 0);
@@ -130,6 +130,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         }
     }
 
+    sf::Texture::bind(NULL);
     {
         float lightpos1[4] = {0, 0, 0, 1.0};
         glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
@@ -144,12 +145,12 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         RenderInfo(SpaceObject* obj, float d)
         : object(obj), depth(d)
         {}
-    
+
         SpaceObject* object;
         float depth;
     };
     std::vector<std::vector<RenderInfo>> render_lists;
-    
+
     sf::Vector2f viewVector = sf::vector2FromAngle(camera_yaw);
     float depth_cutoff_back = camera_position.z * -tanf((90+camera_pitch + camera_fov/2.0) / 180.0f * M_PI);
     float depth_cutoff_front = camera_position.z * -tanf((90+camera_pitch - camera_fov/2.0) / 180.0f * M_PI);
@@ -171,12 +172,12 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             render_lists.emplace_back();
         render_lists[render_list_index].emplace_back(*obj, depth);
     }
-    
+
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
         std::sort(render_list.begin(), render_list.end(), [](const RenderInfo& a, const RenderInfo& b) { return a.depth > b.depth; });
-        
+
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f * (n + 1));
@@ -186,7 +187,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
         glColor4f(1,1,1,1);
         glDisable(GL_BLEND);
-        sf::Texture::bind(NULL);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
         for(auto info : render_list)
@@ -223,7 +223,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glPushMatrix();
     glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
     ParticleEngine::render();
-    
+
     if (show_spacedust && my_spaceship)
     {
         static std::vector<sf::Vector3f> space_dust;
@@ -234,7 +234,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         sf::Vector2f dust_vector = my_spaceship->getVelocity() / 100.0f;
         sf::Vector3f dust_center = sf::Vector3f(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.0);
         glColor4f(0.7, 0.5, 0.35, 0.07);
-        
+
         for(unsigned int n=0; n<space_dust.size(); n++)
         {
             const float maxDustDist = 500.0f;
@@ -260,7 +260,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("redicule2.png"));
+        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("redicule2.png"));
         sf::Shader::bind(ShaderManager::getShader("billboardShader"));
         glColor4f(0.5, 0.5, 0.5, target->getRadius() * 2.5);
         glBegin(GL_QUADS);
@@ -300,7 +300,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
 #endif
 
-    window.popGLStates();
+    window.pushGLStates();
 
     if (show_callsigns && render_lists.size() > 0)
     {
@@ -312,7 +312,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             string call_sign = obj->getCallSign();
             if (call_sign == "")
                 continue;
-            
+
             sf::Vector3f screen_position = worldToScreen(window, sf::Vector3f(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
             if (screen_position.z < 0)
                 continue;
@@ -322,11 +322,11 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, ACenter, 20 * distance_factor, bold_font, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
-    
+
     if (show_headings && my_spaceship)
     {
         float distance = 2500.f;
-        
+
         for(int angle = 0; angle < 360; angle += 30)
         {
             sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(float(angle - 90)) * distance;
@@ -341,7 +341,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f world)
 {
     world -= camera_position;
-    
+
     //Transformation vectors
     float fTempo[8];
     //Modelview transform
@@ -356,7 +356,7 @@ sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f
     fTempo[6] = projection_matrix[2]*fTempo[0]+projection_matrix[6]*fTempo[1]+projection_matrix[10]*fTempo[2]+projection_matrix[14]*fTempo[3];
     fTempo[7] = -fTempo[2];
     //The result normalizes between -1 and 1
-    if(fTempo[7]==0.0)	//The w value
+    if(fTempo[7]==0.0)  //The w value
         return sf::Vector3f(0, 0, -1);
     fTempo[7] = 1.0/fTempo[7];
     //Perspective division
@@ -369,10 +369,10 @@ sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f
     ret.x = (fTempo[4]*0.5+0.5)*viewport[2]+viewport[0];
     ret.y = (fTempo[5]*0.5+0.5)*viewport[3]+viewport[1];
     //This is only correct when glDepthRange(0.0, 1.0)
-    //ret.z = (1.0+fTempo[6])*0.5;	//Between 0 and 1
+    //ret.z = (1.0+fTempo[6])*0.5;  //Between 0 and 1
     //Set Z to distance into the screen (negative is behind the screen)
     ret.z = -fTempo[2];
-    
+
     ret.x = ret.x * window.getView().getSize().x / window.getSize().x;
     ret.y = ret.y * window.getView().getSize().y / window.getSize().y;
     ret.y = window.getView().getSize().y - ret.y;

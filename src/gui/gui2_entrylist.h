@@ -18,7 +18,7 @@ private:
         string value;
         GuiEntry(string name, string value) : name(name), value(value) {}
     };
-    
+
 protected:
     std::vector<GuiEntry> entries;
     int selection_index;

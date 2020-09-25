@@ -12,7 +12,7 @@ static int addGMFunction(lua_State* L)
     const char* name = luaL_checkstring(L, 1);
 
     ScriptSimpleCallback callback;
-    
+
     int idx = 2;
     convert<ScriptSimpleCallback>::param(L, idx, callback);
 
@@ -64,3 +64,30 @@ static int getGMSelection(lua_State* L)
 /// getGMSelection()
 /// Returns an list of objects that the GM currently has selected.
 REGISTER_SCRIPT_FUNCTION(getGMSelection);
+
+static int onGMClick(lua_State* L)
+{
+    ScriptSimpleCallback callback;
+
+    int idx = 1;
+    convert<ScriptSimpleCallback>::param(L,idx,callback);
+
+    if (callback.isSet())
+    {
+        gameGlobalInfo->on_gm_click=[callback](sf::Vector2f position) mutable
+        {
+            callback.call(position.x,position.y);
+        };
+    }
+    else
+    {
+        gameGlobalInfo->on_gm_click = nullptr;
+    }
+
+    return 0;
+}
+/// onGMClick(function)
+/// Register a callback function that is called when the gm clicks on the background of their screen.
+/// Example 1: onGMClick(function(x,y) print(x,y) end) -- print the x and y when clicked.
+/// Example 2: onGMClick(nil) -- resets to no function being called on clicks
+REGISTER_SCRIPT_FUNCTION(onGMClick);

@@ -36,7 +36,6 @@ private:
     // camera_position is a Vector3, so no need to declare one here.
     sf::Vector2f camera_position_2D;
     float target_rotation;
-    float target_velocity;
 
     P<SpaceObject> target_of_target;
 
@@ -50,9 +49,9 @@ private:
 
 public:
     CinematicViewScreen();
-    
+
     virtual void update(float delta) override;
-    
+
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 

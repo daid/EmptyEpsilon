@@ -7,13 +7,14 @@ GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 : GuiElement(owner, id), text(text), func(func)
 {
     text_size = 30;
+    color_set = colorConfig.button;
 }
 
 void GuiButton::onDraw(sf::RenderTarget& window)
 {
-    sf::Color color = selectColor(colorConfig.button.background);
-    sf::Color text_color = selectColor(colorConfig.button.forground);
-    
+    sf::Color color = selectColor(color_set.background);
+    sf::Color text_color = selectColor(color_set.forground);
+
     if (!enabled)
         drawStretched(window, rect, "gui/ButtonBackground.disabled", color);
     else if (active)
@@ -96,7 +97,18 @@ GuiButton* GuiButton::setIcon(string icon_name, EGuiAlign icon_alignment, float 
     return this;
 }
 
+GuiButton* GuiButton::setColors(WidgetColorSet color_set)
+{
+    this->color_set = color_set;
+    return this;
+}
+
 string GuiButton::getIcon() const
 {
     return icon_name;
+}
+
+WidgetColorSet GuiButton::getColors() const
+{
+    return color_set;
 }

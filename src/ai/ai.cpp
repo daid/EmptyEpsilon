@@ -15,12 +15,8 @@ ShipAI::ShipAI(CpuShip* owner)
     has_beams = false;
     beam_weapon_range = 0.0;
     weapon_direction = EWeaponDirection::Front;
-    
-    update_target_delay = 0.0;
-}
 
-ShipAI::~ShipAI()
-{
+    update_target_delay = 0.0;
 }
 
 bool ShipAI::canSwitchAI()
@@ -40,7 +36,7 @@ void ShipAI::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f draw_position,
         a[0].color = a[1].color = sf::Color(255, 128, 128, 64);
         window.draw(a);
     }
-    
+
     sf::VertexArray a(sf::LinesStrip, pathPlanner.route.size() + 1);
     a[0].position = draw_position;
     a[0].color = sf::Color(255, 255, 255, 32);
@@ -114,10 +110,10 @@ void ShipAI::updateWeaponState(float delta)
     has_beams = false;
     beam_weapon_range = 0;
     best_missile_type = MW_None;
-    
+
     float tube_strength_per_direction[4] = {0, 0, 0, 0};
     float beam_strength_per_direction[4] = {0, 0, 0, 0};
-    
+
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tube_count; n++)
     {
@@ -154,7 +150,7 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
-    
+
     int best_tube_index = -1;
     float best_tube_strenght = 0.0;
     int best_beam_index = -1;
@@ -172,10 +168,10 @@ void ShipAI::updateWeaponState(float delta)
             best_beam_strenght = beam_strength_per_direction[n];
         }
     }
-    
+
     has_beams = best_beam_index > -1;
     has_missiles = best_tube_index > -1;
-    
+
     if (has_beams)
     {
         //Figure out our beam weapon range.
@@ -214,7 +210,7 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
-    
+
     int direction_index = best_tube_index;
     float* strength_per_direction = tube_strength_per_direction;
     if (best_beam_strenght > best_tube_strenght)
@@ -345,8 +341,20 @@ void ShipAI::runOrders()
                     owner->orderRoamingAt(sf::Vector2f(random(-30000, 30000), random(-30000, 30000)));
                 flyTowards(owner->getOrderTargetLocation());
             }
+        }else if (owner->weapon_tube_count > 0)
+        {
+            // Find a station which can re-stock our weapons.
+            P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), 50000);
+            if (new_target)
+            {
+                owner->orderRetreat(new_target);
+            }else{
+                sf::Vector2f diff = owner->getOrderTargetLocation() - owner->getPosition();
+                if (diff < 1000.0f)
+                    owner->orderRoamingAt(sf::Vector2f(random(-30000, 30000), random(-30000, 30000)));
+                flyTowards(owner->getOrderTargetLocation());
+            }
         }else{
-            //TODO: Find a station which can re-stock our weapons.
             pathPlanner.clear();
         }
         break;
@@ -393,6 +401,39 @@ void ShipAI::runOrders()
     case AI_Attack:          //Attack [order_target] very specificly.
         pathPlanner.clear();
         break;
+    case AI_Retreat:
+        if ((owner->docking_state == DS_Docked) && (owner->getOrderTarget()) && P<ShipTemplateBasedObject>(owner->getOrderTarget()))
+        {
+            P<ShipTemplateBasedObject> target = owner->getOrderTarget();
+            bool allow_undock = true;
+            if (target->restocks_missiles_docked)
+            {
+                for(int n = 0; n < MW_Count; n++)
+                {
+                    if (owner->weapon_storage[n] < owner->weapon_storage_max[n])
+                    {
+                        allow_undock = false;
+                        break;
+                    }
+                }
+            }
+            if (allow_undock && target->repair_docked && (owner->hull_strength < owner->hull_max))
+            {
+                allow_undock = false;
+            }
+            if (allow_undock)
+            {
+                owner->orderRoaming();    //deletes order_target
+                break;
+            }
+        }else{
+            P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), 50000);
+            if (new_target)
+            {
+                owner->orderRetreat(new_target);
+            }
+        }
+        // no break; continue with docking or roaming
     case AI_Dock:            //Dock with [order_target]
         if (owner->getOrderTarget())
         {
@@ -643,7 +684,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 {
     if (P<ScanProbe>(target))   //Never fire missiles on scan probes
         return std::numeric_limits<float>::infinity();
-    
+
     EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
 
     if (type == MW_HVLI)    //Custom HVLI targeting for AI, as the calculate firing solution
@@ -653,7 +694,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         sf::Vector2f target_position = target->getPosition();
         float target_angle = sf::vector2ToAngle(target_position - owner->getPosition());
         float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
-        
+
         float distance = sf::length(owner->getPosition() - target_position);
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = sf::angleDifference(target_angle, fire_angle);
@@ -665,14 +706,14 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         //If our "error" of hitting is less then double the radius of the target, fire.
         if (fabs(angle_diff) < 80.0 && distance * tanf(fabs(angle_diff) / 180.0f * M_PI) < target->getRadius() * 2.0)
             return fire_angle;
-        
+
         return std::numeric_limits<float>::infinity();
     }
-    
+
     if (type == MW_Nuke || type == MW_EMP)
     {
         sf::Vector2f target_position = target->getPosition();
-        
+
         //Check if we can sort of safely fire an Nuke/EMP. The target needs to be clear of friendly/neutrals.
         float safety_radius = 1100;
         if (sf::length(target_position - owner->getPosition()) < safety_radius)
@@ -693,4 +734,37 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 
     //Use the general weapon tube targeting to get the final firing solution.
     return owner->weapon_tube[tube_index].calculateFiringSolution(target);
+}
+
+P<SpaceObject> ShipAI::findBestMissileRestockTarget(sf::Vector2f position, float radius)
+{
+    float target_score = 0.0;
+    PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(radius, radius), position + sf::Vector2f(radius, radius));
+    P<SpaceObject> target;
+    sf::Vector2f owner_position = owner->getPosition();
+    foreach(Collisionable, obj, objectList)
+    {
+        P<SpaceObject> space_object = obj;
+        if (!space_object || !owner->isFriendly(space_object) || space_object == target)
+            continue;
+        if (!space_object->canBeDockedBy(owner) || !space_object->canRestockMissiles())
+            continue;
+        //calculate score
+        sf::Vector2f position_difference = space_object->getPosition() - owner_position;
+        float distance = sf::length(position_difference);
+        float angle_difference = sf::angleDifference(owner->getRotation(), sf::vector2ToAngle(position_difference));
+        float score = -distance - fabsf(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
+        if (P<SpaceShip>(space_object))
+        {
+            score -= 5000;
+        }
+        if (score == std::numeric_limits<float>::min())
+            continue;
+        if (!target || score > target_score)
+        {
+            target = space_object;
+            target_score = score;
+        }
+    }
+    return target;
 }

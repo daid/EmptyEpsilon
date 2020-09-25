@@ -63,8 +63,8 @@ int EnttecDMXProDevice::getChannelCount()
 void EnttecDMXProDevice::updateLoop()
 {
     //Configuration does not real matter as it's just a virtual device.
-    port->configure(115200, 8, SerialPort::NoParity, SerialPort::OneStopBit);    
-    
+    port->configure(115200, 8, SerialPort::NoParity, SerialPort::OneStopBit);
+
     int size = channel_count + 1;
     uint8_t start_code[5] = {0x7E, 0x06, uint8_t(size & 0xFF), uint8_t(size >> 8), 0x00};
     uint8_t end_code[1] = {0xE7};
@@ -73,7 +73,7 @@ void EnttecDMXProDevice::updateLoop()
         port->send(start_code, sizeof(start_code));
         port->send(channel_data, channel_count);
         port->send(end_code, sizeof(end_code));
-        
+
         //Delay a bit before sending again.
         sf::sleep(sf::milliseconds(100));
     }

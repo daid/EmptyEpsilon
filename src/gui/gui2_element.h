@@ -46,16 +46,17 @@ public:
     GuiElement(GuiContainer* owner, string id);
     virtual ~GuiElement();
 
+    virtual void onUpdate() {}
     virtual void onDraw(sf::RenderTarget& window) {}
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onKey(sf::Event::KeyEvent key, int unicode);
     virtual void onHotkey(const HotkeyResult& key);
-    virtual bool onJoystickXYMove(sf::Vector2f position);
-    virtual bool onJoystickZMove(float position);
-    virtual bool onJoystickRMove(float position);
-    
+    virtual bool onJoystickAxis(const AxisAction& axisAction);
+    virtual void onFocusGained() {}
+    virtual void onFocusLost() {}
+
     GuiElement* setSize(sf::Vector2f size);
     GuiElement* setSize(float x, float y);
     sf::Vector2f getSize() const;
@@ -84,10 +85,10 @@ public:
 
     GuiContainer* getOwner();
     GuiContainer* getTopLevelContainer();
-    
+
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();
-    
+
     friend class GuiContainer;
     friend class GuiCanvas;
 private:
@@ -116,12 +117,12 @@ protected:
 
     void draw9Cut(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float width_factor = 1.0);
     void draw9CutV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White, float height_factor = 1.0);
-    
+
     void drawStretched(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedH(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedV(sf::RenderTarget& window, sf::FloatRect rect, string texture, sf::Color color=sf::Color::White);
     void drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, float corner_size, string texture, sf::Color color=sf::Color::White);
-    
+
     void drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color=sf::Color::White, float rotation=0);
 
     sf::Color selectColor(ColorSet& color_set) const;

@@ -1,0 +1,35 @@
+=emp_explosion.wav==
+Sounds (c) by Christian "Crystan" Hoffmann
+Creative Commons Attribution-Share Alike 3.0
+Edited version of electro/taserdouble from UFO: Alien Invasion
+
+==hvli_fire.wav==
+Sounds (c) by Michel Baradari apollo-music.de
+Licensed under CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
+explodemini.wav, hosted on opengameart.org
+
+==laser_fire.wav==
+Sounds (c) by Christian "Crystan" Hoffmann
+Creative Commons Attribution-Share Alike 3.0
+laser-medium from UFO: Alien Invasion
+
+==nuke_explosion.wav==
+Sounds (c) by Christian "Crystan" Hoffmann
+Creative Commons Attribution-Share Alike 3.0
+explosion from UFO: Alien Invason
+
+==rlaunch.wav==
+Sounds (c) by Michel Baradari apollo-music.de
+Licensed under CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
+Hosted on opengameart.org
+
+===engine.wav===
+Sound (c) Garrett "Oznogon" Guillotte
+Released into the Public Domain
+
+===engine_fighter.wav===
+F-15 Avionics Sound Cockpit View
+F-15 Eagle SFX sound library
+Sound (c) SoundFX.studio
+Licensed under CC BY-NC 3.0 https://creativecommons.org/licenses/by-nc/3.0/
+Retrieved from https://freesound.org/s/456269/

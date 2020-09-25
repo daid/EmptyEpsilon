@@ -78,7 +78,7 @@ function init()
 	spawnStrings = {}
 	GMDiagnosticOn = "Turn On Diagnostic"
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
-	interWave = 150		
+	interWave = 150
 	GMDelayNormalToSlow = "Delay normal to slow"
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 	goods = {}					--overall tracking of goods
@@ -2425,8 +2425,8 @@ function handleDockedState()
 							cMsg = cMsg .. string.format("\nCount near asteroids below: %i",ediv2s4)
 							cMsg = cMsg .. "\n\nYou need three in each sensor scan area"
 						else
-							cMsg = string.format("Count above: %i",ediv1s1)
-							cMsg = cMsg .. string.format("\nCount below: %i",ediv1s2)
+							cMsg = string.format("Count below: %i",ediv1s1)
+							cMsg = cMsg .. string.format("\nCount above: %i",ediv1s2)
 							cMsg = cMsg .. "\n\nYou need six in each sensor scan area"
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
@@ -2445,8 +2445,8 @@ function handleDockedState()
 							cMsg = cMsg .. string.format("\nCount near asteroids below: %i",wdiv2s4)
 							cMsg = cMsg .. "\n\nYou need three in each sensor scan area"
 						else
-							cMsg = string.format("Count above: %i",wdiv1s1)
-							cMsg = cMsg .. string.format("\nCount below: %i",wdiv1s2)
+							cMsg = string.format("Count below: %i",wdiv1s1)
+							cMsg = cMsg .. string.format("\nCount above: %i",wdiv1s2)
 							cMsg = cMsg .. "\n\nYou need six in each sensor scan area"
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
@@ -3769,7 +3769,7 @@ function setPlayers()
 						pobj.healthyMissile = 1.0
 						pobj.prevMissile = 1.0
 					end
-					if pobj:hasWarp() then
+					if pobj:hasWarpDrive() then
 						pobj.healthyWarp = 1.0
 						pobj.prevWarp = 1.0
 					end
@@ -4228,6 +4228,7 @@ end
 function waves(delta)
 	waveTimer = waveTimer - delta
 	if waveTimer < 0 then
+		waveTimer = delta + interWave + random(1,60)
 		spawnCompass = math.random(1,4)
 		if spawnCompass == 1 then
 			hf = spawnEnemies(0,-40000,difficulty,"Kraylor")
@@ -4235,12 +4236,11 @@ function waves(delta)
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowardsBlind(0,0)
 				end
-				divisor = 2
+				waveTimer = waveTimer - random(1,60)
 			else
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowards(0,0)
 				end
-				divisor = 1
 			end
 		elseif spawnCompass == 2 then
 			hf = spawnEnemies(0,40000,difficulty,"Ghosts")
@@ -4248,12 +4248,11 @@ function waves(delta)
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowardsBlind(0,0)
 				end
-				divisor = 2
+				waveTimer = waveTimer - random(1,60)
 			else
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowards(0,0)
 				end
-				divisor = 1
 			end
 		elseif spawnCompass == 3 then
 			hf = spawnEnemies(40000,0,difficulty,"Exuari")
@@ -4261,12 +4260,11 @@ function waves(delta)
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowardsBlind(0,0)
 				end
-				divisor = 2
+				waveTimer = waveTimer - random(1,60)
 			else
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowards(0,0)
 				end
-				divisor = 1
 			end
 		else
 			hf = spawnEnemies(-40000,0,difficulty,"Ktlitans")
@@ -4274,12 +4272,11 @@ function waves(delta)
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowardsBlind(0,0)
 				end
-				divisor = 2
+				waveTimer = waveTimer - random(1,60)
 			else
 				for _, enemy in ipairs(hf) do
 					enemy:orderFlyTowards(0,0)
 				end
-				divisor = 1
 			end
 		end
 		if homeStation:areEnemiesInRange(2000) then
@@ -4290,7 +4287,6 @@ function waves(delta)
 				end
 			end
 		end
-		waveTimer = delta + interWave/divisor + random(1,60)
 	end
 end
 
