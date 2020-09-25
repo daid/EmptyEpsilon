@@ -1,13 +1,13 @@
 #include "gui2_progressbar.h"
 
-GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min, float max, float value)
-: GuiElement(owner, id), min(min), max(max), value(value), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
+GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min_value, float max_value, float start_value)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
 {
 }
 
 void GuiProgressbar::onDraw(sf::RenderTarget& window)
 {
-    float f = (value - min) / (max - min);
+    float f = (value - min_value) / (max_value - min_value);
 
     if (drawBackground)
         drawStretched(window, rect, "gui/ProgressbarBackground");
@@ -16,6 +16,8 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
     if (rect.width >= rect.height)
     {
         fill_rect.width *= f;
+        if (max_value < min_value)
+            fill_rect.left = rect.left + rect.width - fill_rect.width;
         drawStretchedH(window, fill_rect, "gui/ProgressbarFill", color);
     }
     else
@@ -33,10 +35,10 @@ GuiProgressbar* GuiProgressbar::setValue(float value)
     return this;
 }
 
-GuiProgressbar* GuiProgressbar::setRange(float min, float max)
+GuiProgressbar* GuiProgressbar::setRange(float min_value, float max_value)
 {
-    this->min = min;
-    this->max = max;
+    this->min_value = min_value;
+    this->max_value = max_value;
     return this;
 }
 

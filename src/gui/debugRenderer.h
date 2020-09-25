@@ -9,11 +9,11 @@ private:
     sf::Clock fps_timer;
     float fps;
     int fps_counter;
-    
+
     bool show_fps;
     bool show_datarate;
     bool show_timing_graph;
-    
+
     std::vector<Engine::EngineTiming> timing_graph_points;
 public:
     DebugRenderer();

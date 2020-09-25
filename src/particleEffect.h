@@ -29,7 +29,7 @@ class ParticleEngine : public Updatable
 public:
     static void render();
     virtual void update(float delta);
-    
+
     static void spawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time);
 };
 

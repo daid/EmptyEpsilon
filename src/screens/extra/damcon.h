@@ -13,7 +13,7 @@ private:
     GuiKeyValueDisplay* system_health[SYS_COUNT];
 public:
     DamageControlScreen(GuiContainer* owner);
-    
+
     void onDraw(sf::RenderTarget& window) override;
 };
 

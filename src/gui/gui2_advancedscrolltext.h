@@ -14,14 +14,14 @@ protected:
         string text;
         sf::Color color;
     };
-    
+
     std::vector<Entry> entries;
     GuiScrollbar* scrollbar;
     float text_size;
     bool auto_scroll_down;
 public:
     GuiAdvancedScrollText(GuiContainer* owner, string id);
-    
+
     GuiAdvancedScrollText* enableAutoScrollDown() { auto_scroll_down = true; return this; }
     GuiAdvancedScrollText* disableAutoScrollDown() { auto_scroll_down = false; return this; }
 

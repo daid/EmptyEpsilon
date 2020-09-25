@@ -22,7 +22,7 @@ class Mesh : public sf::NonCopyable
 public:
     Mesh(std::vector<MeshVertex>& vertices);
     ~Mesh();
-    
+
     void render();
     sf::Vector3f randomPoint();
 

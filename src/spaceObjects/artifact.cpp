@@ -19,8 +19,10 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
     /// Set if this artifact can be picked up or not. When it is picked up, this artifact will be destroyed.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, allowPickup);
     /// Set a function that will be called if a player picks up the artifact.
-    /// First argument given to the function will be the playerSpaceShip, the second the artifact.
-    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setPickUpCallback);
+    /// First argument given to the function will be the artifact, the second the player.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onPickUp);
+    /// Let the artifact rotate. For reference, normal asteroids in the game have spins between 0.1 and 0.8.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setSpin);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Artifact, "Artifact");
@@ -28,13 +30,14 @@ Artifact::Artifact()
 : SpaceObject(120, "Artifact")
 {
     registerMemberReplication(&model_data_name);
+    registerMemberReplication(&artifact_spin);
 
     setRotation(random(0, 360));
-    
+
     current_model_data_name = "artifact" + string(irandom(1, 8));
     model_data_name = current_model_data_name;
     model_info.setData(current_model_data_name);
-    
+
     allow_pickup = false;
 }
 
@@ -47,7 +50,17 @@ void Artifact::update(float delta)
     }
 }
 
-void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void Artifact::draw3D()
+{
+#if FEATURE_3D_RENDERING
+    if (artifact_spin != 0.0) {
+        glRotatef(engine->getElapsedTime() * artifact_spin, 0, 0, 1);
+    }
+    SpaceObject::draw3D();
+#endif//FEATURE_3D_RENDERING
+}
+
+void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");
@@ -71,7 +84,7 @@ void Artifact::collide(Collisionable* target, float force)
     {
         if (on_pickup_callback.isSet())
         {
-            on_pickup_callback.call(player, P<Artifact>(this));
+            on_pickup_callback.call(P<Artifact>(this), player);
         }
         destroy();
     }
@@ -95,7 +108,12 @@ void Artifact::allowPickup(bool allow)
     allow_pickup = allow;
 }
 
-void Artifact::setPickUpCallback(ScriptSimpleCallback callback)
+void Artifact::setSpin(float spin)
+{
+    artifact_spin = spin;
+}
+
+void Artifact::onPickUp(ScriptSimpleCallback callback)
 {
     this->allow_pickup = 1;
     this->on_pickup_callback = callback;

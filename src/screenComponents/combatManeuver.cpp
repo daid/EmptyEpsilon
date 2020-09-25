@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "combatManeuver.h"
@@ -12,7 +13,7 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 1.0, 0.0);
     charge_bar->setColor(sf::Color(192, 192, 192, 64));
     charge_bar->setPosition(0, 0, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(charge_bar, "CHARGE_LABEL", "Combat maneuver", 20))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiLabel(charge_bar, "CHARGE_LABEL", tr("Combat maneuver"), 20))->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     slider = new GuiSnapSlider2D(this, id + "_STRAFE", sf::Vector2f(-1.0, 1.0), sf::Vector2f(1.0, 0.0), sf::Vector2f(0.0, 0.0), [](sf::Vector2f value) {
         if (my_spaceship)
@@ -22,9 +23,14 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
         }
     });
     slider->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
-    
+
     (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+}
+
+void GuiCombatManeuver::onUpdate()
+{
+    setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 }
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
@@ -44,7 +50,7 @@ void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 
 void GuiCombatManeuver::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (key.category == "HELMS" && my_spaceship && isVisible())
     {
         if (key.hotkey == "COMBAT_LEFT")
         {}//TODO

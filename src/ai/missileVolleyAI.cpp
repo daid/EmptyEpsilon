@@ -37,7 +37,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
     sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
     float target_angle = sf::vector2ToAngle(position_diff);
     float distance = sf::length(position_diff);
-    
+
     if (flank_position == Unknown)
     {
         //No flanking position. Do we want to go left or right of the target?
@@ -65,7 +65,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
                 break;
             }
         }
-        
+
         if (all_possible_loaded)
         {
             int can_fire_count = 0;
@@ -77,7 +77,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
                     can_fire_count++;
                 }
             }
-            
+
             for(int n=0; n<owner->weapon_tube_count; n++)
             {
                 float target_angle = calculateFiringSolution(target, n);
@@ -102,7 +102,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
     }else{
         target_position = target->getPosition() + sf::vector2FromAngle(target_angle + 120) * 3500.0f;
     }
-    
+
     if (owner->getOrder() == AI_StandGround)
     {
         owner->target_rotation = sf::vector2ToAngle(target_position - owner->getPosition());

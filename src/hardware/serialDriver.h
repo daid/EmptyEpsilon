@@ -35,20 +35,20 @@ public:
 
     SerialPort(string name);
     ~SerialPort();
-    
+
     bool isOpen();
-    
+
     void configure(int baudrate, int databits, EParity parity, EStopBits stopbits);
-    
+
     void send(void* data, int data_size);
     int recv(void* data, int data_size);
-    
+
     void setDTR();
     void clearDTR();
     void setRTS();
     void clearRTS();
     void sendBreak();
-    
+
     static std::vector<string> getAvailablePorts();
     static string getPseudoDriverName(string port);
     static std::vector<string> portsByPseudoDriverName(string driver_name);

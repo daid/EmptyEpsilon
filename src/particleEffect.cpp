@@ -9,7 +9,7 @@ std::vector<Particle> ParticleEngine::particles;
 void ParticleEngine::render()
 {
 #if FEATURE_3D_RENDERING
-    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("particle.png"));
+    ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("particle.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     glBegin(GL_QUADS);
     for(unsigned int n=0; n<particles.size(); n++)
@@ -17,11 +17,11 @@ void ParticleEngine::render()
         Particle& p = particles[n];
         if (p.life_time > p.max_life_time)
             continue;
-        
+
         sf::Vector3f position = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.position, p.end.position);
         sf::Vector3f color = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
         float size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
-        
+
         glColor4f(color.x, color.y, color.z, size);
         glTexCoord2f(0, 0);
         glVertex3f(position.x, position.y, position.z);

@@ -5,15 +5,17 @@
 #include <SFML/Window/Event.hpp>
 #include "stringImproved.h"
 
+class JoystickConfig;
+
 class HotkeyConfigItem
 {
 public:
     string key;
     std::tuple<string, string> value;
     sf::Event::KeyEvent hotkey;
-    
+
     HotkeyConfigItem(string key, std::tuple<string, string>);
-    
+
     void load(string key_config);
 };
 
@@ -42,13 +44,14 @@ public:
     void load();
     std::vector<string> getCategories();
     std::vector<std::pair<string, string>> listHotkeysByCategory(string hotkey_category);
-    
+
     std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
 private:
     std::vector<HotkeyConfigCategory> categories;
-    
+
     void newCategory(string key, string name);
     void newKey(string key, std::tuple<string, string>);
+friend class JoystickConfig;
 };
 
 extern HotkeyConfig hotkeys;

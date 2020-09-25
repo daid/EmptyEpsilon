@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
+#include "gui/joystickConfig.h"
 
 class GuiMissileTubeControls;
 class GuiRadarView;
@@ -22,7 +23,7 @@ private:
     GuiKeyValueDisplay* shields_display;
     GuiElement* warp_controls;
     GuiElement* jump_controls;
-    
+
     TargetsContainer targets;
     GuiRadarView* radar;
     GuiRotationDial* missile_aim;
@@ -30,9 +31,10 @@ private:
     GuiToggleButton* lock_aim;
 public:
     TacticalScreen(GuiContainer* owner);
-    
-    virtual void onDraw(sf::RenderTarget& window);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
+    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
 };
 
 #endif//TACTICAL_SCREEN_H

@@ -18,7 +18,7 @@ public:
     GuiOverlay(GuiContainer* owner, string id, sf::Color color);
 
     virtual void onDraw(sf::RenderTarget& window);
-    
+
     GuiOverlay* setColor(sf::Color color);
     GuiOverlay* setAlpha(int alpha);
     GuiOverlay* setTextureCenter(string texture);

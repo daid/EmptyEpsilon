@@ -1,0 +1,28 @@
+[tinyci]
+enabled = True
+
+[build-linux]
+directory = _build_native
+commands =
+    rm -rf script_reference.html
+    cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake --build . --target package
+artifacts = EmptyEpsilon.deb
+
+[build-win32]
+directory = _build_win32
+commands =
+    rm -rf script_reference.html
+    cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/mingw.toolchain -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake --build . --target package
+artifacts = EmptyEpsilon.zip
+
+[build-android]
+directory = _build_android
+commands =
+    cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain -DCMAKE_BUILD_TYPE=Release
+    cmake --build .
+artifacts = EmptyEpsilon.apk
+
+[repos-daid/SeriousProton]
+required = True

@@ -9,8 +9,14 @@ void GuiImage::onDraw(sf::RenderTarget& window)
 {
     sf::Sprite image;
     textureManager.setTexture(image, texture_name);
-    image.setPosition(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
-    float f = rect.height / float(image.getTextureRect().height);
+    float f = std::min(
+        rect.height / float(image.getTextureRect().height),
+        rect.width / float(image.getTextureRect().width)
+    );
+    if (!scale_up) {
+        f = std::min(f, 1.0f);
+    }
+    image.setPosition(rect.left + f * image.getTextureRect().width / 2.0, rect.top + f * image.getTextureRect().height / 2.0);
     image.setScale(f, f);
     image.setRotation(angle);
     image.setColor(color);

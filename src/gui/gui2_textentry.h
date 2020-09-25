@@ -7,7 +7,7 @@ class GuiTextEntry : public GuiElement
 {
 public:
     typedef std::function<void(string text)> func_t;
-    
+
 protected:
     string text;
     float text_size;
@@ -20,6 +20,8 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onMouseDown(sf::Vector2f position) override;
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual void onFocusGained() override;
+    virtual void onFocusLost() override;
 
     string getText() const;
     GuiTextEntry* setText(string text);
