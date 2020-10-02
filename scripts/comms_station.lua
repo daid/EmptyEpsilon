@@ -23,10 +23,12 @@ function mainMenu()
         services = {
             supplydrop = "friend",
             reinforcements = "friend",
+            jumpsupplydrop = "friend",
         },
         service_cost = {
             supplydrop = 100,
             reinforcements = 150,
+            jumpsupplydrop = 125,
         },
         reputation_cost_multipliers = {
             friend = 1.0,
@@ -147,6 +149,33 @@ function handleUndockedState()
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                        else
+                            setCommsMessage("Not enough reputation!");
+                        end
+                        addCommsReply("Back", mainMenu)
+                    end)
+                end
+            end
+            addCommsReply("Back", mainMenu)
+        end)
+    end
+    if isAllowedTo(comms_target.comms_data.services.jumpsupplydrop) then
+        addCommsReply("Can you send a supply drop via jump ship? ("..getServiceCost("jumpsupplydrop").."rep)", function()
+            if player:getWaypointCount() < 1 then
+                setCommsMessage("You need to set a waypoint before you can request backup.");
+            else
+                setCommsMessage("To which waypoint should we deliver your supplies?");
+                for n=1,player:getWaypointCount() do
+                    addCommsReply("WP" .. n, function()
+                        if player:takeReputationPoints(getServiceCost("jumpsupplydrop")) then
+                            local position_x, position_y = comms_target:getPosition()
+                            local target_x, target_y = player:getWaypoint(n)
+                            local script = Script()
+                            script:setVariable("jump_freighter", "Yes")
+                            script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+                            script:setVariable("target_x", target_x):setVariable("target_y", target_y)
+                            script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+                            setCommsMessage("We have dispatched a jump drive equipped supply ship toward WP" .. n);
                         else
                             setCommsMessage("Not enough reputation!");
                         end
