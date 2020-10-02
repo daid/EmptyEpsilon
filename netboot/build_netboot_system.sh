@@ -3,13 +3,16 @@ set -e
 set -u
 
 ### Parameters for the installation.
-export TARGET_NFS_DIR=/srv/nfsroot/
-export TARGET_TFTP_DIR=/srv/tftp/
-export MIRROR=http://ftp.debian.org/debian/
-export ETH=eth0
+export TARGET_NFS_DIR="/srv/nfsroot/"
+export TARGET_TFTP_DIR="/srv/tftp/"
+export MIRROR="http://ftp.debian.org/debian/"
+export ETH="enp0s3"
 
-# Install packages that we need on the host system to install our PXE environment, which includes dnsmasq as a dhcp-server and tftp-server and nfs for the network files system.
-apt-get -y install debootstrap zip coreutils util-linux e2fsprogs dnsmasq nfs-common nfs-kernel-server
+# Install packages that we need on the host system to install our PXE
+#   environment, which includes dnsmasq as a dhcp-server and tftp-server and
+#   nfs for the network files system.
+apt-get -y install debootstrap zip coreutils util-linux e2fsprogs dnsmasq \
+    nfs-common nfs-kernel-server
 
 mkdir -p ${TARGET_NFS_DIR}
 mkdir -p ${TARGET_TFTP_DIR}
@@ -25,12 +28,11 @@ deb-src ${MIRROR} stable main contrib non-free
 deb http://security.debian.org/ stable/updates main contrib non-free
 deb-src http://security.debian.org/ stable/updates main contrib non-free
 
-deb http://ftp.debian.org/ stable-updates main contrib non-free
-deb-src http://ftp.debian.org/ stable-updates main contrib non-free
 EOT
 
-# Setup the PXE network interfaces configuration. This is the configuration the clients will use to bring up their network.
-# Assumes that they have a single LAN card.
+# Setup the PXE network interfaces configuration. This is the configuration the
+#   clients will use to bring up their network. Assumes that they have a single
+#   LAN card.
 cat > ${TARGET_NFS_DIR}/etc/network/interfaces <<-EOT
 auto lo
 iface lo inet loopback
@@ -46,15 +48,18 @@ mount --bind /dev ${TARGET_NFS_DIR}/dev
 mount -t tmpfs none ${TARGET_NFS_DIR}/tmp
 
 cp /etc/resolv.conf ${TARGET_NFS_DIR}/etc/resolv.conf
-# Setup a hostname on the NFS root (This might confuse some applications, as the hostname is random on each read)
+# Setup a hostname on the NFS root (This might confuse some applications, as
+#   the hostname is random on each read)
 echo "pxeclient" > ${TARGET_NFS_DIR}/etc/hostname
 echo "127.0.0.1 pxeclient" >> ${TARGET_NFS_DIR}/etc/hosts
-# Setup /tmp as tmpfs on the netboot system, so we have a place to write things to.
+# Setup /tmp as tmpfs on the netboot system, so we have a place to write
+#   things to.
 cat > ${TARGET_NFS_DIR}/etc/fstab <<-EOT
 tmpfs /tmp  tmpfs  nodev,nosuid 0  0
 EOT
 
-# Get syslinux/pxelinux, which contains a lot of files, but we need some of these to get PXE booting to work.
+# Get syslinux/pxelinux, which contains a lot of files, but we need some of
+#   these to get PXE booting to work.
 sudo apt-get -y install pxelinux syslinux-efi
 mkdir -p ${TARGET_TFTP_DIR}/bios
 mkdir -p ${TARGET_TFTP_DIR}/efi32
@@ -92,7 +97,8 @@ chroot ${TARGET_NFS_DIR} apt-get -y install linux-image-686-pae firmware-linux-n
 cp ${TARGET_NFS_DIR}/boot/vmlinuz* ${TARGET_TFTP_DIR}/vmlinuz.img
 cp ${TARGET_NFS_DIR}/boot/initrd.img* ${TARGET_TFTP_DIR}/initrd.img
 
-# Setup the export to the /etc/exports file, this will server our root trough NFS after rebooting the system later.
+# Setup the export to the /etc/exports file, this will server our root trough
+#   NFS after rebooting the system later.
 cat > /etc/exports <<-EOT
 ${TARGET_NFS_DIR} *(ro,sync,no_root_squash,insecure)
 EOT
@@ -110,7 +116,8 @@ iface ${ETH} inet static
     gateway 192.168.55.1
 EOT
 
-# Setup dnsmasq configuration to serve a PXE boot envirnoment, tftp-server, and to serve as dhcp server (as PXE is handled with DHCP and TFTP)
+# Setup dnsmasq configuration to serve a PXE boot envirnoment, tftp-server, and
+#   to serve as dhcp server (as PXE is handled with DHCP and TFTP)
 cat > /etc/dnsmasq.conf <<-EOT
 interface=${ETH}
 dhcp-range=192.168.55.10,192.168.55.254
@@ -131,21 +138,24 @@ chroot ${TARGET_NFS_DIR} systemctl disable rsyslog
 
 # Install tools in NFS root required to build EE.
 chroot ${TARGET_NFS_DIR} apt-get update
-chroot ${TARGET_NFS_DIR} apt-get -y install git build-essential libx11-dev cmake libxrandr-dev mesa-common-dev libglu1-mesa-dev libudev-dev libglew-dev libjpeg-dev libfreetype6-dev libopenal-dev libsndfile1-dev libxcb1-dev libxcb-image0-dev
+chroot ${TARGET_NFS_DIR} apt-get -y install git build-essential libx11-dev \
+    cmake libxrandr-dev mesa-common-dev libglu1-mesa-dev libudev-dev \
+    libglew-dev libjpeg-dev libfreetype6-dev libopenal-dev libsndfile1-dev \
+    libxcb1-dev libxcb-image0-dev
 # Install basic X setup in NFS root to allow us to run EE later on.
-chroot ${TARGET_NFS_DIR} apt-get -y install xserver-xorg-core xserver-xorg-input-all xserver-xorg-video-all xinit alsa-base alsa-utils
+chroot ${TARGET_NFS_DIR} apt-get -y install xserver-xorg-core \
+    xserver-xorg-input-all xserver-xorg-video-all xinit alsa-utils
 
 # Download&install SFML,EE,SP (This takes a while)
 chroot ${TARGET_NFS_DIR} git clone https://github.com/daid/EmptyEpsilon.git /root/EmptyEpsilon
 chroot ${TARGET_NFS_DIR} git clone https://github.com/daid/SeriousProton.git /root/SeriousProton
-wget http://www.sfml-dev.org/files/SFML-2.3.2-sources.zip -O ${TARGET_NFS_DIR}/root/SFML-2.3.2-sources.zip
-unzip ${TARGET_NFS_DIR}/root/SFML-2.3.2-sources.zip -d ${TARGET_NFS_DIR}/root/
-chroot ${TARGET_NFS_DIR} sh -c 'cd /root/SFML-2.3.2 && cmake . && make -j 3 && make install && ldconfig'
+chroot ${TARGET_NFS_DIR} apt-get -y install libsfml-*
 mkdir -p ${TARGET_NFS_DIR}/root/EmptyEpsilon/_build
 chroot ${TARGET_NFS_DIR} sh -c 'cd /root/EmptyEpsilon/_build && cmake .. -DSERIOUS_PROTON_DIR=$HOME/SeriousProton/ && make -j 3'
 # Create a symlink for the final executable.
 chroot ${TARGET_NFS_DIR} ln -s _build/EmptyEpsilon /root/EmptyEpsilon/EmptyEpsilon
-# Create a symlink to store the options.ini file in /tmp/, this so the client can load a custom file.
+# Create a symlink to store the options.ini file in /tmp/, this so the client
+#   can load a custom file.
 chroot ${TARGET_NFS_DIR} ln -s /tmp/options.ini /root/EmptyEpsilon/options.ini
 
 cat > ${TARGET_NFS_DIR}/root/setup_option_file.sh <<-EOT
@@ -158,7 +168,8 @@ else
 fi
 EOT
 chmod +x ${TARGET_NFS_DIR}/root/setup_option_file.sh
-# Create a link to our client configuration tool, which helps in setting up option files per client.
+# Create a link to our client configuration tool, which helps in setting up
+#   option files per client.
 ln -s ${TARGET_NFS_DIR}/root/EmptyEpsilon/netboot/config_manager.py ~/config_manager.py
 
 # Create an install a systemd unit that runs EE.
@@ -195,7 +206,9 @@ Section "ServerLayout"
 EndSection
 EOT
 
-# Instead of running a login shell on tty1, run a normal shell so we do not have to login with a username/password are just root. Who cares, we are on a read only system.
+# Instead of running a login shell on tty1, run a normal shell so we do not
+#   have to login with a username/password are just root. Who cares, we are on
+#   a read only system.
 cat > ${TARGET_NFS_DIR}/etc/systemd/system/shell_on_tty.service <<-EOT
 [Unit]
 Description=Shell on TTY1
@@ -216,8 +229,9 @@ WantedBy=graphical.target
 EOT
 chroot ${TARGET_NFS_DIR} systemctl enable shell_on_tty.service
 
-# Install the ssh server on the netboot systems, so we can remotely access them, setup a private key on the server and put the public on as authorized key in the netboot system.
-# Also install avahi for easier server discovery.
+# Install the ssh server on the netboot systems, so we can remotely access
+#   them, setup a private key on the server and put the public on as authorized
+#   key in the netboot system. Also install avahi for easier server discovery.
 chroot ${TARGET_NFS_DIR} apt-get install -y openssh-server avahi-daemon avahi-utils libnss-mdns
 echo "PermitRootLogin yes" >> ${TARGET_NFS_DIR}/etc/ssh/sshd_config
 if [[ ! -e $HOME/.ssh/id_rsa ]]; then
@@ -237,7 +251,8 @@ cat > ${TARGET_NFS_DIR}/etc/avahi/services/ee.service <<-EOT
 </service-group>
 EOT
 
-# Install distcc, and setup distcc per default on all our netbooted clients. Meaning we can speed up compiling of EE the more hosts we have.
+# Install distcc, and setup distcc per default on all our netbooted clients.
+#   Meaning we can speed up compiling of EE the more hosts we have.
 chroot ${TARGET_NFS_DIR} apt-get -y install distcc
 # Setup the distcc configuration for the clients.
 sed -ie 's/STARTDISTCC="false"/STARTDISTCC="true"/' ${TARGET_NFS_DIR}/etc/default/distcc
@@ -258,7 +273,8 @@ EOT
 
 cat > /root/dhcp_client.sh <<-EOT
 #!/bin/bash
-## Script to stop the dhcp server, and use the network port as normal client port. So we can access other networks.
+## Script to stop the dhcp server, and use the network port as normal client
+##   port. So we can access other networks.
 systemctl stop dnsmasq
 ifdown -a
 ifup -a -i /etc/network/interfaces.dhcp_client
@@ -267,7 +283,9 @@ chmod +x /root/dhcp_client.sh
 
 cat > /root/dhcp_server.sh <<-EOT
 #!/bin/bash
-## Script to start the dhcp server, and use the network port to host the network boot environment. (useful after switching to client with dhcp_client.sh)
+## Script to start the dhcp server, and use the network port to host the
+##   network boot environment. (useful after switching to client with
+##   dhcp_client.sh)
 systemctl stop dnsmasq
 ifdown -a
 ifup -a
