@@ -268,6 +268,8 @@ void ServerCreationScreen::startScenario()
     // Set these settings to use as future defaults.
     PreferencesManager::set("server_config_warp_jump_drive_setting", string(int(gameGlobalInfo->player_warp_jump_drive_setting)));
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
+    PreferencesManager::set("server_config_hacking_difficulty", string(int(gameGlobalInfo->hacking_difficulty)));
+    PreferencesManager::set("server_config_hacking_games", string(int(gameGlobalInfo->hacking_games)));
     PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));
