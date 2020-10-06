@@ -21,6 +21,7 @@ REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
 {
+    has_weight = false;
     setRadarSignatureInfo(0.0, 0.3, 0.0);
     setCollisionRadius(1.0);
     lifetime = 1.0;

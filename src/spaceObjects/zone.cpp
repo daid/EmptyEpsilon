@@ -23,6 +23,7 @@ REGISTER_MULTIPLAYER_CLASS(Zone, "Zone");
 Zone::Zone()
 : SpaceObject(1, "Zone")
 {
+    has_weight = false;
     color = sf::Color(255, 255, 255, 0);
 
     registerMemberReplication(&outline);
