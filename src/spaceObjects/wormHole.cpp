@@ -122,11 +122,14 @@ void WormHole::collide(Collisionable* target, float collision_force)
     if (update_delta == 0.0)
         return;
 
+    P<SpaceObject> obj = P<Collisionable>(target);
+    if (!obj) return;
+    if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
+
     sf::Vector2f diff = getPosition() - target->getPosition();
     float distance = sf::length(diff);
     float force = (getRadius() * getRadius() * FORCE_MULTIPLIER) / (distance * distance);
 
-    P<SpaceObject> obj = P<Collisionable>(target);
     P<SpaceShip> spaceship = P<Collisionable>(target);
 
     // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
