@@ -439,3 +439,11 @@ static int allowNewPlayerShips(lua_State* L)
 /// Set if the server is allowed to create new player ships from the ship creation screen.
 /// allowNewPlayerShip(false) -- disallow new player ships to be created
 REGISTER_SCRIPT_FUNCTION(allowNewPlayerShips);
+
+static int getEEVersion(lua_State* L)
+{
+    lua_pushinteger(L, VERSION_NUMBER);
+    return 1;
+}
+/// Get a string with the current version number, like "20191231"
+REGISTER_SCRIPT_FUNCTION(getEEVersion);
