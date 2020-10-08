@@ -23,10 +23,12 @@ function mainMenu()
         services = {
             supplydrop = "friend",
             reinforcements = "friend",
+            activatedefensefleet = "neutral",
         },
         service_cost = {
             supplydrop = 100,
             reinforcements = 150,
+            activatedefensefleet = 20,
         },
         reputation_cost_multipliers = {
             friend = 1.0,
@@ -89,6 +91,37 @@ function handleDockedState()
         addCommsReply("Please re-stock our EMP missiles. ("..getWeaponCost("EMP").."rep each)", function()
             handleWeaponRestock("EMP")
         end)
+    end
+    if comms_target.comms_data.idle_defense_fleet ~= nil then
+    	local defense_fleet_count = 0
+    	for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
+    		defense_fleet_count = defense_fleet_count + 1
+    	end
+    	if defense_fleet_count > 0 then
+    		addCommsReply("Activate station defense fleet (" .. getServiceCost("activatedefensefleet") .. " rep)",function()
+    			if player:takeReputationPoints(getServiceCost("activatedefensefleet")) then
+    				local out = string.format("%s defense fleet\n",comms_target:getCallSign())
+    				for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
+    					local script = Script()
+						local position_x, position_y = comms_target:getPosition()
+						local station_name = comms_target:getCallSign()
+						script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+						script:setVariable("station_name",station_name)
+    					script:setVariable("name",name)
+    					script:setVariable("template",template)
+    					script:setVariable("faction_id",comms_target:getFactionId())
+    					script:run("defend_station.lua")
+    					out = out .. " " .. name
+    					comms_target.comms_data.idle_defense_fleet[name] = nil
+    				end
+    				out = out .. "\nactivated"
+    				setCommsMessage(out)
+    			else
+    				setCommsMessage("Insufficient reputation")
+    			end
+				addCommsReply("Back", mainMenu)
+    		end)
+		end
     end
 end
 
@@ -177,6 +210,38 @@ function handleUndockedState()
             end
             addCommsReply("Back", mainMenu)
         end)
+    end
+    if isAllowedTo(comms_target.comms_data.services.activatedefensefleet) and 
+    	comms_target.comms_data.idle_defense_fleet ~= nil then
+    	local defense_fleet_count = 0
+    	for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
+    		defense_fleet_count = defense_fleet_count + 1
+    	end
+    	if defense_fleet_count > 0 then
+    		addCommsReply("Activate station defense fleet (" .. getServiceCost("activatedefensefleet") .. " rep)",function()
+    			if player:takeReputationPoints(getServiceCost("activatedefensefleet")) then
+    				local out = string.format("%s defense fleet\n",comms_target:getCallSign())
+    				for name, template in pairs(comms_target.comms_data.idle_defense_fleet) do
+    					local script = Script()
+						local position_x, position_y = comms_target:getPosition()
+						local station_name = comms_target:getCallSign()
+						script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+						script:setVariable("station_name",station_name)
+    					script:setVariable("name",name)
+    					script:setVariable("template",template)
+    					script:setVariable("faction_id",comms_target:getFactionId())
+    					script:run("defend_station.lua")
+    					out = out .. " " .. name
+    					comms_target.comms_data.idle_defense_fleet[name] = nil
+    				end
+    				out = out .. "\nactivated"
+    				setCommsMessage(out)
+    			else
+    				setCommsMessage("Insufficient reputation")
+    			end
+				addCommsReply("Back", mainMenu)
+    		end)
+		end
     end
 end
 
