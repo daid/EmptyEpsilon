@@ -422,6 +422,99 @@ static int playSoundFile(lua_State* L)
 /// Note that the sound is only played on the server. Not on any of the clients.
 REGISTER_SCRIPT_FUNCTION(playSoundFile);
 
+template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity)
+{
+    switch(complexity)
+    {
+    case SC_None:
+        lua_pushstring(L, "none");
+        return 1;
+    case SC_Simple:
+        lua_pushstring(L, "simple");
+        return 1;
+    case SC_Normal:
+        lua_pushstring(L, "normal");
+        return 1;
+    case SC_Advanced:
+        lua_pushstring(L, "advanced");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int getScanningComplexity(lua_State* L)
+{
+    return convert<EScanningComplexity>::returnType(L, gameGlobalInfo->scanning_complexity);
+}
+/// Get the scanning complexity setting (returns an EScanningComplexity representation)
+REGISTER_SCRIPT_FUNCTION(getScanningComplexity);
+
+static int getHackingDifficulty(lua_State* L)
+{
+    lua_pushinteger(L, gameGlobalInfo->hacking_difficulty);
+    return 1;
+}
+/// Get the hacking difficulty setting (returns an integer between 0 and 3)
+REGISTER_SCRIPT_FUNCTION(getHackingDifficulty);
+
+template<> int convert<EHackingGames>::returnType(lua_State* L, EHackingGames game)
+{
+    switch(game)
+    {
+    case HG_Mine:
+        lua_pushstring(L, "mines");
+        return 1;
+    case HG_Lights:
+        lua_pushstring(L, "lights");
+        return 1;
+    case HG_All:
+        lua_pushstring(L, "all");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+static int getHackingGames(lua_State* L)
+{
+    return convert<EHackingGames>::returnType(L, gameGlobalInfo->hacking_games);
+}
+/// Get the hacking games setting (returns an EHackingGames representation)
+REGISTER_SCRIPT_FUNCTION(getHackingGames);
+
+static int areBeamShieldFrequenciesUsed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->use_beam_shield_frequencies);
+    return 1;
+}
+/// returns if the "Beam/Shield Frequencies" setting is enabled
+REGISTER_SCRIPT_FUNCTION(areBeamShieldFrequenciesUsed);
+
+static int isPerSystemDamageUsed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->use_system_damage);
+    return 1;
+}
+/// returns if the "Per-System Damage" setting is enabled
+REGISTER_SCRIPT_FUNCTION(isPerSystemDamageUsed);
+
+static int isTacticalRadarAllowed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->allow_main_screen_tactical_radar);
+    return 1;
+}
+/// returns if the "Tactical Radar" setting is enabled
+REGISTER_SCRIPT_FUNCTION(isTacticalRadarAllowed);
+
+static int isLongRangeRadarAllowed(lua_State* L)
+{
+    lua_pushboolean(L, gameGlobalInfo->allow_main_screen_long_range_radar);
+    return 1;
+}
+/// returns if the "Long Range Radar" setting is enabled
+REGISTER_SCRIPT_FUNCTION(isLongRangeRadarAllowed);
+
 static int onNewPlayerShip(lua_State* L)
 {
     int idx = 1;

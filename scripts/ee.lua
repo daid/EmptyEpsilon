@@ -168,3 +168,39 @@ ALERT_LEVELS = {
   ALERT_YELLOW,
   ALERT_RED
 }
+
+--- Scanning Complexity.
+--
+-- String constants for scanning complexity (type `EScanningComplexity` in `script_reference.html`).
+--
+-- See `gameGlobalInfo.h`.
+
+SC_NONE = "none"
+SC_SIMPLE = "simple"
+SC_NORMAL = "normal"
+SC_ADVANCED = "advanced"
+
+--- Array of the scan complexities.
+SCANNING_COMPLEXITIES = {
+  SC_NONE,
+  SC_SIMPLE,
+  SC_NORMAL,
+  SC_ADVANCED
+}
+
+--- Hacking Games.
+--
+-- String constants for hacking games (type `EHackingGames` in `script_reference.html`).
+--
+-- See `gameGlobalInfo.h`.
+
+HG_Mine = "mines"
+HG_Lights = "lights"
+HG_All = "all"
+
+--- Array of the scan complexities.
+HACKING_GAMES = {
+  HG_Mine,
+  HG_Lights,
+  HG_All,
+}
