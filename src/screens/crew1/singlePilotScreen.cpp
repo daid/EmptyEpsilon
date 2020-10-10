@@ -68,14 +68,16 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(-20, -140, ABottomRight)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
-    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(-20, -100, ABottomRight)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
-    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(-20, -60, ABottomRight)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
-    shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(240, 40);
+    GuiAutoLayout* stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    stats->setPosition(-20, -20, ABottomRight)->setSize(240, 160);
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
+    heading_display = new GuiKeyValueDisplay(stats, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
+    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setSize(240, 40);
+    velocity_display = new GuiKeyValueDisplay(stats, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setSize(240, 40);
+    shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
+    shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
 
     // Unlocked missile aim dial and lock controls.
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
@@ -120,7 +122,18 @@ void SinglePilotScreen::onDraw(sf::RenderTarget& window)
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
-        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
+        string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
+        if (my_spaceship->hasSystem(SYS_RearShield))
+        {
+            shields_value += " " + string(my_spaceship->getShieldPercentage(1)) + "%";
+        }
+        shields_display->setValue(shields_value);
+        if (my_spaceship->hasSystem(SYS_FrontShield) || my_spaceship->hasSystem(SYS_RearShield))
+        {
+            shields_display->show();
+        } else {
+            shields_display->hide();
+        }
 
         missile_aim->setVisible(tube_controls->getManualAim());
 
