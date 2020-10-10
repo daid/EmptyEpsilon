@@ -7,6 +7,7 @@ class ScanProbe : public SpaceObject, public Updatable
 {
 private:
     constexpr static float probe_speed = 1000.0f;
+    // remaining lifetime in seconds
     float lifetime;
     sf::Vector2f target_position;
 public:

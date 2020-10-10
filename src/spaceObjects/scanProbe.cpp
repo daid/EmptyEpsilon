@@ -8,13 +8,13 @@
 /// A scan probe.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
 {
-    // Callback when the probe's lifetime expires.
-    // Returns the probe.
-    // Example: probe:onExpiration(probeExpired)
+    /// Callback when the probe's lifetime expires.
+    /// Returns the probe.
+    /// Example: probe:onExpiration(probeExpired)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onExpiration);
-    // Callback when the probe is destroyed by damage.
-    // Returns the probe and instigator.
-    // Example: probe:onDestruction(probeDestroyed)
+    /// Callback when the probe is destroyed by damage.
+    /// Returns the probe and instigator.
+    /// Example: probe:onDestruction(probeDestroyed)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onDestruction);
 }
 
