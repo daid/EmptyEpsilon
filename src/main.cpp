@@ -27,9 +27,18 @@
 #include "networkRecorder.h"
 #include "tutorialGame.h"
 
+#include <stdio.h>
+#include <iostream>
 #include "hardware/hardwareController.h"
 #ifdef __WIN32__
 #include "discord.h"
+#include <direct.h>
+#define GetCurrentDir _getcwd
+#define DIR_SEPARATOR "\\"
+#else
+#include <unistd.h>
+#define GetCurrentDir getcwd
+#define DIR_SEPARATOR "/"
 #endif
 
 #ifdef __APPLE__
@@ -154,10 +163,17 @@ int main(int argc, char** argv)
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
 
-    new DirectoryResourceProvider("resources/");
-    new DirectoryResourceProvider("scripts/");
-    new DirectoryResourceProvider("packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory("packs");
+#ifdef RESOURCE_BASE_DIR
+    // prevent default resources from getting a higher prio than files from the home directory
+    if(GetCurrentWorkingDir() + DIR_SEPARATOR != RESOURCE_BASE_DIR) {
+#endif
+        new DirectoryResourceProvider("resources/");
+        new DirectoryResourceProvider("scripts/");
+        new DirectoryResourceProvider("packs/SolCommand/");
+        PackResourceProvider::addPackResourcesForDirectory("packs");
+#ifdef RESOURCE_BASE_DIR
+    }
+#endif
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
@@ -404,4 +420,11 @@ void returnToShipSelection()
     {
         new ShipSelectionScreen();
     }
+}
+
+std::string GetCurrentWorkingDir(void) {
+  char buff[FILENAME_MAX];
+  GetCurrentDir(buff, FILENAME_MAX);
+  std::string current_working_dir(buff);
+  return current_working_dir;
 }
