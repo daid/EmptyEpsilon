@@ -19,6 +19,9 @@ public:
     ScanProbe();
     virtual ~ScanProbe();
 
+    void setLifetime(float lifetime);
+    float getLifetime();
+
     virtual void update(float delta) override;
     virtual bool canBeTargetedBy(P<SpaceObject> other) override;
     virtual void takeDamage(float damage_amount, DamageInfo info) override;
