@@ -246,6 +246,17 @@ string getSectorName(sf::Vector2f position)
     return y + x;
 }
 
+int getSectorName(lua_State* L)
+{
+    float x = luaL_checknumber(L, 1);
+    float y = luaL_checknumber(L, 2);
+    lua_pushstring(L, getSectorName(sf::Vector2f(x, y)).c_str());
+    return 1;
+}
+/// getSectorName(x, y)
+/// Return the sector name for the point with coordinates (x, y). Compare SpaceObject:getSectorName().
+REGISTER_SCRIPT_FUNCTION(getSectorName);
+
 static int victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
