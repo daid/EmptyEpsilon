@@ -65,6 +65,13 @@ void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     window.draw(object_sprite);
 }
 
+std::unordered_map<string, string> Asteroid::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceObject::getGMInfo();
+    ret["typeName"] = "Asteroid";
+    return ret;
+}
+
 void Asteroid::collide(Collisionable* target, float force)
 {
     if (!isServer())
@@ -129,6 +136,13 @@ void VisualAsteroid::draw3D()
     Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
     m->render();
 #endif//FEATURE_3D_RENDERING
+}
+
+std::unordered_map<string, string> VisualAsteroid::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceObject::getGMInfo();
+    ret["typeName"] = "VisualAsteroid";
+    return ret;
 }
 
 void VisualAsteroid::setSize(float size)

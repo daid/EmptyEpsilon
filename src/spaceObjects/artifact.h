@@ -20,6 +20,8 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
+    virtual std::unordered_map<string, string> getGMInfo() override;
+
     virtual void collide(Collisionable* target, float force) override;
 
     void setModel(string name);

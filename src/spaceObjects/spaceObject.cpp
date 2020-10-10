@@ -304,6 +304,24 @@ void SpaceObject::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position,
 {
 }
 
+std::unordered_map<string, string> SpaceObject::getGMInfo()
+{
+    std::unordered_map<string, string> ret = std::unordered_map<string, string>();
+
+    ret["Scanning Depth * Compl."] = string(scanning_depth_value) + " * " + string(scanning_complexity_value);
+
+    if (object_description.not_scanned != "")
+       ret["Descr. 0 (NotSc)"] = object_description.not_scanned;
+    if (object_description.friend_of_foe_identified != "")
+       ret["Descr. 1 (FrFoe)"] = object_description.friend_of_foe_identified;
+    if (object_description.simple_scan != "")
+       ret["Descr. 2 (Simple)"] = object_description.simple_scan;
+    if (object_description.full_scan != "")
+       ret["Descr. 3 (Full)"] = object_description.full_scan;
+
+    return ret;
+}
+
 void SpaceObject::destroy()
 {
     on_destroyed.call(P<SpaceObject>(this));

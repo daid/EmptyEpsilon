@@ -45,6 +45,13 @@ void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     window.draw(object_sprite);
 }
 
+std::unordered_map<string, string> SupplyDrop::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceObject::getGMInfo();
+    ret["Energy"] = string(energy);
+    return ret;
+}
+
 void SupplyDrop::collide(Collisionable* target, float force)
 {
     P<SpaceShip> ship = P<Collisionable>(target);

@@ -201,7 +201,7 @@ public:
     virtual std::vector<std::pair<string, float> > getHackingTargets();
     virtual void hackFinished(P<SpaceObject> source, string target);
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
-    virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
+    virtual std::unordered_map<string, string> getGMInfo();
     virtual string getExportLine() { return ""; }
 
     static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);

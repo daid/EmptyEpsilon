@@ -21,6 +21,8 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
+    virtual std::unordered_map<string, string> getGMInfo() override;
+
     virtual bool canBeTargetedBy(P<SpaceObject> other)  override { return true; }
     virtual void takeDamage(float damage_amount, DamageInfo info) override;
 
