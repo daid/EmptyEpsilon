@@ -13,9 +13,14 @@
 /// A zone area
 REGISTER_SCRIPT_SUBCLASS(Zone, SpaceObject)
 {
+    /// Set corners of n-gon to x_1, y_1, x_2, y_2, ..., x_n, y_n.
+    /// Recall that x goes right and y goes down.
+    /// Example: zone = Zone():setPoints(2000, 0, 0, 3000, -2000, 0)
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setPoints);
+    /// Example: zone:setColor(255, 140, 0)
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setColor);
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setLabel);
+    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, getLabel);
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, isInside);
 }
 
@@ -106,6 +111,11 @@ void Zone::setPoints(std::vector<sf::Vector2f> points)
 void Zone::setLabel(string label)
 {
     this->label = label;
+}
+
+string Zone::getLabel()
+{
+    return this->label;
 }
 
 bool Zone::isInside(P<SpaceObject> obj)
