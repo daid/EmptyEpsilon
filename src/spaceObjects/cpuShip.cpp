@@ -38,6 +38,8 @@ REGISTER_SCRIPT_SUBCLASS(CpuShip, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderAttack);
     /// Order this ship to dock at a specific object (station or otherwise)
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderDock);
+    /// Order this ship to restock missiles at a specific station or finds a close station
+    REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, orderRetreat);
     /// Get the order this ship is executing
     REGISTER_SCRIPT_CLASS_FUNCTION(CpuShip, getOrder);
     /// Get the target location of the currently executed order
