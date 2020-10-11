@@ -644,8 +644,16 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (!obj->canHideInNebula())
                 window = &window_alpha;
             obj->drawOnRadar(*window, object_position_on_screen, scale, view_rotation, long_range);
+
             if (show_callsigns && obj->getCallSign() != "")
-                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+            {
+                P<SpaceShip> ship = P<SpaceObject>(obj);
+                if (!my_spaceship || !ship || ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+                {
+                    // only show callsign of scanned space ships
+                    drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+                }
+            }
         }
     }
     if (my_spaceship)

@@ -243,15 +243,15 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         P<SpaceStation> station = obj;
         P<ScanProbe> probe = obj;
 
-        info_callsign->setValue(obj->getCallSign());
-
         if (ship)
         {
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
+                info_callsign->setValue(obj->getCallSign());
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
             }
         }else{
+            info_callsign->setValue(obj->getCallSign());
             info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
         }
 
