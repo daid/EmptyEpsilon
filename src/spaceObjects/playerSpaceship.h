@@ -168,6 +168,9 @@ public:
     EAlertLevel alert_level;
 
     int32_t linked_science_probe_id = -1;
+    /// MultiplayerObjectID of object targeted by science, or -1 when no target is selected.
+    int32_t science_target_id;
+    int32_t relay_target_id;
 
     PlayerSpaceship();
     virtual ~PlayerSpaceship();
@@ -237,6 +240,10 @@ public:
 
     ESystem getBeamSystemTarget(){ return beam_system_target; }
     string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
+
+    P<SpaceObject> getScienceTarget();
+    P<SpaceObject> getRelayTarget();
+
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
@@ -245,6 +252,8 @@ public:
     void commandWarp(int8_t target);
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
+    void commandSetScienceTarget(P<SpaceObject> target);
+    void commandSetRelayTarget(P<SpaceObject> target);
     void commandSetScienceLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);

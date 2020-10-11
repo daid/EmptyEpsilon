@@ -72,6 +72,10 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTarget);
     /// Gets the name of the target system, instead of the ID
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getBeamSystemTargetName);
+    // Gets the SpaceObject currently selected by science
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getScienceTarget);
+    // Gets the SpaceObject currently selected by relay
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getRelayTarget);
 
     // Command functions
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
@@ -258,6 +262,8 @@ static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
+static const int16_t CMD_SET_SCIENCE_TARGET = 0x002B;
+static const int16_t CMD_SET_RELAY_TARGET = 0x002C;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -1194,6 +1200,20 @@ void PlayerSpaceship::closeComms()
     }
 }
 
+P<SpaceObject> PlayerSpaceship::getScienceTarget()
+{
+    if (game_server)
+        return game_server->getObjectById(science_target_id);
+    return game_client->getObjectById(science_target_id);
+}
+
+P<SpaceObject> PlayerSpaceship::getRelayTarget()
+{
+    if (game_server)
+        return game_server->getObjectById(relay_target_id);
+    return game_client->getObjectById(relay_target_id);
+}
+
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 {
     // Receive a command from a client. Code in this function is executed on
@@ -1651,6 +1671,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             }
         }
         break;
+    case CMD_SET_SCIENCE_TARGET:
+        {
+            packet >> science_target_id;
+        }
+        break;
+    case CMD_SET_RELAY_TARGET:
+        {
+            packet >> relay_target_id;
+        }
+        break;
     }
 }
 
@@ -1697,6 +1727,34 @@ void PlayerSpaceship::commandSetTarget(P<SpaceObject> target)
         packet << CMD_SET_TARGET << target->getMultiplayerId();
     else
         packet << CMD_SET_TARGET << int32_t(-1);
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetScienceTarget(P<SpaceObject> target)
+{
+    sf::Packet packet;
+    if (target)
+    {
+        packet << CMD_SET_SCIENCE_TARGET << target->getMultiplayerId();
+    }
+    else
+    {
+        packet << CMD_SET_SCIENCE_TARGET << int32_t(-1);
+    }
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetRelayTarget(P<SpaceObject> target)
+{
+    sf::Packet packet;
+    if (target)
+    {
+        packet << CMD_SET_RELAY_TARGET << target->getMultiplayerId();
+    }
+    else
+    {
+        packet << CMD_SET_RELAY_TARGET << int32_t(-1);
+    }
     sendClientCommand(packet);
 }
 

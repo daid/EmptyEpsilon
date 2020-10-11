@@ -46,6 +46,14 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             {
             case TargetSelection:
                 science->targets.setToClosestTo(position, 1000.0, TargetsContainer::Selectable);
+                if (my_spaceship && science->targets.get())
+                {
+                    my_spaceship->commandSetScienceTarget(science->targets.get());
+                    my_spaceship->commandSetRelayTarget(science->targets.get());
+                } else {
+                    my_spaceship->commandSetScienceTarget(nullptr);
+                    my_spaceship->commandSetRelayTarget(nullptr);
+                }
                 break;
             case WaypointPlacement:
                 if (my_spaceship)

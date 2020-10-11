@@ -51,6 +51,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
                 return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+            if (targets.get())
+            {
+                my_spaceship->commandSetScienceTarget(targets.get());
+            } else {
+                my_spaceship->commandSetScienceTarget(nullptr);
+            }
         }, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
@@ -66,6 +72,13 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
                 return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+
+            if (targets.get())
+            {
+                my_spaceship->commandSetScienceTarget(targets.get());
+            } else {
+                my_spaceship->commandSetScienceTarget(nullptr);
+            }
         }, nullptr, nullptr
     );
     new RawScannerDataRadarOverlay(probe_radar, "", 5000);
@@ -495,6 +508,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                     obj->canBeScannedBy(my_spaceship))
                 {
                     targets.set(obj);
+                    my_spaceship->commandSetScienceTarget(obj);
                     return;
                 }
             }
@@ -511,6 +525,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                     obj->canBeScannedBy(my_spaceship))
                 {
                     targets.set(obj);
+                    my_spaceship->commandSetScienceTarget(obj);
                     return;
                 }
             }

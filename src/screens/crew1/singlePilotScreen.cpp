@@ -49,7 +49,11 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         [this](sf::Vector2f position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
+            {
                 my_spaceship->commandSetTarget(targets.get());
+                my_spaceship->commandSetScienceTarget(targets.get());
+                my_spaceship->commandSetRelayTarget(targets.get());
+            }
             else if (my_spaceship)
                 my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
         },
@@ -185,6 +189,8 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
+                    my_spaceship->commandSetScienceTarget(targets.get());
+                    my_spaceship->commandSetRelayTarget(targets.get());
                     return;
                 }
             }
@@ -198,6 +204,8 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
+                    my_spaceship->commandSetRelayTarget(targets.get());
+                    my_spaceship->commandSetScienceTarget(targets.get());
                     return;
                 }
             }
@@ -218,6 +226,8 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
+                    my_spaceship->commandSetScienceTarget(targets.get());
+                    my_spaceship->commandSetRelayTarget(targets.get());
                     return;
                 }
             }
@@ -229,6 +239,8 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 {
                     targets.set(obj);
                     my_spaceship->commandSetTarget(targets.get());
+                    my_spaceship->commandSetScienceTarget(targets.get());
+                    my_spaceship->commandSetRelayTarget(targets.get());
                     return;
                 }
             }

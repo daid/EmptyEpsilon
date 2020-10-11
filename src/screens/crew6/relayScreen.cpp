@@ -51,6 +51,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             {
             case TargetSelection:
                 targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
+                if (my_spaceship && targets.get())
+                {
+                    my_spaceship->commandSetRelayTarget(targets.get());
+                } else if (my_spaceship) {
+                    my_spaceship->commandSetRelayTarget(nullptr);
+                }
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
