@@ -19,10 +19,6 @@ ShipAI::ShipAI(CpuShip* owner)
     update_target_delay = 0.0;
 }
 
-ShipAI::~ShipAI()
-{
-}
-
 bool ShipAI::canSwitchAI()
 {
     return true;
@@ -697,9 +693,9 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
     const float target_distance = sf::length(owner->getPosition() - target_position);
     const float search_distance = std::min(4500.0, target_distance + 500.0);
     const float target_angle = sf::vector2ToAngle(target_position - owner->getPosition());
-    const float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
     const float search_angle = 5.0;
 
+    // Verify if missle can be fired safely
     PVector<Collisionable> objectList = CollisionManager::queryArea(owner->getPosition() - sf::Vector2f(search_distance, search_distance), owner->getPosition() + sf::Vector2f(search_distance, search_distance));
     foreach(Collisionable, c, objectList)
     {
@@ -709,8 +705,8 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
             // Ship in research triangle
             const sf::Vector2f owner_to_obj = obj->getPosition() - owner->getPosition();
             const float heading_to_obj = sf::vector2ToAngle(owner_to_obj);
-            const float angle_from_fireline = fabs(sf::angleDifference(heading_to_obj, fire_angle));
-            if(angle_from_fireline < search_angle){
+            const float angle_from_heading_to_target = fabs(sf::angleDifference(heading_to_obj, target_angle));
+            if(angle_from_heading_to_target < search_angle){
               return std::numeric_limits<float>::infinity();
             }
         }
@@ -724,7 +720,6 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         float target_angle = sf::vector2ToAngle(target_position - owner->getPosition());
         float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
 
-        float distance = sf::length(owner->getPosition() - target_position);
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = sf::angleDifference(target_angle, fire_angle);
 
