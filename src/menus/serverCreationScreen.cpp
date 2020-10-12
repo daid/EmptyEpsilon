@@ -197,6 +197,8 @@ ServerCreationScreen::ServerCreationScreen()
     // Fetch and sort all Lua files starting with "scenario_".
     std::vector<string> scenario_filenames = findResources("scenario_*.lua");
     std::sort(scenario_filenames.begin(), scenario_filenames.end());
+    // remove duplicates
+    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
 
     // We select the same mission as we had previously selected
     // unless that one doesnt exist in which case we select the first by default
