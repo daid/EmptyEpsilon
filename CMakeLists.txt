@@ -247,6 +247,7 @@ set(SOURCES
 	src/ai/fighterAI.cpp
 	src/ai/ai.cpp
 	src/ai/aiFactory.cpp
+	src/ai/evasionAI.cpp
 	src/ai/missileVolleyAI.cpp
 	src/hardware/hardwareController.cpp
 	src/hardware/hardwareMappingEffects.cpp
