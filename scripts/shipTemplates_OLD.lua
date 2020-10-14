@@ -554,5 +554,6 @@ for type=1,5 do
         template:setShields(50, 50)
         template:setSpeed(60 - 5 * cnt, 6, 10)
         template:setRadarTrace("radar_transport.png")
+        template:setDefaultAI("evasion")
     end
 end

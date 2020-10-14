@@ -238,6 +238,7 @@ for cnt=1,5 do
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("radar_transport.png")
+    template:setDefaultAI("evasion")
     
     if cnt > 2 then
         variation = template:copy("Personnel Jump Freighter " .. cnt):setLocaleName(string.format(_("Personnel Jump Freighter %d"), cnt))
@@ -250,6 +251,7 @@ for cnt=1,5 do
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("radar_transport.png")
+    template:setDefaultAI("evasion")
     
     if cnt > 2 then
         variation = template:copy("Goods Jump Freighter " .. cnt):setLocaleName(string.format(_("Goods Jump Freighter %d"), cnt))
@@ -262,6 +264,7 @@ for cnt=1,5 do
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("radar_transport.png")
+    template:setDefaultAI("evasion")
     
     if cnt > 2 then
         variation = template:copy("Garbage Jump Freighter " .. cnt):setLocaleName(string.format(_("Garbage Jump Freighter %d"), cnt))
@@ -274,6 +277,7 @@ for cnt=1,5 do
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("radar_transport.png")
+    template:setDefaultAI("evasion")
     
     if cnt > 2 then
         variation = template:copy("Equipment Jump Freighter " .. cnt):setLocaleName(string.format(_("Equipment Jump Freighter %d"), cnt))
@@ -286,6 +290,7 @@ for cnt=1,5 do
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
     template:setRadarTrace("radar_transport.png")
+    template:setDefaultAI("evasion")
     
     if cnt > 2 then
         variation = template:copy("Fuel Jump Freighter " .. cnt):setLocaleName(string.format(_("Fuel Jump Freighter %d"), cnt))
@@ -303,6 +308,7 @@ template:setRadarTrace("radar_transport.png")
 template:setJumpDrive(true)
 template:setJumpDriveRange(5000, 100 * 50000) -- The jump carrier can jump a 100x longer distance then normal jump drives.
 template:setDockClasses("Starfighter", "Frigate", "Corvette")
+template:setDefaultAI("evasion")
 
 
 variation = template:copy("Benedict"):setLocaleName(_("Benedict")):setType("playership"):setClass(_("Corvette"), _("Freighter/Carrier"))

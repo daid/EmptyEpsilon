@@ -85,21 +85,6 @@ static int getDirectionIndex(float direction, float arc)
     return -1;
 }
 
-static float getMissileWeaponStrength(EMissileWeapons type)
-{
-    switch(type)
-    {
-    case MW_Nuke:
-        return 250;
-    case MW_EMP:
-        return 150;
-    case MW_HVLI:
-        return 20;
-    default:
-        return 35;
-    }
-}
-
 void ShipAI::updateWeaponState(float delta)
 {
     if (missile_fire_delay > 0.0)
