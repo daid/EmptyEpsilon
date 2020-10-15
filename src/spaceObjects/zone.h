@@ -16,6 +16,7 @@ public:
     void setColor(int r, int g, int b);
     void setPoints(std::vector<sf::Vector2f> points);
     void setLabel(string label);
+    string getLabel();
     bool isInside(P<SpaceObject> obj);
 
     //virtual string getExportLine() override { return "Zone():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
