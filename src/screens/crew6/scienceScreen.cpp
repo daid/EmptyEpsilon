@@ -214,6 +214,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     });
     view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
 
+    link_to_main = new GuiLinkScienceButton(this, "LINK_TO_MAIN", tr("button", "Link to Main Screen"), database_view);
+    link_to_main->setTextSize(28)->setPosition(240, -20, ABottomLeft)->setSize(200, 50);
+
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }

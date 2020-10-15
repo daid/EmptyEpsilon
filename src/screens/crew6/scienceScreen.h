@@ -5,6 +5,7 @@
 #include "gui/gui2_overlay.h"
 #include "spaceObjects/scanProbe.h"
 #include "playerInfo.h"
+#include "screenComponents/linkScienceButton.h"
 
 class GuiListbox;
 class GuiRadarView;
@@ -59,6 +60,7 @@ public:
     GuiToggleButton* probe_view_button;
     P<ScanProbe> observation_point;
     GuiListbox* view_mode_selection;
+    GuiLinkScienceButton* link_to_main;
 public:
     ScienceScreen(GuiContainer* owner, ECrewPosition crew_position=scienceOfficer);
 

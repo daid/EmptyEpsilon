@@ -59,6 +59,11 @@ bool DatabaseViewComponent::findAndDisplayEntry(string name)
     return false;
 }
 
+P<ScienceDatabase> DatabaseViewComponent::getSelectedEntry()
+{
+    return selected_entry;
+}
+
 void DatabaseViewComponent::fillListBox()
 {
     item_list->setOptions({});

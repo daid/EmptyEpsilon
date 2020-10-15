@@ -2,8 +2,8 @@
 #define DATABASE_VIEW_H
 
 #include "gui/gui2_element.h"
+#include "scienceDatabase.h"
 
-class ScienceDatabase;
 class GuiListbox;
 
 class DatabaseViewComponent : public GuiElement
@@ -12,6 +12,7 @@ public:
     DatabaseViewComponent(GuiContainer* owner);
 
     bool findAndDisplayEntry(string name);
+    P<ScienceDatabase> getSelectedEntry();
 
 private:
     P<ScienceDatabase> findEntryById(int32_t id);
