@@ -24,6 +24,12 @@ GuiListbox* GuiListbox::setButtonHeight(float height)
     return this;
 }
 
+GuiListbox* GuiListbox::scrollTo(int index)
+{
+    scroll->setValue(index);
+    return this;
+}
+
 void GuiListbox::onDraw(sf::RenderTarget& window)
 {
     if (last_rect != rect)
