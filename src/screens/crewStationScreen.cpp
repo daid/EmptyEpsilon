@@ -50,7 +50,7 @@ CrewStationScreen::CrewStationScreen()
             {
                 if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
                 {
-                    my_spaceship->commandCustomFunction(csf.name);
+                    my_spaceship->commandCustomFunction(csf.name, nullptr);
                     break;
                 }
             }

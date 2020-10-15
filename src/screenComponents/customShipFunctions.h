@@ -3,11 +3,13 @@
 
 #include "playerInfo.h"
 #include "gui/gui2_autolayout.h"
+#include "screenComponents/radarView.h"
 
 class GuiCustomShipFunctions : public GuiAutoLayout
 {
 public:
     GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id);
+    GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id, TargetsContainer* targets);
 
     virtual void onDraw(sf::RenderTarget& window) override;
 
@@ -19,6 +21,8 @@ private:
         string name;
         GuiElement* element;
     };
+
+    TargetsContainer* targets;
 
     ECrewPosition position;
     std::vector<Entry> entries;
