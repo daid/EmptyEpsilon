@@ -930,6 +930,12 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
         crew.update();
     }
 
+    if (ship_template->rooms.size() == 0 && amount != 0)
+    {
+        LOG(WARNING) << "Not adding repair crew to ship \"" << callsign << "\", because it has no rooms. Fix this by adding rooms to the ship template \"" << template_name << "\".";
+        return;
+    }
+
     // Add crews until we reach the provided amount.
     for(int create_amount = amount - crew.size(); create_amount > 0; create_amount--)
     {
