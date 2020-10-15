@@ -23,6 +23,8 @@ public:
     GuiListbox* setTextSize(float size);
     GuiListbox* setButtonHeight(float height);
 
+    GuiListbox* scrollTo(int index);
+
     virtual void onDraw(sf::RenderTarget& window);
     virtual bool onMouseDown(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
