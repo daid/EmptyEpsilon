@@ -1,5 +1,6 @@
 #include "customShipFunctions.h"
 #include "playerInfo.h"
+#include "radarView.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
@@ -7,6 +8,13 @@
 GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id)
 : GuiAutoLayout(owner, id, GuiAutoLayout::LayoutVerticalTopToBottom), position(position)
 {
+    this->targets = nullptr;
+}
+
+GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id, TargetsContainer* targets)
+: GuiCustomShipFunctions::GuiCustomShipFunctions(owner, position, id)
+{
+    this->targets = targets;
 }
 
 void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
@@ -80,10 +88,18 @@ void GuiCustomShipFunctions::createEntries()
             if (csf.type == PlayerSpaceship::CustomShipFunction::Type::Button)
             {
                 string name = e.name;
-                e.element = new GuiButton(this, "", csf.caption, [name]()
+
+                e.element = new GuiButton(this, "", csf.caption, [name, this]()
                 {
                     if (my_spaceship)
-                        my_spaceship->commandCustomFunction(name);
+                    {
+                        P<SpaceObject> target = nullptr;
+                        if (targets)
+                        {
+                            target = targets->get();
+                        }
+                        my_spaceship->commandCustomFunction(name, target);
+                    }
                 });
                 e.element->setSize(GuiElement::GuiSizeMax, 50);
             }
