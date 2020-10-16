@@ -9,7 +9,7 @@ class GuiListbox;
 class DatabaseViewComponent : public GuiElement
 {
 public:
-    DatabaseViewComponent(GuiContainer* owner);
+    DatabaseViewComponent(GuiContainer* owner, int navigation_height, bool show_navigation);
 
     bool findAndDisplayEntry(string name);
     bool findAndDisplayEntry(int32_t id);
@@ -26,7 +26,9 @@ private:
     GuiListbox* item_list;
     GuiElement* database_entry;
 
-    static constexpr int navigation_width = 400;
+    bool show_navigation;
+    int add_nav_margin_bottom;
+    int navigation_width = 400;
 };
 
 #endif//DATABASE_VIEW_H

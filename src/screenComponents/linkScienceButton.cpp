@@ -39,6 +39,7 @@ void GuiLinkScienceButton::onUpdate()
         return;
 
     P<ScienceDatabase> entry = database_view->getSelectedEntry();
-    setVisible(database_view->isVisible() && entry && entry->hasContent());
+    setVisible(database_view->isVisible());
+    setEnable(entry && entry->hasContent());
     setValue(entry && entry->getMultiplayerId() == my_spaceship->shared_science_database_id);
 }

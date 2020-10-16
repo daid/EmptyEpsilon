@@ -10,9 +10,11 @@
 
 #include "screenComponents/rotatingModelView.h"
 
-DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
+DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner, int add_nav_margin_bottom = 0, bool show_navigation = true)
 : GuiElement(owner, "DATABASE_VIEW")
 {
+    this->add_nav_margin_bottom = add_nav_margin_bottom;
+    this->show_navigation = show_navigation;
     database_entry = nullptr;
     selected_entry = nullptr;
 
@@ -23,7 +25,9 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         selected_entry = findEntryById(id);
         display();
     });
-    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 130)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    item_list->setPosition(0, 0, ATopLeft)->setMargins(20, 20, 20, 20 + add_nav_margin_bottom)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    if (!show_navigation)
+        item_list->hide();
     display();
 }
 
@@ -78,6 +82,9 @@ P<ScienceDatabase> DatabaseViewComponent::getSelectedEntry()
 
 void DatabaseViewComponent::fillListBox()
 {
+    if (!show_navigation)
+        return;
+
     item_list->setOptions({});
     item_list->setSelectionIndex(-1);
 
@@ -153,7 +160,12 @@ void DatabaseViewComponent::display()
     database_entry = new GuiElement(this, "DATABASE_ENTRY");
     database_entry->setPosition(navigation_width, 0, ATopLeft)->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    fillListBox();
+    if (show_navigation)
+    {
+        fillListBox();
+    } else {
+        database_entry->setPosition(0, 0, ATopLeft)->setMargins(navigation_width / 2 + 20, 20);
+    }
 
     if (!selected_entry)
         return;

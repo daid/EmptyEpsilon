@@ -35,7 +35,7 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
-    database_view = new DatabaseViewComponent(this);
+    database_view = new DatabaseViewComponent(this, 0, false);
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     database_no_entry_text = new GuiLabel(this, "DATABASE_NO_ENTRY_TEXT", tr("main_screen", "No database entry linked"), 48);
     database_no_entry_text->setPosition(0, -100, ACenter)->setSize(400, 200);
