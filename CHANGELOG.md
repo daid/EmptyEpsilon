@@ -3,8 +3,33 @@
 ## [...]
 
 ### Added
+
+- updates in the script reference documentation
+- more variations of the "Adder" ship line and new frigates
+- `getEEVersion()` returns the EE release version
+- mission settings can be read from scripts (like `areBeamShieldFrequenciesUsed()`, etc) #1038
+- german translation
+- `getSectorName()` that can be called without needing a SpaceObject
+- `Zone:getLabel()`
+- `ScanProbe:getLifetime()` and `ScanProbe:setLifeTime()`
+- `CpuShip:orderRetreat()`
+- new AI "evasion" for unarmed transports which tries to avoid enemies
+
 ### Changed
+
+- Missiles and nukes explode at the end of their lifetime
+- nukes and EMPs try to avoid areas
+- control code is no longer case sensitive
+- ships without beams will try to restock their missiles when they ran out
+- all transport ships use the new AI "evasion" by default
+
 ### Fixed
+
+- aim lock is now working with auto rotate
+- hull strength is rounded up before it is displayed to avoid ships with `0` health #1099
+- hacking difficulty and selected games are stored #1011
+- `BlackHole`s and `WormHole`s no longer affect `Zones`, `Beams` and `ElectricExplosions`
+- scenarios with the same file name as a default scenario don't show up twice #1010
 
 ## [2020-08-25]
 
