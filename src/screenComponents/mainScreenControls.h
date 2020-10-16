@@ -14,6 +14,7 @@ private:
     GuiButton* target_lock_button = nullptr;
     GuiButton* tactical_button = nullptr;
     GuiButton* long_range_button = nullptr;
+    GuiButton* database_button = nullptr;
     GuiButton* show_comms_button = nullptr;
     GuiButton* hide_comms_button = nullptr;
     bool onscreen_comms_active = false;

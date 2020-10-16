@@ -12,6 +12,7 @@ public:
     DatabaseViewComponent(GuiContainer* owner);
 
     bool findAndDisplayEntry(string name);
+    bool findAndDisplayEntry(int32_t id);
     P<ScienceDatabase> getSelectedEntry();
 
 private:

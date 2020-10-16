@@ -59,6 +59,18 @@ bool DatabaseViewComponent::findAndDisplayEntry(string name)
     return false;
 }
 
+bool DatabaseViewComponent::findAndDisplayEntry(int32_t id)
+{
+    P<ScienceDatabase> entry = findEntryById(id);
+    if (entry)
+    {
+        selected_entry = entry;
+        display();
+        return true;
+    }
+    return false;
+}
+
 P<ScienceDatabase> DatabaseViewComponent::getSelectedEntry()
 {
     return selected_entry;

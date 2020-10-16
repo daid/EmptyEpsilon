@@ -5,7 +5,9 @@
 #include "engine.h"
 #include "screenComponents/helpOverlay.h"
 #include "gui/gui2_canvas.h"
+#include "gui/gui2_label.h"
 #include "threatLevelEstimate.h"
+#include "screenComponents/databaseView.h"
 
 class GuiViewportMainScreen;
 class GuiRadarView;
@@ -22,6 +24,8 @@ private:
     string keyboard_general = "";
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
+    DatabaseViewComponent* database_view;
+    GuiLabel* database_no_entry_text;
     GuiCommsOverlay* onscreen_comms;
     std::unique_ptr<ImpulseSound> impulse_sound;
 public:
