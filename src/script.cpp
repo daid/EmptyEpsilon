@@ -4,7 +4,8 @@
 
 /// Object which can be used to create and run another script.
 /// Other scripts have their own lifetime, update and init functions.
-/// Scripts can destroy themselves, or be destroyed by the main script.
+/// Scripts can destroy themselves (destroyScript()), or be destroyed by the main script.
+/// Example: local script = Script():run("script.lua"); script:destroy();
 REGISTER_SCRIPT_CLASS(Script)
 {
     /// Run a script with a certain filename
