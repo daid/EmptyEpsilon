@@ -4,6 +4,54 @@
 
 ### Added
 
+- updates in the script reference documentation
+- more variations of the "Adder" ship line and new frigates
+- `getEEVersion()` returns the EE release version
+- mission settings can be read from scripts (like `areBeamShieldFrequenciesUsed()`, etc) #1038
+- german translation
+- `getSectorName()` that can be called without needing a SpaceObject
+- `Zone:getLabel()`
+- `ScanProbe:getLifetime()` and `ScanProbe:setLifeTime()`
+- `CpuShip:orderRetreat()`
+- new AI "evasion" for unarmed transports which tries to avoid enemies
+
+### Changed
+
+- Missiles and nukes explode at the end of their lifetime
+- nukes and EMPs try to avoid areas
+- control code is no longer case sensitive
+- ships without beams will try to restock their missiles when they ran out
+- all transport ships use the new AI "evasion" by default
+
+### Fixed
+
+- aim lock is now working with auto rotate
+- hull strength is rounded up before it is displayed to avoid ships with `0` health #1099
+- hacking difficulty and selected games are stored #1011
+- `BlackHole`s and `WormHole`s no longer affect `Zones`, `Beams` and `ElectricExplosions`
+- scenarios with the same file name as a default scenario don't show up twice #1010
+
+## [2020-08-25]
+
+### Added
+
+- `SpaceShip:hasSystem()`
+- `SpaceShip:getTubeLoadTime()` and `SpaceShip:setTubeLoadTime()
+
+### Fixed
+
+- fix a crash on restarting due to an invalid iterator in the database
+
+
+## [2020-08-07]
+
+### Added
+
+- Script function `commsSwitchToGM()` that allows to switch to a GM chat in comms
+- translations added to ship templates and station names
+- french translation
+- `ShipTemplate::getLocaleName()`
+- Script function `getScenarioTime()` allows to retrieve the game time
 - Science database can be filled and edited from within scenarios. Additional methods have been added to the Lua API
   - `destroy()` can be used to remove selective entries or the whole pre-filled database from within scenarios
   - `getScienceDatabases()` returns a table of all databases at the root level.
@@ -12,12 +60,53 @@
   - `queryScienceDatabase()` allows to easily query for deeply nested entries
 - Science database entries allow to display an image `ScienceDatabase:setImage()`
   - The image files have to be available on all clients in order to be displayed.
+- more descriptions in the script reference
+- allow to set a callback function when a new player ship is created on the ship selection screen `onNewPlayerShip`
+- `allowNewPlayerShips()` can be used in scenarios to disable ship creation from ship selection screen
+- tube size can be changed by GM
+- GM tweak menu has been updated and is now able to modify much more settings
+- GM can create VisualAsteroid, Planet and Artifact
+- GM can create Player ships
+- GM can limit the maximal health of a system
+- added script functions `SpaceShip:setTubeSize()` and `SpaceShip:getTubeSize()`
+- added the option to set hotkeys to reset system power to 100% or other discrete values
+- added `SpaceShip::getJumpDriveCharge()` and `SpaceShip::setJumpDriveCharge()`
+- added `SpaceShip:getAcceleration()` and `SpaceShip:setAcceleration()`
+- Scenario "Unwanted Visitors" added
+- added `SpaceShip:getDockedWith()`
+- added `SpaceShip:getSystemHackedLevel()` and `SpaceShip:setSystemHackedLevel()`
+- script function `onGMClick()` is capable of capturing GM click locations
+- new file `ee.lua` that has constants for the most enums
+- ships can repair and restock missiles on docked ships (`setRepairDocked()`, `setRestocksMissilesDocked()`)
+
 
 ### Changed
 
 - Science database entries are sorted alphabetically.
+- Minimum MacOS compatibility version has been set to `10.10`
+- scrollbars are hidden if all text fits on screen
+- layout of the science database was changed
+- `local` is used more in all lua scripts
+- the last selected scenario is pre-selected when exiting a scenario
+- assets from `HOME` directory are read before `RESOURCE_BASE_DIR`
+- missiles can not be fired during warp
+- radar rotation option is also used by operations and single pilot
 
 ### Fixed
+
+- _Ready_ button can no longer be clicked without having a ship selected
+- Translations with context are no longer ignored #879
+- calculate energy drain of the warp drive by its actual speed
+- it is no longer possible to warp instantly out of a backwards movement
+- entered IP addresses in the server browse menu are stripped of whitepaces
+- fixed misplacement of the red/yellow alert overlay on split screen #902
+- the `util_random_transports.lua` now selects all possible transports
+- planets generate valid lua code again when exporting
+- GM messages are deleted on mission resets
+- `WormHole::onTeleportation()` is called for all SpaceObjects, not just ships
+- Wormhole effect is no longer visible after exiting the wormHole
+- beam positions for `battleship_destroyer_5_upgraded` fixed
+
 
 ## [2020-04-09]
 
