@@ -84,24 +84,14 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
 
         if (on_destruction.isSet())
         {
-            if (info.instigator)
-            {
-                on_destruction.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
-            } else {
-                on_destruction.call(P<WarpJammer>(this));
-            }
+            on_destruction.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
         }
 
         destroy();
     } else {
         if (on_taking_damage.isSet())
         {
-            if (info.instigator)
-            {
-                on_taking_damage.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
-            } else {
-                on_taking_damage.call(P<WarpJammer>(this));
-            }
+            on_taking_damage.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
         }
     }
 }

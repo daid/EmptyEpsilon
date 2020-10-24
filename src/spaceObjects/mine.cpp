@@ -117,12 +117,7 @@ void Mine::explode()
 
     if (on_destruction.isSet())
     {
-        if (info.instigator)
-        {
-            on_destruction.call(P<Mine>(this), P<SpaceObject>(info.instigator));
-        }else{
-            on_destruction.call(P<Mine>(this));
-        }
+        on_destruction.call(P<Mine>(this), P<SpaceObject>(info.instigator));
     }
     destroy();
 }
