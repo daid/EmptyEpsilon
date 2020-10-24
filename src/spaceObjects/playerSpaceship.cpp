@@ -1645,14 +1645,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (csf.type == CustomShipFunction::Type::Button || csf.type == CustomShipFunction::Type::Message)
                     {
-                        P<SpaceObject> target = nullptr;
-                        if (target_id > -1)
-                        {
-                            target = game_server->getObjectById(target_id);
-                            csf.callback.call(P<PlayerSpaceship>(this), target);
-                        } else {
-                            csf.callback.call(P<PlayerSpaceship>(this));
-                        }
+                        P<SpaceObject> target = game_server->getObjectById(target_id);
+                        csf.callback.call(P<PlayerSpaceship>(this), target);
                     }
                     if (csf.type == CustomShipFunction::Type::Message)
                     {
