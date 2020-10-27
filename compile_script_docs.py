@@ -233,6 +233,7 @@ class DocumentationGenerator(object):
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
         stream.write('<p>Some of the types in the parameters:</p>')
         stream.write('<ul>\n')
+        stream.write('<li>ScriptSimpleCallback / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
         stream.write('<li>EAlertLevel: "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
         stream.write('<li>ECrewPosition: "Helms", "Weapons", "Engineering", "Science", "Relay" (<code>playerInfo.cpp</code>)</li>\n')
         stream.write('<li>EMissileSizes: "small", "medium", "large"</li>\n')
