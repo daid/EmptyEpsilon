@@ -2,10 +2,13 @@
 --
 -- Station comms that allows buying ordnance, supply drop, and reinforcements.
 -- Default script for any `SpaceStation`.
+--
+-- @script comms_station
 
+-- uses `mergeTables`
 require("utils.lua")
 
---- Main menu of communcition.
+--- Main menu of communication.
 function mainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
@@ -98,6 +101,7 @@ function handleDockedState()
     end
 end
 
+--- handleWeaponRestock
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then
         setCommsMessage("You need to stay docked for that action.")
@@ -193,6 +197,7 @@ function handleUndockedState()
     end
 end
 
+--- isAllowedTo
 function isAllowedTo(state)
     if state == "friend" and player:isFriendly(comms_target) then
         return true
@@ -215,6 +220,7 @@ function getServiceCost(service)
     return math.ceil(comms_data.service_cost[service])
 end
 
+--- Return "friend" or "neutral".
 function getFriendStatus()
     if player:isFriendly(comms_target) then
         return "friend"

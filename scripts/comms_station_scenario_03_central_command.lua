@@ -1,3 +1,7 @@
+--- Comms with stations for scenario 03.
+--
+-- @script comms_station_scenario_03_central_command
+
 function mainMenu()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
