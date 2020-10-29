@@ -14,7 +14,7 @@ function mainMenu()
 
     if player:isFriendly(comms_target) then
         -----------------------------------------------
-        --Edge of space additions
+        -- Edge of space additions
         if comms_target:getCallSign() == "Central Command" and not player:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
                 setCommsMessage("The E.O.S Scope is in sector H8, right on the edge of Kraylor territory.\n \nBe careful out there")
@@ -171,12 +171,14 @@ function mainMenu()
             end
         end)
     else
+        -- not friendly (and not enemy)
+
         if not player:isDocked(comms_target) then
             setCommsMessage("Greetings sir.\nIf you want to do business please dock with us first.")
             return true
         end
 
-        -- Neutral station
+        -- Neutral station, docked
         setCommsMessage("Welcome to our lovely station")
         addCommsReply("Do you have spare homing missiles for us? (5rep each)", function()
             if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
@@ -212,4 +214,5 @@ function mainMenu()
         end)
     end
 end
+
 mainMenu()
