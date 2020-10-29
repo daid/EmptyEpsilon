@@ -13,39 +13,42 @@ function mainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
     end
-    mergeTables(comms_target.comms_data, {
-        friendlyness = random(0.0, 100.0),
-        weapons = {
-            Homing = "neutral",
-            HVLI = "neutral",
-            Mine = "neutral",
-            Nuke = "friend",
-            EMP = "friend"
-        },
-        weapon_cost = {
-            Homing = 2,
-            HVLI = 2,
-            Mine = 2,
-            Nuke = 15,
-            EMP = 10
-        },
-        services = {
-            supplydrop = "friend",
-            reinforcements = "friend",
-        },
-        service_cost = {
-            supplydrop = 100,
-            reinforcements = 150,
-        },
-        reputation_cost_multipliers = {
-            friend = 1.0,
-            neutral = 2.5
-        },
-        max_weapon_refill_amount = {
-            friend = 1.0,
-            neutral = 0.5
+    mergeTables(
+        comms_target.comms_data,
+        {
+            friendlyness = random(0.0, 100.0),
+            weapons = {
+                Homing = "neutral",
+                HVLI = "neutral",
+                Mine = "neutral",
+                Nuke = "friend",
+                EMP = "friend"
+            },
+            weapon_cost = {
+                Homing = 2,
+                HVLI = 2,
+                Mine = 2,
+                Nuke = 15,
+                EMP = 10
+            },
+            services = {
+                supplydrop = "friend",
+                reinforcements = "friend"
+            },
+            service_cost = {
+                supplydrop = 100,
+                reinforcements = 150
+            },
+            reputation_cost_multipliers = {
+                friend = 1.0,
+                neutral = 2.5
+            },
+            max_weapon_refill_amount = {
+                friend = 1.0,
+                neutral = 0.5
+            }
         }
-    })
+    )
 
     -- comms_data is used globally
     comms_data = comms_target.comms_data
