@@ -43,7 +43,7 @@ function init()
 	create(Asteroid, 20, 5000, 10000, 10000, 10000)
 	create(VisualAsteroid, 10, 5000, 10000, 10000, 10000)
 	create(Mine, 10, 5000, 10000, 10000, 10000)
-	
+
 	-- Brief the players
 	human_shipyard:sendCommsMessage(gallipoli, [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
 
@@ -56,13 +56,13 @@ Good luck, and stay safe.]])
 Your mission is to secure the Shangri-La station in sector F5, as the feeble humans think it's theirs for the taking.
 
 Support our glorious soldiers by preventing the heretics from harming our transports, and cleanse all enemy opposition!]])
-	
+
 	-- Spawn the first wave
 	human_transport = spawnTransport():setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
 	table.insert(humanTroops, human_transport)
 	CpuShip():setTemplate('MT52 Hornet'):setFaction("Human Navy"):setPosition(-7000, 15500):orderDefendTarget(human_transport):setScannedByFaction("Human Navy", true)
 	CpuShip():setTemplate('MT52 Hornet'):setFaction("Human Navy"):setPosition(-7000, 14500):orderDefendTarget(human_transport):setScannedByFaction("Human Navy", true)
-	
+
 	kraylor_transport = spawnTransport():setFaction("Kraylor"):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
 	table.insert(kraylorTroops, kraylor_transport)
 	CpuShip():setTemplate('MT52 Hornet'):setFaction("Kraylor"):setPosition(26500, 5500):orderDefendTarget(kraylor_transport):setScannedByFaction("Kraylor", true)
@@ -73,7 +73,7 @@ function shangrilaComms()
 	-- If players call Shangri-La, provide a status report
 	setCommsMessage("Your faction's militia commander picks up:\nWhat can we do for you, Captain?")
 	addCommsReply("Give us a status report.", function()
-        	setCommsMessage("Here's the latest news from the front.\nHuman dominance: ".. human_points .. "\nKraylor dominance: ".. kraylor_points .. "\nTime elapsed: ".. time)			
+        	setCommsMessage("Here's the latest news from the front.\nHuman dominance: ".. human_points .. "\nKraylor dominance: ".. kraylor_points .. "\nTime elapsed: ".. time)
 	end)
 end
 
@@ -84,11 +84,11 @@ function stationComms()
 		if not comms_source:isDocked(comms_target) then
 			setCommsMessage("A dispatcher responds:\nGreetings, Captain. If you want supplies, please dock with us.")
 		else
-			setCommsMessage("A dispatcher responds:\nGreetings, Captain. What can we do for you?")		
+			setCommsMessage("A dispatcher responds:\nGreetings, Captain. What can we do for you?")
 		end
-		
+
 		addCommsReply("I need a status report.", function()
-			setCommsMessage("Here's the latest news from the front.\nHuman dominance: ".. human_points .. "\nKraylor dominance: ".. kraylor_points .. "\nTime elapsed: ".. time)			
+			setCommsMessage("Here's the latest news from the front.\nHuman dominance: ".. human_points .. "\nKraylor dominance: ".. kraylor_points .. "\nTime elapsed: ".. time)
 		end)
 
 		addCommsReply("Send in more troops. (100 reputation)", function()
@@ -184,7 +184,7 @@ function update(delta)
 	time = time + delta
 	wave_timer = wave_timer + delta
 	troop_timer = troop_timer + delta
-	
+
 	-- If the Gallipoli is destroyed ...
 	if (not gallipoli:isValid()) then
 		-- ... and 20 seconds have passed, spawn the Heinlein.
@@ -195,7 +195,7 @@ function update(delta)
 			human_respawn = human_respawn + delta
 		end
 	end
-	
+
 	-- Ditto for the Crusader.
 	if (not crusader:isValid()) then
 		if kraylor_respawn > 20 then
@@ -204,21 +204,21 @@ function update(delta)
 			kraylor_respawn = kraylor_respawn + delta
 		end
 	end
-	
+
 	-- Increment reputation for both sides.
 	gallipoli:addReputationPoints(delta * 0.3)
 	crusader:addReputationPoints(delta * 0.3)
-	
+
 	-- If a faction has no station or flagship, it loses.
 	-- If a faction scores 50 points, it wins.
 	if ((not gallipoli:isValid()) and (not human_shipyard:isValid())) or kraylor_points > 50 then
 		victory("Kraylor")
 	end
-	
+
 	if ((not crusader:isValid()) and (not kraylor_shipyard:isValid())) or human_points > 50 then
 		victory("Human Navy")
-	end	
-	
+	end
+
 	-- If either flagship is destroyed, its opponent gains a reputation bonus, and
 	-- its opponent's faction gains victory points.
 	if (not gallipoli:isValid()) then
@@ -229,7 +229,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
 		kraylor_points = kraylor_points + 5
 		human_respawn = 0
 	end
-	
+
 	if (not crusader:isValid()) then
 		human_shipyard:sendCommsMessage(gallipoli, [[Good job, Captain!
 
@@ -238,7 +238,7 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
 		human_points = human_points + 5
 		krayor_respawn =  0
 	end
-	
+
 	-- Every 150 seconds, spawn a troop transport and 2 fighters as escorts for
 	-- each faction.
 	if wave_timer > 150 and (human_shipyard:isValid()) then
@@ -247,16 +247,16 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
 		table.insert(humanTroops, human_transport)
 		CpuShip():setTemplate('MT52 Hornet'):setFaction("Human Navy"):setPosition(-7000, 5500 + line):orderDefendTarget(human_transport):setScannedByFaction("Human Navy", true)
 		CpuShip():setTemplate('MT52 Hornet'):setFaction("Human Navy"):setPosition(-7000, 4500 + line):orderDefendTarget(human_transport):setScannedByFaction("Human Navy", true)
-	
+
 		line = random(0, 20) * 500
 		kraylor_transport = spawnTransport():setFaction("Kraylor"):setPosition(27000, -5000 + line):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
 		table.insert(kraylorTroops, kraylor_transport)
 		CpuShip():setTemplate('MT52 Hornet'):setFaction("Kraylor"):setPosition(27000, -5500 + line):orderDefendTarget(kraylor_transport):setScannedByFaction("Kraylor", true)
 		CpuShip():setTemplate('MT52 Hornet'):setFaction("Kraylor"):setPosition(27000, -4500 + line):orderDefendTarget(kraylor_transport):setScannedByFaction("Kraylor", true)
-		
+
 		wave_timer = 0
 	end
-	
+
 	-- Count transports. Every 10 seconds, awward 1 point per transport docked
 	-- with Shangri-La.
 	if troop_timer > 10 then
@@ -265,16 +265,16 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
 				kraylor_points = kraylor_points + 1
 			end
 		end
-	
+
 		for _, transport in ipairs(humanTroops) do
 			if transport:isValid() and transport:isDocked(shangri_la) then
 				human_points = human_points + 1
 			end
 		end
-		
-		troop_timer = 0	
+
+		troop_timer = 0
 	end
-	
+
 	-- If Shangri-La is destroyed, nobody wins.
 	if (not shangri_la:isValid()) then
 		victory("Independents")
