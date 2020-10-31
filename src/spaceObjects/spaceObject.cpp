@@ -102,7 +102,8 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// For a detailed example, see scenario_53_escape.lua.
     /// Requires a function to call back to when hailed.
     /// The function has no parameters, but `comms_source` (PlayerSpaceship)
-    /// and `comms_target` (SpaceObject) are available.
+    /// and `comms_target` (SpaceObject) are made available in the scenario script.
+    /// (Note: They remain as globals. As usual, such globals are not accessible in required files.)
     /// Compare `setCommsScript`.
     /// Example: obj:setCommsFunction(commsStation)
     /// where commsStation is a function
