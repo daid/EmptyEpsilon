@@ -154,9 +154,9 @@ function handleUndockedState()
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
         addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
+                setCommsMessage("You need to set a waypoint before you can request backup.")
             else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
+                setCommsMessage("To which waypoint should we deliver your supplies?")
                 for n=1,player:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
@@ -166,9 +166,9 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                            setCommsMessage("We have dispatched a supply ship toward WP" .. n)
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage("Not enough reputation!")
                         end
                         addCommsReply("Back", mainMenu)
                     end)
@@ -180,16 +180,16 @@ function handleUndockedState()
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
         addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
+                setCommsMessage("You need to set a waypoint before you can request reinforcements.")
             else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
+                setCommsMessage("To which waypoint should we dispatch the reinforcements?")
                 for n=1,player:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage("Not enough reputation!")
                         end
                         addCommsReply("Back", mainMenu)
                     end)
