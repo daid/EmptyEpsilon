@@ -13,7 +13,7 @@ local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 --- Main menu of communication.
 --
 -- Uses one of `friendlyComms`, `neutralComms`, `enemyComms`.
-function mainMenu()
+function commsShipMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
@@ -43,7 +43,7 @@ function friendlyComms(comms_data)
         function()
             if player:getWaypointCount() == 0 then
                 setCommsMessage("No waypoints set. Please set a waypoint first.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", commsShipMainMenu)
             else
                 setCommsMessage("Which waypoint should we defend?")
                 for n = 1, player:getWaypointCount() do
@@ -52,7 +52,7 @@ function friendlyComms(comms_data)
                         function()
                             comms_target:orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage("We are heading to assist at WP" .. n .. ".")
-                            addCommsReply("Back", mainMenu)
+                            addCommsReply("Back", commsShipMainMenu)
                         end
                     )
                 end
@@ -65,7 +65,7 @@ function friendlyComms(comms_data)
             function()
                 setCommsMessage("Heading toward you to assist.")
                 comms_target:orderDefendTarget(player)
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", commsShipMainMenu)
             end
         )
     end
@@ -92,7 +92,7 @@ function friendlyComms(comms_data)
             end
 
             setCommsMessage(msg)
-            addCommsReply("Back", mainMenu)
+            addCommsReply("Back", commsShipMainMenu)
         end
     )
     for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
@@ -102,7 +102,7 @@ function friendlyComms(comms_data)
                 function()
                     setCommsMessage("Docking at " .. obj:getCallSign() .. ".")
                     comms_target:orderDock(obj)
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsShipMainMenu)
                 end
             )
         end
@@ -167,4 +167,4 @@ function neutralComms(comms_data)
     return true
 end
 
-mainMenu()
+commsShipMainMenu()

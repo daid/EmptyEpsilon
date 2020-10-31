@@ -14,7 +14,7 @@ require("utils.lua")
 local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 
 --- Main menu of communication.
-function mainMenu()
+function commsStationMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
     end
@@ -130,7 +130,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.")
         end
-        addCommsReply("Back", mainMenu)
+        addCommsReply("Back", commsStationMainMenu)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
@@ -142,7 +142,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", mainMenu)
+        addCommsReply("Back", commsStationMainMenu)
     end
 end
 
@@ -178,12 +178,12 @@ function handleUndockedState()
                                 else
                                     setCommsMessage("Not enough reputation!")
                                 end
-                                addCommsReply("Back", mainMenu)
+                                addCommsReply("Back", commsStationMainMenu)
                             end
                         )
                     end
                 end
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", commsStationMainMenu)
             end
         )
     end
@@ -207,12 +207,12 @@ function handleUndockedState()
                                 else
                                     setCommsMessage("Not enough reputation!")
                                 end
-                                addCommsReply("Back", mainMenu)
+                                addCommsReply("Back", commsStationMainMenu)
                             end
                         )
                     end
                 end
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", commsStationMainMenu)
             end
         )
     end
@@ -260,4 +260,4 @@ function getFriendStatus()
     end
 end
 
-mainMenu()
+commsStationMainMenu()

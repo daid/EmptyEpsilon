@@ -4,7 +4,7 @@
 --
 -- @script comms_station_scenario_03_central_command
 
-function mainMenu()
+function commsStationMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
@@ -98,12 +98,12 @@ function mainMenu()
                                     else
                                         setCommsMessage("Not enough rep!")
                                     end
-                                    addCommsReply("Back", mainMenu)
+                                    addCommsReply("Back", commsStationMainMenu)
                                 end
                             )
                         end
                     end
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             )
             addCommsReply(
@@ -123,12 +123,12 @@ function mainMenu()
                                     else
                                         setCommsMessage("Not enough rep!")
                                     end
-                                    addCommsReply("Back", mainMenu)
+                                    addCommsReply("Back", commsStationMainMenu)
                                 end
                             )
                         end
                     end
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             )
             return true
@@ -149,11 +149,11 @@ function mainMenu()
                 end
                 if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") then
                     setCommsMessage("Sorry sir, but you are fully stocked with homing missiles.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 else
                     player:setWeaponStorage("Homing", player:getWeaponStorageMax("Homing"))
                     setCommsMessage("Filled up your missile supply.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
@@ -170,11 +170,11 @@ function mainMenu()
                 end
                 if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
                     setCommsMessage("Captain,\nYou have all the mines you can fit in that ship.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 else
                     player:setWeaponStorage("Mine", player:getWeaponStorageMax("Mine"))
                     setCommsMessage("These mines, are yours.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
@@ -191,11 +191,11 @@ function mainMenu()
                 end
                 if player:getWeaponStorage("Nuke") >= player:getWeaponStorageMax("Nuke") then
                     setCommsMessage("All nukes are charged and primed for distruction.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 else
                     player:setWeaponStorage("Nuke", player:getWeaponStorageMax("Nuke"))
                     setCommsMessage("You are fully loaded,\nand ready to explode things.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
@@ -212,11 +212,11 @@ function mainMenu()
                 end
                 if player:getWeaponStorage("EMP") >= player:getWeaponStorageMax("EMP") then
                     setCommsMessage("All storage for EMP missiles is filled sir.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 else
                     player:setWeaponStorage("EMP", player:getWeaponStorageMax("EMP"))
                     setCommsMessage("Recallibrated the electronics and\nfitted you with all the EMP missiles you can carry.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
@@ -239,7 +239,7 @@ function mainMenu()
                 end
                 if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") / 2 then
                     setCommsMessage("You seem to have more then enough missiles")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 else
                     if not player:takeReputationPoints(5 * ((player:getWeaponStorageMax("Homing") / 2) - player:getWeaponStorage("Homing"))) then
                         setCommsMessage("Not enough reputation.")
@@ -247,7 +247,7 @@ function mainMenu()
                     end
                     player:setWeaponStorage("Homing", player:getWeaponStorageMax("Homing") / 2)
                     setCommsMessage("We generously resupplied you with some free homing missiles.\nPut them to good use.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
@@ -260,7 +260,7 @@ function mainMenu()
                 end
                 if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
                     setCommsMessage("You are fully stocked with mines.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 else
                     if not player:takeReputationPoints(5 * (player:getWeaponStorageMax("Mine") - player:getWeaponStorage("Mine"))) then
                         setCommsMessage("Not enough reputation.")
@@ -268,7 +268,7 @@ function mainMenu()
                     end
                     player:setWeaponStorage("Mine", player:getWeaponStorageMax("Mine"))
                     setCommsMessage("Here, have some mines.\nMines are good defensive weapons.")
-                    addCommsReply("Back", mainMenu)
+                    addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
@@ -276,17 +276,17 @@ function mainMenu()
             "Can you supply us with some nukes.",
             function()
                 setCommsMessage("We do not deal in weapons of mass destruction.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", commsStationMainMenu)
             end
         )
         addCommsReply(
             "Please re-stock our EMP Missiles.",
             function()
                 setCommsMessage("We do not deal in weapons of mass disruption.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", commsStationMainMenu)
             end
         )
     end
 end
 
-mainMenu()
+commsStationMainMenu()
