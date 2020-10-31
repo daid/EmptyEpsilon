@@ -55,7 +55,7 @@ function commsStationMainMenu()
         }
     )
 
-    -- comms_data is used globally
+    -- comms_data is used globally (could be avoided, compare comms_ship)
     comms_data = comms_target.comms_data
 
     if player:isEnemy(comms_target) then

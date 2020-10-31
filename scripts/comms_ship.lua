@@ -17,8 +17,8 @@ function commsShipMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
-    -- comms_data is used globally
-    comms_data = comms_target.comms_data
+
+    local comms_data = comms_target.comms_data
 
     if player:isFriendly(comms_target) then
         return friendlyComms(comms_data)
