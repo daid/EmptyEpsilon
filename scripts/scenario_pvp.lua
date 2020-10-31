@@ -7,6 +7,9 @@
 -- Type: PvP
 
 --- Scenario
+--
+-- TODO Consider to add HVLI resupply.
+--
 -- @script scenario_pvp
 
 --- Initialize scenario.
@@ -169,11 +172,11 @@ function supplyDialogue()
             end
             if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
                 setCommsMessage("Sorry, captain, but you are fully stocked with homing missiles.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             else
                 comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
                 setCommsMessage("We've replenished up your homing missile supply.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             end
         end
     )
@@ -191,11 +194,11 @@ function supplyDialogue()
             end
             if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
                 setCommsMessage("Captain, you already have all the mines you can fit in that ship.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             else
                 comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
                 setCommsMessage("These mines are yours.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             end
         end
     )
@@ -213,11 +216,11 @@ function supplyDialogue()
             end
             if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
                 setCommsMessage("Your nukes are already charged and primed for destruction.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             else
                 comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
                 setCommsMessage("You are fully loaded and ready to explode things.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             end
         end
     )
@@ -235,14 +238,16 @@ function supplyDialogue()
             end
             if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
                 setCommsMessage("All storage for EMP missiles is already full, captain.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             else
                 comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
                 setCommsMessage("We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
-                addCommsReply("Back", mainMenu)
+                addCommsReply("Back", supplyDialogue)
             end
         end
     )
+
+    addCommsReply("Back to main menu", stationComms)
 end
 
 --- Update.
