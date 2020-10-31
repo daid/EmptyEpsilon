@@ -2,47 +2,53 @@
 --
 -- Station comms that allows buying ordnance, supply drop, and reinforcements.
 -- Default script for any `SpaceStation`.
+--
+-- @script comms_station
 
+-- uses `mergeTables`
 require("utils.lua")
 
---- Main menu of communcition.
+--- Main menu of communication.
 function mainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
     end
-    mergeTables(comms_target.comms_data, {
-        friendlyness = random(0.0, 100.0),
-        weapons = {
-            Homing = "neutral",
-            HVLI = "neutral",
-            Mine = "neutral",
-            Nuke = "friend",
-            EMP = "friend"
-        },
-        weapon_cost = {
-            Homing = 2,
-            HVLI = 2,
-            Mine = 2,
-            Nuke = 15,
-            EMP = 10
-        },
-        services = {
-            supplydrop = "friend",
-            reinforcements = "friend",
-        },
-        service_cost = {
-            supplydrop = 100,
-            reinforcements = 150,
-        },
-        reputation_cost_multipliers = {
-            friend = 1.0,
-            neutral = 2.5
-        },
-        max_weapon_refill_amount = {
-            friend = 1.0,
-            neutral = 0.5
+    mergeTables(
+        comms_target.comms_data,
+        {
+            friendlyness = random(0.0, 100.0),
+            weapons = {
+                Homing = "neutral",
+                HVLI = "neutral",
+                Mine = "neutral",
+                Nuke = "friend",
+                EMP = "friend"
+            },
+            weapon_cost = {
+                Homing = 2,
+                HVLI = 2,
+                Mine = 2,
+                Nuke = 15,
+                EMP = 10
+            },
+            services = {
+                supplydrop = "friend",
+                reinforcements = "friend"
+            },
+            service_cost = {
+                supplydrop = 100,
+                reinforcements = 150
+            },
+            reputation_cost_multipliers = {
+                friend = 1.0,
+                neutral = 2.5
+            },
+            max_weapon_refill_amount = {
+                friend = 1.0,
+                neutral = 0.5
+            }
         }
-    })
+    )
 
     -- comms_data is used globally
     comms_data = comms_target.comms_data
@@ -98,6 +104,7 @@ function handleDockedState()
     end
 end
 
+--- handleWeaponRestock
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then
         setCommsMessage("You need to stay docked for that action.")
@@ -193,6 +200,7 @@ function handleUndockedState()
     end
 end
 
+--- isAllowedTo
 function isAllowedTo(state)
     if state == "friend" and player:isFriendly(comms_target) then
         return true
@@ -215,6 +223,7 @@ function getServiceCost(service)
     return math.ceil(comms_data.service_cost[service])
 end
 
+--- Return "friend" or "neutral".
 function getFriendStatus()
     if player:isFriendly(comms_target) then
         return "friend"

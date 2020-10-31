@@ -2,11 +2,13 @@
 --
 -- Simple ship comms that allows setting orders if friendly.
 -- Default script for any `CpuShip`.
+--
+-- @script comms_ship
 
 -- NOTE this could be imported
 local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 
---- Main menu of communcition.
+--- Main menu of communication.
 --
 -- Uses one of `friendlyComms`, `neutralComms`, `enemyComms`.
 function mainMenu()
@@ -69,7 +71,7 @@ function friendlyComms(comms_data)
         end
 
         -- TODO this should use a global
-        local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+        local missile_types = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
         for i, missile_type in ipairs(missile_types) do
             if comms_target:getWeaponStorageMax(missile_type) > 0 then
                     msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
@@ -131,7 +133,7 @@ function enemyComms(comms_data)
     return false
 end
 
---- Handle neutral communiction.
+--- Handle neutral communication.
 function neutralComms(comms_data)
     if comms_data.friendlyness > 50 then
         setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.")
