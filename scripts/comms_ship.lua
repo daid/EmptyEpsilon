@@ -36,14 +36,14 @@ function friendlyComms(comms_data)
     end
     addCommsReply("Defend a waypoint", function()
         if player:getWaypointCount() == 0 then
-            setCommsMessage("No waypoints set. Please set a waypoint first.");
+            setCommsMessage("No waypoints set. Please set a waypoint first.")
             addCommsReply("Back", mainMenu)
         else
-            setCommsMessage("Which waypoint should we defend?");
+            setCommsMessage("Which waypoint should we defend?")
             for n=1,player:getWaypointCount() do
                 addCommsReply("Defend WP" .. n, function()
                     comms_target:orderDefendLocation(player:getWaypoint(n))
-                    setCommsMessage("We are heading to assist at WP" .. n ..".");
+                    setCommsMessage("We are heading to assist at WP" .. n ..".")
                     addCommsReply("Back", mainMenu)
                 end)
             end
@@ -51,7 +51,7 @@ function friendlyComms(comms_data)
     end)
     if comms_data.friendlyness > 0.2 then
         addCommsReply("Assist me", function()
-            setCommsMessage("Heading toward you to assist.");
+            setCommsMessage("Heading toward you to assist.")
             comms_target:orderDefendTarget(player)
             addCommsReply("Back", mainMenu)
         end)
@@ -78,13 +78,13 @@ function friendlyComms(comms_data)
             end
         end
 
-        setCommsMessage(msg);
+        setCommsMessage(msg)
         addCommsReply("Back", mainMenu)
     end)
     for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
         if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
             addCommsReply("Dock at " .. obj:getCallSign(), function()
-                setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
+                setCommsMessage("Docking at " .. obj:getCallSign() .. ".")
                 comms_target:orderDock(obj)
                 addCommsReply("Back", mainMenu)
             end)
@@ -123,9 +123,9 @@ function enemyComms(comms_data)
         addCommsReply(taunt_option, function()
             if random(0, 100) < 30 then
                 comms_target:orderAttack(player)
-                setCommsMessage(taunt_success_reply);
+                setCommsMessage(taunt_success_reply)
             else
-                setCommsMessage(taunt_failed_reply);
+                setCommsMessage(taunt_failed_reply)
             end
         end)
         return true
