@@ -8,6 +8,9 @@
 -- uses `mergeTables`
 require("utils.lua")
 
+-- NOTE this could be imported
+local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
+
 --- Main menu of communication.
 function mainMenu()
     if comms_target.comms_data == nil then
@@ -77,45 +80,23 @@ function handleDockedState()
         setCommsMessage("Welcome to our lovely station " .. comms_target:getCallSign() .. ".")
     end
 
-    if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(
-            "Do you have spare homing missiles for us? (" .. getWeaponCost("Homing") .. "rep each)",
-            function()
-                handleWeaponRestock("Homing")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(
-            "Can you restock us with HVLI? (" .. getWeaponCost("HVLI") .. "rep each)",
-            function()
-                handleWeaponRestock("HVLI")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(
-            "Please re-stock our mines. (" .. getWeaponCost("Mine") .. "rep each)",
-            function()
-                handleWeaponRestock("Mine")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(
-            "Can you supply us with some nukes? (" .. getWeaponCost("Nuke") .. "rep each)",
-            function()
-                handleWeaponRestock("Nuke")
-            end
-        )
-    end
-    if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(
-            "Please re-stock our EMP missiles. (" .. getWeaponCost("EMP") .. "rep each)",
-            function()
-                handleWeaponRestock("EMP")
-            end
-        )
+    local reply_messages = {
+        ["Homing"] = "Do you have spare homing missiles for us?",
+        ["HVLI"] = "Can you restock us with HVLI?",
+        ["Mine"] = "Please re-stock our mines.",
+        ["Nuke"] = "Can you supply us with some nukes?",
+        ["EMP"] = "Please re-stock our EMP missiles."
+    }
+
+    for _, missile_type in ipairs(MISSILE_TYPES) do
+        if player:getWeaponStorageMax(missile_type) > 0 then
+            addCommsReply(
+                string.format("%s (%d rep each)", reply_messages[missile_type], getWeaponCost(missile_type)),
+                function()
+                    handleWeaponRestock(missile_type)
+                end
+            )
+        end
     end
 end
 
