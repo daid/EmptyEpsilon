@@ -74,7 +74,7 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
     {
         target->comms_script_callback.getScriptObject()->registerObject(ship, "comms_source");
         target->comms_script_callback.getScriptObject()->registerObject(target, "comms_target");
-        target->comms_script_callback.call();
+        target->comms_script_callback.call(ship, target);
     }
     comms_script_interface = nullptr;
     return has_message;
