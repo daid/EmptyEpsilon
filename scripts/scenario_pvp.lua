@@ -51,11 +51,14 @@ Provide a spatial cover for while our troop transports board the station to recl
 
 Good luck, and stay safe.]])
 
-    kraylor_shipyard:sendCommsMessage(crusader, [[Greetings, Crusader.
+    kraylor_shipyard:sendCommsMessage(
+        crusader,
+        [[Greetings, Crusader.
 
 Your mission is to secure the Shangri-La station in sector F5, as the feeble humans think it's theirs for the taking.
 
-Support our glorious soldiers by preventing the heretics from harming our transports, and cleanse all enemy opposition!]])
+Support our glorious soldiers by preventing the heretics from harming our transports, and cleanse all enemy opposition!]]
+    )
 
     -- Spawn the first wave
     human_transport = spawnTransport():setFaction("Human Navy"):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
@@ -72,9 +75,12 @@ end
 function shangrilaComms()
     -- If players call Shangri-La, provide a status report
     setCommsMessage("Your faction's militia commander picks up:\nWhat can we do for you, Captain?")
-    addCommsReply("Give us a status report.", function()
-            setCommsMessage("Here's the latest news from the front.\nHuman dominance: ".. human_points .. "\nKraylor dominance: ".. kraylor_points .. "\nTime elapsed: ".. time)
-    end)
+    addCommsReply(
+        "Give us a status report.",
+        function()
+            setCommsMessage("Here's the latest news from the front.\nHuman dominance: " .. human_points .. "\nKraylor dominance: " .. kraylor_points .. "\nTime elapsed: " .. time)
+        end
+    )
 end
 
 function stationComms()
@@ -87,33 +93,48 @@ function stationComms()
             setCommsMessage("A dispatcher responds:\nGreetings, Captain. What can we do for you?")
         end
 
-        addCommsReply("I need a status report.", function()
-            setCommsMessage("Here's the latest news from the front.\nHuman dominance: ".. human_points .. "\nKraylor dominance: ".. kraylor_points .. "\nTime elapsed: ".. time)
-        end)
-
-        addCommsReply("Send in more troops. (100 reputation)", function()
-            if not comms_source:takeReputationPoints(100) then setCommsMessage("Not enough reputation."); return end
-            setCommsMessage("Aye, captain. We've deployed a squad with fighter escort to support the assault on Shangri-La.")
-            if comms_target:getFaction() == "Kraylor" then
-              kraylor_transport = spawnTransport():setFaction("Kraylor"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
-                table.insert(kraylorTroops, kraylor_transport)
-                CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(kraylor_transport):setScannedByFaction(comms_source:getFaction(), true)
-            else
-                human_transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
-                table.insert(humanTroops, human_transport)
-                CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(human_transport):setScannedByFaction(comms_source:getFaction(), true)
+        addCommsReply(
+            "I need a status report.",
+            function()
+                setCommsMessage("Here's the latest news from the front.\nHuman dominance: " .. human_points .. "\nKraylor dominance: " .. kraylor_points .. "\nTime elapsed: " .. time)
             end
-            for n=0,1 do
-            end
-        end)
+        )
 
-        addCommsReply("We need some space-based firepower. (150 reputation)", function()
-            if not comms_source:takeReputationPoints(150) then setCommsMessage("Not enough reputation."); return end
-            setCommsMessage("Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La.")
-            strike_leader = CpuShip():setTemplate("Phobos T3"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(shangri_la):setScannedByFaction(comms_source:getFaction(), true)
-            CpuShip():setTemplate("MU52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderFlyFormation(strike_leader, -1000, 0):setScannedByFaction(comms_source:getFaction(), true)
-            CpuShip():setTemplate("MU52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderFlyFormation(strike_leader, 1000, 0):setScannedByFaction(comms_source:getFaction(), true)
-        end)
+        addCommsReply(
+            "Send in more troops. (100 reputation)",
+            function()
+                if not comms_source:takeReputationPoints(100) then
+                    setCommsMessage("Not enough reputation.")
+                    return
+                end
+                setCommsMessage("Aye, captain. We've deployed a squad with fighter escort to support the assault on Shangri-La.")
+                if comms_target:getFaction() == "Kraylor" then
+                    kraylor_transport = spawnTransport():setFaction("Kraylor"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
+                    table.insert(kraylorTroops, kraylor_transport)
+                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(kraylor_transport):setScannedByFaction(comms_source:getFaction(), true)
+                else
+                    human_transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
+                    table.insert(humanTroops, human_transport)
+                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(human_transport):setScannedByFaction(comms_source:getFaction(), true)
+                end
+                for n = 0, 1 do
+                end
+            end
+        )
+
+        addCommsReply(
+            "We need some space-based firepower. (150 reputation)",
+            function()
+                if not comms_source:takeReputationPoints(150) then
+                    setCommsMessage("Not enough reputation.")
+                    return
+                end
+                setCommsMessage("Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La.")
+                strike_leader = CpuShip():setTemplate("Phobos T3"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(shangri_la):setScannedByFaction(comms_source:getFaction(), true)
+                CpuShip():setTemplate("MU52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderFlyFormation(strike_leader, -1000, 0):setScannedByFaction(comms_source:getFaction(), true)
+                CpuShip():setTemplate("MU52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderFlyFormation(strike_leader, 1000, 0):setScannedByFaction(comms_source:getFaction(), true)
+            end
+        )
 
         if comms_source:isDocked(comms_target) then
             addCommsReply("We need supplies.", supplyDialogue)
@@ -126,57 +147,93 @@ end
 function supplyDialogue()
     setCommsMessage("What supplies do you need?")
 
-        addCommsReply("Do you have spare homing missiles for us? (2rep each)", function()
-            if not comms_source:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then setCommsMessage("Not enough reputation."); return end
+    addCommsReply(
+        "Do you have spare homing missiles for us? (2rep each)",
+        function()
+            if not comms_source:isDocked(comms_target) then
+                setCommsMessage("You need to stay docked for that action.")
+                return
+            end
+            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then
+                setCommsMessage("Not enough reputation.")
+                return
+            end
             if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
-                setCommsMessage("Sorry, captain, but you are fully stocked with homing missiles.");
+                setCommsMessage("Sorry, captain, but you are fully stocked with homing missiles.")
                 addCommsReply("Back", mainMenu)
             else
                 comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
                 setCommsMessage("We've replenished up your homing missile supply.")
                 addCommsReply("Back", mainMenu)
             end
-        end)
+        end
+    )
 
-        addCommsReply("Please re-stock our mines. (2rep each)", function()
-            if not comms_source:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then setCommsMessage("Not enough reputation."); return end
+    addCommsReply(
+        "Please re-stock our mines. (2rep each)",
+        function()
+            if not comms_source:isDocked(comms_target) then
+                setCommsMessage("You need to stay docked for that action.")
+                return
+            end
+            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
+                setCommsMessage("Not enough reputation.")
+                return
+            end
             if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
-                setCommsMessage("Captain, you already have all the mines you can fit in that ship.");
+                setCommsMessage("Captain, you already have all the mines you can fit in that ship.")
                 addCommsReply("Back", mainMenu)
             else
                 comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
                 setCommsMessage("These mines are yours.")
                 addCommsReply("Back", mainMenu)
             end
-        end)
+        end
+    )
 
-        addCommsReply("Can you supply us with some nukes? (15rep each)", function()
-            if not comms_source:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-            if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then setCommsMessage("Not enough reputation."); return end
+    addCommsReply(
+        "Can you supply us with some nukes? (15rep each)",
+        function()
+            if not comms_source:isDocked(comms_target) then
+                setCommsMessage("You need to stay docked for that action.")
+                return
+            end
+            if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then
+                setCommsMessage("Not enough reputation.")
+                return
+            end
             if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
-                setCommsMessage("Your nukes are already charged and primed for destruction.");
+                setCommsMessage("Your nukes are already charged and primed for destruction.")
                 addCommsReply("Back", mainMenu)
             else
                 comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
                 setCommsMessage("You are fully loaded and ready to explode things.")
                 addCommsReply("Back", mainMenu)
             end
-        end)
+        end
+    )
 
-        addCommsReply("Please re-stock our EMP missiles. (10rep each)", function()
-            if not comms_source:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
-            if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then setCommsMessage("Not enough reputation."); return end
+    addCommsReply(
+        "Please re-stock our EMP missiles. (10rep each)",
+        function()
+            if not comms_source:isDocked(comms_target) then
+                setCommsMessage("You need to stay docked for that action.")
+                return
+            end
+            if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then
+                setCommsMessage("Not enough reputation.")
+                return
+            end
             if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
-                setCommsMessage("All storage for EMP missiles is already full, captain.");
+                setCommsMessage("All storage for EMP missiles is already full, captain.")
                 addCommsReply("Back", mainMenu)
             else
                 comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
                 setCommsMessage("We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
                 addCommsReply("Back", mainMenu)
             end
-        end)
+        end
+    )
 end
 
 function update(delta)
@@ -189,8 +246,8 @@ function update(delta)
     if (not gallipoli:isValid()) then
         -- ... and 20 seconds have passed, spawn the Heinlein.
         if human_respawn > 20 then
+            -- Otherwise, increment the respawn timer.
             gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-8500, 15000):setCallSign("HNS Heinlein"):setScannedByFaction("Kraylor", false)
-        -- Otherwise, increment the respawn timer.
         else
             human_respawn = human_respawn + delta
         end
@@ -236,7 +293,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
 With the Kraylor flagship out of the way, we can land the final blow!]])
         gallipoli:addReputationPoints(50)
         human_points = human_points + 5
-        krayor_respawn =  0
+        krayor_respawn = 0
     end
 
     -- Every 150 seconds, spawn a troop transport and 2 fighters as escorts for
@@ -293,7 +350,7 @@ end
 -- Create amount of object_type, at a distance between dist_min and dist_max
 -- around the point (x0, y0)
 function create(object_type, amount, dist_min, dist_max, x0, y0)
-        for n=1,amount do
+    for n = 1, amount do
         local r = random(0, 360)
         local distance = random(dist_min, dist_max)
         x = x0 + math.cos(r / 180 * math.pi) * distance
