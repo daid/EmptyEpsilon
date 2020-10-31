@@ -34,58 +34,73 @@ function friendlyComms(comms_data)
     else
         setCommsMessage("Sir, how can we assist?")
     end
-    addCommsReply("Defend a waypoint", function()
-        if player:getWaypointCount() == 0 then
-            setCommsMessage("No waypoints set. Please set a waypoint first.")
-            addCommsReply("Back", mainMenu)
-        else
-            setCommsMessage("Which waypoint should we defend?")
-            for n=1,player:getWaypointCount() do
-                addCommsReply("Defend WP" .. n, function()
-                    comms_target:orderDefendLocation(player:getWaypoint(n))
-                    setCommsMessage("We are heading to assist at WP" .. n ..".")
-                    addCommsReply("Back", mainMenu)
-                end)
+    addCommsReply(
+        "Defend a waypoint",
+        function()
+            if player:getWaypointCount() == 0 then
+                setCommsMessage("No waypoints set. Please set a waypoint first.")
+                addCommsReply("Back", mainMenu)
+            else
+                setCommsMessage("Which waypoint should we defend?")
+                for n = 1, player:getWaypointCount() do
+                    addCommsReply(
+                        "Defend WP" .. n,
+                        function()
+                            comms_target:orderDefendLocation(player:getWaypoint(n))
+                            setCommsMessage("We are heading to assist at WP" .. n .. ".")
+                            addCommsReply("Back", mainMenu)
+                        end
+                    )
+                end
             end
         end
-    end)
+    )
     if comms_data.friendlyness > 0.2 then
-        addCommsReply("Assist me", function()
-            setCommsMessage("Heading toward you to assist.")
-            comms_target:orderDefendTarget(player)
-            addCommsReply("Back", mainMenu)
-        end)
+        addCommsReply(
+            "Assist me",
+            function()
+                setCommsMessage("Heading toward you to assist.")
+                comms_target:orderDefendTarget(player)
+                addCommsReply("Back", mainMenu)
+            end
+        )
     end
-    addCommsReply("Report status", function()
-        local msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
-        local shields = comms_target:getShieldCount()
-        if shields == 1 then
-            msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-        elseif shields == 2 then
-            msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-            msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
-        else
-            for n=0,shields-1 do
-                msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+    addCommsReply(
+        "Report status",
+        function()
+            local msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+            local shields = comms_target:getShieldCount()
+            if shields == 1 then
+                msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+            elseif shields == 2 then
+                msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+                msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+            else
+                for n = 0, shields - 1 do
+                    msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+                end
             end
-        end
 
-        for i, missile_type in ipairs(MISSILE_TYPES) do
-            if comms_target:getWeaponStorageMax(missile_type) > 0 then
+            for i, missile_type in ipairs(MISSILE_TYPES) do
+                if comms_target:getWeaponStorageMax(missile_type) > 0 then
                     msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
+                end
             end
-        end
 
-        setCommsMessage(msg)
-        addCommsReply("Back", mainMenu)
-    end)
+            setCommsMessage(msg)
+            addCommsReply("Back", mainMenu)
+        end
+    )
     for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
         if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-            addCommsReply("Dock at " .. obj:getCallSign(), function()
-                setCommsMessage("Docking at " .. obj:getCallSign() .. ".")
-                comms_target:orderDock(obj)
-                addCommsReply("Back", mainMenu)
-            end)
+            addCommsReply(
+                "Dock at " .. obj:getCallSign(),
+                function()
+                    setCommsMessage("Docking at " .. obj:getCallSign() .. ".")
+                    comms_target:orderDock(obj)
+                    addCommsReply("Back", mainMenu)
+                end
+            )
         end
     end
     return true
@@ -118,14 +133,17 @@ function enemyComms(comms_data)
             setCommsMessage("Mind your own business!")
         end
         comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
-        addCommsReply(taunt_option, function()
-            if random(0, 100) < 30 then
-                comms_target:orderAttack(player)
-                setCommsMessage(taunt_success_reply)
-            else
-                setCommsMessage(taunt_failed_reply)
+        addCommsReply(
+            taunt_option,
+            function()
+                if random(0, 100) < 30 then
+                    comms_target:orderAttack(player)
+                    setCommsMessage(taunt_success_reply)
+                else
+                    setCommsMessage(taunt_failed_reply)
+                end
             end
-        end)
+        )
         return true
     end
     return false

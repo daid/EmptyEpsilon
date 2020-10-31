@@ -78,29 +78,44 @@ function handleDockedState()
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply("Do you have spare homing missiles for us? ("..getWeaponCost("Homing").."rep each)", function()
-            handleWeaponRestock("Homing")
-        end)
+        addCommsReply(
+            "Do you have spare homing missiles for us? (" .. getWeaponCost("Homing") .. "rep each)",
+            function()
+                handleWeaponRestock("Homing")
+            end
+        )
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply("Can you restock us with HVLI? ("..getWeaponCost("HVLI").."rep each)", function()
-            handleWeaponRestock("HVLI")
-        end)
+        addCommsReply(
+            "Can you restock us with HVLI? (" .. getWeaponCost("HVLI") .. "rep each)",
+            function()
+                handleWeaponRestock("HVLI")
+            end
+        )
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply("Please re-stock our mines. ("..getWeaponCost("Mine").."rep each)", function()
-            handleWeaponRestock("Mine")
-        end)
+        addCommsReply(
+            "Please re-stock our mines. (" .. getWeaponCost("Mine") .. "rep each)",
+            function()
+                handleWeaponRestock("Mine")
+            end
+        )
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply("Can you supply us with some nukes? ("..getWeaponCost("Nuke").."rep each)", function()
-            handleWeaponRestock("Nuke")
-        end)
+        addCommsReply(
+            "Can you supply us with some nukes? (" .. getWeaponCost("Nuke") .. "rep each)",
+            function()
+                handleWeaponRestock("Nuke")
+            end
+        )
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply("Please re-stock our EMP missiles. ("..getWeaponCost("EMP").."rep each)", function()
-            handleWeaponRestock("EMP")
-        end)
+        addCommsReply(
+            "Please re-stock our EMP missiles. (" .. getWeaponCost("EMP") .. "rep each)",
+            function()
+                handleWeaponRestock("EMP")
+            end
+        )
     end
 end
 
@@ -152,51 +167,63 @@ function handleUndockedState()
         setCommsMessage("This is " .. comms_target:getCallSign() .. ". Greetings.\nIf you want to do business, please dock with us first.")
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
-            if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.")
-            else
-                setCommsMessage("To which waypoint should we deliver your supplies?")
-                for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("supplydrop")) then
-                            local position_x, position_y = comms_target:getPosition()
-                            local target_x, target_y = player:getWaypoint(n)
-                            local script = Script()
-                            script:setVariable("position_x", position_x):setVariable("position_y", position_y)
-                            script:setVariable("target_x", target_x):setVariable("target_y", target_y)
-                            script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n)
-                        else
-                            setCommsMessage("Not enough reputation!")
-                        end
-                        addCommsReply("Back", mainMenu)
-                    end)
+        addCommsReply(
+            "Can you send a supply drop? (" .. getServiceCost("supplydrop") .. "rep)",
+            function()
+                if player:getWaypointCount() < 1 then
+                    setCommsMessage("You need to set a waypoint before you can request backup.")
+                else
+                    setCommsMessage("To which waypoint should we deliver your supplies?")
+                    for n = 1, player:getWaypointCount() do
+                        addCommsReply(
+                            "WP" .. n,
+                            function()
+                                if player:takeReputationPoints(getServiceCost("supplydrop")) then
+                                    local position_x, position_y = comms_target:getPosition()
+                                    local target_x, target_y = player:getWaypoint(n)
+                                    local script = Script()
+                                    script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+                                    script:setVariable("target_x", target_x):setVariable("target_y", target_y)
+                                    script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+                                    setCommsMessage("We have dispatched a supply ship toward WP" .. n)
+                                else
+                                    setCommsMessage("Not enough reputation!")
+                                end
+                                addCommsReply("Back", mainMenu)
+                            end
+                        )
+                    end
                 end
+                addCommsReply("Back", mainMenu)
             end
-            addCommsReply("Back", mainMenu)
-        end)
+        )
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
-            if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.")
-            else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?")
-                for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("reinforcements")) then
-                            local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)
-                        else
-                            setCommsMessage("Not enough reputation!")
-                        end
-                        addCommsReply("Back", mainMenu)
-                    end)
+        addCommsReply(
+            "Please send reinforcements! (" .. getServiceCost("reinforcements") .. "rep)",
+            function()
+                if player:getWaypointCount() < 1 then
+                    setCommsMessage("You need to set a waypoint before you can request reinforcements.")
+                else
+                    setCommsMessage("To which waypoint should we dispatch the reinforcements?")
+                    for n = 1, player:getWaypointCount() do
+                        addCommsReply(
+                            "WP" .. n,
+                            function()
+                                if player:takeReputationPoints(getServiceCost("reinforcements")) then
+                                    local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+                                    setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)
+                                else
+                                    setCommsMessage("Not enough reputation!")
+                                end
+                                addCommsReply("Back", mainMenu)
+                            end
+                        )
+                    end
                 end
+                addCommsReply("Back", mainMenu)
             end
-            addCommsReply("Back", mainMenu)
-        end)
+        )
     end
 end
 
