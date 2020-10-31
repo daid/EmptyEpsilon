@@ -3,6 +3,8 @@
 -- Simple ship comms that allows setting orders if friendly.
 -- Default script for any `CpuShip`.
 --
+-- TODO `player` can be replaced by `comms_source`
+--
 -- @script comms_ship
 
 -- NOTE this could be imported

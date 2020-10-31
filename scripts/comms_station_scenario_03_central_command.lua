@@ -1,5 +1,7 @@
 --- Comms with stations for scenario 03.
 --
+-- TODO `player` can be replaced by `comms_source`
+--
 -- @script comms_station_scenario_03_central_command
 
 function mainMenu()

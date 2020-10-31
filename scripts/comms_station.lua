@@ -3,6 +3,8 @@
 -- Station comms that allows buying ordnance, supply drop, and reinforcements.
 -- Default script for any `SpaceStation`.
 --
+-- TODO `player` can be replaced by `comms_source`
+--
 -- @script comms_station
 
 -- uses `mergeTables`
