@@ -42,6 +42,8 @@ REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// Within the callback function, `comms_source` and `comms_target` are available.
 /// Deprecated: In a CommsScript, `player` can be used for `comms_source`.
 /// (In a CommsFunction, only `comms_source` is provided.)
+/// Instead of using the globals, the callback function can take two parameters.
+/// Example: addCommsReply(message, function(comms_source, comms_target) ... end)
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
 /// Use this function from a communication callback function to switch the current
 /// communication from scripted to a GM based chat.
@@ -93,7 +95,7 @@ void CommsScriptInterface::commChannelMessage(int32_t message_id)
             target->comms_script_callback.getScriptObject()->registerObject(target, "comms_target");
         }
         reply_callbacks.clear();
-        callback.call();
+        callback.call(ship, target);
     }
 
     comms_script_interface = nullptr;
