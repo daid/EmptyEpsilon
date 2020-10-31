@@ -6,6 +6,10 @@
 ---             The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all-out battle for Shangri-La.
 -- Type: PvP
 
+--- Scenario
+-- @script scenario_pvp
+
+--- Initialize scenario.
 function init()
     humanTroops = {}
     kraylorTroops = {}
@@ -72,8 +76,10 @@ Support our glorious soldiers by preventing the heretics from harming our transp
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Kraylor"):setPosition(26500, 4500):orderDefendTarget(kraylor_transport):setScannedByFaction("Kraylor", true)
 end
 
+--- Comms with independent station _Shangri-La_.
+--
+-- If players call Shangri-La, provide a status report
 function shangrilaComms()
-    -- If players call Shangri-La, provide a status report
     setCommsMessage("Your faction's militia commander picks up:\nWhat can we do for you, Captain?")
     addCommsReply(
         "Give us a status report.",
@@ -83,9 +89,11 @@ function shangrilaComms()
     )
 end
 
+--- Comms for station(s).
+--
+-- If friendly players call a station, provide a status report and offer
+-- reinforcements at a reputation cost.
 function stationComms()
-    -- If friendly players call a station, provide a status report and offer
-    -- reinforcements at a reputation cost.
     if comms_source:isFriendly(comms_target) then
         if not comms_source:isDocked(comms_target) then
             setCommsMessage("A dispatcher responds:\nGreetings, Captain. If you want supplies, please dock with us.")
@@ -144,6 +152,7 @@ function stationComms()
     end
 end
 
+--- Comms supplyDialogue.
 function supplyDialogue()
     setCommsMessage("What supplies do you need?")
 
@@ -236,6 +245,7 @@ function supplyDialogue()
     )
 end
 
+--- Update.
 function update(delta)
     -- Increment timers
     time = time + delta
@@ -338,7 +348,7 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
     end
 end
 
--- Spawn a troop transport.
+--- Spawn a troop transport.
 function spawnTransport()
     ship = CpuShip():setTemplate("Personnel Freighter 2")
     ship:setHullMax(100):setHull(100)
@@ -347,7 +357,7 @@ function spawnTransport()
     return ship
 end
 
--- Create amount of object_type, at a distance between dist_min and dist_max
+--- Create amount of object_type, at a distance between dist_min and dist_max
 -- around the point (x0, y0)
 function create(object_type, amount, dist_min, dist_max, x0, y0)
     for n = 1, amount do
