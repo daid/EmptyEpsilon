@@ -70,9 +70,7 @@ function friendlyComms(comms_data)
             end
         end
 
-        -- TODO this should use a global
-        local missile_types = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
-        for i, missile_type in ipairs(missile_types) do
+        for i, missile_type in ipairs(MISSILE_TYPES) do
             if comms_target:getWeaponStorageMax(missile_type) > 0 then
                     msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
             end
