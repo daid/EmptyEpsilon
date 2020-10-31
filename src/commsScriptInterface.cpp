@@ -34,6 +34,8 @@ static int commsSwitchToGM(lua_State* L)
 
 /// setCommsMessage(message)
 /// Sets the message/reply shown to the comms officer.
+/// Not setting the message leads to "no reply" (when trying to open comms)
+/// or a dialog with the message "?" (in a reply).
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// addCommsReply(message, function)
 /// Add an reply option for communications.
