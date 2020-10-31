@@ -28,6 +28,8 @@ function mainMenu()
 end
 
 --- Handle friendly communication.
+--
+-- @tparam table comms_data
 function friendlyComms(comms_data)
     if comms_data.friendlyness < 20 then
         setCommsMessage("What do you want?")
@@ -107,6 +109,8 @@ function friendlyComms(comms_data)
 end
 
 --- Handle enemy communication.
+--
+-- @tparam table comms_data
 function enemyComms(comms_data)
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
@@ -150,6 +154,8 @@ function enemyComms(comms_data)
 end
 
 --- Handle neutral communication.
+--
+-- @tparam table comms_data
 function neutralComms(comms_data)
     if comms_data.friendlyness > 50 then
         setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.")

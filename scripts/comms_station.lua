@@ -120,11 +120,14 @@ function handleDockedState()
 end
 
 --- handleWeaponRestock
+--
+-- @tparam string weapon the missile type
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then
         setCommsMessage("You need to stay docked for that action.")
         return
     end
+
     if not isAllowedTo(comms_data.weapons[weapon]) then
         if weapon == "Nuke" then
             setCommsMessage("We do not deal in weapons of mass destruction.")
@@ -135,6 +138,7 @@ function handleWeaponRestock(weapon)
         end
         return
     end
+
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
@@ -166,6 +170,8 @@ function handleUndockedState()
     else
         setCommsMessage("This is " .. comms_target:getCallSign() .. ". Greetings.\nIf you want to do business, please dock with us first.")
     end
+
+    -- supplydrop
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
         addCommsReply(
             "Can you send a supply drop? (" .. getServiceCost("supplydrop") .. "rep)",
@@ -198,6 +204,8 @@ function handleUndockedState()
             end
         )
     end
+
+    -- reinforcements
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
         addCommsReply(
             "Please send reinforcements! (" .. getServiceCost("reinforcements") .. "rep)",
@@ -228,6 +236,8 @@ function handleUndockedState()
 end
 
 --- isAllowedTo
+--
+-- @treturn boolean
 function isAllowedTo(state)
     if state == "friend" and player:isFriendly(comms_target) then
         return true
@@ -240,17 +250,25 @@ end
 
 --- Return the number of reputation points that a specified weapon costs for the
 -- current player.
+--
+-- @tparam string weapon the missile type
+-- @treturn integer
 function getWeaponCost(weapon)
     return math.ceil(comms_data.weapon_cost[weapon] * comms_data.reputation_cost_multipliers[getFriendStatus()])
 end
 
 --- Return the number of reputation points that a specified service costs for
 -- the current player.
+--
+-- @tparam string service the service
+-- @treturn integer
 function getServiceCost(service)
     return math.ceil(comms_data.service_cost[service])
 end
 
 --- Return "friend" or "neutral".
+--
+-- @treturn string
 function getFriendStatus()
     if player:isFriendly(comms_target) then
         return "friend"
