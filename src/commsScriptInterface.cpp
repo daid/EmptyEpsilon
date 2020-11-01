@@ -34,12 +34,16 @@ static int commsSwitchToGM(lua_State* L)
 
 /// setCommsMessage(message)
 /// Sets the message/reply shown to the comms officer.
+/// Not setting the message leads to "no reply" (when trying to open comms)
+/// or a dialog with the message "?" (in a reply).
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// addCommsReply(message, function)
 /// Add an reply option for communications.
 /// Within the callback function, `comms_source` and `comms_target` are available.
 /// Deprecated: In a CommsScript, `player` can be used for `comms_source`.
 /// (In a CommsFunction, only `comms_source` is provided.)
+/// Instead of using the globals, the callback function can take two parameters.
+/// Example: addCommsReply(message, function(comms_source, comms_target) ... end)
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
 /// Use this function from a communication callback function to switch the current
 /// communication from scripted to a GM based chat.
@@ -72,7 +76,7 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
     {
         target->comms_script_callback.getScriptObject()->registerObject(ship, "comms_source");
         target->comms_script_callback.getScriptObject()->registerObject(target, "comms_target");
-        target->comms_script_callback.call();
+        target->comms_script_callback.call(ship, target);
     }
     comms_script_interface = nullptr;
     return has_message;
@@ -91,7 +95,7 @@ void CommsScriptInterface::commChannelMessage(int32_t message_id)
             target->comms_script_callback.getScriptObject()->registerObject(target, "comms_target");
         }
         reply_callbacks.clear();
-        callback.call();
+        callback.call(ship, target);
     }
 
     comms_script_interface = nullptr;
