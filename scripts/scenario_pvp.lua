@@ -100,18 +100,18 @@ Support our glorious soldiers by preventing the heretics from harming our transp
     -- Spawn the first wave
     do
         local faction = "Human Navy"
-        local human_transport = spawnTransport():setFaction(faction):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction(faction, true)
-        table.insert(humanTroops, human_transport)
-        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 15500):orderDefendTarget(human_transport):setScannedByFaction(faction, true)
-        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 14500):orderDefendTarget(human_transport):setScannedByFaction(faction, true)
+        local transport = spawnTransport():setFaction(faction):setPosition(-7000, 15000):orderDock(shangri_la):setScannedByFaction(faction, true)
+        table.insert(humanTroops, transport)
+        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 15500):orderDefendTarget(transport):setScannedByFaction(faction, true)
+        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 14500):orderDefendTarget(transport):setScannedByFaction(faction, true)
     end
 
     do
         local faction = "Kraylor"
-        local kraylor_transport = spawnTransport():setFaction(faction):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction(faction, true)
-        table.insert(kraylorTroops, kraylor_transport)
-        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(26500, 5500):orderDefendTarget(kraylor_transport):setScannedByFaction(faction, true)
-        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(26500, 4500):orderDefendTarget(kraylor_transport):setScannedByFaction(faction, true)
+        local transport = spawnTransport():setFaction(faction):setPosition(26500, 5000):orderDock(shangri_la):setScannedByFaction(faction, true)
+        table.insert(kraylorTroops, transport)
+        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(26500, 5500):orderDefendTarget(transport):setScannedByFaction(faction, true)
+        CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(26500, 4500):orderDefendTarget(transport):setScannedByFaction(faction, true)
     end
 end
 
@@ -171,13 +171,13 @@ function stationComms()
                 end
                 setCommsMessage("Aye, captain. We've deployed a squad with fighter escort to support the assault on Shangri-La.")
                 if comms_target:getFaction() == "Human Navy" then
-                    local human_transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
-                    table.insert(humanTroops, human_transport)
-                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(human_transport):setScannedByFaction(comms_source:getFaction(), true)
+                    local transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
+                    table.insert(humanTroops, transport)
+                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(transport):setScannedByFaction(comms_source:getFaction(), true)
                 elseif comms_target:getFaction() == "Kraylor" then
-                    local kraylor_transport = spawnTransport():setFaction("Kraylor"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
-                    table.insert(kraylorTroops, kraylor_transport)
-                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(kraylor_transport):setScannedByFaction(comms_source:getFaction(), true)
+                    local transport = spawnTransport():setFaction("Kraylor"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
+                    table.insert(kraylorTroops, transport)
+                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(transport):setScannedByFaction(comms_source:getFaction(), true)
                 else
                     -- Can usually not happen. Do nothing.
                 end
@@ -347,19 +347,19 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
         do
             local faction = "Human Navy"
             local line = random(0, 20) * 500
-            local human_transport = spawnTransport():setFaction(faction):setPosition(-7000, 5000 + line):orderDock(shangri_la):setScannedByFaction(faction, true)
-            table.insert(humanTroops, human_transport)
-            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 5500 + line):orderDefendTarget(human_transport):setScannedByFaction(faction, true)
-            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 4500 + line):orderDefendTarget(human_transport):setScannedByFaction(faction, true)
+            local transport = spawnTransport():setFaction(faction):setPosition(-7000, 5000 + line):orderDock(shangri_la):setScannedByFaction(faction, true)
+            table.insert(humanTroops, transport)
+            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 5500 + line):orderDefendTarget(transport):setScannedByFaction(faction, true)
+            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(-7000, 4500 + line):orderDefendTarget(transport):setScannedByFaction(faction, true)
         end
 
         do
             local faction = "Kraylor"
             local line = random(0, 20) * 500
-            local kraylor_transport = spawnTransport():setFaction(faction):setPosition(27000, -5000 + line):orderDock(shangri_la):setScannedByFaction(faction, true)
-            table.insert(kraylorTroops, kraylor_transport)
-            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(27000, -5500 + line):orderDefendTarget(kraylor_transport):setScannedByFaction(faction, true)
-            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(27000, -4500 + line):orderDefendTarget(kraylor_transport):setScannedByFaction(faction, true)
+            local transport = spawnTransport():setFaction(faction):setPosition(27000, -5000 + line):orderDock(shangri_la):setScannedByFaction(faction, true)
+            table.insert(kraylorTroops, transport)
+            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(27000, -5500 + line):orderDefendTarget(transport):setScannedByFaction(faction, true)
+            CpuShip():setTemplate("MT52 Hornet"):setFaction(faction):setPosition(27000, -4500 + line):orderDefendTarget(transport):setScannedByFaction(faction, true)
         end
 
         wave_timer = 0
