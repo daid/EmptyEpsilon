@@ -1,8 +1,8 @@
 -- Name: Clash in Shangri-La (PVP)
 -- Description: Since its creation, the Shangri-La station was governed by a multi-ethnic consortium that assured the station's independence across the conflicts that shook the sector.
 ---             However, the station's tranquility came to an abrupt end when most of the governing consortium's members were assassinated under a Exuari false flag operation.
----             Now the station is in a state of civil war, with infighting breaking out between warring factions. Both the neighboring Human Navy and Kraylor are worried that the breakdown
----             of order in Shangri-La could tilt the balance of power in their opponent's favor, and sent "peacekeepers" to shift the situation to their own advantage.
+---             Now the station is in a state of civil war, with infighting breaking out between warring factions.
+--              Both the neighboring Human Navy and Kraylor are worried that the breakdown of order in Shangri-La could tilt the balance of power in their opponent's favor, and sent "peacekeepers" to shift the situation to their own advantage.
 ---             The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all-out battle for Shangri-La.
 -- Type: PvP
 
@@ -257,11 +257,11 @@ function update(delta)
 
     -- If the Gallipoli is destroyed ...
     if (not gallipoli:isValid()) then
-        -- ... and 20 seconds have passed, spawn the Heinlein.
         if human_respawn > 20 then
-            -- Otherwise, increment the respawn timer.
+            -- ... and 20 seconds have passed, spawn the Heinlein.
             gallipoli = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-8500, 15000):setCallSign("HNS Heinlein"):setScannedByFaction("Kraylor", false)
         else
+            -- Otherwise, increment the respawn timer.
             human_respawn = human_respawn + delta
         end
     end
@@ -327,7 +327,7 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
         wave_timer = 0
     end
 
-    -- Count transports. Every 10 seconds, awward 1 point per transport docked
+    -- Count transports. Every 10 seconds, award 1 point per transport docked
     -- with Shangri-La.
     if troop_timer > 10 then
         for _, transport in ipairs(kraylorTroops) do
@@ -352,6 +352,8 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
 end
 
 --- Spawn a troop transport.
+--
+-- @treturn CpuShip
 function spawnTransport()
     ship = CpuShip():setTemplate("Personnel Freighter 2")
     ship:setHullMax(100):setHull(100)
@@ -360,8 +362,8 @@ function spawnTransport()
     return ship
 end
 
---- Create amount of object_type, at a distance between dist_min and dist_max
--- around the center (cx, cy)
+--- Create `amount` of `object_type`, at a distance between `dist_min` and `dist_max`
+-- around the center `(cx, cy)`.
 function create(object_type, amount, dist_min, dist_max, cx, cy)
     for _ = 1, amount do
         local phi = random(0, 2 * math.pi)
