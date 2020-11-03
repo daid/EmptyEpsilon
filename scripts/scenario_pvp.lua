@@ -208,110 +208,123 @@ end
 function supplyDialogue()
     setCommsMessage("What supplies do you need?")
 
+    local missile_type
+    local price
+
+    missile_type = "Homing"
+    price = 2
     addCommsReply(
-        "Do you have spare homing missiles for us? (2rep each)",
+        string.format("Do you have spare homing missiles for us? (%d rep each)", price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage("You need to stay docked for that action.")
                 return
             end
-            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then
+            if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
                 setCommsMessage("Not enough reputation.")
                 return
             end
-            if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
+            if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
                 setCommsMessage("Sorry, captain, but you are fully stocked with homing missiles.")
                 addCommsReply("Back", supplyDialogue)
             else
-                comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
+                comms_source:setWeaponStorage(missile_type, comms_source:getWeaponStorageMax(missile_type))
                 setCommsMessage("We've replenished up your homing missile supply.")
                 addCommsReply("Back", supplyDialogue)
             end
         end
     )
 
+    missile_type = "Mine"
+    price = 2
     addCommsReply(
-        "Please re-stock our mines. (2rep each)",
+        string.format("Please re-stock our mines. (%d rep each)", price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage("You need to stay docked for that action.")
                 return
             end
-            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
+            if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
                 setCommsMessage("Not enough reputation.")
                 return
             end
-            if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
+            if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
                 setCommsMessage("Captain, you already have all the mines you can fit in that ship.")
                 addCommsReply("Back", supplyDialogue)
             else
-                comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
+                comms_source:setWeaponStorage(missile_type, comms_source:getWeaponStorageMax(missile_type))
                 setCommsMessage("These mines are yours.")
                 addCommsReply("Back", supplyDialogue)
             end
         end
     )
 
+    missile_type = "Nuke"
+    price = 15
     addCommsReply(
-        "Can you supply us with some nukes? (15rep each)",
+        string.format("Can you supply us with some nukes? (%d rep each)", price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage("You need to stay docked for that action.")
                 return
             end
-            if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then
+            if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
                 setCommsMessage("Not enough reputation.")
                 return
             end
-            if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
+            if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
                 setCommsMessage("Your nukes are already charged and primed for destruction.")
                 addCommsReply("Back", supplyDialogue)
             else
-                comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
+                comms_source:setWeaponStorage(missile_type, comms_source:getWeaponStorageMax(missile_type))
                 setCommsMessage("You are fully loaded and ready to explode things.")
                 addCommsReply("Back", supplyDialogue)
             end
         end
     )
 
+    missile_type = "EMP"
+    price = 10
     addCommsReply(
-        "Please re-stock our EMP missiles. (10rep each)",
+        string.format("Please re-stock our EMP missiles. (%d rep each)", price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage("You need to stay docked for that action.")
                 return
             end
-            if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then
+            if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
                 setCommsMessage("Not enough reputation.")
                 return
             end
-            if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
+            if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
                 setCommsMessage("All storage for EMP missiles is already full, captain.")
                 addCommsReply("Back", supplyDialogue)
             else
-                comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
+                comms_source:setWeaponStorage(missile_type, comms_source:getWeaponStorageMax(missile_type))
                 setCommsMessage("We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
                 addCommsReply("Back", supplyDialogue)
             end
         end
     )
 
+    missile_type = "HVLI"
+    price = 2
     addCommsReply(
-        "Can you restock us with HVLI? (2rep each)",
+        string.format("Can you restock us with HVLI? (%d rep each)", price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage("You need to stay docked for that action.")
                 return
             end
-            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("HVLI") - comms_source:getWeaponStorage("HVLI"))) then
+            if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
                 setCommsMessage("Not enough reputation.")
                 return
             end
-            if comms_source:getWeaponStorage("HVLI") >= comms_source:getWeaponStorageMax("HVLI") then
+            if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
                 setCommsMessage("Sorry, captain, but you are fully stocked with HVLIs.")
                 addCommsReply("Back", supplyDialogue)
             else
-                comms_source:setWeaponStorage("HVLI", comms_source:getWeaponStorageMax("HVLI"))
+                comms_source:setWeaponStorage(missile_type, comms_source:getWeaponStorageMax(missile_type))
                 setCommsMessage("We've replenished up your HVLI supply.")
                 addCommsReply("Back", supplyDialogue)
             end
