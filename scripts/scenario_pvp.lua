@@ -117,6 +117,21 @@ Support our glorious soldiers by preventing the heretics from harming our transp
     end
 end
 
+--- Compile and return status report.
+--
+-- @treturn string the status report
+function getStatusReport()
+    return table.concat(
+        {
+            "Here's the latest news from the front.",
+            string.format("Human dominance: %d", human_points),
+            string.format("Kraylor dominance: %d", kraylor_points),
+            string.format("Time elapsed: %.0f", time)
+        },
+        "\n"
+    )
+end
+
 --- Comms with independent station _Shangri-La_.
 --
 -- If players call Shangri-La, provide a status report
@@ -125,7 +140,7 @@ function shangrilaComms()
     addCommsReply(
         "Give us a status report.",
         function()
-            setCommsMessage("Here's the latest news from the front.\nHuman dominance: " .. human_points .. "\nKraylor dominance: " .. kraylor_points .. "\nTime elapsed: " .. time)
+            setCommsMessage(getStatusReport())
         end
     )
 end
@@ -145,7 +160,7 @@ function stationComms()
         addCommsReply(
             "I need a status report.",
             function()
-                setCommsMessage("Here's the latest news from the front.\nHuman dominance: " .. human_points .. "\nKraylor dominance: " .. kraylor_points .. "\nTime elapsed: " .. time)
+                setCommsMessage(getStatusReport())
             end
         )
 
