@@ -70,8 +70,8 @@ function init()
     time = 0
     wave_timer = 0
     troop_timer = 0
-    kraylor_respawn = 0
     human_respawn = 0
+    kraylor_respawn = 0
 
     human_points = 0
     kraylor_points = 0
@@ -170,14 +170,16 @@ function stationComms()
                     return
                 end
                 setCommsMessage("Aye, captain. We've deployed a squad with fighter escort to support the assault on Shangri-La.")
-                if comms_target:getFaction() == "Kraylor" then
+                if comms_target:getFaction() == "Human Navy" then
+                    local human_transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
+                    table.insert(humanTroops, human_transport)
+                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(human_transport):setScannedByFaction(comms_source:getFaction(), true)
+                elseif comms_target:getFaction() == "Kraylor" then
                     local kraylor_transport = spawnTransport():setFaction("Kraylor"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Kraylor", true)
                     table.insert(kraylorTroops, kraylor_transport)
                     CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(kraylor_transport):setScannedByFaction(comms_source:getFaction(), true)
                 else
-                    local human_transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
-                    table.insert(humanTroops, human_transport)
-                    CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(human_transport):setScannedByFaction(comms_source:getFaction(), true)
+                    -- Can usually not happen. Do nothing.
                 end
             end
         )
