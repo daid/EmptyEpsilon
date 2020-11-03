@@ -361,13 +361,13 @@ function spawnTransport()
 end
 
 --- Create amount of object_type, at a distance between dist_min and dist_max
--- around the point (x0, y0)
-function create(object_type, amount, dist_min, dist_max, x0, y0)
-    for n = 1, amount do
-        local r = random(0, 360)
+-- around the center (cx, cy)
+function create(object_type, amount, dist_min, dist_max, cx, cy)
+    for _ = 1, amount do
+        local phi = random(0, 2 * math.pi)
         local distance = random(dist_min, dist_max)
-        x = x0 + math.cos(r / 180 * math.pi) * distance
-        y = y0 + math.sin(r / 180 * math.pi) * distance
+        x = cx + math.cos(phi) * distance
+        y = cy + math.sin(phi) * distance
         object_type():setPosition(x, y)
     end
 end
