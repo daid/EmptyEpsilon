@@ -8,8 +8,6 @@
 
 --- Scenario
 --
--- TODO Consider to add HVLI resupply.
---
 -- @script scenario_pvp
 
 -- global variables in this scenario
@@ -293,6 +291,28 @@ function supplyDialogue()
             else
                 comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
                 setCommsMessage("We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
+                addCommsReply("Back", supplyDialogue)
+            end
+        end
+    )
+
+    addCommsReply(
+        "Can you restock us with HVLI? (2rep each)",
+        function()
+            if not comms_source:isDocked(comms_target) then
+                setCommsMessage("You need to stay docked for that action.")
+                return
+            end
+            if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("HVLI") - comms_source:getWeaponStorage("HVLI"))) then
+                setCommsMessage("Not enough reputation.")
+                return
+            end
+            if comms_source:getWeaponStorage("HVLI") >= comms_source:getWeaponStorageMax("HVLI") then
+                setCommsMessage("Sorry, captain, but you are fully stocked with HVLIs.")
+                addCommsReply("Back", supplyDialogue)
+            else
+                comms_source:setWeaponStorage("HVLI", comms_source:getWeaponStorageMax("HVLI"))
+                setCommsMessage("We've replenished up your HVLI supply.")
                 addCommsReply("Back", supplyDialogue)
             end
         end
