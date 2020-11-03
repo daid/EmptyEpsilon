@@ -338,7 +338,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
 With the Kraylor flagship out of the way, we can land the final blow!]])
         gallipoli:addReputationPoints(50)
         human_points = human_points + 5
-        krayor_respawn = 0
+        kraylor_respawn = 0
     end
 
     -- Every 150 seconds, spawn a troop transport and 2 fighters as escorts for
