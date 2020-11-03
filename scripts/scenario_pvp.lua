@@ -12,6 +12,32 @@
 --
 -- @script scenario_pvp
 
+-- global variables in this scenario
+
+-- independent station
+local shangri_la
+
+-- for Human Navy and Kraylor
+local gallipoli
+local crusader
+
+local human_shipyard
+local kraylor_shipyard
+
+local humanTroops
+local kraylorTroops
+
+local human_respawn
+local kraylor_respawn
+
+local human_points
+local kraylor_points
+
+-- time
+local time
+local wave_timer
+local troop_timer
+
 --- Initialize scenario.
 function init()
     humanTroops = {}
