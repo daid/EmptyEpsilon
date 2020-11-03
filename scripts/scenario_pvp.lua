@@ -128,8 +128,6 @@ function stationComms()
                     table.insert(humanTroops, human_transport)
                     CpuShip():setTemplate("MT52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(human_transport):setScannedByFaction(comms_source:getFaction(), true)
                 end
-                for n = 0, 1 do
-                end
             end
         )
 
