@@ -1,4 +1,4 @@
-# The dicectory `scripts`
+# The directory `scripts`
 
 The Lua files are used in different ways.
 
@@ -39,4 +39,4 @@ The default communication scripts for each created ship or station.
   - uses `supply_drop.lua`
 - `comms_supply_drop.lua` (used by `supply_drop.lua`)
 
-They can be replaced by `setCommsScript(filename)` or setCommsFunction(callback)`.
+They can be replaced by `obj:setCommsScript(filename)` or `obj:setCommsFunction(callback)`.
