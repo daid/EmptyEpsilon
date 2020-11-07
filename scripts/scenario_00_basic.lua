@@ -128,54 +128,25 @@ function init()
     end
 
     -- GM functions to manually trigger enemy waves.
-    addGMFunction(
-        "Strikeship wave",
-        function()
-            addWave(enemyList, 0, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
-
-    addGMFunction(
-        "Fighter wave",
-        function()
-            addWave(enemyList, 1, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
-
-    addGMFunction(
-        "Gunship wave",
-        function()
-            addWave(enemyList, 2, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
-
-    addGMFunction(
-        "Dreadnought",
-        function()
-            addWave(enemyList, 4, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
-
-    addGMFunction(
-        "Missile cruiser wave",
-        function()
-            addWave(enemyList, 5, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
-
-    addGMFunction(
-        "Cruiser wave",
-        function()
-            addWave(enemyList, 6, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
-
-    addGMFunction(
-        "Adv. striker wave",
-        function()
-            addWave(enemyList, 9, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
-        end
-    )
+    local buttons = {
+        -- button name, kind of wave
+        {"Strikeship wave", 0},
+        {"Fighter wave", 1},
+        {"Gunship wave", 2},
+        {"Dreadnought", 4},
+        {"Missile cruiser wave", 5},
+        {"Cruiser wave", 6},
+        {"Adv. striker wave", 9}
+    }
+    for _, button in ipairs(buttons) do
+        local name, kind = table.unpack(button)
+        addGMFunction(
+            name,
+            function()
+                addWave(enemyList, kind, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
+            end
+        )
+    end
 
     -- Let the GM spawn a random enemy wave.
     addGMFunction(
