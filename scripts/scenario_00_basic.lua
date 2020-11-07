@@ -86,16 +86,19 @@ function init()
     -- Randomly distribute 3 allied stations throughout the region.
     n = 0
     station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     table.insert(stationList, station_1)
-    table.insert(friendlyList, setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+    table.insert(friendlyList, station_1)
     n = 1
-    table.insert(stationList, station_2)
     station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
-    table.insert(friendlyList, setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+    setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    table.insert(stationList, station_2)
+    table.insert(friendlyList, station_2)
     n = 2
-    table.insert(stationList, station_3)
     station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
-    table.insert(friendlyList, setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000)))
+    setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    table.insert(stationList, station_3)
+    table.insert(friendlyList, station_3)
 
     -- Start the players with 300 reputation.
     friendlyList[1]:addReputationPoints(300.0)
