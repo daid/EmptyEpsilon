@@ -181,17 +181,16 @@ function init()
     )
 
     -- Set the number of enemy waves based on the scenario variation.
-    if getScenarioVariation() == "Extreme" then
-        enemy_group_count = 20
-    elseif getScenarioVariation() == "Hard" then
-        enemy_group_count = 8
-    elseif getScenarioVariation() == "Easy" then
-        enemy_group_count = 3
-    elseif getScenarioVariation() == "Empty" then
-        enemy_group_count = 0
-    else
-        enemy_group_count = 5
-    end
+    local counts = {
+        ["Extreme"] = 20,
+        ["Hard"] = 8,
+        -- default:
+        ["None"] = 5,
+        ["Easy"] = 3,
+        ["Empty"] = 0
+    }
+    local enemy_group_count = counts[getScenarioVariation()]
+    assert(enemy_group_count, "unknown variation, could not set enemy_group_count")
 
     -- If not in the Empty variation, spawn the corresponding number of random
     -- enemy waves at distributed random headings and semi-random distances
