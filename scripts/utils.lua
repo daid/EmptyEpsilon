@@ -4,7 +4,8 @@
 --
 -- These functions should be as generic as possible, so they are highly usable.
 
--- Given enough information, find the distance between two positions.
+--- Given enough information, find the distance between two positions.
+--
 -- This function can be called four ways:
 --
 -- distance(obj1, obj2)
@@ -67,21 +68,23 @@ function distance(a, b, c, d)
     return math.sqrt(xd * xd + yd * yd)
 end
 
--- Given an angle and length, return a relative vector (x, y coordinates).
---
--- vectorFromAngle(angle, length)
---   angle: Relative heading, in degrees
---   length: Relative distance, in thousandths of an in-game unit (1000 = 1U)
+--- Given an angle and length, return a relative vector (x, y coordinates).
 --
 -- Example: For relative x and y coordinates 1000 units away at a heading of
 -- 45 degrees, run:
---   vectorFromAngle(45, 1000).
+--    vectorFromAngle(45, 1000)
+--
+-- @param angle Relative heading, in degrees
+-- @param length Relative distance, in thousandths of an in-game unit (1000 = 1U)
+-- @return x the relative x coordinate
+-- @return y the relative y coordinate
 function vectorFromAngle(angle, length)
     return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
 end
 
--- Place an object relative to a vector. Returns the object with its position
--- set to the resulting coordinates.
+--- Place an object relative to a vector.
+--
+-- Returns the object with its position set to the resulting coordinates.
 --
 -- setCirclePos(obj, x, y, angle, distance)
 --   obj: An object.
@@ -99,7 +102,7 @@ function setCirclePos(obj, x, y, angle, distance)
     return obj:setPosition(x + dx, y + dy)
 end
 
--- Create objects along a line between two vectors, optionally with grid
+--- Create objects along a line between two vectors, optionally with grid
 -- placement and randomization.
 --
 -- createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance, randomize)
@@ -113,14 +116,15 @@ end
 --   randomize (optional): If present, randomize object placement by this
 --     amount. Defaults to 0 (grid).
 --
---   Examples: To create a mine field, run:
---     createObjectsOnLine(0, 0, 10000, 0, 1000, Mine, 4)
---   This creates 4 rows of mines from 0,0 to 10000,0, with mines spaced 1U
---   apart.
---
---   The `randomize` parameter adds chaos to the pattern. This works well for
---   asteroid fields:
---     createObjectsOnLine(0, 0, 10000, 0, 300, Asteroid, 4, 100, 800)
+-- @usage
+-- -- To create a mine field, run:
+-- createObjectsOnLine(0, 0, 10000, 0, 1000, Mine, 4)
+-- -- This creates 4 rows of mines from 0,0 to 10000,0, with mines spaced 1U
+-- -- apart.
+-- @usage
+-- -- The `randomize` parameter adds chaos to the pattern. This works well for
+-- -- asteroid fields:
+-- createObjectsOnLine(0, 0, 10000, 0, 300, Asteroid, 4, 100, 800)
 function createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance, randomize)
     if rows == nil then
         rows = 1
@@ -145,11 +149,11 @@ function createObjectsOnLine(x1, y1, x2, y2, spacing, object_type, rows, chance,
     end
 end
 
--- Merge data from table B into table A. Every key not set in table A is filled
--- by the data from table B.
+--- Merge data from table B into table A.
+-- Every key not set in table A is filled by the data from table B.
 --
 -- This function can fill in incomplete configuration data. See the
--- comms_station.lua script as example.
+-- `comms_station.lua` script as example.
 function mergeTables(table_a, table_b)
     for key, value in pairs(table_b) do
         if table_a[key] == nil then
@@ -160,7 +164,7 @@ function mergeTables(table_a, table_b)
     end
 end
 
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
+--- Create amount of `object_type`, at a distance between `dist_min` and `dist_max` around the point (`x0`, `y0`)
 function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
     for n = 1, amount do
         local r = random(0, 360)
@@ -171,17 +175,17 @@ function placeRandomAroundPoint(object_type, amount, dist_min, dist_max, x0, y0)
     end
 end
 
--- Place semi-random object_types around point (x,y) in a (x_grids by y_grids) area
+--- Place semi-random `object_types` around point `(x,y)` in a (`x_grids` by `y_grids`) area.
+--
 -- Perlin Noise is used to create a sort of natural look to the created objects.
--- Use the perlin_z-parameter together with density to control amound of placed objects
--- Sensible values for perlin_z are in a range of {0.1 .. 0.5}
+-- Use the `perlin_z`-parameter together with `density` to control amound of placed objects
+-- Sensible values for `perlin_z` are in a range of {0.1 .. 0.5}.
 --
--- Example:
---
---   -- Creates a 10x10 grid space filled with some asteroids and nebulas
---   placeRandomObjects(Asteroid, 30, 0.3, 0, 0, 10, 10)
---   placeRandomObjects(VisualAsteroid, 30, 0.3, 0, 0, 10, 10)
---   placeRandomObjects(Nebula, 15, 0.3, 0, 0, 10, 10)
+-- @usage
+-- -- Creates a 10x10 grid space filled with some asteroids and nebulas
+-- placeRandomObjects(Asteroid, 30, 0.3, 0, 0, 10, 10)
+-- placeRandomObjects(VisualAsteroid, 30, 0.3, 0, 0, 10, 10)
+-- placeRandomObjects(Nebula, 15, 0.3, 0, 0, 10, 10)
 function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_grids)
     -- Prepare the Perlin Noise generator (if needed)
     require("perlin_noise.lua")
