@@ -19,6 +19,11 @@ require("utils.lua")
 --   setCirclePos(obj, x, y, angle, distance)
 --      Returns the object with its position set to the resulting coordinates.
 
+-- Global variables for this scenario
+local enemyList
+local friendlyList
+local stationList
+
 -- Add an enemy wave.
 -- enemyList: A table containing enemy ship objects.
 -- type: A number; at each integer, determines a different wave of ships to add
@@ -29,7 +34,7 @@ function addWave(enemyList, type, a, d)
     if type < 1.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
     elseif type < 2.0 then
-        leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
+        local leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
         table.insert(enemyList, leader)
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
@@ -45,7 +50,7 @@ function addWave(enemyList, type, a, d)
     elseif type < 5.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
     elseif type < 6.0 then
-        leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
+        local leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
         table.insert(enemyList, leader)
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
@@ -84,18 +89,19 @@ function init()
     stationList = {}
 
     -- Randomly distribute 3 allied stations throughout the region.
+    local n
     n = 0
-    station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    local station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     table.insert(stationList, station_1)
     table.insert(friendlyList, station_1)
     n = 1
-    station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    local station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     table.insert(stationList, station_2)
     table.insert(friendlyList, station_2)
     n = 2
-    station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    local station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     table.insert(stationList, station_3)
     table.insert(friendlyList, station_3)
@@ -104,8 +110,8 @@ function init()
     friendlyList[1]:addReputationPoints(300.0)
 
     -- Randomly scatter nebulae near the players' spawn point.
-    local x, y = friendlyList[1]:getPosition()
-    setCirclePos(Nebula(), x, y, random(0, 360), 6000)
+    local cx, cy = friendlyList[1]:getPosition()
+    setCirclePos(Nebula(), cx, cy, random(0, 360), 6000)
 
     for n = 1, 5 do
         setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
@@ -165,9 +171,9 @@ function init()
     addGMFunction(
         "Random wave",
         function()
-            a = setWaveAngle(math.random(20), math.random(20))
-            d = setWaveDistance(math.random(20))
-            type = random(0, 10)
+            local a = setWaveAngle(math.random(20), math.random(20))
+            local d = setWaveDistance(math.random(20))
+            local type = random(0, 10)
             addWave(enemyList, type, a, d)
         end
     )
@@ -177,10 +183,10 @@ function init()
     addGMFunction(
         "Random friendly",
         function()
-            a = setWaveAngle(math.random(20), math.random(20))
-            d = random(15000, 20000 + math.random(20) * 1500)
-            friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
-            friendlyShipIndex = math.random(#friendlyShip)
+            local a = setWaveAngle(math.random(20), math.random(20))
+            local d = random(15000, 20000 + math.random(20) * 1500)
+            local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
+            local friendlyShipIndex = math.random(#friendlyShip)
             table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         end
     )
@@ -211,26 +217,26 @@ function init()
     -- relative to the players' spawn point.
     if enemy_group_count > 0 then
         for cnt = 1, enemy_group_count do
-            a = setWaveAngle(cnt, enemy_group_count)
-            d = setWaveDistance(enemy_group_count)
-            type = random(0, 10)
+            local a = setWaveAngle(cnt, enemy_group_count)
+            local d = setWaveDistance(enemy_group_count)
+            local type = random(0, 10)
             addWave(enemyList, type, a, d)
         end
     end
 
     -- Spawn 2-5 random asteroid belts.
     for cnt = 1, random(2, 5) do
-        a = random(0, 360)
-        a2 = random(0, 360)
-        adiff = math.abs(a2 - a)
-        d = random(3000, 40000)
-        x, y = vectorFromAngle(a, d)
+        local a = random(0, 360)
+        local a2 = random(0, 360)
+        local adiff = math.abs(a2 - a)
+        local d = random(3000, 40000)
+        local x, y = vectorFromAngle(a, d)
 
         for acnt = 1, 50 do
-            dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
-            dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-            posx = x + dx1 + dx2
-            posy = x + dy1 + dy2
+            local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
+            local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
+            local posx = x + dx1 + dx2
+            local posy = x + dy1 + dy2
             -- Avoid spawning asteroids within 1U of the player start position or
             -- 2U of any station.
             if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
@@ -243,24 +249,24 @@ function init()
         end
 
         for acnt = 1, 100 do
-            dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
-            dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
+            local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
+            local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
         end
     end
 
     -- Spawn 0-3 random mine fields.
     for cnt = 1, random(0, 3) do
-        a = random(0, 360)
-        a2 = random(0, 360)
-        d = random(20000, 40000)
-        x, y = vectorFromAngle(a, d)
+        local a = random(0, 360)
+        local a2 = random(0, 360)
+        local d = random(20000, 40000)
+        local x, y = vectorFromAngle(a, d)
 
         for nx = -1, 1 do
             for ny = -5, 5 do
                 if random(0, 100) < 90 then
-                    dx1, dy1 = vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
-                    dx2, dy2 = vectorFromAngle(a2 + 90, (ny * 1000) + random(-100, 100))
+                    local dx1, dy1 = vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
+                    local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * 1000) + random(-100, 100))
                     Mine():setPosition(x + dx1 + dx2, y + dy1 + dy2)
                 end
             end
@@ -268,12 +274,12 @@ function init()
     end
 
     -- Spawn a random black hole.
-    a = random(0, 360)
-    d = random(10000, 45000)
-    x, y = vectorFromAngle(a, d)
+    local a = random(0, 360)
+    local d = random(10000, 45000)
+    local x, y = vectorFromAngle(a, d)
     -- Watching a station fall into a black hole to start the game never gets old,
     -- but players hate it. Avoid spawning black holes too close to stations.
-    spawn_hole = false
+    local spawn_hole = false
     while not spawn_hole do
         for i, station in ipairs(stationList) do
             if distance(station, x, y) > 3000 then
@@ -290,16 +296,14 @@ function init()
 end
 
 function update(delta)
-    enemy_count = 0
-    friendly_count = 0
-
     -- Count all surviving enemies and allies.
+    local enemy_count = 0
     for _, enemy in ipairs(enemyList) do
         if enemy:isValid() then
             enemy_count = enemy_count + 1
         end
     end
-
+    local friendly_count = 0
     for _, friendly in ipairs(friendlyList) do
         if friendly:isValid() then
             friendly_count = friendly_count + 1
