@@ -89,48 +89,48 @@ ship_names = {
 
 --- Add an enemy wave.
 --
--- That is, create it and add it to `enemyList`.
+-- That is, create it and add it to `list`.
 --
--- @tparam table enemyList A table containing enemy ship objects. The created ships are appended to this array.
+-- @tparam table list A table containing enemy ship objects. The created ships are appended to this array.
 -- @tparam number kind A number; at each integer, determines a different wave of ships to add
---  to the enemyList. Any number is valid, but only numbers in [0, 10) are meaningful.
+--  to the list. Any number is valid, but only numbers in [0, 10) are meaningful.
 -- @tparam number a The spawned wave's heading relative to the players' spawn point.
 -- @tparam number d The spawned wave's distance from the players' spawn point.
-function addWave(enemyList, kind, a, d)
+function addWave(list, kind, a, d)
     local cx, cy = 0, 0 -- center
     if kind < 1.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Ranus U"):setRotation(a + 180):orderRoaming(), cx, cy, a, d))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Ranus U"):setRotation(a + 180):orderRoaming(), cx, cy, a, d))
     elseif kind < 2.0 then
         local leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-1, 1), d + random(-100, 100))
-        table.insert(enemyList, leader)
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), cx, cy, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), cx, cy, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(list, leader)
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
     elseif kind < 3.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 4.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 5.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 6.0 then
         local leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100))
-        table.insert(enemyList, leader)
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(list, leader)
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), cx, cy, a + random(-1, 1), d + random(-100, 100)))
     elseif kind < 7.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 8.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Nirvana R5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("Nirvana R5"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     elseif kind < 9.0 then
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MU52 Hornet"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("MU52 Hornet"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     else
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
-        table.insert(enemyList, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
+        table.insert(list, setCirclePos(CpuShip():setTemplate("WX-Lindworm"):setRotation(a + 180):orderRoaming(), cx, cy, a + random(-5, 5), d + random(-100, 100)))
     end
 end
 
