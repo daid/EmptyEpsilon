@@ -89,11 +89,13 @@ ship_names = {
 
 --- Add an enemy wave.
 --
--- @param enemyList A table containing enemy ship objects. The created ships are appended to this array.
--- @param kind A number; at each integer, determines a different wave of ships to add
+-- That is, create it and add it to `enemyList`.
+--
+-- @tparam table enemyList A table containing enemy ship objects. The created ships are appended to this array.
+-- @tparam number kind A number; at each integer, determines a different wave of ships to add
 --  to the enemyList. Any number is valid, but only numbers in [0, 10) are meaningful.
--- @param a The spawned wave's heading relative to the players' spawn point.
--- @param d The spawned wave's distance from the players' spawn point.
+-- @tparam number a The spawned wave's heading relative to the players' spawn point.
+-- @tparam number d The spawned wave's distance from the players' spawn point.
 function addWave(enemyList, kind, a, d)
     local cx, cy = 0, 0 -- center
     if kind < 1.0 then
@@ -134,16 +136,18 @@ end
 
 --- Returns a semi-random heading.
 --
--- @param cnt A counter, generally between 1 and the number of enemy groups.
--- @param enemy_group_count A number of enemy groups, generally set by the scenario variation.
+-- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
+-- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
+-- @treturn number a random angle (between 0-60 and 360+60)
 function getWaveAngle(cnt, enemy_group_count)
     return cnt * 360 / enemy_group_count + random(-60, 60)
 end
 
 --- Returns a semi-random distance.
 --
--- @param cnt A counter, generally between 1 and the number of enemy groups.
--- @param enemy_group_count A number of enemy groups, generally set by the scenario variation. Unused.
+-- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
+-- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation. Unused.
+-- @treturn number a distance
 function getWaveDistance(cnt, enemy_group_count)
     return random(25000 + cnt * 1000, 30000 + cnt * 3000)
 end
@@ -349,7 +353,7 @@ end
 
 --- Update.
 --
--- @param delta time delta
+-- @tparam number delta time delta
 function update(delta)
     if not scenario_started then
         if not player:isValid() then
