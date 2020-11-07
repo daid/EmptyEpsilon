@@ -34,9 +34,9 @@ Rundown of the mission:
 ==Phase 2: Discovery
 * You first mission will be to investigate a strange signal from a nebula.
 * As the nebula is in the outer space regions, you'll have you use a jump carrier.
-* The jump carrier delivers you to the edge of a nebulea cloud. There are a few kraylor ships here for you to fight.
-* The objective is to find an artifact within the nebulea, and scan it. This is a tough scan (level 3)
-* In these nebulea, you can also encounter ghost ships. Which are just lost single ships. As well as two "dud" artifacts that are not the source of the signal.
+* The jump carrier delivers you to the edge of a nebulae cloud. There are a few kraylor ships here for you to fight.
+* The objective is to find an artifact within the nebulae, and scan it. This is a tough scan (level 3)
+* In these nebulae, you can also encounter ghost ships. Which are just lost single ships. As well as two "dud" artifacts that are not the source of the signal.
 * When you scan the proper artifact, it gives you 4 readings in the description. Relay needs to pass these readings to the JC-88 or Shipyard before the mission continues.
 * When this is done, the artifact becomes unstable, and becomes a wormhole that sucks in the player.
 ==Phase 3: Lost in enemy space...
