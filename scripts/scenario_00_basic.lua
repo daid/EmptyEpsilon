@@ -123,7 +123,7 @@ function init()
     local cx, cy = friendlyList[1]:getPosition()
     setCirclePos(Nebula(), cx, cy, random(0, 360), 6000)
 
-    for n = 1, 5 do
+    for _ = 1, 5 do
         setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
     end
 
@@ -195,24 +195,21 @@ function init()
     -- If not in the Empty variation, spawn the corresponding number of random
     -- enemy waves at distributed random headings and semi-random distances
     -- relative to the players' spawn point.
-    if enemy_group_count > 0 then
-        for cnt = 1, enemy_group_count do
-            local a = setWaveAngle(cnt, enemy_group_count)
-            local d = setWaveDistance(enemy_group_count)
-            local kind = random(0, 10)
-            addWave(enemyList, kind, a, d)
-        end
+    for cnt = 1, enemy_group_count do
+        local a = setWaveAngle(cnt, enemy_group_count)
+        local d = setWaveDistance(enemy_group_count)
+        local kind = random(0, 10)
+        addWave(enemyList, kind, a, d)
     end
 
     -- Spawn 2-5 random asteroid belts.
-    for cnt = 1, random(2, 5) do
+    for _ = 1, irandom(2, 5) do
         local a = random(0, 360)
         local a2 = random(0, 360)
-        local adiff = math.abs(a2 - a)
         local d = random(3000, 40000)
         local x, y = vectorFromAngle(a, d)
 
-        for acnt = 1, 50 do
+        for _ = 1, 50 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             local posx = x + dx1 + dx2
@@ -220,7 +217,7 @@ function init()
             -- Avoid spawning asteroids within 1U of the player start position or
             -- 2U of any station.
             if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
-                for i, station in ipairs(stationList) do
+                for _, station in ipairs(stationList) do
                     if distance(station, posx, posy) > 2000 then
                         Asteroid():setPosition(posx, posy):setSize(random(100, 500))
                     end
@@ -228,7 +225,7 @@ function init()
             end
         end
 
-        for acnt = 1, 100 do
+        for _ = 1, 100 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
@@ -236,7 +233,7 @@ function init()
     end
 
     -- Spawn 0-3 random mine fields.
-    for cnt = 1, random(0, 3) do
+    for _ = 1, irandom(0, 3) do
         local a = random(0, 360)
         local a2 = random(0, 360)
         local d = random(20000, 40000)
@@ -261,7 +258,7 @@ function init()
     -- but players hate it. Avoid spawning black holes too close to stations.
     local spawn_hole = false
     while not spawn_hole do
-        for i, station in ipairs(stationList) do
+        for _, station in ipairs(stationList) do
             if distance(station, x, y) > 3000 then
                 spawn_hole = true
             else
