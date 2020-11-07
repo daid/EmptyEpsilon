@@ -24,12 +24,15 @@ local enemyList
 local friendlyList
 local stationList
 
--- Add an enemy wave.
--- enemyList: A table containing enemy ship objects.
--- kind: A number; at each integer, determines a different wave of ships to add
---       to the enemyList. Any number is valid, but only 0.99-9.0 are meaningful.
--- a: The spawned wave's heading relative to the players' spawn point.
--- d: The spawned wave's distance from the players' spawn point.
+--- Add an enemy wave.
+--
+-- That is, create it and add it to `enemyList`.
+--
+-- @tparam table enemyList A table containing enemy ship objects.
+-- @tparam integer kind A number; at each integer, determines a different wave of ships to add
+--  to the enemyList. Any number is valid, but only 0.99-9.0 are meaningful.
+-- @tparam number a The spawned wave's heading relative to the players' spawn point.
+-- @tparam number d The spawned wave's distance from the players' spawn point.
 function addWave(enemyList, kind, a, d)
     if kind < 1.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
@@ -67,19 +70,26 @@ function addWave(enemyList, kind, a, d)
     end
 end
 
--- Returns a semi-random heading.
--- cnt: A counter, generally between 1 and the number of enemy groups.
--- enemy_group_count: A number of enemy groups, generally set by the scenario type.
+--- Returns a semi-random heading.
+--
+-- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
+-- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
+-- @treturn number a random angle (between 0-60 and 360+60)
 function setWaveAngle(cnt, enemy_group_count)
     return cnt * 360 / enemy_group_count + random(-60, 60)
 end
 
--- Returns a semi-random distance.
--- enemy_group_count: A number of enemy groups, generally set by the scenario type.
+--- Returns a semi-random distance.
+--
+-- `enemy_group_count` is multiplied by 3 u and increases the distance.
+--
+-- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
+-- @treturn number a distance
 function setWaveDistance(enemy_group_count)
     return random(35000, 40000 + enemy_group_count * 3000)
 end
 
+--- Initialize scenario.
 function init()
     -- Spawn a player Atlantis.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
@@ -295,6 +305,9 @@ function init()
     Script():run("util_random_transports.lua")
 end
 
+--- Update.
+--
+-- @tparam number delta the time delta (in seconds)
 function update(delta)
     -- Count all surviving enemies and allies.
     local enemy_count = 0
