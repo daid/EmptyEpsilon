@@ -75,7 +75,7 @@ end
 -- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
 -- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
 -- @treturn number a random angle (between 0-60 and 360+60)
-function setWaveAngle(cnt, enemy_group_count)
+function randomWaveAngle(cnt, enemy_group_count)
     return cnt * 360 / enemy_group_count + random(-60, 60)
 end
 
@@ -85,7 +85,7 @@ end
 --
 -- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
 -- @treturn number a distance
-function setWaveDistance(enemy_group_count)
+function randomWaveDistance(enemy_group_count)
     return random(35000, 40000 + enemy_group_count * 3000)
 end
 
@@ -143,7 +143,7 @@ function init()
         addGMFunction(
             name,
             function()
-                addWave(enemyList, kind, setWaveAngle(math.random(20), math.random(20)), setWaveDistance(math.random(5)))
+                addWave(enemyList, kind, randomWaveAngle(math.random(20), math.random(20)), randomWaveDistance(math.random(5)))
             end
         )
     end
@@ -152,8 +152,8 @@ function init()
     addGMFunction(
         "Random wave",
         function()
-            local a = setWaveAngle(math.random(20), math.random(20))
-            local d = setWaveDistance(math.random(20))
+            local a = randomWaveAngle(math.random(20), math.random(20))
+            local d = randomWaveDistance(math.random(20))
             local kind = random(0, 10)
             addWave(enemyList, kind, a, d)
         end
@@ -164,7 +164,7 @@ function init()
     addGMFunction(
         "Random friendly",
         function()
-            local a = setWaveAngle(math.random(20), math.random(20))
+            local a = randomWaveAngle(math.random(20), math.random(20))
             local d = random(15000, 20000 + math.random(20) * 1500)
             local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
             local friendlyShipIndex = math.random(#friendlyShip)
@@ -196,8 +196,8 @@ function init()
     -- enemy waves at distributed random headings and semi-random distances
     -- relative to the players' spawn point.
     for cnt = 1, enemy_group_count do
-        local a = setWaveAngle(cnt, enemy_group_count)
-        local d = setWaveDistance(enemy_group_count)
+        local a = randomWaveAngle(cnt, enemy_group_count)
+        local d = randomWaveDistance(enemy_group_count)
         local kind = random(0, 10)
         addWave(enemyList, kind, a, d)
     end

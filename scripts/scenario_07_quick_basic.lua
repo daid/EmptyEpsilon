@@ -139,7 +139,7 @@ end
 -- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
 -- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation.
 -- @treturn number a random angle (between 0-60 and 360+60)
-function getWaveAngle(cnt, enemy_group_count)
+function randomWaveAngle(cnt, enemy_group_count)
     return cnt * 360 / enemy_group_count + random(-60, 60)
 end
 
@@ -148,7 +148,7 @@ end
 -- @tparam number cnt A counter, generally between 1 and the number of enemy groups.
 -- @tparam number enemy_group_count A number of enemy groups, generally set by the scenario variation. Unused.
 -- @treturn number a distance
-function getWaveDistance(cnt, enemy_group_count)
+function randomWaveDistance(cnt, enemy_group_count)
     return random(25000 + cnt * 1000, 30000 + cnt * 3000)
 end
 
@@ -319,8 +319,8 @@ function startScenario()
     -- relative to the players' spawn point.
     if enemy_group_count > 0 then
         for cnt = 1, enemy_group_count do
-            local a = getWaveAngle(cnt, enemy_group_count)
-            local d = getWaveDistance(cnt, enemy_group_count)
+            local a = randomWaveAngle(cnt, enemy_group_count)
+            local d = randomWaveDistance(cnt, enemy_group_count)
             local kind = random(0, 10)
             addWave(enemyList, kind, a, d)
         end
