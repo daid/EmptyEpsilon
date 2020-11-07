@@ -26,40 +26,40 @@ local stationList
 
 -- Add an enemy wave.
 -- enemyList: A table containing enemy ship objects.
--- type: A number; at each integer, determines a different wave of ships to add
+-- kind: A number; at each integer, determines a different wave of ships to add
 --       to the enemyList. Any number is valid, but only 0.99-9.0 are meaningful.
 -- a: The spawned wave's heading relative to the players' spawn point.
 -- d: The spawned wave's distance from the players' spawn point.
-function addWave(enemyList, type, a, d)
-    if type < 1.0 then
+function addWave(enemyList, kind, a, d)
+    if kind < 1.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
-    elseif type < 2.0 then
+    elseif kind < 2.0 then
         local leader = setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
         table.insert(enemyList, leader)
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-    elseif type < 3.0 then
+    elseif kind < 3.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Adder MK5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-    elseif type < 4.0 then
+    elseif kind < 4.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-    elseif type < 5.0 then
+    elseif kind < 5.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-    elseif type < 6.0 then
+    elseif kind < 6.0 then
         local leader = setCirclePos(CpuShip():setTemplate("Piranha F12"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
         table.insert(enemyList, leader)
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, -1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-    elseif type < 7.0 then
+    elseif kind < 7.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Phobos T3"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-    elseif type < 8.0 then
+    elseif kind < 8.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Nirvana R5"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-    elseif type < 9.0 then
+    elseif kind < 9.0 then
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("MU52 Hornet"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
     else
         table.insert(enemyList, setCirclePos(CpuShip():setTemplate("Stalker R7"):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
@@ -173,8 +173,8 @@ function init()
         function()
             local a = setWaveAngle(math.random(20), math.random(20))
             local d = setWaveDistance(math.random(20))
-            local type = random(0, 10)
-            addWave(enemyList, type, a, d)
+            local kind = random(0, 10)
+            addWave(enemyList, kind, a, d)
         end
     )
 
@@ -219,8 +219,8 @@ function init()
         for cnt = 1, enemy_group_count do
             local a = setWaveAngle(cnt, enemy_group_count)
             local d = setWaveDistance(enemy_group_count)
-            local type = random(0, 10)
-            addWave(enemyList, type, a, d)
+            local kind = random(0, 10)
+            addWave(enemyList, kind, a, d)
         end
     end
 
