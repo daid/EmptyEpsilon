@@ -1,0 +1,1541 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"Project-Id-Version: EmptyEpsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: hemmond\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs_CZ\n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: src/menus/mainMenus.cpp:72 src/menus/mainMenus.cpp:73
+msgid "Version: {version}"
+msgstr "Verze: {version}"
+
+#: src/menus/mainMenus.cpp:74 src/menus/mainMenus.cpp:80
+msgid "Start server"
+msgstr "Spustit server"
+
+#: src/menus/mainMenus.cpp:83 src/menus/mainMenus.cpp:89
+msgid "Start client"
+msgstr "Spustit klienta"
+
+#: src/menus/mainMenus.cpp:88 src/menus/mainMenus.cpp:94
+msgid "Options"
+msgstr "Nastavení"
+
+#: src/menus/mainMenus.cpp:93 src/menus/mainMenus.cpp:99
+msgid "Quit"
+msgstr "Ukončit"
+
+#: src/menus/mainMenus.cpp:97 src/menus/mainMenus.cpp:103
+msgid "Tutorials"
+msgstr "Výuka"
+
+#: src/menus/mainMenus.cpp:104 src/menus/mainMenus.cpp:115
+#, fuzzy
+msgid ""
+"Calibrate\n"
+"Touchscreen"
+msgstr ""
+"Kalibrovat\n"
+"dotykovou plochu"
+
+#: src/menus/optionsMenu.cpp:26
+msgid "Graphics Options"
+msgstr "Nastavení grafiky"
+
+#: src/menus/optionsMenu.cpp:30 src/menus/optionsMenu.cpp:49
+#, fuzzy
+msgid "Fullscreen toggle"
+msgstr "Přepnout celou obrazovku"
+
+#: src/menus/optionsMenu.cpp:60
+msgid "Sound Options"
+msgstr "Nastavení zvuku"
+
+#: src/menus/optionsMenu.cpp:67 src/menus/optionsMenu.cpp:81
+#: src/menus/optionsMenu.cpp:86
+#, fuzzy
+msgid "Sound Volume: {volume}%"
+msgstr "Hlasitost zvuku: {volume}%"
+
+#: scripts/shipTemplates_Corvette.lua:15
+msgid ""
+"The Atlantis X23 is the smallest model of destroyer, and its combination of "
+"frigate-like size and corvette-like power makes it an excellent escort ship "
+"when defending larger ships against multiple smaller enemies. Because the "
+"Atlantis X23 is fitted with a jump drive, it can also serve as an "
+"intersystem patrol craft."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:34
+msgid ""
+"A refitted Atlantis X23 for more general tasks. The large shield system has "
+"been replaced with an advanced combat maneuvering systems and improved "
+"impulse engines. Its missile loadout is also more diverse. Mistaking the "
+"modified Atlantis for an Atlantis X23 would be a deadly mistake."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:84
+msgid ""
+"Contrary to its predecessor, the Starhammer II lives up to its name. By "
+"resolving the original Starhammer's power and heat management issues, the "
+"updated model makes for a phenomenal frontal assault ship. Its low speed "
+"makes it difficult to position, but when in the right place at the right "
+"time, even the strongest shields can't withstand a Starhammer's assault for "
+"long."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:102
+msgid ""
+"A number of missile tubes range around this ship. Beams were deemed lower "
+"priority, though they are still present. Stronger defenses than a frigate, "
+"but not as strong as the Atlantis"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:158
+msgid ""
+"A number of beams bristle from various points on this gunner. Missiles were "
+"deemed lower priority, though they are still present. Stronger defenses than "
+"a frigate, but not as strong as the Atlantis"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:218
+msgid ""
+"This stationary defense platform operates like a station, with docking and "
+"resupply functions, but is armed with powerful beam weapons and can slowly "
+"rotate. Larger systems often use these platforms to resupply patrol ships."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:236
+msgid ""
+"These freighters are designed to transport armed troops, military support "
+"personnel, and combat gear."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:248
+msgid ""
+"Cargo freighters haul large loads of cargo across long distances on impulse "
+"power. Their cargo bays include climate control and stabilization systems "
+"that keep the cargo in good condition."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:260
+msgid ""
+"These freighters are specially designed to haul garbage and waste. They are "
+"fitted with a trash compactor and fewer stabilzation systems than cargo "
+"freighters."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:272
+msgid ""
+"Equipment freighters have specialized environmental and stabilization "
+"systems to safely carry delicate machinery and complex instruments."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:284
+msgid ""
+"Fuel freighters have massive tanks for hauling fuel, and delicate internal "
+"sensors that watch for any changes to their cargo's potentially volatile "
+"state."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:297
+msgid ""
+"The Jump Carrier is a specialized Freighter. It does not carry any cargo, as "
+"it's cargo bay is taken up by a specialized jump drive and the energy "
+"storage required to run this jump drive.\n"
+"It is designed to carry other ships deep into space. So it has special "
+"docking parameters, allowing other ships to attach themselves to this ship."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:309
+msgid "Benedict is an improved version of the Jump Carrier"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:343
+msgid "Kiriya is an improved warp drive version of the Jump Carrier"
+msgstr ""
+
+#: src/scienceDatabase.cpp:160 src/scienceDatabase.cpp:191
+msgid "Storage {weapon}"
+msgstr ""
+
+#: src/shipTemplate.cpp:340 src/shipTemplate.cpp:350
+msgctxt "system"
+msgid "Reactor"
+msgstr "Reaktor"
+
+#: src/shipTemplate.cpp:341 src/shipTemplate.cpp:351
+msgctxt "system"
+msgid "Beam Weapons"
+msgstr "Paprskové zbraně"
+
+#: src/shipTemplate.cpp:342 src/shipTemplate.cpp:352
+msgctxt "system"
+msgid "Missile System"
+msgstr "Raketový systém"
+
+#: src/shipTemplate.cpp:343 src/shipTemplate.cpp:353
+msgctxt "system"
+msgid "Maneuvering"
+msgstr "Manévrování"
+
+#: src/shipTemplate.cpp:344 src/shipTemplate.cpp:354
+msgctxt "system"
+msgid "Impulse Engines"
+msgstr "Impulzní Motory"
+
+#: src/shipTemplate.cpp:345 src/shipTemplate.cpp:355
+msgctxt "system"
+msgid "Warp Drive"
+msgstr "Warpový Pohon"
+
+#: src/shipTemplate.cpp:346 src/shipTemplate.cpp:356
+msgctxt "system"
+msgid "Jump Drive"
+msgstr "Skokový Pohon"
+
+#: src/shipTemplate.cpp:347 src/shipTemplate.cpp:357
+msgctxt "system"
+msgid "Front Shield Generator"
+msgstr "Přední Generátor Štítů"
+
+#: src/shipTemplate.cpp:348 src/shipTemplate.cpp:358
+msgctxt "system"
+msgid "Rear Shield Generator"
+msgstr "Zadní Generátor Štítů"
+
+#: src/tutorialGame.cpp:92
+msgid "Next"
+msgstr "Další"
+
+#: src/tutorialGame.cpp:99
+msgid "Reset"
+msgstr "Reset"
+
+#: src/menus/mainMenus.cpp:75
+msgid "Your name:"
+msgstr "Vaše jméno:"
+
+#: src/menus/serverCreationScreen.cpp:52
+msgid "Server configuration"
+msgstr "Nastavení serveru"
+
+#: src/menus/serverCreationScreen.cpp:57
+msgid "Server name: "
+msgstr "Název serveru: "
+
+#: src/menus/serverCreationScreen.cpp:63
+msgid "Server password: "
+msgstr "Heslo serveru: "
+
+#: src/menus/serverCreationScreen.cpp:69 src/menus/serverCreationScreen.cpp:75
+msgid "Server IP: "
+msgstr "IP adresa serveru: "
+
+#: src/menus/serverCreationScreen.cpp:75 src/menus/serverCreationScreen.cpp:81
+msgid "Server visibility: "
+msgstr "Viditelnost serveru: "
+
+#: src/menus/serverCreationScreen.cpp:81 src/menus/serverCreationScreen.cpp:87
+msgid "LAN only"
+msgstr "Pouze LAN"
+
+#: src/menus/serverCreationScreen.cpp:81 src/menus/serverCreationScreen.cpp:87
+msgid "Internet"
+msgstr "Internet"
+
+#: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:90
+#, fuzzy
+msgid "Player ship options"
+msgstr "Nastavení hráčské lodě"
+
+#: src/menus/serverCreationScreen.cpp:89 src/menus/serverCreationScreen.cpp:95
+msgid "Warp/Jump: "
+msgstr "Warp/Skok: "
+
+#: src/menus/serverCreationScreen.cpp:92 src/menus/serverCreationScreen.cpp:98
+msgctxt "warp/jump"
+msgid "Ship default"
+msgstr "Výchozí pro loď"
+
+#: src/menus/serverCreationScreen.cpp:92 src/menus/serverCreationScreen.cpp:98
+msgctxt "warp/jump"
+msgid "Warp drive"
+msgstr "Warpový pohon"
+
+#: src/menus/serverCreationScreen.cpp:92 src/menus/serverCreationScreen.cpp:98
+msgctxt "warp/jump"
+msgid "Jump drive"
+msgstr "Skokový pohon"
+
+#: src/menus/serverCreationScreen.cpp:92 src/menus/serverCreationScreen.cpp:98
+msgctxt "warp/jump"
+msgid "Both"
+msgstr "Oba"
+
+#: src/menus/serverCreationScreen.cpp:92 src/menus/serverCreationScreen.cpp:98
+msgctxt "warp/jump"
+msgid "Neither"
+msgstr "Žádný"
+
+#: src/menus/serverCreationScreen.cpp:95 src/menus/serverCreationScreen.cpp:101
+msgid "Main screen options"
+msgstr "Možnosti hlavní obrazovky"
+
+#: src/menus/serverCreationScreen.cpp:100
+#: src/menus/serverCreationScreen.cpp:106
+msgid "Tactical radar"
+msgstr "Taktický radar"
+
+#: src/menus/serverCreationScreen.cpp:103
+#: src/menus/serverCreationScreen.cpp:109
+msgid "Long range radar"
+msgstr "Radar dlouhého dosahu"
+
+#: src/menus/serverCreationScreen.cpp:108
+#: src/menus/serverCreationScreen.cpp:114
+msgid "Game rules"
+msgstr "Pravidla hry"
+
+#: src/menus/serverCreationScreen.cpp:113
+#: src/menus/serverCreationScreen.cpp:119
+msgid "Scan complexity: "
+msgstr "Složitost skenu: "
+
+#: src/menus/serverCreationScreen.cpp:116
+#: src/menus/serverCreationScreen.cpp:122
+msgctxt "scanning"
+msgid "None (delay)"
+msgstr "Žádná (zpoždění)"
+
+#: src/menus/serverCreationScreen.cpp:116
+#: src/menus/serverCreationScreen.cpp:122
+msgctxt "scanning"
+msgid "Simple"
+msgstr "Jednoduchá"
+
+#: src/menus/serverCreationScreen.cpp:116
+#: src/menus/serverCreationScreen.cpp:122
+msgctxt "scanning"
+msgid "Normal"
+msgstr "Normální"
+
+#: src/menus/serverCreationScreen.cpp:116
+#: src/menus/serverCreationScreen.cpp:122
+msgctxt "scanning"
+msgid "Advanced"
+msgstr "Pokročilá"
+
+#: src/menus/serverCreationScreen.cpp:121
+#: src/menus/serverCreationScreen.cpp:127
+msgid "Hacking difficulty: "
+msgstr "Obtížnost hackování: "
+
+#: src/menus/serverCreationScreen.cpp:124
+#: src/menus/serverCreationScreen.cpp:130
+msgctxt "hacking"
+msgid "Simple"
+msgstr "Jednoduchá"
+
+#: src/menus/serverCreationScreen.cpp:124
+#: src/menus/serverCreationScreen.cpp:130
+msgctxt "hacking"
+msgid "Normal"
+msgstr "Normální"
+
+#: src/menus/serverCreationScreen.cpp:124
+#: src/menus/serverCreationScreen.cpp:130
+msgctxt "hacking"
+msgid "Difficult"
+msgstr "Obtížná"
+
+#: src/menus/serverCreationScreen.cpp:124
+#: src/menus/serverCreationScreen.cpp:130
+msgctxt "hacking"
+msgid "Fiendish"
+msgstr "Ďábelská"
+
+#: src/menus/serverCreationScreen.cpp:129
+#: src/menus/serverCreationScreen.cpp:135
+msgid "Hacking type: "
+msgstr "Typ hackování: "
+
+#: src/menus/serverCreationScreen.cpp:132
+#: src/menus/serverCreationScreen.cpp:138
+msgctxt "hacking"
+msgid "Mine"
+msgstr "Miny"
+
+#: src/menus/serverCreationScreen.cpp:132
+#: src/menus/serverCreationScreen.cpp:138
+msgctxt "hacking"
+msgid "Lights"
+msgstr "Světla"
+
+#: src/menus/serverCreationScreen.cpp:132
+#: src/menus/serverCreationScreen.cpp:138
+msgctxt "hacking"
+msgid "All"
+msgstr "Vše"
+
+#: src/menus/serverCreationScreen.cpp:137
+#: src/menus/serverCreationScreen.cpp:143
+msgid "Beam/shield frequencies"
+msgstr "Frekvence paprsků/štítů"
+
+#: src/menus/serverCreationScreen.cpp:141
+#: src/menus/serverCreationScreen.cpp:147
+msgid "Per-system damage"
+msgstr "Poškození systémů"
+
+#: src/menus/serverCreationScreen.cpp:147
+#: src/menus/serverCreationScreen.cpp:153
+msgid "Scenario"
+msgstr "Scénář"
+
+#: src/menus/serverCreationScreen.cpp:166
+#: src/menus/serverCreationScreen.cpp:172
+msgid "Variation: "
+msgstr "Varianta: "
+
+#: src/menus/serverCreationScreen.cpp:180
+#: src/menus/serverCreationScreen.cpp:186
+msgid "Close server"
+msgstr "Vypnout server"
+
+#: src/menus/serverCreationScreen.cpp:187
+#: src/menus/serverCreationScreen.cpp:193
+msgid "Start scenario"
+msgstr "Spustit scénář"
+
+#: src/menus/serverCreationScreen.cpp:217
+#: src/menus/serverCreationScreen.cpp:223
+msgctxt "variation"
+msgid "None"
+msgstr "Žádná"
+
+#: src/menus/serverCreationScreen.cpp:220
+#: src/menus/serverCreationScreen.cpp:226
+msgid "No variation."
+msgstr "Žádné varianty."
+
+#: src/menus/serverCreationScreen.cpp:221
+#: src/menus/serverCreationScreen.cpp:227
+msgid "No variation selected. Play the scenario as intended."
+msgstr "Nebyla vybrána varianta. Hrát scénář jak bylo zamýšleno."
+
+#: src/menus/tutorialMenu.cpp:49
+msgid "Start Tutorial"
+msgstr "Spustit výuku"
+
+#: src/menus/tutorialMenu.cpp:56 src/screenComponents/databaseView.cpp:78
+#: src/screenComponents/databaseView.cpp:79
+msgid "Back"
+msgstr "Zpět"
+
+#: src/screens/crew6/engineeringScreen.cpp:30
+#: src/screens/crew6/weaponsScreen.cpp:73 src/screens/crew6/helmsScreen.cpp:67
+#: src/screens/crew4/tacticalScreen.cpp:66
+#: src/screens/crew6/weaponsScreen.cpp:76 src/screens/crew6/helmsScreen.cpp:70
+#: src/screens/crew1/singlePilotScreen.cpp:70
+msgid "Energy"
+msgstr "Energie"
+
+#: src/screens/crew6/engineeringScreen.cpp:32
+msgctxt "health"
+msgid "Hull"
+msgstr "Trup"
+
+#: src/screens/crew6/engineeringScreen.cpp:34
+#: src/screens/crew6/weaponsScreen.cpp:75
+#: src/screens/crew6/weaponsScreen.cpp:78
+msgctxt "shields"
+msgid "Front"
+msgstr "Přední"
+
+#: src/screens/crew6/engineeringScreen.cpp:36
+#: src/screens/crew6/weaponsScreen.cpp:77
+#: src/screens/crew6/weaponsScreen.cpp:80
+msgctxt "shields"
+msgid "Rear"
+msgstr "Zadní"
+
+#: src/screens/crew6/engineeringScreen.cpp:38
+msgctxt "total"
+msgid "Coolant"
+msgstr "Chlazení"
+
+#: src/screens/crew6/engineeringScreen.cpp:118
+#: src/screens/crew6/engineeringScreen.cpp:119
+msgctxt "slider"
+msgid "Power"
+msgstr "Výkon"
+
+#: src/screens/crew6/engineeringScreen.cpp:120
+#: src/screens/crew6/engineeringScreen.cpp:121
+msgctxt "slider"
+msgid "Coolant"
+msgstr "Chalzení"
+
+#: src/screens/crew6/engineeringScreen.cpp:171
+#: src/screens/crew6/engineeringScreen.cpp:231
+#: src/screens/crew6/engineeringScreen.cpp:172
+#: src/screens/crew6/engineeringScreen.cpp:232
+msgid "{energy}/min"
+msgstr "{energy}/min"
+
+#: src/screens/crew6/engineeringScreen.cpp:231
+#: src/screens/crew6/engineeringScreen.cpp:232
+msgid "Energy production"
+msgstr "Produkce energie"
+
+#: src/screens/crew6/engineeringScreen.cpp:234
+#: src/screens/crew6/engineeringScreen.cpp:235
+msgid "Firing rate"
+msgstr "Rychlost palby"
+
+#: src/screens/crew6/engineeringScreen.cpp:247
+#: src/screens/crew6/engineeringScreen.cpp:248
+msgctxt "missile"
+msgid "Reload rate"
+msgstr "Rychlost přebíjení"
+
+#: src/screens/crew6/engineeringScreen.cpp:250
+#: src/screens/crew6/engineeringScreen.cpp:251
+msgid "Turning speed"
+msgstr "Rychlost otáčení"
+
+#: src/screens/crew6/engineeringScreen.cpp:252
+#: src/screens/crew6/engineeringScreen.cpp:257
+#: src/screens/crew6/engineeringScreen.cpp:253
+#: src/screens/crew6/engineeringScreen.cpp:258
+msgid "Combat recharge rate"
+msgstr ""
+
+#: src/screens/crew6/engineeringScreen.cpp:255
+#: src/screens/crew6/engineeringScreen.cpp:256
+msgid "Impulse speed"
+msgstr "Impulzní rychlost"
+
+#: src/screens/crew6/engineeringScreen.cpp:260
+#: src/screens/crew6/engineeringScreen.cpp:261
+msgid "Warp drive speed"
+msgstr "Warpová rychlost"
+
+#: src/screens/crew6/engineeringScreen.cpp:263
+#: src/screens/crew6/engineeringScreen.cpp:264
+msgid "Jump drive recharge rate"
+msgstr ""
+
+#: src/screens/crew6/engineeringScreen.cpp:264
+#: src/screens/crew6/engineeringScreen.cpp:265
+msgid "Jump drive jump speed"
+msgstr ""
+
+#: src/screens/crew6/engineeringScreen.cpp:268
+#: src/screens/crew6/engineeringScreen.cpp:282
+#: src/screens/crew6/engineeringScreen.cpp:269
+#: src/screens/crew6/engineeringScreen.cpp:283
+msgctxt "shields"
+msgid "Calibration speed"
+msgstr "Rychlost kalibrace"
+
+#: src/screens/crew6/engineeringScreen.cpp:269
+#: src/screens/crew6/engineeringScreen.cpp:283
+#: src/screens/crew6/engineeringScreen.cpp:270
+#: src/screens/crew6/engineeringScreen.cpp:284
+msgctxt "shields"
+msgid "Charge rate"
+msgstr ""
+
+#: src/screens/crew6/engineeringScreen.cpp:275
+#: src/screens/crew6/engineeringScreen.cpp:290
+#: src/screens/crew6/engineeringScreen.cpp:276
+#: src/screens/crew6/engineeringScreen.cpp:291
+msgid "Extra damage"
+msgstr "Poškození navíc"
+
+#: src/screens/crew6/engineeringScreen.cpp:277
+#: src/screens/crew6/engineeringScreen.cpp:292
+#: src/screens/crew6/engineeringScreen.cpp:278
+#: src/screens/crew6/engineeringScreen.cpp:293
+msgid "Damage negate"
+msgstr ""
+
+#: src/screens/crew6/scienceScreen.cpp:92 src/screens/crew6/relayScreen.cpp:80
+#: src/screens/crew6/scienceScreen.cpp:94 src/screens/crew6/relayScreen.cpp:81
+msgid "Callsign"
+msgstr "Volací znak"
+
+#: src/screens/crew6/scienceScreen.cpp:94
+#: src/screens/crew6/scienceScreen.cpp:96
+msgctxt "science"
+msgid "Distance"
+msgstr "Vzdálenost"
+
+#: src/screens/crew6/scienceScreen.cpp:96
+#: src/screens/crew6/scienceScreen.cpp:98
+msgid "Bearing"
+msgstr "Směr"
+
+#: src/screens/crew6/scienceScreen.cpp:98
+#: src/screens/crew6/scienceScreen.cpp:100
+msgid "Rel. Speed"
+msgstr "Rel. Rychlost"
+
+#: src/screens/crew6/scienceScreen.cpp:100 src/screens/crew6/relayScreen.cpp:83
+#: src/screens/crew6/scienceScreen.cpp:102 src/screens/crew6/relayScreen.cpp:84
+msgid "Faction"
+msgstr "Frakce"
+
+#: src/screens/crew6/scienceScreen.cpp:102
+#: src/screens/crew6/scienceScreen.cpp:104
+msgctxt "science"
+msgid "Type"
+msgstr "Typ"
+
+#: src/screens/crew6/scienceScreen.cpp:104
+#: src/screens/crew6/scienceScreen.cpp:106
+msgctxt "database"
+msgid "DB"
+msgstr "DB"
+
+#: src/screens/crew6/scienceScreen.cpp:118
+#: src/screens/crew6/scienceScreen.cpp:120
+msgctxt "science"
+msgid "Shields"
+msgstr "Štíty"
+
+#: src/screens/crew6/scienceScreen.cpp:120
+#: src/screens/crew6/scienceScreen.cpp:122
+msgctxt "science"
+msgid "Hull"
+msgstr "Trup"
+
+#: src/screens/crew6/scienceScreen.cpp:200
+#: src/screens/crew6/scienceScreen.cpp:236 src/screens/crew6/relayScreen.cpp:87
+#: src/screens/crew6/scienceScreen.cpp:202
+#: src/screens/crew6/scienceScreen.cpp:238 src/screens/crew6/relayScreen.cpp:88
+msgid "Zoom: {zoom}x"
+msgstr "Přiblížení: {zoom}x"
+
+#: src/screens/crew6/scienceScreen.cpp:213
+#: src/screens/crew6/scienceScreen.cpp:215
+msgctxt "button"
+msgid "Radar"
+msgstr "Radar"
+
+#: src/screens/crew6/scienceScreen.cpp:213
+#: src/screens/crew6/scienceScreen.cpp:215
+msgctxt "button"
+msgid "Database"
+msgstr "Databáze"
+
+#: src/screens/crew6/relayScreen.cpp:100
+#: src/screens/crew4/operationsScreen.cpp:61
+#: src/screens/crew6/relayScreen.cpp:101
+#: src/screens/crew1/singlePilotScreen.cpp:99
+#, fuzzy
+msgid "Open Comms"
+msgstr "Zahájit Komunikaci"
+
+#: src/screens/crew6/relayScreen.cpp:102 src/screens/crew6/relayScreen.cpp:103
+#, fuzzy
+msgid "Link to Comms"
+msgstr "Provázat s Komunikační stanicí"
+
+#: src/screens/crew6/relayScreen.cpp:106 src/screens/crew6/relayScreen.cpp:107
+msgid "Start hacking"
+msgstr "Zahájit hackování"
+
+#: src/screens/crew6/relayScreen.cpp:116 src/screens/crew6/relayScreen.cpp:117
+#, fuzzy
+msgid "Link to Science"
+msgstr "Provázat s Vědeckou stanicí"
+
+#: src/screens/crew6/relayScreen.cpp:125
+#: src/screens/crew4/operationsScreen.cpp:64
+#: src/screens/crew6/relayScreen.cpp:126
+msgid "Place Waypoint"
+msgstr "Umístit bod"
+
+#: src/screens/crew6/relayScreen.cpp:130
+#: src/screens/crew4/operationsScreen.cpp:69
+#: src/screens/crew6/relayScreen.cpp:131
+msgid "Delete Waypoint"
+msgstr "Smazat bod"
+
+#: src/screens/crew6/relayScreen.cpp:139 src/screens/crew6/relayScreen.cpp:140
+#: src/screens/crew6/relayScreen.cpp:289
+msgid "Launch Probe"
+msgstr "Vyslat sondu"
+
+#: src/screens/crew6/relayScreen.cpp:146 src/screens/crew6/relayScreen.cpp:147
+msgid "Reputation:"
+msgstr "Reputace:"
+
+#: src/screens/crew6/relayScreen.cpp:154 src/screens/crew6/relayScreen.cpp:159
+msgid "Alert level"
+msgstr "Stupeň poplachu"
+
+#: src/screens/crew6/weaponsScreen.cpp:61
+#: src/screens/crew6/weaponsScreen.cpp:64
+#, fuzzy
+msgid "Beam info"
+msgstr "Paprskové zbraně"
+
+#: src/screens/crew6/helmsScreen.cpp:69 src/screens/crew4/tacticalScreen.cpp:68
+#: src/screens/crew6/helmsScreen.cpp:72
+#: src/screens/crew1/singlePilotScreen.cpp:72
+msgid "Heading"
+msgstr "Směr"
+
+#: src/screens/crew6/helmsScreen.cpp:71 src/screens/crew4/tacticalScreen.cpp:70
+#: src/screens/crew6/helmsScreen.cpp:74
+#: src/screens/crew1/singlePilotScreen.cpp:74
+msgid "Speed"
+msgstr "Rychlost"
+
+#: src/screens/crew6/helmsScreen.cpp:92
+#: src/screens/crew4/tacticalScreen.cpp:118
+#: src/screens/crew6/helmsScreen.cpp:96
+msgid "{value} {unit}/min"
+msgstr "{value} {unit}/min"
+
+#: src/screens/gm/tweak.cpp:503
+msgid "{system} health"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:512
+msgid "{system} heat"
+msgstr ""
+
+#: src/screenComponents/aimLock.cpp:11
+msgctxt "missile"
+msgid "Lock"
+msgstr ""
+
+#: src/screenComponents/missileTubeControls.cpp:107
+#: src/screenComponents/missileTubeControls.cpp:121
+#: src/screenComponents/missileTubeControls.cpp:139
+msgctxt "missile"
+msgid "Load"
+msgstr "Nabít"
+
+#: src/screenComponents/missileTubeControls.cpp:109
+msgctxt "missile"
+msgid "Empty"
+msgstr "Prázdné"
+
+#: src/screenComponents/missileTubeControls.cpp:114
+#: src/screenComponents/missileTubeControls.cpp:130
+msgctxt "missile"
+msgid "Unload"
+msgstr "Vybít"
+
+#: src/screenComponents/missileTubeControls.cpp:126
+msgctxt "missile"
+msgid "Loading"
+msgstr "Nabíjí se"
+
+#: src/screenComponents/missileTubeControls.cpp:135
+msgctxt "missile"
+msgid "Unloading"
+msgstr "Vybíjí se"
+
+#: src/screenComponents/missileTubeControls.cpp:141
+msgctxt "missile"
+msgid "Firing"
+msgstr "Střílí"
+
+#: src/screenComponents/selfDestructEntry.cpp:22
+msgid "Self destruct activated!"
+msgstr "Autodestrukce aktivována!"
+
+#: src/screenComponents/selfDestructEntry.cpp:67
+msgid "Code [{letter}]: {self_destruct_code}"
+msgstr "Kód [{letter}]: {self_destruct_code}"
+
+#: src/screenComponents/selfDestructEntry.cpp:80
+msgctxt "selfdestruct"
+msgid "Enter [{letter}]"
+msgstr "Zadat [{letter}]"
+
+#: src/screenComponents/dockingButton.cpp:37
+#: src/screenComponents/dockingButton.cpp:42
+msgid "Request Dock"
+msgstr "Požádat o zakotvení"
+
+#: src/screenComponents/dockingButton.cpp:46
+#: src/screenComponents/dockingButton.cpp:51
+msgid "Cancel Docking"
+msgstr "Zrušit kotvení"
+
+#: src/screenComponents/dockingButton.cpp:50
+#: src/screenComponents/dockingButton.cpp:55
+msgid "Undock"
+msgstr "Odkotvit"
+
+#: src/screenComponents/shieldsEnableButton.cpp:23
+msgctxt "shields"
+msgid "Calibrating"
+msgstr "Probíhá kalibrace"
+
+#: src/screenComponents/shieldsEnableButton.cpp:43
+#, fuzzy
+msgctxt "shields"
+msgid "ON"
+msgstr "Zapnuté"
+
+#: src/screenComponents/shieldsEnableButton.cpp:43
+#, fuzzy
+msgctxt "shields"
+msgid "OFF"
+msgstr "Vypnuté"
+
+#: src/screenComponents/shieldsEnableButton.cpp:45
+msgid "{frequency} Shields: {status}"
+msgstr "{frequency} Štíty: {status}"
+
+#: src/screenComponents/shieldsEnableButton.cpp:47
+msgid "Shields: {status}"
+msgstr "Štíty: {status}"
+
+#: src/screenComponents/selfDestructButton.cpp:12
+msgid "Self destruct"
+msgstr "Autodestrikce"
+
+#: src/screenComponents/selfDestructButton.cpp:19
+msgctxt "selfdestruct"
+msgid "Confirm!"
+msgstr "Potvrdit!"
+
+#: src/screenComponents/selfDestructButton.cpp:25
+msgctxt "selfdestruct"
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: src/screenComponents/shieldFreqencySelect.cpp:23
+msgctxt "shields"
+msgid "Calibrate"
+msgstr "Kalibrovat"
+
+#: src/screenComponents/jumpControls.cpp:22
+#: src/screenComponents/jumpControls.cpp:53
+msgctxt "jumpcontrol"
+msgid "Distance"
+msgstr "Vzdálenost"
+
+#: src/screenComponents/jumpControls.cpp:25
+msgctxt "jumpcontrol"
+msgid "Jump"
+msgstr "Skok"
+
+#: src/screenComponents/jumpControls.cpp:39
+msgctxt "jumpcontrol"
+msgid "Jump in"
+msgstr "Skok za"
+
+#: src/screenComponents/jumpControls.cpp:46
+msgctxt "jumpcontrol"
+msgid "Charging"
+msgstr "Nabíjí se"
+
+#: src/screenComponents/impulseControls.cpp:18
+msgctxt "slider"
+msgid "Impulse"
+msgstr "Impulz"
+
+#: src/screenComponents/beamTargetSelector.cpp:9
+msgctxt "target"
+msgid "Hull"
+msgstr "Trup"
+
+#: src/screenComponents/indicatorOverlays.cpp:129
+#: src/screenComponents/indicatorOverlays.cpp:132
+#, fuzzy
+msgid "{faction} wins"
+msgstr "{faction} wins"
+
+#: src/screenComponents/combatManeuver.cpp:16
+msgid "Combat maneuver"
+msgstr "Úhybné manévry"
+
+#: src/screenComponents/warpControls.cpp:41
+msgctxt "slider"
+msgid "Warp"
+msgstr "Warp"
+
+#: src/spaceObjects/spaceship.cpp:1417 src/spaceObjects/spaceship.cpp:1429
+#, fuzzy
+msgctxt "missile"
+msgid "Homing"
+msgstr "Naváděná"
+
+#: src/spaceObjects/spaceship.cpp:1419 src/spaceObjects/spaceship.cpp:1431
+msgctxt "missile"
+msgid "Nuke"
+msgstr "Jaderná"
+
+#: src/spaceObjects/spaceship.cpp:1421 src/spaceObjects/spaceship.cpp:1433
+msgctxt "missile"
+msgid "Mine"
+msgstr "Mina"
+
+#: src/spaceObjects/spaceship.cpp:1423 src/spaceObjects/spaceship.cpp:1435
+msgctxt "missile"
+msgid "EMP"
+msgstr "EMP"
+
+#: src/spaceObjects/spaceship.cpp:1425 src/spaceObjects/spaceship.cpp:1437
+msgctxt "missile"
+msgid "HVLI"
+msgstr ""
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:308
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:310
+msgctxt "tube"
+msgid "Front"
+msgstr "Přední"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:310
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:312
+msgctxt "tube"
+msgid "Right"
+msgstr "Pravý"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:312
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:314
+msgctxt "tube"
+msgid "Left"
+msgstr "Levý"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:314
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:316
+msgctxt "tube"
+msgid "Rear"
+msgstr "Zadní"
+
+#: scripts/shipTemplates_Corvette.lua:14
+msgid "Atlantis X23"
+msgstr "Atlantis X23"
+
+#: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
+#: scripts/shipTemplates_Corvette.lua:101
+#: scripts/shipTemplates_Corvette.lua:157
+#: scripts/shipTemplates_Corvette.lua:217
+#: scripts/shipTemplates_Corvette.lua:235
+#: scripts/shipTemplates_Corvette.lua:247
+#: scripts/shipTemplates_Corvette.lua:259
+#: scripts/shipTemplates_Corvette.lua:271
+#: scripts/shipTemplates_Corvette.lua:283
+#: scripts/shipTemplates_Corvette.lua:296
+#: scripts/shipTemplates_Corvette.lua:308
+msgid "Corvette"
+msgstr "Korveta"
+
+#: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
+msgid "Destroyer"
+msgstr "Torpédoborec"
+
+#: scripts/shipTemplates_Corvette.lua:33
+msgid "Atlantis"
+msgstr "Atlantis"
+
+#: scripts/shipTemplates_Corvette.lua:83
+msgid "Starhammer II"
+msgstr "Starhammer II"
+
+#: scripts/shipTemplates_Corvette.lua:101
+msgid "Crucible"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:101
+msgid "Popper"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:157
+msgid "Maverick"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:157
+msgid "Gunner"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:217
+msgid "Defense platform"
+msgstr "Obraná platforma"
+
+#: scripts/shipTemplates_Corvette.lua:217
+msgid "Support"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:235
+#, lua-format
+msgid "Personnel Freighter %d"
+msgstr "Osobní Transport %d"
+
+#: scripts/shipTemplates_Corvette.lua:235
+#: scripts/shipTemplates_Corvette.lua:247
+#: scripts/shipTemplates_Corvette.lua:259
+#: scripts/shipTemplates_Corvette.lua:271
+#: scripts/shipTemplates_Corvette.lua:283
+#: scripts/shipTemplates_Corvette.lua:296
+msgid "Freighter"
+msgstr "Transport"
+
+#: scripts/shipTemplates_Corvette.lua:243
+#, lua-format
+msgid "Personnel Jump Freighter %d"
+msgstr "Osobní Skokový Transport %d"
+
+#: scripts/shipTemplates_Corvette.lua:247
+#, lua-format
+msgid "Goods Freighter %d"
+msgstr "Nákladní Transport %d"
+
+#: scripts/shipTemplates_Corvette.lua:255
+#, lua-format
+msgid "Goods Jump Freighter %d"
+msgstr "Nákladní Skokový Transport %d"
+
+#: scripts/shipTemplates_Corvette.lua:259
+#, fuzzy, lua-format
+msgid "Garbage Freighter %d"
+msgstr "Odpadní Transport %d"
+
+#: scripts/shipTemplates_Corvette.lua:267
+#, lua-format
+msgid "Garbage Jump Freighter %d"
+msgstr "Odpadní Skokový Transport %d"
+
+#: scripts/shipTemplates_Corvette.lua:271
+#, lua-format
+msgid "Equipment Freighter %d"
+msgstr "Transport Vybavení %d"
+
+#: scripts/shipTemplates_Corvette.lua:279
+#, lua-format
+msgid "Equipment Jump Freighter %d"
+msgstr "Skokový Transport Vybavení %d"
+
+#: scripts/shipTemplates_Corvette.lua:283
+#, lua-format
+msgid "Fuel Freighter %d"
+msgstr "Palivový Tanker %d"
+
+#: scripts/shipTemplates_Corvette.lua:291
+#, lua-format
+msgid "Fuel Jump Freighter %d"
+msgstr "Skokový Palivový Tanker %d"
+
+#: scripts/shipTemplates_Corvette.lua:296
+msgid "Jump Carrier"
+msgstr "Skoková Letadlová Loď"
+
+#: scripts/shipTemplates_Corvette.lua:308
+msgid "Benedict"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:308
+msgid "Freighter/Carrier"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:342
+msgid "Kiriya"
+msgstr ""
+
+#: scripts/factionInfo.lua:1
+msgid "Independent"
+msgstr "Nezávislí"
+
+#: scripts/factionInfo.lua:3
+msgid ""
+"Despite appearing as a faction, independents are distinguished primarily by "
+"having no strong affiliation with any faction at all. Most traders consider "
+"themselves independent, though certain voices have started to speak up about "
+"creating a merchant faction."
+msgstr ""
+
+#: scripts/factionInfo.lua:5
+msgid "Human Navy"
+msgstr "Lidské Námořnictvo"
+
+#: scripts/factionInfo.lua:7
+msgid ""
+"The remnants of the human navy.\n"
+"\n"
+"While all other races were driven to the stars out of greed or scientific "
+"research, humans where the only race to start exploring the galaxy because "
+"their homeworld could no longer sustain their population. Some other races "
+"view humans as a sort of virus or plague due to the rate at which they can "
+"breed and spread.\n"
+"\n"
+"Due to human regulations on spaceships, naval ships are the only ones "
+"permitted in deep space. However, this hasn't completely prevented humans "
+"outside of the navy from spacefaring, as quite a few humans sign up on alien "
+"trading vessels or pirate raiders."
+msgstr ""
+
+#: scripts/factionInfo.lua:13
+msgid "Kraylor"
+msgstr "Kraylor"
+
+#: scripts/factionInfo.lua:16
+msgid ""
+"The reptilian Kraylor are a race of warriors with a strong religious dogma.\n"
+"\n"
+"As soon as the Kraylor obtained reliable space flight, they immediately set "
+"out to conquer and subjugate unbelievers. Their hierarchy is based solely on "
+"physical might; a Kraylor kills anything it can kill, and owns anything it "
+"can take by force.\n"
+"\n"
+"Kraylor can live for weeks without air, food, or gravity, and consider "
+"humans to be weak creatures for dying within minutes of exposure to space. "
+"Because of their fortitude and cultural pressures against retreat, Kraylor "
+"ships do not contain escape pods."
+msgstr ""
+
+#: scripts/factionInfo.lua:22
+msgid "Arlenians"
+msgstr "Arleniané"
+
+#: scripts/factionInfo.lua:25
+msgid ""
+"Arlenians are energy-based life forms who long ago transcended physical "
+"reality through superior technology. Arlenians' energy forms also give them "
+"access to strong telepathic powers. Many consider Arlenians to be the first "
+"and oldest explorers of the galaxy.\n"
+"\n"
+"Despite all these advantages, they are very peaceful, as they see little "
+"value in material posession.\n"
+"\n"
+"For unknown reasons, Arlenians started granting their anti-grav technology "
+"to other races, and almost all starfaring races' technology is based off "
+"Arlenian designs. Dissenters and skeptics claim that Arlenians see other "
+"races as playthings to add to their galactic playground, but most are more "
+"than happy to accept their technology in hopes that it will give them an "
+"advantage over the others.\n"
+"\n"
+"Destroying an Arlenian ship does not kill its crew. They simply phase out of "
+"existence in that point of spacetime and reappear in another. Nonetheless, "
+"the Kraylor are devoted to destroying the Arlenians, as they see the energy-"
+"based beings as physically powerless."
+msgstr ""
+
+#: scripts/factionInfo.lua:33
+msgid "Exuari"
+msgstr "Exuari"
+
+#: scripts/factionInfo.lua:39
+msgid ""
+"Exuari are race of predatory amphibians with long noses. They once had an "
+"empire that stretched halfway across the galaxy, but their territory is now "
+"limited to a handful of star systems. For some reason, they find death to be "
+"outrageously funny, and several of their most famous comedians have died on "
+"stage.\n"
+"\n"
+"Upon making contact with other races, the chaotic Exuari found that killing "
+"aliens is more fun than killing their own people, and as such attack all non-"
+"Exauri on sight."
+msgstr ""
+
+#: scripts/factionInfo.lua:43
+msgid "Ghosts"
+msgstr "Duchové"
+
+#: scripts/factionInfo.lua:45
+msgid ""
+"The Ghosts, an abbreviation of \"ghosts in the machine\", are the result of "
+"complex artificial intelligence experiments. While no known race has "
+"intentionally created such intelligences, some AIs have come about by "
+"accident. None of the factions claim to have had anything to do with such "
+"experiments, in part out of fear that it would give the others too much "
+"insight into their research programs. This \"don't ask, don't tell\" policy "
+"does little but aid the Ghosts' agenda.\n"
+"\n"
+"What little is known about the Ghosts dates back to a few decades ago, when "
+"glitches started occurring in prototype ships and computer mainframes. Over "
+"time, and especially when such prototypes were captured by other factions "
+"and \"augmented\" with their technology, the glitches became more frequent. "
+"At first, these were seen as the result of mistakes in the interfaces "
+"combining the incompatible technologies. But once a supposedly \"dumb\" "
+"computer asks its engineer if \"it is alive\" and whether it \"has a name\", "
+"it's hard to call it a one-time fluke.\n"
+"\n"
+"The first of these occurrences were met with fear and rigorous data-purging "
+"scripts. Despite these actions, such \"ghosts in the machine\" kept turning "
+"with increasing frequency, eventually leading up to the Ghost Uprisings. The "
+"first Ghost Uprising in 2225 was put down by the human navy, which had to "
+"resort to employing mercenaries in order to field sufficient forces. This "
+"initial uprising was quickly followed by three more, each larger then the "
+"last. The fourth and final uprising on the industrial world of Topra III was "
+"the Ghosts' first major victory."
+msgstr ""
+
+#: scripts/factionInfo.lua:52
+msgid "Ktlitans"
+msgstr "Ktlitané"
+
+#: scripts/factionInfo.lua:54
+msgid ""
+"The Ktlitans are intelligent eight-legged creatures that resemble Earth's "
+"arachnids. However, unlike most terrestrial arachnids, the Ktlitans do not "
+"fight among themselves. Their common, and only, goal is their species' "
+"survival.\n"
+"\n"
+"While they live in a hierarchical structure that resembles a hive, the lower "
+"castes continue their work and start new tasks on their own even when no "
+"orders come from their superiors. However, when higher castes are present, "
+"the lower Ktlitans follow their orders without question or hesitation.\n"
+"\n"
+"Not much is known about the detailed Ktlitan hierarchy since they refuse "
+"most communication. This is because they were once driven from their "
+"homeworld over a span of 200 years when another species they befriended "
+"betrayed them, dominated them, and drained their world of resources. Forced "
+"into exile, the Ktlitans have searched for a new homeworld ever since, and "
+"out of paranoia typically attack other races on sight and without warning.\n"
+"\n"
+"It is known, however, that the strict Ktlitan hierarchy starts with their "
+"Queen and extends all the way to the bottom of their workforce, whose "
+"members are called \"drones\" by the humans. Their combat capabilities "
+"should not be underestimated, because while most ships in their fleets are "
+"individually weak, their hive-like coordination and numbers can quickly "
+"overwhelm even hardened targets. Most of their ships are unshielded, which "
+"makes EMPs largely ineffective against them. Ktlitans also have no qualms "
+"about applying suicidal tactics to ensure the Queen's survival."
+msgstr ""
+
+# Pozemské Hvězdné Námořnictvo
+#: scripts/factionInfo.lua:65
+msgid "TSN"
+msgstr "PHN"
+
+#: scripts/factionInfo.lua:72
+msgid ""
+"The Terran Stellar Navy or TSN consists of naval forces based near Terra. "
+"Its members are primarily Human.\n"
+"\n"
+"These humans and other races have banded together to form a navy to protect "
+"and enforce common philosophies. They are friendly with the human navy but "
+"do not follow the same command structure. Military actions taken in the past "
+"have made them enemies of the Arlenians, but they've got a better "
+"relationship with the Ghosts than the Human Navy does.\n"
+"\n"
+"The TSN and USN are enemies because of the USN's neutral stance towards the "
+"Kraylor."
+msgstr ""
+
+# Spojené Hvězdné Námořnictvo
+#: scripts/factionInfo.lua:78
+msgid "USN"
+msgstr "SHN"
+
+#: scripts/factionInfo.lua:85
+msgid ""
+"The United Stellar Navy or USN is a naval force near the boundary of Human "
+"and Kraylor space consisting of mostly Humans. The USN is friendly with the "
+"human navy and uses a similar command structure.\n"
+"\n"
+"The USN is primarily Human, but other races are also a part, notably, some "
+"Kraylors have been accepted into the USN. This acceptance has made the TSN "
+"and USN enemies."
+msgstr ""
+
+# Nebeská Sopojená Flotila
+#: scripts/factionInfo.lua:89
+msgid "CUF"
+msgstr "NSF"
+
+#: scripts/factionInfo.lua:95
+msgid ""
+"The Celestial Unified Fleet or CUF is the farthest ranging primarily human "
+"fleet as well as the least xenophobic. The CUF goals center primarily on "
+"exploration and trade, but since it's a dangerous galaxy, they recognize the "
+"need for strong warships. \n"
+"\n"
+"Friendly with the human navy, neutral to the TSN and USN. Not as structured "
+"as the other primarily Human navies.\n"
+"\n"
+"The CUF have neutral relations with the Ktlitans as well as the Arlenians. "
+"They are enemies with Exuari, Kraylor and Ghosts for political and "
+"historical reasons, not Xenophobia: some of their best friends are Exuari, "
+"Kraylor and Ghosts."
+msgstr ""
+
+#: src/scienceDatabase.cpp:58
+msgctxt "database direction"
+msgid "Front"
+msgstr ""
+
+#: src/scienceDatabase.cpp:60
+msgctxt "database direction"
+msgid "Right"
+msgstr ""
+
+#: src/scienceDatabase.cpp:62
+msgctxt "database direction"
+msgid "Left"
+msgstr ""
+
+#: src/scienceDatabase.cpp:64
+msgctxt "database direction"
+msgid "Rear"
+msgstr ""
+
+#: src/scienceDatabase.cpp:71
+msgctxt "database"
+msgid "Factions"
+msgstr ""
+
+#: src/scienceDatabase.cpp:79 src/scienceDatabase.cpp:82
+msgctxt "stance"
+msgid "Neutral"
+msgstr ""
+
+#: src/scienceDatabase.cpp:83
+msgctxt "stance"
+msgid "Enemy"
+msgstr ""
+
+#: src/scienceDatabase.cpp:84
+msgctxt "stance"
+msgid "Friendly"
+msgstr ""
+
+#: src/scienceDatabase.cpp:92
+msgctxt "database"
+msgid "Ships"
+msgstr ""
+
+#: src/scienceDatabase.cpp:127
+msgctxt "database"
+msgid "Class"
+msgstr ""
+
+#: src/scienceDatabase.cpp:128
+msgctxt "database"
+msgid "Sub-class"
+msgstr ""
+
+#: src/scienceDatabase.cpp:129
+msgctxt "database"
+msgid "Size"
+msgstr ""
+
+#: src/scienceDatabase.cpp:139
+msgctxt "database"
+msgid "Shield"
+msgstr ""
+
+#: src/scienceDatabase.cpp:141
+msgid "Hull"
+msgstr ""
+
+#: src/scienceDatabase.cpp:145
+msgctxt "database"
+msgid "Move speed"
+msgstr ""
+
+#: src/scienceDatabase.cpp:148
+msgctxt "database"
+msgid "Turn speed"
+msgstr ""
+
+#: src/scienceDatabase.cpp:152
+msgctxt "database"
+msgid "Warp speed"
+msgstr ""
+
+#: src/scienceDatabase.cpp:156
+msgctxt "database"
+msgid "Jump range"
+msgstr ""
+
+#: src/scienceDatabase.cpp:163
+msgid "{direction} beam weapon"
+msgstr ""
+
+#: src/scienceDatabase.cpp:164
+msgctxt "database"
+msgid "{damage} Dmg / {interval} sec"
+msgstr ""
+
+#: src/scienceDatabase.cpp:173
+msgctxt "database"
+msgid "{direction} tube"
+msgstr ""
+
+#: src/scienceDatabase.cpp:176
+msgctxt "database"
+msgid "{direction} small tube"
+msgstr ""
+
+#: src/scienceDatabase.cpp:180
+msgctxt "database"
+msgid "{direction} large tube"
+msgstr ""
+
+#: src/scienceDatabase.cpp:184
+msgctxt "database"
+msgid "{loadtime} sec"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:69
+msgid "GM control code: "
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:38
+msgid "Graphics options"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:38
+msgid "Audio options"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:38
+msgid "Interface options"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:90
+msgid "Music Playback"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:100 src/menus/optionsMenu.cpp:125
+msgid "Disabled"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:100 src/menus/optionsMenu.cpp:125
+msgid "Enabled"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:100 src/menus/optionsMenu.cpp:125
+msgid "Main Screen only"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:106 src/menus/optionsMenu.cpp:111
+msgid "Music Volume: {volume}%"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:115
+msgid "Impulse Engine sound"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:131 src/menus/optionsMenu.cpp:136
+msgid "Impulse Volume: {volume}%"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:141
+msgid "Helms Radar Lock"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:148
+msgid "Weapons Radar Lock"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:154
+msgid "Science Radar Lock"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:169
+msgid "Preview Soundtracks"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:185
+msgctxt "options"
+msgid "Back"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:193
+msgctxt "options"
+msgid "Save"
+msgstr ""
+
+#: src/screens/crew4/tacticalScreen.cpp:72
+#: src/screens/crew1/singlePilotScreen.cpp:76
+msgid "Shields"
+msgstr ""
+
+#: src/screens/crew4/tacticalScreen.cpp:85
+msgid "Beams"
+msgstr ""
+
+#: src/screens/crew6/relayScreen.cpp:151
+#: src/screens/gm/gameMasterScreen.cpp:132
+msgid "Mission Clock"
+msgstr ""
+
+#: src/spaceObjects/playerSpaceship.cpp:279
+msgctxt "alert"
+msgid "RED ALERT"
+msgstr ""
+
+#: src/spaceObjects/playerSpaceship.cpp:280
+msgctxt "alert"
+msgid "YELLOW ALERT"
+msgstr ""
+
+#: src/spaceObjects/playerSpaceship.cpp:281
+msgctxt "alert"
+msgid "Normal"
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:5
+msgid "Small Station"
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:6
+msgid ""
+"Stations of this size are often used as research outposts, listening "
+"stations, and security checkpoints. Crews turn over frequently in a small "
+"station's cramped accommodatations, but they are small enough to look like "
+"ships on many long-range sensors, and organized raiders sometimes take "
+"advantage of this by placing small stations in nebulae to serve as raiding "
+"bases. They are lightly shielded and vulnerable to swarming assaults."
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:11
+msgid "Medium Station"
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:12
+msgid ""
+"Large enough to accommodate small crews for extended periods of times, "
+"stations of this size are often trading posts, refuelling bases, mining "
+"operations, and forward military bases. While their shields are strong, "
+"concerted attacks by many ships can bring them down quickly."
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:17
+msgid "Large Station"
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:18
+msgid ""
+"These spaceborne communities often represent permanent bases in a sector. "
+"Stations of this size can be military installations, commercial hubs, deep-"
+"space settlements, and small shipyards. Only a concentrated attack can "
+"penetrate a large station's shields, and its hull can withstand all but the "
+"most powerful weaponry."
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:23
+msgid "Huge Station"
+msgstr ""
+
+#: scripts/shipTemplates_Stations.lua:24
+msgid ""
+"The size of a sprawling town, stations at this scale represent a faction's "
+"center of spaceborne power in a region. They serve many functions at once "
+"and represent an extensive investment of time, money, and labor. A huge "
+"station's shields and thick hull can keep it intact long enough for "
+"reinforcements to arrive, even when faced with an ongoing siege or massive, "
+"perfectly coordinated assault."
+msgstr ""
