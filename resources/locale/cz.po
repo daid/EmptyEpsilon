@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs_CZ\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: src/menus/mainMenus.cpp:72 src/menus/mainMenus.cpp:73
 msgid "Version: {version}"
@@ -72,6 +72,10 @@ msgid ""
 "Atlantis X23 is fitted with a jump drive, it can also serve as an "
 "intersystem patrol craft."
 msgstr ""
+"Atlantis X23 je nejmenší model torpédoborce. Velikostí fregata a silou "
+"korveta tvoří výbornou doprovodnou loď pro obranu větších lodí proti více "
+"menším nepřátelům. Atlantis X23 je dále vybavena skokovým pohonem takže může "
+"být použita i jako hlídková loď mezi hvězdnými systémy."
 
 #: scripts/shipTemplates_Corvette.lua:34
 msgid ""
@@ -80,6 +84,10 @@ msgid ""
 "impulse engines. Its missile loadout is also more diverse. Mistaking the "
 "modified Atlantis for an Atlantis X23 would be a deadly mistake."
 msgstr ""
+"Refitovaná verze Atlantis X23 pro více všeobecné úkoly. Silný systém štítů "
+"byl nahrazen pokročilým manévrovacím systémem a vylepšenými impulzními "
+"motory. Její torpéda jsou taktéž více univerzální. Splést si tuto upravenou "
+"Atlantis za Atlantis X23 by byla smrtelná chyba."
 
 #: scripts/shipTemplates_Corvette.lua:84
 msgid ""
@@ -90,6 +98,11 @@ msgid ""
 "time, even the strongest shields can't withstand a Starhammer's assault for "
 "long."
 msgstr ""
+"Oproti svému předchůdci, Starhammer II (Hvězdné kladivo) dostává svému "
+"jménu. Vyřešením problémů původního Starhammeru v energetice a chlazení, "
+"vylepšený model je fenomenální loď pro čelní útok. jeho nízká rychlost je "
+"sice náročnější na natočení, ale když je ve správný čas na správném místě, "
+"ani nejsilnější lodě nevydrží proti útoku Starhammeru dlouho."
 
 #: scripts/shipTemplates_Corvette.lua:102
 msgid ""
@@ -97,6 +110,9 @@ msgid ""
 "priority, though they are still present. Stronger defenses than a frigate, "
 "but not as strong as the Atlantis"
 msgstr ""
+"Početné torpédomety kolem lodi. Paprskové zbraně byly považovány za nižší "
+"prioritu, ale stále tu nějaké jsou. Lepší obrana, než fregaty, ale ne tak "
+"silné jako Atlantis"
 
 #: scripts/shipTemplates_Corvette.lua:158
 msgid ""
@@ -104,6 +120,9 @@ msgid ""
 "deemed lower priority, though they are still present. Stronger defenses than "
 "a frigate, but not as strong as the Atlantis"
 msgstr ""
+"Řada paprskových zbraní ježících se z různých míst na tomto střelci. "
+"Torpédomety byly považovány za nižší prioritu, ale stále tu nějaké jsou. "
+"Lepší obrana, než fregaty, ale ne tak silné jako Atlantis"
 
 #: scripts/shipTemplates_Corvette.lua:218
 msgid ""
@@ -111,6 +130,10 @@ msgid ""
 "resupply functions, but is armed with powerful beam weapons and can slowly "
 "rotate. Larger systems often use these platforms to resupply patrol ships."
 msgstr ""
+"Tato statická obranná platforma funguje jako stanice, s dokováním a "
+"zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
+"pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
+"zásobování hlídkových lodí. "
 
 #: scripts/shipTemplates_Corvette.lua:236
 msgid ""
