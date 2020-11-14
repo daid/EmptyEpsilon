@@ -8,7 +8,7 @@
 -- Author: Fouindor
 
 --- Scenario
--- @script scenario_04_gftp
+-- @script scenario_07_gftp
 
 function init()
     -- Spawn Marco Polo, its defenders and a Ktilitian strike team

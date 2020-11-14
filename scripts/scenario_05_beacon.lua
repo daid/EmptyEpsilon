@@ -6,7 +6,7 @@
 -- Type: Mission
 
 --- Scenario
--- @script scenario_02_beacon
+-- @script scenario_05_beacon
 
 --- Init is run when the scenario is started. Create your initial world.
 function init()
