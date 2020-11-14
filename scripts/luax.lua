@@ -12,10 +12,11 @@
 --
 -- **Version history**
 --
--- Version 0.2
+-- Version 0.3
 --
 -- - add `table.contains`
 -- - add `table.filter`
+-- - add `table.shuffle`
 --
 -- @author Tom
 -- @module luax
