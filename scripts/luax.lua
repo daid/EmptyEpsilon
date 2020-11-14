@@ -108,3 +108,17 @@ function table.filter(list, predicate)
         list[pos] = nil
     end
 end
+
+--- Shuffle the list `list` in place.
+--
+-- Uses the efficient Fisher-Yates shuffle.
+--
+-- Note that the quality of the shuffle is limited by the random number generator.
+--
+-- @tparam table list the array to shuffle
+function table.shuffle(list)
+    for i = #list, 2, -1 do
+        local j = math.random(i)
+        list[i], list[j] = list[j], list[i]
+    end
+end
