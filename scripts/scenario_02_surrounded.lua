@@ -6,7 +6,7 @@
 -- Type: Basic
 
 --- Scenario
--- @script scenario_05_surrounded
+-- @script scenario_02_surrounded
 
 function setCirclePos(obj, angle, distance)
     obj:setPosition(math.sin(angle / 180 * math.pi) * distance, -math.cos(angle / 180 * math.pi) * distance)

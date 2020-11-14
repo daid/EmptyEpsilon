@@ -8,7 +8,7 @@
 -- Author: Visjammer
 
 --- Scenario
--- @script scenario_03_edgeofspace
+-- @script scenario_06_edgeofspace
 
 --- Init is run when the scenario is started. Create your initial world.
 function init()

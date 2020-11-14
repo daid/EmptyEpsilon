@@ -8,7 +8,7 @@
 -- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)
 
 --- Scenario
--- @script scenario_01_waves
+-- @script scenario_03_waves
 
 require("utils.lua")
 -- For this scenario, utils.lua provides:
