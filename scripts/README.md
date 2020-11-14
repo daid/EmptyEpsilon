@@ -22,7 +22,13 @@ The following files only need to exist on the server.
 
 ## Scenarios and tutorials
 
-- `scenario_*.lua`
+- `scenario_*.lua` (Some scenarios are not yet renamed.)
+  - 00 ... basic scenarios
+  - 05 ... missions
+  - 10 example showing creation of space objects
+  - 47 ... Xansta's scenarios
+  - 80 ... player vs. player
+  - 90 ... not really scenarios
 - `tutorial_*.lua`
 
 ## Scripts for scenarios
