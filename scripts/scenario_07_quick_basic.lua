@@ -8,7 +8,7 @@
 -- Variation[GM Start]: The scenario is not started until the GM gives the start sign. This gives some time for a new crew to get a feeling for the controls before the actual scenario starts.
 
 --- Scenario
--- @script scenario
+-- @script scenario_07_quick_basic
 
 -- Import:
 -- vectorFromAngle(angle, length)
@@ -268,6 +268,7 @@ function init()
 end
 
 --- Start Scenario.
+--
 -- Called once in `update` as soon as the game is unpaused or by the GM.
 function startScenario()
     -- Set the number of enemy waves based on the scenario variation.

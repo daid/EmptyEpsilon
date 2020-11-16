@@ -7,7 +7,10 @@
 -- Type: Mission
 -- Author: Visjammer
 
--- Init is run when the scenario is started. Create your initial world
+--- Scenario
+-- @script scenario_03_edgeofspace
+
+--- Init is run when the scenario is started. Create your initial world.
 function init()
     -- Create the main ship for the players.
     Player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(12400, 18200):setCallSign("Apollo"):addReputationPoints(250.0)
@@ -40,13 +43,13 @@ function init()
 
     Science_Galileo = SpaceStation():setTemplate("Medium Station"):setFaction("Arlenians"):setPosition(11100, -49150):setCallSign("Galileo")
 
-    -------------------------------------------------------------------------
+    -- -----------------------------------------------------------------------
     --Random-ass stations
     SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("DS7"):setPosition(-44177, 20762)
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS4"):setPosition(1632, 30619)
     SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("DS3"):setPosition(-9130, 10285)
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS2"):setPosition(-27987, 41095)
-    ---------------------------------------------------------------------------
+    -- -------------------------------------------------------------------------
 
     Human_m1 = CpuShip():setFaction("Human Navy"):setTemplate("MT52 Hornet"):setCallSign("HM1"):setScanned(true):setPosition(31875, 38653):orderDefendLocation(31875, 38653)
     Human_m2 = CpuShip():setFaction("Human Navy"):setTemplate("MT52 Hornet"):setCallSign("HM2"):setScanned(true):setPosition(37493, 37185):orderDefendLocation(37493, 37185)
@@ -100,9 +103,9 @@ function init()
     kraylor_m3 = CpuShip():setFaction("Kraylor"):setTemplate("Atlantis X23"):setCallSign("K-MDFD"):setPosition(106363, 25218):orderStandGround()
     kraylor_m4 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("K-MC001"):setPosition(104829, 21454):orderStandGround()
 
-    ------------------------------------------------------------------------------------
+    -- ----------------------------------------------------------------------------------
     --Kraylor Nebula, that crazy maze with bad guys in it
-    ------------------------------------------------------------------------------------
+    -- ----------------------------------------------------------------------------------
     Nebula():setPosition(82515, 1149)
     Nebula():setPosition(88962, 3520)
     Nebula():setPosition(83108, -7966)
@@ -182,8 +185,8 @@ function init()
     CpuShip():setFaction("Kraylor"):setTemplate("Atlantis X23"):setCallSign("K-GDN2"):setPosition(102474, -42231):orderDefendLocation(102474, -42231)
     CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setCallSign("K-EGF1"):setPosition(87826, -3182):orderDefendLocation(87826, -3182)
     Kraylor_hole = WormHole():setPosition(109190, -39762):setTargetPosition(-61730, 29490)
-    ---------------------------------------------------------------------------
-    ---------------------------------------------------------------------------
+    -- -------------------------------------------------------------------------
+    -- -------------------------------------------------------------------------
 
     --Central Command sends us to investigate the issues with E.O.S. Scope --Expanded text to attempt to explain why Apollo is shuttling this data around physically
     Central_Command:sendCommsMessage(
@@ -669,7 +672,7 @@ When your ship is finished being outfitted for war move up to the nebula, but be
 Reports are coming in from core Human space that a massive Kraylor strike force is attacking! Get through that wormhole and attack from within their ranks to hold them off. We'll send all our available ships to converge there.]])
             )
 
-            --------------------------------------------------------------------------------------
+            -- ------------------------------------------------------------------------------------
             --Let's get crazy up in here
             k01 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("BR21"):setPosition(-50654, 32238):orderRoaming()
             k02 = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setCallSign("UT64"):setPosition(-48368, 27476):orderRoaming()

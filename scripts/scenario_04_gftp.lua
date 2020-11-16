@@ -7,6 +7,9 @@
 -- Type: Mission
 -- Author: Fouindor
 
+--- Scenario
+-- @script scenario_04_gftp
+
 function init()
     --Spawn Marco Polo, its defenders and a Ktilitian strike team
     marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription("A merchant and entertainement hub."):setPosition(-21200, 45250)

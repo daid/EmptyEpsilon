@@ -1,3 +1,7 @@
+--- Script for random transports.
+--
+-- @script util_random_transports
+
 stationList = {}
 transportList = {}
 spawn_delay = 0

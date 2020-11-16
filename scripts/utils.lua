@@ -1,5 +1,6 @@
--- Name: utils
--- Description: Bunch of useful utility functions that can be used in any scenario script.
+--- Utils.
+--
+-- Bunch of useful utility functions that can be used in any scenario script.
 
 --[[ These functions should be as generic as possible, so they are highly usable. --]]
 
