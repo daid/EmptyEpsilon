@@ -11,7 +11,7 @@
 -- @script scenario_04_gftp
 
 function init()
-    --Spawn Marco Polo, its defenders and a Ktilitian strike team
+    -- Spawn Marco Polo, its defenders and a Ktilitian strike team
     marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription("A merchant and entertainement hub."):setPosition(-21200, 45250)
     parangon = CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setCallSign("HNS Parangon"):orderDefendTarget(marco_polo):setPosition(-21500, 44500):setScanned(true)
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("P-1"):setPosition(-21600, 45000):orderDefendTarget(parangon):setScanned(true)
@@ -24,7 +24,7 @@ function init()
     CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Ksa-4"):setFaction("Ktlitans"):setPosition(-43000, 44000):orderRoaming()
     Nebula():setPosition(-42000, 46000)
 
-    --Spawn Stakhanov, its defenders and a Ktilitian assault
+    -- Spawn Stakhanov, its defenders and a Ktilitian assault
     stakhanov = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Stakhanov"):setDescription("The Stakhanov Mining Complex centralises the efforts to mine the material-rich asteroids of the sector."):setPosition(32000, 9000)
     create(Asteroid, 90, 4000, 16000, 32000, 9000)
     create(VisualAsteroid, 70, 4000, 15000, 32000, 9000)
@@ -45,17 +45,17 @@ function init()
     CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Nleb-2A"):setFaction("Ktlitans"):setPosition(66000, 10000):orderRoaming()
     CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Nleb-2B"):setFaction("Ktlitans"):setPosition(67000, 11000):orderRoaming()
 
-    --Spawn the Black Site and itBLAH BLAH BLAH
+    -- Spawn the Black Site and itBLAH BLAH BLAH
     bs114 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Black Site #114"):setDescription("A Human Navy secret base. Its purpose is highly classified."):setPosition(-45600, -14800)
     create(Nebula, 4, 10000, 15000, -45600, -14800)
     create(Mine, 8, 5000, 7500, -45600, -14800)
 
-    --Spawn the Arlenian Lighbringer
+    -- Spawn the Arlenian Lighbringer
     lightbringer = CpuShip():setTemplate("Phobos T3"):setCallSign("Lightbringer"):setFaction("Arlenians"):setPosition(-10000, -20000)
     Nebula():setPosition(-10000, -20000)
     create(Nebula, 2, 4500, 5500, -10000, -20000)
 
-    --Spawn diverse things
+    -- Spawn diverse things
     nsa = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("NSA"):setDescription("Nosy Sensing Array, an old SIGINT platform."):setPosition(5000, 5000):setCommsScript("")
     swarm_command = CpuShip():setTemplate("Ktlitan Queen"):setCallSign("Swarm Command"):setFaction("Ghosts"):setPosition(35000, 53000):setCommsFunction(swarmCommandComms)
     d1 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Drone-1"):setFaction("Ghosts"):setPosition(36000, 53000):orderDefendTarget(swarm_command)
@@ -66,14 +66,14 @@ function init()
     Nebula():setPosition(35000, 53000)
     create(Nebula, 3, 4500, 5500, 35000, 53000)
 
-    --Pop random nebulae
+    -- Pop random nebulae
     create(Nebula, 5, 10000, 60000, -10000, 10000)
 
-    --Spawn the Player
+    -- Spawn the Player
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setPosition(-22000, 44000):setCallSign("Epsilon")
     allowNewPlayerShips(false)
 
-    --start the mission
+    -- start the mission
     main_mission = 1
     mission_timer = 0
     stakhanov:sendCommsMessage(
@@ -340,7 +340,7 @@ KTLITAN ATTACK IS A DISTRACTION -STOP- STAKHANOV IS NOT THE TRUE TARGET -STOP- D
     end
 
     if (main_mission == 5) then
-        --if the ghost hacker is killed, move forward
+        -- if the ghost hacker is killed, move forward
         if not ghost_hacker:isValid() then
             bs114:sendCommsMessage(
                 player,
@@ -353,7 +353,7 @@ However, the other ships seem to be less lucky. Most go offline, and other are g
             hacked = 0
         end
 
-        --if the ghost hacker is near, make him board the station
+        -- if the ghost hacker is near, make him board the station
         if (ghost_hacker:isValid()) and (distance(ghost_hacker, bs114) < 2000) and (hacker_board == 0) then
             bs114:sendCommsMessage(player, [[You hear the panicked voice of the BS#114 dispatcher :
 
@@ -363,7 +363,7 @@ However, the other ships seem to be less lucky. Most go offline, and other are g
             mission_timer = 0
         end
 
-        --if the ghost hacker is docked, bs114 is lost... retreat to Marco Polo
+        -- if the ghost hacker is docked, bs114 is lost... retreat to Marco Polo
         if (hacker_board == 1) and (mission_timer > 20) then
             bs114:sendCommsMessage(player, [[There is a loud bang and sparks fly in your ship's command deck. All the other ships and the station go offline. Amidst the silence, a crudely synthetized voice break in :
 "HAHA
@@ -454,7 +454,7 @@ To summarize, get near the infected ships, find a backdoor using the frequency L
             ((not k4:isValid()) or (k4:getFaction() == "Human Navy")) and
             ((not k5:isValid()) or (k5:getFaction() == "Human Navy"))
 
-        --if every ship is killed or saved
+        -- if every ship is killed or saved
         if
             (hacked == 0) and expression and
                 (bs114:sendCommsMessage(
@@ -465,12 +465,12 @@ To summarize, get near the infected ships, find a backdoor using the frequency L
 There is a lot to process at the instant, we will contact you as soon as we understand what the hell just happened."]]
                 ))
          then
-            --TODO : different speech if Korolev killed or saved
+            -- TODO : different speech if Korolev killed or saved
             mission_timer = 0
             main_mission = 8
         end
 
-        --if ship is at Marco Polo
+        -- if ship is at Marco Polo
         if
             (hacked == 1) and (distance(player, marco_polo) < 10000) and
                 (bs114:sendCommsMessage(
@@ -485,9 +485,9 @@ There is a lot to process at the instant, we will contact you as soon as we unde
         end
     end
 
-    --give the player 2 minutes to catch their breath :)
+    -- give the player 2 minutes to catch their breath :)
     if (main_mission == 8) and (mission_timer > 120) then
-        --Use NSA to find the command platform
+        -- Use NSA to find the command platform
         if
             (hacked == 0) and
                 (bs114:sendCommsMessage(
@@ -505,7 +505,7 @@ We want to deliver the first blow, locate and destroy it. To find its position, 
             main_mission = 9
         end
 
-        --Go secure NSA to meet Shiva
+        -- Go secure NSA to meet Shiva
         if
             (hacked == 1) and
                 (stakhanov:sendCommsMessage(
@@ -532,7 +532,7 @@ It is due to come out of its FTL jump near the NSA array, secure the location an
     end
 
     if (main_mission == 9) then
-        --if the parasite emission is taken care of either way...
+        -- if the parasite emission is taken care of either way...
         if (hacked == 0) then
             -- if lightbringer is killed
             if (not lightbringer:isValid()) then
@@ -553,7 +553,7 @@ We are both ready to continue our purpose, it seems."]])) then
             end
         end
 
-        --if player near NSA, spawn a Ghost attack
+        -- if player near NSA, spawn a Ghost attack
         if (hacked == 1) and (distance(player, nsa) < 10000) and (stakhanov:sendCommsMessage(player, [[Central Command comes in :
         "Bogeys on their way to NSA, Epsilon. Take care of them."]])) then
             gfighter1 = CpuShip():setTemplate("MT52 Hornet"):setCallSign("Z-1"):setFaction("Ghosts"):setPosition(-20000, -10000):orderFlyTowards(5000, 5000)
@@ -589,7 +589,7 @@ We are both ready to continue our purpose, it seems."]])) then
             main_mission = 11
         end
 
-        --if the assault on NSA is repelled
+        -- if the assault on NSA is repelled
         if (hacked == 1) and (not gfighter1:isValid()) and (not gfighter2:isValid()) and (not gfighter3:isValid()) and (not gfighter4:isValid()) then
             shiva = spawnNuker():setCallSign("HNS Shiva"):setFaction("Human Navy"):setPosition(2000, 2000):orderFlyTowards(-44600, -13800):setScanned(true)
             shiva:sendCommsMessage(player, [[Come in, this is HNS Shiva, here to clean this mess. Your mission for now is to escort us to the compromised site. Let's roll !]])
@@ -601,7 +601,7 @@ We are both ready to continue our purpose, it seems."]])) then
     end
 
     if (main_mission == 11) then
-        --if players are close to the swarm command
+        -- if players are close to the swarm command
         if (hacked == 0) and distance(player, swarm_command) < 7500 then
             bs114:sendCommsMessage(player, [[Okay everyone, time to give the bots a taste of their own medicine. Escort safely our recovery team to infiltrate and extract information from the Swarm Command.]])
             d1:orderAttack(scout)
