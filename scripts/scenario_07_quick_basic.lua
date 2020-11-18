@@ -152,6 +152,7 @@ function init()
     enemyList = {}
     friendlyList = {}
 
+    -- Create player ship.
     local template_name = "Phobos M3P"
     if getScenarioVariation() == "Advanced" then
         template_name = "Atlantis"
@@ -161,13 +162,13 @@ function init()
     player:setJumpDrive(true)
     player:setWarpDrive(false)
 
+    -- Start the players with 300 reputation.
+    player:addReputationPoints(300.0)
+
     allowNewPlayerShips(false)
 
     -- Put a single small station here, which needs to be defended.
     table.insert(friendlyList, SpaceStation():setTemplate("Small Station"):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
-
-    -- Start the players with 300 reputation.
-    player:addReputationPoints(300.0)
 
     -- Randomly scatter nebulae near the players' spawn point.
     local x, y = player:getPosition()
@@ -203,10 +204,11 @@ function init()
 
     -- Spawn 1-3 random asteroid belts.
     for cnt = 1, irandom(1, 3) do
-        local a = random(0, 360)
-        local a2 = random(0, 360)
-        local d = random(3000, 40000)
+        local a = random(0, 360) -- angle (direction)
+        local d = random(3000, 40000) -- distance
         local x, y = vectorFromAngle(a, d)
+
+        local a2 = random(0, 360) -- angle (orientation)
 
         for _ = 1, 50 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
@@ -240,7 +242,7 @@ function init()
         end
     end
 
-    -- Create a bunch of neutral stations
+    -- Create a bunch of neutral stations.
     for _ = 1, 6 do
         setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
     end
@@ -294,11 +296,12 @@ function startScenario()
         end
     end
 
-    friendlyList[1]:sendCommsMessage(
+    local station = friendlyList[1]
+    station:sendCommsMessage(
         player,
-        string.format([[%s, please inform your Captain and crew that you have a total of %d minutes for this mission.
+        string.format([[%s, your objective is to fend off the incoming Kraylor attack.
+Please inform your Captain and crew that you have a total of %d minutes for this mission.
 The mission started at the arrival of this message.
-Your objective is to fend off the incomming Kraylor attack.
 Good Luck.]], player:getCallSign(), gametimeleft / 60)
     )
     scenario_started = true
@@ -308,12 +311,14 @@ end
 --
 -- @param delta time delta
 function update(delta)
-    -- Calculate the game time left, and act on it.
     if scenario_started then
+        -- Calculate the game time left, and act on it.
         gametimeleft = gametimeleft - delta
         if gametimeleft < 0 then
             victory("Kraylor")
-            setBanner("Mission: FAILED")
+            local text = "Mission: FAILED (time has run out)"
+            globalMessage(text)
+            setBanner(text)
             return
         end
         if gametimeleft < timewarning then
@@ -347,14 +352,18 @@ function update(delta)
         -- Note that players can win even if they destroy the enemies by blowing themselves up.
         if enemy_count == 0 then
             victory("Human Navy")
-            setBanner("Mission: SUCCESS")
+            local text = string.format("Mission: SUCCESS (%d seconds left)", math.floor(gametimeleft))
+            globalMessage(text)
+            setBanner(text)
             return
         end
 
         -- If all allies are destroyed, the Humans (players) lose.
         if friendly_count == 0 or not player:isValid() then
             victory("Kraylor")
-            setBanner("Mission: FAILED")
+            local text = "Mission: FAILED (no friendlies left)"
+            globalMessage(text)
+            setBanner(text)
             return
         else
             -- As the battle continues, award reputation based on
@@ -365,6 +374,7 @@ function update(delta)
                 end
             end
 
+            -- Set banner for cinematic and top down views.
             local condition = "green"
             if player:getShieldLevel(0) < player:getShieldMax(0) * 0.8 or player:getShieldLevel(1) < player:getShieldMax(1) * 0.8 then
                 condition = "yellow"
@@ -377,7 +387,9 @@ function update(delta)
     else
         if not player:isValid() then
             victory("Kraylor")
-            setBanner("Mission: FAILED")
+            local text = "Mission: FAILED (ship lost before mission started)"
+            globalMessage(text)
+            setBanner(text)
             return
         end
         setBanner("Mission: PREPARING")
