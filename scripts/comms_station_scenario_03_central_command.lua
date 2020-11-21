@@ -13,7 +13,7 @@ function commsStationMainMenu()
     end
 
     if comms_source:isFriendly(comms_target) then
-        -----------------------------------------------
+        -- ---------------------------------------------
         -- Edge of space additions
         if comms_target:getCallSign() == "Central Command" and not comms_source:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
@@ -66,7 +66,10 @@ function commsStationMainMenu()
                 return true
             end
         end
-        -----------------------------------------------
+
+        -- ---------------------------------------------
+        -- Default communication (old version)
+        -- TODO reuse functions from comms.lua
 
         if comms_target:areEnemiesInRange(5000) then
             setCommsMessage("We are under attack! No time for chatting!")
