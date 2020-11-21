@@ -100,7 +100,7 @@ function commsStationDocked(comms_source, comms_target)
         if comms_source:getWeaponStorageMax(missile_type) > 0 then
             addCommsReply(
                 string.format("%s (%d rep each)", reply_messages[missile_type], getWeaponCost(comms_source, comms_target, missile_type)),
-                function()
+                function(comms_source, comms_target)
                     handleWeaponRestock(comms_source, comms_target, missile_type)
                 end
             )
@@ -169,7 +169,7 @@ function commsStationUndocked(comms_source, comms_target)
     if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then
         addCommsReply(
             "Can you send a supply drop? (" .. getServiceCost(comms_source, comms_target, "supplydrop") .. "rep)",
-            function()
+            function(comms_source, comms_target)
                 if comms_source:getWaypointCount() < 1 then
                     setCommsMessage("You need to set a waypoint before you can request backup.")
                 else
@@ -177,7 +177,7 @@ function commsStationUndocked(comms_source, comms_target)
                     for n = 1, comms_source:getWaypointCount() do
                         addCommsReply(
                             "WP" .. n,
-                            function()
+                            function(comms_source, comms_target)
                                 if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "supplydrop")) then
                                     local position_x, position_y = comms_target:getPosition()
                                     local target_x, target_y = comms_source:getWaypoint(n)
@@ -203,7 +203,7 @@ function commsStationUndocked(comms_source, comms_target)
     if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.reinforcements) then
         addCommsReply(
             "Please send reinforcements! (" .. getServiceCost(comms_source, comms_target, "reinforcements") .. "rep)",
-            function()
+            function(comms_source, comms_target)
                 if comms_source:getWaypointCount() < 1 then
                     setCommsMessage("You need to set a waypoint before you can request reinforcements.")
                 else
@@ -211,7 +211,7 @@ function commsStationUndocked(comms_source, comms_target)
                     for n = 1, comms_source:getWaypointCount() do
                         addCommsReply(
                             "WP" .. n,
-                            function()
+                            function(comms_source, comms_target)
                                 if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "reinforcements")) then
                                     local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                                     setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)

@@ -41,7 +41,7 @@ function commsShipFriendly(comms_source, comms_target)
     end
     addCommsReply(
         "Defend a waypoint",
-        function()
+        function(comms_source, comms_target)
             if comms_source:getWaypointCount() == 0 then
                 setCommsMessage("No waypoints set. Please set a waypoint first.")
                 addCommsReply("Back", commsShipMainMenu)
@@ -50,7 +50,7 @@ function commsShipFriendly(comms_source, comms_target)
                 for n = 1, comms_source:getWaypointCount() do
                     addCommsReply(
                         "Defend WP" .. n,
-                        function()
+                        function(comms_source, comms_target)
                             comms_target:orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage("We are heading to assist at WP" .. n .. ".")
                             addCommsReply("Back", commsShipMainMenu)
@@ -63,7 +63,7 @@ function commsShipFriendly(comms_source, comms_target)
     if comms_data.friendlyness > 0.2 then
         addCommsReply(
             "Assist me",
-            function()
+            function(comms_source, comms_target)
                 setCommsMessage("Heading toward you to assist.")
                 comms_target:orderDefendTarget(comms_source)
                 addCommsReply("Back", commsShipMainMenu)
@@ -72,7 +72,7 @@ function commsShipFriendly(comms_source, comms_target)
     end
     addCommsReply(
         "Report status",
-        function()
+        function(comms_source, comms_target)
             local msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
             local shields = comms_target:getShieldCount()
             if shields == 1 then
@@ -100,7 +100,7 @@ function commsShipFriendly(comms_source, comms_target)
         if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
             addCommsReply(
                 "Dock at " .. obj:getCallSign(),
-                function()
+                function(comms_source, comms_target)
                     setCommsMessage("Docking at " .. obj:getCallSign() .. ".")
                     comms_target:orderDock(obj)
                     addCommsReply("Back", commsShipMainMenu)
@@ -144,7 +144,7 @@ function commsShipEnemy(comms_source, comms_target)
         comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
         addCommsReply(
             taunt_option,
-            function()
+            function(comms_source, comms_target)
                 if random(0, 100) < 30 then
                     comms_target:orderAttack(comms_source)
                     setCommsMessage(taunt_success_reply)
