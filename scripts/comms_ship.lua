@@ -18,21 +18,18 @@ function commsShipMainMenu()
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
 
-    local comms_data = comms_target.comms_data
-
     if player:isFriendly(comms_target) then
-        return friendlyComms(comms_data)
+        return friendlyComms()
     end
     if player:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(player) then
-        return enemyComms(comms_data)
+        return enemyComms()
     end
-    return neutralComms(comms_data)
+    return neutralComms()
 end
 
 --- Handle friendly communication.
---
--- @tparam table comms_data
-function friendlyComms(comms_data)
+function friendlyComms()
+    local comms_data = comms_target.comms_data
     if comms_data.friendlyness < 20 then
         setCommsMessage("What do you want?")
     else
@@ -111,9 +108,8 @@ function friendlyComms(comms_data)
 end
 
 --- Handle enemy communication.
---
--- @tparam table comms_data
-function enemyComms(comms_data)
+function enemyComms()
+    local comms_data = comms_target.comms_data
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
         local taunt_option = "We will see to your destruction!"
@@ -156,10 +152,8 @@ function enemyComms(comms_data)
 end
 
 --- Handle neutral communication.
---
--- @tparam table comms_data
-function neutralComms(comms_data)
-    if comms_data.friendlyness > 50 then
+function neutralComms()
+    if comms_target.comms_data.friendlyness > 50 then
         setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.")
     else
         setCommsMessage("We have nothing for you.\nGood day.")
