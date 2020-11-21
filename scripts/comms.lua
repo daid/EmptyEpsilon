@@ -317,9 +317,24 @@ end
 
 --- Handle communications while docked with this station.
 --
+-- Simply delegate to `commsStationRestockMissiles`.
+--
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsStationDocked(comms_source, comms_target)
+    commsStationRestockMissiles(comms_source, comms_target)
+end
+
+--- Handle missile restock with station.
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsStationRestockMissiles(comms_source, comms_target)
+    if not comms_source:isDocked(comms_target) then
+        setCommsMessage("You need to be docked for that action.")
+        return
+    end
+
     local message
     if comms_source:isFriendly(comms_target) then
         message = string.format("Good day, officer! Welcome to %s.\nWhat can we do for you today?", comms_target:getCallSign())
