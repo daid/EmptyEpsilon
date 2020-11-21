@@ -82,11 +82,13 @@ end
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsStationDocked(comms_source, comms_target)
+    local message
     if comms_source:isFriendly(comms_target) then
-        setCommsMessage("Good day, officer! Welcome to " .. comms_target:getCallSign() .. ".\nWhat can we do for you today?")
+        message = string.format("Good day, officer! Welcome to %s.\nWhat can we do for you today?", comms_target:getCallSign())
     else
-        setCommsMessage("Welcome to our lovely station " .. comms_target:getCallSign() .. ".")
+        message = string.format("Welcome to our lovely station %s.", comms_target:getCallSign())
     end
+    setCommsMessage(message)
 
     local reply_messages = {
         ["Homing"] = "Do you have spare homing missiles for us?",
@@ -120,24 +122,28 @@ function handleWeaponRestock(comms_source, comms_target, weapon)
     end
 
     if not isAllowedTo(comms_source, comms_target, comms_target.comms_data.weapons[weapon]) then
+        local message
         if weapon == "Nuke" then
-            setCommsMessage("We do not deal in weapons of mass destruction.")
+            message = "We do not deal in weapons of mass destruction."
         elseif weapon == "EMP" then
-            setCommsMessage("We do not deal in weapons of mass disruption.")
+            message = "We do not deal in weapons of mass disruption."
         else
-            setCommsMessage("We do not deal in those weapons.")
+            message = "We do not deal in those weapons."
         end
+        setCommsMessage(message)
         return
     end
 
     local points_per_item = getWeaponCost(comms_source, comms_target, weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus(comms_source, comms_target)]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
+        local message
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.")
+            message = "All nukes are charged and primed for destruction."
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.")
+            message = "Sorry, sir, but you are as fully stocked as I can allow."
         end
+        setCommsMessage(message)
         addCommsReply("Back", commsStationMainMenu)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
@@ -145,11 +151,13 @@ function handleWeaponRestock(comms_source, comms_target, weapon)
             return
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
+        local message
         if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+            message = "You are fully loaded and ready to explode things."
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            message = "We generously resupplied you with some weapon charges.\nPut them to good use."
         end
+        setCommsMessage(message)
         addCommsReply("Back", commsStationMainMenu)
     end
 end
@@ -159,16 +167,18 @@ end
 -- @tparam PlayerSpaceship comms_source
 -- @tparam SpaceStation comms_target
 function commsStationUndocked(comms_source, comms_target)
+    local message
     if comms_source:isFriendly(comms_target) then
-        setCommsMessage("This is " .. comms_target:getCallSign() .. ". Good day, officer.\nIf you need supplies, please dock with us first.")
+        message = string.format("This is %s. Good day, officer.\nIf you need supplies, please dock with us first.", comms_target:getCallSign())
     else
-        setCommsMessage("This is " .. comms_target:getCallSign() .. ". Greetings.\nIf you want to do business, please dock with us first.")
+        message = string.format("This is %s. Greetings.\nIf you want to do business, please dock with us first.", comms_target:getCallSign())
     end
+    setCommsMessage(message)
 
     -- supply drop
     if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then
         addCommsReply(
-            "Can you send a supply drop? (" .. getServiceCost(comms_source, comms_target, "supplydrop") .. "rep)",
+            string.format("Can you send a supply drop? (%d rep)", getServiceCost(comms_source, comms_target, "supplydrop")),
             --
             commsStationSupplyDrop
         )
@@ -177,7 +187,7 @@ function commsStationUndocked(comms_source, comms_target)
     -- reinforcements
     if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.reinforcements) then
         addCommsReply(
-            "Please send reinforcements! (" .. getServiceCost(comms_source, comms_target, "reinforcements") .. "rep)",
+            string.format("Please send reinforcements! (%d rep)", getServiceCost(comms_source, comms_target, "reinforcements")),
             --
             commsStationReinforcements
         )
@@ -197,8 +207,9 @@ function commsStationSupplyDrop(comms_source, comms_target)
         setCommsMessage("To which waypoint should we deliver your supplies?")
         for n = 1, comms_source:getWaypointCount() do
             addCommsReply(
-                "WP" .. n,
+                formatWaypoint(n),
                 function(comms_source, comms_target)
+                    local message
                     if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "supplydrop")) then
                         local position_x, position_y = comms_target:getPosition()
                         local target_x, target_y = comms_source:getWaypoint(n)
@@ -206,10 +217,11 @@ function commsStationSupplyDrop(comms_source, comms_target)
                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                         script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                        setCommsMessage("We have dispatched a supply ship toward WP" .. n)
+                        message = string.format("We have dispatched a supply ship toward %s.", formatWaypoint(n))
                     else
-                        setCommsMessage("Not enough reputation!")
+                        message = "Not enough reputation!"
                     end
+                    setCommsMessage(message)
                     addCommsReply("Back", commsStationMainMenu)
                 end
             )
@@ -229,14 +241,16 @@ function commsStationReinforcements(comms_source, comms_target)
         setCommsMessage("To which waypoint should we dispatch the reinforcements?")
         for n = 1, comms_source:getWaypointCount() do
             addCommsReply(
-                "WP" .. n,
+                formatWaypoint(n),
                 function(comms_source, comms_target)
+                    local message
                     if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "reinforcements")) then
                         local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                        setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)
+                        message = string.format("We have dispatched %s to assist at %s.", ship:getCallSign(), formatWaypoint(n))
                     else
-                        setCommsMessage("Not enough reputation!")
+                        message = "Not enough reputation!"
                     end
+                    setCommsMessage(message)
                     addCommsReply("Back", commsStationMainMenu)
                 end
             )
@@ -296,6 +310,14 @@ function getFriendStatus(comms_source, comms_target)
     else
         return "neutral"
     end
+end
+
+--- Format integer i as "WP i".
+--
+-- @tparam integer i the index of the waypoint
+-- @treturn string "WP i"
+function formatWaypoint(i)
+    return string.format("WP %d", i)
 end
 
 -- `comms_source` and `comms_target` are global in comms script.
