@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-Basepath: ../../scripts\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: scenario_03_edgeofspace.lua\n"
+"X-Poedit-SearchPath-0: scenario_06_edgeofspace.lua\n"
 
 # Scenario name
 msgid "The Edge-of-Space"
@@ -28,7 +28,7 @@ msgid ""
 "telescopes."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:188
+#: scripts/scenario_06_edgeofspace.lua:188
 #, fuzzy
 msgid ""
 "Apollo, Come in.\r\n"
@@ -63,14 +63,14 @@ msgstr ""
 "\n"
 "Reouvrez les communications si vous avez des questions."
 
-#: scripts/scenario_03_edgeofspace.lua:235
-#: scripts/scenario_03_edgeofspace.lua:345
-#: scripts/scenario_03_edgeofspace.lua:362
-#: scripts/scenario_03_edgeofspace.lua:383
+#: scripts/scenario_06_edgeofspace.lua:235
+#: scripts/scenario_06_edgeofspace.lua:345
+#: scripts/scenario_06_edgeofspace.lua:362
+#: scripts/scenario_06_edgeofspace.lua:383
 msgid "Apollo, you've incited a war! What a disaster..."
 msgstr "Apollo, vous venez de declencher une guerre! C'est un desastre..."
 
-#: scripts/scenario_03_edgeofspace.lua:241
+#: scripts/scenario_06_edgeofspace.lua:241
 #, fuzzy
 msgid ""
 "A human Naval Cruiser encroaching on Kraylor space?\r\n"
@@ -85,7 +85,7 @@ msgstr ""
 "n'aurons d'autre choix que de considerer vos actions comme hostiles. Notre "
 "flotte indestructible ne fera qu'une bouchee de vous."
 
-#: scripts/scenario_03_edgeofspace.lua:250
+#: scripts/scenario_06_edgeofspace.lua:250
 #, fuzzy
 msgid ""
 "Kraylor have their Endline station near our E.O.S Scope.\r\n"
@@ -96,7 +96,7 @@ msgstr ""
 "\n"
 "Ne les provoquez pas, nous n'essayons pas de declencher une guerre."
 
-#: scripts/scenario_03_edgeofspace.lua:261
+#: scripts/scenario_06_edgeofspace.lua:261
 #, fuzzy
 msgid ""
 "Attention Human Naval Vessel:\r\n"
@@ -118,7 +118,7 @@ msgstr ""
 "Procedez a la maintenance necessaire sur votre equipement, mais sachez que "
 "nous considerons cette station telescopique comme une menace potentielle."
 
-#: scripts/scenario_03_edgeofspace.lua:281
+#: scripts/scenario_06_edgeofspace.lua:281
 #, fuzzy
 msgid ""
 "We're beginning an inspection of the EOS Scope facility now. \r\n"
@@ -129,7 +129,7 @@ msgstr ""
 "\n"
 "Cela ne devrait pas prendre longtemps."
 
-#: scripts/scenario_03_edgeofspace.lua:294
+#: scripts/scenario_06_edgeofspace.lua:294
 #, fuzzy
 msgid ""
 "It looks like the databanks are still in good working order.\r\n"
@@ -140,7 +140,7 @@ msgstr ""
 "\n"
 "Nous allons recuperer ce que nous pouvons."
 
-#: scripts/scenario_03_edgeofspace.lua:310
+#: scripts/scenario_06_edgeofspace.lua:310
 #, fuzzy
 msgid ""
 "Is something wrong Apollo? \r\n"
@@ -155,7 +155,7 @@ msgstr ""
 "\n"
 "Amarrez-vous pour que nous puissions monter a bord."
 
-#: scripts/scenario_03_edgeofspace.lua:329
+#: scripts/scenario_06_edgeofspace.lua:329
 #, fuzzy
 msgid ""
 "Our inspection of the scope facility is complete. We were able to retrieve "
@@ -171,7 +171,7 @@ msgstr ""
 "Nous devrions nous depecher de retourner au commandement central avec ceci "
 "afin qu'ils puissent commencer le travail."
 
-#: scripts/scenario_03_edgeofspace.lua:350
+#: scripts/scenario_06_edgeofspace.lua:350
 #, fuzzy
 msgid ""
 "It appears the damage was mechanical, but Kraylor ships in the area have "
@@ -191,7 +191,7 @@ msgstr ""
 "cette station arlesienne pour l'analyse des donnees recuperees par nos "
 "differents telescopes."
 
-#: scripts/scenario_03_edgeofspace.lua:367
+#: scripts/scenario_06_edgeofspace.lua:367
 #, fuzzy
 msgid ""
 "Distress Signal incoming from Galileo station:\r\n"
@@ -206,7 +206,7 @@ msgstr ""
 "qu'ils ont l'intention de nous attaquer ! Vous etes le seul vaisseau pret au "
 "combat pres de notre secteur. Aidez-nous !"
 
-#: scripts/scenario_03_edgeofspace.lua:388
+#: scripts/scenario_06_edgeofspace.lua:388
 #, fuzzy
 msgid ""
 "We don't know why Kraylor ships were attacking us. We had just recieved word "
@@ -223,7 +223,7 @@ msgstr ""
 "Merci d'avoir defendu notre station. Veuillez vous amarrer afin que nous "
 "puissions analyser les donnees."
 
-#: scripts/scenario_03_edgeofspace.lua:399
+#: scripts/scenario_06_edgeofspace.lua:399
 #, fuzzy
 msgid ""
 "Apollo, come in!\r\n"
@@ -243,7 +243,7 @@ msgstr ""
 "\n"
 "C'est-a-dire vous, Apollo !"
 
-#: scripts/scenario_03_edgeofspace.lua:424
+#: scripts/scenario_06_edgeofspace.lua:424
 #, fuzzy
 msgid ""
 "Apollo, HM1 here.\r\n"
@@ -257,7 +257,7 @@ msgstr ""
 "Nous entrons dans leur territoire pour une frappe de represailles. "
 "Concentrez vos tires sur la station de Kraylor Endline !"
 
-#: scripts/scenario_03_edgeofspace.lua:442
+#: scripts/scenario_06_edgeofspace.lua:442
 #, fuzzy
 msgid ""
 "Apollo, come in.\r\n"
@@ -270,8 +270,8 @@ msgstr ""
 "Nous sommes contraints de declarer la guerre aux Kraylors. Entrez dans leur "
 "teritoire et ripostez en attaquant leur station Endline sans defense !"
 
-#: scripts/scenario_03_edgeofspace.lua:462
-#: scripts/scenario_03_edgeofspace.lua:520
+#: scripts/scenario_06_edgeofspace.lua:462
+#: scripts/scenario_06_edgeofspace.lua:520
 #, fuzzy
 msgid ""
 "Apollo, come in.\r\n"
@@ -293,8 +293,8 @@ msgstr ""
 "Amarrez avec le E.O.S Scope. Nous reamenageons votre navire en prevision des "
 "temps de guerre."
 
-#: scripts/scenario_03_edgeofspace.lua:478
-#: scripts/scenario_03_edgeofspace.lua:535
+#: scripts/scenario_06_edgeofspace.lua:478
+#: scripts/scenario_06_edgeofspace.lua:535
 #, fuzzy
 msgid ""
 "Broadcast on all Human Naval frequencies:\r\n"
@@ -306,8 +306,8 @@ msgstr ""
 "Ordure humaine, nous vous avions somme de rester hors du territoire de "
 "Kraylor !"
 
-#: scripts/scenario_03_edgeofspace.lua:495
-#: scripts/scenario_03_edgeofspace.lua:552
+#: scripts/scenario_06_edgeofspace.lua:495
+#: scripts/scenario_06_edgeofspace.lua:552
 #, fuzzy
 msgid ""
 "Apollo, come in.\r\n"
@@ -320,7 +320,7 @@ msgstr ""
 "Notre cessez-le-feu avec les Kraylors touche a sa fin. Detruisez les "
 "derniers vaisseaux du Kraylor qui menacent notre territoire E.O.S. !"
 
-#: scripts/scenario_03_edgeofspace.lua:579
+#: scripts/scenario_06_edgeofspace.lua:579
 #, fuzzy
 msgid ""
 "Apollo, come in.\r\n"
@@ -341,7 +341,7 @@ msgstr ""
 "Amarrez avec le E.O.S Scope. Nous reamenageons votre navire en prevision des "
 "temps de guerre."
 
-#: scripts/scenario_03_edgeofspace.lua:616
+#: scripts/scenario_06_edgeofspace.lua:616
 #, fuzzy
 msgid ""
 "Science station Galileo has returned with their analysis of the E.O.S Scope "
@@ -367,7 +367,7 @@ msgstr ""
 "Quand votre vaisseau aura fini d'etre re-equipe, dirigez-vous vers la "
 "nebuleuse, mais soyez prudent. Il peut y avoir des pieges."
 
-#: scripts/scenario_03_edgeofspace.lua:629
+#: scripts/scenario_06_edgeofspace.lua:629
 #, fuzzy
 msgid ""
 "Apollo come in!\r\n"
