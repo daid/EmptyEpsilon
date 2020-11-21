@@ -3,8 +3,6 @@
 -- Simple ship comms that allows setting orders if friendly.
 -- Default script for any `CpuShip`.
 --
--- TODO `player` can be replaced by `comms_source`
---
 -- @script comms_ship
 
 -- NOTE this could be imported
@@ -18,10 +16,10 @@ function commsShipMainMenu()
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
 
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
         return commsShipFriendly()
     end
-    if player:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(player) then
+    if comms_source:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(comms_source) then
         return commsShipEnemy()
     end
     return commsShipNeutral()
@@ -38,16 +36,16 @@ function commsShipFriendly()
     addCommsReply(
         "Defend a waypoint",
         function()
-            if player:getWaypointCount() == 0 then
+            if comms_source:getWaypointCount() == 0 then
                 setCommsMessage("No waypoints set. Please set a waypoint first.")
                 addCommsReply("Back", commsShipMainMenu)
             else
                 setCommsMessage("Which waypoint should we defend?")
-                for n = 1, player:getWaypointCount() do
+                for n = 1, comms_source:getWaypointCount() do
                     addCommsReply(
                         "Defend WP" .. n,
                         function()
-                            comms_target:orderDefendLocation(player:getWaypoint(n))
+                            comms_target:orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage("We are heading to assist at WP" .. n .. ".")
                             addCommsReply("Back", commsShipMainMenu)
                         end
@@ -61,7 +59,7 @@ function commsShipFriendly()
             "Assist me",
             function()
                 setCommsMessage("Heading toward you to assist.")
-                comms_target:orderDefendTarget(player)
+                comms_target:orderDefendTarget(comms_source)
                 addCommsReply("Back", commsShipMainMenu)
             end
         )
@@ -139,7 +137,7 @@ function commsShipEnemy()
             taunt_option,
             function()
                 if random(0, 100) < 30 then
-                    comms_target:orderAttack(player)
+                    comms_target:orderAttack(comms_source)
                     setCommsMessage(taunt_success_reply)
                 else
                     setCommsMessage(taunt_failed_reply)
