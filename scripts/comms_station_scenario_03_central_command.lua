@@ -1,7 +1,5 @@
 --- Comms with stations for scenario 03.
 --
--- TODO `player` can be replaced by `comms_source`
---
 -- @script comms_station_scenario_03_central_command
 
 function commsStationMainMenu()
@@ -10,14 +8,14 @@ function commsStationMainMenu()
     end
     comms_data = comms_target.comms_data
 
-    if player:isEnemy(comms_target) then
+    if comms_source:isEnemy(comms_target) then
         return false
     end
 
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
         -----------------------------------------------
         -- Edge of space additions
-        if comms_target:getCallSign() == "Central Command" and not player:isDocked(comms_target) then
+        if comms_target:getCallSign() == "Central Command" and not comms_source:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
                 setCommsMessage("The E.O.S Scope is in sector H8, right on the edge of Kraylor territory.\n \nBe careful out there")
                 return true
@@ -74,22 +72,22 @@ function commsStationMainMenu()
             setCommsMessage("We are under attack! No time for chatting!")
             return true
         end
-        if not player:isDocked(comms_target) then
+        if not comms_source:isDocked(comms_target) then
             setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.")
             addCommsReply(
                 "Can you send a supply drop? (100rep)",
                 function()
-                    if player:getWaypointCount() < 1 then
+                    if comms_source:getWaypointCount() < 1 then
                         setCommsMessage("You need to set a waypoint before you can request backup.")
                     else
                         setCommsMessage("Where do we need to drop off your supplies?")
-                        for n = 1, player:getWaypointCount() do
+                        for n = 1, comms_source:getWaypointCount() do
                             addCommsReply(
                                 "WP" .. n,
                                 function()
-                                    if player:takeReputationPoints(100) then
+                                    if comms_source:takeReputationPoints(100) then
                                         local position_x, position_y = comms_target:getPosition()
-                                        local target_x, target_y = player:getWaypoint(n)
+                                        local target_x, target_y = comms_source:getWaypoint(n)
                                         local script = Script()
                                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
@@ -109,16 +107,16 @@ function commsStationMainMenu()
             addCommsReply(
                 "Please send backup! (150rep)",
                 function()
-                    if player:getWaypointCount() < 1 then
+                    if comms_source:getWaypointCount() < 1 then
                         setCommsMessage("You need to set a waypoint before you can request backup.")
                     else
                         setCommsMessage("Where does the backup needs to go?")
-                        for n = 1, player:getWaypointCount() do
+                        for n = 1, comms_source:getWaypointCount() do
                             addCommsReply(
                                 "WP" .. n,
                                 function()
-                                    if player:takeReputationPoints(150) then
-                                        ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+                                    if comms_source:takeReputationPoints(150) then
+                                        ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                                         setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)
                                     else
                                         setCommsMessage("Not enough rep!")
@@ -139,19 +137,19 @@ function commsStationMainMenu()
         addCommsReply(
             "Do you have spare homing missiles for us? (2rep each)",
             function()
-                if not player:isDocked(comms_target) then
+                if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
                     return
                 end
-                if not player:takeReputationPoints(2 * (player:getWeaponStorageMax("Homing") - player:getWeaponStorage("Homing"))) then
+                if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then
                     setCommsMessage("Not enough reputation.")
                     return
                 end
-                if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") then
+                if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
                     setCommsMessage("Sorry sir, but you are fully stocked with homing missiles.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
-                    player:setWeaponStorage("Homing", player:getWeaponStorageMax("Homing"))
+                    comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
                     setCommsMessage("Filled up your missile supply.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
@@ -160,19 +158,19 @@ function commsStationMainMenu()
         addCommsReply(
             "Please re-stock our mines. (2rep each)",
             function()
-                if not player:isDocked(comms_target) then
+                if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
                     return
                 end
-                if not player:takeReputationPoints(2 * (player:getWeaponStorageMax("Mine") - player:getWeaponStorage("Mine"))) then
+                if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
                     setCommsMessage("Not enough reputation.")
                     return
                 end
-                if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
+                if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
                     setCommsMessage("Captain,\nYou have all the mines you can fit in that ship.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
-                    player:setWeaponStorage("Mine", player:getWeaponStorageMax("Mine"))
+                    comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
                     setCommsMessage("These mines, are yours.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
@@ -181,19 +179,19 @@ function commsStationMainMenu()
         addCommsReply(
             "Can you supply us with some nukes. (15rep each)",
             function()
-                if not player:isDocked(comms_target) then
+                if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
                     return
                 end
-                if not player:takeReputationPoints(15 * (player:getWeaponStorageMax("Nuke") - player:getWeaponStorage("Nuke"))) then
+                if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then
                     setCommsMessage("Not enough reputation.")
                     return
                 end
-                if player:getWeaponStorage("Nuke") >= player:getWeaponStorageMax("Nuke") then
+                if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
                     setCommsMessage("All nukes are charged and primed for distruction.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
-                    player:setWeaponStorage("Nuke", player:getWeaponStorageMax("Nuke"))
+                    comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
                     setCommsMessage("You are fully loaded,\nand ready to explode things.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
@@ -202,19 +200,19 @@ function commsStationMainMenu()
         addCommsReply(
             "Please re-stock our EMP Missiles. (10rep each)",
             function()
-                if not player:isDocked(comms_target) then
+                if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
                     return
                 end
-                if not player:takeReputationPoints(10 * (player:getWeaponStorageMax("EMP") - player:getWeaponStorage("EMP"))) then
+                if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then
                     setCommsMessage("Not enough reputation.")
                     return
                 end
-                if player:getWeaponStorage("EMP") >= player:getWeaponStorageMax("EMP") then
+                if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
                     setCommsMessage("All storage for EMP missiles is filled sir.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
-                    player:setWeaponStorage("EMP", player:getWeaponStorageMax("EMP"))
+                    comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
                     setCommsMessage("Recallibrated the electronics and\nfitted you with all the EMP missiles you can carry.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
@@ -223,7 +221,7 @@ function commsStationMainMenu()
     else
         -- not friendly (and not enemy)
 
-        if not player:isDocked(comms_target) then
+        if not comms_source:isDocked(comms_target) then
             setCommsMessage("Greetings sir.\nIf you want to do business please dock with us first.")
             return true
         end
@@ -233,19 +231,19 @@ function commsStationMainMenu()
         addCommsReply(
             "Do you have spare homing missiles for us? (5rep each)",
             function()
-                if not player:isDocked(comms_target) then
+                if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
                     return
                 end
-                if player:getWeaponStorage("Homing") >= player:getWeaponStorageMax("Homing") / 2 then
+                if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") / 2 then
                     setCommsMessage("You seem to have more then enough missiles")
                     addCommsReply("Back", commsStationMainMenu)
                 else
-                    if not player:takeReputationPoints(5 * ((player:getWeaponStorageMax("Homing") / 2) - player:getWeaponStorage("Homing"))) then
+                    if not comms_source:takeReputationPoints(5 * ((comms_source:getWeaponStorageMax("Homing") / 2) - comms_source:getWeaponStorage("Homing"))) then
                         setCommsMessage("Not enough reputation.")
                         return
                     end
-                    player:setWeaponStorage("Homing", player:getWeaponStorageMax("Homing") / 2)
+                    comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing") / 2)
                     setCommsMessage("We generously resupplied you with some free homing missiles.\nPut them to good use.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
@@ -254,19 +252,19 @@ function commsStationMainMenu()
         addCommsReply(
             "Please re-stock our mines. (5rep each)",
             function()
-                if not player:isDocked(comms_target) then
+                if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
                     return
                 end
-                if player:getWeaponStorage("Mine") >= player:getWeaponStorageMax("Mine") then
+                if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
                     setCommsMessage("You are fully stocked with mines.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
-                    if not player:takeReputationPoints(5 * (player:getWeaponStorageMax("Mine") - player:getWeaponStorage("Mine"))) then
+                    if not comms_source:takeReputationPoints(5 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
                         setCommsMessage("Not enough reputation.")
                         return
                     end
-                    player:setWeaponStorage("Mine", player:getWeaponStorageMax("Mine"))
+                    comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
                     setCommsMessage("Here, have some mines.\nMines are good defensive weapons.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
