@@ -60,9 +60,6 @@ function commsStationMainMenu()
         }
     )
 
-    -- comms_data is used globally (could be avoided, compare comms_ship)
-    comms_data = comms_target.comms_data
-
     if player:isEnemy(comms_target) then
         return false
     end
@@ -116,7 +113,7 @@ function handleWeaponRestock(weapon)
         return
     end
 
-    if not isAllowedTo(comms_data.weapons[weapon]) then
+    if not isAllowedTo(comms_target.comms_data.weapons[weapon]) then
         if weapon == "Nuke" then
             setCommsMessage("We do not deal in weapons of mass destruction.")
         elseif weapon == "EMP" then
@@ -128,7 +125,7 @@ function handleWeaponRestock(weapon)
     end
 
     local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
+    local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
             setCommsMessage("All nukes are charged and primed for destruction.")
@@ -242,7 +239,7 @@ end
 -- @tparam string weapon the missile type
 -- @treturn integer
 function getWeaponCost(weapon)
-    return math.ceil(comms_data.weapon_cost[weapon] * comms_data.reputation_cost_multipliers[getFriendStatus()])
+    return math.ceil(comms_target.comms_data.weapon_cost[weapon] * comms_target.comms_data.reputation_cost_multipliers[getFriendStatus()])
 end
 
 --- Return the number of reputation points that a specified service costs for
@@ -251,7 +248,7 @@ end
 -- @tparam string service the service
 -- @treturn integer
 function getServiceCost(service)
-    return math.ceil(comms_data.service_cost[service])
+    return math.ceil(comms_target.comms_data.service_cost[service])
 end
 
 --- Return "friend" or "neutral".
