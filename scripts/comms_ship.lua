@@ -11,22 +11,28 @@ local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 --- Main menu of communication.
 --
 -- Uses one of `commsShipFriendly`, `commsShipNeutral`, `commsShipEnemy`.
-function commsShipMainMenu()
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsShipMainMenu(comms_source, comms_target)
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
 
     if comms_source:isFriendly(comms_target) then
-        return commsShipFriendly()
+        return commsShipFriendly(comms_source, comms_target)
     end
     if comms_source:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(comms_source) then
-        return commsShipEnemy()
+        return commsShipEnemy(comms_source, comms_target)
     end
-    return commsShipNeutral()
+    return commsShipNeutral(comms_source, comms_target)
 end
 
 --- Handle friendly communication.
-function commsShipFriendly()
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsShipFriendly(comms_source, comms_target)
     local comms_data = comms_target.comms_data
     if comms_data.friendlyness < 20 then
         setCommsMessage("What do you want?")
@@ -106,7 +112,10 @@ function commsShipFriendly()
 end
 
 --- Handle enemy communication.
-function commsShipEnemy()
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsShipEnemy(comms_source, comms_target)
     local comms_data = comms_target.comms_data
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
@@ -150,7 +159,10 @@ function commsShipEnemy()
 end
 
 --- Handle neutral communication.
-function commsShipNeutral()
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsShipNeutral(comms_source, comms_target)
     if comms_target.comms_data.friendlyness > 50 then
         setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.")
     else
@@ -159,4 +171,5 @@ function commsShipNeutral()
     return true
 end
 
-commsShipMainMenu()
+-- `comms_source` and `comms_target` are global in comms script.
+commsShipMainMenu(comms_source, comms_target)
