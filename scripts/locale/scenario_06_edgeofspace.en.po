@@ -11,7 +11,7 @@ msgid ""
 "telescopes."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:188
+#: scripts/scenario_06_edgeofspace.lua:188
 msgid ""
 "Apollo, Come in.\r\n"
 "Our Edge-of-space telescope has been experiencing malfunctions over the "
@@ -29,14 +29,14 @@ msgid ""
 "Reopen communications if you have any questions."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:235
-#: scripts/scenario_03_edgeofspace.lua:345
-#: scripts/scenario_03_edgeofspace.lua:362
-#: scripts/scenario_03_edgeofspace.lua:383
+#: scripts/scenario_06_edgeofspace.lua:235
+#: scripts/scenario_06_edgeofspace.lua:345
+#: scripts/scenario_06_edgeofspace.lua:362
+#: scripts/scenario_06_edgeofspace.lua:383
 msgid "Apollo, you've incited a war! What a disaster..."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:241
+#: scripts/scenario_06_edgeofspace.lua:241
 msgid ""
 "A human Naval Cruiser encroaching on Kraylor space?\r\n"
 "\r\n"
@@ -45,14 +45,14 @@ msgid ""
 "short work of you."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:250
+#: scripts/scenario_06_edgeofspace.lua:250
 msgid ""
 "Kraylor have their Endline station near our E.O.S Scope.\r\n"
 "\r\n"
 "Do not confront them; we're not trying to start a war."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:261
+#: scripts/scenario_06_edgeofspace.lua:261
 msgid ""
 "Attention Human Naval Vessel:\r\n"
 "\r\n"
@@ -64,21 +64,21 @@ msgid ""
 "consider your telescopic station to be a potential threat."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:281
+#: scripts/scenario_06_edgeofspace.lua:281
 msgid ""
 "We're beginning an inspection of the EOS Scope facility now. \r\n"
 "\r\n"
 "This shouldn't take long."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:294
+#: scripts/scenario_06_edgeofspace.lua:294
 msgid ""
 "It looks like the databanks are still in good working order.\r\n"
 "\r\n"
 "We'll retrieve what we can."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:310
+#: scripts/scenario_06_edgeofspace.lua:310
 msgid ""
 "Is something wrong Apollo? \r\n"
 "\r\n"
@@ -87,7 +87,7 @@ msgid ""
 "Please dock so we can come aboard."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:329
+#: scripts/scenario_06_edgeofspace.lua:329
 msgid ""
 "Our inspection of the scope facility is complete. We were able to retrieve "
 "much of the data recorded over the past few days, though proper analysis "
@@ -96,7 +96,7 @@ msgid ""
 "We should hurry back to Central Command with    this so they can begin work."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:350
+#: scripts/scenario_06_edgeofspace.lua:350
 msgid ""
 "It appears the damage was mechanical, but Kraylor ships in the area have "
 "been spotted in surveillance data you recovered from E.O.S Scope. It's "
@@ -107,7 +107,7 @@ msgid ""
 "analyze the data retrieved from our various Scope stations."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:367
+#: scripts/scenario_06_edgeofspace.lua:367
 msgid ""
 "Distress Signal incoming from Galileo station:\r\n"
 "\r\n"
@@ -116,7 +116,7 @@ msgid ""
 "Assist us!"
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:388
+#: scripts/scenario_06_edgeofspace.lua:388
 msgid ""
 "We don't know why Kraylor ships were attacking us. We had just recieved word "
 "that your ship was on its way with data from the Edge-of-space telescopic "
@@ -126,7 +126,7 @@ msgid ""
 "able to analyze the data from E.O.S Scope."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:399
+#: scripts/scenario_06_edgeofspace.lua:399
 msgid ""
 "Apollo, come in!\r\n"
 "\r\n"
@@ -137,7 +137,7 @@ msgid ""
 "That means you, Apollo!"
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:424
+#: scripts/scenario_06_edgeofspace.lua:424
 msgid ""
 "Apollo, HM1 here.\r\n"
 "\r\n"
@@ -145,7 +145,7 @@ msgid ""
 "territory for our retaliation strike. Attack the Kraylor Endline station!"
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:442
+#: scripts/scenario_06_edgeofspace.lua:442
 msgid ""
 "Apollo, come in.\r\n"
 "\r\n"
@@ -153,8 +153,8 @@ msgid ""
 "retaliate on their defenseless Endline station!"
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:462
-#: scripts/scenario_03_edgeofspace.lua:520
+#: scripts/scenario_06_edgeofspace.lua:462
+#: scripts/scenario_06_edgeofspace.lua:520
 msgid ""
 "Apollo, come in.\r\n"
 "\r\n"
@@ -166,16 +166,16 @@ msgid ""
 "times of war."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:478
-#: scripts/scenario_03_edgeofspace.lua:535
+#: scripts/scenario_06_edgeofspace.lua:478
+#: scripts/scenario_06_edgeofspace.lua:535
 msgid ""
 "Broadcast on all Human Naval frequencies:\r\n"
 "\r\n"
 "Human scum, we warned you to stay out of Kraylor territory!"
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:495
-#: scripts/scenario_03_edgeofspace.lua:552
+#: scripts/scenario_06_edgeofspace.lua:495
+#: scripts/scenario_06_edgeofspace.lua:552
 msgid ""
 "Apollo, come in.\r\n"
 "\r\n"
@@ -183,7 +183,7 @@ msgid ""
 "Kraylor ships threatening our E.O.S territory!"
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:579
+#: scripts/scenario_06_edgeofspace.lua:579
 msgid ""
 "Apollo, come in.\r\n"
 "\r\n"
@@ -194,7 +194,7 @@ msgid ""
 "times of war."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:616
+#: scripts/scenario_06_edgeofspace.lua:616
 msgid ""
 "Science station Galileo has returned with their analysis of the E.O.S Scope "
 "data.\r\n"
@@ -208,7 +208,7 @@ msgid ""
 "but be cautious. There may be traps."
 msgstr ""
 
-#: scripts/scenario_03_edgeofspace.lua:629
+#: scripts/scenario_06_edgeofspace.lua:629
 msgid ""
 "Apollo come in!\r\n"
 "\r\n"
