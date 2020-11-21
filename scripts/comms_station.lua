@@ -14,6 +14,11 @@ require("utils.lua")
 local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 
 --- Main menu of communication.
+--
+-- - Prepares `comms_data`.
+-- - If the station is not an enemy and no enemies are nearby, the dialog is
+--   provided by `commsStationUndocked` or `commsStationDocked`.
+--   (Back buttons go to the main menu in order to check for enemies again.)
 function commsStationMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
@@ -67,15 +72,15 @@ function commsStationMainMenu()
         return true
     end
     if not player:isDocked(comms_target) then
-        handleUndockedState()
+        commsStationUndocked()
     else
-        handleDockedState()
+        commsStationDocked()
     end
     return true
 end
 
 --- Handle communications while docked with this station.
-function handleDockedState()
+function commsStationDocked()
     if player:isFriendly(comms_target) then
         setCommsMessage("Good day, officer! Welcome to " .. comms_target:getCallSign() .. ".\nWhat can we do for you today?")
     else
@@ -147,14 +152,14 @@ function handleWeaponRestock(weapon)
 end
 
 --- Handle communications when we are not docked with the station.
-function handleUndockedState()
+function commsStationUndocked()
     if player:isFriendly(comms_target) then
         setCommsMessage("This is " .. comms_target:getCallSign() .. ". Good day, officer.\nIf you need supplies, please dock with us first.")
     else
         setCommsMessage("This is " .. comms_target:getCallSign() .. ". Greetings.\nIf you want to do business, please dock with us first.")
     end
 
-    -- supplydrop
+    -- supply drop
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
         addCommsReply(
             "Can you send a supply drop? (" .. getServiceCost("supplydrop") .. "rep)",

@@ -12,23 +12,23 @@ local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
 
 --- Main menu of communication.
 --
--- Uses one of `friendlyComms`, `neutralComms`, `enemyComms`.
+-- Uses one of `commsShipFriendly`, `commsShipNeutral`, `commsShipEnemy`.
 function commsShipMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
     end
 
     if player:isFriendly(comms_target) then
-        return friendlyComms()
+        return commsShipFriendly()
     end
     if player:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(player) then
-        return enemyComms()
+        return commsShipEnemy()
     end
-    return neutralComms()
+    return commsShipNeutral()
 end
 
 --- Handle friendly communication.
-function friendlyComms()
+function commsShipFriendly()
     local comms_data = comms_target.comms_data
     if comms_data.friendlyness < 20 then
         setCommsMessage("What do you want?")
@@ -108,7 +108,7 @@ function friendlyComms()
 end
 
 --- Handle enemy communication.
-function enemyComms()
+function commsShipEnemy()
     local comms_data = comms_target.comms_data
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
@@ -152,7 +152,7 @@ function enemyComms()
 end
 
 --- Handle neutral communication.
-function neutralComms()
+function commsShipNeutral()
     if comms_target.comms_data.friendlyness > 50 then
         setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.")
     else
