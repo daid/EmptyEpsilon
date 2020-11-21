@@ -73,26 +73,7 @@ function commsShipFriendly(comms_source, comms_target)
     addCommsReply(
         "Report status",
         function(comms_source, comms_target)
-            local msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
-            local shields = comms_target:getShieldCount()
-            if shields == 1 then
-                msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-            elseif shields == 2 then
-                msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-                msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
-            else
-                for n = 0, shields - 1 do
-                    msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
-                end
-            end
-
-            for i, missile_type in ipairs(MISSILE_TYPES) do
-                if comms_target:getWeaponStorageMax(missile_type) > 0 then
-                    msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
-                end
-            end
-
-            setCommsMessage(msg)
+            setCommsMessage(getStatusReport(comms_target))
             addCommsReply("Back", commsShipMainMenu)
         end
     )
@@ -169,6 +150,36 @@ function commsShipNeutral(comms_source, comms_target)
         setCommsMessage("We have nothing for you.\nGood day.")
     end
     return true
+end
+
+--- Return status report of ship.
+--
+-- Hull, Shields, Missiles.
+--
+-- @tparam ShipTemplateBasedObject ship the ship
+-- @treturn string the report
+function getStatusReport(ship)
+    local msg = "Hull: " .. math.floor(ship:getHull() / ship:getHullMax() * 100) .. "%\n"
+
+    local shields = ship:getShieldCount()
+    if shields == 1 then
+        msg = msg .. "Shield: " .. math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100) .. "%\n"
+    elseif shields == 2 then
+        msg = msg .. "Front Shield: " .. math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100) .. "%\n"
+        msg = msg .. "Rear Shield: " .. math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100) .. "%\n"
+    else
+        for n = 0, shields - 1 do
+            msg = msg .. "Shield " .. n .. ": " .. math.floor(ship:getShieldLevel(n) / ship:getShieldMax(n) * 100) .. "%\n"
+        end
+    end
+
+    for i, missile_type in ipairs(MISSILE_TYPES) do
+        if ship:getWeaponStorageMax(missile_type) > 0 then
+            msg = msg .. missile_type .. " Missiles: " .. math.floor(ship:getWeaponStorage(missile_type)) .. "/" .. math.floor(ship:getWeaponStorageMax(missile_type)) .. "\n"
+        end
+    end
+
+    return msg
 end
 
 -- `comms_source` and `comms_target` are global in comms script.
