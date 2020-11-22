@@ -810,12 +810,12 @@ msgstr "Kalibruje se"
 #: src/screenComponents/shieldsEnableButton.cpp:43
 msgctxt "shields"
 msgid "ON"
-msgstr "Zapnute"
+msgstr "Zdvizene"
 
 #: src/screenComponents/shieldsEnableButton.cpp:43
 msgctxt "shields"
 msgid "OFF"
-msgstr "Vypnute"
+msgstr "Sklopene"
 
 #: src/screenComponents/shieldsEnableButton.cpp:45
 msgid "{frequency} Shields: {status}"
