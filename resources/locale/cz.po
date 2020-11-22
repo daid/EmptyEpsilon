@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs_CZ\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: src/menus/mainMenus.cpp:72 src/menus/mainMenus.cpp:73
 msgid "Version: {version}"
@@ -131,7 +131,7 @@ msgstr ""
 "Tato statická obranná platforma funguje jako stanice, s dokováním a "
 "zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
 "pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
-"zásobování hlídkových lodí. "
+"zásobování hlídkových lodí."
 
 #: scripts/shipTemplates_Corvette.lua:236
 msgid ""
@@ -185,7 +185,7 @@ msgstr ""
 
 #: src/scienceDatabase.cpp:160 src/scienceDatabase.cpp:191
 msgid "Storage {weapon}"
-msgstr ""
+msgstr "{weapon} strely"
 
 #: src/shipTemplate.cpp:340 src/shipTemplate.cpp:350
 msgctxt "system"
@@ -677,7 +677,7 @@ msgstr "Zahajit hackovani"
 
 #: src/screens/crew6/relayScreen.cpp:116 src/screens/crew6/relayScreen.cpp:117
 msgid "Link to Science"
-msgstr "Propojit s vedeckou st. "
+msgstr "Propojit s vedeckou st."
 
 #: src/screens/crew6/relayScreen.cpp:125
 #: src/screens/crew4/operationsScreen.cpp:64
@@ -1294,12 +1294,12 @@ msgstr "Predni"
 #: src/scienceDatabase.cpp:60
 msgctxt "database direction"
 msgid "Right"
-msgstr "Prave"
+msgstr "Prava"
 
 #: src/scienceDatabase.cpp:62
 msgctxt "database direction"
 msgid "Left"
-msgstr "Leve"
+msgstr "Leva"
 
 #: src/scienceDatabase.cpp:64
 msgctxt "database direction"
