@@ -81,10 +81,10 @@ msgid ""
 "impulse engines. Its missile loadout is also more diverse. Mistaking the "
 "modified Atlantis for an Atlantis X23 would be a deadly mistake."
 msgstr ""
-"Refitovana verze Atlantis X23 pro vice vseobecne ukoly. Silný systém štítů "
-"byl nahrazen pokročilým manévrovacím systémem a vylepšenými impulzními "
-"motory. Její torpéda jsou taktéž více univerzální. Splést si tuto upravenou "
-"Atlantis za Atlantis X23 by byla smrtelná chyba."
+"Refitovana verze Atlantis X23 pro vice vseobecne ukoly. Silny system stitu "
+"byl nahrazen pokrocilym manevrovacim systemem a vylepsenymi impulznimi "
+"motory. Jeji torpeda jsou taktez vice univerzalni. Splest si tuto upravenou "
+"Atlantis za Atlantis X23 by byla smrtelna chyba."
 
 #: scripts/shipTemplates_Corvette.lua:84
 msgid ""
@@ -95,11 +95,11 @@ msgid ""
 "time, even the strongest shields can't withstand a Starhammer's assault for "
 "long."
 msgstr ""
-"Oproti svému předchůdci, Starhammer II (Hvězdné kladivo) dostává svému "
-"jménu. Vyřešením problémů původního Starhammeru v energetice a chlazení, "
-"vylepšený model je fenomenální loď pro čelní útok. jeho nízká rychlost je "
-"sice náročnější na natočení, ale když je ve správný čas na správném místě, "
-"ani nejsilnější lodě nevydrží proti útoku Starhammeru dlouho."
+"Oproti svemu predchudci, Starhammer II (Hvezdne kladivo) dostava svemu "
+"jmenu. Vyresenim problemu puvodniho Starhammeru v energetice a chlazeni, "
+"vylepseny model je fenomenalni lod pro celni utok. jeho nizka rychlost je "
+"sice narocnejsi na natoceni, ale kdyz je ve spravny cas na spravnem miste, "
+"ani nejsilnejsi lode nevydrzi proti utoku Starhammeru dlouho."
 
 #: scripts/shipTemplates_Corvette.lua:102
 msgid ""
@@ -107,9 +107,9 @@ msgid ""
 "priority, though they are still present. Stronger defenses than a frigate, "
 "but not as strong as the Atlantis"
 msgstr ""
-"Početné torpédomety kolem lodi. Paprskové zbraně byly považovány za nižší "
-"prioritu, ale stále tu nějaké jsou. Lepší obrana, než fregaty, ale ne tak "
-"silné jako Atlantis"
+"Pocetne torpedomety kolem lodi. Paprskove zbrane byly povazovany za nizsi "
+"prioritu, ale stale tu nejake jsou. Lepsi obrana, nez fregaty, ale ne tak "
+"silne jako Atlantis"
 
 #: scripts/shipTemplates_Corvette.lua:158
 msgid ""
@@ -117,9 +117,9 @@ msgid ""
 "deemed lower priority, though they are still present. Stronger defenses than "
 "a frigate, but not as strong as the Atlantis"
 msgstr ""
-"Řada paprskových zbraní ježících se z různých míst na tomto střelci. "
-"Torpédomety byly považovány za nižší prioritu, ale stále tu nějaké jsou. "
-"Lepší obrana, než fregaty, ale ne tak silné jako Atlantis"
+"Rada paprskovych zbrani jezicich se z ruznych mist na tomto strelci. "
+"Torpedomety byly povazovany za nizsi prioritu, ale stale tu nejake jsou. "
+"Lepsi obrana, nez fregaty, ale ne tak silne jako Atlantis"
 
 #: scripts/shipTemplates_Corvette.lua:218
 msgid ""
@@ -127,18 +127,18 @@ msgid ""
 "resupply functions, but is armed with powerful beam weapons and can slowly "
 "rotate. Larger systems often use these platforms to resupply patrol ships."
 msgstr ""
-"Tato statická obranná platforma funguje jako stanice, s dokováním a "
-"zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
-"pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
-"zásobování hlídkových lodí."
+"Tato staticka obranna platforma funguje jako stanice, s dokovanim a "
+"zasobovanim, ale je vyzbrojena silnymi paprskovymi zbranemi a dokaze se "
+"pomalu otacet. Vetsi hvezdne systemy casto vyuzivaji tyto platformy pro "
+"zasobovani hlidkovych lodi."
 
 #: scripts/shipTemplates_Corvette.lua:236
 msgid ""
 "These freighters are designed to transport armed troops, military support "
 "personnel, and combat gear."
 msgstr ""
-"Tyto přepravní lodě byly navrženy pro transport vojáků, podpůrného armádního "
-"personálu a bojové výbavy."
+"Tyto prepravni lode byly navrzeny pro transport vojaku, podpurneho armadniho "
+"personalu a bojove vybavy."
 
 #: scripts/shipTemplates_Corvette.lua:248
 #: scripts/shipTemplates_Corvette.lua:249
@@ -147,9 +147,9 @@ msgid ""
 "power. Their cargo bays include climate control and stabilization systems "
 "that keep the cargo in good condition."
 msgstr ""
-"Tyto přepravní lodě transportují velké množství nákladu na veliké "
-"vzdálenosti impulzní rychlostí. Výbava nákladového prostoru zahrnuje systémy "
-"pro ovládání a stabilizaci prostředí, které udržují náklad dobrém stavu."
+"Tyto prepravni lode transportuji velke mnozstvi nakladu na velike "
+"vzdalenosti impulzni rychlosti. Vybava nakladoveho prostoru zahrnuje systemy "
+"pro ovladani a stabilizaci prostredi, ktere udrzuji naklad dobrem stavu."
 
 #: scripts/shipTemplates_Corvette.lua:260
 #: scripts/shipTemplates_Corvette.lua:262
@@ -158,9 +158,9 @@ msgid ""
 "fitted with a trash compactor and fewer stabilzation systems than cargo "
 "freighters."
 msgstr ""
-"Tyto přepravní lodě jsou speciálně navrženy pro transport odpadu. Jsou "
-"vybaveny zhutňovačem odpadu a méně systémy pro stabilizaci prostředí, než "
-"nákladná tra"
+"Tyto prepravni lode jsou specialne navrzeny pro transport odpadu. Jsou "
+"vybaveny zhutnovacem odpadu a mene systemy pro stabilizaci prostredi, nez "
+"nakladna tra"
 
 #: scripts/shipTemplates_Corvette.lua:272
 #: scripts/shipTemplates_Corvette.lua:275
@@ -168,9 +168,9 @@ msgid ""
 "Equipment freighters have specialized environmental and stabilization "
 "systems to safely carry delicate machinery and complex instruments."
 msgstr ""
-"Tyto přepravní lodě mají specializované systémy pro stabilizaci prostředí, "
-"které zajišťují bezpečný transport choulostivých strojů a složitých "
-"přístrojů."
+"Tyto prepravni lode maji specializovane systemy pro stabilizaci prostredi, "
+"ktere zajistuji bezpecny transport choulostivych stroju a slozitych "
+"pristroju."
 
 #: scripts/shipTemplates_Corvette.lua:284
 #: scripts/shipTemplates_Corvette.lua:288
@@ -179,9 +179,9 @@ msgid ""
 "sensors that watch for any changes to their cargo's potentially volatile "
 "state."
 msgstr ""
-"Palivové tankery mají masivní nádrže pro transport paliva a velmi jemné "
-"vnitřní senzory, které hlídají jakoukoliv změnu ve stavu potenciálně "
-"výbušného nákladu."
+"Palivove tankery maji masivni nadrze pro transport paliva a velmi jemne "
+"vnitrni senzory, ktere hlidaji jakoukoliv zmenu ve stavu potencialne "
+"vybusneho nakladu."
 
 #: scripts/shipTemplates_Corvette.lua:297
 #: scripts/shipTemplates_Corvette.lua:302
@@ -804,7 +804,7 @@ msgstr ""
 #: src/screenComponents/aimLock.cpp:11
 msgctxt "missile"
 msgid "Lock"
-msgstr "Zaměření"
+msgstr "Zamereni"
 
 #: src/screenComponents/missileTubeControls.cpp:107
 #: src/screenComponents/missileTubeControls.cpp:121
@@ -943,7 +943,7 @@ msgstr "Trup"
 #: src/screenComponents/indicatorOverlays.cpp:129
 #: src/screenComponents/indicatorOverlays.cpp:132
 msgid "{faction} wins"
-msgstr "Výhra frakce: {faction}"
+msgstr "Vyhra frakce: {faction}"
 
 #: src/screenComponents/combatManeuver.cpp:16
 msgid "Combat maneuver"
@@ -1500,7 +1500,7 @@ msgstr "{loadtime} sec"
 
 #: src/menus/serverCreationScreen.cpp:69
 msgid "GM control code: "
-msgstr "Kód pána hry: "
+msgstr "Kod pana hry: "
 
 #: src/menus/optionsMenu.cpp:38
 msgid "Graphics options"
@@ -1756,7 +1756,7 @@ msgstr "Pauza"
 #: src/screens/gm/gameMasterScreen.cpp:45
 msgctxt "button"
 msgid "Intercept all comms"
-msgstr "Odposlech všech komunikaci"
+msgstr "Odposlech vsech komunikaci"
 
 #: src/screens/gm/gameMasterScreen.cpp:60
 #, fuzzy
@@ -1796,7 +1796,7 @@ msgstr "Volat lod"
 
 #: src/screens/gm/gameMasterScreen.cpp:161
 msgid "Defend location"
-msgstr "Bránit lokaci"
+msgstr "Branit lokaci"
 
 #: src/screens/gm/gameMasterScreen.cpp:166
 msgid "Stand ground"
@@ -1925,7 +1925,7 @@ msgstr "Dosah rusicky:"
 
 #: src/screens/gm/tweak.cpp:287
 msgid "Tube count:"
-msgstr "Počet torpedometu:"
+msgstr "Pocet torpedometu:"
 
 #: src/screens/gm/tweak.cpp:311
 msgid "Tube: {id_tube}"
@@ -1986,22 +1986,22 @@ msgstr "Oblouk:"
 #: src/screens/gm/tweak.cpp:443
 msgctxt "beam"
 msgid "Direction:"
-msgstr "Směr:"
+msgstr "Smer:"
 
 #: src/screens/gm/tweak.cpp:449
 msgctxt "beam"
 msgid "Turret arc:"
-msgstr "Oblouk střelecké věže:"
+msgstr "Oblouk strelecke veze:"
 
 #: src/screens/gm/tweak.cpp:455
 msgctxt "beam"
 msgid "Turret direction:"
-msgstr "Směr střelecké věže:"
+msgstr "Smer strelecke veze:"
 
 #: src/screens/gm/tweak.cpp:461
 msgctxt "beam"
 msgid "Turret rotation rate:"
-msgstr "Rychlost otáčení věže:"
+msgstr "Rychlost otaceni veze:"
 
 #: src/screens/gm/tweak.cpp:476
 msgctxt "beam"
