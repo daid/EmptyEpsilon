@@ -15,7 +15,19 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: scenario_02_beacon.lua\n"
 
-#: scenario_02_beacon.lua:60
+# Scenario name
+msgid "Beacon of light series"
+msgstr ""
+
+# Scenario description
+msgid ""
+"The beacon of light scenario, build from the series at EmptyEpsilon.org.Near "
+"the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat went "
+"missing, and your mission will start with recovering him. (Must use Epsilon "
+"as ship)"
+msgstr ""
+
+#: scripts/scenario_02_beacon.lua:60
 msgid ""
 "Epsilon, please come in?\n"
 "\n"
@@ -37,7 +49,7 @@ msgstr ""
 "secteur G5 qui bloque nos scanners. Rendez-vous sur place et enquetez sur "
 "cette disparition."
 
-#: scenario_02_beacon.lua:82 scenario_02_beacon.lua:94
+#: scripts/scenario_02_beacon.lua:82 scripts/scenario_02_beacon.lua:94
 msgid ""
 "RT-4 has been destroyed! But an escape pod is ejected from the ship.\n"
 "\n"
@@ -52,7 +64,7 @@ msgstr ""
 "pour voir si J.J.Johnson s'en est sorti. Sa mort serait un terrible coup dur "
 "pour les negociations de paix dans la region."
 
-#: scenario_02_beacon.lua:85
+#: scripts/scenario_02_beacon.lua:85
 msgid ""
 "\n"
 "And destroy those Exuari scum while you are at it!"
@@ -60,7 +72,7 @@ msgstr ""
 "\n"
 "Et eliminez ces ordures d'Exuari pendant que vous y etes !"
 
-#: scenario_02_beacon.lua:107
+#: scripts/scenario_02_beacon.lua:107
 msgid ""
 "Sir Johnson seems to have suffocated. This is a great loss for our cause of "
 "global peace.\n"
@@ -73,7 +85,7 @@ msgstr ""
 "Veuillez remettre son corps a Research-1. Nous ferons le necessaire pour que "
 "vous preniez en charge sa mission."
 
-#: scenario_02_beacon.lua:114
+#: scripts/scenario_02_beacon.lua:114
 msgid ""
 "Just received message that Sir Johnson is safely aboard your ship! Great "
 "job!\n"
@@ -86,7 +98,7 @@ msgstr ""
 "\n"
 "Veuillez escorter le diplomate vers Orion-5 dans le secteur G3."
 
-#: scenario_02_beacon.lua:124
+#: scripts/scenario_02_beacon.lua:124
 msgid ""
 "J.J.Johnson thanks you for rescuing him.\n"
 "\n"
@@ -96,7 +108,7 @@ msgstr ""
 "\n"
 "Il vous parle de sa mission.\n"
 
-#: scenario_02_beacon.lua:128 scenario_02_beacon.lua:136
+#: scripts/scenario_02_beacon.lua:128 scripts/scenario_02_beacon.lua:136
 msgid ""
 "He just came back from a mission from the Refugee-X station. Which is a "
 "neutral station in the area, known to house anyone no matter their history.\n"
@@ -124,11 +136,11 @@ msgstr ""
 "pacifiques, nous avons retire vos armes nucleaires et vos IEM. Vous les "
 "recupererez une fois la mission terminee."
 
-#: scenario_02_beacon.lua:134
+#: scripts/scenario_02_beacon.lua:134
 msgid "J.J.Johnson message towards Orion-5 is clear:\n"
 msgstr "Le message de J.J.Johnson a l'egard d'Orion-5 est clair :\n"
 
-#: scenario_02_beacon.lua:156
+#: scripts/scenario_02_beacon.lua:156
 msgid ""
 "Apperently, J.J.Johnson managed to send out a transmission with his mission "
 "details to Orion-5 before he passed away.\n"
@@ -140,7 +152,7 @@ msgstr ""
 "\n"
 "Rendez-vous sur Orion-5 pour en recevoir les details."
 
-#: scenario_02_beacon.lua:165
+#: scripts/scenario_02_beacon.lua:165
 msgid ""
 "Two tough looking criminals board your ship. They are already cuffed, and do "
 "not look too happy about the whole situation.\n"
@@ -162,7 +174,7 @@ msgstr ""
 "\n"
 "Retournez a Orion-5 pour delivrer les criminels."
 
-#: scenario_02_beacon.lua:184
+#: scripts/scenario_02_beacon.lua:184
 msgid ""
 "Sllaaami graa kully fartsy!\n"
 "\n"
@@ -176,7 +188,7 @@ msgstr ""
 "qu'ils veuillent vous eliminer et que votre mort leur apportera beaucoup de "
 "satisfaction."
 
-#: scenario_02_beacon.lua:201
+#: scripts/scenario_02_beacon.lua:201
 msgid ""
 "Good job on dealing with those Exuari scum. The criminals are safely in our "
 "custody now. We'll be sending out a protection detail for Refugee-X\n"
@@ -196,19 +208,19 @@ msgstr ""
 "secteur D7. Ils ont entames les recherches et scannent les vaisseaux pour "
 "trouver le transport Exuari.\n"
 
-#: scenario_02_beacon.lua:206 scenario_02_beacon.lua:224
+#: scripts/scenario_02_beacon.lua:206 scripts/scenario_02_beacon.lua:224
 msgid "We have refitted your nukes and EMPs. "
 msgstr "Nous avons reinstalle vos armes nucleaires et vos IEM. "
 
-#: scenario_02_beacon.lua:206
+#: scripts/scenario_02_beacon.lua:206
 msgid "Awesome job on taking out the Exuari without those."
 msgstr "Felicitation pour la prise en charge de l'Exuari sans votre armement."
 
-#: scenario_02_beacon.lua:224
+#: scripts/scenario_02_beacon.lua:224
 msgid "Now to get those Exuaris!"
 msgstr "Maintenant allons nous occuper de ces Exuaris !"
 
-#: scenario_02_beacon.lua:230
+#: scripts/scenario_02_beacon.lua:230
 msgid ""
 "Scan the transports to identify the Exuari one. When you have identified it, "
 "do NOT destroy it.\n"
@@ -221,21 +233,21 @@ msgstr ""
 "Ciblez ses moteurs a impulsion avec vos armes a faisceau pour stopper sa "
 "progression."
 
-#: scenario_02_beacon.lua:242 scenario_02_beacon.lua:251
-#: scenario_02_beacon.lua:268
+#: scripts/scenario_02_beacon.lua:242 scripts/scenario_02_beacon.lua:251
+#: scripts/scenario_02_beacon.lua:268
 msgid "What the hell? I told you NOT to destroy the transport."
 msgstr ""
 "Bon sang, qu'est-ce qui se passe ? Je vous avais dit de ne pas detruire le "
 "transport."
 
-#: scenario_02_beacon.lua:245
+#: scripts/scenario_02_beacon.lua:245
 msgid ""
 "Transport identified, take down their impulse engines so we can capture it."
 msgstr ""
 "Transport identifie, neutralisez leurs moteurs a impulsion afin que nous "
 "puissions le capturer."
 
-#: scenario_02_beacon.lua:254
+#: scripts/scenario_02_beacon.lua:254
 msgid ""
 "Ok, transport disabled. We'll be sending a recovery team. Defend the "
 "transport, the Exuari will most likely rather destroy it then let it fall in "
@@ -245,7 +257,7 @@ msgstr ""
 "Defendez le transport, les Exuari prefereront sans doute le detruire plutot "
 "que de le laisser tomber entre nos mains."
 
-#: scenario_02_beacon.lua:286
+#: scripts/scenario_02_beacon.lua:286
 msgid ""
 "Transporter recovery team coming in.\n"
 "\n"
@@ -257,7 +269,7 @@ msgstr ""
 "Nous avons reussi a capturer le transport Exuari et l'avons ramene sur "
 "Orion-5. Veuillez vous y rendre pour un debriefing."
 
-#: scenario_02_beacon.lua:295
+#: scripts/scenario_02_beacon.lua:295
 msgid ""
 "Thanks to captured Exuari death squad we now know the location of the Exuari "
 "base in the area.\n"

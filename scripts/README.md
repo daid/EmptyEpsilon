@@ -1,4 +1,4 @@
-# The dicectory `scripts`
+# The directory `scripts`
 
 The Lua files are used in different ways.
 
@@ -15,7 +15,8 @@ The following files only need to exist on the server.
 
 ## Useful to `require` in scenarios
 
-- `ee.lua`
+- `ee.lua` with EmptyEpsilon constants
+- `luax.lua` with additional Lua functions
 - `utils.lua`
   - `perlin_noise.lua`
 
@@ -39,4 +40,4 @@ The default communication scripts for each created ship or station.
   - uses `supply_drop.lua`
 - `comms_supply_drop.lua` (used by `supply_drop.lua`)
 
-They can be replaced by `setCommsScript(filename)` or setCommsFunction(callback)`.
+They can be replaced by `obj:setCommsScript(filename)` or `obj:setCommsFunction(callback)`.
