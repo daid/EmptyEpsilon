@@ -727,6 +727,18 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", tr("Max Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    max_scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
+        target->setMaxScanProbeCount(value);
+    });
+    max_scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", tr("Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
+        target->setScanProbeCount(value);
+    });
+    scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", tr("button", "Can scan"), [this](bool value) {
@@ -780,6 +792,8 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     coolant_slider->setValue(target->max_coolant);
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
     long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+    max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
+    scan_probes_slider->setValue(target->getScanProbeCount());
     can_scan->setValue(target->getCanScan());
     can_hack->setValue(target->getCanHack());
     can_dock->setValue(target->getCanDock());

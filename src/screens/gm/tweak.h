@@ -201,6 +201,8 @@ private:
     GuiSlider* coolant_slider;
     GuiSlider* short_range_radar_slider;
     GuiSlider* long_range_radar_slider;
+    GuiSlider* max_scan_probes_slider;
+    GuiSlider* scan_probes_slider;
     GuiToggleButton* can_scan;
     GuiToggleButton* can_hack;
     GuiToggleButton* can_dock;
