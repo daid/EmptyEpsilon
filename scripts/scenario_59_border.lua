@@ -10544,7 +10544,10 @@ function setPlayers()
 					end
 					pobj.autoCoolant = false
 					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
+					pobj.max_jump_range = 40000
+					pobj.min_jump_range = 3000
+					pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+					pobj:setJumpDriveCharge(pobj.max_jump_range)
 				elseif tempPlayerType == "Benedict" then
 					if #playerShipNamesFor["Benedict"] > 0 then
 						pobj:setCallSign(tableRemoveRandom(playerShipNamesFor["Benedict"]))
@@ -10572,7 +10575,10 @@ function setPlayers()
 						until(pobj:getBeamWeaponRange(bi) < 1)
 					end
 					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
+					pobj.max_jump_range = 40000
+					pobj.min_jump_range = 3000
+					pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+					pobj:setJumpDriveCharge(pobj.max_jump_range)
 				elseif tempPlayerType == "ZX-Lindworm" then
 					if #playerShipNamesFor["Lindworm"] > 0 then
 						pobj:setCallSign(tableRemoveRandom(playerShipNamesFor["Lindworm"]))
@@ -10666,6 +10672,12 @@ function setPlayers()
 					if pobj:hasJumpDrive() then
 						pobj.healthyJump = 1.0
 						pobj.prevJump = 1.0
+					end
+				end
+				if pobj:hasJumpDrive() then
+					if pobj.max_jump_range == nil then
+						pobj.max_jump_range = 50000
+						pobj.min_jump_range = 5000
 					end
 				end
 			end
@@ -14242,7 +14254,10 @@ function spawnDroneFleet(originX, originY, droneCount, faction)
 	end
 	local fleetList = {}
 	local deploySpacing = random(300,800)
-	local deployConfig = random(1,100)
+	local shape = "hexagonal"
+	if random(1,100) < 50 then
+		shape = "square"
+	end
 	for i=1,droneCount do
 		ship = CpuShip():setFaction(faction):setTemplate("Ktlitan Drone"):orderRoaming():setCommsScript(""):setCommsFunction(commsShip)
 		ship:setCallSign(generateCallSign(nil,faction))
@@ -14253,11 +14268,7 @@ function spawnDroneFleet(originX, originY, droneCount, faction)
 			rawHumanShipStrength = rawHumanShipStrength + 4
 			ship:onDestruction(friendlyVesselDestroyed)
 		end
-		if deployConfig < 50 then
-			ship:setPosition(originX+fleetPosDelta1x[i]*deploySpacing,originY+fleetPosDelta1y[i]*deploySpacing)
-		else
-			ship:setPosition(originX+fleetPosDelta2x[i]*deploySpacing,originY+fleetPosDelta2y[i]*deploySpacing)
-		end
+		ship:setPosition(originX + formation_delta[shape].x[i] * deploySpacing, originY + formation_delta[shape].y[i] * deploySpacing)
 		table.insert(fleetList,ship)
 	end
 	return fleetList, droneCount*4
@@ -14273,7 +14284,10 @@ function spawnFighterFleet(originX, originY, fighterCount, faction)
 	local fleetList = {}
 	local fleetPower = 0
 	local deploySpacing = random(300,800)
-	local deployConfig = random(1,100)
+	local shape = "hexagonal"
+	if random(1,100) < 50 then
+		shape = "square"
+	end
 	for i=1,fighterCount do
 		local shipTemplateType = math.random(1,#fighterNames)
 		fleetPower = fleetPower + fighterScores[shipTemplateType]
@@ -14286,11 +14300,7 @@ function spawnFighterFleet(originX, originY, fighterCount, faction)
 			rawHumanShipStrength = rawHumanShipStrength + fighterScores[shipTemplateType]
 			ship:onDestruction(friendlyVesselDestroyed)
 		end
-		if deployConfig < 50 then
-			ship:setPosition(originX+fleetPosDelta1x[i]*deploySpacing,originY+fleetPosDelta1y[i]*deploySpacing)
-		else
-			ship:setPosition(originX+fleetPosDelta2x[i]*deploySpacing,originY+fleetPosDelta2y[i]*deploySpacing)
-		end
+		ship:setPosition(originX + formation_delta[shape].x[i] * deploySpacing, originY + formation_delta[shape].y[i] * deploySpacing)
 		table.insert(fleetList,ship)
 	end
 	return fleetList, fleetPower
@@ -14310,7 +14320,10 @@ function spawnJammerFleet(originX, originY)
 	local fleetList = {}
 	local fleetPower = 0
 	local deploySpacing = random(300,800)
-	local deployConfig = random(1,100)
+	local shape = "hexagonal"
+	if random(1,100) < 50 then
+		shape = "square"
+	end
 	for i=1,shipSpawnCount do
 		local shipTemplateType = math.random(1,#jammerNames)
 		fleetPower = fleetPower + jammerScores[shipTemplateType]
@@ -14318,11 +14331,7 @@ function spawnJammerFleet(originX, originY)
 		ship:setCallSign(generateCallSign(nil,faction))
 		rawKraylorShipStrength = rawKraylorShipStrength + jammerScores[shipTemplateType]
 		ship:onDestruction(enemyVesselDestroyed)
-		if deployConfig < 50 then
-			ship:setPosition(originX+fleetPosDelta1x[i]*deploySpacing,originY+fleetPosDelta1y[i]*deploySpacing)
-		else
-			ship:setPosition(originX+fleetPosDelta2x[i]*deploySpacing,originY+fleetPosDelta2y[i]*deploySpacing)
-		end
+		ship:setPosition(originX + formation_delta[shape].x[i] * deploySpacing, originY + formation_delta[shape].y[i] * deploySpacing)
 		table.insert(fleetList,ship)
 	end
 	return fleetList, fleetPower
