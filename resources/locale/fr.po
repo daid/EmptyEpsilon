@@ -3380,7 +3380,7 @@ msgstr ""
 "L'EMP est egalement plus petit et plus facile a stocker que les armes nucleaires lourdes. "
 "De nombreux capitaines (et pirates) preferent les EMP aux armes nucleaires pour ces raisons "
 "et les utilisent pour affaiblir les boucliers des cibles avant de les attaquer en combat "
-rapproche avec un tir a faisceau laser."
+"rapproche avec un tir a faisceau laser."
 
 #: scripts/science_db.lua:64
 msgid ""
