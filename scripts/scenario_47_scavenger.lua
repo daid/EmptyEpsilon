@@ -92,6 +92,7 @@ function init()
 	efficient_battery_diagnostic = false
 	prefix_length = 0
 	suffix_index = 0
+	accumulated_delta = 0
 	contract_eligible = false			--should start out as false
 	transition_contract_message = false	--should start out as false
 	contract_station = {}
