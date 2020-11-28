@@ -152,46 +152,47 @@ function spawnWave()
         end
 
         -- Set ship type
-        local type = random(0, 10) -- TODO rename variable
-        local score = 9999
-        if type < 2 then
+        local typeRoll = random(0, 10)
+        local score
+        if typeRoll < 2 then
             if irandom(1, 100) < 80 then
                 ship:setTemplate("MT52 Hornet")
             else
                 ship:setTemplate("MU52 Hornet")
             end
             score = 5
-        elseif type < 3 then
+        elseif typeRoll < 3 then
             if irandom(1, 100) < 80 then
                 ship:setTemplate("Adder MK5")
             else
                 ship:setTemplate("WX-Lindworm")
             end
             score = 7
-        elseif type < 6 then
+        elseif typeRoll < 6 then
             if irandom(1, 100) < 80 then
                 ship:setTemplate("Phobos T3")
             else
                 ship:setTemplate("Piranha F12")
             end
             score = 15
-        elseif type < 7 then
+        elseif typeRoll < 7 then
             ship:setTemplate("Ranus U")
             score = 25
-        elseif type < 8 then
+        elseif typeRoll < 8 then
             if irandom(1, 100) < 50 then
                 ship:setTemplate("Stalker Q7")
             else
                 ship:setTemplate("Stalker R7")
             end
             score = 25
-        elseif type < 9 then
+        elseif typeRoll < 9 then
             ship:setTemplate("Atlantis X23")
             score = 50
         else
             ship:setTemplate("Odin")
             score = 250
         end
+        assert(score ~= nil)
 
         -- Destroy ship if it was too strong else take it
         if score > totalScoreRequirement * 1.1 + 5 then
