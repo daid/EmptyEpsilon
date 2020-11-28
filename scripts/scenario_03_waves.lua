@@ -48,8 +48,15 @@ How many waves can you destroy?]]
     getPlayerShip(-1):addToShipLog(text, "white")
 
     -- Random friendly stations
-    for n = 1, 2 do
-        table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
+    for _ = 1, 2 do
+        local station = SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000))
+        table.insert(friendlyList, station)
+    end
+
+    -- Random neutral stations
+    for _ = 1, 6 do
+        local station = SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent")
+        setCirclePos(station, 0, 0, random(0, 360), random(15000, 30000))
     end
     friendlyList[1]:addReputationPoints(150.0)
 
@@ -83,11 +90,6 @@ How many waves can you destroy?]]
 
     -- First enemy wave
     spawnWave()
-
-    -- Random neutral stations
-    for n = 1, 6 do
-        setCirclePos(SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
-    end
 
     -- Random transports
     Script():run("util_random_transports.lua")
