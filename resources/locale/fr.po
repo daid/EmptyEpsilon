@@ -3295,6 +3295,38 @@ msgstr ""
 "moitie des degats de leurs homologues de base, mais a quoi sert un missile s'il ne "
 "touche pas sa cible."
 
+#: scripts/science_db.lua:44
+msgid "Drop distance"
+msgstr "Distance de largage"
+
+#: scripts/science_db.lua:45
+msgid "Trigger distance"
+msgstr "Declenchement"
+
+#: scripts/science_db.lua:36 46 55
+msgid "Blast radius"
+msgstr "Rayon d'action"
+
+#: scripts/science_db.lua:37 47 56
+msgid "Damage at center"
+msgstr "Degats au centre"
+
+#: scripts/science_db.lua:38 48 57
+msgid "Damage at edge"
+msgstr "Degats au bord"
+
+#: scripts/science_db.lua:30 35 54 61
+msgid "Range"
+msgstr "Portee"
+
+#: scripts/science_db.lua:31 62
+msgid "Damage"
+msgstr "Degats"
+
+#: scripts/science_db.lua:63
+msgid "Burst"
+msgstr "Rafale"
+
 #: scripts/science_db.lua:29
 msgid "Homing missile"
 msgstr ""
@@ -3309,6 +3341,10 @@ msgstr ""
 "combat spatial. Il est suffisamment compact pour etre monte sur des fregates "
 "et suffisamment puissant pour etre utilise sur de plus grands navires, mais "
 "en etant generalement utilise dans plus d'un tube de missile."
+
+#: scripts/science_db.lua:34
+msgid "Nuke"
+msgstr ""
 
 #: scripts/science_db.lua:39
 msgid ""
@@ -3336,6 +3372,10 @@ msgstr ""
 "mais comme ces armes sont souvent utilisees au beau milieu d'une bataille, il "
 "est impossible de savoir si le blindage ou les boucliers de la coque peuvent "
 "fournir une protection efficace."
+
+#: scripts/science_db.lua:43
+msgid "Mine"
+msgstr ""
 
 #: scripts/science_db.lua:49
 msgid ""
@@ -3381,6 +3421,10 @@ msgstr ""
 "De nombreux capitaines (et pirates) preferent les EMP aux armes nucleaires pour ces raisons "
 "et les utilisent pour affaiblir les boucliers des cibles avant de les attaquer en combat "
 "rapproche avec un tir a faisceau laser."
+
+#: scripts/science_db.lua:60
+msgid "HVLI"
+msgstr ""
 
 #: scripts/science_db.lua:64
 msgid ""
