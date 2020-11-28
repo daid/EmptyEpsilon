@@ -9,7 +9,7 @@ This class of ships is normally not fitted with jump or warp drives. But in some
 They are divided in 3 different sub-classes:
 * Cruiser: Weaponized frigates, focused on combat. These come in various roles.
 * Light transport: Small transports, like transporting up to 50 soldiers in spartan conditions or a few diplomats in luxury. Depending on the role can have some weaponry.
-* Support: Support types come in many variaties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels.
+* Support: Support types come in many varieties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels.
 ----------------------------------------------------------]]
 template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("Phobos T3")):setClass(_("Frigate"), _("Cruiser")):setModel("AtlasHeavyFighterYellow")
 template:setRadarTrace("radar_cruiser.png")
