@@ -79,7 +79,7 @@ variation:addDoor(6, 3, false);
 variation:addDoor(6, 4, false);
 variation:addDoor(8, 3, false);
 variation:addDoor(8, 4, false);
- 
+
 --Airlock doors
 --variation:addDoor(2, 2, false);
 --variation:addDoor(2, 5, false);
