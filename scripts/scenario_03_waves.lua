@@ -18,13 +18,14 @@ require("utils.lua")
 --      Returns the object with its position set to the resulting coordinates.
 
 function randomStationTemplate()
-    if random(0, 100) < 10 then
+    local rnd = random(0, 100)
+    if rnd < 10 then
         return "Huge Station"
     end
-    if random(0, 100) < 20 then
+    if rnd < 20 then
         return "Large Station"
     end
-    if random(0, 100) < 50 then
+    if rnd < 50 then
         return "Medium Station"
     end
     return "Small Station"
