@@ -27,40 +27,40 @@ It has been reported that some battleships started using larger variations of th
 Smaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target.]]))
 
 item = weapons:addEntry(_('Homing missile'))
-item:addKeyValue('Range', '5.4u')
-item:addKeyValue('Damage', '35')
+item:addKeyValue(_('Range'), '5.4u')
+item:addKeyValue(_('Damage'), '35')
 item:setLongDescription(_([[This target-seeking missile is the workhorse of many space combat arsenals. It's compact enough to be fitted on frigates, and packs enough punch to be used on larger ships, though usually in more than a single missile tube.]]))
 
-item = weapons:addEntry('Nuke')
-item:addKeyValue('Range', '5.4u')
-item:addKeyValue('Blast radius', '1u')
-item:addKeyValue('Damage at center', '160')
-item:addKeyValue('Damage at edge', '30')
+item = weapons:addEntry(_('Nuke'))
+item:addKeyValue(_('Range'), '5.4u')
+item:addKeyValue(_('Blast radius'), '1u')
+item:addKeyValue(_('Damage at center'), '160')
+item:addKeyValue(_('Damage at edge'), '30')
 item:setLongDescription(_([[A nuclear missile is similar to a homing missile in that it can seek a target, but it moves and turns more slowly and explodes a greatly increased payload. Its nuclear explosion spans 1U of space and can take out multiple ships in a single shot.
 
 Some captains oppose the use of nuclear weapons because their large explosions can lead to 'fragging', or unintentional friendly fire. Shields should protect crews from harmful radiation, but because these weapons are often used in the thick of battle, there's no way of knowing if hull plating or shields can provide enough protection.]]))
 
-item = weapons:addEntry('Mine')
-item:addKeyValue('Drop distance', '1.2u')
-item:addKeyValue('Trigger distance', '0.6u')
-item:addKeyValue('Blast radius', '1u')
-item:addKeyValue('Damage at center', '160')
-item:addKeyValue('Damage at edge', '30')
+item = weapons:addEntry(_('Mine'))
+item:addKeyValue(_('Drop distance'), '1u')
+item:addKeyValue(_('Trigger distance'), '0.8u')
+item:addKeyValue(_('Blast radius'), '1u')
+item:addKeyValue(_('Damage at center'), '160')
+item:addKeyValue(_('Damage at edge'), '30')
 item:setLongDescription(_([[Mines are often placed in defensive perimeters around stations. There are also old minefields scattered around the galaxy from older wars.
 
 Some fearless captains use mines as offensive weapons, but their delayed detonation and blast radius make this use risky at best.]]))
 
 item = weapons:addEntry(_('EMP'))
-item:addKeyValue('Range', '5.4u')
-item:addKeyValue('Blast radius', '1u')
-item:addKeyValue('Damage at center', '160')
-item:addKeyValue('Damage at edge', '30')
+item:addKeyValue(_('Range'), '5.4u')
+item:addKeyValue(_('Blast radius'), '1u')
+item:addKeyValue(_('Damage at center'), '160')
+item:addKeyValue(_('Damage at edge'), '30')
 item:setLongDescription(_([[The electromagnetic pulse missile (EMP) reproduces the disruptive effects of a nuclear explosion, but without the destructive properties. This causes it to only affect shields within its blast radius, leaving their hulls intact. The EMP missile is also smaller and easier to store than heavy nukes. Many captains (and pirates) prefer EMPs over nukes for these reasons, and use them to knock out targets' shields before closing to disable them with focused beam fire.]]))
 
-item = weapons:addEntry('HVLI')
-item:addKeyValue('Range', '5.4u')
-item:addKeyValue('Damage', '6 each, 30 total')
-item:addKeyValue('Burst', '5')
+item = weapons:addEntry(_('HVLI'))
+item:addKeyValue(_('Range'), '5.4u')
+item:addKeyValue(_('Damage'), '6 each, 30 total')
+item:addKeyValue(_('Burst'), '5')
 item:setLongDescription(_([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
 
 Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]]))
