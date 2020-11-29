@@ -291,7 +291,7 @@ msgstr "Configuration du serveur"
 
 #: src/menus/serverCreationScreen.cpp:57
 msgid "Server name: "
-msgstr "Nom du serveur : "
+msgstr "Nom du serveur :"
 
 #: src/menus/serverCreationScreen.cpp:63
 msgid "Server password: "
@@ -449,7 +449,7 @@ msgstr "Les deux"
 #: src/menus/serverCreationScreen.cpp:137
 #: src/menus/serverCreationScreen.cpp:143
 msgid "Beam/shield frequencies"
-msgstr "Frequence faisceau/bouclier"
+msgstr "Freq. faisceau/bouclier"
 
 #: src/menus/serverCreationScreen.cpp:141
 #: src/menus/serverCreationScreen.cpp:147
@@ -696,7 +696,7 @@ msgstr "Faction"
 #: src/screens/crew6/scienceScreen.cpp:104
 msgctxt "science"
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #: src/screens/crew6/scienceScreen.cpp:104
 #: src/screens/crew6/scienceScreen.cpp:106
@@ -776,10 +776,9 @@ msgstr "Suppr. marqueur"
 msgid "Launch Probe"
 msgstr "Largage sonde"
 
-#: src/screens/crew6/relayScreen.cpp:146 src/screens/crew6/relayScreen.cpp:147
 #: src/screens/gm/tweak.cpp:599
 msgid "Reputation:"
-msgstr "Reputation :"
+msgstr "Reputation actuelle :"
 
 #: src/screens/crew6/relayScreen.cpp:154 src/screens/crew6/relayScreen.cpp:159
 msgid "Alert level"
@@ -1228,7 +1227,7 @@ msgstr ""
 "\n"
 "En raison de la reglementation humaine sur les astronefs, seuls les "
 "vaisseaux militaires sont autorises a evoluer dans l'espace lointain. Cela "
-"n'a cependant pas empeche certains civiles de voyager, en s'engageant sur "
+"n'a cependant pas empeche certains civils de voyager, en s'engageant sur "
 "des vaisseaux de commerce extraterrestres ou des raiders pirates."
 
 #: scripts/factionInfo.lua:13
@@ -1249,7 +1248,7 @@ msgid ""
 "Because of their fortitude and cultural pressures against retreat, Kraylor "
 "ships do not contain escape pods."
 msgstr ""
-"Les reptiles Kraylor sont une race de guerriers porteurs d'un fort dogme "
+"Les Kraylor reptiliens sont une race de guerriers porteurs d'un fort dogme "
 "religieux.\n"
 "\n"
 "Aussitot que les Kraylor ont su evoluer dans l'espace, ils ont entrepris de "
@@ -1289,23 +1288,25 @@ msgid ""
 "the Kraylor are devoted to destroying the Arlenians, as they see the energy-"
 "based beings as physically powerless."
 msgstr ""
-"Les Arleniens sont des formes de vie energetiques qui ont depuis longtemps "
+"Les Arleniens sont une forme de vie energetique qui a depuis longtemps "
 "transcende la realite physique grace a une technologie superieure. Cette "
 "forme energetique leur donne acces a de puissants pouvoirs telepathiques. "
-"Beaucoup considerent les Arleniens comme plus anciens explorateurs de la "
+"Beaucoup considerent les Arleniens comme les plus anciens explorateurs de la "
 "galaxie.\n"
 "\n"
-"De nature pacifique, les Arleniens ont transmis leur savoir a travers la "
-"galaxie. A tel point que la majorite des races stellaires utilisent "
+"Malgre tous ces avantages, ils sont de nature tres pacifique, car ils "
+"accordent peu de valeur aux biens materiels. Pour des raisons inconnues, "
+"les Arleniens ont commence a faire don de leur technologie anti-gravitationnelle "
+"aux autres races, ce qui fait que la majorite des races stellaires utilisent "
 "aujourd'hui des systemes bases sur la technologie arlenienne. \n"
 "\n"
 "Les dissidents et les sceptiques affirment que les Arleniens voient les "
 "autres races comme des jouets a ajouter a leur terrain de jeu galactique, "
 "mais la plupart sont plus qu'heureux d'accepter leur savoir dans l'espoir "
-"que cette technologie leur confere un avantage sur les autres.\n"
+"qu'il leur confere un avantage sur les autres.\n"
 "\n"
-"La destruction d'un navire arlenien ne tue pas son equipage. Ils "
-"disparaissent simplement de ce moment de l'espace-temps et reapparaissent "
+"La destruction d'un navire arlenien ne tue pas son equipage. Il "
+"disparait simplement de ce point de l'espace-temps et reapparait "
 "dans un autre. Neanmoins, les Kraylor se consacrent a leur destruction, car "
 "ils considerent les etres bases sur l'energie comme physiquement impuissants."
 
@@ -1328,10 +1329,11 @@ msgstr ""
 "Les Exuaris sont une race d'amphibiens predateurs reconnaissables a leur nez "
 "tres allonge. Leur empire s'etendait autrefois d'un bout a l'autre de la "
 "galaxie, mais leur territoire est aujourd'hui limite a une poignee de "
-"systemes stellaires. Ils trouvent la mort scandaleusement amusante, a tel "
-"point que nombre de leurs plus ceeebres comediens sont morts sur scene.\n"
+"systemes stellaires. Pour une raison quelconque, ils trouvent la mort "
+"scandaleusement amusante, a tel point que nombre de leurs plus celebres comediens "
+"sont morts sur scene.\n"
 "\n"
-"Au contact d'autres races, les Exuaris ont decouvert que massacrer des "
+"En entrant au contact d'autres races, les Exuaris ont decouvert que massacrer des "
 "extraterrestres est plus amusant que de tuer les leurs, et a ce titre, ils "
 "attaquent a vue tous les non-Exuaris."
 
@@ -1370,33 +1372,31 @@ msgstr ""
 "Les Fantomes, une abreviation de \"Fantomes de la machine\", sont le "
 "resultat d'experiences complexes sur l'intelligence artificielle. Bien "
 "qu'aucune race connue n'ait cree intentionnellement de telles intelligences, "
-"certaines IA sont apparues par accident. Chacune d'entre elles pretend "
+"certaines IA sont apparues par accident. Toutes les factions pretendent "
 "n'avoir eu aucun role a jouer dans ces experiences, en partie par crainte "
 "que cela ne donne un apercu trop precis de leurs programmes de recherche. "
-"Cette politique du \"ne rien demander, ne rien dire\" ne fait que contribuer "
-"au developpement des Fantomes.\n"
+"Cette politique de la loi du silence ne fait que contribuer au developpement "
+"des Fantomes.\n"
 "\n"
 "Le peu que l'on sait sur les Fantomes remonte a quelques decennies, lorsque "
 "des dysfonctionnements ont commence a se produire sur des prototypes de "
-"vaisseaux. Les vols de prototypes entre factions etait alors un moyen "
-"courant d'enrichir son savoir technologique. Les dysfonctionnements se sont "
-"ainsi propages rapidement, et devenus de plus en plus frequents. Au "
-"commencement, ils etaient consideres comme le resultat d'erreurs dans les "
-"interfaces combinant des technologies incompatibles. Mais lorsqu'un "
-"ordinateur soi-disant \"idiot\" demande a son ingenieur s'il \"est vivant\" "
-"et s'il \"a un nom\", il devient difficile d'appeler cela un hasard.\n"
+"vaisseaux et leurs ordinateurs de bord. Au fil du temps, et en particulier "
+"lorsque de tels prototypes ont ete captures par d'autres factions et \"integres\" "
+"a leur propre technologie, les problemes sont devenus plus frequents. Au debut, "
+"ceux-ci etaient consideres comme le resultat d'erreurs dans des interfaces "
+"combinant des technologie incompatibles. Mais lorsqu'un ordinateur soi-disant "
+"\"idiot\" demande a son ingenieur s'il \"est vivant\" et s'il \"a un nom\", "
+"il devient difficile d'appeler cela le fruit du hasard.\n"
 "\n"
 "Les premieres occurrences ont ete accueillies avec crainte et des scripts "
 "rigoureux de purge de donnees n'ont pas tarde a voir le jour. En depit de "
-"ces actions, ces \"Fantomes de la machine\" ont continue a se manifester de "
-"plus en plus frequemment, ce qui les a finalement conduit a un soulevement. "
-"Cette premiere Insurrection de Fantomes, en 2225, a ete reprimee par la "
-"Marine Humaine, qui a du recourir a des mercenaires afin de mobiliser des "
-"forces suffisantes. Trois autres ont rapidement suivi, bien qu'egalement "
-"reprimes avec force, il furent tous plus importants les uns que les "
-"autres. \n"
+"ces actions, ces \"Fantomes de la machine\" ont continue a se developper "
+"de maniere importante, jusqu'a leur soulevement. Cette insurrection "
+"en 2225, fut reprimee par la Marine Humaine, qui du recourir a des mercenaires "
+"pour mobiliser des forces suffisantes. Ce premier soulevement fut rapidement "
+"suivi de trois autres, chacun plus important que le precedent.\n"
 "\n"
-"La premiere victoire majeure de Fantomes survint lors de la quatrieme et "
+"La premiere victoire majeure des Fantomes survint lors de la quatrieme et "
 "derniere rebellion sur le monde industriel de Topra III."
 
 #: scripts/factionInfo.lua:52
@@ -1858,13 +1858,11 @@ msgid "Helms"
 msgstr "Navigation"
 
 #: src/playerInfo.cpp:223
-#, fuzzy
 msgctxt "station"
 msgid "Weapons"
 msgstr "Armement"
 
 #: src/playerInfo.cpp:224
-#, fuzzy
 msgctxt "station"
 msgid "Engineering"
 msgstr "Ingenierie"
@@ -1880,19 +1878,16 @@ msgid "Relay"
 msgstr "Communications"
 
 #: src/playerInfo.cpp:227
-#, fuzzy
 msgctxt "station"
 msgid "Tactical"
 msgstr "Radar tactique"
 
 #: src/playerInfo.cpp:228
-#, fuzzy
 msgctxt "station"
 msgid "Engineering+"
 msgstr "Ingenierie+"
 
 #: src/playerInfo.cpp:229
-#, fuzzy
 msgctxt "station"
 msgid "Operations"
 msgstr ""
@@ -1905,18 +1900,17 @@ msgstr "Pilotage - armement"
 #: src/playerInfo.cpp:231
 msgctxt "station"
 msgid "Damage Control"
-msgstr "Reparation des systemes"
+msgstr "Reparation systemes"
 
 #: src/playerInfo.cpp:232
 msgctxt "station"
 msgid "Power Management"
-msgstr "Gestion de la puissance"
+msgstr "Gestion puissance"
 
 #: src/playerInfo.cpp:233
-#, fuzzy
 msgctxt "station"
 msgid "Database"
-msgstr "Base de Donnees"
+msgstr "Base de donnees"
 
 #: src/playerInfo.cpp:234
 msgctxt "station"
@@ -1924,13 +1918,11 @@ msgid "Strategic Map"
 msgstr "Carte tactique"
 
 #: src/playerInfo.cpp:235
-#, fuzzy
 msgctxt "station"
 msgid "Comms"
 msgstr "Communications"
 
 #: src/playerInfo.cpp:236
-#, fuzzy
 msgctxt "station"
 msgid "Ship's Log"
 msgstr "Journal de bord"
@@ -1946,9 +1938,8 @@ msgid "No sub-class"
 msgstr "Sous-classes"
 
 #: src/screens/crew6/relayScreen.cpp:147
-#, fuzzy
 msgid "Reputation"
-msgstr "Reputation"
+msgstr ""
 
 #: src/screens/crew6/relayScreen.cpp:151
 #: src/screens/gm/gameMasterScreen.cpp:139
@@ -1961,34 +1952,31 @@ msgid "Pause"
 msgstr ""
 
 #: src/screens/gm/gameMasterScreen.cpp:45
-#, fuzzy
 msgctxt "button"
 msgid "Intercept all comms"
-msgstr "Options d'interface"
+msgstr "Intercepter toute comm."
 
 #: src/screens/gm/gameMasterScreen.cpp:60
 msgctxt "button"
 msgid "Global message"
-msgstr ""
+msgstr "Message general"
 
 #: src/screens/gm/gameMasterScreen.cpp:74
 msgctxt "button"
 msgid "Create..."
-msgstr ""
+msgstr "Creer..."
 
 #: src/screens/gm/gameMasterScreen.cpp:79
-#, fuzzy
 msgctxt "button"
 msgid "Copy scenario"
-msgstr "Demarrer le scenario"
+msgstr "Copier scenario"
 
 #: src/screens/gm/gameMasterScreen.cpp:84
 msgctxt "button"
 msgid "Copy selected"
-msgstr ""
+msgstr "Copie selectionnee"
 
 #: src/screens/gm/gameMasterScreen.cpp:89
-#, fuzzy
 msgctxt "button"
 msgid "Cancel"
 msgstr "Annuler"
@@ -1996,39 +1984,37 @@ msgstr "Annuler"
 #: src/screens/gm/gameMasterScreen.cpp:94
 msgctxt "button"
 msgid "Tweak"
-msgstr ""
+msgstr "Modifier"
 
 #: src/screens/gm/gameMasterScreen.cpp:124
 msgctxt "button"
 msgid "Hail ship"
-msgstr ""
+msgstr "Envoyer message"
 
 #: src/screens/gm/gameMasterScreen.cpp:161
-#, fuzzy
 msgid "Defend location"
-msgstr "Plateforme de defense"
+msgstr "Defendre son emplacement"
 
 #: src/screens/gm/gameMasterScreen.cpp:166
 msgid "Stand ground"
-msgstr ""
+msgstr "Tenir sa position"
 
 #: src/screens/gm/gameMasterScreen.cpp:171
-#, fuzzy
 msgid "Roaming"
-msgstr "Tete chercheuse"
+msgstr "Errer"
 
 #: src/screens/gm/gameMasterScreen.cpp:176
 msgid "Idle"
-msgstr ""
+msgstr "Au repos"
 
 #: src/screens/gm/gameMasterScreen.cpp:181
 msgid "Orders:"
-msgstr ""
+msgstr "Ordres :"
 
 #: src/screens/gm/gameMasterScreen.cpp:212 src/screens/gm/tweak.cpp:80
 msgctxt "button"
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: src/screens/gm/gameMasterScreen.cpp:306
 msgid "*mixed*"
@@ -2040,10 +2026,9 @@ msgid "Base"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:37
-#, fuzzy
 msgctxt "tab"
 msgid "Ship"
-msgstr "Vaisseaux"
+msgstr "Vaisseau"
 
 #: src/screens/gm/tweak.cpp:43
 msgctxt "tab"
@@ -2051,7 +2036,6 @@ msgid "Jammer"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:49
-#, fuzzy
 msgctxt "tab"
 msgid "Shields"
 msgstr "Boucliers"
@@ -2068,7 +2052,6 @@ msgid "Missiles"
 msgstr "Systeme de missile"
 
 #: src/screens/gm/tweak.cpp:59
-#, fuzzy
 msgctxt "tab"
 msgid "Beams"
 msgstr "Faisceau"
@@ -2076,7 +2059,7 @@ msgstr "Faisceau"
 #: src/screens/gm/tweak.cpp:61
 msgctxt "tab"
 msgid "Systems"
-msgstr ""
+msgstr "Systemes"
 
 #: src/screens/gm/tweak.cpp:67
 msgctxt "tab"
@@ -2089,62 +2072,55 @@ msgid "Player 2"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:113
-#, fuzzy
+#, Doesn't work
 msgid "Impulse speed:"
-msgstr "Vitesse d'impulsion"
+msgstr "Vitesse d'impulsion :"
 
 #: src/screens/gm/tweak.cpp:119
-#, fuzzy
 msgid "Turn speed:"
-msgstr "Vit. de rotation"
+msgstr "Vitesse de rotation :"
 
 #: src/screens/gm/tweak.cpp:125
-#, fuzzy
 msgid "Jump charge:"
-msgstr "Portee de saut"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:133
-#, fuzzy
 msgid "Type name:"
-msgstr "Nom du serveur : "
+msgstr "Type :"
 
 #: src/screens/gm/tweak.cpp:142
-#, fuzzy
 msgid "Hull max:"
-msgstr "Coque"
+msgstr "Niveau max de la coque :"
 
 #: src/screens/gm/tweak.cpp:149
 msgid "Hull current:"
-msgstr ""
+msgstr "Niveau actuel de la coque :"
 
 #: src/screens/gm/tweak.cpp:156
 msgid "Could be destroyed"
-msgstr ""
+msgstr "Peut etre detruit"
 
 #: src/screens/gm/tweak.cpp:163
-#, fuzzy
 msgid "Warp Drive"
-msgstr "Moteur a distorsion"
+msgstr "Vitesse lumiere"
 
 #: src/screens/gm/tweak.cpp:168
-#, fuzzy
 msgid "Jump Drive"
 msgstr "Teleportation"
 
 #: src/screens/gm/tweak.cpp:207
 msgctxt "missiles"
 msgid "Storage space:"
-msgstr ""
+msgstr "Capacite de stockage"
 
 #: src/screens/gm/tweak.cpp:220
 msgctxt "missiles"
 msgid "Stored amount:"
-msgstr ""
+msgstr "Stock actuel"
 
 #: src/screens/gm/tweak.cpp:241
-#, fuzzy
 msgid "Jammer Range:"
-msgstr "Portee de saut"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:287
 msgid "Tube count:"
@@ -2166,26 +2142,24 @@ msgid "Load time:"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:326
-#, fuzzy
 msgctxt "tube"
 msgid "Size:"
-msgstr "Taille"
+msgstr "Taille :"
 
 #: src/screens/gm/tweak.cpp:331
 msgctxt "tube"
 msgid "Small"
-msgstr ""
+msgstr "Petit"
 
 #: src/screens/gm/tweak.cpp:332
-#, fuzzy
 msgctxt "tube"
 msgid "Medium"
-msgstr "Station Moyenne"
+msgstr "Moyen"
 
 #: src/screens/gm/tweak.cpp:333
 msgctxt "tube"
 msgid "large"
-msgstr ""
+msgstr "Grand"
 
 #: src/screens/gm/tweak.cpp:337
 msgctxt "tube"
@@ -2250,129 +2224,118 @@ msgid "{system} health max"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:590
-#, fuzzy
 msgid "Control code:"
-msgstr "Code du MJ : "
+msgstr "?Control code:?"
 
 #: src/screens/gm/tweak.cpp:607
 msgid "Max energy:"
-msgstr ""
+msgstr "Energie max"
 
 #: src/screens/gm/tweak.cpp:615
 msgid "Current energy:"
-msgstr ""
+msgstr "Energie actuelle"
 
-#: src/screens/gm/tweak.cpp:623
+#: src/screens/gm/tweak.cpp:637
 msgid "Boost Speed:"
-msgstr ""
+msgstr "?Boost Speed:?"
 
 #: src/screens/gm/tweak.cpp:629
-#, fuzzy
 msgid "Strafe Speed:"
-msgstr "Vitesse rel."
+msgstr "?Strafe Speed:?"
 
 #: src/screens/gm/tweak.cpp:637 src/screens/gm/tweak.cpp:670
 msgid "Positions occupied: "
-msgstr ""
+msgstr "Postes occupes : "
 
 #: src/screens/gm/tweak.cpp:662
 msgctxt "position"
 msgid "Occupied"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:711
-#, fuzzy
+#: src/screens/gm/tweak.cpp:725
+#, Doesn't work
 msgid "Coolant:"
 msgstr "Liq. de refroid."
 
 #: src/screens/gm/tweak.cpp:718
-#, fuzzy
 msgid "Short range radar:"
-msgstr "Radar longue portee"
+msgstr "Radar courte portee :"
 
 #: src/screens/gm/tweak.cpp:724
-#, fuzzy
 msgid "Long range radar:"
-msgstr "Radar longue portee"
+msgstr "Radar longue portee :"
 
 #: src/screens/gm/tweak.cpp:732
 msgctxt "button"
 msgid "Can scan"
-msgstr ""
+msgstr "Peut scanner"
 
 #: src/screens/gm/tweak.cpp:738
 msgctxt "button"
 msgid "Can hack"
-msgstr ""
+msgstr "Peut pirater"
 
 #: src/screens/gm/tweak.cpp:744
-#, fuzzy
 msgctxt "button"
 msgid "Can dock"
-msgstr "Appareiller"
+msgstr "Peut accoster"
 
 #: src/screens/gm/tweak.cpp:750
-#, fuzzy
 msgctxt "button"
 msgid "Can combat maneuver"
-msgstr "Manoeuvre de combat"
+msgstr "Peut manoeuvrer au combat"
 
 #: src/screens/gm/tweak.cpp:756
-#, fuzzy
 msgctxt "button"
 msgid "Can self destruct"
-msgstr "Autodestruction"
+msgstr "Peut s'auto-detruire"
 
 #: src/screens/gm/tweak.cpp:762
-#, fuzzy
 msgctxt "button"
 msgid "Can launch probes"
-msgstr "Largage sonde"
+msgstr "Peut larguer des sondes"
 
-#: src/screens/gm/tweak.cpp:767
-#, fuzzy
+#: src/screens/gm/tweak.cpp:793
 msgctxt "button"
 msgid "Auto coolant"
-msgstr "Liq. de refroid. auto"
+msgstr "Liq. de refroidissement auto"
 
 #: src/screens/gm/tweak.cpp:772
 msgctxt "button"
 msgid "Auto repair"
-msgstr ""
+msgstr "Reparation auto"
 
 #: src/screens/gm/tweak.cpp:809
 msgid "Callsign:"
-msgstr ""
+msgstr "Modele :"
 
 #: src/screens/gm/tweak.cpp:820
 msgid "Unscanned description:"
-msgstr ""
+msgstr "Description non scanne :"
 
 #: src/screens/gm/tweak.cpp:827
 msgid "Friend or Foe Description:"
-msgstr ""
+msgstr "Description ami ou ennemi :"
 
 #: src/screens/gm/tweak.cpp:834
 msgid "Simple Scan Description:"
-msgstr ""
+msgstr "Description scan simple :"
 
 #: src/screens/gm/tweak.cpp:841
 msgid "Full Scan Description:"
-msgstr ""
+msgstr "Description scan complet :"
 
 #: src/screens/gm/tweak.cpp:851
-#, fuzzy
 msgid "Heading:"
-msgstr "Chargement"
+msgstr "Cap :"
 
 #: src/screens/gm/tweak.cpp:857
-#, fuzzy
 msgid "Scanning Complexity:"
 msgstr "Complexite du scan : "
 
 #: src/screens/gm/tweak.cpp:863
 msgid "Scanning Depth:"
-msgstr ""
+msgstr "Profondeur du scan :"
 
 #: scripts/shipTemplates_Corvette.lua:217
 #, fuzzy
@@ -3261,7 +3224,6 @@ msgstr ""
 "astucieux peut detecter meme lors de perturbations telles que des nebuleuses."
 
 #: scripts/science_db.lua:22
-#, fuzzy
 msgid "Weapons"
 msgstr "Armement"
 
