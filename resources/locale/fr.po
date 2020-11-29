@@ -449,7 +449,7 @@ msgstr "Les deux"
 #: src/menus/serverCreationScreen.cpp:137
 #: src/menus/serverCreationScreen.cpp:143
 msgid "Beam/shield frequencies"
-msgstr "Frequences de faisceau/bouclier"
+msgstr "Frequence faisceau/bouclier"
 
 #: src/menus/serverCreationScreen.cpp:141
 #: src/menus/serverCreationScreen.cpp:147
@@ -459,12 +459,12 @@ msgstr "Degats des systemes"
 #: src/menus/serverCreationScreen.cpp:147
 #: src/menus/serverCreationScreen.cpp:153
 msgid "Scenario"
-msgstr "Scenario"
+msgstr "Choix du scenario"
 
 #: src/menus/serverCreationScreen.cpp:166
 #: src/menus/serverCreationScreen.cpp:172
 msgid "Variation: "
-msgstr "Variation : "
+msgstr "Variante : "
 
 #: src/menus/serverCreationScreen.cpp:180
 #: src/menus/serverCreationScreen.cpp:186
@@ -486,13 +486,13 @@ msgstr "Aucune"
 #: src/menus/serverCreationScreen.cpp:220
 #: src/menus/serverCreationScreen.cpp:226
 msgid "No variation."
-msgstr "Pas de variation."
+msgstr "Pas de variante."
 
 #: src/menus/serverCreationScreen.cpp:221
 #: src/menus/serverCreationScreen.cpp:227
 #: src/menus/serverCreationScreen.cpp:243
 msgid "No variation selected. Play the scenario as intended."
-msgstr "Pas de variation selectionnee. Jouez le scenario comme prevu."
+msgstr "Pas de variante selectionnee. Jouez le scenario de base."
 
 #: src/menus/tutorialMenu.cpp:49 src/menus/tutorialMenu.cpp:59
 msgid "Start Tutorial"
@@ -743,11 +743,11 @@ msgstr "Base de Donnees"
 #: src/screens/crew4/operationsScreen.cpp:64
 #: src/screens/crew1/singlePilotScreen.cpp:102
 msgid "Open Comms"
-msgstr "Ouvrir comm."
+msgstr "Ouvrir Comm."
 
 #: src/screens/crew6/relayScreen.cpp:102 src/screens/crew6/relayScreen.cpp:103
 msgid "Link to Comms"
-msgstr ""
+msgstr "Lier a Communications"
 
 #: src/screens/crew6/relayScreen.cpp:106 src/screens/crew6/relayScreen.cpp:107
 msgid "Start hacking"
@@ -762,14 +762,14 @@ msgstr "Lier a Science"
 #: src/screens/crew6/relayScreen.cpp:126
 #: src/screens/crew4/operationsScreen.cpp:67
 msgid "Place Waypoint"
-msgstr "Placer Marqueur"
+msgstr "Placer marqueur"
 
 #: src/screens/crew6/relayScreen.cpp:130
 #: src/screens/crew4/operationsScreen.cpp:69
 #: src/screens/crew6/relayScreen.cpp:131
 #: src/screens/crew4/operationsScreen.cpp:72
 msgid "Delete Waypoint"
-msgstr "Supprimer Marqueur"
+msgstr "Suppr. marqueur"
 
 #: src/screens/crew6/relayScreen.cpp:139 src/screens/crew6/relayScreen.cpp:140
 #: src/screens/crew6/relayScreen.cpp:289
@@ -788,7 +788,7 @@ msgstr "Niveau d'alerte"
 #: src/screens/crew6/weaponsScreen.cpp:61
 #: src/screens/crew6/weaponsScreen.cpp:64
 msgid "Beam info"
-msgstr "Info de faisceau"
+msgstr "Infos de faisceau"
 
 #: src/screens/crew6/helmsScreen.cpp:69 src/screens/crew4/tacticalScreen.cpp:68
 #: src/screens/crew6/helmsScreen.cpp:72
@@ -890,7 +890,7 @@ msgstr "Desamarrer"
 #: src/screenComponents/shieldsEnableButton.cpp:23
 msgctxt "shields"
 msgid "Calibrating"
-msgstr "Calibration"
+msgstr "Calibrage en cours"
 
 #: src/screenComponents/shieldsEnableButton.cpp:43
 msgctxt "shields"
@@ -1702,31 +1702,31 @@ msgstr "Ecran principal"
 
 #: src/menus/optionsMenu.cpp:106 src/menus/optionsMenu.cpp:111
 msgid "Music Volume: {volume}%"
-msgstr "Volume Musique : {volume} %"
+msgstr "Volume musique : {volume} %"
 
 #: src/menus/optionsMenu.cpp:115
 msgid "Impulse Engine sound"
-msgstr "Son de moteur a impulsion"
+msgstr "Son du moteur a impulsion"
 
 #: src/menus/optionsMenu.cpp:131 src/menus/optionsMenu.cpp:136
 msgid "Impulse Volume: {volume}%"
-msgstr "Volume Moteurs : {volume} %"
+msgstr "Volume moteur : {volume} %"
 
 #: src/menus/optionsMenu.cpp:141
 msgid "Helms Radar Lock"
-msgstr ""
+msgstr "Radar Navigation verrouille"
 
 #: src/menus/optionsMenu.cpp:148 src/menus/optionsMenu.cpp:149
 msgid "Weapons Radar Lock"
-msgstr "Radar Armement On"
+msgstr "Radar armement verrouille"
 
 #: src/menus/optionsMenu.cpp:154 src/menus/optionsMenu.cpp:155
 msgid "Science Radar Lock"
-msgstr "Radar Science active"
+msgstr "Radar Science verrouille"
 
 #: src/menus/optionsMenu.cpp:169 src/menus/optionsMenu.cpp:171
 msgid "Preview Soundtracks"
-msgstr ""
+msgstr "Ecoute des bandes-son"
 
 #: src/menus/optionsMenu.cpp:185 src/menus/optionsMenu.cpp:187
 msgctxt "options"
@@ -1748,7 +1748,7 @@ msgstr "Boucliers"
 #: src/screens/crew4/tacticalScreen.cpp:85
 #: src/screens/crew4/tacticalScreen.cpp:88
 msgid "Beams"
-msgstr "Faisceaux"
+msgstr "Faisceau"
 
 #: src/screens/crew6/relayScreen.cpp:151
 #: src/screens/gm/gameMasterScreen.cpp:132
@@ -1877,7 +1877,7 @@ msgstr "Science"
 #: src/playerInfo.cpp:226
 msgctxt "station"
 msgid "Relay"
-msgstr "Communication"
+msgstr "Communications"
 
 #: src/playerInfo.cpp:227
 #, fuzzy
@@ -1889,28 +1889,28 @@ msgstr "Radar tactique"
 #, fuzzy
 msgctxt "station"
 msgid "Engineering+"
-msgstr "Ingenierie"
+msgstr "Ingenierie+"
 
 #: src/playerInfo.cpp:229
 #, fuzzy
 msgctxt "station"
 msgid "Operations"
-msgstr "Options"
+msgstr ""
 
 #: src/playerInfo.cpp:230
 msgctxt "station"
 msgid "Single Pilot"
-msgstr ""
+msgstr "Pilotage - armement"
 
 #: src/playerInfo.cpp:231
 msgctxt "station"
 msgid "Damage Control"
-msgstr ""
+msgstr "Reparation des systemes"
 
 #: src/playerInfo.cpp:232
 msgctxt "station"
 msgid "Power Management"
-msgstr ""
+msgstr "Gestion de la puissance"
 
 #: src/playerInfo.cpp:233
 #, fuzzy
@@ -1921,19 +1921,19 @@ msgstr "Base de Donnees"
 #: src/playerInfo.cpp:234
 msgctxt "station"
 msgid "Strategic Map"
-msgstr ""
+msgstr "Carte tactique"
 
 #: src/playerInfo.cpp:235
 #, fuzzy
 msgctxt "station"
 msgid "Comms"
-msgstr "Ouvrir comm."
+msgstr "Communications"
 
 #: src/playerInfo.cpp:236
 #, fuzzy
 msgctxt "station"
 msgid "Ship's Log"
-msgstr "Vaisseaux"
+msgstr "Journal de bord"
 
 #: src/shipTemplate.cpp:123
 #, fuzzy
@@ -2071,7 +2071,7 @@ msgstr "Systeme de missile"
 #, fuzzy
 msgctxt "tab"
 msgid "Beams"
-msgstr "Faisceaux"
+msgstr "Faisceau"
 
 #: src/screens/gm/tweak.cpp:61
 msgctxt "tab"
@@ -3295,6 +3295,38 @@ msgstr ""
 "moitie des degats de leurs homologues de base, mais a quoi sert un missile s'il ne "
 "touche pas sa cible."
 
+#: scripts/science_db.lua:44
+msgid "Drop distance"
+msgstr "Distance de largage"
+
+#: scripts/science_db.lua:45
+msgid "Trigger distance"
+msgstr "Declenchement"
+
+#: scripts/science_db.lua:36 46 55
+msgid "Blast radius"
+msgstr "Rayon d'action"
+
+#: scripts/science_db.lua:37 47 56
+msgid "Damage at center"
+msgstr "Degats au centre"
+
+#: scripts/science_db.lua:38 48 57
+msgid "Damage at edge"
+msgstr "Degats au bord"
+
+#: scripts/science_db.lua:30 35 54 61
+msgid "Range"
+msgstr "Portee"
+
+#: scripts/science_db.lua:31 62
+msgid "Damage"
+msgstr "Degats"
+
+#: scripts/science_db.lua:63
+msgid "Burst"
+msgstr "Rafale"
+
 #: scripts/science_db.lua:29
 msgid "Homing missile"
 msgstr ""
@@ -3309,6 +3341,10 @@ msgstr ""
 "combat spatial. Il est suffisamment compact pour etre monte sur des fregates "
 "et suffisamment puissant pour etre utilise sur de plus grands navires, mais "
 "en etant generalement utilise dans plus d'un tube de missile."
+
+#: scripts/science_db.lua:34
+msgid "Nuke"
+msgstr ""
 
 #: scripts/science_db.lua:39
 msgid ""
@@ -3336,6 +3372,10 @@ msgstr ""
 "mais comme ces armes sont souvent utilisees au beau milieu d'une bataille, il "
 "est impossible de savoir si le blindage ou les boucliers de la coque peuvent "
 "fournir une protection efficace."
+
+#: scripts/science_db.lua:43
+msgid "Mine"
+msgstr ""
 
 #: scripts/science_db.lua:49
 msgid ""
@@ -3381,6 +3421,10 @@ msgstr ""
 "De nombreux capitaines (et pirates) preferent les EMP aux armes nucleaires pour ces raisons "
 "et les utilisent pour affaiblir les boucliers des cibles avant de les attaquer en combat "
 "rapproche avec un tir a faisceau laser."
+
+#: scripts/science_db.lua:60
+msgid "HVLI"
+msgstr ""
 
 #: scripts/science_db.lua:64
 msgid ""
