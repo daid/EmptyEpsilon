@@ -26,7 +26,7 @@ Mine::Mine()
     particleTimeout = 0.0;
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
-    PathPlannerManager::getInstance()->addAvoidObject(this, trigger_range * 1.2f);
+    PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
 }
 
 void Mine::draw3D()
