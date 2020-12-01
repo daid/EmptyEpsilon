@@ -24,12 +24,14 @@ jobs:
         name: Linux Debian
         path: /home/runner/work/EmptyEpsilon/EmptyEpsilon/build/EmptyEpsilon.deb
         if-no-files-found: error
+        retention-days: 5
     - name: Upload script_reference.html artifact
       uses: actions/upload-artifact@v2
       with:
         name: Script Reference
         path: /home/runner/work/EmptyEpsilon/EmptyEpsilon/build/script_reference.html
         if-no-files-found: error
+
   win32:
     name: Build Win32 Exe on Ubuntu
     runs-on: ubuntu-latest
@@ -48,6 +50,8 @@ jobs:
         name: Windows 32-bit
         path: /home/runner/work/EmptyEpsilon/EmptyEpsilon/_build_win32/upload/
         if-no-files-found: error
+        retention-days: 5
+
   macos:
     name: Build MacOS App on MacOS
     runs-on: macos-latest
@@ -66,6 +70,8 @@ jobs:
         name: MacOS
         path: /Users/runner/work/EmptyEpsilon/EmptyEpsilon/_build/EmptyEpsilon.dmg
         if-no-files-found: error
+        retention-days: 5
+
   android:
     name: Build Android Apk on Ubuntu
     runs-on: ubuntu-latest
@@ -84,3 +90,4 @@ jobs:
         name: Android
         path: /home/runner/work/EmptyEpsilon/EmptyEpsilon/_build_android/EmptyEpsilon.apk
         if-no-files-found: error
+        retention-days: 5
