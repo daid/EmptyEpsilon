@@ -82,8 +82,9 @@ hdiutil create "../tmp/tmp.dmg" -ov -volname "EmptyEpsilon" -fs HFS+ -srcfolder 
 hdiutil convert "../tmp/tmp.dmg" -format UDZO -o "EmptyEpsilon.dmg"
 
 elif [[ $1 == 'android' ]]; then
-
-keytool -noprompt -genkey -alias Android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=daid.github.io, OU=EmptyEpsilon, O=EmptyEpsilon, L=None, ST=None, C=None"
+# Use the below command to generate a new keystore. Then use gh actions to upload it as an artifact from "/home/runner/.keystore".
+# keytool -noprompt -genkey -alias Android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=daid.github.io, OU=EmptyEpsilon, O=EmptyEpsilon, L=None, ST=None, C=None"
+mv $PROJECT_DIR/EmptyEpsilon/android/keystore $HOME/.keystore
 mkdir _build_android
 cd _build_android
 cmake .. -DCMAKE_TOOLCHAIN_FILE=$PROJECT_DIR/EmptyEpsilon/cmake/android.toolchain -DSERIOUS_PROTON_DIR=$PROJECT_DIR/SeriousProton -DCMAKE_MAKE_PROGRAM=$(which make)
