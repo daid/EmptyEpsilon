@@ -55,7 +55,7 @@ jobs:
     - name: Update Container
       run: sudo softwareupdate -ia
     - name: Install SFML
-      run: brew install cmake sfml
+      run: brew install cmake sfml mesa
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
     - name: Build
