@@ -7,7 +7,7 @@
 REGISTER_SHIP_AI(ShipAI, "default");
 
 ShipAI::ShipAI(CpuShip* owner)
-: owner(owner)
+: owner(owner), pathPlanner(owner->getRadius())
 {
     missile_fire_delay = 0.0;
 
