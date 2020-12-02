@@ -1,5 +1,5 @@
 ---
-name: CI/CD
+name: CI/CD 
 on:
   push:
     branches:
@@ -24,13 +24,13 @@ jobs:
         name: Linux Debian
         path: /home/runner/work/EmptyEpsilon/EmptyEpsilon/build/EmptyEpsilon.deb
         if-no-files-found: error
-        retention-days: 5
     - name: Upload script_reference.html artifact
       uses: actions/upload-artifact@v2
       with:
         name: Script Reference
         path: /home/runner/work/EmptyEpsilon/EmptyEpsilon/build/script_reference.html
         if-no-files-found: error
+        retention-days: 5
 
   win32:
     name: Build Win32 Exe on Ubuntu
@@ -82,6 +82,12 @@ jobs:
       run: sudo apt-get install build-essential cmake python3-minimal mingw-w64 ninja-build p7zip-full libsfml-dev
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
+    - name: Load Keystore from Secrets
+      continue-on-error: true
+      run: 'echo "$KEYSTORE" | base64 -d > $HOME/.keystore'
+      shell: bash
+      env:
+        KEYSTORE: ${{secrets.ANDROID_KEYSTORE_BASE64}}
     - name: Build
       run: docker/build.sh android
     - name: Upload Android Artifact
