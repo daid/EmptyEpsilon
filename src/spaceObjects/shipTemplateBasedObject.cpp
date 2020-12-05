@@ -3,7 +3,13 @@
 #include "scriptInterface.h"
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 {
-    /// Set the ship template to be used for this station. Stations use ship-templates to define hull/shields/looks
+    /// Set the template to be used for this ship or station. Templates define hull/shields/looks etc.
+    /// Examples:
+    /// CpuShip():setTemplate("Phobos T3")
+    /// PlayerSpaceship():setTemplate("Phobos M3P")
+    /// SpaceStation():setTemplate("Large Station")
+    /// WARNING: Using a string that is not a valid template name lets the game crash! This is case-sensitive.
+    /// See `scripts/shipTemplates.lua` for the existing templates.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setTemplate);
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShipTemplate);
