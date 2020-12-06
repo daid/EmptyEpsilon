@@ -1525,7 +1525,7 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 
 string frequencyToString(int frequency)
 {
-    return string(400 + (frequency * 20)) + "THz";
+    return string(frequencyToDisplayNumber(frequency)) + "THz";
 }
 
 #ifndef _MSC_VER
