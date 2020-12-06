@@ -27,6 +27,57 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
         es = SYS_None;
 }
 
+template<> int convert<ESystem>::returnType(lua_State* L, ESystem es)
+{
+    switch(es)
+    {
+    case SYS_Reactor:
+        lua_pushstring(L, "reactor");
+        return 1;
+    case SYS_Cloaking: 
+        lua_pushstring(L, "cloaking");
+        return 1;
+    case SYS_BeamWeapons:  
+        lua_pushstring(L, "beamweapons");
+        return 1;
+    case SYS_MissileSystem: 
+        lua_pushstring(L, "missilesystem");
+        return 1;
+    case SYS_Maneuver: 
+        lua_pushstring(L, "maneuver");
+        return 1;
+    case SYS_Impulse: 
+        lua_pushstring(L, "impulse");
+        return 1;
+    case SYS_Warp: 
+        lua_pushstring(L, "warp");
+        return 1;
+    case SYS_JumpDrive: 
+        lua_pushstring(L, "jumpdrive");
+        return 1;
+    case SYS_FrontShield: 
+        lua_pushstring(L, "frontshield");
+        return 1;
+    case SYS_RearShield: 
+        lua_pushstring(L, "rearshield");
+        return 1;
+    case SYS_Docks: 
+        lua_pushstring(L, "docks");
+        return 1;
+    case SYS_Drones: 
+        lua_pushstring(L, "drones");
+        return 1;
+    case SYS_Door:  
+        lua_pushstring(L, "door");
+        return 1;
+    case SYS_None:  
+        lua_pushstring(L, "none");
+        return 1;
+    default:
+        return 0;
+    }
+}
+
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt)
 {

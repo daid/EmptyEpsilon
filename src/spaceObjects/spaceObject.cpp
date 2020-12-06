@@ -1,6 +1,7 @@
 #include "spaceObject.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
+#include "shipTemplate.h"
 
 #include "scriptInterface.h"
 /// SpaceObject is the base for every object which can be seen in space.
@@ -628,4 +629,22 @@ template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedSt
         ss = SS_SimpleScan;
     else if (str == "full" || str == "fullscan")
         ss = SS_FullScan;
+}
+
+template<> int convert<EDamageType>::returnType(lua_State* L, EDamageType es)
+{
+    switch(es)
+    {
+    case DT_Kinetic:
+        lua_pushstring(L, "kinetic");
+        return 1;
+    case DT_EMP:
+        lua_pushstring(L, "emp");
+        return 1;
+    case DT_Energy:
+        lua_pushstring(L, "energy");
+        return 1;
+    default:
+        return 0;
+    }
 }
