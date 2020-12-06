@@ -34,9 +34,6 @@ template<> int convert<ESystem>::returnType(lua_State* L, ESystem es)
     case SYS_Reactor:
         lua_pushstring(L, "reactor");
         return 1;
-    case SYS_Cloaking: 
-        lua_pushstring(L, "cloaking");
-        return 1;
     case SYS_BeamWeapons:  
         lua_pushstring(L, "beamweapons");
         return 1;
@@ -60,15 +57,6 @@ template<> int convert<ESystem>::returnType(lua_State* L, ESystem es)
         return 1;
     case SYS_RearShield: 
         lua_pushstring(L, "rearshield");
-        return 1;
-    case SYS_Docks: 
-        lua_pushstring(L, "docks");
-        return 1;
-    case SYS_Drones: 
-        lua_pushstring(L, "drones");
-        return 1;
-    case SYS_Door:  
-        lua_pushstring(L, "door");
         return 1;
     case SYS_None:  
         lua_pushstring(L, "none");
