@@ -85,8 +85,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// First argument given to the function will be the object taking damage, the second the instigator SpaceObject (or nil).
     /// If instigator is not nil, you will get in this order :
     /// a string which is the damage type as defined in EDamageType and converted as string in shipTemplate source, 
-    /// an integer which is the frequency used, a string which is the subsystem hit, 
-    /// and an integer which is the shield index if shield is hit, -1 if no shield is hit
+    /// a number which is the frequency used, 
+    /// a string which is the subsystem hit, 
+    /// two floats which are resp. damage taken by shields and damage taken by hull
+    /// and a number which is the shield index if shield is hit, -1 if no shield is hit
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, onTakingDamage);
     /// Set a function that will be called if the object is destroyed by taking damage.
     /// First argument given to the function will be the object taking damage, the second the instigator SpaceObject that gave the final blow (or nil).
@@ -265,6 +267,7 @@ bool ShipTemplateBasedObject::hasShield()
 void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 {
     signed int hit_shield_index = -1;
+    float shield_damage = 0;
     if (shield_count > 0 && getShieldsActive())
     {
         float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(info.location - getPosition()));
@@ -274,7 +277,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         int shield_index = int((angle + arc / 2.0f) / arc);
         shield_index %= shield_count;
 
-        float shield_damage = damage_amount * getShieldDamageFactor(info, shield_index);
+        shield_damage = damage_amount * getShieldDamageFactor(info, shield_index);
         damage_amount -= shield_level[shield_index];
         shield_level[shield_index] -= shield_damage;
         hit_shield_index = shield_index;
@@ -302,7 +305,12 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         {
             if (info.instigator)
             {
-                on_taking_damage.call(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator), info.type, frequencyToDisplayNumber(info.frequency), info.system_target, hit_shield_index);
+                on_taking_damage.call(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator), 
+                                        info.type, frequencyToDisplayNumber(info.frequency), 
+                                        info.system_target, 
+                                        shield_damage, 
+                                        damage_amount,
+                                        hit_shield_index);
             } else {
                 on_taking_damage.call(P<ShipTemplateBasedObject>(this));
             }
