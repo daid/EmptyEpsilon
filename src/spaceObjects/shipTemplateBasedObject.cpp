@@ -83,6 +83,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRearShieldMax);
     /// Set a function that will be called if the object is taking damage.
     /// First argument given to the function will be the object taking damage, the second the instigator SpaceObject (or nil).
+    /// If instigator is not nil, you will get in this order :
+    /// a string which is the damage type as defined in EDamageType, 
+    /// an integer which is the frequency used, a string which is the subsystem hit, 
+    /// and an integer which is the shield index if shield is hit, -1 if no shield is hit
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, onTakingDamage);
     /// Set a function that will be called if the object is destroyed by taking damage.
     /// First argument given to the function will be the object taking damage, the second the instigator SpaceObject that gave the final blow (or nil).
