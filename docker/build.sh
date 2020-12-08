@@ -83,8 +83,11 @@ hdiutil convert "../tmp/tmp.dmg" -format UDZO -o "EmptyEpsilon.dmg"
 
 elif [[ $1 == 'android' ]]; then
 
-# If the key file does not exist, make a new one. The GH Actions should have put the keyfile there by now.
-if [ ! -r $HOME/.keystore ]; then
+# If the key file does not exist, make a new one. The GH Actions should have put the keyfile there by now. If a empty file exists, delete it.
+if [ ! -s $HOME/.keystore ]; then
+if [ -f $HOME/.keystore ]; then
+rm $HOME/.keystore
+fi
 keytool -noprompt -genkey -alias Android -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=daid.github.io, OU=EmptyEpsilon, O=EmptyEpsilon, L=None, ST=None, C=None"
 echo "Key not found! Generating a new key!"
 fi
