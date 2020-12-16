@@ -53,7 +53,7 @@ Rundown of the mission:
 ==Phase 5:...
 --]]
 
--- Init is run when the scenario is started. Create your initial world
+--- Init is run when the scenario is started. Create your initial world
 function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
@@ -293,6 +293,9 @@ Doppler instability: %i]],
     --]]
 end
 
+--- Phase 1
+-- @section phase1
+
 function phase1MessagePowerup(delta)
     if delta > 0 then
         shipyard_gamma:sendCommsMessage(
@@ -382,7 +385,9 @@ function phase1WaitForContact(delta)
     -- Wait for the shipyardGammaComms to handle this state.
 end
 
---[[*********************************************************************--]]
+--- Phase 2
+-- @section phase2
+
 function phase2WaitForJump(delta)
     if handleJumpCarrier(jc88, 24000, 125000, 310000, -71000, [[Hold on tight, heading for sector B20.]]) then
         -- Good, continue.
@@ -454,6 +459,9 @@ Do NOT engage the Kraylor. I repeat, DO NOT ENGAGE.]]))
     end
 end
 
+--- Phase 3
+-- @section phase3
+
 function phase3FindHoleInTheKraylorDefenseLine(delta)
     px, py = player:getPosition()
     if distance(player, -5000, -260000) < 10000 or py > -248000 or px > 75000 then
@@ -513,7 +521,9 @@ However, do NOT engage any of the Kraylor bases directly. You are not equipped t
     end
 end
 
---[[*********************************************************************--]]
+--- Phase 4
+-- @section phase4
+
 function phase4JumpBackToKraylorLine(delta)
     if handleJumpCarrier(jc88, 24000, 125000, 10000, -210000, [[Hold on tight, heading for Kraylor defense line.]]) then
         -- Good, continue.
@@ -562,7 +572,9 @@ Dock with us, and we'll take a shot at cracking them.]])
     end
 end
 
---[[*********************************************************************--]]
+--- Phase 5
+-- @section phase5
+
 function phase5DockWithShipyard(delta)
     if player:isDocked(shipyard_gamma) then
         shipyard_gamma:sendCommsMessage(player, [[Thanks. We are processing these documents right now.
@@ -694,7 +706,9 @@ function phase5OdinAttack(delta)
     end
 end
 
---[[*********************************************************************--]]
+--- Comms
+-- @section comms
+
 function shipyardGammaComms()
     if mission_state == phase3FindHoleInTheKraylorDefenseLine then
         return false
@@ -838,8 +852,12 @@ function scrambleMessage(message)
     return message
 end
 
---[[ Assistance function to help with the details of the player using a jump carrier. --]]
+--- Other
+-- @section other
+
 jumping_state = "wait_for_dock"
+
+--- Assistance function to help with the details of the player using a jump carrier.
 function handleJumpCarrier(jc, source_x, source_y, dest_x, dest_y, jumping_message)
     if jumping_state == "wait_for_dock" then
         if player:isDocked(jc) then
@@ -879,6 +897,9 @@ function putKraylorDefenseLineOnFullOffense()
     end
 end
 
+--- Update scenario.
+--
+-- @tparam number delta the time difference in seconds
 function update(delta)
     if not player:isValid() or (not jc88:isValid() and mission_state ~= phase5OdinAttack) then
         defeat_timeout = defeat_timeout - delta

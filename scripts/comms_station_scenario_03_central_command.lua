@@ -4,6 +4,7 @@
 --
 -- @script comms_station_scenario_03_central_command
 
+--- Main menu of communication.
 function commsStationMainMenu()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -15,7 +16,7 @@ function commsStationMainMenu()
     end
 
     if player:isFriendly(comms_target) then
-        -----------------------------------------------
+        -- ---------------------------------------------
         -- Edge of space additions
         if comms_target:getCallSign() == "Central Command" and not player:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
@@ -68,7 +69,7 @@ function commsStationMainMenu()
                 return true
             end
         end
-        -----------------------------------------------
+        -- ---------------------------------------------
 
         if comms_target:areEnemiesInRange(5000) then
             setCommsMessage("We are under attack! No time for chatting!")

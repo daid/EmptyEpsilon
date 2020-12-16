@@ -721,7 +721,8 @@ function spawnNuker()
     return ship
 end
 
--- create amount of object_type, at a distance between dist_min and dist_max around the point (x0, y0)
+--- Create amount of `object_type`,
+-- at a distance between `dist_min` and `dist_max` around the point (`x0`, `y0`).
 function create(object_type, amount, dist_min, dist_max, x0, y0)
     for n = 1, amount do
         local r = random(0, 360)
@@ -732,7 +733,9 @@ function create(object_type, amount, dist_min, dist_max, x0, y0)
     end
 end
 
---distance between 2 objects
+--- Return distance between two objects.
+--
+-- @treturn number
 function distance(obj1, obj2)
     x1, y1 = obj1:getPosition()
     x2, y2 = obj2:getPosition()
