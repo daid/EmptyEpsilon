@@ -260,11 +260,11 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("disable_shaders").toInt())
         PostProcessor::setEnable(false);
 
-    P<ResourceStream> main_font_stream = getResourceStream("gui/fonts/BebasNeue Regular.otf");
+    P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BebasNeue Regular.otf"));
     main_font = new sf::Font();
     main_font->loadFromStream(**main_font_stream);
 
-    P<ResourceStream> bold_font_stream = getResourceStream("gui/fonts/BebasNeue Bold.otf");
+    P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BebasNeue Bold.otf"));
     bold_font = new sf::Font();
     bold_font->loadFromStream(**bold_font_stream);
 
