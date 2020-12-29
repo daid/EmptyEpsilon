@@ -198,6 +198,7 @@ GuiContainer* GuiElement::getTopLevelContainer()
 
 void GuiElement::destroy()
 {
+    setVisible(false);
     destroyed = true;
 }
 
