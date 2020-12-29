@@ -80,7 +80,10 @@ void BlackHole::collide(Collisionable* target, float collision_force)
         {
             obj->takeDamage(100000.0, info); //try to destroy the object by inflicting a huge amount of damage
             if (target)
+            {
                 target->destroy();
+                return;
+            }
         }
     }
     if (force > 100.0 && isServer())
