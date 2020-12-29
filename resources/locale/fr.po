@@ -2293,7 +2293,7 @@ msgstr "Peut larguer des sondes"
 #: src/screens/gm/tweak.cpp:793
 msgctxt "button"
 msgid "Auto coolant"
-msgstr "Liq. de refroid. auto"
+msgstr "Liq. de refroidissement auto"
 
 #: src/screens/gm/tweak.cpp:772
 msgctxt "button"

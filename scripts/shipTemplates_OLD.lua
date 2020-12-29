@@ -53,7 +53,7 @@ template:addDoor(6, 3, false);
 template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
- 
+
 
 --Airlock doors
 --template:addDoor(2, 2, false);
@@ -165,11 +165,11 @@ template:setWeaponStorage("EMP", 2)
 template:setDescription(_([[The tugboat is a reliable, but small and un-armed transport ship. Due to it's low cost, it is a favourite ship to teach the ropes to fledgeling captains, without risking friendly fire.]]))
 
 --List of possible fighters --
--- Intercepter (anti fighter) -> High speed, low visibility, front beam weapons
+-- Interceptor (anti fighter) -> High speed, low visibility, front beam weapons
 -- Bomber (anti capital) -> Low speed, high visibility, high armor (for a fighter), high shields (for a fighter), multiple missiles
-	-- Bomber mine
+    -- Bomber mine
 
--- Mine ship -- 
+-- Mine ship --
 variation = template:copy("Nautilus"):setLocaleName(_("Nautilus")):setType("playership"):setClass("Frigate","Mine Layer")
 variation:setDescription(_("Small mine laying vessel with minimal armament, shields and hull"))
 variation:setShields(60,60)
@@ -214,8 +214,7 @@ variation:addDoor( 6, 1, false)
 variation:addDoor( 4, 2, true)
 variation:addDoor( 4, 1, true)
 
-	
-	
+
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
 template = ShipTemplate():setName("Fighter"):setLocaleName(_("Fighter")):setModel("small_fighter_1")
@@ -230,12 +229,12 @@ template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, an
 
 -- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
 -- Karnack cruiser mark I
-	-- Fabricated by: Repulse shipyards
-	-- Due to it's versitility, this ship has found wide adoptation in most factions. Most factions have extensively retrofitted these ships
-	-- to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becomming an all time favourite with smugglers and other civillian parties. However, they have used it's adaptable nature to re-fit them with (illigal) weaponry.
+-- Fabricated by: Repulse shipyards
+-- Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships
+-- to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry.
 template = ShipTemplate():setName("Karnack"):setLocaleName(_("Karnack")):setModel("small_frigate_4"):setClass(_("Frigate"), _("Cruiser"))
 template:setRadarTrace("radar_cruiser.png")
-template:setDescription(_("Fabricated by: Repulse shipyards. Due to it's versatility, this ship has found wide adoptation in most factions. Most factions have extensively retrofitted these ships to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becomming an all time favourite with smugglers and other civillian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry."))
+template:setDescription(_("Fabricated by: Repulse shipyards. Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 60, -15, 1000.0, 6.0, 6)
 template:setBeam(1, 60,  15, 1000.0, 6.0, 6)
@@ -244,23 +243,23 @@ template:setShields(40, 40)
 template:setSpeed(60, 6, 10)
 
 -- Karnack Cruiser mark II
-	-- Fabricated by: Repulse shipyards
-	-- The sucessor to the widly sucesfull mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes.
+-- Fabricated by: Repulse shipyards
+-- The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes.
 
 variation = template:copy("Cruiser"):setLocaleName(_("ship", "Karnack MK2"))
-variation:setDescription(_("Fabricated by: Repulse shipyards. The sucessor to the widly sucesfull mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savoury purposes."))
+variation:setDescription(_("Fabricated by: Repulse shipyards. The successor to the widely successful mark I Karnack cruiser. This ship has several notable improvements over the original ship, including better armor, slightly improved weaponry and customization by the shipyards. The latter improvement was the most requested feature by several factions once they realized that their old surplus mark I ships were used for less savory purposes."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 90, -15, 1000.0, 6.0, 6)
 variation:setBeam(1, 90,  15, 1000.0, 6.0, 6)
 variation:setHull(70)
 
--- Polaris missle cruiser mark I
-	-- Fabricated by: Repulse shipyards
-	-- TODO
--- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealth with properly.
+-- Polaris missile cruiser mark I
+-- Fabricated by: Repulse shipyards
+-- TODO
+-- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly.
 template = ShipTemplate():setName("Missile Cruiser"):setLocaleName(_("Missile Cruiser")):setModel("space_cruiser_4"):setClass(_("Frigate"), _("Cruiser: Missile"))
 template:setRadarTrace("radar_missile_cruiser.png")
-template:setDescription(_("Polaris missle cruiser mark I. Fabricated by: Repulse shipyards. This missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly."))
+template:setDescription(_("Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setTubes(1, 25.0)
 template:setHull(40)
@@ -268,10 +267,10 @@ template:setShields(50, 50)
 template:setSpeed(45, 3, 10)
 template:setWeaponStorage("Homing", 10)
 
--- The gunship is a ship equiped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
+-- The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
 template = ShipTemplate():setName("Gunship"):setLocaleName(_("Gunship")):setModel("battleship_destroyer_4_upgraded"):setClass(_("Frigate"),_("subclass","Gunship"))
 template:setRadarTrace("radar_adv_gunship.png")
-template:setDescription(_("The gunship is a ship equiped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
+template:setDescription(_("The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 50,-15, 1000.0, 6.0, 8)
 template:setBeam(1, 50, 15, 1000.0, 6.0, 8)
@@ -281,15 +280,15 @@ template:setShields(100, 80, 80)
 template:setSpeed(60, 5, 10)
 template:setWeaponStorage("Homing", 4)
 
--- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
+-- The advanced gunship is a ship equipped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
 variation = template:copy("Adv. Gunship"):setLocaleName(_("Adv. Gunship"))
-variation:setDescription(_("The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
+variation:setDescription(_("The advanced gunship is a ship equipped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
 variation:setTubes(2, 8.0) -- Amount of torpedo tubes
 
--- The Strikeship is a warp-drive equiped figher build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.
+-- The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.
 template = ShipTemplate():setName("Strikeship"):setLocaleName(_("Strikeship")):setModel("small_frigate_3"):setClass(_("Starfighter"),_("subclass","Strike"))
 template:setRadarTrace("radar_striker.png")
-template:setDescription("The Strikeship is a warp-drive equipped figher build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.")
+template:setDescription("The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)

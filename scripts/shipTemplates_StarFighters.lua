@@ -6,9 +6,9 @@ It's rare to see starfighters with more then 1 shield section.
 One of the most well known starfighters at earth is the X-Wing.
 
 Starfighters come in 3 subclasses:
-* Interceptors: Fast, low on firepower, high on manouverability
-* Gunship: Equiped with more weapons, but hands in maneuverbility because of it.
-* Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the largers bombers have been known to deliver nukes.
+* Interceptors: Fast, low on firepower, high on maneuverability
+* Gunship: Equipped with more weapons, but hands in maneuverability because of it.
+* Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the larger bombers have been known to deliver nukes.
 ----------------------------------------------------------]]
 template = ShipTemplate():setName("MT52 Hornet"):setLocaleName(_("MT52 Hornet")):setClass(_("Starfighter"), _("Interceptor")):setModel("WespeScoutYellow")
 template:setRadarTrace("radar_fighter.png")
