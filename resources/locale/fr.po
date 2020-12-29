@@ -18,7 +18,7 @@ msgstr ""
 
 #: src/menus/mainMenus.cpp:72 src/menus/mainMenus.cpp:73
 msgid "Version: {version}"
-msgstr "Version : {version}"
+msgstr "Version : {version}"
 
 #: src/menus/mainMenus.cpp:74 src/menus/mainMenus.cpp:80
 msgid "Start server"
@@ -226,7 +226,7 @@ msgstr ""
 #: src/scienceDatabase.cpp:160 src/scienceDatabase.cpp:191
 #: src/scienceDatabase.cpp:405
 msgid "Storage {weapon}"
-msgstr "Cap. de stockage {weapon}"
+msgstr "Stockage {weapon}"
 
 #: src/shipTemplate.cpp:340 src/shipTemplate.cpp:350 src/shipTemplate.cpp:377
 msgctxt "system"
@@ -236,7 +236,7 @@ msgstr "Reacteur"
 #: src/shipTemplate.cpp:341 src/shipTemplate.cpp:351 src/shipTemplate.cpp:378
 msgctxt "system"
 msgid "Beam Weapons"
-msgstr "Armes a faisceau"
+msgstr "Arme a faisceaux"
 
 #: src/shipTemplate.cpp:342 src/shipTemplate.cpp:352 src/shipTemplate.cpp:379
 msgctxt "system"
@@ -311,7 +311,7 @@ msgstr "Seulement LAN"
 
 #: src/menus/serverCreationScreen.cpp:81 src/menus/serverCreationScreen.cpp:87
 msgid "Internet"
-msgstr "Internet"
+msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:90
 msgid "Player ship options"
@@ -568,7 +568,7 @@ msgstr "Liquide de refroidissement"
 #: src/screens/crew6/engineeringScreen.cpp:179
 #: src/screens/crew6/engineeringScreen.cpp:259
 msgid "{energy}/min"
-msgstr "{energy}/min"
+msgstr ""
 
 #: src/screens/crew6/engineeringScreen.cpp:231
 #: src/screens/crew6/engineeringScreen.cpp:232
@@ -580,20 +580,20 @@ msgstr "Production d'energie"
 #: src/screens/crew6/engineeringScreen.cpp:235
 #: src/screens/crew6/engineeringScreen.cpp:262
 msgid "Firing rate"
-msgstr "Frequence de tir"
+msgstr "Cadence de tir"
 
 #: src/screens/crew6/engineeringScreen.cpp:247
 #: src/screens/crew6/engineeringScreen.cpp:248
 #: src/screens/crew6/engineeringScreen.cpp:275
 msgctxt "missile"
 msgid "Reload rate"
-msgstr ""
+msgstr "Vit. de charg. des tubes"
 
 #: src/screens/crew6/engineeringScreen.cpp:250
 #: src/screens/crew6/engineeringScreen.cpp:251
 #: src/screens/crew6/engineeringScreen.cpp:278
 msgid "Turning speed"
-msgstr "Vit. de rotation"
+msgstr "Vitesse de rotation"
 
 #: src/screens/crew6/engineeringScreen.cpp:252
 #: src/screens/crew6/engineeringScreen.cpp:257
@@ -602,31 +602,31 @@ msgstr "Vit. de rotation"
 #: src/screens/crew6/engineeringScreen.cpp:280
 #: src/screens/crew6/engineeringScreen.cpp:285
 msgid "Combat recharge rate"
-msgstr ""
+msgstr "Recharge man. de combat"
 
 #: src/screens/crew6/engineeringScreen.cpp:255
 #: src/screens/crew6/engineeringScreen.cpp:256
 #: src/screens/crew6/engineeringScreen.cpp:283
 msgid "Impulse speed"
-msgstr "Vitesse d'impulsion"
+msgstr "Puissance des moteurs"
 
 #: src/screens/crew6/engineeringScreen.cpp:260
 #: src/screens/crew6/engineeringScreen.cpp:261
 #: src/screens/crew6/engineeringScreen.cpp:288
 msgid "Warp drive speed"
-msgstr "Vitesse lumiere"
+msgstr "Vitesse lumiere max"
 
 #: src/screens/crew6/engineeringScreen.cpp:263
 #: src/screens/crew6/engineeringScreen.cpp:264
 #: src/screens/crew6/engineeringScreen.cpp:291
 msgid "Jump drive recharge rate"
-msgstr ""
+msgstr "Temps de rechargement"
 
 #: src/screens/crew6/engineeringScreen.cpp:264
 #: src/screens/crew6/engineeringScreen.cpp:265
 #: src/screens/crew6/engineeringScreen.cpp:292
 msgid "Jump drive jump speed"
-msgstr ""
+msgstr "Delai avant le saut"
 
 #: src/screens/crew6/engineeringScreen.cpp:268
 #: src/screens/crew6/engineeringScreen.cpp:282
@@ -646,7 +646,7 @@ msgstr "Vitesse de calibration"
 #: src/screens/crew6/engineeringScreen.cpp:311
 msgctxt "shields"
 msgid "Charge rate"
-msgstr "Taux de charge"
+msgstr "Regeneration"
 
 #: src/screens/crew6/engineeringScreen.cpp:275
 #: src/screens/crew6/engineeringScreen.cpp:290
@@ -655,7 +655,7 @@ msgstr "Taux de charge"
 #: src/screens/crew6/engineeringScreen.cpp:303
 #: src/screens/crew6/engineeringScreen.cpp:318
 msgid "Extra damage"
-msgstr ""
+msgstr "Dommages supplementaires"
 
 #: src/screens/crew6/engineeringScreen.cpp:277
 #: src/screens/crew6/engineeringScreen.cpp:292
@@ -664,7 +664,7 @@ msgstr ""
 #: src/screens/crew6/engineeringScreen.cpp:305
 #: src/screens/crew6/engineeringScreen.cpp:320
 msgid "Damage negate"
-msgstr ""
+msgstr "Reduction des degats"
 
 #: src/screens/crew6/scienceScreen.cpp:92 src/screens/crew6/relayScreen.cpp:80
 #: src/screens/crew6/scienceScreen.cpp:94 src/screens/crew6/relayScreen.cpp:81
@@ -690,7 +690,7 @@ msgstr "Vit. relative"
 #: src/screens/crew6/scienceScreen.cpp:100 src/screens/crew6/relayScreen.cpp:83
 #: src/screens/crew6/scienceScreen.cpp:102 src/screens/crew6/relayScreen.cpp:84
 msgid "Faction"
-msgstr "Faction"
+msgstr ""
 
 #: src/screens/crew6/scienceScreen.cpp:102
 #: src/screens/crew6/scienceScreen.cpp:104
@@ -728,7 +728,7 @@ msgstr "Zoom : {zoom}x"
 #: src/screens/crew6/scienceScreen.cpp:215
 msgctxt "button"
 msgid "Radar"
-msgstr "Radar"
+msgstr ""
 
 #: src/screens/crew6/scienceScreen.cpp:213
 #: src/screens/crew6/scienceScreen.cpp:215
@@ -787,7 +787,7 @@ msgstr "Niveau d'alerte"
 #: src/screens/crew6/weaponsScreen.cpp:61
 #: src/screens/crew6/weaponsScreen.cpp:64
 msgid "Beam info"
-msgstr "Infos de faisceau"
+msgstr "Faisceaux : reglages"
 
 #: src/screens/crew6/helmsScreen.cpp:69 src/screens/crew4/tacticalScreen.cpp:68
 #: src/screens/crew6/helmsScreen.cpp:72
@@ -814,11 +814,11 @@ msgstr "{value} {unit}/min"
 
 #: src/screens/gm/tweak.cpp:503 src/screens/gm/tweak.cpp:529
 msgid "{system} health"
-msgstr ""
+msgstr "{system}: sante actuelle"
 
 #: src/screens/gm/tweak.cpp:512 src/screens/gm/tweak.cpp:548
 msgid "{system} heat"
-msgstr ""
+msgstr "Surchauffe en cours"
 
 #: src/screenComponents/aimLock.cpp:11
 msgctxt "missile"
@@ -870,6 +870,7 @@ msgstr "Code [{letter}]: {self_destruct_code}"
 msgctxt "selfdestruct"
 msgid "Enter [{letter}]"
 msgstr "Entrer [{letter}]"
+
 
 #: src/screenComponents/dockingButton.cpp:37
 #: src/screenComponents/dockingButton.cpp:42
@@ -1598,12 +1599,12 @@ msgstr "Vaisseaux"
 #: src/scienceDatabase.cpp:127 src/scienceDatabase.cpp:341
 msgctxt "database"
 msgid "Class"
-msgstr "Classes"
+msgstr "Classe"
 
 #: src/scienceDatabase.cpp:128 src/scienceDatabase.cpp:342
 msgctxt "database"
 msgid "Sub-class"
-msgstr "Sous-classes"
+msgstr "Sous-classe"
 
 #: src/scienceDatabase.cpp:129 src/scienceDatabase.cpp:343
 msgctxt "database"
@@ -1613,7 +1614,7 @@ msgstr "Taille"
 #: src/scienceDatabase.cpp:139 src/scienceDatabase.cpp:353
 msgctxt "database"
 msgid "Shield"
-msgstr "Bouclier"
+msgstr "Boucliers"
 
 #: src/scienceDatabase.cpp:141 src/scienceDatabase.cpp:355
 msgid "Hull"
@@ -1632,7 +1633,7 @@ msgstr "Vit. de rotation"
 #: src/scienceDatabase.cpp:152 src/scienceDatabase.cpp:366
 msgctxt "database"
 msgid "Warp speed"
-msgstr "Vitesse de lumiere"
+msgstr "Vitesse lumiere"
 
 #: src/scienceDatabase.cpp:156 src/scienceDatabase.cpp:370
 msgctxt "database"
@@ -1928,14 +1929,12 @@ msgid "Ship's Log"
 msgstr "Journal de bord"
 
 #: src/shipTemplate.cpp:123
-#, fuzzy
 msgid "No class"
-msgstr "Classes"
+msgstr ""
 
 #: src/shipTemplate.cpp:124
-#, fuzzy
 msgid "No sub-class"
-msgstr "Sous-classes"
+msgstr ""
 
 #: src/screens/crew6/relayScreen.cpp:147
 msgid "Reputation"
@@ -1974,7 +1973,7 @@ msgstr "Copier scenario"
 #: src/screens/gm/gameMasterScreen.cpp:84
 msgctxt "button"
 msgid "Copy selected"
-msgstr "Copie selectionnee"
+msgstr "Copier selection"
 
 #: src/screens/gm/gameMasterScreen.cpp:89
 msgctxt "button"
@@ -2023,7 +2022,7 @@ msgstr ""
 #: src/screens/gm/tweak.cpp:32
 msgctxt "tab"
 msgid "Base"
-msgstr ""
+msgstr "Scan"
 
 #: src/screens/gm/tweak.cpp:37
 msgctxt "tab"
@@ -2046,15 +2045,14 @@ msgid "Tubes"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:57
-#, fuzzy
 msgctxt "tab"
 msgid "Missiles"
-msgstr "Systeme de missile"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:59
 msgctxt "tab"
 msgid "Beams"
-msgstr "Faisceau"
+msgstr "Faisceaux"
 
 #: src/screens/gm/tweak.cpp:61
 msgctxt "tab"
@@ -2064,17 +2062,16 @@ msgstr "Systemes"
 #: src/screens/gm/tweak.cpp:67
 msgctxt "tab"
 msgid "Player"
-msgstr ""
+msgstr "Options"
 
 #: src/screens/gm/tweak.cpp:69
 msgctxt "tab"
 msgid "Player 2"
-msgstr ""
+msgstr "Options 2"
 
 #: src/screens/gm/tweak.cpp:113
-#, Doesn't work
 msgid "Impulse speed:"
-msgstr "Vitesse d'impulsion :"
+msgstr "Vitesse des moteurs :"
 
 #: src/screens/gm/tweak.cpp:119
 msgid "Turn speed:"
@@ -2082,7 +2079,7 @@ msgstr "Vitesse de rotation :"
 
 #: src/screens/gm/tweak.cpp:125
 msgid "Jump charge:"
-msgstr ""
+msgstr "Temps rechargement du saut :"
 
 #: src/screens/gm/tweak.cpp:133
 msgid "Type name:"
@@ -2124,22 +2121,21 @@ msgstr ""
 
 #: src/screens/gm/tweak.cpp:287
 msgid "Tube count:"
-msgstr ""
+msgstr "Nombre de tubes :"
 
 #: src/screens/gm/tweak.cpp:311
 msgid "Tube: {id_tube}"
-msgstr ""
+msgstr "Tube : {id_tube}"
 
 #: src/screens/gm/tweak.cpp:314
-#, fuzzy
 msgctxt "tube"
 msgid "Direction:"
-msgstr "Tube {direction}"
+msgstr "Orientation :"
 
 #: src/screens/gm/tweak.cpp:320
 msgctxt "tube"
 msgid "Load time:"
-msgstr ""
+msgstr "Temps de chargement :"
 
 #: src/screens/gm/tweak.cpp:326
 msgctxt "tube"
@@ -2164,55 +2160,54 @@ msgstr "Grand"
 #: src/screens/gm/tweak.cpp:337
 msgctxt "tube"
 msgid "Allowed use:"
-msgstr ""
+msgstr "Missiles autorises :"
 
 #: src/screens/gm/tweak.cpp:380
 msgid "Shield {id_shield} max:"
-msgstr ""
+msgstr "Bouclier {id_shield} : puissance max"
 
 #: src/screens/gm/tweak.cpp:390
 msgid "Shield {id_shield}:"
-msgstr ""
+msgstr "Bouclier {id_shield} : puissance actuelle"
 
 #: src/screens/gm/tweak.cpp:434
 msgid "Beam: {id_beam}"
-msgstr ""
+msgstr "Faisceau : {id_beam}"
 
 #: src/screens/gm/tweak.cpp:437
 msgctxt "beam"
 msgid "Arc:"
-msgstr ""
+msgstr "Amplitude de l'arc"
 
 #: src/screens/gm/tweak.cpp:443
-#, fuzzy
 msgctxt "beam"
 msgid "Direction:"
-msgstr "Tube {direction}"
+msgstr "Orientation"
 
 #: src/screens/gm/tweak.cpp:449
 msgctxt "beam"
 msgid "Turret arc:"
-msgstr ""
+msgstr "Tourelle : Amplitude de l'arc"
 
 #: src/screens/gm/tweak.cpp:455
 msgctxt "beam"
 msgid "Turret direction:"
-msgstr ""
+msgstr "Tourelle : orientation"
 
 #: src/screens/gm/tweak.cpp:461
 msgctxt "beam"
 msgid "Turret rotation rate:"
-msgstr ""
+msgstr "Tourelle : vitesse de rotation"
 
 #: src/screens/gm/tweak.cpp:476
 msgctxt "beam"
 msgid "Range:"
-msgstr ""
+msgstr "Portee"
 
 #: src/screens/gm/tweak.cpp:482
 msgctxt "beam"
 msgid "Cycle time:"
-msgstr ""
+msgstr "Intervalle entre 2 tirs"
 
 #: src/screens/gm/tweak.cpp:488
 msgctxt "beam"
@@ -2221,27 +2216,27 @@ msgstr "Degats"
 
 #: src/screens/gm/tweak.cpp:538
 msgid "{system} health max"
-msgstr ""
+msgstr "sante max"
 
 #: src/screens/gm/tweak.cpp:590
 msgid "Control code:"
-msgstr "?Control code:?"
+msgstr "Code de controle :"
 
 #: src/screens/gm/tweak.cpp:607
 msgid "Max energy:"
-msgstr "Energie max"
+msgstr "Energie max :"
 
 #: src/screens/gm/tweak.cpp:615
 msgid "Current energy:"
-msgstr "Energie actuelle"
+msgstr "Energie actuelle :"
 
 #: src/screens/gm/tweak.cpp:637
 msgid "Boost Speed:"
-msgstr "?Boost Speed:?"
+msgstr "Man. Combat: Vit. d'acceleration"
 
 #: src/screens/gm/tweak.cpp:629
 msgid "Strafe Speed:"
-msgstr "?Strafe Speed:?"
+msgstr "Man. Combat: Vit. d'esquive"
 
 #: src/screens/gm/tweak.cpp:637 src/screens/gm/tweak.cpp:670
 msgid "Positions occupied: "
@@ -2253,7 +2248,7 @@ msgid "Occupied"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:725
-#, Doesn't work
+#, Doesn't work but works with langage de
 msgid "Coolant:"
 msgstr "Liq. de refroid."
 
@@ -2298,7 +2293,7 @@ msgstr "Peut larguer des sondes"
 #: src/screens/gm/tweak.cpp:793
 msgctxt "button"
 msgid "Auto coolant"
-msgstr "Liq. de refroidissement auto"
+msgstr "Liq. de refroid. auto"
 
 #: src/screens/gm/tweak.cpp:772
 msgctxt "button"
@@ -2311,7 +2306,7 @@ msgstr "Modele :"
 
 #: src/screens/gm/tweak.cpp:820
 msgid "Unscanned description:"
-msgstr "Description non scanne :"
+msgstr "Description sans scan :"
 
 #: src/screens/gm/tweak.cpp:827
 msgid "Friend or Foe Description:"
@@ -2338,10 +2333,9 @@ msgid "Scanning Depth:"
 msgstr "Profondeur du scan :"
 
 #: scripts/shipTemplates_Corvette.lua:217
-#, fuzzy
 msgctxt "subclass"
 msgid "Support"
-msgstr "Support"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgid "Odin"
@@ -2647,18 +2641,16 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:369
-#, fuzzy
 msgid "Repulse"
-msgstr "Impulsion"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:369
 msgid "Armored Transport"
 msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:414
-#, fuzzy
 msgid "Fiend G3"
-msgstr "Amical"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:272
 #: scripts/shipTemplates_StarFighters.lua:65
@@ -2675,9 +2667,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:428
-#, fuzzy
 msgid "Fiend G4"
-msgstr "Amical"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:429
 msgid ""
@@ -2689,9 +2680,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:433
-#, fuzzy
 msgid "Fiend G6"
-msgstr "Amical"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:434
 msgid ""
@@ -2703,9 +2693,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:437
-#, fuzzy
 msgid "Fiend G5"
-msgstr "Amical"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:438
 msgid ""
@@ -2890,9 +2879,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:364
-#, fuzzy
 msgid "Battlestation"
-msgstr "Petite Station"
+msgstr "Station de combat"
 
 #: scripts/shipTemplates_OLD.lua:364
 msgid "Battlecruiser"
@@ -2905,9 +2893,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:456
-#, fuzzy
 msgid "Weapons platform"
-msgstr "Plateforme de defense"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:458
 msgid ""
@@ -2930,44 +2917,36 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:484
-#, fuzzy
 msgid "Ktlitan Fighter"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:491
-#, fuzzy
 msgid "Ktlitan Breaker"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:501
-#, fuzzy
 msgid "Ktlitan Worker"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:508
-#, fuzzy
 msgid "Ktlitan Drone"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:514
-#, fuzzy
 msgid "Ktlitan Feeder"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:524
-#, fuzzy
 msgid "Ktlitan Scout"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:530
-#, fuzzy
 msgid "Ktlitan Destroyer"
-msgstr "Destroyer"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:541
-#, fuzzy
 msgid "Ktlitan Queen"
-msgstr "Ktlitiens"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:552
 #, lua-format
@@ -2979,9 +2958,8 @@ msgid "MT52 Hornet"
 msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:13
-#, fuzzy
 msgid "Interceptor"
-msgstr "Internet"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:15
 msgid ""
