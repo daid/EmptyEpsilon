@@ -90,5 +90,6 @@ void BlackHole::collide(Collisionable* target, float collision_force)
     {
         obj->takeDamage(force * update_delta / 10.0f, info);
     }
-    target->setPosition(target->getPosition() + diff / distance * update_delta * force);
+    if (!obj) {return;}
+    obj->setPosition(obj->getPosition() + diff / distance * update_delta * force);
 }
