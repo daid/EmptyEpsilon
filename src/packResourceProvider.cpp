@@ -1,10 +1,12 @@
 #include "packResourceProvider.h"
 
 #include <cstdio>
-
 #ifdef _WIN32
 #include <malloc.h>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #else
+#include <dirent.h>
 #include <alloca.h>
 #endif
 

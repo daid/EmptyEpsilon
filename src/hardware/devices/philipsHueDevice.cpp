@@ -3,9 +3,6 @@
 #include "philipsHueDevice.h"
 #include "hardware/serialDriver.h"
 #include "logging.h"
-#ifndef _MSC_VER
-#include <unistd.h>
-#endif
 #include <json11/json11.hpp>
 
 using namespace json11;
