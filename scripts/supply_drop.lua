@@ -4,6 +4,9 @@
 
 function init()
 	my_ship = CpuShip():setCommsScript("comms_supply_drop.lua"):setFactionId(faction_id):setPosition(position_x, position_y):setTemplate("Flavia"):setScanned(true):orderFlyTowardsBlind(target_x, target_y)
+	if jump_freighter ~= nil and jump_freighter == "Yes" then
+		my_ship:setJumpDrive(true):setJumpDriveRange(5000,25000):setJumpDriveCharge(20000)
+	end
 	state = 0
 end
 
