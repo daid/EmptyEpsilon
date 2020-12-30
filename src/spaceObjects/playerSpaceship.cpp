@@ -2081,6 +2081,4 @@ void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
     this->on_probe_launch = callback;
 }
 
-#ifndef _MSC_VER
 #include "playerSpaceship.hpp"
-#endif /* _MSC_VER */

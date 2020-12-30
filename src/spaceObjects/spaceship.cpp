@@ -1528,6 +1528,4 @@ string frequencyToString(int frequency)
     return string(400 + (frequency * 20)) + "THz";
 }
 
-#ifndef _MSC_VER
 #include "spaceship.hpp"
-#endif
