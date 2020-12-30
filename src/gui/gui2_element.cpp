@@ -198,8 +198,12 @@ GuiContainer* GuiElement::getTopLevelContainer()
 
 void GuiElement::destroy()
 {
-    setVisible(false);
     destroyed = true;
+}
+
+bool GuiElement::isDestroyed()
+{
+    return destroyed;
 }
 
 void GuiElement::updateRect(sf::FloatRect parent_rect)
