@@ -4,7 +4,7 @@ The Lua files are used in different ways.
 
 ## Hard-coded usage
 
-These files should be equal on the server an all clients.
+These files should be equal on the server and all clients.
 
 - `factionInfo.lua`
 - `model_data.lua`
@@ -45,5 +45,6 @@ The default communication scripts for each created ship or station.
 - `comms_station.lua` (hard-coded default for stations)
   - uses `supply_drop.lua`
 - `comms_supply_drop.lua` (used by `supply_drop.lua`)
+- `comms_station_scenario_06_central_command.lua` (used by `scenario_06_edgeofspace.lua`)
 
 They can be replaced by `obj:setCommsScript(filename)` or `obj:setCommsFunction(callback)`.
