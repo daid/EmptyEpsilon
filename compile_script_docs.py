@@ -13,7 +13,7 @@
 import re
 import os
 import sys
-import codecs
+import io
 
 try:
 	from xml.etree import cElementTree as ElementTree
@@ -107,7 +107,7 @@ class DocumentationGenerator(object):
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
         if ext == '.c' or ext == '.cpp' or ext == '.h':
-            for line in codecs.open(filename, "r", encoding="utf-8", errors="ignore"):
+            for line in io.open(filename, "r", encoding="utf-8", errors="ignore"):
                 m = re.match('^# *include *[<"](.*)[>"]$', line)
                 if m is not None:
                     self.addFile(m.group(1))
@@ -119,7 +119,7 @@ class DocumentationGenerator(object):
                 continue
             description = ""
             current_class = None
-            with codecs.open(filename, "r", encoding="utf-8", errors="ignore") as f:
+            with io.open(filename, "r", encoding="utf-8", errors="ignore") as f:
                 for line in f:
                     if line.startswith('#'):
                         continue
@@ -139,7 +139,7 @@ class DocumentationGenerator(object):
             description = ""
             current_class = None
             #print("Processing: %s" % (filename))
-            for line in codecs.open(filename, "r", encoding="utf-8", errors="ignore"):
+            for line in io.open(filename, "r", encoding="utf-8", errors="ignore"):
                 if line.startswith('#'):
                     continue
                 res = re.search('///(.*)', line)
