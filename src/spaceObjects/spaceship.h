@@ -80,17 +80,7 @@ public:
     float energy_level;
     float max_energy_level;
     ShipSystem systems[SYS_COUNT];
-    static constexpr std::array<float, SYS_COUNT> default_system_power_factors{
-        /*SYS_Reactor*/     -25.0,
-        /*SYS_BeamWeapons*/   3.0,
-        /*SYS_MissileSystem*/ 1.0,
-        /*SYS_Maneuver*/      2.0,
-        /*SYS_Impulse*/       4.0,
-        /*SYS_Warp*/          5.0,
-        /*SYS_JumpDrive*/     5.0,
-        /*SYS_FrontShield*/   5.0,
-        /*SYS_RearShield*/    5.0,
-    };
+    static std::array<float, SYS_COUNT> default_system_power_factors;
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)
      */
