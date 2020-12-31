@@ -50,7 +50,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         manual_ip->setText(value);
     });
     if (PreferencesManager::get("last_server", "") != "") {
-        server_list->addEntry(tr("Last Session ({last})").format({{"last", PreferencesManager::get("last_server", "")}})),
+        server_list->addEntry(tr("Last Session ({last})").format({{"last", PreferencesManager::get("last_server", "")}}),
             PreferencesManager::get("last_server", ""));
     }
     scanner->addCallbacks([this](sf::IpAddress address, string name) {
