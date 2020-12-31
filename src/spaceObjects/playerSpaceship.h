@@ -50,8 +50,6 @@ public:
     constexpr static float max_scanning_delay = 6.0;
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
-    // Subsystem effectiveness base rates
-    static float system_power_user_factor[];
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 

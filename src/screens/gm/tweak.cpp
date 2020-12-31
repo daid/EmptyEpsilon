@@ -59,6 +59,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry(tr("tab", "Beams"), "");
         pages.push_back(new GuiShipTweakSystems(this));
         list->addEntry(tr("tab", "Systems"), "");
+        pages.push_back(new GuiShipTweakSystemPowerFactors(this));
+        list->addEntry(tr("tab", "Power"), "");
     }
 
     if (tweak_type == TW_Player)
@@ -583,6 +585,74 @@ void GuiShipTweakSystems::open(P<SpaceObject> target)
 {
     P<SpaceShip> ship = target;
     this->target = ship;
+}
+
+string GuiShipTweakSystemPowerFactors::powerFactorToText(float power)
+{
+    return string(power, 1);
+}
+
+GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* owner)
+    : GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    GuiAutoLayout* center_col = new GuiAutoLayout(this, "CENTER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    center_col->setPosition(10, 25, ATopCenter)->setSize(200, GuiElement::GuiSizeMax);
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(200, GuiElement::GuiSizeMax);
+
+    // Header
+    (new GuiLabel(left_col, "", "", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(center_col, "", tr("current factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", tr("desired factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        ESystem system = ESystem(n);
+        (new GuiLabel(left_col, "", tr("{system}").format({ {"system", getLocaleSystemName(system)} }), 20))->setSize(GuiElement::GuiSizeMax, 30);
+        system_current_power_factor[n] = new GuiLabel(center_col, "", "", 20);
+        system_current_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
+
+        system_power_factor[n] = new GuiTextEntry(right_col, "", "");
+        system_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
+        system_power_factor[n]->enterCallback([this, n](const string& text)
+            {
+                // Perform safe conversion (typos can happen).
+                char* end = nullptr;
+                auto converted = strtof(text.c_str(), &end);
+                if (converted == 0.f && end == text.c_str())
+                {
+                    // failed - reset text to current value.
+                    system_power_factor[n]->setText(string(target->systems[n].power_factor, 1));
+                }
+                else
+                {
+                    // apply!
+                    target->systems[n].power_factor = converted;
+                }
+            });
+    }
+    // Footer
+    (new GuiLabel(center_col, "", tr("Applies on [Enter]"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+}
+
+void GuiShipTweakSystemPowerFactors::open(P<SpaceObject> target)
+{
+    P<SpaceShip> ship = target;
+    this->target = ship;
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        system_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
+    }
+}
+
+void GuiShipTweakSystemPowerFactors::onDraw(sf::RenderTarget& window)
+{
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        system_current_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
+    }
 }
 
 GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
