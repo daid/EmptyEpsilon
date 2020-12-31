@@ -256,7 +256,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             case SYS_Reactor:
                 if (effectiveness > 1.0f)
                     effectiveness = (1.0f + effectiveness) / 2.0f;
-                addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1)}}));
+                addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * - my_spaceship->getSystemPowerUserFactor(selected_system) * 60.0, 1)}}));
                 break;
             case SYS_BeamWeapons:
                 addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100) + "%");

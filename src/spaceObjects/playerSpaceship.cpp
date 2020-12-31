@@ -204,18 +204,6 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructSize);
 }
 
-float PlayerSpaceship::system_power_user_factor[] = {
-    /*SYS_Reactor*/     -25.0 * 0.08,
-    /*SYS_BeamWeapons*/   3.0 * 0.08,
-    /*SYS_MissileSystem*/ 1.0 * 0.08,
-    /*SYS_Maneuver*/      2.0 * 0.08,
-    /*SYS_Impulse*/       4.0 * 0.08,
-    /*SYS_Warp*/          5.0 * 0.08,
-    /*SYS_JumpDrive*/     5.0 * 0.08,
-    /*SYS_FrontShield*/   5.0 * 0.08,
-    /*SYS_RearShield*/    5.0 * 0.08,
-};
-
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
 static const int16_t CMD_WARP = 0x0003;
@@ -370,18 +358,21 @@ PlayerSpaceship::PlayerSpaceship()
     // Initialize each subsystem to be powered with no coolant or heat.
     for(int n = 0; n < SYS_COUNT; n++)
     {
-        systems[n].health = 1.0;
-        systems[n].power_level = 1.0;
-        systems[n].power_request = 1.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].heat_level = 0.0;
+        assert(n < default_system_power_factors.size());
+        systems[n].health = 1.0f;
+        systems[n].power_level = 1.0f;
+        systems[n].power_request = 1.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].heat_level = 0.0f;
+        systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].power_level);
         registerMemberReplication(&systems[n].power_request);
         registerMemberReplication(&systems[n].coolant_level);
         registerMemberReplication(&systems[n].coolant_request);
         registerMemberReplication(&systems[n].heat_level, 1.0);
+        registerMemberReplication(&systems[n].power_factor);
     }
 
     if (game_server)
@@ -885,18 +876,22 @@ float PlayerSpaceship::getNetSystemEnergyUsage()
     // Determine each subsystem's energy draw.
     for(int n = 0; n < SYS_COUNT; n++)
     {
+        
         if (!hasSystem(ESystem(n))) continue;
+
+        const auto& system = systems[n];
         // Factor the subsystem's health into energy generation.
-        if (system_power_user_factor[n] < 0)
+        auto power_user_factor = system.getPowerUserFactor();
+        if (power_user_factor < 0)
         {
             float f = getSystemEffectiveness(ESystem(n));
             if (f > 1.0f)
                 f = (1.0f + f) / 2.0f;
-            net_power -= system_power_user_factor[n] * f;
+            net_power -= power_user_factor * f;
         }
         else
         {
-            net_power -= system_power_user_factor[n] * systems[n].power_level;
+            net_power -= power_user_factor * system.power_level;
         }
     }
 

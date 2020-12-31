@@ -1,6 +1,8 @@
-#include <i18n.h>
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
+#include <i18n.h>
+
+#include <array>
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
@@ -36,6 +38,7 @@ enum EDockingState
 class ShipSystem
 {
 public:
+    static constexpr float power_factor_rate = 0.08f;
     float health; //1.0-0.0, where 0.0 is fully broken.
     float health_max; //1.0-0.0, where 0.0 is fully broken.
     float power_level; //0.0-3.0, default 1.0
@@ -44,10 +47,16 @@ public:
     float coolant_level; //0.0-10.0
     float coolant_request;
     float hacked_level; //0.0-1.0
+    float power_factor;
 
-    float getHeatingDelta()
+    float getHeatingDelta() const
     {
         return powf(1.7, power_level - 1.0) - (1.01 + coolant_level * 0.1);
+    }
+
+    float getPowerUserFactor() const
+    {
+        return power_factor * power_factor_rate;
     }
 };
 
@@ -71,6 +80,17 @@ public:
     float energy_level;
     float max_energy_level;
     ShipSystem systems[SYS_COUNT];
+    static constexpr std::array<float, SYS_COUNT> default_system_power_factors{
+        /*SYS_Reactor*/     -25.0,
+        /*SYS_BeamWeapons*/   3.0,
+        /*SYS_MissileSystem*/ 1.0,
+        /*SYS_Maneuver*/      2.0,
+        /*SYS_Impulse*/       4.0,
+        /*SYS_Warp*/          5.0,
+        /*SYS_JumpDrive*/     5.0,
+        /*SYS_FrontShield*/   5.0,
+        /*SYS_RearShield*/    5.0,
+    };
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)
      */
@@ -322,8 +342,12 @@ public:
     void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
     float getSystemPower(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].power_level; }
     void setSystemPower(ESystem system, float power) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_level = std::min(3.0f, std::max(0.0f, power)); }
+    float getSystemPowerUserFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].getPowerUserFactor(); }
+    float getSystemPowerFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].power_factor; }
+    void setSystemPowerFactor(ESystem system, float factor) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_factor = factor; }
     float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
     void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
+    
     float getImpulseMaxSpeed() { return impulse_max_speed; }
     void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
     float getRotationMaxSpeed() { return turn_speed; }
