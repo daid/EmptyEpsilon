@@ -1,7 +1,7 @@
 #ifndef SERIAL_DRIVER_H
 #define SERIAL_DRIVER_H
 
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <windows.h>
 #endif
 #include "stringImproved.h"
@@ -11,7 +11,7 @@
 class SerialPort
 {
 private:
-#ifdef __WIN32__
+#ifdef _WIN32
     HANDLE handle;
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))

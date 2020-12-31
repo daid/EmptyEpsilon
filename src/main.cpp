@@ -28,7 +28,7 @@
 #include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
-#ifdef __WIN32__
+#ifdef _WIN32
 #include "discord.h"
 #endif
 
@@ -100,7 +100,7 @@ int main(int argc, char** argv)
 #else
     Logging::setLogLevel(LOGLEVEL_INFO);
 #endif
-#if defined(__WIN32__) && !defined(DEBUG)
+#if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
 #endif
 #ifdef CONFIG_DIR
@@ -306,7 +306,7 @@ int main(int argc, char** argv)
     else
         hardware_controller->loadConfiguration("hardware.ini");
 
-#ifdef __WIN32__
+#ifdef _WIN32
     new DiscordRichPresence();
 #endif
 
@@ -342,7 +342,7 @@ int main(int argc, char** argv)
         // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
-#ifdef __WIN32__
+#ifdef _WIN32
             mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
 #else
             mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
