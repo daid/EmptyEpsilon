@@ -32,7 +32,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         else
             scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
     });
-    lan_internet_selector->setOptions({"LAN", "Internet"})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+    lan_internet_selector->setOptions({tr("LAN"), tr("Internet")})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
 
     connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"), [this]() {
         new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(manual_ip->getText()));
