@@ -1363,7 +1363,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
                 comms_target_name = comms_target->getCallSign();
-                comms_incomming_message = "Opened comms with " + comms_target_name;
+                comms_incomming_message = tr("chatdialog", "Opened comms with ") + comms_target_name;
                 addToShipLog(tr("shiplog", "Hailing: ") + comms_target_name, colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
@@ -1387,8 +1387,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     comms_state = CS_ChannelOpenPlayer;
                     playerShip->comms_state = CS_ChannelOpenPlayer;
 
-                    comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
-                    playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
+                    comms_incomming_message = tr("chatdialog", "Opened comms to ") + playerShip->getCallSign();
+                    playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to ") + getCallSign();
                     addToShipLog(tr("shiplog", "Opened communication channel to ") + playerShip->getCallSign(), colorConfig.log_generic);
                     playerShip->addToShipLog(tr("shiplog", "Opened communication channel to ") + getCallSign(), colorConfig.log_generic);
                 }else{
@@ -1402,7 +1402,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (!comms_target)
                     {
-                        addToShipLog("tr("shiplog", Hail suddenly went dead."), colorConfig.log_generic);
+                        addToShipLog("tr("shiplog", "Hail suddenly went dead."), colorConfig.log_generic);
                         comms_state = CS_ChannelBroken;
                     }else{
                         addToShipLog(tr("shiplog", "Accepted hail from ") + comms_target->getCallSign(), colorConfig.log_generic);
@@ -1440,7 +1440,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_ChannelOpenGM;
 
                 addToShipLog(tr("shiplog", "Opened communication channel to ") + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = "Opened comms with " + comms_target_name;
+                comms_incomming_message = tr("chatdialog", "Opened comms with ") + comms_target_name;
             }else{
                 addToShipLog(tr("shiplog", "Refused hail from ") + comms_target_name, colorConfig.log_generic);
                 comms_state = CS_Inactive;
