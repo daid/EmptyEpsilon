@@ -2068,6 +2068,23 @@ string PlayerSpaceship::getExportLine()
         result += ":setAutoCoolant(true)";
     if (auto_repair_enabled)
         result += ":commandSetAutoRepair(true)";
+
+    // Update power factors, only for the systems where it changed.
+    for (auto sys_index = 0; sys_index < SYS_COUNT; ++sys_index)
+    {
+        auto system = static_cast<ESystem>(sys_index);
+        if (hasSystem(system))
+        {
+            assert(sys_index < default_system_power_factors.size());
+            auto default_factor = default_system_power_factors[sys_index];
+            auto current_factor = getSystemPowerFactor(system);
+            auto difference = std::fabs(current_factor - default_factor) > std::numeric_limits<float>::epsilon();
+            if (difference)
+            {
+                result += ":setSystemPowerFactor(" + string(system) + ", " + string(current_factor, 1) + ")";
+            }
+        }
+    }
     return result;
 }
 
