@@ -121,7 +121,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         {
             if (target.first == target_system)
             {
-                hacking_status_label->setText(target_system + tr("hacking", " : Hacked {percent}%").format({{"percent", string(int(target.second * 100.0f + 0.5f))}}));
+                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
                 break;
             }
         }
