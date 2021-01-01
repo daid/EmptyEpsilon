@@ -12,7 +12,7 @@ GuiJumpIndicator::GuiJumpIndicator(GuiContainer* owner)
 
     box = new GuiPanel(owner, "JUMP_BOX");
     box->setSize(800, 100)->setPosition(0, 200, ATopCenter);
-    label = new GuiLabel(box, "JUMP_LABEL", tr("Jump in: "), 50);
+    label = new GuiLabel(box, "JUMP_LABEL", "Jump in: ", 50);
     label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenter);
 }
 
