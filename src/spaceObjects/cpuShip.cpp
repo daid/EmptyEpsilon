@@ -217,7 +217,7 @@ void CpuShip::orderFlyTowards(sf::Vector2f target)
     orders = AI_FlyTowards;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, "Moving to " + string(target.x) + "," + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {target},").format({{"target", string(target.x)}}) + string(target.y) + ".");
 }
 
 void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
@@ -225,7 +225,7 @@ void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
     orders = AI_FlyTowardsBlind;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly,"Moving to " + string(target.x) + "," + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {target},").format({{"target", string(target.x)}}) + string(target.y) + ".");
 }
 
 void CpuShip::orderAttack(P<SpaceObject> object)
@@ -235,7 +235,7 @@ void CpuShip::orderAttack(P<SpaceObject> object)
     orders = AI_Attack;
     order_target = object;
     order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly, "Moving to attack " + object->getCallSign() + "!");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
 }
 
 void CpuShip::orderDock(P<SpaceObject> object)
@@ -245,7 +245,7 @@ void CpuShip::orderDock(P<SpaceObject> object)
     orders = AI_Dock;
     order_target = object;
     order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly, "Docking to " + object->getCallSign() + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
 void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
