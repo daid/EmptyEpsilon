@@ -32,13 +32,13 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
     hacking_status_label = new GuiLabel(minigame_box, "", "", 25);
     hacking_status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0);
-    reset_button = new GuiButton(minigame_box, "", "Reset", [this]()
+    reset_button = new GuiButton(minigame_box, "", tr("hacking", "Reset"), [this]()
     {
         game->reset();
     });
     reset_button->setSize(200, 50);
     reset_button->setPosition(25, -25, ABottomLeft);
-    close_button = new GuiButton(minigame_box, "", "Close", [this]()
+    close_button = new GuiButton(minigame_box, "", tr("hacking", "Close"), [this]()
     {
         hide();
     });
@@ -53,7 +53,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2 + 200, 0, ACenter);
 
-    GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", "Target system:", 25);
+    GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", tr("hacking", "Target system:"), 25);
     target_selection_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 15);
 
     target_list = new GuiListbox(target_selection_box, "", [this](int index, string value)
@@ -112,7 +112,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         }
     } else {
         progress_bar->setValue(game->getProgress());
-        status_label->setText("Hacking in Progress: " + string(int(100 * game->getProgress())) + "%");
+        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}})
     }
     if (target_system != "")
     {
@@ -121,7 +121,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         {
             if (target.first == target_system)
             {
-                hacking_status_label->setText("Hacked " + target_system + ": " + string(int(target.second * 100.0f + 0.5f)) + "%");
+                hacking_status_label->setText(target_system + tr("hacking", " : Hacked {percent}%").format({{"percent", string(int(target.second * 100.0f + 0.5f))}}));
                 break;
             }
         }
@@ -138,7 +138,7 @@ void GuiHackingDialog::onMiniGameComplete(bool success)
     reset_time = engine->getElapsedTime() + auto_reset_time;
     game->disable();
     last_game_success = success;
-    status_label->setText(success ? "Hacking SUCCESS!" : "Hacking FAILURE!");
+    status_label->setText(success ? tr("Hacking SUCCESS!" : "Hacking FAILURE!"));
 }
 
 void GuiHackingDialog::getNewGame() {
