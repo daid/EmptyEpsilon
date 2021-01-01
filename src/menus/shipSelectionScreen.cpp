@@ -298,7 +298,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 LOG(INFO) << "Password doesn't match control code. Attempt: " << password;
                 my_player_info->commandSetShipId(-1);
                 // Notify the player.
-                password_label->setText(tr("Incorrect control code. Re-enter code for {callsign}").format({{"callsign", ship->getCallSign()}}) + ":");
+                password_label->setText(tr("Incorrect control code. Re-enter code for {callsign}:").format({{"callsign", ship->getCallSign()}}));
                 // Reset the dialog.
                 password_entry->setText("");
             } else {
