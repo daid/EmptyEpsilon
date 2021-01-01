@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "main.h"
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
