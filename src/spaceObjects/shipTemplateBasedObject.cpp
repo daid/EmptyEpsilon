@@ -219,11 +219,22 @@ void ShipTemplateBasedObject::draw3DTransparent()
 
 void ShipTemplateBasedObject::update(float delta)
 {
+    // All ShipTemplateBasedObjects should have a valid template.
+    // If this object lacks a template, or has an inconsistent template...
     if (!ship_template || ship_template->getName() != template_name)
     {
+        // Attempt to align the object's template to its reported template name.
         ship_template = ShipTemplate::getTemplate(template_name);
+
+        // If the template still doesn't exist, destroy the object.
         if (!ship_template)
+        {
+            LOG(ERROR) << "ShipTemplateBasedObject with ID " << string(getMultiplayerId()) << " lacked a template, so it was destroyed.";
+            destroy();
             return;
+        }
+
+        // If it does exist, set up its collider and model.
         ship_template->setCollisionData(this);
         model_info.setData(ship_template->model_data);
     }
