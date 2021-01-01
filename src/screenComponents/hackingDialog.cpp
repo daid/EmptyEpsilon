@@ -112,7 +112,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         }
     } else {
         progress_bar->setValue(game->getProgress());
-        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}))
+        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}));
     }
     if (target_system != "")
     {
