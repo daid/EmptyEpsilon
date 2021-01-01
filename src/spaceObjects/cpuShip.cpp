@@ -149,7 +149,7 @@ void CpuShip::orderRoaming()
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = sf::Vector2f();
-    this->addBroadcast(FVF_Friendly,"Searching for targets.");
+    this->addBroadcast(FVF_Friendly, tr("Searching for targets."));
 }
 
 void CpuShip::orderRoamingAt(sf::Vector2f position)
@@ -286,17 +286,17 @@ string getAIOrderString(EAIOrder order)
 {
     switch(order)
     {
-    case AI_Idle: return "Idle";
-    case AI_Roaming: return "Roaming";
-    case AI_Retreat: return "Retreat";
-    case AI_StandGround: return "Stand Ground";
-    case AI_DefendLocation: return "Defend Location";
-    case AI_DefendTarget: return "Defend Target";
-    case AI_FlyFormation: return "Fly in formation";
-    case AI_FlyTowards: return "Fly towards";
-    case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
-    case AI_Attack: return "Attack";
-    case AI_Dock: return "Dock";
+    case AI_Idle: return tr("orderscpu", "Idle");
+    case AI_Roaming: return tr("orderscpu", "Roaming");
+    case AI_Retreat: return tr("orderscpu", "Retreat");
+    case AI_StandGround: return tr("orderscpu", "Stand Ground");
+    case AI_DefendLocation: return tr("orderscpu", "Defend Location");
+    case AI_DefendTarget: return tr("orderscpu", "Defend Target");
+    case AI_FlyFormation: return tr("orderscpu", "Fly in formation");
+    case AI_FlyTowards: return tr("orderscpu", "Fly towards");
+    case AI_FlyTowardsBlind: return tr("orderscpu", "Fly towards (ignore all)");
+    case AI_Attack: return tr("orderscpu", "Attack");
+    case AI_Dock: return tr("orderscpu", "Dock");
     }
     return "Unknown";
 }
