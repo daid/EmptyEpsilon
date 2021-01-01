@@ -154,7 +154,7 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         opening_progress->setValue(my_spaceship->getCommsOpeningDelay());
 
         hailed_box->setVisible(my_spaceship->isCommsBeingHailed());
-        hailed_label->setText("Hailed by " + my_spaceship->getCommsTargetName());
+        hailed_label->setText(tr("Hailed by {name}").format({{"name", my_spaceship->getCommsTargetName()}}));
 
         no_response_box->setVisible(my_spaceship->isCommsFailed());
 
