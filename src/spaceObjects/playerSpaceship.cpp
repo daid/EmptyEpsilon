@@ -1388,12 +1388,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     playerShip->comms_state = CS_ChannelOpenPlayer;
 
                     comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", playerShip->getCallSign()}});
-                    playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to ") + getCallSign();
-                    addToShipLog(tr("shiplog", "Opened communication channel to ") + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog(tr("shiplog", "Opened communication channel to ") + getCallSign(), colorConfig.log_generic);
+                    playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", getCallSign()}});
+                    addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
+                    playerShip->addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                 }else{
-                    addToShipLog(tr("shiplog", "Refused communications from ") + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog(tr("shiplog", "Refused communications to ") + getCallSign(), colorConfig.log_generic);
+                    addToShipLog(tr("shiplog", "Refused communications from {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
+                    playerShip->addToShipLog(tr("shiplog", "Refused communications to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                     playerShip->comms_state = CS_ChannelFailed;
                 }
@@ -1405,7 +1405,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                         addToShipLog(tr("shiplog", "Hail suddenly went dead."), colorConfig.log_generic);
                         comms_state = CS_ChannelBroken;
                     }else{
-                        addToShipLog(tr("shiplog", "Accepted hail from ") + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
                         comms_reply_id.clear();
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
@@ -1425,7 +1425,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     }
                 }else{
                     if (comms_target)
-                        addToShipLog(tr("shiplog", "Refused hail from ") + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Refused hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                 }
             }
@@ -1439,10 +1439,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 comms_state = CS_ChannelOpenGM;
 
-                addToShipLog(tr("shiplog", "Opened communication channel to ") + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = tr("chatdialog", "Opened comms with ") + comms_target_name;
+                addToShipLog(tr("shiplog", "Opened communication channel to {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
+                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
             }else{
-                addToShipLog(tr("shiplog", "Refused hail from ") + comms_target_name, colorConfig.log_generic);
+                addToShipLog(tr("shiplog", "Refused hail from {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
                 comms_state = CS_Inactive;
             }
         }
