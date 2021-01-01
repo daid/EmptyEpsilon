@@ -172,6 +172,21 @@ P<ScienceDatabase> ScienceDatabase::getEntryByName(string name)
     return queryScienceDatabase(name, this->getId());
 }
 
+P<ScienceDatabase> ScienceDatabase::getEntryById(int32_t id)
+{
+    P<ScienceDatabase> entry;
+
+    for(auto sd : ScienceDatabase::science_databases)
+    {
+        if (sd->getId() == id)
+        {
+            entry = sd;
+        }
+    }
+
+    return entry;
+}
+
 bool ScienceDatabase::hasEntries()
 {
     for(auto sd : ScienceDatabase::science_databases)
@@ -213,6 +228,30 @@ P<ScienceDatabase> ScienceDatabase::queryScienceDatabase(string name, int32_t pa
 
     return nullptr;
 }
+
+static int queryScienceDatabaseById(lua_State* L)
+{
+    P<ScienceDatabase> entry = nullptr;
+
+    for(int i = 1; i <= lua_gettop(L); i++)
+    {
+        string segment = string(luaL_checkstring(L, i));
+        entry = ScienceDatabase::getEntryById(segment.toInt());
+
+        if (!entry)
+        {
+            // No entry with this multiplayer_id.
+            return 0;
+        }
+    }
+
+    return convert<P<ScienceDatabase> >::returnType(L, entry);
+}
+
+/// Return a ScienceDatabase entry by its unique multiplayer_id.
+/// Returns nil if no entry is found.
+/// Example: local mine_db = queryScienceDatabaseById(4);
+REGISTER_SCRIPT_FUNCTION(queryScienceDatabaseById);
 
 static int queryScienceDatabase(lua_State* L)
 {
