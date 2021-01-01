@@ -1124,7 +1124,7 @@ bool PlayerSpaceship::hailCommsByGM(string target_name)
         return false;
 
     // Log the hail.
-    addToShipLog(tr("shiplog", "Hailed by ") + target_name, colorConfig.log_generic);
+    addToShipLog(tr("shiplog", "Hailed by {name}").format({{"name", target_name}}), colorConfig.log_generic);
 
     // Set comms to the hail state and notify Relay/comms.
     comms_state = CS_BeingHailedByGM;
@@ -1188,7 +1188,7 @@ void PlayerSpaceship::closeComms()
                 if (player_ship->comms_state == CS_BeingHailed && player_ship->comms_target == this)
                 {
                     player_ship->comms_state = CS_Inactive;
-                    player_ship->addToShipLog(tr("shiplog", "Hailing from ") + getCallSign() + tr("shiplog", " stopped"), colorConfig.log_generic);
+                    player_ship->addToShipLog(tr("shiplog", "Hailing from {callsign} stopped").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                 }
             }
         }
@@ -1363,8 +1363,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
                 comms_target_name = comms_target->getCallSign();
-                comms_incomming_message = tr("chatdialog", "Opened comms with ") + comms_target_name;
-                addToShipLog(tr("shiplog", "Hailing: ") + comms_target_name, colorConfig.log_generic);
+                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
+                addToShipLog(tr("shiplog", "Hailing: {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
             }
@@ -1387,7 +1387,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     comms_state = CS_ChannelOpenPlayer;
                     playerShip->comms_state = CS_ChannelOpenPlayer;
 
-                    comms_incomming_message = tr("chatdialog", "Opened comms to ") + playerShip->getCallSign();
+                    comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", playerShip->getCallSign()}});
                     playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to ") + getCallSign();
                     addToShipLog(tr("shiplog", "Opened communication channel to ") + playerShip->getCallSign(), colorConfig.log_generic);
                     playerShip->addToShipLog(tr("shiplog", "Opened communication channel to ") + getCallSign(), colorConfig.log_generic);
