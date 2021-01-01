@@ -15,8 +15,8 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
 
     ship_destroyed_overlay = new GuiOverlay(this, "SHIP_DESTROYED", sf::Color(0, 0, 0, 128));
     (new GuiPanel(ship_destroyed_overlay, "SHIP_DESTROYED_FRAME"))->setPosition(0, 0, ACenter)->setSize(500, 100);
-    (new GuiLabel(ship_destroyed_overlay, "SHIP_DESTROYED_TEXT", "SHIP DESTROYED!", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
-    (new GuiButton(ship_destroyed_overlay, "SHIP_DESTROYED_BUTTON", "Return", [this]() {
+    (new GuiLabel(ship_destroyed_overlay, "SHIP_DESTROYED_TEXT", tr("SHIP DESTROYED!"), 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiButton(ship_destroyed_overlay, "SHIP_DESTROYED_BUTTON", tr("shipdestroyed", "Return"), [this]() {
         this->owner->destroy();
         soundManager->stopMusic();
         returnToShipSelection();
