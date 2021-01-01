@@ -12,6 +12,7 @@
 #include "spaceObjects/blackHole.h"
 #include "spaceObjects/nebula.h"
 #include "spaceObjects/spaceship.h"
+#include "spaceObjects/missiles/missileWeapon.h"
 #include "spaceObjects/planet.h"
 
 class JSONGenerator
@@ -268,21 +269,37 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
     json.endArray();
     json.write("rotation", obj->getRotation());
     P<SpaceShip> ship = obj;
+
     if (ship)
     {
         writeShipEntry(json, ship);
-    }else{
+    }
+    else
+    {
         P<SpaceStation> station = obj;
+
         if (station)
         {
             writeStationEntry(json, station);
-        }else{
-            P<Planet> planet = obj;
-            if (planet)
+        }
+        else
+        {
+            P<MissileWeapon> missile = obj;
+
+            if (missile)
             {
-                writePlanetEntry(json, planet);
+                writeMissileEntry(json, missile);
             }
-    }
+            else
+            {
+                P<Planet> planet = obj;
+
+                if (planet)
+                {
+                    writePlanetEntry(json, planet);
+                }
+            }
+        }
     }
 }
 
@@ -510,6 +527,18 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
                 json.arrayWrite(station->shield_max[n]);
             config.endArray();
         }
+    }
+}
+
+void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile)
+{
+    json.write("category_modifier", missile->category_modifier);
+    json.write("owner_id", missile->owner->getMultiplayerId());
+
+    // Don't bother writing a target ID if it's unguided or targetless.
+    if (missile->target_id != -1)
+    {
+        json.write("target_id", missile->target_id);
     }
 }
 
