@@ -1,0 +1,30 @@
+# Scenario name
+msgid "Ghost from the Past"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Far from any frontline or civilization, patrolling the Stakhanov Mining "
+"Complex can be a dull and lonely task of seizing contraband and stopping "
+"drunken brawls, and brightened only by R&R at Marco Polo station.However, "
+"when an inbound FTL-capable Ktlitan swarm is announced, you must scramble to "
+"save the sector![Requires beam/shield frequenies] [Hard]This scenario is "
+"limited to one player ship: the Atlantis Epsilon."
+msgstr ""
+
+#: scripts/scenario_07_gftp.lua:83
+msgid ""
+"Your R&R aboard the Marco Polo is brought to quick end by an urgent "
+"broadcast from Central Command:\n"
+"\n"
+"\"Epsilon, please come in.\n"
+"\n"
+"We have an emergency situation. Our sensors detect that a hostile Ktlitan "
+"swarm just jumped into your sector, with the main force heading for the "
+"Stakhanov Mining Complex. Proceed at once to Stakhanov and assist in the "
+"defence.\n"
+"\n"
+"Be careful of the dense asteroid agglomeration en route to the SMC.\n"
+"\n"
+"I repeat, this is not an exercise! Proceed at once to Stakhanov.\""
+msgstr ""

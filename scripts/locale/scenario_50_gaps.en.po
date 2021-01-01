@@ -1,0 +1,10 @@
+# Scenario name
+msgid "Close the Gaps"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Using Nautilus class mine layer, lay mines across the space lanes expected "
+"to be used by invading enemiesMission advice: It's better to hit an asteroid "
+"than a mine"
+msgstr ""

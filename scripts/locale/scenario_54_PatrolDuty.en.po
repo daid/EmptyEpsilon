@@ -1,0 +1,9 @@
+# Scenario name
+msgid "Delta quadrant patrol duty"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Patrol between three stations in the Delta quadrant to protect from "
+"enemiesVersion 8"
+msgstr ""

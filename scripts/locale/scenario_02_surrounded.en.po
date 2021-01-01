@@ -1,0 +1,10 @@
+# Scenario name
+msgid "Surrounded"
+msgstr ""
+
+# Scenario description
+msgid ""
+"You are surrounded by asteroids, enemies, and mines.Spawn the player ships "
+"you want. The strength of enemy ships is independent of the number and type "
+"of player ships.(The scenario can be won with a single Atlantis.)"
+msgstr ""

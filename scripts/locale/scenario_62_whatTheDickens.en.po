@@ -1,0 +1,7 @@
+# Scenario name
+msgid "What the Dickens"
+msgstr ""
+
+# Scenario description
+msgid "Patrol around the London area during Christmas. Bah! Humbug!"
+msgstr ""

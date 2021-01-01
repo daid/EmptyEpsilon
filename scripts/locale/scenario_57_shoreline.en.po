@@ -1,0 +1,11 @@
+# Scenario name
+msgid "Shoreline"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Waves of increasingly difficult enemies. At least one required mission and "
+"several optional missions. Missions selected at random unless game master "
+"intervenesMaximum of 8 player ships supported by scenario. More player ships "
+"may experience strange resultsVersion 3"
+msgstr ""

@@ -1,0 +1,9 @@
+# Scenario name
+msgid "Battlefield"
+msgstr ""
+
+# Scenario description
+msgid ""
+"More than 60 Human Navy and Exuari ships face off in all-out war near a "
+"neutral station.(This scenario is designed for performance testing.)"
+msgstr ""

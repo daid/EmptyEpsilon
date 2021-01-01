@@ -1,0 +1,12 @@
+# Scenario name
+msgid "Quick Basic"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Different version of the Basic scenario intended to play out quicker. There "
+"is only a single small station to defend.This scenario is designed to be ran "
+"at conventions, since you can run a 4-player crew with minimal experience "
+"through a game in 20 minutes.This scenario is designed for the provided "
+"player Phobos-type ship (or an Atlantis in the Advanced variant)."
+msgstr ""

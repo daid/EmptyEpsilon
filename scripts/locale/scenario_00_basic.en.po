@@ -1,0 +1,12 @@
+# Scenario name
+msgid "Basic"
+msgstr ""
+
+# Scenario description
+msgid ""
+"A few random stations are under attack by enemies, with random terrain "
+"around them. Destroy all enemies to win.The scenario provides a single "
+"player-controlled Atlantis, which is sufficient to win even in the \"Extreme"
+"\" variant.Other player ships can be spawned, but the strength of enemy "
+"ships is independent of the number and types of player ships."
+msgstr ""

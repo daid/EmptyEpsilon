@@ -1,0 +1,10 @@
+# Scenario name
+msgid "Escape"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Escape imprisonment and return home.Mission consists of one ship with a full "
+"crew. Engineer and Science will be busyVersion 4 Adds more activity for the "
+"weapons officer (6Apr2020)"
+msgstr ""

@@ -1,0 +1,18 @@
+# Scenario name
+msgid "Clash in Shangri-La (PVP)"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Since its creation, the Shangri-La station was governed by a multi-ethnic "
+"consortium that assured the station's independence across the conflicts that "
+"shook the sector.However, the station's tranquility came to an abrupt end "
+"when most of the governing consortium's members were assassinated under a "
+"Exuari false flag operation.Now the station is in a state of civil war, with "
+"infighting breaking out between warring factions.Both the neighboring Human "
+"Navy and Kraylor are worried that the breakdown of order in Shangri-La could "
+"tilt the balance of power in their opponent's favor, and sent \"peacekeepers"
+"\" to shift the situation to their own advantage.The Human Navy's HNS "
+"Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all-out battle for "
+"Shangri-La."
+msgstr ""

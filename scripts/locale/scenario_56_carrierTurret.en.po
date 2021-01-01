@@ -1,0 +1,12 @@
+# Scenario name
+msgid "Carriers and turrets"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Three player ships: a carrier and two smaller ships docked with the carrier. "
+"Objective: search out and find the enemy. Use the carrier to travel long "
+"distances.Carrier and several player ships with turrets available for use by "
+"the players made available with this scenario script and the associated "
+"files."
+msgstr ""

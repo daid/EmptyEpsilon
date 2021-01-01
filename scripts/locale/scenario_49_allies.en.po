@@ -1,0 +1,11 @@
+# Scenario name
+msgid "Allies and Enemies"
+msgstr ""
+
+# Scenario description
+msgid ""
+"The Arlenians are your allies. The Kraylors and Exuari are your enemies and "
+"will try to prevent you from completing your missions. Duration: "
+"approximately 30 minutesVersion 0Three missions available in current "
+"version. Tested with EE version 20190910"
+msgstr ""

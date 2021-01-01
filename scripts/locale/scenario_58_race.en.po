@@ -1,0 +1,15 @@
+# Scenario name
+msgid "Fermi 500"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the "
+"shortest time. Play for time by yourself, but have more fun with multiple "
+"player ships.First place earns 10 points, second place: 5, third place: 3 "
+"and 4th place: 1. Each target drone of yours shot earns one point. Shoot an "
+"opponent's drone and they get the point.Before the race starts, scope out "
+"the course, visit some stations, maybe improve your ship for the race. But, "
+"watch your time carefully. If you are not at waypoint 1 at the start of the "
+"race, your ship will be destroyed."
+msgstr ""

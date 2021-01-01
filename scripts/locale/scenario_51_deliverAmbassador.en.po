@@ -1,0 +1,19 @@
+# Scenario name
+msgid "Deliver Ambassador Gremus"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Unrest on Goltin 7 requires the skills of ambassador Gremus. Your mission: "
+"transport the ambassador wherever needed. You may encounter resistance.You "
+"are not flying a destroyer bristling with weapons. You are on a transport "
+"freighter with weapons bolted on as an afterthought. These weapons are "
+"pointed behind you to deter any marauding pirates. You won't necessarily be "
+"able to just destroy any enemies that might attempt to stop you from "
+"accomplishing your mission, you may have to evade. The navy wants you to "
+"succeed, so has fitted your ship with warp drive and a single diverse "
+"ordnance weapons tube which includes nuclear capability. If you get lost or "
+"forget your orders, check in with stations for information.Player ship: "
+"Template model: Flavia P. Falcon. Suggest turning music volume to 10% and "
+"sound volume to 100% on serverVersion 4"
+msgstr ""
