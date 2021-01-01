@@ -158,7 +158,7 @@ void CpuShip::orderRoamingAt(sf::Vector2f position)
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}));
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
 }
 
 void CpuShip::orderRetreat(P<SpaceObject> object)
@@ -189,7 +189,7 @@ void CpuShip::orderDefendLocation(sf::Vector2f position)
     orders = AI_DefendLocation;
     order_target = NULL;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Defending {posx},").format({{"posx", string(position.x)}}) + string(position.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Defending {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
 }
 
 void CpuShip::orderDefendTarget(P<SpaceObject> object)
