@@ -9,6 +9,10 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getName);
+    // Return an entry's unique multiplayer_id.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getId);
+    // Return an entry's parent's unique multiplayer_id.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getParentId);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
     /// returns a child entry by its case-insensitive name
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getEntryByName);
