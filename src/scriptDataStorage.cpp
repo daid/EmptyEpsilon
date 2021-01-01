@@ -8,7 +8,13 @@ class ScriptStorage : public PObject
 public:
     ScriptStorage()
     {
-        FILE* f = fopen("scriptstorage.json", "rt");
+        if (getenv("HOME"))
+        {
+            scriptstorage_path = string(getenv("HOME")) + "/.emptyepsilon/" + scriptstorage_path;
+        }
+
+        FILE* f = fopen(scriptstorage_path.c_str(), "rt");
+
         if (f)
         {
             std::string s;
@@ -32,10 +38,13 @@ public:
     void set(string key, string value)
     {
         if (data[key] == value)
+        {
             return;
-        data[key] = value;
+        }
 
-        FILE* f = fopen("scriptstorage.json", "wt");
+        data[key] = value;
+        FILE* f = fopen(scriptstorage_path.c_str(), "wt");
+
         if (f)
         {
             json11::Json json{data};
@@ -54,6 +63,7 @@ public:
     }
 
 private:
+    string scriptstorage_path = "scriptstorage.json";
     std::unordered_map<std::string, std::string> data;
 };
 
