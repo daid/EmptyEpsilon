@@ -1,21 +1,24 @@
 -- Name: Clash in Shangri-La (PVP)
 -- Description: Since its creation, the Shangri-La station was governed by a multi-ethnic consortium that assured the station's independence across the conflicts that shook the sector.
----             However, the station's tranquility came to an abrupt end when most of the governing consortium's members were assassinated under a Exuari false flag operation.
----             Now the station is in a state of civil war, with infighting breaking out between warring factions.
----             Both the neighboring Human Navy and Kraylor are worried that the breakdown of order in Shangri-La could tilt the balance of power in their opponent's favor, and sent "peacekeepers" to shift the situation to their own advantage.
----             The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all-out battle for Shangri-La.
+---
+--- However, the station's tranquility came to an abrupt end when most of the governing consortium's members were assassinated under a Exuari false flag operation.
+---
+--- Now the station is in a state of civil war, with infighting breaking out between warring factions.
+---
+--- Both the neighboring Human Navy and Kraylor are worried that the breakdown of order in Shangri-La could tilt the balance of power in their opponent's favor, and sent "peacekeepers" to shift the situation to their own advantage.
+---
+--- The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all-out battle for Shangri-La.
 -- Type: PvP
 
 --- Scenario
---
--- @script scenario_pvp
+-- @script scenario_81_pvp
 
--- global variables in this scenario
+-- Global variables in this scenario
 
--- independent station
+-- Independent station
 local shangri_la
 
--- for Human Navy and Kraylor
+-- Human Navy and Kraylor
 local gallipoli
 local crusader
 
@@ -31,7 +34,7 @@ local respawn_kraylor
 local points_human
 local points_kraylor
 
--- time
+-- Timers
 local time
 local wave_timer
 local troop_timer
@@ -82,17 +85,20 @@ function init()
     create(Mine, 10, 5000, 10000, 10000, 10000)
 
     -- Brief the players
-    shipyard_human:sendCommsMessage(gallipoli, [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
+    shipyard_human:sendCommsMessage(
+        gallipoli,
+        [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
 
-Provide a spatial cover for while our troop transports board the station to reclaim it.
+Provide cover while our troop transports board the station to reclaim it.
 
-Good luck, and stay safe.]])
+Good luck, and stay safe.]]
+    )
 
     shipyard_kraylor:sendCommsMessage(
         crusader,
         [[Greetings, Crusader.
 
-Your mission is to secure the Shangri-La station in sector F5, as the feeble humans think it's theirs for the taking.
+Your mission is to secure the Shangri-La station in sector F5. The feeble humans think it's theirs for the taking.
 
 Support our glorious soldiers by preventing the heretics from harming our transports, and cleanse all enemy opposition!]]
     )
@@ -134,7 +140,9 @@ end
 --
 -- If players call Shangri-La, provide a status report
 function shangrilaComms()
-    setCommsMessage("Your faction's militia commander picks up:\nWhat can we do for you, Captain?")
+    setCommsMessage([[Your faction's militia commander picks up:
+
+What can we do for you, Captain?]])
     addCommsReply(
         "Give us a status report.",
         function()
@@ -150,9 +158,13 @@ end
 function stationComms()
     if comms_source:isFriendly(comms_target) then
         if not comms_source:isDocked(comms_target) then
-            setCommsMessage("A dispatcher responds:\nGreetings, Captain. If you want supplies, please dock with us.")
+            setCommsMessage([[A dispatcher responds:
+
+Greetings, Captain. If you want supplies, please dock with us.]])
         else
-            setCommsMessage("A dispatcher responds:\nGreetings, Captain. What can we do for you?")
+            setCommsMessage([[A dispatcher responds:
+
+Greetings, Captain. What can we do for you?]])
         end
 
         addCommsReply(
@@ -169,7 +181,7 @@ function stationComms()
                     setCommsMessage("Not enough reputation.")
                     return
                 end
-                setCommsMessage("Aye, captain. We've deployed a squad with fighter escort to support the assault on Shangri-La.")
+                setCommsMessage("Aye, Captain. We've deployed a squad with fighter escort to support the assault on Shangri-La.")
                 if comms_target:getFaction() == "Human Navy" then
                     local transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
                     table.insert(troops_human, transport)
@@ -241,8 +253,8 @@ function supplyDialogue()
         missile_type = "Homing",
         price = 2,
         request = "Do you have spare homing missiles for us?",
-        reply_full = "Sorry, captain, but you are fully stocked with homing missiles.",
-        reply_filled = "We've replenished up your homing missile supply."
+        reply_full = "Sorry, Captain, but you are fully stocked with homing missiles.",
+        reply_filled = "We've replenished your homing missile supply."
     }
 
     addCommsReplySupply {
@@ -265,7 +277,7 @@ function supplyDialogue()
         missile_type = "EMP",
         price = 10,
         request = "Please re-stock our EMP missiles.",
-        reply_full = "All storage for EMP missiles is already full, captain.",
+        reply_full = "All storage for EMP missiles is already full, Captain.",
         reply_filled = "We've recalibrated the electronics and fitted you with all the EMP missiles you can carry."
     }
 
@@ -273,8 +285,8 @@ function supplyDialogue()
         missile_type = "HVLI",
         price = 2,
         request = "Can you restock us with HVLI?",
-        reply_full = "Sorry, captain, but you are fully stocked with HVLIs.",
-        reply_filled = "We've replenished up your HVLI supply."
+        reply_full = "Sorry, Captain, but you are fully stocked with HVLIs.",
+        reply_filled = "We've replenished your HVLI supply."
     }
 
     addCommsReply("Back to main menu", stationComms)
@@ -324,18 +336,24 @@ function update(delta)
     -- If either flagship is destroyed, its opponent gains a reputation bonus, and
     -- its opponent's faction gains victory points.
     if (not gallipoli:isValid()) then
-        shipyard_kraylor:sendCommsMessage(crusader, [[Well done, Crusader!
+        shipyard_kraylor:sendCommsMessage(
+            crusader,
+            [[Well done, Crusader!
 
-The pathetic Human flagship has been disabled. Go for the victory!]])
+The pathetic Human flagship has been disabled. Go for the victory!]]
+        )
         crusader:addReputationPoints(50)
         points_kraylor = points_kraylor + 5
         respawn_human = 0
     end
 
     if (not crusader:isValid()) then
-        shipyard_human:sendCommsMessage(gallipoli, [[Good job, Captain!
+        shipyard_human:sendCommsMessage(
+            gallipoli,
+            [[Good job, Captain!
 
-With the Kraylor flagship out of the way, we can land the final blow!]])
+With the Kraylor flagship out of the way, we can land the final blow!]]
+        )
         gallipoli:addReputationPoints(50)
         points_human = points_human + 5
         respawn_kraylor = 0
@@ -400,10 +418,10 @@ function spawnTransport()
     return ship
 end
 
---- Create `amount` of `object_type`, at a distance between `dist_min` and `dist_max`
--- around the center `(cx, cy)`.
-function create(object_type, amount, dist_min, dist_max, cx, cy)
-    for _ = 1, amount do
+--[[ Distribute a `number` of `object_type` objects at a random distance
+     between `dist_min` and `dist_max` around the coordinates `cx, cy`. ]] --
+function create(object_type, number, dist_min, dist_max, cx, cy)
+    for _ = 1, number do
         local phi = random(0, 2 * math.pi)
         local distance = random(dist_min, dist_max)
         local x = cx + math.cos(phi) * distance
