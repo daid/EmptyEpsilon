@@ -105,19 +105,33 @@ function commsShipEnemy(comms_source, comms_target)
         local taunt_success_reply = "Your bloodline will end here!"
         local taunt_failed_reply = "Your feeble threats are meaningless."
         if faction == "Kraylor" then
-            message = "Ktzzzsss.\nYou will DIEEee weaklingsss!"
+            message = [[Ktzzzsss.
+
+You will DIEEee weaklingsss!]]
         elseif faction == "Arlenians" then
-            message = "We wish you no harm, but will harm you if we must.\nEnd of transmission."
+            message = [[We wish you no harm, but will harm you if we must.
+
+End of transmission.]]
         elseif faction == "Exuari" then
             message = "Stay out of our way, or your death will amuse us extremely!"
         elseif faction == "Ghosts" then
-            message = "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."
+            message = [[One zero one.
+
+No binary communication detected. Switching to universal speech.
+
+Generating appropriate response for target from human language archives.
+
+:Do not cross us.:
+
+Communication halted.]]
             taunt_option = "EXECUTE: SELFDESTRUCT"
             taunt_success_reply = "Rogue command received. Targeting source."
             taunt_failed_reply = "External command ignored."
         elseif faction == "Ktlitans" then
-            message = "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."
-            taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+            message = [[The hive suffers no threats. Opposition to any of us is opposition to us all.
+
+Stand down or prepare to donate your corpses toward our nutrition.]]
+            taunt_option = "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
             taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
             taunt_failed_reply = "The hive has greater priorities than exterminating pests."
         else
@@ -149,9 +163,13 @@ end
 function commsShipNeutral(comms_source, comms_target)
     local message
     if comms_target.comms_data.friendlyness > 50 then
-        message = "Sorry, we have no time to chat with you.\nWe are on an important mission."
+        message = [[Sorry, we have no time to chat with you.
+
+We are on an important mission.]]
     else
-        message = "We have nothing for you.\nGood day."
+        message = [[We have nothing for you.
+
+Good day.]]
     end
     setCommsMessage(message)
     return true
