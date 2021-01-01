@@ -217,7 +217,7 @@ void CpuShip::orderFlyTowards(sf::Vector2f target)
     orders = AI_FlyTowards;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {targetx},").format({{"targetx", string(target.x)}}) + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
 }
 
 void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
@@ -225,7 +225,7 @@ void CpuShip::orderFlyTowardsBlind(sf::Vector2f target)
     orders = AI_FlyTowardsBlind;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {targetx},").format({{"targetx", string(target.x)}}) + string(target.y) + ".");
+    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
 }
 
 void CpuShip::orderAttack(P<SpaceObject> object)
