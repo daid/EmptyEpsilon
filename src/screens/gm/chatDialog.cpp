@@ -57,7 +57,7 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
     case CS_ChannelBroken:
     case CS_ChannelClosed:
         chat_text->setText(tr("chatGM", "Channel not open, enter name to hail as to hail target."));
-        disableComms(player->getCallSign() + tr("chatGM", " - Inactive"));
+        disableComms(tr("chatGM", "{callsign} - Inactive").format({{"callsign", player->getCallSign()}}));
         break;
     case CS_OpeningChannel:
     case CS_BeingHailed:
