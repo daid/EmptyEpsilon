@@ -112,7 +112,7 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         }
     } else {
         progress_bar->setValue(game->getProgress());
-        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}})
+        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}))
     }
     if (target_system != "")
     {
@@ -138,7 +138,7 @@ void GuiHackingDialog::onMiniGameComplete(bool success)
     reset_time = engine->getElapsedTime() + auto_reset_time;
     game->disable();
     last_game_success = success;
-    status_label->setText(success ? tr("Hacking SUCCESS!" : "Hacking FAILURE!"));
+    status_label->setText(success ? tr("Hacking SUCCESS!") : tr("Hacking FAILURE!"));
 }
 
 void GuiHackingDialog::getNewGame() {
