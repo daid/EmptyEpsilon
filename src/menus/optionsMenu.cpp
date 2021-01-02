@@ -1,3 +1,5 @@
+#include <regex>
+
 #include <i18n.h>
 #include "engine.h"
 #include "optionsMenu.h"
@@ -162,6 +164,39 @@ OptionsMenu::OptionsMenu()
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Language.
+    // Get list of locales from translation files in `resources/locale`.
+    std::vector<string> locale_filenames = findResources("locale/*.po");;
+    std::vector<string> locale_options = {};
+    // Match most possible short locale codings; ignore scenario and tutorial files.
+    std::regex locale_regex (R"(locale/(\w\w\w?|\w\w\w?_\w\w)\.po)");
+
+    // If locale files are listed...
+    if (locale_filenames.size() > 0)
+    {
+        // Check each for a match to the locale file pattern.
+        for (auto filename : locale_filenames)
+        {
+            std::smatch match;
+
+            if (std::regex_match(filename, match, locale_regex))
+            {
+                // Push the group match, which should be the locale shortcode,
+                // to the options list without validation.
+                // If there's a zzz_AA.po file, it'll show up as zzz_AA.
+                locale_options.push_back(static_cast<string>(match[1]));
+            }
+        }
+    }
+    else
+    {
+        // If no locale files are found, throw an error and default locale to en.
+        LOG(ERROR) << "No locale files found. Defaulting to en.";
+        locale_options.push_back("en");
+    }
+
+    std::sort(locale_options.begin(), locale_options.end());
+
+    // Populate the selector with the locale list.
     (new GuiLabel(interface_page, "LANGUAGE", tr("Language"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     language_selection = new GuiSelector(interface_page, "LANGUAGE_SELECTION", [](int index, string value)
     {
@@ -169,7 +204,7 @@ OptionsMenu::OptionsMenu()
         i18n::reset();
         i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     });
-    language_selection->setOptions({"cz", "de", "en", "fr", "it"})->setSize(GuiElement::GuiSizeMax, 50);
+    language_selection->setOptions(locale_options)->setSize(GuiElement::GuiSizeMax, 50);
     language_selection->setSelectionIndex(language_selection->indexByValue(PreferencesManager::get("language", "en")));
     (new GuiLabel(interface_page, "LANGUAGE_INSTRUCTIONS", tr("Exit options to apply"), 30))->setSize(GuiElement::GuiSizeMax, 50);
 
