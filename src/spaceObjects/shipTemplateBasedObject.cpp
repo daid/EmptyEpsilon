@@ -306,7 +306,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
             if (info.instigator)
             {
                 on_taking_damage.call(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator), 
-                                        info.type, frequencyToDisplayNumber(info.frequency), 
+                                        info.type, info.frequency, 
                                         info.system_target, 
                                         shield_damage, 
                                         damage_amount,
@@ -424,9 +424,4 @@ string ShipTemplateBasedObject::getShieldDataString()
         data += string(int(shield_level[n]));
     }
     return data;
-}
-
-int frequencyToDisplayNumber(int frequency)
-{
-    return 400 + (frequency * 20);
 }

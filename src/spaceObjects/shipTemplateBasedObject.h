@@ -110,6 +110,4 @@ public:
 
 };
 
-int frequencyToDisplayNumber(int frequency);
-
 #endif//SHIP_TEMPLATE_BASED_OBJECT_H

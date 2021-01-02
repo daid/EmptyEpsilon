@@ -1523,6 +1523,23 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
     return f1;
 }
 
+static int frequencyToDisplayNumber(int frequency)
+{
+    return 400 + (frequency * 20);
+}
+
+
+static int frequencyAsDisplayNumber(lua_State* L)
+{
+    int freq = luaL_checkinteger(L, 1);
+    return convert<int>::returnType(L, frequencyToDisplayNumber(freq));
+}   
+/// usage : frequencyAsDisplayNumber(frequency)
+/// Converts a frequency returned by other scripting function.
+/// It returns the frequency as displayed on player's interface in THz (without appending "THz")
+REGISTER_SCRIPT_FUNCTION(frequencyAsDisplayNumber);
+
+
 string frequencyToString(int frequency)
 {
     return string(frequencyToDisplayNumber(frequency)) + "THz";
