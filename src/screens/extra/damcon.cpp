@@ -17,7 +17,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
     GuiAutoLayout* system_health_layout = new GuiAutoLayout(this, "DAMCON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     system_health_layout->setPosition(0, 0, ACenterLeft)->setSize(300, 600);
 
-    hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8, "Hull", "0%");
+    hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8, tr("damagecontrol", "Hull"), "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40);
 
     for(unsigned int n=0; n<SYS_COUNT; n++)
