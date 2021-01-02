@@ -210,6 +210,11 @@ P<ScienceDatabase> ScienceDatabase::queryScienceDatabase(string name, int32_t pa
     return nullptr;
 }
 
+bool ScienceDatabase::hasContent()
+{
+    return long_description != "" || model_data_name != "" || image != "" || keyValuePairs.size() > 0;
+}
+
 static int queryScienceDatabase(lua_State* L)
 {
     P<ScienceDatabase> entry = nullptr;

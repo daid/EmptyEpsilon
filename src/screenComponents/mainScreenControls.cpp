@@ -98,6 +98,20 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     }));
     long_range_button = buttons.back();
 
+     // If the player has control over database, enable the database view option in the main screen controls.
+    if (my_player_info->crew_position[scienceOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot] || my_player_info->crew_position[databaseView])
+    {
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_DATABASE_BUTTON", "Database", [this]()
+        {
+            if (my_spaceship)
+            {
+                my_spaceship->commandMainScreenSetting(MSS_Database);
+            }
+            closePopup();
+        }));
+        database_button = buttons.back();
+    }
+
     // If the player has control over comms, they can toggle the comms overlay
     // on the main screen.
     if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])

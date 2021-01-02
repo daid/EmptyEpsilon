@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "mainScreen.h"
@@ -34,6 +35,12 @@ ScreenMainScreen::ScreenMainScreen()
     long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    database_view = new DatabaseViewComponent(this, 0, false);
+    database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    database_no_entry_text = new GuiLabel(this, "DATABASE_NO_ENTRY_TEXT", tr("main_screen", "No database entry linked"), 48);
+    database_no_entry_text->setPosition(0, -100, ACenter)->setSize(400, 200);
+    database_no_entry_text->hide();
+
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
 
@@ -91,17 +98,36 @@ void ScreenMainScreen::update(float delta)
             viewport->show();
             tactical_radar->hide();
             long_range_radar->hide();
+            database_view->hide();
+            database_no_entry_text->hide();
             break;
         case MSS_Tactical:
             viewport->hide();
             tactical_radar->show();
             long_range_radar->hide();
+            database_view->hide();
+            database_no_entry_text->hide();
             break;
         case MSS_LongRange:
             viewport->hide();
             tactical_radar->hide();
             long_range_radar->show();
+            database_view->hide();
+            database_no_entry_text->hide();
             break;
+        case MSS_Database:
+            viewport->hide();
+            tactical_radar->hide();
+            long_range_radar->hide();
+
+            if (database_view->findAndDisplayEntry(my_spaceship->shared_science_database_id))
+            {
+                database_view->show();
+                database_no_entry_text->hide();
+            } else {
+                database_view->hide();
+                database_no_entry_text->show();
+            }
         }
 
         switch(my_spaceship->main_screen_overlay)
@@ -161,14 +187,23 @@ void ScreenMainScreen::onClick(sf::Vector2f mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else
+                my_spaceship->commandMainScreenSetting(MSS_Database);
             break;
         case MSS_Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            else
+                my_spaceship->commandMainScreenSetting(MSS_Database);
             break;
         case MSS_LongRange:
+            my_spaceship->commandMainScreenSetting(MSS_Database);
+            break;
+        case MSS_Database:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            else if (gameGlobalInfo->allow_main_screen_long_range_radar)
+                my_spaceship->commandMainScreenSetting(MSS_LongRange);
             break;
         }
     }
@@ -192,6 +227,8 @@ void ScreenMainScreen::onHotkey(const HotkeyResult& key)
             my_spaceship->commandMainScreenSetting(MSS_Tactical);
         else if (key.hotkey == "LONG_RANGE_RADAR")
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        else if (key.hotkey == "VIEW_DATABASE")
+            my_spaceship->commandMainScreenSetting(MSS_Database);
         else if (key.hotkey == "FIRST_PERSON")
             viewport->first_person = !viewport->first_person;
     }

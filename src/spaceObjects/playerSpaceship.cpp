@@ -113,6 +113,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetDatabaseLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
     /// Return the number of Engineering repair crews on the ship.
@@ -258,6 +259,7 @@ static const int16_t CMD_SET_MAIN_SCREEN_OVERLAY = 0x0027;
 static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
+static const int16_t CMD_SET_DATABASE_LINK = 0x002B;
 
 string alertLevelToString(EAlertLevel level)
 {
@@ -349,6 +351,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
+    registerMemberReplication(&shared_science_database_id);
     registerMemberReplication(&control_code);
     registerMemberReplication(&long_range_radar_range);
     registerMemberReplication(&short_range_radar_range);
@@ -1626,6 +1629,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             packet >> linked_science_probe_id;
         }
         break;
+    case CMD_SET_DATABASE_LINK:
+        {
+            packet >> shared_science_database_id;
+        }
+        break;
     case CMD_HACKING_FINISHED:
         {
             uint32_t id;
@@ -1979,6 +1987,12 @@ void PlayerSpaceship::commandCustomFunction(string name)
 void PlayerSpaceship::commandSetScienceLink(int32_t id){
     sf::Packet packet;
     packet << CMD_SET_SCIENCE_LINK << id;
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandSetDatabaseLink(int32_t id){
+    sf::Packet packet;
+    packet << CMD_SET_DATABASE_LINK << id;
     sendClientCommand(packet);
 }
 

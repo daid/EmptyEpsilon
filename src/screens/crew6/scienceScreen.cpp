@@ -169,7 +169,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_description->setTextSize(28)->setMargins(20, 20, 0, 0)->setSize(GuiElement::GuiSizeMax, 400)->hide();
 
     // Prep and hide the database view.
-    database_view = new DatabaseViewComponent(this);
+    database_view = new DatabaseViewComponent(this, 150, true);
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Probe view button
@@ -213,6 +213,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         database_view->setVisible(index == 1);
     });
     view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+
+    link_to_main = new GuiLinkScienceButton(this, "LINK_TO_MAIN", tr("button", "Link to Main"), database_view);
+    link_to_main->setPosition(20, -120, ABottomLeft)->setSize(200, 50)->disable();
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");

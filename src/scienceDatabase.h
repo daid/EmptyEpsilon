@@ -100,6 +100,8 @@ public:
     bool hasEntries();
     PVector<ScienceDatabase> getEntries();
     static P<ScienceDatabase> queryScienceDatabase(string name, int32_t parent_id);
+
+    bool hasContent();
 private:
     string normalized_name; // used for sorting and querying
     string directionLabel(float direction);
