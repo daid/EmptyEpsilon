@@ -1221,20 +1221,6 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
     return weapon_tube[index].getLoadType();
 }
 
-EMissileSizes SpaceShip::getWeaponTubeSize(int index)
-{
-    if (index < 0 || index >= weapon_tube_count)
-        return MS_Small;
-    return weapon_tube[index].getSize();
-}
-
-void SpaceShip::setWeaponTubeSize(int index, EMissileSizes size)
-{
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].setSize(size);
-}
-
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
 {
     if (index < 0 || index >= weapon_tube_count)
@@ -1267,21 +1253,21 @@ void SpaceShip::setWeaponTubeDirection(int index, float direction)
 
 void SpaceShip::setTubeSize(int index, EMissileSizes size)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return;
     weapon_tube[index].setSize(size);
 }
 
 EMissileSizes SpaceShip::getTubeSize(int index)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return MS_Medium;
     return weapon_tube[index].getSize();
 }
 
 float SpaceShip::getTubeLoadTime(int index)
 {
-    if (index < 0 || index >= max_weapon_tubes) {
+    if (index < 0 || index >= weapon_tube_count) {
         return 0;
     }
     return weapon_tube[index].getLoadTimeConfig();
@@ -1289,7 +1275,7 @@ float SpaceShip::getTubeLoadTime(int index)
 
 void SpaceShip::setTubeLoadTime(int index, float time)
 {
-    if (index < 0 || index >= max_weapon_tubes) {
+    if (index < 0 || index >= weapon_tube_count) {
         return;
     }
     weapon_tube[index].setLoadTimeConfig(time);
