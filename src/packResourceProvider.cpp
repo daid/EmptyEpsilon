@@ -71,8 +71,12 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 {
 #ifdef _WIN32
     WIN32_FIND_DATAA data;
-    assert(directory.endswith("/"));
-    HANDLE handle = FindFirstFileA((directory + "*").c_str(), &data);
+    auto search_root = directory;
+    if (!search_root.endswith("/"))
+    {
+        search_root += "/";
+    }
+    HANDLE handle = FindFirstFileA((search_root + "*").c_str(), &data);
     if (handle == INVALID_HANDLE_VALUE)
         return;
 
