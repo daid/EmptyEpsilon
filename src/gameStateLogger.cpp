@@ -533,7 +533,12 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
 void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile)
 {
     json.write("category_modifier", missile->category_modifier);
-    json.write("owner_id", missile->owner->getMultiplayerId());
+
+    // A missile's owner might not exist when we log data. Skip the owner_id if so.
+    if (missile->owner)
+    {
+        json.write("owner_id", missile->owner->getMultiplayerId());
+    }
 
     // Don't bother writing a target ID if it's unguided or targetless.
     if (missile->target_id != -1)
