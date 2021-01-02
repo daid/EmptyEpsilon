@@ -61,7 +61,7 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
         break;
     case CS_OpeningChannel:
     case CS_BeingHailed:
-        disableComms(player->getCallSign() + tr("chatGM", " - Opening communications with {chat}").format({{"chat", player->getCommsTargetName()}}));
+        disableComms(tr("chatGM", "{callsign} - Opening communications with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_BeingHailedByGM:
         disableComms(player->getCallSign() + tr("chatGM", " - Hailing as {chat}").format({{"chat", player->getCommsTargetName()}}));
