@@ -232,17 +232,12 @@ P<ScienceDatabase> ScienceDatabase::queryScienceDatabase(string name, int32_t pa
 static int queryScienceDatabaseById(lua_State* L)
 {
     P<ScienceDatabase> entry = nullptr;
+    entry = ScienceDatabase::getEntryById(luaL_checknumber(L, 1));
 
-    for(int i = 1; i <= lua_gettop(L); i++)
+    if (!entry)
     {
-        string segment = string(luaL_checkstring(L, i));
-        entry = ScienceDatabase::getEntryById(segment.toInt());
-
-        if (!entry)
-        {
-            // No entry with this multiplayer_id.
-            return 0;
-        }
+        // No entry with this multiplayer_id.
+        return 0;
     }
 
     return convert<P<ScienceDatabase> >::returnType(L, entry);
