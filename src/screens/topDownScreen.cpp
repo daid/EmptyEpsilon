@@ -28,7 +28,7 @@ TopDownScreen::TopDownScreen()
     camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock onto a player ship.
-    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", "Lock camera on ship", [this](bool value) {});
+    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [this](bool value) {});
     camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
