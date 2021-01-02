@@ -176,12 +176,12 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             }
         }
 
-        energy_display->setValue(toNearbyInt(my_spaceship->energy_level) + " (" + tr("{energy}/min").format({{"energy", toNearbyInt(average_energy_delta * 60.0f)}}) + ")");
+        energy_display->setValue(toNearbyIntString(my_spaceship->energy_level) + " (" + tr("{energy}/min").format({{"energy", toNearbyIntString(average_energy_delta * 60.0f)}}) + ")");
         if (my_spaceship->energy_level < 100)
             energy_display->setColor(sf::Color::Red);
         else
             energy_display->setColor(sf::Color::White);
-        hull_display->setValue(toNearbyInt(100 * my_spaceship->hull_strength / my_spaceship->hull_max) + "%");
+        hull_display->setValue(toNearbyIntString(100 * my_spaceship->hull_strength / my_spaceship->hull_max) + "%");
         if (my_spaceship->hull_strength < my_spaceship->hull_max / 4.0f)
             hull_display->setColor(sf::Color::Red);
         else
@@ -200,7 +200,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         } else {
             rear_shield_display->hide();
         }
-        coolant_display->setValue(toNearbyInt(my_spaceship->max_coolant * 10) + "%");
+        coolant_display->setValue(toNearbyIntString(my_spaceship->max_coolant * 10) + "%");
 
         for(int n=0; n<SYS_COUNT; n++)
         {
@@ -212,7 +212,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 info.damage_bar->setValue(-health)->setColor(sf::Color(128, 32, 32, 192));
             else
                 info.damage_bar->setValue(health)->setColor(sf::Color(64, 128 * health, 64 * health, 192));
-            info.damage_label->setText(toNearbyInt(health * 100) + "%");
+            info.damage_label->setText(toNearbyIntString(health * 100) + "%");
             float health_max = my_spaceship->systems[n].health_max;
             if (health_max < 1.0)
                 info.damage_icon->show();
@@ -240,9 +240,9 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         if (selected_system != SYS_None)
         {
             ShipSystem& system = my_spaceship->systems[selected_system];
-            power_label->setText("Power: " + toNearbyInt(system.power_level * 100) + "%/" + toNearbyInt(system.power_request * 100) + "%");
+            power_label->setText("Power: " + toNearbyIntString(system.power_level * 100) + "%/" + toNearbyIntString(system.power_request * 100) + "%");
             power_slider->setValue(system.power_request);
-            coolant_label->setText("Coolant: " + toNearbyInt(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100) + "%/" + toNearbyInt(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100) + "%");
+            coolant_label->setText("Coolant: " + toNearbyIntString(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100) + "%/" + toNearbyIntString(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100) + "%");
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
             coolant_slider->setValue(std::min(system.coolant_request, my_spaceship->max_coolant));
 
@@ -250,7 +250,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
             float health_max = my_spaceship->getSystemHealthMax(selected_system);
             if (health_max < 1.0)
-                addSystemEffect("Maximal health", toNearbyInt(health_max * 100) + "%");
+                addSystemEffect("Maximal health", toNearbyIntString(health_max * 100) + "%");
             switch(selected_system)
             {
             case SYS_Reactor:
@@ -259,64 +259,64 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1)}}));
                 break;
             case SYS_BeamWeapons:
-                addSystemEffect(tr("Firing rate"), toNearbyInt(effectiveness * 100) + "%");
+                addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100) + "%");
                 // If the ship has a turret, also note that the rotation rate
                 // is affected.
                 for(int n = 0; n < max_beam_weapons; n++)
                 {
                     if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
                     {
-                        addSystemEffect("Turret rotation rate", toNearbyInt(effectiveness * 100) + "%");
+                        addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
                         break;
                     }
                 }
                 break;
             case SYS_MissileSystem:
-                addSystemEffect(tr("missile","Reload rate"), toNearbyInt(effectiveness * 100) + "%");
+                addSystemEffect(tr("missile","Reload rate"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
             case SYS_Maneuver:
-                addSystemEffect(tr("Turning speed"), toNearbyInt(effectiveness * 100) + "%");
+                addSystemEffect(tr("Turning speed"), toNearbyIntString(effectiveness * 100) + "%");
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
-                    addSystemEffect(tr("Combat recharge rate"), toNearbyInt(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100) + "%");
+                    addSystemEffect(tr("Combat recharge rate"), toNearbyIntString(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100) + "%");
                 break;
             case SYS_Impulse:
-                addSystemEffect(tr("Impulse speed"), toNearbyInt(effectiveness * 100) + "%");
+                addSystemEffect(tr("Impulse speed"), toNearbyIntString(effectiveness * 100) + "%");
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
-                    addSystemEffect(tr("Combat recharge rate"), toNearbyInt(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100) + "%");
+                    addSystemEffect(tr("Combat recharge rate"), toNearbyIntString(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100) + "%");
                 break;
             case SYS_Warp:
-                addSystemEffect(tr("Warp drive speed"), toNearbyInt(effectiveness * 100) + "%");
+                addSystemEffect(tr("Warp drive speed"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
             case SYS_JumpDrive:
-                addSystemEffect(tr("Jump drive recharge rate"), toNearbyInt(my_spaceship->getJumpDriveRechargeRate() * 100) + "%");
-                addSystemEffect(tr("Jump drive jump speed"), toNearbyInt(effectiveness * 100) + "%");
+                addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(my_spaceship->getJumpDriveRechargeRate() * 100) + "%");
+                addSystemEffect(tr("Jump drive jump speed"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
             case SYS_FrontShield:
                 if (gameGlobalInfo->use_beam_shield_frequencies)
-                    addSystemEffect(tr("shields","Calibration speed"), toNearbyInt((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100) + "%");
-                addSystemEffect(tr("shields","Charge rate"), toNearbyInt(effectiveness * 100) + "%");
+                    addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100) + "%");
+                addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
                     float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, 0);
                     if (damage_negate < 0.0)
-                        addSystemEffect(tr("Extra damage"), toNearbyInt(-damage_negate * 100) + "%");
+                        addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                     else
-                        addSystemEffect(tr("Damage negate"), toNearbyInt(damage_negate * 100) + "%");
+                        addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
                 }
                 break;
             case SYS_RearShield:
                 if (gameGlobalInfo->use_beam_shield_frequencies)
-                    addSystemEffect(tr("shields","Calibration speed"), toNearbyInt((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100) + "%");
-                addSystemEffect(tr("shields","Charge rate"), toNearbyInt(effectiveness * 100) + "%");
+                    addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100) + "%");
+                addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
                 {
                     DamageInfo di;
                     di.type = DT_Kinetic;
                     float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
                     if (damage_negate < 0.0)
-                        addSystemEffect(tr("Extra damage"), toNearbyInt(-damage_negate * 100) + "%");
+                        addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                     else
-                        addSystemEffect(tr("Damage negate"), toNearbyInt(damage_negate * 100) + "%");
+                        addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
                 }
                 break;
             default:
@@ -476,7 +476,7 @@ void EngineeringScreen::addSystemEffect(string key, string value)
     system_effects_index++;
 }
 
-string EngineeringScreen::toNearbyInt(float value)
+string EngineeringScreen::toNearbyIntString(float value)
 {
     return string(int(nearbyint(value)));
 }
