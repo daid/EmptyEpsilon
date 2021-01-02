@@ -23,4 +23,6 @@ extern PostProcessor* warpPostProcessor;
 void returnToMainMenu();
 void returnToShipSelection();
 
+std::string GetCurrentWorkingDir();
+
 #endif//MAIN_H
