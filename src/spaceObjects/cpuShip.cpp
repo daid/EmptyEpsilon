@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include <limits>
 
 #include "ai/aiFactory.h"
@@ -283,6 +284,25 @@ string CpuShip::getExportLine()
 }
 
 string getAIOrderString(EAIOrder order)
+{
+    switch(order)
+    {
+    case AI_Idle: return "Idle";
+    case AI_Roaming: return "Roaming";
+    case AI_Retreat: return "Retreat";
+    case AI_StandGround: return "Stand Ground";
+    case AI_DefendLocation: return "Defend Location";
+    case AI_DefendTarget: return "Defend Target";
+    case AI_FlyFormation: return "Fly in formation";
+    case AI_FlyTowards: return "Fly towards";
+    case AI_FlyTowardsBlind: return "Fly towards (ignore all)";
+    case AI_Attack: return "Attack";
+    case AI_Dock: return "Dock";
+    }
+    return "Unknown";
+}
+
+string getLocaleAIOrderString(EAIOrder order)
 {
     switch(order)
     {
