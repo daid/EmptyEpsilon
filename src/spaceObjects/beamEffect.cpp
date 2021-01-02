@@ -127,7 +127,7 @@ void BeamEffect::update(float delta)
     {
         float volume = 50.0f + (beam_fire_sound_power * 75.0f);
         float pitch = (1.0f / beam_fire_sound_power) + random(-0.1f, 0.1f);
-        soundManager->playSound(beam_fire_sound, source->getPosition(), 200.0, 1.0, pitch, volume);
+        soundManager->playSound(beam_fire_sound, source->getPosition(), 400.0, 60.0, pitch, volume);
         beam_sound_played = true;
     }
 
