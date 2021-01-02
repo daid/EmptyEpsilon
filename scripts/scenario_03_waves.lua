@@ -247,7 +247,7 @@ function update(delta)
     -- Continue ...
     if enemy_count == 0 then
         spawnWaveDelay = 15.0
-        globalMessage(_("Wave cleared!")
+        globalMessage(_("Wave cleared!"))
         getPlayerShip(-1):addToShipLog("Wave " .. waveNumber .. " cleared.", "green")
     end
     -- ... or lose
