@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "globalMessageEntryView.h"
 #include "GMActions.h"
 
