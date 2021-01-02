@@ -1,4 +1,5 @@
 #include "powerManagement.h"
+#include "missileWeaponData.h"
 
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"

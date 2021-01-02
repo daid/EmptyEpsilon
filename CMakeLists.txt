@@ -46,8 +46,12 @@ if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     endif()
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
+if(MSVC)
+	add_definitions(-DNOMINMAX)
+else()
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
+endif()
 
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)

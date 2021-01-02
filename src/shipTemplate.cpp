@@ -598,6 +598,4 @@ ShipTemplate::TemplateType ShipTemplate::getType()
     return type;
 }
 
-#ifndef _MSC_VER
 #include "shipTemplate.hpp"
-#endif /* _MSC_VER */
