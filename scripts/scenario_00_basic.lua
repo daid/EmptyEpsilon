@@ -190,7 +190,7 @@ function init()
         ["Empty"] = 0
     }
     local enemy_group_count = counts[getScenarioVariation()]
-    assert(enemy_group_count, "unknown variation, could not set enemy_group_count")
+    assert(enemy_group_count, "unknown variation " .. getScenarioVariation() .. " could not set enemy_group_count")
 
     -- If not in the Empty variation, spawn the corresponding number of random
     -- enemy waves at distributed random headings and semi-random distances
