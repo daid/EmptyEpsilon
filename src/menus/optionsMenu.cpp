@@ -137,6 +137,9 @@ OptionsMenu::OptionsMenu()
     impulse_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Interface options
+    // Radar rotation state.
+    (new GuiLabel(interface_page, "RADAR_LOCK", tr("Lock Radar Rotation"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+
     // Helms rotation lock.
     (new GuiToggleButton(interface_page, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
     {
@@ -157,6 +160,18 @@ OptionsMenu::OptionsMenu()
         PreferencesManager::set("science_radar_lock", value ? "1" : "");
         PreferencesManager::set("operations_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Language.
+    (new GuiLabel(interface_page, "LANGUAGE", tr("Language"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    language_selection = new GuiSelector(interface_page, "LANGUAGE_SELECTION", [](int index, string value)
+    {
+        PreferencesManager::set("language", string(value));
+        i18n::reset();
+        i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    });
+    language_selection->setOptions({"cz", "de", "en", "fr", "it"})->setSize(GuiElement::GuiSizeMax, 50);
+    language_selection->setSelectionIndex(language_selection->indexByValue(PreferencesManager::get("language", "en")));
+    (new GuiLabel(interface_page, "LANGUAGE_INSTRUCTIONS", tr("Exit options to apply"), 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.

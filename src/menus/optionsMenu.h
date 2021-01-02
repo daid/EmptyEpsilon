@@ -23,6 +23,7 @@ private:
     GuiLabel* sound_volume_overlay_label;
     GuiLabel* music_volume_overlay_label;
     GuiLabel* impulse_volume_overlay_label;
+    GuiSelector* language_selection;
 public:
     OptionsMenu();
 
