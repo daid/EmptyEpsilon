@@ -61,20 +61,20 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
         break;
     case CS_OpeningChannel:
     case CS_BeingHailed:
-        disableComms(player->getCallSign() + tr("chatGM", " - Opening communications with {chat}").format({{"chat", player->getCommsTargetName()}}));
+        disableComms(tr("chatGM", "{callsign} - Opening communications with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_BeingHailedByGM:
-        disableComms(player->getCallSign() + tr("chatGM", " - Hailing as {chat}").format({{"chat", player->getCommsTargetName()}}));
+        disableComms(tr("chatGM", "{callsign} - Hailing as {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_ChannelOpen:
     case CS_ChannelOpenPlayer:
-        disableComms(player->getCallSign() + tr("chatGM", " - Communicating with {chat}").format({{"chat", player->getCommsTargetName()}}));
+        disableComms(tr("chatGM", "{callsign} - Communicating with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         break;
     case CS_ChannelOpenGM:
         if (notification)
-            setTitle(tr("chatGM", "** {chat} - Communicating as ").format({{"chat", player->getCallSign()}}) + player->getCommsTargetName() + "**");
+            setTitle(tr("chatGM", "**{callsign} - Communicating as {target}**").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         else
-            setTitle(player->getCallSign() + tr("chatGM", " - Communicating as {chat}").format({{"chat", player->getCommsTargetName()}}));
+            setTitle(tr("chatGM", "{callsign} - Communicating as {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
         chat_text->enable();
         text_entry->enable();
         if (chat_text->getText() != player->getCommsIncommingMessage())
