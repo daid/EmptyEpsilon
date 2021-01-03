@@ -154,6 +154,9 @@ void GameGlobalInfo::addScript(P<Script> script)
 
 void GameGlobalInfo::reset()
 {
+    if (state_logger)
+        state_logger->destroy();
+
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
@@ -207,8 +210,6 @@ void GameGlobalInfo::destroy()
 {
     reset();
     MultiplayerObject::destroy();
-    if (state_logger)
-        state_logger->destroy();
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
