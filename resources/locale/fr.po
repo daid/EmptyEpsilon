@@ -73,12 +73,12 @@ msgid ""
 "Atlantis X23 is fitted with a jump drive, it can also serve as an "
 "intersystem patrol craft."
 msgstr ""
-"Le Atlantis X23 est le plus petit modele de destroyer existant. Il associe "
+"L' Atlantis X23 est le plus petit modele de destroyer existant. Il associe "
 "la taille d'une fregate a la puissance de feu d'une corvette, ce qui en fait "
 "un excellent vaisseau d'escorte pour defendre de plus grands vaisseaux "
 "contre de multiples appareils ennemis de classe inferieure. Muni d'un moteur "
-"de saut, le Atlantis X23 est egalement tres adapte aux missions de "
-"patrouille de grande envergure."
+"de saut, l' Atlantis X23 est egalement tres adapte aux missions de "
+"patrouille longue distance."
 
 #: scripts/shipTemplates_Corvette.lua:34
 msgid ""
@@ -311,7 +311,7 @@ msgstr "Seulement LAN"
 
 #: src/menus/serverCreationScreen.cpp:81 src/menus/serverCreationScreen.cpp:87
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
 #: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:90
 msgid "Player ship options"
@@ -386,13 +386,13 @@ msgstr "Simple"
 #: src/menus/serverCreationScreen.cpp:122
 msgctxt "scanning"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 #: src/menus/serverCreationScreen.cpp:116
 #: src/menus/serverCreationScreen.cpp:122
 msgctxt "scanning"
 msgid "Advanced"
-msgstr "Avance"
+msgstr "Avancee"
 
 #: src/menus/serverCreationScreen.cpp:121
 #: src/menus/serverCreationScreen.cpp:127
@@ -409,7 +409,7 @@ msgstr "Simple"
 #: src/menus/serverCreationScreen.cpp:130
 msgctxt "hacking"
 msgid "Normal"
-msgstr "Normal"
+msgstr "Normale"
 
 #: src/menus/serverCreationScreen.cpp:124
 #: src/menus/serverCreationScreen.cpp:130
@@ -568,7 +568,7 @@ msgstr "Liquide de refroidissement"
 #: src/screens/crew6/engineeringScreen.cpp:179
 #: src/screens/crew6/engineeringScreen.cpp:259
 msgid "{energy}/min"
-msgstr ""
+msgstr "{energy}/min"
 
 #: src/screens/crew6/engineeringScreen.cpp:231
 #: src/screens/crew6/engineeringScreen.cpp:232
@@ -690,13 +690,13 @@ msgstr "Vit. relative"
 #: src/screens/crew6/scienceScreen.cpp:100 src/screens/crew6/relayScreen.cpp:83
 #: src/screens/crew6/scienceScreen.cpp:102 src/screens/crew6/relayScreen.cpp:84
 msgid "Faction"
-msgstr ""
+msgstr "Faction"
 
 #: src/screens/crew6/scienceScreen.cpp:102
 #: src/screens/crew6/scienceScreen.cpp:104
 msgctxt "science"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: src/screens/crew6/scienceScreen.cpp:104
 #: src/screens/crew6/scienceScreen.cpp:106
@@ -728,7 +728,7 @@ msgstr "Zoom : {zoom}x"
 #: src/screens/crew6/scienceScreen.cpp:215
 msgctxt "button"
 msgid "Radar"
-msgstr ""
+msgstr "Radar"
 
 #: src/screens/crew6/scienceScreen.cpp:213
 #: src/screens/crew6/scienceScreen.cpp:215
@@ -870,7 +870,6 @@ msgstr "Code [{letter}]: {self_destruct_code}"
 msgctxt "selfdestruct"
 msgid "Enter [{letter}]"
 msgstr "Entrer [{letter}]"
-
 
 #: src/screenComponents/dockingButton.cpp:37
 #: src/screenComponents/dockingButton.cpp:42
@@ -1891,7 +1890,7 @@ msgstr "Ingenierie+"
 #: src/playerInfo.cpp:229
 msgctxt "station"
 msgid "Operations"
-msgstr ""
+msgstr "Operations"
 
 #: src/playerInfo.cpp:230
 msgctxt "station"
@@ -1930,15 +1929,15 @@ msgstr "Journal de bord"
 
 #: src/shipTemplate.cpp:123
 msgid "No class"
-msgstr ""
+msgstr "Aucune"
 
 #: src/shipTemplate.cpp:124
 msgid "No sub-class"
-msgstr ""
+msgstr "Aucune"
 
 #: src/screens/crew6/relayScreen.cpp:147
 msgid "Reputation"
-msgstr ""
+msgstr "Reputation actuelle :"
 
 #: src/screens/crew6/relayScreen.cpp:151
 #: src/screens/gm/gameMasterScreen.cpp:139
@@ -1948,7 +1947,7 @@ msgstr "Temps ecoule"
 #: src/screens/gm/gameMasterScreen.cpp:37
 msgctxt "button"
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: src/screens/gm/gameMasterScreen.cpp:45
 msgctxt "button"
@@ -2017,7 +2016,7 @@ msgstr "Fermer"
 
 #: src/screens/gm/gameMasterScreen.cpp:306
 msgid "*mixed*"
-msgstr ""
+msgstr "*varie*"
 
 #: src/screens/gm/tweak.cpp:32
 msgctxt "tab"
@@ -2042,12 +2041,12 @@ msgstr "Boucliers"
 #: src/screens/gm/tweak.cpp:55
 msgctxt "tab"
 msgid "Tubes"
-msgstr ""
+msgstr "Tubes"
 
 #: src/screens/gm/tweak.cpp:57
 msgctxt "tab"
 msgid "Missiles"
-msgstr ""
+msgstr "Missiles"
 
 #: src/screens/gm/tweak.cpp:59
 msgctxt "tab"
@@ -2245,7 +2244,7 @@ msgstr "Postes occupes : "
 #: src/screens/gm/tweak.cpp:662
 msgctxt "position"
 msgid "Occupied"
-msgstr ""
+msgstr "Occupe"
 
 #: src/screens/gm/tweak.cpp:725
 #, Doesn't work but works with langage de
@@ -2345,12 +2344,12 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:364
 msgctxt "class"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Cuirasse"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgctxt "subclass"
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #: scripts/shipTemplates_Dreadnaught.lua:11
 msgid ""
@@ -2390,11 +2389,11 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:261 scripts/shipTemplates_OLD.lua:272
 #: scripts/shipTemplates_OLD.lua:471
 msgid "Frigate"
-msgstr ""
+msgstr "Fregate"
 
 #: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:236
 msgid "Cruiser"
-msgstr ""
+msgstr "Croiser"
 
 #: scripts/shipTemplates_Frigates.lua:16
 msgid ""
@@ -3115,7 +3114,7 @@ msgstr ""
 
 #: scripts/science_db.lua:9
 msgid "Nebula"
-msgstr "Nebuleuses"
+msgstr "Nebuleuse"
 
 #: scripts/science_db.lua:10
 msgid ""
@@ -3269,7 +3268,7 @@ msgstr "Rafale"
 
 #: scripts/science_db.lua:29
 msgid "Homing missile"
-msgstr ""
+msgstr "Homing missile"
 
 #: scripts/science_db.lua:32
 msgid ""
@@ -3284,7 +3283,7 @@ msgstr ""
 
 #: scripts/science_db.lua:34
 msgid "Nuke"
-msgstr ""
+msgstr "Nuke"
 
 #: scripts/science_db.lua:39
 msgid ""
@@ -3315,7 +3314,7 @@ msgstr ""
 
 #: scripts/science_db.lua:43
 msgid "Mine"
-msgstr ""
+msgstr "Mine"
 
 #: scripts/science_db.lua:49
 msgid ""
@@ -3339,7 +3338,7 @@ msgstr ""
 
 #: scripts/science_db.lua:53
 msgid "EMP"
-msgstr ""
+msgstr "EMP"
 
 #: scripts/science_db.lua:58
 msgid ""
@@ -3364,7 +3363,7 @@ msgstr ""
 
 #: scripts/science_db.lua:60
 msgid "HVLI"
-msgstr ""
+msgstr "HVLI"
 
 #: scripts/science_db.lua:64
 msgid ""
