@@ -122,6 +122,18 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", tr("Jump Min Distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    jump_min_distance_slider= new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
+        target->setJumpDriveRange(value,target->jump_drive_max_distance);
+    });
+    jump_min_distance_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", tr("Jump Max Distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    jump_max_distance_slider= new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
+        target->setJumpDriveRange(target->jump_drive_min_distance,value);
+    });
+    jump_max_distance_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     (new GuiLabel(left_col, "", tr("Jump charge:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     jump_charge_slider = new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
         target->setJumpDriveCharge(value);
@@ -175,6 +187,8 @@ void GuiTweakShip::onDraw(sf::RenderTarget& window)
 {
     hull_slider->setValue(target->hull_strength);
     jump_charge_slider->setValue(target->getJumpDriveCharge());
+    jump_min_distance_slider->setValue(target->jump_drive_min_distance);
+    jump_max_distance_slider->setValue(target->jump_drive_max_distance);
     type_name->setText(target->getTypeName());
     warp_toggle->setValue(target->has_warp_drive);
     jump_toggle->setValue(target->hasJumpDrive());
@@ -727,6 +741,18 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", tr("Max Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    max_scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
+        target->setMaxScanProbeCount(value);
+    });
+    max_scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(left_col, "", tr("Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
+        target->setScanProbeCount(value);
+    });
+    scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     // Right column
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", tr("button", "Can scan"), [this](bool value) {
@@ -780,6 +806,8 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     coolant_slider->setValue(target->max_coolant);
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
     long_range_radar_slider->setValue(target->getLongRangeRadarRange());
+    max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
+    scan_probes_slider->setValue(target->getScanProbeCount());
     can_scan->setValue(target->getCanScan());
     can_hack->setValue(target->getCanHack());
     can_dock->setValue(target->getCanDock());

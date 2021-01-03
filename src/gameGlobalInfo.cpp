@@ -267,6 +267,7 @@ static int victory(lua_State* L)
 }
 /// victory(string)
 /// Called with a faction name as parameter, sets a certain faction as victor and ends the game.
+/// (The GM can unpause the game, but the scenario with its update function is destroyed.)
 REGISTER_SCRIPT_FUNCTION(victory);
 
 static int globalMessage(lua_State* L)

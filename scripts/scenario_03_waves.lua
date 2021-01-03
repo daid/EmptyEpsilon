@@ -7,6 +7,9 @@
 -- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. (Players are more quickly overwhelmed, leading to shorter games.)
 -- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)
 
+--- Scenario
+-- @script scenario_03_waves
+
 require("utils.lua")
 -- For this scenario, utils.lua provides:
 --   vectorFromAngle(angle, length)
@@ -15,13 +18,14 @@ require("utils.lua")
 --      Returns the object with its position set to the resulting coordinates.
 
 function randomStationTemplate()
-    if random(0, 100) < 10 then
+    local rnd = random(0, 100)
+    if rnd < 10 then
         return "Huge Station"
     end
-    if random(0, 100) < 20 then
+    if rnd < 20 then
         return "Large Station"
     end
-    if random(0, 100) < 50 then
+    if rnd < 50 then
         return "Medium Station"
     end
     return "Small Station"
@@ -44,8 +48,15 @@ How many waves can you destroy?]]
     getPlayerShip(-1):addToShipLog(text, "white")
 
     -- Random friendly stations
-    for n = 1, 2 do
-        table.insert(friendlyList, SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000)))
+    for _ = 1, 2 do
+        local station = SpaceStation():setTemplate(randomStationTemplate()):setFaction("Human Navy"):setPosition(random(-5000, 5000), random(-5000, 5000))
+        table.insert(friendlyList, station)
+    end
+
+    -- Random neutral stations
+    for _ = 1, 6 do
+        local station = SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent")
+        setCirclePos(station, 0, 0, random(0, 360), random(15000, 30000))
     end
     friendlyList[1]:addReputationPoints(150.0)
 
@@ -79,11 +90,6 @@ How many waves can you destroy?]]
 
     -- First enemy wave
     spawnWave()
-
-    -- Random neutral stations
-    for n = 1, 6 do
-        setCirclePos(SpaceStation():setTemplate(randomStationTemplate()):setFaction("Independent"), 0, 0, random(0, 360), random(15000, 30000))
-    end
 
     -- Random transports
     Script():run("util_random_transports.lua")
@@ -148,46 +154,47 @@ function spawnWave()
         end
 
         -- Set ship type
-        local type = random(0, 10) -- TODO rename variable
-        local score = 9999
-        if type < 2 then
+        local typeRoll = random(0, 10)
+        local score
+        if typeRoll < 2 then
             if irandom(1, 100) < 80 then
                 ship:setTemplate("MT52 Hornet")
             else
                 ship:setTemplate("MU52 Hornet")
             end
             score = 5
-        elseif type < 3 then
+        elseif typeRoll < 3 then
             if irandom(1, 100) < 80 then
                 ship:setTemplate("Adder MK5")
             else
                 ship:setTemplate("WX-Lindworm")
             end
             score = 7
-        elseif type < 6 then
+        elseif typeRoll < 6 then
             if irandom(1, 100) < 80 then
                 ship:setTemplate("Phobos T3")
             else
                 ship:setTemplate("Piranha F12")
             end
             score = 15
-        elseif type < 7 then
+        elseif typeRoll < 7 then
             ship:setTemplate("Ranus U")
             score = 25
-        elseif type < 8 then
+        elseif typeRoll < 8 then
             if irandom(1, 100) < 50 then
                 ship:setTemplate("Stalker Q7")
             else
                 ship:setTemplate("Stalker R7")
             end
             score = 25
-        elseif type < 9 then
+        elseif typeRoll < 9 then
             ship:setTemplate("Atlantis X23")
             score = 50
         else
             ship:setTemplate("Odin")
             score = 250
         end
+        assert(score ~= nil)
 
         -- Destroy ship if it was too strong else take it
         if score > totalScoreRequirement * 1.1 + 5 then

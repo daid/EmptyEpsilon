@@ -8,8 +8,19 @@
 -- uses `mergeTables`
 require("utils.lua")
 
+-- NOTE this could be imported
+local MISSILE_TYPES = {"Homing", "Nuke", "Mine", "EMP", "HVLI"}
+
 --- Main menu of communication.
-function mainMenu()
+--
+-- - Prepares `comms_data`.
+-- - If the station is not an enemy and no enemies are nearby, the dialog is
+--   provided by `commsStationUndocked` or `commsStationDocked`.
+--   (Back buttons go to the main menu in order to check for enemies again.)
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsStationMainMenu(comms_source, comms_target)
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
     end
@@ -50,10 +61,7 @@ function mainMenu()
         }
     )
 
-    -- comms_data is used globally
-    comms_data = comms_target.comms_data
-
-    if player:isEnemy(comms_target) then
+    if comms_source:isEnemy(comms_target) then
         return false
     end
 
@@ -61,151 +69,208 @@ function mainMenu()
         setCommsMessage("We are under attack! No time for chatting!")
         return true
     end
-    if not player:isDocked(comms_target) then
-        handleUndockedState()
+    if not comms_source:isDocked(comms_target) then
+        commsStationUndocked(comms_source, comms_target)
     else
-        handleDockedState()
+        commsStationDocked(comms_source, comms_target)
     end
     return true
 end
 
 --- Handle communications while docked with this station.
-function handleDockedState()
-    if player:isFriendly(comms_target) then
-        setCommsMessage("Good day, officer! Welcome to " .. comms_target:getCallSign() .. ".\nWhat can we do for you today?")
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsStationDocked(comms_source, comms_target)
+    local message
+    if comms_source:isFriendly(comms_target) then
+        message = string.format("Good day, officer! Welcome to %s.\nWhat can we do for you today?", comms_target:getCallSign())
     else
-        setCommsMessage("Welcome to our lovely station " .. comms_target:getCallSign() .. ".")
+        message = string.format("Welcome to our lovely station %s.", comms_target:getCallSign())
     end
+    setCommsMessage(message)
 
-    if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply("Do you have spare homing missiles for us? ("..getWeaponCost("Homing").."rep each)", function()
-            handleWeaponRestock("Homing")
-        end)
-    end
-    if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply("Can you restock us with HVLI? ("..getWeaponCost("HVLI").."rep each)", function()
-            handleWeaponRestock("HVLI")
-        end)
-    end
-    if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply("Please re-stock our mines. ("..getWeaponCost("Mine").."rep each)", function()
-            handleWeaponRestock("Mine")
-        end)
-    end
-    if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply("Can you supply us with some nukes? ("..getWeaponCost("Nuke").."rep each)", function()
-            handleWeaponRestock("Nuke")
-        end)
-    end
-    if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply("Please re-stock our EMP missiles. ("..getWeaponCost("EMP").."rep each)", function()
-            handleWeaponRestock("EMP")
-        end)
+    local reply_messages = {
+        ["Homing"] = "Do you have spare homing missiles for us?",
+        ["HVLI"] = "Can you restock us with HVLI?",
+        ["Mine"] = "Please re-stock our mines.",
+        ["Nuke"] = "Can you supply us with some nukes?",
+        ["EMP"] = "Please re-stock our EMP missiles."
+    }
+
+    for _, missile_type in ipairs(MISSILE_TYPES) do
+        if comms_source:getWeaponStorageMax(missile_type) > 0 then
+            addCommsReply(
+                string.format("%s (%d rep each)", reply_messages[missile_type], getWeaponCost(comms_source, comms_target, missile_type)),
+                function(comms_source, comms_target)
+                    handleWeaponRestock(comms_source, comms_target, missile_type)
+                end
+            )
+        end
     end
 end
 
---- handleWeaponRestock
-function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then
+--- Handle weapon restock.
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @tparam string weapon the missile type
+function handleWeaponRestock(comms_source, comms_target, weapon)
+    if not comms_source:isDocked(comms_target) then
         setCommsMessage("You need to stay docked for that action.")
         return
     end
-    if not isAllowedTo(comms_data.weapons[weapon]) then
+
+    if not isAllowedTo(comms_source, comms_target, comms_target.comms_data.weapons[weapon]) then
+        local message
         if weapon == "Nuke" then
-            setCommsMessage("We do not deal in weapons of mass destruction.")
+            message = "We do not deal in weapons of mass destruction."
         elseif weapon == "EMP" then
-            setCommsMessage("We do not deal in weapons of mass disruption.")
+            message = "We do not deal in weapons of mass disruption."
         else
-            setCommsMessage("We do not deal in those weapons.")
+            message = "We do not deal in those weapons."
         end
+        setCommsMessage(message)
         return
     end
-    local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
+
+    local points_per_item = getWeaponCost(comms_source, comms_target, weapon)
+    local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_target.comms_data.max_weapon_refill_amount[getFriendStatus(comms_source, comms_target)]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
+        local message
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.")
+            message = "All nukes are charged and primed for destruction."
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.")
+            message = "Sorry, sir, but you are as fully stocked as I can allow."
         end
-        addCommsReply("Back", mainMenu)
+        setCommsMessage(message)
+        addCommsReply("Back", commsStationMainMenu)
     else
-        if not player:takeReputationPoints(points_per_item * item_amount) then
+        if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
             return
         end
-        player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
-        if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+        comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
+        local message
+        if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
+            message = "You are fully loaded and ready to explode things."
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            message = "We generously resupplied you with some weapon charges.\nPut them to good use."
         end
-        addCommsReply("Back", mainMenu)
+        setCommsMessage(message)
+        addCommsReply("Back", commsStationMainMenu)
     end
 end
 
 --- Handle communications when we are not docked with the station.
-function handleUndockedState()
-    if player:isFriendly(comms_target) then
-        setCommsMessage("This is " .. comms_target:getCallSign() .. ". Good day, officer.\nIf you need supplies, please dock with us first.")
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsStationUndocked(comms_source, comms_target)
+    local message
+    if comms_source:isFriendly(comms_target) then
+        message = string.format("This is %s. Good day, officer.\nIf you need supplies, please dock with us first.", comms_target:getCallSign())
     else
-        setCommsMessage("This is " .. comms_target:getCallSign() .. ". Greetings.\nIf you want to do business, please dock with us first.")
+        message = string.format("This is %s. Greetings.\nIf you want to do business, please dock with us first.", comms_target:getCallSign())
     end
-    if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
-            if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
-            else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
-                for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("supplydrop")) then
-                            local position_x, position_y = comms_target:getPosition()
-                            local target_x, target_y = player:getWaypoint(n)
-                            local script = Script()
-                            script:setVariable("position_x", position_x):setVariable("position_y", position_y)
-                            script:setVariable("target_x", target_x):setVariable("target_y", target_y)
-                            script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
-                        else
-                            setCommsMessage("Not enough reputation!");
-                        end
-                        addCommsReply("Back", mainMenu)
-                    end)
-                end
-            end
-            addCommsReply("Back", mainMenu)
-        end)
+    setCommsMessage(message)
+
+    -- supply drop
+    if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then
+        addCommsReply(
+            string.format("Can you send a supply drop? (%d rep)", getServiceCost(comms_source, comms_target, "supplydrop")),
+            --
+            commsStationSupplyDrop
+        )
     end
-    if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
-            if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
-            else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
-                for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("reinforcements")) then
-                            local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
-                        else
-                            setCommsMessage("Not enough reputation!");
-                        end
-                        addCommsReply("Back", mainMenu)
-                    end)
-                end
-            end
-            addCommsReply("Back", mainMenu)
-        end)
+
+    -- reinforcements
+    if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.reinforcements) then
+        addCommsReply(
+            string.format("Please send reinforcements! (%d rep)", getServiceCost(comms_source, comms_target, "reinforcements")),
+            --
+            commsStationReinforcements
+        )
     end
 end
 
+--- Ask for a waypoint and deliver supply drop to it.
+--
+-- Uses the script `supply_drop.lua`
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsStationSupplyDrop(comms_source, comms_target)
+    if comms_source:getWaypointCount() < 1 then
+        setCommsMessage("You need to set a waypoint before you can request backup.")
+    else
+        setCommsMessage("To which waypoint should we deliver your supplies?")
+        for n = 1, comms_source:getWaypointCount() do
+            addCommsReply(
+                formatWaypoint(n),
+                function(comms_source, comms_target)
+                    local message
+                    if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "supplydrop")) then
+                        local position_x, position_y = comms_target:getPosition()
+                        local target_x, target_y = comms_source:getWaypoint(n)
+                        local script = Script()
+                        script:setVariable("position_x", position_x):setVariable("position_y", position_y)
+                        script:setVariable("target_x", target_x):setVariable("target_y", target_y)
+                        script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
+                        message = string.format("We have dispatched a supply ship toward %s.", formatWaypoint(n))
+                    else
+                        message = "Not enough reputation!"
+                    end
+                    setCommsMessage(message)
+                    addCommsReply("Back", commsStationMainMenu)
+                end
+            )
+        end
+    end
+    addCommsReply("Back", commsStationMainMenu)
+end
+
+--- Ask for a waypoint and send reinforcements to defend it.
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+function commsStationReinforcements(comms_source, comms_target)
+    if comms_source:getWaypointCount() < 1 then
+        setCommsMessage("You need to set a waypoint before you can request reinforcements.")
+    else
+        setCommsMessage("To which waypoint should we dispatch the reinforcements?")
+        for n = 1, comms_source:getWaypointCount() do
+            addCommsReply(
+                formatWaypoint(n),
+                function(comms_source, comms_target)
+                    local message
+                    if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "reinforcements")) then
+                        local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
+                        message = string.format("We have dispatched %s to assist at %s.", ship:getCallSign(), formatWaypoint(n))
+                    else
+                        message = "Not enough reputation!"
+                    end
+                    setCommsMessage(message)
+                    addCommsReply("Back", commsStationMainMenu)
+                end
+            )
+        end
+    end
+    addCommsReply("Back", commsStationMainMenu)
+end
+
 --- isAllowedTo
-function isAllowedTo(state)
-    if state == "friend" and player:isFriendly(comms_target) then
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @tparam string state
+-- @treturn boolean true if allowed
+function isAllowedTo(comms_source, comms_target, state)
+    -- TODO reconsider the logic of these conditions
+    if state == "friend" and comms_source:isFriendly(comms_target) then
         return true
     end
-    if state == "neutral" and not player:isEnemy(comms_target) then
+    if state == "neutral" and not comms_source:isEnemy(comms_target) then
         return true
     end
     return false
@@ -213,23 +278,47 @@ end
 
 --- Return the number of reputation points that a specified weapon costs for the
 -- current player.
-function getWeaponCost(weapon)
-    return math.ceil(comms_data.weapon_cost[weapon] * comms_data.reputation_cost_multipliers[getFriendStatus()])
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @tparam string weapon the missile type
+-- @treturn integer the cost
+function getWeaponCost(comms_source, comms_target, weapon)
+    local relation = getFriendStatus(comms_source, comms_target)
+    return math.ceil(comms_target.comms_data.weapon_cost[weapon] * comms_target.comms_data.reputation_cost_multipliers[relation])
 end
 
 --- Return the number of reputation points that a specified service costs for
 -- the current player.
-function getServiceCost(service)
-    return math.ceil(comms_data.service_cost[service])
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @tparam string service the service
+-- @treturn integer the cost
+function getServiceCost(comms_source, comms_target, service)
+    return math.ceil(comms_target.comms_data.service_cost[service])
 end
 
 --- Return "friend" or "neutral".
-function getFriendStatus()
-    if player:isFriendly(comms_target) then
+--
+-- @tparam PlayerSpaceship comms_source
+-- @tparam SpaceStation comms_target
+-- @treturn string the status
+function getFriendStatus(comms_source, comms_target)
+    if comms_source:isFriendly(comms_target) then
         return "friend"
     else
         return "neutral"
     end
 end
 
-mainMenu()
+--- Format integer i as "WP i".
+--
+-- @tparam integer i the index of the waypoint
+-- @treturn string "WP i"
+function formatWaypoint(i)
+    return string.format("WP %d", i)
+end
+
+-- `comms_source` and `comms_target` are global in comms script.
+commsStationMainMenu(comms_source, comms_target)

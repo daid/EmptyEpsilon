@@ -154,6 +154,7 @@ ShipTemplate::ShipTemplate()
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
     impulse_sound_file = "sfx/engine.wav";
+    default_ai_name = "default";
 }
 
 void ShipTemplate::setBeamTexture(int index, string texture)

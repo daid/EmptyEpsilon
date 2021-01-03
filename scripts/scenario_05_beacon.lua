@@ -5,7 +5,10 @@
 --- This scenario is played with exactly one player ship: the Atlantis Epsilon.
 -- Type: Mission
 
--- Init is run when the scenario is started. Create your initial world
+--- Scenario
+-- @script scenario_05_beacon
+
+--- Init is run when the scenario is started. Create your initial world.
 function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
@@ -97,14 +100,17 @@ And destroy those Exuari scum while you are at it!]])
         )
     end
     if not exuari_RT4_guard1:isValid() and not exuari_RT4_guard2:isValid() then
-        -- Not sure how you did it, but you managed to destroy the two Exauri's before they detroy RT4...
+        -- Not sure how you did it, but you managed to destroy the two Exauri's before they destroy RT4...
         transport_RT4:destroy()
         mission_state = missionRT4EscapeDropped
         transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
         transport_RT4_drop_time = 0.0
-        research_station:sendCommsMessage(player, _([[RT-4 has been destroyed! But an escape pod is ejected from the ship.
+        research_station:sendCommsMessage(
+            player,
+            _([[RT-4 has been destroyed! But an escape pod is ejected from the ship.
 
-Lifesigns detected in the pod, please pick up the pod to see if J.J.Johnson made it. His death would be a great blow to the peace negotiations in the region.]]))
+Lifesigns detected in the pod, please pick up the pod to see if J.J.Johnson made it. His death would be a great blow to the peace negotiations in the region.]])
+        )
     end
 end
 function missionRT4EscapeDropped(delta)
@@ -228,7 +234,7 @@ function missionAmbushed(delta)
                 _(
                 [[Good job on dealing with those Exuari scum. The criminals are safely in our custody now. We'll be sending out a protection detail for Refugee-X
 
-We managed to extract some vital infro from the Exuari. In the next transport convoy towards Research-1 a Exuari death squad is hiding in one of the ships. The transport detail is heading in from D7, seek them out and scan the ships to find the Exuari transport.
+We managed to extract some vital info from the Exuari. In the next transport convoy towards Research-1 a Exuari death squad is hiding in one of the ships. The transport detail is heading in from D7, seek them out and scan the ships to find the Exuari transport.
 ]]
             )
             if refilled then
@@ -359,7 +365,8 @@ function distance(obj1, obj2)
     return math.sqrt(xd * xd + yd * yd)
 end
 
--- Place random objects in a line, from point x1,y1 to x2,y2 with a random distance of random_amount
+--- Place random objects in a line, from point `x1`, `y1` to `x2`, `y2`
+-- with a random distance of `random_amount`.
 function placeRandom(object_type, amount, x1, y1, x2, y2, random_amount)
     for n = 1, amount do
         local f = random(0, 1)

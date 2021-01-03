@@ -7,6 +7,7 @@
 REGISTER_SCRIPT_SUBCLASS(ExplosionEffect, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ExplosionEffect, setSize);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ExplosionEffect, setOnRadar);
 }
 
 REGISTER_MULTIPLAYER_CLASS(ExplosionEffect, "ExplosionEffect");
