@@ -3409,252 +3409,236 @@ msgstr ""
 #: src/menus/joinServerMenu.cpp:18
 msgctxt "connectserver"
 msgid "Connecting..."
-msgstr ""
+msgstr "Connexion en cours..."
 
 #: src/menus/joinServerMenu.cpp:51
-#, fuzzy
 msgid "Please enter the server password:"
-msgstr "Mot de passe du serveur : "
+msgstr "Veuillez saisir le mot de passe du serveur :"
 
 #: src/menus/serverBrowseMenu.cpp:25
-#, fuzzy
 msgctxt "screenLan"
 msgid "Back"
 msgstr "Retour"
 
 #: src/menus/serverBrowseMenu.cpp:36
 msgid "LAN"
-msgstr ""
+msgstr "LAN"
 
 #: src/menus/serverBrowseMenu.cpp:38
 msgctxt "screenLan"
 msgid "Connect"
-msgstr ""
+msgstr "Connexion"
 
 #: src/menus/serverBrowseMenu.cpp:54
 msgid "Last Session ({last})"
-msgstr ""
+msgstr "Derniere session ({last})"
 
 #: src/menus/tutorialMenu.cpp:29
-#, fuzzy
 msgctxt "title"
 msgid "Tutorials"
 msgstr "Tutoriels"
 
 #: src/menus/shipSelectionScreen.cpp:42
-#, fuzzy
 msgid "Select your station"
-msgstr "Configuration du serveur"
+msgstr "Selection postes"
 
 #: src/menus/shipSelectionScreen.cpp:48
 msgid "6/5 player crew"
-msgstr ""
+msgstr "Equipage 5/6 joueurs"
 
 #: src/menus/shipSelectionScreen.cpp:48
 msgid "4/3 player crew"
-msgstr ""
+msgstr "Equipage 3/4 joueurs"
 
 #: src/menus/shipSelectionScreen.cpp:48
 msgid "1 player crew/extras"
-msgstr ""
+msgstr "Postes extras"
 
 #: src/menus/shipSelectionScreen.cpp:48
-#, fuzzy
 msgid "Alternative options"
-msgstr "Options d'interface"
+msgstr "Options alternatives"
 
 #: src/menus/shipSelectionScreen.cpp:51
-#, fuzzy
 msgid "Main screen"
 msgstr "Ecran principal"
 
 #: src/menus/shipSelectionScreen.cpp:67
-#, fuzzy
 msgid "Main screen controls"
-msgstr "Options de l'ecran principal"
+msgstr "Controle de l'ecran principal"
 
 #: src/menus/shipSelectionScreen.cpp:73
 msgid "Game master"
-msgstr ""
+msgstr "Maitre de jeu"
 
 #: src/menus/shipSelectionScreen.cpp:84
 msgid "Ship window"
-msgstr ""
+msgstr "Vue fenetre"
 
 #: src/menus/shipSelectionScreen.cpp:96
 msgid "0 degrees"
-msgstr ""
+msgstr "0 degres"
 
 #: src/menus/shipSelectionScreen.cpp:100
 msgid "Top-down 3D view"
-msgstr ""
+msgstr "Vue de haut en 3D"
 
 #: src/menus/shipSelectionScreen.cpp:109
 msgid "Cinematic view"
-msgstr ""
+msgstr "Vue cinematique"
 
 #: src/menus/shipSelectionScreen.cpp:118
 msgid "Spectate (view all)"
-msgstr ""
+msgstr "Vue spectateur (carte)"
 
 #: src/menus/shipSelectionScreen.cpp:127
-#, fuzzy
 msgid "Enter the GM control code:"
-msgstr "Code du MJ : "
+msgstr "Entrer code de controle MJ :"
 
 #: src/menus/shipSelectionScreen.cpp:143
 msgid "Select ship"
-msgstr ""
+msgstr "Selection vaisseau"
 
 #: src/menus/shipSelectionScreen.cpp:144
 msgid "Waiting for server to spawn a ship"
-msgstr ""
+msgstr "En attente du serveur"
 
 #: src/menus/shipSelectionScreen.cpp:196
 msgid "Spawn player ship"
-msgstr ""
+msgstr "Creer vaisseau joueur"
 
 #: src/menus/shipSelectionScreen.cpp:215
-#, fuzzy
 msgid "Scenario selection"
-msgstr "Choix du scenario"
+msgstr "Retour scenario"
 
 #: src/menus/shipSelectionScreen.cpp:222
 msgid "Disconnect"
-msgstr ""
+msgstr "Deconnexion"
 
 #: src/menus/shipSelectionScreen.cpp:230
 msgid "Ready"
-msgstr ""
+msgstr "Demarrer"
 
 #: src/menus/shipSelectionScreen.cpp:244 src/menus/shipSelectionScreen.cpp:250
 #: src/menus/shipSelectionScreen.cpp:329
 msgid "Enter this ship's control code:"
-msgstr ""
+msgstr "Entrer code de controle du vaisseau :"
 
 #: src/menus/shipSelectionScreen.cpp:248
-#, fuzzy
 msgid "Cancel"
 msgstr "Annuler"
 
 #: src/menus/shipSelectionScreen.cpp:265
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/menus/shipSelectionScreen.cpp:276
 msgid "Incorrect control code. Re-enter GM code:"
-msgstr ""
+msgstr "Code de controle incorrect. Veuillez reessayer :"
 
 #: src/menus/shipSelectionScreen.cpp:282
 msgid ""
 "Control code accepted.\n"
 "Granting access."
 msgstr ""
+"Code de controle ok.\n"
+"Acces accorde."
 
 #: src/menus/shipSelectionScreen.cpp:301
 msgid "Incorrect control code. Re-enter code for {callsign}:"
-msgstr ""
+msgstr "Code de controle incorrect. Veuillez reessayer {callsign} :"
 
 #: src/menus/shipSelectionScreen.cpp:310
 msgid ""
 "Control code accepted.\n"
 "Granting access to {callsign}."
 msgstr ""
+"Code de controle ok.\n"
+"Acces accorde a {callsign}."
 
 #: src/menus/shipSelectionScreen.cpp:324
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/screens/cinematicViewScreen.cpp:39 src/screens/topDownScreen.cpp:31
 msgctxt "button"
 msgid "Lock camera on ship"
-msgstr ""
+msgstr "Verrouiller camera vaisseau"
 
 #: src/screens/cinematicViewScreen.cpp:42
 msgctxt "button"
 msgid "Lock camera on ship's target"
-msgstr ""
+msgstr "Verrouiller camera cible"
 
 #: src/screens/crew6/scienceScreen.cpp:176
 msgctxt "button"
 msgid "Probe View"
-msgstr ""
+msgstr "Vue sonde"
 
 #: src/screens/extra/damcon.cpp:20
-#, fuzzy
 msgctxt "damagecontrol"
 msgid "Hull"
 msgstr "Coque"
 
 #: src/screens/extra/powerManagement.cpp:22
-#, fuzzy
 msgid "Coolant"
-msgstr "Liq. de ref."
+msgstr "Liq. de refr."
 
 #: src/screens/extra/powerManagement.cpp:40
-#, fuzzy
 msgctxt "button"
 msgid "Power"
 msgstr "Puissance"
 
 #: src/screens/extra/powerManagement.cpp:41
-#, fuzzy
 msgctxt "button"
 msgid "Coolant"
-msgstr "Liq. de ref."
+msgstr "Liquide de refroidissement."
 
 #: src/screens/extra/powerManagement.cpp:42
 msgctxt "button"
 msgid "Heat"
-msgstr ""
+msgstr "Surchauffe"
 
 #: src/screens/gm/objectCreationView.cpp:51
 msgctxt "create"
 msgid "Artifact"
-msgstr ""
+msgstr "Artefact"
 
 #: src/screens/gm/objectCreationView.cpp:55
 msgctxt "create"
 msgid "Warp Jammer"
-msgstr ""
+msgstr "Brouilleur de vitesse lumiere"
 
 #: src/screens/gm/objectCreationView.cpp:59
-#, fuzzy
 msgctxt "create"
 msgid "Mine"
 msgstr "Mine"
 
 #: src/screens/gm/objectCreationView.cpp:68
-#, fuzzy
 msgctxt "create"
 msgid "Asteroid"
 msgstr "Asteroide"
 
 #: src/screens/gm/objectCreationView.cpp:72
-#, fuzzy
 msgctxt "create"
 msgid "Visual Asteroid"
-msgstr "Asteroide"
+msgstr ""
 
 #: src/screens/gm/objectCreationView.cpp:76
 msgctxt "create"
 msgid "Planet"
-msgstr ""
+msgstr "Planete"
 
 #: src/screens/gm/objectCreationView.cpp:80
-#, fuzzy
 msgctxt "create"
 msgid "BlackHole"
 msgstr "Trou noir"
 
 #: src/screens/gm/objectCreationView.cpp:84
-#, fuzzy
 msgctxt "create"
 msgid "Nebula"
 msgstr "Nebuleuse"
 
 #: src/screens/gm/objectCreationView.cpp:88
-#, fuzzy
 msgctxt "create"
 msgid "Worm Hole"
 msgstr "Trou de ver"
@@ -3663,47 +3647,47 @@ msgstr "Trou de ver"
 #: src/screenComponents/commsOverlay.cpp:102
 msgctxt "button"
 msgid "Send"
-msgstr ""
+msgstr "Envoyer"
 
 #: src/screens/gm/chatDialog.cpp:46
 msgctxt "chatGM"
 msgid "Target - Destroyed"
-msgstr ""
+msgstr "Cible - detruite"
 
 #: src/screens/gm/chatDialog.cpp:59
 msgctxt "chatGM"
 msgid "Channel not open, enter name to hail as to hail target."
-msgstr ""
+msgstr "Canal non ouvert, entrer un nom d'appelant pour appeler la cible."
 
 #: src/screens/gm/chatDialog.cpp:60
 msgctxt "chatGM"
 msgid "{callsign} - Inactive"
-msgstr ""
+msgstr "{callsign} - Inactif"
 
 #: src/screens/gm/chatDialog.cpp:64
 msgctxt "chatGM"
 msgid "{callsign} - Opening communications with {target}"
-msgstr ""
+msgstr "{callsign} - Ouverture des communications avec {target}"
 
 #: src/screens/gm/chatDialog.cpp:67
 msgctxt "chatGM"
 msgid "{callsign} - Hailing as {target}"
-msgstr ""
+msgstr "{callsign} - Appelant comme {target}"
 
 #: src/screens/gm/chatDialog.cpp:71
 msgctxt "chatGM"
 msgid "{callsign} - Communicating with {target}"
-msgstr ""
+msgstr "{callsign} - En communication avec {target}"
 
 #: src/screens/gm/chatDialog.cpp:75
 msgctxt "chatGM"
 msgid "**{callsign} - Communicating as {target}**"
-msgstr ""
+msgstr "**{callsign} - Communiquer comme {target}**"
 
 #: src/screens/gm/chatDialog.cpp:77
 msgctxt "chatGM"
 msgid "{callsign} - Communicating as {target}"
-msgstr ""
+msgstr "{callsign} - Communiquer comme {target}"
 
 #: src/screens/gm/tweak.cpp:125
 #, fuzzy
