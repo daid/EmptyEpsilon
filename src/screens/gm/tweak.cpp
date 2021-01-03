@@ -253,8 +253,8 @@ GuiJammerTweak::GuiJammerTweak(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     (new GuiLabel(left_col, "", tr("Jammer Range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    jammer_range_slider = new GuiSlider(left_col, "", 0, 20000, 0, [this](float value) {
-        target->setRange(value);
+    jammer_range_slider = new GuiSlider(left_col, "", 0, 50000, 0, [this](float value) {
+        target->setRange(round(value/100)*100);
     });
     jammer_range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }

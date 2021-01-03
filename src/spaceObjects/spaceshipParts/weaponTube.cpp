@@ -71,6 +71,7 @@ void WeaponTube::startLoad(EMissileWeapons type)
 
     state = WTS_Loading;
     delay = load_time;
+    parent->forceMemberReplicationUpdate(&delay);
     type_loaded = type;
     parent->weapon_storage[type]--;
 }
@@ -81,6 +82,7 @@ void WeaponTube::startUnload()
     {
         state = WTS_Unloading;
         delay = load_time;
+        parent->forceMemberReplicationUpdate(&delay);
     }
 }
 

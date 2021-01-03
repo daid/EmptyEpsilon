@@ -26,7 +26,7 @@ TutorialMenu::TutorialMenu()
     container->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(50);
 
     // Tutorial section.
-    (new GuiLabel(container, "TUTORIAL_LABEL", "Tutorials", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(container, "TUTORIAL_LABEL", tr("title", "Tutorials"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     // List each scenario derived from scenario_*.lua files in Resources.
     GuiListbox* tutorial_list = new GuiListbox(container, "TUTORIAL_LIST", [this](int index, string value)
     {

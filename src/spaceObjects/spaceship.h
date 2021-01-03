@@ -427,13 +427,11 @@ public:
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
     EMissileWeapons getWeaponTubeLoadType(int index);
-    EMissileSizes getWeaponTubeSize(int index);
 
     void weaponTubeAllowMissle(int index, EMissileWeapons type);
     void weaponTubeDisallowMissle(int index, EMissileWeapons type);
     void setWeaponTubeExclusiveFor(int index, EMissileWeapons type);
     void setWeaponTubeDirection(int index, float direction);
-    void setWeaponTubeSize(int index, EMissileSizes size);
     void setTubeSize(int index, EMissileSizes size);
     EMissileSizes getTubeSize(int index);
     void setTubeLoadTime(int index, float time);
