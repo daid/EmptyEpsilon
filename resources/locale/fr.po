@@ -77,7 +77,7 @@ msgstr ""
 "la taille d'une fregate a la puissance de feu d'une corvette, ce qui en fait "
 "un excellent vaisseau d'escorte pour defendre de plus grands vaisseaux "
 "contre de multiples appareils ennemis de classe inferieure. Muni d'un moteur "
-"de saut, l' Atlantis X23 est egalement tres adapte aux missions de "
+"de saut, l' Atlantis X23 est particulierement adapte aux missions de "
 "patrouille longue distance."
 
 #: scripts/shipTemplates_Corvette.lua:34
@@ -105,9 +105,9 @@ msgstr ""
 "Contrairement a son predecesseur, le Starhammer II est a la hauteur de son "
 "nom. En solutionnant les problemes de puissance et de surchauffe du "
 "Starhammer original, ce modele ameliore fait un vaisseau d'assaut "
-"phenomenal. Sa faible vitesse le rend difficile a positionner, mais "
-"lorsqu'il est bien dirige, il peut venir a bout des boucliers les plus "
-"robustes."
+"phenomenal. Sa faible vitesse le rend difficile a diriger, mais quand il se "
+"trouve au bon endroit au bon moment, meme les boucliers les plus puissants ne "
+"peuvent pas resister longtemps à l'assaut d'un Starhammer. "
 
 #: scripts/shipTemplates_Corvette.lua:102
 msgid ""
@@ -116,7 +116,7 @@ msgid ""
 "but not as strong as the Atlantis"
 msgstr ""
 "Le Creuset embarque un certain nombre de tubes de lancement, pointant dans "
-"toutes les directions. Les faisceaux juges moins prioritaires ont une "
+"toutes les directions. Les faisceaux laser juges moins prioritaires ont une "
 "puissance reduite, bien qu'ils soient toujours presents. Ses defenses sont "
 "plus solides que celles d'une fregate, mais pas autant que celles de "
 "l'Atlantis"
@@ -127,7 +127,7 @@ msgid ""
 "deemed lower priority, though they are still present. Stronger defenses than "
 "a frigate, but not as strong as the Atlantis"
 msgstr ""
-"Le modele Dissident est herisse de faisceaux pointant dans diverses "
+"Le modele Dissident est herisse de faisceaux laser pointant dans diverses "
 "directions. Il embarque tres peu de missiles et ne possede que 3 tubes de "
 "lancement. Ses defenses sont plus solides que celles d'une fregate, mais pas "
 "autant que celles de l'Atlantis"
@@ -140,7 +140,7 @@ msgid ""
 msgstr ""
 "Cette plate-forme de defense stationnaire fonctionne comme une station avec "
 "ses baies d'amarrage et de reapprovisionnement. Elle est cependant equipee "
-"de puissantes armes a faisceau et peut tourner lentement. Les systemes les "
+"de puissants faisceaux laser et peut pivoter lentement. Les systemes les "
 "plus etendus utilisent souvent ces plates-formes pour reapprovisionner les "
 "navires de patrouille."
 
@@ -149,7 +149,7 @@ msgid ""
 "These freighters are designed to transport armed troops, military support "
 "personnel, and combat gear."
 msgstr ""
-"Ces cargos sont destines a transporter des troupes et autres personnels et "
+"Les navettes sont destines a transporter des troupes et autres personnels et "
 "equipements militaires."
 
 #: scripts/shipTemplates_Corvette.lua:248
@@ -192,7 +192,7 @@ msgid ""
 "sensors that watch for any changes to their cargo's potentially volatile "
 "state."
 msgstr ""
-"Les citernes de carburant ont des reservoirs gigantesques, et des capteurs "
+"Les citernes de carburant ont des reservoirs gigantesques et des capteurs "
 "internes extremement sensibles qui controlent a tout moment l'etat de leurs "
 "cargaisons potentiellement volatile."
 
@@ -449,7 +449,7 @@ msgstr "Les deux"
 #: src/menus/serverCreationScreen.cpp:137
 #: src/menus/serverCreationScreen.cpp:143
 msgid "Beam/shield frequencies"
-msgstr "Freq. faisceau/bouclier"
+msgstr "Freq. faisceaux/bouclier"
 
 #: src/menus/serverCreationScreen.cpp:141
 #: src/menus/serverCreationScreen.cpp:147
@@ -1163,7 +1163,7 @@ msgstr "Citerne LD %d"
 #: scripts/shipTemplates_Corvette.lua:296
 #: scripts/shipTemplates_Corvette.lua:301
 msgid "Jump Carrier"
-msgstr "Remorqueur LD"
+msgstr "Teleporteur"
 
 #: scripts/shipTemplates_Corvette.lua:308
 #: scripts/shipTemplates_Corvette.lua:314
@@ -1748,7 +1748,7 @@ msgstr "Boucliers"
 #: src/screens/crew4/tacticalScreen.cpp:85
 #: src/screens/crew4/tacticalScreen.cpp:88
 msgid "Beams"
-msgstr "Faisceau"
+msgstr "Faisceaux"
 
 #: src/screens/crew6/relayScreen.cpp:151
 #: src/screens/gm/gameMasterScreen.cpp:132
