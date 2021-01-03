@@ -1951,11 +1951,11 @@ msgstr "Journal de bord"
 
 #: src/shipTemplate.cpp:123
 msgid "No class"
-msgstr "Aucune"
+msgstr "Classe non definie"
 
 #: src/shipTemplate.cpp:124
 msgid "No sub-class"
-msgstr "Aucune"
+msgstr "non definie"
 
 #: src/screens/crew6/relayScreen.cpp:147
 #: src/screens/crew4/operationsScreen.cpp:84
@@ -3591,7 +3591,7 @@ msgstr "Puissance"
 #: src/screens/extra/powerManagement.cpp:41
 msgctxt "button"
 msgid "Coolant"
-msgstr "Liquide de refroidissement."
+msgstr "Liquide de refroidissement"
 
 #: src/screens/extra/powerManagement.cpp:42
 msgctxt "button"
