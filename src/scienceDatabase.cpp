@@ -9,6 +9,10 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setName);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getName);
+    // Return an entry's unique multiplayer_id.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getId);
+    // Return an entry's parent's unique multiplayer_id.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getParentId);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, addEntry);
     /// returns a child entry by its case-insensitive name
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getEntryByName);
@@ -168,6 +172,21 @@ P<ScienceDatabase> ScienceDatabase::getEntryByName(string name)
     return queryScienceDatabase(name, this->getId());
 }
 
+P<ScienceDatabase> ScienceDatabase::getEntryById(int32_t id)
+{
+    P<ScienceDatabase> entry;
+
+    for(auto sd : ScienceDatabase::science_databases)
+    {
+        if (sd->getId() == id)
+        {
+            entry = sd;
+        }
+    }
+
+    return entry;
+}
+
 bool ScienceDatabase::hasEntries()
 {
     for(auto sd : ScienceDatabase::science_databases)
@@ -209,6 +228,25 @@ P<ScienceDatabase> ScienceDatabase::queryScienceDatabase(string name, int32_t pa
 
     return nullptr;
 }
+
+static int queryScienceDatabaseById(lua_State* L)
+{
+    P<ScienceDatabase> entry = nullptr;
+    entry = ScienceDatabase::getEntryById(luaL_checknumber(L, 1));
+
+    if (!entry)
+    {
+        // No entry with this multiplayer_id.
+        return 0;
+    }
+
+    return convert<P<ScienceDatabase> >::returnType(L, entry);
+}
+
+/// Return a ScienceDatabase entry by its unique multiplayer_id.
+/// Returns nil if no entry is found.
+/// Example: local mine_db = queryScienceDatabaseById(4);
+REGISTER_SCRIPT_FUNCTION(queryScienceDatabaseById);
 
 static int queryScienceDatabase(lua_State* L)
 {
