@@ -1,11 +1,12 @@
 -- Name: Quick Basic
--- Description: Different version of the basic scenario. Which intended to play out quicker. There is only a single small station to defend.
---- This scenario is designed to be ran on conventions. As you can run a 4 player crew in 20 minutes trough a game with minimal experience.
+-- Description: Different version of the Basic scenario intended to play out quicker. There is only a single small station to defend.
 ---
---- This scenario is designed for the provided player ship of type Phobos (or Atlantis on Advanced).
+--- This scenario is designed to be ran at conventions, since you can run a 4-player crew with minimal experience through a game in 20 minutes.
+---
+--- This scenario is designed for the provided player Phobos-type ship (or an Atlantis in the Advanced variant).
 -- Type: Convention
--- Variation[Advanced]: Give the players a stronger Atlantis instead of the Phobos. Which is more difficult to control, but has more firepower and defense. Increases enemy strengh as well.
--- Variation[GM Start]: The scenario is not started until the GM gives the start sign. This gives some time for a new crew to get a feeling for the controls before the actual scenario starts.
+-- Variation[Advanced]: Give the players a stronger Atlantis instead of the Phobos. The Atlantis is more difficult to control, but has more firepower and defense. Also increases enemy strength.
+-- Variation[GM Start]: The scenario is not started until the GM signals for it to start. This gives some time for a new crew to get a feeling for the controls before the actual scenario starts.
 
 --- Scenario
 -- @script scenario_01_quick_basic
@@ -330,9 +331,12 @@ function startScenario()
     station:sendCommsMessage(
         player,
         string.format([[%s, your objective is to fend off the incoming Kraylor attack.
+
 Please inform your Captain and crew that you have a total of %d minutes for this mission.
+
 The mission started at the arrival of this message.
-Good Luck.]], player:getCallSign(), gametimeleft / 60)
+
+Good luck.]], player:getCallSign(), gametimeleft / 60)
     )
     scenario_started = true
 end
