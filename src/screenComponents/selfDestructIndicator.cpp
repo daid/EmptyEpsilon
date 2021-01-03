@@ -37,9 +37,7 @@ void GuiSelfDestructIndicator::onDraw(sf::RenderTarget& window)
             }
             else
             {
-                char buffer[46];
-                snprintf(buffer, 46, tr("This ship will self-destruct in %.0f seconds."), my_spaceship->self_destruct_countdown);
-                label->setText(buffer);
+                label->setText(tr("This ship will self-destruct in {seconds} seconds.").format({{"seconds", string(int(std::nearbyint(my_spaceship->self_destruct_countdown)))}}));
             }
         }
     }else{
