@@ -3492,7 +3492,7 @@ msgstr "Vue spectateur (carte)"
 
 #: src/menus/shipSelectionScreen.cpp:127
 msgid "Enter the GM control code:"
-msgstr "Entrer code de controle MJ :"
+msgstr "Entrer le code de controle MJ :"
 
 #: src/menus/shipSelectionScreen.cpp:143
 msgid "Select ship"
@@ -3500,7 +3500,7 @@ msgstr "Selection vaisseau"
 
 #: src/menus/shipSelectionScreen.cpp:144
 msgid "Waiting for server to spawn a ship"
-msgstr "En attente du serveur"
+msgstr "En attente du serveur pour embarquement"
 
 #: src/menus/shipSelectionScreen.cpp:196
 msgid "Spawn player ship"
@@ -3521,7 +3521,7 @@ msgstr "Demarrer"
 #: src/menus/shipSelectionScreen.cpp:244 src/menus/shipSelectionScreen.cpp:250
 #: src/menus/shipSelectionScreen.cpp:329
 msgid "Enter this ship's control code:"
-msgstr "Entrer code de controle du vaisseau :"
+msgstr "Veuillez saisir le code de controle du vaisseau :"
 
 #: src/menus/shipSelectionScreen.cpp:248
 msgid "Cancel"
@@ -3540,7 +3540,7 @@ msgid ""
 "Control code accepted.\n"
 "Granting access."
 msgstr ""
-"Code de controle ok.\n"
+"Code de controle valide.\n"
 "Acces accorde."
 
 #: src/menus/shipSelectionScreen.cpp:301
@@ -3552,7 +3552,7 @@ msgid ""
 "Control code accepted.\n"
 "Granting access to {callsign}."
 msgstr ""
-"Code de controle ok.\n"
+"Code de controle valide.\n"
 "Acces accorde a {callsign}."
 
 #: src/menus/shipSelectionScreen.cpp:324
