@@ -1960,7 +1960,7 @@ msgstr "non definie"
 #: src/screens/crew6/relayScreen.cpp:147
 #: src/screens/crew4/operationsScreen.cpp:84
 msgid "Reputation"
-msgstr "Reputation actuelle :"
+msgstr "Reputation actuelle "
 
 #: src/screens/crew6/relayScreen.cpp:151
 #: src/screens/gm/gameMasterScreen.cpp:139
@@ -3803,7 +3803,7 @@ msgstr "Pas de reponse..."
 
 #: src/screenComponents/commsOverlay.cpp:65
 msgid "Communications were suddenly cut"
-msgstr "Les communications ont ete brusquement coupees"
+msgstr "La communication a ete brusquement coupee"
 
 #: src/screenComponents/commsOverlay.cpp:76
 msgid "Communications channel closed"
@@ -4071,7 +4071,7 @@ msgstr "Communication refusee en provenance de {callsign}"
 #: src/spaceObjects/playerSpaceship.cpp:1396
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
-msgstr "Communication refusee a {callsign}"
+msgstr ""
 
 #: src/spaceObjects/playerSpaceship.cpp:1405
 msgctxt "shiplog"
@@ -4081,12 +4081,12 @@ msgstr "Communication brusquement interrompue."
 #: src/spaceObjects/playerSpaceship.cpp:1408
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
-msgstr "Communication acceptee provenant de {callsign}"
+msgstr "Communication provenant de {callsign} acceptee"
 
 #: src/spaceObjects/playerSpaceship.cpp:1428
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
-msgstr "Communication refusee provenant de {callsign}"
+msgstr "Communication provenant de {callsign} refusee"
 
 #: src/spaceObjects/playerSpaceship.cpp:1442
 msgctxt "shiplog"
@@ -4096,7 +4096,7 @@ msgstr "Canal de communication ouvert a {name}"
 #: src/spaceObjects/playerSpaceship.cpp:1445
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
-msgstr "Communication refusee par {name}"
+msgstr "Communication refusee a {name}"
 
 #: scripts/shipTemplates_OLD.lua:237
 msgid ""
