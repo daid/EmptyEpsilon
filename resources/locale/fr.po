@@ -3690,221 +3690,203 @@ msgid "{callsign} - Communicating as {target}"
 msgstr "{callsign} - Communiquer comme {target}"
 
 #: src/screens/gm/tweak.cpp:125
-#, fuzzy
 msgid "Jump Min Distance:"
-msgstr "Distance"
+msgstr "Portee de saut min :"
 
 #: src/screens/gm/tweak.cpp:131
-#, fuzzy
 msgid "Jump Max Distance:"
-msgstr "Distance"
+msgstr "Portee de saut max :"
 
 #: src/screens/gm/tweak.cpp:744
-#, fuzzy
 msgid "Max Scan Probes:"
-msgstr "Peut larguer des sondes"
+msgstr "Sondes : capacité max"
 
 #: src/screens/gm/tweak.cpp:750
-#, fuzzy
 msgid "Scan Probes:"
-msgstr "Largage sonde"
+msgstr "Sondes : stock actuel"
 
 #: src/screenComponents/selfDestructIndicator.cpp:15
 msgid "SELF DESTRUCT ACTIVATED"
-msgstr ""
+msgstr "AUTO DESTRUCTION ACTIVEE"
 
 #: src/screenComponents/selfDestructIndicator.cpp:32
 msgid "Waiting for autorization input: {codes} left"
-msgstr ""
+msgstr "Validation des codes en cours : {codes} restant"
 
 #: src/screenComponents/selfDestructIndicator.cpp:36
 msgid "Have a nice day."
-msgstr ""
+msgstr "Yippee Ki Yay !"
 
 #: src/screenComponents/selfDestructIndicator.cpp:40
 msgid "This ship will self-destruct in {seconds} seconds."
-msgstr ""
+msgstr "Ce vaisseau s'autodetruira dans {seconds} secondes."
 
 #: src/screenComponents/frequencyCurve.cpp:59
 msgid "Damage with your beams"
-msgstr ""
+msgstr "Degats avec vos faisceaux"
 
 #: src/screenComponents/frequencyCurve.cpp:61
-#, fuzzy
 msgid "Damage on your shields"
-msgstr "Reparation systemes"
+msgstr "Degats sur vos boucliers"
 
 #: src/screenComponents/powerDamageIndicator.cpp:33
 msgctxt "systems"
 msgid "DAMAGED"
-msgstr ""
+msgstr "ENDOMMAGE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:37
 msgctxt "systems"
 msgid "JAMMED"
-msgstr ""
+msgstr "BLOQUE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:41
 msgctxt "systems"
 msgid "NO POWER"
-msgstr ""
+msgstr "AUCUNE ENERGIE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:45
 msgctxt "systems"
 msgid "LOW ENERGY"
-msgstr ""
+msgstr "ENERGIE FAIBLE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:49
 msgctxt "systems"
 msgid "LOW POWER"
-msgstr ""
+msgstr "PUISSANCE FAIBLE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:53
 msgctxt "systems"
 msgid "OVERHEATING"
-msgstr ""
+msgstr "SURCHAUFFE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:57
 msgctxt "systems"
 msgid "HACKED"
-msgstr ""
+msgstr "PIRATE"
 
 #: src/screenComponents/indicatorOverlays.cpp:23
-#, fuzzy
 msgid "Game Paused"
-msgstr "Options de jeu"
+msgstr "En pause"
 
 #: src/screenComponents/indicatorOverlays.cpp:26
-#, fuzzy
 msgid "Unpause"
-msgstr "Pause"
+msgstr "Revenir au jeu"
 
 #: src/screenComponents/indicatorOverlays.cpp:126
 msgid "Defeat!"
-msgstr ""
+msgstr "Defaite !"
 
 #: src/screenComponents/indicatorOverlays.cpp:129
 msgid "Victory!"
-msgstr ""
+msgstr "Victoire !"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:18
 msgid "SHIP DESTROYED!"
-msgstr ""
+msgstr "VAISSEAU DETRUIT !"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:19
 msgctxt "shipdestroyed"
 msgid "Return"
-msgstr ""
+msgstr "Retour"
 
 #: src/screenComponents/commsOverlay.cpp:20
 msgid "Opening communications..."
-msgstr ""
+msgstr "Appel en cours..."
 
 #: src/screenComponents/commsOverlay.cpp:39
 msgid "Answer"
-msgstr ""
+msgstr "Repondre"
 
 #: src/screenComponents/commsOverlay.cpp:45
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorer"
 
 #: src/screenComponents/commsOverlay.cpp:54
 msgid "No reply..."
-msgstr ""
+msgstr "Pas de reponse..."
 
 #: src/screenComponents/commsOverlay.cpp:65
 msgid "Communications were suddenly cut"
-msgstr ""
+msgstr "Les communications ont ete brusquement coupees"
 
 #: src/screenComponents/commsOverlay.cpp:76
 msgid "Communications channel closed"
-msgstr ""
+msgstr "Canal de communication ferme"
 
 #: src/screenComponents/commsOverlay.cpp:157
 msgid "Hailed by {name}"
-msgstr ""
+msgstr "Message provenant de {name}"
 
 #: src/screenComponents/jumpIndicator.cpp:24
-#, fuzzy
 msgid "Jump in: {delay}"
-msgstr "Saut dans"
+msgstr "Saut dans : {delay}"
 
 #: src/screenComponents/scanningDialog.cpp:21
 msgctxt "scanning"
 msgid "Electric signature"
-msgstr ""
+msgstr "Signature electrique"
 
 #: src/screenComponents/scanningDialog.cpp:27
 msgctxt "scanning"
 msgid "LOCKED"
-msgstr ""
+msgstr "VERROUILLE"
 
 #: src/screenComponents/mainScreenControls.cpp:14
-#, fuzzy
 msgctxt "controlbutton"
 msgid "Main screen"
 msgstr "Ecran principal"
 
 #: src/screenComponents/mainScreenControls.cpp:31
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Front"
-msgstr "B. avant"
+msgstr "Avant"
 
 #: src/screenComponents/mainScreenControls.cpp:39
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Back"
-msgstr "Retour"
+msgstr "Arriere"
 
 #: src/screenComponents/mainScreenControls.cpp:47
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Left"
 msgstr "Gauche"
 
 #: src/screenComponents/mainScreenControls.cpp:55
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Right"
-msgstr "Droit"
+msgstr "Droite"
 
 #: src/screenComponents/mainScreenControls.cpp:68
 msgctxt "mainscreen"
 msgid "Target lock"
-msgstr ""
+msgstr "Cible verrouillee"
 
 #: src/screenComponents/mainScreenControls.cpp:80
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Tactical"
-msgstr "Radar tactique"
+msgstr "Tactique"
 
 #: src/screenComponents/mainScreenControls.cpp:91
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Long Range"
-msgstr "Radar longue portee"
+msgstr "Longue portee"
 
 #: src/screenComponents/mainScreenControls.cpp:105
 msgctxt "mainscreen"
 msgid "Show comms"
-msgstr ""
+msgstr "Afficher comms"
 
 #: src/screenComponents/mainScreenControls.cpp:116
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Hide comms"
-msgstr "Ouvrir Comm."
+msgstr "Cacher comms."
 
 #: src/screenComponents/hackingDialog.cpp:35
-#, fuzzy
 msgctxt "hacking"
 msgid "Reset"
 msgstr "Reinitialiser"
 
 #: src/screenComponents/hackingDialog.cpp:41
-#, fuzzy
 msgctxt "hacking"
 msgid "Close"
 msgstr "Fermer"
@@ -3912,86 +3894,82 @@ msgstr "Fermer"
 #: src/screenComponents/hackingDialog.cpp:56
 msgctxt "hacking"
 msgid "Target system:"
-msgstr ""
+msgstr "Systeme cible :"
 
 #: src/screenComponents/hackingDialog.cpp:115
 msgctxt "hacking"
 msgid "Hacking in Progress: {percent}%"
-msgstr ""
+msgstr "Piratage en cours : {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:124
 msgctxt "hacking"
 msgid "{target}: hacked {percent}%"
-msgstr ""
+msgstr "{target}: neutralise a {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:141
 msgid "Hacking SUCCESS!"
-msgstr ""
+msgstr "Piratage REUSSI !"
 
 #: src/screenComponents/hackingDialog.cpp:141
 msgid "Hacking FAILURE!"
-msgstr ""
+msgstr "Piratage ECHOUE !"
 
 #: src/spaceObjects/cpuShip.cpp:153
 msgctxt "cpulog"
 msgid "Searching for targets."
-msgstr ""
+msgstr "En recherche de cibles."
 
 #: src/spaceObjects/cpuShip.cpp:162
 msgctxt "cpulog"
 msgid "Searching for hostiles around {x},{y}."
-msgstr ""
+msgstr "En recherche d'ennemis autour de {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:171
 msgctxt "cpulog"
 msgid "Searching for supplies."
-msgstr ""
+msgstr "En recherche de marchandises."
 
 #: src/spaceObjects/cpuShip.cpp:174 src/spaceObjects/cpuShip.cpp:249
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
-msgstr ""
+msgstr "En cours d'amarrage a {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:185
-#, fuzzy
 msgctxt "cpulog"
 msgid "Standing ground for now."
-msgstr "Tenir sa position"
+msgstr "Tient sa position pour l'instant."
 
 #: src/spaceObjects/cpuShip.cpp:193
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
-msgstr ""
+msgstr "En train de defendre {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:203
-#, fuzzy
 msgctxt "cpulog"
 msgid "Defending {callsign}."
-msgstr "Defendre son emplacement"
+msgstr "En train de defendre {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:213
 msgctxt "cpulog"
 msgid "Following {callsign}."
-msgstr ""
+msgstr "En train de suivre {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:221 src/spaceObjects/cpuShip.cpp:229
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
-msgstr ""
+msgstr "Se deplace vers {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:239
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
-msgstr ""
+msgstr "En train d'attaquer {callsign}!"
 
 #: src/spaceObjects/cpuShip.cpp:309
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr "Au repos"
 
 #: src/spaceObjects/cpuShip.cpp:310
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr "Errer"
@@ -3999,134 +3977,130 @@ msgstr "Errer"
 #: src/spaceObjects/cpuShip.cpp:311
 msgctxt "orderscpu"
 msgid "Retreat"
-msgstr ""
+msgstr "Battre en retraite"
 
 #: src/spaceObjects/cpuShip.cpp:312
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr "Tenir sa position"
 
 #: src/spaceObjects/cpuShip.cpp:313
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr "Defendre son emplacement"
 
 #: src/spaceObjects/cpuShip.cpp:314
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Defend Target"
-msgstr "Defendre son emplacement"
+msgstr "Defendre la cible"
 
 #: src/spaceObjects/cpuShip.cpp:315
 msgctxt "orderscpu"
 msgid "Fly in formation"
-msgstr ""
+msgstr "Voler en formation"
 
 #: src/spaceObjects/cpuShip.cpp:316
 msgctxt "orderscpu"
 msgid "Fly towards"
-msgstr ""
+msgstr "Voler vers"
 
 #: src/spaceObjects/cpuShip.cpp:317
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
-msgstr ""
+msgstr "Voler vers (tout ignorer)"
 
 #: src/spaceObjects/cpuShip.cpp:318
 msgctxt "orderscpu"
 msgid "Attack"
-msgstr ""
+msgstr "Attaquer"
 
 #: src/spaceObjects/cpuShip.cpp:319
 msgctxt "orderscpu"
 msgid "Dock"
-msgstr ""
+msgstr "A quai"
 
 #: src/spaceObjects/playerSpaceship.cpp:395
-#, fuzzy
 msgctxt "shiplog"
 msgid "Start of log"
-msgstr "Demarrer le tutoriel"
+msgstr "Debut du journal de bord"
 
 #: src/spaceObjects/playerSpaceship.cpp:1127
 msgctxt "shiplog"
 msgid "Hailed by {name}"
-msgstr ""
+msgstr "Appel provenant de {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1181
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
-msgstr ""
+msgstr "Communication interrompue de l'exterieur"
 
 #: src/spaceObjects/playerSpaceship.cpp:1191
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
-msgstr ""
+msgstr "Appel provenant de {callsign} interrompu"
 
 #: src/spaceObjects/playerSpaceship.cpp:1195
 msgctxt "shiplog"
 msgid "Communication channel closed"
-msgstr ""
+msgstr "Fin de transmission"
 
 #: src/spaceObjects/playerSpaceship.cpp:1366
 #: src/spaceObjects/playerSpaceship.cpp:1443
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
-msgstr ""
+msgstr "Communication etablie avec {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1367
 msgctxt "shiplog"
 msgid "Hailing: {name}"
-msgstr ""
+msgstr "Salutations : {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1390
 #: src/spaceObjects/playerSpaceship.cpp:1391
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
-msgstr ""
+msgstr "Communication etablie avec {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1392
 #: src/spaceObjects/playerSpaceship.cpp:1393
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
-msgstr ""
+msgstr "Communication etablie avec {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1395
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
-msgstr ""
+msgstr "Communication refusee en provenance de {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1396
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
-msgstr ""
+msgstr "Communication refusee a {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1405
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
-msgstr ""
+msgstr "Communication brusquement interrompue."
 
 #: src/spaceObjects/playerSpaceship.cpp:1408
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
-msgstr ""
+msgstr "Communication acceptee provenant de {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1428
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
-msgstr ""
+msgstr "Communication refusee provenant de {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1442
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
-msgstr ""
+msgstr "Canal de communication ouvert a {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1445
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
-msgstr ""
+msgstr "Communication refusee par {name}"
 
 #: scripts/shipTemplates_OLD.lua:237
 msgid ""
