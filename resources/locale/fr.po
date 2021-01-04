@@ -107,7 +107,7 @@ msgstr ""
 "Starhammer original, ce modele ameliore fait un vaisseau d'assaut "
 "phenomenal. Sa faible vitesse le rend difficile a diriger, mais quand il se "
 "trouve au bon endroit au bon moment, meme les boucliers les plus puissants "
-"ne peuvent pas resister longtemps à l'assaut d'un Starhammer. "
+"ne peuvent pas resister longtemps a l'assaut d'un Starhammer. "
 
 #: scripts/shipTemplates_Corvette.lua:102
 msgid ""
@@ -159,7 +159,7 @@ msgid ""
 "power. Their cargo bays include climate control and stabilization systems "
 "that keep the cargo in good condition."
 msgstr ""
-"Les transporteurs de fret acheminent de grandes quantites de marchandises "
+"Les transports de fret acheminent de grandes quantites de marchandises "
 "sur de longues distances grace a la puissance de leurs moteurs a impulsion. "
 "Leurs soutes sont equipees de systemes de controle et de stabilisation "
 "climatique qui maintiennent la cargaison en bon etat."
@@ -238,7 +238,7 @@ msgstr "Reacteur"
 #: src/shipTemplate.cpp:379
 msgctxt "system"
 msgid "Beam Weapons"
-msgstr "Arme a faisceaux"
+msgstr "Faisceaux laser"
 
 #: src/shipTemplate.cpp:342 src/shipTemplate.cpp:352 src/shipTemplate.cpp:379
 #: src/shipTemplate.cpp:380
@@ -491,7 +491,7 @@ msgstr "Demarrer le scenario"
 #: src/menus/serverCreationScreen.cpp:235
 msgctxt "variation"
 msgid "None"
-msgstr "Aucune"
+msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:220
 #: src/menus/serverCreationScreen.cpp:226
@@ -1105,8 +1105,9 @@ msgid "Defense platform"
 msgstr "Plateforme de defense"
 
 #: scripts/shipTemplates_Corvette.lua:217
+msgctxt "subclass"
 msgid "Support"
-msgstr "Support"
+msgstr "Soutien"
 
 #: scripts/shipTemplates_Corvette.lua:235
 #, lua-format
@@ -1137,13 +1138,13 @@ msgstr "Navette LD %d"
 #: scripts/shipTemplates_Corvette.lua:248
 #, lua-format
 msgid "Goods Freighter %d"
-msgstr "Transporteur de fret %d"
+msgstr "Transport de fret %d"
 
 #: scripts/shipTemplates_Corvette.lua:255
 #: scripts/shipTemplates_Corvette.lua:257
 #, lua-format
 msgid "Goods Jump Freighter %d"
-msgstr "Transporteur de fret LD %d"
+msgstr "Transport de fret LD %d"
 
 #: scripts/shipTemplates_Corvette.lua:259
 #: scripts/shipTemplates_Corvette.lua:261
@@ -2378,14 +2379,9 @@ msgstr "Complexite du scan : "
 msgid "Scanning Depth:"
 msgstr "Profondeur du scan :"
 
-#: scripts/shipTemplates_Corvette.lua:217
-msgctxt "subclass"
-msgid "Support"
-msgstr ""
-
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9 scripts/shipTemplates_OLD.lua:349
 #: scripts/shipTemplates_OLD.lua:364 scripts/shipTemplates_OLD.lua:348
@@ -2420,6 +2416,24 @@ msgid ""
 "and destroy everything before they know what hit them. It's effective and "
 "destructive, but extremely expensive."
 msgstr ""
+"L'Odin est un \"navire\" si grand et si unique qu'il est presque a lui tout seul "
+"une classe a part.\n"
+"\n"
+Ce navire est souvent surnomme le \"Pere de tout\", un nom qui decrit bien les "
+"nombreux roles que ce navire peut remplir. C'est a la fois une station de "
+"ravitaillement et une station extremement bien protegee et tres lourdement armee, "
+"capables d'aneantir a elle seule de petites flottes."
+"\n"
+"Le noyau d'Odin contient la plus grande plateforme de teleportation jamais creee. "
+"Environ 150 membres d'équipage sont necessaires rien que pour faire fonctionner "
+"la teleportation, et il faut 5 jours d'operations en continu pour l'alimenter."
+"\n"
+"En raison du cout enorme de ce cuirasse, seuls les systemes stellaires les plus "
+"riches sont capables de construire et d'entretenir des navires tel l'Odin."
+"\n"
+"La tactique principale de cette machine est de sauter dans un systeme ennemi sans "
+"mefiance et de tout detruire avant qu'ils ne se rendent compte de ce qui leur "
+"arrive. C'est efficace et destructeur, mais extremement cher."
 
 #: scripts/shipTemplates_Frigates.lua:14
 msgid "Phobos T3"
@@ -2444,7 +2458,7 @@ msgstr "Fregate"
 #: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:236
 #: scripts/shipTemplates_OLD.lua:235
 msgid "Cruiser"
-msgstr "Croiser"
+msgstr "Croiseur"
 
 #: scripts/shipTemplates_Frigates.lua:16
 msgid ""
@@ -2912,18 +2926,21 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:349 scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Cuirasse"
 
 #: scripts/shipTemplates_OLD.lua:349 scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
 msgid "Assault"
-msgstr ""
+msgstr "Assaut"
 
 #: scripts/shipTemplates_OLD.lua:351 scripts/shipTemplates_OLD.lua:350
 msgid ""
 "The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
 "huge amount of beam weapons in the front. Taking it head-on is suicide."
 msgstr ""
+"Le Cuirasse est une forteresse volante, il est tres lent en vitesse et a la "
+"manoeuvre, mais contient une enorme quantite de faisceaux laser à l'avant. "
+"Le prendre de front serait un suicide."
 
 #: scripts/shipTemplates_OLD.lua:364 scripts/shipTemplates_OLD.lua:363
 msgid "Battlestation"
@@ -2931,13 +2948,15 @@ msgstr "Station de combat"
 
 #: scripts/shipTemplates_OLD.lua:364 scripts/shipTemplates_OLD.lua:363
 msgid "Battlecruiser"
-msgstr ""
+msgstr "Croiseur de guerre"
 
 #: scripts/shipTemplates_OLD.lua:366 scripts/shipTemplates_OLD.lua:365
 msgid ""
 "The battle station is a huge ship with many defensive features. It can be "
 "docked by smaller ships."
 msgstr ""
+"La Station de combat est un immense navire avec de nombreuses fonctionnalites "
+"defensives. Il peut être accoste par de plus petits navires."
 
 #: scripts/shipTemplates_OLD.lua:456 scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
@@ -3375,7 +3394,7 @@ msgstr ""
 "nucleaires lourdes. De nombreux capitaines (et pirates) preferent les EMP "
 "aux armes nucleaires pour ces raisons et les utilisent pour affaiblir les "
 "boucliers des cibles avant de les attaquer en combat rapproche avec un tir a "
-"faisceau laser."
+"faisceaux laser."
 
 #: scripts/science_db.lua:64
 msgid ""
@@ -3695,7 +3714,7 @@ msgstr "Portee de saut max :"
 
 #: src/screens/gm/tweak.cpp:744
 msgid "Max Scan Probes:"
-msgstr "Sondes : capacité max"
+msgstr "Sondes : capacite max"
 
 #: src/screens/gm/tweak.cpp:750
 msgid "Scan Probes:"
