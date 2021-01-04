@@ -2764,9 +2764,8 @@ msgid "Player Missile Cr."
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:116
-#, fuzzy
 msgid "Player Fighter"
-msgstr "Navette %d"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:156
 msgid "Tug"
@@ -2788,9 +2787,8 @@ msgid "Small mine laying vessel with minimal armament, shields and hull"
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:221 scripts/shipTemplates_OLD.lua:220
-#, fuzzy
 msgid "Fighter"
-msgstr "Cargo"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:223 scripts/shipTemplates_OLD.lua:222
 msgid ""
@@ -2830,9 +2828,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:261 scripts/shipTemplates_OLD.lua:260
-#, fuzzy
 msgid "Missile Cruiser"
-msgstr "Systeme de missile"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:261 scripts/shipTemplates_OLD.lua:260
 msgid "Cruiser: Missile"
@@ -2877,9 +2874,8 @@ msgstr ""
 #: scripts/shipTemplates_StarFighters.lua:65
 #: scripts/shipTemplates_StarFighters.lua:121 scripts/shipTemplates_OLD.lua:289
 #: scripts/shipTemplates_OLD.lua:301
-#, fuzzy
 msgid "Starfighter"
-msgstr "Cargo"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:290 scripts/shipTemplates_OLD.lua:289
 msgctxt "subclass"
@@ -4145,7 +4141,6 @@ msgid ""
 msgstr ""
 
 #: scripts/factionInfo.lua:72
-#, fuzzy
 msgid ""
 "The Terran Stellar Navy, or TSN, consists of naval forces based near Terra. "
 "Its members are primarily human.\n"
@@ -4173,7 +4168,6 @@ msgstr ""
 "a-vis des Kraylor."
 
 #: scripts/factionInfo.lua:85
-#, fuzzy
 msgid ""
 "The United Stellar Navy, or USN, is a naval force near the boundary of human "
 "and Kraylor space consisting of mostly humans. The USN is friendly with the "
@@ -4192,7 +4186,6 @@ msgstr ""
 "son sein. Source de l'opposition entre MSU et FST."
 
 #: scripts/factionInfo.lua:95
-#, fuzzy
 msgid ""
 "The Celestial Unified Fleet, or CUF, is the farthest-ranging primarily human "
 "fleet as well as the least xenophobic. The CUF's goals center on exploration "
