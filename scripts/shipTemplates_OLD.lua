@@ -288,7 +288,7 @@ variation:setTubes(2, 8.0) -- Amount of torpedo tubes
 -- The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.
 template = ShipTemplate():setName("Strikeship"):setLocaleName(_("Strikeship")):setModel("small_frigate_3"):setClass(_("Starfighter"),_("subclass","Strike"))
 template:setRadarTrace("radar_striker.png")
-template:setDescription("The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.")
+template:setDescription(_("The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields."))
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
 template:setBeam(1, 40, 5, 1000.0, 6.0, 6)

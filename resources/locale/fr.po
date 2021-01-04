@@ -2719,7 +2719,7 @@ msgstr ""
 #: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:272
 #: scripts/shipTemplates_StarFighters.lua:65 scripts/shipTemplates_OLD.lua:271
 msgid "Gunship"
-msgstr ""
+msgstr "Combattant"
 
 #: scripts/shipTemplates_Frigates.lua:416
 msgid ""
@@ -2859,7 +2859,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:272 scripts/shipTemplates_OLD.lua:271
 msgctxt "subclass"
 msgid "Gunship"
-msgstr ""
+msgstr "Combattant"
 
 #: scripts/shipTemplates_OLD.lua:274
 msgid ""
@@ -2889,7 +2889,7 @@ msgstr ""
 #: scripts/shipTemplates_StarFighters.lua:121 scripts/shipTemplates_OLD.lua:289
 #: scripts/shipTemplates_OLD.lua:301
 msgid "Starfighter"
-msgstr ""
+msgstr "Chasseur stellaire"
 
 #: scripts/shipTemplates_OLD.lua:290 scripts/shipTemplates_OLD.lua:289
 msgctxt "subclass"
@@ -2898,7 +2898,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:302 scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
-msgstr ""
+msgstr "Foudroyant"
 
 #: scripts/shipTemplates_OLD.lua:302 scripts/shipTemplates_OLD.lua:301
 msgctxt "subclass"
@@ -2912,16 +2912,23 @@ msgid ""
 "damage, and lacks in shields. However, due to the jump drive, it's quick to "
 "get into the action."
 msgstr ""
+"Le Foudroyant est un vaisseau equipe d'une plate-forme de teleportation et "
+"concu pour des frappes rapides.\n Il de deplace lentement mais est tres agile. "
+"Il ne produit pas de gros degats et manque de boucliers mais en raison de la "
+"teleportation, il peut rentrer rapidement en action."
 
 #: scripts/shipTemplates_OLD.lua:313 scripts/shipTemplates_OLD.lua:312
 msgid "Striker"
-msgstr ""
+msgstr "L'Eclair"
 
 #: scripts/shipTemplates_OLD.lua:314 scripts/shipTemplates_OLD.lua:313
 msgid ""
 "The Striker is the predecessor to the advanced striker, slow but agile, but "
 "does not do an extreme amount of damage, and lacks in shields"
 msgstr ""
+"L'Eclair est le predecesseur du Foudroyant, lent mais agile, il n'inflige "
+"pas une quantite extreme de degats et manque de boucliers.\n Plus solide et "
+"maniable que le foudroyant, il dispose de la vitesse lumiere."
 
 #: scripts/shipTemplates_OLD.lua:349 scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
@@ -3021,11 +3028,11 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
-msgstr ""
+msgstr "Frelon MT52"
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "Interceptor"
-msgstr ""
+msgstr "Intercepteur"
 
 #: scripts/shipTemplates_StarFighters.lua:15
 msgid ""
@@ -3033,20 +3040,26 @@ msgid ""
 "It's easy to find spare parts for MT52s, not only because they are produced "
 "in large numbers, but also because they suffer high losses in combat."
 msgstr ""
+"Le Hornet MT52 est un intercepteur de base reperable dans de nombreux coins "
+"de la galaxie. Il est facile de trouver des pieces de rechange pour les MT52, "
+"non seulement parce qu'elles sont produites en grand nombre, mais aussi parce "
+"qu'elles subissent des pertes importantes au combat."
 
 #: scripts/shipTemplates_StarFighters.lua:23
 msgid "MU52 Hornet"
-msgstr ""
+msgstr "Frelon MU52"
 
 #: scripts/shipTemplates_StarFighters.lua:25
 msgid ""
 "The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
 "are slightly improved over the MT52 model."
 msgstr ""
+"Le Frelon MU52 est une version amelioree du Frelon MT52. Tous ses systemes sont "
+"legerement ameliores par rapport au modele MT52."
 
 #: scripts/shipTemplates_StarFighters.lua:31
 msgid "MP52 Hornet"
-msgstr ""
+msgstr "Frelon MP52"
 
 #: scripts/shipTemplates_StarFighters.lua:32
 msgid ""
@@ -3054,10 +3067,13 @@ msgid ""
 "nearly twice the hull strength, nearly three times the shielding, better "
 "acceleration, impulse boosters, and a second laser cannon."
 msgstr ""
+"Le Frelon MP52 est une version considerablement amelioree du Frelon MU52, "
+"avec une coque deux fois plus resistante, un blindage presque trois fois superieur, "
+"une meilleure acceleration, des boosters d'impulsion et un deuxieme canon laser."
 
 #: scripts/shipTemplates_StarFighters.lua:65
 msgid "Adder MK5"
-msgstr ""
+msgstr "Vipere MK5"
 
 #: scripts/shipTemplates_StarFighters.lua:67
 msgid ""
@@ -3065,10 +3081,13 @@ msgid ""
 "and law officers alike. It is cheap, fast, and easy to maintain, and it "
 "packs a decent punch."
 msgstr ""
+"La cinquieme generation de la ligne Vipere s'est averee etre un grand succes "
+"parmi les pirates et les officiers de justice. C'est un modele bon marche, rapide et "
+"facile a entretenir, et il a un certain punch."
 
 #: scripts/shipTemplates_StarFighters.lua:78
 msgid "Adder MK4"
-msgstr ""
+msgstr "Vipere MK4"
 
 #: scripts/shipTemplates_StarFighters.lua:80
 msgid ""
@@ -3077,10 +3096,13 @@ msgid ""
 "hull, however, means careless buyers are sometimes conned into buying mark 4 "
 "models disguised as the mark 5."
 msgstr ""
+"Le Vipere MK4 se fait rare de nos jours en raison du succes de son successeur, "
+"le Vipere MK5, qui le remplace desormais. Leur coque etant similaire, certains "
+"acheteurs imprudents achetent parfois des modeles MK4 maquilles en MK5."
 
 #: scripts/shipTemplates_StarFighters.lua:88
 msgid "Adder MK3"
-msgstr ""
+msgstr "Vipere MK3"
 
 #: scripts/shipTemplates_StarFighters.lua:89
 msgid ""
@@ -3091,10 +3113,17 @@ msgid ""
 "similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
 "has weaker shields and hull, but a faster turn speed"
 msgstr ""
+"Le Vipere MK3 est l'un des premiers de la gamme Vipere a rencontrer un certain "
+"succes. Un grand nombre d'entre eux ont ete produits avant que le fabricant ne "
+"fasse sa premiere faillite.\n"
+"\n"
+"Il y a eu une augmentation recente des achats de Vipere MK3 sur le marche secondaire "
+"en raison de son prix bas et de sa similitude avec les modeles suivants. Compare au "
+"MK4, le MK3 a des boucliers et une coque plus faibles, mais une vitesse de rotation plus rapide."
 
 #: scripts/shipTemplates_StarFighters.lua:94
 msgid "Adder MK6"
-msgstr ""
+msgstr "Vipere MK6"
 
 #: scripts/shipTemplates_StarFighters.lua:96
 msgid ""
@@ -3102,10 +3131,13 @@ msgid ""
 "model. Since people still prefer the more familiar and reliable mark 5, the "
 "mark 6 has not seen the same level of success."
 msgstr ""
+"Le Vipere MK6 est une petite mise a niveau du modele MK5 tres reussi. Etant "
+"donne que les gens preferent toujours le MK5, plus familier et plus fiable "
+"surtout, le MK6 ne connais pas le meme succes."
 
 #: scripts/shipTemplates_StarFighters.lua:100
 msgid "Adder MK7"
-msgstr ""
+msgstr "Vipere MK7"
 
 #: scripts/shipTemplates_StarFighters.lua:102
 msgid ""
@@ -3115,10 +3147,16 @@ msgid ""
 "models, especially the Mark 5, prevented them from raising the purchase "
 "price enough to recoup the development and manufacturing costs of the Mark 7"
 msgstr ""
+"La sortie du Vipere MK7 a conduit le fabricant a une seconde faillite.\n"
+"\n"
+"Ils ont apporte des ameliorations au MK7 par rapport au MK6, comme des boucliers "
+"plus solides et des faisceaux laser plus grand. Mais la popularite de leurs modeles "
+"precedents, en particulier le MK5, les a empeches d'augmenter suffisamment le prix "
+"d'achat pour amortir les couts de developpement et de fabrication du MK7."
 
 #: scripts/shipTemplates_StarFighters.lua:106
 msgid "Adder MK8"
-msgstr ""
+msgstr "Vipere MK8"
 
 #: scripts/shipTemplates_StarFighters.lua:108
 msgid ""
@@ -3128,10 +3166,17 @@ msgid ""
 "practical but nostalgic buyer who must purchase replacements for their Adder "
 "Mark 5 fleet"
 msgstr ""
+"Apres avoir fait faillite, la nouvelle direction a revisite son modele le plus "
+"populaire, le MK5, avec plusieurs ameliorations : des boucliers plus solides, "
+"des faisceaux plus amples et plus puissants ainsi qu'une vitesse de rotation "
+"plus rapide.\n"
+"\n"
+"Ainsi est ne le modele MK8. Il se destine a l'acheteur pragmatique mais nostalgique "
+"qui doit acheter des pieces de rechange pour sa flotte de MK5."
 
 #: scripts/shipTemplates_StarFighters.lua:113
 msgid "Adder MK9"
-msgstr ""
+msgstr "Vipere MK9"
 
 #: scripts/shipTemplates_StarFighters.lua:115
 msgid ""
@@ -3141,14 +3186,19 @@ msgid ""
 "two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
 "9.'"
 msgstr ""
+"Sur les traces du MK8 arrive le MK9.\n"
+"Toujours en se basant sur le modele MK5, les concepteurs ont developpes des "
+"boucliers plus solides, des faisceaux plus puissants, plus amples et plus rapides, "
+"une vitesse de rotation plus rapide et pour la petite touche speciale : 2 missiles "
+"nucleaires.\n Comme le dit si bien la pub : \"Vous vous sentirez mieux dans un Vipere MK9.\""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "WX-Lindworm"
-msgstr ""
+msgstr "Dragon-WX"
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "Bomber"
-msgstr ""
+msgstr "Bombardier"
 
 #: scripts/shipTemplates_StarFighters.lua:123
 msgid ""
@@ -3157,6 +3207,11 @@ msgid ""
 "the Worm's two launchers can pack quite a punch. Its goal is to fly in, "
 "destroy its target, and fly out or be destroyed."
 msgstr ""
+"Le Dragon-WX, ou \"Dragon\" comme on l'appelle souvent, est un chasseur stellaire "
+"de classe bombardier.\n"
+"Bien qu'etant l'un des chasseurs stellaires les moins proteges encore en service, "
+"ces deux lances-missiles peuvent faire mal. Son objectif est simple : rechercher "
+"sa cible, la detruire et retourner d'ou il vient ou avant d'etre detruit."
 
 #: scripts/shipTemplates_StarFighters.lua:136
 msgid "ZX-Lindworm"
