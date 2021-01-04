@@ -12,10 +12,6 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
   get_filename_component(SERIOUS_PROTON_DIR "${CMAKE_BINARY_DIR}/${SERIOUS_PROTON_DIR}" ABSOLUTE)
 endif()
 
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-	add_definitions(-DDEBUG)
-endif(CMAKE_BUILD_TYPE MATCHES Debug)
-
 if(ENABLE_CRASH_LOGGER)
  if(WIN32)
   if(NOT DEFINED DRMINGW_ROOT)
@@ -46,9 +42,7 @@ if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     endif()
 endif()
 
-if(MSVC)
-	add_definitions(-DNOMINMAX)
-else()
+if(NOT MSVC)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
 endif()
@@ -56,20 +50,11 @@ endif()
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
     set(CMAKE_INSTALL_PREFIX "./")
-elseif(UNIX)
-    # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-    add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 # Set minimum target macOS version
 if(APPLE)
 	set(MACOSX_DEPLOYMENT_TARGET "10.10")
-endif()
-
-if(CONFIG_DIR)
-    add_definitions(-DCONFIG_DIR="${CONFIG_DIR}")
-elseif(UNIX)
-    add_definitions(-DCONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 ## ensure c++11 is used
@@ -382,10 +367,7 @@ foreach(SP_SOURCE
 	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}/${SP_SOURCE})
 endforeach()
 
-add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
-add_definitions(-DVERSION_NUMBER=${VERSION_NUMBER})
 if(ENABLE_CRASH_LOGGER)
-  add_definitions(-DENABLE_CRASH_LOGGER)
   if(WIN32)
     link_directories(${DRMINGW_ROOT}/lib/)
   endif()
@@ -401,6 +383,25 @@ else()
     add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
+# Defines
+target_compile_definitions(${EXECUTABLE_NAME}
+    PUBLIC
+    # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
+    SFML_NO_DEPRECATED_WARNINGS
+    $<$<CONFIG:Debug>:DEBUG>
+    $<$<BOOL:${MSVC}>:NOMINMAX>
+
+    # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
+    $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+    $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
+    $<$<AND:$<NOT:$<BOOL:${CONFIG_DIR}>>,$<BOOL:${UNIX}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+
+    WINDOW_TITLE="EmptyEpsilon"
+    VERSION_NUMBER=${VERSION_NUMBER}
+
+    $<$<BOOL:${ENABLE_CRASH_LOGGER}>:ENABLE_CRASH_LOGGER>
+)
+
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
 target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:Release>:${OPTIMIZER_FLAGS}>)
@@ -412,7 +413,6 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(SFML 2.3 REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
 target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
-add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
 
 # Setup OpenGl
 if(ANDROID)
