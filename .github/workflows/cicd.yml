@@ -63,5 +63,38 @@ jobs:
           cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton
           ninja
           ninja install
-        
-        
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_type: [Debug, RelWithDebInfo, Release]
+    steps:
+      - name: Dependencies
+        run: |
+          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip”
+          $sfml_zip = "${{github.workspace}}/sfml-dev.zip"
+          (new-object System.Net.WebClient).DownloadFile($sfml_link, $sfml_zip)
+          Expand-Archive -LiteralPath $sfml_zip -DestinationPath "${{github.workspace}}/externals"
+      - name: EmptyEpsilon Checkout
+        uses: actions/checkout@v2
+        with:
+          path: EmptyEpsilon
+      - name: SeriousProton Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: daid/SeriousProton
+          path: SeriousProton
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+      - name: Configure CMake
+        working-directory: ${{github.workspace}}/build
+        run: >
+          cmake ../EmptyEpsilon
+          -G "Visual Studio 16 2019" -A Win32
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DSFML_ROOT="${{github.workspace}}/externals/SFML-2.5.1"
+          -DSERIOUS_PROTON_DIR=../SeriousProton
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . --config ${{ matrix.build_type }}      
