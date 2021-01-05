@@ -161,6 +161,8 @@ void GameGlobalInfo::reset()
     gm_messages.clear();
     on_gm_click = nullptr;
 
+    flushDatabaseData();
+
     foreach(GameEntity, e, entityList)
         e->destroy();
     foreach(SpaceObject, o, space_object_list)
@@ -188,7 +190,6 @@ void GameGlobalInfo::startScenario(string filename)
     i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
-    flushDatabaseData();
     fillDefaultDatabaseData();
 
     P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
