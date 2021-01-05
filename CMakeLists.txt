@@ -513,8 +513,7 @@ if(PYTHONINTERP_FOUND)
         COMMENT "Building script reference documentation.")
   add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
   
-  set(SCRIPT_REFERENCE_INSTALL_DIR .)
-  # Matches what's above.
+  # Matches install logic above.
   if(WIN32)
   	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
   elseif(APPLE)
