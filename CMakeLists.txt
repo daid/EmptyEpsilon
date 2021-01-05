@@ -516,7 +516,16 @@ if(PYTHONINTERP_FOUND)
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Building script reference documentation.")
   add_custom_target(script_reference ALL DEPENDS ${CMAKE_BINARY_DIR}/script_reference.html)
-  install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
+  
+  # Matches install logic above.
+  if(WIN32)
+  	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION .)
+  elseif(APPLE)
+  	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION "EmptyEpsilon.app/Contents/Resources")
+  elseif(NOT ANDROID)
+	# DOCDIR already has PROJECT_NAME (EmptyEpsilon) appended (from CMake docs)
+  	install(FILES ${CMAKE_BINARY_DIR}/script_reference.html DESTINATION "${CMAKE_INSTALL_FULL_DOCDIR}")
+  endif()
 endif()
 
 add_custom_target(update_locale
