@@ -73,12 +73,14 @@ msgid ""
 "Atlantis X23 is fitted with a jump drive, it can also serve as an "
 "intersystem patrol craft."
 msgstr ""
-"L' Atlantis X23 est le plus petit modele de destroyer existant. Il associe "
-"la taille d'une fregate a la puissance de feu d'une corvette, ce qui en fait "
-"un excellent vaisseau d'escorte pour defendre de plus grands vaisseaux "
-"contre de multiples appareils ennemis de classe inferieure. Muni d'un moteur "
-"de saut, l' Atlantis X23 est particulierement adapte aux missions de "
-"patrouille longue distance."
+"L' Atlantis X23 est le plus petit modele de destroyer existant.\n"
+"\n"
+"Il associe la taille d'une fregate a la puissance de feu d'une corvette, "
+"ce qui en fait un excellent vaisseau d'escorte pour defendre de plus grands "
+"vaisseaux contre de multiples appareils ennemis de classe inferieure.\n"
+"\n"
+"Muni d'un moteur de saut, l' Atlantis X23 est particulierement adapte aux "
+"missions de patrouille longue distance."
 
 #: scripts/shipTemplates_Corvette.lua:34
 msgid ""
@@ -103,11 +105,13 @@ msgid ""
 "long."
 msgstr ""
 "Contrairement a son predecesseur, le Starhammer II est a la hauteur de son "
-"nom. En solutionnant les problemes de puissance et de surchauffe du "
+"nom.\n"
+"\n"
+"En solutionnant les problemes de puissance et de surchauffe du "
 "Starhammer original, ce modele ameliore fait un vaisseau d'assaut "
 "phenomenal. Sa faible vitesse le rend difficile a diriger, mais quand il se "
 "trouve au bon endroit au bon moment, meme les boucliers les plus puissants "
-"ne peuvent pas resister longtemps à l'assaut d'un Starhammer. "
+"ne peuvent pas resister longtemps a l'assaut d'un Starhammer. "
 
 #: scripts/shipTemplates_Corvette.lua:102
 msgid ""
@@ -140,9 +144,10 @@ msgid ""
 msgstr ""
 "Cette plate-forme de defense stationnaire fonctionne comme une station avec "
 "ses baies d'amarrage et de reapprovisionnement. Elle est cependant equipee "
-"de puissants faisceaux laser et peut pivoter lentement. Les systemes les "
-"plus etendus utilisent souvent ces plates-formes pour reapprovisionner les "
-"navires de patrouille."
+"de puissants faisceaux laser et peut pivoter lentement.\n"
+"\n"
+"Les systemes les plus etendus utilisent souvent ces plates-formes pour "
+"reapprovisionner les navires de patrouille."
 
 #: scripts/shipTemplates_Corvette.lua:236
 msgid ""
@@ -159,8 +164,9 @@ msgid ""
 "power. Their cargo bays include climate control and stabilization systems "
 "that keep the cargo in good condition."
 msgstr ""
-"Les transporteurs de fret acheminent de grandes quantites de marchandises "
-"sur de longues distances grace a la puissance de leurs moteurs a impulsion. "
+"Les transports de fret acheminent de grandes quantites de marchandises "
+"sur de longues distances grace a la puissance de leurs moteurs a impulsion.\n"
+"\n"
 "Leurs soutes sont equipees de systemes de controle et de stabilisation "
 "climatique qui maintiennent la cargaison en bon etat."
 
@@ -205,9 +211,10 @@ msgid ""
 "It is designed to carry other ships deep into space. So it has special "
 "docking parameters, allowing other ships to attach themselves to this ship."
 msgstr ""
-"Il s'agit d'un cargo specialise. Il ne transporte aucune cargaison, car sa "
+"Il s' agit d'un cargo specialise. Il ne transporte aucune cargaison, car sa "
 "soute est occupee par un moteur de saut specialise et le stockage d'energie "
 "necessaire pour faire fonctionner ce moteur de saut.\n"
+"\n"
 "Il est concu pour transporter d'autres vaisseaux a travers l'espace. Il a "
 "donc des parametres d'amarrage particuliers, permettant a d'autres vaisseaux "
 "de s'y attacher."
@@ -238,7 +245,7 @@ msgstr "Reacteur"
 #: src/shipTemplate.cpp:379
 msgctxt "system"
 msgid "Beam Weapons"
-msgstr "Arme a faisceaux"
+msgstr "Faisceaux laser"
 
 #: src/shipTemplate.cpp:342 src/shipTemplate.cpp:352 src/shipTemplate.cpp:379
 #: src/shipTemplate.cpp:380
@@ -491,7 +498,7 @@ msgstr "Demarrer le scenario"
 #: src/menus/serverCreationScreen.cpp:235
 msgctxt "variation"
 msgid "None"
-msgstr "Aucune"
+msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:220
 #: src/menus/serverCreationScreen.cpp:226
@@ -1070,7 +1077,7 @@ msgstr "Atlantis X23"
 #: scripts/shipTemplates_Corvette.lua:301
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Corvette"
-msgstr "Corvette"
+msgstr "Corvettes"
 
 #: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
 msgid "Destroyer"
@@ -1105,8 +1112,9 @@ msgid "Defense platform"
 msgstr "Plateforme de defense"
 
 #: scripts/shipTemplates_Corvette.lua:217
+msgctxt "subclass"
 msgid "Support"
-msgstr "Support"
+msgstr "Soutien"
 
 #: scripts/shipTemplates_Corvette.lua:235
 #, lua-format
@@ -1137,13 +1145,13 @@ msgstr "Navette LD %d"
 #: scripts/shipTemplates_Corvette.lua:248
 #, lua-format
 msgid "Goods Freighter %d"
-msgstr "Transporteur de fret %d"
+msgstr "Transport de fret %d"
 
 #: scripts/shipTemplates_Corvette.lua:255
 #: scripts/shipTemplates_Corvette.lua:257
 #, lua-format
 msgid "Goods Jump Freighter %d"
-msgstr "Transporteur de fret LD %d"
+msgstr "Transport de fret LD %d"
 
 #: scripts/shipTemplates_Corvette.lua:259
 #: scripts/shipTemplates_Corvette.lua:261
@@ -1951,7 +1959,7 @@ msgstr "Journal de bord"
 
 #: src/shipTemplate.cpp:123
 msgid "No class"
-msgstr "Classe non definie"
+msgstr "Classes non definies"
 
 #: src/shipTemplate.cpp:124
 msgid "No sub-class"
@@ -2378,21 +2386,16 @@ msgstr "Complexite du scan : "
 msgid "Scanning Depth:"
 msgstr "Profondeur du scan :"
 
-#: scripts/shipTemplates_Corvette.lua:217
-msgctxt "subclass"
-msgid "Support"
-msgstr ""
-
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9 scripts/shipTemplates_OLD.lua:349
 #: scripts/shipTemplates_OLD.lua:364 scripts/shipTemplates_OLD.lua:348
 #: scripts/shipTemplates_OLD.lua:363
 msgctxt "class"
 msgid "Dreadnought"
-msgstr "Cuirasse"
+msgstr "Cuirasses"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgctxt "subclass"
@@ -2420,6 +2423,24 @@ msgid ""
 "and destroy everything before they know what hit them. It's effective and "
 "destructive, but extremely expensive."
 msgstr ""
+"L'Odin est un \"navire\" si grand et si unique qu'il est presque a lui tout seul "
+"une classe a part.\n"
+"\n"
+"Ce navire est souvent surnomme le \"Pere de tout\", un nom qui decrit bien les "
+"nombreux roles qu'il peut remplir. C'est a la fois une station de "
+"ravitaillement et une station extremement bien protegee et tres lourdement armee, "
+"capables d'aneantir a elle seule de petites flottes.\n"
+"\n"
+"Le noyau de l'Odin contient la plus grande plateforme de teleportation jamais creee. "
+"Environ 150 membres d'equipage sont necessaires rien que pour faire fonctionner "
+"la teleportation, et il faut 5 jours d'operations en continu pour l'alimenter.\n"
+"\n"
+"En raison du cout enorme de ce cuirasse, seuls les systemes stellaires les plus "
+"riches sont capables de construire et d'entretenir des navires tel l'Odin.\n"
+"\n"
+"La tactique principale de cette machine est de sauter dans un systeme ennemi sans "
+"mefiance et de tout detruire avant qu'ils ne se rendent compte de ce qui leur "
+"arrive. C'est efficace et destructeur, mais extremement cher."
 
 #: scripts/shipTemplates_Frigates.lua:14
 msgid "Phobos T3"
@@ -2439,12 +2460,12 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Frigate"
-msgstr "Fregate"
+msgstr "Fregates"
 
 #: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:236
 #: scripts/shipTemplates_OLD.lua:235
 msgid "Cruiser"
-msgstr "Croiser"
+msgstr "Croiseur"
 
 #: scripts/shipTemplates_Frigates.lua:16
 msgid ""
@@ -2705,7 +2726,7 @@ msgstr ""
 #: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:272
 #: scripts/shipTemplates_StarFighters.lua:65 scripts/shipTemplates_OLD.lua:271
 msgid "Gunship"
-msgstr ""
+msgstr "Combattant"
 
 #: scripts/shipTemplates_Frigates.lua:416
 msgid ""
@@ -2845,7 +2866,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:272 scripts/shipTemplates_OLD.lua:271
 msgctxt "subclass"
 msgid "Gunship"
-msgstr ""
+msgstr "Combattant"
 
 #: scripts/shipTemplates_OLD.lua:274
 msgid ""
@@ -2875,7 +2896,7 @@ msgstr ""
 #: scripts/shipTemplates_StarFighters.lua:121 scripts/shipTemplates_OLD.lua:289
 #: scripts/shipTemplates_OLD.lua:301
 msgid "Starfighter"
-msgstr ""
+msgstr "Chasseurs stellaires"
 
 #: scripts/shipTemplates_OLD.lua:290 scripts/shipTemplates_OLD.lua:289
 msgctxt "subclass"
@@ -2884,12 +2905,12 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:302 scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
-msgstr ""
+msgstr "Foudroyant"
 
 #: scripts/shipTemplates_OLD.lua:302 scripts/shipTemplates_OLD.lua:301
 msgctxt "subclass"
 msgid "Patrol"
-msgstr ""
+msgstr "Patrouilleur"
 
 #: scripts/shipTemplates_OLD.lua:304 scripts/shipTemplates_OLD.lua:303
 msgid ""
@@ -2898,32 +2919,44 @@ msgid ""
 "damage, and lacks in shields. However, due to the jump drive, it's quick to "
 "get into the action."
 msgstr ""
+"Le Foudroyant est un vaisseau equipe d'une plate-forme de teleportation et "
+"concu pour des frappes rapides.\n"
+"\n"
+"Il se deplace lentement mais est tres agile. "
+"Il ne produit pas de gros degats et manque de boucliers mais en raison de la "
+"teleportation, il peut rentrer rapidement en action."
 
 #: scripts/shipTemplates_OLD.lua:313 scripts/shipTemplates_OLD.lua:312
 msgid "Striker"
-msgstr ""
+msgstr "L'Eclair"
 
 #: scripts/shipTemplates_OLD.lua:314 scripts/shipTemplates_OLD.lua:313
 msgid ""
 "The Striker is the predecessor to the advanced striker, slow but agile, but "
 "does not do an extreme amount of damage, and lacks in shields"
 msgstr ""
+"L'Eclair est le predecesseur du Foudroyant, lent mais agile, il n'inflige "
+"pas une quantite extreme de degats et manque de boucliers.\n Plus solide et "
+"maniable que le foudroyant, il dispose de la vitesse lumiere."
 
 #: scripts/shipTemplates_OLD.lua:349 scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Cuirasse"
 
 #: scripts/shipTemplates_OLD.lua:349 scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
 msgid "Assault"
-msgstr ""
+msgstr "Assaut"
 
 #: scripts/shipTemplates_OLD.lua:351 scripts/shipTemplates_OLD.lua:350
 msgid ""
 "The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
 "huge amount of beam weapons in the front. Taking it head-on is suicide."
 msgstr ""
+"Le Cuirasse est une forteresse volante, il est tres lent en vitesse et a la "
+"manoeuvre, mais contient une enorme quantite de faisceaux laser a l'avant.\n"
+"Le prendre de front serait un suicide."
 
 #: scripts/shipTemplates_OLD.lua:364 scripts/shipTemplates_OLD.lua:363
 msgid "Battlestation"
@@ -2931,13 +2964,15 @@ msgstr "Station de combat"
 
 #: scripts/shipTemplates_OLD.lua:364 scripts/shipTemplates_OLD.lua:363
 msgid "Battlecruiser"
-msgstr ""
+msgstr "Croiseur de guerre"
 
 #: scripts/shipTemplates_OLD.lua:366 scripts/shipTemplates_OLD.lua:365
 msgid ""
 "The battle station is a huge ship with many defensive features. It can be "
 "docked by smaller ships."
 msgstr ""
+"La Station de combat est un immense navire avec de nombreuses fonctionnalites "
+"defensives. Il peut etre accoste par de plus petits navires."
 
 #: scripts/shipTemplates_OLD.lua:456 scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
@@ -3002,11 +3037,11 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
-msgstr ""
+msgstr "Frelon MT52"
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "Interceptor"
-msgstr ""
+msgstr "Intercepteur"
 
 #: scripts/shipTemplates_StarFighters.lua:15
 msgid ""
@@ -3014,20 +3049,28 @@ msgid ""
 "It's easy to find spare parts for MT52s, not only because they are produced "
 "in large numbers, but also because they suffer high losses in combat."
 msgstr ""
+"Le Frelon MT52 est un intercepteur de base reperable dans de nombreux coins "
+"de la galaxie.\n"
+"\n"
+"Il est facile de trouver des pieces de rechange pour les MT52, "
+"non seulement parce qu' elles sont produites en grand nombre, mais aussi parce "
+"qu' elles subissent des pertes importantes au combat."
 
 #: scripts/shipTemplates_StarFighters.lua:23
 msgid "MU52 Hornet"
-msgstr ""
+msgstr "Frelon MU52"
 
 #: scripts/shipTemplates_StarFighters.lua:25
 msgid ""
 "The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
 "are slightly improved over the MT52 model."
 msgstr ""
+"Le Frelon MU52 est une version amelioree du Frelon MT52. Tous ses systemes sont "
+"legerement ameliores par rapport au modele MT52."
 
 #: scripts/shipTemplates_StarFighters.lua:31
 msgid "MP52 Hornet"
-msgstr ""
+msgstr "Frelon MP52"
 
 #: scripts/shipTemplates_StarFighters.lua:32
 msgid ""
@@ -3035,10 +3078,13 @@ msgid ""
 "nearly twice the hull strength, nearly three times the shielding, better "
 "acceleration, impulse boosters, and a second laser cannon."
 msgstr ""
+"Le Frelon MP52 est une version considerablement amelioree du Frelon MU52, "
+"avec une coque deux fois plus resistante, un blindage presque trois fois superieur, "
+"une meilleure acceleration, des boosters d'impulsion et un deuxieme canon laser."
 
 #: scripts/shipTemplates_StarFighters.lua:65
 msgid "Adder MK5"
-msgstr ""
+msgstr "Vipere MK5"
 
 #: scripts/shipTemplates_StarFighters.lua:67
 msgid ""
@@ -3046,10 +3092,13 @@ msgid ""
 "and law officers alike. It is cheap, fast, and easy to maintain, and it "
 "packs a decent punch."
 msgstr ""
+"La cinquieme generation de la ligne Vipere s'est averee etre un grand succes "
+"parmi les pirates et les officiers de justice. C'est un modele bon marche, rapide et "
+"facile a entretenir, et il a un certain punch."
 
 #: scripts/shipTemplates_StarFighters.lua:78
 msgid "Adder MK4"
-msgstr ""
+msgstr "Vipere MK4"
 
 #: scripts/shipTemplates_StarFighters.lua:80
 msgid ""
@@ -3058,10 +3107,13 @@ msgid ""
 "hull, however, means careless buyers are sometimes conned into buying mark 4 "
 "models disguised as the mark 5."
 msgstr ""
+"Le Vipere MK4 se fait rare de nos jours en raison du succes de son successeur, "
+"le Vipere MK5, qui le remplace desormais. Leur coque etant similaire, certains "
+"acheteurs imprudents achetent parfois des modeles MK4 maquilles en MK5."
 
 #: scripts/shipTemplates_StarFighters.lua:88
 msgid "Adder MK3"
-msgstr ""
+msgstr "Vipere MK3"
 
 #: scripts/shipTemplates_StarFighters.lua:89
 msgid ""
@@ -3072,10 +3124,17 @@ msgid ""
 "similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
 "has weaker shields and hull, but a faster turn speed"
 msgstr ""
+"Le Vipere MK3 est l'un des premiers de la gamme Vipere a rencontrer un certain "
+"succes. Un grand nombre d'entre eux ont ete produits avant que le fabricant ne "
+"fasse sa premiere faillite.\n"
+"\n"
+"Il y a eu une augmentation recente des achats de Vipere MK3 sur le marche secondaire "
+"en raison de son prix bas et de sa similitude avec les modeles suivants. Compare au "
+"MK4, le MK3 a des boucliers et une coque plus faibles, mais une vitesse de rotation plus rapide."
 
 #: scripts/shipTemplates_StarFighters.lua:94
 msgid "Adder MK6"
-msgstr ""
+msgstr "Vipere MK6"
 
 #: scripts/shipTemplates_StarFighters.lua:96
 msgid ""
@@ -3083,10 +3142,13 @@ msgid ""
 "model. Since people still prefer the more familiar and reliable mark 5, the "
 "mark 6 has not seen the same level of success."
 msgstr ""
+"Le Vipere MK6 est une petite mise a niveau du modele MK5 tres reussi. Etant "
+"donne que les gens preferent toujours le MK5, plus familier et plus fiable "
+"surtout, le MK6 ne connais pas le meme succes."
 
 #: scripts/shipTemplates_StarFighters.lua:100
 msgid "Adder MK7"
-msgstr ""
+msgstr "Vipere MK7"
 
 #: scripts/shipTemplates_StarFighters.lua:102
 msgid ""
@@ -3096,10 +3158,18 @@ msgid ""
 "models, especially the Mark 5, prevented them from raising the purchase "
 "price enough to recoup the development and manufacturing costs of the Mark 7"
 msgstr ""
+"La sortie du Vipere MK7 a conduit le fabricant a une seconde faillite.\n"
+"\n"
+"Ils lui ont apportes des ameliorations par rapport au MK6, comme des boucliers "
+"plus solides et des faisceaux laser plus grand.\n"
+"\n"
+"Malgre cela, la popularite de leurs modeles precedents, en particulier le "
+"MK5, les a empeches d'augmenter suffisamment le prix d'achat pour amortir "
+"les couts de developpement et de fabrication du MK7."
 
 #: scripts/shipTemplates_StarFighters.lua:106
 msgid "Adder MK8"
-msgstr ""
+msgstr "Vipere MK8"
 
 #: scripts/shipTemplates_StarFighters.lua:108
 msgid ""
@@ -3109,10 +3179,17 @@ msgid ""
 "practical but nostalgic buyer who must purchase replacements for their Adder "
 "Mark 5 fleet"
 msgstr ""
+"Apres avoir fait faillite, la nouvelle direction a revisite son modele le plus "
+"populaire, le MK5, avec plusieurs ameliorations : des boucliers plus solides, "
+"des faisceaux plus amples et plus puissants ainsi qu'une vitesse de rotation "
+"plus rapide.\n"
+"\n"
+"Ainsi est ne le modele MK8. Il se destine a l'acheteur pragmatique mais nostalgique "
+"qui doit acheter des pieces de rechange pour sa flotte de MK5."
 
 #: scripts/shipTemplates_StarFighters.lua:113
 msgid "Adder MK9"
-msgstr ""
+msgstr "Vipere MK9"
 
 #: scripts/shipTemplates_StarFighters.lua:115
 msgid ""
@@ -3122,14 +3199,23 @@ msgid ""
 "two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
 "9.'"
 msgstr ""
+"Sur les traces du MK8 arrive le MK9.\n"
+"\n"
+"Toujours en se basant sur le modele MK5, les concepteurs ont developpes des "
+"boucliers plus solides, des faisceaux plus puissants, amples et rapides ainsi "
+"qu' une vitesse de rotation plus rapide.\n"
+"\n"
+"Petite touche speciale : 2 missiles nucleaires.\n"
+"\n"
+"Comme le dit si bien leur "slogan : \"Vous vous sentirez mieux dans un Vipere MK9.\""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "WX-Lindworm"
-msgstr ""
+msgstr "Dragon-WX"
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "Bomber"
-msgstr ""
+msgstr "Bombardier"
 
 #: scripts/shipTemplates_StarFighters.lua:123
 msgid ""
@@ -3138,6 +3224,12 @@ msgid ""
 "the Worm's two launchers can pack quite a punch. Its goal is to fly in, "
 "destroy its target, and fly out or be destroyed."
 msgstr ""
+"Le Dragon-WX, ou \"Dragon\" comme on l'appelle souvent, est un chasseur stellaire "
+"de classe bombardier.\n"
+"\n"
+"Bien qu'etant l'un des chasseurs stellaires les moins bien proteges encore en service, "
+"ces deux lance-missiles peuvent faire mal. Son objectif est simple : rechercher "
+"sa cible, la detruire et retourner d'ou il vient avant d'etre detruit."
 
 #: scripts/shipTemplates_StarFighters.lua:136
 msgid "ZX-Lindworm"
@@ -3375,7 +3467,7 @@ msgstr ""
 "nucleaires lourdes. De nombreux capitaines (et pirates) preferent les EMP "
 "aux armes nucleaires pour ces raisons et les utilisent pour affaiblir les "
 "boucliers des cibles avant de les attaquer en combat rapproche avec un tir a "
-"faisceau laser."
+"faisceaux laser."
 
 #: scripts/science_db.lua:64
 msgid ""
@@ -3695,7 +3787,7 @@ msgstr "Portee de saut max :"
 
 #: src/screens/gm/tweak.cpp:744
 msgid "Max Scan Probes:"
-msgstr "Sondes : capacité max"
+msgstr "Sondes : capacite max"
 
 #: src/screens/gm/tweak.cpp:750
 msgid "Scan Probes:"
