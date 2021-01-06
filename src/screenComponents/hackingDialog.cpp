@@ -73,16 +73,16 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     show();
     while(target_list->entryCount() > 0)
         target_list->removeEntry(0);
-    std::vector<std::pair<string, string> > targets = target->getLocaleHackingTargets();
-    for(std::pair<string, string>& target : targets)
+    std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
+    for(std::pair<ESystem, float>& target : targets)
     {
-        target_list->addEntry(target.second, target.first);
+        target_list->addEntry(getLocaleSystemName(target.first), getSystemName(target.first));
     }
     if (targets.size() == 1)
     {
         target_selection_box->hide();
-        target_system = targets[0].first;
-        locale_target_system = targets[0].second;
+        target_system = getSystemName(targets[0].first);
+        locale_target_system = getLocaleSystemName(targets[0].first);
         getNewGame();
     } else {
         target_selection_box->show();
@@ -116,10 +116,10 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
     }
     if (target_system != "")
     {
-        std::vector<std::pair<string, float> > targets = target->getHackingTargets();
-        for(std::pair<string, float>& target : targets)
+        std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
+        for(std::pair<ESystem, float>& target : targets)
         {
-            if (target.first == target_system)
+            if (getSystemName(target.first) == target_system)
             {
                 hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", locale_target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
                 break;

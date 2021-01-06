@@ -357,14 +357,9 @@ bool SpaceObject::canBeHackedBy(P<SpaceObject> other)
     return false;
 }
 
-std::vector<std::pair<string, float> > SpaceObject::getHackingTargets()
+std::vector<std::pair<ESystem, float> > SpaceObject::getHackingTargets()
 {
-    return std::vector<std::pair<string, float> >();
-}
-
-std::vector<std::pair<string, string> > SpaceObject::getLocaleHackingTargets()
-{
-    return std::vector<std::pair<string, string> >();
+    return std::vector<std::pair<ESystem, float> >();
 }
 
 void SpaceObject::hackFinished(P<SpaceObject> source, string target)
