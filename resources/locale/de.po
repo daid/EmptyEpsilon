@@ -43,7 +43,6 @@ msgid ""
 msgstr "Kalibriere Touchscreen"
 
 #: src/menus/optionsMenu.cpp:26
-#, fuzzy
 msgid "Graphics Options"
 msgstr "Grafikoptionen"
 
@@ -52,7 +51,6 @@ msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
 
 #: src/menus/optionsMenu.cpp:60
-#, fuzzy
 msgid "Sound Options"
 msgstr "Optionen"
 
@@ -3760,10 +3758,9 @@ msgid "Asteroid"
 msgstr "Asteroid"
 
 #: src/screens/gm/objectCreationView.cpp:72
-#, fuzzy
 msgctxt "create"
 msgid "Visual Asteroid"
-msgstr "Asteroid"
+msgstr "Visueller Asteroid"
 
 #: src/screens/gm/objectCreationView.cpp:76
 msgctxt "create"
