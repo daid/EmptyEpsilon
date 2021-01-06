@@ -1035,6 +1035,19 @@ std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
     return results;
 }
 
+std::vector<std::pair<string, string> > SpaceShip::getLocaleHackingTargets()
+{
+    std::vector<std::pair<string, string>> results;
+    for(unsigned int n=0; n<SYS_COUNT; n++)
+    {
+        if (n != SYS_Reactor && hasSystem(ESystem(n)))
+        {
+            results.emplace_back(getSystemName(ESystem(n)), getLocaleSystemName(ESystem(n)));
+        }
+    }
+    return results;
+}
+
 void SpaceShip::hackFinished(P<SpaceObject> source, string target)
 {
     for(unsigned int n=0; n<SYS_COUNT; n++)

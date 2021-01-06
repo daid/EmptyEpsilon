@@ -199,6 +199,7 @@ public:
     virtual void scannedBy(P<SpaceObject> other);
     virtual bool canBeHackedBy(P<SpaceObject> other);
     virtual std::vector<std::pair<string, float> > getHackingTargets();
+    virtual std::vector<std::pair<string, string> > getLocaleHackingTargets();
     virtual void hackFinished(P<SpaceObject> source, string target);
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }

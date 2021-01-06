@@ -362,6 +362,11 @@ std::vector<std::pair<string, float> > SpaceObject::getHackingTargets()
     return std::vector<std::pair<string, float> >();
 }
 
+std::vector<std::pair<string, string> > SpaceObject::getLocaleHackingTargets()
+{
+    return std::vector<std::pair<string, string> >();
+}
+
 void SpaceObject::hackFinished(P<SpaceObject> source, string target)
 {
 }

@@ -281,6 +281,7 @@ public:
 
     virtual bool canBeHackedBy(P<SpaceObject> other) override;
     virtual std::vector<std::pair<string, float> > getHackingTargets() override;
+    virtual std::vector<std::pair<string, string> > getLocaleHackingTargets() override;
     virtual void hackFinished(P<SpaceObject> source, string target) override;
 
     /*!
