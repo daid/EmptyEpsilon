@@ -49,7 +49,6 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     progress_bar->setPosition(-25, 75, ATopRight);
     progress_bar->setSize(50, game->getBoardSize().y);
 
-
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2 + 200, 0, ACenter);
 
@@ -59,6 +58,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     target_list = new GuiListbox(target_selection_box, "", [this](int index, string value)
     {
         target_system = value;
+        locale_target_system = target_list->getEntryName(index);
         getNewGame();
     });
     target_list->setPosition(25, 75, ATopLeft);
@@ -73,18 +73,18 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     show();
     while(target_list->entryCount() > 0)
         target_list->removeEntry(0);
-    std::vector<std::pair<string, float> > targets = target->getHackingTargets();
-    for(std::pair<string, float>& target : targets)
+    std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
+    for(std::pair<ESystem, float>& target : targets)
     {
-        target_list->addEntry(target.first, target.first);
+        target_list->addEntry(getLocaleSystemName(target.first), getSystemName(target.first));
     }
     if (targets.size() == 1)
     {
         target_selection_box->hide();
-        target_system = targets[0].first;
+        target_system = getSystemName(targets[0].first);
+        locale_target_system = getLocaleSystemName(targets[0].first);
         getNewGame();
-    } else
-    {
+    } else {
         target_selection_box->show();
         game->disable();
     }
@@ -116,12 +116,12 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
     }
     if (target_system != "")
     {
-        std::vector<std::pair<string, float> > targets = target->getHackingTargets();
-        for(std::pair<string, float>& target : targets)
+        std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
+        for(std::pair<ESystem, float>& target : targets)
         {
-            if (target.first == target_system)
+            if (getSystemName(target.first) == target_system)
             {
-                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
+                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", locale_target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
                 break;
             }
         }
@@ -167,6 +167,4 @@ void GuiHackingDialog::getNewGame() {
     progress_bar->setPosition(-25, (minigame_box->getSize().y - board_size.y)/2, ATopRight);
 
     target_selection_box->setPosition(minigame_box->getSize().x / 2 + 150, 0, ACenter);
-
-
 }

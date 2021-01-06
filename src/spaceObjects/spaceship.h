@@ -280,7 +280,7 @@ public:
     bool isFullyScannedByFaction(int faction_id);
 
     virtual bool canBeHackedBy(P<SpaceObject> other) override;
-    virtual std::vector<std::pair<string, float> > getHackingTargets() override;
+    virtual std::vector<std::pair<ESystem, float> > getHackingTargets() override;
     virtual void hackFinished(P<SpaceObject> source, string target) override;
 
     /*!
