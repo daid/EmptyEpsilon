@@ -542,6 +542,8 @@ if(PYTHONINTERP_FOUND)
 endif()
 
 add_custom_target(update_locale
+	COMMAND sed -i "/^#: /d" resources/locale/en.po
+	COMMAND sed -i "/^#: /d" resources/locale/tutorial.en.po
 	COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -j -d resources/locale/en ${SOURCES}
 	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/en scripts/shipTemplates_*.lua scripts/comms_ship.lua scripts/comms_station.lua scripts/comms_supply_drop.lua scripts/factionInfo.lua scripts/science_db.lua
 	COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/tutorial.en scripts/tutorial_*.lua
