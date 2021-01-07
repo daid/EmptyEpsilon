@@ -203,6 +203,7 @@ set(SOURCES
 	src/gui/joystickConfig.cpp
 	src/gui/mouseRenderer.cpp
 	src/gui/scriptError.cpp
+	src/gui/gui2_spinbox.cpp
 	src/gui/gui2_slider.cpp
 	src/gui/gui2_togglebutton.cpp
 	src/gui/gui2_arrow.cpp
