@@ -2749,7 +2749,7 @@ msgstr ""
 "systeme de teleportation bon marche et voila ! Le Demon G3 etait ne ! \n"
 "\n"
 "Comme pour le Combattant, il est equipe d'un tube de missile a tete chercheuse et "
-"de faisceaux laser pour abattre facilement les navires les plus faibles. 
+"de faisceaux laser pour abattre facilement les navires les plus faibles. "
 "La teleportation en fait un navire plus dangereux que le Combattant d'origine."
 
 #: scripts/shipTemplates_Frigates.lua:428
