@@ -20,6 +20,7 @@ public:
     virtual void collide(Collisionable* target, float force) override;
 
     void setSize(float size);
+    float getSize();
 
     virtual string getExportLine() override { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
@@ -37,6 +38,7 @@ public:
     virtual void draw3D() override;
 
     void setSize(float size);
+    float getSize();
 
     virtual string getExportLine() override { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
