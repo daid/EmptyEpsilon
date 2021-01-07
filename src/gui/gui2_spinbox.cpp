@@ -19,13 +19,7 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, func_t func)
         // Decrement by the interval amount.
         setValue(getValue() - interval);
 
-        // Don't let the value drop below the minimum.
-        if (getValue() < min_value)
-        {
-            setValue(min_value);
-        }
-
-        // callback();
+        callback(this->func);
     });
     decrement->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 
@@ -35,40 +29,60 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, func_t func)
         // Increment by the interval amount.
         setValue(getValue() + interval);
 
-        // Don't let the value increase past the maximum.
-        if (getValue() > max_value)
-        {
-            setValue(max_value);
-        }
-
-        // callback();
+        callback(this->func);
     });
     increment->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 }
 
 void GuiSpinBox::onDraw(sf::RenderTarget& window)
 {
-    // Disable buttons if value is at min/max.
-    if (getValue() <= min_value)
+    // Only check value if something's in the box.
+    if (text.length() > 0)
     {
-        decrement->setEnable(false);
-    }
-    else
-    {
-        decrement->setEnable(true);
-    }
+        // Disable inc/dec buttons if value is at min/max.
+        if (getValue() <= min_value)
+        {
+            decrement->setEnable(false);
+        }
+        else
+        {
+            decrement->setEnable(true);
+        }
 
-    if (getValue() >= max_value)
-    {
-        increment->setEnable(false);
-    }
-    else
-    {
-        increment->setEnable(true);
+        if (getValue() >= max_value)
+        {
+            increment->setEnable(false);
+        }
+        else
+        {
+            increment->setEnable(true);
+        }
     }
 
     // Draw textbox.
-    GuiTextEntry::onDraw(window);
+    if (focus)
+    {
+        drawStretched(window, rect, "gui/TextEntryBackground.focused", selectColor(colorConfig.text_entry.background));
+    }
+    else
+    {
+        drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
+    }
+
+    bool typing_indicator = focus;
+    const float blink_rate = 0.530;
+
+    if (blink_clock.getElapsedTime().asSeconds() < blink_rate)
+    {
+        typing_indicator = false;
+    }
+
+    if (blink_clock.getElapsedTime().asSeconds() > blink_rate * 2.0f)
+    {
+        blink_clock.restart();
+    }
+
+    drawText(window, sf::FloatRect(rect.left + rect.height, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
 bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
@@ -90,7 +104,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     }
 
     // Enter/Return key behavior.
-    if (key.code == sf::Keyboard::Return)
+    if (key.code == sf::Keyboard::Return && text.length() > 0)
     {
         // Run enterCallback.
         if (enter_func)
@@ -150,6 +164,16 @@ float GuiSpinBox::getValue()
 
 GuiSpinBox* GuiSpinBox::setValue(float value)
 {
+    // Cap the values to min/max.
+    if (value > max_value)
+    {
+        value = max_value;
+    }
+    else if (value < min_value)
+    {
+        value = min_value;
+    }
+
     // Set the TextEntry's "text" to the value.
     // Make it look like an integer if that's what's requested.
     if (display_integer)
