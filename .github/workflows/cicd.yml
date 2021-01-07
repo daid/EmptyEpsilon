@@ -42,6 +42,9 @@ jobs:
           cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton
           ninja package
   macos:
+    # https://github.com/actions/virtual-environments/issues/841
+    # Mac builds are flaky, disable for now.
+    if: ${{ false }}
     name: MacOS
     runs-on: macos-11.0
     steps:
