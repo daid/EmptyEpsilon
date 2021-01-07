@@ -1022,14 +1022,14 @@ bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
     return (!(this->isFriendly(other)) && this->isFriendOrFoeIdentifiedBy(other)) ;
 }
 
-std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
+std::vector<std::pair<ESystem, float>> SpaceShip::getHackingTargets()
 {
-    std::vector<std::pair<string, float>> results;
+    std::vector<std::pair<ESystem, float>> results;
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
         if (n != SYS_Reactor && hasSystem(ESystem(n)))
         {
-            results.emplace_back(getSystemName(ESystem(n)), systems[n].hacked_level);
+            results.emplace_back(ESystem(n), systems[n].hacked_level);
         }
     }
     return results;

@@ -126,15 +126,17 @@ int main(int argc, char** argv)
         int port = defaultServerPort;
         string password = "";
         int listenPort = defaultServerPort;
+        string proxyName = "";
         auto parts = PreferencesManager::get("proxy").split(":");
         string host = parts[0];
         if (parts.size() > 1) port = parts[1].toInt();
         if (parts.size() > 2) password = parts[2].upper();
         if (parts.size() > 3) listenPort = parts[3].toInt();
+        if (parts.size() > 4) proxyName = parts[4];
         if (host == "listen")
-            new GameServerProxy(password, listenPort);
+            new GameServerProxy(password, listenPort, proxyName);
         else
-            new GameServerProxy(host, port, password, listenPort);
+            new GameServerProxy(host, port, password, listenPort, proxyName);
         engine->runMainLoop();
         return 0;
     }

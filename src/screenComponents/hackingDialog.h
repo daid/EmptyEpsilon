@@ -26,6 +26,7 @@ public:
 private:
     P<SpaceObject> target;
     string target_system;
+    string locale_target_system;
     float reset_time;
     static constexpr float auto_reset_time = 2.0f;
     bool last_game_success;
