@@ -222,13 +222,12 @@ msgstr ""
 #: scripts/shipTemplates_Corvette.lua:309
 #: scripts/shipTemplates_Corvette.lua:315
 msgid "Benedict is an improved version of the Jump Carrier"
-msgstr "Le Benedict est une version amelioree du Remorqueur LD"
+msgstr "Le Benedict est une version amelioree du Teleporteur"
 
 #: scripts/shipTemplates_Corvette.lua:343
 #: scripts/shipTemplates_Corvette.lua:349
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
-msgstr ""
-"Le Kiriya est un Remorqueur LD equipe d'un moteur a distorsion ameliore"
+msgstr "Le Kiriya est un transporteur equipe d'un moteur a vitesse lumiere."
 
 #: src/scienceDatabase.cpp:160 src/scienceDatabase.cpp:191
 #: src/scienceDatabase.cpp:405
@@ -2477,7 +2476,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:28
 msgid "Elara P2"
-msgstr ""
+msgstr "Elara P2"
 
 #: scripts/shipTemplates_Frigates.lua:29
 msgid ""
@@ -2485,6 +2484,9 @@ msgid ""
 "addition of a warp drive and stronger front shields, the Elara P2 poses a "
 "greater threat than the Phobos"
 msgstr ""
+"Inspire par le design du Phobos T3, le Elara P2 est presque identique. "
+"Avec l'ajout de la vitesse lumiere et de boucliers avant plus puissants, "
+"l'Elara P2 represente une plus grande menace que le Phobos."
 
 #: scripts/shipTemplates_Frigates.lua:33
 msgid "Phobos M3"
@@ -2678,11 +2680,11 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:312
 msgid "Flavia"
-msgstr ""
+msgstr "Flavia"
 
 #: scripts/shipTemplates_Frigates.lua:312
 msgid "Light transport"
-msgstr ""
+msgstr "Transport leger"
 
 #: scripts/shipTemplates_Frigates.lua:314
 msgid ""
@@ -2690,26 +2692,32 @@ msgid ""
 "passenger transport. It's cheaper than a freighter for small loads and short "
 "distances, and is often used to carry high-value cargo discreetly."
 msgstr ""
+"Populaire parmi les commercants et les passeurs, le Flavia est un petit "
+"vaisseau de transport de marchandises et de passagers.\n"
+"\n"
+"Il est moins cher qu'un cargo pour les petites charges et les courtes distances, "
+"et est souvent utilise pour transporter discretement des marchandises de grande valeur."
 
 #: scripts/shipTemplates_Frigates.lua:319
 msgid "Flavia Falcon"
-msgstr ""
+msgstr "Faucon Flavia"
 
 #: scripts/shipTemplates_Frigates.lua:320
 msgid ""
 "The Flavia Falcon is a Flavia transport modified for faster flight, and adds "
 "rear-mounted lasers to keep enemies off its back."
 msgstr ""
+"Le Faucon Flavia est un vaisseau de transport Flavia modifie pour un vol plus rapide "
+"et equipe de faisceaux laser montes a l'arriere pour tenir a distance ses poursuivants."
 
 #: scripts/shipTemplates_Frigates.lua:325
 msgid "Flavia P.Falcon"
-msgstr ""
+msgstr "Faucon P.Flavia"
 
 #: scripts/shipTemplates_Frigates.lua:326
 msgid ""
-"The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
-"drive."
-msgstr ""
+"The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp drive."
+msgstr "Le Faucon P.Flavia dispose a l'arriere d'un tube de missile a capacite nucleaire et de la vitesse lumiere."
 
 #: scripts/shipTemplates_Frigates.lua:369
 msgid "Repulse"
@@ -2721,7 +2729,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:414
 msgid "Fiend G3"
-msgstr ""
+msgstr "Demon G3"
 
 #: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:272
 #: scripts/shipTemplates_StarFighters.lua:65 scripts/shipTemplates_OLD.lua:271
@@ -2736,10 +2744,17 @@ msgid ""
 "missile tube and beams to readily take down weaker ships. With the jump "
 "drive, it becomes quite a bit more dangerous than the stock Gunship."
 msgstr ""
+"Le Demon G3 fut le 1er modele concu par Conversions R Us.\n Ils ont fait une bonne "
+"affaire sur un certain nombre de Combattants d'occasion. Ils leur ont ajoute un "
+"systeme de teleportation bon marche et voila ! Le Demon G3 etait ne ! \n"
+"\n"
+"Comme pour le Combattant, il est equipe d'un tube de missile a tete chercheuse et "
+"de faisceaux laser pour abattre facilement les navires les plus faibles. 
+"La teleportation en fait un navire plus dangereux que le Combattant d'origine."
 
 #: scripts/shipTemplates_Frigates.lua:428
 msgid "Fiend G4"
-msgstr ""
+msgstr "Demon G4"
 
 #: scripts/shipTemplates_Frigates.lua:429
 msgid ""
@@ -2749,10 +2764,18 @@ msgid ""
 "homing missile tube and beams to readily take down weaker ships. With the "
 "warp drive, it becomes quite a bit more dangerous than the stock Gunship."
 msgstr ""
+"Le Demon G4 fut parmi les 1er modeles concu par Conversions R Us.\n"
+"Ils ont fait une bonne affaire sur un certain nombre de Combattants d'occasion. "
+"Ils leur ont ajoute un moteur a vitesse lumiere bon marche et voila ! Le "
+"Demon G4 etait ne !\n"
+"\n"
+"Comme pour le Combattant, il est equipe d'un tube de missile a tete chercheuse "
+"et de faisceaux laser pour abattre facilement les navires les plus faibles. "
+"La vitesse lumiere en fait un navire plus dangereux que le Combattant d'origine."
 
 #: scripts/shipTemplates_Frigates.lua:433
 msgid "Fiend G6"
-msgstr ""
+msgstr "Demon G6"
 
 #: scripts/shipTemplates_Frigates.lua:434
 msgid ""
@@ -2762,10 +2785,19 @@ msgid ""
 "Gunship, it has two homing missile tubes and beams to readily take down "
 "weaker ships. The warp drive makes it all the more dangerous."
 msgstr ""
+"Avec les succes des modeles Demon G3 et G4, Conversions R Us a poursuivi sa "
+"serie avec le Demon G6.\n"
+"\n"
+"Ils ont acquis des Combattant V2 d'occasion, y ont ajoute un moteur a vitesse "
+"lumiere bon marche et le Demon G6 etait ne.\n"
+"\n"
+"Comme pour le Combattant V2, il dispose a l'avant de deux tubes de missiles a "
+"tete chercheuse et de 2 faisceaux laser pour pouvoir abattre facilement les "
+"navires les plus faibles. La vitesse lumiere le rend encore plus dangereux."
 
 #: scripts/shipTemplates_Frigates.lua:437
 msgid "Fiend G5"
-msgstr ""
+msgstr "Demon G5"
 
 #: scripts/shipTemplates_Frigates.lua:438
 msgid ""
@@ -2775,6 +2807,14 @@ msgid ""
 "Gunship, it has two homing missile tubes and beams to readily take down "
 "weaker ships. The jump drive makes it all the more dangerous."
 msgstr ""
+"Avec les succes des modeles Demon G3 et G4, Conversions R Us a poursuivi sa "
+"serie avec le Demon G5.\n"
+"Ils ont acquis des Combattant V2 d'occasion, y ont ajoute un systeme de "
+"teleportation bon marche et le Demon G5 etait ne.\n"
+"\n"
+"Comme pour le Combattant V2, il dispose a l'avant de deux tubes de missiles a "
+"tete chercheuse et de 2 faisceaux laser pour pouvoir abattre facilement les "
+"navires les plus faibles. La teleportation le rend encore plus dangereux."
 
 #: scripts/shipTemplates_OLD.lua:6
 msgid "Player Cruiser"
@@ -2820,9 +2860,9 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:236 scripts/shipTemplates_OLD.lua:235
 msgid "Karnack"
-msgstr ""
+msgstr "Karnack"
 
-#: scripts/shipTemplates_OLD.lua:238
+#: scripts/shipTemplates_OLD.lua:237
 msgid ""
 "Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
 "found wide adoptation in most factions. Most factions have extensively "
@@ -2832,13 +2872,23 @@ msgid ""
 "and other civillian parties. However, they have used it's adaptable nature "
 "to re-fit them with (illegal) weaponry."
 msgstr ""
+"Fabrique par: Chantiers Navals Repulse.\n"
+"\n"
+"En raison de sa polyvalence, ce vaisseau a trouve sa place dans la plupart "
+"des factions qui l'ont considerablement modernises pour l'adapter a leurs "
+"doctrines de combat. Comme il s'agit d'un modele assez ancien, la plupart "
+"des factions ont vendues des versions depouillees.\n"
+"\n"
+"Ce fonctionnement a fait de ce navire, en tout temps, le favori aupres des "
+"passeurs et d'autres groupes civils. Cependant, ils ont utilise sa nature "
+"adaptable pour le reequiper (illegalement) en armes."
 
-#: scripts/shipTemplates_OLD.lua:250 scripts/shipTemplates_OLD.lua:249
+#: scripts/shipTemplates_OLD.lua:249
 msgctxt "ship"
 msgid "Karnack MK2"
-msgstr ""
+msgstr "Karnack MK2"
 
-#: scripts/shipTemplates_OLD.lua:251
+#: scripts/shipTemplates_OLD.lua:250
 msgid ""
 "Fabricated by: Repulse shipyards. The sucessor to the widly sucesfull mark I "
 "Karnack cruiser. This ship has several notable improvements over the "
@@ -2863,32 +2913,40 @@ msgid ""
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:272 scripts/shipTemplates_OLD.lua:271
+#: scripts/shipTemplates_OLD.lua:271
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Combattant"
 
-#: scripts/shipTemplates_OLD.lua:274
+#: scripts/shipTemplates_OLD.lua:273
 msgid ""
 "The gunship is a ship equiped with a homing missile tube to do initial "
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
+"Le Combattant est un navire equipe d'un tube de missile a tete chercheuse "
+"a l'avant lui permettant de faire de gros degats avant d'eliminer "
+"definitivement l'ennemi avec ses 2 faisceaux de tir avant. Il est concu "
+"pour eliminer rapidement les ennemis plus faibles que lui."
 
-#: scripts/shipTemplates_OLD.lua:285 scripts/shipTemplates_OLD.lua:284
+#: scripts/shipTemplates_OLD.lua:284
 msgid "Adv. Gunship"
-msgstr ""
+msgstr "Combattant V2"
 
-#: scripts/shipTemplates_OLD.lua:286
+#: scripts/shipTemplates_OLD.lua:285
 msgid ""
 "The advanced gunship is a ship equiped with 2 homing missiles to do initial "
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
+"Le Combattant V2 est un navire equipe de 2 tubes de missile a tete chercheuse "
+"a l'avant lui permettant de faire de gros degats avant d'eliminer definitivement "
+"l'ennemi avec ses 2 faisceaux de tir avant. Il est concu pour eliminer rapidement "
+"les ennemis plus faibles que lui."
 
 #: scripts/shipTemplates_OLD.lua:290 scripts/shipTemplates_OLD.lua:289
 msgid "Strikeship"
-msgstr ""
+msgstr "Navire de frappe"
 
 #: scripts/shipTemplates_OLD.lua:290 scripts/shipTemplates_OLD.lua:302
 #: scripts/shipTemplates_StarFighters.lua:13
@@ -2901,7 +2959,7 @@ msgstr "Chasseurs stellaires"
 #: scripts/shipTemplates_OLD.lua:290 scripts/shipTemplates_OLD.lua:289
 msgctxt "subclass"
 msgid "Strike"
-msgstr ""
+msgstr "Frappeur"
 
 #: scripts/shipTemplates_OLD.lua:302 scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
@@ -2986,17 +3044,20 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:471 scripts/shipTemplates_OLD.lua:470
 msgid "Blockade Runner"
-msgstr ""
+msgstr "Coursier"
 
 #: scripts/shipTemplates_OLD.lua:471 scripts/shipTemplates_OLD.lua:470
 msgid "High Punch"
-msgstr ""
+msgstr "Penetrant"
 
 #: scripts/shipTemplates_OLD.lua:473 scripts/shipTemplates_OLD.lua:472
 msgid ""
 "Blockade runner is a reasonably fast, high shield, slow on weapons ship "
 "designed to break through defense lines and deliver goods."
 msgstr ""
+"Le Coursier est un vaisseau raisonnablement rapide, aux puissants "
+"boucliers mais avec un armement leger, concu pour franchir les lignes "
+"de defense et livrer des marchandises."
 
 #: scripts/shipTemplates_OLD.lua:484 scripts/shipTemplates_OLD.lua:483
 msgid "Ktlitan Fighter"
@@ -3709,7 +3770,7 @@ msgstr "Asteroide"
 #: src/screens/gm/objectCreationView.cpp:72
 msgctxt "create"
 msgid "Visual Asteroid"
-msgstr ""
+msgstr "Asteroide de decoration"
 
 #: src/screens/gm/objectCreationView.cpp:76
 msgctxt "create"
@@ -4190,46 +4251,11 @@ msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Communication refusee a {name}"
 
-#: scripts/shipTemplates_OLD.lua:237
-msgid ""
-"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
-"found wide adaptation in most factions. Most factions have extensively "
-"retrofitted these ships to suit their combat doctrines. Because it's an "
-"older model, most factions have been selling stripped versions. This "
-"practice has led to this ship becoming an all time favorite with smugglers "
-"and other civilian parties. However, they have used it's adaptable nature to "
-"re-fit them with (illegal) weaponry."
-msgstr ""
-
-#: scripts/shipTemplates_OLD.lua:250
-msgid ""
-"Fabricated by: Repulse shipyards. The successor to the widely successful "
-"mark I Karnack cruiser. This ship has several notable improvements over the "
-"original ship, including better armor, slightly improved weaponry and "
-"customization by the shipyards. The latter improvement was the most "
-"requested feature by several factions once they realized that their old "
-"surplus mark I ships were used for less savory purposes."
-msgstr ""
-
 #: scripts/shipTemplates_OLD.lua:262
 msgid ""
 "Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
 "missile cruiser is a long range missile firing platform. It cannot handle a "
 "lot of damage, but can do a lot of damage if not dealt with properly."
-msgstr ""
-
-#: scripts/shipTemplates_OLD.lua:273
-msgid ""
-"The gunship is a ship equipped with a homing missile tube to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-
-#: scripts/shipTemplates_OLD.lua:285
-msgid ""
-"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
 msgstr ""
 
 #: scripts/factionInfo.lua:72

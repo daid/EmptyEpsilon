@@ -368,7 +368,7 @@ variation:addDoor(6, 5, true)
 
 template = ShipTemplate():setName("Repulse"):setLocaleName(_("Repulse")):setClass(_("Frigate"), _("Armored Transport")):setModel("LightCorvetteRed"):setType("playership")
 template:setRadarTrace("radar_tug.png")
-template:setDescription("Jump/Turret version of Flavia Falcon")
+template:setDescription(_("Jump/Turret version of Flavia Falcon"))
 template:setHull(120)
 template:setShields(80, 80)
 template:setSpeed(55, 9, 10)
