@@ -11,6 +11,7 @@ public:
 protected:
     string text;
     float text_size;
+    float text_leftpad;
     func_t func;
     func_t enter_func;
     sf::Clock blink_clock;
@@ -26,6 +27,7 @@ public:
     string getText() const;
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
+    GuiTextEntry* setTextLeftpad(float leftpad);
     GuiTextEntry* callback(func_t func);
     GuiTextEntry* enterCallback(func_t func);
 };

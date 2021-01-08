@@ -2,7 +2,7 @@
 #include "input.h"
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), func(nullptr)
+: GuiElement(owner, id), text(text), text_size(30.0f), text_leftpad(16.0f), func(nullptr)
 {
 }
 
@@ -18,7 +18,7 @@ void GuiTextEntry::onDraw(sf::RenderTarget& window)
         typing_indicator = false;
     if (blink_clock.getElapsedTime().asSeconds() > blink_rate * 2.0f)
         blink_clock.restart();
-    drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
+    drawText(window, sf::FloatRect(rect.left + text_leftpad, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
 bool GuiTextEntry::onMouseDown(sf::Vector2f position)
@@ -98,6 +98,21 @@ GuiTextEntry* GuiTextEntry::setText(string text)
 GuiTextEntry* GuiTextEntry::setTextSize(float size)
 {
     this->text_size = size;
+    return this;
+}
+
+GuiTextEntry* GuiTextEntry::setTextLeftpad(float leftpad)
+{
+    if (leftpad > 0.0f)
+    {
+        // Set distance from left edge where text contents begin.
+        this->text_leftpad = leftpad;
+    }
+    else
+    {
+        this->text_leftpad = 0.0f;
+    }
+
     return this;
 }
 
