@@ -4,22 +4,29 @@
 #include "gui2_panel.h"
 #include "soundManager.h"
 
-GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, func_t func)
+GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, unsigned short decimals, float interval, func_t func)
 : GuiTextEntry(owner, id, string(0.0f)),
-  func(nullptr),
+  func(func),
+  enter_func(nullptr),
+  decimals(decimals),
+  value(0.0f),
   text_size(30),
-  interval(1.0f),
+  interval(interval),
   min_value(0.0f),
-  max_value(10.0f),
-  display_integer(false)
+  max_value(10.0f)
 {
     decrement = new GuiArrowButton(this, id + "_DECREMENT", 0, [this]() {
         soundManager->playSound("button.wav");
 
-        // Decrement by the interval amount.
-        setValue(getValue() - interval);
+        // Decrement the current value by the interval amount.
+        setValue(getLimitedValue(getValue() - this->interval));
 
-        callback(this->func);
+        // Run callback.
+        if (this->func)
+        {
+            func_t f = this->func;
+            f(this->text);
+        }
     });
     decrement->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 
@@ -27,9 +34,14 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, func_t func)
         soundManager->playSound("button.wav");
 
         // Increment by the interval amount.
-        setValue(getValue() + interval);
+        setValue(getLimitedValue(getValue() + this->interval));
 
-        callback(this->func);
+        // Run callback.
+        if (this->func)
+        {
+            func_t f = this->func;
+            f(this->text);
+        }
     });
     increment->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 }
@@ -82,6 +94,8 @@ void GuiSpinBox::onDraw(sf::RenderTarget& window)
         blink_clock.restart();
     }
 
+    // TODO: Make TextEntry left pad configurable,
+    // then replace redundant code starting at // Draw textbox.
     drawText(window, sf::FloatRect(rect.left + rect.height, rect.top, rect.width, rect.height), text + (typing_indicator ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
@@ -90,7 +104,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     // Backspace key behavior.
     if (key.code == sf::Keyboard::BackSpace && text.length() > 0)
     {
-        // Remove character behind cursor.
+        // Remove a character behind the cursor.
         text = text.substr(0, -1);
 
         // Run callback.
@@ -106,6 +120,10 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     // Enter/Return key behavior.
     if (key.code == sf::Keyboard::Return && text.length() > 0)
     {
+        // Cap the entered value.
+        text = getLimitedString(text);
+        value = stof(text);
+
         // Run enterCallback.
         if (enter_func)
         {
@@ -116,32 +134,13 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // Paste with Ctrl-V.
-    if (key.code == sf::Keyboard::V && key.control)
-    {
-        for(int unicode : Clipboard::readClipboard())
-        {
-            // Accept only 0-9 and .
-            if ((unicode > 47 && unicode < 58) || (unicode == 46))
-            {
-                text += string(char(unicode));
-            }
-        }
-
-        // Run callback.
-        if (func)
-        {
-            func_t f = func;
-            f(text);
-        }
-
-        return true;
-    }
+    // TODO: Determine whether there's a use case for copy/paste.
 
     // Add to string if key is 0-9 or .
+    // TODO: Handle negative values
     if ((unicode > 47 && unicode < 58) || (unicode == 46))
     {
-        text += string(char(unicode));
+        validateTextEntry(unicode);
 
         // Run callback.
         if (func)
@@ -153,36 +152,87 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    LOG(WARNING) << "Key " << unicode << " not entered; enter 0-9 or . only.";
+    LOG(WARNING) << "Key " << unicode << " entered; must be 47-58 (0-9) or 46 (.) only.";
     return true;
+}
+
+void GuiSpinBox::onFocusLost()
+{
+    // On loss of focus, limit the string value.
+    text = getLimitedString(text);
+    value = stof(text);
+    GuiTextEntry::onFocusLost();
+}
+
+void GuiSpinBox::validateTextEntry(int unicode)
+{
+    if (text.length() == 0 && unicode == 46)
+    {
+        LOG(DEBUG) << "Can't start spinbox value with a decimal point.";
+        text += "0.";
+    }
+    else
+    {
+        text += string(char(unicode));
+    }
 }
 
 float GuiSpinBox::getValue()
 {
+    // TODO: Return stored value instead of converting display text.
     return stof(text);
 }
 
-GuiSpinBox* GuiSpinBox::setValue(float value)
+float GuiSpinBox::getLimitedValue(float value)
 {
-    // Cap the values to min/max.
+    // Cap the value to minimum and maximum values.
     if (value > max_value)
     {
-        value = max_value;
+        return max_value;
     }
     else if (value < min_value)
     {
-        value = min_value;
+        return min_value;
     }
 
-    // Set the TextEntry's "text" to the value.
-    // Make it look like an integer if that's what's requested.
-    if (display_integer)
+    // Otherwise, just return the value.
+    return value;
+}
+
+string GuiSpinBox::getLimitedString(string value)
+{
+    // If the string isn't empty and doesn't start with a "." ...
+    if (value.length() > 0)
+    {
+        if (value.substr(0, 1) != ".")
+        {
+            // Return the limited value of the string, as a string.
+            return string(getLimitedValue(stof(value)), decimals);
+        } else {
+            // If it starts with ".", prefix it with a 0.
+            return string(getLimitedValue(stof("0" + value)), decimals);
+        }
+    }
+    else
+    {
+        // If the string is empty, return the minimum value.
+        return string(min_value, decimals);
+    }
+}
+
+GuiSpinBox* GuiSpinBox::setValue(float new_value)
+{
+    value = getLimitedValue(new_value);
+
+    // Set the TextEntry's "text" to the value, respecting min/max limits.
+    // Set the number of decimals. Round to the nearest integral value if 0.
+    if (decimals == 0)
     {
         this->text = string(nearbyint(value), 0);
     }
     else
     {
-        this->text = string(value);
+        this->text = string(value, decimals);
     }
 
     return this;
@@ -193,16 +243,17 @@ float GuiSpinBox::getInterval()
     return interval;
 }
 
-GuiSpinBox* GuiSpinBox::setInterval(float interval)
+GuiSpinBox* GuiSpinBox::setInterval(float new_interval)
 {
     // Set the interval as long as it's greater than 0.
-    if (interval > 0.0f)
+    if (new_interval > 0.0f)
     {
-        this->interval = interval;
+        interval = new_interval;
     }
     else
     {
-        LOG(WARNING) << "SpinBox " << id << " interval " << interval << " cannot be negative.";
+        LOG(WARNING) << "SpinBox " << id << " interval cannot be 0 or negative: " << interval;
+        interval = 0.1f;
     }
 
     return this;
@@ -213,16 +264,18 @@ float GuiSpinBox::getMinValue()
     return min_value;
 }
 
-GuiSpinBox* GuiSpinBox::setMinValue(float min_value)
+GuiSpinBox* GuiSpinBox::setMinValue(float new_min_value)
 {
     // Set the min value as long as it's smaller than the max value.
-    if (min_value < max_value)
+    // TODO: Handle negative values
+    if (new_min_value < max_value && new_min_value >= 0.0f)
     {
-        this->min_value = min_value;
+        min_value = new_min_value;
     }
     else
     {
-        LOG(WARNING) << "SpinBox " << id << " minimum value " << min_value << " cannot be larger than the maximum value.";
+        LOG(WARNING) << "SpinBox " << id << " minimum value cannot be larger than the maximum value or negative: " << new_min_value;
+        min_value = 0.0f;
     }
 
     return this;
@@ -233,29 +286,18 @@ float GuiSpinBox::getMaxValue()
     return max_value;
 }
 
-GuiSpinBox* GuiSpinBox::setMaxValue(float max_value)
+GuiSpinBox* GuiSpinBox::setMaxValue(float new_max_value)
 {
     // Set the max value as long as it's larger than the min value.
-    if (max_value > min_value)
+    if (new_max_value > min_value)
     {
-        this->max_value = max_value;
+        max_value = new_max_value;
     }
     else
     {
-        LOG(WARNING) << "SpinBox " << id << " maximum value " << max_value << " cannot be smaller than the minimum value.";
+        LOG(WARNING) << "SpinBox " << id << " maximum value cannot be smaller than the minimum value: " << max_value;
+        max_value = min_value + 0.1f;
     }
 
-    return this;
-}
-
-bool GuiSpinBox::getDisplayInteger()
-{
-    return display_integer;
-}
-
-GuiSpinBox* GuiSpinBox::setDisplayInteger(bool display_integer)
-{
-    // Set whether to display the value as an integer.
-    this->display_integer = display_integer;
     return this;
 }

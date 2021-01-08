@@ -10,32 +10,37 @@ class GuiSpinBox : public GuiTextEntry
 protected:
     func_t func;
     func_t enter_func;
+    unsigned short decimals;
+    float value;
     float text_size;
     float interval;
     float min_value;
     float max_value;
-    bool display_integer;
-    EGuiAlign text_alignment;
     GuiArrowButton* decrement;
     GuiArrowButton* increment;
+
+    float getLimitedValue(float value);
+    string getLimitedString(string value);
+    void validateTextEntry(int unicode);
 public:
     typedef std::function<void(string text)> func_t;
 
-    GuiSpinBox(GuiContainer* owner, string id, func_t func);
+    GuiSpinBox(GuiContainer* owner, string id, unsigned short decimals, float interval, func_t func);
 
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual void onFocusLost() override;
 
     float getValue();
-    GuiSpinBox* setValue(float value);
+    GuiSpinBox* setValue(float new_value);
     float getInterval();
     GuiSpinBox* setInterval(float interval);
     float getMinValue();
     GuiSpinBox* setMinValue(float min_value);
     float getMaxValue();
     GuiSpinBox* setMaxValue(float max_value);
-    bool getDisplayInteger();
-    GuiSpinBox* setDisplayInteger(bool display_integer);
+    bool getDecimals();
+    GuiSpinBox* setDecimals(int new_decimals);
 };
 
 #endif//GUI2_SPINBOX_H
