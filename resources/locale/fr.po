@@ -2231,7 +2231,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:14
 msgid "Phobos T3"
-msgstr ""
+msgstr "Phobos T3"
 
 #: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_Frigates.lua:87
 #: scripts/shipTemplates_Frigates.lua:116
@@ -2258,6 +2258,14 @@ msgid ""
 "Its basic stats aren't impressive, but due to its modular nature, it's "
 "fairly easy to produce in large quantities."
 msgstr ""
+"Le Phobos T3, tout comme l'Atlantis, est le cheval de bataille de presque "
+"toute les marines.\n"
+"\n"
+"Il est extremement facile a modifier, ce qui fait de la "
+"modernisation de ce navire un jeu d'enfant.\n"
+"\n"
+"Ses caracteristiques de base ne sont pas impressionnantes, mais en raison de "
+"sa nature modulaire, il est assez facile a produire en grandes quantites."
 
 #: scripts/shipTemplates_Frigates.lua:28
 msgid "Elara P2"
@@ -2269,13 +2277,14 @@ msgid ""
 "addition of a warp drive and stronger front shields, the Elara P2 poses a "
 "greater threat than the Phobos"
 msgstr ""
+
 "Inspire par le design du Phobos T3, le Elara P2 est presque identique. Avec "
 "l'ajout de la vitesse lumiere et de boucliers avant plus puissants, l'Elara "
 "P2 represente une plus grande menace que le Phobos."
 
 #: scripts/shipTemplates_Frigates.lua:33
 msgid "Phobos M3"
-msgstr ""
+msgstr "Phobos M3"
 
 #: scripts/shipTemplates_Frigates.lua:34
 msgid ""
@@ -2283,44 +2292,58 @@ msgid ""
 "mine-laying tube, but the extra storage required for the mines slows this "
 "ship down slightly."
 msgstr ""
+"Le Phobos M3 est l'une des variations les plus courantes du Phobos T3.\n"
+"\n"
+"Il possede en plus un tube dedie au largage de mines, mais le stockage "
+"supplementaire requis pour les mines ralentit legerement ce navire."
 
 #: scripts/shipTemplates_Frigates.lua:41
 msgid "Phobos M3P"
-msgstr ""
+msgstr "Phobos M3P"
 
 #: scripts/shipTemplates_Frigates.lua:42
 msgid ""
 "Player variant of the Phobos M3, not as strong as the atlantis, but has "
 "front firing tubes, making it an easier to use ship in some scenarios."
 msgstr ""
+"La version Joueur du Phobos M3.\n"
+"\n"
+"Pas aussi puissant que l'Atlantis, mais possede des tubes de tir a l'avant, "
+"ce qui en fait un navire plus facile a utiliser dans certaines missions."
 
 #: scripts/shipTemplates_Frigates.lua:87
 msgid "Nirvana R5"
-msgstr ""
+msgstr "Nirvana R5"
 
 #: scripts/shipTemplates_Frigates.lua:87
 msgid "Cruiser: Anti-fighter"
-msgstr ""
+msgstr "Croiseur : Anti-chasseur"
 
 #: scripts/shipTemplates_Frigates.lua:89
 msgid ""
 "The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-"
 "damage point-defense weapons to quickly take out starfighters."
 msgstr ""
+"Le Nirvana R5 est un croiseur anti-chasseur.\n"
+"\n"
+"Il dispose de plusieurs faisceaux laser a tir rapide et a faibles degats "
+"pour eliminer rapidement les chasseurs stellaires."
 
 #: scripts/shipTemplates_Frigates.lua:98
 msgid "Nirvana R5A"
-msgstr ""
+msgstr "Nirvana R5A"
 
 #: scripts/shipTemplates_Frigates.lua:99
 msgid ""
 "An improved version of the Nirvana R5 with faster turning speed and firing "
 "rates."
 msgstr ""
+"Une version amelioree du Nirvana R5 avec une vitesse de rotation et une "
+"cadence de tir plus rapides."
 
 #: scripts/shipTemplates_Frigates.lua:106
 msgid "Nirvana R3"
-msgstr ""
+msgstr "Nirvana R3"
 
 #: scripts/shipTemplates_Frigates.lua:107
 msgid ""
@@ -2329,20 +2352,29 @@ msgid ""
 "defense beam weapons. Compared to the later, more common Nirvana R5, it has "
 "shorter beams, weaker shields and hull and a slower impulse drive."
 msgstr ""
+"L'un des premiers modeles Nirvana produits en serie. le Nirvana R3 a ete concu "
+"pour servir contre les chasseurs.\n"
+"\n"
+"Il possede plusieurs faisceaux laser de defense, rapides mais occasionnant peu "
+"de degats. En comparaison au Nirvana R5 plus recent et plus courant, il a des "
+"faisceaux plus courts, des boucliers et une coque plus faibles et des moteurs a "
+"impulsion plus lents."
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgid "Storm"
-msgstr ""
+msgstr "Tempete"
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgid "Cruiser: Heavy Artillery"
-msgstr ""
+msgstr "Croiseur : artillerie lourde"
 
 #: scripts/shipTemplates_Frigates.lua:118
 msgid ""
 "A heavy artillery cruiser, the Storm fires bunches of missiles from forward "
 "facing tubes."
 msgstr ""
+"Croiseur d'artillerie lourde,\n"
+"le Tempete tire des salves de missiles a partir de tubes orientes vers l'avant."
 
 #: scripts/shipTemplates_Frigates.lua:133
 msgid "Hathcock"
@@ -2351,7 +2383,7 @@ msgstr ""
 #: scripts/shipTemplates_Frigates.lua:133
 #: scripts/shipTemplates_Frigates.lua:299
 msgid "Cruiser: Sniper"
-msgstr ""
+msgstr "Croiseur : sniper"
 
 #: scripts/shipTemplates_Frigates.lua:135
 msgid ""
@@ -2365,7 +2397,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:179
 msgid "Cruiser: Light Artillery"
-msgstr ""
+msgstr "Croiseur : artillerie legere"
 
 #: scripts/shipTemplates_Frigates.lua:181
 msgid ""
@@ -2603,6 +2635,7 @@ msgid ""
 msgstr ""
 "Avec les succes des modeles Demon G3 et G4, Conversions R Us a poursuivi sa "
 "serie avec le Demon G5.\n"
+
 "Ils ont acquis des Combattant V2 d'occasion, y ont ajoute un systeme de "
 "teleportation bon marche et le Demon G5 etait ne.\n"
 "\n"
@@ -2656,6 +2689,7 @@ msgstr ""
 msgid "Karnack"
 msgstr "Karnack"
 
+#: scripts/shipTemplates_OLD.lua:237
 msgid ""
 "Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
 "found wide adoptation in most factions. Most factions have extensively "
@@ -2681,6 +2715,7 @@ msgctxt "ship"
 msgid "Karnack MK2"
 msgstr "Karnack MK2"
 
+#: scripts/shipTemplates_OLD.lua:250
 msgid ""
 "Fabricated by: Repulse shipyards. The sucessor to the widly sucesfull mark I "
 "Karnack cruiser. This ship has several notable improvements over the "
@@ -2689,49 +2724,67 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savoury purposes."
 msgstr ""
+"Fabrique par: Chantiers Navals Repulse.\n"
+"\n"
+"Le successeur du grand succes commercial : le croiseur Karnack.\n"
+"\n"
+"Ce navire a connu plusieurs ameliorations notables par rapport au navire "
+"d'origine, y compris un meilleur blindage, un armement legerement ameliore "
+"et une personnalisation par les chantiers navals.\n"
+"\n"
+"Cette derniere amelioration a ete la caracteristique la plus demandee par "
+"plusieurs factions une fois qu'elles ont realise que leurs vieux navires MK2 "
+"excedentaires etaient utilises a des fins moins...reglementaires."
 
 #: scripts/shipTemplates_OLD.lua:260
 msgid "Missile Cruiser"
-msgstr ""
+msgstr "Croiseur de missiles"
 
 #: scripts/shipTemplates_OLD.lua:260
 msgid "Cruiser: Missile"
-msgstr ""
+msgstr "Croiseur : missiles"
 
 msgid ""
-"Polaris missle cruiser mark I. Fabricated by: Repulse shipyards. This "
+"Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
 "missile cruiser is a long range missile firing platform. It cannot handle a "
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
+"Croiseur de missiles Polaris MK1, fabrique par : Chantiers Navals Repulse.\n"
+"\n"
+"Ce croiseur de missiles est une plate-forme de tir de missiles longue portee. "
+"Il ne peut pas essuyer beaucoup de degats, mais peut en occasionner beaucoup "
+"s'il n'est pas gere correctement."
 
 #: scripts/shipTemplates_OLD.lua:271
 msgctxt "subclass"
 msgid "Gunship"
 msgstr "Combattant"
 
+#: scripts/shipTemplates_OLD.lua:273
 msgid ""
 "The gunship is a ship equiped with a homing missile tube to do initial "
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant est un navire equipe d'un tube de missile a tete chercheuse a "
-"l'avant lui permettant de faire de gros degats avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux de tir avant. Il est concu pour "
-"eliminer rapidement les ennemis plus faibles que lui."
+"Le Combattant est un navire equipe d'un tube de missile a tete chercheuse "
+"a l'avant lui permettant de faire de gros degats avant d'eliminer "
+"definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est concu "
+"pour eliminer rapidement les ennemis plus faibles que lui."
 
 #: scripts/shipTemplates_OLD.lua:284
 msgid "Adv. Gunship"
 msgstr "Combattant V2"
 
+#: scripts/shipTemplates_OLD.lua:285
 msgid ""
 "The advanced gunship is a ship equiped with 2 homing missiles to do initial "
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant V2 est un navire equipe de 2 tubes de missile a tete "
-"chercheuse a l'avant lui permettant de faire de gros degats avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux de tir avant. Il est concu pour "
-"eliminer rapidement les ennemis plus faibles que lui."
+"Le Combattant V2 est un navire equipe de 2 tubes de missile a tete chercheuse "
+"a l'avant lui permettant de faire de gros degats avant d'eliminer definitivement "
+"l'ennemi avec ses 2 faisceaux laser avant. Il est concu pour eliminer rapidement "
+"les ennemis plus faibles que lui."
 
 #: scripts/shipTemplates_OLD.lua:289
 msgid "Strikeship"
@@ -4044,68 +4097,12 @@ msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Communication refusee a {name}"
 
-#: scripts/shipTemplates_OLD.lua:237
-#, fuzzy
-msgid ""
-"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
-"found wide adaptation in most factions. Most factions have extensively "
-"retrofitted these ships to suit their combat doctrines. Because it's an "
-"older model, most factions have been selling stripped versions. This "
-"practice has led to this ship becoming an all time favorite with smugglers "
-"and other civilian parties. However, they have used it's adaptable nature to "
-"re-fit them with (illegal) weaponry."
-msgstr ""
-"Fabrique par: Chantiers Navals Repulse.\n"
-"\n"
-"En raison de sa polyvalence, ce vaisseau a trouve sa place dans la plupart "
-"des factions qui l'ont considerablement modernises pour l'adapter a leurs "
-"doctrines de combat. Comme il s'agit d'un modele assez ancien, la plupart "
-"des factions ont vendues des versions depouillees.\n"
-"\n"
-"Ce fonctionnement a fait de ce navire, en tout temps, le favori aupres des "
-"passeurs et d'autres groupes civils. Cependant, ils ont utilise sa nature "
-"adaptable pour le reequiper (illegalement) en armes."
-
-#: scripts/shipTemplates_OLD.lua:250
-msgid ""
-"Fabricated by: Repulse shipyards. The successor to the widely successful "
-"mark I Karnack cruiser. This ship has several notable improvements over the "
-"original ship, including better armor, slightly improved weaponry and "
-"customization by the shipyards. The latter improvement was the most "
-"requested feature by several factions once they realized that their old "
-"surplus mark I ships were used for less savory purposes."
-msgstr ""
-
 #: scripts/shipTemplates_OLD.lua:262
 msgid ""
 "Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
 "missile cruiser is a long range missile firing platform. It cannot handle a "
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
-
-#: scripts/shipTemplates_OLD.lua:273
-#, fuzzy
-msgid ""
-"The gunship is a ship equipped with a homing missile tube to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-"Le Combattant est un navire equipe d'un tube de missile a tete chercheuse a "
-"l'avant lui permettant de faire de gros degats avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux de tir avant. Il est concu pour "
-"eliminer rapidement les ennemis plus faibles que lui."
-
-#: scripts/shipTemplates_OLD.lua:285
-#, fuzzy
-msgid ""
-"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-"Le Combattant V2 est un navire equipe de 2 tubes de missile a tete "
-"chercheuse a l'avant lui permettant de faire de gros degats avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux de tir avant. Il est concu pour "
-"eliminer rapidement les ennemis plus faibles que lui."
 
 #: scripts/factionInfo.lua:72
 msgid ""
