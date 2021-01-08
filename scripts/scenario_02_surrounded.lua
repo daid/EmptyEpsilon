@@ -1,7 +1,8 @@
 -- Name: Surrounded
--- Description: You are surrounded by asteroids, enemies and mines.
+-- Description: You are surrounded by asteroids, enemies, and mines.
 ---
---- Spawn the player ship(s) you want. The strength of the enemy is independent of their number and type.
+--- Spawn the player ships you want. The strength of enemy ships is independent of the number and type of player ships.
+---
 --- (The scenario can be won with a single Atlantis.)
 -- Type: Basic
 

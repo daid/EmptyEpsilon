@@ -352,9 +352,4 @@ static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::Cust
 
 string alertLevelToString(EAlertLevel level);
 string alertLevelToLocaleString(EAlertLevel level);
-
-#ifdef _MSC_VER
-#include "playerSpaceship.hpp"
-#endif /* _MSC_VER */
-
 #endif//PLAYER_SPACESHIP_H

@@ -1022,14 +1022,14 @@ bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
     return (!(this->isFriendly(other)) && this->isFriendOrFoeIdentifiedBy(other)) ;
 }
 
-std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
+std::vector<std::pair<ESystem, float>> SpaceShip::getHackingTargets()
 {
-    std::vector<std::pair<string, float>> results;
+    std::vector<std::pair<ESystem, float>> results;
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
         if (n != SYS_Reactor && hasSystem(ESystem(n)))
         {
-            results.emplace_back(getSystemName(ESystem(n)), systems[n].hacked_level);
+            results.emplace_back(ESystem(n), systems[n].hacked_level);
         }
     }
     return results;
@@ -1221,20 +1221,6 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
     return weapon_tube[index].getLoadType();
 }
 
-EMissileSizes SpaceShip::getWeaponTubeSize(int index)
-{
-    if (index < 0 || index >= weapon_tube_count)
-        return MS_Small;
-    return weapon_tube[index].getSize();
-}
-
-void SpaceShip::setWeaponTubeSize(int index, EMissileSizes size)
-{
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].setSize(size);
-}
-
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
 {
     if (index < 0 || index >= weapon_tube_count)
@@ -1267,21 +1253,21 @@ void SpaceShip::setWeaponTubeDirection(int index, float direction)
 
 void SpaceShip::setTubeSize(int index, EMissileSizes size)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return;
     weapon_tube[index].setSize(size);
 }
 
 EMissileSizes SpaceShip::getTubeSize(int index)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return MS_Medium;
     return weapon_tube[index].getSize();
 }
 
 float SpaceShip::getTubeLoadTime(int index)
 {
-    if (index < 0 || index >= max_weapon_tubes) {
+    if (index < 0 || index >= weapon_tube_count) {
         return 0;
     }
     return weapon_tube[index].getLoadTimeConfig();
@@ -1289,7 +1275,7 @@ float SpaceShip::getTubeLoadTime(int index)
 
 void SpaceShip::setTubeLoadTime(int index, float time)
 {
-    if (index < 0 || index >= max_weapon_tubes) {
+    if (index < 0 || index >= weapon_tube_count) {
         return;
     }
     weapon_tube[index].setLoadTimeConfig(time);
@@ -1528,6 +1514,4 @@ string frequencyToString(int frequency)
     return string(400 + (frequency * 20)) + "THz";
 }
 
-#ifndef _MSC_VER
 #include "spaceship.hpp"
-#endif

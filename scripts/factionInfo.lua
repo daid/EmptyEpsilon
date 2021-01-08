@@ -69,7 +69,7 @@ TSN:setEnemy(kraylor)
 TSN:setEnemy(exuari)
 TSN:setEnemy(arlenians)
 TSN:setEnemy(Hive)
-TSN:setDescription(_([[The Terran Stellar Navy or TSN consists of naval forces based near Terra. Its members are primarily Human.
+TSN:setDescription(_([[The Terran Stellar Navy, or TSN, consists of naval forces based near Terra. Its members are primarily human.
 
 These humans and other races have banded together to form a navy to protect and enforce common philosophies. They are friendly with the human navy but do not follow the same command structure. Military actions taken in the past have made them enemies of the Arlenians, but they've got a better relationship with the Ghosts than the Human Navy does.
 
@@ -82,9 +82,9 @@ USN:setEnemy(exuari)
 USN:setEnemy(GITM)
 USN:setEnemy(Hive)
 USN:setEnemy(TSN)
-USN:setDescription(_([[The United Stellar Navy or USN is a naval force near the boundary of Human and Kraylor space consisting of mostly Humans. The USN is friendly with the human navy and uses a similar command structure.
+USN:setDescription(_([[The United Stellar Navy, or USN, is a naval force near the boundary of human and Kraylor space consisting of mostly humans. The USN is friendly with the human navy and uses a similar command structure.
 
-The USN is primarily Human, but other races are also a part, notably, some Kraylors have been accepted into the USN. This acceptance has made the TSN and USN enemies.]]))
+The USN is primarily human but includes other races. This includes some Kraylor, which has made the TSN an enemy of the USN.]]))
 
 CUF = FactionInfo():setName("CUF"):setLocaleName(_("CUF"))
 CUF:setGMColor(128, 255, 255)
@@ -92,8 +92,8 @@ CUF:setFriendly(human)
 CUF:setEnemy(exuari)
 CUF:setEnemy(kraylor)
 CUF:setEnemy(GITM)
-CUF:setDescription(_([[The Celestial Unified Fleet or CUF is the farthest ranging primarily human fleet as well as the least xenophobic. The CUF goals center primarily on exploration and trade, but since it's a dangerous galaxy, they recognize the need for strong warships. 
+CUF:setDescription(_([[The Celestial Unified Fleet, or CUF, is the farthest-ranging primarily human fleet as well as the least xenophobic. The CUF's goals center on exploration and trade, but since it's a dangerous galaxy, they recognize the need for strong warships.
 
-Friendly with the human navy, neutral to the TSN and USN. Not as structured as the other primarily Human navies.
+The CUF is friendly with the human navy, and neutral toward the TSN and USN. They are less structured than the other primarily human navies.
 
-The CUF have neutral relations with the Ktlitans as well as the Arlenians. They are enemies with Exuari, Kraylor and Ghosts for political and historical reasons, not Xenophobia: some of their best friends are Exuari, Kraylor and Ghosts.]]))
+The CUF have neutral relations with the Ktlitans and Arlenians. They are enemies with Exuari, Kraylor, and Ghosts for political and historical reasons, not xenophobia; some of their best friends are also Exuari, Kraylor, and Ghosts.]]))

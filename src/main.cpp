@@ -28,7 +28,7 @@
 #include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
-#ifdef __WIN32__
+#ifdef _WIN32
 #include "discord.h"
 #endif
 
@@ -100,7 +100,7 @@ int main(int argc, char** argv)
 #else
     Logging::setLogLevel(LOGLEVEL_INFO);
 #endif
-#if defined(__WIN32__) && !defined(DEBUG)
+#if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
 #endif
 #ifdef CONFIG_DIR
@@ -126,15 +126,17 @@ int main(int argc, char** argv)
         int port = defaultServerPort;
         string password = "";
         int listenPort = defaultServerPort;
+        string proxyName = "";
         auto parts = PreferencesManager::get("proxy").split(":");
         string host = parts[0];
         if (parts.size() > 1) port = parts[1].toInt();
         if (parts.size() > 2) password = parts[2].upper();
         if (parts.size() > 3) listenPort = parts[3].toInt();
+        if (parts.size() > 4) proxyName = parts[4];
         if (host == "listen")
-            new GameServerProxy(password, listenPort);
+            new GameServerProxy(password, listenPort, proxyName);
         else
-            new GameServerProxy(host, port, password, listenPort);
+            new GameServerProxy(host, port, password, listenPort, proxyName);
         engine->runMainLoop();
         return 0;
     }
@@ -157,7 +159,7 @@ int main(int argc, char** argv)
     new DirectoryResourceProvider("resources/");
     new DirectoryResourceProvider("scripts/");
     new DirectoryResourceProvider("packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory("packs");
+    PackResourceProvider::addPackResourcesForDirectory("packs/");
     if (getenv("HOME"))
     {
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
@@ -306,7 +308,7 @@ int main(int argc, char** argv)
     else
         hardware_controller->loadConfiguration("hardware.ini");
 
-#ifdef __WIN32__
+#ifdef _WIN32
     new DiscordRichPresence();
 #endif
 
@@ -342,7 +344,7 @@ int main(int argc, char** argv)
         // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
-#ifdef __WIN32__
+#ifdef _WIN32
             mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
 #else
             mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);

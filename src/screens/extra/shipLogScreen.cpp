@@ -1,4 +1,5 @@
 #include "shipLogScreen.h"
+#include "shipTemplate.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 

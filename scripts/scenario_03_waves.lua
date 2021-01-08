@@ -1,11 +1,10 @@
 -- Name: Waves
--- Description: Waves of increasingly difficult enemies.
---- There is no victory. How many waves can you destroy?
+-- Description: Waves of increasingly difficult enemies attack friendly stations. There is no victory. How many waves can you destroy?
 ---
---- Spawn the player ship(s) you want. The strength of the enemy is independent of their number and type.
+--- Spawn the player ships you want. The strength of enemy ships is independent of the number and type of player ships.
 -- Type: Basic
--- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. (Players are more quickly overwhelmed, leading to shorter games.)
--- Variation[Easy]: Makes each wave easier by decreasing the number of ships in each wave. (Takes longer for the players to be overwhelmed; good for new players.)
+-- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. Players are overwhelmed more quickly, leading to shorter games.
+-- Variation[Easy]: Decreases the number of ships in each wave. Good for new players, but takes longer for the players to be overwhelmed.
 
 --- Scenario
 -- @script scenario_03_waves
@@ -41,10 +40,11 @@ function init()
     PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
     -- Give the mission to the (first) player ship
-    local text = [[At least one friendly base must survive.
-Destroy all enemy ships. After a short delay, the next wave will appear.
-And so on ...
-How many waves can you destroy?]]
+    local text = _([[At least one friendly base must survive.
+
+Destroy all enemy ships. After a short delay, the next wave will appear. And so on ...
+
+How many waves can you destroy?]])
     getPlayerShip(-1):addToShipLog(text, "white")
 
     -- Random friendly stations
@@ -247,7 +247,7 @@ function update(delta)
     -- Continue ...
     if enemy_count == 0 then
         spawnWaveDelay = 15.0
-        globalMessage("Wave cleared!")
+        globalMessage(_("Wave cleared!"))
         getPlayerShip(-1):addToShipLog("Wave " .. waveNumber .. " cleared.", "green")
     end
     -- ... or lose

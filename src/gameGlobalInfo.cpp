@@ -154,9 +154,14 @@ void GameGlobalInfo::addScript(P<Script> script)
 
 void GameGlobalInfo::reset()
 {
+    if (state_logger)
+        state_logger->destroy();
+
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
+
+    flushDatabaseData();
 
     foreach(GameEntity, e, entityList)
         e->destroy();
@@ -185,7 +190,6 @@ void GameGlobalInfo::startScenario(string filename)
     i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
-    flushDatabaseData();
     fillDefaultDatabaseData();
 
     P<ScriptObject> scienceInfoScript = new ScriptObject("science_db.lua");
@@ -207,8 +211,6 @@ void GameGlobalInfo::destroy()
 {
     reset();
     MultiplayerObject::destroy();
-    if (state_logger)
-        state_logger->destroy();
 }
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)

@@ -1,11 +1,18 @@
 #include "packResourceProvider.h"
 
-#include <dirent.h>
-#include <stdio.h>
-#ifdef __WIN32__
+#include <cstdio>
+
+#ifdef _WIN32
 #include <malloc.h>
 #else
 #include <alloca.h>
+#endif
+
+#ifdef _MSC_VER
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#else
+#include <dirent.h>
 #endif
 
 static inline int readInt(FILE* f)
@@ -67,6 +74,29 @@ std::vector<string> PackResourceProvider::findResources(const string searchPatte
 
 void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 {
+#ifdef _MSC_VER
+    WIN32_FIND_DATAA data;
+    auto search_root = directory;
+    if (!search_root.endswith("/"))
+    {
+        search_root += "/";
+    }
+    HANDLE handle = FindFirstFileA((search_root + "*").c_str(), &data);
+    if (handle == INVALID_HANDLE_VALUE)
+        return;
+
+    do {
+        if (data.cFileName[0] == '.')
+            continue;
+        string name = directory + "/" + string(data.cFileName);
+        if (name.lower().endswith(".pack"))
+        {
+            new PackResourceProvider(name);
+        }
+    } while (FindNextFileA(handle, &data));
+
+    FindClose(handle);
+#else
     DIR* dir = opendir(directory.c_str());
     if (!dir)
         return;
@@ -83,6 +113,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
         }
     }
     closedir(dir);
+#endif
 }
 
 PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)

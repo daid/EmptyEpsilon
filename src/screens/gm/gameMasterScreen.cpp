@@ -1,6 +1,7 @@
+#include "gameMasterScreen.h"
+#include "shipTemplate.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
-#include "gameMasterScreen.h"
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
 #include "tweak.h"

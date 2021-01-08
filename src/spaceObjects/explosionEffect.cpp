@@ -116,7 +116,7 @@ void ExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f positio
 void ExplosionEffect::update(float delta)
 {
     if (delta > 0 && lifetime == maxLifetime)
-        soundManager->playSound(explosion_sound, getPosition(), size, 1.0);
+        soundManager->playSound(explosion_sound, getPosition(), size * 2, 60.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
