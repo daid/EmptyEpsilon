@@ -11,7 +11,6 @@ protected:
     func_t func;
     func_t enter_func;
     unsigned short decimals;
-    float value;
     float text_size;
     float interval;
     float min_value;
@@ -30,6 +29,8 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
     virtual void onFocusLost() override;
+
+    void applyInterval(float factor);
 
     float getValue();
     GuiSpinBox* setValue(float new_value);

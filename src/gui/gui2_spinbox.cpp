@@ -9,7 +9,6 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, unsigned short decimals, 
   func(func),
   enter_func(nullptr),
   decimals(decimals),
-  value(0.0f),
   text_size(30),
   interval(interval),
   min_value(0.0f),
@@ -18,8 +17,7 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, unsigned short decimals, 
     decrement = new GuiArrowButton(this, id + "_DECREMENT", 0, [this]() {
         soundManager->playSound("button.wav");
 
-        // Decrement the current value by the interval amount.
-        setValue(getLimitedValue(getValue() - this->interval));
+        applyInterval(-1);
 
         // Run callback.
         if (this->func)
@@ -33,8 +31,7 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, unsigned short decimals, 
     increment = new GuiArrowButton(this, id + "_INCREMENT", 180, [this]() {
         soundManager->playSound("button.wav");
 
-        // Increment by the interval amount.
-        setValue(getLimitedValue(getValue() + this->interval));
+        applyInterval(1);
 
         // Run callback.
         if (this->func)
@@ -101,6 +98,8 @@ void GuiSpinBox::onDraw(sf::RenderTarget& window)
 
 bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
 {
+    // Only active when the TextEntry component has focus.
+
     // Backspace key behavior.
     if (key.code == sf::Keyboard::BackSpace && text.length() > 0)
     {
@@ -117,12 +116,11 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // Enter/Return key behavior.
+    // Enter/Return key behavior: validate and set
     if (key.code == sf::Keyboard::Return && text.length() > 0)
     {
         // Cap the entered value.
         text = getLimitedString(text);
-        value = stof(text);
 
         // Run enterCallback.
         if (enter_func)
@@ -134,7 +132,21 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // TODO: Determine whether there's a use case for copy/paste.
+    // Up/Right key behavior: increment
+    if ((key.code == sf::Keyboard::Up || key.code == sf::Keyboard::Right) && text.length() > 0)
+    {
+        applyInterval(1);
+
+        return true;
+    }
+
+    // Down/Left key behavior: decrement
+    if ((key.code == sf::Keyboard::Down || key.code == sf::Keyboard::Left) && text.length() > 0)
+    {
+        applyInterval(-1);
+
+        return true;
+    }
 
     // Add to string if key is 0-9 or .
     // TODO: Handle negative values
@@ -160,7 +172,6 @@ void GuiSpinBox::onFocusLost()
 {
     // On loss of focus, limit the string value.
     text = getLimitedString(text);
-    value = stof(text);
     GuiTextEntry::onFocusLost();
 }
 
@@ -222,7 +233,7 @@ string GuiSpinBox::getLimitedString(string value)
 
 GuiSpinBox* GuiSpinBox::setValue(float new_value)
 {
-    value = getLimitedValue(new_value);
+    float value = getLimitedValue(new_value);
 
     // Set the TextEntry's "text" to the value, respecting min/max limits.
     // Set the number of decimals. Round to the nearest integral value if 0.
@@ -278,6 +289,9 @@ GuiSpinBox* GuiSpinBox::setMinValue(float new_min_value)
         min_value = 0.0f;
     }
 
+    // Validate the value against the new min.
+    setValue(stof(text));
+
     return this;
 }
 
@@ -295,9 +309,26 @@ GuiSpinBox* GuiSpinBox::setMaxValue(float new_max_value)
     }
     else
     {
-        LOG(WARNING) << "SpinBox " << id << " maximum value cannot be smaller than the minimum value: " << max_value;
+        LOG(WARNING) << "SpinBox " << id << " maximum value cannot be smaller than the minimum value: " << new_max_value;
         max_value = min_value + 0.1f;
     }
 
+    // Validate the value against the new max.
+    setValue(stof(text));
+
     return this;
+}
+
+void GuiSpinBox::applyInterval(float factor)
+{
+    float modified_factor = factor;
+
+    // Hold down shift to multiiply the interval by 10.
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+    {
+        modified_factor *= 10.0f;
+    }
+
+    // Adjust the value by the interval and factor.
+    setValue(getLimitedValue(getValue() + (modified_factor * interval)));
 }
