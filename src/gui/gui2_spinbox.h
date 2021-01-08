@@ -24,7 +24,7 @@ protected:
 public:
     typedef std::function<void(string text)> func_t;
 
-    GuiSpinBox(GuiContainer* owner, string id, unsigned short decimals, float interval, func_t func);
+    GuiSpinBox(GuiContainer* owner, string id, float min_value, float max_value, float start_value, unsigned short decimals, float interval, func_t func);
 
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
@@ -42,6 +42,8 @@ public:
     GuiSpinBox* setMaxValue(float max_value);
     bool getDecimals();
     GuiSpinBox* setDecimals(int new_decimals);
+    GuiSpinBox* callback(func_t func);
+    GuiSpinBox* enterCallback(func_t func);
 };
 
 #endif//GUI2_SPINBOX_H
