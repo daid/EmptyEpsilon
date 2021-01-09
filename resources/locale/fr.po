@@ -2452,13 +2452,17 @@ msgstr "Harceleur Q7"
 
 #: scripts/shipTemplates_Frigates.lua:272
 msgid "Cruiser: Strike ship"
-msgstr ""
+msgstr "Croiseur : navire de frappe"
 
 #: scripts/shipTemplates_Frigates.lua:274
 msgid ""
 "The Stalker is a strike ship designed to swoop into battle, deal damage "
 "quickly, and get out fast. The Q7 model is fitted with a warp drive."
 msgstr ""
+"Le Harceleur est un vaisseau d'attaque concu pour plonger dans la "
+"bataille, infliger rapidement des degats et battre en retraite aussitot`\n"
+"\n"
+"Le modele Q7 est equipe de la vitesse lumiere."
 
 #: scripts/shipTemplates_Frigates.lua:282
 msgid "Stalker Q5"
@@ -2470,6 +2474,13 @@ msgid ""
 "swoop into battle, deal damage quickly and retreat. Compared to the Q7, the "
 "Q5 has weaker shields and hull, but a faster turn speed"
 msgstr ""
+"Le Harceleur Q5 precede le Harceleur Q7.\n"
+"\n"
+"Comme ce dernier, il est concu pour se lancer dans la bataille, infliger "
+"rapidement des degats et battre en retraite.\n"
+"\n"
+"Compare au Q7, le Q5 a des boucliers et une coque plus faibles, mais une "
+"vitesse de rotation plus rapide."
 
 #: scripts/shipTemplates_Frigates.lua:288
 msgid "Stalker R7"
@@ -2480,6 +2491,10 @@ msgid ""
 "The Stalker is a strike ship designed to swoop into battle, deal damage "
 "quickly, and get out fast. The R7 model is fitted with a jump drive."
 msgstr ""
+"Le Harceleur est un vaisseau d'attaque concu pour plonger dans la "
+"bataille, infliger rapidement des degats et battre en retraite aussitot.\n"
+"\n"
+"Le modele R7 est equipe de la teleportation."
 
 #: scripts/shipTemplates_Frigates.lua:293
 msgid "Stalker R5"
@@ -2491,6 +2506,13 @@ msgid ""
 "swoop into battle, deal damage quickly and retreat. Compared to the R7, the "
 "R5 has weaker shields and hull, but a faster turn speed"
 msgstr ""
+"Le Harceleur R5 precede le Harceleur R7.\n"
+"\n"
+"Comme ce dernier, il est concu pour se lancer dans la bataille, infliger "
+"rapidement des degats et battre en retraite.\n"
+"\n"
+"Compare au R7, le R5 a des boucliers et une coque plus faibles, mais une "
+"vitesse de rotation plus rapide."
 
 #: scripts/shipTemplates_Frigates.lua:299
 msgid "Ranus U"
