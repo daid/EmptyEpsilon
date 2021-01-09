@@ -52,6 +52,7 @@ public:
     virtual void onMouseDrag(sf::Vector2f position);
     virtual void onMouseUp(sf::Vector2f position);
     virtual bool onKey(sf::Event::KeyEvent key, int unicode);
+    virtual bool onTextEntered(sf::Event::TextEvent text, int unicode);
     virtual void onHotkey(const HotkeyResult& key);
     virtual bool onJoystickAxis(const AxisAction& axisAction);
     virtual void onFocusGained() {}

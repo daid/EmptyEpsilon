@@ -19,6 +19,7 @@ public:
     DebugRenderer();
 
     virtual void render(sf::RenderTarget& window);
+    virtual void handleTextEntered(sf::Event::TextEvent text, int unicode);
     virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode);
 };
 

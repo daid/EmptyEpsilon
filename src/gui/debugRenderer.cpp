@@ -112,3 +112,7 @@ void DebugRenderer::handleKeyPress(sf::Event::KeyEvent key, int unicode)
             P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(60);
     }
 }
+
+void DebugRenderer::handleTextEntered(sf::Event::TextEvent text, int unicode)
+{
+}

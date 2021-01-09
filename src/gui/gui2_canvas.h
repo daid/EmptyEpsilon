@@ -17,12 +17,14 @@ public:
 
     virtual void render(sf::RenderTarget& window) override;
     virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode) override;
+    virtual void handleTextEntered(sf::Event::TextEvent text, int unicode) override;
     virtual void handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position) override;
     virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
 
     virtual void onClick(sf::Vector2f mouse_position);
     virtual void onHotkey(const HotkeyResult& key);
     virtual void onKey(sf::Event::KeyEvent key, int unicode);
+    virtual void onTextEntered(sf::Event::TextEvent text, int unicode);
 
     void focus(GuiElement* element);
     //Called when an element is destroyed in this tree. Recursive tests if the given element or any of it's children currently has focus, and unsets that focus.

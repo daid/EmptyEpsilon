@@ -34,6 +34,11 @@ bool GuiElement::onKey(sf::Event::KeyEvent key, int unicode)
     return false;
 }
 
+bool GuiElement::onTextEntered(sf::Event::TextEvent text, int unicode)
+{
+    return false;
+}
+
 void GuiElement::onHotkey(const HotkeyResult& key)
 {
 }

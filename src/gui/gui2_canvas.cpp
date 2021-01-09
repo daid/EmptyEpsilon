@@ -64,6 +64,21 @@ void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
     onKey(key, unicode);
 }
 
+void GuiCanvas::handleTextEntered(sf::Event::TextEvent text, int unicode)
+{
+    // If a GUI element is focused, pass the input to its onTextEntered.
+    if (focus_element)
+    {
+        if (focus_element->onTextEntered(text, unicode))
+        {
+            return;
+        }
+    }
+
+    // Otherwise, handle it in this canvas.
+    onTextEntered(text, unicode);
+}
+
 void GuiCanvas::handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position){
     for(AxisAction action : joystick.getAxisAction(joystickId, axis, position)){
         forwardJoystickAxisToElements(action);
@@ -88,6 +103,10 @@ void GuiCanvas::onHotkey(const HotkeyResult& key)
 }
 
 void GuiCanvas::onKey(sf::Event::KeyEvent key, int unicode)
+{
+}
+
+void GuiCanvas::onTextEntered(sf::Event::TextEvent text, int unicode)
 {
 }
 
