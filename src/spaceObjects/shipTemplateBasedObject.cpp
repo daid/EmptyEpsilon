@@ -358,7 +358,7 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
     this->template_name = template_name;
     ship_template = new_ship_template;
-    type_name = template_name;
+    type_name = new_ship_template->getLocaleName();
 
     hull_strength = hull_max = ship_template->hull;
     shield_count = ship_template->shield_count;
