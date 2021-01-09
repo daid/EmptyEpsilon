@@ -413,8 +413,8 @@ target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
 target_compile_options(${EXECUTABLE_NAME}
 	PUBLIC
-	$<$<AND:$<NOT:${MSVC}>,$<CONFIG:RelWithDebInfo>>:-g1>
-	$<$<AND:$<NOT:${MSVC}>,$<OR:$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${OPTIMIZER_FLAGS}>
+	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<CONFIG:RelWithDebInfo>>:-g1>
+	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<OR:$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${OPTIMIZER_FLAGS}>
 	$<$<BOOL:${MSVC}>:/MP /permissive->
 )
 
