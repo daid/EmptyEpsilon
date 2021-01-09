@@ -90,7 +90,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     window_button->setSize(175, 50);
 
     window_angle = new GuiSlider(window_button_row, "WINDOW_ANGLE", 0.0, 359.0, 0.0, [this](float value) {
-        window_angle_label->setText(string(int(window_angle->getValue())) + tr("shipwindow", " degrees"));
+        window_angle_label->setText(tr("shipwindow", "{angle} degrees").format({{"angle", string(int(window_angle->getValue()))}}));
     });
     window_angle->setSize(GuiElement::GuiSizeMax, 50);
     window_angle_label = new GuiLabel(window_angle, "WINDOW_ANGLE_LABEL", tr("shipwindow", "0 degrees"), 30);
