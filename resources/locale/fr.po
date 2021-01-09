@@ -2460,7 +2460,7 @@ msgid ""
 "quickly, and get out fast. The Q7 model is fitted with a warp drive."
 msgstr ""
 "Le Harceleur est un vaisseau d'attaque concu pour plonger dans la "
-"bataille, infliger rapidement des degats et battre en retraite aussitot`\n"
+"bataille, infliger rapidement des degats et battre en retraite aussitot.\n"
 "\n"
 "Le modele Q7 est equipe de la vitesse lumiere."
 
