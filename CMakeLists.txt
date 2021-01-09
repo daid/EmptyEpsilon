@@ -411,8 +411,12 @@ endif()
 
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
-target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:Release>:${OPTIMIZER_FLAGS}>)
-target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:RelWithDebInfo>:-g1 ${OPTIMIZER_FLAGS}>)
+target_compile_options(${EXECUTABLE_NAME}
+	PUBLIC
+	$<$<AND:$<NOT:${MSVC}>,$<CONFIG:RelWithDebInfo>>:-g1>
+	$<$<AND:$<NOT:${MSVC}>,$<OR:$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${OPTIMIZER_FLAGS}>
+	$<$<BOOL:${MSVC}>:/MP /permissive->
+)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
