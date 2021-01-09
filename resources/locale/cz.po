@@ -80,8 +80,8 @@ msgid ""
 msgstr ""
 "Refitovana verze Atlantis X23 pro vice vseobecne ukoly. Silny system stitu "
 "byl nahrazen pokrocilym manevrovacim systemem a vylepsenymi impulznimi "
-"motory. Jeji torpeda jsou taktez vice univerzalni. Splest si tuto upravenou "
-"Atlantis za Atlantis X23 by byla smrtelna chyba."
+"motory. Jeji torpedova vybava je taktez vice univerzalni. Splest si tuto "
+"upravenou Atlantis za Atlantis X23 by byla smrtelna chyba."
 
 #: scripts/shipTemplates_Corvette.lua:84
 msgid ""
@@ -93,10 +93,10 @@ msgid ""
 "long."
 msgstr ""
 "Oproti svemu predchudci, Starhammer II (Hvezdne kladivo) dostava svemu "
-"jmenu. Vyresenim problemu puvodniho Starhammeru v energetice a chlazeni, "
-"vylepseny model je fenomenalni lod pro celni utok. jeho nizka rychlost je "
-"sice narocnejsi na natoceni, ale kdyz je ve spravny cas na spravnem miste, "
-"ani nejsilnejsi lode nevydrzi proti utoku Starhammeru dlouho."
+"jmenu. Vyresenim problemu puvodniho Starhammeru v energetice a chlazeni se "
+"stal tento vylepseny fenomenalni lodi pro celni utok. Jeho nizka rychlost "
+"klade sice vetsi nároky na pilota, ale kdyz je ve spravny cas na spravnem "
+"miste, ani nejsilnejsi lode nevydrzi proti utoku Starhammeru dlouho."
 
 #: scripts/shipTemplates_Corvette.lua:102
 msgid ""
@@ -114,7 +114,7 @@ msgid ""
 "deemed lower priority, though they are still present. Stronger defenses than "
 "a frigate, but not as strong as the Atlantis"
 msgstr ""
-"Rada paprskovych zbrani jezicich se z ruznych mist na tomto strelci. "
+"Rada paprskovych zbrani jezicich se z ruznych mist na teto strelecke lodi. "
 "Torpedomety byly povazovany za nizsi prioritu, ale stale tu nejake jsou. "
 "Lepsi obrana, nez fregaty, ale ne tak silne jako Atlantis"
 
@@ -155,7 +155,7 @@ msgid ""
 msgstr ""
 "Tyto prepravni lode jsou specialne navrzeny pro transport odpadu. Jsou "
 "vybaveny zhutnovacem odpadu a mene systemy pro stabilizaci prostredi, nez "
-"nakladna tra"
+"nakladni lode."
 
 #: scripts/shipTemplates_Corvette.lua:275
 msgid ""
@@ -612,7 +612,7 @@ msgstr "Zahajit komunikaci"
 
 #: src/screens/crew6/relayScreen.cpp:103
 msgid "Link to Comms"
-msgstr "Provazat s komunikacni stanici"
+msgstr "Provazat s komunikacni st."
 
 #: src/screens/crew6/relayScreen.cpp:107
 msgid "Start hacking"
@@ -665,11 +665,11 @@ msgstr "{value} {unit}/min"
 
 #: src/screens/gm/tweak.cpp:543
 msgid "{system} health"
-msgstr ""
+msgstr "{system} - zdravi"
 
 #: src/screens/gm/tweak.cpp:562
 msgid "{system} heat"
-msgstr ""
+msgstr "{system} - teplota"
 
 #: src/screenComponents/aimLock.cpp:11
 msgctxt "missile"
@@ -948,14 +948,14 @@ msgid "Goods Jump Freighter %d"
 msgstr "Nakladni Skokovy Transport %d"
 
 #: scripts/shipTemplates_Corvette.lua:261
-#, fuzzy, lua-format
+#, lua-format
 msgid "Garbage Freighter %d"
-msgstr "Odpadni Transport %d"
+msgstr "Transport na Odpad %d"
 
 #: scripts/shipTemplates_Corvette.lua:270
 #, lua-format
 msgid "Garbage Jump Freighter %d"
-msgstr "Odpadni Skokovy Transport %d"
+msgstr "Skokovy Transport na Odpad %d"
 
 #: scripts/shipTemplates_Corvette.lua:274
 #, lua-format
@@ -1024,6 +1024,18 @@ msgid ""
 "outside of the navy from spacefaring, as quite a few humans sign up on alien "
 "trading vessels or pirate raiders."
 msgstr ""
+"Zbytky pozemskeho namornictva.\n"
+"\n"
+"Zatim co ostatni rasy se vydaly do vesmiru ve jmenu chamtivosti, nebo "
+"vedeckeho pokroku, lide byli jedinou rasou, ktera zacala prozkoumavat "
+"galaxii, kdyz jejich svet jiz nedokazal udrzet jejich populaci. Nektere "
+"dalsi rasy vidi lidstvo jako nejaky virus nebo mor, na zaklade rychlosti s "
+"jakou se mnozi a rozsiruji.\n"
+"\n"
+"Lidske predpisy pro vesmirne lode urcuji, ze jen lode namornictva smi do "
+"hlubokeho vesmiru. To vsak uplne nezabranilo lidem mimo namornictvo, aby se "
+"vydali do vesmiu, nebot peknych par lidi se prihlasilo ke sluzbe na "
+"mimozemskych obchodnich lodich nebo piratskych najezdnicich. "
 
 #: scripts/factionInfo.lua:13
 msgid "Kraylor"
@@ -1271,7 +1283,7 @@ msgstr "Velikost"
 #: src/scienceDatabase.cpp:391
 msgctxt "database"
 msgid "Shield"
-msgstr "Stit"
+msgstr "Stity"
 
 #: src/scienceDatabase.cpp:393
 msgid "Hull"
@@ -1757,17 +1769,17 @@ msgstr "Pocet torpedometu:"
 
 #: src/screens/gm/tweak.cpp:325
 msgid "Tube: {id_tube}"
-msgstr "Torpedomet: "
+msgstr "Torpedomet: {id_tube}"
 
 #: src/screens/gm/tweak.cpp:328
 msgctxt "tube"
 msgid "Direction:"
-msgstr "Smer"
+msgstr "Směr:"
 
 #: src/screens/gm/tweak.cpp:334
 msgctxt "tube"
 msgid "Load time:"
-msgstr "Doba nabijeni: "
+msgstr "Doba nabijeni:"
 
 #: src/screens/gm/tweak.cpp:340
 msgctxt "tube"
@@ -1787,7 +1799,7 @@ msgstr "Stredni"
 #: src/screens/gm/tweak.cpp:347
 msgctxt "tube"
 msgid "large"
-msgstr "Velke"
+msgstr "velke"
 
 #: src/screens/gm/tweak.cpp:351
 msgctxt "tube"
@@ -1848,7 +1860,7 @@ msgstr "Poskozeni:"
 
 #: src/screens/gm/tweak.cpp:552
 msgid "{system} health max"
-msgstr ""
+msgstr "{system} - maximum zdravi"
 
 #: src/screens/gm/tweak.cpp:604
 msgid "Control code:"
@@ -1872,7 +1884,7 @@ msgstr "Rychlost uhybu do boku:"
 
 #: src/screens/gm/tweak.cpp:651 src/screens/gm/tweak.cpp:684
 msgid "Positions occupied: "
-msgstr "Obsazene pozice:"
+msgstr "Obsazene pozice: "
 
 #: src/screens/gm/tweak.cpp:676
 msgctxt "position"
@@ -1966,22 +1978,22 @@ msgstr "Hloubka skenu:"
 #: scripts/shipTemplates_Corvette.lua:217
 msgctxt "subclass"
 msgid "Support"
-msgstr ""
+msgstr "Podpurne"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9 scripts/shipTemplates_OLD.lua:348
 #: scripts/shipTemplates_OLD.lua:363
 msgctxt "class"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Bitevní loď"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgctxt "subclass"
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
 
 #: scripts/shipTemplates_Dreadnaught.lua:11
 msgid ""
@@ -2021,11 +2033,11 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Frigate"
-msgstr ""
+msgstr "Fregata"
 
 #: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:235
 msgid "Cruiser"
-msgstr ""
+msgstr "Křižník"
 
 #: scripts/shipTemplates_Frigates.lua:16
 msgid ""
@@ -2170,7 +2182,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:216
 msgid "Piranha"
-msgstr ""
+msgstr "Pirana"
 
 #: scripts/shipTemplates_Frigates.lua:217
 msgid ""
@@ -2242,7 +2254,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:312
 msgid "Light transport"
-msgstr ""
+msgstr "Lehky transport"
 
 #: scripts/shipTemplates_Frigates.lua:314
 msgid ""
@@ -2421,9 +2433,10 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:271
+#, fuzzy
 msgctxt "subclass"
 msgid "Gunship"
-msgstr ""
+msgstr "Bojová loď"
 
 msgid ""
 "The gunship is a ship equiped with a homing missile tube to do initial "
@@ -2433,7 +2446,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:284
 msgid "Adv. Gunship"
-msgstr ""
+msgstr "Pokročilá bojová loď"
 
 msgid ""
 "The advanced gunship is a ship equiped with 2 homing missiles to do initial "
@@ -2442,8 +2455,9 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289
+#, fuzzy
 msgid "Strikeship"
-msgstr ""
+msgstr "Útočná loď"
 
 #: scripts/shipTemplates_OLD.lua:289 scripts/shipTemplates_OLD.lua:301
 #: scripts/shipTemplates_StarFighters.lua:13
@@ -2453,18 +2467,20 @@ msgid "Starfighter"
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289
+#, fuzzy
 msgctxt "subclass"
 msgid "Strike"
-msgstr ""
+msgstr "Útočná"
 
 #: scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:301
+#, fuzzy
 msgctxt "subclass"
 msgid "Patrol"
-msgstr ""
+msgstr "Hlídková"
 
 #: scripts/shipTemplates_OLD.lua:303
 msgid ""
@@ -2487,7 +2503,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
 msgid "Dreadnought"
-msgstr ""
+msgstr "Bitevní loď"
 
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
@@ -2502,11 +2518,11 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:363
 msgid "Battlestation"
-msgstr ""
+msgstr "Bojová stanice"
 
 #: scripts/shipTemplates_OLD.lua:363
 msgid "Battlecruiser"
-msgstr ""
+msgstr "Bojový křižník"
 
 #: scripts/shipTemplates_OLD.lua:365
 msgid ""
@@ -2516,7 +2532,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
-msgstr ""
+msgstr "Zbranova platforma"
 
 #: scripts/shipTemplates_OLD.lua:457
 msgid ""
@@ -2704,7 +2720,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "Bomber"
-msgstr ""
+msgstr "Bombarder"
 
 #: scripts/shipTemplates_StarFighters.lua:123
 msgid ""
@@ -2720,11 +2736,11 @@ msgstr ""
 
 #: scripts/science_db.lua:5
 msgid "Natural"
-msgstr ""
+msgstr "Prirodni"
 
 #: scripts/science_db.lua:6
 msgid "Asteroid"
-msgstr ""
+msgstr "Asteroid"
 
 #: scripts/science_db.lua:7
 msgid ""
@@ -2734,7 +2750,7 @@ msgstr ""
 
 #: scripts/science_db.lua:9
 msgid "Nebula"
-msgstr ""
+msgstr "Mlhovina"
 
 #: scripts/science_db.lua:10
 msgid ""
@@ -2748,7 +2764,7 @@ msgstr ""
 
 #: scripts/science_db.lua:12
 msgid "Black hole"
-msgstr ""
+msgstr "Cerna dira"
 
 #: scripts/science_db.lua:13
 msgid ""
@@ -2767,7 +2783,7 @@ msgstr ""
 
 #: scripts/science_db.lua:17
 msgid "Wormhole"
-msgstr ""
+msgstr "Cervi dira"
 
 #: scripts/science_db.lua:18
 msgid ""
@@ -2787,7 +2803,7 @@ msgstr ""
 
 #: scripts/science_db.lua:22
 msgid "Weapons"
-msgstr ""
+msgstr "Zbrane"
 
 #: scripts/science_db.lua:23
 msgid ""
@@ -2808,7 +2824,7 @@ msgstr ""
 
 #: scripts/science_db.lua:29
 msgid "Homing missile"
-msgstr ""
+msgstr "Navadena strela"
 
 #: scripts/science_db.lua:32
 msgid ""
@@ -2870,31 +2886,29 @@ msgstr ""
 #: src/menus/joinServerMenu.cpp:18
 msgctxt "connectserver"
 msgid "Connecting..."
-msgstr ""
+msgstr "Pripojuji se..."
 
 #: src/menus/joinServerMenu.cpp:51
-#, fuzzy
 msgid "Please enter the server password:"
-msgstr "Heslo serveru: "
+msgstr "Prosim zadejte heslo serveru:"
 
 #: src/menus/serverBrowseMenu.cpp:25
-#, fuzzy
 msgctxt "screenLan"
 msgid "Back"
 msgstr "Zpet"
 
 #: src/menus/serverBrowseMenu.cpp:36
 msgid "LAN"
-msgstr ""
+msgstr "LAN"
 
 #: src/menus/serverBrowseMenu.cpp:38
 msgctxt "screenLan"
 msgid "Connect"
-msgstr ""
+msgstr "Pripojit"
 
 #: src/menus/serverBrowseMenu.cpp:54
 msgid "Last Session ({last})"
-msgstr ""
+msgstr "Predchozi sezeni ({last})"
 
 #: src/menus/tutorialMenu.cpp:29
 #, fuzzy
@@ -2903,163 +2917,159 @@ msgid "Tutorials"
 msgstr "Vyuka"
 
 #: src/menus/shipSelectionScreen.cpp:42
-#, fuzzy
 msgid "Select your station"
-msgstr "Nastaveni serveru"
-
-#: src/menus/shipSelectionScreen.cpp:48
-msgid "6/5 player crew"
-msgstr ""
-
-#: src/menus/shipSelectionScreen.cpp:48
-msgid "4/3 player crew"
-msgstr ""
-
-#: src/menus/shipSelectionScreen.cpp:48
-msgid "1 player crew/extras"
-msgstr ""
+msgstr "Vyber stanici"
 
 #: src/menus/shipSelectionScreen.cpp:48
 #, fuzzy
+msgid "6/5 player crew"
+msgstr "posadka: 6/5 hracu"
+
+#: src/menus/shipSelectionScreen.cpp:48
+#, fuzzy
+msgid "4/3 player crew"
+msgstr "posadka: 4/3 hraci"
+
+#: src/menus/shipSelectionScreen.cpp:48
+#, fuzzy
+msgid "1 player crew/extras"
+msgstr "posadka: 1 hrac/extra"
+
+#: src/menus/shipSelectionScreen.cpp:48
 msgid "Alternative options"
-msgstr "Nastaveni rozhrani"
+msgstr "Alternativni moznosti"
 
 #: src/menus/shipSelectionScreen.cpp:51
-#, fuzzy
 msgid "Main screen"
-msgstr "Pouze hlavni obrazovka"
+msgstr "Hlavni obrazovka"
 
 #: src/menus/shipSelectionScreen.cpp:67
-#, fuzzy
 msgid "Main screen controls"
-msgstr "Moznosti hlavni obrazovky"
+msgstr "Ovladani hlavni obrazovky"
 
 #: src/menus/shipSelectionScreen.cpp:73
 msgid "Game master"
-msgstr ""
+msgstr "Pan hry"
 
 #: src/menus/shipSelectionScreen.cpp:84
 msgid "Ship window"
-msgstr ""
+msgstr "Okno z lodi"
 
 #: src/menus/shipSelectionScreen.cpp:96
 msgid "0 degrees"
-msgstr ""
+msgstr "0 stupnu"
 
 #: src/menus/shipSelectionScreen.cpp:100
 msgid "Top-down 3D view"
-msgstr ""
+msgstr "3D pohled shora"
 
 #: src/menus/shipSelectionScreen.cpp:109
 msgid "Cinematic view"
-msgstr ""
+msgstr "Filmový pohled"
 
 #: src/menus/shipSelectionScreen.cpp:118
 msgid "Spectate (view all)"
-msgstr ""
+msgstr "Pozorovat (zobrazit vse)"
 
 #: src/menus/shipSelectionScreen.cpp:127
-#, fuzzy
 msgid "Enter the GM control code:"
-msgstr "Kod pana hry: "
+msgstr "Zadejte kod pana hry:"
 
 #: src/menus/shipSelectionScreen.cpp:143
 msgid "Select ship"
-msgstr ""
+msgstr "Vyberte lod"
 
 #: src/menus/shipSelectionScreen.cpp:144
 msgid "Waiting for server to spawn a ship"
-msgstr ""
+msgstr "Cekam az server prida lod"
 
 #: src/menus/shipSelectionScreen.cpp:196
 msgid "Spawn player ship"
-msgstr ""
+msgstr "Pridat hracskou lod"
 
 #: src/menus/shipSelectionScreen.cpp:215
-#, fuzzy
 msgid "Scenario selection"
-msgstr "Scenar"
+msgstr "Vyber scenare"
 
 #: src/menus/shipSelectionScreen.cpp:222
 msgid "Disconnect"
-msgstr ""
+msgstr "Odpojit"
 
 #: src/menus/shipSelectionScreen.cpp:230
 msgid "Ready"
-msgstr ""
+msgstr "Pripraven"
 
 #: src/menus/shipSelectionScreen.cpp:244 src/menus/shipSelectionScreen.cpp:250
 #: src/menus/shipSelectionScreen.cpp:329
 msgid "Enter this ship's control code:"
-msgstr ""
+msgstr "Zadejte ovladaci kod lodi:"
 
 #: src/menus/shipSelectionScreen.cpp:248
-#, fuzzy
 msgid "Cancel"
 msgstr "Zrusit"
 
 #: src/menus/shipSelectionScreen.cpp:265
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/menus/shipSelectionScreen.cpp:276
 msgid "Incorrect control code. Re-enter GM code:"
-msgstr ""
+msgstr "Nespravny kod. Zadejte znovu kod pana jeskyne:"
 
 #: src/menus/shipSelectionScreen.cpp:282
 msgid ""
 "Control code accepted.\n"
 "Granting access."
 msgstr ""
+"Ovladaci kod prijat.\n"
+"Udeluji pristup."
 
 #: src/menus/shipSelectionScreen.cpp:301
 msgid "Incorrect control code. Re-enter code for {callsign}:"
-msgstr ""
+msgstr "Nespravny kod. Zadejte znovu kod pro {callsign}:"
 
 #: src/menus/shipSelectionScreen.cpp:310
 msgid ""
 "Control code accepted.\n"
 "Granting access to {callsign}."
 msgstr ""
+"Ovladaci kod prijat.\n"
+"Udeluji pristup k lodi {callsign}."
 
 #: src/menus/shipSelectionScreen.cpp:324
 msgid "OK"
-msgstr ""
+msgstr "Ok"
 
 #: src/screens/cinematicViewScreen.cpp:39 src/screens/topDownScreen.cpp:31
 msgctxt "button"
 msgid "Lock camera on ship"
-msgstr ""
+msgstr "Zamknout kameru na lod"
 
 #: src/screens/cinematicViewScreen.cpp:42
 msgctxt "button"
 msgid "Lock camera on ship's target"
-msgstr ""
+msgstr "Zamknout kameru na cil lodi"
 
 #: src/screens/crew6/scienceScreen.cpp:176
 msgctxt "button"
 msgid "Probe View"
-msgstr ""
+msgstr "Pohled sondy"
 
 #: src/screens/extra/damcon.cpp:20
-#, fuzzy
 msgctxt "damagecontrol"
 msgid "Hull"
 msgstr "Trup"
 
 #: src/screens/extra/powerManagement.cpp:22
-#, fuzzy
 msgid "Coolant"
 msgstr "Chlazeni"
 
 #: src/screens/extra/powerManagement.cpp:40
-#, fuzzy
 msgctxt "button"
 msgid "Power"
 msgstr "Vykon"
 
 #: src/screens/extra/powerManagement.cpp:41
-#, fuzzy
 msgctxt "button"
 msgid "Coolant"
 msgstr "Chlazeni"
@@ -3067,65 +3077,63 @@ msgstr "Chlazeni"
 #: src/screens/extra/powerManagement.cpp:42
 msgctxt "button"
 msgid "Heat"
-msgstr ""
+msgstr "Teplota"
 
 #: src/screens/gm/objectCreationView.cpp:51
 msgctxt "create"
 msgid "Artifact"
-msgstr ""
+msgstr "Artefakt"
 
 #: src/screens/gm/objectCreationView.cpp:55
-#, fuzzy
 msgctxt "create"
 msgid "Warp Jammer"
-msgstr "Rusicka"
+msgstr "Rusicka warpu"
 
 #: src/screens/gm/objectCreationView.cpp:59
-#, fuzzy
 msgctxt "create"
 msgid "Mine"
-msgstr "Miny"
+msgstr "Mina"
 
 #: src/screens/gm/objectCreationView.cpp:68
 msgctxt "create"
 msgid "Asteroid"
-msgstr ""
+msgstr "Asteroid"
 
 #: src/screens/gm/objectCreationView.cpp:72
 msgctxt "create"
 msgid "Visual Asteroid"
-msgstr ""
+msgstr "Vizualni Asteroid"
 
 #: src/screens/gm/objectCreationView.cpp:76
 msgctxt "create"
 msgid "Planet"
-msgstr ""
+msgstr "Planeta"
 
 #: src/screens/gm/objectCreationView.cpp:80
 msgctxt "create"
 msgid "BlackHole"
-msgstr ""
+msgstr "Cerna dira"
 
 #: src/screens/gm/objectCreationView.cpp:84
 msgctxt "create"
 msgid "Nebula"
-msgstr ""
+msgstr "Mlhovina"
 
 #: src/screens/gm/objectCreationView.cpp:88
 msgctxt "create"
 msgid "Worm Hole"
-msgstr ""
+msgstr "Cervi dira"
 
 #: src/screens/gm/globalMessageEntryView.cpp:22
 #: src/screenComponents/commsOverlay.cpp:102
 msgctxt "button"
 msgid "Send"
-msgstr ""
+msgstr "Odeslat"
 
 #: src/screens/gm/chatDialog.cpp:46
 msgctxt "chatGM"
 msgid "Target - Destroyed"
-msgstr ""
+msgstr "Cil - Znicen"
 
 #: src/screens/gm/chatDialog.cpp:59
 msgctxt "chatGM"
@@ -3163,181 +3171,168 @@ msgid "{callsign} - Communicating as {target}"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:125
-#, fuzzy
 msgid "Jump Min Distance:"
-msgstr "Vzdalenost"
+msgstr "Minimalni vzdalenost skoku:"
 
 #: src/screens/gm/tweak.cpp:131
-#, fuzzy
 msgid "Jump Max Distance:"
-msgstr "Vzdalenost"
+msgstr "Maximalni vzdalenost skoku:"
 
 #: src/screens/gm/tweak.cpp:744
-#, fuzzy
 msgid "Max Scan Probes:"
-msgstr "Muze vyslat sondu"
+msgstr "Maximum sond:"
 
 #: src/screens/gm/tweak.cpp:750
-#, fuzzy
 msgid "Scan Probes:"
-msgstr "Vyslat sondu"
+msgstr "Sond:"
 
 #: src/screenComponents/selfDestructIndicator.cpp:15
 msgid "SELF DESTRUCT ACTIVATED"
-msgstr ""
+msgstr "SEBEDESTRUKCE AKTIVNI"
 
 #: src/screenComponents/selfDestructIndicator.cpp:32
 msgid "Waiting for autorization input: {codes} left"
-msgstr ""
+msgstr "Cekam na zadani kodu: {codes} zbyva zadat"
 
 #: src/screenComponents/selfDestructIndicator.cpp:36
 msgid "Have a nice day."
-msgstr ""
+msgstr "Preji pekny den."
 
 #: src/screenComponents/selfDestructIndicator.cpp:40
 msgid "This ship will self-destruct in {seconds} seconds."
-msgstr ""
+msgstr "Tato lod se sama znici za {seconds} seconds."
 
 #: src/screenComponents/frequencyCurve.cpp:59
 msgid "Damage with your beams"
-msgstr ""
+msgstr "Poskozeni vasimi paprsky"
 
 #: src/screenComponents/frequencyCurve.cpp:61
-#, fuzzy
 msgid "Damage on your shields"
-msgstr "Kontrola skod"
+msgstr "Poskozeni vasich stitu"
 
 #: src/screenComponents/powerDamageIndicator.cpp:33
 msgctxt "systems"
 msgid "DAMAGED"
-msgstr ""
+msgstr "POSKOZEN"
 
 #: src/screenComponents/powerDamageIndicator.cpp:37
 msgctxt "systems"
 msgid "JAMMED"
-msgstr ""
+msgstr "ZARUSEN"
 
 #: src/screenComponents/powerDamageIndicator.cpp:41
 msgctxt "systems"
 msgid "NO POWER"
-msgstr ""
+msgstr "ZADNY VYKON"
 
 #: src/screenComponents/powerDamageIndicator.cpp:45
 msgctxt "systems"
 msgid "LOW ENERGY"
-msgstr ""
+msgstr "MALO ENERGIE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:49
 msgctxt "systems"
 msgid "LOW POWER"
-msgstr ""
+msgstr "MALO VYKONU"
 
 #: src/screenComponents/powerDamageIndicator.cpp:53
 msgctxt "systems"
 msgid "OVERHEATING"
-msgstr ""
+msgstr "PREHRIVA SE"
 
 #: src/screenComponents/powerDamageIndicator.cpp:57
 msgctxt "systems"
 msgid "HACKED"
-msgstr ""
+msgstr "HACKNUTY"
 
 #: src/screenComponents/indicatorOverlays.cpp:23
-#, fuzzy
 msgid "Game Paused"
-msgstr "Pravidla hry"
+msgstr "Hra pozastavena"
 
 #: src/screenComponents/indicatorOverlays.cpp:26
-#, fuzzy
 msgid "Unpause"
-msgstr "Pauza"
+msgstr "Odpauzovat"
 
 #: src/screenComponents/indicatorOverlays.cpp:126
 msgid "Defeat!"
-msgstr ""
+msgstr "Porazka!"
 
 #: src/screenComponents/indicatorOverlays.cpp:129
 msgid "Victory!"
-msgstr ""
+msgstr "Vitezstvi!"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:18
 msgid "SHIP DESTROYED!"
-msgstr ""
+msgstr "LOD ZNICENA!"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:19
 msgctxt "shipdestroyed"
 msgid "Return"
-msgstr ""
+msgstr "Vratit se"
 
 #: src/screenComponents/commsOverlay.cpp:20
 msgid "Opening communications..."
-msgstr ""
+msgstr "Zahajuji komunikaci..."
 
 #: src/screenComponents/commsOverlay.cpp:39
 msgid "Answer"
-msgstr ""
+msgstr "Odpovedet"
 
 #: src/screenComponents/commsOverlay.cpp:45
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorovat"
 
 #: src/screenComponents/commsOverlay.cpp:54
 msgid "No reply..."
-msgstr ""
+msgstr "Bez odpovedi"
 
 #: src/screenComponents/commsOverlay.cpp:65
 msgid "Communications were suddenly cut"
-msgstr ""
+msgstr "Komunikace byla necekane prerusena"
 
 #: src/screenComponents/commsOverlay.cpp:76
 msgid "Communications channel closed"
-msgstr ""
+msgstr "Komunikacni kanal uzavren"
 
 #: src/screenComponents/commsOverlay.cpp:157
 msgid "Hailed by {name}"
-msgstr ""
+msgstr "{name} nas vola"
 
 #: src/screenComponents/jumpIndicator.cpp:24
-#, fuzzy
 msgid "Jump in: {delay}"
-msgstr "Skok za"
+msgstr "Skok za: {delay}"
 
 #: src/screenComponents/scanningDialog.cpp:21
 msgctxt "scanning"
 msgid "Electric signature"
-msgstr ""
+msgstr "Elektricka signatura"
 
 #: src/screenComponents/scanningDialog.cpp:27
 msgctxt "scanning"
 msgid "LOCKED"
-msgstr ""
+msgstr "ODPOVIDA"
 
 #: src/screenComponents/mainScreenControls.cpp:14
-#, fuzzy
 msgctxt "controlbutton"
 msgid "Main screen"
-msgstr "Pouze hlavni obrazovka"
+msgstr "Hlavni obrazovka"
 
 #: src/screenComponents/mainScreenControls.cpp:31
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Front"
 msgstr "Predni"
 
 #: src/screenComponents/mainScreenControls.cpp:39
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Back"
-msgstr "Zpet"
+msgstr "Zadni"
 
 #: src/screenComponents/mainScreenControls.cpp:47
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Left"
 msgstr "Levy"
 
 #: src/screenComponents/mainScreenControls.cpp:55
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Right"
 msgstr "Pravy"
@@ -3345,13 +3340,12 @@ msgstr "Pravy"
 #: src/screenComponents/mainScreenControls.cpp:68
 msgctxt "mainscreen"
 msgid "Target lock"
-msgstr ""
+msgstr "Zamereny cil"
 
 #: src/screenComponents/mainScreenControls.cpp:80
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Tactical"
-msgstr "Takticke st."
+msgstr "Takticky radar"
 
 #: src/screenComponents/mainScreenControls.cpp:91
 #, fuzzy
@@ -3362,22 +3356,19 @@ msgstr "Radar dlouheho dosahu"
 #: src/screenComponents/mainScreenControls.cpp:105
 msgctxt "mainscreen"
 msgid "Show comms"
-msgstr ""
+msgstr "Zobrazit komunikaci"
 
 #: src/screenComponents/mainScreenControls.cpp:116
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Hide comms"
-msgstr "Zahajit komunikaci"
+msgstr "Skryt komunikaci"
 
 #: src/screenComponents/hackingDialog.cpp:35
-#, fuzzy
 msgctxt "hacking"
 msgid "Reset"
 msgstr "Reset"
 
 #: src/screenComponents/hackingDialog.cpp:41
-#, fuzzy
 msgctxt "hacking"
 msgid "Close"
 msgstr "Zavrit"
@@ -3385,86 +3376,82 @@ msgstr "Zavrit"
 #: src/screenComponents/hackingDialog.cpp:55
 msgctxt "hacking"
 msgid "Target system:"
-msgstr ""
+msgstr "Zacilit system:"
 
 #: src/screenComponents/hackingDialog.cpp:115
 msgctxt "hacking"
 msgid "Hacking in Progress: {percent}%"
-msgstr ""
+msgstr "Hackovani probiha: {procent}%"
 
 #: src/screenComponents/hackingDialog.cpp:124
 msgctxt "hacking"
 msgid "{target}: hacked {percent}%"
-msgstr ""
+msgstr "{target}: hacknuty na {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:141
 msgid "Hacking SUCCESS!"
-msgstr ""
+msgstr "Hacking USPESNY!"
 
 #: src/screenComponents/hackingDialog.cpp:141
 msgid "Hacking FAILURE!"
-msgstr ""
+msgstr "Hacking SELHAL!"
 
 #: src/spaceObjects/cpuShip.cpp:153
 msgctxt "cpulog"
 msgid "Searching for targets."
-msgstr ""
+msgstr "Hleda cile."
 
 #: src/spaceObjects/cpuShip.cpp:162
 msgctxt "cpulog"
 msgid "Searching for hostiles around {x},{y}."
-msgstr ""
+msgstr "Hleda nepratele kolem {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:171
 msgctxt "cpulog"
 msgid "Searching for supplies."
-msgstr ""
+msgstr "Hleda zasoby"
 
 #: src/spaceObjects/cpuShip.cpp:174 src/spaceObjects/cpuShip.cpp:249
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
-msgstr ""
+msgstr "Kotvi k {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:185
-#, fuzzy
 msgctxt "cpulog"
 msgid "Standing ground for now."
-msgstr "Zustat na miste"
+msgstr "Prozatim zustava na miste."
 
 #: src/spaceObjects/cpuShip.cpp:193
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
-msgstr ""
+msgstr "Brani {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:203
-#, fuzzy
 msgctxt "cpulog"
 msgid "Defending {callsign}."
-msgstr "Branit lokaci"
+msgstr "Brani {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:213
 msgctxt "cpulog"
 msgid "Following {callsign}."
-msgstr ""
+msgstr "Sleduje {callsign}."
 
 #: src/spaceObjects/cpuShip.cpp:221 src/spaceObjects/cpuShip.cpp:229
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
-msgstr ""
+msgstr "Leti na {x},{y}."
 
 #: src/spaceObjects/cpuShip.cpp:239
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
-msgstr ""
+msgstr "Leti k utoku na {callsign}!"
 
 #: src/spaceObjects/cpuShip.cpp:309
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr "Nedelat nic"
 
 #: src/spaceObjects/cpuShip.cpp:310
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr "Toulat se"
@@ -3472,134 +3459,130 @@ msgstr "Toulat se"
 #: src/spaceObjects/cpuShip.cpp:311
 msgctxt "orderscpu"
 msgid "Retreat"
-msgstr ""
+msgstr "Ustoupit"
 
 #: src/spaceObjects/cpuShip.cpp:312
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr "Zustat na miste"
 
 #: src/spaceObjects/cpuShip.cpp:313
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr "Branit lokaci"
 
 #: src/spaceObjects/cpuShip.cpp:314
-#, fuzzy
 msgctxt "orderscpu"
 msgid "Defend Target"
-msgstr "Branit lokaci"
+msgstr "Branit cil"
 
 #: src/spaceObjects/cpuShip.cpp:315
 msgctxt "orderscpu"
 msgid "Fly in formation"
-msgstr ""
+msgstr "Letet ve formaci"
 
 #: src/spaceObjects/cpuShip.cpp:316
 msgctxt "orderscpu"
 msgid "Fly towards"
-msgstr ""
+msgstr "Letet k"
 
 #: src/spaceObjects/cpuShip.cpp:317
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
-msgstr ""
+msgstr "Letet k (ignorovat vse)"
 
 #: src/spaceObjects/cpuShip.cpp:318
 msgctxt "orderscpu"
 msgid "Attack"
-msgstr ""
+msgstr "Utok"
 
 #: src/spaceObjects/cpuShip.cpp:319
 msgctxt "orderscpu"
 msgid "Dock"
-msgstr ""
+msgstr "Zadokovat"
 
 #: src/spaceObjects/playerSpaceship.cpp:395
-#, fuzzy
 msgctxt "shiplog"
 msgid "Start of log"
-msgstr "Spustit vyuku"
+msgstr "Zacatek deniku"
 
 #: src/spaceObjects/playerSpaceship.cpp:1127
 msgctxt "shiplog"
 msgid "Hailed by {name}"
-msgstr ""
+msgstr "Vola nas {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1181
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
-msgstr ""
+msgstr "Komunikace uzavrena protistranou"
 
 #: src/spaceObjects/playerSpaceship.cpp:1191
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
-msgstr ""
+msgstr "Volani od {callsign} prestalo"
 
 #: src/spaceObjects/playerSpaceship.cpp:1195
 msgctxt "shiplog"
 msgid "Communication channel closed"
-msgstr ""
+msgstr "Komunikacni kanal uzavren"
 
 #: src/spaceObjects/playerSpaceship.cpp:1366
 #: src/spaceObjects/playerSpaceship.cpp:1443
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
-msgstr ""
+msgstr "Zahajena komunikace s: {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1367
 msgctxt "shiplog"
 msgid "Hailing: {name}"
-msgstr ""
+msgstr "Volame: {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1390
 #: src/spaceObjects/playerSpaceship.cpp:1391
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
-msgstr ""
+msgstr "Zahajena komunikace s {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1392
 #: src/spaceObjects/playerSpaceship.cpp:1393
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
-msgstr ""
+msgstr "Otevren komunikacni kanal s {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1395
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
-msgstr ""
+msgstr "Komunikace od {callsign} odmitnuta"
 
 #: src/spaceObjects/playerSpaceship.cpp:1396
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
-msgstr ""
+msgstr "Komunikace s {callsign} odmitnuta"
 
 #: src/spaceObjects/playerSpaceship.cpp:1405
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
-msgstr ""
+msgstr "Volani nahle zmizelo."
 
 #: src/spaceObjects/playerSpaceship.cpp:1408
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
-msgstr ""
+msgstr "Prijata komunikace od {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1428
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
-msgstr ""
+msgstr "Odmitnuta komunikace od {callsign}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1442
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
-msgstr ""
+msgstr "Otevren komunikacni kanal s {name}"
 
 #: src/spaceObjects/playerSpaceship.cpp:1445
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
-msgstr ""
+msgstr "Odmitnuta komunikace od {name}"
 
 #: scripts/shipTemplates_OLD.lua:237
 msgid ""
@@ -3686,50 +3669,44 @@ msgstr ""
 
 #: scripts/science_db.lua:30 scripts/science_db.lua:35
 #: scripts/science_db.lua:54 scripts/science_db.lua:61
-#, fuzzy
 msgid "Range"
-msgstr "Dosah:"
+msgstr "Dosah"
 
 #: scripts/science_db.lua:31 scripts/science_db.lua:62
-#, fuzzy
 msgid "Damage"
-msgstr "Poskozeni:"
+msgstr "Poskozeni"
 
 #: scripts/science_db.lua:34
-#, fuzzy
 msgid "Nuke"
-msgstr "Jaderne"
+msgstr "Jaderna strela"
 
 #: scripts/science_db.lua:36 scripts/science_db.lua:46
 #: scripts/science_db.lua:55
 msgid "Blast radius"
-msgstr ""
+msgstr "Polomer vybuchu"
 
 #: scripts/science_db.lua:37 scripts/science_db.lua:47
 #: scripts/science_db.lua:56
-#, fuzzy
 msgid "Damage at center"
-msgstr "Negace poskozeni"
+msgstr "Pozkozeni v epicentru"
 
 #: scripts/science_db.lua:38 scripts/science_db.lua:48
 #: scripts/science_db.lua:57
-#, fuzzy
 msgid "Damage at edge"
-msgstr "Negace poskozeni"
+msgstr "Pozkozeni na okraji"
 
 #: scripts/science_db.lua:43
-#, fuzzy
 msgid "Mine"
-msgstr "Miny"
+msgstr "Mina"
 
 #: scripts/science_db.lua:44
-#, fuzzy
 msgid "Drop distance"
-msgstr "Vzdalenost"
+msgstr "Vypousteci vzdalenost"
 
 #: scripts/science_db.lua:45
+#, fuzzy
 msgid "Trigger distance"
-msgstr ""
+msgstr "Aktivační vzdálenost"
 
 #: scripts/science_db.lua:60
 msgid "HVLI"
@@ -3737,7 +3714,7 @@ msgstr ""
 
 #: scripts/science_db.lua:63
 msgid "Burst"
-msgstr ""
+msgstr "Davka"
 
 #: scripts/shipTemplates_Frigates.lua:371
 msgid "Jump/Turret version of Flavia Falcon"
