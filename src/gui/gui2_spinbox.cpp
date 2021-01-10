@@ -197,7 +197,7 @@ float GuiSpinBox::getValue()
 
 float GuiSpinBox::getLimitedValue(float value)
 {
-    // Limit the value to minimum and maximum values.
+    // Return a limited value if it exceeds min/max.
     if (value > max_value)
     {
         return max_value;
@@ -279,13 +279,13 @@ float GuiSpinBox::getMinValue()
 GuiSpinBox* GuiSpinBox::setMinValue(float new_min_value)
 {
     // Set the min value as long as it's smaller than the max value.
-    if (new_min_value < max_value && new_min_value >= 0.0f)
+    if (new_min_value < max_value)
     {
         min_value = new_min_value;
     }
     else
     {
-        LOG(WARNING) << "SpinBox " << id << " minimum value cannot be larger than the maximum value or negative: " << new_min_value;
+        LOG(WARNING) << "SpinBox " << id << " minimum value cannot be larger than the maximum value: " << new_min_value;
         min_value = 0.0f;
     }
 
