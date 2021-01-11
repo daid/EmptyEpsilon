@@ -286,7 +286,7 @@ GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     (new GuiLabel(left_col, "", tr("Asteroid Size:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    asteroid_size_slider = new GuiSlider(left_col, "", 0, 1000, 0, [this](float value) {
+    asteroid_size_slider = new GuiSlider(left_col, "", 10, 500, 0, [this](float value) {
         target->setSize(value);
     });
     asteroid_size_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
