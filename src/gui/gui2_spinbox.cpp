@@ -52,7 +52,7 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, float min_value, float ma
 void GuiSpinBox::onDraw(sf::RenderTarget& window)
 {
     // Only check value if something's in the box.
-    if (text.length() > 0)
+    if (text.length() > 0 && text != "." && text != "-" && text != "-.")
     {
         // Disable inc/dec buttons if value is at min/max.
         if (getValue() <= min_value)
@@ -144,8 +144,8 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // Add to string if key is 0-9 or .
-    if ((unicode > 47 && unicode < 58) || (unicode == 46))
+    // Add to string if key is 0-9, ., or -
+    if (unicode > 44 && unicode != 47 && unicode < 58)
     {
         validateTextEntry(unicode);
 
@@ -184,8 +184,14 @@ void GuiSpinBox::validateTextEntry(int unicode)
         LOG(DEBUG) << "Can't start spinbox value with a decimal point.";
         text += "0.";
     }
+    else if ((text == "." || text == "-" || text == "-.") && (unicode == 45 || unicode == 46))
+    {
+        LOG(DEBUG) << "Can't start spinbox value with multiple non-numerals.";
+    }
     else
     {
+        // Anything else works, including multiple decimal and negative signs
+        // elsewhere in the string, which are discarded.
         text += string(char(unicode));
     }
 }
