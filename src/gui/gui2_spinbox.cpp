@@ -83,6 +83,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     // Only active when the TextEntry component has focus.
 
     // Backspace key behavior.
+    // Mind that Backspace toggles voice chat!
     if (key.code == sf::Keyboard::BackSpace && text.length() > 0)
     {
         // Remove a character behind the cursor.
@@ -98,7 +99,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // Enter/Return key behavior: validate and set
+    // Enter/Return key behavior: validate and set.
     if (key.code == sf::Keyboard::Return && text.length() > 0)
     {
         // Limit the entered value.
@@ -114,7 +115,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // Up/Right key behavior: increment
+    // Up/Right key behavior: increment.
     if ((key.code == sf::Keyboard::Up || key.code == sf::Keyboard::Right) && text.length() > 0)
     {
         applyInterval(1);
@@ -129,7 +130,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         return true;
     }
 
-    // Down/Left key behavior: decrement
+    // Down/Left key behavior: decrement.
     if ((key.code == sf::Keyboard::Down || key.code == sf::Keyboard::Left) && text.length() > 0)
     {
         applyInterval(-1);
