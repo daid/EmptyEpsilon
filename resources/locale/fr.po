@@ -1011,7 +1011,7 @@ msgstr "Benedict"
 
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Freighter/Carrier"
-msgstr "Cargo / Remorqueur"
+msgstr "Cargo/Remorqueur"
 
 #: scripts/shipTemplates_Corvette.lua:348
 msgid "Kiriya"
