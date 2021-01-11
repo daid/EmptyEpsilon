@@ -16,8 +16,7 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, float min_value, float ma
 {
     decrement = new GuiArrowButton(this, id + "_DECREMENT", 0, [this]() {
         soundManager->playSound("button.wav");
-
-        applyInterval(-1);
+        applyInterval(-(this->interval));
 
         // Run callback.
         if (this->func)
@@ -30,8 +29,7 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, float min_value, float ma
 
     increment = new GuiArrowButton(this, id + "_INCREMENT", 180, [this]() {
         soundManager->playSound("button.wav");
-
-        applyInterval(1);
+        applyInterval(this->interval);
 
         // Run callback.
         if (this->func)
@@ -118,7 +116,8 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     // Up/Right key behavior: increment.
     if ((key.code == sf::Keyboard::Up || key.code == sf::Keyboard::Right) && text.length() > 0)
     {
-        applyInterval(1);
+        soundManager->playSound("button.wav");
+        applyInterval(interval);
 
         // Run callback.
         if (func)
@@ -133,7 +132,8 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     // Down/Left key behavior: decrement.
     if ((key.code == sf::Keyboard::Down || key.code == sf::Keyboard::Left) && text.length() > 0)
     {
-        applyInterval(-1);
+        soundManager->playSound("button.wav");
+        applyInterval(-interval);
 
         // Run callback.
         if (func)
@@ -328,16 +328,17 @@ GuiSpinBox* GuiSpinBox::setMaxValue(float new_max_value)
 
 void GuiSpinBox::applyInterval(float factor)
 {
-    float modified_factor = factor;
+    float modifier = 1.0f;
 
-    // Hold down shift to multiiply the interval by 10.
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+    // Hold down shift to multiply the interval by 10.
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)
+        || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
     {
-        modified_factor *= 10.0f;
+        modifier = 10.0f;
     }
 
-    // Adjust the value by the interval and factor.
-    setValue(getLimitedValue(getValue() + (modified_factor * interval)));
+    // Adjust the value by the factor and modifier.
+    setValue(getLimitedValue(getValue() + (factor * modifier)));
 }
 
 GuiSpinBox* GuiSpinBox::callback(func_t func)
