@@ -170,7 +170,7 @@ template:setDescription(_([[The tugboat is a reliable, but small and un-armed tr
     -- Bomber mine
 
 -- Mine ship --
-variation = template:copy("Nautilus"):setLocaleName(_("Nautilus")):setType("playership"):setClass("Frigate","Mine Layer")
+variation = template:copy("Nautilus"):setLocaleName(_("Nautilus")):setType("playership"):setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
 variation:setDescription(_("Small mine laying vessel with minimal armament, shields and hull"))
 variation:setShields(60,60)
 variation:setHull(100)
@@ -232,7 +232,7 @@ template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, an
 -- Fabricated by: Repulse shipyards
 -- Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships
 -- to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry.
-template = ShipTemplate():setName("Karnack"):setLocaleName(_("Karnack")):setModel("small_frigate_4"):setClass(_("Frigate"), _("Cruiser"))
+template = ShipTemplate():setName("Karnack"):setLocaleName(_("Karnack")):setModel("small_frigate_4"):setClass(_("class", "Frigate"), _("subclass", "Cruiser"))
 template:setRadarTrace("radar_cruiser.png")
 template:setDescription(_("Fabricated by: Repulse shipyards. Due to it's versatility, this ship has found wide adaptation in most factions. Most factions have extensively retrofitted these ships to suit their combat doctrines. Because it's an older model, most factions have been selling stripped versions. This practice has led to this ship becoming an all time favorite with smugglers and other civilian parties. However, they have used it's adaptable nature to re-fit them with (illegal) weaponry."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -257,7 +257,7 @@ variation:setHull(70)
 -- Fabricated by: Repulse shipyards
 -- TODO
 -- The missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly.
-template = ShipTemplate():setName("Missile Cruiser"):setLocaleName(_("Missile Cruiser")):setModel("space_cruiser_4"):setClass(_("Frigate"), _("Cruiser: Missile"))
+template = ShipTemplate():setName("Missile Cruiser"):setLocaleName(_("Missile Cruiser")):setModel("space_cruiser_4"):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Missile"))
 template:setRadarTrace("radar_missile_cruiser.png")
 template:setDescription(_("Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This missile cruiser is a long range missile firing platform. It cannot handle a lot of damage, but can do a lot of damage if not dealt with properly."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -268,7 +268,7 @@ template:setSpeed(45, 3, 10)
 template:setWeaponStorage("Homing", 10)
 
 -- The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
-template = ShipTemplate():setName("Gunship"):setLocaleName(_("Gunship")):setModel("battleship_destroyer_4_upgraded"):setClass(_("Frigate"),_("subclass","Gunship"))
+template = ShipTemplate():setName("Gunship"):setLocaleName(_("Gunship")):setModel("battleship_destroyer_4_upgraded"):setClass(_("class", "Frigate"), _("subclass", "Gunship"))
 template:setRadarTrace("radar_adv_gunship.png")
 template:setDescription(_("The gunship is a ship equipped with a homing missile tube to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -286,7 +286,7 @@ variation:setDescription(_("The advanced gunship is a ship equipped with 2 homin
 variation:setTubes(2, 8.0) -- Amount of torpedo tubes
 
 -- The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields.
-template = ShipTemplate():setName("Strikeship"):setLocaleName(_("Strikeship")):setModel("small_frigate_3"):setClass(_("Starfighter"),_("subclass","Strike"))
+template = ShipTemplate():setName("Strikeship"):setLocaleName(_("Strikeship")):setModel("small_frigate_3"):setClass(_("class", "Starfighter"), _("subclass", "Strike"))
 template:setRadarTrace("radar_striker.png")
 template:setDescription(_("The Strikeship is a warp-drive equipped fighter build for quick strikes, it's fast, it's agile, but does not do an extreme amount of damage, and lacks in rear shields."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -298,7 +298,7 @@ template:setSpeed(70, 12, 12)
 template:setWarpSpeed(1000)
 
 -- The Advanced Striker is a jump-drive equipped fighter build for quick strikes, it's slow but very agile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump drive, it's quick to get into the action.
-template = ShipTemplate():setName("Adv. Striker"):setLocaleName(_("Adv. Striker")):setClass(_("Starfighter"),_("subclass", "Patrol")):setModel("dark_fighter_6")
+template = ShipTemplate():setName("Adv. Striker"):setLocaleName(_("Adv. Striker")):setClass(_("class", "Starfighter"), _("subclass", "Patrol")):setModel("dark_fighter_6")
 template:setRadarTrace("radar_adv_striker.png")
 template:setDescription(_("The Advanced Striker is a jump-drive equipped fighter build for quick strikes, it's slow but very agile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump drive, it's quick to get into the action."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -345,7 +345,7 @@ variation:addDoor(5,4,true)
 
 
 -- The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide.
-template = ShipTemplate():setName("Dreadnought"):setLocaleName(_("ship","Dreadnought")):setModel("battleship_destroyer_1_upgraded"):setClass(_("class", "Dreadnought"),_("subclass","Assault"))
+template = ShipTemplate():setName("Dreadnought"):setLocaleName(_("ship","Dreadnought")):setModel("battleship_destroyer_1_upgraded"):setClass(_("class", "Dreadnought"), _("subclass", "Assault"))
 template:setRadarTrace("radar_dread.png")
 template:setDescription(_("The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -360,7 +360,7 @@ template:setShields(300, 300, 300, 300, 300)
 template:setSpeed(30, 1.5, 5)
 
 -- The battle station is a huge ship with many defensive features. It can be docked by smaller ships.
-template = ShipTemplate():setName("Battlestation"):setLocaleName(_("Battlestation")):setModel("Ender Battlecruiser"):setClass(_("class", "Dreadnought"),_("Battlecruiser"))
+template = ShipTemplate():setName("Battlestation"):setLocaleName(_("Battlestation")):setModel("Ender Battlecruiser"):setClass(_("class", "Dreadnought"), _("subclass", "Battlecruiser"))
 template:setRadarTrace("radar_battleship.png")
 template:setDescription(_("The battle station is a huge ship with many defensive features. It can be docked by smaller ships."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -467,7 +467,7 @@ template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
 
 -- Blockade runner is a reasonably fast, high shield, slow on weapons ship designed to break through defense lines and deliver goods.
-template = ShipTemplate():setName("Blockade Runner"):setLocaleName(_("Blockade Runner")):setModel("battleship_destroyer_3_upgraded"):setClass(_("Frigate"),_("High Punch"))
+template = ShipTemplate():setName("Blockade Runner"):setLocaleName(_("Blockade Runner")):setModel("battleship_destroyer_3_upgraded"):setClass(_("class", "Frigate"),_("subclass", "High Punch"))
 template:setRadarTrace("radar_blockade.png")
 template:setDescription(_("Blockade runner is a reasonably fast, high shield, slow on weapons ship designed to break through defense lines and deliver goods."))
 --                  Arc, Dir, Range, CycleTime, Dmg
