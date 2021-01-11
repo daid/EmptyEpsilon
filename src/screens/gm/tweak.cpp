@@ -37,6 +37,12 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry(tr("tab", "Ship"), "");
     }
 
+    if (tweak_type == TW_Asteroid)
+    {
+        pages.push_back(new GuiAsteroidTweak(this));
+        list->addEntry(tr("tab","Asteroid"), "");
+    }
+
     if (tweak_type == TW_Jammer)
     {
         pages.push_back(new GuiJammerTweak(this));
@@ -268,6 +274,33 @@ void GuiJammerTweak::open(P<SpaceObject> target)
 void GuiJammerTweak::onDraw(sf::RenderTarget& window)
 {
     jammer_range_slider->setValue(target->getRange());
+}
+
+GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(left_col, "", tr("Asteroid Size:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    asteroid_size_slider = new GuiSlider(left_col, "", 10, 500, 0, [this](float value) {
+        target->setSize(value);
+    });
+    asteroid_size_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+}
+
+void GuiAsteroidTweak::open(P<SpaceObject> target)
+{
+    P<Asteroid> asteroid = target;
+    this->target = asteroid;
+}
+
+void GuiAsteroidTweak::onDraw(sf::RenderTarget& window)
+{
+    asteroid_size_slider->setValue(target->getSize());
 }
 
 void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
