@@ -2,7 +2,7 @@
 #define SCIENCE_DATABASE_H
 
 #include "engine.h"
-#include "shipTemplate.h"
+#include "modelData.h"
 
 /*!
  * \brief An entry for the science database that is formed by a number of key value pairs.

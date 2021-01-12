@@ -4,6 +4,7 @@
 #include "engine.h"
 #include "spaceObject.h"
 #include "shipTemplate.h"
+#include "scienceDatabase.h"
 
 /**
     An object which is based on a ship template. Contains generic behaviour for:
@@ -32,6 +33,8 @@ public:
     bool repair_docked;                   //[config]
     bool restocks_scan_probes;
     bool restocks_missiles_docked;        //only restocks cpuships; playerships should use comms
+
+    int32_t science_database_entry = -1;
 
     ScriptSimpleCallback on_destruction;
     ScriptSimpleCallback on_taking_damage;
@@ -102,6 +105,9 @@ public:
     void setRestocksScanProbes(bool enabled) { restocks_scan_probes = enabled; }
     bool getRestocksMissilesDocked() { return restocks_missiles_docked; }
     void setRestocksMissilesDocked(bool enabled) { restocks_missiles_docked = enabled; }
+
+    void setScienceDatabaseEntry(P<ScienceDatabase> entry);
+    P<ScienceDatabase> getScienceDatabaseEntry();
 
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);

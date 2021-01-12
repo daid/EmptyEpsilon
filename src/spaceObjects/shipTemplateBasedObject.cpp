@@ -71,6 +71,14 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksMissilesDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksMissilesDocked);
 
+    /// gets the database entry for this ship
+    /// Example: local description = ship:getScienceDatabaseEntry():getLongDescription()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getScienceDatabaseEntry);
+    /// sets the database entry for this ship
+    /// Example: local db=ScienceDatabase():setName(_("Mysterious Ship")):setLongDescription(_("A very mysterious ship, maybe you will find out more later"))
+    /// ship:setScienceDatabaseEntry(db)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setScienceDatabaseEntry);
+
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
     /// [Depricated]
@@ -374,6 +382,8 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
 
+    science_database_entry = ship_template->science_database_entry;
+
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();
 }
@@ -404,6 +414,23 @@ ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
     if (std::abs(sf::angleDifference(angle, 0.0f)) < 90)
         return SYS_FrontShield;
     return SYS_RearShield;
+}
+
+void ShipTemplateBasedObject::setScienceDatabaseEntry(P<ScienceDatabase> entry)
+{
+    science_database_entry = entry->getMultiplayerId();
+}
+
+P<ScienceDatabase> ShipTemplateBasedObject::getScienceDatabaseEntry()
+{
+    if (game_server)
+    {
+        return game_server->getObjectById(science_database_entry);
+    }
+    else
+    {
+        return game_client->getObjectById(science_database_entry);
+    }
 }
 
 void ShipTemplateBasedObject::onTakingDamage(ScriptSimpleCallback callback)
