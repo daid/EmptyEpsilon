@@ -734,7 +734,7 @@ msgstr "Dechargement"
 #: src/screenComponents/missileTubeControls.cpp:141
 msgctxt "missile"
 msgid "Firing"
-msgstr ""
+msgstr "Feu"
 
 #: src/screenComponents/selfDestructEntry.cpp:22
 msgid "Self destruct activated!"
@@ -1011,7 +1011,7 @@ msgstr "Benedict"
 
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Freighter/Carrier"
-msgstr "Cargo / Remorqueur"
+msgstr "Cargo/Remorqueur"
 
 #: scripts/shipTemplates_Corvette.lua:348
 msgid "Kiriya"
@@ -1582,7 +1582,7 @@ msgid "Beams"
 msgstr "Faisceaux"
 
 msgid "Mission Clock"
-msgstr ""
+msgstr "Timer de la mission"
 
 #: src/spaceObjects/playerSpaceship.cpp:280
 msgctxt "alert"
@@ -1755,11 +1755,11 @@ msgstr "Journal de bord"
 
 #: src/shipTemplate.cpp:123
 msgid "No class"
-msgstr "Classes non definies"
+msgstr "Sans classe"
 
 #: src/shipTemplate.cpp:124
 msgid "No sub-class"
-msgstr "Non definie"
+msgstr "Sans sous-classe"
 
 #: src/screens/crew4/operationsScreen.cpp:84
 #: src/screens/crew6/relayScreen.cpp:147
@@ -1865,7 +1865,7 @@ msgstr "Vaisseau"
 #: src/screens/gm/tweak.cpp:43
 msgctxt "tab"
 msgid "Jammer"
-msgstr ""
+msgstr "Brouilleur"
 
 #: src/screens/gm/tweak.cpp:49
 msgctxt "tab"
@@ -1950,7 +1950,7 @@ msgstr "Stock actuel"
 
 #: src/screens/gm/tweak.cpp:255
 msgid "Jammer Range:"
-msgstr ""
+msgstr "Portee du brouilleur"
 
 #: src/screens/gm/tweak.cpp:301
 msgid "Tube count:"
@@ -2375,7 +2375,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:133
 msgid "Hathcock"
-msgstr ""
+msgstr "Hathcock"
 
 #: scripts/shipTemplates_Frigates.lua:133
 #: scripts/shipTemplates_Frigates.lua:299
@@ -2387,6 +2387,10 @@ msgid ""
 "Long range narrow beam and some point defense beams, broadside missiles. "
 "Agile for a frigate"
 msgstr ""
+"Le Hatchcok possede un faisceau laser etroit a longue portee, plusieurs "
+"petits faisceaux de defense et des lance-missiles sur les flancs.\n"
+"\n"
+"Agile pour une fregate."
 
 #: scripts/shipTemplates_Frigates.lua:179
 msgid "Piranha F12"
@@ -2579,11 +2583,11 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:369
 msgid "Repulse"
-msgstr ""
+msgstr "Repulse"
 
 #: scripts/shipTemplates_Frigates.lua:369
 msgid "Armored Transport"
-msgstr ""
+msgstr "Transport blinde"
 
 #: scripts/shipTemplates_Frigates.lua:414
 msgid "Fiend G3"
@@ -2682,19 +2686,19 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:6
 msgid "Player Cruiser"
-msgstr ""
+msgstr "Croiseur joueur"
 
 #: scripts/shipTemplates_OLD.lua:62
 msgid "Player Missile Cr."
-msgstr ""
+msgstr "Croiseur de missiles joueur"
 
 #: scripts/shipTemplates_OLD.lua:116
 msgid "Player Fighter"
-msgstr ""
+msgstr "Chasseur joueur"
 
 #: scripts/shipTemplates_OLD.lua:156
 msgid "Tug"
-msgstr ""
+msgstr "Remorqueur"
 
 #: scripts/shipTemplates_OLD.lua:165
 msgid ""
@@ -2702,18 +2706,22 @@ msgid ""
 "it's low cost, it is a favourite ship to teach the ropes to fledgeling "
 "captains, without risking friendly fire."
 msgstr ""
+"Le remorqueur est un navire de transport fiable, mais petit et non arme.\n"
+"\n"
+"En raison de son faible cout, c'est le navire ideal pour enseigner les "
+"ficelles du metier aux capitaines en herbe, sans risquer un tir ami."
 
 #: scripts/shipTemplates_OLD.lua:173
 msgid "Nautilus"
-msgstr ""
+msgstr "Nautilus"
 
 #: scripts/shipTemplates_OLD.lua:174
 msgid "Small mine laying vessel with minimal armament, shields and hull"
-msgstr ""
+msgstr "Petit poseur de mines avec coque, armement et boucliers minimaux."
 
 #: scripts/shipTemplates_OLD.lua:220
 msgid "Fighter"
-msgstr ""
+msgstr "Chasseur"
 
 #: scripts/shipTemplates_OLD.lua:222
 msgid ""
@@ -2721,6 +2729,10 @@ msgid ""
 "come in larger groups. They are easy to take out, but should not be "
 "underestimated."
 msgstr ""
+"Les chasseurs sont des vaisseaux agiles et rapides qui ne font pas beaucoup "
+"de degats. Ils se deplacent generalement en groupes plus importants.\n"
+"\n"
+"Ils sont faciles a eliminer, mais ne doivent cependant pas etre sous-estimes."
 
 #: scripts/shipTemplates_OLD.lua:235
 msgid "Karnack"
@@ -2913,13 +2925,16 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
-msgstr ""
+msgstr "Plate-forme armee"
 
 #: scripts/shipTemplates_OLD.lua:457
 msgid ""
 "The weapons-platform is a stationary platform with beam-weapons. It's "
 "extremely slow to turn, but it's beam weapons do a huge amount of damage."
 msgstr ""
+"La plate-forme armee est une plate-forme stationnaire equipee de faisceaux "
+"laser. Elle est extremement lente a tourner, mais ses faisceaux font "
+"d'enormes degats."
 
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Blockade Runner"
@@ -2940,40 +2955,40 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:483
 msgid "Ktlitan Fighter"
-msgstr ""
+msgstr "Chasseur Ktlitan"
 
 #: scripts/shipTemplates_OLD.lua:490
 msgid "Ktlitan Breaker"
-msgstr ""
+msgstr "Briseur Ktlitan"
 
 #: scripts/shipTemplates_OLD.lua:500
 msgid "Ktlitan Worker"
-msgstr ""
+msgstr "Ktlitan ouvrier"
 
 #: scripts/shipTemplates_OLD.lua:507
 msgid "Ktlitan Drone"
-msgstr ""
+msgstr "Drone Ktlitan"
 
 #: scripts/shipTemplates_OLD.lua:513
 msgid "Ktlitan Feeder"
-msgstr ""
+msgstr "Ktlitan nourriciere"
 
 #: scripts/shipTemplates_OLD.lua:523
 msgid "Ktlitan Scout"
-msgstr ""
+msgstr "Ktlitan eclaireur"
 
 #: scripts/shipTemplates_OLD.lua:529
 msgid "Ktlitan Destroyer"
-msgstr ""
+msgstr "Destroyer Ktlitan"
 
 #: scripts/shipTemplates_OLD.lua:540
 msgid "Ktlitan Queen"
-msgstr ""
+msgstr "Reine Ktlitan"
 
 #: scripts/shipTemplates_OLD.lua:551
 #, lua-format
 msgid "Transport %dx%d"
-msgstr ""
+msgstr "Transport %dx%d"
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
@@ -3178,7 +3193,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:136
 msgid "ZX-Lindworm"
-msgstr ""
+msgstr "Dragon-ZX"
 
 #: scripts/science_db.lua:5
 msgid "Natural"
@@ -4259,7 +4274,7 @@ msgstr "Rafale"
 
 #: scripts/shipTemplates_Frigates.lua:371
 msgid "Jump/Turret version of Flavia Falcon"
-msgstr ""
+msgstr "Version Saut/Tourelle du Faucon flavia."
 
 #: scripts/shipTemplates_OLD.lua:291
 msgid ""
