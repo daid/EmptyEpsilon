@@ -259,7 +259,11 @@ void GameMasterScreen::update(float delta)
         if (ship)
         {
             if (player_ship_selector->indexByValue(string(n)) == -1)
+            {
                 player_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+            } else {
+                player_ship_selector->setEntryName(player_ship_selector->indexByValue(string(n)),ship->getCallSign());
+            }
 
             if (ship->isCommsBeingHailedByGM() || ship->isCommsChatOpenToGM())
             {
