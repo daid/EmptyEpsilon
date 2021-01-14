@@ -239,7 +239,7 @@ class DocumentationGenerator(object):
         stream.write('<ul>\n')
         stream.write('<li>ScriptSimpleCallback / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
         stream.write('<li>EAlertLevel: "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
-        stream.write('<li>ECrewPosition: "Helms", "Weapons", "Engineering", "Science", "Relay" (<code>playerInfo.cpp</code>)</li>\n')
+        stream.write('<li>ECrewPosition: "Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", "Database", "AltRelay", "CommsOnly", "ShipLog", (<code>playerInfo.cpp</code>)</li>\n')
         stream.write('<li>EMissileSizes: "small", "medium", "large"</li>\n')
         stream.write('<li>EMissileWeapons: "Homing", "Nuke", "Mine", "EMP", "HVLI" (<code>spaceship.cpp</code>)</li>\n')
         stream.write('<li>EScannedState: "notscanned", "friendorfoeidentified", "simplescan", "fullscan" (<code>spaceObject.h</code>)</li>\n')
