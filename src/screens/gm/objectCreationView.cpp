@@ -42,10 +42,14 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     std::sort(template_names.begin(), template_names.end());
     for(string template_name : template_names)
     {
-        (new GuiButton(box, "CREATE_STATION_" + template_name, template_name, [this, template_name]() {
-            setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
-        }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
-        y += 30;
+        auto stationTemplate=ShipTemplate::getTemplate(template_name);
+        if (stationTemplate)
+        {
+            (new GuiButton(box, "CREATE_STATION_" + template_name, ShipTemplate::getTemplate(template_name)->getLocaleName(), [this, template_name]() {
+                setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
+            }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
+            y += 30;
+        }
     }
 
     (new GuiButton(box, "CREATE_ARTIFACT", tr("create", "Artifact"), [this]() {
@@ -100,7 +104,11 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     cpu_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for(string template_name : template_names)
     {
-        cpu_ship_listbox->addEntry(template_name, template_name);
+        auto shipTemplate=ShipTemplate::getTemplate(template_name);
+        if (shipTemplate)
+        {
+            cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+        }
     }
 
     auto player_template_names = ShipTemplate::getTemplateNameList(ShipTemplate::PlayerShip);
@@ -112,7 +120,11 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     player_ship_listbox->setTextSize(20)->setButtonHeight(30)->setPosition(-20, 20, ATopRight)->setSize(300, 460);
     for (const auto template_name : player_template_names)
     {
-        player_ship_listbox->addEntry(template_name, template_name);
+        auto shipTemplate=ShipTemplate::getTemplate(template_name);
+        if (shipTemplate)
+        {
+            player_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
+        }
     }
     player_ship_listbox->hide();
 
