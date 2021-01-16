@@ -43,8 +43,9 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Example: local heading = obj:getHeading(0)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getHeading);
     /// Gets this object's directional velocity within 2D space.
-    /// Returns a value in meters/second.
-    /// Example: local velocity = obj:getVelocity()
+    /// Returns a pair of values x, y which are velocity 2D vector.
+    /// It is X and Y difference from current object position to position after certain time.
+    /// Example: local vx, vy = obj:getVelocity()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
     /// Gets this object's rotational velocity within 2D space.
     /// Returns a value in degrees/second.
