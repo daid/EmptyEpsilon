@@ -60,6 +60,7 @@ private:
     bool show_heading_indicators;
     bool show_game_master_data;
     float range_indicator_step_size;
+    uint8_t background_alpha;
     ERadarStyle style;
     EFogOfWarStyle fog_style;
     func_t mouse_down_func;
@@ -91,6 +92,7 @@ public:
     GuiRadarView* enableHeadingIndicators() { show_heading_indicators = true; return this; }
     GuiRadarView* disableHeadingIndicators() { show_heading_indicators = false; return this; }
     GuiRadarView* gameMaster() { show_game_master_data = true; return this; }
+    GuiRadarView* setBackgroundAlpha(uint8_t background_alpha) { this->background_alpha = background_alpha; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
     bool getAutoCentering() { return auto_center_on_my_ship; }
