@@ -5,19 +5,20 @@
 
 enum ECrewPosition
 {
-    //6/5 player crew
+    // 6/5 player crew
     helmsOfficer,
     weaponsOfficer,
     engineering,
     scienceOfficer,
     relayOfficer,
-    //4/3 player crew
-    tacticalOfficer,    //helms+weapons-shields
-    engineeringAdvanced,//engineering+shields
-    operationsOfficer, //science+comms
-    //1 player crew
-    singlePilot,
-    //extras
+    // 4/3 player crew
+    tacticalOfficer,     //helms+weapons-shields
+    engineeringAdvanced, //engineering+shields
+    operationsOfficer,   //science+comms
+    // 1 player crew
+    singlePilot, // 2D backgorund
+    cockpitScreen, // 3D background
+    // extras
     damageControl,
     powerManagement,
     databaseView,

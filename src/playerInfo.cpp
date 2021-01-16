@@ -14,6 +14,7 @@
 #include "screens/crew4/operationsScreen.h"
 
 #include "screens/crew1/singlePilotScreen.h"
+#include "screens/crew1/cockpitScreen.h"
 
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
@@ -147,11 +148,11 @@ void PlayerInfo::spawnUI()
     }else{
 
         CrewStationScreen* screen = new CrewStationScreen();
-        if (main_screen)
+        if (main_screen && !crew_position[cockpitScreen])
             screen->enableMainScreen();
         auto container = screen->getTabContainer();
 
-        //Crew 6/5
+        // Crew 6/5
         if (crew_position[helmsOfficer])
             screen->addStationTab(new HelmsScreen(container), helmsOfficer, getCrewPositionName(helmsOfficer), getCrewPositionIcon(helmsOfficer));
         if (crew_position[weaponsOfficer])
@@ -163,7 +164,7 @@ void PlayerInfo::spawnUI()
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(container, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
 
-        //Crew 4/3
+        // Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(container), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
         if (crew_position[engineeringAdvanced])
@@ -171,11 +172,13 @@ void PlayerInfo::spawnUI()
         if (crew_position[operationsOfficer])
             screen->addStationTab(new OperationScreen(container), operationsOfficer, getCrewPositionName(operationsOfficer), getCrewPositionIcon(operationsOfficer));
 
-        //Crew 1
+        // Crew 1
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(container), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
+        if (crew_position[cockpitScreen])
+            screen->addStationTab(new CockpitScreen(container), cockpitScreen, getCrewPositionName(cockpitScreen), getCrewPositionIcon(cockpitScreen));
 
-        //Extra
+        // Extra
         if (crew_position[damageControl])
             screen->addStationTab(new DamageControlScreen(container), damageControl, getCrewPositionName(damageControl), getCrewPositionIcon(damageControl));
         if (crew_position[powerManagement])
@@ -228,6 +231,7 @@ string getCrewPositionName(ECrewPosition position)
     case engineeringAdvanced: return tr("station","Engineering+");
     case operationsOfficer: return tr("station","Operations");
     case singlePilot: return tr("station","Single Pilot");
+    case cockpitScreen: return tr("station","Cockpit View");
     case damageControl: return tr("station","Damage Control");
     case powerManagement: return tr("station","Power Management");
     case databaseView: return tr("station","Database");
@@ -251,6 +255,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case engineeringAdvanced: return "";
     case operationsOfficer: return "";
     case singlePilot: return "";
+    case cockpitScreen: return "";
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
@@ -261,12 +266,12 @@ string getCrewPositionIcon(ECrewPosition position)
     }
 }
 
-/* Define script conversion function for the ECrewPosition enum. */
+// Define script conversion function for the ECrewPosition enum.
 template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosition& cp)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
 
-    //6/5 player crew
+    // 6/5 player crew
     if (str == "helms" || str == "helmsofficer")
         cp = helmsOfficer;
     else if (str == "weapons" || str == "weaponsofficer")
@@ -278,7 +283,7 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
     else if (str == "relay" || str == "relayofficer")
         cp = relayOfficer;
 
-    //4/3 player crew
+    // 4/3 player crew
     else if (str == "tactical" || str == "tacticalofficer")
         cp = tacticalOfficer;    //helms+weapons-shields
     else if (str == "engineering+" || str == "engineering+officer" || str == "engineeringadvanced" || str == "engineeringadvancedofficer")
@@ -286,11 +291,13 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
     else if (str == "operations" || str == "operationsofficer")
         cp = operationsOfficer; //science+comms
 
-    //1 player crew
+    // 1 player crew
     else if (str == "single" || str == "singlepilot")
         cp = singlePilot;
+    else if (str == "cockpit" || str == "cockpitview")
+        cp = cockpitScreen;
 
-    //extras
+    // Extras
     else if (str == "damagecontrol")
         cp = damageControl;
     else if (str == "powermanagement")

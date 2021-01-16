@@ -115,6 +115,14 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
 
+    // Separate single-pilot view controls, since defaults might collide with helm.
+    newCategory("COCKPIT_VIEW", "Cockpit View");
+    newKey("VIEW_FORWARD", std::make_tuple("View forward", "I"));
+    newKey("VIEW_LEFT", std::make_tuple("View left", "J"));
+    newKey("VIEW_BACK", std::make_tuple("View backward", "K"));
+    newKey("VIEW_RIGHT", std::make_tuple("View right", "L"));
+    newKey("FIRST_PERSON", std::make_tuple("Toggle first-person view", "F"));
+    newKey("TOGGLE_TARGETING_MODE", std::make_tuple("Lock view on target", "O"));
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
