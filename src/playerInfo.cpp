@@ -14,7 +14,9 @@
 #include "screens/crew4/operationsScreen.h"
 
 #include "screens/crew1/singlePilotScreen.h"
+#ifndef __ANDROID__
 #include "screens/crew1/cockpitScreen.h"
+#endif
 
 #include "screens/extra/damcon.h"
 #include "screens/extra/powerManagement.h"
@@ -175,8 +177,10 @@ void PlayerInfo::spawnUI()
         // Crew 1
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(container), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
+#ifndef __ANDROID__
         if (crew_position[cockpitScreen])
             screen->addStationTab(new CockpitScreen(container), cockpitScreen, getCrewPositionName(cockpitScreen), getCrewPositionIcon(cockpitScreen));
+#endif
 
         // Extra
         if (crew_position[damageControl])
