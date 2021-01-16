@@ -115,7 +115,7 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_CONFIRM", std::make_tuple("Confirm self-destruct", ""));
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple("Cancel self-destruct", ""));
 
-    // Separate single-pilot view controls, since defaults might collide with helm.
+    // Separate cockpit view controls, since defaults might collide with helm.
     newCategory("COCKPIT_VIEW", "Cockpit View");
     newKey("VIEW_FORWARD", std::make_tuple("View forward", "I"));
     newKey("VIEW_LEFT", std::make_tuple("View left", "J"));
