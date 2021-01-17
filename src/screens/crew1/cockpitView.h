@@ -32,7 +32,7 @@ private:
     bool targeting_mode;
     GuiViewport3D* viewport;
 
-    GuiAutoLayout* stats;
+    GuiAutoLayout* ship_stats;
     GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
