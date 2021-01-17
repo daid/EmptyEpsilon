@@ -198,7 +198,12 @@ void CockpitView::onDraw(sf::RenderTarget& window)
     {
         // Update the player ship's energy and navigation stats.
         energy_display->setValue(string(int(my_spaceship->energy_level)));
-        heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
+        float heading = my_spaceship->getRotation() + 90.0f;
+        while (heading < 0.0f)
+        {
+            heading += 360.0f;
+        }
+        heading_display->setValue(string(fmodf(heading, 359.9), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
         reputation_display->setValue(string(my_spaceship->getReputationPoints(), 0));
