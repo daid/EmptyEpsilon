@@ -33,20 +33,23 @@ private:
     GuiViewport3D* viewport;
 
     GuiAutoLayout* stats;
+    GuiKeyValueDisplay* hull_display;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
     GuiKeyValueDisplay* shields_display;
+    GuiKeyValueDisplay* reputation_display;
+    GuiKeyValueDisplay* clock_display;
 
     GuiAutoLayout* target_stats;
-    GuiKeyValueDisplay* target_callsign_display;
-    GuiKeyValueDisplay* target_distance_display;
-    GuiKeyValueDisplay* target_bearing_display;
-    GuiKeyValueDisplay* target_relspeed_display;
-    GuiKeyValueDisplay* target_faction_display;
-    GuiKeyValueDisplay* target_type_display;
-    GuiKeyValueDisplay* target_shields_display;
-    GuiKeyValueDisplay* target_hull_display;
+    GuiKeyValueDisplay* target_callsign;
+    GuiKeyValueDisplay* target_distance;
+    GuiKeyValueDisplay* target_bearing;
+    GuiKeyValueDisplay* target_relspeed;
+    GuiKeyValueDisplay* target_faction;
+    GuiKeyValueDisplay* target_type;
+    GuiKeyValueDisplay* target_shields;
+    GuiKeyValueDisplay* target_hull;
 
     GuiElement* warp_controls;
     GuiElement* jump_controls;

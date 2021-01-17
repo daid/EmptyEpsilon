@@ -1,4 +1,4 @@
-#include "main.h"
+#include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "cockpitView.h"
@@ -78,39 +78,47 @@ CockpitView::CockpitView(GuiContainer* owner)
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock", "0") == "1");
 
-    // Ship stats and combat maneuver at bottom right corner of left panel.
+    // Combat maneuver above ship stats in bottom right.
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
-    combat_maneuver->setPosition(-20, -180, ABottomRight)->setSize(200, 150)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+    combat_maneuver->setPosition(-20, -230, ABottomRight)->setSize(200, 130)->setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
-    stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stats->setPosition(-20, -20, ABottomRight)->setSize(240, 160);
-    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(stats, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
-    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(stats, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
-    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
-    shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
+    // Ship stats at bottom right corner.
+    ship_stats = new GuiAutoLayout(this, "SHIP_STATS", GuiAutoLayout::LayoutVerticalBottomToTop);
+    ship_stats->setPosition(-20, -20, ABottomRight)->setSize(240, 120);
+    clock_display = new GuiKeyValueDisplay(ship_stats, "CLOCK_DISPLAY", 0.45, tr("Clock"), "");
+    clock_display->setSize(240, 30);
+    reputation_display = new GuiKeyValueDisplay(ship_stats, "REPUTATION_DISPLAY", 0.45, tr("Reputation"), "");
+    reputation_display->setSize(240, 30);
+    hull_display = new GuiKeyValueDisplay(ship_stats, "HULL_DISPLAY", 0.45, tr("Hull"), "");
+    hull_display->setIcon("gui/icons/hull")->setSize(240, 30);
+    shields_display = new GuiKeyValueDisplay(ship_stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
+    shields_display->setIcon("gui/icons/shields")->setSize(240, 30);
+    velocity_display = new GuiKeyValueDisplay(ship_stats, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    velocity_display->setIcon("gui/icons/speed")->setSize(240, 30);
+    heading_display = new GuiKeyValueDisplay(ship_stats, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
+    heading_display->setIcon("gui/icons/heading")->setSize(240, 30);
+    energy_display = new GuiKeyValueDisplay(ship_stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display->setIcon("gui/icons/energy")->setSize(240, 30);
 
+    // Target stats at upper left. Shown only when targeting mode (camera) is enabled.
     target_stats = new GuiAutoLayout(this, "TARGET_STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    target_stats->setPosition(20, 80, ATopLeft)->setSize(240, 160)->hide();
-    target_callsign_display = new GuiKeyValueDisplay(target_stats, "TARGET_CALLSIGN", 0.4, tr("target", "Callsign"), "");
-    target_callsign_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_distance_display = new GuiKeyValueDisplay(target_stats, "TARGET_DISTANCE", 0.4, tr("target", "Distance"), "");
-    target_distance_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_bearing_display = new GuiKeyValueDisplay(target_stats, "TARGET_BEARING", 0.4, tr("target", "Bearing"), "");
-    target_bearing_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_relspeed_display = new GuiKeyValueDisplay(target_stats, "TARGET_RELATIVE_SPEED", 0.4, tr("target", "Rel. Speed"), "");
-    target_relspeed_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_faction_display = new GuiKeyValueDisplay(target_stats, "TARGET_FACTION", 0.4, tr("target", "Faction"), "");
-    target_faction_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_type_display = new GuiKeyValueDisplay(target_stats, "TARGET_TYPE", 0.4, tr("target", "Type"), "");
-    target_type_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_shields_display = new GuiKeyValueDisplay(target_stats, "TARGET_SHIELDS", 0.4, tr("target", "Shields"), "");
-    target_shields_display->setSize(GuiElement::GuiSizeMax, 30);
-    target_hull_display = new GuiKeyValueDisplay(target_stats, "TARGET_HULL", 0.4, tr("target", "Hull"), "");
-    target_hull_display->setSize(GuiElement::GuiSizeMax, 30);
+    target_stats->setPosition(20, 60, ATopLeft)->setSize(240, 160)->hide();
+    target_callsign = new GuiKeyValueDisplay(target_stats, "TARGET_CALLSIGN", 0.4, tr("Callsign"), "");
+    target_callsign->setSize(GuiElement::GuiSizeMax, 30);
+    target_distance = new GuiKeyValueDisplay(target_stats, "TARGET_DISTANCE", 0.4, tr("Distance"), "");
+    target_distance->setSize(GuiElement::GuiSizeMax, 30);
+    target_bearing = new GuiKeyValueDisplay(target_stats, "TARGET_BEARING", 0.4, tr("Bearing"), "");
+    target_bearing->setSize(GuiElement::GuiSizeMax, 30);
+    target_relspeed = new GuiKeyValueDisplay(target_stats, "TARGET_RELATIVE_SPEED", 0.4, tr("Rel. Speed"), "");
+    target_relspeed->setSize(GuiElement::GuiSizeMax, 30);
+    target_faction = new GuiKeyValueDisplay(target_stats, "TARGET_FACTION", 0.4, tr("Faction"), "");
+    target_faction->setSize(GuiElement::GuiSizeMax, 30);
+    target_type = new GuiKeyValueDisplay(target_stats, "TARGET_TYPE", 0.4, tr("Type"), "");
+    target_type->setSize(GuiElement::GuiSizeMax, 30);
+    target_shields = new GuiKeyValueDisplay(target_stats, "TARGET_SHIELDS", 0.4, tr("Shields"), "");
+    target_shields->setSize(GuiElement::GuiSizeMax, 30);
+    target_hull = new GuiKeyValueDisplay(target_stats, "TARGET_HULL", 0.4, tr("Hull"), "");
+    target_hull->setSize(GuiElement::GuiSizeMax, 30);
 
     // Unlocked missile aim dial and lock controls.
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value)
@@ -151,10 +159,14 @@ CockpitView::CockpitView(GuiContainer* owner)
     (new GuiImpulseControls(this, "IMPULSE"))->setPosition(-200, -70, ABottomCenter)->setSize(110, 250);
 
     // Docking, comms, and shields buttons across top.
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(200, 40);
-    (new GuiOpenCommsButton(this, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setPosition(220, 20, ATopLeft)->setSize(200, 40);
+    GuiAutoLayout* relay_layout = new GuiAutoLayout(this, "RELAY_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    relay_layout->setPosition(20, 20, ATopLeft)->setSize(520, 40);
+    (new GuiDockingButton(relay_layout, "DOCKING"))->setSize(240, 40);
+    (new GuiOpenCommsButton(relay_layout, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setSize(150, 40);
+    (new GuiShieldsEnableButton(relay_layout, "SHIELDS_ENABLE"))->showIconOnly(true)->setSize(130, 40);
+
+    // Comms overlay.
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->showIconOnly(true)->setPosition(420, 20, ATopLeft)->setSize(130, 40);
 
     // Missile lock toggle; auto-aim at target when enabled, manually aim when disabled.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
@@ -189,6 +201,8 @@ void CockpitView::onDraw(sf::RenderTarget& window)
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
+        reputation_display->setValue(string(my_spaceship->getReputationPoints(), 0));
+        clock_display->setValue(string(gameGlobalInfo->elapsed_time, 0));
 
         // Update warp/jump control visibility if it's changed.
         warp_controls->setVisible(my_spaceship->has_warp_drive);
@@ -295,6 +309,9 @@ void CockpitView::onDraw(sf::RenderTarget& window)
             shields_display->hide();
         }
 
+        // Update hull integrity indicator.
+        hull_display->setValue(string(int(nearbyint(100 * my_spaceship->hull_strength / my_spaceship->hull_max))) + "%");
+
         // Set missile aim if tube controls are unlocked.
         missile_aim->setVisible(tube_controls->getManualAim());
 
@@ -306,38 +323,46 @@ void CockpitView::onDraw(sf::RenderTarget& window)
         targets.set(my_spaceship->getTarget());
 
         // Populate target stats.
-        target_callsign_display->setValue("-");
-        target_distance_display->setValue("-");
-        target_bearing_display->setValue("-");
-        target_relspeed_display->setValue("-");
-        target_faction_display->setValue("-");
-        target_type_display->setValue("-");
-        target_shields_display->setValue("-");
-        target_hull_display->setValue("-");
+        target_callsign->setValue("-");
+        target_distance->setValue("-");
+        target_bearing->setValue("-");
+        target_relspeed->setValue("-");
+        target_faction->setValue("-");
+        target_type->setValue("-");
+        target_shields->setValue("-");
+        target_hull->setValue("-");
 
         if (targets.get())
         {
+            // Determine target object type.
             P<SpaceObject> obj = targets.get();
             P<SpaceShip> ship = obj;
             P<SpaceStation> station = obj;
 
+            // Get target's relative position, distance, and bearing.
             sf::Vector2f position_diff = obj->getPosition() - my_spaceship->getPosition();
             float distance = sf::length(position_diff);
-            float heading = sf::vector2ToAngle(position_diff) - 270;
+            float bearing = sf::vector2ToAngle(position_diff) - 270.0f;
 
-            while(heading < 0) heading += 360;
-
-            float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
-
-            if (fabs(rel_velocity) < 0.01)
+            // Normalize bearing to 0-360.
+            while (bearing < 0.0f)
             {
-                rel_velocity = 0.0;
+                bearing += 360.0f;
             }
 
-            target_callsign_display->setValue(obj->getCallSign());
-            target_distance_display->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-            target_bearing_display->setValue(string(int(heading)));
-            target_relspeed_display->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+            // Calculate relative velocity from target's and our velocity.
+            float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+
+            // Round small values down to zero.
+            if (fabs(rel_velocity) < 0.01f)
+            {
+                rel_velocity = 0.0f;
+            }
+
+            target_callsign->setValue(obj->getCallSign());
+            target_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+            target_bearing->setValue(string(int(bearing)));
+            target_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
             // If the target is a ship, show information about the ship based on how
             // deeply we've scanned it.
@@ -347,40 +372,40 @@ void CockpitView::onDraw(sf::RenderTarget& window)
                 // hull integrity, and database reference button.
                 if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
                 {
-                    target_faction_display->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
-                    target_type_display->setValue(ship->getTypeName());
-                    target_shields_display->setValue(ship->getShieldDataString());
-                    target_hull_display->setValue(int(ceil(ship->getHull())));
+                    target_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+                    target_type->setValue(ship->getTypeName());
+                    target_shields->setValue(ship->getShieldDataString());
+                    target_hull->setValue(int(ceil(ship->getHull())));
                 }
             }
             // If the target isn't a ship, show basic info.
             else
             {
-                target_faction_display->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+                target_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
 
                 // If the target is a station, show basic tactical info.
                 if (station)
                 {
-                    target_type_display->setValue(station->template_name);
-                    target_shields_display->setValue(station->getShieldDataString());
-                    target_hull_display->setValue(int(ceil(station->getHull())));
+                    target_type->setValue(station->template_name);
+                    target_shields->setValue(station->getShieldDataString());
+                    target_hull->setValue(int(ceil(station->getHull())));
                 }
             }
 
             // Show target info if targeting mode is on.
             target_stats->setVisible(targeting_mode);
         }
-        // If the target is a waypoint, show its heading and distance, and our
+        // If the target is a waypoint, show its bearing and distance, and our
         // velocity toward it.
         else if (targets.getWaypointIndex() >= 0)
         {
             sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
             float distance = sf::length(position_diff);
-            float heading = sf::vector2ToAngle(position_diff) - 270;
+            float bearing = sf::vector2ToAngle(position_diff) - 270;
 
-            while (heading < 0)
+            while (bearing < 0)
             {
-                heading += 360;
+                bearing += 360;
             }
 
             float rel_velocity = -dot(my_spaceship->getVelocity(), position_diff / distance);
@@ -390,9 +415,9 @@ void CockpitView::onDraw(sf::RenderTarget& window)
                 rel_velocity = 0.0;
             }
 
-            target_distance_display->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-            target_bearing_display->setValue(string(int(heading)));
-            target_relspeed_display->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+            target_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+            target_bearing->setValue(string(int(bearing)));
+            target_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
             // Show target info if targeting mode is on.
             target_stats->setVisible(targeting_mode);
@@ -487,7 +512,7 @@ void CockpitView::onHotkey(const HotkeyResult& key)
                         continue;
                     }
 
-                    // If there's a next target, set it as the new target.
+                    // If there's a next target within short-range radar range, set it as the new target.
                     if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
                     {
                         // If NEXT_ENEMY_TARGET was pressed, set the next target only if it's a known enemy.
