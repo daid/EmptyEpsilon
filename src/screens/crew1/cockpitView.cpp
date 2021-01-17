@@ -1,7 +1,7 @@
 #include "main.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
-#include "cockpitScreen.h"
+#include "cockpitView.h"
 #include "preferenceManager.h"
 
 #include "screenComponents/viewport3d.h"
@@ -31,8 +31,8 @@
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_image.h"
 
-CockpitScreen::CockpitScreen(GuiContainer* owner)
-: GuiOverlay(owner, "COCKPIT_SCREEN", colorConfig.background)
+CockpitView::CockpitView(GuiContainer* owner)
+: GuiOverlay(owner, "COCKPIT_VIEW", colorConfig.background)
 {
     targeting_mode = false;
     first_person = PreferencesManager::get("first_person") == "1" ? true : false;
@@ -144,28 +144,28 @@ CockpitScreen::CockpitScreen(GuiContainer* owner)
 
     // Engine controls on either side of the radar.
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    engine_layout->setPosition(255, -80, ABottomCenter)->setSize(200, 240);
+    engine_layout->setPosition(265, -70, ABottomCenter)->setSize(200, 250);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(90, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(90, GuiElement::GuiSizeMax);
 
-    (new GuiImpulseControls(this, "IMPULSE"))->setPosition(-190, -80, ABottomCenter)->setSize(110, 240);
+    (new GuiImpulseControls(this, "IMPULSE"))->setPosition(-200, -70, ABottomCenter)->setSize(110, 250);
 
     // Docking, comms, and shields buttons across top.
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
-    (new GuiOpenCommsButton(this, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
+    (new GuiDockingButton(this, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(200, 40);
+    (new GuiOpenCommsButton(this, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setPosition(220, 20, ATopLeft)->setSize(200, 40);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(520, 20, ATopLeft)->setSize(250, 50);
+    (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->showIconOnly(true)->setPosition(420, 20, ATopLeft)->setSize(130, 40);
 
     // Missile lock toggle; auto-aim at target when enabled, manually aim when disabled.
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(-180, -20, ABottomCenter)->setSize(110, 50);
+    lock_aim->setPosition(-180, -20, ABottomCenter)->setSize(110, 40);
 
     // Targeting camera toggle. Camera tracks selected target when enabled.
     targeting_mode_button = new GuiToggleButton(this, "TARGETING_MODE", tr("target", "TGT"), [this](bool value)
         {
             this->setTargetingMode(value);
         });
-    targeting_mode_button->setValue(targeting_mode)->setIcon("gui/icons/station-weapons")->setPosition(180, -20, ABottomCenter)->setSize(110, 50);
+    targeting_mode_button->setValue(targeting_mode)->setIcon("gui/icons/station-weapons")->setPosition(180, -20, ABottomCenter)->setSize(110, 40);
     setTargetingMode(targeting_mode);
 
     // Initialize steering wheel rotation to initial rotation.
@@ -180,11 +180,11 @@ CockpitScreen::CockpitScreen(GuiContainer* owner)
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
-void CockpitScreen::onDraw(sf::RenderTarget& window)
+void CockpitView::onDraw(sf::RenderTarget& window)
 {
     if (my_spaceship)
     {
-        // Update energy and navigation stats.
+        // Update the player ship's energy and navigation stats.
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
@@ -223,13 +223,14 @@ void CockpitScreen::onDraw(sf::RenderTarget& window)
             }
             default:
             {
+                // target_camera_yaw is already ship_rotation, which is CV_Forward.
                 break;
             }
         }
 
         if (targeting_mode)
         {
-            // Point camera at target.
+            // Point camera at target, if we have one and it exists.
             P<SpaceObject> target_ship = my_spaceship->getTarget();
 
             if (target_ship)
@@ -239,7 +240,7 @@ void CockpitScreen::onDraw(sf::RenderTarget& window)
             }
         }
 
-        // Move camera if first person.
+        // If first person is on, move the camera to that perspective.
         if (first_person)
         {
             camera_ship_distance = -(my_spaceship->getRadius() * 1.5);
@@ -250,17 +251,6 @@ void CockpitScreen::onDraw(sf::RenderTarget& window)
         // Place and aim camera.
         sf::Vector2f cameraPosition2D = my_spaceship->getPosition() + sf::vector2FromAngle(target_camera_yaw) * -camera_ship_distance;
         sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
-
-#ifdef DEBUG
-        // Allow top-down view in debug mode on Z key.
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        {
-            targetCameraPosition.x = my_spaceship->getPosition().x;
-            targetCameraPosition.y = my_spaceship->getPosition().y;
-            targetCameraPosition.z = 3000.0;
-            camera_pitch = 90.0f;
-        }
-#endif
 
         // Display first-person perspective if enabled.
         if (first_person)
@@ -274,7 +264,19 @@ void CockpitScreen::onDraw(sf::RenderTarget& window)
             camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
         }
 
+#ifdef DEBUG
+        // Allow top-down view in debug mode on Z key.
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+        {
+            targetCameraPosition.x = my_spaceship->getPosition().x;
+            targetCameraPosition.y = my_spaceship->getPosition().y;
+            targetCameraPosition.z = 3000.0;
+            camera_pitch = 90.0f;
+        }
+#endif
+
         // Update shield indicators.
+        // Only shows front/rear shields?
         string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
 
         if (my_spaceship->hasSystem(SYS_RearShield))
@@ -406,7 +408,7 @@ void CockpitScreen::onDraw(sf::RenderTarget& window)
     GuiOverlay::onDraw(window);
 }
 
-bool CockpitScreen::onJoystickAxis(const AxisAction& axisAction)
+bool CockpitView::onJoystickAxis(const AxisAction& axisAction)
 {
     if (my_spaceship)
     {
@@ -421,6 +423,7 @@ bool CockpitScreen::onJoystickAxis(const AxisAction& axisAction)
             if (axisAction.action == "ROTATE")
             {
                 my_spaceship->commandTurnSpeed(axisAction.value);
+                steering_wheel->setValue(target_rotation - view_rotation);
                 return true;
             }
 
@@ -444,7 +447,7 @@ bool CockpitScreen::onJoystickAxis(const AxisAction& axisAction)
     return false;
 }
 
-void CockpitScreen::onHotkey(const HotkeyResult& key)
+void CockpitView::onHotkey(const HotkeyResult& key)
 {
     if (my_spaceship)
     {
@@ -466,44 +469,9 @@ void CockpitScreen::onHotkey(const HotkeyResult& key)
 
         if (key.category == "WEAPONS")
         {
-            if (key.hotkey == "NEXT_ENEMY_TARGET")
+            if (key.hotkey == "NEXT_TARGET" || key.hotkey == "NEXT_ENEMY_TARGET")
             {
-                bool current_found = false;
-
-                for (P<SpaceObject> obj : space_object_list)
-                {
-                    if (obj == targets.get())
-                    {
-                        current_found = true;
-                        continue;
-                    }
-
-                    if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                    {
-                        targets.set(obj);
-                        my_spaceship->commandSetTarget(targets.get());
-                        return;
-                    }
-                }
-
-                for (P<SpaceObject> obj : space_object_list)
-                {
-                    if (obj == targets.get())
-                    {
-                        continue;
-                    }
-
-                    if (my_spaceship->isEnemy(obj) && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                    {
-                        targets.set(obj);
-                        my_spaceship->commandSetTarget(targets.get());
-                        return;
-                    }
-                }
-            }
-
-            if (key.hotkey == "NEXT_TARGET")
-            {
+                // Get next target from space_object_list.
                 bool current_found = false;
 
                 for(P<SpaceObject> obj : space_object_list)
@@ -519,11 +487,16 @@ void CockpitScreen::onHotkey(const HotkeyResult& key)
                         continue;
                     }
 
+                    // If there's a next target, set it as the new target.
                     if (current_found && sf::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
                     {
-                        targets.set(obj);
-                        my_spaceship->commandSetTarget(targets.get());
-                        return;
+                        // If NEXT_ENEMY_TARGET was pressed, set the next target only if it's a known enemy.
+                        if (key.hotkey == "NEXT_TARGET" || (key.hotkey == "NEXT_ENEMY_TARGET" && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified))
+                        {
+                            targets.set(obj);
+                            my_spaceship->commandSetTarget(targets.get());
+                            return;                            
+                        }
                     }
                 }
 
@@ -586,7 +559,7 @@ void CockpitScreen::onHotkey(const HotkeyResult& key)
     }
 }
 
-void CockpitScreen::setTargetingMode(bool new_mode)
+void CockpitView::setTargetingMode(bool new_mode)
 {
     // Toggle target camera mode.
     targeting_mode = new_mode;

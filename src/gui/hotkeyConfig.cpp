@@ -62,7 +62,7 @@ HotkeyConfig::HotkeyConfig()
         newKey(std::string("UNLOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Unload tube ") + string(n+1), ""));
     for(int n=0; n<max_weapon_tubes; n++)
         newKey(std::string("FIRE_TUBE_") + string(n+1), std::make_tuple(std::string("Fire tube ") + string(n+1), ""));
-    newKey("NEXT_ENEMY_TARGET", std::make_tuple("Select next target", ""));
+    newKey("NEXT_ENEMY_TARGET", std::make_tuple("Select next hostile target", ""));
     newKey("NEXT_TARGET", std::make_tuple("Select next target (any)", ""));
     newKey("TOGGLE_SHIELDS", std::make_tuple("Toggle shields", "S"));
     newKey("ENABLE_SHIELDS", std::make_tuple("Enable shields", ""));
@@ -244,6 +244,7 @@ void HotkeyConfig::load()
 std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
 {
     std::vector<HotkeyResult> results;
+
     for(HotkeyConfigCategory& cat : categories)
     {
         for(HotkeyConfigItem& item : cat.hotkeys)
@@ -298,13 +299,20 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
                     if (key_name.second == item.hotkey.code)
                     {
                         string keyModifier = "";
-                        if (item.hotkey.shift) {
+
+                        if (item.hotkey.shift)
+                        {
                             keyModifier = "Shift+";
-                        } else if (item.hotkey.control) {
+                        }
+                        else if (item.hotkey.control)
+                        {
                             keyModifier = "Ctrl+";
-                        } else if (item.hotkey.alt){
+                        }
+                        else if (item.hotkey.alt)
+                        {
                             keyModifier = "Alt+";
                         }
+
                         ret.push_back({std::get<0>(item.value), keyModifier + key_name.first});
                     }
                 }
@@ -331,13 +339,21 @@ void HotkeyConfigItem::load(string key_config)
     for(const string& config : key_config.split(";"))
     {
         if (config == "[alt]")
+        {
             hotkey.alt = true;
+        }
         else if (config == "[control]")
+        {
             hotkey.control = true;
+        }
         else if (config == "[shift]")
+        {
             hotkey.shift = true;
+        }
         else if (config == "[system]")
+        {
             hotkey.system = true;
+        }
         else
         {
             for(auto key_name : sfml_key_names)

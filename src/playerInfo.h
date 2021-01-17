@@ -12,12 +12,12 @@ enum ECrewPosition
     scienceOfficer,
     relayOfficer,
     // 4/3 player crew
-    tacticalOfficer,     //helms+weapons-shields
-    engineeringAdvanced, //engineering+shields
-    operationsOfficer,   //science+comms
+    tacticalOfficer,     // helms + weapons - shields
+    engineeringAdvanced, // engineering + shields
+    operationsOfficer,   // science + comms
     // 1 player crew
-    singlePilot, // 2D backgorund
-    cockpitScreen, // 3D background
+    singlePilot,   // 2D background
+    cockpitView, // 3D background
     // extras
     damageControl,
     powerManagement,
@@ -63,7 +63,7 @@ REGISTER_MULTIPLAYER_ENUM(ECrewPosition);
 string getCrewPositionName(ECrewPosition position);
 string getCrewPositionIcon(ECrewPosition position);
 
-/* Define script conversion function for the DamageInfo structure. */
+// Define script conversion function for the DamageInfo structure.
 template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosition& cp);
 
 #endif//PLAYER_INFO_H

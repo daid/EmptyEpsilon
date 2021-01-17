@@ -1,5 +1,5 @@
-#ifndef COCKPIT_SCREEN_H
-#define COCKPIT_SCREEN_H
+#ifndef COCKPIT_VIEW_H
+#define COCKPIT_VIEW_H
 
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
@@ -16,7 +16,7 @@ class GuiLabel;
 class GuiImage;
 class GuiAutoLayout;
 
-class CockpitScreen : public GuiOverlay
+class CockpitView : public GuiOverlay
 {
 private:
     enum ECockpitView
@@ -64,7 +64,7 @@ private:
     GuiToggleButton* lock_aim;
     GuiToggleButton* targeting_mode_button;
 public:
-    CockpitScreen(GuiContainer* owner);
+    CockpitView(GuiContainer* owner);
 
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;
@@ -73,4 +73,4 @@ public:
     void setTargetingMode(bool new_mode);
 };
 
-#endif//COCKPIT_SCREEN_H
+#endif//COCKPIT_VIEW_H

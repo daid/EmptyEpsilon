@@ -4,10 +4,16 @@
 #include "preferenceManager.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
-: GuiElement(owner, id), text(text), func(func)
+: GuiElement(owner, id),
+  text(text),
+  text_size(30.0f),
+  text_alignment(ACenter),
+  func(func),
+  icon_name(""),
+  icon_alignment(ACenterRight),
+  icon_rotation(0.0f),
+  color_set(colorConfig.button)
 {
-    text_size = 30;
-    color_set = colorConfig.button;
 }
 
 void GuiButton::onDraw(sf::RenderTarget& window)
@@ -33,6 +39,7 @@ void GuiButton::onDraw(sf::RenderTarget& window)
         float scale = rect.height / icon.getTextureRect().height * 0.8;
         icon.setScale(scale, scale);
         icon.setRotation(icon_rotation);
+
         switch(icon_alignment)
         {
         case ACenterLeft:
@@ -46,10 +53,13 @@ void GuiButton::onDraw(sf::RenderTarget& window)
             text_rect.width = rect.width - rect.height;
             text_align = ACenterRight;
         }
+
         icon.setColor(text_color);
         window.draw(icon);
         drawText(window, text_rect, text, text_align, text_size, main_font, text_color);
-    }else{
+    }
+    else
+    {
         drawText(window, rect, text, ACenter, text_size, main_font, text_color);
     }
 }
@@ -64,6 +74,7 @@ void GuiButton::onMouseUp(sf::Vector2f position)
     if (rect.contains(position))
     {
         soundManager->playSound("button.wav");
+
         if (func)
         {
             func_t f = func;

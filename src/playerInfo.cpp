@@ -15,7 +15,7 @@
 
 #include "screens/crew1/singlePilotScreen.h"
 #ifndef __ANDROID__
-#include "screens/crew1/cockpitScreen.h"
+#include "screens/crew1/cockpitView.h"
 #endif
 
 #include "screens/extra/damcon.h"
@@ -147,11 +147,16 @@ void PlayerInfo::spawnUI()
     if (my_player_info->isOnlyMainScreen())
     {
         new ScreenMainScreen();
-    }else{
-
+    }
+    else
+    {
         CrewStationScreen* screen = new CrewStationScreen();
-        if (main_screen && !crew_position[cockpitScreen])
+
+        if (main_screen && !crew_position[cockpitView])
+        {
             screen->enableMainScreen();
+        }
+
         auto container = screen->getTabContainer();
 
         // Crew 6/5
@@ -178,8 +183,8 @@ void PlayerInfo::spawnUI()
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(container), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
 #ifndef __ANDROID__
-        if (crew_position[cockpitScreen])
-            screen->addStationTab(new CockpitScreen(container), cockpitScreen, getCrewPositionName(cockpitScreen), getCrewPositionIcon(cockpitScreen));
+        if (crew_position[cockpitView])
+            screen->addStationTab(new CockpitView(container), cockpitView, getCrewPositionName(cockpitView), getCrewPositionIcon(cockpitView));
 #endif
 
         // Extra
@@ -197,18 +202,26 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ShipLogScreen(container), shipLog, getCrewPositionName(shipLog), getCrewPositionIcon(shipLog));
 
         GuiSelfDestructEntry* sde = new GuiSelfDestructEntry(container, "SELF_DESTRUCT_ENTRY");
+
         for(int n=0; n<max_crew_positions; n++)
+        {
             if (crew_position[n])
+            {
                 sde->enablePosition(ECrewPosition(n));
+            }
+        }
+
         if (crew_position[tacticalOfficer])
         {
             sde->enablePosition(weaponsOfficer);
             sde->enablePosition(helmsOfficer);
         }
+
         if (crew_position[engineeringAdvanced])
         {
             sde->enablePosition(engineering);
         }
+
         if (crew_position[operationsOfficer])
         {
             sde->enablePosition(scienceOfficer);
@@ -216,7 +229,9 @@ void PlayerInfo::spawnUI()
         }
 
         if (main_screen_control)
+        {
             new GuiMainScreenControls(container);
+        }
 
         screen->finishCreation();
     }
@@ -235,7 +250,7 @@ string getCrewPositionName(ECrewPosition position)
     case engineeringAdvanced: return tr("station","Engineering+");
     case operationsOfficer: return tr("station","Operations");
     case singlePilot: return tr("station","Single Pilot");
-    case cockpitScreen: return tr("station","Cockpit View");
+    case cockpitView: return tr("station","Cockpit View");
     case damageControl: return tr("station","Damage Control");
     case powerManagement: return tr("station","Power Management");
     case databaseView: return tr("station","Database");
@@ -259,7 +274,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case engineeringAdvanced: return "";
     case operationsOfficer: return "";
     case singlePilot: return "";
-    case cockpitScreen: return "";
+    case cockpitView: return "";
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
@@ -289,17 +304,17 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
 
     // 4/3 player crew
     else if (str == "tactical" || str == "tacticalofficer")
-        cp = tacticalOfficer;    //helms+weapons-shields
+        cp = tacticalOfficer;     // helms + weapons - shields
     else if (str == "engineering+" || str == "engineering+officer" || str == "engineeringadvanced" || str == "engineeringadvancedofficer")
-        cp = engineeringAdvanced;//engineering+shields
+        cp = engineeringAdvanced; // engineering + shields
     else if (str == "operations" || str == "operationsofficer")
-        cp = operationsOfficer; //science+comms
+        cp = operationsOfficer;   // science + comms
 
     // 1 player crew
     else if (str == "single" || str == "singlepilot")
-        cp = singlePilot;
+        cp = singlePilot;   // 2D background
     else if (str == "cockpit" || str == "cockpitview")
-        cp = cockpitScreen;
+        cp = cockpitView; // 3D background
 
     // Extras
     else if (str == "damagecontrol")

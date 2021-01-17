@@ -286,7 +286,9 @@ GuiElement* CrewStationScreen::findTab(string name)
     for(CrewTabInfo& info : tabs)
     {
         if (info.button->getText() == name)
+        {
             return info.element;
+        }
     }
 
     return nullptr;
@@ -298,25 +300,41 @@ string CrewStationScreen::listHotkeysLimited(string station)
     keyboard_general = "";
 
     for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
-        if (shortcut.first == "Switch to next crew station" || shortcut.first =="Switch to previous crew station" || shortcut.first == "Switch crew station")
+    {
+        if (shortcut.first == "Switch to next crew station" || shortcut.first == "Switch to previous crew station" || shortcut.first == "Switch crew station")
+        {
             keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
+        }
+    }
 
     if (station == "Tactical")
     {
         for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Helms"))
+        {
            ret += shortcut.second + ":\t" + shortcut.first + "\n";
+        }
+
         for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))
         {
             if (shortcut.first != "Toggle shields")
+            {
                 ret += shortcut.second + ":\t" + shortcut.first + "\n";
+            }
         }
-    } else if (station == "Engineering+") {
+    }
+    else if (station == "Engineering+")
+    {
         for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Engineering"))
+        {
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
+        }
+
         for (std::pair<string, string> shortcut : listControlsByCategory("Weapons"))
         {
             if (shortcut.first == "Toggle shields")
+            {
                 ret += shortcut.second + ":\t" + shortcut.first + "\n";
+            }
         }
     }
 
@@ -325,12 +343,25 @@ string CrewStationScreen::listHotkeysLimited(string station)
     //        return ret;
     //    ----
 
-    else if (station == "Single Pilot")
+    if (station == "Single Pilot" || station == "Cockpit View")
     {
         for (std::pair<string, string> shortcut : listControlsByCategory("Helms"))
+        {
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
+        }
+
         for (std::pair<string, string> shortcut : listControlsByCategory("Weapons"))
+        {
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
+        }
+    }
+
+    if (station == "Cockpit View")
+    {
+        for (std::pair<string, string> shortcut : listControlsByCategory("Cockpit View"))
+        {
+            ret += shortcut.second + ":\t" + shortcut.first + "\n";
+        }
     }
 
     return ret;
@@ -338,17 +369,26 @@ string CrewStationScreen::listHotkeysLimited(string station)
 
 void CrewStationScreen::tileViewport()
 {
-    if (current_position == singlePilot)
+    if (current_position == cockpitView)
+    {
+        // Cockpit view has its own viewport.
+        main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        viewport->hide();
+    }
+    else if (current_position == singlePilot)
     {
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
         viewport->setPosition(1000, 0, ATopLeft);
-    } else {
+    }
+    else
+    {
         main_panel->setSize(1200, GuiElement::GuiSizeMax);
         viewport->setPosition(1200, 0, ATopLeft);
     }
 }
 
-std::vector<std::pair<string, string>> CrewStationScreen::listControlsByCategory(string category){
+std::vector<std::pair<string, string>> CrewStationScreen::listControlsByCategory(string category)
+{
     std::vector<std::pair<string, string>> hotkeyControls = hotkeys.listHotkeysByCategory(category);
     std::vector<std::pair<string, string>> joystickControls = joystick.listJoystickByCategory(category);
     hotkeyControls.insert(hotkeyControls.end(), joystickControls.begin(), joystickControls.end());
