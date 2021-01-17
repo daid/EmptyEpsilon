@@ -34,14 +34,6 @@
 CockpitScreen::CockpitScreen(GuiContainer* owner)
 : GuiOverlay(owner, "COCKPIT_SCREEN", colorConfig.background)
 {
-/*
-    // Render the radar shadow and background decorations.
-    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
-    background_gradient->setTextureCenter("gui/BackgroundGradient");
-
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
-    background_crosses->setTextureTiled("gui/BackgroundCrosses");
-*/
     targeting_mode = false;
     first_person = PreferencesManager::get("first_person") == "1" ? true : false;
     view_rotation = 0.0f;
@@ -59,7 +51,7 @@ CockpitScreen::CockpitScreen(GuiContainer* owner)
     // 5U tactical radar with piloting features.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
     radar->setPosition(0, -20, ABottomCenter)->setSize(GuiElement::GuiSizeMatchHeight, 300);
-    radar->/*setBackgroundAlpha(192)->*/setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
+    radar->setBackgroundAlpha(192)->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
         [this](sf::Vector2f position) {
