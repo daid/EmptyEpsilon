@@ -1,6 +1,7 @@
 --- Comms with stations for scenario 03.
 --
 -- @script comms_station_scenario_03_central_command
+-- TODO
 
 function commsStationMainMenu()
     if comms_target.comms_data == nil then
