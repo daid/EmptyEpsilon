@@ -59,6 +59,7 @@ private:
     GuiRadarView* radar;
     float view_rotation;
     float target_rotation;
+    float turn_speed;
     GuiRotationDial* missile_aim;
     GuiRotationDial* steering_wheel;
     GuiImage* missile_aim_icon;

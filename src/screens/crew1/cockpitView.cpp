@@ -25,6 +25,7 @@
 
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/hotkeyConfig.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_rotationdial.h"
@@ -38,6 +39,7 @@ CockpitView::CockpitView(GuiContainer* owner)
     first_person = PreferencesManager::get("first_person") == "1" ? true : false;
     view_rotation = 0.0f;
     target_rotation = 0.0f;
+    turn_speed = 0.0f;
 
     // Render the 3D viewport across the entire window
     viewport = new GuiViewport3D(this, "3D_VIEW");
@@ -294,6 +296,40 @@ void CockpitView::onDraw(sf::RenderTarget& window)
         }
 #endif
 
+        // Keyboard emulation of joystick rotation.
+        // The hotkey system doesn't support reading isKeyPressed, but we want
+        // to retain hotkey mapping. So let's fake it.
+        // Wish I could do this in onKey but that doesn't seem to work?
+        if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "TURN_LEFT")))
+        {
+            if (turn_speed != -10.0f)
+            {
+                turn_speed = -10.0f;
+                my_spaceship->commandTurnSpeed(turn_speed);
+            }
+
+            target_rotation = my_spaceship->getRotation();
+        }
+        else if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "TURN_RIGHT")))
+        {
+            if (turn_speed != 10.0f)
+            {
+                turn_speed = 10.0f;
+                my_spaceship->commandTurnSpeed(turn_speed);
+            }
+
+            target_rotation = my_spaceship->getRotation();
+        }
+        else if (turn_speed == 10.0f || turn_speed == -10.0f)
+        {
+            // This will probably? conflict with joystick input.
+            turn_speed = 0.0f;
+            my_spaceship->commandTurnSpeed(turn_speed);
+        }
+
+        // Update wheel.
+        steering_wheel->setValue(target_rotation - view_rotation);
+
         // Update shield indicators.
         // Only shows front/rear shields?
         string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
@@ -450,10 +486,11 @@ bool CockpitView::onJoystickAxis(const AxisAction& axisAction)
                 return true;
             }
 
+            // Same behavior as Helms, and update the steering wheel.
             if (axisAction.action == "ROTATE")
             {
                 my_spaceship->commandTurnSpeed(axisAction.value);
-                steering_wheel->setValue(target_rotation - view_rotation);
+                target_rotation = my_spaceship->getRotation();
                 return true;
             }
 
@@ -481,21 +518,12 @@ void CockpitView::onHotkey(const HotkeyResult& key)
 {
     if (my_spaceship)
     {
+        /*
         if (key.category == "HELMS")
         {
-            if (key.hotkey == "TURN_LEFT")
-            {
-                target_rotation -= 5.0f;
-                my_spaceship->commandTargetRotation(target_rotation);
-                steering_wheel->setValue(target_rotation - view_rotation);
-            }
-            else if (key.hotkey == "TURN_RIGHT")
-            {
-                target_rotation += 5.0f;
-                my_spaceship->commandTargetRotation(target_rotation);
-                steering_wheel->setValue(target_rotation - view_rotation);
-            }
+            // See onDraw for TURN_LEFT and TURN_RIGHT.
         }
+        */
 
         if (key.category == "WEAPONS")
         {
@@ -585,7 +613,22 @@ void CockpitView::onHotkey(const HotkeyResult& key)
             {
                 setTargetingMode(!targeting_mode);
             }
-        }
+
+            // Control the steering wheel target instead of directly rotating
+            // the ship.
+            if (key.hotkey == "TURN_WHEEL_LEFT")
+            {
+                target_rotation -= 5.0f;
+                my_spaceship->commandTargetRotation(target_rotation);
+                steering_wheel->setValue(target_rotation - view_rotation);
+            }
+            else if (key.hotkey == "TURN_WHEEL_RIGHT")
+            {
+                target_rotation += 5.0f;
+                my_spaceship->commandTargetRotation(target_rotation);
+                steering_wheel->setValue(target_rotation - view_rotation);
+            }
+         }
     }
 }
 
