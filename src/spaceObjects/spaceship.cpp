@@ -1,5 +1,9 @@
-#include <i18n.h>
 #include "spaceship.h"
+
+#include <array>
+
+#include <i18n.h>
+
 #include "mesh.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
@@ -46,6 +50,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPower);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerFactor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerFactor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
@@ -125,6 +131,18 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
 
+std::array<float, SYS_COUNT> SpaceShip::default_system_power_factors{
+    /*SYS_Reactor*/     -25.0,
+    /*SYS_BeamWeapons*/   3.0,
+    /*SYS_MissileSystem*/ 1.0,
+    /*SYS_Maneuver*/      2.0,
+    /*SYS_Impulse*/       4.0,
+    /*SYS_Warp*/          5.0,
+    /*SYS_JumpDrive*/     5.0,
+    /*SYS_FrontShield*/   5.0,
+    /*SYS_RearShield*/    5.0,
+};
+
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
@@ -197,14 +215,16 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     for(int n=0; n<SYS_COUNT; n++)
     {
-        systems[n].health = 1.0;
-        systems[n].health_max = 1.0;
-        systems[n].power_level = 1.0;
-        systems[n].power_request = 1.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].coolant_request = 0.0;
-        systems[n].heat_level = 0.0;
-        systems[n].hacked_level = 0.0;
+        assert(n < default_system_power_factors.size());
+        systems[n].health = 1.0f;
+        systems[n].health_max = 1.0f;
+        systems[n].power_level = 1.0f;
+        systems[n].power_request = 1.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].coolant_request = 0.0f;
+        systems[n].heat_level = 0.0f;
+        systems[n].hacked_level = 0.0f;
+        systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].health, 0.1);
         registerMemberReplication(&systems[n].health_max, 0.1);
