@@ -62,15 +62,18 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
+    GuiAutoLayout* stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    stats->setPosition(20, 100, ATopLeft)->setSize(240, 160);
+
     // Ship statistics in the top left corner.
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
-    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
-    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    shields_display = new GuiKeyValueDisplay(this, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
-    shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setPosition(20, 220, ATopLeft)->setSize(240, 40);
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
+    heading_display = new GuiKeyValueDisplay(stats, "HEADING_DISPLAY", 0.45, tr("Heading"), "");
+    heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setSize(240, 40);
+    velocity_display = new GuiKeyValueDisplay(stats, "VELOCITY_DISPLAY", 0.45, tr("Speed"), "");
+    velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setSize(240, 40);
+    shields_display = new GuiKeyValueDisplay(stats, "SHIELDS_DISPLAY", 0.45, tr("Shields"), "");
+    shields_display->setIcon("gui/icons/shields")->setTextSize(20)->setSize(240, 40);
 
     // Weapon tube loading controls in the bottom left corner.
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
@@ -89,7 +92,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     }
 
     // Weapon tube locking, and manual aiming controls.
-    missile_aim = new GuiRotationDial(this, "MISSILE_AIM", -90, 360 - 90, 0, [this](float value){
+    missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
     missile_aim->hide()->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
@@ -120,7 +123,19 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         warp_controls->setVisible(my_spaceship->has_warp_drive);
         jump_controls->setVisible(my_spaceship->has_jump_drive);
 
-        shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
+        string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
+        if (my_spaceship->hasSystem(SYS_RearShield))
+        {
+            shields_value += " " + string(my_spaceship->getShieldPercentage(1)) + "%";
+        }
+        shields_display->setValue(shields_value);
+        if (my_spaceship->hasSystem(SYS_FrontShield) || my_spaceship->hasSystem(SYS_RearShield))
+        {
+            shields_display->show();
+        } else {
+            shields_display->hide();
+        }
+
         targets.set(my_spaceship->getTarget());
     }
     GuiOverlay::onDraw(window);

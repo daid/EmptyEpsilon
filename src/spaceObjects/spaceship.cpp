@@ -1,5 +1,9 @@
-#include <i18n.h>
 #include "spaceship.h"
+
+#include <array>
+
+#include <i18n.h>
+
 #include "mesh.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
@@ -46,6 +50,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPower);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerFactor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerFactor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
@@ -60,10 +66,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveRange);
     /// sets the current jump range charged.
     /// ships will be able to jump when this is equal to their max jump drive range.
-    /// Example ship:setJumpCharge(50000)
+    /// Example ship:setJumpDriveCharge(50000)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDriveCharge);
     /// returns the current amount of jump charged.
-    /// Example ship:getJumpCharge()
+    /// Example ship:getJumpDriveCharge()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDriveCharge);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
@@ -124,6 +130,18 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Set the scane state of this ship for a particular faction.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
+
+std::array<float, SYS_COUNT> SpaceShip::default_system_power_factors{
+    /*SYS_Reactor*/     -25.0,
+    /*SYS_BeamWeapons*/   3.0,
+    /*SYS_MissileSystem*/ 1.0,
+    /*SYS_Maneuver*/      2.0,
+    /*SYS_Impulse*/       4.0,
+    /*SYS_Warp*/          5.0,
+    /*SYS_JumpDrive*/     5.0,
+    /*SYS_FrontShield*/   5.0,
+    /*SYS_RearShield*/    5.0,
+};
 
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
@@ -197,14 +215,16 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     for(int n=0; n<SYS_COUNT; n++)
     {
-        systems[n].health = 1.0;
-        systems[n].health_max = 1.0;
-        systems[n].power_level = 1.0;
-        systems[n].power_request = 1.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].coolant_request = 0.0;
-        systems[n].heat_level = 0.0;
-        systems[n].hacked_level = 0.0;
+        assert(n < default_system_power_factors.size());
+        systems[n].health = 1.0f;
+        systems[n].health_max = 1.0f;
+        systems[n].power_level = 1.0f;
+        systems[n].power_request = 1.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].coolant_request = 0.0f;
+        systems[n].heat_level = 0.0f;
+        systems[n].hacked_level = 0.0f;
+        systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].health, 0.1);
         registerMemberReplication(&systems[n].health_max, 0.1);
@@ -839,7 +859,8 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     P<SpaceShip> ship = obj;
     if (!ship || !ship->ship_template)
         return false;
-    return ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) > 0;
+    return (ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) +
+	   ship_template->can_be_docked_by_class.count(ship->ship_template->getSubClass())) > 0;
 }
 
 void SpaceShip::collide(Collisionable* other, float force)
@@ -1021,14 +1042,14 @@ bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
     return (!(this->isFriendly(other)) && this->isFriendOrFoeIdentifiedBy(other)) ;
 }
 
-std::vector<std::pair<string, float>> SpaceShip::getHackingTargets()
+std::vector<std::pair<ESystem, float>> SpaceShip::getHackingTargets()
 {
-    std::vector<std::pair<string, float>> results;
+    std::vector<std::pair<ESystem, float>> results;
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
         if (n != SYS_Reactor && hasSystem(ESystem(n)))
         {
-            results.emplace_back(getSystemName(ESystem(n)), systems[n].hacked_level);
+            results.emplace_back(ESystem(n), systems[n].hacked_level);
         }
     }
     return results;
@@ -1220,20 +1241,6 @@ EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
     return weapon_tube[index].getLoadType();
 }
 
-EMissileSizes SpaceShip::getWeaponTubeSize(int index)
-{
-    if (index < 0 || index >= weapon_tube_count)
-        return MS_Small;
-    return weapon_tube[index].getSize();
-}
-
-void SpaceShip::setWeaponTubeSize(int index, EMissileSizes size)
-{
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].setSize(size);
-}
-
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
 {
     if (index < 0 || index >= weapon_tube_count)
@@ -1266,21 +1273,21 @@ void SpaceShip::setWeaponTubeDirection(int index, float direction)
 
 void SpaceShip::setTubeSize(int index, EMissileSizes size)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return;
     weapon_tube[index].setSize(size);
 }
 
 EMissileSizes SpaceShip::getTubeSize(int index)
 {
-    if (index < 0 || index >= max_weapon_tubes)
+    if (index < 0 || index >= weapon_tube_count)
         return MS_Medium;
     return weapon_tube[index].getSize();
 }
 
 float SpaceShip::getTubeLoadTime(int index)
 {
-    if (index < 0 || index >= max_weapon_tubes) {
+    if (index < 0 || index >= weapon_tube_count) {
         return 0;
     }
     return weapon_tube[index].getLoadTimeConfig();
@@ -1288,7 +1295,7 @@ float SpaceShip::getTubeLoadTime(int index)
 
 void SpaceShip::setTubeLoadTime(int index, float time)
 {
-    if (index < 0 || index >= max_weapon_tubes) {
+    if (index < 0 || index >= weapon_tube_count) {
         return;
     }
     weapon_tube[index].setLoadTimeConfig(time);
@@ -1527,6 +1534,4 @@ string frequencyToString(int frequency)
     return string(400 + (frequency * 20)) + "THz";
 }
 
-#ifndef _MSC_VER
 #include "spaceship.hpp"
-#endif

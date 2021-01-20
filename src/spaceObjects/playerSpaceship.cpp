@@ -204,18 +204,6 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getSelfDestructSize);
 }
 
-float PlayerSpaceship::system_power_user_factor[] = {
-    /*SYS_Reactor*/     -25.0 * 0.08,
-    /*SYS_BeamWeapons*/   3.0 * 0.08,
-    /*SYS_MissileSystem*/ 1.0 * 0.08,
-    /*SYS_Maneuver*/      2.0 * 0.08,
-    /*SYS_Impulse*/       4.0 * 0.08,
-    /*SYS_Warp*/          5.0 * 0.08,
-    /*SYS_JumpDrive*/     5.0 * 0.08,
-    /*SYS_FrontShield*/   5.0 * 0.08,
-    /*SYS_RearShield*/    5.0 * 0.08,
-};
-
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
 static const int16_t CMD_WARP = 0x0003;
@@ -370,18 +358,21 @@ PlayerSpaceship::PlayerSpaceship()
     // Initialize each subsystem to be powered with no coolant or heat.
     for(int n = 0; n < SYS_COUNT; n++)
     {
-        systems[n].health = 1.0;
-        systems[n].power_level = 1.0;
-        systems[n].power_request = 1.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].coolant_level = 0.0;
-        systems[n].heat_level = 0.0;
+        assert(n < default_system_power_factors.size());
+        systems[n].health = 1.0f;
+        systems[n].power_level = 1.0f;
+        systems[n].power_request = 1.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].coolant_level = 0.0f;
+        systems[n].heat_level = 0.0f;
+        systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].power_level);
         registerMemberReplication(&systems[n].power_request);
         registerMemberReplication(&systems[n].coolant_level);
         registerMemberReplication(&systems[n].coolant_request);
         registerMemberReplication(&systems[n].heat_level, 1.0);
+        registerMemberReplication(&systems[n].power_factor);
     }
 
     if (game_server)
@@ -392,7 +383,7 @@ PlayerSpaceship::PlayerSpaceship()
         }
 
         // Initialize the ship's log.
-        addToShipLog("Start of log", colorConfig.log_generic);
+        addToShipLog(tr("shiplog", "Start of log"), colorConfig.log_generic);
     }
 
     // Initialize player ship callsigns with a "PL" designation.
@@ -885,18 +876,22 @@ float PlayerSpaceship::getNetSystemEnergyUsage()
     // Determine each subsystem's energy draw.
     for(int n = 0; n < SYS_COUNT; n++)
     {
+        
         if (!hasSystem(ESystem(n))) continue;
+
+        const auto& system = systems[n];
         // Factor the subsystem's health into energy generation.
-        if (system_power_user_factor[n] < 0)
+        auto power_user_factor = system.getPowerUserFactor();
+        if (power_user_factor < 0)
         {
             float f = getSystemEffectiveness(ESystem(n));
             if (f > 1.0f)
                 f = (1.0f + f) / 2.0f;
-            net_power -= system_power_user_factor[n] * f;
+            net_power -= power_user_factor * f;
         }
         else
         {
-            net_power -= system_power_user_factor[n] * systems[n].power_level;
+            net_power -= power_user_factor * system.power_level;
         }
     }
 
@@ -928,6 +923,12 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     {
         crew[0]->destroy();
         crew.update();
+    }
+
+    if (ship_template->rooms.size() == 0 && amount != 0)
+    {
+        LOG(WARNING) << "Not adding repair crew to ship \"" << callsign << "\", because it has no rooms. Fix this by adding rooms to the ship template \"" << template_name << "\".";
+        return;
     }
 
     // Add crews until we reach the provided amount.
@@ -1118,7 +1119,7 @@ bool PlayerSpaceship::hailCommsByGM(string target_name)
         return false;
 
     // Log the hail.
-    addToShipLog("Hailed by " + target_name, colorConfig.log_generic);
+    addToShipLog(tr("shiplog", "Hailed by {name}").format({{"name", target_name}}), colorConfig.log_generic);
 
     // Set comms to the hail state and notify Relay/comms.
     comms_state = CS_BeingHailedByGM;
@@ -1172,7 +1173,7 @@ void PlayerSpaceship::closeComms()
         {
             P<PlayerSpaceship> player_ship = comms_target;
             player_ship->comms_state = CS_ChannelClosed;
-            player_ship->addToShipLog("Communication channel closed by other side", colorConfig.log_generic);
+            player_ship->addToShipLog(tr("shiplog", "Communication channel closed by other side"), colorConfig.log_generic);
         }
         if (comms_state == CS_OpeningChannel && comms_target)
         {
@@ -1182,11 +1183,11 @@ void PlayerSpaceship::closeComms()
                 if (player_ship->comms_state == CS_BeingHailed && player_ship->comms_target == this)
                 {
                     player_ship->comms_state = CS_Inactive;
-                    player_ship->addToShipLog("Hailing from " + getCallSign() + " stopped", colorConfig.log_generic);
+                    player_ship->addToShipLog(tr("shiplog", "Hailing from {callsign} stopped").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                 }
             }
         }
-        addToShipLog("Communication channel closed", colorConfig.log_generic);
+        addToShipLog(tr("shiplog", "Communication channel closed"), colorConfig.log_generic);
         if (comms_state == CS_ChannelOpenGM)
             comms_state = CS_ChannelClosed;
         else
@@ -1357,8 +1358,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
                 comms_target_name = comms_target->getCallSign();
-                comms_incomming_message = "Opened comms with " + comms_target_name;
-                addToShipLog("Hailing: " + comms_target_name, colorConfig.log_generic);
+                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
+                addToShipLog(tr("shiplog", "Hailing: {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
             }
@@ -1381,13 +1382,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     comms_state = CS_ChannelOpenPlayer;
                     playerShip->comms_state = CS_ChannelOpenPlayer;
 
-                    comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
-                    playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
-                    addToShipLog("Opened communication channel to " + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog("Opened communication channel to " + getCallSign(), colorConfig.log_generic);
+                    comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", playerShip->getCallSign()}});
+                    playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", getCallSign()}});
+                    addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
+                    playerShip->addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                 }else{
-                    addToShipLog("Refused communications from " + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog("Refused communications to " + getCallSign(), colorConfig.log_generic);
+                    addToShipLog(tr("shiplog", "Refused communications from {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
+                    playerShip->addToShipLog(tr("shiplog", "Refused communications to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                     playerShip->comms_state = CS_ChannelFailed;
                 }
@@ -1396,10 +1397,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (!comms_target)
                     {
-                        addToShipLog("Hail suddenly went dead.", colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Hail suddenly went dead."), colorConfig.log_generic);
                         comms_state = CS_ChannelBroken;
                     }else{
-                        addToShipLog("Accepted hail from " + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
                         comms_reply_id.clear();
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
@@ -1419,7 +1420,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     }
                 }else{
                     if (comms_target)
-                        addToShipLog("Refused hail from " + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog(tr("shiplog", "Refused hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                 }
             }
@@ -1433,10 +1434,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 comms_state = CS_ChannelOpenGM;
 
-                addToShipLog("Opened communication channel to " + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = "Opened comms with " + comms_target_name;
+                addToShipLog(tr("shiplog", "Opened communication channel to {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
+                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
             }else{
-                addToShipLog("Refused hail from " + comms_target_name, colorConfig.log_generic);
+                addToShipLog(tr("shiplog", "Refused hail from {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
                 comms_state = CS_Inactive;
             }
         }
@@ -2067,6 +2068,23 @@ string PlayerSpaceship::getExportLine()
         result += ":setAutoCoolant(true)";
     if (auto_repair_enabled)
         result += ":commandSetAutoRepair(true)";
+
+    // Update power factors, only for the systems where it changed.
+    for (auto sys_index = 0; sys_index < SYS_COUNT; ++sys_index)
+    {
+        auto system = static_cast<ESystem>(sys_index);
+        if (hasSystem(system))
+        {
+            assert(sys_index < default_system_power_factors.size());
+            auto default_factor = default_system_power_factors[sys_index];
+            auto current_factor = getSystemPowerFactor(system);
+            auto difference = std::fabs(current_factor - default_factor) > std::numeric_limits<float>::epsilon();
+            if (difference)
+            {
+                result += ":setSystemPowerFactor(" + string(system) + ", " + string(current_factor, 1) + ")";
+            }
+        }
+    }
     return result;
 }
 
@@ -2075,6 +2093,4 @@ void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
     this->on_probe_launch = callback;
 }
 
-#ifndef _MSC_VER
 #include "playerSpaceship.hpp"
-#endif /* _MSC_VER */

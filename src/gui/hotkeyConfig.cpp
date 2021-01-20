@@ -344,6 +344,26 @@ std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(st
     return ret;
 }
 
+sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(string hotkey_category, string hotkey_name)
+{
+    for(HotkeyConfigCategory& cat : categories)
+    {
+        if (cat.key == hotkey_category)
+        {
+            for(HotkeyConfigItem& item : cat.hotkeys)
+            {
+                if (item.key == hotkey_name)
+                {
+                    return item.hotkey.code;
+                }
+            }
+        }
+    }
+
+    LOG(WARNING) << "Requested an SFML Key from hotkey " << hotkey_category << ", " << hotkey_name << ", but none was found.";
+    return sf::Keyboard::KeyCount;
+}
+
 HotkeyConfigItem::HotkeyConfigItem(string key, std::tuple<string, string> value)
 {
     this->key = key;

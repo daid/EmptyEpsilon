@@ -37,6 +37,8 @@ public:
     ///Control Duration of the beam. Default is 1 second
     void setDuration(float duration) {this->lifetime = duration;}
     void setRing(bool ring) {this->fire_ring = ring;}
+protected:
+    bool beam_sound_played;
 };
 
 #endif//BEAM_EFFECT_H

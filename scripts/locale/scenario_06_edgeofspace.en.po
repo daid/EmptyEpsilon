@@ -1,0 +1,216 @@
+# Scenario name
+msgid "The Edge-of-Space"
+msgstr ""
+
+# Scenario description
+msgid ""
+"You command the Technician Cruiser Apollo, a repair ship on the border of "
+"dangerous space.The Apollo is outfitted with minimal weapons as there is a "
+"cease-fire between the Human Navy and the neighboring Kraylor.You are tasked "
+"with discovering the cause of damage on one of your deep space telescopes."
+"This scenario is limited to one player ship: the Atlantis Apollo."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:191
+msgid ""
+"Apollo, come in.\n"
+"\n"
+"Our edge-of-space telescope has been malfunctioning for the past few days. "
+"We expect the cause to be a mechanical failure, but we want you to take a "
+"look.\n"
+"\n"
+"The E.O.S. scope is on the border of Kraylor space, so maintain contact and "
+"keep up long-range scans.\n"
+"\n"
+"Dock with the E.O.S. scope and investigate the damage. Transmitting your "
+"report via standard communications channels is too dangerous given the "
+"already delicate nature of our treaty with the Kraylor, so return to Central "
+"Command to report your findings.\n"
+"\n"
+"Reopen communications if you have any questions."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:239
+#: scripts/scenario_06_edgeofspace.lua:368
+#: scripts/scenario_06_edgeofspace.lua:392
+#: scripts/scenario_06_edgeofspace.lua:419
+msgid "Apollo, you've incited a war! What a disaster..."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:248
+msgid ""
+"A Human Naval cruiser encroaching on Kraylor space?\n"
+"\n"
+"Be warned: if you venture near our Endline territory, we will have no choice "
+"but to view your actions as hostile. Our indestructible fleet will make "
+"short work of you."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:260
+msgid ""
+"The Kraylor's Endline station is near our E.O.S. scope.\n"
+"\n"
+"Do not confront them; we're not trying to start a war."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:274
+msgid ""
+"Attention Human Naval vessel:\n"
+"\n"
+"We have noted your expansion toward Kraylor Endline territory. Know that "
+"even the slightest act of aggression will be met with a forceful purging of "
+"all human ships and stations from our sector of space.\n"
+"\n"
+"Do what maintenance you must while you are here, but know also that we "
+"consider your telescopic station to be a potential threat."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:297
+msgid ""
+"We're beginning our inspection of the E.O.S. scope facility.\n"
+"\n"
+"This shouldn't take long."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:312
+msgid ""
+"It looks like the databanks are still in good working order.\n"
+"\n"
+"We'll retrieve what we can."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:331
+msgid ""
+"Is something wrong Apollo? We're still in the facility.\n"
+"\n"
+"Please dock so we can come aboard."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:351
+msgid ""
+"Our inspection of the scope facility is complete. We retrieved much of the "
+"data recorded over the past few days, though proper analysis will require an "
+"expert.\n"
+"\n"
+"We should hurry back to Central Command with this so they can begin work."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:376
+msgid ""
+"It appears the damage was mechanical, but Kraylor ships in the area have "
+"been spotted in surveillance data you recovered from the E.O.S. scope. It's "
+"possible this was sabotage.\n"
+"\n"
+"Whatever the case, we need you to rendezvous with science station Galileo in "
+"sector C5. We've contracted this Arlenian station to interpret and analyze "
+"data retrieved from our various scope stations."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:400
+msgid ""
+"Distress signal incoming from Galileo station:\n"
+"\n"
+"Kraylor ships are in our vicinity, and we believe they intend to attack us! "
+"Please, you are the only battle-ready ship near our sector. Assist us!"
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:427
+msgid ""
+"We don't know why Kraylor ships were attacking us. We had just recieved word "
+"that your ship was on its way with data from the edge-of-space telescopic "
+"station when they began interrupting transmissions.\n"
+"\n"
+"Thank you for defending our station. Please dock with us, and we'll analyze "
+"the data from the E.O.S. scope."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:441
+msgid ""
+"Apollo, come in!\n"
+"\n"
+"Leave the E.O.S. data with Galileo for now, we've confirmed reports that "
+"Kraylor are brazen enough to attack our E.O.S. scope directly! All available "
+"ships should converge on E.O.S. territory in sector H8!\n"
+"\n"
+"That means you, Apollo!"
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:469
+msgid ""
+"Apollo, HM1 here.\n"
+"\n"
+"Central Command has no choice but to declare war. We're moving into Kraylor "
+"territory for our retaliatory strike. Attack the Kraylor Endline station!"
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:490
+msgid ""
+"Apollo, come in.\n"
+"\n"
+"We have no choice but to declare war. Move into Kraylor territory and "
+"retaliate on their defenseless Endline station!"
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:513
+#: scripts/scenario_06_edgeofspace.lua:580
+msgid ""
+"Apollo, come in.\n"
+"\n"
+"Our cease-fire with the Kraylor is at a bitter end, and aggression will only "
+"rise from here. It is imperative that our ships be equipped with all counter-"
+"measures necessary to keep them safe.\n"
+"\n"
+"Dock with the E.O.S. scope. We are re-fitting your ship in preparation for "
+"wartime."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:532
+#: scripts/scenario_06_edgeofspace.lua:598
+msgid ""
+"Broadcast on all Human Naval frequencies:\n"
+"\n"
+"Human scum, we warned you to stay out of Kraylor territory!"
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:552
+#: scripts/scenario_06_edgeofspace.lua:618
+msgid ""
+"Apollo, come in.\n"
+"\n"
+"Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining "
+"Kraylor ships threatening our E.O.S. territory!"
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:648
+msgid ""
+"Apollo, come in.\n"
+"\n"
+"Kraylor aggression will only rise from here. It is imperative that our ships "
+"be equipped with all counter-measures necessary to keep them safe.\n"
+"\n"
+"Dock with the E.O.S. scope. We are re-fitting your ship in preparation for "
+"wartime."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:688
+msgid ""
+"Science station Galileo has completed their analysis of the E.O.S. scope "
+"data.\n"
+"\n"
+"Edge-of-space sensors picked up sparse signals from the super-nebula in "
+"Kraylor space that indicate they have some kind of wormhole. Intelligence "
+"suggests they intend to use it to infiltrate human space and attack us where "
+"we are defenseless!\n"
+"\n"
+"When your ship is finished being outfitted for war, move up to the nebula, "
+"but be cautious. There may be traps."
+msgstr ""
+
+#: scripts/scenario_06_edgeofspace.lua:704
+msgid ""
+"Apollo, come in!\n"
+"\n"
+"Reports are coming in from core human space that a massive Kraylor strike "
+"force is attacking! Get through that wormhole and attack from within their "
+"ranks to hold them off. We'll send all our available ships to converge there."
+msgstr ""

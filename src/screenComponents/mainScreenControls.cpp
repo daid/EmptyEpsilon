@@ -11,7 +11,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     setPosition(-20, 70, ATopRight);
 
     // Set which buttons appear when opening the main screen controls.
-    open_button = new GuiToggleButton(this, "MAIN_SCREEN_CONTROLS_SHOW", "Main screen", [this](bool value)
+    open_button = new GuiToggleButton(this, "MAIN_SCREEN_CONTROLS_SHOW", tr("controlbutton", "Main screen"), [this](bool value)
     {
         for(GuiButton* button : buttons)
             button->setVisible(value);
@@ -28,7 +28,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     open_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Front, back, left, and right view buttons.
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_FRONT_BUTTON", "Front", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_FRONT_BUTTON", tr("mainscreen", "Front"), [this]()
     {
         if (my_spaceship)
         {
@@ -36,7 +36,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         }
         closePopup();
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_BACK_BUTTON", "Back", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_BACK_BUTTON", tr("mainscreen", "Back"), [this]()
     {
         if (my_spaceship)
         {
@@ -44,7 +44,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         }
         closePopup();
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LEFT_BUTTON", "Left", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LEFT_BUTTON", tr("mainscreen", "Left"), [this]()
     {
         if (my_spaceship)
         {
@@ -52,7 +52,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         }
         closePopup();
     }));
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_RIGHT_BUTTON", "Right", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_RIGHT_BUTTON", tr("mainscreen", "Right"), [this]()
     {
         if (my_spaceship)
         {
@@ -65,7 +65,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     // option in the main screen controls.
     if (my_player_info->crew_position[weaponsOfficer] || my_player_info->crew_position[tacticalOfficer] || my_player_info->crew_position[singlePilot])
     {
-        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TARGET_BUTTON", "Target lock", [this]()
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TARGET_BUTTON", tr("mainscreen", "Target lock"), [this]()
         {
             if (my_spaceship)
             {
@@ -77,7 +77,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     }
 
     // Tactical radar button.
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TACTICAL_BUTTON", "Tactical", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_TACTICAL_BUTTON", tr("mainscreen", "Tactical"), [this]()
     {
         if (my_spaceship)
         {
@@ -88,7 +88,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     tactical_button = buttons.back();
 
     // Long-range radar button.
-    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", "Long Range", [this]()
+    buttons.push_back(new GuiButton(this, "MAIN_SCREEN_LONG_RANGE_BUTTON", tr("mainscreen", "Long Range"), [this]()
     {
         if (my_spaceship)
         {
@@ -102,7 +102,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     // on the main screen.
     if (my_player_info->crew_position[relayOfficer] || my_player_info->crew_position[operationsOfficer] || my_player_info->crew_position[singlePilot])
     {
-        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", "Show comms", [this]()
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_SHOW_COMMS_BUTTON", tr("mainscreen", "Show comms"), [this]()
         {
             if (my_spaceship)
             {
@@ -113,7 +113,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         }));
         show_comms_button = buttons.back();
 
-        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_HIDE_COMMS_BUTTON", "Hide comms", [this]()
+        buttons.push_back(new GuiButton(this, "MAIN_SCREEN_HIDE_COMMS_BUTTON", tr("mainscreen", "Hide comms"), [this]()
         {
             if (my_spaceship)
             {

@@ -73,12 +73,15 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         }
     }
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    front_shield_display = new GuiKeyValueDisplay(this, "FRONT_SHIELD_DISPLAY", 0.45, tr("shields","Front"), "");
-    front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    rear_shield_display = new GuiKeyValueDisplay(this, "REAR_SHIELD_DISPLAY", 0.45, tr("shields", "Rear"), "");
-    rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
+    GuiAutoLayout* stats = new GuiAutoLayout(this, "WEAPONS_STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
+    stats->setPosition(20, 100, ATopLeft)->setSize(240, 120);
+
+    energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setSize(240, 40);
+    front_shield_display = new GuiKeyValueDisplay(stats, "FRONT_SHIELD_DISPLAY", 0.45, tr("shields","Front"), "");
+    front_shield_display->setIcon("gui/icons/shields-fore")->setTextSize(20)->setSize(240, 40);
+    rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45, tr("shields", "Rear"), "");
+    rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setSize(240, 40);
 
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
@@ -97,7 +100,19 @@ void WeaponsScreen::onDraw(sf::RenderTarget& window)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
+        if (my_spaceship->hasSystem(SYS_FrontShield))
+        {
+            front_shield_display->show();
+        } else {
+            front_shield_display->hide();
+        }
         rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
+        if (my_spaceship->hasSystem(SYS_RearShield))
+        {
+            rear_shield_display->show();
+        } else {
+            rear_shield_display->hide();
+        }
         targets.set(my_spaceship->getTarget());
 
         missile_aim->setVisible(tube_controls->getManualAim());

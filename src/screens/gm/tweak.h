@@ -7,6 +7,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/warpJammer.h"
+#include "spaceObjects/asteroid.h"
 
 class SpaceShip;
 class GuiKeyValueDisplay;
@@ -22,7 +23,8 @@ enum ETweakType
     TW_Jammer,  // WarpJammer
     TW_Ship,    // Ships
     TW_Station, // TODO: Space stations
-    TW_Player   // Player ships
+    TW_Player,  // Player ships
+    TW_Asteroid // Asteroid
 };
 
 class GuiTweakPage : public GuiElement
@@ -59,6 +61,8 @@ private:
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;
     GuiSlider* jump_charge_slider;
+    GuiSlider* jump_min_distance_slider;
+    GuiSlider* jump_max_distance_slider;
     GuiToggleButton* can_be_destroyed_toggle;
 public:
     GuiTweakShip(GuiContainer* owner);
@@ -76,6 +80,20 @@ private:
     GuiSlider* jammer_range_slider;
 public:
     GuiJammerTweak(GuiContainer* owner);
+
+    virtual void onDraw(sf::RenderTarget& window) override;
+
+    virtual void open(P<SpaceObject> target) override;
+};
+
+class GuiAsteroidTweak : public GuiTweakPage
+{
+private:
+    P<Asteroid> target;
+
+    GuiSlider* asteroid_size_slider;
+public:
+    GuiAsteroidTweak(GuiContainer* owner);
 
     virtual void onDraw(sf::RenderTarget& window) override;
 
@@ -172,6 +190,21 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
 };
 
+class GuiShipTweakSystemPowerFactors : public GuiTweakPage
+{
+private:
+    P<SpaceShip> target;
+    GuiLabel* system_current_power_factor[SYS_COUNT];
+    GuiTextEntry* system_power_factor[SYS_COUNT];
+
+    static string powerFactorToText(float);
+public:
+    explicit GuiShipTweakSystemPowerFactors(GuiContainer* owner);
+
+    void open(P<SpaceObject> target) override;
+    void onDraw(sf::RenderTarget& window) override;
+};
+
 class GuiShipTweakPlayer : public GuiTweakPage
 {
 private:
@@ -201,6 +234,8 @@ private:
     GuiSlider* coolant_slider;
     GuiSlider* short_range_radar_slider;
     GuiSlider* long_range_radar_slider;
+    GuiSlider* max_scan_probes_slider;
+    GuiSlider* scan_probes_slider;
     GuiToggleButton* can_scan;
     GuiToggleButton* can_hack;
     GuiToggleButton* can_dock;

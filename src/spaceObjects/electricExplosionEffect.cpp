@@ -7,12 +7,14 @@
 REGISTER_SCRIPT_SUBCLASS(ElectricExplosionEffect, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setSize);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ElectricExplosionEffect, setOnRadar);
 }
 
 REGISTER_MULTIPLAYER_CLASS(ElectricExplosionEffect, "ElectricExplosionEffect");
 ElectricExplosionEffect::ElectricExplosionEffect()
 : SpaceObject(1000.0, "ElectricExplosionEffect")
 {
+    has_weight = false;
     on_radar = false;
     size = 1.0;
 
@@ -97,7 +99,7 @@ void ElectricExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f
 void ElectricExplosionEffect::update(float delta)
 {
     if (delta > 0 && lifetime == maxLifetime)
-        soundManager->playSound("sfx/emp_explosion.wav", getPosition(), size, 1.0);
+        soundManager->playSound("sfx/emp_explosion.wav", getPosition(), size * 2, 60.0);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();

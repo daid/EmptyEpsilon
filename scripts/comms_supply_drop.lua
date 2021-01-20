@@ -1,14 +1,21 @@
--- Name: Supply ship comms
--- Description: Stripped comms that do not allow any interaction. Used for transport ships.
+--- Supply ship comms.
+--
+-- Stripped comms that do not allow any interaction.
+-- Used for transport ships spawned in `util_random_transports.lua`.
+--
+-- @script comms_supply_drop
 
-function mainMenu()
-	if player:isFriendly(comms_target) then
-		setCommsMessage("Transporting goods.");
-		return true
-	end
-	if player:isEnemy(comms_target) then
-		return false
-	end
-	setCommsMessage("We have nothing for you.\nGood day.");
+--- Main menu.
+function commsShipMainMenu(comms_source, comms_target)
+    if comms_source:isFriendly(comms_target) then
+        setCommsMessage("Transporting goods.")
+        return true
+    end
+    if comms_source:isEnemy(comms_target) then
+        return false
+    end
+    setCommsMessage("We have nothing for you.\nGood day.")
 end
-mainMenu()
+
+-- `comms_source` and `comms_target` are global in comms script
+commsShipMainMenu(comms_source, comms_target)

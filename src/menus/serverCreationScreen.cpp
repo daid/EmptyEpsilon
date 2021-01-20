@@ -197,6 +197,8 @@ ServerCreationScreen::ServerCreationScreen()
     // Fetch and sort all Lua files starting with "scenario_".
     std::vector<string> scenario_filenames = findResources("scenario_*.lua");
     std::sort(scenario_filenames.begin(), scenario_filenames.end());
+    // remove duplicates
+    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
 
     // We select the same mission as we had previously selected
     // unless that one doesnt exist in which case we select the first by default
@@ -213,6 +215,7 @@ ServerCreationScreen::ServerCreationScreen()
     }
 
     scenario_list->setSelectionIndex(mission_selected);
+    scenario_list->scrollTo(mission_selected);
     selectScenario(scenario_list->getSelectionValue());
 
     gameGlobalInfo->reset();
@@ -268,6 +271,8 @@ void ServerCreationScreen::startScenario()
     // Set these settings to use as future defaults.
     PreferencesManager::set("server_config_warp_jump_drive_setting", string(int(gameGlobalInfo->player_warp_jump_drive_setting)));
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
+    PreferencesManager::set("server_config_hacking_difficulty", string(int(gameGlobalInfo->hacking_difficulty)));
+    PreferencesManager::set("server_config_hacking_games", string(int(gameGlobalInfo->hacking_games)));
     PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));

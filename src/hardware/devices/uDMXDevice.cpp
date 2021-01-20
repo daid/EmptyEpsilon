@@ -1,48 +1,48 @@
 #include "uDMXDevice.h"
 #include "logging.h"
 
-#ifdef __WIN32__
+#ifdef _WIN32
     #include <windows.h>
 
     HMODULE UDMX_dll;
 
     extern "C" {
-    bool __stdcall (*UDMX_Configure)();
-    bool __stdcall (*UDMX_Connected)();
-    bool __stdcall (*UDMX_ChannelSet)(long Channel, long Value);
-    bool __stdcall (*UDMX_ChannelsSet)(long ChannelCnt, long Channel, long* Value);
+    bool (__stdcall *UDMX_Configure)();
+    bool (__stdcall *UDMX_Connected)();
+    bool (__stdcall *UDMX_ChannelSet)(long Channel, long Value);
+    bool (__stdcall *UDMX_ChannelsSet)(long ChannelCnt, long Channel, long* Value);
     }
 #endif
 
 //Configure the device.
 bool UDMXDevice::configure(std::unordered_map<string, string> settings)
 {
-#ifdef __WIN32__
+#ifdef _WIN32
     UDMX_dll = LoadLibrary("uDMX.dll");
     if (UDMX_dll == NULL)
     {
         LOG(ERROR) << "Failed to load uDMX.dll for uDMX hardware";
         return false;
     }
-    UDMX_Configure = (bool __stdcall (*)())GetProcAddress(UDMX_dll, "Configure");
+    UDMX_Configure = (bool (__stdcall *)())GetProcAddress(UDMX_dll, "Configure");
     if (UDMX_Configure == NULL)
     {
         LOG(ERROR) << "Failed to find Configure function in uDMX.dll";
         return false;
     }
-    UDMX_Connected = (bool __stdcall (*)())GetProcAddress(UDMX_dll, "Connected");
+    UDMX_Connected = (bool (__stdcall *)())GetProcAddress(UDMX_dll, "Connected");
     if (UDMX_Connected == NULL)
     {
         LOG(ERROR) << "Failed to find Connected function in uDMX.dll";
         return false;
     }
-    UDMX_ChannelSet = (bool __stdcall (*)(long Channel, long Value))GetProcAddress(UDMX_dll, "ChannelSet");
+    UDMX_ChannelSet = (bool (__stdcall *)(long Channel, long Value))GetProcAddress(UDMX_dll, "ChannelSet");
     if (UDMX_ChannelSet == NULL)
     {
         LOG(ERROR) << "Failed to find ChannelSet function in uDMX.dll";
         return false;
     }
-    UDMX_ChannelsSet = (bool __stdcall (*)(long ChannelCnt, long Channel, long* Value))GetProcAddress(UDMX_dll, "ChannelsSet");
+    UDMX_ChannelsSet = (bool (__stdcall *)(long ChannelCnt, long Channel, long* Value))GetProcAddress(UDMX_dll, "ChannelsSet");
     if (UDMX_ChannelsSet == NULL)
     {
         LOG(ERROR) << "Failed to find ChannelsSet function in uDMX.dll";
@@ -66,7 +66,7 @@ bool UDMXDevice::configure(std::unordered_map<string, string> settings)
 //Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
 void UDMXDevice::setChannelData(int channel, float value)
 {
-#ifdef __WIN32__
+#ifdef _WIN32
     UDMX_ChannelSet(channel, value * 255);
 #endif
 }

@@ -1,6 +1,9 @@
 #include "playerInfo.h"
+#include "gameGlobalInfo.h"
 #include "operationsScreen.h"
 #include "preferenceManager.h"
+
+#include "gui/gui2_keyvaluedisplay.h"
 
 #include "screens/crew6/scienceScreen.h"
 
@@ -77,8 +80,22 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     });
     delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
 
+    // Reputation display.
+    info_reputation = new GuiKeyValueDisplay(this, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
+    info_reputation->setPosition(20, 20, ATopLeft)->setSize(175, 30);
+
+    // Scenario clock display.
+    info_clock = new GuiKeyValueDisplay(this, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
+    info_clock->setPosition(20, 50, ATopLeft)->setSize(175, 30);
+
     mode = TargetSelection;
 
     new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+}
+
+void OperationScreen::onDraw(sf::RenderTarget& window)
+{
+    info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+    info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
 }

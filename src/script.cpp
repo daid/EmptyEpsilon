@@ -4,7 +4,8 @@
 
 /// Object which can be used to create and run another script.
 /// Other scripts have their own lifetime, update and init functions.
-/// Scripts can destroy themselves, or be destroyed by the main script.
+/// Scripts can destroy themselves (destroyScript()), or be destroyed by the main script.
+/// Example: local script = Script():run("script.lua"); script:destroy();
 REGISTER_SCRIPT_CLASS(Script)
 {
     /// Run a script with a certain filename
@@ -26,6 +27,7 @@ Script::Script()
 
 static int require(lua_State* L)
 {
+    int old_top = lua_gettop(L);
     string filename = luaL_checkstring(L, 1);
 
     P<ResourceStream> stream = getResourceStream(filename);
@@ -52,7 +54,7 @@ static int require(lua_State* L)
     }
 
     //Call the actual code.
-    if (lua_pcall(L, 0, 0, 0))
+    if (lua_pcall(L, 0, LUA_MULTRET, 0))
     {
         string error_string = luaL_checkstring(L, -1);
         LOG(ERROR) << "LUA: require: " << error_string;
@@ -60,7 +62,7 @@ static int require(lua_State* L)
         return lua_error(L);
     }
 
-    return 0;
+    return lua_gettop(L) - old_top;
 }
 /// require(filename)
 /// Run the script with the given filename in the same context as the current running script.

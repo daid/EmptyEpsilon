@@ -255,7 +255,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
         }
 
-        if (probe && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
+        if (probe && my_spaceship && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
         {
             link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
             link_to_science_button->enable();

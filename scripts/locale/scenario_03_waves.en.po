@@ -1,0 +1,30 @@
+# Scenario name
+msgid "Waves"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Waves of increasingly difficult enemies attack friendly stations. There is "
+"no victory. How many waves can you destroy?Spawn the player ships you want. "
+"The strength of enemy ships is independent of the number and type of player "
+"ships."
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:43
+msgid ""
+"At least one friendly base must survive.\n"
+"\n"
+"Destroy all enemy ships. After a short delay, the next wave will appear. And "
+"so on ...\n"
+"\n"
+"How many waves can you destroy?"
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:217
+#, lua-format
+msgid "Wave %d"
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:250
+msgid "Wave cleared!"
+msgstr ""

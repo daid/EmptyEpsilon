@@ -21,6 +21,7 @@ REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
 BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
 {
+    has_weight = false;
     setRadarSignatureInfo(0.0, 0.3, 0.0);
     setCollisionRadius(1.0);
     lifetime = 1.0;
@@ -29,6 +30,7 @@ BeamEffect::BeamEffect()
     beam_texture = "beam_orange.png";
     beam_fire_sound = "sfx/laser_fire.wav";
     beam_fire_sound_power = 1;
+    beam_sound_played = false;
     fire_ring = true;
     registerMemberReplication(&lifetime, 0.1);
     registerMemberReplication(&sourceId);
@@ -121,11 +123,12 @@ void BeamEffect::update(float delta)
     if (target)
         targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
 
-    if (source && delta > 0 && lifetime == 1.0)
+    if (source && delta > 0 && !beam_sound_played)
     {
         float volume = 50.0f + (beam_fire_sound_power * 75.0f);
         float pitch = (1.0f / beam_fire_sound_power) + random(-0.1f, 0.1f);
-        soundManager->playSound(beam_fire_sound, source->getPosition(), 200.0, 1.0, pitch, volume);
+        soundManager->playSound(beam_fire_sound, source->getPosition(), 400.0, 60.0, pitch, volume);
+        beam_sound_played = true;
     }
 
     lifetime -= delta;

@@ -70,7 +70,8 @@ void PathPlannerManager::update(float delta)
     }
 }
 
-PathPlanner::PathPlanner()
+PathPlanner::PathPlanner(float my_size)
+: my_size(my_size)
 {
     manager = PathPlannerManager::getInstance();
 }
@@ -173,7 +174,7 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
             if (f > 0 && f < startEndLength - i->size)
             {
                 sf::Vector2f q = start + startEndDiff / startEndLength * f;
-                if ((q - position) < i->size)
+                if ((q - position) < i->size + my_size)
                 {
                     if (f < firstAvoidF)
                     {
@@ -237,7 +238,7 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
                     if (f > 0 && f < startEndLength - i->size)
                     {
                         sf::Vector2f q = start + startEndDiff / startEndLength * f;
-                        if ((q - position) < i->size)
+                        if ((q - position) < i->size + my_size)
                         {
                             if (f < firstAvoidF)
                             {
@@ -267,9 +268,9 @@ bool PathPlanner::checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2
         sf::Vector2f position = avoidObject.source->getPosition();
         if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
             firstAvoidQ.x += 0.1f;
-        new_point = position + sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+        new_point = position + sf::normalize(firstAvoidQ - position) * (avoidObject.size * 1.1f + my_size);
         if (alt_point)
-            *alt_point = position - sf::normalize(firstAvoidQ - position) * avoidObject.size * 1.1f;
+            *alt_point = position - sf::normalize(firstAvoidQ - position) * (avoidObject.size * 1.1f + my_size);
         return true;
     }
     return false;

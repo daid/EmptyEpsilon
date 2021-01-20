@@ -59,6 +59,8 @@ private:
 
     void addSystemEffect(string key, string value);
     void selectSystem(ESystem system);
+
+    string toNearbyIntString(float value);
 public:
     EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position=engineering);
 

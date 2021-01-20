@@ -78,6 +78,21 @@ protected:
      */
     float calculateFiringSolution(P<SpaceObject> target, int tube_index);
     P<SpaceObject> findBestMissileRestockTarget(sf::Vector2f position, float radius);
+
+    static float getMissileWeaponStrength(EMissileWeapons type)
+    {
+        switch(type)
+        {
+        case MW_Nuke:
+            return 250;
+        case MW_EMP:
+            return 150;
+        case MW_HVLI:
+            return 20;
+        default:
+            return 35;
+        }
+    }
 };
 
 #endif//AI_H

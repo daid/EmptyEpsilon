@@ -20,10 +20,10 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
     (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
-    (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Game Paused", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiLabel(pause_overlay, "PAUSE_LABEL", tr("Game Paused"), 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
     if (game_server)
     {
-        (new GuiButton(pause_overlay, "PAUSE_RESUME", "Unpause", []() {
+        (new GuiButton(pause_overlay, "PAUSE_RESUME", tr("Unpause"), []() {
             engine->setGameSpeed(1.0);
         }))->setPosition(0, 75, ACenter)->setSize(500, 50);
     }
@@ -123,10 +123,10 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
             switch(fvf_state)
             {
             case FVF_Enemy:
-                victory_label->setText("Defeat!");
+                victory_label->setText(tr("Defeat!"));
                 break;
             case FVF_Friendly:
-                victory_label->setText("Victory!");
+                victory_label->setText(tr("Victory!"));
                 break;
             case FVF_Neutral:
                 victory_label->setText(tr("{faction} wins").format({{"faction", factionInfo[gameGlobalInfo->getVictoryFactionId()]->getLocaleName()}}));

@@ -13,6 +13,10 @@
 import re
 import os
 import sys
+# Use io.open instead of open to ignore text encoding errors in both
+# Python 2 and 3.
+import io
+
 try:
 	from xml.etree import cElementTree as ElementTree
 except:
@@ -105,7 +109,7 @@ class DocumentationGenerator(object):
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
         if ext == '.c' or ext == '.cpp' or ext == '.h':
-            for line in open(filename, "r"):
+            for line in io.open(filename, "r", errors="ignore"):
                 m = re.match('^# *include *[<"](.*)[>"]$', line)
                 if m is not None:
                     self.addFile(m.group(1))
@@ -117,7 +121,7 @@ class DocumentationGenerator(object):
                 continue
             description = ""
             current_class = None
-            with open(filename, "r") as f:
+            with io.open(filename, "r", errors="ignore") as f:
                 for line in f:
                     if line.startswith('#'):
                         continue
@@ -137,7 +141,7 @@ class DocumentationGenerator(object):
             description = ""
             current_class = None
             #print("Processing: %s" % (filename))
-            for line in open(filename, "r"):
+            for line in io.open(filename, "r", errors="ignore"):
                 if line.startswith('#'):
                     continue
                 res = re.search('///(.*)', line)
@@ -233,8 +237,9 @@ class DocumentationGenerator(object):
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
         stream.write('<p>Some of the types in the parameters:</p>')
         stream.write('<ul>\n')
+        stream.write('<li>ScriptSimpleCallback / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
         stream.write('<li>EAlertLevel: "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
-        stream.write('<li>ECrewPosition: "Helms", "Weapons", "Engineering", "Science", "Relay" (<code>playerInfo.cpp</code>)</li>\n')
+        stream.write('<li>ECrewPosition: "Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", "Database", "AltRelay", "CommsOnly", "ShipLog", (<code>playerInfo.cpp</code>)</li>\n')
         stream.write('<li>EMissileSizes: "small", "medium", "large"</li>\n')
         stream.write('<li>EMissileWeapons: "Homing", "Nuke", "Mine", "EMP", "HVLI" (<code>spaceship.cpp</code>)</li>\n')
         stream.write('<li>EScannedState: "notscanned", "friendorfoeidentified", "simplescan", "fullscan" (<code>spaceObject.h</code>)</li>\n')

@@ -1,0 +1,103 @@
+---
+name: CI/CD
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update apt index
+      run: sudo apt-get update -qq
+    - name: Install SFML
+      run: sudo apt-get install libsfml-dev
+    - name: Checkout EmptyEpsilon
+      uses: actions/checkout@v2
+    - name: Build and test
+      run: docker/build.sh
+  windows-cross:
+    name: Windows (Cross-Compile)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dependencies
+        run: |
+          sudo apt update -qq
+          sudo apt install build-essential cmake python3-minimal mingw-w64 ninja-build p7zip-full
+      - name: SeriousProton Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: daid/SeriousProton
+          path: SeriousProton  
+      - name: EmptyEpsilon Checkout
+        uses: actions/checkout@v2
+        with:
+          path: EmptyEpsilon
+      - name: Build
+        run: |
+          mkdir -p _build_win32
+          cd _build_win32
+          cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton
+          ninja package
+  macos:
+    # https://github.com/actions/virtual-environments/issues/841
+    # Mac builds are flaky, disable for now.
+    if: ${{ false }}
+    name: MacOS
+    runs-on: macos-11.0
+    steps:
+      - name: Dependencies
+        run: brew install cmake sfml ninja
+      - name: SeriousProton Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: daid/SeriousProton
+          path: SeriousProton  
+      - name: EmptyEpsilon Checkout
+        uses: actions/checkout@v2
+        with:
+          path: EmptyEpsilon
+      - name: Build
+        run: |
+          mkdir -p _build_macos
+          cd _build_macos
+          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton
+          ninja
+          ninja install
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_type: [Debug, RelWithDebInfo, Release]
+    steps:
+      - name: Dependencies
+        run: |
+          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip”
+          $sfml_zip = "${{github.workspace}}/sfml-dev.zip"
+          (new-object System.Net.WebClient).DownloadFile($sfml_link, $sfml_zip)
+          Expand-Archive -LiteralPath $sfml_zip -DestinationPath "${{github.workspace}}/externals"
+      - name: EmptyEpsilon Checkout
+        uses: actions/checkout@v2
+        with:
+          path: EmptyEpsilon
+      - name: SeriousProton Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: daid/SeriousProton
+          path: SeriousProton
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+      - name: Configure CMake
+        working-directory: ${{github.workspace}}/build
+        run: >
+          cmake ../EmptyEpsilon
+          -G "Visual Studio 16 2019" -A Win32
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DSFML_ROOT="${{github.workspace}}/externals/SFML-2.5.1"
+          -DSERIOUS_PROTON_DIR=../SeriousProton
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . --config ${{ matrix.build_type }}      

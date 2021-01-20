@@ -5,6 +5,7 @@
 AlertLevelOverlay::AlertLevelOverlay(GuiContainer* owner)
 : GuiElement(owner, "")
 {
+    setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
@@ -36,11 +37,11 @@ void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
     sf::Sprite alert;
     textureManager.setTexture(alert, "alert_overlay.png");
     alert.setColor(color);
-    alert.setPosition(window.getView().getSize() / 2.0f);
+    alert.setPosition(getCenterPoint());
     window.draw(alert);
     sf::Text alert_text(text, *main_font, text_size);
     alert_text.setColor(color);
     alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
-    alert_text.setPosition(window.getView().getSize() / 2.0f - sf::Vector2f(0, 300));
+    alert_text.setPosition(getCenterPoint() - sf::Vector2f(0, 300));
     window.draw(alert_text);
 }

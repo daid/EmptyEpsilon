@@ -33,9 +33,10 @@ class PathPlanner : public sf::NonCopyable
 {
 private:
     unsigned int insert_idx, remove_idx, remove_idx2;
+    float my_size = 0.0f;
     P<PathPlannerManager> manager;
 public:
-    PathPlanner();
+    PathPlanner(float my_size);
 
     std::vector<sf::Vector2f> route;
 

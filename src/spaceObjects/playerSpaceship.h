@@ -50,8 +50,6 @@ public:
     constexpr static float max_scanning_delay = 6.0;
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
-    // Subsystem effectiveness base rates
-    static float system_power_user_factor[];
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
@@ -328,7 +326,7 @@ public:
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 
     // Ship control code/password setter
-    void setControlCode(string code) { control_code = code; }
+    void setControlCode(string code) { control_code = code.upper(); }
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
@@ -352,9 +350,4 @@ static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::Cust
 
 string alertLevelToString(EAlertLevel level);
 string alertLevelToLocaleString(EAlertLevel level);
-
-#ifdef _MSC_VER
-#include "playerSpaceship.hpp"
-#endif /* _MSC_VER */
-
 #endif//PLAYER_SPACESHIP_H

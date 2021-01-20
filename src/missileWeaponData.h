@@ -47,10 +47,4 @@ public:
 
     static const MissileWeaponData& getDataFor(EMissileWeapons type);
 };
-
-#ifdef _MSC_VER
-// MFC: GCC does proper external template instantiation, VC++ doesn't.
-#include "missileWeaponData.hpp"
-#endif
-
 #endif//MISSILE_WEAPON_DATA_H

@@ -32,13 +32,13 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
     hacking_status_label = new GuiLabel(minigame_box, "", "", 25);
     hacking_status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0);
-    reset_button = new GuiButton(minigame_box, "", "Reset", [this]()
+    reset_button = new GuiButton(minigame_box, "", tr("hacking", "Reset"), [this]()
     {
         game->reset();
     });
     reset_button->setSize(200, 50);
     reset_button->setPosition(25, -25, ABottomLeft);
-    close_button = new GuiButton(minigame_box, "", "Close", [this]()
+    close_button = new GuiButton(minigame_box, "", tr("hacking", "Close"), [this]()
     {
         hide();
     });
@@ -49,16 +49,16 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     progress_bar->setPosition(-25, 75, ATopRight);
     progress_bar->setSize(50, game->getBoardSize().y);
 
-
     target_selection_box = new GuiPanel(this, id + "_BOX");
     target_selection_box->setSize(300, 545)->setPosition(board_size.x / 2 + 200, 0, ACenter);
 
-    GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", "Target system:", 25);
+    GuiLabel* target_selection_label = new GuiLabel(target_selection_box, "", tr("hacking", "Target system:"), 25);
     target_selection_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 15);
 
     target_list = new GuiListbox(target_selection_box, "", [this](int index, string value)
     {
         target_system = value;
+        locale_target_system = target_list->getEntryName(index);
         getNewGame();
     });
     target_list->setPosition(25, 75, ATopLeft);
@@ -73,18 +73,18 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     show();
     while(target_list->entryCount() > 0)
         target_list->removeEntry(0);
-    std::vector<std::pair<string, float> > targets = target->getHackingTargets();
-    for(std::pair<string, float>& target : targets)
+    std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
+    for(std::pair<ESystem, float>& target : targets)
     {
-        target_list->addEntry(target.first, target.first);
+        target_list->addEntry(getLocaleSystemName(target.first), getSystemName(target.first));
     }
     if (targets.size() == 1)
     {
         target_selection_box->hide();
-        target_system = targets[0].first;
+        target_system = getSystemName(targets[0].first);
+        locale_target_system = getLocaleSystemName(targets[0].first);
         getNewGame();
-    } else
-    {
+    } else {
         target_selection_box->show();
         game->disable();
     }
@@ -112,16 +112,16 @@ void GuiHackingDialog::onDraw(sf::RenderTarget& window)
         }
     } else {
         progress_bar->setValue(game->getProgress());
-        status_label->setText("Hacking in Progress: " + string(int(100 * game->getProgress())) + "%");
+        status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}));
     }
     if (target_system != "")
     {
-        std::vector<std::pair<string, float> > targets = target->getHackingTargets();
-        for(std::pair<string, float>& target : targets)
+        std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
+        for(std::pair<ESystem, float>& target : targets)
         {
-            if (target.first == target_system)
+            if (getSystemName(target.first) == target_system)
             {
-                hacking_status_label->setText("Hacked " + target_system + ": " + string(int(target.second * 100.0f + 0.5f)) + "%");
+                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", locale_target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
                 break;
             }
         }
@@ -138,7 +138,7 @@ void GuiHackingDialog::onMiniGameComplete(bool success)
     reset_time = engine->getElapsedTime() + auto_reset_time;
     game->disable();
     last_game_success = success;
-    status_label->setText(success ? "Hacking SUCCESS!" : "Hacking FAILURE!");
+    status_label->setText(success ? tr("Hacking SUCCESS!") : tr("Hacking FAILURE!"));
 }
 
 void GuiHackingDialog::getNewGame() {
@@ -167,6 +167,4 @@ void GuiHackingDialog::getNewGame() {
     progress_bar->setPosition(-25, (minigame_box->getSize().y - board_size.y)/2, ATopRight);
 
     target_selection_box->setPosition(minigame_box->getSize().x / 2 + 150, 0, ACenter);
-
-
 }
