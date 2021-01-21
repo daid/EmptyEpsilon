@@ -126,6 +126,7 @@ set(SOURCES
 	src/menus/optionsMenu.cpp
 	src/menus/shipSelectionScreen.cpp
 	src/menus/autoConnectScreen.cpp
+	src/menus/hotkeyMenu.cpp
 	src/screens/cinematicViewScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
@@ -200,6 +201,7 @@ set(SOURCES
 	src/screenComponents/mineSweeper.cpp
 	src/screenComponents/impulseSound.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyBinder.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp
 	src/gui/mouseRenderer.cpp

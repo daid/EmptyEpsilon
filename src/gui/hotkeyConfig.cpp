@@ -7,6 +7,12 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
+    newCategory("BASIC", "basic"); // these Items should all have predefined values
+    newKey("PAUSE", std::make_tuple("Pause game", "P"));
+    newKey("HELP", std::make_tuple("Show in-game help", "F1"));
+    newKey("ESCAPE", std::make_tuple("Return to ship options menu", "Escape"));
+    newKey("HOME", std::make_tuple("Return to ship options menu", "Home"));  // Remove this item as it does the same as Escape?
+
     newCategory("GENERAL", "General");
     newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", "Tab"));
     newKey("PREV_STATION", std::make_tuple("Switch to previous crew station", ""));
@@ -231,6 +237,19 @@ static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
     {"Pause", sf::Keyboard::Pause},
 };
 
+string HotkeyConfig::getStringForKey(sf::Keyboard::Key key)
+{
+    for(auto key_name : sfml_key_names)
+    {
+        if (key_name.second == key)
+        {
+            return key_name.first;
+        }
+    }
+
+    return "";
+}
+
 void HotkeyConfig::load()
 {
     for(HotkeyConfigCategory& cat : categories)
@@ -239,6 +258,7 @@ void HotkeyConfig::load()
         {
             string key_config = PreferencesManager::get(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
             item.load(key_config);
+            item.value = std::make_tuple(std::get<0>(item.value), key_config);
         }
     }
 }
@@ -325,6 +345,24 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
     return ret;
 }
 
+std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(string hotkey_category)
+{
+    std::vector<std::pair<string, string>> ret;
+
+    for(HotkeyConfigCategory& cat : categories)
+    {
+        if (cat.name == hotkey_category)
+        {
+            for(HotkeyConfigItem& item : cat.hotkeys)
+            {
+                ret.push_back({std::get<0>(item.value), std::get<1>(item.value)});
+            }
+        }
+    }
+
+    return ret;
+}
+
 sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(string hotkey_category, string hotkey_name)
 {
     for(HotkeyConfigCategory& cat : categories)
@@ -380,7 +418,7 @@ void HotkeyConfigItem::load(string key_config)
         {
             for(auto key_name : sfml_key_names)
             {
-                if (key_name.first == config)
+                if (key_name.first.lower() == config.lower())
                 {
                     hotkey.code = key_name.second;
                     break;
@@ -388,4 +426,35 @@ void HotkeyConfigItem::load(string key_config)
             }
         }
     }
+}
+
+bool HotkeyConfig::setHotkey(std::string work_cat, std::pair<string,string> key, string new_value)
+{
+    // test if new_value is part of the sfml_list
+    for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names)
+    {
+        if ((sfml_key.first.lower() == new_value.lower()) || new_value == "")
+        {
+            for (HotkeyConfigCategory &cat : categories)
+            {
+                if (cat.name == work_cat)
+                {
+                    for (HotkeyConfigItem &item : cat.hotkeys)
+                    {
+                        if (key.first == std::get<0>(item.value))
+                        {
+                            item.load(new_value);
+                            item.value = std::make_tuple(std::get<0>(item.value), new_value);
+
+                            PreferencesManager::set(std::string("HOTKEY.") + cat.key + "." + item.key, std::get<1>(item.value));
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
 }

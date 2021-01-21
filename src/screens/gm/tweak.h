@@ -190,6 +190,21 @@ public:
     virtual void onDraw(sf::RenderTarget& window) override;
 };
 
+class GuiShipTweakSystemPowerFactors : public GuiTweakPage
+{
+private:
+    P<SpaceShip> target;
+    GuiLabel* system_current_power_factor[SYS_COUNT];
+    GuiTextEntry* system_power_factor[SYS_COUNT];
+
+    static string powerFactorToText(float);
+public:
+    explicit GuiShipTweakSystemPowerFactors(GuiContainer* owner);
+
+    void open(P<SpaceObject> target) override;
+    void onDraw(sf::RenderTarget& window) override;
+};
+
 class GuiShipTweakPlayer : public GuiTweakPage
 {
 private:
