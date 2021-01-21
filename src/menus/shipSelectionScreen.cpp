@@ -495,7 +495,7 @@ void ShipSelectionScreen::updateCrewTypeOptions()
             crew_position_button[n]->show();
         break;
     case 2:
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
         crew_position_button[cockpitView]->show();
 #endif
         crew_position_button[singlePilot]->show();

@@ -14,7 +14,7 @@
 #include "screens/crew4/operationsScreen.h"
 
 #include "screens/crew1/singlePilotScreen.h"
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
 #include "screens/crew1/cockpitView.h"
 #endif
 
@@ -182,7 +182,7 @@ void PlayerInfo::spawnUI()
         // Crew 1
         if (crew_position[singlePilot])
             screen->addStationTab(new SinglePilotScreen(container), singlePilot, getCrewPositionName(singlePilot), getCrewPositionIcon(singlePilot));
-#ifndef __ANDROID__
+#if FEATURE_3D_RENDERING
         if (crew_position[cockpitView])
             screen->addStationTab(new CockpitView(container), cockpitView, getCrewPositionName(cockpitView), getCrewPositionIcon(cockpitView));
 #endif
