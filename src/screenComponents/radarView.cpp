@@ -246,9 +246,10 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
                 // ... or is a scan probe from our ship ...
                 || (P<ScanProbe>(obj) && P<ScanProbe>(obj)->owner_id == my_spaceship->getMultiplayerId()))
             {
-                float r = 5000.0 * scale;
+                float r = 5000.0f * scale;
 
-                // Unmask short-range radar around it
+                // Unmask the short-range radar radius around friendly PlayerShips.
+                // (We have to specify our own ship because we can belong to a faction hostile to us!)
                 if (P<PlayerSpaceship>(obj) && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
                 {
                     r = P<PlayerSpaceship>(obj)->getShortRangeRadarRange() * scale;
@@ -596,39 +597,58 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
     switch(fog_style)
     {
     case NoFogOfWar:
-        foreach(SpaceObject, obj, space_object_list)
+        for(P<SpaceObject> obj : space_object_list)
         {
             visible_objects.insert(*obj);
         }
+
         break;
     case FriendlysShortRangeFogOfWar:
         if (!my_spaceship)
-            return;
-        foreach(SpaceObject, obj, space_object_list)
         {
-            if (!obj->canHideInNebula())
-                visible_objects.insert(*obj);
+            return;
+        }
 
-            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj)) || !obj->isFriendly(my_spaceship))
+        for(P<SpaceObject> obj : space_object_list)
+        {
+            // If the object can't hide inside a nebula, show it.
+            if (!obj->canHideInNebula())
             {
-                P<ScanProbe> sp = obj;
-                if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
-                {
-                    continue;
-                }
+                visible_objects.insert(*obj);
             }
 
-            sf::Vector2f position = obj->getPosition();
-            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(5000, 5000), position + sf::Vector2f(5000, 5000));
-            foreach(Collisionable, c_obj, obj_list)
+            // If an object is a ship or station that is friendly, or is our ship...
+            if (((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
+                // ... or is a scan probe from our ship ...
+                || (P<ScanProbe>(obj) && P<ScanProbe>(obj)->owner_id == my_spaceship->getMultiplayerId()))
             {
-                P<SpaceObject> obj2 = c_obj;
-                if (obj2 && (obj->getPosition() - obj2->getPosition()) < 5000.0f + obj2->getRadius())
+                float r = 5000.0f;
+
+                // Unmask the short-range radar radius around friendly PlayerShips.
+                // (We have to specify our own ship because we can belong to a faction hostile to us!)
+                if (P<PlayerSpaceship>(obj) && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
                 {
-                    visible_objects.insert(*obj2);
+                    r = P<PlayerSpaceship>(obj)->getShortRangeRadarRange();
+                }
+
+                // Get all objects within 5U or short-range radar range of the object.
+                sf::Vector2f position = obj->getPosition();
+                PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
+
+                // For each found object ...
+                for(P<Collisionable> c_obj : obj_list)
+                {
+                    // Show it if it's a SpaceObject within 5U or short-range radar range.
+                    P<SpaceObject> obj2 = c_obj;
+
+                    if (obj2 && (obj->getPosition() - obj2->getPosition()) < r + obj2->getRadius())
+                    {
+                        visible_objects.insert(*obj2);
+                    }
                 }
             }
         }
+
         break;
     case NebulaFogOfWar:
         foreach(SpaceObject, obj, space_object_list)
