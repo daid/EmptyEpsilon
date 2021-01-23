@@ -232,25 +232,30 @@ void GuiRadarView::drawBackground(sf::RenderTarget& window)
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 {
     window.clear(sf::Color(0, 0, 0, 255));
+
     if (my_spaceship)
     {
         float scale = std::min(rect.width, rect.height) / 2.0f / distance;
-
-        float r = 5000.0 * scale;
-        sf::CircleShape circle(r, 50);
-        circle.setOrigin(r, r);
+        sf::CircleShape circle(5000.0f, 50);
         circle.setFillColor(sf::Color(255, 255, 255, 255));
 
-        foreach(SpaceObject, obj, space_object_list)
+        for(P<SpaceObject> obj : space_object_list)
         {
-            if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
+            // If an object is a ship or station that is friendly, or is our ship...
+            if (((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
+                // ... or is a scan probe from our ship ...
+                || (P<ScanProbe>(obj) && P<ScanProbe>(obj)->owner_id == my_spaceship->getMultiplayerId()))
             {
-                circle.setPosition(worldToScreen(obj->getPosition()));
-                window.draw(circle);
-            }
-            P<ScanProbe> sp = obj;
-            if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
-            {
+                float r = 5000.0 * scale;
+
+                // Unmask short-range radar around it
+                if (P<PlayerSpaceship>(obj) && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
+                {
+                    r = P<PlayerSpaceship>(obj)->getShortRangeRadarRange() * scale;
+                }
+
+                circle.setRadius(r);
+                circle.setOrigin(r, r);
                 circle.setPosition(worldToScreen(obj->getPosition()));
                 window.draw(circle);
             }
