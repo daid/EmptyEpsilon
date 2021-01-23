@@ -296,38 +296,7 @@ void CockpitView::onDraw(sf::RenderTarget& window)
         }
 #endif
 
-        // Keyboard emulation of joystick rotation.
-        // The hotkey system doesn't support reading isKeyPressed, but we want
-        // to retain hotkey mapping. So let's fake it.
-        // Wish I could do this in onKey but that doesn't seem to work?
-        if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "TURN_LEFT")))
-        {
-            if (turn_speed != -10.0f)
-            {
-                turn_speed = -10.0f;
-                my_spaceship->commandTurnSpeed(turn_speed);
-            }
-
-            target_rotation = my_spaceship->getRotation();
-        }
-        else if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "TURN_RIGHT")))
-        {
-            if (turn_speed != 10.0f)
-            {
-                turn_speed = 10.0f;
-                my_spaceship->commandTurnSpeed(turn_speed);
-            }
-
-            target_rotation = my_spaceship->getRotation();
-        }
-        else if (turn_speed == 10.0f || turn_speed == -10.0f)
-        {
-            // This will probably? conflict with joystick input.
-            turn_speed = 0.0f;
-            my_spaceship->commandTurnSpeed(turn_speed);
-        }
-
-        // Update wheel.
+        // Update steering wheel's target heading indicator.
         steering_wheel->setValue(target_rotation - view_rotation);
 
         // Update shield indicators.
@@ -472,6 +441,43 @@ void CockpitView::onDraw(sf::RenderTarget& window)
 
     // Draw the view.
     GuiOverlay::onDraw(window);
+}
+
+void CockpitView::onUpdate()
+{
+    if (my_spaceship)
+    {
+        // Keyboard emulation of joystick rotation.
+        // The hotkey system doesn't support reading isKeyPressed, but we want
+        // to retain hotkey mapping. So let's fake it.
+        // Wish I could do this in onKey but that doesn't seem to work?
+        if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "TURN_LEFT")))
+        {
+            if (turn_speed != -10.0f)
+            {
+                turn_speed = -10.0f;
+                my_spaceship->commandTurnSpeed(turn_speed);
+            }
+
+            target_rotation = my_spaceship->getRotation();
+        }
+        else if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "TURN_RIGHT")))
+        {
+            if (turn_speed != 10.0f)
+            {
+                turn_speed = 10.0f;
+                my_spaceship->commandTurnSpeed(turn_speed);
+            }
+
+            target_rotation = my_spaceship->getRotation();
+        }
+        else if (turn_speed == 10.0f || turn_speed == -10.0f)
+        {
+            // This might conflict with joystick input.
+            turn_speed = 0.0f;
+            my_spaceship->commandTurnSpeed(turn_speed);
+        }
+    }
 }
 
 bool CockpitView::onJoystickAxis(const AxisAction& axisAction)
