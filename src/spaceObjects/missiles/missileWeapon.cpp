@@ -4,6 +4,8 @@
 
 
 /// Base class for every missile (mines are not missiles)
+/// You cannot create a missile in script with this class, use derived classes
+/// like HomingMissile, HVLI etc.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 {
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
