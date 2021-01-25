@@ -2,6 +2,25 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
+
+/// Base class for every missile (mines are not missiles)
+REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
+{
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
+  /// Must be an existing target, else does nothing. It does not check if really targetable or not.
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setTarget);
+  /// Lifetime is a number in seconds
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getLifetime);
+  /// Lifetime is a number in seconds
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setLifetime);
+  /// Set the missile size as for tube size.
+  /// Valid sizes: see EMissileSizes
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getMissileSize);
+  /// Get the missile size as for tube size.
+  /// Valid sizes: see EMissileSizes
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setMissileSize);
+}
+
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
 {
@@ -107,4 +126,41 @@ void MissileWeapon::updateMovement()
         else
             setAngularVelocity(angle_diff * data.turnrate * size_speed_modifier);
     }
+}
+
+P<SpaceObject> MissileWeapon::getTarget()
+{
+    if (game_server)
+        return game_server->getObjectById(target_id);
+    return game_client->getObjectById(target_id);
+}
+
+
+void MissileWeapon::setTarget(P<SpaceObject> target)
+{
+    if (!target)
+    {
+        return;
+    }
+    target_id = target->getMultiplayerId();
+}
+
+float MissileWeapon::getLifetime()
+{
+    return lifetime;
+}
+
+void MissileWeapon::setLifetime(float lifetime)
+{
+    this->lifetime = lifetime;
+}
+
+EMissileSizes MissileWeapon::getMissileSize()
+{
+    return MissileWeaponData::convertCategoryModifierToSize(category_modifier);
+}
+
+void MissileWeapon::setMissileSize(EMissileSizes missile_size)
+{
+    category_modifier = MissileWeaponData::convertSizeToCategoryModifier(missile_size);
 }

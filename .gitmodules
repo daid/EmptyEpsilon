@@ -1,0 +1,3 @@
+[submodule "Private.EEScripts"]
+	path = Private.EEScripts
+	url = https://github.com/Tsht/Private.EEScripts.git

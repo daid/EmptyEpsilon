@@ -37,4 +37,30 @@ string getMissileSizeString(EMissileSizes size)
     }
 }
 
+const float MissileWeaponData::convertSizeToCategoryModifier(EMissileSizes size)
+{
+    switch(size)
+    {
+        case MS_Small:
+            return 0.5;
+        case MS_Medium:
+            return 1.0;
+        case MS_Large:
+            return 2.0;
+        default:
+            return 1.0;
+    }
+}
+
+const EMissileSizes MissileWeaponData::convertCategoryModifierToSize(float size)
+{
+    if(0.5 == size)
+        return MS_Small;
+    if(1.0 == size)
+        return MS_Medium;
+    if(2.0 == size)
+        return MS_Large;
+    return MS_Medium;
+}
+
 #include "missileWeaponData.hpp"

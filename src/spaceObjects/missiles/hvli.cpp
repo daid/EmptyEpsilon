@@ -2,6 +2,12 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
+/// HVLI missile
+REGISTER_SCRIPT_SUBCLASS(HVLI, MissileWeapon)
+{
+  //registered for typeName and creation
+}
+
 REGISTER_MULTIPLAYER_CLASS(HVLI, "HVLI");
 HVLI::HVLI()
 : MissileWeapon("HVLI", MissileWeaponData::getDataFor(MW_HVLI))
