@@ -52,6 +52,8 @@ static int require(lua_State* L)
         lua_pushstring(L, ("require:" + error_string).c_str());
         return lua_error(L);
     }
+    lua_pushvalue(L, lua_upvalueindex(1));
+    lua_setupvalue(L, -2, 1);
 
     //Call the actual code.
     if (lua_pcall(L, 0, LUA_MULTRET, 0))

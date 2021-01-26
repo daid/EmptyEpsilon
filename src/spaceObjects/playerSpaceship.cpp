@@ -356,7 +356,7 @@ PlayerSpaceship::PlayerSpaceship()
     }
 
     // Initialize each subsystem to be powered with no coolant or heat.
-    for(int n = 0; n < SYS_COUNT; n++)
+    for(unsigned int n = 0; n < SYS_COUNT; n++)
     {
         assert(n < default_system_power_factors.size());
         systems[n].health = 1.0f;
@@ -2070,7 +2070,7 @@ string PlayerSpaceship::getExportLine()
         result += ":commandSetAutoRepair(true)";
 
     // Update power factors, only for the systems where it changed.
-    for (auto sys_index = 0; sys_index < SYS_COUNT; ++sys_index)
+    for (unsigned int sys_index = 0; sys_index < SYS_COUNT; ++sys_index)
     {
         auto system = static_cast<ESystem>(sys_index);
         if (hasSystem(system))
