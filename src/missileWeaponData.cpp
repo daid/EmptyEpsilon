@@ -54,11 +54,11 @@ const float MissileWeaponData::convertSizeToCategoryModifier(EMissileSizes size)
 
 const EMissileSizes MissileWeaponData::convertCategoryModifierToSize(float size)
 {
-    if(0.5 == size)
+    if (std::abs(size - 0.5) < 0.1)
         return MS_Small;
-    if(1.0 == size)
+    if (std::abs(size - 1.0) < 0.1)
         return MS_Medium;
-    if(2.0 == size)
+    if (std::abs(size - 2.0) < 0.1)
         return MS_Large;
     return MS_Medium;
 }
