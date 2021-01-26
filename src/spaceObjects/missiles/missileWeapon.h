@@ -36,6 +36,13 @@ public:
     virtual void hitObject(P<SpaceObject> object) = 0;
     //Called when the missile's lifetime is up. Missile is destroyed afterwards.
     virtual void lifeEnded() {}
+    
+    P<SpaceObject> getTarget();
+    void setTarget(P<SpaceObject> target);
+    float getLifetime();
+    void setLifetime(float lifetime);
+    EMissileSizes getMissileSize();
+    void setMissileSize(EMissileSizes missile_size);
 
 private:
     void updateMovement();
