@@ -27,6 +27,8 @@ private:
 public:
     ScreenMainScreen();
 
+    virtual void destroy() override;
+
     virtual void update(float delta) override;
 
     virtual void onClick(sf::Vector2f mouse_position) override;

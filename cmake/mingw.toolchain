@@ -39,6 +39,7 @@ if(NOT SFML_ROOT)
                 "-DCMAKE_SYSROOT=${CMAKE_SYSROOT}"
                 "-DCMAKE_INSTALL_PREFIX=${CMAKE_SYSROOT}"
                 "-DCMAKE_BUILD_TYPE=Release"
+                "-DALSOFT_BACKEND_OSS=OFF"
                 "-DDXSDK_DIR=/usr/i686-w64-mingw32"
             WORKING_DIRECTORY "${WIN32_BASE}/openal_build")
         execute_process_ex(

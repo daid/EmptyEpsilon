@@ -3,6 +3,12 @@
 #include "spaceObjects/explosionEffect.h"
 #include "pathPlanner.h"
 
+/// Nuke missile
+REGISTER_SCRIPT_SUBCLASS(Nuke, MissileWeapon)
+{
+  //registered for typeName and creation
+}
+
 REGISTER_MULTIPLAYER_CLASS(Nuke, "Nuke");
 Nuke::Nuke()
 : MissileWeapon("Nuke", MissileWeaponData::getDataFor(MW_Nuke))

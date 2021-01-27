@@ -6,6 +6,7 @@
 class GuiOverlay;
 class GuiKeyValueDisplay;
 class GuiButton;
+class ScienceScreen;
 
 class OperationScreen : public GuiOverlay
 {
@@ -19,6 +20,8 @@ private:
 
     EMode mode;
     int drag_waypoint_index;
+
+    ScienceScreen* science;
 
     GuiKeyValueDisplay* info_reputation;
     GuiKeyValueDisplay* info_clock;

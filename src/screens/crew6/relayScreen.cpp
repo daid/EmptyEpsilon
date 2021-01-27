@@ -233,7 +233,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             }
         }
         if (!near_friendly)
+        {
             targets.clear();
+            hacking_dialog->hide();
+        }
     }
 
     if (targets.get())

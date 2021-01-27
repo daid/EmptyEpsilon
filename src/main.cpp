@@ -296,9 +296,11 @@ int main(int argc, char** argv)
             }
         }
     }
+
+    // Set up voice chat and key bindings.
     NetworkAudioRecorder* nar = new NetworkAudioRecorder();
-    nar->addKeyActivation(sf::Keyboard::Key::Tilde, 0);
-    nar->addKeyActivation(sf::Keyboard::Key::BackSpace, 1);
+    nar->addKeyActivation(hotkeys.getKeyByHotkey("BASIC", "VOICE_CHAT_ALL"), 0);
+    nar->addKeyActivation(hotkeys.getKeyByHotkey("BASIC", "VOICE_CHAT_SHIP"), 1);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR

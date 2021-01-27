@@ -12,6 +12,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("HELP", std::make_tuple("Show in-game help", "F1"));
     newKey("ESCAPE", std::make_tuple("Return to ship options menu", "Escape"));
     newKey("HOME", std::make_tuple("Return to ship options menu", "Home"));  // Remove this item as it does the same as Escape?
+    newKey("VOICE_CHAT_ALL", std::make_tuple("Broadcast voice chat to server", "Backspace"));
+    newKey("VOICE_CHAT_SHIP", std::make_tuple("Broadcast voice chat to ship", "Tilde"));
 
     newCategory("GENERAL", "General");
     newKey("NEXT_STATION", std::make_tuple("Switch to next crew station", "Tab"));
