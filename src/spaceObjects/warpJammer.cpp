@@ -70,6 +70,13 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     }
 }
 
+std::unordered_map<string, string> WarpJammer::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceObject::getGMInfo();
+    ret["Jammer Range"] = string(range);
+    return ret;
+}
+
 void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
 {
     if (info.type == DT_EMP)

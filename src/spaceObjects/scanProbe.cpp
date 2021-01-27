@@ -126,6 +126,13 @@ void ScanProbe::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
     }
 }
 
+std::unordered_map<string, string> ScanProbe::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceObject::getGMInfo();
+    ret["Lifetime"] = string(lifetime);
+    return ret;
+}
+
 void ScanProbe::setOwner(P<SpaceObject> owner)
 {
     if (!owner) return;

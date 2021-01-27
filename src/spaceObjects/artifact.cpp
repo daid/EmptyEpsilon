@@ -74,6 +74,13 @@ void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     window.draw(object_sprite);
 }
 
+std::unordered_map<string, string> Artifact::getGMInfo()
+{
+    std::unordered_map<string, string> ret = SpaceObject::getGMInfo();
+    ret["allowPickup"] = string(allow_pickup);
+    return ret;
+}
+
 void Artifact::collide(Collisionable* target, float force)
 {
     if (!isServer() || !allow_pickup)
