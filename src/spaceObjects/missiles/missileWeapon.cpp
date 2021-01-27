@@ -29,11 +29,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
 {
+    owner_id = -1;
     target_id = -1;
     target_angle = 0;
     category_modifier = 1;
     lifetime = data.lifetime;
 
+    registerMemberReplication(&owner_id);
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
     registerMemberReplication(&category_modifier);
@@ -135,16 +137,13 @@ void MissileWeapon::updateMovement()
 
 P<SpaceObject> MissileWeapon::getOwner()
 {
+    // Owner and owner_id are assigned by the weapon tube upon firing.
     if (game_server)
     {
-        return owner;
-    }
-    else
-    {
-        LOG(WARNING) << "Tried to get a missile's owner on a client, but the owner isn't replicated over the network.";
+        return game_server->getObjectById(owner_id);
     }
 
-    return nullptr;
+    return game_client->getObjectById(owner_id);
 }
 
 P<SpaceObject> MissileWeapon::getTarget()
@@ -181,4 +180,27 @@ EMissileSizes MissileWeapon::getMissileSize()
 void MissileWeapon::setMissileSize(EMissileSizes missile_size)
 {
     category_modifier = MissileWeaponData::convertSizeToCategoryModifier(missile_size);
+}
+
+std::unordered_map<string, string> MissileWeapon::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+
+    if (owner)
+    {
+        ret["Owner"] = owner->getCallSign();
+    }
+
+    P<SpaceObject> target = game_server->getObjectById(target_id);
+
+    if (target)
+    {
+        ret["Target"] = target->getCallSign();
+    }
+
+    ret["Faction"] = getLocaleFaction();
+    ret["Lifetime"] = lifetime;
+    ret["Size"] = getMissileSize();
+
+    return ret;
 }

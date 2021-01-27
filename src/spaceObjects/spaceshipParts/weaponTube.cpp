@@ -115,6 +115,7 @@ void WeaponTube::spawnProjectile(float target_angle)
         {
             P<HomingMissile> missile = new HomingMissile();
             missile->owner = parent;
+            missile->owner_id = parent->getMultiplayerId();
             missile->setFactionId(parent->getFactionId());
             missile->target_id = parent->target_id;
             missile->setPosition(fireLocation);
@@ -127,6 +128,7 @@ void WeaponTube::spawnProjectile(float target_angle)
         {
             P<Nuke> missile = new Nuke();
             missile->owner = parent;
+            missile->owner_id = parent->getMultiplayerId();
             missile->setFactionId(parent->getFactionId());
             missile->target_id = parent->target_id;
             missile->setPosition(fireLocation);
@@ -139,6 +141,7 @@ void WeaponTube::spawnProjectile(float target_angle)
         {
             P<Mine> missile = new Mine();
             missile->owner = parent;
+            missile->owner_id = parent->getMultiplayerId();
             missile->setFactionId(parent->getFactionId());
             missile->setPosition(fireLocation);
             missile->setRotation(parent->getRotation() + direction);
@@ -149,6 +152,7 @@ void WeaponTube::spawnProjectile(float target_angle)
         {
             P<HVLI> missile = new HVLI();
             missile->owner = parent;
+            missile->owner_id = parent->getMultiplayerId();
             missile->setFactionId(parent->getFactionId());
             missile->setPosition(fireLocation);
             missile->setRotation(parent->getRotation() + direction);
@@ -160,6 +164,7 @@ void WeaponTube::spawnProjectile(float target_angle)
         {
             P<EMPMissile> missile = new EMPMissile();
             missile->owner = parent;
+            missile->owner_id = parent->getMultiplayerId();
             missile->setFactionId(parent->getFactionId());
             missile->target_id = parent->target_id;
             missile->setPosition(fireLocation);

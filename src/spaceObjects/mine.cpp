@@ -10,6 +10,8 @@
 /// A mine object. Simple, effective, deadly.
 REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 {
+  // Get the mine's owner's object.
+  REGISTER_SCRIPT_CLASS_FUNCTION(Mine, getOwner);
   // Set a function that will be called if the mine explodes.
   // First argument is the mine, second argument is the mine's owner/instigator (or nil).
   REGISTER_SCRIPT_CLASS_FUNCTION(Mine, onDestruction);
@@ -19,6 +21,7 @@ REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
 : SpaceObject(50, "Mine"), data(MissileWeaponData::getDataFor(MW_Mine))
 {
+    owner_id = -1;
     setCollisionRadius(trigger_range);
     triggered = false;
     triggerTimeout = triggerDelay;
@@ -27,6 +30,8 @@ Mine::Mine()
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
+
+    registerMemberReplication(&owner_id);
 }
 
 void Mine::draw3D()
@@ -130,4 +135,28 @@ void Mine::explode()
 void Mine::onDestruction(ScriptSimpleCallback callback)
 {
     this->on_destruction = callback;
+}
+
+P<SpaceObject> Mine::getOwner()
+{
+    if (game_server)
+    {
+        return game_server->getObjectById(owner_id);
+    }
+
+    return game_client->getObjectById(owner_id);
+}
+
+std::unordered_map<string, string> Mine::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+
+    if (owner)
+    {
+        ret["Owner"] = owner->getCallSign();
+    }
+
+    ret["Faction"] = getLocaleFaction();
+
+    return ret;
 }
