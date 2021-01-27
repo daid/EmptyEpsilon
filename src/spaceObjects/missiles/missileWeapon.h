@@ -37,6 +37,7 @@ public:
     //Called when the missile's lifetime is up. Missile is destroyed afterwards.
     virtual void lifeEnded() {}
     
+    P<SpaceObject> getOwner();
     P<SpaceObject> getTarget();
     void setTarget(P<SpaceObject> target);
     float getLifetime();

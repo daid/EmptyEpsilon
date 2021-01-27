@@ -8,6 +8,9 @@
 /// like HomingMissile, HVLI etc.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 {
+  /// Get the missile's owner's object.
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getOwner);
+  /// Get the missile's target object.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
   /// Must be an existing target, else does nothing. It does not check if really targetable or not.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setTarget);
@@ -130,13 +133,26 @@ void MissileWeapon::updateMovement()
     }
 }
 
+P<SpaceObject> MissileWeapon::getOwner()
+{
+    if (game_server)
+    {
+        return owner;
+    }
+    else
+    {
+        LOG(WARNING) << "Tried to get a missile's owner on a client, but the owner isn't replicated over the network.";
+    }
+
+    return nullptr;
+}
+
 P<SpaceObject> MissileWeapon::getTarget()
 {
     if (game_server)
         return game_server->getObjectById(target_id);
     return game_client->getObjectById(target_id);
 }
-
 
 void MissileWeapon::setTarget(P<SpaceObject> target)
 {
