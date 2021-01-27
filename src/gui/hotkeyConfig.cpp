@@ -7,7 +7,7 @@ HotkeyConfig hotkeys;
 
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
-    newCategory("BASIC", "basic"); // these Items should all have predefined values
+    newCategory("BASIC", "Basic"); // these Items should all have predefined values
     newKey("PAUSE", std::make_tuple("Pause game", "P"));
     newKey("HELP", std::make_tuple("Show in-game help", "F1"));
     newKey("ESCAPE", std::make_tuple("Return to ship options menu", "Escape"));
@@ -32,6 +32,16 @@ HotkeyConfig::HotkeyConfig()
     newKey("LONG_RANGE_RADAR", std::make_tuple("View long-range radar", "Q"));
     newKey("FIRST_PERSON", std::make_tuple("Toggle first-person view", "F"));
 
+    // - Single Pilot and Tactical use:
+    //   - Helms TURN_LEFT and _RIGHT, DOCK_* and UNDOCK, *_IMPULSE, *_JUMP,
+    //     and WARP_*.
+    //   - Weapons NEXT_ENEMY_TARGET, NEXT_TARGET, AIM_MISSILE_LEFT and _RIGHT,
+    //     *_AIM_LOCK, COMBAT_*, SELECT_MISSILE_*, *_TUBE_*, SHIELD_CAL_*,
+    //     and *_SHIELDS.
+    // - Tactical also uses:
+    //   - Weapons BEAM_FREQUENCY_*, BEAM_SUBSYSTEM_TARGET_*
+    // - Operations uses Science hotkeys.
+
     newCategory("HELMS", "Helms");
     newKey("INC_IMPULSE", std::make_tuple("Increase impulse", "Up"));
     newKey("DEC_IMPULSE", std::make_tuple("Decrease impulse", "Down"));
@@ -40,11 +50,11 @@ HotkeyConfig::HotkeyConfig()
     newKey("MIN_IMPULSE", std::make_tuple("Max reverse impulse", ""));
     newKey("TURN_LEFT", std::make_tuple("Turn left", "Left"));
     newKey("TURN_RIGHT", std::make_tuple("Turn right", "Right"));
-    newKey("WARP_0", std::make_tuple("Warp off", "Num0"));
-    newKey("WARP_1", std::make_tuple("Warp 1", "Num1"));
-    newKey("WARP_2", std::make_tuple("Warp 2", "Num2"));
-    newKey("WARP_3", std::make_tuple("Warp 3", "Num3"));
-    newKey("WARP_4", std::make_tuple("Warp 4", "Num4"));
+    newKey("WARP_0", std::make_tuple("Warp off", "Num6"));
+    newKey("WARP_1", std::make_tuple("Warp 1", "Num7"));
+    newKey("WARP_2", std::make_tuple("Warp 2", "Num8"));
+    newKey("WARP_3", std::make_tuple("Warp 3", "Num9"));
+    newKey("WARP_4", std::make_tuple("Warp 4", "Num0"));
     newKey("DOCK_ACTION", std::make_tuple("Dock request/abort/undock", "D"));
     newKey("DOCK_REQUEST", std::make_tuple("Initiate docking", ""));
     newKey("DOCK_ABORT", std::make_tuple("Abort docking", ""));
@@ -62,34 +72,41 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELECT_MISSILE_TYPE_MINE", std::make_tuple("Select mine", "Num3"));
     newKey("SELECT_MISSILE_TYPE_EMP", std::make_tuple("Select EMP", "Num4"));
     newKey("SELECT_MISSILE_TYPE_HVLI", std::make_tuple("Select HVLI", "Num5"));
-    for(int n=0; n<max_weapon_tubes; n++)
+    for(int n = 0; n < max_weapon_tubes; n++)
+    {
         newKey(std::string("LOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Load tube ") + string(n+1), ""));
-    for(int n=0; n<max_weapon_tubes; n++)
+    }
+    for(int n = 0; n < max_weapon_tubes; n++)
+    {
         newKey(std::string("UNLOAD_TUBE_") + string(n+1), std::make_tuple(std::string("Unload tube ") + string(n+1), ""));
-    for(int n=0; n<max_weapon_tubes; n++)
+    }
+    for(int n = 0; n < max_weapon_tubes; n++)
+    {
         newKey(std::string("FIRE_TUBE_") + string(n+1), std::make_tuple(std::string("Fire tube ") + string(n+1), ""));
-    newKey("NEXT_ENEMY_TARGET", std::make_tuple("Select next hostile target", "R"));
-    newKey("NEXT_TARGET", std::make_tuple("Select next target (any)", "T"));
+    }
+    newKey("NEXT_ENEMY_TARGET", std::make_tuple("Select next hostile target", "C"));
+    newKey("NEXT_TARGET", std::make_tuple("Select next target (any)", "Z"));
     newKey("TOGGLE_SHIELDS", std::make_tuple("Toggle shields", "S"));
     newKey("ENABLE_SHIELDS", std::make_tuple("Enable shields", ""));
     newKey("DISABLE_SHIELDS", std::make_tuple("Disable shields", ""));
-    newKey("SHIELD_CAL_INC", std::make_tuple("Increase shield frequency target", "RBracket"));
-    newKey("SHIELD_CAL_DEC", std::make_tuple("Decrease shield frequency target", "LBracket"));
-    newKey("SHIELD_CAL_START", std::make_tuple("Start shield calibration", "BackSlash"));
+    newKey("SHIELD_CAL_INC", std::make_tuple("Increase shield frequency target", "Period"));
+    newKey("SHIELD_CAL_DEC", std::make_tuple("Decrease shield frequency target", "Comma"));
+    newKey("SHIELD_CAL_START", std::make_tuple("Start shield calibration", "Slash"));
     newKey("BEAM_SUBSYSTEM_TARGET_NEXT", std::make_tuple("Next beam subsystem target type", "Quote"));
     newKey("BEAM_SUBSYSTEM_TARGET_PREV", std::make_tuple("Previous beam subsystem target type", "SemiColon"));
-    newKey("BEAM_FREQUENCY_INCREASE", std::make_tuple("Increase beam frequency", "Up"));
-    newKey("BEAM_FREQUENCY_DECREASE", std::make_tuple("Decrease beam frequency", "Down"));
-    newKey("TOGGLE_AIM_LOCK", std::make_tuple("Toggle missile aim lock", "Space"));
+    newKey("BEAM_FREQUENCY_INCREASE", std::make_tuple("Increase beam frequency", "M"));
+    newKey("BEAM_FREQUENCY_DECREASE", std::make_tuple("Decrease beam frequency", "N"));
+    newKey("TOGGLE_AIM_LOCK", std::make_tuple("Toggle missile aim lock", "B"));
     newKey("ENABLE_AIM_LOCK", std::make_tuple("Enable missile aim lock", ""));
     newKey("DISABLE_AIM_LOCK", std::make_tuple("Disable missile aim lock", ""));
-    newKey("AIM_MISSILE_LEFT", std::make_tuple("Turn missile aim to the left", "Left"));
-    newKey("AIM_MISSILE_RIGHT", std::make_tuple("Turn missile aim to the right", "Right"));
+    newKey("AIM_MISSILE_LEFT", std::make_tuple("Turn missile aim to the left", "G"));
+    newKey("AIM_MISSILE_RIGHT", std::make_tuple("Turn missile aim to the right", "H"));
 
     newCategory("SCIENCE", "Science");
     newKey("SCAN_OBJECT", std::make_tuple("Scan object", "S"));
     newKey("NEXT_SCANNABLE_OBJECT", std::make_tuple("Select next scannable object", "C"));
 
+    // Engineering functions should not overlap with other stations'.
     newCategory("ENGINEERING", "Engineering");
     newKey("SELECT_REACTOR", std::make_tuple("Select reactor system", "Num1"));
     newKey("SELECT_BEAM_WEAPONS", std::make_tuple("Select beam weapon system", "Num2"));
