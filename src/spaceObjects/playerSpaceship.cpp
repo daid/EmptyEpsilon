@@ -63,6 +63,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getMaxScanProbeCount);
 
+    /// the callback gets two parameters: the PlayerSpaceship and - if any - the SpaceObject selected
+    /// by the station when the button was pressed.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomButton);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomInfo);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
@@ -1634,14 +1636,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_CUSTOM_FUNCTION:
         {
             string name;
+            int32_t target_id;
             packet >> name;
+            packet >> target_id;
+
             for(CustomShipFunction& csf : custom_functions)
             {
                 if (csf.name == name)
                 {
                     if (csf.type == CustomShipFunction::Type::Button || csf.type == CustomShipFunction::Type::Message)
                     {
-                        csf.callback.call();
+                        P<SpaceObject> target = game_server->getObjectById(target_id);
+                        csf.callback.call(P<PlayerSpaceship>(this), target);
                     }
                     if (csf.type == CustomShipFunction::Type::Message)
                     {
@@ -1963,11 +1969,12 @@ void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, string targe
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandCustomFunction(string name)
+void PlayerSpaceship::commandCustomFunction(string name, P<SpaceObject> target)
 {
     sf::Packet packet;
     packet << CMD_CUSTOM_FUNCTION;
     packet << name;
+    packet << (target ? target->getMultiplayerId() : -1);
     sendClientCommand(packet);
 }
 

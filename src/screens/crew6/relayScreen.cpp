@@ -179,7 +179,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         alert_level_buttons.push_back(alert_button);
     }
 
-    (new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, relayOfficer, "", &targets))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     hacking_dialog = new GuiHackingDialog(this, "");
 

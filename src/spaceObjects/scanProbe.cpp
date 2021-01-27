@@ -90,12 +90,7 @@ void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
 {
     if (on_destruction.isSet())
     {
-        if (info.instigator)
-        {
-            on_destruction.call(P<ScanProbe>(this), P<SpaceObject>(info.instigator));
-        } else {
-            on_destruction.call(P<ScanProbe>(this));
-        }
+        on_destruction.call(P<ScanProbe>(this), P<SpaceObject>(info.instigator));
     }
     destroy();
 }
