@@ -141,7 +141,7 @@ P<SpaceObject> Mine::getOwner()
         return owner;
     }
 
-    LOG(ERROR) << "Mine::getOwner(): owner not replicated to clients."
+    LOG(ERROR) << "Mine::getOwner(): owner not replicated to clients.";
     return nullptr;
 }
 

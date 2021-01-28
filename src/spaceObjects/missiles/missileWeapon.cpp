@@ -141,7 +141,7 @@ P<SpaceObject> MissileWeapon::getOwner()
         return owner;
     }
 
-    LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients."
+    LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients.";
     return nullptr;
 }
 
