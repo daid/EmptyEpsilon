@@ -157,6 +157,8 @@ public:
     int scan_probe_stock;
     float scan_probe_recharge = 0.0;
     ScriptSimpleCallback on_probe_launch;
+    ScriptSimpleCallback on_probe_link;
+    ScriptSimpleCallback on_probe_unlink;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
@@ -226,6 +228,8 @@ public:
     int getMaxScanProbeCount() { return max_scan_probes; }
 
     void onProbeLaunch(ScriptSimpleCallback callback);
+    void onProbeLink(ScriptSimpleCallback callback);
+    void onProbeUnlink(ScriptSimpleCallback callback);
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);

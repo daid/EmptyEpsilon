@@ -130,9 +130,26 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
     /// Callback when this ship launches a probe.
-    /// Returns the launching PlayerSpaceship and launched ScanProbe.
-    /// Example: player:onProbeLaunch(trackProbe)
+    /// Passes the launching PlayerSpaceship and launched ScanProbe.
+    /// Example:
+    /// player:onProbeLaunch(function (player, probe)
+    ///     print(probe:getCallSign() .. " launched from " .. player:getCallSign())
+    /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    /// Callback when this ship links a probe to the science screen.
+    /// Passes the PlayerShip and linked ScanProbe.
+    /// Example:
+    /// player:onProbeLink(function (player, probe)
+    ///     print(probe:getCallSign() .. " linked to science on " .. player:getCallSign())
+    /// end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLink);
+    /// Callback when this ship unlinks a probe from the science screen.
+    /// Passes the PlayerShip.
+    /// Example:
+    /// player:onProbeUnlink(function (player)
+    ///     print("probe unlinked from science on " .. player:getCallSign())
+    /// end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeUnlink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
@@ -725,8 +742,8 @@ void PlayerSpaceship::applyTemplateValues()
     can_launch_probe = ship_template->can_launch_probe;
     if (!on_new_player_ship_called)
     {
-        on_new_player_ship_called=true;
-    gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
+        on_new_player_ship_called = true;
+        gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
     }
 }
 
@@ -1620,6 +1637,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_SCIENCE_LINK:
         {
             packet >> linked_science_probe_id;
+
+            if (linked_science_probe_id != -1 && on_probe_link.isSet())
+            {
+                P<ScanProbe> p = game_server->getObjectById(linked_science_probe_id);
+
+                if (p)
+                {
+                    on_probe_link.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+                }
+            }
+            else if (linked_science_probe_id == -1 && on_probe_unlink.isSet())
+            {
+                on_probe_unlink.call(P<PlayerSpaceship>(this));
+            }
         }
         break;
     case CMD_HACKING_FINISHED:
@@ -1972,7 +2003,8 @@ void PlayerSpaceship::commandCustomFunction(string name)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetScienceLink(int32_t id){
+void PlayerSpaceship::commandSetScienceLink(int32_t id)
+{
     sf::Packet packet;
     packet << CMD_SET_SCIENCE_LINK << id;
     sendClientCommand(packet);
@@ -2092,6 +2124,16 @@ string PlayerSpaceship::getExportLine()
 void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
 {
     this->on_probe_launch = callback;
+}
+
+void PlayerSpaceship::onProbeLink(ScriptSimpleCallback callback)
+{
+    this->on_probe_link = callback;
+}
+
+void PlayerSpaceship::onProbeUnlink(ScriptSimpleCallback callback)
+{
+    this->on_probe_unlink = callback;
 }
 
 #include "playerSpaceship.hpp"
