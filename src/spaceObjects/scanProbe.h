@@ -12,10 +12,12 @@ private:
     float lifetime;
     // Probe target coordinates.
     sf::Vector2f target_position;
+    // Whether the probe has arrived to the target_position.
+    bool has_arrived;
 public:
     int owner_id;
 
-    ScriptSimpleCallback on_creation;
+    ScriptSimpleCallback on_arrival;
     ScriptSimpleCallback on_expiration;
     ScriptSimpleCallback on_destruction;
 
@@ -31,11 +33,13 @@ public:
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
 
+    bool hasArrived() { return has_arrived; }
     void setTarget(sf::Vector2f target) { target_position = target; }
     sf::Vector2f getTarget() { return target_position; }
+    P<SpaceObject> getOwner() { return game_server->getObjectById(owner_id); }
     void setOwner(P<SpaceObject> owner);
 
-    void onCreation(ScriptSimpleCallback callback);
+    void onArrival(ScriptSimpleCallback callback);
     void onExpiration(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);
 };

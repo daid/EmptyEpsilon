@@ -12,15 +12,28 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
     /// The default initial lifetime is 10 minutes.
     /// Example: probe:setLifetime(60 * 5)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setLifetime);
-    // Get the probe's remaining lifetime.
+    /// Get the probe's remaining lifetime.
     /// Example: local lifetime = probe:getLifetime()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getLifetime);
+    /// Set the probe's target coordinates.
+    /// Example: probe:setTarget(1000, 5000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setTarget);
+    /// Get the probe's target coordinates.
+    /// Example: local targetX, targetY = probe:getTarget()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getTarget);
+    /// Get the probe's owner SpaceObject.
+    /// Example: local owner_ship = probe:getOwner()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getOwner);
+    /// Callback when the probe arrives to its target coordinates.
+    /// Passes the probe and position as arguments to the callback.
+    /// Example: probe:onArrival(probeArrived)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onArrival);
     /// Callback when the probe's lifetime expires.
-    /// Returns the probe.
+    /// Passes the probe as an argument to the callback.
     /// Example: probe:onExpiration(probeExpired)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onExpiration);
     /// Callback when the probe is destroyed by damage.
-    /// Returns the probe and instigator.
+    /// Passes the probe and instigator as arguments to the callback.
     /// Example: probe:onDestruction(probeDestroyed)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, onDestruction);
 }
@@ -31,6 +44,8 @@ ScanProbe::ScanProbe()
 {
     // Probe persists for 10 minutes.
     lifetime = 60 * 10;
+    // Probe has not arrived yet.
+    has_arrived = false;
 
     registerMemberReplication(&owner_id);
     registerMemberReplication(&target_position);
@@ -98,13 +113,28 @@ void ScanProbe::update(float delta)
     // physics and at a fixed rate of speed.
     if ((target_position - getPosition()) > getRadius())
     {
+        // The probe is in transit.
+        has_arrived = false;
         sf::Vector2f v = normalize(target_position - getPosition());
         setPosition(getPosition() + v * delta * probe_speed);
+        setHeading(vector2ToAngle(v) + 90.0f);
+    }
+    else if (!has_arrived)
+    {
+        // The probe arrived to its destination.
+        has_arrived = true;
+
+        // Fire the onArrival callback, if set.
+        if (on_arrival.isSet())
+        {
+            on_arrival.call(P<ScanProbe>(this), getPosition().x, getPosition().y);
+        }
     }
 }
 
 bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
+    // The probe cannot be targeted until it reaches its destination.
     return (getTarget() - getPosition()) < getRadius();
 }
 
@@ -146,7 +176,7 @@ void ScanProbe::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, f
 
     if (long_range)
     {
-        // Draw a circle on long-range radars representing the probe's fixed 5U
+        // Draw a circle on the GM radar representing the probe's fixed 5U
         // radar radius.
         sf::CircleShape radar_radius(5000 * scale);
         radar_radius.setOrigin(5000 * scale, 5000 * scale);
@@ -168,6 +198,11 @@ void ScanProbe::setOwner(P<SpaceObject> owner)
     // Set the probe's faction and ship ownership based on the passed object.
     setFactionId(owner->getFactionId());
     owner_id = owner->getMultiplayerId();
+}
+
+void ScanProbe::onArrival(ScriptSimpleCallback callback)
+{
+    this->on_arrival = callback;
 }
 
 void ScanProbe::onDestruction(ScriptSimpleCallback callback)
