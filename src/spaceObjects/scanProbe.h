@@ -6,13 +6,16 @@
 class ScanProbe : public SpaceObject, public Updatable
 {
 private:
+    // Probe flight speed; 1U/sec.
     constexpr static float probe_speed = 1000.0f;
-    // remaining lifetime in seconds
+    // Remaining lifetime in seconds.
     float lifetime;
+    // Probe target coordinates.
     sf::Vector2f target_position;
 public:
     int owner_id;
 
+    ScriptSimpleCallback on_creation;
     ScriptSimpleCallback on_expiration;
     ScriptSimpleCallback on_destruction;
 
@@ -32,6 +35,7 @@ public:
     sf::Vector2f getTarget() { return target_position; }
     void setOwner(P<SpaceObject> owner);
 
+    void onCreation(ScriptSimpleCallback callback);
     void onExpiration(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);
 };
