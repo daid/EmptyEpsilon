@@ -70,7 +70,7 @@ ScanProbe::~ScanProbe()
 
 void ScanProbe::setLifetime(float lifetime)
 {
-    this->lifetime = lifetime;
+    this->lifetime = lifetime > 0.0f ? lifetime : 0.0f;
 }
 
 float ScanProbe::getLifetime()
