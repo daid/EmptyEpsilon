@@ -29,13 +29,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
 {
-    owner_id = -1;
     target_id = -1;
     target_angle = 0;
     category_modifier = 1;
     lifetime = data.lifetime;
 
-    registerMemberReplication(&owner_id);
     registerMemberReplication(&target_id);
     registerMemberReplication(&target_angle);
     registerMemberReplication(&category_modifier);
@@ -137,13 +135,14 @@ void MissileWeapon::updateMovement()
 
 P<SpaceObject> MissileWeapon::getOwner()
 {
-    // Owner and owner_id are assigned by the weapon tube upon firing.
+    // Owner is assigned by the weapon tube upon firing.
     if (game_server)
     {
-        return game_server->getObjectById(owner_id);
+        return owner;
     }
 
-    return game_client->getObjectById(owner_id);
+    LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients."
+    return nullptr;
 }
 
 P<SpaceObject> MissileWeapon::getTarget()

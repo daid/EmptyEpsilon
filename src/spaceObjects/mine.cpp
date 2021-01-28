@@ -21,7 +21,6 @@ REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
 : SpaceObject(50, "Mine"), data(MissileWeaponData::getDataFor(MW_Mine))
 {
-    owner_id = -1;
     setCollisionRadius(trigger_range);
     triggered = false;
     triggerTimeout = triggerDelay;
@@ -30,8 +29,6 @@ Mine::Mine()
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
-
-    registerMemberReplication(&owner_id);
 }
 
 void Mine::draw3D()
@@ -141,10 +138,11 @@ P<SpaceObject> Mine::getOwner()
 {
     if (game_server)
     {
-        return game_server->getObjectById(owner_id);
+        return owner;
     }
 
-    return game_client->getObjectById(owner_id);
+    LOG(ERROR) << "Mine::getOwner(): owner not replicated to clients."
+    return nullptr;
 }
 
 std::unordered_map<string, string> Mine::getGMInfo()

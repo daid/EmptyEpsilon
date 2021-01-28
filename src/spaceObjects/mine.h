@@ -15,7 +15,6 @@ class Mine : public SpaceObject, public Updatable
 
 public:
     P<SpaceObject> owner;
-    int32_t owner_id;
     bool triggered;       //Only valid on server.
     float triggerTimeout; //Only valid on server.
     float ejectTimeout;   //Only valid on server.
