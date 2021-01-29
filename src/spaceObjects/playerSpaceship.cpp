@@ -151,11 +151,13 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     ///     print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. player:getCallSign())
     /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLink);
-    /// Callback when this ship unlinks a probe from the Science screen.
-    /// Passes the PlayerShip.
+    /// Callback when this ship unlinks a probe on the Science screen.
+    /// Passes the PlayerShip and previously linked ScanProbe.
+    /// Does _not_ fire when the probe is destroyed or expires;
+    /// see ScanProbe:onDestruction() and ScanProbe:onExpiration().
     /// Example:
-    /// player:onProbeUnlink(function (player)
-    ///     print("Probe unlinked from Science on ship " .. player:getCallSign())
+    /// player:onProbeUnlink(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " unlinked from Science on ship " .. player:getCallSign())
     /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeUnlink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
