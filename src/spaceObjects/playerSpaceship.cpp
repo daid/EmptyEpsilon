@@ -2042,8 +2042,9 @@ void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
 void PlayerSpaceship::commandClearScienceLink()
 {
     sf::Packet packet;
+
     packet << CMD_SET_SCIENCE_LINK;
-    packet << -1;
+    packet << int32_t(-1);
     sendClientCommand(packet);
 }
 
