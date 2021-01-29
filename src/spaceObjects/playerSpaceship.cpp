@@ -2024,20 +2024,19 @@ void PlayerSpaceship::commandCustomFunction(string name)
 void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
 {
     sf::Packet packet;
-    packet << CMD_SET_SCIENCE_LINK;
 
     // Pass the probe's multiplayer ID if the probe isn't nullptr.
     if (probe)
     {
+        packet << CMD_SET_SCIENCE_LINK;
         packet << probe->getMultiplayerId();
+        sendClientCommand(packet);
     }
-    // Otherwise, pass -1 to unlink it, same as commandClearScienceLink().
+    // Otherwise, it's invalid. Warn and do nothing.
     else
     {
-        LOG(WARNING) << "Attempted to unlink a ScanProbe from Science, but the ScanProbe wasn't valid.";
-        packet << -1;
+        LOG(WARNING) << "commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.";
     }
-    sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandClearScienceLink()
