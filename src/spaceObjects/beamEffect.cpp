@@ -62,7 +62,7 @@ BeamEffect::BeamEffect()
         shader = ShaderManager::getShader("shaders/basic");
         shaderPositionAttribute = glGetAttribLocation(shader->getNativeHandle(), "position");
         shaderTexCoordsAttribute = glGetAttribLocation(shader->getNativeHandle(), "texcoords");
-}
+    }
 #endif
 }
 
@@ -84,23 +84,30 @@ void BeamEffect::draw3DTransparent()
     shader->setUniform("textureMap", *textureManager.getTexture(beam_texture));
     sf::Shader::bind(shader);
     
+    gl::ScopedVertexAttribArray positions(shaderPositionAttribute);
+    gl::ScopedVertexAttribArray texcoords(shaderTexCoordsAttribute);
 
-    std::array<VertexAndTexCoords, 4*2> quads;
-
+    std::array<VertexAndTexCoords, 4> quad;
     // Beam
     {
         sf::Vector3f v0 = startPoint + eyeNormal * 4.0f;
         sf::Vector3f v1 = endPoint + eyeNormal * 4.0f;
         sf::Vector3f v2 = endPoint - eyeNormal * 4.0f;
         sf::Vector3f v3 = startPoint - eyeNormal * 4.0f;
-        quads[0].vertex = v0;
-        quads[0].texcoords = { 0.f, 0.f };
-        quads[1].vertex = v1;
-        quads[1].texcoords = { 0.f, 1.f };
-        quads[2].vertex = v2;
-        quads[2].texcoords = { 1.f, 1.f };
-        quads[3].vertex = v3;
-        quads[3].texcoords = { 1.f, 0.f };
+        quad[0].vertex = v0;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v1;
+        quad[1].texcoords = { 0.f, 1.f };
+        quad[2].vertex = v2;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v3;
+        quad[3].texcoords = { 1.f, 0.f };
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        // Draw the beam
+        glDrawArrays(GL_QUADS, 0, quad.size());
+
     }
 
     // Fire ring
@@ -117,22 +124,21 @@ void BeamEffect::draw3DTransparent()
         sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
         sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
 
-        quads[4].vertex = v1;
-        quads[4].texcoords = { 0.f, 0.f };
-        quads[5].vertex = v2;
-        quads[5].texcoords = { 1.f, 0.f };
-        quads[6].vertex = v3;
-        quads[6].texcoords = { 1.f, 1.f };
-        quads[7].vertex = v4;
-        quads[7].texcoords = { 0.f, 1.f };
-    }
+        quad[0].vertex = v1;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v2;
+        quad[1].texcoords = { 1.f, 0.f };
+        quad[2].vertex = v3;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v4;
+        quad[3].texcoords = { 0.f, 1.f };
 
-    // Draw
-    gl::ScopedVertexAttribArray positions(shaderPositionAttribute);
-    gl::ScopedVertexAttribArray texcoords(shaderTexCoordsAttribute);
-    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quads.data());
-    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quads.data() + sizeof(sf::Vector3f)));
-    glDrawArrays(GL_QUADS, 0, fire_ring ? static_cast<GLsizei>(quads.size()) : 4);
+        shader->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
+        sf::Shader::bind(shader);
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        glDrawArrays(GL_QUADS, 0, quad.size());
+    }
 }
 #endif//FEATURE_3D_RENDERING
 
