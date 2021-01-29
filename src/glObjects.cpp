@@ -9,30 +9,30 @@ static_assert(std::is_same<uint32_t, GLuint>::value, "GLuint and uint32_t are *N
 
 namespace gl
 {
-	namespace details
-	{
-		void createBuffers(size_t count, uint32_t* buffers)
-		{
-			glGenBuffers(count, buffers);
-		}
-		void deleteBuffers(size_t count, const uint32_t* buffers)
-		{
-			glDeleteBuffers(count, buffers);
-		}
-	}
+    namespace details
+    {
+        void createBuffers(size_t count, uint32_t* buffers)
+        {
+            glGenBuffers(count, buffers);
+        }
+        void deleteBuffers(size_t count, const uint32_t* buffers)
+        {
+            glDeleteBuffers(count, buffers);
+        }
+    }
 
-	ScopedVertexAttribArray::ScopedVertexAttribArray(int32_t attrib)
-		:attrib{ attrib }
-	{
-		if (attrib != -1)
-			glEnableVertexAttribArray(attrib);
-	}
+    ScopedVertexAttribArray::ScopedVertexAttribArray(int32_t attrib)
+        :attrib{ attrib }
+    {
+        if (attrib != -1)
+            glEnableVertexAttribArray(attrib);
+    }
 
-	ScopedVertexAttribArray::~ScopedVertexAttribArray()
-	{
-		if (attrib != -1)
-			glDisableVertexAttribArray(attrib);
-	}
+    ScopedVertexAttribArray::~ScopedVertexAttribArray()
+    {
+        if (attrib != -1)
+            glDisableVertexAttribArray(attrib);
+    }
 } // namespace gl
 
 #endif // FEATURE_3D_RENDERING

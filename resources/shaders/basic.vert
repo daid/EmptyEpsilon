@@ -10,6 +10,6 @@ varying vec2 fragtexcoords;
 
 void main()
 {
-	fragtexcoords = texcoords;
-	gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);
+    fragtexcoords = texcoords;
+    gl_Position = gl_ModelViewProjectionMatrix * vec4(position, 1.0);
 }
