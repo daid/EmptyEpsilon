@@ -1,8 +1,21 @@
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 #include "beamEffect.h"
 #include "spaceship.h"
 #include "mesh.h"
 #include "main.h"
+
+#if FEATURE_3D_RENDERING
+sf::Shader* BeamEffect::shader = nullptr;
+uint32_t BeamEffect::shaderPositionAttribute = 0;
+uint32_t BeamEffect::shaderTexCoordsAttribute = 0;
+
+struct VertexAndTexCoords
+{
+    sf::Vector3f vertex;
+    sf::Vector2f texcoords;
+};
+#endif
 
 /// BeamEffect is a beam weapon fire effect that will fade after 1 seond
 /// Example: BeamEffect():setSource(player):setTarget(enemy_ship)
@@ -43,6 +56,14 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&beam_fire_sound);
     registerMemberReplication(&beam_fire_sound_power);
     registerMemberReplication(&fire_ring);
+#if FEATURE_3D_RENDERING
+    if (!shader)
+    {
+        shader = ShaderManager::getShader("shaders/basic");
+        shaderPositionAttribute = glGetAttribLocation(shader->getNativeHandle(), "position");
+        shaderTexCoordsAttribute = glGetAttribLocation(shader->getNativeHandle(), "texcoords");
+    }
+#endif
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -58,26 +79,38 @@ void BeamEffect::draw3DTransparent()
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(camera_position - startPoint, endPoint - startPoint));
 
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture(beam_texture));
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
-    glColor3f(lifetime, lifetime, lifetime);
+    // Setup shader
+    shader->setUniform("color", sf::Glsl::Vec4(lifetime, lifetime, lifetime, 1.f));
+    shader->setUniform("textureMap", *textureManager.getTexture(beam_texture));
+    sf::Shader::bind(shader);
+    
+    gl::ScopedVertexAttribArray positions(shaderPositionAttribute);
+    gl::ScopedVertexAttribArray texcoords(shaderTexCoordsAttribute);
+
+    std::array<VertexAndTexCoords, 4> quad;
+    // Beam
     {
         sf::Vector3f v0 = startPoint + eyeNormal * 4.0f;
         sf::Vector3f v1 = endPoint + eyeNormal * 4.0f;
         sf::Vector3f v2 = endPoint - eyeNormal * 4.0f;
         sf::Vector3f v3 = startPoint - eyeNormal * 4.0f;
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex3f(v0.x, v0.y, v0.z);
-        glTexCoord2f(0, 1);
-        glVertex3f(v1.x, v1.y, v1.z);
-        glTexCoord2f(1, 1);
-        glVertex3f(v2.x, v2.y, v2.z);
-        glTexCoord2f(1, 0);
-        glVertex3f(v3.x, v3.y, v3.z);
-        glEnd();
+        quad[0].vertex = v0;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v1;
+        quad[1].texcoords = { 0.f, 1.f };
+        quad[2].vertex = v2;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v3;
+        quad[3].texcoords = { 1.f, 0.f };
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        // Draw the beam
+        glDrawArrays(GL_QUADS, 0, quad.size());
+
     }
 
+    // Fire ring
     if (fire_ring)
     {
         sf::Vector3f side = sf::cross(hitNormal, sf::Vector3f(0, 0, 1));
@@ -91,18 +124,20 @@ void BeamEffect::draw3DTransparent()
         sf::Vector3f v3 = v0 - side * ring_size - up * ring_size;
         sf::Vector3f v4 = v0 + side * ring_size - up * ring_size;
 
-        ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
-        sf::Shader::bind(ShaderManager::getShader("basicShader"));
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex3f(v1.x, v1.y, v1.z);
-        glTexCoord2f(1, 0);
-        glVertex3f(v2.x, v2.y, v2.z);
-        glTexCoord2f(1, 1);
-        glVertex3f(v3.x, v3.y, v3.z);
-        glTexCoord2f(0, 1);
-        glVertex3f(v4.x, v4.y, v4.z);
-        glEnd();
+        quad[0].vertex = v1;
+        quad[0].texcoords = { 0.f, 0.f };
+        quad[1].vertex = v2;
+        quad[1].texcoords = { 1.f, 0.f };
+        quad[2].vertex = v3;
+        quad[2].texcoords = { 1.f, 1.f };
+        quad[3].vertex = v4;
+        quad[3].texcoords = { 0.f, 1.f };
+
+        shader->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
+        sf::Shader::bind(shader);
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        glDrawArrays(GL_QUADS, 0, quad.size());
     }
 }
 #endif//FEATURE_3D_RENDERING
