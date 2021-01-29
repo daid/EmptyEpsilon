@@ -303,49 +303,71 @@ void ShipAI::updateTarget()
 
 void ShipAI::runOrders()
 {
-    //When we are not attacking a target, follow orders
+    // When not attacking a target, follow orders.
     switch(owner->getOrder())
     {
-    case AI_Idle:            //Don't do anything, don't even attack.
+    case AI_Idle:
+    {
+        // Hold the current position. Do nothing. Don't attack.
         pathPlanner.clear();
         break;
-    case AI_Roaming:         //Fly around and engage at will, without a clear target
-        //Could mean 3 things
-        // 1) we are looking for a target
-        // 2) we ran out of missiles
-        // 3) we have no weapons
+    }
+    case AI_Roaming:
+    {
+        // Roam and engage at will, without a specific target.
+
+        // - Continuously roam if armed and looking for a target.
         if (has_missiles || has_beams)
         {
+            // If this ship has beams or missiles, find a new target
+            // within 50U.
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), 50000);
+
+            // If a target is found, set it as the target going forward.
             if (new_target)
             {
                 owner->target_id = new_target->getMultiplayerId();
-            }else{
-                sf::Vector2f diff = owner->getOrderTargetLocation() - owner->getPosition();
-                if (diff < 1000.0f)
-                    owner->orderRoamingAt(sf::Vector2f(random(-30000, 30000), random(-30000, 30000)));
-                flyTowards(owner->getOrderTargetLocation());
             }
-        }else if (owner->weapon_tube_count > 0)
+            // If no target is found, roam to a new random location within
+            // 30U of this ship's current position.
+            else
+            {
+                roamToNewRandomLocation(30000.0f);
+            }
+        }
+        // - Retreat to a station, or roam to find a station, if out of
+        //   missiles and without beam weapons.
+        else if (owner->weapon_tube_count > 0)
         {
-            // Find a station which can re-stock our weapons.
+            // Find a dockable object within 50U that can re-stock
+            // missiles.
             P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), 50000);
+
+            // If a dockable object is found, retreat toward it.
             if (new_target)
             {
                 owner->orderRetreat(new_target);
-            }else{
-                sf::Vector2f diff = owner->getOrderTargetLocation() - owner->getPosition();
-                if (diff < 1000.0f)
-                    owner->orderRoamingAt(sf::Vector2f(random(-30000, 30000), random(-30000, 30000)));
-                flyTowards(owner->getOrderTargetLocation());
             }
-        }else{
+            // If no station is found, roam to a new random location within
+            // 30U of this ship's current position.
+            else
+            {
+                roamToNewRandomLocation(30000.0f);
+            }
+        }
+        // - Hold ground if unarmed.
+        else
+        {
             pathPlanner.clear();
         }
         break;
-    case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
+    }
+    case AI_StandGround:
+    {
+        // Hold this position. Do not retreat. Attack nearby targets.
         pathPlanner.clear();
         break;
+    }
     case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
     case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
         flyTowards(owner->getOrderTargetLocation());
@@ -776,4 +798,22 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(sf::Vector2f position, float
         }
     }
     return target;
+}
+
+void ShipAI::roamToNewRandomLocation(float radius = 30000.0f)
+{
+    sf::Vector2f position = owner->getPosition();
+    sf::Vector2f target_location = owner->getOrderTargetLocation();
+    sf::Vector2f diff = target_location - position;
+
+    // If we're within 1U of the point we're roaming toward, or our
+    // target coordinates are the default 0,0, roam toward a new
+    // random point within a 30U radius of our current position.
+    if (diff < 1000.0f || target_location == sf::Vector2f(0.0f, 0.0f))
+    {
+        owner->orderRoamingAt(sf::Vector2f(random(position.x - radius, position.y + radius), random(position.x - radius, position.y + radius)));
+    }
+
+    // Navigate to the new roaming target location.
+    flyTowards(owner->getOrderTargetLocation());
 }
