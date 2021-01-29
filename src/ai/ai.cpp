@@ -332,7 +332,7 @@ void ShipAI::runOrders()
             // 30U of this ship's current position.
             else
             {
-                roamToNewRandomLocation(30000.0f);
+                roamToNewRandomLocation(owner->getPosition(), 30000.0f);
             }
         }
         // - Retreat to a station, or roam to find a station, if out of
@@ -352,7 +352,7 @@ void ShipAI::runOrders()
             // 30U of this ship's current position.
             else
             {
-                roamToNewRandomLocation(30000.0f);
+                roamToNewRandomLocation(owner->getPosition(), 30000.0f);
             }
         }
         // - Hold ground if unarmed.
@@ -800,15 +800,16 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(sf::Vector2f position, float
     return target;
 }
 
-void ShipAI::roamToNewRandomLocation(float radius = 30000.0f)
+void ShipAI::roamToNewRandomLocation(sf::Vector2f position, float radius)
 {
-    sf::Vector2f position = owner->getPosition();
+    sf::Vector2f owner_position = owner->getPosition();
     sf::Vector2f target_location = owner->getOrderTargetLocation();
-    sf::Vector2f diff = target_location - position;
+    sf::Vector2f diff = target_location - owner_position;
 
     // If we're within 1U of the point we're roaming toward, or our
     // target coordinates are the default 0,0, roam toward a new
-    // random point within a 30U radius of our current position.
+    // random point within a 30U radius of the roaming origin
+    // (ship's position at initial start of roaming).
     if (diff < 1000.0f || target_location == sf::Vector2f(0.0f, 0.0f))
     {
         owner->orderRoamingAt(sf::Vector2f(random(position.x - radius, position.y + radius), random(position.x - radius, position.y + radius)));

@@ -61,7 +61,7 @@ protected:
     virtual void runAttack(P<SpaceObject> target);
     virtual void flyTowards(sf::Vector2f target, float keep_distance = 100.0);
     virtual void flyFormation(P<SpaceObject> target, sf::Vector2f offset);
-    virtual void roamToNewRandomLocation(float radius);
+    virtual void roamToNewRandomLocation(sf::Vector2f position, float radius);
 
     P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
     float targetScore(P<SpaceObject> target);
