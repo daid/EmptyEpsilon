@@ -2,9 +2,12 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
+
+class ScanProbe;
 
 enum ECommsState
 {
@@ -247,7 +250,8 @@ public:
     void commandWarp(int8_t target);
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
-    void commandSetScienceLink(int32_t id);
+    void commandSetScienceLink(P<ScanProbe> probe);
+    void commandClearScienceLink();
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);

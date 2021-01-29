@@ -1,6 +1,5 @@
 #include "playerSpaceship.h"
 #include "gui/colorConfig.h"
-#include "scanProbe.h"
 #include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
@@ -113,7 +112,16 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLaunchProbe);
+    /// Command the science screen to link to the given ScanProbe object.
+    /// This is equivalent of selecting a probe on Relay and clicking
+    /// "Link to Science".
+    /// Example: player:commandSetScienceLink(probeObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    /// Command the science screen to clear its link to any ScanProbe object.
+    /// This is equivalent to clicking "Link to Science" on Relay when a link
+    /// is already active.
+    /// Example: player:commandClearScienceLink()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandClearScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
     /// Return the number of Engineering repair crews on the ship.
@@ -133,21 +141,21 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Passes the launching PlayerSpaceship and launched ScanProbe.
     /// Example:
     /// player:onProbeLaunch(function (player, probe)
-    ///     print(probe:getCallSign() .. " launched from " .. player:getCallSign())
+    ///     print("Probe " .. probe:getCallSign() .. " launched from ship " .. player:getCallSign())
     /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
-    /// Callback when this ship links a probe to the science screen.
+    /// Callback when this ship links a probe to the Science screen.
     /// Passes the PlayerShip and linked ScanProbe.
     /// Example:
     /// player:onProbeLink(function (player, probe)
-    ///     print(probe:getCallSign() .. " linked to science on " .. player:getCallSign())
+    ///     print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. player:getCallSign())
     /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLink);
-    /// Callback when this ship unlinks a probe from the science screen.
+    /// Callback when this ship unlinks a probe from the Science screen.
     /// Passes the PlayerShip.
     /// Example:
     /// player:onProbeUnlink(function (player)
-    ///     print("probe unlinked from science on " .. player:getCallSign())
+    ///     print("Probe unlinked from Science on ship " .. player:getCallSign())
     /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeUnlink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
@@ -2003,10 +2011,19 @@ void PlayerSpaceship::commandCustomFunction(string name)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetScienceLink(int32_t id)
+void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
 {
     sf::Packet packet;
-    packet << CMD_SET_SCIENCE_LINK << id;
+    packet << CMD_SET_SCIENCE_LINK;
+    packet << probe->getMultiplayerId();
+    sendClientCommand(packet);
+}
+
+void PlayerSpaceship::commandClearScienceLink()
+{
+    sf::Packet packet;
+    packet << CMD_SET_SCIENCE_LINK;
+    packet << -1;
     sendClientCommand(packet);
 }
 
