@@ -1644,20 +1644,28 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_SCIENCE_LINK:
         {
+            // Capture previously linked probe, if there is one.
+            P<ScanProbe> old_linked_probe;
+
+            if (linked_science_probe_id != -1)
+            {
+                old_linked_probe = game_server->getObjectById(linked_science_probe_id);
+            }
+
             packet >> linked_science_probe_id;
 
             if (linked_science_probe_id != -1 && on_probe_link.isSet())
             {
-                P<ScanProbe> p = game_server->getObjectById(linked_science_probe_id);
+                P<ScanProbe> new_linked_probe = game_server->getObjectById(linked_science_probe_id);
 
-                if (p)
+                if (new_linked_probe)
                 {
-                    on_probe_link.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+                    on_probe_link.call(P<PlayerSpaceship>(this), P<ScanProbe>(new_linked_probe));
                 }
             }
             else if (linked_science_probe_id == -1 && on_probe_unlink.isSet())
             {
-                on_probe_unlink.call(P<PlayerSpaceship>(this));
+                on_probe_unlink.call(P<PlayerSpaceship>(this), P<ScanProbe>(old_linked_probe));
             }
         }
         break;
