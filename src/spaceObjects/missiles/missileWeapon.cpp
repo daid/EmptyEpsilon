@@ -8,6 +8,9 @@
 /// like HomingMissile, HVLI etc.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 {
+  /// Get the missile's owner's object.
+  REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getOwner);
+  /// Get the missile's target object.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
   /// Must be an existing target, else does nothing. It does not check if really targetable or not.
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setTarget);
@@ -130,13 +133,24 @@ void MissileWeapon::updateMovement()
     }
 }
 
+P<SpaceObject> MissileWeapon::getOwner()
+{
+    // Owner is assigned by the weapon tube upon firing.
+    if (game_server)
+    {
+        return owner;
+    }
+
+    LOG(ERROR) << "MissileWeapon::getOwner(): owner not replicated to clients.";
+    return nullptr;
+}
+
 P<SpaceObject> MissileWeapon::getTarget()
 {
     if (game_server)
         return game_server->getObjectById(target_id);
     return game_client->getObjectById(target_id);
 }
-
 
 void MissileWeapon::setTarget(P<SpaceObject> target)
 {
@@ -165,4 +179,27 @@ EMissileSizes MissileWeapon::getMissileSize()
 void MissileWeapon::setMissileSize(EMissileSizes missile_size)
 {
     category_modifier = MissileWeaponData::convertSizeToCategoryModifier(missile_size);
+}
+
+std::unordered_map<string, string> MissileWeapon::getGMInfo()
+{
+    std::unordered_map<string, string> ret;
+
+    if (owner)
+    {
+        ret["Owner"] = owner->getCallSign();
+    }
+
+    P<SpaceObject> target = game_server->getObjectById(target_id);
+
+    if (target)
+    {
+        ret["Target"] = target->getCallSign();
+    }
+
+    ret["Faction"] = getLocaleFaction();
+    ret["Lifetime"] = lifetime;
+    ret["Size"] = getMissileSize();
+
+    return ret;
 }
