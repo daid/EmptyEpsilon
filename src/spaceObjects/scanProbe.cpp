@@ -6,7 +6,7 @@
 #include "scriptInterface.h"
 
 /// A scan probe.
-REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
+REGISTER_SCRIPT_SUBCLASS(ScanProbe, SpaceObject)
 {
     /// Set the probe's remaining lifetime, in seconds.
     /// The default initial lifetime is 10 minutes.
@@ -21,6 +21,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
     /// Get the probe's target coordinates.
     /// Example: local targetX, targetY = probe:getTarget()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getTarget);
+    /// Set the probe's owner SpaceObject.
+    /// Requires a SpaceObject.
+    /// Example: probe:setOwner(owner_ship)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setOwner);
     /// Get the probe's owner SpaceObject.
     /// Example: local owner_ship = probe:getOwner()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getOwner);
