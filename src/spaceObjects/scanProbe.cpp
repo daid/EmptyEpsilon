@@ -8,6 +8,15 @@
 /// A scan probe.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
 {
+    /// Set the probe's speed. A value of 1000 = 1U/second.
+    /// Probes move at a fixed rate of speed and ignore physics.
+    /// Requires a float value. The default vaule is 1000.
+    /// Example: probe:setSpeed(2000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setSpeed);
+    /// Get the probe's speed. A value of 1000 = 1U/second.
+    /// Returns a float value.
+    /// Example: local speed = probe:getSpeed()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getSpeed);
     /// Set the probe's remaining lifetime, in seconds.
     /// The default initial lifetime is 10 minutes.
     /// Example: probe:setLifetime(60 * 5)
@@ -40,7 +49,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(ScanProbe, "ScanProbe");
 ScanProbe::ScanProbe()
-: SpaceObject(100, "ScanProbe")
+: SpaceObject(100, "ScanProbe"),
+  probe_speed(1000.0f)
 {
     // Probe persists for 10 minutes.
     lifetime = 60 * 10;
@@ -81,6 +91,16 @@ ScanProbe::ScanProbe()
 // defined.
 ScanProbe::~ScanProbe()
 {
+}
+
+void ScanProbe::setSpeed(float probe_speed)
+{
+    this->probe_speed = probe_speed > 0.0f ? probe_speed : 0.0f;
+}
+
+float ScanProbe::getSpeed()
+{
+    return this->probe_speed;
 }
 
 void ScanProbe::setLifetime(float lifetime)
