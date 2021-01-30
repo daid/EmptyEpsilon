@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 
 #include "main.h"
@@ -5,6 +6,21 @@
 #include "playerInfo.h"
 
 #include "scriptInterface.h"
+
+#include "glObjects.h"
+
+#if FEATURE_3D_RENDERING
+sf::Shader* Nebula::shader = nullptr;
+uint32_t Nebula::shaderPositionAttribute = 0;
+uint32_t Nebula::shaderTexCoordsAttribute = 0;
+
+struct VertexAndTexCoords
+{
+    sf::Vector3f vertex;
+    sf::Vector2f texcoords;
+};
+#endif
+
 
 /// Nebulae block long-range radar in a 5U range.
 REGISTER_SCRIPT_SUBCLASS(Nebula, SpaceObject)
@@ -36,6 +52,15 @@ Nebula::Nebula()
     }
 
     nebula_list.push_back(this);
+
+#if FEATURE_3D_RENDERING
+    if (!shader)
+    {
+        shader = ShaderManager::getShader("shaders/billboard");
+        shaderPositionAttribute = glGetAttribLocation(shader->getNativeHandle(), "position");
+        shaderTexCoordsAttribute = glGetAttribLocation(shader->getNativeHandle(), "texcoords");
+    }
+#endif
 }
 
 #if FEATURE_3D_RENDERING
@@ -43,6 +68,17 @@ void Nebula::draw3DTransparent()
 {
     glRotatef(getRotation(), 0, 0, -1);
     glTranslatef(-getPosition().x, -getPosition().y, 0);
+
+    std::array<VertexAndTexCoords, 4> quad{
+        sf::Vector3f(), {0.f, 0.f},
+        sf::Vector3f(), {1.f, 0.f},
+        sf::Vector3f(), {1.f, 1.f},
+        sf::Vector3f(), {0.f, 1.f}
+    };
+
+    gl::ScopedVertexAttribArray positions(shaderPositionAttribute);
+    gl::ScopedVertexAttribArray texcoords(shaderTexCoordsAttribute);
+
     for(int n=0; n<cloud_count; n++)
     {
         NebulaCloud& cloud = clouds[n];
@@ -55,19 +91,21 @@ void Nebula::draw3DTransparent()
         if (alpha < 0.0)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
-        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-        glBegin(GL_QUADS);
-        glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
-        glTexCoord2f(0, 0);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(1, 0);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(1, 1);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(0, 1);
-        glVertex3f(position.x, position.y, position.z);
-        glEnd();
+        // setup our quad.
+        for (auto& point : quad)
+        {
+            point.vertex = position;
+        }
+
+        
+        shader->setUniform("textureMap", *textureManager.getTexture("Nebula" + string(cloud.texture) + ".png"));
+        shader->setUniform("color", sf::Glsl::Vec4(alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size));
+
+        sf::Shader::bind(shader); // we need to rebind the shader (for the texture unit)
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        glDrawArrays(GL_QUADS, 0, quad.size());
     }
 }
 #endif//FEATURE_3D_RENDERING
