@@ -43,7 +43,7 @@ ExplosionEffect::ExplosionEffect()
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
 #if FEATURE_3D_RENDERING
-    if (!basicShader)
+    if (!basicShader && gl::isAvailable())
     {
         basicShader = ShaderManager::getShader("shaders/basic");
         basicShaderPositionAttribute = glGetAttribLocation(basicShader->getNativeHandle(), "position");
