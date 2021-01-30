@@ -131,13 +131,31 @@ void ScanProbe::update(float delta)
 
     // The probe moves in a straight line to its destination, independent of
     // physics and at a fixed rate of speed.
-    if ((target_position - getPosition()) > getRadius())
+    sf::Vector2f diff = target_position - getPosition();
+    float movement = delta * probe_speed;
+    float distance = sf::length(diff);
+
+    // If the probe's outer radius hasn't reached the target position ...
+    if (diff > getRadius())
     {
-        // The probe is in transit.
+        // The probe is still in transit.
         has_arrived = false;
-        sf::Vector2f v = normalize(target_position - getPosition());
-        setPosition(getPosition() + v * delta * probe_speed);
+
+        // Normalize the diff.
+        sf::Vector2f v = normalize(diff);
+
+        // Update the probe's heading.
         setHeading(vector2ToAngle(v) + 90.0f);
+
+        // Move toward the target position at the given rate of speed.
+        // However, don't overshoot the target if traveling so fast that the
+        // movement per tick is greater than the distance to the destination.
+        if (distance < movement)
+        {
+            movement = distance;
+        }
+
+        setPosition(getPosition() + v * movement);
     }
     else if (!has_arrived)
     {
