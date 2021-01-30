@@ -6,7 +6,7 @@
 #include "scriptInterface.h"
 
 /// A scan probe.
-REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
+REGISTER_SCRIPT_SUBCLASS(ScanProbe, SpaceObject)
 {
     /// Set the probe's remaining lifetime, in seconds.
     /// The default initial lifetime is 10 minutes.
