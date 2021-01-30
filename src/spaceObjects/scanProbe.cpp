@@ -21,6 +21,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ScanProbe, SpaceObject)
     /// Get the probe's target coordinates.
     /// Example: local targetX, targetY = probe:getTarget()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getTarget);
+    /// Set the probe's owner SpaceObject.
+    /// Requires a SpaceObject.
+    /// Example: probe:setOwner(owner_ship)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setOwner);
     /// Get the probe's owner SpaceObject.
     /// Example: local owner_ship = probe:getOwner()
     REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getOwner);
