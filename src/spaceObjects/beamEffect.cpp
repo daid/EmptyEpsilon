@@ -57,7 +57,7 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&beam_fire_sound_power);
     registerMemberReplication(&fire_ring);
 #if FEATURE_3D_RENDERING
-    if (!shader)
+    if (!shader && gl::isAvailable())
     {
         shader = ShaderManager::getShader("shaders/basic");
         shaderPositionAttribute = glGetAttribLocation(shader->getNativeHandle(), "position");

@@ -33,6 +33,12 @@ namespace gl
         if (attrib != -1)
             glDisableVertexAttribArray(attrib);
     }
+
+    bool isAvailable()
+    {
+        // Works in "greater or equal than" fashion..
+        return GLEW_VERSION_2_0;
+    }
 } // namespace gl
 
 #endif // FEATURE_3D_RENDERING
