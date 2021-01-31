@@ -48,6 +48,8 @@ namespace gl
     private:
         int32_t attrib = -1;
     };
+
+    bool isAvailable();
 }
 #endif // FEATURE_3D_RENDERING
 #endif // EMPTYEPSILON_GLOBJECTS_H
