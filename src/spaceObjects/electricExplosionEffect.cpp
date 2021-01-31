@@ -40,7 +40,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
 #if FEATURE_3D_RENDERING
-    if (!particlesShader)
+    if (!particlesShader && gl::isAvailable())
     {
         particlesShader = ShaderManager::getShader("shaders/billboard");
         particlesShaderPositionAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "position");

@@ -61,7 +61,7 @@ WormHole::WormHole()
     }
 
 #if FEATURE_3D_RENDERING
-    if (!shader)
+    if (!shader && gl::isAvailable())
     {
         shader = ShaderManager::getShader("shaders/billboard");
         shaderPositionAttribute = glGetAttribLocation(shader->getNativeHandle(), "position");

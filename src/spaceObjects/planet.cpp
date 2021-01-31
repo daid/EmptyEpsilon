@@ -155,7 +155,7 @@ Planet::Planet()
     registerMemberReplication(&orbit_distance);
 
 #if FEATURE_3D_RENDERING
-    if (!billboardShader)
+    if (!billboardShader && gl::isAvailable())
     {
         billboardShader = ShaderManager::getShader("shaders/billboard");
         billboardShaderPositionAttribute = glGetAttribLocation(billboardShader->getNativeHandle(), "position");
