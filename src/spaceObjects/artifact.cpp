@@ -23,6 +23,15 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onPickUp);
     /// Let the artifact rotate. For reference, normal asteroids in the game have spins between 0.1 and 0.8.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setSpin);
+    /// Set the icon to be used for this artifact on the radar.
+    /// For example, artifact:setRadarTraceIcon("RadarArrow.png") will show an arrow instead of a dot for this artifact.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setRadarTraceIcon);
+    /// Scales the radar trace. Setting to 0 restores to standard autoscaling.
+    /// Setting to 1 is needed for mimicking ship traces.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setRadarTraceScale);
+    /// Sets the color of the radar trace.
+    /// Example: 255,200,100 for mimicking asteroids.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setRadarTraceColor);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Artifact, "Artifact");
@@ -31,6 +40,9 @@ Artifact::Artifact()
 {
     registerMemberReplication(&model_data_name);
     registerMemberReplication(&artifact_spin);
+    registerMemberReplication(&radar_trace_icon);
+    registerMemberReplication(&radar_trace_scale);
+    registerMemberReplication(&radar_trace_color);
 
     setRotation(random(0, 360));
 
@@ -63,13 +75,25 @@ void Artifact::draw3D()
 void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "RadarBlip.png");
+    textureManager.setTexture(object_sprite, radar_trace_icon);
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
-    object_sprite.setColor(sf::Color(255, 255, 255));
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
-    if (size < 0.2)
-        size = 0.2;
+    object_sprite.setColor(radar_trace_color);
+    // radar trace scaling, via script or automatically
+    float size;
+    if (radar_trace_scale > 0)
+    {
+        if (long_range)
+            size =radar_trace_scale * 0.7;
+        else
+            size = radar_trace_scale;
+    }
+    else
+    {
+        size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
+        if (size < 0.2)
+            size = 0.2;
+    }
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
 }
@@ -111,6 +135,16 @@ void Artifact::allowPickup(bool allow)
 void Artifact::setSpin(float spin)
 {
     artifact_spin = spin;
+}
+
+void Artifact::setRadarTraceIcon(string icon)
+{
+    radar_trace_icon = icon;
+}
+
+void Artifact::setRadarTraceScale(float scale)
+{
+    radar_trace_scale = scale;
 }
 
 void Artifact::onPickUp(ScriptSimpleCallback callback)
