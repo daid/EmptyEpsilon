@@ -57,8 +57,9 @@ ScanProbe::ScanProbe()
     // Probe has not arrived yet.
     has_arrived = false;
 
-    registerMemberReplication(&owner_id);
-    registerMemberReplication(&target_position);
+    registerMemberReplication(&owner_id, 0.5);
+    registerMemberReplication(&probe_speed, 0.1);
+    registerMemberReplication(&target_position, 0.1);
     registerMemberReplication(&lifetime, 60.0);
 
     // Give the probe a small electrical radar signature.
