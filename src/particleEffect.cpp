@@ -26,6 +26,7 @@ void ParticleEngine::render()
 
 void ParticleEngine::update(float delta)
 {
+#if FEATURE_3D_RENDERING
     // Update particles, move all freshly expired particles to the end.
     // Update our first_expired entry.
     first_expired = std::partition(std::begin(particles), first_expired, [delta](Particle& p)
@@ -33,6 +34,7 @@ void ParticleEngine::update(float delta)
         p.life_time += delta;
         return p.life_time <= p.max_life_time;
     });
+#endif // FEATURE_3D_RENDERING
 }
 
 void ParticleEngine::spawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time)
@@ -122,7 +124,7 @@ void ParticleEngine::doRender()
 
         for (size_t n = 0; n < live_particle_count;)
         {
-            auto instance_count = std::min(live_particle_count - n, instances_per_draw);
+            auto instance_count = std::min(live_particle_count - n, positions.size());
 
             // setup the instances (individual particles)
             for (auto instance = 0; instance < instance_count; ++instance)
