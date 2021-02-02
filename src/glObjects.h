@@ -61,6 +61,19 @@ namespace gl
         int32_t attrib = -1;
     };
 
+    class ScopedTexture final
+    {
+    public:
+        ScopedTexture(uint32_t target, uint32_t texture);
+        ~ScopedTexture();
+
+        uint32_t get() const { return texture; }
+    private:
+        uint32_t target = 0;
+        uint32_t texture = 0;
+        int32_t previously_bound = -1;
+    };
+
     bool isAvailable();
 }
 #endif // FEATURE_3D_RENDERING

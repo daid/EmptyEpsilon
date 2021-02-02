@@ -31,13 +31,15 @@ class ParticleEngine : public Updatable
 #if FEATURE_3D_RENDERING
     static constexpr size_t vertices_per_instance = 4; // a quad...
     static constexpr size_t elements_per_instance = 6; // ... made of two triangles (ES2 has no support for GL_QUADS)
-    static constexpr size_t instances_per_draw = 64; // Number of particles that a single draw can handle. ! Sync up with the shader !
+    static constexpr size_t instances_per_draw = 60; // Number of particles that a single draw can handle. ! Sync up with the shader !
     static constexpr size_t max_vertex_count = instances_per_draw * vertices_per_instance; // Maximum number of vertices per draw call.
 
     enum class Uniforms : uint8_t
     {
         Centers = 0,
         ColorAndSizes,
+        Projection,
+        ModelView,
 
         Count
     };

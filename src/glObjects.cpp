@@ -45,6 +45,22 @@ namespace gl
             glDisableVertexAttribArray(attrib);
     }
 
+    ScopedTexture::ScopedTexture(uint32_t target, uint32_t texture)
+        :target{ target }, texture{ texture }
+    {
+        // ES2 only supports 2D textures and cubemaps.
+        glGetIntegerv(target == GL_TEXTURE_2D ? GL_TEXTURE_BINDING_2D : GL_TEXTURE_BINDING_CUBE_MAP, &previously_bound);
+        
+        if (previously_bound != texture)
+            glBindTexture(target, texture);
+    }
+
+    ScopedTexture::~ScopedTexture()
+    {
+        if (previously_bound != texture)
+            glBindTexture(target, previously_bound);
+    }
+
     bool isAvailable()
     {
         // Works in "greater or equal than" fashion..

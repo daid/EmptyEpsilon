@@ -1,4 +1,5 @@
-#version 120
+#version 100
+precision mediump float;
 
 // Program inputs
 uniform sampler2D textureMap;

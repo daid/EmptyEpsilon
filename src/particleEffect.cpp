@@ -62,9 +62,13 @@ ParticleEngine::ParticleEngine()
         shader = ShaderManager::getShader("shaders/particles");
         shaderVertexIDAttribute = glGetAttribLocation(shader->getNativeHandle(), "vertex_id");
 
+        auto handle = shader->getNativeHandle();
+        glValidateProgram(handle);
+
         uniforms[as_index(Uniforms::Centers)] = glGetUniformLocation(shader->getNativeHandle(), "centers");
         uniforms[as_index(Uniforms::ColorAndSizes)] = glGetUniformLocation(shader->getNativeHandle(), "color_and_sizes");
-
+        uniforms[as_index(Uniforms::Projection)] = glGetUniformLocation(shader->getNativeHandle(), "projection");
+        uniforms[as_index(Uniforms::ModelView)] = glGetUniformLocation(shader->getNativeHandle(), "model_view");
 
         std::array<uint8_t, instances_per_draw * elements_per_instance> elements;
 
@@ -105,10 +109,21 @@ ParticleEngine::ParticleEngine()
 
 void ParticleEngine::doRender()
 {
-    shader->setUniform("textureMap", *textureManager.getTexture("particle.png"));
-
     sf::Shader::bind(shader);
 
+    // Setup shared state:
+    // - Texture
+    gl::ScopedTexture particle_texture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
+
+    // - Matrices
+    std::array<float, 4*4> matrix;
+    
+    glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
+    glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, matrix.data());
+    
+    glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
+    glUniformMatrix4fv(uniforms[as_index(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
+    
     {
         std::array<sf::Glsl::Vec3, instances_per_draw> positions;
         std::array<sf::Glsl::Vec4, instances_per_draw> color_and_sizes;
@@ -118,7 +133,7 @@ void ParticleEngine::doRender()
         gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, particleEngine->buffers[as_index(Buffers::Vertex)]);
 
         glVertexAttribPointer(ids.get(), 1, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)0);
-
+ 
         // Process only non-expired
         size_t live_particle_count = first_expired - std::begin(particles);
 
@@ -141,13 +156,14 @@ void ParticleEngine::doRender()
             // Send instances to shader.
             glUniform3fv(uniforms[as_index(Uniforms::Centers)], positions.size(), reinterpret_cast<const float*>(positions.data()));
             glUniform4fv(uniforms[as_index(Uniforms::ColorAndSizes)], color_and_sizes.size(), reinterpret_cast<const float*>(color_and_sizes.data()));
-
+        
             // Draw our instances
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_BYTE, nullptr);
+            
             n += instance_count;
         }
     }
-    sf::Shader::bind(NULL);
+    sf::Shader::bind(nullptr);
 }
 
 void ParticleEngine::doSpawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time)
