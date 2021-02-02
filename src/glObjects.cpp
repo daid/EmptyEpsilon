@@ -19,6 +19,15 @@ namespace gl
         {
             glDeleteBuffers(count, buffers);
         }
+
+        void createTextures(size_t count, uint32_t* textures)
+        {
+            glGenTextures(count, textures);
+        }
+        void deleteTextures(size_t count, const uint32_t* textures)
+        {
+            glDeleteTextures(count, textures);
+        }
     }
 
     ScopedVertexAttribArray::ScopedVertexAttribArray(int32_t attrib)

@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 
 #include "main.h"
@@ -26,6 +27,98 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     show_callsigns = false;
     show_headings = false;
     show_spacedust = false;
+
+    // Load up our starbox into a cubemap.
+#if FEATURE_3D_RENDERING
+    if (gl::isAvailable())
+    {
+        // Setup shader.
+        starbox_shader = ShaderManager::getShader("shaders/starbox");
+        starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = glGetUniformLocation(starbox_shader->getNativeHandle(), "projection");
+        starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)] = glGetUniformLocation(starbox_shader->getNativeHandle(), "model_view");
+
+        starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = glGetAttribLocation(starbox_shader->getNativeHandle(), "position");
+
+        // Load up the cube texture.
+        // Face setup
+        constexpr std::array<std::tuple<const char*, uint32_t>, 6> faces{
+            std::make_tuple("StarsRight.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
+            std::make_tuple("StarsLeft.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
+            std::make_tuple("StarsTop.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
+            std::make_tuple("StarsBottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
+            std::make_tuple("StarsFront.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
+            std::make_tuple("StarsBack.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
+        };
+
+        // Upload
+        glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
+        sf::Image image;
+        for (const auto& face : faces)
+        {
+            auto stream = getResourceStream(std::get<0>(face));
+            if (!stream || !image.loadFromStream(**stream))
+            {
+                LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
+                image.create(8, 8, sf::Color(255, 0, 255, 128));
+            }
+
+            glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+        }
+
+        // Make it pretty.
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+        for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T , GL_TEXTURE_WRAP_R })
+            glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
+
+        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
+
+        // Load up the ebo and vbo for the cube.
+        /*   
+               .2------6
+             .' |    .'|
+            3---+--7'  |
+            |   |  |   |
+            |  .0--+---4
+            |.'    | .'
+            1------5'
+        */
+        std::array<sf::Vector3f, 8> positions{
+            // Left face
+            sf::Vector3f{-1.f, -1.f, -1.f}, // 0
+            sf::Vector3f{-1.f, -1.f, 1.f},  // 1
+            sf::Vector3f{-1.f, 1.f, -1.f},  // 2
+            sf::Vector3f{-1.f, 1.f, 1.f},   // 3
+
+            // Right face
+            sf::Vector3f{1.f, -1.f, -1.f},  // 4
+            sf::Vector3f{1.f, -1.f, 1.f},   // 5
+            sf::Vector3f{1.f, 1.f, -1.f},   // 6
+            sf::Vector3f{1.f, 1.f, 1.f},    // 7
+        };
+
+        constexpr std::array<uint8_t, 6 * 6> elements{
+            2, 6, 4, 4, 0, 2, // Back
+            3, 2, 0, 0, 1, 3, // Left
+            6, 7, 5, 5, 4, 6, // Right
+            7, 3, 1, 3, 1, 5, // Front
+            6, 2, 3, 3, 7, 6, // Top
+            0, 4, 5, 5, 1, 0, // Bottom
+        };
+
+        // Upload to GPU.
+        glBindBuffer(GL_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Vertex)]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
+
+        glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(sf::Vector3f), positions.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+    }
+#endif // FEATURE_3D_RENDERING
 }
 
 void GuiViewport3D::onDraw(sf::RenderTarget& window)
@@ -46,7 +139,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
     glColor4f(1,1,1,1);
 
@@ -65,49 +157,46 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glGetDoublev(GL_MODELVIEW_MATRIX, model_matrix);
     glGetDoublev(GL_VIEWPORT, viewport);
 
-    glDepthMask(false);
-    sf::Texture::bind(textureManager.getTexture("StarsBack"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f( 100, 100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100,-100);
-    glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsLeft"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f(-100,-100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f(-100,-100,-100);
-    glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsFront"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100,-100);
-    glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsRight"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f( 100,-100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f( 100,-100,-100);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
-    glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsTop"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100, 100, 100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100,-100, 100);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100, 100, 100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100,-100, 100);
-    glEnd();
-    sf::Texture::bind(textureManager.getTexture("StarsBottom"), sf::Texture::Normalized);
-    glBegin(GL_TRIANGLE_STRIP);
-    glTexCoord2f(1.0, 0.0); glVertex3f( 100,-100,-100);
-    glTexCoord2f(0.0, 0.0); glVertex3f(-100,-100,-100);
-    glTexCoord2f(1.0, 1.0); glVertex3f( 100, 100,-100);
-    glTexCoord2f(0.0, 1.0); glVertex3f(-100, 100,-100);
-    glEnd();
+    // Draw starbox.
+    glDepthMask(GL_FALSE);
+    {
+        starbox_shader->setUniform("scale", 100.f);
+        sf::Shader::bind(starbox_shader);
+
+        // Setup shared state (uniforms)
+        glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
+        
+        // Uniform
+        // Upload matrices (only float 4x4 supported in es2)
+        std::array<float, 16> matrix;
+
+        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
+        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, matrix.data());
+
+        glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
+        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
+        
+        // Bind our cube
+        {
+            gl::ScopedVertexAttribArray positions(starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
+            glBindBuffer(GL_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Vertex)]);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
+
+            // Vertex attributes.
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
+
+
+            glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_BYTE, (GLvoid*)0);
+
+            // Cleanup
+            glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+        }
+
+        glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
+        sf::Shader::bind(nullptr);
+    }
+    glDepthMask(GL_TRUE);
 
     if (gameGlobalInfo)
     {

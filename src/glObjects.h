@@ -16,6 +16,9 @@ namespace gl
     {
         void createBuffers(size_t count, uint32_t* dst);
         void deleteBuffers(size_t count, const uint32_t* src);
+
+        void createTextures(size_t count, uint32_t* textures);
+        void deleteTextures(size_t count, const uint32_t* textures);
     }
 
     // RAII object to hold multiple buffers (vbo, ebo etc).
@@ -30,6 +33,26 @@ namespace gl
         ~Buffers()
         {
             details::deleteBuffers(buffers.size(), buffers.data());
+        }
+        constexpr uint32_t operator[](size_t index)
+        {
+            return buffers[index];
+        }
+    private:
+        std::array<uint32_t, Count> buffers;
+    };
+
+    template<size_t Count>
+    class Textures final
+    {
+    public:
+        Textures()
+        {
+            details::createTextures(buffers.size(), buffers.data());
+        }
+        ~Textures()
+        {
+            details::deleteTextures(buffers.size(), buffers.data());
         }
         constexpr uint32_t operator[](size_t index)
         {
