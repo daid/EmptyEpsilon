@@ -14,6 +14,9 @@
 */
 class ShipTemplateBasedObject : public SpaceObject, public Updatable
 {
+private:
+    float long_range_radar_range;
+    float short_range_radar_range;
 public:
     string template_name;
     string type_name;
@@ -90,6 +93,12 @@ public:
     float getRearShieldMax() { return shield_max[1]; }
     void setRearShield(float amount) { if (amount < 0) return; shield_level[1] = amount; }
     void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
+
+    // Radar range
+    float getLongRangeRadarRange() { return long_range_radar_range; }
+    float getShortRangeRadarRange() { return short_range_radar_range; }
+    void setLongRangeRadarRange(float range) { range = std::max(range, 100.0f); long_range_radar_range = range; short_range_radar_range = std::min(short_range_radar_range, range); }
+    void setShortRangeRadarRange(float range) { range = std::max(range, 100.0f); short_range_radar_range = range; long_range_radar_range = std::max(long_range_radar_range, range); }
 
     void setRadarTrace(string trace) { radar_trace = trace; }
     void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }

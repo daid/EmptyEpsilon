@@ -133,10 +133,6 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Returns the launching PlayerSpaceship and launched ScanProbe.
     /// Example: player:onProbeLaunch(trackProbe)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
     /// Set whether the object can scan other objects.
     /// Requires a Boolean value.
     /// Example: ship:setCanScan(true)
@@ -339,8 +335,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
-    registerMemberReplication(&long_range_radar_range);
-    registerMemberReplication(&short_range_radar_range);
     registerMemberReplication(&custom_functions);
 
     // Determine which stations must provide self-destruct confirmation codes.
@@ -711,10 +705,6 @@ void PlayerSpaceship::applyTemplateValues()
     // Set the ship's number of repair crews in Engineering from the ship's
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);
-
-    // Set the ship's radar ranges.
-    long_range_radar_range = ship_template->long_range_radar_range;
-    short_range_radar_range = ship_template->short_range_radar_range;
 
     // Set the ship's capabilities.
     can_scan = ship_template->can_scan;
@@ -2004,16 +1994,16 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
     if (long_range)
     {
-        sf::CircleShape radar_radius(long_range_radar_range * scale);
-        radar_radius.setOrigin(long_range_radar_range * scale, long_range_radar_range * scale);
+        sf::CircleShape radar_radius(getShortRangeRadarRange() * scale);
+        radar_radius.setOrigin(getShortRangeRadarRange() * scale, getShortRangeRadarRange() * scale);
         radar_radius.setPosition(position);
         radar_radius.setFillColor(sf::Color::Transparent);
         radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
         radar_radius.setOutlineThickness(3.0);
         window.draw(radar_radius);
 
-        sf::CircleShape short_radar_radius(short_range_radar_range * scale);
-        short_radar_radius.setOrigin(short_range_radar_range * scale, short_range_radar_range * scale);
+        sf::CircleShape short_radar_radius(getShortRangeRadarRange() * scale);
+        short_radar_radius.setOrigin(getShortRangeRadarRange() * scale, getShortRangeRadarRange() * scale);
         short_radar_radius.setPosition(position);
         short_radar_radius.setFillColor(sf::Color::Transparent);
         short_radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
@@ -2022,37 +2012,13 @@ void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f posit
     }
 }
 
-float PlayerSpaceship::getLongRangeRadarRange()
-{
-    return long_range_radar_range;
-}
-
-float PlayerSpaceship::getShortRangeRadarRange()
-{
-    return short_range_radar_range;
-}
-
-void PlayerSpaceship::setLongRangeRadarRange(float range)
-{
-    range = std::max(range, 100.0f);
-    long_range_radar_range = range;
-    short_range_radar_range = std::min(short_range_radar_range, range);
-}
-
-void PlayerSpaceship::setShortRangeRadarRange(float range)
-{
-    range = std::max(range, 100.0f);
-    short_range_radar_range = range;
-    long_range_radar_range = std::max(long_range_radar_range, range);
-}
-
 string PlayerSpaceship::getExportLine()
 {
     string result = "PlayerSpaceship():setTemplate(\"" + template_name + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + getScriptExportModificationsOnTemplate();
-    if (short_range_radar_range != ship_template->short_range_radar_range)
-        result += ":setShortRangeRadarRange(" + string(short_range_radar_range, 0) + ")";
-    if (long_range_radar_range != ship_template->long_range_radar_range)
-        result += ":setLongRangeRadarRange(" + string(long_range_radar_range, 0) + ")";
+    if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
+        result += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
+    if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
+        result += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
     if (can_scan != ship_template->can_scan)
         result += ":setCanScan(" + string(can_scan, true) + ")";
     if (can_hack != ship_template->can_hack)
