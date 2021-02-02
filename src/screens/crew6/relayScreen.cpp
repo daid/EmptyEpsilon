@@ -218,7 +218,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         bool near_friendly = false;
         foreach(SpaceObject, obj, space_object_list)
         {
-            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj)) || !obj->isFriendly(my_spaceship))
+            if ((!P<ShipTemplateBasedObject>(obj)) || !obj->isFriendly(my_spaceship))
             {
                 P<ScanProbe> sp = obj;
                 if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
@@ -226,7 +226,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
                     continue;
                 }
             }
-            if (obj->getPosition() - target->getPosition() < 5000.0f)
+            if (obj->getPosition() - target->getPosition() < P<ShipTemplateBasedObject>(obj)->getShortRangeRadarRange())
             {
                 near_friendly = true;
                 break;

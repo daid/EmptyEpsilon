@@ -237,20 +237,26 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
         float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
         float r = 5000.0 * scale;
-        sf::CircleShape circle(r, 50);
-        circle.setOrigin(r, r);
-        circle.setFillColor(sf::Color(255, 255, 255, 255));
 
         foreach(SpaceObject, obj, space_object_list)
         {
-            if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
+            if (P<ShipTemplateBasedObject>(obj) && obj->isFriendly(my_spaceship))
             {
+                r = P<ShipTemplateBasedObject>(obj)->getShortRangeRadarRange() * scale;
+                sf::CircleShape circle(r, 50);
+                circle.setOrigin(r, r);
+                circle.setFillColor(sf::Color(255, 255, 255, 255));
                 circle.setPosition(worldToScreen(obj->getPosition()));
                 window.draw(circle);
             }
+
             P<ScanProbe> sp = obj;
+
             if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
             {
+                sf::CircleShape circle(r, 50);
+                circle.setOrigin(r, r);
+                circle.setFillColor(sf::Color(255, 255, 255, 255));
                 circle.setPosition(worldToScreen(obj->getPosition()));
                 window.draw(circle);
             }
@@ -599,12 +605,13 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
     case FriendlysShortRangeFogOfWar:
         if (!my_spaceship)
             return;
+
         foreach(SpaceObject, obj, space_object_list)
         {
             if (!obj->canHideInNebula())
                 visible_objects.insert(*obj);
 
-            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj)) || !obj->isFriendly(my_spaceship))
+            if (!P<ShipTemplateBasedObject>(obj) || !obj->isFriendly(my_spaceship))
             {
                 P<ScanProbe> sp = obj;
                 if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
@@ -613,12 +620,15 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 }
             }
 
+            float r = ((P<ShipTemplateBasedObject>(obj)) && obj->isFriendly(my_spaceship)) ? P<ShipTemplateBasedObject>(obj)->getShortRangeRadarRange() : 5000.0f;
+
             sf::Vector2f position = obj->getPosition();
-            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(5000, 5000), position + sf::Vector2f(5000, 5000));
+            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
+
             foreach(Collisionable, c_obj, obj_list)
             {
                 P<SpaceObject> obj2 = c_obj;
-                if (obj2 && (obj->getPosition() - obj2->getPosition()) < 5000.0f + obj2->getRadius())
+                if (obj2 && (obj->getPosition() - obj2->getPosition()) < r + obj2->getRadius())
                 {
                     visible_objects.insert(*obj2);
                 }
