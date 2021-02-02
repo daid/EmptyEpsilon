@@ -21,6 +21,17 @@ namespace gl
         }
     }
 
+    ScopedBufferBinding::ScopedBufferBinding(uint32_t target, uint32_t buffer)
+        :target{target}, buffer{buffer}
+    {
+        glBindBuffer(target, buffer);
+    }
+
+    ScopedBufferBinding::~ScopedBufferBinding()
+    {
+        glBindBuffer(target, GL_NONE);
+    }
+
     ScopedVertexAttribArray::ScopedVertexAttribArray(int32_t attrib)
         :attrib{ attrib }
     {

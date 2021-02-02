@@ -39,6 +39,18 @@ namespace gl
         std::array<uint32_t, Count> buffers;
     };
 
+    class ScopedBufferBinding final
+    {
+    public:
+        explicit ScopedBufferBinding(uint32_t target, uint32_t buffer);
+        ~ScopedBufferBinding();
+
+        uint32_t get() const { return buffer; }
+    private:
+        uint32_t target = 0;
+        uint32_t buffer = 0;
+    };
+
     class ScopedVertexAttribArray final
     {
     public:
