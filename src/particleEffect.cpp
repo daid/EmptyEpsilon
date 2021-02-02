@@ -28,7 +28,7 @@ void ParticleEngine::update(float delta)
 {
     // Update particles, move all freshly expired particles to the end.
     // Update our first_expired entry.
-    first_expired = std::partition(std::begin(particles), first_expired, [delta](auto& p)
+    first_expired = std::partition(std::begin(particles), first_expired, [delta](Particle& p)
     {
         p.life_time += delta;
         return p.life_time <= p.max_life_time;
