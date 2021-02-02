@@ -64,6 +64,8 @@ private:
     GuiSlider* jump_min_distance_slider;
     GuiSlider* jump_max_distance_slider;
     GuiToggleButton* can_be_destroyed_toggle;
+    GuiSlider* short_range_radar_slider;
+    GuiSlider* long_range_radar_slider;
 public:
     GuiTweakShip(GuiContainer* owner);
 
@@ -232,8 +234,6 @@ private:
     P<PlayerSpaceship> target;
 
     GuiSlider* coolant_slider;
-    GuiSlider* short_range_radar_slider;
-    GuiSlider* long_range_radar_slider;
     GuiSlider* max_scan_probes_slider;
     GuiSlider* scan_probes_slider;
     GuiToggleButton* can_scan;
