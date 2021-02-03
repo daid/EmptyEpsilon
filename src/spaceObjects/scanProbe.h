@@ -7,7 +7,7 @@ class ScanProbe : public SpaceObject, public Updatable
 {
 private:
     // Probe flight speed; 1U/sec.
-    constexpr static float probe_speed = 1000.0f;
+    float probe_speed;
     // Remaining lifetime in seconds.
     float lifetime;
     // Probe target coordinates.
@@ -24,6 +24,8 @@ public:
     ScanProbe();
     virtual ~ScanProbe();
 
+    void setSpeed(float probe_speed);
+    float getSpeed();
     void setLifetime(float lifetime);
     float getLifetime();
 

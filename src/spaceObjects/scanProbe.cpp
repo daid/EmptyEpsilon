@@ -8,6 +8,15 @@
 /// A scan probe.
 REGISTER_SCRIPT_SUBCLASS(ScanProbe, SpaceObject)
 {
+    /// Set the probe's speed. A value of 1000 = 1U/second.
+    /// Probes move at a fixed rate of speed and ignore physics.
+    /// Requires a float value. The default vaule is 1000.
+    /// Example: probe:setSpeed(2000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, setSpeed);
+    /// Get the probe's speed. A value of 1000 = 1U/second.
+    /// Returns a float value.
+    /// Example: local speed = probe:getSpeed()
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScanProbe, getSpeed);
     /// Set the probe's remaining lifetime, in seconds.
     /// The default initial lifetime is 10 minutes.
     /// Example: probe:setLifetime(60 * 5)
@@ -44,15 +53,17 @@ REGISTER_SCRIPT_SUBCLASS(ScanProbe, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(ScanProbe, "ScanProbe");
 ScanProbe::ScanProbe()
-: SpaceObject(100, "ScanProbe")
+: SpaceObject(100, "ScanProbe"),
+  probe_speed(1000.0f)
 {
     // Probe persists for 10 minutes.
     lifetime = 60 * 10;
     // Probe has not arrived yet.
     has_arrived = false;
 
-    registerMemberReplication(&owner_id);
-    registerMemberReplication(&target_position);
+    registerMemberReplication(&owner_id, 0.5);
+    registerMemberReplication(&probe_speed, 0.1);
+    registerMemberReplication(&target_position, 0.1);
     registerMemberReplication(&lifetime, 60.0);
 
     // Give the probe a small electrical radar signature.
@@ -87,6 +98,16 @@ ScanProbe::~ScanProbe()
 {
 }
 
+void ScanProbe::setSpeed(float probe_speed)
+{
+    this->probe_speed = probe_speed > 0.0f ? probe_speed : 0.0f;
+}
+
+float ScanProbe::getSpeed()
+{
+    return this->probe_speed;
+}
+
 void ScanProbe::setLifetime(float lifetime)
 {
     this->lifetime = lifetime > 0.0f ? lifetime : 0.0f;
@@ -115,13 +136,31 @@ void ScanProbe::update(float delta)
 
     // The probe moves in a straight line to its destination, independent of
     // physics and at a fixed rate of speed.
-    if ((target_position - getPosition()) > getRadius())
+    sf::Vector2f diff = target_position - getPosition();
+    float movement = delta * probe_speed;
+    float distance = sf::length(diff);
+
+    // If the probe's outer radius hasn't reached the target position ...
+    if (diff > getRadius())
     {
-        // The probe is in transit.
+        // The probe is still in transit.
         has_arrived = false;
-        sf::Vector2f v = normalize(target_position - getPosition());
-        setPosition(getPosition() + v * delta * probe_speed);
+
+        // Normalize the diff.
+        sf::Vector2f v = normalize(diff);
+
+        // Update the probe's heading.
         setHeading(vector2ToAngle(v) + 90.0f);
+
+        // Move toward the target position at the given rate of speed.
+        // However, don't overshoot the target if traveling so fast that the
+        // movement per tick is greater than the distance to the destination.
+        if (distance < movement)
+        {
+            movement = distance;
+        }
+
+        setPosition(getPosition() + v * movement);
     }
     else if (!has_arrived)
     {
