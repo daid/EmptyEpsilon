@@ -1992,18 +1992,24 @@ void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
 void PlayerSpaceship::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
+
     if (long_range)
     {
-        sf::CircleShape radar_radius(getShortRangeRadarRange() * scale);
-        radar_radius.setOrigin(getShortRangeRadarRange() * scale, getShortRangeRadarRange() * scale);
+        float long_radar_indicator_radius = getLongRangeRadarRange() * scale;
+        float short_radar_indicator_radius = getShortRangeRadarRange() * scale;
+
+        // Draw long-range radar radius indicator
+        sf::CircleShape radar_radius(long_radar_indicator_radius);
+        radar_radius.setOrigin(long_radar_indicator_radius, long_radar_indicator_radius);
         radar_radius.setPosition(position);
         radar_radius.setFillColor(sf::Color::Transparent);
         radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
         radar_radius.setOutlineThickness(3.0);
         window.draw(radar_radius);
 
-        sf::CircleShape short_radar_radius(getShortRangeRadarRange() * scale);
-        short_radar_radius.setOrigin(getShortRangeRadarRange() * scale, getShortRangeRadarRange() * scale);
+        // Draw short-range radar radius indicator
+        sf::CircleShape short_radar_radius(short_radar_indicator_radius);
+        short_radar_radius.setOrigin(short_radar_indicator_radius, short_radar_indicator_radius);
         short_radar_radius.setPosition(position);
         short_radar_radius.setFillColor(sf::Color::Transparent);
         short_radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
