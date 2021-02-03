@@ -11,6 +11,11 @@ private:
     float artifact_spin=0.0;
     bool allow_pickup;
     ScriptSimpleCallback on_pickup_callback;
+
+    string radar_trace_icon="RadarBlip.png";
+    float radar_trace_scale=0;
+    sf::Color radar_trace_color = sf::Color(255, 255, 255);
+
 public:
     Artifact();
 
@@ -26,6 +31,10 @@ public:
     void setSpin(float spin=0.0);
     void explode();
     void allowPickup(bool allow);
+
+    void setRadarTraceIcon(string icon);
+    void setRadarTraceScale(float scale);
+    void setRadarTraceColor(int r, int g, int b) { radar_trace_color = sf::Color(r, g, b); }
 
     virtual string getExportLine() override;
     void onPickUp(ScriptSimpleCallback callback);
