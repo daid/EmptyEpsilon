@@ -240,9 +240,11 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 
         foreach(SpaceObject, obj, space_object_list)
         {
-            if (P<ShipTemplateBasedObject>(obj) && obj->isFriendly(my_spaceship))
+            P<ShipTemplateBasedObject> stb_obj = obj;
+
+            if (stb_obj && obj->isFriendly(my_spaceship))
             {
-                r = P<ShipTemplateBasedObject>(obj)->getShortRangeRadarRange() * scale;
+                r = stb_obj->getShortRangeRadarRange() * scale;
                 sf::CircleShape circle(r, 50);
                 circle.setOrigin(r, r);
                 circle.setFillColor(sf::Color(255, 255, 255, 255));
@@ -611,16 +613,19 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (!obj->canHideInNebula())
                 visible_objects.insert(*obj);
 
-            if (!P<ShipTemplateBasedObject>(obj) || !obj->isFriendly(my_spaceship))
+            P<ShipTemplateBasedObject> stb_obj = obj;
+
+            if (!stb_obj || !obj->isFriendly(my_spaceship))
             {
                 P<ScanProbe> sp = obj;
+
                 if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
                 {
                     continue;
                 }
             }
 
-            float r = ((P<ShipTemplateBasedObject>(obj)) && obj->isFriendly(my_spaceship)) ? P<ShipTemplateBasedObject>(obj)->getShortRangeRadarRange() : 5000.0f;
+            float r = (stb_obj && obj->isFriendly(my_spaceship)) ? stb_obj->getShortRangeRadarRange() : 5000.0f;
 
             sf::Vector2f position = obj->getPosition();
             PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
