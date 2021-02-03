@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include "engine.h"
 #include "modelData.h"
+#include "scienceDatabase.h"
 
 #include "beamTemplate.h"
 #include "missileWeaponData.h"
@@ -118,6 +119,8 @@ public:
     float jump_drive_max_distance;
     int weapon_storage[MW_Count];
 
+    int32_t science_database_entry = -1;
+
     string radar_trace;
     float long_range_radar_range = 30000.0f;
     float short_range_radar_range = 5000.0f;
@@ -148,6 +151,7 @@ public:
     void setMesh(string model, string color_texture, string specular_texture, string illumination_texture);
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
+    void setScienceDatabaseEntry(P<ScienceDatabase> entry);
 
     void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
     void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);

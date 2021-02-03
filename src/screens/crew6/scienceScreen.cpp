@@ -107,8 +107,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         P<SpaceShip> ship = targets.get();
         if (ship)
         {
-            if (database_view->findAndDisplayEntry(ship->getTypeName()))
+            auto entry=ship->getScienceDatabaseEntry();
+            if (entry)
             {
+                database_view->selectAndDisplay(entry);
                 view_mode_selection->setSelectionIndex(1);
                 radar_view->hide();
                 background_gradient->hide();

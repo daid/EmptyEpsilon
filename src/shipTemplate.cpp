@@ -437,6 +437,11 @@ void ShipTemplate::setRepairDocked(bool enabled)
     repair_docked = enabled;
 }
 
+void ShipTemplate::setScienceDatabaseEntry(P<ScienceDatabase> entry)
+{
+    science_database_entry = entry->getMultiplayerId();
+}
+
 void ShipTemplate::setRestocksScanProbes(bool enabled)
 {
     restocks_scan_probes = enabled;
