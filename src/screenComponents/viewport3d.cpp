@@ -7,6 +7,7 @@
 #include "viewport3d.h"
 
 #include "particleEffect.h"
+#include "glObjects.h"
 
 #if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
@@ -343,25 +344,36 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     if (my_spaceship && my_spaceship->getTarget())
     {
+        auto billboard_shader = ShaderManager::getShader("shaders/billboard");
+
         P<SpaceObject> target = my_spaceship->getTarget();
         glDisable(GL_DEPTH_TEST);
         glPushMatrix();
-        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
+        glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("redicule2.png"));
-        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-        glColor4f(0.5, 0.5, 0.5, target->getRadius() * 2.5);
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 1);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(0, 1);
-        glVertex3f(0, 0, 0);
-        glEnd();
+        billboard_shader->setUniform("textureMap", *textureManager.getTexture("redicule2.png"));
+        billboard_shader->setUniform("color", sf::Glsl::Vec4(.5f, .5f, .5f, target->getRadius() * 2.5f));
+        sf::Shader::bind(billboard_shader);
+        {
+            gl::ScopedVertexAttribArray positions(glGetAttribLocation(billboard_shader->getNativeHandle(), "position"));
+            gl::ScopedVertexAttribArray texcoords(glGetAttribLocation(billboard_shader->getNativeHandle(), "texcoords"));
+            auto vertices = {
+                uint8_t(0), uint8_t(0), uint8_t(0),
+                uint8_t(0), uint8_t(0), uint8_t(0),
+                uint8_t(0), uint8_t(0), uint8_t(0),
+                uint8_t(0), uint8_t(0), uint8_t(0)
+            };
+            glVertexAttribPointer(positions.get(), 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)vertices.begin());
+            auto coords = {
+                uint8_t(0), uint8_t(0),
+                uint8_t(1), uint8_t(0),
+                uint8_t(1), uint8_t(1),
+                uint8_t(0), uint8_t(1)
+            };
+            glVertexAttribPointer(texcoords.get(), 2, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)coords.begin());
+            glDrawArrays(GL_QUADS, 0, 4);
+        }
         glPopMatrix();
     }
 
