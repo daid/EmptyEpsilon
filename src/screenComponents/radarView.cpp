@@ -243,7 +243,8 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 
         foreach(SpaceObject, obj, space_object_list)
         {
-            if ((P<SpaceShip>(obj) || P<SpaceStation>(obj)) && obj->isFriendly(my_spaceship))
+            if ((P<SpaceShip>(obj) || P<SpaceStation>(obj))
+                && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
             {
                 circle.setPosition(worldToScreen(obj->getPosition()));
                 window.draw(circle);
@@ -604,7 +605,8 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             if (!obj->canHideInNebula())
                 visible_objects.insert(*obj);
 
-            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj)) || !obj->isFriendly(my_spaceship))
+            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj))
+                || (!obj->isFriendly(my_spaceship) && obj != my_spaceship))
             {
                 P<ScanProbe> sp = obj;
                 if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
