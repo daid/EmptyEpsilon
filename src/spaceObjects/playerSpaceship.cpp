@@ -1,6 +1,5 @@
 #include "playerSpaceship.h"
 #include "gui/colorConfig.h"
-#include "scanProbe.h"
 #include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
@@ -113,7 +112,16 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLaunchProbe);
+    /// Command the science screen to link to the given ScanProbe object.
+    /// This is equivalent of selecting a probe on Relay and clicking
+    /// "Link to Science".
+    /// Example: player:commandSetScienceLink(probeObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    /// Command the science screen to clear its link to any ScanProbe object.
+    /// This is equivalent to clicking "Link to Science" on Relay when a link
+    /// is already active.
+    /// Example: player:commandClearScienceLink()
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandClearScienceLink);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
     /// Return the number of Engineering repair crews on the ship.
@@ -130,9 +138,32 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Set a password to join the ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setControlCode);
     /// Callback when this ship launches a probe.
-    /// Returns the launching PlayerSpaceship and launched ScanProbe.
-    /// Example: player:onProbeLaunch(trackProbe)
+    /// Passes the launching PlayerSpaceship and launched ScanProbe.
+    /// Example:
+    /// player:onProbeLaunch(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " launched from ship " .. player:getCallSign())
+    /// end)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLaunch);
+    /// Callback when this ship links a probe to the Science screen.
+    /// Passes the PlayerShip and linked ScanProbe.
+    /// Example:
+    /// player:onProbeLink(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. player:getCallSign())
+    /// end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeLink);
+    /// Callback when this ship unlinks a probe on the Science screen.
+    /// Passes the PlayerShip and previously linked ScanProbe.
+    /// Does _not_ fire when the probe is destroyed or expires;
+    /// see ScanProbe:onDestruction() and ScanProbe:onExpiration().
+    /// Example:
+    /// player:onProbeUnlink(function (player, probe)
+    ///     print("Probe " .. probe:getCallSign() .. " unlinked from Science on ship " .. player:getCallSign())
+    /// end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, onProbeUnlink);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setShortRangeRadarRange);
     /// Set whether the object can scan other objects.
     /// Requires a Boolean value.
     /// Example: ship:setCanScan(true)
@@ -715,8 +746,8 @@ void PlayerSpaceship::applyTemplateValues()
     can_launch_probe = ship_template->can_launch_probe;
     if (!on_new_player_ship_called)
     {
-        on_new_player_ship_called=true;
-    gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
+        on_new_player_ship_called = true;
+        gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
     }
 }
 
@@ -1609,7 +1640,29 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         break;
     case CMD_SET_SCIENCE_LINK:
         {
+            // Capture previously linked probe, if there is one.
+            P<ScanProbe> old_linked_probe;
+
+            if (linked_science_probe_id != -1)
+            {
+                old_linked_probe = game_server->getObjectById(linked_science_probe_id);
+            }
+
             packet >> linked_science_probe_id;
+
+            if (linked_science_probe_id != -1 && on_probe_link.isSet())
+            {
+                P<ScanProbe> new_linked_probe = game_server->getObjectById(linked_science_probe_id);
+
+                if (new_linked_probe)
+                {
+                    on_probe_link.call(P<PlayerSpaceship>(this), P<ScanProbe>(new_linked_probe));
+                }
+            }
+            else if (linked_science_probe_id == -1 && on_probe_unlink.isSet())
+            {
+                on_probe_unlink.call(P<PlayerSpaceship>(this), P<ScanProbe>(old_linked_probe));
+            }
         }
         break;
     case CMD_HACKING_FINISHED:
@@ -1962,9 +2015,30 @@ void PlayerSpaceship::commandCustomFunction(string name)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetScienceLink(int32_t id){
+void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
+{
     sf::Packet packet;
-    packet << CMD_SET_SCIENCE_LINK << id;
+
+    // Pass the probe's multiplayer ID if the probe isn't nullptr.
+    if (probe)
+    {
+        packet << CMD_SET_SCIENCE_LINK;
+        packet << probe->getMultiplayerId();
+        sendClientCommand(packet);
+    }
+    // Otherwise, it's invalid. Warn and do nothing.
+    else
+    {
+        LOG(WARNING) << "commandSetScienceLink received a null or invalid ScanProbe, so no command was sent.";
+    }
+}
+
+void PlayerSpaceship::commandClearScienceLink()
+{
+    sf::Packet packet;
+
+    packet << CMD_SET_SCIENCE_LINK;
+    packet << int32_t(-1);
     sendClientCommand(packet);
 }
 
@@ -2064,6 +2138,16 @@ string PlayerSpaceship::getExportLine()
 void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
 {
     this->on_probe_launch = callback;
+}
+
+void PlayerSpaceship::onProbeLink(ScriptSimpleCallback callback)
+{
+    this->on_probe_link = callback;
+}
+
+void PlayerSpaceship::onProbeUnlink(ScriptSimpleCallback callback)
+{
+    this->on_probe_unlink = callback;
 }
 
 #include "playerSpaceship.hpp"

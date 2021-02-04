@@ -242,7 +242,8 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
         {
             P<ShipTemplateBasedObject> stb_obj = obj;
 
-            if (stb_obj && obj->isFriendly(my_spaceship))
+            if (stb_obj
+                && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
             {
                 r = stb_obj->getShortRangeRadarRange() * scale;
                 sf::CircleShape circle(r, 50);
@@ -615,7 +616,8 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
 
             P<ShipTemplateBasedObject> stb_obj = obj;
 
-            if (!stb_obj || !obj->isFriendly(my_spaceship))
+            if (!stb_obj
+                || (!obj->isFriendly(my_spaceship) && obj != my_spaceship))
             {
                 P<ScanProbe> sp = obj;
 

@@ -31,6 +31,10 @@ Mine::Mine()
     PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
 }
 
+Mine::~Mine()
+{
+}
+
 void Mine::draw3D()
 {
 }

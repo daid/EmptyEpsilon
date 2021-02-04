@@ -21,6 +21,7 @@ public:
     float particleTimeout;
 
     Mine();
+    virtual ~Mine();
 
     virtual void draw3D() override;
     virtual void draw3DTransparent() override;

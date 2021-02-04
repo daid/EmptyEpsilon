@@ -2,9 +2,12 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
+
+class ScanProbe;
 
 enum ECommsState
 {
@@ -154,6 +157,8 @@ public:
     int scan_probe_stock;
     float scan_probe_recharge = 0.0;
     ScriptSimpleCallback on_probe_launch;
+    ScriptSimpleCallback on_probe_link;
+    ScriptSimpleCallback on_probe_unlink;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
@@ -223,6 +228,8 @@ public:
     int getMaxScanProbeCount() { return max_scan_probes; }
 
     void onProbeLaunch(ScriptSimpleCallback callback);
+    void onProbeLink(ScriptSimpleCallback callback);
+    void onProbeUnlink(ScriptSimpleCallback callback);
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);
@@ -240,7 +247,8 @@ public:
     void commandWarp(int8_t target);
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
-    void commandSetScienceLink(int32_t id);
+    void commandSetScienceLink(P<ScanProbe> probe);
+    void commandClearScienceLink();
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
