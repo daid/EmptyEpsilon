@@ -165,7 +165,7 @@ CockpitView::CockpitView(GuiContainer* owner)
     relay_layout->setPosition(20, 20, ATopLeft)->setSize(520, 40);
     (new GuiDockingButton(relay_layout, "DOCKING"))->setSize(240, 40);
     (new GuiOpenCommsButton(relay_layout, "OPEN_COMMS_BUTTON", tr("Open Comms"), &targets))->setSize(150, 40);
-    (new GuiShieldsEnableButton(relay_layout, "SHIELDS_ENABLE"))->showIconOnly(true)->setSize(130, 40);
+    (new GuiShieldsEnableButton(relay_layout, "SHIELDS_ENABLE"))->setSize(220, 40);
 
     // Comms overlay.
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
