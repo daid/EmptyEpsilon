@@ -148,8 +148,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("VIEW_RIGHT", std::make_tuple("View right", "L"));
     newKey("FIRST_PERSON", std::make_tuple("Toggle first-person view", "F"));
     newKey("TOGGLE_TARGETING_MODE", std::make_tuple("Lock view on target", "O"));
-    newKey("TURN_WHEEL_LEFT", std::make_tuple("Rotate desired heading left", "Z"));
-    newKey("TURN_WHEEL_RIGHT", std::make_tuple("Rotate desired heading left", "C"));
+    newKey("TURN_WHEEL_LEFT", std::make_tuple("Rotate desired heading left", "Q"));
+    newKey("TURN_WHEEL_RIGHT", std::make_tuple("Rotate desired heading right", "E"));
 }
 
 static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
