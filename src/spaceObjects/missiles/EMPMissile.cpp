@@ -3,6 +3,11 @@
 #include "spaceObjects/electricExplosionEffect.h"
 #include "pathPlanner.h"
 
+/// EMP missile
+REGISTER_SCRIPT_SUBCLASS(EMPMissile, MissileWeapon)
+{
+  //registered for typeName and creation
+}
 REGISTER_MULTIPLAYER_CLASS(EMPMissile, "EMPMissile");
 EMPMissile::EMPMissile()
 : MissileWeapon("EMPMissile", MissileWeaponData::getDataFor(MW_EMP))

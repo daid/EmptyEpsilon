@@ -116,9 +116,13 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     // Link probe to science button.
     link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to Science"), [this](bool value){
         if (value)
-            my_spaceship->commandSetScienceLink(targets.get()->getMultiplayerId());
+        {
+            my_spaceship->commandSetScienceLink(targets.get());
+        }
         else
-            my_spaceship->commandSetScienceLink(-1);
+        {
+            my_spaceship->commandClearScienceLink();
+        }
     });
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
 
@@ -218,7 +222,8 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         bool near_friendly = false;
         foreach(SpaceObject, obj, space_object_list)
         {
-            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj)) || !obj->isFriendly(my_spaceship))
+            if ((!P<SpaceShip>(obj) && !P<SpaceStation>(obj))
+                || (!obj->isFriendly(my_spaceship) && obj != my_spaceship))
             {
                 P<ScanProbe> sp = obj;
                 if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
@@ -233,7 +238,10 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
             }
         }
         if (!near_friendly)
+        {
             targets.clear();
+            hacking_dialog->hide();
+        }
     }
 
     if (targets.get())

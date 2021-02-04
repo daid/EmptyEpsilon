@@ -12,6 +12,12 @@ class ElectricExplosionEffect : public SpaceObject, public Updatable
     float size;
     sf::Vector3f particleDirections[particleCount];
     bool on_radar;
+
+#if FEATURE_3D_RENDERING
+    static sf::Shader* particlesShader;
+    static uint32_t particlesShaderPositionAttribute;
+    static uint32_t particlesShaderTexCoordsAttribute;
+#endif
 public:
     ElectricExplosionEffect();
     virtual ~ElectricExplosionEffect();

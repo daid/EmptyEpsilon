@@ -1,9 +1,11 @@
 -- Name: Fermi 500
 -- Description: Race three laps of four waypoints (1 to 2 to 3 to 4 to 1 = 1 lap) in the shortest time. Play for time by yourself, but have more fun with multiple player ships.
 ---
---- First place earns 10 points, second place: 5, third place: 3 and 4th place: 1. Each target drone of yours shot earns one point. Shoot an opponent's drone and they get the point.
+--- Placement points depend on the number of racers present at the starting point when the race starts. Precise values are given to Relay at that time. Each target drone of yours shot earns one point. Shoot an opponent's drone and they get the point.
 ---
---- Before the race starts, scope out the course, visit some stations, maybe improve your ship for the race. But, watch your time carefully. If you are not at waypoint 1 at the start of the race, your ship will be destroyed.
+--- Before the race starts, scope out the course, visit some stations, maybe improve your ship for the race. But, watch your time carefully. If you are not at waypoint 1 at the start of the race, your ship will be destroyed. Your competitors may also try to destroy you despite being your nominal allies, so beware
+---
+--- Current version updated for online event on 23Jan2021
 -- Type: Race
 -- Variation[Feisty]: Target drones shoot if you get close enough
 -- Variation[Raiders]: Feisty target drones *plus* enemies chase you while you race
@@ -11,53 +13,13 @@
 
 require("utils.lua")
 
--- Create amount of objects of type object_type along arc
--- Center defined by x and y
--- Radius defined by distance
--- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
--- Use randomize to vary the distance from the center point. Omit to keep distance constant
--- Example:
---   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
-function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
-	if randomize == nil then randomize = 0 end
-	if amount == nil then amount = 1 end
-	arcLen = endArcClockwise - startArc
-	if startArc > endArcClockwise then
-		endArcClockwise = endArcClockwise + 360
-		arcLen = arcLen + 360
-	end
-	if amount > arcLen then
-		for ndex=1,arcLen do
-			radialPoint = startArc+ndex
-			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
-		end
-		for ndex=1,amount-arcLen do
-			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
-		end
-	else
-		for ndex=1,amount do
-			radialPoint = random(startArc,endArcClockwise)
-			pointDist = distance + random(-randomize,randomize)
-			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
-		end
-	end
-end
---[[-----------------------------------------------------------------
-      Initialization 
------------------------------------------------------------------]]--
+----------------------
+--	Initialization  --
+----------------------
 function init()
-	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	--Player Ship Beams
-	psb = {}
-	psb["MP52 Hornet"] = 2
-	psb["Phobos M3P"] = 2
-	psb["Flavia P.Falcon"] = 2
-	psb["Atlantis"] = 2
-	psb["Player Cruiser"] = 2
-	psb["Player Fighter"] = 2
+	scenario_version = "2.0.0"
+	print(string.format("     -----     Scenario: Fermi 500     -----     Version %s     -----",scenario_version))
+	print(_VERSION)
 	-- 27 types of goods so far
 	goodsList = {	{"food",0},
 					{"medicine",0},
@@ -87,15 +49,326 @@ function init()
 					{"software",0},
 					{"battery",0}	}
 	diagnostic = true
-	playerShipNamesForMP52Hornet = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny"}
-	playerShipNamesForPiranha = {"Razor's Edge","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"}
-	playerShipNamesForFlaviaPFalcon = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
-	playerShipNamesForPhobosM3P = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
-	playerShipNamesForAtlantis = {"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
-	playerShipNamesForCruiser = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
-	playerShipNamesForMissileCruiser = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
-	playerShipNamesForFighter = {"Buzzer","Flitter","Zippiticus","Hopper","Molt"}
-	playerShipNamesForLeftovers = {"Forgone","Righteous","Masher"}
+	player_count = 0
+	player_start_list = {}
+	player_ship_stats = {	
+		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, probes = 10,	},
+		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, probes = 15,	},
+		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, probes = 27	,	},
+		["Phobos M3P"]			= { strength = 19,	cargo = 10,	distance = 200,	long_range_radar = 25000, short_range_radar = 5000, probes = 15,	},
+		["Atlantis"]			= { strength = 52,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 25,	},
+		["Player Cruiser"]		= { strength = 40,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 22,	},
+		["Player Missile Cr."]	= { strength = 45,	cargo = 8,	distance = 200,	long_range_radar = 35000, short_range_radar = 6000, probes = 26,	},
+		["Player Fighter"]		= { strength = 7,	cargo = 3,	distance = 100,	long_range_radar = 15000, short_range_radar = 4500, probes = 11,	},
+		["Benedict"]			= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 20,	},
+		["Kiriya"]				= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 35000, short_range_radar = 5000, probes = 20,	},
+		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, probes = 17,	},
+		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, probes = 12,	},
+		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000, probes = 35,	},
+		["Ender"]				= { strength = 100,	cargo = 20,	distance = 2000,long_range_radar = 45000, short_range_radar = 7000, probes = 24,	},
+		["Nautilus"]			= { strength = 12,	cargo = 7,	distance = 200,	long_range_radar = 22000, short_range_radar = 4000, probes = 23,	},
+		["Hathcock"]			= { strength = 30,	cargo = 6,	distance = 200,	long_range_radar = 35000, short_range_radar = 6000, probes = 20,	},
+		["Maverick"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 4000, probes = 18,	},
+		["Crucible"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 6000, probes = 20,	},
+	}		
+	--Player ship name lists to supplant standard randomized call sign generation
+	playerShipNamesFor = {}
+	playerShipNamesFor["MP52 Hornet"] = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
+	playerShipNamesFor["Piranha"] = {"Razor","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"}
+	playerShipNamesFor["Flavia P.Falcon"] = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
+	playerShipNamesFor["Phobos M3P"] = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
+	playerShipNamesFor["Atlantis"] = {"Excalibur","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
+	playerShipNamesFor["Player Cruiser"] = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
+	playerShipNamesFor["Player Missile Cr."] = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
+	playerShipNamesFor["Player Fighter"] = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
+	playerShipNamesFor["Benedict"] = {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"}
+	playerShipNamesFor["Kiriya"] = {"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"}
+	playerShipNamesFor["Striker"] = {"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"}
+	playerShipNamesFor["ZX-Lindworm"] = {"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"}
+	playerShipNamesFor["Repulse"] = {"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"}
+	playerShipNamesFor["Ender"] = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
+	playerShipNamesFor["Nautilus"] = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
+	playerShipNamesFor["Hathcock"] = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Fett", "Hawkeye", "Hanzo"}
+	playerShipNamesFor["Maverick"] = {"Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge"}
+	playerShipNamesFor["Crucible"] = {"Sling", "Stark", "Torrid", "Kicker", "Flummox"}
+	playerShipNamesFor["Leftovers"] = {
+		"Adelphi",
+		"Ahwahnee",
+		"Akagi",
+		"Akira",
+		"Al-Batani",
+		"Ambassador",
+		"Andromeda",
+		"Antares",
+		"Apollo",
+		"Appalachia",
+		"Arcos",
+		"Aries",
+		"Athena",
+		"Beethoven",
+		"Bellerophon",
+		"Biko",
+		"Bonchune",
+		"Bozeman",
+		"Bradbury",
+		"Brattain",
+		"Budapest",
+		"Buran",
+		"Cairo",
+		"Calypso",
+		"Capricorn",
+		"Carolina",
+		"Centaur",
+		"Challenger",
+		"Charleston",
+		"Chekov",
+		"Cheyenne",
+		"Clement",
+		"Cochraine",
+		"Columbia",
+		"Concorde",
+		"Constantinople",
+		"Constellation",
+		"Constitution",
+		"Copernicus",
+		"Cousteau",
+		"Crazy Horse",
+		"Crockett",
+		"Daedalus",
+		"Danube",
+		"Defiant",
+		"Deneva",
+		"Denver",
+		"Discovery",
+		"Drake",
+		"Endeavor",
+		"Endurance",
+		"Equinox",
+		"Essex",
+		"Exeter",
+		"Farragut",
+		"Fearless",
+		"Fleming",
+		"Foregone",
+		"Fredrickson",
+		"Freedom",
+		"Gage",
+		"Galaxy",
+		"Galileo",
+		"Gander",
+		"Ganges",
+		"Gettysburg",
+		"Ghandi",
+		"Goddard",
+		"Grissom",
+		"Hathaway",
+		"Helin",
+		"Hera",
+		"Heracles",
+		"Hokule'a",
+		"Honshu",
+		"Hood",
+		"Hope",
+		"Horatio",
+		"Horizon",
+		"Interceptor",
+		"Intrepid",
+		"Istanbul",
+		"Jenolen",
+		"Kearsarge",
+		"Kongo",
+		"Korolev",
+		"Kyushu",
+		"Lakota",
+		"Lalo",
+		"Lancer",
+		"Lantree",
+		"LaSalle",
+		"Leeds",
+		"Lexington",
+		"Luna",
+		"Magellan",
+		"Majestic",
+		"Malinche",
+		"Maryland",
+		"Masher",
+		"Mediterranean",
+		"Mekong",
+		"Melbourne",
+		"Merced",
+		"Merrimack",
+		"Miranda",
+		"Nash",
+		"New Orleans",
+		"Newton",
+		"Niagra",
+		"Nobel",
+		"Norway",
+		"Nova",
+		"Oberth",
+		"Odyssey",
+		"Orinoco",
+		"Osiris",
+		"Pasteur",
+		"Pegasus",
+		"Peregrine",
+		"Poseidon",
+		"Potempkin",
+		"Princeton",
+		"Prokofiev",
+		"Prometheus",
+		"Proxima",
+		"Rabin",
+		"Raman",
+		"Relativity",
+		"Reliant",
+		"Renaissance",
+		"Renegade",
+		"Republic",
+		"Rhode Island",
+		"Rigel",
+		"Righteous",
+		"Rubicon",
+		"Rutledge",
+		"Sarajevo",
+		"Saratoga",
+		"Scimitar",
+		"Sequoia",
+		"Shenandoah",
+		"ShirKahr",
+		"Sitak",
+		"Socrates",
+		"Sovereign",
+		"Spector",
+		"Springfield",
+		"Stargazer",
+		"Steamrunner",
+		"Surak",
+		"Sutherland",
+		"Sydney",
+		"T'Kumbra",
+		"Thomas Paine",
+		"Thunderchild",
+		"Tian An Men",
+		"Titan",
+		"Tolstoy",
+		"Trial",
+		"Trieste",
+		"Trinculo",
+		"Tripoli",
+		"Ulysses",
+		"Valdemar",
+		"Valiant",
+		"Volga",
+		"Voyager",
+		"Wambundu",
+		"Waverider",
+		"Wellington",
+		"Wells",
+		"Wyoming",
+		"Yamaguchi",
+		"Yamato",
+		"Yangtzee Kiang",
+		"Yeager",
+		"Yorkshire",
+		"Yorktown",
+		"Yosemite",
+		"Yukon",
+		"Zapata",
+		"Zhukov",
+		"Zodiac",
+	}
+	control_code_stem = {	--All control codes must use capital letters or they will not work.
+		"ALWAYS",
+		"ASTRO",
+		"BLACK",
+		"BLANK",
+		"BLUE",
+		"BRIGHT",
+		"BROWN",
+		"CHAIN",
+		"CHURCH",
+		"CORNER",
+		"DARK",
+		"DOORWAY",
+		"DOUBLE",
+		"DULL",
+		"ELBOW",
+		"EMPTY",
+		"EPSILON",
+		"FAST",
+		"FLOWER",
+		"FLY",
+		"FROZEN",
+		"GIG",
+		"GREEN",
+		"GLOW",
+		"HAND",
+		"HAMMER",
+		"INK",
+		"INTEL",
+		"JOUST",
+		"JUMP",
+		"KEY",
+		"KINDLE",
+		"LAP",
+		"LETTER",
+		"LIST",
+		"MORNING",
+		"NEXT",
+		"OPEN",
+		"ORANGE",
+		"OUTSIDE",
+		"PURPLE",
+		"QUARTER",
+		"QUIET",
+		"RED",
+		"SHINE",
+		"SIGMA",
+		"STAR",
+		"STREET",
+		"TOKEN",
+		"THIRSTY",
+		"UNDER",
+		"VANISH",
+		"WHITE",
+		"WRENCH",
+		"YELLOW",
+	}
+	reward_grid = {
+		{10},	--1
+		{10,5},	--2
+		{10,5,1},	--3
+		{10,5,1,0},	--4
+		{10,5,1,0,0},	--5
+		{10,5,3,1,0,0},	--6
+		{10,5,3,1,0,0,0},	--7
+		{10,7,4,2,1,0,0,0},	--8
+		{10,7,4,2,1,0,0,0,0},	--9
+		{10,7,4,2,1,0,0,0,0,0},	--10
+		{10,7,5,3,2,1,0,0,0,0,0},	--11
+		{10,7,5,3,2,1,0,0,0,0,0,0},	--12
+		{10,7,5,3,2,1,0,0,0,0,0,0,0},	--13
+		{10,8,6,4,3,2,1,0,0,0,0,0,0,0},	--14
+		{10,8,6,4,3,2,1,0,0,0,0,0,0,0,0},	--15
+		{10,8,6,5,4,3,2,1,0,0,0,0,0,0,0,0},	--16
+		{10,8,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0},	--17
+		{10,8,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0},	--18
+		{10,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0},	--19
+		{10,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0},	--20
+		{10,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0},	--21
+		{10,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0},	--22
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0},	--23
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--24
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--25
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--26
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--27
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--28
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--29
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--30
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--31
+		{10,9,8,7,6,5,4,3,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},	--32
+	}
 	goods = {}
 	raceStartDelay = 600		-- should be 600 for a 10 minute prep period
 	racePoint1x = -4000
@@ -120,6 +393,41 @@ function init()
 		leg3length = distance(racePoint3x,racePoint3y,racePoint4x,racePoint4y)
 		raceLength = (leg1length + leg2length + leg3length + leg4length)/1000 * 3
 	until(raceLength >= 500)
+	Zone():setPoints(
+		racePoint1x + 500, racePoint1y + 500,
+		racePoint1x - 500, racePoint1y + 500,
+		racePoint1x - 500, racePoint1y - 500,
+		racePoint1x + 500, racePoint1y - 500
+	):setLabel("WP1"):setColor(0,64,0)
+	Zone():setPoints(
+		racePoint2x + 500, racePoint2y + 500,
+		racePoint2x - 500, racePoint2y + 500,
+		racePoint2x - 500, racePoint2y - 500,
+		racePoint2x + 500, racePoint2y - 500
+	):setLabel("WP2"):setColor(0,64,0)
+	Zone():setPoints(
+		racePoint3x + 500, racePoint3y + 500,
+		racePoint3x - 500, racePoint3y + 500,
+		racePoint3x - 500, racePoint3y - 500,
+		racePoint3x + 500, racePoint3y - 500
+	):setLabel("WP3"):setColor(0,64,0)
+	Zone():setPoints(
+		racePoint4x + 500, racePoint4y + 500,
+		racePoint4x - 500, racePoint4y + 500,
+		racePoint4x - 500, racePoint4y - 500,
+		racePoint4x + 500, racePoint4y - 500
+	):setLabel("WP4"):setColor(0,64,0)
+	setVariations()
+	patienceTimeLimit = 1800
+	original_patience_time_limit = patienceTimeLimit
+	raceTimer = 0
+	unfinishedRacers = 0
+	impulseBump = random(10,50)
+	setGMButtons()
+	storage = getScriptStorage()
+	storage.gatherStats = gatherStats
+end
+function setVariations()
 	if getScenarioVariation() == "Feisty" or getScenarioVariation() == "Raiders" or getScenarioVariation() == "Hazardous" then
 		shootBack = true
 	else
@@ -135,10 +443,128 @@ function init()
 	else
 		hazards = false
 	end
-	patienceTimeLimit = 2000
-	ufrv = "base"
-	unfinishedRacers = 0
-	impulseBump = random(10,50)
+end
+--	GM Buttons
+function setGMButtons()
+	mainGMButtons = mainGMButtonsDuringPause
+	mainGMButtons()
+end
+function showControlCodes(faction_filter)
+	local code_list = {}
+	for pidx=1,32 do
+		local p = getPlayerShip(pidx)
+		if p ~= nil and p:isValid() then
+			if faction_filter == "Kraylor" then
+				if p:getFaction() == "Kraylor" then
+					code_list[p:getCallSign()] = {code = p.control_code, faction = p:getFaction()}
+				end
+			elseif faction_filter == "Human Navy" then
+				if p:getFaction() == "Human Navy" then
+					code_list[p:getCallSign()] = {code = p.control_code, faction = p:getFaction()}
+				end
+			elseif faction_filter == "Ktlitans" then
+				if p:getFaction() == "Ktlitans" then
+					code_list[p:getCallSign()] = {code = p.control_code, faction = p:getFaction()}
+				end
+			else
+				code_list[p:getCallSign()] = {code = p.control_code, faction = p:getFaction()}
+			end
+		end
+	end
+	local sorted_names = {}
+	for name in pairs(code_list) do
+		table.insert(sorted_names,name)
+	end
+	table.sort(sorted_names)
+	local output = ""
+	for _, name in ipairs(sorted_names) do
+		local faction = ""
+		if code_list[name].faction == "Kraylor" then
+			faction = " (Kraylor)"
+		elseif code_list[name].faction == "Ktlitans" then
+			faction = " (Ktlitan)"
+		end
+		output = output .. string.format("%s: %s %s\n",name,code_list[name].code,faction)
+	end
+	addGMMessage(output)
+end
+--	GM buttons while paused
+function mainGMButtonsDuringPause()
+	clearGMFunctions()
+	addGMFunction(string.format("Version %s",scenario_version),function()
+		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+		addGMMessage(version_message)
+		print(version_message)
+	end)
+	addGMFunction("Show control codes",showControlCodes)
+	addGMFunction(string.format("+Start Delay: %i",raceStartDelay/60),setStartDelay)
+	addGMFunction(string.format("+Patience: %i",patienceTimeLimit/60),setPatienceTimeLimit)
+end
+function setPatienceTimeLimit()
+	clearGMFunctions()
+	addGMFunction("-Main",mainGMButtons)
+	if patienceTimeLimit < 3000 then
+		addGMFunction(string.format("%i Patience + -> %i",patienceTimeLimit/60,(patienceTimeLimit + 300)/60),function()
+			patienceTimeLimit = patienceTimeLimit + 300
+			original_patience_time_limit = patienceTimeLimit
+			setPatienceTimeLimit()
+		end)
+	end
+	if patienceTimeLimit > 600 then
+		addGMFunction(string.format("%i Patience - -> %i",patienceTimeLimit/60,(patienceTimeLimit - 300)/60),function()
+			patienceTimeLimit = patienceTimeLimit - 300
+			original_patience_time_limit = patienceTimeLimit
+			setPatienceTimeLimit()
+		end)
+	end
+end
+function setStartDelay()
+	clearGMFunctions()
+	addGMFunction("-Main",mainGMButtons)
+	if raceStartDelay < 1200 then
+		addGMFunction(string.format("%i Delay + -> %i",raceStartDelay/60,(raceStartDelay + 60)/60),function()
+			raceStartDelay = raceStartDelay + 60
+			setStartDelay()
+		end)
+	end
+	if raceStartDelay > 60 then
+		addGMFunction(string.format("%i Delay - -> %i",raceStartDelay/60,(raceStartDelay - 60)/60),function()
+			raceStartDelay = raceStartDelay - 60
+			setStartDelay()
+		end)
+	end
+end
+--	GM buttons after pause
+function mainGMButtonsAfterPause()
+	clearGMFunctions()
+	addGMFunction(string.format("Version %s",scenario_version),function()
+		local version_message = string.format("Scenario version %s\n LUA version %s",scenario_version,_VERSION)
+		addGMMessage(version_message)
+		print(version_message)
+	end)
+	addGMFunction("Show control codes",showControlCodes)
+	addGMFunction("Show statistics",function()
+		local stats = gatherStats()
+		local out = "Current Statistics:\nShip: state, laps, waypoint goal, drone pts"
+		for name, details in pairs(stats.ship) do
+			out = out .. "\n" .. name .. ": " 
+			if details.is_alive then 
+				out = out .. "alive, "
+			else
+				out = out .. "dead, "
+			end
+			if details.participant ~= nil then
+				out = out .. details.participant .. ", "
+			end
+--			if details.participant == "participant" then
+--				out = out .. "participant, "
+--			else
+--				out = out .. "forfeit, "
+--			end
+			out = string.format("%s%i, %i, %i",out,details.lap_count,details.waypoint_goal,details.drone_points)
+		end
+		addGMMessage(out)
+	end)
 end
 
 function setStations()
@@ -147,20 +573,24 @@ function setStations()
 	totalStations = 0
 	friendlyStations = 0
 	neutralStations = 0
+	--Timer
 	stationTimer = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationTimer:setPosition(-5000,-5000):setDescription("Race Timing Facility"):setCallSign("Timer")
 	table.insert(stationList,stationTimer)
 	friendlyStations = friendlyStations + 1
+	--Vaiken
 	stationVaiken = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationVaiken:setPosition(random(-10000,5000),random(5000,9000)):setCallSign("Vaiken"):setDescription("Ship building and maintenance facility")
 	table.insert(stationList,stationVaiken)
 	friendlyStations = friendlyStations + 1
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
+	--Zefram
 	stationZefram = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("Warp Engine Components")
 	table.insert(stationList,stationZefram)
 	friendlyStations = friendlyStations + 1
 	goods[stationZefram] = {{"warp",5,140},{"food",5,1}}
+	--Marconi
 	marconiAngle = random(0,360)
 	xMarconi, yMarconi = vectorFromAngle(marconiAngle,random(12500,15000))
 	stationMarconi = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -168,6 +598,7 @@ function setStations()
 	table.insert(stationList,stationMarconi)
 	neutralStations = neutralStations + 1
 	goods[stationMarconi] = {{"beam",5,80}}
+	--Muddville
 	muddAngle = marconiAngle + random(60,180)
 	xMudd, yMudd = vectorFromAngle(muddAngle,random(12500,15000))
 	stationMudd = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -175,6 +606,7 @@ function setStations()
 	table.insert(stationList,stationMudd)
 	neutralStations = neutralStations + 1
 	goods[stationMudd] = {{"luxury",10,60}}
+	--Alcaleica
 	alcaleicaAngle = muddAngle + random(60,120)
 	xAlcaleica, yAlcaleica = vectorFromAngle(alcaleicaAngle,random(12500,15000))
 	stationAlcaleica = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -182,16 +614,19 @@ function setStations()
 	table.insert(stationList,stationAlcaleica)
 	neutralStations = neutralStations + 1
 	goods[stationAlcaleica] = {{"optic",5,66}}
+	--California
 	stationCalifornia = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationCalifornia:setPosition(random(-90000,-70000),random(-15000,25000)):setCallSign("California"):setDescription("Mining station")
 	table.insert(stationList,stationCalifornia)
 	friendlyStations = friendlyStations + 1
 	goods[stationCalifornia] = {{"food",2,1},{"gold",5,25},{"dilithium",2,25}}
+	--Outpost-15
 	stationOutpost15 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationOutpost15:setPosition(random(35000,50000),random(52000,79000)):setCallSign("Outpost-15"):setDescription("Mining and trade")
 	table.insert(stationList,stationOutpost15)
 	neutralStations = neutralStations + 1
 	placeRandomAroundPoint(Asteroid,25,1,15000,60000,75000)
+	--Outpost-21
 	stationOutpost21 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationOutpost21:setPosition(random(50000,75000),random(52000,61250)):setCallSign("Outpost-21"):setDescription("Mining and gambling")
 	table.insert(stationList,stationOutpost21)
@@ -203,11 +638,13 @@ function setStations()
 		goods[stationOutpost21] = {{"luxury",5,70},{"gold",5,25}}
 		goods[stationOutpost15] = {{"cobalt",4,50}}
 	end
+	--Valero
 	stationValero = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationValero:setPosition(random(-88000,-65000),random(36250,40000)):setCallSign("Valero"):setDescription("Resupply")
 	table.insert(stationList,stationValero)
 	neutralStations = neutralStations + 1
 	goods[stationValero] = {{"luxury",5,77}}
+	--Vactel
 	vactelAngle = random(0,360)
 	xVactel, yVactel = vectorFromAngle(vactelAngle,random(50000,61250))
 	stationVactel = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -215,6 +652,7 @@ function setStations()
 	table.insert(stationList,stationVactel)
 	neutralStations = neutralStations + 1
 	goods[stationVactel] = {{"circuit",5,50}}
+	--Archer
 	archerAngle = vactelAngle + random(60,120)
 	xArcher, yArcher = vectorFromAngle(archerAngle,random(50000,61250))
 	stationArcher = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -222,6 +660,7 @@ function setStations()
 	table.insert(stationList,stationArcher)
 	neutralStations = neutralStations + 1
 	goods[stationArcher] = {{"shield",5,90}}
+	--Deer
 	deerAngle = archerAngle + random(60,120)
 	xDeer, yDeer = vectorFromAngle(deerAngle,random(50000,61250))
 	stationDeer = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -229,6 +668,7 @@ function setStations()
 	table.insert(stationList,stationDeer)
 	neutralStations = neutralStations + 1
 	goods[stationDeer] = {{"tractor",5,90},{"repulsor",5,95}}
+	--Cavor
 	cavorAngle = deerAngle + random(60,90)
 	xCavor, yCavor = vectorFromAngle(cavorAngle,random(50000,61250))
 	stationCavor = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -236,113 +676,137 @@ function setStations()
 	table.insert(stationList,stationCavor)
 	neutralStations = neutralStations + 1
 	goods[stationCavor] = {{"filament",5,42}}
+	--Emory
 	stationEmory = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationEmory:setPosition(random(72000,85000),random(-50000,-26000)):setCallSign("Emory"):setDescription("Transporter Components")
 	table.insert(stationList,stationEmory)
 	friendlyStations = friendlyStations + 1
 	goods[stationEmory] = {{"transporter",5,63},{"food",2,1}}
+	--Veloquan
 	stationVeloquan = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationVeloquan:setPosition(random(-25000,15000),random(27000,40000)):setCallSign("Veloquan"):setDescription("Sensor components")
 	table.insert(stationList,stationVeloquan)
 	neutralStations = neutralStations + 1
 	goods[stationVeloquan] = {{"sensor",5,68}}
+	--Barclay
 	stationBarclay = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationBarclay:setPosition(random(-20000,0),random(-45000,-25000)):setCallSign("Barclay"):setDescription("Communications components")
 	table.insert(stationList,stationBarclay)
 	neutralStations = neutralStations + 1
 	goods[stationBarclay] = {{"communication",5,58}}
+	--Lipkin
 	stationLipkin = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationLipkin:setPosition(random(20000,45000),random(-25000,-15000)):setCallSign("Lipkin"):setDescription("Autodoc components")
 	table.insert(stationList,stationLipkin)
 	neutralStations = neutralStations + 1
 	goods[stationLipkin] = {{"autodoc",5,76}}
+	--Ripley
 	stationRipley = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationRipley:setPosition(random(-75000,-30000),random(55000,62150)):setCallSign("Ripley"):setDescription("Load Lifters and components")
 	table.insert(stationList,stationRipley)
 	neutralStations = neutralStations + 1
 	goods[stationRipley] = {{"lifter",5,61}}
+	--Deckard
 	stationDeckard = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationDeckard:setPosition(random(-45000,-25000),random(-25000,-14000)):setCallSign("Deckard"):setDescription("Android components")
 	table.insert(stationList,stationDeckard)
 	neutralStations = neutralStations + 1
 	goods[stationDeckard] = {{"android",5,73}}
+	--Conner
 	stationConnor = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationConnor:setPosition(random(-10000,15000),random(15000,27000)):setCallSign("Connor"):setDescription("Weapons Automation components")
 	table.insert(stationList,stationConnor)
 	neutralStations = neutralStations + 1
+	--Anderson
 	stationAnderson = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationAnderson:setPosition(random(15000,20000),random(-25000,48000)):setCallSign("Anderson"):setDescription("Battery and Software Engineering")
 	table.insert(stationList,stationAnderson)
 	neutralStations = neutralStations + 1
 	goods[stationAnderson] = {{"battery",5,65},{"software",5,115}}
+	--Feynman
 	stationFeynman = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationFeynman:setPosition(random(-90000,-55000),random(25000,36250)):setCallSign("Feynman"):setDescription("Nanotechnology Research")
 	table.insert(stationList,stationFeynman)
 	friendlyStations = friendlyStations + 1
 	goods[stationFeynman] = {{"nanites",5,79},{"software",5,115},{"food",2,1}}
+	--Mayo
 	stationMayo = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationMayo:setPosition(random(-45000,-30000),random(-14000,12500)):setCallSign("Mayo"):setDescription("Medical Research")
 	table.insert(stationList,stationMayo)
 	friendlyStations = friendlyStations + 1
 	goods[stationMayo] = {{"food",5,1},{"medicine",5,5}}
+	--Nefatha
 	stationNefatha = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationNefatha:setPosition(random(-10000,12500),random(-96000,-80000)):setCallSign("Nefatha"):setDescription("Commerce and recreation")
 	table.insert(stationList,stationNefatha)
 	neutralStations = neutralStations + 1
 	goods[stationNefatha] = {{"luxury",5,70}}
+	--Science-4
 	stationScience4 = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationScience4:setPosition(random(-60000,-40000),random(47000,55000)):setCallSign("Science-4"):setDescription("Biotech research")
 	table.insert(stationList,stationScience4)
 	neutralStations = neutralStations + 1
+	--Speculation-4
 	stationSpeculation4 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationSpeculation4:setPosition(random(-26000,-15000),random(-10000,27000)):setCallSign("Speculation-4"):setDescription("Trading post")
 	table.insert(stationList,stationSpeculation4)
 	neutralStations = neutralStations + 1
 	goods[stationSpeculation4] = {{"luxury",5,65}}
+	--Tiberius
 	stationTiberius = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationTiberius:setPosition(random(-30000,-26000),random(-14000,35000)):setCallSign("Tiberius"):setDescription("Logistics coordination")
 	table.insert(stationList,stationTiberius)
 	friendlyStations = friendlyStations + 1
 	goods[stationTiberius] = {{"food",5,1}}
+	--Research-1
 	stationResearch11 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationResearch11:setPosition(random(-75000,-55000),random(-50000,-25000)):setCallSign("Research-11"):setDescription("Low Gravity Research")
 	table.insert(stationList,stationResearch11)
 	neutralStations = neutralStations + 1
+	--Freena
 	stationFreena = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationFreena:setPosition(random(0,15000),irandom(-37500,-15000)):setCallSign("Freena"):setDescription("Zero gravity sports")
 	table.insert(stationList,stationFreena)
 	neutralStations = neutralStations + 1
+	--Outpost-33
 	stationOutpost33 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationOutpost33:setPosition(random(15000,65000),random(-65000,-25000)):setCallSign("Outpost-33"):setDescription("Resupply")
 	table.insert(stationList,stationOutpost33)
 	neutralStations = neutralStations + 1
 	goods[stationOutpost33] = {{"luxury",5,75}}
+	--Lando
 	stationLando = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationLando:setPosition(random(-60000,-30000),random(612500,70000)):setCallSign("Lando"):setDescription("Casino and Gambling")
 	table.insert(stationList,stationLando)
 	neutralStations = neutralStations + 1
+	--Komov
 	stationKomov = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationKomov:setPosition(random(-55000,-30000),random(70000,80000)):setCallSign("Komov"):setDescription("Xenopsychology research")
 	table.insert(stationList,stationKomov)
 	neutralStations = neutralStations + 1
+	--Science-2
 	stationScience2 = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationScience2:setPosition(random(20000,35000),random(55000,70000)):setCallSign("Science-2"):setDescription("Research Lab and Observatory")
 	table.insert(stationList,stationScience2)
 	neutralStations = neutralStations + 1
+	--Prefect
 	stationPrefect = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationPrefect:setPosition(random(-65000,-60000),random(36250,55000)):setCallSign("Prefect"):setDescription("Textile and Fashion Creation")
 	table.insert(stationList,stationPrefect)
 	neutralStations = neutralStations + 1
 	goods[stationPrefect] = {{"luxury",5,45}}
+	--Outpost-7
 	stationOutpost7 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationOutpost7:setPosition(random(35000,45000),random(-15000,25000)):setCallSign("Outpost-7"):setDescription("Resupply")
 	table.insert(stationList,stationOutpost7)
 	neutralStations = neutralStations + 1
 	goods[stationOutpost7] = {{"luxury",5,80}}
+	--Organa
 	stationOrgana = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationOrgana:setPosition(irandom(55000,62000),random(20000,45000)):setCallSign("Organa"):setDescription("Diplomatic training")
 	table.insert(stationList,stationOrgana)
 	neutralStations = neutralStations + 1
+	--Grap
 	stationGrap = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	xGrap = random(-20000,0)
 	yGrap = random(-25000,-20000)
@@ -360,6 +824,7 @@ function setStations()
 	createRandomAlongArc(Asteroid, afd+negEnd, xGrap+xNegAngleGrap, yGrap+yNegAngleGrap, negGrap, posAxisGrap, posAxisGrap+negEnd, spreadGrap)
 	table.insert(stationList,stationGrap)
 	neutralStations = neutralStations + 1
+	--Grup
 	stationGrup = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	xGrup = random(-20000,-10000)
 	yGrup = random(15000,30000)
@@ -389,20 +854,24 @@ function setStations()
 	end
 	table.insert(stationList,stationGrup)
 	neutralStations = neutralStations + 1
+	--Outpost-8
 	stationOutpost8 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationOutpost8:setPosition(random(-65000,-40000),random(-61250,-50000)):setCallSign("Outpost-8")
 	table.insert(stationList,stationOutpost8)
 	neutralStations = neutralStations + 1
+	--Science-7
 	stationScience7 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 	stationScience7:setPosition(random(-25000,-20000),random(-40000,-10000)):setCallSign("Science-7"):setDescription("Observatory")
 	table.insert(stationList,stationScience7)
 	friendlyStations = friendlyStations + 1
 	goods[stationScience7] = {{"food",2,1}}
+	--Carradine
 	stationCarradine = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationCarradine:setPosition(random(20000,35000),random(-15000,40000)):setCallSign("Carradine"):setDescription("Impulse Engine Components")
 	table.insert(stationList,stationCarradine)
 	neutralStations = neutralStations + 1
 	goods[stationCarradine] = {{"impulse",5,100}}
+	--Calvin
 	stationCalvin = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
 	stationCalvin:setPosition(random(40000,86250),random(45000,51000)):setCallSign("Calvin"):setDescription("Robotic components")
 	table.insert(stationList,stationCalvin)
@@ -410,6 +879,7 @@ function setStations()
 	totalStations = neutralStations + friendlyStations
 	goods[stationCalvin] = {{"robotic",5,87}}
 	originalStationList = stationList	--save for statistics
+	--Artifacts
 	art1 = Artifact():setModel("artifact4"):allowPickup(false):setScanningParameters(2,2):setRadarSignatureInfo(random(4,20),random(2,12), random(7,13))
 	art2 = Artifact():setModel("artifact5"):allowPickup(false):setScanningParameters(2,3):setRadarSignatureInfo(random(2,12),random(7,13), random(4,20))
 	art3 = Artifact():setModel("artifact6"):allowPickup(false):setScanningParameters(3,2):setRadarSignatureInfo(random(7,13),random(4,20), random(2,12))
@@ -460,22 +930,27 @@ function setStations()
 		art2.chroniton = true
 		art1.parallel = true
 	end
+	--Ganalda
 	ganaldaAngle = random(0,360)
 	xGanalda, yGanalda = vectorFromAngle(ganaldaAngle,random(120000,150000))
 	stationGanalda = SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor")
 	stationGanalda:setPosition(xGanalda,yGanalda):setCallSign("Ganalda")
+	--Empok Nor
 	empokAngle = ganaldaAngle + random(60,180)
 	xEmpok, yEmpok = vectorFromAngle(empokAngle,random(120000,150000))
 	stationEmpok = SpaceStation():setTemplate("Large Station"):setFaction("Exuari")
 	stationEmpok:setPosition(xEmpok,yEmpok):setCallSign("Empok Nor")
+	--Ticonderoga
 	ticAngle = empokAngle + random(60,120)
 	xTic, yTic = vectorFromAngle(ticAngle,random(120000,150000))
 	stationTic = SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor")
 	stationTic:setPosition(xTic,yTic):setCallSign("Ticonderoga")
+	--Nebulae
 	createRandomAlongArc(Nebula, 15, 100000, -100000, 140000, 100, 170, 25000)
 	Nebula():setPosition(xGanalda,yGanalda)
 	gDist = distance(stationGanalda,0,0)
 	createRandomAlongArc(Nebula, 5, 0, 0, gDist,ganaldaAngle-20, ganaldaAngle+20, 9000)
+	--Alderaan
 	alderaan= Planet():setPosition(random(-27000,32000),random(65500,87500)):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Alderaan")
 	alderaan:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	alderaan:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
@@ -533,6 +1008,7 @@ function setStations()
 	tradeFood[stationDeckard] = true
 	tradeLuxury[stationDeckard] = true
 	tradeLuxury[stationAnderson] = true
+	tradeFood[stationAnderson] = true
 	tradeFood[stationFeynman] = true
 	tradeMedicine[stationOutpost33] = true
 	spinRandom = math.random(1,3)
@@ -898,9 +1374,43 @@ function setStations()
 		table.insert(pacMine850,tpm)
 	end
 end
---[[-----------------------------------------------------------------
-      Station communication 
------------------------------------------------------------------]]--
+function createRandomAlongArc(object_type, amount, x, y, distance, startArc, endArcClockwise, randomize)
+-- Create amount of objects of type object_type along arc
+-- Center defined by x and y
+-- Radius defined by distance
+-- Start of arc between 0 and 360 (startArc), end arc: endArcClockwise
+-- Use randomize to vary the distance from the center point. Omit to keep distance constant
+-- Example:
+--   createRandomAlongArc(Asteroid, 100, 500, 3000, 65, 120, 450)
+	if randomize == nil then randomize = 0 end
+	if amount == nil then amount = 1 end
+	arcLen = endArcClockwise - startArc
+	if startArc > endArcClockwise then
+		endArcClockwise = endArcClockwise + 360
+		arcLen = arcLen + 360
+	end
+	if amount > arcLen then
+		for ndex=1,arcLen do
+			radialPoint = startArc+ndex
+			pointDist = distance + random(-randomize,randomize)
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+		end
+		for ndex=1,amount-arcLen do
+			radialPoint = random(startArc,endArcClockwise)
+			pointDist = distance + random(-randomize,randomize)
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)			
+		end
+	else
+		for ndex=1,amount do
+			radialPoint = random(startArc,endArcClockwise)
+			pointDist = distance + random(-randomize,randomize)
+			object_type():setPosition(x + math.cos(radialPoint / 180 * math.pi) * pointDist, y + math.sin(radialPoint / 180 * math.pi) * pointDist)
+		end
+	end
+end
+-----------------------------
+--	Station communication  --
+-----------------------------
 function commsStation()
     if comms_target.comms_data == nil then
         comms_target.comms_data = {}
@@ -939,31 +1449,22 @@ function commsStation()
         }
     })
     comms_data = comms_target.comms_data
-	for p3idx=1,8 do
-		p3obj = getPlayerShip(p3idx)
-		if p3obj ~= nil and p3obj:isValid() then
-			if p3obj:isCommsOpening() then
-				player = p3obj
-			end
-		end
-	end
-    if player:isEnemy(comms_target) then
+    if comms_source:isEnemy(comms_target) then
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
         setCommsMessage("We are under attack! No time for chatting!");
         return true
     end
-    if not player:isDocked(comms_target) then
+    if not comms_source:isDocked(comms_target) then
         handleUndockedState()
     else
         handleDockedState()
     end
     return true
 end
-
 function handleDockedState()
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
 		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
     else
 		oMsg = "Welcome to our lovely station.\n"
@@ -973,14 +1474,15 @@ function handleDockedState()
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
+	local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	for _, missile_type in ipairs(missile_types) do
-		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
+		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
 		addCommsReply("I need ordnance restocked", function()
 			setCommsMessage("What type of ordnance?")
 			for _, missile_type in ipairs(missile_types) do
-				if player:getWeaponStorageMax(missile_type) > 0 then
+				if comms_source:getWeaponStorageMax(missile_type) > 0 then
 					addCommsReply(missile_type .. " (" .. getWeaponCost(missile_type) .. "rep each)", function()
 						handleWeaponRestock(missile_type)
 					end)
@@ -988,16 +1490,177 @@ function handleDockedState()
 			end
 		end)
 	end
-	if player:isFriendly(comms_target) then
+	if comms_source:isFriendly(comms_target) then
 		addCommsReply("What are my current orders?", function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
 				ordMsg = ordMsg .. string.format("\n%i Seconds remain until start of race",raceStartDelay)
+			else
+				if comms_source.goal ~= nil then
+					ordMsg = ordMsg .. string.format("\nImmediate goal: race waypoint %i",comms_source.goal)
+				end
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply("Back", commsStation)
 		end)
 	end
+	addCommsReply("Do you upgrade spaceships?", function()
+		if comms_target == stationZefram then
+			setCommsMessage("We can upgrade your jump drive maximum range for nanites or robotic goods")
+		elseif comms_target == stationCarradine then
+			setCommsMessage(string.format("We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium",impulseBump))
+		elseif comms_target == spinStation then
+			setCommsMessage(string.format("We can increase the speed your rotate speed by %.2f percent for %s",spinBump,spinComponent))
+		elseif comms_target == stationMarconi then
+			setCommsMessage(string.format("We can increase the range of your beam weapons by %.2f percent for %s",beamRangeBump,beamComponent))
+		elseif comms_target == tubeStation then
+			setCommsMessage(string.format("We can add a homing missile tube to your ship for %s",tubeComponent))
+--			elseif comms_target == stationArcher then
+--				setCommsMessage(string.format("We can upgrade the durability of your hull by %.2f percent for %s",hullBump,hullComponent))
+		elseif comms_target == shieldStation then
+			setCommsMessage(string.format("We can upgrade your shields by %.2f percent for %s",shieldBump,shieldComponent))
+		elseif comms_target == stationNefatha then
+			setCommsMessage(string.format("We can upgrade your energy capacity by 25 percent for %s",energyComponent))
+		else
+			setCommsMessage("We don't upgrade spaceships")
+		end
+	end)
+	addCommsReply("Visit cartography office", function()
+		if comms_target.cartographer_description == nil then
+			local clerk_choice = math.random(1,3)
+			if clerk_choice == 1 then
+				comms_target.cartographer_description = "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+			elseif clerk_choice == 2 then
+				comms_target.cartographer_description = "The clerk behind the desk examines you then returns to grooming her tentacles."
+			else
+				comms_target.cartographer_description = "The clerk behind the desk glances at you then returns to preening her feathers."
+			end
+		end
+		setCommsMessage(string.format("%s\n\nYou can examine the brochure on the coffee table or talk to the cartographer",comms_target.cartographer_description))
+		addCommsReply("Examine brochure",function()
+			setCommsMessage("The brochure has a list of nearby stations and has a list of goods nearby")
+			addCommsReply("Examine station list", function()
+				local brochure_stations = ""
+				local sx, sy = comms_target:getPosition()
+				local nearby_objects = getObjectsInRadius(sx,sy,30000)
+				for _, obj in ipairs(nearby_objects) do
+					if obj.typeName == "SpaceStation" then
+						if not obj:isEnemy(comms_target) then
+							if brochure_stations == "" then
+								brochure_stations = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+							else
+								brochure_stations = string.format("%s\n%s %s %s",brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+							end
+						end
+					end
+				end
+				setCommsMessage(brochure_stations)
+				addCommsReply("Back",commsStation)
+			end)
+			addCommsReply("Examine goods list", function()
+				local brochure_goods = ""
+				local sx, sy = comms_target:getPosition()
+				local nearby_objects = getObjectsInRadius(sx,sy,30000)
+				for _, obj in ipairs(nearby_objects) do
+					if obj.typeName == "SpaceStation" then
+						if not obj:isEnemy(comms_target) then
+							if goods[obj] ~= nil then
+								local gi = 1
+								repeat
+									if brochure_goods == "" then
+										brochure_goods = string.format("Good, quantity, cost, station:\n%s, %i, %i, %s",goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
+									else
+										brochure_goods = string.format("%s\n%s, %i, %i, %s",brochure_goods,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3],obj:getCallSign())
+									end
+									gi = gi + 1
+								until(gi > #goods[obj])
+							end
+						end
+					end
+				end
+				setCommsMessage(brochure_goods)
+				addCommsReply("Back",commsStation)
+			end)
+			addCommsReply("Back",commsStation)
+		end)
+		addCommsReply("Talk to apprentice cartographer", function()
+			setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
+			addCommsReply("Locate station", function()
+				setCommsMessage("These are stations I have learned")
+				local sx, sy = comms_target:getPosition()
+				local nearby_objects = getObjectsInRadius(sx,sy,50000)
+				local stations_known = 0
+				for _, obj in ipairs(nearby_objects) do
+					if obj.typeName == "SpaceStation" then
+						if not obj:isEnemy(comms_target) then
+							stations_known = stations_known + 1
+							addCommsReply(obj:getCallSign(),function()
+								local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+								if goods[obj] ~= nil then
+									station_details = string.format("%s\nGood, quantity, cost",station_details)
+									local gi = 1
+									repeat
+										station_details = string.format("%s\n   %s, %i, %i",station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
+										gi = gi + 1
+									until(gi > #goods[obj])
+								end
+								setCommsMessage(station_details)
+								addCommsReply("Back",commsStation)
+							end)
+						end
+					end
+				end
+				if stations_known == 0 then
+					setCommsMessage("I have learned of no stations yet")
+				end
+				addCommsReply("Back",commsStation)
+			end)
+			addCommsReply("Locate goods", function()
+				setCommsMessage("These are the goods I know about")
+				local sx, sy = comms_target:getPosition()
+				local nearby_objects = getObjectsInRadius(sx,sy,50000)
+				local button_count = 0
+				local by_goods = {}
+				for _, obj in ipairs(nearby_objects) do
+					if obj.typeName == "SpaceStation" then
+						if not obj:isEnemy(comms_target) then
+							if goods[obj] ~= nil then
+								station_details = string.format("%s\nGood, quantity, cost",station_details)
+								local gi = 1
+								repeat
+									by_goods[goods[obj][gi][1]] = obj
+									gi = gi + 1
+								until(gi > #goods[obj])
+							end
+						end
+					end
+				end
+				for good, obj in pairs(by_goods) do
+					addCommsReply(good, function()
+						local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+						if goods[obj] ~= nil then					
+--						if obj.comms_data.goods ~= nil then
+							station_details = string.format("%s\nGood, quantity, cost",station_details)
+							local gi = 1
+							repeat
+								station_details = string.format("%s\n   %s, %i, %i",station_details,goods[obj][gi][1],goods[obj][gi][2],goods[obj][gi][3])
+								gi = gi + 1
+							until(gi > #goods[obj])
+						end
+						setCommsMessage(station_details)
+						addCommsReply("Back",commsStation)
+					end)
+					button_count = button_count + 1
+					if button_count >= 20 then
+						break
+					end
+				end
+				addCommsReply("Back",commsStation)
+			end)
+			addCommsReply("Back",commsStation)
+		end)
+		addCommsReply("Back",commsStation)
+	end)	
 	if goods[comms_target] ~= nil then
 		addCommsReply("Buy, sell, trade", function()
 			oMsg = "Goods or components available here: quantity, cost in reputation\n"
@@ -1013,19 +1676,19 @@ function handleDockedState()
 			gi = 1
 			cargoHoldEmpty = true
 			repeat
-				playerGoodsType = goods[player][gi][1]
-				playerGoodsQuantity = goods[player][gi][2]
+				playerGoodsType = goods[comms_source][gi][1]
+				playerGoodsQuantity = goods[comms_source][gi][2]
 				if playerGoodsQuantity > 0 then
 					oMsg = oMsg .. string.format("     %s: %i\n",playerGoodsType,playerGoodsQuantity)
 					cargoHoldEmpty = false
 				end
 				gi = gi + 1
-			until(gi > #goods[player])
+			until(gi > #goods[comms_source])
 			if cargoHoldEmpty then
 				oMsg = oMsg .. "     Empty\n"
 			end
-			playerRep = math.floor(player:getReputationPoints())
-			oMsg = oMsg .. string.format("Available Space: %i, Available Reputation: %i\n",player.cargo,playerRep)
+			playerRep = math.floor(comms_source:getReputationPoints())
+			oMsg = oMsg .. string.format("Available Space: %i, Available Reputation: %i\n",comms_source.cargo,playerRep)
 			setCommsMessage(oMsg)
 			-- Buttons for reputation purchases
 			gi = 1
@@ -1035,17 +1698,17 @@ function handleDockedState()
 				local goodsRep = goods[comms_target][gi][3]
 				addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
 					oMsg = string.format("Type: %s, Quantity: %i, Rep: %i",goodsType,goodsQuantity,goodsRep)
-					if player.cargo < 1 then
+					if comms_source.cargo < 1 then
 						oMsg = oMsg .. "\nInsufficient cargo space for purchase"
 					elseif goodsRep > playerRep then
 						oMsg = oMsg .. "\nInsufficient reputation for purchase"
 					elseif goodsQuantity < 1 then
 						oMsg = oMsg .. "\nInsufficient station inventory"
 					else
-						if not player:takeReputationPoints(goodsRep) then
+						if not comms_source:takeReputationPoints(goodsRep) then
 							oMsg = oMsg .. "\nInsufficient reputation for purchase"
 						else
-							player.cargo = player.cargo - 1
+							comms_source.cargo = comms_source.cargo - 1
 							decrementStationGoods(goodsType)
 							incrementPlayerGoods(goodsType)
 							oMsg = oMsg .. "\npurchased"
@@ -1061,11 +1724,11 @@ function handleDockedState()
 				gi = 1
 				foodQuantity = 0
 				repeat
-					if goods[player][gi][1] == "food" then
-						foodQuantity = goods[player][gi][2]
+					if goods[comms_source][gi][1] == "food" then
+						foodQuantity = goods[comms_source][gi][2]
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				if foodQuantity > 0 then
 					gi = 1
 					repeat
@@ -1093,11 +1756,11 @@ function handleDockedState()
 				gi = 1
 				luxuryQuantity = 0
 				repeat
-					if goods[player][gi][1] == "luxury" then
-						luxuryQuantity = goods[player][gi][2]
+					if goods[comms_source][gi][1] == "luxury" then
+						luxuryQuantity = goods[comms_source][gi][2]
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				if luxuryQuantity > 0 then
 					gi = 1
 					repeat
@@ -1125,11 +1788,11 @@ function handleDockedState()
 				gi = 1
 				medicineQuantity = 0
 				repeat
-					if goods[player][gi][1] == "medicine" then
-						medicineQuantity = goods[player][gi][2]
+					if goods[comms_source][gi][1] == "medicine" then
+						medicineQuantity = goods[comms_source][gi][2]
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				if medicineQuantity > 0 then
 					gi = 1
 					repeat
@@ -1160,27 +1823,27 @@ function handleDockedState()
 		naniteQuantity = 0
 		roboticQuantity = 0
 		repeat
-			if goods[player][gi][1] == "nanites" then
-				naniteQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == "nanites" then
+				naniteQuantity = goods[comms_source][gi][2]
 			end
-			if goods[player][gi][1] == "robotic" then
-				roboticQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == "robotic" then
+				roboticQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if naniteQuantity > 0 then
-			if player:hasJumpDrive() then
+			if comms_source:hasJumpDrive() then
 				addCommsReply("Provide nanites for jump drive upgrade", function()
-					if player.jumpUpgrade then
+					if comms_source.jumpUpgrade then
 						setCommsMessage("You already have the upgrade")
 					else
 						decrementPlayerGoods("nanites")
-						player.cargo = player.cargo + 1
-						player.jumpUpgrade = true
-						if player:getTypeName() == "Player Fighter" then
-							player:setJumpDriveRange(3000,45000)
+						comms_source.cargo = comms_source.cargo + 1
+						comms_source.jumpUpgrade = true
+						if comms_source:getTypeName() == "Player Fighter" then
+							comms_source:setJumpDriveRange(3000,45000)
 						else
-							player:setJumpDriveRange(5000,55000)
+							comms_source:setJumpDriveRange(5000,55000)
 						end
 						setCommsMessage("Your jump drive has been upgraded")
 					end
@@ -1188,18 +1851,18 @@ function handleDockedState()
 			end
 		end
 		if roboticQuantity > 0 then
-			if player:hasJumpDrive() then
+			if comms_source:hasJumpDrive() then
 				addCommsReply("Provide robotic goods for jump drive upgrade", function()
-					if player.jumpUpgrade then
+					if comms_source.jumpUpgrade then
 						setCommsMessage("You already have the upgrade")
 					else
 						decrementPlayerGoods("robotic")
-						player.cargo = player.cargo + 1
-						player.jumpUpgrade = true
-						if player:getTypeName() == "Player Fighter" then
-							player:setJumpDriveRange(3000,45000)
+						comms_source.cargo = comms_source.cargo + 1
+						comms_source.jumpUpgrade = true
+						if comms_source:getTypeName() == "Player Fighter" then
+							comms_source:setJumpDriveRange(3000,45000)
 						else
-							player:setJumpDriveRange(5000,55000)
+							comms_source:setJumpDriveRange(5000,55000)
 						end
 						setCommsMessage("Your jump drive has been upgraded")
 					end
@@ -1212,36 +1875,36 @@ function handleDockedState()
 		tritaniumQuantity = 0
 		dilithiumQuantity = 0
 		repeat
-			if goods[player][gi][1] == "tritanium" then
-				tritaniumQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == "tritanium" then
+				tritaniumQuantity = goods[comms_source][gi][2]
 			end
-			if goods[player][gi][1] == "dilithium" then
-				dilithiumQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == "dilithium" then
+				dilithiumQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])		
+		until(gi > #goods[comms_source])		
 		if tritaniumQuantity > 0 then
 			addCommsReply(string.format("Provide tritanium for %.2f percent impulse engine speed upgrade",impulseBump), function()
-				if player.impulseUpgrade then
+				if comms_source.impulseUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
 					decrementPlayerGoods("tritanium")
-					player.cargo = player.cargo + 1
-					player.impulseUpgrade = true
-					player:setImpulseMaxSpeed(player:getImpulseMaxSpeed()*(1+impulseBump/100))
+					comms_source.cargo = comms_source.cargo + 1
+					comms_source.impulseUpgrade = true
+					comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*(1+impulseBump/100))
 					setCommsMessage("Your impulse engine speed has been upgraded")
 				end
 			end)
 		end
 		if dilithiumQuantity > 0 then
 			addCommsReply(string.format("Provide dilithium for %f percent impulse engine speed upgrade",impulseBump), function()
-				if player.impulseUpgrade then
+				if comms_source.impulseUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
 					decrementPlayerGoods("dilithium")
-					player.cargo = player.cargo + 1
-					player.impulseUpgrade = true
-					player:setImpulseMaxSpeed(player:getImpulseMaxSpeed()*(1+impulseBump/100))
+					comms_source.cargo = comms_source.cargo + 1
+					comms_source.impulseUpgrade = true
+					comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*(1+impulseBump/100))
 					setCommsMessage("Your impulse engine speed has been upgraded")
 				end
 			end)
@@ -1251,20 +1914,20 @@ function handleDockedState()
 		gi = 1
 		spinQuantity = 0
 		repeat
-			if goods[player][gi][1] == spinComponent then
-				spinQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == spinComponent then
+				spinQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if spinQuantity > 0 then
 			addCommsReply(string.format("Provide %s for %.2f percent maneuver speed upgrade",spinComponent,spinBump), function()
-				if player.spinUpgrade then
+				if comms_source.spinUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
 					decrementPlayerGoods(spinComponent)
-					player.cargo = player.cargo + 1
-					player.spinUpgrade = true
-					player:setRotationMaxSpeed(player:getRotationMaxSpeed()*(1+spinBump/100))
+					comms_source.cargo = comms_source.cargo + 1
+					comms_source.spinUpgrade = true
+					comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*(1+spinBump/100))
 					setCommsMessage("Your spin speed has been upgraded")
 				end
 			end)
@@ -1274,32 +1937,31 @@ function handleDockedState()
 		gi = 1
 		beamQuantity = 0
 		repeat
-			if goods[player][gi][1] == beamComponent then
-				beamQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == beamComponent then
+				beamQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if beamQuantity > 0 then
 			addCommsReply(string.format("Provide %s for %.2f percent beam range upgrade",beamComponent,beamRangeBump), function()
-				if player.beamRangeUpgrade then
+				if comms_source.beamRangeUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
-					tempBeam = psb[player:getTypeName()]
-					if tempBeam == nil then
-						setCommsMessage("Your ship does not support a beam weapon upgrade")
-					else
+					if comms_source:getBeamWeaponRange(0) > 0 then
 						decrementPlayerGoods(beamComponent)
-						player.cargo = player.cargo + 1
-						player.beamRangeUpgrade = true
+						comms_source.cargo = comms_source.cargo + 1
+						comms_source.beamRangeUpgrade = true
 						for b=0,tempBeam-1 do
-							newRange = player:getBeamWeaponRange(b) * (1+beamRangeBump/100)
-							tempCycle = player:getBeamWeaponCycleTime(b)
-							tempDamage = player:getBeamWeaponDamage(b)
-							tempArc = player:getBeamWeaponArc(b)
-							tempDirection = player:getBeamWeaponDirection(b)
-							player:setBeamWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
+							newRange = comms_source:getBeamWeaponRange(b) * (1+beamRangeBump/100)
+							tempCycle = comms_source:getBeamWeaponCycleTime(b)
+							tempDamage = comms_source:getBeamWeaponDamage(b)
+							tempArc = comms_source:getBeamWeaponArc(b)
+							tempDirection = comms_source:getBeamWeaponDirection(b)
+							comms_source:setBeamWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
 						end	
 						setCommsMessage("Your beam range has been upgraded")					
+					else
+						setCommsMessage("Your ship does not support a beam weapon upgrade")
 					end
 				end
 			end)
@@ -1309,25 +1971,25 @@ function handleDockedState()
 		gi = 1
 		tubeQuantity = 0
 		repeat
-			if goods[player][gi][1] == tubeComponent then
-				tubeQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == tubeComponent then
+				tubeQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if tubeQuantity > 0 then
 			addCommsReply(string.format("Provide %s for additional homing missile tube",tubeComponent), function()
-				if player.tubeUpgrade then
+				if comms_source.tubeUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
 					decrementPlayerGoods(tubeComponent)
-					player.cargo = player.cargo + 1
-					player.tubeUpgrade = true
-					originalTubes = player:getWeaponTubeCount()
+					comms_source.cargo = comms_source.cargo + 1
+					comms_source.tubeUpgrade = true
+					originalTubes = comms_source:getWeaponTubeCount()
 					newTubes = originalTubes + 1
-					player:setWeaponTubeCount(newTubes)
-					player:setWeaponTubeExclusiveFor(originalTubes, "Homing")
-					player:setWeaponStorageMax("Homing", player:getWeaponStorageMax("Homing") + 2)
-					player:setWeaponStorage("Homing", player:getWeaponStorage("Homing") + 2)
+					comms_source:setWeaponTubeCount(newTubes)
+					comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
+					comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
+					comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
 					setCommsMessage("You now have an additional homing missle tube")
 				end
 			end)
@@ -1337,20 +1999,20 @@ function handleDockedState()
 --		gi = 1
 --		hullQuantity = 0
 --		repeat
---			if goods[player][gi][1] == hullComponent then
---				hullQuantity = goods[player][gi][2]
+--			if goods[comms_source][gi][1] == hullComponent then
+--				hullQuantity = goods[comms_source][gi][2]
 --			end
 --			gi = gi + 1
---		until(gi > #goods[player])
+--		until(gi > #goods[comms_source])
 --		if hullQuantity > 0 then
 --			addCommsReply(string.format("Provide %s for %.2f percent hull upgrade",hullComponent,hullBump), function()
---				if player.hullUpgrade then
+--				if comms_source.hullUpgrade then
 --					setCommsMessage("You already have the upgrade")
 --				else
 --					decrementPlayerGoods(hullComponent)
---					player.cargo = player.cargo + 1
---					player.hullUpgrade = true
---					player:setHullMax(player:getHullMax()*(1+hullBump/100))
+--					comms_source.cargo = comms_source.cargo + 1
+--					comms_source.hullUpgrade = true
+--					comms_source:setHullMax(comms_source:getHullMax()*(1+hullBump/100))
 --					setCommsMessage("You now have an upgraded hull")
 --				end
 --			end)
@@ -1360,20 +2022,20 @@ function handleDockedState()
 		gi = 1
 		energyQuantity = 0
 		repeat
-			if goods[player][gi][1] == energyComponent then
-				energyQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == energyComponent then
+				energyQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if energyQuantity > 0 then
 			addCommsReply(string.format("Provide %s for 25 percent energy capacity upgrade",energyComponent), function()
-				if player.energyUpgrade then
+				if comms_source.energyUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
 					decrementPlayerGoods(energyComponent)
-					player.cargo = player.cargo + 1
-					player.energyUpgrade = true
-					player:setMaxEnergy(player:getMaxEnergy()*1.25)
+					comms_source.cargo = comms_source.cargo + 1
+					comms_source.energyUpgrade = true
+					comms_source:setMaxEnergy(comms_source:getMaxEnergy()*1.25)
 					setCommsMessage("You now have upgraded energy capacity")
 				end
 			end)
@@ -1383,38 +2045,38 @@ function handleDockedState()
 		gi = 1
 		shieldQuantity = 0
 		repeat
-			if goods[player][gi][1] == shieldComponent then
-				shieldQuantity = goods[player][gi][2]
+			if goods[comms_source][gi][1] == shieldComponent then
+				shieldQuantity = goods[comms_source][gi][2]
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if shieldQuantity > 0 then
 			addCommsReply(string.format("Provide %s for %.2f percent front shield upgrade",shieldComponent,shieldBump), function()
-				if player.frontShieldUpgrade then
+				if comms_source.frontShieldUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
 					decrementPlayerGoods(shieldComponent)
-					player.cargo = player.cargo + 1
-					player.frontShieldUpgrade = true
-					si = player:getShieldCount()
-					if player:getShieldCount() == 1 then
-						player:setShieldsMax(player:getShieldMax(0)*(1+shieldBump/100))
+					comms_source.cargo = comms_source.cargo + 1
+					comms_source.frontShieldUpgrade = true
+					si = comms_source:getShieldCount()
+					if comms_source:getShieldCount() == 1 then
+						comms_source:setShieldsMax(comms_source:getShieldMax(0)*(1+shieldBump/100))
 					else
-						player:setShieldsMax(player:getShieldMax(0)*(1+shieldBump/100), player:getShieldMax(1))
+						comms_source:setShieldsMax(comms_source:getShieldMax(0)*(1+shieldBump/100), comms_source:getShieldMax(1))
 					end
 					setCommsMessage("You now have an upgraded front shield")
 				end
 			end)
-			if player:getShieldCount() > 1 then
+			if comms_source:getShieldCount() > 1 then
 				addCommsReply(string.format("Provide %s for %.2f percent rear shield upgrade",shieldComponent,shieldBump), function()
-					if player.rearShieldUpgrade then
+					if comms_source.rearShieldUpgrade then
 						setCommsMessage("You already have the upgrade")
 					else
 						decrementPlayerGoods(shieldComponent)
-						player.cargo = player.cargo + 1
-						player.rearShieldUpgrade = true
-						si = player:getShieldCount()
-						player:setShieldsMax(player:getShieldMax(0), player:getShieldMax(1)*(1+shieldBump/100))
+						comms_source.cargo = comms_source.cargo + 1
+						comms_source.rearShieldUpgrade = true
+						si = comms_source:getShieldCount()
+						comms_source:setShieldsMax(comms_source:getShieldMax(0), comms_source:getShieldMax(1)*(1+shieldBump/100))
 						setCommsMessage("You now have an upgraded rear shield")
 					end				
 				end)
@@ -1422,19 +2084,17 @@ function handleDockedState()
 		end
 	end
 end
-
 function isAllowedTo(state)
-    if state == "friend" and player:isFriendly(comms_target) then
+    if state == "friend" and comms_source:isFriendly(comms_target) then
         return true
     end
-    if state == "neutral" and not player:isEnemy(comms_target) then
+    if state == "neutral" and not comms_source:isEnemy(comms_target) then
         return true
     end
     return false
 end
-
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then 
 		setCommsMessage("You need to stay docked for that action.")
 		return
 	end
@@ -1445,7 +2105,7 @@ function handleWeaponRestock(weapon)
         return
     end
     local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
+    local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
             setCommsMessage("All nukes are charged and primed for destruction.");
@@ -1454,12 +2114,12 @@ function handleWeaponRestock(weapon)
         end
         addCommsReply("Back", commsStation)
     else
-        if not player:takeReputationPoints(points_per_item * item_amount) then
+        if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
             return
         end
-        player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
-        if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
+        comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
+        if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
             setCommsMessage("You are fully loaded and ready to explode things.")
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
@@ -1467,14 +2127,12 @@ function handleWeaponRestock(weapon)
         addCommsReply("Back", commsStation)
     end
 end
-
 function getWeaponCost(weapon)
     return math.ceil(comms_data.weapon_cost[weapon] * comms_data.reputation_cost_multipliers[getFriendStatus()])
 end
-
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
         oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
     else
         oMsg = "Greetings.\nIf you want to do business, please dock with us first."
@@ -1506,40 +2164,16 @@ function handleUndockedState()
 				setCommsMessage("We don't upgrade spaceships")
 			end
 		end)
-		addCommsReply("See any enemies in your area?", function()
-			if player:isFriendly(comms_target) then
-				enemiesInRange = 0
-				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
-					if obj:isEnemy(player) then
-						enemiesInRange = enemiesInRange + 1
-					end
-				end
-				if enemiesInRange > 0 then
-					if enemiesInRange > 1 then
-						setCommsMessage(string.format("Yes, we see %i enemies within 30U",enemiesInRange))
-					else
-						setCommsMessage("Yes, we see one enemy within 30U")						
-					end
-					player:addReputationPoints(2.0)					
-				else
-					setCommsMessage("No enemies within 30U")
-					player:addReputationPoints(1.0)
-				end
-				addCommsReply("Back", commsStation)
-			else
-				setCommsMessage("Not really")
-				player:addReputationPoints(1.0)
-				addCommsReply("Back", commsStation)
-			end
-		end)
 	end)
-	if player:isFriendly(comms_target) then
+	if comms_source:isFriendly(comms_target) then
 		addCommsReply("What are my current orders?", function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
 				ordMsg = ordMsg .. string.format("\n%i Seconds remain until start of race",raceStartDelay)
 			else
-				ordMsg = ordMsg .. string.format("\nRace has been running for %f secoonds",raceTimer)
+				if comms_source.goal ~= nil then
+					ordMsg = ordMsg .. string.format("\nImmediate goal: race waypoint %i",comms_source.goal)
+				end
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply("Back", commsStation)
@@ -1559,7 +2193,7 @@ function handleUndockedState()
 			if raceStartDelay <= 0 then
 				addCommsReply("Show player goals in race", function()
 					dMsg = "Player goals in race:"
-					for p12idx=1,8 do
+					for p12idx=1,32 do
 						p12 = getPlayerShip(p12idx)
 						if p12 ~= nil and p12:isValid() then
 							dMsg = dMsg .. string.format("\nPlayer %i: %s goal: %i",p12idx,p12:getCallSign(),p12.goal)
@@ -1569,8 +2203,8 @@ function handleUndockedState()
 					addCommsReply("Back", commsStation)
 				end)
 			end
-			addCommsReply("Show patience time limit and ufrv", function()
-				dMsg = string.format("\nPatience time limit: %i  ufrv: %s  ",patienceTimeLimit,ufrv)
+			addCommsReply("Show patience time limit", function()
+				dMsg = string.format("\nPatience time limit: %i",patienceTimeLimit)
 				setCommsMessage(dMsg)
 				addCommsReply("Back", commsStation)
 			end)
@@ -1590,15 +2224,15 @@ function handleUndockedState()
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
         addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
-            if player:getWaypointCount() < 1 then
+            if comms_source:getWaypointCount() < 1 then
                 setCommsMessage("You need to set a waypoint before you can request backup.");
             else
                 setCommsMessage("To which waypoint should we deliver your supplies?");
-                for n=1,player:getWaypointCount() do
+                for n=1,comms_source:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("supplydrop")) then
+                        if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
-                            local target_x, target_y = player:getWaypoint(n)
+                            local target_x, target_y = comms_source:getWaypoint(n)
                             local script = Script()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
@@ -1616,14 +2250,14 @@ function handleUndockedState()
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
         addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
-            if player:getWaypointCount() < 1 then
+            if comms_source:getWaypointCount() < 1 then
                 setCommsMessage("You need to set a waypoint before you can request reinforcements.");
             else
                 setCommsMessage("To which waypoint should we dispatch the reinforcements?");
-                for n=1,player:getWaypointCount() do
+                for n=1,comms_source:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("reinforcements")) then
-                            ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
+                        if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
+                            ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
                         else
                             setCommsMessage("Not enough reputation!");
@@ -1636,17 +2270,21 @@ function handleUndockedState()
         end)
     end
 end
-
+function getServiceCost(service)
+	-- Return the number of reputation points that a specified service costs for
+	-- the current player.
+    return math.ceil(comms_data.service_cost[service])
+end
 function getFriendStatus()
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
         return "friend"
     else
         return "neutral"
     end
 end
---[[-----------------------------------------------------------------
-      Ship communication 
------------------------------------------------------------------]]--
+--------------------------
+--	Ship communication  --
+--------------------------
 function commsShip()
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
@@ -1655,23 +2293,14 @@ function commsShip()
 		goods[comms_target] = {goodsList[irandom(1,#goodsList)][1], 1, random(20,80)}
 	end
 	comms_data = comms_target.comms_data
-	for p4idx=1,8 do
-		p4obj = getPlayerShip(p4idx)
-		if p4obj ~= nil and p4obj:isValid() then
-			if p4obj:isCommsOpening() then
-				player = p4obj
-			end
-		end
-	end	
-	if player:isFriendly(comms_target) then
+	if comms_source:isFriendly(comms_target) then
 		return friendlyComms(comms_data)
 	end
-	if player:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(player) then
+	if comms_source:isEnemy(comms_target) and comms_target:isFriendOrFoeIdentifiedBy(comms_source) then
 		return enemyComms(comms_data)
 	end
 	return neutralComms(comms_data)
 end
-
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
 		setCommsMessage("What do you want?");
@@ -1679,14 +2308,14 @@ function friendlyComms(comms_data)
 		setCommsMessage("Sir, how can we assist?");
 	end
 	addCommsReply("Defend a waypoint", function()
-		if player:getWaypointCount() == 0 then
+		if comms_source:getWaypointCount() == 0 then
 			setCommsMessage("No waypoints set. Please set a waypoint first.");
 			addCommsReply("Back", commsShip)
 		else
 			setCommsMessage("Which waypoint should we defend?");
-			for n=1,player:getWaypointCount() do
+			for n=1,comms_source:getWaypointCount() do
 				addCommsReply("Defend WP" .. n, function()
-					comms_target:orderDefendLocation(player:getWaypoint(n))
+					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 					setCommsMessage("We are heading to assist at WP" .. n ..".");
 					addCommsReply("Back", commsShip)
 				end)
@@ -1696,7 +2325,7 @@ function friendlyComms(comms_data)
 	if comms_data.friendlyness > 0.2 then
 		addCommsReply("Assist me", function()
 			setCommsMessage("Heading toward you to assist.");
-			comms_target:orderDefendTarget(player)
+			comms_target:orderDefendTarget(comms_source)
 			addCommsReply("Back", commsShip)
 		end)
 	end
@@ -1713,14 +2342,12 @@ function friendlyComms(comms_data)
 				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
 			end
 		end
-
-		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
+		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
 					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
 			end
 		end
-
 		setCommsMessage(msg);
 		addCommsReply("Back", commsShip)
 	end)
@@ -1735,7 +2362,6 @@ function friendlyComms(comms_data)
 	end
 	return true
 end
-
 function enemyComms(comms_data)
 	if comms_target.owner == nil then
 		if comms_data.friendlyness > 50 then
@@ -1765,7 +2391,7 @@ function enemyComms(comms_data)
 			comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 			addCommsReply(taunt_option, function()
 				if random(0, 100) < 30 then
-					comms_target:orderAttack(player)
+					comms_target:orderAttack(comms_source)
 					setCommsMessage(taunt_success_reply);
 				else
 					setCommsMessage(taunt_failed_reply);
@@ -1779,7 +2405,6 @@ function enemyComms(comms_data)
 	end
 	return false
 end
-
 function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
@@ -1791,16 +2416,16 @@ function neutralComms(comms_data)
 				addCommsReply("Back", commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
-			if distance(player,comms_target) < 5000 then
+			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					gi = 1
 					luxuryQuantity = 0
 					repeat
-						if goods[player][gi][1] == "luxury" then
-							luxuryQuantity = goods[player][gi][2]
+						if goods[comms_source][gi][1] == "luxury" then
+							luxuryQuantity = goods[comms_source][gi][2]
 						end
 						gi = gi + 1
-					until(gi > #goods[player])
+					until(gi > #goods[comms_source])
 					if luxuryQuantity > 0 then
 						gi = 1
 						repeat
@@ -1831,15 +2456,15 @@ function neutralComms(comms_data)
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]
 						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
-							if player.cargo < 1 then
+							if comms_source.cargo < 1 then
 								setCommsMessage("Insufficient cargo space for purchase")
 							elseif goodsQuantity < 1 then
 								setCommsMessage("Insufficient inventory on freighter")
 							else
-								if not player:takeReputationPoints(goodsRep) then
+								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage("Insufficient reputation for purchase")
 								else
-									player.cargo = player.cargo - 1
+									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
 									setCommsMessage("Purchased")
@@ -1856,7 +2481,7 @@ function neutralComms(comms_data)
 			-- Offer to sell destination information
 			destRep = random(1,5)
 			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
-				if not player:takeReputationPoints(destRep) then
+				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage("Insufficient reputation")
 				else
 					setCommsMessage(comms_target.target:getCallSign())
@@ -1864,7 +2489,7 @@ function neutralComms(comms_data)
 				addCommsReply("Back", commsShip)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
-			if distance(player,comms_target) < 5000 then
+			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					gi = 1
 					repeat
@@ -1872,15 +2497,15 @@ function neutralComms(comms_data)
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]
 						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
-							if player.cargo < 1 then
+							if comms_source.cargo < 1 then
 								setCommsMessage("Insufficient cargo space for purchase")
 							elseif goodsQuantity < 1 then
 								setCommsMessage("Insufficient inventory on freighter")
 							else
-								if not player:takeReputationPoints(goodsRep) then
+								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage("Insufficient reputation for purchase")
 								else
-									player.cargo = player.cargo - 1
+									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
 									setCommsMessage("Purchased")
@@ -1898,15 +2523,15 @@ function neutralComms(comms_data)
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]*2
 						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
-							if player.cargo < 1 then
+							if comms_source.cargo < 1 then
 								setCommsMessage("Insufficient cargo space for purchase")
 							elseif goodsQuantity < 1 then
 								setCommsMessage("Insufficient inventory on freighter")
 							else
-								if not player:takeReputationPoints(goodsRep) then
+								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage("Insufficient reputation for purchase")
 								else
-									player.cargo = player.cargo - 1
+									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
 									setCommsMessage("Purchased")
@@ -1921,7 +2546,7 @@ function neutralComms(comms_data)
 		else
 			setCommsMessage("Why are you bothering me?")
 			-- Offer to sell goods if goods or equipment freighter double price
-			if distance(player,comms_target) < 5000 then
+			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					gi = 1
 					repeat
@@ -1929,15 +2554,15 @@ function neutralComms(comms_data)
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]*2
 						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
-							if player.cargo < 1 then
+							if comms_source.cargo < 1 then
 								setCommsMessage("Insufficient cargo space for purchase")
 							elseif goodsQuantity < 1 then
 								setCommsMessage("Insufficient inventory on freighter")
 							else
-								if not player:takeReputationPoints(goodsRep) then
+								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage("Insufficient reputation for purchase")
 								else
-									player.cargo = player.cargo - 1
+									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
 									setCommsMessage("Purchased")
@@ -1959,29 +2584,27 @@ function neutralComms(comms_data)
 	end
 	return true
 end
---[[-----------------------------------------------------------------
-      Cargo management 
------------------------------------------------------------------]]--
+------------------------
+--	Cargo management  --
+------------------------
 function incrementPlayerGoods(goodsType)
 	local gi = 1
 	repeat
-		if goods[player][gi][1] == goodsType then
-			goods[player][gi][2] = goods[player][gi][2] + 1
+		if goods[comms_source][gi][1] == goodsType then
+			goods[comms_source][gi][2] = goods[comms_source][gi][2] + 1
 		end
 		gi = gi + 1
-	until(gi > #goods[player])
+	until(gi > #goods[comms_source])
 end
-
 function decrementPlayerGoods(goodsType)
 	local gi = 1
 	repeat
-		if goods[player][gi][1] == goodsType then
-			goods[player][gi][2] = goods[player][gi][2] - 1
+		if goods[comms_source][gi][1] == goodsType then
+			goods[comms_source][gi][2] = goods[comms_source][gi][2] - 1
 		end
 		gi = gi + 1
-	until(gi > #goods[player])
+	until(gi > #goods[comms_source])
 end
-
 function decrementStationGoods(goodsType)
 	local gi = 1
 	repeat
@@ -1991,7 +2614,6 @@ function decrementStationGoods(goodsType)
 		gi = gi + 1
 	until(gi > #goods[comms_target])
 end
-
 function decrementShipGoods(goodsType)
 	local gi = 1
 	repeat
@@ -2001,7 +2623,7 @@ function decrementShipGoods(goodsType)
 		gi = gi + 1
 	until(gi > #goods[comms_target])
 end
-
+--	Target drones
 function spawnTargetDrone(originx,originy,targetDroneID,area,sequenceNumber)
 	if shootBack then
 		enemyTemplate = "Atlantis X23"
@@ -2022,7 +2644,7 @@ function spawnTargetDrone(originx,originy,targetDroneID,area,sequenceNumber)
 	end
 	table.insert(droneList,td)
 end
-
+--	Moving terrain
 function moveHazardAsteroids(aList,aDiameter)
 	for hai=1,4 do
 		if aList[hai]:isValid() then
@@ -2035,7 +2657,6 @@ function moveHazardAsteroids(aList,aDiameter)
 		end
 	end
 end
-
 function moveHazardMines(mList,mDiameter)
 	for hmi=1,4 do
 		if mList[hmi]:isValid() then
@@ -2048,7 +2669,6 @@ function moveHazardMines(mList,mDiameter)
 		end
 	end
 end
-
 function moveHazardPacMines(pmList,pmDiameter)
 	for hpmi=1,#pmList do
 		if pmList[hpmi]:isValid() then
@@ -2061,129 +2681,432 @@ function moveHazardPacMines(pmList,pmDiameter)
 		end
 	end
 end
-
+--	Naming player ships
+function tableRemoveRandom(array)
+--	Remove random element from array and return it.
+	-- Returns nil if the array is empty,
+	-- analogous to `table.remove`.
+    local array_item_count = #array
+    if array_item_count == 0 then
+        return nil
+    end
+    local selected_item = math.random(array_item_count)
+    array[selected_item], array[array_item_count] = array[array_item_count], array[selected_item]
+    return table.remove(array)
+end
+function namePlayerShip(p,template_type)
+	if playerShipNamesFor[template_type] ~= nil and #playerShipNamesFor[template_type] > 0 then
+		p:setCallSign(tableRemoveRandom(playerShipNamesFor[template_type]))
+	else
+		p:setCallSign(tableRemoveRandom(playerShipNamesFor["Leftovers"]))
+	end
+end
+--	End of game handling
+function allRacersFinished()
+	print("in all racers finished function")
+	calculateTimeRank()
+	if playerCount == 1 then
+		soloComplete()
+	else
+		competeComplete()
+	end
+	globalMessage(gMsg)
+end
+function raceTimerExpired()
+	print("in race timer expired function")
+	calculateTimeRank()
+	if playerCount == 1 then
+		soloExpire()
+	else
+		competeExpire()
+	end
+	globalMessage(gMsg)
+end
+function calculateTimeRank()
+	print("in calculate time rank function")
+	playerList = {}
+	for p6idx=1,32 do
+		p6 = getPlayerShip(p6idx)
+		if p6 ~= nil and p6:isValid() and p6.participant == "participant" then
+			table.insert(playerList,p6)
+			if p6.raceTime == nil then
+				p6.raceTime = raceTimer
+			end
+			if p6.raceTime < 600 then
+				p6.timeRank = "Admiral"
+			elseif p6.raceTime < 720 then
+				p6.timeRank = "Captain"
+			elseif p6.raceTime < 900 then
+				p6.timeRank = "Commander"
+			elseif p6.raceTime < 1200 then
+				p6.timeRank = "Lieutenant"
+			elseif p6.raceTime < 1500 then
+				p6.timeRank = "Ensign"
+			else
+				if p6.raceTime == nil then
+					p6.timeRank = "Undefined"
+				else
+					p6.timeRank = "Cadet"
+				end
+			end
+		end
+	end
+end
+function soloComplete()
+	print("in solo complete function")
+	gMsg = string.format("Race completed in %.2f seconds. Time rank: %s",playerList[1].raceTime,playerList[1].timeRank)
+	eliminatedDrones = countEliminatedDrones(playerList[1])
+	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
+end
+function soloExpire()
+	print("in solo expire function")
+	gMsg = "Race administrators got tired of waiting. Race stopped after 2000 seconds. Time Rank: Cadet"
+	eliminatedDrones = countEliminatedDrones(playerList[1])
+	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
+end
+function competeComplete()
+	print("in compete complete function")
+	gMsg = "Race Results"
+	competeResults()
+end
+function competeExpire()
+	print("in compete expire function")
+	gMsg = string.format("Race administrators got tired of waiting. Race stopped after %.2f seconds.",raceTimer)
+	competeResults()
+end
+function competeResults()
+	print("in compete results function")
+	local stat_list, sorted_stat_list = gatherStats(true)
+	gMsg = gMsg .. "\nOrdered by score. Place, ship name, score, time in seconds, place points, drone points"
+	print("Final Statistics:")
+	print("Rank","Score","Place","Drones","Time","Name")
+	for index, item in ipairs(sorted_stat_list) do
+		local time = 0
+		if item.time ~= nil then
+			time = item.time
+		end
+		print(index,item.score,item.rank_points,item.drone_points,time,item.name)
+		gMsg = gMsg .. string.format("\n%i, %s, %i, %.2f, %i, %i",index,item.name,item.score,time,item.rank_points,item.drone_points)
+		if index == 1 then
+			gMsg = gMsg .. "\n\n\n"
+		end
+	end
+--	previous method (deprecated)
+--[[
+	fastestPlayer(10)
+	victoryAccount = false
+	fastestPlayer(5)
+	if playerCount > 2 then
+		gMsg = gMsg .. "\n\n\n"
+		fastestPlayer(3)
+		victoryAccount = true
+	end
+	if playerCount > 3 then
+		fastestPlayer(1)
+	end
+	if playerCount > 4 then
+		for pl=1,#playerList do
+			if playerList[pl].timePoints == nil then
+				playerList[pl].timePoints = 0
+				gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: 0",playerList[pl]:getCallSign(),playerList[pl].raceTime,playerList[pl].timeRank)
+			end
+		end
+	end
+	if not victoryAccount then
+		gMsg = gMsg .. "\n\n\n"
+	end
+	droneTally()
+	gMsg = gMsg .. "\n"
+	unorderedFinalTally()
+--]]
+end
+function fastestPlayer(reward)
+	shortestTime = 999999
+	for pl=1,#playerList do
+		if playerList[pl].timePoints == nil then
+			if playerList[pl].raceTime < shortestTime then
+				pi = pl
+				shortestTime = playerList[pl].raceTime
+			end
+		end
+	end
+	if pi ~= nil then
+		playerList[pi].timePoints = reward
+		gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: %i",playerList[pi]:getCallSign(),playerList[pi].raceTime,playerList[pi].timeRank,playerList[pi].timePoints)
+	else
+		gMsg = gMsg .. "\nResults indeterminate"
+	end
+	return
+end
+function droneTally()
+	for pl=1,#playerList do
+		eliminatedDrones = countEliminatedDrones(playerList[pl])
+		playerList[pl].score = playerList[pl].timePoints + eliminatedDrones
+		playerList[pl].dronePoints = eliminatedDrones
+	end	
+end
+function countEliminatedDrones(ePlayer)
+	local remainingDrones = 0
+	local tdid = ePlayer:getCallSign()
+	if droneList ~= nil and #droneList > 0 then
+		for didx=1,#droneList do
+			if droneList[didx]:isValid() then
+				if droneList[didx].owner == tdid then
+					remainingDrones = remainingDrones + 1
+				end
+			end
+		end
+	else
+		remainingDrones = 12
+	end
+	return 12 - remainingDrones	
+end
+function countEliminatedDronesByName(name)
+	local remainingDrones = 0
+	if droneList ~= nil and #droneList > 0 then
+		for didx=1,#droneList do
+			if droneList[didx]:isValid() then
+				if droneList[didx].owner == name then
+					remainingDrones = remainingDrones + 1
+				end
+			end
+		end
+	else
+		remainingDrones = 12
+	end
+	return 12 - remainingDrones	
+end
+function unorderedFinalTally()
+	for pl=1,#playerList do
+		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",playerList[pl]:getCallSign(),playerList[pl].dronePoints,playerList[pl].score)
+	end
+end
+function finalTally()
+	outerIndex = #playerList
+	for plo=1,outerIndex do
+		bestScore = 0
+		for pl=1,#playerList do
+			if playerList[pl].score >= bestScore then
+				bestPlayer = playerList[pl]
+				bestScore = playerList[pl].score
+			end
+		end
+		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",bestPlayer:getCallSign(),bestPlayer.dronePoints,bestPlayer.score)
+		table.remove(playerList,bestPlayer)
+	end
+end
+function gatherStats(final_score)
+	local stat_list = {}
+	stat_list.scenario = {name = "Fermi 500", version = scenario_version}
+	stat_list.ship = {}
+	stat_list.times = {}
+	stat_list.times.stage = game_state
+	stat_list.times.raceStartDelay = raceStartDelay
+	stat_list.times.raceTimer = raceTimer
+	stat_list.times.patienceTimeLimit = patienceTimeLimit
+	local score_list = {}
+	for pidx=1,32 do
+		local p = getPlayerShip(pidx)
+		if p ~= nil then
+			score_list[p:getCallSign()] = {laps = p.laps, goal = p.goal, drone_points = 0, rank = 0, score = 0, time = 0}
+			local participant = false
+			if p.participant == "participant" then
+				participant = "participant"
+			else
+				if raceStartDelay > 0 then
+					participant = "unknown"
+				else
+					participant = "forfeit"
+				end
+			end
+			local laps = 0
+			if p.laps ~= nil then
+				laps = p.laps
+			end
+			local goal = 0
+			if p.goal ~= nil then
+				goal = p.goal
+			end
+			local rank_goal = goal - 1
+			if rank_goal == 0 then
+				rank_goal = 4
+			elseif rank_goal < 0 then
+				rank_goal = 0
+			end
+			local drone_points = 0
+			if p:isValid() then
+				drone_points = countEliminatedDrones(p)
+				score_list[p:getCallSign()].drone_points = drone_points
+				score_list[p:getCallSign()].rank = laps*10000 + rank_goal*1000
+				if p.raceTime ~= nil then
+					score_list[p:getCallSign()].rank = score_list[p:getCallSign()].rank + (original_patience_time_limit - p.raceTime)
+					score_list[p:getCallSign()].time = p.raceTime
+				end
+				stat_list.ship[p:getCallSign()] = {is_alive = true, participant = participant, lap_count = laps, waypoint_goal = goal, drone_points = drone_points, rank_points = 0, score = 0, time = 0}
+			else
+				drone_points = countEliminatedDronesByName(p.name)
+				score_list[p.name].drone_points = drone_points
+				score_list[p.name].rank = laps*10000 + rank_goal*1000
+				if p.raceTime ~= nil then
+					score_list[p.name].rank = score_list[p:getCallSign()].rank + (original_patience_time_limit - p.raceTime)
+					score_list[p.name].time = p.raceTime
+				end
+				stat_list.ship[p.name] = {is_alive = false, participant = participant, lap_count = laps, waypoint_goal = goal, drone_points = drone_points, rank_points = 0, score = 0, time = 0}
+			end
+		end
+	end
+	for name, p in pairs(player_start_list) do
+		if name ~= nil then
+			if stat_list.ship[name] == nil then
+				if p ~= nil then
+					local participant = p.participant
+					if participant == nil then
+						participant = "unknown"
+					end
+					local laps = 0
+					if p.laps ~= nil then
+						laps = p.laps
+					end
+					local goal = 1
+					if p.goal ~= nil then
+						goal = p.goal
+					end
+					local rank_goal = goal - 1
+					if rank_goal == 0 then
+						rank_goal = 4
+					elseif rank_goal < 0 then
+						rank_goal = 0
+					end
+					local drone_points = countEliminatedDronesByName(name)
+					if drone_points == nil then
+						drone_points = 0
+					end
+					if score_list[name] ~= nil then
+						score_list[name].drone_points = drone_points
+						score_list[name].rank = laps*10000 + rank_goal*1000
+						if p.raceTime ~= nil then
+							score_list[name].rank = score_list[p:getCallSign()].rank + (original_patience_time_limit - p.raceTime)
+							score_list[name].time = p.raceTime
+						end
+					end
+					stat_list.ship[name] = {is_alive = false, participant = participant, lap_count = laps, waypoint_goal = goal, drone_points = drone_points, rank_points = 0, score = 0, time = 0} 
+				end
+			end
+		end
+	end
+	local sorted_score_list = {}
+	for name, details in pairs(score_list) do
+		table.insert(sorted_score_list,{name=name,drone_points=details.drone_points,rank=details.rank,time=details.time})
+	end
+	table.sort(sorted_score_list,function(a,b)
+		return a.rank > b.rank
+	end)
+--	for _,item in ipairs(sorted_score_list) do
+--		print(item.name, item.drone_points, item.rank)
+--	end
+	if sorted_score_list ~= nil and #sorted_score_list > 0 and player_count > 0 then
+		local prev_value = sorted_score_list[1].rank
+		local place_index = 1
+		local reward_index = 1
+		for _, item in ipairs(sorted_score_list) do
+			if item.rank ~= prev_value then
+				reward_index = place_index
+			end
+			local reward = reward_grid[player_count][reward_index]
+			stat_list.ship[item.name].rank_points = reward
+--			stat_list.ship[item.name].score = reward + item.drone_points
+			stat_list.ship[item.name].time = item.time	
+			place_index = place_index + 1
+			prev_value = item.rank
+		end
+	end
+	for name, details in pairs(stat_list.ship) do
+		local reward = details.rank_points
+		local drones = details.drone_points
+		if reward ~= nil and drones ~= nil then
+			details.score = reward + drones
+		end
+	end
+	if final_score then
+		print("in gather stats function when the final score is being calculated")
+		local sorted_stat_list = {}
+		for name, details in pairs(stat_list.ship) do
+			table.insert(sorted_stat_list,{name=name,lap_count=details.lap_count,waypoint_goal=details.waypoint_goal,score=details.score,rank_points=details.rank_points,drone_points=details.drone_points,time=details.time})
+		end
+		table.sort(sorted_stat_list,function(a,b)
+			return a.score > b.score
+		end)
+		print("Score","Place","Drones","Name","Laps","WP Goal")
+		for _, item in ipairs(sorted_stat_list) do
+			print(item.score,item.rank_points,item.drone_points,item.name,item.lap_count,item.waypoint_goal)
+		end
+		return stat_list, sorted_stat_list
+	end
+	return stat_list
+end
+function setRaceWaypoints(p)
+	string.format("")	--global context for serious proton
+	p:commandAddWaypoint(racePoint1x,racePoint1y)
+	p:commandAddWaypoint(racePoint2x,racePoint2y)
+	p:commandAddWaypoint(racePoint3x,racePoint3y)
+	p:commandAddWaypoint(racePoint4x,racePoint4y)
+end
+function resetRaceWaypoints(p)
+	string.format("")	--global context for serious proton
+	for i=p:getWaypointCount(),1,-1 do
+		p:commandRemoveWaypoint(i)
+	end
+	setRaceWaypoints(p)
+end
 function update(delta)
 	if delta == 0 then
+		game_state = "paused"
 		--game paused
-		for pidx=1,8 do
-			player = getPlayerShip(pidx)
-			if player ~= nil and player:isValid() then
-				if not player.nameAssigned then
-					player.nameAssigned = true
-					tempPlayerType = player:getTypeName()
+		for pidx=1,32 do
+			local p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				if p.nameAssigned == nil then
+					p.nameAssigned = true
+					local control_code_index = math.random(1,#control_code_stem)
+					local stem = control_code_stem[control_code_index]
+					table.remove(control_code_stem,control_code_index)
+					local branch = math.random(100,999)
+					p.control_code = stem .. branch
+					p:setControlCode(stem .. branch)
+					tempPlayerType = p:getTypeName()
+					p.shipScore = player_ship_stats[tempPlayerType].strength
+					p.maxCargo = player_ship_stats[tempPlayerType].cargo
+					p:addReputationPoints(5)
+					goods[p] = goodsList
+					namePlayerShip(p,tempPlayerType)
+					p.name = p:getCallSign()
+					local gi = 1
+					repeat
+						if goods[p][gi][1] == "food" then
+							goods[p][gi][2] = 1
+						end
+						if goods[p][gi][1] == "medicine" then
+							goods[p][gi][2] = 1
+						end
+						gi = gi + 1
+					until(gi > #goods[p])
+					p.cargo = p.maxCargo - 2
 					if tempPlayerType == "MP52 Hornet" then
-						if #playerShipNamesForMP52Hornet > 0 then
-							ni = math.random(1,#playerShipNamesForMP52Hornet)
-							player:setCallSign(playerShipNamesForMP52Hornet[ni])
-							table.remove(playerShipNamesForMP52Hornet,ni)
-						end
-						player.shipScore = 7
-						player.maxCargo = 3
-						player.cargo = 2
-						player:setWarpDrive(true)
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Piranha" then
-						if #playerShipNamesForPiranha > 0 then
-							ni = math.random(1,#playerShipNamesForPiranha)
-							player:setCallSign(playerShipNamesForPiranha[ni])
-							table.remove(playerShipNamesForPiranha,ni)
-						end
-						player.shipScore = 16
-						player.maxCargo = 8
-						player.cargo = 7
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Flavia P.Falcon" then
-						if #playerShipNamesForFlaviaPFalcon > 0 then
-							ni = math.random(1,#playerShipNamesForFlaviaPFalcon)
-							player:setCallSign(playerShipNamesForFlaviaPFalcon[ni])
-							table.remove(playerShipNamesForFlaviaPFalcon,ni)
-						end
-						player.shipScore = 15
-						player.maxCargo = 15
-						player.cargo = 14
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
+						p:setWarpDrive(true)
 					elseif tempPlayerType == "Phobos M3P" then
-						if #playerShipNamesForPhobosM3P > 0 then
-							ni = math.random(1,#playerShipNamesForPhobosM3P)
-							player:setCallSign(playerShipNamesForPhobosM3P[ni])
-							table.remove(playerShipNamesForPhobosM3P,ni)
-						end
-						player.shipScore = 19
-						player.maxCargo = 10
-						player.cargo = 9
-						player:setWarpDrive(true)
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Atlantis" then
-						if #playerShipNamesForAtlantis > 0 then
-							ni = math.random(1,#playerShipNamesForAtlantis)
-							player:setCallSign(playerShipNamesForAtlantis[ni])
-							table.remove(playerShipNamesForAtlantis,ni)
-						end
-						player.shipScore = 52
-						player.maxCargo = 6
-						player.cargo = 5
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Player Cruiser" then
-						if #playerShipNamesForCruiser > 0 then
-							ni = math.random(1,#playerShipNamesForCruiser)
-							player:setCallSign(playerShipNamesForCruiser[ni])
-							table.remove(playerShipNamesForCruiser,ni)
-						end
-						player.shipScore = 40
-						player.maxCargo = 6
-						player.cargo = 5
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					elseif tempPlayerType == "Player Missile Cr." then
-						if #playerShipNamesForMissileCruiser > 0 then
-							ni = math.random(1,#playerShipNamesForMissileCruiser)
-							player:setCallSign(playerShipNamesForMissileCruiser[ni])
-							table.remove(playerShipNamesForMissileCruiser,ni)
-						end
-						player.shipScore = 45
-						player.maxCargo = 8
-						player.cargo = 7
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
+						p:setWarpDrive(true)
 					elseif tempPlayerType == "Player Fighter" then
-						if #playerShipNamesForFighter > 0 then
-							ni = math.random(1,#playerShipNamesForFighter)
-							player:setCallSign(playerShipNamesForFighter[ni])
-							table.remove(playerShipNamesForFighter,ni)
+						p:setJumpDrive(true)
+						p:setJumpDriveRange(3000,40000)
+					end
+					print("Control Code for " .. p:getCallSign(), p.control_code)
+					if player_ship_stats[tempPlayerType] == nil then
+						p.shipScore = 24
+						p.maxCargo = 5
+						p.cargo = p.maxCargo
+						if not p:hasSystem("warp") and not p:hasSystem("jumpdrive") then
+							pobj:setWarpDrive(true)
 						end
-						player.shipScore = 7
-						player.maxCargo = 3
-						player.cargo = 2
-						player:setJumpDrive(true)
-						player:setJumpDriveRange(3000,40000)
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
-					else
-						if #playerShipNamesForLeftovers > 0 then
-							ni = math.random(1,#playerShipNamesForLeftovers)
-							player:setCallSign(playerShipNamesForLeftovers[ni])
-							table.remove(playerShipNamesForLeftovers,ni)
-						end
-						player.shipScore = 24
-						player.maxCargo = 5
-						player.cargo = 4
-						player:setWarpDrive(true)
-						goods[player] = goodsList
-						player:addReputationPoints(5)
-						incrementPlayerGoods("food")
 					end
 				end
 			end
@@ -2192,26 +3115,59 @@ function update(delta)
 	end
 	-- game not paused
 	if stationsBuilt ~= "done" then
+		game_state = "creating"
 		stationsBuilt = "done"
 		setStations()
 	end
+	if mainGMButtons == mainGMButtonsDuringPause then
+		mainGMButtons = mainGMButtonsAfterPause
+		mainGMButtons()
+	end
+	if players_placed == nil then
+		game_state = "placing"
+		player_count = 0
+		for pidx=1,32 do
+			local p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				player_count = player_count + 1
+			end
+		end
+		local angle_increment = 360/player_count
+		local angle = random(0,360)
+		for pidx=1,player_count do
+			local p = getPlayerShip(pidx)
+			if p ~= nil and p:isValid() then
+				local start_x, start_y = vectorFromAngle(angle,10000)
+				p:setPosition(start_x, start_y)
+				p:setHeading((angle + 180)%360)
+				p:commandTargetRotation((angle + 90)%360)
+				angle = angle + angle_increment
+			else
+				print("Player ship problem. Restart")
+				return
+			end
+		end
+		players_placed = true
+	end
 	if raceInstructionMessage ~= "sent" then
+		game_state = "introducing"
 		raceInstructionMessage = "sent"
 		primaryOrders = string.format("Start race on time at waypoint 1\nRace Length: %f units",raceLength)
-		for p1idx=1,8 do
-			p1 = getPlayerShip(p1idx)
+		for p1idx=1,32 do
+			local p1 = getPlayerShip(p1idx)
 			if p1 ~= nil and p1:isValid() then
 				p1:addToShipLog("Race starts in 10 minutes. Be at waypoint 1 on time or forfeit","Magenta")
-				p1:addToShipLog(string.format("Today's race length: %f units",raceLength),"Magenta")
+				p1:addToShipLog(string.format("Today's race length: %.1f units",raceLength),"Magenta")
 			end
 		end
 	end
 	if raceStartDelay > 0 then
+		game_state = "countdown"
 		--before race start
 		raceStartDelay = raceStartDelay - delta
-		stationTimer:setCallSign(string.format("%.2f",raceStartDelay))
+		stationTimer:setCallSign(string.format("Race Start Countdown: %.2f",raceStartDelay))
 		if stationsBuilt == "done" then
-			for p2idx=1,8 do
+			for p2idx=1,32 do
 				p2 = getPlayerShip(p2idx)
 				if p2 ~= nil and p2:isValid() then
 					if p2:getWaypointCount() < 1 then
@@ -2232,31 +3188,37 @@ function update(delta)
 			end
 		end
 	else
+		game_state = "race"
 		--race has started
 		if startLineCheck ~= "done" then
 			startLineCheck = "done"
 			raceTimer = 0
 			primaryOrders = "Complete race. Win if possible."
-			for p4idx=1,8 do
+			player_start_list = {}
+			original_player_count = player_count
+			player_count = 0
+			for p4idx=1,32 do
 				p4 = getPlayerShip(p4idx)
 				if p4 ~= nil and p4:isValid() then
 					if distance(p4,racePoint1x,racePoint1y) < 5000 then
-						p4.participant = true
+						p4.participant = "participant"
 						p4.goal = 2
 						p4.laps = 0
 						p4.laptimer = 0
 						p4.legtimer = 0
 						p4:addToShipLog("Go!","Red")
+						player_start_list[p4:getCallSign()] = p4
+						player_count = player_count + 1
 					else
 						p4:destroy()
 					end
 				end
 			end
 			droneList = {}
-			for p4idx=1,8 do	--make some target drones
+			for p4idx=1,32 do	--make some target drones
 				p4 = getPlayerShip(p4idx)
-				if p4 ~= nil and p4:isValid() and p4.participant then
-					tdid = p4:getCallSign()
+				if p4 ~= nil and p4:isValid() and p4.participant == "participant" then
+					tdid = p4:getCallSign()	--target drone ID
 					for etd=1,4 do
 						spawnTargetDrone(racePoint2x,racePoint2y,tdid,"wp2",etd)
 						spawnTargetDrone(racePoint3x,racePoint3y,tdid,"wp3",etd)
@@ -2265,7 +3227,7 @@ function update(delta)
 				end
 			end
 		else
-			stationTimer:setCallSign(string.format("%.2f",raceTimer))
+			stationTimer:setCallSign(string.format("Race Run Time %.2f",raceTimer))
 			raceTimer = raceTimer + delta
 			if hazards then
 				hazardDelay = hazardDelay - 1
@@ -2287,9 +3249,51 @@ function update(delta)
 					moveHazardPacMines(pacMine850,850)
 				end
 			end
-			for p5idx=1,8 do
+			if follow_up_message == nil then
+				follow_up_message = "sent"
+				local msg = "The race has begun!"
+				for name, p in pairs(player_start_list) do
+					p:addToShipLog(msg,"Magenta")
+				end
+				if player_count == original_player_count then
+					msg = string.format("With %i racers, we have the following points awarded for final race place:",player_count)
+				else
+					msg = string.format("With %i racers remaining from the original %i registrants, we have the following points awarded for final race place:",player_count,original_player_count)
+				end
+				for name, p in pairs(player_start_list) do
+					p:addToShipLog(msg,"Magenta")
+				end
+				msg = ""
+				local place_name = {
+					"First",
+					"Second",
+					"Third",
+					"Fourth",
+					"Fifth",
+					"Sixth",
+					"Seventh",
+					"Eighth",
+					"Ninth",
+					"Tenth",
+				}
+				for i=1,#reward_grid[player_count] do
+					if reward_grid[player_count][i] > 0 then
+						if i > 1 then
+							msg = msg .. ", " .. place_name[i] .. ":" .. reward_grid[player_count][i]
+						else
+							msg = place_name[i] .. ":" .. reward_grid[player_count][i]
+						end
+					else
+						break
+					end
+				end
+				for name, p in pairs(player_start_list) do
+					p:addToShipLog(msg,"Magenta")
+				end
+			end
+			for p5idx=1,32 do
 				p5 = getPlayerShip(p5idx)
-				if p5 ~= nil and p5:isValid() and p5.participant and p5.laps < 3 then
+				if p5 ~= nil and p5:isValid() and p5.participant == "participant" and p5.laps < 3 then
 					p5.laptimer = p5.laptimer + delta
 					p5.legtimer = p5.legtimer + delta
 					if chasers then
@@ -2307,6 +3311,19 @@ function update(delta)
 								p5.c3:setFaction("Kraylor"):orderDefendLocation(racePoint1x,racePoint1y)						
 							end
 						end
+					end
+					local name_tag_text = string.format("%s in %s",p5:getCallSign(),p5:getSectorName())
+					if p5:hasPlayerAtPosition("Helms") then
+						p5.name_tag_helm = "name_tag_helm"
+						p5:addCustomInfo("Helms",p5.name_tag_helm,name_tag_text)
+					end
+					if p5:hasPlayerAtPosition("Tactical") then
+						p5.name_tag_helm_tac = "name_tag_helm_tac"
+						p5:addCustomInfo("Tactical",p5.name_tag_helm_tac,name_tag_text)
+					end
+					if p5:hasPlayerAtPosition("SinglePilot") then
+						p5.name_tag_helm_single = "name_tag_helm_single"
+						p5:addCustomInfo("SinglePilot",p5.name_tag_helm_single,name_tag_text)
 					end
 					if p5.goal == 2 then
 						if distance(p5,racePoint2x,racePoint2y) < 1000 then
@@ -2360,192 +3377,40 @@ function update(delta)
 							end
 						end
 					end
-				end
-			end
-			unfinishedRacers = 0
-			playerCount = 0
-			for p7idx=1,8 do
-				p7 = getPlayerShip(p7idx)
-				if p7 ~= nil and p7:isValid() and p7.participant then
-					playerCount = playerCount + 1
-					if p7.laps < 3 then
-						unfinishedRacers = unfinishedRacers + 1
+					if p5:getWaypointCount() < 1 then
+						p5:commandAddWaypoint(racePoint1x,racePoint1y)
+						p5:commandAddWaypoint(racePoint2x,racePoint2y)
+						p5:commandAddWaypoint(racePoint3x,racePoint3y)
+						p5:commandAddWaypoint(racePoint4x,racePoint4y)
 					end
 				end
 			end
-			if playerCount > 1 then
-				if unfinishedRacers == 1 then
-					if patienceTimeLimit == 2000 then
-						patienceTimeLimit = raceTimer + 10
+			local finished_racers = 0
+			local viable_racers = 0
+			for pidx=1,32 do
+				local p = getPlayerShip(pidx)
+				if p ~= nil and p:isValid() and p.participant == "participant" then
+					viable_racers = viable_racers + 1
+					if p.laps >= 3 then
+						finished_racers = finished_racers + 1
 					end
 				end
 			end
-			if unfinishedRacers < 1 then
+			if finished_racers < #reward_grid[player_count] and reward_grid[player_count][finished_racers + 1] == 0 then
+				if patienceTimeLimit == original_patience_time_limit then
+					patienceTimeLimit = raceTimer + 10		--wait 10 seconds for last place player ship to finish
+				end
+			end
+			if finished_racers >= viable_racers then
 				allRacersFinished()
+				game_state = "complete"
 				victory("Human Navy")
 			end
 			if raceTimer > patienceTimeLimit then
 				raceTimerExpired()
+				game_state = "expired"
 				victory("Human Navy")
 			end
 		end
 	end
 end
-
-function allRacersFinished()
-	calculateTimeRank()
-	if playerCount == 1 then
-		soloComplete()
-	else
-		competeComplete()
-	end
-	globalMessage(gMsg)
-end
-
-function raceTimerExpired()
-	calculateTimeRank()
-	if playerCount == 1 then
-		soloExpire()
-	else
-		competeExpire()
-	end
-	globalMessage(gMsg)
-end
-
-function calculateTimeRank()
-	playerList = {}
-	for p6idx=1,8 do
-		p6 = getPlayerShip(p6idx)
-		if p6 ~= nil and p6:isValid() and p6.participant then
-			table.insert(playerList,p6)
-			if p6.raceTime == nil then
-				p6.raceTime = raceTimer
-			end
-			if p6.raceTime < 600 then
-				p6.timeRank = "Admiral"
-			elseif p6.raceTime < 720 then
-				p6.timeRank = "Captain"
-			elseif p6.raceTime < 900 then
-				p6.timeRank = "Commander"
-			elseif p6.raceTime < 1200 then
-				p6.timeRank = "Lieutenant"
-			elseif p6.raceTime < 1500 then
-				p6.timeRank = "Ensign"
-			else
-				if p6.raceTime == nil then
-					p6.timeRank = "Undefined"
-				else
-					p6.timeRank = "Cadet"
-				end
-			end
-		end
-	end
-end
-
-function soloComplete()
-	gMsg = string.format("Race completed in %.2f seconds. Time rank: %s",playerList[1].raceTime,playerList[1].timeRank)
-	eliminatedDrones = countEliminatedDrones(playerList[1])
-	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
-end
-
-function soloExpire()
-	gMsg = "Race administrators got tired of waiting. Race stopped after 2000 seconds. Time Rank: Cadet"
-	eliminatedDrones = countEliminatedDrones(playerList[1])
-	gMsg = gMsg .. string.format("\nTarget drones eliminated: %i",eliminatedDrones)
-end
-
-function competeComplete()
-	gMsg = "Race Results"
-	competeResults()
-end
-
-function competeExpire()
-	gMsg = string.format("Race administrators got tired of waiting. Race stopped after %.2f seconds.",raceTimer)
-	competeResults()
-end
-
-function competeResults()
-	fastestPlayer(10)
-	victoryAccount = false
-	fastestPlayer(5)
-	if playerCount > 2 then
-		gMsg = gMsg .. "\n\n\n"
-		fastestPlayer(3)
-		victoryAccount = true
-	end
-	if playerCount > 3 then
-		fastestPlayer(1)
-	end
-	if playerCount > 4 then
-		for pl=1,#playerList do
-			if playerList[pl].timePoints == nil then
-				playerList[pl].timePoints = 0
-				gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: 0",playerList[pl]:getCallSign(),playerList[pl].raceTime,playerList[pl].timeRank)
-			end
-		end
-	end
-	if not victoryAccount then
-		gMsg = gMsg .. "\n\n\n"
-	end
-	droneTally()
-	gMsg = gMsg .. "\n"
-	unorderedFinalTally()
-end
-
-function fastestPlayer(reward)
-	shortestTime = 999999
-	for pl=1,#playerList do
-		if playerList[pl].timePoints == nil then
-			if playerList[pl].raceTime < shortestTime then
-				pi = pl
-				shortestTime = playerList[pl].raceTime
-			end
-		end
-	end
-	playerList[pi].timePoints = reward
-	gMsg = gMsg .. string.format("\n%s time: %.2f seconds. Time rank: %s. Placement points: %i",playerList[pi]:getCallSign(),playerList[pi].raceTime,playerList[pi].timeRank,playerList[pi].timePoints)
-	return
-end
-
-function droneTally()
-	for pl=1,#playerList do
-		eliminatedDrones = countEliminatedDrones(playerList[pl])
-		playerList[pl].score = playerList[pl].timePoints + eliminatedDrones
-		playerList[pl].dronePoints = eliminatedDrones
-	end	
-end
-
-function countEliminatedDrones(ePlayer)
-	remainingDrones = 0
-	tdid = ePlayer:getCallSign()
-	for didx=1,#droneList do
-		if droneList[didx]:isValid() then
-			if droneList[didx].owner == tdid then
-				remainingDrones = remainingDrones + 1
-			end
-		end
-	end
-	return 12 - remainingDrones	
-end
-
-function unorderedFinalTally()
-	for pl=1,#playerList do
-		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",playerList[pl]:getCallSign(),playerList[pl].dronePoints,playerList[pl].score)
-	end
-end
-
-function finalTally()
-	outerIndex = #playerList
-	for plo=1,outerIndex do
-		bestScore = 0
-		for pl=1,#playerList do
-			if playerList[pl].score >= bestScore then
-				bestPlayer = playerList[pl]
-				bestScore = playerList[pl].score
-			end
-		end
-		gMsg = gMsg .. string.format("%s Drones shot: %i, Total score: %i. ",bestPlayer:getCallSign(),bestPlayer.dronePoints,bestPlayer.score)
-		table.remove(playerList,bestPlayer)
-	end
-end
-
