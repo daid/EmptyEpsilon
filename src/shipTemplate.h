@@ -119,8 +119,8 @@ public:
     int weapon_storage[MW_Count];
 
     string radar_trace;
-    float long_range_radar_range = 30000.0f;
-    float short_range_radar_range = 5000.0f;
+    float long_range_radar_range;
+    float short_range_radar_range;
     string impulse_sound_file;
 
     std::vector<ShipRoomTemplate> rooms;
