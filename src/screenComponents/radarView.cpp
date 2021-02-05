@@ -606,14 +606,30 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         }
         break;
     case FriendlysShortRangeFogOfWar:
-        if (!my_spaceship)
-            return;
+        // Reveal objects if they are within short-range radar range (or 5U) of
+        // a friendly ship, station, or scan probe.
 
+        // Continue only if the player's ship exists.
+        if (!my_spaceship)
+        {
+            return;
+        }
+
+        // For each SpaceObject on the map...
         foreach(SpaceObject, obj, space_object_list)
         {
+            // If the object can't hide in a nebula, it's considered visible.
             if (!obj->canHideInNebula())
+            {
                 visible_objects.insert(*obj);
+            }
 
+            // Consider the object only if it is:
+            // - Any ShipTemplateBasedObject (ship or station)
+            // - A SpaceObject belonging to a friendly faction
+            // - The player's ship
+            // - A scan probe owned by the player's ship
+            // This check is duplicated in RelayScreen::onDraw.
             P<ShipTemplateBasedObject> stb_obj = obj;
 
             if (!stb_obj
@@ -627,20 +643,27 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
                 }
             }
 
-            float r = (stb_obj && obj->isFriendly(my_spaceship)) ? stb_obj->getShortRangeRadarRange() : 5000.0f;
+            // Set the radius to reveal as getShortRangeRadarRange() if the
+            // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
+            float r = stb_obj ? stb_obj->getShortRangeRadarRange() : 5000.0f;
 
+            // Query for objects within short-range radar/5U of this object.
             sf::Vector2f position = obj->getPosition();
             PVector<Collisionable> obj_list = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
 
+            // For each of those objects, check if it is at least partially
+            // inside the revealed radius. If so, reveal the object on the map.
             foreach(Collisionable, c_obj, obj_list)
             {
                 P<SpaceObject> obj2 = c_obj;
+
                 if (obj2 && (obj->getPosition() - obj2->getPosition()) < r + obj2->getRadius())
                 {
                     visible_objects.insert(*obj2);
                 }
             }
         }
+
         break;
     case NebulaFogOfWar:
         foreach(SpaceObject, obj, space_object_list)

@@ -216,12 +216,23 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
 
     info_faction->setValue("-");
 
+    // If the player has a target and the player isn't destroyed...
     if (targets.get() && my_spaceship)
     {
+        // Check each object to determine whether the target is still within
+        // shared radar range of a friendly object.
         P<SpaceObject> target = targets.get();
         bool near_friendly = false;
+
+        // For each SpaceObject on the map...
         foreach(SpaceObject, obj, space_object_list)
         {
+            // Consider the object only if it is:
+            // - Any ShipTemplateBasedObject (ship or station)
+            // - A SpaceObject belonging to a friendly faction
+            // - The player's ship
+            // - A scan probe owned by the player's ship
+            // This check is duplicated from GuiRadarView::drawObjects.
             P<ShipTemplateBasedObject> stb_obj = obj;
 
             if (!stb_obj
@@ -235,14 +246,23 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
                 }
             }
 
-            if (obj->getPosition() - target->getPosition() < stb_obj->getShortRangeRadarRange())
+            // Set the targetable radius to getShortRangeRadarRange() if the
+            // object's a ShipTemplateBasedObject. Otherwise, default to 5U.
+            float r = stb_obj ? stb_obj->getShortRangeRadarRange() : 5000.0f;
+
+            // If the target is within the short-range radar range/5U of the
+            // object, consider it near a friendly object.
+            if (obj->getPosition() - target->getPosition() < r)
             {
                 near_friendly = true;
                 break;
             }
         }
+
         if (!near_friendly)
         {
+            // If the target is no longer near a friendly object, unset it as
+            // the target, and close any open hacking dialogs.
             targets.clear();
             hacking_dialog->hide();
         }
