@@ -29,6 +29,22 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Returns a value in degrees.
     /// Example: local rotation = obj:getRotation()
     REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
+    /// Set whether physics are enabled on the artifact.
+    /// Requires two Boolean values, for enabling physics and static physics.
+    /// Enabling static physics prevents objects that collide with the artifact
+    /// from moving it.
+    /// Example to create an object that respects physics collisions but won't
+    /// move: artifact:setCollisionPhysics(true, true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setCollisionPhysics);
+    /// Set the circular collider radius for this object.
+    /// Requires a float value.
+    /// Example setting a 1U collision radius:
+    /// artifact:setCollisionRadius(1000.0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setCollisionRadius);
+    /// Set the collision friction (difficulty to push) for this object.
+    /// Requires a float value.
+    /// Example: artifact:setCollisionFriction(10000.0)
+    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setCollisionFriction);
     /// Sets this object's heading, in degrees ranging from 0 to 360.
     /// Unlike setRotation, a value of 0 points to the top of the map.
     /// Values that are negative or greater than 360 are are converted to values
