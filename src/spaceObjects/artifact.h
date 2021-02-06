@@ -8,13 +8,13 @@ class Artifact : public SpaceObject, public Updatable
 private:
     string current_model_data_name;
     string model_data_name;
-    float artifact_spin=0.0;
+    float artifact_spin;
     bool allow_pickup;
     ScriptSimpleCallback on_pickup_callback;
 
-    string radar_trace_icon="RadarBlip.png";
-    float radar_trace_scale=0;
-    sf::Color radar_trace_color = sf::Color(255, 255, 255);
+    string radar_trace_icon;
+    float radar_trace_scale;
+    sf::Color radar_trace_color;
 
 public:
     Artifact();

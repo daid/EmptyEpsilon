@@ -36,21 +36,23 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(Artifact, "Artifact");
 Artifact::Artifact()
-: SpaceObject(120, "Artifact")
+: SpaceObject(120, "Artifact"),
+  current_model_data_name("artifact" + string(irandom(1, 8))),
+  model_data_name(current_model_data_name),
+  artifact_spin(0.0f),
+  allow_pickup(false),
+  radar_trace_icon("RadarBlip.png"),
+  radar_trace_scale(0),
+  radar_trace_color(sf::Color(255, 255, 255))
 {
+    setRotation(random(0, 360));
+    model_info.setData(current_model_data_name);
+
     registerMemberReplication(&model_data_name);
     registerMemberReplication(&artifact_spin);
     registerMemberReplication(&radar_trace_icon);
     registerMemberReplication(&radar_trace_scale);
     registerMemberReplication(&radar_trace_color);
-
-    setRotation(random(0, 360));
-
-    current_model_data_name = "artifact" + string(irandom(1, 8));
-    model_data_name = current_model_data_name;
-    model_info.setData(current_model_data_name);
-
-    allow_pickup = false;
 }
 
 void Artifact::update(float delta)
