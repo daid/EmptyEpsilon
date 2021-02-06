@@ -18,9 +18,27 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, explode);
     /// Set if this artifact can be picked up or not. When it is picked up, this artifact will be destroyed.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, allowPickup);
-    /// Set a function that will be called if a player picks up the artifact.
-    /// First argument given to the function will be the artifact, the second the player.
+    /// Set a function that will be called every tick when a SpaceObject is
+    /// colliding with the artifact.
+    /// Passes the artifact and colliding SpaceObject.
+    /// Example:
+    /// artifact:onCollision(function(artifact, collider) print("Collision occurred") end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onCollision);
+    /// Set a function that will be called every tick when a PlayerSpaceship is
+    /// colliding with the artifact.
+    /// Passes the artifact and colliding PlayerSpaceship.
+    /// Example:
+    /// artifact:onCollision(function(artifact, player) print("Collision occurred") end)
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onPlayerCollision);
+    /// Set a function that will be called once when a PlayerSpaceship collides
+    /// with the artifact while allowPickup is enabled. The artifact is
+    /// subsequently destroyed.
+    /// Passes the artifact and colliding PlayerSpaceship.
+    /// Example:
+    /// artifact:onPickUp(function(artifact, player) print("Artifact retrieved") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onPickUp);
+    /// Alias of onPickUp.
+    REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, onPickup);
     /// Let the artifact rotate. For reference, normal asteroids in the game have spins between 0.1 and 0.8.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setSpin);
     /// Set the icon to be used for this artifact on the radar.
@@ -102,17 +120,43 @@ void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
 
 void Artifact::collide(Collisionable* target, float force)
 {
-    if (!isServer() || !allow_pickup)
+    // Handle collisions on the server only.
+    if (!isServer())
+    {
         return;
+    }
+
+    // Fire collision callbacks.
     P<SpaceObject> hit_object = P<Collisionable>(target);
     P<PlayerSpaceship> player = hit_object;
+
+    // Player-specific callback handling.
     if (player)
     {
-        if (on_pickup_callback.isSet())
+        if (allow_pickup)
         {
-            on_pickup_callback.call(P<Artifact>(this), player);
+            // If the artifact is collectible, pick it up.
+            if (on_pickup_callback.isSet())
+            {
+                on_pickup_callback.call(P<Artifact>(this), player);
+            }
+
+            destroy();
         }
-        destroy();
+        else
+        {
+            // If the artifact isn't collectible, fire the collision callback.
+            if (on_player_collision_callback.isSet())
+            {
+                on_player_collision_callback.call(P<Artifact>(this), player);
+            }
+        }
+    }
+
+    // Fire the SpaceObject collision callback, if set.
+    if (hit_object && on_collision_callback.isSet())
+    {
+        on_collision_callback.call(P<Artifact>(this), hit_object);
     }
 }
 
@@ -153,6 +197,16 @@ void Artifact::onPickUp(ScriptSimpleCallback callback)
 {
     this->allow_pickup = 1;
     this->on_pickup_callback = callback;
+}
+
+void Artifact::onCollision(ScriptSimpleCallback callback)
+{
+    this->on_collision_callback = callback;
+}
+
+void Artifact::onPlayerCollision(ScriptSimpleCallback callback)
+{
+    this->on_player_collision_callback = callback;
 }
 
 string Artifact::getExportLine()
