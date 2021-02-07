@@ -95,7 +95,7 @@ msgid ""
 "long."
 msgstr ""
 "Anders als sein Vorgaenger macht der Starhammer II seinem Namen alle Ehre. "
-"Die Probleme der Energie und Hitzemanagement des Ursprungsmodells wurden "
+"Die Probleme von Energie und Hitzemanagement des Ursprungsmodells wurden "
 "geloest, und so stellt das neue Modell ein ausgezeichnetes Angriffsschiff "
 "dar. Seine geringe Geschwindigkeit erschwert es, in Position zu kommen, aber "
 "sobald er sich zur richtigen Zeit am richtigen Ort befindet, koennen selbst "
@@ -435,7 +435,7 @@ msgstr "Szenario starten"
 #: src/menus/serverCreationScreen.cpp:235
 msgctxt "variation"
 msgid "None"
-msgstr "Keine"
+msgstr ""
 
 msgid "No variation."
 msgstr "Keine Variante."
@@ -680,7 +680,7 @@ msgstr "{system} : Zustand"
 
 #: src/screens/gm/tweak.cpp:595
 msgid "{system} heat"
-msgstr "{system}: Hitze"
+msgstr "{system}: Waerme"
 
 #: src/screenComponents/aimLock.cpp:11
 msgctxt "missile"
@@ -3360,7 +3360,7 @@ msgstr ""
 
 #: src/menus/shipSelectionScreen.cpp:84
 msgid "Ship window"
-msgstr ""
+msgstr "Schiffsfenster"
 
 msgid "0 degrees"
 msgstr ""
@@ -3375,7 +3375,7 @@ msgstr ""
 
 #: src/menus/shipSelectionScreen.cpp:118
 msgid "Spectate (view all)"
-msgstr ""
+msgstr "Zuschauer (alles sichtbar)"
 
 #: src/menus/shipSelectionScreen.cpp:127
 msgid "Enter the GM control code:"
@@ -3383,7 +3383,7 @@ msgstr "SL-Kontrollcode eingeben :"
 
 #: src/menus/shipSelectionScreen.cpp:143
 msgid "Select ship"
-msgstr ""
+msgstr "Waehle Schiff"
 
 #: src/menus/shipSelectionScreen.cpp:144
 msgid "Waiting for server to spawn a ship"
@@ -3479,7 +3479,7 @@ msgstr "Kuehlm."
 #: src/screens/extra/powerManagement.cpp:42
 msgctxt "button"
 msgid "Heat"
-msgstr ""
+msgstr "Waerme"
 
 #: src/screens/gm/objectCreationView.cpp:51
 msgctxt "create"
@@ -3665,7 +3665,7 @@ msgstr ""
 
 #: src/screenComponents/shipDestroyedPopup.cpp:18
 msgid "SHIP DESTROYED!"
-msgstr ""
+msgstr "Schiff zerstoert!"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:19
 msgctxt "shipdestroyed"
@@ -3678,7 +3678,7 @@ msgstr ""
 
 #: src/screenComponents/commsOverlay.cpp:39
 msgid "Answer"
-msgstr ""
+msgstr "Antworten"
 
 #: src/screenComponents/commsOverlay.cpp:45
 msgid "Ignore"
@@ -4181,7 +4181,7 @@ msgstr "HGBI"
 
 #: scripts/science_db.lua:63
 msgid "Burst"
-msgstr ""
+msgstr "Einzelgeschosse"
 
 #: scripts/shipTemplates_Frigates.lua:371
 msgid "Jump/Turret version of Flavia Falcon"
@@ -4202,12 +4202,12 @@ msgstr ""
 #: src/menus/shipSelectionScreen.cpp:93
 msgctxt "shipwindow"
 msgid "{angle} degrees"
-msgstr ""
+msgstr "{angle} Grad"
 
 #: src/menus/shipSelectionScreen.cpp:96
 msgctxt "shipwindow"
 msgid "0 degrees"
-msgstr ""
+msgstr "0 Grad"
 
 #: src/screens/gm/objectCreationView.cpp:35
 msgctxt "create"
