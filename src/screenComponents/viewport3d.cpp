@@ -115,9 +115,34 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
         glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(sf::Vector3f), positions.data(), GL_STATIC_DRAW);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+        // Setup spacedust
+        spacedust_shader = ShaderManager::getShader("shaders/spacedust");
+        spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "projection");
+        spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "model_view");
+        spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "rotation");
+
+        spacedust_vertex_hash_attribute = glGetAttribLocation(spacedust_shader->getNativeHandle(), "vertex_hash");
+
+        // Prepare and upload our hashes.
+        // Each spacedust line is made of two points.
+        // They both share the same hash, but have opposite signs.
+        // We have `spacedust_particle_count` "particles" made of 2 vertices each being two bytes - 4KiB array.
+        
+        std::vector<int16_t> hashes(2 * spacedust_particle_count);
+        for (auto i = 0; i < hashes.size(); i += 2)
+        {
+            auto particle_hash = irandom(1, 32767);
+            hashes[i] = -particle_hash;
+            hashes[i + 1] = particle_hash;
+        }
+
+        // Upload to GPU
+        glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
+        glBufferData(GL_ARRAY_BUFFER, hashes.size() * sizeof(int16_t), hashes.data(), GL_STATIC_DRAW);
 
         glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+        
     }
 #endif // FEATURE_3D_RENDERING
 }
@@ -316,29 +341,32 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     if (show_spacedust && my_spaceship)
     {
-        static std::vector<sf::Vector3f> space_dust;
+        sf::Shader::bind(spacedust_shader);
 
-        while(space_dust.size() < 1000)
-            space_dust.push_back(sf::Vector3f());
+        // Upload matrices (only float 4x4 supported in es2)
+        std::array<float, 16> matrix;
 
-        sf::Vector2f dust_vector = my_spaceship->getVelocity() / 100.0f;
-        sf::Vector3f dust_center = sf::Vector3f(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.0);
-        glColor4f(0.7, 0.5, 0.35, 0.07);
+        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, matrix.data());
 
-        for(unsigned int n=0; n<space_dust.size(); n++)
+        glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
+
+        spacedust_shader->setUniform("time", engine->getElapsedTime());
+        
+        // Ship information for flying particles
+        spacedust_shader->setUniform("velocity", my_spaceship->getVelocity());
+        spacedust_shader->setUniform("center", my_spaceship->getPosition());
+        
         {
-            const float maxDustDist = 500.0f;
-            const float minDustDist = 100.0f;
-            glPushMatrix();
-            if ((space_dust[n] - dust_center) > maxDustDist || (space_dust[n] - dust_center) < minDustDist)
-                space_dust[n] = dust_center + sf::Vector3f(random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist));
-            glTranslatef(space_dust[n].x, space_dust[n].y, space_dust[n].z);
-            glBegin(GL_LINES);
-            glVertex3f(-dust_vector.x, -dust_vector.y, 0);
-            glVertex3f( dust_vector.x,  dust_vector.y, 0);
-            glEnd();
-            glPopMatrix();
+            gl::ScopedVertexAttribArray hashes(spacedust_vertex_hash_attribute);
+            glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
+            glVertexAttribPointer(hashes.get(), 1, GL_SHORT, GL_FALSE, 0, (GLvoid*)0);
+            
+            glDrawArrays(GL_LINES, 0, 2 * spacedust_particle_count);
+            glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
+        sf::Shader::bind(nullptr);
     }
     glPopMatrix();
 
