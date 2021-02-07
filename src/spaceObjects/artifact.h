@@ -10,8 +10,9 @@ private:
     string model_data_name;
     float artifact_spin;
     bool allow_pickup;
-    ScriptSimpleCallback on_collision_callback;
     ScriptSimpleCallback on_pickup_callback;
+    ScriptSimpleCallback on_collision_callback;
+    ScriptSimpleCallback on_player_collision_callback;
 
     string radar_trace_icon;
     float radar_trace_scale;
