@@ -122,25 +122,31 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "model_view");
         spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "rotation");
 
-        spacedust_vertex_hash_attribute = glGetAttribLocation(spacedust_shader->getNativeHandle(), "vertex_hash");
+        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = glGetAttribLocation(spacedust_shader->getNativeHandle(), "position");
+        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)] = glGetAttribLocation(spacedust_shader->getNativeHandle(), "sign_value");
 
-        // Prepare and upload our hashes.
-        // Each spacedust line is made of two points.
-        // They both share the same hash, but have opposite signs.
-        // We have `spacedust_particle_count` "particles" made of 2 vertices each being two bytes - 4KiB array.
+        // Reserve our GPU buffer.
+        // Each dust particle consist of:
+        // - a worldpace position (Vector3f)
+        // - a sign value (single byte).
+        // Both "arrays" are maintained separate:
+        // the signs are stable (they just tell us which "end" of the line we're on)
+        // The positions will get updated more frequently.
+        // It means each particle occupies 2*13B (assuming tight packing)
+        glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
+        glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(sf::Vector3f) + sizeof(int8_t)), nullptr, GL_DYNAMIC_DRAW);
+
+        // Generate and update the alternating vertices signs.
+        std::array<int8_t, 2 * spacedust_particle_count> signs;
         
-        std::vector<int16_t> hashes(2 * spacedust_particle_count);
-        for (auto i = 0; i < hashes.size(); i += 2)
+        for (auto n = 0; n < signs.size(); n += 2)
         {
-            auto particle_hash = irandom(1, 32767);
-            hashes[i] = -particle_hash;
-            hashes[i + 1] = particle_hash;
+            signs[n] = -1;
+            signs[n + 1] = 1;
         }
 
-        // Upload to GPU
-        glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-        glBufferData(GL_ARRAY_BUFFER, hashes.size() * sizeof(int16_t), hashes.data(), GL_STATIC_DRAW);
-
+        // Update sign parts.
+        glBufferSubData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * sizeof(sf::Vector3f), signs.size() * sizeof(int8_t), signs.data());
         glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         
     }
@@ -341,6 +347,28 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     if (show_spacedust && my_spaceship)
     {
+        static std::vector<sf::Vector3f> space_dust(2 * spacedust_particle_count);
+        
+        sf::Vector2f dust_vector = my_spaceship->getVelocity() / 100.f;
+        sf::Vector3f dust_center = sf::Vector3f(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.f); 
+
+        constexpr float maxDustDist = 500.f;
+        constexpr float minDustDist = 100.f;
+        
+        bool update_required = false; // Do we need to update the GPU buffer?
+
+        for (auto n = 0; n < space_dust.size(); n += 2)
+        {
+            //
+            auto delta = space_dust[n] - dust_center;
+            if (delta > maxDustDist || delta < minDustDist)
+            {
+                update_required = true;
+                space_dust[n] = dust_center + sf::Vector3f(random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist));
+                space_dust[n + 1] = space_dust[n];
+            }
+        }
+
         sf::Shader::bind(spacedust_shader);
 
         // Upload matrices (only float 4x4 supported in es2)
@@ -352,16 +380,20 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
 
-        spacedust_shader->setUniform("time", engine->getElapsedTime());
-        
         // Ship information for flying particles
-        spacedust_shader->setUniform("velocity", my_spaceship->getVelocity());
-        spacedust_shader->setUniform("center", my_spaceship->getPosition());
+        spacedust_shader->setUniform("velocity", dust_vector);
         
         {
-            gl::ScopedVertexAttribArray hashes(spacedust_vertex_hash_attribute);
+            gl::ScopedVertexAttribArray positions(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
+            gl::ScopedVertexAttribArray signs(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)]);
             glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-            glVertexAttribPointer(hashes.get(), 1, GL_SHORT, GL_FALSE, 0, (GLvoid*)0);
+            
+            if (update_required)
+            {
+                glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(sf::Vector3f), space_dust.data());
+            }
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
+            glVertexAttribPointer(signs.get(), 1, GL_BYTE, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(sf::Vector3f)));
             
             glDrawArrays(GL_LINES, 0, 2 * spacedust_particle_count);
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
