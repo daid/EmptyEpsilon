@@ -20,15 +20,21 @@ class GuiViewport3D : public GuiElement
         Projection = 0,
         ModelView,
 
-        Count
+        StarboxCount,
+
+        Rotation = StarboxCount,
+
+        SpacedustCount
     };
 
     enum class Buffers : uint8_t
     {
         Vertex = 0,
-        Element,
 
-        Count
+        SpacedustCount,
+
+        Element = SpacedustCount,
+        StarboxCount
     };
 
     enum class VertexAttributes : uint8_t
@@ -37,11 +43,20 @@ class GuiViewport3D : public GuiElement
         Count
     };
 
-    std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> starbox_uniforms;
-    std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> starbox_vertex_attributes;
+    // Starbox
+    std::array<uint32_t, static_cast<size_t>(Uniforms::StarboxCount)> starbox_uniforms;
+    std::array<uint32_t, static_cast<size_t>(VertexAttributes::Count)> starbox_vertex_attributes;
     gl::Textures<1> starbox_texture;
-    gl::Buffers<static_cast<size_t>(Buffers::Count)> starbox_buffers;
+    gl::Buffers<static_cast<size_t>(Buffers::StarboxCount)> starbox_buffers;
     sf::Shader* starbox_shader = nullptr;
+
+    // Spacedust
+    static constexpr size_t spacedust_particle_count = 1024;
+    std::array<uint32_t, static_cast<size_t>(Uniforms::SpacedustCount)> spacedust_uniforms;
+    uint32_t spacedust_vertex_hash_attribute = 0;
+    gl::Buffers<static_cast<size_t>(Buffers::SpacedustCount)> spacedust_buffer;
+    sf::Shader* spacedust_shader = nullptr;
+
     
 #endif
 public:
