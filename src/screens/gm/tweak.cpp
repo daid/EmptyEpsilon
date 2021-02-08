@@ -11,6 +11,7 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_togglebutton.h"
+#include "gui/gui2_spinbox.h"
 
 GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
@@ -640,6 +641,24 @@ string GuiShipTweakSystemPowerFactors::powerFactorToText(float power)
     return string(power, 1);
 }
 
+void GuiShipTweakSystemPowerFactors::applyValue(int n, const string& text)
+{
+    // Perform safe conversion (typos can happen).
+    char* end = nullptr;
+    auto converted = strtof(text.c_str(), &end);
+
+    if (converted == 0.f && end == text.c_str())
+    {
+        // failed - reset text to current value.
+        system_power_factor[n]->setText(string(target->systems[n].power_factor, 1));
+    }
+    else
+    {
+        // apply!
+        target->systems[n].power_factor = converted;
+    }
+}
+
 GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* owner)
     : GuiTweakPage(owner)
 {
@@ -655,6 +674,7 @@ GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* own
     (new GuiLabel(center_col, "", tr("current factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(right_col, "", tr("desired factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
 
+    // Adjust each system's power factor, its impact on the reactor.
     for (int n = 0; n < SYS_COUNT; n++)
     {
         ESystem system = ESystem(n);
@@ -662,27 +682,26 @@ GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* own
         system_current_power_factor[n] = new GuiLabel(center_col, "", "", 20);
         system_current_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
 
-        system_power_factor[n] = new GuiTextEntry(right_col, "", "");
-        system_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
+        system_power_factor[n] = new GuiSpinBox(right_col, "SYSTEM_POWER_FACTOR_" + string(n), -1000.0f, 1000.0f, 0.0f, 1, 1.0f, [this, n](const string& text)
+            {
+                // applyValue(n, text);
+            });
         system_power_factor[n]->enterCallback([this, n](const string& text)
             {
-                // Perform safe conversion (typos can happen).
-                char* end = nullptr;
-                auto converted = strtof(text.c_str(), &end);
-                if (converted == 0.f && end == text.c_str())
-                {
-                    // failed - reset text to current value.
-                    system_power_factor[n]->setText(string(target->systems[n].power_factor, 1));
-                }
-                else
-                {
-                    // apply!
-                    target->systems[n].power_factor = converted;
-                }
-            });
+                applyValue(n, text);
+            }
+        );
+        system_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
     }
+
     // Footer
-    (new GuiLabel(center_col, "", tr("Applies on [Enter]"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(left_col, "APPLY_LABEL", tr("Press [Enter] in a field\nto apply its value"), 20))->setSize(200, 60);
+    (new GuiButton(right_col, "APPLY_BUTTON", tr("button", "Apply All"), [this]() {
+        for (int n = 0; n < SYS_COUNT; n++)
+        {
+            applyValue(n, system_power_factor[n]->getText());
+        }
+    }))->setTextSize(20)->setSize(100, 30);
 }
 
 void GuiShipTweakSystemPowerFactors::open(P<SpaceObject> target)

@@ -198,6 +198,7 @@ private:
     P<SpaceShip> target;
     GuiLabel* system_current_power_factor[SYS_COUNT];
     GuiTextEntry* system_power_factor[SYS_COUNT];
+    void applyValue(int n, const string& text);
 
     static string powerFactorToText(float);
 public:
