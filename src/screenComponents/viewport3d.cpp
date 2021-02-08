@@ -380,26 +380,51 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
-    sf::Shader::bind(NULL);
-    glColor3f(1, 1, 1);
 
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
-    foreach(SpaceObject, obj, space_object_list)
+    auto debug_shader = ShaderManager::getShader("shaders/basicColor");
+    // Store location of the model_view matrix which will change for each object.
+    auto model_view_location = glGetUniformLocation(debug_shader->getNativeHandle(), "model_view");
+    sf::Shader::bind(debug_shader);
     {
-        glPushMatrix();
-        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
-        glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
-        glRotatef(obj->getRotation(), 0, 0, 1);
+        // Common state: color, projection matrix.    
+        debug_shader->setUniform("color", sf::Glsl::Vec4(sf::Color::White));
+        
+        std::array<float, 16> matrix;
+        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
 
-        std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
-        glBegin(GL_LINE_LOOP);
-        for(unsigned int n=0; n<collisionShape.size(); n++)
-            glVertex3f(collisionShape[n].x, collisionShape[n].y, 0);
-        glEnd();
-        glPopMatrix();
+        glUniformMatrix4fv(glGetUniformLocation(debug_shader->getNativeHandle(), "projection"), 1, GL_FALSE, matrix.data());
+
+        std::vector<sf::Vector3f> points;
+        gl::ScopedVertexAttribArray positions(glGetAttribLocation(debug_shader->getNativeHandle(), "position"));
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            glPushMatrix();
+            glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
+            glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
+            glRotatef(obj->getRotation(), 0, 0, 1);
+
+            glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
+            glUniformMatrix4fv(model_view_location, 1, GL_FALSE, matrix.data());
+
+            std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
+
+            if (collisionShape.size() > points.size())
+            {
+                points.resize(collisionShape.size());
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), points.data());
+            }
+
+            for (unsigned int n = 0; n < collisionShape.size(); n++)
+                points[n] = sf::Vector3f(collisionShape[n].x, collisionShape[n].y, 0.f);
+            
+            glDrawArrays(GL_LINE_LOOP, 0, collisionShape.size());
+            glPopMatrix();
+        }
     }
 #endif
+    sf::Shader::bind(nullptr);
 
     window.pushGLStates();
 
