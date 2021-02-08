@@ -28,8 +28,8 @@ public:
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* setTextLeftpad(float leftpad);
-    GuiTextEntry* callback(func_t func);
-    GuiTextEntry* enterCallback(func_t func);
+    virtual GuiTextEntry* callback(func_t func);
+    virtual GuiTextEntry* enterCallback(func_t func);
 };
 
 #endif//GUI2_TEXTENTRY_H

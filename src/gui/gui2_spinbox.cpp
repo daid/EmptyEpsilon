@@ -45,6 +45,22 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, float min_value, float ma
 
     // Populate start_value.
     setValue(start_value);
+
+    // Validate value on field destruction
+    text = getLimitedString(text);
+}
+
+GuiSpinBox::~GuiSpinBox()
+{
+    // Validate value on field destruction
+    text = getLimitedString(text);
+
+    // Run enter callback.
+    if (enter_func != nullptr)
+    {
+        func_t f = enter_func;
+        f(text);
+    }
 }
 
 void GuiSpinBox::onDraw(sf::RenderTarget& window)
@@ -80,8 +96,24 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
 {
     // Only active when the TextEntry component has focus.
 
+    // Enter/Return key behavior: validate and set.
+    if (key.code == sf::Keyboard::Return && text.length() > 0)
+    {
+        // Limit the entered value.
+        text = getLimitedString(text);
+
+        // Run enter callback.
+        if (enter_func != nullptr)
+        {
+            func_t f = enter_func;
+            f(text);
+        }
+
+        return true;
+    }
+
     // Backspace key behavior.
-    // Mind that Backspace toggles voice chat!
+    // Mind that Backspace toggles voice chat by default!
     if (key.code == sf::Keyboard::BackSpace && text.length() > 0)
     {
         // Remove a character behind the cursor.
@@ -91,22 +123,6 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
         if (func)
         {
             func_t f = func;
-            f(text);
-        }
-
-        return true;
-    }
-
-    // Enter/Return key behavior: validate and set.
-    if (key.code == sf::Keyboard::Return && text.length() > 0)
-    {
-        // Limit the entered value.
-        text = getLimitedString(text);
-
-        // Run enterCallback.
-        if (enter_func)
-        {
-            func_t f = enter_func;
             f(text);
         }
 
@@ -146,7 +162,7 @@ bool GuiSpinBox::onKey(sf::Event::KeyEvent key, int unicode)
     }
 
     // Add to string if key is 0-9, ., or -
-    if (unicode > 44 && unicode != 47 && unicode < 58)
+    if (unicode < 58 && unicode != 47 && unicode > 44)
     {
         validateTextEntry(unicode);
 
@@ -227,7 +243,9 @@ string GuiSpinBox::getLimitedString(string value)
         {
             // Return the limited value of the string, as a string.
             return string(getLimitedValue(stof(value)), decimals);
-        } else {
+        }
+        else
+        {
             // If it starts with ".", prefix it with a 0.
             return string(getLimitedValue(stof("0" + value)), decimals);
         }
