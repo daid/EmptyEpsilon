@@ -252,21 +252,27 @@ function init()
     end
 
     -- Spawn a random black hole.
-    local a = random(0, 360)
-    local d = random(10000, 45000)
-    local x, y = vectorFromAngle(a, d)
-    -- Watching a station fall into a black hole to start the game never gets old,
-    -- but players hate it. Avoid spawning black holes too close to stations.
+    local x, y
     local spawn_hole = false
+
+    -- Avoid spawning black holes too close to stations.
     while not spawn_hole do
+        -- Generate random coordinates between 10U and 45U from the origin.
+        local a = random(0, 360)
+        local d = random(10000, 45000)
+        x, y = vectorFromAngle(a, d)
+
+        -- Check station distance from possible black hole locations.
+        -- If it's too close to a station, generate new coordinates.
         for _, station in ipairs(stationList) do
-            if distance(station, x, y) > 3000 then
+            if distance(station, x, y) > 5000 then
                 spawn_hole = true
             else
                 spawn_hole = false
             end
         end
     end
+
     BlackHole():setPosition(x, y)
 
     -- Spawn random neutral transports.

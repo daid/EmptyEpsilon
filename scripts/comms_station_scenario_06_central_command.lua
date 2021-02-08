@@ -1,6 +1,6 @@
---- Comms with stations for scenario 03.
+--- Comms with stations for scenario 06.
 --
--- @script comms_station_scenario_03_central_command
+-- @script comms_station_scenario_06_central_command
 
 function commsStationMainMenu()
     if comms_target.comms_data == nil then
@@ -17,7 +17,9 @@ function commsStationMainMenu()
         -- Edge of space additions
         if comms_target:getCallSign() == "Central Command" and not comms_source:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
-                setCommsMessage("The E.O.S Scope is in sector H8, right on the edge of Kraylor territory.\n \nBe careful out there")
+                setCommsMessage([[The E.O.S. scope is in sector H8, right on the edge of Kraylor territory.
+
+Be careful out there.]])
                 return true
             end
 
@@ -27,22 +29,24 @@ function commsStationMainMenu()
             end
 
             if comms_target.mission_state == 3 then
-                setCommsMessage("The Arlenian science station Galileo is in sector C5. Lay in a course bearing 356 from Central Command and deliver the E.O.S Scope data there.")
+                setCommsMessage("The Arlenian science station Galileo is in sector C5. Lay in a course bearing 356 from Central Command and deliver the E.O.S. scope data there.")
                 return true
             end
 
             if comms_target.mission_state == 4 then
-                setCommsMessage("Save the Galileo station! They're under attack in sector C5, and we need them to analyze that data!")
+                setCommsMessage("Save Galileo station! They're under attack in sector C5, and we need them to analyze that data!")
                 return true
             end
 
             if comms_target.mission_state == 5 then
-                setCommsMessage("Dock with Galileo in sector C5 and deliver the E.O.S Scope data.")
+                setCommsMessage("Dock with Galileo station in sector C5 and deliver the E.O.S. scope data.")
                 return true
             end
 
             if comms_target.mission_state == 6 then
-                setCommsMessage("Kraylor ships are attacking E.O.S Scope directly! Get down there quick as possible and help it!\n \nIf you need more assistance request it from Midspace Support.")
+                setCommsMessage([[Kraylor ships are directly attacking the E.O.S. scope! Get down there as quickly as possible and help defend it!
+
+If you need more assistance, request it from Midspace Support.]])
                 return true
             end
 
@@ -52,17 +56,17 @@ function commsStationMainMenu()
             end
 
             if comms_target.mission_state == 8 then
-                setCommsMessage("Destroy the remaining Kraylor ships threatening our E.O.S Scope!")
+                setCommsMessage("Destroy the remaining Kraylor ships threatening our E.O.S. scope!")
                 return true
             end
 
             if comms_target.mission_state == 9 then
-                setCommsMessage("Dock at the E.O.S Scope to be refitted for war and standby for orders.")
+                setCommsMessage("Dock at the E.O.S. scope to be refitted for wartime, and standby for orders.")
                 return true
             end
 
             if comms_target.mission_state == 10 then
-                setCommsMessage("The Kraylor Super-nebula is hiding a wormhole which we believe is going to be used in an attack on Human space. There is an entrance into the nebula in sector F10, but be careful of traps!")
+                setCommsMessage("The Kraylor super-nebula hides a wormhole that we believe will be used in an attack on human space. There is an entrance into the nebula in sector F10, but be careful of traps!")
                 return true
             end
         end
@@ -73,7 +77,9 @@ function commsStationMainMenu()
             return true
         end
         if not comms_source:isDocked(comms_target) then
-            setCommsMessage("Good day officer,\nIf you need supplies please dock with us first.")
+            setCommsMessage([[Good day, officer.
+
+If you need supplies, please dock with us first.]])
             addCommsReply(
                 "Can you send a supply drop? (100rep)",
                 function()
@@ -92,9 +98,9 @@ function commsStationMainMenu()
                                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                                         script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                                        setCommsMessage("We have dispatched a supply ship towards WP" .. n)
+                                        setCommsMessage("We have dispatched a supply ship toward WP" .. n)
                                     else
-                                        setCommsMessage("Not enough rep!")
+                                        setCommsMessage("Not enough reputation.")
                                     end
                                     addCommsReply("Back", commsStationMainMenu)
                                 end
@@ -110,14 +116,14 @@ function commsStationMainMenu()
                     if comms_source:getWaypointCount() < 1 then
                         setCommsMessage("You need to set a waypoint before you can request backup.")
                     else
-                        setCommsMessage("Where does the backup needs to go?")
+                        setCommsMessage("Where does the backup need to go?")
                         for n = 1, comms_source:getWaypointCount() do
                             addCommsReply(
                                 "WP" .. n,
                                 function()
                                     if comms_source:takeReputationPoints(150) then
                                         ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                                        setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n)
+                                        setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n .. ".")
                                     else
                                         setCommsMessage("Not enough rep!")
                                     end
@@ -133,7 +139,9 @@ function commsStationMainMenu()
         end
 
         -- Friendly station, docked.
-        setCommsMessage("Good day officer,\nWhat can we do for you today?")
+        setCommsMessage([[Good day, officer.
+
+What can we do for you today?]])
         addCommsReply(
             "Do you have spare homing missiles for us? (2rep each)",
             function()
@@ -146,11 +154,11 @@ function commsStationMainMenu()
                     return
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
-                    setCommsMessage("Sorry sir, but you are fully stocked with homing missiles.")
+                    setCommsMessage("Sorry, sir, but you are fully stocked with homing missiles.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
-                    setCommsMessage("Filled up your missile supply.")
+                    setCommsMessage("We have refilled your missile supply.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
             end
@@ -167,17 +175,17 @@ function commsStationMainMenu()
                     return
                 end
                 if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
-                    setCommsMessage("Captain,\nYou have all the mines you can fit in that ship.")
+                    setCommsMessage("Captain, your ship is already fully stocked with mines.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
-                    setCommsMessage("These mines, are yours.")
+                    setCommsMessage("These mines are yours.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Can you supply us with some nukes. (15rep each)",
+            "Can you supply us with some nukes? (15rep each)",
             function()
                 if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
@@ -188,17 +196,17 @@ function commsStationMainMenu()
                     return
                 end
                 if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
-                    setCommsMessage("All nukes are charged and primed for distruction.")
+                    setCommsMessage("All nukes are charged and primed for destruction.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
-                    setCommsMessage("You are fully loaded,\nand ready to explode things.")
+                    setCommsMessage("You are fully loaded and ready to explode things.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Please re-stock our EMP Missiles. (10rep each)",
+            "Please re-stock our EMP missiles. (10rep each)",
             function()
                 if not comms_source:isDocked(comms_target) then
                     setCommsMessage("You need to stay docked for that action.")
@@ -209,11 +217,11 @@ function commsStationMainMenu()
                     return
                 end
                 if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
-                    setCommsMessage("All storage for EMP missiles is filled sir.")
+                    setCommsMessage("All storage for EMP missiles is filled, sir.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
-                    setCommsMessage("Recallibrated the electronics and\nfitted you with all the EMP missiles you can carry.")
+                    setCommsMessage("Recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
             end
@@ -222,12 +230,14 @@ function commsStationMainMenu()
         -- not friendly (and not enemy)
 
         if not comms_source:isDocked(comms_target) then
-            setCommsMessage("Greetings sir.\nIf you want to do business please dock with us first.")
+            setCommsMessage([[Greetings, sir.
+
+If you want to do business, please dock with us first.]])
             return true
         end
 
         -- Neutral station, docked
-        setCommsMessage("Welcome to our lovely station")
+        setCommsMessage("Welcome to our lovely station.")
         addCommsReply(
             "Do you have spare homing missiles for us? (5rep each)",
             function()
@@ -236,7 +246,7 @@ function commsStationMainMenu()
                     return
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") / 2 then
-                    setCommsMessage("You seem to have more then enough missiles")
+                    setCommsMessage("You seem to have more than enough missiles.")
                     addCommsReply("Back", commsStationMainMenu)
                 else
                     if not comms_source:takeReputationPoints(5 * ((comms_source:getWeaponStorageMax("Homing") / 2) - comms_source:getWeaponStorage("Homing"))) then
@@ -244,7 +254,9 @@ function commsStationMainMenu()
                         return
                     end
                     comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing") / 2)
-                    setCommsMessage("We generously resupplied you with some free homing missiles.\nPut them to good use.")
+                    setCommsMessage([[We generously resupplied you with some free homing missiles.
+
+Put them to good use.]])
                     addCommsReply("Back", commsStationMainMenu)
                 end
             end
@@ -265,20 +277,20 @@ function commsStationMainMenu()
                         return
                     end
                     comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
-                    setCommsMessage("Here, have some mines.\nMines are good defensive weapons.")
+                    setCommsMessage("Here, have some mines. Mines are good defensive weapons.")
                     addCommsReply("Back", commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Can you supply us with some nukes.",
+            "Can you supply us with some nukes?",
             function()
                 setCommsMessage("We do not deal in weapons of mass destruction.")
                 addCommsReply("Back", commsStationMainMenu)
             end
         )
         addCommsReply(
-            "Please re-stock our EMP Missiles.",
+            "Please re-stock our EMP missiles.",
             function()
                 setCommsMessage("We do not deal in weapons of mass disruption.")
                 addCommsReply("Back", commsStationMainMenu)

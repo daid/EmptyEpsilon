@@ -67,6 +67,13 @@ ScreenMainScreen::ScreenMainScreen()
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") != "0") );
 }
 
+void ScreenMainScreen::destroy()
+{
+    if (threat_estimate)
+        threat_estimate->destroy();
+    PObject::destroy();
+}
+
 void ScreenMainScreen::update(float delta)
 {
     if (game_client && game_client->getStatus() == GameClient::Disconnected)

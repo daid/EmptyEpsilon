@@ -81,6 +81,13 @@ CrewStationScreen::CrewStationScreen()
     impulse_sound = std::unique_ptr<ImpulseSound>( new ImpulseSound(PreferencesManager::get("impulse_sound_enabled", "2") == "1") );
 }
 
+void CrewStationScreen::destroy()
+{
+    if (threat_estimate)
+        threat_estimate->destroy();
+    PObject::destroy();
+}
+
 GuiContainer* CrewStationScreen::getTabContainer()
 {
     return main_panel;

@@ -90,7 +90,7 @@ function commsStationDocked(comms_source, comms_target)
         message = string.format("Welcome to our lovely station %s.", comms_target:getCallSign())
     end
 
-    setCommsMessage(message + string.format("\n\nReputation: %s", comms_source:getReputationPoints()))
+    setCommsMessage(string.format("%s\n\nReputation: %s", message, comms_source:getReputationPoints()))
 
     local reply_messages = {
         ["Homing"] = "Do you have spare homing missiles for us?",
@@ -177,7 +177,7 @@ function commsStationUndocked(comms_source, comms_target)
         message = string.format("This is %s. Greetings.\nIf you want to do business, please dock with us first.", comms_target:getCallSign())
     end
 
-    setCommsMessage(message .. string.format("\n\nReputation: %s", comms_source:getReputationPoints()))
+    setCommsMessage(string.format("%s\n\nReputation: %s", message, comms_source:getReputationPoints()))
 
     -- supply drop
     if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then

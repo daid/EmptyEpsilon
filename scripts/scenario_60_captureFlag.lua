@@ -1,10 +1,11 @@
--- Name: Capture the Flag (PPEV)
+-- Name: Capture the Flag
 -- Description: Capture opposing team's "flag" before they capture yours
 --- 
---- The region consists of two halves divided by a line of nebulae. The first 5 minutes each side decides where to place their flag. The ships closest to the referee station determine the team's flag location during the initial phase. Crossing to the other side during this phase will result in ship destruction. The weapons officer will mark the flag coordinates when the ship reaches the flag location. After the 5 minute timer expires, an artifact will be placed at the location representing the team's flag. If no place has been marked, the ship's current location will be used. If the location is outside the game boundaries, the flag will be placed at the nearest in bound location
+--- The region consists of two halves divided by a line of nebulae and/or markers. The first 5 minutes (configurable) each side decides where to place their flag. The ships closest to the referee station determine the team's flag location during the initial phase. Crossing to the other side during this phase will result in ship destruction. The weapons officer will mark the flag coordinates when the ship reaches the flag location. After the flag hide timer expires, an artifact will be placed at the location representing the team's flag. If no place has been marked, the ship's current location will be used. If the location is outside the game boundaries, the flag will be placed at the nearest in bounds location
 ---
---- Once the flags are placed, the hunt is on. Ships may cross the border in search of the other team's flag, but while they are in the other team's territory they may be tagged by an opponent ship within 1U. Being tagged sends you back to your own region with damage to your warp/jump drive. Each flag must be scanned before it can be retrived. Retrieval occurs by getting within 1U of the flag. Being tagged while in posession of the flag drops the flag at the location of the tag event. Cross back to your side with the flag to claim victory
+--- Once the flags are placed, the hunt is on. Ships may cross the border in search of the other team's flag, but while they are in the other team's territory they may be tagged by an opponent ship within 0.75U. Being tagged sends you back to your own region with damage to your warp/jump drive. Each flag must be scanned before it can be retrived. Retrieval occurs by getting within 1U of the flag. Being tagged while in posession of the flag drops the flag at the location of the tag event. Cross back to your side with the flag to claim victory
 ---
+--- Current version designed for post pandemic event, but the pandemic lasted longer than anticipated. Event was held 23Jan2021 with 14 player ships participating. Enjoy this scenario in your own multiple player ship event.
 -- Author: Xansta & Kilted-Klingon
 -- Type: Player ship vs. player ship, teams up to 16 ships per side
 -- Variation[Easy]: Easy enemies, told which opposing team ship picked up flag
@@ -19,7 +20,7 @@
 require("utils.lua")
 
 function init()
-	scenario_version = "1.7"
+	scenario_version = "1.31.4"
 	print(string.format("     -----     Scenario: Capture the Flag     -----     Version %s     -----",scenario_version))
 	print(_VERSION)
 	
@@ -27,7 +28,137 @@ function init()
 --	Global variables  --
 ------------------------
 -- Variables that may be modified before game start to adjust game play
+	--[[
+	--If you insert a custom ship_name here, be sure to remove it from the pool of random names
+	preset_players = {}
+	--1st ship spawned: Maverick
+	table.insert(preset_players, 
+		{
+			xo = "Starry",				--1st choice
+			ship_name = "Phoenix",
+			faction = "Human Navy",
+			ship_pref_1 = "Maverick",	--pref 2
+			ship_pref_2 = "Nautilus",	--pref 1
+			ship_pref_3 = "Player Cruiser",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "Aldric",				--3rd choice
+			faction = "Kraylor",
+			ship_name = "Durance",
+			ship_pref_1 = "Maverick",	--pref 2
+			ship_pref_2 = "Atlantis",	--pref 1
+			ship_pref_3 = "Crucible",
+			ship_pref_4 = "Piranha",
+			ship_pref_5 = "Player Cruiser",
+			ship_pref_6 = "Player Missile Cr.",
+		}
+	)
+	--2nd ship spawned: Atlantis
+	table.insert(preset_players, 
+		{
+			xo = "Larry",
+			ship_name = "Mondo",
+			faction = "Human Navy",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "Epeac",				--2nd choice
+			faction = "Kraylor",
+			ship_name = "Dauntless",
+			ship_pref_1 = "Atlantis",
+			ship_pref_2 = "Maverick",
+			ship_pref_3 = "Crucible",
+		}
+	)
+	--3rd ship spawned: Phobos M3P
+	table.insert(preset_players, 
+		{
+			xo = "Lupus",				--5th choice
+			faction = "Human Navy",
+			ship_name = "Harbinger",
+			ship_pref_1 = "PhobosM3P",		--Lupus prefers warp
+			ship_pref_4 = "Atlantis",		--Theta pref 1
+			ship_pref_2 = "Crucible",
+			ship_pref_3 = "Maverick",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "Daid",
+			faction = "Kraylor",
+			ship_name = "UltiShiptastic",
+		}
+	)
+	--4th ship spawned: Crucible
+	table.insert(preset_players, 
+		{
+			xo = "Mo",
+			ship_name = "Shotgun",
+			faction = "Human Navy",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "Theta",				--4th choice
+			faction = "Kraylor",
+			ship_name = "Prokop",
+			ship_pref_1 = "Crucible",	--pref 2
+			ship_pref_2 = "Atlantis",	--pref 1
+			ship_pref_3 = "Maverick",
+			ship_pref_4 = "Phobos M3P",
+		}
+	)
+	--5th ship spawned: Flavia P.Falcon
+	table.insert(preset_players, 
+		{
+			xo = "Curly",
+			ship_name = "Jayhawk",
+			faction = "Human Navy",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "AJ",
+			ship_name = "Roc",
+			faction = "Kraylor",
+		}
+	)
+	--6th ship spawned: Repulse
+	table.insert(preset_players, 
+		{
+			xo = "Shemp",
+			ship_name = "Lizard",
+			faction = "Human Navy",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "Hemmond",
+			faction = "Kraylor",
+			ship_name = "Sentinel",
+		}
+	)
+	--7th ship spawned: Player Missile Cr.
+	table.insert(preset_players, 
+		{
+			xo = "Ted",
+			ship_name = "Cremator",
+			faction = "Human Navy",
+		}
+	)
+	table.insert(preset_players, 
+		{
+			xo = "Hermann",
+			ship_name = "Charger",
+			faction = "Kraylor",
+		}
+	)
+	--]]
 	diagnostic = false 			-- See GM button. A boolean for printing debug data to the console during development; turn to "false" during game play 
+	timeDivision = "paused"
 	gameTimeLimit = 45*60		-- See GM button. Time limit for game; this is measured in real time seconds (example: 45*60 = 45 minutes)
 	hideFlagTime = 300			-- See GM button. Time given to hide flag; this is measured in real time seconds; (300 secs or 5 mins is the normal setting; 60 for certain tests)
 	maxGameTime = gameTimeLimit	-- See GM Button.
@@ -210,9 +341,29 @@ function init()
 			"Delta 4",		"Yellow 4",
 		},
 	}
-	wingSquadronNames = true	-- See GM button. Set to true to name ships alpha/bravo/charlie vs. red/blue/green etc.; set to false to use randomized names from a list
+	wingSquadronNames = false	-- See GM button. Set to true to name ships alpha/bravo/charlie vs. red/blue/green etc.; set to false to use randomized names from a list
+	player_ship_stats = {	
+		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, probes = 10,	},
+		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, probes = 15,	},
+		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, probes = 27	,	},
+		["Phobos M3P"]			= { strength = 19,	cargo = 10,	distance = 200,	long_range_radar = 25000, short_range_radar = 5000, probes = 15,	},
+		["Atlantis"]			= { strength = 52,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 25,	},
+		["Player Cruiser"]		= { strength = 40,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 22,	},
+		["Player Missile Cr."]	= { strength = 45,	cargo = 8,	distance = 200,	long_range_radar = 35000, short_range_radar = 6000, probes = 26,	},
+		["Player Fighter"]		= { strength = 7,	cargo = 3,	distance = 100,	long_range_radar = 15000, short_range_radar = 4500, probes = 11,	},
+		["Benedict"]			= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 20,	},
+		["Kiriya"]				= { strength = 10,	cargo = 9,	distance = 400,	long_range_radar = 35000, short_range_radar = 5000, probes = 20,	},
+		["Striker"]				= { strength = 8,	cargo = 4,	distance = 200,	long_range_radar = 35000, short_range_radar = 5000, probes = 17,	},
+		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 5500, probes = 12,	},
+		["Repulse"]				= { strength = 14,	cargo = 12,	distance = 200,	long_range_radar = 38000, short_range_radar = 5000, probes = 35,	},
+		["Ender"]				= { strength = 100,	cargo = 20,	distance = 2000,long_range_radar = 45000, short_range_radar = 7000, probes = 24,	},
+		["Nautilus"]			= { strength = 12,	cargo = 7,	distance = 200,	long_range_radar = 22000, short_range_radar = 4000, probes = 23,	},
+		["Hathcock"]			= { strength = 30,	cargo = 6,	distance = 200,	long_range_radar = 35000, short_range_radar = 6000, probes = 20,	},
+		["Maverick"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 4000, probes = 18,	},
+		["Crucible"]			= { strength = 45,	cargo = 5,	distance = 200,	long_range_radar = 20000, short_range_radar = 6000, probes = 20,	},
+	}		
 	tagDamage = 1.25			-- See GM button. Amount to subtract from jump/warp drive when tagged. Full health = 1
-	tag_distance = 1000			-- See GM button. How far away to be considered tagged and returned to other side
+	tag_distance = 750			-- See GM button. How far away to be considered tagged and returned to other side
 	hard_flag_reveal = true		-- See GM button. On hard difficulty, will a flag pick up be revealed on main screen or not
 	side_destroyed_ends_game = true		-- See GM button. If one side completely destroyed, will game end immediately or not (if not, set game time remaining to 60 seconds)
 	autoEnemies = false			-- See GM button. Boolean default value for whether or not marauders spawn
@@ -230,16 +381,17 @@ function init()
 		["Default"] =	defaultTerrain,
 		["Passing"] =	justPassingBy,
 		["Symmetric"] =	randomSymmetric,
+		["Rabbit"] =	downTheRabbitHole
 	}
 	-- Drone related global variables
 		dronesAreAllowed = true 				-- See GM button. The base boolean to turn on/off drone usage within the scenarios
 		uniform_drone_carrying_capacity = 50	-- See GM button. This is the max number of drones that can be carried by a playership; for the initial implementations, all player ships will have equal capacity
 		drone_name_type = "squad-num of size"	-- See GM button. Valid values are "default" (use EE), "squad-num/size" (K), "short" (X preferred), "squad-num of size" (X alternate)
 		drone_modified_from_template =  true 	-- See GM button. Boolean governing whether drone properties will be modified from their original template values
-		drone_hull_strength = 50	-- See GM button. Original: 30  drones do not have shields and only have their hull strength for defense; reasonable values should be from 25-75; obviously the higher the stronger
+		drone_hull_strength = 25	-- See GM button. Original: 30  drones do not have shields and only have their hull strength for defense; reasonable values should be from 25-75; obviously the higher the stronger
 		drone_impulse_speed = 120	-- See GM button. Original: 120 drones only have impulse engines, and usually tend to be faster because they are lighter and no living pilots required; reasonable values should be from 100-150
 		drone_beam_range = 700 		-- See Gm button. Original: 600 the distance at which the drone can hit its target; reasonable values should be from 500-1000
-		drone_beam_damage = 10 		-- See Gm button. Original: 6   drones have a single forward facing beam weapon; this sets the damage done by the beam; reasonable values should be from 5-10
+		drone_beam_damage = 8 		-- See Gm button. Original: 6   drones have a single forward facing beam weapon; this sets the damage done by the beam; reasonable values should be from 5-10
 		drone_beam_cycle_time = 5	-- See Gm button. Original: 4   this is the number of seconds it takes for the beam weapon to recharge and to be able to fire again; reasonable values should be from 3-8
 		drone_flag_check_interval = 5		-- See GM button. How many seconds between each drone flag detection cycle
 		drone_message_reset_count = 8		-- See GM button. How many flag check intervals to wait before sending another message about a possible flag being detected
@@ -248,26 +400,38 @@ function init()
 	revisedPlayerShipProbeCount = 20  -- See GM button. The standard count of 8 just is not quite enough for this game, so we need to have an easy way to modify; all player ships will have this amount at game start
 	control_code_stem = {	--All control codes must use capital letters or they will not work.
 		"ALWAYS",
+		"ASTRO",
 		"BLACK",
+		"BLANK",
 		"BLUE",
 		"BRIGHT",
 		"BROWN",
 		"CHAIN",
 		"CHURCH",
+		"CORNER",
+		"DARK",
 		"DOORWAY",
+		"DOUBLE",
 		"DULL",
 		"ELBOW",
 		"EMPTY",
 		"EPSILON",
+		"FAST",
 		"FLOWER",
 		"FLY",
 		"FROZEN",
+		"GIG",
 		"GREEN",
 		"GLOW",
+		"HAND",
 		"HAMMER",
 		"INK",
+		"INTEL",
+		"JOUST",
 		"JUMP",
 		"KEY",
+		"KINDLE",
+		"LAP",
 		"LETTER",
 		"LIST",
 		"MORNING",
@@ -329,8 +493,13 @@ function init()
 		tradeMedicine = {}	--stations that will trade medicine for other goods; 
 	-- convenience table for accessing drones
 		droneFleets = {}
+	boundary_beam_string = {
+		"beam_blue.png",
+		"beam_purple.png",
+		"beam_green.png"
+	}
 
-
+	boundary_marker = "buoys"
 	-- Initialization checklist by function
 	setVariations()
 	initializeDroneButtonFunctionTables()
@@ -339,6 +508,11 @@ function init()
 	setupBarteringGoods() -- part of Xansta's larger overall bartering/crafting setup
 	setupPlacementRandomizationFunctions()
 	terrainType()  -- sets up the environment terrain according to the choice above
+	plotTeamDemarcationLine()
+	plotFlagPlacementBoundaries()
+	
+	storage = getScriptStorage()
+	storage.gatherStats = gatherStats
 
 	-- Print initialization items to console
 	wfv = "end of init"
@@ -351,7 +525,7 @@ function init()
 	print("    (Uniform) Drone carrying capacity for player ships: " .. uniform_drone_carrying_capacity)
 	print("    Drone scanning range for flags/decoys:  " .. drone_scan_range_for_flags)
 	print("  ")
-	print("-----     All of the above settings may be adjusted by GM button. ")
+	print("-----     All of the above initial configuration settings may be adjusted by GM button. ")
 	print("-----     So don't count on these values to remain accurate")
 
 end
@@ -383,9 +557,6 @@ function mainGMButtonsDuringPause()
 	end)
 	addGMFunction(string.format("+Terrain: %s",terrain_type_name),setTerrain)
 	addGMFunction("+Player Config",playerConfig)
-	if interwave_delay == nil then
-		interwave_delay = "normal"
-	end
 	button_label = "Enable Auto-Enemies"
 	if autoEnemies then
 		button_label = "Disable Auto-Enemies"
@@ -403,6 +574,25 @@ function mainGMButtonsDuringPause()
 	else
 		addGMFunction(string.format("+Times G%i H%i",gameTimeLimit/60,hideFlagTime/60),setGameTimeLimit)
 	end
+	addGMFunction(string.format("Level: %s ->Next",difficulty_text),function()
+		if difficulty_text == "normal" then
+			difficulty_text = "hard"
+			difficulty = 2
+			flagScanDepth = math.random(1,3)		--number of times to scan
+			flagScanComplexity = math.random(3,4)	--number of bars in scan
+		elseif difficulty_text == "hard" then
+			difficulty_text = "easy"
+			difficulty = .5
+			flagScanDepth = 1						--number of times to scan
+			flagScanComplexity = math.random(1,2)	--number of bars in scan
+		elseif difficulty_text == "easy" then
+			difficulty_text = "normal"
+			difficulty = 1
+			flagScanDepth = math.random(2,3)		--number of times to scan
+			flagScanComplexity = 2					--number of bars in scan
+		end
+		mainGMButtons()
+	end)
 	if difficulty > 1 then
 		button_label = "Show Pick Up Off"
 		if hard_flag_reveal then
@@ -429,10 +619,99 @@ function mainGMButtonsDuringPause()
 		end
 		mainGMButtons()
 	end)
+	addGMFunction(string.format("Marker: %s ->Next",boundary_marker),function()
+		if boundary_marker == "stars" then
+			boundary_marker = "buoys"
+		elseif boundary_marker == "buoys" then
+			boundary_marker = "none"
+		elseif boundary_marker == "none" then
+			boundary_marker = "stars"
+		end
+		plotTeamDemarcationLine()
+		plotFlagPlacementBoundaries()
+		mainGMButtons()
+	end)
+	addGMFunction("Player Prefs",function()
+		local out_message = "Remaining player preferences:"
+		print(out_message)
+		for i=1,#preset_players do
+			local item = preset_players[i]
+			local out = string.format("XO:%s",item.xo)
+			print(out)
+			out_message = out_message .. "\n" .. out
+			if item.faction ~= nil then
+				out = string.format("    Faction:%s",item.faction)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_name ~= nil then
+				out = string.format("    Ship name:%s",item.ship_name)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_pref_1 ~= nil then
+				out = string.format("    Ship preference 1:%s",item.ship_pref_1)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_pref_2 ~= nil then
+				out = string.format("    Ship preference 2:%s",item.ship_pref_2)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_pref_3 ~= nil then
+				out = string.format("    Ship preference 3:%s",item.ship_pref_3)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_pref_4 ~= nil then
+				out = string.format("    Ship preference 4:%s",item.ship_pref_4)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_pref_5 ~= nil then
+				out = string.format("    Ship preference 5:%s",item.ship_pref_5)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+			if item.ship_pref_6 ~= nil then
+				out = string.format("    Ship preference 6:%s",item.ship_pref_6)
+				print(out)
+				out_message = out_message .. "\n" .. out
+			end
+		end
+		addGMMessage(out_message)
+	end)
 end
 function setTerrain()
 	clearGMFunctions()
 	addGMFunction("-from Terrain",mainGMButtons)
+	addGMFunction(string.format("Size: %s -> Next",terrain_size),function()
+		if terrain_size == "medium" then
+			terrain_size = "large"
+			boundary = 200000
+		elseif terrain_size == "large" then
+			terrain_size = "small"
+			boundary = 50000
+		elseif terrain_size == "small" then
+			terrain_size = "medium"
+			boundary = 100000
+		end
+		if terrain_objects ~= nil and #terrain_objects > 0 then
+			for _, obj in pairs(terrain_objects) do
+				obj:destroy()
+			end
+			terrain_objects = {}
+		end
+		stationList = {}
+		humanStationList = {}
+		kraylorStationList = {}
+		neutralStationList = {}
+		setupPlacementRandomizationFunctions()
+		terrainType()
+		setTerrain()
+		plotFlagPlacementBoundaries()
+	end)
 	for name, terrain in pairs(terrain_choices) do
 		local button_name = name
 		if button_name == terrain_type_name then
@@ -457,6 +736,143 @@ function setTerrain()
 		end)
 	end
 end
+function plotTeamDemarcationLine()
+	if boundary_items == nil then
+		boundary_items = {}
+	else
+		if #boundary_items > 0 then
+			for _, item in ipairs(boundary_items) do
+				item:destroy()
+			end
+			boundary_items = {}
+		end
+	end
+	if boundary_marker == "stars" then
+		local demarcation_x_position = 0
+		local demarcation_y_position = 2500
+		local star = nil
+		for index=1,40 do
+			star = Planet():setPosition(demarcation_x_position, demarcation_y_position)
+				:setPlanetRadius(150)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/star-1.png")
+				--:setPlanetAtmosphereTexture("planets/star-1.png")
+				:setPlanetAtmosphereColor(1.0,1.0,1.0)
+				:setAxialRotationTime(100)
+			table.insert(boundary_items,star)
+			demarcation_y_position = demarcation_y_position * -1
+			star = Planet():setPosition(demarcation_x_position, demarcation_y_position)
+				:setPlanetRadius(150)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/star-1.png")
+				--:setPlanetAtmosphereTexture("planets/star-1.png")
+				:setPlanetAtmosphereColor(1.0,1.0,1.0)
+				:setAxialRotationTime(100)
+			table.insert(boundary_items,star)
+			demarcation_y_position = demarcation_y_position * -1
+			demarcation_y_position = demarcation_y_position + 5000
+		end
+		demarcation_y_position = 5000
+		for index=1,40 do
+			star = Planet():setPosition(demarcation_x_position, demarcation_y_position)
+				:setPlanetRadius(150)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/planet-2.png")
+				:setPlanetAtmosphereColor(0.5,0,0)
+				:setAxialRotationTime(100)
+			table.insert(boundary_items,star)
+			demarcation_y_position = demarcation_y_position * -1
+			star = Planet():setPosition(demarcation_x_position, demarcation_y_position)
+				:setPlanetRadius(150)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/planet-2.png")
+				:setPlanetAtmosphereColor(1.0,0,0)
+				:setAxialRotationTime(100)
+			table.insert(boundary_items,star)
+			demarcation_y_position = demarcation_y_position * -1
+			demarcation_y_position = demarcation_y_position + 5000
+		end
+	elseif boundary_marker == "buoys" then
+		buoy_beam_interval = 2
+		buoy_beam_timer = buoy_beam_interval
+		buoy_beam_count = 0
+		for i=1,80 do
+			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions("Territory boundary marker","A buoy placed on the line marking the boundary between Human and Kraylor territory"):setScanningParameters(1,1):setRadarSignatureInfo(.5,1,0))
+			table.insert(boundary_items,Artifact():allowPickup(false):setPosition(0,i*-2500):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(100):setCallSign("Marker Buoy"):setDescriptions("Territory boundary marker","A buoy placed on the line marking the boundary between Human and Kraylor territory"):setScanningParameters(1,1):setRadarSignatureInfo(0,.5,1))
+		end
+	end
+end
+function plotFlagPlacementBoundaries()
+	if flag_area_boundary_items == nil then
+		flag_area_boundary_items = {}
+	else
+		if #flag_area_boundary_items > 0 then
+			for _, item in ipairs(flag_area_boundary_items) do
+				item:destroy()
+			end
+			flag_area_boundary_items = {}
+		end
+	end
+	if boundary_marker == "stars" or boundary_marker == "buoys" then
+		local index = 0
+		repeat
+			local temp_marker = nil
+			if index == 0 then
+				temp_marker = createBoundaryMarker(index,boundary/2)	--middle of southern edge
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(index,-boundary/2)	--middle of northern edge
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(boundary,index)		--middle of eastern edge
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(-boundary,index)		--middle of western edge
+				table.insert(flag_area_boundary_items,temp_marker)
+			elseif index == boundary then
+				temp_marker = createBoundaryMarker(index,boundary/2)	--southeast corner
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(-index,-boundary/2)	--northwest corner
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(index,-boundary/2)	--northeast corner
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(-index,boundary/2)	--southwest corner
+				table.insert(flag_area_boundary_items,temp_marker)
+			else
+				temp_marker = createBoundaryMarker(index,boundary/2)	--eastern part of southern line
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(-index,-boundary/2)	--western part of northern line
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(index,-boundary/2)	--eastern part of northern line
+				table.insert(flag_area_boundary_items,temp_marker)
+				temp_marker = createBoundaryMarker(-index,boundary/2)	--western part of southern line
+				table.insert(flag_area_boundary_items,temp_marker)
+				if index < boundary/2 then
+					temp_marker = createBoundaryMarker(boundary,index)	--southern part of eastern line
+					table.insert(flag_area_boundary_items,temp_marker)
+					temp_marker = createBoundaryMarker(boundary,-index)	--northern part of eastern line
+					table.insert(flag_area_boundary_items,temp_marker)
+					temp_marker = createBoundaryMarker(-boundary,-index)--northern part of western line
+					table.insert(flag_area_boundary_items,temp_marker)
+					temp_marker = createBoundaryMarker(-boundary,index)	--southern part of western line
+					table.insert(flag_area_boundary_items,temp_marker)
+				end
+			end
+			index = index + 2500
+		until(index >= boundary)
+	end
+end
+function createBoundaryMarker(position_x, position_y)
+	local temp_marker = nil
+	if boundary_marker == "stars" then
+		temp_marker = Planet():setPosition(position_x, position_y)
+			:setPlanetRadius(200)
+			:setDistanceFromMovementPlane(0)
+			:setPlanetSurfaceTexture("planets/star-1.png")
+			:setPlanetAtmosphereColor(1.0,1.0,1.0)
+	elseif boundary_marker == "buoys" then
+		temp_marker = Artifact():allowPickup(false):setPosition(position_x,position_y):setModel("SensorBuoyMKIII"):setRotation(90):setSpin(50):setDescriptions("Flag hiding territory boundary marker","A temporary buoy placed on the edge of the territory where a flag or decoy may be hidden"):setScanningParameters(1,1):setRadarSignatureInfo(.3,.5,0)
+	end
+	return temp_marker
+end
+
 function playerConfig()
 	clearGMFunctions()
 	addGMFunction("-from Player Config",mainGMButtons)
@@ -486,10 +902,12 @@ function playerConfig()
 		button_label = "+Drones On"
 	end
 	addGMFunction(button_label,configureDrones)
+	--[[
 	local p = getPlayerShip(-1)
 	if p == nil then
 		addGMFunction(string.format("+Probes %i",revisedPlayerShipProbeCount),setPlayerProbes)
 	end
+	--]]
 end
 function setGameTimeLimit()
 	clearGMFunctions()
@@ -515,6 +933,11 @@ function setGameTimeLimit()
 	if hideFlagTime > 300 then
 		addGMFunction(string.format("Hide Flag %i Del 5 -> %i",hideFlagTime/60,hideFlagTime/60 - 5),function()
 			hideFlagTime = hideFlagTime - 300
+			setGameTimeLimit()
+		end)
+	elseif hideFlagTime > 60 then
+		addGMFunction(string.format("Hide Flag %i Del 4 -> %i",hideFlagTime/60,hideFlagTime/60 - 4),function()
+			hideFlagTime = hideFlagTime - 240
 			setGameTimeLimit()
 		end)
 	end
@@ -820,6 +1243,7 @@ function mainGMButtonsAfterPause()
 	end)
 	addGMFunction("Show control codes",showControlCodes)
 	addGMFunction("Show Kraylor codes",showKraylorCodes)
+	addGMFunction("Show Ktlitan codes",showKtlitanCodes)
 	addGMFunction("Show Human codes",showHumanCodes)
 	local button_label = "Enable Auto-Enemies"
 	if autoEnemies then
@@ -849,12 +1273,18 @@ function mainGMButtonsAfterPause()
 	if dronesAreAllowed then 
 		addGMFunction("Detailed Drone Report", detailedDroneReport)
 	end
+	if gameTimeLimit < (maxGameTime - hideFlagTime) then
+		addGMFunction("Intelligent Bugger",intelligentBugger)
+	end
 end
 function showKraylorCodes()
 	showControlCodes("Kraylor")
 end
 function showHumanCodes()
 	showControlCodes("Human Navy")
+end
+function showKtlitanCodes()
+	showControlCodes("Ktlitans")
 end
 function showControlCodes(faction_filter)
 	local code_list = {}
@@ -867,6 +1297,10 @@ function showControlCodes(faction_filter)
 				end
 			elseif faction_filter == "Human Navy" then
 				if p:getFaction() == "Human Navy" then
+					code_list[p:getCallSign()] = {code = p.control_code, faction = p:getFaction()}
+				end
+			elseif faction_filter == "Ktlitans" then
+				if p:getFaction() == "Ktlitans" then
 					code_list[p:getCallSign()] = {code = p.control_code, faction = p:getFaction()}
 				end
 			else
@@ -884,6 +1318,8 @@ function showControlCodes(faction_filter)
 		local faction = ""
 		if code_list[name].faction == "Kraylor" then
 			faction = " (Kraylor)"
+		elseif code_list[name].faction == "Ktlitans" then
+			faction = " (Ktlitan)"
 		end
 		output = output .. string.format("%s: %s %s\n",name,code_list[name].code,faction)
 	end
@@ -891,50 +1327,126 @@ function showControlCodes(faction_filter)
 end
 function intelligentBugger()
 	-- Spawn a player ship not affiliated with either team for harassment purposes
-	if bugger == nil then
-		spawnBugger()
-	else
-		if not bugger:isValid() then
-			spawnBugger()
-		end
-	end
+	spawnBugger()
 	if buggerResupply == nil then
-		buggerResupply = SpaceStation():setFaction("Exuari"):setTemplate("Medium Station"):setPosition(0,boundary/2 + 2000):setCommsScript(""):setCommsFunction(resupplyStation)
+		buggerResupply = SpaceStation():setFaction("Ktlitans"):setTemplate("Medium Station"):setPosition(0,boundary/2 + 2000):setCommsScript(""):setCommsFunction(resupplyStation)
 	else
 		if not buggerResupply:isValid() then
-			buggerResupply = SpaceStation():setFaction("Exuari"):setTemplate("Medium Station"):setPosition(0,boundary/2 + 2000):setCommsScript(""):setCommsFunction(resupplyStation)
+			buggerResupply = SpaceStation():setFaction("Ktlitans"):setTemplate("Medium Station"):setPosition(0,boundary/2 + 2000):setCommsScript(""):setCommsFunction(resupplyStation)
 		end
 	end
 end
 function spawnBugger()
-	bugger = PlayerSpaceship():setFaction("Exuari"):setPosition(0,boundary/2):addReputationPoints(100)
-	if random(1,500) < 50 then
-		bugger:setTemplate("ZX-Lindworm"):setWarpDrive(true)
-	else
-		bugger:setTemplate("Repulse")
+	local bugger = PlayerSpaceship():setFaction("Ktlitans"):setPosition(0,boundary/2):addReputationPoints(100)
+	bugger:setTemplate("ZX-Lindworm"):setWarpDrive(true):setWarpSpeed(950)
+	bugger.template_type = "ZX-Lindworm"
+	namePlayer(bugger,"Lindworm")
+	local control_code_index = math.random(1,#control_code_stem)
+	local stem = control_code_stem[control_code_index]
+	table.remove(control_code_stem,control_code_index)
+	local branch = math.random(100,999)
+	bugger.control_code = stem .. branch
+	bugger:setControlCode(stem .. branch)
+	if bugger_player_names == nil then
+		bugger_player_names = {}
 	end
+	bugger_player_names[bugger:getCallSign()] = bugger
+	addGMMessage(string.format("New Bugger ship: %s\nControl code: %s",bugger:getCallSign(),bugger.control_code))
+	print("Control Code for bugger " .. bugger:getCallSign(), bugger.control_code)
 end
-function currentStats()
-	local active_human_ship_count = 0
-	local destroyed_human_ship_count = 0
-	local active_kraylor_ship_count = 0
-	local destroyed_kraylor_ship_count = 0
-	local active_human_drone_count = 0
-	local destroyed_human_drone_count = 0
-	local active_kraylor_drone_count = 0
-	local destroyed_kraylor_drone_count = 0
-	local bugger_count = 0
+function gatherStats()
+	local stat_list = {}
+	stat_list.scenario = {name = "Capture the Flag", version = scenario_version}
+	stat_list.human = {}
+	stat_list.kraylor = {}
+	stat_list.bugger = {}
+	stat_list.human.ship = {}
+	stat_list.kraylor.ship = {}
+	stat_list.bugger.ship = {}
+	stat_list.human.active_ship_count = 0
+	stat_list.human.destroyed_ship_count = 0
+	stat_list.kraylor.active_ship_count = 0
+	stat_list.kraylor.destroyed_ship_count = 0
+	stat_list.bugger.active_ship_count = 0
+	stat_list.bugger.destroyed_ship_count = 0
+	stat_list.human.active_drone_count = 0
+	stat_list.human.destroyed_drone_count = 0
+	stat_list.kraylor.active_drone_count = 0
+	stat_list.kraylor.destroyed_drone_count = 0
+	stat_list.times = {}
+	stat_list.times.game = {}
+	stat_list.times.hide_flag = {}
+	stat_list.times.stage = timeDivision
+	stat_list.times.game.max = maxGameTime
+	stat_list.times.game.total_seconds_left = gameTimeLimit
+	stat_list.times.game.minutes_left = math.floor(gameTimeLimit / 60)
+	stat_list.times.game.seconds_left = math.floor(gameTimeLimit % 60)
+	stat_list.times.hide_flag.max = hideFlagTime
+	stat_list.times.hide_flag.total_seconds_left = gameTimeLimit - (maxGameTime - hideFlagTime)
+	stat_list.times.hide_flag.minutes_left = math.floor((gameTimeLimit - (maxGameTime - hideFlagTime)) / 60)
+	stat_list.times.hide_flag.seconds_left = math.floor((gameTimeLimit - (maxGameTime - hideFlagTime)) % 60)
 	for pidx=1,32 do
 		p = getPlayerShip(pidx)
 		if p ~= nil then
 			if p:isValid() then
 				local faction = p:getFaction()
-				if faction == "Exuari" then
-					bugger_count = bugger_count + 1
+				local flag = false
+				local drone_info = {}
+				local squad_count = 0
+				local squad_list = {}
+				local active_drone_count = 0
+				local destroyed_drone_count = 0
+				if faction == "Ktlitans" then
+					stat_list.bugger.active_ship_count = stat_list.bugger.active_ship_count + 1
+					stat_list.bugger.ship[p:getCallSign()] = {template_type = p:getTypeName(), is_alive = true}
 				elseif faction == "Kraylor" then
-					active_kraylor_ship_count = active_kraylor_ship_count + 1
+					if p.droneSquads ~= nil then
+						for squadName, droneList in pairs(p.droneSquads) do
+							if squadName ~= nil then
+								squad_count = squad_count + 1
+								squad_list[squadName] = {active_count = 0, destroyed_count = 0, max = #droneList}
+								for i=1,#droneList do
+									if droneList[i]:isValid() then
+										squad_list[squadName].active_count = squad_list[squadName].active_count + 1
+										active_drone_count = active_drone_count + 1
+									else
+										squad_list[squadName].destroyed_count = squad_list[squadName].destroyed_count + 1
+										destroyed_drone_count = destroyed_drone_count + 1
+									end
+								end
+							end
+						end
+					end
+					stat_list.kraylor.active_ship_count = stat_list.kraylor.active_ship_count + 1
+					if p.flag then
+						flag = true
+					end
+					drone_info = {uniform_drone_carrying_capacity = uniform_drone_carrying_capacity, squad_count = squad_count, squad_list = squad_list, active_drone_count = active_drone_count, destroyed_drone_count = destroyed_drone_count}
+					stat_list.kraylor.ship[p:getCallSign()] = {template_type = p:getTypeName(), is_alive = true, has_flag = flag, pick_up_count = p.pick_up_count, tagged_count = p.tagged_count, drone_info = drone_info}
 				elseif faction == "Human Navy" then
-					active_human_ship_count = active_human_ship_count + 1
+					if p.droneSquads ~= nil then
+						for squadName, droneList in pairs(p.droneSquads) do
+							if squadName ~= nil then
+								squad_count = squad_count + 1
+								squad_list[squadName] = {active_count = 0, destroyed_count = 0, max = #droneList}
+								for i=1,#droneList do
+									if droneList[i]:isValid() then
+										squad_list[squadName].active_count = squad_list[squadName].active_count + 1
+										active_drone_count = active_drone_count + 1
+									else
+										squad_list[squadName].destroyed_count = squad_list[squadName].destroyed_count + 1
+										destroyed_drone_count = destroyed_drone_count + 1
+									end
+								end
+							end
+						end
+					end
+					stat_list.human.active_ship_count = stat_list.human.active_ship_count + 1
+					if p.flag then
+						flag = true
+					end
+					drone_info = {uniform_drone_carrying_capacity = uniform_drone_carrying_capacity, squad_count = squad_count, squad_list = squad_list, active_drone_count = active_drone_count, destroyed_drone_count = destroyed_drone_count}
+					stat_list.human.ship[p:getCallSign()] = {template_type = p:getTypeName(), is_alive = true, has_flag = flag, pick_up_count = p.pick_up_count, tagged_count = p.tagged_count, drone_info = drone_info}
 				end
 			end
 			if pidx %2 == 0 then	--kraylor
@@ -942,9 +1454,9 @@ function currentStats()
 					for squadName, droneList in pairs(p.droneSquads) do
 						for i=1,#droneList do
 							if droneList[i]:isValid() then
-								active_kraylor_drone_count = active_kraylor_drone_count + 1
+								stat_list.kraylor.active_drone_count = stat_list.kraylor.active_drone_count + 1
 							else
-								destroyed_kraylor_drone_count = destroyed_kraylor_drone_count + 1
+								stat_list.kraylor.destroyed_drone_count = stat_list.kraylor.destroyed_drone_count + 1
 							end
 						end
 					end
@@ -954,9 +1466,9 @@ function currentStats()
 					for squadName, droneList in pairs(p.droneSquads) do
 						for i=1,#droneList do
 							if droneList[i]:isValid() then
-								active_human_drone_count = active_human_drone_count + 1
+								stat_list.human.active_drone_count = stat_list.human.active_drone_count + 1
 							else
-								destroyed_human_drone_count = destroyed_human_drone_count + 1
+								stat_list.human.destroyed_drone_count = stat_list.human.destroyed_drone_count + 1
 							end
 						end
 					end
@@ -966,50 +1478,129 @@ function currentStats()
 	end
 	for pName, p in pairs(human_player_names) do
 		if not p:isValid() then
-			destroyed_human_ship_count = destroyed_human_ship_count + 1
+			local drone_info = {}
+			local squad_count = 0
+			local squad_list = {}
+			local active_drone_count = 0
+			local destroyed_drone_count = 0
+			if p.droneSquads ~= nil then
+				for squadName, droneList in pairs(p.droneSquads) do
+					if squadName ~= nil then
+						squad_count = squad_count + 1
+						squad_list[squadName] = {active_count = 0, destroyed_count = 0, max = #droneList}
+						for i=1,#droneList do
+							if droneList[i]:isValid() then
+								squad_list[squadName].active_count = squad_list[squadName].active_count + 1
+								active_drone_count = active_drone_count + 1
+							else
+								squad_list[squadName].destroyed_count = squad_list[squadName].destroyed_count + 1
+								destroyed_drone_count = destroyed_drone_count + 1
+							end
+						end
+					end
+				end
+			end
+			drone_info = {uniform_drone_carrying_capacity = uniform_drone_carrying_capacity, squad_count = squad_count, squad_list = squad_list, active_drone_count = active_drone_count, destroyed_drone_count = destroyed_drone_count}
+			stat_list.human.destroyed_ship_count = stat_list.human.destroyed_ship_count + 1
+			stat_list.human.ship[pName] = {template_type = p.template_type, is_alive = false, has_flag = false, pick_up_count = p.pick_up_count, tagged_count = p.tagged_count, drone_info = drone_info}
 		end
 	end
 	for pName, p in pairs(kraylor_player_names) do
 		if not p:isValid() then
-			destroyed_kraylor_ship_count = destroyed_kraylor_ship_count + 1
+			local drone_info = {}
+			local squad_count = 0
+			local squad_list = {}
+			local active_drone_count = 0
+			local destroyed_drone_count = 0
+			if p.droneSquads ~= nil then
+				for squadName, droneList in pairs(p.droneSquads) do
+					if squadName ~= nil then
+						squad_count = squad_count + 1
+						squad_list[squadName] = {active_count = 0, destroyed_count = 0, max = #droneList}
+						for i=1,#droneList do
+							if droneList[i]:isValid() then
+								squad_list[squadName].active_count = squad_list[squadName].active_count + 1
+								active_drone_count = active_drone_count + 1
+							else
+								squad_list[squadName].destroyed_count = squad_list[squadName].destroyed_count + 1
+								destroyed_drone_count = destroyed_drone_count + 1
+							end
+						end
+					end
+				end
+			end
+			drone_info = {uniform_drone_carrying_capacity = uniform_drone_carrying_capacity, squad_count = squad_count, squad_list = squad_list, active_drone_count = active_drone_count, destroyed_drone_count = destroyed_drone_count}
+			stat_list.kraylor.destroyed_ship_count = stat_list.kraylor.destroyed_ship_count + 1
+			stat_list.kraylor.ship[pName] = {template_type = p.template_type, is_alive = false, has_flag = false, pick_up_count = p.pick_up_count, tagged_count = p.tagged_count, drone_info = drone_info}
 		end
 	end
+	if bugger_player_names ~= nil then
+		for pName, p in pairs(bugger_player_names) do
+			if not p:isValid() then
+				stat_list.bugger.destroyed_ship_count = stat_list.bugger.destroyed_ship_count + 1
+				stat_list.bugger.ship[pName] = {template_type = p.template_type, is_alive = false}
+			end
+		end
+	end
+	--[[sort
+	local sorted_ships = {}
+	for ship, details in pairs(stat_list.human.ship) do
+		table.insert(sorted_ships,{name=ship,details=details})
+	end
+	table.sort(sorted_ships, function(a,b)
+		return a.name < b.name
+	end)
+	stat_list.human.sorted_ships = sorted_ships
+	sorted_ships = {}
+	for ship, details in pairs(stat_list.kraylor.ship) do
+		table.insert(sorted_ships,{name=ship,details=details})
+	end
+	table.sort(sorted_ships, function(a,b)
+		return a.name < b.name
+	end)
+	stat_list.kraylor.sorted_ships = sorted_ships
+	--]]
+	storage.stats = stat_list
+	return stat_list
+end
+function currentStats()
+	local stats = gatherStats()
 	print(" ")
 	print("----------CURRENT SUMMARY STATS-----------")
 	print("  Humans:")
-	print("    Number of active ships:  " .. active_human_ship_count)
-	print("    Number of destroyed ships:  " .. destroyed_human_ship_count)
+	print("    Number of active ships:  " .. stats.human.active_ship_count)
+	print("    Number of destroyed ships:  " .. stats.human.destroyed_ship_count)
 	if dronesAreAllowed then
-		print("    Total number of active drones:  " .. active_human_drone_count)
-		print("    Total number of destroyed drones:  " .. destroyed_human_drone_count)
+		print("    Total number of active drones:  " .. stats.human.active_drone_count)
+		print("    Total number of destroyed drones:  " .. stats.human.destroyed_drone_count)
 	end
 	print("  Kraylor:")
-	print("    Number of active ships:  " .. active_kraylor_ship_count)
-	print("    Number of destroyed ships:  " .. destroyed_kraylor_ship_count)
+	print("    Number of active ships:  " .. stats.kraylor.active_ship_count)
+	print("    Number of destroyed ships:  " .. stats.kraylor.destroyed_ship_count)
 	if dronesAreAllowed then
-		print("    Total number of active drones:  " .. active_kraylor_drone_count)
-		print("    Total number of destroyed drones:  " .. destroyed_kraylor_drone_count)
+		print("    Total number of active drones:  " .. stats.kraylor.active_drone_count)
+		print("    Total number of destroyed drones:  " .. stats.kraylor.destroyed_drone_count)
 	end
-	if bugger_count > 0 then
-		print("Active buggers:  " .. bugger_count)
+	if stats.bugger.active_ship_count > 0 then
+		print("Active buggers:  " .. stats.bugger.active_ship_count)
 	end
 	print("-----------------END STATS-----------------")
 	local gm_out = "Human:"
-	gm_out = gm_out .. "\n   Number of active ships: " .. active_human_ship_count
-	gm_out = gm_out .. "\n   Number of destroyed ships: " .. destroyed_human_ship_count
+	gm_out = gm_out .. "\n   Number of active ships: " .. stats.human.active_ship_count
+	gm_out = gm_out .. "\n   Number of destroyed ships: " .. stats.human.destroyed_ship_count
 	if dronesAreAllowed then
-		gm_out = gm_out .. "\n   Total number of active drones: " .. active_human_drone_count
-		gm_out = gm_out .. "\n   Total number of destroyed drones: " .. destroyed_human_drone_count
+		gm_out = gm_out .. "\n   Total number of active drones: " .. stats.human.active_drone_count
+		gm_out = gm_out .. "\n   Total number of destroyed drones: " .. stats.human.destroyed_drone_count
 	end
 	gm_out = gm_out .. "\nKraylor:"
-	gm_out = gm_out .. "\n   Number of active ships: " .. active_kraylor_ship_count
-	gm_out = gm_out .. "\n   Number of destroyed ships: " .. destroyed_kraylor_ship_count
+	gm_out = gm_out .. "\n   Number of active ships: " .. stats.kraylor.active_ship_count
+	gm_out = gm_out .. "\n   Number of destroyed ships: " .. stats.kraylor.destroyed_ship_count
 	if dronesAreAllowed then
-		gm_out = gm_out .. "\n   Total number of active drones: " .. active_kraylor_drone_count
-		gm_out = gm_out .. "\n   Total number of destroyed drones: " .. destroyed_kraylor_drone_count
+		gm_out = gm_out .. "\n   Total number of active drones: " .. stats.kraylor.active_drone_count
+		gm_out = gm_out .. "\n   Total number of destroyed drones: " .. stats.kraylor.destroyed_drone_count
 	end
-	if bugger_count > 0 then
-		gm_out = gm_out .. "\nActive buggers: " .. bugger_count
+	if stats.bugger.active_ship_count > 0 then
+		gm_out = gm_out .. "\nActive buggers: " .. stats.bugger.active_ship_count
 	end
 	addGMMessage(gm_out)
 end
@@ -1055,23 +1646,29 @@ end
 function setVariations()
 	if string.find(getScenarioVariation(),"Easy") then		--will be told which opposing team ship picked up flag
 		difficulty = .5
+		difficulty_text = "easy"
 		flagScanDepth = 1						--number of times to scan
 		flagScanComplexity = math.random(1,2)	--number of bars in scan
 	elseif string.find(getScenarioVariation(),"Hard") then	--won't be told when opposing team picks up flag
 		difficulty = 2
+		difficulty_text = "hard"
 		flagScanDepth = math.random(1,3)		--number of times to scan
 		flagScanComplexity = math.random(3,4)	--number of bars in scan
 	else													--will be told that opposing team picked up flag
 		difficulty = 1		--default (normal)
+		difficulty_text = "normal"
 		flagScanDepth = math.random(2,3)		--number of times to scan
 		flagScanComplexity = 2					--number of bars in scan
 	end
 	if string.find(getScenarioVariation(),"Small") then
+		terrain_size = "small"
 		boundary = 50000
 	elseif string.find(getScenarioVariation(),"Large") then
 		boundary = 200000
+		terrain_size = "large"
 	else
 		boundary = 100000
+		terrain_size = "medium"
 	end
 end
 function initializeDroneButtonFunctionTables()
@@ -1086,159 +1683,187 @@ function initializeDroneButtonFunctionTables()
 		{	nil		,	nil		 ,p8DropDecoy},
 	}
 end
+--[[
+function namePlayer(pobj,player_type)
+	if #playerShipNamesFor[player_type] > 0 then
+		pobj:setCallSign(tableRemoveRandom(playerShipNamesFor[player_type]))
+	else
+		pobj:setCallSign(tableRemoveRandom(playerShipNamesFor["Leftovers"]))
+	end
+end
+--]]
+function namePlayer(p,player_type)
+	if p.name == nil then
+--		print("template:",player_type)
+		if preset_players ~= nil then
+--			print("preset players exist")
+			if #preset_players > 0 then
+--				print("preset players remain:",#preset_players)
+				for i=1,#preset_players do
+--					print("Checking item number:",i,"XO:",preset_players[i].xo)
+					if preset_players[i].ship_pref_1 ~= nil then	--preference
+--						print("has ship preference:",preset_players[i].ship_pref_1,"current template:",player_type)
+						if preset_players[i].ship_pref_1 == player_type then
+--							print("ship preference matches")
+							if preset_players[i].faction ~= nil then
+--								print("has preferred faction:",preset_players[i].faction)
+								if preset_players[i].faction == p:getFaction() then
+--									print("faction matches")
+									if preset_players[i].ship_name ~= nil then	--preference, faction, name
+										p:setCallSign(preset_players[i].ship_name)
+										p.name = "preset"
+										print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+										table.remove(preset_players,i)
+									else	--preference, faction, no name
+										namePlayerShipRandomly(p,player_type)
+										p.name = "preset"
+										print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+										table.remove(preset_players,i)
+									end
+								end
+								--preference matched, but faction did not
+							else
+								if preset_players[i].ship_name ~= nil then	--preference, no faction, name
+									p:setCallSign(preset_players[i].ship_name)
+									p.name = "preset"
+									print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+									table.remove(preset_players,i)
+								else	--preference, no faction, no name
+									namePlayerShipRandomly(p,player_type)
+									p.name = "preset"
+									print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+									table.remove(preset_players,i)
+								end
+							end
+						end
+					elseif preset_players[i].ship_name ~= nil then	--name
+--						print("has ship name:",preset_players[i].ship_name)
+						if preset_players[i].faction ~= nil then
+							if preset_players[i].faction == p:getFaction() then	--name, faction, no preference
+								p:setCallSign(preset_players[i].ship_name)
+								p.name = "preset"
+								print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+								table.remove(preset_players,i)
+							end
+							--faction did not match
+						else	--name, no faction, no preference
+							p:setCallSign(preset_players[i].ship_name)
+							p.name = "preset"
+							print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+							table.remove(preset_players,i)
+						end
+					elseif preset_players[i].faction ~= nil then
+						if preset_players[i].faction == p:getFaction() then
+							namePlayerShipRandomly(p,player_type)
+							p.name = "preset"
+							print(string.format("XO: %s, Faction: %s, Ship Type: %s, Ship Name: %s",preset_players[i].xo,p:getFaction(),player_type,p:getCallSign()))
+							table.remove(preset_players,i)
+						end
+					end
+					if p.name ~= nil then
+						break
+					end
+				end
+			end
+		end
+		if p.name == nil then
+			namePlayerShipRandomly(p)
+		end
+	end
+end
+function namePlayerShipRandomly(p,player_type)
+	if #playerShipNamesFor[player_type] > 0 then
+		p:setCallSign(tableRemoveRandom(playerShipNamesFor[player_type]))
+	else
+		p:setCallSign(tableRemoveRandom(playerShipNamesFor["Leftovers"]))
+	end
+	p.name = "set"
+end
+
 
 function setPlayer(pobj,playerIndex)
 	goods[pobj] = goodsList
 	pobj:addReputationPoints(150)
 	pobj.nameAssigned = true
 	tempPlayerType = pobj:getTypeName()
-	if tempPlayerType == "MP52 Hornet" then
-		if #playerShipNamesForMP52Hornet > 0 then
-			ni = math.random(1,#playerShipNamesForMP52Hornet)
-			pobj:setCallSign(playerShipNamesForMP52Hornet[ni])
-			table.remove(playerShipNamesForMP52Hornet,ni)
-		end
-		pobj.shipScore = 7
-		pobj.maxCargo = 3
-		pobj.autoCoolant = false
-		pobj:setWarpDrive(true)
-	elseif tempPlayerType == "Piranha" then
-		if #playerShipNamesForPiranha > 0 then
-			ni = math.random(1,#playerShipNamesForPiranha)
-			pobj:setCallSign(playerShipNamesForPiranha[ni])
-			table.remove(playerShipNamesForPiranha,ni)
-		end
-		pobj.shipScore = 16
-		pobj.maxCargo = 8
-	elseif tempPlayerType == "Flavia P.Falcon" then
-		if #playerShipNamesForFlaviaPFalcon > 0 then
-			ni = math.random(1,#playerShipNamesForFlaviaPFalcon)
-			pobj:setCallSign(playerShipNamesForFlaviaPFalcon[ni])
-			table.remove(playerShipNamesForFlaviaPFalcon,ni)
-		end
-		pobj.shipScore = 13
-		pobj.maxCargo = 15
-	elseif tempPlayerType == "Phobos M3P" then
-		if #playerShipNamesForPhobosM3P > 0 then
-			ni = math.random(1,#playerShipNamesForPhobosM3P)
-			pobj:setCallSign(playerShipNamesForPhobosM3P[ni])
-			table.remove(playerShipNamesForPhobosM3P,ni)
-		end
-		pobj.shipScore = 19
-		pobj.maxCargo = 10
-		pobj:setWarpDrive(true)
-	elseif tempPlayerType == "Atlantis" then
-		if #playerShipNamesForAtlantis > 0 then
-			ni = math.random(1,#playerShipNamesForAtlantis)
-			pobj:setCallSign(playerShipNamesForAtlantis[ni])
-			table.remove(playerShipNamesForAtlantis,ni)
-		end
-		pobj.shipScore = 52
-		pobj.maxCargo = 6
-	elseif tempPlayerType == "Player Cruiser" then
-		if #playerShipNamesForCruiser > 0 then
-			ni = math.random(1,#playerShipNamesForCruiser)
-			pobj:setCallSign(playerShipNamesForCruiser[ni])
-			table.remove(playerShipNamesForCruiser,ni)
-		end
-		pobj.shipScore = 40
-		pobj.maxCargo = 6
-	elseif tempPlayerType == "Player Missile Cr." then
-		if #playerShipNamesForMissileCruiser > 0 then
-			ni = math.random(1,#playerShipNamesForMissileCruiser)
-			pobj:setCallSign(playerShipNamesForMissileCruiser[ni])
-			table.remove(playerShipNamesForMissileCruiser,ni)
-		end
-		pobj.shipScore = 45
-		pobj.maxCargo = 8
-	elseif tempPlayerType == "Player Fighter" then
-		if #playerShipNamesForFighter > 0 then
-			ni = math.random(1,#playerShipNamesForFighter)
-			pobj:setCallSign(playerShipNamesForFighter[ni])
-			table.remove(playerShipNamesForFighter,ni)
-		end
-		pobj.shipScore = 7
-		pobj.maxCargo = 3
-		pobj.autoCoolant = false
-		pobj:setJumpDrive(true)
-		pobj:setJumpDriveRange(3000,40000)
+	if player_ship_stats[tempPlayerType] ~= nil then
+		pobj.shipScore = player_ship_stats[tempPlayerType].strength
+		pobj.maxCargo = player_ship_stats[tempPlayerType].cargo
+	end
+	pobj.template_type = tempPlayerType
+	if tempPlayerType == "Atlantis" then
+		namePlayer(pobj,"Atlantis")
 	elseif tempPlayerType == "Benedict" then
-		if #playerShipNamesForBenedict > 0 then
-			ni = math.random(1,#playerShipNamesForBenedict)
-			pobj:setCallSign(playerShipNamesForBenedict[ni])
-			table.remove(playerShipNamesForBenedict,ni)
-		end
-		pobj.shipScore = 10
-		pobj.maxCargo = 9
+		namePlayer(pobj,"Benedict")
+	elseif tempPlayerType == "Crucible" then
+		namePlayer(pobj,"Crucible")
+	elseif tempPlayerType == "Ender" then
+		namePlayer(pobj,"Ender")
+	elseif tempPlayerType == "Flavia P.Falcon" then
+		namePlayer(pobj,"FlaviaPFalcon")
+	elseif tempPlayerType == "Hathcock" then
+		namePlayer(pobj,"Hathcock")
+		pobj.max_jump_range = 60000
+		pobj.min_jump_range = 6000
+		pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+		pobj:setJumpDriveCharge(pobj.max_jump_range)
 	elseif tempPlayerType == "Kiriya" then
-		if #playerShipNamesForKiriya > 0 then
-			ni = math.random(1,#playerShipNamesForKiriya)
-			pobj:setCallSign(playerShipNamesForKiriya[ni])
-			table.remove(playerShipNamesForKiriya,ni)
-		end
-		pobj.shipScore = 10
-		pobj.maxCargo = 9
-	elseif tempPlayerType == "Striker" then
-		if #playerShipNamesForStriker > 0 then
-			ni = math.random(1,#playerShipNamesForStriker)
-			pobj:setCallSign(playerShipNamesForStriker[ni])
-			table.remove(playerShipNamesForStriker,ni)
-		end
-		pobj.shipScore = 8
-		pobj.maxCargo = 4
-		pobj:setJumpDrive(true)
-		pobj:setJumpDriveRange(3000,40000)
-	elseif tempPlayerType == "ZX-Lindworm" then
-		if #playerShipNamesForLindworm > 0 then
-			ni = math.random(1,#playerShipNamesForLindworm)
-			pobj:setCallSign(playerShipNamesForLindworm[ni])
-			table.remove(playerShipNamesForLindworm,ni)
-		end
-		pobj.shipScore = 8
-		pobj.maxCargo = 3
+		namePlayer(pobj,"Kiriya")
+	elseif tempPlayerType == "MP52 Hornet" then
+		namePlayer(pobj,"MP52Hornet")
 		pobj.autoCoolant = false
 		pobj:setWarpDrive(true)
-	elseif tempPlayerType == "Repulse" then
-		if #playerShipNamesForRepulse > 0 then
-			ni = math.random(1,#playerShipNamesForRepulse)
-			pobj:setCallSign(playerShipNamesForRepulse[ni])
-			table.remove(playerShipNamesForRepulse,ni)
-		end
-		pobj.shipScore = 14
-		pobj.maxCargo = 12
-	elseif tempPlayerType == "Ender" then
-		if #playerShipNamesForEnder > 0 then
-			ni = math.random(1,#playerShipNamesForEnder)
-			pobj:setCallSign(playerShipNamesForEnder[ni])
-			table.remove(playerShipNamesForEnder,ni)
-		end
-		pobj.shipScore = 100
-		pobj.maxCargo = 20
+	elseif tempPlayerType == "Maverick" then
+		namePlayer(pobj,"Maverick")
 	elseif tempPlayerType == "Nautilus" then
-		if #playerShipNamesForNautilus > 0 then
-			ni = math.random(1,#playerShipNamesForNautilus)
-			pobj:setCallSign(playerShipNamesForNautilus[ni])
-			table.remove(playerShipNamesForNautilus,ni)
-		end
-		pobj.shipScore = 12
-		pobj.maxCargo = 7
-	elseif tempPlayerType == "Hathcock" then
-		if #playerShipNamesForHathcock > 0 then
-			ni = math.random(1,#playerShipNamesForHathcock)
-			pobj:setCallSign(playerShipNamesForHathcock[ni])
-			table.remove(playerShipNamesForHathcock,ni)
-		end
-		pobj.shipScore = 30
-		pobj.maxCargo = 6
+		namePlayer(pobj,"Nautilus")
+		pobj.max_jump_range = 70000
+		pobj.min_jump_range = 5000
+		pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+		pobj:setJumpDriveCharge(pobj.max_jump_range)
+	elseif tempPlayerType == "Phobos M3P" then
+		namePlayer(pobj,"PhobosM3P")
+		pobj:setWarpDrive(true)
+		pobj:setWarpSpeed(900)
+	elseif tempPlayerType == "Piranha" then
+		namePlayer(pobj,"Piranha")
+	elseif tempPlayerType == "Player Cruiser" then
+		namePlayer(pobj,"Cruiser")
+		pobj.max_jump_range = 80000
+		pobj.min_jump_range = 5000
+		pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+		pobj:setJumpDriveCharge(pobj.max_jump_range)
+	elseif tempPlayerType == "Player Fighter" then
+		namePlayer(pobj,"Fighter")
+		pobj.autoCoolant = false
+		pobj:setJumpDrive(true)
+		pobj.max_jump_range = 40000
+		pobj.min_jump_range = 3000
+		pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+		pobj:setJumpDriveCharge(pobj.max_jump_range)
+	elseif tempPlayerType == "Player Missile Cr." then
+		namePlayer(pobj,"MissileCruiser")
+	elseif tempPlayerType == "Repulse" then
+		namePlayer(pobj,"Repulse")
+	elseif tempPlayerType == "Striker" then
+		namePlayer(pobj,"Striker")
+		pobj:setJumpDrive(true)
+		pobj.max_jump_range = 40000
+		pobj.min_jump_range = 3000
+		pobj:setJumpDriveRange(pobj.min_jump_range,pobj.max_jump_range)
+		pobj:setJumpDriveCharge(pobj.max_jump_range)
+	elseif tempPlayerType == "ZX-Lindworm" then
+		namePlayer(pobj,"Lindworm")
+		pobj.autoCoolant = false
+		pobj:setWarpDrive(true)
+		pobj:setWarpSpeed(950)
 	else
-		if #playerShipNamesForLeftovers > 0 then
-			ni = math.random(1,#playerShipNamesForLeftovers)
-			pobj:setCallSign(playerShipNamesForLeftovers[ni])
-			table.remove(playerShipNamesForLeftovers,ni)
-		end
+		namePlayer(pobj,"Leftovers")
 		pobj.shipScore = 24
 		pobj.maxCargo = 5
-		pobj:setWarpDrive(true)
+		if not pobj:hasSystem("warp") and not pobj:hasSystem("jumpdrive") then
+			pobj:setWarpDrive(true)
+		end
 	end
 	if dronesAreAllowed then
 		pobj.deploy_drone = function(pidx,droneNumber)
@@ -1480,14 +2105,70 @@ function setPlayer(pobj,playerIndex)
 	pobj.control_code = stem .. branch
 	pobj:setControlCode(stem .. branch)
 	print("Control Code for " .. pobj:getCallSign(), pobj.control_code)
-	-- Kilted Klingon mods:
-	pobj:setMaxScanProbeCount(revisedPlayerShipProbeCount)
-	pobj:setScanProbeCount(revisedPlayerShipProbeCount)
+	pobj.tagged_count = 0
+	pobj.pick_up_count = 0
+	pobj.drop_count = 0
+	pobj:setMaxScanProbeCount(player_ship_stats[tempPlayerType].probes)
+	pobj:setScanProbeCount(player_ship_stats[tempPlayerType].probes)
+	pobj:onDestroyed(function(self)
+		self.point_of_destruction_x, self.point_of_destruction_y = self:getPosition()
+		if self.flag then			--destroyed ship carrying flag
+			self.flag = false		--drop flag
+			self.drop_count = self.drop_count + 1
+			local my_faction = self:getFaction()
+			local px, py = self:getPosition()
+			if my_faction == "Kraylor" then
+				p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
+				table.insert(human_flags,p1Flag)
+				p1Flag:setDescriptions("Flag","Human Navy Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+				if difficulty < 2 then
+					p1Flag:setScannedByFaction("Kraylor",true)
+					if difficulty < 1 then
+						globalMessage(string.format("%s dropped Human Navy flag",self:getCallSign()))
+					else
+						globalMessage("Human Navy flag dropped")
+					end
+				else
+					if hard_flag_reveal then
+						globalMessage("Flag dropped")
+					end
+				end
+			elseif my_faction == "Human Navy" then
+				p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
+				table.insert(kraylor_flags,p2Flag)
+				p2Flag:setDescriptions("Flag","Kraylor Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
+				if difficulty < 2 then
+					p2Flag:setScannedByFaction("Human Navy",true)
+					if difficulty < 1 then
+						globalMessage(string.format("%s dropped Kraylor flag",p:getCallSign()))
+					else
+						globalMessage("Kraylor flag dropped")
+					end
+				else
+					if hard_flag_reveal then
+						globalMessage("Flag dropped")
+					end
+				end
+			end
+		end
+	end)
 end
 
 -----------------
 --	Utilities  --
 -----------------
+function tableRemoveRandom(array)
+--	Remove random element from array and return it.
+	-- Returns nil if the array is empty,
+	-- analogous to `table.remove`.
+    local array_item_count = #array
+    if array_item_count == 0 then
+        return nil
+    end
+    local selected_item = math.random(array_item_count)
+    array[selected_item], array[array_item_count] = array[array_item_count], array[selected_item]
+    return table.remove(array)
+end
 function placeRandomAroundPointList(object_type, amount, dist_min, dist_max, x0, y0)
 	local pointList = {}
     for n=1,amount do
@@ -1542,8 +2223,7 @@ end
 --	Mortal repair crew
 function healthCheck(delta)
 	if healthCheckTimer < 0 then
-		healthCheckCount = healthCheckCount + 1
-		for pidx=1,12 do
+		for pidx=1,32 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				if p:getRepairCrewCount() > 0 then
@@ -1561,7 +2241,7 @@ function healthCheck(delta)
 					p.prevManeuver = p:getSystemHealth("maneuver")
 					fatalityChance = fatalityChance + (p.prevImpulse - p:getSystemHealth("impulse"))
 					p.prevImpulse = p:getSystemHealth("impulse")
-					if psb[p:getTypeName()] ~= nil then
+					if pobj:getBeamWeaponRange(0) > 0 then
 						if p.healthyBeam == nil then
 							p.healthyBeam = 1.0
 							p.prevBeam = 1.0
@@ -1631,6 +2311,51 @@ function crewFate(p, fatalityChance)
 		end
 	end
 end
+function resetPreviousSystemHealth(p)
+	string.format("")	--may need global context
+	if p == nil then
+		p = comms_source
+	end
+	local currentShield = 0
+	if p:getShieldCount() > 1 then
+		currentShield = (p:getSystemHealth("frontshield") + p:getSystemHealth("rearshield"))/2
+	else
+		currentShield = p:getSystemHealth("frontshield")
+	end
+	p.prevShield = currentShield
+	p.prevReactor = p:getSystemHealth("reactor")
+	p.prevManeuver = p:getSystemHealth("maneuver")
+	p.prevImpulse = p:getSystemHealth("impulse")
+	if p:getBeamWeaponRange(0) > 0 then
+		if p.healthyBeam == nil then
+			p.healthyBeam = 1.0
+			p.prevBeam = 1.0
+		end
+		p.prevBeam = p:getSystemHealth("beamweapons")
+	end
+	if p:getWeaponTubeCount() > 0 then
+		if p.healthyMissile == nil then
+			p.healthyMissile = 1.0
+			p.prevMissile = 1.0
+		end
+		p.prevMissile = p:getSystemHealth("missilesystem")
+	end
+	if p:hasWarpDrive() then
+		if p.healthyWarp == nil then
+			p.healthyWarp = 1.0
+			p.prevWarp = 1.0
+		end
+		p.prevWarp = p:getSystemHealth("warp")
+	end
+	if p:hasJumpDrive() then
+		if p.healthyJump == nil then
+			p.healthyJump = 1.0
+			p.prevJump = 1.0
+		end
+		p.prevJump = p:getSystemHealth("jumpdrive")
+	end
+end
+
 --	Marauding enemies
 function marauderWaves(delta)
 	waveTimer = waveTimer - delta
@@ -1770,7 +2495,7 @@ end
 function playerPower()
 	--evaluate the players for enemy strength and size spawning purposes
 	playerShipScore = 0
-	for p5idx=1,12 do
+	for p5idx=1,32 do
 		p5obj = getPlayerShip(p5idx)
 		if p5obj ~= nil and p5obj:isValid() then
 			if p5obj.shipScore == nil then
@@ -2920,6 +3645,955 @@ function moveJustPassingBy(delta)
 		end
 
 end	--moveJustPassingBy
+--	Down The Rabbit Hole Terrain  --
+function downTheRabbitHole()
+	-- This terrain is a collection of interconnected worm holes that connect the interiors of the opposing sides; in effect, it creates a "multi-front" because now the opposing team can come from the 
+	-- rear as well as the front; this will no doubt cause a great deal of consternation... ha
+
+	-- player tagged relocation override is located at the end of this function; it's at the end because the values depend on "terrain" variables calculated in the middle of the function
+
+	dynamicTerrain = moveDownTheRabbitHole   
+	show_nebula = true
+	
+	-- WORM HOLES 
+		worm_hole_list = {}
+		local worm_hole_coordinates = {
+		--	human side
+			{x = -180057	,y =	462		,target_x =	175945	,target_y =	-56		},
+			{x = -129765	,y =	49780	,target_x =	126325	,target_y =	-47942	},
+			{x = -50428		,y =	29117	,target_x =	46238	,target_y =	-28454	},
+			{x = -51402		,y =	-29753	,target_x =	45106	,target_y =	26256	},
+			{x = -130545	,y =	-50220	,target_x =	124937	,target_y =	46904	},
+		--	kraylor side
+			{x = 48792		,y =	28337	,target_x =	-48201	,target_y =	-27799	},
+			{x = 48403		,y =	-30337	,target_x =	-47101	,target_y =	26969	},
+			{x = 130665		,y =	-49904	,target_x =	-125248	,target_y =	47945	},
+			{x = 128938		,y =	48560	,target_x =	-126058	,target_y =	-48404	},
+			{x = 179994		,y =	0		,target_x =	-176025	,target_y =	-172	},
+		}
+		for i=1,#worm_hole_coordinates do
+			local worm = WormHole():setPosition(worm_hole_coordinates[i].x,worm_hole_coordinates[i].y)
+			worm.final_target_x = worm_hole_coordinates[i].target_x
+			worm.final_target_y = worm_hole_coordinates[i].target_y
+			local vx, vy = vectorFromAngle(random(0,360),3000)
+			worm:setTargetPosition(worm_hole_coordinates[i].x + vx,worm_hole_coordinates[i].y + vy)
+			worm:onTeleportation(function(self,teleportee)
+				local teleportee_type = teleportee.typeName
+				if gameTimeLimit < (maxGameTime - hideFlagTime - 1) then
+					if teleportee_type == "PlayerSpaceship" then
+						if teleportee:hasSystem("warp") then
+							teleportee:setSystemHealth("warp",teleportee:getSystemHealth("warp")*.9)
+						end
+						if teleportee:hasSystem("jumpdrive") then
+							teleportee:setSystemHealth("jumpdrive",teleportee:getSystemHealth("jumpdrive")*.9)
+						end
+					end
+				else
+					local wx, wy = self:getPosition()
+					local vx, vy = vectorFromAngle(random(0,360),3000)
+					self:setTargetPosition(wx + vx, wy + vy)
+					if teleportee_type == "PlayerSpaceship" then
+						if teleportee:hasPlayerAtPosition("Helms") then
+							teleportee.worm_hole_target_message = "worm_hole_target_message"
+							teleportee:addCustomMessage("Helms",teleportee.worm_hole_target_message,"Worm hole teleportation destination will change after the flag hiding time expires")
+						end
+						if teleportee:hasPlayerAtPosition("Tactical") then
+							teleportee.worm_hole_target_message_tac = "worm_hole_target_message_tac"
+							teleportee:addCustomMessage("Tactical",teleportee.worm_hole_target_message_tac,"Worm hole teleportation destination will change after the flag hiding time expires")
+						end
+					end
+				end
+			end)
+			table.insert(worm_hole_list,worm)
+			table.insert(terrain_objects,worm)
+		end
+
+	-- PLANETS/RING OF ASTEROIDS WITH MINES 
+		-- applies to both sides
+			main_planet_center_x_distance = 100000
+			main_planet_center_y_distance = 0
+			main_planet_radius = 10000
+			
+			number_of_asteroids_in_ring = 100
+			asteroid_min_orbit_speed = 360/(60 * 240) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 240 seconds 
+			asteroid_max_orbit_speed = 360/(60 * 150) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 150 seconds
+			
+			number_of_mines_in_ring = 20
+			mine_min_orbit_speed = 360/(60 * 240) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 240 seconds
+			mine_max_orbit_speed = 360/(60 * 150) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 150 seconds
+
+		-- human side
+			human_planet_center_x = -1 * main_planet_center_x_distance
+			human_planet_center_y = main_planet_center_y_distance
+			human_planet_radius = main_planet_radius
+			human_planet_gas_giant = Planet()
+				:setPosition(human_planet_center_x,human_planet_center_y)
+				:setPlanetRadius(human_planet_radius)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/gas-1.png")
+				:setPlanetAtmosphereColor(0,0.8,0.2)
+				:setAxialRotationTime(120)
+			table.insert(terrain_objects,human_planet_gas_giant)
+				
+			human_moon_1_radius = 1000
+			human_moon_1_orbit_distance = 5000
+			human_moon_1_orbit_time = 300  -- measured in near-real-time seconds I believe
+			human_moon_1_center_x = human_planet_center_x
+			human_moon_1_center_y = human_planet_center_y + human_planet_radius + human_moon_1_orbit_distance + human_moon_1_radius
+			human_moon_1 = Planet()
+				:setPosition(human_moon_1_center_x,human_moon_1_center_y)
+				:setPlanetRadius(human_moon_1_radius)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/moon-1.png")
+				:setPlanetAtmosphereColor(0.2,0.2,0.2)
+				:setAxialRotationTime(120)
+				:setOrbit(human_planet_gas_giant, human_moon_1_orbit_time)
+			table.insert(terrain_objects,human_moon_1)			
+
+			human_moon_2_radius = 2500
+			human_moon_2_orbit_distance = human_moon_1_orbit_distance + 12500
+			human_moon_2_orbit_time = 900  -- measured in near-real-time seconds I believe
+			human_moon_2_center_x = human_planet_center_x
+			human_moon_2_center_y = human_planet_center_y + human_planet_radius + human_moon_2_orbit_distance + human_moon_2_radius
+			human_moon_2 = Planet()
+				:setPosition(human_moon_2_center_x,human_moon_2_center_y)
+				:setPlanetRadius(human_moon_2_radius)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/planet-1.png")
+				:setPlanetCloudTexture("planets/clouds-1.png")
+				:setPlanetAtmosphereTexture("planets/atmosphere.png")
+				:setPlanetAtmosphereColor(0.2,0.2,1.0)
+				:setAxialRotationTime(120)
+				:setOrbit(human_planet_gas_giant, human_moon_2_orbit_time)
+			table.insert(terrain_objects,human_moon_2)			
+				
+			human_asteroid_ring_min_radius = human_moon_1_center_y + human_moon_1_radius + 1000
+			human_asteroid_ring_max_radius = human_moon_2_center_y - human_moon_2_radius - 1000
+			human_asteroid_ring = {}
+		
+			for i=1,number_of_asteroids_in_ring do
+				human_asteroid_ring[i] = Asteroid()
+				human_asteroid_ring[i].angle = math.random(1, 360)  -- the current angle of the asteroid in relation to the planet center
+				human_asteroid_ring[i].radius = math.random(human_asteroid_ring_min_radius, human_asteroid_ring_max_radius) -- the radius distance of the asteroid from the planet center, randomly generated in a band range
+				human_asteroid_ring[i].speed = random(asteroid_min_orbit_speed, asteroid_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
+				setCirclePos(human_asteroid_ring[i], 
+					human_planet_center_x, 
+					human_planet_center_y, 
+					human_asteroid_ring[i].angle, 
+					human_asteroid_ring[i].radius)
+				table.insert(terrain_objects,human_asteroid_ring[i])
+			end
+
+			human_mine_ring = {}  -- these are actually interspersed in the ring of asteroids, but they have their own table for update purposes
+			
+			for i=1,number_of_mines_in_ring do
+				human_mine_ring[i] = Mine()
+				human_mine_ring[i].angle = math.random(1, 360)  -- the current angle of the mine in relation to the planet center
+				human_mine_ring[i].radius = math.random(human_asteroid_ring_min_radius, human_asteroid_ring_max_radius) -- the radius distance of the mine from the planet center, randomly generated in a band range
+				human_mine_ring[i].speed = random(mine_min_orbit_speed, mine_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
+				setCirclePos(human_mine_ring[i], 
+					human_planet_center_x, 
+					human_planet_center_y, 
+					human_mine_ring[i].angle, 
+					human_mine_ring[i].radius)
+				table.insert(terrain_objects,human_mine_ring[i])
+			end
+
+		-- kraylor side
+			kraylor_planet_center_x = main_planet_center_x_distance
+			kraylor_planet_center_y = main_planet_center_y_distance
+			kraylor_planet_radius = main_planet_radius
+			kraylor_planet_molten_giant = Planet()
+				:setPosition(kraylor_planet_center_x,kraylor_planet_center_y)
+				:setPlanetRadius(kraylor_planet_radius)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/planet-2.png")
+				:setPlanetAtmosphereColor(0.8,0,0)
+				:setAxialRotationTime(120)
+			table.insert(terrain_objects,kraylor_planet_molten_giant)
+				
+			kraylor_moon_1_radius = 1000
+			kraylor_moon_1_orbit_distance = 5000
+			kraylor_moon_1_orbit_time = 300  -- measured in near-real-time seconds I believe
+			kraylor_moon_1_center_x = kraylor_planet_center_x
+			kraylor_moon_1_center_y = kraylor_planet_center_y + kraylor_planet_radius + kraylor_moon_1_orbit_distance + kraylor_moon_1_radius
+			kraylor_moon_1 = Planet()
+				:setPosition(kraylor_moon_1_center_x,kraylor_moon_1_center_y)
+				:setPlanetRadius(kraylor_moon_1_radius)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/moon-1.png")
+				:setPlanetAtmosphereColor(0.2,0.2,0.2)
+				:setAxialRotationTime(120)
+				:setOrbit(kraylor_planet_molten_giant, kraylor_moon_1_orbit_time)
+			table.insert(terrain_objects,kraylor_moon_1)
+
+			kraylor_moon_2_radius = 2500
+			kraylor_moon_2_orbit_distance = kraylor_moon_1_orbit_distance + 12500
+			kraylor_moon_2_orbit_time = 900  -- measured in near-real-time seconds I believe
+			kraylor_moon_2_center_x = kraylor_planet_center_x
+			kraylor_moon_2_center_y = kraylor_planet_center_y + kraylor_planet_radius + kraylor_moon_2_orbit_distance + kraylor_moon_2_radius
+			kraylor_moon_2 = Planet()
+				:setPosition(kraylor_moon_2_center_x,kraylor_moon_2_center_y)
+				:setPlanetRadius(kraylor_moon_2_radius)
+				:setDistanceFromMovementPlane(0)
+				:setPlanetSurfaceTexture("planets/planet-1.png")
+				:setPlanetCloudTexture("planets/clouds-1.png")
+				:setPlanetAtmosphereTexture("planets/atmosphere.png")
+				:setPlanetAtmosphereColor(0.2,0.2,1.0)
+				:setAxialRotationTime(120)
+				:setOrbit(kraylor_planet_molten_giant, kraylor_moon_2_orbit_time)
+			table.insert(terrain_objects,kraylor_moon_2)
+				
+			kraylor_asteroid_ring_min_radius = kraylor_moon_1_center_y + kraylor_moon_1_radius + 1000
+			kraylor_asteroid_ring_max_radius = kraylor_moon_2_center_y - kraylor_moon_2_radius - 1000
+			kraylor_asteroid_ring = {}
+		
+			for i=1,number_of_asteroids_in_ring do
+				kraylor_asteroid_ring[i] = Asteroid()
+				kraylor_asteroid_ring[i].angle = math.random(1, 360)  -- the current angle of the asteroid in relation to the planet center
+				kraylor_asteroid_ring[i].radius = math.random(kraylor_asteroid_ring_min_radius, kraylor_asteroid_ring_max_radius) -- the radius distance of the asteroid from the planet center, randomly generated in a band range
+				kraylor_asteroid_ring[i].speed = random(asteroid_min_orbit_speed, asteroid_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
+				setCirclePos(kraylor_asteroid_ring[i], 
+					kraylor_planet_center_x, 
+					kraylor_planet_center_y, 
+					kraylor_asteroid_ring[i].angle, 
+					kraylor_asteroid_ring[i].radius)
+				table.insert(terrain_objects,kraylor_asteroid_ring[i])
+			end
+
+			kraylor_mine_ring = {}  -- these are actually interspersed in the ring of asteroids, but they have their own table for update purposes
+			
+			for i=1,number_of_mines_in_ring do
+				kraylor_mine_ring[i] = Mine()
+				kraylor_mine_ring[i].angle = math.random(1, 360)  -- the current angle of the mine in relation to the planet center
+				kraylor_mine_ring[i].radius = math.random(kraylor_asteroid_ring_min_radius, kraylor_asteroid_ring_max_radius) -- the radius distance of the mine from the planet center, randomly generated in a band range
+				kraylor_mine_ring[i].speed = random(mine_min_orbit_speed, mine_max_orbit_speed) -- the orbital speed of the asteroid, expressed as a delta of angle change per update cycle, randomly generated
+				setCirclePos(kraylor_mine_ring[i], 
+					kraylor_planet_center_x, 
+					kraylor_planet_center_y, 
+					kraylor_mine_ring[i].angle, 
+					kraylor_mine_ring[i].radius)
+				table.insert(terrain_objects,kraylor_mine_ring[i])
+			end
+
+	-- STATIONS
+		-- human side
+			human_orbital_station_1 = SpaceStation()
+				:setTemplate("Small Station")
+				:setFaction("Human Navy")
+				:setCallSign("DS845")
+			table.insert(terrain_objects,human_orbital_station_1)
+			human_orbital_station_1.angle = 270 
+			human_orbital_station_1.speed = 360/(60 * (human_moon_1_orbit_time + (human_moon_1_orbit_time * 0.05))) -- this is supposed to equate to the same time it takes for human moon 1 to orbit the planet... maybe... 
+			human_orbital_station_1.distance = human_moon_1_center_y
+			setCirclePos(human_orbital_station_1, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_1.angle, 
+				human_orbital_station_1.distance)
+
+			human_orbital_station_2 = SpaceStation()
+				:setTemplate("Huge Station")
+				:setFaction("Human Navy")
+				:setCallSign("DS10246")
+			table.insert(terrain_objects,human_orbital_station_2)
+			human_orbital_station_2.angle = 0 
+			human_orbital_station_2.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			human_orbital_station_2.distance = human_moon_2_center_y + human_moon_2_radius + 10000
+			setCirclePos(human_orbital_station_2, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_2.angle, 
+				human_orbital_station_2.distance)
+
+			human_orbital_station_3 = SpaceStation()
+				:setTemplate("Medium Station")
+				:setFaction("Human Navy")
+				:setCallSign("DS1038")
+			table.insert(terrain_objects,human_orbital_station_3)
+			human_orbital_station_3.angle = 180 
+			human_orbital_station_3.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			human_orbital_station_3.distance = human_moon_2_center_y + human_moon_2_radius + 10000
+			setCirclePos(human_orbital_station_3, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_3.angle, 
+				human_orbital_station_3.distance)
+				
+			human_orbital_station_4 = SpaceStation()
+				:setTemplate("Medium Station")
+				:setFaction("Independent")
+				:setCallSign("DS2639")
+			table.insert(terrain_objects,human_orbital_station_4)
+			human_orbital_station_4.angle = 90 
+			human_orbital_station_4.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			human_orbital_station_4.distance = human_moon_2_center_y + human_moon_2_radius + 10000
+			setCirclePos(human_orbital_station_4, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_4.angle, 
+				human_orbital_station_4.distance)
+				
+			human_orbital_station_5 = SpaceStation()
+				:setTemplate("Medium Station")
+				:setFaction("Independent")
+				:setCallSign("DS317")
+			table.insert(terrain_objects,human_orbital_station_5)
+			human_orbital_station_5.angle = 270 
+			human_orbital_station_5.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			human_orbital_station_5.distance = human_moon_2_center_y + human_moon_2_radius + 10000
+			setCirclePos(human_orbital_station_5, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_5.angle, 
+				human_orbital_station_5.distance)
+			
+			-- non-moving stations by the forward and middle wormholes
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS877"):setPosition(-135096, -50568))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS875"):setPosition(-54873, -33476))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS876"):setPosition(-54445, 32967))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS878"):setPosition(-134989, 49845))
+			-- non-moving station; forward center
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS879"):setPosition(-32800, 101))
+			-- non-moving stations; middle distance to the flanks
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCallSign("DS890"):setPosition(-73903, -50010))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCallSign("DS889"):setPosition(-73250, 49216))
+			-- non-moving stations; forward near dividing line
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS886"):setPosition(-20112, 50261))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS885"):setPosition(-20112, 30024))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS884"):setPosition(-19982, -50010))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS883"):setPosition(-20112, -30034))
+			-- non-moving stations; to the rear
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS888"):setPosition(-167515, 29240))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS887"):setPosition(-167123, -28728))
+
+		-- kraylor side
+			kraylor_orbital_station_1 = SpaceStation()
+				:setTemplate("Small Station")
+				:setFaction("Kraylor")
+				:setCallSign("DS734")
+			table.insert(terrain_objects,kraylor_orbital_station_1)
+			kraylor_orbital_station_1.angle = 270 
+			kraylor_orbital_station_1.speed = 360/(60 * (kraylor_moon_1_orbit_time + (kraylor_moon_1_orbit_time * 0.05))) -- this is supposed to equate to the same time it takes for kraylor moon 1 to orbit the planet... maybe... 
+			kraylor_orbital_station_1.distance = kraylor_moon_1_center_y
+			setCirclePos(kraylor_orbital_station_1, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_1.angle, 
+				kraylor_orbital_station_1.distance)
+
+			kraylor_orbital_station_2 = SpaceStation()
+				:setTemplate("Huge Station")
+				:setFaction("Kraylor")
+				:setCallSign("DS9135")
+			table.insert(terrain_objects,kraylor_orbital_station_2)
+			kraylor_orbital_station_2.angle = 180 
+			kraylor_orbital_station_2.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			kraylor_orbital_station_2.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
+			setCirclePos(kraylor_orbital_station_2, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_2.angle, 
+				kraylor_orbital_station_2.distance)
+
+			kraylor_orbital_station_3 = SpaceStation()
+				:setTemplate("Medium Station")
+				:setFaction("Kraylor")
+				:setCallSign("DS927")
+			table.insert(terrain_objects,kraylor_orbital_station_3)
+			kraylor_orbital_station_3.angle = 0 
+			kraylor_orbital_station_3.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			kraylor_orbital_station_3.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
+			setCirclePos(kraylor_orbital_station_3, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_3.angle, 
+				kraylor_orbital_station_3.distance)
+				
+			kraylor_orbital_station_4 = SpaceStation()
+				:setTemplate("Medium Station")
+				:setFaction("Independent")
+				:setCallSign("DS1528")
+			table.insert(terrain_objects,kraylor_orbital_station_4)
+			kraylor_orbital_station_4.angle = 90 
+			kraylor_orbital_station_4.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			kraylor_orbital_station_4.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
+			setCirclePos(kraylor_orbital_station_4, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_4.angle, 
+				kraylor_orbital_station_4.distance)
+				
+			kraylor_orbital_station_5 = SpaceStation()
+				:setTemplate("Medium Station")
+				:setFaction("Independent")
+				:setCallSign("DS206")
+			table.insert(terrain_objects,kraylor_orbital_station_5)
+			kraylor_orbital_station_5.angle = 270 
+			kraylor_orbital_station_5.speed = 360/(60 * 1800) -- this equates to the number of degrees traversed for each update call if one complete orbit takes 1800 seconds
+			kraylor_orbital_station_5.distance = kraylor_moon_2_center_y + kraylor_moon_2_radius + 10000
+			setCirclePos(kraylor_orbital_station_5, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_5.angle, 
+				kraylor_orbital_station_5.distance)
+			
+			-- non-moving stations by the forward and middle wormholes
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor"):setCallSign("DS766"):setPosition(135096, -50568))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor"):setCallSign("DS764"):setPosition(54873, -33476))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor"):setCallSign("DS765"):setPosition(54445, 32967))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor"):setCallSign("DS767"):setPosition(134989, 49845))
+			-- non-moving station; forward center
+				table.insert(terrain_objects,SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor"):setCallSign("DS768"):setPosition(32800, 101))
+			-- non-moving stations; middle distance to the flanks
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setCallSign("DS789"):setPosition(73903, -50010))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setCallSign("DS778"):setPosition(73250, 49216))
+			-- non-moving stations; forward near dividing line
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS775"):setPosition(20112, 50261))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS774"):setPosition(20112, 30024))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS773"):setPosition(19982, -50010))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS772"):setPosition(20112, -30034))
+			-- non-moving stations; to the rear
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS777"):setPosition(167515, 29240))
+				table.insert(terrain_objects,SpaceStation():setTemplate("Large Station"):setFaction("Independent"):setCallSign("DS776"):setPosition(167123, -28728))
+
+	-- NEBULA AND MINES IN THE NEBULA
+		if show_nebula then
+			-- human side 
+				table.insert(terrain_objects,Nebula():setPosition(-25950, 15065))
+				table.insert(terrain_objects,Nebula():setPosition(-17927, 3032))
+				table.insert(terrain_objects,Nebula():setPosition(-18114, -4244))
+				table.insert(terrain_objects,Nebula():setPosition(-25390, -18424))
+				table.insert(terrain_objects,Mine():setPosition(-35073, -35990))
+				table.insert(terrain_objects,Mine():setPosition(-36480, -37598))
+				table.insert(terrain_objects,Mine():setPosition(-37887, -41417))
+				table.insert(terrain_objects,Mine():setPosition(-50551, -65738))
+				table.insert(terrain_objects,Mine():setPosition(-49144, -62723))
+				table.insert(terrain_objects,Mine():setPosition(-29445, -72573))
+				table.insert(terrain_objects,Mine():setPosition(-33666, -66944))
+				table.insert(terrain_objects,Mine():setPosition(-57586, -73176))
+				table.insert(terrain_objects,Mine():setPosition(-41505, -50864))
+				table.insert(terrain_objects,Mine():setPosition(-38088, -46040))
+				table.insert(terrain_objects,Mine():setPosition(-38490, -62321))
+				table.insert(terrain_objects,Mine():setPosition(-44923, -55688))
+				table.insert(terrain_objects,Mine():setPosition(-52762, -68753))
+				table.insert(terrain_objects,Mine():setPosition(-55174, -73779))
+				table.insert(terrain_objects,Nebula():setPosition(-48679, -59598))
+				table.insert(terrain_objects,Nebula():setPosition(-52498, -66834))
+				table.insert(terrain_objects,Nebula():setPosition(-54508, -73668))
+				table.insert(terrain_objects,Nebula():setPosition(-66970, -78090))
+				table.insert(terrain_objects,Nebula():setPosition(-71393, -31658))
+				table.insert(terrain_objects,Nebula():setPosition(-89483, -65427))
+				table.insert(terrain_objects,Nebula():setPosition(-36418, -65427))
+				table.insert(terrain_objects,Nebula():setPosition(-39835, -59598))
+				table.insert(terrain_objects,Nebula():setPosition(-34006, -34472))
+				table.insert(terrain_objects,Nebula():setPosition(-38830, -42714))
+				table.insert(terrain_objects,Nebula():setPosition(-73202, -60402))
+				table.insert(terrain_objects,Nebula():setPosition(-42850, -51357))
+				table.insert(terrain_objects,Nebula():setPosition(-100538, -82915))
+				table.insert(terrain_objects,Nebula():setPosition(-83252, -76482))
+				table.insert(terrain_objects,Mine():setPosition(-104822, -56090))
+				table.insert(terrain_objects,Nebula():setPosition(-135312, -79900))
+				table.insert(terrain_objects,Nebula():setPosition(-122448, -76884))
+				table.insert(terrain_objects,Mine():setPosition(-164659, -17990))
+				table.insert(terrain_objects,Mine():setPosition(-167875, -15578))
+				table.insert(terrain_objects,Mine():setPosition(-191393, -15377))
+				table.insert(terrain_objects,Nebula():setPosition(-193202, -61407))
+				table.insert(terrain_objects,Mine():setPosition(-160237, -5528))
+				table.insert(terrain_objects,Mine():setPosition(-162448, -9950))
+				table.insert(terrain_objects,Mine():setPosition(-102008, -56492))
+				table.insert(terrain_objects,Nebula():setPosition(-100337, -55377))
+				table.insert(terrain_objects,Nebula():setPosition(-106367, -56181))
+				table.insert(terrain_objects,Mine():setPosition(-160036, -41910))
+				table.insert(terrain_objects,Mine():setPosition(-178327, -20402))
+				table.insert(terrain_objects,Mine():setPosition(-185764, -26030))
+				table.insert(terrain_objects,Mine():setPosition(-155011, -27236))
+				table.insert(terrain_objects,Mine():setPosition(-184558, -40503))
+				table.insert(terrain_objects,Nebula():setPosition(-115011, -67236))
+				table.insert(terrain_objects,Mine():setPosition(-159835, 12764))
+				table.insert(terrain_objects,Mine():setPosition(-155413, 11759))
+				table.insert(terrain_objects,Mine():setPosition(-156217, 27437))
+				table.insert(terrain_objects,Nebula():setPosition(-164659, -65628))
+				table.insert(terrain_objects,Nebula():setPosition(-164659, -52161))
+				table.insert(terrain_objects,Mine():setPosition(-154609, -12362))
+				table.insert(terrain_objects,Nebula():setPosition(-184960, -39698))
+				table.insert(terrain_objects,Nebula():setPosition(-193202, -40302))
+				table.insert(terrain_objects,Nebula():setPosition(-161242, -41910))
+				table.insert(terrain_objects,Nebula():setPosition(-184960, -70653))
+				table.insert(terrain_objects,Mine():setPosition(-150790, 15578))
+				table.insert(terrain_objects,Mine():setPosition(-174508, 29648))
+				table.insert(terrain_objects,Mine():setPosition(-167674, 17588))
+				table.insert(terrain_objects,Nebula():setPosition(-186166, -48744))
+				table.insert(terrain_objects,Nebula():setPosition(-187975, -55176))
+				table.insert(terrain_objects,Nebula():setPosition(-170890, -78090))
+				table.insert(terrain_objects,Nebula():setPosition(-173704, -61005))
+				table.insert(terrain_objects,Nebula():setPosition(-25161, -79497))
+				table.insert(terrain_objects,Nebula():setPosition(-31795, -72261))
+				table.insert(terrain_objects,Mine():setPosition(-42108, 51649))
+				table.insert(terrain_objects,Mine():setPosition(-42510, 48030))
+				table.insert(terrain_objects,Nebula():setPosition(-41443, 41106))
+				table.insert(terrain_objects,Nebula():setPosition(-69583, 30854))
+				table.insert(terrain_objects,Nebula():setPosition(-73001, 56181))
+				table.insert(terrain_objects,Mine():setPosition(-36681, 55066))
+				table.insert(terrain_objects,Nebula():setPosition(-36217, 34070))
+				table.insert(terrain_objects,Mine():setPosition(-96179, 56272))
+				table.insert(terrain_objects,Nebula():setPosition(-94508, 57186))
+				table.insert(terrain_objects,Nebula():setPosition(-98930, 52563))
+				table.insert(terrain_objects,Mine():setPosition(-34872, 57679))
+				table.insert(terrain_objects,Nebula():setPosition(-33805, 60402))
+				table.insert(terrain_objects,Mine():setPosition(-46732, 55669))
+				table.insert(terrain_objects,Nebula():setPosition(-38227, 53166))
+				table.insert(terrain_objects,Mine():setPosition(-98993, 53860))
+				table.insert(terrain_objects,Mine():setPosition(-99998, 56674))
+				table.insert(terrain_objects,Nebula():setPosition(-100940, 81910))
+				table.insert(terrain_objects,Nebula():setPosition(-63955, 69447))
+				table.insert(terrain_objects,Nebula():setPosition(-70991, 74673))
+				table.insert(terrain_objects,Nebula():setPosition(-84860, 73668))
+				table.insert(terrain_objects,Nebula():setPosition(-87875, 65628))
+				table.insert(terrain_objects,Nebula():setPosition(-44056, 52764))
+				table.insert(terrain_objects,Nebula():setPosition(-43654, 48543))
+				table.insert(terrain_objects,Mine():setPosition(-51355, 63709))
+				table.insert(terrain_objects,Nebula():setPosition(-51091, 62814))
+				table.insert(terrain_objects,Mine():setPosition(-21003, 70945))
+				table.insert(terrain_objects,Nebula():setPosition(-19935, 73065))
+				table.insert(terrain_objects,Mine():setPosition(-31656, 62905))
+				table.insert(terrain_objects,Mine():setPosition(-28440, 67729))
+				table.insert(terrain_objects,Nebula():setPosition(-27171, 66432))
+				table.insert(terrain_objects,Mine():setPosition(-195212, -8342))
+				table.insert(terrain_objects,Mine():setPosition(-193604, -31055))
+				table.insert(terrain_objects,Nebula():setPosition(-213905, -49749))
+				table.insert(terrain_objects,Mine():setPosition(-41304, 43809))
+				table.insert(terrain_objects,Mine():setPosition(-39093, 40593))
+				table.insert(terrain_objects,Mine():setPosition(-37887, 35367))
+				table.insert(terrain_objects,Nebula():setPosition(-202448, 2111))
+				table.insert(terrain_objects,Nebula():setPosition(-212498, -704))
+				table.insert(terrain_objects,Nebula():setPosition(-205262, -13166))
+				table.insert(terrain_objects,Nebula():setPosition(-210689, -16181))
+				table.insert(terrain_objects,Mine():setPosition(-158227, 36482))
+				table.insert(terrain_objects,Mine():setPosition(-154207, 37889))
+				table.insert(terrain_objects,Mine():setPosition(-179533, 37487))
+				table.insert(terrain_objects,Nebula():setPosition(-209684, -27035))
+				table.insert(terrain_objects,Nebula():setPosition(-206468, -42111))
+				table.insert(terrain_objects,Mine():setPosition(-165664, 40101))
+				table.insert(terrain_objects,Mine():setPosition(-195413, 15176))
+				table.insert(terrain_objects,Mine():setPosition(-199835, 7337))
+				table.insert(terrain_objects,Mine():setPosition(-193403, -2312))
+				table.insert(terrain_objects,Mine():setPosition(-202247, 33467))
+				table.insert(terrain_objects,Mine():setPosition(-197423, 36683))
+				table.insert(terrain_objects,Mine():setPosition(-196619, 21809))
+				table.insert(terrain_objects,Nebula():setPosition(-209282, 26633))
+				table.insert(terrain_objects,Nebula():setPosition(-205865, 20804))
+				table.insert(terrain_objects,Nebula():setPosition(-206669, 12764))
+				table.insert(terrain_objects,Nebula():setPosition(-204056, 47136))
+				table.insert(terrain_objects,Nebula():setPosition(-212297, 46332))
+				table.insert(terrain_objects,Nebula():setPosition(-206468, 33668))
+				table.insert(terrain_objects,Nebula():setPosition(-214709, 35276))
+				table.insert(terrain_objects,Mine():setPosition(-205061, 21608))
+				table.insert(terrain_objects,Nebula():setPosition(-214709, 12965))
+				table.insert(terrain_objects,Nebula():setPosition(-176518, 46131))
+				table.insert(terrain_objects,Nebula():setPosition(-178930, 49146))
+				table.insert(terrain_objects,Nebula():setPosition(-154207, 64623))
+				table.insert(terrain_objects,Nebula():setPosition(-167272, 65226))
+				table.insert(terrain_objects,Nebula():setPosition(-183754, 59598))
+				table.insert(terrain_objects,Nebula():setPosition(-164659, 51156))
+				table.insert(terrain_objects,Nebula():setPosition(-152197, 37085))
+				table.insert(terrain_objects,Nebula():setPosition(-155212, 36080))
+				table.insert(terrain_objects,Nebula():setPosition(-149784, 45729))
+				table.insert(terrain_objects,Nebula():setPosition(-168076, 39296))
+				table.insert(terrain_objects,Nebula():setPosition(-184960, 38894))
+				table.insert(terrain_objects,Nebula():setPosition(-180538, 35075))
+				table.insert(terrain_objects,Nebula():setPosition(-178327, 70452))
+				table.insert(terrain_objects,Nebula():setPosition(-186970, 55980))
+				table.insert(terrain_objects,Nebula():setPosition(-194207, 45528))
+				table.insert(terrain_objects,Nebula():setPosition(-197222, 36683))
+				table.insert(terrain_objects,Nebula():setPosition(-202850, 32864))
+				table.insert(terrain_objects,Nebula():setPosition(-118026, 70452))
+				table.insert(terrain_objects,Nebula():setPosition(-104156, 58995))
+				table.insert(terrain_objects,Nebula():setPosition(-135312, 78090))
+				table.insert(terrain_objects,Nebula():setPosition(-120036, 81106))
+				table.insert(terrain_objects,Nebula():setPosition(-193604, 71457))
+				table.insert(terrain_objects,Nebula():setPosition(-203453, 55980))
+				table.insert(terrain_objects,Nebula():setPosition(-197021, 13970))
+				table.insert(terrain_objects,Nebula():setPosition(-195815, 22814))
+				table.insert(terrain_objects,Nebula():setPosition(-133101, 26030))
+				table.insert(terrain_objects,Nebula():setPosition(-152800, 14975))
+				table.insert(terrain_objects,Nebula():setPosition(-135111, -27839))
+				table.insert(terrain_objects,Nebula():setPosition(-153202, -14171))
+				table.insert(terrain_objects,Nebula():setPosition(-161041, -7538))
+				table.insert(terrain_objects,Nebula():setPosition(-166669, -16583))
+				table.insert(terrain_objects,Nebula():setPosition(-157222, 26030))
+				table.insert(terrain_objects,Nebula():setPosition(-167674, 18794))
+				table.insert(terrain_objects,Nebula():setPosition(-174910, 26231))
+				table.insert(terrain_objects,Nebula():setPosition(-160237, 11960))
+				table.insert(terrain_objects,Nebula():setPosition(-195413, -8141))
+				table.insert(terrain_objects,Nebula():setPosition(-192800, -2312))
+				table.insert(terrain_objects,Nebula():setPosition(-197624, -35276))
+				table.insert(terrain_objects,Nebula():setPosition(-199433, 7337))
+				table.insert(terrain_objects,Nebula():setPosition(-156217, -26432))
+				table.insert(terrain_objects,Nebula():setPosition(-166066, -35678))
+				table.insert(terrain_objects,Nebula():setPosition(-178528, -35879))
+				table.insert(terrain_objects,Nebula():setPosition(-176518, -21608))
+				table.insert(terrain_objects,Nebula():setPosition(-193403, -16382))
+				table.insert(terrain_objects,Nebula():setPosition(-193805, -30653))
+				table.insert(terrain_objects,Nebula():setPosition(-186367, -26432))
+				table.insert(terrain_objects,Nebula():setPosition(-199634, -23417))
+			-- kraylor side
+				table.insert(terrain_objects,Nebula():setPosition(25950, 15065))
+				table.insert(terrain_objects,Nebula():setPosition(17927, 3032))
+				table.insert(terrain_objects,Nebula():setPosition(18114, -4244))
+				table.insert(terrain_objects,Nebula():setPosition(25390, -18424))
+				table.insert(terrain_objects,Mine():setPosition(35073, -35990))
+				table.insert(terrain_objects,Mine():setPosition(36480, -37598))
+				table.insert(terrain_objects,Mine():setPosition(37887, -41417))
+				table.insert(terrain_objects,Mine():setPosition(50551, -65738))
+				table.insert(terrain_objects,Mine():setPosition(49144, -62723))
+				table.insert(terrain_objects,Mine():setPosition(29445, -72573))
+				table.insert(terrain_objects,Mine():setPosition(33666, -66944))
+				table.insert(terrain_objects,Mine():setPosition(57586, -73176))
+				table.insert(terrain_objects,Mine():setPosition(41505, -50864))
+				table.insert(terrain_objects,Mine():setPosition(38088, -46040))
+				table.insert(terrain_objects,Mine():setPosition(38490, -62321))
+				table.insert(terrain_objects,Mine():setPosition(44923, -55688))
+				table.insert(terrain_objects,Mine():setPosition(52762, -68753))
+				table.insert(terrain_objects,Mine():setPosition(55174, -73779))
+				table.insert(terrain_objects,Nebula():setPosition(48679, -59598))
+				table.insert(terrain_objects,Nebula():setPosition(52498, -66834))
+				table.insert(terrain_objects,Nebula():setPosition(54508, -73668))
+				table.insert(terrain_objects,Nebula():setPosition(66970, -78090))
+				table.insert(terrain_objects,Nebula():setPosition(71393, -31658))
+				table.insert(terrain_objects,Nebula():setPosition(89483, -65427))
+				table.insert(terrain_objects,Nebula():setPosition(36418, -65427))
+				table.insert(terrain_objects,Nebula():setPosition(39835, -59598))
+				table.insert(terrain_objects,Nebula():setPosition(34006, -34472))
+				table.insert(terrain_objects,Nebula():setPosition(38830, -42714))
+				table.insert(terrain_objects,Nebula():setPosition(73202, -60402))
+				table.insert(terrain_objects,Nebula():setPosition(42850, -51357))
+				table.insert(terrain_objects,Nebula():setPosition(100538, -82915))
+				table.insert(terrain_objects,Nebula():setPosition(83252, -76482))
+				table.insert(terrain_objects,Mine():setPosition(104822, -56090))
+				table.insert(terrain_objects,Nebula():setPosition(135312, -79900))
+				table.insert(terrain_objects,Nebula():setPosition(122448, -76884))
+				table.insert(terrain_objects,Mine():setPosition(164659, -17990))
+				table.insert(terrain_objects,Mine():setPosition(167875, -15578))
+				table.insert(terrain_objects,Mine():setPosition(191393, -15377))
+				table.insert(terrain_objects,Nebula():setPosition(193202, -61407))
+				table.insert(terrain_objects,Mine():setPosition(160237, -5528))
+				table.insert(terrain_objects,Mine():setPosition(162448, -9950))
+				table.insert(terrain_objects,Mine():setPosition(102008, -56492))
+				table.insert(terrain_objects,Nebula():setPosition(100337, -55377))
+				table.insert(terrain_objects,Nebula():setPosition(106367, -56181))
+				table.insert(terrain_objects,Mine():setPosition(160036, -41910))
+				table.insert(terrain_objects,Mine():setPosition(178327, -20402))
+				table.insert(terrain_objects,Mine():setPosition(185764, -26030))
+				table.insert(terrain_objects,Mine():setPosition(155011, -27236))
+				table.insert(terrain_objects,Mine():setPosition(184558, -40503))
+				table.insert(terrain_objects,Nebula():setPosition(115011, -67236))
+				table.insert(terrain_objects,Mine():setPosition(159835, 12764))
+				table.insert(terrain_objects,Mine():setPosition(155413, 11759))
+				table.insert(terrain_objects,Mine():setPosition(156217, 27437))
+				table.insert(terrain_objects,Nebula():setPosition(164659, -65628))
+				table.insert(terrain_objects,Nebula():setPosition(164659, -52161))
+				table.insert(terrain_objects,Mine():setPosition(154609, -12362))
+				table.insert(terrain_objects,Nebula():setPosition(184960, -39698))
+				table.insert(terrain_objects,Nebula():setPosition(193202, -40302))
+				table.insert(terrain_objects,Nebula():setPosition(161242, -41910))
+				table.insert(terrain_objects,Nebula():setPosition(184960, -70653))
+				table.insert(terrain_objects,Mine():setPosition(150790, 15578))
+				table.insert(terrain_objects,Mine():setPosition(174508, 29648))
+				table.insert(terrain_objects,Mine():setPosition(167674, 17588))
+				table.insert(terrain_objects,Nebula():setPosition(186166, -48744))
+				table.insert(terrain_objects,Nebula():setPosition(187975, -55176))
+				table.insert(terrain_objects,Nebula():setPosition(170890, -78090))
+				table.insert(terrain_objects,Nebula():setPosition(173704, -61005))
+				table.insert(terrain_objects,Nebula():setPosition(25161, -79497))
+				table.insert(terrain_objects,Nebula():setPosition(31795, -72261))
+				table.insert(terrain_objects,Mine():setPosition(42108, 51649))
+				table.insert(terrain_objects,Mine():setPosition(42510, 48030))
+				table.insert(terrain_objects,Nebula():setPosition(41443, 41106))
+				table.insert(terrain_objects,Nebula():setPosition(69583, 30854))
+				table.insert(terrain_objects,Nebula():setPosition(73001, 56181))
+				table.insert(terrain_objects,Mine():setPosition(36681, 55066))
+				table.insert(terrain_objects,Nebula():setPosition(36217, 34070))
+				table.insert(terrain_objects,Mine():setPosition(96179, 56272))
+				table.insert(terrain_objects,Nebula():setPosition(94508, 57186))
+				table.insert(terrain_objects,Nebula():setPosition(98930, 52563))
+				table.insert(terrain_objects,Mine():setPosition(34872, 57679))
+				table.insert(terrain_objects,Nebula():setPosition(33805, 60402))
+				table.insert(terrain_objects,Mine():setPosition(46732, 55669))
+				table.insert(terrain_objects,Nebula():setPosition(38227, 53166))
+				table.insert(terrain_objects,Mine():setPosition(98993, 53860))
+				table.insert(terrain_objects,Mine():setPosition(99998, 56674))
+				table.insert(terrain_objects,Nebula():setPosition(100940, 81910))
+				table.insert(terrain_objects,Nebula():setPosition(63955, 69447))
+				table.insert(terrain_objects,Nebula():setPosition(70991, 74673))
+				table.insert(terrain_objects,Nebula():setPosition(84860, 73668))
+				table.insert(terrain_objects,Nebula():setPosition(87875, 65628))
+				table.insert(terrain_objects,Nebula():setPosition(44056, 52764))
+				table.insert(terrain_objects,Nebula():setPosition(43654, 48543))
+				table.insert(terrain_objects,Mine():setPosition(51355, 63709))
+				table.insert(terrain_objects,Nebula():setPosition(51091, 62814))
+				table.insert(terrain_objects,Mine():setPosition(21003, 70945))
+				table.insert(terrain_objects,Nebula():setPosition(19935, 73065))
+				table.insert(terrain_objects,Mine():setPosition(31656, 62905))
+				table.insert(terrain_objects,Mine():setPosition(28440, 67729))
+				table.insert(terrain_objects,Nebula():setPosition(27171, 66432))
+				table.insert(terrain_objects,Mine():setPosition(195212, -8342))
+				table.insert(terrain_objects,Mine():setPosition(193604, -31055))
+				table.insert(terrain_objects,Nebula():setPosition(213905, -49749))
+				table.insert(terrain_objects,Mine():setPosition(41304, 43809))
+				table.insert(terrain_objects,Mine():setPosition(39093, 40593))
+				table.insert(terrain_objects,Mine():setPosition(37887, 35367))
+				table.insert(terrain_objects,Nebula():setPosition(202448, 2111))
+				table.insert(terrain_objects,Nebula():setPosition(212498, -704))
+				table.insert(terrain_objects,Nebula():setPosition(205262, -13166))
+				table.insert(terrain_objects,Nebula():setPosition(210689, -16181))
+				table.insert(terrain_objects,Mine():setPosition(158227, 36482))
+				table.insert(terrain_objects,Mine():setPosition(154207, 37889))
+				table.insert(terrain_objects,Mine():setPosition(179533, 37487))
+				table.insert(terrain_objects,Nebula():setPosition(209684, -27035))
+				table.insert(terrain_objects,Nebula():setPosition(206468, -42111))
+				table.insert(terrain_objects,Mine():setPosition(165664, 40101))
+				table.insert(terrain_objects,Mine():setPosition(195413, 15176))
+				table.insert(terrain_objects,Mine():setPosition(199835, 7337))
+				table.insert(terrain_objects,Mine():setPosition(193403, -2312))
+				table.insert(terrain_objects,Mine():setPosition(202247, 33467))
+				table.insert(terrain_objects,Mine():setPosition(197423, 36683))
+				table.insert(terrain_objects,Mine():setPosition(196619, 21809))
+				table.insert(terrain_objects,Nebula():setPosition(209282, 26633))
+				table.insert(terrain_objects,Nebula():setPosition(205865, 20804))
+				table.insert(terrain_objects,Nebula():setPosition(206669, 12764))
+				table.insert(terrain_objects,Nebula():setPosition(204056, 47136))
+				table.insert(terrain_objects,Nebula():setPosition(212297, 46332))
+				table.insert(terrain_objects,Nebula():setPosition(206468, 33668))
+				table.insert(terrain_objects,Nebula():setPosition(214709, 35276))
+				table.insert(terrain_objects,Mine():setPosition(205061, 21608))
+				table.insert(terrain_objects,Nebula():setPosition(214709, 12965))
+				table.insert(terrain_objects,Nebula():setPosition(176518, 46131))
+				table.insert(terrain_objects,Nebula():setPosition(178930, 49146))
+				table.insert(terrain_objects,Nebula():setPosition(154207, 64623))
+				table.insert(terrain_objects,Nebula():setPosition(167272, 65226))
+				table.insert(terrain_objects,Nebula():setPosition(183754, 59598))
+				table.insert(terrain_objects,Nebula():setPosition(164659, 51156))
+				table.insert(terrain_objects,Nebula():setPosition(152197, 37085))
+				table.insert(terrain_objects,Nebula():setPosition(155212, 36080))
+				table.insert(terrain_objects,Nebula():setPosition(149784, 45729))
+				table.insert(terrain_objects,Nebula():setPosition(168076, 39296))
+				table.insert(terrain_objects,Nebula():setPosition(184960, 38894))
+				table.insert(terrain_objects,Nebula():setPosition(180538, 35075))
+				table.insert(terrain_objects,Nebula():setPosition(178327, 70452))
+				table.insert(terrain_objects,Nebula():setPosition(186970, 55980))
+				table.insert(terrain_objects,Nebula():setPosition(194207, 45528))
+				table.insert(terrain_objects,Nebula():setPosition(197222, 36683))
+				table.insert(terrain_objects,Nebula():setPosition(202850, 32864))
+				table.insert(terrain_objects,Nebula():setPosition(118026, 70452))
+				table.insert(terrain_objects,Nebula():setPosition(104156, 58995))
+				table.insert(terrain_objects,Nebula():setPosition(135312, 78090))
+				table.insert(terrain_objects,Nebula():setPosition(120036, 81106))
+				table.insert(terrain_objects,Nebula():setPosition(193604, 71457))
+				table.insert(terrain_objects,Nebula():setPosition(203453, 55980))
+				table.insert(terrain_objects,Nebula():setPosition(197021, 13970))
+				table.insert(terrain_objects,Nebula():setPosition(195815, 22814))
+				table.insert(terrain_objects,Nebula():setPosition(133101, 26030))
+				table.insert(terrain_objects,Nebula():setPosition(152800, 14975))
+				table.insert(terrain_objects,Nebula():setPosition(135111, -27839))
+				table.insert(terrain_objects,Nebula():setPosition(153202, -14171))
+				table.insert(terrain_objects,Nebula():setPosition(161041, -7538))
+				table.insert(terrain_objects,Nebula():setPosition(166669, -16583))
+				table.insert(terrain_objects,Nebula():setPosition(157222, 26030))
+				table.insert(terrain_objects,Nebula():setPosition(167674, 18794))
+				table.insert(terrain_objects,Nebula():setPosition(174910, 26231))
+				table.insert(terrain_objects,Nebula():setPosition(160237, 11960))
+				table.insert(terrain_objects,Nebula():setPosition(195413, -8141))
+				table.insert(terrain_objects,Nebula():setPosition(192800, -2312))
+				table.insert(terrain_objects,Nebula():setPosition(197624, -35276))
+				table.insert(terrain_objects,Nebula():setPosition(199433, 7337))
+				table.insert(terrain_objects,Nebula():setPosition(156217, -26432))
+				table.insert(terrain_objects,Nebula():setPosition(166066, -35678))
+				table.insert(terrain_objects,Nebula():setPosition(178528, -35879))
+				table.insert(terrain_objects,Nebula():setPosition(176518, -21608))
+				table.insert(terrain_objects,Nebula():setPosition(193403, -16382))
+				table.insert(terrain_objects,Nebula():setPosition(193805, -30653))
+				table.insert(terrain_objects,Nebula():setPosition(186367, -26432))
+				table.insert(terrain_objects,Nebula():setPosition(199634, -23417))			
+		end
+		
+
+	-- player tagged relocation override
+	-- this is placed at the end because the values depend on "terrain" variables calculated in the middle of the function
+	hx = human_planet_center_x + human_planet_radius + (human_moon_1_orbit_distance/2)
+	kx = kraylor_planet_center_x - kraylor_planet_radius - (kraylor_moon_1_orbit_distance/2)
+	--player side   		  Hum   Kra    Hum   Kra    Hum    Kra    Hum   Kra    Hum    Kra    Hum   Kra	  Hum	 Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra    Hum    Kra
+	--player index   		   1     2      3     4      5      6      7     8      9     10     11    12	  13	 14     15     16     17     18     19     20     21     22     23     24     25     26     27     28     29     30     31     32
+	player_tag_relocate_x = { hx,   kx,    hx,   kx,    hx,    kx,    hx,   kx,    hx,    kx,    hx,   kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx,    hx,    kx}	
+	player_tag_relocate_y =	{  0,    0,     0,    0,     0,     0,     0,    0,     0,     0,     0,    0,     0,    0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0}
+
+
+end
+function moveDownTheRabbitHole()
+
+	-- move asteroid rings
+	for i=1,number_of_asteroids_in_ring do
+		-- human side
+			if human_asteroid_ring[i]:isValid() then
+				human_asteroid_ring[i].angle = human_asteroid_ring[i].angle + human_asteroid_ring[i].speed
+				if human_asteroid_ring[i].angle > 360 then
+					human_asteroid_ring[i].angle = human_asteroid_ring[i].angle - 360
+				end
+				setCirclePos(human_asteroid_ring[i], 
+					human_planet_center_x, 
+					human_planet_center_y, 
+					human_asteroid_ring[i].angle, 
+					human_asteroid_ring[i].radius)
+			end
+		-- kraylor side
+			if kraylor_asteroid_ring[i]:isValid() then
+				kraylor_asteroid_ring[i].angle = kraylor_asteroid_ring[i].angle + kraylor_asteroid_ring[i].speed
+				if kraylor_asteroid_ring[i].angle > 360 then
+					kraylor_asteroid_ring[i].angle = kraylor_asteroid_ring[i].angle - 360
+				end
+				setCirclePos(kraylor_asteroid_ring[i], 
+					kraylor_planet_center_x, 
+					kraylor_planet_center_y, 
+					kraylor_asteroid_ring[i].angle, 
+					kraylor_asteroid_ring[i].radius)
+			end
+		
+	end
+
+	-- move mines in the asteroid rings
+	for i=1,number_of_mines_in_ring do
+		-- human side
+			if human_mine_ring[i]:isValid() then
+				human_mine_ring[i].angle = human_mine_ring[i].angle + human_mine_ring[i].speed
+				if human_mine_ring[i].angle > 360 then
+					human_mine_ring[i].angle = human_mine_ring[i].angle - 360
+				end
+				setCirclePos(human_mine_ring[i], 
+					human_planet_center_x, 
+					human_planet_center_y, 
+					human_mine_ring[i].angle, 
+					human_mine_ring[i].radius)
+			end
+		-- kraylor side
+			if kraylor_mine_ring[i]:isValid() then
+				kraylor_mine_ring[i].angle = kraylor_mine_ring[i].angle + kraylor_mine_ring[i].speed
+				if kraylor_mine_ring[i].angle > 360 then
+					kraylor_mine_ring[i].angle = kraylor_mine_ring[i].angle - 360
+				end
+				setCirclePos(kraylor_mine_ring[i], 
+					kraylor_planet_center_x, 
+					kraylor_planet_center_y, 
+					kraylor_mine_ring[i].angle, 
+					kraylor_mine_ring[i].radius)
+			end
+		
+	end
+	
+	-- move orbiting space stations
+		-- human
+			human_orbital_station_1.angle = human_orbital_station_1.angle + human_orbital_station_1.speed
+			if human_orbital_station_1.angle > 360 then 
+				human_orbital_station_1.angle = human_orbital_station_1.angle - 360
+			end
+			setCirclePos(human_orbital_station_1, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_1.angle, 
+				human_orbital_station_1.distance)
+
+			human_orbital_station_2.angle = human_orbital_station_2.angle + human_orbital_station_2.speed
+			if human_orbital_station_2.angle > 360 then 
+				human_orbital_station_2.angle = human_orbital_station_2.angle - 360
+			end
+			setCirclePos(human_orbital_station_2, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_2.angle, 
+				human_orbital_station_2.distance)
+
+			human_orbital_station_3.angle = human_orbital_station_3.angle + human_orbital_station_3.speed
+			if human_orbital_station_3.angle > 360 then 
+				human_orbital_station_3.angle = human_orbital_station_3.angle - 360
+			end
+			setCirclePos(human_orbital_station_3, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_3.angle, 
+				human_orbital_station_3.distance)
+
+			human_orbital_station_4.angle = human_orbital_station_4.angle + human_orbital_station_4.speed
+			if human_orbital_station_4.angle > 360 then 
+				human_orbital_station_4.angle = human_orbital_station_4.angle - 360
+			end
+			setCirclePos(human_orbital_station_4, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_4.angle, 
+				human_orbital_station_4.distance)
+
+			human_orbital_station_5.angle = human_orbital_station_5.angle + human_orbital_station_5.speed
+			if human_orbital_station_5.angle > 360 then 
+				human_orbital_station_5.angle = human_orbital_station_5.angle - 360
+			end
+			setCirclePos(human_orbital_station_5, 
+				human_planet_center_x, 
+				human_planet_center_y, 
+				human_orbital_station_5.angle, 
+				human_orbital_station_5.distance)
+
+		-- kraylor
+			kraylor_orbital_station_1.angle = kraylor_orbital_station_1.angle + kraylor_orbital_station_1.speed
+			if kraylor_orbital_station_1.angle > 360 then 
+				kraylor_orbital_station_1.angle = kraylor_orbital_station_1.angle - 360
+			end
+			setCirclePos(kraylor_orbital_station_1, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_1.angle, 
+				kraylor_orbital_station_1.distance)
+
+			kraylor_orbital_station_2.angle = kraylor_orbital_station_2.angle + kraylor_orbital_station_2.speed
+			if kraylor_orbital_station_2.angle > 360 then 
+				kraylor_orbital_station_2.angle = kraylor_orbital_station_2.angle - 360
+			end
+			setCirclePos(kraylor_orbital_station_2, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_2.angle, 
+				kraylor_orbital_station_2.distance)
+
+			kraylor_orbital_station_3.angle = kraylor_orbital_station_3.angle + kraylor_orbital_station_3.speed
+			if kraylor_orbital_station_3.angle > 360 then 
+				kraylor_orbital_station_3.angle = kraylor_orbital_station_3.angle - 360
+			end
+			setCirclePos(kraylor_orbital_station_3, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_3.angle, 
+				kraylor_orbital_station_3.distance)
+
+			kraylor_orbital_station_4.angle = kraylor_orbital_station_4.angle + kraylor_orbital_station_4.speed
+			if kraylor_orbital_station_4.angle > 360 then 
+				kraylor_orbital_station_4.angle = kraylor_orbital_station_4.angle - 360
+			end
+			setCirclePos(kraylor_orbital_station_4, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_4.angle, 
+				kraylor_orbital_station_4.distance)
+
+			kraylor_orbital_station_5.angle = kraylor_orbital_station_5.angle + kraylor_orbital_station_5.speed
+			if kraylor_orbital_station_5.angle > 360 then 
+				kraylor_orbital_station_5.angle = kraylor_orbital_station_5.angle - 360
+			end
+			setCirclePos(kraylor_orbital_station_5, 
+				kraylor_planet_center_x, 
+				kraylor_planet_center_y, 
+				kraylor_orbital_station_5.angle, 
+				kraylor_orbital_station_5.distance)
+
+	
+end
 
 -------------------------------
 --	Cargo related functions  --
@@ -2930,41 +4604,219 @@ function setupTailoredShipAttributes()
 	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
 	--Ship Template Score List
 	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250   ,6        ,18       ,14               ,30          ,27            ,80           ,100            ,65               ,6                ,45               ,40              ,4              ,48              ,8              ,50                 ,22}
-	--Player Ship Beams
-	psb = {}
-	psb["MP52 Hornet"] = 2
-	psb["Phobos M3P"] = 2
-	psb["Flavia P.Falcon"] = 2
-	psb["Atlantis"] = 2
-	psb["Player Cruiser"] = 2
-	psb["Player Fighter"] = 2
-	psb["Striker"] = 2
-	psb["ZX-Lindworm"] = 1
-	psb["Ender"] = 12
-	psb["Repulse"] = 2
-	psb["Benedict"] = 2
-	psb["Kiriya"] = 2
-	psb["Nautilus"] = 2
-	psb["Hathcock"] = 4
-
-	playerShipNamesForMP52Hornet = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
-	playerShipNamesForPiranha = {"Razor","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"}
-	playerShipNamesForFlaviaPFalcon = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
-	playerShipNamesForPhobosM3P = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
-	playerShipNamesForAtlantis = {"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
-	playerShipNamesForCruiser = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
-	playerShipNamesForMissileCruiser = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
-	playerShipNamesForFighter = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
-	playerShipNamesForBenedict = {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"}
-	playerShipNamesForKiriya = {"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"}
-	playerShipNamesForStriker = {"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"}
-	playerShipNamesForLindworm = {"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"}
-	playerShipNamesForRepulse = {"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"}
-	playerShipNamesForEnder = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
-	playerShipNamesForNautilus = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
-	playerShipNamesForHathcock = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"}
-	playerShipNamesForLeftovers = {"Foregone","Righteous","Masher"}
-
+	playerShipNamesFor = {}
+	-- TODO switch to spelling with space or dash matching the type name
+	playerShipNamesFor["MP52Hornet"] = {"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"}
+	playerShipNamesFor["Piranha"] = {"Razor","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"}
+	playerShipNamesFor["FlaviaPFalcon"] = {"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"}
+	playerShipNamesFor["PhobosM3P"] = {"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"}
+	playerShipNamesFor["Atlantis"] = {"Excalibur","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"}
+	playerShipNamesFor["Cruiser"] = {"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"}
+	playerShipNamesFor["MissileCruiser"] = {"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"}
+	playerShipNamesFor["Fighter"] = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
+	playerShipNamesFor["Benedict"] = {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"}
+	playerShipNamesFor["Kiriya"] = {"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"}
+	playerShipNamesFor["Striker"] = {"Sparrow","Sizzle","Squawk","Crow","Snowbird","Hawk"}
+	playerShipNamesFor["Lindworm"] = {"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"}
+	playerShipNamesFor["Repulse"] = {"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"}
+	playerShipNamesFor["Ender"] = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
+	playerShipNamesFor["Nautilus"] = {"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"}
+	playerShipNamesFor["Hathcock"] = {"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Fett", "Hawkeye", "Hanzo"}
+	playerShipNamesFor["ProtoAtlantis"] = {"Narsil", "Blade", "Decapitator", "Trisect", "Sabre"}
+	playerShipNamesFor["Maverick"] = {"Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge"}
+	playerShipNamesFor["Crucible"] = {"Sling", "Stark", "Torrid", "Kicker", "Flummox"}
+	playerShipNamesFor["Surkov"] = {"Sting", "Sneak", "Bingo", "Thrill", "Vivisect"}
+	playerShipNamesFor["Stricken"] = {"Blazon", "Streaker", "Pinto", "Spear", "Javelin"}
+	playerShipNamesFor["AtlantisII"] = {"Spyder", "Shelob", "Tarantula", "Aragog", "Charlotte"}
+	playerShipNamesFor["Redhook"] = {"Headhunter", "Thud", "Troll", "Scalper", "Shark"}
+	playerShipNamesFor["DestroyerIII"] = {"Trebuchet", "Pitcher", "Mutant", "Gronk", "Methuselah"}
+	playerShipNamesFor["Leftovers"] = {
+		"Adelphi",
+		"Ahwahnee",
+		"Akagi",
+		"Akira",
+		"Al-Batani",
+		"Ambassador",
+		"Andromeda",
+		"Antares",
+		"Apollo",
+		"Appalachia",
+		"Arcos",
+		"Aries",
+		"Athena",
+		"Beethoven",
+		"Bellerophon",
+		"Biko",
+		"Bonchune",
+		"Bozeman",
+		"Bradbury",
+		"Brattain",
+		"Budapest",
+		"Buran",
+		"Cairo",
+		"Calypso",
+		"Capricorn",
+		"Carolina",
+		"Centaur",
+		"Challenger",
+		"Charleston",
+		"Chekov",
+		"Cheyenne",
+		"Clement",
+		"Cochraine",
+		"Columbia",
+		"Concorde",
+		"Constantinople",
+		"Constellation",
+		"Constitution",
+		"Copernicus",
+		"Cousteau",
+		"Crazy Horse",
+		"Crockett",
+		"Daedalus",
+		"Danube",
+		"Defiant",
+		"Deneva",
+		"Denver",
+		"Discovery",
+		"Drake",
+		"Endeavor",
+		"Endurance",
+		"Equinox",
+		"Essex",
+		"Exeter",
+		"Farragut",
+		"Fearless",
+		"Fleming",
+		"Foregone",
+		"Fredrickson",
+		"Freedom",
+		"Gage",
+		"Galaxy",
+		"Galileo",
+		"Gander",
+		"Ganges",
+		"Gettysburg",
+		"Ghandi",
+		"Goddard",
+		"Grissom",
+		"Hathaway",
+		"Helin",
+		"Hera",
+		"Heracles",
+		"Hokule'a",
+		"Honshu",
+		"Hood",
+		"Hope",
+		"Horatio",
+		"Horizon",
+		"Interceptor",
+		"Intrepid",
+		"Istanbul",
+		"Jenolen",
+		"Kearsarge",
+		"Kongo",
+		"Korolev",
+		"Kyushu",
+		"Lakota",
+		"Lalo",
+		"Lancer",
+		"Lantree",
+		"LaSalle",
+		"Leeds",
+		"Lexington",
+		"Luna",
+		"Magellan",
+		"Majestic",
+		"Malinche",
+		"Maryland",
+		"Masher",
+		"Mediterranean",
+		"Mekong",
+		"Melbourne",
+		"Merced",
+		"Merrimack",
+		"Miranda",
+		"Nash",
+		"New Orleans",
+		"Newton",
+		"Niagra",
+		"Nobel",
+		"Norway",
+		"Nova",
+		"Oberth",
+		"Odyssey",
+		"Orinoco",
+		"Osiris",
+		"Pasteur",
+		"Pegasus",
+		"Peregrine",
+		"Poseidon",
+		"Potempkin",
+		"Princeton",
+		"Prokofiev",
+		"Prometheus",
+		"Proxima",
+		"Rabin",
+		"Raman",
+		"Relativity",
+		"Reliant",
+		"Renaissance",
+		"Renegade",
+		"Republic",
+		"Rhode Island",
+		"Rigel",
+		"Righteous",
+		"Rubicon",
+		"Rutledge",
+		"Sarajevo",
+		"Saratoga",
+		"Scimitar",
+		"Sequoia",
+		"Shenandoah",
+		"ShirKahr",
+		"Sitak",
+		"Socrates",
+		"Sovereign",
+		"Spector",
+		"Springfield",
+		"Stargazer",
+		"Steamrunner",
+		"Surak",
+		"Sutherland",
+		"Sydney",
+		"T'Kumbra",
+		"Thomas Paine",
+		"Thunderchild",
+		"Tian An Men",
+		"Titan",
+		"Tolstoy",
+		"Trial",
+		"Trieste",
+		"Trinculo",
+		"Tripoli",
+		"Ulysses",
+		"Valdemar",
+		"Valiant",
+		"Volga",
+		"Voyager",
+		"Wambundu",
+		"Waverider",
+		"Wellington",
+		"Wells",
+		"Wyoming",
+		"Yamaguchi",
+		"Yamato",
+		"Yangtzee Kiang",
+		"Yeager",
+		"Yorkshire",
+		"Yorktown",
+		"Yosemite",
+		"Yukon",
+		"Zapata",
+		"Zhukov",
+		"Zodiac",
+	}
 end
 function setupBarteringGoods()
 	-- part of Xansta's larger overall bartering/crafting setup
@@ -4591,18 +6443,15 @@ function resupplyStation()
         }
     })
     comms_data = comms_target.comms_data
-	if bugger:isCommsOpening() then
-		player = bugger
-	end
-	if player:isEnemy(comms_target) then
+	if comms_source:isEnemy(comms_target) then
         return false
     end
-    if player:isDocked(comms_target) then
+    if comms_source:isDocked(comms_target) then
 		setCommsMessage("Greetings")
 		missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		missilePresence = 0
 		for _, missile_type in ipairs(missile_types) do
-			missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
+			missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 		end
 		if missilePresence > 0 then
 			if comms_target.nukeAvail == nil then
@@ -4613,19 +6462,19 @@ function resupplyStation()
 				comms_target.hvliAvail = true
 			end
 			if comms_target.nukeAvail or comms_target.empAvail or comms_target.homeAvail or comms_target.mineAvail or comms_target.hvliAvail then
-				if player:getWeaponStorageMax("Homing") > 0 then
+				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if comms_target.homeAvail then
 						homePrompt = "Restock Homing ("
 						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
-							handleWeaponRestock("Homing")
+							handleResupplyStationWeaponRestock("Homing")
 						end)
 					end
 				end
-				if player:getWeaponStorageMax("HVLI") > 0 then
+				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if comms_target.hvliAvail then
 						hvliPrompt = "Restock HVLI ("
 						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
-							handleWeaponRestock("HVLI")
+							handleResupplyStationWeaponRestock("HVLI")
 						end)
 					end
 				end
@@ -4635,6 +6484,40 @@ function resupplyStation()
         setCommsMessage("Dock, please")
     end
     return true
+end
+function handleResupplyStationWeaponRestock(weapon)
+    if not comms_source:isDocked(comms_target) then 
+		setCommsMessage("You need to stay docked for that action.")
+		return
+	end
+    if not isAllowedTo(comms_data.weapons[weapon]) then
+        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
+        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
+        else setCommsMessage("We do not deal in those weapons.") end
+        return
+    end
+    local points_per_item = getWeaponCost(weapon)
+    local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
+    if item_amount <= 0 then
+        if weapon == "Nuke" then
+            setCommsMessage("All nukes are charged and primed for destruction.");
+        else
+            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+        end
+        addCommsReply("Back", resupplyStation)
+    else
+        if not comms_source:takeReputationPoints(points_per_item * item_amount) then
+            setCommsMessage("Not enough reputation.")
+            return
+        end
+        comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
+        if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
+            setCommsMessage("You are fully loaded and ready to explode things.")
+        else
+            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+        end
+        addCommsReply("Back", resupplyStation)
+    end
 end
 function commsStation()
     if comms_target.comms_data == nil then
@@ -4673,19 +6556,11 @@ function commsStation()
             neutral = 0.5
         }
     })
-    comms_data = comms_target.comms_data
-	for p3idx=1,12 do
-		p3obj = getPlayerShip(p3idx)
-		if p3obj ~= nil and p3obj:isValid() then
-			if p3obj:isCommsOpening() then
-				player = p3obj
-			end
-		end
-	end
-   if player:isEnemy(comms_target) then
+	comms_data = comms_target.comms_data
+	if comms_source:isEnemy(comms_target) then
         return false
     end
-    if not player:isDocked(comms_target) then
+    if not comms_source:isDocked(comms_target) then
         handleUndockedState()
     else
         handleDockedState()
@@ -4693,7 +6568,7 @@ function commsStation()
     return true
 end
 function handleDockedState()
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
 		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
     else
 		oMsg = "Welcome to our lovely station.\n"
@@ -4701,7 +6576,7 @@ function handleDockedState()
 	setCommsMessage(oMsg)
 	missilePresence = 0
 	for _, missile_type in ipairs(missile_types) do
-		missilePresence = missilePresence + player:getWeaponStorageMax(missile_type)
+		missilePresence = missilePresence + comms_source:getWeaponStorageMax(missile_type)
 	end
 	if missilePresence > 0 then
 		if comms_target.nukeAvail == nil then
@@ -4734,7 +6609,7 @@ function handleDockedState()
 		if comms_target.nukeAvail or comms_target.empAvail or comms_target.homeAvail or comms_target.mineAvail or comms_target.hvliAvail then
 			addCommsReply("I need ordnance restocked", function()
 				setCommsMessage("What type of ordnance?")
-				if player:getWeaponStorageMax("Nuke") > 0 then
+				if comms_source:getWeaponStorageMax("Nuke") > 0 then
 					if comms_target.nukeAvail then
 						if math.random(1,10) <= 5 then
 							nukePrompt = "Can you supply us with some nukes? ("
@@ -4746,7 +6621,7 @@ function handleDockedState()
 						end)
 					end
 				end
-				if player:getWeaponStorageMax("EMP") > 0 then
+				if comms_source:getWeaponStorageMax("EMP") > 0 then
 					if comms_target.empAvail then
 						if math.random(1,10) <= 5 then
 							empPrompt = "Please re-stock our EMP missiles. ("
@@ -4758,7 +6633,7 @@ function handleDockedState()
 						end)
 					end
 				end
-				if player:getWeaponStorageMax("Homing") > 0 then
+				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if comms_target.homeAvail then
 						if math.random(1,10) <= 5 then
 							homePrompt = "Do you have spare homing missiles for us? ("
@@ -4770,7 +6645,7 @@ function handleDockedState()
 						end)
 					end
 				end
-				if player:getWeaponStorageMax("Mine") > 0 then
+				if comms_source:getWeaponStorageMax("Mine") > 0 then
 					if comms_target.mineAvail then
 						minePromptChoice = math.random(1,5)
 						if minePromptChoice == 1 then
@@ -4789,7 +6664,7 @@ function handleDockedState()
 						end)
 					end
 				end
-				if player:getWeaponStorageMax("HVLI") > 0 then
+				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if comms_target.hvliAvail then
 						if math.random(1,10) <= 5 then
 							hvliPrompt = "What about HVLI? ("
@@ -4804,34 +6679,36 @@ function handleDockedState()
 			end)
 		end
 	end
-	if player:isFriendly(comms_target) then
+	if comms_source:isFriendly(comms_target) then
 		if math.random(1,6) <= (4 - difficulty) then
-			if player:getRepairCrewCount() < player.maxRepairCrew then
+			if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
 				hireCost = math.random(30,60)
 			else
 				hireCost = math.random(45,90)
 			end
 			addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
-				if not player:takeReputationPoints(hireCost) then
+				if not comms_source:takeReputationPoints(hireCost) then
 					setCommsMessage("Insufficient reputation")
 				else
-					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
+					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
+					resetPreviousSystemHealth(comms_source)
 					setCommsMessage("Repair crew member hired")
 				end
 			end)
 		end
 	else
 		if math.random(1,6) <= (4 - difficulty) then
-			if player:getRepairCrewCount() < player.maxRepairCrew then
+			if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
 				hireCost = math.random(45,90)
 			else
 				hireCost = math.random(60,120)
 			end
 			addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
-				if not player:takeReputationPoints(hireCost) then
+				if not comms_source:takeReputationPoints(hireCost) then
 					setCommsMessage("Insufficient reputation")
 				else
-					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
+					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
+					resetPreviousSystemHealth(comms_source)
 					setCommsMessage("Repair crew member hired")
 				end
 			end)
@@ -4850,7 +6727,7 @@ function handleDockedState()
 					addCommsReply("Back", commsStation)
 				end)
 			end
-			if player:isFriendly(comms_target) then
+			if comms_source:isFriendly(comms_target) then
 				if comms_target.gossip ~= nil then
 					if random(1,100) < 50 then
 						addCommsReply("Gossip", function()
@@ -4877,19 +6754,19 @@ function handleDockedState()
 			gi = 1
 			cargoHoldEmpty = true
 			repeat
-				playerGoodsType = goods[player][gi][1]
-				playerGoodsQuantity = goods[player][gi][2]
+				playerGoodsType = goods[comms_source][gi][1]
+				playerGoodsQuantity = goods[comms_source][gi][2]
 				if playerGoodsQuantity > 0 then
 					oMsg = oMsg .. string.format("     %s: %i\n",playerGoodsType,playerGoodsQuantity)
 					cargoHoldEmpty = false
 				end
 				gi = gi + 1
-			until(gi > #goods[player])
+			until(gi > #goods[comms_source])
 			if cargoHoldEmpty then
 				oMsg = oMsg .. "     Empty\n"
 			end
-			playerRep = math.floor(player:getReputationPoints())
-			oMsg = oMsg .. string.format("Available Space: %i, Available Reputation: %i\n",player.cargo,playerRep)
+			playerRep = math.floor(comms_source:getReputationPoints())
+			oMsg = oMsg .. string.format("Available Space: %i, Available Reputation: %i\n",comms_source.cargo,playerRep)
 			setCommsMessage(oMsg)
 			-- Buttons for reputation purchases
 			gi = 1
@@ -4899,17 +6776,17 @@ function handleDockedState()
 				local goodsRep = goods[comms_target][gi][3]
 				addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
 					oMsg = string.format("Type: %s, Quantity: %i, Rep: %i",goodsType,goodsQuantity,goodsRep)
-					if player.cargo < 1 then
+					if comms_source.cargo < 1 then
 						oMsg = oMsg .. "\nInsufficient cargo space for purchase"
 					elseif goodsRep > playerRep then
 						oMsg = oMsg .. "\nInsufficient reputation for purchase"
 					elseif goodsQuantity < 1 then
 						oMsg = oMsg .. "\nInsufficient station inventory"
 					else
-						if not player:takeReputationPoints(goodsRep) then
+						if not comms_source:takeReputationPoints(goodsRep) then
 							oMsg = oMsg .. "\nInsufficient reputation for purchase"
 						else
-							player.cargo = player.cargo - 1
+							comms_source.cargo = comms_source.cargo - 1
 							decrementStationGoods(goodsType)
 							incrementPlayerGoods(goodsType)
 							oMsg = oMsg .. "\npurchased"
@@ -4925,11 +6802,11 @@ function handleDockedState()
 				gi = 1
 				foodQuantity = 0
 				repeat
-					if goods[player][gi][1] == "food" then
-						foodQuantity = goods[player][gi][2]
+					if goods[comms_source][gi][1] == "food" then
+						foodQuantity = goods[comms_source][gi][2]
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				if foodQuantity > 0 then
 					gi = 1
 					repeat
@@ -4957,11 +6834,11 @@ function handleDockedState()
 				gi = 1
 				luxuryQuantity = 0
 				repeat
-					if goods[player][gi][1] == "luxury" then
-						luxuryQuantity = goods[player][gi][2]
+					if goods[comms_source][gi][1] == "luxury" then
+						luxuryQuantity = goods[comms_source][gi][2]
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				if luxuryQuantity > 0 then
 					gi = 1
 					repeat
@@ -4989,11 +6866,11 @@ function handleDockedState()
 				gi = 1
 				medicineQuantity = 0
 				repeat
-					if goods[player][gi][1] == "medicine" then
-						medicineQuantity = goods[player][gi][2]
+					if goods[comms_source][gi][1] == "medicine" then
+						medicineQuantity = goods[comms_source][gi][2]
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				if medicineQuantity > 0 then
 					gi = 1
 					repeat
@@ -5021,46 +6898,46 @@ function handleDockedState()
 		gi = 1
 		cargoHoldEmpty = true
 		repeat
-			playerGoodsType = goods[player][gi][1]
-			playerGoodsQuantity = goods[player][gi][2]
+			playerGoodsType = goods[comms_source][gi][1]
+			playerGoodsQuantity = goods[comms_source][gi][2]
 			if playerGoodsQuantity > 0 then
 				cargoHoldEmpty = false
 			end
 			gi = gi + 1
-		until(gi > #goods[player])
+		until(gi > #goods[comms_source])
 		if not cargoHoldEmpty then
 			addCommsReply("Jettison cargo", function()
-				setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",player.cargo))
+				setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
 				gi = 1
 				repeat
-					local goodsType = goods[player][gi][1]
-					local goodsQuantity = goods[player][gi][2]
+					local goodsType = goods[comms_source][gi][1]
+					local goodsQuantity = goods[comms_source][gi][2]
 					if goodsQuantity > 0 then
 						addCommsReply(goodsType, function()
 							decrementPlayerGoods(goodsType)
-							player.cargo = player.cargo + 1
+							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(string.format("One %s jettisoned",goodsType))
 							addCommsReply("Back", commsStation)
 						end)
 					end
 					gi = gi + 1
-				until(gi > #goods[player])
+				until(gi > #goods[comms_source])
 				addCommsReply("Back", commsStation)
 			end)
 		end
 	end
 end
 function isAllowedTo(state)
-    if state == "friend" and player:isFriendly(comms_target) then
+    if state == "friend" and comms_source:isFriendly(comms_target) then
         return true
     end
-    if state == "neutral" and not player:isEnemy(comms_target) then
+    if state == "neutral" and not comms_source:isEnemy(comms_target) then
         return true
     end
     return false
 end
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then 
+    if not comms_source:isDocked(comms_target) then 
 		setCommsMessage("You need to stay docked for that action.")
 		return
 	end
@@ -5071,7 +6948,7 @@ function handleWeaponRestock(weapon)
         return
     end
     local points_per_item = getWeaponCost(weapon)
-    local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
+    local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
             setCommsMessage("All nukes are charged and primed for destruction.");
@@ -5080,12 +6957,12 @@ function handleWeaponRestock(weapon)
         end
         addCommsReply("Back", commsStation)
     else
-        if not player:takeReputationPoints(points_per_item * item_amount) then
+        if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
             return
         end
-        player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
-        if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
+        comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
+        if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
             setCommsMessage("You are fully loaded and ready to explode things.")
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
@@ -5098,7 +6975,7 @@ function getWeaponCost(weapon)
 end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
         oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
     else
         oMsg = "Greetings.\nIf you want to do business, please dock with us first."
@@ -5190,10 +7067,10 @@ function handleUndockedState()
 			end)
 		end
 		addCommsReply("See any enemies in your area?", function()
-			if player:isFriendly(comms_target) then
+			if comms_source:isFriendly(comms_target) then
 				enemiesInRange = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
-					if obj:isEnemy(player) then
+					if obj:isEnemy(comms_source) then
 						enemiesInRange = enemiesInRange + 1
 					end
 				end
@@ -5203,15 +7080,15 @@ function handleUndockedState()
 					else
 						setCommsMessage("Yes, we see one enemy within 30U")						
 					end
-					player:addReputationPoints(2.0)					
+					comms_source:addReputationPoints(2.0)					
 				else
 					setCommsMessage("No enemies within 30U")
-					player:addReputationPoints(1.0)
+					comms_source:addReputationPoints(1.0)
 				end
 				addCommsReply("Back", commsStation)
 			else
 				setCommsMessage("Not really")
-				player:addReputationPoints(1.0)
+				comms_source:addReputationPoints(1.0)
 				addCommsReply("Back", commsStation)
 			end
 		end)
@@ -5263,15 +7140,15 @@ function handleUndockedState()
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
         addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
-            if player:getWaypointCount() < 1 then
+            if comms_source:getWaypointCount() < 1 then
                 setCommsMessage("You need to set a waypoint before you can request backup.");
             else
                 setCommsMessage("To which waypoint should we deliver your supplies?");
-                for n=1,player:getWaypointCount() do
+                for n=1,comms_source:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("supplydrop")) then
+                        if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
-                            local target_x, target_y = player:getWaypoint(n)
+                            local target_x, target_y = comms_source:getWaypoint(n)
                             local script = Script()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
@@ -5289,13 +7166,13 @@ function handleUndockedState()
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
         addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
-            if player:getWaypointCount() < 1 then
+            if comms_source:getWaypointCount() < 1 then
                 setCommsMessage("You need to set a waypoint before you can request reinforcements.");
             else
                 setCommsMessage("To which waypoint should we dispatch the reinforcements?");
-                for n=1,player:getWaypointCount() do
+                for n=1,comms_source:getWaypointCount() do
                     addCommsReply("WP" .. n, function()
-                        if player:takeReputationPoints(getServiceCost("reinforcements")) then
+                        if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
                         else
@@ -5365,7 +7242,7 @@ function fillStationBrains()
 	end
 end
 function getFriendStatus()
-    if player:isFriendly(comms_target) then
+    if comms_source:isFriendly(comms_target) then
         return "friend"
     else
         return "neutral"
@@ -6460,9 +8337,11 @@ function placeFlagsPhase()
 		-- removes the "place flag" buttons if the player ship goes outside of the establish flag placement boundary
 		-- adds the "place flag" button back to the player ship when they return inside the established flag placement boundary
 	timeDivision = "hide"
-	minutes = math.floor((gameTimeLimit - (maxGameTime - hideFlagTime))/60)
-	seconds = (gameTimeLimit - (maxGameTime - hideFlagTime)) % 60
-	stationZebra:setCallSign(string.format("Hide flag %i:%.1f",minutes,seconds))
+	if stationZebra ~= nil and stationZebra:isValid() then
+		minutes = math.floor((gameTimeLimit - (maxGameTime - hideFlagTime))/60)
+		seconds = (gameTimeLimit - (maxGameTime - hideFlagTime)) % 60
+		stationZebra:setCallSign(string.format("Hide flag %i:%.1f",minutes,seconds))
+	end
 	if p1 ~= nil and p1:isValid() then
 		local p1x, p1y = p1:getPosition()
 		if p1x > 0 then
@@ -6635,28 +8514,45 @@ function placeFlagsPhase()
 			end
 		end
 	end
-	if p9 ~= nil and p9:isValid() then
-		p9x, p9y = p9:getPosition()
-		if p9x > 0 then
-			p9:destroy()
-		end
-	end
-	if p10 ~= nil and p10:isValid() then
-		p10x, p10y = p10:getPosition()
-		if p10x < 0 then
-			p10:destroy()
-		end
-	end
-	if p11 ~= nil and p11:isValid() then
-		p11x, p11y = p11:getPosition()
-		if p11x > 0 then
-			p11:destroy()
-		end
-	end
-	if p12 ~= nil and p12:isValid() then
-		p12x, p12y = p12:getPosition()
-		if p12x < 0 then
-			p12:destroy()
+	local boundary_check_list = {
+		{player = p9,	greater = true},
+		{player = p10,	greater = false},
+		{player = p11,	greater = true},
+		{player = p12,	greater = false},
+		{player = p13,	greater = true},
+		{player = p14,	greater = false},
+		{player = p15,	greater = true},
+		{player = p16,	greater = false},
+		{player = p17,	greater = true},
+		{player = p18,	greater = false},
+		{player = p19,	greater = true},
+		{player = p20,	greater = false},
+		{player = p21,	greater = true},
+		{player = p22,	greater = false},
+		{player = p23,	greater = true},
+		{player = p24,	greater = false},
+		{player = p25,	greater = true},
+		{player = p26,	greater = false},
+		{player = p27,	greater = true},
+		{player = p28,	greater = false},
+		{player = p29,	greater = true},
+		{player = p30,	greater = false},
+		{player = p31,	greater = true},
+		{player = p32,	greater = false},
+	}
+	for i=1,#boundary_check_list do
+		local bcp = boundary_check_list[i]
+		if bcp.player ~= nil and bcp.player:isValid() then
+			local p_x, p_y = bcp.player:getPosition()
+			if bcp.greater then
+				if p_x > 0 then
+					bcp.player:destroy()
+				end
+			else
+				if p_x < 0 then
+					bcp.player:destroy()
+				end
+			end
 		end
 	end
 end
@@ -6669,7 +8565,24 @@ function transitionFromPreparationToHunt()
 	removeP2FlagButton()
 	if p1Flag == nil then
 		if p1Flagx == nil then
-			p1Flagx, p1Flagy = p1:getPosition()
+			if p1 ~= nil and p1:isValid() then
+				p1Flagx, p1Flagy = p1:getPosition()
+--				print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship is valid)")
+			else
+				if p1.point_of_destruction_x ~= nil and p1.point_of_destruction_y ~= nil then
+					p1Flagx = p1.point_of_destruction_x
+					p1Flagy = p1.point_of_destruction_y
+--					print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship not valid, using point of destruction)")
+				else
+					p1Flagx = playerStartX[1]
+					p1Flagy = playerStartY[1]
+--					print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(ship not valid, using starting point)")
+				end
+			end
+		end
+		if p1Flagx > 0 then
+			p1Flagx = -1
+--			print("human flag x:",p1Flagx,"human flag y:",p1Flagy,"(point was in the wrong territory)")
 		end
 		if p1Flagx < -1*boundary then
 			p1Flagx = -1*boundary
@@ -6688,7 +8601,24 @@ function transitionFromPreparationToHunt()
 	end
 	if p2Flag == nil then
 		if p2Flagx == nil then
-			p2Flagx, p2Flagy = p2:getPosition()
+			if p2 ~= nil and p2:isValid() then
+				p2Flagx, p2Flagy = p2:getPosition()
+--				print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship is valid)")
+			else
+				if p2.point_of_destruction_x ~= nil and p2.point_of_destruction_y ~= nil then
+					p2Flagx = p2.point_of_destruction_x
+					p2Flagy = p2.point_of_destruction_y
+--					print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship not valid, using point of destruction)")
+				else
+					p2Flagx = playerStartX[2]
+					p2Flagy = playerStartY[2]
+--					print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(ship not valid, using starting point)")
+				end
+			end
+		end
+		if p2Flagx < 0 then
+			p2Flagx = 1
+--			print("kraylor flag x:",p2Flagx,"kraylor flag y:",p2Flagy,"(point was in the wrong territory)")
 		end
 		if p2Flagx > boundary then
 			p2Flagx = boundary
@@ -6813,12 +8743,24 @@ function transitionFromPreparationToHunt()
 			local fx, fy = flag:getPosition()
 		end
 	end
+	if worm_hole_list ~= nil then
+		if #worm_hole_list > 0 then
+			for i=1,#worm_hole_list do
+				local worm = worm_hole_list[i]
+				worm:setTargetPosition(worm.final_target_x,worm.final_target_y)
+			end
+		end
+	end
+	if flag_area_boundary_items ~= nil then
+		if #flag_area_boundary_items > 0 then
+			for i=1,#flag_area_boundary_items do
+				flag_area_boundary_items[i]:destroy()
+			end
+		end
+	end
+	mainGMButtons()
 end
 function manageHuntPhaseMechanics()
-	if GMIntelligentBugger == nil then
-		GMIntelligentBugger = "Intelligent Bugger"
-		addGMFunction(GMIntelligentBugger,intelligentBugger)
-	end
 	timeDivision = "hunt"
 	humanShipsRemaining = 0
 	kraylorShipsRemaining = 0
@@ -6829,45 +8771,54 @@ function manageHuntPhaseMechanics()
 		p = getPlayerShip(pidx)
 		if p ~= nil then
 			px, py = p:getPosition()
-			if p:isValid() and p:getFaction() ~= "Exuari" then
-				if pidx % 2 == 0 then	--process Kraylor player ship
+			if p:isValid() then
+				if p:getFaction() == "Kraylor" then
 					kraylorShipsRemaining = kraylorShipsRemaining + 1
 					if p.flag and px > 0 then
+						timeDivision = "victory-kraylor"
 						victory("Kraylor")
 					end
 					if p1Flag:isValid() then
 						if distance(p,p1Flag) < 500 and p1Flag:isScannedByFaction("Kraylor") then
 							p.flag = true
+							p.pick_up_count = p.pick_up_count + 1
 							if p.flag then
-								if p.flag_info == nil then
-									local labelName = string.format("flag_badge_helm_%s",p:getCallSign())
-									if p:hasPlayerAtPosition("Helms") then
-										p:addCustomInfo("Helms",labelName,"Carrying Flag")
-									end
-									if p:hasPlayerAtPosition("Tactical") then
-										labelName = string.format("flag_badge_tactical_%s",p:getCallSign())
-										p:addCustomInfo("Tactical",labelName,"Carrying Flag")
-									end
-									p.flag_info = true
+								if p:hasPlayerAtPosition("Helms") then
+									p.flag_badge = "flag_badge"
+									p:addCustomInfo("Helms",p.flag_badge,"Human Flag Aboard")
+								end
+								if p:hasPlayerAtPosition("Tactical") then
+									p.flag_badge_tac = "flag_badge_tac"
+									p:addCustomInfo("Tactical",p.flag_badge_tac,"Human Flag Aboard")
 								end
 							end
 							p1Flag:destroy()
 							p:addToShipLog("You picked up the Human Navy flag","Green")
 							if difficulty < 2 then
-								for cpidx=1,31,2 do
-									cp = getPlayerShip(cpidx)
+								for cpidx=1,32 do
+									local cp = getPlayerShip(cpidx)
 									if cp ~= nil and cp:isValid() then
-										if difficulty < 1 then
-											cp:addToShipLog(string.format("%s has picked up your flag",p:getCallSign()),"Magenta")
-										else
-											cp:addToShipLog("Your flag has been picked up","Magenta")
+										if cp ~= p then
+											if p:getFaction() == "Human Navy" then
+												if difficulty < 1 then
+													cp:addToShipLog(string.format("Kraylor ship %s picked up your flag",p:getCallSign()),"Magenta")
+												else
+													cp:addToShipLog("The Kraylor picked up your flag","Magenta")
+												end
+											elseif p:getFaction() == "Kraylor" then
+												if difficulty < 1 then
+													cp:addToShipLog(string.format("%s picked up the Human Navy Flag",p:getCallSign()),"Magenta")
+												else
+													cp:addToShipLog("Your team picked up the Human Navy flag","Magenta")
+												end
+											end
 										end
 									end
 								end
 								if difficulty < 1 then
-									globalMessage(string.format("%s obtained Human Navy flag",p:getCallSign()))
+									globalMessage(string.format("Kraylor ship %s obtained Human Navy flag",p:getCallSign()))
 								else
-									globalMessage("Human Navy flag obtained")
+									globalMessage("Kraylor obtained Human Navy flag")
 								end
 							else
 								if hard_flag_reveal then
@@ -6877,11 +8828,12 @@ function manageHuntPhaseMechanics()
 						end
 					end
 					if px < 0 then				--Kraylor in Human area
-						for cpidx=1,31,2 do		--loop through Human ships
+						for cpidx=1,32 do
 							cp = getPlayerShip(cpidx)
-							if cp ~= nil and cp:isValid() then
+							if cp ~= nil and cp:isValid() and cp:getFaction() == "Human Navy" then
 								if distance(p,cp) < tag_distance then	--tagged
 									p:setPosition(player_tag_relocate_x[pidx],player_tag_relocate_y[pidx])
+									p.tagged_count = p.tagged_count + 1
 									curWarpDmg = p:getSystemHealth("warp")
 									if curWarpDmg > (-1 + tagDamage) then
 										p:setSystemHealth("warp", curWarpDmg - tagDamage)
@@ -6895,24 +8847,42 @@ function manageHuntPhaseMechanics()
 									end
 									if p.flag then				--carrying flag
 										p.flag = false			--drop flag
-										if p.flag_info ~= nil then
-											local labelName = string.format("flag_badge_helm_%s",p:getCallSign())
-											if p:hasPlayerAtPosition("Helms") then
-												p:removeCustom("Helms",labelName)
-											end
-											if p:hasPlayerAtPosition("Tactical") then
-												labelName = string.format("flag_badge_tactical_%s",p:getCallSign())
-												p:removeCustom("Tactical",labelName)
-											end
-											p.flag_info = nil
+										p.drop_count = p.drop_count + 1
+										if p.flag_badge ~= nil then
+											p:removeCustom("Helms",p.flag_badge)
+											p.flag_badge = nil
+										end
+										if p.flag_badge_tac ~= nil then
+											p:removeCustom("Tactical",p.flag_badge_tac)
+											p.flag_badge_tac = nil
 										end
 										p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(human_flags,p1Flag)
 										p1Flag:setDescriptions("Flag","Human Navy Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 										if difficulty < 2 then
 											p1Flag:setScannedByFaction("Kraylor",true)
+											for cpidx=1,32 do
+												local cp = getPlayerShip(cpidx)
+												if cp ~= nil and cp:isValid() then
+													if cp ~= p then
+														if p:getFaction() == "Human Navy" then
+															if difficulty < 1 then
+																cp:addToShipLog(string.format("Kraylor ship %s dropped your flag",p:getCallSign()),"Magenta")
+															else
+																cp:addToShipLog("The Kraylor dropped your flag","Magenta")
+															end
+														elseif p:getFaction() == "Kraylor" then
+															if difficulty < 1 then
+																cp:addToShipLog(string.format("%s dropped the Human Navy Flag",p:getCallSign()),"Magenta")
+															else
+																cp:addToShipLog("Your team dropped the Human Navy flag","Magenta")
+															end
+														end
+													end
+												end
+											end
 											if difficulty < 1 then
-												globalMessage(string.format("%s dropped Human Navy flag",p:getCallSign()))
+												globalMessage(string.format("Kraylor ship %s dropped Human Navy flag",p:getCallSign()))
 											else
 												globalMessage("Human Navy flag dropped")
 											end
@@ -6926,44 +8896,53 @@ function manageHuntPhaseMechanics()
 							end
 						end
 					end
-				else	-- process Human player ship
+				elseif p:getFaction() == "Human Navy" then	-- process Human player ship
 					humanShipsRemaining = humanShipsRemaining + 1
 					if p.flag and px < 0 then
+						timeDivision = "victory-human"
 						victory("Human Navy")
 					end
 					if p2Flag:isValid() then
 						if distance(p,p2Flag) < 500 and p2Flag:isScannedByFaction("Human Navy") then
 							p.flag = true
+							p.pick_up_count = p.pick_up_count + 1
 							if p.flag then
-								if p.flag_info == nil then
-									local labelName = string.format("flag_badge_helm_%s",p:getCallSign())
-									if p:hasPlayerAtPosition("Helms") then
-										p:addCustomInfo("Helms",labelName,"Carrying Flag")
-									end
-									if p:hasPlayerAtPosition("Tactical") then
-										labelName = string.format("flag_badge_tactical_%s",p:getCallSign())
-										p:addCustomInfo("Tactical",labelName,"Carrying Flag")
-									end
-									p.flag_info = true
+								if p:hasPlayerAtPosition("Helms") then
+									p.flag_badge = "flag_badge"
+									p:addCustomInfo("Helms",p.flag_badge,"Kraylor Flag Aboard")
+								end
+								if p:hasPlayerAtPosition("Tactical") then
+									p.flag_badge_tac = "flag_badge_tac"
+									p:addCustomInfo("Tactical",p.flag_badge_tac,"Kraylor Flag Aboard")
 								end
 							end
 							p2Flag:destroy()
 							p:addToShipLog("You picked up the Kraylor flag","Green")
 							if difficulty < 2 then
-								for cpidx=2,32,2 do
+								for cpidx=1,32 do
 									cp = getPlayerShip(cpidx)
 									if cp ~= nil and cp:isValid() then
-										if difficulty < 1 then
-											cp:addToShipLog(string.format("%s has picked up your flag",p:getCallSign()),"Magenta")
-										else
-											cp:addToShipLog("Your flag has been picked up","Magenta")
+										if cp ~= p then
+											if p:getFaction() == "Kraylor" then
+												if difficulty < 1 then
+													cp:addToShipLog(string.format("Human Navy ship %s picked up your flag",p:getCallSign()),"Magenta")
+												else
+													cp:addToShipLog("The Human Navy picked up your flag","Magenta")
+												end
+											elseif p:getFaction() == "Human Navy" then
+												if difficulty < 1 then
+													cp:addToShipLog(string.format("%s picked up the Kraylor Flag",p:getCallSign()),"Magenta")
+												else
+													cp:addToShipLog("Your team picked up the Kraylor flag","Magenta")
+												end
+											end
 										end
 									end
 								end
 								if difficulty < 1 then
-									globalMessage(string.format("%s obtained Kraylor flag",p:getCallSign()))
+									globalMessage(string.format("Human Navy ship %s obtained Kraylor flag",p:getCallSign()))
 								else
-									globalMessage("Kraylor flag obtained")
+									globalMessage("Human Navy obtained Kraylor flag")
 								end
 							else
 								if hard_flag_reveal then
@@ -6973,11 +8952,12 @@ function manageHuntPhaseMechanics()
 						end
 					end
 					if px > 0 then				--Human in Kraylor area
-						for cpidx=2,32,2 do		--loop through Kraylor ships
+						for cpidx=1,32 do		--loop through Kraylor ships
 							cp = getPlayerShip(cpidx)
-							if cp ~= nil and cp:isValid() then
+							if cp ~= nil and cp:isValid() and cp:getFaction() == "Kraylor" then
 								if distance(p,cp) < tag_distance then	--tagged
 									p:setPosition(player_tag_relocate_x[pidx],player_tag_relocate_y[pidx])
+									p.tagged_count = p.tagged_count + 1
 									curWarpDmg = p:getSystemHealth("warp")
 									if curWarpDmg > (-1 + tagDamage) then
 										p:setSystemHealth("warp", curWarpDmg - tagDamage)
@@ -6991,26 +8971,44 @@ function manageHuntPhaseMechanics()
 									end
 									if p.flag then				--carrying flag
 										p.flag = false			--drop flag
-										if p.flag_info ~= nil then
-											local labelName = string.format("flag_badge_helm_%s",p:getCallSign())
-											if p:hasPlayerAtPosition("Helms") then
-												p:removeCustom("Helms",labelName)
-											end
-											if p:hasPlayerAtPosition("Tactical") then
-												labelName = string.format("flag_badge_tactical_%s",p:getCallSign())
-												p:removeCustom("Tactical",labelName)
-											end
-											p.flag_info = nil
+										p.drop_count = p.drop_count + 1
+										if p.flag_badge ~= nil then
+											p:removeCustom("Helms",p.flag_badge)
+											p.flag_badge = nil
+										end
+										if p.flag_badge_tac ~= nil then
+											p:removeCustom("Tactical",p.flag_badge_tac)
+											p.flag_badge_tac = nil
 										end
 										p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(kraylor_flags,p2Flag)
 										p2Flag:setDescriptions("Flag","Kraylor Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
 										if difficulty < 2 then
 											p2Flag:setScannedByFaction("Human Navy",true)
+											for cpidx=1,32 do
+												local cp = getPlayerShip(cpidx)
+												if cp ~= nil and cp:isValid() then
+													if cp ~= p then
+														if p:getFaction() == "Kraylor" then
+															if difficulty < 1 then
+																cp:addToShipLog(string.format("Human Navy ship %s dropped your flag",p:getCallSign()),"Magenta")
+															else
+																cp:addToShipLog("The Human Navy dropped your flag","Magenta")
+															end
+														elseif p:getFaction() == "Human Navy" then
+															if difficulty < 1 then
+																cp:addToShipLog(string.format("%s dropped the Kraylor Flag",p:getCallSign()),"Magenta")
+															else
+																cp:addToShipLog("Your team dropped the Kraylor flag","Magenta")
+															end
+														end
+													end
+												end
+											end
 											if difficulty < 1 then
-												globalMessage(string.format("%s dropped Kraylor flag",p:getCallSign()))
+												globalMessage(string.format("Human Navy %s dropped Kraylor flag",p:getCallSign()))
 											else
-												globalMessage("Kraylor flag dropped")
+												globalMessage("Human Navy flag dropped")
 											end
 										else
 											if hard_flag_reveal then
@@ -7023,48 +9021,12 @@ function manageHuntPhaseMechanics()
 						end
 					end
 				end
-			else						--player not valid (destroyed)
-				if p.flag then			--destroyed ship carrying flag
-					p.flag = false		--drop flag
-					if pidx % 2 == 0 then	--Kraylor destroyed, reinstate Human flag
-						p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
-						table.insert(human_flags,p1Flag)
-						p1Flag:setDescriptions("Flag","Human Navy Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
-						if difficulty < 2 then
-							p1Flag:setScannedByFaction("Kraylor",true)
-							if difficulty < 1 then
-								globalMessage(string.format("%s dropped Human Navy flag",p:getCallSign()))
-							else
-								globalMessage("Human Navy flag dropped")
-							end
-						else
-							if hard_flag_reveal then
-								globalMessage("Flag dropped")
-							end
-						end
-					else					--Human destroyed, reinstate Kraylor flag
-						p2Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
-						table.insert(kraylor_flags,p2Flag)
-						p2Flag:setDescriptions("Flag","Kraylor Flag"):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
-						if difficulty < 2 then
-							p2Flag:setScannedByFaction("Human Navy",true)
-							if difficulty < 1 then
-								globalMessage(string.format("%s dropped Kraylor flag",p:getCallSign()))
-							else
-								globalMessage("Kraylor flag dropped")
-							end
-						else
-							if hard_flag_reveal then
-								globalMessage("Flag dropped")
-							end
-						end
-					end
-				end
 			end
 		end
 	end
 	if kraylorShipsRemaining == 0 then
 		if side_destroyed_ends_game then
+			timeDivision = "victory-human"
 			victory("Human Navy")
 		else
 			if game_timer_reset_on_side_destruction == nil then
@@ -7075,6 +9037,7 @@ function manageHuntPhaseMechanics()
 	end
 	if humanShipsRemaining == 0 then
 		if side_destroyed_ends_game then
+			timeDivision = "victory-kraylor"
 			victory("Kraylor")
 		else
 			if game_timer_reset_on_side_destruction == nil then
@@ -7106,7 +9069,7 @@ function droneDetectFlagCheck(delta)
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then	--science officers get messages from all drones
-									for pidx=1,12 do
+									for pidx=1,32 do
 										p = getPlayerShip(pidx)
 										if p ~= nil and p:isValid() then
 											local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
@@ -7122,7 +9085,7 @@ function droneDetectFlagCheck(delta)
 										end	--valid player
 									end	--player loop
 								elseif difficulty > 1 then	--science officer gets messages from drones launched from their own ship
-									for pidx=1,12 do
+									for pidx=1,32 do
 										p = getPlayerShip(pidx)
 										if p ~= nil and p:isValid() then
 											if obj.deployer ~= nil and obj.deployer == p then
@@ -7140,10 +9103,10 @@ function droneDetectFlagCheck(delta)
 										end	--valid player
 									end	--player loop
 								else	--normal difficulty 1: science officers get messages from friendly ships' drones
-									for pidx=1,12 do
+									for pidx=1,32 do
 										p = getPlayerShip(pidx)
 										if p ~= nil and p:isValid() then
-											if p:getFaction() == "Kraylor" then
+											if p:getFaction() == "Kraylor" and obj:getFaction() == "Kraylor" then
 												local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 												if p:hasPlayerAtPosition("Science") then
 													p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
@@ -7182,7 +9145,7 @@ function droneDetectFlagCheck(delta)
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then
-									for pidx=1,12 do
+									for pidx=1,32 do
 										p = getPlayerShip(pidx)
 										if p ~= nil and p:isValid() then
 											local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
@@ -7198,7 +9161,7 @@ function droneDetectFlagCheck(delta)
 										end	--valid player
 									end	--player loop
 								elseif difficulty > 1 then
-									for pidx=1,12 do
+									for pidx=1,32 do
 										p = getPlayerShip(pidx)
 										if p ~= nil and p:isValid() then
 											if obj.deployer ~= nil and obj.deployer == p then
@@ -7216,10 +9179,10 @@ function droneDetectFlagCheck(delta)
 										end	--valid player
 									end	--player loop
 								else	--normal difficulty 1
-									for pidx=1,12 do
+									for pidx=1,32 do
 										p = getPlayerShip(pidx)
 										if p ~= nil and p:isValid() then
-											if p:getFaction() == "Human Navy" then
+											if p:getFaction() == "Human Navy" and obj:getFaction() == "Human Navy" then
 												local drone_message_label = string.format("scienceDroneNote%s%s",obj:getCallSign(),p:getCallSign())
 												if p:hasPlayerAtPosition("Science") then
 													p:addCustomMessage("Science",drone_message_label,string.format("Drone %s in sector %s reports possible flag in sector %s",obj:getCallSign(),obj:getSectorName(),flag:getSectorName()))
@@ -7253,9 +9216,29 @@ function droneDetectFlagCheck(delta)
 		drone_flag_check_timer = delta + drone_flag_check_interval
 	end	--drone flag check timer expiration
 end
+function buoyBeams(delta)
+	buoy_beam_timer = buoy_beam_timer - delta
+	if buoy_beam_timer < 0 then
+		for i=1,#boundary_items - 2 do
+			if i % 4 == buoy_beam_count % 4 then
+				BeamEffect():setSource(boundary_items[i],0,0,0):setTarget(boundary_items[i+2],0,0):setDuration(buoy_beam_interval):setRing(false):setTexture(boundary_beam_string[math.random(1,#boundary_beam_string)])
+				if i < 3 then
+					if stationZebra ~= nil and stationZebra:isValid() then
+						BeamEffect():setSource(boundary_items[i],0,0,0):setTarget(stationZebra,0,0):setDuration(buoy_beam_interval):setRing(false):setTexture(boundary_beam_string[math.random(1,#boundary_beam_string)])
+					end
+				end
+			end
+		end
+		buoy_beam_timer = buoy_beam_interval
+		buoy_beam_count = buoy_beam_count + 1
+	end
+end
 
  -- ***********************************************************************************
 function update(delta)
+	if boundary_marker == "buoys" then
+		buoyBeams(delta)
+	end
 	if delta == 0 then
 		manageAddingNewPlayerShips()
 		return
@@ -7266,6 +9249,7 @@ function update(delta)
 	end
 	gameTimeLimit = gameTimeLimit - delta
 	if gameTimeLimit < 0 then
+		timeDivision = "victory-exuari"
 		victory("Exuari")
 	end
 --	print(string.format("Max game time: %i, Hide flag time: %i, Game time limit: %.1f",maxGameTime,hideFlagTime,gameTimeLimit))
@@ -7287,6 +9271,24 @@ function update(delta)
 	end
 	if plotH ~= nil then	--health
 		plotH(delta)
+	end
+	for pidx=1,32 do
+		local p5 = getPlayerShip(pidx)
+		if p5 ~= nil and p5:isValid() then
+			local name_tag_text = string.format("%s in %s",p5:getCallSign(),p5:getSectorName())
+			if p5:hasPlayerAtPosition("Helms") then
+				p5.name_tag_helm = "name_tag_helm"
+				p5:addCustomInfo("Helms",p5.name_tag_helm,name_tag_text)
+			end
+			if p5:hasPlayerAtPosition("Tactical") then
+				p5.name_tag_helm_tac = "name_tag_helm_tac"
+				p5:addCustomInfo("Tactical",p5.name_tag_helm_tac,name_tag_text)
+			end
+			if p5:hasPlayerAtPosition("SinglePilot") then
+				p5.name_tag_helm_single = "name_tag_helm_single"
+				p5:addCustomInfo("SinglePilot",p5.name_tag_helm_single,name_tag_text)
+			end
+		end
 	end
 	if plotW ~= nil then	--waves of marauders
 		plotW(delta)

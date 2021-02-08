@@ -390,6 +390,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 system.write("heat", ship->systems[n].heat_level);
                 system.write("coolant_level", ship->systems[n].coolant_level);
                 system.write("coolant_request", ship->systems[n].coolant_request);
+                system.write("power_factor", ship->systems[n].power_factor);
             }
         }
     }

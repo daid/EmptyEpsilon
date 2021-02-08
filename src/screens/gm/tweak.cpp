@@ -37,6 +37,12 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry(tr("tab", "Ship"), "");
     }
 
+    if (tweak_type == TW_Asteroid)
+    {
+        pages.push_back(new GuiAsteroidTweak(this));
+        list->addEntry(tr("tab","Asteroid"), "");
+    }
+
     if (tweak_type == TW_Jammer)
     {
         pages.push_back(new GuiJammerTweak(this));
@@ -59,6 +65,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry(tr("tab", "Beams"), "");
         pages.push_back(new GuiShipTweakSystems(this));
         list->addEntry(tr("tab", "Systems"), "");
+        pages.push_back(new GuiShipTweakSystemPowerFactors(this));
+        list->addEntry(tr("tab", "Power"), "");
     }
 
     if (tweak_type == TW_Player)
@@ -110,6 +118,15 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
+    // Set type name. Does not change ship type.
+    (new GuiLabel(left_col, "", tr("Type name:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+
+    type_name = new GuiTextEntry(left_col, "", "");
+    type_name->setSize(GuiElement::GuiSizeMax, 50);
+    type_name->callback([this](string text) {
+        target->setTypeName(text);
+    });
+
     (new GuiLabel(left_col, "", tr("Impulse speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
         target->impulse_max_speed = value;
@@ -141,15 +158,6 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     jump_charge_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     // Right column
-    // Set type name. Does not change ship type.
-    (new GuiLabel(right_col, "", tr("Type name:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-
-    type_name = new GuiTextEntry(right_col, "", "");
-    type_name->setSize(GuiElement::GuiSizeMax, 50);
-    type_name->callback([this](string text) {
-        target->setTypeName(text);
-    });
-
     // Hull max and state sliders
     (new GuiLabel(right_col, "", tr("Hull max:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     hull_max_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
@@ -164,11 +172,11 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-   // Can be destroyed bool
-   can_be_destroyed_toggle = new GuiToggleButton(right_col, "", tr("Could be destroyed"), [this](bool value) {
-       target->setCanBeDestroyed(value);
-   });
-   can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    // Can be destroyed bool
+    can_be_destroyed_toggle = new GuiToggleButton(right_col, "", tr("Could be destroyed"), [this](bool value) {
+        target->setCanBeDestroyed(value);
+    });
+    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
 
     // Warp and jump drive toggles
     (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -181,6 +189,19 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
         target->setJumpDrive(value);
     });
     jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
+
+    // Radar ranges
+    (new GuiLabel(right_col, "", tr("Short-range radar range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    short_range_radar_slider = new GuiSlider(right_col, "", 100.0, 20000.0, 0.0, [this](float value) {
+        target->setShortRangeRadarRange(value);
+    });
+    short_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", tr("Long-range radar range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    long_range_radar_slider = new GuiSlider(right_col, "", 100.0, 100000.0, 0.0, [this](float value) {
+        target->setLongRangeRadarRange(value);
+    });
+    long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiTweakShip::onDraw(sf::RenderTarget& window)
@@ -196,6 +217,8 @@ void GuiTweakShip::onDraw(sf::RenderTarget& window)
     turn_speed_slider->setValue(target->turn_speed);
     hull_max_slider->setValue(target->hull_max);
     can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
+    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
+    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
 }
 
 void GuiTweakShip::open(P<SpaceObject> target)
@@ -268,6 +291,33 @@ void GuiJammerTweak::open(P<SpaceObject> target)
 void GuiJammerTweak::onDraw(sf::RenderTarget& window)
 {
     jammer_range_slider->setValue(target->getRange());
+}
+
+GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)
+: GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+
+    (new GuiLabel(left_col, "", tr("Asteroid Size:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    asteroid_size_slider = new GuiSlider(left_col, "", 10, 500, 0, [this](float value) {
+        target->setSize(value);
+    });
+    asteroid_size_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+}
+
+void GuiAsteroidTweak::open(P<SpaceObject> target)
+{
+    P<Asteroid> asteroid = target;
+    this->target = asteroid;
+}
+
+void GuiAsteroidTweak::onDraw(sf::RenderTarget& window)
+{
+    asteroid_size_slider->setValue(target->getSize());
 }
 
 void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
@@ -585,6 +635,74 @@ void GuiShipTweakSystems::open(P<SpaceObject> target)
     this->target = ship;
 }
 
+string GuiShipTweakSystemPowerFactors::powerFactorToText(float power)
+{
+    return string(power, 1);
+}
+
+GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* owner)
+    : GuiTweakPage(owner)
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    GuiAutoLayout* center_col = new GuiAutoLayout(this, "CENTER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    center_col->setPosition(10, 25, ATopCenter)->setSize(200, GuiElement::GuiSizeMax);
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(200, GuiElement::GuiSizeMax);
+
+    // Header
+    (new GuiLabel(left_col, "", "", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(center_col, "", tr("current factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", tr("desired factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        ESystem system = ESystem(n);
+        (new GuiLabel(left_col, "", tr("{system}").format({ {"system", getLocaleSystemName(system)} }), 20))->setSize(GuiElement::GuiSizeMax, 30);
+        system_current_power_factor[n] = new GuiLabel(center_col, "", "", 20);
+        system_current_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
+
+        system_power_factor[n] = new GuiTextEntry(right_col, "", "");
+        system_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
+        system_power_factor[n]->enterCallback([this, n](const string& text)
+            {
+                // Perform safe conversion (typos can happen).
+                char* end = nullptr;
+                auto converted = strtof(text.c_str(), &end);
+                if (converted == 0.f && end == text.c_str())
+                {
+                    // failed - reset text to current value.
+                    system_power_factor[n]->setText(string(target->systems[n].power_factor, 1));
+                }
+                else
+                {
+                    // apply!
+                    target->systems[n].power_factor = converted;
+                }
+            });
+    }
+    // Footer
+    (new GuiLabel(center_col, "", tr("Applies on [Enter]"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+}
+
+void GuiShipTweakSystemPowerFactors::open(P<SpaceObject> target)
+{
+    P<SpaceShip> ship = target;
+    this->target = ship;
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        system_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
+    }
+}
+
+void GuiShipTweakSystemPowerFactors::onDraw(sf::RenderTarget& window)
+{
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        system_current_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
+    }
+}
+
 GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
@@ -729,18 +847,6 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     coolant_slider->addSnapValue(10,1)->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", tr("Short range radar:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    short_range_radar_slider = new GuiSlider(left_col, "", 100.0, 20000.0, 0.0, [this](float value) {
-        target->setShortRangeRadarRange(value);
-    });
-    short_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
-    (new GuiLabel(left_col, "", tr("Long range radar:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    long_range_radar_slider = new GuiSlider(left_col, "", 100.0, 100000.0, 0.0, [this](float value) {
-        target->setLongRangeRadarRange(value);
-    });
-    long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
-
     (new GuiLabel(left_col, "", tr("Max Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     max_scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
         target->setMaxScanProbeCount(value);
@@ -804,8 +910,6 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
 {
     coolant_slider->setValue(target->max_coolant);
-    short_range_radar_slider->setValue(target->getShortRangeRadarRange());
-    long_range_radar_slider->setValue(target->getLongRangeRadarRange());
     max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
     scan_probes_slider->setValue(target->getScanProbeCount());
     can_scan->setValue(target->getCanScan());

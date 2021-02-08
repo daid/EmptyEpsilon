@@ -23,6 +23,7 @@ class CrewStationScreen : public GuiCanvas, public Updatable
     P<ThreatLevelEstimate> threat_estimate;
 public:
     CrewStationScreen();
+    virtual void destroy() override;
 
     GuiContainer* getTabContainer();
     void addStationTab(GuiElement* element, ECrewPosition position, string name, string icon);

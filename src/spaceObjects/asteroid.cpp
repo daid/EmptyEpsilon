@@ -9,8 +9,13 @@
 /// An asteroid in space. Which you can fly into and hit. Will do damage.
 REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 {
-    /// Set the size of this asteroid, per default asteroids have a size of 120
+    /// Set the radius of this asteroid
+    /// The default radius for an asteroid is between 110 and 130
+    /// Example: Asteroid():setSize(50)
     REGISTER_SCRIPT_CLASS_FUNCTION(Asteroid, setSize);
+    /// Gets the current radius of this asteroid
+    /// Example: local size=Asteroid():getSize()
+    REGISTER_SCRIPT_CLASS_FUNCTION(Asteroid, getSize);
 }
 
 REGISTER_MULTIPLAYER_CLASS(Asteroid, "Asteroid");
@@ -89,11 +94,21 @@ void Asteroid::setSize(float size)
     setRadius(size);
 }
 
+float Asteroid::getSize()
+{
+    return size;
+}
+
 /// An asteroid in space. Outside of hit range, just for visuals.
 REGISTER_SCRIPT_SUBCLASS(VisualAsteroid, SpaceObject)
 {
-    /// Set the size of this asteroid, per default asteroids have a size of 120
+    /// Set the radius of this asteroid
+    /// The default radius for an VisualAsteroid is between 110 and 130
+    /// Example: VisualAsteroid():setSize(50)
     REGISTER_SCRIPT_CLASS_FUNCTION(VisualAsteroid, setSize);
+    /// Gets the current radius of this asteroid
+    /// Example: local size=VisualAsteroid():getSize()
+    REGISTER_SCRIPT_CLASS_FUNCTION(VisualAsteroid, getSize);
 }
 
 REGISTER_MULTIPLAYER_CLASS(VisualAsteroid, "VisualAsteroid");
@@ -137,4 +152,9 @@ void VisualAsteroid::setSize(float size)
     setRadius(size);
     while(fabs(z) < size * 2)
         z *= random(1.2, 2.0);
+}
+
+float VisualAsteroid::getSize()
+{
+    return size;
 }

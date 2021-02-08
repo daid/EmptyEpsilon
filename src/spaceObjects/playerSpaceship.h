@@ -2,9 +2,12 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
+
+class ScanProbe;
 
 enum ECommsState
 {
@@ -50,8 +53,6 @@ public:
     constexpr static float max_scanning_delay = 6.0;
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
-    // Subsystem effectiveness base rates
-    static float system_power_user_factor[];
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
@@ -114,9 +115,6 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
-
-    float long_range_radar_range = 50000.0f;
-    float short_range_radar_range = 5000.0f;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -159,6 +157,8 @@ public:
     int scan_probe_stock;
     float scan_probe_recharge = 0.0;
     ScriptSimpleCallback on_probe_launch;
+    ScriptSimpleCallback on_probe_link;
+    ScriptSimpleCallback on_probe_unlink;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
@@ -228,6 +228,8 @@ public:
     int getMaxScanProbeCount() { return max_scan_probes; }
 
     void onProbeLaunch(ScriptSimpleCallback callback);
+    void onProbeLink(ScriptSimpleCallback callback);
+    void onProbeUnlink(ScriptSimpleCallback callback);
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);
@@ -245,7 +247,8 @@ public:
     void commandWarp(int8_t target);
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
-    void commandSetScienceLink(int32_t id);
+    void commandSetScienceLink(P<ScanProbe> probe);
+    void commandClearScienceLink();
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
@@ -332,12 +335,6 @@ public:
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
-
-    // Radar range
-    float getLongRangeRadarRange();
-    float getShortRangeRadarRange();
-    void setLongRangeRadarRange(float range);
-    void setShortRangeRadarRange(float range);
 
     // Script export function
     virtual string getExportLine() override;

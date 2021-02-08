@@ -2,6 +2,12 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
+/// Homing missile
+REGISTER_SCRIPT_SUBCLASS(HomingMissile, MissileWeapon)
+{
+  //registered for typeName and creation
+}
+
 REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
 HomingMissile::HomingMissile()
 : MissileWeapon("HomingMissile", MissileWeaponData::getDataFor(MW_Homing))

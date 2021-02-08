@@ -118,6 +118,7 @@ set(SOURCES
 	src/GMMessage.cpp
 	src/tutorialGame.cpp
 	src/scriptDataStorage.cpp
+	src/glObjects.cpp
 	src/menus/joinServerMenu.cpp
 	src/menus/serverBrowseMenu.cpp
 	src/menus/mainMenus.cpp
@@ -126,6 +127,7 @@ set(SOURCES
 	src/menus/optionsMenu.cpp
 	src/menus/shipSelectionScreen.cpp
 	src/menus/autoConnectScreen.cpp
+	src/menus/hotkeyMenu.cpp
 	src/screens/cinematicViewScreen.cpp
 	src/screens/crewStationScreen.cpp
 	src/screens/topDownScreen.cpp
@@ -199,6 +201,7 @@ set(SOURCES
 	src/screenComponents/mineSweeper.cpp
 	src/screenComponents/impulseSound.cpp
 	src/gui/colorConfig.cpp
+	src/gui/hotkeyBinder.cpp
 	src/gui/hotkeyConfig.cpp
 	src/gui/joystickConfig.cpp
 	src/gui/mouseRenderer.cpp
@@ -412,8 +415,12 @@ endif()
 
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
-target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:Release>:${OPTIMIZER_FLAGS}>)
-target_compile_options(${EXECUTABLE_NAME} PUBLIC $<$<CONFIG:RelWithDebInfo>:-g1 ${OPTIMIZER_FLAGS}>)
+target_compile_options(${EXECUTABLE_NAME}
+	PUBLIC
+	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<CONFIG:RelWithDebInfo>>:-g1>
+	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<OR:$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${OPTIMIZER_FLAGS}>
+	$<$<BOOL:${MSVC}>:/MP /permissive->
+)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 

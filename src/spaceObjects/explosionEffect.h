@@ -13,6 +13,15 @@ class ExplosionEffect : public SpaceObject, public Updatable
     string explosion_sound;
     sf::Vector3f particleDirections[particleCount];
     bool on_radar;
+#if FEATURE_3D_RENDERING
+    static sf::Shader* basicShader;
+    static uint32_t basicShaderPositionAttribute;
+    static uint32_t basicShaderTexCoordsAttribute;
+
+    static sf::Shader* particlesShader;
+    static uint32_t particlesShaderPositionAttribute;
+    static uint32_t particlesShaderTexCoordsAttribute;
+#endif
 public:
     ExplosionEffect();
     virtual ~ExplosionEffect();
