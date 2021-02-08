@@ -199,27 +199,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
     glDepthMask(GL_TRUE);
 
-    if (gameGlobalInfo)
-    {
-        //Render the background nebulas from the gameGlobalInfo. This ensures that all screens see the same background as it is replicated across clients.
-        for(int n=0; n<GameGlobalInfo::max_nebulas; n++)
-        {
-            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebula_info[n].textureName), sf::Texture::Pixels);
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-            glPushMatrix();
-            glRotatef(180, gameGlobalInfo->nebula_info[n].vector.x, gameGlobalInfo->nebula_info[n].vector.y, gameGlobalInfo->nebula_info[n].vector.z);
-            glColor4f(1,1,1,0.1);
-            glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2f(1.0,    0); glVertex3f( 100, 100, 100);
-            glTexCoord2f(   0,    0); glVertex3f( 100, 100,-100);
-            glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100, 100);
-            glTexCoord2f(   0, 1.0); glVertex3f(-100, 100,-100);
-            glEnd();
-            glPopMatrix();
-        }
-    }
-
     sf::Texture::bind(NULL);
     {
         float lightpos1[4] = {0, 0, 0, 1.0};

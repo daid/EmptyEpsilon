@@ -21,14 +21,6 @@ GameGlobalInfo::GameGlobalInfo()
         registerMemberReplication(&playerShipId[n]);
     }
 
-    for(int n=0; n<max_nebulas; n++)
-    {
-        nebula_info[n].vector = sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1));
-        nebula_info[n].textureName = "Nebula" + string(irandom(1, 3));
-        registerMemberReplication(&nebula_info[n].vector);
-        registerMemberReplication(&nebula_info[n].textureName);
-    }
-
     global_message_timeout = 0.0;
     player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;

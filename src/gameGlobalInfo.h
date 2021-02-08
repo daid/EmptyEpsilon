@@ -11,13 +11,6 @@ class GameStateLogger;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 
-class NebulaInfo
-{
-public:
-    sf::Vector3f vector;
-    string textureName;
-};
-
 enum EPlayerWarpJumpDrive
 {
     PWJ_ShipDefault = 0,
@@ -49,10 +42,6 @@ public:
      * \brief Maximum number of player ships.
      */
     static const int max_player_ships = 32;
-    /*!
-     * \brief Maximum number of visual background nebulas.
-     */
-    static const int max_nebulas = 32;
 private:
     int victory_faction;
     int32_t playerShipId[max_player_ships];
@@ -68,7 +57,6 @@ public:
     string banner_string;
 
     std::vector<float> reputation_points;
-    NebulaInfo nebula_info[max_nebulas];
     EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     EScanningComplexity scanning_complexity;
     //Hacking difficulty ranges from 0 to 3
