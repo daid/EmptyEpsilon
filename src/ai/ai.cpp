@@ -236,6 +236,9 @@ void ShipAI::updateTarget()
     EAIOrder orders = owner->getOrder();
     sf::Vector2f order_target_location = owner->getOrderTargetLocation();
     P<SpaceObject> order_target = owner->getOrderTarget();
+    // Update ranges before calculating
+    short_range = owner->getShortRangeRadarRange();
+    long_range = owner->getLongRangeRadarRange();
 
     // Check if we lost our target because it entered a nebula.
     if (target && target->canHideInNebula() && Nebula::blockedByNebula(position, target->getPosition()))
@@ -355,6 +358,10 @@ void ShipAI::updateTarget()
 
 void ShipAI::runOrders()
 {
+    // Update ranges before calculating
+    long_range = owner->getLongRangeRadarRange();
+    relay_range = long_range * 2.0f;
+
     //When we are not attacking a target, follow orders
     switch(owner->getOrder())
     {
@@ -722,6 +729,9 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
 
 float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 {
+    // Update ranges before calculating
+    short_range = owner->getShortRangeRadarRange();
+
     // Never fire missiles at scan probes.
     if (P<ScanProbe>(target))
     {
