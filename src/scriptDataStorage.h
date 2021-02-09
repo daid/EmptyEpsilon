@@ -18,6 +18,4 @@ private:
     std::unordered_map<std::string, std::string> data;
 };
 
-static P<ScriptStorage> storage;
-
 #endif // SCRIPT_DATA_STORAGE_H

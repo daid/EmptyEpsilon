@@ -1,5 +1,7 @@
 #include "scriptDataStorage.h"
 
+static P<ScriptStorage> storage;
+
 REGISTER_SCRIPT_CLASS(ScriptStorage)
 {
     /// Get a value from persistent script storage.
