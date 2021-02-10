@@ -72,8 +72,8 @@ void ElectricExplosionEffect::draw3DTransparent()
     glScalef(scale * size, scale * size, scale * size);
     glColor3f(alpha, alpha, alpha);
 
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
+    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
+    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
     Mesh* m = Mesh::getMesh("sphere.obj");
     m->render();
     glScalef(0.5, 0.5, 0.5);

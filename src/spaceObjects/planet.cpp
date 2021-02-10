@@ -279,7 +279,7 @@ void Planet::draw3D()
             PlanetMeshGenerator planet_mesh_generator(level_of_detail);
             planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
         }
-        sf::Shader* shader = ShaderManager::getShader("planetShader");
+        sf::Shader* shader = ShaderManager::getShader("shaders/planetShader");
         shader->setUniform("baseMap", *textureManager.getTexture(planet_texture));
         shader->setUniform("atmosphereColor", (sf::Glsl::Vec4)atmosphere_color);
         sf::Shader::bind(shader);
@@ -312,7 +312,7 @@ void Planet::draw3DTransparent()
             PlanetMeshGenerator planet_mesh_generator(level_of_detail);
             planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
         }
-        sf::Shader* shader = ShaderManager::getShader("planetShader");
+        sf::Shader* shader = ShaderManager::getShader("shaders/planetShader");
         shader->setUniform("baseMap", *textureManager.getTexture(cloud_texture));
         shader->setUniform("atmosphereColor", (sf::Glsl::Vec4)sf::Color(0,0,0));
         sf::Shader::bind(shader);

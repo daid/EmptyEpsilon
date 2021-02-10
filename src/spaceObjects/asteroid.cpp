@@ -44,7 +44,7 @@ void Asteroid::draw3D()
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
-    sf::Shader* shader = ShaderManager::getShader("objectShaderBS");
+    sf::Shader* shader = ShaderManager::getShader("shaders/objectShaderBS");
     shader->setUniform("baseMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_d.png"));
     shader->setUniform("specularMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_s.png"));
     sf::Shader::bind(shader);
@@ -137,7 +137,7 @@ void VisualAsteroid::draw3D()
     glTranslatef(0, 0, z);
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
-    sf::Shader* shader = ShaderManager::getShader("objectShaderBS");
+    sf::Shader* shader = ShaderManager::getShader("shaders/objectShaderBS");
     shader->setUniform("baseMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_d.png"));
     shader->setUniform("specularMap", *textureManager.getTexture("Astroid_" + string(model_number) + "_s.png"));
     sf::Shader::bind(shader);
