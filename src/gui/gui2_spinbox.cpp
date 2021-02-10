@@ -46,21 +46,13 @@ GuiSpinBox::GuiSpinBox(GuiContainer* owner, string id, float min_value, float ma
     // Populate start_value.
     setValue(start_value);
 
-    // Validate value on field destruction
+    // Validate value on field creation.
     text = getLimitedString(text);
 }
 
 GuiSpinBox::~GuiSpinBox()
 {
-    // Validate value on field destruction
-    text = getLimitedString(text);
-
-    // Run enter callback.
-    if (enter_func != nullptr)
-    {
-        func_t f = enter_func;
-        f(text);
-    }
+    // TODO: Handle value on field destruction.
 }
 
 void GuiSpinBox::onDraw(sf::RenderTarget& window)
