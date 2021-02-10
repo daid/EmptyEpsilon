@@ -1,5 +1,7 @@
 //Simple per-pixel light shader.
 
+const vec4 light_position = vec4(20000., 20000., 20000., 1.0);
+
 uniform sampler2D baseMap;
 uniform sampler2D illuminationMap;
 
@@ -8,7 +10,7 @@ varying vec3 position;
 
 void main()
 {
-	vec3 lightDir = normalize(vec3(gl_LightSource[0].position) - position);
+	vec3 lightDir = normalize(vec3(light_position) - position);
 	vec3 n = normalize(normal);
 	float intensity = max(0.1, dot(lightDir, n));
 	
