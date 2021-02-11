@@ -104,7 +104,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
             2, 6, 4, 4, 0, 2, // Back
             3, 2, 0, 0, 1, 3, // Left
             6, 7, 5, 5, 4, 6, // Right
-            7, 3, 1, 3, 1, 5, // Front
+            7, 3, 1, 1, 5, 7, // Front
             6, 2, 3, 3, 7, 6, // Top
             0, 4, 5, 5, 1, 0, // Bottom
         };
