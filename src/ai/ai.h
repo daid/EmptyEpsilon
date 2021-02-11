@@ -21,6 +21,10 @@ protected:
     bool has_missiles;
     bool has_beams;
     float beam_weapon_range;
+    float short_range;
+    float long_range;
+    float relay_range;
+
     enum class EWeaponDirection
     {
         Front,
