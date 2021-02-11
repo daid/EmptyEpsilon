@@ -131,7 +131,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     window.popGLStates();
 
-    ShaderManager::getShader("billboardShader")->setUniform("camera_position", camera_position);
+    ShaderManager::getShader("shaders/billboardShader")->setUniform("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
