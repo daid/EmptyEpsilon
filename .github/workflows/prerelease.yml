@@ -136,7 +136,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ jobs.make_release.outputs.upload_url }}
+          upload_url: ${{ needs.make_release.outputs.upload_url }}
           asset_path: ${{github.workspace}}/build/EmptyEpsilon.zip
           asset_name: EmptyEpsilon-win32-${{ matrix.build_type }}.zip
           asset_content_type: application/zip
