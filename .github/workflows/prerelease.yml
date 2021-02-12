@@ -24,8 +24,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.event.inputs.branch }}
+          release_name: Release ${{ github.event.inputs.branch }}
           draft: false
           prerelease: true
   linux:
@@ -40,7 +40,7 @@ jobs:
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.event.inputs.name }}
+        ref: ${{ github.event.inputs.branch }}
     - name: Build and test
       run: docker/build.sh
   windows-cross:
@@ -61,7 +61,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: EmptyEpsilon
-          ref: ${{ github.event.inputs.name }}
+          ref: ${{ github.event.inputs.branch }}
       - name: Build
         run: |
           mkdir -p _build_win32
@@ -86,7 +86,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: EmptyEpsilon
-          ref: ${{ github.event.inputs.name }}
+          ref: ${{ github.event.inputs.branch }}
       - name: Build
         run: |
           mkdir -p _build_macos
@@ -112,7 +112,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: EmptyEpsilon
-          ref: ${{ github.event.inputs.name }}
+          ref: ${{ github.event.inputs.branch }}
       - name: SeriousProton Checkout
         uses: actions/checkout@v2
         with:
@@ -123,11 +123,12 @@ jobs:
       - name: Configure CMake
         working-directory: ${{github.workspace}}/build
         run: >
-          cmake ../EmptyEpsilon
+          cmake
           -G "Visual Studio 16 2019" -A Win32
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DSFML_ROOT="${{github.workspace}}/externals/SFML-2.5.1"
           -DSERIOUS_PROTON_DIR=../SeriousProton
+          ../EmptyEpsilon
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: cmake --build . --config ${{ matrix.build_type }} --target package
