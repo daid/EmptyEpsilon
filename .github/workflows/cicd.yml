@@ -72,10 +72,11 @@ jobs:
     strategy:
       matrix:
         build_type: [Debug, RelWithDebInfo, Release]
+        arch: [Win32, x64]
     steps:
       - name: Dependencies
         run: |
-          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip”
+          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-${{ matrix.arch == 'Win32' && '32' || 64 }}-bit.zip”
           $sfml_zip = "${{github.workspace}}/sfml-dev.zip"
           (new-object System.Net.WebClient).DownloadFile($sfml_link, $sfml_zip)
           Expand-Archive -LiteralPath $sfml_zip -DestinationPath "${{github.workspace}}/externals"
@@ -93,11 +94,12 @@ jobs:
       - name: Configure CMake
         working-directory: ${{github.workspace}}/build
         run: >
-          cmake ../EmptyEpsilon
-          -G "Visual Studio 16 2019" -A Win32
+          cmake
+          -G "Visual Studio 16 2019" -A ${{ matrix.arch }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -DSFML_ROOT="${{github.workspace}}/externals/SFML-2.5.1"
-          -DSERIOUS_PROTON_DIR=../SeriousProton
+          -DSFML_ROOT="../externals/SFML-2.5.1"
+          -DSERIOUS_PROTON_DIR="../SeriousProton"
+          ../EmptyEpsilon
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: cmake --build . --config ${{ matrix.build_type }}      
+        run: cmake --build . --config ${{ matrix.build_type }} --target package
