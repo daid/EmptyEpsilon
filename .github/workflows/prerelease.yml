@@ -127,7 +127,7 @@ jobs:
           -G "Visual Studio 16 2019" -A Win32
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DSFML_ROOT="${{github.workspace}}/externals/SFML-2.5.1"
-          -DSERIOUS_PROTON_DIR="${{github.workspace}}/SeriousProton"
+          -DSERIOUS_PROTON_DIR="../SeriousProton"
           ../EmptyEpsilon
       - name: Build
         working-directory: ${{github.workspace}}/build
