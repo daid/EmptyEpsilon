@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.event.inputs.branch }}
+          tag_name: ${{ github.event.inputs.branch }}-release
           release_name: Release ${{ github.event.inputs.branch }}
           draft: false
           prerelease: true
@@ -127,7 +127,7 @@ jobs:
           -G "Visual Studio 16 2019" -A Win32
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DSFML_ROOT="${{github.workspace}}/externals/SFML-2.5.1"
-          -DSERIOUS_PROTON_DIR=../SeriousProton
+          -DSERIOUS_PROTON_DIR="${{github.workspace}}/SeriousProton"
           ../EmptyEpsilon
       - name: Build
         working-directory: ${{github.workspace}}/build
