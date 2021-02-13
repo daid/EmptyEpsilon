@@ -432,11 +432,6 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
                 coolant_slider->setValue(0.0f);
                 my_spaceship->commandSetSystemPowerRequest(system, 1.0f);
                 my_spaceship->commandSetSystemCoolantRequest(system, my_spaceship->max_coolant / n_systems);
-                if (gameGlobalInfo->use_nano_repair_crew)
-                {
-                    repair_slider->setValue(0.0f);
-                    my_spaceship->commandSetSystemRepairRequest(system, my_spaceship->max_repair / n_systems);
-                }
             }
         }
         
