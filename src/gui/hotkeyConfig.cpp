@@ -36,9 +36,9 @@ HotkeyConfig::HotkeyConfig()
 
     // - Single Pilot and Tactical use:
     //   - Helms TURN_LEFT and _RIGHT, DOCK_* and UNDOCK, *_IMPULSE, *_JUMP,
-    //     and WARP_*.
+    //     WARP_*, and COMBAT_*.
     //   - Weapons NEXT_ENEMY_TARGET, NEXT_TARGET, AIM_MISSILE_LEFT and _RIGHT,
-    //     *_AIM_LOCK, COMBAT_*, SELECT_MISSILE_*, *_TUBE_*, SHIELD_CAL_*,
+    //     *_AIM_LOCK, SELECT_MISSILE_*, *_TUBE_*, SHIELD_CAL_*,
     //     and *_SHIELDS.
     // - Tactical also uses:
     //   - Weapons BEAM_FREQUENCY_*, BEAM_SUBSYSTEM_TARGET_*
@@ -64,9 +64,9 @@ HotkeyConfig::HotkeyConfig()
     newKey("INC_JUMP", std::make_tuple("Increase jump distance", "RBracket"));
     newKey("DEC_JUMP", std::make_tuple("Decrease jump distance", "LBracket"));
     newKey("JUMP", std::make_tuple("Initiate jump", "BackSlash"));
-    //newKey("COMBAT_LEFT", "Combat maneuver left");
-    //newKey("COMBAT_RIGHT", "Combat maneuver right");
-    //newKey("COMBAT_BOOST", "Combat maneuver boost");
+    newKey("COMBAT_LEFT", std::make_tuple("Combat maneuver left", "J"));
+    newKey("COMBAT_RIGHT", std::make_tuple("Combat maneuver right", "L"));
+    newKey("COMBAT_BOOST", std::make_tuple("Combat maneuver boost", "I"));
 
     newCategory("WEAPONS", "Weapons");
     newKey("SELECT_MISSILE_TYPE_HOMING", std::make_tuple("Select homing", "Num1"));

@@ -24,13 +24,69 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     });
     slider->setPosition(0, -50, ABottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
 
+    was_strafe_key_pressed = false;
+    was_boost_key_pressed = false;
+
     (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, ABottomLeft))->setPosition(0, 0, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
 }
 
 void GuiCombatManeuver::onUpdate()
 {
-    setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+    // Only if this ship has combat maneuvers...
+    if (my_spaceship && my_spaceship->getCanCombatManeuver())
+    {
+        // Show these controls.
+        setVisible(true);
+        sf::Vector2f new_value = slider->getValue();
+        bool is_strafe_key_pressed = false;
+        bool is_boost_key_pressed = false;
+
+        // Implement hotkeys in the update loop.
+        // onHotkey doesn't support reading isKeyPressed, but we want to retain
+        // hotkey mapping, so it's implemented in onUpdate with isKeyPressed.
+
+        // Adjust lateral value on left/right hotkeys.
+        if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "COMBAT_LEFT")))
+        {
+            new_value.x = -1.0f;
+            was_strafe_key_pressed = true;
+            is_strafe_key_pressed = true;
+        }
+        else if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "COMBAT_RIGHT")))
+        {
+            new_value.x = 1.0f;
+            was_strafe_key_pressed = true;
+            is_strafe_key_pressed = true;
+        }
+        else if (was_strafe_key_pressed && !is_strafe_key_pressed)
+        {
+            // If either was pressed but isn't now, reset to 0.
+            // Otherwise, do nothing.
+            was_strafe_key_pressed = false;
+            new_value.x = 0.0f;
+        }
+
+        // Adjust boost on boost hotkey.
+        if (sf::Keyboard::isKeyPressed(hotkeys.getKeyByHotkey("HELMS", "COMBAT_BOOST")))
+        {
+            new_value.y = 1.0f;
+            was_boost_key_pressed = true;
+            is_boost_key_pressed = true;
+        }
+        else if (was_boost_key_pressed && !is_boost_key_pressed)
+        {
+            // If boost was pressed but isn't now, reset to 0.
+            // Otherwise, do nothing.
+            was_boost_key_pressed = false;
+            new_value.y = 0.0f;
+        }
+
+        // Apply values.
+        slider->setValue(new_value);
+        my_spaceship->commandCombatManeuverStrafe(new_value.x);
+        my_spaceship->commandCombatManeuverBoost(new_value.y);
+    }
 }
 
 void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
@@ -50,15 +106,7 @@ void GuiCombatManeuver::onDraw(sf::RenderTarget& window)
 
 void GuiCombatManeuver::onHotkey(const HotkeyResult& key)
 {
-    if (key.category == "HELMS" && my_spaceship && isVisible())
-    {
-        if (key.hotkey == "COMBAT_LEFT")
-        {}//TODO
-        else if (key.hotkey == "COMBAT_RIGHT")
-        {}//TODO
-        else if (key.hotkey == "COMBAT_BOOST")
-        {}//TODO
-    }
+    // Hotkeys handled in onUpdate.
 }
 
 void GuiCombatManeuver::setBoostValue(float value)

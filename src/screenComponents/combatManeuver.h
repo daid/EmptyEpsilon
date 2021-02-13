@@ -11,6 +11,9 @@ class GuiCombatManeuver : public GuiElement
 private:
     GuiSnapSlider2D* slider;
     GuiProgressbar* charge_bar;
+    bool was_strafe_key_pressed;
+    bool was_boost_key_pressed;
+
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
 
