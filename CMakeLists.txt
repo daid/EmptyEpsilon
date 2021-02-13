@@ -442,6 +442,14 @@ endif()
 add_subdirectory("${SERIOUS_PROTON_DIR}/src/libopus/" "${CMAKE_CURRENT_BINARY_DIR}/libopus")
 target_link_libraries(${EXECUTABLE_NAME} opus)
 
+set(GLM_BASE_PATH "${CMAKE_CURRENT_BINARY_DIR}/glm")
+set(GLM_ZIP "${GLM_BASE_PATH}/glm.zip")
+if(NOT EXISTS "${GLM_ZIP}")
+  file(DOWNLOAD "https://github.com/g-truc/glm/releases/download/0.9.9.8/glm-0.9.9.8.zip" "${GLM_ZIP}" TIMEOUT 60 TLS_VERIFY ON)
+  execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${GLM_ZIP}" WORKING_DIRECTORY "${GLM_BASE_PATH}")
+  target_include_directories(${EXECUTABLE_NAME} PUBLIC "${GLM_BASE_PATH}/glm")
+endif()
+
 # Some magical Win 32 stuff
 if(WIN32)
   target_link_libraries(${EXECUTABLE_NAME} wsock32 iphlpapi)
