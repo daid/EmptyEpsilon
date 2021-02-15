@@ -200,13 +200,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glDepthMask(GL_TRUE);
 
     sf::Texture::bind(NULL);
-    {
-        float lightpos1[4] = {0, 0, 0, 1.0};
-        glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
-
-        float lightpos0[4] = {20000, 20000, 20000, 1.0};
-        glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
-    }
 
     class RenderInfo
     {
