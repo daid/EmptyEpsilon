@@ -260,7 +260,10 @@ void ShipAI::updateTarget()
     // If we're roaming, select the best target within long-range radar range.
     if (orders == AI_Roaming)
     {
-        new_target = findBestTarget(position, long_range);
+        if (target)
+            new_target = findBestTarget(position, short_range + 2000.0f);
+        else
+            new_target = findBestTarget(position, long_range);
     }
 
     // If we're holding ground or flying toward a destination, select only
@@ -847,3 +850,4 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(sf::Vector2f position, float
     }
     return target;
 }
+
