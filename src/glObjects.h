@@ -42,6 +42,18 @@ namespace gl
         std::array<uint32_t, Count> buffers;
     };
 
+    class ScopedBufferBinding final
+    {
+    public:
+        explicit ScopedBufferBinding(uint32_t target, uint32_t buffer);
+        ~ScopedBufferBinding();
+
+        uint32_t get() const { return buffer; }
+    private:
+        uint32_t target = 0;
+        uint32_t buffer = 0;
+    };
+
     template<size_t Count>
     class Textures final
     {
@@ -70,6 +82,19 @@ namespace gl
         int32_t get() const { return attrib; }
     private:
         int32_t attrib = -1;
+    };
+
+    class ScopedTexture final
+    {
+    public:
+        ScopedTexture(uint32_t target, uint32_t texture);
+        ~ScopedTexture();
+
+        uint32_t get() const { return texture; }
+    private:
+        uint32_t target = 0;
+        uint32_t texture = 0;
+        int32_t previously_bound = -1;
     };
 
     bool isAvailable();
