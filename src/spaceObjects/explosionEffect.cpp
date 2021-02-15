@@ -84,8 +84,8 @@ void ExplosionEffect::draw3DTransparent()
     sf::Vector3f v3 = sf::Vector3f( 1,  1, 0);
     sf::Vector3f v4 = sf::Vector3f(-1,  1, 0);
 
-    ShaderManager::getShader("basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_sphere_texture.png"));
-    sf::Shader::bind(ShaderManager::getShader("basicShader"));
+    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_sphere_texture.png"));
+    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
     Mesh* m = Mesh::getMesh("sphere.obj");
     m->render();
 

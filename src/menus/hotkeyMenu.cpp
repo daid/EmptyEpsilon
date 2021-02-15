@@ -66,7 +66,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Bottom: Menu navigation
     // Back button to return to the Options menu
-    (new GuiButton(bottom_row, "BACK", tr("options", "BACK"), [this]()
+    (new GuiButton(bottom_row, "BACK", tr("options", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();

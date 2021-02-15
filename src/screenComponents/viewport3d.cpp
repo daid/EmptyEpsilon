@@ -42,7 +42,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
         // Load up the cube texture.
         // Face setup
-        constexpr std::array<std::tuple<const char*, uint32_t>, 6> faces{
+        std::array<std::tuple<const char*, uint32_t>, 6> faces{
             std::make_tuple("StarsRight.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
             std::make_tuple("StarsLeft.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
             std::make_tuple("StarsTop.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
@@ -104,7 +104,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
             2, 6, 4, 4, 0, 2, // Back
             3, 2, 0, 0, 1, 3, // Left
             6, 7, 5, 5, 4, 6, // Right
-            7, 3, 1, 3, 1, 5, // Front
+            7, 3, 1, 1, 5, 7, // Front
             6, 2, 3, 3, 7, 6, // Top
             0, 4, 5, 5, 1, 0, // Bottom
         };
@@ -131,7 +131,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     window.popGLStates();
 
-    ShaderManager::getShader("billboardShader")->setUniform("camera_position", camera_position);
+    ShaderManager::getShader("shaders/billboardShader")->setUniform("camera_position", camera_position);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
@@ -199,35 +199,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
     glDepthMask(GL_TRUE);
 
-    if (gameGlobalInfo)
-    {
-        //Render the background nebulas from the gameGlobalInfo. This ensures that all screens see the same background as it is replicated across clients.
-        for(int n=0; n<GameGlobalInfo::max_nebulas; n++)
-        {
-            sf::Texture::bind(textureManager.getTexture(gameGlobalInfo->nebula_info[n].textureName), sf::Texture::Pixels);
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-            glPushMatrix();
-            glRotatef(180, gameGlobalInfo->nebula_info[n].vector.x, gameGlobalInfo->nebula_info[n].vector.y, gameGlobalInfo->nebula_info[n].vector.z);
-            glColor4f(1,1,1,0.1);
-            glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2f(1.0,    0); glVertex3f( 100, 100, 100);
-            glTexCoord2f(   0,    0); glVertex3f( 100, 100,-100);
-            glTexCoord2f(1.0, 1.0); glVertex3f(-100, 100, 100);
-            glTexCoord2f(   0, 1.0); glVertex3f(-100, 100,-100);
-            glEnd();
-            glPopMatrix();
-        }
-    }
-
     sf::Texture::bind(NULL);
-    {
-        float lightpos1[4] = {0, 0, 0, 1.0};
-        glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
-
-        float lightpos0[4] = {20000, 20000, 20000, 1.0};
-        glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
-    }
 
     class RenderInfo
     {
@@ -380,26 +352,51 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
-    sf::Shader::bind(NULL);
-    glColor3f(1, 1, 1);
 
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
-    foreach(SpaceObject, obj, space_object_list)
+    auto debug_shader = ShaderManager::getShader("shaders/basicColor");
+    // Store location of the model_view matrix which will change for each object.
+    auto model_view_location = glGetUniformLocation(debug_shader->getNativeHandle(), "model_view");
+    sf::Shader::bind(debug_shader);
     {
-        glPushMatrix();
-        glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
-        glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
-        glRotatef(obj->getRotation(), 0, 0, 1);
+        // Common state: color, projection matrix.    
+        debug_shader->setUniform("color", sf::Glsl::Vec4(sf::Color::White));
+        
+        std::array<float, 16> matrix;
+        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
 
-        std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
-        glBegin(GL_LINE_LOOP);
-        for(unsigned int n=0; n<collisionShape.size(); n++)
-            glVertex3f(collisionShape[n].x, collisionShape[n].y, 0);
-        glEnd();
-        glPopMatrix();
+        glUniformMatrix4fv(glGetUniformLocation(debug_shader->getNativeHandle(), "projection"), 1, GL_FALSE, matrix.data());
+
+        std::vector<sf::Vector3f> points;
+        gl::ScopedVertexAttribArray positions(glGetAttribLocation(debug_shader->getNativeHandle(), "position"));
+        foreach(SpaceObject, obj, space_object_list)
+        {
+            glPushMatrix();
+            glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
+            glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
+            glRotatef(obj->getRotation(), 0, 0, 1);
+
+            glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
+            glUniformMatrix4fv(model_view_location, 1, GL_FALSE, matrix.data());
+
+            std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
+
+            if (collisionShape.size() > points.size())
+            {
+                points.resize(collisionShape.size());
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), points.data());
+            }
+
+            for (unsigned int n = 0; n < collisionShape.size(); n++)
+                points[n] = sf::Vector3f(collisionShape[n].x, collisionShape[n].y, 0.f);
+            
+            glDrawArrays(GL_LINE_LOOP, 0, collisionShape.size());
+            glPopMatrix();
+        }
     }
 #endif
+    sf::Shader::bind(nullptr);
 
     window.pushGLStates();
 

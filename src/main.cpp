@@ -211,9 +211,9 @@ int main(int argc, char** argv)
         effectLayer = new RenderLayer(objectLayer);
         hudLayer = new RenderLayer(effectLayer);
         mouseLayer = new RenderLayer(hudLayer);
-        glitchPostProcessor = new PostProcessor("glitch", mouseLayer);
+        glitchPostProcessor = new PostProcessor("shaders/glitch", mouseLayer);
         glitchPostProcessor->enabled = false;
-        warpPostProcessor = new PostProcessor("warp", glitchPostProcessor);
+        warpPostProcessor = new PostProcessor("shaders/warp", glitchPostProcessor);
         warpPostProcessor->enabled = false;
         defaultRenderLayer = objectLayer;
 

@@ -21,7 +21,7 @@ void ParticleEngine::render()
 #if FEATURE_3D_RENDERING
     if (particleEngine)
         particleEngine->doRender();
-#endif
+#endif//FEATURE_3D_RENDERING
 }
 
 void ParticleEngine::update(float delta)

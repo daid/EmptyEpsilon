@@ -1,4 +1,4 @@
-#version 100
+#version 120
 
 // Program inputs
 uniform mat4 projection;

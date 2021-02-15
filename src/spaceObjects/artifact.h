@@ -8,14 +8,15 @@ class Artifact : public SpaceObject, public Updatable
 private:
     string current_model_data_name;
     string model_data_name;
-    float artifact_spin=0.0;
+    float artifact_spin;
     bool allow_pickup;
     ScriptSimpleCallback on_pickup_callback;
+    ScriptSimpleCallback on_collision_callback;
+    ScriptSimpleCallback on_player_collision_callback;
 
-    string radar_trace_icon="RadarBlip.png";
-    float radar_trace_scale=0;
-    sf::Color radar_trace_color = sf::Color(255, 255, 255);
-
+    string radar_trace_icon;
+    float radar_trace_scale;
+    sf::Color radar_trace_color;
 public:
     Artifact();
 
@@ -36,8 +37,13 @@ public:
     void setRadarTraceScale(float scale);
     void setRadarTraceColor(int r, int g, int b) { radar_trace_color = sf::Color(r, g, b); }
 
-    virtual string getExportLine() override;
     void onPickUp(ScriptSimpleCallback callback);
+    // Consistent naming workaround
+    void onPickup(ScriptSimpleCallback callback) { onPickUp(callback); }
+    void onCollision(ScriptSimpleCallback callback);
+    void onPlayerCollision(ScriptSimpleCallback callback);
+
+    virtual string getExportLine() override;
 };
 
 #endif//ARTIFACT_H

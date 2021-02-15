@@ -71,6 +71,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksMissilesDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksMissilesDocked);
 
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShortRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setLongRangeRadarRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShortRangeRadarRange);
+
     /// [Depricated]
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getFrontShield);
     /// [Depricated]
@@ -109,6 +114,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     }
     hull_strength = hull_max = 100.0;
 
+    long_range_radar_range = 30000.0f;
+    short_range_radar_range = 5000.0f;
+
     registerMemberReplication(&template_name);
     registerMemberReplication(&type_name);
     registerMemberReplication(&shield_count);
@@ -122,6 +130,8 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&impulse_sound_file);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
+    registerMemberReplication(&long_range_radar_range, 0.5);
+    registerMemberReplication(&short_range_radar_range, 0.5);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
 
@@ -364,6 +374,10 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     shield_count = ship_template->shield_count;
     for(int n=0; n<shield_count; n++)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
+
+    // Set the ship's radar ranges.
+    long_range_radar_range = ship_template->long_range_radar_range;
+    short_range_radar_range = ship_template->short_range_radar_range;
 
     radar_trace = ship_template->radar_trace;
     impulse_sound_file = ship_template->impulse_sound_file;
