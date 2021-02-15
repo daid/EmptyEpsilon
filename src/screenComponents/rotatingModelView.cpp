@@ -61,14 +61,6 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
 
-    {
-        float lightpos1[4] = {0, 0, 0, 1.0};
-        glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
-
-        float lightpos0[4] = {20000, 20000, 20000, 1.0};
-        glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
-    }
-
     glTranslatef(0, -200, 0);
     glRotatef(-30, 1, 0, 0);
     glRotatef(engine->getElapsedTime() * 360.0f / 10.0f, 0.0f, 0.0f, 1.0f);
