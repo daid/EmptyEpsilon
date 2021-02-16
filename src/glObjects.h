@@ -21,25 +21,70 @@ namespace gl
         void deleteTextures(size_t count, const uint32_t* textures);
     }
 
+    enum class Unitialized
+    {
+    };
+
     // RAII object to hold multiple buffers (vbo, ebo etc).
     template<size_t Count>
     class Buffers final
     {
     public:
+
         Buffers()
         {
             details::createBuffers(buffers.size(), buffers.data());
         }
+
+        explicit constexpr Buffers(Unitialized)
+        {
+        }
+
+        // Move-only type
+        Buffers(const Buffers&) = delete;
+        Buffers& operator=(const Buffers&) = delete;
+
+        Buffers(Buffers&& other)
+            :buffers{ std::move(other.buffers) }
+        {
+            for (auto& buffer : other.buffers)
+            {
+                buffer = 0;
+            }
+        }
+
+        Buffers& operator =(Buffers&& other)
+        {
+            if (buffers.data() != other.buffers.data())
+            {
+                reset();
+                buffers = std::move(other.buffers);
+                for (auto& buffer : other.buffers)
+                {
+                    buffer = 0;
+                }
+            }
+
+            return *this;
+        }
+
         ~Buffers()
         {
-            details::deleteBuffers(buffers.size(), buffers.data());
+            reset();
         }
-        constexpr uint32_t operator[](size_t index)
+
+        constexpr uint32_t operator[](size_t index) const
         {
             return buffers[index];
         }
     private:
-        std::array<uint32_t, Count> buffers;
+        void reset()
+        {
+            if (buffers[0] != 0)
+                details::deleteBuffers(buffers.size(), buffers.data());
+        }
+
+        std::array<uint32_t, Count> buffers{ 0 };
     };
 
     class ScopedBufferBinding final
@@ -62,16 +107,55 @@ namespace gl
         {
             details::createTextures(buffers.size(), buffers.data());
         }
+
+        explicit constexpr Textures(Unitialized)
+        {
+        }
+
+        // Move-only type
+        Textures(const Textures&) = delete;
+        Textures& operator=(const Textures&) = delete;
+
+        Textures(Textures&& other)
+            :buffers{ std::move(other.buffers) }
+        {
+            for (auto& buffer : other.buffers)
+            {
+                buffer = 0;
+            }
+        }
+
+        Textures& operator =(Textures&& other)
+        {
+            if (buffers.data() != other.buffers.data())
+            {
+                reset();
+                buffers = std::move(other.buffers);
+                for (auto& buffer : other.buffers)
+                {
+                    buffer = 0;
+                }
+            }
+
+            return *this;
+        }
+
         ~Textures()
         {
-            details::deleteTextures(buffers.size(), buffers.data());
+            reset();
         }
-        constexpr uint32_t operator[](size_t index)
+
+        constexpr uint32_t operator[](size_t index) const
         {
             return buffers[index];
         }
     private:
-        std::array<uint32_t, Count> buffers;
+        void reset()
+        {
+            if (buffers[0] != 0)
+                details::deleteTextures(buffers.size(), buffers.data());
+        }
+        std::array<uint32_t, Count> buffers{ 0 };
     };
 
     class ScopedVertexAttribArray final

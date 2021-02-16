@@ -344,7 +344,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
                 uint8_t(0), uint8_t(1)
             };
             glVertexAttribPointer(texcoords.get(), 2, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)coords.begin());
-            glDrawArrays(GL_QUADS, 0, 4);
+            std::initializer_list<uint8_t> indices{ 0, 1, 2, 2, 3, 0 };
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
         }
         glPopMatrix();
     }
