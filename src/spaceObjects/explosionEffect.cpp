@@ -12,12 +12,7 @@ uint32_t ExplosionEffect::basicShaderTexCoordsAttribute = 0;
 sf::Shader* ExplosionEffect::particlesShader = nullptr;
 uint32_t ExplosionEffect::particlesShaderPositionAttribute = 0;
 uint32_t ExplosionEffect::particlesShaderTexCoordsAttribute = 0;
-
-struct VertexAndTexCoords
-{
-    sf::Vector3f vertex;
-    sf::Vector2f texcoords;
-};
+gl::Buffers<2> ExplosionEffect::particlesBuffers(gl::Unitialized{});
 #endif
 
 /// ExplosionEffect is a visible explosion, like from nukes, missiles, ship destruction, etc
@@ -52,6 +47,41 @@ ExplosionEffect::ExplosionEffect()
         particlesShader = ShaderManager::getShader("shaders/billboard");
         particlesShaderPositionAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "position");
         particlesShaderTexCoordsAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "texcoords");
+        particlesBuffers = gl::Buffers<2>();
+
+
+        // Each vertex is a position and a texcoords.
+        // The two arrays are maintained separately (texcoords are fixed, vertices position change).
+        constexpr size_t vertex_size = sizeof(sf::Vector3f) + sizeof(sf::Vector2f);
+        gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
+        gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
+
+        // VBO
+        glBufferData(GL_ARRAY_BUFFER, max_quad_count * 4 * vertex_size, nullptr, GL_DYNAMIC_DRAW);
+
+        // Create initial data.
+        std::array<uint8_t, 6 * max_quad_count> indices;
+        std::array<sf::Vector2f, 4 * max_quad_count> texcoords;
+        for (auto i = 0; i < max_quad_count; ++i)
+        {
+            texcoords[4 * i + 0] = { 0.f, 0.f };
+            texcoords[4 * i + 1] = { 1.f, 0.f };
+            texcoords[4 * i + 2] = { 1.f, 1.f };
+            texcoords[4 * i + 3] = { 0.f, 1.f };
+
+            indices[6 * i + 0] = i + 0;
+            indices[6 * i + 1] = i + 1;
+            indices[6 * i + 2] = i + 2;
+            indices[6 * i + 3] = i + 2;
+            indices[6 * i + 4] = i + 3;
+            indices[6 * i + 5] = i + 0;
+        }
+
+        // Update texcoords
+        glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(sf::Vector3f), texcoords.size() * sizeof(sf::Vector2f), texcoords.data());
+        // Upload indices
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint8_t), indices.data(), GL_STATIC_DRAW);
+
     }
 #endif
 }
@@ -94,27 +124,25 @@ void ExplosionEffect::draw3DTransparent()
     sf::Shader::bind(basicShader);
     glScalef(1.5, 1.5, 1.5);
 
-    constexpr size_t quad_count = 10;
-    std::array<VertexAndTexCoords, 4*quad_count> quads;
-    // Initialize texcoords per quad.
-    for (auto i = 0; i < quads.size(); i += 4)
-    {
-        quads[i + 0].texcoords = { 0.f, 0.f };
-        quads[i + 1].texcoords = { 1.f, 0.f };
-        quads[i + 2].texcoords = { 1.f, 1.f };
-        quads[i + 3].texcoords = { 0.f, 1.f };
-    }
+    std::array<sf::Vector3f, 4*max_quad_count> vertices;
+    gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
+    gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
+    
     // Draw
     {
-        quads[0].vertex = v1;
-        quads[1].vertex = v2;
-        quads[2].vertex = v3;
-        quads[3].vertex = v4;
+        vertices[0] = v1;
+        vertices[1] = v2;
+        vertices[2] = v3;
+        vertices[3] = v4;
         gl::ScopedVertexAttribArray positions(basicShaderPositionAttribute);
         gl::ScopedVertexAttribArray texcoords(basicShaderTexCoordsAttribute);
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quads.data());
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quads.data() + sizeof(sf::Vector3f)));
-        glDrawArrays(GL_QUADS, 0, 4);
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
+
+        // upload single vertex
+        glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(sf::Vector3f), vertices.data());
+
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr);
     }
     glPopMatrix();
 
@@ -130,23 +158,26 @@ void ExplosionEffect::draw3DTransparent()
     gl::ScopedVertexAttribArray positions(particlesShaderPositionAttribute);
     gl::ScopedVertexAttribArray texcoords(particlesShaderTexCoordsAttribute);
 
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
+
     // We're drawing particles `quad_count` at a time.
     for(size_t n = 0; n<particleCount;)
     {
-        auto active_quads = std::min(quad_count, particleCount - n);
+        auto active_quads = std::min(max_quad_count, particleCount - n);
         // setup quads
         for (auto p = 0; p < active_quads; ++p)
         {
             sf::Vector3f v = particleDirections[n + p] * scale * size;
-            quads[4 * p + 0].vertex = v;
-            quads[4 * p + 1].vertex = v;
-            quads[4 * p + 2].vertex = v;
-            quads[4 * p + 3].vertex = v;
+            vertices[4 * p + 0] = v;
+            vertices[4 * p + 1] = v;
+            vertices[4 * p + 2] = v;
+            vertices[4 * p + 3] = v;
         }
-       
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quads.data());
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quads.data() + sizeof(sf::Vector3f)));
-        glDrawArrays(GL_QUADS, 0, 4 * active_quads);
+        // upload
+        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(sf::Vector3f), vertices.data());
+        
+        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_BYTE, nullptr);
         n += active_quads;
     }    
 }
