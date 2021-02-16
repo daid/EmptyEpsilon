@@ -161,10 +161,11 @@ void ExplosionEffect::draw3DTransparent()
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
     glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
 
+    const size_t quad_count = max_quad_count;
     // We're drawing particles `quad_count` at a time.
     for(size_t n = 0; n<particleCount;)
     {
-        auto active_quads = std::min(max_quad_count, particleCount - n);
+        auto active_quads = std::min(quad_count, particleCount - n);
         // setup quads
         for (auto p = 0; p < active_quads; ++p)
         {
