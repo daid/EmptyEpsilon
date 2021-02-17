@@ -789,9 +789,18 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
         string position_name = getCrewPositionName(ECrewPosition(n));
         string position_state = "-";
 
+        std::vector<string> players;
+         foreach(PlayerInfo, i, player_info_list)
+         {
+            if (i->ship_id == target->getMultiplayerId() && i->crew_position[n])
+            {
+                players.push_back(i->name);
+            }
+        }
+
         if (target->hasPlayerAtPosition(ECrewPosition(n)))
         {
-            position_state = tr("position", "Occupied");
+            position_state = tr("position", string(", ").join(players));
             position_counter += 1;
         }
 
