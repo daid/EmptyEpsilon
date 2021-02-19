@@ -76,13 +76,12 @@ namespace ShaderRegistry
 	{
 		sf::Shader* get() const { return shader; }
 		int32_t uniform(Uniforms id) const { return uniforms[Uniforms_t(id)]; }
-		int32_t attribute(Attributes id) const { return attributes[Attributes_t(id)] ? Attributes_t(id) : -1; }
+		int32_t attribute(Attributes id) const { return attributes[Attributes_t(id)]; }
 		static void initialize();
 	private:
 		sf::Shader* shader = nullptr;
 		std::array<int32_t, Uniforms_t(Uniforms::Count)> uniforms;
-		std::bitset<Attributes_t(Attributes::Count)> attributes;
-		
+		std::array<int32_t, Uniforms_t(Attributes::Count)> attributes;
 	};
 
 	const Shader& get(Shaders id);

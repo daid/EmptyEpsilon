@@ -76,13 +76,14 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
     glTranslatef(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z);
     glDepthFunc(GL_EQUAL);
     {
-        auto& basicShader = ShaderRegistry::get(ShaderRegistry::Shaders::Basic);
-        glUseProgram(basicShader.get()->getNativeHandle());
-        glUniform4f(basicShader.uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
         glBindTexture(GL_TEXTURE_2D, texture->getNativeHandle());
-        gl::ScopedVertexAttribArray positions(basicShader.attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(basicShader.attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(basicShader.attribute(ShaderRegistry::Attributes::Normal));
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
 
         data->mesh->render(positions.get(), texcoords.get(), normals.get());
     }
@@ -101,13 +102,14 @@ void ModelInfo::renderShield(float alpha)
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
     Mesh* m = Mesh::getMesh("sphere.obj");
     {
-        auto& basicShader = ShaderRegistry::get(ShaderRegistry::Shaders::Basic);
-        glUseProgram(basicShader.get()->getNativeHandle());
-        glUniform4f(basicShader.uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
         glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("shield_hit_effect.png")->getNativeHandle());
-        gl::ScopedVertexAttribArray positions(basicShader.attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(basicShader.attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(basicShader.attribute(ShaderRegistry::Attributes::Normal));
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
 
         m->render(positions.get(), texcoords.get(), normals.get());
     }
@@ -125,13 +127,14 @@ void ModelInfo::renderShield(float alpha, float angle)
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
     Mesh* m = Mesh::getMesh("half_sphere.obj");
     {
-        auto& basicShader = ShaderRegistry::get(ShaderRegistry::Shaders::Basic);
-        glUseProgram(basicShader.get()->getNativeHandle());
-        glUniform4f(basicShader.uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
         glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("shield_hit_effect.png")->getNativeHandle());
-        gl::ScopedVertexAttribArray positions(basicShader.attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(basicShader.attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(basicShader.attribute(ShaderRegistry::Attributes::Normal));
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
 
         m->render(positions.get(), texcoords.get(), normals.get());
     }

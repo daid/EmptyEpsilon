@@ -208,8 +208,11 @@ void ModelData::render()
     glScalef(scale, scale, scale);
     glTranslatef(mesh_offset.x, mesh_offset.y, mesh_offset.z);
 
-    auto& shader = ShaderRegistry::get(shader_id);
+    ShaderRegistry::ScopedShader shader(shader_id);
+
+    // Textures
     glBindTexture(GL_TEXTURE_2D, texture->getNativeHandle());
+
     if (specular_texture)
     {
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
@@ -222,14 +225,11 @@ void ModelData::render()
         glBindTexture(GL_TEXTURE_2D, illumination_texture->getNativeHandle());
     }
 
-    glUseProgram(shader.get()->getNativeHandle());
-
-    {
-        gl::ScopedVertexAttribArray positions(shader.attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(shader.attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(shader.attribute(ShaderRegistry::Attributes::Normal));
-        mesh->render(positions.get(), texcoords.get(), normals.get());
-    }
+    // Draw
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+    mesh->render(positions.get(), texcoords.get(), normals.get());
 
     if (specular_texture || illumination_texture)
         glActiveTexture(GL_TEXTURE0);
