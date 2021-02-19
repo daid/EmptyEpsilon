@@ -1,15 +1,25 @@
+#version 120
+
 //Simple per-pixel light shader.
 
-varying vec3 normal;
-varying vec3 position;
+// Program inputs
+
+// Per-vertex inputs
+attribute vec3 position;
+attribute vec3 normal;
+attribute vec2 texcoords;
+
+// Per-vertex outputs
+varying vec3 fragnormal;
+varying vec3 viewspace_position;
+varying vec2 fragtexcoords;
 
 void main()
 {
-	normal = normalize(gl_NormalMatrix * gl_Normal);
-	position = vec3(gl_ModelViewMatrix * gl_Vertex);
+	fragnormal = normalize(gl_NormalMatrix * normal);
+	vec4 modelview_position = gl_ModelViewMatrix * vec4(position, 1.);
+	viewspace_position = vec3(modelview_position);
 	
-	gl_TexCoord[0] = gl_MultiTexCoord0;
-	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
-	gl_FrontColor = gl_Color;
-	gl_BackColor = gl_Color;
+	fragtexcoords = texcoords;
+	gl_Position = gl_ProjectionMatrix * modelview_position;
 }
