@@ -15,13 +15,6 @@ class ExplosionEffect : public SpaceObject, public Updatable
     sf::Vector3f particleDirections[particleCount];
     bool on_radar;
 #if FEATURE_3D_RENDERING
-    static sf::Shader* basicShader;
-    static uint32_t basicShaderPositionAttribute;
-    static uint32_t basicShaderTexCoordsAttribute;
-
-    static sf::Shader* particlesShader;
-    static uint32_t particlesShaderPositionAttribute;
-    static uint32_t particlesShaderTexCoordsAttribute;
     // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
     static constexpr size_t max_quad_count = 64;
     static gl::Buffers<2> particlesBuffers;

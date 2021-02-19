@@ -5,13 +5,6 @@
 #include "glObjects.h"
 
 #if FEATURE_3D_RENDERING
-sf::Shader* ExplosionEffect::basicShader = nullptr;
-uint32_t ExplosionEffect::basicShaderPositionAttribute = 0;
-uint32_t ExplosionEffect::basicShaderTexCoordsAttribute = 0;
-
-sf::Shader* ExplosionEffect::particlesShader = nullptr;
-uint32_t ExplosionEffect::particlesShaderPositionAttribute = 0;
-uint32_t ExplosionEffect::particlesShaderTexCoordsAttribute = 0;
 gl::Buffers<2> ExplosionEffect::particlesBuffers(gl::Unitialized{});
 #endif
 
@@ -38,15 +31,8 @@ ExplosionEffect::ExplosionEffect()
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
 #if FEATURE_3D_RENDERING
-    if (!basicShader && gl::isAvailable())
+    if (!particlesBuffers[0] && gl::isAvailable())
     {
-        basicShader = ShaderManager::getShader("shaders/basic");
-        basicShaderPositionAttribute = glGetAttribLocation(basicShader->getNativeHandle(), "position");
-        basicShaderTexCoordsAttribute = glGetAttribLocation(basicShader->getNativeHandle(), "texcoords");
-
-        particlesShader = ShaderManager::getShader("shaders/billboard");
-        particlesShaderPositionAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "position");
-        particlesShaderTexCoordsAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "texcoords");
         particlesBuffers = gl::Buffers<2>();
 
 
@@ -100,63 +86,65 @@ void ExplosionEffect::draw3DTransparent()
     if (f < 0.2f)
     {
         scale = (f / 0.2f);
-    }else{
+    }
+    else {
         scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 1.0f, 1.3f);
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
 
+    std::array<sf::Vector3f, 4 * max_quad_count> vertices;
+
     glPushMatrix();
-    glScalef(scale * size, scale * size, scale * size);
-    glColor3f(alpha, alpha, alpha);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
-    sf::Vector3f v1 = sf::Vector3f(-1, -1, 0);
-    sf::Vector3f v2 = sf::Vector3f( 1, -1, 0);
-    sf::Vector3f v3 = sf::Vector3f( 1,  1, 0);
-    sf::Vector3f v4 = sf::Vector3f(-1,  1, 0);
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
-    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *textureManager.getTexture("fire_sphere_texture.png"));
-    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
-    Mesh* m = Mesh::getMesh("sphere.obj");
-    m->render();
+    // Explosion sphere
+    {
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("fire_sphere_texture.png")->getNativeHandle());
 
-    basicShader->setUniform("textureMap", *textureManager.getTexture("fire_ring.png"));
-    basicShader->setUniform("color", sf::Glsl::Vec4(alpha, alpha, alpha, 1.f));
-    sf::Shader::bind(basicShader);
-    glScalef(1.5, 1.5, 1.5);
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
-    std::array<sf::Vector3f, 4*max_quad_count> vertices;
+        Mesh* m = Mesh::getMesh("sphere.obj");
+        glScalef(scale * size, scale * size, scale * size);
+        m->render(positions.get(), texcoords.get(), normals.get());
+    }
+
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
-    
-    // Draw
+
+    // Fire ring
     {
-        vertices[0] = v1;
-        vertices[1] = v2;
-        vertices[2] = v3;
-        vertices[3] = v4;
-        gl::ScopedVertexAttribArray positions(basicShaderPositionAttribute);
-        gl::ScopedVertexAttribArray texcoords(basicShaderTexCoordsAttribute);
-        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("fire_ring.png")->getNativeHandle());
+        glScalef(1.5f, 1.5f, 1.5f);
 
-        // upload single vertex
-        glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(sf::Vector3f), vertices.data());
+        vertices[0] = sf::Vector3f(-1, -1, 0);
+        vertices[1] = sf::Vector3f(1, -1, 0);
+        vertices[2] = sf::Vector3f(1, 1, 0);
+        vertices[3] = sf::Vector3f(-1, 1, 0);
+        {
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
+            glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr);
+            // upload single vertex
+            glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(sf::Vector3f), vertices.data());
+
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr);
+        }
     }
     glPopMatrix();
 
+    shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
 
-    particlesShader->setUniform("textureMap", *textureManager.getTexture("particle.png"));
-    
-    sf::Shader::bind(particlesShader);
+    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
+
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 5.0f);
     float r = Tween<float>::easeInQuad(f, 0.0, 1.0, 1.0f, 0.0f);
     float g = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
     float b = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
-    particlesShader->setUniform("color", sf::Glsl::Vec4(r, g, b, size / 32.0f));
-    gl::ScopedVertexAttribArray positions(particlesShaderPositionAttribute);
-    gl::ScopedVertexAttribArray texcoords(particlesShaderTexCoordsAttribute);
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
 
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
     glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
