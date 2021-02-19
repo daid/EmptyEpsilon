@@ -14,7 +14,7 @@ namespace ShaderRegistry
 {
 	namespace
 	{
-		std::array<Shader, ShaderID_t(Shaders::Count)> shaders;
+		std::array<Shader, Shaders_t(Shaders::Count)> shaders;
 	}
 
 	void Shader::initialize()
@@ -133,7 +133,7 @@ namespace ShaderRegistry
 
 	const Shader& get(Shaders shader)
 	{
-		return shaders[ShaderID_t(shader)];
+		return shaders[Shaders_t(shader)];
 	}
 
 	ScopedShader::ScopedShader(Shaders id) noexcept
