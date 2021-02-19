@@ -8,6 +8,7 @@
 
 #include "particleEffect.h"
 #include "glObjects.h"
+#include "shaderRegistry.h"
 
 #if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
@@ -129,9 +130,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
-    window.popGLStates();
-
-    ShaderManager::getShader("shaders/billboardShader")->setUniform("camera_position", camera_position);
+    
+    glActiveTexture(GL_TEXTURE0);
 
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
@@ -141,7 +141,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     glEnable(GL_CULL_FACE);
-    glColor4f(1,1,1,1);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -247,7 +246,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glDepthMask(true);
         glClear(GL_DEPTH_BUFFER_BIT);
 
-        glColor4f(1,1,1,1);
         glDisable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
@@ -259,11 +257,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
             glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
             glRotatef(obj->getRotation(), 0, 0, 1);
-
             obj->draw3D();
             glPopMatrix();
         }
-        sf::Shader::bind(NULL);
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
         glDisable(GL_CULL_FACE);
@@ -276,7 +273,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
             glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
             glRotatef(obj->getRotation(), 0, 0, 1);
-
             obj->draw3DTransparent();
             glPopMatrix();
         }
@@ -316,7 +312,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     if (my_spaceship && my_spaceship->getTarget())
     {
-        auto billboard_shader = ShaderManager::getShader("shaders/billboard");
+        ShaderRegistry::ScopedShader billboard(ShaderRegistry::Shaders::Billboard);
 
         P<SpaceObject> target = my_spaceship->getTarget();
         glDisable(GL_DEPTH_TEST);
@@ -324,12 +320,11 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        billboard_shader->setUniform("textureMap", *textureManager.getTexture("redicule2.png"));
-        billboard_shader->setUniform("color", sf::Glsl::Vec4(.5f, .5f, .5f, target->getRadius() * 2.5f));
-        sf::Shader::bind(billboard_shader);
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("redicule2.png")->getNativeHandle());
+        glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
         {
-            gl::ScopedVertexAttribArray positions(glGetAttribLocation(billboard_shader->getNativeHandle(), "position"));
-            gl::ScopedVertexAttribArray texcoords(glGetAttribLocation(billboard_shader->getNativeHandle(), "texcoords"));
+            gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
+            gl::ScopedVertexAttribArray texcoords(billboard.get().attribute(ShaderRegistry::Attributes::Texcoords));
             auto vertices = {
                 uint8_t(0), uint8_t(0), uint8_t(0),
                 uint8_t(0), uint8_t(0), uint8_t(0),
@@ -356,21 +351,19 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
-    auto debug_shader = ShaderManager::getShader("shaders/basicColor");
-    // Store location of the model_view matrix which will change for each object.
-    auto model_view_location = glGetUniformLocation(debug_shader->getNativeHandle(), "model_view");
-    sf::Shader::bind(debug_shader);
+    
     {
-        // Common state: color, projection matrix.    
-        debug_shader->setUniform("color", sf::Glsl::Vec4(sf::Color::White));
-        
+        ShaderRegistry::ScopedShader debug_shader(ShaderRegistry::Shaders::BasicColor);
+        // Common state: color, projection matrix.
+        glUniform4f(debug_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
+
         std::array<float, 16> matrix;
         glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
-
-        glUniformMatrix4fv(glGetUniformLocation(debug_shader->getNativeHandle(), "projection"), 1, GL_FALSE, matrix.data());
+        glUniformMatrix4fv(debug_shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, matrix.data());
 
         std::vector<sf::Vector3f> points;
-        gl::ScopedVertexAttribArray positions(glGetAttribLocation(debug_shader->getNativeHandle(), "position"));
+        gl::ScopedVertexAttribArray positions(debug_shader.get().attribute(ShaderRegistry::Attributes::Position));
+
         foreach(SpaceObject, obj, space_object_list)
         {
             glPushMatrix();
@@ -379,7 +372,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             glRotatef(obj->getRotation(), 0, 0, 1);
 
             glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
-            glUniformMatrix4fv(model_view_location, 1, GL_FALSE, matrix.data());
+            glUniformMatrix4fv(debug_shader.get().uniform(ShaderRegistry::Uniforms::ModelView), 1, GL_FALSE, matrix.data());
 
             std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
 
@@ -397,9 +390,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         }
     }
 #endif
-    sf::Shader::bind(nullptr);
 
-    window.pushGLStates();
+    window.resetGLStates();
 
     if (show_callsigns && render_lists.size() > 0)
     {
