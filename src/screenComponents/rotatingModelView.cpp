@@ -5,6 +5,7 @@
 #include "rotatingModelView.h"
 
 #include "glObjects.h"
+#include "shaderRegistry.h"
 
 #include <array>
 
@@ -55,7 +56,6 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
 
-    glColor4f(1,1,1,1);
     glDisable(GL_BLEND);
     sf::Texture::bind(NULL);
     glDepthMask(true);
@@ -69,26 +69,25 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         glScalef(scale, scale, scale);
         model->render();
 #ifdef DEBUG
-        auto debug_shader = ShaderManager::getShader("shaders/basicColor");
-        sf::Shader::bind(debug_shader);
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
         {
             // Common state - matrices.
             std::array<float, 16> matrix;
             glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
-            glUniformMatrix4fv(glGetUniformLocation(debug_shader->getNativeHandle(), "projection"), 1, GL_FALSE, matrix.data());
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, matrix.data());
 
             glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
-            glUniformMatrix4fv(glGetUniformLocation(debug_shader->getNativeHandle(), "model_view"), 1, GL_FALSE, matrix.data());
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::ModelView), 1, GL_FALSE, matrix.data());
 
             // Vertex attrib
-            gl::ScopedVertexAttribArray positions(glGetAttribLocation(debug_shader->getNativeHandle(), "position"));
+            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
 
             for (const EngineEmitterData& ee : model->engine_emitters)
             {
                 sf::Vector3f offset = ee.position * model->scale;
                 float r = model->scale * ee.scale * 0.5;
 
-                debug_shader->setUniform("color", sf::Glsl::Vec4(ee.color.x, ee.color.y, ee.color.z, 1.f));
+                glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
                 auto vertices = {
                     sf::Vector3f{offset.x + r, offset.y, offset.z},
                     sf::Vector3f{offset.x - r, offset.y, offset.z},
@@ -101,7 +100,8 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
                 glDrawArrays(GL_LINES, 0, vertices.size());
             }
             float r = model->getRadius() * 0.1f;
-            debug_shader->setUniform("color", sf::Glsl::Vec4(sf::Color::White));
+            
+            glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
 
             for (const sf::Vector3f& position : model->beam_position)
             {
@@ -137,8 +137,6 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         }
 #endif
     }
-
-    sf::Shader::bind(NULL);
     glDisable(GL_DEPTH_TEST);
 
     window.pushGLStates();
