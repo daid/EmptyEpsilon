@@ -13,11 +13,6 @@ class BeamEffect : public SpaceObject, public Updatable
     sf::Vector3f targetOffset;
     sf::Vector2f targetLocation;
     sf::Vector3f hitNormal;
-#if FEATURE_3D_RENDERING
-    static sf::Shader* shader;
-    static uint32_t shaderPositionAttribute;
-    static uint32_t shaderTexCoordsAttribute;
-#endif
 public:
     bool fire_ring;
     string beam_texture;
