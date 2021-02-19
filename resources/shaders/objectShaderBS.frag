@@ -1,3 +1,4 @@
+#version 120
 //Simple per-pixel light shader.
 
 const vec4 light0_position = vec4(20000., 20000., 20000., 1.0);
