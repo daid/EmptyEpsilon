@@ -39,6 +39,8 @@
 #include <libgen.h>
 #endif
 
+#include "shaderRegistry.h"
+
 sf::Vector3f camera_position;
 float camera_yaw;
 float camera_pitch;
@@ -233,6 +235,7 @@ int main(int argc, char** argv)
             window_manager->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         window_manager->setAllowVirtualResize(true);
         engine->registerObject("windowManager", window_manager);
+        ShaderRegistry::Shader::initialize();
     }
     if (PreferencesManager::get("touchscreen").toInt())
     {
