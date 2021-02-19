@@ -113,6 +113,7 @@ set(SOURCES
 	src/factionInfo.cpp
 	src/mesh.cpp
 	src/scenarioInfo.cpp
+	src/shaderRegistry.cpp
 	src/repairCrew.cpp
 	src/GMScriptCallback.cpp
 	src/GMMessage.cpp
