@@ -7,6 +7,7 @@
 #include "engine.h"
 
 #include "mesh.h"
+#include "shaderRegistry.h"
 
 class SpaceObject;
 
@@ -42,7 +43,7 @@ private:
     sf::Texture* texture;
     sf::Texture* specular_texture;
     sf::Texture* illumination_texture;
-    sf::Shader* shader;
+    ShaderRegistry::Shaders shader_id;
     float scale;
 
     float radius;
