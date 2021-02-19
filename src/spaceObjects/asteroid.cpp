@@ -48,21 +48,21 @@ void Asteroid::draw3D()
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
 
-    auto& shader = ShaderRegistry::get(ShaderRegistry::Shaders::ObjectSpecular);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
+
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->getNativeHandle());
 
     glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->getNativeHandle());
 
-
-    glUseProgram(shader.get()->getNativeHandle());
     Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
-    {
-        gl::ScopedVertexAttribArray positions(shader.attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(shader.attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(shader.attribute(ShaderRegistry::Attributes::Normal));
-        m->render(positions.get(), texcoords.get(), normals.get());
-    }
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+    m->render(positions.get(), texcoords.get(), normals.get());
+
 
     glActiveTexture(GL_TEXTURE0);
 #endif//FEATURE_3D_RENDERING
@@ -153,22 +153,19 @@ void VisualAsteroid::draw3D()
     glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
     glScalef(getRadius(), getRadius(), getRadius());
 
-    auto& shader = ShaderRegistry::get(ShaderRegistry::Shaders::ObjectSpecular);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
+
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->getNativeHandle());
 
     glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->getNativeHandle());
 
-
-    glUseProgram(shader.get()->getNativeHandle());
-
     Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
-    {
-        gl::ScopedVertexAttribArray positions(shader.attribute(ShaderRegistry::Attributes::Position));
-        gl::ScopedVertexAttribArray texcoords(shader.attribute(ShaderRegistry::Attributes::Texcoords));
-        gl::ScopedVertexAttribArray normals(shader.attribute(ShaderRegistry::Attributes::Normal));
-        m->render(positions.get(), texcoords.get(), normals.get());
-    }
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+    m->render(positions.get(), texcoords.get(), normals.get());
 
     glActiveTexture(GL_TEXTURE0);
 #endif//FEATURE_3D_RENDERING

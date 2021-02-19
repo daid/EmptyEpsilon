@@ -94,14 +94,14 @@ void ElectricExplosionEffect::draw3DTransparent()
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-
     glPushMatrix();
     Mesh* m = Mesh::getMesh("sphere.obj");
     {
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
         glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("electric_sphere_texture.png")->getNativeHandle());
+
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
         gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
         glScalef(scale * size, scale * size, scale * size);
@@ -123,6 +123,9 @@ void ElectricExplosionEffect::draw3DTransparent()
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
 
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
 

@@ -68,13 +68,15 @@ void BeamEffect::draw3DTransparent()
     sf::Vector3f startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(camera_position - startPoint, endPoint - startPoint));
+
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(beam_texture)->getNativeHandle());
-    auto& beamShader = ShaderRegistry::get(ShaderRegistry::Shaders::Basic);
-    glUseProgram(beamShader.get()->getNativeHandle());
-    glUniform4f(beamShader.uniform(ShaderRegistry::Uniforms::Color), lifetime, lifetime, lifetime, 1.f);
+
+    ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
+
+    glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), lifetime, lifetime, lifetime, 1.f);
     
-    gl::ScopedVertexAttribArray positions(beamShader.attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(beamShader.attribute(ShaderRegistry::Attributes::Texcoords));
+    gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     std::array<VertexAndTexCoords, 4> quad;
     // Beam

@@ -61,7 +61,7 @@ namespace ShaderRegistry
 		{
 			auto& entry = shaders[i];
 			entry.shader = ShaderManager::getShader(shader_names[i]);
-			entry.attributes.reset();
+
 			assert(entry.shader);
 			
 			if (entry.shader)
@@ -75,39 +75,7 @@ namespace ShaderRegistry
 				auto relink = false;
 				for (auto attrib = 0; attrib < attribute_names.size(); ++attrib)
 				{
-					auto location = glGetAttribLocation(handle, attribute_names[attrib]);
-
-					// We force each attribute location to match its position in the enum.
-					// This makes all array attributes line up - they can be enabled *once*
-					// for an entire series of shaders.
-					if (location != -1 && attrib != location)
-					{
-						location = attrib;
-						glBindAttribLocation(handle, location, attribute_names[attrib]);
-						relink = true;
-
-					}
-					entry.attributes.set(attrib, location != -1);
-				}
-
-				if (relink)
-				{
-					glLinkProgram(handle);
-					
-					GLint status = GL_FALSE;
-					glGetProgramiv(handle, GL_LINK_STATUS, &status);
-					
-					if (status == GL_FALSE)
-					{
-						// Log the error.
-						GLint length = 0;
-						glGetProgramiv(handle, GL_INFO_LOG_LENGTH, &length);
-						
-						std::string log(length + 1, '\0');
-						glGetProgramInfoLog(handle, log.size() + 1, &length, &log[0]);
-
-						LOG(ERROR) << "Failed to link shader: " << log;
-					}
+					entry.attributes[attrib] = glGetAttribLocation(handle, attribute_names[attrib]);
 				}
 
 				// Find out uniform locations
