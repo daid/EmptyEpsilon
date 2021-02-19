@@ -18,12 +18,6 @@ class Nebula : public SpaceObject
     int radar_visual;
     NebulaCloud clouds[cloud_count];
 
-#if FEATURE_3D_RENDERING
-    static sf::Shader* shader;
-    static uint32_t shaderPositionAttribute;
-    static uint32_t shaderTexCoordsAttribute;
-#endif
-
 public:
     Nebula();
 
