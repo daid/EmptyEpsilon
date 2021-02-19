@@ -54,12 +54,6 @@ private:
     float collision_size;
 
     void updateCollisionSize();
-
-#if FEATURE_3D_RENDERING
-    static sf::Shader* billboardShader;
-    static uint32_t billboardShaderPositionAttribute;
-    static uint32_t billboardShaderTexCoordsAttribute;
-#endif
 };
 
 #endif//PLANET_H
