@@ -124,6 +124,12 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     });
     impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", tr("Impulse reverse speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    impulse_reverse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
+        target->impulse_max_reverse_speed = value;
+    });
+    impulse_reverse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
     (new GuiLabel(left_col, "", tr("Turn speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     turn_speed_slider = new GuiSlider(left_col, "", 0.0, 35, 0.0, [this](float value) {
         target->turn_speed = value;
@@ -201,6 +207,7 @@ void GuiTweakShip::onDraw(sf::RenderTarget& window)
     warp_toggle->setValue(target->has_warp_drive);
     jump_toggle->setValue(target->hasJumpDrive());
     impulse_speed_slider->setValue(target->impulse_max_speed);
+    impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
     turn_speed_slider->setValue(target->turn_speed);
     hull_max_slider->setValue(target->hull_max);
     can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
@@ -212,6 +219,7 @@ void GuiTweakShip::open(P<SpaceObject> target)
     this->target = ship;
 
     impulse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_speed, 5.0f);
+    impulse_reverse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_reverse_speed, 5.0f);
     turn_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->turn_speed, 1.0f);
     hull_max_slider->clearSnapValues()->addSnapValue(ship->ship_template->hull, 5.0f);
 }

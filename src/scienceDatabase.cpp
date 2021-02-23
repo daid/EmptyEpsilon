@@ -395,6 +395,7 @@ void fillDefaultDatabaseData()
         if (ship_template->impulse_speed > 0.0)
         {
             entry->addKeyValue(tr("database", "Move speed"), string(ship_template->impulse_speed * 60 / 1000, 1) + " u/min");
+            entry->addKeyValue(tr("database", "Reverse move speed"), string(ship_template->impulse_reverse_speed * 60 / 1000, 1) + " u/min");
         }
         if (ship_template->turn_speed > 0.0) {
             entry->addKeyValue(tr("database", "Turn speed"), string(ship_template->turn_speed, 1) + " deg/sec");

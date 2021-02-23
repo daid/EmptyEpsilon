@@ -112,9 +112,19 @@ public:
     float impulse_max_speed;
 
     /*!
+     * [config] Max speed of the reverse impulse engines, in m/s
+     */
+    float impulse_max_reverse_speed;
+
+    /*!
      * [config] Impulse engine acceleration, in (m/s)/s
      */
     float impulse_acceleration;
+
+    /*!
+     * [config] Impulse engine acceleration in reverse, in (m/s)/s
+     */
+    float impulse_reverse_acceleration;
 
     /*!
      * [config] True if we have a warpdrive.
@@ -340,10 +350,14 @@ public:
     
     float getImpulseMaxSpeed() { return impulse_max_speed; }
     void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
+    float getImpulseMaxReverseSpeed() { return impulse_max_reverse_speed; }
+    void setImpulseMaxReverseSpeed(float speed) { impulse_max_reverse_speed = speed; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
     float getAcceleration() { return impulse_acceleration; }
     void setAcceleration(float acceleration) { impulse_acceleration = acceleration; }
+    float getReverseAcceleration() { return impulse_reverse_acceleration; }
+    void setReverseAcceleration(float reverse_acceleration) { impulse_reverse_acceleration = reverse_acceleration; }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
     bool hasJumpDrive() { return has_jump_drive; }

@@ -55,6 +55,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
     /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
+    /// Sets the impulse maximum speed in reverse. By default, it's equal to forward speed
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setReverseSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
     /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
@@ -141,7 +143,9 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<max_shield_count; n++)
         shield_level[n] = 0.0;
     impulse_speed = 500.0;
+    impulse_reverse_speed = 500.0;
     impulse_acceleration = 20.0;
+    impulse_reverse_acceleration = 20.0;
     turn_speed = 10.0;
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
@@ -414,6 +418,19 @@ void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
     impulse_speed = impulse;
     turn_speed = turn;
     impulse_acceleration = acceleration;
+
+    if((impulse == 0.0f) && (impulse_reverse_speed == 0.0f)) // hack supposing we keep existing invariant, to handle template copies
+    {                                                        // and initialisation order while keeping compatibility
+        //use front speed as default value for reverse speed and acceleration
+        impulse_reverse_speed = impulse;
+        impulse_reverse_acceleration = acceleration;
+    } //else we already set different impulse and reverse impulse so don't default them
+}
+
+void ShipTemplate::setReverseSpeed(float reverse_speed, float reverse_acceleration)
+{
+    impulse_reverse_speed = reverse_speed;
+    impulse_reverse_acceleration = reverse_acceleration;
 }
 
 void ShipTemplate::setCombatManeuver(float boost, float strafe)
@@ -537,9 +554,11 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     for(int n=0; n<max_shield_count; n++)
         result->shield_level[n] = shield_level[n];
     result->impulse_speed = impulse_speed;
+    result->impulse_reverse_speed = impulse_reverse_speed;
     result->turn_speed = turn_speed;
     result->warp_speed = warp_speed;
     result->impulse_acceleration = impulse_acceleration;
+    result->impulse_reverse_acceleration = impulse_reverse_acceleration;
     result->combat_maneuver_boost_speed = combat_maneuver_boost_speed;
     result->combat_maneuver_strafe_speed = combat_maneuver_strafe_speed;
     result->shares_energy_with_docked = shares_energy_with_docked;
