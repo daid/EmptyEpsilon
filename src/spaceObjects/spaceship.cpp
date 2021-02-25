@@ -295,9 +295,24 @@ void SpaceShip::applyTemplateValues()
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
     impulse_max_speed = ship_template->impulse_speed;
-    impulse_max_reverse_speed = ship_template->impulse_reverse_speed;
+    if(ship_template->impulse_reverse_speed != -1)
+    {
+        impulse_max_reverse_speed = ship_template->impulse_reverse_speed;
+    }
+    else //We did not change reverse speed value, so it's defaulted to front speed
+    {
+        impulse_max_reverse_speed = ship_template->impulse_speed;
+    }
     impulse_acceleration = ship_template->impulse_acceleration;
-    impulse_reverse_acceleration = ship_template->impulse_reverse_acceleration;
+    if(ship_template->impulse_reverse_acceleration != -1)
+    {
+        impulse_reverse_acceleration = ship_template->impulse_reverse_acceleration;
+    }
+    else //We did not change reverse deceleration value, so it's defaulted to front acceleration
+    {
+        impulse_reverse_acceleration = ship_template->impulse_acceleration;
+    }
+    
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
     combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;

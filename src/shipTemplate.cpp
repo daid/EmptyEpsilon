@@ -55,7 +55,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
     /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
-    /// Sets the impulse maximum speed in reverse. By default, it's equal to forward speed
+    /// Sets the impulse maximum speed in reverse. By default, it's equal to forward speed and acceleration
+    /// If set, it's inherited on copied templates, and setSpeed won't overload anymore inherited (copied) templates reverse speed an deceleration
+    /// If not set, inherited (copied) template's reverse speed and deceleration will be the same as forward speed and acceleration
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setReverseSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
@@ -143,9 +145,9 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<max_shield_count; n++)
         shield_level[n] = 0.0;
     impulse_speed = 500.0;
-    impulse_reverse_speed = 500.0;
+    impulse_reverse_speed = -1;
     impulse_acceleration = 20.0;
-    impulse_reverse_acceleration = 20.0;
+    impulse_reverse_acceleration = -1;
     turn_speed = 10.0;
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
@@ -418,13 +420,6 @@ void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
     impulse_speed = impulse;
     turn_speed = turn;
     impulse_acceleration = acceleration;
-
-    if((impulse == 0.0f) && (impulse_reverse_speed == 0.0f)) // hack supposing we keep existing invariant, to handle template copies
-    {                                                        // and initialisation order while keeping compatibility
-        //use front speed as default value for reverse speed and acceleration
-        impulse_reverse_speed = impulse;
-        impulse_reverse_acceleration = acceleration;
-    } //else we already set different impulse and reverse impulse so don't default them
 }
 
 void ShipTemplate::setReverseSpeed(float reverse_speed, float reverse_acceleration)
