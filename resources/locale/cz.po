@@ -720,7 +720,7 @@ msgstr "Kod [{letter}]: {self_destruct_code}"
 #: src/screenComponents/selfDestructEntry.cpp:80
 msgctxt "selfdestruct"
 msgid "Enter [{letter}]"
-msgstr "Zadat [{letter}]"
+msgstr "Zadejte [{letter}]"
 
 #: src/screenComponents/dockingButton.cpp:42
 msgid "Request Dock"
@@ -1035,7 +1035,7 @@ msgstr ""
 "Lidske predpisy pro vesmirne lode urcuji, ze jen lode namornictva smi do "
 "hlubokeho vesmiru. To vsak uplne nezabranilo lidem mimo namornictvo, aby se "
 "vydali do vesmiu, nebot peknych par lidi se prihlasilo ke sluzbe na "
-"mimozemskych obchodnich lodich nebo piratskych najezdnicich. "
+"mimozemskych obchodnich lodich nebo piratskych najezdnicich."
 
 #: scripts/factionInfo.lua:13
 msgid "Kraylor"
@@ -1936,7 +1936,7 @@ msgstr "Muze vyslat sondu"
 #: src/screens/gm/tweak.cpp:793
 msgctxt "button"
 msgid "Auto coolant"
-msgstr "Autimaticke chlazeni"
+msgstr "Automaticke chlazeni"
 
 #: src/screens/gm/tweak.cpp:798
 msgctxt "button"
@@ -2445,6 +2445,7 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:284
+#, fuzzy
 msgid "Adv. Gunship"
 msgstr "Pokročilá bojová loď"
 
@@ -2589,7 +2590,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:551
 #, lua-format
 msgid "Transport %dx%d"
-msgstr ""
+msgstr "Transport %dx%d"
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
@@ -2858,7 +2859,7 @@ msgstr ""
 
 #: scripts/science_db.lua:53
 msgid "EMP"
-msgstr ""
+msgstr "EMP"
 
 #: scripts/science_db.lua:58
 msgid ""
@@ -3138,37 +3139,37 @@ msgstr "Cil - Znicen"
 #: src/screens/gm/chatDialog.cpp:59
 msgctxt "chatGM"
 msgid "Channel not open, enter name to hail as to hail target."
-msgstr ""
+msgstr "Kanal neaktivni, zadej jmeno za ktere volas cil."
 
 #: src/screens/gm/chatDialog.cpp:60
 msgctxt "chatGM"
 msgid "{callsign} - Inactive"
-msgstr ""
+msgstr "{callsign} - Neaktivni"
 
 #: src/screens/gm/chatDialog.cpp:64
 msgctxt "chatGM"
 msgid "{callsign} - Opening communications with {target}"
-msgstr ""
+msgstr "{callsign} - Zahajuji komunikaci s {target}"
 
 #: src/screens/gm/chatDialog.cpp:67
 msgctxt "chatGM"
 msgid "{callsign} - Hailing as {target}"
-msgstr ""
+msgstr "{callsign} - Volam jako {target}"
 
 #: src/screens/gm/chatDialog.cpp:71
 msgctxt "chatGM"
 msgid "{callsign} - Communicating with {target}"
-msgstr ""
+msgstr "{callsign} - Komunikuji s {target}"
 
 #: src/screens/gm/chatDialog.cpp:75
 msgctxt "chatGM"
 msgid "**{callsign} - Communicating as {target}**"
-msgstr ""
+msgstr "**{callsign} - Kounikuji jako {target}**"
 
 #: src/screens/gm/chatDialog.cpp:77
 msgctxt "chatGM"
 msgid "{callsign} - Communicating as {target}"
-msgstr ""
+msgstr "{callsign} - Komunikuji jako {target}"
 
 #: src/screens/gm/tweak.cpp:125
 msgid "Jump Min Distance:"
@@ -3192,7 +3193,7 @@ msgstr "SEBEDESTRUKCE AKTIVNI"
 
 #: src/screenComponents/selfDestructIndicator.cpp:32
 msgid "Waiting for autorization input: {codes} left"
-msgstr "Cekam na zadani kodu: {codes} zbyva zadat"
+msgstr "Cekam na zadani kodu: zbyva zadat {codes} kod(y)"
 
 #: src/screenComponents/selfDestructIndicator.cpp:36
 msgid "Have a nice day."
@@ -3284,7 +3285,7 @@ msgstr "Ignorovat"
 
 #: src/screenComponents/commsOverlay.cpp:54
 msgid "No reply..."
-msgstr "Bez odpovedi"
+msgstr "Bez odpovedi..."
 
 #: src/screenComponents/commsOverlay.cpp:65
 msgid "Communications were suddenly cut"
@@ -3308,6 +3309,7 @@ msgid "Electric signature"
 msgstr "Elektricka signatura"
 
 #: src/screenComponents/scanningDialog.cpp:27
+#, fuzzy
 msgctxt "scanning"
 msgid "LOCKED"
 msgstr "ODPOVIDA"
@@ -3409,7 +3411,7 @@ msgstr "Hleda nepratele kolem {x},{y}."
 #: src/spaceObjects/cpuShip.cpp:171
 msgctxt "cpulog"
 msgid "Searching for supplies."
-msgstr "Hleda zasoby"
+msgstr "Hleda zasoby."
 
 #: src/spaceObjects/cpuShip.cpp:174 src/spaceObjects/cpuShip.cpp:249
 msgctxt "cpulog"
