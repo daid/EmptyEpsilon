@@ -5,22 +5,53 @@ on:
     branches:
       - master
   pull_request:
+  workflow_dispatch:
 jobs:
   linux:
     name: Linux
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build_type: [Debug, RelWithDebInfo, Release]
     steps:
-    - name: Update apt index
-      run: sudo apt-get update -qq
-    - name: Install SFML
-      run: sudo apt-get install libsfml-dev
-    - name: Checkout EmptyEpsilon
+    - name: Dependencies
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install build-essential cmake ninja-build zip unzip libsfml-dev 
+    - name: SeriousProton Checkout
       uses: actions/checkout@v2
-    - name: Build and test
-      run: docker/build.sh
+      with:
+        repository: gcask/SeriousProton
+        path: SeriousProton  
+    - name: EmptyEpsilon Checkout
+      uses: actions/checkout@v2
+      with:
+        path: EmptyEpsilon
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{github.workspace}}/build
+    - name: Configure CMake
+      working-directory: ${{github.workspace}}/build
+      run: >
+        cmake
+        -G Ninja
+        -DCMAKE_INSTALL_PREFIX=dist
+        -DCPACK_GENERATOR=ZIP
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DSERIOUS_PROTON_DIR="../SeriousProton"
+        ../EmptyEpsilon
+    - name: Build
+      working-directory: ${{github.workspace}}/build
+      run: cmake --build . --config ${{ matrix.build_type }} --target package
+    - uses: actions/upload-artifact@v2
+      with:
+        name: emptyepsilon-linux-${{ matrix.build_type }}.zip
+        path: ${{ github.workspace }}/build/EmptyEpsilon.zip
   windows-cross:
     name: Windows (Cross-Compile)
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        build_type: [Debug, RelWithDebInfo, Release]
     steps:
       - name: Dependencies
         run: |
@@ -29,53 +60,76 @@ jobs:
       - name: SeriousProton Checkout
         uses: actions/checkout@v2
         with:
-          repository: daid/SeriousProton
+          repository: gcask/SeriousProton
           path: SeriousProton  
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
           path: EmptyEpsilon
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+      - name: Configure CMake
+        working-directory: ${{github.workspace}}/build
+        run: >
+          cmake
+          -G Ninja
+          -DCPACK_GENERATOR=ZIP
+          -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DSERIOUS_PROTON_DIR="../SeriousProton"
+          ../EmptyEpsilon
       - name: Build
+        working-directory: ${{github.workspace}}/build
         run: |
-          mkdir -p _build_win32
-          cd _build_win32
-          cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton
-          ninja package
+          cmake --build . --config ${{ matrix.build_type }} --target package
+      - uses: actions/upload-artifact@v2
+        with:
+          name: emptyepsilon-win-mingw-${{matrix.build_type }}.zip
+          path: ${{ github.workspace }}/build/EmptyEpsilon.zip
   macos:
-    # https://github.com/actions/virtual-environments/issues/841
-    # Mac builds are flaky, disable for now.
-    if: ${{ false }}
     name: MacOS
-    runs-on: macos-11.0
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        build_type: [Debug, RelWithDebInfo, Release]
     steps:
       - name: Dependencies
         run: brew install cmake sfml ninja
       - name: SeriousProton Checkout
         uses: actions/checkout@v2
         with:
-          repository: daid/SeriousProton
+          repository: gcask/SeriousProton
           path: SeriousProton  
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
           path: EmptyEpsilon
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+      - name: Configure CMake
+        working-directory: ${{github.workspace}}/build
+        run: >
+          cmake
+          -G Ninja
+          -DCPACK_GENERATOR=Bundle
+          -DCPACK_BUNDLE_NAME=EmptyEpsilon
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DSERIOUS_PROTON_DIR="../SeriousProton"
+          ../EmptyEpsilon
       - name: Build
-        run: |
-          mkdir -p _build_macos
-          cd _build_macos
-          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton
-          ninja
-          ninja install
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . --config ${{ matrix.build_type }} --target EmptyEpsilon
   windows:
     name: Windows
     runs-on: windows-latest
     strategy:
       matrix:
         build_type: [Debug, RelWithDebInfo, Release]
+        arch: [Win32, x64]
     steps:
       - name: Dependencies
         run: |
-          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip”
+          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-${{ matrix.arch == 'Win32' && '32' || '64' }}-bit.zip”
           $sfml_zip = "${{github.workspace}}/sfml-dev.zip"
           (new-object System.Net.WebClient).DownloadFile($sfml_link, $sfml_zip)
           Expand-Archive -LiteralPath $sfml_zip -DestinationPath "${{github.workspace}}/externals"
@@ -93,11 +147,17 @@ jobs:
       - name: Configure CMake
         working-directory: ${{github.workspace}}/build
         run: >
-          cmake ../EmptyEpsilon
-          -G "Visual Studio 16 2019" -A Win32
+          cmake
+          -G "Visual Studio 16 2019" -A ${{ matrix.arch }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DSFML_ROOT="../externals/SFML-2.5.1"
           -DSERIOUS_PROTON_DIR="../SeriousProton"
+          ../EmptyEpsilon
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: cmake --build . --config ${{ matrix.build_type }} --target package 
+        run: |
+          cmake --build . --config ${{ matrix.build_type }} --target package
+      - uses: actions/upload-artifact@v2
+        with:
+          name: emptyepsilon-win-${{ matrix.arch }}-${{matrix.build_type }}.zip
+          path: ${{ github.workspace }}/build/EmptyEpsilon.zip

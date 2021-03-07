@@ -5,6 +5,7 @@
 
 #if FEATURE_3D_RENDERING
 #include <array>
+#include <cstddef>
 #include <cstdint>
 
 namespace gl
