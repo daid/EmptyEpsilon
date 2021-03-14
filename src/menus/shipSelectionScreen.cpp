@@ -554,7 +554,15 @@ void ShipSelectionScreen::onReadyClick()
     {
         my_player_info->commandSetShipId(-1);
         destroy();
-        new CinematicViewScreen();
+        
+        auto selectedShip = player_ship_list->getSelectionValue();
+        
+        if (selectedShip.empty())
+        {
+            selectedShip = "0";
+        }
+        
+        new CinematicViewScreen(selectedShip.toInt());
     }else if(spectator_button->getValue())
     {
         my_player_info->commandSetShipId(-1);
