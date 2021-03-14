@@ -320,7 +320,7 @@ void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget&
 
 void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Font* font, sf::Color color)
 {
-    sf::Text textElement(text, *font, font_size);
+    sf::Text textElement(sf::String::fromUtf8(std::begin(text), std::end(text)), *font, font_size);
     float y = 0;
     float x = 0;
 
@@ -371,7 +371,7 @@ void GuiElement::drawText(sf::RenderTarget& window, sf::FloatRect rect, string t
 
 void GuiElement::drawVerticalText(sf::RenderTarget& window, sf::FloatRect rect, string text, EGuiAlign align, float font_size, sf::Font* font, sf::Color color)
 {
-    sf::Text textElement(text, *font, font_size);
+    sf::Text textElement(sf::String::fromUtf8(std::begin(text), std::end(text)), *font, font_size);
     textElement.setRotation(-90);
     float x = 0;
     float y = 0;
