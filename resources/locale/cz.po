@@ -3383,7 +3383,7 @@ msgstr "Zacilit system:"
 #: src/screenComponents/hackingDialog.cpp:115
 msgctxt "hacking"
 msgid "Hacking in Progress: {percent}%"
-msgstr "Hackovani probiha: {procent}%"
+msgstr "Hackovani probiha: {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:124
 msgctxt "hacking"
