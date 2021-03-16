@@ -143,6 +143,7 @@ function init()
 		local expand_distance = 0
 		local new_x, new_y = vectorFromAngle(random(0,360),random(4000,20000+expand_distance))
 		repeat
+			far_enough = true
 			new_x, new_y = vectorFromAngle(random(0,360),random(4000,20000+expand_distance))
 			new_x = new_x + ref_x
 			new_y = new_y + ref_y
