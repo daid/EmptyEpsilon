@@ -307,52 +307,63 @@ foreach(SP_SOURCE
 	src/multiplayer.cpp
 	src/P.cpp
 	src/i18n.cpp
-	src/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp
-	src/Box2D/Dynamics/Contacts/b2ContactSolver.cpp
-	src/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp
-	src/Box2D/Dynamics/Contacts/b2CircleContact.cpp
-	src/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp
-	src/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp
-	src/Box2D/Dynamics/Contacts/b2Contact.cpp
-	src/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp
-	src/Box2D/Dynamics/Contacts/b2PolygonContact.cpp
-	src/Box2D/Dynamics/Joints/b2MouseJoint.cpp
-	src/Box2D/Dynamics/Joints/b2MotorJoint.cpp
-	src/Box2D/Dynamics/Joints/b2PulleyJoint.cpp
-	src/Box2D/Dynamics/Joints/b2FrictionJoint.cpp
-	src/Box2D/Dynamics/Joints/b2Joint.cpp
-	src/Box2D/Dynamics/Joints/b2WheelJoint.cpp
-	src/Box2D/Dynamics/Joints/b2RopeJoint.cpp
-	src/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp
-	src/Box2D/Dynamics/Joints/b2DistanceJoint.cpp
-	src/Box2D/Dynamics/Joints/b2WeldJoint.cpp
-	src/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp
-	src/Box2D/Dynamics/Joints/b2GearJoint.cpp
-	src/Box2D/Dynamics/b2Fixture.cpp
-	src/Box2D/Dynamics/b2World.cpp
-	src/Box2D/Dynamics/b2Island.cpp
-	src/Box2D/Dynamics/b2Body.cpp
-	src/Box2D/Dynamics/b2ContactManager.cpp
-	src/Box2D/Dynamics/b2WorldCallbacks.cpp
-	src/Box2D/Rope/b2Rope.cpp
-	src/Box2D/Collision/b2CollidePolygon.cpp
-	src/Box2D/Collision/b2Distance.cpp
-	src/Box2D/Collision/b2CollideCircle.cpp
-	src/Box2D/Collision/Shapes/b2CircleShape.cpp
-	src/Box2D/Collision/Shapes/b2ChainShape.cpp
-	src/Box2D/Collision/Shapes/b2EdgeShape.cpp
-	src/Box2D/Collision/Shapes/b2PolygonShape.cpp
-	src/Box2D/Collision/b2TimeOfImpact.cpp
-	src/Box2D/Collision/b2DynamicTree.cpp
-	src/Box2D/Collision/b2BroadPhase.cpp
-	src/Box2D/Collision/b2CollideEdge.cpp
-	src/Box2D/Collision/b2Collision.cpp
-	src/Box2D/Common/b2BlockAllocator.cpp
-	src/Box2D/Common/b2StackAllocator.cpp
-	src/Box2D/Common/b2Math.cpp
-	src/Box2D/Common/b2Timer.cpp
-	src/Box2D/Common/b2Draw.cpp
-	src/Box2D/Common/b2Settings.cpp
+	
+	# Box2D
+	src/Box2D/src/collision/b2_chain_shape.cpp
+	src/Box2D/src/collision/b2_circle_shape.cpp
+	src/Box2D/src/collision/b2_collide_circle.cpp
+	src/Box2D/src/collision/b2_broad_phase.cpp
+	src/Box2D/src/collision/b2_collide_edge.cpp
+	src/Box2D/src/collision/b2_collide_polygon.cpp
+	src/Box2D/src/collision/b2_collision.cpp
+	src/Box2D/src/collision/b2_distance.cpp
+	src/Box2D/src/collision/b2_dynamic_tree.cpp
+	src/Box2D/src/collision/b2_edge_shape.cpp
+	src/Box2D/src/collision/b2_polygon_shape.cpp
+	src/Box2D/src/collision/b2_time_of_impact.cpp
+	src/Box2D/src/common/b2_block_allocator.cpp
+	src/Box2D/src/common/b2_draw.cpp
+	src/Box2D/src/common/b2_math.cpp
+	src/Box2D/src/common/b2_settings.cpp
+	src/Box2D/src/common/b2_stack_allocator.cpp
+	src/Box2D/src/common/b2_timer.cpp
+	src/Box2D/src/dynamics/b2_body.cpp
+	src/Box2D/src/dynamics/b2_chain_circle_contact.cpp
+	src/Box2D/src/dynamics/b2_chain_circle_contact.h
+	src/Box2D/src/dynamics/b2_chain_polygon_contact.cpp
+	src/Box2D/src/dynamics/b2_chain_polygon_contact.h
+	src/Box2D/src/dynamics/b2_circle_contact.cpp
+	src/Box2D/src/dynamics/b2_circle_contact.h
+	src/Box2D/src/dynamics/b2_contact.cpp
+	src/Box2D/src/dynamics/b2_contact_manager.cpp
+	src/Box2D/src/dynamics/b2_contact_solver.cpp
+	src/Box2D/src/dynamics/b2_contact_solver.h
+	src/Box2D/src/dynamics/b2_distance_joint.cpp
+	src/Box2D/src/dynamics/b2_edge_circle_contact.cpp
+	src/Box2D/src/dynamics/b2_edge_circle_contact.h
+	src/Box2D/src/dynamics/b2_edge_polygon_contact.cpp
+	src/Box2D/src/dynamics/b2_edge_polygon_contact.h
+	src/Box2D/src/dynamics/b2_fixture.cpp
+	src/Box2D/src/dynamics/b2_friction_joint.cpp
+	src/Box2D/src/dynamics/b2_gear_joint.cpp
+	src/Box2D/src/dynamics/b2_island.cpp
+	src/Box2D/src/dynamics/b2_island.h
+	src/Box2D/src/dynamics/b2_joint.cpp
+	src/Box2D/src/dynamics/b2_motor_joint.cpp
+	src/Box2D/src/dynamics/b2_mouse_joint.cpp
+	src/Box2D/src/dynamics/b2_polygon_circle_contact.cpp
+	src/Box2D/src/dynamics/b2_polygon_circle_contact.h
+	src/Box2D/src/dynamics/b2_polygon_contact.cpp
+	src/Box2D/src/dynamics/b2_polygon_contact.h
+	src/Box2D/src/dynamics/b2_prismatic_joint.cpp
+	src/Box2D/src/dynamics/b2_pulley_joint.cpp
+	src/Box2D/src/dynamics/b2_revolute_joint.cpp
+	src/Box2D/src/dynamics/b2_weld_joint.cpp
+	src/Box2D/src/dynamics/b2_wheel_joint.cpp
+	src/Box2D/src/dynamics/b2_world.cpp
+	src/Box2D/src/dynamics/b2_world_callbacks.cpp
+	src/Box2D/src/rope/b2_rope.cpp
+
 	src/httpServer.cpp
 	src/networkAudioStream.cpp
 	src/engine.cpp
@@ -413,7 +424,7 @@ else()
 endif()
 
 target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
-target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
+target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src ${SERIOUS_PROTON_DIR}/src/Box2D/include)
 target_compile_options(${EXECUTABLE_NAME}
 	PUBLIC
 	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<CONFIG:RelWithDebInfo>>:-g1>
