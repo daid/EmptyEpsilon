@@ -425,7 +425,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
         object_sprite.setScale(0.8, 0.8);
         window.draw(object_sprite);
-        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(my_spaceship->waypoint_labels[n]), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
 
         if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
         {
@@ -435,7 +435,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
             object_sprite.setRotation(sf::vector2ToAngle(screen_position - radar_screen_center) - 90);
             window.draw(object_sprite);
 
-            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(my_spaceship->waypoint_labels[n]), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
         }
     }
 }

@@ -6,6 +6,7 @@
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
+#include <algorithm>
 
 class ScanProbe;
 
@@ -115,10 +116,14 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
+
+    //waypoint variables
+    std::vector<uint8_t> waypoint_free_label_pool{1, 2, 3, 4, 5, 6, 7, 8, 9};
 public:
     std::vector<CustomShipFunction> custom_functions;
 
     std::vector<sf::Vector2f> waypoints;
+    std::vector<uint8_t> waypoint_labels;
 
     // Ship functionality
     // Capable of scanning a target

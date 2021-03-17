@@ -1539,16 +1539,23 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             sf::Vector2f position;
             packet >> position;
-            if (waypoints.size() < 9)
+            if (waypoints.size() < 9) {
                 waypoints.push_back(position);
+                waypoint_labels.push_back(waypoint_free_label_pool.front());
+                waypoint_free_label_pool.erase(waypoint_free_label_pool.begin());
+            }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
             int32_t index;
             packet >> index;
-            if (index >= 0 && index < int(waypoints.size()))
+            if (index >= 0 && index < int(waypoints.size())) {
                 waypoints.erase(waypoints.begin() + index);
+                waypoint_free_label_pool.push_back(waypoint_labels.at(index));
+                waypoint_labels.erase(waypoint_labels.begin() + index);
+                std::sort(waypoint_free_label_pool.begin(), waypoint_free_label_pool.end());
+            }
         }
         break;
     case CMD_MOVE_WAYPOINT:
