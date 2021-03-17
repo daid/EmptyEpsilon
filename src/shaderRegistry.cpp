@@ -69,10 +69,6 @@ namespace ShaderRegistry
 				auto handle = entry.shader->getNativeHandle();
 
 				// First update attribute locations.
-				// Because we might trigger a re-link,
-				// which may change uniform locations
-				// (doubtful, but better safe than sorry!)
-				auto relink = false;
 				for (auto attrib = 0; attrib < attribute_names.size(); ++attrib)
 				{
 					entry.attributes[attrib] = glGetAttribLocation(handle, attribute_names[attrib]);
