@@ -6,7 +6,7 @@
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
-#include <algorithm>
+#include <bitset>
 
 class ScanProbe;
 
@@ -117,8 +117,6 @@ private:
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
 
-    //waypoint variables
-    std::vector<uint8_t> waypoint_free_label_pool{1, 2, 3, 4, 5, 6, 7, 8, 9};
 public:
     std::vector<CustomShipFunction> custom_functions;
 

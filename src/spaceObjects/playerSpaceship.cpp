@@ -1540,9 +1540,22 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             sf::Vector2f position;
             packet >> position;
             if (waypoints.size() < 9) {
-                std::pair<sf::Vector2f,uint8_t> wp_pair(position, waypoint_free_label_pool.front());
+                std::bitset<9> taken_labels;
+                uint8_t label = 0;
+                
+                for(int n=0; n<waypoints.size(); n++) {
+                    taken_labels[waypoints[n].second-1] = true;
+                }
+
+                for(int n=0; n<9; n++) {
+                    if(taken_labels[n] != true) {
+                        label = n+1;
+                        break;
+                    }
+                }
+
+                std::pair<sf::Vector2f,uint8_t> wp_pair(position, label);
                 waypoints.push_back(wp_pair);
-                waypoint_free_label_pool.erase(waypoint_free_label_pool.begin());
             }
         }
         break;
@@ -1550,11 +1563,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             int32_t index;
             packet >> index;
-            if (index >= 0 && index < int(waypoints.size())) {
-                waypoint_free_label_pool.push_back(waypoints.at(index).second);
+            if (index >= 0 && index < int(waypoints.size()))
                 waypoints.erase(waypoints.begin() + index);
-                std::sort(waypoint_free_label_pool.begin(), waypoint_free_label_pool.end());
-            }
         }
         break;
     case CMD_MOVE_WAYPOINT:
