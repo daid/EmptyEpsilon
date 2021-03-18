@@ -31,7 +31,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             {
                 // ... and we select something near a waypoint, switch to move
                 // waypoint mode.
-                if (sf::length(my_spaceship->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0)
+                if (sf::length(my_spaceship->waypoints[science->targets.getWaypointIndex()].first - position) < 1000.0)
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = science->targets.getWaypointIndex();

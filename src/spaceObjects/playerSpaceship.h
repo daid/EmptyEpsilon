@@ -122,8 +122,7 @@ private:
 public:
     std::vector<CustomShipFunction> custom_functions;
 
-    std::vector<sf::Vector2f> waypoints;
-    std::vector<uint8_t> waypoint_labels;
+    std::vector<std::pair<sf::Vector2f,uint8_t>> waypoints;
 
     // Ship functionality
     // Capable of scanning a target
@@ -333,7 +332,7 @@ public:
 
     // Waypoint functions
     int getWaypointCount() { return waypoints.size(); }
-    sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+    sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1].first; return sf::Vector2f(0, 0); }
 
     // Ship control code/password setter
     void setControlCode(string code) { control_code = code.upper(); }

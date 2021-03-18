@@ -1540,8 +1540,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             sf::Vector2f position;
             packet >> position;
             if (waypoints.size() < 9) {
-                waypoints.push_back(position);
-                waypoint_labels.push_back(waypoint_free_label_pool.front());
+                std::pair<sf::Vector2f,uint8_t> wp_pair(position, waypoint_free_label_pool.front());
+                waypoints.push_back(wp_pair);
                 waypoint_free_label_pool.erase(waypoint_free_label_pool.begin());
             }
         }
@@ -1551,9 +1551,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             int32_t index;
             packet >> index;
             if (index >= 0 && index < int(waypoints.size())) {
+                waypoint_free_label_pool.push_back(waypoints.at(index).second);
                 waypoints.erase(waypoints.begin() + index);
-                waypoint_free_label_pool.push_back(waypoint_labels.at(index));
-                waypoint_labels.erase(waypoint_labels.begin() + index);
                 std::sort(waypoint_free_label_pool.begin(), waypoint_free_label_pool.end());
             }
         }
@@ -1564,7 +1563,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             sf::Vector2f position;
             packet >> index >> position;
             if (index >= 0 && index < int(waypoints.size()))
-                waypoints[index] = position;
+                waypoints[index].first = position;
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:

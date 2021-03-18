@@ -430,7 +430,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     else if (targets.getWaypointIndex() >= 0)
     {
         sidebar_pager->hide();
-        sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
+        sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()].first - my_spaceship->getPosition();
         float distance = sf::length(position_diff);
         float heading = sf::vector2ToAngle(position_diff) - 270;
 
