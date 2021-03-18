@@ -1539,23 +1539,22 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             sf::Vector2f position;
             packet >> position;
-            if (waypoints.size() < 9) {
-                std::bitset<9> taken_labels;
-                uint8_t label = 0;
+            if (waypoints.size() < max_waypoints) {
+                std::bitset<max_waypoints> taken_labels;
                 
-                for(int n=0; n<waypoints.size(); n++) {
-                    taken_labels[waypoints[n].second-1] = true;
+                for(const auto& waypoint: waypoints) {
+                    taken_labels[waypoint.second-1] = true;
                 }
 
-                for(int n=0; n<9; n++) {
+                uint8_t label = 0;
+                for(int n=0; n<max_waypoints; n++) {
                     if(taken_labels[n] != true) {
                         label = n+1;
                         break;
                     }
                 }
 
-                std::pair<sf::Vector2f,uint8_t> wp_pair(position, label);
-                waypoints.push_back(wp_pair);
+                waypoints.emplace_back(position, label);
             }
         }
         break;

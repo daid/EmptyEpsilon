@@ -55,6 +55,9 @@ public:
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
 
+    // Maximum number of waypoints
+    constexpr static size_t max_waypoints = 9;
+
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
     // Content of a line in the ship's log
