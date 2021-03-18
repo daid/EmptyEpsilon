@@ -40,7 +40,8 @@ void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
     alert.setPosition(getCenterPoint());
     window.draw(alert);
     sf::Text alert_text(text, *main_font, text_size);
-    alert_text.setColor(color);
+    alert_text.setFillColor(color);
+    alert_text.setOutlineColor(color);
     alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
     alert_text.setPosition(getCenterPoint() - sf::Vector2f(0, 300));
     window.draw(alert_text);

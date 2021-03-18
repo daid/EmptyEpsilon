@@ -80,10 +80,14 @@ void DebugRenderer::render(sf::RenderTarget& window)
         text_server_update.setPosition(0, window.getView().getSize().y - 18 * 3 - 170);
         text_collision.setPosition(0, window.getView().getSize().y - 18 * 2 - 170);
         text_render.setPosition(0, window.getView().getSize().y - 18 - 170);
-        text_update.setColor(sf::Color::Red);
-        text_server_update.setColor(sf::Color::Yellow);
-        text_collision.setColor(sf::Color::Cyan);
-        text_render.setColor(sf::Color::Green);
+        text_update.setFillColor(sf::Color::Red);
+        text_update.setOutlineColor(sf::Color::Red);
+        text_server_update.setFillColor(sf::Color::Yellow);
+        text_server_update.setOutlineColor(sf::Color::Yellow);
+        text_collision.setFillColor(sf::Color::Cyan);
+        text_collision.setOutlineColor(sf::Color::Cyan);
+        text_render.setFillColor(sf::Color::Green);
+        text_render.setOutlineColor(sf::Color::Green);
         window.draw(text_update);
         window.draw(text_server_update);
         window.draw(text_collision);
