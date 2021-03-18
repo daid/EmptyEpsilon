@@ -1,13 +1,5 @@
-project(EmptyEpsilon)
-cmake_minimum_required(VERSION 2.8.12)
-
-if(${CMAKE_VERSION} VERSION_LESS 3.2)
-	# `MINGW` exists starting 3.2.
-	set(MINGW FALSE)
-	if(WIN32 AND CMAKE_COMPILER_IS_GNUCC)
-		set(MINGW TRUE)
-	endif()
-endif()
+cmake_minimum_required(VERSION 3.7)
+project(EmptyEpsilon LANGUAGES CXX C)
 
 option(ENABLE_CRASH_LOGGER "Enable the drmingw crash logging facilities" OFF)
 message(STATUS "ENABLE_CRASH_LOGGER is " ${ENABLE_CRASH_LOGGER})
@@ -20,9 +12,6 @@ if(NOT IS_ABSOLUTE "${SERIOUS_PROTON_DIR}")
   get_filename_component(SERIOUS_PROTON_DIR "${CMAKE_BINARY_DIR}/${SERIOUS_PROTON_DIR}" ABSOLUTE)
 endif()
 
-if(CMAKE_BUILD_TYPE MATCHES Debug)
-	add_definitions(-DDEBUG)
-endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
 if(ENABLE_CRASH_LOGGER)
  if(MINGW)
@@ -54,30 +43,10 @@ if(CMAKE_COMPILER_IS_GNUCC)
     endif()
 endif()
 
-if(MSVC)
-	add_definitions(-DNOMINMAX)
-else()
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror=return-type")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror=return-type")
-endif()
-
-# install resources, scripts, and packs to app bundle instead of system dir.
-if(APPLE)
-    set(CMAKE_INSTALL_PREFIX "./")
-elseif(UNIX)
-    # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-    add_definitions(-DRESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
-endif()
 
 # Set minimum target macOS version
 if(APPLE)
 	set(MACOSX_DEPLOYMENT_TARGET "10.10")
-endif()
-
-if(CONFIG_DIR)
-    add_definitions(-DCONFIG_DIR="${CONFIG_DIR}")
-elseif(UNIX)
-    add_definitions(-DCONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/")
 endif()
 
 ## ensure c++11 is used
@@ -393,15 +362,6 @@ foreach(SP_SOURCE
 	list(APPEND SOURCES ${SERIOUS_PROTON_DIR}/${SP_SOURCE})
 endforeach()
 
-add_definitions(-DWINDOW_TITLE="EmptyEpsilon")
-add_definitions(-DVERSION_NUMBER=${VERSION_NUMBER})
-if(ENABLE_CRASH_LOGGER)
-  add_definitions(-DENABLE_CRASH_LOGGER)
-  if(MINGW)
-    link_directories(${DRMINGW_ROOT}/lib/)
-  endif()
-endif()
-
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework OpenGL -framework Foundation")
 endif()
@@ -412,12 +372,46 @@ else()
     add_executable(${EXECUTABLE_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
-target_include_directories(${EXECUTABLE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
-target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SERIOUS_PROTON_DIR}/src)
+target_compile_definitions(${EXECUTABLE_NAME}
+	PUBLIC
+		$<$<CONFIG:Debug>:DEBUG>
+		$<$<BOOL:${MSVC}>:NOMINMAX>
+		# Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
+		$<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+		$<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
+		$<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+		WINDOW_TITLE="EmptyEpsilon"
+		VERSION_NUMBER=${VERSION_NUMBER}
+
+		$<$<BOOL:${ENABLE_CRASH_LOGGER}:ENABLE_CRASH_LOGGER>
+
+		SFML_NO_DEPRECATED_WARNINGS # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
+
+)
+
+# install resources, scripts, and packs to app bundle instead of system dir.
+if(APPLE)
+    set(CMAKE_INSTALL_PREFIX "./")
+endif()
+
+if(ENABLE_CRASH_LOGGER)
+  if(MINGW)
+    link_directories(${DRMINGW_ROOT}/lib/)
+  endif()
+endif()
+
+
+target_include_directories(${EXECUTABLE_NAME}
+	PUBLIC
+		$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+		$<BUILD_INTERFACE:${SERIOUS_PROTON_DIR}/src>
+)
+
 target_compile_options(${EXECUTABLE_NAME}
 	PUBLIC
 	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<CONFIG:RelWithDebInfo>>:-g1>
 	$<$<AND:$<NOT:$<BOOL:${MSVC}>>,$<OR:$<CONFIG:RelWithDebInfo>,$<CONFIG:Release>>>:${OPTIMIZER_FLAGS}>
+	$<$<NOT:$<BOOL:${MSVC}>>:-Wall -Werror=return-type>
 	$<$<BOOL:${MSVC}>:/MP /permissive->
 )
 
@@ -425,22 +419,21 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 ## Setup SFML
 find_package(SFML 2.3 REQUIRED system window graphics network audio)
-include_directories(${SFML_INCLUDE_DIR})
-target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
-add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
+target_include_directories(${EXECUTABLE_NAME} PUBLIC ${SFML_INCLUDE_DIR})
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${SFML_LIBRARIES})
 
 # Setup OpenGl
 if(ANDROID)
-  target_link_libraries(${EXECUTABLE_NAME} GLESv1_CM)
+  target_link_libraries(${EXECUTABLE_NAME} PUBLIC GLESv1_CM)
 else()
   find_package(OpenGL REQUIRED)
-  include_directories(${OPENGL_INCLUDE_DIR})
-  target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_LIBRARIES})
+  target_include_directories(${EXECUTABLE_NAME} PUBLIC ${OPENGL_INCLUDE_DIR})
+  target_link_libraries(${EXECUTABLE_NAME} PUBLIC ${OPENGL_LIBRARIES})
 endif()
 
 # Opus for voice chat
 add_subdirectory("${SERIOUS_PROTON_DIR}/src/libopus/" "${CMAKE_CURRENT_BINARY_DIR}/libopus")
-target_link_libraries(${EXECUTABLE_NAME} opus)
+target_link_libraries(${EXECUTABLE_NAME} PUBLIC opus)
 
 set(GLM_BASE_PATH "${CMAKE_CURRENT_BINARY_DIR}/glm")
 set(GLM_ZIP "${GLM_BASE_PATH}/glm.zip")
@@ -452,12 +445,12 @@ target_include_directories(${EXECUTABLE_NAME} PUBLIC "${GLM_BASE_PATH}/glm")
 
 # Some magical Win 32 stuff
 if(WIN32)
-  target_link_libraries(${EXECUTABLE_NAME} wsock32 iphlpapi)
+  target_link_libraries(${EXECUTABLE_NAME} PUBLIC wsock32 iphlpapi)
   if(ENABLE_CRASH_LOGGER)
 	if(MINGW)
-		include_directories(${DRMINGW_ROOT}/include/)
+		target_include_directories(${EXECUTABLE_NAME} PUBLIC ${DRMINGW_ROOT}/include/)
 	endif()
-    target_link_libraries(${EXECUTABLE_NAME} exchndl)
+    target_link_libraries(${EXECUTABLE_NAME} PUBLIC exchndl)
   endif()
   set(DISCORD_ARCH "x86_64")
   if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
@@ -475,11 +468,11 @@ if(WIN32)
     endif()
   endif()
   
-  target_link_libraries(${EXECUTABLE_NAME} "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib")
+  target_link_libraries(${EXECUTABLE_NAME} PUBLIC "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib")
   target_include_directories(${EXECUTABLE_NAME} PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/discord/c/")
 elseif(ANDROID)
   set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
-  target_link_libraries(${EXECUTABLE_NAME} log android EGL)
+  target_link_libraries(${EXECUTABLE_NAME} PUBLIC log android EGL)
 elseif(APPLE)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in)
   set_target_properties(${EXECUTABLE_NAME} PROPERTIES MACOSX_BUNDLE_ICON_FILE "${EXECUTABLE_NAME}.icns")
