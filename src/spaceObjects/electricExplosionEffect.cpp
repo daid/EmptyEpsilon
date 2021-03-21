@@ -58,17 +58,18 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         std::array<sf::Vector2f, 4 * max_quad_count> texcoords;
         for (auto i = 0; i < max_quad_count; ++i)
         {
-            texcoords[4 * i + 0] = { 0.f, 0.f };
-            texcoords[4 * i + 1] = { 1.f, 0.f };
-            texcoords[4 * i + 2] = { 1.f, 1.f };
-            texcoords[4 * i + 3] = { 0.f, 1.f };
+            auto quad_offset = 4 * i;
+            texcoords[quad_offset + 0] = { 0.f, 0.f };
+            texcoords[quad_offset + 1] = { 1.f, 0.f };
+            texcoords[quad_offset + 2] = { 1.f, 1.f };
+            texcoords[quad_offset + 3] = { 0.f, 1.f };
 
-            indices[6 * i + 0] = i + 0;
-            indices[6 * i + 1] = i + 1;
-            indices[6 * i + 2] = i + 2;
-            indices[6 * i + 3] = i + 2;
-            indices[6 * i + 4] = i + 3;
-            indices[6 * i + 5] = i + 0;
+            indices[6 * i + 0] = quad_offset + 0;
+            indices[6 * i + 1] = quad_offset + 1;
+            indices[6 * i + 2] = quad_offset + 2;
+            indices[6 * i + 3] = quad_offset + 2;
+            indices[6 * i + 4] = quad_offset + 3;
+            indices[6 * i + 5] = quad_offset + 0;
         }
 
         // Update texcoords
