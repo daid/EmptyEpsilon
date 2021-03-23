@@ -31,7 +31,7 @@ set(SERIOUS_PROTON_DIR "../SeriousProton" CACHE PATH "Path to SeriousProton")
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
 # ensure c++14 is used
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Dependencies
