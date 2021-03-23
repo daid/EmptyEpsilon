@@ -1547,7 +1547,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 }
 
                 uint8_t label = 0;
-                for(int n=0; n<max_waypoints; n++) {
+                for(int n=0; n<taken_labels.size(); n++) {
                     if(taken_labels[n] != true) {
                         label = n+1;
                         break;
