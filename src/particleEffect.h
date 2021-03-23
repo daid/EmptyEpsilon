@@ -66,7 +66,7 @@ private:
     void doSpawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time);
 
     std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> uniforms;
-    gl::Buffers<static_cast<size_t>(Buffers::Count)> buffers;
+    gl::Buffers<static_cast<size_t>(Buffers::Count)> buffers{ gl::Unitialized{} };
 
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
