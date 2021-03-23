@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -30,10 +30,6 @@ set(SERIOUS_PROTON_DIR "../SeriousProton" CACHE PATH "Path to SeriousProton")
 
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
-# ensure c++14 is used
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 # Dependencies
 
 # Setup OpenGl
@@ -42,15 +38,11 @@ if(NOT ANDROID)
 endif()
 
 # SeriousProton
+# Use SP provided json library.
+set(SERIOUSPROTON_WITH_JSON ON CACHE BOOL "" FORCE)
 add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" EXCLUDE_FROM_ALL)
 
 message(STATUS "Crash Logger is: ${ENABLE_CRASH_LOGGER}")
-
-# Json11
-add_subdirectory("${SERIOUS_PROTON_DIR}/src/json11" "${PROJECT_BINARY_DIR}/json11" EXCLUDE_FROM_ALL)
-
-# Opus
-add_subdirectory("${SERIOUS_PROTON_DIR}/src/libopus" "${PROJECT_BINARY_DIR}/opus" EXCLUDE_FROM_ALL)
 
 set(EXTERNALS_DIR "${PROJECT_BINARY_DIR}/externals")
 set(DOWNLOADS_DIR "${PROJECT_BINARY_DIR}/downloads")
@@ -332,7 +324,7 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        seriousproton json11 opus glm::glm
+        seriousproton glm::glm
         "$<$<BOOL:${ANDROID}>:GLESv1_CM;log;android;EGL>"
         "$<$<BOOL:${WIN32}>:iphlpapi;discord>"
         "$<$<NOT:$<BOOL:${ANDROID}>>:${OPENGL_LIBRARIES}>"
