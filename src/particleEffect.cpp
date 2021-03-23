@@ -57,7 +57,7 @@ ParticleEngine::ParticleEngine()
 {
     if (gl::isAvailable())
     {
-        
+        buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
         // Cache shader info.
         shader = ShaderManager::getShader("shaders/particles");
         shaderVertexIDAttribute = glGetAttribLocation(shader->getNativeHandle(), "vertex_id");
