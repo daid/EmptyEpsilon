@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-24 17:33+0100\n"
+"PO-Revision-Date: 2021-03-24 17:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -565,16 +565,16 @@ msgstr "Régénération"
 #: src/screens/crew6/engineeringScreen.cpp:303
 #: src/screens/crew6/engineeringScreen.cpp:317
 msgid "Extra damage"
-msgstr "Dommages supplementaires"
+msgstr "Dommages supplémentaires"
 
 #: src/screens/crew6/engineeringScreen.cpp:305
 #: src/screens/crew6/engineeringScreen.cpp:319
 msgid "Damage negate"
-msgstr "Reduction des degats"
+msgstr "Réduction des dégâts"
 
 #: src/screens/crew6/scienceScreen.cpp:94 src/screens/crew6/relayScreen.cpp:81
 msgid "Callsign"
-msgstr "Modele"
+msgstr "Modèle"
 
 #: src/screens/crew6/scienceScreen.cpp:96
 msgctxt "science"
@@ -626,7 +626,7 @@ msgstr "Radar"
 #: src/screens/crew6/scienceScreen.cpp:215
 msgctxt "button"
 msgid "Database"
-msgstr "Base de Donnees"
+msgstr "Base de données"
 
 #: src/screens/crew4/operationsScreen.cpp:67
 #: src/screens/crew6/relayScreen.cpp:101
@@ -640,7 +640,7 @@ msgstr "Lier a Communications"
 
 #: src/screens/crew6/relayScreen.cpp:107
 msgid "Start hacking"
-msgstr "Demarrer piratage"
+msgstr "Démarrer piratage"
 
 #: src/screens/crew6/relayScreen.cpp:117
 msgid "Link to Science"
@@ -662,7 +662,7 @@ msgstr "Largage sonde"
 
 #: src/screens/gm/tweak.cpp:731
 msgid "Reputation:"
-msgstr "Reputation actuelle :"
+msgstr "Réputation actuelle :"
 
 #: src/screens/crew6/relayScreen.cpp:163
 msgid "Alert level"
@@ -670,7 +670,7 @@ msgstr "Niveau d'alerte"
 
 #: src/screens/crew6/weaponsScreen.cpp:64
 msgid "Beam info"
-msgstr "Faisceaux : reglages"
+msgstr "Faisceaux : réglages"
 
 #: src/screens/crew4/tacticalScreen.cpp:71 src/screens/crew6/helmsScreen.cpp:72
 #: src/screens/crew1/singlePilotScreen.cpp:75
@@ -689,7 +689,7 @@ msgstr "{value} {unit}/min"
 
 #: src/screens/gm/tweak.cpp:593
 msgid "{system} health"
-msgstr "{system}: sante actuelle"
+msgstr "{system}: santé actuelle"
 
 #: src/screens/gm/tweak.cpp:612
 msgid "{system} heat"
@@ -716,7 +716,7 @@ msgstr "Vide"
 #: src/screenComponents/missileTubeControls.cpp:130
 msgctxt "missile"
 msgid "Unload"
-msgstr "Decharger"
+msgstr "Décharger"
 
 #: src/screenComponents/missileTubeControls.cpp:126
 msgctxt "missile"
@@ -726,7 +726,7 @@ msgstr "Chargement"
 #: src/screenComponents/missileTubeControls.cpp:135
 msgctxt "missile"
 msgid "Unloading"
-msgstr "Dechargement"
+msgstr "Déchargement"
 
 #: src/screenComponents/missileTubeControls.cpp:141
 msgctxt "missile"
@@ -735,7 +735,7 @@ msgstr "Feu"
 
 #: src/screenComponents/selfDestructEntry.cpp:22
 msgid "Self destruct activated!"
-msgstr "Autodestruction activee !"
+msgstr "Autodestruction activée !"
 
 #: src/screenComponents/selfDestructEntry.cpp:67
 msgid "Code [{letter}]: {self_destruct_code}"
@@ -756,7 +756,7 @@ msgstr "Annuler accostage"
 
 #: src/screenComponents/dockingButton.cpp:55
 msgid "Undock"
-msgstr "Desamarrer"
+msgstr "Désamarrer"
 
 #: src/screenComponents/shieldsEnableButton.cpp:23
 msgctxt "shields"
@@ -842,7 +842,7 @@ msgstr "Manoeuvre de combat"
 #: src/screenComponents/warpControls.cpp:41
 msgctxt "slider"
 msgid "Warp"
-msgstr "Vit. lumiere"
+msgstr "Vit. lumière"
 
 #: src/spaceObjects/spaceship.cpp:1505
 msgctxt "missile"
@@ -887,7 +887,7 @@ msgstr "Gauche"
 #: src/spaceObjects/spaceshipParts/weaponTube.cpp:302
 msgctxt "tube"
 msgid "Rear"
-msgstr "Arriere"
+msgstr "Arrière"
 
 #: scripts/shipTemplates_Corvette.lua:14
 msgid "Atlantis X23"
@@ -933,11 +933,11 @@ msgstr "Dissident"
 
 #: scripts/shipTemplates_Corvette.lua:157
 msgid "Gunner"
-msgstr "Cannoniere"
+msgstr "Cannonière"
 
 #: scripts/shipTemplates_Corvette.lua:217
 msgid "Defense platform"
-msgstr "Plateforme de defense"
+msgstr "Plate-forme de défense"
 
 #, fuzzy
 #| msgctxt "subclass"
@@ -987,12 +987,12 @@ msgstr "Recycleur LD %d"
 #: scripts/shipTemplates_Corvette.lua:274
 #, lua-format
 msgid "Equipment Freighter %d"
-msgstr "Transport d'equipement %d"
+msgstr "Transport d'équipement %d"
 
 #: scripts/shipTemplates_Corvette.lua:283
 #, lua-format
 msgid "Equipment Jump Freighter %d"
-msgstr "Transport d'equipement LD %d"
+msgstr "Transport d'équipement LD %d"
 
 #: scripts/shipTemplates_Corvette.lua:287
 #, lua-format
@@ -1006,11 +1006,11 @@ msgstr "Citerne LD %d"
 
 #: scripts/shipTemplates_Corvette.lua:301
 msgid "Jump Carrier"
-msgstr "Teleporteur"
+msgstr "Téléporteur"
 
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Benedict"
-msgstr "Benedict"
+msgstr "Bénédict"
 
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Freighter/Carrier"
@@ -1022,7 +1022,7 @@ msgstr "Kiriya"
 
 #: scripts/factionInfo.lua:1
 msgid "Independent"
-msgstr "Independant"
+msgstr "Indépendant"
 
 #: scripts/factionInfo.lua:3
 msgid ""
@@ -1031,10 +1031,10 @@ msgid ""
 "themselves independent, though certain voices have started to speak up about "
 "creating a merchant faction."
 msgstr ""
-"Bien qu'ils apparaissent comme une faction, les independants se distinguent "
+"Bien qu'ils apparaissent comme une faction, les indépendants se distinguent "
 "avant tout par leur absence d'affiliation forte avec qui que ce soit. La "
-"plupart des marchands se considerent comme independants, bien que certaines "
-"voix aient commence a s'elever pour parler de la creation d'une faction "
+"plupart des marchands se considèrent comme indépendants, bien que certaines "
+"voix aient commencées à s'élever pour parler de la création d'une faction "
 "marchande."
 
 #: scripts/factionInfo.lua:5
@@ -1058,16 +1058,16 @@ msgid ""
 msgstr ""
 "Les vestiges de la marine humaine.\n"
 "\n"
-"Alors que toutes les autres races ont ete poussees vers les etoiles par la "
-"cupidite ou la recherche scientifique, les humains ont ete les seuls a "
+"Alors que toutes les autres races ont été poussées vers les étoiles par la "
+"cupidité ou la recherche scientifique, les humains ont été les seuls à "
 "commencer leur exploration de la galaxie par manque de moyens de subsistance "
-"sur leur planete natale. Pour certaines autres races, l'homme est une sorte "
-"de virus ou de fleau en raison de la vitesse a laquelle il peut se "
+"sur leur planète natale. Pour certaines autres races, l'homme est une sorte "
+"de virus ou de fléau en raison de la vitesse à laquelle il peut se "
 "reproduire et se propager.\n"
 "\n"
-"En raison de la reglementation humaine sur les astronefs, seuls les "
-"vaisseaux militaires sont autorises a evoluer dans l'espace lointain. Cela "
-"n'a cependant pas empeche certains civils de voyager, en s'engageant sur des "
+"En raison de la règlementation humaine sur les astronefs, seuls les "
+"vaisseaux militaires sont autorisés a évoluer dans l'espace lointain. Cela "
+"n'a cependant pas empêché certains civils de voyager, en s'engageant sur des "
 "vaisseaux de commerce extraterrestres ou des raiders pirates."
 
 #: scripts/factionInfo.lua:13
