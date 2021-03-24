@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-24 00:01+0100\n"
+"PO-Revision-Date: 2021-03-24 17:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -43,14 +43,14 @@ msgid ""
 "Touchscreen"
 msgstr ""
 "Calibrer\n"
-"Ecran tactile"
+"Écran tactile"
 
 msgid "Graphics Options"
 msgstr "Options graphiques"
 
 #: src/menus/optionsMenu.cpp:50
 msgid "Fullscreen toggle"
-msgstr "Activer plein ecran"
+msgstr "Activer plein écran"
 
 msgid "Sound Options"
 msgstr "Options sonores"
@@ -284,15 +284,15 @@ msgstr "Configuration du serveur"
 
 #: src/menus/serverCreationScreen.cpp:57
 msgid "Server name: "
-msgstr "Nom du serveur :"
+msgstr "Nom du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:63
 msgid "Server password: "
-msgstr "Mot de passe du serveur :"
+msgstr "Mot de passe du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:75
 msgid "Server IP: "
-msgstr "IP du serveur :"
+msgstr "IP du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:81
 msgid "Server visibility: "
@@ -312,7 +312,7 @@ msgstr "Options du vaisseau"
 
 #: src/menus/serverCreationScreen.cpp:95
 msgid "Warp/Jump: "
-msgstr "V. lumière/Téléportation :"
+msgstr "V. lumière/Téléportation : "
 
 #: src/menus/serverCreationScreen.cpp:98
 msgctxt "warp/jump"
@@ -337,11 +337,11 @@ msgstr "Les deux"
 #: src/menus/serverCreationScreen.cpp:98
 msgctxt "warp/jump"
 msgid "Neither"
-msgstr "Aucun"
+msgstr "Aucune"
 
 #: src/menus/serverCreationScreen.cpp:101
 msgid "Main screen options"
-msgstr "Options de l'ecran principal"
+msgstr "Options de l'écran principal"
 
 #: src/menus/serverCreationScreen.cpp:106
 msgid "Tactical radar"
@@ -349,7 +349,7 @@ msgstr "Radar tactique"
 
 #: src/menus/serverCreationScreen.cpp:109
 msgid "Long range radar"
-msgstr "Radar longue portee"
+msgstr "Radar longue portée"
 
 #: src/menus/serverCreationScreen.cpp:114
 msgid "Game rules"
@@ -357,12 +357,12 @@ msgstr "Options de jeu"
 
 #: src/menus/serverCreationScreen.cpp:119
 msgid "Scan complexity: "
-msgstr "Complexite du scan : "
+msgstr "Complexité du scan : "
 
 #: src/menus/serverCreationScreen.cpp:122
 msgctxt "scanning"
 msgid "None (delay)"
-msgstr "Aucune (delai)"
+msgstr "Aucune (délai)"
 
 #: src/menus/serverCreationScreen.cpp:122
 msgctxt "scanning"
@@ -377,11 +377,11 @@ msgstr "Normale"
 #: src/menus/serverCreationScreen.cpp:122
 msgctxt "scanning"
 msgid "Advanced"
-msgstr "Avancee"
+msgstr "Avancée"
 
 #: src/menus/serverCreationScreen.cpp:127
 msgid "Hacking difficulty: "
-msgstr "Difficulte de piratage : "
+msgstr "Difficulté de piratage : "
 
 #: src/menus/serverCreationScreen.cpp:130
 msgctxt "hacking"
@@ -410,12 +410,12 @@ msgstr "Type de piratage : "
 #: src/menus/serverCreationScreen.cpp:138
 msgctxt "hacking"
 msgid "Mine"
-msgstr "Mine"
+msgstr "Mines"
 
 #: src/menus/serverCreationScreen.cpp:138
 msgctxt "hacking"
 msgid "Lights"
-msgstr "Lumieres"
+msgstr "Lumières"
 
 #: src/menus/serverCreationScreen.cpp:138
 msgctxt "hacking"
@@ -424,15 +424,15 @@ msgstr "Les deux"
 
 #: src/menus/serverCreationScreen.cpp:143
 msgid "Beam/shield frequencies"
-msgstr "Freq. faisceaux/bouclier"
+msgstr "Fréq. faisceaux/bouclier"
 
 #: src/menus/serverCreationScreen.cpp:147
 msgid "Per-system damage"
-msgstr "Degats des systemes"
+msgstr "Dégâts des systèmes"
 
 #: src/menus/serverCreationScreen.cpp:153
 msgid "Scenario"
-msgstr "Choix du scenario"
+msgstr "Choix du scénario"
 
 #: src/menus/serverCreationScreen.cpp:172
 msgid "Variation: "
@@ -444,7 +444,7 @@ msgstr "Fermer le serveur"
 
 #: src/menus/serverCreationScreen.cpp:193
 msgid "Start scenario"
-msgstr "Demarrer le scenario"
+msgstr "Démarrer le scénario"
 
 #: src/menus/serverCreationScreen.cpp:235
 msgctxt "variation"
@@ -456,11 +456,11 @@ msgstr "Pas de variante."
 
 #: src/menus/serverCreationScreen.cpp:243
 msgid "No variation selected. Play the scenario as intended."
-msgstr "Pas de variante selectionnee. Jouez le scenario de base."
+msgstr "Pas de variante sélectionnée. Jouer le scénario de base."
 
 #: src/menus/tutorialMenu.cpp:59
 msgid "Start Tutorial"
-msgstr "Demarrer le tutoriel"
+msgstr "Démarrer le tutoriel"
 
 #: src/menus/tutorialMenu.cpp:66 src/screenComponents/databaseView.cpp:105
 #: src/screenComponents/databaseView.cpp:109
@@ -473,7 +473,7 @@ msgstr "Retour"
 #: src/screens/crew1/singlePilotScreen.cpp:73
 #: src/screens/extra/powerManagement.cpp:20
 msgid "Energy"
-msgstr "Energie"
+msgstr "Énergie"
 
 #: src/screens/crew6/engineeringScreen.cpp:36
 msgctxt "health"
@@ -490,7 +490,7 @@ msgstr "B. avant"
 #: src/screens/crew6/weaponsScreen.cpp:83
 msgctxt "shields"
 msgid "Rear"
-msgstr "B. arriere"
+msgstr "B. arrière"
 
 #: src/screens/crew6/engineeringScreen.cpp:42
 msgctxt "total"
@@ -514,7 +514,7 @@ msgstr "{energy}/min"
 
 #: src/screens/crew6/engineeringScreen.cpp:259
 msgid "Energy production"
-msgstr "Production d'energie"
+msgstr "Production d'énergie"
 
 #: src/screens/crew6/engineeringScreen.cpp:262
 msgid "Firing rate"
@@ -540,7 +540,7 @@ msgstr "Puissance des moteurs"
 
 #: src/screens/crew6/engineeringScreen.cpp:288
 msgid "Warp drive speed"
-msgstr "Vitesse lumiere max"
+msgstr "Vitesse lumière max"
 
 #: src/screens/crew6/engineeringScreen.cpp:291
 msgid "Jump drive recharge rate"
@@ -548,7 +548,7 @@ msgstr "Temps de rechargement"
 
 #: src/screens/crew6/engineeringScreen.cpp:292
 msgid "Jump drive jump speed"
-msgstr "Delai avant le saut"
+msgstr "Délai avant le saut"
 
 #: src/screens/crew6/engineeringScreen.cpp:296
 #: src/screens/crew6/engineeringScreen.cpp:310
@@ -560,7 +560,7 @@ msgstr "Vitesse de calibration"
 #: src/screens/crew6/engineeringScreen.cpp:311
 msgctxt "shields"
 msgid "Charge rate"
-msgstr "Regeneration"
+msgstr "Régénération"
 
 #: src/screens/crew6/engineeringScreen.cpp:303
 #: src/screens/crew6/engineeringScreen.cpp:317
