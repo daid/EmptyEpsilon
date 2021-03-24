@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-24 21:02+0100\n"
+"PO-Revision-Date: 2021-03-24 23:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -1552,19 +1552,19 @@ msgstr "Volume moteur : {volume} %"
 
 #: src/menus/optionsMenu.cpp:142
 msgid "Helms Radar Lock"
-msgstr "Radar Navigation verrouille"
+msgstr "Radar Navigation verrouillé"
 
 #: src/menus/optionsMenu.cpp:150
 msgid "Weapons Radar Lock"
-msgstr "Radar armement verrouille"
+msgstr "Radar armement verrouillé"
 
 #: src/menus/optionsMenu.cpp:156
 msgid "Science Radar Lock"
-msgstr "Radar Science verrouille"
+msgstr "Radar Science verrouillé"
 
 #: src/menus/optionsMenu.cpp:182
 msgid "Preview Soundtracks"
-msgstr "Ecoute des bandes-son"
+msgstr "Écoute des bandes-son"
 
 #: src/menus/optionsMenu.cpp:198 src/menus/hotkeyMenu.cpp:69
 msgctxt "options"
@@ -1616,14 +1616,14 @@ msgid ""
 "advantage of this by placing small stations in nebulae to serve as raiding "
 "bases. They are lightly shielded and vulnerable to swarming assaults."
 msgstr ""
-"Les stations de cette taille sont souvent utilisees comme avant-poste de "
-"recherche, station d'ecoute ou poste de controle. Les equipages viennent se "
-"reposer frequemment dans les logements exigus de ces petites stations. Leur "
-"taille reduite leur permet d'apparaitre comme des vaisseaux sur de nombreux "
-"senseurs a longue distance, et des pirates organises s'en servent parfois en "
-"placant de petites stations dans des nebuleuses pour servir de base de "
-"pillage. Elles disposent de boucliers legers et sont donc vulnerables a de "
-"petits assauts organises."
+"Les stations de cette taille sont souvent utilisées comme avant-poste de "
+"recherche, station d'écoute ou poste de contrôle. Les équipages viennent se "
+"reposer fréquemment dans les logements exigus de ces petites stations. Leur "
+"taille réduite leur permet d'apparaître comme des vaisseaux sur de nombreux "
+"senseurs à longue distance, et des pirates organisés s'en servent parfois en "
+"plaçant de petites stations dans des nébuleuses pour servir de base de "
+"pillage. Elles disposent de boucliers légers et sont donc vulnérables à de "
+"petits assauts organisés."
 
 #: scripts/shipTemplates_Stations.lua:11
 msgid "Medium Station"
@@ -1636,11 +1636,11 @@ msgid ""
 "operations, and forward military bases. While their shields are strong, "
 "concerted attacks by many ships can bring them down quickly."
 msgstr ""
-"Assez grandes pour heberger de petits equipages pendant de longues periodes, "
+"Assez grandes pour héberger de petits équipages pendant de longues périodes, "
 "les stations de cette taille servent souvent de comptoir de commerce, de "
-"base de ravitaillement, de base militaire avancee ou encore pour des "
-"operations minieres. Malgre leurs puissants boucliers, des attaques "
-"coordonnees par plusieurs vaisseaux peuvent les faire tomber rapidement."
+"base de ravitaillement, de base militaire avancée ou encore pour des "
+"opérations minières. Malgré leurs puissants boucliers, des attaques "
+"coordonnées par plusieurs vaisseaux peuvent les faire tomber rapidement."
 
 #: scripts/shipTemplates_Stations.lua:17
 msgid "Large Station"
@@ -1654,12 +1654,12 @@ msgid ""
 "penetrate a large station's shields, and its hull can withstand all but the "
 "most powerful weaponry."
 msgstr ""
-"Ces communautes spatiales representent souvent des bases permanentes dans un "
+"Ces communautés spatiales représentent souvent des bases permanentes dans un "
 "secteur. Les stations de cette taille peuvent servir d'installation "
-"militaire, de plaque tournante commerciale, de colonie dans l'espace recule, "
-"ou de petit chantier naval. Seule une attaque concentree pourrait penetrer "
+"militaire, de plaque tournante commerciale, de colonie dans l'espace reculé, "
+"ou de petit chantier naval. Seule une attaque concentrée pourrait pénétrer "
 "les boucliers d'une grande station, et seuls les armements les plus "
-"puissants pourraient venir a bout de sa coque."
+"puissants pourraient venir à bout de sa coque."
 
 #: scripts/shipTemplates_Stations.lua:23
 msgid "Huge Station"
@@ -1674,13 +1674,13 @@ msgid ""
 "reinforcements to arrive, even when faced with an ongoing siege or massive, "
 "perfectly coordinated assault."
 msgstr ""
-"De la taille d'une ville etendue, les stations de cette ampleur representent "
+"De la taille d'une ville étendue, les stations de cette ampleur représentent "
 "le centre spatial de pouvoir d'une faction dans cette region. Elles "
-"remplissent plusieurs fonctions a la fois et representent un investissement "
-"considerable en temps, en argent et en travail. Les enormes boucliers et la "
-"coque epaisse d'une telle station peuvent garder celle-ci intacte "
-"suffisamment longtemps jusqu'a ce que les renforts arrivent, meme face a un "
-"siege en continu ou a un assaut massif parfaitement coordonne."
+"remplissent plusieurs fonctions à la fois et représentent un investissement "
+"considérable en temps, en argent et en travail. Les énormes boucliers et la "
+"coque épaisse d'une telle station peuvent garder celle-ci intacte "
+"suffisamment longtemps jusqu'à ce que les renforts arrivent, même face à un "
+"siège en continu ou à un assaut massif parfaitement coordonné."
 
 #: src/playerInfo.cpp:222
 msgctxt "station"
@@ -1695,7 +1695,7 @@ msgstr "Armement"
 #: src/playerInfo.cpp:224
 msgctxt "station"
 msgid "Engineering"
-msgstr "Ingenierie"
+msgstr "Ingénierie"
 
 #: src/playerInfo.cpp:225
 msgctxt "station"
@@ -1715,12 +1715,12 @@ msgstr "Radar tactique"
 #: src/playerInfo.cpp:228
 msgctxt "station"
 msgid "Engineering+"
-msgstr "Ingenierie+"
+msgstr "Ingénierie+"
 
 #: src/playerInfo.cpp:229
 msgctxt "station"
 msgid "Operations"
-msgstr "Operations"
+msgstr "Opérations"
 
 #: src/playerInfo.cpp:230
 msgctxt "station"
@@ -1730,7 +1730,7 @@ msgstr "Pilotage - armement"
 #: src/playerInfo.cpp:231
 msgctxt "station"
 msgid "Damage Control"
-msgstr "Reparation systemes"
+msgstr "Réparation systèmes"
 
 #: src/playerInfo.cpp:232
 msgctxt "station"
@@ -1740,7 +1740,7 @@ msgstr "Gestion puissance"
 #: src/playerInfo.cpp:233
 msgctxt "station"
 msgid "Database"
-msgstr "Base de donnees"
+msgstr "Base de données"
 
 #: src/playerInfo.cpp:234
 msgctxt "station"
@@ -1768,13 +1768,13 @@ msgstr "Sans sous-classe"
 #: src/screens/crew4/operationsScreen.cpp:84
 #: src/screens/crew6/relayScreen.cpp:151
 msgid "Reputation"
-msgstr "Reputation actuelle "
+msgstr "Réputation actuelle "
 
 #: src/screens/crew4/operationsScreen.cpp:88
 #: src/screens/crew6/relayScreen.cpp:155
 #: src/screens/gm/gameMasterScreen.cpp:144
 msgid "Clock"
-msgstr "Temps ecoule"
+msgstr "Temps écoulé"
 
 #: src/screens/gm/gameMasterScreen.cpp:38
 msgctxt "button"
@@ -1789,22 +1789,22 @@ msgstr "Intercepter toute comm."
 #: src/screens/gm/gameMasterScreen.cpp:61
 msgctxt "button"
 msgid "Global message"
-msgstr "Message general"
+msgstr "Message général"
 
 #: src/screens/gm/gameMasterScreen.cpp:75
 msgctxt "button"
 msgid "Create..."
-msgstr "Creer..."
+msgstr "Créer..."
 
 #: src/screens/gm/gameMasterScreen.cpp:80
 msgctxt "button"
 msgid "Copy scenario"
-msgstr "Copier scenario"
+msgstr "Copier scénario"
 
 #: src/screens/gm/gameMasterScreen.cpp:85
 msgctxt "button"
 msgid "Copy selected"
-msgstr "Copier selection"
+msgstr "Copier sélection"
 
 #: src/menus/joinServerMenu.cpp:20 src/screens/gm/gameMasterScreen.cpp:90
 #: src/screens/gm/objectCreationView.cpp:119
@@ -1827,7 +1827,7 @@ msgstr "Envoyer message"
 
 #: src/screens/gm/gameMasterScreen.cpp:166
 msgid "Defend location"
-msgstr "Defendre son emplacement"
+msgstr "Défendre son emplacement"
 
 #: src/screens/gm/gameMasterScreen.cpp:171
 msgid "Stand ground"
