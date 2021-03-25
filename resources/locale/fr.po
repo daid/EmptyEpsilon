@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-24 23:50+0100\n"
+"PO-Revision-Date: 2021-03-25 20:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -1484,7 +1484,7 @@ msgstr "Faisceau {direction}"
 #: src/scienceDatabase.cpp:416
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{degats} Dmg / {interval} sec"
+msgstr "{damage} Dmg / {interval} sec"
 
 #: src/scienceDatabase.cpp:425
 msgctxt "database"
@@ -1854,7 +1854,7 @@ msgstr "Fermer"
 
 #: src/screens/gm/gameMasterScreen.cpp:317
 msgid "*mixed*"
-msgstr "*varie*"
+msgstr "*varié*"
 
 #: src/screens/gm/tweak.cpp:32
 msgctxt "tab"
@@ -1894,7 +1894,7 @@ msgstr "Faisceaux"
 #: src/screens/gm/tweak.cpp:67
 msgctxt "tab"
 msgid "Systems"
-msgstr "Systemes"
+msgstr "Systèmes"
 
 #: src/screens/gm/tweak.cpp:75
 msgctxt "tab"
@@ -1932,20 +1932,20 @@ msgstr "Niveau actuel de la coque :"
 
 #: src/screens/gm/tweak.cpp:176
 msgid "Could be destroyed"
-msgstr "Peut etre detruit"
+msgstr "Peut être détruit"
 
 #: src/screens/gm/tweak.cpp:183
 msgid "Warp Drive"
-msgstr "Vitesse lumiere"
+msgstr "Vitesse lumière"
 
 #: src/screens/gm/tweak.cpp:188
 msgid "Jump Drive"
-msgstr "Teleportation"
+msgstr "Téléportation"
 
 #: src/screens/gm/tweak.cpp:244
 msgctxt "missiles"
 msgid "Storage space:"
-msgstr "Capacite de stockage"
+msgstr "Capacité de stockage"
 
 #: src/screens/gm/tweak.cpp:257
 msgctxt "missiles"
@@ -1954,7 +1954,7 @@ msgstr "Stock actuel"
 
 #: src/screens/gm/tweak.cpp:278
 msgid "Jammer Range:"
-msgstr "Portee du brouilleur"
+msgstr "Portée du brouilleur"
 
 #: src/screens/gm/tweak.cpp:351
 msgid "Tube count:"
@@ -1997,7 +1997,7 @@ msgstr "Grand"
 #: src/screens/gm/tweak.cpp:401
 msgctxt "tube"
 msgid "Allowed use:"
-msgstr "Missiles autorises :"
+msgstr "Missiles autorisés :"
 
 #: src/screens/gm/tweak.cpp:444
 msgid "Shield {id_shield} max:"
@@ -2039,7 +2039,7 @@ msgstr "Tourelle : vitesse de rotation"
 #: src/screens/gm/tweak.cpp:540
 msgctxt "beam"
 msgid "Range:"
-msgstr "Portee"
+msgstr "Portée"
 
 #: src/screens/gm/tweak.cpp:546
 msgctxt "beam"
@@ -2049,27 +2049,27 @@ msgstr "Intervalle entre 2 tirs"
 #: src/screens/gm/tweak.cpp:552
 msgctxt "beam"
 msgid "Damage:"
-msgstr "Degats"
+msgstr "Dégâts"
 
 #: src/screens/gm/tweak.cpp:602
 msgid "{system} health max"
-msgstr "sante max"
+msgstr "santé max"
 
 #: src/screens/gm/tweak.cpp:722
 msgid "Control code:"
-msgstr "Code de controle :"
+msgstr "Code de contrôle :"
 
 #: src/screens/gm/tweak.cpp:739
 msgid "Max energy:"
-msgstr "Energie max :"
+msgstr "Énergie max :"
 
 #: src/screens/gm/tweak.cpp:747
 msgid "Current energy:"
-msgstr "Energie actuelle :"
+msgstr "Énergie actuelle :"
 
 #: src/screens/gm/tweak.cpp:755
 msgid "Boost Speed:"
-msgstr "Man. Combat: Vit. d'acceleration"
+msgstr "Man. Combat: Vit. d'accélération"
 
 #: src/screens/gm/tweak.cpp:761
 msgid "Strafe Speed:"
@@ -2077,21 +2077,21 @@ msgstr "Man. Combat: Vit. d'esquive"
 
 #: src/screens/gm/tweak.cpp:769 src/screens/gm/tweak.cpp:811
 msgid "Positions occupied: "
-msgstr "Postes occupes : "
+msgstr "Postes occupés : "
 
 msgctxt "position"
 msgid "Occupied"
-msgstr "Occupe"
+msgstr "Occupé"
 
 #: src/screens/gm/tweak.cpp:852
 msgid "Coolant:"
 msgstr "Liq. de refroid."
 
 msgid "Short range radar:"
-msgstr "Radar courte portee :"
+msgstr "Radar courte portée :"
 
 msgid "Long range radar:"
-msgstr "Radar longue portee :"
+msgstr "Radar longue portée :"
 
 #: src/screens/gm/tweak.cpp:873
 msgctxt "button"
@@ -2111,12 +2111,12 @@ msgstr "Peut accoster"
 #: src/screens/gm/tweak.cpp:891
 msgctxt "button"
 msgid "Can combat maneuver"
-msgstr "Peut manoeuvrer au combat"
+msgstr "Peut manœuvrer au combat"
 
 #: src/screens/gm/tweak.cpp:897
 msgctxt "button"
 msgid "Can self destruct"
-msgstr "Peut s'auto-detruire"
+msgstr "Peut s'autodétruire"
 
 #: src/screens/gm/tweak.cpp:903
 msgctxt "button"
@@ -2131,11 +2131,11 @@ msgstr "Liq. de refroidissement auto"
 #: src/screens/gm/tweak.cpp:913
 msgctxt "button"
 msgid "Auto repair"
-msgstr "Reparation auto"
+msgstr "Réparation auto"
 
 #: src/screens/gm/tweak.cpp:950
 msgid "Callsign:"
-msgstr "Modele :"
+msgstr "Modèle :"
 
 #: src/screens/gm/tweak.cpp:961
 msgid "Unscanned description:"
@@ -2159,7 +2159,7 @@ msgstr "Cap :"
 
 #: src/screens/gm/tweak.cpp:998
 msgid "Scanning Complexity:"
-msgstr "Complexite du scan : "
+msgstr "Complexité du scan : "
 
 #: src/screens/gm/tweak.cpp:1004
 msgid "Scanning Depth:"
@@ -2178,7 +2178,7 @@ msgstr "Odin"
 #: scripts/shipTemplates_OLD.lua:363
 msgctxt "class"
 msgid "Dreadnought"
-msgstr "Cuirasses"
+msgstr "Cuirassés"
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgctxt "subclass"
@@ -2206,26 +2206,26 @@ msgid ""
 "and destroy everything before they know what hit them. It's effective and "
 "destructive, but extremely expensive."
 msgstr ""
-"L'Odin est un \"navire\" si grand et si unique qu'il est presque a lui tout "
-"seul une classe a part.\n"
+"L'Odin est un \"navire\" si grand et si unique qu'il est presque à lui tout "
+"seul une classe à part.\n"
 "\n"
-"Ce navire est souvent surnomme le \"Pere de tout\", un nom qui decrit bien "
-"les nombreux roles qu'il peut remplir. C'est a la fois une station de "
-"ravitaillement et une station extremement bien protegee et tres lourdement "
-"armee, capables d'aneantir a elle seule de petites flottes.\n"
+"Ce navire est souvent surnommé le \"Père de tout\", un nom qui décrit bien "
+"les nombreux rôles qu'il peut remplir. C'est à la fois une station de "
+"ravitaillement et une station extrêmement bien protégée et très lourdement "
+"armée, capables d'anéantir à elle seule de petites flottes.\n"
 "\n"
-"Le noyau de l'Odin contient la plus grande plateforme de teleportation "
-"jamais creee. Environ 150 membres d'equipage sont necessaires rien que pour "
-"faire fonctionner la teleportation, et il faut 5 jours d'operations en "
+"Le noyau de l'Odin contient la plus grande plateforme de téléportation "
+"jamais créée. Environ 150 membres d'équipage sont nécessaires rien que pour "
+"faire fonctionner la téléportation, et il faut 5 jours d'opérations en "
 "continu pour l'alimenter.\n"
 "\n"
-"En raison du cout enorme de ce cuirasse, seuls les systemes stellaires les "
+"En raison du coût énorme de ce cuirassé, seuls les systèmes stellaires les "
 "plus riches sont capables de construire et d'entretenir des navires tel "
 "l'Odin.\n"
 "\n"
-"La tactique principale de cette machine est de sauter dans un systeme ennemi "
-"sans mefiance et de tout detruire avant qu'ils ne se rendent compte de ce "
-"qui leur arrive. C'est efficace et destructeur, mais extremement cher."
+"La tactique principale de cette machine est de sauter dans un système ennemi "
+"sans méfiance et de tout détruire avant qu'ils ne se rendent compte de ce "
+"qui leur arrive. C'est efficace et destructeur, mais extrêmement cher."
 
 #: scripts/shipTemplates_Frigates.lua:14
 msgid "Phobos T3"
@@ -2241,7 +2241,7 @@ msgstr "Phobos T3"
 #: scripts/shipTemplates_Frigates.lua:369
 #: scripts/shipTemplates_Frigates.lua:414
 msgid "Frigate"
-msgstr "Fregates"
+msgstr "Frégates"
 
 #: scripts/shipTemplates_Frigates.lua:14
 msgid "Cruiser"
@@ -2255,17 +2255,17 @@ msgid ""
 "fairly easy to produce in large quantities."
 msgstr ""
 "Le Phobos T3, tout comme l'Atlantis, est le cheval de bataille de presque "
-"toute les marines.\n"
+"toutes les marines.\n"
 "\n"
-"Il est extremement facile a modifier, ce qui fait de la modernisation de ce "
+"Il est extrêmement facile à modifier, ce qui fait de la modernisation de ce "
 "navire un jeu d'enfant.\n"
 "\n"
-"Ses caracteristiques de base ne sont pas impressionnantes, mais en raison de "
-"sa nature modulaire, il est assez facile a produire en grandes quantites."
+"Ses caractéristiques de base ne sont pas impressionnantes, mais en raison de "
+"sa nature modulaire, il est assez facile à produire en grandes quantités."
 
 #: scripts/shipTemplates_Frigates.lua:28
 msgid "Elara P2"
-msgstr "Elara P2"
+msgstr "Élara P2"
 
 #: scripts/shipTemplates_Frigates.lua:29
 msgid ""
@@ -2273,10 +2273,10 @@ msgid ""
 "addition of a warp drive and stronger front shields, the Elara P2 poses a "
 "greater threat than the Phobos"
 msgstr ""
-"Inspire par le design du Phobos T3, le Elara P2 est presque identique.\n"
+"Inspiré par le design du Phobos T3, le Élara P2 est presque identique.\n"
 "\n"
-"Avec l'ajout de la vitesse lumiere et de boucliers avant plus puissants, "
-"l'Elara P2 represente une plus grande menace que le Phobos."
+"Avec l'ajout de la vitesse lumière et de boucliers avant plus puissants, "
+"l'Élara P2 représente une plus grande menace que le Phobos."
 
 #: scripts/shipTemplates_Frigates.lua:33
 msgid "Phobos M3"
@@ -2290,8 +2290,8 @@ msgid ""
 msgstr ""
 "Le Phobos M3 est l'une des variations les plus courantes du Phobos T3.\n"
 "\n"
-"Il possede en plus un tube dedie au largage de mines, mais le stockage "
-"supplementaire requis pour les mines ralentit legerement ce navire."
+"Il possède en plus un tube dédié au largage de mines, mais le stockage "
+"supplémentaire requis pour les mines ralentit légèrement ce navire."
 
 #: scripts/shipTemplates_Frigates.lua:41
 msgid "Phobos M3P"
@@ -2304,8 +2304,8 @@ msgid ""
 msgstr ""
 "La version Joueur du Phobos M3.\n"
 "\n"
-"Pas aussi puissant que l'Atlantis, mais possede des tubes de tir a l'avant, "
-"ce qui en fait un navire plus facile a utiliser dans certaines missions."
+"Pas aussi puissant que l'Atlantis, mais possède des tubes de tir à l'avant, "
+"ce qui en fait un navire plus facile à utiliser dans certaines missions."
 
 #: scripts/shipTemplates_Frigates.lua:87
 msgid "Nirvana R5"
@@ -2322,8 +2322,8 @@ msgid ""
 msgstr ""
 "Le Nirvana R5 est un croiseur anti-chasseur.\n"
 "\n"
-"Il dispose de plusieurs faisceaux laser a tir rapide et a faibles degats "
-"pour eliminer rapidement les chasseurs stellaires."
+"Il dispose de plusieurs faisceaux laser à tir rapide et à faibles dégâts "
+"pour éliminer rapidement les chasseurs stellaires."
 
 #: scripts/shipTemplates_Frigates.lua:98
 msgid "Nirvana R5A"
@@ -2334,7 +2334,7 @@ msgid ""
 "An improved version of the Nirvana R5 with faster turning speed and firing "
 "rates."
 msgstr ""
-"Une version amelioree du Nirvana R5 avec une vitesse de rotation et une "
+"Une version améliorée du Nirvana R5 avec une vitesse de rotation et une "
 "cadence de tir plus rapides."
 
 #: scripts/shipTemplates_Frigates.lua:106
@@ -2348,17 +2348,17 @@ msgid ""
 "defense beam weapons. Compared to the later, more common Nirvana R5, it has "
 "shorter beams, weaker shields and hull and a slower impulse drive."
 msgstr ""
-"L'un des premiers modeles Nirvana produits en serie. le Nirvana R3 a ete "
-"concu pour servir contre les chasseurs.\n"
+"L'un des premiers modèles Nirvana produits en série. le Nirvana R3 a été "
+"conçu pour servir contre les chasseurs.\n"
 "\n"
-"Il possede plusieurs faisceaux laser de defense, rapides mais occasionnant "
-"peu de degats. En comparaison au Nirvana R5 plus recent et plus courant, il "
+"Il possède plusieurs faisceaux laser de défense, rapides mais occasionnant "
+"peu de dégâts. En comparaison au Nirvana R5 plus récent et plus courant, il "
 "a des faisceaux plus courts, des boucliers et une coque plus faibles et des "
-"moteurs a impulsion plus lents."
+"moteurs à impulsion plus lents."
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgid "Storm"
-msgstr "Tempete"
+msgstr "Tempête"
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgid "Cruiser: Heavy Artillery"
@@ -2370,7 +2370,7 @@ msgid ""
 "facing tubes."
 msgstr ""
 "Croiseur d'artillerie lourde,\n"
-"le Tempete tire des salves de missiles a partir de tubes orientes vers "
+"le Tempête tire des salves de missiles à partir de tubes orientés vers "
 "l'avant."
 
 #: scripts/shipTemplates_Frigates.lua:133
@@ -2464,7 +2464,7 @@ msgid ""
 "quickly, and get out fast. The Q7 model is fitted with a warp drive."
 msgstr ""
 "Le Harceleur est un vaisseau d'attaque concu pour plonger dans la bataille, "
-"infliger rapidement des degats et battre en retraite aussitot.\n"
+"infliger rapidement des dégâts et battre en retraite aussitot.\n"
 "\n"
 "Le modele Q7 est equipe de la vitesse lumiere."
 
@@ -2481,7 +2481,7 @@ msgstr ""
 "Le Harceleur Q5 precede le Harceleur Q7.\n"
 "\n"
 "Comme ce dernier, il est concu pour se lancer dans la bataille, infliger "
-"rapidement des degats et battre en retraite.\n"
+"rapidement des dégâts et battre en retraite.\n"
 "\n"
 "Compare au Q7, le Q5 a des boucliers et une coque plus faibles, mais une "
 "vitesse de rotation plus rapide."
@@ -2496,7 +2496,7 @@ msgid ""
 "quickly, and get out fast. The R7 model is fitted with a jump drive."
 msgstr ""
 "Le Harceleur est un vaisseau d'attaque concu pour plonger dans la bataille, "
-"infliger rapidement des degats et battre en retraite aussitot.\n"
+"infliger rapidement des dégâts et battre en retraite aussitot.\n"
 "\n"
 "Le modele R7 est equipe de la teleportation."
 
@@ -2513,7 +2513,7 @@ msgstr ""
 "Le Harceleur R5 precede le Harceleur R7.\n"
 "\n"
 "Comme ce dernier, il est concu pour se lancer dans la bataille, infliger "
-"rapidement des degats et battre en retraite.\n"
+"rapidement des dégâts et battre en retraite.\n"
 "\n"
 "Compare au R7, le R5 a des boucliers et une coque plus faibles, mais une "
 "vitesse de rotation plus rapide."
@@ -2529,7 +2529,7 @@ msgid ""
 "nuclear weapons, even though it's also the smallest of all frigate-class "
 "ships."
 msgstr ""
-"Le sniper Ranus U est concu pour infliger de gros degats rapidement et a "
+"Le sniper Ranus U est concu pour infliger de gros dégâts rapidement et a "
 "distance avant de s'echapper.\n"
 "\n"
 "C'est la seule fregate de base equipee d'armes nucleaires, meme si c'est "
@@ -2708,7 +2708,7 @@ msgid ""
 msgstr ""
 "Le remorqueur est un navire de transport fiable, mais petit et non arme.\n"
 "\n"
-"En raison de son faible cout, c'est le navire ideal pour enseigner les "
+"En raison de son faible coût, c'est le navire ideal pour enseigner les "
 "ficelles du metier aux capitaines en herbe, sans risquer un tir ami."
 
 #: scripts/shipTemplates_OLD.lua:173
@@ -2730,7 +2730,7 @@ msgid ""
 "underestimated."
 msgstr ""
 "Les chasseurs sont des vaisseaux agiles et rapides qui ne font pas beaucoup "
-"de degats. Ils se deplacent generalement en groupes plus importants.\n"
+"de dégâts. Ils se deplacent generalement en groupes plus importants.\n"
 "\n"
 "Ils sont faciles a eliminer, mais ne doivent cependant pas etre sous-estimes."
 
@@ -2803,7 +2803,7 @@ msgstr ""
 "Croiseur de missiles Polaris MK1, fabrique par : Chantiers Navals Repulse.\n"
 "\n"
 "Ce croiseur de missiles est une plate-forme de tir de missiles longue "
-"portee. Il ne peut pas essuyer beaucoup de degats, mais peut en occasionner "
+"portee. Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner "
 "beaucoup s'il n'est pas gere correctement."
 
 #: scripts/shipTemplates_OLD.lua:271
@@ -2817,7 +2817,7 @@ msgid ""
 "to quickly take out the enemies weaker then itself."
 msgstr ""
 "Le Combattant est un navire equipe d'un tube de missile a tete chercheuse a "
-"l'avant lui permettant de faire de gros degats avant d'eliminer "
+"l'avant lui permettant de faire de gros dégâts avant d'eliminer "
 "definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est concu pour "
 "eliminer rapidement les ennemis plus faibles que lui."
 
@@ -2831,7 +2831,7 @@ msgid ""
 "to quickly take out the enemies weaker then itself."
 msgstr ""
 "Le Combattant V2 est un navire equipe de 2 tubes de missile a tete "
-"chercheuse a l'avant lui permettant de faire de gros degats avant d'eliminer "
+"chercheuse a l'avant lui permettant de faire de gros dégâts avant d'eliminer "
 "definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est concu pour "
 "eliminer rapidement les ennemis plus faibles que lui."
 
@@ -2870,7 +2870,7 @@ msgstr ""
 "concu pour des frappes rapides.\n"
 "\n"
 "Il se deplace lentement mais est tres agile. Il ne produit pas de gros "
-"degats et manque de boucliers mais en raison de la teleportation, il peut "
+"dégâts et manque de boucliers mais en raison de la teleportation, il peut "
 "rentrer rapidement en action."
 
 #: scripts/shipTemplates_OLD.lua:312
@@ -2883,7 +2883,7 @@ msgid ""
 "does not do an extreme amount of damage, and lacks in shields"
 msgstr ""
 "L'Eclair est le predecesseur du Foudroyant, lent mais agile, il n'inflige "
-"pas une quantite extreme de degats et manque de boucliers.\n"
+"pas une quantite extreme de dégâts et manque de boucliers.\n"
 " Plus solide et maniable que le foudroyant, il dispose de la vitesse lumiere."
 
 #: scripts/shipTemplates_OLD.lua:348
@@ -2930,8 +2930,8 @@ msgid ""
 "extremely slow to turn, but it's beam weapons do a huge amount of damage."
 msgstr ""
 "La plate-forme armee est une plate-forme stationnaire equipee de faisceaux "
-"laser. Elle est extremement lente a tourner, mais ses faisceaux font "
-"d'enormes degats."
+"laser. Elle est extrêmement lente a tourner, mais ses faisceaux font "
+"d'enormes dégâts."
 
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Blockade Runner"
@@ -3326,12 +3326,12 @@ msgstr ""
 "grandes variantes de ces missiles. Les petits combattants et meme les "
 "fregates ne devraient pas avoir trop de mal a les esquiver, mais les "
 "capitaines des plus gros navires spatiaux devraient se mefier de leur "
-"potentiel de degats double. \n"
+"potentiel de dégâts double. \n"
 "\n"
 "De plus petites variations de ces missiles sont egalement devenues courantes "
 "dans la galaxie. Les pilotes de chasse louent leur vitesse et leur "
 "maniabilite, car cela leur donne un avantage contre des cibles petites et "
-"rapides. Ils n'infligent que la moitie des degats de leurs homologues de "
+"rapides. Ils n'infligent que la moitie des dégâts de leurs homologues de "
 "base, mais a quoi sert un missile s'il ne touche pas sa cible."
 
 #: scripts/science_db.lua:29
@@ -3447,7 +3447,7 @@ msgstr ""
 "Chaque tir d'un HVLI declenche une rafale de 5 projectiles, ce qui augmente "
 "les chances de toucher mais necessite d'etre suffisamment pres et d'etre "
 "precis pour etre efficace, surtout si les tubes de lancement se trouvent sur "
-"les cotes du vaisseau. Le tir atteint son plein potentiel de degats dans un "
+"les cotes du vaisseau. Le tir atteint son plein potentiel de dégâts dans un "
 "rayon de 2u."
 
 #: src/menus/joinServerMenu.cpp:18
@@ -3535,7 +3535,7 @@ msgstr "Vue spectateur (carte)"
 
 #: src/menus/shipSelectionScreen.cpp:127
 msgid "Enter the GM control code:"
-msgstr "Entrer le code de controle MJ :"
+msgstr "Entrer le code de contrôle MJ :"
 
 #: src/menus/shipSelectionScreen.cpp:143
 msgid "Select ship"
@@ -3564,7 +3564,7 @@ msgstr "Demarrer"
 #: src/menus/shipSelectionScreen.cpp:244 src/menus/shipSelectionScreen.cpp:250
 #: src/menus/shipSelectionScreen.cpp:329
 msgid "Enter this ship's control code:"
-msgstr "Veuillez saisir le code de controle du vaisseau :"
+msgstr "Veuillez saisir le code de contrôle du vaisseau :"
 
 #: src/menus/shipSelectionScreen.cpp:248
 msgid "Cancel"
@@ -3576,26 +3576,26 @@ msgstr "Ok"
 
 #: src/menus/shipSelectionScreen.cpp:276
 msgid "Incorrect control code. Re-enter GM code:"
-msgstr "Code de controle incorrect. Veuillez reessayer :"
+msgstr "Code de contrôle incorrect. Veuillez reessayer :"
 
 #: src/menus/shipSelectionScreen.cpp:282
 msgid ""
 "Control code accepted.\n"
 "Granting access."
 msgstr ""
-"Code de controle valide.\n"
+"Code de contrôle valide.\n"
 "Acces accorde."
 
 #: src/menus/shipSelectionScreen.cpp:301
 msgid "Incorrect control code. Re-enter code for {callsign}:"
-msgstr "Code de controle incorrect. Veuillez reessayer {callsign} :"
+msgstr "Code de contrôle incorrect. Veuillez reessayer {callsign} :"
 
 #: src/menus/shipSelectionScreen.cpp:310
 msgid ""
 "Control code accepted.\n"
 "Granting access to {callsign}."
 msgstr ""
-"Code de controle valide.\n"
+"Code de contrôle valide.\n"
 "Acces accorde a {callsign}."
 
 #: src/menus/shipSelectionScreen.cpp:324
@@ -4213,7 +4213,7 @@ msgstr ""
 "Croiseur de missiles Polaris MK1, fabrique par : Chantiers Navals Repulse.\n"
 "\n"
 "Ce croiseur de missiles est une plate-forme de tir de missiles longue "
-"portee. Il ne peut pas essuyer beaucoup de degats, mais peut en occasionner "
+"portee. Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner "
 "beaucoup s'il n'est pas gere correctement."
 
 #: scripts/shipTemplates_OLD.lua:273
@@ -4228,7 +4228,7 @@ msgid ""
 "to quickly take out the enemies weaker then itself."
 msgstr ""
 "Le Combattant est un navire equipe d'un tube de missile a tete chercheuse a "
-"l'avant lui permettant de faire de gros degats avant d'eliminer "
+"l'avant lui permettant de faire de gros dégâts avant d'eliminer "
 "definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est concu pour "
 "eliminer rapidement les ennemis plus faibles que lui."
 
@@ -4244,7 +4244,7 @@ msgid ""
 "to quickly take out the enemies weaker then itself."
 msgstr ""
 "Le Combattant V2 est un navire equipe de 2 tubes de missile a tete "
-"chercheuse a l'avant lui permettant de faire de gros degats avant d'eliminer "
+"chercheuse a l'avant lui permettant de faire de gros dégâts avant d'eliminer "
 "definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est concu pour "
 "eliminer rapidement les ennemis plus faibles que lui."
 
@@ -4384,7 +4384,7 @@ msgstr ""
 "Le Navire de frappe est un vaisseau de combat equipe de la vitesse lumiere "
 "et concu pour des frappes eclairs.\n"
 "\n"
-"Il est rapide, agile mais n'inflige pas une quantite extreme de degats et "
+"Il est rapide, agile mais n'inflige pas une quantite extreme de dégâts et "
 "manque de boucliers arriere."
 
 #: src/menus/optionsMenu.cpp:163
