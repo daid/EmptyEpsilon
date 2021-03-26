@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-26 17:23+0100\n"
+"PO-Revision-Date: 2021-03-26 19:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -939,9 +939,6 @@ msgstr "Cannonière"
 msgid "Defense platform"
 msgstr "Plate-forme de défense"
 
-#, fuzzy
-#| msgctxt "subclass"
-#| msgid "Support"
 msgid "Support"
 msgstr "Soutien"
 
@@ -987,7 +984,7 @@ msgstr "Recycleur LD %d"
 #: scripts/shipTemplates_Corvette.lua:274
 #, lua-format
 msgid "Equipment Freighter %d"
-msgstr "Transport d'équipement %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:283
 #, lua-format
@@ -1768,13 +1765,13 @@ msgstr "Sans sous-classe"
 #: src/screens/crew4/operationsScreen.cpp:84
 #: src/screens/crew6/relayScreen.cpp:151
 msgid "Reputation"
-msgstr "Réputation actuelle "
+msgstr "Rép. actuelle "
 
 #: src/screens/crew4/operationsScreen.cpp:88
 #: src/screens/crew6/relayScreen.cpp:155
 #: src/screens/gm/gameMasterScreen.cpp:144
 msgid "Clock"
-msgstr "Temps écoulé"
+msgstr "Temps écoulé "
 
 #: src/screens/gm/gameMasterScreen.cpp:38
 msgctxt "button"
@@ -2452,7 +2449,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:272
 msgid "Stalker Q7"
-msgstr "Harceleur Q7"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:272
 msgid "Cruiser: Strike ship"
@@ -2470,7 +2467,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:282
 msgid "Stalker Q5"
-msgstr "Harceleur Q5"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:283
 msgid ""
@@ -2488,7 +2485,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:288
 msgid "Stalker R7"
-msgstr "Harceleur R7"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:289
 msgid ""
@@ -2502,7 +2499,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:293
 msgid "Stalker R5"
-msgstr "Harceleur R5"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:294
 msgid ""
@@ -2790,21 +2787,16 @@ msgstr "Croiseur de missiles"
 msgid "Cruiser: Missile"
 msgstr "Croiseur : missiles"
 
-#, fuzzy
-#| msgid ""
-#| "Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
-#| "missile cruiser is a long range missile firing platform. It cannot handle "
-#| "a lot of damage, but can do a lot of damage if not dealt with properly."
 msgid ""
 "Polaris missle cruiser mark I. Fabricated by: Repulse shipyards. This "
 "missile cruiser is a long range missile firing platform. It cannot handle a "
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
-"Croiseur de missiles Polaris MK1, fabrique par : Chantiers Navals Repulse.\n"
+"Croiseur de missiles Polaris MK1, fabriqué par : Chantiers Navals Repulse.\n"
 "\n"
-"Ce croiseur de missiles est une plate-forme de tir de missiles longue "
-"portée. Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner "
-"beaucoup s'il n'est pas gere correctement."
+"Ce croiseur de missiles est une plateforme de tir de missiles longue portée. "
+"Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner beaucoup "
+"s'il n'est pas géré correctement."
 
 #: scripts/shipTemplates_OLD.lua:271
 msgctxt "subclass"
@@ -3767,7 +3759,7 @@ msgstr "Ce vaisseau s'autodétruira dans {seconds} secondes."
 
 #: src/screenComponents/frequencyCurve.cpp:59
 msgid "Damage with your beams"
-msgstr "Dégâts avec vos faisceaux"
+msgstr "Dégâts produits par vos faisceaux"
 
 #: src/screenComponents/frequencyCurve.cpp:61
 msgid "Damage on your shields"
@@ -4362,152 +4354,113 @@ msgstr ""
 "manque de boucliers arrière."
 
 #: src/menus/optionsMenu.cpp:163
-#, fuzzy
-#| msgid "Sound Options"
 msgid "Control Options"
-msgstr "Options sonores"
+msgstr "Options de controle"
 
 #: src/menus/optionsMenu.cpp:166 src/menus/hotkeyMenu.cpp:37
 msgid "Configure Keyboard"
-msgstr ""
+msgstr "Configuration Clavier"
 
 #: src/menus/shipSelectionScreen.cpp:93
-#, fuzzy
-#| msgid "0 degrees"
 msgctxt "shipwindow"
 msgid "{angle} degrees"
-msgstr "0 degres"
+msgstr "{angle} degrés"
 
 #: src/menus/shipSelectionScreen.cpp:96
-#, fuzzy
-#| msgid "0 degrees"
 msgctxt "shipwindow"
 msgid "0 degrees"
-msgstr "0 degres"
+msgstr "0 degrés"
 
 #: src/screens/gm/objectCreationView.cpp:35
-#, fuzzy
-#| msgid "Gunship"
 msgctxt "create"
 msgid "cpu ship"
-msgstr "Combattant"
+msgstr "Vaisseau IA"
 
 #: src/screens/gm/objectCreationView.cpp:36
-#, fuzzy
-#| msgid "Spawn player ship"
 msgctxt "create"
 msgid "player ship"
-msgstr "Creer vaisseau joueur"
+msgstr "Vaisseau joueur"
 
 #: src/screens/gm/objectCreationView.cpp:64
 msgctxt "create"
 msgid "Supply Drop"
-msgstr ""
+msgstr "Caisse d'approvisionnement"
 
 #: src/screens/gm/tweak.cpp:43
-#, fuzzy
-#| msgid "Asteroid"
 msgctxt "tab"
 msgid "Asteroid"
-msgstr "Asteroide"
+msgstr "Astéroïde"
 
 #: src/screens/gm/tweak.cpp:69
-#, fuzzy
-#| msgctxt "slider"
-#| msgid "Power"
 msgctxt "tab"
 msgid "Power"
 msgstr "Puissance"
 
 #: src/screens/gm/tweak.cpp:194
-#, fuzzy
-#| msgid "Short range radar:"
 msgid "Short-range radar range:"
-msgstr "Radar courte portée :"
+msgstr "Rayon du radar courte portée :"
 
 #: src/screens/gm/tweak.cpp:200
-#, fuzzy
-#| msgid "Long range radar:"
 msgid "Long-range radar range:"
-msgstr "Radar longue portée :"
+msgstr "Rayon du radar longue portée :"
 
 #: src/screens/gm/tweak.cpp:305
-#, fuzzy
 msgid "Asteroid Size:"
-msgstr "Taille de l'astéroïde"
+msgstr "Taille de l'astéroïde :"
 
 #: src/screens/gm/tweak.cpp:655
-#, fuzzy
-#| msgctxt "beam"
-#| msgid "Turret arc:"
 msgid "current factor"
-msgstr "Tourelle : Amplitude de l'arc"
+msgstr "Coefficient actuel :"
 
 #: src/screens/gm/tweak.cpp:656
 msgid "desired factor"
-msgstr ""
+msgstr "Coefficient souhaité :"
 
 #: src/screens/gm/tweak.cpp:661
-#, fuzzy
-#| msgid "{system} heat"
 msgid "{system}"
-msgstr "Surchauffe en cours"
+msgstr "{system}"
 
 #: src/screens/gm/tweak.cpp:685
 msgid "Applies on [Enter]"
-msgstr ""
+msgstr "Valider avec [Entrer]"
 
 #: src/screens/gm/tweak.cpp:803
-#, fuzzy
-#| msgid "Options"
 msgid "position"
-msgstr "Options"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:173 scripts/shipTemplates_OLD.lua:235
 #: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
 #: scripts/shipTemplates_OLD.lua:470
-#, fuzzy
-#| msgid "Frigate"
 msgctxt "class"
 msgid "Frigate"
-msgstr "Fregates"
+msgstr "Frégates"
 
 #: scripts/shipTemplates_OLD.lua:173
 msgctxt "subclass"
 msgid "Mine Layer"
-msgstr ""
+msgstr "Poseur de mines"
 
 #: scripts/shipTemplates_OLD.lua:235
-#, fuzzy
-#| msgid "Cruiser"
 msgctxt "subclass"
 msgid "Cruiser"
 msgstr "Croiseur"
 
 #: scripts/shipTemplates_OLD.lua:260
-#, fuzzy
-#| msgid "Cruiser: Missile"
 msgctxt "subclass"
 msgid "Cruiser: Missile"
 msgstr "Croiseur : missiles"
 
 #: scripts/shipTemplates_OLD.lua:289 scripts/shipTemplates_OLD.lua:301
-#, fuzzy
-#| msgid "Starfighter"
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Chasseurs stellaires"
 
 #: scripts/shipTemplates_OLD.lua:363
-#, fuzzy
-#| msgid "Battlecruiser"
 msgctxt "subclass"
 msgid "Battlecruiser"
 msgstr "Croiseur de guerre"
 
 #: scripts/shipTemplates_OLD.lua:470
-#, fuzzy
-#| msgid "High Punch"
 msgctxt "subclass"
 msgid "High Punch"
-msgstr "Penetrant"
+msgstr "Pénétrant"
