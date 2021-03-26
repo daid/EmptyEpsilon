@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-26 00:36+0100\n"
+"PO-Revision-Date: 2021-03-26 14:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -2747,16 +2747,16 @@ msgid ""
 "and other civillian parties. However, they have used it's adaptable nature "
 "to re-fit them with (illegal) weaponry."
 msgstr ""
-"Fabrique par: Chantiers Navals Repulse.\n"
+"Fabriqué par: Chantiers Navals Repulse.\n"
 "\n"
-"En raison de sa polyvalence, ce vaisseau a trouve sa place dans la plupart "
-"des factions qui l'ont considerablement modernises pour l'adapter a leurs "
+"En raison de sa polyvalence, ce vaisseau a trouvé sa place dans la plupart "
+"des factions qui l'ont considérablement modernisés pour l'adapter à leurs "
 "doctrines de combat. Comme il s'agit d'un modèle assez ancien, la plupart "
-"des factions ont vendues des versions depouillees.\n"
+"des factions ont vendu des versions dépouillées.\n"
 "\n"
-"Ce fonctionnement a fait de ce navire, en tout temps, le favori aupres des "
-"passeurs et d'autres groupes civils. Cependant, ils ont utilise sa nature "
-"adaptable pour le reequiper (illegalement) en armes."
+"Ce fonctionnement a fait de ce navire, en tout temps, le favori auprès des "
+"passeurs et d'autres groupes civils. Cependant, ils ont utilisé sa nature "
+"adaptable pour le rééquiper (illégalement) en armes."
 
 #: scripts/shipTemplates_OLD.lua:249
 msgctxt "ship"
@@ -2771,17 +2771,17 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savoury purposes."
 msgstr ""
-"Fabrique par: Chantiers Navals Repulse.\n"
+"Fabriqué par: Chantiers Navals Repulse.\n"
 "\n"
-"Le successeur du grand succes commercial : le croiseur Karnack.\n"
+"Le successeur du grand succès commercial : le croiseur Karnack.\n"
 "\n"
-"Ce navire a connu plusieurs ameliorations notables par rapport au navire "
-"d'origine, y compris un meilleur blindage, un armement legerement ameliore "
+"Ce navire a connu plusieurs améliorations notables par rapport au navire "
+"d'origine, y compris un meilleur blindage, un armement légèrement amélioré "
 "et une personnalisation par les chantiers navals.\n"
 "\n"
-"Cette derniere amelioration a ete la caracteristique la plus demandee par "
-"plusieurs factions une fois qu'elles ont realise que leurs vieux navires MK2 "
-"excedentaires etaient utilises a des fins moins...reglementaires."
+"Cette dernière amélioration a été la caractéristique la plus demandée par "
+"plusieurs factions une fois qu'elles ont réalisé que leurs vieux navires MK2 "
+"excédentaires étaient utilisés à des fins moins...règlementaires."
 
 #: scripts/shipTemplates_OLD.lua:260
 msgid "Missile Cruiser"
@@ -2803,7 +2803,7 @@ msgstr ""
 "Croiseur de missiles Polaris MK1, fabrique par : Chantiers Navals Repulse.\n"
 "\n"
 "Ce croiseur de missiles est une plate-forme de tir de missiles longue "
-"portee. Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner "
+"portée. Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner "
 "beaucoup s'il n'est pas gere correctement."
 
 #: scripts/shipTemplates_OLD.lua:271
@@ -2816,24 +2816,24 @@ msgid ""
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant est un navire équipé d'un tube de missile a tête chercheuse a "
-"l'avant lui permettant de faire de gros dégâts avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
-"eliminer rapidement les ennemis plus faibles que lui."
+"Le Combattant est un navire équipé d'un tube de missile à tête chercheuse à "
+"l'avant lui permettant de faire de gros dégâts avant d'éliminer "
+"définitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
+"éliminer rapidement les ennemis plus faibles que lui."
 
 #: scripts/shipTemplates_OLD.lua:284
 msgid "Adv. Gunship"
-msgstr "Combattant V2"
+msgstr ""
 
 msgid ""
 "The advanced gunship is a ship equiped with 2 homing missiles to do initial "
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant V2 est un navire équipé de 2 tubes de missile a tête "
-"chercheuse a l'avant lui permettant de faire de gros dégâts avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
-"eliminer rapidement les ennemis plus faibles que lui."
+"Le Combattant V2 est un navire équipé de 2 tubes de missile à tête "
+"chercheuse à l'avant lui permettant de faire de gros dégâts avant d'éliminer "
+"définitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
+"éliminer rapidement les ennemis plus faibles que lui."
 
 #: scripts/shipTemplates_OLD.lua:289
 msgid "Strikeship"
@@ -2869,7 +2869,7 @@ msgstr ""
 "Le Foudroyant est un vaisseau équipé d'une plate-forme de téléportation et "
 "conçu pour des frappes rapides.\n"
 "\n"
-"Il se deplace lentement mais est tres agile. Il ne produit pas de gros "
+"Il se déplace lentement mais est très agile. Il ne produit pas de gros "
 "dégâts et manque de boucliers mais en raison de la téléportation, il peut "
 "rentrer rapidement en action."
 
@@ -2882,14 +2882,14 @@ msgid ""
 "The Striker is the predecessor to the advanced striker, slow but agile, but "
 "does not do an extreme amount of damage, and lacks in shields"
 msgstr ""
-"L'Eclair est le predecesseur du Foudroyant, lent mais agile, il n'inflige "
-"pas une quantite extreme de dégâts et manque de boucliers.\n"
-" Plus solide et maniable que le foudroyant, il dispose de la vitesse lumière."
+"L'Eclair est le prédécesseur du Foudroyant, lent mais agile, il n'inflige "
+"pas une quantité extrême de dégâts et manque de boucliers.\n"
+"Plus solide et maniable que le foudroyant, il dispose de la vitesse lumière."
 
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
 msgid "Dreadnought"
-msgstr "Cuirasse"
+msgstr "Cuirassé"
 
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
@@ -2901,8 +2901,8 @@ msgid ""
 "The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
 "huge amount of beam weapons in the front. Taking it head-on is suicide."
 msgstr ""
-"Le Cuirasse est une forteresse volante, il est tres lent en vitesse et a la "
-"manoeuvre, mais contient une enorme quantite de faisceaux laser a l'avant.\n"
+"Le Cuirassé est une forteresse volante, il est très lent en vitesse et à la "
+"manœuvre, mais contient une énorme quantité de faisceaux laser à l'avant.\n"
 "Le prendre de front serait un suicide."
 
 #: scripts/shipTemplates_OLD.lua:363
@@ -2918,27 +2918,27 @@ msgid ""
 "docked by smaller ships."
 msgstr ""
 "La Station de combat est un immense navire avec de nombreuses "
-"fonctionnalites defensives. Il peut etre accoste par de plus petits navires."
+"fonctionnalités défensives. Il peut être accosté par de plus petits navires."
 
 #: scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
-msgstr "Plate-forme armee"
+msgstr "Plateforme armée"
 
 #: scripts/shipTemplates_OLD.lua:457
 msgid ""
 "The weapons-platform is a stationary platform with beam-weapons. It's "
 "extremely slow to turn, but it's beam weapons do a huge amount of damage."
 msgstr ""
-"La plate-forme armee est une plate-forme stationnaire equipee de faisceaux "
-"laser. Elle est extrêmement lente a tourner, mais ses faisceaux font "
-"d'enormes dégâts."
+"La plateforme armée est une plateforme stationnaire équipée de faisceaux "
+"laser. Elle est extrêmement lente à tourner, mais ses faisceaux font "
+"d'énormes dégâts."
 
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Blockade Runner"
 msgstr "Coursier"
 
 msgid "High Punch"
-msgstr "Penetrant"
+msgstr "Pénétrant"
 
 #: scripts/shipTemplates_OLD.lua:472
 msgid ""
@@ -2946,7 +2946,7 @@ msgid ""
 "designed to break through defense lines and deliver goods."
 msgstr ""
 "Le Coursier est un vaisseau raisonnablement rapide, aux puissants boucliers "
-"mais avec un armement leger, conçu pour franchir les lignes de defense et "
+"mais avec un armement léger, conçu pour franchir les lignes de défense et "
 "livrer des marchandises."
 
 #: scripts/shipTemplates_OLD.lua:483
@@ -2967,11 +2967,11 @@ msgstr "Drone Ktlitan"
 
 #: scripts/shipTemplates_OLD.lua:513
 msgid "Ktlitan Feeder"
-msgstr "Ktlitan nourriciere"
+msgstr "Ktlitan nourricière"
 
 #: scripts/shipTemplates_OLD.lua:523
 msgid "Ktlitan Scout"
-msgstr "Ktlitan eclaireur"
+msgstr "Ktlitan éclaireur"
 
 #: scripts/shipTemplates_OLD.lua:529
 msgid "Ktlitan Destroyer"
@@ -3000,10 +3000,10 @@ msgid ""
 "It's easy to find spare parts for MT52s, not only because they are produced "
 "in large numbers, but also because they suffer high losses in combat."
 msgstr ""
-"Le Frelon MT52 est un intercepteur de base reperable dans de nombreux coins "
+"Le Frelon MT52 est un intercepteur de base repérable dans de nombreux coins "
 "de la galaxie.\n"
 "\n"
-"Il est facile de trouver des pieces de rechange pour les MT52, non seulement "
+"Il est facile de trouver des pièces de rechange pour les MT52, non seulement "
 "parce qu' elles sont produites en grand nombre, mais aussi parce qu' elles "
 "subissent des pertes importantes au combat."
 
@@ -3016,8 +3016,8 @@ msgid ""
 "The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
 "are slightly improved over the MT52 model."
 msgstr ""
-"Le Frelon MU52 est une version amelioree du Frelon MT52. Tous ses systemes "
-"sont legerement ameliores par rapport au modèle MT52."
+"Le Frelon MU52 est une version améliorée du Frelon MT52. Tous ses systèmes "
+"sont légèrement améliorés par rapport au modèle MT52."
 
 #: scripts/shipTemplates_StarFighters.lua:31
 msgid "MP52 Hornet"
@@ -3029,14 +3029,14 @@ msgid ""
 "nearly twice the hull strength, nearly three times the shielding, better "
 "acceleration, impulse boosters, and a second laser cannon."
 msgstr ""
-"Le Frelon MP52 est une version considerablement amelioree du Frelon MU52, "
-"avec une coque deux fois plus resistante, un blindage presque trois fois "
-"superieur, une meilleure acceleration, des boosters d'impulsion et un "
-"deuxieme canon laser."
+"Le Frelon MP52 est une version considérablement améliorée du Frelon MU52, "
+"avec une coque deux fois plus résistante, un blindage presque trois fois "
+"supérieur, une meilleure accélération, des boosters d'impulsion et un "
+"deuxième canon laser."
 
 #: scripts/shipTemplates_StarFighters.lua:65
 msgid "Adder MK5"
-msgstr "Vipere MK5"
+msgstr "Vipère MK5"
 
 #: scripts/shipTemplates_StarFighters.lua:67
 msgid ""
@@ -3044,13 +3044,13 @@ msgid ""
 "and law officers alike. It is cheap, fast, and easy to maintain, and it "
 "packs a decent punch."
 msgstr ""
-"La cinquieme generation de la ligne Vipere s'est averee etre un grand succes "
+"La cinquième génération de la ligne Vipère s'est avérée être un grand succès "
 "parmi les pirates et les officiers de justice. C'est un modèle bon marché, "
-"rapide et facile a entretenir, et il a un certain punch."
+"rapide et facile à entretenir, et il a un certain punch."
 
 #: scripts/shipTemplates_StarFighters.lua:78
 msgid "Adder MK4"
-msgstr "Vipere MK4"
+msgstr "Vipère MK4"
 
 #: scripts/shipTemplates_StarFighters.lua:80
 msgid ""
@@ -3059,14 +3059,14 @@ msgid ""
 "hull, however, means careless buyers are sometimes conned into buying mark 4 "
 "models disguised as the mark 5."
 msgstr ""
-"Le Vipere MK4 se fait rare de nos jours en raison du succes de son "
-"successeur, le Vipere MK5, qui le remplace desormais. Leur coque etant "
-"similaire, certains acheteurs imprudents achetent parfois des modeles MK4 "
-"maquilles en MK5."
+"Le Vipère MK4 se fait rare de nos jours en raison du succès de son "
+"successeur, le Vipère MK5, qui le remplace désormais. Leur coque étant "
+"similaire, certains acheteurs imprudents achètent parfois des modèles MK4 "
+"maquillés en MK5."
 
 #: scripts/shipTemplates_StarFighters.lua:88
 msgid "Adder MK3"
-msgstr "Vipere MK3"
+msgstr "Vipère MK3"
 
 #: scripts/shipTemplates_StarFighters.lua:89
 msgid ""
@@ -3077,18 +3077,18 @@ msgid ""
 "similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
 "has weaker shields and hull, but a faster turn speed"
 msgstr ""
-"Le Vipere MK3 est l'un des premiers de la gamme Vipere a rencontrer un "
+"Le Vipère MK3 est l'un des premiers de la gamme Vipère a rencontrer un "
 "certain succes. Un grand nombre d'entre eux ont ete produits avant que le "
 "fabricant ne fasse sa premiere faillite.\n"
 "\n"
-"Il y a eu une augmentation recente des achats de Vipere MK3 sur le marché "
+"Il y a eu une augmentation recente des achats de Vipère MK3 sur le marché "
 "secondaire en raison de son prix bas et de sa similitude avec les modeles "
 "suivants. Comparé au MK4, le MK3 a des boucliers et une coque plus faibles, "
 "mais une vitesse de rotation plus rapide."
 
 #: scripts/shipTemplates_StarFighters.lua:94
 msgid "Adder MK6"
-msgstr "Vipere MK6"
+msgstr "Vipère MK6"
 
 #: scripts/shipTemplates_StarFighters.lua:96
 msgid ""
@@ -3096,13 +3096,13 @@ msgid ""
 "model. Since people still prefer the more familiar and reliable mark 5, the "
 "mark 6 has not seen the same level of success."
 msgstr ""
-"Le Vipere MK6 est une petite mise a niveau du modèle MK5 tres reussi. Etant "
+"Le Vipère MK6 est une petite mise a niveau du modèle MK5 tres reussi. Etant "
 "donne que les gens preferent toujours le MK5, plus familier et plus fiable "
 "surtout, le MK6 ne connais pas le même succes."
 
 #: scripts/shipTemplates_StarFighters.lua:100
 msgid "Adder MK7"
-msgstr "Vipere MK7"
+msgstr "Vipère MK7"
 
 #: scripts/shipTemplates_StarFighters.lua:102
 msgid ""
@@ -3112,7 +3112,7 @@ msgid ""
 "models, especially the Mark 5, prevented them from raising the purchase "
 "price enough to recoup the development and manufacturing costs of the Mark 7"
 msgstr ""
-"La sortie du Vipere MK7 a conduit le fabricant a une seconde faillite.\n"
+"La sortie du Vipère MK7 a conduit le fabricant a une seconde faillite.\n"
 "\n"
 "Ils lui ont apportes des ameliorations par rapport au MK6, comme des "
 "boucliers plus solides et des faisceaux laser plus grand.\n"
@@ -3123,7 +3123,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:106
 msgid "Adder MK8"
-msgstr "Vipere MK8"
+msgstr "Vipère MK8"
 
 #: scripts/shipTemplates_StarFighters.lua:108
 msgid ""
@@ -3143,7 +3143,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:113
 msgid "Adder MK9"
-msgstr "Vipere MK9"
+msgstr "Vipère MK9"
 
 #: scripts/shipTemplates_StarFighters.lua:115
 msgid ""
@@ -3162,7 +3162,7 @@ msgstr ""
 "Petite touche speciale : 2 missiles nucleaires.\n"
 "\n"
 "Comme le dit si bien leur \"slogan : \"Vous vous sentirez mieux dans un "
-"Vipere MK9.\""
+"Vipère MK9.\""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "WX-Lindworm"
@@ -3385,7 +3385,7 @@ msgid ""
 "Some fearless captains use mines as offensive weapons, but their delayed "
 "detonation and blast radius make this use risky at best."
 msgstr ""
-"Les mines sont de puissants explosifs stationnaires projetes par l'arriere "
+"Les mines sont de puissants explosifs stationnaires projetes par l'arrière "
 "du vaisseau a 1U de distance et qui detonnent quand un navire se deplace "
 "dans cette zone de 1U a la ronde. L'explosion endommage alors tout ce qui se "
 "trouve dans cette zone. \n"
@@ -3396,7 +3396,7 @@ msgstr ""
 "anciennes guerres martiennes. \n"
 "\n"
 "Certains capitaines temeraires utilisent les mines comme armes offensives, "
-"mais la faible portee, l'absence de visee et le rayon d'effet rend cet usage "
+"mais la faible portée, l'absence de visee et le rayon d'effet rend cet usage "
 "tres complexe."
 
 #: scripts/science_db.lua:53
@@ -3766,11 +3766,11 @@ msgstr "Ce vaisseau s'autodetruira dans {seconds} secondes."
 
 #: src/screenComponents/frequencyCurve.cpp:59
 msgid "Damage with your beams"
-msgstr "Degats avec vos faisceaux"
+msgstr "Dégâts avec vos faisceaux"
 
 #: src/screenComponents/frequencyCurve.cpp:61
 msgid "Damage on your shields"
-msgstr "Degats sur vos boucliers"
+msgstr "Dégâts sur vos boucliers"
 
 #: src/screenComponents/powerDamageIndicator.cpp:33
 msgctxt "systems"
@@ -3887,7 +3887,7 @@ msgstr "Avant"
 #: src/screenComponents/mainScreenControls.cpp:39
 msgctxt "mainscreen"
 msgid "Back"
-msgstr "Arriere"
+msgstr "Arrière"
 
 #: src/screenComponents/mainScreenControls.cpp:47
 msgctxt "mainscreen"
@@ -3912,7 +3912,7 @@ msgstr "Tactique"
 #: src/screenComponents/mainScreenControls.cpp:91
 msgctxt "mainscreen"
 msgid "Long Range"
-msgstr "Longue portee"
+msgstr "Longue portée"
 
 #: src/screenComponents/mainScreenControls.cpp:105
 msgctxt "mainscreen"
@@ -4155,26 +4155,18 @@ msgid ""
 "and other civilian parties. However, they have used it's adaptable nature to "
 "re-fit them with (illegal) weaponry."
 msgstr ""
-"Fabrique par: Chantiers Navals Repulse.\n"
+"Fabriqué par: Chantiers Navals Repulse.\n"
 "\n"
-"En raison de sa polyvalence, ce vaisseau a trouve sa place dans la plupart "
-"des factions qui l'ont considerablement modernises pour l'adapter a leurs "
+"En raison de sa polyvalence, ce vaisseau a trouvé sa place dans la plupart "
+"des factions qui l'ont considérablement modernisés pour l'adapter à leurs "
 "doctrines de combat. Comme il s'agit d'un modèle assez ancien, la plupart "
-"des factions ont vendues des versions dépouillées.\n"
+"des factions ont vendu des versions dépouillées.\n"
 "\n"
-"Ce fonctionnement a fait de ce navire, en tout temps, le favori aupres des "
-"passeurs et d'autres groupes civils. Cependant, ils ont utilise sa nature "
-"adaptable pour le reequiper (illegalement) en armes."
+"Ce fonctionnement a fait de ce navire, en tout temps, le favori auprès des "
+"passeurs et d'autres groupes civils. Cependant, ils ont utilisé sa nature "
+"adaptable pour le rééquiper (illégalement) en armes."
 
 #: scripts/shipTemplates_OLD.lua:250
-#, fuzzy
-#| msgid ""
-#| "Fabricated by: Repulse shipyards. The sucessor to the widly sucesfull "
-#| "mark I Karnack cruiser. This ship has several notable improvements over "
-#| "the original ship, including better armor, slightly improved weaponry and "
-#| "customization by the shipyards. The latter improvement was the most "
-#| "requested feature by several factions once they realized that their old "
-#| "surplus mark I ships were used for less savoury purposes."
 msgid ""
 "Fabricated by: Repulse shipyards. The successor to the widely successful "
 "mark I Karnack cruiser. This ship has several notable improvements over the "
@@ -4183,17 +4175,17 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savory purposes."
 msgstr ""
-"Fabrique par: Chantiers Navals Repulse.\n"
+"Fabriqué par: Chantiers Navals Repulse.\n"
 "\n"
-"Le successeur du grand succes commercial : le croiseur Karnack.\n"
+"Le successeur du grand succès commercial : le croiseur Karnack.\n"
 "\n"
-"Ce navire a connu plusieurs ameliorations notables par rapport au navire "
-"d'origine, y compris un meilleur blindage, un armement legerement ameliore "
+"Ce navire a connu plusieurs améliorations notables par rapport au navire "
+"d'origine, y compris un meilleur blindage, un armement légèrement amélioré "
 "et une personnalisation par les chantiers navals.\n"
 "\n"
-"Cette derniere amelioration a ete la caracteristique la plus demandee par "
-"plusieurs factions une fois qu'elles ont realise que leurs vieux navires MK2 "
-"excedentaires etaient utilises a des fins moins...reglementaires."
+"Cette dernière amélioration a été la caractéristique la plus demandée par "
+"plusieurs factions une fois qu'elles ont réalisé que leurs vieux navires MK2 "
+"excédentaires étaient utilisés à des fins moins...règlementaires."
 
 #: scripts/shipTemplates_OLD.lua:262
 msgid ""
@@ -4201,11 +4193,11 @@ msgid ""
 "missile cruiser is a long range missile firing platform. It cannot handle a "
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
-"Croiseur de missiles Polaris MK1, fabrique par : Chantiers Navals Repulse.\n"
+"Croiseur de missiles Polaris MK1, fabriqué par : Chantiers Navals Repulse.\n"
 "\n"
-"Ce croiseur de missiles est une plate-forme de tir de missiles longue "
-"portee. Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner "
-"beaucoup s'il n'est pas gere correctement."
+"Ce croiseur de missiles est une plateforme de tir de missiles longue portée. "
+"Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner beaucoup "
+"s'il n'est pas géré correctement."
 
 #: scripts/shipTemplates_OLD.lua:273
 msgid ""
@@ -4224,9 +4216,9 @@ msgid ""
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant V2 est un navire équipé de 2 tubes de missile a tête "
-"chercheuse a l'avant lui permettant de faire de gros dégâts avant d'eliminer "
-"definitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
+"Le Combattant V2 est un navire équipé de 2 tubes de missile à tête "
+"chercheuse à l'avant lui permettant de faire de gros dégâts avant d'éliminer "
+"définitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
 "éliminer rapidement les ennemis plus faibles que lui."
 
 #: scripts/factionInfo.lua:72
@@ -4243,7 +4235,7 @@ msgid ""
 "The TSN and USN are enemies because of the USN's neutral stance towards the "
 "Kraylor."
 msgstr ""
-"La Force Spatiale Terrienne ou FST est constituée de forces navales basées "
+"La Force Spatiale Terrienne, ou FST, est constituée de forces navales basées "
 "aux environs de la Terre. Ses membres sont principalement humains.\n"
 "\n"
 "Ces humains et d'autres races se sont regroupés pour former une marine afin "
@@ -4265,7 +4257,7 @@ msgid ""
 "The USN is primarily human but includes other races. This includes some "
 "Kraylor, which has made the TSN an enemy of the USN."
 msgstr ""
-"La Marine Stellaire Unifiée ou MSU est une force navale située près de la "
+"La Marine Stellaire Unifiée, ou MSU, est une force navale située près de la "
 "frontière séparant les espaces humain et Kraylor et composée principalement "
 "d'humains. La MSU est alliée à la Marine Humaine et utilise une structure de "
 "commandement similaire.\n"
@@ -4289,7 +4281,7 @@ msgid ""
 "reasons, not xenophobia; some of their best friends are also Exuari, "
 "Kraylor, and Ghosts."
 msgstr ""
-"La Flotte Celeste Unifiée ou FCU est la flotte principalement humaine la "
+"La Flotte Celeste Unifiée, ou FCU, est la flotte principalement humaine la "
 "plus étendue mais aussi la moins xénophobe. Ses activités sont "
 "principalement axées sur l'exploration et le commerce. Mais consciente de la "
 "dangerosité de la galaxie, la FCU reconnait néanmoins la nécessité de "
@@ -4307,11 +4299,11 @@ msgstr ""
 #: scripts/science_db.lua:30 scripts/science_db.lua:35
 #: scripts/science_db.lua:54 scripts/science_db.lua:61
 msgid "Range"
-msgstr "Portee"
+msgstr "Portée"
 
 #: scripts/science_db.lua:31 scripts/science_db.lua:62
 msgid "Damage"
-msgstr "Degats"
+msgstr "Dégâts"
 
 #: scripts/science_db.lua:34
 msgid "Nuke"
@@ -4325,12 +4317,12 @@ msgstr "Rayon d'action"
 #: scripts/science_db.lua:37 scripts/science_db.lua:47
 #: scripts/science_db.lua:56
 msgid "Damage at center"
-msgstr "Degats au centre"
+msgstr "Dégâts au centre"
 
 #: scripts/science_db.lua:38 scripts/science_db.lua:48
 #: scripts/science_db.lua:57
 msgid "Damage at edge"
-msgstr "Degats au bord"
+msgstr "Dégâts au bord"
 
 #: scripts/science_db.lua:43
 msgid "Mine"
@@ -4342,7 +4334,7 @@ msgstr "Distance de largage"
 
 #: scripts/science_db.lua:45
 msgid "Trigger distance"
-msgstr "Declenchement"
+msgstr "Déclenchement"
 
 #: scripts/science_db.lua:60
 msgid "HVLI"
@@ -4363,10 +4355,10 @@ msgid ""
 "lacks in rear shields."
 msgstr ""
 "Le Navire de frappe est un vaisseau de combat équipé de la vitesse lumière "
-"et conçu pour des frappes eclairs.\n"
+"et conçu pour des frappes éclairs.\n"
 "\n"
-"Il est rapide, agile mais n'inflige pas une quantite extreme de dégâts et "
-"manque de boucliers arriere."
+"Il est rapide, agile mais n'inflige pas une quantité extrême de dégâts et "
+"manque de boucliers arrière."
 
 #: src/menus/optionsMenu.cpp:163
 #, fuzzy
@@ -4430,13 +4422,13 @@ msgstr "Puissance"
 #, fuzzy
 #| msgid "Short range radar:"
 msgid "Short-range radar range:"
-msgstr "Radar courte portee :"
+msgstr "Radar courte portée :"
 
 #: src/screens/gm/tweak.cpp:200
 #, fuzzy
 #| msgid "Long range radar:"
 msgid "Long-range radar range:"
-msgstr "Radar longue portee :"
+msgstr "Radar longue portée :"
 
 #: src/screens/gm/tweak.cpp:305
 #, fuzzy
