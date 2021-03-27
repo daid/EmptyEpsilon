@@ -32,8 +32,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
             player_ship_listbox->hide();
         }
     });
-    player_cpu_selector->addEntry("cpu ship",tr("create", "cpu ship"));
-    player_cpu_selector->addEntry("player ship",tr("create", "player ship"));
+    player_cpu_selector->addEntry(tr("create", "cpu ship"), "cpu ship");
+    player_cpu_selector->addEntry(tr("create", "player ship"), "player ship");
     player_cpu_selector->setSelectionIndex(0);
     player_cpu_selector->setPosition(20, 70, ATopLeft)->setSize(300, 50);
 
