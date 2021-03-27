@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-26 19:11+0100\n"
+"PO-Revision-Date: 2021-03-27 10:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -937,7 +937,7 @@ msgstr "Cannonière"
 
 #: scripts/shipTemplates_Corvette.lua:217
 msgid "Defense platform"
-msgstr "Plate-forme de défense"
+msgstr ""
 
 msgid "Support"
 msgstr "Soutien"
@@ -945,7 +945,7 @@ msgstr "Soutien"
 #: scripts/shipTemplates_Corvette.lua:235
 #, lua-format
 msgid "Personnel Freighter %d"
-msgstr "Navette %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:235
 #: scripts/shipTemplates_Corvette.lua:248
@@ -959,27 +959,27 @@ msgstr "Cargo"
 #: scripts/shipTemplates_Corvette.lua:244
 #, lua-format
 msgid "Personnel Jump Freighter %d"
-msgstr "Navette LD %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:248
 #, lua-format
 msgid "Goods Freighter %d"
-msgstr "Transport de fret %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:257
 #, lua-format
 msgid "Goods Jump Freighter %d"
-msgstr "Transport de fret LD %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:261
 #, lua-format
 msgid "Garbage Freighter %d"
-msgstr "Recycleur %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:270
 #, lua-format
 msgid "Garbage Jump Freighter %d"
-msgstr "Recycleur LD %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:274
 #, lua-format
@@ -989,21 +989,21 @@ msgstr ""
 #: scripts/shipTemplates_Corvette.lua:283
 #, lua-format
 msgid "Equipment Jump Freighter %d"
-msgstr "Transport d'équipement LD %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:287
 #, lua-format
 msgid "Fuel Freighter %d"
-msgstr "Citerne %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:296
 #, lua-format
 msgid "Fuel Jump Freighter %d"
-msgstr "Citerne LD %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:301
 msgid "Jump Carrier"
-msgstr "Téléporteur"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Benedict"
@@ -2262,7 +2262,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:28
 msgid "Elara P2"
-msgstr "Élara P2"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:29
 msgid ""
@@ -2355,7 +2355,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgid "Storm"
-msgstr "Tempête"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgid "Cruiser: Heavy Artillery"
@@ -2588,12 +2588,12 @@ msgstr "Transport blindé"
 
 #: scripts/shipTemplates_Frigates.lua:414
 msgid "Fiend G3"
-msgstr "Démon G3"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:271
 #: scripts/shipTemplates_StarFighters.lua:65
 msgid "Gunship"
-msgstr "Combattant"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:416
 msgid ""
@@ -2615,7 +2615,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:428
 msgid "Fiend G4"
-msgstr "Démon G4"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:429
 msgid ""
@@ -2638,7 +2638,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:433
 msgid "Fiend G6"
-msgstr "Démon G6"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:434
 msgid ""
@@ -2661,7 +2661,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:437
 msgid "Fiend G5"
-msgstr "Démon G5"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:438
 msgid ""
@@ -2695,7 +2695,7 @@ msgstr "Chasseur joueur"
 
 #: scripts/shipTemplates_OLD.lua:156
 msgid "Tug"
-msgstr "Remorqueur"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:165
 msgid ""
@@ -2718,7 +2718,7 @@ msgstr "Petit poseur de mines avec coque, armement et boucliers minimaux."
 
 #: scripts/shipTemplates_OLD.lua:220
 msgid "Fighter"
-msgstr "Chasseur"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:222
 msgid ""
@@ -2782,7 +2782,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:260
 msgid "Missile Cruiser"
-msgstr "Croiseur de missiles"
+msgstr ""
 
 msgid "Cruiser: Missile"
 msgstr "Croiseur : missiles"
@@ -2829,7 +2829,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289
 msgid "Strikeship"
-msgstr "Navire de frappe"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:13
 #: scripts/shipTemplates_StarFighters.lua:65
@@ -2844,7 +2844,7 @@ msgstr "Frappeur"
 
 #: scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
-msgstr "Foudroyant"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:301
 msgctxt "subclass"
@@ -2881,7 +2881,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
 msgid "Dreadnought"
-msgstr "Cuirassé"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
@@ -2899,7 +2899,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:363
 msgid "Battlestation"
-msgstr "Station de combat"
+msgstr ""
 
 msgid "Battlecruiser"
 msgstr "Croiseur de guerre"
@@ -2914,7 +2914,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
-msgstr "Plateforme armée"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:457
 msgid ""
@@ -2927,7 +2927,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Blockade Runner"
-msgstr "Coursier"
+msgstr ""
 
 msgid "High Punch"
 msgstr "Pénétrant"
@@ -2943,35 +2943,35 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:483
 msgid "Ktlitan Fighter"
-msgstr "Chasseur Ktlitan"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:490
 msgid "Ktlitan Breaker"
-msgstr "Briseur Ktlitan"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:500
 msgid "Ktlitan Worker"
-msgstr "Ktlitan ouvrier"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:507
 msgid "Ktlitan Drone"
-msgstr "Drone Ktlitan"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:513
 msgid "Ktlitan Feeder"
-msgstr "Ktlitan nourricière"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:523
 msgid "Ktlitan Scout"
-msgstr "Ktlitan éclaireur"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:529
 msgid "Ktlitan Destroyer"
-msgstr "Destroyer Ktlitan"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:540
 msgid "Ktlitan Queen"
-msgstr "Reine Ktlitan"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:551
 #, lua-format
@@ -2980,7 +2980,7 @@ msgstr "Transport %dx%d"
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
-msgstr "Frelon MT52"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "Interceptor"
@@ -3001,7 +3001,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:23
 msgid "MU52 Hornet"
-msgstr "Frelon MU52"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:25
 msgid ""
@@ -3028,7 +3028,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:65
 msgid "Adder MK5"
-msgstr "Vipère MK5"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:67
 msgid ""
@@ -3042,7 +3042,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:78
 msgid "Adder MK4"
-msgstr "Vipère MK4"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:80
 msgid ""
@@ -3058,7 +3058,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:88
 msgid "Adder MK3"
-msgstr "Vipère MK3"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:89
 msgid ""
@@ -3080,7 +3080,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:94
 msgid "Adder MK6"
-msgstr "Vipère MK6"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:96
 msgid ""
@@ -3094,7 +3094,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:100
 msgid "Adder MK7"
-msgstr "Vipère MK7"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:102
 msgid ""
@@ -3115,7 +3115,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:106
 msgid "Adder MK8"
-msgstr "Vipère MK8"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:108
 msgid ""
@@ -3135,7 +3135,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:113
 msgid "Adder MK9"
-msgstr "Vipère MK9"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:115
 msgid ""
@@ -3158,7 +3158,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "WX-Lindworm"
-msgstr "Dragon-WX"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "Bomber"
