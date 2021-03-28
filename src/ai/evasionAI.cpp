@@ -173,7 +173,8 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
         danger += enemy_beam_dps * (4*enemy_max_beam_range - std::max(distance, enemy_max_beam_range)) / (3 * enemy_max_beam_range);
     }
 
-    if (ship->getImpulseMaxSpeed() > owner->getImpulseMaxSpeed()) danger *= 1.5;
+    if (std::max(ship->getBothImpulseMaxSpeeds().forward,ship->getBothImpulseMaxSpeeds().reverse) 
+            > std::max(owner->getBothImpulseMaxSpeeds().forward, owner->getBothImpulseMaxSpeeds().reverse)) danger *= 1.5; //yes that sound stupid somebody had mounted its forward reactor on reverse but...
     if (P<CpuShip>(ship->getTarget()) == P<CpuShip>(owner)) danger = (danger + 1) * 2;
     return danger;
 }

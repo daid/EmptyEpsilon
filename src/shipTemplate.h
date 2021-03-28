@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <unordered_set>
+#include <optional>
 #include "engine.h"
 #include "modelData.h"
 
@@ -170,8 +171,7 @@ public:
     void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
-    void setSpeed(float impulse, float turn, float acceleration);
-    void setReverseSpeed(float reverse_speed, float reverse_acceleration);
+    void setSpeed(float impulse, float turn, float acceleration, std::optional<float> reverse_speed, std::optional<float> reverse_acceleration);
     void setCombatManeuver(float boost, float strafe);
     void setWarpSpeed(float warp);
     void setJumpDrive(bool enabled);

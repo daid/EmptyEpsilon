@@ -54,16 +54,28 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerFactor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
+    ///[Deprecated] Gets forward impulse max speed.
+    ///Consider using getBothImpulseMaxSpeeds as forward and reverse speed can be different.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
+    ///Sets max speed.
+    ///If called with only one argument, sets forward and reverse speed to equal values.
+    ///If called with two arguments, first one is forward speed and second one is reverse speed.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxReverseSpeed);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxReverseSpeed);
+    ///Get multiple results, first one is forward speed and second one is reverse speed.
+    ///ex : forward,reverse = getBothImpulseMaxSpeeds() (you can also use select or _ to get only reverse speed)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBothImpulseMaxSpeeds);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
+    ///[Deprecated] Gets forward impulse acceleration.
+    ///Consider using getBothAccelerations as forward and reverse acceleration can be different.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getAcceleration);
+    ///Sets acceleration.
+    ///If called with one argument, sets forward and reverse acceleration to equal values.
+    ///If called with two arguments, first one is forward acceleration and second one is reverse acceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setAcceleration);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getReverseAcceleration);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setReverseAcceleration);
+    ///Get multiple resulsts, first one is forward acceleration and second one is reverse acceleration.
+    ///ex : forward, reverse = getBothAccelerations (you can also use select or _ to get only reverse speed)
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBothAccelerations);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
@@ -295,23 +307,9 @@ void SpaceShip::applyTemplateValues()
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
     impulse_max_speed = ship_template->impulse_speed;
-    if(ship_template->impulse_reverse_speed != -1)
-    {
-        impulse_max_reverse_speed = ship_template->impulse_reverse_speed;
-    }
-    else //We did not change reverse speed value, so it's defaulted to front speed
-    {
-        impulse_max_reverse_speed = ship_template->impulse_speed;
-    }
+    impulse_max_reverse_speed = ship_template->impulse_reverse_speed;
     impulse_acceleration = ship_template->impulse_acceleration;
-    if(ship_template->impulse_reverse_acceleration != -1)
-    {
-        impulse_reverse_acceleration = ship_template->impulse_reverse_acceleration;
-    }
-    else //We did not change reverse deceleration value, so it's defaulted to front acceleration
-    {
-        impulse_reverse_acceleration = ship_template->impulse_acceleration;
-    }
+    impulse_reverse_acceleration = ship_template->impulse_reverse_acceleration;
     
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;

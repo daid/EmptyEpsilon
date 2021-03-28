@@ -1,4 +1,5 @@
 #include <i18n.h>
+#include <optional>
 #include "shipTemplate.h"
 #include "spaceObjects/spaceObject.h"
 #include "mesh.h"
@@ -53,12 +54,10 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
+    /// Optional fourth and fifth arguments are reverse speed and reverse acceeleration.
+    /// If not explicitely set, reverse speed and reverse acceleration are set to forward speed and acceleration
     /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
-    /// Sets the impulse maximum speed in reverse. By default, it's equal to forward speed and acceleration
-    /// If set, it's inherited on copied templates, and setSpeed won't overload anymore inherited (copied) templates reverse speed an deceleration
-    /// If not set, inherited (copied) template's reverse speed and deceleration will be the same as forward speed and acceleration
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setReverseSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
     /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
@@ -145,9 +144,9 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<max_shield_count; n++)
         shield_level[n] = 0.0;
     impulse_speed = 500.0;
-    impulse_reverse_speed = -1;
+    impulse_reverse_speed = 500.0;
     impulse_acceleration = 20.0;
-    impulse_reverse_acceleration = -1;
+    impulse_reverse_acceleration = 20.0;
     turn_speed = 10.0;
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
@@ -415,17 +414,14 @@ void ShipTemplate::setDockClasses(std::vector<string> classes)
     can_be_docked_by_class = std::unordered_set<string>(classes.begin(), classes.end());
 }
 
-void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
+void ShipTemplate::setSpeed(float impulse, float turn, float acceleration, std::optional<float> reverse_speed, std::optional<float> reverse_acceleration)
 {
     impulse_speed = impulse;
     turn_speed = turn;
     impulse_acceleration = acceleration;
-}
 
-void ShipTemplate::setReverseSpeed(float reverse_speed, float reverse_acceleration)
-{
-    impulse_reverse_speed = reverse_speed;
-    impulse_reverse_acceleration = reverse_acceleration;
+    impulse_reverse_speed = reverse_speed.value_or(impulse);
+    impulse_reverse_acceleration = reverse_acceleration.value_or(acceleration);
 }
 
 void ShipTemplate::setCombatManeuver(float boost, float strafe)

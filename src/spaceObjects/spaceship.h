@@ -3,6 +3,7 @@
 #include <i18n.h>
 
 #include <array>
+#include <optional>
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
@@ -34,6 +35,14 @@ enum EDockingState
     DS_Docking,
     DS_Docked
 };
+
+struct Speeds
+{
+    float forward;
+    float reverse;
+};
+template<> int convert<Speeds>::returnType(lua_State* L, Speeds speeds);
+
 
 class ShipSystem
 {
@@ -347,19 +356,23 @@ public:
     void setSystemPowerFactor(ESystem system, float factor) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_factor = factor; }
     float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
     void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
-    
-    float getImpulseMaxSpeed() { return impulse_max_speed; }
-    void setImpulseMaxSpeed(float speed) { impulse_max_speed = speed; }
-    float getImpulseMaxReverseSpeed() { return impulse_max_reverse_speed; }
-    void setImpulseMaxReverseSpeed(float speed) { impulse_max_reverse_speed = speed; }
+    Speeds getBothImpulseMaxSpeeds() {return {impulse_max_speed, impulse_max_reverse_speed};}
+    void setImpulseMaxSpeed(const float &forward_speed, std::optional<float> reverse_speed) 
+    { 
+        impulse_max_speed = forward_speed; 
+        impulse_max_reverse_speed = reverse_speed.value_or(forward_speed);
+    }
+    float getImpulseMaxSpeed() { return impulse_max_speed; } //Deprecated. Consider using getBothImpulseMaxSpeeds().forward or .reverse instead.
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
-    float getAcceleration() { return impulse_acceleration; }
-    void setAcceleration(float acceleration) { impulse_acceleration = acceleration; }
-    float getReverseAcceleration() { return impulse_reverse_acceleration; }
-    void setReverseAcceleration(float reverse_acceleration) { impulse_reverse_acceleration = reverse_acceleration; }
+    Speeds getBothAccelerations()   { return {impulse_acceleration, impulse_reverse_acceleration};  }
+    void setAcceleration(float acceleration, std::optional<float> reverse_acceleration) 
+    { 
+        impulse_acceleration = acceleration; 
+        impulse_reverse_acceleration = reverse_acceleration.value_or(acceleration);
+    }
+    float getAcceleration()   {  return impulse_acceleration;  }  //Deprecated. Consider using getBothAccelerations().forward or .reverse instead.
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
-
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
@@ -472,6 +485,7 @@ public:
     // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
     string getScriptExportModificationsOnTemplate();
+    
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
