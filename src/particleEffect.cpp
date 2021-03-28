@@ -57,7 +57,7 @@ ParticleEngine::ParticleEngine()
 {
     if (gl::isAvailable())
     {
-        
+        buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
         // Cache shader info.
         shader = ShaderManager::getShader("shaders/particles");
         shaderVertexIDAttribute = glGetAttribLocation(shader->getNativeHandle(), "vertex_id");
@@ -74,7 +74,7 @@ ParticleEngine::ParticleEngine()
 
         // Per vertex data are... the vertex indices.
         // This is because ES2 does not have VertexID in the shader (so we need to pass it down by hand).
-        std::array<uint8_t, max_vertex_count> vertex_ids; // 4 vertices (quads) per particle.
+        std::array<float, max_vertex_count> vertex_ids; // 4 vertices (quads) per particle.
 
         // Hitting this means either needing to lower the number of instances / vertices per instance,
         // Or switch the element index to a uint16_t.
@@ -102,7 +102,7 @@ ParticleEngine::ParticleEngine()
         gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
 
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
-        glBufferData(GL_ARRAY_BUFFER, vertex_ids.size() * sizeof(uint8_t), vertex_ids.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vertex_ids.size() * sizeof(float), vertex_ids.data(), GL_STATIC_DRAW);
     }
 }
 
@@ -132,7 +132,7 @@ void ParticleEngine::doRender()
         gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, particleEngine->buffers[as_index(Buffers::Element)]);
         gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, particleEngine->buffers[as_index(Buffers::Vertex)]);
 
-        glVertexAttribPointer(ids.get(), 1, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)0);
+        glVertexAttribPointer(ids.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
  
         // Process only non-expired
         size_t live_particle_count = first_expired - std::begin(particles);
