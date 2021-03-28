@@ -383,7 +383,7 @@ template:setJumpDrive(true)
 template:setDockClasses("Starfighter", "Frigate", "Corvette")
 template:setSharesEnergyWithDocked(true)
 
-variation = template:copy("Ender"):setType("playership")
+variation = template:copy("Ender"):setType("playership"):setLocaleName(_("shipP", "Ender"))
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10, -90, 2500.0, 6.1, 4)
 variation:setBeam(1, 10, -90, 2500.0, 6.0, 4)
