@@ -357,7 +357,7 @@ public:
     float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
     void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
     Speeds getBothImpulseMaxSpeeds() {return {impulse_max_speed, impulse_max_reverse_speed};}
-    void setImpulseMaxSpeed(const float &forward_speed, std::optional<float> reverse_speed) 
+    void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed) 
     { 
         impulse_max_speed = forward_speed; 
         impulse_max_reverse_speed = reverse_speed.value_or(forward_speed);
