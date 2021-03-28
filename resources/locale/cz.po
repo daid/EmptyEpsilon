@@ -867,7 +867,7 @@ msgstr "Zadni"
 
 #: scripts/shipTemplates_Corvette.lua:14
 msgid "Atlantis X23"
-msgstr "Atlantis X23"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
 #: scripts/shipTemplates_Corvette.lua:101
@@ -881,15 +881,15 @@ msgstr "Atlantis X23"
 #: scripts/shipTemplates_Corvette.lua:301
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Corvette"
-msgstr "Korveta"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
 msgid "Destroyer"
-msgstr "Torpedoborec"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:33
 msgid "Atlantis"
-msgstr "Atlantis"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:83
 msgid "Starhammer II"
@@ -913,7 +913,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:217
 msgid "Defense platform"
-msgstr "Obrana platforma"
+msgstr ""
 
 msgid "Support"
 msgstr ""
@@ -921,7 +921,7 @@ msgstr ""
 #: scripts/shipTemplates_Corvette.lua:235
 #, lua-format
 msgid "Personnel Freighter %d"
-msgstr "Osobni Transport %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:235
 #: scripts/shipTemplates_Corvette.lua:248
@@ -930,56 +930,56 @@ msgstr "Osobni Transport %d"
 #: scripts/shipTemplates_Corvette.lua:287
 #: scripts/shipTemplates_Corvette.lua:301
 msgid "Freighter"
-msgstr "Transport"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:244
 #, lua-format
 msgid "Personnel Jump Freighter %d"
-msgstr "Osobni Skokovy Transport %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:248
 #, lua-format
 msgid "Goods Freighter %d"
-msgstr "Nakladni Transport %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:257
 #, lua-format
 msgid "Goods Jump Freighter %d"
-msgstr "Nakladni Skokovy Transport %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:261
 #, lua-format
 msgid "Garbage Freighter %d"
-msgstr "Transport na Odpad %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:270
 #, lua-format
 msgid "Garbage Jump Freighter %d"
-msgstr "Skokovy Transport na Odpad %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:274
 #, lua-format
 msgid "Equipment Freighter %d"
-msgstr "Transport Vybaveni %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:283
 #, lua-format
 msgid "Equipment Jump Freighter %d"
-msgstr "Skokovy Transport Vybaveni %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:287
 #, lua-format
 msgid "Fuel Freighter %d"
-msgstr "Palivovy Tanker %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:296
 #, lua-format
 msgid "Fuel Jump Freighter %d"
-msgstr "Skokovy Palivovy Tanker %d"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:301
 msgid "Jump Carrier"
-msgstr "Skokova Letadlova Lod"
+msgstr ""
 
 #: scripts/shipTemplates_Corvette.lua:314
 msgid "Benedict"
@@ -1437,7 +1437,7 @@ msgstr "Normalni"
 
 #: scripts/shipTemplates_Stations.lua:5
 msgid "Small Station"
-msgstr "Mala stanice"
+msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:6
 msgid ""
@@ -1451,7 +1451,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:11
 msgid "Medium Station"
-msgstr "Stredni stanice"
+msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:12
 msgid ""
@@ -1463,7 +1463,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:17
 msgid "Large Station"
-msgstr "Velka stanice"
+msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:18
 msgid ""
@@ -1476,7 +1476,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:23
 msgid "Huge Station"
-msgstr "Obrovska stanice"
+msgstr ""
 
 #: scripts/shipTemplates_Stations.lua:24
 msgid ""
@@ -1978,22 +1978,22 @@ msgstr "Hloubka skenu:"
 #: scripts/shipTemplates_Corvette.lua:217
 msgctxt "subclass"
 msgid "Support"
-msgstr "Podpurne"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgid "Odin"
-msgstr "Odin"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:9 scripts/shipTemplates_OLD.lua:348
 #: scripts/shipTemplates_OLD.lua:363
 msgctxt "class"
 msgid "Dreadnought"
-msgstr "Bitevní loď"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgctxt "subclass"
 msgid "Odin"
-msgstr "Odin"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:11
 msgid ""
@@ -2033,11 +2033,11 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
 #: scripts/shipTemplates_OLD.lua:470
 msgid "Frigate"
-msgstr "Fregata"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:235
 msgid "Cruiser"
-msgstr "Křižník"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:16
 msgid ""
@@ -2182,7 +2182,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:216
 msgid "Piranha"
-msgstr "Pirana"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:217
 msgid ""
@@ -2254,7 +2254,7 @@ msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:312
 msgid "Light transport"
-msgstr "Lehky transport"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:314
 msgid ""
@@ -2433,10 +2433,9 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:271
-#, fuzzy
 msgctxt "subclass"
 msgid "Gunship"
-msgstr "Bojová loď"
+msgstr ""
 
 msgid ""
 "The gunship is a ship equiped with a homing missile tube to do initial "
@@ -2445,9 +2444,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:284
-#, fuzzy
 msgid "Adv. Gunship"
-msgstr "Pokročilá bojová loď"
+msgstr ""
 
 msgid ""
 "The advanced gunship is a ship equiped with 2 homing missiles to do initial "
@@ -2456,9 +2454,8 @@ msgid ""
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289
-#, fuzzy
 msgid "Strikeship"
-msgstr "Útočná loď"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289 scripts/shipTemplates_OLD.lua:301
 #: scripts/shipTemplates_StarFighters.lua:13
@@ -2468,20 +2465,18 @@ msgid "Starfighter"
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289
-#, fuzzy
 msgctxt "subclass"
 msgid "Strike"
-msgstr "Útočná"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:301
-#, fuzzy
 msgctxt "subclass"
 msgid "Patrol"
-msgstr "Hlídková"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:303
 msgid ""
@@ -2504,7 +2499,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "ship"
 msgid "Dreadnought"
-msgstr "Bitevní loď"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
@@ -2519,11 +2514,11 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:363
 msgid "Battlestation"
-msgstr "Bojová stanice"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:363
 msgid "Battlecruiser"
-msgstr "Bojový křižník"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:365
 msgid ""
@@ -2533,7 +2528,7 @@ msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
-msgstr "Zbranova platforma"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:457
 msgid ""
@@ -2590,7 +2585,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:551
 #, lua-format
 msgid "Transport %dx%d"
-msgstr "Transport %dx%d"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
@@ -2721,7 +2716,7 @@ msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgid "Bomber"
-msgstr "Bombarder"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:123
 msgid ""
@@ -2737,11 +2732,11 @@ msgstr ""
 
 #: scripts/science_db.lua:5
 msgid "Natural"
-msgstr "Prirodni"
+msgstr ""
 
 #: scripts/science_db.lua:6
 msgid "Asteroid"
-msgstr "Asteroid"
+msgstr ""
 
 #: scripts/science_db.lua:7
 msgid ""
@@ -2751,7 +2746,7 @@ msgstr ""
 
 #: scripts/science_db.lua:9
 msgid "Nebula"
-msgstr "Mlhovina"
+msgstr ""
 
 #: scripts/science_db.lua:10
 msgid ""
@@ -2765,7 +2760,7 @@ msgstr ""
 
 #: scripts/science_db.lua:12
 msgid "Black hole"
-msgstr "Cerna dira"
+msgstr ""
 
 #: scripts/science_db.lua:13
 msgid ""
@@ -2784,7 +2779,7 @@ msgstr ""
 
 #: scripts/science_db.lua:17
 msgid "Wormhole"
-msgstr "Cervi dira"
+msgstr ""
 
 #: scripts/science_db.lua:18
 msgid ""
@@ -2804,7 +2799,7 @@ msgstr ""
 
 #: scripts/science_db.lua:22
 msgid "Weapons"
-msgstr "Zbrane"
+msgstr ""
 
 #: scripts/science_db.lua:23
 msgid ""
@@ -2825,7 +2820,7 @@ msgstr ""
 
 #: scripts/science_db.lua:29
 msgid "Homing missile"
-msgstr "Navadena strela"
+msgstr ""
 
 #: scripts/science_db.lua:32
 msgid ""
@@ -2859,7 +2854,7 @@ msgstr ""
 
 #: scripts/science_db.lua:53
 msgid "EMP"
-msgstr "EMP"
+msgstr ""
 
 #: scripts/science_db.lua:58
 msgid ""
@@ -3680,7 +3675,7 @@ msgstr "Poskozeni"
 
 #: scripts/science_db.lua:34
 msgid "Nuke"
-msgstr "Jaderna strela"
+msgstr ""
 
 #: scripts/science_db.lua:36 scripts/science_db.lua:46
 #: scripts/science_db.lua:55
@@ -3699,7 +3694,7 @@ msgstr "Pozkozeni na okraji"
 
 #: scripts/science_db.lua:43
 msgid "Mine"
-msgstr "Mina"
+msgstr ""
 
 #: scripts/science_db.lua:44
 msgid "Drop distance"
