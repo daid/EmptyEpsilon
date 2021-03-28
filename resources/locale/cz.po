@@ -425,7 +425,7 @@ msgstr "Spustit scenar"
 #: src/menus/serverCreationScreen.cpp:235
 msgctxt "variation"
 msgid "None"
-msgstr "Zadna"
+msgstr ""
 
 msgid "No variation."
 msgstr "Zadne varianty."
@@ -1263,7 +1263,7 @@ msgstr "Pratelske"
 #: src/scienceDatabase.cpp:344
 msgctxt "database"
 msgid "Ships"
-msgstr "Lode"
+msgstr ""
 
 #: src/scienceDatabase.cpp:379
 msgctxt "database"
@@ -1565,7 +1565,7 @@ msgstr "Lodni denik"
 
 #: src/shipTemplate.cpp:123
 msgid "No class"
-msgstr "Zadna trida"
+msgstr ""
 
 #: src/shipTemplate.cpp:124
 msgid "No sub-class"
