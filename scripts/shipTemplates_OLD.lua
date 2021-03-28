@@ -3,7 +3,7 @@ These are older ship templates, going to be replaced soon.
 ----------------------------------------------------------]]
 
 --[[ Player ships --]]
-template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("shipP", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("playerShip", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
 template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
@@ -59,7 +59,7 @@ template:addDoor(8, 4, false);
 --template:addDoor(2, 2, false);
 --template:addDoor(2, 5, false);
 
-template = ShipTemplate():setName("Player Missile Cr."):setLocaleName(_("shipP", "Player Missile Cr.")):setModel("space_cruiser_4"):setType("playership")
+template = ShipTemplate():setName("Player Missile Cr."):setLocaleName(_("playerShip", "Player Missile Cr.")):setModel("space_cruiser_4"):setType("playership")
 template:setRadarTrace("radar_missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 --Setup 7 tubes. 2 forward for any type of missile, and 2 on each side of the ship and 1 in the rear. The side tubes are exclusive for homing missiles. The rear is exclusive for mines.
@@ -113,7 +113,7 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
-template = ShipTemplate():setName("Player Fighter"):setLocaleName(_("shipP", "Player Fighter")):setModel("small_fighter_1"):setType("playership")
+template = ShipTemplate():setName("Player Fighter"):setLocaleName(_("playerShip", "Player Fighter")):setModel("small_fighter_1"):setType("playership")
 template:setRadarTrace("radar_fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
@@ -170,7 +170,7 @@ template:setDescription(_([[The tugboat is a reliable, but small and un-armed tr
     -- Bomber mine
 
 -- Mine ship --
-variation = template:copy("Nautilus"):setLocaleName(_("shipP", "Nautilus")):setType("playership"):setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
+variation = template:copy("Nautilus"):setLocaleName(_("playerShip", "Nautilus")):setType("playership"):setClass(_("class", "Frigate"), _("subclass", "Mine Layer"))
 variation:setDescription(_("Small mine laying vessel with minimal armament, shields and hull"))
 variation:setShields(60,60)
 variation:setHull(100)
@@ -309,7 +309,7 @@ template:setShields(50, 30)
 template:setSpeed(45, 12, 15)
 template:setJumpDrive(true)
 
-variation = template:copy("Striker"):setLocaleName(_("shipP", "Striker")):setType("playership")
+variation = template:copy("Striker"):setLocaleName(_("playerShip", "Striker")):setType("playership")
 variation:setDescription(_("The Striker is the predecessor to the advanced striker, slow but agile, but does not do an extreme amount of damage, and lacks in shields"))
 variation:setBeam(0, 10,-15, 1000.0, 6.0, 6)
 variation:setBeam(1, 10, 15, 1000.0, 6.0, 6)
@@ -383,7 +383,7 @@ template:setJumpDrive(true)
 template:setDockClasses("Starfighter", "Frigate", "Corvette")
 template:setSharesEnergyWithDocked(true)
 
-variation = template:copy("Ender"):setType("playership"):setLocaleName(_("shipP", "Ender"))
+variation = template:copy("Ender"):setType("playership"):setLocaleName(_("playerShip", "Ender"))
 --                  Arc, Dir, Range, CycleTime, Dmg
 variation:setBeam(0, 10, -90, 2500.0, 6.1, 4)
 variation:setBeam(1, 10, -90, 2500.0, 6.0, 4)
