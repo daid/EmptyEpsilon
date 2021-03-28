@@ -240,9 +240,9 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         if (selected_system != SYS_None)
         {
             ShipSystem& system = my_spaceship->systems[selected_system];
-            power_label->setText(tr("slider", "Power: {percent1}% / {percent2}%").format({{"percent1", toNearbyIntString(system.power_level * 100)}, {"percent2", toNearbyIntString(system.power_request * 100)}}));
+            power_label->setText(tr("slider", "Power: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system.power_level * 100)}, {"requested", toNearbyIntString(system.power_request * 100)}}));
             power_slider->setValue(system.power_request);
-            coolant_label->setText(tr("slider", "Coolant: {percent1}% / {percent2}%").format({{"percent1", toNearbyIntString(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)}, {"percent2", toNearbyIntString(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)}}));
+            coolant_label->setText(tr("slider", "Coolant: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)}, {"requested", toNearbyIntString(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)}}));
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
             coolant_slider->setValue(std::min(system.coolant_request, my_spaceship->max_coolant));
 
