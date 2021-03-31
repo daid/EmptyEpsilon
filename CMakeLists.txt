@@ -327,11 +327,11 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        seriousproton glm::glm
         "$<$<BOOL:${ANDROID}>:GLESv1_CM;log;android;EGL>"
         "$<$<BOOL:${WIN32}>:iphlpapi;discord>"
         "$<$<NOT:$<BOOL:${ANDROID}>>:${OPENGL_LIBRARIES}>"
         "$<$<PLATFORM_ID:Darwin>:-framework OpenGL;-framework Foundation>"
+        seriousproton glm::glm
 )
 
 set_target_properties(${PROJECT_NAME}
