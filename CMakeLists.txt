@@ -280,9 +280,11 @@ set(SOURCES
     src/hardware/devices/uDMXDevice.cpp
     src/hardware/devices/virtualOutputDevice.cpp
     src/hardware/devices/philipsHueDevice.cpp
-
-    $<$<BOOL:${WIN32}>:EmptyEpsilon.rc;src/discord.cpp>
 )
+
+if (WIN32)
+  list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
+endif()
 
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED ${SOURCES})
