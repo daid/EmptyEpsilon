@@ -354,8 +354,11 @@ if(WIN32)
 
     install(FILES "${DISCORD_DLL}" DESTINATION .)
 
-    # Not all configuration emit a pdb (ie Release), make this optional.
-    install(FILES "$<$<BOOL:${MSVC}>:$<TARGET_PDB_FILE:${PROJECT_NAME}>>" DESTINATION . OPTIONAL)
+    
+    if(MSVC)
+      # Not all configuration emit a pdb (ie Release), make this optional.
+      install(FILES "$<TARGET_PDB_FILE:${PROJECT_NAME}>" DESTINATION . OPTIONAL)
+    endif()
 elseif(APPLE)
   install(FILES logo.icns DESTINATION "${PROJECT_NAME}.app/Contents/Resources" RENAME "${PROJECT_NAME}.icns")
   install(DIRECTORY ${EE_RESOURCES} DESTINATION "${PROJECT_NAME}.app/Contents/Resources")
