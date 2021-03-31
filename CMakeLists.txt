@@ -79,9 +79,11 @@ endif()
 # GLM
 set(GLM_BASE_PATH "${EXTERNALS_DIR}")
 
-if(NOT EXISTS "${GLM_BASE_PATH}/glm")
+if(NOT EXISTS "${GLM_BASE_PATH}/glm/CMakeLists.txt")
   set(GLM_ZIP "${DOWNLOADS_DIR}/glm.zip")
   file(DOWNLOAD "https://github.com/g-truc/glm/releases/download/0.9.9.8/glm-0.9.9.8.zip" "${GLM_ZIP}" TIMEOUT 60 TLS_VERIFY ON)
+
+  file(MAKE_DIRECTORY "${GLM_BASE_PATH}/glm")
   execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${GLM_ZIP}" WORKING_DIRECTORY "${GLM_BASE_PATH}")
 endif()
 
@@ -353,7 +355,7 @@ if(WIN32)
     install(FILES "${DISCORD_DLL}" DESTINATION .)
 
     # Not all configuration emit a pdb (ie Release), make this optional.
-    install(FILES "$<TARGET_PDB_FILE:${PROJECT_NAME}>" DESTINATION . OPTIONAL)
+    install(FILES "$<$<BOOL:${MSVC}>:$<TARGET_PDB_FILE:${PROJECT_NAME}>>" DESTINATION . OPTIONAL)
 elseif(APPLE)
   install(FILES logo.icns DESTINATION "${PROJECT_NAME}.app/Contents/Resources" RENAME "${PROJECT_NAME}.icns")
   install(DIRECTORY ${EE_RESOURCES} DESTINATION "${PROJECT_NAME}.app/Contents/Resources")
