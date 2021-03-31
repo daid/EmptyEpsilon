@@ -406,6 +406,9 @@ if(NOT DEFINED CPACK_GENERATOR)
   endif()
 endif()
 
+# Setup install targets:
+# - For EE, we use everything that's been provided with install command.
+# - For SP, we use only the things having the 'runtime' component (ie shared libs).
 set(CPACK_INSTALL_CMAKE_PROJECTS
     "${PROJECT_BINARY_DIR};${PROJECT_NAME};ALL;/"
     "${PROJECT_BINARY_DIR}/SeriousProton;SeriousProton;runtime;/"
