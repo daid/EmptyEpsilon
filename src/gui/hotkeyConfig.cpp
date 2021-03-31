@@ -3,8 +3,6 @@
 #include "preferenceManager.h"
 #include "shipTemplate.h"
 
-HotkeyConfig hotkeys;
-
 HotkeyConfig::HotkeyConfig()
 {  // this list includes all Hotkeys and their standard configuration
     newCategory("BASIC", "Basic"); // these Items should all have predefined values
@@ -245,9 +243,9 @@ static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
     {"Pause", sf::Keyboard::Pause},
 };
 
-string HotkeyConfig::getStringForKey(sf::Keyboard::Key key)
+string HotkeyConfig::getStringForKey(const sf::Keyboard::Key& key) const
 {
-    for(auto key_name : sfml_key_names)
+    for(const auto& key_name : sfml_key_names)
     {
         if (key_name.second == key)
         {
@@ -256,6 +254,12 @@ string HotkeyConfig::getStringForKey(sf::Keyboard::Key key)
     }
 
     return "";
+}
+
+HotkeyConfig& HotkeyConfig::get()
+{
+    static HotkeyConfig hotkeys;
+    return hotkeys;
 }
 
 void HotkeyConfig::load()
@@ -271,12 +275,12 @@ void HotkeyConfig::load()
     }
 }
 
-std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
+std::vector<HotkeyResult> HotkeyConfig::getHotkey(const sf::Event::KeyEvent& key) const
 {
     std::vector<HotkeyResult> results;
-    for(HotkeyConfigCategory& cat : categories)
+    for(const HotkeyConfigCategory& cat : categories)
     {
-        for(HotkeyConfigItem& item : cat.hotkeys)
+        for(const HotkeyConfigItem& item : cat.hotkeys)
         {
             if (item.hotkey.code == key.code && item.hotkey.alt == key.alt && item.hotkey.control == key.control && item.hotkey.shift == key.shift && item.hotkey.system == key.system)
             {
@@ -287,41 +291,43 @@ std::vector<HotkeyResult> HotkeyConfig::getHotkey(sf::Event::KeyEvent key)
     return results;
 }
 
-void HotkeyConfig::newCategory(string key, string name)
+void HotkeyConfig::newCategory(const string& key, const string& name)
 {
-    categories.emplace_back();
-    categories.back().key = key;
-    categories.back().name = name;
+    categories.emplace_back(HotkeyConfigCategory{ key, name });
 }
 
-void HotkeyConfig::newKey(string key, std::tuple<string, string> value)
+void HotkeyConfig::newKey(const string& key, const std::tuple<string, string>& value)
 {
-    categories.back().hotkeys.emplace_back(key, value);
+    assert(!categories.empty());
+
+    if (!categories.empty())
+        categories.back().hotkeys.emplace_back(key, value);
 }
 
-std::vector<string> HotkeyConfig::getCategories()
+std::vector<string> HotkeyConfig::getCategories() const
 {
     // Initialize return value.
     std::vector<string> ret;
+    ret.reserve(categories.size());
 
     // Add each category to the return value.
-    for(HotkeyConfigCategory& cat : categories)
+    for(const HotkeyConfigCategory& cat : categories)
     {
-        ret.push_back(cat.name);
+        ret.emplace_back(cat.name);
     }
 
     return ret;
 }
 
-std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(string hotkey_category)
+std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(const string& hotkey_category) const
 {
     std::vector<std::pair<string, string>> ret;
 
-    for(HotkeyConfigCategory& cat : categories)
+    for(const HotkeyConfigCategory& cat : categories)
     {
         if (cat.name == hotkey_category)
         {
-            for(HotkeyConfigItem& item : cat.hotkeys)
+            for(const HotkeyConfigItem& item : cat.hotkeys)
             {
                 for(auto key_name : sfml_key_names)
                 {
@@ -345,15 +351,15 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(strin
     return ret;
 }
 
-std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(string hotkey_category)
+std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(const string& hotkey_category) const
 {
     std::vector<std::pair<string, string>> ret;
 
-    for(HotkeyConfigCategory& cat : categories)
+    for(const HotkeyConfigCategory& cat : categories)
     {
         if (cat.name == hotkey_category)
         {
-            for(HotkeyConfigItem& item : cat.hotkeys)
+            for(const HotkeyConfigItem& item : cat.hotkeys)
             {
                 ret.push_back({std::get<0>(item.value), std::get<1>(item.value)});
             }
@@ -363,13 +369,13 @@ std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(st
     return ret;
 }
 
-sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(string hotkey_category, string hotkey_name)
+sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const
 {
-    for(HotkeyConfigCategory& cat : categories)
+    for(const HotkeyConfigCategory& cat : categories)
     {
         if (cat.key == hotkey_category)
         {
-            for(HotkeyConfigItem& item : cat.hotkeys)
+            for(const HotkeyConfigItem& item : cat.hotkeys)
             {
                 if (item.key == hotkey_name)
                 {
@@ -383,18 +389,12 @@ sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(string hotkey_category, string ho
     return sf::Keyboard::KeyCount;
 }
 
-HotkeyConfigItem::HotkeyConfigItem(string key, std::tuple<string, string> value)
+HotkeyConfigItem::HotkeyConfigItem(const string& key, const std::tuple<string, string>& value)
+    :key{key}, value{value}, hotkey{sf::Keyboard::KeyCount, false, false, false, false}
 {
-    this->key = key;
-    this->value = value;
-    hotkey.code = sf::Keyboard::KeyCount;
-    hotkey.alt = false;
-    hotkey.control = false;
-    hotkey.shift = false;
-    hotkey.system = false;
 }
 
-void HotkeyConfigItem::load(string key_config)
+void HotkeyConfigItem::load(const string& key_config)
 {
     for(const string& config : key_config.split(";"))
     {
@@ -420,10 +420,10 @@ void HotkeyConfigItem::load(string key_config)
     }
 }
 
-bool HotkeyConfig::setHotkey(std::string work_cat, std::pair<string,string> key, string new_value)
+bool HotkeyConfig::setHotkey(const std::string& work_cat, const std::pair<string,string>& key, const string& new_value)
 {
     // test if new_value is part of the sfml_list
-    for (std::pair<string, sf::Keyboard::Key> sfml_key : sfml_key_names)
+    for (const auto& sfml_key : sfml_key_names)
     {
         if ((sfml_key.first.lower() == new_value.lower()) || new_value == "")
         {
