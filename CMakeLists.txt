@@ -322,7 +322,6 @@ endif()
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
-        $<$<NOT:$<BOOL:${ANDROID}>>:${OPENGL_INCLUDE_DIR}>
 )
 
 add_library(opengl INTERFACE)
