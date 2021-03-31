@@ -325,13 +325,20 @@ target_include_directories(${PROJECT_NAME}
         $<$<NOT:$<BOOL:${ANDROID}>>:${OPENGL_INCLUDE_DIR}>
 )
 
+add_library(opengl INTERFACE)
+target_link_libraries(opengl
+  INTERFACE
+  "$<$<BOOL:${ANDROID}>:GLESv1_CM;EGL>"
+  "$<$<NOT:$<BOOL:${ANDROID}>>:OpenGL::GL>"
+)
+
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        "$<$<BOOL:${ANDROID}>:GLESv1_CM;log;android;EGL>"
+        seriousproton glm::glm opengl
+        "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WIN32}>:iphlpapi;discord>"
-        "$<$<NOT:$<BOOL:${ANDROID}>>:${OPENGL_LIBRARIES}>"
-        "$<$<PLATFORM_ID:Darwin>:-framework OpenGL;-framework Foundation>"
-        seriousproton glm::glm
+        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"
+        
 )
 
 set_target_properties(${PROJECT_NAME}
