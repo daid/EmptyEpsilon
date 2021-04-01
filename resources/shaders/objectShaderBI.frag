@@ -17,5 +17,5 @@ void main()
 	vec4 base = texture2D(baseMap, gl_TexCoord[0].st);
 	vec4 illumination = texture2D(illuminationMap, gl_TexCoord[0].st);
 	
-	gl_FragColor = (base - illumination) * intensity) + illumination;
+	gl_FragColor = (base - illumination) * intensity + illumination;
 }
