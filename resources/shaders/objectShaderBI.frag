@@ -6,7 +6,6 @@ const vec4 light_position = vec4(20000., 20000., 20000., 1.0);
 // Program inputs
 uniform sampler2D baseMap;
 uniform sampler2D illuminationMap;
-uniform vec4 color;
 
 // Per-fragment inputs
 varying vec3 fragnormal;

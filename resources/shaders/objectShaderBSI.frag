@@ -9,8 +9,6 @@ uniform sampler2D baseMap;
 uniform sampler2D specularMap;
 uniform sampler2D illuminationMap;
 
-uniform vec4 color;
-
 // Per-fragment inputs
 varying vec3 fragnormal;
 varying vec3 viewspace_position;
