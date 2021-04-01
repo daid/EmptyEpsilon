@@ -17,7 +17,7 @@ void main()
 	vec3 lightDir = normalize(vec3(light_position) - viewspace_position);
 	float intensity = max(0.1, dot(lightDir, fragnormal));
 	
-	vec3 base = texture2D(baseMap, fragtexcoords.st).rgb;
+	vec4 base = texture2D(baseMap, fragtexcoords.st);
 	
-	gl_FragColor = vec4((base * intensity), color.a);
+	gl_FragColor = (base * intensity);
 }

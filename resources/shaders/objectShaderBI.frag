@@ -19,8 +19,8 @@ void main()
 	vec3 n = fragnormal;
 	float intensity = max(0.1, dot(lightDir, n));
 	
-	vec3 base = texture2D(baseMap, fragtexcoords.st).rgb;
-	vec3 illumination = texture2D(illuminationMap, fragtexcoords.st).rgb;
+	vec4 base = texture2D(baseMap, fragtexcoords.st);
+	vec4 illumination = texture2D(illuminationMap, fragtexcoords.st);
 	
-	gl_FragColor = vec4(((base - illumination) * intensity) + illumination, color.a);
+	gl_FragColor = (base - illumination) * intensity) + illumination;
 }

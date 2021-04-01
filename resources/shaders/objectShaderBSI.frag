@@ -25,11 +25,9 @@ void main()
 	float intensity = max(0.1, dot(lightDir, n));
 	float specularIntensity = min(1.0, pow(max(0.0, dot(lightDir2, n)) * 1.2, 20.0));
 	
-	vec3 base = texture2D(baseMap, fragtexcoords.st).rgb;
-	vec3 illumination = texture2D(illuminationMap, fragtexcoords.st).rgb;
-	vec3 specular = texture2D(specularMap, fragtexcoords.st).rgb;
+	vec4 base = texture2D(baseMap, fragtexcoords.st);
+	vec4 illumination = texture2D(illuminationMap, fragtexcoords.st);
+	vec4 specular = texture2D(specularMap, fragtexcoords.st);
 	
-	gl_FragColor = vec4(((base - illumination) * intensity) + (specular * specularIntensity) + illumination, color.a);
-	//gl_FragColor = vec4(base, gl_Color.a);
-	//gl_FragColor = vec4(specular * specularIntensity, gl_Color.a);
+	gl_FragColor = ((base - illumination) * intensity) + (specular * specularIntensity) + illumination;
 }
