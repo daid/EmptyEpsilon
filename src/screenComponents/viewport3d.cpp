@@ -416,19 +416,19 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(billboard.get().attribute(ShaderRegistry::Attributes::Texcoords));
             auto vertices = {
-                uint8_t(0), uint8_t(0), uint8_t(0),
-                uint8_t(0), uint8_t(0), uint8_t(0),
-                uint8_t(0), uint8_t(0), uint8_t(0),
-                uint8_t(0), uint8_t(0), uint8_t(0)
+                0.f, 0.f, 0.f,
+                0.f, 0.f, 0.f,
+                0.f, 0.f, 0.f,
+                0.f, 0.f, 0.f
             };
-            glVertexAttribPointer(positions.get(), 3, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)vertices.begin());
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)vertices.begin());
             auto coords = {
-                uint8_t(0), uint8_t(0),
-                uint8_t(1), uint8_t(0),
-                uint8_t(1), uint8_t(1),
-                uint8_t(0), uint8_t(1)
+                0.f, 0.f,
+                1.f, 0.f,
+                1.f, 1.f,
+                0.f, 1.f
             };
-            glVertexAttribPointer(texcoords.get(), 2, GL_UNSIGNED_BYTE, GL_FALSE, 0, (GLvoid*)coords.begin());
+            glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)coords.begin());
             std::initializer_list<uint8_t> indices{ 0, 1, 2, 2, 3, 0 };
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
         }
