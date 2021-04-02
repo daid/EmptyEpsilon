@@ -35,6 +35,7 @@ public:
 #endif
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
     virtual void update(float delta);
+    void destroy() override;
 
     void setSize(float size) { this->size = size; }
     void setExplosionSound(string sound) { this->explosion_sound = sound; }

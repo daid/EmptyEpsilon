@@ -109,7 +109,7 @@ void CommsScriptInterface::setCommsMessage(string message)
 
 void CommsScriptInterface::addCommsReply(string message, ScriptSimpleCallback callback)
 {
-    comms_script_interface->ship->addCommsReply(reply_callbacks.size(), message);
+    comms_script_interface->ship->addCommsReply(static_cast<int32_t>(reply_callbacks.size()), message);
     reply_callbacks.push_back(callback);
 }
 

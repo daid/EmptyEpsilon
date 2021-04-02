@@ -46,6 +46,7 @@ public:
 #endif
     virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
+    void destroy() override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
     virtual bool canRestockMissiles() override { return restocks_missiles_docked; }

@@ -277,7 +277,7 @@ bool WeaponTube::isFiring()
 
 float WeaponTube::getLoadProgress()
 {
-    return 1.0 - delay / load_time;
+    return 1.f - delay / load_time;
 }
 
 float WeaponTube::getUnloadProgress()
@@ -315,7 +315,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
     sf::Vector2f target_velocity = target->getVelocity();
     float target_velocity_length = sf::length(target_velocity);
     float missile_angle = sf::vector2ToAngle(target_position - parent->getPosition());
-    float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
+    float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * static_cast<float>(M_PI));
     float missile_exit_angle = parent->getRotation() + direction;
 
     for(int iterations=0; iterations<10; iterations++)
@@ -347,7 +347,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
             float time_target = sf::length((target_position - intersection)) / target_velocity_length;
             float time_missile = sf::length(turn_exit - intersection) / data.speed + turn_time;
             //Calculate the time in which the radius will be on the intersection, to know in which time range we need to hit.
-            float time_radius = (target->getRadius() / 2.0) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
+            float time_radius = (target->getRadius() / 2.f) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
             // When both the missile and the target are at the same position at the same time, we can take a shot!
             if (fabsf(time_target - time_missile) < time_radius)
                 return missile_angle;

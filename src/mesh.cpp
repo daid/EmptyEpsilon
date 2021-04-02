@@ -29,7 +29,7 @@ Mesh::Mesh(std::vector<MeshVertex>& vertices)
 {
     this->vertices = new MeshVertex[vertices.size()];
     memcpy(this->vertices, vertices.data(), sizeof(MeshVertex) * vertices.size());
-    vertexCount = vertices.size();
+    vertexCount = static_cast<int32_t>(vertices.size());
     vbo = NO_BUFFER;
 }
 
@@ -173,7 +173,7 @@ Mesh* Mesh::getMesh(string filename)
                 }
             }
         }while(stream->tell() < stream->getSize());
-        ret->vertexCount = indices.size();
+        ret->vertexCount = static_cast<int32_t>(indices.size());
         ret->vertices = new MeshVertex[indices.size()];
         for(unsigned int n=0; n<indices.size(); n++)
         {
@@ -184,7 +184,7 @@ Mesh* Mesh::getMesh(string filename)
             ret->vertices[n].normal[1] = normals[indices[n].n].z;
             ret->vertices[n].normal[2] = normals[indices[n].n].y;
             ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
-            ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
+            ret->vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
         }
     }else if (filename.endswith(".model"))
     {

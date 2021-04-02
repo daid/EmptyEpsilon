@@ -38,7 +38,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
     float sy = window.getSize().y * window.getView().getViewport().height / window.getView().getSize().y;
-    glViewport(rect.left * sx, (float(window.getView().getSize().y) - rect.height - rect.top) * sx, rect.width * sx, rect.height * sy);
+    glViewport(static_cast<GLint>(rect.left * sx), static_cast<GLint>((float(window.getView().getSize().y) - rect.height - rect.top) * sx), static_cast<GLsizei>(rect.width * sx), static_cast<GLsizei>(rect.height * sy));
 
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT);

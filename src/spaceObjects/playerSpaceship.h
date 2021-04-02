@@ -38,9 +38,9 @@ public:
     constexpr static float energy_shield_use_per_second = 1.5f;
     constexpr static float energy_warp_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
-    constexpr static float system_power_level_change_per_second = 0.3;
+    constexpr static float system_power_level_change_per_second = 0.3f;
     // Coolant change rate
-    constexpr static float system_coolant_level_change_per_second = 1.2;
+    constexpr static float system_coolant_level_change_per_second = 1.2f;
     // Total coolant
     constexpr static float max_coolant_per_system = 10.0f;
     float max_coolant;
@@ -48,9 +48,9 @@ public:
     constexpr static float damage_per_second_on_overheat = 0.08f;
     // Base time it takes to perform an action
     constexpr static float shield_calibration_time = 25.0f;
-    constexpr static float comms_channel_open_time = 2.0;
+    constexpr static float comms_channel_open_time = 2.f;
     constexpr static float scan_probe_charge_time = 10.0f;
-    constexpr static float max_scanning_delay = 6.0;
+    constexpr static float max_scanning_delay = 6.f;
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
 
@@ -327,7 +327,7 @@ public:
     void setShieldsActive(bool active) { shields_active = active; }
 
     // Waypoint functions
-    int getWaypointCount() { return waypoints.size(); }
+    int getWaypointCount() { return static_cast<int>(waypoints.size()); }
     sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
 
     // Ship control code/password setter

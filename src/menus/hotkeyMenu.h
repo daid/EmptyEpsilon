@@ -20,16 +20,16 @@ class GuiHotkeyBinder;
 class HotkeyMenu : public GuiCanvas
 {
 private:
-    const int ROW_HEIGHT = 50;
-    const int FRAME_MARGIN = 50;
-    const int KEY_LABEL_WIDTH = 375;
-    const int KEY_FIELD_WIDTH = 125;
-    const int KEY_LABEL_MARGIN = 25;
-    const int KEY_COLUMN_TOP = ROW_HEIGHT * 2;
-    const int KEY_ROW_COUNT = 10;
-    const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
-    const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
-    const int PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
+    static constexpr float ROW_HEIGHT = 50.f;
+    static constexpr float FRAME_MARGIN = 50.f;
+    static constexpr float KEY_LABEL_WIDTH = 375.f;
+    static constexpr float KEY_FIELD_WIDTH = 125.f;
+    static constexpr float KEY_LABEL_MARGIN = 25.f;
+    static constexpr float KEY_COLUMN_TOP = ROW_HEIGHT * 2;
+    static constexpr int KEY_ROW_COUNT = 10;
+    static constexpr float KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
+    static constexpr float KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
+    static constexpr float PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
 
     GuiElement* container;
     GuiElement* top_row;

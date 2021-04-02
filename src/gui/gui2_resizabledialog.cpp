@@ -79,7 +79,7 @@ void GuiResizableDialog::onDraw(sf::RenderTarget& window)
 
     sf::Sprite image;
     textureManager.setTexture(image, "gui/ResizeDialogCorner");
-    image.setPosition(rect.left + rect.width - resize_icon_size / 2.0, rect.top + rect.height - resize_icon_size / 2.0);
+    image.setPosition(rect.left + rect.width - resize_icon_size / 2.f, rect.top + rect.height - resize_icon_size / 2.f);
     float f = resize_icon_size / float(image.getTextureRect().height);
     image.setScale(f, f);
     image.setColor(sf::Color::White);

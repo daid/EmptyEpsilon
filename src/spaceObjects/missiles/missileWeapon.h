@@ -25,6 +25,7 @@ public:
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
     virtual void update(float delta) override;
+    void destroy() override;
 
     virtual void collide(Collisionable* target, float force) override;
     virtual void takeDamage(float damage_amount, DamageInfo info) override {

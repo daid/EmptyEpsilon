@@ -47,7 +47,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
-    registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&elapsed_time, 0.1f);
 
     for(unsigned int n=0; n<factionInfo.size(); n++)
         reputation_points.push_back(0);
@@ -225,8 +225,8 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
 string getSectorName(sf::Vector2f position)
 {
     constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
+    int sector_x = static_cast<int32_t>(floorf(position.x / sector_size) + 5);
+    int sector_y = static_cast<int32_t>(floorf(position.y / sector_size) + 5);
     string y;
     string x;
     if (sector_y >= 0)
@@ -242,8 +242,8 @@ string getSectorName(sf::Vector2f position)
 
 int getSectorName(lua_State* L)
 {
-    float x = luaL_checknumber(L, 1);
-    float y = luaL_checknumber(L, 2);
+    auto x = static_cast<float>(luaL_checknumber(L, 1));
+    auto y = static_cast<float>(luaL_checknumber(L, 2));
     lua_pushstring(L, getSectorName(sf::Vector2f(x, y)).c_str());
     return 1;
 }
@@ -295,7 +295,7 @@ REGISTER_SCRIPT_FUNCTION(getScenarioTime);
 
 static int getPlayerShip(lua_State* L)
 {
-    int index = luaL_checkinteger(L, 1);
+    auto index = static_cast<int32_t>(luaL_checkinteger(L, 1));
     if (index == -1)
     {
         for(index = 0; index<GameGlobalInfo::max_player_ships; index++)
@@ -339,9 +339,9 @@ REGISTER_SCRIPT_FUNCTION(getActivePlayerShips);
 
 static int getObjectsInRadius(lua_State* L)
 {
-    float x = luaL_checknumber(L, 1);
-    float y = luaL_checknumber(L, 2);
-    float r = luaL_checknumber(L, 3);
+    auto x = static_cast<float>(luaL_checknumber(L, 1));
+    auto y = static_cast<float>(luaL_checknumber(L, 2));
+    auto r = static_cast<float>(luaL_checknumber(L, 3));
 
     sf::Vector2f position(x, y);
 

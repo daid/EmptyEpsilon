@@ -39,7 +39,7 @@ void GuiScrollText::onDraw(sf::RenderTarget& window)
     }
     if (start_pos > 0)
         wrap.text = wrap.text.substr(start_pos);
-    int max_lines = rect.height / main_font->getLineSpacing(text_size);
+    auto max_lines = static_cast<int32_t>(rect.height / main_font->getLineSpacing(static_cast<uint32_t>(text_size)));
     if (wrap.line_count - scrollbar->getValue() > max_lines)
     {
         int end_pos = 0;

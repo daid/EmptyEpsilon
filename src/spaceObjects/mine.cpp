@@ -26,13 +26,18 @@ Mine::Mine()
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
     particleTimeout = 0.0;
-    setRadarSignatureInfo(0.0, 0.05, 0.0);
+    setRadarSignatureInfo(0.f, 0.05f, 0.f);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
 }
 
 Mine::~Mine()
 {
+}
+
+void Mine::destroy()
+{
+    SpaceObject::destroy();
 }
 
 void Mine::draw3D()
@@ -49,7 +54,7 @@ void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     textureManager.setTexture(objectSprite, "RadarBlip.png");
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
-    objectSprite.setScale(0.3, 0.3);
+    objectSprite.setScale(0.3f, 0.3f);
     window.draw(objectSprite);
 }
 
@@ -75,10 +80,10 @@ void Mine::update(float delta)
     }else{
         sf::Vector3f pos = sf::Vector3f(getPosition().x, getPosition().y, 0);
         ParticleEngine::spawn(pos, pos + sf::Vector3f(random(-100, 100), random(-100, 100), random(-100, 100)), sf::Vector3f(1, 1, 1), sf::Vector3f(0, 0, 1), 30, 0, 10.0);
-        particleTimeout = 0.4;
+        particleTimeout = 0.4f;
     }
 
-    if (ejectTimeout > 0.0)
+    if (ejectTimeout > 0.f)
     {
         ejectTimeout -= delta;
         setVelocity(sf::vector2FromAngle(getRotation()) * data.speed);
@@ -119,7 +124,7 @@ void Mine::explode()
     e->setSize(blastRange);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    e->setRadarSignatureInfo(0.0, 0.0, 0.2);
+    e->setRadarSignatureInfo(0.f, 0.f, 0.2f);
 
     if (on_destruction.isSet())
     {

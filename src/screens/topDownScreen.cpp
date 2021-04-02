@@ -60,9 +60,9 @@ void TopDownScreen::update(float delta)
 
     // Enable mouse wheel zoom.
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    if (mouse_wheel_delta != 0.f)
     {
-        camera_position.z = camera_position.z * (1.0 - (mouse_wheel_delta) * 0.1f);
+        camera_position.z = camera_position.z * (1.f - (mouse_wheel_delta) * 0.1f);
         if (camera_position.z > 10000)
             camera_position.z = 10000;
         if (camera_position.z < 1000)

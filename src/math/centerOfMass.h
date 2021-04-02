@@ -3,16 +3,16 @@
 
 template<typename T> T polygonArea(const std::vector<sf::Vector2<T>>& path)
 {
-    int size = path.size();
+    auto size = path.size();
     if (size < 3) return 0;
 
     T a = 0;
-    for(int i=0, j=size-1; i<size; i++)
+    for(size_t i=0, j=size-1; i<size; i++)
     {
         a += (path[j].x + path[i].x) * (path[j].y - path[i].y);
         j = i;
     }
-    return std::abs(a * 0.5);
+    return std::abs(a / 2);
 }
 
 
@@ -23,17 +23,17 @@ template<typename T> sf::Vector2<T> centerOfMass(const std::vector<sf::Vector2<T
     for(unsigned int n=0; n<path.size(); n++)
     {
         sf::Vector2<T> p1 = path[n];
-        double second_factor = (p0.x * p1.y) - (p1.x * p0.y);
+        auto second_factor = (p0.x * p1.y) - (p1.x * p0.y);
 
-        x += double(p0.x + p1.x) * second_factor;
-        y += double(p0.y + p1.y) * second_factor;
+        x += (p0.x + p1.x) * second_factor;
+        y += (p0.y + p1.y) * second_factor;
         p0 = p1;
     }
 
-    double area = polygonArea(path);
+    auto area = polygonArea(path);
     x = x / 6 / area;
     y = y / 6 / area;
-    return sf::Vector2<T>(x, y);
+    return {x, y};
 }
 
 //Check if we are inside the polygon. We do this by tracing from the point towards the negative X direction,

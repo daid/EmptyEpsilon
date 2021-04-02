@@ -24,23 +24,23 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                 f = frequencyVsFrequencyDamageFactor(frequency, n);
             else
                 f = frequencyVsFrequencyDamageFactor(n, frequency);
-            f = Tween<float>::linear(f, 0.5, 1.5, 0.1, 1.0);
+            f = Tween<float>::linear(f, 0.5f, 1.5f, 0.1f, 1.f);
             float h = (rect.height - 50) * f;
-            sf::RectangleShape bar(sf::Vector2f(w * 0.8, h));
+            sf::RectangleShape bar(sf::Vector2f(w * 0.8f, h));
             bar.setPosition(x, rect.top + rect.height - 10 - h);
             if (more_damage_is_positive)
-                bar.setFillColor(sf::Color(255 * (1.0 - f), 255 * f, 0));
+                bar.setFillColor(sf::Color(static_cast<sf::Uint8>(255 * (1.f - f)), static_cast<sf::Uint8>(255 * f), 0));
             else
-                bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
+                bar.setFillColor(sf::Color(static_cast<sf::Uint8>(255 * f), static_cast<sf::Uint8>(255 * (1.f - f)), 0));
             window.draw(bar);
 
             if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
             {
                 sf::Sprite image;
                 textureManager.setTexture(image, "gui/SelectorArrow");
-                image.setPosition(x + w / 2.0, rect.top + rect.height - 20 - h);
+                image.setPosition(x + w / 2.f, rect.top + rect.height - 20 - h);
                 image.setRotation(-90);
-                image.setScale(0.2, 0.2);
+                image.setScale(0.2f, 0.2f);
                 window.draw(image);
             }
         }

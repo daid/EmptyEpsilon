@@ -78,14 +78,14 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     GuiAutoLayout* sidebar = new GuiAutoLayout(this, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
     sidebar->setPosition(-20, 150, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
-    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
+    info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4f, tr("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
 
-    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
+    info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4f, tr("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
     zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1.0f)}}));
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1)}}));
         radar->setDistance(value);
     });
     zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
@@ -148,11 +148,11 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
 
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
+    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7f, tr("Reputation") + ":", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     // Scenario clock display.
-    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
+    info_clock = new GuiKeyValueDisplay(option_buttons, "INFO_CLOCK", 0.7f, tr("Clock") + ":", "");
     info_clock->setSize(GuiElement::GuiSizeMax, 40);
 
     // Bottom layout.
@@ -198,9 +198,9 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
 {
     ///Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    if (mouse_wheel_delta != 0.f)
     {
-        float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        float view_distance = radar->getDistance() * (1.f - (mouse_wheel_delta * 0.1f));
         if (view_distance > 50000.0f)
             view_distance = 50000.0f;
         if (view_distance < 6250.0f)
@@ -208,7 +208,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
+        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1) + "x");
     }
     ///!
 
@@ -316,7 +316,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
         link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
         hack_target_button->setVisible(my_spaceship->getCanHack());
 
-        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+        info_reputation->setValue(string(my_spaceship->getReputationPoints()));
         info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
         launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
     }

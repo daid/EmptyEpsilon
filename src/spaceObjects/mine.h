@@ -22,6 +22,7 @@ public:
 
     Mine();
     virtual ~Mine();
+    void destroy() override;
 
     virtual void draw3D() override;
     virtual void draw3DTransparent() override;

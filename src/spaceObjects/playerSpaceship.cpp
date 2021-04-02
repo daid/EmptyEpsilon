@@ -331,30 +331,30 @@ PlayerSpaceship::PlayerSpaceship()
     for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
         setScannedStateForFaction(faction_id, SS_FullScan);
 
-    updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
+    updateMemberReplicationUpdateDelay(&target_rotation, 0.1f);
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
     registerMemberReplication(&can_dock);
     registerMemberReplication(&can_combat_maneuver);
     registerMemberReplication(&can_self_destruct);
     registerMemberReplication(&can_launch_probe);
-    registerMemberReplication(&hull_damage_indicator, 0.5);
-    registerMemberReplication(&jump_indicator, 0.5);
-    registerMemberReplication(&energy_level, 0.1);
+    registerMemberReplication(&hull_damage_indicator, 0.5f);
+    registerMemberReplication(&jump_indicator, 0.5f);
+    registerMemberReplication(&energy_level, 0.1f);
     registerMemberReplication(&max_energy_level);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
-    registerMemberReplication(&scanning_delay, 0.5);
+    registerMemberReplication(&scanning_delay, 0.5f);
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&scanning_depth);
     registerMemberReplication(&shields_active);
-    registerMemberReplication(&shield_calibration_delay, 0.5);
+    registerMemberReplication(&shield_calibration_delay, 0.5f);
     registerMemberReplication(&auto_repair_enabled);
     registerMemberReplication(&max_coolant);
     registerMemberReplication(&auto_coolant_enabled);
     registerMemberReplication(&beam_system_target);
     registerMemberReplication(&comms_state);
-    registerMemberReplication(&comms_open_delay, 1.0);
+    registerMemberReplication(&comms_open_delay, 1.f);
     registerMemberReplication(&comms_reply_message);
     registerMemberReplication(&comms_target_name);
     registerMemberReplication(&comms_incomming_message);
@@ -362,7 +362,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
     registerMemberReplication(&activate_self_destruct);
-    registerMemberReplication(&self_destruct_countdown, 0.2);
+    registerMemberReplication(&self_destruct_countdown, 0.2f);
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
@@ -435,7 +435,7 @@ void PlayerSpaceship::update(float delta)
     // subsystem effectiveness when determining the tick rate.
     if (shield_calibration_delay > 0)
     {
-        shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.0;
+        shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.f;
     }
 
     // Docking actions.
@@ -593,7 +593,7 @@ void PlayerSpaceship::update(float delta)
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);
             e->setPosition(getPosition());
-            e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+            e->setRadarSignatureInfo(0.f, 0.4f, 0.4f);
 
             DamageInfo info(this, DT_Kinetic, getPosition());
             SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
@@ -616,7 +616,7 @@ void PlayerSpaceship::update(float delta)
         {
             // If warping, consume energy at a rate of 120% the warp request.
             // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(energy_warp_per_second * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.2f) * (shields_active ? 1.5 : 1.0)))
+            if (!useEnergy(energy_warp_per_second * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.2f) * (shields_active ? 1.5f : 1.f)))
                 // If there's not enough energy, fall out of warp.
                 warp_request = 0;
         }
@@ -669,7 +669,7 @@ void PlayerSpaceship::update(float delta)
                         ExplosionEffect* e = new ExplosionEffect();
                         e->setSize(self_destruct_size * 0.67f);
                         e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
-                        e->setRadarSignatureInfo(0.0, 0.6, 0.6);
+                        e->setRadarSignatureInfo(0.f, 0.6f, 0.6f);
                     }
 
                     DamageInfo info(this, DT_Kinetic, getPosition());
@@ -860,10 +860,10 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
 
     systems[system].heat_level += amount;
 
-    if (systems[system].heat_level > 1.0)
+    if (systems[system].heat_level > 1.f)
     {
-        float overheat = systems[system].heat_level - 1.0;
-        systems[system].heat_level = 1.0;
+        float overheat = systems[system].heat_level - 1.f;
+        systems[system].heat_level = 1.f;
 
         if (gameGlobalInfo->use_system_damage)
         {
@@ -924,7 +924,7 @@ float PlayerSpaceship::getNetSystemEnergyUsage()
 int PlayerSpaceship::getRepairCrewCount()
 {
     // Count and return the number of repair crews on this ship.
-    return getRepairCrewFor(this).size();
+    return static_cast<int32_t>(getRepairCrewFor(this).size());
 }
 
 void PlayerSpaceship::setRepairCrewCount(int amount)
@@ -954,7 +954,7 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     }
 
     // Add crews until we reach the provided amount.
-    for(int create_amount = amount - crew.size(); create_amount > 0; create_amount--)
+    for(auto create_amount = amount - static_cast<int32_t>(crew.size()); create_amount > 0; create_amount--)
     {
         P<RepairCrew> rc = new RepairCrew();
         rc->ship_id = getMultiplayerId();

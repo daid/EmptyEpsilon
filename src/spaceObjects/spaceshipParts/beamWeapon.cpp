@@ -15,7 +15,7 @@ BeamWeapon::BeamWeapon()
     cooldown = 0.0;
     damage = 1.0;
     energy_per_beam_fire = 3.0;
-    heat_per_beam_fire = 0.02;
+    heat_per_beam_fire = 0.02f;
     parent = nullptr;
 }
 
@@ -172,7 +172,7 @@ void BeamWeapon::update(float delta)
     {
         // Get the angle to the target.
         sf::Vector2f diff = target->getPosition() - (parent->getPosition() + sf::rotateVector(sf::Vector2f(position.x, position.y), parent->getRotation()));
-        float distance = sf::length(diff) - target->getRadius() / 2.0;
+        float distance = sf::length(diff) - target->getRadius() / 2.f;
 
         // We also only care if the target is within no more than its
         // range * 1.3, which is when we want to start rotating the turret.

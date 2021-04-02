@@ -45,14 +45,14 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
 
     if (warp_scale > 0.0f)
     {
-        if (engine->getElapsedTime() - last_warp_particle_time > 0.1)
+        if (engine->getElapsedTime() - last_warp_particle_time > 0.1f)
         {
-            int count = warp_scale * 10.0f;
+            auto count = static_cast<int32_t>(warp_scale * 10.0f);
             for(int n=0; n<count; n++)
             {
                 sf::Vector3f offset = (data->mesh->randomPoint() + data->mesh_offset) * data->scale;
                 sf::Vector2f pos2d = position + sf::rotateVector(sf::Vector2f(offset.x, offset.y), rotation);
-                sf::Vector3f color = sf::Vector3f(0.6, 0.6, 1);
+                sf::Vector3f color = sf::Vector3f(0.6f, 0.6f, 1);
                 sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
                 ParticleEngine::spawn(pos3d, pos3d, color, color, data->getRadius() / 15.0f, 0.0, 3.0);
             }
@@ -91,7 +91,7 @@ void ModelInfo::renderShield(float alpha)
     glPushMatrix();
     glColor4f(alpha, alpha, alpha, 1);
     glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
-    glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
+    glScalef(data->radius * 1.2f, data->radius * 1.2f, data->radius * 1.2f);
     Mesh* m = Mesh::getMesh("sphere.obj");
     m->render();
     glPopMatrix();
@@ -110,7 +110,7 @@ void ModelInfo::renderShield(float alpha, float angle)
     glColor4f(alpha, alpha, alpha, 1);
     glRotatef(angle, 0, 0, 1);
     glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
-    glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
+    glScalef(data->radius * 1.2f, data->radius * 1.2f, data->radius * 1.2f);
     Mesh* m = Mesh::getMesh("half_sphere.obj");
     m->render();
     glPopMatrix();

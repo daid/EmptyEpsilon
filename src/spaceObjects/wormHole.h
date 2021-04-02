@@ -33,6 +33,7 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
     virtual void update(float delta) override;
     virtual void collide(Collisionable* target, float force) override;
+    void destroy() override;
 
     void setTargetPosition(sf::Vector2f v);   /* Where to jump to */
     sf::Vector2f getTargetPosition();

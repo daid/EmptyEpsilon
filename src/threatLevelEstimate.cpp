@@ -22,7 +22,7 @@ void ThreatLevelEstimate::update(float delta)
         max_threat = std::max(max_threat, getThreatFor(gameGlobalInfo->getPlayerShip(n)));
     }
     float f = delta / threat_drop_off_time;
-    smoothed_threat_level = ((1.0 - f) * smoothed_threat_level) + (max_threat * f);
+    smoothed_threat_level = ((1.f - f) * smoothed_threat_level) + (max_threat * f);
 
     if (!threat_high && smoothed_threat_level > threat_high_level)
     {

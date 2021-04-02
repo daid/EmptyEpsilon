@@ -44,6 +44,7 @@ public:
     void onPlayerCollision(ScriptSimpleCallback callback);
 
     virtual string getExportLine() override;
+    void destroy() override;
 };
 
 #endif//ARTIFACT_H

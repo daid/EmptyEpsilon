@@ -19,7 +19,7 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string tex
 
 unsigned int GuiAdvancedScrollText::getEntryCount() const
 {
-    return entries.size();
+    return static_cast<uint32_t>(entries.size());
 }
 
 string GuiAdvancedScrollText::getEntryText(int index) const
@@ -45,7 +45,7 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 
 void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
 {
-    float line_spacing = main_font->getLineSpacing(text_size);
+    float line_spacing = main_font->getLineSpacing(static_cast<uint32_t>(text_size));
 
     //For all the entries, fix the maximum prefix width, so we know how much space we have for the text.
     float max_prefix_width = 0.0f;
@@ -54,14 +54,14 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         float width = 0.0f;
         for(char c : e.prefix)
         {
-            sf::Glyph glyph = main_font->getGlyph(c, text_size, false);
+            sf::Glyph glyph = main_font->getGlyph(c, static_cast<uint32_t>(text_size), false);
             width += glyph.advance;
         }
         max_prefix_width = std::max(max_prefix_width, width);
     }
 
     //Calculate how many lines we can display properly
-    int max_lines = rect.height / line_spacing;
+    int max_lines = static_cast<int32_t>(rect.height / line_spacing);
 
     //Draw the visible entries
     int draw_offset = -scrollbar->getValue();

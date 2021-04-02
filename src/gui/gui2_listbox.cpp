@@ -40,12 +40,12 @@ void GuiListbox::entriesChanged()
 {
     last_rect = rect;
 
-    int max_buttons = rect.height / button_height;
+    auto max_buttons = static_cast<int32_t>(rect.height / button_height);
     float button_width = rect.width - button_height;
 
     scroll->setSize(button_height, rect.height);
     scroll->setValueSize(max_buttons);
-    scroll->setRange(0, entries.size());
+    scroll->setRange(0, static_cast<int32_t>(entries.size()));
     if ((int)entries.size() <= max_buttons)
     {
         button_width = rect.width;
@@ -58,7 +58,7 @@ void GuiListbox::entriesChanged()
 
     while(buttons.size() < entries.size() && (int)buttons.size() < max_buttons)
     {
-        int offset = buttons.size();
+        int offset = static_cast<int32_t>(buttons.size());
         GuiButton* button = new GuiButton(this, id + "_BUTTON_" + string(offset), "", [this, offset]() {
             setSelectionIndex(offset + scroll->getValue());
             callback();

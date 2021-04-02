@@ -50,9 +50,9 @@ void GuiBasicSlider::onMouseDrag(sf::Vector2f position)
 {
     float new_value;
     if (rect.width > rect.height)
-        new_value = (position.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+        new_value = (position.x - rect.left - (rect.height / 2.f)) / (rect.width - rect.height);
     else
-        new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+        new_value = (position.y - rect.top - (rect.width / 2.f)) / (rect.height - rect.width);
     new_value = min_value + (max_value - min_value) * new_value;
     if (min_value < max_value)
     {
@@ -197,9 +197,9 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
 {
     float new_value;
     if (rect.width > rect.height)
-        new_value = (position.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+        new_value = (position.x - rect.left - (rect.height / 2.f)) / (rect.width - rect.height);
     else
-        new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+        new_value = (position.y - rect.top - (rect.width / 2.f)) / (rect.height - rect.width);
     new_value = min_value + (max_value - min_value) * new_value;
     for(TSnapPoint& point : snap_points)
     {
@@ -276,14 +276,14 @@ void GuiSlider2D::onDraw(sf::RenderTarget& window)
 
     sf::Color color = selectColor(colorConfig.slider.forground);
 
-    float x = rect.left + (rect.width - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
-    float y = rect.top + (rect.height - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);
+    float x = rect.left + (rect.width - 50.f) * (value.x - min_value.x) / (max_value.x - min_value.x);
+    float y = rect.top + (rect.height - 50.f) * (value.y - min_value.y) / (max_value.y - min_value.y);
 
     sf::Sprite sprite;
     textureManager.setTexture(sprite, "gui/SliderKnob");
     sprite.setOrigin(0, 0);
     sprite.setPosition(x, y);
-    sprite.setScale(50.0 / sprite.getTextureRect().width, 50.0 / sprite.getTextureRect().width);
+    sprite.setScale(50.f / sprite.getTextureRect().width, 50.f / sprite.getTextureRect().width);
     sprite.setColor(color);
     window.draw(sprite);
 }

@@ -29,7 +29,7 @@ WarpJammer::WarpJammer()
     hull = 50;
 
     jammer_list.push_back(this);
-    setRadarSignatureInfo(0.05, 0.5, 0.0);
+    setRadarSignatureInfo(0.05f, 0.5f, 0.f);
 
     registerMemberReplication(&range);
 
@@ -51,7 +51,7 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
         object_sprite.setColor(sf::Color(255, 0, 0));
     else
         object_sprite.setColor(sf::Color(200, 150, 100));
-    float size = 0.6;
+    float size = 0.6f;
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
 
@@ -80,7 +80,7 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
-        e->setRadarSignatureInfo(0.5, 0.5, 0.1);
+        e->setRadarSignatureInfo(0.5f, 0.5f, 0.1f);
 
         if (on_destruction.isSet())
         {

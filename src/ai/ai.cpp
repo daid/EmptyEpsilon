@@ -55,7 +55,7 @@ void ShipAI::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f draw_position,
 void ShipAI::run(float delta)
 {
     owner->target_rotation = owner->getRotation();
-    owner->warp_request = 0.0;
+    owner->warp_request = 0;
     owner->impulse_request = 0.0f;
 
     updateWeaponState(delta);
@@ -430,7 +430,7 @@ void ShipAI::runOrders()
         if (owner->getOrderTarget())
         {
             sf::Vector2f target_position = owner->getOrderTarget()->getPosition();
-            float circle_distance = 2000.0f + owner->getOrderTarget()->getRadius() * 2.0 + owner->getRadius() * 2.0;
+            float circle_distance = 2000.0f + owner->getOrderTarget()->getRadius() * 2.f + owner->getRadius() * 2.f;
             target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
             flyTowards(target_position);
         }else{
@@ -510,7 +510,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
     if (has_missiles && best_missile_type == MW_HVLI)
         attack_distance = 2500.0;
     if (has_beams)
-        attack_distance = beam_weapon_range * 0.7;
+        attack_distance = beam_weapon_range * 0.7f;
 
     sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
     float distance = sf::length(position_diff);
@@ -526,7 +526,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     owner->weapon_tube[n].fire(target_angle);
-                    missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
+                    missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.f;
                 }
             }
         }
@@ -572,9 +572,9 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
 
         if (owner->has_warp_drive && rotation_diff < 30.0 && distance > 2000)
         {
-            owner->warp_request = 1.0;
+            owner->warp_request = 1;
         }else{
-            owner->warp_request = 0.0;
+            owner->warp_request = 0;
         }
         if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0 && owner->jump_drive_charge >= owner->jump_drive_max_distance)
         {
@@ -605,11 +605,11 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
         if (distance > keep_distance + owner->impulse_max_speed * 5.0)
             owner->impulse_request = 1.0f;
         else
-            owner->impulse_request = (distance - keep_distance) / owner->impulse_max_speed * 5.0;
+            owner->impulse_request = (distance - keep_distance) / owner->impulse_max_speed * 5.f;
         if (rotation_diff > 90)
             owner->impulse_request = -owner->impulse_request;
         else if (rotation_diff < 45)
-            owner->impulse_request *= 1.0 - ((rotation_diff - 45.0f) / 45.0);
+            owner->impulse_request *= 1.f - ((rotation_diff - 45.0f) / 45.f);
     }
 }
 
@@ -627,7 +627,7 @@ void ShipAI::flyFormation(P<SpaceObject> target, sf::Vector2f offset)
         float distance = sf::length(diff);
 
         //Formation flying code
-        float r = owner->getRadius() * 5.0;
+        float r = owner->getRadius() * 5.f;
         owner->target_rotation = sf::vector2ToAngle(diff);
         if (distance > r)
         {
@@ -635,13 +635,13 @@ void ShipAI::flyFormation(P<SpaceObject> target, sf::Vector2f offset)
             if (angle_diff > 10.0)
                 owner->impulse_request = 0.0;
             else if (angle_diff > 5.0)
-                owner->impulse_request = (10.0 - angle_diff) / 5.0;
+                owner->impulse_request = (10.f - angle_diff) / 5.f;
             else
                 owner->impulse_request = 1.0;
         }else{
             if (distance > r / 2.0)
             {
-                owner->target_rotation += sf::angleDifference(owner->target_rotation, target->getRotation()) * (1.0 - distance / r);
+                owner->target_rotation += sf::angleDifference(owner->target_rotation, target->getRotation()) * (1.f - distance / r);
                 owner->impulse_request = distance / r;
             }else{
                 owner->target_rotation = target->getRotation();
@@ -784,7 +784,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         target_position += target->getVelocity() * fly_time;
 
         //If our "error" of hitting is less then double the radius of the target, fire.
-        if (fabs(angle_diff) < 80.0 && target_distance * tanf(fabs(angle_diff) / 180.0f * M_PI) < target->getRadius() * 2.0)
+        if (fabs(angle_diff) < 80.f && target_distance * tanf(fabs(angle_diff) / 180.0f * static_cast<float>(M_PI)) < target->getRadius() * 2.f)
             return fire_angle;
 
         return std::numeric_limits<float>::infinity();

@@ -160,7 +160,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         sf::Vector2f ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.width, rect.height) / 2.0f;
         if (ship_offset.x < -rect.width / 2.0f || ship_offset.x > rect.width / 2.0f || ship_offset.y < -rect.height / 2.0f || ship_offset.y > rect.height / 2.0f)
         {
-            sf::Vector2f position(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0);
+            sf::Vector2f position(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.f);
             position += ship_offset / sf::length(ship_offset) * std::min(rect.width, rect.height) * 0.4f;
 
             sf::Sprite arrow_sprite;
@@ -203,7 +203,7 @@ void GuiRadarView::updateGhostDots()
 {
     if (next_ghost_dot_update < engine->getElapsedTime())
     {
-        next_ghost_dot_update = engine->getElapsedTime() + 5.0;
+        next_ghost_dot_update = engine->getElapsedTime() + 5.f;
         foreach(SpaceObject, obj, space_object_list)
         {
             P<SpaceShip> ship = obj;
@@ -236,7 +236,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
     {
         float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-        float r = 5000.0 * scale;
+        float r = 5000.f * scale;
 
         foreach(SpaceObject, obj, space_object_list)
         {
@@ -270,15 +270,15 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 {
     sf::Vector2f radar_screen_center(rect.left + rect.width / 2.0f, rect.top + rect.height / 2.0f);
-    float scale = std::min(rect.width, rect.height) / 2.0 / distance;
+    float scale = std::min(rect.width, rect.height) / 2.f / distance;
 
     constexpr float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
 
-    int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1;
-    int sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size);
-    int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1;
-    int sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size);
+    auto sector_x_min = static_cast<int32_t>(std::floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sector_size) + 1);
+    auto sector_x_max = static_cast<int32_t>(std::floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sector_size));
+    auto sector_y_min = static_cast<int32_t>(std::floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sector_size) + 1);
+    auto sector_y_max = static_cast<int32_t>(std::floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sector_size));
     sf::Color color(64, 64, 128, 128);
     for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
     {
@@ -312,10 +312,10 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
     window.draw(lines_y);
 
     color = sf::Color(64, 64, 128, 255);
-    int sub_sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1;
-    int sub_sector_x_max = floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size);
-    int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1;
-    int sub_sector_y_max = floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size);
+    auto sub_sector_x_min = static_cast<int32_t>(std::floor((view_position.x - (radar_screen_center.x - rect.left) / scale) / sub_sector_size) + 1);
+    auto sub_sector_x_max = static_cast<int32_t>(std::floor((view_position.x + (rect.left + rect.width - radar_screen_center.x) / scale) / sub_sector_size));
+    auto sub_sector_y_min = static_cast<int32_t>(std::floor((view_position.y - (radar_screen_center.y - rect.top) / scale) / sub_sector_size) + 1);
+    auto sub_sector_y_max = static_cast<int32_t>(std::floor((view_position.y + (rect.top + rect.height - radar_screen_center.y) / scale) / sub_sector_size));
     sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
     for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
     {
@@ -366,7 +366,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
                 window.draw(circle, blend);
 
                 float diff_angle = sf::vector2ToAngle(diff);
-                float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
+                float angle = acosf(n->getRadius() / diff_len) / static_cast<float>(M_PI) * 180.0f;
 
                 sf::Vector2f pos_a = n->getPosition() - sf::vector2FromAngle(diff_angle + angle) * n->getRadius();
                 sf::Vector2f pos_b = n->getPosition() - sf::vector2FromAngle(diff_angle - angle) * n->getRadius();
@@ -403,7 +403,7 @@ void GuiRadarView::drawGhostDots(sf::RenderTarget& window)
     for(unsigned int n=0; n<ghost_dots.size(); n++)
     {
         ghost_points[n].position = worldToScreen(ghost_dots[n].position);
-        ghost_points[n].color = sf::Color(255, 255, 255, 255 * std::max(((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime), 0.f));
+        ghost_points[n].color = sf::Color(255, 255, 255, static_cast<sf::Uint8>(255 * std::max(((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime), 0.f)));
     }
     window.draw(ghost_points);
 }
@@ -423,7 +423,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
         textureManager.setTexture(object_sprite, "waypoint");
         object_sprite.setColor(colorConfig.ship_waypoint_background);
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
-        object_sprite.setScale(0.8, 0.8);
+        object_sprite.setScale(0.8f, 0.8f);
         window.draw(object_sprite);
         drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
 
@@ -492,7 +492,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             }
 
             float angle_diff = sf::angleDifference(missile_target_angle, fire_angle);
-            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
+            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * static_cast<float>(M_PI));
             if (data.turnrate == 0.0f)
                 turn_radius = 0.0f;
 
@@ -503,7 +503,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
             sf::Vector2f turn_center = sf::vector2FromAngle(fire_angle + left_or_right) * turn_radius;
             sf::Vector2f turn_exit = turn_center + sf::vector2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
-            float turn_distance = fabs(angle_diff) / 360.0 * (turn_radius * 2.0f * M_PI);
+            float turn_distance = fabs(angle_diff) / 360.f * (turn_radius * 2.0f * static_cast<float>(M_PI));
             float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
             float length_after_turn = data.speed * lifetime_after_turn;
 
@@ -790,7 +790,7 @@ void GuiRadarView::drawHeadingIndicators(sf::RenderTarget& window)
     {
         sf::Text text(string(n), *main_font, 15);
         text.setPosition(radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 45));
-        text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
+        text.setOrigin(text.getLocalBounds().width / 2.f, text.getLocalBounds().height / 2.f);
         text.setRotation(n-view_rotation);
         window.draw(text);
     }

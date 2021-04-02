@@ -232,7 +232,7 @@ P<ScienceDatabase> ScienceDatabase::queryScienceDatabase(string name, int32_t pa
 static int queryScienceDatabaseById(lua_State* L)
 {
     P<ScienceDatabase> entry = nullptr;
-    entry = ScienceDatabase::getEntryById(luaL_checknumber(L, 1));
+    entry = ScienceDatabase::getEntryById(static_cast<int32_t>(luaL_checkinteger(L, 1)));
 
     if (!entry)
     {

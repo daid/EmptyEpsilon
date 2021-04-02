@@ -532,7 +532,7 @@ int SpaceObject::getReputationPoints()
 {
     if (gameGlobalInfo->reputation_points.size() < faction_id)
         return 0;
-    return gameGlobalInfo->reputation_points[faction_id];
+    return static_cast<int32_t>(gameGlobalInfo->reputation_points[faction_id]);
 }
 
 bool SpaceObject::takeReputationPoints(float amount)
@@ -598,15 +598,15 @@ template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& d
     if (!lua_isnumber(L, idx))
         return;
 
-    di.location.x = luaL_checknumber(L, idx++);
-    di.location.y = luaL_checknumber(L, idx++);
+    di.location.x = static_cast<float>(luaL_checknumber(L, idx++));
+    di.location.y = static_cast<float>(luaL_checknumber(L, idx++));
 
     if (lua_isnil(L, idx))
         idx++;
     else if (!lua_isnumber(L, idx))
         return;
     else
-        di.frequency = luaL_checkinteger(L, idx++);
+        di.frequency = static_cast<int32_t>(luaL_checkinteger(L, idx++));
 
     if (!lua_isstring(L, idx))
         return;

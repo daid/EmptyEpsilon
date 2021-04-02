@@ -30,7 +30,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
-        particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
+        particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8f, 1.2f);
 
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
@@ -90,13 +90,13 @@ void ElectricExplosionEffect::draw3DTransparent()
 {
     float f = (1.0f - (lifetime / maxLifetime));
     float scale;
-    float alpha = 0.5;
+    float alpha = 0.5f;
     if (f < 0.2f)
     {
-        scale = (f / 0.2f) * 0.8;
+        scale = (f / 0.2f) * 0.8f;
     }else{
-        scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 0.8f, 1.0f);
-        alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
+        scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 0.8f, 1.0f);
+        alpha = Tween<float>::easeInQuad(f, 0.2f, 1.f, 0.5f, 0.0f);
     }
 
     glPushMatrix();
@@ -150,7 +150,7 @@ void ElectricExplosionEffect::draw3DTransparent()
         // upload
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(sf::Vector3f), vertices.data());
         
-        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_BYTE, nullptr);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_BYTE, nullptr);
         n += active_quads;
     }
 }
@@ -166,7 +166,7 @@ void ElectricExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f
     sf::CircleShape circle(size * scale);
     circle.setOrigin(size * scale, size * scale);
     circle.setPosition(position);
-    circle.setFillColor(sf::Color(0, 0, 255, 64 * (lifetime / maxLifetime)));
+    circle.setFillColor(sf::Color(0, 0, 255, static_cast<sf::Uint8>(64 * (lifetime / maxLifetime))));
     window.draw(circle);
 }
 
@@ -177,4 +177,9 @@ void ElectricExplosionEffect::update(float delta)
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
+}
+
+void ElectricExplosionEffect::destroy()
+{
+    SpaceObject::destroy();
 }

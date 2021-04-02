@@ -17,9 +17,9 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 {
     selected_system = SYS_None;
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
+    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45f, tr("Energy"), "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(285, 40);
-    coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, tr("Coolant"), "");
+    coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45f, tr("Coolant"), "");
     coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(315, 20, ATopLeft)->setSize(280, 40);
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     layout->setPosition(20, 60, ATopLeft)->setSize(GuiElement::GuiSizeMax, 400);
@@ -41,33 +41,33 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         (new GuiLabel(box, "", tr("button", "Coolant"), 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
         (new GuiLabel(box, "", tr("button", "Heat"), 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);
 
-        systems[n].power_bar = new GuiProgressbar(box, "", 0.0, 3.0, 1.0);
-        systems[n].power_bar->setDrawBackground(false)->setPosition(52.5, 60, ATopLeft)->setSize(50, 320);
+        systems[n].power_bar = new GuiProgressbar(box, "", 0.f, 3.f, 1.f);
+        systems[n].power_bar->setDrawBackground(false)->setPosition(52.5f, 60, ATopLeft)->setSize(50, 320);
 
-        systems[n].power_slider = new GuiSlider(box, "", 3.0, 0.0, 1.0, [n](float value) {
+        systems[n].power_slider = new GuiSlider(box, "", 3.f, 0.f, 1.f, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemPowerRequest(ESystem(n), value);
         });
-        systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
+        systems[n].power_slider->addSnapValue(1.f, 0.1f)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
 
-        systems[n].coolant_bar = new GuiProgressbar(box, "", 0.0, 10.0, 0.0);
-        systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5, 60, ATopLeft)->setSize(50, 320);
+        systems[n].coolant_bar = new GuiProgressbar(box, "", 0.f, 10.f, 0.f);
+        systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5f, 60, ATopLeft)->setSize(50, 320);
 
-        systems[n].coolant_slider = new GuiSlider(box, "", 10.0, 0.0, 0.0, [n](float value) {
+        systems[n].coolant_slider = new GuiSlider(box, "", 10.f, 0.f, 0.f, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolantRequest(ESystem(n), value);
         });
         systems[n].coolant_slider->setPosition(130, 50, ATopLeft)->setSize(55, 340);
 
-        systems[n].heat_bar = new GuiProgressbar(box, "", 0.0, 1.0, 0.0);
+        systems[n].heat_bar = new GuiProgressbar(box, "", 0.f, 1.f, 0.f);
         systems[n].heat_bar->setPosition(210, 60, ATopLeft)->setSize(50, 320);
     }
 
     (new GuiCustomShipFunctions(this, powerManagement, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
-    previous_energy_level = 0.0;
-    average_energy_delta = 0.0;
-    previous_energy_measurement = 0.0;
+    previous_energy_level = 0.f;
+    average_energy_delta = 0.f;
+    previous_energy_measurement = 0.f;
 
     // TODO: Hotkey help overlay
 }
@@ -88,7 +88,7 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
                 float delta_t = engine->getElapsedTime() - previous_energy_measurement;
                 float delta_e = my_spaceship->energy_level - previous_energy_level;
                 float delta_e_per_second = delta_e / delta_t;
-                average_energy_delta = average_energy_delta * 0.99 + delta_e_per_second * 0.01;
+                average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
 
                 previous_energy_level = my_spaceship->energy_level;
                 previous_energy_measurement = engine->getElapsedTime();
@@ -107,7 +107,7 @@ void PowerManagementScreen::onDraw(sf::RenderTarget& window)
             float heat = my_spaceship->systems[n].heat_level;
             float power = my_spaceship->systems[n].power_level;
             float coolant = my_spaceship->systems[n].coolant_level;
-            systems[n].heat_bar->setValue(heat)->setColor(sf::Color(128, 128 * (1.0 - heat), 0));
+            systems[n].heat_bar->setValue(heat)->setColor(sf::Color(128, static_cast<sf::Uint8>(128 * (1.f - heat)), 0));
             systems[n].power_bar->setValue(power)->setColor(sf::Color(255, 255, 0));
             systems[n].coolant_bar->setValue(coolant)->setColor(sf::Color(0,128,255));
         }
@@ -212,12 +212,12 @@ bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
             {
                 ESystem system = ESystem(n);
                 if (axisAction.action == std::string("POWER_") + getSystemName(system)){
-                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
+                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.f / 2.f);
                     my_spaceship->commandSetSystemPowerRequest(system, systems[n].power_slider->getValue());
                     return true;
                 }
                 if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
-                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
+                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.f / 2.f);
                     my_spaceship->commandSetSystemCoolantRequest(system, systems[n].coolant_slider->getValue());
                     return true;
                 }

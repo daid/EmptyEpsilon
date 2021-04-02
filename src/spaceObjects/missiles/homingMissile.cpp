@@ -12,7 +12,7 @@ REGISTER_MULTIPLAYER_CLASS(HomingMissile, "HomingMissile");
 HomingMissile::HomingMissile()
 : MissileWeapon("HomingMissile", MissileWeaponData::getDataFor(MW_Homing))
 {
-    setRadarSignatureInfo(0.0, 0.1, 0.2);
+    setRadarSignatureInfo(0.f, 0.1f, 0.2f);
 }
 
 void HomingMissile::hitObject(P<SpaceObject> object)

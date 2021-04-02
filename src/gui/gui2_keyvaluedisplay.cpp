@@ -14,12 +14,12 @@ void GuiKeyValueDisplay::onDraw(sf::RenderTarget& window)
     if (rect.width >= rect.height)
     {
         drawText(window, sf::FloatRect(rect.left, rect.top, rect.width * div_distance - div_size, rect.height), key, ACenterRight, text_size);
-        drawText(window, sf::FloatRect(rect.left + rect.width * div_distance + div_size, rect.top, rect.width * (1.0 - div_distance), rect.height), value, ACenterLeft, text_size, bold_font);
+        drawText(window, sf::FloatRect(rect.left + rect.width * div_distance + div_size, rect.top, rect.width * (1.f - div_distance), rect.height), value, ACenterLeft, text_size, bold_font);
         if (icon_texture != "")
         {
             sf::Sprite icon;
             textureManager.setTexture(icon, icon_texture);
-            float scale = rect.height / icon.getTextureRect().height * 0.8;
+            float scale = rect.height / icon.getTextureRect().height * 0.8f;
             icon.setScale(scale, scale);
             icon.setPosition(rect.left + rect.height / 2, rect.top + rect.height / 2);
             window.draw(icon);
@@ -27,8 +27,8 @@ void GuiKeyValueDisplay::onDraw(sf::RenderTarget& window)
     }
     else
     {
-        drawVerticalText(window, sf::FloatRect(rect.left, rect.top + rect.height * (1.0 - div_distance) + div_size, rect.width, rect.height * div_distance - div_size), key, ACenterRight, text_size);
-        drawVerticalText(window, sf::FloatRect(rect.left, rect.top, rect.width, rect.height * (1.0 - div_distance) - div_size), value, ACenterLeft, text_size, bold_font);
+        drawVerticalText(window, sf::FloatRect(rect.left, rect.top + rect.height * (1.f - div_distance) + div_size, rect.width, rect.height * div_distance - div_size), key, ACenterRight, text_size);
+        drawVerticalText(window, sf::FloatRect(rect.left, rect.top, rect.width, rect.height * (1.f - div_distance) - div_size), value, ACenterLeft, text_size, bold_font);
     }
 }
 

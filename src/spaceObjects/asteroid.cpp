@@ -23,11 +23,11 @@ Asteroid::Asteroid()
 : SpaceObject(random(110, 130), "Asteroid")
 {
     setRotation(random(0, 360));
-    rotation_speed = random(0.1, 0.8);
+    rotation_speed = random(0.1f, 0.8f);
     z = random(-50, 50);
     size = getRadius();
     model_number = irandom(1, 10);
-    setRadarSignatureInfo(0.05, 0, 0);
+    setRadarSignatureInfo(0.05f, 0, 0);
 
     registerMemberReplication(&z);
     registerMemberReplication(&size);
@@ -64,8 +64,8 @@ void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     object_sprite.setPosition(position);
     object_sprite.setColor(sf::Color(255, 200, 100));
     float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
-    if (size < 0.2)
-        size = 0.2;
+    if (size < 0.2f)
+        size = 0.2f;
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
 }
@@ -84,7 +84,7 @@ void Asteroid::collide(Collisionable* target, float force)
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
-    e->setRadarSignatureInfo(0.0, 0.1, 0.2);
+    e->setRadarSignatureInfo(0.f, 0.1f, 0.2f);
     destroy();
 }
 
@@ -116,7 +116,7 @@ VisualAsteroid::VisualAsteroid()
 : SpaceObject(random(110, 130), "VisualAsteroid")
 {
     setRotation(random(0, 360));
-    rotation_speed = random(0.1, 0.8);
+    rotation_speed = random(0.1f, 0.8f);
     z = random(300, 800);
     if (random(0, 100) < 50)
         z = -z;
@@ -151,7 +151,7 @@ void VisualAsteroid::setSize(float size)
     this->size = size;
     setRadius(size);
     while(fabs(z) < size * 2)
-        z *= random(1.2, 2.0);
+        z *= random(1.2f, 2.f);
 }
 
 float VisualAsteroid::getSize()

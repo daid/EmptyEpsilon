@@ -44,9 +44,9 @@ float HardwareMappingEffectGlow::onActive()
         clock.restart();
     float f = clock.getElapsedTime().asSeconds() / time;
     if (f > 1.0)
-        return min_value * (f - 1.0) + max_value * (2.0 - f);
+        return min_value * (f - 1.f) + max_value * (2.f - f);
     else
-        return min_value * (1.0 - f) + max_value * (f);
+        return min_value * (1.f - f) + max_value * (f);
 }
 
 void HardwareMappingEffectGlow::onInactive()

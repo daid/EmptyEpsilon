@@ -13,7 +13,7 @@ void GuiTextEntry::onDraw(sf::RenderTarget& window)
     else
         drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
     bool typing_indicator = focus;
-    const float blink_rate = 0.530;
+    constexpr float blink_rate = 0.530f;
     if (blink_clock.getElapsedTime().asSeconds() < blink_rate)
         typing_indicator = false;
     if (blink_clock.getElapsedTime().asSeconds() > blink_rate * 2.0f)

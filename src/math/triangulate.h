@@ -11,7 +11,7 @@ public:
 
     static bool process(const Path& input, Path& output)
     {
-        int n = input.size();
+        int n = static_cast<int32_t>(input.size());
         if (n < 3)
             return false;
 
@@ -73,8 +73,8 @@ private:
     static T area(const Path &input)
     {
         T result = 0;
-        int p0 = input.size() - 1;
-        for(unsigned int p1=0; p1<input.size(); p1++)
+        auto p0 = input.size() - 1;
+        for(auto p1=0; p1<input.size(); p1++)
         {
             result += input[p0].x * input[p1].y - input[p1].x * input[p0].y;
             p0 = p1;

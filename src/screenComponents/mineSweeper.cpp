@@ -16,7 +16,7 @@ MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficul
         {
             FieldItem* item = new FieldItem(owner, "", "", [this, x, y](bool value) { getFieldItem(x, y)->setValue(!value); onFieldClick(x, y); });
             item->setSize(50, 50);
-            item->setPosition(x * 50 - field_size * 25, 25 + y * 50 - field_size * 25, ACenter);
+            item->setPosition(x * 50.f - field_size * 25.f, 25 + y * 50.f - field_size * 25.f, ACenter);
             board.emplace_back(item);
         }
     }
@@ -82,7 +82,7 @@ void MineSweeper::gameComplete()
 
 sf::Vector2f MineSweeper::getBoardSize()
 {
-    return sf::Vector2f(field_size*50, field_size*50);
+    return sf::Vector2f(field_size*50.f, field_size*50.f);
 }
 
 void MineSweeper::onFieldClick(int x, int y)

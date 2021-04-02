@@ -81,11 +81,11 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
 
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(this, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
+    info_reputation = new GuiKeyValueDisplay(this, "INFO_REPUTATION", 0.7f, tr("Reputation") + ":", "");
     info_reputation->setPosition(20, 20, ATopLeft)->setSize(175, 30);
 
     // Scenario clock display.
-    info_clock = new GuiKeyValueDisplay(this, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
+    info_clock = new GuiKeyValueDisplay(this, "INFO_CLOCK", 0.7f, tr("Clock") + ":", "");
     info_clock->setPosition(20, 50, ATopLeft)->setSize(175, 30);
 
     mode = TargetSelection;
@@ -98,7 +98,7 @@ void OperationScreen::onDraw(sf::RenderTarget& window)
 {
     if (science->radar_view->isVisible())
     {
-        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0))->show();
+        info_reputation->setValue(string(my_spaceship->getReputationPoints()))->show();
         info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0))->show();
     }
     else

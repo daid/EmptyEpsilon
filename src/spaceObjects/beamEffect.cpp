@@ -35,7 +35,7 @@ BeamEffect::BeamEffect()
 : SpaceObject(1000, "BeamEffect")
 {
     has_weight = false;
-    setRadarSignatureInfo(0.0, 0.3, 0.0);
+    setRadarSignatureInfo(0.f, 0.3f, 0.f);
     setCollisionRadius(1.0);
     lifetime = 1.0;
     sourceId = -1;
@@ -45,7 +45,7 @@ BeamEffect::BeamEffect()
     beam_fire_sound_power = 1;
     beam_sound_played = false;
     fire_ring = true;
-    registerMemberReplication(&lifetime, 0.1);
+    registerMemberReplication(&lifetime, 0.1f);
     registerMemberReplication(&sourceId);
     registerMemberReplication(&target_id);
     registerMemberReplication(&sourceOffset);
@@ -173,6 +173,11 @@ void BeamEffect::update(float delta)
         destroy();
 }
 
+void BeamEffect::destroy()
+{
+    SpaceObject::destroy();
+}
+
 void BeamEffect::setSource(P<SpaceObject> source, sf::Vector3f offset)
 {
     sourceId = source->getMultiplayerId();
@@ -185,12 +190,12 @@ void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
     target_id = target->getMultiplayerId();
     float r = target->getRadius();
     hitLocation -= target->getPosition();
-    targetOffset = sf::Vector3f(hitLocation.x + random(-r/2.0, r/2.0), hitLocation.y + random(-r/2.0, r/2.0), random(-r/4.0, r/4.0));
+    targetOffset = sf::Vector3f(hitLocation.x + random(-r/2.f, r/2.f), hitLocation.y + random(-r/2.f, r/2.f), random(-r/4.f, r/4.f));
 
     if (target->hasShield())
         targetOffset = sf::normalize(targetOffset) * r;
     else
-        targetOffset = sf::normalize(targetOffset) * random(0, r / 2.0);
+        targetOffset = sf::normalize(targetOffset) * random(0, r / 2.f);
     update(0);
 
     sf::Vector3f hitPos(targetLocation.x, targetLocation.y, targetOffset.z);

@@ -8,11 +8,11 @@
 
 #include "glObjects.h"
 
-#define FORCE_MULTIPLIER          50.0
-#define FORCE_MAX                 10000.0
-#define ALPHA_MULTIPLIER          10.0
+#define FORCE_MULTIPLIER          50.f
+#define FORCE_MAX                 10000.f
+#define ALPHA_MULTIPLIER          10.f
 #define DEFAULT_COLLISION_RADIUS  2500
-#define AVOIDANCE_MULTIPLIER      1.2
+#define AVOIDANCE_MULTIPLIER      1.2f
 #define TARGET_SPREAD             500
 
 #if FEATURE_3D_RENDERING
@@ -46,7 +46,7 @@ WormHole::WormHole()
     pathPlanner = PathPlannerManager::getInstance();
     pathPlanner->addAvoidObject(this, (DEFAULT_COLLISION_RADIUS * AVOIDANCE_MULTIPLIER) );
 
-    setRadarSignatureInfo(0.9, 0.0, 0.0);
+    setRadarSignatureInfo(0.9f, 0.f, 0.f);
 
     // Choose a texture to show on radar
     radar_visual = irandom(1, 3);
@@ -94,8 +94,8 @@ void WormHole::draw3DTransparent()
         float size = cloud.size;
 
         float distance = sf::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+        float alpha = 1.f - (distance / 10000.0f);
+        if (alpha < 0.f)
             continue;
 
         shader->setUniform("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
@@ -118,7 +118,7 @@ void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
     textureManager.setTexture(object_sprite, "wormHole" + string(radar_visual) + ".png");
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
+    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.f;
     object_sprite.setScale(size, size);
     object_sprite.setColor(sf::Color(255, 255, 255));
     window.draw(object_sprite, sf::RenderStates(sf::BlendAdd));
@@ -186,6 +186,11 @@ void WormHole::collide(Collisionable* target, float collision_force)
 
     // TODO: Escaping is impossible. Change setPosition to something Newtonianish.
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
+}
+
+void WormHole::destroy()
+{
+    SpaceObject::destroy();
 }
 
 void WormHole::setTargetPosition(sf::Vector2f v)

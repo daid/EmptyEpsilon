@@ -28,7 +28,7 @@ void GuiBeamFrequencySelector::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "BEAM_FREQUENCY_DECREASE")
         {
             if (getSelectionIndex() <= 0)
-                setSelectionIndex(entries.size() - 1);
+                setSelectionIndex(static_cast<int>(entries.size()) - 1);
             else
                 setSelectionIndex(getSelectionIndex() - 1);
         }

@@ -177,8 +177,8 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
             for(string message : my_spaceship->getCommsReplyOptions())
                 script_comms_options->addEntry(message, message);
             int display_options_count = std::min(5, script_comms_options->entryCount());
-            script_comms_options->setSize(760, display_options_count * 50);
-            script_comms_text->setSize(760, 500 - display_options_count * 50);
+            script_comms_options->setSize(760.f, display_options_count * 50.f);
+            script_comms_text->setSize(760.f, 500.f - display_options_count * 50.f);
         }
     }
 }

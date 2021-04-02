@@ -65,48 +65,48 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     else
         drawText(window, rect, display_text, ACenter, text_size, bold_font, color);
 
-    icon_size = std::min(rect.width, rect.height) * 0.8;
+    icon_size = std::min(rect.width, rect.height) * 0.8f;
     switch(icon_align)
     {
     case ACenterLeft:
-        icon_position = sf::Vector2f(rect.left - icon_size / 2.0, rect.top + rect.height / 2.0);
+        icon_position = sf::Vector2f(rect.left - icon_size / 2.f, rect.top + rect.height / 2.f);
         icon_offset = sf::Vector2f(-icon_size, 0);
         break;
     case ACenterRight:
-        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.0, rect.top + rect.height / 2.0);
+        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.f, rect.top + rect.height / 2.f);
         icon_offset = sf::Vector2f(icon_size, 0);
         break;
     case ABottomRight:
-        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.0, rect.top + rect.height - icon_size / 2.0);
+        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.f, rect.top + rect.height - icon_size / 2.f);
         icon_offset = sf::Vector2f(0, -icon_size);
         break;
     case ABottomLeft:
-        icon_position = sf::Vector2f(rect.left - icon_size / 2.0, rect.top + rect.height - icon_size / 2.0);
+        icon_position = sf::Vector2f(rect.left - icon_size / 2.f, rect.top + rect.height - icon_size / 2.f);
         icon_offset = sf::Vector2f(0, -icon_size);
         break;
     case ATopRight:
-        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.0, rect.top + icon_size / 2.0);
+        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.f, rect.top + icon_size / 2.f);
         icon_offset = sf::Vector2f(0, icon_size);
         break;
     case ATopLeft:
-        icon_position = sf::Vector2f(rect.left - icon_size / 2.0, rect.top + icon_size / 2.0);
+        icon_position = sf::Vector2f(rect.left - icon_size / 2.f, rect.top + icon_size / 2.f);
         icon_offset = sf::Vector2f(0, icon_size);
         break;
     case ATopCenter:
-        icon_position = sf::Vector2f(rect.left + rect.width / 2.0, rect.top - icon_size / 2.0);
+        icon_position = sf::Vector2f(rect.left + rect.width / 2.f, rect.top - icon_size / 2.f);
         icon_offset = sf::Vector2f(0, -icon_size);
         break;
     case ABottomCenter:
-        icon_position = sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height + icon_size / 2.0);
+        icon_position = sf::Vector2f(rect.left + rect.width / 2.f, rect.top + rect.height + icon_size / 2.f);
         icon_offset = sf::Vector2f(0, icon_size);
         break;
     case ACenter:
-        icon_position = sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
+        icon_position = sf::Vector2f(rect.left + rect.width / 2.f, rect.top + rect.height / 2.f);
         icon_offset = sf::Vector2f(0, 0);
         break;
     }
 
-    if (health <= 0.0)
+    if (health <= 0.f)
     {
         drawIcon(window, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
@@ -114,11 +114,11 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         drawIcon(window, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }
-    if (power == 0.0)
+    if (power == 0.f)
     {
         drawIcon(window, "gui/icons/status_no_power", colorConfig.overlay_no_power);
     }
-    else if (power < 0.3)
+    else if (power < 0.3f)
     {
         drawIcon(window, "gui/icons/status_low_power", colorConfig.overlay_low_power);
     }
@@ -126,7 +126,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         drawIcon(window, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
     }
-    if (heat > 0.90)
+    if (heat > 0.90f)
     {
         drawIcon(window, "gui/icons/status_overheat", colorConfig.overlay_overheating);
     }

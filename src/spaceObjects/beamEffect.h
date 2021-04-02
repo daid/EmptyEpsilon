@@ -31,6 +31,8 @@ public:
 #endif
     virtual void update(float delta);
 
+    void destroy() override;
+
     void setSource(P<SpaceObject> source, sf::Vector3f offset);
     void setTarget(P<SpaceObject> target, sf::Vector2f hitLocation);
 

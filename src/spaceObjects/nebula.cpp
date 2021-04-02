@@ -38,7 +38,7 @@ Nebula::Nebula()
     setCollisionRadius(1);
     setRotation(random(0, 360));
     radar_visual = irandom(1, 3);
-    setRadarSignatureInfo(0.0, 0.8, -1.0);
+    setRadarSignatureInfo(0.f, 0.8f, -1.f);
 
     registerMemberReplication(&radar_visual);
 
@@ -87,8 +87,8 @@ void Nebula::draw3DTransparent()
         float size = cloud.size;
 
         float distance = sf::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+        float alpha = 1.f - (distance / 10000.0f);
+        if (alpha < 0.f)
             continue;
 
         // setup our quad.
@@ -117,7 +117,7 @@ void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float 
     textureManager.setTexture(object_sprite, "Nebula" + string(radar_visual) + ".png");
     object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
+    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.f;
     object_sprite.setScale(size, size);
     object_sprite.setColor(sf::Color(255, 255, 255));
     window.draw(object_sprite, sf::BlendAdd);

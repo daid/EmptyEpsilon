@@ -30,7 +30,7 @@ void GuiBeamTargetSelector::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "BEAM_SUBSYSTEM_TARGET_PREV")
         {
             if (getSelectionIndex() <= 0)
-                setSelectionIndex(entries.size() - 1);
+                setSelectionIndex(static_cast<int>(entries.size()) - 1);
             else
                 setSelectionIndex(getSelectionIndex() - 1);
         }

@@ -243,7 +243,7 @@ void ServerCreationScreen::selectScenario(string filename)
     variation_descriptions_list = {tr("No variation selected. Play the scenario as intended.")};
     variation_description->setText(variation_descriptions_list[0]);
 
-    int selected_variation = 0;
+    size_t selected_variation = 0;
     for(auto variation : info.variations)
     {
         variation_names_list.push_back(variation.first);
@@ -259,7 +259,7 @@ void ServerCreationScreen::selectScenario(string filename)
     gameGlobalInfo->scenario = info.name;
     gameGlobalInfo->variation = variation_names_list[selected_variation];
 
-    variation_selection->setSelectionIndex(selected_variation);
+    variation_selection->setSelectionIndex(static_cast<int32_t>(selected_variation));
     variation_description->setText(variation_descriptions_list[selected_variation]);
 
     // Show the variation information only if there's more than 1.

@@ -50,7 +50,7 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
     object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     object_sprite.setColor(data.color);
-    object_sprite.setScale(0.25 + 0.25 * category_modifier, 0.25 + 0.25 * category_modifier);
+    object_sprite.setScale(0.25f + 0.25f * category_modifier, 0.25f + 0.25f * category_modifier);
     window.draw(object_sprite);
 }
 
@@ -78,8 +78,13 @@ void MissileWeapon::update(float delta)
 
     if (delta > 0)
     {
-        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 0.8, 0.8), sf::Vector3f(0, 0, 0), 5, 20, 5.0);
+        ParticleEngine::spawn(sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(getPosition().x, getPosition().y, 0), sf::Vector3f(1, 0.8f, 0.8f), sf::Vector3f(0, 0, 0), 5, 20, 5.f);
     }
+}
+
+void MissileWeapon::destroy()
+{
+    SpaceObject::destroy();
 }
 
 void MissileWeapon::collide(Collisionable* target, float force)

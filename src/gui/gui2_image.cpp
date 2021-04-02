@@ -16,7 +16,7 @@ void GuiImage::onDraw(sf::RenderTarget& window)
     if (!scale_up) {
         f = std::min(f, 1.0f);
     }
-    image.setPosition(rect.left + f * image.getTextureRect().width / 2.0, rect.top + f * image.getTextureRect().height / 2.0);
+    image.setPosition(rect.left + f * image.getTextureRect().width / 2.f, rect.top + f * image.getTextureRect().height / 2.f);
     image.setScale(f, f);
     image.setRotation(angle);
     image.setColor(color);

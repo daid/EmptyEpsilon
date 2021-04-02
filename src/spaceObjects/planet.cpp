@@ -45,11 +45,11 @@ public:
         {
             float u = sf::vector2ToAngle(sf::Vector2f(vertices[n].position[1], vertices[n].position[0])) / 360.0f;
             if (u < 0.0f)
-                u = 1.0 + u;
-            if (std::abs(u - vertices[n].uv[0]) > 0.5)
+                u = 1.f + u;
+            if (std::abs(u - vertices[n].uv[0]) > 0.5f)
                 u += 1.0f;
             vertices[n].uv[0] = u;
-            vertices[n].uv[1] = 0.5 + sf::vector2ToAngle(sf::Vector2f(sf::length(sf::Vector2f(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
+            vertices[n].uv[1] = 0.5f + sf::vector2ToAngle(sf::Vector2f(sf::length(sf::Vector2f(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
         }
     }
 
@@ -139,7 +139,7 @@ Planet::Planet()
 
     collision_size = -2.0f;
 
-    setRadarSignatureInfo(0.5, 0, 0.3);
+    setRadarSignatureInfo(0.5f, 0, 0.3f);
 
     registerMemberReplication(&planet_size);
     registerMemberReplication(&cloud_size);
@@ -166,9 +166,9 @@ Planet::Planet()
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
 {
-    atmosphere_color.r = r * 255;
-    atmosphere_color.g = g * 255;
-    atmosphere_color.b = b * 255;
+    atmosphere_color.r = static_cast<sf::Uint8>(r * 255);
+    atmosphere_color.g = static_cast<sf::Uint8>(g * 255);
+    atmosphere_color.b = static_cast<sf::Uint8>(b * 255);
 }
 
 void Planet::setPlanetAtmosphereTexture(string texture_name)
@@ -199,8 +199,8 @@ float Planet::getCollisionSize()
 void Planet::setPlanetRadius(float size)
 {
     this->planet_size = size;
-    this->cloud_size = size * 1.05;
-    this->atmosphere_size = size * 1.2;
+    this->cloud_size = size * 1.05f;
+    this->atmosphere_size = size * 1.2f;
 }
 
 void Planet::setPlanetCloudRadius(float size)
@@ -373,6 +373,11 @@ void Planet::collide(Collisionable* target, float collision_force)
     {
         //Something hit this planet...
     }
+}
+
+void Planet::destroy()
+{
+    SpaceObject::destroy();
 }
 
 void Planet::updateCollisionSize()

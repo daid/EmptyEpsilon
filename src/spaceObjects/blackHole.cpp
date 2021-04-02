@@ -33,7 +33,7 @@ BlackHole::BlackHole()
 {
     update_delta = 0.0;
     PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
-    setRadarSignatureInfo(0.9, 0, 0);
+    setRadarSignatureInfo(0.9f, 0.f, 0.f);
 
 
 #if FEATURE_3D_RENDERING
@@ -124,4 +124,9 @@ void BlackHole::collide(Collisionable* target, float collision_force)
     }
     if (!obj) {return;}
     obj->setPosition(obj->getPosition() + diff / distance * update_delta * force);
+}
+
+void BlackHole::destroy()
+{
+    SpaceObject::destroy();
 }

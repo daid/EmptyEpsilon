@@ -42,7 +42,7 @@ GuiIndicatorOverlays::~GuiIndicatorOverlays()
 
 static float glow(float min, float max, float time)
 {
-    return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
+    return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.f) - 1.f);
 }
 
 void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
@@ -59,17 +59,17 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
             if (my_spaceship->shield_level[n] < my_spaceship->shield_max[n] / 10.0f)
                 low_shields = true;
         }
-        shield_hit = (shield_hit - 0.5) / 0.5;
-        shield_hit_overlay->setAlpha(32 * shield_hit);
+        shield_hit = (shield_hit - 0.5f) / 0.5f;
+        shield_hit_overlay->setAlpha(static_cast<int32_t>(32 * shield_hit));
 
         if (low_shields)
         {
-            shield_low_warning_overlay->setAlpha(glow(16, 48, 0.5));
+            shield_low_warning_overlay->setAlpha(static_cast<int32_t>(glow(16.f, 48.f, 0.5f)));
         }else{
             shield_low_warning_overlay->setAlpha(0);
         }
 
-        hull_hit_overlay->setAlpha(128 * (my_spaceship->hull_damage_indicator / 1.5));
+        hull_hit_overlay->setAlpha(static_cast<int32_t>(128 * (my_spaceship->hull_damage_indicator / 1.5f)));
     }else{
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);
@@ -81,7 +81,7 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         if (my_spaceship->jump_indicator > 0.0)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0);
+            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.f);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
@@ -89,11 +89,11 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
         if (my_spaceship->current_warp > 0.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
-        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01f);
+        }else if (my_spaceship->jump_delay > 0.f && my_spaceship->jump_delay < 2.f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
+            warpPostProcessor->setUniform("amount", (2.f - my_spaceship->jump_delay) * 0.1f);
         }else{
             warpPostProcessor->enabled = false;
         }

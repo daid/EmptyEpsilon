@@ -49,13 +49,13 @@ void FighterAI::runAttack(P<SpaceObject> target)
         {
             for(int n=0; n<owner->weapon_tube_count; n++)
             {
-                if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0)
+                if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.f)
                 {
                     float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
                     if (target_angle != std::numeric_limits<float>::infinity())
                     {
                         owner->weapon_tube[n].fire(target_angle);
-                        missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0;
+                        missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.f;
                     }
                 }
             }
@@ -65,7 +65,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
 
         if (distance < 500 + target->getRadius())
         {
-            aggression += random(0, 0.05);
+            aggression += random(0.f, 0.05f);
 
             attack_state = evade;
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
@@ -80,7 +80,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         if (owner->shield_level[0] < owner->shield_max[0] * (1.0f - aggression))
         {
             attack_state = recharge;
-            aggression += random(0.1, 0.25);
+            aggression += random(0.1f, 0.25f);
             timeout = 60.0f - std::min(aggression, 1.0f) * 20.0f;
         }
         break;
@@ -101,7 +101,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
             attack_state = dive;
         }else{
             sf::Vector2f target_position = target->getPosition();
-            float circle_distance = 2000.0f + target->getRadius() * 2.0 + owner->getRadius() * 2.0;
+            float circle_distance = 2000.0f + target->getRadius() * 2.f + owner->getRadius() * 2.f;
             target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
             flyTowards(target_position);
         }

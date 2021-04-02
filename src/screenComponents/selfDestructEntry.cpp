@@ -73,7 +73,7 @@ void GuiSelfDestructEntry::onDraw(sf::RenderTarget& window)
                     code_entry_position = n;
                 }
             }
-            code_label->setSize(GuiElement::GuiSizeMax, 30 + 30 * lines);
+            code_label->setSize(GuiElement::GuiSizeMax, 30 + 30.f * lines);
             code_label->setText(codes);
             code_label->setVisible(lines > 0);
 

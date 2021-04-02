@@ -125,7 +125,7 @@ void HotkeyMenu::setCategory(int cat)
     rebinding_columns.clear();
 
     // Reset the hotkey frame size and position
-    int rebinding_ui_width = KEY_COLUMN_WIDTH;
+    auto rebinding_ui_width = KEY_COLUMN_WIDTH;
     rebinding_ui->setPosition(0, KEY_COLUMN_TOP, ATopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * (KEY_ROW_COUNT + 2));
 
     // Get the chosen category
@@ -245,7 +245,7 @@ void HotkeyMenu::pageHotkeys(int direction)
     }
 
     // Move the frame left if the direction is negative, right if it's positive
-    int new_offset = frame_position.x + KEY_COLUMN_WIDTH * direction;
+    auto new_offset = frame_position.x + KEY_COLUMN_WIDTH * direction;
 
     if (new_offset >= 0)
     {

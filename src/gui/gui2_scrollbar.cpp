@@ -17,7 +17,7 @@ void GuiScrollbar::onDraw(sf::RenderTarget& window)
     drawStretched(window, rect, "gui/ScrollbarBackground");
 
     int range = (max_value - min_value);
-    float arrow_size = rect.width / 2.0;
+    float arrow_size = rect.width / 2.f;
     float move_height = (rect.height - arrow_size * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
@@ -28,7 +28,7 @@ void GuiScrollbar::onDraw(sf::RenderTarget& window)
 bool GuiScrollbar::onMouseDown(sf::Vector2f position)
 {
     int range = (max_value - min_value);
-    float arrow_size = rect.width / 2.0;
+    float arrow_size = rect.width / 2.f;
     float move_height = (rect.height - arrow_size * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
@@ -48,7 +48,7 @@ void GuiScrollbar::onMouseDrag(sf::Vector2f position)
 {
     if (drag_scrollbar)
     {
-        float arrow_size = rect.width / 2.0;
+        float arrow_size = rect.width / 2.f;
         int range = (max_value - min_value);
         float move_height = (rect.height - arrow_size * 2);
         float bar_size = move_height * value_size / range;
@@ -68,7 +68,7 @@ void GuiScrollbar::onMouseUp(sf::Vector2f position)
 {
     if (!drag_scrollbar)
     {
-        float arrow_size = rect.width / 2.0;
+        float arrow_size = rect.width / 2.f;
         int range = (max_value - min_value);
         float move_height = (rect.height - arrow_size * 2);
         float bar_size = move_height * value_size / range;

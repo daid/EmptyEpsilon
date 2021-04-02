@@ -40,12 +40,12 @@ public:
         names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Grey"); }), names.end());
         names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("Red"); }), names.end());
         names.erase(std::remove_if(names.begin(), names.end(), [](const string& name) { return name.endswith("White"); }), names.end());
-        int col_count = sqrtf(names.size()) + 1;
-        int row_count = ceil(names.size() / col_count) + 1;
+        auto col_count = static_cast<int32_t>(sqrtf(static_cast<float>(names.size())) + 1);
+        auto row_count = static_cast<int32_t>(ceilf(static_cast<float>(names.size()) / col_count) + 1);
         int x = 0;
         int y = 0;
-        float w = 1600 / col_count;
-        float h = 900 / row_count;
+        float w = 1600.f / col_count;
+        float h = 900.f / row_count;
         for(string name : names)
         {
             (new GuiRotatingModelView(this, "", ModelData::getModel(name)))->setPosition(x * w, y * h, ATopLeft)->setSize(w, h);

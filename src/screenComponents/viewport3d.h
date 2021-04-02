@@ -10,9 +10,9 @@ class GuiViewport3D : public GuiElement
     bool show_headings;
     bool show_spacedust;
 
-    double projection_matrix[16];
-    double model_matrix[16];
-    double viewport[4];
+    float projection_matrix[16];
+    float model_matrix[16];
+    float viewport[4];
 
 #if FEATURE_3D_RENDERING
     enum class Uniforms : uint8_t

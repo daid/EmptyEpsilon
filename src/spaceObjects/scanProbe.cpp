@@ -61,13 +61,13 @@ ScanProbe::ScanProbe()
     // Probe has not arrived yet.
     has_arrived = false;
 
-    registerMemberReplication(&owner_id, 0.5);
-    registerMemberReplication(&probe_speed, 0.1);
-    registerMemberReplication(&target_position, 0.1);
-    registerMemberReplication(&lifetime, 60.0);
+    registerMemberReplication(&owner_id, 0.5f);
+    registerMemberReplication(&probe_speed, 0.1f);
+    registerMemberReplication(&target_position, 0.1f);
+    registerMemberReplication(&lifetime, 60.f);
 
     // Give the probe a small electrical radar signature.
-    setRadarSignatureInfo(0.0, 0.2, 0.0);
+    setRadarSignatureInfo(0.f, 0.2f, 0.f);
 
     // Randomly select a probe model.
     switch(irandom(1, 3))
@@ -96,6 +96,11 @@ ScanProbe::ScanProbe()
 // defined.
 ScanProbe::~ScanProbe()
 {
+}
+
+void ScanProbe::destroy()
+{
+    SpaceObject::destroy();
 }
 
 void ScanProbe::setSpeed(float probe_speed)
@@ -208,7 +213,7 @@ void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     textureManager.setTexture(object_sprite, "ProbeBlip.png");
     object_sprite.setPosition(position);
     object_sprite.setColor(sf::Color(96, 192, 128));
-    float size = 0.3;
+    float size = 0.3f;
     object_sprite.setScale(size, size);
     window.draw(object_sprite);
 }

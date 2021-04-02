@@ -21,7 +21,7 @@ SpaceStation::SpaceStation()
     restocks_scan_probes = true;
     restocks_missiles_docked = true;
     comms_script_name = "comms_station.lua";
-    setRadarSignatureInfo(0.2, 0.5, 0.5);
+    setRadarSignatureInfo(0.2f, 0.5f, 0.5f);
 
     callsign = "DS" + string(getMultiplayerId());
 }
@@ -31,11 +31,11 @@ void SpaceStation::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, 
     sf::Sprite objectSprite;
     textureManager.setTexture(objectSprite, radar_trace);
     objectSprite.setPosition(position);
-    float sprite_scale = scale * getRadius() * 1.5 / objectSprite.getTextureRect().width;
+    float sprite_scale = scale * getRadius() * 1.5f / objectSprite.getTextureRect().width;
 
     if (!long_range)
     {
-        sprite_scale *= 0.7;
+        sprite_scale *= 0.7f;
         drawShieldsOnRadar(window, position, scale, rotation, sprite_scale, true);
     }
     sprite_scale = std::max(0.15f, sprite_scale);
@@ -64,7 +64,7 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     ExplosionEffect* e = new ExplosionEffect();
     e->setSize(getRadius());
     e->setPosition(getPosition());
-    e->setRadarSignatureInfo(0.0, 0.4, 0.4);
+    e->setRadarSignatureInfo(0.f, 0.4f, 0.4f);
 
     if (info.instigator)
     {
@@ -73,11 +73,11 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
         {
             for(int n=0; n<shield_count; n++)
             {
-                points += shield_max[n] * 0.1;
+                points += shield_max[n] * 0.1f;
             }
             points /= shield_count;
         }
-        points += hull_max * 0.1;
+        points += hull_max * 0.1f;
         if (isEnemy(info.instigator))
             info.instigator->addReputationPoints(points);
         else

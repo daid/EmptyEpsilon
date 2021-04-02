@@ -12,7 +12,7 @@ class GuiToggleButton;
 class CinematicViewScreen : public GuiCanvas, public Updatable
 {
 private:
-    const double pi = M_PI;
+    static constexpr float pi = static_cast<float>(M_PI);
 
     GuiViewport3D* viewport;
     P<PlayerSpaceship> target;

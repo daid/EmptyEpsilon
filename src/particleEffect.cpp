@@ -94,7 +94,7 @@ ParticleEngine::ParticleEngine()
             elements[base_element + 5] = base_vertex + 1;
 
             for (auto v = 0; v < 4; ++v)
-                vertex_ids[base_vertex + v] = base_vertex + v;
+                vertex_ids[base_vertex + v] = static_cast<float>(base_vertex + v);
         }
 
         // Hand off to the GPU.
@@ -154,8 +154,8 @@ void ParticleEngine::doRender()
             }
 
             // Send instances to shader.
-            glUniform3fv(uniforms[as_index(Uniforms::Centers)], positions.size(), reinterpret_cast<const float*>(positions.data()));
-            glUniform4fv(uniforms[as_index(Uniforms::ColorAndSizes)], color_and_sizes.size(), reinterpret_cast<const float*>(color_and_sizes.data()));
+            glUniform3fv(uniforms[as_index(Uniforms::Centers)], static_cast<GLsizei>(positions.size()), reinterpret_cast<const float*>(positions.data()));
+            glUniform4fv(uniforms[as_index(Uniforms::ColorAndSizes)], static_cast<GLsizei>(color_and_sizes.size()), reinterpret_cast<const float*>(color_and_sizes.data()));
         
             // Draw our instances
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_BYTE, nullptr);

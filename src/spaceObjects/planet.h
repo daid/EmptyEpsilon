@@ -19,6 +19,7 @@ public:
     virtual void update(float delta) override;
     virtual void collide(Collisionable* target, float force) override;
     virtual bool canHideInNebula()  override { return false; }
+    void destroy() override;
 
     float getPlanetRadius();
     float getCollisionSize();

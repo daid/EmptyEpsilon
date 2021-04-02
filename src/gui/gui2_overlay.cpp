@@ -21,8 +21,8 @@ void GuiOverlay::onDraw(sf::RenderTarget& window)
             break;
         case TM_Centered:
             overlay.setTexture(textureManager.getTexture(texture));
-            overlay.setSize(sf::Vector2f(overlay.getTextureRect().width, overlay.getTextureRect().height));
-            overlay.setPosition(rect.left + rect.width / 2.0 - overlay.getSize().x / 2.0, rect.top + rect.height / 2.0 - overlay.getSize().y / 2.0);
+            overlay.setSize(sf::Vector2f{ sf::Vector2i{overlay.getTextureRect().width, overlay.getTextureRect().height} });
+            overlay.setPosition(rect.left + rect.width / 2.f - overlay.getSize().x / 2.f, rect.top + rect.height / 2.f - overlay.getSize().y / 2.f);
             break;
         case TM_Tiled:
             overlay.setTexture(textureManager.getTexture(texture));

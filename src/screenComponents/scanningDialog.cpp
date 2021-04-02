@@ -30,7 +30,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     for(int n=0; n<max_sliders; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
-        sliders[n]->setPosition(0, 200 + n * 70, ATopCenter)->setSize(450, 50);
+        sliders[n]->setPosition(0, 200 + n * 70.f, ATopCenter)->setSize(450, 50);
     }
     cancel_button = new GuiButton(box, id + "_CANCEL", tr("button", "Cancel"), []() {
         if (my_spaceship)
@@ -84,7 +84,7 @@ bool GuiScanningDialog::onJoystickAxis(const AxisAction& axisAction){
         if (axisAction.category == "SCIENCE"){
             for(int n=0; n<max_sliders; n++) {
                 if (axisAction.action == std::string("SCAN_PARAM_") + string(n+1)){
-                    sliders[n]->setValue((axisAction.value + 1) / 2.0);
+                    sliders[n]->setValue((axisAction.value + 1) / 2.f);
                     updateSignal();
                     return true;
                 }
@@ -106,7 +106,7 @@ void GuiScanningDialog::setupParameters()
         else
             sliders[n]->hide();
     }
-    box->setSize(500, 265 + 70 * my_spaceship->scanning_complexity);
+    box->setSize(500, 265 + 70.f * my_spaceship->scanning_complexity);
 
     for(int n=0; n<max_sliders; n++)
     {

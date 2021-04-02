@@ -180,10 +180,10 @@ void PhilipsHueDevice::setChannelData(int channel, float value)
     sf::Lock lock(mutex);
     switch(channel % 4)
     {
-    case 0: if (lights[light_idx].brightness != value * 254) lights[light_idx].dirty = true; lights[light_idx].brightness = value * 254; break;
-    case 1: if (lights[light_idx].saturation != value * 254) lights[light_idx].dirty = true; lights[light_idx].saturation = value * 254; break;
-    case 2: if (lights[light_idx].hue != value * 65535) lights[light_idx].dirty = true; lights[light_idx].hue = value * 65535; break;
-    case 3: if (lights[light_idx].transitiontime != value) lights[light_idx].dirty = true; lights[light_idx].transitiontime = value; break;
+    case 0: if (lights[light_idx].brightness != value * 254) lights[light_idx].dirty = true; lights[light_idx].brightness = static_cast<int32_t>(value * 254); break;
+    case 1: if (lights[light_idx].saturation != value * 254) lights[light_idx].dirty = true; lights[light_idx].saturation = static_cast<int32_t>(value * 254); break;
+    case 2: if (lights[light_idx].hue != value * 65535) lights[light_idx].dirty = true; lights[light_idx].hue = static_cast<int32_t>(value * 65535); break;
+    case 3: if (lights[light_idx].transitiontime != value) lights[light_idx].dirty = true; lights[light_idx].transitiontime = static_cast<int32_t>(value); break;
     }
 }
 

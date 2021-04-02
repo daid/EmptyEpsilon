@@ -46,9 +46,9 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
         if (dt.horizontal)
         {
             door->setHorizontal();
-            door->setPosition(sf::Vector2f(dt.position) * room_size - sf::Vector2f(0, room_size / 2.0));
+            door->setPosition(sf::Vector2f(dt.position) * room_size - sf::Vector2f(0, room_size / 2.f));
         }else{
-            door->setPosition(sf::Vector2f(dt.position) * room_size - sf::Vector2f(room_size / 2.0, 0));
+            door->setPosition(sf::Vector2f(dt.position) * room_size - sf::Vector2f(room_size / 2.f, 0));
         }
     }
     room_container->setSize(sf::Vector2f(max_size) * room_size);
@@ -169,7 +169,7 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
     float f = 1.0;
     if (ship && ship->hasSystem(system))
         f = std::max(0.0f, ship->systems[system].health);
-    draw9Cut(window, rect, "room_background", sf::Color(255, 255 * f, 255 * f, 255));
+    draw9Cut(window, rect, "room_background", sf::Color(255, static_cast<sf::Uint8>(255 * f), static_cast<sf::Uint8>(255 * f), 255));
 
     if (system != SYS_None && ship && ship->hasSystem(system))
     {
@@ -239,7 +239,7 @@ void GuiShipDoor::onDraw(sf::RenderTarget& window)
 {
     sf::Sprite door_sprite;
     textureManager.setTexture(door_sprite, "room_door.png");
-    door_sprite.setPosition(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
+    door_sprite.setPosition(rect.left + rect.width / 2.f, rect.top + rect.height / 2.f);
     float f = rect.height / float(door_sprite.getTextureRect().height);
     door_sprite.setScale(f, f);
     if (!horizontal)

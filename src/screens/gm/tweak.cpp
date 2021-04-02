@@ -525,12 +525,12 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     (new GuiLabel(right_col, "", tr("beam", "Turret rotation rate:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     // 25 is an arbitrary limit to add granularity; values greater than 25
     // result in practicaly instantaneous turret rotation anyway.
-    turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
+    turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.f, 0.f, [this](float value) {
         // Divide a large value for granularity.
         if (value > 0)
-            target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0);
+            target->beam_weapons[beam_index].setTurretRotationRate(value / 10.f);
         else
-            target->beam_weapons[beam_index].setTurretRotationRate(0.0);
+            target->beam_weapons[beam_index].setTurretRotationRate(0.f);
     });
     turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
@@ -538,19 +538,19 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     turret_rotation_rate_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(right_col, "", tr("beam", "Range:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
-    range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
+    range_slider = new GuiSlider(right_col, "", 0.f, 5000.f, 0.f, [this](float value) {
         target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
     });
     range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Cycle time:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
-    cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
+    cycle_time_slider = new GuiSlider(right_col, "", 0.1f, 20.f, 0.f, [this](float value) {
         target->beam_weapons[beam_index].setCycleTime(value);
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Damage:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
-    damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
+    damage_slider = new GuiSlider(right_col, "", 0.1f, 50.f, 0.f, [this](float value) {
         target->beam_weapons[beam_index].setDamage(value);
     });
     damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
@@ -558,7 +558,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 
 void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
 {
-    target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, 0, false);
+    target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66f), 300.0f / 5000.0f, 0, false);
 
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
@@ -591,31 +591,31 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
     {
         ESystem system = ESystem(n);
         (new GuiLabel(left_col, "", tr("{system} health").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_damage[n] = new GuiSlider(left_col, "", -1.0, 1.0, 0.0, [this, n](float value) {
+        system_damage[n] = new GuiSlider(left_col, "", -1.f, 1.f, 0.f, [this, n](float value) {
             target->systems[n].health = std::min(value,target->systems[n].health_max);
         });
         system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
-        system_damage[n]->addSnapValue(-1.0, 0.01);
-        system_damage[n]->addSnapValue( 0.0, 0.01);
-        system_damage[n]->addSnapValue( 1.0, 0.01);
+        system_damage[n]->addSnapValue(-1.f, 0.01f);
+        system_damage[n]->addSnapValue( 0.f, 0.01f);
+        system_damage[n]->addSnapValue( 1.f, 0.01f);
 
         (new GuiLabel(center_col, "", tr("{system} health max").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_health_max[n] = new GuiSlider(center_col, "", -1.0, 1.0, 1.0, [this, n](float value) {
+        system_health_max[n] = new GuiSlider(center_col, "", -1.f, 1.f, 1.f, [this, n](float value) {
             target->systems[n].health_max = value;
             target->systems[n].health = std::min(value,target->systems[n].health);
         });
         system_health_max[n]->setSize(GuiElement::GuiSizeMax, 30);
-        system_health_max[n]->addSnapValue(-1.0, 0.01);
-        system_health_max[n]->addSnapValue( 0.0, 0.01);
-        system_health_max[n]->addSnapValue( 1.0, 0.01);
+        system_health_max[n]->addSnapValue(-1.f, 0.01f);
+        system_health_max[n]->addSnapValue( 0.f, 0.01f);
+        system_health_max[n]->addSnapValue( 1.f, 0.01f);
 
         (new GuiLabel(right_col, "", tr("{system} heat").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
-        system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
+        system_heat[n] = new GuiSlider(right_col, "", 0.f, 1.f, 0.f, [this, n](float value) {
             target->systems[n].heat_level = value;
         });
         system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
-        system_heat[n]->addSnapValue( 0.0, 0.01);
-        system_heat[n]->addSnapValue( 1.0, 0.01);
+        system_heat[n]->addSnapValue( 0.f, 0.01f);
+        system_heat[n]->addSnapValue( 1.f, 0.01f);
     }
 }
 
@@ -815,7 +815,7 @@ void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
     max_energy_level_slider->setValue(target->max_energy_level);
 
     // Update reputation points.
-    reputation_point_slider->setValue(target->getReputationPoints());
+    reputation_point_slider->setValue(static_cast<float>(target->getReputationPoints()));
 }
 
 void GuiShipTweakPlayer::open(P<SpaceObject> target)
@@ -857,14 +857,14 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     coolant_slider->addSnapValue(10,1)->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", tr("Max Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    max_scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
-        target->setMaxScanProbeCount(value);
+    max_scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.f, [this](float value) {
+        target->setMaxScanProbeCount(static_cast<int32_t>(value));
     });
     max_scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", tr("Scan Probes:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.0, [this](float value) {
-        target->setScanProbeCount(value);
+    scan_probes_slider = new GuiSlider(left_col, "", 0, 20, 0.f, [this](float value) {
+        target->setScanProbeCount(static_cast<int32_t>(value));
     });
     scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -919,8 +919,8 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
 {
     coolant_slider->setValue(target->max_coolant);
-    max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
-    scan_probes_slider->setValue(target->getScanProbeCount());
+    max_scan_probes_slider->setValue(static_cast<float>(target->getMaxScanProbeCount()));
+    scan_probes_slider->setValue(static_cast<float>(target->getScanProbeCount()));
     can_scan->setValue(target->getCanScan());
     can_hack->setValue(target->getCanHack());
     can_dock->setValue(target->getCanDock());
@@ -990,20 +990,20 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
 
     // Set object's heading.
     (new GuiLabel(right_col, "", tr("Heading:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
-    heading_slider = new GuiSlider(right_col, "", 0.0, 359.9, 0.0, [this](float value) {
+    heading_slider = new GuiSlider(right_col, "", 0.f, 359.9f, 0.f, [this](float value) {
         target->setHeading(value);
     });
     heading_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(right_col, "", tr("Scanning Complexity:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     scanning_complexity_slider = new GuiSlider(right_col, "", 0, 4, 0, [this](float value) {
-        target->setScanningParameters(value,target->scanningChannelDepth(target));
+        target->setScanningParameters(static_cast<int32_t>(value),target->scanningChannelDepth(target));
     });
     scanning_complexity_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(right_col, "", tr("Scanning Depth:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     scanning_depth_slider = new GuiSlider(right_col, "", 1, 5, 0, [this](float value) {
-        target->setScanningParameters(target->scanningComplexity(target),value);
+        target->setScanningParameters(target->scanningComplexity(target), static_cast<int32_t>(value));
     });
     scanning_depth_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
@@ -1022,8 +1022,8 @@ void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
 
     // we probably dont need to set these each onDraw
     // but doing it forces the slider to round to a integer
-    scanning_complexity_slider->setValue(target->scanningComplexity(target));
-    scanning_depth_slider->setValue(target->scanningChannelDepth(target));
+    scanning_complexity_slider->setValue(static_cast<float>(target->scanningComplexity(target)));
+    scanning_depth_slider->setValue(static_cast<float>(target->scanningChannelDepth(target)));
 }
 
 void GuiObjectTweakBase::open(P<SpaceObject> target)

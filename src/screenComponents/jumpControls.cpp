@@ -51,7 +51,7 @@ void GuiJumpControls::onDraw(sf::RenderTarget& window)
             charge_bar->setValue(my_spaceship->jump_drive_charge)->show();
         }else{
             label->setKey(tr("jumpcontrol", "Distance"));
-            label->setValue(string(slider->getValue() / 1000.0, 1) + DISTANCE_UNIT_1K);
+            label->setValue(string(slider->getValue() / 1000.f, 1) + DISTANCE_UNIT_1K);
             slider->enable()->show();
             slider->setRange(my_spaceship->jump_drive_max_distance, my_spaceship->jump_drive_min_distance);
             button->enable();

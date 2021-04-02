@@ -12,7 +12,7 @@ REGISTER_MULTIPLAYER_CLASS(HVLI, "HVLI");
 HVLI::HVLI()
 : MissileWeapon("HVLI", MissileWeaponData::getDataFor(MW_HVLI))
 {
-    setRadarSignatureInfo(0.1, 0.0, 0.0);
+    setRadarSignatureInfo(0.1f, 0.f, 0.f);
 }
 
 void HVLI::hitObject(P<SpaceObject> object)
@@ -22,10 +22,10 @@ void HVLI::hitObject(P<SpaceObject> object)
     if (alive_for > 2.0)
         object->takeDamage(category_modifier * 6, info);
     else
-        object->takeDamage(category_modifier * 6 * (alive_for / 2.0), info);
+        object->takeDamage(category_modifier * 6 * (alive_for / 2.f), info);
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(category_modifier * 20);
     e->setPosition(getPosition());
     e->setOnRadar(true);
-    setRadarSignatureInfo(0.0, 0.0, 0.1);
+    setRadarSignatureInfo(0.f, 0.f, 0.1f);
 }

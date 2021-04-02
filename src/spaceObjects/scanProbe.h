@@ -23,6 +23,7 @@ public:
 
     ScanProbe();
     virtual ~ScanProbe();
+    void destroy() override;
 
     void setSpeed(float probe_speed);
     float getSpeed();

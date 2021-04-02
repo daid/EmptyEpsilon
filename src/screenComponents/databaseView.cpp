@@ -145,13 +145,9 @@ void DatabaseViewComponent::display()
     bool has_image_or_model = selected_entry->hasModelData() || selected_entry->getImage() != "";
     bool has_text = selected_entry->getLongDescription().length() > 0;
 
-    int left_column_width = 0;
-    if (has_key_values)
-    {
-        left_column_width = 400;
-    }
+    auto left_column_width = has_key_values ? 400.f : 0.f;
     GuiAutoLayout* right = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_RIGHT", GuiAutoLayout::LayoutHorizontalRows);
-    right->setPosition(left_column_width, 0, ATopLeft)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    right->setPosition(left_column_width, 0.f, ATopLeft)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     if (has_image_or_model)
     {
         GuiElement* visual = (new GuiElement(right, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -185,11 +181,11 @@ void DatabaseViewComponent::display()
     if (has_key_values)
     {
         GuiAutoLayout* left = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LEFT", GuiAutoLayout::LayoutVerticalTopToBottom);
-        left->setPosition(0, 0, ATopLeft)->setMargins(0, 0, 20, 0)->setSize(left_column_width, GuiElement::GuiSizeMax);
+        left->setPosition(0.f, 0.f, ATopLeft)->setMargins(0.f, 0.f, 20.f, 0.f)->setSize(left_column_width, GuiElement::GuiSizeMax);
 
         for(unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
         {
-            (new GuiKeyValueDisplay(left, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(left, "", 0.37f, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
     }
 }

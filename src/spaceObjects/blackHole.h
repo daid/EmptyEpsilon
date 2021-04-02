@@ -28,6 +28,8 @@ public:
     virtual void collide(Collisionable* target, float force) override;
 
     virtual string getExportLine() override { return "BlackHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+
+    void destroy() override;
 };
 
 #endif//BLACK_HOLE_H

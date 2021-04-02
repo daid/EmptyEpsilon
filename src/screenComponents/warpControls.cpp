@@ -13,7 +13,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
     // Build warp request slider.
     slider = new GuiSlider(this, id + "_SLIDER", 4.0, 0.0, 0.0, [this](float value) {
         // Round the slider value to an int.
-        int warp_level = value;
+        auto warp_level = static_cast<int8_t>(value);
 
         // Send a warp request command to our ship.
         if (my_spaceship)

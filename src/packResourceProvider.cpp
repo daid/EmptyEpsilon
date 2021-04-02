@@ -133,18 +133,17 @@ PackResourceStream::~PackResourceStream()
 
 sf::Int64 PackResourceStream::read(void* data, sf::Int64 size)
 {
-    int ret;
     if (read_position + size > this->size)
         size = this->size - read_position;
-    ret = fread(data, 1, size, f);
+    auto ret = fread(data, 1, size, f);
     if (ret > 0)
-        read_position += ret;
-    return ret;
+        read_position += static_cast<int32_t>(ret);
+    return static_cast<sf::Int64>(ret);
 }
 
 sf::Int64 PackResourceStream::seek(sf::Int64 position)
 {
-    read_position = position;
+    read_position = static_cast<int32_t>(position);
     fseek(f, this->position + read_position, SEEK_SET);
     return read_position;
 }

@@ -262,6 +262,11 @@ void ShipTemplateBasedObject::update(float delta)
     }
 }
 
+void ShipTemplateBasedObject::destroy()
+{
+    SpaceObject::destroy();
+}
+
 std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
 {
     std::unordered_map<string, string> ret;
@@ -360,7 +365,7 @@ float ShipTemplateBasedObject::getShieldDamageFactor(DamageInfo& info, int shiel
 
 float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
 {
-    return 0.3;
+    return 0.3f;
 }
 
 void ShipTemplateBasedObject::setTemplate(string template_name)
@@ -414,7 +419,7 @@ ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
 {
     if (shield_count < 2)
         return SYS_FrontShield;
-    float angle = index * 360.0 / shield_count;
+    float angle = index * 360.f / shield_count;
     if (std::abs(sf::angleDifference(angle, 0.0f)) < 90)
         return SYS_FrontShield;
     return SYS_RearShield;

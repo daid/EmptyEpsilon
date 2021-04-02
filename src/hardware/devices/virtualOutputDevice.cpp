@@ -52,7 +52,7 @@ bool VirtualOutputDevice::configure(std::unordered_map<string, string> settings)
             {
                 for(char c : type_string)
                 {
-                    channel_data[index].composition = type_string.length();
+                    channel_data[index].composition = static_cast<int32_t>(type_string.length());
                     switch(c)
                     {
                     case 'R': case 'r': channel_data[index].type = Red; break;
@@ -111,7 +111,7 @@ void VirtualOutputDevice::render(sf::RenderTarget& window)
         }
 
         sf::RectangleShape rect(sf::Vector2f(32, 32));
-        rect.setPosition((location % 32) * 32 + 64, (location / 32) * 32 + 64);
+        rect.setPosition((location % 32) * 32.f + 64, (location / 32) * 32.f + 64);
         rect.setFillColor(color);
         window.draw(rect, sf::BlendAdd);
     }
