@@ -296,14 +296,14 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         render_lists[render_list_index].emplace_back(*obj, depth);
     }
 
-    for(auto n=render_lists.size() - 1; n >= 0; n--)
+    for(auto n=render_lists.size(); n > 0; n--)
     {
-        auto& render_list = render_lists[n];
+        auto& render_list = render_lists[n - 1];
         std::sort(render_list.begin(), render_list.end(), [](const RenderInfo& a, const RenderInfo& b) { return a.depth > b.depth; });
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f * (n + 1));
+        _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f * n);
         glMatrixMode(GL_MODELVIEW);
         glDepthMask(true);
         glClear(GL_DEPTH_BUFFER_BIT);
