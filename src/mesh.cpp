@@ -66,6 +66,7 @@ void Mesh::render()
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }else{
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -79,6 +80,7 @@ void Mesh::render()
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
     }
 #endif//FEATURE_3D_RENDERING
 }
