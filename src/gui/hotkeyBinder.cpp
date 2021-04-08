@@ -34,7 +34,7 @@ bool GuiHotkeyBinder::onKey(sf::Event::KeyEvent key, int unicode)
         }
 
         // Get the key's string name and display it.
-        string key_name = hotkeys.getStringForKey(key.code);
+        string key_name = HotkeyConfig::get().getStringForKey(key.code);
 
         if (key_name.length() > 0) {
             text = key_name;
