@@ -292,8 +292,8 @@ else()
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
-target_compile_definitions(${PROJECT_NAME}
-    PUBLIC
+target_compile_definitions(seriousproton_deps
+    INTERFACE
         WINDOW_TITLE="${PROJECT_NAME}"
         VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
 
@@ -302,23 +302,6 @@ target_compile_definitions(${PROJECT_NAME}
         $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
 )
-
-target_compile_definitions(seriousproton
-    PUBLIC
-        WINDOW_TITLE="${PROJECT_NAME}"
-        VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
-
-        # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-        $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
-        $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
-        $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
-)
-
-## Setup SFML
-find_package(SFML 2.3 REQUIRED system window graphics network audio)
-include_directories(${SFML_INCLUDE_DIR})
-target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
-add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
 
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
@@ -345,10 +328,6 @@ target_link_libraries(${PROJECT_NAME}
         "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"   
 )
 
-if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
-    target_link_libraries(${EXECUTABLE_NAME} PUBLIC stdc++fs)
-endif()
-
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
@@ -363,14 +342,11 @@ include(InstallRequiredSystemLibraries)
 
 set(EE_RESOURCES resources scripts packs)
 if(WIN32)
+    
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
     install(DIRECTORY ${EE_RESOURCES} DESTINATION .)
 
-    get_target_property(DISCORD_DLL discord IMPORTED_LOCATION)
-
-    install(FILES "${DISCORD_DLL}" DESTINATION .)
-
-    
+    install(FILES "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION .)
     if(MSVC)
       # Not all configuration emit a pdb (ie Release), make this optional.
       install(FILES "$<TARGET_PDB_FILE:${PROJECT_NAME}>" DESTINATION . OPTIONAL)
