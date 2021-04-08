@@ -314,6 +314,12 @@ target_compile_definitions(seriousproton
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
 )
 
+## Setup SFML
+find_package(SFML 2.3 REQUIRED system window graphics network audio)
+include_directories(${SFML_INCLUDE_DIR})
+target_link_libraries(${EXECUTABLE_NAME} ${SFML_LIBRARIES})
+add_definitions(-DSFML_NO_DEPRECATED_WARNINGS) # SFML 2.5 gives deprication warnings on a few functions we use. But we maintain 2.3 compatibility, so ignore those warnings.
+
 # install resources, scripts, and packs to app bundle instead of system dir.
 if(APPLE)
     set(CMAKE_INSTALL_PREFIX "./")
@@ -336,9 +342,12 @@ target_link_libraries(${PROJECT_NAME}
         seriousproton glm::glm opengl
         "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WIN32}>:iphlpapi;discord>"
-        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"
-        
+        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"   
 )
+
+if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
+    target_link_libraries(${EXECUTABLE_NAME} PUBLIC stdc++fs)
+endif()
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES

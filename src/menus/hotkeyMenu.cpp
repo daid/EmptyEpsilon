@@ -38,7 +38,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Category selector
     // Get a list of hotkey categories
-    category_list = hotkeys.getCategories();
+    category_list = HotkeyConfig::get().getCategories();
     (new GuiSelector(top_row, "Category", [this](int index, string value)
     {
         HotkeyMenu::setCategory(index);
@@ -136,7 +136,7 @@ void HotkeyMenu::setCategory(int cat)
     int column_row_count = 0;
 
     // Get all hotkeys in this category.
-    hotkey_list = hotkeys.listAllHotkeysByCategory(category);
+    hotkey_list = HotkeyConfig::get().listAllHotkeysByCategory(category);
 
     // Begin rendering hotkey rebinding fields for this category.
     for (std::pair<string, string> item : hotkey_list)
@@ -207,7 +207,7 @@ void HotkeyMenu::saveHotkeys()
     for (std::pair<string,string> item : hotkey_list)
     {
         text = text_entries[i]->getText();
-        hotkey_exists = hotkeys.setHotkey(category, item, text);
+        hotkey_exists = HotkeyConfig::get().setHotkey(category, item, text);
 
         if (!hotkey_exists)
         {

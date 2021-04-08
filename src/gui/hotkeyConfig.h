@@ -14,9 +14,9 @@ public:
     std::tuple<string, string> value;
     sf::Event::KeyEvent hotkey;
 
-    HotkeyConfigItem(string key, std::tuple<string, string>);
+    HotkeyConfigItem(const string& key, const std::tuple<string, string>&);
 
-    void load(string key_config);
+    void load(const string& key_config);
 };
 
 class HotkeyConfigCategory
@@ -39,25 +39,23 @@ public:
 class HotkeyConfig
 {
 public:
-    HotkeyConfig();
+    static HotkeyConfig& get();
 
     void load();
-    std::vector<string> getCategories();
-    std::vector<std::pair<string, string>> listHotkeysByCategory(string hotkey_category);
-    std::vector<std::pair<string, string>> listAllHotkeysByCategory(string hotkey_category);
+    std::vector<string> getCategories() const;
+    std::vector<std::pair<string, string>> listHotkeysByCategory(const string& hotkey_category) const;
+    std::vector<std::pair<string, string>> listAllHotkeysByCategory(const string& hotkey_category) const;
 
-    std::vector<HotkeyResult> getHotkey(sf::Event::KeyEvent key);
-    bool setHotkey(std::string work_cat, std::pair<string,string> key, string new_value);
-    string getStringForKey(sf::Keyboard::Key key);
-    sf::Keyboard::Key getKeyByHotkey(string hotkey_category, string hotkey_name);
+    std::vector<HotkeyResult> getHotkey(const sf::Event::KeyEvent& key) const;
+    bool setHotkey(const std::string& work_cat, const std::pair<string,string>& key, const string& new_value);
+    string getStringForKey(const sf::Keyboard::Key& key) const;
+    sf::Keyboard::Key getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const;
 private:
+    HotkeyConfig();
     std::vector<HotkeyConfigCategory> categories;
 
-    void newCategory(string key, string name);
-    void newKey(string key, std::tuple<string, string>);
+    void newCategory(const string& key, const string& name);
+    void newKey(const string& key, const std::tuple<string, string>&);
 friend class JoystickConfig;
 };
-
-extern HotkeyConfig hotkeys;
-
 #endif//HOTKEY_CONFIG_H
