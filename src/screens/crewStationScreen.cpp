@@ -303,6 +303,8 @@ string CrewStationScreen::listHotkeysLimited(string station)
 {
     string ret = "";
     keyboard_general = "";
+    
+    const auto& hotkeys = HotkeyConfig::get();
 
     for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
         if (shortcut.first == "Switch to next crew station" || shortcut.first =="Switch to previous crew station" || shortcut.first == "Switch crew station")
@@ -356,7 +358,7 @@ void CrewStationScreen::tileViewport()
 }
 
 std::vector<std::pair<string, string>> CrewStationScreen::listControlsByCategory(string category){
-    std::vector<std::pair<string, string>> hotkeyControls = hotkeys.listHotkeysByCategory(category);
+    std::vector<std::pair<string, string>> hotkeyControls = HotkeyConfig::get().listHotkeysByCategory(category);
     std::vector<std::pair<string, string>> joystickControls = joystick.listJoystickByCategory(category);
     hotkeyControls.insert(hotkeyControls.end(), joystickControls.begin(), joystickControls.end());
     return hotkeyControls;

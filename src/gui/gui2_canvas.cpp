@@ -55,7 +55,7 @@ void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
     if (focus_element)
         if (focus_element->onKey(key, unicode))
             return;
-    std::vector<HotkeyResult> hotkey_list = hotkeys.getHotkey(key);
+    std::vector<HotkeyResult> hotkey_list = HotkeyConfig::get().getHotkey(key);
     for(HotkeyResult& result : hotkey_list)
     {
         forwardKeypressToElements(result);
