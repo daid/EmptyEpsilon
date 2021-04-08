@@ -423,6 +423,10 @@ target_compile_options(${EXECUTABLE_NAME}
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
+if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
+    target_link_libraries(${EXECUTABLE_NAME} stdc++fs)
+endif()
+
 ## Setup SFML
 find_package(SFML 2.3 REQUIRED system window graphics network audio)
 include_directories(${SFML_INCLUDE_DIR})
