@@ -44,9 +44,8 @@ jobs:
   macos:
     # https://github.com/actions/virtual-environments/issues/841
     # Mac builds are flaky, disable for now.
-    if: ${{ false }}
     name: MacOS
-    runs-on: macos-11.0
+    runs-on: macos-latest
     steps:
       - name: Dependencies
         run: brew install cmake sfml ninja
