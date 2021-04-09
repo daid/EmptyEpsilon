@@ -303,12 +303,6 @@ target_compile_definitions(seriousproton_deps
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
 )
 
-if(NOT ANDROID)
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
-        target_link_libraries(${PROJECT_NAME} c++fs)
-    endif()
-endif()
-
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
@@ -316,9 +310,8 @@ target_include_directories(${PROJECT_NAME}
 
 add_library(opengl INTERFACE)
 target_link_libraries(opengl
-  INTERFACE
-  "$<$<BOOL:${ANDROID}>:GLESv1_CM;EGL>"
-  "$<$<NOT:$<BOOL:${ANDROID}>>:OpenGL::GL>"
+    INTERFACE
+        "$<IF:$<BOOL:${ANDROID}>,GLESv1_CM;EGL,OpenGL::GL>"
 )
 
 target_link_libraries(${PROJECT_NAME}
