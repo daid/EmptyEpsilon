@@ -423,11 +423,13 @@ target_compile_options(${EXECUTABLE_NAME}
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
-    target_link_libraries(${EXECUTABLE_NAME} stdc++fs)
-endif()
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
-    target_link_libraries(${EXECUTABLE_NAME} c++fs)
+if(NOT ANDROID)
+    if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.1)
+        target_link_libraries(${EXECUTABLE_NAME} stdc++fs)
+    endif()
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+        target_link_libraries(${EXECUTABLE_NAME} c++fs)
+    endif()
 endif()
 
 ## Setup SFML
