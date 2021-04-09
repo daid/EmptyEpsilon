@@ -303,9 +303,10 @@ target_compile_definitions(seriousproton_deps
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
 )
 
-# install resources, scripts, and packs to app bundle instead of system dir.
-if(APPLE)
-    set(CMAKE_INSTALL_PREFIX "./")
+if(NOT ANDROID)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+        target_link_libraries(${PROJECT_NAME} c++fs)
+    endif()
 endif()
 
 target_include_directories(${PROJECT_NAME}
