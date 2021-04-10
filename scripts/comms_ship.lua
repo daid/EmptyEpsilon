@@ -182,7 +182,7 @@ end
 -- @tparam ShipTemplateBasedObject ship the ship
 -- @treturn string the report
 function getStatusReport(ship)
-    local msg = "Hull: " .. math.floor(ship:getHull() / ship:getHullMax() * 100) .. "%\n"
+    local msg = string.format(_("Hull: %d%\n"), math.floor(ship:getHull() / ship:getHullMax() * 100))
 
     local shields = ship:getShieldCount()
     if shields == 1 then
