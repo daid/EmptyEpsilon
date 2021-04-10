@@ -49,10 +49,10 @@ function commsShipFriendly(comms_source, comms_target)
                 setCommsMessage(_("commsShip", "Which waypoint should we defend?"))
                 for n = 1, comms_source:getWaypointCount() do
                     addCommsReply(
-                        string.format(_("Defend %s"), formatWaypoint(n)),
+                        string.format(_("commsShip", "Defend %s"), formatWaypoint(n)),
                         function(comms_source, comms_target)
                             comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-                            setCommsMessage(string.format(_("We are heading to assist at %s."), formatWaypoint(n)))
+                            setCommsMessage(string.format(_("commsShip", "We are heading to assist at %s."), formatWaypoint(n)))
                             addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
                         end
                     )
@@ -80,9 +80,9 @@ function commsShipFriendly(comms_source, comms_target)
     for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
         if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
             addCommsReply(
-                string.format(_("Dock at %s"), obj:getCallSign()),
+                string.format(_("commsShip", "Dock at %s"), obj:getCallSign()),
                 function(comms_source, comms_target)
-                    setCommsMessage(string.format(_("Docking at %s."), obj:getCallSign()))
+                    setCommsMessage(string.format(_("commsShip", "Docking at %s."), obj:getCallSign()))
                     comms_target:orderDock(obj)
                     addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
                 end
@@ -182,14 +182,14 @@ end
 -- @tparam ShipTemplateBasedObject ship the ship
 -- @treturn string the report
 function getStatusReport(ship)
-    local msg = string.format(_("Hull: %d%%\n"), math.floor(ship:getHull() / ship:getHullMax() * 100))
+    local msg = string.format(_("commsShip", "Hull: %d%%\n"), math.floor(ship:getHull() / ship:getHullMax() * 100))
 
     local shields = ship:getShieldCount()
     if shields == 1 then
-        msg = msg .. string.format(_("Shield: %d%%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
+        msg = msg .. string.format(_("commsShip", "Shield: %d%%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
     elseif shields == 2 then
-        msg = msg .. string.format(_("Front Shield: %d%%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
-        msg = msg .. string.format(_("Rear Shield: %d%%\n"), math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100))
+        msg = msg .. string.format(_("commsShip", "Front Shield: %d%%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
+        msg = msg .. string.format(_("commsShip", "Rear Shield: %d%%\n"), math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100))
     else
         for n = 0, shields - 1 do
             msg = msg .. "Shield " .. n .. ": " .. math.floor(ship:getShieldLevel(n) / ship:getShieldMax(n) * 100) .. "%\n"
@@ -210,7 +210,7 @@ end
 -- @tparam integer i the index of the waypoint
 -- @treturn string "WP i"
 function formatWaypoint(i)
-    return string.format(_("WP %d"), i)
+    return string.format(_("commsShip", "WP %d"), i)
 end
 
 -- `comms_source` and `comms_target` are global in comms script.
