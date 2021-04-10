@@ -35,25 +35,25 @@ end
 function commsShipFriendly(comms_source, comms_target)
     local comms_data = comms_target.comms_data
     if comms_data.friendlyness < 20 then
-        setCommsMessage("What do you want?")
+        setCommsMessage(_("commsShip", "What do you want?"))
     else
-        setCommsMessage("Sir, how can we assist?")
+        setCommsMessage(_("commsShip", "Sir, how can we assist?"))
     end
     addCommsReply(
-        "Defend a waypoint",
+        _("commsShip", "Defend a waypoint"),
         function(comms_source, comms_target)
             if comms_source:getWaypointCount() == 0 then
-                setCommsMessage("No waypoints set. Please set a waypoint first.")
-                addCommsReply("Back", commsShipMainMenu)
+                setCommsMessage(_("commsShip", "No waypoints set. Please set a waypoint first."))
+                addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
             else
-                setCommsMessage("Which waypoint should we defend?")
+                setCommsMessage(_("commsShip", "Which waypoint should we defend?"))
                 for n = 1, comms_source:getWaypointCount() do
                     addCommsReply(
-                        string.format("Defend %s", formatWaypoint(n)),
+                        string.format(_("Defend %s"), formatWaypoint(n)),
                         function(comms_source, comms_target)
                             comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-                            setCommsMessage(string.format("We are heading to assist at %s.", formatWaypoint(n)))
-                            addCommsReply("Back", commsShipMainMenu)
+                            setCommsMessage(string.format(_("We are heading to assist at %s."), formatWaypoint(n)))
+                            addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
                         end
                     )
                 end
@@ -62,29 +62,29 @@ function commsShipFriendly(comms_source, comms_target)
     )
     if comms_data.friendlyness > 0.2 then
         addCommsReply(
-            "Assist me",
+            _("commsShip", "Assist me"),
             function(comms_source, comms_target)
-                setCommsMessage("Heading toward you to assist.")
+                setCommsMessage(_("commsShip", "Heading toward you to assist."))
                 comms_target:orderDefendTarget(comms_source)
-                addCommsReply("Back", commsShipMainMenu)
+                addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
             end
         )
     end
     addCommsReply(
-        "Report status",
+        _("commsShip", "Report status"),
         function(comms_source, comms_target)
             setCommsMessage(getStatusReport(comms_target))
-            addCommsReply("Back", commsShipMainMenu)
+            addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
         end
     )
     for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
         if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
             addCommsReply(
-                string.format("Dock at %s", obj:getCallSign()),
+                string.format(_("Dock at %s"), obj:getCallSign()),
                 function(comms_source, comms_target)
-                    setCommsMessage(string.format("Docking at %s.", obj:getCallSign()))
+                    setCommsMessage(string.format(_("Docking at %s."), obj:getCallSign()))
                     comms_target:orderDock(obj)
-                    addCommsReply("Back", commsShipMainMenu)
+                    addCommsReply(_("commsShip", "Back"), commsShipMainMenu)
                 end
             )
         end
@@ -101,21 +101,21 @@ function commsShipEnemy(comms_source, comms_target)
     if comms_data.friendlyness > 50 then
         local faction = comms_target:getFaction()
         local message
-        local taunt_option = "We will see to your destruction!"
-        local taunt_success_reply = "Your bloodline will end here!"
-        local taunt_failed_reply = "Your feeble threats are meaningless."
+        local taunt_option = _("commsShip", "We will see to your destruction!")
+        local taunt_success_reply = _("commsShip", "Your bloodline will end here!")
+        local taunt_failed_reply = _("commsShip", "Your feeble threats are meaningless.")
         if faction == "Kraylor" then
-            message = [[Ktzzzsss.
+            message = _("commsShip", [[Ktzzzsss.
 
-You will DIEEee weaklingsss!]]
+You will DIEEee weaklingsss!]])
         elseif faction == "Arlenians" then
-            message = [[We wish you no harm, but will harm you if we must.
+            message = _("commsShip", [[We wish you no harm, but will harm you if we must.
 
-End of transmission.]]
+End of transmission.]])
         elseif faction == "Exuari" then
-            message = "Stay out of our way, or your death will amuse us extremely!"
+            message = _("commsShip", "Stay out of our way, or your death will amuse us extremely!")
         elseif faction == "Ghosts" then
-            message = [[One zero one.
+            message = _("commsShip", [[One zero one.
 
 No binary communication detected. Switching to universal speech.
 
@@ -123,19 +123,19 @@ Generating appropriate response for target from human language archives.
 
 :Do not cross us.:
 
-Communication halted.]]
-            taunt_option = "EXECUTE: SELFDESTRUCT"
-            taunt_success_reply = "Rogue command received. Targeting source."
-            taunt_failed_reply = "External command ignored."
+Communication halted.]])
+            taunt_option = _("commsShip", "EXECUTE: SELFDESTRUCT")
+            taunt_success_reply = _("commsShip", "Rogue command received. Targeting source.")
+            taunt_failed_reply = _("commsShip", "External command ignored.")
         elseif faction == "Ktlitans" then
-            message = [[The hive suffers no threats. Opposition to any of us is opposition to us all.
+            message = _("commsShip", [[The hive suffers no threats. Opposition to any of us is opposition to us all.
 
-Stand down or prepare to donate your corpses toward our nutrition.]]
-            taunt_option = "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
-            taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-            taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+Stand down or prepare to donate your corpses toward our nutrition.]])
+            taunt_option = _("commsShip", "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>")
+            taunt_success_reply = _("commsShip", "We do not need permission to pluck apart such an insignificant threat.")
+            taunt_failed_reply = _("commsShip", "The hive has greater priorities than exterminating pests.")
         else
-            message = "Mind your own business!"
+            message = _("commsShip", "Mind your own business!")
         end
         setCommsMessage(message)
 
@@ -163,13 +163,13 @@ end
 function commsShipNeutral(comms_source, comms_target)
     local message
     if comms_target.comms_data.friendlyness > 50 then
-        message = [[Sorry, we have no time to chat with you.
+        message = _("commsShip", [[Sorry, we have no time to chat with you.
 
-We are on an important mission.]]
+We are on an important mission.]])
     else
-        message = [[We have nothing for you.
+        message = _("commsShip", [[We have nothing for you.
 
-Good day.]]
+Good day.]])
     end
     setCommsMessage(message)
     return true
@@ -210,7 +210,7 @@ end
 -- @tparam integer i the index of the waypoint
 -- @treturn string "WP i"
 function formatWaypoint(i)
-    return string.format("WP %d", i)
+    return string.format(_("WP %d"), i)
 end
 
 -- `comms_source` and `comms_target` are global in comms script.
