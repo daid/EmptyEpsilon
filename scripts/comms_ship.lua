@@ -182,14 +182,14 @@ end
 -- @tparam ShipTemplateBasedObject ship the ship
 -- @treturn string the report
 function getStatusReport(ship)
-    local msg = string.format(_("Hull: %d%\n"), math.floor(ship:getHull() / ship:getHullMax() * 100))
+    local msg = string.format(_("Hull: %d%%\n"), math.floor(ship:getHull() / ship:getHullMax() * 100))
 
     local shields = ship:getShieldCount()
     if shields == 1 then
-        msg = msg .. string.format(_("Shield: %d%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
+        msg = msg .. string.format(_("Shield: %d%%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
     elseif shields == 2 then
-        msg = msg .. string.format(_("Front Shield: %d%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
-        msg = msg .. string.format(_("Rear Shield: %d%\n"), math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100))
+        msg = msg .. string.format(_("Front Shield: %d%%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
+        msg = msg .. string.format(_("Rear Shield: %d%%\n"), math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100))
     else
         for n = 0, shields - 1 do
             msg = msg .. "Shield " .. n .. ": " .. math.floor(ship:getShieldLevel(n) / ship:getShieldMax(n) * 100) .. "%\n"
