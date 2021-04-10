@@ -186,10 +186,10 @@ function getStatusReport(ship)
 
     local shields = ship:getShieldCount()
     if shields == 1 then
-        msg = msg .. "Shield: " .. math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100) .. "%\n"
+        msg = msg .. string.format(_("Shield: %d%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
     elseif shields == 2 then
-        msg = msg .. "Front Shield: " .. math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100) .. "%\n"
-        msg = msg .. "Rear Shield: " .. math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100) .. "%\n"
+        msg = msg .. string.format(_("Front Shield: %d%\n"), math.floor(ship:getShieldLevel(0) / ship:getShieldMax(0) * 100))
+        msg = msg .. string.format(_("Rear Shield: %d%\n"), math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100))
     else
         for n = 0, shields - 1 do
             msg = msg .. "Shield " .. n .. ": " .. math.floor(ship:getShieldLevel(n) / ship:getShieldMax(n) * 100) .. "%\n"
