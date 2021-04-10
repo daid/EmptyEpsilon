@@ -92,6 +92,7 @@ add_subdirectory("${GLM_BASE_PATH}/glm" "${PROJECT_BINARY_DIR}/glm" EXCLUDE_FROM
 # Set minimum target macOS version
 if(APPLE)
     set(MACOSX_DEPLOYMENT_TARGET "10.10")
+    set(CMAKE_INSTALL_PREFIX ".")
 endif()
 
 
