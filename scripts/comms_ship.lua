@@ -163,11 +163,11 @@ end
 function commsShipNeutral(comms_source, comms_target)
     local message
     if comms_target.comms_data.friendlyness > 50 then
-        message = _("commsShipNeutral", [[Sorry, we have no time to chat with you.
+        message = _("commsShip", [[Sorry, we have no time to chat with you.
 
 We are on an important mission.]])
     else
-        message = _("commsShipNeutral", [[We have nothing for you.
+        message = _("commsShip", [[We have nothing for you.
 
 Good day.]])
     end
