@@ -192,13 +192,13 @@ function getStatusReport(ship)
         msg = msg .. string.format(_("commsShipAssist", "Rear Shield: %d%%\n"), math.floor(ship:getShieldLevel(1) / ship:getShieldMax(1) * 100))
     else
         for n = 0, shields - 1 do
-            msg = msg .. "Shield " .. n .. ": " .. math.floor(ship:getShieldLevel(n) / ship:getShieldMax(n) * 100) .. "%\n"
+            msg = msg .. string.format(_("commsShipAssist", "Shield %d: %d%%\n"), n, math.floor(ship:getShieldLevel(n) / ship:getShieldMax(n) * 100))
         end
     end
 
     for i, missile_type in ipairs(MISSILE_TYPES) do
         if ship:getWeaponStorageMax(missile_type) > 0 then
-            msg = msg .. missile_type .. " Missiles: " .. math.floor(ship:getWeaponStorage(missile_type)) .. "/" .. math.floor(ship:getWeaponStorageMax(missile_type)) .. "\n"
+            msg = msg .. string.format(_("commsShipAssist", "%s Missiles: %d/%d\n"), missile_type, math.floor(ship:getWeaponStorage(missile_type)), math.floor(ship:getWeaponStorageMax(missile_type)))
         end
     end
 
