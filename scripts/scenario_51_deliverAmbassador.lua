@@ -18,37 +18,37 @@ function init()
 	player:setPosition(22400, 18200):setCallSign(playerCallSign)
 	-- Create various stations of various size, purpose and faction.
     outpost41 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-    outpost41:setPosition(22400, 16100):setCallSign("Outpost-41"):setDescription(_("Strategically located human station"))
+    outpost41:setPosition(22400, 16100):setCallSign("Outpost-41"):setDescription(_("scienceStationsDescription", "Strategically located human station"))
     outpost17 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     outpost17:setPosition(52400, -26150):setCallSign("Outpost-17")
     outpost26 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     outpost26:setPosition(-42400, -32150):setCallSign("Outpost-26")
     outpost13 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	outpost13:setPosition(12600, 27554):setCallSign("Outpost-13"):setDescription(_("Gathering point for asteroid miners"))
+	outpost13:setPosition(12600, 27554):setCallSign("Outpost-13"):setDescription(_("scienceStationsDescription", "Gathering point for asteroid miners"))
     outpost57 = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor")
 	outpost57:setPosition(63630, 47554):setCallSign("Outpost-57")
     science22 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	science22:setPosition(11200, 67554):setCallSign("Science-22")
     science37 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	science37:setPosition(-18200, -32554):setCallSign("Science-37"):setDescription(_("Observatory"))
+	science37:setPosition(-18200, -32554):setCallSign("Science-37"):setDescription(_("scienceStationsDescription", "Observatory"))
     bpcommnex = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	bpcommnex:setPosition(-53500,84000):setCallSign("BP Comm Nex"):setDescription(_("Balindor Prime Communications Nexus"))
+	bpcommnex:setPosition(-53500,84000):setCallSign("BP Comm Nex"):setDescription(_("scienceStationsDescription", "Balindor Prime Communications Nexus"))
     goltincomms = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	goltincomms:setPosition(93150,24387):setCallSign("Goltin Comms")
     stationOrdinkal = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrdinkal:setPosition(-14600, 47554):setCallSign("Ordinkal"):setDescription(_("Trading Post"))
+	stationOrdinkal:setPosition(-14600, 47554):setCallSign("Ordinkal"):setDescription(_("scienceStationsDescription", "Trading Post"))
     stationNakor = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationNakor:setPosition(-34310, -37554):setCallSign("Nakor"):setDescription(_("Science and trading hub"))
+	stationNakor:setPosition(-34310, -37554):setCallSign("Nakor"):setDescription(_("scienceStationsDescription", "Science and trading hub"))
     stationKelfist = SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor")
 	stationKelfist:setPosition(44640, 13554):setCallSign("Kelfist")
     stationFranklin = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFranklin:setPosition(-24640, -13554):setCallSign("Franklin"):setDescription(_("Civilian and military station"))
+	stationFranklin:setPosition(-24640, -13554):setCallSign("Franklin"):setDescription(_("scienceStationsDescription", "Civilian and military station"))
     stationBroad = SpaceStation():setTemplate("Large Station"):setFaction("Independent")
-	stationBroad:setPosition(44340, 63554):setCallSign("Broad"):setDescription(_("Trading Post"))
+	stationBroad:setPosition(44340, 63554):setCallSign("Broad"):setDescription(_("scienceStationsDescription", "Trading Post"))
     stationBazamoana = SpaceStation():setTemplate("Large Station"):setFaction("Independent")
-	stationBazamoana:setPosition(35, 87):setCallSign("Bazamoana"):setDescription(_("Trading Nexus"))
+	stationBazamoana:setPosition(35, 87):setCallSign("Bazamoana"):setDescription(_("scienceStationsDescription", "Trading Nexus"))
     stationPangora = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("Major military installation"))
+	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("scienceStationsDescription", "Major military installation"))
 	-- Give out some initial reputation points. Give more for easier difficulty levels
 	stationFranklin:addReputationPoints(50.0)
 	if getScenarioVariation() ~= "Hard" then
@@ -218,20 +218,20 @@ function transportSpawn(delta)
 		if target:isValid() then
 			rnd = irandom(1,5)
 			if rnd == 1 then
-				name = _("Personnel")
+				name = _("scienceShipsName", "Personnel")
 			elseif rnd == 2 then
-				name = _("Goods")
+				name = _("scienceShipsName", "Goods")
 			elseif rnd == 3 then
-				name = _("Garbage")
+				name = _("scienceShipsName", "Garbage")
 			elseif rnd == 4 then
-				name = _("Equipment")
+				name = _("scienceShipsName", "Equipment")
 			else
-				name = _("Fuel")
+				name = _("scienceShipsName", "Fuel")
 			end
 			if irandom(1,100) < 15 then
-				name = string.format(_("%s Jump Freighter %d"), name, irandom(3, 5))
+				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
 			else
-				name = string.format(_("%s Freighter %s"), name, irandom(1, 5))
+				name = string.format(_("scienceShipsName", "%s Freighter %s"), name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent')
 			obj.target = target
@@ -282,7 +282,7 @@ function getAmbassador(delta)
 	player:addToShipLog(string.format(_("[CMDMICHL012](Commander Michael) %s, avoid contact where possible. Get ambassador Gremus at Balindor Prime"), playerCallSign),"Yellow")
 	if playMsgMichaelButton == nil then
 		playMsgMichaelButton = "play"
-		player:addCustomButton("Relay",playMsgMichaelButton,_("|> CMDMICHL012"),playMsgMichael)
+		player:addCustomButton("Relay",playMsgMichaelButton,_("audioButton", "|> CMDMICHL012"),playMsgMichael)
 	end
 	balindorPrime = Planet():setPosition(-50500,84000):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0):setAxialRotationTime(400.0)
 	plot1 = ambassadorAboard
@@ -307,7 +307,7 @@ function revolutionFomenting(delta)
 		player:addToShipLog(_("[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There is serious unrest here on Balindor Prime. I am not sure how long I am going to survive. Please hurry, I can hear a mob outside my compound."),"Yellow")
 		if playMsgGremus1Button == nil then
 			playMsgGremus1Button = "play"
-			player:addCustomButton("Relay",playMsgGremus1Button,_("|> AMBGREMUS001"),playMsgGremus1)
+			player:addCustomButton("Relay",playMsgGremus1Button,_("audioButton", "|> AMBGREMUS001"),playMsgGremus1)
 		end
 		breakoutTimer = 60 * 5
 		plot2 = revolutionOccurs
@@ -329,7 +329,7 @@ function revolutionOccurs(delta)
 			player:addToShipLog(_("[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon."),"Yellow")
 			if playMsgSentry1Button == nil then
 				playMsgSentry1Button = "play"
-				player:addCustomButton("Relay",playMsgSentry1Button,_("|> GREMUSGRD003"),playMsgSentry1)
+				player:addCustomButton("Relay",playMsgSentry1Button,_("audioButton", "|> GREMUSGRD003"),playMsgSentry1)
 			end
 			plot2 = nil
 		else
@@ -435,7 +435,7 @@ function ambassadorAboard(delta)
 		player:addToShipLog(_("[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please transport me to Ningling."),"Yellow")
 		if playMsgGremus2Button == nil then
 			playMsgGremus2Button = "play"
-			player:addCustomButton("Relay",playMsgGremus2Button,_("|> AMBGREMUS004"),playMsgGremus2)
+			player:addCustomButton("Relay",playMsgGremus2Button,_("audioButton", "|> AMBGREMUS004"),playMsgGremus2)
 		end		
 		ningling = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 		ningling:setPosition(12200,-62600):setCallSign("Ningling")
@@ -522,7 +522,7 @@ function gotoNingling(delta)
 		player:addToShipLog(_("[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The ambassador is scheduled for a brief meeting with liaison Fordina. After that meeting, you will be asked to transport the ambassador to Goltin 7. We will contact you after the meeting."),"Yellow")
 		if playMsgProtocolButton == nil then
 			playMsgProtocolButton = "play"
-			player:addCustomButton("Relay",playMsgProtocolButton,_("|> NINGPCLO002"),playMsgProtocol)
+			player:addCustomButton("Relay",playMsgProtocolButton,_("audioButton", "|> NINGPCLO002"),playMsgProtocol)
 		end
 		plot1 = waitForAmbassador
 		meetingTimer = 0.0
@@ -575,7 +575,7 @@ function waitForAmbassador(delta)
 		player:addToShipLog(string.format(_("[AMBGREMUS007](Ambassador Gremus) %s, I am ready to be transported to Goltin 7. Please dock with Ningling"), playerCallSign),"Yellow")
 		if playMsgGremus3Button == nil then
 			playMsgGremus3Button = "play"
-			player:addCustomButton("Relay",playMsgGremus3Button,_("|> AMBGREMUS007"),playMsgGremus3)
+			player:addCustomButton("Relay",playMsgGremus3Button,_("audioButton", "|> AMBGREMUS007"),playMsgGremus3)
 		end
 		plot1 = getFromNingling
 	end
@@ -602,7 +602,7 @@ function getFromNingling(delta)
 		end
 		if playMsgGremus4Button == nil then
 			playMsgGremus4Button = "play"
-			player:addCustomButton("Relay",playMsgGremus4Button,_("|> AMBGREMUS021"),playMsgGremus4)
+			player:addCustomButton("Relay",playMsgGremus4Button,_("audioButton", "|> AMBGREMUS021"),playMsgGremus4)
 		end
 		player:setTypeName("Flavia P. Falcon MK2")
 		player:setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
@@ -628,7 +628,7 @@ function artifactResearch(delta)
 		player:addToShipLog(_("[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that follow-up information from Goltin 7 we spoke of. It seems they want additional information about several artifacts. Some of these have been reported by stations in the area: Pangora, Nakor and Science-37."),"Yellow")
 		if playMsgFordinaButton == nil then
 			playMsgFordinaButton = "play"
-			player:addCustomButton("Relay",playMsgFordinaButton,_("|> LSNFRDNA009"),playMsgFordina)
+			player:addCustomButton("Relay",playMsgFordinaButton,_("audioButton", "|> LSNFRDNA009"),playMsgFordina)
 		end
 		askForPangoraLocation = "ready"
 		askForNakorLocation = "ready"
@@ -657,7 +657,7 @@ function artifactByStation(delta)
 			nPangora.gravity_disruption = irandom(1,21)
 			nPangora.ionic_phase_shift = irandom(5,32)
 			nPangora.doppler_instability = irandom(1,9)
-			nPangora:setDescriptions(_("Unusual object floating in space"), string.format(_([[Object gives off unusual readings:
+			nPangora:setDescriptions(_("scienceArtifactDescription", "Unusual object floating in space"), string.format(_("scienceArtifactDescription", [[Object gives off unusual readings:
 			Beta radiation: %i
 			Gravity disruption: %i
 			Ionic phase shift: %i
@@ -674,7 +674,7 @@ function artifactByStation(delta)
 			nNakor.gamma_radiation = irandom(1,9)
 			nNakor.organic_decay = irandom(3,43)
 			nNakor.gravity_disruption = irandom(2,13)
-			nNakor:setDescription(_("Object with unusual visual properties"), string.format(_([[Sensor readings of interest:
+			nNakor:setDescription(_("scienceArtifactDescription", "Object with unusual visual properties"), string.format(_("scienceArtifactDescription", [[Sensor readings of interest:
 			Gamma radiation: %i
 			Organic decay: %i
 			Gravity disruption: %i]]), nNakor.gamma_radiation, nNakor.organic_decay, nNakor.gravity_disruption))
@@ -690,7 +690,7 @@ function artifactByStation(delta)
 			nScience37.ionic_phase_shift = irandom(1,9)
 			nScience37.organic_decay = irandom(3,13)
 			nScience37.theta_particle_emission = irandom(1,15)
-			nScience37:setDescription(_("Small object floating in space"), string.format(_([[Sensors show:
+			nScience37:setDescription(_("scienceArtifactDescription", "Small object floating in space"), string.format(_("scienceArtifactDescription", [[Sensors show:
 			Ionic pase shift: %i
 			Organic decay: %i
 			Theta particle emission: %i]]),nScience37.ionic_phase_shift, nScience37.organic_decay, nScience37.theta_particle_emission))
@@ -705,7 +705,7 @@ function artifactByStation(delta)
 		if distance(player,nPangora) < 5000 then
 			pangoraExplodeCountdown = 0.0
 			nPangora.gravity_disruption = nPangora.gravity_disruption + 1
-			nPangora:setDescriptions(_("Unusual object floating in space"), string.format(_([[Object gives off unusual readings:
+			nPangora:setDescriptions(_("scienceArtifactDescription", "Unusual object floating in space"), string.format(_("scienceArtifactDescription", [[Object gives off unusual readings:
 			Beta radiation: %i
 			Gravity disruption: %i
 			Ionic phase shift: %i
@@ -727,7 +727,7 @@ end
 
 function pangoraArtifactChange(delta)
 	if player.pangora_reading_change_message == nil then
-		player:addCustomMessage("Science", "Warning", _("The readings on the Pangora artifact have changed"))
+		player:addCustomMessage("Science", "Warning", _("warningMsgScience", "The readings on the Pangora artifact have changed"))
 		player.pangora_reading_change_message = "sent"
 	end
 	plot4 = pangoraArtifactExplode
@@ -810,7 +810,7 @@ function travelGoltin(delta)
 			player:addToShipLog(string.format(_("[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."),playerCallSign),"Yellow")
 			if playMsgGremus6Button == nil then
 				playMsgGremus6Button = "play"
-				player:addCustomButton("Relay",playMsgGremus6Button,_("|> AMBGREMUS021"),playMsgGremus6)
+				player:addCustomButton("Relay",playMsgGremus6Button,_("audioButton", "|> AMBGREMUS021"),playMsgGremus6)
 			end			
 			plot1 = departForResearch
 		end
@@ -894,7 +894,7 @@ function commsStation()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("We are under attack! No time for chatting!"));
+        setCommsMessage(_("classicComms", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -908,33 +908,33 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("Good day, officer!\nWhat can we do for you today?"))
+        setCommsMessage(_("classicComms", "Good day, officer!\nWhat can we do for you today?"))
     else
-        setCommsMessage(_("Welcome to our lovely station."))
+        setCommsMessage(_("classicComms", "Welcome to our lovely station."))
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(string.format(_("Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
+        addCommsReply(string.format(_("classicComms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
             handleWeaponRestock("Homing")
         end)
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(string.format(_("Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
+        addCommsReply(string.format(_("classicComms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
             handleWeaponRestock("HVLI")
         end)
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(string.format(_("Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
+        addCommsReply(string.format(_("classicComms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
             handleWeaponRestock("Mine")
         end)
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(string.format(_("Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
+        addCommsReply(string.format(_("classicComms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
             handleWeaponRestock("Nuke")
         end)
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(string.format(_("Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
+        addCommsReply(string.format(_("classicComms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
             handleWeaponRestock("EMP")
         end)
     end
@@ -1071,32 +1071,32 @@ function handleDockedState()
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage(_("You need to stay docked for that action.")); return end
+    if not player:isDocked(comms_target) then setCommsMessage(_("classicComms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("classicComms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("classicComms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("classicComms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("All nukes are charged and primed for destruction."));
+            setCommsMessage(_("classicComms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("classicComms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("Not enough reputation."))
+            setCommsMessage(_("classicComms", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("You are fully loaded and ready to explode things."))
+            setCommsMessage(_("classicComms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("classicComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -1105,16 +1105,16 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("Good day, officer.\nIf you need supplies, please dock with us first."))
+        setCommsMessage(_("classicComms", "Good day, officer.\nIf you need supplies, please dock with us first."))
     else
-        setCommsMessage(_("Greetings.\nIf you want to do business, please dock with us first."))
+        setCommsMessage(_("classicComms", "Greetings.\nIf you want to do business, please dock with us first."))
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("classicComms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("classicComms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("classicComms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
                     addCommsReply(string.format(_("WP%d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
@@ -1124,9 +1124,9 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("We have dispatched a supply ship toward WP%d"), n));
+                            setCommsMessage(string.format(_("classicComms", "We have dispatched a supply ship toward WP%d"), n));
                         else
-                            setCommsMessage(_("Not enough reputation!"));
+                            setCommsMessage(_("classicComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -1136,18 +1136,18 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("classicComms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("classicComms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("classicComms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("WP%d"), n), function()
+                    addCommsReply(string.format(_("classicComms", "WP%d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("We have dispatched %s to assist at WP%d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("classicComms", "We have dispatched %s to assist at WP%d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("Not enough reputation!"));
+                            setCommsMessage(_("classicComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
