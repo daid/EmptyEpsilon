@@ -727,7 +727,7 @@ end
 
 function pangoraArtifactChange(delta)
 	if player.pangora_reading_change_message == nil then
-		player:addCustomMessage("Science", "Warning", "The readings on the Pangora artifact have changed")
+		player:addCustomMessage("Science", "Warning", _("The readings on the Pangora artifact have changed"))
 		player.pangora_reading_change_message = "sent"
 	end
 	plot4 = pangoraArtifactExplode
@@ -799,8 +799,7 @@ function travelGoltin(delta)
 	if artifactResearchCount > 0 then
 		if distance(player,goltin) < 3300 then
 			globalMessage(_([[Goltin 7 welcomes ambassador Gremus]]))
-			goltincomms:sendCommsMessage(player, "(Ambassador Gremus) Thanks for transporting me, "..playerCallSign..[[. Tensions are high, but I think negotiations will succeed. 
-			In the meantime, be careful of hostile ships.]])
+			goltincomms:sendCommsMessage(player, string.format(_("(Ambassador Gremus) Thanks for transporting me, %s. Tensions are high, but I think negotiations will succeed.\nIn the meantime, be careful of hostile ships."), playerCallSign))
 			playSoundFile("sa_51_Gremus5.ogg")
 			lastMessage = 0.0
 			plot1 = finalMessage
@@ -835,7 +834,7 @@ function goltinAndResearch(delta)
 	if artifactResearchCount > 0 then
 		if distance(player,goltin) < 3300 then
 			globalMessage(_([[Goltin 7 welcomes ambassador Gremus]]))
-			goltincomms:sendCommsMessage(player, "(Ambassador Gremus) Thanks for researching the artifacts, "..playerCallSign..[[. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships.]])
+			goltincomms:sendCommsMessage(player, string.format(_("(Ambassador Gremus) Thanks for researching the artifacts, %d. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships."), playerCallSign))
 			playSoundFile("sa_51_Gremus7.ogg")
 			lastMessage = 0.0
 			plot1 = finalMessage			
