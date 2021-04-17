@@ -333,7 +333,7 @@ function revolutionOccurs(delta)
 			end
 			plot2 = nil
 		else
-			globalMessage(_([[Ambassador lost to hostile mob. The Kraylors are victorious]]))
+			globalMessage(_("globalMsg", [[Ambassador lost to hostile mob. The Kraylors are victorious]]))
 			bpcommnex:sendCommsMessage(player, _([[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]]))
 			playSoundFile("sa_51_Sentry2.ogg")
 			plot2 = defeat
