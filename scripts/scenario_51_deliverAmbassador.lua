@@ -231,7 +231,7 @@ function transportSpawn(delta)
 			if irandom(1,100) < 15 then
 				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
 			else
-				name = string.format(_("scienceShipsName", "%s Freighter %s"), name, irandom(1, 5))
+				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent')
 			obj.target = target
