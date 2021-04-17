@@ -27,9 +27,9 @@ function init()
 	-- rough hexagonal deployment
 	fleetPosDelta2x = {0,2,-2,1,-1, 1, 1,4,-4,0, 0,2,-2,-2, 2,3,-3, 3,-3,6,-6,1,-1, 1,-1,3,-3, 3,-3,4,-4, 4,-4,5,-5, 5,-5}
 	fleetPosDelta2y = {0,0, 0,1, 1,-1,-1,0, 0,2,-2,2,-2, 2,-2,1,-1,-1, 1,0, 0,3, 3,-3,-3,3,-3,-3, 3,2,-2,-2, 2,1,-1,-1, 1}
-	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
-	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
-	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
+	commonGoods = {_("food"),_("medicine"),_("nickel"),_("platinum"),_("gold"),_("dilithium"),_("tritanium"),_("luxury"),_("cobalt"),_("impulse"),_("warp"),_("shield"),_("tractor"),_("repulsor"),_("beam"),_("optic"),_("robotic"),_("filament"),_("transporter"),_("sensor"),_("communication"),_("autodoc"),_("lifter"),_("android"),_("nanites"),_("software"),_("circuit"),_("battery")}
+	componentGoods = {_("impulse"),_("warp"),_("shield"),_("tractor"),_("repulsor"),_("beam"),_("optic"),_("robotic"),_("filament"),_("transporter"),_("sensor"),_("communication"),_("autodoc"),_("lifter"),_("android"),_("nanites"),_("software"),_("circuit"),_("battery")}
+	mineralGoods = {_("nickel"),_("platinum"),_("gold"),_("dilithium"),_("tritanium"),_("cobalt")}
 	diagnostic = false			
 	GMDiagnosticOn = "Turn On Diagnostic"
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
@@ -100,26 +100,26 @@ function init()
 	junkYardDebrisY = {150504, 150317, 148005}
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris1 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(2,1):onPickUp(function(debris, pGrab) string.format("");pGrab.debris1 = true end)
-	debris1:setDescriptions("Debris","Debris: Various broken ship components. Possibly useful for engine or weapons systems repair")
+	debris1:setDescriptions(_("Debris"),_("Debris: Various broken ship components. Possibly useful for engine or weapons systems repair"))
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris2 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(1,3):onPickUp(function(debris, pGrab) string.format("");pGrab.debris2 = true end)
-	debris2:setDescriptions("Debris","Debris: Various broken ship components. Possibly useful for shield or beam systems repair")
+	debris2:setDescriptions(_("Debris"),_("Debris: Various broken ship components. Possibly useful for shield or beam systems repair"))
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris3 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(2,1):onPickUp(function(debris, pGrab) string.format("");pGrab.debris3 = true end)
-	debris3:setDescriptions("Debris","Debris: Various broken ship components. Possibly useful for hull or reactor systems repair")
+	debris3:setDescriptions(_("Debris"),_("Debris: Various broken ship components. Possibly useful for hull or reactor systems repair"))
 	--Signs
 	junkYardSignX = {914126, 905479, 910303}
 	junkYardSignY = {151100, 148728, 147102}
 	junkZone = Zone():setPoints(905479, 148728, 906490, 146843, 910303, 147102, 914126, 151100, 912635, 154012, 905801, 151274)
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign1 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign1:setDescriptions("Space Message Buoy","Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in the Kraylor language")
+	Sign1:setDescriptions(_("Space Message Buoy"),_("Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in the Kraylor language"))
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign2 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign2:setDescriptions("Space Message Buoy","Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an asteroid for the kids' in the Kraylor language")
+	Sign2:setDescriptions(_("Space Message Buoy"),_("Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an asteroid for the kids' in the Kraylor language"))
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign3 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign3:setDescriptions("Space Message Buoy","Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language")
+	Sign3:setDescriptions(_("Space Message Buoy"),_("Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language"))
 	plotSign = billboardUpdate	
 	--Initial player ship
 	playerFighter = PlayerSpaceship():setFaction("Human Navy"):setTemplate("MP52 Hornet"):setCallSign("Scrag"):setPosition(912035, 152062)
@@ -200,7 +200,7 @@ function init()
     junkSupply = SupplyDrop():setFaction("Independent"):setPosition(909362, 151445):setEnergy(500):setWeaponStorage("Homing", 1):setWeaponStorage("Nuke", 0):setWeaponStorage("Mine", 0):setWeaponStorage("EMP", 0)
 	plotH = shipHealth				--enable ship health check plot
 	playerShipHealth = scragHealth	--set function to constrain player ship health
-	playerFighter:addToShipLog(string.format("You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station",brigStation:getCallSign()),"Magenta")
+	playerFighter:addToShipLog(string.format(_("You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station"), brigStation:getCallSign()),"Magenta")
 	plot1 = scanRepulse				--enable first plot mission goal
 	--print("end of init")
 end
@@ -368,9 +368,9 @@ function buildNearbyStations()
 	bwx = brigx + (gRegion[sri][1] - (gbHigh/2))*gSize
 	bwy = brigy + (gRegion[sri][2] - (gbHigh/2))*gSize
 	planetBaldwin = Planet():setPosition(bwx,bwy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Baldwin")
-	planetBaldwin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription("Mining and heavy industry")
+	planetBaldwin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription(_("Mining and heavy industry"))
 	stationWig = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor")
-	stationWig:setPosition(bwx, bwy+3000):setCallSign("BOBS"):setDescription("Baldwin Observatory")
+	stationWig:setPosition(bwx, bwy+3000):setCallSign("BOBS"):setDescription(_("Baldwin Observatory"))
 	stationWig.angle = 90
 	gp = gp + 1
 	rn = math.random(1,#adjList)
@@ -403,9 +403,9 @@ function buildNearbyStations()
 	planetMal = Planet():setPosition(msx,msy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Malastare")
 	planetMal:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	planetMal:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	planetMal:setAxialRotationTime(400.0):setDescription("M class planet")
+	planetMal:setAxialRotationTime(400.0):setDescription(_("M class planet"))
 	stationMal = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
-	stationMal:setPosition(msx,msy+3000):setCallSign("MalNet"):setDescription("Malastare communications network hub")
+	stationMal:setPosition(msx,msy+3000):setCallSign("MalNet"):setDescription(_("Malastare communications network hub"))
 	stationMal.angle = 90
 	gp = gp + 1
 	rn = math.random(1,#adjList)
@@ -1031,7 +1031,7 @@ end
 function placeAlcaleica()
 	--Alcaleica
 	stationAlcaleica = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAlcaleica:setPosition(psx,psy):setCallSign("Alcaleica"):setDescription("Optical Components")
+	stationAlcaleica:setPosition(psx,psy):setCallSign("Alcaleica"):setDescription(_("Optical Components"))
     stationAlcaleica.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1043,8 +1043,8 @@ function placeAlcaleica()
         trade = {	food = false, medicine = false, luxury = false },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We make and supply optic components for various station and ship systems",
-    	history = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"
+        general_information = _("We make and supply optic components for various station and ship systems"),
+    	history = _("This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company")
 	}
 	if stationFaction == "Human Navy" then
 		stationAlcaleica.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
