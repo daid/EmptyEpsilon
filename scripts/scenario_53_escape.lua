@@ -3341,23 +3341,23 @@ function handleDockedState()
 			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
 			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
-			addCommsReply("I need ordnance restocked", function()
+			addCommsReply(_("commsAmmo", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
-				if stationCommsDiagnostic then print("in restock function") end
-				setCommsMessage("What type of ordnance?")
-				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
+				if stationCommsDiagnostic then print(_("commsAmmo", "in restock function")) end
+				setCommsMessage(_("commsAmmo", "What type of ordnance?"))
+				if stationCommsDiagnostic then print(string.format(_("commsAmmo", "player nuke weapon storage max: %.1f"),comms_source:getWeaponStorageMax("Nuke"))) end
 				if comms_source:getWeaponStorageMax("Nuke") > 0 then
-					if stationCommsDiagnostic then print("player can fire nukes") end
+					if stationCommsDiagnostic then print(_("commsAmmo", "player can fire nukes")) end
 					if ctd.weapon_available.Nuke then
-						if stationCommsDiagnostic then print("station has nukes available") end
+						if stationCommsDiagnostic then print(_("commsAmmo", "station has nukes available")) end
 						if math.random(1,10) <= 5 then
-							nukePrompt = "Can you supply us with some nukes? ("
+							nukePrompt = _("commsAmmo", "Can you supply us with some nukes? (")
 						else
-							nukePrompt = "We really need some nukes ("
+							nukePrompt = _("commsAmmo", "We really need some nukes (")
 						end
-						if stationCommsDiagnostic then print("nuke prompt: " .. nukePrompt) end
-						addCommsReply(nukePrompt .. getWeaponCost("Nuke") .. " rep each)", function()
-							if stationCommsDiagnostic then print("going to handle weapon restock function") end
+						if stationCommsDiagnostic then print(string.format(_("commsAmmo", "nuke prompt: %s"), nukePrompt)) end
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+							if stationCommsDiagnostic then print(_("commsAmmo", "going to handle weapon restock function")) end
 							handleWeaponRestock("Nuke")
 						end)
 					end	--end station has nuke available if branch
@@ -3365,11 +3365,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("EMP") > 0 then
 					if ctd.weapon_available.EMP then
 						if math.random(1,10) <= 5 then
-							empPrompt = "Please re-stock our EMP missiles. ("
+							empPrompt = _("commsAmmo", "Please re-stock our EMP missiles. (")
 						else
-							empPrompt = "Got any EMPs? ("
+							empPrompt = _("commsAmmo", "Got any EMPs? (")
 						end
-						addCommsReply(empPrompt .. getWeaponCost("EMP") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end	--end station has EMP available if branch
@@ -3377,11 +3377,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if ctd.weapon_available.Homing then
 						if math.random(1,10) <= 5 then
-							homePrompt = "Do you have spare homing missiles for us? ("
+							homePrompt = _("commsAmmo", "Do you have spare homing missiles for us? (")
 						else
-							homePrompt = "Do you have extra homing missiles? ("
+							homePrompt = _("commsAmmo", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end	--end station has homing for player if branch
@@ -3389,11 +3389,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Mine") > 0 then
 					if ctd.weapon_available.Mine then
 						if math.random(1,10) <= 5 then
-							minePrompt = "We could use some mines. ("
+							minePrompt = _("commsAmmo", "We could use some mines. (")
 						else
-							minePrompt = "How about mines? ("
+							minePrompt = _("commsAmmo", "How about mines? (")
 						end
-						addCommsReply(minePrompt .. getWeaponCost("Mine") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end	--end station has mine for player if branch
@@ -3401,11 +3401,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if ctd.weapon_available.HVLI then
 						if math.random(1,10) <= 5 then
-							hvliPrompt = "What about HVLI? ("
+							hvliPrompt = _("commsAmmo", "What about HVLI? (")
 						else
-							hvliPrompt = "Could you provide HVLI? ("
+							hvliPrompt = _("commsAmmo", "Could you provide HVLI? (")
 						end
-						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end	--end station has HVLI for player if branch
