@@ -27,9 +27,9 @@ function init()
 	-- rough hexagonal deployment
 	fleetPosDelta2x = {0,2,-2,1,-1, 1, 1,4,-4,0, 0,2,-2,-2, 2,3,-3, 3,-3,6,-6,1,-1, 1,-1,3,-3, 3,-3,4,-4, 4,-4,5,-5, 5,-5}
 	fleetPosDelta2y = {0,0, 0,1, 1,-1,-1,0, 0,2,-2,2,-2, 2,-2,1,-1,-1, 1,0, 0,3, 3,-3,-3,3,-3,-3, 3,2,-2,-2, 2,1,-1,-1, 1}
-	commonGoods = {_("food"),_("medicine"),_("nickel"),_("platinum"),_("gold"),_("dilithium"),_("tritanium"),_("luxury"),_("cobalt"),_("impulse"),_("warp"),_("shield"),_("tractor"),_("repulsor"),_("beam"),_("optic"),_("robotic"),_("filament"),_("transporter"),_("sensor"),_("communication"),_("autodoc"),_("lifter"),_("android"),_("nanites"),_("software"),_("circuit"),_("battery")}
-	componentGoods = {_("impulse"),_("warp"),_("shield"),_("tractor"),_("repulsor"),_("beam"),_("optic"),_("robotic"),_("filament"),_("transporter"),_("sensor"),_("communication"),_("autodoc"),_("lifter"),_("android"),_("nanites"),_("software"),_("circuit"),_("battery")}
-	mineralGoods = {_("nickel"),_("platinum"),_("gold"),_("dilithium"),_("tritanium"),_("cobalt")}
+	commonGoods = {"food","medicine","nickel","platinum","gold","dilithium","tritanium","luxury","cobalt","impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
+	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
+	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
 	diagnostic = false			
 	GMDiagnosticOn = "Turn On Diagnostic"
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
