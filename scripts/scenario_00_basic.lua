@@ -27,7 +27,7 @@ local stationList
 
 --- Add an enemy wave.
 --
--- That is, create it and add it to `list`.
+-- That is, create enemy wave and add all its ships to `list`.
 --
 -- @tparam table list A table containing enemy ship objects.
 -- @tparam integer kind A number; at each integer, determines a different wave of ships to add
@@ -35,6 +35,7 @@ local stationList
 -- @tparam number a The spawned wave's heading relative to the players' spawn point.
 -- @tparam number d The spawned wave's distance from the players' spawn point.
 function addWave(list, kind, a, d)
+    -- TODO: for some reason all waves spawn at 0, 0 instead of random coords. Check if randomWaveAngle and randomWaveDistance works properly.
     if kind < 1.0 then
         table.insert(list, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
     elseif kind < 2.0 then
@@ -90,6 +91,42 @@ function randomWaveDistance(enemy_group_count)
     return random(35000, 40000 + enemy_group_count * 3000)
 end
 
+function gmButtons()
+	clearGMFunctions()
+	addGMFunction("+Named Waves",namedWaves)
+    addGMFunction("Random wave",function()
+    	addWave(
+    		enemyList,
+    		random(0,10),
+    		randomWaveAngle(math.random(20),math.random(20)),
+    		randomWaveDistance(math.random(20))
+    	)
+    end)
+	addGMFunction("Win",function()
+		victory("Human Navy")
+    end)
+end
+function namedWaves()
+	-- TODO: verify numbers againts original code if button runs the same wave as original.
+	local wave_names = {
+		[0] = "Strikeship",
+		[1] = "Fighter",
+		[2] = "Gunship",
+		[3] = "Dreadnought",
+		[4] = "Missile Cruiser",
+		[5] = "Cruiser",
+		[6] = "Adv. striker",
+	}
+	clearGMFunctions()
+	addGMFunction("-From Named Waves",gmButtons)
+	for index, name in pairs(wave_names) do
+		addGMFunction(name,function()
+			string.format("")
+			addWave(enemyList,index,randomWaveAngle(math.random(20), math.random(20)), randomWaveDistance(math.random(5)))
+		end)
+	end
+end
+
 --- Initialize scenario.
 function init()
     -- Spawn a player Atlantis.
@@ -102,18 +139,40 @@ function init()
     -- Randomly distribute 3 allied stations throughout the region.
     local n
     n = 0
-    local station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    -- TODO: station_X.comms_data are probably not used. Get rid of it, if possible.
+    station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    station_1.comms_data = {
+    	idle_defense_fleet = {
+    		DF1 = "MT52 Hornet",
+    		DF2 = "MT52 Hornet",
+    		DF3 = "MT52 Hornet",
+    	}
+    }
     table.insert(stationList, station_1)
     table.insert(friendlyList, station_1)
     n = 1
-    local station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    station_2.comms_data = {
+    	idle_defense_fleet = {
+    		DF1 = "Adder MK5",
+    		DF2 = "Adder MK5",
+    		DF3 = "Adder MK5",
+    	}
+    }
     table.insert(stationList, station_2)
     table.insert(friendlyList, station_2)
     n = 2
-    local station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
+    station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
+    station_3.comms_data = {
+    	idle_defense_fleet = {
+    		DF1 = "Phobos T3",
+    		DF2 = "Phobos T3",
+    		DF3 = "Phobos T3",
+    	}
+    }
     table.insert(stationList, station_3)
     table.insert(friendlyList, station_3)
 
@@ -127,59 +186,7 @@ function init()
     for idx = 1, 5 do
         setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
     end
-
-    -- GM functions to manually trigger enemy waves.
-    local buttons = {
-        -- button name, kind of wave
-        {"Strikeship wave", 0},
-        {"Fighter wave", 1},
-        {"Gunship wave", 2},
-        {"Dreadnought", 4},
-        {"Missile cruiser wave", 5},
-        {"Cruiser wave", 6},
-        {"Adv. striker wave", 9}
-    }
-    for _, button in ipairs(buttons) do
-        local name, kind = table.unpack(button)
-        addGMFunction(
-            name,
-            function()
-                addWave(enemyList, kind, randomWaveAngle(math.random(20), math.random(20)), randomWaveDistance(math.random(5)))
-            end
-        )
-    end
-
-    -- Let the GM spawn a random enemy wave.
-    addGMFunction(
-        "Random wave",
-        function()
-            local a = randomWaveAngle(math.random(20), math.random(20))
-            local d = randomWaveDistance(math.random(20))
-            local kind = random(0, 10)
-            addWave(enemyList, kind, a, d)
-        end
-    )
-
-    -- Let the GM spawn random reinforcements. Their distance from the
-    -- players' spawn point is about half that of enemy waves.
-    addGMFunction(
-        "Random friendly",
-        function()
-            local a = randomWaveAngle(math.random(20), math.random(20))
-            local d = random(15000, 20000 + math.random(20) * 1500)
-            local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
-            local friendlyShipIndex = math.random(#friendlyShip)
-            table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-        end
-    )
-
-    -- Let the GM declare the Humans (players) victorious.
-    addGMFunction(
-        "Win",
-        function()
-            victory("Human Navy")
-        end
-    )
+	gmButtons()
 
     -- Set the number of enemy waves based on the scenario variation.
     local counts = {
@@ -255,7 +262,8 @@ function init()
     local x, y
     local spawn_hole = false
 
-    -- Avoid spawning black holes too close to stations.
+    -- Watching a station fall into a black hole to start the game never gets old,
+    -- but players hate it. Avoid spawning black holes too close to stations.
     while not spawn_hole do
         -- Generate random coordinates between 10U and 45U from the origin.
         local a = random(0, 360)
