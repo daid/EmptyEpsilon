@@ -281,7 +281,11 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     std::vector<std::vector<RenderInfo>> render_lists;
 
     sf::Vector2f viewVector = sf::vector2FromAngle(camera_yaw);
+    float depth_cutoff_back = camera_position.z * -tanf((90+camera_pitch + camera_fov/2.f) / 180.f * M_PI);
+    float depth_cutoff_front = camera_position.z * -tanf((90+camera_pitch - camera_fov/2.f) / 180.f * M_PI);
+    if (camera_pitch - camera_fov/2.f <= 0.f)
         depth_cutoff_front = std::numeric_limits<float>::infinity();
+    if (camera_pitch + camera_fov/2.f >= 180.f)
         depth_cutoff_back = -std::numeric_limits<float>::infinity();
     foreach(SpaceObject, obj, space_object_list)
     {
