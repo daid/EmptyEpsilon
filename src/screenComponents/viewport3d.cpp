@@ -215,11 +215,11 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    // OpenGL standard: X across (left-to-right), Y up, Z "into".
-    glRotatef(90, 1, 0, 0); // -> X across (l-t-r), Y "into", Z down 
-    glScalef(1,1,-1);  // -> X across (l-t-r), Y "into", Z up
+    // OpenGL standard: X across (left-to-right), Y up, Z "towards".
+    glRotatef(90, 1, 0, 0); // -> X across (l-t-r), Y "towards", Z down 
+    glScalef(1,1,-1);  // -> X across (l-t-r), Y "towards", Z up
     glRotatef(-camera_pitch, 1, 0, 0);
-    glRotatef(-camera_yaw - 90, 0, 0, 1);
+    glRotatef(-(camera_yaw + 90), 0, 0, 1);
 
     glGetDoublev(GL_PROJECTION_MATRIX, projection_matrix);
     glGetDoublev(GL_MODELVIEW_MATRIX, model_matrix);
@@ -515,6 +515,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
         for(int angle = 0; angle < 360; angle += 30)
         {
+            sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(angle - 90.f) * distance;
             sf::Vector3f screen_pos = worldToScreen(window, sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
                 drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, bold_font, sf::Color(255, 255, 255, 128));
