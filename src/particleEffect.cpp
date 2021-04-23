@@ -94,10 +94,11 @@ ParticleEngine::ParticleEngine()
             elements[base_element + 5] = base_vertex + 1;
 
             // Setup texcoords.
-            texcoords[base_vertex + 0] = { 0.f, 0.f };
-            texcoords[base_vertex + 1] = { 1.f, 0.f };
-            texcoords[base_vertex + 2] = { 1.f, 1.f };
-            texcoords[base_vertex + 3] = { 0.f, 1.f };
+            // OpenGL origin is bottom left.
+            texcoords[base_vertex + 0] = { 0.f, 1.f };
+            texcoords[base_vertex + 1] = { 1.f, 1.f };
+            texcoords[base_vertex + 2] = { 1.f, 0.f };
+            texcoords[base_vertex + 3] = { 0.f, 0.f };
         }
 
         // Hand off to the GPU.

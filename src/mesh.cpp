@@ -89,7 +89,6 @@ sf::Vector3f Mesh::randomPoint()
 {
     //int idx = irandom(0, vertexCount-1);
     //return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
-    int idx = irandom(0, vertexCount / 3) * 3;
     sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
     sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
     sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
@@ -158,16 +157,16 @@ Mesh* Mesh::getMesh(string filename)
 
                         IndexInfo info;
                         info.v = p0[0].toInt() - 1;
-                        info.t = p0[1].toInt() - 1;
-                        info.n = p0[2].toInt() - 1;
+                        info.t = p0[2].toInt() - 1;
+                        info.n = p0[1].toInt() - 1;
                         indices.push_back(info);
                         info.v = p1[0].toInt() - 1;
-                        info.t = p1[1].toInt() - 1;
-                        info.n = p1[2].toInt() - 1;
+                        info.t = p1[2].toInt() - 1;
+                        info.n = p1[1].toInt() - 1;
                         indices.push_back(info);
                         info.v = p2[0].toInt() - 1;
-                        info.t = p2[1].toInt() - 1;
-                        info.n = p2[2].toInt() - 1;
+                        info.t = p2[2].toInt() - 1;
+                        info.n = p2[1].toInt() - 1;
                         indices.push_back(info);
                     }
                 }else{
@@ -179,14 +178,14 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices = new MeshVertex[indices.size()];
         for(unsigned int n=0; n<indices.size(); n++)
         {
-            ret->vertices[n].position[0] = -vertices[indices[n].v].x;
+            ret->vertices[n].position[0] = vertices[indices[n].v].x;
             ret->vertices[n].position[1] = vertices[indices[n].v].z;
             ret->vertices[n].position[2] = vertices[indices[n].v].y;
-            ret->vertices[n].normal[0] = -normals[indices[n].n].x;
+            ret->vertices[n].normal[0] = normals[indices[n].n].x;
             ret->vertices[n].normal[1] = normals[indices[n].n].z;
             ret->vertices[n].normal[2] = normals[indices[n].n].y;
             ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
-            ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
+            ret->vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
         }
     }else if (filename.endswith(".model"))
     {
