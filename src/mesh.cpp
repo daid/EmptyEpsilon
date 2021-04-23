@@ -157,16 +157,16 @@ Mesh* Mesh::getMesh(string filename)
 
                         IndexInfo info;
                         info.v = p0[0].toInt() - 1;
-                        info.t = p0[2].toInt() - 1;
-                        info.n = p0[1].toInt() - 1;
-                        indices.push_back(info);
-                        info.v = p1[0].toInt() - 1;
-                        info.t = p1[2].toInt() - 1;
-                        info.n = p1[1].toInt() - 1;
+                        info.t = p0[1].toInt() - 1;
+                        info.n = p0[2].toInt() - 1;
                         indices.push_back(info);
                         info.v = p2[0].toInt() - 1;
-                        info.t = p2[2].toInt() - 1;
-                        info.n = p2[1].toInt() - 1;
+                        info.t = p2[1].toInt() - 1;
+                        info.n = p2[2].toInt() - 1;
+                        indices.push_back(info);
+                        info.v = p1[0].toInt() - 1;
+                        info.t = p1[1].toInt() - 1;
+                        info.n = p1[2].toInt() - 1;
                         indices.push_back(info);
                     }
                 }else{
