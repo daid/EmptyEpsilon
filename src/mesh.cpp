@@ -87,9 +87,13 @@ void Mesh::render()
 
 sf::Vector3f Mesh::randomPoint()
 {
+    if (vertexCount == 0)
+        return sf::Vector3f{};
+
     //int idx = irandom(0, vertexCount-1);
     //return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
-    int idx = irandom(0, vertexCount / 3) * 3;
+    // Pick a face
+    int idx = irandom(0, vertexCount / 3 - 1) * 3; 
     sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
     sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
     sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
