@@ -113,7 +113,6 @@ end
 
 --- Initializes main GM Menu
 function gmButtons()
-    print("GM buttons")
     clearGMFunctions()
     addGMFunction("+Named Waves",namedWaves)
     addGMFunction("Random wave",function()
@@ -141,9 +140,19 @@ function gmButtons()
     addGMPositionToggle()
     
     -- End scenario with Human Navy (players) victorious.
-    addGMFunction("Win",function()
+    addGMFunction("Win",gmVictoryYesNo)
+end
+
+function gmVictoryYesNo()
+    clearGMFunctions()
+    addGMFunction("Victory?", function() string.format("") end)
+    addGMFunction("Yes", function() 
         victory("Human Navy")
+        clearGMFunctions()
+        addGMFunction("Players have won", function() string.format("") end)
+        addGMFunction("Scenario ended", function() string.format("") end)
     end)
+    addGMFunction("No", gmButtons)
 end
 
 --- Generate GM Toggle buttn for wave positioning algorithm. 
@@ -159,7 +168,6 @@ function addGMPositionToggle()
     addGMFunction(name, function()
         string.format("")   -- Provides global context for SeriousProton
         addWavesToGMPosition = not addWavesToGMPosition
-        --print("Switching from "..name)
         gmButtons()
     end)
 end
