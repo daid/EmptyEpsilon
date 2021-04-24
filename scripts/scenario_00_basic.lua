@@ -35,7 +35,6 @@ local stationList
 -- @tparam number a The spawned wave's heading relative to the players' spawn point.
 -- @tparam number d The spawned wave's distance from the players' spawn point.
 function addWave(list, kind, a, d)
-    -- TODO: for some reason all waves spawn at 0, 0 instead of random coords. Check if randomWaveAngle and randomWaveDistance works properly.
     if kind < 1.0 then
         table.insert(list, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
     elseif kind < 2.0 then
@@ -91,6 +90,7 @@ function randomWaveDistance(enemy_group_count)
     return random(35000, 40000 + enemy_group_count * 3000)
 end
 
+--- Initializes main GM Menu
 function gmButtons()
 	clearGMFunctions()
 	addGMFunction("+Named Waves",namedWaves)
@@ -102,20 +102,36 @@ function gmButtons()
     		randomWaveDistance(math.random(20))
     	)
     end)
+    
+    -- Let the GM spawn random reinforcements. Their distance from the
+    -- players' spawn point is about half that of enemy waves.
+    addGMFunction(
+        "Random friendly",
+        function()
+            local a = randomWaveAngle(math.random(20), math.random(20))
+            local d = random(15000, 20000 + math.random(20) * 1500)
+            local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
+            local friendlyShipIndex = math.random(#friendlyShip)
+            table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+        end
+    )
+    
+    -- End scenario with Human Navy (players) victorious.
 	addGMFunction("Win",function()
 		victory("Human Navy")
     end)
 end
+
+--- Shows "Named waves" GM submenu (that allows spawning more waves).
 function namedWaves()
-	-- TODO: verify numbers againts original code if button runs the same wave as original.
 	local wave_names = {
 		[0] = "Strikeship",
 		[1] = "Fighter",
 		[2] = "Gunship",
-		[3] = "Dreadnought",
-		[4] = "Missile Cruiser",
-		[5] = "Cruiser",
-		[6] = "Adv. striker",
+		[4] = "Dreadnought",
+		[5] = "Missile Cruiser",
+		[6] = "Cruiser",
+		[9] = "Adv. striker",
 	}
 	clearGMFunctions()
 	addGMFunction("-From Named Waves",gmButtons)
@@ -139,7 +155,7 @@ function init()
     -- Randomly distribute 3 allied stations throughout the region.
     local n
     n = 0
-    -- TODO: station_X.comms_data are probably not used. Get rid of it, if possible.
+    -- station_X.comms_data are not yet used, it is here for time when Defense Fleet functionality is implemented to comms_station.lua
     station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     station_1.comms_data = {
@@ -262,8 +278,7 @@ function init()
     local x, y
     local spawn_hole = false
 
-    -- Watching a station fall into a black hole to start the game never gets old,
-    -- but players hate it. Avoid spawning black holes too close to stations.
+    -- Avoid spawning black holes too close to stations.
     while not spawn_hole do
         -- Generate random coordinates between 10U and 45U from the origin.
         local a = random(0, 360)
