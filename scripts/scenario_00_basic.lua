@@ -24,6 +24,27 @@ require("utils.lua")
 local enemyList
 local friendlyList
 local stationList
+local addWavesToGMPosition      -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned. 
+
+-- return angle in degrees (0-360)
+function angle(x1, y1, x2, y2)
+    local dx = x2-x1
+    local dy = y2-y1
+    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1. 
+    return d%360                                -- Transform degrees to range [0, 360]
+end
+
+
+function addWave(list, kind, a, d)
+    if addWavesToGMPosition then
+        onGMClick(function(x,y) 
+            onGMClick(nil)
+            addWaveInner(list, kind, angle(0, 0, x, y), distance(0, 0, x, y))
+        end)
+    else
+        addWaveInner(list, kind, a, d)
+    end
+end
 
 --- Add an enemy wave.
 --
@@ -34,7 +55,7 @@ local stationList
 --  to the list. Any number is valid, but only 0.99-9.0 are meaningful.
 -- @tparam number a The spawned wave's heading relative to the players' spawn point.
 -- @tparam number d The spawned wave's distance from the players' spawn point.
-function addWave(list, kind, a, d)
+function addWaveInner(list, kind, a, d)
     if kind < 1.0 then
         table.insert(list, setCirclePos(CpuShip():setTemplate("Stalker Q7"):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
     elseif kind < 2.0 then
@@ -92,7 +113,7 @@ end
 
 --- Initializes main GM Menu
 function gmButtons()
-	clearGMFunctions()
+    clearGMFunctions()
 	addGMFunction("+Named Waves",namedWaves)
     addGMFunction("Random wave",function()
     	addWave(
@@ -115,10 +136,29 @@ function gmButtons()
             table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         end
     )
+        
+    --addGMPositionToggle()
     
     -- End scenario with Human Navy (players) victorious.
 	addGMFunction("Win",function()
 		victory("Human Navy")
+    end)
+end
+
+--- Generate GM Toggle buttn for wave positioning algorithm. 
+function addGMPositionToggle()
+    local name = "Position: "
+
+    if(addWavesToGMPosition) then
+        name = name.."GM"
+    else
+        name = name.."Random"
+    end
+
+    addGMFunction(name, function()
+        addWavesToGMPosition = not addWavesToGMPosition
+        print("Switching from "..name)
+        gmButtons()
     end)
 end
 
@@ -151,6 +191,8 @@ function init()
     enemyList = {}
     friendlyList = {}
     stationList = {}
+    
+    addWavesToGMPosition = false
 
     -- Randomly distribute 3 allied stations throughout the region.
     local n
@@ -298,6 +340,8 @@ function init()
 
     BlackHole():setPosition(x, y)
 
+    addWavesToGMPosition = true
+    
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
 end
