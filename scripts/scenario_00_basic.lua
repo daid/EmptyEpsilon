@@ -113,15 +113,16 @@ end
 
 --- Initializes main GM Menu
 function gmButtons()
+    print("GM buttons")
     clearGMFunctions()
-	addGMFunction("+Named Waves",namedWaves)
+    addGMFunction("+Named Waves",namedWaves)
     addGMFunction("Random wave",function()
-    	addWave(
-    		enemyList,
-    		random(0,10),
-    		randomWaveAngle(math.random(20),math.random(20)),
-    		randomWaveDistance(math.random(20))
-    	)
+        addWave(
+            enemyList,
+            random(0,10),
+            randomWaveAngle(math.random(20),math.random(20)),
+            randomWaveDistance(math.random(20))
+        )
     end)
     
     -- Let the GM spawn random reinforcements. Their distance from the
@@ -137,11 +138,11 @@ function gmButtons()
         end
     )
         
-    --addGMPositionToggle()
+    addGMPositionToggle()
     
     -- End scenario with Human Navy (players) victorious.
-	addGMFunction("Win",function()
-		victory("Human Navy")
+    addGMFunction("Win",function()
+        victory("Human Navy")
     end)
 end
 
@@ -156,31 +157,32 @@ function addGMPositionToggle()
     end
 
     addGMFunction(name, function()
+        string.format("")   -- Provides global context for SeriousProton
         addWavesToGMPosition = not addWavesToGMPosition
-        print("Switching from "..name)
+        --print("Switching from "..name)
         gmButtons()
     end)
 end
 
 --- Shows "Named waves" GM submenu (that allows spawning more waves).
 function namedWaves()
-	local wave_names = {
-		[0] = "Strikeship",
-		[1] = "Fighter",
-		[2] = "Gunship",
-		[4] = "Dreadnought",
-		[5] = "Missile Cruiser",
-		[6] = "Cruiser",
-		[9] = "Adv. striker",
-	}
-	clearGMFunctions()
-	addGMFunction("-From Named Waves",gmButtons)
-	for index, name in pairs(wave_names) do
-		addGMFunction(name,function()
-			string.format("")
-			addWave(enemyList,index,randomWaveAngle(math.random(20), math.random(20)), randomWaveDistance(math.random(5)))
-		end)
-	end
+    local wave_names = {
+        [0] = "Strikeship",
+        [1] = "Fighter",
+        [2] = "Gunship",
+        [4] = "Dreadnought",
+        [5] = "Missile Cruiser",
+        [6] = "Cruiser",
+        [9] = "Adv. striker",
+    }
+    clearGMFunctions()
+    addGMFunction("-From Named Waves",gmButtons)
+    for index, name in pairs(wave_names) do
+        addGMFunction(name,function()
+            string.format("")
+            addWave(enemyList,index,randomWaveAngle(math.random(20), math.random(20)), randomWaveDistance(math.random(5)))
+        end)
+    end
 end
 
 --- Initialize scenario.
@@ -201,11 +203,11 @@ function init()
     station_1 = SpaceStation():setTemplate("Small Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_1, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     station_1.comms_data = {
-    	idle_defense_fleet = {
-    		DF1 = "MT52 Hornet",
-    		DF2 = "MT52 Hornet",
-    		DF3 = "MT52 Hornet",
-    	}
+        idle_defense_fleet = {
+            DF1 = "MT52 Hornet",
+            DF2 = "MT52 Hornet",
+            DF3 = "MT52 Hornet",
+        }
     }
     table.insert(stationList, station_1)
     table.insert(friendlyList, station_1)
@@ -213,11 +215,11 @@ function init()
     station_2 = SpaceStation():setTemplate("Medium Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_2, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     station_2.comms_data = {
-    	idle_defense_fleet = {
-    		DF1 = "Adder MK5",
-    		DF2 = "Adder MK5",
-    		DF3 = "Adder MK5",
-    	}
+        idle_defense_fleet = {
+            DF1 = "Adder MK5",
+            DF2 = "Adder MK5",
+            DF3 = "Adder MK5",
+        }
     }
     table.insert(stationList, station_2)
     table.insert(friendlyList, station_2)
@@ -225,11 +227,11 @@ function init()
     station_3 = SpaceStation():setTemplate("Large Station"):setRotation(random(0, 360)):setFaction("Human Navy")
     setCirclePos(station_3, 0, 0, n * 360 / 3 + random(-30, 30), random(10000, 22000))
     station_3.comms_data = {
-    	idle_defense_fleet = {
-    		DF1 = "Phobos T3",
-    		DF2 = "Phobos T3",
-    		DF3 = "Phobos T3",
-    	}
+        idle_defense_fleet = {
+            DF1 = "Phobos T3",
+            DF2 = "Phobos T3",
+            DF3 = "Phobos T3",
+        }
     }
     table.insert(stationList, station_3)
     table.insert(friendlyList, station_3)
@@ -244,7 +246,7 @@ function init()
     for idx = 1, 5 do
         setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
     end
-	gmButtons()
+    gmButtons()
 
     -- Set the number of enemy waves based on the scenario variation.
     local counts = {
@@ -265,7 +267,7 @@ function init()
         local a = randomWaveAngle(cnt, enemy_group_count)
         local d = randomWaveDistance(enemy_group_count)
         local kind = random(0, 10)
-        addWave(enemyList, kind, a, d)
+        addWaveInner(enemyList, kind, a, d)
     end
 
     -- Spawn 2-5 random asteroid belts.
@@ -339,8 +341,6 @@ function init()
     end
 
     BlackHole():setPosition(x, y)
-
-    addWavesToGMPosition = true
     
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
