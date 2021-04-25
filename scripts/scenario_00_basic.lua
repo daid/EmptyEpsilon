@@ -21,20 +21,14 @@ require("utils.lua")
 --      Returns the object with its position set to the resulting coordinates.
 --   distance(a, b, c, d)
 --      Returns the distance between two objects/coordinates
+--   angle(a, b, c, d)
+--      Returns the bearing between first object/coordinate and second object/coordinate. 
 
 -- Global variables for this scenario
 local enemyList
 local friendlyList
 local stationList
 local addWavesToGMPosition      -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned. 
-
--- return angle in degrees (0-360)
-function angle(x1, y1, x2, y2)
-    local dx = x2-x1
-    local dy = y2-y1
-    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1. 
-    return d%360                                -- Transform degrees to range [0, 360]
-end
 
 --- Wrapper to adding an enemy wave
 --
