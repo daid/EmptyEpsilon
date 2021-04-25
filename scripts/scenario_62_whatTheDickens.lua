@@ -636,7 +636,7 @@ function arriveA2(delta)
 	if player:getSectorName() == "A2" then
 		px, py = player:getPosition()
 		vx, vy = vectorFromAngle(315,random(10000,12000))
-		marleyArt = Artifact():setPosition(px+vx,py+vy):setModel("artifact2"):allowPickup(false):setDescriptions("Rusty Chain Link","Translucent but glowing rusty chain link"):setRadarSignatureInfo(0,0,.9):setScanningParameters(1,1)
+		marleyArt = Artifact():setPosition(px+vx,py+vy):setModel("artifact2"):allowPickup(false):setDescriptions(_("scienceArtifactDescription", "Rusty Chain Link"),_("scienceArtifactDescription", "Translucent but glowing rusty chain link")):setRadarSignatureInfo(0,0,.9):setScanningParameters(1,1)
 		plot1 = scanMarleyArtifact
 		plot1name = _("plotName", "scanMarleyArtifact")
 	end
@@ -740,7 +740,7 @@ function arriveNearMillbank(delta)
 	if distance(player,stationMillbank) < 15000 then
 		smx, smy = stationMillbank:getPosition()
 		vx, vy = vectorFromAngle(random(0,360),2500)
-		pastArt = Artifact():setPosition(smx+vx,smy+vy):setModel("artifact3"):allowPickup(false):setDescriptions("Tiny escape pod","Tiny escape pod from a previous generation"):setRadarSignatureInfo(0,0.9,0):setScanningParameters(2,1)
+		pastArt = Artifact():setPosition(smx+vx,smy+vy):setModel("artifact3"):allowPickup(false):setDescriptions(_("scienceArtifactDescription", "Tiny escape pod"),_("scienceArtifactDescription", "Tiny escape pod from a previous generation")):setRadarSignatureInfo(0,0.9,0):setScanningParameters(2,1)
 		hopTimer = 1
 		plot1 = hopArt
 		plot1name = _("plotName", "hopArt")
@@ -1239,7 +1239,7 @@ function futureEffect2(delta)
 		futNeb9 = Nebula():setPosition(futx+10000,futy+10000)
 		futureEffect3Timer = 10
 		plot1 = futureEffect3
-		plot1name = "futureEffect3"
+		plot1name = _("plotName", "futureEffect3")
 	end
 end
 
@@ -1291,7 +1291,7 @@ function futureEffect4(delta)
 		cemeteryList = {}
 		necropolisList = {}
 		plot3 = orbitStations
-		plot3name = "orbitStations"
+		plot3name = _("plotName", "orbitStations")
 		plot1 = futureCheck
 		plot1name = _("plotName", "futureCheck")
 	end
@@ -1551,7 +1551,7 @@ function returnMsg7(delta)
 		player:addToShipLog(_("shipLog", "[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim"),"Yellow")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit5.ogg"))
 		plot1 = returnMsg8
-		plot1name = "returnMsg8"
+		plot1name = _("plotName", "returnMsg8")
 		returnMsg8Timer = 10
 	end
 end
@@ -1562,7 +1562,7 @@ function returnMsg8(delta)
 		player:addToShipLog(_("shipLog", "[Tim on Cratchit Cruiser] God bless us every one"),"White")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Tim.ogg"))
 		plot1 = returnMsg9
-		plot1name = "returnMsg9"
+		plot1name = _("plotName", "returnMsg9")
 		returnMsg9Timer = 6
 	end
 end
