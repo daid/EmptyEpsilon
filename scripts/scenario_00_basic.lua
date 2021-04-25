@@ -131,16 +131,23 @@ function gmButtons()
     
     -- Let the GM spawn random reinforcements. Their distance from the
     -- players' spawn point is about half that of enemy waves.
-    addGMFunction(
-        "Random friendly",
-        function()
+    addGMFunction("Random friendly", function()
+        local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
+        local friendlyShipIndex = math.random(#friendlyShip)
+        
+        if addWavesToGMPosition then
+            onGMClick(function(x,y) 
+                onGMClick(nil)
+                local a = angle(0, 0, x, y)
+                local d = distance(0, 0, x, y)
+                table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+            end)
+        else
             local a = randomWaveAngle(math.random(20), math.random(20))
             local d = random(15000, 20000 + math.random(20) * 1500)
-            local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
-            local friendlyShipIndex = math.random(#friendlyShip)
             table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
         end
-    )
+    end)
         
     addGMPositionToggle()
     
