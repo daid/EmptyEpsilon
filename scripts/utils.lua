@@ -5,7 +5,7 @@
 -- These functions should be as generic as possible, so they are highly usable.
 
 -- Given enough information, find the distance between two positions.
--- This function can be called four ways:
+-- This function can be called in four ways:
 --
 -- distance(obj1, obj2)
 --   Returns the distance between two objects.
@@ -40,31 +40,54 @@
 function distance(a, b, c, d)
     local x1, y1 = 0, 0
     local x2, y2 = 0, 0
-    if type(a) == "table" and type(b) == "table" then
-        -- a and b are bth tables.
-        -- Assume distance(obj1, obj2)
-        x1, y1 = a:getPosition()
-        x2, y2 = b:getPosition()
-    elseif type(a) == "table" and type(b) == "number" and type(c) == "number" then
-        -- Assume distance(obj, x, y)
-        x1, y1 = a:getPosition()
-        x2, y2 = b, c
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
-        -- Assume distance(x, y, obj)
-        x1, y1 = a, b
-        x2, y2 = c:getPosition()
-    elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
-        -- a and b are both tables.
-        -- Assume distance(obj1, obj2)
-        x1, y1 = a, b
-        x2, y2 = c, d
-    else
-        -- Not a valid use of the distance function. Throw an error.
-        print(type(a), type(b), type(c), type(d))
-        error("distance() function used incorrectly", 2)
-    end
+    x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
     local xd, yd = (x1 - x2), (y1 - y2)
     return math.sqrt(xd * xd + yd * yd)
+end
+
+-- Given enough information, calculate bearing to from first position/object to second position/object.
+-- This function can be called in four ways:
+--
+-- angle(obj1, obj2)
+--   Returns the bearing from obj1 to obj2.
+--
+--   obj1, obj2: Two objects. Calls getPosition() on each.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     rock2 = Asteroid():setPosition(0, 100)
+--     angle(rock1, rock2) -- Returns 0.0
+--
+-- distance(obj, x, y)
+-- distance(x, y, obj)
+--   Find the bearing from an object to a position,
+--   or from a position to an object.
+--
+--   obj: An object. Calls getPosition() on it.
+--   x, y: Coordinates of a position.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     angle(rock1, 0, 100) -- Returns 0.0
+--     angle(0, 100, rock1) -- Returns 0.0
+--
+-- distance(x1, y1, x2, y2)
+--   Find the bearing from first position to second position.
+--
+--   x1, y1: Origin position's coordinates.
+--   x2, y2: Destination position's coordinates.
+--
+--   Example:
+--     angle(-100, 100, 0, 100) -- Returns 0.0
+function angle(a, b, c, d)
+    local x1, y1 = 0, 0
+    local x2, y2 = 0, 0
+    x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
+
+    local dx = x2-x1
+    local dy = y2-y1
+    local d = math.atan2(dy,dx)*180/math.pi     -- Get degrees in range -180, 180 where 0 is to the left from point 1. 
+    return d%360                                -- Transform degrees to range [0, 360]
 end
 
 -- Given an angle and length, return a relative vector (x, y coordinates).
@@ -216,4 +239,35 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
             end
         end
     end
+end
+
+-- Extract coordinates between two objects, two points, object and point or point and object
+-- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d). 
+-- Returns two sets of coordinates: x1, y1, x2, y2.
+function _fourArgumentsIntoCoordinates(a, b, c, d)
+    local x1, y1 = 0, 0
+    local x2, y2 = 0, 0
+    if type(a) == "table" and type(b) == "table" then
+        -- a and b are bth tables.
+        -- Assume function(obj1, obj2)
+        x1, y1 = a:getPosition()
+        x2, y2 = b:getPosition()
+    elseif type(a) == "table" and type(b) == "number" and type(c) == "number" then
+        -- Assume function(obj1, x2, y2)
+        x1, y1 = a:getPosition()
+        x2, y2 = b, c
+    elseif type(a) == "number" and type(b) == "number" and type(c) == "table" then
+        -- Assume function(x1, y1, obj2)
+        x1, y1 = a, b
+        x2, y2 = c:getPosition()
+    elseif type(a) == "number" and type(b) == "number" and type(c) == "number" and type(d) == "number" then
+        -- Assume function(x1, y1, x2, y2)
+        x1, y1 = a, b
+        x2, y2 = c, d
+    else
+        -- Not a valid use of the distance function. Throw an error.
+        print(type(a), type(b), type(c), type(d))
+        error("_fourArgumentsIntoCoordinates() function used incorrectly", 2)
+    end
+    return x1, y1, x2, y2
 end
