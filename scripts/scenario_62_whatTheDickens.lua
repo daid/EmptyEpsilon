@@ -220,7 +220,7 @@ function init()
 	plot1timer = 5
 	plot1 = missionMessage
 	plot1name = "missionMessage"
-	primaryOrders = string.format(_("Protect Somerset in %s",stationSomerset:getSectorName()))
+	primaryOrders = string.format(_("orders", "Protect Somerset in %s"),stationSomerset:getSectorName())
 	secondaryOrders = ""
 	optionalOrders = ""
 	graveyardDocked = false
@@ -408,34 +408,34 @@ function handleDockedState()
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(_("Interesting points in the area"), function()
-			setCommsMessage(_("You may be interested in one or more of these:"))
-			addCommsReply(_("City"), function()
-				setCommsMessage(_("The City station represents one of the most developed stations in the area. Correlating the station to olde Earth, this would be where the walled medieval area of London would have been located"))
+		addCommsReply(_("areaDescription", "Interesting points in the area"), function()
+			setCommsMessage(_("areaDescription", "You may be interested in one or more of these:"))
+			addCommsReply(_("areaDescription", "City"), function()
+				setCommsMessage(_("areaDescription", "The City station represents one of the most developed stations in the area. Correlating the station to olde Earth, this would be where the walled medieval area of London would have been located"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Change"), function()
-				setCommsMessage(_("Much of the area's financial business is handled at the station named Change. The station name is an oblique reference to the Royal Exchange of London"))
+			addCommsReply(_("areaDescription", "Change"), function()
+				setCommsMessage(_("areaDescription", "Much of the area's financial business is handled at the station named Change. The station name is an oblique reference to the Royal Exchange of London"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Foundling"), function()
-				setCommsMessage(_("Foundling station specializes in medical research for children. The station name honors Foundling Hospital in London, an orphanage established in 1739 by Captain Thomas Coram, a retired seaman"))
+			addCommsReply(_("areaDescription", "Foundling"), function()
+				setCommsMessage(_("areaDescription", "Foundling station specializes in medical research for children. The station name honors Foundling Hospital in London, an orphanage established in 1739 by Captain Thomas Coram, a retired seaman"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Thames"), function()
-				setCommsMessage(_("The zone running through this area colored blue is named Thames after the river Thames in London of olde Earth. Ships should avoid entering this zoneexcept by bridges designated due to the adverse effects it has on ship systems. This is why navigation systems automatically show this region for all ships in the area."))
+			addCommsReply(_("areaDescription", "Thames"), function()
+				setCommsMessage(_("areaDescription", "The zone running through this area colored blue is named Thames after the river Thames in London of olde Earth. Ships should avoid entering this zoneexcept by bridges designated due to the adverse effects it has on ship systems. This is why navigation systems automatically show this region for all ships in the area."))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Covent"), function()
-				setCommsMessage(_("Most of the area's food supply comes from station Covent. It specializes in hydroponics. THe station derives its name from Covent Garden from olde Earth London where fruits, vegetables and flowers were bought and sold"))
+			addCommsReply(_("areaDescription", "Covent"), function()
+				setCommsMessage(_("areaDescription", "Most of the area's food supply comes from station Covent. It specializes in hydroponics. THe station derives its name from Covent Garden from olde Earth London where fruits, vegetables and flowers were bought and sold"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Cheshire"), function()
-				setCommsMessage(_("You can find fine dining and drinking at Cheshire station. The name alludes to the Ye Olde Cheshire Cheese pub from London on olde earth"))
+			addCommsReply(_("areaDescription", "Cheshire"), function()
+				setCommsMessage(_("areaDescription", "You can find fine dining and drinking at Cheshire station. The name alludes to the Ye Olde Cheshire Cheese pub from London on olde earth"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("Tower"), function()
-				setCommsMessage(_("Station Tower serves as a residence for the wealthiest members of the London area community"))
+			addCommsReply(_("areaDescription", "Tower"), function()
+				setCommsMessage(_("areaDescription", "Station Tower serves as a residence for the wealthiest members of the London area community"))
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)
@@ -495,36 +495,36 @@ function handleUndockedState()
 			if plot1name == nil or plot1 == nil then
 				oMsg = oMsg .. ""
 			else
-				oMsg = oMsg .. "\nplot1: " .. plot1name
+				oMsg = oMsg .. string.format(_("\nplot1: %s"), plot1name)
 			end
 			if plot2name == nil or plot2 == nil then
 				oMsg = oMsg .. ""
 			else
-				oMsg = oMsg .. "\nplot2: " .. plot2name
+				oMsg = oMsg .. string.format(_("\nplot2: %s"), plot2name)
 			end
 			if plot3name == nil or plot3 == nil then
 				oMsg = oMsg .. ""
 			else
-				oMsg = oMsg .. "\nplot3: " .. plot3name
+				oMsg = oMsg .. string.format(_("\nplot3: %s"), plot3name)
 			end
 			if plot4name == nil or plot4 == nil then
 				oMsg = oMsg .. ""
 			else
-				oMsg = oMsg .. "\nplot4: " .. plot4name
+				oMsg = oMsg .. string.format(_("\nplot4: %s"), plot4name)
 			end
-			oMsg = oMsg .. "\nwfv: " .. wfv
+			oMsg = oMsg .. string.format(_("\nwfv: %s"), wfv)
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
+        addCommsReply(string.format(_("classicComms", "Can you send a supply drop? (%d rep"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
+                setCommsMessage(_("classicComms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
+                setCommsMessage(_("classicComms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("classicComms", "WP%d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -532,36 +532,36 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                            setCommsMessage(string.format(_("classicComms", "We have dispatched a supply ship toward WP%d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("classicComms", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
+        addCommsReply(string.format(_("classicComms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
+                setCommsMessage(_("classicComms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
+                setCommsMessage(_("classicComms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("classicComms", "WP%d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            setCommsMessage(string.format(_("classicComms", "We have dispatched %s to assist at WP%d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("classicComms", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -615,10 +615,10 @@ function missionMessage(delta)
 	plot1timer = plot1timer - delta
 	if plot1timer < 0 then
 		player:addToShipLog(string.format(_("shipLog", "Your mission is to protect station Somerset in %s. Other missions may be added. Dock with Somerset for additional mission parameters. Welcome to the london area of human navy influence"),stationSomerset:getSectorName()),"Magenta")
-		primaryOrders = string.format("Protect Somerset in %s",stationSomerset:getSectorName())
-		secondaryOrders = "Dock with Somerset"
+		primaryOrders = string.format(_("orders", "Protect Somerset in %s"),stationSomerset:getSectorName())
+		secondaryOrders = _("orders", "Dock with Somerset")
 		plot1 = camdenSensorReading
-		plot1name = "camdenSensorReading"
+		plot1name = _("plotName", "camdenSensorReading")
 	end
 end
 
@@ -626,9 +626,9 @@ function camdenSensorReading(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(_("shipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London1.ogg"))
-		secondaryOrders = "Investigate near station Camden in A2"
+		secondaryOrders = _("orders", "Investigate near station Camden in A2")
 		plot1 = arriveA2
-		plot1name = "arriveA2"
+		plot1name = _("plotName", "arriveA2")
 	end
 end
 
@@ -638,7 +638,7 @@ function arriveA2(delta)
 		vx, vy = vectorFromAngle(315,random(10000,12000))
 		marleyArt = Artifact():setPosition(px+vx,py+vy):setModel("artifact2"):allowPickup(false):setDescriptions("Rusty Chain Link","Translucent but glowing rusty chain link"):setRadarSignatureInfo(0,0,.9):setScanningParameters(1,1)
 		plot1 = scanMarleyArtifact
-		plot1name = "scanMarleyArtifact"
+		plot1name = _("plotName", "scanMarleyArtifact")
 	end
 end
 
@@ -647,7 +647,7 @@ function scanMarleyArtifact(delta)
 		player:addToShipLog(_("shipLog", "[Jacob Marley] Do you remember your partner from previous missions? Especially the one where Marley station was destroyed? I am doomed to haunt this area of space forever. Take care or suffer the same fate."),"Red")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley1.ogg"))
 		plot1 = explosionDelay
-		plot1name = "explosionDelay"
+		plot1name = _("plotName", "explosionDelay")
 		explosionDelayTimer = 10
 	end
 end
@@ -657,7 +657,7 @@ function explosionDelay(delta)
 	if explosionDelayTimer < 0 then
 		marleyArt:explode()
 		plot1 = marleyMob
-		plot1name = "marleyMob"
+		plot1name = _("plotName", "marleyMob")
 		plot1timer = 20
 	end
 end
@@ -672,7 +672,7 @@ function marleyMob(delta)
 		enemyLink = CpuShip():setFaction("Kraylor"):setCallSign("Link"):setTemplate("Adder MK4"):orderAttack(player):setPosition(px+vx,py+vy):setRotation(startAngle+180)
 		table.insert(marleyList, enemyLink)
 		plot1 = destroyMarleyMob
-		plot1name = "destroyMarleyMob"
+		plot1name = _("plotName", "destroyMarleyMob")
 		if difficulty == 1 then
 			vx, vy = vectorFromAngle(startAngle+90,3000)
 			enemyChain = CpuShip():setFaction("Kraylor"):setCallSign("Chain"):setTemplate("Adder MK4"):orderAttack(player):setPosition(px+vx,py+vy):setRotation(startAngle+270)
@@ -704,7 +704,7 @@ function marleyMob(delta)
 		end
 		player:addToShipLog(_("shipLog", "[Jacob Marley] You must defeat the chains that bind you in the form of Kraylor ships"),"Red")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley2.ogg"))
-		secondaryOrders = "Defeat Kraylors"
+		secondaryOrders = _("orders", "Defeat Kraylors")
 	end
 end
 
@@ -720,8 +720,8 @@ function destroyMarleyMob(delta)
 		player:addToShipLog(string.format(_("shipLog", "[Jacob Marley] Defeating the Kraylors gives you an idea of what is to come. Return to Somerset in %s and prepare for three ghostly visits"),stationSomerset:getSectorName()),"Red")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley3.ogg"))
 		plot1 = startChristmasPast
-		plot1name = "startChristmasPast"
-		secondaryOrders = "Dock with Somerset"
+		plot1name = _("plotName", "startChristmasPast")
+		secondaryOrders = _("orders", "Dock with Somerset")
 		removeGMFunction(GMChristmasPast)
 	end
 end
@@ -730,9 +730,9 @@ function startChristmasPast(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("shipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London2.ogg"))
-		secondaryOrders = string.format("Investigate chroniton particles near station Millbank in %s",stationMillbank:getSectorName())
+		secondaryOrders = string.format(_("orders", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
 		plot1 = arriveNearMillbank
-		plot1name = "arriveNearMillbank"
+		plot1name = _("plotName", "arriveNearMillbank")
 	end
 end
 
@@ -743,9 +743,9 @@ function arriveNearMillbank(delta)
 		pastArt = Artifact():setPosition(smx+vx,smy+vy):setModel("artifact3"):allowPickup(false):setDescriptions("Tiny escape pod","Tiny escape pod from a previous generation"):setRadarSignatureInfo(0,0.9,0):setScanningParameters(2,1)
 		hopTimer = 1
 		plot1 = hopArt
-		plot1name = "hopArt"
+		plot1name = _("plotName", "hopArt")
 		plot2 = pastArtScan
-		plot2name = "pastArtScan"
+		plot2name = _("plotName", "pastArtScan")
 	end
 end
 
@@ -764,15 +764,15 @@ function pastArtScan(delta)
 		fezx = (px + smx)/2
 		fezy = (py + smy)/2
 		if distance(player,fezx,fezy) < 1000 then
-			wfv = "alternate fez"
+			wfv = _("alternate fez")
 			fezx = fezx + 3000
 			fezy = fezy + 3000
 		end
 		plot1 = fezEffect
-		plot1name = "fezEffect"
+		plot1name = _("plotName", "fezEffect")
 		plot2 = podToFez
 		podToFezTimer = 1
-		plot2name = "podToFez"
+		plot2name = _("plotName", "podToFez")
 	end
 end
 
@@ -796,7 +796,7 @@ function fezEffect(delta)
 	fezNeb1 = Nebula():setPosition(fezx,fezy)
 	fez2Timer = 3
 	plot1 = fez2Effect
-	plot1name = "fez2Effect"
+	plot1name = _("plotName", "fez2Effect")
 end
 
 function fez2Effect(delta)
@@ -804,7 +804,7 @@ function fez2Effect(delta)
 	if fez2Timer < 0 then
 		fez3Timer = 3
 		plot1 = fez3Effect
-		plot1name = "fez3Effect"
+		plot1name = _("plotName", "fez3Effect")
 		fezNeb2 = Nebula():setPosition(fezx,fezy+5000)
 		fezNeb3 = Nebula():setPosition(fezx+5000,fezy)
 		fezNeb4 = Nebula():setPosition(fezx,fezy-5000)
@@ -817,7 +817,7 @@ function fez3Effect(delta)
 	if fez3Timer < 0 then
 		stationFezziwig = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Fezziwig"):setPosition(fezx, fezy)
 		plot1 = fezWelcomeMessage
-		plot1name = "fezWelcomeMessage"
+		plot1name = _("plotName", "fezWelcomeMessage")
 		fezWelcomeTimer = 5
 	end
 end
@@ -828,7 +828,7 @@ function fezWelcomeMessage(delta)
 		player:addToShipLog(_("shipLog", "Welcome to the Christmases of your past, Scrooge"),"Blue")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child1.ogg"))
 		plot1 = fezFleet
-		plot1name = "fezFleet"
+		plot1name = _("plotName", "fezFleet")
 		fezFleetTimer = 7
 	end
 end
@@ -843,7 +843,7 @@ function fezFleet(delta)
 		enemyAliBabba = CpuShip():setFaction("Exuari"):setCallSign("Ali Babba"):setTemplate("WX-Lindworm"):orderAttack(player):setPosition(px+vx,py+vy):setRotation(startAngle+170)
 		table.insert(fezList, enemyAliBabba)
 		plot1 = destroyFezFleet
-		plot1name = "destroyFezFleet"
+		plot1name = _("plotName", "destroyFezFleet")
 		vx, vy = vectorFromAngle(startAngle+10,5000)
 		enemyValentine = CpuShip():setFaction("Exuari"):setCallSign("Valentine"):setTemplate("WX-Lindworm"):orderAttack(player):setPosition(px+vx,py+vy):setRotation(startAngle+190)
 		table.insert(fezList, enemyValentine)
@@ -884,8 +884,8 @@ function destroyFezFleet(delta)
 		vx, vy = vectorFromAngle(belleAngle,20000)
 		friendBelle = CpuShip():setFaction("Human Navy"):setCallSign("Belle"):setTemplate("Goods Freighter 3"):orderDock(stationFezziwig):setPosition(fezx+vx,fezy+vy):setRotation(belleAngle+180):setScannedByFaction("Human Navy",true)
 		plot1 = belleNemesis
-		plot1name = "belleNemesis"
-		secondaryOrders = "Protect Belle"
+		plot1name = _("plotName", "belleNemesis")
+		secondaryOrders = _("orders", "Protect Belle")
 		belleNemesisTimer = 10
 	end
 end
@@ -898,7 +898,7 @@ function belleNemesis(delta)
 		enemyIdol = CpuShip():setFaction("Exuari"):setCallSign("Idol"):setTemplate("MT52 Hornet"):orderAttack(friendBelle):setPosition(fezx+vx,fezy+vy):setRotation(startAngle+170)
 		table.insert(belleList, enemyIdol)
 		plot1 = destroyBelleFleet
-		plot1name = "destroyBelleFleet"
+		plot1name = _("plotName", "destroyBelleFleet")
 		vx, vy = vectorFromAngle(belleAngle+10,24000)
 		enemyGold = CpuShip():setFaction("Exuari"):setCallSign("Gold"):setTemplate("MT52 Hornet"):orderRoaming():setPosition(fezx+vx,fezy+vy):setRotation(startAngle+190)
 		table.insert(belleList, enemyGold)
@@ -933,8 +933,8 @@ function destroyBelleFleet(delta)
 		player:addToShipLog(_("shipLog", "You protected Belle. Somerset awaits"),"Blue")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child3.ogg"))
 		plot1 = startChristmasPresent
-		secondaryOrders = "Dock with Somerset"
-		plot1name = "startChristmasPresent"
+		secondaryOrders = _("orders", "Dock with Somerset")
+		plot1name = _("plotName", "startChristmasPresent")
 		removeGMFunction(GMChristmasPresent)
 		stationFezziwig:destroy()
 		fezNeb1:destroy()
@@ -950,9 +950,9 @@ function startChristmasPresent(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London3.ogg"))
-		secondaryOrders = string.format("Investigate unusual readings near Bedlam in %s",stationBedlam:getSectorName())
+		secondaryOrders = string.format(_("orders", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
 		plot1 = arriveNearBedlam
-		plot1name = "arriveNearBedlam"
+		plot1name = _("plotName", "arriveNearBedlam")
 	end
 end
 
@@ -966,8 +966,8 @@ function arriveNearBedlam(delta)
 		enemyHolly = CpuShip():setFaction("Ghosts"):setCallSign("Holly"):setTemplate("Phobos T3"):orderAttack(player):setPosition(px+vx,py+vy)
 		table.insert(cratchitList, enemyHolly)
 		plot1 = destroyCratchitFleet
-		plot1name = "destroyCratchitFleet"
-		secondaryOrders = "Destroy marauding enemies"
+		plot1name = _("plotName", "destroyCratchitFleet")
+		secondaryOrders = _("orders", "Destroy marauding enemies")
 		if difficulty >= 1 then
 			vx, vy = vectorFromAngle(random(0,300),random(8000,12000))
 			enemyWreath = CpuShip():setFaction("Ghosts"):setCallSign("Wreath"):setTemplate("Phobos T3"):orderRoaming():setPosition(px+vx,py+vy)
@@ -1004,11 +1004,11 @@ function destroyCratchitFleet(delta)
 			vx, vy = vectorFromAngle(turkeyAngle,random(20000,30000))
 			friendTurkeySurprise = CpuShip():setFaction("Human Navy"):setCallSign("Turkey Surprise"):setTemplate("Equipment Freighter 3"):orderDock(stationSomerset):setPosition(bx+vx,by+vy):setScannedByFaction("Human Navy",true)
 			plot1 = timIll
-			plot1name = "timIll"
-			secondaryOrders = "Take Tim from Bedlam to Turkey Surprise"
+			plot1name = _("plotName", "timIll")
+			secondaryOrders = _("orders", "Take Tim from Bedlam to Turkey Surprise")
 			timAboard = false
 			plot2 = turkeyNemesis
-			plot2name = "turkeyNemesis"
+			plot2name = _("plotName", "turkeyNemesis")
 			turkeyNemesisTimer = 30
 			timLifeTimer = 240
 			timHalfLife = timLifeTimer/2
@@ -1029,7 +1029,7 @@ function turkeyNemesis(delta)
 		enemyCrutch = CpuShip():setFaction("Ghosts"):setCallSign("Crutch"):setTemplate("Piranha F12"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
 		table.insert(turkeyList, enemyCrutch)
 		plot2 = presentHunters
-		plot2name = "presentHunters"
+		plot2name = _("plotName", "presentHunters")
 		presentHuntersTimer = 30
 		vx, vy = vectorFromAngle(tgAngle,random(5000,6000))
 		enemyConsumption = CpuShip():setFaction("Ghosts"):setCallSign("Consumption"):setTemplate("Karnack"):orderAttack(friendTurkeySurprise):setPosition(tx+vx,ty+vy)
@@ -1063,7 +1063,7 @@ function presentHunters(delta)
 		enemyGoose = CpuShip():setFaction("Ghosts"):setCallSign("Goose"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2,(ty+sy)/2)
 		table.insert(turkeyList, enemyGoose)
 		plot2 = presentOutrage
-		plot2name = "presentOutrage"
+		plot2name = _("plotName", "presentOutrage")
 		presentOutrageTimer = 30
 		if difficulty >= 1 then
 			enemySuckingPig = CpuShip():setFaction("Ghosts"):setCallSign("Sucking Pig"):setTemplate("Gunship"):orderAttack(stationSomerset):setPosition((tx+sx)/2 + 1000,(ty+sy)/2)
@@ -1086,7 +1086,7 @@ function presentOutrage(delta)
 		player:addToShipLog(_("shipLog", "How dare you bring us here!"),"#556b2f")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Kralien1.ogg"))
 		plot2 = presentIntent
-		plot2name = "presentIntent"
+		plot2name = _("plotName", "presentIntent")
 		presentIntentTimer = 20
 	end
 end
@@ -1133,8 +1133,8 @@ function timIll(delta)
 					player:addToShipLog(_("shipLog", "[Turkey Surprise] We have transported Tim and our doctors are examining him"),"Cyan")
 					playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Turkey3.ogg"))
 					plot1 = timHeal
-					plot1name = "timHeal"
-					secondaryOrders = "Protect Turkey Surprise"
+					plot1name = _("plotName", "timHeal")
+					secondaryOrders = _("orders", "Protect Turkey Surprise")
 					timHealTimer = 50
 				end
 			end
@@ -1153,8 +1153,8 @@ function timHeal(delta)
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit3.ogg"))
 		timAboard = false
 		plot1 = returnTim
-		plot1name = "returnTim"
-		secondaryOrders = "Return Tim to Bedlam"
+		plot1name = _("plotName", "returnTim")
+		secondaryOrders = _("orders", "Return Tim to Bedlam")
 	end
 	if not friendTurkeySurprise:isValid() then
 		globalMessage(string.format(_("msgGlobal", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
@@ -1168,8 +1168,8 @@ function returnTim(delta)
 			player:addToShipLog(_("shipLog", "[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you"),"Yellow")
 			playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit4.ogg"))
 			plot1 = endChristmasPast
-			plot1name = "endChristmasPast"
-			secondaryOrders = "Dock with Somerset"
+			plot1name = _("plotName", "endChristmasPast")
+			secondaryOrders = _("orders", "Dock with Somerset")
 		end
 	else
 		if distance(friendTurkeySurprise,player) < 500 then
@@ -1198,20 +1198,20 @@ function endChristmasPast(delta)
 	friendTurkeySurprise:destroy()
 	removeGMFunction(GMChristmasFuture)
 	plot1 = startChristmasFuture
-	plot1name = "startChristmasFuture"
+	plot1name = _("plotName", "startChristmasFuture")
 end
 
 function startChristmasFuture(delta)
-	secondaryOrders = "Dock with Somerset"
+	secondaryOrders = _("orders", "Dock with Somerset")
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("shipLog", "We are glad you took care of those Ghosts in the machine. They came out of nowhere! We still saw some impossible sensor readings even after our sensor overhaul. We are now conducting a level 5 diagnostic and repair regimen. Keep an eye on the City in %s"),stationCity:getSectorName()),"Magenta")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London4.ogg"))
-		secondaryOrders = string.format("Watch the City in %s",stationCity:getSectorName())
+		secondaryOrders = string.format(_("orders", "Watch the City in %s"),stationCity:getSectorName())
 		cx, cy = stationCity:getPosition()
 		futx = cx + 5000
 		futy = cy - 5000
 		plot1 = futureEffect1
-		plot1name = "futureEffect1"
+		plot1name = _("plotName", "futureEffect1")
 		futureEffect1Timer = 15
 	end
 end
@@ -1222,7 +1222,7 @@ function futureEffect1(delta)
 		futNeb1 = Nebula():setPosition(futx, futy)
 		futureEffect2Timer = 10
 		plot1 = futureEffect2
-		plot1name = "futureEffect2"
+		plot1name = _("plotName", "futureEffect2")
 	end
 end
 
@@ -1257,7 +1257,7 @@ function futureEffect3(delta)
 		end
 		plot2 = moveNebula
 		plot1 = futureEffect4
-		plot1name = "futureEffect4"
+		plot1name = _("plotName", "futureEffect4")
 		futureEffect4Timer = 10
 	end
 end
@@ -1293,7 +1293,7 @@ function futureEffect4(delta)
 		plot3 = orbitStations
 		plot3name = "orbitStations"
 		plot1 = futureCheck
-		plot1name = "futureCheck"
+		plot1name = _("plotName", "futureCheck")
 	end
 end
 
@@ -1410,7 +1410,7 @@ function futureCheck(delta)
 		end
 		if fleetCount == 0 then
 			plot1 = cleanFuture
-			plot1name = "cleanFuture"
+			plot1name = _("plotName", "cleanFuture")
 		end
 	end
 end
@@ -1481,13 +1481,13 @@ function cleanFuture(delta)
 	futNeb8:destroy()
 	futNeb9:destroy()
 	plot1 = returnMsg1
-	plot1name = "returnMsg1"
+	plot1name = _("plotName", "returnMsg1")
 end
 
 function returnMsg1(delta)
 	player:addToShipLog(_("shipLog", "Dock at Somerset for a well deserved Christmas break"),"Magenta")
 	plot1 = returnMsg2
-	plot1name = "returnMsg2"
+	plot1name = _("plotName", "returnMsg2")
 	returnMsg2Timer = 4
 end
 
@@ -1497,7 +1497,7 @@ function returnMsg2(delta)
 		player:addToShipLog(_("shipLog", "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"),"Red")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley4.ogg"))
 		plot1 = returnMsg3
-		plot1name = "returnMsg3"
+		plot1name = _("plotName", "returnMsg3")
 		returnMsg3Timer = 4
 	end
 end
@@ -1508,7 +1508,7 @@ function returnMsg3(delta)
 		player:addToShipLog(_("shipLog", "May the shadows of the things that have been continue to remind you of the joy of Christmas"),"Blue")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child4.ogg"))
 		plot1 = returnMsg4
-		plot1name = "returnMsg4"
+		plot1name = _("plotName", "returnMsg4")
 		returnMsg4Timer = 8
 	end
 end
@@ -1518,7 +1518,7 @@ function returnMsg4(delta)
 	if returnMsg4Timer < 0 and distance(player,stationSomerset) < 60000 then
 		player:addToShipLog(_("shipLog", "Despite Ignorance and Want, prisons and workhouses, know each day fully and celebrate it, especially Christmas"),"Yellow")
 		plot1 = returnMsg5
-		plot1name = "returnMsg5"
+		plot1name = _("plotName", "returnMsg5")
 		returnMsg5Timer = 15
 	end
 end
@@ -1529,7 +1529,7 @@ function returnMsg5(delta)
 		player:addToShipLog(_("shipLog", "[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!"),"Cyan")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Urchins.ogg"))
 		plot1 = returnMsg6
-		plot1name = "returnMsg6"
+		plot1name = _("plotName", "returnMsg6")
 		returnMsg6Timer = 3
 	end
 end
@@ -1540,7 +1540,7 @@ function returnMsg6(delta)
 		player:addToShipLog(_("shipLog", "[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty"),"Green")
 		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Fred.ogg"))
 		plot1 = returnMsg7
-		plot1name = "returnMsg7"
+		plot1name = _("plotName", "returnMsg7")
 		returnMsg7Timer = 6
 	end
 end
@@ -1575,7 +1575,7 @@ function returnMsg9(delta)
 			playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Tim2.ogg"))
 		end
 		plot1 = finalDock
-		plot1name = "finalDock"
+		plot1name = _("plotName", "finalDock")
 	end
 end
 
