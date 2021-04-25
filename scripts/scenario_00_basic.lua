@@ -19,6 +19,8 @@ require("utils.lua")
 --      Returns a relative vector (x, y coordinates)
 --   setCirclePos(obj, x, y, angle, distance)
 --      Returns the object with its position set to the resulting coordinates.
+--   distance(a, b, c, d)
+--      Returns the distance between two objects/coordinates
 
 -- Global variables for this scenario
 local enemyList
@@ -34,7 +36,16 @@ function angle(x1, y1, x2, y2)
     return d%360                                -- Transform degrees to range [0, 360]
 end
 
-
+--- Wrapper to adding an enemy wave
+--
+-- This wrapper either calls addWaveInner directly (when on random wave positioning)
+-- or after onGMClick (when set to GM wave positioning).
+--
+-- @tparam table list A table containing enemy ship objects.
+-- @tparam integer kind A number; at each integer, determines a different wave of ships to add
+--  to the list. Any number is valid, but only 0.99-9.0 are meaningful.
+-- @tparam number a The spawned wave's heading relative to the players' spawn point (ignored when on GM positioning).
+-- @tparam number d The spawned wave's distance from the players' spawn point (ignored when on GM positioning).
 function addWave(list, kind, a, d)
     if addWavesToGMPosition then
         onGMClick(function(x,y) 
@@ -143,6 +154,7 @@ function gmButtons()
     addGMFunction("Win",gmVictoryYesNo)
 end
 
+--- Shows Yes/No question dialogue GM submenu with question if Human Navy should win. 
 function gmVictoryYesNo()
     clearGMFunctions()
     addGMFunction("Victory?", function() string.format("") end)
@@ -155,7 +167,7 @@ function gmVictoryYesNo()
     addGMFunction("No", gmButtons)
 end
 
---- Generate GM Toggle buttn for wave positioning algorithm. 
+--- Generate GM Toggle button for changing wave positioning variant. 
 function addGMPositionToggle()
     local name = "Position: "
 
