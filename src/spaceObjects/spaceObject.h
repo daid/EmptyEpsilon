@@ -14,6 +14,8 @@ enum EDamageType
     DT_EMP
 };
 
+template<> int convert<EDamageType>::returnType(lua_State* L, EDamageType es);
+
 class DamageInfo
 {
 public:

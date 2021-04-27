@@ -29,7 +29,7 @@ enum ESystem
 
 /* Define script conversion function for the ESystem enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
-
+template<> int convert<ESystem>::returnType(lua_State* L, ESystem es);
 class ShipRoomTemplate
 {
 public:

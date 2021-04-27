@@ -27,6 +27,12 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
         es = SYS_None;
 }
 
+template<> int convert<ESystem>::returnType(lua_State* L, ESystem es)
+{
+    lua_pushstring(L, getSystemName(es).c_str());
+    return 1;
+}
+
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt)
 {
