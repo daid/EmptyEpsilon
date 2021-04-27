@@ -241,6 +241,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     background_texture.setActive(true);
     glDepthMask(GL_TRUE);
     glDisable(GL_STENCIL_TEST);
+    background_texture.setActive(false);
 
     //Render the final radar
     drawRenderTexture(background_texture, window);
