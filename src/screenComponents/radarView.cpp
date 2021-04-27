@@ -9,6 +9,24 @@
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
 
+namespace
+{
+    enum class RadarStencil : uint8_t
+    {
+        None = 0,
+        RadarBounds = 1 << 0,
+        VisibleSpace = 1 << 1,
+        InBoundsAndVisible = RadarBounds | VisibleSpace,
+        All = InBoundsAndVisible
+
+    };
+
+    constexpr std::underlying_type_t<RadarStencil> as_mask(RadarStencil mask)
+    {
+        return static_cast<std::underlying_type_t<RadarStencil>>(mask);
+    }
+}
+
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id),
     next_ghost_dot_update(0.0),
@@ -68,25 +86,6 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 
 void GuiRadarView::onDraw(sf::RenderTarget& window)
 {
-    //We need 3 textures:
-    // * background
-    // * forground
-    // * mask
-    // Depending on what type of radar we are rendering we can use the mask to mask out the forground and/or background textures before rendering them
-    // to the screen.
-
-    //New rendering method. Render to texture first, so we do not need the stencil buffer, as this causes issues with the post processing effects.
-    // Render background to screen
-    // Render sectors to screen
-    // Render range indicators to screen
-    // Clear texture with 0% alpha
-    // Render objects to texture
-    // Render fog to texture with 0% alpha
-    //      make fog result transparent, clearing anything that is in the fog.
-    //      We can use different blendmodes to get the effect we want, as we can mask out alphas with that.
-    // Render objects that are not effected by fog to texture
-    // Render texture to screen
-
     //Hacky, when not relay and we have a ship, center on it.
     if (my_spaceship && auto_center_on_my_ship) {
         view_position = my_spaceship->getPosition();
@@ -106,22 +105,72 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         }
     }
 
-    //Setup our textures for rendering
+    //Setup our texture for rendering
     adjustRenderTexture(background_texture);
-    adjustRenderTexture(forground_texture);
-    adjustRenderTexture(mask_texture);
 
+    // Draw the initial background 'clear' color.
+    drawBackground(background_texture);
+    // Setup the stencil for the radar state.
+    
+    // We're relying on stencil buffer to draw the radar:
+    sf::CircleShape circle(0.f, 50);
+    if ((style == CircularMasked || style == Circular))
+    {
+        // Draw the radar's outline.
+        // First, and before any stencil kicks in,
+        // this way, the outline is not even a part of the rendering area.
+        float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
+        circle.setRadius(r);
+        circle.setOrigin(r, r);
+        circle.setPosition(getCenterPoint());
+        circle.setFillColor(sf::Color::Transparent);
+        circle.setOutlineThickness(2.f);
+        circle.setOutlineColor(colorConfig.radar_outline);
+        background_texture.draw(circle);
+    }
+
+    glEnable(GL_STENCIL_TEST); // we need it to clear.
+    glStencilMask(as_mask(RadarStencil::InBoundsAndVisible));
+    
+    // By default for:
+    // - Rectangular radar: everything is deemed visible.
+    // - Circular: Nothing is, and we'll seed the stencil.
+    glClearStencil(as_mask(style == Rectangular ? RadarStencil::InBoundsAndVisible : RadarStencil::None));
+    glClear(GL_STENCIL_BUFFER_BIT);
+    glDepthMask(GL_FALSE); // Nothing in this process writes in the depth.
+    
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+    
+    if ((style == CircularMasked || style == Circular))
+    {
+        // Setup our stencil to update the stencil, with a default of "everything's visible".
+        glStencilFunc(GL_ALWAYS, as_mask(RadarStencil::InBoundsAndVisible), 0);
+
+        // Draws the radar circle shape.
+        circle.setFillColor(sf::Color{ 20, 20, 20, background_alpha });
+        circle.setOutlineThickness(0.f);
+        background_texture.draw(circle);
+    }
+
+    // Draw the blocked areas.
+    // In this cas, we want to clear the 'visible' bit,
+    // for all the stencil that has the radar one.
+    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     ///Draw the mask texture, which will be black vs white for masking.
     // White areas will be visible, black areas will be masked away.
     if (fog_style == NebulaFogOfWar)
-        drawNebulaBlockedAreas(mask_texture);
-    if (fog_style == FriendlysShortRangeFogOfWar)
-        drawNoneFriendlyBlockedAreas(mask_texture);
+    {
+        drawNebulaBlockedAreas(background_texture);
+    }
+    else if (fog_style == FriendlysShortRangeFogOfWar)
+        drawNoneFriendlyBlockedAreas(background_texture);
 
-    ///Draw the background texture
-    drawBackground(background_texture);
-    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)    //Mask the background color with the nebula blocked areas, but show the rest.
-        drawRenderTexture(mask_texture, background_texture, sf::Color::White, sf::BlendMultiply);
+    // Stencil is setup!
+    glStencilMask(as_mask(RadarStencil::None)); // disable writes.
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Back to defaults.
+
+    // These always draw within the radar's confine.
+    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     drawSectorGrid(background_texture);
     drawRangeIndicators(background_texture);
     if (show_target_projection)
@@ -130,30 +179,27 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         drawMissileTubes(background_texture);
 
     ///Start drawing of foreground
-    forground_texture.clear(sf::Color::Transparent);
+    // Foreground is radar confine + not blocked out.
+    
     //Draw things that are masked out by fog-of-war
     if (show_ghost_dots)
     {
         updateGhostDots();
-        drawGhostDots(forground_texture);
+        drawGhostDots(background_texture);
     }
-    drawObjects(forground_texture, background_texture);
-    if (show_game_master_data)
-        drawObjectsGM(forground_texture);
 
-    //Draw the mask on the drawn objects
-    if (fog_style == NebulaFogOfWar || fog_style == FriendlysShortRangeFogOfWar)
-    {
-        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, sf::BlendMode(
-            sf::BlendMode::Zero, sf::BlendMode::SrcAlpha, sf::BlendMode::Add
-        ));
-    }
-    //Post masking
+    drawObjects(background_texture);
+
+    // Post masking
+    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
+    if (show_game_master_data)
+        drawObjectsGM(background_texture);
+
     if (show_waypoints)
-        drawWaypoints(forground_texture);
+        drawWaypoints(background_texture);
     if (show_heading_indicators)
-        drawHeadingIndicators(forground_texture);
-    drawTargets(forground_texture);
+        drawHeadingIndicators(background_texture);
+    drawTargets(background_texture);
 
     if (style == Rectangular && my_spaceship)
     {
@@ -167,36 +213,15 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
             textureManager.setTexture(arrow_sprite, "waypoint");
             arrow_sprite.setPosition(position);
             arrow_sprite.setRotation(sf::vector2ToAngle(ship_offset) - 90);
-            forground_texture.draw(arrow_sprite);
+            background_texture.draw(arrow_sprite);
         }
     }
-
-    if (style == CircularMasked || style == Circular)
-    {
-        //When we have a circular masked radar, use the mask_texture to clear out everything that is not part of the circle.
-        mask_texture.clear(sf::Color(0, 0, 0, 0));
-        float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
-        sf::CircleShape circle(r, 50);
-        circle.setOrigin(r, r);
-        circle.setPosition(getCenterPoint());
-        circle.setFillColor(sf::Color::Black);
-        circle.setOutlineColor(colorConfig.radar_outline);
-        circle.setOutlineThickness(2.0);
-        mask_texture.draw(circle);
-
-        sf::BlendMode blend_mode(
-            sf::BlendMode::One, sf::BlendMode::SrcAlpha, sf::BlendMode::Add,
-            sf::BlendMode::Zero, sf::BlendMode::SrcAlpha, sf::BlendMode::Add
-        );
-        drawRenderTexture(mask_texture, background_texture, sf::Color::White, blend_mode);
-        drawRenderTexture(mask_texture, forground_texture, sf::Color::White, blend_mode);
-    }
+    // Done with the stencil.
+    glDepthMask(GL_TRUE);
+    glDisable(GL_STENCIL_TEST);
 
     //Render the final radar
     drawRenderTexture(background_texture, window);
-    drawRenderTexture(forground_texture, window);
-    //if (style == Circular)
-    //    drawRadarCutoff(window);
 }
 
 void GuiRadarView::updateGhostDots()
@@ -226,18 +251,22 @@ void GuiRadarView::updateGhostDots()
 
 void GuiRadarView::drawBackground(sf::RenderTarget& window)
 {
-    window.clear(sf::Color(20, 20, 20, background_alpha));
+    uint8_t tint = fog_style == NoFogOfWar ? 20 : 0;
+    // When drawing a non-rectangular radar (ie circle),
+    // we need full transparency on the outer edge.
+    // We then use the stencil mask to allow the actual drawing.
+    window.clear(style == Rectangular ? sf::Color{ tint, tint, tint, background_alpha } : sf::Color::Transparent);
 }
 
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 {
-    window.clear(sf::Color(0, 0, 0, 255));
     if (my_spaceship)
     {
         float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
         float r = 5000.0 * scale;
-
+        sf::CircleShape circle(0.f, 50);
+        circle.setFillColor(sf::Color{ 20, 20, 20, background_alpha });
         foreach(SpaceObject, obj, space_object_list)
         {
             P<ShipTemplateBasedObject> stb_obj = obj;
@@ -246,9 +275,8 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
                 && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
             {
                 r = stb_obj->getShortRangeRadarRange() * scale;
-                sf::CircleShape circle(r, 50);
+                circle.setRadius(r);
                 circle.setOrigin(r, r);
-                circle.setFillColor(sf::Color(255, 255, 255, 255));
                 circle.setPosition(worldToScreen(obj->getPosition()));
                 window.draw(circle);
             }
@@ -257,9 +285,8 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 
             if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
             {
-                sf::CircleShape circle(r, 50);
+                circle.setRadius(r);
                 circle.setOrigin(r, r);
-                circle.setFillColor(sf::Color(255, 255, 255, 255));
                 circle.setPosition(worldToScreen(obj->getPosition()));
                 window.draw(circle);
             }
@@ -332,11 +359,6 @@ void GuiRadarView::drawSectorGrid(sf::RenderTarget& window)
 
 void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
 {
-    sf::BlendMode blend(
-        sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add,
-        sf::BlendMode::One, sf::BlendMode::Zero, sf::BlendMode::Add
-    );
-    window.clear(sf::Color(255, 255, 255, 255));
     if (!my_spaceship)
         return;
     sf::Vector2f scan_center = my_spaceship->getPosition();
@@ -344,6 +366,13 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
     PVector<Nebula> nebulas = Nebula::getNebulas();
+    
+    sf::CircleShape circle(0.f, 32);
+    circle.setFillColor(sf::Color::Black);
+    sf::VertexArray a(sf::TrianglesStrip, 5);
+    for(int n=0; n<5;n++)
+        a[n].color = sf::Color::Black;
+
     foreach(Nebula, n, nebulas)
     {
         sf::Vector2f diff = n->getPosition() - scan_center;
@@ -353,17 +382,12 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
         {
             if (diff_len < n->getRadius())
             {
-                sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
-                background.setPosition(rect.left, rect.top);
-                background.setFillColor(sf::Color(0, 0, 0, 255));
-                window.draw(background, blend);
             }else{
                 float r = n->getRadius() * scale;
-                sf::CircleShape circle(r, 32);
+                circle.setRadius(r);
                 circle.setOrigin(r, r);
                 circle.setPosition(worldToScreen(n->getPosition()));
-                circle.setFillColor(sf::Color(0, 0, 0, 255));
-                window.draw(circle, blend);
+                window.draw(circle);
 
                 float diff_angle = sf::vector2ToAngle(diff);
                 float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
@@ -374,26 +398,15 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
                 sf::Vector2f pos_d = scan_center + sf::normalize(pos_b - scan_center) * distance * 3.0f;
                 sf::Vector2f pos_e = scan_center + diff / diff_len * distance * 3.0f;
 
-                sf::VertexArray a(sf::TrianglesStrip, 5);
                 a[0].position = worldToScreen(pos_a);
                 a[1].position = worldToScreen(pos_b);
                 a[2].position = worldToScreen(pos_c);
                 a[3].position = worldToScreen(pos_d);
                 a[4].position = worldToScreen(pos_e);
-                for(int n=0; n<5;n++)
-                    a[n].color = sf::Color(0, 0, 0, 255);
-                window.draw(a, blend);
+                
+                window.draw(a);
             }
         }
-    }
-
-    {
-        float r = 5000.0f * scale;
-        sf::CircleShape circle(r, 32);
-        circle.setOrigin(r, r);
-        circle.setPosition(radar_screen_center + (scan_center - view_position) * scale);
-        circle.setFillColor(sf::Color(255, 255, 255,255));
-        window.draw(circle, blend);
     }
 }
 
@@ -592,17 +605,18 @@ void GuiRadarView::drawMissileTubes(sf::RenderTarget& window)
     }
 }
 
-void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget& window_alpha)
+void GuiRadarView::drawObjects(sf::RenderTarget& window)
 {
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-    std::set<SpaceObject*> visible_objects;
+    std::unordered_set<SpaceObject*> visible_objects;
+    visible_objects.reserve(space_object_list.size());
     switch(fog_style)
     {
     case NoFogOfWar:
         foreach(SpaceObject, obj, space_object_list)
         {
-            visible_objects.insert(*obj);
+            visible_objects.emplace(*obj);
         }
         break;
     case FriendlysShortRangeFogOfWar:
@@ -621,7 +635,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
             // If the object can't hide in a nebula, it's considered visible.
             if (!obj->canHideInNebula())
             {
-                visible_objects.insert(*obj);
+                visible_objects.emplace(*obj);
             }
 
             // Consider the object only if it is:
@@ -659,7 +673,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
 
                 if (obj2 && (obj->getPosition() - obj2->getPosition()) < r + obj2->getRadius())
                 {
-                    visible_objects.insert(*obj2);
+                    visible_objects.emplace(*obj2);
                 }
             }
         }
@@ -670,37 +684,60 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window_normal, sf::RenderTarget
         {
             if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
                 continue;
-            visible_objects.insert(*obj);
+            visible_objects.emplace(*obj);
         }
         break;
     }
 
-    for(SpaceObject* obj : visible_objects)
+    std::vector<SpaceObject*> maybe_hidden;
+    maybe_hidden.reserve(visible_objects.size());
+    // poor person's std.erase_if.
+    for (auto it = std::begin(visible_objects), last = std::end(visible_objects); it != last;)
+    {
+        if ((*it)->canHideInNebula())
+        {
+            maybe_hidden.emplace_back(*it);
+            it = visible_objects.erase(it);
+        }
+        else
+            ++it;
+    }
+
+    auto draw_object = [&window, this, scale](SpaceObject* obj)
     {
         sf::Vector2f object_position_on_screen = worldToScreen(obj->getPosition());
         float r = obj->getRadius() * scale;
         sf::FloatRect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != *my_spaceship && rect.intersects(object_rect))
         {
-            sf::RenderTarget* window = &window_normal;
-            if (!obj->canHideInNebula())
-                window = &window_alpha;
-            obj->drawOnRadar(*window, object_position_on_screen, scale, view_rotation, long_range);
+            obj->drawOnRadar(window, object_position_on_screen, scale, view_rotation, long_range);
             if (show_callsigns && obj->getCallSign() != "")
-                drawText(*window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
+                drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
         }
+    };
+    // First draw all objects that are maybe hidden.
+    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::InBoundsAndVisible));
+    for (auto obj : maybe_hidden)
+    {
+        draw_object(obj);
     }
+    // Second, draw all objects that can't hide.
+    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
+    for(SpaceObject* obj : visible_objects)
+    {
+        draw_object(obj);
+    }
+
     if (my_spaceship)
     {
         sf::Vector2f object_position_on_screen = worldToScreen(my_spaceship->getPosition());
-        my_spaceship->drawOnRadar(window_normal, object_position_on_screen, scale, view_rotation, long_range);
+        my_spaceship->drawOnRadar(window, object_position_on_screen, scale, view_rotation, long_range);
     }
 }
 
 void GuiRadarView::drawObjectsGM(sf::RenderTarget& window)
 {
     float scale = std::min(rect.width, rect.height) / 2.0f / distance;
-
     foreach(SpaceObject, obj, space_object_list)
     {
         sf::Vector2f object_position_on_screen = worldToScreen(obj->getPosition());
