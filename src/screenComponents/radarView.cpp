@@ -712,20 +712,6 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
         break;
     }
 
-    std::vector<SpaceObject*> maybe_hidden;
-    maybe_hidden.reserve(visible_objects.size());
-    // poor person's std.erase_if.
-    for (auto it = std::begin(visible_objects), last = std::end(visible_objects); it != last;)
-    {
-        if ((*it)->canHideInNebula())
-        {
-            maybe_hidden.emplace_back(*it);
-            it = visible_objects.erase(it);
-        }
-        else
-            ++it;
-    }
-
     auto draw_object = [&window, this, scale](SpaceObject* obj)
     {
         sf::Vector2f object_position_on_screen = worldToScreen(obj->getPosition());
@@ -738,19 +724,25 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
                 drawText(window, sf::FloatRect(object_position_on_screen.x, object_position_on_screen.y - 15, 0, 0), obj->getCallSign(), ACenter, 15, bold_font);
         }
     };
+
     // First draw all objects that are maybe hidden.
     background_texture.setActive(true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::InBoundsAndVisible));
-    for (auto obj : maybe_hidden)
+    for (auto obj : visible_objects)
     {
-        draw_object(obj);
+        if (obj->canHideInNebula())
+        {
+            draw_object(obj);
+        }
     }
+
     // Second, draw all objects that can't hide.
     background_texture.setActive(true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     for(SpaceObject* obj : visible_objects)
     {
-        draw_object(obj);
+        if (!obj->canHideInNebula())
+            draw_object(obj);
     }
 
     if (my_spaceship)
