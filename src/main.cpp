@@ -148,6 +148,12 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
+#if defined(ANDROID)
+        if (mod.endswith("/"))
+        {
+            mod.pop_back(); 
+        } 
+#endif       
         if (getenv("HOME"))
         {
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
@@ -157,20 +163,23 @@ int main(int argc, char** argv)
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
 
-    new DirectoryResourceProvider("resources/");
-    new DirectoryResourceProvider("scripts/");
-    new DirectoryResourceProvider("packs/SolCommand/");
-    PackResourceProvider::addPackResourcesForDirectory("packs/");
+    new DirectoryResourceProvider("resources");
+    new DirectoryResourceProvider("scripts");
+    new DirectoryResourceProvider("packs/SolCommand");
+    PackResourceProvider::addPackResourcesForDirectory("packs");
+#if !defined(ANDROID)
+    //Android only supports resources in asset directory 
     if (getenv("HOME"))
     {
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
-        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources");
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts");
+        new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand");
     }
+#endif
 #ifdef RESOURCE_BASE_DIR
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts/");
-    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand/");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "scripts");
+    new DirectoryResourceProvider(RESOURCE_BASE_DIR "packs/SolCommand");
     PackResourceProvider::addPackResourcesForDirectory(RESOURCE_BASE_DIR "packs");
 #endif
     textureManager.setDefaultSmooth(true);

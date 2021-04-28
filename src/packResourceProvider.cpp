@@ -74,13 +74,13 @@ std::vector<string> PackResourceProvider::findResources(const string searchPatte
 
 void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 {
-#ifdef _MSC_VER
-    WIN32_FIND_DATAA data;
     auto search_root = directory;
     if (!search_root.endswith("/"))
     {
         search_root += "/";
     }
+#ifdef _MSC_VER
+    WIN32_FIND_DATAA data;
     HANDLE handle = FindFirstFileA((search_root + "*").c_str(), &data);
     if (handle == INVALID_HANDLE_VALUE)
         return;
@@ -88,7 +88,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
     do {
         if (data.cFileName[0] == '.')
             continue;
-        string name = directory + "/" + string(data.cFileName);
+        string name = search_root + "/" + string(data.cFileName);
         if (name.lower().endswith(".pack"))
         {
             new PackResourceProvider(name);
@@ -97,7 +97,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 
     FindClose(handle);
 #else
-    DIR* dir = opendir(directory.c_str());
+    DIR* dir = opendir(search_root.c_str());
     if (!dir)
         return;
 
@@ -106,7 +106,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
     {
         if (entry->d_name[0] == '.')
             continue;
-        string name = directory + "/" + string(entry->d_name);
+        string name = search_root + "/" + string(entry->d_name);
         if (name.lower().endswith(".pack"))
         {
             new PackResourceProvider(name);
