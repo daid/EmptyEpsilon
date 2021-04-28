@@ -110,14 +110,11 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
 
     // Draw the initial background 'clear' color.
     drawBackground(background_texture);
-    // Setup the stencil for the radar state.
-    
     
     sf::CircleShape circle(0.f, 50);
     if ((style == CircularMasked || style == Circular))
     {
-        // Draw the radar's outline.
-        // First, and before any stencil kicks in,
+        // Draw the radar's outline. First, and before any stencil kicks in.
         // this way, the outline is not even a part of the rendering area.
         float r = std::min(rect.width, rect.height) / 2.0f - 2.0f;
         circle.setRadius(r);
@@ -136,7 +133,9 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     // so we have to keep re-activating the target window all the time.
     // We're relying on stencil buffer to draw the radar:
     background_texture.setActive(true);
-    glEnable(GL_STENCIL_TEST); // we need it to clear.
+
+    // Stencil setup.
+    glEnable(GL_STENCIL_TEST);
     glStencilMask(as_mask(RadarStencil::InBoundsAndVisible));
     
     // By default, nothing's visible.
@@ -146,41 +145,43 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         // Rectangular shape, radar bounds is the entire texture target.
         clear_mask |= as_mask(RadarStencil::RadarBounds);
 
+        // Without fog of war (ie GM), everything is deemed visible :)
         if (fog_style == NoFogOfWar)
             clear_mask |= as_mask(RadarStencil::VisibleSpace);
     }
     glClearStencil(clear_mask);
     glClear(GL_STENCIL_BUFFER_BIT);
+
     glDepthMask(GL_FALSE); // Nothing in this process writes in the depth.
     
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     
     if ((style == CircularMasked || style == Circular))
     {
-        // Setup our stencil to update the stencil, with a default of "everything's visible".
+        // When drawing the radar 'scope', mark the area as "in sight" and "visible".
         glStencilFunc(GL_ALWAYS, as_mask(RadarStencil::InBoundsAndVisible), 0);
 
         // Draws the radar circle shape.
+        // Note that this draws both in the stencil and the color buffer!
         circle.setFillColor(sf::Color{ 20, 20, 20, background_alpha });
         circle.setOutlineThickness(0.f);
         background_texture.draw(circle);
     }
 
-    // Draw the blocked areas.
-    // In this cas, we want to clear the 'visible' bit,
-    // for all the stencil that has the radar one.
     background_texture.setActive(true);
-    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
-    ///Draw the mask texture, which will be black vs white for masking.
-    // White areas will be visible, black areas will be masked away.
     if (fog_style == NebulaFogOfWar)
     {
+        // Draw the *blocked* areas.
+        // In this cas, we want to clear the 'visible' bit,
+        // for all the stencil that has the radar one.
+        glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
         drawNebulaBlockedAreas(background_texture);
     }
     else if (fog_style == FriendlysShortRangeFogOfWar)
     {
         // Draws the *visible* areas.
-        glStencilFunc(GL_ALWAYS, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::All));
+        // Add the visible states to anything that's in friendly sight (and still in bounds)
+        glStencilFunc(GL_EQUAL, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::RadarBounds));
         drawNoneFriendlyBlockedAreas(background_texture);
     }
 
