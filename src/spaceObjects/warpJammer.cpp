@@ -86,9 +86,9 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         {
             if (info.instigator)
             {
-                on_destruction.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
+                on_destruction.call<void>(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_destruction.call(P<WarpJammer>(this));
+                on_destruction.call<void>(P<WarpJammer>(this));
             }
         }
 
@@ -98,9 +98,9 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
         {
             if (info.instigator)
             {
-                on_taking_damage.call(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
+                on_taking_damage.call<void>(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_taking_damage.call(P<WarpJammer>(this));
+                on_taking_damage.call<void>(P<WarpJammer>(this));
             }
         }
     }
