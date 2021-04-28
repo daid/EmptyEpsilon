@@ -166,7 +166,16 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     else
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
     window.popGLStates();
-
+    // Depending on the extensions,
+    // SFML may rely on FBOs.
+    // calling setActive() ensures the *correct* one is bound,
+    // in case post process effects are on.
+    // Otherwise, gl*() calls go on the *wrong* target, and mayhem ensues
+    // ('mayhem' is ymmv, depending on your flavor of hardware/os/drivers).
+    // SFML docs warn that any library calls (into SFML that is) may
+    // freely change the active binding, so change with caution
+    // (the window.get*() below and shader/texture binding are 'fine').
+    window.setActive();
     ShaderManager::getShader("shaders/billboardShader")->setUniform("camera_position", camera_position);
 
     float camera_fov = 60.0f;
@@ -195,7 +204,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         // (top / bottom is flipped around)
         auto left = view_size.x * relative_viewport.left + window_rect.left;
         auto top = view_size.y * (view_to_window.y + relative_viewport.top) - (window_rect.top + window_rect.height);
-
+        
         // Setup 3D viewport.
         glViewport(left, top, window_rect.width, window_rect.height);
     }
@@ -489,7 +498,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
 #endif
     sf::Shader::bind(nullptr);
-
+    window.setActive(false);
     window.pushGLStates();
 
     if (show_callsigns && render_lists.size() > 0)
