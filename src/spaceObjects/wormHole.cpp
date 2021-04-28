@@ -175,7 +175,7 @@ void WormHole::collide(Collisionable* target, float collision_force)
                                                random(-TARGET_SPREAD, TARGET_SPREAD))));
         if (on_teleportation.isSet())
         {
-            on_teleportation.call(P<WormHole>(this), obj);
+            on_teleportation.call<void>(P<WormHole>(this), obj);
         }
         if (spaceship)
         {

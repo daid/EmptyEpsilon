@@ -125,9 +125,9 @@ void Mine::explode()
     {
         if (info.instigator)
         {
-            on_destruction.call(P<Mine>(this), P<SpaceObject>(info.instigator));
+            on_destruction.call<void>(P<Mine>(this), P<SpaceObject>(info.instigator));
         }else{
-            on_destruction.call(P<Mine>(this));
+            on_destruction.call<void>(P<Mine>(this));
         }
     }
     destroy();
