@@ -322,9 +322,9 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         {
             if (info.instigator)
             {
-                on_taking_damage.call(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
+                on_taking_damage.call<void>(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_taking_damage.call(P<ShipTemplateBasedObject>(this));
+                on_taking_damage.call<void>(P<ShipTemplateBasedObject>(this));
             }
         }
     }
@@ -344,9 +344,9 @@ void ShipTemplateBasedObject::takeHullDamage(float damage_amount, DamageInfo& in
         {
             if (info.instigator)
             {
-                on_destruction.call(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
+                on_destruction.call<void>(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_destruction.call(P<ShipTemplateBasedObject>(this));
+                on_destruction.call<void>(P<ShipTemplateBasedObject>(this));
             }
         }
         destroy();

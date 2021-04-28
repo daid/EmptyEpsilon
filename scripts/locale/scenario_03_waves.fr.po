@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: 2021-04-04 22:27+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Basepath: .\n"
+
+#: scenario_03_waves.lua:43
+msgid ""
+"At least one friendly base must survive.\n"
+"\n"
+"Destroy all enemy ships. After a short delay, the next wave will appear. And "
+"so on ...\n"
+"\n"
+"How many waves can you destroy?"
+msgstr ""
+"Au moins une base alliée doit survivre.\n"
+"Détruisez tous les vaisseaux ennemis. Après un court laps de temps, la "
+"prochaine vague apparaîtra. Et ainsi de suite…\n"
+"Combien de vagues serez-vous en mesure de détruire ?"
+
+#: scenario_03_waves.lua:125 scenario_03_waves.lua:251
+msgid "Wave "
+msgstr "Vague n° "
+
+#: scenario_03_waves.lua:217
+#, lua-format
+msgid "Wave %d"
+msgstr "Vague n° %d"
+
+#: scenario_03_waves.lua:250
+msgid "Wave cleared!"
+msgstr "Vague éliminée !"
+
+#: scenario_03_waves.lua:251
+msgid " cleared."
+msgstr " éliminée !"
+
+#, lua-format
+#~ msgid "Wave {number}"
+#~ msgstr "Vague n° {number}"

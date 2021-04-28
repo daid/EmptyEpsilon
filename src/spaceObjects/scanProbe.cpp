@@ -128,7 +128,7 @@ void ScanProbe::update(float delta)
         // Fire the onExpiration callback, if set.
         if (on_expiration.isSet())
         {
-            on_expiration.call(P<ScanProbe>(this));
+            on_expiration.call<void>(P<ScanProbe>(this));
         }
 
         destroy();
@@ -170,7 +170,7 @@ void ScanProbe::update(float delta)
         // Fire the onArrival callback, if set.
         if (on_arrival.isSet())
         {
-            on_arrival.call(P<ScanProbe>(this), getPosition().x, getPosition().y);
+            on_arrival.call<void>(P<ScanProbe>(this), getPosition().x, getPosition().y);
         }
     }
 }
@@ -189,11 +189,11 @@ void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
     {
         if (info.instigator)
         {
-            on_destruction.call(P<ScanProbe>(this), P<SpaceObject>(info.instigator));
+            on_destruction.call<void>(P<ScanProbe>(this), P<SpaceObject>(info.instigator));
         }
         else
         {
-            on_destruction.call(P<ScanProbe>(this));
+            on_destruction.call<void>(P<ScanProbe>(this));
         }
     }
 
