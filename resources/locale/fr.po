@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-04-30 21:15+0200\n"
+"PO-Revision-Date: 2021-05-01 20:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -689,7 +689,7 @@ msgstr "{value} {unit}/min"
 
 #: src/screens/gm/tweak.cpp:593
 msgid "{system} health"
-msgstr "{system}: santé actuelle"
+msgstr "{system} : santé actuelle"
 
 #: src/screens/gm/tweak.cpp:612
 msgid "{system} heat"
@@ -739,7 +739,7 @@ msgstr "Autodestruction activée !"
 
 #: src/screenComponents/selfDestructEntry.cpp:67
 msgid "Code [{letter}]: {self_destruct_code}"
-msgstr "Code [{letter}]: {self_destruct_code}"
+msgstr "Code [{letter}] : {self_destruct_code}"
 
 #: src/screenComponents/selfDestructEntry.cpp:80
 msgctxt "selfdestruct"
@@ -1992,11 +1992,11 @@ msgstr "Énergie actuelle :"
 
 #: src/screens/gm/tweak.cpp:755
 msgid "Boost Speed:"
-msgstr "Man. Combat: Vit. d'accélération"
+msgstr "Man. Combat : Vit. d'accélération"
 
 #: src/screens/gm/tweak.cpp:761
 msgid "Strafe Speed:"
-msgstr "Man. Combat: Vit. d'esquive"
+msgstr "Man. Combat : Vit. d'esquive"
 
 #: src/screens/gm/tweak.cpp:769 src/screens/gm/tweak.cpp:811
 msgid "Positions occupied: "
@@ -3745,7 +3745,7 @@ msgstr "Piratage en cours : {percent}%"
 #: src/screenComponents/hackingDialog.cpp:124
 msgctxt "hacking"
 msgid "{target}: hacked {percent}%"
-msgstr "{target}: neutralisé à {percent}%"
+msgstr "{target} : neutralisé à {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:141
 msgid "Hacking SUCCESS!"
@@ -3803,7 +3803,7 @@ msgstr "Se déplace vers {x},{y}."
 #: src/spaceObjects/cpuShip.cpp:283
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
-msgstr "En train d'attaquer {callsign}!"
+msgstr "En train d'attaquer {callsign} !"
 
 #: src/spaceObjects/cpuShip.cpp:364
 msgctxt "orderscpu"
@@ -3863,27 +3863,27 @@ msgstr "À quai"
 #: src/spaceObjects/playerSpaceship.cpp:412
 msgctxt "shiplog"
 msgid "Start of log"
-msgstr "Début du journal de bord"
+msgstr "Début du journal de bord :"
 
 #: src/spaceObjects/playerSpaceship.cpp:1144
 msgctxt "shiplog"
 msgid "Hailed by {name}"
-msgstr "Appel provenant de {name}"
+msgstr "Appel provenant de {name}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1198
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
-msgstr "Communication interrompue de l'extérieur"
+msgstr "Communication interrompue de l'extérieur."
 
 #: src/spaceObjects/playerSpaceship.cpp:1208
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
-msgstr "Appel provenant de {callsign} interrompu"
+msgstr "Appel provenant de {callsign} interrompu."
 
 #: src/spaceObjects/playerSpaceship.cpp:1212
 msgctxt "shiplog"
 msgid "Communication channel closed"
-msgstr "Fin de transmission"
+msgstr "Fin de transmission."
 
 #: src/spaceObjects/playerSpaceship.cpp:1383
 #: src/spaceObjects/playerSpaceship.cpp:1460
@@ -3894,7 +3894,7 @@ msgstr "Communication établie avec {name}"
 #: src/spaceObjects/playerSpaceship.cpp:1384
 msgctxt "shiplog"
 msgid "Hailing: {name}"
-msgstr "Salutations : {name}"
+msgstr "Salutations : {name}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1407
 #: src/spaceObjects/playerSpaceship.cpp:1408
@@ -3906,17 +3906,17 @@ msgstr "Communication établie avec {callsign}"
 #: src/spaceObjects/playerSpaceship.cpp:1410
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
-msgstr "Communication établie avec {callsign}"
+msgstr "Communication établie avec {callsign}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1412
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
-msgstr "Communication refusée en provenance de {callsign}"
+msgstr "Communication en provenance de {callsign} refusée."
 
 #: src/spaceObjects/playerSpaceship.cpp:1413
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
-msgstr ""
+msgstr "Communication vers {callsign} refusée."
 
 #: src/spaceObjects/playerSpaceship.cpp:1422
 msgctxt "shiplog"
@@ -3926,22 +3926,22 @@ msgstr "Communication brusquement interrompue."
 #: src/spaceObjects/playerSpaceship.cpp:1425
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
-msgstr "Communication provenant de {callsign} acceptée"
+msgstr "Appel provenant de {callsign} accepté."
 
 #: src/spaceObjects/playerSpaceship.cpp:1445
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
-msgstr "Communication provenant de {callsign} refusée"
+msgstr "Appel provenant de {callsign} refusé."
 
 #: src/spaceObjects/playerSpaceship.cpp:1459
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
-msgstr "Canal de communication ouvert à {name}"
+msgstr "Canal de communication ouvert avec {name}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1462
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
-msgstr "Communication refusée à {name}"
+msgstr "Appel provenant de {name} refusé."
 
 #: scripts/shipTemplates_OLD.lua:237
 msgid ""
@@ -3953,7 +3953,7 @@ msgid ""
 "and other civilian parties. However, they have used it's adaptable nature to "
 "re-fit them with (illegal) weaponry."
 msgstr ""
-"Fabriqué par: Chantiers Navals Repulse.\n"
+"Fabriqué par : Chantiers Navals Repulse.\n"
 "\n"
 "En raison de sa polyvalence, ce vaisseau a trouvé sa place dans la plupart "
 "des factions qui l'ont considérablement modernisés pour l'adapter à leurs "
@@ -3973,7 +3973,7 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savory purposes."
 msgstr ""
-"Fabriqué par: Chantiers Navals Repulse.\n"
+"Fabriqué par : Chantiers Navals Repulse.\n"
 "\n"
 "Le successeur du grand succès commercial : le croiseur Karnack.\n"
 "\n"
@@ -4284,17 +4284,17 @@ msgstr ""
 #: src/screens/crew6/engineeringScreen.cpp:243
 msgctxt "slider"
 msgid "Power: {current_level}% / {requested}%"
-msgstr ""
+msgstr "Puissance : {current_level}% / {requested}%"
 
 #: src/screens/crew6/engineeringScreen.cpp:245
 msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
-msgstr ""
+msgstr "Liquide de refroidissement : {current_level}% / {requested}%"
 
 #: src/screens/gm/tweak.cpp:182
 msgctxt "tweak_ship"
 msgid "Special drives:"
-msgstr ""
+msgstr "Moteurs spéciaux :"
 
 #: scripts/shipTemplates_Corvette.lua:14
 msgctxt "ship"
@@ -4821,22 +4821,24 @@ msgstr ""
 #: scripts/comms_ship.lua:38
 msgctxt "commsShipAssist"
 msgid "What do you want?"
-msgstr ""
+msgstr "Que voulez-vous ?"
 
 #: scripts/comms_ship.lua:40
 msgctxt "commsShipAssist"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/comms_ship.lua:43
 msgctxt "commsShipAssist"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Défendez un marqueur"
 
 #: scripts/comms_ship.lua:46
 msgctxt "commsShipAssist"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
 
 #: scripts/comms_ship.lua:47 scripts/comms_ship.lua:56
 #: scripts/comms_ship.lua:69 scripts/comms_ship.lua:77
@@ -4851,40 +4853,40 @@ msgstr "Retour"
 #: scripts/comms_ship.lua:49
 msgctxt "commsShipAssist"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/comms_ship.lua:52
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Defend %s"
-msgstr ""
+msgstr "Défendez %s"
 
 #: scripts/comms_ship.lua:55
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "We are heading to assist at %s."
-msgstr ""
+msgstr "Nous partons pour défendre le marqueur %s."
 
 #: scripts/comms_ship.lua:65
 msgctxt "commsShipAssist"
 msgid "Assist me"
-msgstr ""
+msgstr "Aidez-nous !"
 
 #: scripts/comms_ship.lua:67
 msgctxt "commsShipAssist"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/comms_ship.lua:74
 msgctxt "commsShipAssist"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/comms_ship.lua:83
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Amarrez-vous à %s"
 
 #: scripts/comms_ship.lua:85
 #, lua-format
@@ -4895,17 +4897,17 @@ msgstr "En cours d'amarrage à %s."
 #: scripts/comms_ship.lua:104
 msgctxt "commsShipEnemy"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "Nous allons vous détruire !"
 
 #: scripts/comms_ship.lua:105
 msgctxt "commsShipEnemy"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Votre race va s'éteindre ici et maintenant !"
 
 #: scripts/comms_ship.lua:106
 msgctxt "commsShipEnemy"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/comms_ship.lua:108
 msgctxt "commsShipEnemy"
@@ -4914,6 +4916,9 @@ msgid ""
 "\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Vous allez mourir faibles créatures insignifiantes!"
 
 #: scripts/comms_ship.lua:112
 msgctxt "commsShipEnemy"
@@ -4922,11 +4927,16 @@ msgid ""
 "\n"
 "End of transmission."
 msgstr ""
+"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+"\n"
+"Fin de transmission."
 
 #: scripts/comms_ship.lua:116
 msgctxt "commsShipEnemy"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
 
 #: scripts/comms_ship.lua:118
 msgctxt "commsShipEnemy"
@@ -4941,21 +4951,32 @@ msgid ""
 "\n"
 "Communication halted."
 msgstr ""
+"000110011010...Grzzzz..\n"
+"\n"
+"Communication binaire non détectée..Grzzz Nous passons en communication "
+"universelle..Grrzzz\n"
+"\n"
+"Générer une réponse appropriée pour la cible en langage humain à partir des "
+"archives...Grrzzzz\n"
+"\n"
+"Ne nous approchez pas! Grrzzz\n"
+"\n"
+"Communication interrompue."
 
 #: scripts/comms_ship.lua:127
 msgctxt "commsShipEnemy"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTER A DISTANCE: AUTODESTRUCTION"
 
 #: scripts/comms_ship.lua:128
 msgctxt "commsShipEnemy"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Commande non autorisée reçue. Cible verrouillée."
 
 #: scripts/comms_ship.lua:129
 msgctxt "commsShipEnemy"
 msgid "External command ignored."
-msgstr ""
+msgstr "Ordre externe ignoré."
 
 #: scripts/comms_ship.lua:131
 msgctxt "commsShipEnemy"
@@ -4965,26 +4986,32 @@ msgid ""
 "\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/comms_ship.lua:134
 msgctxt "commsShipEnemy"
 msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
 
 #: scripts/comms_ship.lua:135
 msgctxt "commsShipEnemy"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
 
 #: scripts/comms_ship.lua:136
 msgctxt "commsShipEnemy"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
 
 #: scripts/comms_ship.lua:138
 msgctxt "commsShipEnemy"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/comms_ship.lua:166
 msgctxt "commsShip"
@@ -4993,6 +5020,9 @@ msgid ""
 "\n"
 "We are on an important mission."
 msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"\n"
+"Nous sommes en mission de la plus haute importance."
 
 #: scripts/comms_ship.lua:170
 msgctxt "commsShip"
@@ -5001,53 +5031,56 @@ msgid ""
 "\n"
 "Good day."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"\n"
+"Bonne journée."
 
 #: scripts/comms_ship.lua:185
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Coque : %d%%\n"
 
 #: scripts/comms_ship.lua:189
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/comms_ship.lua:191
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/comms_ship.lua:192
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/comms_ship.lua:195
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "Shield %d: %d%%\n"
-msgstr ""
+msgstr "Bouclier %d : %d%%\n"
 
 #: scripts/comms_ship.lua:201
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles : %d/%d\n"
 
 #: scripts/comms_ship.lua:213
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "WP %d"
-msgstr ""
+msgstr "Marqueur %d"
 
 #: scripts/comms_station.lua:69
 msgctxt "commsStation"
 msgid "We are under attack! No time for chatting!"
-msgstr ""
+msgstr "Nous sommes sous le feu de l'ennemi ! Pas le temps de bavarder !"
 
 #: scripts/comms_station.lua:88
 #, lua-format
@@ -5056,12 +5089,14 @@ msgid ""
 "Good day, officer! Welcome to %s.\n"
 "What can we do for you today?"
 msgstr ""
+"Bonjour officier ! Bienvenue sur %s.\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
 
 #: scripts/comms_station.lua:90
 #, lua-format
 msgctxt "commsStation"
 msgid "Welcome to our lovely station %s."
-msgstr ""
+msgstr "Bienvenue dans notre charmante station orbitale %s."
 
 #: scripts/comms_station.lua:93 scripts/comms_station.lua:180
 #, lua-format
@@ -5071,77 +5106,84 @@ msgid ""
 "\n"
 "Reputation: %d"
 msgstr ""
+"%s\n"
+"\n"
+"Réputation : %d"
 
 #: scripts/comms_station.lua:96
 msgctxt "commsStation"
 msgid "Do you have spare homing missiles for us?"
-msgstr ""
+msgstr "Auriez-vous des homing missiles pour nous ?"
 
 #: scripts/comms_station.lua:97
 msgctxt "commsStation"
 msgid "Can you restock us with HVLI?"
-msgstr ""
+msgstr "Pouvez-vous nous réapprovisionner en HVLI ? "
 
 #: scripts/comms_station.lua:98
 msgctxt "commsStation"
 msgid "Please re-stock our mines."
-msgstr ""
+msgstr "Merci de réapprovisionner notre stock de mines, c'est urgent."
 
 #: scripts/comms_station.lua:99
 msgctxt "commsStation"
 msgid "Can you supply us with some nukes?"
-msgstr ""
+msgstr "Avez-vous des missiles nucléaires nukes ?"
 
 #: scripts/comms_station.lua:100
 msgctxt "commsStation"
 msgid "Please re-stock our EMP missiles."
-msgstr ""
+msgstr "Avez-vous des missiles EMP ?"
 
 #: scripts/comms_station.lua:106
 #, lua-format
 msgctxt "commsStation"
 msgid "%s (%d rep each)"
-msgstr ""
+msgstr "%s (%d rép chacun)"
 
 #: scripts/comms_station.lua:122
 msgctxt "commsStation"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "Vous devez rester amarrés à la station pour cette action."
 
 #: scripts/comms_station.lua:129
 msgctxt "commsStation"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
+"Nous ne fournissons pas ce type d'armes de destruction massive. \n"
+"Nous sommes pour la paix dans l'univers."
 
 #: scripts/comms_station.lua:131
 msgctxt "commsStation"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
 #: scripts/comms_station.lua:133
 msgctxt "commsStation"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
 #: scripts/comms_station.lua:144
 msgctxt "commsStation"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
 
 #: scripts/comms_station.lua:146
 msgctxt "commsStation"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
+"Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
+"fournir."
 
 #: scripts/comms_station.lua:152
 msgctxt "commsStation"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Pas assez de réputation."
 
 #: scripts/comms_station.lua:158
 msgctxt "commsStation"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "Vous êtes chargés au max et prêt à tout faire péter."
 
 #: scripts/comms_station.lua:160
 msgctxt "commsStation"
@@ -5149,6 +5191,8 @@ msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
 
 #: scripts/comms_station.lua:175
 #, lua-format
@@ -5157,6 +5201,9 @@ msgid ""
 "This is %s. Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
+"Voici %s. Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
 
 #: scripts/comms_station.lua:177
 #, lua-format
@@ -5165,66 +5212,75 @@ msgid ""
 "This is %s. Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
+"Voici %s. Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/comms_station.lua:185
 #, lua-format
 msgctxt "commsStation"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
 
 #: scripts/comms_station.lua:194
 #, lua-format
 msgctxt "commsStation"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Merci de nous envoyer des renforts ! (%d rep)"
 
 #: scripts/comms_station.lua:209
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de "
+"réapprovisionnement."
 
 #: scripts/comms_station.lua:211
 msgctxt "commsStation"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "À quel waypoint devons-nous envoyer le réapprovisionnement ?"
 
 #: scripts/comms_station.lua:224
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched a supply ship toward %s."
 msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"réapprovisionnement au marqueur %s."
 
 #: scripts/comms_station.lua:226 scripts/comms_station.lua:255
 msgctxt "commsStation"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Pas assez de points de réputation !"
 
 #: scripts/comms_station.lua:243
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "Vous devez définir un marqueur avant de demander des renforts."
 
 #: scripts/comms_station.lua:245
 msgctxt "commsStation"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
 #: scripts/comms_station.lua:253
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched %s to assist at %s."
 msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"waypoint %s."
 
 #: scripts/comms_station.lua:324
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
-msgstr ""
+msgstr "Marqueur %d"
 
 #: scripts/comms_supply_drop.lua:11
 msgctxt "commsShip"
 msgid "Transporting goods."
-msgstr ""
+msgstr "Transport de marchandises."
 
 #: scripts/comms_supply_drop.lua:17
 msgctxt "commsShip"
@@ -5232,3 +5288,5 @@ msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"Bonne journée."
