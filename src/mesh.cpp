@@ -66,6 +66,7 @@ void Mesh::render()
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }else{
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -79,15 +80,20 @@ void Mesh::render()
         glDisableClientState(GL_VERTEX_ARRAY);
         glDisableClientState(GL_NORMAL_ARRAY);
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
     }
 #endif//FEATURE_3D_RENDERING
 }
 
 sf::Vector3f Mesh::randomPoint()
 {
+    if (vertexCount == 0)
+        return sf::Vector3f{};
+
     //int idx = irandom(0, vertexCount-1);
     //return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
-    int idx = irandom(0, vertexCount / 3) * 3;
+    // Pick a face
+    int idx = irandom(0, vertexCount / 3 - 1) * 3; 
     sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
     sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
     sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
@@ -159,13 +165,13 @@ Mesh* Mesh::getMesh(string filename)
                         info.t = p0[1].toInt() - 1;
                         info.n = p0[2].toInt() - 1;
                         indices.push_back(info);
-                        info.v = p1[0].toInt() - 1;
-                        info.t = p1[1].toInt() - 1;
-                        info.n = p1[2].toInt() - 1;
-                        indices.push_back(info);
                         info.v = p2[0].toInt() - 1;
                         info.t = p2[1].toInt() - 1;
                         info.n = p2[2].toInt() - 1;
+                        indices.push_back(info);
+                        info.v = p1[0].toInt() - 1;
+                        info.t = p1[1].toInt() - 1;
+                        info.n = p1[2].toInt() - 1;
                         indices.push_back(info);
                     }
                 }else{
@@ -177,14 +183,14 @@ Mesh* Mesh::getMesh(string filename)
         ret->vertices = new MeshVertex[indices.size()];
         for(unsigned int n=0; n<indices.size(); n++)
         {
-            ret->vertices[n].position[0] = -vertices[indices[n].v].x;
+            ret->vertices[n].position[0] = vertices[indices[n].v].x;
             ret->vertices[n].position[1] = vertices[indices[n].v].z;
             ret->vertices[n].position[2] = vertices[indices[n].v].y;
-            ret->vertices[n].normal[0] = -normals[indices[n].n].x;
+            ret->vertices[n].normal[0] = normals[indices[n].n].x;
             ret->vertices[n].normal[1] = normals[indices[n].n].z;
             ret->vertices[n].normal[2] = normals[indices[n].n].y;
             ret->vertices[n].uv[0] = texCoords[indices[n].t].x;
-            ret->vertices[n].uv[1] = 1.0 - texCoords[indices[n].t].y;
+            ret->vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
         }
     }else if (filename.endswith(".model"))
     {
