@@ -269,8 +269,10 @@ void GuiElement::updateRect(sf::FloatRect parent_rect)
     }
 }
 
-void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
+[[nodiscard]]
+bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
 {
+    auto success = true;
     P<WindowManager> window_manager = engine->getObject("windowManager");
 
     //Hack the rectangle for this element so it sits perfectly on pixel boundaries.
@@ -281,11 +283,16 @@ void GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
     {
         sf::ContextSettings settings{};
         settings.stencilBits = 8;
-        texture.create(texture_size.x, texture_size.y, settings);
+        success = texture.create(texture_size.x, texture_size.y, settings);
     }
 
-    //Set the view so it covers this elements normal rect. So we can draw exactly the same on this texture as no the normal screen.
-    texture.setView(sf::View{ rect });
+    if (success)
+    {
+        //Set the view so it covers this elements normal rect. So we can draw exactly the same on this texture as no the normal screen.
+        texture.setView(sf::View{ rect });
+    }
+
+    return success;
 }
 
 void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color, const sf::RenderStates& states)
