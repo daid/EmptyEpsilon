@@ -83,7 +83,7 @@ function init()
 	stationList = {}
 	transportList = {}
 	tmp = SupplyDrop()
-	for _, obj in ipairs(tmp:getObjectsInRange(300000)) do
+	for idx, obj in ipairs(tmp:getObjectsInRange(300000)) do
 		if obj.typeName == "SpaceStation" then
 			table.insert(stationList, obj)
 		end
