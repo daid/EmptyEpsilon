@@ -102,7 +102,7 @@ SYS_REARSHIELD = "rearshield"
 --
 -- @usage
 -- local pship = getPlayerShip(-1)
--- for _, system in ipairs(SYSTEMS) do
+-- for idx, system in ipairs(SYSTEMS) do
 --   pship:setSystemHealth(system, 1.0)
 --   pship:setSystemHeat(system, 0.0)
 --   pship:setSystemPower(system, 1.0)

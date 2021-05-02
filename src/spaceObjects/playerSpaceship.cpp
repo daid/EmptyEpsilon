@@ -747,7 +747,7 @@ void PlayerSpaceship::applyTemplateValues()
     if (!on_new_player_ship_called)
     {
         on_new_player_ship_called = true;
-        gameGlobalInfo->on_new_player_ship.call(P<PlayerSpaceship>(this));
+        gameGlobalInfo->on_new_player_ship.call<void>(P<PlayerSpaceship>(this));
     }
 }
 
@@ -1628,7 +1628,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             p->setOwner(this);
             if (on_probe_launch.isSet())
             {
-                on_probe_launch.call(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+                on_probe_launch.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(p));
             }
             scan_probe_stock--;
         }
@@ -1656,12 +1656,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
 
                 if (new_linked_probe)
                 {
-                    on_probe_link.call(P<PlayerSpaceship>(this), P<ScanProbe>(new_linked_probe));
+                    on_probe_link.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(new_linked_probe));
                 }
             }
             else if (linked_science_probe_id == -1 && on_probe_unlink.isSet())
             {
-                on_probe_unlink.call(P<PlayerSpaceship>(this), P<ScanProbe>(old_linked_probe));
+                on_probe_unlink.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(old_linked_probe));
             }
         }
         break;
@@ -1685,7 +1685,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (csf.type == CustomShipFunction::Type::Button || csf.type == CustomShipFunction::Type::Message)
                     {
-                        csf.callback.call();
+                        csf.callback.call<void>();
                     }
                     if (csf.type == CustomShipFunction::Type::Message)
                     {
