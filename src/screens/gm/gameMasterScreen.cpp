@@ -152,7 +152,7 @@ GameMasterScreen::GameMasterScreen()
         {
             if (n == index)
             {
-                callback.callback.call();
+                callback.callback.call<void>();
                 return;
             }
             n++;

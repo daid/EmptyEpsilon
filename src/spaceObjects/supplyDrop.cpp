@@ -69,7 +69,7 @@ void SupplyDrop::collide(Collisionable* target, float force)
         }
         if (on_pickup_callback.isSet())
         {
-            on_pickup_callback.call(P<SupplyDrop>(this), player);
+            on_pickup_callback.call<void>(P<SupplyDrop>(this), player);
             picked_up = true;
         }
 
