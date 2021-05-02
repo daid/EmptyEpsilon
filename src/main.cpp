@@ -149,16 +149,17 @@ int main(int argc, char** argv)
     {
         string mod = PreferencesManager::get("mod");
 #if defined(ANDROID)
-        if (mod.endswith("/"))
-        {
-            mod.pop_back(); 
-        } 
+        mod = mod.rstrip("\\/"); //Android is really touchy about ending slashes
 #endif       
+
+#if !defined(ANDROID)
+        //Android only supports resources in asset directory 
         if (getenv("HOME"))
         {
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
             PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
         }
+#endif
         new DirectoryResourceProvider("resources/mods/" + mod);
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
