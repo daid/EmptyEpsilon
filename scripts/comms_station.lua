@@ -100,7 +100,7 @@ function commsStationDocked(comms_source, comms_target)
         ["EMP"] = _("commsStation", "Please re-stock our EMP missiles.")
     }
 
-    for _, missile_type in ipairs(MISSILE_TYPES) do
+    for idx, missile_type in ipairs(MISSILE_TYPES) do
         if comms_source:getWeaponStorageMax(missile_type) > 0 then
             addCommsReply(
                 string.format(_("commsStation", "%s (%d rep each)"), reply_messages[missile_type], getWeaponCost(comms_source, comms_target, missile_type)),

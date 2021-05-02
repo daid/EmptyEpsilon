@@ -77,7 +77,7 @@ function commsShipFriendly(comms_source, comms_target)
             addCommsReply(_("button", "Back"), commsShipMainMenu)
         end
     )
-    for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+    for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
         if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
             addCommsReply(
                 string.format(_("commsShipAssist", "Dock at %s"), obj:getCallSign()),
