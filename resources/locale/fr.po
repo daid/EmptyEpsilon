@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-05-01 20:03+0200\n"
+"PO-Revision-Date: 2021-05-02 01:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -505,7 +505,7 @@ msgstr "Puissance"
 #: src/screens/crew6/engineeringScreen.cpp:128
 msgctxt "slider"
 msgid "Coolant"
-msgstr "Liquide de refroidissement"
+msgstr "Liq. de refroidissement"
 
 #: src/screens/crew6/engineeringScreen.cpp:179
 #: src/screens/crew6/engineeringScreen.cpp:259
@@ -4284,12 +4284,12 @@ msgstr ""
 #: src/screens/crew6/engineeringScreen.cpp:243
 msgctxt "slider"
 msgid "Power: {current_level}% / {requested}%"
-msgstr "Puissance : {current_level}% / {requested}%"
+msgstr "Puissance : {current_level}%/{requested}%"
 
 #: src/screens/crew6/engineeringScreen.cpp:245
 msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
-msgstr "Liquide de refroidissement : {current_level}% / {requested}%"
+msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
 
 #: src/screens/gm/tweak.cpp:182
 msgctxt "tweak_ship"
@@ -5080,7 +5080,9 @@ msgstr "Marqueur %d"
 #: scripts/comms_station.lua:69
 msgctxt "commsStation"
 msgid "We are under attack! No time for chatting!"
-msgstr "Nous sommes sous le feu de l'ennemi ! Pas le temps de bavarder !"
+msgstr ""
+"Nous sommes sous le feu de l'ennemi !\n"
+"Pas le temps de bavarder !"
 
 #: scripts/comms_station.lua:88
 #, lua-format
@@ -5201,7 +5203,7 @@ msgid ""
 "This is %s. Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
-"Voici %s. Bonjour, officier.\n"
+"Ici la station %s. Bonjour, officier.\n"
 "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
 "station au préalable."
 
@@ -5212,7 +5214,7 @@ msgid ""
 "This is %s. Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
-"Voici %s. Salutations.\n"
+"Ici la station %s. Salutations.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/comms_station.lua:185
@@ -5238,7 +5240,7 @@ msgstr ""
 #: scripts/comms_station.lua:211
 msgctxt "commsStation"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr "À quel waypoint devons-nous envoyer le réapprovisionnement ?"
+msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 
 #: scripts/comms_station.lua:224
 #, lua-format
@@ -5269,13 +5271,13 @@ msgctxt "commsStation"
 msgid "We have dispatched %s to assist at %s."
 msgstr ""
 "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
-"waypoint %s."
+"marqueur %s."
 
 #: scripts/comms_station.lua:324
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
-msgstr "Marqueur %d"
+msgstr "%d"
 
 #: scripts/comms_supply_drop.lua:11
 msgctxt "commsShip"
