@@ -396,7 +396,7 @@ model:addEngineEmitter(-95,-30, 8,  0.2, 0.2, 1.0, 5.0)
 model:addEngineEmitter(-95,-30, 0,  0.2, 0.2, 1.0, 5.0)
 model:addEngineEmitter(-95,-30,-8,  0.2, 0.2, 1.0, 5.0)
 
-for _, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
+for idx, color in ipairs({"Blue", "Green", "Grey", "Red", "White", "Yellow"}) do
     model = ModelData()
     model:setName("AdlerLongRangeScout" .. color)
     model:setMesh("AdlerLongRangeScout/AdlerLongRangeSoutHull.model")

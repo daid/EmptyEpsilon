@@ -18,7 +18,7 @@ function init()
 	inactivity_count = 0
 	inactivity_max = 300
 	local objects = getObjectsInRadius(position_x, position_y, 100)	--position_[x|y] set by calling script
-	for _, object in ipairs(objects) do
+	for idx, object in ipairs(objects) do
 		if object.typeName == "SpaceStation" then
 			if object:getCallSign() == station_name then	--station_name set by calling script
 				my_station = object

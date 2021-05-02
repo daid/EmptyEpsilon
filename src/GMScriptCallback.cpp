@@ -76,7 +76,7 @@ static int onGMClick(lua_State* L)
     {
         gameGlobalInfo->on_gm_click=[callback](sf::Vector2f position) mutable
         {
-            callback.call(position.x,position.y);
+            callback.call<void>(position.x,position.y);
         };
     }
     else
