@@ -4502,7 +4502,7 @@ function friendlyComms(comms_data)
 		setCommsMessage(msg);
 		addCommsReply(_("Back"), commsShip)
 	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("commsShip", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("commsShip", "Docking at %s."), obj:getCallSign()));
