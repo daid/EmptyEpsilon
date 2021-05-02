@@ -218,7 +218,7 @@ Doppler instability: %i]]),
     kraylor_defense_line_ships = {}
     kraylor_defense_line_engaged = false
 
-    for _, warp_jammer in ipairs(kraylor_defense_line) do
+    for idx, warp_jammer in ipairs(kraylor_defense_line) do
         x, y = warp_jammer:getPosition()
         ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
         if random(0, 100) < 20 then
@@ -255,7 +255,7 @@ Doppler instability: %i]]),
     }
     kraylor_transport = nil
 
-    for _, station in ipairs(kraylor_forward_line) do
+    for idx, station in ipairs(kraylor_forward_line) do
         x, y = station:getPosition()
         ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
 
