@@ -272,6 +272,9 @@ void GuiElement::updateRect(sf::FloatRect parent_rect)
 [[nodiscard]]
 bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
 {
+#ifdef SFML_SYSTEM_ANDROID
+    return false;
+#else
     auto success = true;
     P<WindowManager> window_manager = engine->getObject("windowManager");
 
@@ -293,6 +296,7 @@ bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
     }
 
     return success;
+#endif
 }
 
 void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color, const sf::RenderStates& states)
