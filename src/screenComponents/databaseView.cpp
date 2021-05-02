@@ -102,11 +102,11 @@ void DatabaseViewComponent::fillListBox()
     {
         if (children_idx.size() != 0)
         {
-            item_list->addEntry(tr("Back"), std::to_string(selected_entry->getParentId()));
+            item_list->addEntry(tr("button", "Back"), std::to_string(selected_entry->getParentId()));
         }
         else if(parent_entry)
         {
-            item_list->addEntry(tr("Back"), std::to_string(parent_entry->getParentId()));
+            item_list->addEntry(tr("button", "Back"), std::to_string(parent_entry->getParentId()));
         }
     }
 

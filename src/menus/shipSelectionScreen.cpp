@@ -245,7 +245,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     password_label->setPosition(0, 40, ATopCenter);
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
     password_entry->setPosition(20, 0, ACenterLeft)->setSize(400, 50);
-    password_cancel = new GuiButton(password_entry_box, "PASSWORD_CANCEL_BUTTON", tr("Cancel"), [this]() {
+    password_cancel = new GuiButton(password_entry_box, "PASSWORD_CANCEL_BUTTON", tr("button", "Cancel"), [this]() {
         // Reset the dialog.
         password_label->setText(tr("Enter this ship's control code:"));
         password_entry->setText("");
