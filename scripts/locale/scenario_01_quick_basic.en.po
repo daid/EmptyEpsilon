@@ -1,0 +1,73 @@
+# Scenario name
+msgid "Quick Basic"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:333
+#, lua-format
+msgid ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Please inform your Captain and crew that you have a total of %d minutes for "
+"this mission.\n"
+"\n"
+"The mission started at the arrival of this message.\n"
+"\n"
+"Good luck."
+msgstr ""
+
+#: scenario_01_quick_basic.lua:346
+msgid "green"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:349
+msgid "yellow"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:353
+msgid "red"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:365
+msgid "Mission: FAILED (ship lost before mission started)"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:370
+msgid "Mission: PREPARING"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:380
+msgid "Mission: FAILED (time has run out)"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:387
+#, lua-format
+msgid "%s, you have %d minute remaining."
+msgstr ""
+
+#: scenario_01_quick_basic.lua:390
+#, lua-format
+msgid "%s, you have %d minutes remaining."
+msgstr ""
+
+#: scenario_01_quick_basic.lua:393
+#, lua-format
+msgid "%s, you have %d minutes remaining of mission time."
+msgstr ""
+
+#: scenario_01_quick_basic.lua:416
+#, lua-format
+msgid "Mission: SUCCESS (%d seconds left)"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:425
+msgid "Mission: FAILED (all your ships destroyed)"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:434
+msgid "Mission: FAILED (no friendlies left)"
+msgstr ""
+
+#: scenario_01_quick_basic.lua:450
+#, lua-format
+msgid "Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s"
+msgstr ""
