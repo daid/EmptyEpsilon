@@ -169,6 +169,35 @@ OptionsMenu::OptionsMenu()
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
+    //Select the language
+    (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    
+    //Don't wan't scripts/locale. Also, compatible with android assets.
+    DirectoryResourceProvider* lang_prov = new DirectoryResourceProvider("resources/locale");
+    std::vector<string> languages {lang_prov->findResources("*.po")};
+    std::for_each(languages.begin(), languages.end(), [](string &str) 
+    {
+        //strip extension
+        str = str.substr(0, str.rfind("."));
+    });
+    //get only yy.po, the main language files (not tutorial.xx.po for example)
+    languages.erase(std::remove_if(languages.begin(), languages.end(), [](string &str) { return -1 != str.find("."); }), languages.end()); 
+    
+    int default_index = 0;
+    auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
+    if(default_elem != languages.end())
+    {
+        default_index =  default_elem - languages.begin();
+    }
+    
+    (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+    {
+        i18n::reset();
+        i18n::load("locale/" + value + ".po");
+        PreferencesManager::set("language", value);
+    }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+
+
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.
 
