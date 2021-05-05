@@ -38,8 +38,7 @@
 --   Example:
 --     distance(-100, 100, 0, 100) -- Returns 100
 function distance(a, b, c, d)
-    local x1, y1 = 0, 0
-    local x2, y2 = 0, 0
+    local x1, y1, x2, y2
     x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
     local xd, yd = (x1 - x2), (y1 - y2)
     return math.sqrt(xd * xd + yd * yd)
@@ -81,8 +80,7 @@ end
 --   Example:
 --     angleRotation(-100, 100, 0, 100) -- Returns 0.0
 function angleRotation(a, b, c, d)
-    local x1, y1 = 0, 0
-    local x2, y2 = 0, 0
+    local x1, y1, x2, y2
     x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
 
     local dx = x2-x1
@@ -134,25 +132,20 @@ end
 
 -- Given an angle and length, return a relative vector (x, y coordinates).
 --
--- vectorFromAngle(angle, length, angleIsHeading)
+-- vectorFromAngle(angle, length, angle_is_heading)
 --   angle: Relative angle (as rotation vector), in degrees
 --   length: Relative distance, in thousandths of an in-game unit (1000 = 1U)
---   angleIsHeading: Optional argument, if set to TRUE, then angle will be treated
---                   as heading instead of rotation vector. 
+--   angle_is_heading: Optional argument, if set to TRUE, then angle will be treated
+--                     as heading instead of rotation vector. 
 --
 -- Example: 
---   For relative x and y coordinates 1000 units away at a rotation angle
---   of 45 degrees, run:
+--   For relative x and y coordinates 1000 units away at a rotation angle of 45 degrees, run:
 --     x, y = vectorFromAngle(45, 1000).
---   For relative x and y coordinates 1000 units away at a heading 
---   of 45 degrees, run:
+--   For relative x and y coordinates 1000 units away at a heading of 45 degrees, run:
 --     x, y = vectorFromAngle(45, 1000, true)
-function vectorFromAngle(angle_in, length, angleIsHeading)
-    local angle
-    if angleIsHeading ~= nil and angleIsHeading == true then
-        angle=angle_in-90  -- if angle was set as heading
-    else
-        angle=angle_in
+function vectorFromAngle(angle, length, angle_is_heading)
+    if angle_is_heading ~= nil and angle_is_heading == true then
+        angle=angle-90  -- if angle was set as heading, sanitize it.
     end
     return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
 end
@@ -164,8 +157,8 @@ end
 --   obj: An object.
 --   x, y: Origin coordinates.
 --   angle, distance: Relative heading and distance from the origin.
---   angleIsHeading: Optional argument, if set to TRUE, then angle will be treated
---                   as heading instead of rotation vector. 
+--   angle_is_heading: Optional argument, if set to TRUE, then angle will be treated
+--                     as heading instead of rotation vector. 
 --
 -- Returns the object with its position set to the resulting coordinates, by
 -- calling setPosition().
@@ -175,8 +168,8 @@ end
 --     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
 --   To create a space station 10000 units from coordinates 100, -100 at a heading of 45 degrees, run:
 --     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000, true)
-function setCirclePos(obj, x, y, angle, distance, angleIsHeading)
-    local dx, dy = vectorFromAngle(angle, distance, angleIsHeading)
+function setCirclePos(obj, x, y, angle, distance, angle_is_heading)
+    local dx, dy = vectorFromAngle(angle, distance, angle_is_heading)
     return obj:setPosition(x + dx, y + dy)
 end
 
