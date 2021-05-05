@@ -45,22 +45,23 @@ function distance(a, b, c, d)
     return math.sqrt(xd * xd + yd * yd)
 end
 
--- Given enough information, calculate bearing to from first position/object to second position/object.
+-- Given enough information, calculate rotation angle from first position/object to second position/object.
+-- Rotation angle 0 degrees is to the right of the GM screen. 
 -- This function can be called in four ways:
 --
--- angle(obj1, obj2)
---   Returns the bearing from obj1 to obj2.
+-- angleRotation(obj1, obj2)
+--   Returns the rotation angle from obj1 to obj2.
 --
 --   obj1, obj2: Two objects. Calls getPosition() on each.
 --
 --   Example:
 --     rock1 = Asteroid():setPosition(-100, 100)
 --     rock2 = Asteroid():setPosition(0, 100)
---     angle(rock1, rock2) -- Returns 0.0
+--     angleRotation(rock1, rock2) -- Returns 0.0
 --
--- distance(obj, x, y)
--- distance(x, y, obj)
---   Find the bearing from an object to a position,
+-- angleRotation(obj, x, y)
+-- angleRotation(x, y, obj)
+--   Find the rotation angle from an object to a position,
 --   or from a position to an object.
 --
 --   obj: An object. Calls getPosition() on it.
@@ -68,18 +69,18 @@ end
 --
 --   Example:
 --     rock1 = Asteroid():setPosition(-100, 100)
---     angle(rock1, 0, 100) -- Returns 0.0
---     angle(0, 100, rock1) -- Returns 0.0
+--     angleRotation(rock1, 0, 100) -- Returns 0.0
+--     angleRotation(0, 100, rock1) -- Returns 0.0
 --
--- distance(x1, y1, x2, y2)
---   Find the bearing from first position to second position.
+-- angleRotation(x1, y1, x2, y2)
+--   Find the rotation angle from first position to second position.
 --
 --   x1, y1: Origin position's coordinates.
 --   x2, y2: Destination position's coordinates.
 --
 --   Example:
---     angle(-100, 100, 0, 100) -- Returns 0.0
-function angle(a, b, c, d)
+--     angleRotation(-100, 100, 0, 100) -- Returns 0.0
+function angleRotation(a, b, c, d)
     local x1, y1 = 0, 0
     local x2, y2 = 0, 0
     x1, y1, x2, y2 = _fourArgumentsIntoCoordinates(a, b, c, d)
@@ -90,16 +91,69 @@ function angle(a, b, c, d)
     return d%360                                -- Transform degrees to range [0, 360]
 end
 
+-- Given enough information, calculate heading from first position/object to second position/object.
+-- Heading 0 degrees is to the top of the GM screen (same as 0 degrees on the radar). 
+-- This function can be called in four ways:
+--
+-- angleHeading(obj1, obj2)
+--   Returns the heading from obj1 to obj2.
+--
+--   obj1, obj2: Two objects. Calls getPosition() on each.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     rock2 = Asteroid():setPosition(0, 100)
+--     angleRotation(rock1, rock2) -- Returns 0.0
+--
+-- angleRotation(obj, x, y)
+-- angleRotation(x, y, obj)
+--   Find the heading from an object to a position,
+--   or from a position to an object.
+--
+--   obj: An object. Calls getPosition() on it.
+--   x, y: Coordinates of a position.
+--
+--   Example:
+--     rock1 = Asteroid():setPosition(-100, 100)
+--     angleRotation(rock1, 0, 100) -- Returns 0.0
+--     angleRotation(0, 100, rock1) -- Returns 0.0
+--
+-- angleRotation(x1, y1, x2, y2)
+--   Find the heading from first position to second position.
+--
+--   x1, y1: Origin position's coordinates.
+--   x2, y2: Destination position's coordinates.
+--
+--   Example:
+--     angleRotation(-100, 100, 0, 100) -- Returns 0.0
+function angleHeading(a, b, c, d)
+    local d = angleRotation(a, b, c, d) -- Get rotation vector
+    d = d+90                            -- Convert to heading
+    return d%360                        -- Transform degrees to range [0, 360]
+end
+
 -- Given an angle and length, return a relative vector (x, y coordinates).
 --
--- vectorFromAngle(angle, length)
---   angle: Relative heading, in degrees
+-- vectorFromAngle(angle, length, angleIsHeading)
+--   angle: Relative angle (as rotation vector), in degrees
 --   length: Relative distance, in thousandths of an in-game unit (1000 = 1U)
+--   angleIsHeading: Optional argument, if set to TRUE, then angle will be treated
+--                   as heading instead of rotation vector. 
 --
--- Example: For relative x and y coordinates 1000 units away at a heading of
--- 45 degrees, run:
---   vectorFromAngle(45, 1000).
-function vectorFromAngle(angle, length)
+-- Example: 
+--   For relative x and y coordinates 1000 units away at a rotation angle
+--   of 45 degrees, run:
+--     x, y = vectorFromAngle(45, 1000).
+--   For relative x and y coordinates 1000 units away at a heading 
+--   of 45 degrees, run:
+--     x, y = vectorFromAngle(45, 1000, true)
+function vectorFromAngle(angle_in, length, angleIsHeading)
+    local angle
+    if angleIsHeading ~= nil and angleIsHeading == true then
+        angle=angle_in-90  -- if angle was set as heading
+    else
+        angle=angle_in
+    end
     return math.cos(angle / 180 * math.pi) * length, math.sin(angle / 180 * math.pi) * length
 end
 
@@ -110,15 +164,19 @@ end
 --   obj: An object.
 --   x, y: Origin coordinates.
 --   angle, distance: Relative heading and distance from the origin.
+--   angleIsHeading: Optional argument, if set to TRUE, then angle will be treated
+--                   as heading instead of rotation vector. 
 --
 -- Returns the object with its position set to the resulting coordinates, by
 -- calling setPosition().
 --
--- Example: To create a space station 10000 units from coordinates 100, -100
--- at a heading of 45 degrees, run
---   setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
-function setCirclePos(obj, x, y, angle, distance)
-    local dx, dy = vectorFromAngle(angle, distance)
+-- Example: 
+--   To create a space station 10000 units from coordinates 100, -100 at a rotation vector of 45 degrees, run:
+--     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000)
+--   To create a space station 10000 units from coordinates 100, -100 at a heading of 45 degrees, run:
+--     setCirclePos(SpaceStation():setTemplate("Small Station"):setFaction("Independent"), 100, -100, 45, 10000, true)
+function setCirclePos(obj, x, y, angle, distance, angleIsHeading)
+    local dx, dy = vectorFromAngle(angle, distance, angleIsHeading)
     return obj:setPosition(x + dx, y + dy)
 end
 
