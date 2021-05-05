@@ -21,7 +21,7 @@ require("utils.lua")
 --      Returns the object with its position set to the resulting coordinates.
 --   distance(a, b, c, d)
 --      Returns the distance between two objects/coordinates
---   angle(a, b, c, d)
+--   angleRotation(a, b, c, d)
 --      Returns the bearing between first object/coordinate and second object/coordinate. 
 
 -- Global variables for this scenario
@@ -44,7 +44,7 @@ function addWave(list, kind, a, d)
     if addWavesToGMPosition then
         onGMClick(function(x,y) 
             onGMClick(nil)
-            addWaveInner(list, kind, angle(0, 0, x, y), distance(0, 0, x, y))
+            addWaveInner(list, kind, angleRotation(0, 0, x, y), distance(0, 0, x, y))
         end)
     else
         addWaveInner(list, kind, a, d)
@@ -138,7 +138,7 @@ function gmButtons()
         if addWavesToGMPosition then
             onGMClick(function(x,y) 
                 onGMClick(nil)
-                local a = angle(0, 0, x, y)
+                local a = angleRotation(0, 0, x, y)
                 local d = distance(0, 0, x, y)
                 table.insert(friendlyList, setCirclePos(CpuShip():setTemplate(friendlyShip[friendlyShipIndex]):setRotation(a):setFaction("Human Navy"):orderRoaming():setScanned(true), 0, 0, a + random(-5, 5), d + random(-100, 100)))
             end)
@@ -292,13 +292,13 @@ function init()
     end
 
     -- Spawn 2-5 random asteroid belts.
-    for _ = 1, irandom(2, 5) do
+    for i_ = 1, irandom(2, 5) do
         local a = random(0, 360)
         local a2 = random(0, 360)
         local d = random(3000, 40000)
         local x, y = vectorFromAngle(a, d)
 
-        for _ = 1, 50 do
+        for j_ = 1, 50 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1000, 1000))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             local posx = x + dx1 + dx2
@@ -306,7 +306,7 @@ function init()
             -- Avoid spawning asteroids within 1U of the player start position or
             -- 2U of any station.
             if math.abs(posx) > 1000 and math.abs(posy) > 1000 then
-                for _, station in ipairs(stationList) do
+                for k_, station in ipairs(stationList) do
                     if distance(station, posx, posy) > 2000 then
                         Asteroid():setPosition(posx, posy):setSize(random(100, 500))
                     end
@@ -314,7 +314,7 @@ function init()
             end
         end
 
-        for _ = 1, 100 do
+        for j_ = 1, 100 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
             VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
@@ -322,7 +322,7 @@ function init()
     end
 
     -- Spawn 0-3 random mine fields.
-    for _ = 1, irandom(0, 3) do
+    for i_ = 1, irandom(0, 3) do
         local a = random(0, 360)
         local a2 = random(0, 360)
         local d = random(20000, 40000)
@@ -352,7 +352,7 @@ function init()
 
         -- Check station distance from possible black hole locations.
         -- If it's too close to a station, generate new coordinates.
-        for _, station in ipairs(stationList) do
+        for i_, station in ipairs(stationList) do
             if distance(station, x, y) > 5000 then
                 spawn_hole = true
             else
@@ -373,13 +373,13 @@ end
 function update(delta)
     -- Count all surviving enemies and allies.
     local enemy_count = 0
-    for _, enemy in ipairs(enemyList) do
+    for i_, enemy in ipairs(enemyList) do
         if enemy:isValid() then
             enemy_count = enemy_count + 1
         end
     end
     local friendly_count = 0
-    for _, friendly in ipairs(friendlyList) do
+    for i_, friendly in ipairs(friendlyList) do
         if friendly:isValid() then
             friendly_count = friendly_count + 1
         end
@@ -401,7 +401,7 @@ function update(delta)
     else
         -- As the battle continues, award reputation based on
         -- the players' progress and number of surviving allies.
-        for _, friendly in ipairs(friendlyList) do
+        for i_, friendly in ipairs(friendlyList) do
             if friendly:isValid() then
                 friendly:addReputationPoints(delta * friendly_count * 0.1)
             end
