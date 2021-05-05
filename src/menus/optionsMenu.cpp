@@ -173,8 +173,10 @@ OptionsMenu::OptionsMenu()
     (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     
     //Don't wan't scripts/locale. Also, compatible with android assets.
-    DirectoryResourceProvider* lang_prov = new DirectoryResourceProvider("resources/locale");
+    DirectoryResourceProvider* lang_prov {new DirectoryResourceProvider("resources/locale")};
     std::vector<string> languages {lang_prov->findResources("*.po")};
+    lang_prov->destroy();
+
     std::for_each(languages.begin(), languages.end(), [](string &str) 
     {
         //strip extension
@@ -196,7 +198,7 @@ OptionsMenu::OptionsMenu()
         i18n::load("locale/" + value + ".po");
         PreferencesManager::set("language", value);
     }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
-
+    
 
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.
