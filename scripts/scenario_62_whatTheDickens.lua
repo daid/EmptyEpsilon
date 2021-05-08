@@ -624,15 +624,9 @@ end
 
 function camdenSensorReading(delta)
 	if player:isDocked(stationSomerset) then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London1.ogg"))
-		secondaryOrders = _("orders", "Investigate near station Camden in A2")
-=======
-		player:addToShipLog("Investigate unusual sensor readings near station Camden in A2","Magenta")
 		playSoundFile("sa_62_London1.ogg")
-		secondaryOrders = "Investigate near station Camden in A2"
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
+		secondaryOrders = _("orders", "Investigate near station Camden in A2")
 		plot1 = arriveA2
 		plot1name = _("plotName", "arriveA2")
 	end
@@ -650,13 +644,8 @@ end
 
 function scanMarleyArtifact(delta)
 	if marleyArt:isScannedBy(player) then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Jacob Marley] Do you remember your partner from previous missions? Especially the one where Marley station was destroyed? I am doomed to haunt this area of space forever. Take care or suffer the same fate."),"Red")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley1.ogg"))
-=======
-		player:addToShipLog("[Jacob Marley] Do you remember your partner from previous missions? Especially the one where Marley station was destroyed? I am doomed to haunt this area of space forever. Take care or suffer the same fate.","Red")
 		playSoundFile("sa_62_Marley1.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = explosionDelay
 		plot1name = _("plotName", "explosionDelay")
 		explosionDelayTimer = 10
@@ -713,15 +702,9 @@ function marleyMob(delta)
 				table.insert(marleyList, enemyBind)
 			end
 		end
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Jacob Marley] You must defeat the chains that bind you in the form of Kraylor ships"),"Red")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley2.ogg"))
-		secondaryOrders = _("orders", "Defeat Kraylors")
-=======
-		player:addToShipLog("[Jacob Marley] You must defeat the chains that bind you in the form of Kraylor ships","Red")
 		playSoundFile("sa_62_Marley2.ogg")
-		secondaryOrders = "Defeat Kraylors"
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
+		secondaryOrders = _("orders", "Defeat Kraylors")
 	end
 end
 
@@ -734,13 +717,8 @@ function destroyMarleyMob(delta)
 	end
 	if marleyMobCount == 0 then
 		player:addReputationPoints(50)
-<<<<<<< HEAD
 		player:addToShipLog(string.format(_("shipLog", "[Jacob Marley] Defeating the Kraylors gives you an idea of what is to come. Return to Somerset in %s and prepare for three ghostly visits"),stationSomerset:getSectorName()),"Red")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley3.ogg"))
-=======
-		player:addToShipLog(string.format("[Jacob Marley] Defeating the Kraylors gives you an idea of what is to come. Return to Somerset in %s and prepare for three ghostly visits",stationSomerset:getSectorName()),"Red")
 		playSoundFile("sa_62_Marley3.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = startChristmasPast
 		plot1name = _("plotName", "startChristmasPast")
 		secondaryOrders = _("orders", "Dock with Somerset")
@@ -750,15 +728,9 @@ end
 
 function startChristmasPast(delta)
 	if player:isDocked(stationSomerset) then
-<<<<<<< HEAD
 		player:addToShipLog(string.format(_("shipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London2.ogg"))
-		secondaryOrders = string.format(_("orders", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
-=======
-		player:addToShipLog(string.format("I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate.",stationMillbank:getSectorName()),"Magenta")
 		playSoundFile("sa_62_London2.ogg")
-		secondaryOrders = string.format("Investigate chroniton particles near station Millbank in %s",stationMillbank:getSectorName())
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
+		secondaryOrders = string.format(_("orders", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
 		plot1 = arriveNearMillbank
 		plot1name = _("plotName", "arriveNearMillbank")
 	end
@@ -853,13 +825,8 @@ end
 function fezWelcomeMessage(delta)
 	fezWelcomeTimer = fezWelcomeTimer - delta
 	if fezWelcomeTimer < 0 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "Welcome to the Christmases of your past, Scrooge"),"Blue")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child1.ogg"))
-=======
-		player:addToShipLog("Welcome to the Christmases of your past, Scrooge","Blue")
 		playSoundFile("sa_62_Child1.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = fezFleet
 		plot1name = _("plotName", "fezFleet")
 		fezFleetTimer = 7
@@ -911,13 +878,8 @@ function destroyFezFleet(delta)
 	end
 	if fezFleetCount == 0 then
 		player:addReputationPoints(50)
-<<<<<<< HEAD
 		player:addToShipLog(string.format(_("shipLog", "Belle has come. Be sure she makes it to Fezziwig in %s"),stationFezziwig:getSectorName()),"Blue")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child2.ogg"))
-=======
-		player:addToShipLog(string.format("Belle has come. Be sure she makes it to Fezziwig in %s",stationFezziwig:getSectorName()),"Blue")
 		playSoundFile("sa_62_Child2.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		belleAngle = random(170,190)
 		vx, vy = vectorFromAngle(belleAngle,20000)
 		friendBelle = CpuShip():setFaction("Human Navy"):setCallSign("Belle"):setTemplate("Goods Freighter 3"):orderDock(stationFezziwig):setPosition(fezx+vx,fezy+vy):setRotation(belleAngle+180):setScannedByFaction("Human Navy",true)
@@ -968,13 +930,8 @@ function destroyBelleFleet(delta)
 	end
 	if belleFleetCount == 0 or distance(friendBelle,stationFezziwig) < 1000 then
 		player:addReputationPoints(50)
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "You protected Belle. Somerset awaits"),"Blue")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child3.ogg"))
-=======
-		player:addToShipLog("You protected Belle. Somerset awaits","Blue")
 		playSoundFile("sa_62_Child3.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = startChristmasPresent
 		secondaryOrders = _("orders", "Dock with Somerset")
 		plot1name = _("plotName", "startChristmasPresent")
@@ -991,15 +948,9 @@ end
 
 function startChristmasPresent(delta)
 	if player:isDocked(stationSomerset) then
-<<<<<<< HEAD
 		player:addToShipLog(string.format(_("shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London3.ogg"))
-		secondaryOrders = string.format(_("orders", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
-=======
-		player:addToShipLog(string.format("Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate",stationBedlam:getSectorName()),"Magenta")
 		playSoundFile("sa_62_London3.ogg")
-		secondaryOrders = string.format("Investigate unusual readings near Bedlam in %s",stationBedlam:getSectorName())
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
+		secondaryOrders = string.format(_("orders", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
 		plot1 = arriveNearBedlam
 		plot1name = _("plotName", "arriveNearBedlam")
 	end
@@ -1007,13 +958,8 @@ end
 
 function arriveNearBedlam(delta)
 	if distance(player,stationBedlam) < 3000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Bob Cratchit on station Bedlam] Happy Christmas, Scrooge! You are just in time to make our holiday bright. I know it is against your nature, but surely you can decorate our skies with alien enemy ship explosions. In the worst case, we will get a sky decorated with your ship exploding."),"Yellow")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit1.ogg"))
-=======
-		player:addToShipLog("[Bob Cratchit on station Bedlam] Happy Christmas, Scrooge! You are just in time to make our holiday bright. I know it is against your nature, but surely you can decorate our skies with alien enemy ship explosions. In the worst case, we will get a sky decorated with your ship exploding.","Yellow")
 		playSoundFile("sa_62_BobCratchit1.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		cratchitList = {}
 		px, py = player:getPosition()
 		vx, vy = vectorFromAngle(random(0,300),random(6000,8000))
@@ -1051,13 +997,8 @@ function destroyCratchitFleet(delta)
 	if cratchitFleetCount == 0 then
 		if stationBedlam:isValid() then
 			player:addReputationPoints(50)
-<<<<<<< HEAD
 			player:addToShipLog(_("shipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
-			playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit2.ogg"))
-=======
-			player:addToShipLog("[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?","Yellow")
 			playSoundFile("sa_62_BobCratchit2.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 			turkeyAngle = random(90,180)
 			bx, by = stationBedlam:getPosition()
 			vx, vy = vectorFromAngle(turkeyAngle,random(20000,30000))
@@ -1142,13 +1083,8 @@ end
 function presentOutrage(delta)
 	presentOutrageTimer = presentOutrageTimer - delta
 	if presentOutrageTimer < 0 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "How dare you bring us here!"),"#556b2f")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Kralien1.ogg"))
-=======
-		player:addToShipLog("How dare you bring us here!","#556b2f")
 		playSoundFile("sa_62_Kralien1.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot2 = presentIntent
 		plot2name = _("plotName", "presentIntent")
 		presentIntentTimer = 20
@@ -1158,13 +1094,8 @@ end
 function presentIntent(delta)
 	presentIntentTimer = presentIntentTimer - delta
 	if presentIntentTimer < 0 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "Silence! Since we are here, let us destroy Somerset"),"#556b2f")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Kralien2.ogg"))
-=======
-		player:addToShipLog("Silence! Since we are here, let us destroy Somerset","#556b2f")
 		playSoundFile("sa_62_Kralien2.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot2 = nil
 		plot2name = ""
 	end
@@ -1195,21 +1126,12 @@ function timIll(delta)
 				if player:getShieldsActive() then
 					if shieldsOnMsg == nil then
 						shieldsOnMsg = "sent"
-<<<<<<< HEAD
 						player:addToShipLog(_("shipLog", "[Turkey Surprise] We cannot transport through your shields. Please lower them"),"Cyan")
-						playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Turkey1.ogg"))
+						playSoundFile("sa_62_Turkey1.ogg")
 					end
 				else
 					player:addToShipLog(_("shipLog", "[Turkey Surprise] We have transported Tim and our doctors are examining him"),"Cyan")
-					playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Turkey3.ogg"))
-=======
-						player:addToShipLog("[Turkey Surprise] We cannot transport through your shields. Please lower them","Cyan")
-						playSoundFile("sa_62_Turkey1.ogg") 
-					end
-				else
-					player:addToShipLog("[Turkey Surprise] We have transported Tim and our doctors are examining him","Cyan")
 					playSoundFile("sa_62_Turkey3.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 					plot1 = timHeal
 					plot1name = _("plotName", "timHeal")
 					secondaryOrders = _("orders", "Protect Turkey Surprise")
@@ -1227,13 +1149,8 @@ end
 function timHeal(delta)
 	timHealTimer = timHealTimer - delta
 	if timHealTimer < 0 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Bob Cratchit] Turkey Surprise tells me Tim is doing fine. In fact, he's ready to return to duty. We need him here for critical repairs. Would you bring him home, please?"),"Yellow")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit3.ogg"))
-=======
-		player:addToShipLog("[Bob Cratchit] Turkey Surprise tells me Tim is doing fine. In fact, he's ready to return to duty. We need him here for critical repairs. Would you bring him home, please?","Yellow")
 		playSoundFile("sa_62_BobCratchit3.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		timAboard = false
 		plot1 = returnTim
 		plot1name = _("plotName", "returnTim")
@@ -1248,13 +1165,8 @@ end
 function returnTim(delta)
 	if timAboard then
 		if player:isDocked(stationBedlam) then
-<<<<<<< HEAD
 			player:addToShipLog(_("shipLog", "[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you"),"Yellow")
-			playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit4.ogg"))
-=======
-			player:addToShipLog("[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you","Yellow")
 			playSoundFile("sa_62_BobCratchit4.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 			plot1 = endChristmasPast
 			plot1name = _("plotName", "endChristmasPast")
 			secondaryOrders = _("orders", "Dock with Somerset")
@@ -1264,13 +1176,8 @@ function returnTim(delta)
 			if player:getShieldsActive() then
 				if shieldsOnMsg == nil then
 					shieldsOnMsg = "sent"
-<<<<<<< HEAD
 					player:addToShipLog(_("shipLog", "[Turkey Surprise] We cannot transport through your shields. Please lower them"),"Cyan")
-					playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Turkey2.ogg"))
-=======
-					player:addToShipLog("[Turkey Surprise] We cannot transport through your shields. Please lower them","Cyan")
 					playSoundFile("sa_62_Turkey2.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 				end
 			else
 				player:addToShipLog(_("shipLog", "[Transporter Room] Tim has been transported aboard. Bedlam is wating for us to bring him back to work on repairs"),"Magenta")
@@ -1297,15 +1204,9 @@ end
 function startChristmasFuture(delta)
 	secondaryOrders = _("orders", "Dock with Somerset")
 	if player:isDocked(stationSomerset) then
-<<<<<<< HEAD
 		player:addToShipLog(string.format(_("shipLog", "We are glad you took care of those Ghosts in the machine. They came out of nowhere! We still saw some impossible sensor readings even after our sensor overhaul. We are now conducting a level 5 diagnostic and repair regimen. Keep an eye on the City in %s"),stationCity:getSectorName()),"Magenta")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_London4.ogg"))
-		secondaryOrders = string.format(_("orders", "Watch the City in %s"),stationCity:getSectorName())
-=======
-		player:addToShipLog(string.format("We are glad you took care of those Ghosts in the machine. They came out of nowhere! We still saw some impossible sensor readings even after our sensor overhaul. We are now conducting a level 5 diagnostic and repair regimen. Keep an eye on the City in %s",stationCity:getSectorName()),"Magenta")
 		playSoundFile("sa_62_London4.ogg")
-		secondaryOrders = string.format("Watch the City in %s",stationCity:getSectorName())
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
+		secondaryOrders = string.format(_("orders", "Watch the City in %s"),stationCity:getSectorName())
 		cx, cy = stationCity:getPosition()
 		futx = cx + 5000
 		futy = cy - 5000
@@ -1593,13 +1494,8 @@ end
 function returnMsg2(delta)
 	returnMsg2Timer = returnMsg2Timer - delta
 	if returnMsg2Timer < 0 and distance(player,stationSomerset) < 80000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"),"Red")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Marley4.ogg"))
-=======
-		player:addToShipLog("[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge","Red")
 		playSoundFile("sa_62_Marley4.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = returnMsg3
 		plot1name = _("plotName", "returnMsg3")
 		returnMsg3Timer = 4
@@ -1609,13 +1505,8 @@ end
 function returnMsg3(delta)
 	returnMsg3Timer = returnMsg3Timer - delta
 	if returnMsg3Timer < 0 and distance(player,stationSomerset) < 70000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "May the shadows of the things that have been continue to remind you of the joy of Christmas"),"Blue")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Child4.ogg"))
-=======
-		player:addToShipLog("May the shadows of the things that have been continue to remind you of the joy of Christmas","Blue")
 		playSoundFile("sa_62_Child4.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = returnMsg4
 		plot1name = _("plotName", "returnMsg4")
 		returnMsg4Timer = 8
@@ -1635,13 +1526,8 @@ end
 function returnMsg5(delta)
 	returnMsg5Timer = returnMsg5Timer - delta
 	if returnMsg5Timer < 0 and distance(player,stationSomerset) < 50000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!"),"Cyan")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Urchins.ogg"))
-=======
-		player:addToShipLog("[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!","Cyan")
 		playSoundFile("sa_62_Urchins.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = returnMsg6
 		plot1name = _("plotName", "returnMsg6")
 		returnMsg6Timer = 3
@@ -1651,13 +1537,8 @@ end
 function returnMsg6(delta)
 	returnMsg6Timer = returnMsg6Timer - delta
 	if returnMsg6Timer < 0 and distance(player,stationSomerset) < 40000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty"),"Green")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Fred.ogg"))
-=======
-		player:addToShipLog("[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty","Green")
 		playSoundFile("sa_62_Fred.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = returnMsg7
 		plot1name = _("plotName", "returnMsg7")
 		returnMsg7Timer = 6
@@ -1667,13 +1548,8 @@ end
 function returnMsg7(delta)
 	returnMsg7Timer = returnMsg7Timer - delta
 	if returnMsg7Timer < 0 and distance(player,stationSomerset) < 30000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim"),"Yellow")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_BobCratchit5.ogg"))
-=======
-		player:addToShipLog("[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim","Yellow")
 		playSoundFile("sa_62_BobCratchit5.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = returnMsg8
 		plot1name = _("plotName", "returnMsg8")
 		returnMsg8Timer = 10
@@ -1683,13 +1559,8 @@ end
 function returnMsg8(delta)
 	returnMsg8Timer = returnMsg8Timer - delta
 	if returnMsg8Timer < 0 and distance(player,stationSomerset) < 20000 then
-<<<<<<< HEAD
 		player:addToShipLog(_("shipLog", "[Tim on Cratchit Cruiser] God bless us every one"),"White")
-		playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Tim.ogg"))
-=======
-		player:addToShipLog("[Tim on Cratchit Cruiser] God bless us every one","White")
 		playSoundFile("sa_62_Tim.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		plot1 = returnMsg9
 		plot1name = _("plotName", "returnMsg9")
 		returnMsg9Timer = 6
@@ -1700,13 +1571,8 @@ function returnMsg9(delta)
 	returnMsg9Timer = returnMsg9Timer - delta
 	if returnMsg9Timer < 0 and distance(player,stationSomerset) < 10000 then
 		if difficulty > 1 then
-<<<<<<< HEAD
 			player:addToShipLog(_("shipLog", "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"),"White")
-			playSoundFile(_("soundFile", "scenariosSounds/62_whatTheDickens/sa_62_Tim2.ogg"))
-=======
-			player:addToShipLog("[Tim on Cratchit Cruiser] Give me some freakin' eggnog","White")
 			playSoundFile("sa_62_Tim2.ogg")
->>>>>>> parent of 00dfd28d ( Add 26 _() for .ogg sound files and creation of "scenariosSounds/62_whatTheDickens" folder)
 		end
 		plot1 = finalDock
 		plot1name = _("plotName", "finalDock")
