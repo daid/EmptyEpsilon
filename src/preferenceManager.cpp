@@ -50,7 +50,7 @@ void PreferencesManager::save(string filename)
 {
 #if defined(ANDROID)
     //I guess nobody wants to set something like options.ini and then some_directory/options.ini
-    //so here the directory hierarchy is not keept.
+    //so here the directory hierarchy is not kept.
     //On Android you have to write your user files to a specific directory.
     ANativeActivity *nactivity {sf::getNativeActivity()};
     filename = string(nactivity->internalDataPath) + "/" + filename.substr(filename.rfind("/")+1);
