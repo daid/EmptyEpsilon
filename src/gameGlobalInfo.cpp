@@ -377,6 +377,15 @@ static int getScenarioVariation(lua_State* L)
 /// Returns the currently used scenario variation.
 REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
 
+static int getGameLanguage(lua_State* L)
+{
+    lua_pushstring(L, PreferencesManager::get("language", "en").c_str());
+    return 1;
+}
+/// getGameLanguage()
+/// Returns the language as the string set in game preferences under language key
+REGISTER_SCRIPT_FUNCTION(getGameLanguage);
+
 /** Short lived object to do a scenario change on the update loop. See "setScenario" for details */
 class ScenarioChanger : public Updatable
 {
