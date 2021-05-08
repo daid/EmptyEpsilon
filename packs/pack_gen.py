@@ -27,12 +27,12 @@ def convertObj(filename):
 	cnt = 0
 	for face in faces:
 		for i in xrange(2, len(face)):
-			for n in [0, i, i-1]:
+			for n in [0, i-1, i]:
 				v = vertices[face[n][0] - 1]
 				vt = uvs[face[n][1] - 1]
 				vn = normals[face[n][2] - 1]
 				cnt += 1
-				data += struct.pack('@ffffffff', v[0], v[1], v[2], vn[0], vn[1], vn[2], vt[0], 1.0 - vt[1])
+				data += struct.pack('@ffffffff', v[0], v[2], v[1], vn[0], vn[2], vn[1], vt[0], 1.0 - vt[1])
 	data = struct.pack('>i', cnt) + data
 	return data, os.path.splitext(filename)[0] + '.model'
 
