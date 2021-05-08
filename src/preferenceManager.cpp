@@ -1,5 +1,10 @@
 #include "preferenceManager.h"
 
+#if defined(ANDROID)
+#include <SFML/System/NativeActivity.hpp>
+#include <android/native_activity.h>
+#endif
+
 std::unordered_map<string, string> PreferencesManager::preference;
 
 void PreferencesManager::set(string key, string value)
@@ -16,6 +21,10 @@ string PreferencesManager::get(string key, string default_value)
 
 void PreferencesManager::load(string filename)
 {
+#if defined(ANDROID)
+    ANativeActivity *nactivity {sf::getNativeActivity()};
+    filename = string(nactivity->internalDataPath) + "/" + filename;
+#endif
     FILE* f = fopen(filename.c_str(), "r");
     if (f)
     {
@@ -39,6 +48,10 @@ void PreferencesManager::load(string filename)
 
 void PreferencesManager::save(string filename)
 {
+#if defined(ANDROID)
+    ANativeActivity *nactivity {sf::getNativeActivity()};
+    filename = string(nactivity->internalDataPath) + "/" + filename;
+#endif
     FILE* f = fopen(filename.c_str(), "w");
     if (f)
     {
