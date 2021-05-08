@@ -138,7 +138,7 @@ void Artifact::collide(Collisionable* target, float force)
             // If the artifact is collectible, pick it up.
             if (on_pickup_callback.isSet())
             {
-                on_pickup_callback.call(P<Artifact>(this), player);
+                on_pickup_callback.call<void>(P<Artifact>(this), player);
             }
 
             destroy();
@@ -148,7 +148,7 @@ void Artifact::collide(Collisionable* target, float force)
             // If the artifact isn't collectible, fire the collision callback.
             if (on_player_collision_callback.isSet())
             {
-                on_player_collision_callback.call(P<Artifact>(this), player);
+                on_player_collision_callback.call<void>(P<Artifact>(this), player);
             }
         }
     }
@@ -156,7 +156,7 @@ void Artifact::collide(Collisionable* target, float force)
     // Fire the SpaceObject collision callback, if set.
     if (hit_object && on_collision_callback.isSet())
     {
-        on_collision_callback.call(P<Artifact>(this), hit_object);
+        on_collision_callback.call<void>(P<Artifact>(this), hit_object);
     }
 }
 

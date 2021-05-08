@@ -321,7 +321,7 @@ void SpaceObject::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position,
 
 void SpaceObject::destroy()
 {
-    on_destroyed.call(P<SpaceObject>(this));
+    on_destroyed.call<void>(P<SpaceObject>(this));
     MultiplayerObject::destroy();
 }
 
