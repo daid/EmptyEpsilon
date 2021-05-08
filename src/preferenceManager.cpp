@@ -23,7 +23,7 @@ void PreferencesManager::load(string filename)
 {
 #if defined(ANDROID)
     ANativeActivity *nactivity {sf::getNativeActivity()};
-    filename = string(nactivity->internalDataPath) + "/" + filename;
+    filename = string(nactivity->internalDataPath) + "/" + filename.substr(filename.rfind("/")+1);
 #endif
     FILE* f = fopen(filename.c_str(), "r");
     if (f)
@@ -49,8 +49,11 @@ void PreferencesManager::load(string filename)
 void PreferencesManager::save(string filename)
 {
 #if defined(ANDROID)
+    //I guess nobody wants to set something like options.ini and then some_directory/options.ini
+    //so here the directory hierarchy is not keept.
+    //On Android you have to write your user files to a specific directory.
     ANativeActivity *nactivity {sf::getNativeActivity()};
-    filename = string(nactivity->internalDataPath) + "/" + filename;
+    filename = string(nactivity->internalDataPath) + "/" + filename.substr(filename.rfind("/")+1);
 #endif
     FILE* f = fopen(filename.c_str(), "w");
     if (f)
