@@ -272,7 +272,7 @@ void GuiElement::updateRect(sf::FloatRect parent_rect)
 [[nodiscard]]
 bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
 {
-#ifdef SFML_OPENGL_ES
+#ifdef SFML_SYSTEM_ANDROID
     /* On GL ES systems, SFML runs on assumptions regarding
     the available GL extensions, for instance considering packed depth/stencil is never available.[1]
     Because of that unreliability, just forego render textures on those systems.
