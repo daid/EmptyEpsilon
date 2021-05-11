@@ -55,7 +55,7 @@ private:
      * \brief check if this console can be mainscreen.
      * Being a main screen requires a bit more than the normal GUI, so we need to do some checks.
      */
-    bool canDoMainScreen() { return PostProcessor::isEnabled() && sf::Shader::isAvailable(); }
+    bool canDoMainScreen() const;
 
     void updateReadyButton();
     void updateCrewTypeOptions();
