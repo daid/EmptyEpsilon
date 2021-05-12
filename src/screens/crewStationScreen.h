@@ -22,12 +22,11 @@ class CrewStationScreen : public GuiCanvas, public Updatable
 {
     P<ThreatLevelEstimate> threat_estimate;
 public:
-    CrewStationScreen();
+    explicit CrewStationScreen(bool with_main_screen);
     virtual void destroy() override;
 
     GuiContainer* getTabContainer();
     void addStationTab(GuiElement* element, ECrewPosition position, string name, string icon);
-    void enableMainScreen() { main_screen_enabled = true; }
     void finishCreation();
 
     virtual void update(float delta) override;
@@ -36,7 +35,7 @@ public:
 
 private:
     GuiElement* main_panel;
-    GuiViewport3D* viewport;
+    GuiViewport3D* viewport{ nullptr };
     GuiButton* select_station_button;
     GuiPanel* button_strip;
     GuiHelpOverlay* keyboard_help;
@@ -44,7 +43,6 @@ private:
     GuiScrollText* message_text;
     GuiButton* message_close_button;
     std::unique_ptr<ImpulseSound> impulse_sound;
-    bool main_screen_enabled = false;
 
     struct CrewTabInfo {
         GuiToggleButton* button;

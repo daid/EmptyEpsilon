@@ -144,11 +144,10 @@ void PlayerInfo::spawnUI()
     if (my_player_info->isOnlyMainScreen())
     {
         new ScreenMainScreen();
-    }else{
+    }
+    else {
 
-        CrewStationScreen* screen = new CrewStationScreen();
-        if (main_screen)
-            screen->enableMainScreen();
+        CrewStationScreen* screen = new CrewStationScreen{ main_screen };
         auto container = screen->getTabContainer();
 
         //Crew 6/5
