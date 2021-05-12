@@ -1,4 +1,8 @@
 #include "shipSelectionScreen.h"
+
+#include "featureDefs.h"
+#include "glObjects.h"
+
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
@@ -421,6 +425,18 @@ void ShipSelectionScreen::update(float delta)
     //Sync our configured user name with the server
     if (my_player_info->name != PreferencesManager::get("username"))
         my_player_info->commandSetName(PreferencesManager::get("username"));
+}
+
+bool ShipSelectionScreen::canDoMainScreen() const
+{
+    if constexpr (FEATURE_3D_RENDERING)
+    {
+        return PostProcessor::isEnabled() && sf::Shader::isAvailable() && gl::isAvailable();
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void ShipSelectionScreen::updateReadyButton()
