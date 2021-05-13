@@ -64,7 +64,7 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
 
 sf::Vector3f Mesh::randomPoint()
 {
-    if (vertexCount == 0)
+    if (vertices.empty())
         return sf::Vector3f{};
 
     //int idx = irandom(0, vertexCount-1);
