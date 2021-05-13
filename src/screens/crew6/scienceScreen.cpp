@@ -307,7 +307,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (fabs(rel_velocity) < 0.01)
             rel_velocity = 0.0;
 
-        info_callsign->setValue(obj->getCallSign());
         info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
         info_heading->setValue(string(int(heading)));
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
@@ -337,6 +336,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
             // hull integrity, and database reference button.
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
+                info_callsign->setValue(obj->getCallSign());
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
                 info_type->setValue(ship->getTypeName());
                 info_type_button->show();
@@ -413,6 +413,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         else
         {
             sidebar_pager->hide();
+            info_callsign->setValue(obj->getCallSign());
             info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
 
             // If the target is a station, show basic tactical info.
