@@ -204,7 +204,9 @@ void ModelData::render()
         return;
 
     glPushMatrix();
-
+    // EE's coordinate flips to a Z-up left hand.
+    // To account for that, flip the model around 180deg.
+    glRotatef(180.f, 0.f, 0.f, 1.f);
     glScalef(scale, scale, scale);
     glTranslatef(mesh_offset.x, mesh_offset.y, mesh_offset.z);
 

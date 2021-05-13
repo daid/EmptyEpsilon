@@ -67,7 +67,7 @@ void JoystickConfig::load()
             item.load(key_config);
         }
     }
-    for(HotkeyConfigCategory& cat : hotkeys.categories)
+    for(HotkeyConfigCategory& cat : HotkeyConfig::get().categories)
     {
         JoystickConfigCategory& categoryToAdd = getCategory(cat.key, cat.name);
         for(HotkeyConfigItem& item : cat.hotkeys)

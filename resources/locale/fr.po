@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-27 10:58+0100\n"
+"PO-Revision-Date: 2021-05-02 01:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -46,14 +46,14 @@ msgstr ""
 "Écran tactile"
 
 msgid "Graphics Options"
-msgstr "Options graphiques"
+msgstr ""
 
 #: src/menus/optionsMenu.cpp:50
 msgid "Fullscreen toggle"
 msgstr "Activer plein écran"
 
 msgid "Sound Options"
-msgstr "Options sonores"
+msgstr ""
 
 #: src/menus/optionsMenu.cpp:82 src/menus/optionsMenu.cpp:87
 msgid "Sound Volume: {volume}%"
@@ -452,7 +452,7 @@ msgid "None"
 msgstr ""
 
 msgid "No variation."
-msgstr "Pas de variante."
+msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:243
 msgid "No variation selected. Play the scenario as intended."
@@ -505,7 +505,7 @@ msgstr "Puissance"
 #: src/screens/crew6/engineeringScreen.cpp:128
 msgctxt "slider"
 msgid "Coolant"
-msgstr "Liquide de refroidissement"
+msgstr "Liq. de refroidissement"
 
 #: src/screens/crew6/engineeringScreen.cpp:179
 #: src/screens/crew6/engineeringScreen.cpp:259
@@ -574,7 +574,7 @@ msgstr "Réduction des dégâts"
 
 #: src/screens/crew6/scienceScreen.cpp:94 src/screens/crew6/relayScreen.cpp:81
 msgid "Callsign"
-msgstr "Modèle"
+msgstr "Nom"
 
 #: src/screens/crew6/scienceScreen.cpp:96
 msgctxt "science"
@@ -689,7 +689,7 @@ msgstr "{value} {unit}/min"
 
 #: src/screens/gm/tweak.cpp:593
 msgid "{system} health"
-msgstr "{system}: santé actuelle"
+msgstr "{system} : santé actuelle"
 
 #: src/screens/gm/tweak.cpp:612
 msgid "{system} heat"
@@ -739,7 +739,7 @@ msgstr "Autodestruction activée !"
 
 #: src/screenComponents/selfDestructEntry.cpp:67
 msgid "Code [{letter}]: {self_destruct_code}"
-msgstr "Code [{letter}]: {self_destruct_code}"
+msgstr "Code [{letter}] : {self_destruct_code}"
 
 #: src/screenComponents/selfDestructEntry.cpp:80
 msgctxt "selfdestruct"
@@ -889,133 +889,93 @@ msgctxt "tube"
 msgid "Rear"
 msgstr "Arrière"
 
-#: scripts/shipTemplates_Corvette.lua:14
 msgid "Atlantis X23"
-msgstr "Atlantis X23"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
-#: scripts/shipTemplates_Corvette.lua:101
-#: scripts/shipTemplates_Corvette.lua:157
-#: scripts/shipTemplates_Corvette.lua:217
-#: scripts/shipTemplates_Corvette.lua:235
-#: scripts/shipTemplates_Corvette.lua:248
-#: scripts/shipTemplates_Corvette.lua:261
-#: scripts/shipTemplates_Corvette.lua:274
-#: scripts/shipTemplates_Corvette.lua:287
-#: scripts/shipTemplates_Corvette.lua:301
-#: scripts/shipTemplates_Corvette.lua:314
 msgid "Corvette"
-msgstr "Corvettes"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
 msgid "Destroyer"
-msgstr "Destroyer"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:33
 msgid "Atlantis"
-msgstr "Atlantis"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:83
 msgid "Starhammer II"
-msgstr "Starhammer II"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:101
 msgid "Crucible"
-msgstr "Creuset"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:101
 msgid "Popper"
-msgstr "Bombardier"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:157
 msgid "Maverick"
-msgstr "Dissident"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:157
 msgid "Gunner"
-msgstr "Cannonière"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:217
 msgid "Defense platform"
 msgstr ""
 
 msgid "Support"
-msgstr "Soutien"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:235
 #, lua-format
 msgid "Personnel Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:235
-#: scripts/shipTemplates_Corvette.lua:248
-#: scripts/shipTemplates_Corvette.lua:261
-#: scripts/shipTemplates_Corvette.lua:274
-#: scripts/shipTemplates_Corvette.lua:287
-#: scripts/shipTemplates_Corvette.lua:301
 msgid "Freighter"
-msgstr "Cargo"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:244
 #, lua-format
 msgid "Personnel Jump Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:248
 #, lua-format
 msgid "Goods Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:257
 #, lua-format
 msgid "Goods Jump Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:261
 #, lua-format
 msgid "Garbage Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:270
 #, lua-format
 msgid "Garbage Jump Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:274
 #, lua-format
 msgid "Equipment Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:283
 #, lua-format
 msgid "Equipment Jump Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:287
 #, lua-format
 msgid "Fuel Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:296
 #, lua-format
 msgid "Fuel Jump Freighter %d"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:301
 msgid "Jump Carrier"
 msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:314
 msgid "Benedict"
-msgstr "Bénédict"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:314
 msgid "Freighter/Carrier"
-msgstr "Cargo/Remorqueur"
+msgstr ""
 
-#: scripts/shipTemplates_Corvette.lua:348
 msgid "Kiriya"
-msgstr "Kiriya"
+msgstr ""
 
 #: scripts/factionInfo.lua:1
 msgid "Independent"
@@ -1317,18 +1277,6 @@ msgid ""
 "The TSN and USN are enemies because of the USN's neutral stance towards the "
 "Kraylor."
 msgstr ""
-"La Force Spatiale Terrienne ou FST est constituée de forces navales basées "
-"aux environs de la Terre. Ses membres sont principalement humains.\n"
-"\n"
-"Ces humains et d'autres races se sont regroupés pour former une marine afin "
-"de protéger et de faire respecter des philosophies communes. Ils sont alliés "
-"à la Marine Humaine mais ne partagent pas la même chaine de commandement. "
-"Certaines opérations militaires passées ont fait d'eux les ennemis des "
-"Arléniens, mais ils ont de meilleures relations avec les Fantômes que la "
-"Marine Humaine.\n"
-"\n"
-"La FST et la MSU sont ennemies en raison de la position neutre de la MSU vis-"
-"à-vis des Kraylors."
 
 #: scripts/factionInfo.lua:78
 msgid "USN"
@@ -1343,14 +1291,6 @@ msgid ""
 "Kraylors have been accepted into the USN. This acceptance has made the TSN "
 "and USN enemies."
 msgstr ""
-"La Marine Stellaire Unifiée ou MSU est une force navale située près de la "
-"frontière séparant les espaces humain et Kraylor et composée principalement "
-"d'humains. La MSU est alliée à la Marine Humaine et utilise une structure de "
-"commandement similaire.\n"
-"\n"
-"Bien que la MSU soit principalement composée d'humains, d'autres races en "
-"font également partie, notamment certains Kraylors qui ont été acceptés en "
-"son sein. Source de l'opposition entre MSU et FST."
 
 #: scripts/factionInfo.lua:89
 msgid "CUF"
@@ -1370,20 +1310,6 @@ msgid ""
 "historical reasons, not Xenophobia: some of their best friends are Exuari, "
 "Kraylor and Ghosts."
 msgstr ""
-"La Flotte Celeste Unifiée ou FCU est la flotte principalement humaine la "
-"plus étendue mais aussi la moins xénophobe. Ses activités sont "
-"principalement axées sur l'exploration et le commerce. Mais consciente de la "
-"dangerosité de la galaxie, la FCU reconnait néanmoins la nécessité de "
-"disposer de navires de guerre puissants. \n"
-"\n"
-"Amicaux envers la Marine Humaine mais neutres envers la FST et la MSU, leur "
-"structure est moins stricte que celle des autres flottes humaines.\n"
-"\n"
-"La FCU a des relations neutres avec les Ktlitiens ainsi qu'avec les "
-"Arléniens. Elle est ennemie des Éxuaris, Kraylors et Fantômes pour des "
-"raisons politiques et historiques, et non pour des raisons de xénophobie : "
-"certains des meilleurs amis des membres de la FCU sont des représentants de "
-"ces races."
 
 #: src/scienceDatabase.cpp:296
 msgctxt "database direction"
@@ -1583,7 +1509,7 @@ msgid "Beams"
 msgstr "Faisceaux"
 
 msgid "Mission Clock"
-msgstr "Timer de la mission"
+msgstr ""
 
 #: src/spaceObjects/playerSpaceship.cpp:296
 msgctxt "alert"
@@ -1804,7 +1730,7 @@ msgid "Copy selected"
 msgstr "Copier sélection"
 
 #: src/menus/joinServerMenu.cpp:20 src/screens/gm/gameMasterScreen.cpp:90
-#: src/screens/gm/objectCreationView.cpp:119
+#: src/screens/gm/objectCreationView.cpp:131
 #: src/screens/gm/globalMessageEntryView.cpp:18
 #: src/screenComponents/commsOverlay.cpp:25
 #: src/screenComponents/scanningDialog.cpp:35
@@ -2066,11 +1992,11 @@ msgstr "Énergie actuelle :"
 
 #: src/screens/gm/tweak.cpp:755
 msgid "Boost Speed:"
-msgstr "Man. Combat: Vit. d'accélération"
+msgstr "Man. Combat : Vit. d'accélération"
 
 #: src/screens/gm/tweak.cpp:761
 msgid "Strafe Speed:"
-msgstr "Man. Combat: Vit. d'esquive"
+msgstr "Man. Combat : Vit. d'esquive"
 
 #: src/screens/gm/tweak.cpp:769 src/screens/gm/tweak.cpp:811
 msgid "Positions occupied: "
@@ -2078,17 +2004,17 @@ msgstr "Postes occupés : "
 
 msgctxt "position"
 msgid "Occupied"
-msgstr "Occupé"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:852
 msgid "Coolant:"
 msgstr "Liq. de refroid."
 
 msgid "Short range radar:"
-msgstr "Radar courte portée :"
+msgstr ""
 
 msgid "Long range radar:"
-msgstr "Radar longue portée :"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:873
 msgctxt "button"
@@ -2165,11 +2091,10 @@ msgstr "Profondeur du scan :"
 #: scripts/shipTemplates_Corvette.lua:217
 msgctxt "subclass"
 msgid "Support"
-msgstr "Soutien"
+msgstr ""
 
-#: scripts/shipTemplates_Dreadnaught.lua:9
 msgid "Odin"
-msgstr "Odin"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:9 scripts/shipTemplates_OLD.lua:348
 #: scripts/shipTemplates_OLD.lua:363
@@ -2180,7 +2105,7 @@ msgstr "Cuirassés"
 #: scripts/shipTemplates_Dreadnaught.lua:9
 msgctxt "subclass"
 msgid "Odin"
-msgstr "Odin"
+msgstr ""
 
 #: scripts/shipTemplates_Dreadnaught.lua:11
 msgid ""
@@ -2224,25 +2149,14 @@ msgstr ""
 "sans méfiance et de tout détruire avant qu'ils ne se rendent compte de ce "
 "qui leur arrive. C'est efficace et destructeur, mais extrêmement cher."
 
-#: scripts/shipTemplates_Frigates.lua:14
 msgid "Phobos T3"
-msgstr "Phobos T3"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_Frigates.lua:87
-#: scripts/shipTemplates_Frigates.lua:116
-#: scripts/shipTemplates_Frigates.lua:133
-#: scripts/shipTemplates_Frigates.lua:179
-#: scripts/shipTemplates_Frigates.lua:272
-#: scripts/shipTemplates_Frigates.lua:299
-#: scripts/shipTemplates_Frigates.lua:312
-#: scripts/shipTemplates_Frigates.lua:369
-#: scripts/shipTemplates_Frigates.lua:414
 msgid "Frigate"
-msgstr "Frégates"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:14
 msgid "Cruiser"
-msgstr "Croiseur"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:16
 msgid ""
@@ -2260,7 +2174,6 @@ msgstr ""
 "Ses caractéristiques de base ne sont pas impressionnantes, mais en raison de "
 "sa nature modulaire, il est assez facile à produire en grandes quantités."
 
-#: scripts/shipTemplates_Frigates.lua:28
 msgid "Elara P2"
 msgstr ""
 
@@ -2275,9 +2188,8 @@ msgstr ""
 "Avec l'ajout de la vitesse lumière et de boucliers avant plus puissants, "
 "l'Élara P2 représente une plus grande menace que le Phobos."
 
-#: scripts/shipTemplates_Frigates.lua:33
 msgid "Phobos M3"
-msgstr "Phobos M3"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:34
 msgid ""
@@ -2290,9 +2202,8 @@ msgstr ""
 "Il possède en plus un tube dédié au largage de mines, mais le stockage "
 "supplémentaire requis pour les mines ralentit légèrement ce navire."
 
-#: scripts/shipTemplates_Frigates.lua:41
 msgid "Phobos M3P"
-msgstr "Phobos M3P"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:42
 msgid ""
@@ -2304,13 +2215,11 @@ msgstr ""
 "Pas aussi puissant que l'Atlantis, mais possède des tubes de tir à l'avant, "
 "ce qui en fait un navire plus facile à utiliser dans certaines missions."
 
-#: scripts/shipTemplates_Frigates.lua:87
 msgid "Nirvana R5"
-msgstr "Nirvana R5"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:87
 msgid "Cruiser: Anti-fighter"
-msgstr "Croiseur : anti-chasseur"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:89
 msgid ""
@@ -2322,9 +2231,8 @@ msgstr ""
 "Il dispose de plusieurs faisceaux laser à tir rapide et à faibles dégâts "
 "pour éliminer rapidement les chasseurs stellaires."
 
-#: scripts/shipTemplates_Frigates.lua:98
 msgid "Nirvana R5A"
-msgstr "Nirvana R5A"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:99
 msgid ""
@@ -2334,9 +2242,8 @@ msgstr ""
 "Une version améliorée du Nirvana R5 avec une vitesse de rotation et une "
 "cadence de tir plus rapides."
 
-#: scripts/shipTemplates_Frigates.lua:106
 msgid "Nirvana R3"
-msgstr "Nirvana R3"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:107
 msgid ""
@@ -2353,13 +2260,11 @@ msgstr ""
 "a des faisceaux plus courts, des boucliers et une coque plus faibles et des "
 "moteurs à impulsion plus lents."
 
-#: scripts/shipTemplates_Frigates.lua:116
 msgid "Storm"
 msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:116
 msgid "Cruiser: Heavy Artillery"
-msgstr "Croiseur : artillerie lourde"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:118
 msgid ""
@@ -2370,14 +2275,11 @@ msgstr ""
 "le Tempête tire des salves de missiles à partir de tubes orientés vers "
 "l'avant."
 
-#: scripts/shipTemplates_Frigates.lua:133
 msgid "Hathcock"
-msgstr "Hathcock"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:133
-#: scripts/shipTemplates_Frigates.lua:299
 msgid "Cruiser: Sniper"
-msgstr "Croiseur : sniper"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:135
 msgid ""
@@ -2389,13 +2291,11 @@ msgstr ""
 "\n"
 "Agile pour une frégate."
 
-#: scripts/shipTemplates_Frigates.lua:179
 msgid "Piranha F12"
-msgstr "Piranha F12"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:179
 msgid "Cruiser: Light Artillery"
-msgstr "Croiseur : artillerie légère"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:181
 msgid ""
@@ -2405,9 +2305,8 @@ msgstr ""
 "Croiseur d'artillerie légère, le Piranha F12 est le plus petit navire à "
 "tirer exclusivement à partir de tubes de lancement situés sur les flancs."
 
-#: scripts/shipTemplates_Frigates.lua:201
 msgid "Piranha F12.M"
-msgstr "Piranha F12.M"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:202
 msgid ""
@@ -2422,9 +2321,8 @@ msgstr ""
 "\n"
 "Cependant, ces changements réduisent sa capacité maximale de stockage."
 
-#: scripts/shipTemplates_Frigates.lua:207
 msgid "Piranha F8"
-msgstr "Piranha F8"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:208
 msgid ""
@@ -2435,9 +2333,8 @@ msgstr ""
 "puissance de feu et de la configuration étrange de ses tubes de lancement.\n"
 "Le résultat fut un énorme échec financier."
 
-#: scripts/shipTemplates_Frigates.lua:216
 msgid "Piranha"
-msgstr "Piranha"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:217
 msgid ""
@@ -2447,13 +2344,11 @@ msgstr ""
 "Ce Piranha F12 spécialisé dans le combat possède en plus 2 tubes de largage "
 "de mines ainsi que des systèmes de manœuvre de combat et de téléportation."
 
-#: scripts/shipTemplates_Frigates.lua:272
 msgid "Stalker Q7"
 msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:272
 msgid "Cruiser: Strike ship"
-msgstr "Croiseur : navire de frappe"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:274
 msgid ""
@@ -2465,7 +2360,6 @@ msgstr ""
 "\n"
 "Le modèle Q7 est équipé de la vitesse lumière."
 
-#: scripts/shipTemplates_Frigates.lua:282
 msgid "Stalker Q5"
 msgstr ""
 
@@ -2483,7 +2377,6 @@ msgstr ""
 "Comparé au Q7, le Q5 a des boucliers et une coque plus faibles, mais une "
 "vitesse de rotation plus rapide."
 
-#: scripts/shipTemplates_Frigates.lua:288
 msgid "Stalker R7"
 msgstr ""
 
@@ -2497,7 +2390,6 @@ msgstr ""
 "\n"
 "Le modèle R7 est équipé de la téléportation."
 
-#: scripts/shipTemplates_Frigates.lua:293
 msgid "Stalker R5"
 msgstr ""
 
@@ -2515,9 +2407,8 @@ msgstr ""
 "Comparé au R7, le R5 a des boucliers et une coque plus faibles, mais une "
 "vitesse de rotation plus rapide."
 
-#: scripts/shipTemplates_Frigates.lua:299
 msgid "Ranus U"
-msgstr "Ranus U"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:301
 msgid ""
@@ -2532,13 +2423,11 @@ msgstr ""
 "C'est la seule frégate de base équipée d'armes nucléaires, même si c'est "
 "aussi le plus petit de tous les navires de classe frégate."
 
-#: scripts/shipTemplates_Frigates.lua:312
 msgid "Flavia"
-msgstr "Flavia"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:312
 msgid "Light transport"
-msgstr "Transport léger"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:314
 msgid ""
@@ -2553,9 +2442,8 @@ msgstr ""
 "distances, et est souvent utilisé pour transporter discrètement des "
 "marchandises de grande valeur."
 
-#: scripts/shipTemplates_Frigates.lua:319
 msgid "Flavia Falcon"
-msgstr "Faucon Flavia"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:320
 msgid ""
@@ -2566,9 +2454,8 @@ msgstr ""
 "plus rapide et équipé de faisceaux laser montés à l'arrière pour tenir à "
 "distance ses poursuivants."
 
-#: scripts/shipTemplates_Frigates.lua:325
 msgid "Flavia P.Falcon"
-msgstr "Faucon P.Flavia"
+msgstr ""
 
 #: scripts/shipTemplates_Frigates.lua:326
 msgid ""
@@ -2578,20 +2465,15 @@ msgstr ""
 "Le Faucon P.Flavia dispose à l'arrière d'un tube de missile à capacité "
 "nucléaire et de la vitesse lumière."
 
-#: scripts/shipTemplates_Frigates.lua:369
 msgid "Repulse"
-msgstr "Répulse"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:369
 msgid "Armored Transport"
-msgstr "Transport blindé"
+msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:414
 msgid "Fiend G3"
 msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:271
-#: scripts/shipTemplates_StarFighters.lua:65
 msgid "Gunship"
 msgstr ""
 
@@ -2613,7 +2495,6 @@ msgstr ""
 "plus faibles. La téléportation en fait un navire plus dangereux que le "
 "Combattant d'origine."
 
-#: scripts/shipTemplates_Frigates.lua:428
 msgid "Fiend G4"
 msgstr ""
 
@@ -2636,7 +2517,6 @@ msgstr ""
 "plus faibles. La vitesse lumière en fait un navire plus dangereux que le "
 "Combattant d'origine."
 
-#: scripts/shipTemplates_Frigates.lua:433
 msgid "Fiend G6"
 msgstr ""
 
@@ -2659,7 +2539,6 @@ msgstr ""
 "les navires les plus faibles. La vitesse lumière le rend encore plus "
 "dangereux."
 
-#: scripts/shipTemplates_Frigates.lua:437
 msgid "Fiend G5"
 msgstr ""
 
@@ -2681,19 +2560,15 @@ msgstr ""
 "à tête chercheuse et de 2 faisceaux laser pour pouvoir abattre facilement "
 "les navires les plus faibles. La téléportation le rend encore plus dangereux."
 
-#: scripts/shipTemplates_OLD.lua:6
 msgid "Player Cruiser"
-msgstr "Croiseur joueur"
+msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:62
 msgid "Player Missile Cr."
-msgstr "Croiseur de missiles joueur"
+msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:116
 msgid "Player Fighter"
-msgstr "Chasseur joueur"
+msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:156
 msgid "Tug"
 msgstr ""
 
@@ -2708,15 +2583,13 @@ msgstr ""
 "En raison de son faible coût, c'est le navire idéal pour enseigner les "
 "ficelles du métier aux capitaines en herbe, sans risquer un tir ami."
 
-#: scripts/shipTemplates_OLD.lua:173
 msgid "Nautilus"
-msgstr "Nautilus"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:174
 msgid "Small mine laying vessel with minimal armament, shields and hull"
 msgstr "Petit poseur de mines avec coque, armement et boucliers minimaux."
 
-#: scripts/shipTemplates_OLD.lua:220
 msgid "Fighter"
 msgstr ""
 
@@ -2731,9 +2604,8 @@ msgstr ""
 "\n"
 "Ils sont faciles à éliminer, mais ne doivent cependant pas être sous-estimés."
 
-#: scripts/shipTemplates_OLD.lua:235
 msgid "Karnack"
-msgstr "Karnack"
+msgstr ""
 
 msgid ""
 "Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
@@ -2744,21 +2616,11 @@ msgid ""
 "and other civillian parties. However, they have used it's adaptable nature "
 "to re-fit them with (illegal) weaponry."
 msgstr ""
-"Fabriqué par: Chantiers Navals Repulse.\n"
-"\n"
-"En raison de sa polyvalence, ce vaisseau a trouvé sa place dans la plupart "
-"des factions qui l'ont considérablement modernisés pour l'adapter à leurs "
-"doctrines de combat. Comme il s'agit d'un modèle assez ancien, la plupart "
-"des factions ont vendu des versions dépouillées.\n"
-"\n"
-"Ce fonctionnement a fait de ce navire, en tout temps, le favori auprès des "
-"passeurs et d'autres groupes civils. Cependant, ils ont utilisé sa nature "
-"adaptable pour le rééquiper (illégalement) en armes."
 
 #: scripts/shipTemplates_OLD.lua:249
 msgctxt "ship"
 msgid "Karnack MK2"
-msgstr "Karnack MK2"
+msgstr ""
 
 msgid ""
 "Fabricated by: Repulse shipyards. The sucessor to the widly sucesfull mark I "
@@ -2768,52 +2630,31 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savoury purposes."
 msgstr ""
-"Fabriqué par: Chantiers Navals Repulse.\n"
-"\n"
-"Le successeur du grand succès commercial : le croiseur Karnack.\n"
-"\n"
-"Ce navire a connu plusieurs améliorations notables par rapport au navire "
-"d'origine, y compris un meilleur blindage, un armement légèrement amélioré "
-"et une personnalisation par les chantiers navals.\n"
-"\n"
-"Cette dernière amélioration a été la caractéristique la plus demandée par "
-"plusieurs factions une fois qu'elles ont réalisé que leurs vieux navires MK2 "
-"excédentaires étaient utilisés à des fins moins...règlementaires."
 
-#: scripts/shipTemplates_OLD.lua:260
 msgid "Missile Cruiser"
 msgstr ""
 
 msgid "Cruiser: Missile"
-msgstr "Croiseur : missiles"
+msgstr ""
 
 msgid ""
 "Polaris missle cruiser mark I. Fabricated by: Repulse shipyards. This "
 "missile cruiser is a long range missile firing platform. It cannot handle a "
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
-"Croiseur de missiles Polaris MK1, fabriqué par : Chantiers Navals Repulse.\n"
-"\n"
-"Ce croiseur de missiles est une plateforme de tir de missiles longue portée. "
-"Il ne peut pas essuyer beaucoup de dégâts, mais peut en occasionner beaucoup "
-"s'il n'est pas géré correctement."
 
-#: scripts/shipTemplates_OLD.lua:271
+#: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:271
+#: scripts/shipTemplates_StarFighters.lua:65
 msgctxt "subclass"
 msgid "Gunship"
-msgstr "Combattant"
+msgstr ""
 
 msgid ""
 "The gunship is a ship equiped with a homing missile tube to do initial "
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant est un navire équipé d'un tube de missile à tête chercheuse à "
-"l'avant lui permettant de faire de gros dégâts avant d'éliminer "
-"définitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
-"éliminer rapidement les ennemis plus faibles que lui."
 
-#: scripts/shipTemplates_OLD.lua:284
 msgid "Adv. Gunship"
 msgstr ""
 
@@ -2822,34 +2663,25 @@ msgid ""
 "damage and then take out the enemy with 2 front firing beams. It's designed "
 "to quickly take out the enemies weaker then itself."
 msgstr ""
-"Le Combattant V2 est un navire équipé de 2 tubes de missile à tête "
-"chercheuse à l'avant lui permettant de faire de gros dégâts avant d'éliminer "
-"définitivement l'ennemi avec ses 2 faisceaux laser avant. Il est conçu pour "
-"éliminer rapidement les ennemis plus faibles que lui."
 
-#: scripts/shipTemplates_OLD.lua:289
 msgid "Strikeship"
 msgstr ""
 
-#: scripts/shipTemplates_StarFighters.lua:13
-#: scripts/shipTemplates_StarFighters.lua:65
-#: scripts/shipTemplates_StarFighters.lua:121
 msgid "Starfighter"
-msgstr "Chasseurs stellaires"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289
 msgctxt "subclass"
 msgid "Strike"
-msgstr "Frappeur"
+msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:301
 msgid "Adv. Striker"
 msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:301
 msgctxt "subclass"
 msgid "Patrol"
-msgstr "Patrouilleur"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:303
 msgid ""
@@ -2865,9 +2697,8 @@ msgstr ""
 "dégâts et manque de boucliers mais en raison de la téléportation, il peut "
 "rentrer rapidement en action."
 
-#: scripts/shipTemplates_OLD.lua:312
 msgid "Striker"
-msgstr "L'Eclair"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:313
 msgid ""
@@ -2886,7 +2717,7 @@ msgstr ""
 #: scripts/shipTemplates_OLD.lua:348
 msgctxt "subclass"
 msgid "Assault"
-msgstr "Assaut"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:350
 msgid ""
@@ -2897,12 +2728,11 @@ msgstr ""
 "manœuvre, mais contient une énorme quantité de faisceaux laser à l'avant.\n"
 "Le prendre de front serait un suicide."
 
-#: scripts/shipTemplates_OLD.lua:363
 msgid "Battlestation"
 msgstr ""
 
 msgid "Battlecruiser"
-msgstr "Croiseur de guerre"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:365
 msgid ""
@@ -2912,7 +2742,6 @@ msgstr ""
 "La Station de combat est un immense navire avec de nombreuses "
 "fonctionnalités défensives. Il peut être accosté par de plus petits navires."
 
-#: scripts/shipTemplates_OLD.lua:455
 msgid "Weapons platform"
 msgstr ""
 
@@ -2925,12 +2754,11 @@ msgstr ""
 "laser. Elle est extrêmement lente à tourner, mais ses faisceaux font "
 "d'énormes dégâts."
 
-#: scripts/shipTemplates_OLD.lua:470
 msgid "Blockade Runner"
 msgstr ""
 
 msgid "High Punch"
-msgstr "Pénétrant"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:472
 msgid ""
@@ -2941,50 +2769,39 @@ msgstr ""
 "mais avec un armement léger, conçu pour franchir les lignes de défense et "
 "livrer des marchandises."
 
-#: scripts/shipTemplates_OLD.lua:483
 msgid "Ktlitan Fighter"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:490
 msgid "Ktlitan Breaker"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:500
 msgid "Ktlitan Worker"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:507
 msgid "Ktlitan Drone"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:513
 msgid "Ktlitan Feeder"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:523
 msgid "Ktlitan Scout"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:529
 msgid "Ktlitan Destroyer"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:540
 msgid "Ktlitan Queen"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:551
 #, lua-format
 msgid "Transport %dx%d"
-msgstr "Transport %dx%d"
+msgstr ""
 
-#: scripts/shipTemplates_StarFighters.lua:13
 msgid "MT52 Hornet"
 msgstr ""
 
-#: scripts/shipTemplates_StarFighters.lua:13
 msgid "Interceptor"
-msgstr "Intercepteur"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:15
 msgid ""
@@ -2999,7 +2816,6 @@ msgstr ""
 "parce qu' elles sont produites en grand nombre, mais aussi parce qu' elles "
 "subissent des pertes importantes au combat."
 
-#: scripts/shipTemplates_StarFighters.lua:23
 msgid "MU52 Hornet"
 msgstr ""
 
@@ -3011,9 +2827,8 @@ msgstr ""
 "Le Frelon MU52 est une version améliorée du Frelon MT52. Tous ses systèmes "
 "sont légèrement améliorés par rapport au modèle MT52."
 
-#: scripts/shipTemplates_StarFighters.lua:31
 msgid "MP52 Hornet"
-msgstr "Frelon MP52"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:32
 msgid ""
@@ -3026,7 +2841,6 @@ msgstr ""
 "supérieur, une meilleure accélération, des boosters d'impulsion et un "
 "deuxième canon laser."
 
-#: scripts/shipTemplates_StarFighters.lua:65
 msgid "Adder MK5"
 msgstr ""
 
@@ -3040,7 +2854,6 @@ msgstr ""
 "parmi les pirates et les officiers de justice. C'est un modèle bon marché, "
 "rapide et facile à entretenir, et il a un certain punch."
 
-#: scripts/shipTemplates_StarFighters.lua:78
 msgid "Adder MK4"
 msgstr ""
 
@@ -3056,7 +2869,6 @@ msgstr ""
 "similaire, certains acheteurs imprudents achètent parfois des modèles MK4 "
 "maquillés en MK5."
 
-#: scripts/shipTemplates_StarFighters.lua:88
 msgid "Adder MK3"
 msgstr ""
 
@@ -3078,7 +2890,6 @@ msgstr ""
 "suivants. Comparé au MK4, le MK3 a des boucliers et une coque plus faibles, "
 "mais une vitesse de rotation plus rapide."
 
-#: scripts/shipTemplates_StarFighters.lua:94
 msgid "Adder MK6"
 msgstr ""
 
@@ -3092,7 +2903,6 @@ msgstr ""
 "donné que les gens préfèrent toujours le MK5, plus familier et plus fiable "
 "surtout, le MK6 ne connais pas le même succès."
 
-#: scripts/shipTemplates_StarFighters.lua:100
 msgid "Adder MK7"
 msgstr ""
 
@@ -3113,7 +2923,6 @@ msgstr ""
 "MK5, les a empêchés d'augmenter suffisamment le prix d'achat pour amortir "
 "les coûts de développement et de fabrication du MK7."
 
-#: scripts/shipTemplates_StarFighters.lua:106
 msgid "Adder MK8"
 msgstr ""
 
@@ -3133,7 +2942,6 @@ msgstr ""
 "Ainsi est né le modèle MK8. Il se destine a l'acheteur pragmatique mais "
 "nostalgique qui doit acheter des pièces de rechange pour sa flotte de MK5."
 
-#: scripts/shipTemplates_StarFighters.lua:113
 msgid "Adder MK9"
 msgstr ""
 
@@ -3156,13 +2964,11 @@ msgstr ""
 "Comme le dit si bien leur \"slogan : \"Vous vous sentirez mieux dans un "
 "Vipère MK9.\""
 
-#: scripts/shipTemplates_StarFighters.lua:121
 msgid "WX-Lindworm"
 msgstr ""
 
-#: scripts/shipTemplates_StarFighters.lua:121
 msgid "Bomber"
-msgstr "Bombardier"
+msgstr ""
 
 #: scripts/shipTemplates_StarFighters.lua:123
 msgid ""
@@ -3179,9 +2985,8 @@ msgstr ""
 "simple : rechercher sa cible, la détruire et retourner d'où il vient avant "
 "d'être détruit."
 
-#: scripts/shipTemplates_StarFighters.lua:136
 msgid "ZX-Lindworm"
-msgstr "Dragon-ZX"
+msgstr ""
 
 #: scripts/science_db.lua:5
 msgid "Natural"
@@ -3512,7 +3317,7 @@ msgid "Ship window"
 msgstr "Vue fenêtre"
 
 msgid "0 degrees"
-msgstr "0 degrés"
+msgstr ""
 
 #: src/menus/shipSelectionScreen.cpp:100
 msgid "Top-down 3D view"
@@ -3634,47 +3439,47 @@ msgctxt "button"
 msgid "Heat"
 msgstr "Surchauffe"
 
-#: src/screens/gm/objectCreationView.cpp:51
+#: src/screens/gm/objectCreationView.cpp:55
 msgctxt "create"
 msgid "Artifact"
 msgstr "Artefact"
 
-#: src/screens/gm/objectCreationView.cpp:55
+#: src/screens/gm/objectCreationView.cpp:59
 msgctxt "create"
 msgid "Warp Jammer"
 msgstr "Brouilleur de vitesse lumière"
 
-#: src/screens/gm/objectCreationView.cpp:59
+#: src/screens/gm/objectCreationView.cpp:63
 msgctxt "create"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/screens/gm/objectCreationView.cpp:68
+#: src/screens/gm/objectCreationView.cpp:72
 msgctxt "create"
 msgid "Asteroid"
 msgstr "Astéroïde"
 
-#: src/screens/gm/objectCreationView.cpp:72
+#: src/screens/gm/objectCreationView.cpp:76
 msgctxt "create"
 msgid "Visual Asteroid"
 msgstr "Astéroïde décoratif"
 
-#: src/screens/gm/objectCreationView.cpp:76
+#: src/screens/gm/objectCreationView.cpp:80
 msgctxt "create"
 msgid "Planet"
 msgstr "Planète"
 
-#: src/screens/gm/objectCreationView.cpp:80
+#: src/screens/gm/objectCreationView.cpp:84
 msgctxt "create"
 msgid "BlackHole"
 msgstr "Trou noir"
 
-#: src/screens/gm/objectCreationView.cpp:84
+#: src/screens/gm/objectCreationView.cpp:88
 msgctxt "create"
 msgid "Nebula"
 msgstr "Nébuleuse"
 
-#: src/screens/gm/objectCreationView.cpp:88
+#: src/screens/gm/objectCreationView.cpp:92
 msgctxt "create"
 msgid "Worm Hole"
 msgstr "Trou de ver"
@@ -3940,7 +3745,7 @@ msgstr "Piratage en cours : {percent}%"
 #: src/screenComponents/hackingDialog.cpp:124
 msgctxt "hacking"
 msgid "{target}: hacked {percent}%"
-msgstr "{target}: neutralisé à {percent}%"
+msgstr "{target} : neutralisé à {percent}%"
 
 #: src/screenComponents/hackingDialog.cpp:141
 msgid "Hacking SUCCESS!"
@@ -3998,7 +3803,7 @@ msgstr "Se déplace vers {x},{y}."
 #: src/spaceObjects/cpuShip.cpp:283
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
-msgstr "En train d'attaquer {callsign}!"
+msgstr "En train d'attaquer {callsign} !"
 
 #: src/spaceObjects/cpuShip.cpp:364
 msgctxt "orderscpu"
@@ -4058,27 +3863,27 @@ msgstr "À quai"
 #: src/spaceObjects/playerSpaceship.cpp:412
 msgctxt "shiplog"
 msgid "Start of log"
-msgstr "Début du journal de bord"
+msgstr "Début du journal de bord :"
 
 #: src/spaceObjects/playerSpaceship.cpp:1144
 msgctxt "shiplog"
 msgid "Hailed by {name}"
-msgstr "Appel provenant de {name}"
+msgstr "Appel provenant de {name}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1198
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
-msgstr "Communication interrompue de l'extérieur"
+msgstr "Communication interrompue de l'extérieur."
 
 #: src/spaceObjects/playerSpaceship.cpp:1208
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
-msgstr "Appel provenant de {callsign} interrompu"
+msgstr "Appel provenant de {callsign} interrompu."
 
 #: src/spaceObjects/playerSpaceship.cpp:1212
 msgctxt "shiplog"
 msgid "Communication channel closed"
-msgstr "Fin de transmission"
+msgstr "Fin de transmission."
 
 #: src/spaceObjects/playerSpaceship.cpp:1383
 #: src/spaceObjects/playerSpaceship.cpp:1460
@@ -4089,7 +3894,7 @@ msgstr "Communication établie avec {name}"
 #: src/spaceObjects/playerSpaceship.cpp:1384
 msgctxt "shiplog"
 msgid "Hailing: {name}"
-msgstr "Salutations : {name}"
+msgstr "Salutations : {name}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1407
 #: src/spaceObjects/playerSpaceship.cpp:1408
@@ -4101,17 +3906,17 @@ msgstr "Communication établie avec {callsign}"
 #: src/spaceObjects/playerSpaceship.cpp:1410
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
-msgstr "Communication établie avec {callsign}"
+msgstr "Communication établie avec {callsign}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1412
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
-msgstr "Communication refusée en provenance de {callsign}"
+msgstr "Communication en provenance de {callsign} refusée."
 
 #: src/spaceObjects/playerSpaceship.cpp:1413
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
-msgstr ""
+msgstr "Communication vers {callsign} refusée."
 
 #: src/spaceObjects/playerSpaceship.cpp:1422
 msgctxt "shiplog"
@@ -4121,22 +3926,22 @@ msgstr "Communication brusquement interrompue."
 #: src/spaceObjects/playerSpaceship.cpp:1425
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
-msgstr "Communication provenant de {callsign} acceptée"
+msgstr "Appel provenant de {callsign} accepté."
 
 #: src/spaceObjects/playerSpaceship.cpp:1445
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
-msgstr "Communication provenant de {callsign} refusée"
+msgstr "Appel provenant de {callsign} refusé."
 
 #: src/spaceObjects/playerSpaceship.cpp:1459
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
-msgstr "Canal de communication ouvert à {name}"
+msgstr "Canal de communication ouvert avec {name}."
 
 #: src/spaceObjects/playerSpaceship.cpp:1462
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
-msgstr "Communication refusée à {name}"
+msgstr "Appel provenant de {name} refusé."
 
 #: scripts/shipTemplates_OLD.lua:237
 msgid ""
@@ -4148,7 +3953,7 @@ msgid ""
 "and other civilian parties. However, they have used it's adaptable nature to "
 "re-fit them with (illegal) weaponry."
 msgstr ""
-"Fabriqué par: Chantiers Navals Repulse.\n"
+"Fabriqué par : Chantiers Navals Repulse.\n"
 "\n"
 "En raison de sa polyvalence, ce vaisseau a trouvé sa place dans la plupart "
 "des factions qui l'ont considérablement modernisés pour l'adapter à leurs "
@@ -4168,7 +3973,7 @@ msgid ""
 "requested feature by several factions once they realized that their old "
 "surplus mark I ships were used for less savory purposes."
 msgstr ""
-"Fabriqué par: Chantiers Navals Repulse.\n"
+"Fabriqué par : Chantiers Navals Repulse.\n"
 "\n"
 "Le successeur du grand succès commercial : le croiseur Karnack.\n"
 "\n"
@@ -4381,7 +4186,7 @@ msgctxt "create"
 msgid "player ship"
 msgstr "Vaisseau joueur"
 
-#: src/screens/gm/objectCreationView.cpp:64
+#: src/screens/gm/objectCreationView.cpp:68
 msgctxt "create"
 msgid "Supply Drop"
 msgstr "Caisse d'approvisionnement"
@@ -4428,9 +4233,17 @@ msgstr "Valider avec [Entrer]"
 msgid "position"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:173 scripts/shipTemplates_OLD.lua:235
-#: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
-#: scripts/shipTemplates_OLD.lua:470
+#: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_Frigates.lua:87
+#: scripts/shipTemplates_Frigates.lua:116
+#: scripts/shipTemplates_Frigates.lua:133
+#: scripts/shipTemplates_Frigates.lua:179
+#: scripts/shipTemplates_Frigates.lua:272
+#: scripts/shipTemplates_Frigates.lua:299
+#: scripts/shipTemplates_Frigates.lua:312
+#: scripts/shipTemplates_Frigates.lua:369
+#: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:173
+#: scripts/shipTemplates_OLD.lua:235 scripts/shipTemplates_OLD.lua:260
+#: scripts/shipTemplates_OLD.lua:271 scripts/shipTemplates_OLD.lua:470
 msgctxt "class"
 msgid "Frigate"
 msgstr "Frégates"
@@ -4438,19 +4251,22 @@ msgstr "Frégates"
 #: scripts/shipTemplates_OLD.lua:173
 msgctxt "subclass"
 msgid "Mine Layer"
-msgstr "Poseur de mines"
+msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:235
+#: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:235
 msgctxt "subclass"
 msgid "Cruiser"
-msgstr "Croiseur"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:260
 msgctxt "subclass"
 msgid "Cruiser: Missile"
-msgstr "Croiseur : missiles"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:289 scripts/shipTemplates_OLD.lua:301
+#: scripts/shipTemplates_StarFighters.lua:13
+#: scripts/shipTemplates_StarFighters.lua:65
+#: scripts/shipTemplates_StarFighters.lua:121
 msgctxt "class"
 msgid "Starfighter"
 msgstr "Chasseurs stellaires"
@@ -4458,9 +4274,1021 @@ msgstr "Chasseurs stellaires"
 #: scripts/shipTemplates_OLD.lua:363
 msgctxt "subclass"
 msgid "Battlecruiser"
-msgstr "Croiseur de guerre"
+msgstr ""
 
 #: scripts/shipTemplates_OLD.lua:470
 msgctxt "subclass"
 msgid "High Punch"
-msgstr "Pénétrant"
+msgstr ""
+
+#: src/screens/crew6/engineeringScreen.cpp:243
+msgctxt "slider"
+msgid "Power: {current_level}% / {requested}%"
+msgstr "Puissance : {current_level}%/{requested}%"
+
+#: src/screens/crew6/engineeringScreen.cpp:245
+msgctxt "slider"
+msgid "Coolant: {current_level}% / {requested}%"
+msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
+
+#: src/screens/gm/tweak.cpp:182
+msgctxt "tweak_ship"
+msgid "Special drives:"
+msgstr "Moteurs spéciaux :"
+
+#: scripts/shipTemplates_Corvette.lua:14
+msgctxt "ship"
+msgid "Atlantis X23"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
+#: scripts/shipTemplates_Corvette.lua:101
+#: scripts/shipTemplates_Corvette.lua:157
+#: scripts/shipTemplates_Corvette.lua:217
+#: scripts/shipTemplates_Corvette.lua:235
+#: scripts/shipTemplates_Corvette.lua:248
+#: scripts/shipTemplates_Corvette.lua:261
+#: scripts/shipTemplates_Corvette.lua:274
+#: scripts/shipTemplates_Corvette.lua:287
+#: scripts/shipTemplates_Corvette.lua:301
+#: scripts/shipTemplates_Corvette.lua:314
+msgctxt "class"
+msgid "Corvette"
+msgstr "Corvettes"
+
+#: scripts/shipTemplates_Corvette.lua:14 scripts/shipTemplates_Corvette.lua:83
+msgctxt "subclass"
+msgid "Destroyer"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:33
+msgctxt "playerShip"
+msgid "Atlantis"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:83
+msgctxt "ship"
+msgid "Starhammer II"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:101
+msgctxt "playerShip"
+msgid "Crucible"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:101
+msgctxt "subclass"
+msgid "Popper"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:157
+msgctxt "playerShip"
+msgid "Maverick"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:157
+msgctxt "subclass"
+msgid "Gunner"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:217
+msgctxt "ship"
+msgid "Defense platform"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:235
+#, lua-format
+msgctxt "ship"
+msgid "Personnel Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:235
+#: scripts/shipTemplates_Corvette.lua:248
+#: scripts/shipTemplates_Corvette.lua:261
+#: scripts/shipTemplates_Corvette.lua:274
+#: scripts/shipTemplates_Corvette.lua:287
+#: scripts/shipTemplates_Corvette.lua:301
+msgctxt "subclass"
+msgid "Freighter"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:244
+#, lua-format
+msgctxt "ship"
+msgid "Personnel Jump Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:248
+#, lua-format
+msgctxt "ship"
+msgid "Goods Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:257
+#, lua-format
+msgctxt "ship"
+msgid "Goods Jump Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:261
+#, lua-format
+msgctxt "ship"
+msgid "Garbage Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:270
+#, lua-format
+msgctxt "ship"
+msgid "Garbage Jump Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:274
+#, lua-format
+msgctxt "ship"
+msgid "Equipment Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:283
+#, lua-format
+msgctxt "ship"
+msgid "Equipment Jump Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:287
+#, lua-format
+msgctxt "ship"
+msgid "Fuel Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:296
+#, lua-format
+msgctxt "ship"
+msgid "Fuel Jump Freighter %d"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:301
+msgctxt "ship"
+msgid "Jump Carrier"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:314
+msgctxt "playerShip"
+msgid "Benedict"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:314
+msgctxt "subclass"
+msgid "Freighter/Carrier"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:348
+msgctxt "playerShip"
+msgid "Kiriya"
+msgstr ""
+
+#: scripts/shipTemplates_Dreadnaught.lua:9
+msgctxt "ship"
+msgid "Odin"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:14
+msgctxt "ship"
+msgid "Phobos T3"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:28
+msgctxt "ship"
+msgid "Elara P2"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:33
+msgctxt "ship"
+msgid "Phobos M3"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:41
+msgctxt "playerShip"
+msgid "Phobos M3P"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:87
+msgctxt "ship"
+msgid "Nirvana R5"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:87
+msgctxt "subclass"
+msgid "Cruiser: Anti-fighter"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:98
+msgctxt "ship"
+msgid "Nirvana R5A"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:106
+msgctxt "ship"
+msgid "Nirvana R3"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:116
+msgctxt "ship"
+msgid "Storm"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:116
+msgctxt "subclass"
+msgid "Cruiser: Heavy Artillery"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:133
+msgctxt "playerShip"
+msgid "Hathcock"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:133
+#: scripts/shipTemplates_Frigates.lua:299
+msgctxt "subclass"
+msgid "Cruiser: Sniper"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:179
+msgctxt "ship"
+msgid "Piranha F12"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:179
+msgctxt "subclass"
+msgid "Cruiser: Light Artillery"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:201
+msgctxt "ship"
+msgid "Piranha F12.M"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:207
+msgctxt "ship"
+msgid "Piranha F8"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:216
+msgctxt "playerShip"
+msgid "Piranha"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:272
+msgctxt "ship"
+msgid "Stalker Q7"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:272
+msgctxt "subclass"
+msgid "Cruiser: Strike ship"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:282
+msgctxt "ship"
+msgid "Stalker Q5"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:288
+msgctxt "ship"
+msgid "Stalker R7"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:293
+msgctxt "ship"
+msgid "Stalker R5"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:299
+msgctxt "ship"
+msgid "Ranus U"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:312
+msgctxt "ship"
+msgid "Flavia"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:312
+msgctxt "subclass"
+msgid "Light transport"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:319
+msgctxt "ship"
+msgid "Flavia Falcon"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:325
+msgctxt "playerShip"
+msgid "Flavia P.Falcon"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:369
+msgctxt "playerShip"
+msgid "Repulse"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:369
+msgctxt "subclass"
+msgid "Armored Transport"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:414
+msgctxt "ship"
+msgid "Fiend G3"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:428
+msgctxt "ship"
+msgid "Fiend G4"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:433
+msgctxt "ship"
+msgid "Fiend G6"
+msgstr ""
+
+#: scripts/shipTemplates_Frigates.lua:437
+msgctxt "ship"
+msgid "Fiend G5"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:6
+msgctxt "playerShip"
+msgid "Player Cruiser"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:62
+msgctxt "playerShip"
+msgid "Player Missile Cr."
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:116
+msgctxt "playerShip"
+msgid "Player Fighter"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:156
+msgctxt "ship"
+msgid "Tug"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:173
+msgctxt "playerShip"
+msgid "Nautilus"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:220
+msgctxt "ship"
+msgid "Fighter"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:235
+msgctxt "ship"
+msgid "Karnack"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:260
+msgctxt "ship"
+msgid "Missile Cruiser"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:271
+msgctxt "ship"
+msgid "Gunship"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:284
+msgctxt "ship"
+msgid "Adv. Gunship"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:289
+msgctxt "ship"
+msgid "Strikeship"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:301
+msgctxt "ship"
+msgid "Adv. Striker"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:312
+msgctxt "playerShip"
+msgid "Striker"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:363
+msgctxt "ship"
+msgid "Battlestation"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:386
+msgctxt "playerShip"
+msgid "Ender"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:455
+msgctxt "ship"
+msgid "Weapons platform"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:470
+msgctxt "ship"
+msgid "Blockade Runner"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:483
+msgctxt "ship"
+msgid "Ktlitan Fighter"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:490
+msgctxt "ship"
+msgid "Ktlitan Breaker"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:500
+msgctxt "ship"
+msgid "Ktlitan Worker"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:507
+msgctxt "ship"
+msgid "Ktlitan Drone"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:513
+msgctxt "ship"
+msgid "Ktlitan Feeder"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:523
+msgctxt "ship"
+msgid "Ktlitan Scout"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:529
+msgctxt "ship"
+msgid "Ktlitan Destroyer"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:540
+msgctxt "ship"
+msgid "Ktlitan Queen"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:551
+#, lua-format
+msgctxt "ship"
+msgid "Transport %dx%d"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:13
+msgctxt "ship"
+msgid "MT52 Hornet"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:13
+msgctxt "subclass"
+msgid "Interceptor"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:23
+msgctxt "ship"
+msgid "MU52 Hornet"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:31
+msgctxt "playerShip"
+msgid "MP52 Hornet"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:65
+msgctxt "ship"
+msgid "Adder MK5"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:78
+msgctxt "ship"
+msgid "Adder MK4"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:88
+msgctxt "ship"
+msgid "Adder MK3"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:94
+msgctxt "ship"
+msgid "Adder MK6"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:100
+msgctxt "ship"
+msgid "Adder MK7"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:106
+msgctxt "ship"
+msgid "Adder MK8"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:113
+msgctxt "ship"
+msgid "Adder MK9"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:121
+msgctxt "ship"
+msgid "WX-Lindworm"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:121
+msgctxt "subclass"
+msgid "Bomber"
+msgstr ""
+
+#: scripts/shipTemplates_StarFighters.lua:136
+msgctxt "playerShip"
+msgid "ZX-Lindworm"
+msgstr ""
+
+#: scripts/comms_ship.lua:38
+msgctxt "commsShipAssist"
+msgid "What do you want?"
+msgstr "Que voulez-vous ?"
+
+#: scripts/comms_ship.lua:40
+msgctxt "commsShipAssist"
+msgid "Sir, how can we assist?"
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#: scripts/comms_ship.lua:43
+msgctxt "commsShipAssist"
+msgid "Defend a waypoint"
+msgstr "Défendez un marqueur"
+
+#: scripts/comms_ship.lua:46
+msgctxt "commsShipAssist"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
+
+#: scripts/comms_ship.lua:47 scripts/comms_ship.lua:56
+#: scripts/comms_ship.lua:69 scripts/comms_ship.lua:77
+#: scripts/comms_ship.lua:87 scripts/comms_station.lua:149
+#: scripts/comms_station.lua:163 scripts/comms_station.lua:229
+#: scripts/comms_station.lua:234 scripts/comms_station.lua:258
+#: scripts/comms_station.lua:263
+msgctxt "button"
+msgid "Back"
+msgstr "Retour"
+
+#: scripts/comms_ship.lua:49
+msgctxt "commsShipAssist"
+msgid "Which waypoint should we defend?"
+msgstr "Quel marqueur devons-nous défendre ?"
+
+#: scripts/comms_ship.lua:52
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Defend %s"
+msgstr "Défendez %s"
+
+#: scripts/comms_ship.lua:55
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "We are heading to assist at %s."
+msgstr "Nous partons pour défendre le marqueur %s."
+
+#: scripts/comms_ship.lua:65
+msgctxt "commsShipAssist"
+msgid "Assist me"
+msgstr "Aidez-nous !"
+
+#: scripts/comms_ship.lua:67
+msgctxt "commsShipAssist"
+msgid "Heading toward you to assist."
+msgstr "Entendu, nous partons immédiatement vous aider."
+
+#: scripts/comms_ship.lua:74
+msgctxt "commsShipAssist"
+msgid "Report status"
+msgstr "Au rapport"
+
+#: scripts/comms_ship.lua:83
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Dock at %s"
+msgstr "Amarrez-vous à %s"
+
+#: scripts/comms_ship.lua:85
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Docking at %s."
+msgstr "En cours d'amarrage à %s."
+
+#: scripts/comms_ship.lua:104
+msgctxt "commsShipEnemy"
+msgid "We will see to your destruction!"
+msgstr "Nous allons vous détruire !"
+
+#: scripts/comms_ship.lua:105
+msgctxt "commsShipEnemy"
+msgid "Your bloodline will end here!"
+msgstr "Votre race va s'éteindre ici et maintenant !"
+
+#: scripts/comms_ship.lua:106
+msgctxt "commsShipEnemy"
+msgid "Your feeble threats are meaningless."
+msgstr "Vos petites menaces ne nous impressionnent pas."
+
+#: scripts/comms_ship.lua:108
+msgctxt "commsShipEnemy"
+msgid ""
+"Ktzzzsss.\n"
+"\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Vous allez mourir faibles créatures insignifiantes!"
+
+#: scripts/comms_ship.lua:112
+msgctxt "commsShipEnemy"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"\n"
+"End of transmission."
+msgstr ""
+"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+"\n"
+"Fin de transmission."
+
+#: scripts/comms_ship.lua:116
+msgctxt "commsShipEnemy"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
+
+#: scripts/comms_ship.lua:118
+msgctxt "commsShipEnemy"
+msgid ""
+"One zero one.\n"
+"\n"
+"No binary communication detected. Switching to universal speech.\n"
+"\n"
+"Generating appropriate response for target from human language archives.\n"
+"\n"
+":Do not cross us.:\n"
+"\n"
+"Communication halted."
+msgstr ""
+"000110011010...Grzzzz..\n"
+"\n"
+"Communication binaire non détectée..Grzzz Nous passons en communication "
+"universelle..Grrzzz\n"
+"\n"
+"Générer une réponse appropriée pour la cible en langage humain à partir des "
+"archives...Grrzzzz\n"
+"\n"
+"Ne nous approchez pas! Grrzzz\n"
+"\n"
+"Communication interrompue."
+
+#: scripts/comms_ship.lua:127
+msgctxt "commsShipEnemy"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "EXECUTER A DISTANCE: AUTODESTRUCTION"
+
+#: scripts/comms_ship.lua:128
+msgctxt "commsShipEnemy"
+msgid "Rogue command received. Targeting source."
+msgstr "Commande non autorisée reçue. Cible verrouillée."
+
+#: scripts/comms_ship.lua:129
+msgctxt "commsShipEnemy"
+msgid "External command ignored."
+msgstr "Ordre externe ignoré."
+
+#: scripts/comms_ship.lua:131
+msgctxt "commsShipEnemy"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
+#: scripts/comms_ship.lua:134
+msgctxt "commsShipEnemy"
+msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+
+#: scripts/comms_ship.lua:135
+msgctxt "commsShipEnemy"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+
+#: scripts/comms_ship.lua:136
+msgctxt "commsShipEnemy"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
+
+#: scripts/comms_ship.lua:138
+msgctxt "commsShipEnemy"
+msgid "Mind your own business!"
+msgstr "Occupez-vous de vos affaires !"
+
+#: scripts/comms_ship.lua:166
+msgctxt "commsShip"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"\n"
+"We are on an important mission."
+msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"\n"
+"Nous sommes en mission de la plus haute importance."
+
+#: scripts/comms_ship.lua:170
+msgctxt "commsShip"
+msgid ""
+"We have nothing for you.\n"
+"\n"
+"Good day."
+msgstr ""
+"Nous n'avons rien pour vous.\n"
+"\n"
+"Bonne journée."
+
+#: scripts/comms_ship.lua:185
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Hull: %d%%\n"
+msgstr "Coque : %d%%\n"
+
+#: scripts/comms_ship.lua:189
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Shield: %d%%\n"
+msgstr "Boucliers : %d%%\n"
+
+#: scripts/comms_ship.lua:191
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Front Shield: %d%%\n"
+msgstr "Boucliers avant : %d%%\n"
+
+#: scripts/comms_ship.lua:192
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Rear Shield: %d%%\n"
+msgstr "Boucliers arrière : %d%%\n"
+
+#: scripts/comms_ship.lua:195
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Shield %d: %d%%\n"
+msgstr "Bouclier %d : %d%%\n"
+
+#: scripts/comms_ship.lua:201
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "%s Missiles: %d/%d\n"
+msgstr "%s Missiles : %d/%d\n"
+
+#: scripts/comms_ship.lua:213
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "WP %d"
+msgstr "Marqueur %d"
+
+#: scripts/comms_station.lua:69
+msgctxt "commsStation"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+"Nous sommes sous le feu de l'ennemi !\n"
+"Pas le temps de bavarder !"
+
+#: scripts/comms_station.lua:88
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"Good day, officer! Welcome to %s.\n"
+"What can we do for you today?"
+msgstr ""
+"Bonjour officier ! Bienvenue sur %s.\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
+
+#: scripts/comms_station.lua:90
+#, lua-format
+msgctxt "commsStation"
+msgid "Welcome to our lovely station %s."
+msgstr "Bienvenue dans notre charmante station orbitale %s."
+
+#: scripts/comms_station.lua:93 scripts/comms_station.lua:180
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"%s\n"
+"\n"
+"Reputation: %d"
+msgstr ""
+"%s\n"
+"\n"
+"Réputation : %d"
+
+#: scripts/comms_station.lua:96
+msgctxt "commsStation"
+msgid "Do you have spare homing missiles for us?"
+msgstr "Auriez-vous des homing missiles pour nous ?"
+
+#: scripts/comms_station.lua:97
+msgctxt "commsStation"
+msgid "Can you restock us with HVLI?"
+msgstr "Pouvez-vous nous réapprovisionner en HVLI ? "
+
+#: scripts/comms_station.lua:98
+msgctxt "commsStation"
+msgid "Please re-stock our mines."
+msgstr "Merci de réapprovisionner notre stock de mines, c'est urgent."
+
+#: scripts/comms_station.lua:99
+msgctxt "commsStation"
+msgid "Can you supply us with some nukes?"
+msgstr "Avez-vous des missiles nucléaires nukes ?"
+
+#: scripts/comms_station.lua:100
+msgctxt "commsStation"
+msgid "Please re-stock our EMP missiles."
+msgstr "Avez-vous des missiles EMP ?"
+
+#: scripts/comms_station.lua:106
+#, lua-format
+msgctxt "commsStation"
+msgid "%s (%d rep each)"
+msgstr "%s (%d rép chacun)"
+
+#: scripts/comms_station.lua:122
+msgctxt "commsStation"
+msgid "You need to stay docked for that action."
+msgstr "Vous devez rester amarrés à la station pour cette action."
+
+#: scripts/comms_station.lua:129
+msgctxt "commsStation"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+"Nous ne fournissons pas ce type d'armes de destruction massive. \n"
+"Nous sommes pour la paix dans l'univers."
+
+#: scripts/comms_station.lua:131
+msgctxt "commsStation"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+
+#: scripts/comms_station.lua:133
+msgctxt "commsStation"
+msgid "We do not deal in those weapons."
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+
+#: scripts/comms_station.lua:144
+msgctxt "commsStation"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
+
+#: scripts/comms_station.lua:146
+msgctxt "commsStation"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
+"fournir."
+
+#: scripts/comms_station.lua:152
+msgctxt "commsStation"
+msgid "Not enough reputation."
+msgstr "Pas assez de réputation."
+
+#: scripts/comms_station.lua:158
+msgctxt "commsStation"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+
+#: scripts/comms_station.lua:160
+msgctxt "commsStation"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
+
+#: scripts/comms_station.lua:175
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"This is %s. Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Ici la station %s. Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
+
+#: scripts/comms_station.lua:177
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"This is %s. Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Ici la station %s. Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#: scripts/comms_station.lua:185
+#, lua-format
+msgctxt "commsStation"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+
+#: scripts/comms_station.lua:194
+#, lua-format
+msgctxt "commsStation"
+msgid "Please send reinforcements! (%d rep)"
+msgstr "Merci de nous envoyer des renforts ! (%d rep)"
+
+#: scripts/comms_station.lua:209
+msgctxt "commsStation"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de "
+"réapprovisionnement."
+
+#: scripts/comms_station.lua:211
+msgctxt "commsStation"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+
+#: scripts/comms_station.lua:224
+#, lua-format
+msgctxt "commsStation"
+msgid "We have dispatched a supply ship toward %s."
+msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"réapprovisionnement au marqueur %s."
+
+#: scripts/comms_station.lua:226 scripts/comms_station.lua:255
+msgctxt "commsStation"
+msgid "Not enough reputation!"
+msgstr "Pas assez de points de réputation !"
+
+#: scripts/comms_station.lua:243
+msgctxt "commsStation"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr "Vous devez définir un marqueur avant de demander des renforts."
+
+#: scripts/comms_station.lua:245
+msgctxt "commsStation"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
+#: scripts/comms_station.lua:253
+#, lua-format
+msgctxt "commsStation"
+msgid "We have dispatched %s to assist at %s."
+msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %s."
+
+#: scripts/comms_station.lua:324
+#, lua-format
+msgctxt "commsStation"
+msgid "WP %d"
+msgstr "%d"
+
+#: scripts/comms_supply_drop.lua:11
+msgctxt "commsShip"
+msgid "Transporting goods."
+msgstr "Transport de marchandises."
+
+#: scripts/comms_supply_drop.lua:17
+msgctxt "commsShip"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+"Nous n'avons rien pour vous.\n"
+"Bonne journée."

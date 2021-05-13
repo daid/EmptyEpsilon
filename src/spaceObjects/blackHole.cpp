@@ -42,10 +42,10 @@ void BlackHole::update(float delta)
 void BlackHole::draw3DTransparent()
 {
     static std::array<VertexAndTexCoords, 4> quad{
-        sf::Vector3f(), {0.f, 0.f},
-        sf::Vector3f(), {1.f, 0.f},
+        sf::Vector3f(), {0.f, 1.f},
         sf::Vector3f(), {1.f, 1.f},
-        sf::Vector3f(), {0.f, 1.f}
+        sf::Vector3f(), {1.f, 0.f},
+        sf::Vector3f(), {0.f, 0.f}
     };
 
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("blackHole3d.png")->getNativeHandle());
@@ -60,9 +60,8 @@ void BlackHole::draw3DTransparent()
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
     glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
 
-    std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
+    std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
-    glBlendFunc(GL_ONE, GL_ONE);
 }
 #endif
 

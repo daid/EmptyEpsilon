@@ -194,7 +194,7 @@ int main(int argc, char** argv)
     }
 
     colorConfig.load();
-    hotkeys.load();
+    HotkeyConfig::get().load();
     joystick.load();
 
     if (PreferencesManager::get("username", "") == "")
@@ -302,8 +302,8 @@ int main(int argc, char** argv)
 
     // Set up voice chat and key bindings.
     NetworkAudioRecorder* nar = new NetworkAudioRecorder();
-    nar->addKeyActivation(hotkeys.getKeyByHotkey("BASIC", "VOICE_CHAT_ALL"), 0);
-    nar->addKeyActivation(hotkeys.getKeyByHotkey("BASIC", "VOICE_CHAT_SHIP"), 1);
+    nar->addKeyActivation(HotkeyConfig::get().getKeyByHotkey("BASIC", "VOICE_CHAT_ALL"), 0);
+    nar->addKeyActivation(HotkeyConfig::get().getKeyByHotkey("BASIC", "VOICE_CHAT_SHIP"), 1);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR

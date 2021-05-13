@@ -124,7 +124,7 @@ function init()
     local cx, cy = friendlyList[1]:getPosition()
     setCirclePos(Nebula(), cx, cy, random(0, 360), 6000)
 
-    for _ = 1, 5 do
+    for idx = 1, 5 do
         setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
     end
 

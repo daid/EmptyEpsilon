@@ -53,17 +53,17 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         for (auto i = 0; i < max_quad_count; ++i)
         {
             auto quad_offset = 4 * i;
-            texcoords[quad_offset + 0] = { 0.f, 0.f };
-            texcoords[quad_offset + 1] = { 1.f, 0.f };
-            texcoords[quad_offset + 2] = { 1.f, 1.f };
-            texcoords[quad_offset + 3] = { 0.f, 1.f };
+            texcoords[quad_offset + 0] = { 0.f, 1.f };
+            texcoords[quad_offset + 1] = { 1.f, 1.f };
+            texcoords[quad_offset + 2] = { 1.f, 0.f };
+            texcoords[quad_offset + 3] = { 0.f, 0.f };
 
             indices[6 * i + 0] = quad_offset + 0;
-            indices[6 * i + 1] = quad_offset + 1;
-            indices[6 * i + 2] = quad_offset + 2;
-            indices[6 * i + 3] = quad_offset + 2;
+            indices[6 * i + 1] = quad_offset + 2;
+            indices[6 * i + 2] = quad_offset + 1;
+            indices[6 * i + 3] = quad_offset + 0;
             indices[6 * i + 4] = quad_offset + 3;
-            indices[6 * i + 5] = quad_offset + 0;
+            indices[6 * i + 5] = quad_offset + 2;
         }
 
         // Update texcoords
