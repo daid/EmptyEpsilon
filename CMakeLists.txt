@@ -24,8 +24,19 @@ endif()
 
 project(EmptyEpsilon LANGUAGES CXX C  VERSION ${MAJOR}.${MINOR}.${PATCH})
 
+# Defaults
+set(WITH_DISCORD_DEFAULT OFF)
+if(WIN32)
+  set(WITH_DISCORD_DEFAULT ON)
+endif()
+
 # User-settings
 set(SERIOUS_PROTON_DIR "../SeriousProton" CACHE PATH "Path to SeriousProton")
+if(NOT ANDROID)
+    option(WITH_DISCORD "Build with Discord support" ${WITH_DISCORD_DEFAULT})
+else()
+    set(WITH_DISCORD OFF)
+endif()
 
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
@@ -48,31 +59,41 @@ set(DOWNLOADS_DIR "${PROJECT_BINARY_DIR}/downloads")
 file(MAKE_DIRECTORY "${EXTERNAL_DIR}" "${DOWNLOADS_DIR}")
 
 # Discord
-if(WIN32)
+if(WITH_DISCORD)
   set(DISCORD_ARCH "x86_64")
   if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
     set(DISCORD_ARCH "x86")
   endif()
+  set(DISCORD_INCLUDE_PATH "${EXTERNALS_DIR}/discord/c")
   set(DISCORD_LIB_PATH "${EXTERNALS_DIR}/discord/lib/${DISCORD_ARCH}")
-  file(MAKE_DIRECTORY "${DISCORD_LIB_PATH}")
-  if(NOT EXISTS "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib")
+  file(MAKE_DIRECTORY "${DISCORD_INCLUDE_PATH}")
+  if(NOT EXISTS "${DISCORD_INCLUDE_PATH}/discord_game_sdk.h")
     set(DISCORD_GAME_SDK "${DOWNLOADS_DIR}/discord_game_sdk.zip")
     file(DOWNLOAD "https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip" "${DISCORD_GAME_SDK}" TIMEOUT 60 TLS_VERIFY ON)
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${DISCORD_GAME_SDK}" WORKING_DIRECTORY "${EXTERNALS_DIR}/discord")
-    if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    if(WIN32 AND CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
       # Discord uses Windows.h (capital W) and that does not play nice when cross-compiling.
       # we want to patch with a lowercase windows.h
       message(STATUS "Patching discord_game_sdk.h, using a lowercase Windows.h (cross-compilation compatibility)")
       execute_process(COMMAND sed -i "s/<Windows.h>/<windows.h>/g" c/discord_game_sdk.h WORKING_DIRECTORY "${EXTERNALS_DIR}/discord")
     endif()
   endif()
-  
+  add_library(discord_h INTERFACE IMPORTED)
+  set_target_properties(discord_h PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${DISCORD_INCLUDE_PATH}"  
+  )
   add_library(discord SHARED IMPORTED)
   set_target_properties(discord PROPERTIES
-    IMPORTED_LOCATION "${DISCORD_LIB_PATH}/discord_game_sdk.dll"
-    IMPORTED_IMPLIB "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib"
-    INTERFACE_INCLUDE_DIRECTORIES "${EXTERNALS_DIR}/discord/c/"
+    IMPORTED_LOCATION "${DISCORD_LIB_PATH}/discord_game_sdk${CMAKE_SHARED_LIBRARY_SUFFIX}"
   )
+  
+  if (WIN32)
+    set_target_properties(discord PROPERTIES
+      IMPORTED_IMPLIB "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib"
+    )
+  endif()
+
+  target_link_libraries(discord INTERFACE discord_h)
 endif()
 
 # GLM
@@ -283,9 +304,14 @@ set(SOURCES
     src/hardware/devices/philipsHueDevice.cpp
 )
 
-if (WIN32)
-  list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
+if (WITH_DISCORD)
+  list(APPEND SOURCES src/discord.cpp)
 endif()
+
+if (WIN32)
+  list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
+
 
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -304,6 +330,8 @@ target_compile_definitions(seriousproton_deps
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
 )
 
+target_compile_definitions(${PROJECT_NAME} PUBLIC WITH_DISCORD=$<BOOL:${WITH_DISCORD}>)
+
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
@@ -319,7 +347,8 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         seriousproton glm::glm opengl
         "$<$<BOOL:${ANDROID}>:log;android>"
-        "$<$<BOOL:${WIN32}>:iphlpapi;discord>"
+        "$<$<BOOL:${WIN32}>:iphlpapi>"
+        "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
         "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"   
 )
 
@@ -341,7 +370,6 @@ if(WIN32)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
     install(DIRECTORY ${EE_RESOURCES} DESTINATION .)
 
-    install(FILES "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION .)
     if(MSVC)
       # Not all configuration emit a pdb (ie Release), make this optional.
       install(FILES "$<TARGET_PDB_FILE:${PROJECT_NAME}>" DESTINATION . OPTIONAL)
@@ -355,6 +383,19 @@ else()
     include(GNUInstallDirs)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
     install(DIRECTORY ${EE_RESOURCES} DESTINATION "${CMAKE_INSTALL_DATADIR}/emptyepsilon")
+endif()
+
+if(WITH_DISCORD)
+    set(discord_install_dir)
+    if(WIN32)
+        set(discord_install_dir .)
+    elseif(APPLE)
+        set(discord_install_dir bin)
+    else()
+        set(discord_install_dir "${CMAKE_INSTALL_BINDIR}")
+    endif()
+
+    install(PROGRAMS "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION "${discord_install_dir}")
 endif()
 
 find_package(PythonInterp)

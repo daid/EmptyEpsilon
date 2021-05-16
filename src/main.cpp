@@ -29,7 +29,7 @@
 #include "tutorialGame.h"
 
 #include "hardware/hardwareController.h"
-#ifdef _WIN32
+#if WITH_DISCORD
 #include "discord.h"
 #endif
 
@@ -311,9 +311,10 @@ int main(int argc, char** argv)
     else
         hardware_controller->loadConfiguration("hardware.ini");
 
-#ifdef _WIN32
-    new DiscordRichPresence();
-#endif
+    if constexpr (WITH_DISCORD)
+    {
+        new DiscordRichPresence(std::filesystem::path{ argv[0] }.replace_filename("discord_game_sdk"));
+    }
 
     returnToMainMenu();
     engine->runMainLoop();
