@@ -195,7 +195,7 @@ OptionsMenu::OptionsMenu()
 
     // Bottom GUI.
     // Back button.
-    (new GuiButton(this, "BACK", tr("options", "Back"), [this]()
+    (new GuiButton(this, "BACK", tr("button", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
