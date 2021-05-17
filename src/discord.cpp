@@ -11,7 +11,7 @@ static IDiscordCoreEvents events;
 static DiscordActivity previousActivity;
 
 DiscordRichPresence::DiscordRichPresence(const std::filesystem::path& discord_sdk)
-    :discord{DynamicLibrary::open(DynamicLibrary::add_native_suffix(discord_sdk))}
+    :discord{DynamicLibrary::open(discord_sdk)}
 {
     if (!discord)
     {

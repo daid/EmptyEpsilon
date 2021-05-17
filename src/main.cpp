@@ -313,7 +313,14 @@ int main(int argc, char** argv)
 
     if constexpr (WITH_DISCORD)
     {
-        new DiscordRichPresence(std::filesystem::path{ argv[0] }.replace_filename("discord_game_sdk"));
+        std::filesystem::path discord_sdk
+        {
+#ifdef RESOURCE_BASE_DIR
+        RESOURCE_BASE_DIR
+#endif
+        };
+        discord_sdk /= std::filesystem::path{ "plugins" } / DynamicLibrary::add_native_suffix("discord_game_sdk");
+        new DiscordRichPresence(discord_sdk);
     }
 
     returnToMainMenu();
