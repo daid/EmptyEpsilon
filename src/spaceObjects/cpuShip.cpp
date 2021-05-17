@@ -303,7 +303,7 @@ void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 std::unordered_map<string, string> CpuShip::getGMInfo()
 {
     std::unordered_map<string, string> ret = SpaceShip::getGMInfo();
-    ret["Orders"] = getAIOrderString(orders);
+    ret[trMark("gm_info", "Orders")] = getAIOrderString(orders);
     return ret;
 }
 
