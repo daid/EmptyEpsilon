@@ -311,7 +311,7 @@ int main(int argc, char** argv)
     else
         hardware_controller->loadConfiguration("hardware.ini");
 
-    if constexpr (WITH_DISCORD)
+#if WITH_DISCORD
     {
         std::filesystem::path discord_sdk
         {
@@ -322,6 +322,7 @@ int main(int argc, char** argv)
         discord_sdk /= std::filesystem::path{ "plugins" } / DynamicLibrary::add_native_suffix("discord_game_sdk");
         new DiscordRichPresence(discord_sdk);
     }
+#endif // WITH_DISCORD
 
     returnToMainMenu();
     engine->runMainLoop();
