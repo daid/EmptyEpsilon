@@ -63,7 +63,7 @@ TutorialMenu::TutorialMenu()
     start_tutorial_button->setEnable(false)->setPosition(0, 0, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Back button.
-    (new GuiButton(bottom_row, "BACK", tr("Back"), [this]()
+    (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
