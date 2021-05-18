@@ -35,7 +35,7 @@ namespace
     }
 }
 
-ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClient::DisconnectReason> last_attempt)
+ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClient::DisconnectReason> last_attempt /* = {} */)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
 
