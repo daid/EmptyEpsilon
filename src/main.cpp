@@ -107,10 +107,11 @@ int main(int argc, char** argv)
 #ifdef CONFIG_DIR
     PreferencesManager::load(CONFIG_DIR "options.ini");
 #endif
+    PreferencesManager::load("options.ini");
     if (getenv("HOME"))
         PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-    else
-        PreferencesManager::load("options.ini");
+    if (getenv("APPDATA"))
+        PreferencesManager::load(string(getenv("APPDATA")) + "/emptyepsilon/options.ini");
 
     for(int n=1; n<argc; n++)
     {
@@ -153,6 +154,11 @@ int main(int argc, char** argv)
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
             PackResourceProvider::addPackResourcesForDirectory(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
         }
+        if (getenv("APPDATA"))
+        {
+            new DirectoryResourceProvider(string(getenv("APPDATA")) + "/emptyepsilon/resources/mods/" + mod);
+            PackResourceProvider::addPackResourcesForDirectory(string(getenv("APPDATA")) + "/emptyepsilon/resources/mods/" + mod);
+        }
         new DirectoryResourceProvider("resources/mods/" + mod);
         PackResourceProvider::addPackResourcesForDirectory("resources/mods/" + mod);
     }
@@ -166,6 +172,12 @@ int main(int argc, char** argv)
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/scripts/");
         new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/packs/SolCommand/");
+    }
+    if (getenv("APPDATA"))
+    {
+        new DirectoryResourceProvider(string(getenv("APPDATA")) + "/emptyepsilon/resources/");
+        new DirectoryResourceProvider(string(getenv("APPDATA")) + "/emptyepsilon/scripts/");
+        new DirectoryResourceProvider(string(getenv("APPDATA")) + "/emptyepsilon/packs/SolCommand/");
     }
 #ifdef RESOURCE_BASE_DIR
     new DirectoryResourceProvider(RESOURCE_BASE_DIR "resources/");
@@ -306,10 +318,11 @@ int main(int argc, char** argv)
 #ifdef CONFIG_DIR
     hardware_controller->loadConfiguration(CONFIG_DIR "hardware.ini");
 #endif
+    hardware_controller->loadConfiguration("hardware.ini");
     if (getenv("HOME"))
         hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
-    else
-        hardware_controller->loadConfiguration("hardware.ini");
+    if (getenv("APPDATA"))
+        hardware_controller->loadConfiguration(string(getenv("APPDATA")) + "/emptyepsilon/hardware.ini");
 
 #if WITH_DISCORD
     {
@@ -353,7 +366,6 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") == "")
     {
 #ifndef _MSC_VER
-        // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
         if (getenv("HOME"))
         {
 #ifdef _WIN32
@@ -362,6 +374,14 @@ int main(int argc, char** argv)
             mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+        }else if (getenv("APPDATA"))
+        {
+#ifdef _WIN32
+            mkdir((string(getenv("APPDATA")) + "/emptyepsilon").c_str());
+#else
+            mkdir((string(getenv("APPDATA")) + "/emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+#endif
+            PreferencesManager::save(string(getenv("APPDATA")) + "/emptyepsilon/options.ini");
         }else
 #endif
         {
