@@ -429,14 +429,12 @@ void ShipSelectionScreen::update(float delta)
 
 bool ShipSelectionScreen::canDoMainScreen() const
 {
-    if constexpr (FEATURE_3D_RENDERING)
-    {
-        return PostProcessor::isEnabled() && sf::Shader::isAvailable() && gl::isAvailable();
-    }
-    else
-    {
-        return false;
-    }
+#if FEATURE_3D_RENDERING
+    return PostProcessor::isEnabled() && sf::Shader::isAvailable() && gl::isAvailable();
+#else
+    // Don't bother checking anything without 3D rendering feature on.
+    return false;
+#endif
 }
 
 void ShipSelectionScreen::updateReadyButton()
