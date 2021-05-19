@@ -8,9 +8,34 @@
 #include "gui/gui2_button.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_textentry.h"
+#include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
 
-ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
+namespace
+{
+    const string& disconnectErrorMessage(GameClient::DisconnectReason reason)
+    {
+        switch (reason)
+        {
+        case GameClient::DisconnectReason::None:
+            return tr("game_client_disconnect_reason", "still connected");
+        case GameClient::DisconnectReason::BadCredentials:
+            return tr("game_client_disconnect_reason", "bad credentials");
+        case GameClient::DisconnectReason::ClosedByServer:
+            return tr("game_client_disconnect_reason", "closed by server");
+        case GameClient::DisconnectReason::TimedOut:
+            return tr("game_client_disconnect_reason", "timed out");
+        case GameClient::DisconnectReason::Unknown:
+            return tr("game_client_disconnect_reason", "unknown");
+        case GameClient::DisconnectReason::VersionMismatch:
+            return tr("game_client_disconnect_reason", "version mismatch");
+        default:
+            return tr("game_client_disconnect_reason", "unspecified error {error}").format({ {"error", string{static_cast<int>(reason)}} });
+        }
+    }
+}
+
+ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClient::DisconnectReason> last_attempt /* = {} */)
 {
     scanner = new ServerScanner(VERSION_NUMBER);
 
@@ -26,6 +51,13 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source)
         destroy();
         returnToMainMenu();
     }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+
+    if (last_attempt)
+    {
+        auto error_message = tr("Connection error: {message}").format({ {"message", disconnectErrorMessage(*last_attempt)} });
+        auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message, 30);
+        error_info->setPosition(0, 25, ATopCenter);
+    }
 
     lan_internet_selector = new GuiSelector(this, "LAN_INTERNET_SELECT", [this](int index, string value) {
         if (index == 0)
