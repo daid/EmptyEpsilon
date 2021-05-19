@@ -1,3 +1,10 @@
+# Set minimum target macOS version: https://cmake.org/cmake/help/v3.8/variable/CMAKE_OSX_DEPLOYMENT_TARGET.html#variable:CMAKE_OSX_DEPLOYMENT_TARGET
+# SFML targets 10.7, recent XCode version complains about anything below 10.9 (Mavericks, Oct. 2013).
+# Must be first!
+if(NOT DEFINED ENV{MACOSX_DEPLOYMENT_TARGET})
+  set(ENV{MACOSX_DEPLOYMENT_TARGET} "10.9")
+endif()
+
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -87,14 +94,6 @@ if(NOT EXISTS "${GLM_BASE_PATH}/glm/CMakeLists.txt")
 endif()
 
 add_subdirectory("${GLM_BASE_PATH}/glm" "${PROJECT_BINARY_DIR}/glm" EXCLUDE_FROM_ALL)
-
-
-# Set minimum target macOS version
-if(APPLE)
-    set(MACOSX_DEPLOYMENT_TARGET "10.10")
-    set(CMAKE_INSTALL_PREFIX ".")
-endif()
-
 
 set(SOURCES
     src/main.cpp
@@ -348,8 +347,8 @@ if(WIN32)
     endif()
 elseif(APPLE)
   install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION . RUNTIME DESTINATION bin)
-  install(FILES logo.icns DESTINATION "${PROJECT_NAME}.app/Contents/Resources" RENAME "${PROJECT_NAME}.icns")
-  install(DIRECTORY ${EE_RESOURCES} DESTINATION "${PROJECT_NAME}.app/Contents/Resources")
+  install(FILES logo.icns DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" RENAME "${PROJECT_NAME}.icns")
+  install(DIRECTORY ${EE_RESOURCES} DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources")
 elseif(ANDROID)
   android_apk(EmptyEpsilon)
 else()
@@ -370,12 +369,12 @@ if(PYTHONINTERP_FOUND)
   
   # Matches install logic above.
   if(WIN32)
-    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION .)
+    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION . OPTIONAL)
   elseif(APPLE)
-    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "${PROJECT_NAME}.app/Contents/Resources")
+    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" OPTIONAL)
   elseif(NOT ANDROID)
     # DOCDIR already has PROJECT_NAME (EmptyEpsilon) appended (from CMake docs)
-    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "${CMAKE_INSTALL_DOCDIR}" OPTIONAL)
   endif()
 endif()
 
@@ -387,9 +386,28 @@ add_custom_target(update_locale
     COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/tutorial.en scripts/tutorial_*.lua
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-set(CPACK_PACKAGE_EXECUTABLES ${PROJECT_NAME})
+# Generic settings
+set(CPACK_PACKAGE_EXECUTABLES "${PROJECT_NAME};Empty Epsilon (${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})")
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_CONTACT "https://github.com/daid/")
+
+set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/logo.png")
+set(CPACK_PACKAGE_CHECKSUM SHA256)
+
+# WIX (win installer)
+# Setup the upgrade GUID to have one per version.
+# https://tools.ietf.org/html/rfc4122#appendix-C
+set(GUID_NAMESPACE_URL 6ba7b810-9dad-11d1-80b4-00c04fd430c8) # "Name string is URL" - in the appendix linked above.
+string(UUID EMPTYEPSILON_GUID NAMESPACE ${GUID_NAMESPACE_URL} NAME "https://github.com/daid/EmptyEpsilon" TYPE SHA1)
+
+string(UUID CPACK_WIX_UPGRADE_GUID NAMESPACE ${EMPTYEPSILON_GUID} NAME "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}" TYPE SHA1)
+set(CPACK_WIX_UI_BANNER "${CMAKE_CURRENT_SOURCE_DIR}/resources/logo_full.png")
+set(CPACK_WIX_UI_DIALOG "${CMAKE_CURRENT_SOURCE_DIR}/resources/logo_white.png")
+# Add/Remove programs info.
+set(CPACK_WIX_PROPERTY_ARPHELPLINK "https://daid.github.io/EmptyEpsilon/#tabs=6")
+set(CPACK_WIX_PROPERTY_APPURLINFOABOUT "https://daid.github.io/EmptyEpsilon/#tabs=0")
+set(CPACK_WIX_PROPERTY_ARPURLUPDATEINFO "https://daid.github.io/EmptyEpsilon/#tabs=5")
+
 if(NOT DEFINED CPACK_GENERATOR)
   if(WIN32)
     set(CPACK_GENERATOR "ZIP")
@@ -397,6 +415,36 @@ if(NOT DEFINED CPACK_GENERATOR)
     set(CPACK_GENERATOR "DEB")
     set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev")
   endif()
+endif()
+
+if(APPLE)
+  if("DragNDrop" IN_LIST CPACK_GENERATOR)
+    if(DEFINED SFML_ROOT)
+      if(SFML_ROOT MATCHES "Frameworks$")
+        # Copy SFML and its extlibs to binary dir.
+	      # SFML_ROOT *should* be the Frameworks folder!
+	      execute_process(
+		      COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_ROOT}/" "${CMAKE_BINARY_DIR}/Frameworks/"
+		      COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_ROOT}/../extlibs/" "${CMAKE_BINARY_DIR}/Frameworks/")
+	      install(CODE "
+  		    include(BundleUtilities)
+  		    fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${CMAKE_BINARY_DIR};${CMAKE_BINARY_DIR}/Frameworks\")
+	      ")
+      else()
+        message(WARNING "macOS DMG packaging: SFML_ROOT *must* point to SFML's Frameworks folder (no trailing slashes). The bundle will not be fixed up properly.")
+      endif()
+    else()
+      # This is usually the case when using sfml from homebrew, which sadly not portable enough for DMG packages.
+      message(WARNING "macOS DMG package requested - please set SFML_ROOT, otherwise the bundle will not be fixed up properly.")
+    endif()
+  endif()
+endif()
+
+if ("WIX" IN_LIST CPACK_GENERATOR AND CPACK_PACKAGE_VERSION_MAJOR GREATER 100)
+	# WIX does not like major version number > 256.
+	# So if we're above 100, assume it's a year-like format and strip out century/millenium.
+	math(EXPR CPACK_PACKAGE_VERSION_MAJOR "${CPACK_PACKAGE_VERSION_MAJOR} % 100")
+  set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
 endif()
 
 # Setup install targets:
