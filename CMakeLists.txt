@@ -407,6 +407,7 @@ set(CPACK_WIX_UI_DIALOG "${CMAKE_CURRENT_SOURCE_DIR}/resources/logo_white.png")
 set(CPACK_WIX_PROPERTY_ARPHELPLINK "https://daid.github.io/EmptyEpsilon/#tabs=6")
 set(CPACK_WIX_PROPERTY_APPURLINFOABOUT "https://daid.github.io/EmptyEpsilon/#tabs=0")
 set(CPACK_WIX_PROPERTY_ARPURLUPDATEINFO "https://daid.github.io/EmptyEpsilon/#tabs=5")
+set(CPACK_WIX_PRODUCT_ICON "${CMAKE_CURRENT_SOURCE_DIR}/logo.ico")
 
 if(NOT DEFINED CPACK_GENERATOR)
   if(WIN32)
@@ -440,11 +441,35 @@ if(APPLE)
   endif()
 endif()
 
-if ("WIX" IN_LIST CPACK_GENERATOR AND CPACK_PACKAGE_VERSION_MAJOR GREATER 100)
-	# WIX does not like major version number > 256.
-	# So if we're above 100, assume it's a year-like format and strip out century/millenium.
-	math(EXPR CPACK_PACKAGE_VERSION_MAJOR "${CPACK_PACKAGE_VERSION_MAJOR} % 100")
-  set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
+set(sp_runtime_root "/")
+
+if ("WIX" IN_LIST CPACK_GENERATOR)    
+    if (EmptyEpsilon_VERSION_MAJOR GREATER 100)
+	    # WIX does not like major version number > 256.
+	    # So if we're above 100, assume it's a year-like format and strip out century/millenium.
+	    math(EXPR wix_major "${EmptyEpsilon_VERSION_MAJOR} % 100")
+
+        # WIX only care for the bundled PACKAGE_VERSION - fix only this one.
+        set(CPACK_PACKAGE_VERSION "${wix_major}.${EmptyEpsilon_VERSION_MINOR}.${EmptyEpsilon_VERSION_PATCH}")
+    endif()
+    
+    # WIX is... weird.
+    # When packaging, it puts each 'component' into a subdirectory.
+    # Things without a specific component fall under an 'Unspecified' catch-all one[1]
+    # Now when using components, with install targets coming from different projects (via the CPACK_INSTALL_CMAKE_PROJECTS below)
+    # it seems it's just... lost: components ends up in the root directory of the packaging tree instead of the component's.
+    # So we shove everything that's coming from runtime straight under the 'runtime' tree, and voila, we pleased the CMake gods.
+    #
+    # [1]: https://cmake.org/cmake/help/v3.8/variable/CMAKE_INSTALL_DEFAULT_COMPONENT_NAME.html#variable:CMAKE_INSTALL_DEFAULT_COMPONENT_NAME
+    set(sp_runtime_root "/runtime")
+endif()
+
+if(WIN32)
+    # Since the runtime component is mandatory, no point in presenting it to the user.
+    # This ensures we only display one entry as a 'bundle' in the MSI.
+    set(CPACK_COMPONENT_UNSPECIFIED_DEPENDS runtime)
+    set(CPACK_COMPONENT_RUNTIME_HIDDEN TRUE)
+    set(CPACK_COMPONENT_RUNTIME_REQUIRED TRUE)
 endif()
 
 # Setup install targets:
@@ -452,7 +477,7 @@ endif()
 # - For SP, we use only the things having the 'runtime' component (ie shared libs).
 set(CPACK_INSTALL_CMAKE_PROJECTS
     "${PROJECT_BINARY_DIR};${PROJECT_NAME};ALL;/"
-    "${PROJECT_BINARY_DIR}/SeriousProton;SeriousProton;runtime;/"
+    "${PROJECT_BINARY_DIR}/SeriousProton;SeriousProton;runtime;${sp_runtime_root}"
 )
 
 include(CPack)
