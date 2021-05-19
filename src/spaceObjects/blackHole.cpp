@@ -62,6 +62,7 @@ void BlackHole::draw3DTransparent()
 
     std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+    glBlendFunc(GL_ONE, GL_ONE);
 }
 #endif
 

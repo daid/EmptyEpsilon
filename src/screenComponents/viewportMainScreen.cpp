@@ -6,7 +6,14 @@
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
 : GuiViewport3D(owner, id)
 {
-    showCallsigns()->showHeadings()->showSpacedust();
+    uint8_t flags = PreferencesManager::get("main_screen_flags","7").toInt();
+
+    if (flags & flag_callsigns)
+      showCallsigns();
+    if (flags & flag_headings)
+      showHeadings();
+    if (flags & flag_spacedust)
+      showSpacedust();
 
     first_person = PreferencesManager::get("first_person") == "1";
 }
