@@ -53,6 +53,12 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
 
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyShieldUsePerSecond);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyShieldUsePerSecond);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyWarpPerSecond);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyWarpPerSecond);
+
     /// Set the maximum coolant available to engineering. Default is 10.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getMaxCoolant);
@@ -341,6 +347,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&jump_indicator, 0.5);
     registerMemberReplication(&energy_level, 0.1);
+    registerMemberReplication(&energy_warp_per_second, .5f);
+    registerMemberReplication(&energy_shield_use_per_second, .5f);
     registerMemberReplication(&max_energy_level);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
@@ -387,17 +395,22 @@ PlayerSpaceship::PlayerSpaceship()
         assert(n < default_system_power_factors.size());
         systems[n].health = 1.0f;
         systems[n].power_level = 1.0f;
+        systems[n].power_rate_per_second = ShipSystem::default_power_rate_per_second;
         systems[n].power_request = 1.0f;
         systems[n].coolant_level = 0.0f;
-        systems[n].coolant_level = 0.0f;
+        systems[n].coolant_rate_per_second = ShipSystem::default_coolant_rate_per_second;
         systems[n].heat_level = 0.0f;
+        systems[n].heatup_rate_per_second = ShipSystem::default_heatup_rate_per_second;
         systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].power_level);
+        registerMemberReplication(&systems[n].power_rate_per_second, .5f);
         registerMemberReplication(&systems[n].power_request);
         registerMemberReplication(&systems[n].coolant_level);
+        registerMemberReplication(&systems[n].coolant_rate_per_second, .5f);
         registerMemberReplication(&systems[n].coolant_request);
         registerMemberReplication(&systems[n].heat_level, 1.0);
+        registerMemberReplication(&systems[n].heatup_rate_per_second, .5f);
         registerMemberReplication(&systems[n].power_factor);
     }
 
@@ -547,7 +560,7 @@ void PlayerSpaceship::update(float delta)
 
         // Consume power if shields are enabled.
         if (shields_active)
-            useEnergy(delta * energy_shield_use_per_second);
+            useEnergy(delta * getEnergyShieldUsePerSecond());
 
         // Consume power based on subsystem requests and state.
         energy_level += delta * getNetSystemEnergyUsage();
@@ -558,32 +571,32 @@ void PlayerSpaceship::update(float delta)
 
             if (systems[n].power_request > systems[n].power_level)
             {
-                systems[n].power_level += delta * system_power_level_change_per_second;
+                systems[n].power_level += delta * systems[n].power_rate_per_second;
                 if (systems[n].power_level > systems[n].power_request)
                     systems[n].power_level = systems[n].power_request;
             }
             else if (systems[n].power_request < systems[n].power_level)
             {
-                systems[n].power_level -= delta * system_power_level_change_per_second;
+                systems[n].power_level -= delta * systems[n].power_rate_per_second;
                 if (systems[n].power_level < systems[n].power_request)
                     systems[n].power_level = systems[n].power_request;
             }
 
             if (systems[n].coolant_request > systems[n].coolant_level)
             {
-                systems[n].coolant_level += delta * system_coolant_level_change_per_second;
+                systems[n].coolant_level += delta * systems[n].coolant_rate_per_second;
                 if (systems[n].coolant_level > systems[n].coolant_request)
                     systems[n].coolant_level = systems[n].coolant_request;
             }
             else if (systems[n].coolant_request < systems[n].coolant_level)
             {
-                systems[n].coolant_level -= delta * system_coolant_level_change_per_second;
+                systems[n].coolant_level -= delta * systems[n].coolant_rate_per_second;
                 if (systems[n].coolant_level < systems[n].coolant_request)
                     systems[n].coolant_level = systems[n].coolant_request;
             }
 
             // Add heat to overpowered subsystems.
-            addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * system_heatup_per_second);
+            addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * systems[n].heatup_rate_per_second);
         }
 
         // If reactor health is worse than -90% and overheating, it explodes,
@@ -616,7 +629,7 @@ void PlayerSpaceship::update(float delta)
         {
             // If warping, consume energy at a rate of 120% the warp request.
             // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(energy_warp_per_second * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.2f) * (shields_active ? 1.5 : 1.0)))
+            if (!useEnergy(getEnergyWarpPerSecond() * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.2f) * (shields_active ? 1.5 : 1.0)))
                 // If there's not enough energy, fall out of warp.
                 warp_request = 0;
         }
@@ -870,7 +883,7 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
             // Heat damage is specified as damage per second while overheating.
             // Calculate the amount of overheat back to a time, and use that to
             // calculate the actual damage taken.
-            systems[system].health -= overheat / system_heatup_per_second * damage_per_second_on_overheat;
+            systems[system].health -= overheat / systems[system].heatup_rate_per_second * damage_per_second_on_overheat;
 
             if (systems[system].health < -1.0)
                 systems[system].health = -1.0;
