@@ -400,7 +400,7 @@ PlayerSpaceship::PlayerSpaceship()
         systems[n].coolant_level = 0.0f;
         systems[n].coolant_rate_per_second = ShipSystem::default_coolant_rate_per_second;
         systems[n].heat_level = 0.0f;
-        systems[n].heatup_rate_per_second = ShipSystem::default_heatup_rate_per_second;
+        systems[n].heat_rate_per_second = ShipSystem::default_heat_rate_per_second;
         systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].power_level);
@@ -410,7 +410,7 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&systems[n].coolant_rate_per_second, .5f);
         registerMemberReplication(&systems[n].coolant_request);
         registerMemberReplication(&systems[n].heat_level, 1.0);
-        registerMemberReplication(&systems[n].heatup_rate_per_second, .5f);
+        registerMemberReplication(&systems[n].heat_rate_per_second, .5f);
         registerMemberReplication(&systems[n].power_factor);
     }
 
@@ -596,7 +596,7 @@ void PlayerSpaceship::update(float delta)
             }
 
             // Add heat to overpowered subsystems.
-            addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * systems[n].heatup_rate_per_second);
+            addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * systems[n].heat_rate_per_second);
         }
 
         // If reactor health is worse than -90% and overheating, it explodes,
@@ -883,7 +883,7 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
             // Heat damage is specified as damage per second while overheating.
             // Calculate the amount of overheat back to a time, and use that to
             // calculate the actual damage taken.
-            systems[system].health -= overheat / systems[system].heatup_rate_per_second * damage_per_second_on_overheat;
+            systems[system].health -= overheat / systems[system].heat_rate_per_second * damage_per_second_on_overheat;
 
             if (systems[system].health < -1.0)
                 systems[system].health = -1.0;
@@ -2149,7 +2149,7 @@ string PlayerSpaceship::getExportLine()
                 result += ":setSystemCoolantRate(" + string(system) + ", " + string(getSystemCoolantRate(system), 2) + ")";
             }
 
-            if (std::fabs(getSystemHeatRate(system) - ShipSystem::default_heatup_rate_per_second) > std::numeric_limits<float>::epsilon())
+            if (std::fabs(getSystemHeatRate(system) - ShipSystem::default_heat_rate_per_second) > std::numeric_limits<float>::epsilon())
             {
                 result += ":setSystemHeatRate(" + string(system) + ", " + string(getSystemHeatRate(system), 2) + ")";
             }
