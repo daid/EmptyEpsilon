@@ -268,6 +268,12 @@ private:
     GuiToggleButton* can_launch_probe;
     GuiToggleButton* auto_coolant_enabled;
     GuiToggleButton* auto_repair_enabled;
+
+    GuiLabel* energy_warp_per_second{};
+    GuiTextEntry* desired_energy_warp_per_second{};
+
+    GuiLabel* energy_shield_per_second{};
+    GuiTextEntry* desired_energy_shield_per_second{};
 public:
     GuiShipTweakPlayer2(GuiContainer* owner);
 

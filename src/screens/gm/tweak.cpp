@@ -972,6 +972,48 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    energy_warp_per_second = new GuiLabel(left_col, "", "", 30);
+    energy_warp_per_second->setSize(GuiElement::GuiSizeMax, 50);
+    desired_energy_warp_per_second = new GuiTextEntry(left_col, "", "");
+    desired_energy_warp_per_second->setSize(GuiElement::GuiSizeMax, 30);
+    desired_energy_warp_per_second->enterCallback([this](const string& text)
+        {
+            // Perform safe conversion (typos can happen).
+            char* end = nullptr;
+            auto converted = strtof(text.c_str(), &end);
+            if (converted == 0.f && end == text.c_str())
+            {
+                // failed - reset text to current value.
+                desired_energy_warp_per_second->setText(string(this->target->getEnergyWarpPerSecond(), 2));
+            }
+            else
+            {
+                // apply!
+                this->target->setEnergyWarpPerSecond(converted);
+            }
+        });
+
+    energy_shield_per_second = new GuiLabel(left_col, "", "", 30);
+    energy_shield_per_second->setSize(GuiElement::GuiSizeMax, 50);
+    desired_energy_shield_per_second = new GuiTextEntry(left_col, "", "");
+    desired_energy_shield_per_second->setSize(GuiElement::GuiSizeMax, 30);
+    desired_energy_shield_per_second->enterCallback([this](const string& text)
+        {
+            // Perform safe conversion (typos can happen).
+            char* end = nullptr;
+            auto converted = strtof(text.c_str(), &end);
+            if (converted == 0.f && end == text.c_str())
+            {
+                // failed - reset text to current value.
+                desired_energy_shield_per_second->setText(string(this->target->getEnergyShieldUsePerSecond(), 2));
+            }
+            else
+            {
+                // apply!
+                this->target->setEnergyShieldUsePerSecond(converted);
+            }
+        });
+
     // Right column
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", tr("button", "Can scan"), [this](bool value) {
@@ -1033,6 +1075,15 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     can_launch_probe->setValue(target->getCanLaunchProbe());
     auto_coolant_enabled->setValue(target->auto_coolant_enabled);
     auto_repair_enabled->setValue(target->auto_repair_enabled);
+    
+    energy_warp_per_second->setText(tr("player_tweak", "Warp (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyWarpPerSecond())} }));
+    energy_shield_per_second->setText(tr("player_tweak", "Shields (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyShieldUsePerSecond())} }));
+
+    energy_warp_per_second->setVisible(target->hasWarpDrive());
+    desired_energy_warp_per_second->setVisible(energy_warp_per_second->isVisible());
+
+    energy_shield_per_second->setVisible(target->hasShield());
+    desired_energy_shield_per_second->setVisible(energy_shield_per_second->isVisible());
 }
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)
