@@ -1,6 +1,9 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "commsOverlay.h"
+
+#include "gameGlobalInfo.h"
+
 #include "gui/gui2_panel.h"
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_button.h"
@@ -8,6 +11,9 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_textentry.h"
+#include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_autolayout.h"
+#include "gui/gui2_image.h"
 
 #include "onScreenKeyboard.h"
 
@@ -123,11 +129,24 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     }
 
     // Panel for scripted comms with objects.
+    constexpr auto script_comms_box_width = 800.f;
     script_comms_box = new GuiPanel(owner, "COMMS_SCRIPT_BOX");
-    script_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, ABottomCenter);
+    script_comms_box->hide()->setSize(script_comms_box_width, 600)->setPosition(0, -100, ABottomCenter);
+
+    // Header to display key information (currently reputation, clock).
+    constexpr auto header_item_height = 30.f;
+    {
+        constexpr auto header_item_offset = 100.f;
+        constexpr auto header_item_width = script_comms_box_width / 2.f - header_item_offset;
+        
+        script_comms_box_reputation = new GuiKeyValueDisplay(script_comms_box, "REPUTATION", 0.5f, tr("comms_gui", "Reputation:"), "");
+        script_comms_box_clock = new GuiKeyValueDisplay(script_comms_box, "CLOCK", 0.5f, tr("comms_gui", "Clock:"), "");
+        script_comms_box_reputation->setSize(header_item_width, header_item_height)->setPosition(header_item_offset, 0.f, ATopLeft);
+        script_comms_box_clock->setSize(header_item_width, header_item_height)->setPosition(-header_item_offset, 0.f, ATopRight);
+    }
 
     script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
-    script_comms_text->setPosition(20, 30, ATopLeft)->setSize(760, 500);
+    script_comms_text->setPosition(20, header_item_height + 5.f, ATopLeft)->setSize(760, 500);
 
     // List possible responses to a scripted communication.
     script_comms_options = new GuiListbox(script_comms_box, "COMMS_SCRIPT_LIST", [this](int index, string value) {
@@ -167,6 +186,8 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
         script_comms_box->setVisible(my_spaceship->isCommsScriptOpen());
         script_comms_text->setText(my_spaceship->getCommsIncommingMessage());
 
+        script_comms_box_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+
         // Show the scripted comms options. If they've changed, update the lsit
         bool changed = script_comms_options->entryCount() != int(my_spaceship->getCommsReplyOptions().size());
         if (!changed && my_spaceship->getCommsReplyOptions().size() > 0)
@@ -181,6 +202,8 @@ void GuiCommsOverlay::onDraw(sf::RenderTarget& window)
             script_comms_text->setSize(760, 500 - display_options_count * 50);
         }
     }
+
+    script_comms_box_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
 }
 
 void GuiCommsOverlay::clearElements()

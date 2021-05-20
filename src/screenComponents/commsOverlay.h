@@ -10,6 +10,7 @@ class GuiLabel;
 class GuiScrollText;
 class GuiListbox;
 class GuiTextEntry;
+class GuiKeyValueDisplay;
 
 class GuiCommsOverlay : public GuiElement
 {
@@ -34,6 +35,8 @@ private:
     GuiButton* chat_comms_close_button;
 
     GuiPanel* script_comms_box;
+    GuiKeyValueDisplay* script_comms_box_reputation{};
+    GuiKeyValueDisplay* script_comms_box_clock{};
     GuiScrollText* script_comms_text;
     GuiListbox* script_comms_options;
     GuiButton* script_comms_close;
