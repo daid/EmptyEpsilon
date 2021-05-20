@@ -386,9 +386,12 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 JSONGenerator system = systems.createDict(getSystemName(ESystem(n)).c_str());
                 system.write("health", ship->systems[n].health);
                 system.write("power_level", ship->systems[n].power_level);
+                system.write("power_rate_per_second", ship->systems[n].power_rate_per_second);
                 system.write("power_request", ship->systems[n].power_request);
                 system.write("heat", ship->systems[n].heat_level);
+                system.write("heatup_rate_per_second", ship->systems[n].heatup_rate_per_second);
                 system.write("coolant_level", ship->systems[n].coolant_level);
+                system.write("coolant_rate_per_second", ship->systems[n].coolant_rate_per_second);
                 system.write("coolant_request", ship->systems[n].coolant_request);
                 system.write("power_factor", ship->systems[n].power_factor);
             }
