@@ -165,7 +165,6 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
         soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
-    window.popGLStates();
     // Depending on the extensions,
     // SFML may rely on FBOs.
     // calling setActive() ensures the *correct* one is bound,
@@ -498,8 +497,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
 #endif
     sf::Shader::bind(nullptr);
+    window.resetGLStates();
     window.setActive(false);
-    window.pushGLStates();
 
     if (show_callsigns && render_lists.size() > 0)
     {
