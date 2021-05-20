@@ -9,6 +9,8 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
+include(GNUInstallDirs)
+
 # Set a default version.
 # For historical reason, we first honor CPack variables if they are set.
 if(DEFINED CPACK_PACKAGE_VERSION_MAJOR)
@@ -324,9 +326,9 @@ target_compile_definitions(seriousproton_deps
         VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
 
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-        $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+        $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
         $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
-        $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+        $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
 )
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC WITH_DISCORD=$<BOOL:${WITH_DISCORD}>)
@@ -380,7 +382,6 @@ elseif(APPLE)
 elseif(ANDROID)
   android_apk(EmptyEpsilon)
 else()
-    include(GNUInstallDirs)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
     install(DIRECTORY ${EE_RESOURCES} DESTINATION "${CMAKE_INSTALL_DATADIR}/emptyepsilon")
 endif()
@@ -458,6 +459,10 @@ if(NOT DEFINED CPACK_GENERATOR)
     set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev")
   endif()
 endif()
+
+# Allows injection of per-generator logic.
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPackProjectConfig.cmake.in" "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake" @ONLY)
+set(CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake")
 
 if(APPLE)
   if("DragNDrop" IN_LIST CPACK_GENERATOR)
