@@ -207,6 +207,30 @@ public:
     void onDraw(sf::RenderTarget& window) override;
 };
 
+class GuiShipTweakSystemRates : public GuiTweakPage
+{
+public:
+    enum class Type
+    {
+        Power = 0,
+        Heat,
+        Coolant
+    };
+
+    GuiShipTweakSystemRates(GuiContainer* owner, Type type);
+
+    void open(P<SpaceObject> target) override;
+    void onDraw(sf::RenderTarget& window) override;
+private:
+    float getRateValue(ESystem system, Type type) const;
+    void setRateValue(ESystem system, Type type, float value);
+    std::array<GuiLabel*, SYS_COUNT> current_rates;
+    std::array<GuiTextEntry*, SYS_COUNT> desired_rates;
+
+    P<SpaceShip> target;
+    Type type;
+};
+
 class GuiShipTweakPlayer : public GuiTweakPage
 {
 private:
