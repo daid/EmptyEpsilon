@@ -8,6 +8,7 @@
 
 #include "particleEffect.h"
 #include "glObjects.h"
+#include "sfmlCompatibility.h"
 
 #if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
@@ -174,7 +175,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     // SFML docs warn that any library calls (into SFML that is) may
     // freely change the active binding, so change with caution
     // (the window.get*() below and shader/texture binding are 'fine').
-    window.setActive();
+    activateRenderTarget(window);
     ShaderManager::getShader("shaders/billboardShader")->setUniform("camera_position", camera_position);
 
     float camera_fov = 60.0f;
@@ -498,7 +499,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 #endif
     sf::Shader::bind(nullptr);
     window.resetGLStates();
-    window.setActive(false);
+    activateRenderTarget(window, false);
 
     if (show_callsigns && render_lists.size() > 0)
     {

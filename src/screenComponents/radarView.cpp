@@ -8,6 +8,7 @@
 #include "radarView.h"
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
+#include "sfmlCompatibility.h"
 
 namespace
 {
@@ -137,7 +138,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     // Each SFML call may reset the binding,
     // so we have to keep re-activating the target window all the time.
     // We're relying on stencil buffer to draw the radar:
-    radar_target.setActive(true);
+    activateRenderTarget(radar_target, true);
 
     // Stencil setup.
     glEnable(GL_STENCIL_TEST);
@@ -173,7 +174,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         radar_target.draw(circle);
     }
 
-    radar_target.setActive(true);
+    activateRenderTarget(radar_target, true);
     if (fog_style == NebulaFogOfWar)
     {
         // Draw the *blocked* areas.
@@ -191,7 +192,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     }
 
     // Stencil is setup!
-    radar_target.setActive(true);
+    activateRenderTarget(radar_target, true);
     glStencilMask(as_mask(RadarStencil::None)); // disable writes.
     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Back to defaults.
 
@@ -217,7 +218,7 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     drawObjects(radar_target);
 
     // Post masking
-    radar_target.setActive(true);
+    activateRenderTarget(radar_target, true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     if (show_game_master_data)
         drawObjectsGM(radar_target);
@@ -244,10 +245,10 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
         }
     }
     // Done with the stencil.
-    radar_target.setActive(true);
+    activateRenderTarget(radar_target, true);
     glDepthMask(GL_TRUE);
     glDisable(GL_STENCIL_TEST);
-    radar_target.setActive(false);
+    activateRenderTarget(radar_target, false);
 
     if (use_rendertexture)
     {
@@ -736,7 +737,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
     };
 
     // First draw all objects that are maybe hidden.
-    window.setActive(true);
+    activateRenderTarget(window, true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::InBoundsAndVisible));
     for (auto obj : visible_objects)
     {
@@ -747,7 +748,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
     }
 
     // Second, draw all objects that can't hide.
-    window.setActive(true);
+    activateRenderTarget(window, true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     for(SpaceObject* obj : visible_objects)
     {
