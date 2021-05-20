@@ -32,7 +32,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         [this](sf::Vector2f position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
+                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()].first - position) < 1000.0)
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = targets.getWaypointIndex();

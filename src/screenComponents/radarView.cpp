@@ -463,7 +463,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
 
     for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
     {
-        sf::Vector2f screen_position = worldToScreen(my_spaceship->waypoints[n]);
+        sf::Vector2f screen_position = worldToScreen(my_spaceship->waypoints[n].first);
 
         sf::Sprite object_sprite;
         textureManager.setTexture(object_sprite, "waypoint");
@@ -471,7 +471,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
         object_sprite.setPosition(screen_position - sf::Vector2f(0, 10));
         object_sprite.setScale(0.8, 0.8);
         window.draw(object_sprite);
-        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+        drawText(window, sf::FloatRect(screen_position.x, screen_position.y - 10, 0, 0), string(my_spaceship->waypoints[n].second), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
 
         if (style != Rectangular && sf::length(screen_position - radar_screen_center) > std::min(rect.width, rect.height) * 0.5f)
         {
@@ -481,7 +481,7 @@ void GuiRadarView::drawWaypoints(sf::RenderTarget& window)
             object_sprite.setRotation(sf::vector2ToAngle(screen_position - radar_screen_center) - 90);
             window.draw(object_sprite);
 
-            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(n + 1), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
+            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), string(my_spaceship->waypoints[n].second), ACenter, 18, bold_font, colorConfig.ship_waypoint_text);
         }
     }
 }
@@ -800,7 +800,7 @@ void GuiRadarView::drawTargets(sf::RenderTarget& window)
 
     if (my_spaceship && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < my_spaceship->getWaypointCount())
     {
-        sf::Vector2f object_position_on_screen = worldToScreen(my_spaceship->waypoints[targets->getWaypointIndex()]);
+        sf::Vector2f object_position_on_screen = worldToScreen(my_spaceship->waypoints[targets->getWaypointIndex()].first);
 
         target_sprite.setPosition(object_position_on_screen - sf::Vector2f(0, 10));
         window.draw(target_sprite);

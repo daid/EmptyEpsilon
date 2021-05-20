@@ -1539,8 +1539,23 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
         {
             sf::Vector2f position;
             packet >> position;
-            if (waypoints.size() < 9)
-                waypoints.push_back(position);
+            if (waypoints.size() < max_waypoints) {
+                std::bitset<max_waypoints> taken_labels;
+                
+                for(const auto& waypoint: waypoints) {
+                    taken_labels[waypoint.second-1] = true;
+                }
+
+                uint8_t label = 0;
+                for(int n=0; n<taken_labels.size(); n++) {
+                    if(taken_labels[n] != true) {
+                        label = n+1;
+                        break;
+                    }
+                }
+
+                waypoints.emplace_back(position, label);
+            }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
@@ -1557,7 +1572,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             sf::Vector2f position;
             packet >> index >> position;
             if (index >= 0 && index < int(waypoints.size()))
-                waypoints[index] = position;
+                waypoints[index].first = position;
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:

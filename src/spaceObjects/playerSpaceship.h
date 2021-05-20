@@ -6,6 +6,7 @@
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
+#include <bitset>
 
 class ScanProbe;
 
@@ -53,6 +54,9 @@ public:
     constexpr static float max_scanning_delay = 6.0;
     // Maximum number of self-destruction confirmation codes
     constexpr static int max_self_destruct_codes = 3;
+
+    // Maximum number of waypoints
+    constexpr static size_t max_waypoints = 9;
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
@@ -115,10 +119,11 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
+
 public:
     std::vector<CustomShipFunction> custom_functions;
 
-    std::vector<sf::Vector2f> waypoints;
+    std::vector<std::pair<sf::Vector2f,uint8_t>> waypoints;
 
     // Ship functionality
     // Capable of scanning a target
@@ -328,7 +333,7 @@ public:
 
     // Waypoint functions
     int getWaypointCount() { return waypoints.size(); }
-    sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+    sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1].first; return sf::Vector2f(0, 0); }
 
     // Ship control code/password setter
     void setControlCode(string code) { control_code = code.upper(); }
