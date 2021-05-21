@@ -67,6 +67,12 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry(tr("tab", "Systems"), "");
         pages.push_back(new GuiShipTweakSystemPowerFactors(this));
         list->addEntry(tr("tab", "Power"), "");
+        pages.push_back(new GuiShipTweakSystemRates(this, GuiShipTweakSystemRates::Type::Coolant));
+        list->addEntry(tr("tab", "Coolant Rate"), "");
+        pages.push_back(new GuiShipTweakSystemRates(this, GuiShipTweakSystemRates::Type::Heat));
+        list->addEntry(tr("tab", "Heat Rate"), "");
+        pages.push_back(new GuiShipTweakSystemRates(this, GuiShipTweakSystemRates::Type::Power));
+        list->addEntry(tr("tab", "Power Rate"), "");
     }
 
     if (tweak_type == TW_Player)
@@ -703,6 +709,104 @@ void GuiShipTweakSystemPowerFactors::onDraw(sf::RenderTarget& window)
     }
 }
 
+GuiShipTweakSystemRates::GuiShipTweakSystemRates(GuiContainer* owner, Type type)
+    : GuiTweakPage(owner), type{type}
+{
+    GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    left_col->setPosition(50, 25, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    GuiAutoLayout* center_col = new GuiAutoLayout(this, "CENTER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    center_col->setPosition(10, 25, ATopCenter)->setSize(200, GuiElement::GuiSizeMax);
+    GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
+    right_col->setPosition(-25, 25, ATopRight)->setSize(200, GuiElement::GuiSizeMax);
+
+    // Header
+    (new GuiLabel(left_col, "", "", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(center_col, "", tr("current rate"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", tr("desired rate"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        ESystem system = ESystem(n);
+        (new GuiLabel(left_col, "", tr("{system}").format({ {"system", getLocaleSystemName(system)} }), 20))->setSize(GuiElement::GuiSizeMax, 30);
+        current_rates[n] = new GuiLabel(center_col, "", "", 20);
+        current_rates[n]->setSize(GuiElement::GuiSizeMax, 30);
+
+        desired_rates[n] = new GuiTextEntry(right_col, "", "");
+        desired_rates[n]->setSize(GuiElement::GuiSizeMax, 30);
+        desired_rates[n]->enterCallback([this, n](const string& text)
+            {
+                // Perform safe conversion (typos can happen).
+                char* end = nullptr;
+                auto converted = strtof(text.c_str(), &end);
+                if (converted == 0.f && end == text.c_str())
+                {
+                    // failed - reset text to current value.
+                    desired_rates[n]->setText(string(getRateValue(ESystem(n), this->type), 2));
+                }
+                else
+                {
+                    // apply!
+                    setRateValue(ESystem(n), this->type, converted);
+                }
+            });
+    }
+    // Footer
+    (new GuiLabel(center_col, "", tr("Applies on [Enter]"), 20))->setSize(GuiElement::GuiSizeMax, 30);
+}
+
+void GuiShipTweakSystemRates::open(P<SpaceObject> target)
+{
+    P<SpaceShip> ship = target;
+    this->target = ship;
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        current_rates[n]->setText(string(getRateValue(ESystem(n), type), 2));
+    }
+}
+
+void GuiShipTweakSystemRates::onDraw(sf::RenderTarget& window)
+{
+    for (int n = 0; n < SYS_COUNT; n++)
+    {
+        current_rates[n]->setText(string(getRateValue(ESystem(n), type), 2));
+    }
+}
+
+
+float GuiShipTweakSystemRates::getRateValue(ESystem system, Type type) const
+{
+    switch (type)
+    {
+    case Type::Coolant:
+        return target->getSystemCoolantRate(system);
+    case Type::Heat:
+        return target->getSystemHeatRate(system);
+    case Type::Power:
+        return target->getSystemPowerRate(system);
+    }
+
+    LOG(ERROR) << "Unknown rate type " << static_cast<std::underlying_type_t<Type>>(type);
+    return 0.f;
+}
+
+void GuiShipTweakSystemRates::setRateValue(ESystem system, Type type, float value)
+{
+    switch (type)
+    {
+    case Type::Coolant:
+        target->setSystemCoolantRate(system, value);
+        break;
+    case Type::Heat:
+        target->setSystemHeatRate(system, value);
+        break;
+    case Type::Power:
+        target->setSystemPowerRate(system, value);
+        break;
+    default:
+        LOG(ERROR) << "Unknown rate type " << static_cast<std::underlying_type_t<Type>>(type);
+    }
+}
+
 GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
@@ -868,6 +972,48 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     });
     scan_probes_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    energy_warp_per_second = new GuiLabel(left_col, "", "", 30);
+    energy_warp_per_second->setSize(GuiElement::GuiSizeMax, 50);
+    desired_energy_warp_per_second = new GuiTextEntry(left_col, "", "");
+    desired_energy_warp_per_second->setSize(GuiElement::GuiSizeMax, 30);
+    desired_energy_warp_per_second->enterCallback([this](const string& text)
+        {
+            // Perform safe conversion (typos can happen).
+            char* end = nullptr;
+            auto converted = strtof(text.c_str(), &end);
+            if (converted == 0.f && end == text.c_str())
+            {
+                // failed - reset text to current value.
+                desired_energy_warp_per_second->setText(string(this->target->getEnergyWarpPerSecond(), 2));
+            }
+            else
+            {
+                // apply!
+                this->target->setEnergyWarpPerSecond(converted);
+            }
+        });
+
+    energy_shield_per_second = new GuiLabel(left_col, "", "", 30);
+    energy_shield_per_second->setSize(GuiElement::GuiSizeMax, 50);
+    desired_energy_shield_per_second = new GuiTextEntry(left_col, "", "");
+    desired_energy_shield_per_second->setSize(GuiElement::GuiSizeMax, 30);
+    desired_energy_shield_per_second->enterCallback([this](const string& text)
+        {
+            // Perform safe conversion (typos can happen).
+            char* end = nullptr;
+            auto converted = strtof(text.c_str(), &end);
+            if (converted == 0.f && end == text.c_str())
+            {
+                // failed - reset text to current value.
+                desired_energy_shield_per_second->setText(string(this->target->getEnergyShieldUsePerSecond(), 2));
+            }
+            else
+            {
+                // apply!
+                this->target->setEnergyShieldUsePerSecond(converted);
+            }
+        });
+
     // Right column
     // Can scan bool
     can_scan = new GuiToggleButton(right_col, "", tr("button", "Can scan"), [this](bool value) {
@@ -929,6 +1075,15 @@ void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
     can_launch_probe->setValue(target->getCanLaunchProbe());
     auto_coolant_enabled->setValue(target->auto_coolant_enabled);
     auto_repair_enabled->setValue(target->auto_repair_enabled);
+    
+    energy_warp_per_second->setText(tr("player_tweak", "Warp (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyWarpPerSecond())} }));
+    energy_shield_per_second->setText(tr("player_tweak", "Shields (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyShieldUsePerSecond())} }));
+
+    energy_warp_per_second->setVisible(target->hasWarpDrive());
+    desired_energy_warp_per_second->setVisible(energy_warp_per_second->isVisible());
+
+    energy_shield_per_second->setVisible(target->hasShield());
+    desired_energy_shield_per_second->setVisible(energy_shield_per_second->isVisible());
 }
 
 void GuiShipTweakPlayer2::open(P<SpaceObject> target)

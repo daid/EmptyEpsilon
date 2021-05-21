@@ -35,12 +35,8 @@ class PlayerSpaceship : public SpaceShip
 {
 public:
     // Power consumption and generation base rates
-    constexpr static float energy_shield_use_per_second = 1.5f;
-    constexpr static float energy_warp_per_second = 1.0f;
-    constexpr static float system_heatup_per_second = 0.05f;
-    constexpr static float system_power_level_change_per_second = 0.3;
-    // Coolant change rate
-    constexpr static float system_coolant_level_change_per_second = 1.2;
+    constexpr static float default_energy_shield_use_per_second = 1.5f;
+    constexpr static float default_energy_warp_per_second = 1.0f;
     // Total coolant
     constexpr static float max_coolant_per_system = 10.0f;
     float max_coolant;
@@ -115,6 +111,8 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
+    float energy_shield_use_per_second = default_energy_shield_use_per_second;
+    float energy_warp_per_second = default_energy_warp_per_second;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -301,6 +299,12 @@ public:
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
     EAlertLevel getAlertLevel() { return alert_level; }
+
+    // Flow rate controls.
+    float getEnergyShieldUsePerSecond() const { return energy_shield_use_per_second; }
+    void setEnergyShieldUsePerSecond(float rate) { energy_shield_use_per_second = rate; }
+    float getEnergyWarpPerSecond() const { return energy_warp_per_second; }
+    void setEnergyWarpPerSecond(float rate) { energy_warp_per_second = rate; }
 
     // Ship update functions
     virtual void update(float delta) override;
