@@ -83,14 +83,12 @@ end
 -- @tparam SpaceStation comms_target
 function commsStationDocked(comms_source, comms_target)
     local message
-
     if comms_source:isFriendly(comms_target) then
         message = string.format(_("commsStation", "Good day, officer! Welcome to %s.\nWhat can we do for you today?"), comms_target:getCallSign())
     else
         message = string.format(_("commsStation", "Welcome to our lovely station %s."), comms_target:getCallSign())
     end
-
-    setCommsMessage(string.format(_("commsStation", "%s\n\nReputation: %d"), message, comms_source:getReputationPoints()))
+    setCommsMessage(message)
 
     local reply_messages = {
         ["Homing"] = _("commsStation", "Do you have spare homing missiles for us?"),
@@ -170,14 +168,12 @@ end
 -- @tparam SpaceStation comms_target
 function commsStationUndocked(comms_source, comms_target)
     local message
-
     if comms_source:isFriendly(comms_target) then
         message = string.format(_("commsStation", "This is %s. Good day, officer.\nIf you need supplies, please dock with us first."), comms_target:getCallSign())
     else
         message = string.format(_("commsStation", "This is %s. Greetings.\nIf you want to do business, please dock with us first."), comms_target:getCallSign())
     end
-
-    setCommsMessage(string.format(_("commsStation", "%s\n\nReputation: %d"), message, comms_source:getReputationPoints()))
+    setCommsMessage(message)
 
     -- supply drop
     if isAllowedTo(comms_source, comms_target, comms_target.comms_data.services.supplydrop) then
