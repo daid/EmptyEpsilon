@@ -155,3 +155,12 @@ void WarpJammer::onDestruction(ScriptSimpleCallback callback)
 {
     this->on_destruction = callback;
 }
+
+string WarpJammer::getExportLine()
+{
+    string ret = "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    if (getRange()!=7000.0) {
+	    ret += ":setRange("+string(getRange())+")";
+    }
+    return ret;
+}
