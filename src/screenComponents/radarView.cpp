@@ -109,6 +109,21 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     auto use_rendertexture = adjustRenderTexture(background_texture);
     auto& radar_target = use_rendertexture ? background_texture : window;
 
+    if (!use_rendertexture)
+    {
+        // When we are not using a render texture, we must take some care to not overstep our bounds,
+        // quite literally.
+        // We use scissoring to define a 'box' in which all draw operations can happen.
+        // This allows the side main screen to work correctly even when falling back in the non-render texture path.
+        auto origin = radar_target.mapCoordsToPixel(sf::Vector2f{ rect.left, rect.top });
+        auto extents = radar_target.mapCoordsToPixel(sf::Vector2f{ rect.width, rect.height });
+
+        radar_target.setActive(true);
+
+        glEnable(GL_SCISSOR_TEST);
+        glScissor(origin.x, origin.y, extents.x, extents.y);
+    }
+
     // Draw the initial background 'clear' color.
     if (use_rendertexture || style == Rectangular)
     {
@@ -247,6 +262,12 @@ void GuiRadarView::onDraw(sf::RenderTarget& window)
     radar_target.setActive(true);
     glDepthMask(GL_TRUE);
     glDisable(GL_STENCIL_TEST);
+    
+    if (!use_rendertexture)
+    {
+        glDisable(GL_SCISSOR_TEST);
+    }
+
     radar_target.setActive(false);
 
     if (use_rendertexture)
