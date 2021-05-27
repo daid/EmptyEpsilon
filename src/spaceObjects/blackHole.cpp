@@ -7,13 +7,10 @@
 
 #include "scriptInterface.h"
 #include "glObjects.h"
+#include "shaderRegistry.h"
 
 
 #if FEATURE_3D_RENDERING
-sf::Shader* BlackHole::shader = nullptr;
-uint32_t BlackHole::shaderPositionAttribute = 0;
-uint32_t BlackHole::shaderTexCoordsAttribute = 0;
-
 struct VertexAndTexCoords
 {
     sf::Vector3f vertex;
@@ -34,16 +31,6 @@ BlackHole::BlackHole()
     update_delta = 0.0;
     PathPlannerManager::getInstance()->addAvoidObject(this, 7000);
     setRadarSignatureInfo(0.9, 0, 0);
-
-
-#if FEATURE_3D_RENDERING
-    if (!shader && gl::isAvailable())
-    {
-        shader = ShaderManager::getShader("shaders/billboard");
-        shaderPositionAttribute = glGetAttribLocation(shader->getNativeHandle(), "position");
-        shaderTexCoordsAttribute = glGetAttribLocation(shader->getNativeHandle(), "texcoords");
-    }
-#endif
 }
 
 void BlackHole::update(float delta)
@@ -61,13 +48,14 @@ void BlackHole::draw3DTransparent()
         sf::Vector3f(), {0.f, 0.f}
     };
 
-    gl::ScopedVertexAttribArray positions(shaderPositionAttribute);
-    gl::ScopedVertexAttribArray texcoords(shaderTexCoordsAttribute);
+    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("blackHole3d.png")->getNativeHandle());
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 5000.f);
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    shader->setUniform("textureMap", *textureManager.getTexture("blackHole3d.png"));
-    shader->setUniform("color", sf::Glsl::Vec4(1.f, 1.f, 1.f, 5000.f));
-    sf::Shader::bind(shader);
 
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
     glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));

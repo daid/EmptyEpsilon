@@ -15,9 +15,6 @@ class ElectricExplosionEffect : public SpaceObject, public Updatable
     bool on_radar;
 
 #if FEATURE_3D_RENDERING
-    static sf::Shader* particlesShader;
-    static uint32_t particlesShaderPositionAttribute;
-    static uint32_t particlesShaderTexCoordsAttribute;
     // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
     static constexpr size_t max_quad_count = 64;
     static gl::Buffers<2> particlesBuffers;

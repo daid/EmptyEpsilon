@@ -164,6 +164,12 @@ namespace gl
     public:
         explicit ScopedVertexAttribArray(int32_t attrib);
         ~ScopedVertexAttribArray();
+
+        ScopedVertexAttribArray(const ScopedVertexAttribArray&) = delete;
+        ScopedVertexAttribArray& operator=(const ScopedVertexAttribArray&) = delete;
+
+        ScopedVertexAttribArray(ScopedVertexAttribArray&&) noexcept;
+        ScopedVertexAttribArray& operator=(ScopedVertexAttribArray&&) noexcept;
         int32_t get() const { return attrib; }
     private:
         int32_t attrib = -1;

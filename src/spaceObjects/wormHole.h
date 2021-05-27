@@ -17,12 +17,6 @@ class WormHole : public SpaceObject, public Updatable
 
     ScriptSimpleCallback on_teleportation;
 
-#if FEATURE_3D_RENDERING
-    static sf::Shader* shader;
-    static uint32_t shaderPositionAttribute;
-    static uint32_t shaderTexCoordsAttribute;
-#endif
-
 public:
     WormHole();
 

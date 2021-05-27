@@ -1,9 +1,12 @@
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 
 #include "particleEffect.h"
 #include "modelInfo.h"
 #include "featureDefs.h"
 #include "main.h"
+
+#include "shaderRegistry.h"
 
 ModelInfo::ModelInfo()
 : last_engine_particle_time(0), last_warp_particle_time(0), engine_scale(0), warp_scale(0.0f)
@@ -72,10 +75,19 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
     glScalef(data->scale, data->scale, data->scale);
     glTranslatef(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z);
     glDepthFunc(GL_EQUAL);
-    glColor4f(alpha, alpha, alpha, 1);
-    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *texture);
-    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
-    data->mesh->render();
+    {
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glBindTexture(GL_TEXTURE_2D, texture->getNativeHandle());
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        data->mesh->render(positions.get(), texcoords.get(), normals.get());
+    }
+    
     glDepthFunc(GL_LESS);
 
     glPopMatrix();
@@ -85,15 +97,22 @@ void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
 void ModelInfo::renderShield(float alpha)
 {
 #if FEATURE_3D_RENDERING
-    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
-
     glPushMatrix();
-    glColor4f(alpha, alpha, alpha, 1);
     glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
     Mesh* m = Mesh::getMesh("sphere.obj");
-    m->render();
+    {
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("shield_hit_effect.png")->getNativeHandle());
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        m->render(positions.get(), texcoords.get(), normals.get());
+    }
     glPopMatrix();
 #endif//FEATURE_3D_RENDERING
 }
@@ -102,17 +121,23 @@ void ModelInfo::renderShield(float alpha, float angle)
 {
 #if FEATURE_3D_RENDERING
     if (!data) return;
-
-    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *textureManager.getTexture("shield_hit_effect.png"));
-    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
-
     glPushMatrix();
-    glColor4f(alpha, alpha, alpha, 1);
     glRotatef(angle, 0, 0, 1);
     glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
     Mesh* m = Mesh::getMesh("half_sphere.obj");
-    m->render();
+    {
+        ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
+
+        glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("shield_hit_effect.png")->getNativeHandle());
+
+        gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        m->render(positions.get(), texcoords.get(), normals.get());
+    }
     glPopMatrix();
 #endif//FEATURE_3D_RENDERING
 }

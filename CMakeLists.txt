@@ -148,6 +148,7 @@ set(SOURCES
     src/GMMessage.cpp
     src/tutorialGame.cpp
     src/scriptDataStorage.cpp
+    src/shaderRegistry.cpp
     src/glObjects.cpp
     src/menus/joinServerMenu.cpp
     src/menus/serverBrowseMenu.cpp
