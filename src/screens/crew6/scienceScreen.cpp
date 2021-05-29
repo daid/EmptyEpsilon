@@ -398,6 +398,11 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 {
                     info_shield_frequency->setFrequency(ship->shield_frequency);
                     info_beam_frequency->setFrequency(ship->beam_frequency);
+
+                    // Target ship has no shields - inform science operator. 
+                    info_shield_frequency->setEnemyWithoutEquipment(ship->getShieldDataString().size() == 0);
+
+                    info_beam_frequency->setEnemyWithoutEquipment(false);   // Not implemented yet. 
                 }
 
                 // Show the status of each subsystem.
