@@ -4,6 +4,7 @@
 #include "scienceDatabase.h"
 #include "spaceObjects/nebula.h"
 #include "preferenceManager.h"
+#include "shipTemplate.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
@@ -399,10 +400,19 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     info_shield_frequency->setFrequency(ship->shield_frequency);
                     info_beam_frequency->setFrequency(ship->beam_frequency);
 
-                    // Target ship has no shields - inform science operator. 
-                    info_shield_frequency->setEnemyWithoutEquipment(ship->getShieldDataString().size() == 0);
+                    // Show on graph information that target has no shields instead of frequencies. 
+                    info_shield_frequency->setEnemyHasEquipment(ship->getShieldCount() > 0);
 
-                    info_beam_frequency->setEnemyWithoutEquipment(false);   // Not implemented yet. 
+                    // Show on graph information that target has no beams instad of frequencies. 
+                    bool has_beams = false;
+                    for(int n = 0; n < max_beam_weapons; n++)
+                    {
+                        if (ship->beam_weapons[n].getRange() > 0.0) {
+                            has_beams = true;
+                            break;
+                        }
+                    }
+                    info_beam_frequency->setEnemyHasEquipment(has_beams);
                 }
 
                 // Show the status of each subsystem.

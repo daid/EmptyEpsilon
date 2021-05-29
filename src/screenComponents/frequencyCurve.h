@@ -7,7 +7,7 @@ class GuiFrequencyCurve : public GuiPanel
 {
     bool frequency_is_beam;
     bool more_damage_is_positive;
-    bool enemy_without_equipment;   /*< If target ship have beams/shields (depending on frequency_is_beam) */
+    bool enemy_has_equipment;   /*< True if target ship have beams/shields (which of those depends on frequency_is_beam) */
 
     int frequency;
 public:
@@ -17,7 +17,7 @@ public:
 
     GuiFrequencyCurve* setFrequency(int frequency) { this->frequency = frequency; return this; }
 
-    void setEnemyWithoutEquipment(bool state) { this->enemy_without_equipment = state; }
+    void setEnemyHasEquipment(bool state) { this->enemy_has_equipment = state; }
 };
 
 #endif//FREQUENCY_CURVE_H

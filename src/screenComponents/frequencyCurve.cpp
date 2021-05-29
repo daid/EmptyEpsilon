@@ -15,15 +15,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
 
     if (frequency >= 0 && frequency <= SpaceShip::max_frequency)
     {
-        if (enemy_without_equipment) {
-            if (frequency_is_beam) {
-                drawText(window, rect, tr("scienceGraph", "No enemy beams"), ACenter, 35);
-            }
-            else {
-                drawText(window, rect, tr("scienceGraph", "No enemy shields"), ACenter, 35);
-            }
-        }
-        else {
+        if (enemy_has_equipment) {
             float w = (rect.width - 40) / (SpaceShip::max_frequency + 1);
             for(int n=0; n<=SpaceShip::max_frequency; n++)
             {
@@ -70,7 +62,13 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                     text = tr("Damage on your shields");
             }
             drawText(window, sf::FloatRect(rect.left, rect.top, rect.width, 40), text, ACenter, 20);
-        } // end else enemy_without_equipment
+        } // end if enemy_has_equipment
+        else {
+            if (frequency_is_beam)
+                drawText(window, rect, tr("scienceFrequencyGraph", "No enemy beams"), ACenter, 35);
+            else
+                drawText(window, rect, tr("scienceFrequencyGraph", "No enemy shields"), ACenter, 35);
+        }
     }else{
         drawText(window, rect, "No data", ACenter, 35);
     }
