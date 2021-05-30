@@ -10,15 +10,31 @@ static IDiscordCoreEvents events;
 
 static DiscordActivity previousActivity;
 
-DiscordRichPresence::DiscordRichPresence()
+DiscordRichPresence::DiscordRichPresence(const std::filesystem::path& discord_sdk)
+    :discord{DynamicLibrary::open(discord_sdk)}
 {
+    if (!discord)
+    {
+        LOG(WARNING) << "Failed to initialize discord. Not using rich presence.";
+        return;
+    }
+
+    auto discord_create = discord->getFunction<decltype(&DiscordCreate)>("DiscordCreate");
+
+    if (!discord_create)
+    {
+        LOG(WARNING) << "Failed to load discord factory function. Not using rich presence.";
+        return;
+    }
+
     DiscordCreateParams params;
     params.client_id = 697525001603252304;
     params.flags = DiscordCreateFlags_NoRequireDiscord;
     params.events = &events;
     params.event_data = nullptr;
 
-    if (DiscordCreate(DISCORD_VERSION, &params, &core) != DiscordResult_Ok)
+
+    if (discord_create(DISCORD_VERSION, &params, &core) != DiscordResult_Ok)
     {
         LOG(WARNING) << "Discord not installed or not running. Not using discord rich presence";
         return;
@@ -26,6 +42,8 @@ DiscordRichPresence::DiscordRichPresence()
 
     activityManager = core->get_activity_manager(core);
 }
+
+DiscordRichPresence::~DiscordRichPresence() = default;
 
 void DiscordRichPresence::update(float delta)
 {

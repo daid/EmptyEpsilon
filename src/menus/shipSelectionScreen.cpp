@@ -1,4 +1,8 @@
 #include "shipSelectionScreen.h"
+
+#include "featureDefs.h"
+#include "glObjects.h"
+
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
@@ -245,7 +249,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     password_label->setPosition(0, 40, ATopCenter);
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
     password_entry->setPosition(20, 0, ACenterLeft)->setSize(400, 50);
-    password_cancel = new GuiButton(password_entry_box, "PASSWORD_CANCEL_BUTTON", tr("Cancel"), [this]() {
+    password_cancel = new GuiButton(password_entry_box, "PASSWORD_CANCEL_BUTTON", tr("button", "Cancel"), [this]() {
         // Reset the dialog.
         password_label->setText(tr("Enter this ship's control code:"));
         password_entry->setText("");
@@ -421,6 +425,16 @@ void ShipSelectionScreen::update(float delta)
     //Sync our configured user name with the server
     if (my_player_info->name != PreferencesManager::get("username"))
         my_player_info->commandSetName(PreferencesManager::get("username"));
+}
+
+bool ShipSelectionScreen::canDoMainScreen() const
+{
+#if FEATURE_3D_RENDERING
+    return PostProcessor::isEnabled() && sf::Shader::isAvailable() && gl::isAvailable();
+#else
+    // Don't bother checking anything without 3D rendering feature on.
+    return false;
+#endif
 }
 
 void ShipSelectionScreen::updateReadyButton()
