@@ -55,6 +55,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("WARP_2", std::make_tuple("Warp 2", "Num8"));
     newKey("WARP_3", std::make_tuple("Warp 3", "Num9"));
     newKey("WARP_4", std::make_tuple("Warp 4", "Num0"));
+    newKey("INC_WARP", std::make_tuple("Increase Warp", ""));
+    newKey("DEC_WARP", std::make_tuple("Decrease Warp", ""));
     newKey("DOCK_ACTION", std::make_tuple("Dock request/abort/undock", "D"));
     newKey("DOCK_REQUEST", std::make_tuple("Initiate docking", ""));
     newKey("DOCK_ABORT", std::make_tuple("Abort docking", ""));
