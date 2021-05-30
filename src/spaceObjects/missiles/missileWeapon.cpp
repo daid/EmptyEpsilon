@@ -71,7 +71,7 @@ void MissileWeapon::update(float delta)
 
     // Since we do want the range to remain the same, ensure that slow missiles don't die down as fast.
     lifetime -= delta * size_speed_modifier;
-    if (lifetime < 0)
+    if (lifetime < 0 && isServer())
     {
         lifeEnded();
         destroy();
