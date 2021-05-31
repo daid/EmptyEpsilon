@@ -189,7 +189,7 @@ int main(int argc, char** argv)
         LOG(INFO) << "Enabling HTTP script access on port: " << port_nr;
         LOG(INFO) << "NOTE: This is potentially a risk!";
         HttpServer* server = new HttpServer(port_nr);
-        server->addHandler(new HttpRequestFileHandler("www"));
+        server->addHandler(new HttpRequestFileHandler(PreferencesManager::get("www_directory","www")));
         server->addHandler(new HttpScriptHandler());
     }
 
