@@ -205,7 +205,7 @@ void HotkeyMenu::saveHotkeys()
     }
 
     // Read in all TextEntry values and update hotkeys
-    std::regex buttonIdExpression ("(\\[J([0-7])\\])?\\[B([0-9]|[12][0-9]|3[0-1])\\]"); // matches [J0] - [J7] (optional) and  [B0] - [B31]
+    std::regex buttonIdExpression(R"((\[[JB][0-9]+\])+)"); // matches Joystick and keyboard button codes (loosely)
     for (std::pair<string,string> item : hotkey_list)
     {
         text = text_entries[i]->getText();
