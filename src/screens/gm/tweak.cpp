@@ -471,6 +471,16 @@ void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
     {
         shield_slider[n]->setValue(target->shield_level[n]);
         shield_max_slider[n]->setValue(target->shield_max[n]);
+
+        // Set range to 0 on all unused shields, since values set there by GM are not reflected by the game anyways.
+        if(target->shield_count>n) {
+            shield_slider[n]->setRange(0.0, 500);
+            shield_max_slider[n]->setRange(0.0, 500);
+        }
+        else{
+            shield_slider[n]->setRange(0.0, 0);
+            shield_max_slider[n]->setRange(0.0, 0);
+        }
     }
 }
 
