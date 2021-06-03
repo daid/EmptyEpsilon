@@ -41,7 +41,7 @@ struct Speeds
     float forward;
     float reverse;
 };
-template<> int convert<Speeds>::returnType(lua_State* L, Speeds speeds);
+template<> int convert<Speeds>::returnType(lua_State* L, const Speeds &speeds);
 
 
 class ShipSystem
