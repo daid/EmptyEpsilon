@@ -177,7 +177,7 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     textureManager.setAutoSprite(false);
     textureManager.getTexture("Tokka_WalkingMan.png", sf::Vector2i(6, 1)); //Setup the sprite mapping.
-    i18n::load("locale/" + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {

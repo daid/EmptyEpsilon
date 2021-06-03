@@ -172,18 +172,13 @@ OptionsMenu::OptionsMenu()
     //Select the language
     (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     
-    //Don't wan't scripts/locale. Also, compatible with android assets.
-    DirectoryResourceProvider* lang_prov {new DirectoryResourceProvider("resources/locale")};
-    std::vector<string> languages {lang_prov->findResources("*.po")};
-    lang_prov->destroy();
-
+    std::vector<string> languages = findResources("locale/main.*.po");
+    
     for(string &language : languages) 
     {
         //strip extension
-        language = language.substr(0, language.rfind("."));
+        language = language.substr(language.find(".") + 1, language.rfind("."));
     }
-    //get only yy.po, the main language files (not tutorial.xx.po for example)
-    languages.erase(std::remove_if(languages.begin(), languages.end(), [](string &str) { return -1 != str.find("."); }), languages.end()); 
     std::sort(languages.begin(), languages.end());
 
     int default_index = 0;
@@ -196,7 +191,7 @@ OptionsMenu::OptionsMenu()
     (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
     {
         i18n::reset();
-        i18n::load("locale/" + value + ".po");
+        i18n::load("locale/main." + value + ".po");
         PreferencesManager::set("language", value);
     }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     
