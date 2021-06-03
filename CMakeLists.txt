@@ -9,8 +9,6 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-include(GNUInstallDirs)
-
 # Set a default version.
 # For historical reason, we first honor CPack variables if they are set.
 if(DEFINED CPACK_PACKAGE_VERSION_MAJOR)
@@ -32,6 +30,8 @@ else()
 endif()
 
 project(EmptyEpsilon LANGUAGES CXX C  VERSION ${MAJOR}.${MINOR}.${PATCH})
+
+include(GNUInstallDirs)
 
 # Defaults
 set(WITH_DISCORD_DEFAULT OFF)
