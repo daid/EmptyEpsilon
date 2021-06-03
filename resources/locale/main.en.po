@@ -3745,3 +3745,64 @@ msgstr ""
 msgctxt "subclass"
 msgid "High Punch"
 msgstr ""
+
+#: src/screens/gm/gameMasterScreen.cpp:324
+msgctxt "gm_info"
+msgid "Position"
+msgstr ""
+
+#: src/screens/gm/gameMasterScreen.cpp:336
+msgid "gm_info"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:192
+#: src/spaceObjects/mine.cpp:160
+msgctxt "gm_info"
+msgid "Owner"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:199
+msgctxt "gm_info"
+msgid "Target"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:202
+#: src/spaceObjects/mine.cpp:163
+msgctxt "gm_info"
+msgid "Faction"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:203
+msgctxt "gm_info"
+msgid "Lifetime"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:204
+msgctxt "gm_info"
+msgid "Size"
+msgstr ""
+
+#: src/spaceObjects/cpuShip.cpp:306
+msgctxt "gm_info"
+msgid "Orders"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:271
+msgctxt "gm_info"
+msgid "CallSign"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:272
+msgctxt "gm_info"
+msgid "Type"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:273
+msgctxt "gm_info"
+msgid "Hull"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:278
+msgctxt "gm_info"
+msgid "Shield"
+msgstr ""

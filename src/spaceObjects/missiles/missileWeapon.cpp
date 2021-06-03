@@ -2,6 +2,8 @@
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
 
+#include "i18n.h"
+
 
 /// Base class for every missile (mines are not missiles)
 /// You cannot create a missile in script with this class, use derived classes
@@ -69,7 +71,7 @@ void MissileWeapon::update(float delta)
 
     // Since we do want the range to remain the same, ensure that slow missiles don't die down as fast.
     lifetime -= delta * size_speed_modifier;
-    if (lifetime < 0)
+    if (lifetime < 0 && isServer())
     {
         lifeEnded();
         destroy();
@@ -187,19 +189,19 @@ std::unordered_map<string, string> MissileWeapon::getGMInfo()
 
     if (owner)
     {
-        ret["Owner"] = owner->getCallSign();
+        ret[trMark("gm_info", "Owner")] = owner->getCallSign();
     }
 
     P<SpaceObject> target = game_server->getObjectById(target_id);
 
     if (target)
     {
-        ret["Target"] = target->getCallSign();
+        ret[trMark("gm_info", "Target")] = target->getCallSign();
     }
 
-    ret["Faction"] = getLocaleFaction();
-    ret["Lifetime"] = lifetime;
-    ret["Size"] = getMissileSize();
+    ret[trMark("gm_info", "Faction")] = getLocaleFaction();
+    ret[trMark("gm_info", "Lifetime")] = lifetime;
+    ret[trMark("gm_info", "Size")] = getMissileSize();
 
     return ret;
 }

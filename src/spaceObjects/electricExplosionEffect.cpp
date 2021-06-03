@@ -3,11 +3,9 @@
 #include "main.h"
 #include "electricExplosionEffect.h"
 #include "glObjects.h"
+#include "shaderRegistry.h"
 
 #if FEATURE_3D_RENDERING
-sf::Shader* ElectricExplosionEffect::particlesShader = nullptr;
-uint32_t ElectricExplosionEffect::particlesShaderPositionAttribute = 0;
-uint32_t ElectricExplosionEffect::particlesShaderTexCoordsAttribute = 0;
 gl::Buffers<2> ElectricExplosionEffect::particlesBuffers(gl::Unitialized{});
 #endif
 
@@ -35,12 +33,8 @@ ElectricExplosionEffect::ElectricExplosionEffect()
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
 #if FEATURE_3D_RENDERING
-    if (!particlesShader && gl::isAvailable())
+    if (!particlesBuffers[0] && gl::isAvailable())
     {
-        particlesShader = ShaderManager::getShader("shaders/billboard");
-        particlesShaderPositionAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "position");
-        particlesShaderTexCoordsAttribute = glGetAttribLocation(particlesShader->getNativeHandle(), "texcoords");
-
         particlesBuffers = gl::Buffers<2>();
 
         
@@ -99,16 +93,25 @@ void ElectricExplosionEffect::draw3DTransparent()
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
 
-    glPushMatrix();
-    glScalef(scale * size, scale * size, scale * size);
-    glColor3f(alpha, alpha, alpha);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
-    ShaderManager::getShader("shaders/basicShader")->setUniform("textureMap", *textureManager.getTexture("electric_sphere_texture.png"));
-    sf::Shader::bind(ShaderManager::getShader("shaders/basicShader"));
+    glPushMatrix();
     Mesh* m = Mesh::getMesh("sphere.obj");
-    m->render();
-    glScalef(0.5, 0.5, 0.5);
-    m->render();
+    {
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("electric_sphere_texture.png")->getNativeHandle());
+
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+        glScalef(scale * size, scale * size, scale * size);
+        m->render(positions.get(), texcoords.get(), normals.get());
+
+        glScalef(0.5f, 0.5f, 0.5f);
+        m->render(positions.get(), texcoords.get(), normals.get());
+        
+    }
     glPopMatrix();
 
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 3.0f);
@@ -118,14 +121,18 @@ void ElectricExplosionEffect::draw3DTransparent()
 
     std::array<sf::Vector3f, 4 * max_quad_count> vertices;
 
-    particlesShader->setUniform("textureMap", *textureManager.getTexture("particle.png"));
+    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
 
-    sf::Shader::bind(particlesShader);
-    particlesShader->setUniform("color", sf::Glsl::Vec4(r, g, b, size / 32.0f));
+    shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
+    glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
+
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
-    gl::ScopedVertexAttribArray positions(particlesShaderPositionAttribute);
-    gl::ScopedVertexAttribArray texcoords(particlesShaderTexCoordsAttribute);
+    
 
     // Set up attribs
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);

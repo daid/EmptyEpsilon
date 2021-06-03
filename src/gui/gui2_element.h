@@ -94,7 +94,12 @@ public:
 private:
     void updateRect(sf::FloatRect parent_rect);
 protected:
-    void adjustRenderTexture(sf::RenderTexture& texture);
+    /*! Setup (and creates) a RenderTexture with a view that fits this element.
+    * \param texture inout The RT target to update
+    * \return Whether the texture was successfully created/updated.
+    */
+    [[nodiscard]]
+    bool adjustRenderTexture(sf::RenderTexture& texture);
     void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color = sf::Color::White, const sf::RenderStates& states = sf::RenderStates::Default);
 
     /*!

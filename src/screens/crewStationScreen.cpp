@@ -17,13 +17,16 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/joystickConfig.h"
 
-CrewStationScreen::CrewStationScreen()
+CrewStationScreen::CrewStationScreen(bool with_main_screen)
 {
-    // Create a 3D viewport behind everything, to serve as the right-side panel
-    viewport = new GuiViewportMainScreen(this, "3D_VIEW");
-    viewport->showCallsigns()->showHeadings()->showSpacedust();
-    viewport->setPosition(1200, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    viewport->hide();
+    if (with_main_screen)
+    {
+        // Create a 3D viewport behind everything, to serve as the right-side panel
+        viewport = new GuiViewportMainScreen(this, "3D_VIEW");
+        viewport->showCallsigns()->showHeadings()->showSpacedust();
+        viewport->setPosition(1200, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        viewport->hide();
+    }
 
     main_panel = new GuiElement(this, "MAIN");
     main_panel->setSize(1200, GuiElement::GuiSizeMax);
@@ -162,15 +165,24 @@ void CrewStationScreen::update(float delta)
         return;
     }
 
-    // Responsively show/hide the 3D viewport.
-    if (!main_screen_enabled || viewport->getRect().width < viewport->getRect().height / 3.0f)
+    if (viewport)
     {
-        viewport->hide();
-        main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    } else {
-        viewport->show();
-        tileViewport();
+        // Responsively show/hide the 3D viewport.
+        if (viewport->getRect().width < viewport->getRect().height / 3.0f)
+        {
+            viewport->hide();
+            main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        }
+        else {
+            viewport->show();
+            tileViewport();
+        }
     }
+    else
+    {
+        main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
+    
 
     if (my_spaceship)
     {
@@ -347,6 +359,9 @@ string CrewStationScreen::listHotkeysLimited(string station)
 
 void CrewStationScreen::tileViewport()
 {
+    if (!viewport)
+        return;
+
     if (current_position == singlePilot)
     {
         main_panel->setSize(1000, GuiElement::GuiSizeMax);

@@ -1,3 +1,10 @@
+# Set minimum target macOS version: https://cmake.org/cmake/help/v3.8/variable/CMAKE_OSX_DEPLOYMENT_TARGET.html#variable:CMAKE_OSX_DEPLOYMENT_TARGET
+# SFML targets 10.7, however EE targets C++17 features only available in 10.15+ (Catalina, June 2019).
+# Must be first!
+if(NOT DEFINED ENV{MACOSX_DEPLOYMENT_TARGET})
+  set(ENV{MACOSX_DEPLOYMENT_TARGET} "10.15")
+endif()
+
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -24,8 +31,21 @@ endif()
 
 project(EmptyEpsilon LANGUAGES CXX C  VERSION ${MAJOR}.${MINOR}.${PATCH})
 
+include(GNUInstallDirs)
+
+# Defaults
+set(WITH_DISCORD_DEFAULT OFF)
+if(WIN32)
+  set(WITH_DISCORD_DEFAULT ON)
+endif()
+
 # User-settings
 set(SERIOUS_PROTON_DIR "../SeriousProton" CACHE PATH "Path to SeriousProton")
+if(NOT ANDROID)
+    option(WITH_DISCORD "Build with Discord support" ${WITH_DISCORD_DEFAULT})
+else()
+    set(WITH_DISCORD OFF)
+endif()
 
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
@@ -48,31 +68,41 @@ set(DOWNLOADS_DIR "${PROJECT_BINARY_DIR}/downloads")
 file(MAKE_DIRECTORY "${EXTERNAL_DIR}" "${DOWNLOADS_DIR}")
 
 # Discord
-if(WIN32)
+if(WITH_DISCORD)
   set(DISCORD_ARCH "x86_64")
   if(${CMAKE_SIZEOF_VOID_P} EQUAL 4)
     set(DISCORD_ARCH "x86")
   endif()
+  set(DISCORD_INCLUDE_PATH "${EXTERNALS_DIR}/discord/c")
   set(DISCORD_LIB_PATH "${EXTERNALS_DIR}/discord/lib/${DISCORD_ARCH}")
-  file(MAKE_DIRECTORY "${DISCORD_LIB_PATH}")
-  if(NOT EXISTS "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib")
+  file(MAKE_DIRECTORY "${DISCORD_INCLUDE_PATH}")
+  if(NOT EXISTS "${DISCORD_INCLUDE_PATH}/discord_game_sdk.h")
     set(DISCORD_GAME_SDK "${DOWNLOADS_DIR}/discord_game_sdk.zip")
     file(DOWNLOAD "https://dl-game-sdk.discordapp.net/latest/discord_game_sdk.zip" "${DISCORD_GAME_SDK}" TIMEOUT 60 TLS_VERIFY ON)
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${DISCORD_GAME_SDK}" WORKING_DIRECTORY "${EXTERNALS_DIR}/discord")
-    if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    if(WIN32 AND CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
       # Discord uses Windows.h (capital W) and that does not play nice when cross-compiling.
       # we want to patch with a lowercase windows.h
       message(STATUS "Patching discord_game_sdk.h, using a lowercase Windows.h (cross-compilation compatibility)")
       execute_process(COMMAND sed -i "s/<Windows.h>/<windows.h>/g" c/discord_game_sdk.h WORKING_DIRECTORY "${EXTERNALS_DIR}/discord")
     endif()
   endif()
-  
+  add_library(discord_h INTERFACE IMPORTED)
+  set_target_properties(discord_h PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${DISCORD_INCLUDE_PATH}"  
+  )
   add_library(discord SHARED IMPORTED)
   set_target_properties(discord PROPERTIES
-    IMPORTED_LOCATION "${DISCORD_LIB_PATH}/discord_game_sdk.dll"
-    IMPORTED_IMPLIB "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib"
-    INTERFACE_INCLUDE_DIRECTORIES "${EXTERNALS_DIR}/discord/c/"
+    IMPORTED_LOCATION "${DISCORD_LIB_PATH}/discord_game_sdk${CMAKE_SHARED_LIBRARY_SUFFIX}"
   )
+  
+  if (WIN32)
+    set_target_properties(discord PROPERTIES
+      IMPORTED_IMPLIB "${DISCORD_LIB_PATH}/discord_game_sdk.dll.lib"
+    )
+  endif()
+
+  target_link_libraries(discord INTERFACE discord_h)
 endif()
 
 # GLM
@@ -87,14 +117,6 @@ if(NOT EXISTS "${GLM_BASE_PATH}/glm/CMakeLists.txt")
 endif()
 
 add_subdirectory("${GLM_BASE_PATH}/glm" "${PROJECT_BINARY_DIR}/glm" EXCLUDE_FROM_ALL)
-
-
-# Set minimum target macOS version
-if(APPLE)
-    set(MACOSX_DEPLOYMENT_TARGET "10.10")
-    set(CMAKE_INSTALL_PREFIX ".")
-endif()
-
 
 set(SOURCES
     src/main.cpp
@@ -126,6 +148,7 @@ set(SOURCES
     src/GMMessage.cpp
     src/tutorialGame.cpp
     src/scriptDataStorage.cpp
+    src/shaderRegistry.cpp
     src/glObjects.cpp
     src/menus/joinServerMenu.cpp
     src/menus/serverBrowseMenu.cpp
@@ -283,9 +306,14 @@ set(SOURCES
     src/hardware/devices/philipsHueDevice.cpp
 )
 
-if (WIN32)
-  list(APPEND SOURCES EmptyEpsilon.rc src/discord.cpp)
+if (WITH_DISCORD)
+  list(APPEND SOURCES src/discord.cpp)
 endif()
+
+if (WIN32)
+  list(APPEND SOURCES EmptyEpsilon.rc)
+endif()
+
 
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -299,10 +327,12 @@ target_compile_definitions(seriousproton_deps
         VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
 
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-        $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+        $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
         $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
-        $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/emptyepsilon/">
+        $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
 )
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC WITH_DISCORD=$<BOOL:${WITH_DISCORD}>)
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC
@@ -319,7 +349,8 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         seriousproton glm::glm opengl
         "$<$<BOOL:${ANDROID}>:log;android>"
-        "$<$<BOOL:${WIN32}>:iphlpapi;discord>"
+        "$<$<BOOL:${WIN32}>:iphlpapi>"
+        "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
         "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"   
 )
 
@@ -341,20 +372,32 @@ if(WIN32)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
     install(DIRECTORY ${EE_RESOURCES} DESTINATION .)
 
-    install(FILES "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION .)
     if(MSVC)
       # Not all configuration emit a pdb (ie Release), make this optional.
       install(FILES "$<TARGET_PDB_FILE:${PROJECT_NAME}>" DESTINATION . OPTIONAL)
     endif()
 elseif(APPLE)
-  install(FILES logo.icns DESTINATION "${PROJECT_NAME}.app/Contents/Resources" RENAME "${PROJECT_NAME}.icns")
-  install(DIRECTORY ${EE_RESOURCES} DESTINATION "${PROJECT_NAME}.app/Contents/Resources")
+  install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION . RUNTIME DESTINATION bin)
+  install(FILES logo.icns DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" RENAME "${PROJECT_NAME}.icns")
+  install(DIRECTORY ${EE_RESOURCES} DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources")
 elseif(ANDROID)
   android_apk(EmptyEpsilon)
 else()
-    include(GNUInstallDirs)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
     install(DIRECTORY ${EE_RESOURCES} DESTINATION "${CMAKE_INSTALL_DATADIR}/emptyepsilon")
+endif()
+
+if(WITH_DISCORD)
+    set(discord_install_prefix)
+    if(WIN32)
+        set(discord_install_prefix ".")
+    elseif(APPLE)
+        set(discord_install_prefix "${PROJECT_NAME}.app/Contents/Resources")
+    else()
+        set(discord_install_prefix "${CMAKE_INSTALL_DATADIR}/emptyepsilon")
+    endif()
+
+    install(PROGRAMS "$<TARGET_PROPERTY:discord,IMPORTED_LOCATION>" DESTINATION "${discord_install_prefix}/plugins")
 endif()
 
 find_package(PythonInterp)
@@ -369,12 +412,12 @@ if(PYTHONINTERP_FOUND)
   
   # Matches install logic above.
   if(WIN32)
-    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION .)
+    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION . OPTIONAL)
   elseif(APPLE)
-    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "${PROJECT_NAME}.app/Contents/Resources")
+    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" OPTIONAL)
   elseif(NOT ANDROID)
     # DOCDIR already has PROJECT_NAME (EmptyEpsilon) appended (from CMake docs)
-    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+    install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "${CMAKE_INSTALL_DOCDIR}" OPTIONAL)
   endif()
 endif()
 
@@ -386,9 +429,29 @@ add_custom_target(update_locale
     COMMAND xgettext --keyword=_:1c,2 --keyword=_:1 --omit-header -j -d resources/locale/tutorial.en scripts/tutorial_*.lua
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
-set(CPACK_PACKAGE_EXECUTABLES ${PROJECT_NAME})
+# Generic settings
+set(CPACK_PACKAGE_EXECUTABLES "${PROJECT_NAME};Empty Epsilon (${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})")
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_CONTACT "https://github.com/daid/")
+
+set(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/logo.png")
+set(CPACK_PACKAGE_CHECKSUM SHA256)
+
+# WIX (win installer)
+# Setup the upgrade GUID to have one per version.
+# https://tools.ietf.org/html/rfc4122#appendix-C
+set(GUID_NAMESPACE_URL 6ba7b810-9dad-11d1-80b4-00c04fd430c8) # "Name string is URL" - in the appendix linked above.
+string(UUID EMPTYEPSILON_GUID NAMESPACE ${GUID_NAMESPACE_URL} NAME "https://github.com/daid/EmptyEpsilon" TYPE SHA1)
+
+string(UUID CPACK_WIX_UPGRADE_GUID NAMESPACE ${EMPTYEPSILON_GUID} NAME "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}" TYPE SHA1)
+set(CPACK_WIX_UI_BANNER "${CMAKE_CURRENT_SOURCE_DIR}/resources/logo_full.png")
+set(CPACK_WIX_UI_DIALOG "${CMAKE_CURRENT_SOURCE_DIR}/resources/logo_white.png")
+# Add/Remove programs info.
+set(CPACK_WIX_PROPERTY_ARPHELPLINK "https://daid.github.io/EmptyEpsilon/#tabs=6")
+set(CPACK_WIX_PROPERTY_APPURLINFOABOUT "https://daid.github.io/EmptyEpsilon/#tabs=0")
+set(CPACK_WIX_PROPERTY_ARPURLUPDATEINFO "https://daid.github.io/EmptyEpsilon/#tabs=5")
+set(CPACK_WIX_PRODUCT_ICON "${CMAKE_CURRENT_SOURCE_DIR}/logo.ico")
+
 if(NOT DEFINED CPACK_GENERATOR)
   if(WIN32)
     set(CPACK_GENERATOR "ZIP")
@@ -398,12 +461,70 @@ if(NOT DEFINED CPACK_GENERATOR)
   endif()
 endif()
 
+# Allows injection of per-generator logic.
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/CPackProjectConfig.cmake.in" "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake" @ONLY)
+set(CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake")
+
+if(APPLE)
+  if("DragNDrop" IN_LIST CPACK_GENERATOR)
+    if(DEFINED SFML_ROOT)
+      if(SFML_ROOT MATCHES "Frameworks$")
+        # Copy SFML and its extlibs to binary dir.
+	      # SFML_ROOT *should* be the Frameworks folder!
+	      execute_process(
+		      COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_ROOT}/" "${CMAKE_BINARY_DIR}/Frameworks/"
+		      COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_ROOT}/../extlibs/" "${CMAKE_BINARY_DIR}/Frameworks/")
+	      install(CODE "
+  		    include(BundleUtilities)
+  		    fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${CMAKE_BINARY_DIR};${CMAKE_BINARY_DIR}/Frameworks\")
+	      ")
+      else()
+        message(WARNING "macOS DMG packaging: SFML_ROOT *must* point to SFML's Frameworks folder (no trailing slashes). The bundle will not be fixed up properly.")
+      endif()
+    else()
+      # This is usually the case when using sfml from homebrew, which sadly not portable enough for DMG packages.
+      message(WARNING "macOS DMG package requested - please set SFML_ROOT, otherwise the bundle will not be fixed up properly.")
+    endif()
+  endif()
+endif()
+
+set(sp_runtime_root "/")
+
+if ("WIX" IN_LIST CPACK_GENERATOR)    
+    if (EmptyEpsilon_VERSION_MAJOR GREATER 100)
+	    # WIX does not like major version number > 256.
+	    # So if we're above 100, assume it's a year-like format and strip out century/millenium.
+	    math(EXPR wix_major "${EmptyEpsilon_VERSION_MAJOR} % 100")
+
+        # WIX only care for the bundled PACKAGE_VERSION - fix only this one.
+        set(CPACK_PACKAGE_VERSION "${wix_major}.${EmptyEpsilon_VERSION_MINOR}.${EmptyEpsilon_VERSION_PATCH}")
+    endif()
+    
+    # WIX is... weird.
+    # When packaging, it puts each 'component' into a subdirectory.
+    # Things without a specific component fall under an 'Unspecified' catch-all one[1]
+    # Now when using components, with install targets coming from different projects (via the CPACK_INSTALL_CMAKE_PROJECTS below)
+    # it seems it's just... lost: components ends up in the root directory of the packaging tree instead of the component's.
+    # So we shove everything that's coming from runtime straight under the 'runtime' tree, and voila, we pleased the CMake gods.
+    #
+    # [1]: https://cmake.org/cmake/help/v3.8/variable/CMAKE_INSTALL_DEFAULT_COMPONENT_NAME.html#variable:CMAKE_INSTALL_DEFAULT_COMPONENT_NAME
+    set(sp_runtime_root "/runtime")
+endif()
+
+if(WIN32)
+    # Since the runtime component is mandatory, no point in presenting it to the user.
+    # This ensures we only display one entry as a 'bundle' in the MSI.
+    set(CPACK_COMPONENT_UNSPECIFIED_DEPENDS runtime)
+    set(CPACK_COMPONENT_RUNTIME_HIDDEN TRUE)
+    set(CPACK_COMPONENT_RUNTIME_REQUIRED TRUE)
+endif()
+
 # Setup install targets:
 # - For EE, we use everything that's been provided with install command.
 # - For SP, we use only the things having the 'runtime' component (ie shared libs).
 set(CPACK_INSTALL_CMAKE_PROJECTS
     "${PROJECT_BINARY_DIR};${PROJECT_NAME};ALL;/"
-    "${PROJECT_BINARY_DIR}/SeriousProton;SeriousProton;runtime;/"
+    "${PROJECT_BINARY_DIR}/SeriousProton;SeriousProton;runtime;${sp_runtime_root}"
 )
 
 include(CPack)
