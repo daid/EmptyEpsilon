@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "engine.h"
 #include "hotkeyMenu.h"
+#include <regex>
 
 #include "gui/hotkeyBinder.h"
 #include "gui/gui2_autolayout.h"
@@ -204,14 +205,15 @@ void HotkeyMenu::saveHotkeys()
     }
 
     // Read in all TextEntry values and update hotkeys
+    std::regex buttonIdExpression(R"((\[[JB][0-9]+\])+)"); // matches Joystick and keyboard button codes (loosely)
     for (std::pair<string,string> item : hotkey_list)
     {
         text = text_entries[i]->getText();
         hotkey_exists = HotkeyConfig::get().setHotkey(category, item, text);
-
-        if (!hotkey_exists)
+        std::smatch matches;
+        if (!hotkey_exists && !std::regex_match(text, matches, buttonIdExpression))
         {
-            // Keys without equivalent SFML codes can't be accepted.
+            // Keys without equivalent SFML codes or joystick button code can't be accepted.
             // Blank the corresponding key entry field.
             text_entries[i]->setText("");
 
