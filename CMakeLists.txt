@@ -49,6 +49,11 @@ endif()
 
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
+# Enable colored output with Ninja
+if(CMAKE_GENERATOR MATCHES "Ninja")
+    add_compile_options (-fdiagnostics-color)
+endif()
+
 # Dependencies
 
 # Setup OpenGl
