@@ -65,6 +65,8 @@ private:
     GuiSlider* jump_min_distance_slider;
     GuiSlider* jump_max_distance_slider;
     GuiToggleButton* can_be_destroyed_toggle;
+    GuiSlider* short_range_radar_slider;
+    GuiSlider* long_range_radar_slider;
 public:
     GuiTweakShip(GuiContainer* owner);
 
@@ -206,6 +208,30 @@ public:
     void onDraw(sf::RenderTarget& window) override;
 };
 
+class GuiShipTweakSystemRates : public GuiTweakPage
+{
+public:
+    enum class Type
+    {
+        Power = 0,
+        Heat,
+        Coolant
+    };
+
+    GuiShipTweakSystemRates(GuiContainer* owner, Type type);
+
+    void open(P<SpaceObject> target) override;
+    void onDraw(sf::RenderTarget& window) override;
+private:
+    float getRateValue(ESystem system, Type type) const;
+    void setRateValue(ESystem system, Type type, float value);
+    std::array<GuiLabel*, SYS_COUNT> current_rates;
+    std::array<GuiTextEntry*, SYS_COUNT> desired_rates;
+
+    P<SpaceShip> target;
+    Type type;
+};
+
 class GuiShipTweakPlayer : public GuiTweakPage
 {
 private:
@@ -233,8 +259,6 @@ private:
     P<PlayerSpaceship> target;
 
     GuiSlider* coolant_slider;
-    GuiSlider* short_range_radar_slider;
-    GuiSlider* long_range_radar_slider;
     GuiSlider* max_scan_probes_slider;
     GuiSlider* scan_probes_slider;
     GuiToggleButton* can_scan;
@@ -245,6 +269,12 @@ private:
     GuiToggleButton* can_launch_probe;
     GuiToggleButton* auto_coolant_enabled;
     GuiToggleButton* auto_repair_enabled;
+
+    GuiLabel* energy_warp_per_second{};
+    GuiTextEntry* desired_energy_warp_per_second{};
+
+    GuiLabel* energy_shield_per_second{};
+    GuiTextEntry* desired_energy_shield_per_second{};
 public:
     GuiShipTweakPlayer2(GuiContainer* owner);
 

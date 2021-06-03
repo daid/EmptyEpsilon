@@ -17,6 +17,7 @@ class Nebula : public SpaceObject
 
     int radar_visual;
     NebulaCloud clouds[cloud_count];
+
 public:
     Nebula();
 

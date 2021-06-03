@@ -1,7 +1,13 @@
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 
 #include "featureDefs.h"
 #include "rotatingModelView.h"
+
+#include "glObjects.h"
+#include "shaderRegistry.h"
+
+#include <array>
 
 #if FEATURE_3D_RENDERING
 static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
@@ -50,19 +56,10 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
     glRotatef(90, 1, 0, 0);
     glScalef(1,1,-1);
 
-    glColor4f(1,1,1,1);
     glDisable(GL_BLEND);
     sf::Texture::bind(NULL);
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
-
-    {
-        float lightpos1[4] = {0, 0, 0, 1.0};
-        glLightfv(GL_LIGHT1, GL_POSITION, lightpos1);
-
-        float lightpos0[4] = {20000, 20000, 20000, 1.0};
-        glLightfv(GL_LIGHT0, GL_POSITION, lightpos0);
-    }
 
     glTranslatef(0, -200, 0);
     glRotatef(-30, 1, 0, 0);
@@ -72,55 +69,74 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         glScalef(scale, scale, scale);
         model->render();
 #ifdef DEBUG
-
-        sf::Shader::bind(NULL);
-        for (const EngineEmitterData& ee : model->engine_emitters)
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
         {
-            sf::Vector3f offset = ee.position * model->scale;
-            float r = model->scale * ee.scale * 0.5;
+            // Common state - matrices.
+            std::array<float, 16> matrix;
+            glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, matrix.data());
 
-            glColor3f(ee.color.x, ee.color.y, ee.color.z);
-            glBegin(GL_LINES);
-            glVertex3f(offset.x + r, offset.y, offset.z);
-            glVertex3f(offset.x - r, offset.y, offset.z);
-            glVertex3f(offset.x, offset.y + r, offset.z);
-            glVertex3f(offset.x, offset.y - r, offset.z);
-            glVertex3f(offset.x, offset.y, offset.z + r);
-            glVertex3f(offset.x, offset.y, offset.z - r);
-            glEnd();
-        }
-        float r = model->getRadius() * 0.1f;
-        glColor3f(1.0, 1.0, 1.0);
-        for (const sf::Vector3f& position : model->beam_position)
-        {
-            sf::Vector3f offset = position * model->scale;
+            glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::ModelView), 1, GL_FALSE, matrix.data());
 
-            glBegin(GL_LINES);
-            glVertex3f(offset.x + r, offset.y, offset.z);
-            glVertex3f(offset.x - r, offset.y, offset.z);
-            glVertex3f(offset.x, offset.y + r, offset.z);
-            glVertex3f(offset.x, offset.y - r, offset.z);
-            glVertex3f(offset.x, offset.y, offset.z + r);
-            glVertex3f(offset.x, offset.y, offset.z - r);
-            glEnd();
-        }
-        for (const sf::Vector3f& position : model->tube_position)
-        {
-            sf::Vector3f offset = position * model->scale;
+            // Vertex attrib
+            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
 
-            glBegin(GL_LINES);
-            glVertex3f(offset.x + r * 3, offset.y, offset.z);
-            glVertex3f(offset.x - r, offset.y, offset.z);
-            glVertex3f(offset.x, offset.y + r, offset.z);
-            glVertex3f(offset.x, offset.y - r, offset.z);
-            glVertex3f(offset.x, offset.y, offset.z + r);
-            glVertex3f(offset.x, offset.y, offset.z - r);
-            glEnd();
+            for (const EngineEmitterData& ee : model->engine_emitters)
+            {
+                sf::Vector3f offset = ee.position * model->scale;
+                float r = model->scale * ee.scale * 0.5;
+
+                glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
+                auto vertices = {
+                    sf::Vector3f{offset.x + r, offset.y, offset.z},
+                    sf::Vector3f{offset.x - r, offset.y, offset.z},
+                    sf::Vector3f{offset.x, offset.y + r, offset.z},
+                    sf::Vector3f{offset.x, offset.y - r, offset.z},
+                    sf::Vector3f{offset.x, offset.y, offset.z + r},
+                    sf::Vector3f{offset.x, offset.y, offset.z - r}
+                };
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), std::begin(vertices));
+                glDrawArrays(GL_LINES, 0, vertices.size());
+            }
+            float r = model->getRadius() * 0.1f;
+            
+            glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
+
+            for (const sf::Vector3f& position : model->beam_position)
+            {
+                sf::Vector3f offset = position * model->scale;
+
+                auto vertices = {
+                    sf::Vector3f{offset.x + r, offset.y, offset.z},
+                    sf::Vector3f{offset.x - r, offset.y, offset.z},
+                    sf::Vector3f{offset.x, offset.y + r, offset.z},
+                    sf::Vector3f{offset.x, offset.y - r, offset.z},
+                    sf::Vector3f{offset.x, offset.y, offset.z + r},
+                    sf::Vector3f{offset.x, offset.y, offset.z - r}
+                };
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), std::begin(vertices));
+                glDrawArrays(GL_LINES, 0, vertices.size());
+            }
+            
+            for (const sf::Vector3f& position : model->tube_position)
+            {
+                sf::Vector3f offset = position * model->scale;
+
+                auto vertices = {
+                    sf::Vector3f{offset.x + r * 3, offset.y, offset.z},
+                    sf::Vector3f{offset.x - r, offset.y, offset.z},
+                    sf::Vector3f{offset.x, offset.y + r, offset.z},
+                    sf::Vector3f{offset.x, offset.y - r, offset.z},
+                    sf::Vector3f{offset.x, offset.y, offset.z + r},
+                    sf::Vector3f{offset.x, offset.y, offset.z - r}
+                };
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), std::begin(vertices));
+                glDrawArrays(GL_LINES, 0, vertices.size());
+            }
         }
 #endif
     }
-
-    sf::Shader::bind(NULL);
     glDisable(GL_DEPTH_TEST);
 
     window.pushGLStates();

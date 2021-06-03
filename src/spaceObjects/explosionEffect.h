@@ -2,6 +2,7 @@
 #define EXPLOSION_EFFECT_H
 
 #include "spaceObject.h"
+#include "glObjects.h"
 
 class ExplosionEffect : public SpaceObject, public Updatable
 {
@@ -13,6 +14,11 @@ class ExplosionEffect : public SpaceObject, public Updatable
     string explosion_sound;
     sf::Vector3f particleDirections[particleCount];
     bool on_radar;
+#if FEATURE_3D_RENDERING
+    // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
+    static constexpr size_t max_quad_count = 64;
+    static gl::Buffers<2> particlesBuffers;
+#endif
 public:
     ExplosionEffect();
     virtual ~ExplosionEffect();

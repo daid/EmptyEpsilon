@@ -1,9 +1,23 @@
+#include <GL/glew.h>
 #include "planet.h"
 #include <SFML/OpenGL.hpp>
 #include "main.h"
 #include "pathPlanner.h"
 
 #include "scriptInterface.h"
+#include "glObjects.h"
+#include "shaderRegistry.h"
+
+#include <glm/vec4.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#if FEATURE_3D_RENDERING
+struct VertexAndTexCoords
+{
+    sf::Vector3f vertex;
+    sf::Vector2f texcoords;
+};
+#endif
 
 static Mesh* planet_mesh[16];
 
@@ -249,18 +263,25 @@ void Planet::draw3D()
     {
         glTranslatef(0, 0, distance_from_movement_plane);
         glScalef(planet_size, planet_size, planet_size);
-        glColor3f(1, 1, 1);
 
         if (!planet_mesh[level_of_detail])
         {
             PlanetMeshGenerator planet_mesh_generator(level_of_detail);
-            planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
+            planet_mesh[level_of_detail] = new Mesh(std::move(planet_mesh_generator.vertices));
         }
-        sf::Shader* shader = ShaderManager::getShader("planetShader");
-        shader->setUniform("baseMap", *textureManager.getTexture(planet_texture));
-        shader->setUniform("atmosphereColor", (sf::Glsl::Vec4)atmosphere_color);
-        sf::Shader::bind(shader);
-        planet_mesh[level_of_detail]->render();
+
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Planet);
+
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
+        glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::AtmosphereColor), 1, glm::value_ptr(glm::vec4(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, atmosphere_color.a) / 255.f));
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(planet_texture)->getNativeHandle());
+        {
+            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+            gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+            gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+            planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get());
+        }
     }
 }
 
@@ -282,35 +303,50 @@ void Planet::draw3DTransparent()
         glPushMatrix();
         glScalef(cloud_size, cloud_size, cloud_size);
         glRotatef(engine->getElapsedTime() * 1.0f, 0, 0, 1);
-        glColor3f(1, 1, 1);
 
         if (!planet_mesh[level_of_detail])
         {
             PlanetMeshGenerator planet_mesh_generator(level_of_detail);
-            planet_mesh[level_of_detail] = new Mesh(planet_mesh_generator.vertices);
+            planet_mesh[level_of_detail] = new Mesh(std::move(planet_mesh_generator.vertices));
         }
-        sf::Shader* shader = ShaderManager::getShader("planetShader");
-        shader->setUniform("baseMap", *textureManager.getTexture(cloud_texture));
-        shader->setUniform("atmosphereColor", (sf::Glsl::Vec4)sf::Color(0,0,0));
-        sf::Shader::bind(shader);
-        planet_mesh[level_of_detail]->render();
+
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Planet);
+
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
+        glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::AtmosphereColor), 1, glm::value_ptr(glm::vec4(0.f)));
+
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(cloud_texture)->getNativeHandle());
+        {
+            gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+            gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+            gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+            planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get());
+        }
         glPopMatrix();
     }
     if (atmosphere_texture != "" && atmosphere_size > 0)
     {
-        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture(atmosphere_texture));
-        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-        glColor4f(atmosphere_color.r / 255.0f, atmosphere_color.g / 255.0f, atmosphere_color.b / 255.0f, atmosphere_size * 2.0f);
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 0);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(1, 1);
-        glVertex3f(0, 0, 0);
-        glTexCoord2f(0, 1);
-        glVertex3f(0, 0, 0);
-        glEnd();
+        static std::array<VertexAndTexCoords, 4> quad{
+        sf::Vector3f(), {0.f, 1.f},
+        sf::Vector3f(), {1.f, 1.f},
+        sf::Vector3f(), {1.f, 0.f},
+        sf::Vector3f(), {0.f, 0.f}
+        };
+
+        ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
+
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(atmosphere_texture)->getNativeHandle());
+        glm::vec4 color(glm::vec3(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b) / 255.f, atmosphere_size * 2.0f);
+        glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1, glm::value_ptr(color));
+        gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+        gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+        
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+
+        std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
 }
 #endif

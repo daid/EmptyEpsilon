@@ -31,14 +31,14 @@ msgstr ""
 msgid "Graphics Options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:49
+#: src/menus/optionsMenu.cpp:50
 msgid "Fullscreen toggle"
 msgstr ""
 
 msgid "Sound Options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:81 src/menus/optionsMenu.cpp:86
+#: src/menus/optionsMenu.cpp:82 src/menus/optionsMenu.cpp:87
 msgid "Sound Volume: {volume}%"
 msgstr ""
 
@@ -144,47 +144,47 @@ msgstr ""
 msgid "Storage {weapon}"
 msgstr ""
 
-#: src/shipTemplate.cpp:378
+#: src/shipTemplate.cpp:380
 msgctxt "system"
 msgid "Reactor"
 msgstr ""
 
-#: src/shipTemplate.cpp:379
+#: src/shipTemplate.cpp:381
 msgctxt "system"
 msgid "Beam Weapons"
 msgstr ""
 
-#: src/shipTemplate.cpp:380
+#: src/shipTemplate.cpp:382
 msgctxt "system"
 msgid "Missile System"
 msgstr ""
 
-#: src/shipTemplate.cpp:381
+#: src/shipTemplate.cpp:383
 msgctxt "system"
 msgid "Maneuvering"
 msgstr ""
 
-#: src/shipTemplate.cpp:382
+#: src/shipTemplate.cpp:384
 msgctxt "system"
 msgid "Impulse Engines"
 msgstr ""
 
-#: src/shipTemplate.cpp:383
+#: src/shipTemplate.cpp:385
 msgctxt "system"
 msgid "Warp Drive"
 msgstr ""
 
-#: src/shipTemplate.cpp:384
+#: src/shipTemplate.cpp:386
 msgctxt "system"
 msgid "Jump Drive"
 msgstr ""
 
-#: src/shipTemplate.cpp:385
+#: src/shipTemplate.cpp:387
 msgctxt "system"
 msgid "Front Shield Generator"
 msgstr ""
 
-#: src/shipTemplate.cpp:386
+#: src/shipTemplate.cpp:388
 msgctxt "system"
 msgid "Rear Shield Generator"
 msgstr ""
@@ -570,24 +570,24 @@ msgid "Link to Science"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:70
-#: src/screens/crew6/relayScreen.cpp:126
+#: src/screens/crew6/relayScreen.cpp:130
 msgid "Place Waypoint"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:75
-#: src/screens/crew6/relayScreen.cpp:131
+#: src/screens/crew6/relayScreen.cpp:135
 msgid "Delete Waypoint"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:140 src/screens/crew6/relayScreen.cpp:289
+#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:321
 msgid "Launch Probe"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:613
+#: src/screens/gm/tweak.cpp:731
 msgid "Reputation:"
 msgstr ""
 
-#: src/screens/crew6/relayScreen.cpp:159
+#: src/screens/crew6/relayScreen.cpp:163
 msgid "Alert level"
 msgstr ""
 
@@ -610,11 +610,11 @@ msgstr ""
 msgid "{value} {unit}/min"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:543
+#: src/screens/gm/tweak.cpp:593
 msgid "{system} health"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:562
+#: src/screens/gm/tweak.cpp:612
 msgid "{system} heat"
 msgstr ""
 
@@ -767,47 +767,47 @@ msgctxt "slider"
 msgid "Warp"
 msgstr ""
 
-#: src/spaceObjects/spaceship.cpp:1485
+#: src/spaceObjects/spaceship.cpp:1505
 msgctxt "missile"
 msgid "Homing"
 msgstr ""
 
-#: src/spaceObjects/spaceship.cpp:1487
+#: src/spaceObjects/spaceship.cpp:1507
 msgctxt "missile"
 msgid "Nuke"
 msgstr ""
 
-#: src/spaceObjects/spaceship.cpp:1489
+#: src/spaceObjects/spaceship.cpp:1509
 msgctxt "missile"
 msgid "Mine"
 msgstr ""
 
-#: src/spaceObjects/spaceship.cpp:1491
+#: src/spaceObjects/spaceship.cpp:1511
 msgctxt "missile"
 msgid "EMP"
 msgstr ""
 
-#: src/spaceObjects/spaceship.cpp:1493
+#: src/spaceObjects/spaceship.cpp:1513
 msgctxt "missile"
 msgid "HVLI"
 msgstr ""
 
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:312
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:296
 msgctxt "tube"
 msgid "Front"
 msgstr ""
 
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:314
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:298
 msgctxt "tube"
 msgid "Right"
 msgstr ""
 
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:316
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:300
 msgctxt "tube"
 msgid "Left"
 msgstr ""
 
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:318
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:302
 msgctxt "tube"
 msgid "Rear"
 msgstr ""
@@ -1274,68 +1274,68 @@ msgstr ""
 msgid "GM control code: "
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:38
+#: src/menus/optionsMenu.cpp:39
 msgid "Graphics options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:38
+#: src/menus/optionsMenu.cpp:39
 msgid "Audio options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:38
+#: src/menus/optionsMenu.cpp:39
 msgid "Interface options"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:90
+#: src/menus/optionsMenu.cpp:91
 msgid "Music Playback"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:100 src/menus/optionsMenu.cpp:125
+#: src/menus/optionsMenu.cpp:101 src/menus/optionsMenu.cpp:126
 msgid "Disabled"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:100 src/menus/optionsMenu.cpp:125
+#: src/menus/optionsMenu.cpp:101 src/menus/optionsMenu.cpp:126
 msgid "Enabled"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:100 src/menus/optionsMenu.cpp:125
+#: src/menus/optionsMenu.cpp:101 src/menus/optionsMenu.cpp:126
 msgid "Main Screen only"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:106 src/menus/optionsMenu.cpp:111
+#: src/menus/optionsMenu.cpp:107 src/menus/optionsMenu.cpp:112
 msgid "Music Volume: {volume}%"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:115
+#: src/menus/optionsMenu.cpp:116
 msgid "Impulse Engine sound"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:131 src/menus/optionsMenu.cpp:136
+#: src/menus/optionsMenu.cpp:132 src/menus/optionsMenu.cpp:137
 msgid "Impulse Volume: {volume}%"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:141
+#: src/menus/optionsMenu.cpp:142
 msgid "Helms Radar Lock"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:149
+#: src/menus/optionsMenu.cpp:150
 msgid "Weapons Radar Lock"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:155
+#: src/menus/optionsMenu.cpp:156
 msgid "Science Radar Lock"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:171
+#: src/menus/optionsMenu.cpp:182
 msgid "Preview Soundtracks"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:187
+#: src/menus/optionsMenu.cpp:198 src/menus/hotkeyMenu.cpp:69
 msgctxt "options"
 msgid "Back"
 msgstr ""
 
-#: src/menus/optionsMenu.cpp:195
+#: src/menus/optionsMenu.cpp:206 src/menus/hotkeyMenu.cpp:78
 msgctxt "options"
 msgid "Save"
 msgstr ""
@@ -1352,17 +1352,17 @@ msgstr ""
 msgid "Mission Clock"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:280
+#: src/spaceObjects/playerSpaceship.cpp:296
 msgctxt "alert"
 msgid "RED ALERT"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:281
+#: src/spaceObjects/playerSpaceship.cpp:297
 msgctxt "alert"
 msgid "YELLOW ALERT"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:282
+#: src/spaceObjects/playerSpaceship.cpp:298
 msgctxt "alert"
 msgid "Normal"
 msgstr ""
@@ -1504,13 +1504,13 @@ msgid "No sub-class"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:84
-#: src/screens/crew6/relayScreen.cpp:147
+#: src/screens/crew6/relayScreen.cpp:151
 msgid "Reputation"
 msgstr ""
 
 #: src/screens/crew4/operationsScreen.cpp:88
-#: src/screens/crew6/relayScreen.cpp:151
-#: src/screens/gm/gameMasterScreen.cpp:140
+#: src/screens/crew6/relayScreen.cpp:155
+#: src/screens/gm/gameMasterScreen.cpp:144
 msgid "Clock"
 msgstr ""
 
@@ -1558,39 +1558,39 @@ msgctxt "button"
 msgid "Tweak"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:125
+#: src/screens/gm/gameMasterScreen.cpp:129
 msgctxt "button"
 msgid "Hail ship"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:162
+#: src/screens/gm/gameMasterScreen.cpp:166
 msgid "Defend location"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:167
+#: src/screens/gm/gameMasterScreen.cpp:171
 msgid "Stand ground"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:172
+#: src/screens/gm/gameMasterScreen.cpp:176
 msgid "Roaming"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:177
+#: src/screens/gm/gameMasterScreen.cpp:181
 msgid "Idle"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:182
+#: src/screens/gm/gameMasterScreen.cpp:186
 msgid "Orders:"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:213 src/screens/gm/tweak.cpp:80
+#: src/screens/gm/gameMasterScreen.cpp:219 src/screens/gm/tweak.cpp:88
 #: src/screenComponents/commsOverlay.cpp:110
 #: src/screenComponents/commsOverlay.cpp:140
 msgctxt "button"
 msgid "Close"
 msgstr ""
 
-#: src/screens/gm/gameMasterScreen.cpp:307
+#: src/screens/gm/gameMasterScreen.cpp:317
 msgid "*mixed*"
 msgstr ""
 
@@ -1604,305 +1604,302 @@ msgctxt "tab"
 msgid "Ship"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:43
+#: src/screens/gm/tweak.cpp:49
 msgctxt "tab"
 msgid "Jammer"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:49
+#: src/screens/gm/tweak.cpp:55
 msgctxt "tab"
 msgid "Shields"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:55
+#: src/screens/gm/tweak.cpp:61
 msgctxt "tab"
 msgid "Tubes"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:57
+#: src/screens/gm/tweak.cpp:63
 msgctxt "tab"
 msgid "Missiles"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:59
+#: src/screens/gm/tweak.cpp:65
 msgctxt "tab"
 msgid "Beams"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:61
+#: src/screens/gm/tweak.cpp:67
 msgctxt "tab"
 msgid "Systems"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:67
+#: src/screens/gm/tweak.cpp:75
 msgctxt "tab"
 msgid "Player"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:69
+#: src/screens/gm/tweak.cpp:77
 msgctxt "tab"
 msgid "Player 2"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:113
+#: src/screens/gm/tweak.cpp:130
 msgid "Impulse speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:119
+#: src/screens/gm/tweak.cpp:136
 msgid "Turn speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:137
+#: src/screens/gm/tweak.cpp:154
 msgid "Jump charge:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:145
+#: src/screens/gm/tweak.cpp:122
 msgid "Type name:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:154
+#: src/screens/gm/tweak.cpp:162
 msgid "Hull max:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:161
+#: src/screens/gm/tweak.cpp:169
 msgid "Hull current:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:168
+#: src/screens/gm/tweak.cpp:176
 msgid "Could be destroyed"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:175
+#: src/screens/gm/tweak.cpp:183
 msgid "Warp Drive"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:180
+#: src/screens/gm/tweak.cpp:188
 msgid "Jump Drive"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:221
+#: src/screens/gm/tweak.cpp:244
 msgctxt "missiles"
 msgid "Storage space:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:234
+#: src/screens/gm/tweak.cpp:257
 msgctxt "missiles"
 msgid "Stored amount:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:255
+#: src/screens/gm/tweak.cpp:278
 msgid "Jammer Range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:301
+#: src/screens/gm/tweak.cpp:351
 msgid "Tube count:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:325
+#: src/screens/gm/tweak.cpp:375
 msgid "Tube: {id_tube}"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:328
+#: src/screens/gm/tweak.cpp:378
 msgctxt "tube"
 msgid "Direction:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:334
+#: src/screens/gm/tweak.cpp:384
 msgctxt "tube"
 msgid "Load time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:340
+#: src/screens/gm/tweak.cpp:390
 msgctxt "tube"
 msgid "Size:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:345
+#: src/screens/gm/tweak.cpp:395
 msgctxt "tube"
 msgid "Small"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:346
+#: src/screens/gm/tweak.cpp:396
 msgctxt "tube"
 msgid "Medium"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:347
+#: src/screens/gm/tweak.cpp:397
 msgctxt "tube"
 msgid "large"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:351
+#: src/screens/gm/tweak.cpp:401
 msgctxt "tube"
 msgid "Allowed use:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:394
+#: src/screens/gm/tweak.cpp:444
 msgid "Shield {id_shield} max:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:404
+#: src/screens/gm/tweak.cpp:454
 msgid "Shield {id_shield}:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:448
+#: src/screens/gm/tweak.cpp:498
 msgid "Beam: {id_beam}"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:451
+#: src/screens/gm/tweak.cpp:501
 msgctxt "beam"
 msgid "Arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:457
+#: src/screens/gm/tweak.cpp:507
 msgctxt "beam"
 msgid "Direction:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:463
+#: src/screens/gm/tweak.cpp:513
 msgctxt "beam"
 msgid "Turret arc:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:469
+#: src/screens/gm/tweak.cpp:519
 msgctxt "beam"
 msgid "Turret direction:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:475
+#: src/screens/gm/tweak.cpp:525
 msgctxt "beam"
 msgid "Turret rotation rate:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:490
+#: src/screens/gm/tweak.cpp:540
 msgctxt "beam"
 msgid "Range:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:496
+#: src/screens/gm/tweak.cpp:546
 msgctxt "beam"
 msgid "Cycle time:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:502
+#: src/screens/gm/tweak.cpp:552
 msgctxt "beam"
 msgid "Damage:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:552
+#: src/screens/gm/tweak.cpp:602
 msgid "{system} health max"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:604
+#: src/screens/gm/tweak.cpp:722
 msgid "Control code:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:621
+#: src/screens/gm/tweak.cpp:739
 msgid "Max energy:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:629
+#: src/screens/gm/tweak.cpp:747
 msgid "Current energy:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:637
+#: src/screens/gm/tweak.cpp:755
 msgid "Boost Speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:643
+#: src/screens/gm/tweak.cpp:761
 msgid "Strafe Speed:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:651 src/screens/gm/tweak.cpp:684
+#: src/screens/gm/tweak.cpp:769 src/screens/gm/tweak.cpp:811
 msgid "Positions occupied: "
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:676
 msgctxt "position"
 msgid "Occupied"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:725
+#: src/screens/gm/tweak.cpp:852
 msgid "Coolant:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:732
 msgid "Short range radar:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:738
 msgid "Long range radar:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:758
+#: src/screens/gm/tweak.cpp:873
 msgctxt "button"
 msgid "Can scan"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:764
+#: src/screens/gm/tweak.cpp:879
 msgctxt "button"
 msgid "Can hack"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:770
+#: src/screens/gm/tweak.cpp:885
 msgctxt "button"
 msgid "Can dock"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:776
+#: src/screens/gm/tweak.cpp:891
 msgctxt "button"
 msgid "Can combat maneuver"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:782
+#: src/screens/gm/tweak.cpp:897
 msgctxt "button"
 msgid "Can self destruct"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:788
+#: src/screens/gm/tweak.cpp:903
 msgctxt "button"
 msgid "Can launch probes"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:793
+#: src/screens/gm/tweak.cpp:908
 msgctxt "button"
 msgid "Auto coolant"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:798
+#: src/screens/gm/tweak.cpp:913
 msgctxt "button"
 msgid "Auto repair"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:837
+#: src/screens/gm/tweak.cpp:950
 msgid "Callsign:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:848
+#: src/screens/gm/tweak.cpp:961
 msgid "Unscanned description:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:855
+#: src/screens/gm/tweak.cpp:968
 msgid "Friend or Foe Description:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:862
+#: src/screens/gm/tweak.cpp:975
 msgid "Simple Scan Description:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:869
+#: src/screens/gm/tweak.cpp:982
 msgid "Full Scan Description:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:879
+#: src/screens/gm/tweak.cpp:992
 msgid "Heading:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:885
+#: src/screens/gm/tweak.cpp:998
 msgid "Scanning Complexity:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:891
+#: src/screens/gm/tweak.cpp:1004
 msgid "Scanning Depth:"
 msgstr ""
 
@@ -1960,13 +1957,11 @@ msgstr ""
 #: scripts/shipTemplates_Frigates.lua:299
 #: scripts/shipTemplates_Frigates.lua:312
 #: scripts/shipTemplates_Frigates.lua:369
-#: scripts/shipTemplates_Frigates.lua:414 scripts/shipTemplates_OLD.lua:235
-#: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
-#: scripts/shipTemplates_OLD.lua:470
+#: scripts/shipTemplates_Frigates.lua:414
 msgid "Frigate"
 msgstr ""
 
-#: scripts/shipTemplates_Frigates.lua:14 scripts/shipTemplates_OLD.lua:235
+#: scripts/shipTemplates_Frigates.lua:14
 msgid "Cruiser"
 msgstr ""
 
@@ -2353,7 +2348,6 @@ msgstr ""
 msgid "Missile Cruiser"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:260
 msgid "Cruiser: Missile"
 msgstr ""
 
@@ -2388,7 +2382,6 @@ msgstr ""
 msgid "Strikeship"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:289 scripts/shipTemplates_OLD.lua:301
 #: scripts/shipTemplates_StarFighters.lua:13
 #: scripts/shipTemplates_StarFighters.lua:65
 #: scripts/shipTemplates_StarFighters.lua:121
@@ -2447,7 +2440,6 @@ msgstr ""
 msgid "Battlestation"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:363
 msgid "Battlecruiser"
 msgstr ""
 
@@ -2471,7 +2463,6 @@ msgstr ""
 msgid "Blockade Runner"
 msgstr ""
 
-#: scripts/shipTemplates_OLD.lua:470
 msgid "High Punch"
 msgstr ""
 
@@ -2878,7 +2869,6 @@ msgstr ""
 msgid "Ship window"
 msgstr ""
 
-#: src/menus/shipSelectionScreen.cpp:96
 msgid "0 degrees"
 msgstr ""
 
@@ -3089,19 +3079,19 @@ msgctxt "chatGM"
 msgid "{callsign} - Communicating as {target}"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:125
+#: src/screens/gm/tweak.cpp:142
 msgid "Jump Min Distance:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:131
+#: src/screens/gm/tweak.cpp:148
 msgid "Jump Max Distance:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:744
+#: src/screens/gm/tweak.cpp:859
 msgid "Max Scan Probes:"
 msgstr ""
 
-#: src/screens/gm/tweak.cpp:750
+#: src/screens/gm/tweak.cpp:865
 msgid "Scan Probes:"
 msgstr ""
 
@@ -3314,190 +3304,190 @@ msgstr ""
 msgid "Hacking FAILURE!"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:153
+#: src/spaceObjects/cpuShip.cpp:197
 msgctxt "cpulog"
 msgid "Searching for targets."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:162
+#: src/spaceObjects/cpuShip.cpp:206
 msgctxt "cpulog"
 msgid "Searching for hostiles around {x},{y}."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:171
+#: src/spaceObjects/cpuShip.cpp:215
 msgctxt "cpulog"
 msgid "Searching for supplies."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:174 src/spaceObjects/cpuShip.cpp:249
+#: src/spaceObjects/cpuShip.cpp:218 src/spaceObjects/cpuShip.cpp:293
 msgctxt "cpulog"
 msgid "Docking to {callsign}."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:185
+#: src/spaceObjects/cpuShip.cpp:229
 msgctxt "cpulog"
 msgid "Standing ground for now."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:193
+#: src/spaceObjects/cpuShip.cpp:237
 msgctxt "cpulog"
 msgid "Defending {x},{y}."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:203
+#: src/spaceObjects/cpuShip.cpp:247
 msgctxt "cpulog"
 msgid "Defending {callsign}."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:213
+#: src/spaceObjects/cpuShip.cpp:257
 msgctxt "cpulog"
 msgid "Following {callsign}."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:221 src/spaceObjects/cpuShip.cpp:229
+#: src/spaceObjects/cpuShip.cpp:265 src/spaceObjects/cpuShip.cpp:273
 msgctxt "cpulog"
 msgid "Moving to {x},{y}."
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:239
+#: src/spaceObjects/cpuShip.cpp:283
 msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:309
+#: src/spaceObjects/cpuShip.cpp:364
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:310
+#: src/spaceObjects/cpuShip.cpp:365
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:311
+#: src/spaceObjects/cpuShip.cpp:366
 msgctxt "orderscpu"
 msgid "Retreat"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:312
+#: src/spaceObjects/cpuShip.cpp:367
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:313
+#: src/spaceObjects/cpuShip.cpp:368
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:314
+#: src/spaceObjects/cpuShip.cpp:369
 msgctxt "orderscpu"
 msgid "Defend Target"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:315
+#: src/spaceObjects/cpuShip.cpp:370
 msgctxt "orderscpu"
 msgid "Fly in formation"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:316
+#: src/spaceObjects/cpuShip.cpp:371
 msgctxt "orderscpu"
 msgid "Fly towards"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:317
+#: src/spaceObjects/cpuShip.cpp:372
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:318
+#: src/spaceObjects/cpuShip.cpp:373
 msgctxt "orderscpu"
 msgid "Attack"
 msgstr ""
 
-#: src/spaceObjects/cpuShip.cpp:319
+#: src/spaceObjects/cpuShip.cpp:374
 msgctxt "orderscpu"
 msgid "Dock"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:395
+#: src/spaceObjects/playerSpaceship.cpp:412
 msgctxt "shiplog"
 msgid "Start of log"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1127
+#: src/spaceObjects/playerSpaceship.cpp:1144
 msgctxt "shiplog"
 msgid "Hailed by {name}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1181
+#: src/spaceObjects/playerSpaceship.cpp:1198
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1191
+#: src/spaceObjects/playerSpaceship.cpp:1208
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1195
+#: src/spaceObjects/playerSpaceship.cpp:1212
 msgctxt "shiplog"
 msgid "Communication channel closed"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1366
-#: src/spaceObjects/playerSpaceship.cpp:1443
+#: src/spaceObjects/playerSpaceship.cpp:1383
+#: src/spaceObjects/playerSpaceship.cpp:1460
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1367
+#: src/spaceObjects/playerSpaceship.cpp:1384
 msgctxt "shiplog"
 msgid "Hailing: {name}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1390
-#: src/spaceObjects/playerSpaceship.cpp:1391
+#: src/spaceObjects/playerSpaceship.cpp:1407
+#: src/spaceObjects/playerSpaceship.cpp:1408
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1392
-#: src/spaceObjects/playerSpaceship.cpp:1393
+#: src/spaceObjects/playerSpaceship.cpp:1409
+#: src/spaceObjects/playerSpaceship.cpp:1410
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1395
+#: src/spaceObjects/playerSpaceship.cpp:1412
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1396
+#: src/spaceObjects/playerSpaceship.cpp:1413
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1405
+#: src/spaceObjects/playerSpaceship.cpp:1422
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1408
+#: src/spaceObjects/playerSpaceship.cpp:1425
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1428
+#: src/spaceObjects/playerSpaceship.cpp:1445
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1442
+#: src/spaceObjects/playerSpaceship.cpp:1459
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
 msgstr ""
 
-#: src/spaceObjects/playerSpaceship.cpp:1445
+#: src/spaceObjects/playerSpaceship.cpp:1462
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr ""
@@ -3642,4 +3632,177 @@ msgid ""
 "The Strikeship is a warp-drive equipped fighter build for quick strikes, "
 "it's fast, it's agile, but does not do an extreme amount of damage, and "
 "lacks in rear shields."
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:163
+msgid "Control Options"
+msgstr ""
+
+#: src/menus/optionsMenu.cpp:166 src/menus/hotkeyMenu.cpp:37
+msgid "Configure Keyboard"
+msgstr ""
+
+#: src/menus/shipSelectionScreen.cpp:93
+msgctxt "shipwindow"
+msgid "{angle} degrees"
+msgstr ""
+
+#: src/menus/shipSelectionScreen.cpp:96
+msgctxt "shipwindow"
+msgid "0 degrees"
+msgstr ""
+
+#: src/screens/gm/objectCreationView.cpp:35
+msgctxt "create"
+msgid "cpu ship"
+msgstr ""
+
+#: src/screens/gm/objectCreationView.cpp:36
+msgctxt "create"
+msgid "player ship"
+msgstr ""
+
+#: src/screens/gm/objectCreationView.cpp:64
+msgctxt "create"
+msgid "Supply Drop"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:43
+msgctxt "tab"
+msgid "Asteroid"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:69
+msgctxt "tab"
+msgid "Power"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:194
+msgid "Short-range radar range:"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:200
+msgid "Long-range radar range:"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:305
+msgid "Asteroid Size:"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:655
+msgid "current factor"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:656
+msgid "desired factor"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:661
+msgid "{system}"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:685
+msgid "Applies on [Enter]"
+msgstr ""
+
+#: src/screens/gm/tweak.cpp:803
+msgid "position"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:173 scripts/shipTemplates_OLD.lua:235
+#: scripts/shipTemplates_OLD.lua:260 scripts/shipTemplates_OLD.lua:271
+#: scripts/shipTemplates_OLD.lua:470
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:173
+msgctxt "subclass"
+msgid "Mine Layer"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:235
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:260
+msgctxt "subclass"
+msgid "Cruiser: Missile"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:289 scripts/shipTemplates_OLD.lua:301
+msgctxt "class"
+msgid "Starfighter"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:363
+msgctxt "subclass"
+msgid "Battlecruiser"
+msgstr ""
+
+#: scripts/shipTemplates_OLD.lua:470
+msgctxt "subclass"
+msgid "High Punch"
+msgstr ""
+
+#: src/screens/gm/gameMasterScreen.cpp:324
+msgctxt "gm_info"
+msgid "Position"
+msgstr ""
+
+#: src/screens/gm/gameMasterScreen.cpp:336
+msgid "gm_info"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:192
+#: src/spaceObjects/mine.cpp:160
+msgctxt "gm_info"
+msgid "Owner"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:199
+msgctxt "gm_info"
+msgid "Target"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:202
+#: src/spaceObjects/mine.cpp:163
+msgctxt "gm_info"
+msgid "Faction"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:203
+msgctxt "gm_info"
+msgid "Lifetime"
+msgstr ""
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:204
+msgctxt "gm_info"
+msgid "Size"
+msgstr ""
+
+#: src/spaceObjects/cpuShip.cpp:306
+msgctxt "gm_info"
+msgid "Orders"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:271
+msgctxt "gm_info"
+msgid "CallSign"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:272
+msgctxt "gm_info"
+msgid "Type"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:273
+msgctxt "gm_info"
+msgid "Hull"
+msgstr ""
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:278
+msgctxt "gm_info"
+msgid "Shield"
 msgstr ""

@@ -38,7 +38,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     });
     reset_button->setSize(200, 50);
     reset_button->setPosition(25, -25, ABottomLeft);
-    close_button = new GuiButton(minigame_box, "", tr("hacking", "Close"), [this]()
+    close_button = new GuiButton(minigame_box, "", tr("button", "Close"), [this]()
     {
         hide();
     });

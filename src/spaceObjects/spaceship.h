@@ -48,6 +48,9 @@ class ShipSystem
 {
 public:
     static constexpr float power_factor_rate = 0.08f;
+    static constexpr float default_heat_rate_per_second = 0.05f;
+    static constexpr float default_power_rate_per_second = 0.3f;
+    static constexpr float default_coolant_rate_per_second = 1.2f;
     float health; //1.0-0.0, where 0.0 is fully broken.
     float health_max; //1.0-0.0, where 0.0 is fully broken.
     float power_level; //0.0-3.0, default 1.0
@@ -57,6 +60,9 @@ public:
     float coolant_request;
     float hacked_level; //0.0-1.0
     float power_factor;
+    float coolant_rate_per_second{};
+    float heat_rate_per_second{};
+    float power_rate_per_second{};
 
     float getHeatingDelta() const
     {
@@ -349,29 +355,34 @@ public:
     void setSystemHealthMax(ESystem system, float health_max) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health_max = std::min(1.0f, std::max(-1.0f, health_max)); }
     float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }
     void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
+    float getSystemHeatRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].heat_rate_per_second; }
+    void setSystemHeatRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_rate_per_second = rate; }
+
     float getSystemPower(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].power_level; }
     void setSystemPower(ESystem system, float power) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_level = std::min(3.0f, std::max(0.0f, power)); }
+    float getSystemPowerRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].power_rate_per_second; }
+    void setSystemPowerRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_rate_per_second = rate; }
     float getSystemPowerUserFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].getPowerUserFactor(); }
     float getSystemPowerFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].power_factor; }
     void setSystemPowerFactor(ESystem system, float factor) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_factor = factor; }
     float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
     void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
-    Speeds getBothImpulseMaxSpeeds() {return {impulse_max_speed, impulse_max_reverse_speed};}
+    Speeds getImpulseMaxSpeed() {return {impulse_max_speed, impulse_max_reverse_speed};}
     void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed) 
     { 
         impulse_max_speed = forward_speed; 
         impulse_max_reverse_speed = reverse_speed.value_or(forward_speed);
     }
-    float getImpulseMaxSpeed() { return impulse_max_speed; } //Deprecated. Consider using getBothImpulseMaxSpeeds().forward or .reverse instead.
+    float getSystemCoolantRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].coolant_rate_per_second; }
+    void setSystemCoolantRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_rate_per_second = rate; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
-    Speeds getBothAccelerations()   { return {impulse_acceleration, impulse_reverse_acceleration};  }
+    Speeds getAcceleration()   { return {impulse_acceleration, impulse_reverse_acceleration};  }
     void setAcceleration(float acceleration, std::optional<float> reverse_acceleration) 
     { 
         impulse_acceleration = acceleration; 
         impulse_reverse_acceleration = reverse_acceleration.value_or(acceleration);
     }
-    float getAcceleration()   {  return impulse_acceleration;  }  //Deprecated. Consider using getBothAccelerations().forward or .reverse instead.
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }

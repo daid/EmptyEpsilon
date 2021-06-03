@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "engine.h"
 #include "hotkeyMenu.h"
+#include <regex>
 
 #include "gui/hotkeyBinder.h"
 #include "gui/gui2_autolayout.h"
@@ -38,7 +39,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Category selector
     // Get a list of hotkey categories
-    category_list = hotkeys.getCategories();
+    category_list = HotkeyConfig::get().getCategories();
     (new GuiSelector(top_row, "Category", [this](int index, string value)
     {
         HotkeyMenu::setCategory(index);
@@ -66,7 +67,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Bottom: Menu navigation
     // Back button to return to the Options menu
-    (new GuiButton(bottom_row, "BACK", tr("options", "BACK"), [this]()
+    (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
@@ -136,7 +137,7 @@ void HotkeyMenu::setCategory(int cat)
     int column_row_count = 0;
 
     // Get all hotkeys in this category.
-    hotkey_list = hotkeys.listAllHotkeysByCategory(category);
+    hotkey_list = HotkeyConfig::get().listAllHotkeysByCategory(category);
 
     // Begin rendering hotkey rebinding fields for this category.
     for (std::pair<string, string> item : hotkey_list)
@@ -204,14 +205,15 @@ void HotkeyMenu::saveHotkeys()
     }
 
     // Read in all TextEntry values and update hotkeys
+    std::regex buttonIdExpression(R"((\[[JB][0-9]+\])+)"); // matches Joystick and keyboard button codes (loosely)
     for (std::pair<string,string> item : hotkey_list)
     {
         text = text_entries[i]->getText();
-        hotkey_exists = hotkeys.setHotkey(category, item, text);
-
-        if (!hotkey_exists)
+        hotkey_exists = HotkeyConfig::get().setHotkey(category, item, text);
+        std::smatch matches;
+        if (!hotkey_exists && !std::regex_match(text, matches, buttonIdExpression))
         {
-            // Keys without equivalent SFML codes can't be accepted.
+            // Keys without equivalent SFML codes or joystick button code can't be accepted.
             // Blank the corresponding key entry field.
             text_entries[i]->setText("");
 

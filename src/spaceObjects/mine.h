@@ -21,6 +21,7 @@ public:
     float particleTimeout;
 
     Mine();
+    virtual ~Mine();
 
     virtual void draw3D() override;
     virtual void draw3DTransparent() override;
@@ -33,6 +34,8 @@ public:
     void explode();
     void onDestruction(ScriptSimpleCallback callback);
 
+    P<SpaceObject> getOwner();
+    virtual std::unordered_map<string, string> getGMInfo() override;
     virtual string getExportLine() override { return "Mine():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 
 private:

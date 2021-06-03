@@ -2,6 +2,7 @@
 #define BEAM_EFFECT_H
 
 #include "spaceObject.h"
+#include "glObjects.h"
 
 class BeamEffect : public SpaceObject, public Updatable
 {

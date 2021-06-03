@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include <SFML/OpenGL.hpp>
 
 #include "main.h"
@@ -5,12 +6,23 @@
 #include "spaceship.h"
 #include "scriptInterface.h"
 
+#include "glObjects.h"
+#include "shaderRegistry.h"
+
 #define FORCE_MULTIPLIER          50.0
 #define FORCE_MAX                 10000.0
 #define ALPHA_MULTIPLIER          10.0
 #define DEFAULT_COLLISION_RADIUS  2500
 #define AVOIDANCE_MULTIPLIER      1.2
 #define TARGET_SPREAD             500
+
+#if FEATURE_3D_RENDERING
+struct VertexAndTexCoords
+{
+    sf::Vector3f vertex;
+    sf::Vector2f texcoords;
+};
+#endif
 
 /// A wormhole object that drags objects toward it like a black hole, and then
 /// teleports them to another point when they reach its center.
@@ -49,8 +61,19 @@ WormHole::WormHole()
 #if FEATURE_3D_RENDERING
 void WormHole::draw3DTransparent()
 {
-    glRotatef(getRotation(), 0, 0, -1);
+    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
     glTranslatef(-getPosition().x, -getPosition().y, 0);
+
+    std::array<VertexAndTexCoords, 4> quad{
+        sf::Vector3f(), {0.f, 1.f},
+        sf::Vector3f(), {1.f, 1.f},
+        sf::Vector3f(), {1.f, 0.f},
+        sf::Vector3f(), {0.f, 0.f}
+    };
+
+    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
+    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
+
     for(int n=0; n<cloud_count; n++)
     {
         NebulaCloud& cloud = clouds[n];
@@ -63,19 +86,13 @@ void WormHole::draw3DTransparent()
         if (alpha < 0.0)
             continue;
 
-        ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("wormHole" + string(cloud.texture) + ".png"));
-        sf::Shader::bind(ShaderManager::getShader("billboardShader"));
-        glBegin(GL_QUADS);
-        glColor4f(alpha * 0.8, alpha * 0.8, alpha * 0.8, size);
-        glTexCoord2f(0, 0);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(1, 0);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(1, 1);
-        glVertex3f(position.x, position.y, position.z);
-        glTexCoord2f(0, 1);
-        glVertex3f(position.x, position.y, position.z);
-        glEnd();
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("wormHole" + string(cloud.texture) + ".png")->getNativeHandle());
+        glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
+
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
 }
 #endif//FEATURE_3D_RENDERING
@@ -145,7 +162,7 @@ void WormHole::collide(Collisionable* target, float collision_force)
                                                random(-TARGET_SPREAD, TARGET_SPREAD))));
         if (on_teleportation.isSet())
         {
-            on_teleportation.call(P<WormHole>(this), obj);
+            on_teleportation.call<void>(P<WormHole>(this), obj);
         }
         if (spaceship)
         {

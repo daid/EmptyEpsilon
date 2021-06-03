@@ -9,7 +9,7 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
-CinematicViewScreen::CinematicViewScreen()
+CinematicViewScreen::CinematicViewScreen(int32_t playerShip /* = 0 */)
 {
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
@@ -23,9 +23,9 @@ CinematicViewScreen::CinematicViewScreen()
     camera_yaw = -90.0f;
     camera_pitch = 45.0f;
 
-    // Lock onto player ship 0 to start.
-    if (gameGlobalInfo->getPlayerShip(0))
-        target = gameGlobalInfo->getPlayerShip(0);
+    // Lock onto player ship to start.
+    if (gameGlobalInfo->getPlayerShip(playerShip))
+        target = gameGlobalInfo->getPlayerShip(playerShip);
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {

@@ -17,10 +17,10 @@
 OperationScreen::OperationScreen(GuiContainer* owner)
 : GuiOverlay(owner, "", colorConfig.background)
 {
-    ScienceScreen* science = new ScienceScreen(this, operationsOfficer);
+    science = new ScienceScreen(this, operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
     science->science_radar->setCallbacks(
-        [this, science](sf::Vector2f position) { // Down
+        [this](sf::Vector2f position) { // Down
             // If not our ship, or if we're scanning, ignore clicks.
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
@@ -39,12 +39,12 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
             mouse_down_position = position;
         },
-        [this, science](sf::Vector2f position) { // Drag
+        [this](sf::Vector2f position) { // Drag
             // If we're dragging a waypoint, move it.
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
-        [this, science](sf::Vector2f position) { // Up
+        [this](sf::Vector2f position) { // Up
             switch(mode)
             {
             case TargetSelection:
@@ -67,12 +67,12 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this, science]() {
+    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
         mode = WaypointPlacement;
     });
     place_waypoint_button->setPosition(-270, -70, ABottomRight)->setSize(200, 50);
 
-    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this, science]() {
+    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
         {
             my_spaceship->commandRemoveWaypoint(science->targets.getWaypointIndex());
@@ -96,6 +96,14 @@ OperationScreen::OperationScreen(GuiContainer* owner)
 
 void OperationScreen::onDraw(sf::RenderTarget& window)
 {
-    info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
-    info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
+    if (science->radar_view->isVisible())
+    {
+        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0))->show();
+        info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0))->show();
+    }
+    else
+    {
+        info_reputation->hide();
+        info_clock->hide();
+    }
 }

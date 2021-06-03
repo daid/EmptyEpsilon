@@ -97,5 +97,22 @@ bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
 
 string SpaceStation::getExportLine()
 {
-    return "SpaceStation():setTemplate(\"" + template_name + "\"):setFaction(\"" + getFaction() + "\"):setCallSign(\"" + getCallSign() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+    string ret = "SpaceStation()";
+    ret += ":setTemplate(\"" + template_name + "\")";
+
+    if (getShortRangeRadarRange() != ship_template->short_range_radar_range)
+    {
+        ret += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
+    }
+
+    if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
+    {
+        ret += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
+    }
+
+    ret += ":setFaction(\"" + getFaction() + "\")";
+    ret += ":setCallSign(\"" + getCallSign() + "\")";
+    ret += ":setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
+
+    return ret;
 }

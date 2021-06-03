@@ -34,6 +34,8 @@ REGISTER_SCRIPT_CLASS(ScienceDatabase)
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getLongDescription);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setImage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, getImage);
+
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setModelDataName);
 }
 
 PVector<ScienceDatabase> ScienceDatabase::science_databases;

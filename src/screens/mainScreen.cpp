@@ -46,7 +46,7 @@ ScreenMainScreen::ScreenMainScreen()
 
     keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
 
-    for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Main Screen"))
+    for (std::pair<string, string> shortcut : HotkeyConfig::get().listHotkeysByCategory("Main Screen"))
         keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
 
     keyboard_help->setText(keyboard_general);

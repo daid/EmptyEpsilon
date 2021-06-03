@@ -4868,7 +4868,7 @@ function hintRepulse(delta)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseHintMessageEPlus = "repulseHintMessageEPlus"
-			playerFighter:addCustomMessage("Engineering",repulseHintMessageEPlus,string.format("Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters.",junkRepulse:getCallSign(),playerFighter:getCallSign()))
+			playerFighter:addCustomMessage("Engineering+",repulseHintMessageEPlus,string.format("Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters.",junkRepulse:getCallSign(),playerFighter:getCallSign()))
 		end
 		plot1 = hugRepulse
 	end
@@ -4885,7 +4885,7 @@ function hugRepulse(delta)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseTransferButtonEPlus = "repulseTransferButtonEPlus"
-			playerFighter:addCustomButton("Engineering",repulseTransferButtonEPlus,"Transfer to Repulse",repulseTransfer)
+			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,"Transfer to Repulse",repulseTransfer)
 		end
 		if repulseTransferButtonEPlus ~= nil or repulseTransferButton ~= nil then
 			plot1 = nil

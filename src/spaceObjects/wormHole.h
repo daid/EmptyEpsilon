@@ -16,6 +16,7 @@ class WormHole : public SpaceObject, public Updatable
     NebulaCloud clouds[cloud_count];
 
     ScriptSimpleCallback on_teleportation;
+
 public:
     WormHole();
 

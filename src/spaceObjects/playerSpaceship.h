@@ -2,9 +2,12 @@
 #define PLAYER_SPACESHIP_H
 
 #include "spaceship.h"
+#include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include <iostream>
+
+class ScanProbe;
 
 enum ECommsState
 {
@@ -32,12 +35,8 @@ class PlayerSpaceship : public SpaceShip
 {
 public:
     // Power consumption and generation base rates
-    constexpr static float energy_shield_use_per_second = 1.5f;
-    constexpr static float energy_warp_per_second = 1.0f;
-    constexpr static float system_heatup_per_second = 0.05f;
-    constexpr static float system_power_level_change_per_second = 0.3;
-    // Coolant change rate
-    constexpr static float system_coolant_level_change_per_second = 1.2;
+    constexpr static float default_energy_shield_use_per_second = 1.5f;
+    constexpr static float default_energy_warp_per_second = 1.0f;
     // Total coolant
     constexpr static float max_coolant_per_system = 10.0f;
     float max_coolant;
@@ -112,9 +111,8 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
-
-    float long_range_radar_range = 50000.0f;
-    float short_range_radar_range = 5000.0f;
+    float energy_shield_use_per_second = default_energy_shield_use_per_second;
+    float energy_warp_per_second = default_energy_warp_per_second;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -157,6 +155,8 @@ public:
     int scan_probe_stock;
     float scan_probe_recharge = 0.0;
     ScriptSimpleCallback on_probe_launch;
+    ScriptSimpleCallback on_probe_link;
+    ScriptSimpleCallback on_probe_unlink;
 
     // Main screen content
     EMainScreenSetting main_screen_setting;
@@ -226,6 +226,8 @@ public:
     int getMaxScanProbeCount() { return max_scan_probes; }
 
     void onProbeLaunch(ScriptSimpleCallback callback);
+    void onProbeLink(ScriptSimpleCallback callback);
+    void onProbeUnlink(ScriptSimpleCallback callback);
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);
@@ -243,7 +245,8 @@ public:
     void commandWarp(int8_t target);
     void commandJump(float distance);
     void commandSetTarget(P<SpaceObject> target);
-    void commandSetScienceLink(int32_t id);
+    void commandSetScienceLink(P<ScanProbe> probe);
+    void commandClearScienceLink();
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
     void commandUnloadTube(int8_t tubeNumber);
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
@@ -297,6 +300,12 @@ public:
     void setRepairCrewCount(int amount);
     EAlertLevel getAlertLevel() { return alert_level; }
 
+    // Flow rate controls.
+    float getEnergyShieldUsePerSecond() const { return energy_shield_use_per_second; }
+    void setEnergyShieldUsePerSecond(float rate) { energy_shield_use_per_second = rate; }
+    float getEnergyWarpPerSecond() const { return energy_warp_per_second; }
+    void setEnergyWarpPerSecond(float rate) { energy_warp_per_second = rate; }
+
     // Ship update functions
     virtual void update(float delta) override;
     virtual bool useEnergy(float amount) override;
@@ -330,12 +339,6 @@ public:
 
     // Radar function
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
-
-    // Radar range
-    float getLongRangeRadarRange();
-    float getShortRangeRadarRange();
-    void setLongRangeRadarRange(float range);
-    void setShortRangeRadarRange(float range);
 
     // Script export function
     virtual string getExportLine() override;

@@ -48,34 +48,38 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHealthMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeatRate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeatRate);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPower);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPower);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerRate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerRate);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerFactor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerFactor);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
-    ///[Deprecated] Gets forward impulse max speed.
-    ///Consider using getBothImpulseMaxSpeeds as forward and reverse speed can be different.
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolantRate);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolantRate);
+    ///Get multiple results, first one is forward speed and second one is reverse speed.
+    ///ex : forward,reverse = getImpulseMaxSpeed() (you can also use select or _ to get only reverse speed)
+    ///You can also only get forward speed, reverse speed will just be discarded : 
+    ///forward = getImpulseMaxSpeed()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
     ///Sets max speed.
     ///If called with only one argument, sets forward and reverse speed to equal values.
     ///If called with two arguments, first one is forward speed and second one is reverse speed.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
-    ///Get multiple results, first one is forward speed and second one is reverse speed.
-    ///ex : forward,reverse = getBothImpulseMaxSpeeds() (you can also use select or _ to get only reverse speed)
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBothImpulseMaxSpeeds);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
-    ///[Deprecated] Gets forward impulse acceleration.
-    ///Consider using getBothAccelerations as forward and reverse acceleration can be different.
+    ///Get multiple resulsts, first one is forward acceleration and second one is reverse acceleration.
+    ///ex : forward, reverse = getAcceleration (you can also use select or _ to get only reverse speed)
+    ///You can also only get forward speed, reverse speed will just be discarded : 
+    ///forward = getAcceleration()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getAcceleration);
     ///Sets acceleration.
     ///If called with one argument, sets forward and reverse acceleration to equal values.
     ///If called with two arguments, first one is forward acceleration and second one is reverse acceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setAcceleration);
-    ///Get multiple resulsts, first one is forward acceleration and second one is reverse acceleration.
-    ///ex : forward, reverse = getBothAccelerations (you can also use select or _ to get only reverse speed)
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBothAccelerations);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setJumpDrive);
@@ -233,16 +237,19 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_strafe_speed);
     registerMemberReplication(&radar_trace);
 
-    for(int n=0; n<SYS_COUNT; n++)
+    for(unsigned int n=0; n<SYS_COUNT; n++)
     {
         assert(n < default_system_power_factors.size());
         systems[n].health = 1.0f;
         systems[n].health_max = 1.0f;
         systems[n].power_level = 1.0f;
+        systems[n].power_rate_per_second = ShipSystem::default_power_rate_per_second;
         systems[n].power_request = 1.0f;
         systems[n].coolant_level = 0.0f;
+        systems[n].coolant_rate_per_second = ShipSystem::default_coolant_rate_per_second;
         systems[n].coolant_request = 0.0f;
         systems[n].heat_level = 0.0f;
+        systems[n].heat_rate_per_second = ShipSystem::default_heat_rate_per_second;
         systems[n].hacked_level = 0.0f;
         systems[n].power_factor = default_system_power_factors[n];
 

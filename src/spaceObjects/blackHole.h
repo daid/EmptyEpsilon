@@ -6,6 +6,7 @@
 class BlackHole : public SpaceObject, public Updatable
 {
     float update_delta;
+
 public:
     BlackHole();
 

@@ -57,9 +57,14 @@ void JoinServerScreen::update(float delta)
         }
         break;
     case GameClient::Disconnected:
+    {
+        auto reason = game_client->getDisconnectReason();
         destroy();
         disconnectFromServer();
-        new ServerBrowserMenu(this->source);
+        
+        new ServerBrowserMenu(this->source, reason);
+    }
+        
         break;
     case GameClient::Connected:
         PreferencesManager::set("last_server", this->ip.toString());
