@@ -377,7 +377,7 @@ public:
     void setSystemCoolantRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_rate_per_second = rate; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
-    Speeds getAcceleration()   { return {impulse_acceleration, impulse_reverse_acceleration};  }
+    Speeds getAcceleration() { return {impulse_acceleration, impulse_reverse_acceleration};}
     void setAcceleration(float acceleration, std::optional<float> reverse_acceleration) 
     { 
         impulse_acceleration = acceleration; 
