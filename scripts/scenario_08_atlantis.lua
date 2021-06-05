@@ -908,7 +908,7 @@ function scrambleMessage(message)
     end
     message = string.format(_([[(The transmission is loaded with static noise.)
 
-]] %s), message)
+%s]]), message)
     return message
 end
 
