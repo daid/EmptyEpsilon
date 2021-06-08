@@ -1,4 +1,5 @@
 #include <i18n.h>
+#include <optional>
 #include "shipTemplate.h"
 #include "spaceObjects/spaceObject.h"
 #include "mesh.h"
@@ -53,6 +54,8 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Example: setShieldData(400) setShieldData(100, 80) setShieldData(100, 50, 50)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setShields);
     /// Set the impulse speed, rotation speed and impulse acceleration for this ship.
+    /// Optional fourth and fifth arguments are reverse speed and reverse acceeleration.
+    /// If not explicitely set, reverse speed and reverse acceleration are set to forward speed and acceleration
     /// Compare SpaceShip:setImpulseMaxSpeed, :setRotationMaxSpeed, :setAcceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
     /// Sets the combat maneuver power of this ship.
@@ -141,7 +144,9 @@ ShipTemplate::ShipTemplate()
     for(int n=0; n<max_shield_count; n++)
         shield_level[n] = 0.0;
     impulse_speed = 500.0;
+    impulse_reverse_speed = 500.0;
     impulse_acceleration = 20.0;
+    impulse_reverse_acceleration = 20.0;
     turn_speed = 10.0;
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
@@ -411,11 +416,14 @@ void ShipTemplate::setDockClasses(std::vector<string> classes)
     can_be_docked_by_class = std::unordered_set<string>(classes.begin(), classes.end());
 }
 
-void ShipTemplate::setSpeed(float impulse, float turn, float acceleration)
+void ShipTemplate::setSpeed(float impulse, float turn, float acceleration, std::optional<float> reverse_speed, std::optional<float> reverse_acceleration)
 {
     impulse_speed = impulse;
     turn_speed = turn;
     impulse_acceleration = acceleration;
+
+    impulse_reverse_speed = reverse_speed.value_or(impulse);
+    impulse_reverse_acceleration = reverse_acceleration.value_or(acceleration);
 }
 
 void ShipTemplate::setCombatManeuver(float boost, float strafe)
@@ -539,9 +547,11 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     for(int n=0; n<max_shield_count; n++)
         result->shield_level[n] = shield_level[n];
     result->impulse_speed = impulse_speed;
+    result->impulse_reverse_speed = impulse_reverse_speed;
     result->turn_speed = turn_speed;
     result->warp_speed = warp_speed;
     result->impulse_acceleration = impulse_acceleration;
+    result->impulse_reverse_acceleration = impulse_reverse_acceleration;
     result->combat_maneuver_boost_speed = combat_maneuver_boost_speed;
     result->combat_maneuver_strafe_speed = combat_maneuver_strafe_speed;
     result->shares_energy_with_docked = shares_energy_with_docked;

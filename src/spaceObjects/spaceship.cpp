@@ -60,11 +60,25 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolantRate);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolantRate);
+    ///Get multiple results, first one is forward speed and second one is reverse speed.
+    ///ex : forward,reverse = getImpulseMaxSpeed() (you can also use select or _ to get only reverse speed)
+    ///You can also only get forward speed, reverse speed will just be discarded : 
+    ///forward = getImpulseMaxSpeed()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseMaxSpeed);
+    ///Sets max speed.
+    ///If called with only one argument, sets forward and reverse speed to equal values.
+    ///If called with two arguments, first one is forward speed and second one is reverse speed.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRotationMaxSpeed);
+    ///Get multiple resulsts, first one is forward acceleration and second one is reverse acceleration.
+    ///ex : forward, reverse = getAcceleration (you can also use select or _ to get only reverse speed)
+    ///You can also only get forward speed, reverse speed will just be discarded : 
+    ///forward = getAcceleration()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getAcceleration);
+    ///Sets acceleration.
+    ///If called with one argument, sets forward and reverse acceleration to equal values.
+    ///If called with two arguments, first one is forward acceleration and second one is reverse acceleration.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setAcceleration);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
@@ -171,6 +185,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     weapon_tube_count = 0;
     turn_speed = 10.0;
     impulse_max_speed = 600.0;
+    impulse_max_reverse_speed = 600.0;
     combat_maneuver_charge = 1.0;
     combat_maneuver_boost_request = 0.0;
     combat_maneuver_boost_active = 0.0;
@@ -184,6 +199,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     shield_frequency = irandom(0, max_frequency);
     docking_state = DS_NotDocking;
     impulse_acceleration = 20.0;
+    impulse_reverse_acceleration = 20.0;
     energy_level = 1000;
     max_energy_level = 1000;
     turnSpeed = 0.0f;
@@ -205,7 +221,9 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&target_id);
     registerMemberReplication(&turn_speed);
     registerMemberReplication(&impulse_max_speed);
+    registerMemberReplication(&impulse_max_reverse_speed);
     registerMemberReplication(&impulse_acceleration);
+    registerMemberReplication(&impulse_reverse_acceleration);
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
     registerMemberReplication(&docking_state);
@@ -296,7 +314,10 @@ void SpaceShip::applyTemplateValues()
     energy_level = max_energy_level = ship_template->energy_storage_amount;
 
     impulse_max_speed = ship_template->impulse_speed;
+    impulse_max_reverse_speed = ship_template->impulse_reverse_speed;
     impulse_acceleration = ship_template->impulse_acceleration;
+    impulse_reverse_acceleration = ship_template->impulse_reverse_acceleration;
+    
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
     combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
@@ -637,6 +658,17 @@ void SpaceShip::update(float delta)
     else
         setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
 
+    //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
+    float cap_speed = impulse_max_speed;
+    
+    if(current_impulse < 0 && impulse_max_reverse_speed <= 0.01)
+    {
+        current_impulse = 0; //we could get stuck with a ship with no reverse speed, not being able to accelerate
+    }
+    if(current_impulse < 0) 
+    {
+        cap_speed = impulse_max_reverse_speed;
+    }
     if ((has_jump_drive && jump_delay > 0) || (has_warp_drive && warp_request > 0))
     {
         if (WarpJammer::isWarpJammed(getPosition()))
@@ -649,15 +681,15 @@ void SpaceShip::update(float delta)
     {
         if (current_impulse > 0.0)
         {
-            if (impulse_max_speed > 0)
-                current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
+            if (cap_speed > 0)
+                current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
             if (current_impulse < 0.0)
                 current_impulse = 0.0;
         }
         if (current_impulse < 0.0)
         {
-            if (impulse_max_speed > 0)
-                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (cap_speed > 0)
+                current_impulse += delta * (impulse_acceleration / cap_speed);
             if (current_impulse > 0.0)
                 current_impulse = 0.0;
         }
@@ -677,14 +709,14 @@ void SpaceShip::update(float delta)
     {
         if (current_impulse > 0.0)
         {
-            if (impulse_max_speed > 0)
-                current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
+            if (cap_speed > 0)
+                current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
             if (current_impulse < 0.0)
                 current_impulse = 0.0;
         }else if (current_impulse < 0.0)
         {
-            if (impulse_max_speed > 0)
-                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (cap_speed > 0)
+                current_impulse += delta * (impulse_acceleration / cap_speed);
             if (current_impulse > 0.0)
                 current_impulse = 0.0;
         }else{
@@ -729,14 +761,14 @@ void SpaceShip::update(float delta)
             impulse_request = -1.0;
         if (current_impulse < impulse_request)
         {
-            if (impulse_max_speed > 0)
-                current_impulse += delta * (impulse_acceleration / impulse_max_speed);
+            if (cap_speed > 0)
+                current_impulse += delta * (impulse_acceleration / cap_speed);
             if (current_impulse > impulse_request)
                 current_impulse = impulse_request;
         }else if (current_impulse > impulse_request)
         {
-            if (impulse_max_speed > 0)
-                current_impulse -= delta * (impulse_acceleration / impulse_max_speed);
+            if (cap_speed > 0)
+                current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
             if (current_impulse < impulse_request)
                 current_impulse = impulse_request;
         }
@@ -747,7 +779,7 @@ void SpaceShip::update(float delta)
 
     // Determine forward direction and velocity.
     sf::Vector2f forward = sf::vector2FromAngle(getRotation());
-    setVelocity(forward * (current_impulse * impulse_max_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
+    setVelocity(forward * (current_impulse * cap_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
 
     if (combat_maneuver_boost_active > combat_maneuver_boost_request)
     {
@@ -1375,6 +1407,8 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         ret += ":setHull(" + string(hull_strength, 0) + ")";
     if (impulse_max_speed != ship_template->impulse_speed)
         ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
+    if (impulse_max_reverse_speed != ship_template->impulse_reverse_speed)
+        ret += ":setImpulseMaxReverseSpeed(" + string(impulse_max_reverse_speed, 1) + ")";
     if (turn_speed != ship_template->turn_speed)
         ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
     if (has_jump_drive != ship_template->has_jump_drive)

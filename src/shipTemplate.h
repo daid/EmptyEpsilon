@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <unordered_set>
+#include <optional>
 #include "engine.h"
 #include "modelData.h"
 
@@ -109,8 +110,8 @@ public:
     float hull;
     int shield_count;
     float shield_level[max_shield_count];
-    float impulse_speed, turn_speed, warp_speed;
-    float impulse_acceleration;
+    float impulse_speed, impulse_reverse_speed, turn_speed, warp_speed;
+    float impulse_acceleration, impulse_reverse_acceleration;
     float combat_maneuver_boost_speed;
     float combat_maneuver_strafe_speed;
     bool has_jump_drive, has_cloaking;
@@ -170,7 +171,7 @@ public:
     void setTubeDirection(int index, float direction);
     void setHull(float amount) { hull = amount; }
     void setShields(std::vector<float> values);
-    void setSpeed(float impulse, float turn, float acceleration);
+    void setSpeed(float impulse, float turn, float acceleration, std::optional<float> reverse_speed, std::optional<float> reverse_acceleration);
     void setCombatManeuver(float boost, float strafe);
     void setWarpSpeed(float warp);
     void setJumpDrive(bool enabled);

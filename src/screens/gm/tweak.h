@@ -57,6 +57,7 @@ private:
     GuiToggleButton* warp_toggle;
     GuiToggleButton* jump_toggle;
     GuiSlider* impulse_speed_slider;
+    GuiSlider* impulse_reverse_speed_slider;
     GuiSlider* turn_speed_slider;
     GuiSlider* hull_max_slider;
     GuiSlider* hull_slider;

@@ -436,6 +436,8 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         config.write("turn_speed", ship->turn_speed);
         config.write("impulse_speed", ship->impulse_max_speed);
         config.write("impulse_acceleration", ship->impulse_acceleration);
+        config.write("impulse_reverse_speed", ship->impulse_max_reverse_speed);
+        config.write("impulse_reverse_acceleration", ship->impulse_reverse_acceleration);
         config.write("hull", ship->hull_max);
         if (ship->has_warp_drive)
             config.write("warp", ship->warp_speed_per_warp_level);
