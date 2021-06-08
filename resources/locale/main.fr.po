@@ -4166,6 +4166,10 @@ msgstr "Options de controle"
 msgid "Configure Keyboard"
 msgstr "Configuration Clavier"
 
+#: src/menus/optionsMenu.cpp:173
+msgid "Language (applies on back)"
+msgstr "Langue (à la sortie du menu)"
+
 #: src/menus/shipSelectionScreen.cpp:93
 msgctxt "shipwindow"
 msgid "{angle} degrees"

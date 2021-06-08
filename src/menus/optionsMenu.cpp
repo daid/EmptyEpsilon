@@ -169,6 +169,33 @@ OptionsMenu::OptionsMenu()
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
+    //Select the language
+    (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    
+    std::vector<string> languages = findResources("locale/main.*.po");
+    
+    for(string &language : languages) 
+    {
+        //strip extension
+        language = language.substr(language.find(".") + 1, language.rfind("."));
+    }
+    std::sort(languages.begin(), languages.end());
+
+    int default_index = 0;
+    auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
+    if(default_elem != languages.end())
+    {
+        default_index =  default_elem - languages.begin();
+    }
+    
+    (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+    {
+        i18n::reset();
+        i18n::load("locale/main." + value + ".po");
+        PreferencesManager::set("language", value);
+    }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+    
+
     // Right column, auto layout. Draw first element 50px from top.
     // Music preview jukebox.
 
