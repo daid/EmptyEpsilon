@@ -138,6 +138,7 @@ public:
         void init();
         sp::io::Keybinding toggle_ui;
         sp::io::Keybinding lock_camera;
+        sp::io::Keybinding cycle_camera;
         sp::io::Keybinding previous_player_ship;
         sp::io::Keybinding next_player_ship;
         sp::io::Keybinding move_forward;
