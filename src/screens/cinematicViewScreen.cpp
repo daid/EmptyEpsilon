@@ -44,6 +44,10 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t play
     camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
     camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(350, 50)->hide();
 
+    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle trough ships"), [this](bool value) {});
+    camera_lock_cycle_toggle->setValue(false)->setPosition(670, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
+    cycle_time = 0.0f;
+
     new GuiIndicatorOverlays(this);
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
@@ -77,6 +81,11 @@ void CinematicViewScreen::update(float delta)
     if (keys.cinematic.lock_camera.getDown())
     {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+    }
+
+    if (keys.cinematic.cycle_camera.getDown())
+    {
+        camera_lock_cycle_toggle->setValue(!camera_lock_cycle_toggle->getValue());
     }
 
     if (keys.cinematic.previous_player_ship.getDown())
@@ -181,6 +190,20 @@ void CinematicViewScreen::update(float delta)
         }
     }
 
+    // If cycle is enabled switch target every 30 sec.
+    if (camera_lock_cycle_toggle->getValue())
+    {
+        cycle_time -= delta;
+        if (cycle_time < 0.0)
+        {
+            cycle_time = 30.0f;
+            camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
+            if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
+                camera_lock_selector->setSelectionIndex(0);
+            target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        }
+    }
+
     // Plot headings from the camera to the locked player ship.
     // Set camera_yaw and camera_pitch to those values.
 
@@ -189,7 +212,10 @@ void CinematicViewScreen::update(float delta)
     {
         // Show the target-of-target lock button.
         if (camera_lock_toggle->isVisible())
+        {
             camera_lock_tot_toggle->show();
+            camera_lock_cycle_toggle->show();
+        }
 
         // Get the selected ship's current position.
         target_position_2D = target->getPosition();
@@ -290,5 +316,6 @@ void CinematicViewScreen::update(float delta)
     } else {
         // Hide the target-of-target camera lock button.
         camera_lock_tot_toggle->hide();
+        camera_lock_cycle_toggle->hide();
     }
 }

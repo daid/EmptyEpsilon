@@ -9,6 +9,7 @@ Keys keys;
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
     lock_camera("CINEMATIC_LOCK_CAMERA", "L"),
+    cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
     next_player_ship("CINEMATIC_NEXT_PLAYER_SHIP", "K"),
     move_forward("CINEMATIC_MOVE_FORWARD", "W"),
@@ -29,6 +30,7 @@ void Keys::CinematicKeys::init()
     const auto localized_category = tr("hotkey_menu", "Cinematic View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
+    cycle_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera cycle"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous player ship"));
     next_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle next player ship"));
     move_forward.setLabel(localized_category, tr("hotkey_Cinematic", "Move forward"));
