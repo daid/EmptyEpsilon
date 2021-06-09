@@ -77,7 +77,10 @@ void AutoConnectScreen::update(float delta)
         case GameClient::ReadyToConnect:
         case GameClient::Connecting:
         case GameClient::Authenticating:
-            status_label->setText("Connecting: " + connect_to_address.toString());
+            if (!connect_to_address.getHumanReadable().empty())
+                status_label->setText("Connecting: " + connect_to_address.getHumanReadable()[0]);
+            else
+                status_label->setText("Connecting...");
             break;
         case GameClient::WaitingForPassword: //For now, just disconnect when we found a password protected server.
         case GameClient::Disconnected:
@@ -93,7 +96,10 @@ void AutoConnectScreen::update(float delta)
                         my_player_info = i;
                 if (my_player_info && gameGlobalInfo)
                 {
-                    status_label->setText("Waiting for ship on " + connect_to_address.toString() + "...");
+                    if (!connect_to_address.getHumanReadable().empty())
+                        status_label->setText("Waiting for ship on " + connect_to_address.getHumanReadable()[0] + "...");
+                    else
+                        status_label->setText("Waiting for ship...");
                     if (!my_spaceship)
                     {
                         for(int n=0; n<GameGlobalInfo::max_player_ships; n++)

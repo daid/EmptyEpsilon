@@ -9,7 +9,7 @@ class GuiLabel;
 class AutoConnectScreen : public GuiCanvas, public Updatable
 {
     P<ServerScanner> scanner;
-    sf::IpAddress connect_to_address;
+    sp::io::network::Address connect_to_address;
     ECrewPosition crew_position;
     bool control_main_screen;
     std::map<string, string> ship_filters;

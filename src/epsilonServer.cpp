@@ -22,7 +22,7 @@ EpsilonServer::EpsilonServer()
         for(auto proxy : PreferencesManager::get("serverproxy").split(":"))
         {
             if (proxy != "")
-                connectToProxy(sf::IpAddress(proxy));
+                connectToProxy(sp::io::network::Address(proxy));
         }
     }
 }

@@ -68,7 +68,7 @@ bool PlayerInfo::isOnlyMainScreen()
 
 void PlayerInfo::commandSetCrewPosition(ECrewPosition position, bool active)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UPDATE_CREW_POSITION << int32_t(position) << active;
     sendClientCommand(packet);
 
@@ -77,14 +77,14 @@ void PlayerInfo::commandSetCrewPosition(ECrewPosition position, bool active)
 
 void PlayerInfo::commandSetShipId(int32_t id)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UPDATE_SHIP_ID << id;
     sendClientCommand(packet);
 }
 
 void PlayerInfo::commandSetMainScreen(bool enabled)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UPDATE_MAIN_SCREEN << enabled;
     sendClientCommand(packet);
 
@@ -93,7 +93,7 @@ void PlayerInfo::commandSetMainScreen(bool enabled)
 
 void PlayerInfo::commandSetMainScreenControl(bool control)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << control;
     sendClientCommand(packet);
 
@@ -102,14 +102,14 @@ void PlayerInfo::commandSetMainScreenControl(bool control)
 
 void PlayerInfo::commandSetName(const string& name)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UPDATE_NAME << name;
     sendClientCommand(packet);
 
     this->name = name;
 }
 
-void PlayerInfo::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
+void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     if (client_id != this->client_id) return;
     int16_t command;
