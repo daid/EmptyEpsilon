@@ -226,7 +226,7 @@ void RepairCrew::update(float delta)
     }
 }
 
-void RepairCrew::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
+void RepairCrew::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     int16_t command;
     packet >> command;
@@ -247,7 +247,7 @@ void RepairCrew::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
 
 void RepairCrew::commandSetTargetPosition(sf::Vector2i position)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_TARGET_POSITION << position;
     sendClientCommand(packet);
 }

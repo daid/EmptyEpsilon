@@ -35,7 +35,7 @@ public:
     RepairCrew();
     virtual ~RepairCrew();
 
-    virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet);
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet);
     void commandSetTargetPosition(sf::Vector2i position);
 
     virtual void update(float delta);

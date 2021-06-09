@@ -16,7 +16,7 @@ GameMasterActions::GameMasterActions()
     gameMasterActions = this;
 }
 
-void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
+void GameMasterActions::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     int16_t command;
     packet >> command;
@@ -50,13 +50,13 @@ void GameMasterActions::onReceiveClientCommand(int32_t client_id, sf::Packet& pa
 
 void GameMasterActions::commandRunScript(string code)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_RUN_SCRIPT << code;
     sendClientCommand(packet);
 }
 void GameMasterActions::commandSendGlobalMessage(string message)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SEND_GLOBAL_MESSAGE << message;
     sendClientCommand(packet);
 }

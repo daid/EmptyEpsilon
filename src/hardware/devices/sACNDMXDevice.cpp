@@ -1,6 +1,5 @@
 #include <string.h>
 
-#include "fixedSocket.h"
 #include "sACNDMXDevice.h"
 #include "random.h"
 #include "logging.h"
@@ -74,7 +73,8 @@ void StreamingAcnDMXDevice::updateLoop()
     uint8_t sequence_number = 0;
     while(run_thread)
     {
-        sf::Packet packet;
+        //TODO:SOCKET: This is no longer correct after we modify the DataBuffer to save data
+        sp::io::DataBuffer packet;
         //Root layer
         packet << uint16_t(0x0010); //RLP Size
         packet << uint16_t(0x0000); //RLP Preamble size
@@ -106,10 +106,11 @@ void StreamingAcnDMXDevice::updateLoop()
 
         sequence_number++;
 
+        /*TODO:SOCKET
         if (multicast)
             socket.send(packet.getData(), packet.getDataSize(), sf::IpAddress(239, 255, (universe >> 8), universe & 0xFF), acn_port);
         else
-            UDPbroadcastPacket(socket, packet.getData(), packet.getDataSize(), acn_port);
+            UDPbroadcastPacket(socket, packet.getData(), packet.getDataSize(), acn_port);*/
 
         sf::sleep(sf::milliseconds(resend_delay));
     }

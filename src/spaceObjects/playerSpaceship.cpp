@@ -308,8 +308,8 @@ string alertLevelToLocaleString(EAlertLevel level)
 }
 
 // Configure ship's log packets.
-static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
-static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
+static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
+static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
@@ -896,7 +896,7 @@ void PlayerSpaceship::addHeat(ESystem system, float amount)
 
 void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_PLAY_CLIENT_SOUND;
     packet << max_crew_positions;
     packet << sound_name;
@@ -1230,7 +1230,7 @@ void PlayerSpaceship::closeComms()
     }
 }
 
-void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& packet)
+void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     // Receive a command from a client. Code in this function is executed on
     // the server only.
@@ -1715,42 +1715,42 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
 // Client-side functions to send a command to the server.
 void PlayerSpaceship::commandTargetRotation(float target)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_TARGET_ROTATION << target;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandTurnSpeed(float turnSpeed)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_TURN_SPEED << turnSpeed;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandImpulse(float target)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_IMPULSE << target;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandWarp(int8_t target)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_WARP << target;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandJump(float distance)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_JUMP << distance;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetTarget(P<SpaceObject> target)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     if (target)
         packet << CMD_SET_TARGET << target->getMultiplayerId();
     else
@@ -1760,21 +1760,21 @@ void PlayerSpaceship::commandSetTarget(P<SpaceObject> target)
 
 void PlayerSpaceship::commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_LOAD_TUBE << tubeNumber << missileType;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandUnloadTube(int8_t tubeNumber)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UNLOAD_TUBE << tubeNumber;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_angle)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
     sendClientCommand(packet);
 }
@@ -1796,35 +1796,35 @@ void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> 
 
 void PlayerSpaceship::commandSetShields(bool enabled)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_SHIELDS << enabled;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandMainScreenSetting(EMainScreenSetting mainScreen)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandMainScreenOverlay(EMainScreenOverlay mainScreen)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_MAIN_SCREEN_OVERLAY << mainScreen;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandScan(P<SpaceObject> object)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SCAN_OBJECT << object->getMultiplayerId();
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetSystemPowerRequest(ESystem system, float power_request)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     systems[system].power_request = power_request;
     packet << CMD_SET_SYSTEM_POWER_REQUEST << system << power_request;
     sendClientCommand(packet);
@@ -1832,7 +1832,7 @@ void PlayerSpaceship::commandSetSystemPowerRequest(ESystem system, float power_r
 
 void PlayerSpaceship::commandSetSystemCoolantRequest(ESystem system, float coolant_request)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     systems[system].coolant_request = coolant_request;
     packet << CMD_SET_SYSTEM_COOLANT_REQUEST << system << coolant_request;
     sendClientCommand(packet);
@@ -1841,21 +1841,21 @@ void PlayerSpaceship::commandSetSystemCoolantRequest(ESystem system, float coola
 void PlayerSpaceship::commandDock(P<SpaceObject> object)
 {
     if (!object) return;
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_DOCK << object->getMultiplayerId();
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandUndock()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_UNDOCK;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandAbortDock()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_ABORT_DOCK;
     sendClientCommand(packet);
 }
@@ -1863,105 +1863,105 @@ void PlayerSpaceship::commandAbortDock()
 void PlayerSpaceship::commandOpenTextComm(P<SpaceObject> obj)
 {
     if (!obj) return;
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_OPEN_TEXT_COMM << obj->getMultiplayerId();
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCloseTextComm()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_CLOSE_TEXT_COMM;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandAnswerCommHail(bool awnser)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_ANSWER_COMM_HAIL << awnser;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSendComm(uint8_t index)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SEND_TEXT_COMM << index;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSendCommPlayer(string message)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SEND_TEXT_COMM_PLAYER << message;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetAutoRepair(bool enabled)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_AUTO_REPAIR << enabled;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetBeamFrequency(int32_t frequency)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_BEAM_FREQUENCY << frequency;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetBeamSystemTarget(ESystem system)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_BEAM_SYSTEM_TARGET << system;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetShieldFrequency(int32_t frequency)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_SHIELD_FREQUENCY << frequency;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandAddWaypoint(sf::Vector2f position)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_ADD_WAYPOINT << position;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_REMOVE_WAYPOINT << index;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandMoveWaypoint(int32_t index, sf::Vector2f position)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_MOVE_WAYPOINT << index << position;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandActivateSelfDestruct()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_ACTIVATE_SELF_DESTRUCT;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCancelSelfDestruct()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_CANCEL_SELF_DESTRUCT;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_CONFIRM_SELF_DESTRUCT << index << code;
     sendClientCommand(packet);
 }
@@ -1969,7 +1969,7 @@ void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
 void PlayerSpaceship::commandCombatManeuverBoost(float amount)
 {
     combat_maneuver_boost_request = amount;
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_COMBAT_MANEUVER_BOOST << amount;
     sendClientCommand(packet);
 }
@@ -1977,35 +1977,35 @@ void PlayerSpaceship::commandCombatManeuverBoost(float amount)
 void PlayerSpaceship::commandCombatManeuverStrafe(float amount)
 {
     combat_maneuver_strafe_request = amount;
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_COMBAT_MANEUVER_STRAFE << amount;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_LAUNCH_PROBE << target_position;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandScanDone()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SCAN_DONE;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandScanCancel()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SCAN_CANCEL;
     sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_SET_ALERT_LEVEL;
     packet << level;
     sendClientCommand(packet);
@@ -2013,7 +2013,7 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
 
 void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, string target_system)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_HACKING_FINISHED;
     packet << target->getMultiplayerId();
     packet << target_system;
@@ -2022,7 +2022,7 @@ void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, string targe
 
 void PlayerSpaceship::commandCustomFunction(string name)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
     packet << CMD_CUSTOM_FUNCTION;
     packet << name;
     sendClientCommand(packet);
@@ -2030,7 +2030,7 @@ void PlayerSpaceship::commandCustomFunction(string name)
 
 void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
 
     // Pass the probe's multiplayer ID if the probe isn't nullptr.
     if (probe)
@@ -2048,14 +2048,14 @@ void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
 
 void PlayerSpaceship::commandClearScienceLink()
 {
-    sf::Packet packet;
+    sp::io::DataBuffer packet;
 
     packet << CMD_SET_SCIENCE_LINK;
     packet << int32_t(-1);
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::onReceiveServerCommand(sf::Packet& packet)
+void PlayerSpaceship::onReceiveServerCommand(sp::io::DataBuffer& packet)
 {
     int16_t command;
     packet >> command;

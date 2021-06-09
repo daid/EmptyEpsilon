@@ -238,7 +238,7 @@ public:
     ESystem getBeamSystemTarget(){ return beam_system_target; }
     string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
     // Client command functions
-    virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
     void commandTargetRotation(float target);
     void commandTurnSpeed(float turnSpeed);
     void commandImpulse(float target);
@@ -284,7 +284,7 @@ public:
     void commandHackingFinished(P<SpaceObject> target, string target_system);
     void commandCustomFunction(string name);
 
-    virtual void onReceiveServerCommand(sf::Packet& packet) override;
+    virtual void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
 
     // Template function
     virtual void applyTemplateValues() override;
@@ -348,9 +348,10 @@ template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
 template<> void convert<EAlertLevel>::param(lua_State* L, int& idx, EAlertLevel& al);
 REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
 
-static inline sf::Packet& operator << (sf::Packet& packet, const PlayerSpaceship::CustomShipFunction& csf) { return packet << uint8_t(csf.type) << uint8_t(csf.crew_position) << csf.name << csf.caption; } \
-static inline sf::Packet& operator >> (sf::Packet& packet, PlayerSpaceship::CustomShipFunction& csf) { int8_t tmp; packet >> tmp; csf.type = PlayerSpaceship::CustomShipFunction::Type(tmp); packet >> tmp; csf.crew_position = ECrewPosition(tmp); packet >> csf.name >> csf.caption; return packet; }
+static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const PlayerSpaceship::CustomShipFunction& csf) { return packet << uint8_t(csf.type) << uint8_t(csf.crew_position) << csf.name << csf.caption; } \
+static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, PlayerSpaceship::CustomShipFunction& csf) { int8_t tmp; packet >> tmp; csf.type = PlayerSpaceship::CustomShipFunction::Type(tmp); packet >> tmp; csf.crew_position = ECrewPosition(tmp); packet >> csf.name >> csf.caption; return packet; }
 
 string alertLevelToString(EAlertLevel level);
 string alertLevelToLocaleString(EAlertLevel level);
+
 #endif//PLAYER_SPACESHIP_H

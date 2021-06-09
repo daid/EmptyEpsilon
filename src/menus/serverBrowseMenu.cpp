@@ -68,7 +68,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
     lan_internet_selector->setOptions({tr("LAN"), tr("Internet")})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
 
     connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"), [this]() {
-        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(manual_ip->getText()));
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(manual_ip->getText()));
         destroy();
     });
     connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);
@@ -76,7 +76,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
     manual_ip = new GuiTextEntry(this, "IP", "");
     manual_ip->setPosition(-50, -120, ABottomRight)->setSize(300, 50);
     manual_ip->enterCallback([this](string text) {
-        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sf::IpAddress(text.strip()));
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(text.strip()));
         destroy();
     });
     server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
@@ -86,16 +86,20 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
         server_list->addEntry(tr("Last Session ({last})").format({{"last", PreferencesManager::get("last_server", "")}}),
             PreferencesManager::get("last_server", ""));
     }
-    scanner->addCallbacks([this](sf::IpAddress address, string name) {
+    scanner->addCallbacks([this](sp::io::network::Address address, string name) {
         //New server found
-        server_list->addEntry(name + " (" + address.toString() + ")", address.toString());
+        if (address.getHumanReadable().empty()) return;
+        auto addr_str = address.getHumanReadable()[0];
+        server_list->addEntry(name + " (" + addr_str + ")", addr_str);
 
         if (manual_ip->getText() == "")
-            manual_ip->setText(address.toString());
+            manual_ip->setText(addr_str);
 
-    }, [this](sf::IpAddress address) {
+    }, [this](sp::io::network::Address address) {
         //Server removed from list
-        server_list->removeEntry(server_list->indexByValue(address.toString()));
+        if (address.getHumanReadable().empty()) return;
+        auto addr_str = address.getHumanReadable()[0];
+        server_list->removeEntry(server_list->indexByValue(addr_str));
     });
     server_list->setPosition(0, 50, ATopCenter)->setSize(700, 600);
 }

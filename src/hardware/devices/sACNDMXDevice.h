@@ -2,7 +2,7 @@
 #define S_ACN_DMX_DEVICE_H
 
 #include <SFML/System.hpp>
-#include <SFML/Network.hpp>
+#include <io/network/udpSocket.h>
 #include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"
 
@@ -13,7 +13,7 @@ private:
     static constexpr int acn_port = 5568;
 
     sf::Thread update_thread;
-    sf::UdpSocket socket;
+    sp::io::network::UdpSocket socket;
 
     bool run_thread;
     int channel_count;

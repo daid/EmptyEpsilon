@@ -119,7 +119,7 @@ static inline bool operator < (P<ScienceDatabase> a, P<ScienceDatabase> b) {
     return a->getNormalizedName() < b->getNormalizedName();
 }
 
-static inline sf::Packet& operator << (sf::Packet& packet, const ScienceDatabase::KeyValue& kv) { return packet << kv.key << kv.value; }
-static inline sf::Packet& operator >> (sf::Packet& packet, ScienceDatabase::KeyValue& kv) { return packet >> kv.key >> kv.value; }
+static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const ScienceDatabase::KeyValue& kv) { return packet << kv.key << kv.value; }
+static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, ScienceDatabase::KeyValue& kv) { return packet >> kv.key >> kv.value; }
 
 #endif//SCIENCE_DATABASE_H

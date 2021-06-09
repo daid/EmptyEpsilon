@@ -10,7 +10,7 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_button.h"
 
-JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sf::IpAddress ip)
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip)
 : ip(ip)
 {
     this->source = source;
@@ -67,7 +67,8 @@ void JoinServerScreen::update(float delta)
         
         break;
     case GameClient::Connected:
-        PreferencesManager::set("last_server", this->ip.toString());
+        if (!this->ip.getHumanReadable().empty())
+            PreferencesManager::set("last_server", this->ip.getHumanReadable()[0]);
         if (game_client->getClientId() > 0)
         {
             foreach(PlayerInfo, i, player_info_list)
