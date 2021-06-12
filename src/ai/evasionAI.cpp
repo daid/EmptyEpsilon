@@ -85,7 +85,7 @@ bool EvasionAI::evadeIfNecessary()
         P<SpaceShip> ship = obj;
         if (!ship || !owner->isEnemy(ship))
             continue;
-        if (ship->canHideInNebula() && Nebula::blockedByNebula(position, ship->getPosition()))
+        if (ship->canHideInNebula() && Nebula::blockedByNebula(position, ship->getPosition(), owner->getShortRangeRadarRange()))
             continue;
         float score = evasionDangerScore(ship, scan_radius);
         if (score == std::numeric_limits<float>::min())

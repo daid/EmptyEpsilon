@@ -29,7 +29,7 @@ public:
     virtual bool canHideInNebula() { return false; }
 
     static bool inNebula(sf::Vector2f position);
-    static bool blockedByNebula(sf::Vector2f start, sf::Vector2f end);
+    static bool blockedByNebula(sf::Vector2f start, sf::Vector2f end, float radar_short_range);
     static sf::Vector2f getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f end);
     static PVector<Nebula> getNebulas();
 

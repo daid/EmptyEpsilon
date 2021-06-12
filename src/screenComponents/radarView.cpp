@@ -736,7 +736,7 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
     case NebulaFogOfWar:
         foreach(SpaceObject, obj, space_object_list)
         {
-            if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+            if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
                 continue;
             visible_objects.emplace(*obj);
         }
