@@ -255,7 +255,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
             targets.clear();
     }else{
-        if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition()))
+        if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition(), my_spaceship->getShortRangeRadarRange()))
             targets.clear();
     }
 
@@ -500,7 +500,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 // If this object is my ship or not visible due to a Nebula,
                 // skip it.
                 if (obj == my_spaceship ||
-                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
                     continue;
 
                 // If this is a scannable object and the currently selected
@@ -519,7 +519,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
             {
                 if (obj == targets.get() ||
                     obj == my_spaceship ||
-                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition()))
+                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
                     continue;
 
                 if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&

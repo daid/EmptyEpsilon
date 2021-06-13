@@ -129,11 +129,11 @@ bool Nebula::inNebula(sf::Vector2f position)
     return false;
 }
 
-bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end)
+bool Nebula::blockedByNebula(sf::Vector2f start, sf::Vector2f end, float radar_short_range)
 {
     sf::Vector2f startEndDiff = end - start;
     float startEndLength = sf::length(startEndDiff);
-    if (startEndLength < 5000.0f)
+    if (startEndLength < radar_short_range)
         return false;
 
     foreach(Nebula, n, nebula_list)
