@@ -318,7 +318,6 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
     {
         float scale = std::min(rect.width, rect.height) / 2.0f / distance;
 
-        float r = 5000.0 * scale;
         sf::CircleShape circle(0.f, 50);
         circle.setFillColor(sf::Color{ 20, 20, 20, background_alpha });
         foreach(SpaceObject, obj, space_object_list)
@@ -328,7 +327,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
             if (stb_obj
                 && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
             {
-                r = stb_obj->getShortRangeRadarRange() * scale;
+                auto r = stb_obj->getShortRangeRadarRange() * scale;
                 circle.setRadius(r);
                 circle.setOrigin(r, r);
                 circle.setPosition(worldToScreen(obj->getPosition()));
@@ -339,6 +338,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sf::RenderTarget& window)
 
             if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
             {
+                auto r = 5000.f * scale;
                 circle.setRadius(r);
                 circle.setOrigin(r, r);
                 circle.setPosition(worldToScreen(obj->getPosition()));
@@ -436,6 +436,14 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
         {
             if (diff_len < n->getRadius())
             {
+                // Inside a nebula - everything is blocked out.
+                sf::RectangleShape background(sf::Vector2f(rect.width, rect.height));
+                background.setPosition(rect.left, rect.top);
+                background.setFillColor(sf::Color::Black);
+                window.draw(background);
+                
+                // Leave the loop here: there's no point adding more blocked areas.
+                break;
             }else{
                 float r = n->getRadius() * scale;
                 circle.setRadius(r);
@@ -461,6 +469,18 @@ void GuiRadarView::drawNebulaBlockedAreas(sf::RenderTarget& window)
                 window.draw(a);
             }
         }
+    }
+
+    // ship's short radar range is always visible.
+    {
+        float scale = std::min(rect.width, rect.height) / 2.0f / distance;
+
+        circle.setFillColor(sf::Color{ 20, 20, 20, background_alpha });
+        auto r = my_spaceship->getShortRangeRadarRange() * scale;
+        circle.setRadius(r);
+        circle.setOrigin(r, r);
+        circle.setPosition(worldToScreen(my_spaceship->getPosition()));
+        window.draw(circle);
     }
 }
 
@@ -756,23 +776,10 @@ void GuiRadarView::drawObjects(sf::RenderTarget& window)
         }
     };
 
-    // First draw all objects that are maybe hidden.
-    window.setActive(true);
-    glStencilFunc(GL_EQUAL, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::InBoundsAndVisible));
-    for (auto obj : visible_objects)
-    {
-        if (obj->canHideInNebula())
-        {
-            draw_object(obj);
-        }
-    }
-
-    // Second, draw all objects that can't hide.
     window.setActive(true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     for(SpaceObject* obj : visible_objects)
     {
-        if (!obj->canHideInNebula())
             draw_object(obj);
     }
 
