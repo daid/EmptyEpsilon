@@ -27,6 +27,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockingState);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponStorageMax);
@@ -91,6 +92,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// returns the current amount of jump charged.
     /// Example ship:getJumpDriveCharge()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDriveCharge);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDelay);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWarpDrive);
     /// Set the warp speed for this ship's warp level 1.
