@@ -314,7 +314,6 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
 
         string description = obj->getDescriptionFor(my_spaceship);
-        string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
         if (description.size() > 0)
         {
@@ -328,7 +327,11 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         else
         {
             sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
+            if (sidebar_pager->getSelectionIndex() < 0)
+                sidebar_pager->setSelectionIndex(0);
         }
+
+        string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
         // If the target is a ship, show information about the ship based on how
         // deeply we've scanned it.
