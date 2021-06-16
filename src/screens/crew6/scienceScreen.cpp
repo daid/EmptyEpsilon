@@ -320,7 +320,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         {
             info_description->setText(description)->show();
 
-            if (!sidebar_pager->indexByValue("Description"))
+            if (sidebar_pager->indexByValue("Description") < 0)
             {
                 sidebar_pager->addEntry("Description", "Description");
             }
