@@ -51,7 +51,8 @@ function commsShipFriendly(comms_source, comms_target)
                     addCommsReply(
                         string.format(_("commsShipAssist", "Defend %s"), formatWaypoint(n)),
                         function(comms_source, comms_target)
-                            comms_target:orderDefendLocation(comms_source:getWaypoint(n))
+                            x, y = comms_source:getWaypoint(n)
+                            comms_target:orderDefendLocation(x, y)
                             setCommsMessage(string.format(_("commsShipAssist", "We are heading to assist at %s."), formatWaypoint(n)))
                             addCommsReply(_("button", "Back"), commsShipMainMenu)
                         end
