@@ -99,4 +99,68 @@ jobs:
           -DSERIOUS_PROTON_DIR="../SeriousProton"
       - name: Build
         working-directory: ${{github.workspace}}/build
-        run: cmake --build . --config ${{ matrix.build_type }} --target package 
+        run: cmake --build . --config ${{ matrix.build_type }} --target package
+  android:
+    name: Android APK
+    runs-on: ubuntu-latest
+    steps:
+      # Github's machines are already provisioned with Android toolchains.
+      - name: Setup
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq ninja-build
+      - name: Android Keystore (Debug)
+        run: >
+          keytool -genkey -v -keystore debug.keystore
+          -storepass android
+          -alias androiddebugkey -keypass android
+          -keyalg RSA -keysize 2048 -validity 10000
+          -dname "C=US, O=Android, CN=Android Debug"
+      - name: SeriousProton Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: daid/SeriousProton
+          path: SeriousProton
+      - name: EmptyEpsilon Checkout
+        uses: actions/checkout@v2
+        with:
+          path: EmptyEpsilon
+      # The Android toolchain file uses cache variables.
+      # However, some of them won't get applied properly,
+      # Because toolchain file are a whole other can of CMake worms.
+      # We run a bunch of sed commands, patching the toolchain to make it
+      # compatible with Github's CI setup.
+      - name: Android SDK Injection
+        run: |
+          sed -i "s!ANDROID_SDK_PATH \"\"!ANDROID_SDK_PATH \"$ANDROID_SDK_ROOT\"!" EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!ANDROID_API_TARGET "26"!ANDROID_API_TARGET "27"!' EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!ANDROID_SIGN_KEY_NAME "Android"!ANDROID_SIGN_KEY_NAME "androiddebugkey"!' EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!ANDROID_SIGN_KEY_PASSWORD "password"!ANDROID_SIGN_KEY_PASSWORD "android"!' EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!set(SFML_ROOT "${SFML_INSTALL_PATH}")!!' EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!file(COPY "${SFML_INSTALL_PATH}/!file(COPY "${SFML_ROOT}/!g' EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!-sigalg SHA1withRSA!-sigalg SHA1withRSA -keystore "${{github.workspace}}/debug.keystore"!' EmptyEpsilon/cmake/android.toolchain
+          sed -i 's!--whole-archive ${SFML_INSTALL_PATH}!--whole-archive ${SFML_ROOT}!' EmptyEpsilon/CMakeLists.txt
+          cat EmptyEpsilon/cmake/android.toolchain
+      - name: Create Build Environment
+        run: cmake -E make_directory ${{github.workspace}}/build
+      # Most of the settings here have been 'patched' above, kept here for readability/consistency.
+      - name: Configure CMake
+        working-directory: ${{github.workspace}}/build
+        run: >
+          cmake ../EmptyEpsilon
+          -G Ninja
+          -DSFML_ROOT:PATH=/usr/local/lib/android/sdk/ndk-bundle/sources/third_party/sfml/
+          -DCMAKE_MAKE_PROGRAM:FILEPATH=$(which ninja)
+          -DCMAKE_BUILD_TYPE:STRING=Release
+          -DSERIOUS_PROTON_DIR:PATH=../SeriousProton
+          -DANDROID_SDK_PATH:PATH=$ANDROID_SDK_ROOT
+          -DANDROID_API_TARGET:STRING=27
+          -DANDROID_SIGN_KEY_NAME:STRING=androiddebugkey
+          -DANDROID_SIGN_KEY_PASSWORD:STRING=android
+          -DCMAKE_TOOLCHAIN_FILE:FILEPATH=../EmptyEpsilon/cmake/android.toolchain
+      - name: Build
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . --parallel --target EmptyEpsilon --verbose   
+      - name: Package
+        working-directory: ${{github.workspace}}/build
+        run: cmake --build . --parallel --target apk --verbose
