@@ -72,9 +72,15 @@ ServerCreationScreen::ServerCreationScreen()
     // Server IP row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "IP_LABEL", tr("Server IP: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "IP_LABEL", tr("Server IPs: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    auto ips = new GuiSelector(row, "IP", [](int index, string value){});
+    ips->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     for(auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
-        (new GuiLabel(row, "IP", addr_str, 30))->setAlignment(ACenterLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    {
+        if (addr_str == "::1" || addr_str == "127.0.0.1") continue;
+        ips->addEntry(addr_str, addr_str);
+    }
+    ips->setSelectionIndex(ips->entryCount() - 1);
 
     // LAN/Internet row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);

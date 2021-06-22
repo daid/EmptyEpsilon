@@ -106,11 +106,10 @@ void StreamingAcnDMXDevice::updateLoop()
 
         sequence_number++;
 
-        /*TODO:SOCKET
         if (multicast)
-            socket.send(packet.getData(), packet.getDataSize(), sf::IpAddress(239, 255, (universe >> 8), universe & 0xFF), acn_port);
+            socket.sendMulticast(packet, universe, acn_port);
         else
-            UDPbroadcastPacket(socket, packet.getData(), packet.getDataSize(), acn_port);*/
+            socket.sendBroadcast(packet, acn_port);
 
         sf::sleep(sf::milliseconds(resend_delay));
     }
