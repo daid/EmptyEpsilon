@@ -100,26 +100,26 @@ function init()
 	junkYardDebrisY = {150504, 150317, 148005}
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris1 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(2,1):onPickUp(function(debris, pGrab) string.format("");pGrab.debris1 = true end)
-	debris1:setDescriptions("Debris","Debris: Various broken ship components. Possibly useful for engine or weapons systems repair")
+	debris1:setDescriptions(_("scienceDebrisDescription", "Debris"),_("scienceDebrisDescription", "Debris: Various broken ship components. Possibly useful for engine or weapons systems repair"))
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris2 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(1,3):onPickUp(function(debris, pGrab) string.format("");pGrab.debris2 = true end)
-	debris2:setDescriptions("Debris","Debris: Various broken ship components. Possibly useful for shield or beam systems repair")
+	debris2:setDescriptions(_("scienceDebrisDescription", "Debris"),_("scienceDebrisDescription", "Debris: Various broken ship components. Possibly useful for shield or beam systems repair"))
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris3 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(2,1):onPickUp(function(debris, pGrab) string.format("");pGrab.debris3 = true end)
-	debris3:setDescriptions("Debris","Debris: Various broken ship components. Possibly useful for hull or reactor systems repair")
+	debris3:setDescriptions(_("scienceDebrisDescription", "Debris"),_("scienceDebrisDescription", "Debris: Various broken ship components. Possibly useful for hull or reactor systems repair"))
 	--Signs
 	junkYardSignX = {914126, 905479, 910303}
 	junkYardSignY = {151100, 148728, 147102}
 	junkZone = Zone():setPoints(905479, 148728, 906490, 146843, 910303, 147102, 914126, 151100, 912635, 154012, 905801, 151274)
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign1 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign1:setDescriptions("Space Message Buoy","Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in the Kraylor language")
+	Sign1:setDescriptions(_("scienceBuoyDescription", "Space Message Buoy"),_("scienceBuoyDescription", "Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in the Kraylor language"))
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign2 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign2:setDescriptions("Space Message Buoy","Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an asteroid for the kids' in the Kraylor language")
+	Sign2:setDescriptions(_("scienceBuoyDescription", "Space Message Buoy"),_("scienceBuoyDescription", "Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an asteroid for the kids' in the Kraylor language"))
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign3 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign3:setDescriptions("Space Message Buoy","Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language")
+	Sign3:setDescriptions(_("scienceBuoyDescription", "Space Message Buoy"),_("scienceBuoyDescription", "Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language"))
 	plotSign = billboardUpdate	
 	--Initial player ship
 	playerFighter = PlayerSpaceship():setFaction("Human Navy"):setTemplate("MP52 Hornet"):setCallSign("Scrag"):setPosition(912035, 152062)
@@ -200,7 +200,7 @@ function init()
     junkSupply = SupplyDrop():setFaction("Independent"):setPosition(909362, 151445):setEnergy(500):setWeaponStorage("Homing", 1):setWeaponStorage("Nuke", 0):setWeaponStorage("Mine", 0):setWeaponStorage("EMP", 0)
 	plotH = shipHealth				--enable ship health check plot
 	playerShipHealth = scragHealth	--set function to constrain player ship health
-	playerFighter:addToShipLog(string.format("You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station",brigStation:getCallSign()),"Magenta")
+	playerFighter:addToShipLog(string.format(_("shipLog", "You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station"), brigStation:getCallSign()),"Magenta")
 	plot1 = scanRepulse				--enable first plot mission goal
 	--print("end of init")
 end
@@ -368,9 +368,9 @@ function buildNearbyStations()
 	bwx = brigx + (gRegion[sri][1] - (gbHigh/2))*gSize
 	bwy = brigy + (gRegion[sri][2] - (gbHigh/2))*gSize
 	planetBaldwin = Planet():setPosition(bwx,bwy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Baldwin")
-	planetBaldwin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription("Mining and heavy industry")
+	planetBaldwin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription(_("scienceStationDescription", "Mining and heavy industry"))
 	stationWig = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor")
-	stationWig:setPosition(bwx, bwy+3000):setCallSign("BOBS"):setDescription("Baldwin Observatory")
+	stationWig:setPosition(bwx, bwy+3000):setCallSign("BOBS"):setDescription(_("scienceStationDescription", "Baldwin Observatory"))
 	stationWig.angle = 90
 	gp = gp + 1
 	rn = math.random(1,#adjList)
@@ -403,9 +403,9 @@ function buildNearbyStations()
 	planetMal = Planet():setPosition(msx,msy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Malastare")
 	planetMal:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	planetMal:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	planetMal:setAxialRotationTime(400.0):setDescription("M class planet")
+	planetMal:setAxialRotationTime(400.0):setDescription(_("scienceStationDescription", "M class planet"))
 	stationMal = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
-	stationMal:setPosition(msx,msy+3000):setCallSign("MalNet"):setDescription("Malastare communications network hub")
+	stationMal:setPosition(msx,msy+3000):setCallSign("MalNet"):setDescription(_("scienceStationDescription", "Malastare communications network hub"))
 	stationMal.angle = 90
 	gp = gp + 1
 	rn = math.random(1,#adjList)
@@ -1031,7 +1031,7 @@ end
 function placeAlcaleica()
 	--Alcaleica
 	stationAlcaleica = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAlcaleica:setPosition(psx,psy):setCallSign("Alcaleica"):setDescription("Optical Components")
+	stationAlcaleica:setPosition(psx,psy):setCallSign("Alcaleica"):setDescription(_("scienceStationDescription", "Optical Components"))
     stationAlcaleica.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1043,8 +1043,8 @@ function placeAlcaleica()
         trade = {	food = false, medicine = false, luxury = false },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We make and supply optic components for various station and ship systems",
-    	history = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"
+        general_information = _("generalStationInformation", "We make and supply optic components for various station and ship systems"),
+    	history = _("stationHistory", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company")
 	}
 	if stationFaction == "Human Navy" then
 		stationAlcaleica.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1062,7 +1062,7 @@ end
 function placeAnderson()
 	--Anderson 
 	stationAnderson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAnderson:setPosition(psx,psy):setCallSign("Anderson"):setDescription("Battery and software engineering")
+	stationAnderson:setPosition(psx,psy):setCallSign("Anderson"):setDescription(_("scienceStationDescription", "Battery and software engineering"))
     stationAnderson.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1074,8 +1074,8 @@ function placeAnderson()
         			software =	{quantity = 5,	cost = 115} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We provide high quality high capacity batteries and specialized software for all shipboard systems",
-    	history = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"
+        general_information = _("generalStationInformation", "We provide high quality high capacity batteries and specialized software for all shipboard systems"),
+    	history = _("stationHistory", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion")
 	}
 	if stationFaction == "Human Navy" then
 		stationAnderson.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1088,7 +1088,7 @@ end
 function placeArcher()
 	--Archer 
 	stationArcher = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationArcher:setPosition(psx,psy):setCallSign("Archer"):setDescription("Shield and Armor Research")
+	stationArcher:setPosition(psx,psy):setCallSign("Archer"):setDescription(_("scienceStationDescription", "Shield and Armor Research"))
     stationArcher.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1100,8 +1100,8 @@ function placeArcher()
         trade = {	food = false, medicine = false, luxury = true },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "The finest shield and armor manufacturer in the quadrant",
-    	history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
+        general_information = _("generalStationInformation", "The finest shield and armor manufacturer in the quadrant"),
+    	history = _("stationHistory", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer")
 	}
 	if stationFaction == "Human Navy" then
 		stationArcher.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1118,7 +1118,7 @@ end
 function placeArchimedes()
 	--Archimedes
 	stationArchimedes = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationArchimedes:setPosition(psx,psy):setCallSign("Archimedes"):setDescription("Energy and particle beam components")
+	stationArchimedes:setPosition(psx,psy):setCallSign("Archimedes"):setDescription(_("scienceStationDescription", "Energy and particle beam components"))
     stationArchimedes.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1129,8 +1129,8 @@ function placeArchimedes()
         goods = {	beam =	{quantity = 5,	cost = 80} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We fabricate general and specialized components for ship beam systems",
-    	history = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"
+        general_information = _("generalStationInformation", "We fabricate general and specialized components for ship beam systems"),
+    	history = _("stationHistory", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it")
 	}
 	if stationFaction == "Human Navy" then
 		stationArchimedes.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1147,7 +1147,7 @@ end
 function placeArmstrong()
 	--Armstrong
 	stationArmstrong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationArmstrong:setPosition(psx,psy):setCallSign("Armstrong"):setDescription("Warp and Impulse engine manufacturing")
+	stationArmstrong:setPosition(psx,psy):setCallSign("Armstrong"):setDescription(_("scienceStationDescription", "Warp and Impulse engine manufacturing"))
     stationArmstrong.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1160,8 +1160,8 @@ function placeArmstrong()
         trade = {	food = false, medicine = false, luxury = false },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis",
-    	history = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."
+        general_information = _("generalStationInformation", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"),
+    	history = _("stationHistory", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems.")
 	}
 	if stationFaction == "Human Navy" then
 		stationArmstrong.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1174,7 +1174,7 @@ end
 function placeAsimov()
 	--Asimov
 	stationAsimov = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAsimov:setCallSign("Asimov"):setDescription("Training and Coordination"):setPosition(psx,psy)
+	stationAsimov:setCallSign("Asimov"):setDescription(_("scienceStationDescription", "Training and Coordination")):setPosition(psx,psy)
     stationAsimov.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1185,8 +1185,8 @@ function placeAsimov()
         goods = {	tractor =	{quantity = 5,	cost = 48} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector",
-    	history = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"
+        general_information = _("generalStationInformation", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"),
+    	history = _("stationHistory", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region")
 	}
 	if stationFaction == "Human Navy" then
 		stationAsimov.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1199,7 +1199,7 @@ end
 function placeBarclay()
 	--Barclay
 	stationBarclay = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationBarclay:setPosition(psx,psy):setCallSign("Barclay"):setDescription("Communication components")
+	stationBarclay:setPosition(psx,psy):setCallSign("Barclay"):setDescription(_("scienceStationDescription", "Communication components"))
     stationBarclay.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1211,8 +1211,8 @@ function placeBarclay()
         trade = {	food = false, medicine = false, luxury = false },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We provide a range of communication equipment and software for use aboard ships",
-    	history = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"
+        general_information = _("generalStationInformation", "We provide a range of communication equipment and software for use aboard ships"),
+    	history = _("stationHistory", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station")
 	}
 	if stationFaction == "Human Navy" then
 		stationBarclay.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1229,7 +1229,7 @@ end
 function placeBethesda()
 	--Bethesda 
 	stationBethesda = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription("Medical research")
+	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription(_("scienceStationDescription", "Medical research"))
     stationBethesda.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1242,15 +1242,15 @@ function placeBethesda()
         			food =		{quantity = math.random(5,10),	cost = 1} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We research and treat exotic medical conditions",
-    	history = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"
+        general_information = _("generalStationInformation", "We research and treat exotic medical conditions"),
+    	history = _("stationHistory", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century")
 	}
 	return stationBethesda
 end
 function placeBroeck()
 	--Broeck
 	stationBroeck = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationBroeck:setPosition(psx,psy):setCallSign("Broeck"):setDescription("Warp drive components")
+	stationBroeck:setPosition(psx,psy):setCallSign("Broeck"):setDescription(_("scienceStationDescription", "Warp drive components"))
     stationBroeck.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1262,8 +1262,8 @@ function placeBroeck()
         trade = {	food = false, medicine = false, luxury = random(1,100) < 62 },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We provide warp drive engines and components",
-    	history = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"
+        general_information = _("generalStationInformation", "We provide warp drive engines and components"),
+    	history = _("stationHistory", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth")
 	}
 	if stationFaction == "Human Navy" then
 		stationBroeck.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1281,7 +1281,7 @@ end
 function placeCalifornia()
 	--California
 	stationCalifornia = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalifornia:setPosition(psx,psy):setCallSign("California"):setDescription("Mining station")
+	stationCalifornia:setPosition(psx,psy):setCallSign("California"):setDescription(_("scienceStationDescription", "Mining station"))
     stationCalifornia.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1305,7 +1305,7 @@ end
 function placeCalvin()
 	--Calvin 
 	stationCalvin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalvin:setPosition(psx,psy):setCallSign("Calvin"):setDescription("Robotic research")
+	stationCalvin:setPosition(psx,psy):setCallSign("Calvin"):setDescription(_("scienceStationDescription", "Robotic research"))
     stationCalvin.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1317,8 +1317,8 @@ function placeCalvin()
         trade = {	food = false, medicine = false, luxury = true },
 		buy =	{	[randomComponent("robotic")] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We research and provide robotic systems and components",
-    	history = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"
+        general_information = _("generalStationInformation", "We research and provide robotic systems and components"),
+    	history = _("stationHistory", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming")
 	}
 	if stationFaction == "Human Navy" then
 		stationCalvin.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1333,7 +1333,7 @@ end
 function placeCavor()
 	--Cavor 
 	stationCavor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCavor:setPosition(psx,psy):setCallSign("Cavor"):setDescription("Advanced Material components")
+	stationCavor:setPosition(psx,psy):setCallSign("Cavor"):setDescription(_("scienceStationDescription", "Advanced Material components"))
     stationCavor.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1344,8 +1344,8 @@ function placeCavor()
         goods = {	filament =	{quantity = 5,	cost = 42} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction",
-    	history = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"
+        general_information = _("generalStationInformation", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"),
+    	history = _("stationHistory", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite")
 	}
 	if stationFaction == "Human Navy" then
 		stationCavor.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1374,7 +1374,7 @@ end
 function placeChatuchak()
 	--Chatuchak
 	stationChatuchak = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationChatuchak:setPosition(psx,psy):setCallSign("Chatuchak"):setDescription("Trading station")
+	stationChatuchak:setPosition(psx,psy):setCallSign("Chatuchak"):setDescription(_("scienceStationDescription", "Trading station"))
     stationChatuchak.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1385,8 +1385,8 @@ function placeChatuchak()
         goods = {	luxury =	{quantity = 5,	cost = 60} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Only the largest market and trading location in twenty sectors. You can find your heart's desire here",
-    	history = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"
+        general_information = _("generalStationInformation", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"),
+    	history = _("stationHistory", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind")
 	}
 	if stationFaction == "Human Navy" then
 		stationChatuchak.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1399,7 +1399,7 @@ end
 function placeCoulomb()
 	--Coulomb
 	stationCoulomb = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCoulomb:setPosition(psx,psy):setCallSign("Coulomb"):setDescription("Shielded circuitry fabrication")
+	stationCoulomb:setPosition(psx,psy):setCallSign("Coulomb"):setDescription(_("scienceStationDescription", "Shielded circuitry fabrication"))
     stationCoulomb.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1411,8 +1411,8 @@ function placeCoulomb()
         trade = {	food = false, medicine = false, luxury = random(1,100) < 82 },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference",
-    	history = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"
+        general_information = _("generalStationInformation", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"),
+    	history = _("stationHistory", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits")
 	}
 	if stationFaction == "Human Navy" then
 		stationCoulomb.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1430,7 +1430,7 @@ end
 function placeCyrus()
 	--Cyrus
 	stationCyrus = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCyrus:setPosition(psx,psy):setCallSign("Cyrus"):setDescription("Impulse engine components")
+	stationCyrus:setPosition(psx,psy):setCallSign("Cyrus"):setDescription(_("scienceStationDescription", "Impulse engine components"))
     stationCyrus.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1441,8 +1441,8 @@ function placeCyrus()
         goods = {	impulse =	{quantity = 5,	cost = 124} },
         trade = {	food = false, medicine = false, luxury = random(1,100) < 78 },
         public_relations = true,
-        general_information = "We supply high quality impulse engines and parts for use aboard ships",
-    	history = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"
+        general_information = _("generalStationInformation", "We supply high quality impulse engines and parts for use aboard ships"),
+    	history = _("stationHistory", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne")
 	}
 	if stationFaction == "Human Navy" then
 		stationCyrus.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1460,7 +1460,7 @@ end
 function placeDeckard()
 	--Deckard
 	stationDeckard = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeckard:setPosition(psx,psy):setCallSign("Deckard"):setDescription("Android components")
+	stationDeckard:setPosition(psx,psy):setCallSign("Deckard"):setDescription(_("scienceStationDescription", "Android components"))
     stationDeckard.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1471,8 +1471,8 @@ function placeDeckard()
         goods = {	android =	{quantity = 5,	cost = 73} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "Supplier of android components, programming and service",
-    	history = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"
+        general_information = _("generalStationInformation", "Supplier of android components, programming and service"),
+    	history = _("stationHistory", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids")
 	}
 	if stationFaction == "Human Navy" then
 		stationDeckard.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1488,7 +1488,7 @@ end
 function placeDeer()
 	--Deer
 	stationDeer = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeer:setPosition(psx,psy):setCallSign("Deer"):setDescription("Repulsor and Tractor Beam Components")
+	stationDeer:setPosition(psx,psy):setCallSign("Deer"):setDescription(_("scienceStationDescription", "Repulsor and Tractor Beam Components"))
     stationDeer.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1501,8 +1501,8 @@ function placeDeer()
         trade = {	food = false, medicine = false, luxury = true },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We can meet all your pushing and pulling needs with specialized equipment custom made",
-    	history = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"
+        general_information = _("generalStationInformation", "We can meet all your pushing and pulling needs with specialized equipment custom made"),
+    	history = _("stationHistory", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products")
 	}
 	if stationFaction == "Human Navy" then
 		stationDeer.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1521,7 +1521,7 @@ end
 function placeErickson()
 	--Erickson
 	stationErickson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationErickson:setPosition(psx,psy):setCallSign("Erickson"):setDescription("Transporter components")
+	stationErickson:setPosition(psx,psy):setCallSign("Erickson"):setDescription(_("scienceStationDescription", "Transporter components"))
     stationErickson.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1532,8 +1532,8 @@ function placeErickson()
         goods = {	transporter =	{quantity = 5,	cost = 90} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We provide transporters used aboard ships as well as the components for repair and maintenance",
-    	history = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"
+        general_information = _("generalStationInformation", "We provide transporters used aboard ships as well as the components for repair and maintenance"),
+    	history = _("stationHistory", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy")
 	}
 	if stationFaction == "Human Navy" then
 		stationErickson.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1551,7 +1551,7 @@ end
 function placeEvondos()
 	--Evondos
 	stationEvondos = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationEvondos:setPosition(psx,psy):setCallSign("Evondos"):setDescription("Autodoc components")
+	stationEvondos:setPosition(psx,psy):setCallSign("Evondos"):setDescription(_("scienceStationDescription", "Autodoc components"))
     stationEvondos.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1562,8 +1562,8 @@ function placeEvondos()
         goods = {	autodoc =	{quantity = 5,	cost = 56} },
         trade = {	food = false, medicine = false, luxury = random(1,100) < 41 },
         public_relations = true,
-        general_information = "We provide components for automated medical machinery",
-    	history = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"
+        general_information = _("generalStationInformation", "We provide components for automated medical machinery"),
+    	history = _("stationHistory", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland")
 	}
 	if stationFaction == "Human Navy" then
 		stationEvondos.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1580,7 +1580,7 @@ end
 function placeFeynman()
 	--Feynman 
 	stationFeynman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationFeynman:setPosition(psx,psy):setCallSign("Feynman"):setDescription("Nanotechnology research")
+	stationFeynman:setPosition(psx,psy):setCallSign("Feynman"):setDescription(_("scienceStationDescription", "Nanotechnology research"))
     stationFeynman.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1592,8 +1592,8 @@ function placeFeynman()
         			nanites =	{quantity = 5,	cost = 79} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We provide nanites and software for a variety of ship-board systems",
-    	history = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"
+        general_information = _("generalStationInformation", "We provide nanites and software for a variety of ship-board systems"),
+    	history = _("stationHistory", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman")
 	}
 	if stationFaction == "Human Navy" then
 		stationFeynman.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1610,7 +1610,7 @@ function placeGrasberg()
 	--Grasberg
 	placeRandomAsteroidsAroundPoint(15,1,15000,psx,psy)
 	stationGrasberg = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationGrasberg:setPosition(psx,psy):setCallSign("Grasberg"):setDescription("Mining")
+	stationGrasberg:setPosition(psx,psy):setCallSign("Grasberg"):setDescription(_("scienceStationDescription", "Mining"))
     stationGrasberg.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1622,8 +1622,8 @@ function placeGrasberg()
         trade = {	food = false, medicine = false, luxury = false },
 		buy =	{	[randomComponent()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We mine nearby asteroids for precious minerals and process them for sale",
-    	history = "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"
+        general_information = _("generalStationInformation", "We mine nearby asteroids for precious minerals and process them for sale"),
+    	history = _("stationHistory", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids")
 	}
 	if stationFaction == "Human Navy" then
 		stationGrasberg.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1649,7 +1649,7 @@ end
 function placeHayden()
 	--Hayden
 	stationHayden = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationHayden:setPosition(psx,psy):setCallSign("Hayden"):setDescription("Observatory and stellar mapping")
+	stationHayden:setPosition(psx,psy):setCallSign("Hayden"):setDescription(_("scienceStationDescription", "Observatory and stellar mapping"))
     stationHayden.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1660,8 +1660,8 @@ function placeHayden()
         goods = {	nanites =	{quantity = 5,	cost = 65} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding",
-    	history = "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"
+        general_information = _("generalStationInformation", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"),
+    	history = _("stationHistory", "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century")
 	}
 	if stationFaction == "Human Navy" then
 		stationHayden.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1674,7 +1674,7 @@ end
 function placeHeyes()
 	--Heyes
 	stationHeyes = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationHeyes:setPosition(psx,psy):setCallSign("Heyes"):setDescription("Sensor components")
+	stationHeyes:setPosition(psx,psy):setCallSign("Heyes"):setDescription(_("scienceStationDescription", "Sensor components"))
     stationHeyes.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1686,8 +1686,8 @@ function placeHeyes()
         trade = {	food = false, medicine = false, luxury = true },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We research and manufacture sensor components and systems",
-    	history = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"
+        general_information = _("generalStationInformation", "We research and manufacture sensor components and systems"),
+    	history = _("stationHistory", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility")
 	}
 	if stationFaction == "Human Navy" then
 		stationHeyes.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1700,7 +1700,7 @@ end
 function placeHossam()
 	--Hossam
 	stationHossam = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationHossam:setPosition(psx,psy):setCallSign("Hossam"):setDescription("Nanite supplier")
+	stationHossam:setPosition(psx,psy):setCallSign("Hossam"):setDescription(_("scienceStationDescription", "Nanite supplier"))
     stationHossam.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1711,8 +1711,8 @@ function placeHossam()
         goods = {	nanites =	{quantity = 5,	cost = 90} },
         trade = {	food = false, medicine = false, luxury = random(1,100) < 63 },
         public_relations = true,
-        general_information = "We provide nanites for various organic and non-organic systems",
-    	history = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"
+        general_information = _("generalStationInformation", "We provide nanites for various organic and non-organic systems"),
+    	history = _("stationHistory", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel")
 	}
 	if stationFaction == "Human Navy" then
 		stationHossam.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1731,7 +1731,7 @@ function placeImpala()
 	--Impala
 	placeRandomAsteroidsAroundPoint(15,1,15000,psx,psy)
 	stationImpala = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationImpala:setPosition(psx,psy):setCallSign("Impala"):setDescription("Mining")
+	stationImpala:setPosition(psx,psy):setCallSign("Impala"):setDescription(_("scienceStationDescription", "Mining"))
     stationImpala.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1743,7 +1743,7 @@ function placeImpala()
         trade = {	food = false, medicine = false, luxury = true },
 		buy =	{	[randomComponent()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We mine nearby asteroids for precious minerals"
+        general_information = _("generalStationInformation", "We mine nearby asteroids for precious minerals")
 	}
 	local impalaGoods = random(1,100)
 	if impalaGoods < 20 then
@@ -1771,7 +1771,7 @@ end
 function placeKomov()
 	--Komov
 	stationKomov = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKomov:setPosition(psx,psy):setCallSign("Komov"):setDescription("Xenopsychology training")
+	stationKomov:setPosition(psx,psy):setCallSign("Komov"):setDescription(_("scienceStationDescription", "Xenopsychology training"))
     stationKomov.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1782,8 +1782,8 @@ function placeKomov()
         goods = {	filament =	{quantity = 5,	cost = 46} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We provide classes and simulation to help train diverse species in how to relate to each other",
-    	history = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"
+        general_information = _("generalStationInformation", "We provide classes and simulation to help train diverse species in how to relate to each other"),
+    	history = _("stationHistory", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles")
 	}
 	if stationFaction == "Human Navy" then
 		stationKomov.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1801,7 +1801,7 @@ end
 function placeKrak()
 	--Krak
 	stationKrak = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKrak:setPosition(psx,psy):setCallSign("Krak"):setDescription("Mining station")
+	stationKrak:setPosition(psx,psy):setCallSign("Krak"):setDescription(_("scienceStationDescription", "Mining station"))
     stationKrak.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1858,7 +1858,7 @@ end
 function placeKruk()
 	--Kruk
 	stationKruk = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKruk:setPosition(psx,psy):setCallSign("Kruk"):setDescription("Mining station")
+	stationKruk:setPosition(psx,psy):setCallSign("Kruk"):setDescription(_("scienceStationDescription", "Mining station"))
     stationKruk.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1915,7 +1915,7 @@ end
 function placeLipkin()
 	--Lipkin
 	stationLipkin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationLipkin:setPosition(psx,psy):setCallSign("Lipkin"):setDescription("Autodoc components")
+	stationLipkin:setPosition(psx,psy):setCallSign("Lipkin"):setDescription(_("scienceStationDescription", "Autodoc components"))
     stationLipkin.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1926,8 +1926,8 @@ function placeLipkin()
         goods = {	autodoc =	{quantity = 5,	cost = 76} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)",
-    	history = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"
+        general_information = _("generalStationInformation", "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)"),
+    	history = _("stationHistory", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth")
 	}
 	if stationFaction == "Human Navy" then
 		stationLipkin.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1942,7 +1942,7 @@ end
 function placeMadison()
 	--Madison
 	stationMadison = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMadison:setPosition(psx,psy):setCallSign("Madison"):setDescription("Zero gravity sports and entertainment")
+	stationMadison:setPosition(psx,psy):setCallSign("Madison"):setDescription(_("scienceStationDescription", "Zero gravity sports and entertainment"))
     stationMadison.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1953,8 +1953,8 @@ function placeMadison()
         goods = {	luxury =	{quantity = 5,	cost = 70} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Come take in a game or two or perhaps see a show",
-    	history = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"
+        general_information = _("generalStationInformation", "Come take in a game or two or perhaps see a show"),
+    	history = _("stationHistory", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment")
 	}
 	if stationFaction == "Human Navy" then
 		stationMadison.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -1971,7 +1971,7 @@ end
 function placeMaiman()
 	--Maiman
 	stationMaiman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMaiman:setPosition(psx,psy):setCallSign("Maiman"):setDescription("Energy beam components")
+	stationMaiman:setPosition(psx,psy):setCallSign("Maiman"):setDescription(_("scienceStationDescription", "Energy beam components"))
     stationMaiman.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -1983,8 +1983,8 @@ function placeMaiman()
         trade = {	food = false, medicine = false, luxury = false },
 		buy =	{	[randomMineral()] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We research and manufacture energy beam components and systems",
-    	history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"
+        general_information = _("generalStationInformation", "We research and manufacture energy beam components and systems"),
+    	history = _("stationHistory", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth")
 	}
 	if stationFaction == "Human Navy" then
 		stationMaiman.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2001,7 +2001,7 @@ end
 function placeMarconi()
 	--Marconi 
 	stationMarconi = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMarconi:setPosition(psx,psy):setCallSign("Marconi"):setDescription("Energy Beam Components")
+	stationMarconi:setPosition(psx,psy):setCallSign("Marconi"):setDescription(_("scienceStationDescription", "Energy Beam Components"))
     stationMarconi.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2012,8 +2012,8 @@ function placeMarconi()
         goods = {	beam =	{quantity = 5,	cost = 80} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We manufacture energy beam components",
-    	history = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"
+        general_information = _("generalStationInformation", "We manufacture energy beam components"),
+    	history = _("stationHistory", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon")
 	}
 	if stationFaction == "Human Navy" then
 		stationMarconi.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2031,7 +2031,7 @@ end
 function placeMayo()
 	--Mayo
 	stationMayo = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMayo:setPosition(psx,psy):setCallSign("Mayo"):setDescription("Medical Research")
+	stationMayo:setPosition(psx,psy):setCallSign("Mayo"):setDescription(_("scienceStationDescription", "Medical Research"))
     stationMayo.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2044,15 +2044,15 @@ function placeMayo()
         			medicine = 	{quantity = 5,	cost = 5} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We research exotic diseases and other human medical conditions",
-    	history = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"
+        general_information = _("generalStationInformation", "We research exotic diseases and other human medical conditions"),
+    	history = _("stationHistory", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth")
 	}
 	return stationMayo
 end
 function placeMiller()
 	--Miller
 	stationMiller = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMiller:setPosition(psx,psy):setCallSign("Miller"):setDescription("Exobiology research")
+	stationMiller:setPosition(psx,psy):setCallSign("Miller"):setDescription(_("scienceStationDescription", "Exobiology research"))
     stationMiller.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2063,8 +2063,8 @@ function placeMiller()
         goods = {	optic =	{quantity = 5,	cost = 60} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We study recently discovered life forms not native to Earth",
-    	history = "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"
+        general_information = _("generalStationInformation", "We study recently discovered life forms not native to Earth"),
+    	history = _("stationHistory", "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller")
 	}
 	if stationFaction == "Human Navy" then
 		stationMiller.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2077,7 +2077,7 @@ end
 function placeMuddville()
 	--Muddville 
 	stationMudd = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMudd:setPosition(psx,psy):setCallSign("Muddville"):setDescription("Trading station")
+	stationMudd:setPosition(psx,psy):setCallSign("Muddville"):setDescription(_("scienceStationDescription", "Trading station"))
     stationMudd.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2088,8 +2088,8 @@ function placeMuddville()
         goods = {	luxury =	{quantity = 5,	cost = 60} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Come to Muddvile for all your trade and commerce needs and desires",
-    	history = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"
+        general_information = _("generalStationInformation", "Come to Muddvile for all your trade and commerce needs and desires"),
+    	history = _("stationHistory", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman")
 	}
 	if stationFaction == "Human Navy" then
 		stationMudd.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2102,7 +2102,7 @@ end
 function placeNexus6()
 	--Nexus-6
 	stationNexus6 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationNexus6:setPosition(psx,psy):setCallSign("Nexus-6"):setDescription("Android components")
+	stationNexus6:setPosition(psx,psy):setCallSign("Nexus-6"):setDescription(_("scienceStationDescription", "Android components"))
     stationNexus6.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2115,8 +2115,8 @@ function placeNexus6()
 		buy =	{	[randomMineral()] = math.random(40,200),
 					[randomComponent("android")] = math.random(40,200)	},
         public_relations = true,
-        general_information = "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans",
-    	history = "We named the station after the ground breaking android model produced by the Tyrell corporation"
+        general_information = _("generalStationInformation", "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans"),
+    	history = _("stationHistory", "We named the station after the ground breaking android model produced by the Tyrell corporation")
 	}
 	if stationFaction == "Human Navy" then
 		stationNexus6.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2133,7 +2133,7 @@ end
 function placeOBrien()
 	--O'Brien
 	stationOBrien = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOBrien:setPosition(psx,psy):setCallSign("O'Brien"):setDescription("Transporter components")
+	stationOBrien:setPosition(psx,psy):setCallSign("O'Brien"):setDescription(_("scienceStationDescription", "Transporter components"))
     stationOBrien.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2144,8 +2144,8 @@ function placeOBrien()
         goods = {	transporter =	{quantity = 5,	cost = 76} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We research and fabricate high quality transporters and transporter components for use aboard ships",
-    	history = "Miles O'Brien started this business after his experience as a transporter chief"
+        general_information = _("generalStationInformation", "We research and fabricate high quality transporters and transporter components for use aboard ships"),
+    	history = _("stationHistory", "Miles O'Brien started this business after his experience as a transporter chief")
 	}
 	if stationFaction == "Human Navy" then
 		stationOBrien.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2164,7 +2164,7 @@ end
 function placeOlympus()
 	--Olympus
 	stationOlympus = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOlympus:setPosition(psx,psy):setCallSign("Olympus"):setDescription("Optical components")
+	stationOlympus:setPosition(psx,psy):setCallSign("Olympus"):setDescription(_("scienceStationDescription", "Optical components"))
     stationOlympus.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2175,8 +2175,8 @@ function placeOlympus()
         goods = {	optic =	{quantity = 5,	cost = 66} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We fabricate optical lenses and related equipment as well as fiber optic cabling and components",
-    	history = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"
+        general_information = _("generalStationInformation", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"),
+    	history = _("stationHistory", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry")
 	}
 	if stationFaction == "Human Navy" then
 		stationOlympus.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2194,7 +2194,7 @@ end
 function placeOrgana()
 	--Organa
 	stationOrgana = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrgana:setPosition(psx,psy):setCallSign("Organa"):setDescription("Diplomatic training")
+	stationOrgana:setPosition(psx,psy):setCallSign("Organa"):setDescription(_("scienceStationDescription", "Diplomatic training"))
     stationOrgana.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2205,15 +2205,15 @@ function placeOrgana()
         goods = {	luxury =	{quantity = 5,	cost = 96} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "The premeire academy for leadership and diplomacy training in the region",
-    	history = "Established by the royal family so critical during the political upheaval era"
+        general_information = _("generalStationInformation", "The premeire academy for leadership and diplomacy training in the region"),
+    	history = _("stationHistory", "Established by the royal family so critical during the political upheaval era")
 	}
 	return stationOrgana
 end
 function placeOutpost15()
 	--Outpost 15
 	stationOutpost15 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost15:setPosition(psx,psy):setCallSign("Outpost-15"):setDescription("Mining and trade")
+	stationOutpost15:setPosition(psx,psy):setCallSign("Outpost-15"):setDescription(_("scienceStationDescription", "Mining and trade"))
     stationOutpost15.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2251,7 +2251,7 @@ end
 function placeOutpost21()
 	--Outpost 21
 	stationOutpost21 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost21:setPosition(psx,psy):setCallSign("Outpost-21"):setDescription("Mining and gambling")
+	stationOutpost21:setPosition(psx,psy):setCallSign("Outpost-21"):setDescription(_("scienceStationDescription", "Mining and gambling"))
     stationOutpost21.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2290,7 +2290,7 @@ end
 function placeOwen()
 	--Owen
 	stationOwen = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOwen:setPosition(psx,psy):setCallSign("Owen"):setDescription("Load lifters and components")
+	stationOwen:setPosition(psx,psy):setCallSign("Owen"):setDescription(_("scienceStationDescription", "Load lifters and components"))
     stationOwen.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2301,8 +2301,8 @@ function placeOwen()
         goods = {	lifter =	{quantity = 5,	cost = 61} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We provide load lifters and components for various ship systems",
-    	history = "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators"
+        general_information = _("generalStationInformation", "We provide load lifters and components for various ship systems"),
+    	history = _("stationHistory", "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators")
 	}
 	if stationFaction == "Human Navy" then
 		stationOwen.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2317,7 +2317,7 @@ end
 function placePanduit()
 	--Panduit
 	stationPanduit = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationPanduit:setPosition(psx,psy):setCallSign("Panduit"):setDescription("Optic components")
+	stationPanduit:setPosition(psx,psy):setCallSign("Panduit"):setDescription(_("scienceStationDescription", "Optic components"))
     stationPanduit.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2328,8 +2328,8 @@ function placePanduit()
         goods = {	optic =	{quantity = 5,	cost = 79} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We provide optic components for various ship systems",
-    	history = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"
+        general_information = _("generalStationInformation", "We provide optic components for various ship systems"),
+    	history = _("stationHistory", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States")
 	}
 	if stationFaction == "Human Navy" then
 		stationPanduit.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2347,7 +2347,7 @@ end
 function placeRipley()
 	--Ripley
 	stationRipley = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationRipley:setPosition(psx,psy):setCallSign("Ripley"):setDescription("Load lifters and components")
+	stationRipley:setPosition(psx,psy):setCallSign("Ripley"):setDescription(_("scienceStationDescription", "Load lifters and components"))
     stationRipley.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2358,8 +2358,8 @@ function placeRipley()
         goods = {	lifter =	{quantity = 5,	cost = 82} },
         trade = {	food = false, medicine = false, luxury = random(1,100) < 47 },
         public_relations = true,
-        general_information = "We provide load lifters and components",
-    	history = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"
+        general_information = _("generalStationInformation", "We provide load lifters and components"),
+    	history = _("stationHistory", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship")
 	}
 	if stationFaction == "Human Navy" then
 		stationRipley.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2377,7 +2377,7 @@ end
 function placeRutherford()
 	--Rutherford
 	stationRutherford = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationRutherford:setPosition(psx,psy):setCallSign("Rutherford"):setDescription("Shield components and research")
+	stationRutherford:setPosition(psx,psy):setCallSign("Rutherford"):setDescription(_("scienceStationDescription", "Shield components and research"))
     stationRutherford.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2388,8 +2388,8 @@ function placeRutherford()
         goods = {	shield =	{quantity = 5,	cost = 90} },
         trade = {	food = false, medicine = false, luxury = random(1,100) < 43 },
         public_relations = true,
-        general_information = "We research and fabricate components for ship shield systems",
-    	history = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"
+        general_information = _("generalStationInformation", "We research and fabricate components for ship shield systems"),
+    	history = _("stationHistory", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century")
 	}
 	if stationFaction == "Human Navy" then
 		stationRutherford.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2407,7 +2407,7 @@ end
 function placeScience7()
 	--Science 7
 	stationScience7 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience7:setPosition(psx,psy):setCallSign("Science-7"):setDescription("Observatory")
+	stationScience7:setPosition(psx,psy):setCallSign("Science-7"):setDescription(_("scienceStationDescription", "Observatory"))
     stationScience7.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2423,7 +2423,7 @@ end
 function placeShawyer()
 	--Shawyer
 	stationShawyer = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationShawyer:setPosition(psx,psy):setCallSign("Shawyer"):setDescription("Impulse engine components")
+	stationShawyer:setPosition(psx,psy):setCallSign("Shawyer"):setDescription(_("scienceStationDescription", "Impulse engine components"))
     stationShawyer.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2434,8 +2434,8 @@ function placeShawyer()
         goods = {	impulse =	{quantity = 5,	cost = 100} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We research and manufacture impulse engine components and systems",
-    	history = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"
+        general_information = _("generalStationInformation", "We research and manufacture impulse engine components and systems"),
+    	history = _("stationHistory", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century")
 	}
 	if stationFaction == "Human Navy" then
 		stationShawyer.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2452,7 +2452,7 @@ end
 function placeShree()
 	--Shree
 	stationShree = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationShree:setPosition(psx,psy):setCallSign("Shree"):setDescription("Repulsor and tractor beam components")
+	stationShree:setPosition(psx,psy):setCallSign("Shree"):setDescription(_("scienceStationDescription", "Repulsor and tractor beam components"))
     stationShree.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2464,8 +2464,8 @@ function placeShree()
         			repulsor =	{quantity = 5,	cost = math.random(85,95)} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We make ship systems designed to push or pull other objects around in space",
-    	history = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"
+        general_information = _("generalStationInformation", "We make ship systems designed to push or pull other objects around in space"),
+    	history = _("stationHistory", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today")
 	}
 	if stationFaction == "Human Navy" then
 		stationShree.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2483,7 +2483,7 @@ end
 function placeSoong()
 	--Soong 
 	stationSoong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationSoong:setPosition(psx,psy):setCallSign("Soong"):setDescription("Android components")
+	stationSoong:setPosition(psx,psy):setCallSign("Soong"):setDescription(_("scienceStationDescription", "Android components"))
     stationSoong.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2494,8 +2494,8 @@ function placeSoong()
         goods = {	android =	{quantity = 5,	cost = 73} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We create androids and android components",
-    	history = "The station is named after Dr. Noonian Soong, the famous android researcher and builder"
+        general_information = _("generalStationInformation", "We create androids and android components"),
+    	history = _("stationHistory", "The station is named after Dr. Noonian Soong, the famous android researcher and builder")
 	}
 	if stationFaction == "Human Navy" then
 		stationSoong.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2510,7 +2510,7 @@ end
 function placeTiberius()
 	--Tiberius
 	stationTiberius = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationTiberius:setPosition(psx,psy):setCallSign("Tiberius"):setDescription("Logistics coordination")
+	stationTiberius:setPosition(psx,psy):setCallSign("Tiberius"):setDescription(_("scienceStationDescription", "Logistics coordination"))
     stationTiberius.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2521,15 +2521,15 @@ function placeTiberius()
         goods = {	food =	{quantity = 5,	cost = 1} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We support the stations and ships in the area with planning and communication services",
-    	history = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"
+        general_information = _("generalStationInformation", "We support the stations and ships in the area with planning and communication services"),
+    	history = _("stationHistory", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name")
 	}
 	return stationTiberius
 end
 function placeTokra()
 	--Tokra
 	stationTokra = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationTokra:setPosition(psx,psy):setCallSign("Tokra"):setDescription("Advanced material components")
+	stationTokra:setPosition(psx,psy):setCallSign("Tokra"):setDescription(_("scienceStationDescription", "Advanced material components"))
     stationTokra.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2540,8 +2540,8 @@ function placeTokra()
         goods = {	filament =	{quantity = 5,	cost = 42} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We create multiple types of advanced material components. Our most popular products are our filaments",
-    	history = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"
+        general_information = _("generalStationInformation", "We create multiple types of advanced material components. Our most popular products are our filaments"),
+    	history = _("stationHistory", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them")
 	}
 	local whatTrade = random(1,100)
 	if stationFaction == "Human Navy" then
@@ -2570,7 +2570,7 @@ end
 function placeToohie()
 	--Toohie
 	stationToohie = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationToohie:setPosition(psx,psy):setCallSign("Toohie"):setDescription("Shield and armor components and research")
+	stationToohie:setPosition(psx,psy):setCallSign("Toohie"):setDescription(_("scienceStationDescription", "Shield and armor components and research"))
     stationToohie.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2581,8 +2581,8 @@ function placeToohie()
         goods = {	shield =	{quantity = 5,	cost = 90} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We research and make general and specialized components for ship shield and ship armor systems",
-    	history = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."
+        general_information = _("generalStationInformation", "We research and make general and specialized components for ship shield and ship armor systems"),
+    	history = _("stationHistory", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")
 	}
 	if stationFaction == "Human Navy" then
 		stationToohie.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2599,7 +2599,7 @@ end
 function placeUtopiaPlanitia()
 	--Utopia Planitia
 	stationUtopiaPlanitia = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationUtopiaPlanitia:setPosition(psx,psy):setCallSign("Utopia Planitia"):setDescription("Ship building and maintenance facility")
+	stationUtopiaPlanitia:setPosition(psx,psy):setCallSign("Utopia Planitia"):setDescription(_("scienceStationDescription", "Ship building and maintenance facility"))
     stationUtopiaPlanitia.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2610,7 +2610,7 @@ function placeUtopiaPlanitia()
         goods = {	warp =	{quantity = 5,	cost = 167} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"
+        general_information = _("generalStationInformation", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel")
 	}
 	if stationFaction == "Human Navy" then
 		stationUtopiaPlanitia.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2623,7 +2623,7 @@ end
 function placeVactel()
 	--Vactel
 	stationVactel = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationVactel:setPosition(psx,psy):setCallSign("Vactel"):setDescription("Shielded Circuitry Fabrication")
+	stationVactel:setPosition(psx,psy):setCallSign("Vactel"):setDescription(_("scienceStationDescription", "Shielded Circuitry Fabrication"))
     stationVactel.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2634,8 +2634,8 @@ function placeVactel()
         goods = {	circuit =	{quantity = 5,	cost = 50} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We specialize in circuitry shielded from external hacking suitable for ship systems",
-    	history = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"
+        general_information = _("generalStationInformation", "We specialize in circuitry shielded from external hacking suitable for ship systems"),
+    	history = _("stationHistory", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips")
 	}
 	if stationFaction == "Human Navy" then
 		stationVactel.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2648,7 +2648,7 @@ end
 function placeVeloquan()
 	--Veloquan
 	stationVeloquan = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationVeloquan:setPosition(psx,psy):setCallSign("Veloquan"):setDescription("Sensor components")
+	stationVeloquan:setPosition(psx,psy):setCallSign("Veloquan"):setDescription(_("scienceStationDescription", "Sensor components"))
     stationVeloquan.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2659,8 +2659,8 @@ function placeVeloquan()
         goods = {	sensor =	{quantity = 5,	cost = 68} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use",
-    	history = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"
+        general_information = _("generalStationInformation", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"),
+    	history = _("stationHistory", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy")
 	}
 	if stationFaction == "Human Navy" then
 		stationVeloquan.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2678,7 +2678,7 @@ end
 function placeZefram()
 	--Zefram
 	stationZefram = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationZefram:setPosition(psx,psy):setCallSign("Zefram"):setDescription("Warp engine components")
+	stationZefram:setPosition(psx,psy):setCallSign("Zefram"):setDescription(_("scienceStationDescription", "Warp engine components"))
     stationZefram.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2689,8 +2689,8 @@ function placeZefram()
         goods = {	warp =	{quantity = 5,	cost = 140} },
         trade = {	food = false, medicine = false, luxury = true },
         public_relations = true,
-        general_information = "We specialize in the esoteric components necessary to make warp drives function properly",
-    	history = "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"
+        general_information = _("generalStationInformation", "We specialize in the esoteric components necessary to make warp drives function properly"),
+    	history = _("stationHistory", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do")
 	}
 	if stationFaction == "Human Navy" then
 		stationZefram.comms_data.goods.food = {quantity = math.random(5,10), cost = 1}
@@ -2709,7 +2709,7 @@ end
 function placeJabba()
 	--Jabba
 	stationJabba = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationJabba:setPosition(psx,psy):setCallSign("Jabba"):setDescription("Commerce and gambling")
+	stationJabba:setPosition(psx,psy):setCallSign("Jabba"):setDescription(_("scienceStationDescription", "Commerce and gambling"))
     stationJabba.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2720,7 +2720,7 @@ function placeJabba()
         goods = {},
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Come play some games and shop. House take does not exceed 4 percent"
+        general_information = _("generalStationInformation", "Come play some games and shop. House take does not exceed 4 percent")
 	}
 	local stationGoodChoice = math.random(1,3)
 	if stationGoodChoice == 1 then
@@ -2735,7 +2735,7 @@ end
 function placeKrik()
 	--Krik
 	stationKrik = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKrik:setPosition(psx,psy):setCallSign("Krik"):setDescription("Mining station")
+	stationKrik:setPosition(psx,psy):setCallSign("Krik"):setDescription(_("scienceStationDescription", "Mining station"))
     stationKrik.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2788,7 +2788,7 @@ end
 function placeLando()
 	--Lando
 	stationLando = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationLando:setPosition(psx,psy):setCallSign("Lando"):setDescription("Casino and Gambling")
+	stationLando:setPosition(psx,psy):setCallSign("Lando"):setDescription(_("scienceStationDescription", "Casino and Gambling"))
     stationLando.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2812,7 +2812,7 @@ end
 function placeMaverick()
 	--Maverick
 	stationMaverick = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMaverick:setPosition(psx,psy):setCallSign("Maverick"):setDescription("Gambling and resupply")
+	stationMaverick:setPosition(psx,psy):setCallSign("Maverick"):setDescription(_("scienceStationDescription", "Gambling and resupply"))
     stationMaverick.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2823,7 +2823,7 @@ function placeMaverick()
         goods = {},
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Relax and meet some interesting players"
+        general_information = _("generalStationInformation", "Relax and meet some interesting players")
 	}
 	local stationGoodChoice = math.random(1,3)
 	if stationGoodChoice == 1 then
@@ -2838,7 +2838,7 @@ end
 function placeNefatha()
 	--Nefatha
 	stationNefatha = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationNefatha:setPosition(psx,psy):setCallSign("Nefatha"):setDescription("Commerce and recreation")
+	stationNefatha:setPosition(psx,psy):setCallSign("Nefatha"):setDescription(_("scienceStationDescription", "Commerce and recreation"))
     stationNefatha.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2854,7 +2854,7 @@ end
 function placeOkun()
 	--Okun
 	stationOkun = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOkun:setPosition(psx,psy):setCallSign("Okun"):setDescription("Xenopsychology research")
+	stationOkun:setPosition(psx,psy):setCallSign("Okun"):setDescription(_("scienceStationDescription", "Xenopsychology research"))
     stationOkun.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2879,7 +2879,7 @@ end
 function placeOutpost7()
 	--Outpost 7
 	stationOutpost7 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost7:setPosition(psx,psy):setCallSign("Outpost-7"):setDescription("Resupply")
+	stationOutpost7:setPosition(psx,psy):setCallSign("Outpost-7"):setDescription(_("scienceStationDescription", "Resupply"))
     stationOutpost7.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2919,7 +2919,7 @@ end
 function placeOutpost33()
 	--Outpost 33
 	stationOutpost33 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost33:setPosition(psx,psy):setCallSign("Outpost-33"):setDescription("Resupply")
+	stationOutpost33:setPosition(psx,psy):setCallSign("Outpost-33"):setDescription(_("scienceStationDescription", "Resupply"))
     stationOutpost33.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2935,7 +2935,7 @@ end
 function placePrada()
 	--Prada
 	stationPrada = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationPrada:setPosition(psx,psy):setCallSign("Prada"):setDescription("Textiles and fashion")
+	stationPrada:setPosition(psx,psy):setCallSign("Prada"):setDescription(_("scienceStationDescription", "Textiles and fashion"))
     stationPrada.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2959,7 +2959,7 @@ end
 function placeResearch11()
 	--Research-11
 	stationResearch11 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationResearch11:setPosition(psx,psy):setCallSign("Research-11"):setDescription("Stress Psychology Research")
+	stationResearch11:setPosition(psx,psy):setCallSign("Research-11"):setDescription(_("scienceStationDescription", "Stress Psychology Research"))
     stationResearch11.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -2983,7 +2983,7 @@ end
 function placeResearch19()
 	--Research-19
 	stationResearch19 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationResearch19:setPosition(psx,psy):setCallSign("Research-19"):setDescription("Low gravity research")
+	stationResearch19:setPosition(psx,psy):setCallSign("Research-19"):setDescription(_("scienceStationDescription", "Low gravity research"))
     stationResearch19.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3007,7 +3007,7 @@ end
 function placeRubis()
 	--Rubis
 	stationRubis = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationRubis:setPosition(psx,psy):setCallSign("Rubis"):setDescription("Resupply")
+	stationRubis:setPosition(psx,psy):setCallSign("Rubis"):setDescription(_("scienceStationDescription", "Resupply"))
     stationRubis.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3018,14 +3018,14 @@ function placeRubis()
         goods = {	luxury =	{quantity = 5,	cost = 76} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Get your energy here! Grab a drink before you go!"
+        general_information = _("generalStationInformation", "Get your energy here! Grab a drink before you go!")
 	}
 	return stationRubis
 end
 function placeScience2()
 	--Science 2
 	stationScience2 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience2:setPosition(psx,psy):setCallSign("Science-2"):setDescription("Research Lab and Observatory")
+	stationScience2:setPosition(psx,psy):setCallSign("Science-2"):setDescription(_("scienceStationDescription", "Research Lab and Observatory"))
     stationScience2.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3049,7 +3049,7 @@ end
 function placeScience4()
 	--Science 4
 	stationScience4 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience4:setPosition(psx,psy):setCallSign("Science-4"):setDescription("Biotech research")
+	stationScience4:setPosition(psx,psy):setCallSign("Science-4"):setDescription(_("scienceStationDescription", "Biotech research"))
     stationScience4.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3073,7 +3073,7 @@ end
 function placeSkandar()
 	--Skandar
 	stationSkandar = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationSkandar:setPosition(psx,psy):setCallSign("Skandar"):setDescription("Routine maintenance and entertainment")
+	stationSkandar:setPosition(psx,psy):setCallSign("Skandar"):setDescription(_("scienceStationDescription", "Routine maintenance and entertainment"))
     stationSkandar.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3084,15 +3084,15 @@ function placeSkandar()
         goods = {	luxury =	{quantity = 5,	cost = 87} },
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars",
-    	history = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"
+        general_information = _("generalStationInformation", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"),
+    	history = _("stationHistory", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax")
 	}
 	return stationSkandar
 end
 function placeSpot()
 	--Spot
 	stationSpot = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationSpot:setPosition(psx,psy):setCallSign("Spot"):setDescription("Observatory")
+	stationSpot:setPosition(psx,psy):setCallSign("Spot"):setDescription(_("scienceStationDescription", "Observatory"))
     stationSpot.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3116,7 +3116,7 @@ end
 function placeStarnet()
 	--Starnet 
 	stationStarnet = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription("Automated weapons systems")
+	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription(_("scienceStationDescription", "Automated weapons systems"))
     stationStarnet.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3127,7 +3127,7 @@ function placeStarnet()
         goods = {},
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "We research and create automated weapons systems to improve ship combat capability"
+        general_information = _("generalStationInformation", "We research and create automated weapons systems to improve ship combat capability")
 	}
 	local stationGoodChoice = math.random(1,3)
 	if stationGoodChoice == 1 then
@@ -3142,7 +3142,7 @@ end
 function placeTandon()
 	--Tandon
 	stationTandon = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationTandon:setPosition(psx,psy):setCallSign("Tandon"):setDescription("Biotechnology research")
+	stationTandon:setPosition(psx,psy):setCallSign("Tandon"):setDescription(_("scienceStationDescription", "Biotechnology research"))
     stationTandon.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3153,8 +3153,8 @@ function placeTandon()
         goods = {},
         trade = {	food = false, medicine = false, luxury = false },
         public_relations = true,
-        general_information = "Merging the organic and inorganic through research",
-    	history = "Continued from the Tandon school of engineering started on Earth in the early 21st century"
+        general_information = _("generalStationInformation", "Merging the organic and inorganic through research"),
+    	history = _("stationHistory", "Continued from the Tandon school of engineering started on Earth in the early 21st century")
 	}
 	local stationGoodChoice = math.random(1,3)
 	if stationGoodChoice == 1 then
@@ -3169,7 +3169,7 @@ end
 function placeVaiken()
 	--Vaiken
 	stationVaiken = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationVaiken:setPosition(psx,psy):setCallSign("Vaiken"):setDescription("Ship building and maintenance facility")
+	stationVaiken:setPosition(psx,psy):setCallSign("Vaiken"):setDescription(_("scienceStationDescription", "Ship building and maintenance facility"))
     stationVaiken.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3186,7 +3186,7 @@ end
 function placeValero()
 	--Valero
 	stationValero = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationValero:setPosition(psx,psy):setCallSign("Valero"):setDescription("Resupply")
+	stationValero:setPosition(psx,psy):setCallSign("Valero"):setDescription(_("scienceStationDescription", "Resupply"))
     stationValero.comms_data = {
     	friendlyness = random(0,100),
         weapons = 			{Homing = "neutral",					HVLI = "neutral", 						Mine = "neutral",						Nuke = "friend", 						EMP = "friend"},
@@ -3309,7 +3309,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("commsStation", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -3322,12 +3322,12 @@ end
 function handleDockedState()
     local ctd = comms_target.comms_data
     if player:isFriendly(comms_target) then
-		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
+		oMsg = _("commsStation", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = "Welcome to our lovely station.\n"
+		oMsg = _("commsStation", "Welcome to our lovely station.\n")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("commsStation", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
@@ -3341,23 +3341,23 @@ function handleDockedState()
 			(ctd.weapon_available.Homing and comms_source:getWeaponStorageMax("Homing") > 0) or 
 			(ctd.weapon_available.Mine   and comms_source:getWeaponStorageMax("Mine") > 0)   or 
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
-			addCommsReply("I need ordnance restocked", function()
+			addCommsReply(_("commsAmmo", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
-				if stationCommsDiagnostic then print("in restock function") end
-				setCommsMessage("What type of ordnance?")
-				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
+				if stationCommsDiagnostic then print(_("commsAmmo", "in restock function")) end
+				setCommsMessage(_("commsAmmo", "What type of ordnance?"))
+				if stationCommsDiagnostic then print(string.format(_("commsAmmo", "player nuke weapon storage max: %.1f"),comms_source:getWeaponStorageMax("Nuke"))) end
 				if comms_source:getWeaponStorageMax("Nuke") > 0 then
-					if stationCommsDiagnostic then print("player can fire nukes") end
+					if stationCommsDiagnostic then print(_("commsAmmo", "player can fire nukes")) end
 					if ctd.weapon_available.Nuke then
-						if stationCommsDiagnostic then print("station has nukes available") end
+						if stationCommsDiagnostic then print(_("commsAmmo", "station has nukes available")) end
 						if math.random(1,10) <= 5 then
-							nukePrompt = "Can you supply us with some nukes? ("
+							nukePrompt = _("commsAmmo", "Can you supply us with some nukes? (")
 						else
-							nukePrompt = "We really need some nukes ("
+							nukePrompt = _("commsAmmo", "We really need some nukes (")
 						end
-						if stationCommsDiagnostic then print("nuke prompt: " .. nukePrompt) end
-						addCommsReply(nukePrompt .. getWeaponCost("Nuke") .. " rep each)", function()
-							if stationCommsDiagnostic then print("going to handle weapon restock function") end
+						if stationCommsDiagnostic then print(string.format(_("commsAmmo", "nuke prompt: %s"), nukePrompt)) end
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+							if stationCommsDiagnostic then print(_("commsAmmo", "going to handle weapon restock function")) end
 							handleWeaponRestock("Nuke")
 						end)
 					end	--end station has nuke available if branch
@@ -3365,11 +3365,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("EMP") > 0 then
 					if ctd.weapon_available.EMP then
 						if math.random(1,10) <= 5 then
-							empPrompt = "Please re-stock our EMP missiles. ("
+							empPrompt = _("commsAmmo", "Please re-stock our EMP missiles. (")
 						else
-							empPrompt = "Got any EMPs? ("
+							empPrompt = _("commsAmmo", "Got any EMPs? (")
 						end
-						addCommsReply(empPrompt .. getWeaponCost("EMP") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end	--end station has EMP available if branch
@@ -3377,11 +3377,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if ctd.weapon_available.Homing then
 						if math.random(1,10) <= 5 then
-							homePrompt = "Do you have spare homing missiles for us? ("
+							homePrompt = _("commsAmmo", "Do you have spare homing missiles for us? (")
 						else
-							homePrompt = "Do you have extra homing missiles? ("
+							homePrompt = _("commsAmmo", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end	--end station has homing for player if branch
@@ -3389,11 +3389,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Mine") > 0 then
 					if ctd.weapon_available.Mine then
 						if math.random(1,10) <= 5 then
-							minePrompt = "We could use some mines. ("
+							minePrompt = _("commsAmmo", "We could use some mines. (")
 						else
-							minePrompt = "How about mines? ("
+							minePrompt = _("commsAmmo", "How about mines? (")
 						end
-						addCommsReply(minePrompt .. getWeaponCost("Mine") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end	--end station has mine for player if branch
@@ -3401,11 +3401,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if ctd.weapon_available.HVLI then
 						if math.random(1,10) <= 5 then
-							hvliPrompt = "What about HVLI? ("
+							hvliPrompt = _("commsAmmo", "What about HVLI? (")
 						else
-							hvliPrompt = "Could you provide HVLI? ("
+							hvliPrompt = _("commsAmmo", "Could you provide HVLI? (")
 						end
-						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end	--end station has HVLI for player if branch
@@ -3415,54 +3415,54 @@ function handleDockedState()
 	end	--end missles used on player ship if branch
 	if comms_target == beamFixStation then
 		if playerRepulse.beamFix == nil then
-			addCommsReply("Talk to Kent's brother", function()
-				setCommsMessage("Kent? You made it out of the Kraylor base? We thought you were going to spend the rest of your life there. Thank you, captain, for helping Kent get out of there")
-				addCommsReply("Can you help us with beam weapon repair?", function()
-					setCommsMessage("For the Repulse class? Absolutely. I used to work on those all the time.")
+			addCommsReply(_("commsCrewFriends", "Talk to Kent's brother"), function()
+				setCommsMessage(_("commsCrewFriends", "Kent? You made it out of the Kraylor base? We thought you were going to spend the rest of your life there. Thank you, captain, for helping Kent get out of there"))
+				addCommsReply(_("commsCrewFriends", "Can you help us with beam weapon repair?"), function()
+					setCommsMessage(_("commsCrewFriends", "For the Repulse class? Absolutely. I used to work on those all the time."))
 					playerRepulse:setBeamWeapon(1, 10,-90, 1200.0, 6.0, 5)
 					playerRepulse.beamFix = "done"
 					fixFloodTimer = 30
 					plot1 = fixFlood
-					addCommsReply("Thanks", function()
-						setCommsMessage("You're quite welcome. While I was in there, I fixed up your beams so they could function at maximum potential")
+					addCommsReply(_("commsCrewFriends", "Thanks"), function()
+						setCommsMessage(_("commsCrewFriends", "You're quite welcome. While I was in there, I fixed up your beams so they could function at maximum potential"))
 						playerRepulse.maxBeam = 1
-						addCommsReply("Then double thanks!", function()
+						addCommsReply(_("commsCrewFriends", "Then double thanks!"), function()
 							playerRepulse:addReputationPoints(30)
-							setCommsMessage("Thank *you* for getting my brother out of that Kraylor prison")
-							addCommsReply("Back", commsStation)
+							setCommsMessage(_("commsCrewFriends", "Thank *you* for getting my brother out of that Kraylor prison"))
+							addCommsReply(_("Back"), commsStation)
 						end)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
 	if comms_target == missileFixStation then
 		if playerRepulse.missileFix == nil then
-			addCommsReply("Talk to Edwina's father", function()
-				setCommsMessage("I am glad to hear that Edwina escaped that prison. We were worried about her")
-				addCommsReply("Edwina says you do missile systems repair work", function()
-					setCommsMessage("Should be easy enough. I'm grateful to you for helping Edwina escape.")
+			addCommsReply(_("commsCrewFriends", "Talk to Edwina's father"), function()
+				setCommsMessage(_("commsCrewFriends", "I am glad to hear that Edwina escaped that prison. We were worried about her"))
+				addCommsReply(_("commsCrewFriends", "Edwina says you do missile systems repair work"), function()
+					setCommsMessage(_("commsCrewFriends", "Should be easy enough. I'm grateful to you for helping Edwina escape."))
 					playerRepulse.maxMissile = 1
 					playerRepulse.missileFix = "done"
 					addCommsReply("Thanks", function()
-						setCommsMessage("You're quite welcome")
+						setCommsMessage(_("commsCrewFriends", "You're quite welcome"))
 						playerRepulse:addReputationPoints(30)
-						addCommsReply("Back",commsStation)
+						addCommsReply(_("Back"),commsStation)
 					end)
-					addCommsReply("Back",commsStation)
+					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 		end
 	end
 	if comms_target == impulseFixStation then
 		if playerRepulse.impulseFix == nil then
-			addCommsReply("Talk to Johnny", function()
-				setCommsMessage("Mom? Wow, I thought you were toast. Good to hear your voice")
-				addCommsReply("Can you get our impulse drive working better", function()
+			addCommsReply(_("commsCrewFriends", "Talk to Johnny"), function()
+				setCommsMessage(_("commsCrewFriends", "Mom? Wow, I thought you were toast. Good to hear your voice"))
+				addCommsReply(_("commsCrewFriends", "Can you get our impulse drive working better"), function()
 					if difficulty > 1 then
 						if impulseFixStation.good_base == nil then
 							repeat
@@ -3488,40 +3488,40 @@ function handleDockedState()
 							impulse_good_quantity = comms_source.goods[impulseFixStation.impulse_good]
 						end
 						if impulse_good_quantity > 0 then
-							setCommsMessage(string.format("Piece of cake. Thanks for the %s",impulseFixStation.impulse_good))
+							setCommsMessage(string.format(_("commsCrewFriends", "Piece of cake. Thanks for the %s"),impulseFixStation.impulse_good))
 							playerRepulse.maxImpulse = 1
 							playerRepulse.impulseFix = "done"
 							comms_source.goods[impulseFixStation.impulse_good] = comms_source.goods[impulseFixStation.impulse_good] - 1
 							comms_source.cargo = comms_source.cargo + 1
-							addCommsReply("Thank you", function()
-								setCommsMessage("Sure. Mom, I'll see you at Christmas")
+							addCommsReply(_("commsCrewFriends", "Thank you"), function()
+								setCommsMessage(_("commsCrewFriends", "Sure. Mom, I'll see you at Christmas"))
 								playerRepulse:addReputationPoints(30)
-								addCommsReply("Back",commsStation)
+								addCommsReply(_("Back"),commsStation)
 							end)
 						else
-							setCommsMessage(string.format("Piece of cake, but I'll need %s",impulseFixStation.impulse_good))
+							setCommsMessage(string.format(_("commsCrewFriends", "Piece of cake, but I'll need %s"),impulseFixStation.impulse_good))
 						end
 					else
-						setCommsMessage("Piece of cake")
+						setCommsMessage(_("commsCrewFriends", "Piece of cake"))
 						playerRepulse.maxImpulse = 1
 						playerRepulse.impulseFix = "done"
-						addCommsReply("Thank you", function()
-							setCommsMessage("Sure. Mom, I'll see you at Christmas")
+						addCommsReply(_("commsCrewFriends", "Thank you"), function()
+							setCommsMessage(_("commsCrewFriends", "Sure. Mom, I'll see you at Christmas"))
 							playerRepulse:addReputationPoints(30)
-							addCommsReply("Back",commsStation)
+							addCommsReply(_("Back"),commsStation)
 						end)
 					end
-					addCommsReply("Back",commsStation)
+					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 		end
 	end
 	if comms_target == jumpFixStation then
 		if playerRepulse.jumpFix == nil then
-			addCommsReply("Talk to Nancy's brother", function()
-				setCommsMessage("Nancy! Last I heard, your ship had been captured by Kraylors and you were imprisoned. Good to know you won't be stuck there forever. What brings you here?")
-				addCommsReply("Our jump drive needs some tuning", function()
+			addCommsReply(_("commsCrewFriends", "Talk to Nancy's brother"), function()
+				setCommsMessage(_("commsCrewFriends", "Nancy! Last I heard, your ship had been captured by Kraylors and you were imprisoned. Good to know you won't be stuck there forever. What brings you here?"))
+				addCommsReply(_("commsCrewFriends", "Our jump drive needs some tuning"), function()
 					if difficulty >= 1 then
 						if jumpFixStation.good_base == nil then
 							repeat
@@ -3547,61 +3547,61 @@ function handleDockedState()
 							jump_good_quantity = comms_source.goods[jumpFixStation.jump_good]
 						end
 						if jump_good_quantity > 0 then
-							setCommsMessage(string.format("That should not be hard to do. I could probably do that in my sleep. Thanks for bringing %s",jumpFixStation.jump_good))
+							setCommsMessage(string.format(_("commsCrewFriends", "That should not be hard to do. I could probably do that in my sleep. Thanks for bringing %s"),jumpFixStation.jump_good))
 							comms_source.goods[jumpFixStation.jump_good] = comms_source.goods[jumpFixStation.jump_good] - 1
 							player.cargo = player.cargo + 1
 							playerRepulse.maxJump = 1
 							playerRepulse.jumpFix = "done"
-							addCommsReply("Thanks, bro", function()
-								setCommsMessage("No problem. Treat your jump drive right and it'll always bring you home")
+							addCommsReply(_("commsCrewFriends", "Thanks, bro"), function()
+								setCommsMessage(_("commsCrewFriends", "No problem. Treat your jump drive right and it'll always bring you home"))
 								playerRepulse:addReputationPoints(30)
-								addCommsReply("Back",commsStation)
+								addCommsReply(_("Back"),commsStation)
 							end)
 						else
-							setCommsMessage(string.format("That should not be hard to do. I could probably do that in my sleep. But I'll need some %s",jumpFixStation.jump_good))
+							setCommsMessage(string.format(_("commsCrewFriends", "That should not be hard to do. I could probably do that in my sleep. But I'll need some %s"),jumpFixStation.jump_good))
 						end
 					else
-						setCommsMessage("That should not be hard to do. I could probably do that in my sleep")
+						setCommsMessage(_("commsCrewFriends", "That should not be hard to do. I could probably do that in my sleep"))
 						playerRepulse.maxJump = 1
 						playerRepulse.jumpFix = "done"
-						addCommsReply("Thanks, bro", function()
-							setCommsMessage("No problem. Treat your jump drive right and it'll always bring you home")
+						addCommsReply(_("commsCrewFriends", "Thanks, bro"), function()
+							setCommsMessage(_("commsCrewFriends", "No problem. Treat your jump drive right and it'll always bring you home"))
 							playerRepulse:addReputationPoints(30)
-							addCommsReply("Back",commsStation)
+							addCommsReply(_("Back"),commsStation)
 						end)
 					end
-					addCommsReply("Back",commsStation)
+					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 		end
 	end
 	if comms_target == reactorFixStation then
 		if playerRepulse.reactorFix == nil then
-			addCommsReply("Talk to Manuel's cousin", function()
-				setCommsMessage("Yo Manuel, why you want to scare us by getting captured, man? At least you escaped. Why you here?")
-				addCommsReply("The reactor is weak... real weak", function()
-					setCommsMessage("Lemme see if I can get it to charge up right.")
+			addCommsReply(_("commsCrewFriends", "Talk to Manuel's cousin"), function()
+				setCommsMessage(_("commsCrewFriends", "Yo Manuel, why you want to scare us by getting captured, man? At least you escaped. Why you here?"))
+				addCommsReply(_("commsCrewFriends", "The reactor is weak... real weak"), function()
+					setCommsMessage(_("commsCrewFriends", "Lemme see if I can get it to charge up right."))
 					playerRepulse.maxReactor = 1
 					playerRepulse.reactorFix = "done"
-					addCommsReply("The captain would appreciate it", function()
-						setCommsMessage("You're all set. Don't overheat the reactor or you'll get a nasty surprise")
+					addCommsReply(_("commsCrewFriends", "The captain would appreciate it"), function()
+						setCommsMessage(_("commsCrewFriends", "You're all set. Don't overheat the reactor or you'll get a nasty surprise"))
 						playerRepulse:addReputationPoints(30)
-						addCommsReply("Back",commsStation)
+						addCommsReply(_("Back"),commsStation)
 					end)
-					addCommsReply("Back",commsStation)
+					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 		end
 	end
 	if comms_target == longRangeFixStation then
 		if playerRepulse.longRangeFix == nil then
-			addCommsReply("Talk to Fred's wife", function()
-				setCommsMessage("Fred! You escaped! We were worried sick")
-				addCommsReply("We need to connect to the Human Navy network", function()
-					setCommsMessage("I can do that for you. However, that means you'll go from being Independent to being in the Human Navy")
-					addCommsReply("I understand the consequences. Please proceed", function()
+			addCommsReply(_("commsCrewFriends", "Talk to Fred's wife"), function()
+				setCommsMessage(_("commsCrewFriends", "Fred! You escaped! We were worried sick"))
+				addCommsReply(_("commsCrewFriends", "We need to connect to the Human Navy network"), function()
+					setCommsMessage(_("commsCrewFriends", "I can do that for you. However, that means you'll go from being Independent to being in the Human Navy"))
+					addCommsReply(_("commsCrewFriends", "I understand the consequences. Please proceed"), function()
 						playerRepulse.longRangeFix = "done"
 						playerRepulse:setFaction("Human Navy")
 						stationFaction = "Human Navy"
@@ -3644,35 +3644,35 @@ function handleDockedState()
 							gy = adjList[rn][2]
 						end
 						plot4 = returnHome
-						setCommsMessage("You're all fixed up")
-						addCommsReply("Thanks", function()
-							setCommsMessage("You're welcome. Fred, honey, I'll see you after you get off work")
+						setCommsMessage(_("commsCrewFriends", "You're all fixed up"))
+						addCommsReply(_("commsCrewFriends", "Thanks"), function()
+							setCommsMessage(_("commsCrewFriends", "You're welcome. Fred, honey, I'll see you after you get off work"))
 							playerRepulse:addReputationPoints(30)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply("I'll check with the captain and get back to you", function()
-						setCommsMessage("Ok")
-						addCommsReply("Back", commsStation)
+					addCommsReply(_("commsCrewFriends", "I'll check with the captain and get back to you"), function()
+						setCommsMessage(_("commsCrewFriends", "Ok"))
+						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply("Back",commsStation)
+					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Back",commsStation)
+				addCommsReply(_("Back"),commsStation)
 			end)
 		end
 	end
 	if comms_target == shieldFixStation then
 		if playerRepulse.frontShieldFix == nil and playerRepulse.rearShieldFix == nil then
-			addCommsReply("Talk to Amir's sister", function()
-				setCommsMessage(string.format("Welcome to %s! Any friend of Amir's is a friend of mine",shieldFixStation:getCallSign()))
-				addCommsReply("Can you help us with our shields?", function()
-					setCommsMessage("Yes, I can. However, I can only help with one: front or rear. I need more parts to do both")
-					addCommsReply("Repair front shield", function()
-						setCommsMessage("Your front shields are now fully operational. Your repair crew can finish the rest")
+			addCommsReply(_("commsCrewFriends", "Talk to Amir's sister"), function()
+				setCommsMessage(string.format(_("commsCrewFriends", "Welcome to %s! Any friend of Amir's is a friend of mine"),shieldFixStation:getCallSign()))
+				addCommsReply(_("commsCrewFriends", "Can you help us with our shields?"), function()
+					setCommsMessage(_("commsCrewFriends", "Yes, I can. However, I can only help with one: front or rear. I need more parts to do both"))
+					addCommsReply(_("commsCrewFriends", "Repair front shield"), function()
+						setCommsMessage(_("commsCrewFriends", "Your front shields are now fully operational. Your repair crew can finish the rest"))
 						playerRepulse.maxFrontShield = 1
 						playerRepulse.frontShieldFix = "done"
-						addCommsReply("Thanks", function()
+						addCommsReply(_("commsCrewFriends", "Thanks"), function()
 							if shieldGoodBase == nil then
 								repeat
 									candidate = stationList[math.random(1,#stationList)]
@@ -3692,17 +3692,17 @@ function handleDockedState()
 									end
 								until(shieldGoodBase ~= nil)
 							end
-							setCommsMessage(string.format("Certainly. Bring back %s to get the rear shield fixed. You might find some at %s",shieldGood,shieldGoodBase:getCallSign()))
+							setCommsMessage(string.format(_("commsCrewFriends", "Certainly. Bring back %s to get the rear shield fixed. You might find some at %s"),shieldGood,shieldGoodBase:getCallSign()))
 							playerRepulse:addReputationPoints(30)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply("Repair rear shield", function()
-						setCommsMessage("Your rear shields are now fully operational. Your repair crew can finish the rest")
+					addCommsReply(_("commsCrewFriends", "Repair rear shield"), function()
+						setCommsMessage(_("commsCrewFriends", "Your rear shields are now fully operational. Your repair crew can finish the rest"))
 						playerRepulse.maxRearShield = 1
 						playerRepulse.rearShieldFix = "done"
-						addCommsReply("Thanks", function()
+						addCommsReply(_("commsCrewFriends", "Thanks"), function()
 							if shieldGoodBase == nil then
 								repeat
 									candidate = stationList[math.random(1,#stationList)]
@@ -3722,68 +3722,68 @@ function handleDockedState()
 									end
 								until(shieldGoodBase ~= nil)
 							end
-							setCommsMessage(string.format("Certainly. Bring back %s to get the front shield fixed. You might find some at %s",shieldGood,shieldGoodBase:getCallSign()))
+							setCommsMessage(string.format(_("commsCrewFriends", "Certainly. Bring back %s to get the front shield fixed. You might find some at %s"),shieldGood,shieldGoodBase:getCallSign()))
 							playerRepulse:addReputationPoints(30)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		elseif playerRepulse.frontShieldFix == nil or playerRepulse.rearShieldFix == nil then
-			addCommsReply("Talk to Amir's sister", function()
-				setCommsMessage(string.format("Welcome back. Did you bring some %s for me to finish fixing up your shields?",shieldGood))
+			addCommsReply(_("commsCrewFriends", "Talk to Amir's sister"), function()
+				setCommsMessage(string.format(_("commsCrewFriends", "Welcome back. Did you bring some %s for me to finish fixing up your shields?"),shieldGood))
 				local shieldGoodQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[shieldGood] ~= nil and comms_source.goods[shieldGood] > 0 then
 					shieldGoodQuantity = comms_source.goods[shieldGood]
 				end
 				if shieldGoodQuantity > 0 then
-					addCommsReply(string.format("Yes, please take the %s and fix the shields",shieldGood), function()
+					addCommsReply(string.format(_("commsCrewFriends", "Yes, please take the %s and fix the shields"),shieldGood), function()
 						comms_source.goods[shieldGood] = comms_source.goods[shieldGood] - 1
 						player.cargo = player.cargo + 1
 						if playerRepulse.frontShieldFix == nil then
 							playerRepulse.maxFrontShield = 1
 							playerRepulse.frontShieldFix = "done"
-							setCommsMessage("Front shield fully functional")
+							setCommsMessage(_("commsCrewFriends", "Front shield fully functional"))
 						else
 							playerRepulse.maxRearShield = 1
 							playerRepulse.rearShieldFix = "done"
-							setCommsMessage("Rear shield fully functional")
+							setCommsMessage(_("commsCrewFriends", "Rear shield fully functional"))
 						end
 						playerRepulse:addReputationPoints(30)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				else
-					addCommsReply(string.format("Oops, no %s aboard",shieldGood), function()
-						setCommsMessage("Ok, good luck")
-						addCommsReply("Back", commsStation)
+					addCommsReply(string.format(_("commsCrewFriends", "Oops, no %s aboard"),shieldGood), function()
+						setCommsMessage(_("commsCrewFriends", "Ok, good luck"))
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
 	if ctd.public_relations then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
-			addCommsReply("General information", function()
+		addCommsReply(_("commsStation", "Tell me more about your station"), function()
+			setCommsMessage(_("commsStation", "What would you like to know?"))
+			addCommsReply(_("commsStation", "General information"), function()
 				setCommsMessage(ctd.general_information)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if ctd.history ~= nil then
-				addCommsReply("Station history", function()
+				addCommsReply(_("commsStation", "Station history"), function()
 					setCommsMessage(ctd.history)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_source:isFriendly(comms_target) then
 				if ctd.gossip ~= nil then
 					if random(1,100) < (100 - (30 * (difficulty - .5))) then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("commsStation", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -3795,41 +3795,41 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	if goodCount > 0 then
-		addCommsReply("Buy, sell, trade", function()
+		addCommsReply(_("commsTrade", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
-			local goodsReport = string.format("Station %s:\nGoods or components available for sale: quantity, cost in reputation\n",comms_target:getCallSign())
+			local goodsReport = string.format(_("commsTrade", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
-				goodsReport = goodsReport .. string.format("     %s: %i, %i\n",good,goodData["quantity"],goodData["cost"])
+				goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
 			end
 			if ctd.buy ~= nil then
-				goodsReport = goodsReport .. "Goods or components station will buy: price in reputation\n"
+				goodsReport = goodsReport .. _("commsTrade", "Goods or components station will buy: price in reputation\n")
 				for good, price in pairs(ctd.buy) do
-					goodsReport = goodsReport .. string.format("     %s: %i\n",good,price)
+					goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i\n"),good,price)
 				end
 			end
-			goodsReport = goodsReport .. string.format("Current cargo aboard %s:\n",comms_source:getCallSign())
+			goodsReport = goodsReport .. string.format(_("commsTrade", "Current cargo aboard %s:\n"),comms_source:getCallSign())
 			local cargoHoldEmpty = true
 			local player_good_count = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
 					player_good_count = player_good_count + 1
-					goodsReport = goodsReport .. string.format("     %s: %i\n",good,goodQuantity)
+					goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i\n"),good,goodQuantity)
 				end
 			end
 			if player_good_count < 1 then
-				goodsReport = goodsReport .. "     Empty\n"
+				goodsReport = goodsReport .. _("commsTrade", "     Empty\n")
 			end
-			goodsReport = goodsReport .. string.format("Available Space: %i, Available Reputation: %i\n",comms_source.cargo,math.floor(comms_source:getReputationPoints()))
+			goodsReport = goodsReport .. string.format(_("commsTrade", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
 			setCommsMessage(goodsReport)
 			for good, goodData in pairs(ctd.goods) do
-				addCommsReply(string.format("Buy one %s for %i reputation",good,goodData["cost"]), function()
-					local goodTransactionMessage = string.format("Type: %s, Quantity: %i, Rep: %i",good,goodData["quantity"],goodData["cost"])
+				addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
+					local goodTransactionMessage = string.format(_("commsTrade", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
 					if comms_source.cargo < 1 then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient cargo space for purchase"
+						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient cargo space for purchase")
 					elseif goodData["cost"] > math.floor(comms_source:getReputationPoints()) then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient reputation for purchase")
 					elseif goodData["quantity"] < 1 then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
 					else
 						if comms_source:takeReputationPoints(goodData["cost"]) then
 							comms_source.cargo = comms_source.cargo - 1
@@ -3841,36 +3841,36 @@ function handleDockedState()
 								comms_source.goods[good] = 0
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
-							goodTransactionMessage = goodTransactionMessage .. "\npurchased"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\npurchased")
 						else
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient reputation for purchase")
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if ctd.buy ~= nil then
 				for good, price in pairs(ctd.buy) do
 					if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
-						addCommsReply(string.format("Sell one %s for %i reputation",good,price), function()
-							local goodTransactionMessage = string.format("Type: %s,  Reputation price: %i",good,price)
+						addCommsReply(string.format(_("commsTrade", "Sell one %s for %i reputation"),good,price), function()
+							local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Reputation price: %i"),good,price)
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source:addReputationPoints(price)
-							goodTransactionMessage = goodTransactionMessage .. "\nOne sold"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
 			end
 			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods.food ~= nil and comms_source.goods.food.quantity > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format("Trade food for %s",good), function()
-						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
+					addCommsReply(string.format(_("commsTrade", "Trade food for %s"),good), function()
+						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -3881,19 +3881,19 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["food"] = comms_source.goods["food"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
 			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods.medicine ~= nil and comms_source.goods.medicine.quantity > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format("Trade medicine for %s",good), function()
-						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
+					addCommsReply(string.format(_("commsTrade", "Trade medicine for %s"),good), function()
+						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -3904,19 +3904,19 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["medicine"] = comms_source.goods["medicine"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
 			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods.luxury ~= nil and comms_source.goods.luxury.quantity > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format("Trade luxury for %s",good), function()
-						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
+					addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
+						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData[quantity] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -3927,14 +3927,14 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		local player_good_count = 0
 		if comms_source.goods ~= nil then
@@ -3943,24 +3943,24 @@ function handleDockedState()
 			end
 		end
 		if player_good_count > 0 then
-			addCommsReply("Jettison cargo", function()
-				setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+			addCommsReply(_("commsTrade", "Jettison cargo"), function()
+				setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 				for good, good_quantity in pairs(comms_source.goods) do
 					if good_quantity > 0 then
 						addCommsReply(good, function()
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source.cargo = comms_source.cargo + 1
-							setCommsMessage(string.format("One %s jettisoned",good))
-							addCommsReply("Back", commsStation)
+							setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("No tutorial covered goods or cargo. Explain", function()
-			setCommsMessage("Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)")
-			addCommsReply("Back", commsStation)
+		addCommsReply(_("commsTrade", "No tutorial covered goods or cargo. Explain"), function()
+			setCommsMessage(_("commsTrade", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 end
@@ -3975,55 +3975,55 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("commsAmmo", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("commsAmmo", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("commsAmmo", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("commsAmmo", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
 		if player:getReputationPoints() > points_per_item * item_amount then
 			if player:takeReputationPoints(points_per_item * item_amount) then
 				player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
 				if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-					setCommsMessage("You are fully loaded and ready to explode things.")
+					setCommsMessage(_("commsAmmo", "You are fully loaded and ready to explode things."))
 				else
-					setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+					setCommsMessage(_("commsAmmo", "We generously resupplied you with some weapon charges.\nPut them to good use."))
 				end
 			else
-				setCommsMessage("Not enough reputation.")
+				setCommsMessage(_("commsAmmo", "Not enough reputation."))
 				return
 			end
 		else
 			if player:getReputationPoints() > points_per_item then
-				setCommsMessage("You can't afford as much as I'd like to give you")
-				addCommsReply("Get just one", function()
+				setCommsMessage(_("commsAmmo", "You can't afford as much as I'd like to give you"))
+				addCommsReply(_("commsAmmo", "Get just one"), function()
 					if player:takeReputationPoints(points_per_item) then
 						player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + 1)
 						if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-							setCommsMessage("You are fully loaded and ready to explode things.")
+							setCommsMessage(_("commsAmmo", "You are fully loaded and ready to explode things."))
 						else
-							setCommsMessage("We generously resupplied you with one weapon charge.\nPut it to good use.")
+							setCommsMessage(_("commsAmmo", "We generously resupplied you with one weapon charge.\nPut it to good use."))
 						end
 					else
-						setCommsMessage("Not enough reputation.")
+						setCommsMessage(_("commsAmmo", "Not enough reputation."))
 					end
 					return
 				end)
 			else
-				setCommsMessage("Not enough reputation.")
+				setCommsMessage(_("commsAmmo", "Not enough reputation."))
 				return				
 			end
 		end
@@ -4039,7 +4039,7 @@ function handleWeaponRestock(weapon)
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
 --]]
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 function getWeaponCost(weapon)
@@ -4049,12 +4049,12 @@ function handleUndockedState()
     --Handle communications when we are not docked with the station.
     local ctd = comms_target.comms_data
     if player:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("commsStation", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("commsStation", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("commsStation", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	if comms_target.nukeAvail == nil then
 		if math.random(1,10) <= (4 - difficulty) then
@@ -4084,41 +4084,41 @@ function handleUndockedState()
 		end
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
-		addCommsReply("What ordnance do you have available for restock?", function()
+ 	addCommsReply(_("commsStation", "I need information"), function()
+		setCommsMessage(_("commsStation", "What kind of information do you need?"))
+		addCommsReply(_("commsAmmo", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
 			if ctd.weapon_available.Nuke then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Nuke"
+				ordnanceListMsg = ordnanceListMsg .. _("commsAmmo", "\n   Nuke")
 			end
 			if ctd.weapon_available.EMP then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   EMP"
+				ordnanceListMsg = ordnanceListMsg .. _("commsAmmo", "\n   EMP")
 			end
 			if ctd.weapon_available.Homing then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Homing"
+				ordnanceListMsg = ordnanceListMsg .. _("commsAmmo", "\n   Homing")
 			end
 			if ctd.weapon_available.Mine then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Mine"
+				ordnanceListMsg = ordnanceListMsg .. _("commsAmmo", "\n   Mine")
 			end
 			if ctd.weapon_available.HVLI then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   HVLI"
+				ordnanceListMsg = ordnanceListMsg .. _("commsAmmo", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				ordnanceListMsg = "We have no ordnance available for restock"
+				ordnanceListMsg = _("commsAmmo", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				ordnanceListMsg = "We have the following type of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("commsAmmo", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg)
 			else
-				ordnanceListMsg = "We have the following types of ordnance available for restock:" .. ordnanceListMsg
+				ordnanceListMsg = string.format(_("commsAmmo", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		local goodsAvailable = false
 		if ctd.goods ~= nil then
@@ -4129,19 +4129,19 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply("What goods do you have available for sale or trade?", function()
+			addCommsReply(_("commsTrade", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("commsTrade", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("commsTrade", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("Where can I find particular goods?", function()
+		addCommsReply(_("commsTrade", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
+			gkMsg = _("commsTrade", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -4181,42 +4181,42 @@ function handleUndockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
-					addCommsReply("Back", commsStation)
+					setCommsMessage(string.format(_("commsTrade", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+				gkMsg = gkMsg .. _("commsTrade", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				gkMsg = gkMsg .. _("commsTrade", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if ctd.public_relations then
-			addCommsReply("Tell me more about your station", function()
-				setCommsMessage("What would you like to know?")
-				addCommsReply("General information", function()
+			addCommsReply(_("commsStation", "Tell me more about your station"), function()
+				setCommsMessage(_("commsStation", "What would you like to know?"))
+				addCommsReply(_("commsStation", "General information"), function()
 					setCommsMessage(ctd.general_information)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 				if ctd.history ~= nil then
-					addCommsReply("Station history", function()
+					addCommsReply(_("commsStation", "Station history"), function()
 						setCommsMessage(ctd.history)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end)	--end station info comms reply branch
 		end	--end public relations if branch
 	end)
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
+        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
+                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
+                setCommsMessage(_("commsStation", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -4224,36 +4224,36 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                            setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("commsStation", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
+        addCommsReply(string.format(_("commsStation", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
+                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
+                setCommsMessage(_("commsStation", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("commsStation", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -4284,22 +4284,22 @@ function fillStationBrains()
 					tradeString = ""
 					stationTrades = false
 					if tradeMedicine[stationList[sti]] ~= nil then
-						tradeString = " and will trade it for medicine"
+						tradeString = _("commsStation", " and will trade it for medicine")
 						stationTrades = true
 					end
 					if tradeFood[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or food"
+							tradeString = tradeString .. _("commsStation", " or food")
 						else
-							tradeString = tradeString .. " and will trade it for food"
+							tradeString = tradeString .. _("commsStation", " and will trade it for food")
 							stationTrades = true
 						end
 					end
 					if tradeLuxury[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. " or luxury"
+							tradeString = tradeString .. _("commsStation", " or luxury")
 						else
-							tradeString = tradeString .. " and will trade it for luxury"
+							tradeString = tradeString .. _("commsStation", " and will trade it for luxury")
 						end
 					end
 					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
@@ -4362,19 +4362,19 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage("What do you want?");
+		setCommsMessage(_("commsShip", "What do you want?"));
 	else
-		setCommsMessage("Sir, how can we assist?");
+		setCommsMessage(_("commsShip", "Sir, how can we assist?"));
 	end
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		addCommsReply("Do you have cargo you might sell?", function()
+		addCommsReply(_("commsTrade", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
-			local cargoMsg = "We've got "
+			local cargoMsg = _("commsTrade", "We've got ")
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. ", " .. good
+						cargoMsg = cargoMsg .. _("commsTrade", ", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -4382,7 +4382,7 @@ function friendlyComms(comms_data)
 				goodCount = goodCount + goodData.quantity
 			end
 			if goodCount == 0 then
-				cargoMsg = cargoMsg .. "nothing"
+				cargoMsg = cargoMsg .. _("commsTrade", "nothing")
 			end
 			setCommsMessage(cargoMsg)
 		end)
@@ -4395,18 +4395,18 @@ function friendlyComms(comms_data)
 			end
 			if goodCount > 0 then
 				addCommsReply("Jettison cargo", function()
-					setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+					setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 					for good, good_quantity in pairs(comms_source.goods) do
 						if good_quantity > 0 then
 							addCommsReply(good, function()
 								comms_source.goods[good] = comms_source.goods[good] - 1
 								comms_source.cargo = comms_source.cargo + 1
-								setCommsMessage(string.format("One %s jettisoned",good))
-								addCommsReply("Back", commsShip)
+								setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -4417,12 +4417,12 @@ function friendlyComms(comms_data)
 				if luxuryQuantity > 0 then
 					for good, goodData in pairs(comms_data.goods) do
 						if goodData.quantity > 0 then
-							addCommsReply(string.format("Trade luxury for %s",good), function()
+							addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
 								comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 								if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 								comms_source.goods[good] = comms_source.goods[good] + 1
-								setCommsMessage("Traded")
-								addCommsReply("Back", commsShip)
+								setCommsMessage(_("commsTrade", "Traded"))
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end
@@ -4435,7 +4435,7 @@ function friendlyComms(comms_data)
 			end
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
-					addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+					addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 						if comms_source.cargo > 0 then
 							if comms_source:takeReputationPoints(goodData.cost) then
 								goodData.quantity = goodData.quantity - 1
@@ -4443,71 +4443,71 @@ function friendlyComms(comms_data)
 								if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 								comms_source.goods[good] = comms_source.goods[good] + 1
 								comms_source.cargo = comms_source.cargo - 1
-								setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+								setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 							else
-								setCommsMessage("Insufficient reputation for purchase")
+								setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 							end
 						else
-							setCommsMessage("Insufficient cargo space")
+							setCommsMessage(_("commsTrade", "Insufficient cargo space"))
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 			end	--freighter goods loop
 		end
 	end
-	addCommsReply("Defend a waypoint", function()
+	addCommsReply(_("commsShip", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
-			addCommsReply("Back", commsShip)
+			setCommsMessage(_("commsShip", "No waypoints set. Please set a waypoint first."));
+			addCommsReply(_("Back"), commsShip)
 		else
-			setCommsMessage("Which waypoint should we defend?");
+			setCommsMessage(_("commsShip", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply("Defend WP" .. n, function()
+				addCommsReply(string.format(_("commsShip", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage("We are heading to assist at WP" .. n ..".");
-					addCommsReply("Back", commsShip)
+					setCommsMessage(string.format(_("commsShip", "We are heading to assist at WP %d."), n));
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply("Assist me", function()
-			setCommsMessage("Heading toward you to assist.");
+		addCommsReply(_("commsShip", "Assist me"), function()
+			setCommsMessage(_("commsShip", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 	end
-	addCommsReply("Report status", function()
-		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+	addCommsReply(_("commsShip", "Report status"), function()
+		msg = string.format(_("commsShip", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
-			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			msg = msg .. string.format(_("commsShip", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 		elseif shields == 2 then
-			msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-			msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+			msg = msg .. string.format(_("commsShip", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("commsShip", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
 		else
 			for n=0,shields-1 do
-				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+				msg = msg .. string.format(_("commsShip", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
 
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
-					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
+					msg = msg .. string.format(_("commsShip", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
 		
 		setCommsMessage(msg);
-		addCommsReply("Back", commsShip)
+		addCommsReply(_("Back"), commsShip)
 	end)
-	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
+	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply("Dock at " .. obj:getCallSign(), function()
-				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
+			addCommsReply(string.format(_("commsShip", "Dock at %s"), obj:getCallSign()), function()
+				setCommsMessage(string.format(_("commsShip", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 	end
@@ -4516,27 +4516,27 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = "We will see to your destruction!"
-		taunt_success_reply = "Your bloodline will end here!"
-		taunt_failed_reply = "Your feeble threats are meaningless."
+		taunt_option = _("commsShipEnemy", "We will see to your destruction!")
+		taunt_success_reply = _("commsShipEnemy", "Your bloodline will end here!")
+		taunt_failed_reply = _("commsShipEnemy", "Your feeble threats are meaningless.")
 		if faction == "Kraylor" then
-			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+			setCommsMessage(_("commsShipEnemy", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 		elseif faction == "Arlenians" then
-			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+			setCommsMessage(_("commsShipEnemy", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
-			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+			setCommsMessage(_("commsShipEnemy", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-			taunt_option = "EXECUTE: SELFDESTRUCT"
-			taunt_success_reply = "Rogue command received. Targeting source."
-			taunt_failed_reply = "External command ignored."
+			setCommsMessage(_("commsShipEnemy", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("commsShipEnemy", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("commsShipEnemy", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("commsShipEnemy", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-			taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-			taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-			taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+			setCommsMessage(_("commsShipEnemy", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("commsShipEnemy", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("commsShipEnemy", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("commsShipEnemy", "The hive has greater priorities than exterminating pests.")
 		else
-			setCommsMessage("Mind your own business!");
+			setCommsMessage(_("commsShipEnemy", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -4554,14 +4554,14 @@ end
 function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		setCommsMessage("Yes?")
-		addCommsReply("Do you have cargo you might sell?", function()
+		setCommsMessage(_("commsShip", "Yes?"))
+		addCommsReply(_("commsTrade", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
-			local cargoMsg = "We've got "
+			local cargoMsg = _("commsTrade", "We've got ")
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. ", " .. good
+						cargoMsg = cargoMsg .. _("commsTrade", ", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -4569,17 +4569,17 @@ function neutralComms(comms_data)
 				goodCount = goodCount + goodData.quantity
 			end
 			if goodCount == 0 then
-				cargoMsg = cargoMsg .. "nothing"
+				cargoMsg = cargoMsg .. _("commsTrade", "nothing")
 			end
 			setCommsMessage(cargoMsg)
 		end)
 		local freighter_multiplier = 1
 		if comms_data.friendlyness > 66 then
-			setCommsMessage("Yes?")
+			setCommsMessage(_("commsShip", "Yes?"))
 			-- Offer destination information
-			addCommsReply("Where are you headed?", function()
+			addCommsReply(_("commsShip", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if distance(comms_source,comms_target) < 5000 then
@@ -4590,19 +4590,19 @@ function neutralComms(comms_data)
 					end
 				end
 				if goodCount > 0 then
-					addCommsReply("Jettison cargo", function()
-						setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+					addCommsReply(_("commsTrade", "Jettison cargo"), function()
+						setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then
 								addCommsReply(good, function()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format("One %s jettisoned",good))
-									addCommsReply("Back", commsShip)
+									setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+									addCommsReply(_("Back"), commsShip)
 								end)
 							end
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -4613,12 +4613,12 @@ function neutralComms(comms_data)
 					if luxuryQuantity > 0 then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format("Trade luxury for %s",good), function()
+								addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
 									comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 									if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 									comms_source.goods[good] = comms_source.goods[good] + 1
-									setCommsMessage("Traded")
-									addCommsReply("Back", commsShip)
+									setCommsMessage(_("commsTrade", "Traded"))
+									addCommsReply(_("Back"), commsShip)
 								end)
 							end
 						end
@@ -4631,7 +4631,7 @@ function neutralComms(comms_data)
 				end
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
-						addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 							if comms_source.cargo > 0 then
 								if comms_source:takeReputationPoints(goodData.cost) then
 									goodData.quantity = goodData.quantity - 1
@@ -4639,29 +4639,29 @@ function neutralComms(comms_data)
 									if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 								end
 							else
-								setCommsMessage("Insufficient cargo space")
+								setCommsMessage(_("commsTrade", "Insufficient cargo space"))
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 					end
 				end	--freighter goods loop
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage("What do you want?")
+			setCommsMessage(_("commsShip", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
+			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("commsShip", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if distance(comms_source,comms_target) < 5000 then
@@ -4672,19 +4672,19 @@ function neutralComms(comms_data)
 					end
 				end
 				if goodCount > 0 then
-					addCommsReply("Jettison cargo", function()
-						setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+					addCommsReply(_("commsTrade", "Jettison cargo"), function()
+						setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then
 								addCommsReply(good, function()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format("One %s jettisoned",good))
-									addCommsReply("Back", commsShip)
+									setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+									addCommsReply(_("Back"), commsShip)
 								end)
 							end
 						end
-						addCommsReply("Back", commsShip)
+						addCommsReply(_("Back"), commsShip)
 					end)
 				end
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -4694,7 +4694,7 @@ function neutralComms(comms_data)
 				end
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
-						addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 							if comms_source.cargo > 0 then
 								if comms_source:takeReputationPoints(goodData.cost*freighter_multiplier) then
 									goodData.quantity = goodData.quantity - 1
@@ -4706,27 +4706,27 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 								end
 							else
-								setCommsMessage("Insufficient cargo space")
+								setCommsMessage(_("commsTrade", "Insufficient cargo space"))
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 					end
 				end	--freighter goods loop
 			end
 		else	--least friendly
-			setCommsMessage("Why are you bothering me?")
+			setCommsMessage(_("commsTrade", "Why are you bothering me?"))
 			-- Offer to sell goods if goods or equipment freighter double price
 			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					freighter_multiplier = 3
 					for good, goodData in pairs(comms_data.goods) do
 						if goodData.quantity > 0 then
-							addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+							addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 								if comms_source.cargo > 0 then
 									if comms_source:takeReputationPoints(goodData.cost*freighter_multiplier) then
 										goodData.quantity = goodData.quantity - 1
@@ -4738,14 +4738,14 @@ function neutralComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage("Insufficient reputation for purchase")
+										setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 									end
 								else
-									setCommsMessage("Insufficient cargo space")
+									setCommsMessage(_("commsTrade", "Insufficient cargo space"))
 								end
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end
 					end	--freighter goods loop
@@ -4754,9 +4754,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+			setCommsMessage(_("commsShip", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage("We have nothing for you.\nGood day.");
+			setCommsMessage(_("commsShip", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true
@@ -4793,7 +4793,7 @@ function checkForSuffocationOnFighter(delta)
 			end
 		end
 		suffocation_timer = suffocation_timer - delta
-		local suffocation_label = "Suffocation"
+		local suffocation_label = _("msgTimerTab", "Suffocation")
 		local suffocation_label_minutes = math.floor(suffocation_timer / 60)
 		local suffocation_label_seconds = math.floor(suffocation_timer % 60)
 		if suffocation_label_minutes <= 0 then
@@ -4804,7 +4804,7 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			if playerFighter.suffocation_message == nil then
 				playerFighter.suffocation_message = "suffocation_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.suffocation_message,"Environmental systems show limited air remaining")
+				playerFighter:addCustomMessage("Engineering",playerFighter.suffocation_message,_("msgEngineer", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer = "suffocation_timer"
 			playerFighter:addCustomInfo("Engineering",playerFighter.suffocation_timer,suffocation_label)
@@ -4812,7 +4812,7 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			if playerFighter.suffocation_message_eng_plus == nil then
 				playerFighter.suffocation_message_eng_plus = "suffocation_message_eng_plus"
-				playerFighter:addCustomMessage("Engineering+",playerFighter.suffocation_message_eng_plus,"Environmental systems show limited air remaining")
+				playerFighter:addCustomMessage("Engineering+",playerFighter.suffocation_message_eng_plus,_("msgEngineer", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer_eng_plus = "suffocation_timer_eng_plus"
 			playerFighter:addCustomInfo("Engineering+",playerFighter.suffocation_timer_eng_plus,suffocation_label)
@@ -4820,7 +4820,7 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Science") then
 			if playerFighter.suffocation_message_science == nil then
 				playerFighter.suffocation_message_science = "suffocation_message_science"
-				playerFighter:addCustomMessage("Science",playerFighter.suffocation_message_science,"Environmental systems show limited air remaining")
+				playerFighter:addCustomMessage("Science",playerFighter.suffocation_message_science,_("msgScience", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer_science = "suffocation_timer_science"
 			playerFighter:addCustomInfo("Science",playerFighter.suffocation_timer_science,suffocation_label)
@@ -4828,13 +4828,13 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Operations") then
 			if playerFighter.suffocation_message_ops == nil then
 				playerFighter.suffocation_message_ops = "suffocation_message_ops"
-				playerFighter:addCustomMessage("Operations",playerFighter.suffocation_message_ops,"Environmental systems show limited air remaining")
+				playerFighter:addCustomMessage("Operations",playerFighter.suffocation_message_ops,_("msgOperations", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer_ops = "suffocation_timer_ops"
 			playerFighter:addCustomInfo("Operations",playerFighter.suffocation_timer_ops,suffocation_label)
 		end
 		if suffocation_timer < 0 then
-			globalMessage("You suffocated while aboard the fighter hulk")
+			globalMessage(_("msgGlobal", "You suffocated while aboard the fighter hulk"))
 			victory("Kraylor")
 			if playerFighter.suffocation_timer ~= nil then
 				playerFighter:removeCustom(playerFighter.suffocation_timer)
@@ -4864,11 +4864,11 @@ function hintRepulse(delta)
 	if hintRepulseTimer < 0 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			repulseHintMessage = "repulseHintMessage"
-			playerFighter:addCustomMessage("Engineering",repulseHintMessage,string.format("Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters.",junkRepulse:getCallSign(),playerFighter:getCallSign()))
+			playerFighter:addCustomMessage("Engineering",repulseHintMessage,string.format(_("msgEngineer", "Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters."),junkRepulse:getCallSign(),playerFighter:getCallSign()))
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseHintMessageEPlus = "repulseHintMessageEPlus"
-			playerFighter:addCustomMessage("Engineering+",repulseHintMessageEPlus,string.format("Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters.",junkRepulse:getCallSign(),playerFighter:getCallSign()))
+			playerFighter:addCustomMessage("Engineering+",repulseHintMessageEPlus,string.format(_("msgEngineer+", "Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters."),junkRepulse:getCallSign(),playerFighter:getCallSign()))
 		end
 		plot1 = hugRepulse
 	end
@@ -4881,11 +4881,11 @@ function hugRepulse(delta)
 	if distance(playerFighter,junkRepulse) < 500 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			repulseTransferButton = "repulseTransferButton"
-			playerFighter:addCustomButton("Engineering",repulseTransferButton,"Transfer to Repulse",repulseTransfer)
+			playerFighter:addCustomButton("Engineering",repulseTransferButton,_("buttonEngineer", "Transfer to Repulse"),repulseTransfer)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseTransferButtonEPlus = "repulseTransferButtonEPlus"
-			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,"Transfer to Repulse",repulseTransfer)
+			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("buttonEengineer+", "Transfer to Repulse"),repulseTransfer)
 		end
 		if repulseTransferButtonEPlus ~= nil or repulseTransferButton ~= nil then
 			plot1 = nil
@@ -4946,7 +4946,7 @@ function repulseTransfer()
 	playerShipHealth = plunderHealth	--switch player health check function to repulse
 	augmentRepairCrewTimer = 45			--time to repair crew escape
 	plot1 = augmentRepairCrew
-	playerRepulse:addToShipLog("Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently registered as Independent","Magenta")
+	playerRepulse:addToShipLog(_("shipLog", "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently registered as Independent"),"Magenta")
 	player = playerRepulse
 	plotKP = kraylorPatrol				--start sending out Kraylor patrols
 	plotSuffocate = nil
@@ -4956,18 +4956,18 @@ function augmentRepairCrew(delta)
 --Former repair crew asks to be rescued to take up their jobs again
 	augmentRepairCrewTimer = augmentRepairCrewTimer - delta
 	if augmentRepairCrewTimer < 0 then
-		brigHailed = brigStation:sendCommsMessage(playerRepulse,"Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console")
+		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
 		if brigHailed then
 			if playerRepulse:hasPlayerAtPosition("Weapons") then
 				if retrieveRepairCrewButton == nil then
 					retrieveRepairCrewButton = "retrieveRepairCrewButton"
-					playerRepulse:addCustomButton("Weapons",retrieveRepairCrewButton,"Return Transport",returnRepairCrew)
+					playerRepulse:addCustomButton("Weapons",retrieveRepairCrewButton,_("buttonWeapons", "Return Transport"),returnRepairCrew)
 				end
 			end
 			if playerRepulse:hasPlayerAtPosition("Tactical") then
 				if retrieveRepairCrewButtonTac == nil then
 					retrieveRepairCrewButtonTac = "retrieveRepairCrewButtonTac"
-					playerRepulse:addCustomButton("Tactical",retrieveRepairCrewButtonTac,"Return Transport",returnRepairCrew)
+					playerRepulse:addCustomButton("Tactical",retrieveRepairCrewButtonTac,_("buttonTactical", "Return Transport"),returnRepairCrew)
 				end
 			end
 			plot1 = beamDamageReport
@@ -4990,7 +4990,7 @@ function beamDamageReport(delta)
 --Report on damaged beams on port side, start second plot
 	beamDamageReportTimer = beamDamageReportTimer - delta
 	if beamDamageReportTimer < 0 then
-		playerRepulse:addToShipLog("Repair crew reports that the port beam weapon emplacement is currently non-functional. No applicable spare parts found aboard","Magenta")
+		playerRepulse:addToShipLog(_("shipLog", "Repair crew reports that the port beam weapon emplacement is currently non-functional. No applicable spare parts found aboard"),"Magenta")
 		plot1 = jumpDamageReport
 		plot2 = portBeamEnable
 		jumpDamageReportTimer = 30
@@ -5001,11 +5001,11 @@ function jumpDamageReport(delta)
 	jumpDamageReportTimer = jumpDamageReportTimer - delta
 	if jumpDamageReportTimer < 0 then
 		if playerRepulse.debris1 then
-			playerRepulse:addToShipLog("Repair crew reports the jump drive not operational. However, they may be able to adapt some of the space debris picked up earlier into suitable replacement parts. They are starting the fabrication process now","Magenta")
+			playerRepulse:addToShipLog(_("shipLog", "Repair crew reports the jump drive not operational. However, they may be able to adapt some of the space debris picked up earlier into suitable replacement parts. They are starting the fabrication process now"),"Magenta")
 			plot3 = jumpPartFabrication
 			jumpPartFabricationTimer = 60
 		else
-			playerRepulse:addToShipLog("Repair crew reports the jump drive inoperative. Additional parts are necessary","Magenta")
+			playerRepulse:addToShipLog(_("shipLog", "Repair crew reports the jump drive inoperative. Additional parts are necessary"),"Magenta")
 			plot3 = jumpPartGathering
 		end
 		plot1 = missileDamageReport
@@ -5016,7 +5016,7 @@ function missileDamageReport(delta)
 --Report on damaged missile systems
 	missileDamageReportTimer = missileDamageReportTimer - delta
 	if missileDamageReportTimer < 0 then
-		playerRepulse:addToShipLog("Repair crew says the missle weapons systems are not repairable with available components","Magenta")
+		playerRepulse:addToShipLog(_("shipLog", "Repair crew says the missle weapons systems are not repairable with available components"),"Magenta")
 		hull_damage_report_timer = 80
 		plot1 = hullDamageReport
 	end
@@ -5027,7 +5027,7 @@ function hullDamageReport(delta)
 		plot1 = damageSummaryReport
 		if playerRepulse.debris3 then
 			playerRepulse:setHull(playerRepulse:getHull()*2)
-			playerRepulse:addToShipLog("Repair crew applied some of the parts picked up to make some repairs on the hull","Magenta")
+			playerRepulse:addToShipLog(_("shipLog", "Repair crew applied some of the parts picked up to make some repairs on the hull"),"Magenta")
 		end
 	end
 end
@@ -5043,7 +5043,7 @@ function damageSummaryReport(delta)
 	totalDiff = totalDiff + math.abs(playerRepulse.maxFrontShield - playerRepulse:getSystemHealth("frontshield"))
 	totalDiff = totalDiff + math.abs(playerRepulse.maxRearShield - playerRepulse:getSystemHealth("rearshield"))
 	if totalDiff < .1 then
-		playerRepulse:addToShipLog("Repair crew reports they have repaired as much as they can. Additional parts may be available in the junk yard. We have not been able to get long range communications online, so we are as yet unable to locate or contact any Human Navy stations.","Magenta")
+		playerRepulse:addToShipLog(_("shipLog", "Repair crew reports they have repaired as much as they can. Additional parts may be available in the junk yard. We have not been able to get long range communications online, so we are as yet unable to locate or contact any Human Navy stations."),"Magenta")
 		plot1 = nil
 	end
 end
@@ -5063,7 +5063,7 @@ function fixFlood(delta)
 		end
 		if missileFixStation ~= nil then
 			if missileFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format("[Edwina (repair crew member)] My dad can fix our missile systems. He's got years of experience. He's on %s",missileFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("shipLog", "[Edwina (repair crew member)] My dad can fix our missile systems. He's got years of experience. He's on %s"),missileFixStation:getCallSign()),"Magenta")
 				missileFixStationMessage = "sent"
 			end
 		end
@@ -5079,7 +5079,7 @@ function fixFlood(delta)
 		end
 		if shieldFixStation ~= nil then
 			if shieldFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format("[Amir (repair crew member)] My sister fixes shield systems. I bet she could easily get our shields working. She works at a shop on %s",shieldFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("shipLog", "[Amir (repair crew member)] My sister fixes shield systems. I bet she could easily get our shields working. She works at a shop on %s"),shieldFixStation:getCallSign()),"Magenta")
 				shieldFixStationMessage = "sent"
 			end
 		end
@@ -5095,7 +5095,7 @@ function fixFlood(delta)
 		end
 		if impulseFixStation ~= nil then
 			if impulseFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format("[Janet (repair crew member)] Johnny, my son, does practical research on impulse drives. He's on %s. He can probably get our impulse engines up to full capacity",impulseFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("shipLog", "[Janet (repair crew member)] Johnny, my son, does practical research on impulse drives. He's on %s. He can probably get our impulse engines up to full capacity"),impulseFixStation:getCallSign()),"Magenta")
 				impulseFixStationMessage = "sent"
 			end
 		end
@@ -5111,7 +5111,7 @@ function fixFlood(delta)
 		end
 		if longRangeFixStation ~= nil then
 			if longRangeFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format("[Fred (repair crew member)] The outfit my wife works for on %s specializes in long range communication. She could probably get our systems connected back up to the Human Navy communication network",longRangeFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("shipLog", "[Fred (repair crew member)] The outfit my wife works for on %s specializes in long range communication. She could probably get our systems connected back up to the Human Navy communication network"),longRangeFixStation:getCallSign()),"Magenta")
 				longRangeFixStationMessage = "sent"
 			end
 		end
@@ -5127,7 +5127,7 @@ function fixFlood(delta)
 		end
 		if jumpFixStation ~= nil then
 			if jumpFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format("[Nancy (repair crew member)] Our jump drive needs help. My brother on %s fixes jump drives and he could get ours working",jumpFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("shipLog", "[Nancy (repair crew member)] Our jump drive needs help. My brother on %s fixes jump drives and he could get ours working"),jumpFixStation:getCallSign()),"Magenta")
 				jumpFixStationMessage = "sent"
 			end
 		end
@@ -5143,18 +5143,18 @@ function fixFlood(delta)
 		end
 		if reactorFixStation ~= nil then
 			if reactorFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format("[Manuel (repair crew member)] The reactor could use some tuning. My cousin can fix us up. He does work on reactors on %s",reactorFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("shipLog", "[Manuel (repair crew member)] The reactor could use some tuning. My cousin can fix us up. He does work on reactors on %s"),reactorFixStation:getCallSign()),"Magenta")
 				reactorFixStationMessage = "sent"
 				if playerRepulse:hasPlayerAtPosition("Relay") then
 					if crewFixButtonMsg == nil then
 						crewFixButtonMsg = "crewFixButtonMsg"
-						playerRepulse:addCustomButton("Relay",crewFixButtonMsg,"crew fixers",showCrewFixers)
+						playerRepulse:addCustomButton("Relay",crewFixButtonMsg,_("buttonRelay", "crew fixers"),showCrewFixers)
 					end
 				end
 				if playerRepulse:hasPlayerAtPosition("Operations") then
 					if crewFixButtonMsgOp == nil then
 						crewFixButtonMsgOp = "crewFixButtonMsgOp"
-						playerRepulse:addCustomButton("Operations",crewFixButtonMsgOp,"crew fixers",showCrewFixers)
+						playerRepulse:addCustomButton("Operations",crewFixButtonMsgOp,_("buttonOperations", "crew fixers"),showCrewFixers)
 					end
 				end
 				harassment_timer = 350
@@ -5188,22 +5188,22 @@ end
 function showCrewFixers()
 	oMsg = ""
 	if not playerRepulse.missileFix then
-		oMsg = oMsg .. string.format(" Missiles:%s(%s) ",missileFixStation:getCallSign(),missileFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepair", " Missiles:%s(%s) "),missileFixStation:getCallSign(),missileFixStation:getSectorName())
 	end
 	if not playerRepulse.frontShieldFix and not playerRepulse.rearShieldFix then
-		oMsg = oMsg .. string.format(" Shields:%s(%s) ",shieldFixStation:getCallSign(),shieldFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepair", " Shields:%s(%s) "),shieldFixStation:getCallSign(),shieldFixStation:getSectorName())
 	end
 	if not playerRepulse.impulseFix then
-		oMsg = oMsg .. string.format(" Impulse:%s(%s) ",impulseFixStation:getCallSign(),impulseFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepair", " Impulse:%s(%s) "),impulseFixStation:getCallSign(),impulseFixStation:getSectorName())
 	end
 	if not playerRepulse.longRangeFix then
-		oMsg = oMsg .. string.format(" Communications:%s(%s) ",longRangeFixStation:getCallSign(),longRangeFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepair", " Communications:%s(%s) "),longRangeFixStation:getCallSign(),longRangeFixStation:getSectorName())
 	end
 	if not playerRepulse.jumpFix then
-		oMsg = oMsg .. string.format(" Jump:%s(%s) ",jumpFixStation:getCallSign(),jumpFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepair", " Jump:%s(%s) "),jumpFixStation:getCallSign(),jumpFixStation:getSectorName())
 	end
 	if not playerRepulse.reactorFix then
-		oMsg = oMsg .. string.format(" Reactor:%s(%s) ",reactorFixStation:getCallSign(),reactorFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepair", " Reactor:%s(%s) "),reactorFixStation:getCallSign(),reactorFixStation:getSectorName())
 	end
 	if oMsg == nil then
 		if crewFixButtonMsg ~= nil then
@@ -5213,7 +5213,7 @@ function showCrewFixers()
 			playerRepulse:removeCustom(crewFixButtonMsgOp)		
 		end
 	else
-		playerRepulse:addToShipLog("Repair crew suggested locations for ship fixes:","Magenta")
+		playerRepulse:addToShipLog(_("shipLog", "Repair crew suggested locations for ship fixes:"),"Magenta")
 		playerRepulse:addToShipLog(oMsg,"Magenta")
 	end
 end
@@ -5237,7 +5237,7 @@ function suggestBeamFix(delta)
 					beamFixStation = candidate
 				end
 			until(beamFixStation ~= nil)
-			playerRepulse:addToShipLog(string.format("[Kent (repair crew member)] My brother on %s in %s can fix our port side beam weapon",beamFixStation:getCallSign(),beamFixStation:getSectorName()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("shipLog", "[Kent (repair crew member)] My brother on %s in %s can fix our port side beam weapon"),beamFixStation:getCallSign(),beamFixStation:getSectorName()),"Magenta")
 			plot2 = chaseTrigger
 		end
 	end
@@ -5270,8 +5270,8 @@ function junkYardDog(delta)
 			plot2 = borisChase
 		end
 		if playerRepulse.junk_yard_dog_warning == nil then
-			playerRepulse:addToShipLog(string.format("[Sensor tech] Looks like %s figured out where we went and has sicced %s on us.",brigStation:getCallSign(),junk_yard_dog:getCallSign()),"Magenta")
-			playerRepulse:addToShipLog(string.format("[Engineering tech] With our hull at %i, we better hope our shields hold",playerRepulse:getHull()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("shipLog", "[Sensor tech] Looks like %s figured out where we went and has sicced %s on us."),brigStation:getCallSign(),junk_yard_dog:getCallSign()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("shipLog", "[Engineering tech] With our hull at %i, we better hope our shields hold"),playerRepulse:getHull()),"Magenta")
 			playerRepulse.junk_yard_dog_warning = "sent"
 		end
 	end
@@ -5284,11 +5284,11 @@ function borisChase(delta)
 			if junkChaser ~= nil and junkChaser:isValid() then
 				chaserMsgChoice = math.random(1,3)
 				if chaserMsgChoice == 1 then
-					playerRepulse:addToShipLog(string.format("[%s] You won't get away so easily",junkChaser:getCallSign()),"Red")
+					playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] You won't get away so easily"),junkChaser:getCallSign()),"Red")
 				elseif chaserMsgChoice == 2 then
-					playerRepulse:addToShipLog(string.format("[%s] You can run, but you can't hide",junkChaser:getCallSign()),"Red")
+					playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] You can run, but you can't hide"),junkChaser:getCallSign()),"Red")
 				else
-					playerRepulse:addToShipLog(string.format("[%s] I will get you yet",junkChaser:getCallSign()),"Red")
+					playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] I will get you yet"),junkChaser:getCallSign()),"Red")
 				end
 			else
 				if difficulty < 1 then
@@ -5301,11 +5301,11 @@ function borisChase(delta)
 				junkChaser:onDestruction(resetBoris)
 				chaserMsgChoice = math.random(1,3)
 				if chaserMsgChoice == 1 then
-					junkChaser:sendCommsMessage(playerRepulse,"You don't steal from Boris Junk Yard without consequences. I'm coming for you")
+					junkChaser:sendCommsMessage(playerRepulse,_("You don't steal from Boris Junk Yard without consequences. I'm coming for you"))
 				elseif chaserMsgChoice == 2 then
-					junkChaser:sendCommsMessage(playerRepulse,"I saw you steal that ship. You'll rue the day")
+					junkChaser:sendCommsMessage(playerRepulse,_("I saw you steal that ship. You'll rue the day"))
 				else
-					junkChaser:sendCommsMessage(playerRepulse,"Stealing a ship, eh? We'll just see about that")
+					junkChaser:sendCommsMessage(playerRepulse,_("Stealing a ship, eh? We'll just see about that"))
 				end
 			end
 		end
@@ -5317,11 +5317,11 @@ function resetBoris(self, instigator)
 	end
 	chaserMsgChoice = math.random(1,3)
 	if chaserMsgChoice == 1 then
-		playerRepulse:addToShipLog(string.format("[%s] You can't get rid of me that easily",self:getCallSign()),"Red")
+		playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] You can't get rid of me that easily"),self:getCallSign()),"Red")
 	elseif chaserMsgChoice == 2 then
-		playerRepulse:addToShipLog(string.format("[%s] I'll be back",self:getCallSign()),"Red")
+		playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] I'll be back"),self:getCallSign()),"Red")
 	else
-		playerRepulse:addToShipLog(string.format("[%s] I've got plenty of ships",self:getCallSign()),"Red")
+		playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] I've got plenty of ships"),self:getCallSign()),"Red")
 	end
 end
 ------------------------------------
@@ -5337,7 +5337,7 @@ function jumpPartRecognition(delta)
 --Identify debris as useful for repair of jump drive
 	jumpPartRecognitionTimer = jumpPartRecognitionTimer - delta
 	if jumpPartRecognitionTimer < 0 then
-		playerRepulse:addToShipLog("Repair crew thinks they can use the space debris recently acquired to make repair parts for the jump drive. They are starting the fabrication process now.","Magenta")
+		playerRepulse:addToShipLog(_("shipLog", "Repair crew thinks they can use the space debris recently acquired to make repair parts for the jump drive. They are starting the fabrication process now."),"Magenta")
 		plot3 = jumpPartFabrication
 		jumpPartFabricationTimer = 60
 	end
@@ -5346,7 +5346,7 @@ function jumpPartFabrication(delta)
 --Jump drive repairable 
 	jumpPartFabricationTimer = jumpPartFabricationTimer - delta
 	if jumpPartFabricationTimer < 0 then
-		playerRepulse:addToShipLog("Repair crew finished jump drive part fabrication. They believe the jump drive should be functional soon","Magenta")
+		playerRepulse:addToShipLog(_("shipLog", "Repair crew finished jump drive part fabrication. They believe the jump drive should be functional soon"),"Magenta")
 		playerRepulse.maxJump = .5
 		plot3 = nil
 	end
@@ -5571,9 +5571,9 @@ function kraylorTransportPlot(delta)
 				name = "Fuel"
 			end
 			if random(1,100) < 30 then
-				name = name .. " Jump Freighter " .. irandom(3, 5)
+				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
 			else
-				name = name .. " Freighter " .. irandom(1, 5)
+				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
 			end
 			kobj = CpuShip():setTemplate(name):setFaction('Kraylor'):setCommsScript(""):setCommsFunction(commsShip)
 			kobj.target = target
@@ -5645,9 +5645,9 @@ function independentTransportPlot(delta)
 				name = "Fuel"
 			end
 			if irandom(1,100) < 30 then
-				name = name .. " Jump Freighter " .. irandom(3, 5)
+				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
 			else
-				name = name .. " Freighter " .. irandom(1, 5)
+				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent'):setCommsScript(""):setCommsFunction(commsShip)
 			obj.target = target
@@ -5694,7 +5694,7 @@ function billboardUpdate(delta)
 		junkZone:setColor(128,0,128)
 	end
 	if signsScanned >= 3 then
-		junkZone:setLabel("Boris Junk Yard")
+		junkZone:setLabel(_("scienceJunkDescription", "Boris Junk Yard"))
 		junkZone.color = "purple"
 		flashTimer = 5
 		plotSign = billboardFlash
@@ -5727,7 +5727,7 @@ function scragHealth(delta)
 		if playerFighter.reactor_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.reactor_max_message = "reactor_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.reactor_max_message,"Reached maximum repair on reactor")
+				playerFighter:addCustomMessage("Engineering",playerFighter.reactor_max_message,_("msgEngineer", "Reached maximum repair on reactor"))
 			end
 		end
 	end
@@ -5736,7 +5736,7 @@ function scragHealth(delta)
 		if playerFighter.beamweapons_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.beamweapons_max_message = "beamweapons_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.beamweapons_max_message,"Reached maximum repair on beam weapons")
+				playerFighter:addCustomMessage("Engineering",playerFighter.beamweapons_max_message,_("msgEngineer", "Reached maximum repair on beam weapons"))
 			end
 		end
 	end
@@ -5745,7 +5745,7 @@ function scragHealth(delta)
 		if playerFighter.maneuver_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.maneuver_max_message = "maneuver_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.maneuver_max_message,"Reached maximum repair on maneuver")
+				playerFighter:addCustomMessage("Engineering",playerFighter.maneuver_max_message,_("msgEngineer", "Reached maximum repair on maneuver"))
 			end
 		end
 	end
@@ -5754,7 +5754,7 @@ function scragHealth(delta)
 		if playerFighter.impulse_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.impulse_max_message = "impulse_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.impulse_max_message,"Reached maximum repair on impulse engines")
+				playerFighter:addCustomMessage("Engineering",playerFighter.impulse_max_message,_("msgEngineer", "Reached maximum repair on impulse engines"))
 			end
 		end
 	end
@@ -5763,7 +5763,7 @@ function scragHealth(delta)
 		if playerFighter.frontshield_max_message == nil then
 			if playerFighter:hasPlayerAtPosition("Engineering") then
 				playerFighter.frontshield_max_message = "frontshield_max_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.frontshield_max_message,"Reached maximum repair on shields")
+				playerFighter:addCustomMessage("Engineering",playerFighter.frontshield_max_message,_("msgEngineer", "Reached maximum repair on shields"))
 			end
 		end
 	end
@@ -5776,7 +5776,7 @@ function plunderHealth(delta)
 			if playerRepulse.reactor_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.reactor_max_message = "reactor_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.reactor_max_message,"Reached maximum repair on reactor")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.reactor_max_message,_("msgEngineer", "Reached maximum repair on reactor"))
 				end
 			end
 		end
@@ -5785,7 +5785,7 @@ function plunderHealth(delta)
 			if playerRepulse.beamweapons_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.beamweapons_max_message = "beamweapons_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.beamweapons_max_message,"Reached maximum repair on beam weapons")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.beamweapons_max_message,_("msgEngineer", "Reached maximum repair on beam weapons"))
 				end
 			end
 		end
@@ -5794,7 +5794,7 @@ function plunderHealth(delta)
 			if playerRepulse.maneuver_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.maneuver_max_message = "maneuver_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.maneuver_max_message,"Reached maximum repair on maneuver")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.maneuver_max_message,_("msgEngineer", "Reached maximum repair on maneuver"))
 				end
 			end
 		end
@@ -5803,7 +5803,7 @@ function plunderHealth(delta)
 			if playerRepulse.missilesystem_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.missilesystem_max_message = "missilesystem_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.missilesystem_max_message,"Reached maximum repair on missile weapons")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.missilesystem_max_message,_("msgEngineer", "Reached maximum repair on missile weapons"))
 				end
 			end
 		end
@@ -5812,7 +5812,7 @@ function plunderHealth(delta)
 			if playerRepulse.impulse_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.impulse_max_message = "impulse_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.impulse_max_message,"Reached maximum repair on impulse engines")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.impulse_max_message,_("msgEngineer", "Reached maximum repair on impulse engines"))
 				end
 			end
 		end
@@ -5821,7 +5821,7 @@ function plunderHealth(delta)
 			if playerRepulse.warp_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.warp_max_message = "warp_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.warp_max_message,"Reached maximum repair on warp drive")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.warp_max_message,_("msgEngineer", "Reached maximum repair on warp drive"))
 				end
 			end
 		end
@@ -5830,7 +5830,7 @@ function plunderHealth(delta)
 			if playerRepulse.jumpdrive_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.jumpdrive_max_message = "jumpdrive_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.jumpdrive_max_message,"Reached maximum repair on jump drive")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.jumpdrive_max_message,_("msgEngineer", "Reached maximum repair on jump drive"))
 				end
 			end
 		end
@@ -5839,7 +5839,7 @@ function plunderHealth(delta)
 			if playerRepulse.frontshield_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.frontshield_max_message = "frontshield_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.frontshield_max_message,"Reached maximum repair on front shield")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.frontshield_max_message,_("msgEngineer", "Reached maximum repair on front shield"))
 				end
 			end
 		end
@@ -5848,7 +5848,7 @@ function plunderHealth(delta)
 			if playerRepulse.rearshield_max_message == nil then
 				if playerRepulse:hasPlayerAtPosition("Engineering") then
 					playerRepulse.rearshield_max_message = "rearshield_max_message"
-					playerRepulse:addCustomMessage("Engineering",playerRepulse.rearshield_max_message,"Reached maximum repair on rear shield")
+					playerRepulse:addCustomMessage("Engineering",playerRepulse.rearshield_max_message,_("msgEngineer", "Reached maximum repair on rear shield"))
 				end
 			end
 		end
