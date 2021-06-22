@@ -20,11 +20,16 @@ msgid ""
 "How many waves can you destroy?"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:217
+#: scripts/scenario_03_waves.lua:125 scripts/scenario_03_waves.lua:217
 #, lua-format
 msgid "Wave %d"
 msgstr ""
 
 #: scripts/scenario_03_waves.lua:250
 msgid "Wave cleared!"
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:251
+#, lua-format
+msgid "Wave %d cleared."
 msgstr ""

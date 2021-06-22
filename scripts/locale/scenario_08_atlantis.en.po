@@ -2,12 +2,19 @@
 msgid "Birth of the Atlantis"
 msgstr ""
 
-#: scenario_08_atlantis.lua:161 scenario_08_atlantis.lua:177
-#: scenario_08_atlantis.lua:181
+# Scenario description
+msgid ""
+"You are the first crew of a new and improved version of the Atlantis space "
+"explorer.You must check out ship systems and complete an initial mission."
+"This scenario is limited to one player ship: the Atlantis Atlantis-1."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:161 scripts/scenario_08_atlantis.lua:177
+#: scripts/scenario_08_atlantis.lua:181
 msgid "An odd object floating in space."
 msgstr ""
 
-#: scenario_08_atlantis.lua:163
+#: scripts/scenario_08_atlantis.lua:163
 #, lua-format
 msgid ""
 "This object is giving off strange readings.\n"
@@ -18,13 +25,13 @@ msgid ""
 "Doppler instability: %i"
 msgstr ""
 
-#: scenario_08_atlantis.lua:177 scenario_08_atlantis.lua:181
+#: scripts/scenario_08_atlantis.lua:177 scripts/scenario_08_atlantis.lua:181
 msgid ""
 "This object seems to be inert, and not giving any readings on your sensors. "
 "The actual object must be somewhere else."
 msgstr ""
 
-#: scenario_08_atlantis.lua:323
+#: scripts/scenario_08_atlantis.lua:323
 msgid ""
 "Come in, Atlantis-1.\n"
 "\n"
@@ -38,7 +45,7 @@ msgid ""
 "in powered down mode."
 msgstr ""
 
-#: scenario_08_atlantis.lua:344
+#: scripts/scenario_08_atlantis.lua:344
 msgid ""
 "Good, Atlantis-1, we read all systems are go. You can safely undock now.\n"
 "\n"
@@ -46,7 +53,7 @@ msgid ""
 "stock up on weapons."
 msgstr ""
 
-#: scenario_08_atlantis.lua:362
+#: scripts/scenario_08_atlantis.lua:362
 msgid ""
 "I see you are stocked up on missiles now, Atlantis-1.\n"
 "\n"
@@ -58,7 +65,7 @@ msgid ""
 "identify them."
 msgstr ""
 
-#: scenario_08_atlantis.lua:381
+#: scripts/scenario_08_atlantis.lua:381
 msgid ""
 "Perfect, Atlantis-1. They identify as Kraylor ships because we put fake IDs "
 "in them.\n"
@@ -70,7 +77,7 @@ msgid ""
 "penetrate them."
 msgstr ""
 
-#: scenario_08_atlantis.lua:403
+#: scripts/scenario_08_atlantis.lua:403
 msgid ""
 "Good, all weapons are operational. Atlantis-1 seems to be in perfect "
 "operating condition.\n"
@@ -79,11 +86,11 @@ msgid ""
 "dock with Supply-6 to resupply."
 msgstr ""
 
-#: scenario_08_atlantis.lua:418
+#: scripts/scenario_08_atlantis.lua:418
 msgid "Hold on tight, heading for sector B20."
 msgstr ""
 
-#: scenario_08_atlantis.lua:422
+#: scripts/scenario_08_atlantis.lua:422
 msgid ""
 "Atlantis-1,\n"
 "\n"
@@ -95,7 +102,7 @@ msgid ""
 "Report back when you have found the source of the odd sensor readings."
 msgstr ""
 
-#: scenario_08_atlantis.lua:460
+#: scripts/scenario_08_atlantis.lua:460
 msgid ""
 "Atlantis-1, what is happening?\n"
 "\n"
@@ -103,7 +110,7 @@ msgid ""
 "there."
 msgstr ""
 
-#: scenario_08_atlantis.lua:488
+#: scripts/scenario_08_atlantis.lua:488
 msgid ""
 "Atlantis-1,\n"
 "\n"
@@ -113,7 +120,7 @@ msgid ""
 "Do NOT engage the Kraylor. I repeat, DO NOT ENGAGE."
 msgstr ""
 
-#: scenario_08_atlantis.lua:505
+#: scripts/scenario_08_atlantis.lua:505
 msgid ""
 "Atlantis-1, come in.\n"
 "\n"
@@ -122,7 +129,7 @@ msgid ""
 "Try to get to sector ZU5. We are sending JC88 to get you out of there."
 msgstr ""
 
-#: scenario_08_atlantis.lua:514
+#: scripts/scenario_08_atlantis.lua:514
 msgid ""
 "Atlantis-1, come in.\n"
 "\n"
@@ -132,11 +139,11 @@ msgid ""
 "are sending JC88 to get you out of there."
 msgstr ""
 
-#: scenario_08_atlantis.lua:528 scenario_08_atlantis.lua:613
+#: scripts/scenario_08_atlantis.lua:528 scripts/scenario_08_atlantis.lua:613
 msgid "Hold on tight, heading for Shipyard-Gamma."
 msgstr ""
 
-#: scenario_08_atlantis.lua:532
+#: scripts/scenario_08_atlantis.lua:532
 msgid ""
 "Welcome home, Atlantis-1.\n"
 "\n"
@@ -144,7 +151,7 @@ msgid ""
 "for your mission report."
 msgstr ""
 
-#: scenario_08_atlantis.lua:550
+#: scripts/scenario_08_atlantis.lua:550
 msgid ""
 "Atlantis-1, we've worked through the data you collected on the anomaly that "
 "collapsed into the wormhole.\n"
@@ -168,11 +175,11 @@ msgid ""
 "equipped to handle a full-on assault."
 msgstr ""
 
-#: scenario_08_atlantis.lua:575
+#: scripts/scenario_08_atlantis.lua:575
 msgid "Hold on tight, heading for Kraylor defense line."
 msgstr ""
 
-#: scenario_08_atlantis.lua:579
+#: scripts/scenario_08_atlantis.lua:579
 msgid ""
 "We have arrived. Find the right moment to take out that transport, grab the "
 "cargo, and then dock with us.\n"
@@ -180,13 +187,13 @@ msgid ""
 "Expect heavy retaliation as soon as you attack the transport."
 msgstr ""
 
-#: scenario_08_atlantis.lua:605
+#: scripts/scenario_08_atlantis.lua:605
 msgid ""
 "Return to the carrier IMMEDIATELY. The entire Kraylor fleet is after you. "
 "Whatever you picked up must be valuable."
 msgstr ""
 
-#: scenario_08_atlantis.lua:617
+#: scripts/scenario_08_atlantis.lua:617
 msgid ""
 "Perfect recovery, Atlantis-1. Seems like the transport was moving highly "
 "encrypted documents.\n"
@@ -194,7 +201,7 @@ msgid ""
 "Dock with us and we'll take a shot at cracking them."
 msgstr ""
 
-#: scenario_08_atlantis.lua:637
+#: scripts/scenario_08_atlantis.lua:637
 msgid ""
 "We are processing the recovered documents. The Kraylor do not excel at "
 "encryption, but this is pretty advanced by their standards.\n"
@@ -202,7 +209,7 @@ msgid ""
 "It will take some time to crack this, but we should be successful."
 msgstr ""
 
-#: scenario_08_atlantis.lua:652
+#: scripts/scenario_08_atlantis.lua:652
 msgid ""
 "We've cracked the first part of the documents.\n"
 "\n"
@@ -214,7 +221,7 @@ msgid ""
 "getting more information from these documents. They are a bit of a mess."
 msgstr ""
 
-#: scenario_08_atlantis.lua:670
+#: scripts/scenario_08_atlantis.lua:670
 msgid ""
 "More results from the decryption team.\n"
 "\n"
@@ -230,7 +237,7 @@ msgid ""
 "We'll keep you updated with more information."
 msgstr ""
 
-#: scenario_08_atlantis.lua:690
+#: scripts/scenario_08_atlantis.lua:690
 msgid ""
 "It looks like the Kraylor were watching these experiments and waiting for "
 "their moment to steal the end result.\n"
@@ -244,7 +251,7 @@ msgid ""
 "missile storage."
 msgstr ""
 
-#: scenario_08_atlantis.lua:708
+#: scripts/scenario_08_atlantis.lua:708
 msgid ""
 "We cracked the final piece of the puzzle.\n"
 "\n"
@@ -257,7 +264,7 @@ msgid ""
 "advantage."
 msgstr ""
 
-#: scenario_08_atlantis.lua:723
+#: scripts/scenario_08_atlantis.lua:723
 msgid ""
 "We've just detected a power surge.\n"
 "\n"
@@ -267,19 +274,19 @@ msgid ""
 "personnel! Save what you can!"
 msgstr ""
 
-#: scenario_08_atlantis.lua:738
+#: scripts/scenario_08_atlantis.lua:738
 msgid "Bonus points for destroying the battlestation!"
 msgstr ""
 
-#: scenario_08_atlantis.lua:776
+#: scripts/scenario_08_atlantis.lua:776
 msgid "Atlantis-1, are you ready for your first mission?"
 msgstr ""
 
-#: scenario_08_atlantis.lua:778 scenario_08_atlantis.lua:831
+#: scripts/scenario_08_atlantis.lua:778 scripts/scenario_08_atlantis.lua:831
 msgid "Yes."
 msgstr ""
 
-#: scenario_08_atlantis.lua:780
+#: scripts/scenario_08_atlantis.lua:780
 msgid ""
 "Good. Your first mission is to identify odd readings coming from the nebula "
 "cloud in sector B20.\n"
@@ -290,15 +297,15 @@ msgid ""
 "Dock with JC-88 and it will handle the rest."
 msgstr ""
 
-#: scenario_08_atlantis.lua:789 scenario_08_atlantis.lua:885
+#: scripts/scenario_08_atlantis.lua:789 scripts/scenario_08_atlantis.lua:885
 msgid "No."
 msgstr ""
 
-#: scenario_08_atlantis.lua:791
+#: scripts/scenario_08_atlantis.lua:791
 msgid "Then hail us again when you are ready."
 msgstr ""
 
-#: scenario_08_atlantis.lua:801
+#: scripts/scenario_08_atlantis.lua:801
 msgid ""
 "Atlantis-1,\n"
 "\n"
@@ -309,22 +316,22 @@ msgid ""
 "details."
 msgstr ""
 
-#: scenario_08_atlantis.lua:811
+#: scripts/scenario_08_atlantis.lua:811
 msgid ""
 "Good day, Atlantis-1.\n"
 "\n"
 "Please continue with your current objective."
 msgstr ""
 
-#: scenario_08_atlantis.lua:825
+#: scripts/scenario_08_atlantis.lua:825
 msgid "Jump carrier JC-88 reporting. All system nominal."
 msgstr ""
 
-#: scenario_08_atlantis.lua:829
+#: scripts/scenario_08_atlantis.lua:829
 msgid "Atlantis-1, did you find the source of the odd sensor readings?"
 msgstr ""
 
-#: scenario_08_atlantis.lua:833
+#: scripts/scenario_08_atlantis.lua:833
 msgid ""
 "Great, because our sensor readings are inconclusive. Can you report your "
 "readings to us?\n"
@@ -332,26 +339,26 @@ msgid ""
 "First, what is the beta radiation reading?"
 msgstr ""
 
-#: scenario_08_atlantis.lua:840
+#: scripts/scenario_08_atlantis.lua:840
 msgid "Next, what is the ionic phase shift reading?"
 msgstr ""
 
-#: scenario_08_atlantis.lua:845
+#: scripts/scenario_08_atlantis.lua:845
 msgid "Next, what is the gravity disruption reading?"
 msgstr ""
 
-#: scenario_08_atlantis.lua:850
+#: scripts/scenario_08_atlantis.lua:850
 msgid "Finally, what is the doppler instability reading?"
 msgstr ""
 
-#: scenario_08_atlantis.lua:857
+#: scripts/scenario_08_atlantis.lua:857
 msgid ""
 "Are you sure? Those readings are really off the normal scale.\n"
 "\n"
 "These readings indicate it is very unstable! Please move away from it."
 msgstr ""
 
-#: scenario_08_atlantis.lua:862
+#: scripts/scenario_08_atlantis.lua:862
 msgid ""
 "Are you sure? Those readings are really off the normal scale.\n"
 "\n"
@@ -359,30 +366,31 @@ msgid ""
 "The nebula might be interfering with your sensors."
 msgstr ""
 
-#: scenario_08_atlantis.lua:868
+#: scripts/scenario_08_atlantis.lua:868
 msgid ""
 "Can you confirm your readings and report back? These numbers do not match "
 "our readings at all."
 msgstr ""
 
-#: scenario_08_atlantis.lua:887
+#: scripts/scenario_08_atlantis.lua:887
 msgid "Then continue looking for it."
 msgstr ""
 
-#: scenario_08_atlantis.lua:909
+#: scripts/scenario_08_atlantis.lua:909
 #, lua-format
 msgid ""
 "(The transmission is loaded with static noise.)\n"
 "\n"
+"%s"
 msgstr ""
 
-#: scenario_08_atlantis.lua:943
+#: scripts/scenario_08_atlantis.lua:943
 msgid ""
 "Looks like the docking couplers detached prematurely.\n"
 "\n"
 "This happens sometimes. I am on my way so we can try again."
 msgstr ""
 
-#: scenario_08_atlantis.lua:962
+#: scripts/scenario_08_atlantis.lua:962
 msgid "Surrender yourself, human intruder."
 msgstr ""
