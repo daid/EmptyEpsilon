@@ -37,12 +37,12 @@ void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& wi
             int count = 0;
             for(GuiElement* element : elements)
             {
-                if (element->isVisible())
+                if (!element->isDestroyed() && element->isVisible())
                     count += 1;
             }
             for(GuiElement* element : elements)
             {
-                if (element->isVisible())
+                if (!element->isDestroyed() && element->isVisible())
                 {
                     element->setSize(GuiElement::GuiSizeMax, parent_rect.height / count);
                     element->setPosition(offset.x, offset.y);
@@ -57,12 +57,12 @@ void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& wi
             int count = 0;
             for(GuiElement* element : elements)
             {
-                if (element->isVisible())
+                if (!element->isDestroyed() && element->isVisible())
                     count += 1;
             }
             for(GuiElement* element : elements)
             {
-                if (element->isVisible())
+                if (!element->isDestroyed() && element->isVisible())
                 {
                     element->setSize(parent_rect.width / count, GuiElement::GuiSizeMax);
                     element->setPosition(offset.x, offset.y);
@@ -75,7 +75,7 @@ void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& wi
     }
     for(GuiElement* element : elements)
     {
-        if (element->isVisible())
+        if (!element->isDestroyed() && element->isVisible())
         {
             element->setPosition(offset, alignment);
             offset.x += element->getSize().x * scale.x;

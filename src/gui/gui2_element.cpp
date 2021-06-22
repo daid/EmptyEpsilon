@@ -201,6 +201,11 @@ void GuiElement::destroy()
     destroyed = true;
 }
 
+bool GuiElement::isDestroyed()
+{
+    return destroyed;
+}
+
 void GuiElement::updateRect(sf::FloatRect parent_rect)
 {
     sf::Vector2f local_size = size;

@@ -89,6 +89,8 @@ public:
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();
 
+    bool isDestroyed();
+
     friend class GuiContainer;
     friend class GuiCanvas;
 private:
