@@ -111,4 +111,4 @@ jobs:
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
     - name: Test if lua scripts parse
-      run: find scripts/ -iname "*.lua" |  LUA_INIT="function require(...) end" xargs -P 4 -n 1 lua
+      run: find scripts/ -iname "*.lua" | xargs -P 4 -n 1 luac -p
