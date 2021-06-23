@@ -100,3 +100,15 @@ jobs:
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: cmake --build . --config ${{ matrix.build_type }} --target package 
+  luatest:
+    name: LuaTest
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update apt index
+      run: sudo apt-get update -qq
+    - name: Install SFML
+      run: sudo apt-get install lua5.3
+    - name: Checkout EmptyEpsilon
+      uses: actions/checkout@v2
+    - name: Test if lua scripts parse
+      run: find scripts/ -iname "*.lua" |  LUA_INIT="function require(...) end" xargs -P 4 -n 1 lua
