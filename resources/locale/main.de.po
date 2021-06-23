@@ -2039,7 +2039,7 @@ msgstr "Spiel pausieren"
 #: src/gui/hotkeyConfig.cpp:10
 msgctxt "hotkey_Basic"
 msgid "Show in-game help"
-msgstr "In-GameHilfe anzeigen"
+msgstr "In-Game-Hilfe anzeigen"
 
 #: src/gui/hotkeyConfig.cpp:11 src/gui/hotkeyConfig.cpp:12
 msgctxt "hotkey_Basic"
