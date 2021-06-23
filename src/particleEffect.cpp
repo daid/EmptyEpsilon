@@ -80,7 +80,7 @@ ParticleEngine::ParticleEngine()
         // Or switch the element index to a uint16_t.
         static_assert((texcoords.size() - 1) <= std::numeric_limits<uint8_t>::max(), "Too many elements! Indices overflow.");
 
-        for (auto quad = 0; quad < instances_per_draw; ++quad)
+        for (auto quad = 0U; quad < instances_per_draw; ++quad)
         {
             auto base_vertex = static_cast<uint8_t>(vertices_per_instance * quad);
             auto base_element = elements_per_instance * quad;
@@ -154,12 +154,12 @@ void ParticleEngine::doRender()
         // Process only non-expired
         size_t live_particle_count = first_expired - std::begin(particles);
 
-        for (size_t n = 0; n < live_particle_count;)
+        for (size_t n = 0U; n < live_particle_count;)
         {
             auto instance_count = std::min(live_particle_count - n, instances_per_draw);
 
             // setup the instances (individual particles)
-            for (auto instance = 0; instance < instance_count; ++instance)
+            for (auto instance = 0U; instance < instance_count; ++instance)
             {
                 const auto& p = particles[n + instance];
                 auto position = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.position, p.end.position);
@@ -167,7 +167,7 @@ void ParticleEngine::doRender()
                 auto size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
 
                 auto base_vertex = vertices_per_instance * instance;
-                for (auto v = 0; v < vertices_per_instance; ++v)
+                for (auto v = 0U; v < vertices_per_instance; ++v)
                 {
                     particle_data[base_vertex + v].position = position;
                     particle_data[base_vertex + v].color = color;

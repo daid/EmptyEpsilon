@@ -7,6 +7,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <limits>
 
 namespace gl
 {
@@ -185,7 +186,7 @@ namespace gl
     private:
         uint32_t target = 0;
         uint32_t texture = 0;
-        int32_t previously_bound = -1;
+        uint32_t previously_bound = std::numeric_limits<uint32_t>::max();
     };
 
     bool isAvailable();

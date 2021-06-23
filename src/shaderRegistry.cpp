@@ -57,7 +57,7 @@ namespace ShaderRegistry
 			std::make_tuple(Uniforms::IlluminationMap, 2),
 		};
 
-		for (auto i = 0; i < shader_names.size(); ++i)
+		for (auto i = 0U; i < shader_names.size(); ++i)
 		{
 			auto& entry = shaders[i];
 			entry.shader = ShaderManager::getShader(shader_names[i]);
@@ -69,13 +69,13 @@ namespace ShaderRegistry
 				auto handle = entry.shader->getNativeHandle();
 
 				// First update attribute locations.
-				for (auto attrib = 0; attrib < attribute_names.size(); ++attrib)
+				for (auto attrib = 0U; attrib < attribute_names.size(); ++attrib)
 				{
 					entry.attributes[attrib] = glGetAttribLocation(handle, attribute_names[attrib]);
 				}
 
 				// Find out uniform locations
-				for (auto uniform = 0; uniform < uniform_names.size(); ++uniform)
+				for (auto uniform = 0U; uniform < uniform_names.size(); ++uniform)
 				{
 					entry.uniforms[uniform] = glGetUniformLocation(handle, uniform_names[uniform]);
 				}

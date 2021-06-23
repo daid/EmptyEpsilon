@@ -48,7 +48,7 @@ ExplosionEffect::ExplosionEffect()
         // Create initial data.
         std::array<uint8_t, 6 * max_quad_count> indices;
         std::array<sf::Vector2f, 4 * max_quad_count> texcoords;
-        for (auto i = 0; i < max_quad_count; ++i)
+        for (auto i = 0U; i < max_quad_count; ++i)
         {
             auto quad_offset = 4 * i;
             texcoords[quad_offset + 0] = { 0.f, 1.f };
@@ -164,7 +164,7 @@ void ExplosionEffect::draw3DTransparent()
     {
         auto active_quads = std::min(quad_count, particleCount - n);
         // setup quads
-        for (auto p = 0; p < active_quads; ++p)
+        for (auto p = 0U; p < active_quads; ++p)
         {
             sf::Vector3f v = particleDirections[n + p] * scale * size;
             vertices[4 * p + 0] = v;

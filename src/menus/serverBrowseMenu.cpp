@@ -13,7 +13,7 @@
 
 namespace
 {
-    const string& disconnectErrorMessage(GameClient::DisconnectReason reason)
+    const string disconnectErrorMessage(GameClient::DisconnectReason reason)
     {
         switch (reason)
         {

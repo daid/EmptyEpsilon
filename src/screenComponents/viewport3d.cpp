@@ -140,7 +140,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         // Generate and update the alternating vertices signs.
         std::array<float, 2 * spacedust_particle_count> signs;
         
-        for (auto n = 0; n < signs.size(); n += 2)
+        for (auto n = 0U; n < signs.size(); n += 2)
         {
             signs[n] = -1.f;
             signs[n + 1] = 1.f;
@@ -378,7 +378,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         
         bool update_required = false; // Do we need to update the GPU buffer?
 
-        for (auto n = 0; n < space_dust.size(); n += 2)
+        for (auto n = 0U; n < space_dust.size(); n += 2)
         {
             //
             auto delta = space_dust[n] - dust_center;

@@ -92,7 +92,7 @@ namespace gl
         :target{ target }, texture{ texture }
     {
         // ES2 only supports 2D textures and cubemaps.
-        GL_CHECK(glGetIntegerv(target == GL_TEXTURE_2D ? GL_TEXTURE_BINDING_2D : GL_TEXTURE_BINDING_CUBE_MAP, &previously_bound));
+        GL_CHECK(glGetIntegerv(target == GL_TEXTURE_2D ? GL_TEXTURE_BINDING_2D : GL_TEXTURE_BINDING_CUBE_MAP, (int32_t*)&previously_bound));
         
         if (previously_bound != texture)
             GL_CHECK(glBindTexture(target, texture));
