@@ -96,7 +96,7 @@ MainMenu::MainMenu()
         destroy();
     }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "QUIT", tr("Quit"), [this]() {
+    (new GuiButton(this, "QUIT", tr("Quit"), []() {
         engine->shutdown();
     }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
 

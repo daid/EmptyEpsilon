@@ -33,7 +33,7 @@ string getMissileSizeString(EMissileSizes size)
         case MS_Large:
             return "large";
         default:
-            return "unknown size:" + size;
+            return string("unknown size:") + string(size);
     }
 }
 

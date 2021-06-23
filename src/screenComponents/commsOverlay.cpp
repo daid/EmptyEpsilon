@@ -107,7 +107,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     chat_comms_send_button->setPosition(-20, -20, ABottomRight)->setSize(120, 50);
 
     // Button to close chat comms.
-    chat_comms_close_button = new GuiButton(chat_comms_box, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
+    chat_comms_close_button = new GuiButton(chat_comms_box, "CLOSE_BUTTON", tr("button", "Close"), []() {
         if (my_spaceship)
             my_spaceship->commandCloseTextComm();
     });
