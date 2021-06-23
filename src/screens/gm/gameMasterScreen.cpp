@@ -35,7 +35,7 @@ GameMasterScreen::GameMasterScreen()
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", sf::Color(255, 255, 255, 32));
     box_selection_overlay->hide();
 
-    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
+    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [](bool value) {
         if (!value)
             engine->setGameSpeed(1.0f);
         else
@@ -43,7 +43,7 @@ GameMasterScreen::GameMasterScreen()
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
 
-    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [this](bool value) {
+    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
@@ -87,7 +87,7 @@ GameMasterScreen::GameMasterScreen()
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
-    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), [this]() {
+    cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
         gameGlobalInfo->on_gm_click = nullptr;
     });
     cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
@@ -216,7 +216,7 @@ GameMasterScreen::GameMasterScreen()
 
     message_text = new GuiScrollText(message_frame, "", "");
     message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
-    message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), [this]() {
+    message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), []() {
         if (!gameGlobalInfo->gm_messages.empty())
         {
             gameGlobalInfo->gm_messages.pop_front();

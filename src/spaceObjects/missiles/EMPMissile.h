@@ -12,10 +12,10 @@ class EMPMissile : public MissileWeapon
 public:
     EMPMissile();
 
-    virtual void hitObject(P<SpaceObject> object);
+    void hitObject(P<SpaceObject> object) override;
     void explode();
     void lifeEnded() override;
-    void update(float delta);
+    void update(float delta) override;
 };
 
 #endif//EMP_MISSILE_H
