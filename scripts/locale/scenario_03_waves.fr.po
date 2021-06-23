@@ -13,7 +13,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: .\n"
 
-#: scenario_03_waves.lua:43
+#, fuzzy
+msgid "Waves"
+msgstr "Vague n° "
+
+# Scenario description
+msgid ""
+"Waves of increasingly difficult enemies attack friendly stations. There is "
+"no victory. How many waves can you destroy?Spawn the player ships you want. "
+"The strength of enemy ships is independent of the number and type of player "
+"ships."
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:43
 msgid ""
 "At least one friendly base must survive.\n"
 "\n"
@@ -27,23 +39,22 @@ msgstr ""
 "prochaine vague apparaîtra. Et ainsi de suite…\n"
 "Combien de vagues serez-vous en mesure de détruire ?"
 
-#: scenario_03_waves.lua:125 scenario_03_waves.lua:251
-msgid "Wave "
-msgstr "Vague n° "
-
-#: scenario_03_waves.lua:217
+#: scripts/scenario_03_waves.lua:125 scripts/scenario_03_waves.lua:217
 #, lua-format
 msgid "Wave %d"
 msgstr "Vague n° %d"
 
-#: scenario_03_waves.lua:250
+#: scripts/scenario_03_waves.lua:250
 msgid "Wave cleared!"
 msgstr "Vague éliminée !"
 
-#: scenario_03_waves.lua:251
-msgid " cleared."
-msgstr " éliminée !"
+#: scripts/scenario_03_waves.lua:251
+#, fuzzy, lua-format
+msgid "Wave %d cleared."
+msgstr "Vague éliminée !"
 
-#, lua-format
+#~ msgid " cleared."
+#~ msgstr " éliminée !"
+
 #~ msgid "Wave {number}"
 #~ msgstr "Vague n° {number}"

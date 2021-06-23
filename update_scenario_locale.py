@@ -5,6 +5,16 @@ import subprocess
 import json
 import os
 
+def update_other_languages(base):
+    assert base.endswith(".en.po")
+    for other in glob.glob(base[:-5] + "*.po"):
+        if other == base:
+            continue
+        print("Merge %s -> %s" % (base, other))
+        cmd = ["msgmerge", "-U", other, base]
+        subprocess.run(cmd, check=True)
+
+
 os.makedirs("scripts/locale", exist_ok=True)
 for scenario in glob.glob("scripts/scenario_*.lua"):
     output = scenario.replace(".lua", ".en.po").replace("scripts/", "scripts/locale/")
@@ -36,5 +46,18 @@ for scenario in glob.glob("scripts/scenario_*.lua"):
             f.write("msgid %s\n" % (json.dumps(info["description"])))
         f.write("msgstr \"\"\n")
     f.close()
+    cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--omit-header", "-j", "-d", output[:-3], "-C", "-"]
+    subprocess.run(cmd, check=True, input=b"")
+    pre = open(output, "rt").read()
     cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--omit-header", "-j", "-d", output[:-3], scenario]
     subprocess.run(cmd, check=True)
+    post = open(output, "rt").read()
+    if pre == post:
+        os.unlink(output)
+        print("Skipped %s" % (scenario))
+    else:
+        update_other_languages(output)
+        print("Done %s" % (scenario))
+
+update_other_languages("resources/locale/main.en.po")
+update_other_languages("resources/locale/tutorial.en.po")

@@ -23,21 +23,7 @@ msgid ""
 "investigate and recover RT-4 if possible."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:94
-msgid ""
-"RT-4 has been destroyed, but not before it launched an escape pod.\n"
-"\n"
-"Life signs are detected in the pod. Please retrieve the pod to see if J.J. "
-"Johnson survived. His death would be a great blow to the region's peace "
-"negotiations.\n"
-" \n"
-msgstr ""
-
-#: scripts/scenario_05_beacon.lua:98
-msgid "And destroy those Exuari scum while you are at it!"
-msgstr ""
-
-#: scripts/scenario_05_beacon.lua:109
+#: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
 msgid ""
 "RT-4 has been destroyed, but not before it launched an escape pod.\n"
 "\n"
@@ -46,7 +32,11 @@ msgid ""
 "negotiations."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:125
+#: scripts/scenario_05_beacon.lua:96
+msgid "And destroy those Exuari scum while you are at it!"
+msgstr ""
+
+#: scripts/scenario_05_beacon.lua:123
 msgid ""
 "J.J. Johnson seems to have suffocated. This is a great loss for our cause of "
 "peace.\n"
@@ -55,7 +45,7 @@ msgid ""
 "over his mission."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:135
+#: scripts/scenario_05_beacon.lua:133
 msgid ""
 "Just received message that Sir Johnson is safely aboard your ship! Great "
 "job!\n"
@@ -64,13 +54,13 @@ msgid ""
 "the station."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:148
+#: scripts/scenario_05_beacon.lua:146
 msgid ""
 "J.J. Johnson thanks you for rescuing him and tells you about his mission.\n"
 "\n"
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:150 scripts/scenario_05_beacon.lua:163
+#: scripts/scenario_05_beacon.lua:148 scripts/scenario_05_beacon.lua:161
 msgid ""
 "He just returned from a mission from the Refugee-X station, a neutral "
 "station in the area known to house anyone regardless of their history.\n"
@@ -86,19 +76,19 @@ msgid ""
 "you of nukes and EMPs. You will get them back once you deliver the criminals."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:161
+#: scripts/scenario_05_beacon.lua:159
 msgid ""
 "J.J. Johnson's message toward Orion-5 is clear:\n"
 "\n"
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:187
+#: scripts/scenario_05_beacon.lua:185
 msgid ""
 "J.J. Johnson transmitted his mission details to Orion-5 before he passed "
 "away. Head to Orion-5 for details."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:197
+#: scripts/scenario_05_beacon.lua:195
 msgid ""
 "Two tough-looking criminals board your ship. They are already cuffed and do "
 "not look too happy about the situation.\n"
@@ -112,7 +102,7 @@ msgid ""
 "Head back to Orion-5 to deliver the criminals."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:220
+#: scripts/scenario_05_beacon.lua:218
 msgid ""
 "Sllaaami graa kully fartsy!\n"
 "\n"
@@ -121,7 +111,7 @@ msgid ""
 "great fun."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:241
+#: scripts/scenario_05_beacon.lua:239
 msgid ""
 "Good job dealing with those Exuari scum. The criminals are safely in our "
 "custody, and we'll send a protection detail to Refugee-X.\n"
@@ -132,19 +122,19 @@ msgid ""
 "ships to find the Exuari transport."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:245 scripts/scenario_05_beacon.lua:272
+#: scripts/scenario_05_beacon.lua:243 scripts/scenario_05_beacon.lua:270
 msgid "We have refitted your nukes and EMPs."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:245
+#: scripts/scenario_05_beacon.lua:243
 msgid "Awesome job taking out the Exuari without those."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:272
+#: scripts/scenario_05_beacon.lua:270
 msgid "Now to get those Exuari!"
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:282
+#: scripts/scenario_05_beacon.lua:280
 msgid ""
 "Scan the transports to identify the Exuari one. When you have identified it, "
 "do NOT destroy it.\n"
@@ -152,24 +142,24 @@ msgid ""
 "Target its impulse engines with your beam weapons to halt its progress."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:301 scripts/scenario_05_beacon.lua:318
-#: scripts/scenario_05_beacon.lua:342
+#: scripts/scenario_05_beacon.lua:299 scripts/scenario_05_beacon.lua:316
+#: scripts/scenario_05_beacon.lua:340
 msgid "What the hell? I told you NOT to destroy the transport."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:307
+#: scripts/scenario_05_beacon.lua:305
 msgid ""
 "Transport identified. Take out their impulse engines so we can capture it."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:324
+#: scripts/scenario_05_beacon.lua:322
 msgid ""
 "The transport is disabled. We're dispatching a recovery team and need you to "
 "defend the transport from the Exuari, who will likely destroy it rather then "
 "let it fall into our hands."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:367
+#: scripts/scenario_05_beacon.lua:365
 msgid ""
 "Transport recovery team coming in:\n"
 "\n"
@@ -177,7 +167,7 @@ msgid ""
 "Please head to Orion-5 for debriefing.\""
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:379
+#: scripts/scenario_05_beacon.lua:377
 msgid ""
 "Thanks to the captured Exuari death squad, we now know the location of the "
 "Exuari base in the area.\n"

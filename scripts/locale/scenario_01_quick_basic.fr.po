@@ -18,7 +18,16 @@ msgstr ""
 msgid "Quick Basic"
 msgstr ""
 
-#: scenario_01_quick_basic.lua:333
+# Scenario description
+msgid ""
+"Different version of the Basic scenario intended to play out quicker. There "
+"is only a single small station to defend.This scenario is designed to be ran "
+"at conventions, since you can run a 4-player crew with minimal experience "
+"through a game in 20 minutes.This scenario is designed for the provided "
+"player Phobos-type ship (or an Atlantis in the Advanced variant)."
+msgstr ""
+
+#: scripts/scenario_01_quick_basic.lua:333
 #, lua-format
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
@@ -39,59 +48,59 @@ msgstr ""
 "\n"
 "Bonne chance."
 
-#: scenario_01_quick_basic.lua:346
+#: scripts/scenario_01_quick_basic.lua:346
 msgid "green"
 msgstr "vert"
 
-#: scenario_01_quick_basic.lua:349
+#: scripts/scenario_01_quick_basic.lua:349
 msgid "yellow"
 msgstr "jaune"
 
-#: scenario_01_quick_basic.lua:353
+#: scripts/scenario_01_quick_basic.lua:353
 msgid "red"
 msgstr "rouge"
 
-#: scenario_01_quick_basic.lua:365
+#: scripts/scenario_01_quick_basic.lua:365
 msgid "Mission: FAILED (ship lost before mission started)"
 msgstr "Mission : ECHEC (vaisseau detruit avant le debut de la mission)"
 
-#: scenario_01_quick_basic.lua:370
+#: scripts/scenario_01_quick_basic.lua:370
 msgid "Mission: PREPARING"
 msgstr "Mission : EN PREPARATION"
 
-#: scenario_01_quick_basic.lua:380
+#: scripts/scenario_01_quick_basic.lua:380
 msgid "Mission: FAILED (time has run out)"
 msgstr "Mission : ECHEC (temps ecoule)"
 
-#: scenario_01_quick_basic.lua:387
+#: scripts/scenario_01_quick_basic.lua:387
 #, lua-format
 msgid "%s, you have %d minute remaining."
 msgstr "%s, il ne vous reste qu'%d minute."
 
-#: scenario_01_quick_basic.lua:390
+#: scripts/scenario_01_quick_basic.lua:390
 #, lua-format
 msgid "%s, you have %d minutes remaining."
 msgstr "%s, il ne vous reste que %d minutes."
 
-#: scenario_01_quick_basic.lua:393
+#: scripts/scenario_01_quick_basic.lua:393
 #, lua-format
 msgid "%s, you have %d minutes remaining of mission time."
 msgstr "%s, il ne vous reste que %d minutes pour réussir votre mission."
 
-#: scenario_01_quick_basic.lua:416
+#: scripts/scenario_01_quick_basic.lua:416
 #, lua-format
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr "Mission : SUCCES (%d secondes restantes)"
 
-#: scenario_01_quick_basic.lua:425
+#: scripts/scenario_01_quick_basic.lua:425
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr "Mission : ECHEC (tous vos vaisseaux detruits)"
 
-#: scenario_01_quick_basic.lua:434
+#: scripts/scenario_01_quick_basic.lua:434
 msgid "Mission: FAILED (no friendlies left)"
 msgstr "Mission : ECHEC (aucune base alliee restante)"
 
-#: scenario_01_quick_basic.lua:450
+#: scripts/scenario_01_quick_basic.lua:450
 #, lua-format
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s"
 msgstr ""
