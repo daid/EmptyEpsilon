@@ -74,42 +74,46 @@ void StreamingAcnDMXDevice::updateLoop()
     while(run_thread)
     {
         //TODO:SOCKET: This is no longer correct after we modify the DataBuffer to save data
-        sp::io::DataBuffer packet;
+        std::vector<uint8_t> buffer;
+        auto addU8 = [&buffer](uint8_t d) { buffer.resize(buffer.size() + 1); buffer[buffer.size()-1] = d; };
+        auto addU16 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 2); buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };
+        auto addU32 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 4); buffer[buffer.size()-4] = d >> 24; buffer[buffer.size()-3] = d >> 16; buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };
+
         //Root layer
-        packet << uint16_t(0x0010); //RLP Size
-        packet << uint16_t(0x0000); //RLP Preamble size
-        packet << uint8_t('A') << uint8_t('S') << uint8_t('C') << uint8_t('-') << uint8_t('E') << uint8_t('1') << uint8_t('.') << uint8_t('1') << uint8_t('7') << uint8_t('\0') << uint8_t('\0') << uint8_t('\0'); //ACN Packet identifier
-        packet << uint16_t(0x7000 | (110 + channel_count)); //Flags and length
-        packet << uint32_t(0x0004); //Vector, identifies as PDU protocol
+        addU16(0x0010); //RLP Size
+        addU16(0x0000); //RLP Preamble size
+        addU8('A'); addU8('S'); addU8('C'); addU8('-'); addU8('E'); addU8('1'); addU8('.'); addU8('1'); addU8('7'); addU8('\0'); addU8('\0'); addU8('\0'); //ACN Packet identifier
+        addU16(0x7000 | (110 + channel_count)); //Flags and length
+        addU32(0x0004); //Vector, identifies as PDU protocol
         for(int n=0; n<16; n++)
-            packet << uuid[n];//Sender Unique ID, needs to be an UUID by spec. But most likely ignored by equipment.
+            addU8(uuid[n]);//Sender Unique ID, needs to be an UUID by spec. But most likely ignored by equipment.
         //Framing layer
-        packet << uint16_t(0x7000 | (88 + channel_count)); //Flags and length
-        packet << uint32_t(0x0002); //Vector, identifies as DMP protocol PDU
+        addU16(0x7000 | (88 + channel_count)); //Flags and length
+        addU32(0x0002); //Vector, identifies as DMP protocol PDU
         for(int n=0; n<64; n++)
-            packet << source_name[n];//Source name, needs to be an UTF-8 zero terminated string. Only for ID goals.
-        packet << uint8_t(100); //Priority
-        packet << uint16_t(0);  //Reserved
-        packet << uint8_t(sequence_number);  //sequence number
-        packet << uint8_t(0);  //option flags
-        packet << uint16_t(universe);  //Universe number
+            addU8(source_name[n]);//Source name, needs to be an UTF-8 zero terminated string. Only for ID goals.
+        addU8(100); //Priority
+        addU16(0);  //Reserved
+        addU8(sequence_number);  //sequence number
+        addU8(0);  //option flags
+        addU16(universe);  //Universe number
         //DMP layer
-        packet << uint16_t(0x7000 | (11 + channel_count)); //Flags and length
-        packet << uint8_t(2);  //Vector, message is PDU
-        packet << uint8_t(0xa1);  //Format of address and data
-        packet << uint16_t(0x0000);  //First property address
-        packet << uint16_t(0x0001);  //Address increments
-        packet << uint16_t(1 + channel_count);  //Value count
-        packet << uint8_t(0x00); //DMX512 start byte.
+        addU16(0x7000 | (11 + channel_count)); //Flags and length
+        addU8(2);  //Vector, message is PDU
+        addU8(0xa1);  //Format of address and data
+        addU16(0x0000);  //First property address
+        addU16(0x0001);  //Address increments
+        addU16(1 + channel_count);  //Value count
+        addU8(0x00); //DMX512 start byte.
         for(int n=0; n<channel_count; n++)
-            packet << uint8_t(channel_data[n]);
+            addU8(channel_data[n]);
 
         sequence_number++;
 
         if (multicast)
-            socket.sendMulticast(packet, universe, acn_port);
+            socket.sendMulticast(buffer.data(), buffer.size(), universe, acn_port);
         else
-            socket.sendBroadcast(packet, acn_port);
+            socket.sendBroadcast(buffer.data(), buffer.size(), acn_port);
 
         sf::sleep(sf::milliseconds(resend_delay));
     }
