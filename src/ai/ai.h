@@ -1,7 +1,7 @@
 #ifndef AI_H
 #define AI_H
 
-#include <SFML/System.hpp>
+#include "nonCopyable.h"
 #include "pathPlanner.h"
 
 ///Forward declaration
@@ -11,7 +11,7 @@ class CpuShip;
  * Base for all ship AIs. This base class handles basic AI which just follows orders straight on and attacks head on.
  * ShipAI objects are only created on the server.
  */
-class ShipAI : sf::NonCopyable
+class ShipAI : sp::NonCopyable
 {
 protected:
     /**!

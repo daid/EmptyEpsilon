@@ -1,7 +1,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <SFML/System.hpp>
+#include "nonCopyable.h"
 #include "stringImproved.h"
 
 struct MeshVertex
@@ -11,7 +11,7 @@ struct MeshVertex
     float uv[2];
 };
 
-class Mesh : public sf::NonCopyable
+class Mesh : sp::NonCopyable
 {
     std::vector<MeshVertex> vertices;
     uint32_t vbo;

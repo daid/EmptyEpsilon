@@ -6,7 +6,7 @@
 #include "spaceObjects/spaceObject.h"
 class SpaceShip;
 
-class BeamWeapon : public sf::NonCopyable
+class BeamWeapon : sp::NonCopyable
 {
 public:
     BeamWeapon();

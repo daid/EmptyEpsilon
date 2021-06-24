@@ -16,7 +16,7 @@ class GuiProgressbar;
 class GuiLabel;
 class GuiPanel;
 
-class MiniGame : public sf::NonCopyable
+class MiniGame : sp::NonCopyable
 {
   public:
     MiniGame(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);

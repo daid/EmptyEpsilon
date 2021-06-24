@@ -3,7 +3,7 @@
 
 #include "modelData.h"
 
-class ModelInfo : sf::NonCopyable
+class ModelInfo : sp::NonCopyable
 {
 private:
     P<ModelData> data;

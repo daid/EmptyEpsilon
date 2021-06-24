@@ -1,7 +1,7 @@
 #ifndef WEAPON_TUBE_H
 #define WEAPON_TUBE_H
 
-#include "SFML/System/NonCopyable.hpp"
+#include "nonCopyable.h"
 #include "shipTemplate.h"
 
 class SpaceShip;
@@ -15,7 +15,7 @@ enum EWeaponTubeState
     WTS_Firing
 };
 
-class WeaponTube : public sf::NonCopyable
+class WeaponTube : sp::NonCopyable
 {
 public:
     WeaponTube();

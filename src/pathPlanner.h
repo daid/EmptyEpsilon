@@ -29,7 +29,7 @@ public:
 };
 
 //The path planner is used to plan a route trough the world map without hitting any objects.
-class PathPlanner : public sf::NonCopyable
+class PathPlanner : sp::NonCopyable
 {
 private:
     unsigned int insert_idx, remove_idx, remove_idx2;

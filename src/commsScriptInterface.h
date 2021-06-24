@@ -8,7 +8,7 @@ class ScriptObject;
 class PlayerSpaceship;
 class SpaceObject;
 
-class CommsScriptInterface : public sf::NonCopyable
+class CommsScriptInterface : sp::NonCopyable
 {
 public:
     bool openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target);

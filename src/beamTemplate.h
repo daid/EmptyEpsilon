@@ -1,11 +1,10 @@
 #ifndef BEAM_TEMPLATE_H
 #define BEAM_TEMPLATE_H
 
-#include "SFML/System/NonCopyable.hpp"
-
+#include "nonCopyable.h"
 #include "stringImproved.h"
 
-class BeamTemplate : public sf::NonCopyable
+class BeamTemplate : sp::NonCopyable
 {
 public:
     BeamTemplate();
