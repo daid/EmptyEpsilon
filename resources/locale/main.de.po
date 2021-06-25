@@ -50,7 +50,7 @@ msgstr "Feindlich"
 #: src/scienceDatabase.cpp:338
 msgctxt "stance"
 msgid "Friendly"
-msgstr "Verbuendet"
+msgstr "Verbündet"
 
 #: src/scienceDatabase.cpp:346
 msgctxt "database"
@@ -89,7 +89,7 @@ msgstr "Geschwindigkeit"
 #: src/scienceDatabase.cpp:400
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr "Geschwindigkeit rückwärts"
+msgstr "Geschw. rückwärts"
 
 #: src/scienceDatabase.cpp:403
 msgctxt "database"
@@ -113,7 +113,7 @@ msgstr "Laser {direction}"
 #: src/scienceDatabase.cpp:419
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} Schaden / {interval} s"
+msgstr "{damage} Schaden / {interval} Sek."
 
 #: src/scienceDatabase.cpp:428
 msgctxt "database"
@@ -133,7 +133,7 @@ msgstr "gr. Raketen {direction}"
 #: src/scienceDatabase.cpp:439
 msgctxt "database"
 msgid "{loadtime} sec"
-msgstr "{loadtime} s"
+msgstr "{loadtime} Sek. Ladezeit"
 
 #: src/scienceDatabase.cpp:446
 msgid "Storage {weapon}"
@@ -240,7 +240,7 @@ msgstr "Raketensystem"
 #: src/shipTemplate.cpp:388
 msgctxt "system"
 msgid "Maneuvering"
-msgstr "Maneuvriertriebwerke"
+msgstr "Manövriertriebwerke"
 
 #: src/shipTemplate.cpp:389
 msgctxt "system"
@@ -574,7 +574,7 @@ msgstr ""
 #: src/menus/serverCreationScreen.cpp:243
 msgid "No variation selected. Play the scenario as intended."
 msgstr ""
-"Keine Variante gewaehlt. Szenario wird in der Standard-Variante gespielt."
+"Keine Variante gewählt. Szenario wird in der Standard-Variante gespielt."
 
 #: src/menus/tutorialMenu.cpp:29
 msgctxt "title"
@@ -603,7 +603,7 @@ msgstr "Vollbild umschalten"
 
 #: src/menus/optionsMenu.cpp:82 src/menus/optionsMenu.cpp:87
 msgid "Sound Volume: {volume}%"
-msgstr "Lautstaerke: {volume}%"
+msgstr "Lautstärke: {volume}%"
 
 #: src/menus/optionsMenu.cpp:91
 msgid "Music Playback"
@@ -623,7 +623,7 @@ msgstr "Nur Hauptschirm"
 
 #: src/menus/optionsMenu.cpp:107 src/menus/optionsMenu.cpp:112
 msgid "Music Volume: {volume}%"
-msgstr "Musiklautstaerke"
+msgstr "Musiklautstärke"
 
 #: src/menus/optionsMenu.cpp:116
 msgid "Impulse Engine sound"
@@ -631,7 +631,7 @@ msgstr "Impulsantriebs-Sound"
 
 #: src/menus/optionsMenu.cpp:132 src/menus/optionsMenu.cpp:137
 msgid "Impulse Volume: {volume}%"
-msgstr "Impulslautstaerke: {volume}%"
+msgstr "Impulslautstärke: {volume}%"
 
 #: src/menus/optionsMenu.cpp:142
 msgid "Helms Radar Lock"
@@ -696,7 +696,7 @@ msgstr "Hauptschirm-Steuerung"
 
 #: src/menus/shipSelectionScreen.cpp:77
 msgid "Game master"
-msgstr "Spielleiter"
+msgstr "Spielleitung"
 
 #: src/menus/shipSelectionScreen.cpp:88
 msgid "Ship window"
@@ -730,7 +730,7 @@ msgstr "SL-Kontrollcode eingeben :"
 
 #: src/menus/shipSelectionScreen.cpp:147
 msgid "Select ship"
-msgstr "Waehle Schiff"
+msgstr "Wähle Schiff"
 
 #: src/menus/shipSelectionScreen.cpp:148
 msgid "Waiting for server to spawn a ship"
@@ -809,7 +809,7 @@ msgstr "Setze Wegpunkt"
 #: src/screens/crew4/operationsScreen.cpp:75
 #: src/screens/crew6/relayScreen.cpp:135
 msgid "Delete Waypoint"
-msgstr "Loesche Wegpunkt"
+msgstr "Lösche Wegpunkt"
 
 #: src/screens/crew4/operationsScreen.cpp:84
 #: src/screens/crew6/relayScreen.cpp:151
@@ -874,7 +874,7 @@ msgstr "Heck"
 #: src/screens/crew6/engineeringScreen.cpp:42
 msgctxt "total"
 msgid "Coolant"
-msgstr "Kuehlm."
+msgstr "Kühlm."
 
 #: src/screens/crew6/engineeringScreen.cpp:126
 msgctxt "slider"
@@ -1053,7 +1053,7 @@ msgstr "Hülle"
 
 #: src/screens/extra/powerManagement.cpp:22
 msgid "Coolant"
-msgstr "Kuehlm."
+msgstr "Kühlm."
 
 #: src/screens/extra/powerManagement.cpp:40
 msgctxt "button"
@@ -1063,7 +1063,7 @@ msgstr "Leistung"
 #: src/screens/extra/powerManagement.cpp:41
 msgctxt "button"
 msgid "Coolant"
-msgstr "Kuehlm."
+msgstr "Kühlm."
 
 #: src/screens/extra/powerManagement.cpp:42
 msgctxt "button"
@@ -1169,7 +1169,7 @@ msgstr "Artefakt"
 #: src/screens/gm/objectCreationView.cpp:59
 msgctxt "create"
 msgid "Warp Jammer"
-msgstr "Stoersender"
+msgstr "Störsender"
 
 #: src/screens/gm/objectCreationView.cpp:63
 msgctxt "create"
@@ -1275,7 +1275,7 @@ msgstr "Asteroid"
 #: src/screens/gm/tweak.cpp:49
 msgctxt "tab"
 msgid "Jammer"
-msgstr "Stoersender"
+msgstr "Störsender"
 
 #: src/screens/gm/tweak.cpp:55
 msgctxt "tab"
@@ -1370,7 +1370,7 @@ msgstr "Hülle aktuell:"
 
 #: src/screens/gm/tweak.cpp:188
 msgid "Could be destroyed"
-msgstr "Kann zerstoert werden"
+msgstr "Kann zerstört werden"
 
 #: src/screens/gm/tweak.cpp:194
 msgctxt "tweak_ship"
@@ -1409,7 +1409,7 @@ msgstr "Störsender-Reichweite:"
 
 #: src/screens/gm/tweak.cpp:319
 msgid "Asteroid Size:"
-msgstr "Asteroidengroesse:"
+msgstr "Asteroidengröße:"
 
 #: src/screens/gm/tweak.cpp:365
 msgid "Tube count:"
@@ -1432,7 +1432,7 @@ msgstr "Ladezeit:"
 #: src/screens/gm/tweak.cpp:404
 msgctxt "tube"
 msgid "Size:"
-msgstr "Groesse:"
+msgstr "Größe:"
 
 #: src/screens/gm/tweak.cpp:409
 msgctxt "tube"
@@ -1516,7 +1516,7 @@ msgstr "{system} : max. Zustand"
 
 #: src/screens/gm/tweak.cpp:636
 msgid "{system} heat"
-msgstr "{system}: Waerme"
+msgstr "{system}: Wärme"
 
 #: src/screens/gm/tweak.cpp:679
 msgid "current factor"
@@ -1528,7 +1528,7 @@ msgstr "gewünschter Faktor"
 
 #: src/screens/gm/tweak.cpp:685 src/screens/gm/tweak.cpp:748
 msgid "{system}"
-msgstr "{system}: Wärme"
+msgstr "{system}"
 
 #: src/screens/gm/tweak.cpp:709 src/screens/gm/tweak.cpp:772
 msgid "Applies on [Enter]"
@@ -1619,7 +1619,7 @@ msgstr "Kann Sonden starten"
 #: src/screens/gm/tweak.cpp:1072
 msgctxt "button"
 msgid "Auto coolant"
-msgstr "Auto-Kuehlm."
+msgstr "Auto-Kühlm."
 
 #: src/screens/gm/tweak.cpp:1077
 msgctxt "button"
@@ -1662,7 +1662,7 @@ msgstr "Richtung:"
 
 #: src/screens/gm/tweak.cpp:1171
 msgid "Scanning Complexity:"
-msgstr "Scankomplexitaet:"
+msgstr "Scankomplexität:"
 
 #: src/screens/gm/tweak.cpp:1177
 msgid "Scanning Depth:"
@@ -1724,7 +1724,7 @@ msgstr ""
 
 #: src/screenComponents/selfDestructEntry.cpp:22
 msgid "Self destruct activated!"
-msgstr "Selbstzerstoerung aktiviert!"
+msgstr "Selbstzerstörung aktiviert!"
 
 #: src/screenComponents/selfDestructEntry.cpp:67
 msgid "Code [{letter}]: {self_destruct_code}"
@@ -1777,7 +1777,7 @@ msgstr "Selbstzertst."
 #: src/screenComponents/selfDestructButton.cpp:19
 msgctxt "selfdestruct"
 msgid "Confirm!"
-msgstr "Bestaetige!"
+msgstr "Bestätige!"
 
 #: src/screenComponents/shieldFreqencySelect.cpp:23
 msgctxt "shields"
@@ -1894,7 +1894,7 @@ msgstr "Flugmanöver"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:18
 msgid "SHIP DESTROYED!"
-msgstr "Schiff zerstoert!"
+msgstr "Schiff zerstört!"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:19
 msgctxt "shipdestroyed"
@@ -1991,7 +1991,7 @@ msgstr "Langstreckeckenradar"
 #: src/screenComponents/mainScreenControls.cpp:105
 msgctxt "mainscreen"
 msgid "Show comms"
-msgstr "Gespraeche anzeigen"
+msgstr "Gespräche anzeigen"
 
 #: src/screenComponents/mainScreenControls.cpp:116
 msgctxt "mainscreen"
@@ -2274,7 +2274,7 @@ msgstr "Wähle Mine"
 #: src/gui/hotkeyConfig.cpp:75
 msgctxt "hotkey_Weapons"
 msgid "Select EMP"
-msgstr "Waehle EMP"
+msgstr "Wähle EMP"
 
 #: src/gui/hotkeyConfig.cpp:76
 msgctxt "hotkey_Weapons"
@@ -3052,7 +3052,7 @@ msgid ""
 "fitted with a trash compactor and fewer stabilzation systems than cargo "
 "freighters."
 msgstr ""
-"Diese Muellfrachter sind speziell dazu gebaut um Abfälle zu transportieren. "
+"Diese Müllfrachter sind speziell dazu gebaut um Abfälle zu transportieren. "
 "Sie sich mit einer Müllpresse ausgestattet und besitzen weniger "
 "Stabillisierungssysteme als normale Frachtschiffe."
 
@@ -3095,7 +3095,7 @@ msgid ""
 "state."
 msgstr ""
 "Treibstoff-Frachter besitzen massive Tanks und hochempfindliche interne "
-"Sensoren, um jede Aenderung des Zustands der Fracht zu ueberwachen."
+"Sensoren, um jede Änderung des Zustands der Fracht zu überwachen."
 
 #: scripts/shipTemplates_Corvette.lua:296
 #, lua-format
@@ -3131,11 +3131,11 @@ msgstr ""
 #: scripts/shipTemplates_Corvette.lua:314
 msgctxt "subclass"
 msgid "Freighter/Carrier"
-msgstr "Frachter/Traegerschiff"
+msgstr "Frachter/Trägerschiff"
 
 #: scripts/shipTemplates_Corvette.lua:315
 msgid "Benedict is an improved version of the Jump Carrier"
-msgstr "Die Benedict ist eine verbesserte Version des Sprung-Traegers"
+msgstr "Die Benedict ist eine verbesserte Version des Sprung-Trägers"
 
 #: scripts/shipTemplates_Corvette.lua:348
 msgctxt "playerShip"
@@ -3192,7 +3192,7 @@ msgstr ""
 "sowohl Versorgungsstation als auch eine stark gepanzerte Waffenstation, "
 "fähig kleinere Flotten im Alleingang zu besiegen.\n"
 "\n"
-"Im Kern der Odin befindet sich der groesste Sprungantrieb der jemals gebaut "
+"Im Kern der Odin befindet sich der größte Sprungantrieb der jemals gebaut "
 "wurde. Etwa 150 Arbeiter sind noetig, um den Antrieb in Betrieb zu halten, "
 "und er benoetigt 5 Tage um sich aufzuladen.\n"
 "\n"
@@ -3292,7 +3292,7 @@ msgstr ""
 #: scripts/shipTemplates_Frigates.lua:87
 msgctxt "subclass"
 msgid "Cruiser: Anti-fighter"
-msgstr "Kreuzer: Anti-Jaeger"
+msgstr "Kreuzer: Anti-Jäger"
 
 #: scripts/shipTemplates_Frigates.lua:89
 msgid ""
@@ -3327,11 +3327,11 @@ msgid ""
 "defense beam weapons. Compared to the later, more common Nirvana R5, it has "
 "shorter beams, weaker shields and hull and a slower impulse drive."
 msgstr ""
-"Als eine der ersten in Massenproduktion hergestellen Nirvana-Modelle, ist "
-"die Nirvana R3 speziell fuer den Einsatz gegen Jaeger ausgelegt. Sie besitzt "
-"mehrere schnelle und schwache Abwehrlaser. Verglichen mit der spaeteren, "
-"weiter verbreiteten Nirvana R5 haben die Laser eine kuerzere Reichweite, "
-"ausserdem sind Schilde und Impulsantrieb schwaecher."
+"Als eine der ersten in Massenproduktion hergestellten Nirvana-Modelle, ist "
+"die Nirvana R3 speziell für den Einsatz gegen Jäger ausgelegt. Sie besitzt "
+"mehrere schnelle und schwache Abwehrlaser. Verglichen mit der späteren, "
+"weiter verbreiteten Nirvana R5 haben die Laser eine kürzere Reichweite, "
+"außerdem sind Schilde und Impulsantrieb schwächer."
 
 #: scripts/shipTemplates_Frigates.lua:116
 msgctxt "ship"
@@ -3536,8 +3536,8 @@ msgid ""
 "distances, and is often used to carry high-value cargo discreetly."
 msgstr ""
 "Die Flavia ist ein kleines Fracht- und Passagierschiff und sowohl unter "
-"Haendlern als auch Schmugglern beliebt. Bei kleinerer Ladung und kuerzeren "
-"Strecken ist es guenstiger als ein ein Frachter und wird oft gbenutzt um "
+"Händlern als auch Schmugglern beliebt. Bei kleinerer Ladung und kuerzeren "
+"Strecken ist es günstiger als ein ein Frachter und wird oft genutzt um "
 "hochwertige Ware diskret zu transportieren."
 
 #: scripts/shipTemplates_Frigates.lua:319
@@ -3791,7 +3791,7 @@ msgid ""
 "lot of damage, but can do a lot of damage if not dealt with properly."
 msgstr ""
 "Polaris-Raketenkreuzer MK1 Hergestellt von Repulse shipyards. Dieser "
-"Raketenkreuzer ist eine Langstrecken-Raketenplattform. Er haelt nicht allzu "
+"Raketenkreuzer ist eine Langstrecken-Raketenplattform. Er hält nicht allzu "
 "viel  Schaden aus, aber kann sehr viel Schaden anrichten."
 
 #: scripts/shipTemplates_OLD.lua:271
@@ -4755,8 +4755,8 @@ msgstr ""
 "Art Virus oder Plage.\n"
 "\n"
 "Aufgrund der menschlichen Gesetze sind Navyschiffe die einzigen, die in den "
-"Tiefenraum vordringen duerfen. Das hat allerdings nicht alle Menschen "
-"ausserhalb der Navy an der Raumfahrt gehindert, denn etliche Menschen heuern "
+"Tiefenraum vordringen dürfen. Das hat allerdings nicht alle Menschen "
+"außerhalb der Navy an der Raumfahrt gehindert, denn etliche Menschen heuern "
 "auf Alienschiffen an - oder bei Piraten."
 
 #: scripts/factionInfo.lua:13
@@ -4785,11 +4785,11 @@ msgstr ""
 "Hierarchie basiert ausschließlich aus physischer Stärke; Ein Kraylor tötet "
 "alles was er töten kann, und nimmt alles was er kann, gewaltsam an sich.\n"
 "\n"
-"Kraylor koennen wochenlang ohne Luft, Nahrung oder Schwerkraft ueberleben "
-"und betrachten Menschen als schwaechlich, da sie schon binnen Minuten "
-"sterben, wenn sie dem Vakuum des Weltalls ausgesetzt sind. Aufgrund ihrer "
-"Widerstandskraft und der kulturellen Ablehnung gegen Rueckzug verfuegen ihre "
-"Schiffe ueber keine Rettungskapseln."
+"Kraylor können wochenlang ohne Luft, Nahrung oder Schwerkraft überleben und "
+"betrachten Menschen als schwächlich, da sie schon binnen Minuten sterben, "
+"wenn sie dem Vakuum des Weltalls ausgesetzt sind. Aufgrund ihrer "
+"Widerstandskraft und der kulturellen Ablehnung gegen Rückzug verfügen ihre "
+"Schiffe über keine Rettungskapseln."
 
 #: scripts/factionInfo.lua:22
 msgid "Arlenians"
@@ -4834,11 +4834,11 @@ msgstr ""
 "als froh darüber und nehmen die Technologie dankbar an, in der Hoffung, "
 "dadurch einen Vorteil gegenüber anderen zu erhalten.\n"
 "\n"
-"Die Zerstoerung eines Arlenian-Schiffes tötet nicht seine Crew. Sie "
-"verlassen lediglich die Realität an diesem Ort der Raumzeit und erscheinen "
-"an einem anderen Punkt wieder. Dennoch sind die Kraylor besessen davon, die "
-"Arlenians zu vernichten, da sie diese Energiebasierten Wesen als physisch "
-"machtlos ansehen."
+"Die Zerstörung eines Arlenian-Schiffes tötet nicht seine Crew. Sie verlassen "
+"lediglich die Realität an diesem Ort der Raumzeit und erscheinen an einem "
+"anderen Punkt wieder. Dennoch sind die Kraylor besessen davon, die Arlenians "
+"zu vernichten, da sie diese Energiebasierten Wesen als physisch machtlos "
+"ansehen."
 
 #: scripts/factionInfo.lua:33
 msgid "Exuari"
@@ -5032,7 +5032,7 @@ msgstr ""
 "\n"
 "Die  USN  ist  hauptsächlich menschlich, aber anderer Vertreter anderer "
 "Spezies sind ebenfalls Mitglied. Bemerkenswerterweise wurden auch einige "
-"Kraylor in die USN aufgenommen. Diese Akzeptanz fuehrte zur Feindschaft mit "
+"Kraylor in die USN aufgenommen. Diese Akzeptanz führte zur Feindschaft mit "
 "der TSN."
 
 #: scripts/factionInfo.lua:89
@@ -5082,8 +5082,8 @@ msgid ""
 "Asteroids are minor planets, usually smaller than a few kilometers. Larger "
 "variants are sometimes refered to as planetoids."
 msgstr ""
-"Asteroiden sind kleinere Himmelskoerper, üblicherweise nur wenige Kilometer "
-"gross - größere Varianten werden manchmal als Planetoiden bezeichnet."
+"Asteroiden sind kleinere Himmelskörper, üblicherweise nur wenige Kilometer "
+"groß - größere Varianten werden manchmal als Planetoiden bezeichnet."
 
 #: scripts/science_db.lua:9
 msgid "Nebula"
@@ -5157,15 +5157,15 @@ msgid ""
 msgstr ""
 "Ein Wurmloch, auch bekannt als Einstein-Rosen-Brücke, ist ein Phänomen das "
 "zwei Punkte der Raumzeit miteinander verbindet. Sprungantriebe funktionieren "
-"auf eine ähnliche Weise, aber statt kuenstlich geschaffen zu werden, nimmt "
+"auf eine ähnliche Weise, aber statt künstlich geschaffen zu werden, nimmt "
 "ein Wurmloch einen bestimmten Ort im Raum ein. Objekte die in ein Wurmloch "
 "eintreten treten augenblicklich aus dem anderen Ende wieder heraus. Diese "
 "andere Ende kann weniger Meter, oder auch tausende von Lichtjahren entfernt "
 "sein. \n"
 "\n"
-"Wurmloecher sind selten, und die meisten funktionieren nur in eine Richtung. "
+"Wurmlöcher sind selten, und die meisten funktionieren nur in eine Richtung. "
 "Passierbare Wurmlöcher, welche stabil sind und Reisen in beide Richtungen "
-"erlauben sind noch viel seltener. Alle Wurmloecher erzeugen starke "
+"erlauben sind noch viel seltener. Alle Wurmlöcher erzeugen starke "
 "Signalverzerrungen auf den Sensoren, wodurch ein guter Wissenschaftsoffizier "
 "in der Lage ist, sie auch durch Störquellen wie Nebel hindurch aufzuspüren."
 
@@ -5192,7 +5192,7 @@ msgstr ""
 "Diese Datenbank deckt lediglich die Standard-Raketenvarianten ab, die in der "
 "Galaxie verwendet werden.\n"
 "Es wurde berichtet, dass manche Schiffe angefangen haben, größere Varianten "
-"dieser Raketen zu nutzen. Kleine Jaeger und selbst Fregatten sollten keine "
+"dieser Raketen zu nutzen. Kleine Jäger und selbst Fregatten sollten keine "
 "Probleme haben, ihnen auszuweichen, aber Captains auf größeren Schiffen "
 "sollten sich vor ihrer potentiell doppelt so hohen Schadenswirkung in Acht "
 "nehmen.\n"
@@ -5259,17 +5259,17 @@ msgid ""
 "often used in the thick of battle, there's no way of knowing if hull plating "
 "or shields can provide enough protection."
 msgstr ""
-"Eine Nuklearrakete kann, aehnlich wie eine normale Zielsuchrakete ihr "
+"Eine Nuklearrakete kann, ähnlich wie eine normale Zielsuchrakete ihr "
 "Zielverfolgen, allerdings ist sie langsamer und weniger wendig, außerdem ist "
 "ihre Sprengkraft wesentlich höher.Ihre Atomare Explosion hat einen Radius "
 "von 1u und kann so mehrere Schiffe mit einem Schuss ausschalten.\n"
 "\n"
-"Einige captains lehnen die Nutzung dieser Raketen ab, da ihre Explosionen zu "
+"Einige Captains lehnen die Nutzung dieser Raketen ab, da ihre Explosionen zu "
 "Schäden am eigenen Schiff führen können. Zwar sollten die Schilde die "
-"Besatzung vor schädlicher Stahlung schützen, aber da diese Waffen oft in der "
-"Hitze des Gefechts genutzt werden, laesst sich schwer sagen, wodurch welcher "
-"Schaden entstanden ist, und ob Schilde oder Panzerung wirklich genügend "
-"Schutz bieten."
+"Besatzung vor schädlicher Strahlung schützen, aber da diese Waffen oft in "
+"der Hitze des Gefechts genutzt werden, lässt sich schwer sagen, wodurch "
+"welcher Schaden entstanden ist, und ob Schilde oder Panzerung wirklich "
+"genügend Schutz bieten."
 
 #: scripts/science_db.lua:43
 msgid "Mine"
@@ -5292,11 +5292,11 @@ msgid ""
 "detonation and blast radius make this use risky at best."
 msgstr ""
 "Oft werden Minen als Verteidigungslinie um Stationen herum genutzt. Quer "
-"ueber die Galaxie vertstreut existieren auch noch alte Minenfelder, "
-"Ueberbleibsel vergangener Schlachten.\n"
+"über die Galaxie verstreut existieren auch noch alte Minenfelder, "
+"Überbleibsel vergangener Schlachten.\n"
 "\n"
 "Einige furchtlose Captains nutzen Minen auch als Offensivwaffen, aber die "
-"verzoegerte Explosion und der grosse Explosionsradius machen dies zu einem "
+"verzögerte Explosion und der grosse Explosionsradius machen dies zu einem "
 "sehr riskanten Unterfangen."
 
 #: scripts/science_db.lua:53
