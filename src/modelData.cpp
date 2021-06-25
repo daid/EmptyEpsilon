@@ -193,7 +193,8 @@ P<ModelData> ModelData::getModel(string name)
 
 std::vector<string> ModelData::getModelDataNames()
 {
-    std::vector<string> ret(data_map.size());
+    std::vector<string> ret;
+    ret.reserve(data_map.size());
     for(const auto &it : data_map)
     {
         ret.emplace_back(it.first);
