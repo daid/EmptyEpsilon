@@ -14,7 +14,7 @@ msgstr ""
 
 # Scenario name
 msgid "Beacon of Light series"
-msgstr ""
+msgstr "Beacon of Light"
 
 # Scenario description
 msgid ""
@@ -82,7 +82,7 @@ msgstr ""
 "Offenbar ist Sir Johnson erstickt. Dies ist ein großer Verlust für unserer "
 "Bemühungen, dauerhaften Frieden zu erreichen.\n"
 "\n"
-"Bitte bringen Sie seine Leichte zurück nach Research-1. Wir werden "
+"Bitte bringen Sie seine Leiche zurück nach Research-1. Wir werden "
 "Vorbereitungen treffen, damit Sie seine Mission übernehmen können."
 
 #: scripts/scenario_05_beacon.lua:133
