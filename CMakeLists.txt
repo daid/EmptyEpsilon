@@ -59,6 +59,8 @@ endif()
 # SeriousProton
 # Use SP provided json library.
 set(SERIOUSPROTON_WITH_JSON ON CACHE BOOL "" FORCE)
+# Set window title for SP.
+set(WINDOW_TITLE "${PROJECT_NAME}" CACHE STRING "" FORCE)
 add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" EXCLUDE_FROM_ALL)
 
 message(STATUS "Crash Logger is: ${ENABLE_CRASH_LOGGER}")
@@ -301,6 +303,9 @@ if (WIN32)
   list(APPEND SOURCES EmptyEpsilon.rc)
 endif()
 
+# Config header.
+configure_file(cmake/config.h.in include/config.h)
+
 
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -308,22 +313,17 @@ else()
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
-target_compile_definitions(seriousproton_deps
-    INTERFACE
-        WINDOW_TITLE="${PROJECT_NAME}"
-        VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
-
+target_compile_definitions(${PROJECT_NAME}
+    PUBLIC
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
         $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
         $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
 )
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC WITH_DISCORD=$<BOOL:${WITH_DISCORD}>)
-
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
+        "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src;${CMAKE_CURRENT_BINARY_DIR}/include>"
 )
 
 add_library(opengl INTERFACE)

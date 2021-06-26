@@ -2,6 +2,7 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scienceDatabase.h"
+#include "config.h"
 
 P<GameGlobalInfo> gameGlobalInfo;
 
