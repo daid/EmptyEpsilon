@@ -33,6 +33,9 @@ public:
     void onTeleportation(ScriptSimpleCallback callback);
 
     virtual string getExportLine() override { return "WormHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setTargetPosition(" + string(target_position.x, 0) + ", " + string(target_position.y, 0) + ")"; }
+
+protected:
+    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//WORM_HOLE_H

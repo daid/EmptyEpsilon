@@ -414,3 +414,8 @@ string Planet::getExportLine()
     //TODO setOrbit
     return ret;
 }
+
+glm::mat4 Planet::getModelMatrix() const
+{
+    return glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, distance_from_movement_plane));
+}

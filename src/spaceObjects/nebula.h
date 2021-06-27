@@ -34,6 +34,9 @@ public:
     static PVector<Nebula> getNebulas();
 
     virtual string getExportLine() { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+
+protected:
+    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//NEBULA_H

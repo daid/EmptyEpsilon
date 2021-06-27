@@ -7,6 +7,8 @@
 #include "factionInfo.h"
 #include "shipTemplate.h"
 
+#include <glm/mat4x4.hpp>
+
 enum EDamageType
 {
     DT_Energy,
@@ -109,7 +111,7 @@ public:
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
     virtual ~SpaceObject();
 
-    float getRadius() { return object_radius; }
+    float getRadius() const { return object_radius; }
     void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
 
     bool hasWeight() { return has_weight; }
@@ -228,7 +230,10 @@ public:
 
     ScriptSimpleCallback on_destroyed;
 
+    glm::mat4 getModelTransform() const { return getModelMatrix(); }
+
 protected:
+    virtual glm::mat4 getModelMatrix() const;
     ModelInfo model_info;
     bool has_weight = true;
 };

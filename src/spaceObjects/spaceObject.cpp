@@ -2,6 +2,8 @@
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
 
+#include <glm/ext/matrix_transform.hpp>
+
 #include "scriptInterface.h"
 /// SpaceObject is the base for every object which can be seen in space.
 /// General properties can read and set for each object.
@@ -580,6 +582,14 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
         target->addToShipLogBy(message, this);
     }
     return result;
+}
+
+glm::mat4 SpaceObject::getModelMatrix() const
+{
+    auto position = getPosition();
+    auto rotation = getRotation();
+    auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3{ position.x, position.y, 0.f });
+    return glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 }
 
 // Define a script conversion function for the DamageInfo structure.
