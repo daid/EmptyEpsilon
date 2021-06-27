@@ -23,6 +23,9 @@ public:
     float getSize();
 
     virtual string getExportLine() override { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + ":setSize(" + string(getSize(),0) + ")"; }
+
+protected:
+    glm::mat4 getModelMatrix() const override;
 };
 
 class VisualAsteroid : public SpaceObject
@@ -41,6 +44,9 @@ public:
     float getSize();
 
     virtual string getExportLine() override { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" ":setSize(" + string(getSize(),0) + ")"; }
+
+protected:
+    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//ASTEROID_H

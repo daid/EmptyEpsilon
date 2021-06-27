@@ -9,6 +9,8 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
+#include <glm/ext/matrix_transform.hpp>
+
 #define FORCE_MULTIPLIER          50.0
 #define FORCE_MAX                 10000.0
 #define ALPHA_MULTIPLIER          10.0
@@ -187,4 +189,9 @@ sf::Vector2f WormHole::getTargetPosition()
 void WormHole::onTeleportation(ScriptSimpleCallback callback)
 {
     this->on_teleportation = callback;
+}
+
+glm::mat4 WormHole::getModelMatrix() const
+{
+    return glm::identity<glm::mat4>();
 }

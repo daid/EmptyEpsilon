@@ -10,6 +10,8 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
+#include <glm/ext/matrix_transform.hpp>
+
 #if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
@@ -186,4 +188,9 @@ sf::Vector2f Nebula::getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f en
 PVector<Nebula> Nebula::getNebulas()
 {
     return nebula_list;
+}
+
+glm::mat4 Nebula::getModelMatrix() const
+{
+    return glm::identity<glm::mat4>();
 }
