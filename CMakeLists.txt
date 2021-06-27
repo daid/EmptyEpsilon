@@ -51,8 +51,9 @@ message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
 # Dependencies
 
-# Setup OpenGl
+# Setup OpenGL
 if(NOT ANDROID)
+    set(OpenGL_GL_PREFERENCE LEGACY)
     find_package(OpenGL REQUIRED)
 endif()
 
