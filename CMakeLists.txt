@@ -309,7 +309,6 @@ endif()
 
 target_compile_definitions(seriousproton_deps
     INTERFACE
-        WINDOW_TITLE="${PROJECT_NAME}"
         VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
 
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
