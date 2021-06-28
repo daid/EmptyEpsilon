@@ -22,7 +22,7 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
         returnToShipSelection();
     }))->setPosition(0, 75, ACenter)->setSize(500, 50);
 
-    show_timeout.restart();
+    show_timeout.start(5.0);
 }
 
 void GuiShipDestroyedPopup::onDraw(sf::RenderTarget& window)
@@ -30,9 +30,9 @@ void GuiShipDestroyedPopup::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         ship_destroyed_overlay->hide();
-        show_timeout.restart();
+        show_timeout.start(5.0);
     }else{
-        if (show_timeout.getElapsedTime().asSeconds() > 5.0)
+        if (show_timeout.isExpired())
             ship_destroyed_overlay->show();
     }
 }
