@@ -106,30 +106,30 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
     }
 }
 
-bool WarpJammer::isWarpJammed(sf::Vector2f position)
+bool WarpJammer::isWarpJammed(glm::vec2 position)
 {
     foreach(WarpJammer, wj, jammer_list)
     {
-        if (wj->getPosition() - position < wj->range)
+        if (glm::length2(wj->getPosition() - position) < wj->range * wj->range)
             return true;
     }
     return false;
 }
 
-sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end)
+glm::vec2 WarpJammer::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
 {
-    sf::Vector2f startEndDiff = end - start;
-    float startEndLength = sf::length(startEndDiff);
+    auto startEndDiff = end - start;
+    float startEndLength = glm::length(startEndDiff);
     P<WarpJammer> first_jammer;
     float first_jammer_f = startEndLength;
-    sf::Vector2f first_jammer_q;
+    glm::vec2 first_jammer_q{0, 0};
     foreach(WarpJammer, wj, jammer_list)
     {
-        float f = sf::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
+        float f = glm::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
         if (f < 0.0)
             f = 0;
-        sf::Vector2f q = start + startEndDiff / startEndLength * f;
-        if ((q - wj->getPosition()) < wj->range)
+        glm::vec2 q = start + startEndDiff / startEndLength * f;
+        if (glm::length2(q - wj->getPosition()) < wj->range*wj->range)
         {
             if (!first_jammer || f < first_jammer_f)
             {
@@ -142,8 +142,8 @@ sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vect
     if (!first_jammer)
         return end;
 
-    float d = sf::length(first_jammer_q - first_jammer->getPosition());
-    return first_jammer_q + sf::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
+    float d = glm::length(first_jammer_q - first_jammer->getPosition());
+    return first_jammer_q + glm::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
 }
 
 void WarpJammer::onTakingDamage(ScriptSimpleCallback callback)

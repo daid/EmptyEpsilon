@@ -39,8 +39,8 @@ void FighterAI::runOrders()
 
 void FighterAI::runAttack(P<SpaceObject> target)
 {
-    sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
-    float distance = sf::length(position_diff);
+    auto position_diff = target->getPosition() - owner->getPosition();
+    float distance = glm::length(position_diff);
 
     switch(attack_state)
     {
@@ -70,7 +70,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
             attack_state = evade;
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
 
-            float target_dir = sf::vector2ToAngle(position_diff);
+            float target_dir = vec2ToAngle(position_diff);
             float a_diff = sf::angleDifference(target_dir, owner->getRotation());
             if (a_diff < 0)
                 evade_direction = target_dir - random(25, 40);
@@ -100,9 +100,9 @@ void FighterAI::runAttack(P<SpaceObject> target)
         {
             attack_state = dive;
         }else{
-            sf::Vector2f target_position = target->getPosition();
+            auto target_position = target->getPosition();
             float circle_distance = 2000.0f + target->getRadius() * 2.0 + owner->getRadius() * 2.0;
-            target_position += sf::vector2FromAngle(sf::vector2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
+            target_position += vec2FromAngle(vec2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
             flyTowards(target_position);
         }
         break;

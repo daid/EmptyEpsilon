@@ -63,10 +63,10 @@ protected:
     virtual void updateTarget();
     virtual void runOrders();
     virtual void runAttack(P<SpaceObject> target);
-    virtual void flyTowards(sf::Vector2f target, float keep_distance = 100.0);
-    virtual void flyFormation(P<SpaceObject> target, sf::Vector2f offset);
+    virtual void flyTowards(glm::vec2 target, float keep_distance = 100.0);
+    virtual void flyFormation(P<SpaceObject> target, glm::vec2 offset);
 
-    P<SpaceObject> findBestTarget(sf::Vector2f position, float radius);
+    P<SpaceObject> findBestTarget(glm::vec2 position, float radius);
     float targetScore(P<SpaceObject> target);
 
     /**!
@@ -81,7 +81,7 @@ protected:
      * Used for missiles, as they require some intelligence to fire.
      */
     float calculateFiringSolution(P<SpaceObject> target, int tube_index);
-    P<SpaceObject> findBestMissileRestockTarget(sf::Vector2f position, float radius);
+    P<SpaceObject> findBestMissileRestockTarget(glm::vec2 position, float radius);
 
     static float getMissileWeaponStrength(EMissileWeapons type)
     {

@@ -136,21 +136,21 @@ void ScanProbe::update(float delta)
 
     // The probe moves in a straight line to its destination, independent of
     // physics and at a fixed rate of speed.
-    sf::Vector2f diff = target_position - getPosition();
+    auto diff = target_position - getPosition();
     float movement = delta * probe_speed;
-    float distance = sf::length(diff);
+    float distance = glm::length(diff);
 
     // If the probe's outer radius hasn't reached the target position ...
-    if (diff > getRadius())
+    if (distance > getRadius())
     {
         // The probe is still in transit.
         has_arrived = false;
 
         // Normalize the diff.
-        sf::Vector2f v = normalize(diff);
+        auto v = glm::normalize(diff);
 
         // Update the probe's heading.
-        setHeading(vector2ToAngle(v) + 90.0f);
+        setHeading(vec2ToAngle(v) + 90.0f);
 
         // Move toward the target position at the given rate of speed.
         // However, don't overshoot the target if traveling so fast that the
@@ -178,7 +178,7 @@ void ScanProbe::update(float delta)
 bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
     // The probe cannot be targeted until it reaches its destination.
-    return (getTarget() - getPosition()) < getRadius();
+    return glm::length2(getTarget() - getPosition()) < getRadius()*getRadius();
 }
 
 void ScanProbe::takeDamage(float damage_amount, DamageInfo info)

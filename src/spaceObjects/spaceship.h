@@ -207,7 +207,7 @@ public:
 
     EDockingState docking_state;
     P<SpaceObject> docking_target; //Server only
-    sf::Vector2f docking_offset; //Server only
+    glm::vec2 docking_offset{0, 0}; //Server only
 
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();

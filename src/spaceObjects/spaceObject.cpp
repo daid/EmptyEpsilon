@@ -475,15 +475,15 @@ bool SpaceObject::isFriendly(P<SpaceObject> obj)
     }
 }
 
-void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
+void SpaceObject::damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
 {
-    PVector<Collisionable> hitList = CollisionManager::queryArea(position - sf::Vector2f(blast_range, blast_range), position + sf::Vector2f(blast_range, blast_range));
+    PVector<Collisionable> hitList = CollisionManager::queryArea(position - glm::vec2(blast_range, blast_range), position + glm::vec2(blast_range, blast_range));
     foreach(Collisionable, c, hitList)
     {
         P<SpaceObject> obj = c;
         if (obj)
         {
-            float dist = sf::length(position - obj->getPosition()) - obj->getRadius() - min_range;
+            float dist = glm::length(position - obj->getPosition()) - obj->getRadius() - min_range;
             if (dist < 0) dist = 0;
             if (dist < blast_range - min_range)
             {
@@ -495,13 +495,14 @@ void SpaceObject::damageArea(sf::Vector2f position, float blast_range, float min
 
 bool SpaceObject::areEnemiesInRange(float range)
 {
-    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - sf::Vector2f(range, range), getPosition() + sf::Vector2f(range, range));
+    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range));
     foreach(Collisionable, c, hitList)
     {
         P<SpaceObject> obj = c;
         if (obj && isEnemy(obj))
         {
-            if (getPosition() - obj->getPosition() < range + obj->getRadius())
+            auto r = range + obj->getRadius();
+            if (glm::length2(getPosition() - obj->getPosition()) < r*r)
                 return true;
         }
     }
@@ -511,11 +512,12 @@ bool SpaceObject::areEnemiesInRange(float range)
 PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
 {
     PVector<SpaceObject> ret;
-    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - sf::Vector2f(range, range), getPosition() + sf::Vector2f(range, range));
+    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range));
     foreach(Collisionable, c, hitList)
     {
         P<SpaceObject> obj = c;
-        if (obj && getPosition() - obj->getPosition() < range + obj->getRadius())
+        auto r = range + obj->getRadius();
+        if (obj && glm::length2(getPosition() - obj->getPosition()) < r*r)
         {
             ret.push_back(obj);
         }

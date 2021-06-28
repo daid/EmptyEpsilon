@@ -40,25 +40,25 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [this](sf::Vector2f position) {
+        [this](glm::vec2 position) {
             if (my_spaceship)
             {
-                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                float angle = vec2ToAngle(position - my_spaceship->getPosition());
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
-        [this](sf::Vector2f position) {
+        [this](glm::vec2 position) {
             if (my_spaceship)
             {
-                float angle = sf::vector2ToAngle(position - my_spaceship->getPosition());
+                float angle = vec2ToAngle(position - my_spaceship->getPosition());
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - sf::Vector2f(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
-        [this](sf::Vector2f position) {
+        [this](glm::vec2 position) {
             if (my_spaceship)
-                my_spaceship->commandTargetRotation(sf::vector2ToAngle(position - my_spaceship->getPosition()));
+                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
             heading_hint->hide();
         }
     );
@@ -92,7 +92,7 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
-        float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
+        float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
 
         warp_controls->setVisible(my_spaceship->has_warp_drive);

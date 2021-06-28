@@ -54,7 +54,7 @@ private:
      * \brief 2D colission box of the ship.
      * As the game is only 2D, we only need a width & height that indicates the collission object.
      */
-    sf::Vector2f collision_box;
+    glm::vec2 collision_box{0, 0};
 
     std::vector<sf::Vector3f> beam_position;
     std::vector<sf::Vector3f> tube_position;
@@ -97,7 +97,7 @@ public:
      */
     void setScale(float scale);
     void setRadius(float radius);
-    void setCollisionBox(sf::Vector2f collision_box);
+    void setCollisionBox(glm::vec2 collision_box);
 
     /*!
      * Add a beam position (location from which a beam weapon is fired
@@ -117,9 +117,9 @@ public:
     void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale);
 
     sf::Vector3f getBeamPosition(int index);
-    sf::Vector2f getBeamPosition2D(int index);
+    glm::vec2 getBeamPosition2D(int index);
     sf::Vector3f getTubePosition(int index);
-    sf::Vector2f getTubePosition2D(int index);
+    glm::vec2 getTubePosition2D(int index);
     void setCollisionData(P<SpaceObject> object);
     float getRadius();
 

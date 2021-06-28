@@ -21,7 +21,7 @@ class DamageInfo
 public:
     P<SpaceObject> instigator;
     EDamageType type;
-    sf::Vector2f location;
+    glm::vec2 location{0, 0};
     int frequency;
     ESystem system_target;
 
@@ -29,7 +29,7 @@ public:
     : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
     {}
 
-    DamageInfo(P<SpaceObject> instigator, EDamageType type, sf::Vector2f location)
+    DamageInfo(P<SpaceObject> instigator, EDamageType type, glm::vec2 location)
     : instigator(instigator), type(type), location(location), frequency(-1), system_target(SYS_None)
     {}
 };
@@ -206,7 +206,7 @@ public:
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
     virtual string getExportLine() { return ""; }
 
-    static void damageArea(sf::Vector2f position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);
+    static void damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);

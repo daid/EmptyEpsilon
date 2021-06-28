@@ -207,7 +207,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             // set the position before the template so that onNewPlayerShip has as much data as possible
                     ship->setRotation(random(0, 360));
                     ship->target_rotation = ship->getRotation();
-                    ship->setPosition(sf::Vector2f(random(-100, 100), random(-100, 100)));
+                    ship->setPosition(glm::vec2(random(-100, 100), random(-100, 100)));
                     ship->setTemplate(ship_template_selector->getSelectionValue());
                     my_player_info->commandSetShipId(ship->getMultiplayerId());
                 }

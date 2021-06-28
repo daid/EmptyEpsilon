@@ -20,7 +20,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     science = new ScienceScreen(this, operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
     science->science_radar->setCallbacks(
-        [this](sf::Vector2f position) { // Down
+        [this](glm::vec2 position) { // Down
             // If not our ship, or if we're scanning, ignore clicks.
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
@@ -31,7 +31,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             {
                 // ... and we select something near a waypoint, switch to move
                 // waypoint mode.
-                if (sf::length(my_spaceship->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0)
+                if (glm::length(my_spaceship->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0)
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = science->targets.getWaypointIndex();
@@ -39,12 +39,12 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
             mouse_down_position = position;
         },
-        [this](sf::Vector2f position) { // Drag
+        [this](glm::vec2 position) { // Drag
             // If we're dragging a waypoint, move it.
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
-        [this](sf::Vector2f position) { // Up
+        [this](glm::vec2 position) { // Up
             switch(mode)
             {
             case TargetSelection:
