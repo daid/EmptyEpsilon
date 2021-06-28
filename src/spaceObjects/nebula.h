@@ -28,9 +28,9 @@ public:
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range);
     virtual bool canHideInNebula() { return false; }
 
-    static bool inNebula(sf::Vector2f position);
-    static bool blockedByNebula(sf::Vector2f start, sf::Vector2f end, float radar_short_range);
-    static sf::Vector2f getFirstBlockedPosition(sf::Vector2f start, sf::Vector2f end);
+    static bool inNebula(glm::vec2 position);
+    static bool blockedByNebula(glm::vec2 start, glm::vec2 end, float radar_short_range);
+    static glm::vec2 getFirstBlockedPosition(glm::vec2 start, glm::vec2 end);
     static PVector<Nebula> getNebulas();
 
     virtual string getExportLine() { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }

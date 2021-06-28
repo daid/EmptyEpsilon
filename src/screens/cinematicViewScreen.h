@@ -21,27 +21,27 @@ private:
     GuiToggleButton* camera_lock_tot_toggle;
     float min_camera_distance;
     float max_camera_distance;
-    sf::Vector2f camera_rotation_vector;
-    sf::Vector2f camera_destination;
+    glm::vec2 camera_rotation_vector{0, 0};
+    glm::vec2 camera_destination{0, 0};
     float angle_yaw;
     float angle_pitch;
 
-    sf::Vector2f diff_2D;
+    glm::vec2 diff_2D{0, 0};
     sf::Vector3f diff_3D;
     float distance_2D;
     float distance_3D;
 
-    sf::Vector2f target_position_2D;
+    glm::vec2 target_position_2D{0, 0};
     sf::Vector3f target_position_3D;
     // camera_position is a Vector3, so no need to declare one here.
-    sf::Vector2f camera_position_2D;
+    glm::vec2 camera_position_2D{0, 0};
     float target_rotation;
 
     P<SpaceObject> target_of_target;
 
-    sf::Vector2f tot_position_2D;
+    glm::vec2 tot_position_2D{0, 0};
     sf::Vector3f tot_position_3D;
-    sf::Vector2f tot_diff_2D;
+    glm::vec2 tot_diff_2D{0, 0};
     sf::Vector3f tot_diff_3D;
     float tot_angle;
     float tot_distance_2D;

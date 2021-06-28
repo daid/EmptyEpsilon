@@ -40,3 +40,6 @@ options.ini
 .vscode
 logs
 *.log
+build*/
+_build*/
+cmake/_win32/

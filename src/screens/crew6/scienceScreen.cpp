@@ -47,7 +47,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     science_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
-        [this](sf::Vector2f position) {
+        [this](glm::vec2 position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
 
@@ -62,7 +62,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     probe_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
-        [this](sf::Vector2f position) {
+        [this](glm::vec2 position) {
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;
 
@@ -184,7 +184,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
         if (value && probe)
         {
-            sf::Vector2f probe_position = probe->getPosition();
+            auto probe_position = probe->getPosition();
             science_radar->hide();
             probe_radar->show();
             probe_radar->setViewPosition(probe_position)->show();
@@ -252,7 +252,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
 
     if (probe_view_button->getValue() && probe)
     {
-        if (targets.get() && (probe->getPosition() - targets.get()->getPosition()) > 5000.0f)
+        if (targets.get() && glm::length2(probe->getPosition() - targets.get()->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
     }else{
         if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition(), my_spaceship->getShortRangeRadarRange()))
@@ -297,9 +297,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
         P<SpaceShip> ship = obj;
         P<SpaceStation> station = obj;
 
-        sf::Vector2f position_diff = obj->getPosition() - my_spaceship->getPosition();
-        float distance = sf::length(position_diff);
-        float heading = sf::vector2ToAngle(position_diff) - 270;
+        auto position_diff = obj->getPosition() - my_spaceship->getPosition();
+        float distance = glm::length(position_diff);
+        float heading = vec2ToAngle(position_diff) - 270;
 
         while(heading < 0) heading += 360;
 
@@ -448,9 +448,9 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     else if (targets.getWaypointIndex() >= 0)
     {
         sidebar_pager->hide();
-        sf::Vector2f position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
-        float distance = sf::length(position_diff);
-        float heading = sf::vector2ToAngle(position_diff) - 270;
+        auto position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
+        float distance = glm::length(position_diff);
+        float heading = vec2ToAngle(position_diff) - 270;
 
         while(heading < 0) heading += 360;
 
@@ -509,7 +509,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                 // If this is a scannable object and the currently selected
                 // object, and it remains in radar range, continue to set it.
                 if (current_found &&
-                    sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                    glm::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
                     obj->canBeScannedBy(my_spaceship))
                 {
                     targets.set(obj);
@@ -525,7 +525,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
                     Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
                     continue;
 
-                if (sf::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                if (glm::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
                     obj->canBeScannedBy(my_spaceship))
                 {
                     targets.set(obj);

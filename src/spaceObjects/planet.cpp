@@ -214,7 +214,7 @@ void Planet::setOrbit(P<SpaceObject> target, float orbit_time)
     if (!target)
         return;
     this->orbit_target_id = target->getMultiplayerId();
-    this->orbit_distance = sf::length(getPosition() - target->getPosition());
+    this->orbit_distance = glm::length(getPosition() - target->getPosition());
     this->orbit_time = orbit_time;
 }
 
@@ -236,9 +236,9 @@ void Planet::update(float delta)
             orbit_target = game_client->getObjectById(orbit_target_id);
         if (orbit_target)
         {
-            float angle = sf::vector2ToAngle(getPosition() - orbit_target->getPosition());
+            float angle = vec2ToAngle(getPosition() - orbit_target->getPosition());
             angle += delta / orbit_time * 360.0f;
-            setPosition(orbit_target->getPosition() + sf::vector2FromAngle(angle) * orbit_distance);
+            setPosition(orbit_target->getPosition() + vec2FromAngle(angle) * orbit_distance);
         }
     }
 

@@ -294,7 +294,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 {
     if (shield_count > 0 && getShieldsActive())
     {
-        float angle = sf::angleDifference(getRotation(), sf::vector2ToAngle(info.location - getPosition()));
+        float angle = sf::angleDifference(getRotation(), vec2ToAngle(info.location - getPosition()));
         if (angle < 0)
             angle += 360.0f;
         float arc = 360.0f / float(shield_count);

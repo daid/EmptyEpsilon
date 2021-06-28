@@ -76,7 +76,7 @@ void MissileWeapon::update(float delta)
         lifeEnded();
         destroy();
     }
-    setVelocity(sf::vector2FromAngle(getRotation()) * data.speed * size_speed_modifier);
+    setVelocity(vec2FromAngle(getRotation()) * data.speed * size_speed_modifier);
 
     if (delta > 0)
     {
@@ -116,9 +116,13 @@ void MissileWeapon::updateMovement()
                 target = game_client->getObjectById(target_id);
             }
 
-            if (target && (target->getPosition() - getPosition()) < data.homing_range + target->getRadius())
+            if (target)
             {
-                target_angle = sf::vector2ToAngle(target->getPosition() - getPosition());
+                float r = data.homing_range + target->getRadius();
+                if (glm::length2(target->getPosition() - getPosition()) < r*r)
+                {
+                    target_angle = vec2ToAngle(target->getPosition() - getPosition());
+                }
             }
         }
         // Small missiles have a larger speed & rotational speed, large ones are slower and turn less fast

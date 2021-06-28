@@ -39,9 +39,9 @@ void EvasionAI::runOrders()
     case AI_Dock:
         if (owner->getOrderTarget() && owner->docking_state == DS_NotDocking)
         {
-            sf::Vector2f target_position = owner->getOrderTarget()->getPosition();
-            sf::Vector2f diff = owner->getPosition() - target_position;
-            float dist = sf::length(diff);
+            auto target_position = owner->getOrderTarget()->getPosition();
+            auto diff = owner->getPosition() - target_position;
+            float dist = glm::length(diff);
             if (dist < 3000 + owner->getOrderTarget()->getRadius())
             {
                 // if close to the docking target: make a run for it
@@ -72,14 +72,14 @@ bool EvasionAI::evadeIfNecessary()
 
     is_evading = false;
 
-    sf::Vector2f position = owner->getPosition();
+    auto position = owner->getPosition();
     float scan_radius = 9000.0;
 
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(scan_radius, scan_radius), position + sf::Vector2f(scan_radius, scan_radius));
+    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(scan_radius, scan_radius), position + glm::vec2(scan_radius, scan_radius));
 
     // NOT AN OBJECT ON THE PLANE, but it represents an escape vector.
     // It tracks which direction is the best to run to (angle) and the strength of the desire to go there (distance from origin)
-    sf::Vector2f evasion_vector = sf::Vector2f();
+    glm::vec2 evasion_vector = glm::vec2(0, 0);
     foreach(Collisionable, obj, objectList)
     {
         P<SpaceShip> ship = obj;
@@ -91,30 +91,30 @@ bool EvasionAI::evadeIfNecessary()
         if (score == std::numeric_limits<float>::min())
             continue;
 
-        sf::Vector2f vec = position - ship->getPosition();
-        vec = sf::normalize(vec) * score;
+        auto vec = position - ship->getPosition();
+        vec = glm::normalize(vec) * score;
         evasion_vector += vec;
     }
 
-    if (sf::length(evasion_vector) > 0.0) // if: evasion is necessary
+    if (glm::length2(evasion_vector) > 0.0) // if: evasion is necessary
     {
         // have a bias to your original target.
         // this makes ships fly around enemies rather than straight running from them
-        sf::Vector2f target_position = owner->getOrderTargetLocation();
+        auto target_position = owner->getOrderTargetLocation();
         if (owner->getOrderTarget())
         {
             target_position = owner->getOrderTarget()->getPosition();
         }
 
         float distance = 12000.0f; // should be big enough for jump drive to be considered
-        if (sf::length(target_position) > 0.0)
+        if (glm::length(target_position) > 0.0)
         {
             // ships with warp or jump drives have a tendency to fly past enemies quickly
-            evasion_vector += sf::normalize(target_position - position) * (owner->hasWarpDrive() || owner->hasJumpDrive() ? 15.0f : 5.0f);
-            distance = std::min(distance, sf::length(target_position - position));
+            evasion_vector += glm::normalize(target_position - position) * (owner->hasWarpDrive() || owner->hasJumpDrive() ? 15.0f : 5.0f);
+            distance = std::min(distance, glm::length(target_position - position));
         }
 
-        evasion_vector = sf::normalize(evasion_vector) * float(distance);
+        evasion_vector = glm::normalize(evasion_vector) * float(distance);
 
         evasion_location = position + evasion_vector;
         flyTowards(evasion_location, 100.0);
@@ -157,8 +157,8 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
         return 0.0;
     }
 
-    sf::Vector2f position_difference = ship->getPosition() - owner->getPosition();
-    float distance = sf::length(position_difference);
+    auto position_difference = ship->getPosition() - owner->getPosition();
+    float distance = glm::length(position_difference);
     enemy_max_beam_range += ship->getRadius() + owner->getRadius();
 
     float danger = 0.0;

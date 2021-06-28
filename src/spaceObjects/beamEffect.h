@@ -11,7 +11,7 @@ class BeamEffect : public SpaceObject, public Updatable
     int32_t target_id;
     sf::Vector3f sourceOffset;
     sf::Vector3f targetOffset;
-    sf::Vector2f targetLocation;
+    glm::vec2 targetLocation{};
     sf::Vector3f hitNormal;
 public:
     bool fire_ring;
@@ -27,7 +27,7 @@ public:
     virtual void update(float delta);
 
     void setSource(P<SpaceObject> source, sf::Vector3f offset);
-    void setTarget(P<SpaceObject> target, sf::Vector2f hitLocation);
+    void setTarget(P<SpaceObject> target, glm::vec2 hitLocation);
 
     ///Set the texture used for this beam. Default is beam_orange.png
     void setTexture(string texture) {this->beam_texture = texture;}

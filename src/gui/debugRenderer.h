@@ -6,7 +6,7 @@
 class DebugRenderer : public Renderable, public InputEventHandler
 {
 private:
-    sf::Clock fps_timer;
+    sp::SystemStopwatch fps_timer;
     float fps;
     int fps_counter;
 

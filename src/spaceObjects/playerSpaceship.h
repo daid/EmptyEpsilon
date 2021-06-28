@@ -116,7 +116,7 @@ private:
 public:
     std::vector<CustomShipFunction> custom_functions;
 
-    std::vector<sf::Vector2f> waypoints;
+    std::vector<glm::vec2> waypoints;
 
     // Ship functionality
     // Capable of scanning a target
@@ -269,15 +269,15 @@ public:
     void commandSetBeamFrequency(int32_t frequency);
     void commandSetBeamSystemTarget(ESystem system);
     void commandSetShieldFrequency(int32_t frequency);
-    void commandAddWaypoint(sf::Vector2f position);
+    void commandAddWaypoint(glm::vec2 position);
     void commandRemoveWaypoint(int32_t index);
-    void commandMoveWaypoint(int32_t index, sf::Vector2f position);
+    void commandMoveWaypoint(int32_t index, glm::vec2 position);
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);
     void commandCombatManeuverBoost(float amount);
     void commandCombatManeuverStrafe(float strafe);
-    void commandLaunchProbe(sf::Vector2f target_position);
+    void commandLaunchProbe(glm::vec2 target_position);
     void commandScanDone();
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
@@ -332,7 +332,7 @@ public:
 
     // Waypoint functions
     int getWaypointCount() { return waypoints.size(); }
-    sf::Vector2f getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return sf::Vector2f(0, 0); }
+    glm::vec2 getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return glm::vec2(0, 0); }
 
     // Ship control code/password setter
     void setControlCode(string code) { control_code = code.upper(); }

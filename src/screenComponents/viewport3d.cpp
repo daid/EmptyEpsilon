@@ -168,7 +168,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
         soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
-        soundManager->setListenerPosition(sf::Vector2f(camera_position.x, camera_position.y), camera_yaw);
+        soundManager->setListenerPosition(glm::vec2(camera_position.x, camera_position.y), camera_yaw);
     
     glActiveTexture(GL_TEXTURE0);
     // SFML may rely on FBOs.
@@ -288,7 +288,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     };
     std::vector<std::vector<RenderInfo>> render_lists;
 
-    sf::Vector2f viewVector = sf::vector2FromAngle(camera_yaw);
+    auto viewVector = vec2FromAngle(camera_yaw);
     float depth_cutoff_back = camera_position.z * -tanf((90+camera_pitch + camera_fov/2.f) / 180.f * M_PI);
     float depth_cutoff_front = camera_position.z * -tanf((90+camera_pitch - camera_fov/2.f) / 180.f * M_PI);
     if (camera_pitch - camera_fov/2.f <= 0.f)
@@ -297,7 +297,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         depth_cutoff_back = -std::numeric_limits<float>::infinity();
     foreach(SpaceObject, obj, space_object_list)
     {
-        float depth = sf::dot(viewVector, obj->getPosition() - sf::Vector2f(camera_position.x, camera_position.y));
+        float depth = glm::dot(viewVector, obj->getPosition() - glm::vec2(camera_position.x, camera_position.y));
         if (depth + obj->getRadius() < depth_cutoff_back)
             continue;
         if (depth - obj->getRadius() > depth_cutoff_front)
@@ -368,7 +368,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     {
         static std::vector<sf::Vector3f> space_dust(2 * spacedust_particle_count);
         
-        sf::Vector2f dust_vector = my_spaceship->getVelocity() / 100.f;
+        glm::vec2 dust_vector = my_spaceship->getVelocity() / 100.f;
         sf::Vector3f dust_center = sf::Vector3f(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.f); 
 
         constexpr float maxDustDist = 500.f;
@@ -399,7 +399,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
 
         // Ship information for flying particles
-        spacedust_shader->setUniform("velocity", dust_vector);
+        spacedust_shader->setUniform("velocity", sf::Vector2f(dust_vector.x, dust_vector.y));
         
         {
             gl::ScopedVertexAttribArray positions(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
@@ -482,7 +482,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
             glUniformMatrix4fv(debug_shader.get().uniform(ShaderRegistry::Uniforms::ModelView), 1, GL_FALSE, matrix.data());
 
-            std::vector<sf::Vector2f> collisionShape = obj->getCollisionShape();
+            auto collisionShape = obj->getCollisionShape();
 
             if (collisionShape.size() > points.size())
             {
@@ -531,7 +531,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
         for(int angle = 0; angle < 360; angle += 30)
         {
-            sf::Vector2f world_pos = my_spaceship->getPosition() + sf::vector2FromAngle(angle - 90.f) * distance;
+            glm::vec2 world_pos = my_spaceship->getPosition() + vec2FromAngle(angle - 90.f) * distance;
             sf::Vector3f screen_pos = worldToScreen(window, sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
                 drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, bold_font, sf::Color(255, 255, 255, 128));

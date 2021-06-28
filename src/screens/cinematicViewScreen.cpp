@@ -138,7 +138,7 @@ void CinematicViewScreen::update(float delta)
         diff_2D = target_position_2D - camera_position_2D;
         diff_3D = target_position_3D - camera_position;
 
-        distance_2D = sf::length(diff_2D);
+        distance_2D = glm::length(diff_2D);
         distance_3D = sf::length(diff_3D);
 
         // Get the ship's current heading and velocity.
@@ -146,12 +146,12 @@ void CinematicViewScreen::update(float delta)
         // float target_velocity = sf::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        max_camera_distance = 1000.0f + target->getRadius() + sf::length(target->getVelocity());
+        max_camera_distance = 1000.0f + target->getRadius() + glm::length(target->getVelocity());
         min_camera_distance = target->getRadius() * 2.0f;
 
         // Check if our selected ship has a weapons target.
         target_of_target = target->getTarget();
-        if (target_of_target && sf::length(target_of_target->getPosition() - target_position_2D) > 10000.0)
+        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0)
             target_of_target = nullptr;
 
         // If it does, lock the camera onto that target.
@@ -167,16 +167,16 @@ void CinematicViewScreen::update(float delta)
             // Get the diff, distance, and angle between the ToT and camera.
             tot_diff_2D = tot_position_2D - camera_position_2D;
             tot_diff_3D = tot_position_3D - camera_position;
-            tot_angle = sf::vector2ToAngle(tot_diff_2D);
-            tot_distance_2D = sf::length(tot_diff_2D);
+            tot_angle = vec2ToAngle(tot_diff_2D);
+            tot_distance_2D = glm::length(tot_diff_2D);
             tot_distance_3D = sf::length(tot_diff_3D);
 
             //Point the camera aiming between the target ship and the target of the target.
-            angle_yaw = tot_angle + sf::angleDifference(tot_angle, sf::vector2ToAngle(diff_2D)) / 2.0f;
+            angle_yaw = tot_angle + sf::angleDifference(tot_angle, vec2ToAngle(diff_2D)) / 2.0f;
             if (std::abs(sf::angleDifference(angle_yaw, tot_angle)) > 40.0f)
             {
                 //The target of target is not really in view, so re-position the camera.
-                camera_position_2D = target_position_2D - sf::vector2FromAngle(sf::vector2ToAngle(tot_position_2D - target_position_2D) + 20) * target->getRadius() * 2.0f;
+                camera_position_2D = target_position_2D - vec2FromAngle(vec2ToAngle(tot_position_2D - target_position_2D) + 20) * target->getRadius() * 2.0f;
                 camera_position.x = camera_position_2D.x;
                 camera_position.y = camera_position_2D.y;
             }
@@ -189,7 +189,7 @@ void CinematicViewScreen::update(float delta)
         {
             // Set a vector 10 degrees to the right of the selected ship's
             // rotation.
-            camera_rotation_vector = sf::vector2FromAngle(target_rotation + 10);
+            camera_rotation_vector = vec2FromAngle(target_rotation + 10);
 
             // Plot a destination on that vector at a distance of 1U.
             camera_destination = target_position_2D + camera_rotation_vector * max_camera_distance;
@@ -208,7 +208,7 @@ void CinematicViewScreen::update(float delta)
             if (!camera_lock_tot_toggle->getValue() || !target_of_target)
             {
                 // Calculate the angles between the camera and the ship.
-                angle_yaw = sf::vector2ToAngle(diff_2D);
+                angle_yaw = vec2ToAngle(diff_2D);
                 angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
             }
         }

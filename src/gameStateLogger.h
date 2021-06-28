@@ -34,7 +34,7 @@ private:
     float logging_interval;
     float logging_delay;
     float start_time;
-    std::map<int, sf::Vector2f> static_objects;
+    std::map<int, glm::vec2> static_objects;
 
     void logGameState();
     bool isStatic(P<SpaceObject> obj);
