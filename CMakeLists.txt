@@ -498,9 +498,12 @@ else()
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES})
 endif()
 
+# Version number is yyyy.mm.dd - convert to a merged single value.
+math(EXPR VERSION_NUMBER "${PROJECT_VERSION_MAJOR} * 10000 + ${PROJECT_VERSION_MINOR} * 100 + ${PROJECT_VERSION_PATCH}")
+
 target_compile_definitions(seriousproton_deps
     INTERFACE
-        VERSION_NUMBER=${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}
+        VERSION_NUMBER=${VERSION_NUMBER}
 
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
         $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
