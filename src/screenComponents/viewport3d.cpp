@@ -10,18 +10,10 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
-#if FEATURE_3D_RENDERING
-static void _glPerspective(double fovY, double aspect, double zNear, double zFar )
-{
-    const double pi = 3.1415926535897932384626433832795;
-    double fW, fH;
-
-    fH = tan(fovY / 360 * pi) * zNear;
-    fW = fH * aspect;
-
-    glFrustum(-fW, fW, -fH, fH, zNear, zFar);
-}
-#endif//FEATURE_3D_RENDERING
+#include <glm/glm.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -229,9 +221,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     glColor4f(1,1,1,1);
 
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f);
+    projection_matrix = glm::perspective(glm::radians(camera_fov), rect.width / rect.height, 1.f, 25000.f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -241,9 +231,8 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     glRotatef(-camera_pitch, 1, 0, 0);
     glRotatef(-(camera_yaw + 90), 0, 0, 1);
 
-    glGetDoublev(GL_PROJECTION_MATRIX, projection_matrix);
-    glGetDoublev(GL_MODELVIEW_MATRIX, model_matrix);
-    glGetDoublev(GL_VIEWPORT, viewport);
+    glGetFloatv(GL_MODELVIEW_MATRIX, glm::value_ptr(model_matrix));
+    glGetFloatv(GL_VIEWPORT, glm::value_ptr(viewport));
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
@@ -258,8 +247,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         // Upload matrices (only float 4x4 supported in es2)
         std::array<float, 16> matrix;
 
-        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
-        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, matrix.data());
+        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
         glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
         glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
@@ -327,9 +315,19 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         auto& render_list = render_lists[n];
         std::sort(render_list.begin(), render_list.end(), [](const RenderInfo& a, const RenderInfo& b) { return a.depth > b.depth; });
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        _glPerspective(camera_fov, rect.width/rect.height, 1.f, 25000.f * (n + 1));
+        auto projection = glm::perspective(glm::radians(camera_fov), rect.width / rect.height, 1.f, 25000.f * (n + 1));
+        // Update projection matrix in shaders.
+        for (auto i = 0; i < ShaderRegistry::Shaders_t(ShaderRegistry::Shaders::Count); ++i)
+        {
+            const auto& shader = ShaderRegistry::get(ShaderRegistry::Shaders(i));
+            if (shader.uniform(ShaderRegistry::Uniforms::Projection) != -1)
+            {
+                glUseProgram(shader.get()->getNativeHandle());
+                glUniformMatrix4fv(shader.uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection));
+            }
+        }
+        glUseProgram(GL_NONE);
+
         glMatrixMode(GL_MODELVIEW);
         glDepthMask(true);
 
@@ -364,7 +362,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     glPushMatrix();
     glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
-    ParticleEngine::render();
+    ParticleEngine::render(projection_matrix);
 
     if (show_spacedust && my_spaceship)
     {
@@ -395,8 +393,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         // Upload matrices (only float 4x4 supported in es2)
         std::array<float, 16> matrix;
 
-        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, matrix.data());
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE,glm::value_ptr(projection_matrix));
 
         glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
@@ -470,8 +467,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         glUniform4f(debug_shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
 
         std::array<float, 16> matrix;
-        glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
-        glUniformMatrix4fv(debug_shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, matrix.data());
+        glUniformMatrix4fv(debug_shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
         std::vector<sf::Vector3f> points;
         gl::ScopedVertexAttribArray positions(debug_shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -547,37 +543,21 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f world)
 {
     world -= camera_position;
+    auto view_pos = model_matrix * glm::vec4{ world.x, world.y, world.z, 1.f };
+    auto pos = projection_matrix * view_pos;
 
-    //Transformation vectors
-    float fTempo[8];
-    //Modelview transform
-    fTempo[0] = model_matrix[0]*world.x+model_matrix[4]*world.y+model_matrix[8]*world.z+model_matrix[12];  //w is always 1
-    fTempo[1] = model_matrix[1]*world.x+model_matrix[5]*world.y+model_matrix[9]*world.z+model_matrix[13];
-    fTempo[2] = model_matrix[2]*world.x+model_matrix[6]*world.y+model_matrix[10]*world.z+model_matrix[14];
-    fTempo[3] = model_matrix[3]*world.x+model_matrix[7]*world.y+model_matrix[11]*world.z+model_matrix[15];
-    //Projection transform, the final row of projection matrix is always [0 0 -1 0]
-    //so we optimize for that.
-    fTempo[4] = projection_matrix[0]*fTempo[0]+projection_matrix[4]*fTempo[1]+projection_matrix[8]*fTempo[2]+projection_matrix[12]*fTempo[3];
-    fTempo[5] = projection_matrix[1]*fTempo[0]+projection_matrix[5]*fTempo[1]+projection_matrix[9]*fTempo[2]+projection_matrix[13]*fTempo[3];
-    fTempo[6] = projection_matrix[2]*fTempo[0]+projection_matrix[6]*fTempo[1]+projection_matrix[10]*fTempo[2]+projection_matrix[14]*fTempo[3];
-    fTempo[7] = -fTempo[2];
-    //The result normalizes between -1 and 1
-    if(fTempo[7]==0.0)  //The w value
-        return sf::Vector3f(0, 0, -1);
-    fTempo[7] = 1.0/fTempo[7];
-    //Perspective division
-    fTempo[4] *= fTempo[7];
-    fTempo[5] *= fTempo[7];
-    fTempo[6] *= fTempo[7];
+    // Perspective division
+    pos /= pos.w;
+
     //Window coordinates
     //Map x, y to range 0-1
     sf::Vector3f ret;
-    ret.x = (fTempo[4]*0.5+0.5)*viewport[2]+viewport[0];
-    ret.y = (fTempo[5]*0.5+0.5)*viewport[3]+viewport[1];
+    ret.x = (pos.x * .5f + .5f) * viewport.z + viewport.x;
+    ret.y = (pos.y * .5f + .5f) * viewport.w + viewport.y;
     //This is only correct when glDepthRange(0.0, 1.0)
     //ret.z = (1.0+fTempo[6])*0.5;  //Between 0 and 1
     //Set Z to distance into the screen (negative is behind the screen)
-    ret.z = -fTempo[2];
+    ret.z = -view_pos.z;
 
     ret.x = ret.x * window.getView().getSize().x / window.getSize().x;
     ret.y = ret.y * window.getView().getSize().y / window.getSize().y;

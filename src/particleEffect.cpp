@@ -4,6 +4,8 @@
 #include "featureDefs.h"
 #include "particleEffect.h"
 
+#include <glm/gtc/type_ptr.hpp>
+
 ParticleEngine* ParticleEngine::particleEngine = nullptr;
 
 #if FEATURE_3D_RENDERING
@@ -16,11 +18,11 @@ static constexpr typename std::underlying_type<Enum>::type as_index(Enum entry)
 #endif // FEATURE_3D_RENDERING
 
 
-void ParticleEngine::render()
+void ParticleEngine::render(const glm::mat4& projection)
 {
 #if FEATURE_3D_RENDERING
     if (particleEngine)
-        particleEngine->doRender();
+        particleEngine->doRender(projection);
 #endif//FEATURE_3D_RENDERING
 }
 
@@ -119,7 +121,7 @@ ParticleEngine::ParticleEngine()
 }
 
 
-void ParticleEngine::doRender()
+void ParticleEngine::doRender(const glm::mat4& projection)
 {
     sf::Shader::bind(shader);
 
@@ -128,11 +130,9 @@ void ParticleEngine::doRender()
     gl::ScopedTexture particle_texture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
 
     // - Matrices
+    glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection));
+
     std::array<float, 4*4> matrix;
-    
-    glGetFloatv(GL_PROJECTION_MATRIX, matrix.data());
-    glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, matrix.data());
-    
     glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
     glUniformMatrix4fv(uniforms[as_index(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
     

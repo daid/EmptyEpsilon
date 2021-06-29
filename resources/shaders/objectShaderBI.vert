@@ -3,6 +3,7 @@
 //Simple per-pixel light shader.
 
 // Program inputs
+uniform mat4 projection;
 
 // Per-vertex inputs
 attribute vec3 position;
@@ -21,5 +22,5 @@ void main()
 	viewspace_position = vec3(modelview_position);
 	
 	fragtexcoords = texcoords;
-	gl_Position = gl_ProjectionMatrix * modelview_position;
+	gl_Position = projection * modelview_position;
 }
