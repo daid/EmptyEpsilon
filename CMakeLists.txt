@@ -50,7 +50,7 @@ endif()
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
 # Enable colored output with Ninja
-if(CMAKE_GENERATOR MATCHES "Ninja")
+if((CMAKE_GENERATOR MATCHES "Ninja") AND (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
     add_compile_options (-fdiagnostics-color)
 endif()
 
