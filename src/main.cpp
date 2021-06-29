@@ -151,6 +151,8 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");
+        if (mod.back() != '/')
+            mod += "/";
         if (getenv("HOME"))
         {
             new DirectoryResourceProvider(string(getenv("HOME")) + "/.emptyepsilon/resources/mods/" + mod);
