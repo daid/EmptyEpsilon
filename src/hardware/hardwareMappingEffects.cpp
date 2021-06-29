@@ -34,16 +34,17 @@ bool HardwareMappingEffectGlow::configure(std::unordered_map<string, string> set
     OPT_SETTING("min_value", min_value, "glow", 0.0);
     OPT_SETTING("max_value", max_value, "glow", 1.0);
     REQ_SETTING("time", time, "glow");
-    clock.restart();
+    timer.repeat(time);
+    back = false;
     return true;
 }
 
 float HardwareMappingEffectGlow::onActive()
 {
-    if (clock.getElapsedTime().asSeconds() > time * 2.0)
-        clock.restart();
-    float f = clock.getElapsedTime().asSeconds() / time;
-    if (f > 1.0)
+    if (timer.isExpired())
+        back = !back;
+    float f = timer.getProgress();
+    if (back)
         return min_value * (f - 1.0) + max_value * (2.0 - f);
     else
         return min_value * (1.0 - f) + max_value * (f);
@@ -51,7 +52,7 @@ float HardwareMappingEffectGlow::onActive()
 
 void HardwareMappingEffectGlow::onInactive()
 {
-    clock.restart();
+    timer.repeat(time);
 }
 
 bool HardwareMappingEffectBlink::configure(std::unordered_map<string, string> settings)
@@ -60,15 +61,19 @@ bool HardwareMappingEffectBlink::configure(std::unordered_map<string, string> se
     OPT_SETTING("off_value", off_value, "blink", 0.0);
     REQ_SETTING("on_time", on_time, "blink");
     REQ_SETTING("off_time", off_time, "blink");
-    clock.restart();
+    on = true;
+    timer.start(on_time);
     return true;
 }
 
 float HardwareMappingEffectBlink::onActive()
 {
-    if (clock.getElapsedTime().asSeconds() > on_time + off_time)
-        clock.restart();
-    if (clock.getElapsedTime().asSeconds() > on_time)
+    if (timer.isExpired())
+    {
+        on = !on;
+        timer.start(on ? on_time : off_time);
+    }
+    if (on)
         return off_value;
     else
         return on_value;
@@ -76,7 +81,8 @@ float HardwareMappingEffectBlink::onActive()
 
 void HardwareMappingEffectBlink::onInactive()
 {
-    clock.restart();
+    on = true;
+    timer.start(on_time);
 }
 
 HardwareMappingEffectVariable::HardwareMappingEffectVariable(HardwareController* controller)
@@ -132,27 +138,27 @@ bool HardwareMappingEffectNoise::configure(std::unordered_map<string, string> se
     OPT_SETTING("smoothness", smoothness, "noise", 0.0);
     start_value = random(0.0, 1.0);
     target_value = random(0.0, 1.0);
+    if (smoothness > 0)
+        timer.repeat(smoothness);
     return true;
 }
 
 float HardwareMappingEffectNoise::onActive()
 {
-    float f = clock.getElapsedTime().asSeconds();
-    if (f > smoothness)
+    if (!timer.isRunning())
+        return Tween<float>::linear(random(0, 1), 0, 1, min_value, max_value);
+    if (timer.isExpired())
     {
-        clock.restart();
         start_value = target_value;
         target_value = random(0, 1);
-        f = 0;
     }
-    if (smoothness > 0)
-        f = Tween<float>::linear(f, 0, smoothness, start_value, target_value);
-    else
-        f = start_value;
+    float f = timer.getProgress();
+    f = Tween<float>::linear(f, 0, smoothness, start_value, target_value);
     return Tween<float>::linear(f, 0, 1, min_value, max_value);
 }
 
 void HardwareMappingEffectNoise::onInactive()
 {
-    clock.restart();
+    if (smoothness > 0)
+        timer.repeat(smoothness);
 }

@@ -36,8 +36,7 @@ public:
 
     string trigger_variable;
     float runtime;
-    bool triggered;
-    sf::Clock start_time;
+    sp::Timer timer;
 
     EOperator compare_operator;
     bool previous_valid;

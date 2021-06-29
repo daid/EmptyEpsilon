@@ -4,7 +4,6 @@
 DebugRenderer::DebugRenderer()
 : Renderable(mouseLayer)
 {
-    fps_timer.restart();
     fps = 0.0;
     fps_counter = 0;
 
@@ -22,7 +21,7 @@ void DebugRenderer::render(sf::RenderTarget& window)
     fps_counter++;
     if (fps_counter > 30)
     {
-        fps = fps_counter / fps_timer.restart().asSeconds();
+        fps = fps_counter / fps_timer.restart();
         fps_counter = 0;
     }
     string text = "";

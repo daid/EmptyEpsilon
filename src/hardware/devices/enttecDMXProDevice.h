@@ -1,9 +1,9 @@
 #ifndef ENTTEC_DMX_PRO_DEVICE_H
 #define ENTTEC_DMX_PRO_DEVICE_H
 
-#include <SFML/System.hpp>
-#include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"
+#include <stdint.h>
+#include <thread>
 
 //The DMX512SerialDevice can talk to Enttec DMX Pro hardware:
 // http://www.enttec.com/?main_menu=Products&pn=70304
@@ -12,7 +12,7 @@ class EnttecDMXProDevice : public HardwareOutputDevice
 {
 private:
     SerialPort* port;
-    sf::Thread update_thread;
+    std::thread update_thread;
 
     bool run_thread;
     int channel_count;

@@ -106,6 +106,7 @@ int main(int argc, char** argv)
 #if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
 #endif
+    LOG(Info, "Starting...");
 #ifdef CONFIG_DIR
     PreferencesManager::load(CONFIG_DIR "options.ini");
 #endif
@@ -233,6 +234,8 @@ int main(int argc, char** argv)
         P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
         if (PreferencesManager::get("instance_name") != "")
             window_manager->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
+        else
+            window_manager->setTitle("EmptyEpsilon");
         window_manager->setAllowVirtualResize(true);
         engine->registerObject("windowManager", window_manager);
         ShaderRegistry::Shader::initialize();

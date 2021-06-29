@@ -1,9 +1,9 @@
 #ifndef BEAM_WEAPON_H
 #define BEAM_WEAPON_H
 
-#include "SFML/System/NonCopyable.hpp"
 #include "stringImproved.h"
 #include "spaceObjects/spaceObject.h"
+
 class SpaceShip;
 
 class BeamWeapon : sp::NonCopyable

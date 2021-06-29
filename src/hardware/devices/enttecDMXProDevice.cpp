@@ -3,7 +3,6 @@
 #include "logging.h"
 
 EnttecDMXProDevice::EnttecDMXProDevice()
-: update_thread(&EnttecDMXProDevice::updateLoop, this)
 {
     port = nullptr;
     for(int n=0; n<512; n++)
@@ -16,7 +15,7 @@ EnttecDMXProDevice::~EnttecDMXProDevice()
     if (run_thread)
     {
         run_thread = false;
-        update_thread.wait();
+        update_thread.join();
     }
     if (port)
         delete port;
@@ -41,7 +40,7 @@ bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
     if (port)
     {
         run_thread = true;
-        update_thread.launch();
+        update_thread = std::move(std::thread(&EnttecDMXProDevice::updateLoop, this));
         return true;
     }
     return false;
@@ -75,6 +74,6 @@ void EnttecDMXProDevice::updateLoop()
         port->send(end_code, sizeof(end_code));
 
         //Delay a bit before sending again.
-        sf::sleep(sf::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }

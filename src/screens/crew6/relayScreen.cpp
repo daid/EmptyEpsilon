@@ -29,10 +29,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
-        [this](sf::Vector2f position) { //down
+        [this](glm::vec2 position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                if (sf::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
+                if (glm::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = targets.getWaypointIndex();
@@ -40,13 +40,13 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             }
             mouse_down_position = position;
         },
-        [this](sf::Vector2f position) { //drag
+        [this](glm::vec2 position) { //drag
             if (mode == TargetSelection)
                 radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
             if (mode == MoveWaypoint && my_spaceship)
                 my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
         },
-        [this](sf::Vector2f position) { //up
+        [this](glm::vec2 position) { //up
             switch(mode)
             {
             case TargetSelection:
@@ -252,7 +252,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
 
             // If the target is within the short-range radar range/5U of the
             // object, consider it near a friendly object.
-            if (obj->getPosition() - target->getPosition() < r)
+            if (glm::length2(obj->getPosition() - target->getPosition()) < r * r)
             {
                 near_friendly = true;
                 break;

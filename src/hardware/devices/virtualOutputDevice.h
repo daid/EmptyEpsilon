@@ -1,7 +1,6 @@
 #ifndef VIRTUAL_OUTPUT_DEVICE_H
 #define VIRTUAL_OUTPUT_DEVICE_H
 
-#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"

@@ -223,7 +223,7 @@ string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
     }
 }
 
-string getSectorName(sf::Vector2f position)
+string getSectorName(glm::vec2 position)
 {
     constexpr float sector_size = 20000;
     int sector_x = floorf(position.x / sector_size) + 5;
@@ -245,7 +245,7 @@ int getSectorName(lua_State* L)
 {
     float x = luaL_checknumber(L, 1);
     float y = luaL_checknumber(L, 2);
-    lua_pushstring(L, getSectorName(sf::Vector2f(x, y)).c_str());
+    lua_pushstring(L, getSectorName(glm::vec2(x, y)).c_str());
     return 1;
 }
 /// getSectorName(x, y)
@@ -344,14 +344,14 @@ static int getObjectsInRadius(lua_State* L)
     float y = luaL_checknumber(L, 2);
     float r = luaL_checknumber(L, 3);
 
-    sf::Vector2f position(x, y);
+    glm::vec2 position(x, y);
 
     PVector<SpaceObject> objects;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - sf::Vector2f(r, r), position + sf::Vector2f(r, r));
+    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r));
     foreach(Collisionable, obj, objectList)
     {
         P<SpaceObject> sobj = obj;
-        if (sobj && (sobj->getPosition() - position) < r)
+        if (sobj && glm::length2(sobj->getPosition() - position) < r*r)
             objects.push_back(sobj);
     }
 

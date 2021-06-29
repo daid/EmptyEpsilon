@@ -83,9 +83,9 @@ void Mine::update(float delta)
     if (ejectTimeout > 0.0)
     {
         ejectTimeout -= delta;
-        setVelocity(sf::vector2FromAngle(getRotation()) * data.speed);
+        setVelocity(vec2FromAngle(getRotation()) * data.speed);
     }else{
-        setVelocity(sf::Vector2f(0, 0));
+        setVelocity(glm::vec2(0, 0));
     }
     if (!triggered)
         return;

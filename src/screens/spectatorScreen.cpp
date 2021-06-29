@@ -11,9 +11,9 @@ SpectatorScreen::SpectatorScreen()
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();
     main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
-        [this](sf::Vector2f position) { this->onMouseDown(position); },
-        [this](sf::Vector2f position) { this->onMouseDrag(position); },
-        [this](sf::Vector2f position) { this->onMouseUp(position); }
+        [this](glm::vec2 position) { this->onMouseDown(position); },
+        [this](glm::vec2 position) { this->onMouseDrag(position); },
+        [this](glm::vec2 position) { this->onMouseUp(position); }
     );
 
     new GuiIndicatorOverlays(this);
@@ -37,20 +37,20 @@ void SpectatorScreen::update(float delta)
     }
 }
 
-void SpectatorScreen::onMouseDown(sf::Vector2f position)
+void SpectatorScreen::onMouseDown(glm::vec2 position)
 {
     drag_start_position = position;
     drag_previous_position = position;
 }
 
-void SpectatorScreen::onMouseDrag(sf::Vector2f position)
+void SpectatorScreen::onMouseDrag(glm::vec2 position)
 {
     main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
     position -= (position - drag_previous_position);
     drag_previous_position = position;
 }
 
-void SpectatorScreen::onMouseUp(sf::Vector2f position)
+void SpectatorScreen::onMouseUp(glm::vec2 position)
 {
 }
 

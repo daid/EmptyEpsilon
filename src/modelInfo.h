@@ -15,7 +15,7 @@ public:
     float engine_scale;
     float warp_scale;
 
-    void render(sf::Vector2f position, float rotation);
+    void render(glm::vec2 position, float rotation);
     void renderOverlay(sf::Texture* texture, float alpha);
     void renderShield(float alpha);
     void renderShield(float alpha, float angle);

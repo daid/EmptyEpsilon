@@ -1,9 +1,9 @@
 #ifndef HARDWARE_MAPPING_EFFECTS_H
 #define HARDWARE_MAPPING_EFFECTS_H
 
-#include <SFML/System.hpp>
 #include <unordered_map>
 #include "stringImproved.h"
+#include "timer.h"
 
 class HardwareController;
 
@@ -36,7 +36,8 @@ class HardwareMappingEffectGlow : public HardwareMappingEffect
 private:
     float min_value, max_value;
     float time;
-    sf::Clock clock;
+    sp::Timer timer;
+    bool back;
 public:
     virtual bool configure(std::unordered_map<string, string> settings);
     virtual float onActive();
@@ -48,7 +49,8 @@ class HardwareMappingEffectBlink : public HardwareMappingEffect
 private:
     float on_value, off_value;
     float on_time, off_time;
-    sf::Clock clock;
+    sp::Timer timer;
+    bool on;
 public:
     virtual bool configure(std::unordered_map<string, string> settings);
     virtual float onActive();
@@ -74,7 +76,7 @@ class HardwareMappingEffectNoise : public HardwareMappingEffect
     float smoothness;
     float min_value, max_value;
 
-    sf::Clock clock;
+    sp::Timer timer;
     float start_value;
     float target_value;
 public:

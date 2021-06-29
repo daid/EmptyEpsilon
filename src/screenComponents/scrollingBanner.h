@@ -13,7 +13,7 @@ private:
     static constexpr float scroll_speed_per_second = 150.0f;
     static constexpr float black_area = 200.0f;
 
-    sf::Clock update_clock;
+    sp::SystemStopwatch update_clock;
     float draw_offset;
 };
 

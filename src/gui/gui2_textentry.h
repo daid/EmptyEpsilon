@@ -13,7 +13,9 @@ protected:
     float text_size;
     func_t func;
     func_t enter_func;
-    sf::Clock blink_clock;
+    const float blink_rate = 0.530;
+    sp::SystemTimer blink_timer;
+    bool typing_indicator{false};
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 

@@ -5,7 +5,6 @@
 #include "logging.h"
 
 StreamingAcnDMXDevice::StreamingAcnDMXDevice()
-: update_thread(&StreamingAcnDMXDevice::updateLoop, this)
 {
     for(int n=0; n<512; n++)
         channel_data[n] = 0;
@@ -27,7 +26,7 @@ StreamingAcnDMXDevice::~StreamingAcnDMXDevice()
     if (run_thread)
     {
         run_thread = false;
-        update_thread.wait();
+        update_thread.join();
     }
 }
 
@@ -51,7 +50,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
     }
 
     run_thread = true;
-    update_thread.launch();
+    update_thread = std::move(std::thread(&StreamingAcnDMXDevice::updateLoop, this));
     return true;
 }
 
@@ -115,6 +114,6 @@ void StreamingAcnDMXDevice::updateLoop()
         else
             socket.sendBroadcast(buffer.data(), buffer.size(), acn_port);
 
-        sf::sleep(sf::milliseconds(resend_delay));
+        std::this_thread::sleep_for(std::chrono::milliseconds(resend_delay));
     }
 }
