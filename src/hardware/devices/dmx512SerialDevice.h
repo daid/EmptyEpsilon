@@ -1,9 +1,10 @@
 #ifndef DMX512_SERIAL_DEVICE_H
 #define DMX512_SERIAL_DEVICE_H
 
-#include <SFML/System.hpp>
-#include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"
+
+#include <stdint.h>
+#include <thread>
 
 //The DMX512SerialDevice can talk to Open DMX USB hardware, and just about any hardware which is just an serial port connected to a line driver.
 class SerialPort;
@@ -11,7 +12,7 @@ class DMX512SerialDevice : public HardwareOutputDevice
 {
 private:
     SerialPort* port;
-    sf::Thread update_thread;
+    std::thread update_thread;
 
     bool run_thread;
     int channel_count;

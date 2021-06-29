@@ -1,10 +1,11 @@
 #ifndef PHILIPS_HUE_DEVICE_H
 #define PHILIPS_HUE_DEVICE_H
 
-#include <SFML/System.hpp>
-#include <SFML/Network.hpp>
-#include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"
+
+#include <stdint.h>
+#include <thread>
+#include <mutex>
 
 //The PhilipsHueDevice talks to a philips hue bridge.
 //Documentation of the philips hue API is at:
@@ -48,8 +49,8 @@ private:
         string laststate;
     };
 
-    sf::Thread update_thread;
-    sf::Mutex mutex;
+    std::thread update_thread;
+    std::mutex mutex;
     std::vector<LightInfo> lights;
 
     bool run_thread;

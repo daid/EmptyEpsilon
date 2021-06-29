@@ -13,7 +13,6 @@
 using namespace json11;
 
 PhilipsHueDevice::PhilipsHueDevice()
-: update_thread(&PhilipsHueDevice::updateLoop, this)
 {
     userfile = "philips_hue.name";
     run_thread = false;
@@ -24,7 +23,7 @@ PhilipsHueDevice::~PhilipsHueDevice()
     if (run_thread)
     {
         run_thread = false;
-        update_thread.wait();
+        update_thread.join();
     }
 }
 
@@ -116,7 +115,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             LOG(WARNING) << "Philips hue retry count exceeded.";
             return false;
         }
-        sf::sleep(sf::milliseconds(5000));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
     }
 
     if (username != "")
@@ -167,7 +166,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
     if (username != "")
     {
         run_thread = true;
-        update_thread.launch();
+        update_thread = std::move(std::thread(&PhilipsHueDevice::updateLoop, this));
         return true;
     }
     return false;
@@ -179,7 +178,7 @@ void PhilipsHueDevice::setChannelData(int channel, float value)
     if (light_idx < 0 || light_idx >= light_count)
         return;
 
-    sf::Lock lock(mutex);
+    std::lock_guard<std::mutex> lock(mutex);
     switch(channel % 4)
     {
     case 0: if (lights[light_idx].brightness != value * 254) lights[light_idx].dirty = true; lights[light_idx].brightness = value * 254; break;
@@ -206,7 +205,7 @@ void PhilipsHueDevice::updateLoop()
             {
                 LightInfo info;
                 {
-                    sf::Lock lock(mutex);
+                    std::lock_guard<std::mutex> lock(mutex);
                     lights[n].dirty = false;
                     info = lights[n];
                 }
@@ -227,6 +226,6 @@ void PhilipsHueDevice::updateLoop()
                 }
             }
         }
-        sf::sleep(sf::milliseconds(50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 }

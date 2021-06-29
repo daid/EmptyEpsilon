@@ -241,14 +241,12 @@ void HardwareController::update(float delta)
         }
         if (trigger)
         {
-            event.triggered = true;
-            event.start_time.restart();
+            event.timer.start(event.runtime);
         }
-        if (event.triggered && event.channel_nr < int(channels.size()))
+        if (event.timer.isRunning() && event.channel_nr < int(channels.size()))
         {
             channels[event.channel_nr] = event.effect->onActive();
-            if (event.start_time.getElapsedTime().asSeconds() > event.runtime)
-                event.triggered = false;
+            event.timer.isExpired(); //reset the running state if it is expired.
         }else{
             event.effect->onInactive();
         }
@@ -318,7 +316,6 @@ void HardwareController::createNewHardwareMappingEvent(int channel_number, std::
     event.trigger_variable = trigger;
     event.channel_nr = channel_number;
     event.runtime = settings["runtime"].toFloat();
-    event.triggered = false;
     event.previous_value = 0.0;
 
     event.effect = createEffect(settings);
