@@ -9,6 +9,8 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
+#include <glm/ext/matrix_transform.hpp>
+
 /// An asteroid in space. Which you can fly into and hit. Will do damage.
 REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 {
@@ -114,6 +116,13 @@ float Asteroid::getSize()
     return size;
 }
 
+glm::mat4 Asteroid::getModelMatrix() const
+{
+    auto asteroid_matrix = glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, z));
+    asteroid_matrix = glm::rotate(asteroid_matrix, glm::radians(engine->getElapsedTime() * rotation_speed), glm::vec3(0.f, 0.f, 1.f));
+    return glm::scale(asteroid_matrix, glm::vec3(getRadius()));
+}
+
 /// An asteroid in space. Outside of hit range, just for visuals.
 REGISTER_SCRIPT_SUBCLASS(VisualAsteroid, SpaceObject)
 {
@@ -183,4 +192,11 @@ void VisualAsteroid::setSize(float size)
 float VisualAsteroid::getSize()
 {
     return size;
+}
+
+glm::mat4 VisualAsteroid::getModelMatrix() const
+{
+    auto asteroid_matrix = glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, z));
+    asteroid_matrix = glm::rotate(asteroid_matrix, glm::radians(engine->getElapsedTime() * rotation_speed), glm::vec3(0.f, 0.f, 1.f));
+    return glm::scale(asteroid_matrix, glm::vec3(getRadius()));
 }

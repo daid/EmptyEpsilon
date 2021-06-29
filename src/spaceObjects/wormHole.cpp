@@ -9,6 +9,8 @@
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
+#include <glm/ext/matrix_transform.hpp>
+
 #define FORCE_MULTIPLIER          50.0
 #define FORCE_MAX                 10000.0
 #define ALPHA_MULTIPLIER          10.0
@@ -113,9 +115,10 @@ void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, floa
 // Draw a line toward the target position
 void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
+    auto offset = target_position - getPosition();
     sf::VertexArray a(sf::Lines, 2);
     a[0].position = position;
-    a[1].position = position + (target_position - getPosition()) * scale;
+    a[1].position = position + sf::Vector2f(offset.x, offset.y) * scale;
     a[0].color = sf::Color(255, 255, 255, 32);
     window.draw(a);
 
@@ -143,8 +146,8 @@ void WormHole::collide(Collisionable* target, float collision_force)
     if (!obj) return;
     if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
 
-    sf::Vector2f diff = getPosition() - target->getPosition();
-    float distance = sf::length(diff);
+    auto diff = getPosition() - target->getPosition();
+    float distance = glm::length(diff);
     float force = (getRadius() * getRadius() * FORCE_MULTIPLIER) / (distance * distance);
 
     P<SpaceShip> spaceship = P<Collisionable>(target);
@@ -158,8 +161,7 @@ void WormHole::collide(Collisionable* target, float collision_force)
         force = FORCE_MAX;
         if (isServer())
             target->setPosition( (target_position +
-                                  sf::Vector2f(random(-TARGET_SPREAD, TARGET_SPREAD),
-                                               random(-TARGET_SPREAD, TARGET_SPREAD))));
+                                  glm::vec2(random(-TARGET_SPREAD, TARGET_SPREAD), random(-TARGET_SPREAD, TARGET_SPREAD))));
         if (on_teleportation.isSet())
         {
             on_teleportation.call<void>(P<WormHole>(this), obj);
@@ -174,12 +176,12 @@ void WormHole::collide(Collisionable* target, float collision_force)
     target->setPosition(target->getPosition() + diff / distance * update_delta * force);
 }
 
-void WormHole::setTargetPosition(sf::Vector2f v)
+void WormHole::setTargetPosition(glm::vec2 v)
 {
     target_position = v;
 }
 
-sf::Vector2f WormHole::getTargetPosition()
+glm::vec2 WormHole::getTargetPosition()
 {
     return target_position;
 }
@@ -187,4 +189,9 @@ sf::Vector2f WormHole::getTargetPosition()
 void WormHole::onTeleportation(ScriptSimpleCallback callback)
 {
     this->on_teleportation = callback;
+}
+
+glm::mat4 WormHole::getModelMatrix() const
+{
+    return glm::identity<glm::mat4>();
 }

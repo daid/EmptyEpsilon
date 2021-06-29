@@ -51,8 +51,9 @@ message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
 
 # Dependencies
 
-# Setup OpenGl
+# Setup OpenGL
 if(NOT ANDROID)
+    set(OpenGL_GL_PREFERENCE LEGACY)
     find_package(OpenGL REQUIRED)
 endif()
 
@@ -60,8 +61,6 @@ endif()
 # Use SP provided json library.
 set(SERIOUSPROTON_WITH_JSON ON CACHE BOOL "" FORCE)
 add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" EXCLUDE_FROM_ALL)
-
-message(STATUS "Crash Logger is: ${ENABLE_CRASH_LOGGER}")
 
 set(EXTERNALS_DIR "${PROJECT_BINARY_DIR}/externals")
 set(DOWNLOADS_DIR "${PROJECT_BINARY_DIR}/downloads")
@@ -291,6 +290,197 @@ set(SOURCES
     src/hardware/devices/uDMXDevice.cpp
     src/hardware/devices/virtualOutputDevice.cpp
     src/hardware/devices/philipsHueDevice.cpp
+
+    src/ai/aiFactory.h
+    src/ai/ai.h
+    src/ai/evasionAI.h
+    src/ai/fighterAI.h
+    src/ai/missileVolleyAI.h
+    src/beamTemplate.h
+    src/commsScriptInterface.h
+    src/discord.h
+    src/epsilonServer.h
+    src/factionInfo.h
+    src/featureDefs.h
+    src/gameGlobalInfo.h
+    src/gameStateLogger.h
+    src/glObjects.h
+    src/GMActions.h
+    src/GMMessage.h
+    src/GMScriptCallback.h
+    src/gui/colorConfig.h
+    src/gui/debugRenderer.h
+    src/gui/gui2_advancedscrolltext.h
+    src/gui/gui2_arrowbutton.h
+    src/gui/gui2_arrow.h
+    src/gui/gui2_autolayout.h
+    src/gui/gui2_button.h
+    src/gui/gui2_canvas.h
+    src/gui/gui2_container.h
+    src/gui/gui2_element.h
+    src/gui/gui2_entrylist.h
+    src/gui/gui2_image.h
+    src/gui/gui2_keyvaluedisplay.h
+    src/gui/gui2_label.h
+    src/gui/gui2_listbox.h
+    src/gui/gui2_overlay.h
+    src/gui/gui2_panel.h
+    src/gui/gui2_progressbar.h
+    src/gui/gui2_progressslider.h
+    src/gui/gui2_resizabledialog.h
+    src/gui/gui2_rotationdial.h
+    src/gui/gui2_scrollbar.h
+    src/gui/gui2_scrolltext.h
+    src/gui/gui2_selector.h
+    src/gui/gui2_slider.h
+    src/gui/gui2_textentry.h
+    src/gui/gui2_togglebutton.h
+    src/gui/hotkeyBinder.h
+    src/gui/hotkeyConfig.h
+    src/gui/joystickConfig.h
+    src/gui/mouseRenderer.h
+    src/gui/scriptError.h
+    src/hardware/devices/dmx512SerialDevice.h
+    src/hardware/devices/enttecDMXProDevice.h
+    src/hardware/devices/philipsHueDevice.h
+    src/hardware/devices/sACNDMXDevice.h
+    src/hardware/devices/uDMXDevice.h
+    src/hardware/devices/virtualOutputDevice.h
+    src/hardware/hardwareController.h
+    src/hardware/hardwareMappingEffects.h
+    src/hardware/hardwareOutputDevice.h
+    src/hardware/serialDriver.h
+    src/httpScriptAccess.h
+    src/main.h
+    src/math
+    src/math/centerOfMass.h
+    src/math/triangulate.h
+    src/menus/autoConnectScreen.h
+    src/menus/hotkeyMenu.h
+    src/menus/joinServerMenu.h
+    src/menus/mainMenus.h
+    src/menus/optionsMenu.h
+    src/menus/serverBrowseMenu.h
+    src/menus/serverCreationScreen.h
+    src/menus/shipSelectionScreen.h
+    src/menus/tutorialMenu.h
+    src/mesh.h
+    src/missileWeaponData.h
+    src/modelData.h
+    src/modelInfo.h
+    src/mouseCalibrator.h
+    src/packResourceProvider.h
+    src/particleEffect.h
+    src/pathPlanner.h
+    src/playerInfo.h
+    src/preferenceManager.h
+    src/repairCrew.h
+    src/scenarioInfo.h
+    src/scienceDatabase.h
+    src/screenComponents/aimLock.h
+    src/screenComponents/alertOverlay.h
+    src/screenComponents/beamFrequencySelector.h
+    src/screenComponents/beamTargetSelector.h
+    src/screenComponents/combatManeuver.h
+    src/screenComponents/commsOverlay.h
+    src/screenComponents/customShipFunctions.h
+    src/screenComponents/databaseView.h
+    src/screenComponents/dockingButton.h
+    src/screenComponents/frequencyCurve.h
+    src/screenComponents/globalMessage.h
+    src/screenComponents/hackingDialog.h
+    src/screenComponents/helpOverlay.h
+    src/screenComponents/impulseControls.h
+    src/screenComponents/impulseSound.h
+    src/screenComponents/indicatorOverlays.h
+    src/screenComponents/jumpControls.h
+    src/screenComponents/jumpIndicator.h
+    src/screenComponents/lightsOut.h
+    src/screenComponents/mainScreenControls.h
+    src/screenComponents/mineSweeper.h
+    src/screenComponents/miniGame.h
+    src/screenComponents/missileTubeControls.h
+    src/screenComponents/noiseOverlay.h
+    src/screenComponents/onScreenKeyboard.h
+    src/screenComponents/openCommsButton.h
+    src/screenComponents/powerDamageIndicator.h
+    src/screenComponents/radarView.h
+    src/screenComponents/rawScannerDataRadarOverlay.h
+    src/screenComponents/rotatingModelView.h
+    src/screenComponents/scanningDialog.h
+    src/screenComponents/scanTargetButton.h
+    src/screenComponents/scrollingBanner.h
+    src/screenComponents/selfDestructButton.h
+    src/screenComponents/selfDestructEntry.h
+    src/screenComponents/selfDestructIndicator.h
+    src/screenComponents/shieldFreqencySelect.h
+    src/screenComponents/shieldsEnableButton.h
+    src/screenComponents/shipDestroyedPopup.h
+    src/screenComponents/shipInternalView.h
+    src/screenComponents/shipsLogControl.h
+    src/screenComponents/signalQualityIndicator.h
+    src/screenComponents/snapSlider.h
+    src/screenComponents/targetsContainer.h
+    src/screenComponents/viewport3d.h
+    src/screenComponents/viewportMainScreen.h
+    src/screenComponents/warpControls.h
+    src/screens/cinematicViewScreen.h
+    src/screens/crew1/singlePilotScreen.h
+    src/screens/crew4/engineeringAdvancedScreen.h
+    src/screens/crew4/operationsScreen.h
+    src/screens/crew4/tacticalScreen.h
+    src/screens/crew6/engineeringScreen.h
+    src/screens/crew6/helmsScreen.h
+    src/screens/crew6/relayScreen.h
+    src/screens/crew6/scienceScreen.h
+    src/screens/crew6/weaponsScreen.h
+    src/screens/crewStationScreen.h
+    src/screens/extra/commsScreen.h
+    src/screens/extra/damcon.h
+    src/screens/extra/databaseScreen.h
+    src/screens/extra/powerManagement.h
+    src/screens/extra/shipLogScreen.h
+    src/screens/gm/chatDialog.h
+    src/screens/gm/gameMasterScreen.h
+    src/screens/gm/globalMessageEntryView.h
+    src/screens/gm/objectCreationView.h
+    src/screens/gm/tweak.h
+    src/screens/mainScreen.h
+    src/screens/spectatorScreen.h
+    src/screens/topDownScreen.h
+    src/screens/windowScreen.h
+    src/script.h
+    src/shaderRegistry.h
+    src/shipTemplate.h
+    src/spaceObjects/artifact.h
+    src/spaceObjects/asteroid.h
+    src/spaceObjects/beamEffect.h
+    src/spaceObjects/blackHole.h
+    src/spaceObjects/cpuShip.h
+    src/spaceObjects/electricExplosionEffect.h
+    src/spaceObjects/explosionEffect.h
+    src/spaceObjects/mine.h
+    src/spaceObjects/missiles/EMPMissile.h
+    src/spaceObjects/missiles/homingMissile.h
+    src/spaceObjects/missiles/hvli.h
+    src/spaceObjects/missiles/missileWeapon.h
+    src/spaceObjects/missiles/nuke.h
+    src/spaceObjects/nebula.h
+    src/spaceObjects/planet.h
+    src/spaceObjects/playerSpaceship.h
+    src/spaceObjects/scanProbe.h
+    src/spaceObjects/shipTemplateBasedObject.h
+    src/spaceObjects/spaceObject.h
+    src/spaceObjects/spaceship.h
+    src/spaceObjects/spaceshipParts/beamWeapon.h
+    src/spaceObjects/spaceshipParts/weaponTube.h
+    src/spaceObjects/spaceStation.h
+    src/spaceObjects/supplyDrop.h
+    src/spaceObjects/warpJammer.h
+    src/spaceObjects/wormHole.h
+    src/spaceObjects/zone.h
+    src/threatLevelEstimate.h
+    src/tutorialGame.h
 )
 
 if (WITH_DISCORD)
@@ -313,7 +503,6 @@ math(EXPR VERSION_NUMBER "${PROJECT_VERSION_MAJOR} * 10000 + ${PROJECT_VERSION_M
 
 target_compile_definitions(seriousproton_deps
     INTERFACE
-        WINDOW_TITLE="${PROJECT_NAME}"
         VERSION_NUMBER=${VERSION_NUMBER}
 
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources

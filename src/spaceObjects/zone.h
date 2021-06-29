@@ -14,7 +14,7 @@ public:
     virtual bool canHideInNebula()  override { return false; }
 
     void setColor(int r, int g, int b);
-    void setPoints(std::vector<sf::Vector2f> points);
+    void setPoints(std::vector<glm::vec2> points);
     void setLabel(string label);
     string getLabel();
     bool isInside(P<SpaceObject> obj);
@@ -23,8 +23,8 @@ public:
 
 private:
     sf::Color color;
-    std::vector<sf::Vector2f> outline;
-    std::vector<sf::Vector2f> triangles;
+    std::vector<glm::vec2> outline;
+    std::vector<glm::vec2> triangles;
     string label;
 };
 

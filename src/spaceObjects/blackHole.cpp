@@ -89,8 +89,8 @@ void BlackHole::collide(Collisionable* target, float collision_force)
     if (!obj) return;
     if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
 
-    sf::Vector2f diff = getPosition() - target->getPosition();
-    float distance = sf::length(diff);
+    auto diff = getPosition() - target->getPosition();
+    float distance = glm::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
     DamageInfo info(NULL, DT_Kinetic, getPosition());
     if (force > 10000.0)

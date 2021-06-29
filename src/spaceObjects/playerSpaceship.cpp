@@ -681,7 +681,7 @@ void PlayerSpaceship::update(float delta)
                     {
                         ExplosionEffect* e = new ExplosionEffect();
                         e->setSize(self_destruct_size * 0.67f);
-                        e->setPosition(getPosition() + sf::rotateVector(sf::Vector2f(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
+                        e->setPosition(getPosition() + rotateVec2(glm::vec2(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
                         e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
@@ -1550,7 +1550,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_ADD_WAYPOINT:
         {
-            sf::Vector2f position;
+            glm::vec2 position{};
             packet >> position;
             if (waypoints.size() < 9)
                 waypoints.push_back(position);
@@ -1567,7 +1567,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
     case CMD_MOVE_WAYPOINT:
         {
             int32_t index;
-            sf::Vector2f position;
+            glm::vec2 position{};
             packet >> index >> position;
             if (index >= 0 && index < int(waypoints.size()))
                 waypoints[index] = position;
@@ -1633,7 +1633,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
     case CMD_LAUNCH_PROBE:
         if (scan_probe_stock > 0)
         {
-            sf::Vector2f target;
+            glm::vec2 target{};
             packet >> target;
             P<ScanProbe> p = new ScanProbe();
             p->setPosition(getPosition());
@@ -1924,7 +1924,7 @@ void PlayerSpaceship::commandSetShieldFrequency(int32_t frequency)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandAddWaypoint(sf::Vector2f position)
+void PlayerSpaceship::commandAddWaypoint(glm::vec2 position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_ADD_WAYPOINT << position;
@@ -1938,7 +1938,7 @@ void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandMoveWaypoint(int32_t index, sf::Vector2f position)
+void PlayerSpaceship::commandMoveWaypoint(int32_t index, glm::vec2 position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_MOVE_WAYPOINT << index << position;
@@ -1982,7 +1982,7 @@ void PlayerSpaceship::commandCombatManeuverStrafe(float amount)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandLaunchProbe(sf::Vector2f target_position)
+void PlayerSpaceship::commandLaunchProbe(glm::vec2 target_position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_LAUNCH_PROBE << target_position;

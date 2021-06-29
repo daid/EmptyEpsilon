@@ -90,7 +90,7 @@ void TopDownScreen::update(float delta)
     // If locked onto a player ship, move the camera along with it.
     if (camera_lock_toggle->getValue() && target)
     {
-        sf::Vector2f target_position = target->getPosition();
+        auto target_position = target->getPosition();
 
         camera_position.x = target_position.x;
         camera_position.y = target_position.y;

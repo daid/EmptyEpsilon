@@ -23,8 +23,8 @@ void GuiSignalQualityIndicator::onDraw(sf::RenderTarget& window)
     float noise[3] = {error_noise, error_noise, error_noise};
     for(int n=0; n<3; n++)
     {
-        phase[n] = clock.getElapsedTime().asSeconds() * (2.0f + error_phase * (100.0f + n * 45.0f));
-        phase[n] = clock.getElapsedTime().asSeconds() + error_phase * (100.0f + n * 45.0f);
+        phase[n] = clock.get() * (2.0f + error_phase * (100.0f + n * 45.0f));
+        phase[n] = clock.get() + error_phase * (100.0f + n * 45.0f);
         freq[n] = 2.0f * float(M_PI) / float(r.getVertexCount()) * target_period * (1.0 + (error_period * (0.0 + n * 2.2)));
     }
     for(unsigned int n=0; n<r.getVertexCount(); n++)

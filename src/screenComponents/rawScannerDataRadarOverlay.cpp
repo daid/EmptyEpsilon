@@ -14,7 +14,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
     if (!my_spaceship)
         return;
 
-    sf::Vector2f view_position = radar->getViewPosition();
+    auto view_position = radar->getViewPosition();
     float view_rotation = radar->getViewRotation();
 
     // Cap the number of signature points, which determines the raw data's
@@ -33,7 +33,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
 
         // Initialize angle, distance, and scale variables.
         float a_0, a_1;
-        float dist = sf::length(obj->getPosition() - view_position);
+        float dist = glm::length(obj->getPosition() - view_position);
         float scale = 1.0;
 
         // If the object is more than twice as far away as the maximum radar
@@ -55,7 +55,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
             // Otherwise, measure the affected range of angles by the object's
             // distance and radius.
             float a_diff = asinf(obj->getRadius() / dist) / M_PI * 180.0f;
-            float a_center = sf::vector2ToAngle(obj->getPosition() - view_position);
+            float a_center = vec2ToAngle(obj->getPosition() - view_position);
             a_0 = a_center - a_diff;
             a_1 = a_center + a_diff;
         }

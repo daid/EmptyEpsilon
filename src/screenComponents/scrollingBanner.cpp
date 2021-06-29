@@ -9,7 +9,7 @@ GuiScrollingBanner::GuiScrollingBanner(GuiContainer* owner)
 
 void GuiScrollingBanner::onDraw(sf::RenderTarget& window)
 {
-    draw_offset += update_clock.restart().asSeconds() * scroll_speed_per_second;
+    draw_offset += update_clock.restart() * scroll_speed_per_second;
 
     if (!gameGlobalInfo || gameGlobalInfo->banner_string == "")
     {

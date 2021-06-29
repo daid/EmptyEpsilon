@@ -7,6 +7,8 @@
 
 #include "shaderRegistry.h"
 
+#include <glm/ext/matrix_transform.hpp>
+
 #if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
@@ -146,9 +148,9 @@ void BeamEffect::update(float delta)
         target = game_client->getObjectById(target_id);
     }
     if (source)
-        setPosition(source->getPosition() + rotateVector(sf::Vector2f(sourceOffset.x, sourceOffset.y), source->getRotation()));
+        setPosition(source->getPosition() + rotateVec2(glm::vec2(sourceOffset.x, sourceOffset.y), source->getRotation()));
     if (target)
-        targetLocation = target->getPosition() + sf::Vector2f(targetOffset.x, targetOffset.y);
+        targetLocation = target->getPosition() + glm::vec2(targetOffset.x, targetOffset.y);
 
     if (source && delta > 0 && !beam_sound_played)
     {
@@ -170,7 +172,7 @@ void BeamEffect::setSource(P<SpaceObject> source, sf::Vector3f offset)
     update(0);
 }
 
-void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
+void BeamEffect::setTarget(P<SpaceObject> target, glm::vec2 hitLocation)
 {
     target_id = target->getMultiplayerId();
     float r = target->getRadius();
@@ -186,4 +188,10 @@ void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
     sf::Vector3f hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f targetPos(target->getPosition().x, target->getPosition().y, 0);
     hitNormal = sf::normalize(targetPos - hitPos);
+}
+
+glm::mat4 BeamEffect::getModelMatrix() const
+{
+    auto position = getPosition();
+    return glm::translate(SpaceObject::getModelMatrix(), -glm::vec3(position.x, position.y, 0.f));
 }

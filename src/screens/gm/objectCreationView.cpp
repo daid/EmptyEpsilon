@@ -152,7 +152,7 @@ bool GuiObjectCreationView::onMouseDown(sf::Vector2f position)
 
 void GuiObjectCreationView::setCreateScript(const string create, const string configure)
 {
-    gameGlobalInfo->on_gm_click = [create, configure] (sf::Vector2f position)
+    gameGlobalInfo->on_gm_click = [create, configure] (glm::vec2 position)
     {
         gameMasterActions->commandRunScript(create + ":setPosition("+string(position.x)+","+string(position.y)+")" + configure);
     };

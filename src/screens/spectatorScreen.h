@@ -12,17 +12,17 @@ class SpectatorScreen : public GuiCanvas, public Updatable
 private:
     GuiRadarView* main_radar;
 
-    sf::Vector2f drag_start_position;
-    sf::Vector2f drag_previous_position;
+    glm::vec2 drag_start_position{};
+    glm::vec2 drag_previous_position{};
 public:
     SpectatorScreen();
     virtual ~SpectatorScreen() = default;
 
     virtual void update(float delta);
 
-    void onMouseDown(sf::Vector2f position);
-    void onMouseDrag(sf::Vector2f position);
-    void onMouseUp(sf::Vector2f position);
+    void onMouseDown(glm::vec2 position);
+    void onMouseDrag(glm::vec2 position);
+    void onMouseUp(glm::vec2 position);
 
     void onKey(sf::Event::KeyEvent key, int unicode);
 };

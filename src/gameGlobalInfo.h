@@ -81,7 +81,7 @@ public:
     ScriptSimpleCallback on_new_player_ship;
     bool allow_new_player_ships = true;
 
-    std::function<void(sf::Vector2f)> on_gm_click;
+    std::function<void(glm::vec2)> on_gm_click;
 
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
@@ -114,7 +114,7 @@ public:
 };
 
 string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
-string getSectorName(sf::Vector2f position);
+string getSectorName(glm::vec2 position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 REGISTER_MULTIPLAYER_ENUM(EHackingGames);

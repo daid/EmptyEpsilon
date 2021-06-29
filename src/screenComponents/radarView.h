@@ -22,8 +22,8 @@ public:
         FriendlysShortRangeFogOfWar
     };
 
-    typedef std::function<void(sf::Vector2f position)> func_t;
-    typedef std::function<void(float position)>        ffunc_t;
+    typedef std::function<void(glm::vec2 position)> pfunc_t;
+    typedef std::function<void(float position)>     ffunc_t;
 private:
     sf::RenderTexture background_texture;
 
@@ -32,10 +32,10 @@ private:
     public:
         constexpr static float total_lifetime = 60.0f;
 
-        sf::Vector2f position;
+        glm::vec2 position{};
         float end_of_life;
 
-        GhostDot(sf::Vector2f pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
+        GhostDot(glm::vec2 pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
     };
     std::vector<GhostDot> ghost_dots;
     float next_ghost_dot_update;
@@ -43,7 +43,7 @@ private:
     TargetsContainer* targets;
     GuiMissileTubeControls* missile_tube_controls;
 
-    sf::Vector2f view_position;
+    glm::vec2 view_position{0, 0};
     float view_rotation;
     bool auto_center_on_my_ship;
     bool auto_rotate_on_my_ship;
@@ -61,9 +61,9 @@ private:
     uint8_t background_alpha;
     ERadarStyle style;
     EFogOfWarStyle fog_style;
-    func_t mouse_down_func;
-    func_t mouse_drag_func;
-    func_t mouse_up_func;
+    pfunc_t mouse_down_func;
+    pfunc_t mouse_drag_func;
+    pfunc_t mouse_up_func;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -97,18 +97,18 @@ public:
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
     bool getAutoRotating() { return auto_rotate_on_my_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
-    GuiRadarView* setCallbacks(func_t mouse_down_func, func_t mouse_drag_func, func_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
-    GuiRadarView* setViewPosition(sf::Vector2f view_position) { this->view_position = view_position; return this; }
-    sf::Vector2f getViewPosition() { return view_position; }
+    GuiRadarView* setCallbacks(pfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
+    glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
 
-    sf::Vector2f worldToScreen(sf::Vector2f world_position);
-    sf::Vector2f screenToWorld(sf::Vector2f screen_position);
+    sf::Vector2f worldToScreen(glm::vec2 world_position);
+    glm::vec2 screenToWorld(sf::Vector2f screen_position);
 
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseDrag(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onMouseDown(sf::Vector2f position) override;
+    virtual void onMouseDrag(sf::Vector2f position) override;
+    virtual void onMouseUp(sf::Vector2f position) override;
 private:
     void updateGhostDots();
 

@@ -38,13 +38,13 @@ private:
 public:
     PathPlanner(float my_size);
 
-    std::vector<sf::Vector2f> route;
+    std::vector<glm::vec2> route;
 
-    void plan(sf::Vector2f start, sf::Vector2f end);
+    void plan(glm::vec2 start, glm::vec2 end);
     void clear();
 private:
-    void recursivePlan(sf::Vector2f start, sf::Vector2f end, int& recursion_counter);
-    bool checkToAvoid(sf::Vector2f start, sf::Vector2f end, sf::Vector2f& new_point, sf::Vector2f* alt_point=NULL);
+    void recursivePlan(glm::vec2 start, glm::vec2 end, int& recursion_counter);
+    bool checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_point, glm::vec2* alt_point=NULL);
 };
 
 #endif//PATH_PLANNER_H

@@ -27,7 +27,7 @@ class CpuShip : public SpaceShip
     static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
-    sf::Vector2f order_target_location; //Server only
+    glm::vec2 order_target_location{};  //Server only
     P<SpaceObject> order_target;        //Server only
     ShipAI* ai;
 
@@ -42,19 +42,19 @@ public:
 
     void orderIdle();
     void orderRoaming();
-    void orderRoamingAt(sf::Vector2f position);
+    void orderRoamingAt(glm::vec2 position);
     void orderRetreat(P<SpaceObject> object);
     void orderStandGround();
-    void orderDefendLocation(sf::Vector2f position);
+    void orderDefendLocation(glm::vec2 position);
     void orderDefendTarget(P<SpaceObject> object);
-    void orderFlyFormation(P<SpaceObject> object, sf::Vector2f offset);
-    void orderFlyTowards(sf::Vector2f target);
-    void orderFlyTowardsBlind(sf::Vector2f target);
+    void orderFlyFormation(P<SpaceObject> object, glm::vec2 offset);
+    void orderFlyTowards(glm::vec2 target);
+    void orderFlyTowardsBlind(glm::vec2 target);
     void orderAttack(P<SpaceObject> object);
     void orderDock(P<SpaceObject> object);
 
     EAIOrder getOrder() { return orders; }
-    sf::Vector2f getOrderTargetLocation() { return order_target_location; }
+    glm::vec2 getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
 
     virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;

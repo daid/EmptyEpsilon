@@ -40,7 +40,7 @@ void WindowScreen::update(float delta)
         camera_yaw = my_spaceship->getRotation() + angle;
         camera_pitch = 0.0f;
 
-        sf::Vector2f position = my_spaceship->getPosition() + sf::rotateVector(sf::Vector2f(my_spaceship->getRadius(), 0), camera_yaw);
+        auto position = my_spaceship->getPosition() + rotateVec2(glm::vec2(my_spaceship->getRadius(), 0), camera_yaw);
 
         camera_position.x = position.x;
         camera_position.y = position.y;

@@ -53,7 +53,7 @@ float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
     threat += ship->hull_max - ship->hull_strength;
 
     float radius = 7000.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(ship->getPosition() - sf::Vector2f(radius, radius), ship->getPosition() + sf::Vector2f(radius, radius));
+    PVector<Collisionable> objectList = CollisionManager::queryArea(ship->getPosition() - glm::vec2(radius, radius), ship->getPosition() + glm::vec2(radius, radius));
     foreach(Collisionable, obj, objectList)
     {
         P<SpaceShip> other_ship = obj;

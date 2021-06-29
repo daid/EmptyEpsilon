@@ -87,7 +87,7 @@ void ModelData::setRadius(float radius)
     this->radius = radius;
 }
 
-void ModelData::setCollisionBox(sf::Vector2f collision_box)
+void ModelData::setCollisionBox(glm::vec2 collision_box)
 {
     this->collision_box = collision_box;
 }
@@ -136,11 +136,11 @@ sf::Vector3f ModelData::getBeamPosition(int index)
     return (beam_position[index] + mesh_offset) * scale;
 }
 
-sf::Vector2f ModelData::getBeamPosition2D(int index)
+glm::vec2 ModelData::getBeamPosition2D(int index)
 {
     if (index < 0 || index >= (int)beam_position.size())
-        return sf::Vector2f(0.0f, 0.0f);
-    return sf::Vector2f(beam_position[index].x + mesh_offset.x, beam_position[index].y + mesh_offset.y) * scale;
+        return glm::vec2(0.0f, 0.0f);
+    return glm::vec2(beam_position[index].x + mesh_offset.x, beam_position[index].y + mesh_offset.y) * scale;
 }
 
 sf::Vector3f ModelData::getTubePosition(int index)
@@ -150,11 +150,11 @@ sf::Vector3f ModelData::getTubePosition(int index)
     return (tube_position[index] + mesh_offset) * scale;
 }
 
-sf::Vector2f ModelData::getTubePosition2D(int index)
+glm::vec2 ModelData::getTubePosition2D(int index)
 {
     if (index < 0 || index >= (int)tube_position.size())
-        return sf::Vector2f(0.0f, 0.0f);
-    return sf::Vector2f(tube_position[index].x + mesh_offset.x, tube_position[index].y + mesh_offset.y) * scale;
+        return glm::vec2(0.0f, 0.0f);
+    return glm::vec2(tube_position[index].x + mesh_offset.x, tube_position[index].y + mesh_offset.y) * scale;
 }
 
 void ModelData::load()

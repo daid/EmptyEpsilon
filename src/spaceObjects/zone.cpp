@@ -46,13 +46,15 @@ void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float sc
     sf::VertexArray triangle_array(sf::Triangles, triangles.size());
     for(unsigned int n=0; n<outline.size() + 1; n++)
     {
-        outline_array[n].position = position + sf::rotateVector(outline[n % outline.size()] * scale, -rotation);
+        sf::Vector2f v(outline[n % outline.size()].x, outline[n % outline.size()].y);
+        outline_array[n].position = position + sf::rotateVector(v * scale, -rotation);
         outline_array[n].color = color;
         outline_array[n].color.a = 128;
     }
     for(unsigned int n=0; n<triangles.size(); n++)
     {
-        triangle_array[n].position = position + sf::rotateVector(triangles[n] * scale, -rotation);
+        sf::Vector2f v(triangles[n].x, triangles[n].y);
+        triangle_array[n].position = position + sf::rotateVector(v * scale, -rotation);
         triangle_array[n].color = color;
         triangle_array[n].color.a = 64;
     }
@@ -88,20 +90,20 @@ void Zone::setColor(int r, int g, int b)
     color = sf::Color(r, g, b);
 }
 
-void Zone::setPoints(std::vector<sf::Vector2f> points)
+void Zone::setPoints(std::vector<glm::vec2> points)
 {
     triangles.clear();
 
-    sf::Vector2f position = centerOfMass(points);
+    glm::vec2 position = centerOfMass(points);
     float radius = 1;
     for(auto& p : points)
     {
         p -= position;
-        radius = std::max(radius, sf::length(p));
+        radius = std::max(radius, glm::length(p));
     }
 
     outline = points;
-    Triangulate<float>::process(points, triangles);
+    Triangulate::process(points, triangles);
 
     setPosition(position);
     setRadius(radius);

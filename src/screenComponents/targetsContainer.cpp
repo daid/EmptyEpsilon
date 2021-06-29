@@ -46,10 +46,10 @@ void TargetsContainer::set(PVector<SpaceObject> objs)
     entries = objs;
 }
 
-void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ESelectionType selection_type)
+void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
     P<SpaceObject> target;
-    PVector<Collisionable> list = CollisionManager::queryArea(position - sf::Vector2f(max_range, max_range), position + sf::Vector2f(max_range, max_range));
+    PVector<Collisionable> list = CollisionManager::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
     foreach(Collisionable, obj, list)
     {
         P<SpaceObject> spaceObject = obj;
@@ -66,7 +66,7 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
                     continue;
                 break;
             }
-            if (!target || sf::length(position - spaceObject->getPosition()) < sf::length(position - target->getPosition()))
+            if (!target || glm::length2(position - spaceObject->getPosition()) < glm::length2(position - target->getPosition()))
                 target = spaceObject;
         }
     }
@@ -76,9 +76,9 @@ void TargetsContainer::setToClosestTo(sf::Vector2f position, float max_range, ES
     {
         for(int n=0; n<my_spaceship->getWaypointCount(); n++)
         {
-            if ((my_spaceship->waypoints[n] - position) < max_range)
+            if (glm::length2(my_spaceship->waypoints[n] - position) < max_range*max_range)
             {
-                if (!target || sf::length(position - my_spaceship->waypoints[n]) < sf::length(position - target->getPosition()))
+                if (!target || glm::length2(position - my_spaceship->waypoints[n]) < glm::length2(position - target->getPosition()))
                 {
                     clear();
                     waypoint_selection_index = n;

@@ -171,15 +171,15 @@ void BeamWeapon::update(float delta)
     if (game_server && range > 0.0 && target && parent->isEnemy(target) && delta > 0 && parent->current_warp == 0.0 && parent->docking_state == DS_NotDocking)
     {
         // Get the angle to the target.
-        sf::Vector2f diff = target->getPosition() - (parent->getPosition() + sf::rotateVector(sf::Vector2f(position.x, position.y), parent->getRotation()));
-        float distance = sf::length(diff) - target->getRadius() / 2.0;
+        auto diff = target->getPosition() - (parent->getPosition() + rotateVec2(glm::vec2(position.x, position.y), parent->getRotation()));
+        float distance = glm::length(diff) - target->getRadius() / 2.0;
 
         // We also only care if the target is within no more than its
         // range * 1.3, which is when we want to start rotating the turret.
         // TODO: Add a manual aim override similar to weapon tubes.
         if (distance < range * 1.3)
         {
-            float angle = sf::vector2ToAngle(diff);
+            float angle = vec2ToAngle(diff);
             float angle_diff = sf::angleDifference(direction + parent->getRotation(), angle);
 
             if (turret_arc > 0)
@@ -241,7 +241,7 @@ void BeamWeapon::fire(P<SpaceObject> target, ESystem system_target)
 
     cooldown = cycle_time; // Reset time of weapon
 
-    sf::Vector2f hit_location = target->getPosition() - sf::normalize(target->getPosition() - parent->getPosition()) * target->getRadius();
+    auto hit_location = target->getPosition() - glm::normalize(target->getPosition() - parent->getPosition()) * target->getRadius();
     P<BeamEffect> effect = new BeamEffect();
     effect->setSource(parent, position);
     effect->setTarget(target, hit_location);
