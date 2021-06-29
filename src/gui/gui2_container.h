@@ -2,7 +2,6 @@
 #define GUI2_CONTAINER_H
 
 #include <list>
-#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "gui/joystickConfig.h"
 

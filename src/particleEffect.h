@@ -1,7 +1,7 @@
 #ifndef PARTICLE_EFFECT_H
 #define PARTICLE_EFFECT_H
 
-#include <SFML/System.hpp>
+#include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "engine.h"

@@ -1,7 +1,7 @@
 #ifndef MODEL_DATA_H
 #define MODEL_DATA_H
 
-#include <SFML/System.hpp>
+#include <SFML/System/Vector3.hpp>
 #include <unordered_map>
 
 #include "engine.h"

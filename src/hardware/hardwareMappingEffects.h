@@ -1,7 +1,6 @@
 #ifndef HARDWARE_MAPPING_EFFECTS_H
 #define HARDWARE_MAPPING_EFFECTS_H
 
-#include <SFML/System.hpp>
 #include <unordered_map>
 #include "stringImproved.h"
 #include "timer.h"

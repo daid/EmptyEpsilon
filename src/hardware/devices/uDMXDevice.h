@@ -1,7 +1,6 @@
 #ifndef UDMX_DEVICE_H
 #define UDMX_DEVICE_H
 
-#include <SFML/System.hpp>
 #include <stdint.h>
 #include "hardware/hardwareOutputDevice.h"
 
