@@ -5,6 +5,8 @@
 
 #include "scriptInterface.h"
 
+#include <set>
+
 REGISTER_SCRIPT_CLASS(ScienceDatabase)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(ScienceDatabase, setName);
