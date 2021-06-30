@@ -45,7 +45,7 @@ void BlackHole::draw3DTransparent()
         glm::vec3{}, {0.f, 1.f},
         glm::vec3{}, {1.f, 1.f},
         glm::vec3{}, {1.f, 0.f},
-        glm::vec3{}), {0.f, 0.f}
+        glm::vec3{}, {0.f, 0.f}
     };
 
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("blackHole3d.png")->getNativeHandle());
