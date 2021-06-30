@@ -33,9 +33,9 @@ bool GuiRotationDial::onMouseDown(sf::Vector2f position)
     float radius = std::min(rect.width, rect.height) / 2.0f;
 
     sf::Vector2f diff = position - center;
-    if (diff > radius)
+    if (sf::length(diff) > radius)
         return false;
-    if (diff < radius * 0.875f)
+    if (sf::length(diff) < radius * 0.875f)
         return false;
 
     onMouseDrag(position);

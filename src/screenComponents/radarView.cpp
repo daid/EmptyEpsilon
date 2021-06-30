@@ -941,7 +941,7 @@ bool GuiRadarView::onMouseDown(sf::Vector2f position)
     if (style == Circular || style == CircularMasked)
     {
         float radius = std::min(rect.width, rect.height) / 2.0f;
-        if (position - getCenterPoint() > radius)
+        if (sf::length(position - getCenterPoint()) > radius)
             return false;
     }
     if (!mouse_down_func && !mouse_drag_func && !mouse_up_func)
