@@ -14,8 +14,8 @@
 #if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
-    sf::Vector3f vertex;
-    sf::Vector2f texcoords;
+    glm::vec3 vertex;
+    glm::vec2 texcoords;
 };
 #endif
 
@@ -31,41 +31,41 @@ public:
     {
         max_iterations = iterations;
 
-        createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(0, 1, 0), sf::Vector3f(1, 0, 0), sf::Vector2f(0, 0), sf::Vector2f(0, 0.5), sf::Vector2f(0.25, 0.5));
-        createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(1, 0, 0), sf::Vector3f(0,-1, 0), sf::Vector2f(0.25, 0), sf::Vector2f(0.25, 0.5), sf::Vector2f(0.5, 0.5));
-        createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(0,-1, 0), sf::Vector3f(-1, 0, 0), sf::Vector2f(0.5, 0), sf::Vector2f(0.5, 0.5), sf::Vector2f(0.75, 0.5));
-        createFace(0, sf::Vector3f(0, 0, 1), sf::Vector3f(-1, 0, 0), sf::Vector3f(0, 1, 0), sf::Vector2f(0.75, 0), sf::Vector2f(0.75, 0.5), sf::Vector2f(1.0, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(0, 1, 0), glm::vec3(1, 0, 0), glm::vec2(0, 0), glm::vec2(0, 0.5), glm::vec2(0.25, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(1, 0, 0), glm::vec3(0,-1, 0), glm::vec2(0.25, 0), glm::vec2(0.25, 0.5), glm::vec2(0.5, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(0,-1, 0), glm::vec3(-1, 0, 0), glm::vec2(0.5, 0), glm::vec2(0.5, 0.5), glm::vec2(0.75, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(-1, 0, 0), glm::vec3(0, 1, 0), glm::vec2(0.75, 0), glm::vec2(0.75, 0.5), glm::vec2(1.0, 0.5));
 
-        createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(1, 0, 0), sf::Vector3f(0, 1, 0), sf::Vector2f(0, 1.0), sf::Vector2f(0.25, 0.5), sf::Vector2f(0.0, 0.5));
-        createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(0,-1, 0), sf::Vector3f(1, 0, 0), sf::Vector2f(0.25, 1.0), sf::Vector2f(0.5, 0.5), sf::Vector2f(0.25, 0.5));
-        createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(-1, 0, 0), sf::Vector3f(0,-1, 0), sf::Vector2f(0.5, 1.0), sf::Vector2f(0.75, 0.5), sf::Vector2f(0.5, 0.5));
-        createFace(0, sf::Vector3f(0, 0,-1), sf::Vector3f(0,1, 0), sf::Vector3f(-1, 0, 0), sf::Vector2f(0.75, 1.0), sf::Vector2f(1.0, 0.5), sf::Vector2f(0.75, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(1, 0, 0), glm::vec3(0, 1, 0), glm::vec2(0, 1.0), glm::vec2(0.25, 0.5), glm::vec2(0.0, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(0,-1, 0), glm::vec3(1, 0, 0), glm::vec2(0.25, 1.0), glm::vec2(0.5, 0.5), glm::vec2(0.25, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(-1, 0, 0), glm::vec3(0,-1, 0), glm::vec2(0.5, 1.0), glm::vec2(0.75, 0.5), glm::vec2(0.5, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(0,1, 0), glm::vec3(-1, 0, 0), glm::vec2(0.75, 1.0), glm::vec2(1.0, 0.5), glm::vec2(0.75, 0.5));
 
         for(unsigned int n=0; n<vertices.size(); n++)
         {
-            float u = sf::vector2ToAngle(sf::Vector2f(vertices[n].position[1], vertices[n].position[0])) / 360.0f;
+            float u = vec2ToAngle(glm::vec2(vertices[n].position[1], vertices[n].position[0])) / 360.0f;
             if (u < 0.0f)
                 u = 1.0 + u;
             if (std::abs(u - vertices[n].uv[0]) > 0.5)
                 u += 1.0f;
             vertices[n].uv[0] = u;
-            vertices[n].uv[1] = 0.5 + sf::vector2ToAngle(sf::Vector2f(sf::length(sf::Vector2f(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
+            vertices[n].uv[1] = 0.5 + vec2ToAngle(glm::vec2(glm::length(glm::vec2(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
         }
     }
 
-    void createFace(int iteration, sf::Vector3f v0, sf::Vector3f v1, sf::Vector3f v2, sf::Vector2f uv0, sf::Vector2f uv1, sf::Vector2f uv2)
+    void createFace(int iteration, glm::vec3 v0, glm::vec3 v1, glm::vec3 v2, glm::vec2 uv0, glm::vec2 uv1, glm::vec2 uv2)
     {
         if (iteration < max_iterations)
         {
-            sf::Vector3f v01 = v0 + v1;
-            sf::Vector3f v12 = v1 + v2;
-            sf::Vector3f v02 = v0 + v2;
-            sf::Vector2f uv01 = (uv0 + uv1) / 2.0f;
-            sf::Vector2f uv12 = (uv1 + uv2) / 2.0f;
-            sf::Vector2f uv02 = (uv0 + uv2) / 2.0f;
-            v01 /= sf::length(v01);
-            v12 /= sf::length(v12);
-            v02 /= sf::length(v02);
+            glm::vec3 v01 = v0 + v1;
+            glm::vec3 v12 = v1 + v2;
+            glm::vec3 v02 = v0 + v2;
+            glm::vec2 uv01 = (uv0 + uv1) / 2.0f;
+            glm::vec2 uv12 = (uv1 + uv2) / 2.0f;
+            glm::vec2 uv02 = (uv0 + uv2) / 2.0f;
+            v01 /= glm::length(v01);
+            v12 /= glm::length(v12);
+            v02 /= glm::length(v02);
             createFace(iteration + 1, v0, v01, v02, uv0, uv01, uv02);
             createFace(iteration + 1, v01, v1, v12, uv01, uv1, uv12);
             createFace(iteration + 1, v01, v12, v02, uv01, uv12, uv02);
@@ -249,7 +249,7 @@ void Planet::update(float delta)
 #if FEATURE_3D_RENDERING
 void Planet::draw3D()
 {
-    float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, distance_from_movement_plane));
+    float distance = glm::length(camera_position - glm::vec3(getPosition().x, getPosition().y, distance_from_movement_plane));
 
     //view_scale ~= about the size the planet is on the screen.
     float view_scale = planet_size / distance;
@@ -287,7 +287,7 @@ void Planet::draw3D()
 
 void Planet::draw3DTransparent()
 {
-    float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, distance_from_movement_plane));
+    float distance = glm::length(camera_position - glm::vec3(getPosition().x, getPosition().y, distance_from_movement_plane));
 
     //view_scale ~= about the size the planet is on the screen.
     float view_scale = planet_size / distance;
@@ -328,10 +328,10 @@ void Planet::draw3DTransparent()
     if (atmosphere_texture != "" && atmosphere_size > 0)
     {
         static std::array<VertexAndTexCoords, 4> quad{
-        sf::Vector3f(), {0.f, 1.f},
-        sf::Vector3f(), {1.f, 1.f},
-        sf::Vector3f(), {1.f, 0.f},
-        sf::Vector3f(), {0.f, 0.f}
+        glm::vec3(), {0.f, 1.f},
+        glm::vec3(), {1.f, 1.f},
+        glm::vec3(), {1.f, 0.f},
+        glm::vec3(), {0.f, 0.f}
         };
 
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
@@ -343,7 +343,7 @@ void Planet::draw3DTransparent()
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
         
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(sf::Vector3f)));
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
 
         std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));

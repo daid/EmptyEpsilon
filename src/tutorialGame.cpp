@@ -123,7 +123,7 @@ void TutorialGame::update(float delta)
         const float camera_ship_distance = 420.0f;
         const float camera_ship_height = 420.0f;
         glm::vec2 cameraPosition2D = my_spaceship->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
-        sf::Vector3f targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
+        glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 
         camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
         camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;

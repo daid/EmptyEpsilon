@@ -1,19 +1,19 @@
 #ifndef PARTICLE_EFFECT_H
 #define PARTICLE_EFFECT_H
 
-#include <SFML/System/Vector3.hpp>
 #include <SFML/Graphics.hpp>
 
 #include "engine.h"
 
 #include "glObjects.h"
 
+#include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
 
 struct ParticleData
 {
-    sf::Vector3f position{};
-    sf::Vector3f color{};
+    glm::vec3 position{};
+    glm::vec3 color{};
     float size{};
 };
 class Particle
@@ -66,13 +66,13 @@ public:
     static void render(const glm::mat4& projection);
     virtual void update(float delta);
 
-    static void spawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time);
+    static void spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time);
 
 private:
 #if FEATURE_3D_RENDERING
     ParticleEngine();
     void doRender(const glm::mat4& projection);
-    void doSpawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time);
+    void doSpawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time);
 
     std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> uniforms;
     std::array<uint32_t, static_cast<size_t>(Attributes::Count)> attributes{};

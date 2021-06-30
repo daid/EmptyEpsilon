@@ -12,7 +12,7 @@ class ExplosionEffect : public SpaceObject, public Updatable
     float lifetime;
     float size;
     string explosion_sound;
-    sf::Vector3f particleDirections[particleCount];
+    glm::vec3 particleDirections[particleCount];
     bool on_radar;
 #if FEATURE_3D_RENDERING
     // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.

@@ -79,18 +79,18 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
             |.'    | .'
             1------5'
         */
-        std::array<sf::Vector3f, 8> positions{
+        std::array<glm::vec3, 8> positions{
             // Left face
-            sf::Vector3f{-1.f, -1.f, -1.f}, // 0
-            sf::Vector3f{-1.f, -1.f, 1.f},  // 1
-            sf::Vector3f{-1.f, 1.f, -1.f},  // 2
-            sf::Vector3f{-1.f, 1.f, 1.f},   // 3
+            glm::vec3{-1.f, -1.f, -1.f}, // 0
+            glm::vec3{-1.f, -1.f, 1.f},  // 1
+            glm::vec3{-1.f, 1.f, -1.f},  // 2
+            glm::vec3{-1.f, 1.f, 1.f},   // 3
 
             // Right face
-            sf::Vector3f{1.f, -1.f, -1.f},  // 4
-            sf::Vector3f{1.f, -1.f, 1.f},   // 5
-            sf::Vector3f{1.f, 1.f, -1.f},   // 6
-            sf::Vector3f{1.f, 1.f, 1.f},    // 7
+            glm::vec3{1.f, -1.f, -1.f},  // 4
+            glm::vec3{1.f, -1.f, 1.f},   // 5
+            glm::vec3{1.f, 1.f, -1.f},   // 6
+            glm::vec3{1.f, 1.f, 1.f},    // 7
         };
 
         constexpr std::array<uint8_t, 6 * 6> elements{
@@ -106,7 +106,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         glBindBuffer(GL_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Vertex)]);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
 
-        glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(sf::Vector3f), positions.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(glm::vec3), positions.data(), GL_STATIC_DRAW);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
         // Setup spacedust
@@ -127,7 +127,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         // The positions will get updated more frequently.
         // It means each particle occupies 2*16B (assuming tight packing)
         glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-        glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(sf::Vector3f) + sizeof(float)), nullptr, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(glm::vec3) + sizeof(float)), nullptr, GL_DYNAMIC_DRAW);
 
         // Generate and update the alternating vertices signs.
         std::array<float, 2 * spacedust_particle_count> signs;
@@ -139,11 +139,11 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         }
 
         // Update sign parts.
-        glBufferSubData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * sizeof(sf::Vector3f), signs.size() * sizeof(float), signs.data());
+        glBufferSubData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * sizeof(glm::vec3), signs.size() * sizeof(float), signs.data());
         {
             // zero out positions.
-            const std::vector<sf::Vector3f> zeroed_positions(2 * spacedust_particle_count);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(sf::Vector3f), zeroed_positions.data());
+            const std::vector<glm::vec3> zeroed_positions(2 * spacedust_particle_count);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(glm::vec3), zeroed_positions.data());
         }
         glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         
@@ -259,7 +259,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
 
             // Vertex attributes.
-            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
 
 
             glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_BYTE, (GLvoid*)0);
@@ -366,10 +366,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     if (show_spacedust && my_spaceship)
     {
-        static std::vector<sf::Vector3f> space_dust(2 * spacedust_particle_count);
+        static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
         
         glm::vec2 dust_vector = my_spaceship->getVelocity() / 100.f;
-        sf::Vector3f dust_center = sf::Vector3f(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.f); 
+        glm::vec3 dust_center = glm::vec3(my_spaceship->getPosition().x, my_spaceship->getPosition().y, 0.f); 
 
         constexpr float maxDustDist = 500.f;
         constexpr float minDustDist = 100.f;
@@ -380,10 +380,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         {
             //
             auto delta = space_dust[n] - dust_center;
-            if (delta > maxDustDist || delta < minDustDist)
+            if (glm::length2(delta) > maxDustDist*maxDustDist || glm::length2(delta) < minDustDist*minDustDist)
             {
                 update_required = true;
-                space_dust[n] = dust_center + sf::Vector3f(random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist));
+                space_dust[n] = dust_center + glm::vec3(random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist), random(-maxDustDist, maxDustDist));
                 space_dust[n + 1] = space_dust[n];
             }
         }
@@ -408,10 +408,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             
             if (update_required)
             {
-                glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(sf::Vector3f), space_dust.data());
+                glBufferSubData(GL_ARRAY_BUFFER, 0, space_dust.size() * sizeof(glm::vec3), space_dust.data());
             }
-            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
-            glVertexAttribPointer(signs.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(sf::Vector3f)));
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
+            glVertexAttribPointer(signs.get(), 1, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(2 * spacedust_particle_count * sizeof(glm::vec3)));
             
             glDrawArrays(GL_LINES, 0, 2 * spacedust_particle_count);
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
@@ -469,7 +469,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         std::array<float, 16> matrix;
         glUniformMatrix4fv(debug_shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection_matrix));
 
-        std::vector<sf::Vector3f> points;
+        std::vector<glm::vec3> points;
         gl::ScopedVertexAttribArray positions(debug_shader.get().attribute(ShaderRegistry::Attributes::Position));
 
         foreach(SpaceObject, obj, space_object_list)
@@ -487,11 +487,11 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             if (collisionShape.size() > points.size())
             {
                 points.resize(collisionShape.size());
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), points.data());
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), points.data());
             }
 
             for (unsigned int n = 0; n < collisionShape.size(); n++)
-                points[n] = sf::Vector3f(collisionShape[n].x, collisionShape[n].y, 0.f);
+                points[n] = glm::vec3(collisionShape[n].x, collisionShape[n].y, 0.f);
             
             glDrawArrays(GL_LINE_LOOP, 0, collisionShape.size());
             glPopMatrix();
@@ -515,7 +515,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             if (call_sign == "")
                 continue;
 
-            sf::Vector3f screen_position = worldToScreen(window, sf::Vector3f(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
+            glm::vec3 screen_position = worldToScreen(window, glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
             if (screen_position.z < 0)
                 continue;
             if (screen_position.z > 10000.0)
@@ -532,7 +532,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         for(int angle = 0; angle < 360; angle += 30)
         {
             glm::vec2 world_pos = my_spaceship->getPosition() + vec2FromAngle(angle - 90.f) * distance;
-            sf::Vector3f screen_pos = worldToScreen(window, sf::Vector3f(world_pos.x, world_pos.y, 0.0f));
+            glm::vec3 screen_pos = worldToScreen(window, glm::vec3(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
                 drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, bold_font, sf::Color(255, 255, 255, 128));
         }
@@ -540,7 +540,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 #endif//FEATURE_3D_RENDERING
 }
 
-sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f world)
+glm::vec3 GuiViewport3D::worldToScreen(sf::RenderTarget& window, glm::vec3 world)
 {
     world -= camera_position;
     auto view_pos = model_matrix * glm::vec4{ world.x, world.y, world.z, 1.f };
@@ -551,7 +551,7 @@ sf::Vector3f GuiViewport3D::worldToScreen(sf::RenderTarget& window, sf::Vector3f
 
     //Window coordinates
     //Map x, y to range 0-1
-    sf::Vector3f ret;
+    glm::vec3 ret;
     ret.x = (pos.x * .5f + .5f) * viewport.z + viewport.x;
     ret.y = (pos.y * .5f + .5f) * viewport.w + viewport.y;
     //This is only correct when glDepthRange(0.0, 1.0)

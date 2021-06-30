@@ -45,8 +45,8 @@ public:
     float getHeatPerFire();
     void setHeatPerFire(float heat);
 
-    void setPosition(sf::Vector3f position);
-    sf::Vector3f getPosition();
+    void setPosition(glm::vec3 position);
+    glm::vec3 getPosition();
 
     void setBeamTexture(string beam_texture);
     string getBeamTexture();
@@ -55,7 +55,7 @@ public:
 
     void update(float delta);
 protected:
-    sf::Vector3f position;//Visual position on the 3D model where this beam is fired from.
+    glm::vec3 position;//Visual position on the 3D model where this beam is fired from.
     SpaceShip* parent; //The ship that this beam weapon is attached to.
 
     //Beam configuration

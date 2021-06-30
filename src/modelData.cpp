@@ -72,7 +72,7 @@ void ModelData::setIllumination(string illumination_texture_name)
     this->illumination_texture_name = illumination_texture_name;
 }
 
-void ModelData::setRenderOffset(sf::Vector3f mesh_offset)
+void ModelData::setRenderOffset(glm::vec3 mesh_offset)
 {
      this->mesh_offset = mesh_offset;
 }
@@ -92,22 +92,22 @@ void ModelData::setCollisionBox(glm::vec2 collision_box)
     this->collision_box = collision_box;
 }
 
-void ModelData::addBeamPosition(sf::Vector3f position)
+void ModelData::addBeamPosition(glm::vec3 position)
 {
     beam_position.push_back(position);
 }
 
-void ModelData::addTubePosition(sf::Vector3f position)
+void ModelData::addTubePosition(glm::vec3 position)
 {
     tube_position.push_back(position);
 }
 
-void ModelData::addEngineEmitter(sf::Vector3f position, sf::Vector3f color, float scale)
+void ModelData::addEngineEmitter(glm::vec3 position, glm::vec3 color, float scale)
 {
     engine_emitters.push_back(EngineEmitterData(position, color, scale));
 }
 
-void ModelData::addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale)
+void ModelData::addEngineEmitor(glm::vec3 position, glm::vec3 color, float scale)
 {
     LOG(WARNING) << "Depricated function addEngineEmitor called. Use addEngineEmitter instead.";
     addEngineEmitter(position, color, scale);
@@ -129,10 +129,10 @@ void ModelData::setCollisionData(P<SpaceObject> object)
         object->setCollisionBox(collision_box);
 }
 
-sf::Vector3f ModelData::getBeamPosition(int index)
+glm::vec3 ModelData::getBeamPosition(int index)
 {
     if (index < 0 || index >= (int)beam_position.size())
-        return sf::Vector3f(0.0f, 0.0f, 0.0f);
+        return glm::vec3(0.0f, 0.0f, 0.0f);
     return (beam_position[index] + mesh_offset) * scale;
 }
 
@@ -143,10 +143,10 @@ glm::vec2 ModelData::getBeamPosition2D(int index)
     return glm::vec2(beam_position[index].x + mesh_offset.x, beam_position[index].y + mesh_offset.y) * scale;
 }
 
-sf::Vector3f ModelData::getTubePosition(int index)
+glm::vec3 ModelData::getTubePosition(int index)
 {
     if (index < 0 || index >= (int)tube_position.size())
-        return sf::Vector3f(0.0f, 0.0f, 0.0f);
+        return glm::vec3(0.0f, 0.0f, 0.0f);
     return (tube_position[index] + mesh_offset) * scale;
 }
 

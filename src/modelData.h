@@ -1,24 +1,24 @@
 #ifndef MODEL_DATA_H
 #define MODEL_DATA_H
 
-#include <SFML/System/Vector3.hpp>
-#include <unordered_map>
-
 #include "engine.h"
 
 #include "mesh.h"
 #include "shaderRegistry.h"
+
+#include <unordered_map>
+#include <glm/vec3.hpp>
 
 class SpaceObject;
 
 class EngineEmitterData
 {
 public:
-    sf::Vector3f position;
-    sf::Vector3f color;
+    glm::vec3 position;
+    glm::vec3 color;
     float scale;
 
-    EngineEmitterData(sf::Vector3f position, sf::Vector3f color, float scale) : position(position), color(color), scale(scale) {}
+    EngineEmitterData(glm::vec3 position, glm::vec3 color, float scale) : position(position), color(color), scale(scale) {}
 };
 
 class ModelData : public PObject
@@ -39,7 +39,7 @@ private:
     bool loaded;
 
     Mesh* mesh;
-    sf::Vector3f mesh_offset;
+    glm::vec3 mesh_offset;
     sf::Texture* texture;
     sf::Texture* specular_texture;
     sf::Texture* illumination_texture;
@@ -56,8 +56,8 @@ private:
      */
     glm::vec2 collision_box{0, 0};
 
-    std::vector<sf::Vector3f> beam_position;
-    std::vector<sf::Vector3f> tube_position;
+    std::vector<glm::vec3> beam_position;
+    std::vector<glm::vec3> tube_position;
     std::vector<EngineEmitterData> engine_emitters;
 
 public:
@@ -88,7 +88,7 @@ public:
      * \param mesh_offset 3D offset of the model.
      * Not all models have the same origin, so we can use this to compensate for that.
      */
-    void setRenderOffset(sf::Vector3f mesh_offset);
+    void setRenderOffset(glm::vec3 mesh_offset);
 
     /*!
      * Set the scale of the model.
@@ -102,23 +102,23 @@ public:
     /*!
      * Add a beam position (location from which a beam weapon is fired
      */
-    void addBeamPosition(sf::Vector3f position);
+    void addBeamPosition(glm::vec3 position);
 
     /*!
      * Add a (missile) tube position (location from which a tube based weapon is fired
      */
-    void addTubePosition(sf::Vector3f position);
+    void addTubePosition(glm::vec3 position);
 
     /*!
      * Add a particle emitter
      */
-    void addEngineEmitter(sf::Vector3f position, sf::Vector3f color, float scale);
+    void addEngineEmitter(glm::vec3 position, glm::vec3 color, float scale);
     //Depricated
-    void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale);
+    void addEngineEmitor(glm::vec3 position, glm::vec3 color, float scale);
 
-    sf::Vector3f getBeamPosition(int index);
+    glm::vec3 getBeamPosition(int index);
     glm::vec2 getBeamPosition2D(int index);
-    sf::Vector3f getTubePosition(int index);
+    glm::vec3 getTubePosition(int index);
     glm::vec2 getTubePosition2D(int index);
     void setCollisionData(P<SpaceObject> object);
     float getRadius();

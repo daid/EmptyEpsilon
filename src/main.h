@@ -4,7 +4,7 @@
 #include "engine.h"
 #include "config.h"
 
-extern sf::Vector3f camera_position;
+extern glm::vec3 camera_position;
 extern float camera_yaw;
 extern float camera_pitch;
 extern sf::Font* main_font;

@@ -39,10 +39,10 @@ void ParticleEngine::update(float delta)
 #endif // FEATURE_3D_RENDERING
 }
 
-void ParticleEngine::spawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time)
+void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time)
 {
 #if FEATURE_3D_RENDERING
-    if (sf::length(position - camera_position) / (size + end_size) < 0.1)
+    if (glm::length2(position - camera_position) / (size + end_size) < 0.1f*0.1f)
         return;
 
     if (!particleEngine)
@@ -76,7 +76,7 @@ ParticleEngine::ParticleEngine()
 
         std::array<uint8_t, instances_per_draw * elements_per_instance> elements;
 
-        std::array<sf::Vector2f, max_vertex_count> texcoords{};
+        std::array<glm::vec2, max_vertex_count> texcoords{};
 
         // Hitting this means either needing to lower the number of instances / vertices per instance,
         // Or switch the element index to a uint16_t.
@@ -108,14 +108,14 @@ ParticleEngine::ParticleEngine()
         gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
 
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
-        glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(sf::Vector2f)), nullptr, GL_DYNAMIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(glm::vec2)), nullptr, GL_DYNAMIC_DRAW);
         {
             // Ensure zero-initialization of the particle data.
             std::array<ParticleData, max_vertex_count> particle_data{};
             glBufferSubData(GL_ARRAY_BUFFER, 0, particle_data.size() * sizeof(ParticleData), particle_data.data());
 
             // Upload texcoords once.
-            glBufferSubData(GL_ARRAY_BUFFER, particle_data.size() * sizeof(ParticleData), texcoords.size() * sizeof(sf::Vector2f), texcoords.data());
+            glBufferSubData(GL_ARRAY_BUFFER, particle_data.size() * sizeof(ParticleData), texcoords.size() * sizeof(glm::vec2), texcoords.data());
         }
     }
 }
@@ -147,7 +147,7 @@ void ParticleEngine::doRender(const glm::mat4& projection)
         gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, particleEngine->buffers[as_index(Buffers::Vertex)]);
 
         glVertexAttribPointer(centers.get(), 3, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid *>(offsetof(ParticleData, position)));
-        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), reinterpret_cast<const GLvoid*>(max_vertex_count * sizeof(ParticleData)));
+        glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), reinterpret_cast<const GLvoid*>(max_vertex_count * sizeof(ParticleData)));
         glVertexAttribPointer(colors.get(), 3, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, color)));
         glVertexAttribPointer(sizes.get(), 1, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, size)));
  
@@ -162,8 +162,8 @@ void ParticleEngine::doRender(const glm::mat4& projection)
             for (auto instance = 0U; instance < instance_count; ++instance)
             {
                 const auto& p = particles[n + instance];
-                auto position = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.position, p.end.position);
-                auto color = Tween<sf::Vector3f>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
+                auto position = Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.position, p.end.position);
+                auto color = Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
                 auto size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
 
                 auto base_vertex = vertices_per_instance * instance;
@@ -187,7 +187,7 @@ void ParticleEngine::doRender(const glm::mat4& projection)
     sf::Shader::bind(nullptr);
 }
 
-void ParticleEngine::doSpawn(sf::Vector3f position, sf::Vector3f end_position, sf::Vector3f color, sf::Vector3f end_color, float size, float end_size, float life_time)
+void ParticleEngine::doSpawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time)
 {
     if (first_expired == std::end(particles))
     {

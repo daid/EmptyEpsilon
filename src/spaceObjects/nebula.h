@@ -6,7 +6,7 @@
 class NebulaCloud
 {
 public:
-    sf::Vector2f offset;
+    glm::vec2 offset;
     int texture;
     float size;
 };

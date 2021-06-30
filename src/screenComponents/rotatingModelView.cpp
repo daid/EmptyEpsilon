@@ -85,54 +85,54 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
 
             for (const EngineEmitterData& ee : model->engine_emitters)
             {
-                sf::Vector3f offset = ee.position * model->scale;
+                glm::vec3 offset = ee.position * model->scale;
                 float r = model->scale * ee.scale * 0.5;
 
                 glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
                 auto vertices = {
-                    sf::Vector3f{offset.x + r, offset.y, offset.z},
-                    sf::Vector3f{offset.x - r, offset.y, offset.z},
-                    sf::Vector3f{offset.x, offset.y + r, offset.z},
-                    sf::Vector3f{offset.x, offset.y - r, offset.z},
-                    sf::Vector3f{offset.x, offset.y, offset.z + r},
-                    sf::Vector3f{offset.x, offset.y, offset.z - r}
+                    glm::vec3{offset.x + r, offset.y, offset.z},
+                    glm::vec3{offset.x - r, offset.y, offset.z},
+                    glm::vec3{offset.x, offset.y + r, offset.z},
+                    glm::vec3{offset.x, offset.y - r, offset.z},
+                    glm::vec3{offset.x, offset.y, offset.z + r},
+                    glm::vec3{offset.x, offset.y, offset.z - r}
                 };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), std::begin(vertices));
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
                 glDrawArrays(GL_LINES, 0, vertices.size());
             }
             float r = model->getRadius() * 0.1f;
             
             glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
 
-            for (const sf::Vector3f& position : model->beam_position)
+            for (const glm::vec3& position : model->beam_position)
             {
-                sf::Vector3f offset = position * model->scale;
+                glm::vec3 offset = position * model->scale;
 
                 auto vertices = {
-                    sf::Vector3f{offset.x + r, offset.y, offset.z},
-                    sf::Vector3f{offset.x - r, offset.y, offset.z},
-                    sf::Vector3f{offset.x, offset.y + r, offset.z},
-                    sf::Vector3f{offset.x, offset.y - r, offset.z},
-                    sf::Vector3f{offset.x, offset.y, offset.z + r},
-                    sf::Vector3f{offset.x, offset.y, offset.z - r}
+                    glm::vec3{offset.x + r, offset.y, offset.z},
+                    glm::vec3{offset.x - r, offset.y, offset.z},
+                    glm::vec3{offset.x, offset.y + r, offset.z},
+                    glm::vec3{offset.x, offset.y - r, offset.z},
+                    glm::vec3{offset.x, offset.y, offset.z + r},
+                    glm::vec3{offset.x, offset.y, offset.z - r}
                 };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), std::begin(vertices));
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
                 glDrawArrays(GL_LINES, 0, vertices.size());
             }
             
-            for (const sf::Vector3f& position : model->tube_position)
+            for (const glm::vec3& position : model->tube_position)
             {
-                sf::Vector3f offset = position * model->scale;
+                glm::vec3 offset = position * model->scale;
 
                 auto vertices = {
-                    sf::Vector3f{offset.x + r * 3, offset.y, offset.z},
-                    sf::Vector3f{offset.x - r, offset.y, offset.z},
-                    sf::Vector3f{offset.x, offset.y + r, offset.z},
-                    sf::Vector3f{offset.x, offset.y - r, offset.z},
-                    sf::Vector3f{offset.x, offset.y, offset.z + r},
-                    sf::Vector3f{offset.x, offset.y, offset.z - r}
+                    glm::vec3{offset.x + r * 3, offset.y, offset.z},
+                    glm::vec3{offset.x - r, offset.y, offset.z},
+                    glm::vec3{offset.x, offset.y + r, offset.z},
+                    glm::vec3{offset.x, offset.y - r, offset.z},
+                    glm::vec3{offset.x, offset.y, offset.z + r},
+                    glm::vec3{offset.x, offset.y, offset.z - r}
                 };
-                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), std::begin(vertices));
+                glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), std::begin(vertices));
                 glDrawArrays(GL_LINES, 0, vertices.size());
             }
         }

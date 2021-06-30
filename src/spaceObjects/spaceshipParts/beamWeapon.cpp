@@ -134,12 +134,12 @@ void BeamWeapon::setHeatPerFire(float heat)
     heat_per_beam_fire = heat;
 }
 
-void BeamWeapon::setPosition(sf::Vector3f position)
+void BeamWeapon::setPosition(glm::vec3 position)
 {
     this->position = position;
 }
 
-sf::Vector3f BeamWeapon::getPosition()
+glm::vec3 BeamWeapon::getPosition()
 {
     return position;
 }

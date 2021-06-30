@@ -41,7 +41,7 @@
 
 #include "shaderRegistry.h"
 
-sf::Vector3f camera_position;
+glm::vec3 camera_position;
 float camera_yaw;
 float camera_pitch;
 sf::Font* main_font;

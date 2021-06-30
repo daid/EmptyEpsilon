@@ -62,18 +62,18 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
 #endif//FEATURE_3D_RENDERING
 }
 
-sf::Vector3f Mesh::randomPoint()
+glm::vec3 Mesh::randomPoint()
 {
     if (vertices.empty())
-        return sf::Vector3f{};
+        return glm::vec3{};
 
     //int idx = irandom(0, vertexCount-1);
-    //return sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
+    //return glm::vec3(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
     // Pick a face
     int idx = irandom(0, vertices.size() / 3 - 1) * 3; 
-    sf::Vector3f v0 = sf::Vector3f(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
-    sf::Vector3f v1 = sf::Vector3f(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
-    sf::Vector3f v2 = sf::Vector3f(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
+    glm::vec3 v0 = glm::vec3(vertices[idx].position[0], vertices[idx].position[1], vertices[idx].position[2]);
+    glm::vec3 v1 = glm::vec3(vertices[idx+1].position[0], vertices[idx+1].position[1], vertices[idx+1].position[2]);
+    glm::vec3 v2 = glm::vec3(vertices[idx+2].position[0], vertices[idx+2].position[1], vertices[idx+2].position[2]);
 
     float f1 = random(0.0, 1.0);
     float f2 = random(0.0, 1.0);
@@ -82,8 +82,8 @@ sf::Vector3f Mesh::randomPoint()
         f1 = 1.0f - f1;
         f2 = 1.0f - f2;
     }
-    sf::Vector3f v01 = (v0 * f1) + (v1 * (1.0f - f1));
-    sf::Vector3f ret = (v01 * f2) + (v2 * (1.0f - f2));
+    glm::vec3 v01 = (v0 * f1) + (v1 * (1.0f - f1));
+    glm::vec3 ret = (v01 * f2) + (v2 * (1.0f - f2));
     return ret;
 }
 
@@ -107,9 +107,9 @@ Mesh* Mesh::getMesh(const string& filename)
     std::vector<MeshVertex> mesh_vertices;
     if (filename.endswith(".obj"))
     {
-        std::vector<sf::Vector3f> vertices;
-        std::vector<sf::Vector3f> normals;
-        std::vector<sf::Vector2f> texCoords;
+        std::vector<glm::vec3> vertices;
+        std::vector<glm::vec3> normals;
+        std::vector<glm::vec2> texCoords;
         std::vector<IndexInfo> indices;
 
         do
@@ -122,13 +122,13 @@ Mesh* Mesh::getMesh(const string& filename)
                     continue;
                 if (parts[0] == "v")
                 {
-                    vertices.push_back(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat()));
+                    vertices.emplace_back(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
                 }else if (parts[0] == "vn")
                 {
-                    normals.push_back(sf::normalize(sf::Vector3f(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
+                    normals.push_back(glm::normalize(glm::vec3(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
                 }else if (parts[0] == "vt")
                 {
-                    texCoords.push_back(sf::Vector2f(parts[1].toFloat(), parts[2].toFloat()));
+                    texCoords.push_back(glm::vec2(parts[1].toFloat(), parts[2].toFloat()));
                 }else if (parts[0] == "f")
                 {
                     for(unsigned int n=3; n<parts.size(); n++)

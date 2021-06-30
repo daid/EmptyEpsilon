@@ -11,7 +11,7 @@ class ElectricExplosionEffect : public SpaceObject, public Updatable
 
     float lifetime;
     float size;
-    sf::Vector3f particleDirections[particleCount];
+    glm::vec3 particleDirections[particleCount];
     bool on_radar;
 
 #if FEATURE_3D_RENDERING

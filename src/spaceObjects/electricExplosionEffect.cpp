@@ -28,7 +28,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
-        particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
+        particleDirections[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
 
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
@@ -40,7 +40,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         
         // Each vertex is a position and a texcoords.
         // The two arrays are maintained separately (texcoords are fixed, vertices position change).
-        constexpr size_t vertex_size = sizeof(sf::Vector3f) + sizeof(sf::Vector2f);
+        constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2);
         gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
         gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
 
@@ -49,7 +49,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
 
         // Create initial data.
         std::array<uint8_t, 6 * max_quad_count> indices;
-        std::array<sf::Vector2f, 4 * max_quad_count> texcoords;
+        std::array<glm::vec2, 4 * max_quad_count> texcoords;
         for (auto i = 0U; i < max_quad_count; ++i)
         {
             auto quad_offset = 4 * i;
@@ -67,7 +67,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         }
 
         // Update texcoords
-        glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(sf::Vector3f), texcoords.size() * sizeof(sf::Vector2f), texcoords.data());
+        glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(glm::vec3), texcoords.size() * sizeof(glm::vec2), texcoords.data());
         // Upload indices
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint8_t), indices.data(), GL_STATIC_DRAW);
     }
@@ -119,7 +119,7 @@ void ElectricExplosionEffect::draw3DTransparent()
     float g = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
     float b = Tween<float>::easeInQuad(f, 0.0, 1.0, 1.0f, 0.0f);
 
-    std::array<sf::Vector3f, 4 * max_quad_count> vertices;
+    std::array<glm::vec3, 4 * max_quad_count> vertices;
 
     glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
 
@@ -135,8 +135,8 @@ void ElectricExplosionEffect::draw3DTransparent()
     
 
     // Set up attribs
-    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
-    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
 
 
     const size_t quad_count = max_quad_count;
@@ -147,7 +147,7 @@ void ElectricExplosionEffect::draw3DTransparent()
         // setup quads
         for (auto p = 0U; p < active_quads; ++p)
         {
-            sf::Vector3f v = particleDirections[n + p] * scale * size;
+            glm::vec3 v = particleDirections[n + p] * scale * size;
             vertices[4 * p + 0] = v;
             vertices[4 * p + 1] = v;
             vertices[4 * p + 2] = v;
@@ -155,7 +155,7 @@ void ElectricExplosionEffect::draw3DTransparent()
         }
 
         // upload
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(sf::Vector3f), vertices.data());
+        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
         
         glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_BYTE, nullptr);
         n += active_quads;

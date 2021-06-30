@@ -26,7 +26,7 @@ ExplosionEffect::ExplosionEffect()
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
-        particleDirections[n] = sf::normalize(sf::Vector3f(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
+        particleDirections[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
 
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
@@ -38,7 +38,7 @@ ExplosionEffect::ExplosionEffect()
 
         // Each vertex is a position and a texcoords.
         // The two arrays are maintained separately (texcoords are fixed, vertices position change).
-        constexpr size_t vertex_size = sizeof(sf::Vector3f) + sizeof(sf::Vector2f);
+        constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2);
         gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
         gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
 
@@ -47,7 +47,7 @@ ExplosionEffect::ExplosionEffect()
 
         // Create initial data.
         std::array<uint8_t, 6 * max_quad_count> indices;
-        std::array<sf::Vector2f, 4 * max_quad_count> texcoords;
+        std::array<glm::vec2, 4 * max_quad_count> texcoords;
         for (auto i = 0U; i < max_quad_count; ++i)
         {
             auto quad_offset = 4 * i;
@@ -65,7 +65,7 @@ ExplosionEffect::ExplosionEffect()
         }
 
         // Update texcoords
-        glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(sf::Vector3f), texcoords.size() * sizeof(sf::Vector2f), texcoords.data());
+        glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(glm::vec3), texcoords.size() * sizeof(glm::vec2), texcoords.data());
         // Upload indices
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint8_t), indices.data(), GL_STATIC_DRAW);
 
@@ -93,7 +93,7 @@ void ExplosionEffect::draw3DTransparent()
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
 
-    std::array<sf::Vector3f, 4 * max_quad_count> vertices;
+    std::array<glm::vec3, 4 * max_quad_count> vertices;
 
     glPushMatrix();
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
@@ -123,19 +123,19 @@ void ExplosionEffect::draw3DTransparent()
         glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("fire_ring.png")->getNativeHandle());
         glScalef(1.5f, 1.5f, 1.5f);
 
-        vertices[0] = sf::Vector3f(-1, -1, 0);
-        vertices[1] = sf::Vector3f(1, -1, 0);
-        vertices[2] = sf::Vector3f(1, 1, 0);
-        vertices[3] = sf::Vector3f(-1, 1, 0);
+        vertices[0] = glm::vec3(-1, -1, 0);
+        vertices[1] = glm::vec3(1, -1, 0);
+        vertices[2] = glm::vec3(1, 1, 0);
+        vertices[3] = glm::vec3(-1, 1, 0);
         {
             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
-            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
-            glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
+            glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
+            glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
 
             // upload single vertex
-            glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(sf::Vector3f), vertices.data());
+            glBufferSubData(GL_ARRAY_BUFFER, 0, 4 * sizeof(glm::vec3), vertices.data());
 
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, nullptr);
         }
@@ -155,8 +155,8 @@ void ExplosionEffect::draw3DTransparent()
     float b = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
 
-    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(sf::Vector3f), (GLvoid*)0);
-    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(sf::Vector2f), (GLvoid*)(vertices.size() * sizeof(sf::Vector3f)));
+    glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
+    glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));
 
     const size_t quad_count = max_quad_count;
     // We're drawing particles `quad_count` at a time.
@@ -166,14 +166,14 @@ void ExplosionEffect::draw3DTransparent()
         // setup quads
         for (auto p = 0U; p < active_quads; ++p)
         {
-            sf::Vector3f v = particleDirections[n + p] * scale * size;
+            glm::vec3 v = particleDirections[n + p] * scale * size;
             vertices[4 * p + 0] = v;
             vertices[4 * p + 1] = v;
             vertices[4 * p + 2] = v;
             vertices[4 * p + 3] = v;
         }
         // upload
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(sf::Vector3f), vertices.data());
+        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
         
         glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_BYTE, nullptr);
         n += active_quads;
