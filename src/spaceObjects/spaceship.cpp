@@ -616,7 +616,7 @@ void SpaceShip::update(float delta)
                 docking_state = DS_NotDocking;
             else
                 target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
-            if (fabs(sf::angleDifference(target_rotation, getRotation())) < 10.0)
+            if (fabs(angleDifference(target_rotation, getRotation())) < 10.0)
                 impulse_request = -1.0;
             else
                 impulse_request = 0.0;
@@ -649,7 +649,7 @@ void SpaceShip::update(float delta)
 
     float rotationDiff;
     if (fabs(turnSpeed) < 0.0005f) {
-        rotationDiff = sf::angleDifference(getRotation(), target_rotation);
+        rotationDiff = angleDifference(getRotation(), target_rotation);
     } else {
         rotationDiff = turnSpeed;
     }
@@ -908,7 +908,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 
 void SpaceShip::collide(Collisionable* other, float force)
 {
-    if (docking_state == DS_Docking && fabs(sf::angleDifference(target_rotation, getRotation())) < 10.0)
+    if (docking_state == DS_Docking && fabs(angleDifference(target_rotation, getRotation())) < 10.0)
     {
         P<SpaceObject> dock_object = P<Collisionable>(other);
         if (dock_object == docking_target)

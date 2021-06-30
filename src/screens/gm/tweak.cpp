@@ -427,7 +427,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
 
 void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
 {
-    direction_slider->setValue(sf::angleDifference(0.0f, target->weapon_tube[tube_index].getDirection()));
+    direction_slider->setValue(angleDifference(0.0f, target->weapon_tube[tube_index].getDirection()));
     load_time_slider->setValue(target->weapon_tube[tube_index].getLoadTimeConfig());
     for(int n=0; n<MW_Count; n++)
     {
@@ -585,10 +585,10 @@ void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
     target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, 0, false);
 
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
-    direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
+    direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
     range_slider->setValue(target->beam_weapons[beam_index].getRange());
     turret_arc_slider->setValue(target->beam_weapons[beam_index].getTurretArc());
-    turret_direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getTurretDirection()));
+    turret_direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getTurretDirection()));
     turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
     turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
     cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());

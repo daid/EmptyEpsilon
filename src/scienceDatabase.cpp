@@ -296,13 +296,13 @@ REGISTER_SCRIPT_FUNCTION(getScienceDatabases);
 static string directionLabel(float direction)
 {
     string name = "?";
-    if (std::abs(sf::angleDifference(0.0f, direction)) <= 45)
+    if (std::abs(angleDifference(0.0f, direction)) <= 45)
         name = tr("database direction", "Front");
-    if (std::abs(sf::angleDifference(90.0f, direction)) < 45)
+    if (std::abs(angleDifference(90.0f, direction)) < 45)
         name = tr("database direction", "Right");
-    if (std::abs(sf::angleDifference(-90.0f, direction)) < 45)
+    if (std::abs(angleDifference(-90.0f, direction)) < 45)
         name = tr("database direction", "Left");
-    if (std::abs(sf::angleDifference(180.0f, direction)) <= 45)
+    if (std::abs(angleDifference(180.0f, direction)) <= 45)
         name = tr("database direction", "Rear");
     return name;
 }

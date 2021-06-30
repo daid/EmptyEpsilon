@@ -128,7 +128,7 @@ void MissileWeapon::updateMovement()
         // Small missiles have a larger speed & rotational speed, large ones are slower and turn less fast
         float size_speed_modifier = 1 / category_modifier;
 
-        float angle_diff = sf::angleDifference(getRotation(), target_angle);
+        float angle_diff = angleDifference(getRotation(), target_angle);
 
         if (angle_diff > 1.0)
             setAngularVelocity(data.turnrate * size_speed_modifier);

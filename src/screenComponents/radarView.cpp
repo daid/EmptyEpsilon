@@ -578,7 +578,7 @@ void GuiRadarView::drawTargetProjections(sf::RenderTarget& window)
                 }
             }
 
-            float angle_diff = sf::angleDifference(missile_target_angle, fire_angle);
+            float angle_diff = angleDifference(missile_target_angle, fire_angle);
             float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
             if (data.turnrate == 0.0f)
                 turn_radius = 0.0f;

@@ -180,12 +180,12 @@ void BeamWeapon::update(float delta)
         if (distance < range * 1.3)
         {
             float angle = vec2ToAngle(diff);
-            float angle_diff = sf::angleDifference(direction + parent->getRotation(), angle);
+            float angle_diff = angleDifference(direction + parent->getRotation(), angle);
 
             if (turret_arc > 0)
             {
                 // Get the target's angle relative to the turret's direction.
-                float turret_angle_diff = sf::angleDifference(turret_direction + parent->getRotation(), angle);
+                float turret_angle_diff = angleDifference(turret_direction + parent->getRotation(), angle);
 
                 // If the turret can rotate ...
                 if (turret_rotation_rate > 0)
@@ -202,7 +202,7 @@ void BeamWeapon::update(float delta)
                     } else {
                         // ... rotate the turret's beam toward the turret's
                         // direction to reset it.
-                        float reset_angle_diff = sf::angleDifference(direction, turret_direction);
+                        float reset_angle_diff = angleDifference(direction, turret_direction);
 
                         if (fabsf(reset_angle_diff) > 0)
                         {
@@ -224,7 +224,7 @@ void BeamWeapon::update(float delta)
     // If the beam is turreted and can move, but doesn't have a target, reset it
     // if necessary.
     } else if (game_server && range > 0.0 && delta > 0 && turret_arc > 0.0 && direction != turret_direction && turret_rotation_rate > 0) {
-        float reset_angle_diff = sf::angleDifference(direction, turret_direction);
+        float reset_angle_diff = angleDifference(direction, turret_direction);
 
         if (fabsf(reset_angle_diff) > 0)
         {

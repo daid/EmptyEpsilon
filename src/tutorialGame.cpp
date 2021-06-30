@@ -126,7 +126,7 @@ void TutorialGame::update(float delta)
         glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 
         camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
-        camera_yaw += sf::angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
+        camera_yaw += angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
     }
 }
 

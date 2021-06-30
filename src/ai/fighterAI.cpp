@@ -71,7 +71,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
             timeout = 30.0f - std::min(aggression, 1.0f) * 20.0f;
 
             float target_dir = vec2ToAngle(position_diff);
-            float a_diff = sf::angleDifference(target_dir, owner->getRotation());
+            float a_diff = angleDifference(target_dir, owner->getRotation());
             if (a_diff < 0)
                 evade_direction = target_dir - random(25, 40);
             else

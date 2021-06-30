@@ -43,7 +43,7 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         //No flanking position. Do we want to go left or right of the target?
         auto left_point = target->getPosition() + vec2FromAngle(target_angle - 120) * 3500.0f;
         auto right_point = target->getPosition() + vec2FromAngle(target_angle + 120) * 3500.0f;
-        if (sf::angleDifference(vec2ToAngle(left_point - owner->getPosition()), owner->getRotation()) < sf::angleDifference(vec2ToAngle(right_point - owner->getPosition()), owner->getRotation()))
+        if (angleDifference(vec2ToAngle(left_point - owner->getPosition()), owner->getRotation()) < angleDifference(vec2ToAngle(right_point - owner->getPosition()), owner->getRotation()))
         {
             flank_position = Left;
         }else{

@@ -172,8 +172,8 @@ void CinematicViewScreen::update(float delta)
             tot_distance_3D = glm::length(tot_diff_3D);
 
             //Point the camera aiming between the target ship and the target of the target.
-            angle_yaw = tot_angle + sf::angleDifference(tot_angle, vec2ToAngle(diff_2D)) / 2.0f;
-            if (std::abs(sf::angleDifference(angle_yaw, tot_angle)) > 40.0f)
+            angle_yaw = tot_angle + angleDifference(tot_angle, vec2ToAngle(diff_2D)) / 2.0f;
+            if (std::abs(angleDifference(angle_yaw, tot_angle)) > 40.0f)
             {
                 //The target of target is not really in view, so re-position the camera.
                 camera_position_2D = target_position_2D - vec2FromAngle(vec2ToAngle(tot_position_2D - target_position_2D) + 20) * target->getRadius() * 2.0f;

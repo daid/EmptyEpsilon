@@ -294,7 +294,7 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 {
     if (shield_count > 0 && getShieldsActive())
     {
-        float angle = sf::angleDifference(getRotation(), vec2ToAngle(info.location - getPosition()));
+        float angle = angleDifference(getRotation(), vec2ToAngle(info.location - getPosition()));
         if (angle < 0)
             angle += 360.0f;
         float arc = 360.0f / float(shield_count);
@@ -420,7 +420,7 @@ ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
     if (shield_count < 2)
         return SYS_FrontShield;
     float angle = index * 360.0 / shield_count;
-    if (std::abs(sf::angleDifference(angle, 0.0f)) < 90)
+    if (std::abs(angleDifference(angle, 0.0f)) < 90)
         return SYS_FrontShield;
     return SYS_RearShield;
 }

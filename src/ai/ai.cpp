@@ -80,13 +80,13 @@ void ShipAI::run(float delta)
 
 static int getDirectionIndex(float direction, float arc)
 {
-    if (fabs(sf::angleDifference(direction, 0.0f)) < arc / 2.0f)
+    if (fabs(angleDifference(direction, 0.0f)) < arc / 2.0f)
         return 0;
-    if (fabs(sf::angleDifference(direction, 90.0f)) < arc / 2.0f)
+    if (fabs(angleDifference(direction, 90.0f)) < arc / 2.0f)
         return 1;
-    if (fabs(sf::angleDifference(direction, 180.0f)) < arc / 2.0f)
+    if (fabs(angleDifference(direction, 180.0f)) < arc / 2.0f)
         return 2;
-    if (fabs(sf::angleDifference(direction, 270.0f)) < arc / 2.0f)
+    if (fabs(angleDifference(direction, 270.0f)) < arc / 2.0f)
         return 3;
     return -1;
 }
@@ -544,7 +544,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
             auto target_position = target->getPosition();
             auto diff = target_position - owner->getPosition();
             float angle = vec2ToAngle(diff);
-            if ((weapon_direction == EWeaponDirection::Side && sf::angleDifference(angle, owner->getRotation()) > 0) || weapon_direction == EWeaponDirection::Left)
+            if ((weapon_direction == EWeaponDirection::Side && angleDifference(angle, owner->getRotation()) > 0) || weapon_direction == EWeaponDirection::Left)
                 angle += 160;
             else
                 angle -= 160;
@@ -570,7 +570,7 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 
         //Normal flying towards target code
         owner->target_rotation = vec2ToAngle(diff);
-        float rotation_diff = fabs(sf::angleDifference(owner->target_rotation, owner->getRotation()));
+        float rotation_diff = fabs(angleDifference(owner->target_rotation, owner->getRotation()));
 
         if (owner->has_warp_drive && rotation_diff < 30.0 && distance > 2000)
         {
@@ -633,7 +633,7 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         owner->target_rotation = vec2ToAngle(diff);
         if (distance > r)
         {
-            float angle_diff = sf::angleDifference(owner->target_rotation, owner->getRotation());
+            float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
             if (angle_diff > 10.0)
                 owner->impulse_request = 0.0;
             else if (angle_diff > 5.0)
@@ -643,7 +643,7 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         }else{
             if (distance > r / 2.0)
             {
-                owner->target_rotation += sf::angleDifference(owner->target_rotation, target->getRotation()) * (1.0 - distance / r);
+                owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0 - distance / r);
                 owner->impulse_request = distance / r;
             }else{
                 owner->target_rotation = target->getRotation();
@@ -686,7 +686,7 @@ float ShipAI::targetScore(P<SpaceObject> target)
     float distance = glm::length(position_difference);
     //auto position_difference_normal = position_difference / distance;
     //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
-    float angle_difference = sf::angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
+    float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
     float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
     if (P<SpaceStation>(target))
     {
@@ -707,7 +707,7 @@ float ShipAI::targetScore(P<SpaceObject> target)
         {
             if (distance < owner->beam_weapons[n].getRange())
             {
-                if (fabs(sf::angleDifference(angle_difference, owner->beam_weapons[n].getDirection())) < owner->beam_weapons[n].getArc() / 2.0f)
+                if (fabs(angleDifference(angle_difference, owner->beam_weapons[n].getDirection())) < owner->beam_weapons[n].getArc() / 2.0f)
                     score += 1000;
             }
         }
@@ -763,7 +763,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
             // Ship in research triangle
             const auto owner_to_obj = obj->getPosition() - owner->getPosition();
             const float heading_to_obj = vec2ToAngle(owner_to_obj);
-            const float angle_from_heading_to_target = std::abs(sf::angleDifference(heading_to_obj, target_angle));
+            const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
             if(angle_from_heading_to_target < search_angle){
               return std::numeric_limits<float>::infinity();
             }
@@ -779,7 +779,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
 
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
-        float angle_diff = sf::angleDifference(target_angle, fire_angle);
+        float angle_diff = angleDifference(target_angle, fire_angle);
 
         //Target is moving. Estimate where he will be when the missile hits.
         float fly_time = target_distance / data.speed;
@@ -836,7 +836,7 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
         //calculate score
         auto position_difference = space_object->getPosition() - owner_position;
         float distance = glm::length(position_difference);
-        float angle_difference = sf::angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
+        float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
         float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
         if (P<SpaceShip>(space_object))
         {
