@@ -191,5 +191,10 @@ namespace gl
 
     bool isAvailable();
 }
+#else
+namespace gl
+{
+    constexpr bool isAvailable() { return false;  }
+}
 #endif // FEATURE_3D_RENDERING
 #endif // EMPTYEPSILON_GLOBJECTS_H
