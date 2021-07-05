@@ -23,7 +23,7 @@ private:
     const int ROW_HEIGHT = 50;
     const int FRAME_MARGIN = 50;
     const int KEY_LABEL_WIDTH = 375;
-    const int KEY_FIELD_WIDTH = 125;
+    const int KEY_FIELD_WIDTH = 150;
     const int KEY_LABEL_MARGIN = 25;
     const int KEY_COLUMN_TOP = ROW_HEIGHT * 2;
     const int KEY_ROW_COUNT = 10;
