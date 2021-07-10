@@ -38,10 +38,10 @@ function init()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         weaponsTutorial
     }
@@ -145,21 +145,21 @@ addToSequence(weaponsTutorial, function()
     player:setRotationMaxSpeed(0)
 end)
 
-addToSequence(weaponsTutorial, [[This is the weapons screen.
-As the weapons officer, you are responsible for targeting beam weapons, loading and firing missile weapons, and controlling your shields.]])
+addToSequence(weaponsTutorial, _([[This is the weapons screen.
+As the weapons officer, you are responsible for targeting beam weapons, loading and firing missile weapons, and controlling your shields.]]))
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(700, 0):setRotation(0):orderIdle():setScanned(true) end)
-addToSequence(weaponsTutorial, [[Your most fundamental task is to target your ship's weapons.
+addToSequence(weaponsTutorial, _([[Your most fundamental task is to target your ship's weapons.
 Your beam weapons only fire at your selected target, and homing missiles travel toward your selected target.
 
-Target the ship in front of you by pressing it.]], function() return player:getTarget() == prev_object end)
-addToSequence(weaponsTutorial, [[Good! Notice that your beam weapons did not fire on this ship until you targeted it.
+Target the ship in front of you by pressing it.]]), function() return player:getTarget() == prev_object end)
+addToSequence(weaponsTutorial, _([[Good! Notice that your beam weapons did not fire on this ship until you targeted it.
 
-Next up: shield controls.]])
+Next up: shield controls.]]))
 addToSequence(weaponsTutorial, function() prev_object:destroy() end)
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(-700, 0):setRotation(0):orderAttack(player):setScanned(true) end)
-addToSequence(weaponsTutorial, [[As you might notice, you are being shot at. Do not worry, you cannot die right now.
+addToSequence(weaponsTutorial, _([[As you might notice, you are being shot at. Do not worry, you cannot die right now.
 
-You are taking damage, however, so enable your shields to protect yourself.]], function()
+You are taking damage, however, so enable your shields to protect yourself.]]), function()
     player:setHull(player:getHullMax())
     player:setSystemHealth("reactor", 1.0)
     player:setSystemHealth("beamweapons", 1.0)
@@ -172,13 +172,13 @@ You are taking damage, however, so enable your shields to protect yourself.]], f
     player:setSystemHealth("rearshield", 1.0)
     return player:getShieldLevel(1) < player:getShieldMax(1)
 end)
-addToSequence(weaponsTutorial, [[Shields protect your ship from direct damage, but they cost extra energy to maintain, can take only a limited amount of damage, and are slow to recharge. Eventually, this enemy's attacks will get through your shields.
+addToSequence(weaponsTutorial, _([[Shields protect your ship from direct damage, but they cost extra energy to maintain, can take only a limited amount of damage, and are slow to recharge. Eventually, this enemy's attacks will get through your shields.
 
-Disable your shields to continue.]], function() return not player:getShieldsActive() end)
+Disable your shields to continue.]]), function() return not player:getShieldsActive() end)
 addToSequence(weaponsTutorial, function() prev_object:destroy() end)
-addToSequence(weaponsTutorial, [[While only a single button, your shields are vital for survival. They protect against all kinds of damage, including beam weapons, missiles, asteroids, and mines, so make them one of your primary priorities.
+addToSequence(weaponsTutorial, _([[While only a single button, your shields are vital for survival. They protect against all kinds of damage, including beam weapons, missiles, asteroids, and mines, so make them one of your primary priorities.
 
-Next up, the real fun starts: missile weapons.]])
+Next up, the real fun starts: missile weapons.]]))
 
 addToSequence(weaponsTutorial, function()
     player:setWeaponStorageMax("homing", 1)
@@ -187,30 +187,30 @@ addToSequence(weaponsTutorial, function()
     prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(3000, 0):setRotation(0):orderIdle():setScanned(true)
     prev_object:setHull(1):setShieldsMax(1) -- Make it die in 1 shot.
 end)
-addToSequence(weaponsTutorial, [[You have 1 homing missile in your missile storage now, and 1 weapon tube.
+addToSequence(weaponsTutorial, _([[You have 1 homing missile in your missile storage now, and 1 weapon tube.
 You can load this missile into your weapon tube. Depending on your ship type, you might have more types of missiles and more weapon tubes.
 
-Load this homing missile into the weapon tube by selecting the homing missile, and then pressing the load button for this tube. Note that it takes some time to load missiles into tubes.]],
+Load this homing missile into the weapon tube by selecting the homing missile, and then pressing the load button for this tube. Note that it takes some time to load missiles into tubes.]]),
     function() return player:getWeaponTubeLoadType(0) == "homing" end)
-addToSequence(weaponsTutorial, [[Great! Now fire this missile by clicking on the tube.]], function() return player:getWeaponTubeLoadType(0) == nil end)
-addToSequence(weaponsTutorial, [[Missile away!]], function() return not prev_object:isValid() end)
+addToSequence(weaponsTutorial, _([[Great! Now fire this missile by clicking on the tube.]]), function() return player:getWeaponTubeLoadType(0) == nil end)
+addToSequence(weaponsTutorial, _([[Missile away!]]), function() return not prev_object:isValid() end)
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(2000, -2000):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
 addToSequence(weaponsTutorial, function() tutorial:setMessageToBottomPosition() end)
-addToSequence(weaponsTutorial, [[BOOM! That was just firing straight ahead, but you can also aim missiles.
+addToSequence(weaponsTutorial, _([[BOOM! That was just firing straight ahead, but you can also aim missiles.
 
 First, unlock your aim by pressing the [Lock] button above the radar view.
 Next, aim your missiles with the aiming dial surrounding the radar.
-Point the aiming dial at the next ship, load a missile, and fire.]], function()
+Point the aiming dial at the next ship, load a missile, and fire.]]), function()
     if player:getWeaponStorage("homing") < 1 then
         player:setWeaponStorage("homing", 1)
     end
     return not prev_object:isValid()
 end)
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1550, -1900):setRotation(0):orderIdle():setScanned(true):setHull(1):setShieldsMax(1) end)
-addToSequence(weaponsTutorial, [[Perfect aim!
+addToSequence(weaponsTutorial, _([[Perfect aim!
 
 The next ship is behind you. Target the ship by pressing it to guide your homing missiles toward your selected target.
-While not necessary against a stationary target, this homing ability can make all the difference against a moving target.]], function()
+While not necessary against a stationary target, this homing ability can make all the difference against a moving target.]]), function()
     if player:getWeaponStorage("homing") < 1 then
         player:setWeaponStorage("homing", 1)
     end
@@ -218,4 +218,4 @@ While not necessary against a stationary target, this homing ability can make al
 end)
 addToSequence(weaponsTutorial, function() player:setWeaponStorage("homing", 0):setWeaponStorageMax("homing", 0) end)
 addToSequence(weaponsTutorial, function() tutorial:setMessageToTopPosition() end)
-addToSequence(weaponsTutorial, [[In addition to homing missiles, your ship might have nukes, EMPs, and mines. Nukes and EMPs have the same features as homing missiles, but have a 1u-radius blast and do much more damage. EMPs damage only shields, and thus are great for weakening heavily shielded enemies.]])
+addToSequence(weaponsTutorial, _([[In addition to homing missiles, your ship might have nukes, EMPs, and mines. Nukes and EMPs have the same features as homing missiles, but have a 1u-radius blast and do much more damage. EMPs damage only shields, and thus are great for weakening heavily shielded enemies.]]))

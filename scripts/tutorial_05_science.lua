@@ -30,10 +30,10 @@ function init()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         scienceTutorial
     }
@@ -133,31 +133,31 @@ addToSequence(scienceTutorial, function()
     tutorial:setMessageToBottomPosition()
     resetPlayerShip()
 end)
-addToSequence(scienceTutorial, [[Welcome, science officer.
+addToSequence(scienceTutorial, _([[Welcome, science officer.
 
-You are the eyes of the ship. Your job is to supply the captain with information. From your station, you can detect and scan objects at a range of up to 30u.]])
+You are the eyes of the ship. Your job is to supply the captain with information. From your station, you can detect and scan objects at a range of up to 30u.]]))
 addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000) end)
 addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
-addToSequence(scienceTutorial, [[On this radar, you can select objects to get information about them.
+addToSequence(scienceTutorial, _([[On this radar, you can select objects to get information about them.
 I've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.
-Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]])
+Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]]))
 addToSequence(scienceTutorial, function() prev_object:destroy() end)
 addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
-addToSequence(scienceTutorial, [[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
+addToSequence(scienceTutorial, _([[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
 To learn about it, you must scan it. Scanning requires you to match your scanner's frequency bands to your target's.
-Scan this ship now.]], function() return prev_object:isScannedBy(player) end)
-addToSequence(scienceTutorial, [[Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know.]])
-addToSequence(scienceTutorial, [[Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.
+Scan this ship now.]]), function() return prev_object:isScannedBy(player) end)
+addToSequence(scienceTutorial, _([[Good. Notice that you now know this ship is unfriendly. It might have been a friendly or neutral ship as well, but until you scanned it, you do not know.]]))
+addToSequence(scienceTutorial, _([[Note that you have less information about this ship than the friendly ship. You must perform a deep scan of this ship to acquire more information.
 A deep scan takes more effort and requires you to align 2 different frequency bands simultaneously.
-Deep scan the enemy now.]], function() return prev_object:isFullyScannedBy(player) end)
-addToSequence(scienceTutorial, [[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]])
+Deep scan the enemy now.]]), function() return prev_object:isFullyScannedBy(player) end)
+addToSequence(scienceTutorial, _([[Excellent. Notice that this took more time and concentration than the simple scan, so be careful to perform deep scans only when necessary or you could run out of time.]]))
 addToSequence(scienceTutorial, function() prev_object:destroy() end)
 addToSequence(scienceTutorial, function() prev_object2:destroy() end)
 addToSequence(scienceTutorial, function() tutorial:setMessageToTopPosition() end)
-addToSequence(scienceTutorial, [[Next to the long-range radar, the science station can also access the science database.
+addToSequence(scienceTutorial, _([[Next to the long-range radar, the science station can also access the science database.
 
-In this database, you can look up details on things like ship types, weapons, and other objects.]])
-addToSequence(scienceTutorial, [[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
+In this database, you can look up details on things like ship types, weapons, and other objects.]]))
+addToSequence(scienceTutorial, _([[Remember, your job is to supply information. Knowing the location and status of other ships is vital to your captain.
 
-Without your information, the crew is mostly blind.]])
+Without your information, the crew is mostly blind.]]))
 
