@@ -24,10 +24,10 @@ function init()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         relayTutorial
     }
@@ -126,12 +126,12 @@ addToSequence(relayTutorial, function()
     tutorial:setMessageToBottomPosition()
     resetPlayerShip()
 end)
-addToSequence(relayTutorial, [[Welcome to relay!
+addToSequence(relayTutorial, _([[Welcome to relay!
 
-It is your job to communicate with stations and ships. You also have access to short-range radar data from friendly ships and stations, and can place navigational waypoints and launch scanning probes.]])
-addToSequence(relayTutorial, [[Your first responsibility is to coordinate the ship's communications.
+It is your job to communicate with stations and ships. You also have access to short-range radar data from friendly ships and stations, and can place navigational waypoints and launch scanning probes.]]))
+addToSequence(relayTutorial, _([[Your first responsibility is to coordinate the ship's communications.
 
-You can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you.]])
+You can target any station or ship and attempt to communicate with it. Other ships can also attempt to contact you.]]))
 addToSequence(relayTutorial, function()
     prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
     prev_object:setCommsFunction(function()
@@ -144,21 +144,21 @@ addToSequence(relayTutorial, function()
         end)
     end)
 end)
-addToSequence(relayTutorial, [[Open communications with the station near you to continue the tutorial.]], function() return player:isCommsScriptOpen() end)
+addToSequence(relayTutorial, _([[Open communications with the station near you to continue the tutorial.]]), function() return player:isCommsScriptOpen() end)
 addToSequence(relayTutorial, function() tutorial:setMessageToTopPosition() end)
-addToSequence(relayTutorial, [[Now finish your talk with the station.]], function() return not player:isCommsScriptOpen() end)
+addToSequence(relayTutorial, _([[Now finish your talk with the station.]]), function() return not player:isCommsScriptOpen() end)
 addToSequence(relayTutorial, function() tutorial:setMessageToBottomPosition() end)
 addToSequence(relayTutorial, function() prev_object:destroy() end)
-addToSequence(relayTutorial, [[Depending on the scenario, you might have different options when communicating with stations.
-They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]])
+addToSequence(relayTutorial, _([[Depending on the scenario, you might have different options when communicating with stations.
+They might inform you about new objectives and your mission progress, ask for backup, or resupply your weapons. This is all part of your responsibilities as relay officer.]]))
 addToSequence(relayTutorial, function() prev_object = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(20000, -20000):orderIdle():setCallSign("DMY-01"):setScanned(true) end)
 addToSequence(relayTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-24000, 2500):orderIdle():setScanned(true) end)
 addToSequence(relayTutorial, function() prev_object3 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(-17000, -7500):orderIdle():setScanned(true) end)
 addToSequence(relayTutorial, function() prev_object4 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5400, 7500):orderIdle():setScanned(false) end)
-addToSequence(relayTutorial, [[Your station also includes this radar map.
+addToSequence(relayTutorial, _([[Your station also includes this radar map.
 
-On this map, you can detect objects within 5u of all allied ships and stations. Everything else is invisible to you. This gives you a different view from the science officer, because you can scan the contents of nebulae.]])
-addToSequence(relayTutorial, [[Finally, you control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01.]], function()
+On this map, you can detect objects within 5u of all allied ships and stations. Everything else is invisible to you. This gives you a different view from the science officer, because you can scan the contents of nebulae.]]))
+addToSequence(relayTutorial, _([[Finally, you control your ship's probes. Probes can expand your radar view. Launch a probe to the top right, toward the ship designated DMY-01.]]), function()
     for _, obj in ipairs(getObjectsInRadius(20000, -20000, 5000)) do
         if obj.typeName == "ScanProbe" then
             return true
@@ -169,5 +169,5 @@ addToSequence(relayTutorial, function() prev_object:destroy() end)
 addToSequence(relayTutorial, function() prev_object2:destroy() end)
 addToSequence(relayTutorial, function() prev_object3:destroy() end)
 addToSequence(relayTutorial, function() prev_object4:destroy() end)
-addToSequence(relayTutorial, [[Probes can expand your sensory capabilities beyond your normal range and explore nebulae. However, you have a limited supply of them and can't replenish them until you to dock with a station.]])
+addToSequence(relayTutorial, _([[Probes can expand your sensory capabilities beyond your normal range and explore nebulae. However, you have a limited supply of them and can't replenish them until you to dock with a station.]]))
 

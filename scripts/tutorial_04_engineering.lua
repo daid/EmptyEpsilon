@@ -21,10 +21,10 @@ function init()
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     tutorial:setPlayerShip(player)
 
-    tutorial:showMessage([[Welcome to the EmptyEpsilon tutorial.
+    tutorial:showMessage(_([[Welcome to the EmptyEpsilon tutorial.
 Note that this tutorial is designed to give you a quick overview of the basic options for the game, but does not cover every single aspect.
 
-Press next to continue...]], true)
+Press next to continue...]]), true)
     tutorial_list = {
         engineeringTutorial
 
@@ -124,63 +124,63 @@ addToSequence(engineeringTutorial, function()
     tutorial:setMessageToTopPosition()
     resetPlayerShip()
 end)
-addToSequence(engineeringTutorial, [[Welcome to engineering.
+addToSequence(engineeringTutorial, _([[Welcome to engineering.
 Engineering is split into two parts. The top part shows your ship's interior, including damage control teams stationed throughout.
-The bottom part controls power and coolant levels of your ship's systems.]])
+The bottom part controls power and coolant levels of your ship's systems.]]))
 addToSequence(engineeringTutorial, function() player:setWarpDrive(true) end)
 addToSequence(engineeringTutorial, function() player:setSystemHeat("warp", 0.8) end)
-addToSequence(engineeringTutorial, [[First, we will explain your control over your ship's systems.
+addToSequence(engineeringTutorial, _([[First, we will explain your control over your ship's systems.
 Each row on the bottom area of the screen represents one of your ship's system, and each system has a damage level, heat level, power level, and coolant level.
 
-I've overheated your warp system. An overheating system can damage your ship. You can prevent this by putting coolant in your warp system. Select the warp system and increase the coolant slider.]], function() return player:getSystemHeat("warp") < 0.05 end)
+I've overheated your warp system. An overheating system can damage your ship. You can prevent this by putting coolant in your warp system. Select the warp system and increase the coolant slider.]]), function() return player:getSystemHeat("warp") < 0.05 end)
 addToSequence(engineeringTutorial, function() player:setSystemHeat("impulse", 0.8) end)
-addToSequence(engineeringTutorial, [[I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the warp system's coolant level is automatically reduced to allow for coolant in the impulse system.
+addToSequence(engineeringTutorial, _([[I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the warp system's coolant level is automatically reduced to allow for coolant in the impulse system.
 
-This is because you have a limited amount of coolant available to distribute this across your ship's systems.]], function() return player:getSystemHeat("impulse") < 0.05 end)
-addToSequence(engineeringTutorial, [[Good! Next up: power levels.
+This is because you have a limited amount of coolant available to distribute this across your ship's systems.]]), function() return player:getSystemHeat("impulse") < 0.05 end)
+addToSequence(engineeringTutorial, _([[Good! Next up: power levels.
 You can manage each system's power level independently. Adding power to a system makes it perform more effectively, but also generates more heat, and thus requires coolant to prevent it from overheating and damaging the system.
 
-Maximize the power to the front shield system.]], function() return player:getSystemPower("frontshield") > 2.5 end)
-addToSequence(engineeringTutorial, [[The added power increases the amount of heat in the system.
+Maximize the power to the front shield system.]]), function() return player:getSystemPower("frontshield") > 2.5 end)
+addToSequence(engineeringTutorial, _([[The added power increases the amount of heat in the system.
 
-Overpower the system until it overheats.]], function() return player:getSystemHealth("frontshield") < 0.5 end)
+Overpower the system until it overheats.]]), function() return player:getSystemHealth("frontshield") < 0.5 end)
 addToSequence(engineeringTutorial, function() player:setSystemPower("frontshield", 0.0) end)
 addToSequence(engineeringTutorial, function() player:commandSetSystemPowerRequest("frontshield", 0.0) end)
-addToSequence(engineeringTutorial, [[Note that as the system overheats, it takes damage. Because the system is damaged, it functions less effectively.
+addToSequence(engineeringTutorial, _([[Note that as the system overheats, it takes damage. Because the system is damaged, it functions less effectively.
 
-Systems can also take damage when your ship is hit while the shields are down.]])
+Systems can also take damage when your ship is hit while the shields are down.]]))
 addToSequence(engineeringTutorial, function() tutorial:setMessageToBottomPosition() end)
-addToSequence(engineeringTutorial, [[In this top area, you see your damage control teams in your ship.]])
-addToSequence(engineeringTutorial, [[The front shield system is damaged, as indicated by the color of this room's outline.
+addToSequence(engineeringTutorial, _([[In this top area, you see your damage control teams in your ship.]]))
+addToSequence(engineeringTutorial, _([[The front shield system is damaged, as indicated by the color of this room's outline.
 
 Select a damage control team from elsewhere on the ship by pressing it, then press on that room to initiate repairs.
-(Repairs will take a while.)]], function() player:commandSetSystemPowerRequest("frontshield", 0.0) return player:getSystemHealth("frontshield") > 0.9 end)
+(Repairs will take a while.)]]), function() player:commandSetSystemPowerRequest("frontshield", 0.0) return player:getSystemHealth("frontshield") > 0.9 end)
 addToSequence(engineeringTutorial, function() tutorial:setMessageToTopPosition() end)
-addToSequence(engineeringTutorial, [[Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.
-Remember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can.]])
-addToSequence(engineeringTutorial, [[Reactor:
+addToSequence(engineeringTutorial, _([[Good. Now you know your most important tasks. Next, we'll go over each system's function in detail.
+Remember, each system performs better with more power, but performs less well when damaged. Your job is to keep vital systems running as well as you can.]]))
+addToSequence(engineeringTutorial, _([[Reactor:
 
-The reactor generates energy. Adding power to the reactor increases your energy generation rate.]])
-addToSequence(engineeringTutorial, [[Beam Weapons:
+The reactor generates energy. Adding power to the reactor increases your energy generation rate.]]))
+addToSequence(engineeringTutorial, _([[Beam Weapons:
 
 Adding power to the beam weapons system increases their rate of fire, which causes them to do more damage.
-Note that every beam you fire adds additional heat to the system.]])
-addToSequence(engineeringTutorial, [[Missile System:
+Note that every beam you fire adds additional heat to the system.]]))
+addToSequence(engineeringTutorial, _([[Missile System:
 
-Increased missile system power lowers the reload time of weapon tubes.]])
-addToSequence(engineeringTutorial, [[Maneuvering:
+Increased missile system power lowers the reload time of weapon tubes.]]))
+addToSequence(engineeringTutorial, _([[Maneuvering:
 
-Increasing power to the maneuvering system allows the ship to turn faster. It also increases the recharge rate for the combat maneuvering system.]])
-addToSequence(engineeringTutorial, [[Impulse Engines:
+Increasing power to the maneuvering system allows the ship to turn faster. It also increases the recharge rate for the combat maneuvering system.]]))
+addToSequence(engineeringTutorial, _([[Impulse Engines:
 
-Adding power to the impulse engines increases your impulse flight speed.]])
-addToSequence(engineeringTutorial, [[Warp Drive:
+Adding power to the impulse engines increases your impulse flight speed.]]))
+addToSequence(engineeringTutorial, _([[Warp Drive:
 
-Adding power to the warp drive increases your warp drive flight speed.]])
-addToSequence(engineeringTutorial, [[Jump Drive:
+Adding power to the warp drive increases your warp drive flight speed.]]))
+addToSequence(engineeringTutorial, _([[Jump Drive:
 
-A higher-powered jump drive recharges faster and has a shorter delay before jumping.]])
-addToSequence(engineeringTutorial, [[Shields:
+A higher-powered jump drive recharges faster and has a shorter delay before jumping.]]))
+addToSequence(engineeringTutorial, _([[Shields:
 
-Additional power in the shield system increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged.]])
-addToSequence(engineeringTutorial, [[This concludes the overview of the engineering station. Be sure to keep your ship running in top condition!]])
+Additional power in the shield system increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged.]]))
+addToSequence(engineeringTutorial, _([[This concludes the overview of the engineering station. Be sure to keep your ship running in top condition!]]))
