@@ -641,8 +641,7 @@ msgstr ""
 "Damit wären wir am Ende der Übersicht zu dieser Konsole angelangt. Halte das "
 "Schiff in einem guten Zustand!"
 
-#: scripts/tutorial_00_all.lua:367 scripts/tutorial_00_all.lua:453
-#: scripts/tutorial_05_science.lua:136
+#: scripts/tutorial_00_all.lua:367 scripts/tutorial_05_science.lua:136
 msgid ""
 "Welcome, science officer.\n"
 "\n"
@@ -846,6 +845,21 @@ msgstr ""
 "Sonden können deine Sensordaten erweitern und Nebel erforschen. Allerdings "
 "ist ihr Vorrat begrenzt und kann nur wieder aufgefüllt werden, wenn du an "
 "einer Station andockst."
+
+#: scripts/tutorial_00_all.lua:453
+#, fuzzy
+msgid ""
+"Welcome, operations officer.\n"
+"\n"
+"You are the eyes of the ship. Your job is to supply the captain with "
+"information. From your station, you can detect and scan objects at a range "
+"of up to 30u."
+msgstr ""
+"Willkommen auf der Wissenschafts-Station!\n"
+"\n"
+"Du bist die Augen und Ohren des Schiffes. Deine Aufgabe ist es, Captain und "
+"Crew mit Informationen zu versorgen. Von deiner Station aus kannst du in "
+"einem Radius von 30U Objekte erfassen und scannen."
 
 #: scripts/tutorial_00_all.lua:480
 msgid ""

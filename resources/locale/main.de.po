@@ -12,130 +12,130 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/scienceDatabase.cpp:298
+#: src/scienceDatabase.cpp:300
 msgctxt "database direction"
 msgid "Front"
 msgstr "Front"
 
-#: src/scienceDatabase.cpp:300
+#: src/scienceDatabase.cpp:302
 msgctxt "database direction"
 msgid "Right"
 msgstr "Rechts"
 
-#: src/scienceDatabase.cpp:302
+#: src/scienceDatabase.cpp:304
 msgctxt "database direction"
 msgid "Left"
 msgstr "Links"
 
-#: src/scienceDatabase.cpp:304
+#: src/scienceDatabase.cpp:306
 msgctxt "database direction"
 msgid "Rear"
 msgstr "Heck"
 
-#: src/scienceDatabase.cpp:325
+#: src/scienceDatabase.cpp:327
 msgctxt "database"
 msgid "Factions"
 msgstr "Fraktionen"
 
-#: src/scienceDatabase.cpp:333 src/scienceDatabase.cpp:336
+#: src/scienceDatabase.cpp:335 src/scienceDatabase.cpp:338
 msgctxt "stance"
 msgid "Neutral"
 msgstr "Neutral"
 
-#: src/scienceDatabase.cpp:337
+#: src/scienceDatabase.cpp:339
 msgctxt "stance"
 msgid "Enemy"
 msgstr "Feindlich"
 
-#: src/scienceDatabase.cpp:338
+#: src/scienceDatabase.cpp:340
 msgctxt "stance"
 msgid "Friendly"
 msgstr "Verbündet"
 
-#: src/scienceDatabase.cpp:346
+#: src/scienceDatabase.cpp:348
 msgctxt "database"
 msgid "Ships"
 msgstr "Schiffe"
 
-#: src/scienceDatabase.cpp:381
+#: src/scienceDatabase.cpp:383
 msgctxt "database"
 msgid "Class"
 msgstr "Klasse"
 
-#: src/scienceDatabase.cpp:382
+#: src/scienceDatabase.cpp:384
 msgctxt "database"
 msgid "Sub-class"
 msgstr "Unterklasse"
 
-#: src/scienceDatabase.cpp:383
+#: src/scienceDatabase.cpp:385
 msgctxt "database"
 msgid "Size"
 msgstr "Größe"
 
-#: src/scienceDatabase.cpp:393
+#: src/scienceDatabase.cpp:395
 msgctxt "database"
 msgid "Shield"
 msgstr "Schilde"
 
-#: src/scienceDatabase.cpp:395
+#: src/scienceDatabase.cpp:397
 msgid "Hull"
 msgstr "Hülle"
 
-#: src/scienceDatabase.cpp:399
+#: src/scienceDatabase.cpp:401
 msgctxt "database"
 msgid "Move speed"
 msgstr "Geschwindigkeit"
 
-#: src/scienceDatabase.cpp:400
+#: src/scienceDatabase.cpp:402
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr "Geschw. rückwärts"
 
-#: src/scienceDatabase.cpp:403
+#: src/scienceDatabase.cpp:405
 msgctxt "database"
 msgid "Turn speed"
 msgstr "Wendigkeit"
 
-#: src/scienceDatabase.cpp:407
+#: src/scienceDatabase.cpp:409
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Warpgeschwindigkeit"
 
-#: src/scienceDatabase.cpp:411
+#: src/scienceDatabase.cpp:413
 msgctxt "database"
 msgid "Jump range"
 msgstr "Sprungreichweite"
 
-#: src/scienceDatabase.cpp:418
+#: src/scienceDatabase.cpp:420
 msgid "{direction} beam weapon"
 msgstr "Laser {direction}"
 
-#: src/scienceDatabase.cpp:419
+#: src/scienceDatabase.cpp:421
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
 msgstr "{damage} Schaden / {interval} Sek."
 
-#: src/scienceDatabase.cpp:428
+#: src/scienceDatabase.cpp:430
 msgctxt "database"
 msgid "{direction} tube"
 msgstr "Raketen {direction}"
 
-#: src/scienceDatabase.cpp:431
+#: src/scienceDatabase.cpp:433
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr "kl. Raketen {direction}"
 
-#: src/scienceDatabase.cpp:435
+#: src/scienceDatabase.cpp:437
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr "gr. Raketen {direction}"
 
-#: src/scienceDatabase.cpp:439
+#: src/scienceDatabase.cpp:441
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr "{loadtime} Sek. Ladezeit"
 
-#: src/scienceDatabase.cpp:446
+#: src/scienceDatabase.cpp:448
 msgid "Storage {weapon}"
 msgstr "Ladung {weapon}"
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "LAN"
 msgstr "LAN"
 
-#: src/menus/serverBrowseMenu.cpp:68 src/menus/serverCreationScreen.cpp:87
+#: src/menus/serverBrowseMenu.cpp:68 src/menus/serverCreationScreen.cpp:94
 msgid "Internet"
 msgstr "Internet"
 
@@ -415,163 +415,164 @@ msgid "GM control code: "
 msgstr "SL-Kontrollcode: "
 
 #: src/menus/serverCreationScreen.cpp:75
-msgid "Server IP: "
+#, fuzzy
+msgid "Server IPs: "
 msgstr "Server-IP: "
 
-#: src/menus/serverCreationScreen.cpp:81
+#: src/menus/serverCreationScreen.cpp:88
 msgid "Server visibility: "
 msgstr "Serversichtbarkeit: "
 
-#: src/menus/serverCreationScreen.cpp:87
+#: src/menus/serverCreationScreen.cpp:94
 msgid "LAN only"
 msgstr "Nur LAN"
 
-#: src/menus/serverCreationScreen.cpp:90
+#: src/menus/serverCreationScreen.cpp:97
 msgid "Player ship options"
 msgstr "Spielerschiff-Optionen"
 
-#: src/menus/serverCreationScreen.cpp:95
+#: src/menus/serverCreationScreen.cpp:102
 msgid "Warp/Jump: "
 msgstr "Warp/Sprung: "
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Ship default"
 msgstr "Schiff-Standard"
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Warp drive"
 msgstr "Warpantrieb"
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Jump drive"
 msgstr "Sprungantrieb"
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Both"
 msgstr "Beide"
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Neither"
 msgstr "Keiner"
 
-#: src/menus/serverCreationScreen.cpp:101
+#: src/menus/serverCreationScreen.cpp:108
 msgid "Main screen options"
 msgstr "Hauptschirm-Optionen"
 
-#: src/menus/serverCreationScreen.cpp:106
+#: src/menus/serverCreationScreen.cpp:113
 msgid "Tactical radar"
 msgstr "Taktisches Radar"
 
-#: src/menus/serverCreationScreen.cpp:109
+#: src/menus/serverCreationScreen.cpp:116
 msgid "Long range radar"
 msgstr "Langstreckeckenradar"
 
-#: src/menus/serverCreationScreen.cpp:114
+#: src/menus/serverCreationScreen.cpp:121
 msgid "Game rules"
 msgstr "Spielregeln"
 
-#: src/menus/serverCreationScreen.cpp:119
+#: src/menus/serverCreationScreen.cpp:126
 msgid "Scan complexity: "
 msgstr "Scankomplexität: "
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "None (delay)"
 msgstr "Keine (Wartezeit)"
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "Simple"
 msgstr "Einfach"
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "Normal"
 msgstr "Normal"
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "Advanced"
 msgstr "Erweitert"
 
-#: src/menus/serverCreationScreen.cpp:127
+#: src/menus/serverCreationScreen.cpp:134
 msgid "Hacking difficulty: "
 msgstr "Hacking-Schwierigkeit: "
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Simple"
 msgstr "Einfach"
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Normal"
 msgstr "Normal"
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Difficult"
 msgstr "Schwierig"
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr "Wahnsinning"
 
-#: src/menus/serverCreationScreen.cpp:135
+#: src/menus/serverCreationScreen.cpp:142
 msgid "Hacking type: "
 msgstr "Hacking-Art: "
 
-#: src/menus/serverCreationScreen.cpp:138
+#: src/menus/serverCreationScreen.cpp:145
 msgctxt "hacking"
 msgid "Mine"
 msgstr "Minen"
 
-#: src/menus/serverCreationScreen.cpp:138
+#: src/menus/serverCreationScreen.cpp:145
 msgctxt "hacking"
 msgid "Lights"
 msgstr "Lichter"
 
-#: src/menus/serverCreationScreen.cpp:138
+#: src/menus/serverCreationScreen.cpp:145
 msgctxt "hacking"
 msgid "All"
 msgstr "Alle"
 
-#: src/menus/serverCreationScreen.cpp:143
+#: src/menus/serverCreationScreen.cpp:150
 msgid "Beam/shield frequencies"
 msgstr "Frequenzen"
 
-#: src/menus/serverCreationScreen.cpp:147
+#: src/menus/serverCreationScreen.cpp:154
 msgid "Per-system damage"
 msgstr "Schaden pro System"
 
-#: src/menus/serverCreationScreen.cpp:153
+#: src/menus/serverCreationScreen.cpp:160
 msgid "Scenario"
 msgstr "Szenario"
 
-#: src/menus/serverCreationScreen.cpp:172
+#: src/menus/serverCreationScreen.cpp:179
 msgid "Variation: "
 msgstr "Variante: "
 
-#: src/menus/serverCreationScreen.cpp:186
+#: src/menus/serverCreationScreen.cpp:193
 msgid "Close server"
 msgstr "Server beenden"
 
-#: src/menus/serverCreationScreen.cpp:193
+#: src/menus/serverCreationScreen.cpp:200
 msgid "Start scenario"
 msgstr "Szenario starten"
 
-#: src/menus/serverCreationScreen.cpp:235
+#: src/menus/serverCreationScreen.cpp:242
 msgctxt "variation"
 msgid "None"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:243
+#: src/menus/serverCreationScreen.cpp:250
 msgid "No variation selected. Play the scenario as intended."
 msgstr ""
 "Keine Variante gewählt. Szenario wird in der Standard-Variante gespielt."
@@ -2546,29 +2547,29 @@ msgctxt "hotkey_Engineering"
 msgid "Cancel self-destruct"
 msgstr "Selbstzertstörung abbrechen"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:192
+#: src/spaceObjects/missiles/missileWeapon.cpp:196
 #: src/spaceObjects/mine.cpp:160
 msgctxt "gm_info"
 msgid "Owner"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:199
+#: src/spaceObjects/missiles/missileWeapon.cpp:203
 msgctxt "gm_info"
 msgid "Target"
 msgstr "Ziel"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:202
+#: src/spaceObjects/missiles/missileWeapon.cpp:206
 #: src/spaceObjects/mine.cpp:163
 msgctxt "gm_info"
 msgid "Faction"
 msgstr "Fraktion"
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:203
+#: src/spaceObjects/missiles/missileWeapon.cpp:207
 msgctxt "gm_info"
 msgid "Lifetime"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:204
+#: src/spaceObjects/missiles/missileWeapon.cpp:208
 msgctxt "gm_info"
 msgid "Size"
 msgstr "Größe"
