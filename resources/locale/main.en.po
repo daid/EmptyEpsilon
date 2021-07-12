@@ -1,127 +1,127 @@
-#: src/scienceDatabase.cpp:298
+#: src/scienceDatabase.cpp:300
 msgctxt "database direction"
 msgid "Front"
 msgstr ""
 
-#: src/scienceDatabase.cpp:300
+#: src/scienceDatabase.cpp:302
 msgctxt "database direction"
 msgid "Right"
 msgstr ""
 
-#: src/scienceDatabase.cpp:302
+#: src/scienceDatabase.cpp:304
 msgctxt "database direction"
 msgid "Left"
 msgstr ""
 
-#: src/scienceDatabase.cpp:304
+#: src/scienceDatabase.cpp:306
 msgctxt "database direction"
 msgid "Rear"
 msgstr ""
 
-#: src/scienceDatabase.cpp:325
+#: src/scienceDatabase.cpp:327
 msgctxt "database"
 msgid "Factions"
 msgstr ""
 
-#: src/scienceDatabase.cpp:333 src/scienceDatabase.cpp:336
+#: src/scienceDatabase.cpp:335 src/scienceDatabase.cpp:338
 msgctxt "stance"
 msgid "Neutral"
 msgstr ""
 
-#: src/scienceDatabase.cpp:337
+#: src/scienceDatabase.cpp:339
 msgctxt "stance"
 msgid "Enemy"
 msgstr ""
 
-#: src/scienceDatabase.cpp:338
+#: src/scienceDatabase.cpp:340
 msgctxt "stance"
 msgid "Friendly"
 msgstr ""
 
-#: src/scienceDatabase.cpp:346
+#: src/scienceDatabase.cpp:348
 msgctxt "database"
 msgid "Ships"
 msgstr ""
 
-#: src/scienceDatabase.cpp:381
+#: src/scienceDatabase.cpp:383
 msgctxt "database"
 msgid "Class"
 msgstr ""
 
-#: src/scienceDatabase.cpp:382
+#: src/scienceDatabase.cpp:384
 msgctxt "database"
 msgid "Sub-class"
 msgstr ""
 
-#: src/scienceDatabase.cpp:383
+#: src/scienceDatabase.cpp:385
 msgctxt "database"
 msgid "Size"
 msgstr ""
 
-#: src/scienceDatabase.cpp:393
+#: src/scienceDatabase.cpp:395
 msgctxt "database"
 msgid "Shield"
 msgstr ""
 
-#: src/scienceDatabase.cpp:395
+#: src/scienceDatabase.cpp:397
 msgid "Hull"
 msgstr ""
 
-#: src/scienceDatabase.cpp:399
+#: src/scienceDatabase.cpp:401
 msgctxt "database"
 msgid "Move speed"
 msgstr ""
 
-#: src/scienceDatabase.cpp:400
+#: src/scienceDatabase.cpp:402
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr ""
 
-#: src/scienceDatabase.cpp:403
+#: src/scienceDatabase.cpp:405
 msgctxt "database"
 msgid "Turn speed"
 msgstr ""
 
-#: src/scienceDatabase.cpp:407
+#: src/scienceDatabase.cpp:409
 msgctxt "database"
 msgid "Warp speed"
 msgstr ""
 
-#: src/scienceDatabase.cpp:411
+#: src/scienceDatabase.cpp:413
 msgctxt "database"
 msgid "Jump range"
 msgstr ""
 
-#: src/scienceDatabase.cpp:418
+#: src/scienceDatabase.cpp:420
 msgid "{direction} beam weapon"
 msgstr ""
 
-#: src/scienceDatabase.cpp:419
+#: src/scienceDatabase.cpp:421
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
 msgstr ""
 
-#: src/scienceDatabase.cpp:428
+#: src/scienceDatabase.cpp:430
 msgctxt "database"
 msgid "{direction} tube"
 msgstr ""
 
-#: src/scienceDatabase.cpp:431
+#: src/scienceDatabase.cpp:433
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr ""
 
-#: src/scienceDatabase.cpp:435
+#: src/scienceDatabase.cpp:437
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr ""
 
-#: src/scienceDatabase.cpp:439
+#: src/scienceDatabase.cpp:441
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr ""
 
-#: src/scienceDatabase.cpp:446
+#: src/scienceDatabase.cpp:448
 msgid "Storage {weapon}"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "LAN"
 msgstr ""
 
-#: src/menus/serverBrowseMenu.cpp:68 src/menus/serverCreationScreen.cpp:87
+#: src/menus/serverBrowseMenu.cpp:68 src/menus/serverCreationScreen.cpp:94
 msgid "Internet"
 msgstr ""
 
@@ -401,163 +401,163 @@ msgid "GM control code: "
 msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:75
-msgid "Server IP: "
+msgid "Server IPs: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:81
+#: src/menus/serverCreationScreen.cpp:88
 msgid "Server visibility: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:87
+#: src/menus/serverCreationScreen.cpp:94
 msgid "LAN only"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:90
+#: src/menus/serverCreationScreen.cpp:97
 msgid "Player ship options"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:95
+#: src/menus/serverCreationScreen.cpp:102
 msgid "Warp/Jump: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Ship default"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Warp drive"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Jump drive"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Both"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:98
+#: src/menus/serverCreationScreen.cpp:105
 msgctxt "warp/jump"
 msgid "Neither"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:101
+#: src/menus/serverCreationScreen.cpp:108
 msgid "Main screen options"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:106
+#: src/menus/serverCreationScreen.cpp:113
 msgid "Tactical radar"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:109
+#: src/menus/serverCreationScreen.cpp:116
 msgid "Long range radar"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:114
+#: src/menus/serverCreationScreen.cpp:121
 msgid "Game rules"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:119
+#: src/menus/serverCreationScreen.cpp:126
 msgid "Scan complexity: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "None (delay)"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "Simple"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "Normal"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:122
+#: src/menus/serverCreationScreen.cpp:129
 msgctxt "scanning"
 msgid "Advanced"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:127
+#: src/menus/serverCreationScreen.cpp:134
 msgid "Hacking difficulty: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Simple"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Normal"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Difficult"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:130
+#: src/menus/serverCreationScreen.cpp:137
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:135
+#: src/menus/serverCreationScreen.cpp:142
 msgid "Hacking type: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:138
+#: src/menus/serverCreationScreen.cpp:145
 msgctxt "hacking"
 msgid "Mine"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:138
+#: src/menus/serverCreationScreen.cpp:145
 msgctxt "hacking"
 msgid "Lights"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:138
+#: src/menus/serverCreationScreen.cpp:145
 msgctxt "hacking"
 msgid "All"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:143
+#: src/menus/serverCreationScreen.cpp:150
 msgid "Beam/shield frequencies"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:147
+#: src/menus/serverCreationScreen.cpp:154
 msgid "Per-system damage"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:153
+#: src/menus/serverCreationScreen.cpp:160
 msgid "Scenario"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:172
+#: src/menus/serverCreationScreen.cpp:179
 msgid "Variation: "
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:186
+#: src/menus/serverCreationScreen.cpp:193
 msgid "Close server"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:193
+#: src/menus/serverCreationScreen.cpp:200
 msgid "Start scenario"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:235
+#: src/menus/serverCreationScreen.cpp:242
 msgctxt "variation"
 msgid "None"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:243
+#: src/menus/serverCreationScreen.cpp:250
 msgid "No variation selected. Play the scenario as intended."
 msgstr ""
 
@@ -2531,29 +2531,29 @@ msgctxt "hotkey_Engineering"
 msgid "Cancel self-destruct"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:192
+#: src/spaceObjects/missiles/missileWeapon.cpp:196
 #: src/spaceObjects/mine.cpp:160
 msgctxt "gm_info"
 msgid "Owner"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:199
+#: src/spaceObjects/missiles/missileWeapon.cpp:203
 msgctxt "gm_info"
 msgid "Target"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:202
+#: src/spaceObjects/missiles/missileWeapon.cpp:206
 #: src/spaceObjects/mine.cpp:163
 msgctxt "gm_info"
 msgid "Faction"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:203
+#: src/spaceObjects/missiles/missileWeapon.cpp:207
 msgctxt "gm_info"
 msgid "Lifetime"
 msgstr ""
 
-#: src/spaceObjects/missiles/missileWeapon.cpp:204
+#: src/spaceObjects/missiles/missileWeapon.cpp:208
 msgctxt "gm_info"
 msgid "Size"
 msgstr ""

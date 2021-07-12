@@ -357,7 +357,6 @@ set(SOURCES
     src/hardware/serialDriver.h
     src/httpScriptAccess.h
     src/main.h
-    src/math
     src/math/centerOfMass.h
     src/math/triangulate.h
     src/menus/autoConnectScreen.h
