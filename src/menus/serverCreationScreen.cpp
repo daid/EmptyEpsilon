@@ -75,6 +75,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "IP_LABEL", tr("Server IPs: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     auto ips = new GuiSelector(row, "IP", [](int index, string value){});
     ips->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    ips->setTextSize(20);
     for(auto addr_str : sp::io::network::Address::getLocalAddress().getHumanReadable())
     {
         if (addr_str == "::1" || addr_str == "127.0.0.1") continue;
