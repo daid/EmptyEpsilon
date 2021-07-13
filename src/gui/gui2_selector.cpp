@@ -80,6 +80,7 @@ void GuiSelector::onMouseUp(sf::Vector2f position)
                     callback();
                 }));
                 popup_buttons[n]->setSize(GuiElement::GuiSizeMax, 50);
+                popup_buttons[n]->setTextSize(text_size);
             }else{
                 popup_buttons[n]->setText(entries[n].name);
             }
