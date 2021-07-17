@@ -2223,7 +2223,7 @@ msgstr "Warp verringern"
 #: src/gui/hotkeyConfig.cpp:60
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr "Docken/abbrechen/abdocken"
+msgstr "Andocken/abbrechen/abdocken"
 
 #: src/gui/hotkeyConfig.cpp:61
 msgctxt "hotkey_Helms"
