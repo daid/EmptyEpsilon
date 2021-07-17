@@ -113,7 +113,7 @@ msgstr "Laser {direction}"
 #: src/scienceDatabase.cpp:421
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} Schaden / {interval} Sek."
+msgstr "{damage} Schaden / {interval} sek"
 
 #: src/scienceDatabase.cpp:430
 msgctxt "database"
@@ -162,7 +162,7 @@ msgstr "Wissenschaft"
 #: src/playerInfo.cpp:225
 msgctxt "station"
 msgid "Relay"
-msgstr ""
+msgstr "Kommunikation"
 
 #: src/playerInfo.cpp:226
 msgctxt "station"
@@ -207,7 +207,7 @@ msgstr "Strategische Karte"
 #: src/playerInfo.cpp:234
 msgctxt "station"
 msgid "Comms"
-msgstr "Kommunikation"
+msgstr "Nachrichten"
 
 #: src/playerInfo.cpp:235
 msgctxt "station"
@@ -303,7 +303,7 @@ msgstr "noch verbunden"
 #: src/menus/serverBrowseMenu.cpp:23
 msgctxt "game_client_disconnect_reason"
 msgid "bad credentials"
-msgstr ""
+msgstr "Anmeldefehler"
 
 #: src/menus/serverBrowseMenu.cpp:25
 msgctxt "game_client_disconnect_reason"
@@ -313,7 +313,7 @@ msgstr "durch Server beendet"
 #: src/menus/serverBrowseMenu.cpp:27
 msgctxt "game_client_disconnect_reason"
 msgid "timed out"
-msgstr ""
+msgstr "Zeitüberschreitung"
 
 #: src/menus/serverBrowseMenu.cpp:29
 msgctxt "game_client_disconnect_reason"
@@ -345,7 +345,7 @@ msgstr "Zurück"
 
 #: src/menus/serverBrowseMenu.cpp:57
 msgid "Connection error: {message}"
-msgstr ""
+msgstr "Verbindungsfehler: {message}"
 
 #: src/menus/serverBrowseMenu.cpp:68
 msgid "LAN"
@@ -415,9 +415,8 @@ msgid "GM control code: "
 msgstr "SL-Kontrollcode: "
 
 #: src/menus/serverCreationScreen.cpp:75
-#, fuzzy
 msgid "Server IPs: "
-msgstr "Server-IP: "
+msgstr "Server-IPs:"
 
 #: src/menus/serverCreationScreen.cpp:88
 msgid "Server visibility: "
@@ -644,7 +643,7 @@ msgstr "Rotierendes Waffen-Radar"
 
 #: src/menus/optionsMenu.cpp:156
 msgid "Science Radar Lock"
-msgstr "Rotierendes Wissenschafts-Radar"
+msgstr "Rot. Wissenschafts-Radar"
 
 #: src/menus/optionsMenu.cpp:163
 msgid "Control Options"
@@ -673,15 +672,15 @@ msgstr "Stations-Auswahl"
 
 #: src/menus/shipSelectionScreen.cpp:52
 msgid "6/5 player crew"
-msgstr ""
+msgstr "Crewstärke: 5-6 Pers."
 
 #: src/menus/shipSelectionScreen.cpp:52
 msgid "4/3 player crew"
-msgstr ""
+msgstr "Crewstärke: 3-4 Pers."
 
 #: src/menus/shipSelectionScreen.cpp:52
 msgid "1 player crew/extras"
-msgstr ""
+msgstr "Solo-Crew/Extras"
 
 #: src/menus/shipSelectionScreen.cpp:52
 msgid "Alternative options"
@@ -756,11 +755,11 @@ msgstr "Bereit"
 #: src/menus/shipSelectionScreen.cpp:248 src/menus/shipSelectionScreen.cpp:254
 #: src/menus/shipSelectionScreen.cpp:333
 msgid "Enter this ship's control code:"
-msgstr "Schiffs-Kontrollcde eingeben"
+msgstr "Schiffs-Kontrollcde eingeben:"
 
 #: src/menus/shipSelectionScreen.cpp:269
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: src/menus/shipSelectionScreen.cpp:280
 msgid "Incorrect control code. Re-enter GM code:"
@@ -771,6 +770,8 @@ msgid ""
 "Control code accepted.\n"
 "Granting access."
 msgstr ""
+"Kontrollcode akzeptiert.\n"
+"Gewähre Zugang"
 
 #: src/menus/shipSelectionScreen.cpp:305
 msgid "Incorrect control code. Re-enter code for {callsign}:"
@@ -781,10 +782,12 @@ msgid ""
 "Control code accepted.\n"
 "Granting access to {callsign}."
 msgstr ""
+"Kontrollcode akzeptiert.\n"
+"Gewähre Zugang zu {callsign}."
 
 #: src/menus/shipSelectionScreen.cpp:328
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/screens/cinematicViewScreen.cpp:39 src/screens/topDownScreen.cpp:31
 msgctxt "button"
@@ -900,7 +903,7 @@ msgstr "Leistung: {current_level}% / {requested}%"
 #: src/screens/crew6/engineeringScreen.cpp:245
 msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
-msgstr "Kühlm: {current_level}% / {requested}%"
+msgstr "Kühlmittel: {current_level}% / {requested}%"
 
 #: src/screens/crew6/engineeringScreen.cpp:259
 msgid "Energy production"
@@ -1054,7 +1057,7 @@ msgstr "Hülle"
 
 #: src/screens/extra/powerManagement.cpp:22
 msgid "Coolant"
-msgstr "Kühlm."
+msgstr "Kühlmittel"
 
 #: src/screens/extra/powerManagement.cpp:40
 msgctxt "button"
@@ -1064,7 +1067,7 @@ msgstr "Leistung"
 #: src/screens/extra/powerManagement.cpp:41
 msgctxt "button"
 msgid "Coolant"
-msgstr "Kühlm."
+msgstr "Kühlmittel"
 
 #: src/screens/extra/powerManagement.cpp:42
 msgctxt "button"
@@ -1316,7 +1319,7 @@ msgstr "Kühlmittelrate"
 #: src/screens/gm/tweak.cpp:73
 msgctxt "tab"
 msgid "Heat Rate"
-msgstr "WärmeHitzerate"
+msgstr "Wärmerate"
 
 #: src/screens/gm/tweak.cpp:75
 msgctxt "tab"
@@ -1355,7 +1358,7 @@ msgstr "Minimale Sprungweite:"
 
 #: src/screens/gm/tweak.cpp:160
 msgid "Jump Max Distance:"
-msgstr "Maximale Sprungweite"
+msgstr "Maximale Sprungweite:"
 
 #: src/screens/gm/tweak.cpp:166
 msgid "Jump charge:"
@@ -1376,7 +1379,7 @@ msgstr "Kann zerstört werden"
 #: src/screens/gm/tweak.cpp:194
 msgctxt "tweak_ship"
 msgid "Special drives:"
-msgstr ""
+msgstr "Spezialantriebe:"
 
 #: src/screens/gm/tweak.cpp:195
 msgid "Warp Drive"
@@ -1585,7 +1588,7 @@ msgstr "Maximal Sondenanzahl:"
 
 #: src/screens/gm/tweak.cpp:987
 msgid "Scan Probes:"
-msgstr "Sonden"
+msgstr "Sonden:"
 
 #: src/screens/gm/tweak.cpp:1037
 msgctxt "button"
@@ -1620,7 +1623,7 @@ msgstr "Kann Sonden starten"
 #: src/screens/gm/tweak.cpp:1072
 msgctxt "button"
 msgid "Auto coolant"
-msgstr "Auto-Kühlm."
+msgstr "Auto-Kühlung"
 
 #: src/screens/gm/tweak.cpp:1077
 msgctxt "button"
@@ -1721,7 +1724,7 @@ msgstr "Einen schönen Tag noch."
 
 #: src/screenComponents/selfDestructIndicator.cpp:40
 msgid "This ship will self-destruct in {seconds} seconds."
-msgstr ""
+msgstr "Dieses Schiff wird sich in {seconds} Sekunden selbst zerstören."
 
 #: src/screenComponents/selfDestructEntry.cpp:22
 msgid "Self destruct activated!"
@@ -2030,7 +2033,7 @@ msgstr "Hacking FEHLGESCHLAGEN!"
 #: src/gui/hotkeyConfig.cpp:8
 msgctxt "hotkey_menu"
 msgid "Basic"
-msgstr ""
+msgstr "Basis"
 
 #: src/gui/hotkeyConfig.cpp:9
 msgctxt "hotkey_Basic"
@@ -2065,37 +2068,37 @@ msgstr "Allgemein"
 #: src/gui/hotkeyConfig.cpp:17
 msgctxt "hotkey_General"
 msgid "Switch to next crew station"
-msgstr ""
+msgstr "Wechsle zur nächsten Station"
 
 #: src/gui/hotkeyConfig.cpp:18
 msgctxt "hotkey_General"
 msgid "Switch to previous crew station"
-msgstr "zur vorherigen Station wechseln"
+msgstr "Zur vorherigen Station wechseln"
 
 #: src/gui/hotkeyConfig.cpp:19
 msgctxt "hotkey_General"
 msgid "Switch to helms station"
-msgstr ""
+msgstr "Zur Steuerkonsole wechseln"
 
 #: src/gui/hotkeyConfig.cpp:20
 msgctxt "hotkey_General"
 msgid "Switch to weapons station"
-msgstr ""
+msgstr "Wechsle zu Waffenstation"
 
 #: src/gui/hotkeyConfig.cpp:21
 msgctxt "hotkey_General"
 msgid "Switch to engineering station"
-msgstr ""
+msgstr "Maschinenraum"
 
 #: src/gui/hotkeyConfig.cpp:22
 msgctxt "hotkey_General"
 msgid "Switch to science station"
-msgstr ""
+msgstr "Wechsle zu Wissenschaft"
 
 #: src/gui/hotkeyConfig.cpp:23
 msgctxt "hotkey_General"
 msgid "Switch to relay station"
-msgstr ""
+msgstr "Wechsle zu Kommunikation"
 
 #: src/gui/hotkeyConfig.cpp:25
 msgctxt "hotkey_menu"
@@ -2105,22 +2108,22 @@ msgstr "Hauptschirm"
 #: src/gui/hotkeyConfig.cpp:26
 msgctxt "hotkey_MainScreen"
 msgid "View forward"
-msgstr ""
+msgstr "Ansicht: Front"
 
 #: src/gui/hotkeyConfig.cpp:27
 msgctxt "hotkey_MainScreen"
 msgid "View left"
-msgstr ""
+msgstr "Ansicht: Links"
 
 #: src/gui/hotkeyConfig.cpp:28
 msgctxt "hotkey_MainScreen"
 msgid "View right"
-msgstr ""
+msgstr "Ansicht: Rechts"
 
 #: src/gui/hotkeyConfig.cpp:29
 msgctxt "hotkey_MainScreen"
 msgid "View backward"
-msgstr ""
+msgstr "Ansicht: Heck"
 
 #: src/gui/hotkeyConfig.cpp:30
 msgctxt "hotkey_MainScreen"
@@ -2140,7 +2143,7 @@ msgstr "Zeige Langstreckeckenradar"
 #: src/gui/hotkeyConfig.cpp:33
 msgctxt "hotkey_MainScreen"
 msgid "Toggle first-person view"
-msgstr ""
+msgstr "Ich-Perspektive umschalten"
 
 #: src/gui/hotkeyConfig.cpp:45
 msgctxt "hotkey_menu"
@@ -2155,7 +2158,7 @@ msgstr "Impuls erhöhen"
 #: src/gui/hotkeyConfig.cpp:47
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse"
-msgstr ""
+msgstr "Impuls verringern"
 
 #: src/gui/hotkeyConfig.cpp:48
 msgctxt "hotkey_Helms"
@@ -2170,7 +2173,7 @@ msgstr "Max. Impuls"
 #: src/gui/hotkeyConfig.cpp:50
 msgctxt "hotkey_Helms"
 msgid "Max reverse impulse"
-msgstr ""
+msgstr "Max. rückwärts-Impuls"
 
 #: src/gui/hotkeyConfig.cpp:51
 msgctxt "hotkey_Helms"
@@ -2180,7 +2183,7 @@ msgstr "Nach links"
 #: src/gui/hotkeyConfig.cpp:52
 msgctxt "hotkey_Helms"
 msgid "Turn right"
-msgstr ""
+msgstr "Nach rechts"
 
 #: src/gui/hotkeyConfig.cpp:53
 msgctxt "hotkey_Helms"
@@ -2210,17 +2213,17 @@ msgstr "Warp 4"
 #: src/gui/hotkeyConfig.cpp:58
 msgctxt "hotkey_Helms"
 msgid "Increase Warp"
-msgstr ""
+msgstr "Warp erhöhen"
 
 #: src/gui/hotkeyConfig.cpp:59
 msgctxt "hotkey_Helms"
 msgid "Decrease Warp"
-msgstr ""
+msgstr "Warp verringern"
 
 #: src/gui/hotkeyConfig.cpp:60
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr ""
+msgstr "Docken/abbrechen/abdocken"
 
 #: src/gui/hotkeyConfig.cpp:61
 msgctxt "hotkey_Helms"
@@ -2230,7 +2233,7 @@ msgstr "Starte Docking"
 #: src/gui/hotkeyConfig.cpp:62
 msgctxt "hotkey_Helms"
 msgid "Abort docking"
-msgstr "Starte HackingDocking abbrechen"
+msgstr "Docking abbrechen"
 
 #: src/gui/hotkeyConfig.cpp:63
 msgctxt "hotkey_Helms"
@@ -2250,7 +2253,7 @@ msgstr "Sprungentfernung reduzieren"
 #: src/gui/hotkeyConfig.cpp:66
 msgctxt "hotkey_Helms"
 msgid "Initiate jump"
-msgstr ""
+msgstr "Sprung einleiten"
 
 #: src/gui/hotkeyConfig.cpp:71
 msgctxt "hotkey_menu"
@@ -2285,27 +2288,27 @@ msgstr "Wähle HGBI"
 #: src/gui/hotkeyConfig.cpp:79
 msgctxt "hotkey_Weapons"
 msgid "Load tube {number}"
-msgstr ""
+msgstr "Lade Schacht {number}"
 
 #: src/gui/hotkeyConfig.cpp:83
 msgctxt "hotkey_Weapons"
 msgid "Unload tube {number}"
-msgstr ""
+msgstr "Entlade Schacht {number}"
 
 #: src/gui/hotkeyConfig.cpp:87
 msgctxt "hotkey_Weapons"
 msgid "Fire tube {number}"
-msgstr ""
+msgstr "Schacht {number} abfeuern"
 
 #: src/gui/hotkeyConfig.cpp:89
 msgctxt "hotkey_Weapons"
 msgid "Select next hostile target"
-msgstr "nächstes feindliches Ziel"
+msgstr "Nnächstes feindliches Ziel"
 
 #: src/gui/hotkeyConfig.cpp:90
 msgctxt "hotkey_Weapons"
 msgid "Select next target (any)"
-msgstr "nächstes Ziel (beliebig)"
+msgstr "Nächstes Ziel (beliebig)"
 
 #: src/gui/hotkeyConfig.cpp:91
 msgctxt "hotkey_Weapons"
@@ -2315,7 +2318,7 @@ msgstr "Schilde an/aus"
 #: src/gui/hotkeyConfig.cpp:92
 msgctxt "hotkey_Weapons"
 msgid "Enable shields"
-msgstr "AktiviertSchilde aktivieren"
+msgstr "Schilde aktivieren"
 
 #: src/gui/hotkeyConfig.cpp:93
 msgctxt "hotkey_Weapons"
@@ -2325,7 +2328,7 @@ msgstr "Schilde deaktivieren"
 #: src/gui/hotkeyConfig.cpp:94
 msgctxt "hotkey_Weapons"
 msgid "Increase shield frequency target"
-msgstr "erhöhe Schildfrequenz"
+msgstr "Erhöhe Schildfrequenz"
 
 #: src/gui/hotkeyConfig.cpp:95
 msgctxt "hotkey_Weapons"
@@ -2340,12 +2343,12 @@ msgstr "Starte Schildkalibrierung"
 #: src/gui/hotkeyConfig.cpp:97
 msgctxt "hotkey_Weapons"
 msgid "Next beam subsystem target type"
-msgstr ""
+msgstr "Nächsten Subsystem anvisieren"
 
 #: src/gui/hotkeyConfig.cpp:98
 msgctxt "hotkey_Weapons"
 msgid "Previous beam subsystem target type"
-msgstr ""
+msgstr "Vorheriges Subsystem anvisieren"
 
 #: src/gui/hotkeyConfig.cpp:99
 msgctxt "hotkey_Weapons"
@@ -2395,7 +2398,7 @@ msgstr "Objekt scannen"
 #: src/gui/hotkeyConfig.cpp:109
 msgctxt "hotkey_Science"
 msgid "Select next scannable object"
-msgstr "neues scanbares Object wählen"
+msgstr "Nächstes scanbares Object wählen"
 
 #: src/gui/hotkeyConfig.cpp:112
 msgctxt "hotkey_menu"
@@ -2415,127 +2418,127 @@ msgstr "Wähle Laserziel"
 #: src/gui/hotkeyConfig.cpp:115
 msgctxt "hotkey_Engineering"
 msgid "Select missile weapon system"
-msgstr ""
+msgstr "Wähle System: Waffen"
 
 #: src/gui/hotkeyConfig.cpp:116
 msgctxt "hotkey_Engineering"
 msgid "Select maneuvering system"
-msgstr ""
+msgstr "Wähle System: Manöver"
 
 #: src/gui/hotkeyConfig.cpp:117
 msgctxt "hotkey_Engineering"
 msgid "Select impulse system"
-msgstr ""
+msgstr "Wähle System: Impuls"
 
 #: src/gui/hotkeyConfig.cpp:118
 msgctxt "hotkey_Engineering"
 msgid "Select warp system"
-msgstr ""
+msgstr "Wähle System: Warp"
 
 #: src/gui/hotkeyConfig.cpp:119
 msgctxt "hotkey_Engineering"
 msgid "Select jump drive system"
-msgstr ""
+msgstr "Wähle System Sprungantrieb"
 
 #: src/gui/hotkeyConfig.cpp:120
 msgctxt "hotkey_Engineering"
 msgid "Select front shields system"
-msgstr ""
+msgstr "Wähle System: Frontschilde"
 
 #: src/gui/hotkeyConfig.cpp:121
 msgctxt "hotkey_Engineering"
 msgid "Select rear shields system"
-msgstr ""
+msgstr "Wähle System: Heckschilde"
 
 #: src/gui/hotkeyConfig.cpp:122
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 0%"
-msgstr ""
+msgstr "Setze Systemleistung: 0%"
 
 #: src/gui/hotkeyConfig.cpp:123
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 30%"
-msgstr ""
+msgstr "Setze Systemleistung: 30%"
 
 #: src/gui/hotkeyConfig.cpp:124
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 50%"
-msgstr ""
+msgstr "Setze Systemleistung: 50%"
 
 #: src/gui/hotkeyConfig.cpp:125
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 100%"
-msgstr ""
+msgstr "Setze Systemleistung: 100%"
 
 #: src/gui/hotkeyConfig.cpp:126
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 150%"
-msgstr ""
+msgstr "Setze Systemleistung: 150%"
 
 #: src/gui/hotkeyConfig.cpp:127
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 200%"
-msgstr ""
+msgstr "Setze Systemleistung: 200%"
 
 #: src/gui/hotkeyConfig.cpp:128
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 250%"
-msgstr ""
+msgstr "Setze Systemleistung: 250%"
 
 #: src/gui/hotkeyConfig.cpp:129
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 300%"
-msgstr ""
+msgstr "Setze Systemleistung: 300%"
 
 #: src/gui/hotkeyConfig.cpp:130
 msgctxt "hotkey_Engineering"
 msgid "Increase system power"
-msgstr ""
+msgstr "Systemleistung verringern"
 
 #: src/gui/hotkeyConfig.cpp:131
 msgctxt "hotkey_Engineering"
 msgid "Decrease system power"
-msgstr ""
+msgstr "System-Leistung verringern"
 
 #: src/gui/hotkeyConfig.cpp:132
 msgctxt "hotkey_Engineering"
 msgid "Increase system coolant"
-msgstr ""
+msgstr "System-Kühlmittel erhöhen"
 
 #: src/gui/hotkeyConfig.cpp:133
 msgctxt "hotkey_Engineering"
 msgid "Decrease system coolant"
-msgstr ""
+msgstr "System-Kühlmittel verringern"
 
 #: src/gui/hotkeyConfig.cpp:134
 msgctxt "hotkey_Engineering"
 msgid "Next repair crew"
-msgstr ""
+msgstr "Reperaturcrew: nächstes"
 
 #: src/gui/hotkeyConfig.cpp:135
 msgctxt "hotkey_Engineering"
 msgid "Crew move up"
-msgstr ""
+msgstr "Crewbewegung: hoch"
 
 #: src/gui/hotkeyConfig.cpp:136
 msgctxt "hotkey_Engineering"
 msgid "Crew move down"
-msgstr ""
+msgstr "Crewbewegung: runter"
 
 #: src/gui/hotkeyConfig.cpp:137
 msgctxt "hotkey_Engineering"
 msgid "Crew move left"
-msgstr ""
+msgstr "Crewbewegung: links"
 
 #: src/gui/hotkeyConfig.cpp:138
 msgctxt "hotkey_Engineering"
 msgid "Crew move right"
-msgstr ""
+msgstr "Crewbewegung: rechts"
 
 #: src/gui/hotkeyConfig.cpp:139
 msgctxt "hotkey_Engineering"
 msgid "Start self-destruct"
-msgstr "leite Selbstzertörung ein"
+msgstr "Leite Selbstzertörung ein"
 
 #: src/gui/hotkeyConfig.cpp:140
 msgctxt "hotkey_Engineering"
@@ -2551,7 +2554,7 @@ msgstr "Selbstzertstörung abbrechen"
 #: src/spaceObjects/mine.cpp:160
 msgctxt "gm_info"
 msgid "Owner"
-msgstr ""
+msgstr "Besitzer"
 
 #: src/spaceObjects/missiles/missileWeapon.cpp:203
 msgctxt "gm_info"
@@ -2567,7 +2570,7 @@ msgstr "Fraktion"
 #: src/spaceObjects/missiles/missileWeapon.cpp:207
 msgctxt "gm_info"
 msgid "Lifetime"
-msgstr ""
+msgstr "Lebenszeit"
 
 #: src/spaceObjects/missiles/missileWeapon.cpp:208
 msgctxt "gm_info"
@@ -3580,7 +3583,7 @@ msgstr "Armored Transport"
 
 #: scripts/shipTemplates_Frigates.lua:371
 msgid "Jump/Turret version of Flavia Falcon"
-msgstr ""
+msgstr "Sprung/Geschützturm-Version der Flavia Falcon"
 
 #: scripts/shipTemplates_Frigates.lua:414
 msgctxt "ship"
@@ -4182,6 +4185,12 @@ msgid ""
 "two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
 "9.'"
 msgstr ""
+"Kurz nach der Adder Mark 8 wurde die Adder Mark 9 azf den Markt gebracht. "
+"Noch immer wird die Adder Mark 5 als Basis genutzt, aber die Designer "
+"versahen sie mit stärkeren Schilde, stärkeren, längeren und schnellere "
+"Schilde, sowie einer höheren Wendigkeit - und, als kbesonderes Extra, zwei "
+"Nuklearraketen. Wie ihre Werbung sagt: \"In einer Adder Mark 9 fühlen sich "
+"einfach besser.\""
 
 #: scripts/shipTemplates_StarFighters.lua:121
 msgctxt "ship"
@@ -4225,6 +4234,13 @@ msgid ""
 "advantage of this by placing small stations in nebulae to serve as raiding "
 "bases. They are lightly shielded and vulnerable to swarming assaults."
 msgstr ""
+"Stationen dieser Größe werden als als Forschungsaußenposten, Horchposten, "
+"und Sicherheits-Checkpoints genutzt. Aufgrund der beengten Unterkünfte "
+"wechselt die Crew sehr häufig. Sie sind klein genug um auf vielen "
+"Langstreckensensoren wie Schiffe auszusehen, und organisierte Piratenbanden "
+"nutzen dies manchmal aus, indem sie kleine Stationen in Nebelns platzieren, "
+"die dann als Operationsbasen dienen.\n"
+"Sie haben nur schwache Schilde und sind sind anfällig für Schwarmangriffe."
 
 #: scripts/shipTemplates_Stations.lua:11
 msgid "Medium Station"
@@ -4255,6 +4271,12 @@ msgid ""
 "penetrate a large station's shields, and its hull can withstand all but the "
 "most powerful weaponry."
 msgstr ""
+"Diese Weltraum-gemeinschaften stellen oft permanente Basen in einem Sektor "
+"dar. Bei Stationen dieser Größe kan es sich um vieles handeln: "
+"Millitärstützpunke, Handelszentren, Tiefenraum-Siedlungen, oder kleine "
+"Schiffswerften. Nur ein geballter Angriff kann die Schilde einer großen "
+"Station durchdringen, und ihre Hülle widersteht den meisten Waffen für "
+"längere Zeit."
 
 #: scripts/shipTemplates_Stations.lua:23
 msgid "Huge Station"
@@ -4269,6 +4291,13 @@ msgid ""
 "reinforcements to arrive, even when faced with an ongoing siege or massive, "
 "perfectly coordinated assault."
 msgstr ""
+"Mit der Größe eine Großstadt representiert eine Station dieser Größe das "
+"Machtzentrum der jeweiligen Fraktion in dieser Region. Sie erfüllen viele "
+"Funktionen gleichzeitig ud stellen einen enormen Aufwand an Zeit, Geld und "
+"Arbeit zur Schau Die Hülle und Schilde einer übergroßen Station halten in "
+"der Regel lange genug Stand, bis Verstärkung eintrifft - selbst wenn sie "
+"einer großen Belagerung, oder einem massiven, koordinierten Angriff "
+"ausgesetzt ist."
 
 #: scripts/comms_ship.lua:38
 msgctxt "commsShipAssist"
@@ -4375,7 +4404,7 @@ msgstr ""
 #: scripts/comms_ship.lua:117
 msgctxt "commsShipEnemy"
 msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr "Gehen Sie uns aus dem Weg, oder Ihr Tod wird uns extrem amüsieren."
+msgstr "Gehen Sie uns aus dem Weg, oder Ihr Tod wird uns extrem amüsieren!"
 
 #: scripts/comms_ship.lua:119
 msgctxt "commsShipEnemy"
@@ -4515,7 +4544,7 @@ msgstr "%s Raketen: %d/%d\n"
 #, lua-format
 msgctxt "commsShipAssist"
 msgid "WP %d"
-msgstr ""
+msgstr "WP %d"
 
 #: scripts/comms_station.lua:69
 msgctxt "commsStation"
@@ -4693,7 +4722,7 @@ msgstr "Wir haben %s ausgeschickt um  bei %s zu unterstützen."
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
-msgstr ""
+msgstr "WP %d"
 
 #: scripts/comms_supply_drop.lua:11
 msgctxt "commsShip"
@@ -4794,7 +4823,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:22
 msgid "Arlenians"
-msgstr ""
+msgstr "Arlenian"
 
 #: scripts/factionInfo.lua:25
 msgid ""
@@ -4843,7 +4872,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:33
 msgid "Exuari"
-msgstr ""
+msgstr "Exuari"
 
 #: scripts/factionInfo.lua:39
 msgid ""
@@ -4985,7 +5014,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:65
 msgid "TSN"
-msgstr ""
+msgstr "TSN"
 
 #: scripts/factionInfo.lua:72
 msgid ""
@@ -5015,7 +5044,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:78
 msgid "USN"
-msgstr ""
+msgstr "USN"
 
 #: scripts/factionInfo.lua:85
 msgid ""
@@ -5038,7 +5067,7 @@ msgstr ""
 
 #: scripts/factionInfo.lua:89
 msgid "CUF"
-msgstr ""
+msgstr "CUF"
 
 #: scripts/factionInfo.lua:95
 msgid ""
@@ -5228,7 +5257,6 @@ msgstr ""
 "üblicherweise mit mehr als einem Waffenschacht benutzt werden."
 
 #: scripts/science_db.lua:34
-#, fuzzy
 msgid "Nuke"
 msgstr "Nuke"
 
@@ -5324,7 +5352,6 @@ msgstr ""
 "Schüssen der Laser kampfunfähig machen."
 
 #: scripts/science_db.lua:60
-#, fuzzy
 msgid "HVLI"
 msgstr "HGBI"
 
