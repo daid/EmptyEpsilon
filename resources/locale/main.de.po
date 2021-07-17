@@ -2078,7 +2078,7 @@ msgstr "Zur vorherigen Station wechseln"
 #: src/gui/hotkeyConfig.cpp:19
 msgctxt "hotkey_General"
 msgid "Switch to helms station"
-msgstr "Zur Steuerkonsole wechseln"
+msgstr "Wechsle zu Steuerkonsole"
 
 #: src/gui/hotkeyConfig.cpp:20
 msgctxt "hotkey_General"
@@ -2088,7 +2088,7 @@ msgstr "Wechsle zu Waffenstation"
 #: src/gui/hotkeyConfig.cpp:21
 msgctxt "hotkey_General"
 msgid "Switch to engineering station"
-msgstr "Maschinenraum"
+msgstr "Wechsle zu Maschinenraum"
 
 #: src/gui/hotkeyConfig.cpp:22
 msgctxt "hotkey_General"
