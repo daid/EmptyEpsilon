@@ -68,9 +68,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getMaxScanProbeCount);
 
-    /// add a custom Button to the according station. Use Index to sort (shared with custom info).
+    /// add a custom Button to the according station. Use order to sort (shared with custom info).
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomButton);
-    /// add a custom Info Label to the according station. Use Index to sort (shared with custom button).
+    /// add a custom Info Label to the according station. Use order to sort (shared with custom button).
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomInfo);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessage);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
@@ -1056,7 +1056,7 @@ bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
     return false;
 }
 
-void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> index)
+void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order)
 {
     removeCustom(name);
     custom_functions.emplace_back();
@@ -1066,10 +1066,10 @@ void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, strin
     csf.crew_position = position;
     csf.caption = caption;
     csf.callback = callback;
-    csf.index = index.value_or(0);
+    csf.order = order.value_or(0);
 }
 
-void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> index)
+void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order)
 {
     removeCustom(name);
     custom_functions.emplace_back();
@@ -1078,7 +1078,7 @@ void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string 
     csf.name = name;
     csf.crew_position = position;
     csf.caption = caption;
-    csf.index = index.value_or(0);
+    csf.order = order.value_or(0);
 }
 
 void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, string caption)

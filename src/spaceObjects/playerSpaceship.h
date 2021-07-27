@@ -81,7 +81,7 @@ public:
         string caption;
         ECrewPosition crew_position;
         ScriptSimpleCallback callback;
-        int index;
+        int order;
 
         bool operator!=(const CustomShipFunction& csf) { return type != csf.type || name != csf.name || caption != csf.caption || crew_position != csf.crew_position; }
     };
@@ -230,8 +230,8 @@ public:
     void onProbeLink(ScriptSimpleCallback callback);
     void onProbeUnlink(ScriptSimpleCallback callback);
 
-    void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> index);
-    void addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> index);
+    void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order);
+    void addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order);
     void addCustomMessage(ECrewPosition position, string name, string caption);
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
@@ -355,5 +355,5 @@ static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, Playe
 string alertLevelToString(EAlertLevel level);
 string alertLevelToLocaleString(EAlertLevel level);
 
-static inline bool operator < (const PlayerSpaceship::CustomShipFunction& a, const PlayerSpaceship::CustomShipFunction& b) {return (a.index < b.index);}
+static inline bool operator < (const PlayerSpaceship::CustomShipFunction& a, const PlayerSpaceship::CustomShipFunction& b) {return (a.order < b.order);}
 #endif//PLAYER_SPACESHIP_H
