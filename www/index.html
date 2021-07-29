@@ -785,10 +785,9 @@
             $.get('set.lua', $("#set-script").val())
               .done(function(data) {
                 $("#set-output").text(JSON.stringify(JSON.parse(data), null, 2));
-              });
-	            .fail(function(x, y, reason) {
-		            $("#set-output").text("FAIL:" + reason);
-	            });
+              }).fail(function(x, y, reason) {
+		        $("#set-output").text("FAIL:" + reason);
+	          });
           }
         </script>
       </section>

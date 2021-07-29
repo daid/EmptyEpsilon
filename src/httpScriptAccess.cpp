@@ -3,26 +3,26 @@
 
 #define sOBJECT "_OBJECT_"
 
-bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection* connection)
+
+EEHttpServer::EEHttpServer(int port, string static_file_path)
+: server(port)
 {
-    if (request.path == "/exec.lua")
+    server.setStaticFilePath(static_file_path);
+    server.addURLHandler("/exec.lua", [](const sp::io::http::Server::Request& request) -> string
     {
         if (!gameGlobalInfo)
         {
-            connection->sendString("{\"ERROR\": \"No game\"}");
-            return true;
+            return "{\"ERROR\": \"No game\"}";
         }
         P<ScriptObject> script = new ScriptObject();
         script->setMaxRunCycles(100000);
         string output;
         if (!script->runCode(request.post_data, output))
-            connection->sendString("{\"ERROR\": \"Script error: " + script->getError().replace("\"", "'") + "\"}");
-        else
-            connection->sendString(output);
+            output = "{\"ERROR\": \"Script error: " + script->getError().replace("\"", "'") + "\"}";
         script->destroy();
-        return true;
-    }
-    else if (request.path == "/get.lua")
+        return output;
+    });
+    server.addURLHandler("/get.lua", [](const sp::io::http::Server::Request& request) -> string
     {
         /*
         Call LUA-exposed functions and return their result in a dictionary.
@@ -42,22 +42,20 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         */
         if (!gameGlobalInfo)
         {
-            connection->sendString("{\"ERROR\": \"No game\"}");
-            return true;
+            return "{\"ERROR\": \"No game\"}";
         }
 
         string luaCode;
         string objectId = "getPlayerShip(-1)";
-        std::unordered_map<string, string>::iterator i;
+        std::unordered_map<string, string>::const_iterator i;
         P<ScriptObject> script;
         string output;
 
         // Look for _OBJECT_ in parameters. If not found, use default
-        i = request.parameters.find(sOBJECT);
-        if (i != request.parameters.end())
+        i = request.query.find(sOBJECT);
+        if (i != request.query.end())
         {
-            objectId = request.parameters[sOBJECT];
-            request.parameters.erase(i);
+            objectId = i->second;
         }
 
         luaCode = "object = " + objectId + "\n" +
@@ -65,13 +63,14 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
                   "return {";
 
         // Loop through URL parameters
-        for (i = request.parameters.begin(); i != request.parameters.end(); i++)
+        for (i = request.query.begin(); i != request.query.end(); i++)
         {
+            if (i->first == sOBJECT)
+                continue;
             // Fail if trying to set stuff. We only do get.
             if (i->second.substr(0, 3) == "set")
             {
-                connection->sendString("{\"ERROR\": \"Cannot set values through get.lua\", \"COMMAND\": \"" + i->second + "\"}");
-                return true;
+                return "{\"ERROR\": \"Cannot set values through get.lua\", \"COMMAND\": \"" + i->second + "\"}";
             }
             // Build LUA-code
             luaCode += i->first + " = object:" + i->second + ", ";
@@ -84,16 +83,12 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         // Return dictionary with error, else output
         if (!script->runCode(luaCode, output))
         {
-            connection->sendString("{\"ERROR\": \"Script error\"}");
-        }
-        else
-        {
-            connection->sendString(output);
+            output = "{\"ERROR\": \"Script error\"}";
         }
         script->destroy();
-        return true;
-    }
-    else if (request.path == "/set.lua")
+        return output;
+    });
+    server.addURLHandler("/set.lua", [](const sp::io::http::Server::Request& request) -> string
     {
         /*
         Call LUA-exposed functions with arguments.
@@ -114,28 +109,28 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         */
         if (!gameGlobalInfo)
         {
-            connection->sendString("{\"ERROR\": \"No game\"}");
-            return true;
+            return "{\"ERROR\": \"No game\"}";
         }
 
         string luaCode;
         string objectId = "getPlayerShip(-1)";
-        std::unordered_map<string, string>::iterator i;
+        std::unordered_map<string, string>::const_iterator i;
         P<ScriptObject> script;
-        string output;;
+        string output;
 
-        i = request.parameters.find(sOBJECT);
-        if (i != request.parameters.end())
+        i = request.query.find(sOBJECT);
+        if (i != request.query.end())
         {
-            objectId = request.parameters[sOBJECT];
-            request.parameters.erase(i);
+            objectId = i->first;
         }
 
         luaCode = "object = " + objectId + "\n" +
                "if object == nil then return {error = \"No valid object\"} end\n";
 
-        for (i = request.parameters.begin(); i != request.parameters.end(); i++)
+        for (i = request.query.begin(); i != request.query.end(); i++)
         {
+            if (i->first == sOBJECT)
+                continue;
             if (i->second == "")
                 luaCode += "object:" + i->first + ";\n";
             else
@@ -146,12 +141,10 @@ bool HttpScriptHandler::handleRequest(HttpRequest& request, HttpServerConnection
         script->setMaxRunCycles(100000);
 
         if (!script->runCode(luaCode, output))
-            connection->sendString("{\"ERROR\": \"Script error\"}");
+            output = "{\"ERROR\": \"Script error\"}";
         else
-            connection->sendString(output);
+            output = "{}";
         script->destroy();
-        return true;
-    }
-
-    return false;
+        return output;
+    });
 }

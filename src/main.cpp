@@ -190,9 +190,7 @@ int main(int argc, char** argv)
             port_nr = 80;
         LOG(INFO) << "Enabling HTTP script access on port: " << port_nr;
         LOG(INFO) << "NOTE: This is potentially a risk!";
-        HttpServer* server = new HttpServer(port_nr);
-        server->addHandler(new HttpRequestFileHandler(PreferencesManager::get("www_directory","www")));
-        server->addHandler(new HttpScriptHandler());
+        new EEHttpServer(port_nr, PreferencesManager::get("www_directory", "www"));
     }
 
     colorConfig.load();
