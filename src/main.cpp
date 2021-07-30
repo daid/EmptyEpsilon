@@ -47,10 +47,6 @@ float camera_yaw;
 float camera_pitch;
 sf::Font* main_font;
 sf::Font* bold_font;
-RenderLayer* backgroundLayer;
-RenderLayer* objectLayer;
-RenderLayer* effectLayer;
-RenderLayer* hudLayer;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
@@ -208,16 +204,12 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") == "")
     {
         //Setup the rendering layers.
-        backgroundLayer = new RenderLayer();
-        objectLayer = new RenderLayer(backgroundLayer);
-        effectLayer = new RenderLayer(objectLayer);
-        hudLayer = new RenderLayer(effectLayer);
-        mouseLayer = new RenderLayer(hudLayer);
+        defaultRenderLayer = new RenderLayer();
+        mouseLayer = new RenderLayer(defaultRenderLayer);
         glitchPostProcessor = new PostProcessor("shaders/glitch", mouseLayer);
         glitchPostProcessor->enabled = false;
         warpPostProcessor = new PostProcessor("shaders/warp", glitchPostProcessor);
         warpPostProcessor->enabled = false;
-        defaultRenderLayer = objectLayer;
 
         int width = 1200;
         int height = 900;
