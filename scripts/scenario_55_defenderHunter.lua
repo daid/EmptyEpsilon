@@ -7110,7 +7110,7 @@ function initialOrders(delta)
 					foundPlayer = true
 					p:addToShipLog(string.format("You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit",homeStation:getCallSign()),"Magenta")
 					primaryOrders = string.format("Protect %s",homeStation:getCallSign())
-					playSoundFile("sa_55_Commander1.wav")
+					playSoundFile("audio/scenario/55/sa_55_Commander1.ogg")
 				end
 			end
 			if foundPlayer then
@@ -7397,7 +7397,7 @@ function easyDelivery(delta)
 			else
 				p:addToShipLog(string.format("[%s] We need some goods of type %s. Can you help? I hear %s has some",homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
 				plot2reminder = string.format("Bring %s to %s. Possible source: %s",easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
-				playSoundFile("sa_55_Manager1.wav")
+				playSoundFile("audio/scenario/55/sa_55_Manager1.ogg")
 			end
 			easyDeliveryMsg = "sent"
 		end
@@ -7685,7 +7685,7 @@ function hunterTransition2(delta)
 	hunterTransition2Timer = hunterTransition2Timer - delta
 	if hunterTransition2Timer < 0 then
 		iuMsg = string.format("Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f",dangerValue)
-		playSoundFile("sa_55_Commander2.wav")
+		playSoundFile("audio/scenario/55/sa_55_Commander2.ogg")
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
@@ -7993,7 +7993,7 @@ function randomDelivery(delta)
 			else
 				p:addToShipLog(string.format("[%s] We are running low on goods of type %s. Can you help? %s in %s should have some",homeStation:getCallSign(),randomDeliverGood,randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName()),"85,107,47")
 				plot4reminder = string.format("Bring %s to %s. Possible source: %s in %s",randomDeliverGood,homeStation:getCallSign(),randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName())
-				playSoundFile("sa_55_Manager2.wav")
+				playSoundFile("audio/scenario/55/sa_55_Manager2.ogg")
 			end
 			randomDeliveryMsg = "sent"
 		end
@@ -8602,7 +8602,7 @@ function stationShieldDelay(delta)
 				p:addToShipLog(string.format("Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s",homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
 			end
 		end
-		playSoundFile("sa_55_Commander3.wav")
+		playSoundFile("audio/scenario/55/sa_55_Commander3.ogg")
 		plot4reminder = string.format("Find shield expert at station %s in %s",shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName())
 		plot4 = visitShieldExpertStation
 	end
@@ -8626,7 +8626,7 @@ function visitShieldExpertStation(delta)
 					p:addToShipLog(string.format("We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
 					plot4 = meetShieldExportTransportHeartbroken
 					plot4reminder = string.format("Meet transport %s last reported in %s to find Maria Shrivner",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
-					playSoundFile("sa_55_BaseChief.wav")
+					playSoundFile("audio/scenario/55/sa_55_BaseChief.ogg")
 				end
 			end
 		end
@@ -8660,7 +8660,7 @@ function meetShieldExportTransport(delta)
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
 				p:addToShipLog(string.format("[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness",shieldExpertStation:getCallSign(),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
-				playSoundFile("sa_55_Maria1.wav")
+				playSoundFile("audio/scenario/55/sa_55_Maria1.ogg")
 				plot4 = returnHomeForShields
 				plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
 				break
@@ -8677,7 +8677,7 @@ function meetShieldExportTransportHeartbroken(delta)
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
 				p:addToShipLog(string.format("[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness",homeStation:getCallSign()),"Yellow")
-				playSoundFile("sa_55_Maria2.wav")
+				playSoundFile("audio/scenario/55/sa_55_Maria2.ogg")
 				plot4 = giftForBeau
 				beauGift = false
 				plot4reminder = string.format("Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s",shieldExpertStation:getCallSign())
@@ -8697,7 +8697,7 @@ function giftForBeau(delta)
 					if p.shieldExpert then
 						if beauGift then
 							p:addToShipLog(string.format("[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded",homeStation:getCallSign()),"Yellow")
-							playSoundFile("sa_55_Maria3.wav")
+							playSoundFile("audio/scenario/55/sa_55_Maria3.ogg")
 							plot4 = returnHomeForShields
 							plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
 						end
@@ -8712,7 +8712,7 @@ function giftForBeau(delta)
 				p:addToShipLog(string.format("We were just notified that station %s has been destroyed",shieldExpertStation:getCallSign()),"Magenta")
 				if p.shieldExpert then
 					p:addToShipLog(string.format("[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity",homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
-					playSoundFile("sa_55_Maria4.wav")
+					playSoundFile("audio/scenario/55/sa_55_Maria4.ogg")
 					plot4 = returnHomeForShields
 					plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
 				end
@@ -8741,7 +8741,7 @@ function returnHomeForShields(delta)
 						end
 					end
 					p:addToShipLog(string.format("[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually",homeStation:getCallSign()),"Yellow")
-					playSoundFile("sa_55_Maria5.wav")
+					playSoundFile("audio/scenario/55/sa_55_Maria5.ogg")
 					choooseNextPlot4line()
 					homeStation.shieldUpgrade = true
 				end

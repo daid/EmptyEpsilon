@@ -5011,7 +5011,7 @@ function handleDockedState()
 								comms_source.cargo = comms_source.cargo + 1
 								comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.2)
 								if impulseDone == nil then
-									playSoundFile("sa_54_UTImpulse.wav")
+									playSoundFile("audio/scenario/54/sa_54_UTImpulse.ogg")
 									impulseDone = "played"
 								end
 								setCommsMessage(string.format("Thanks for the %s. Your impulse engines now have improved speed",comms_source.nabbitPart))
@@ -5022,7 +5022,7 @@ function handleDockedState()
 						else
 							comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.2)
 							if impulseDone == nil then
-								playSoundFile("sa_54_UTImpulse.wav")
+								playSoundFile("audio/scenario/54/sa_54_UTImpulse.ogg")
 								impulseDone = "played"
 							end
 							setCommsMessage("Your impulse engines now have improved speed")
@@ -5283,7 +5283,7 @@ function artifactUpgrade()
 	comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*2)
 	comms_source.artAnchorUpgrade = true
 	if maneuverDone ~= "played" then
-		playSoundFile("sa_54_UTManeuver.wav")
+		playSoundFile("audio/scenario/54/sa_54_UTManeuver.ogg")
 		maneuverDone = "played"
 	end	
 end
@@ -5295,7 +5295,7 @@ function lisbonBeamUpgrade()
 	until(comms_source:getBeamWeaponRange(bi) < 1)
 	comms_source.lisbonUpgrade = true
 	if coolBeamsDone ~= "played" then
-		playSoundFile("sa_54_UTCoolBeams.wav")
+		playSoundFile("audio/scenario/54/sa_54_UTCoolBeams.ogg")
 		coolBeamsDone = "played"
 	end
 end
@@ -5317,7 +5317,7 @@ function kojakBeamUpgrade()
 	until(comms_source:getBeamWeaponRange(bi) < 1)
 	comms_source.kojakUpgrade = true
 	if tripleBeam ~= "played" then
-		playSoundFile("sa_54_UTTripleBeam.wav")
+		playSoundFile("audio/scenario/54/sa_54_UTTripleBeam.ogg")
 		tripleBeam = "played"
 	end
 end
@@ -6684,7 +6684,7 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 end
 
 function playDefendUtopiaMsg()
-	playSoundFile("sa_54_AuthMBDefend.wav")
+	playSoundFile("audio/scenario/54/sa_54_AuthMBDefend.ogg")
 	closestUtopiaPlayer:removeCustom(defendUtopiaMsgButton)
 	closestUtopiaPlayer:removeCustom(defendUtopiaMsgButtonOps)
 	closestUtopiaPlayer = nil
@@ -6775,14 +6775,14 @@ function afterPatrol(delta)
 			plot1 = defendUtopia
 			removeGMFunction("Skip to defend U.P.")
 		else
-			playSoundFile("sa_54_AuthMBVictory.wav")
+			playSoundFile("audio/scenario/54/sa_54_AuthMBVictory.ogg")
 			victory("Human Navy")
 		end
 	end
 end
 
 function playUtopiaBreakMsg()
-	playSoundFile("sa_54_AuthMBBreak.wav")
+	playSoundFile("audio/scenario/54/sa_54_AuthMBBreak.ogg")
 	closestMidWaveUtopiaPlayer:removeCustom(utopiaBreakMsgButton)
 	closestMidWaveUtopiaPlayer:removeCustom(utopiaBreakMsgButtonOps)
 	closestMidWaveUtopiaPlayer = nil
@@ -7001,7 +7001,7 @@ end
 --	Second plot line: small enemy fleet followed by sick miner  --
 ------------------------------------------------------------------
 function playAsimovSensorTechMessage()
-	playSoundFile("sa_54_TorrinSensorTech.wav")
+	playSoundFile("audio/scenario/54/sa_54_TorrinSensorTech.ogg")
 	closestPlayer:removeCustom(playMsgFromAsimovButton)
 	closestPlayer:removeCustom(playMsgFromAsimovButtonOps)
 	closestPlayer = nil
@@ -7056,7 +7056,7 @@ function nuisance(delta)
 end
 
 function playSickStationMessage()
-	playSoundFile("sa_54_MinerSickRequest.wav")
+	playSoundFile("audio/scenario/54/sa_54_MinerSickRequest.ogg")
 	closestSickMinerPlayer:removeCustom(playMsgFromSickStationButton)
 	closestSickMinerPlayer:removeCustom(playMsgFromSickStationButtonOps)
 	closestSickMinerPlayer = nil
@@ -7100,7 +7100,7 @@ function sickMiner(delta)
 end
 
 function playSickStationMessage2()
-	playSoundFile("sa_54_MinerSickAboard.wav")
+	playSoundFile("audio/scenario/54/sa_54_MinerSickAboard.ogg")
 	sickMinerShip:removeCustom(playMsg2FromSickStationButton)
 	sickMinerShip:removeCustom(playMsg2FromSickStationButtonOps)
 end
@@ -7130,7 +7130,7 @@ function getSickMinerFromStation(delta)
 end
 
 function playBethesdaStationMessage()
-	playSoundFile("sa_54_BethesdaDoctor.wav")
+	playSoundFile("audio/scenario/54/sa_54_BethesdaDoctor.ogg")
 	sickMinerShip:removeCustom(playMsgFromBethesdaButton)
 	sickMinerShip:removeCustom(playMsgFromBethesdaButtonOps)
 end
@@ -7157,7 +7157,7 @@ function takeSickMinerToBethesda(delta)
 end
 
 function playKojakThanksMessage()
-	playSoundFile("sa_54_KojakThanks.wav")
+	playSoundFile("audio/scenario/54/sa_54_KojakThanks.ogg")
 	closestBethesdaPlayer:removeCustom(playMsgKojakButton)
 	closestBethesdaPlayer:removeCustom(playMsgKojakButtonOps)
 	closestBethesdaPlayer = nil
@@ -7307,7 +7307,7 @@ end
 --	Third plot line: comparable fleet and Nabbit upgrade  --
 ------------------------------------------------------------
 function playUtopiaPlanitiaSensorTechMessage()
-	playSoundFile("sa_54_DuncanSensorTech.wav")
+	playSoundFile("audio/scenario/54/sa_54_DuncanSensorTech.ogg")
 	closestIncursionPlayer:removeCustom(playUtopiaPlanitiaSensorMsgButton)
 	closestIncursionPlayer:removeCustom(playUtopiaPlanitiaSensorMsgButtonOps)
 	closestIncursionPlayer = nil
@@ -7407,7 +7407,7 @@ function getNabbit(delta)
 end
 
 function playNabbitTune()
-	playSoundFile("sa_54_NabbitTune.wav")
+	playSoundFile("audio/scenario/54/sa_54_NabbitTune.ogg")
 	nabbitShip:removeCustom(playNabbitTuneMsgButton)
 	nabbitShip:removeCustom(playNabbitTuneMsgButtonOps)
 end
@@ -7473,7 +7473,7 @@ function attack1(delta)
 end
 
 function playLisbonRequestMessage()
-	playSoundFile("sa_54_BethesdaAdmin.wav")
+	playSoundFile("audio/scenario/54/sa_54_BethesdaAdmin.ogg")
 	closestLisbonPlayer:removeCustom(playLisbonMsgButton)
 	closestLisbonPlayer:removeCustom(playLisbonMsgButtonOps)
 	closestLisbonPlayer = nil
@@ -7983,7 +7983,7 @@ end
 function afterAmbush(delta)
 	gameTimeLimit = gameTimeLimit - delta
 	if gameTimeLimit < 0 then
-		playSoundFile("sa_54_AuthMBVictory.wav")
+		playSoundFile("audio/scenario/54/sa_54_AuthMBVictory.ogg")
 		victory("Human Navy")	
 	end
 end
@@ -8001,7 +8001,7 @@ function unscannedAnchors(delta)
 end
 
 function playArtSound()
-	playSoundFile("sa_54_UPScienceGet.wav")
+	playSoundFile("audio/scenario/54/sa_54_UPScienceGet.ogg")
 	artSoundShip:removeCustom(artSoundButton)
 	artSoundShip:removeCustom(artSoundButtonOps)
 end
