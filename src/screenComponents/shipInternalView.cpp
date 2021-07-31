@@ -273,9 +273,9 @@ void GuiShipCrew::onDraw(sf::RenderTarget& window)
 
     sf::Sprite sprite;
     if (crew->action == RC_Move)
-        textureManager.setTexture(sprite, "Tokka_WalkingMan.png", int(crew->action_delay * 12) % 6);
+        textureManager.setTexture(sprite, "topdownCrew.png", int(crew->action_delay * 12) % 6);
     else
-        textureManager.setTexture(sprite, "Tokka_WalkingMan.png", 0);
+        textureManager.setTexture(sprite, "topdownCrew.png", 0);
     float f = getSize().y / float(sprite.getTextureRect().height);
     sprite.setScale(f, f);
     sprite.setPosition(getCenterPoint());
