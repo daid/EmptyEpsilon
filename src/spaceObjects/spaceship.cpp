@@ -362,7 +362,7 @@ void SpaceShip::draw3DTransparent()
         if (wormhole_alpha > 0.0f)
             delay = wormhole_alpha;
         float alpha = 1.0f - (delay / 10.0f);
-        model_info.renderOverlay(textureManager.getTexture("electric_sphere_texture.png"), alpha);
+        model_info.renderOverlay(textureManager.getTexture("texture/electric_sphere_texture.png"), alpha);
     }
 }
 #endif//FEATURE_3D_RENDERING

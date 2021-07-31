@@ -96,10 +96,10 @@ void ElectricExplosionEffect::draw3DTransparent()
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
     glPushMatrix();
-    Mesh* m = Mesh::getMesh("sphere.obj");
+    Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("electric_sphere_texture.png")->getNativeHandle());
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/electric_sphere_texture.png")->getNativeHandle());
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));

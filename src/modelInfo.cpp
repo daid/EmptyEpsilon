@@ -100,12 +100,12 @@ void ModelInfo::renderShield(float alpha)
     glPushMatrix();
     glRotatef(engine->getElapsedTime() * 5, 0, 0, 1);
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
-    Mesh* m = Mesh::getMesh("sphere.obj");
+    Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("shield_hit_effect.png")->getNativeHandle());
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/shield_hit_effect.png")->getNativeHandle());
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -125,12 +125,12 @@ void ModelInfo::renderShield(float alpha, float angle)
     glRotatef(angle, 0, 0, 1);
     glRotatef(engine->getElapsedTime() * 5, 1, 0, 0);
     glScalef(data->radius * 1.2, data->radius * 1.2, data->radius * 1.2);
-    Mesh* m = Mesh::getMesh("half_sphere.obj");
+    Mesh* m = Mesh::getMesh("mesh/half_sphere.obj");
     {
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("shield_hit_effect.png")->getNativeHandle());
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/shield_hit_effect.png")->getNativeHandle());
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));

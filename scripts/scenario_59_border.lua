@@ -687,9 +687,9 @@ function setConstants()
 	info_choice = 0
 	info_choice_max = 5
 	mining_beam_string = {
-		"beam_orange.png",
-		"beam_yellow.png",
-		"fire_sphere_texture.png"
+		"texture/beam_orange.png",
+		"texture/beam_yellow.png",
+		"texture/fire_sphere_texture.png"
 	}
 	mining_drain = .00025 * difficulty
 	wreck_mod_debris = {}

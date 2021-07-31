@@ -40,7 +40,7 @@ BeamEffect::BeamEffect()
     lifetime = 1.0;
     sourceId = -1;
     target_id = -1;
-    beam_texture = "beam_orange.png";
+    beam_texture = "texture/beam_orange.png";
     beam_fire_sound = "sfx/laser_fire.wav";
     beam_fire_sound_power = 1;
     beam_sound_played = false;
@@ -127,7 +127,7 @@ void BeamEffect::draw3DTransparent()
         quad[3].vertex = v4;
         quad[3].texcoords = { 0.f, 1.f };
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("fire_ring.png")->getNativeHandle());
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_ring.png")->getNativeHandle());
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
         std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };

@@ -102,7 +102,7 @@ void ExplosionEffect::draw3DTransparent()
 
     // Explosion sphere
     {
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("fire_sphere_texture.png")->getNativeHandle());
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_sphere_texture.png")->getNativeHandle());
 
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
 
@@ -110,7 +110,7 @@ void ExplosionEffect::draw3DTransparent()
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
         gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
-        Mesh* m = Mesh::getMesh("sphere.obj");
+        Mesh* m = Mesh::getMesh("mesh/sphere.obj");
         glScalef(scale * size, scale * size, scale * size);
         m->render(positions.get(), texcoords.get(), normals.get());
     }
@@ -120,7 +120,7 @@ void ExplosionEffect::draw3DTransparent()
 
     // Fire ring
     {
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("fire_ring.png")->getNativeHandle());
+        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_ring.png")->getNativeHandle());
         glScalef(1.5f, 1.5f, 1.5f);
 
         vertices[0] = glm::vec3(-1, -1, 0);

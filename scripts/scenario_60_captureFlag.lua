@@ -494,9 +494,9 @@ function init()
 	-- convenience table for accessing drones
 		droneFleets = {}
 	boundary_beam_string = {
-		"beam_blue.png",
-		"beam_purple.png",
-		"beam_green.png"
+		"texture/beam_blue.png",
+		"texture/beam_purple.png",
+		"texture/beam_green.png"
 	}
 
 	boundary_marker = "buoys"

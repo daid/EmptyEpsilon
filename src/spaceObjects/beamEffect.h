@@ -29,7 +29,7 @@ public:
     void setSource(P<SpaceObject> source, glm::vec3 offset);
     void setTarget(P<SpaceObject> target, glm::vec2 hitLocation);
 
-    ///Set the texture used for this beam. Default is beam_orange.png
+    ///Set the texture used for this beam. Default is texture/beam_orange.png
     void setTexture(string texture) {this->beam_texture = texture;}
     ///Set the sound played when firing the beam. Default firing sound is sfx/laser_fire.wav
     void setBeamFireSound(string sound) {this->beam_fire_sound = sound;}
