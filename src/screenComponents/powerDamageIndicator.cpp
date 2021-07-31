@@ -58,7 +58,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     }else{
         return;
     }
-    drawStretched(window, rect, "gui/damage_power_overlay", color);
+    drawStretched(window, rect, "gui/widget/damagePowerOverlay.png", color);
 
     if (rect.height > rect.width)
         drawVerticalText(window, rect, display_text, ACenter, text_size, bold_font, color);

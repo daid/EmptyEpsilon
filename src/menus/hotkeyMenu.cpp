@@ -16,7 +16,7 @@ HotkeyMenu::HotkeyMenu()
     P<WindowManager> windowManager = engine->getObject("windowManager");
 
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
 
     // TODO: Figure out how to make this an AutoLayout.
     container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");

@@ -36,12 +36,12 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         // Load up the cube texture.
         // Face setup
         std::array<std::tuple<const char*, uint32_t>, 6> faces{
-            std::make_tuple("StarsRight.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
-            std::make_tuple("StarsLeft.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
-            std::make_tuple("StarsTop.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
-            std::make_tuple("StarsBottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
-            std::make_tuple("StarsFront.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
-            std::make_tuple("StarsBack.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
+            std::make_tuple("skybox/right.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
+            std::make_tuple("skybox/left.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
+            std::make_tuple("skybox/top.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
+            std::make_tuple("skybox/bottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
+            std::make_tuple("skybox/front.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
+            std::make_tuple("skybox/back.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
         };
 
         // Upload

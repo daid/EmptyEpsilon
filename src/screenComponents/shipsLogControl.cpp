@@ -21,7 +21,7 @@ ShipsLog::ShipsLog(GuiContainer* owner)
 
 void ShipsLog::onDraw(sf::RenderTarget& window)
 {
-    drawStretchedHV(window, sf::FloatRect(rect.left, rect.top, rect.width, rect.height + 100), 25.0f, "gui/PanelBackground");
+    drawStretchedHV(window, sf::FloatRect(rect.left, rect.top, rect.width, rect.height + 100), 25.0f, "gui/widget/PanelBackground.png");
 
     if (!my_spaceship)
         return;

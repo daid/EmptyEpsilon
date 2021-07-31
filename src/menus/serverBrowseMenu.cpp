@@ -45,7 +45,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
         scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
 
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
 
     (new GuiButton(this, "BACK", tr("button", "Back"), [this]() {
         destroy();

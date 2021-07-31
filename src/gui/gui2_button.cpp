@@ -16,13 +16,13 @@ void GuiButton::onDraw(sf::RenderTarget& window)
     sf::Color text_color = selectColor(color_set.forground);
 
     if (!enabled)
-        drawStretched(window, rect, "gui/ButtonBackground.disabled", color);
+        drawStretched(window, rect, "gui/widget/ButtonBackground.disabled.png", color);
     else if (active)
-        drawStretched(window, rect, "gui/ButtonBackground.active", color);
+        drawStretched(window, rect, "gui/widget/ButtonBackground.active.png", color);
     else if (hover)
-        drawStretched(window, rect, "gui/ButtonBackground.hover", color);
+        drawStretched(window, rect, "gui/widget/ButtonBackground.hover.png", color);
     else
-        drawStretched(window, rect, "gui/ButtonBackground", color);
+        drawStretched(window, rect, "gui/widget/ButtonBackground.png", color);
 
     if (icon_name != "")
     {

@@ -35,7 +35,7 @@ void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
     }
 
     sf::Sprite alert;
-    textureManager.setTexture(alert, "alert_overlay.png");
+    textureManager.setTexture(alert, "gui/alertOverlay.png");
     alert.setColor(color);
     alert.setPosition(getCenterPoint());
     window.draw(alert);

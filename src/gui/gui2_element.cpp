@@ -743,7 +743,7 @@ void GuiElement::drawStretchedHV(sf::RenderTarget& window, sf::FloatRect rect, f
 void GuiElement::drawArrow(sf::RenderTarget& window, sf::FloatRect rect, sf::Color color, float rotation)
 {
     sf::Sprite arrow;
-    textureManager.setTexture(arrow, "gui/SelectorArrow");
+    textureManager.setTexture(arrow, "gui/widget/SelectorArrow.png");
     arrow.setPosition(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
     float f = rect.height / float(arrow.getTextureRect().height);
     arrow.setScale(f, f);

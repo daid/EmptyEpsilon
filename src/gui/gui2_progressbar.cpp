@@ -10,7 +10,7 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
     float f = (value - min_value) / (max_value - min_value);
 
     if (drawBackground)
-        drawStretched(window, rect, "gui/ProgressbarBackground");
+        drawStretched(window, rect, "gui/widget/ProgressbarBackground.png");
 
     sf::FloatRect fill_rect = rect;
     if (rect.width >= rect.height)
@@ -18,13 +18,13 @@ void GuiProgressbar::onDraw(sf::RenderTarget& window)
         fill_rect.width *= f;
         if (max_value < min_value)
             fill_rect.left = rect.left + rect.width - fill_rect.width;
-        drawStretchedH(window, fill_rect, "gui/ProgressbarFill", color);
+        drawStretchedH(window, fill_rect, "gui/widget/ProgressbarFill.png", color);
     }
     else
     {
         fill_rect.height *= f;
         fill_rect.top = rect.top + rect.height - fill_rect.height;
-        drawStretchedV(window, fill_rect, "gui/ProgressbarFill", color);
+        drawStretchedV(window, fill_rect, "gui/widget/ProgressbarFill.png", color);
     }
     drawText(window, rect, text, ACenter);
 }

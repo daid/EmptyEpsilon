@@ -13,7 +13,7 @@ ShipLogScreen::ShipLogScreen(GuiContainer* owner)
     shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     custom_function_sidebar= new GuiCustomShipFunctions(shiplog_layout, shipLog, "");
     custom_function_sidebar->setSize(270, GuiElement::GuiSizeMax);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
     log_text = new GuiAdvancedScrollText(shiplog_layout, "SHIP_LOG");
     log_text->enableAutoScrollDown();
     log_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

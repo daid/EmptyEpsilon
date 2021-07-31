@@ -14,7 +14,7 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
 
 void GuiScrollbar::onDraw(sf::RenderTarget& window)
 {
-    drawStretched(window, rect, "gui/ScrollbarBackground");
+    drawStretched(window, rect, "gui/widget/ScrollbarBackground.png");
 
     int range = (max_value - min_value);
     float arrow_size = rect.width / 2.0;
@@ -22,7 +22,7 @@ void GuiScrollbar::onDraw(sf::RenderTarget& window)
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
         bar_size = move_height;
-    drawStretched(window, sf::FloatRect(rect.left, rect.top + arrow_size + move_height * getValue() / range, rect.width, bar_size), "gui/ScrollbarSelection", sf::Color::White);
+    drawStretched(window, sf::FloatRect(rect.left, rect.top + arrow_size + move_height * getValue() / range, rect.width, bar_size), "gui/widget/ScrollbarSelection.png", sf::Color::White);
 }
 
 bool GuiScrollbar::onMouseDown(sf::Vector2f position)

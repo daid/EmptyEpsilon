@@ -18,7 +18,7 @@ void GuiScrollingBanner::onDraw(sf::RenderTarget& window)
     }
 
     {
-        sf::Texture* texture_ptr = textureManager.getTexture("gui/ButtonBackground.png");
+        sf::Texture* texture_ptr = textureManager.getTexture("gui/widget/ButtonBackground.png");
         sf::Vector2f texture_size = sf::Vector2f(texture_ptr->getSize());
         sf::VertexArray a(sf::TrianglesStrip, 4);
 

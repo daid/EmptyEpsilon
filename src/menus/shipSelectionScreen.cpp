@@ -28,7 +28,7 @@
 ShipSelectionScreen::ShipSelectionScreen()
 {
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
+    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
 
     // Easiest place to ensure that positional sound is disabled on console
     // views. As soon as a 3D view is rendered, positional sound is re-enabled.

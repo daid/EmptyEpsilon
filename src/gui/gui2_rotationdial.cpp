@@ -15,12 +15,12 @@ void GuiRotationDial::onDraw(sf::RenderTarget& window)
     float radius = std::min(rect.width, rect.height) / 2.0f;
 
     sf::Sprite sprite;
-    textureManager.setTexture(sprite, "dial_background.png");
+    textureManager.setTexture(sprite, "gui/widget/dial_background.png");
     sprite.setPosition(center);
     sprite.setScale(radius * 2 / sprite.getTextureRect().height, radius * 2 / sprite.getTextureRect().height);
     window.draw(sprite);
 
-    textureManager.setTexture(sprite, "dial_button.png");
+    textureManager.setTexture(sprite, "gui/widget/dial_button.png");
     sprite.setPosition(center);
     sprite.setScale(radius * 2 / sprite.getTextureRect().height, radius * 2 / sprite.getTextureRect().height);
     sprite.setRotation((value - min_value) / (max_value - min_value) * 360.0f);

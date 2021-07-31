@@ -12,7 +12,7 @@ void GuiKeyValueDisplay::onDraw(sf::RenderTarget& window)
     constexpr auto key_alignment = ACenterRight;
     constexpr auto value_alignment = ACenterLeft;
 
-    drawStretched(window, rect, "gui/KeyValueBackground", color);
+    drawStretched(window, rect, "gui/widget/KeyValueBackground.png", color);
     if (rect.width >= rect.height)
     {
         drawText(window, sf::FloatRect(rect.left, rect.top, rect.width * div_distance - div_size, rect.height), key, key_alignment, text_size);

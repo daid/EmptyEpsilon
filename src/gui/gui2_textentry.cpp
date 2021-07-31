@@ -10,9 +10,9 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 void GuiTextEntry::onDraw(sf::RenderTarget& window)
 {
     if (focus)
-        drawStretched(window, rect, "gui/TextEntryBackground.focused", selectColor(colorConfig.text_entry.background));
+        drawStretched(window, rect, "gui/widget/TextEntryBackground.focused.png", selectColor(colorConfig.text_entry.background));
     else
-        drawStretched(window, rect, "gui/TextEntryBackground", selectColor(colorConfig.text_entry.background));
+        drawStretched(window, rect, "gui/widget/TextEntryBackground.png", selectColor(colorConfig.text_entry.background));
     if (blink_timer.isExpired())
         typing_indicator = !typing_indicator;
     drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (typing_indicator && focus ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));

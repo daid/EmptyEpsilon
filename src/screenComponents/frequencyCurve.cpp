@@ -38,7 +38,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                 if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
                 {
                     sf::Sprite image;
-                    textureManager.setTexture(image, "gui/SelectorArrow");
+                    textureManager.setTexture(image, "gui/widget/SelectorArrow.png");
                     image.setPosition(x + w / 2.0, rect.top + rect.height - 20 - h);
                     image.setRotation(-90);
                     image.setScale(0.2, 0.2);

@@ -894,7 +894,7 @@ void GuiRadarView::drawRadarCutoff(sf::RenderTarget& window)
     float screen_size = std::min(rect.width, rect.height) / 2.0f;
 
     sf::Sprite cutOff;
-    textureManager.setTexture(cutOff, "radarCutoff.png");
+    textureManager.setTexture(cutOff, "gui/radarCutoff.png");
     cutOff.setPosition(radar_screen_center);
     cutOff.setScale(screen_size / float(cutOff.getTextureRect().width) * 2, screen_size / float(cutOff.getTextureRect().width) * 2);
     window.draw(cutOff);

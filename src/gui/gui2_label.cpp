@@ -8,7 +8,7 @@ GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
 void GuiLabel::onDraw(sf::RenderTarget& window)
 {
     if (background)
-        drawStretched(window, rect, "gui/LabelBackground", selectColor(colorConfig.label.background));
+        drawStretched(window, rect, "gui/widget/LabelBackground.png", selectColor(colorConfig.label.background));
     sf::Color color = selectColor(colorConfig.label.forground);
     sf::Font* font = main_font;
     if (bold)
