@@ -21,7 +21,7 @@ ExplosionEffect::ExplosionEffect()
 : SpaceObject(1000.0, "ExplosionEffect")
 {
     size = 1.0;
-    explosion_sound = "explosion.wav";
+    explosion_sound = "sfx/explosion.wav";
     on_radar = false;
     setCollisionRadius(1.0);
     lifetime = maxLifetime;

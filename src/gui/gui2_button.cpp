@@ -63,7 +63,7 @@ void GuiButton::onMouseUp(sf::Vector2f position)
 {
     if (rect.contains(position))
     {
-        soundManager->playSound("button.wav");
+        soundManager->playSound("sfx/button.wav");
         if (func)
         {
             func_t f = func;

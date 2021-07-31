@@ -669,7 +669,7 @@ void PlayerSpaceship::update(float delta)
                 if (do_self_destruct)
                 {
                     self_destruct_countdown = PreferencesManager::get("self_destruct_countdown", "10").toFloat();
-                    playSoundOnMainScreen("vocal_self_destruction.wav");
+                    playSoundOnMainScreen("sfx/vocal_self_destruction.wav");
                 }
             }else{
                 // If the countdown has started, tick the clock.
@@ -1310,11 +1310,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
                 shields_active = active;
                 if (active)
                 {
-                    playSoundOnMainScreen("shield_up.wav");
+                    playSoundOnMainScreen("sfx/shield_up.wav");
                 }
                 else
                 {
-                    playSoundOnMainScreen("shield_down.wav");
+                    playSoundOnMainScreen("sfx/shield_down.wav");
                 }
             }
         }

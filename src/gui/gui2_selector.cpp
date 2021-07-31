@@ -8,7 +8,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30)
 {
     left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
-        soundManager->playSound("button.wav");
+        soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() <= 0)
             setSelectionIndex(entries.size() - 1);
         else
@@ -17,7 +17,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     });
     left->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
     right = new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
-        soundManager->playSound("button.wav");
+        soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() >= (int)entries.size() - 1)
             setSelectionIndex(0);
         else
@@ -69,7 +69,7 @@ void GuiSelector::onMouseUp(sf::Vector2f position)
 {
     if (rect.contains(position))
     {
-        soundManager->playSound("button.wav");
+        soundManager->playSound("sfx/button.wav");
         for(unsigned int n=0; n<entries.size(); n++)
         {
             if (popup_buttons.size() <= n)
