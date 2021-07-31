@@ -159,7 +159,7 @@ ShipTemplate::ShipTemplate()
         weapon_storage[n] = 0;
     long_range_radar_range = 30000.0f;
     short_range_radar_range = 5000.0f;
-    radar_trace = "RadarArrow.png";
+    radar_trace = "radar/arrow.png";
     impulse_sound_file = "sfx/engine.wav";
     default_ai_name = "default";
 }
@@ -224,9 +224,9 @@ void ShipTemplate::setTubeSize(int index, EMissileSizes size)
 
 void ShipTemplate::setType(TemplateType type)
 {
-    if (radar_trace == "RadarArrow.png" && type == Station)
+    if (radar_trace == "radar/arrow.png" && type == Station)
     {
-        radar_trace = "RadarBlip.png";
+        radar_trace = "radar/blip.png";
     }
     if (type == Station)
         repair_docked = true;
@@ -492,7 +492,7 @@ void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
 
 void ShipTemplate::setRadarTrace(string trace)
 {
-    radar_trace = trace;
+    radar_trace = "radar/" + trace;
 }
 
 void ShipTemplate::setLongRangeRadarRange(float range)

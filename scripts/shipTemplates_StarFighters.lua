@@ -11,7 +11,7 @@ Starfighters come in 3 subclasses:
 * Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the larger bombers have been known to deliver nukes.
 ----------------------------------------------------------]]
 template = ShipTemplate():setName("MT52 Hornet"):setLocaleName(_("ship", "MT52 Hornet")):setClass(_("class", "Starfighter"), _("subclass", "Interceptor")):setModel("WespeScoutYellow")
-template:setRadarTrace("radar_fighter.png")
+template:setRadarTrace("fighter.png")
 template:setDescription(_([[The MT52 Hornet is a basic interceptor found in many corners of the galaxy. It's easy to find spare parts for MT52s, not only because they are produced in large numbers, but also because they suffer high losses in combat.]]))
 template:setHull(30)
 template:setShields(20)
@@ -63,7 +63,7 @@ variation:addDoor(5, 1, false);
 variation:addDoor(5, 2, false);
 
 template = ShipTemplate():setName("Adder MK5"):setLocaleName(_("ship", "Adder MK5")):setClass(_("class", "Starfighter"), _("subclass", "Gunship")):setModel("AdlerLongRangeScoutYellow")
-template:setRadarTrace("radar_fighter.png")
+template:setRadarTrace("fighter.png")
 template:setDescription(_([[The Adder line's fifth iteration proved to be a great success among pirates and law officers alike. It is cheap, fast, and easy to maintain, and it packs a decent punch.]]))
 template:setHull(50)
 template:setShields(30)
@@ -119,7 +119,7 @@ variation:setSpeed(80, 30, 25)
 variation:setWeaponStorage("Nuke", 2)
 
 template = ShipTemplate():setName("WX-Lindworm"):setLocaleName(_("ship", "WX-Lindworm")):setClass(_("class", "Starfighter"), _("subclass", "Bomber")):setModel("LindwurmFighterYellow")
-template:setRadarTrace("radar_fighter.png")
+template:setRadarTrace("fighter.png")
 template:setDescription(_([[The WX-Lindworm, or "Worm" as it's often called, is a bomber-class starfighter. While one of the least-shielded starfighters in active duty, the Worm's two launchers can pack quite a punch. Its goal is to fly in, destroy its target, and fly out or be destroyed.]]))
 template:setHull(50)
 template:setShields(20)

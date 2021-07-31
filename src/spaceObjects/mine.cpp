@@ -48,7 +48,7 @@ void Mine::draw3DTransparent()
 void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite objectSprite;
-    textureManager.setTexture(objectSprite, "RadarBlip.png");
+    textureManager.setTexture(objectSprite, "radar/blip.png");
     objectSprite.setRotation(getRotation());
     objectSprite.setPosition(position);
     objectSprite.setScale(0.3, 0.3);

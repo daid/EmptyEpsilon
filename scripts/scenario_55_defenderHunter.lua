@@ -4848,7 +4848,7 @@ end
 function enforcer(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Blockade Runner"):orderRoaming()
 	ship:setTypeName("Enforcer")
-	ship:setRadarTrace("radar_ktlitan_destroyer.png")			--different radar trace
+	ship:setRadarTrace("ktlitan_destroyer.png")			--different radar trace
 	ship:setWarpDrive(true)										--warp (vs none)
 	ship:setWarpSpeed(600)
 	ship:setImpulseMaxSpeed(100)								--faster impulse (vs 60)
@@ -4962,7 +4962,7 @@ end
 function predator(enemyFaction)
 	local ship = CpuShip():setFaction(enemyFaction):setTemplate("Piranha F8"):orderRoaming()
 	ship:setTypeName("Predator")
-	ship:setRadarTrace("radar_missile_cruiser.png")				--different radar trace
+	ship:setRadarTrace("missile_cruiser.png")				--different radar trace
 	ship:setJumpDrive(true)
 	ship:setJumpDriveRange(5000,35000)			
 	ship:setImpulseMaxSpeed(65)									--faster impulse (vs 40)

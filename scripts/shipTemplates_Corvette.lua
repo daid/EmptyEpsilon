@@ -13,7 +13,7 @@ They come in 3 different subclasses:
 
 template = ShipTemplate():setName("Atlantis X23"):setLocaleName(_("ship", "Atlantis X23")):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_1_upgraded")
 template:setDescription(_([[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]]))
-template:setRadarTrace("radar_dread.png")
+template:setRadarTrace("dread.png")
 template:setHull(100)
 template:setShields(200, 200, 200, 200)
 template:setSpeed(30, 3.5, 5)
@@ -82,7 +82,7 @@ variation:addDoor(8, 4, false);
 
 template = ShipTemplate():setName("Starhammer II"):setLocaleName(_("ship", "Starhammer II")):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_4_upgraded")
 template:setDescription(_([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]]))
-template:setRadarTrace("radar_dread.png")
+template:setRadarTrace("dread.png")
 template:setHull(200)
 template:setShields(450, 350, 150, 150, 350)
 template:setSpeed(35, 6, 10)
@@ -100,7 +100,7 @@ template:weaponTubeDisallowMissle(1, "EMP")
 
 template = ShipTemplate():setName("Crucible"):setLocaleName(_("playerShip", "Crucible")):setClass(_("class", "Corvette"), _("subclass", "Popper")):setModel("LaserCorvetteRed"):setType("playership")
 template:setDescription(_("A number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
-template:setRadarTrace("radar_laser.png")
+template:setRadarTrace("laser.png")
 template:setHull(160)
 template:setShields(160,160)
 template:setSpeed(80,15,40)
@@ -156,7 +156,7 @@ template:addDoor(10,4, true)
 
 template = ShipTemplate():setName("Maverick"):setLocaleName(_("playerShip", "Maverick")):setClass(_("class", "Corvette"), _("subclass", "Gunner")):setModel("LaserCorvetteGreen"):setType("playership")
 template:setDescription(_("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
-template:setRadarTrace("radar_laser.png")
+template:setRadarTrace("laser.png")
 template:setHull(160)
 template:setShields(160,160)
 template:setSpeed(80,15,40)
@@ -216,7 +216,7 @@ template:addDoor(10,4, true)
 -- Smaller ships can dock to this platform to re-supply.
 template = ShipTemplate():setName("Defense platform"):setLocaleName(_("ship", "Defense platform")):setClass(_("class", "Corvette"), _("subclass", "Support")):setModel("space_station_4")
 template:setDescription(_([[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
-template:setRadarTrace("radartrace_smallstation.png")
+template:setRadarTrace("smallstation.png")
 template:setHull(150)
 template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
@@ -237,7 +237,7 @@ for cnt=1,5 do
     template:setHull(100)
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
 
     if cnt > 2 then
@@ -250,7 +250,7 @@ for cnt=1,5 do
     template:setHull(100)
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
 
     if cnt > 2 then
@@ -263,7 +263,7 @@ for cnt=1,5 do
     template:setHull(100)
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
 
     if cnt > 2 then
@@ -276,7 +276,7 @@ for cnt=1,5 do
     template:setHull(100)
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
 
     if cnt > 2 then
@@ -289,7 +289,7 @@ for cnt=1,5 do
     template:setHull(100)
     template:setShields(50, 50)
     template:setSpeed(60 - 5 * cnt, 6, 10)
-    template:setRadarTrace("radar_transport.png")
+    template:setRadarTrace("transport.png")
     template:setDefaultAI("evasion")
 
     if cnt > 2 then
@@ -304,7 +304,7 @@ It is designed to carry other ships deep into space. So it has special docking p
 template:setHull(100)
 template:setShields(50, 50)
 template:setSpeed(50, 6, 10)
-template:setRadarTrace("radar_transport.png")
+template:setRadarTrace("transport.png")
 template:setJumpDrive(true)
 template:setJumpDriveRange(5000, 100 * 50000) -- The jump carrier can jump a 100x longer distance then normal jump drives.
 template:setDockClasses("Starfighter", "Frigate", "Corvette")

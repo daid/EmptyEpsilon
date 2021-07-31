@@ -12,7 +12,7 @@ They are divided in 3 different sub-classes:
 * Support: Support types come in many varieties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels.
 ----------------------------------------------------------]]
 template = ShipTemplate():setName("Phobos T3"):setLocaleName(_("ship", "Phobos T3")):setClass(_("class", "Frigate"), _("subclass", "Cruiser")):setModel("AtlasHeavyFighterYellow")
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("cruiser.png")
 template:setDescription(_([[The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. It's extremely easy to modify, which makes retro-fitting this ship a breeze. Its basic stats aren't impressive, but due to its modular nature, it's fairly easy to produce in large quantities.]]))
 template:setHull(70)
 template:setShields(50, 40)
@@ -85,7 +85,7 @@ variation:addDoor(8, 4, false);
 --variation:addDoor(2, 5, false);
 
 template = ShipTemplate():setName("Nirvana R5"):setLocaleName(_("ship", "Nirvana R5")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Anti-fighter")):setModel("small_frigate_5") -- TODO: Better 3D model selection
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("cruiser.png")
 template:setDescription(_([[The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-damage point-defense weapons to quickly take out starfighters.]]))
 template:setBeamWeapon(0, 90, -15, 1200, 3, 1)
 template:setBeamWeapon(1, 90,  15, 1200, 3, 1)
@@ -114,7 +114,7 @@ variation:setShields(40, 30)
 variation:setSpeed(65, 12, 10)
 
 template = ShipTemplate():setName("Storm"):setLocaleName(_("ship", "Storm")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Heavy Artillery")):setModel("HeavyCorvetteYellow")	--Yellow, Green, Blue, White, Red
-template:setRadarTrace("radar_piranha.png")
+template:setRadarTrace("piranha.png")
 template:setDescription(_([[A heavy artillery cruiser, the Storm fires bunches of missiles from forward facing tubes.]]))
 template:setBeamWeapon(0, 60, 0, 1200, 3, 2)
 template:setHull(50)
@@ -131,7 +131,7 @@ template:setTubeDirection(4,  2)
 template:setDefaultAI('missilevolley')
 
 template = ShipTemplate():setName("Hathcock"):setLocaleName(_("playerShip", "Hathcock")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Sniper")):setModel("HeavyCorvetteGreen"):setType("playership")
-template:setRadarTrace("radar_piranha.png")
+template:setRadarTrace("piranha.png")
 template:setDescription(_("Long range narrow beam and some point defense beams, broadside missiles. Agile for a frigate"))
 --						Arc, Dir, Range, CycleTime, Dmg
 template:setBeamWeapon(0, 4,   0, 1400.0, 6.0, 4)
@@ -177,7 +177,7 @@ template:addDoor( 5, 1, false)
 
 
 template = ShipTemplate():setName("Piranha F12"):setLocaleName(_("ship", "Piranha F12")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Light Artillery")):setModel("HeavyCorvetteRed")
-template:setRadarTrace("radar_piranha.png")
+template:setRadarTrace("piranha.png")
 template:setDescription(_([[A light artillery cruiser, the Piranha F12 is the smallest ship to exclusively fire from broadside weapon tubes.]]))
 template:setHull(70)
 template:setShields(30, 30)
@@ -270,7 +270,7 @@ variation:addDoor(7, 3, false)
 
 --Cruiser: strike craft (fast in/out)
 template = ShipTemplate():setName("Stalker Q7"):setLocaleName(_("ship", "Stalker Q7")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Strike ship")):setModel("small_frigate_3")
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("cruiser.png")
 template:setDescription(_([[The Stalker is a strike ship designed to swoop into battle, deal damage quickly, and get out fast. The Q7 model is fitted with a warp drive.]]))
 template:setHull(50)
 template:setShields(80, 30, 30, 30)
@@ -297,7 +297,7 @@ variation:setShields(50,50)
 variation:setSpeed(70, 15, 12)
 
 template = ShipTemplate():setName("Ranus U"):setLocaleName(_("ship", "Ranus U")):setClass(_("class", "Frigate"), _("subclass", "Cruiser: Sniper")):setModel("MissileCorvetteGreen")
-template:setRadarTrace("radar_cruiser.png")
+template:setRadarTrace("cruiser.png")
 template:setDescription(_([[The Ranus U sniper is built to deal a large amounts of damage quickly and from a distance before escaping. It's the only basic frigate that carries nuclear weapons, even though it's also the smallest of all frigate-class ships.]]))
 template:setHull(30)
 template:setShields(30, 5, 5)
@@ -310,7 +310,7 @@ template:setWeaponStorage("Nuke", 2)
 --Cruiser: tackler
 
 template = ShipTemplate():setName("Flavia"):setLocaleName(_("ship", "Flavia")):setClass(_("class", "Frigate"), _("subclass", "Light transport")):setModel("LightCorvetteGrey")
-template:setRadarTrace("radar_tug.png")
+template:setRadarTrace("tug.png")
 template:setDescription(_([[Popular among traders and smugglers, the Flavia is a small cargo and passenger transport. It's cheaper than a freighter for small loads and short distances, and is often used to carry high-value cargo discreetly.]]))
 template:setHull(50)
 template:setShields(50, 50)
@@ -367,7 +367,7 @@ variation:addDoor(5, 5, true)
 variation:addDoor(6, 5, true)
 
 template = ShipTemplate():setName("Repulse"):setLocaleName(_("playerShip", "Repulse")):setClass(_("class", "Frigate"), _("subclass", "Armored Transport")):setModel("LightCorvetteRed"):setType("playership")
-template:setRadarTrace("radar_tug.png")
+template:setRadarTrace("tug.png")
 template:setDescription(_("Jump/Turret version of Flavia Falcon"))
 template:setHull(120)
 template:setShields(80, 80)
@@ -412,7 +412,7 @@ template:addDoor( 8, 3, true)
 template:addDoor(10, 2, false)
 
 template = ShipTemplate():setName("Fiend G3"):setLocaleName(_("ship", "Fiend G3")):setModel("battleship_destroyer_4_upgraded"):setClass(_("class", "Frigate"), _("subclass", "Gunship"))
-template:setRadarTrace("radar_adv_gunship.png")
+template:setRadarTrace("adv_gunship.png")
 template:setDescription(_([[The Fiend G3 was the first model produced by Conversions R Us. They got a good deal on a number of used Gunships. They added a cheap jump drive to the Gunship and viola! they made the Fiend G3. Like the Gunship, it has a homing missile tube and beams to readily take down weaker ships. With the jump drive, it becomes quite a bit more dangerous than the stock Gunship.]]))
 --                 Arc, Dir,  Range,  CycleTime, Dmg
 template:setBeam(0, 50, -15, 1000.0,		6.0, 8)

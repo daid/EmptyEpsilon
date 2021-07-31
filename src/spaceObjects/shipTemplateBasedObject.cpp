@@ -56,7 +56,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
     /// Set the icon to be used for this object on the radar.
-    /// For example, station:setRadarTrace("RadarArrow.png") will show an arrow instead of a dot for this station.
+    /// For example, station:setRadarTrace("arrow.png") will show an arrow instead of a dot for this station.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRadarTrace);
     /// Set the sound file to be used for this object's impulse engines.
     /// Requires a string for a filename relative to the resources path.

@@ -44,7 +44,7 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
     /// Let the artifact rotate. For reference, normal asteroids in the game have spins between 0.1 and 0.8.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setSpin);
     /// Set the icon to be used for this artifact on the radar.
-    /// For example, artifact:setRadarTraceIcon("RadarArrow.png") will show an arrow instead of a dot for this artifact.
+    /// For example, artifact:setRadarTraceIcon("arrow.png") will show an arrow instead of a dot for this artifact.
     REGISTER_SCRIPT_CLASS_FUNCTION(Artifact, setRadarTraceIcon);
     /// Scales the radar trace. Setting to 0 restores to standard autoscaling.
     /// Setting to 1 is needed for mimicking ship traces.
@@ -61,7 +61,7 @@ Artifact::Artifact()
   model_data_name(current_model_data_name),
   artifact_spin(0.0f),
   allow_pickup(false),
-  radar_trace_icon("RadarBlip.png"),
+  radar_trace_icon("radar/blip.png"),
   radar_trace_scale(0),
   radar_trace_color(sf::Color(255, 255, 255))
 {
@@ -187,7 +187,7 @@ void Artifact::setSpin(float spin)
 
 void Artifact::setRadarTraceIcon(string icon)
 {
-    radar_trace_icon = icon;
+    radar_trace_icon = "radar/" + icon;
 }
 
 void Artifact::setRadarTraceScale(float scale)

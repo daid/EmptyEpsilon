@@ -100,7 +100,7 @@ public:
     void setLongRangeRadarRange(float range) { range = std::max(range, 100.0f); long_range_radar_range = range; short_range_radar_range = std::min(short_range_radar_range, range); }
     void setShortRangeRadarRange(float range) { range = std::max(range, 100.0f); short_range_radar_range = range; long_range_radar_range = std::max(long_range_radar_range, range); }
 
-    void setRadarTrace(string trace) { radar_trace = trace; }
+    void setRadarTrace(string trace) { radar_trace = "radar/" + trace; }
     void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
 
     bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }

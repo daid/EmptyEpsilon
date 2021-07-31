@@ -137,7 +137,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     // Example ship:setTubeLoadTime(0, 15)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeLoadTime);
     /// Set the icon to be used for this ship on the radar.
-    /// For example, ship:setRadarTrace("RadarBlip.png") will show a dot instead of an arrow for this ship.
+    /// For example, ship:setRadarTrace("blip.png") will show a dot instead of an arrow for this ship.
     /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
     /// Get the dynamic radar signature values for each component band.
@@ -557,7 +557,7 @@ void SpaceShip::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
     // Otherwise, draw the ship-specific icon.
     if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
     {
-        textureManager.setTexture(objectSprite, "RadarArrow.png");
+        textureManager.setTexture(objectSprite, "radar/arrow.png");
     }
     else
     {

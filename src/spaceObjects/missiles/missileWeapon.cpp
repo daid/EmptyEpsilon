@@ -48,7 +48,7 @@ void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position,
     if (long_range) return;
 
     sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "RadarArrow.png");
+    textureManager.setTexture(object_sprite, "radar/arrow.png");
     object_sprite.setRotation(getRotation()-rotation);
     object_sprite.setPosition(position);
     object_sprite.setColor(data.color);

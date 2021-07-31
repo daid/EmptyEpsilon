@@ -7,7 +7,7 @@ Think: Stardestroyer.
 ----------------------------------------------------------]]
 
 template = ShipTemplate():setName("Odin"):setLocaleName(_("ship", "Odin")):setClass(_("class", "Dreadnought"), _("subclass", "Odin")):setModel("space_station_2")
-template:setRadarTrace("radartrace_largestation.png")
+template:setRadarTrace("largestation.png")
 template:setDescription(_([[The Odin is a "ship" so large and unique that it's almost a class of its own.
 
 The ship is often nicknamed the "all-father", a name that aptly describes the many roles this ship can fulfill. It's both a supply station and an extremely heavily armored and shielded weapon station capable of annihilating small fleets on its own.

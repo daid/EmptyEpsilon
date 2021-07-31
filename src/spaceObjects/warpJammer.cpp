@@ -44,7 +44,7 @@ WarpJammer::~WarpJammer()
 void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
 {
     sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "RadarBlip.png");
+    textureManager.setTexture(object_sprite, "radar/blip.png");
     object_sprite.setRotation(getRotation());
     object_sprite.setPosition(position);
     if (my_spaceship && my_spaceship->isEnemy(this))
