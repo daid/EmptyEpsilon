@@ -205,7 +205,7 @@ void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, flo
 {
     // All probes use the same green icon on radar.
     sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "ProbeBlip.png");
+    textureManager.setTexture(object_sprite, "radar/probe.png");
     object_sprite.setPosition(position);
     object_sprite.setColor(sf::Color(96, 192, 128));
     float size = 0.3;
