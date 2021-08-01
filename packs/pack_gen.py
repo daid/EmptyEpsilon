@@ -77,7 +77,6 @@ def buildPack(name):
 def main():
 	for dir in os.listdir("."):
 		if os.path.isdir(dir):
-			if not dir.startswith("SolCommand"):
-				buildPack(dir)
+			buildPack(dir)
 
 main()
