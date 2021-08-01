@@ -16,7 +16,7 @@
 --- -Setting priorities
 -- Type: Tutorial
 require("utils.lua")
-require("tutorial_00_all.lua")
+require("tutorial/00_all.lua")
 
 function init()
     tutorial_list = {

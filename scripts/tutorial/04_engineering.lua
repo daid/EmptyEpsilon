@@ -15,7 +15,7 @@
 --- -When systems are damaged by being shot, colliding with space hazards, or overheating, the Engineering officer can dispatch repair crews to the system for repairs. Each systems has a damage state between -100% to 100%. Systems below 100% function suboptimally, in much the same way as if they are underpowered. Once a system is at or below 0%, it completely stops functioning until it is repaired. Systems can be repaired by sending a repair crew to the room containing the system. Hull damage affects the entire ship, and docking at a station can repair it, but hull repairs progress very slowly.
 -- Type: Tutorial
 
-require("tutorial_00_all.lua")
+require("tutorial/00_all.lua")
 
 function init()
     tutorial_list = {

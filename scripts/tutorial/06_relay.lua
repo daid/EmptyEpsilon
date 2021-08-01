@@ -17,7 +17,7 @@
 --- Communications: 
 --- -The Relay officer can open communications with stations and other ships. Friendly ships hailed by the Relay officer can take orders, and friendly stations can dispatch backup and supply ships. While your ship is docked at a station, the Relay officer can request rearmament of the ship's missiles and mines. Some of these requests can cost some of your crew's reputation, which is also tracked by the Relay station.
 -- Type: Tutorial
-require("tutorial_00_all.lua")
+require("tutorial/00_all.lua")
 
 function init()
     tutorial_list = {

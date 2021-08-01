@@ -24,7 +24,7 @@
 --- -The Science officer can access the ship's database of all known ships, as well as data about weapons and space hazards. This can be vital when assessing a ship's capabilities without a deep scan, or for help navigating a black hole, wormhole, or other anomaly.
 -- Type: Tutorial
 
-require("tutorial_00_all.lua")
+require("tutorial/00_all.lua")
 
 function init()
     tutorial_list = {
