@@ -190,6 +190,8 @@ ShipSelectionScreen::ShipSelectionScreen()
             for(string& template_name : template_names)
             {
                 P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+                if (!ship_template->visible)
+                    continue;
                 ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
             }
             ship_template_selector->setSelectionIndex(0);

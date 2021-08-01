@@ -45,6 +45,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         auto stationTemplate=ShipTemplate::getTemplate(template_name);
         if (stationTemplate)
         {
+            if (!stationTemplate->visible)
+                continue;
             (new GuiButton(box, "CREATE_STATION_" + template_name, ShipTemplate::getTemplate(template_name)->getLocaleName(), [this, template_name]() {
                 setCreateScript("SpaceStation():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setTemplate(\"" + template_name + "\")");
             }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
@@ -107,6 +109,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         auto shipTemplate=ShipTemplate::getTemplate(template_name);
         if (shipTemplate)
         {
+            if (!shipTemplate->visible)
+                continue;
             cpu_ship_listbox->addEntry(ShipTemplate::getTemplate(template_name)->getLocaleName(), template_name);
         }
     }

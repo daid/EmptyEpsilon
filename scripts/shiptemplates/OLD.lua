@@ -4,6 +4,7 @@ These are older ship templates, going to be replaced soon.
 
 --[[ Player ships --]]
 template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("playerShip", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+template:hidden() -- The player cruiser is pretty much replaced by the Atlantis.
 template:setRadarTrace("cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
@@ -60,6 +61,7 @@ template:addDoor(8, 4, false);
 --template:addDoor(2, 5, false);
 
 template = ShipTemplate():setName("Player Missile Cr."):setLocaleName(_("playerShip", "Player Missile Cr.")):setModel("space_cruiser_4"):setType("playership")
+template:hidden() -- The Player Missile Cr. is pretty much replaced by the Crucible
 template:setRadarTrace("missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 --Setup 7 tubes. 2 forward for any type of missile, and 2 on each side of the ship and 1 in the rear. The side tubes are exclusive for homing missiles. The rear is exclusive for mines.
@@ -114,6 +116,7 @@ template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
 template = ShipTemplate():setName("Player Fighter"):setLocaleName(_("playerShip", "Player Fighter")):setModel("small_fighter_1"):setType("playership")
+template:hidden() -- The Player Figher is replaced by the MP52 Hornet
 template:setRadarTrace("fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
 template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
@@ -218,6 +221,7 @@ variation:addDoor( 4, 1, true)
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
 template = ShipTemplate():setName("Fighter"):setLocaleName(_("ship", "Fighter")):setModel("small_fighter_1")
+template:hidden() -- Replaced by the Hornet class
 template:setRadarTrace("fighter.png")
 template:setDescription(_("Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated."))
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -478,81 +482,3 @@ template:setBeam(3, 25,  190, 1000.0, 6.0, 8)
 template:setHull(70)
 template:setShields(100, 150)
 template:setSpeed(60, 15, 25)
-
-----------------------Ktlitan ships
-template = ShipTemplate():setName("Ktlitan Fighter"):setLocaleName(_("ship", "Ktlitan Fighter")):setModel("sci_fi_alien_ship_1")
-template:setRadarTrace("ktlitan_fighter.png")
-template:setBeam(0, 60, 0, 1200.0, 4.0, 6)
-template:setHull(70)
-template:setSpeed(140, 30, 25)
-template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
-
-template = ShipTemplate():setName("Ktlitan Breaker"):setLocaleName(_("ship", "Ktlitan Breaker")):setModel("sci_fi_alien_ship_2")
-template:setRadarTrace("ktlitan_breaker.png")
-template:setBeam(0, 40, 0, 800.0, 4.0, 6)
-template:setBeam(1, 35,-15, 800.0, 4.0, 6)
-template:setBeam(2, 35, 15, 800.0, 4.0, 6)
-template:setTubes(1, 13.0) -- Amount of torpedo tubes, loading time
-template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
-template:setHull(120)
-template:setSpeed(100, 5, 25)
-
-template = ShipTemplate():setName("Ktlitan Worker"):setLocaleName(_("ship", "Ktlitan Worker")):setModel("sci_fi_alien_ship_3")
-template:setRadarTrace("ktlitan_worker.png")
-template:setBeam(0, 40, -90, 600.0, 4.0, 6)
-template:setBeam(1, 40, 90, 600.0, 4.0, 6)
-template:setHull(50)
-template:setSpeed(100, 35, 25)
-
-template = ShipTemplate():setName("Ktlitan Drone"):setLocaleName(_("ship", "Ktlitan Drone")):setModel("sci_fi_alien_ship_4")
-template:setRadarTrace("ktlitan_drone.png")
-template:setBeam(0, 40, 0, 600.0, 4.0, 6)
-template:setHull(30)
-template:setSpeed(120, 10, 25)
-
-template = ShipTemplate():setName("Ktlitan Feeder"):setLocaleName(_("ship", "Ktlitan Feeder")):setModel("sci_fi_alien_ship_5")
-template:setRadarTrace("ktlitan_feeder.png")
-template:setBeam(0, 20, 0, 800.0, 4.0, 6)
-template:setBeam(1, 35,-15, 600.0, 4.0, 6)
-template:setBeam(2, 35, 15, 600.0, 4.0, 6)
-template:setBeam(3, 20,-25, 600.0, 4.0, 6)
-template:setBeam(4, 20, 25, 600.0, 4.0, 6)
-template:setHull(150)
-template:setSpeed(120, 8, 25)
-
-template = ShipTemplate():setName("Ktlitan Scout"):setLocaleName(_("ship", "Ktlitan Scout")):setModel("sci_fi_alien_ship_6")
-template:setRadarTrace("ktlitan_scout.png")
-template:setBeam(0, 40, 0, 600.0, 4.0, 6)
-template:setHull(100)
-template:setSpeed(150, 30, 25)
-
-template = ShipTemplate():setName("Ktlitan Destroyer"):setLocaleName(_("ship", "Ktlitan Destroyer")):setModel("sci_fi_alien_ship_7")
-template:setRadarTrace("ktlitan_destroyer.png")
-template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
-template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
-template:setHull(300)
-template:setShields(50, 50, 50)
-template:setTubes(3, 15.0) -- Amount of torpedo tubes
-template:setSpeed(70, 5, 10)
-template:setWeaponStorage("Homing", 25)
-template:setDefaultAI('missilevolley')
-
-template = ShipTemplate():setName("Ktlitan Queen"):setLocaleName(_("ship", "Ktlitan Queen")):setModel("sci_fi_alien_ship_8")
-template:setRadarTrace("ktlitan_queen.png")
-template:setHull(350)
-template:setShields(100, 100, 100)
-template:setTubes(2, 15.0) -- Amount of torpedo tubes
-template:setWeaponStorage("Nuke", 5)
-template:setWeaponStorage("EMP", 5)
-template:setWeaponStorage("Homing", 5)
-
-for type=1,5 do
-    for cnt=1,5 do
-        template = ShipTemplate():setName("Transport" .. type .. "x" .. cnt):setLocaleName(string.format(_("ship", "Transport %dx%d"), type, cnt)):setModel("transport_" .. type .. "_" .. cnt)
-        template:setHull(100)
-        template:setShields(50, 50)
-        template:setSpeed(60 - 5 * cnt, 6, 10)
-        template:setRadarTrace("transport.png")
-        template:setDefaultAI("evasion")
-    end
-end

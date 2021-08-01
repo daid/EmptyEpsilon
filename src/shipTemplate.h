@@ -85,6 +85,7 @@ public:
     TemplateType getType();
 
     P<ModelData> model_data;
+    bool visible{true}; //Should be visible in science/gm/other player facing locations. Invisible templates exists for backwards compatibility.
 
     /*!
      * List of ship classes that can dock with this ship. (only used for ship2ship docking)
@@ -133,6 +134,7 @@ public:
     void setLocaleName(string name);
     void setClass(string class_name, string sub_class_name);
     void setDescription(string description);
+    void hidden() { visible = false; }
     void setModel(string model_name);
     void setDefaultAI(string default_ai_name);
     void setDockClasses(std::vector<string> classes);

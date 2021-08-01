@@ -19,6 +19,9 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Sets the type of template. Defaults to normal ships, so then it does not need to be set.
     /// Example: template:setType("ship"), template:setType("playership"), template:setType("station")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setType);
+    /// Hides this template from GM creation features and science database.
+    /// Hidden templates exists mainly for backwards compatibility of scripts.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, hidden);
     /// Set the default AI behaviour. EE has 3 types of AI coded into the game right now: "default", "fighter", "missilevolley"
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDefaultAI);
     /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
