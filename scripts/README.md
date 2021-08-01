@@ -45,6 +45,5 @@ The default communication scripts for each created ship or station.
 - `comms_station.lua` (hard-coded default for stations)
   - uses `supply_drop.lua`
 - `comms_supply_drop.lua` (used by `supply_drop.lua`)
-- `comms_station_scenario_06_central_command.lua` (used by `scenario_06_edgeofspace.lua`)
 
 They can be replaced by `obj:setCommsScript(filename)` or `obj:setCommsFunction(callback)`.
