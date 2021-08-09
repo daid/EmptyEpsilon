@@ -351,27 +351,17 @@ void Planet::draw3DTransparent()
 }
 #endif
 
-void Planet::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Planet::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     if (collision_size > 0)
     {
-        sf::CircleShape radar_radius(collision_size * scale);
-        radar_radius.setOrigin(collision_size * scale, collision_size * scale);
-        radar_radius.setPosition(position);
-        radar_radius.setFillColor(sf::Color(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, 128));
-        window.draw(radar_radius);
+        renderer.fillCircle(position, collision_size * scale, sf::Color(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, 128));
     }
 }
 
-void Planet::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Planet::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::CircleShape radar_radius(planet_size * scale);
-    radar_radius.setOrigin(planet_size * scale, planet_size * scale);
-    radar_radius.setPosition(position);
-    radar_radius.setFillColor(sf::Color::Transparent);
-    radar_radius.setOutlineColor(sf::Color(255, 255, 255, 128));
-    radar_radius.setOutlineThickness(3);
-    window.draw(radar_radius);
+    renderer.drawCircleOutline(position, planet_size * scale, 3, sf::Color(255, 255, 255, 128));
 }
 
 void Planet::collide(Collisionable* target, float collision_force)

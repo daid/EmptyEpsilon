@@ -14,7 +14,6 @@ class GuiRotationDial;
 class WeaponsScreen : public GuiOverlay
 {
 private:
-    GuiOverlay* background_gradient;
     GuiOverlay* background_crosses;
 
     TargetsContainer targets;
@@ -28,7 +27,7 @@ private:
 public:
     WeaponsScreen(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual bool onJoystickAxis(const AxisAction& axisAction) override;
 };

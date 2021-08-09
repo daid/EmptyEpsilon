@@ -16,7 +16,7 @@ DebugRenderer::DebugRenderer()
 #endif
 }
 
-void DebugRenderer::render(sf::RenderTarget& window)
+void DebugRenderer::render(sp::RenderTarget& renderer)
 {
     fps_counter++;
     if (fps_counter > 30)
@@ -33,6 +33,7 @@ void DebugRenderer::render(sf::RenderTarget& window)
         text = text + string(game_server->getSendDataRate() / 1000, 1) + " kb per second\n";
         text = text + string(game_server->getSendDataRatePerClient() / 1000, 1) + " kb per client\n";
     }
+    /* TODO_GFX
     if (show_timing_graph)
     {
         if (timing_graph_points.size() > window.getView().getSize().x)
@@ -88,10 +89,8 @@ void DebugRenderer::render(sf::RenderTarget& window)
         window.draw(text_collision);
         window.draw(text_render);
     }
-
-    sf::Text textElement(text, *main_font, 18);
-    textElement.setPosition(0, 0);
-    window.draw(textElement);
+    */
+   renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
 }
 
 void DebugRenderer::handleKeyPress(sf::Event::KeyEvent key, int unicode)

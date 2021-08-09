@@ -18,7 +18,7 @@ GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
     first_person = PreferencesManager::get("first_person") == "1";
 }
 
-void GuiViewportMainScreen::onDraw(sf::RenderTarget& window)
+void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
@@ -70,5 +70,5 @@ void GuiViewportMainScreen::onDraw(sf::RenderTarget& window)
             camera_yaw += angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
         }
     }
-    GuiViewport3D::onDraw(window);
+    GuiViewport3D::onDraw(renderer);
 }

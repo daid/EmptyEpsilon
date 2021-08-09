@@ -19,8 +19,8 @@ public:
     GuiHackingDialog(GuiContainer* owner, string id);
 
     void open(P<SpaceObject> target);
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual bool onMouseDown(sf::Vector2f position) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
     void onMiniGameComplete(bool success);
 
 private:

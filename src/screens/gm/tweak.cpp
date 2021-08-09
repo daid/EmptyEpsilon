@@ -15,7 +15,7 @@
 GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 : GuiPanel(owner, "GM_TWEAK_DIALOG")
 {
-    setPosition(0, -100, ABottomCenter);
+    setPosition(0, -100, sp::Alignment::BottomCenter);
     setSize(1000, 700);
 
     GuiListbox* list = new GuiListbox(this, "", [this](int index, string value)
@@ -26,7 +26,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     });
 
     list->setSize(300, GuiElement::GuiSizeMax);
-    list->setPosition(25, 25, ATopLeft);
+    list->setPosition(25, 25, sp::Alignment::TopLeft);
 
     pages.push_back(new GuiObjectTweakBase(this));
     list->addEntry(tr("tab", "Base"), "");
@@ -85,7 +85,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 
     for(GuiTweakPage* page : pages)
     {
-        page->setSize(700, 700)->setPosition(0, 0, ABottomRight)->hide();
+        page->setSize(700, 700)->setPosition(0, 0, sp::Alignment::BottomRight)->hide();
     }
 
     pages[0]->show();
@@ -93,7 +93,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
 
     (new GuiButton(this, "CLOSE_BUTTON", tr("button", "Close"), [this]() {
         hide();
-    }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
+    }))->setTextSize(20)->setPosition(-10, 0, sp::Alignment::TopRight)->setSize(70, 30);
 }
 
 void GuiObjectTweak::open(P<SpaceObject> target)
@@ -106,9 +106,9 @@ void GuiObjectTweak::open(P<SpaceObject> target)
     show();
 }
 
-void GuiObjectTweak::onDraw(sf::RenderTarget& window)
+void GuiObjectTweak::onDraw(sp::RenderTarget& renderer)
 {
-    GuiPanel::onDraw(window);
+    GuiPanel::onDraw(renderer);
 
     if (!target)
         hide();
@@ -118,10 +118,10 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
     // Set type name. Does not change ship type.
@@ -216,7 +216,7 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     long_range_radar_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
-void GuiTweakShip::onDraw(sf::RenderTarget& window)
+void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
 {
     hull_slider->setValue(target->hull_strength);
     jump_charge_slider->setValue(target->getJumpDriveCharge());
@@ -249,10 +249,10 @@ GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
     (new GuiLabel(left_col, "", tr("missiles", "Storage space:"), 30))->setSize(GuiElement::GuiSizeMax, 40);
@@ -284,10 +284,10 @@ GuiJammerTweak::GuiJammerTweak(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     (new GuiLabel(left_col, "", tr("Jammer Range:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     jammer_range_slider = new GuiSlider(left_col, "", 0, 50000, 0, [this](float value) {
@@ -302,7 +302,7 @@ void GuiJammerTweak::open(P<SpaceObject> target)
     this->target = jammer;
 }
 
-void GuiJammerTweak::onDraw(sf::RenderTarget& window)
+void GuiJammerTweak::onDraw(sp::RenderTarget& renderer)
 {
     jammer_range_slider->setValue(target->getRange());
 }
@@ -311,10 +311,10 @@ GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     (new GuiLabel(left_col, "", tr("Asteroid Size:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     asteroid_size_slider = new GuiSlider(left_col, "", 10, 500, 0, [this](float value) {
@@ -329,12 +329,12 @@ void GuiAsteroidTweak::open(P<SpaceObject> target)
     this->target = asteroid;
 }
 
-void GuiAsteroidTweak::onDraw(sf::RenderTarget& window)
+void GuiAsteroidTweak::onDraw(sp::RenderTarget& renderer)
 {
     asteroid_size_slider->setValue(target->getSize());
 }
 
-void GuiShipTweakMissileWeapons::onDraw(sf::RenderTarget& window)
+void GuiShipTweakMissileWeapons::onDraw(sp::RenderTarget& renderer)
 {
     for(int n=0; n<MW_Count; n++)
     {
@@ -356,10 +356,10 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
     (new GuiLabel(left_col, "", tr("Tube count:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -425,7 +425,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     }
 }
 
-void GuiShipTweakMissileTubes::onDraw(sf::RenderTarget& window)
+void GuiShipTweakMissileTubes::onDraw(sp::RenderTarget& renderer)
 {
     direction_slider->setValue(angleDifference(0.0f, target->weapon_tube[tube_index].getDirection()));
     load_time_slider->setValue(target->weapon_tube[tube_index].getLoadTimeConfig());
@@ -448,10 +448,10 @@ GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     for(int n=0; n<max_shield_count; n++)
     {
@@ -473,7 +473,7 @@ GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
     }
 }
 
-void GuiShipTweakShields::onDraw(sf::RenderTarget& window)
+void GuiShipTweakShields::onDraw(sp::RenderTarget& renderer)
 {
     for(int n=0; n<max_shield_count; n++)
     {
@@ -509,9 +509,9 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     beam_index = 0;
 
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiSelector* index_selector = new GuiSelector(left_col, "", [this](int index, string value)
     {
@@ -580,9 +580,9 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 }
 
-void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
+void GuiShipTweakBeamweapons::onDraw(sp::RenderTarget& renderer)
 {
-    target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, 0, false);
+    target->drawOnRadar(renderer, glm::vec2(rect.position.x - 150.0f + rect.size.x / 2.0f, rect.position.y + rect.size.y * 0.66), 300.0f / 5000.0f, 0, false);
 
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
@@ -605,11 +605,11 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(200, GuiElement::GuiSizeMax);
     GuiAutoLayout* center_col = new GuiAutoLayout(this, "CENTER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    center_col->setPosition(10, 25, ATopCenter)->setSize(200, GuiElement::GuiSizeMax);
+    center_col->setPosition(10, 25, sp::Alignment::TopCenter)->setSize(200, GuiElement::GuiSizeMax);
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(200, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(200, GuiElement::GuiSizeMax);
 
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -643,7 +643,7 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
     }
 }
 
-void GuiShipTweakSystems::onDraw(sf::RenderTarget& window)
+void GuiShipTweakSystems::onDraw(sp::RenderTarget& renderer)
 {
     for(int n=0; n<SYS_COUNT; n++)
     {
@@ -668,11 +668,11 @@ GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* own
     : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(200, GuiElement::GuiSizeMax);
     GuiAutoLayout* center_col = new GuiAutoLayout(this, "CENTER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    center_col->setPosition(10, 25, ATopCenter)->setSize(200, GuiElement::GuiSizeMax);
+    center_col->setPosition(10, 25, sp::Alignment::TopCenter)->setSize(200, GuiElement::GuiSizeMax);
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(200, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(200, GuiElement::GuiSizeMax);
 
     // Header
     (new GuiLabel(left_col, "", "", 20))->setSize(GuiElement::GuiSizeMax, 30);
@@ -719,7 +719,7 @@ void GuiShipTweakSystemPowerFactors::open(P<SpaceObject> target)
     }
 }
 
-void GuiShipTweakSystemPowerFactors::onDraw(sf::RenderTarget& window)
+void GuiShipTweakSystemPowerFactors::onDraw(sp::RenderTarget& target)
 {
     for (int n = 0; n < SYS_COUNT; n++)
     {
@@ -731,11 +731,11 @@ GuiShipTweakSystemRates::GuiShipTweakSystemRates(GuiContainer* owner, Type type)
     : GuiTweakPage(owner), type{type}
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(200, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(200, GuiElement::GuiSizeMax);
     GuiAutoLayout* center_col = new GuiAutoLayout(this, "CENTER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    center_col->setPosition(10, 25, ATopCenter)->setSize(200, GuiElement::GuiSizeMax);
+    center_col->setPosition(10, 25, sp::Alignment::TopCenter)->setSize(200, GuiElement::GuiSizeMax);
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(200, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(200, GuiElement::GuiSizeMax);
 
     // Header
     (new GuiLabel(left_col, "", "", 20))->setSize(GuiElement::GuiSizeMax, 30);
@@ -782,7 +782,7 @@ void GuiShipTweakSystemRates::open(P<SpaceObject> target)
     }
 }
 
-void GuiShipTweakSystemRates::onDraw(sf::RenderTarget& window)
+void GuiShipTweakSystemRates::onDraw(sp::RenderTarget& target)
 {
     for (int n = 0; n < SYS_COUNT; n++)
     {
@@ -834,10 +834,10 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
 
     // Add two columns.
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
     // Edit control code.
@@ -900,7 +900,7 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     }
 }
 
-void GuiShipTweakPlayer::onDraw(sf::RenderTarget& window)
+void GuiShipTweakPlayer::onDraw(sp::RenderTarget& renderer)
 {
     // Update position list.
     int position_counter = 0;
@@ -965,10 +965,10 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 {
     // Add two columns.
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
     (new GuiLabel(left_col, "", tr("Coolant:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
@@ -1080,7 +1080,7 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     auto_repair_enabled->setSize(GuiElement::GuiSizeMax, 40);
 }
 
-void GuiShipTweakPlayer2::onDraw(sf::RenderTarget& window)
+void GuiShipTweakPlayer2::onDraw(sp::RenderTarget& renderer)
 {
     coolant_slider->setValue(target->max_coolant);
     max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
@@ -1113,10 +1113,10 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_col->setPosition(50, 25, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* right_col = new GuiAutoLayout(this, "RIGHT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
     // Edit object's callsign.
@@ -1181,7 +1181,7 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     scanning_depth_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
-void GuiObjectTweakBase::onDraw(sf::RenderTarget& window)
+void GuiObjectTweakBase::onDraw(sp::RenderTarget& renderer)
 {
     heading_slider->setValue(target->getHeading());
 

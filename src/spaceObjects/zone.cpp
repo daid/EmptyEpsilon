@@ -37,50 +37,33 @@ Zone::Zone()
     registerMemberReplication(&label);
 }
 
-void Zone::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Zone::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (!long_range || color.a == 0)
+    if (!long_range || color.a == 0 || !outline.size())
         return;
-
-    sf::VertexArray outline_array(sf::LinesStrip, outline.size() + 1);
-    sf::VertexArray triangle_array(sf::Triangles, triangles.size());
-    for(unsigned int n=0; n<outline.size() + 1; n++)
-    {
-        sf::Vector2f v(outline[n % outline.size()].x, outline[n % outline.size()].y);
-        outline_array[n].position = position + sf::rotateVector(v * scale, -rotation);
-        outline_array[n].color = color;
-        outline_array[n].color.a = 128;
-    }
-    for(unsigned int n=0; n<triangles.size(); n++)
-    {
-        sf::Vector2f v(triangles[n].x, triangles[n].y);
-        triangle_array[n].position = position + sf::rotateVector(v * scale, -rotation);
-        triangle_array[n].color = color;
-        triangle_array[n].color.a = 64;
-    }
-    window.draw(triangle_array);
-    window.draw(outline_array);
+    std::vector<glm::vec2> triangle_points;
+    for(auto p : triangles)
+        triangle_points.push_back(position + rotateVec2(p, -rotation));
+    renderer.drawTriangleStrip(triangle_points, sf::Color(color.r, color.g, color.b, 64));
+    std::vector<glm::vec2> outline_points;
+    for(auto p : outline)
+        outline_points.push_back(position + rotateVec2(p, -rotation));
+    outline_points.push_back(position + rotateVec2(outline[0], -rotation));
+    renderer.drawLine(outline_points, sf::Color(color.r, color.g, color.b, 128));
 
     if (label.length() > 0)
     {
         int font_size = getRadius() * scale / label.length();
-        sf::Text text_element(label, *main_font, font_size);
-
-        float x = position.x - text_element.getLocalBounds().width / 2.0 - text_element.getLocalBounds().left;
-        float y = position.y - font_size + font_size * 0.35;
-
-        text_element.setPosition(x, y);
-        text_element.setColor(sf::Color(color.r, color.g, color.b, 128));
-        window.draw(text_element);
+        renderer.drawText(sp::Rect(position.x, position.y, 0, 0), label, sp::Alignment::Center, font_size, main_font, sf::Color(color.r, color.g, color.b, 128));
     }
 }
 
-void Zone::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Zone::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     if (long_range && color.a == 0)
     {
         color.a = 255;
-        drawOnRadar(window, position, scale, rotation, long_range);
+        drawOnRadar(renderer, position, scale, rotation, long_range);
         color.a = 0;
     }
 }

@@ -10,7 +10,7 @@ public:
     GuiDockingButton(GuiContainer* owner, string id);
 
     virtual void onUpdate() override;
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onHotkey(const HotkeyResult& key) override;
 private:
     void click();

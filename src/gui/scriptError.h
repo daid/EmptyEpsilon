@@ -8,7 +8,7 @@ class ScriptErrorRenderer : public Renderable
 public:
     ScriptErrorRenderer();
 
-    virtual void render(sf::RenderTarget& window);
+    virtual void render(sp::RenderTarget& target) override;
 };
 
 #endif//SCRIPT_ERROR_H

@@ -64,13 +64,13 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
 
-    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
+    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, sp::Alignment::BottomRight)->setSize(200, 50);
 
     // Manage waypoints.
     place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
         mode = WaypointPlacement;
     });
-    place_waypoint_button->setPosition(-270, -70, ABottomRight)->setSize(200, 50);
+    place_waypoint_button->setPosition(-270, -70, sp::Alignment::BottomRight)->setSize(200, 50);
 
     delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
@@ -78,15 +78,15 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             my_spaceship->commandRemoveWaypoint(science->targets.getWaypointIndex());
         }
     });
-    delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
+    delete_waypoint_button->setPosition(-270, -120, sp::Alignment::BottomRight)->setSize(200, 50);
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(this, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
-    info_reputation->setPosition(20, 20, ATopLeft)->setSize(175, 30);
+    info_reputation->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(175, 30);
 
     // Scenario clock display.
     info_clock = new GuiKeyValueDisplay(this, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
-    info_clock->setPosition(20, 50, ATopLeft)->setSize(175, 30);
+    info_clock->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(175, 30);
 
     mode = TargetSelection;
 
@@ -94,7 +94,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void OperationScreen::onDraw(sf::RenderTarget& window)
+void OperationScreen::onDraw(sp::RenderTarget& target)
 {
     if (science->radar_view->isVisible())
     {

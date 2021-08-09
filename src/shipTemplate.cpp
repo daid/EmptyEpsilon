@@ -287,10 +287,10 @@ void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, fl
     beams[index].setTurretRotationRate(rotation_rate);
 }
 
-sf::Vector2i ShipTemplate::interiorSize()
+glm::ivec2 ShipTemplate::interiorSize()
 {
-    sf::Vector2i min_pos(1000, 1000);
-    sf::Vector2i max_pos(0, 0);
+    glm::ivec2 min_pos(1000, 1000);
+    glm::ivec2 max_pos(0, 0);
     for(unsigned int n=0; n<rooms.size(); n++)
     {
         min_pos.x = std::min(min_pos.x, rooms[n].position.x);
@@ -298,20 +298,20 @@ sf::Vector2i ShipTemplate::interiorSize()
         max_pos.x = std::max(max_pos.x, rooms[n].position.x + rooms[n].size.x);
         max_pos.y = std::max(max_pos.y, rooms[n].position.y + rooms[n].size.y);
     }
-    if (min_pos != sf::Vector2i(1, 1))
+    if (min_pos != glm::ivec2(1, 1))
     {
-        sf::Vector2i offset = sf::Vector2i(1, 1) - min_pos;
+        glm::ivec2 offset = glm::ivec2(1, 1) - min_pos;
         for(unsigned int n=0; n<rooms.size(); n++)
             rooms[n].position += offset;
         for(unsigned int n=0; n<doors.size(); n++)
             doors[n].position += offset;
         max_pos += offset;
     }
-    max_pos += sf::Vector2i(1, 1);
+    max_pos += glm::ivec2(1, 1);
     return max_pos;
 }
 
-ESystem ShipTemplate::getSystemAtRoom(sf::Vector2i position)
+ESystem ShipTemplate::getSystemAtRoom(glm::ivec2 position)
 {
     for(unsigned int n=0; n<rooms.size(); n++)
     {
@@ -478,17 +478,17 @@ void ShipTemplate::setWeaponStorage(EMissileWeapons weapon, int amount)
     }
 }
 
-void ShipTemplate::addRoom(sf::Vector2i position, sf::Vector2i size)
+void ShipTemplate::addRoom(glm::ivec2 position, glm::ivec2 size)
 {
     rooms.push_back(ShipRoomTemplate(position, size, SYS_None));
 }
 
-void ShipTemplate::addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system)
+void ShipTemplate::addRoomSystem(glm::ivec2 position, glm::ivec2 size, ESystem system)
 {
     rooms.push_back(ShipRoomTemplate(position, size, system));
 }
 
-void ShipTemplate::addDoor(sf::Vector2i position, bool horizontal)
+void ShipTemplate::addDoor(glm::ivec2 position, bool horizontal)
 {
     doors.push_back(ShipDoorTemplate(position, horizontal));
 }

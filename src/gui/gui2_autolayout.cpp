@@ -5,31 +5,31 @@ GuiAutoLayout::GuiAutoLayout(GuiContainer* owner, string id, ELayoutMode mode)
 {
 }
 
-void GuiAutoLayout::onDraw(sf::RenderTarget& window)
+void GuiAutoLayout::onDraw(sp::RenderTarget& target)
 {
 }
 
-void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window)
+void GuiAutoLayout::drawElements(sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    sf::Vector2f offset(0, 0);
-    sf::Vector2f scale(0, 0);
-    EGuiAlign alignment = ACenterLeft;
+    glm::vec2 offset(0, 0);
+    glm::vec2 scale(0, 0);
+    sp::Alignment alignment = sp::Alignment::CenterLeft;
     switch(mode)
     {
     case LayoutHorizontalLeftToRight:
-        alignment = ACenterLeft;
+        alignment = sp::Alignment::CenterLeft;
         scale.x = 1.0;
         break;
     case LayoutHorizontalRightToLeft:
-        alignment = ACenterRight;
+        alignment = sp::Alignment::CenterRight;
         scale.x = -1.0;
         break;
     case LayoutVerticalTopToBottom:
-        alignment = ATopCenter;
+        alignment = sp::Alignment::TopCenter;
         scale.y = 1.0;
         break;
     case LayoutVerticalBottomToTop:
-        alignment = ABottomCenter;
+        alignment = sp::Alignment::BottomCenter;
         scale.y = -1.0;
         break;
     case LayoutHorizontalRows:
@@ -44,13 +44,13 @@ void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& wi
             {
                 if (!element->isDestroyed() && element->isVisible())
                 {
-                    element->setSize(GuiElement::GuiSizeMax, parent_rect.height / count);
+                    element->setSize(GuiElement::GuiSizeMax, parent_rect.size.y / count);
                     element->setPosition(offset.x, offset.y);
-                    offset.y += parent_rect.height / count;
+                    offset.y += parent_rect.size.y / count;
                 }
             }
         }
-        GuiContainer::drawElements(parent_rect, window);
+        GuiContainer::drawElements(parent_rect, renderer);
         return;
     case LayoutVerticalColumns:
         {
@@ -64,13 +64,13 @@ void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& wi
             {
                 if (!element->isDestroyed() && element->isVisible())
                 {
-                    element->setSize(parent_rect.width / count, GuiElement::GuiSizeMax);
+                    element->setSize(parent_rect.size.x / count, GuiElement::GuiSizeMax);
                     element->setPosition(offset.x, offset.y);
-                    offset.x += parent_rect.width / count;
+                    offset.x += parent_rect.size.x / count;
                 }
             }
         }
-        GuiContainer::drawElements(parent_rect, window);
+        GuiContainer::drawElements(parent_rect, renderer);
         return;
     }
     for(GuiElement* element : elements)
@@ -82,5 +82,5 @@ void GuiAutoLayout::drawElements(sf::FloatRect parent_rect, sf::RenderTarget& wi
             offset.y += element->getSize().y * scale.y;
         }
     }
-    GuiContainer::drawElements(parent_rect, window);
+    GuiContainer::drawElements(parent_rect, renderer);
 }

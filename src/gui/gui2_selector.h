@@ -9,7 +9,7 @@ class GuiSelector : public GuiEntryList
 {
 protected:
     float text_size;
-    EGuiAlign text_alignment;
+    sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;
     GuiElement* popup;
@@ -17,9 +17,9 @@ protected:
 public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual bool onMouseDown(sf::Vector2f position) override;
-    virtual void onMouseUp(sf::Vector2f position) override;
+    virtual void onDraw(sp::RenderTarget& window) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseUp(glm::vec2 position) override;
 
     GuiSelector* setTextSize(float size);
 };

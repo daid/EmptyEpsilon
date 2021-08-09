@@ -22,6 +22,7 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_slider.h"
+#include "gui/gui2_image.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
@@ -29,8 +30,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     targets.setAllowWaypointSelection();
 
     // Render the radar shadow and background decorations.
-    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
-    background_gradient->setTextureCenter("gui/background/gradientOffset.png");
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientOffset.png");
+    background_gradient->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
 
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/background/crosses.png");
@@ -44,7 +45,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Draw the science radar.
     science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0, &targets);
-    science_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    science_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
         [this](glm::vec2 position) {
@@ -59,7 +60,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
-    probe_radar->setPosition(-270, 0, ACenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    probe_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
         [this](glm::vec2 position) {
@@ -78,14 +79,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     });
     sidebar_selector->setOptions({"Scanning", "Other"});
     sidebar_selector->setSelectionIndex(0);
-    sidebar_selector->setPosition(-20, 120, ATopRight)->setSize(250, 50);
+    sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, 50);
 
     // Target scan data sidebar.
     info_sidebar = new GuiAutoLayout(radar_view, "SIDEBAR", GuiAutoLayout::LayoutVerticalTopToBottom);
-    info_sidebar->setPosition(-20, 170, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
-    custom_function_sidebar->setPosition(-20, 170, ATopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
+    custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
@@ -117,7 +118,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             }
         }
     });
-    info_type_button->setTextSize(20)->setPosition(0, 1, ATopLeft)->setSize(50, 28);
+    info_type_button->setTextSize(20)->setPosition(0, 1, sp::Alignment::TopLeft)->setSize(50, 28);
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
     info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
@@ -194,7 +195,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             probe_radar->hide();
         }
     });
-    probe_view_button->setPosition(20, -120, ABottomLeft)->setSize(200, 50)->disable();
+    probe_view_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(200, 50)->disable();
 
     // Draw the zoom slider.
     zoom_slider = new GuiSlider(radar_view, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, my_spaceship ? my_spaceship->getShortRangeRadarRange() : 5000.0f, my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, [this](float value)
@@ -203,7 +204,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
             zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / value, 1)}}));
         science_radar->setDistance(value);
     });
-    zoom_slider->setPosition(-20, -20, ABottomRight)->setSize(250, 50);
+    zoom_slider->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(250, 50);
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -213,15 +214,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
         background_gradient->setVisible(index == 0);
         database_view->setVisible(index == 1);
     });
-    view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, ABottomLeft)->setSize(200, 100);
+    view_mode_selection->setOptions({tr("button", "Radar"), tr("button", "Database")})->setSelectionIndex(0)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(200, 100);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
-void ScienceScreen::onDraw(sf::RenderTarget& window)
+void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(window);
+    GuiOverlay::onDraw(renderer);
     P<ScanProbe> probe;
 
     if (!my_spaceship)

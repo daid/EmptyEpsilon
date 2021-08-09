@@ -11,22 +11,22 @@ public:
 protected:
     string text;
     float text_size;
-    EGuiAlign text_alignment;
+    sp::Alignment text_alignment;
     func_t func;
     string icon_name;
-    EGuiAlign icon_alignment;
+    sp::Alignment icon_alignment;
     float icon_rotation;
     WidgetColorSet color_set;
 public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
-    virtual void onDraw(sf::RenderTarget& window);
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
+    virtual void onDraw(sp::RenderTarget& target);
+    virtual bool onMouseDown(glm::vec2 position);
+    virtual void onMouseUp(glm::vec2 position);
 
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
-    GuiButton* setIcon(string icon_name, EGuiAlign icon_alignment = ACenterLeft, float rotation = 0);
+    GuiButton* setIcon(string icon_name, sp::Alignment icon_alignment = sp::Alignment::CenterLeft, float rotation = 0);
     GuiButton* setColors(WidgetColorSet color_set);
     string getText() const;
     string getIcon() const;

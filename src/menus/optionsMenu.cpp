@@ -24,10 +24,10 @@ OptionsMenu::OptionsMenu()
 
     // Initialize autolayout columns.
     left_container = new GuiAutoLayout(this, "OPTIONS_LEFT_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_container->setPosition(50, 50, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_container->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     right_container = new GuiAutoLayout(this, "OPTIONS_RIGHT_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_container->setPosition(-50, 50, ATopRight)->setSize(600, GuiElement::GuiSizeMax);
+    right_container->setPosition(-50, 50, sp::Alignment::TopRight)->setSize(600, GuiElement::GuiSizeMax);
 
     // Options pager
     options_pager = new GuiSelector(left_container, "OPTIONS_PAGER", [this](int index, string value)
@@ -39,11 +39,11 @@ OptionsMenu::OptionsMenu()
     options_pager->setOptions({tr("Graphics options"), tr("Audio options"), tr("Interface options")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, 50);
 
     graphics_page = new GuiAutoLayout(left_container, "OPTIONS_GRAPHICS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    graphics_page->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->show();
+    graphics_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->show();
     audio_page = new GuiAutoLayout(left_container, "OPTIONS_AUDIO", GuiAutoLayout::LayoutVerticalTopToBottom);
-    audio_page->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    audio_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     interface_page = new GuiAutoLayout(left_container, "OPTIONS_INTERFACE", GuiAutoLayout::LayoutVerticalTopToBottom);
-    interface_page->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    interface_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
 
     // Graphics options
     // Fullscreen toggle.
@@ -228,7 +228,7 @@ OptionsMenu::OptionsMenu()
         destroy();
         soundManager->stopMusic();
         returnToMainMenu();
-    }))->setPosition(50, -50, ABottomLeft)->setSize(150, 50);
+    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
     // Save options button.
     (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), [this]()
     {
@@ -236,7 +236,7 @@ OptionsMenu::OptionsMenu()
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
         else
             PreferencesManager::save("options.ini");
-    }))->setPosition(200, -50, ABottomLeft)->setSize(150, 50);
+    }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
 }
 
 void OptionsMenu::onKey(sf::Event::KeyEvent key, int unicode)

@@ -13,7 +13,7 @@ private:
 public:
     GuiImage(GuiContainer* owner, string id, string texture_name);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiImage* setScaleUp(bool doesItScaleUp) {
         this->scale_up = doesItScaleUp;

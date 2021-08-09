@@ -8,7 +8,7 @@ class GuiViewportMainScreen : public GuiViewport3D
 public:
     GuiViewportMainScreen(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     bool first_person = false;
 

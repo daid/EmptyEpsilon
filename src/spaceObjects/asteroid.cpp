@@ -70,21 +70,15 @@ void Asteroid::draw3D()
 #endif//FEATURE_3D_RENDERING
 }
 
-void Asteroid::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Asteroid::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     if (size != getRadius())
         setRadius(size);
 
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "radar/blip.png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
-    object_sprite.setColor(sf::Color(255, 200, 100));
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
+    float size = getRadius() * scale / 64.0f;
     if (size < 0.2)
         size = 0.2;
-    object_sprite.setScale(size, size);
-    window.draw(object_sprite);
+    renderer.drawSprite("radar/blip.png", position, size * 32.0f, sf::Color(255, 200, 100));
 }
 
 void Asteroid::collide(Collisionable* target, float force)

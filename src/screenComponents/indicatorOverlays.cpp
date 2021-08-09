@@ -19,19 +19,19 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", sf::Color(255, 0, 0, 0));
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
-    (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
-    (new GuiLabel(pause_overlay, "PAUSE_LABEL", tr("Game Paused"), 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
+    (new GuiLabel(pause_overlay, "PAUSE_LABEL", tr("Game Paused"), 70))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     if (game_server)
     {
         (new GuiButton(pause_overlay, "PAUSE_RESUME", tr("Unpause"), []() {
             engine->setGameSpeed(1.0);
-        }))->setPosition(0, 75, ACenter)->setSize(500, 50);
+        }))->setPosition(0, 75, sp::Alignment::Center)->setSize(500, 50);
     }
 
     victory_overlay = new GuiOverlay(this, "VICTORY", sf::Color(0, 0, 0, 128));
-    (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     victory_label = new GuiLabel(victory_overlay, "VICTORY_LABEL", "...", 70);
-    victory_label->setPosition(0, 0, ACenter)->setSize(500, 100);
+    victory_label->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
 }
 
 GuiIndicatorOverlays::~GuiIndicatorOverlays()
@@ -45,11 +45,11 @@ static float glow(float min, float max, float time)
     return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
 }
 
-void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
+void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        drawAlertLevel(window);
+        drawAlertLevel(renderer);
 
         float shield_hit = 0.0;
         bool low_shields = false;
@@ -139,14 +139,14 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
     }
 }
 
-bool GuiIndicatorOverlays::onMouseDown(sf::Vector2f position)
+bool GuiIndicatorOverlays::onMouseDown(glm::vec2 position)
 {
     if (pause_overlay->isVisible() || victory_overlay->isVisible())
         return true;
     return false;
 }
 
-void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
+void GuiIndicatorOverlays::drawAlertLevel(sp::RenderTarget& renderer)
 {
     sf::Color multiply_color = sf::Color::White;
 
@@ -163,8 +163,5 @@ void GuiIndicatorOverlays::drawAlertLevel(sf::RenderTarget& window)
         return;
     }
 
-    sf::RectangleShape overlay(sf::Vector2f(rect.width, rect.height));
-    overlay.setPosition(rect.left, rect.top);
-    overlay.setFillColor(multiply_color);
-    window.draw(overlay, sf::BlendMultiply);
+    renderer.drawRectColorMultiply(rect, multiply_color);
 }

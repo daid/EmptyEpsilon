@@ -61,13 +61,13 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 void TutorialGame::createScreens()
 {
     viewport = new GuiViewport3D(this, "");
-    viewport->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+    viewport->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
-    tactical_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
     long_range_radar = new GuiRadarView(this, "TACTICAL", nullptr);
-    long_range_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
 
@@ -80,26 +80,26 @@ void TutorialGame::createScreens()
     station_screen[6] = new EngineeringAdvancedScreen(this);
     station_screen[7] = new OperationScreen(this);
     for(int n=0; n<8; n++)
-        station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft);
+        station_screen[n]->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
 
     new GuiIndicatorOverlays(this);
 
     frame = new GuiPanel(this, "");
-    frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+    frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
 
     text = new GuiScrollText(frame, "", "");
-    text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
+    text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     next_button = new GuiButton(frame, "", tr("Next"), [this]() {
         _onNext.call<void>();
     });
-    next_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
+    next_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
     if (repeated_tutorial)
     {
         (new GuiButton(this, "", tr("Reset"), [this]()
         {
             finish();
-        }))->setPosition(-20, 20, ATopRight)->setSize(120, 50);
+        }))->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(120, 50);
     }
     hideAllScreens();
 
@@ -213,7 +213,7 @@ void TutorialGame::setMessageToTopPosition()
     if (viewport == nullptr)
         return;
 
-    frame->setPosition(0, 0, ATopCenter);
+    frame->setPosition(0, 0, sp::Alignment::TopCenter);
 }
 
 void TutorialGame::setMessageToBottomPosition()
@@ -221,7 +221,7 @@ void TutorialGame::setMessageToBottomPosition()
     if (viewport == nullptr)
         return;
 
-    frame->setPosition(0, -50, ABottomCenter);
+    frame->setPosition(0, -50, sp::Alignment::BottomCenter);
 }
 
 void TutorialGame::finish()

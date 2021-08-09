@@ -7,18 +7,18 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
     blink_timer.repeat(blink_rate);
 }
 
-void GuiTextEntry::onDraw(sf::RenderTarget& window)
+void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 {
     if (focus)
-        drawStretched(window, rect, "gui/widget/TextEntryBackground.focused.png", selectColor(colorConfig.text_entry.background));
+        renderer.drawStretched(rect, "gui/widget/TextEntryBackground.focused.png", selectColor(colorConfig.text_entry.background));
     else
-        drawStretched(window, rect, "gui/widget/TextEntryBackground.png", selectColor(colorConfig.text_entry.background));
+        renderer.drawStretched(rect, "gui/widget/TextEntryBackground.png", selectColor(colorConfig.text_entry.background));
     if (blink_timer.isExpired())
         typing_indicator = !typing_indicator;
-    drawText(window, sf::FloatRect(rect.left + 16, rect.top, rect.width, rect.height), text + (typing_indicator && focus ? "_" : ""), ACenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
+    renderer.drawText(sp::Rect(rect.position.x + 16, rect.position.y, rect.size.x, rect.size.y), text + (typing_indicator && focus ? "_" : ""), sp::Alignment::CenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
-bool GuiTextEntry::onMouseDown(sf::Vector2f position)
+bool GuiTextEntry::onMouseDown(glm::vec2 position)
 {
     return true;
 }

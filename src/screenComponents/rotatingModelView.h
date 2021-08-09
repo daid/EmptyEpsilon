@@ -11,7 +11,7 @@ private:
 public:
     GuiRotatingModelView(GuiContainer* owner, string id, P<ModelData> model);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 };
 
 #endif//ROTATING_MODEL_VIEW_H

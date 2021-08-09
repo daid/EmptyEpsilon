@@ -16,13 +16,13 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(this, id + "_BOX");
-    box->setSize(500, 545)->setPosition(0, 0, ACenter);
+    box->setSize(500, 545)->setPosition(0, 0, sp::Alignment::Center);
 
     signal_label = new GuiLabel(box, id + "_LABEL", tr("scanning", "Electric signature"), 30);
-    signal_label->addBackground()->setPosition(0, 20, ATopCenter)->setSize(450, 50);
+    signal_label->addBackground()->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(450, 50);
 
     signal_quality = new GuiSignalQualityIndicator(box, id + "_SIGNAL");
-    signal_quality->setPosition(0, 80, ATopCenter)->setSize(450, 100);
+    signal_quality->setPosition(0, 80, sp::Alignment::TopCenter)->setSize(450, 100);
 
     locked_label = new GuiLabel(signal_quality, id + "_LOCK_LABEL", tr("scanning", "LOCKED"), 50);
     locked_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -30,18 +30,18 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     for(int n=0; n<max_sliders; n++)
     {
         sliders[n] = new GuiSlider(box, id + "_SLIDER_" + string(n), 0.0, 1.0, 0.0, nullptr);
-        sliders[n]->setPosition(0, 200 + n * 70, ATopCenter)->setSize(450, 50);
+        sliders[n]->setPosition(0, 200 + n * 70, sp::Alignment::TopCenter)->setSize(450, 50);
     }
     cancel_button = new GuiButton(box, id + "_CANCEL", tr("button", "Cancel"), []() {
         if (my_spaceship)
             my_spaceship->commandScanCancel();
     });
-    cancel_button->setPosition(0, -20, ABottomCenter)->setSize(300, 50);
+    cancel_button->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     setupParameters();
 }
 
-void GuiScanningDialog::onDraw(sf::RenderTarget& window)
+void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 {
     updateSignal();
 

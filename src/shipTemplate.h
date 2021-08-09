@@ -34,19 +34,19 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
 class ShipRoomTemplate
 {
 public:
-    sf::Vector2i position;
-    sf::Vector2i size;
+    glm::ivec2 position;
+    glm::ivec2 size;
     ESystem system;
 
-    ShipRoomTemplate(sf::Vector2i position, sf::Vector2i size, ESystem system) : position(position), size(size), system(system) {}
+    ShipRoomTemplate(glm::ivec2 position, glm::ivec2 size, ESystem system) : position(position), size(size), system(system) {}
 };
 class ShipDoorTemplate
 {
 public:
-    sf::Vector2i position;
+    glm::ivec2 position;
     bool horizontal;
 
-    ShipDoorTemplate(sf::Vector2i position, bool horizontal) : position(position), horizontal(horizontal) {}
+    ShipDoorTemplate(glm::ivec2 position, bool horizontal) : position(position), horizontal(horizontal) {}
 };
 
 class SpaceObject;
@@ -180,9 +180,9 @@ public:
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
     void setCloaking(bool enabled);
     void setWeaponStorage(EMissileWeapons weapon, int amount);
-    void addRoom(sf::Vector2i position, sf::Vector2i size);
-    void addRoomSystem(sf::Vector2i position, sf::Vector2i size, ESystem system);
-    void addDoor(sf::Vector2i position, bool horizontal);
+    void addRoom(glm::ivec2 position, glm::ivec2 size);
+    void addRoomSystem(glm::ivec2 position, glm::ivec2 size, ESystem system);
+    void addDoor(glm::ivec2 position, bool horizontal);
     void setRadarTrace(string trace);
     void setLongRangeRadarRange(float range);
     void setShortRangeRadarRange(float range);
@@ -190,8 +190,8 @@ public:
 
     P<ShipTemplate> copy(string new_name);
 
-    sf::Vector2i interiorSize();
-    ESystem getSystemAtRoom(sf::Vector2i position);
+    glm::ivec2 interiorSize();
+    ESystem getSystemAtRoom(glm::ivec2 position);
 
     void setCollisionData(P<SpaceObject> object);
 public:

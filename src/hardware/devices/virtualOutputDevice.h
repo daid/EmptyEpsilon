@@ -1,8 +1,8 @@
 #ifndef VIRTUAL_OUTPUT_DEVICE_H
 #define VIRTUAL_OUTPUT_DEVICE_H
 
-#include <SFML/Graphics.hpp>
 #include <stdint.h>
+#include "graphics/renderTarget.h"
 #include "hardware/hardwareOutputDevice.h"
 
 //The virtual output device is a debugging output device.
@@ -41,7 +41,7 @@ public:
     //Return the number of output channels supported by this device.
     virtual int getChannelCount();
 
-    void render(sf::RenderTarget& window);
+    void render(sp::RenderTarget& renderer);
 };
 
 #endif//VIRTUAL_OUTPUT_DEVICE_H

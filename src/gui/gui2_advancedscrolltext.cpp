@@ -5,7 +5,7 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
 : GuiElement(owner, id), text_size(30)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
-    scrollbar->setPosition(0, 0, ATopRight)->setSize(50, GuiElement::GuiSizeMax);
+    scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, sf::Color color)
@@ -43,7 +43,7 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
     return this;
 }
 
-void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
+void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
     float line_spacing = main_font->getLineSpacing(text_size);
 
@@ -61,22 +61,22 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
     }
 
     //Calculate how many lines we can display properly
-    int max_lines = rect.height / line_spacing;
+    int max_lines = rect.size.y / line_spacing;
 
     //Draw the visible entries
     int draw_offset = -scrollbar->getValue();
     for(Entry& e : entries)
     {
-        LineWrapResult wrap = doLineWrap(e.text, text_size, rect.width - 50 - max_prefix_width);
+        LineWrapResult wrap = doLineWrap(e.text, text_size, rect.size.x - 50 - max_prefix_width);
         if (draw_offset >= 0 && draw_offset < max_lines)
         {
-            drawText(window, sf::FloatRect(rect.left, rect.top + line_spacing * draw_offset, rect.width - 50, rect.height), e.prefix, ATopLeft, text_size);
+            renderer.drawText(sp::Rect(rect.position.x, rect.position.y + line_spacing * draw_offset, rect.size.x - 50, rect.size.y), e.prefix, sp::Alignment::TopLeft, text_size);
         }
         for(string line : wrap.text.split("\n"))
         {
             if (draw_offset >= 0 && draw_offset < max_lines)
             {
-                drawText(window, sf::FloatRect(rect.left + max_prefix_width, rect.top + line_spacing * draw_offset, rect.width - 50 - max_prefix_width, rect.height), line, ATopLeft, text_size, main_font, e.color);
+                renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y + line_spacing * draw_offset, rect.size.x - 50 - max_prefix_width, rect.size.y), line, sp::Alignment::TopLeft, text_size, main_font, e.color);
             }
             draw_offset += 1;
         }
@@ -94,5 +94,5 @@ void GuiAdvancedScrollText::onDraw(sf::RenderTarget& window)
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
-    scrollbar->setVisible(rect.height > 100);
+    scrollbar->setVisible(rect.size.y > 100);
 }

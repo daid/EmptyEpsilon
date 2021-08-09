@@ -11,21 +11,21 @@ MouseCalibrator::MouseCalibrator(string filename)
     state = 0;
     InputHandler::mouse_transform = sf::Transform();
 
-    (new GuiLabel(this, "MAIN_LABEL", "Touch Calibration", 50))->setPosition(0, 100, ATopCenter)->setSize(0, 300);
+    (new GuiLabel(this, "MAIN_LABEL", "Touch Calibration", 50))->setPosition(0, 100, sp::Alignment::TopCenter)->setSize(0, 300);
     screen_box[0] = new GuiPanel(this, "BOX_0");
-    screen_box[0]->setPosition(50, 50, ATopLeft)->setSize(50, 50);
+    screen_box[0]->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(50, 50);
     screen_box[1] = new GuiPanel(this, "BOX_1");
-    screen_box[1]->setPosition(-50, 50, ATopRight)->setSize(50, 50);
+    screen_box[1]->setPosition(-50, 50, sp::Alignment::TopRight)->setSize(50, 50);
     screen_box[2] = new GuiPanel(this, "BOX_2");
-    screen_box[2]->setPosition(-50, -50, ABottomRight)->setSize(50, 50);
+    screen_box[2]->setPosition(-50, -50, sp::Alignment::BottomRight)->setSize(50, 50);
     ready_button = new GuiButton(this, "READY_BUTTON", "Finished", [this]() {
         destroy();
         returnToMainMenu();
     });
-    ready_button->setPosition(0, -100, ABottomCenter)->setSize(300, 100)->hide();
+    ready_button->setPosition(0, -100, sp::Alignment::BottomCenter)->setSize(300, 100)->hide();
 
     test_box = new GuiImage(this, "TEST", "gui/widget/PanelBackground.png");
-    test_box->setPosition(0, 0, ATopLeft)->setSize(50, 50);
+    test_box->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(50, 50);
 
     screen_box[1]->hide();
     screen_box[2]->hide();
@@ -54,7 +54,7 @@ void MouseCalibrator::update(float delta)
     {
         if (InputHandler::getMousePos().x >= 0.0)
         {
-            test_box->setPosition(InputHandler::getMousePos() - sf::Vector2f(25, 25));
+            test_box->setPosition(InputHandler::getMousePos() - glm::vec2(25, 25));
             test_box->show();
         }else{
             test_box->hide();
@@ -64,7 +64,7 @@ void MouseCalibrator::update(float delta)
 
 void MouseCalibrator::calculateMatrix()
 {
-    sf::Vector2f screen_point[3];
+    glm::vec2 screen_point[3];
     for(int n=0; n<3; n++)
     {
         screen_point[n] = screen_box[n]->getCenterPoint();

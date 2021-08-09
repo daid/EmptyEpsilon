@@ -6,7 +6,7 @@ ScriptErrorRenderer::ScriptErrorRenderer()
 {
 }
 
-void ScriptErrorRenderer::render(sf::RenderTarget& window)
+void ScriptErrorRenderer::render(sp::RenderTarget& renderer)
 {
     P<ScriptObject> script = engine->getObject("scenario");
     if (!script)
@@ -18,9 +18,6 @@ void ScriptErrorRenderer::render(sf::RenderTarget& window)
     string error = script->getError();
     if (error != "")
     {
-        sf::Text textElement(error, *bold_font, 25);
-        textElement.setColor(sf::Color::Red);
-        textElement.setPosition(0, 0);
-        window.draw(textElement);
+        renderer.drawText(sp::Rect(0, 0, 0, 0), error, sp::Alignment::TopLeft, 25, bold_font, sf::Color::Red);
     }
 }

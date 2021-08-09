@@ -50,13 +50,13 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
     (new GuiButton(this, "BACK", tr("button", "Back"), [this]() {
         destroy();
         returnToMainMenu();
-    }))->setPosition(50, -50, ABottomLeft)->setSize(300, 50);
+    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     if (last_attempt)
     {
         auto error_message = tr("Connection error: {message}").format({ {"message", disconnectErrorMessage(*last_attempt)} });
         auto error_info = new GuiLabel(this, "LAST_ATTEMPT_ERROR_MESSAGE", error_message, 30);
-        error_info->setPosition(0, 25, ATopCenter);
+        error_info->setPosition(0, 25, sp::Alignment::TopCenter);
     }
 
     lan_internet_selector = new GuiSelector(this, "LAN_INTERNET_SELECT", [this](int index, string value) {
@@ -65,16 +65,16 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
         else
             scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
     });
-    lan_internet_selector->setOptions({tr("LAN"), tr("Internet")})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+    lan_internet_selector->setOptions({tr("LAN"), tr("Internet")})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"), [this]() {
         new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(manual_ip->getText()));
         destroy();
     });
-    connect_button->setPosition(-50, -50, ABottomRight)->setSize(300, 50);
+    connect_button->setPosition(-50, -50, sp::Alignment::BottomRight)->setSize(300, 50);
 
     manual_ip = new GuiTextEntry(this, "IP", "");
-    manual_ip->setPosition(-50, -120, ABottomRight)->setSize(300, 50);
+    manual_ip->setPosition(-50, -120, sp::Alignment::BottomRight)->setSize(300, 50);
     manual_ip->enterCallback([this](string text) {
         new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(text.strip()));
         destroy();
@@ -101,7 +101,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
         auto addr_str = address.getHumanReadable()[0];
         server_list->removeEntry(server_list->indexByValue(addr_str));
     });
-    server_list->setPosition(0, 50, ATopCenter)->setSize(700, 600);
+    server_list->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(700, 600);
 }
 
 ServerBrowserMenu::~ServerBrowserMenu()

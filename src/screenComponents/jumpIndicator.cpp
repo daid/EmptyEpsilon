@@ -11,12 +11,12 @@ GuiJumpIndicator::GuiJumpIndicator(GuiContainer* owner)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(owner, "JUMP_BOX");
-    box->setSize(800, 100)->setPosition(0, 200, ATopCenter);
+    box->setSize(800, 100)->setPosition(0, 200, sp::Alignment::TopCenter);
     label = new GuiLabel(box, "JUMP_LABEL", "Jump in: ", 50);
-    label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenter);
+    label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::Center);
 }
 
-void GuiJumpIndicator::onDraw(sf::RenderTarget& window)
+void GuiJumpIndicator::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship && my_spaceship->jump_delay > 0.0)
     {

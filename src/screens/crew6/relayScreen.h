@@ -52,7 +52,7 @@ private:
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 };
 
 #endif//RELAY_SCREEN_H

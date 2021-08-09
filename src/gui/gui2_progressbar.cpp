@@ -5,28 +5,28 @@ GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min_value, 
 {
 }
 
-void GuiProgressbar::onDraw(sf::RenderTarget& window)
+void GuiProgressbar::onDraw(sp::RenderTarget& renderer)
 {
     float f = (value - min_value) / (max_value - min_value);
 
     if (drawBackground)
-        drawStretched(window, rect, "gui/widget/ProgressbarBackground.png");
+        renderer.drawStretched(rect, "gui/widget/ProgressbarBackground.png");
 
-    sf::FloatRect fill_rect = rect;
-    if (rect.width >= rect.height)
+    sp::Rect fill_rect = rect;
+    if (rect.size.x >= rect.size.y)
     {
-        fill_rect.width *= f;
+        fill_rect.size.x *= f;
         if (max_value < min_value)
-            fill_rect.left = rect.left + rect.width - fill_rect.width;
-        drawStretchedH(window, fill_rect, "gui/widget/ProgressbarFill.png", color);
+            fill_rect.position.x = rect.position.x + rect.size.x - fill_rect.size.x;
+        renderer.drawStretchedH(fill_rect, "gui/widget/ProgressbarFill.png", color);
     }
     else
     {
-        fill_rect.height *= f;
-        fill_rect.top = rect.top + rect.height - fill_rect.height;
-        drawStretchedV(window, fill_rect, "gui/widget/ProgressbarFill.png", color);
+        fill_rect.size.y *= f;
+        fill_rect.position.y = rect.position.y + rect.size.y - fill_rect.size.y;
+        renderer.drawStretchedV(fill_rect, "gui/widget/ProgressbarFill.png", color);
     }
-    drawText(window, rect, text, ACenter);
+    renderer.drawText(rect, text, sp::Alignment::Center);
 }
 
 GuiProgressbar* GuiProgressbar::setValue(float value)

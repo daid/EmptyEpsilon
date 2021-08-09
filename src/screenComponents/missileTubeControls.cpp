@@ -52,7 +52,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
             }
         });
         row.fire_button->setSize(200, 50);
-        (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, ACenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", SYS_MissileSystem, sp::Alignment::CenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
         row.loading_bar->setColor(sf::Color(128, 128, 128))->setSize(200, 50);
         row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);
@@ -84,7 +84,8 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
 }
 
-void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
+void GuiMissileTubeControls::onDraw(sp::RenderTarget& renderer)
+{
     if (!my_spaceship)
         return;
     for (int n = 0; n < MW_Count; n++)
@@ -98,9 +99,9 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
         WeaponTube& tube = my_spaceship->weapon_tube[n];
         rows[n].layout->show();
         if (tube.canOnlyLoad(MW_Mine))
-            rows[n].fire_button->setIcon("gui/icons/weapon-mine", ACenterLeft);
+            rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
         else
-            rows[n].fire_button->setIcon("gui/icons/missile", ACenterLeft, tube.getDirection());
+            rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.getDirection());
         if(tube.isEmpty())
         {
             rows[n].load_button->setEnable(tube.canLoad(load_type));
@@ -150,7 +151,7 @@ void GuiMissileTubeControls::onDraw(sf::RenderTarget& window){
     for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
         rows[n].layout->hide();
 
-    GuiAutoLayout::onDraw(window);
+    GuiAutoLayout::onDraw(renderer);
 }
 
 void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)

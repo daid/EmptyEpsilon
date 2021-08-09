@@ -22,7 +22,7 @@ void GuiScanTargetButton::onUpdate()
     setVisible(my_spaceship && my_spaceship->getCanScan());
 }
 
-void GuiScanTargetButton::onDraw(sf::RenderTarget& window)
+void GuiScanTargetButton::onDraw(sp::RenderTarget& target)
 {
     if (!my_spaceship)
         return;

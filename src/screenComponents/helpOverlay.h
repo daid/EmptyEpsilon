@@ -18,7 +18,7 @@ public:
     GuiPanel* frame;
 
     virtual void setText(string new_text);
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 };
 
 #endif//HELP_OVERLAY_H

@@ -13,7 +13,7 @@ class GuiFrequencyCurve : public GuiPanel
 public:
     GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiFrequencyCurve* setFrequency(int frequency) { this->frequency = frequency; return this; }
 

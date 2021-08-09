@@ -12,10 +12,10 @@
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 : GuiOverlay(owner, "DAMCON_SCREEN", colorConfig.background)
 {
-    (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     GuiAutoLayout* system_health_layout = new GuiAutoLayout(this, "DAMCON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    system_health_layout->setPosition(0, 0, ACenterLeft)->setSize(300, 600);
+    system_health_layout->setPosition(0, 0, sp::Alignment::CenterLeft)->setSize(300, 600);
 
     hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8, tr("damagecontrol", "Hull"), "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40);
@@ -26,12 +26,12 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
         system_health[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
 
-    (new GuiCustomShipFunctions(this, damageControl, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, damageControl, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
-void DamageControlScreen::onDraw(sf::RenderTarget& window)
+void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(window);
+    GuiOverlay::onDraw(renderer);
 
     if (my_spaceship)
     {

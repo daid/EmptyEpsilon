@@ -57,7 +57,7 @@ public:
     glm::vec2 getOrderTargetLocation() { return order_target_location; }
     P<SpaceObject> getOrderTarget() { return order_target; }
 
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual std::unordered_map<string, string> getGMInfo() override;
 
     virtual string getExportLine() override;

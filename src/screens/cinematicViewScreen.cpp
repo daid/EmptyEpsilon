@@ -13,7 +13,7 @@ CinematicViewScreen::CinematicViewScreen(int32_t playerShip /* = 0 */)
 {
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
-    viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     viewport->showCallsigns();
 
     // Initialize the camera's vertical position.
@@ -33,14 +33,14 @@ CinematicViewScreen::CinematicViewScreen(int32_t playerShip /* = 0 */)
         if (ship)
             target = ship;
     });
-    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock the camera onto a ship.
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [](bool value) {});
-    camera_lock_toggle->setValue(true)->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_toggle->setValue(true)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
-    camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, ABottomLeft)->setSize(350, 50)->hide();
+    camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(350, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 

@@ -163,18 +163,14 @@ void ElectricExplosionEffect::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void ElectricExplosionEffect::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void ElectricExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     if (!on_radar)
         return;
     if (long_range)
         return;
 
-    sf::CircleShape circle(size * scale);
-    circle.setOrigin(size * scale, size * scale);
-    circle.setPosition(position);
-    circle.setFillColor(sf::Color(0, 0, 255, 64 * (lifetime / maxLifetime)));
-    window.draw(circle);
+    renderer.fillCircle(position, size * scale, sf::Color(0, 0, 255, 64 * (lifetime / maxLifetime)));
 }
 
 void ElectricExplosionEffect::update(float delta)

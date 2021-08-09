@@ -14,7 +14,7 @@ private:
 public:
     GuiGlobalMessageEntryView(GuiContainer* owner);
 
-    virtual bool onMouseDown(sf::Vector2f position);
+    virtual bool onMouseDown(glm::vec2 position) override;
 };
 
 #endif//GLOBAL_MESSAGE_ENTRY_VIEW

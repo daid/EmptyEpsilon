@@ -9,7 +9,7 @@ GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPositio
 {
 }
 
-void GuiCustomShipFunctions::onDraw(sf::RenderTarget& window)
+void GuiCustomShipFunctions::onDraw(sp::RenderTarget& target)
 {
     if (!my_spaceship)
         return;

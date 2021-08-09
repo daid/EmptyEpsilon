@@ -19,26 +19,27 @@ GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<Mod
 {
 }
 
-void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
+void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 {
 #if FEATURE_3D_RENDERING
-    if (rect.height <= 0) return;
-    if (rect.width <= 0) return;
+    if (rect.size.x <= 0) return;
+    if (rect.size.y <= 0) return;
     if (!model) return;
 
-    window.setActive();
+    renderer.getSFMLTarget().setActive();
 
+    auto& window = renderer.getSFMLTarget();
     float camera_fov = 60.0f;
     float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
     float sy = window.getSize().y * window.getView().getViewport().height / window.getView().getSize().y;
-    glViewport(rect.left * sx, (float(window.getView().getSize().y) - rect.height - rect.top) * sx, rect.width * sx, rect.height * sy);
+    glViewport(rect.position.x * sx, (float(window.getView().getSize().y) - rect.size.y - rect.position.y) * sx, rect.size.x * sx, rect.size.y * sy);
 
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT);
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
 
-    auto projection = glm::perspective(glm::radians(camera_fov), rect.width / rect.height, 1.f, 25000.f);
+    auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

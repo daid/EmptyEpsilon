@@ -30,19 +30,12 @@ SupplyDrop::SupplyDrop()
     model_info.setData("ammo_box");
 }
 
-void SupplyDrop::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void SupplyDrop::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "radar/blip.png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
+    sf::Color color(100, 200, 255);
     if (my_spaceship && !my_spaceship->isFriendly(this))
-        object_sprite.setColor(sf::Color(200, 50, 50));
-    else
-        object_sprite.setColor(sf::Color(100, 200, 255));
-    float size = 0.5;
-    object_sprite.setScale(size, size);
-    window.draw(object_sprite);
+        color = sf::Color(200, 50, 50);
+    renderer.drawSprite("radar/blip.png", position, 8, color);
 }
 
 void SupplyDrop::collide(Collisionable* target, float force)

@@ -20,22 +20,22 @@ HotkeyMenu::HotkeyMenu()
 
     // TODO: Figure out how to make this an AutoLayout.
     container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft)->setMargins(FRAME_MARGIN);
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN);
 
     top_row = new GuiElement(container, "TOP_ROW_CONTAINER");
-    top_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, 0, ATopLeft);
+    top_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, 0, sp::Alignment::TopLeft);
 
     rebinding_ui = new GuiPanel(container, "REBINDING_UI_CONTAINER");
-    rebinding_ui->setSize(GuiElement::GuiSizeMax, KEY_COLUMN_HEIGHT)->setPosition(0, KEY_COLUMN_TOP, ATopLeft);
+    rebinding_ui->setSize(GuiElement::GuiSizeMax, KEY_COLUMN_HEIGHT)->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
 
     bottom_row = new GuiElement(container, "BOTTOM_ROW_CONTAINER");
-    bottom_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, 0, ABottomLeft);
+    bottom_row->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setPosition(0, 0, sp::Alignment::BottomLeft);
 
     // Single-column layout
     // Top: Title and category navigation
 
     // Title label
-    (new GuiLabel(top_row, "CONFIGURE_KEYBOARD_LABEL", tr("Configure Keyboard"), 30))->addBackground()->setPosition(0, 0, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    (new GuiLabel(top_row, "CONFIGURE_KEYBOARD_LABEL", tr("Configure Keyboard"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     // Category selector
     // Get a list of hotkey categories
@@ -43,24 +43,24 @@ HotkeyMenu::HotkeyMenu()
     (new GuiSelector(top_row, "Category", [this](int index, string value)
     {
         HotkeyMenu::setCategory(index);
-    }))->setOptions(category_list)->setSelectionIndex(category_index)->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopCenter);
+    }))->setOptions(category_list)->setSelectionIndex(category_index)->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopCenter);
 
     // Page navigation
     previous_page = new GuiArrowButton(container, "PAGE_LEFT", 0, [this]()
     {
         HotkeyMenu::pageHotkeys(1);
     });
-    previous_page->setPosition(0, 0, ACenterLeft)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
+    previous_page->setPosition(0, 0, sp::Alignment::CenterLeft)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
 
     next_page = new GuiArrowButton(container, "PAGE_RIGHT", 180, [this]()
     {
         HotkeyMenu::pageHotkeys(-1);
     });
-    next_page->setPosition(0, 0, ACenterRight)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
+    next_page->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
 
     // Middle: Rebinding UI frame
     rebinding_container = new GuiAutoLayout(rebinding_ui, "HOTKEY_CONFIG_CONTAINER", GuiAutoLayout::ELayoutMode::LayoutHorizontalLeftToRight);
-    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, ATopLeft)->setMargins(FRAME_MARGIN);
+    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN);
 
     // Show category 1 ("General")
     HotkeyMenu::setCategory(1);
@@ -73,13 +73,13 @@ HotkeyMenu::HotkeyMenu()
         destroy();
         soundManager->stopMusic();
         returnToOptionMenu();
-    }))->setPosition(0, 0, ABottomLeft)->setSize(150, GuiElement::GuiSizeMax);
+    }))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 
     // Save hotkey values
     (new GuiButton(bottom_row, "SAVE", tr("options", "Save"), [this]()
     {
         HotkeyMenu::saveHotkeys();
-    }))->setPosition(150, 0, ABottomLeft)->setSize(150, GuiElement::GuiSizeMax);
+    }))->setPosition(150, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 }
 
 void HotkeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
@@ -127,7 +127,7 @@ void HotkeyMenu::setCategory(int cat)
 
     // Reset the hotkey frame size and position
     int rebinding_ui_width = KEY_COLUMN_WIDTH;
-    rebinding_ui->setPosition(0, KEY_COLUMN_TOP, ATopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * (KEY_ROW_COUNT + 2));
+    rebinding_ui->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft)->setSize(KEY_COLUMN_WIDTH + FRAME_MARGIN, ROW_HEIGHT * (KEY_ROW_COUNT + 2));
 
     // Get the chosen category
     category_index = cat;
@@ -157,7 +157,7 @@ void HotkeyMenu::setCategory(int cat)
 
         // Add a label to the current row.
         label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item.first, item.first, 30));
-        label_entries.back()->setAlignment(ACenterRight)->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
+        label_entries.back()->setAlignment(sp::Alignment::CenterRight)->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
 
         // Add a hotkey rebinding field to the current row.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_VALUE_" + item.first, item.second));
@@ -191,15 +191,15 @@ void HotkeyMenu::saveHotkeys()
     if (category == "basic")
     {
         error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", sf::Color::Black);
-        error_window->setSize(500, 200)->setPosition(0, -100, ACenter)->setVisible(true);
+        error_window->setSize(500, 200)->setPosition(0, -100, sp::Alignment::Center)->setVisible(true);
 
         // TODO: If basic hotkeys can't be modified, why are they editable in this menu?
-        (new GuiLabel(error_window, "ERROR_LABEL", "Basic hotkeys cannot be changed", 30))->setSize(300, 50)->setPosition(0, 50, ATopCenter);
+        (new GuiLabel(error_window, "ERROR_LABEL", "Basic hotkeys cannot be changed", 30))->setSize(300, 50)->setPosition(0, 50, sp::Alignment::TopCenter);
         (new GuiButton(error_window, "ERROR_OK", "OK", [this]()
         {
             // Close this window
             error_window->destroy();
-        }))->setSize(200, 50)->setPosition(0, -10, ABottomCenter);
+        }))->setSize(200, 50)->setPosition(0, -10, sp::Alignment::BottomCenter);
 
         return;
     }
@@ -219,14 +219,14 @@ void HotkeyMenu::saveHotkeys()
 
             // Throw an error modal.
             error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", sf::Color::Black);
-            error_window->setSize(500, 200)->setPosition(0, -100, ACenter)->setVisible(true);
+            error_window->setSize(500, 200)->setPosition(0, -100, sp::Alignment::Center)->setVisible(true);
 
-            (new GuiLabel(error_window, "ERROR_LABEL", text.append(": This key can't be used"), 30))->setSize(300, 50)->setPosition(0, 50, ATopCenter);
+            (new GuiLabel(error_window, "ERROR_LABEL", text.append(": This key can't be used"), 30))->setSize(300, 50)->setPosition(0, 50, sp::Alignment::TopCenter);
             (new GuiButton(error_window, "ERROR_OK", "OK", [this]()
             {
                 // Close this modal
                 error_window->destroy();
-            }))->setSize(200, 50)->setPosition(0, -10, ABottomCenter);
+            }))->setSize(200, 50)->setPosition(0, -10, sp::Alignment::BottomCenter);
 
             // TODO: This return stops at the first non-extant hotkey.
             // Others aren't flagged or removed. It should probably keep going.
@@ -238,8 +238,8 @@ void HotkeyMenu::saveHotkeys()
 
 void HotkeyMenu::pageHotkeys(int direction)
 {
-    sf::Vector2f frame_position = rebinding_ui->getPositionOffset();
-    sf::Vector2f frame_size = rebinding_ui->getSize();
+    auto frame_position = rebinding_ui->getPositionOffset();
+    auto frame_size = rebinding_ui->getSize();
 
     if (frame_size.x < KEY_COLUMN_WIDTH * 2)
     {
@@ -252,11 +252,11 @@ void HotkeyMenu::pageHotkeys(int direction)
     if (new_offset >= 0)
     {
         // Don't let the frame move right if its left edge is on screen.
-        rebinding_ui->setPosition(0, KEY_COLUMN_TOP, ATopLeft);
+        rebinding_ui->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
     }
     else if (new_offset > -frame_size.x + KEY_COLUMN_WIDTH + FRAME_MARGIN)
     {
         // Move the frame left only if its right edge is not on screen.
-        rebinding_ui->setPosition(new_offset, KEY_COLUMN_TOP, ATopLeft);
+        rebinding_ui->setPosition(new_offset, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
     }
 }

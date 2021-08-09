@@ -24,7 +24,7 @@ CrewStationScreen::CrewStationScreen(bool with_main_screen)
         // Create a 3D viewport behind everything, to serve as the right-side panel
         viewport = new GuiViewportMainScreen(this, "3D_VIEW");
         viewport->showCallsigns()->showHeadings()->showSpacedust();
-        viewport->setPosition(1200, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        viewport->setPosition(1200, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         viewport->hide();
     }
 
@@ -35,17 +35,17 @@ CrewStationScreen::CrewStationScreen(bool with_main_screen)
     {
         button_strip->show();
     });
-    select_station_button->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    select_station_button->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(250, 50);
 
     button_strip = new GuiPanel(main_panel, "");
-    button_strip->setPosition(-20, 20, ATopRight)->setSize(250, 50);
+    button_strip->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(250, 50);
     button_strip->hide();
 
     message_frame = new GuiPanel(main_panel, "");
-    message_frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+    message_frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
 
     message_text = new GuiScrollText(message_frame, "", "");
-    message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
+    message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     message_close_button = new GuiButton(message_frame, "", "Close", [this]() {
         if (my_spaceship)
         {
@@ -59,7 +59,7 @@ CrewStationScreen::CrewStationScreen(bool with_main_screen)
             }
         }
     });
-    message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
+    message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
     keyboard_help = new GuiHelpOverlay(main_panel, "Keyboard Shortcuts");
 
@@ -109,7 +109,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, ECrewPosition positio
         button_strip->hide();
     });
     info.button->setIcon(icon);
-    info.button->setPosition(0, tabs.size() * 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    info.button->setPosition(0, tabs.size() * 50, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
 
     if (tabs.size() == 0)
     {
@@ -168,7 +168,7 @@ void CrewStationScreen::update(float delta)
     if (viewport)
     {
         // Responsively show/hide the 3D viewport.
-        if (viewport->getRect().width < viewport->getRect().height / 3.0f)
+        if (viewport->getRect().size.x < viewport->getRect().size.y / 3.0f)
         {
             viewport->hide();
             main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -365,10 +365,10 @@ void CrewStationScreen::tileViewport()
     if (current_position == singlePilot)
     {
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
-        viewport->setPosition(1000, 0, ATopLeft);
+        viewport->setPosition(1000, 0, sp::Alignment::TopLeft);
     } else {
         main_panel->setSize(1200, GuiElement::GuiSizeMax);
-        viewport->setPosition(1200, 0, ATopLeft);
+        viewport->setPosition(1200, 0, sp::Alignment::TopLeft);
     }
 }
 

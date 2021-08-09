@@ -12,18 +12,18 @@ GuiCanvas::~GuiCanvas()
 {
 }
 
-void GuiCanvas::render(sf::RenderTarget& window)
+void GuiCanvas::render(sp::RenderTarget& renderer)
 {
-    sf::Vector2f window_size = window.getView().getSize();
-    sf::FloatRect window_rect(0, 0, window_size.x, window_size.y);
+    auto window_size = renderer.getVirtualSize();
+    sp::Rect window_rect(0, 0, window_size.x, window_size.y);
 
-    sf::Vector2f mouse_position = InputHandler::getMousePos();
+    auto mouse_position = InputHandler::getMousePos();
 
-    drawElements(window_rect, window);
+    drawElements(window_rect, renderer);
 
     if (enable_debug_rendering)
     {
-        drawDebugElements(window_rect, window);
+        drawDebugElements(window_rect, renderer);
     }
 
     if (InputHandler::mouseIsPressed(sf::Mouse::Left) || InputHandler::mouseIsPressed(sf::Mouse::Right) || InputHandler::mouseIsPressed(sf::Mouse::Middle))
@@ -79,7 +79,7 @@ void GuiCanvas::handleJoystickButton(unsigned int joystickId, unsigned int butto
     }
 }
 
-void GuiCanvas::onClick(sf::Vector2f mouse_position)
+void GuiCanvas::onClick(glm::vec2 mouse_position)
 {
 }
 

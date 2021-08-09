@@ -42,7 +42,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     // List the station types and stations in the right column.
     GuiAutoLayout* stations_layout = new GuiAutoLayout(right_container, "CREW_POSITION_BUTTON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stations_layout->setPosition(0, 50, ATopCenter)->setSize(400, 600);
+    stations_layout->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(400, 600);
     (new GuiLabel(stations_layout, "CREW_POSITION_SELECT_LABEL", tr("Select your station"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
     // Crew type selector
@@ -139,14 +139,14 @@ ShipSelectionScreen::ShipSelectionScreen()
     // If this is the server, add a panel to create player ships.
     if (game_server)
     {
-        (new GuiPanel(left_container, "CREATE_SHIP_BOX"))->setPosition(0, 50, ATopCenter)->setSize(550, 700);
+        (new GuiPanel(left_container, "CREATE_SHIP_BOX"))->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 700);
     }
 
     // Player ship selection panel
-    (new GuiPanel(left_container, "SHIP_SELECTION_BOX"))->setPosition(0, 50, ATopCenter)->setSize(550, 560);
-    (new GuiLabel(left_container, "SHIP_SELECTION_LABEL", tr("Select ship"), 30))->addBackground()->setPosition(0, 50, ATopCenter)->setSize(510, 50);
+    (new GuiPanel(left_container, "SHIP_SELECTION_BOX"))->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
+    (new GuiLabel(left_container, "SHIP_SELECTION_LABEL", tr("Select ship"), 30))->addBackground()->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(510, 50);
     no_ships_label = new GuiLabel(left_container, "SHIP_SELECTION_NO_SHIPS_LABEL", tr("Waiting for server to spawn a ship"), 30);
-    no_ships_label->setPosition(0, 100, ATopCenter)->setSize(460, 50);
+    no_ships_label->setPosition(0, 100, sp::Alignment::TopCenter)->setSize(460, 50);
 
     // Player ship list
     player_ship_list = new GuiListbox(left_container, "PLAYER_SHIP_LIST", [this](int index, string value) {
@@ -175,7 +175,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             my_player_info->commandSetShipId(-1);
         }
     });
-    player_ship_list->setPosition(0, 100, ATopCenter)->setSize(490, 500);
+    player_ship_list->setPosition(0, 100, sp::Alignment::TopCenter)->setSize(490, 500);
 
     // If this is the server, add buttons and a selector to create player ships.
     if (game_server)
@@ -195,7 +195,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 ship_template_selector->addEntry(template_name + " (" + ship_template->getClass() + ":" + ship_template->getSubClass() + ")", template_name);
             }
             ship_template_selector->setSelectionIndex(0);
-            ship_template_selector->setPosition(0, 630, ATopCenter)->setSize(490, 50);
+            ship_template_selector->setPosition(0, 630, sp::Alignment::TopCenter)->setSize(490, 50);
 
             // Spawn a ship of the selected template near 0,0 and give it a random
             // heading.
@@ -213,7 +213,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                     ship->setTemplate(ship_template_selector->getSelectionValue());
                     my_player_info->commandSetShipId(ship->getMultiplayerId());
                 }
-            }))->setPosition(0, 680, ATopCenter)->setSize(490, 50);
+            }))->setPosition(0, 680, sp::Alignment::TopCenter)->setSize(490, 50);
         }
 
         // If this is the server, the "back" button goes to the scenario
@@ -221,7 +221,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         (new GuiButton(left_container, "DISCONNECT", tr("Scenario selection"), [this]() {
             destroy();
             new ServerCreationScreen();
-        }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+        }))->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
     }else{
         // If this is a client, the "back" button disconnects from the server
         // and returns to the main menu.
@@ -229,14 +229,14 @@ ShipSelectionScreen::ShipSelectionScreen()
             destroy();
             disconnectFromServer();
             returnToMainMenu();
-        }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+        }))->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
     }
 
     // The "Ready" button.
     ready_button = new GuiButton(right_container, "READY_BUTTON", tr("Ready"), [this]() {
         this->onReadyClick();
     });
-    ready_button->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+    ready_button->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Set the crew type selector's default to 6/5 person crew screens.
     crew_type_selector->setSelectionIndex(0);
@@ -246,11 +246,11 @@ ShipSelectionScreen::ShipSelectionScreen()
     password_overlay = new GuiOverlay(this, "PASSWORD_OVERLAY", sf::Color::Black - sf::Color(0, 0, 0, 192));
     password_overlay->hide();
     password_entry_box = new GuiPanel(password_overlay, "PASSWORD_ENTRY_BOX");
-    password_entry_box->setPosition(0, 350, ATopCenter)->setSize(600, 200);
+    password_entry_box->setPosition(0, 350, sp::Alignment::TopCenter)->setSize(600, 200);
     password_label = new GuiLabel(password_entry_box, "PASSWORD_LABEL", tr("Enter this ship's control code:"), 30);
-    password_label->setPosition(0, 40, ATopCenter);
+    password_label->setPosition(0, 40, sp::Alignment::TopCenter);
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
-    password_entry->setPosition(20, 0, ACenterLeft)->setSize(400, 50);
+    password_entry->setPosition(20, 0, sp::Alignment::CenterLeft)->setSize(400, 50);
     password_cancel = new GuiButton(password_entry_box, "PASSWORD_CANCEL_BUTTON", tr("button", "Cancel"), [this]() {
         // Reset the dialog.
         password_label->setText(tr("Enter this ship's control code:"));
@@ -265,7 +265,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         // Unselect GM station if cancelling.
         spectator_button->setValue(false);
     });
-    password_cancel->setPosition(0, -20, ABottomCenter)->setSize(300, 50);
+    password_cancel->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Control code entry button.
     password_entry_ok = new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", tr("Ok"), [this]()
@@ -324,7 +324,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             }
         }
     });
-    password_entry_ok->setPosition(420, 0, ACenterLeft)->setSize(160, 50);
+    password_entry_ok->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
 
     // Control code confirmation button
     password_confirmation = new GuiButton(password_entry_box, "PASSWORD_CONFIRMATION_BUTTON", tr("OK"), [this]() {
@@ -332,7 +332,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         password_entry->show();
         password_cancel->show();
         password_entry_ok->show();
-        password_label->setText(tr("Enter this ship's control code:"))->setPosition(0, 40, ATopCenter);
+        password_label->setText(tr("Enter this ship's control code:"))->setPosition(0, 40, sp::Alignment::TopCenter);
         password_confirmation->hide();
         // Hide the dialog.
         password_overlay->hide();
@@ -340,7 +340,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         left_container->show();
         right_container->show();
     });
-    password_confirmation->setPosition(0, -20, ABottomCenter)->setSize(250, 50)->hide();
+    password_confirmation->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(250, 50)->hide();
 }
 
 void ShipSelectionScreen::update(float delta)

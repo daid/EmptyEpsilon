@@ -11,7 +11,7 @@ private:
 public:
     GuiArrow(GuiContainer* owner, string id, float angle);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiArrow* setColor(sf::Color color) { this->color = color; return this; }
     GuiArrow* setAngle(float angle) { this->angle = angle; return this; }

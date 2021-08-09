@@ -9,46 +9,37 @@ GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value
 {
 }
 
-void GuiRotationDial::onDraw(sf::RenderTarget& window)
+void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
 {
-    sf::Vector2f center = getCenterPoint();
-    float radius = std::min(rect.width, rect.height) / 2.0f;
+    auto center = getCenterPoint();
+    float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
 
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "gui/widget/dial_background.png");
-    sprite.setPosition(center);
-    sprite.setScale(radius * 2 / sprite.getTextureRect().height, radius * 2 / sprite.getTextureRect().height);
-    window.draw(sprite);
-
-    textureManager.setTexture(sprite, "gui/widget/dial_button.png");
-    sprite.setPosition(center);
-    sprite.setScale(radius * 2 / sprite.getTextureRect().height, radius * 2 / sprite.getTextureRect().height);
-    sprite.setRotation((value - min_value) / (max_value - min_value) * 360.0f);
-    window.draw(sprite);
+    renderer.drawSprite("gui/widget/dial_background.png", center, radius * 2.0f);
+    renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f);
 }
 
-bool GuiRotationDial::onMouseDown(sf::Vector2f position)
+bool GuiRotationDial::onMouseDown(glm::vec2 position)
 {
-    sf::Vector2f center = getCenterPoint();
-    float radius = std::min(rect.width, rect.height) / 2.0f;
+    auto center = getCenterPoint();
+    float radius = std::min(rect.size.x, rect.size.y) / 2.0f;
 
-    sf::Vector2f diff = position - center;
-    if (sf::length(diff) > radius)
+    auto diff = position - center;
+    if (glm::length(diff) > radius)
         return false;
-    if (sf::length(diff) < radius * 0.875f)
+    if (glm::length(diff) < radius * 0.875f)
         return false;
 
     onMouseDrag(position);
     return true;
 }
 
-void GuiRotationDial::onMouseDrag(sf::Vector2f position)
+void GuiRotationDial::onMouseDrag(glm::vec2 position)
 {
-    sf::Vector2f center = getCenterPoint();
+    auto center = getCenterPoint();
 
-    sf::Vector2f diff = position - center;
+    auto diff = position - center;
 
-    float new_value = (sf::vector2ToAngle(diff) + 90.0f) / 360.0f;
+    float new_value = (vec2ToAngle(diff) + 90.0f) / 360.0f;
     if (new_value < 0.0f)
         new_value += 1.0f;
     new_value = min_value + (max_value - min_value) * new_value;
@@ -72,7 +63,7 @@ void GuiRotationDial::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiRotationDial::onMouseUp(sf::Vector2f position)
+void GuiRotationDial::onMouseUp(glm::vec2 position)
 {
 }
 

@@ -98,27 +98,14 @@ void Nebula::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void Nebula::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "Nebula" + string(radar_visual) + ".png");
-    object_sprite.setRotation(getRotation()-rotation);
-    object_sprite.setPosition(position);
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
-    object_sprite.setScale(size, size);
-    object_sprite.setColor(sf::Color(255, 255, 255));
-    window.draw(object_sprite, sf::BlendAdd);
+    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0, getRotation()-rotation);
 }
 
-void Nebula::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::CircleShape range_circle(getRadius() * scale);
-    range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
-    range_circle.setPosition(position);
-    range_circle.setFillColor(sf::Color::Transparent);
-    range_circle.setOutlineColor(sf::Color(255, 255, 255, 64));
-    range_circle.setOutlineThickness(2.0);
-    window.draw(range_circle);
+    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, sf::Color(255, 255, 255, 64));
 }
 
 bool Nebula::inNebula(glm::vec2 position)

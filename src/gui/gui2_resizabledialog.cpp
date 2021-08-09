@@ -22,12 +22,12 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
     minimize_button->setSize(50, GuiElement::GuiSizeMax);
 
     title_bar = new GuiLabel(title_bar_layout, "", title, 20);
-    title_bar->addBackground()->setAlignment(ACenterLeft)->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    title_bar->addBackground()->setAlignment(sp::Alignment::CenterLeft)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     contents = new GuiElement(this, "");
-    contents->setPosition(resize_icon_size / 2.0, title_bar_height, ATopLeft);
+    contents->setPosition(resize_icon_size / 2.0, title_bar_height, sp::Alignment::TopLeft);
 
-    min_size = sf::Vector2f(200, title_bar_height + resize_icon_size);
+    min_size = glm::vec2(200, title_bar_height + resize_icon_size);
     minimized = false;
 }
 
@@ -59,47 +59,41 @@ void GuiResizableDialog::setTitle(string title)
     title_bar->setText(title);
 }
 
-void GuiResizableDialog::onDraw(sf::RenderTarget& window)
+void GuiResizableDialog::onDraw(sp::RenderTarget& renderer)
 {
-    GuiPanel::onDraw(window);
+    GuiPanel::onDraw(renderer);
 
-    contents->setSize(rect.width - resize_icon_size, rect.height - title_bar_height - resize_icon_size / 2.0f);
+    contents->setSize(rect.size.x - resize_icon_size, rect.size.y - title_bar_height - resize_icon_size / 2.0f);
 
-    if (rect.left < -50)
+    if (rect.position.x < -50)
         setPosition(-50, getPositionOffset().y);
-    if (rect.top < -(title_bar_height / 2.0f))
+    if (rect.position.y < -(title_bar_height / 2.0f))
         setPosition(getPositionOffset().x, -(title_bar_height / 2.0f));
-    if (rect.left > window.getView().getSize().x - 50)
-        setPosition(window.getView().getSize().x - 50, getPositionOffset().y);
-    if (rect.top > window.getView().getSize().y - title_bar_height)
-        setPosition(getPositionOffset().x, window.getView().getSize().y - title_bar_height);
+    if (rect.position.x > renderer.getVirtualSize().x - 50)
+        setPosition(renderer.getVirtualSize().x - 50, getPositionOffset().y);
+    if (rect.position.y > renderer.getVirtualSize().y - title_bar_height)
+        setPosition(getPositionOffset().x, renderer.getVirtualSize().y - title_bar_height);
 
     if (minimized)
         return;
 
-    sf::Sprite image;
-    textureManager.setTexture(image, "gui/widget/ResizeDialogCorner.png");
-    image.setPosition(rect.left + rect.width - resize_icon_size / 2.0, rect.top + rect.height - resize_icon_size / 2.0);
-    float f = resize_icon_size / float(image.getTextureRect().height);
-    image.setScale(f, f);
-    image.setColor(sf::Color::White);
-    window.draw(image);
+    renderer.drawSprite("gui/widget/ResizeDialogCorner.png", rect.position + rect.size - glm::vec2(resize_icon_size * 0.5, resize_icon_size * 0.5), resize_icon_size);
 }
 
-bool GuiResizableDialog::onMouseDown(sf::Vector2f position)
+bool GuiResizableDialog::onMouseDown(glm::vec2 position)
 {
     click_state = ClickState::None;
     if (title_bar->getRect().contains(position))
         click_state = ClickState::Drag;
-    if (!minimized && position.x >= rect.left + rect.width - resize_icon_size && position.y >= rect.top + rect.height - resize_icon_size)
+    if (!minimized && position.x >= rect.position.x + rect.size.x - resize_icon_size && position.y >= rect.position.y + rect.size.y - resize_icon_size)
         click_state = ClickState::Resize;
-    click_offset = position - sf::Vector2f(rect.left, rect.top);
+    click_offset = position - glm::vec2(rect.position.x, rect.position.y);
     return true;
 }
 
-void GuiResizableDialog::onMouseDrag(sf::Vector2f position)
+void GuiResizableDialog::onMouseDrag(glm::vec2 position)
 {
-    sf::Vector2f offset = (position - sf::Vector2f(rect.left, rect.top));
+    glm::vec2 offset = position - rect.position;
     switch(click_state)
     {
     case ClickState::None:

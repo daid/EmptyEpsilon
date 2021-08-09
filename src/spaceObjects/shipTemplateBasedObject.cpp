@@ -142,18 +142,12 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
     registerMemberReplication(&can_be_destroyed);
 }
 
-void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels)
+void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels)
 {
     if (!getShieldsActive())
         return;
     if (shield_count == 1)
     {
-        sf::Sprite objectSprite;
-        textureManager.setTexture(objectSprite, "shield_circle.png");
-        objectSprite.setPosition(position);
-
-        objectSprite.setScale(sprite_scale * 0.25f * 1.5f, sprite_scale * 0.25f * 1.5f);
-
         sf::Color color = sf::Color(255, 255, 255, 64);
         if (show_levels)
         {
@@ -164,9 +158,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
         {
             color = Tween<sf::Color>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
         }
-        objectSprite.setColor(color);
-
-        window.draw(objectSprite);
+        renderer.drawSprite("shield_circle.png", position, sprite_scale * 0.25f * 1.5f * 256.0f, color);
     }else if (shield_count > 1) {
         float direction = getRotation()-rotation;
         float arc = 360.0f / float(shield_count);
@@ -183,24 +175,22 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sf::RenderTarget& window, sf::V
             {
                 color = Tween<sf::Color>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
             }
-            sf::VertexArray a(sf::TrianglesFan, 4);
-            sf::Vector2f delta_a = sf::vector2FromAngle(direction - arc / 2.0f);
-            sf::Vector2f delta_b = sf::vector2FromAngle(direction);
-            sf::Vector2f delta_c = sf::vector2FromAngle(direction + arc / 2.0f);
-            a[0].position = position + delta_b * sprite_scale * 32.0f * 0.05f;
-            a[1].position = a[0].position + delta_a * sprite_scale * 32.0f * 1.5f;
-            a[2].position = a[0].position + delta_b * sprite_scale * 32.0f * 1.5f;
-            a[3].position = a[0].position + delta_c * sprite_scale * 32.0f * 1.5f;
-            a[0].texCoords = sf::Vector2f(128, 128);
-            a[1].texCoords = sf::Vector2f(128, 128) + delta_a * 128.0f;
-            a[2].texCoords = sf::Vector2f(128, 128) + delta_b * 128.0f;
-            a[3].texCoords = sf::Vector2f(128, 128) + delta_c * 128.0f;
-            a[0].color = color;
-            a[1].color = color;
-            a[2].color = color;
-            a[3].color = color;
-            window.draw(a, textureManager.getTexture("shield_circle.png"));
 
+            glm::vec2 delta_a = vec2FromAngle(direction - arc / 2.0f);
+            glm::vec2 delta_b = vec2FromAngle(direction);
+            glm::vec2 delta_c = vec2FromAngle(direction + arc / 2.0f);
+            
+            auto p0 = position + delta_b * sprite_scale * 32.0f * 0.05f;
+            renderer.drawTexturedQuad("shield_circle.png",
+                p0,
+                p0 + delta_a * sprite_scale * 32.0f * 1.5f,
+                p0 + delta_b * sprite_scale * 32.0f * 1.5f,
+                p0 + delta_c * sprite_scale * 32.0f * 1.5f,
+                glm::vec2(0.5, 0.5),
+                glm::vec2(0.5, 0.5) + delta_a * 0.5f,
+                glm::vec2(0.5, 0.5) + delta_b * 0.5f,
+                glm::vec2(0.5, 0.5) + delta_c * 0.5f,
+                color);
             direction += arc;
         }
     }

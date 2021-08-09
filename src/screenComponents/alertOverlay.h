@@ -12,7 +12,7 @@ private:
 public:
     AlertLevelOverlay(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 };
 
 #endif//ALERT_LEVEL_OVERLAY_H

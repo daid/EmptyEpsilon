@@ -173,8 +173,8 @@ public:
 
     virtual void draw3D();
     virtual void draw3DTransparent() {}
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool longRange);
+    virtual void drawOnRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
+    virtual void drawOnGMRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void destroy();
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }

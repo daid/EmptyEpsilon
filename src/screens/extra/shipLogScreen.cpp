@@ -19,9 +19,9 @@ ShipLogScreen::ShipLogScreen(GuiContainer* owner)
     log_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void ShipLogScreen::onDraw(sf::RenderTarget& window)
+void ShipLogScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(window);
+    GuiOverlay::onDraw(renderer);
 
     if (my_spaceship)
     {

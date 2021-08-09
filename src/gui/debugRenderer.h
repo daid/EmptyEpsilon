@@ -18,7 +18,7 @@ private:
 public:
     DebugRenderer();
 
-    virtual void render(sf::RenderTarget& window);
+    virtual void render(sp::RenderTarget& target) override;
     virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode);
 };
 

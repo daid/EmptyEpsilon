@@ -15,6 +15,7 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
@@ -151,10 +152,10 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 #endif // FEATURE_3D_RENDERING
 }
 
-void GuiViewport3D::onDraw(sf::RenderTarget& window)
+void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 {
 #if FEATURE_3D_RENDERING
-    if (rect.width == 0.f)
+    if (rect.size.x == 0.f)
     {
         // The GUI ticks before Updatables.
         // When the 3D screen is on the side of a station,
@@ -179,28 +180,28 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     // SFML docs warn that any library calls (into SFML that is) may
     // freely change the active binding, so change with caution
     // (the window.get*() below and shader/texture binding are 'fine').
-    window.setActive();
+    renderer.getSFMLTarget().setActive();
 
     float camera_fov = 60.0f;
     {
         // Translate our rect from view coordinates to window.
-        const auto& view = window.getView();
+        const auto& view = renderer.getSFMLTarget().getView();
         const auto& view_size = view.getSize();
 
         const auto& relative_viewport = view.getViewport();
 
         // View's viewport in target coordinate system (= pixels)
-        const auto& window_viewport = window.getViewport(view);
+        const auto& window_viewport = renderer.getSFMLTarget().getViewport(view);
 
         // Get the scaling factor - from logical size to pixels.
         const sf::Vector2f view_to_window{ window_viewport.width / view_size.x, window_viewport.height / view_size.y };
         
         // Compute rect, applying logical -> pixel scaling.
         const sf::IntRect window_rect{
-            static_cast<int32_t>(.5f + rect.left * view_to_window.x),
-            static_cast<int32_t>(.5f + rect.top * view_to_window.y),
-            static_cast<int32_t>(.5f + rect.width * view_to_window.x),
-            static_cast<int32_t>(.5f + rect.height * view_to_window.y)
+            static_cast<int32_t>(.5f + rect.position.x * view_to_window.x),
+            static_cast<int32_t>(.5f + rect.position.y * view_to_window.y),
+            static_cast<int32_t>(.5f + rect.size.x * view_to_window.x),
+            static_cast<int32_t>(.5f + rect.size.y * view_to_window.y)
         };
 
         // Apply current viewport translation.
@@ -221,7 +222,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
 
     glColor4f(1,1,1,1);
 
-    projection_matrix = glm::perspective(glm::radians(camera_fov), rect.width / rect.height, 1.f, 25000.f);
+    projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -315,7 +316,7 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         auto& render_list = render_lists[n];
         std::sort(render_list.begin(), render_list.end(), [](const RenderInfo& a, const RenderInfo& b) { return a.depth > b.depth; });
 
-        auto projection = glm::perspective(glm::radians(camera_fov), rect.width / rect.height, 1.f, 25000.f * (n + 1));
+        auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f * (n + 1));
         // Update projection matrix in shaders.
         for (auto i = 0; i < ShaderRegistry::Shaders_t(ShaderRegistry::Shaders::Count); ++i)
         {
@@ -499,10 +500,10 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
     }
 #endif
 
-    window.resetGLStates();
+    renderer.getSFMLTarget().resetGLStates();
     sf::Shader::bind(nullptr);
-    window.resetGLStates();
-    window.setActive(false);
+    renderer.getSFMLTarget().resetGLStates();
+    renderer.getSFMLTarget().setActive(false);
 
     if (show_callsigns && render_lists.size() > 0)
     {
@@ -515,13 +516,13 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
             if (call_sign == "")
                 continue;
 
-            glm::vec3 screen_position = worldToScreen(window, glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
+            glm::vec3 screen_position = worldToScreen(renderer.getSFMLTarget(), glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
             if (screen_position.z < 0)
                 continue;
             if (screen_position.z > 10000.0)
                 continue;
             float distance_factor = 1.0f - (screen_position.z / 10000.0f);
-            drawText(window, sf::FloatRect(screen_position.x, screen_position.y, 0, 0), call_sign, ACenter, 20 * distance_factor, bold_font, sf::Color(255, 255, 255, 128 * distance_factor));
+            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), call_sign, sp::Alignment::Center, 20 * distance_factor, bold_font, sf::Color(255, 255, 255, 128 * distance_factor));
         }
     }
 
@@ -532,9 +533,9 @@ void GuiViewport3D::onDraw(sf::RenderTarget& window)
         for(int angle = 0; angle < 360; angle += 30)
         {
             glm::vec2 world_pos = my_spaceship->getPosition() + vec2FromAngle(angle - 90.f) * distance;
-            glm::vec3 screen_pos = worldToScreen(window, glm::vec3(world_pos.x, world_pos.y, 0.0f));
+            glm::vec3 screen_pos = worldToScreen(renderer.getSFMLTarget(), glm::vec3(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
-                drawText(window, sf::FloatRect(screen_pos.x, screen_pos.y, 0, 0), string(angle), ACenter, 30, bold_font, sf::Color(255, 255, 255, 128));
+                renderer.drawText(sp::Rect(screen_pos.x, screen_pos.y, 0, 0), string(angle), sp::Alignment::Center, 30, bold_font, sf::Color(255, 255, 255, 128));
         }
     }
 #endif//FEATURE_3D_RENDERING

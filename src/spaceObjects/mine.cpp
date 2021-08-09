@@ -45,28 +45,14 @@ void Mine::draw3DTransparent()
 {
 }
 
-void Mine::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Mine::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite objectSprite;
-    textureManager.setTexture(objectSprite, "radar/blip.png");
-    objectSprite.setRotation(getRotation());
-    objectSprite.setPosition(position);
-    objectSprite.setScale(0.3, 0.3);
-    window.draw(objectSprite);
+    renderer.drawSprite("radar/blip.png", position, 0.3 * 32);
 }
 
-void Mine::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Mine::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::CircleShape hitRadius(trigger_range * scale);
-    hitRadius.setOrigin(trigger_range * scale, trigger_range * scale);
-    hitRadius.setPosition(position);
-    hitRadius.setFillColor(sf::Color::Transparent);
-    if (triggered)
-        hitRadius.setOutlineColor(sf::Color(255, 0, 0, 128));
-    else
-        hitRadius.setOutlineColor(sf::Color(255, 255, 255, 128));
-    hitRadius.setOutlineThickness(3.0);
-    window.draw(hitRadius);
+    renderer.drawCircleOutline(position, trigger_range * scale, 3.0, triggered ? sf::Color(255, 0, 0, 128) : sf::Color(255, 255, 255, 128));
 }
 
 void Mine::update(float delta)

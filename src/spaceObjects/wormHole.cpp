@@ -100,35 +100,18 @@ void WormHole::draw3DTransparent()
 #endif//FEATURE_3D_RENDERING
 
 
-void WormHole::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "wormHole" + string(radar_visual) + ".png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
-    float size = getRadius() * scale / object_sprite.getTextureRect().width * 3.0;
-    object_sprite.setScale(size, size);
-    object_sprite.setColor(sf::Color(255, 255, 255));
-    window.draw(object_sprite, sf::RenderStates(sf::BlendAdd));
+    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRotation() - rotation, getRadius() * scale * 3.0);
 }
 
 // Draw a line toward the target position
-void WormHole::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void WormHole::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     auto offset = target_position - getPosition();
-    sf::VertexArray a(sf::Lines, 2);
-    a[0].position = position;
-    a[1].position = position + sf::Vector2f(offset.x, offset.y) * scale;
-    a[0].color = sf::Color(255, 255, 255, 32);
-    window.draw(a);
+    renderer.drawLine(position, position + glm::vec2(offset.x, offset.y) * scale, sf::Color(255, 255, 255, 32));
 
-    sf::CircleShape range_circle(getRadius() * scale);
-    range_circle.setOrigin(getRadius() * scale, getRadius() * scale);
-    range_circle.setPosition(position);
-    range_circle.setFillColor(sf::Color::Transparent);
-    range_circle.setOutlineColor(sf::Color(255, 255, 255, 32));
-    range_circle.setOutlineThickness(2.0);
-    window.draw(range_circle);
+    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, sf::Color(255, 255, 255, 32));
 }
 
 

@@ -3,12 +3,12 @@
 #include "powerDamageIndicator.h"
 #include "spaceObjects/warpJammer.h"
 
-GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ESystem system, EGuiAlign icon_align)
+GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ESystem system, sp::Alignment icon_align)
 : GuiElement(owner, name), system(system), text_size(30), icon_align(icon_align)
 {
 }
 
-void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
+void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
@@ -58,89 +58,83 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     }else{
         return;
     }
-    drawStretched(window, rect, "gui/widget/damagePowerOverlay.png", color);
+    renderer.drawStretched(rect, "gui/widget/damagePowerOverlay.png", color);
 
-    if (rect.height > rect.width)
-        drawVerticalText(window, rect, display_text, ACenter, text_size, bold_font, color);
+    if (rect.size.y > rect.size.x)
+        renderer.drawVerticalText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color);
     else
-        drawText(window, rect, display_text, ACenter, text_size, bold_font, color);
+        renderer.drawText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color);
 
-    icon_size = std::min(rect.width, rect.height) * 0.8;
+    icon_size = std::min(rect.size.x, rect.size.y) * 0.8;
+
     switch(icon_align)
     {
-    case ACenterLeft:
-        icon_position = sf::Vector2f(rect.left - icon_size / 2.0, rect.top + rect.height / 2.0);
-        icon_offset = sf::Vector2f(-icon_size, 0);
+    case sp::Alignment::CenterLeft:
+        icon_position = glm::vec2(rect.position.x - icon_size / 2.0, rect.position.y + rect.size.y / 2.0);
+        icon_offset = glm::vec2(-icon_size, 0);
         break;
-    case ACenterRight:
-        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.0, rect.top + rect.height / 2.0);
-        icon_offset = sf::Vector2f(icon_size, 0);
+    case sp::Alignment::CenterRight:
+        icon_position = glm::vec2(rect.position.x + rect.size.x + icon_size / 2.0, rect.position.y + rect.size.y / 2.0);
+        icon_offset = glm::vec2(icon_size, 0);
         break;
-    case ABottomRight:
-        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.0, rect.top + rect.height - icon_size / 2.0);
-        icon_offset = sf::Vector2f(0, -icon_size);
+    case sp::Alignment::BottomRight:
+        icon_position = glm::vec2(rect.position.x + rect.size.x + icon_size / 2.0, rect.position.y + rect.size.y - icon_size / 2.0);
+        icon_offset = glm::vec2(0, -icon_size);
         break;
-    case ABottomLeft:
-        icon_position = sf::Vector2f(rect.left - icon_size / 2.0, rect.top + rect.height - icon_size / 2.0);
-        icon_offset = sf::Vector2f(0, -icon_size);
+    case sp::Alignment::BottomLeft:
+        icon_position = glm::vec2(rect.position.x - icon_size / 2.0, rect.position.y + rect.size.y - icon_size / 2.0);
+        icon_offset = glm::vec2(0, -icon_size);
         break;
-    case ATopRight:
-        icon_position = sf::Vector2f(rect.left + rect.width + icon_size / 2.0, rect.top + icon_size / 2.0);
-        icon_offset = sf::Vector2f(0, icon_size);
+    case sp::Alignment::TopRight:
+        icon_position = glm::vec2(rect.position.x + rect.size.x + icon_size / 2.0, rect.position.y + icon_size / 2.0);
+        icon_offset = glm::vec2(0, icon_size);
         break;
-    case ATopLeft:
-        icon_position = sf::Vector2f(rect.left - icon_size / 2.0, rect.top + icon_size / 2.0);
-        icon_offset = sf::Vector2f(0, icon_size);
+    case sp::Alignment::TopLeft:
+        icon_position = glm::vec2(rect.position.x - icon_size / 2.0, rect.position.y + icon_size / 2.0);
+        icon_offset = glm::vec2(0, icon_size);
         break;
-    case ATopCenter:
-        icon_position = sf::Vector2f(rect.left + rect.width / 2.0, rect.top - icon_size / 2.0);
-        icon_offset = sf::Vector2f(0, -icon_size);
+    case sp::Alignment::TopCenter:
+        icon_position = glm::vec2(rect.position.x + rect.size.x / 2.0, rect.position.y - icon_size / 2.0);
+        icon_offset = glm::vec2(0, -icon_size);
         break;
-    case ABottomCenter:
-        icon_position = sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height + icon_size / 2.0);
-        icon_offset = sf::Vector2f(0, icon_size);
+    case sp::Alignment::BottomCenter:
+        icon_position = glm::vec2(rect.position.x + rect.size.x / 2.0, rect.position.y + rect.size.y + icon_size / 2.0);
+        icon_offset = glm::vec2(0, icon_size);
         break;
-    case ACenter:
-        icon_position = sf::Vector2f(rect.left + rect.width / 2.0, rect.top + rect.height / 2.0);
-        icon_offset = sf::Vector2f(0, 0);
+    case sp::Alignment::Center:
+        icon_position = glm::vec2(rect.position.x + rect.size.x / 2.0, rect.position.y + rect.size.y / 2.0);
+        icon_offset = glm::vec2(0, 0);
         break;
     }
 
     if (health <= 0.0)
     {
-        drawIcon(window, "gui/icons/status_damaged", colorConfig.overlay_damaged);
+        drawIcon(renderer, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
     if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
     {
-        drawIcon(window, "gui/icons/status_jammed", colorConfig.overlay_jammed);
+        drawIcon(renderer, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }
     if (power == 0.0)
     {
-        drawIcon(window, "gui/icons/status_no_power", colorConfig.overlay_no_power);
+        drawIcon(renderer, "gui/icons/status_no_power", colorConfig.overlay_no_power);
     }
     else if (power < 0.3)
     {
-        drawIcon(window, "gui/icons/status_low_power", colorConfig.overlay_low_power);
+        drawIcon(renderer, "gui/icons/status_low_power", colorConfig.overlay_low_power);
     }
     if (my_spaceship->energy_level < 10)
     {
-        drawIcon(window, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
+        drawIcon(renderer, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
     }
     if (heat > 0.90)
     {
-        drawIcon(window, "gui/icons/status_overheat", colorConfig.overlay_overheating);
+        drawIcon(renderer, "gui/icons/status_overheat", colorConfig.overlay_overheating);
     }
 }
 
-void GuiPowerDamageIndicator::drawIcon(sf::RenderTarget& window, string icon_name, sf::Color color)
+void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, sf::Color color)
 {
-    sf::Sprite icon;
-    textureManager.setTexture(icon, icon_name);
-    float scale = icon_size / icon.getTextureRect().height;
-    icon.setScale(scale, scale);
-    icon.setPosition(icon_position);
-    icon.setColor(color);
-    window.draw(icon);
-
+    renderer.drawSprite(icon_name, icon_position, icon_size);
     icon_position += icon_offset;
 }

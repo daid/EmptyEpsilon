@@ -68,7 +68,7 @@ public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiRadarView* setDistance(float distance) { this->distance = distance; return this; }
     float getDistance() { return distance; }
@@ -103,30 +103,30 @@ public:
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
 
-    sf::Vector2f worldToScreen(glm::vec2 world_position);
-    glm::vec2 screenToWorld(sf::Vector2f screen_position);
+    glm::vec2 worldToScreen(glm::vec2 world_position);
+    glm::vec2 screenToWorld(glm::vec2 screen_position);
 
-    virtual bool onMouseDown(sf::Vector2f position) override;
-    virtual void onMouseDrag(sf::Vector2f position) override;
-    virtual void onMouseUp(sf::Vector2f position) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseDrag(glm::vec2 position) override;
+    virtual void onMouseUp(glm::vec2 position) override;
 private:
     void updateGhostDots();
 
-    void drawBackground(sf::RenderTarget& window);
-    void drawSectorGrid(sf::RenderTarget& window);
-    void drawNebulaBlockedAreas(sf::RenderTarget& window);
-    void drawNoneFriendlyBlockedAreas(sf::RenderTarget& window);
-    void drawFriendlyNotVisibleAreas(sf::RenderTarget& window);
-    void drawGhostDots(sf::RenderTarget& window);
-    void drawWaypoints(sf::RenderTarget& window);
-    void drawRangeIndicators(sf::RenderTarget& window);
-    void drawTargetProjections(sf::RenderTarget& window);
-    void drawMissileTubes(sf::RenderTarget& window);
-    void drawObjects(sf::RenderTarget& window);
-    void drawObjectsGM(sf::RenderTarget& window);
-    void drawTargets(sf::RenderTarget& window);
-    void drawHeadingIndicators(sf::RenderTarget& window);
-    void drawRadarCutoff(sf::RenderTarget& window);
+    void drawBackground(sp::RenderTarget& target);
+    void drawSectorGrid(sp::RenderTarget& target);
+    void drawNebulaBlockedAreas(sp::RenderTarget& target);
+    void drawNoneFriendlyBlockedAreas(sp::RenderTarget& target);
+    void drawFriendlyNotVisibleAreas(sp::RenderTarget& target);
+    void drawGhostDots(sp::RenderTarget& target);
+    void drawWaypoints(sp::RenderTarget& target);
+    void drawRangeIndicators(sp::RenderTarget& target);
+    void drawTargetProjections(sp::RenderTarget& target);
+    void drawMissileTubes(sp::RenderTarget& target);
+    void drawObjects(sp::RenderTarget& target);
+    void drawObjectsGM(sp::RenderTarget& target);
+    void drawTargets(sp::RenderTarget& target);
+    void drawHeadingIndicators(sp::RenderTarget& target);
+    void drawRadarCutoff(sp::RenderTarget& target);
 };
 
 #endif//RADAR_VIEW_H

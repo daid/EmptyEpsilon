@@ -26,7 +26,7 @@ GameMasterScreen::GameMasterScreen()
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
-    main_radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
         [this](glm::vec2 position) { this->onMouseDown(position); },
         [this](glm::vec2 position) { this->onMouseDrag(position); },
@@ -41,12 +41,12 @@ GameMasterScreen::GameMasterScreen()
         else
             engine->setGameSpeed(0.0f);
     });
-    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
+    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(250, 50);
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
-    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
+    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -56,12 +56,12 @@ GameMasterScreen::GameMasterScreen()
     });
     for(P<FactionInfo> info : factionInfo)
         faction_selector->addEntry(info->getLocaleName(), info->getName());
-    faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
+    faction_selector->setPosition(20, 70, sp::Alignment::TopLeft)->setSize(250, 50);
 
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
         global_message_entry->show();
     });
-    global_message_button->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
+    global_message_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(250, 50);
 
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
         P<SpaceObject> ship = gameGlobalInfo->getPlayerShip(value.toInt());
@@ -70,27 +70,27 @@ GameMasterScreen::GameMasterScreen()
         main_radar->setViewPosition(ship->getPosition());
         targets.set(ship);
     });
-    player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
+    player_ship_selector->setPosition(270, -20, sp::Alignment::BottomLeft)->setSize(350, 50);
 
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", tr("button", "Create..."), [this]() {
         object_creation_view->show();
     });
-    create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+    create_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
 
     copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"), [this]() {
         Clipboard::setClipboard(getScriptExport(false));
     });
-    copy_scenario_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
+    copy_scenario_button->setTextSize(20)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(125, 25);
 
     copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"), [this]() {
         Clipboard::setClipboard(getScriptExport(true));
     });
-    copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
+    copy_selected_button->setTextSize(20)->setPosition(-20, -45, sp::Alignment::BottomRight)->setSize(125, 25);
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
         gameGlobalInfo->on_gm_click = nullptr;
     });
-    cancel_action_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
+    cancel_action_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", tr("button", "Tweak"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -124,7 +124,7 @@ GameMasterScreen::GameMasterScreen()
             }
         }
     });
-    tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
+    tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -136,10 +136,10 @@ GameMasterScreen::GameMasterScreen()
             }
         }
     });
-    player_comms_hail->setPosition(20, -170, ABottomLeft)->setSize(250, 50)->hide();
+    player_comms_hail->setPosition(20, -170, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
     info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    info_layout->setPosition(-20, 20, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
+    info_layout->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Clock"), "");
     info_clock->setSize(GuiElement::GuiSizeMax, 30);
@@ -158,10 +158,10 @@ GameMasterScreen::GameMasterScreen()
             n++;
         }
     });
-    gm_script_options->setPosition(20, 130, ATopLeft)->setSize(250, 500);
+    gm_script_options->setPosition(20, 130, sp::Alignment::TopLeft)->setSize(250, 500);
 
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalBottomToTop);
-    order_layout->setPosition(-20, -90, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+    order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax);
 
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
@@ -212,10 +212,10 @@ GameMasterScreen::GameMasterScreen()
     object_creation_view->hide();
 
     message_frame = new GuiPanel(this, "");
-    message_frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
+    message_frame->setPosition(0, 0, sp::Alignment::TopCenter)->setSize(900, 230)->hide();
 
     message_text = new GuiScrollText(message_frame, "", "");
-    message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
+    message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), []() {
         if (!gameGlobalInfo->gm_messages.empty())
         {
@@ -223,7 +223,7 @@ GameMasterScreen::GameMasterScreen()
         }
 
     });
-    message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
+    message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -429,7 +429,7 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
         break;
     case CD_BoxSelect:
         box_selection_overlay->show();
-        box_selection_overlay->setPosition(main_radar->worldToScreen(drag_start_position), ATopLeft);
+        box_selection_overlay->setPosition(main_radar->worldToScreen(drag_start_position), sp::Alignment::TopLeft);
         box_selection_overlay->setSize(main_radar->worldToScreen(position) - main_radar->worldToScreen(drag_start_position));
         break;
     default:

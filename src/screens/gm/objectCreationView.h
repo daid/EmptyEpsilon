@@ -17,9 +17,9 @@ public:
     GuiListbox* player_ship_listbox;
     GuiObjectCreationView(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
 
-    virtual bool onMouseDown(sf::Vector2f position) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
 
     void setCreateScript(const string create, const string configure = "");
 };

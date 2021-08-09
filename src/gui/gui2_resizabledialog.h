@@ -12,10 +12,10 @@ class GuiResizableDialog : public GuiPanel
 public:
     GuiResizableDialog(GuiContainer* owner, string id, string title);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
 
-    virtual bool onMouseDown(sf::Vector2f position) override;
-    virtual void onMouseDrag(sf::Vector2f position) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseDrag(glm::vec2 position) override;
 
     void minimize(bool minimize=true);
     bool isMinimized() const;
@@ -36,12 +36,12 @@ private:
         Resize,
         Drag
     };
-    sf::Vector2f click_offset;
+    glm::vec2 click_offset;
     ClickState click_state;
 
     virtual void onClose();
 protected:
-    sf::Vector2f min_size;
+    glm::vec2 min_size;
     GuiElement* contents;
 };
 

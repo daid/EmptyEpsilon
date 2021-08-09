@@ -6,34 +6,34 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
 {
     (new GuiArrowButton(this, id + "_UP_ARROW", 90, [this]() {
         setValue(getValue() - 1);
-    }))->setPosition(0, 0, ATopRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
+    }))->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
     (new GuiArrowButton(this, id + "_DOWN_ARROW", -90, [this]() {
         setValue(getValue() + 1);
-    }))->setPosition(0, 0, ABottomRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
+    }))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
 }
 
-void GuiScrollbar::onDraw(sf::RenderTarget& window)
+void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretched(window, rect, "gui/widget/ScrollbarBackground.png");
+    renderer.drawStretched(rect, "gui/widget/ScrollbarBackground.png");
 
     int range = (max_value - min_value);
-    float arrow_size = rect.width / 2.0;
-    float move_height = (rect.height - arrow_size * 2);
+    float arrow_size = rect.size.x / 2.0;
+    float move_height = (rect.size.y - arrow_size * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
         bar_size = move_height;
-    drawStretched(window, sf::FloatRect(rect.left, rect.top + arrow_size + move_height * getValue() / range, rect.width, bar_size), "gui/widget/ScrollbarSelection.png", sf::Color::White);
+    renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), "gui/widget/ScrollbarSelection.png", sf::Color::White);
 }
 
-bool GuiScrollbar::onMouseDown(sf::Vector2f position)
+bool GuiScrollbar::onMouseDown(glm::vec2 position)
 {
     int range = (max_value - min_value);
-    float arrow_size = rect.width / 2.0;
-    float move_height = (rect.height - arrow_size * 2);
+    float arrow_size = rect.size.x / 2.0;
+    float move_height = (rect.size.y - arrow_size * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
         bar_size = move_height;
-    float bar_y = rect.top + arrow_size + move_height * getValue() / range;
+    float bar_y = rect.position.y + arrow_size + move_height * getValue() / range;
     if (position.y >= bar_y && position.y <= bar_y + bar_size)
     {
         drag_scrollbar = true;
@@ -44,18 +44,18 @@ bool GuiScrollbar::onMouseDown(sf::Vector2f position)
     return true;
 }
 
-void GuiScrollbar::onMouseDrag(sf::Vector2f position)
+void GuiScrollbar::onMouseDrag(glm::vec2 position)
 {
     if (drag_scrollbar)
     {
-        float arrow_size = rect.width / 2.0;
+        float arrow_size = rect.size.x / 2.0;
         int range = (max_value - min_value);
-        float move_height = (rect.height - arrow_size * 2);
+        float move_height = (rect.size.y - arrow_size * 2);
         float bar_size = move_height * value_size / range;
         if (bar_size > move_height)
             bar_size = move_height;
 
-        float target_y_offset = position.y - drag_select_offset - (rect.top + arrow_size);
+        float target_y_offset = position.y - drag_select_offset - (rect.position.y + arrow_size);
         target_y_offset = std::max(target_y_offset, 0.0f);
         target_y_offset = std::min(target_y_offset, move_height - bar_size);
 
@@ -64,18 +64,18 @@ void GuiScrollbar::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiScrollbar::onMouseUp(sf::Vector2f position)
+void GuiScrollbar::onMouseUp(glm::vec2 position)
 {
     if (!drag_scrollbar)
     {
-        float arrow_size = rect.width / 2.0;
+        float arrow_size = rect.size.x / 2.0;
         int range = (max_value - min_value);
-        float move_height = (rect.height - arrow_size * 2);
+        float move_height = (rect.size.y - arrow_size * 2);
         float bar_size = move_height * value_size / range;
         if (bar_size > move_height)
             bar_size = move_height;
 
-        float target_y_offset = position.y - bar_size / 2.0f - (rect.top + arrow_size);
+        float target_y_offset = position.y - bar_size / 2.0f - (rect.position.y + arrow_size);
         target_y_offset = std::max(target_y_offset, 0.0f);
         target_y_offset = std::min(target_y_offset, move_height - bar_size);
 

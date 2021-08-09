@@ -7,14 +7,11 @@ MouseRenderer::MouseRenderer()
     visible = true;
 }
 
-void MouseRenderer::render(sf::RenderTarget& window)
+void MouseRenderer::render(sp::RenderTarget& renderer)
 {
     if (!visible) return;
 
-    sf::Vector2f mouse = InputHandler::getMousePos();
+    auto mouse = InputHandler::getMousePos();
 
-    sf::Sprite mouseSprite;
-    textureManager.setTexture(mouseSprite, "mouse.png");
-    mouseSprite.setPosition(mouse);
-    window.draw(mouseSprite);
+    renderer.drawSprite("mouse.png", mouse, 32.0);
 }

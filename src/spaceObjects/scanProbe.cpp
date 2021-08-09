@@ -201,33 +201,21 @@ void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
     destroy();
 }
 
-void ScanProbe::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void ScanProbe::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     // All probes use the same green icon on radar.
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "radar/probe.png");
-    object_sprite.setPosition(position);
-    object_sprite.setColor(sf::Color(96, 192, 128));
-    float size = 0.3;
-    object_sprite.setScale(size, size);
-    window.draw(object_sprite);
+    renderer.drawSprite("radar/probe.png", position, 10, sf::Color(96, 192, 128));
 }
 
-void ScanProbe::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void ScanProbe::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    SpaceObject::drawOnGMRadar(window, position, scale, rotation, long_range);
+    SpaceObject::drawOnGMRadar(renderer, position, scale, rotation, long_range);
 
     if (long_range)
     {
         // Draw a circle on the GM radar representing the probe's fixed 5U
         // radar radius.
-        sf::CircleShape radar_radius(5000 * scale);
-        radar_radius.setOrigin(5000 * scale, 5000 * scale);
-        radar_radius.setPosition(position);
-        radar_radius.setFillColor(sf::Color::Transparent);
-        radar_radius.setOutlineColor(sf::Color(255, 255, 255, 64));
-        radar_radius.setOutlineThickness(3.0);
-        window.draw(radar_radius);
+        renderer.drawCircleOutline(position, 5000*scale, 3.0, sf::Color(255, 255, 255, 64));
     }
 }
 

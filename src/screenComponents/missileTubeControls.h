@@ -32,7 +32,7 @@ private:
 public:
     GuiMissileTubeControls(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onHotkey(const HotkeyResult& key) override;
 
     void setMissileTargetAngle(float angle);

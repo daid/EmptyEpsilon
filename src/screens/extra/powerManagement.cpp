@@ -18,52 +18,52 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
     selected_system = SYS_None;
 
     energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
-    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(285, 40);
+    energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(285, 40);
     coolant_display = new GuiKeyValueDisplay(this, "COOLANT_DISPLAY", 0.45, tr("Coolant"), "");
-    coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(315, 20, ATopLeft)->setSize(280, 40);
+    coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(315, 20, sp::Alignment::TopLeft)->setSize(280, 40);
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    layout->setPosition(20, 60, ATopLeft)->setSize(GuiElement::GuiSizeMax, 400);
+    layout->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 400);
     for(int n=0; n<SYS_COUNT; n++)
     {
         if (n == 4)
         {
             //Start the 2nd row after 4 elements.
             layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-            layout->setPosition(20, 450, ATopLeft)->setSize(GuiElement::GuiSizeMax, 400);
+            layout->setPosition(20, 450, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 400);
         }
 
         GuiPanel* box = new GuiPanel(layout, "");
         systems[n].box = box;
         box->setSize(290, 400);
 
-        (new GuiLabel(box, "", getLocaleSystemName(ESystem(n)), 30))->addBackground()->setAlignment(ACenter)->setPosition(0, 0, ATopLeft)->setSize(290, 50);
-        (new GuiLabel(box, "", tr("button", "Power"), 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 50, ATopLeft)->setSize(30, 340);
-        (new GuiLabel(box, "", tr("button", "Coolant"), 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(100, 50, ATopLeft)->setSize(30, 340);
-        (new GuiLabel(box, "", tr("button", "Heat"), 30))->setVertical()->setAlignment(ACenterLeft)->setPosition(180, 50, ATopLeft)->setSize(30, 340);
+        (new GuiLabel(box, "", getLocaleSystemName(ESystem(n)), 30))->addBackground()->setAlignment(sp::Alignment::Center)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(290, 50);
+        (new GuiLabel(box, "", tr("button", "Power"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(30, 340);
+        (new GuiLabel(box, "", tr("button", "Coolant"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(100, 50, sp::Alignment::TopLeft)->setSize(30, 340);
+        (new GuiLabel(box, "", tr("button", "Heat"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(180, 50, sp::Alignment::TopLeft)->setSize(30, 340);
 
         systems[n].power_bar = new GuiProgressbar(box, "", 0.0, 3.0, 1.0);
-        systems[n].power_bar->setDrawBackground(false)->setPosition(52.5, 60, ATopLeft)->setSize(50, 320);
+        systems[n].power_bar->setDrawBackground(false)->setPosition(52.5, 60, sp::Alignment::TopLeft)->setSize(50, 320);
 
         systems[n].power_slider = new GuiSlider(box, "", 3.0, 0.0, 1.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemPowerRequest(ESystem(n), value);
         });
-        systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, ATopLeft)->setSize(55, 340);
+        systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(55, 340);
 
         systems[n].coolant_bar = new GuiProgressbar(box, "", 0.0, 10.0, 0.0);
-        systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5, 60, ATopLeft)->setSize(50, 320);
+        systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5, 60, sp::Alignment::TopLeft)->setSize(50, 320);
 
         systems[n].coolant_slider = new GuiSlider(box, "", 10.0, 0.0, 0.0, [n](float value) {
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolantRequest(ESystem(n), value);
         });
-        systems[n].coolant_slider->setPosition(130, 50, ATopLeft)->setSize(55, 340);
+        systems[n].coolant_slider->setPosition(130, 50, sp::Alignment::TopLeft)->setSize(55, 340);
 
         systems[n].heat_bar = new GuiProgressbar(box, "", 0.0, 1.0, 0.0);
-        systems[n].heat_bar->setPosition(210, 60, ATopLeft)->setSize(50, 320);
+        systems[n].heat_bar->setPosition(210, 60, sp::Alignment::TopLeft)->setSize(50, 320);
     }
 
-    (new GuiCustomShipFunctions(this, powerManagement, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, powerManagement, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
     average_energy_delta = 0.0;
@@ -72,9 +72,9 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
     // TODO: Hotkey help overlay
 }
 
-void PowerManagementScreen::onDraw(sf::RenderTarget& window)
+void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(window);
+    GuiOverlay::onDraw(renderer);
     if (my_spaceship)
     {
         //Update the energy usage.

@@ -9,44 +9,37 @@ GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool freque
     frequency = -1;
 }
 
-void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
+void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
 {
-    GuiPanel::onDraw(window);
+    GuiPanel::onDraw(renderer);
 
     if (frequency >= 0 && frequency <= SpaceShip::max_frequency)
     {
         if (enemy_has_equipment) {
-            float w = (rect.width - 40) / (SpaceShip::max_frequency + 1);
+            float w = (rect.size.x - 40) / (SpaceShip::max_frequency + 1);
             for(int n=0; n<=SpaceShip::max_frequency; n++)
             {
-                float x = rect.left + 20 + w * n;
+                float x = rect.position.x + 20 + w * n;
                 float f;
                 if (frequency_is_beam)
                     f = frequencyVsFrequencyDamageFactor(frequency, n);
                 else
                     f = frequencyVsFrequencyDamageFactor(n, frequency);
                 f = Tween<float>::linear(f, 0.5, 1.5, 0.1, 1.0);
-                float h = (rect.height - 50) * f;
-                sf::RectangleShape bar(sf::Vector2f(w * 0.8, h));
-                bar.setPosition(x, rect.top + rect.height - 10 - h);
+                float h = (rect.size.y - 50) * f;
+                sp::Rect bar_rect(x, rect.position.y + rect.size.y - 10 - h, w * 0.8, h);
                 if (more_damage_is_positive)
-                    bar.setFillColor(sf::Color(255 * (1.0 - f), 255 * f, 0));
+                    renderer.fillRect(bar_rect, sf::Color(255 * (1.0 - f), 255 * f, 0));
                 else
-                    bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
-                window.draw(bar);
+                    renderer.fillRect(bar_rect, sf::Color(255 * f, 255 * (1.0 - f), 0));
 
                 if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
                 {
-                    sf::Sprite image;
-                    textureManager.setTexture(image, "gui/widget/SelectorArrow.png");
-                    image.setPosition(x + w / 2.0, rect.top + rect.height - 20 - h);
-                    image.setRotation(-90);
-                    image.setScale(0.2, 0.2);
-                    window.draw(image);
+                    renderer.drawRotatedSprite("gui/widget/SelectorArrow.png", glm::vec2(x + w * 0.5, rect.position.y + rect.size.y - 20 - h), w, -90);
                 }
             }
 
-            int mouse_freq_nr = int((InputHandler::getMousePos().x - rect.left - 20) / w);
+            int mouse_freq_nr = int((InputHandler::getMousePos().x - rect.position.x - 20) / w);
 
             string text = "";
             if (rect.contains(InputHandler::getMousePos()) && mouse_freq_nr >= 0 && mouse_freq_nr <= SpaceShip::max_frequency)
@@ -61,15 +54,15 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                 else
                     text = tr("Damage on your shields");
             }
-            drawText(window, sf::FloatRect(rect.left, rect.top, rect.width, 40), text, ACenter, 20);
+            renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, 40), text, sp::Alignment::Center, 20);
         } // end if enemy_has_equipment
         else {
             if (frequency_is_beam)
-                drawText(window, rect, tr("scienceFrequencyGraph", "No enemy beams"), ACenter, 35);
+                renderer.drawText(rect, tr("scienceFrequencyGraph", "No enemy beams"), sp::Alignment::Center, 35);
             else
-                drawText(window, rect, tr("scienceFrequencyGraph", "No enemy shields"), ACenter, 35);
+                renderer.drawText(rect, tr("scienceFrequencyGraph", "No enemy shields"), sp::Alignment::Center, 35);
         }
     }else{
-        drawText(window, rect, "No data", ACenter, 35);
+        renderer.drawText(rect, "No data", sp::Alignment::Center, 35);
     }
 }

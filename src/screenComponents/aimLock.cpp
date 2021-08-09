@@ -59,39 +59,30 @@ AimLock::AimLock(GuiContainer* owner, string id, GuiRadarView* radar, float min_
 {
 }
 
-void AimLock::onDraw(sf::RenderTarget& window)
+void AimLock::onDraw(sp::RenderTarget& renderer)
 {
-    sf::Vector2f center = getCenterPoint();
+    auto center = getCenterPoint();
     float view_rotation = radar->getViewRotation();
-    float radius = std::min(rect.width, rect.height) / 2.0f;
+    float radius = std::min(rect.size.x, rect.size.y);
 
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "dial_background.png");
-    sprite.setPosition(center);
-    sprite.setScale(radius * 2 / sprite.getTextureRect().height, radius * 2 / sprite.getTextureRect().height);
-    window.draw(sprite);
-
-    textureManager.setTexture(sprite, "dial_button.png");
-    sprite.setPosition(center);
-    sprite.setScale(radius * 2 / sprite.getTextureRect().height, radius * 2 / sprite.getTextureRect().height);
-    sprite.setRotation((value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
-    window.draw(sprite);
+    renderer.drawSprite("gui/widget/dial_background.png", center, radius);
+    renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
 }
 
-bool AimLock::onMouseDown(sf::Vector2f position)
+bool AimLock::onMouseDown(glm::vec2 position)
 {
     return GuiRotationDial::onMouseDown(position);
 }
 
-void AimLock::onMouseDrag(sf::Vector2f position)
+void AimLock::onMouseDrag(glm::vec2 position)
 {
     float view_rotation = radar->getViewRotation();
 
-    sf::Vector2f center = getCenterPoint();
+    auto center = getCenterPoint();
 
-    sf::Vector2f diff = position - center;
+    auto diff = position - center;
 
-    float new_value = ((sf::vector2ToAngle(diff) + 90.0f) + view_rotation) / 360.0f;
+    float new_value = ((vec2ToAngle(diff) + 90.0f) + view_rotation) / 360.0f;
     if (new_value < 0.0f)
         new_value += 1.0f;
     if (new_value > 1.0f)
@@ -105,6 +96,6 @@ void AimLock::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void AimLock::onMouseUp(sf::Vector2f position)
+void AimLock::onMouseUp(glm::vec2 position)
 {
 }

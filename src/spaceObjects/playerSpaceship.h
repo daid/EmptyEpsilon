@@ -339,7 +339,7 @@ public:
     void setControlCode(string code) { control_code = code.upper(); }
 
     // Radar function
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     // Script export function
     virtual string getExportLine() override;

@@ -41,32 +41,19 @@ WarpJammer::~WarpJammer()
 {
 }
 
-void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void WarpJammer::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "radar/blip.png");
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
+    sf::Color color(200, 150, 100);
     if (my_spaceship && my_spaceship->isEnemy(this))
-        object_sprite.setColor(sf::Color(255, 0, 0));
-    else
-        object_sprite.setColor(sf::Color(200, 150, 100));
-    float size = 0.6;
-    object_sprite.setScale(size, size);
-    window.draw(object_sprite);
+        color = sf::Color(255, 0, 0);
+    renderer.drawSprite("radar/blip.png", position, 20, color);
 
     if (long_range)
     {
-        sf::CircleShape range_circle(range * scale);
-        range_circle.setOrigin(range * scale, range * scale);
-        range_circle.setPosition(position);
-        range_circle.setFillColor(sf::Color::Transparent);
+        color = sf::Color(200, 150, 100, 64);
         if (my_spaceship && my_spaceship->isEnemy(this))
-            range_circle.setOutlineColor(sf::Color(255, 0, 0, 64));
-        else
-            range_circle.setOutlineColor(sf::Color(200, 150, 100, 64));
-        range_circle.setOutlineThickness(2.0);
-        window.draw(range_circle);
+            color = sf::Color(255, 0, 0, 64);
+        renderer.drawCircleOutline(position, range*scale, 2.0, color);
     }
 }
 

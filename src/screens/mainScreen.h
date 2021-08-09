@@ -31,7 +31,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void onClick(sf::Vector2f mouse_position) override;
+    virtual void onClick(glm::vec2 mouse_position) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };

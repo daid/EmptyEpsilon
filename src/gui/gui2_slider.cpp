@@ -8,51 +8,39 @@ GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, 
 {
 }
 
-void GuiBasicSlider::onDraw(sf::RenderTarget& window)
+void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretched(window, rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
+    renderer.drawStretched(rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
 
     sf::Color color = selectColor(colorConfig.slider.forground);
 
-    if (rect.width > rect.height)
+    if (rect.size.x > rect.size.y)
     {
         float x;
-        x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
+        x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        sf::Sprite sprite;
-        textureManager.setTexture(sprite, "gui/widget/SliderKnob.png");
-        sprite.setOrigin(0, 0);
-        sprite.setPosition(x, rect.top);
-        sprite.setScale(rect.height / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().width);
-        sprite.setColor(color);
-        window.draw(sprite);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y, color);
     }else{
         float y;
-        y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
+        y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        sf::Sprite sprite;
-        textureManager.setTexture(sprite, "gui/widget/SliderKnob.png");
-        sprite.setOrigin(0, 0);
-        sprite.setPosition(rect.left, y);
-        sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().width);
-        sprite.setColor(color);
-        window.draw(sprite);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5, y + rect.size.x * 0.5), rect.size.x, color);
     }
 }
 
-bool GuiBasicSlider::onMouseDown(sf::Vector2f position)
+bool GuiBasicSlider::onMouseDown(glm::vec2 position)
 {
     onMouseDrag(position);
     return true;
 }
 
-void GuiBasicSlider::onMouseDrag(sf::Vector2f position)
+void GuiBasicSlider::onMouseDrag(glm::vec2 position)
 {
     float new_value;
-    if (rect.width > rect.height)
-        new_value = (position.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+    if (rect.size.x > rect.size.y)
+        new_value = (position.x - rect.position.x - (rect.size.y / 2.0)) / (rect.size.x - rect.size.y);
     else
-        new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+        new_value = (position.y - rect.position.y - (rect.size.x / 2.0)) / (rect.size.y - rect.size.x);
     new_value = min_value + (max_value - min_value) * new_value;
     if (min_value < max_value)
     {
@@ -77,7 +65,7 @@ void GuiBasicSlider::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiBasicSlider::onMouseUp(sf::Vector2f position)
+void GuiBasicSlider::onMouseUp(glm::vec2 position)
 {
 }
 
@@ -114,71 +102,43 @@ float GuiBasicSlider::getValue() const
 
 
 
-
-
-
-
-
 GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiBasicSlider(owner, id, min_value, max_value, start_value, func)
 {
     overlay_label = nullptr;
 }
 
-void GuiSlider::onDraw(sf::RenderTarget& window)
+void GuiSlider::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretched(window, rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
+    renderer.drawStretched(rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
 
-    sf::Color color = selectColor(colorConfig.slider.forground);
+    auto fg_color = selectColor(colorConfig.slider.forground);
+    auto bg_color = selectColor(colorConfig.slider.background);
 
-    if (rect.width > rect.height)
+    if (rect.size.x > rect.size.y)
     {
         float x;
 
         for(TSnapPoint& point : snap_points)
         {
-            x = rect.left + (rect.width - rect.height) * (point.value - min_value) / (max_value - min_value);
+            x = rect.position.x + (rect.size.x - rect.size.y) * (point.value - min_value) / (max_value - min_value);
 
-            sf::Sprite snap_sprite;
-            textureManager.setTexture(snap_sprite, "gui/widget/SliderTick.png");
-            snap_sprite.setRotation(90);
-            snap_sprite.setPosition(x + rect.height / 2, rect.top + rect.height / 2);
-            snap_sprite.setScale(rect.height / snap_sprite.getTextureRect().width, rect.height / snap_sprite.getTextureRect().width);
-            snap_sprite.setColor(selectColor(colorConfig.slider.background));
-            window.draw(snap_sprite);
+            renderer.drawRotatedSprite("gui/widget/SliderTick.png", glm::vec2(x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y, 90, bg_color);
         }
-        x = rect.left + (rect.width - rect.height) * (value - min_value) / (max_value - min_value);
+        x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        sf::Sprite sprite;
-        textureManager.setTexture(sprite, "gui/widget/SliderKnob.png");
-        sprite.setOrigin(0, 0);
-        sprite.setPosition(x, rect.top);
-        sprite.setScale(rect.height / sprite.getTextureRect().width, rect.height / sprite.getTextureRect().width);
-        sprite.setColor(color);
-        window.draw(sprite);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y, fg_color);
     }else{
         float y;
         for(TSnapPoint& point : snap_points)
         {
-            y = rect.top + (rect.height - rect.width) * (point.value - min_value) / (max_value - min_value);
+            y = rect.position.y + (rect.size.y - rect.size.x) * (point.value - min_value) / (max_value - min_value);
 
-            sf::Sprite snap_sprite;
-            textureManager.setTexture(snap_sprite, "gui/widget/SliderTick.png");
-            snap_sprite.setOrigin(0, 0);
-            snap_sprite.setPosition(rect.left, y);
-            snap_sprite.setScale(rect.width / snap_sprite.getTextureRect().width, rect.width / snap_sprite.getTextureRect().width);
-            snap_sprite.setColor(selectColor(colorConfig.slider.background));
-            window.draw(snap_sprite);
+            renderer.drawSprite("gui/widget/SliderTick.png", glm::vec2(rect.position.x + rect.size.x * 0.5, y + rect.size.x * 0.5), rect.size.x, bg_color);
         }
-        y = rect.top + (rect.height - rect.width) * (value - min_value) / (max_value - min_value);
+        y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        sf::Sprite sprite;
-        textureManager.setTexture(sprite, "gui/widget/SliderKnob.png");
-        sprite.setOrigin(0, 0);
-        sprite.setPosition(rect.left, y);
-        sprite.setScale(rect.width / sprite.getTextureRect().width, rect.width / sprite.getTextureRect().width);
-        sprite.setColor(color);
-        window.draw(sprite);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5, y + rect.size.x * 0.5), rect.size.x, fg_color);
     }
 
     if (overlay_label)
@@ -187,19 +147,19 @@ void GuiSlider::onDraw(sf::RenderTarget& window)
     }
 }
 
-bool GuiSlider::onMouseDown(sf::Vector2f position)
+bool GuiSlider::onMouseDown(glm::vec2 position)
 {
     onMouseDrag(position);
     return true;
 }
 
-void GuiSlider::onMouseDrag(sf::Vector2f position)
+void GuiSlider::onMouseDrag(glm::vec2 position)
 {
     float new_value;
-    if (rect.width > rect.height)
-        new_value = (position.x - rect.left - (rect.height / 2.0)) / (rect.width - rect.height);
+    if (rect.size.x > rect.size.y)
+        new_value = (position.x - rect.position.x - (rect.size.y / 2.0)) / (rect.size.x - rect.size.y);
     else
-        new_value = (position.y - rect.top - (rect.width / 2.0)) / (rect.height - rect.width);
+        new_value = (position.y - rect.position.y - (rect.size.x / 2.0)) / (rect.size.y - rect.size.x);
     new_value = min_value + (max_value - min_value) * new_value;
     for(TSnapPoint& point : snap_points)
     {
@@ -229,7 +189,7 @@ void GuiSlider::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiSlider::onMouseUp(sf::Vector2f position)
+void GuiSlider::onMouseUp(glm::vec2 position)
 {
 }
 
@@ -258,47 +218,34 @@ GuiSlider* GuiSlider::addOverlay()
 }
 
 
-
-
-
-
-
-
-
-GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, sf::Vector2f min_value, sf::Vector2f max_value, sf::Vector2f start_value, func_t func)
+GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
 }
 
-void GuiSlider2D::onDraw(sf::RenderTarget& window)
+void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretchedHV(window, rect, 25.0f, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
+    renderer.drawStretchedHV(rect, 25.0f, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
 
     sf::Color color = selectColor(colorConfig.slider.forground);
 
-    float x = rect.left + (rect.width - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
-    float y = rect.top + (rect.height - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);
+    float x = rect.position.x + (rect.size.x - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
+    float y = rect.position.y + (rect.size.y - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);
 
-    sf::Sprite sprite;
-    textureManager.setTexture(sprite, "gui/widget/SliderKnob.png");
-    sprite.setOrigin(0, 0);
-    sprite.setPosition(x, y);
-    sprite.setScale(50.0 / sprite.getTextureRect().width, 50.0 / sprite.getTextureRect().width);
-    sprite.setColor(color);
-    window.draw(sprite);
+    renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + 25, y + 25), 50, color);
 }
 
-bool GuiSlider2D::onMouseDown(sf::Vector2f position)
+bool GuiSlider2D::onMouseDown(glm::vec2 position)
 {
     onMouseDrag(position);
     return true;
 }
 
-void GuiSlider2D::onMouseDrag(sf::Vector2f position)
+void GuiSlider2D::onMouseDrag(glm::vec2 position)
 {
-    sf::Vector2f new_value;
-    new_value.x = (position.x - rect.left - 25.0f) / (rect.width - 50.0f);
-    new_value.y = (position.y - rect.top - 25.0f) / (rect.height - 50.0f);
+    glm::vec2 new_value;
+    new_value.x = (position.x - rect.position.x - 25.0f) / (rect.size.x - 50.0f);
+    new_value.y = (position.y - rect.position.y - 25.0f) / (rect.size.y - 50.0f);
     new_value.x = min_value.x + (max_value.x - min_value.x) * new_value.x;
     new_value.y = min_value.y + (max_value.y - min_value.y) * new_value.y;
     for(TSnapPoint& point : snap_points)
@@ -338,7 +285,7 @@ void GuiSlider2D::onMouseDrag(sf::Vector2f position)
     }
 }
 
-void GuiSlider2D::onMouseUp(sf::Vector2f position)
+void GuiSlider2D::onMouseUp(glm::vec2 position)
 {
 }
 
@@ -348,7 +295,7 @@ GuiSlider2D* GuiSlider2D::clearSnapValues()
     return this;
 }
 
-GuiSlider2D* GuiSlider2D::addSnapValue(sf::Vector2f value, sf::Vector2f range)
+GuiSlider2D* GuiSlider2D::addSnapValue(glm::vec2 value, glm::vec2 range)
 {
     snap_points.emplace_back();
     snap_points.back().value = value;
@@ -356,7 +303,7 @@ GuiSlider2D* GuiSlider2D::addSnapValue(sf::Vector2f value, sf::Vector2f range)
     return this;
 }
 
-GuiSlider2D* GuiSlider2D::setValue(sf::Vector2f value)
+GuiSlider2D* GuiSlider2D::setValue(glm::vec2 value)
 {
     if (min_value.x < max_value.x)
     {
@@ -386,7 +333,7 @@ GuiSlider2D* GuiSlider2D::setValue(sf::Vector2f value)
     return this;
 }
 
-sf::Vector2f GuiSlider2D::getValue()
+glm::vec2 GuiSlider2D::getValue()
 {
     return value;
 }

@@ -68,7 +68,7 @@ class GuiViewport3D : public GuiElement
 public:
     GuiViewport3D(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiViewport3D* showCallsigns() { show_callsigns = true; return this; }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }

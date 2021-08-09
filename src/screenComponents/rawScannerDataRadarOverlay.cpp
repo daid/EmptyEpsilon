@@ -9,7 +9,7 @@ RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, stri
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
+void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
@@ -20,7 +20,7 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
     // Cap the number of signature points, which determines the raw data's
     // resolution.
     const int point_count = 512;
-    float radius = std::min(rect.width, rect.height) / 2.0f;
+    float radius = std::min(rect.size.x, rect.size.y) / 2.0f;
 
     RawRadarSignatureInfo signatures[point_count];
 
@@ -124,9 +124,9 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
     }
 
     // Create a vertex array containing each data point.
-    sf::VertexArray a_r(sf::LinesStrip, point_count+1);
-    sf::VertexArray a_g(sf::LinesStrip, point_count+1);
-    sf::VertexArray a_b(sf::LinesStrip, point_count+1);
+    std::vector<glm::vec2> a_r;
+    std::vector<glm::vec2> a_g;
+    std::vector<glm::vec2> a_b;
 
     // For each data point ...
     for(int n = 0; n < point_count; n++)
@@ -150,29 +150,26 @@ void RawScannerDataRadarOverlay::onDraw(sf::RenderTarget& window)
         b /= 5;
 
         // ... and add vectors for each point.
-        a_r[n].position.x = rect.left + rect.width / 2.0f;
-        a_r[n].position.y = rect.top + rect.height / 2.0f;
-        a_r[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.95f - r / 500));
-        a_r[n].color = sf::Color(255, 0, 0);
+        a_r.push_back(
+            glm::vec2(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f) +
+            vec2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.95f - r / 500)));
 
-        a_g[n].position.x = rect.left + rect.width / 2.0f;
-        a_g[n].position.y = rect.top + rect.height / 2.0f;
-        a_g[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.92f - g / 500));
-        a_g[n].color = sf::Color(0, 255, 0);
+        a_g.push_back(
+            glm::vec2(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f) +
+            vec2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.92f - g / 500)));
 
-        a_b[n].position.x = rect.left + rect.width / 2.0f;
-        a_b[n].position.y = rect.top + rect.height / 2.0f;
-        a_b[n].position += sf::vector2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.89f - b / 500));
-        a_b[n].color = sf::Color(0, 0, 255);
+        a_b.push_back(
+            glm::vec2(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f) +
+            vec2FromAngle(float(n) / float(point_count) * 360.0f - view_rotation) * (radius * (0.89f - b / 500)));
     }
 
     // Set a zero value at the "end" of the data point array.
-    a_r[point_count] = a_r[0];
-    a_g[point_count] = a_g[0];
-    a_b[point_count] = a_b[0];
+    a_r.push_back(a_r.front());
+    a_g.push_back(a_g.front());
+    a_b.push_back(a_b.front());
 
     // Draw each band as a line.
-    window.draw(a_r, sf::BlendAdd);
-    window.draw(a_g, sf::BlendAdd);
-    window.draw(a_b, sf::BlendAdd);
+    renderer.drawLineBlendAdd(a_r, sf::Color(255, 0, 0));
+    renderer.drawLineBlendAdd(a_g, sf::Color(0, 255, 0));
+    renderer.drawLineBlendAdd(a_b, sf::Color(0, 0, 255));
 }

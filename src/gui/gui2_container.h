@@ -4,6 +4,7 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 #include "gui/joystickConfig.h"
+#include "rect.h"
 
 class GuiElement;
 class HotkeyResult;
@@ -18,9 +19,9 @@ public:
     virtual ~GuiContainer();
 
 protected:
-    virtual void drawElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
-    virtual void drawDebugElements(sf::FloatRect parent_rect, sf::RenderTarget& window);
-    GuiElement* getClickElement(sf::Vector2f mouse_position);
+    virtual void drawElements(sp::Rect parent_rect, sp::RenderTarget& window);
+    virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
+    GuiElement* getClickElement(glm::vec2 mouse_position);
     void forwardKeypressToElements(const HotkeyResult& key);
     bool forwardJoystickAxisToElements(const AxisAction& axisAction);
 

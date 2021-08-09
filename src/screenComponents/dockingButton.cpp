@@ -32,7 +32,7 @@ void GuiDockingButton::onUpdate()
     setVisible(my_spaceship && my_spaceship->getCanDock());
 }
 
-void GuiDockingButton::onDraw(sf::RenderTarget& window)
+void GuiDockingButton::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
@@ -57,7 +57,7 @@ void GuiDockingButton::onDraw(sf::RenderTarget& window)
             break;
         }
     }
-    GuiButton::onDraw(window);
+    GuiButton::onDraw(renderer);
 }
 
 void GuiDockingButton::onHotkey(const HotkeyResult& key)

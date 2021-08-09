@@ -43,17 +43,11 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     launch_sound_played = false;
 }
 
-void MissileWeapon::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void MissileWeapon::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     if (long_range) return;
 
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, "radar/arrow.png");
-    object_sprite.setRotation(getRotation()-rotation);
-    object_sprite.setPosition(position);
-    object_sprite.setColor(data.color);
-    object_sprite.setScale(0.25 + 0.25 * category_modifier, 0.25 + 0.25 * category_modifier);
-    window.draw(object_sprite);
+    renderer.drawRotatedSprite("radar/arrow.png", position, 32 * (0.25 + 0.25 * category_modifier), getRotation()-rotation, data.color);
 }
 
 void MissileWeapon::update(float delta)

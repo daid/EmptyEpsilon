@@ -48,7 +48,7 @@ public:
         float h = 900 / row_count;
         for(string name : names)
         {
-            (new GuiRotatingModelView(this, "", ModelData::getModel(name)))->setPosition(x * w, y * h, ATopLeft)->setSize(w, h);
+            (new GuiRotatingModelView(this, "", ModelData::getModel(name)))->setPosition(x * w, y * h, sp::Alignment::TopLeft)->setSize(w, h);
             x++;
             if (x == col_count)
             {
@@ -69,13 +69,13 @@ MainMenu::MainMenu()
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
 
-    (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, ATopCenter)->setSize(logo_size_x, logo_size_y);
-    (new GuiLabel(this, "VERSION", tr("Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, ATopCenter)->setSize(0, 20);
+    (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, sp::Alignment::TopCenter)->setSize(logo_size_x, logo_size_y);
+    (new GuiLabel(this, "VERSION", tr("Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, sp::Alignment::TopCenter)->setSize(0, 20);
 
-    (new GuiLabel(this, "", tr("Your name:"), 30))->setAlignment(ACenterLeft)->setPosition(sf::Vector2f(50, -400), ABottomLeft)->setSize(300, 50);
+    (new GuiLabel(this, "", tr("Your name:"), 30))->setAlignment(sp::Alignment::CenterLeft)->setPosition({50, -400}, sp::Alignment::BottomLeft)->setSize(300, 50);
     (new GuiTextEntry(this, "USERNAME", PreferencesManager::get("username")))->callback([](string text) {
         PreferencesManager::set("username", text);
-    })->setPosition(sf::Vector2f(50, -350), ABottomLeft)->setSize(300, 50);
+    })->setPosition({50, -350}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_SERVER", tr("Start server"), [this]() {
         new EpsilonServer();
@@ -84,26 +84,26 @@ MainMenu::MainMenu()
             new ServerCreationScreen();
             destroy();
         }
-    }))->setPosition(sf::Vector2f(50, -230), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({50, -230}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_CLIENT", tr("Start client"), [this]() {
         new ServerBrowserMenu(ServerBrowserMenu::Local);
         destroy();
-    }))->setPosition(sf::Vector2f(50, -170), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({50, -170}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "OPEN_OPTIONS", tr("Options"), [this]() {
         new OptionsMenu();
         destroy();
-    }))->setPosition(sf::Vector2f(50, -110), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({50, -110}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "QUIT", tr("Quit"), []() {
         engine->shutdown();
-    }))->setPosition(sf::Vector2f(50, -50), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({50, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_TUTORIAL", tr("Tutorials"), [this]() {
         new TutorialMenu();
         destroy();
-    }))->setPosition(sf::Vector2f(370, -50), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({370, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     if (InputHandler::touch_screen)
     {
@@ -111,49 +111,49 @@ MainMenu::MainMenu()
             destroy();
             new MouseCalibrator("");
         });
-        touch_calib->setPosition(sf::Vector2f(-50, -50), ABottomRight)->setSize(200, 100);
+        touch_calib->setPosition({-50, -50}, sp::Alignment::BottomRight)->setSize(200, 100);
         (new GuiLabel(touch_calib, "TOUCH_CALIB_LABEL", tr("Calibrate\nTouchscreen"), 30)
-        )->setPosition(0, -15, ACenter);
+        )->setPosition(0, -15, sp::Alignment::Center);
     }
 
     float y = 100;
-    (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 25); y += 25;
-    (new GuiLabel(this, "CREDITS1", "Programming:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS2", "Daid", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS3", "Nallath", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 25); y += 25;
+    (new GuiLabel(this, "CREDITS1", "Programming:", 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS2", "Daid", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS3", "Nallath", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
-    (new GuiLabel(this, "CREDITS1", "Graphics:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS1", "Graphics:", 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
-    (new GuiLabel(this, "CREDITS4", "Music:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS5", "Matthew Pablo", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS6", "Alexandr Zhelanov", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS7", "Joe Baxter-Webb", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS8", "neocrey", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS9", "FoxSynergy", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS4", "Music:", 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS5", "Matthew Pablo", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS6", "Alexandr Zhelanov", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS7", "Joe Baxter-Webb", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS8", "neocrey", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS9", "FoxSynergy", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
-    (new GuiLabel(this, "CREDITS10", "Models:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS11", "Angryfly (turbosquid.com)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS12", "SolCommand (http://solcommand.blogspot.com/)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS10", "Models:", 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS11", "Angryfly (turbosquid.com)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS12", "SolCommand (http://solcommand.blogspot.com/)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
-    (new GuiLabel(this, "CREDITS13", "Crew sprites:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS14", "Tokka (http://bekeen.de/)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS13", "Crew sprites:", 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS14", "Tokka (http://bekeen.de/)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
-    (new GuiLabel(this, "CREDITS15", "Special thanks:", 20))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 20); y += 20;
-    (new GuiLabel(this, "CREDITS16", "Marty Lewis (MadKat)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS17", "Serge Wroclawski", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS18", "Dennis Shelton", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS19", "VolgClawtooth", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS20", "Daniel Loftis", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS21", "David Concepcion", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS22", "Philippe Bruylant", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS23", "Ralf Leichter", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS24", "Lee McDonough (Flea)", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
-    (new GuiLabel(this, "CREDITS25", "Mickael Houet", 18))->setAlignment(ACenterRight)->setPosition(-50, y, ATopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS15", "Special thanks:", 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
+    (new GuiLabel(this, "CREDITS16", "Marty Lewis (MadKat)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS17", "Serge Wroclawski", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS18", "Dennis Shelton", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS19", "VolgClawtooth", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS20", "Daniel Loftis", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS21", "David Concepcion", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS22", "Philippe Bruylant", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS23", "Ralf Leichter", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS24", "Lee McDonough (Flea)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS25", "Mickael Houet", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
 
     if (PreferencesManager::get("instance_name") != "")
     {
-        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(0, 18);
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(0, 18);
     }
 
 #ifdef DEBUG
@@ -167,11 +167,11 @@ MainMenu::MainMenu()
             destroy();
             new GameMasterScreen();
         }
-    }))->setPosition(sf::Vector2f(370, -150), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({370, -150}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "", "MODELS!", [this]() {
         destroy();
         new DebugAllModelView();
-    }))->setPosition(sf::Vector2f(370, -200), ABottomLeft)->setSize(300, 50);
+    }))->setPosition({370, -200}, sp::Alignment::BottomLeft)->setSize(300, 50);
 #endif
 }

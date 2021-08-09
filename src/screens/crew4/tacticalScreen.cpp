@@ -22,14 +22,14 @@
 
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
+#include "gui/gui2_image.h"
 #include "gui/gui2_rotationdial.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
 {
     // Render the radar shadow and background decorations.
-    background_gradient = new GuiOverlay(this, "BACKGROUND_GRADIENT", sf::Color::White);
-    background_gradient->setTextureCenter("gui/background/gradientSingle.png");
+    (new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientSingle.png"))->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
 
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", sf::Color::White);
     background_crosses->setTextureTiled("gui/background/crosses.png");
@@ -39,7 +39,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Short-range tactical radar with a 5U range.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
-    radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 750);
+    radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 750);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
 
     // Control targeting and piloting with radar interactions.
@@ -63,7 +63,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
     GuiAutoLayout* stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stats->setPosition(20, 100, ATopLeft)->setSize(240, 160);
+    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160);
 
     // Ship statistics in the top left corner.
     energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");
@@ -77,41 +77,41 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Weapon tube loading controls in the bottom left corner.
     tube_controls = new GuiMissileTubeControls(this, "MISSILE_TUBES");
-    tube_controls->setPosition(20, -20, ABottomLeft);
+    tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
     // Beam controls beneath the radar.
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
         GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(0, -20, ABottomCenter)->setSize(500, 50);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, ABottomLeft)->setSize(80, 50);
-        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, ABottomLeft)->setSize(132, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setPosition(0, 0, ABottomLeft)->setSize(212, 50);
-        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(288, 50);
+        beam_info_box->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(500, 50);
+        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(80, 50);
+        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, sp::Alignment::BottomLeft)->setSize(132, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
+        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(288, 50);
     }
 
     // Weapon tube locking, and manual aiming controls.
     missile_aim = new AimLock(this, "MISSILE_AIM", radar, -90, 360 - 90, 0, [this](float value){
         tube_controls->setMissileTargetAngle(value);
     });
-    missile_aim->hide()->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
+    missile_aim->hide()->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 20, ATopCenter)->setSize(110, 50);
+    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(110, 50);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
-    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, ABottomRight)->setSize(200, 150);
+    (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    engine_layout->setPosition(-20, -80, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
+    engine_layout->setPosition(-20, -80, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 300);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
-    (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
+    (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
 
-    (new GuiCustomShipFunctions(this, tacticalOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, tacticalOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
-void TacticalScreen::onDraw(sf::RenderTarget& window)
+void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
@@ -138,7 +138,7 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
 
         targets.set(my_spaceship->getTarget());
     }
-    GuiOverlay::onDraw(window);
+    GuiOverlay::onDraw(renderer);
 }
 
 bool TacticalScreen::onJoystickAxis(const AxisAction& axisAction){

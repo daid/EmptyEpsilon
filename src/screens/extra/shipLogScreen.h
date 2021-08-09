@@ -14,7 +14,7 @@ private:
 public:
     ShipLogScreen(GuiContainer* owner);
 
-    void onDraw(sf::RenderTarget& window) override;
+    void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//SHIP_LOG_SCREEN_H

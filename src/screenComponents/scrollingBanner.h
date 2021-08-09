@@ -8,7 +8,7 @@ class GuiScrollingBanner : public GuiElement
 public:
     GuiScrollingBanner(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 private:
     static constexpr float scroll_speed_per_second = 150.0f;
     static constexpr float black_area = 200.0f;

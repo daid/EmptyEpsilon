@@ -8,7 +8,7 @@
 ShipsLog::ShipsLog(GuiContainer* owner)
 : GuiElement(owner, "")
 {
-    setPosition(0, 0, ABottomCenter);
+    setPosition(0, 0, sp::Alignment::BottomCenter);
     setSize(GuiElement::GuiSizeMax, 50);
     setMargins(20, 0);
 
@@ -19,9 +19,9 @@ ShipsLog::ShipsLog(GuiContainer* owner)
     log_text->setMargins(15, 15, 15, 0)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void ShipsLog::onDraw(sf::RenderTarget& window)
+void ShipsLog::onDraw(sp::RenderTarget& renderer)
 {
-    drawStretchedHV(window, sf::FloatRect(rect.left, rect.top, rect.width, rect.height + 100), 25.0f, "gui/widget/PanelBackground.png");
+    renderer.drawStretchedHV(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y + 100), 25.0f, "gui/widget/PanelBackground.png");
 
     if (!my_spaceship)
         return;
@@ -74,7 +74,7 @@ void ShipsLog::onDraw(sf::RenderTarget& window)
     }
 }
 
-bool ShipsLog::onMouseDown(sf::Vector2f position)
+bool ShipsLog::onMouseDown(glm::vec2 position)
 {
     open = !open;
     if (open)

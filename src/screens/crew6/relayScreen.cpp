@@ -27,7 +27,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
-    radar->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
         [this](glm::vec2 position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
@@ -76,7 +76,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         radar->setViewPosition(my_spaceship->getPosition());
 
     GuiAutoLayout* sidebar = new GuiAutoLayout(this, "SIDE_BAR", GuiAutoLayout::LayoutVerticalTopToBottom);
-    sidebar->setPosition(-20, 150, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    sidebar->setPosition(-20, 150, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     info_callsign = new GuiKeyValueDisplay(sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
     info_callsign->setSize(GuiElement::GuiSizeMax, 30);
@@ -88,13 +88,13 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1.0f)}}));
         radar->setDistance(value);
     });
-    zoom_slider->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
+    zoom_slider->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiAutoLayout(this, "BUTTONS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    option_buttons->setPosition(20, 50, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
+    option_buttons->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
     // Open comms button.
     if (allow_comms == true)
@@ -157,7 +157,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     // Bottom layout.
     GuiAutoLayout* layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalBottomToTop);
-    layout->setPosition(-20, -70, ABottomRight)->setSize(300, GuiElement::GuiSizeMax);
+    layout->setPosition(-20, -70, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Alert level buttons.
     alert_level_button = new GuiToggleButton(layout, "", tr("Alert level"), [this](bool value)
@@ -183,7 +183,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         alert_level_buttons.push_back(alert_button);
     }
 
-    (new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 240, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, relayOfficer, ""))->setPosition(-20, 240, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     hacking_dialog = new GuiHackingDialog(this, "");
 
@@ -194,7 +194,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     }
 }
 
-void RelayScreen::onDraw(sf::RenderTarget& window)
+void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
@@ -212,7 +212,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     }
     ///!
 
-    GuiOverlay::onDraw(window);
+    GuiOverlay::onDraw(renderer);
 
     info_faction->setValue("-");
 

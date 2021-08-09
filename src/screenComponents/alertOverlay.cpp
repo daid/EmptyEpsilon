@@ -2,46 +2,39 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 
+
 AlertLevelOverlay::AlertLevelOverlay(GuiContainer* owner)
 : GuiElement(owner, "")
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
-void AlertLevelOverlay::onDraw(sf::RenderTarget& window)
+void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
 
     sf::Color color;
-    string text;
-    float text_size;
+    //string text;
+    //float text_size;
 
     switch(my_spaceship->alert_level)
     {
     case AL_RedAlert:
         color = sf::Color(255, 0, 0);
-        text = "";
-        text_size = 70;
+        //text = "";
+        //text_size = 70;
         break;
     case AL_YellowAlert:
         color = sf::Color(255, 255, 0);
-        text = "";
-        text_size = 60;
+        //text = "";
+        //text_size = 60;
         break;
     case AL_Normal:
     default:
         return;
     }
 
-    sf::Sprite alert;
-    textureManager.setTexture(alert, "gui/alertOverlay.png");
-    alert.setColor(color);
-    alert.setPosition(getCenterPoint());
-    window.draw(alert);
-    sf::Text alert_text(text, *main_font, text_size);
-    alert_text.setColor(color);
-    alert_text.setOrigin(sf::Vector2f(alert_text.getLocalBounds().width / 2.0f, alert_text.getLocalBounds().height / 2.0f + alert_text.getLocalBounds().top));
-    alert_text.setPosition(getCenterPoint() - sf::Vector2f(0, 300));
-    window.draw(alert_text);
+    renderer.drawSprite("gui/alertOverlay.png", getCenterPoint(), 772, color);
+    //renderer.drawText(sp::Rect(getCenterPoint() - glm::vec2(0, 300), glm::vec2(0, 0)), text, sp::Alignment::Center, text_size, main_font, color);
 }

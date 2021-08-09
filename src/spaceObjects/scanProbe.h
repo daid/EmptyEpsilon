@@ -32,8 +32,8 @@ public:
     virtual void update(float delta) override;
     virtual bool canBeTargetedBy(P<SpaceObject> other) override;
     virtual void takeDamage(float damage_amount, DamageInfo info) override;
-    virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
-    virtual void drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     bool hasArrived() { return has_arrived; }
     void setTarget(glm::vec2 target) { target_position = target; }

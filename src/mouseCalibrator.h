@@ -20,7 +20,7 @@ private:
     GuiPanel* screen_box[3];
     GuiImage* test_box;
     GuiButton* ready_button;
-    sf::Vector2f mouse_point[3];
+    glm::vec2 mouse_point[3];
 public:
     MouseCalibrator(string filename);
 

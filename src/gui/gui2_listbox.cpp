@@ -1,7 +1,7 @@
 #include "gui2_listbox.h"
 
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
-: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(ACenter)
+: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center)
 {
     selected_color = sf::Color::White;
     unselected_color = sf::Color(192, 192, 192, 255);
@@ -9,7 +9,7 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
         entriesChanged();
     });
-    scroll->setPosition(0, 0, ATopRight)->hide();
+    scroll->setPosition(0, 0, sp::Alignment::TopRight)->hide();
 }
 
 GuiListbox* GuiListbox::setTextSize(float size)
@@ -30,7 +30,7 @@ GuiListbox* GuiListbox::scrollTo(int index)
     return this;
 }
 
-void GuiListbox::onDraw(sf::RenderTarget& window)
+void GuiListbox::onDraw(sp::RenderTarget& renderer)
 {
     if (last_rect != rect)
         entriesChanged();
@@ -40,15 +40,15 @@ void GuiListbox::entriesChanged()
 {
     last_rect = rect;
 
-    int max_buttons = rect.height / button_height;
-    float button_width = rect.width - button_height;
+    int max_buttons = rect.size.y / button_height;
+    float button_width = rect.size.x - button_height;
 
-    scroll->setSize(button_height, rect.height);
+    scroll->setSize(button_height, rect.size.y);
     scroll->setValueSize(max_buttons);
     scroll->setRange(0, entries.size());
     if ((int)entries.size() <= max_buttons)
     {
-        button_width = rect.width;
+        button_width = rect.size.x;
         scroll->hide();
     }
     else
@@ -63,7 +63,7 @@ void GuiListbox::entriesChanged()
             setSelectionIndex(offset + scroll->getValue());
             callback();
         });
-        button->setPosition(0, offset * button_height, ATopLeft);
+        button->setPosition(0, offset * button_height, sp::Alignment::TopLeft);
         button->setActive(false);
         buttons.push_back(button);
     }
@@ -84,11 +84,11 @@ void GuiListbox::entriesChanged()
     }
 }
 
-bool GuiListbox::onMouseDown(sf::Vector2f position)
+bool GuiListbox::onMouseDown(glm::vec2 position)
 {
     return false;
 }
 
-void GuiListbox::onMouseUp(sf::Vector2f position)
+void GuiListbox::onMouseUp(glm::vec2 position)
 {
 }

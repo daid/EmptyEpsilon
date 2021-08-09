@@ -5,20 +5,7 @@ GuiImage::GuiImage(GuiContainer* owner, string id, string texture_name)
 {
 }
 
-void GuiImage::onDraw(sf::RenderTarget& window)
+void GuiImage::onDraw(sp::RenderTarget& renderer)
 {
-    sf::Sprite image;
-    textureManager.setTexture(image, texture_name);
-    float f = std::min(
-        rect.height / float(image.getTextureRect().height),
-        rect.width / float(image.getTextureRect().width)
-    );
-    if (!scale_up) {
-        f = std::min(f, 1.0f);
-    }
-    image.setPosition(rect.left + f * image.getTextureRect().width / 2.0, rect.top + f * image.getTextureRect().height / 2.0);
-    image.setScale(f, f);
-    image.setRotation(angle);
-    image.setColor(color);
-    window.draw(image);
+    renderer.drawRotatedSprite(texture_name, getCenterPoint(), std::min(rect.size.x, rect.size.y), angle, color);
 }

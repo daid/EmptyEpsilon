@@ -44,7 +44,7 @@ public:
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
 #endif
-    virtual void drawShieldsOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, float sprite_scale, bool show_levels);
+    virtual void drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;

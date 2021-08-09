@@ -94,30 +94,24 @@ void Artifact::draw3D()
 #endif//FEATURE_3D_RENDERING
 }
 
-void Artifact::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void Artifact::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Sprite object_sprite;
-    textureManager.setTexture(object_sprite, radar_trace_icon);
-    object_sprite.setRotation(getRotation());
-    object_sprite.setPosition(position);
-    object_sprite.setColor(radar_trace_color);
     // radar trace scaling, via script or automatically
     float size;
     if (radar_trace_scale > 0)
     {
         if (long_range)
-            size =radar_trace_scale * 0.7;
+            size = radar_trace_scale * 0.7;
         else
             size = radar_trace_scale;
     }
     else
     {
-        size = getRadius() * scale / object_sprite.getTextureRect().width * 2;
+        size = getRadius() * scale / 16;
         if (size < 0.2)
             size = 0.2;
     }
-    object_sprite.setScale(size, size);
-    window.draw(object_sprite);
+    renderer.drawRotatedSprite(radar_trace_icon, position, size * 32.0, getRotation() - rotation, radar_trace_color);
 }
 
 void Artifact::collide(Collisionable* target, float force)

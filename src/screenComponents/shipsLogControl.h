@@ -11,8 +11,8 @@ class ShipsLog : public GuiElement
 public:
     ShipsLog(GuiContainer* owner);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual bool onMouseDown(sf::Vector2f position) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
 private:
     bool open;
     GuiAdvancedScrollText* log_text;

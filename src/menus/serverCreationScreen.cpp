@@ -43,9 +43,9 @@ ServerCreationScreen::ServerCreationScreen()
     GuiElement* right_container = new GuiElement(container, "");
 
     GuiElement* left_panel = new GuiAutoLayout(left_container, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_panel->setPosition(0, 20, ATopCenter)->setSize(550, GuiElement::GuiSizeMax);
+    left_panel->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(550, GuiElement::GuiSizeMax);
     GuiElement* right_panel = new GuiAutoLayout(right_container, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_panel->setPosition(0, 20, ATopCenter)->setSize(550, GuiElement::GuiSizeMax);
+    right_panel->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(550, GuiElement::GuiSizeMax);
 
     // Left column contents.
     // General section.
@@ -54,25 +54,25 @@ ServerCreationScreen::ServerCreationScreen()
     // Server name row.
     GuiElement* row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "NAME_LABEL", tr("Server name: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "NAME_LABEL", tr("Server name: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiTextEntry(row, "SERVER_NAME", game_server->getServerName()))->callback([](string text){game_server->setServerName(text);})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Server password row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "PASSWORD_LABEL", tr("Server password: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiTextEntry(row, "SERVER_PASSWORD", ""))->callback([](string text){game_server->setPassword(text.upper());})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // GM control code row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "GM_CONTROL_CODE_LABEL", tr("GM control code: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiTextEntry(row, "GM_CONTROL_CODE", ""))->callback([](string text){gameGlobalInfo->gm_control_code = text.upper();})->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Server IP row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "IP_LABEL", tr("Server IPs: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "IP_LABEL", tr("Server IPs: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     auto ips = new GuiSelector(row, "IP", [](int index, string value){});
     ips->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     ips->setTextSize(20);
@@ -86,7 +86,7 @@ ServerCreationScreen::ServerCreationScreen()
     // LAN/Internet row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("Server visibility: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("Server visibility: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) {
         if (index == 1)
             game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
@@ -100,7 +100,7 @@ ServerCreationScreen::ServerCreationScreen()
     // Warp/Jump drive row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "WARP_JUMP_LABEL", tr("Warp/Jump: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "WARP_JUMP_LABEL", tr("Warp/Jump: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "WARP_JUMP_SELECT", [](int index, string value) {
         gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(index);
     }))->setOptions({tr("warp/jump", "Ship default"), tr("warp/jump", "Warp drive"), tr("warp/jump", "Jump drive"), tr("warp/jump", "Both"), tr("warp/jump", "Neither")})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -113,10 +113,10 @@ ServerCreationScreen::ServerCreationScreen()
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiToggleButton(row, "MAIN_TACTICAL_TOGGLE", tr("Tactical radar"), [](bool value) {
         gameGlobalInfo->allow_main_screen_tactical_radar = value == 1;
-    }))->setValue(gameGlobalInfo->allow_main_screen_tactical_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
+    }))->setValue(gameGlobalInfo->allow_main_screen_tactical_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterLeft);
     (new GuiToggleButton(row, "MAIN_LONG_RANGE_TOGGLE", tr("Long range radar"), [](bool value) {
         gameGlobalInfo->allow_main_screen_long_range_radar = value == 1;
-    }))->setValue(gameGlobalInfo->allow_main_screen_long_range_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
+    }))->setValue(gameGlobalInfo->allow_main_screen_long_range_radar)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterRight);
 
     // Game rules section.
     (new GuiLabel(left_panel, "GAME_RULES_LABEL", tr("Game rules"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
@@ -124,7 +124,7 @@ ServerCreationScreen::ServerCreationScreen()
     // Science scan complexity selector.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "GAME_SCANNING_COMPLEXITY_LABEL", tr("Scan complexity: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "GAME_SCANNING_COMPLEXITY_LABEL", tr("Scan complexity: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "GAME_SCANNING_COMPLEXITY", [](int index, string value) {
         gameGlobalInfo->scanning_complexity = EScanningComplexity(index);
     }))->setOptions({tr("scanning", "None (delay)"), tr("scanning", "Simple"), tr("scanning", "Normal"), tr("scanning", "Advanced")})->setSelectionIndex((int)gameGlobalInfo->scanning_complexity)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -132,7 +132,7 @@ ServerCreationScreen::ServerCreationScreen()
     // Hacking difficulty selector.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "GAME_HACKING_DIFFICULTY", [](int index, string value) {
         gameGlobalInfo->hacking_difficulty = index;
     }))->setOptions({tr("hacking", "Simple"), tr("hacking", "Normal"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -140,7 +140,7 @@ ServerCreationScreen::ServerCreationScreen()
     // Hacking games selector.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", tr("Hacking type: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", tr("Hacking type: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "GAME_HACKING_GAME", [](int index, string value) {
         gameGlobalInfo->hacking_games = EHackingGames(index);
     }))->setOptions({tr("hacking", "Mine"), tr("hacking", "Lights"), tr("hacking", "All")})->setSelectionIndex((int)gameGlobalInfo->hacking_games)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -150,11 +150,11 @@ ServerCreationScreen::ServerCreationScreen()
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiToggleButton(row, "GAME_FREQUENCIES_TOGGLE", tr("Beam/shield frequencies"), [](bool value) {
         gameGlobalInfo->use_beam_shield_frequencies = value == 1;
-    }))->setValue(gameGlobalInfo->use_beam_shield_frequencies)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
+    }))->setValue(gameGlobalInfo->use_beam_shield_frequencies)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterLeft);
 
     (new GuiToggleButton(row, "GAME_SYS_DAMAGE_TOGGLE", tr("Per-system damage"), [](bool value) {
         gameGlobalInfo->use_system_damage = value == 1;
-    }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterRight);
+    }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterRight);
 
     // Right column contents.
     // Scenario section.
@@ -177,7 +177,7 @@ ServerCreationScreen::ServerCreationScreen()
 
     row = new GuiAutoLayout(variation_container, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "VARIATION_LABEL", tr("Variation: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "VARIATION_LABEL", tr("Variation: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     variation_selection = new GuiSelector(row, "VARIATION_SELECT", [this](int index, string value) {
         gameGlobalInfo->variation = variation_names_list.at(index);
         variation_description->setText(variation_descriptions_list.at(index));
@@ -195,12 +195,12 @@ ServerCreationScreen::ServerCreationScreen()
         destroy();
         disconnectFromServer();
         returnToMainMenu();
-    }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+    }))->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Start server button.
     (new GuiButton(right_container, "START_SERVER", tr("Start scenario"), [this]() {
         startScenario();
-    }))->setPosition(0, -50, ABottomCenter)->setSize(300, 50);
+    }))->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Fetch and sort all Lua files starting with "scenario_".
     std::vector<string> scenario_filenames = findResources("scenario_*.lua");

@@ -18,7 +18,7 @@ WindowScreen::WindowScreen(float angle, uint8_t flags)
       viewport->showHeadings();
     if (flags & flag_spacedust)
       viewport->showSpacedust();
-    viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     new GuiShipDestroyedPopup(this);
 

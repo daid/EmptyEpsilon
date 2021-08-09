@@ -15,7 +15,7 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
             setSelectionIndex(getSelectionIndex() - 1);
         callback();
     });
-    left->setPosition(0, 0, ATopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
+    left->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
     right = new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
         soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() >= (int)entries.size() - 1)
@@ -24,13 +24,13 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
             setSelectionIndex(getSelectionIndex() + 1);
         callback();
     });
-    right->setPosition(0, 0, ATopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
+    right->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
 
     popup = new GuiPanel(getTopLevelContainer(), "");
     popup->hide();
 }
 
-void GuiSelector::onDraw(sf::RenderTarget& window)
+void GuiSelector::onDraw(sp::RenderTarget& renderer)
 {
     left->setEnable(enabled);
     right->setEnable(enabled);
@@ -39,19 +39,19 @@ void GuiSelector::onDraw(sf::RenderTarget& window)
     if (entries.size() < 1 || !enabled)
         color = sf::Color(128, 128, 128, 255);
 
-    drawStretched(window, rect, "gui/widget/SelectorBackground.png", color);
+    renderer.drawStretched(rect, "gui/widget/SelectorBackground.png", color);
     if (selection_index >= 0 && selection_index < (int)entries.size())
-        drawText(window, rect, entries[selection_index].name, ACenter, text_size, main_font, color);
+        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, main_font, color);
 
     if (!focus)
         popup->hide();
-    float top = rect.top;
+    float top = rect.position.y;
     float height = entries.size() * 50;
     if (selection_index >= 0)
         top -= selection_index * 50;
     top = std::max(0.0f, top);
     top = std::min(900.0f - height, top);
-    popup->setPosition(rect.left, top, ATopLeft)->setSize(rect.width, height);
+    popup->setPosition(rect.position.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
@@ -60,12 +60,12 @@ GuiSelector* GuiSelector::setTextSize(float size)
     return this;
 }
 
-bool GuiSelector::onMouseDown(sf::Vector2f position)
+bool GuiSelector::onMouseDown(glm::vec2 position)
 {
     return true;
 }
 
-void GuiSelector::onMouseUp(sf::Vector2f position)
+void GuiSelector::onMouseUp(glm::vec2 position)
 {
     if (rect.contains(position))
     {
@@ -85,7 +85,7 @@ void GuiSelector::onMouseUp(sf::Vector2f position)
                 popup_buttons[n]->setText(entries[n].name);
             }
             popup_buttons[n]->setActive(int(n) == selection_index);
-            popup_buttons[n]->setPosition(0, n * 50, ATopLeft);
+            popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
         }
         for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
         {

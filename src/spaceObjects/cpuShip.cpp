@@ -293,11 +293,11 @@ void CpuShip::orderDock(P<SpaceObject> object)
     this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
-void CpuShip::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, float rotation, bool long_range)
+void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    SpaceShip::drawOnGMRadar(window, position, scale, rotation, long_range);
+    SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
     if (game_server && ai)
-        ai->drawOnGMRadar(window, position, scale);
+        ai->drawOnGMRadar(renderer, position, scale);
 }
 
 std::unordered_map<string, string> CpuShip::getGMInfo()

@@ -14,7 +14,7 @@ TopDownScreen::TopDownScreen()
     // Create a full-screen viewport and draw callsigns on ships.
     viewport = new GuiViewport3D(this, "VIEWPORT");
     viewport->showCallsigns();
-    viewport->setPosition(0, 0, ATopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Set the camera's vertical position/zoom.
     camera_position.z = 7000.0;
@@ -25,11 +25,11 @@ TopDownScreen::TopDownScreen()
         if (ship)
             target = ship;
     });
-    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock onto a player ship.
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [this](bool value) {});
-    camera_lock_toggle->setPosition(20, -20, ABottomLeft)->setSize(300, 50)->hide();
+    camera_lock_toggle->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 

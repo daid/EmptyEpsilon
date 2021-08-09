@@ -23,7 +23,7 @@ public:
 
     GuiScrollText* setScrollbarWidth(float width);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 };
 
 #endif//GUI_SCROLLTEXT_H

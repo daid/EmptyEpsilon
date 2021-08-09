@@ -15,7 +15,7 @@ class GuiSignalQualityIndicator : public GuiElement
 public:
     GuiSignalQualityIndicator(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     void setNoiseError(float f) { error_noise = std::min(fabsf(f), 1.0f); }
     void setPeriodError(float f) { error_period = std::min(fabsf(f), 1.0f); }

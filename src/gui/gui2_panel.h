@@ -8,8 +8,8 @@ class GuiPanel : public GuiElement
 public:
     GuiPanel(GuiContainer* owner, string id);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
-    virtual bool onMouseDown(sf::Vector2f position) override;
+    virtual void onDraw(sp::RenderTarget& window) override;
+    virtual bool onMouseDown(glm::vec2 position) override;
 };
 
 #endif//GUI2_PANEL_H

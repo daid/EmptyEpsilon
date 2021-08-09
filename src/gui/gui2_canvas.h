@@ -9,18 +9,18 @@ class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandl
 private:
     GuiElement* click_element;
     GuiElement* focus_element;
-    sf::Vector2f previous_mouse_position;
+    glm::vec2 previous_mouse_position;
     bool enable_debug_rendering;
 public:
     GuiCanvas();
     virtual ~GuiCanvas();
 
-    virtual void render(sf::RenderTarget& window) override;
+    virtual void render(sp::RenderTarget& window) override;
     virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode) override;
     virtual void handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position) override;
     virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
 
-    virtual void onClick(sf::Vector2f mouse_position);
+    virtual void onClick(glm::vec2 mouse_position);
     virtual void onHotkey(const HotkeyResult& key);
     virtual void onKey(sf::Event::KeyEvent key, int unicode);
 

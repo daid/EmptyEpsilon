@@ -21,42 +21,42 @@ public:
 
     GuiShipInternalView* setShip(P<SpaceShip> ship);
 
-    virtual void onDraw(sf::RenderTarget& window) override;
+    virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 class GuiShipRoomContainer : public GuiElement
 {
 public:
-    typedef std::function<void(sf::Vector2i room_position)> func_t;
+    typedef std::function<void(glm::ivec2 room_position)> func_t;
 private:
     float room_size;
     func_t func;
 public:
     GuiShipRoomContainer(GuiContainer* owner, string id, float room_size, func_t func);
 
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseUp(glm::vec2 position) override;
 };
 
 class GuiShipRoom : public GuiElement
 {
 public:
-    typedef std::function<void(sf::Vector2i room_position)> func_t;
+    typedef std::function<void(glm::ivec2 room_position)> func_t;
 private:
     P<SpaceShip> ship;
     ESystem system;
     float room_size;
     func_t func;
 public:
-    GuiShipRoom(GuiContainer* owner, string id, float room_size, sf::Vector2i room_dimensions, func_t func);
+    GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::ivec2 room_dimensions, func_t func);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiShipRoom* setSystem(P<SpaceShip> ship, ESystem system) { this->ship = ship; this->system = system; return this; }
 
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseUp(glm::vec2 position) override;
 };
 
 class GuiShipDoor : public GuiElement
@@ -70,12 +70,12 @@ private:
 public:
     GuiShipDoor(GuiContainer* owner, string id, func_t func);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target);
 
     GuiShipDoor* setHorizontal() { horizontal = true; return this; }
 
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseUp(glm::vec2 position) override;
 };
 
 class GuiShipCrew : public GuiElement
@@ -89,10 +89,10 @@ private:
 public:
     GuiShipCrew(GuiContainer* owner, string id, P<RepairCrew> crew, func_t func);
 
-    virtual void onDraw(sf::RenderTarget& window);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
-    virtual bool onMouseDown(sf::Vector2f position);
-    virtual void onMouseUp(sf::Vector2f position);
+    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual void onMouseUp(glm::vec2 position) override;
 };
 
 #endif//SHIP_INTERNAL_VIEW_H
