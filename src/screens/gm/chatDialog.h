@@ -27,8 +27,6 @@ private:
     void disableComms(string title);
 
     void onClose() override;
-
-    void drawLine(sf::RenderTarget& window, sf::Vector2f target);
 };
 
 #endif//CHAT_DIALOG_H

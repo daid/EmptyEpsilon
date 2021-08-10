@@ -61,25 +61,25 @@ void CinematicViewScreen::update(float delta)
     // TODO: Add mouselook.
     if (InputHandler::keyboardIsDown(sf::Keyboard::W))
     {
-        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.x;
         camera_position.y += xy_vector.y;
     }
     if (InputHandler::keyboardIsDown(sf::Keyboard::S))
     {
-        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.x;
         camera_position.y -= xy_vector.y;
     }
     if (InputHandler::keyboardIsDown(sf::Keyboard::A))
     {
-        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.y;
         camera_position.y -= xy_vector.x;
     }
     if (InputHandler::keyboardIsDown(sf::Keyboard::D))
     {
-        sf::Vector2f xy_vector = sf::vector2FromAngle(camera_yaw) * delta * 100.0f;
+        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.y;
         camera_position.y += xy_vector.x;
     }

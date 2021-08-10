@@ -24,7 +24,7 @@ class MiniGame : sp::NonCopyable
 
     virtual float getProgress();
     virtual bool isGameComplete();
-    virtual sf::Vector2f getBoardSize();
+    virtual glm::vec2 getBoardSize();
 
     virtual void reset();
     virtual void disable();

@@ -25,7 +25,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
     minigame_box->setPosition(0, 0, sp::Alignment::Center);
     game = std::make_shared<MiniGame>(minigame_box, this, 2);
-    sf::Vector2f board_size = game->getBoardSize();
+    auto board_size = game->getBoardSize();
     minigame_box->setSize(board_size.x + 100, board_size.y + 150);
     status_label = new GuiLabel(minigame_box, "", "...", 25);
     status_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 30);
@@ -160,7 +160,7 @@ void GuiHackingDialog::getNewGame() {
     default:
       irandom(0,1) ? game = std::make_shared<LightsOut>(minigame_box, this, difficulty) : game = std::make_shared<MineSweeper>(minigame_box, this, difficulty);
     }
-    sf::Vector2f board_size = game->getBoardSize();
+    glm::vec2 board_size = game->getBoardSize();
 
     minigame_box->setSize(std::max(board_size.x + 100, 500.f), std::max(board_size.y + 150, 450.f));
     progress_bar->setSize(50, game->getBoardSize().y);

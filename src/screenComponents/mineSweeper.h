@@ -15,7 +15,7 @@ class MineSweeper : public MiniGame {
     virtual void reset() override;
     virtual void disable() override;
     virtual float getProgress() override;
-    virtual sf::Vector2f getBoardSize() override;
+    virtual glm::vec2 getBoardSize() override;
   protected:
     virtual void gameComplete() override;
   private:

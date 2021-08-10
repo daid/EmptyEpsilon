@@ -66,9 +66,9 @@ float LightsOut::getProgress()
 }
 
 
-sf::Vector2f LightsOut::getBoardSize()
+glm::vec2 LightsOut::getBoardSize()
 {
-  return sf::Vector2f(grid_size*50, grid_size*50);
+  return glm::vec2(grid_size*50, grid_size*50);
 }
 
 

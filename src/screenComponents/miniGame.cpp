@@ -50,7 +50,7 @@ bool MiniGame::isGameComplete()
     return game_complete;
 }
 
-sf::Vector2f MiniGame::getBoardSize()
+glm::vec2 MiniGame::getBoardSize()
 {
-    return sf::Vector2f(500,500);
+    return glm::vec2(500,500);
 }

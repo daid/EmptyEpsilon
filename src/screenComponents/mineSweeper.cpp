@@ -80,9 +80,9 @@ void MineSweeper::gameComplete()
     game_complete = true;
 }
 
-sf::Vector2f MineSweeper::getBoardSize()
+glm::vec2 MineSweeper::getBoardSize()
 {
-    return sf::Vector2f(field_size*50, field_size*50);
+    return glm::vec2(field_size*50, field_size*50);
 }
 
 void MineSweeper::onFieldClick(int x, int y)
