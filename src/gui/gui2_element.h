@@ -11,11 +11,11 @@
 class GuiElement : public GuiContainer
 {
 private:
-    glm::vec2 position;
-    glm::vec2 size;
+    glm::vec2 position{0, 0};
+    glm::vec2 size{0, 0};
     struct Margins {
         float left, top, right, bottom;
-    } margins;
+    } margins {0, 0, 0, 0};
     sp::Alignment position_alignment;
     bool destroyed;
 protected:
