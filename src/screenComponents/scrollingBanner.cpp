@@ -33,7 +33,7 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
         a[3].texCoords = sf::Vector2f(texture_size.x / 2, texture_size.y);
 
         for(int n=0; n<4; n++)
-            a[n].color = sf::Color::White;
+            a[n].color = glm::u8vec4{255,255,255,255};
 
         window.draw(a, texture_ptr);
     }

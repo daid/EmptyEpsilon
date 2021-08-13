@@ -20,7 +20,7 @@
 
 ScreenMainScreen::ScreenMainScreen()
 {
-    new GuiOverlay(this, "", sf::Color::Black);
+    new GuiOverlay(this, "", glm::u8vec4(0,0,0,255));
 
     viewport = new GuiViewportMainScreen(this, "VIEWPORT");
     viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

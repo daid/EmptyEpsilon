@@ -170,7 +170,7 @@ void ElectricExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 
     if (long_range)
         return;
 
-    renderer.fillCircle(position, size * scale, sf::Color(0, 0, 255, 64 * (lifetime / maxLifetime)));
+    renderer.fillCircle(position, size * scale, glm::u8vec4(0, 0, 255, 64 * (lifetime / maxLifetime)));
 }
 
 void ElectricExplosionEffect::update(float delta)

@@ -91,9 +91,9 @@ protected:
     */
     [[nodiscard]]
     bool adjustRenderTexture(sf::RenderTexture& texture);
-    void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color = sf::Color::White, const sf::RenderStates& states = sf::RenderStates::Default);
+    void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, glm::u8vec4 color = glm::u8vec4{255,255,255,255}, const sf::RenderStates& states = sf::RenderStates::Default);
 
-    sf::Color selectColor(ColorSet& color_set) const;
+    glm::u8vec4 selectColor(const ColorSet& color_set) const;
 
     class LineWrapResult
     {

@@ -9,7 +9,7 @@ private:
     float min_value;
     float max_value;
     float value;
-    sf::Color color;
+    glm::u8vec4 color;
     bool drawBackground;
 
     string text;
@@ -21,7 +21,7 @@ public:
     GuiProgressbar* setValue(float value);
     GuiProgressbar* setRange(float min_value, float max_value);
     GuiProgressbar* setText(string text);
-    GuiProgressbar* setColor(sf::Color color);
+    GuiProgressbar* setColor(glm::u8vec4 color);
     GuiProgressbar* setDrawBackground(bool drawBackground);
 };
 

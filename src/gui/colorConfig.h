@@ -1,16 +1,16 @@
 #ifndef COLOR_CONFIG_H
 #define COLOR_CONFIG_H
 
-#include <SFML/Graphics/Color.hpp>
+#include <glm/gtc/type_precision.hpp>
 
 class ColorSet
 {
 public:
-    sf::Color normal;
-    sf::Color hover;
-    sf::Color focus;
-    sf::Color disabled;
-    sf::Color active;
+    glm::u8vec4 normal;
+    glm::u8vec4 hover;
+    glm::u8vec4 focus;
+    glm::u8vec4 disabled;
+    glm::u8vec4 active;
 };
 class WidgetColorSet
 {
@@ -22,14 +22,14 @@ public:
 class ColorConfig
 {
 public:
-    sf::Color background;
-    sf::Color radar_outline;
+    glm::u8vec4 background;
+    glm::u8vec4 radar_outline;
 
-    sf::Color log_generic;
-    sf::Color log_send;
-    sf::Color log_receive_friendly;
-    sf::Color log_receive_enemy;
-    sf::Color log_receive_neutral;
+    glm::u8vec4 log_generic;
+    glm::u8vec4 log_send;
+    glm::u8vec4 log_receive_friendly;
+    glm::u8vec4 log_receive_enemy;
+    glm::u8vec4 log_receive_neutral;
 
     WidgetColorSet button;
     WidgetColorSet button_red;
@@ -40,16 +40,16 @@ public:
     WidgetColorSet slider;
     WidgetColorSet textbox;
 
-    sf::Color overlay_damaged;
-    sf::Color overlay_jammed;
-    sf::Color overlay_hacked;
-    sf::Color overlay_no_power;
-    sf::Color overlay_low_energy;
-    sf::Color overlay_low_power;
-    sf::Color overlay_overheating;
+    glm::u8vec4 overlay_damaged;
+    glm::u8vec4 overlay_jammed;
+    glm::u8vec4 overlay_hacked;
+    glm::u8vec4 overlay_no_power;
+    glm::u8vec4 overlay_low_energy;
+    glm::u8vec4 overlay_low_power;
+    glm::u8vec4 overlay_overheating;
 
-    sf::Color ship_waypoint_background;
-    sf::Color ship_waypoint_text;
+    glm::u8vec4 ship_waypoint_background;
+    glm::u8vec4 ship_waypoint_text;
 
     void load();
 };

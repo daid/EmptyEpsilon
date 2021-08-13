@@ -1,7 +1,7 @@
 #include "engine.h"
 #include "gui2_overlay.h"
 
-GuiOverlay::GuiOverlay(GuiContainer* owner, string id, sf::Color color)
+GuiOverlay::GuiOverlay(GuiContainer* owner, string id, glm::u8vec4 color)
 : GuiElement(owner, id), color(color)
 {
     texture_mode = TM_None;
@@ -24,7 +24,7 @@ void GuiOverlay::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-GuiOverlay* GuiOverlay::setColor(sf::Color color)
+GuiOverlay* GuiOverlay::setColor(glm::u8vec4 color)
 {
     this->color = color;
     return this;

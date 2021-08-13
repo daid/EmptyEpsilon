@@ -83,10 +83,10 @@ void GameMasterChatDialog::onDraw(sp::RenderTarget& renderer)
             notification = true;
         }
         if (player->getCommsTarget())
-            renderer.drawLine(rect.center(), radar->worldToScreen(player->getCommsTarget()->getPosition()), sf::Color(128, 255, 128, 128));
+            renderer.drawLine(rect.center(), radar->worldToScreen(player->getCommsTarget()->getPosition()), glm::u8vec4(128, 255, 128, 128));
         break;
     }
-    renderer.drawLine(rect.center(), radar->worldToScreen(player->getPosition()), sf::Color(128, 255, 128, 128));
+    renderer.drawLine(rect.center(), radar->worldToScreen(player->getPosition()), glm::u8vec4(128, 255, 128, 128));
 }
 
 void GameMasterChatDialog::disableComms(string title)

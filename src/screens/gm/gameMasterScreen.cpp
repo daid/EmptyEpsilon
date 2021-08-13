@@ -32,7 +32,7 @@ GameMasterScreen::GameMasterScreen()
         [this](glm::vec2 position) { this->onMouseDrag(position); },
         [this](glm::vec2 position) { this->onMouseUp(position); }
     );
-    box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", sf::Color(255, 255, 255, 32));
+    box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", glm::u8vec4(255, 255, 255, 32));
     box_selection_overlay->hide();
 
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [](bool value) {

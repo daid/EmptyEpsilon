@@ -204,7 +204,7 @@ void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
 void ScanProbe::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     // All probes use the same green icon on radar.
-    renderer.drawSprite("radar/probe.png", position, 10, sf::Color(96, 192, 128));
+    renderer.drawSprite("radar/probe.png", position, 10, glm::u8vec4(96, 192, 128, 255));
 }
 
 void ScanProbe::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -215,7 +215,7 @@ void ScanProbe::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, fl
     {
         // Draw a circle on the GM radar representing the probe's fixed 5U
         // radar radius.
-        renderer.drawCircleOutline(position, 5000*scale, 3.0, sf::Color(255, 255, 255, 64));
+        renderer.drawCircleOutline(position, 5000*scale, 3.0, glm::u8vec4(255, 255, 255, 64));
     }
 }
 

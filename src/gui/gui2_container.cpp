@@ -54,13 +54,13 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
     {
         if (element->visible)
         {
-            renderer.fillRect(element->rect, sf::Color(255, 255, 255, 5));
-            //TODO_GFX: renderer.outlineRect(element->rect, sf::Color::Magenta);
+            renderer.fillRect(element->rect, glm::u8vec4(255, 255, 255, 5));
+            //TODO_GFX: renderer.outlineRect(element->rect, glm::u8vec4(255, 0, 255, 255));
 
             element->drawDebugElements(element->rect, renderer);
 
             if (element->rect.contains(mouse_position))
-                renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, main_font, sf::Color::Red);
+                renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, main_font, glm::u8vec4(255, 0, 0, 255));
         }
     }
 }

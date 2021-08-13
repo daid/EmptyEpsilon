@@ -105,7 +105,7 @@ void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float s
 
 void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, sf::Color(255, 255, 255, 64));
+    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, glm::u8vec4(255, 255, 255, 64));
 }
 
 bool Nebula::inNebula(glm::vec2 position)

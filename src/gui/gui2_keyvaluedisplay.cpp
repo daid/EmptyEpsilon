@@ -2,7 +2,7 @@
 #include "gui2_keyvaluedisplay.h"
 
 GuiKeyValueDisplay::GuiKeyValueDisplay(GuiContainer* owner, const string& id, float div_distance, const string& key, const string& value)
-: GuiElement(owner, id), key(key), value(value), text_size(20.f), div_distance(div_distance), color(sf::Color::White)
+: GuiElement(owner, id), key(key), value(value), text_size(20.f), div_distance(div_distance), color(glm::u8vec4{255,255,255,255})
 {
 }
 
@@ -47,7 +47,7 @@ GuiKeyValueDisplay* GuiKeyValueDisplay::setTextSize(float text_size)
     return this;
 }
 
-GuiKeyValueDisplay* GuiKeyValueDisplay::setColor(sf::Color color)
+GuiKeyValueDisplay* GuiKeyValueDisplay::setColor(glm::u8vec4 color)
 {
     this->color = color;
     return this;

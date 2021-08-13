@@ -6,7 +6,7 @@
 class GuiImage : public GuiElement
 {
 private:
-    sf::Color color;
+    glm::u8vec4 color{255,255,255,255};
     string texture_name;
     bool scale_up = true;
     float angle;
@@ -19,7 +19,7 @@ public:
         this->scale_up = doesItScaleUp;
         return this;
     }
-    GuiImage* setColor(sf::Color color) { this->color = color; return this; }
+    GuiImage* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiImage* setAngle(float angle) { this->angle = angle; return this; }
 };
 

@@ -46,7 +46,7 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     new LocalOnlyGame();
 
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;

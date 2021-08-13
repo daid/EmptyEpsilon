@@ -13,7 +13,7 @@ GuiShipDestroyedPopup::GuiShipDestroyedPopup(GuiCanvas* owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    ship_destroyed_overlay = new GuiOverlay(this, "SHIP_DESTROYED", sf::Color(0, 0, 0, 128));
+    ship_destroyed_overlay = new GuiOverlay(this, "SHIP_DESTROYED", glm::u8vec4(0, 0, 0, 128));
     (new GuiPanel(ship_destroyed_overlay, "SHIP_DESTROYED_FRAME"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     (new GuiLabel(ship_destroyed_overlay, "SHIP_DESTROYED_TEXT", tr("SHIP DESTROYED!"), 70))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     (new GuiButton(ship_destroyed_overlay, "SHIP_DESTROYED_BUTTON", tr("shipdestroyed", "Return"), [this]() {

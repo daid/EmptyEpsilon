@@ -32,9 +32,9 @@ SupplyDrop::SupplyDrop()
 
 void SupplyDrop::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    sf::Color color(100, 200, 255);
+    glm::u8vec4 color(100, 200, 255, 255);
     if (my_spaceship && !my_spaceship->isFriendly(this))
-        color = sf::Color(200, 50, 50);
+        color = glm::u8vec4(200, 50, 50, 255);
     renderer.drawSprite("radar/blip.png", position, 8, color);
 }
 

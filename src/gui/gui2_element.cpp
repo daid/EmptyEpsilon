@@ -311,13 +311,13 @@ bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
 #endif
 }
 
-void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, sf::Color color, const sf::RenderStates& states)
+void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, glm::u8vec4 color, const sf::RenderStates& states)
 {
     texture.display();
 
     sf::Sprite sprite(texture.getTexture());
 
-    sprite.setColor(color);
+    sprite.setColor(sf::Color(color.r, color.g, color.b, color.a));
     sprite.setPosition(rect.position.x, rect.position.y);
 
     const auto& texture_size = texture.getSize();
@@ -327,7 +327,7 @@ void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget&
     window.draw(sprite, states);
 }
 
-sf::Color GuiElement::selectColor(ColorSet& color_set) const
+glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
 {
     if (!enabled)
         return color_set.disabled;

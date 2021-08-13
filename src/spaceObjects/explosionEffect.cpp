@@ -188,7 +188,7 @@ void ExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position
     if (long_range)
         return;
 
-    renderer.fillCircle(position, size * scale, sf::Color(255, 0, 0, 64 * (lifetime / maxLifetime)));
+    renderer.fillCircle(position, size * scale, glm::u8vec4(255, 0, 0, 64 * (lifetime / maxLifetime)));
 }
 
 void ExplosionEffect::update(float delta)

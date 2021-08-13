@@ -13,8 +13,8 @@ protected:
     float text_size;
     float button_height;
     sp::Alignment text_alignment;
-    sf::Color selected_color;
-    sf::Color unselected_color;
+    glm::u8vec4 selected_color;
+    glm::u8vec4 unselected_color;
     GuiScrollbar* scroll;
     sp::Rect last_rect;
 public:

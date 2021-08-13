@@ -29,7 +29,7 @@ Zone::Zone()
 : SpaceObject(1, "Zone")
 {
     has_weight = false;
-    color = sf::Color(255, 255, 255, 0);
+    color = glm::u8vec4(255, 255, 255, 0);
 
     registerMemberReplication(&outline);
     registerMemberReplication(&triangles);
@@ -44,17 +44,17 @@ void Zone::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float sca
     std::vector<glm::vec2> triangle_points;
     for(auto p : triangles)
         triangle_points.push_back(position + rotateVec2(p, -rotation));
-    renderer.drawTriangleStrip(triangle_points, sf::Color(color.r, color.g, color.b, 64));
+    renderer.drawTriangleStrip(triangle_points, glm::u8vec4(color.r, color.g, color.b, 64));
     std::vector<glm::vec2> outline_points;
     for(auto p : outline)
         outline_points.push_back(position + rotateVec2(p, -rotation));
     outline_points.push_back(position + rotateVec2(outline[0], -rotation));
-    renderer.drawLine(outline_points, sf::Color(color.r, color.g, color.b, 128));
+    renderer.drawLine(outline_points, glm::u8vec4(color.r, color.g, color.b, 128));
 
     if (label.length() > 0)
     {
         int font_size = getRadius() * scale / label.length();
-        renderer.drawText(sp::Rect(position.x, position.y, 0, 0), label, sp::Alignment::Center, font_size, main_font, sf::Color(color.r, color.g, color.b, 128));
+        renderer.drawText(sp::Rect(position.x, position.y, 0, 0), label, sp::Alignment::Center, font_size, main_font, glm::u8vec4(color.r, color.g, color.b, 128));
     }
 }
 
@@ -70,7 +70,7 @@ void Zone::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float s
 
 void Zone::setColor(int r, int g, int b)
 {
-    color = sf::Color(r, g, b);
+    color = glm::u8vec4(r, g, b, 255);
 }
 
 void Zone::setPoints(std::vector<glm::vec2> points)

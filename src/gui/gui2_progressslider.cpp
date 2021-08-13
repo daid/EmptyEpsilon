@@ -1,7 +1,7 @@
 #include "gui2_progressslider.h"
 
 GuiProgressSlider::GuiProgressSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiBasicSlider(owner, id, min_value, max_value, start_value, func), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
+: GuiBasicSlider(owner, id, min_value, max_value, start_value, func), color(glm::u8vec4(255, 255, 255, 64)), drawBackground(true)
 {
 }
 
@@ -33,7 +33,7 @@ GuiProgressSlider* GuiProgressSlider::setText(string text)
     return this;
 }
 
-GuiProgressSlider* GuiProgressSlider::setColor(sf::Color color)
+GuiProgressSlider* GuiProgressSlider::setColor(glm::u8vec4 color)
 {
     this->color = color;
     return this;

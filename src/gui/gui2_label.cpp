@@ -1,7 +1,7 @@
 #include "gui2_label.h"
 
 GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
-: GuiElement(owner, id), text(text), text_size(text_size), text_color(sf::Color::White), text_alignment(sp::Alignment::Center), background(false), bold(false), vertical(false)
+: GuiElement(owner, id), text(text), text_size(text_size), text_color(glm::u8vec4{255,255,255,255}), text_alignment(sp::Alignment::Center), background(false), bold(false), vertical(false)
 {
 }
 
@@ -9,7 +9,7 @@ void GuiLabel::onDraw(sp::RenderTarget& renderer)
 {
     if (background)
         renderer.drawStretched(rect, "gui/widget/LabelBackground.png", selectColor(colorConfig.label.background));
-    sf::Color color = selectColor(colorConfig.label.forground);
+    glm::u8vec4 color = selectColor(colorConfig.label.forground);
     sf::Font* font = main_font;
     if (bold)
         font = bold_font;

@@ -29,9 +29,9 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                 float h = (rect.size.y - 50) * f;
                 sp::Rect bar_rect(x, rect.position.y + rect.size.y - 10 - h, w * 0.8, h);
                 if (more_damage_is_positive)
-                    renderer.fillRect(bar_rect, sf::Color(255 * (1.0 - f), 255 * f, 0));
+                    renderer.fillRect(bar_rect, glm::u8vec4(255 * (1.0 - f), 255 * f, 0, 255));
                 else
-                    renderer.fillRect(bar_rect, sf::Color(255 * f, 255 * (1.0 - f), 0));
+                    renderer.fillRect(bar_rect, glm::u8vec4(255 * f, 255 * (1.0 - f), 0, 255));
 
                 if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
                 {

@@ -169,7 +169,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     a_b.push_back(a_b.front());
 
     // Draw each band as a line.
-    renderer.drawLineBlendAdd(a_r, sf::Color(255, 0, 0));
-    renderer.drawLineBlendAdd(a_g, sf::Color(0, 255, 0));
-    renderer.drawLineBlendAdd(a_b, sf::Color(0, 0, 255));
+    renderer.drawLineBlendAdd(a_r, glm::u8vec4(255, 0, 0, 255));
+    renderer.drawLineBlendAdd(a_g, glm::u8vec4(0, 255, 0, 255));
+    renderer.drawLineBlendAdd(a_b, glm::u8vec4(0, 0, 255, 255));
 }

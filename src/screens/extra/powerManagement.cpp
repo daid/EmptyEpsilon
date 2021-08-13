@@ -107,9 +107,9 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
             float heat = my_spaceship->systems[n].heat_level;
             float power = my_spaceship->systems[n].power_level;
             float coolant = my_spaceship->systems[n].coolant_level;
-            systems[n].heat_bar->setValue(heat)->setColor(sf::Color(128, 128 * (1.0 - heat), 0));
-            systems[n].power_bar->setValue(power)->setColor(sf::Color(255, 255, 0));
-            systems[n].coolant_bar->setValue(coolant)->setColor(sf::Color(0,128,255));
+            systems[n].heat_bar->setValue(heat)->setColor(glm::u8vec4(128, 128 * (1.0 - heat), 0, 255));
+            systems[n].power_bar->setValue(power)->setColor(glm::u8vec4(255, 255, 0, 255));
+            systems[n].coolant_bar->setValue(coolant)->setColor(glm::u8vec4(0, 128, 255, 255));
         }
     }
 }

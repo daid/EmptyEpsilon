@@ -12,7 +12,7 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 {
     renderer.drawStretched(rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
 
-    sf::Color color = selectColor(colorConfig.slider.forground);
+    glm::u8vec4 color = selectColor(colorConfig.slider.forground);
 
     if (rect.size.x > rect.size.y)
     {
@@ -227,7 +227,7 @@ void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 {
     renderer.drawStretchedHV(rect, 25.0f, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
 
-    sf::Color color = selectColor(colorConfig.slider.forground);
+    glm::u8vec4 color = selectColor(colorConfig.slider.forground);
 
     float x = rect.position.x + (rect.size.x - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
     float y = rect.position.y + (rect.size.y - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);

@@ -46,7 +46,7 @@ private:
     string planet_texture;
     string cloud_texture;
     string atmosphere_texture;
-    sf::Color atmosphere_color;
+    glm::u8vec4 atmosphere_color;
     float distance_from_movement_plane;
 
     float axial_rotation_time;

@@ -8,7 +8,7 @@ class GuiLabel : public GuiElement
 protected:
     string text;
     float text_size;
-    sf::Color text_color;
+    glm::u8vec4 text_color{255,255,255,255};
     sp::Alignment text_alignment;
     bool background;
     bool bold;

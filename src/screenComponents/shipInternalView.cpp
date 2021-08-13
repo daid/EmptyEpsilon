@@ -170,7 +170,7 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
     float f = 1.0;
     if (ship && ship->hasSystem(system))
         f = std::max(0.0f, ship->systems[system].health);
-    renderer.draw9Cut(rect, "room_background", sf::Color(255, 255 * f, 255 * f, 255));
+    renderer.draw9Cut(rect, "room_background", glm::u8vec4(255, 255 * f, 255 * f, 255));
 
     if (system != SYS_None && ship && ship->hasSystem(system))
     {

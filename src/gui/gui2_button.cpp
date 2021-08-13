@@ -12,8 +12,8 @@ GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 
 void GuiButton::onDraw(sp::RenderTarget& renderer)
 {
-    sf::Color color = selectColor(color_set.background);
-    sf::Color text_color = selectColor(color_set.forground);
+    glm::u8vec4 color = selectColor(color_set.background);
+    glm::u8vec4 text_color = selectColor(color_set.forground);
 
     if (!enabled)
         renderer.drawStretched(rect, "gui/widget/ButtonBackground.disabled.png", color);

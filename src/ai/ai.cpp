@@ -35,14 +35,14 @@ void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, 
     if (target)
     {
         auto v = target->getPosition() - world_position;
-        renderer.drawLine(draw_position, draw_position + v * scale, sf::Color(255, 128, 128, 64));
+        renderer.drawLine(draw_position, draw_position + v * scale, glm::u8vec4(255, 128, 128, 64));
     }
 
     auto p0 = draw_position;
     for(unsigned int n=0; n<pathPlanner.route.size(); n++)
     {
         auto p1 = draw_position + (pathPlanner.route[n] - world_position) * scale;
-        renderer.drawLine(p0, p1, sf::Color(255, 255, 255, 64));
+        renderer.drawLine(p0, p1, glm::u8vec4(255, 255, 255, 64));
         p0 = p1;
     }
 }

@@ -13,7 +13,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     if (!my_spaceship)
         return;
 
-    sf::Color color;
+    glm::u8vec4 color;
     string display_text;
 
     float power = my_spaceship->systems[system].power_level;
@@ -133,7 +133,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, sf::Color color)
+void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, glm::u8vec4 color)
 {
     renderer.drawSprite(icon_name, icon_position, icon_size);
     icon_position += icon_offset;

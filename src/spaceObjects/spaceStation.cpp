@@ -36,15 +36,15 @@ void SpaceStation::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, f
         drawShieldsOnRadar(renderer, position, scale, rotation, sprite_scale, true);
     }
     sprite_scale = std::max(0.15f, sprite_scale);
-    sf::Color color = factionInfo[getFactionId()]->gm_color;
+    glm::u8vec4 color = factionInfo[getFactionId()]->gm_color;
     if (my_spaceship)
     {
         if (isEnemy(my_spaceship))
-            color = sf::Color::Red;
+            color = glm::u8vec4(255, 0, 0, 255);
         else if (isFriendly(my_spaceship))
-            color = sf::Color(128, 255, 128);
+            color = glm::u8vec4(128, 255, 128, 255);
         else
-            color = sf::Color(128, 128, 255);
+            color = glm::u8vec4(128, 128, 255, 255);
     }
     renderer.drawSprite(radar_trace, position, sprite_scale * 32, color);
 }

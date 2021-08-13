@@ -63,7 +63,7 @@ Artifact::Artifact()
   allow_pickup(false),
   radar_trace_icon("radar/blip.png"),
   radar_trace_scale(0),
-  radar_trace_color(sf::Color(255, 255, 255))
+  radar_trace_color(glm::u8vec4(255, 255, 255, 255))
 {
     setRotation(random(0, 360));
     model_info.setData(current_model_data_name);

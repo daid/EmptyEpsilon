@@ -15,10 +15,10 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    shield_hit_overlay = new GuiOverlay(this, "SHIELD_HIT", sf::Color(64, 64, 128, 0));
-    hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", sf::Color(255, 0, 0, 0));
-    shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
-    pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
+    shield_hit_overlay = new GuiOverlay(this, "SHIELD_HIT", glm::u8vec4(64, 64, 128, 0));
+    hull_hit_overlay = new GuiOverlay(this, "HULL_HIT", glm::u8vec4(255, 0, 0, 0));
+    shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", glm::u8vec4(255, 0, 0, 0));
+    pause_overlay = new GuiOverlay(this, "PAUSE", glm::u8vec4(0, 0, 0, 128));
     (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     (new GuiLabel(pause_overlay, "PAUSE_LABEL", tr("Game Paused"), 70))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     if (game_server)
@@ -28,7 +28,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
         }))->setPosition(0, 75, sp::Alignment::Center)->setSize(500, 50);
     }
 
-    victory_overlay = new GuiOverlay(this, "VICTORY", sf::Color(0, 0, 0, 128));
+    victory_overlay = new GuiOverlay(this, "VICTORY", glm::u8vec4(0, 0, 0, 128));
     (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
     victory_label = new GuiLabel(victory_overlay, "VICTORY_LABEL", "...", 70);
     victory_label->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
@@ -148,15 +148,15 @@ bool GuiIndicatorOverlays::onMouseDown(glm::vec2 position)
 
 void GuiIndicatorOverlays::drawAlertLevel(sp::RenderTarget& renderer)
 {
-    sf::Color multiply_color = sf::Color::White;
+    glm::u8vec4 multiply_color{255,255,255,255};
 
     switch(my_spaceship->alert_level)
     {
     case AL_RedAlert:
-        multiply_color = sf::Color(255, 192, 192, 255);
+        multiply_color = glm::u8vec4(255, 192, 192, 255);
         break;
     case AL_YellowAlert:
-        multiply_color = sf::Color(255, 255, 192, 255);
+        multiply_color = glm::u8vec4(255, 255, 192, 255);
         break;
     case AL_Normal:
     default:

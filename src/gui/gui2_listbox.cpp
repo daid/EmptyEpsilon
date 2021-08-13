@@ -3,8 +3,8 @@
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center)
 {
-    selected_color = sf::Color::White;
-    unselected_color = sf::Color(192, 192, 192, 255);
+    selected_color = glm::u8vec4{255,255,255,255};
+    unselected_color = glm::u8vec4(192, 192, 192, 255);
 
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {
         entriesChanged();

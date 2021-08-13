@@ -9,7 +9,7 @@ class GuiProgressSlider : public GuiBasicSlider
 public:
     typedef std::function<void(float value)> func_t;
 private:
-    sf::Color color;
+    glm::u8vec4 color;
     bool drawBackground;
 
     string text;
@@ -22,7 +22,7 @@ public:
     virtual void onMouseUp(glm::vec2 position);
 
     GuiProgressSlider* setText(string text);
-    GuiProgressSlider* setColor(sf::Color color);
+    GuiProgressSlider* setColor(glm::u8vec4 color);
     GuiProgressSlider* setDrawBackground(bool drawBackground);
 };
 

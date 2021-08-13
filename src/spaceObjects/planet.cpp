@@ -129,7 +129,7 @@ Planet::Planet()
     planet_texture = "";
     cloud_texture = "";
     atmosphere_texture = "";
-    atmosphere_color = sf::Color(0, 0, 0);
+    atmosphere_color = glm::u8vec4(0, 0, 0, 0);
     atmosphere_size = 0;
     distance_from_movement_plane = 0;
     axial_rotation_time = 0.0;
@@ -355,13 +355,13 @@ void Planet::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float s
 {
     if (collision_size > 0)
     {
-        renderer.fillCircle(position, collision_size * scale, sf::Color(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, 128));
+        renderer.fillCircle(position, collision_size * scale, glm::u8vec4(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, 128));
     }
 }
 
 void Planet::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawCircleOutline(position, planet_size * scale, 3, sf::Color(255, 255, 255, 128));
+    renderer.drawCircleOutline(position, planet_size * scale, 3, glm::u8vec4(255, 255, 255, 128));
 }
 
 void Planet::collide(Collisionable* target, float collision_force)

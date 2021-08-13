@@ -28,7 +28,7 @@
 ShipSelectionScreen::ShipSelectionScreen()
 {
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // Easiest place to ensure that positional sound is disabled on console
     // views. As soon as a 3D view is rendered, positional sound is re-enabled.
@@ -243,7 +243,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     updateCrewTypeOptions();
 
     // Control code entry dialog.
-    password_overlay = new GuiOverlay(this, "PASSWORD_OVERLAY", sf::Color::Black - sf::Color(0, 0, 0, 192));
+    password_overlay = new GuiOverlay(this, "PASSWORD_OVERLAY", glm::u8vec4(0,0,0,64));
     password_overlay->hide();
     password_entry_box = new GuiPanel(password_overlay, "PASSWORD_ENTRY_BOX");
     password_entry_box->setPosition(0, 350, sp::Alignment::TopCenter)->setSize(600, 200);

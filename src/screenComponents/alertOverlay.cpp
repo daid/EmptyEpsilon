@@ -14,19 +14,19 @@ void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
     if (!my_spaceship)
         return;
 
-    sf::Color color;
+    glm::u8vec4 color;
     //string text;
     //float text_size;
 
     switch(my_spaceship->alert_level)
     {
     case AL_RedAlert:
-        color = sf::Color(255, 0, 0);
+        color = glm::u8vec4(255, 0, 0, 255);
         //text = "";
         //text_size = 70;
         break;
     case AL_YellowAlert:
-        color = sf::Color(255, 255, 0);
+        color = glm::u8vec4(255, 255, 0, 255);
         //text = "";
         //text_size = 60;
         break;

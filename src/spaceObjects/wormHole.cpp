@@ -109,9 +109,9 @@ void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float
 void WormHole::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     auto offset = target_position - getPosition();
-    renderer.drawLine(position, position + glm::vec2(offset.x, offset.y) * scale, sf::Color(255, 255, 255, 32));
+    renderer.drawLine(position, position + glm::vec2(offset.x, offset.y) * scale, glm::u8vec4(255, 255, 255, 32));
 
-    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, sf::Color(255, 255, 255, 32));
+    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
 }
 
 

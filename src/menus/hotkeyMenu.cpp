@@ -16,7 +16,7 @@ HotkeyMenu::HotkeyMenu()
     P<WindowManager> windowManager = engine->getObject("windowManager");
 
     new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // TODO: Figure out how to make this an AutoLayout.
     container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");
@@ -190,7 +190,7 @@ void HotkeyMenu::saveHotkeys()
 
     if (category == "basic")
     {
-        error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", sf::Color::Black);
+        error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", glm::u8vec4(0, 0, 0, 255));
         error_window->setSize(500, 200)->setPosition(0, -100, sp::Alignment::Center)->setVisible(true);
 
         // TODO: If basic hotkeys can't be modified, why are they editable in this menu?
@@ -218,7 +218,7 @@ void HotkeyMenu::saveHotkeys()
             text_entries[i]->setText("");
 
             // Throw an error modal.
-            error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", sf::Color::Black);
+            error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", glm::u8vec4(0,0,0,255));
             error_window->setSize(500, 200)->setPosition(0, -100, sp::Alignment::Center)->setVisible(true);
 
             (new GuiLabel(error_window, "ERROR_LABEL", text.append(": This key can't be used"), 30))->setSize(300, 50)->setPosition(0, 50, sp::Alignment::TopCenter);

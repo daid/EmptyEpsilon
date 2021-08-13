@@ -22,7 +22,7 @@ public:
     //virtual string getExportLine() override { return "Zone():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 
 private:
-    sf::Color color;
+    glm::u8vec4 color{255,255,255,255};
     std::vector<glm::vec2> outline;
     std::vector<glm::vec2> triangles;
     string label;

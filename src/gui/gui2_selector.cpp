@@ -35,9 +35,9 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     left->setEnable(enabled);
     right->setEnable(enabled);
 
-    sf::Color color = sf::Color::White;
+    glm::u8vec4 color = glm::u8vec4{255,255,255,255};
     if (entries.size() < 1 || !enabled)
-        color = sf::Color(128, 128, 128, 255);
+        color = glm::u8vec4(128, 128, 128, 255);
 
     renderer.drawStretched(rect, "gui/widget/SelectorBackground.png", color);
     if (selection_index >= 0 && selection_index < (int)entries.size())

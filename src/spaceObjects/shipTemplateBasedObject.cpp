@@ -148,15 +148,15 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
         return;
     if (shield_count == 1)
     {
-        sf::Color color = sf::Color(255, 255, 255, 64);
+        glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
         if (show_levels)
         {
             float level = shield_level[0] / shield_max[0];
-            color = Tween<sf::Color>::linear(level, 1.0f, 0.0f, sf::Color(128, 128, 255, 128), sf::Color(255, 0, 0, 64));
+            color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
         }
         if (shield_hit_effect[0] > 0.0)
         {
-            color = Tween<sf::Color>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
+            color = Tween<glm::u8vec4>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
         }
         renderer.drawSprite("shield_circle.png", position, sprite_scale * 0.25f * 1.5f * 256.0f, color);
     }else if (shield_count > 1) {
@@ -165,15 +165,15 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
 
         for(int n=0; n<shield_count; n++)
         {
-            sf::Color color = sf::Color(255, 255, 255, 64);
+            glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
             if (show_levels)
             {
                 float level = shield_level[n] / shield_max[n];
-                color = Tween<sf::Color>::linear(level, 1.0f, 0.0f, sf::Color(128, 128, 255, 128), sf::Color(255, 0, 0, 64));
+                color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
             }
             if (shield_hit_effect[n] > 0.0)
             {
-                color = Tween<sf::Color>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, sf::Color(255, 0, 0, 128));
+                color = Tween<glm::u8vec4>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
             }
 
             glm::vec2 delta_a = vec2FromAngle(direction - arc / 2.0f);

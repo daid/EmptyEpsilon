@@ -69,8 +69,8 @@ void BlackHole::draw3DTransparent()
 void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     float size = getRadius() * scale * 2;
-    renderer.drawSprite("radar/blackHole.png", position, size, sf::Color(64, 64, 255));
-    renderer.drawSprite("radar/blackHole.png", position, size, sf::Color(0, 0, 0));
+    renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(64, 64, 255, 255));
+    renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(0, 0, 0, 255));
 }
 
 void BlackHole::collide(Collisionable* target, float collision_force)

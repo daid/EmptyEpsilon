@@ -16,7 +16,7 @@
 #include "gui/gui2_progressbar.h"
 
 GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
-: GuiOverlay(owner, id, sf::Color(0,0,0,64))
+: GuiOverlay(owner, id, glm::u8vec4(0,0,0,64))
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     hide();

@@ -8,7 +8,7 @@
 
 
 GuiGlobalMessageEntryView::GuiGlobalMessageEntryView(GuiContainer* owner)
-: GuiOverlay(owner, "GLOBAL_MESSAGE_ENTRY", sf::Color(0, 0, 0, 128))
+: GuiOverlay(owner, "GLOBAL_MESSAGE_ENTRY", glm::u8vec4(0, 0, 0, 128))
 {
     GuiPanel* box = new GuiPanel(this, "FRAME");
     box->setPosition(0, 0, sp::Alignment::Center)->setSize(800, 150);

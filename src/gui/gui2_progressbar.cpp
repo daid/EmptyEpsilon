@@ -1,7 +1,7 @@
 #include "gui2_progressbar.h"
 
 GuiProgressbar::GuiProgressbar(GuiContainer* owner, string id, float min_value, float max_value, float start_value)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), color(sf::Color(255, 255, 255, 64)), drawBackground(true)
+: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), color(glm::u8vec4(255, 255, 255, 64)), drawBackground(true)
 {
 }
 
@@ -48,7 +48,7 @@ GuiProgressbar* GuiProgressbar::setText(string text)
     return this;
 }
 
-GuiProgressbar* GuiProgressbar::setColor(sf::Color color)
+GuiProgressbar* GuiProgressbar::setColor(glm::u8vec4 color)
 {
     this->color = color;
     return this;

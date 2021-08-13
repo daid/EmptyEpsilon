@@ -22,7 +22,7 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
         bar_size = move_height;
-    renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), "gui/widget/ScrollbarSelection.png", sf::Color::White);
+    renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), "gui/widget/ScrollbarSelection.png", glm::u8vec4{255,255,255,255});
 }
 
 bool GuiScrollbar::onMouseDown(glm::vec2 position)

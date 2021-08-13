@@ -8,7 +8,7 @@
 
 
 GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
-: GuiOverlay(owner, "OBJECT_CREATE_SCREEN", sf::Color(0, 0, 0, 128))
+: GuiOverlay(owner, "OBJECT_CREATE_SCREEN", glm::u8vec4(0, 0, 0, 128))
 {
     GuiPanel* box = new GuiPanel(this, "FRAME");
     box->setPosition(0, 0, sp::Alignment::Center)->setSize(1000, 500);
