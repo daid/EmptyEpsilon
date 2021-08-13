@@ -28,7 +28,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
         phase[n] = clock.get() + error_phase * (100.0f + n * 45.0f);
         freq[n] = 2.0f * float(M_PI) / float(point_count) * target_period * (1.0 + (error_period * (0.0 + n * 2.2)));
     }
-    for(unsigned int n=0; n<point_count; n++)
+    for(int n=0; n<point_count; n++)
     {
         float f;
 

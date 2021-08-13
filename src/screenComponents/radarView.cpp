@@ -367,20 +367,16 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     int sub_sector_x_max = floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sub_sector_size);
     int sub_sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sub_sector_size) + 1;
     int sub_sector_y_max = floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sub_sector_size);
-    /* TODO_GFX
-    sf::VertexArray points(sf::Points, (sub_sector_x_max - sub_sector_x_min + 1) * (sub_sector_y_max - sub_sector_y_min + 1));
+
     for(int sector_x = sub_sector_x_min; sector_x <= sub_sector_x_max; sector_x++)
     {
         float x = sector_x * sub_sector_size;
         for(int sector_y = sub_sector_y_min; sector_y <= sub_sector_y_max; sector_y++)
         {
             float y = sector_y * sub_sector_size;
-            points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].position = worldToScreen(glm::vec2(x,y));
-            points[(sector_x - sub_sector_x_min) + (sector_y - sub_sector_y_min) * (sub_sector_x_max - sub_sector_x_min + 1)].color = color;
+            renderer.drawPoint(worldToScreen(glm::vec2(x,y)), color);
         }
     }
-    window.draw(points);
-    */
 }
 
 void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
@@ -435,15 +431,10 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawGhostDots(sp::RenderTarget& renderer)
 {
-    /* TODO_GFX
-    sf::VertexArray ghost_points(sf::Points, ghost_dots.size());
     for(unsigned int n=0; n<ghost_dots.size(); n++)
     {
-        ghost_points[n].position = worldToScreen(ghost_dots[n].position);
-        ghost_points[n].color = glm::u8vec4(255, 255, 255, 255 * std::max(((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime), 0.f));
+        renderer.drawPoint(worldToScreen(ghost_dots[n].position), glm::u8vec4(255, 255, 255, 255 * std::max(((ghost_dots[n].end_of_life - engine->getElapsedTime()) / GhostDot::total_lifetime), 0.f)));
     }
-    window.draw(ghost_points);
-    */
 }
 
 void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
@@ -827,20 +818,9 @@ void GuiRadarView::drawRadarCutoff(sp::RenderTarget& renderer)
     window.draw(cutOff);
 
     renderer.fillRect(sp::Rect(rect.position.x, rect.position.y, rect.size.x, radar_screen_center.y - screen_size - rect.position.y), glm::u8vec4(0, 0, 0, 255));
-
-    sf::RectangleShape rectBottom(sf::Vector2f(rect.size.x, rect.size.y - screen_size - (radar_screen_center.y - rect.position.y)));
-    rectBottom.setFillColor(sf::Color(0, 0, 0, 255));
-    rectBottom.setPosition(rect.position.x, radar_screen_center.y + screen_size);
-    window.draw(rectBottom);
-
-    sf::RectangleShape rectLeft(sf::Vector2f(radar_screen_center.x - screen_size - rect.position.x, rect.size.y));
-    rectLeft.setFillColor(sf::Color(0, 0, 0, 255));
-    rectLeft.setPosition(rect.position.x, rect.position.y);
-    window.draw(rectLeft);
-    sf::RectangleShape rectRight(sf::Vector2f(rect.size.x - screen_size - (radar_screen_center.x - rect.position.x), rect.size.y));
-    rectRight.setFillColor(sf::Color(0, 0, 0, 255));
-    rectRight.setPosition(radar_screen_center.x + screen_size, rect.position.y);
-    window.draw(rectRight);
+    renderer.fillRect(sp::Rect(rect.position.x, radar_screen_center.y + screen_size, rect.size.x, rect.size.y - screen_size - (radar_screen_center.y - rect.position.y)), glm::u8vec4(0, 0, 0, 255));
+    renderer.fillRect(sp::Rect(rect.position.x, rect.position.y, radar_screen_center.x - screen_size - rect.position.x, rect.size.y), glm::u8vec4(0, 0, 0, 255));
+    renderer.fillRect(sp::Rect(radar_screen_center.x + screen_size, rect.position.y, rect.size.x - screen_size - (radar_screen_center.x - rect.position.x), rect.size.y), glm::u8vec4(0, 0, 0, 255));
 }
 
 glm::vec2 GuiRadarView::worldToScreen(glm::vec2 world_position)
