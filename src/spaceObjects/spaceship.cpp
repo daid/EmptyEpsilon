@@ -323,7 +323,7 @@ void SpaceShip::applyTemplateValues()
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
     combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
-    has_warp_drive = ship_template->warp_speed > 0.0;
+    has_warp_drive = ship_template->has_warp_drive;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
     jump_drive_min_distance = ship_template->jump_drive_min_distance;
