@@ -319,12 +319,12 @@ You can target any station or ship and attempt to communicate with it. Other shi
 addToSequence(relayTutorial, function()
     prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
     prev_object:setCommsFunction(function()
-        setCommsMessage("You successfully opened communications. Congratulations.");
-        addCommsReply("Tell me more!", function()
-            setCommsMessage("Sorry, there's nothing more to tell you.")
+        setCommsMessage(_("You successfully opened communications. Congratulations."));
+        addCommsReply(_("Tell me more!"), function()
+            setCommsMessage(_("Sorry, there's nothing more to tell you."))
         end)
-        addCommsReply("Continue with the tutorial.", function()
-            setCommsMessage("The tutorial will continue when you close communications with this station.")
+        addCommsReply(_("Continue with the tutorial."), function()
+            setCommsMessage(_("The tutorial will continue when you close communications with this station."))
         end)
     end)
 end)
@@ -395,12 +395,12 @@ You can target any station or ship and attempt to communicate with it. Other shi
 addToSequence(operationsTutorial, function()
     prev_object = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(3000, -15000)
     prev_object:setCommsFunction(function()
-        setCommsMessage("You successfully opened communications. Congratulations.");
-        addCommsReply("Tell me more!", function()
-            setCommsMessage("Sorry, there's nothing more to tell you.")
+        setCommsMessage(_("You successfully opened communications. Congratulations."));
+        addCommsReply(_("Tell me more!"), function()
+            setCommsMessage(_("Sorry, there's nothing more to tell you."))
         end)
-        addCommsReply("Continue with the tutorial.", function()
-            setCommsMessage("The tutorial will continue when you close communications with this station.")
+        addCommsReply(_("Continue with the tutorial."), function()
+            setCommsMessage(_("The tutorial will continue when you close communications with this station."))
         end)
     end)
 end)
@@ -414,5 +414,5 @@ They might inform you about new objectives and your mission progress, ask for ba
 
 endOfTutorial = createSequence()
 addToSequence(endOfTutorial, function() tutorial:switchViewToMainScreen() end)
-addToSequence(operationsTutorial, function() tutorial:setMessageToTopPosition() end)
+addToSequence(endOfTutorial, function() tutorial:setMessageToTopPosition() end)
 addToSequence(endOfTutorial, _([[This concludes the tutorial. While we have covered the basics, there are more advanced features in the game that you might discover.]]))
