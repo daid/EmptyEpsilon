@@ -131,6 +131,7 @@ template:setHull(50)
 template:setShields(50, 30)
 --Reputation Score: 13
 template:setSpeed(70, 12, 12)
+template:setWarpDrive(true)
 template:setWarpSpeed(600)
 
 variation = template:copy("Hunter")
@@ -140,6 +141,7 @@ variation:setBeam(2, 50,-15, 1000.0, 6.0, 6)
 variation:setBeam(3, 50, 15, 1000.0, 6.0, 6)
 variation:setShields(80, 30)
 --Reputation Score: 16
+variation:setWarpDrive(true)
 variation:setWarpSpeed(400)
 
 variation = template:copy("Strike")
@@ -148,6 +150,7 @@ variation:setModel("small_frigate_3"):setRadarTrace("exuari_3.png")
 variation:setTubes(1, 10.0)
 variation:setWeaponStorage("EMP", 1)
 variation:setWeaponStorage("HVLI", 2)
+variation:setWarpDrive(true)
 variation:setWarpSpeed(300)
 
 variation = template:copy("Dash")
@@ -158,6 +161,7 @@ variation:setWeaponStorage("HVLI", 4)
 variation:setHull(70)
 variation:setShields(80, 30)
 --Reputation Score: 18
+variation:setWarpDrive(true)
 variation:setWarpSpeed(200)
 
 --[[ Frigates--]]
