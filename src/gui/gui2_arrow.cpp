@@ -7,5 +7,5 @@ GuiArrow::GuiArrow(GuiContainer* owner, string id, float angle)
 
 void GuiArrow::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawRotatedSprite("gui/widget/SelectorArrow.png", getCenterPoint(), std::min(rect.size.x, rect.size.y), angle, selectColor(colorConfig.button.forground));
+    renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", getCenterPoint(), std::min(rect.size.x, rect.size.y), angle, selectColor(colorConfig.button.forground));
 }

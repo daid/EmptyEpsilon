@@ -35,7 +35,7 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
 
                 if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
                 {
-                    renderer.drawRotatedSprite("gui/widget/SelectorArrow.png", glm::vec2(x + w * 0.5, rect.position.y + rect.size.y - 20 - h), w, -90);
+                    renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", glm::vec2(x + w * 0.5, rect.position.y + rect.size.y - 20 - h), w, -90);
                 }
             }
 
