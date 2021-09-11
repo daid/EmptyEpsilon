@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-09-10 23:35+0200\n"
+"PO-Revision-Date: 2021-09-11 13:31+0200\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -2050,7 +2050,7 @@ msgstr "Afficher l'aide en jeu"
 #: src/gui/hotkeyConfig.cpp:11 src/gui/hotkeyConfig.cpp:12
 msgctxt "hotkey_Basic"
 msgid "Return to ship options menu"
-msgstr "Retourner au menu de selection vaisseau/postes"
+msgstr "Retourner au menu vaisseau/postes"
 
 #: src/gui/hotkeyConfig.cpp:13
 msgctxt "hotkey_Basic"
@@ -2070,12 +2070,12 @@ msgstr "Général"
 #: src/gui/hotkeyConfig.cpp:17
 msgctxt "hotkey_General"
 msgid "Switch to next crew station"
-msgstr "Switcher sur le poste d'équipage suivant"
+msgstr "Switcher sur le poste suivant"
 
 #: src/gui/hotkeyConfig.cpp:18
 msgctxt "hotkey_General"
 msgid "Switch to previous crew station"
-msgstr "Switcher sur le poste d'équipage précedent"
+msgstr "Switcher sur le poste précèdent"
 
 #: src/gui/hotkeyConfig.cpp:19
 msgctxt "hotkey_General"
@@ -2155,120 +2155,107 @@ msgstr "Navigation"
 #: src/gui/hotkeyConfig.cpp:46
 msgctxt "hotkey_Helms"
 msgid "Increase impulse"
-msgstr ""
+msgstr "Accélérer (moteurs principaux)"
 
 #: src/gui/hotkeyConfig.cpp:47
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse"
-msgstr ""
+msgstr "Décélérer (moteurs principaux)"
 
 #: src/gui/hotkeyConfig.cpp:48
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Zero impulse"
-msgstr "Moteurs"
+msgstr "Eteindre les moteurs"
 
 #: src/gui/hotkeyConfig.cpp:49
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Max impulse"
-msgstr "Moteurs"
+msgstr "Puissance des moteurs avant max"
 
 #: src/gui/hotkeyConfig.cpp:50
 msgctxt "hotkey_Helms"
 msgid "Max reverse impulse"
-msgstr ""
+msgstr "Puissance des moteurs arrière max"
 
 #: src/gui/hotkeyConfig.cpp:51
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Turn left"
-msgstr "Vit. de rotation"
+msgstr "Tourner à gauche"
 
 #: src/gui/hotkeyConfig.cpp:52
 msgctxt "hotkey_Helms"
 msgid "Turn right"
-msgstr ""
+msgstr "Tourner à droite"
 
 #: src/gui/hotkeyConfig.cpp:53
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Warp off"
-msgstr "Vit. lumière"
+msgstr "Vitesse lumière Off"
 
 #: src/gui/hotkeyConfig.cpp:54
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Warp 1"
-msgstr "Vit. lumière"
+msgstr "Vitesse lumière niveau 1"
 
 #: src/gui/hotkeyConfig.cpp:55
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Warp 2"
-msgstr "Vit. lumière"
+msgstr "Vitesse lumière niveau 2"
 
 #: src/gui/hotkeyConfig.cpp:56
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Warp 3"
-msgstr "Vit. lumière"
+msgstr "Vitesse lumière niveau 3"
 
 #: src/gui/hotkeyConfig.cpp:57
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Warp 4"
-msgstr "Vit. lumière"
+msgstr "Vitesse lumière niveau 4"
 
 #: src/gui/hotkeyConfig.cpp:58
 msgctxt "hotkey_Helms"
 msgid "Increase Warp"
-msgstr ""
+msgstr "Accélérer (vitesse lumière)"
 
 #: src/gui/hotkeyConfig.cpp:59
 msgctxt "hotkey_Helms"
 msgid "Decrease Warp"
-msgstr ""
+msgstr "Décélérer (vitesse lumière)"
 
 #: src/gui/hotkeyConfig.cpp:60
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr ""
+msgstr "Accoster/désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:61
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Initiate docking"
-msgstr "Démarrer piratage"
+msgstr "Accoster"
 
 #: src/gui/hotkeyConfig.cpp:62
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Abort docking"
-msgstr "Démarrer piratage"
+msgstr "Annuler accostage"
 
 #: src/gui/hotkeyConfig.cpp:63
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Undock"
 msgstr "Désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:64
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase jump distance"
-msgstr "Distance de largage"
+msgstr "Augmenter la distance de saut"
 
 #: src/gui/hotkeyConfig.cpp:65
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease jump distance"
-msgstr "Distance de largage"
+msgstr "Diminuer la distance de saut"
 
 #: src/gui/hotkeyConfig.cpp:66
 msgctxt "hotkey_Helms"
 msgid "Initiate jump"
-msgstr ""
+msgstr "Activer le saut (téléportation)"
 
 #: src/gui/hotkeyConfig.cpp:71
 msgctxt "hotkey_menu"
@@ -2328,7 +2315,7 @@ msgstr "Sélectionner la cible suivante"
 #: src/gui/hotkeyConfig.cpp:91
 msgctxt "hotkey_Weapons"
 msgid "Toggle shields"
-msgstr "Activer/désactiver les boucliers (switch)"
+msgstr "Activer/désactiver les boucliers"
 
 #: src/gui/hotkeyConfig.cpp:92
 msgctxt "hotkey_Weapons"
@@ -2343,12 +2330,12 @@ msgstr "Désactiver les boucliers"
 #: src/gui/hotkeyConfig.cpp:94
 msgctxt "hotkey_Weapons"
 msgid "Increase shield frequency target"
-msgstr "Augmenter la fréquence de bouclier de la cible"
+msgstr "Augmenter la fréquence des boucliers"
 
 #: src/gui/hotkeyConfig.cpp:95
 msgctxt "hotkey_Weapons"
 msgid "Decrease shield frequency target"
-msgstr "Réduire la fréquence de bouclier de la cible"
+msgstr "Réduire la fréquence des boucliers"
 
 #: src/gui/hotkeyConfig.cpp:96
 msgctxt "hotkey_Weapons"
@@ -2358,47 +2345,47 @@ msgstr "Démarrer le calibrage des boucliers"
 #: src/gui/hotkeyConfig.cpp:97
 msgctxt "hotkey_Weapons"
 msgid "Next beam subsystem target type"
-msgstr ""
+msgstr "Sous-système ciblé suivant (faisceaux)"
 
 #: src/gui/hotkeyConfig.cpp:98
 msgctxt "hotkey_Weapons"
 msgid "Previous beam subsystem target type"
-msgstr ""
+msgstr "Sous-système ciblé préc. (faisceaux)"
 
 #: src/gui/hotkeyConfig.cpp:99
 msgctxt "hotkey_Weapons"
 msgid "Increase beam frequency"
-msgstr ""
+msgstr "Augmenter la fréquence des faisceaux"
 
 #: src/gui/hotkeyConfig.cpp:100
 msgctxt "hotkey_Weapons"
 msgid "Decrease beam frequency"
-msgstr ""
+msgstr "Réduire la fréquence des faisceaux"
 
 #: src/gui/hotkeyConfig.cpp:101
 msgctxt "hotkey_Weapons"
 msgid "Toggle missile aim lock"
-msgstr ""
+msgstr "Activer/désact. verrouillage missiles"
 
 #: src/gui/hotkeyConfig.cpp:102
 msgctxt "hotkey_Weapons"
 msgid "Enable missile aim lock"
-msgstr ""
+msgstr "Activer le verrouillage des missiles"
 
 #: src/gui/hotkeyConfig.cpp:103
 msgctxt "hotkey_Weapons"
 msgid "Disable missile aim lock"
-msgstr ""
+msgstr "Désactiver le verrouillage des missiles"
 
 #: src/gui/hotkeyConfig.cpp:104
 msgctxt "hotkey_Weapons"
 msgid "Turn missile aim to the left"
-msgstr ""
+msgstr "Verrouillage missiles vers la gauche"
 
 #: src/gui/hotkeyConfig.cpp:105
 msgctxt "hotkey_Weapons"
 msgid "Turn missile aim to the right"
-msgstr ""
+msgstr "Verrouillage missiles vers la droite"
 
 #: src/gui/hotkeyConfig.cpp:107
 msgctxt "hotkey_menu"
@@ -2421,154 +2408,149 @@ msgid "Engineering"
 msgstr "Ingénierie"
 
 #: src/gui/hotkeyConfig.cpp:113
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Select reactor system"
-msgstr "Sélection postes"
+msgstr "Sélectionner le réacteur"
 
 #: src/gui/hotkeyConfig.cpp:114
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Select beam weapon system"
-msgstr "Faisceau {direction}"
+msgstr "Sélectionner les faisceaux laser"
 
 #: src/gui/hotkeyConfig.cpp:115
 msgctxt "hotkey_Engineering"
 msgid "Select missile weapon system"
-msgstr ""
+msgstr "Sélectionner le système de missiles"
 
 #: src/gui/hotkeyConfig.cpp:116
 msgctxt "hotkey_Engineering"
 msgid "Select maneuvering system"
-msgstr ""
+msgstr "Sélectionner la manoeuvre"
 
 #: src/gui/hotkeyConfig.cpp:117
 msgctxt "hotkey_Engineering"
 msgid "Select impulse system"
-msgstr ""
+msgstr "Sélectionner les moteurs à impulsion"
 
 #: src/gui/hotkeyConfig.cpp:118
 msgctxt "hotkey_Engineering"
 msgid "Select warp system"
-msgstr ""
+msgstr "Sélectionner la vitesse lumière"
 
 #: src/gui/hotkeyConfig.cpp:119
 msgctxt "hotkey_Engineering"
 msgid "Select jump drive system"
-msgstr ""
+msgstr "Sélectionner la téléportation"
 
 #: src/gui/hotkeyConfig.cpp:120
 msgctxt "hotkey_Engineering"
 msgid "Select front shields system"
-msgstr ""
+msgstr "Sélectionner les boucliers avant"
 
 #: src/gui/hotkeyConfig.cpp:121
 msgctxt "hotkey_Engineering"
 msgid "Select rear shields system"
-msgstr ""
+msgstr "Sélectionner les boucliers arrière"
 
 #: src/gui/hotkeyConfig.cpp:122
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 0%"
-msgstr ""
+msgstr "Régler la puissance du système à 0%"
 
 #: src/gui/hotkeyConfig.cpp:123
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 30%"
-msgstr ""
+msgstr "Régler la puissance du système à 30%"
 
 #: src/gui/hotkeyConfig.cpp:124
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 50%"
-msgstr ""
+msgstr "Régler la puissance du système à 50%"
 
 #: src/gui/hotkeyConfig.cpp:125
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 100%"
-msgstr ""
+msgstr "Régler la puissance du système à 100%"
 
 #: src/gui/hotkeyConfig.cpp:126
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 150%"
-msgstr ""
+msgstr "Régler la puissance du système à 150%"
 
 #: src/gui/hotkeyConfig.cpp:127
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 200%"
-msgstr ""
+msgstr "Régler la puissance du système à 200%"
 
 #: src/gui/hotkeyConfig.cpp:128
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 250%"
-msgstr ""
+msgstr "Régler la puissance du système à 250%"
 
 #: src/gui/hotkeyConfig.cpp:129
 msgctxt "hotkey_Engineering"
 msgid "Set system power to 300%"
-msgstr ""
+msgstr "Régler la puissance du système à 300%"
 
 #: src/gui/hotkeyConfig.cpp:130
 msgctxt "hotkey_Engineering"
 msgid "Increase system power"
-msgstr ""
+msgstr "Augmenter la puissance du système"
 
 #: src/gui/hotkeyConfig.cpp:131
 msgctxt "hotkey_Engineering"
 msgid "Decrease system power"
-msgstr ""
+msgstr "Réduire la puissance du système"
 
 #: src/gui/hotkeyConfig.cpp:132
 msgctxt "hotkey_Engineering"
 msgid "Increase system coolant"
-msgstr ""
+msgstr "Augmenter le liquide de refroidissement"
 
 #: src/gui/hotkeyConfig.cpp:133
 msgctxt "hotkey_Engineering"
 msgid "Decrease system coolant"
-msgstr ""
+msgstr "Réduire le liquide de refroidissement"
 
 #: src/gui/hotkeyConfig.cpp:134
 msgctxt "hotkey_Engineering"
 msgid "Next repair crew"
-msgstr ""
+msgstr "Sélectionner le réparateur suivant"
 
 #: src/gui/hotkeyConfig.cpp:135
 msgctxt "hotkey_Engineering"
 msgid "Crew move up"
-msgstr ""
+msgstr "Déplacer le réparateur en haut"
 
 #: src/gui/hotkeyConfig.cpp:136
 msgctxt "hotkey_Engineering"
 msgid "Crew move down"
-msgstr ""
+msgstr "Déplacer le réparateur en bas"
 
 #: src/gui/hotkeyConfig.cpp:137
 msgctxt "hotkey_Engineering"
 msgid "Crew move left"
-msgstr ""
+msgstr "Déplacer le réparateur à gauche"
 
 #: src/gui/hotkeyConfig.cpp:138
 msgctxt "hotkey_Engineering"
 msgid "Crew move right"
-msgstr ""
+msgstr "Déplacer le réparateur à droite"
 
 #: src/gui/hotkeyConfig.cpp:139
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Start self-destruct"
-msgstr "Peut s'autodétruire"
+msgstr "Activer l'autodestruction"
 
 #: src/gui/hotkeyConfig.cpp:140
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Confirm self-destruct"
-msgstr "Peut s'autodétruire"
+msgstr "Confirmer l'autodestruction"
 
 #: src/gui/hotkeyConfig.cpp:141
-#, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Cancel self-destruct"
-msgstr "Peut s'autodétruire"
+msgstr "Annuler l'autodestruction"
 
 #: src/spaceObjects/missiles/missileWeapon.cpp:196
 #: src/spaceObjects/mine.cpp:160
