@@ -1,21 +1,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
-"POT-Creation-Date: 2021-04-04 22:27+0200\n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: .\n"
 
-#, fuzzy
 msgid "Waves"
-msgstr "Vague n° "
+msgstr "Vagues"
 
 # Scenario description
 msgid ""
@@ -24,6 +23,10 @@ msgid ""
 "The strength of enemy ships is independent of the number and type of player "
 "ships."
 msgstr ""
+"Des vagues d'ennemis de plus en plus difficiles à contenir attaquent les "
+"stations amies. Il n'y a pas de victoire. Combien de vagues pouvez-vous "
+"détruire ? Faites apparaître les navires de votre choix. La force des "
+"navires ennemis est indépendante du nombre et du type de navires des joueurs."
 
 #: scripts/scenario_03_waves.lua:43
 msgid ""
@@ -49,9 +52,9 @@ msgid "Wave cleared!"
 msgstr "Vague éliminée !"
 
 #: scripts/scenario_03_waves.lua:251
-#, fuzzy, lua-format
+#, lua-format
 msgid "Wave %d cleared."
-msgstr "Vague éliminée !"
+msgstr "Vague %d éliminée !"
 
 #~ msgid " cleared."
 #~ msgstr " éliminée !"
