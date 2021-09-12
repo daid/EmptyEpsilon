@@ -1,0 +1,456 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Birth of the Atlantis"
+msgstr ""
+
+# Scenario description
+msgid ""
+"You are the first crew of a new and improved version of the Atlantis space "
+"explorer.You must check out ship systems and complete an initial mission."
+"This scenario is limited to one player ship: the Atlantis Atlantis-1."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:161 scripts/scenario_08_atlantis.lua:177
+#: scripts/scenario_08_atlantis.lua:181
+msgid "An odd object floating in space."
+msgstr "Un objet étrange flottant dans l'espace."
+
+#: scripts/scenario_08_atlantis.lua:163
+#, lua-format
+msgid ""
+"This object is giving off strange readings.\n"
+"Sensor readings:\n"
+"Beta radiation: %i\n"
+"Gravity disruption: %i\n"
+"Ionic phase shift: %i\n"
+"Doppler instability: %i"
+msgstr ""
+"Nous l'avons trouvé. Cet objet dégage d'étranges radiations.\n"
+"Lectures des capteurs :\n"
+"Rayonnement bêta : %i\n"
+"Perturbation de la gravité : %i\n"
+"Déphasage ionique : %i\n"
+"Instabilité Doppler : %i"
+
+#: scripts/scenario_08_atlantis.lua:177 scripts/scenario_08_atlantis.lua:181
+msgid ""
+"This object seems to be inert, and not giving any readings on your sensors. "
+"The actual object must be somewhere else."
+msgstr ""
+"Cet objet semble inerte, et il ne génère aucune données sur vos capteurs. Le "
+"véritable objet doit être ailleurs."
+
+#: scripts/scenario_08_atlantis.lua:323
+msgid ""
+"Come in, Atlantis-1.\n"
+"\n"
+"Good, your communication systems seems to be working.\n"
+"\n"
+"As you well know, you are aboard the newest version of the Atlantis space "
+"explorer. We will take you through a few quick tests to see if the ship is "
+"operating as expected.\n"
+"\n"
+"First, have your engineer power up all systems to 100%, as you are currently "
+"in powered down mode."
+msgstr ""
+"Bonjour Atlantis-1.\n"
+"\n"
+"Bien, vos systèmes de communication semblent fonctionner.\n"
+"\n"
+"Comme vous le savez déjà, vous êtes à bord de la nouvelle version du "
+"vaisseau explorateur de l'espace Atlantis.\n"
+"Nous allons vous faire passer quelques tests rapides pour voir si le navire "
+"fonctionne comme prévu.\n"
+"\n"
+"Tout d'abord, demandez à votre ingénieur d'alimenter tous les systèmes à "
+"100%, car vous êtes actuellement en mode hors tension."
+
+#: scripts/scenario_08_atlantis.lua:344
+msgid ""
+"Good, Atlantis-1, we read all systems are go. You can safely undock now.\n"
+"\n"
+"Head to sector K6, where F-1 has dropped missile supplies. Pick them up to "
+"stock up on weapons."
+msgstr ""
+"Bien Atlantis-1, nous vous confirmons que tous les systèmes sont "
+"opérationnels. Vous pouvez dès à présent désamarrer en toute sécurité.\n"
+"\n"
+"Dirigez-vous vers le secteur K6, une cargaison de munitions déposée par le "
+"vaisseau F-1 vous y attend. Récupérez-la afin de faire le plein de missiles."
+
+#: scripts/scenario_08_atlantis.lua:362
+msgid ""
+"I see you are stocked up on missiles now, Atlantis-1.\n"
+"\n"
+"There are two dummy ships in your vicinity. Before we test your weapon "
+"systems, we should first identify the ships to ensure we destroy the correct "
+"ones.\n"
+"\n"
+"Have your science officer scan the Dummy-1 and Dummy-2 ships to properly "
+"identify them."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:381
+msgid ""
+"Perfect, Atlantis-1. They identify as Kraylor ships because we put fake IDs "
+"in them.\n"
+"\n"
+"Destroy Dummy-1 with your beam weapons, and use a homing missile to take out "
+"Dummy-2.\n"
+"\n"
+"The shields of Dummy-2 are configured so that your beam weapons will not "
+"penetrate them."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:403
+msgid ""
+"Good, all weapons are operational. Atlantis-1 seems to be in perfect "
+"operating condition.\n"
+"\n"
+"When you are ready to take on your first mission, contact us. You can also "
+"dock with Supply-6 to resupply."
+msgstr ""
+"Bien, toutes les armes sont opérationnelles.\n"
+"Le vaisseau semble être en parfait état de fonctionnement.\n"
+"\n"
+"Quand vous vous sentirez prêt à entreprendre votre première mission. "
+"Contactez nous.\n"
+"(N'hésitez pas à accoster de nouveau sur Supply-6 pour vous réapprovisionner)"
+
+#: scripts/scenario_08_atlantis.lua:418
+msgid "Hold on tight, heading for sector B20."
+msgstr "Tenez bon, cap sur le secteur B20."
+
+#: scripts/scenario_08_atlantis.lua:422
+msgid ""
+"Atlantis-1,\n"
+"\n"
+"Here we are, sector B20. Looks like there are some lingering Kraylor here.\n"
+"\n"
+"We are outside of the no-fire zone and at war with the Kraylor, so you are "
+"clear to engage.\n"
+"\n"
+"Report back when you have found the source of the odd sensor readings."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:460
+msgid ""
+"Atlantis-1, what is happening?\n"
+"\n"
+"We are reading a huge gravity surge from your direction. Get the hell out of "
+"there."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:488
+msgid ""
+"Atlantis-1,\n"
+"\n"
+"Come in. Come in. We suddenly read that your position is behind the Kraylor "
+"defense line.\n"
+"\n"
+"Do NOT engage the Kraylor. I repeat, DO NOT ENGAGE."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:505
+msgid ""
+"Atlantis-1, come in.\n"
+"\n"
+"Finally! We thought we lost you. You are not out of the woods yet, though.\n"
+"\n"
+"Try to get to sector ZU5. We are sending JC88 to get you out of there."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:514
+msgid ""
+"Atlantis-1, come in.\n"
+"\n"
+"Finally! We thought we lost you. You are not out of the woods yet, though.\n"
+"\n"
+"Search for a hole in the Kraylor defenses, then try to get to sector ZU5. We "
+"are sending JC88 to get you out of there."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:528 scripts/scenario_08_atlantis.lua:613
+msgid "Hold on tight, heading for Shipyard-Gamma."
+msgstr "Tenez bon, direction Shipyard-Gamma."
+
+#: scripts/scenario_08_atlantis.lua:532
+msgid ""
+"Welcome home, Atlantis-1.\n"
+"\n"
+"Dock with Supply-6 to recharge and restock, then report to Shipyard-Gamma "
+"for your mission report."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:550
+msgid ""
+"Atlantis-1, we've worked through the data you collected on the anomaly that "
+"collapsed into the wormhole.\n"
+"\n"
+"There are traces of both Kraylor and Arlenian technology in there, which "
+"does not make any sense. The Arlenians are a peaceful race, and the Kraylor "
+"are keen on trying to destroy them.\n"
+"\n"
+"We can only assume that the Kraylor stole some kind of advanced technology "
+"from the Arlenians.\n"
+"\n"
+"We've seen an increase in Kraylor transport activity near the Kraylor "
+"defense line. We believe these transports might carry more information "
+"regarding this technology.\n"
+"\n"
+"We're tasking you to head back to the Kraylor defense line, destroy one of "
+"these transports, and recover any cargo that might remain. It could provide "
+"valuable intel.\n"
+"\n"
+"However, do NOT engage any of the Kraylor bases directly. You are not "
+"equipped to handle a full-on assault."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:575
+msgid "Hold on tight, heading for Kraylor defense line."
+msgstr "Tenez bon, cap sur la ligne de défense des Kraylor."
+
+#: scripts/scenario_08_atlantis.lua:579
+msgid ""
+"We have arrived. Find the right moment to take out that transport, grab the "
+"cargo, and then dock with us.\n"
+"\n"
+"Expect heavy retaliation as soon as you attack the transport."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:605
+msgid ""
+"Return to the carrier IMMEDIATELY. The entire Kraylor fleet is after you. "
+"Whatever you picked up must be valuable."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:617
+msgid ""
+"Perfect recovery, Atlantis-1. Seems like the transport was moving highly "
+"encrypted documents.\n"
+"\n"
+"Dock with us and we'll take a shot at cracking them."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:637
+msgid ""
+"We are processing the recovered documents. The Kraylor do not excel at "
+"encryption, but this is pretty advanced by their standards.\n"
+"\n"
+"It will take some time to crack this, but we should be successful."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:652
+msgid ""
+"We've cracked the first part of the documents.\n"
+"\n"
+"It looks like the Kraylor stole some advanced jump drive technology from the "
+"Arlenians, something called a Heisenberg-Einstein bridge, that folds the "
+"fabric of spacetime.\n"
+"\n"
+"This seems to require particles with a negative mass. We're working on "
+"getting more information from these documents. They are a bit of a mess."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:670
+msgid ""
+"More results from the decryption team.\n"
+"\n"
+"The Arlenians managed to create negative-mass particles. However, the end "
+"result was extremely unstable and could collapse into a black hole at any "
+"second. Stabilizing the particles requires a huge amount of power with "
+"specially formed magnetic fields.\n"
+"\n"
+"In the end, they managed to make long-distance travel possible by opening a "
+"rip in the fabric of spacetime and sending specialized ships through this "
+"tear.\n"
+"\n"
+"We'll keep you updated with more information."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:690
+msgid ""
+"It looks like the Kraylor were watching these experiments and waiting for "
+"their moment to steal the end result.\n"
+"\n"
+"According to these documents, the Kraylor continued the experiments at "
+"sector D20, explaining the phenomenon you experienced there.\n"
+"\n"
+"It looks like they successfully created a working prototype jump drive, but "
+"the documents must have been scrambled here, because they go from mentioning "
+"distances of 2000U to talking about infeasibly large troop counts and "
+"missile storage."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:708
+msgid ""
+"We cracked the final piece of the puzzle.\n"
+"\n"
+"It seems that the Kraylor are constructing a long-range, moving battle "
+"station equipped with unprecedented firepower. The wormhole-powered jump "
+"drive is at the center of this station.\n"
+"\n"
+"While the technology behind the wormhole jump drive isn't stable, the "
+"Kraylor are reckless enough to do this in order to gain a huge tactical "
+"advantage."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:723
+msgid ""
+"We've just detected a power surge.\n"
+"\n"
+"IT'S THE BATTLE STATION!\n"
+"\n"
+"All hands on deck! Man all combat stations and evacuate all non-essential "
+"personnel! Save what you can!"
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:738
+#, fuzzy
+msgid "Bonus points for destroying the battlestation!"
+msgstr "Points bonus pour avoir détruit le poste de combat !"
+
+#: scripts/scenario_08_atlantis.lua:776
+msgid "Atlantis-1, are you ready for your first mission?"
+msgstr "Atlantis-1, êtes-vous prêt pour votre première mission ?"
+
+#: scripts/scenario_08_atlantis.lua:778 scripts/scenario_08_atlantis.lua:831
+msgid "Yes."
+msgstr "Oui."
+
+#: scripts/scenario_08_atlantis.lua:780
+msgid ""
+"Good. Your first mission is to identify odd readings coming from the nebula "
+"cloud in sector B20.\n"
+"\n"
+"Your ship is not equipped to travel this distance by itself, so we have "
+"tasked jump carrier JC-88 to take you there.\n"
+"\n"
+"Dock with JC-88 and it will handle the rest."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:789 scripts/scenario_08_atlantis.lua:885
+msgid "No."
+msgstr "Non."
+
+#: scripts/scenario_08_atlantis.lua:791
+msgid "Then hail us again when you are ready."
+msgstr "Ensuite, contactez-nous à nouveau lorsque vous serez prêt."
+
+#: scripts/scenario_08_atlantis.lua:801
+msgid ""
+"Atlantis-1,\n"
+"\n"
+"We've downloaded all the data you collected thanks to the short-range "
+"quantum-entangled data communication radar.\n"
+"\n"
+"We're working through the data and will contact you when we have more "
+"details."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:811
+#, fuzzy
+msgid ""
+"Good day, Atlantis-1.\n"
+"\n"
+"Please continue with your current objective."
+msgstr ""
+"Bonjour, Atlantis-1.\n"
+"\n"
+"Veuillez continuer avec votre objectif actuel."
+
+#: scripts/scenario_08_atlantis.lua:825
+#, fuzzy
+msgid "Jump carrier JC-88 reporting. All system nominal."
+msgstr "Rapport du porte-avions de saut JC-88. Tout système nominal."
+
+#: scripts/scenario_08_atlantis.lua:829
+msgid "Atlantis-1, did you find the source of the odd sensor readings?"
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:833
+msgid ""
+"Great, because our sensor readings are inconclusive. Can you report your "
+"readings to us?\n"
+"\n"
+"First, what is the beta radiation reading?"
+msgstr ""
+"Génial, car nos lectures de capteurs ne sont pas concluantes. Pouvez-vous "
+"nous faire part des vôtres ?\n"
+"\n"
+"Tout d'abord, quelle est la lecture du rayonnement bêta?"
+
+#: scripts/scenario_08_atlantis.lua:840
+msgid "Next, what is the ionic phase shift reading?"
+msgstr "Ensuite, quelle est la lecture du déphasage ionique ?"
+
+#: scripts/scenario_08_atlantis.lua:845
+msgid "Next, what is the gravity disruption reading?"
+msgstr "Ensuite, quelle est la lecture de la perturbation de la gravité ?"
+
+#: scripts/scenario_08_atlantis.lua:850
+msgid "Finally, what is the doppler instability reading?"
+msgstr "Enfin, quelle est votre lecture sur l'instabilité Doppler ?"
+
+#: scripts/scenario_08_atlantis.lua:857
+msgid ""
+"Are you sure? Those readings are really off the normal scale.\n"
+"\n"
+"These readings indicate it is very unstable! Please move away from it."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:862
+msgid ""
+"Are you sure? Those readings are really off the normal scale.\n"
+"\n"
+"Can you move closer to the object to see if you can improve those readings? "
+"The nebula might be interfering with your sensors."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:868
+msgid ""
+"Can you confirm your readings and report back? These numbers do not match "
+"our readings at all."
+msgstr ""
+"Pouvez-vous re-vérifier vos résultats et nous les confirmer ? Ces chiffres "
+"ne correspondent pas du tout à nos relevés."
+
+#: scripts/scenario_08_atlantis.lua:887
+msgid "Then continue looking for it."
+msgstr "Continuez ensuite à le chercher."
+
+#: scripts/scenario_08_atlantis.lua:909
+#, lua-format
+msgid ""
+"(The transmission is loaded with static noise.)\n"
+"\n"
+"%s"
+msgstr ""
+"(La transmission est perturbée par des parasites.)\n"
+"\n"
+"%s"
+
+#: scripts/scenario_08_atlantis.lua:943
+msgid ""
+"Looks like the docking couplers detached prematurely.\n"
+"\n"
+"This happens sometimes. I am on my way so we can try again."
+msgstr ""
+
+#: scripts/scenario_08_atlantis.lua:962
+msgid "Surrender yourself, human intruder."
+msgstr "Rendez-vous, intrus humain."
