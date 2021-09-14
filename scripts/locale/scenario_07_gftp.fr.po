@@ -65,6 +65,21 @@ msgid ""
 "\n"
 "I repeat, this is not an exercise! Proceed at once to Stakhanov.\""
 msgstr ""
+"Votre séjour en permission à bord du Marco Polo se termine rapidement à "
+"cause d'une diffusion urgente du Commandement Central :\n"
+"\n"
+"\"Epsilon, veuillez écouter.\n"
+"\n"
+"Nous avons une situation d'urgence. Nos capteurs détectent qu'un essaim "
+"hostile de Ktlitiens vient de se téléporter dans votre secteur. Le gros de "
+"leurs troupes se dirige vers le complexe minier de Stakhanov. Rendez-vous "
+"immédiatement à Stakhanov et aidez à la défense du complexe.\n"
+"\n"
+"Faites attention à la ceinture d'astéroïdes dense qui sera sur votre "
+"chemin.\n"
+"\n"
+"Je répète, ceci n'est pas un exercice ! Rendez-vous immédiatement à "
+"Stakhanov.\""
 
 #: scripts/scenario_07_gftp.lua:96
 msgid ""
@@ -200,10 +215,12 @@ msgstr ""
 #: scripts/scenario_07_gftp.lua:152
 msgid "Hello, human lifeform. What help can we provide today?"
 msgstr ""
+"Bonjour, forme de vie humaine. Quelle aide pouvons-nous vous apporter "
+"aujourd'hui ?"
 
 #: scripts/scenario_07_gftp.lua:154
 msgid "You are polluting the frequencies with your research."
-msgstr ""
+msgstr "Vous polluez les fréquences avec vos recherches."
 
 #: scripts/scenario_07_gftp.lua:156
 msgid ""
@@ -212,29 +229,37 @@ msgid ""
 "sensors. If installed on your array, we could both continue our purpose "
 "without interference."
 msgstr ""
+"C'est regrettable. Nos recherches sont d'une importance capitale pour ma "
+"race, et je crains de ne pouvoir arrêter maintenant. Cependant, nous pouvons "
+"vous fournir un de nos capteurs. S'il est installé sur votre baie, nous "
+"pourrions tous les deux poursuivre nos objectifs sans interférence."
 
 #: scripts/scenario_07_gftp.lua:158
 msgid "We'll do this."
-msgstr ""
+msgstr "Faisons donc cela."
 
 #: scripts/scenario_07_gftp.lua:160
 msgid "This is most auspicious. Thank you for your understanding."
-msgstr ""
+msgstr "C'est le plus propice. Merci de votre compréhension."
 
 #: scripts/scenario_07_gftp.lua:165
 msgid "We are not your errand boys, Arlenian."
-msgstr ""
+msgstr "Nous ne sommes pas vos garçons de courses, Arléniens."
 
 #: scripts/scenario_07_gftp.lua:167
 msgid ""
 "A most unfortunate conclusion. If you were to change your mind, come find us."
 msgstr ""
+"Une conclusion des plus regrettables. Si vous deviez changer d'avis, venez "
+"nous trouver."
 
 #: scripts/scenario_07_gftp.lua:176
 msgid ""
 "Static fills the channel. Target is on-range for near-range injection. "
 "Select the band to attack:"
 msgstr ""
+"Le parasite se charge. La cible est à portée pour l'injection à courte "
+"portée. Sélectionnez la bande de fréquence à attaquer :"
 
 #: scripts/scenario_07_gftp.lua:178
 msgid "400-450 THz"
@@ -273,12 +298,16 @@ msgid ""
 "Static fills the channel. It seems that the hacked ship is too far away for "
 "near-field injection."
 msgstr ""
+"Le parasite se charge mais Il semble que le vaisseau piraté soit trop loin "
+"pour une injection à courte portée."
 
 #: scripts/scenario_07_gftp.lua:233
 msgid ""
 "Soon after, a backdoor channel opens indicating that the near-field "
 "injection worked."
 msgstr ""
+"Peu de temps après, un canal backdoor s'ouvre, indiquant que l'injection à "
+"courte portée a fonctionné."
 
 #: scripts/scenario_07_gftp.lua:235
 msgid "Deploy patch."
@@ -291,10 +320,15 @@ msgid ""
 "\n"
 "\"You saved us! Hurray for Epsilon!\""
 msgstr ""
+"Le patch supprime le virus utilisé pour contrôler à distance le navire. "
+"Après quelques secondes, le capitaine entre :\n"
+"\n"
+"\"Vous nous avez sauvés ! Hourra pour Epsilon !\""
 
 #: scripts/scenario_07_gftp.lua:244
 msgid "Nothing happens. Seems that the near-field injection failed."
 msgstr ""
+"Rien ne se passe. Il semble que l'injection à courte portée ait échoué."
 
 #: scripts/scenario_07_gftp.lua:270
 msgid ""
@@ -304,6 +338,11 @@ msgid ""
 "Ktlitan reinforcements are en route toward your position. Your priority is "
 "to engage the carrier. Use extreme caution.\""
 msgstr ""
+"Vous recevez une autre transmission du Commandement central :\n"
+"\n"
+"\"A tous les navires de la Marine à proximité du complexe minier de "
+"Stakhanov, les renforts Ktlitiens sont en route vers votre position. Engagez "
+"le porte-avions en priorité. Faites preuve d'une extrême prudence.\""
 
 #: scripts/scenario_07_gftp.lua:290
 msgid ""
@@ -318,6 +357,17 @@ msgid ""
 "\n"
 "URGENCY AND DISCRETION ARE KEY -STOP-"
 msgstr ""
+"Vous recevez une communication tachyon à chiffrement quantique authentifiée "
+"par la marine :\n"
+"\n"
+"L'ATTAQUE DES KTLITIENS EST UNE DISTRACTION -STOP-\n"
+"\n"
+"STAKHANOV N'EST PAS LA VRAIE CIBLE -STOP-\n"
+"\n"
+"CESSEZ LES OPERATIONS EN COURS ET DIRIGEZ-VOUS IMMEDIATEMENT SUR LE SECTEUR "
+"E2 -STOP-\n"
+"\n"
+"L'URGENCE ET LA DISCRÉTION SONT LES CLÉS -STOP-"
 
 #: scripts/scenario_07_gftp.lua:307
 msgid ""
@@ -329,6 +379,14 @@ msgid ""
 "Location of the base is on a need-to-know basis, so we trust your discretion."
 "\""
 msgstr ""
+"Vous recevez une autre communication cryptée de la Marine :\n"
+"\n"
+"« Epsilon, s'il vous plaît écoutez attentivement. Ici le relais d'expédition "
+"du Black Site #114. Nous subissons de violents assauts d'une partie de la "
+"flotte principale des Ktlitiens !\n"
+"\n"
+"L'emplacement de notre base est confidentiel, nous comptons sur votre "
+"discrétion.\""
 
 #: scripts/scenario_07_gftp.lua:338
 msgid ""
@@ -340,6 +398,14 @@ msgid ""
 "\n"
 "They will try to dock with us. You must intercept it at once!\""
 msgstr ""
+"La dépêche du Black Site #114 envoie une émission d'urgence :\n"
+"\n"
+"\"Il semble que l'ennemi change de tactique. Nos scanners à longue portée "
+"montrent qu'un navire à grande vitesse de type inconnu, escorté par des "
+"chasseurs, a passé outre notre sécurité intérieure.\n"
+"\n"
+"Ils vont tenter de s'amarrer à nous. Vous devez l'intercepter immédiatement !"
+"\""
 
 #: scripts/scenario_07_gftp.lua:362
 msgid ""
@@ -352,6 +418,16 @@ msgid ""
 "However, the other ships seem to be less lucky. Most go offline, and others "
 "are going off-course. What is going on?"
 msgstr ""
+"La dépêche du Black Site #114 abaisse le niveau d'alarme, mais avant qu'elle "
+"ne puisse être diffusée, des étincelles volent sur le pont de commandement "
+"de votre vaisseau.\n"
+"\n"
+"Le vaisseau non identifié a activé sa puissance, mais votre équipe "
+"d'ingénieurs a réussi à contenir les dégâts aux niveaux inférieurs.\n"
+"\n"
+"Cependant, les autres navires semblent avoir eu moins de chance. La plupart "
+"sont privés de communications et d'autres sont à la dérive. Que se passe-t-"
+"il?"
 
 #: scripts/scenario_07_gftp.lua:378
 msgid ""
