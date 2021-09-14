@@ -18,7 +18,6 @@ msgid "Ghost from the Past"
 msgstr "Fantôme du passé"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Far from any frontline or civilization, patrolling the Stakhanov Mining "
 "Complex can be a dull and lonely task of seizing contraband and stopping "
