@@ -810,7 +810,7 @@ function travelGoltin(delta)
 			player:addToShipLog(string.format(_("[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."),playerCallSign),"Yellow")
 			if playMsgGremus6Button == nil then
 				playMsgGremus6Button = "play"
-				player:addCustomButton("Relay",playMsgGremus6Button,_("audioButton", "|> AMBGREMUS021"),playMsgGremus6)
+				player:addCustomButton("Relay",playMsgGremus6Button,_("audioButton", "|> AMBGREMUS032"),playMsgGremus6)
 			end			
 			plot1 = departForResearch
 		end
