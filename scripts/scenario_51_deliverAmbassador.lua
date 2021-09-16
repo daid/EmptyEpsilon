@@ -727,7 +727,7 @@ end
 
 function pangoraArtifactChange(delta)
 	if player.pangora_reading_change_message == nil then
-		player:addCustomMessage("Science", "Warning", _("warningMsgScience", "The readings on the Pangora artifact have changed"))
+		player:addCustomMessage("Science", _("warningMsgScience", "Warning"), _("warningMsgScience", "The readings on the Pangora artifact have changed"))
 		player.pangora_reading_change_message = "sent"
 	end
 	plot4 = pangoraArtifactExplode
@@ -1256,7 +1256,7 @@ function handleUndockedState()
 	end
 	if isAllowedTo(askForScience37ArtifactLocation) then
 		addCommsReply(_("Has anyone reported seeing artifacts near Science-37?"), function()
-			setCommsMessage(_("Freighters doing business here occasionally report an objecton approximate heading zero from Science-37 station"))
+			setCommsMessage(_("Freighters doing business here occasionally report an object on approximate heading zero from Science-37 station"))
 			askForScience37ArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
