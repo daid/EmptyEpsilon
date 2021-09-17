@@ -82,27 +82,27 @@ msgstr "Installation militaire majeure"
 #: scripts/scenario_51_deliverAmbassador.lua:221
 msgctxt "scienceShipsName"
 msgid "Personnel"
-msgstr "Du personnel"
+msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:223
 msgctxt "scienceShipsName"
 msgid "Goods"
-msgstr "Marchandises"
+msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:225
 msgctxt "scienceShipsName"
 msgid "Garbage"
-msgstr "Poubelle"
+msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:227
 msgctxt "scienceShipsName"
 msgid "Equipment"
-msgstr "Équipement"
+msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:229
 msgctxt "scienceShipsName"
 msgid "Fuel"
-msgstr "Carburant"
+msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:232
 #, lua-format
