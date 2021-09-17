@@ -1825,7 +1825,7 @@ msgstr ""
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade medicine for %s"
-msgstr "Échanger des médicaments (medicine) contre %s"
+msgstr "Échanger des Médicaments (medicine) contre %s"
 
 #: scripts/scenario_53_escape.lua:3916 scripts/scenario_53_escape.lua:4420
 #: scripts/scenario_53_escape.lua:4616
@@ -1838,7 +1838,7 @@ msgstr "Échanger Produits de luxe (luxury) contre %s"
 #: scripts/scenario_53_escape.lua:4675
 msgctxt "commsTrade"
 msgid "Jettison cargo"
-msgstr ""
+msgstr "Larguer la cargaison"
 
 #: scripts/scenario_53_escape.lua:3947 scripts/scenario_53_escape.lua:4398
 #: scripts/scenario_53_escape.lua:4594 scripts/scenario_53_escape.lua:4676
@@ -1848,13 +1848,15 @@ msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
+"Espace disponible : %i\n"
+"Que voudriez-vous larguer ?"
 
 #: scripts/scenario_53_escape.lua:3953 scripts/scenario_53_escape.lua:4404
 #: scripts/scenario_53_escape.lua:4600 scripts/scenario_53_escape.lua:4682
 #, lua-format
 msgctxt "commsTrade"
 msgid "One %s jettisoned"
-msgstr ""
+msgstr "Un %s largué"
 
 #: scripts/scenario_53_escape.lua:3961
 msgctxt "commsTrade"
@@ -1946,6 +1948,9 @@ msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
 
 #: scripts/scenario_53_escape.lua:4054
 msgctxt "commsStation"
@@ -1953,6 +1958,8 @@ msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_53_escape.lua:4057
 msgctxt "commsStation"
@@ -1965,12 +1972,12 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4087
 msgctxt "commsStation"
 msgid "I need information"
-msgstr ""
+msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_53_escape.lua:4088
 msgctxt "commsStation"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "De quel genre d'informations avez-vous besoin ?"
 
 #: scripts/scenario_53_escape.lua:4089
 msgctxt "commsAmmo"
@@ -2097,90 +2104,97 @@ msgstr ""
 msgctxt "commsStation"
 msgid "Can you send a supply drop? (%d rep"
 msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
 
 #: scripts/scenario_53_escape.lua:4215
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de "
+"réapprovisionnement."
 
 #: scripts/scenario_53_escape.lua:4217
 msgctxt "commsStation"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 
 #: scripts/scenario_53_escape.lua:4219 scripts/scenario_53_escape.lua:4245
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
-msgstr ""
+msgstr "%d"
 
 #: scripts/scenario_53_escape.lua:4227
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"réapprovisionnement au marqueur %d."
 
 #: scripts/scenario_53_escape.lua:4229 scripts/scenario_53_escape.lua:4250
 msgctxt "commsStation"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Pas assez de réputation !"
 
 #: scripts/scenario_53_escape.lua:4239
 #, lua-format
 msgctxt "commsStation"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Merci de nous envoyer des renforts ! (%d rép)"
 
 #: scripts/scenario_53_escape.lua:4241
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
 
 #: scripts/scenario_53_escape.lua:4243
 msgctxt "commsStation"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
 #: scripts/scenario_53_escape.lua:4248
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %d."
 
 #: scripts/scenario_53_escape.lua:4287
 msgctxt "commsStation"
 msgid " and will trade it for medicine"
-msgstr ""
+msgstr " et va l'échanger contre des Médicaments (medicine)"
 
 #: scripts/scenario_53_escape.lua:4292
 msgctxt "commsStation"
 msgid " or food"
-msgstr ""
+msgstr " ou de la Nourriture (food)"
 
 #: scripts/scenario_53_escape.lua:4294
 msgctxt "commsStation"
 msgid " and will trade it for food"
-msgstr ""
+msgstr " et va l'échanger contre de la Nourriture (food)"
 
 #: scripts/scenario_53_escape.lua:4300
 msgctxt "commsStation"
 msgid " or luxury"
-msgstr ""
+msgstr " ou des Produits de luxe (luxury)"
 
 #: scripts/scenario_53_escape.lua:4302
 msgctxt "commsStation"
 msgid " and will trade it for luxury"
-msgstr ""
+msgstr " et va l'échanger contre des Produits de luxe (luxury)"
 
 #: scripts/scenario_53_escape.lua:4365 scripts/scenario_53_escape.lua:4655
 msgctxt "commsShip"
 msgid "What do you want?"
-msgstr ""
+msgstr "Que voulez-vous ?"
 
 #: scripts/scenario_53_escape.lua:4367
 msgctxt "commsShip"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_53_escape.lua:4371 scripts/scenario_53_escape.lua:4558
 msgctxt "commsTrade"
@@ -2229,107 +2243,109 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4459
 msgctxt "commsShip"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Défendez un marqueur"
 
 #: scripts/scenario_53_escape.lua:4461
 msgctxt "commsShip"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
 
 #: scripts/scenario_53_escape.lua:4464
 msgctxt "commsShip"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_53_escape.lua:4466
 #, lua-format
 msgctxt "commsShip"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Défendez le marqueur %d"
 
 #: scripts/scenario_53_escape.lua:4468
 #, lua-format
 msgctxt "commsShip"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "Nous partons pour défendre le marqueur %d."
 
 #: scripts/scenario_53_escape.lua:4475
 msgctxt "commsShip"
 msgid "Assist me"
-msgstr ""
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_53_escape.lua:4476
 msgctxt "commsShip"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_53_escape.lua:4481
 msgctxt "commsShip"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_53_escape.lua:4482
 #, lua-format
 msgctxt "commsShip"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:4485
 #, lua-format
 msgctxt "commsShip"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:4487
 #, lua-format
 msgctxt "commsShip"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:4488
 #, lua-format
 msgctxt "commsShip"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:4491
 #, lua-format
 msgctxt "commsShip"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_53_escape.lua:4498
 #, lua-format
 msgctxt "commsShip"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles: %d/%d\n"
 
 #: scripts/scenario_53_escape.lua:4507
 #, lua-format
 msgctxt "commsShip"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Amarrez-vous à %s"
 
 #: scripts/scenario_53_escape.lua:4508
 #, lua-format
 msgctxt "commsShip"
 msgid "Docking at %s."
-msgstr ""
+msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_53_escape.lua:4519
 msgctxt "commsShipEnemy"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "Nous allons vous détruire !"
 
 #: scripts/scenario_53_escape.lua:4520
 msgctxt "commsShipEnemy"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Votre race va s'éteindre ici et maintenant !"
 
 #: scripts/scenario_53_escape.lua:4521
 msgctxt "commsShipEnemy"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/scenario_53_escape.lua:4523
 msgctxt "commsShipEnemy"
@@ -2337,6 +2353,9 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Vous allez mourir faibles créatures insignifiantes!"
 
 #: scripts/scenario_53_escape.lua:4525
 msgctxt "commsShipEnemy"
@@ -2344,11 +2363,16 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
+"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+"\n"
+"Fin de transmission."
 
 #: scripts/scenario_53_escape.lua:4527
 msgctxt "commsShipEnemy"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
 
 #: scripts/scenario_53_escape.lua:4529
 msgctxt "commsShipEnemy"
@@ -2360,21 +2384,32 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
+"000110011010...Grzzzz..\n"
+"\n"
+"Communication binaire non détectée..Grzzz Nous passons en communication "
+"universelle..Grrzzz\n"
+"\n"
+"Générer une réponse appropriée pour la cible en langage humain à partir des "
+"archives...Grrzzzz\n"
+"\n"
+"Ne nous approchez pas! Grrzzz\n"
+"\n"
+"Communication interrompue."
 
 #: scripts/scenario_53_escape.lua:4530
 msgctxt "commsShipEnemy"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
 
 #: scripts/scenario_53_escape.lua:4531
 msgctxt "commsShipEnemy"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Commande non autorisée reçue. Cible verrouillée."
 
 #: scripts/scenario_53_escape.lua:4532
 msgctxt "commsShipEnemy"
 msgid "External command ignored."
-msgstr ""
+msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_53_escape.lua:4534
 msgctxt "commsShipEnemy"
@@ -2383,31 +2418,37 @@ msgid ""
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_53_escape.lua:4535
 msgctxt "commsShipEnemy"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
 
 #: scripts/scenario_53_escape.lua:4536
 msgctxt "commsShipEnemy"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
 
 #: scripts/scenario_53_escape.lua:4537
 msgctxt "commsShipEnemy"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
 
 #: scripts/scenario_53_escape.lua:4539
 msgctxt "commsShipEnemy"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_53_escape.lua:4557 scripts/scenario_53_escape.lua:4578
 msgctxt "commsShip"
 msgid "Yes?"
-msgstr ""
+msgstr "Oui ?"
 
 #: scripts/scenario_53_escape.lua:4580
 msgctxt "commsShip"
@@ -2423,7 +2464,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4660
 msgctxt "commsShip"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Réputation insuffisante"
 
 #: scripts/scenario_53_escape.lua:4722
 msgctxt "commsTrade"
@@ -2436,6 +2477,9 @@ msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"\n"
+"Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_53_escape.lua:4759
 msgctxt "commsShip"
@@ -2443,6 +2487,9 @@ msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"\n"
+"Bonne journée."
 
 #: scripts/scenario_53_escape.lua:4796
 msgctxt "msgTimerTab"
@@ -2714,14 +2761,17 @@ msgstr ""
 msgid ""
 "You don't steal from Boris Junk Yard without consequences. I'm coming for you"
 msgstr ""
+"Vous ne pouvez pas voler du matériel de la casse Boris sans conséquences. je "
+"viens m'occuper de vous"
 
 #: scripts/scenario_53_escape.lua:5306
 msgid "I saw you steal that ship. You'll rue the day"
 msgstr ""
+"Je vous ai vu voler ce vaisseau. Je vais vous faire regretter d'être nés"
 
 #: scripts/scenario_53_escape.lua:5308
 msgid "Stealing a ship, eh? We'll just see about that"
-msgstr ""
+msgstr "Alors, on vole un vaisseau ? Tranquillement... Bin on va voir ca"
 
 #: scripts/scenario_53_escape.lua:5320
 #, lua-format

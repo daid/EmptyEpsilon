@@ -4210,7 +4210,7 @@ function handleUndockedState()
 		end	--end public relations if branch
 	end)
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
                 setCommsMessage(_("commsStation", "You need to set a waypoint before you can request backup."));
             else
