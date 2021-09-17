@@ -1202,12 +1202,12 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3354
 msgctxt "commsAmmo"
 msgid "Can you supply us with some nukes? ("
-msgstr "Pouvez-vous nous fournir des armes nucléaires ? ("
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 
 #: scripts/scenario_53_escape.lua:3356
 msgctxt "commsAmmo"
 msgid "We really need some nukes ("
-msgstr "Nous avons vraiment besoin d'armes nucléaires ("
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_53_escape.lua:3358
 #, lua-format
@@ -1241,12 +1241,12 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_53_escape.lua:3380
 msgctxt "commsAmmo"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles à tête chercheuse de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
 
 #: scripts/scenario_53_escape.lua:3382
 msgctxt "commsAmmo"
 msgid "Do you have extra homing missiles? ("
-msgstr "Avez-vous des missiles à tête chercheuse supplémentaires ? ("
+msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
 
 #: scripts/scenario_53_escape.lua:3392
 msgctxt "commsAmmo"
@@ -1261,7 +1261,7 @@ msgstr "Et concernant les mines ? ("
 #: scripts/scenario_53_escape.lua:3404
 msgctxt "commsAmmo"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "Concernant les HVLI ? ("
 
 #: scripts/scenario_53_escape.lua:3406
 msgctxt "commsAmmo"
@@ -1678,7 +1678,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3798
 msgctxt "commsTrade"
 msgid "Buy, sell, trade"
-msgstr ""
+msgstr "Acheter, vendre, échanger"
 
 #: scripts/scenario_53_escape.lua:3800
 #, lua-format
@@ -1687,40 +1687,44 @@ msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
+"Station %s :\n"
+"Marchandises ou composants disponibles à la vente : quantité, coût en "
+"réputation\n"
 
 #: scripts/scenario_53_escape.lua:3802
 #, lua-format
 msgctxt "commsTrade"
 msgid "     %s: %i, %i\n"
-msgstr ""
+msgstr "     %s: %i, %i\n"
 
 #: scripts/scenario_53_escape.lua:3805
 msgctxt "commsTrade"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
+"Marchandises ou composants que la station achètera : prix en réputation\n"
 
 #: scripts/scenario_53_escape.lua:3807 scripts/scenario_53_escape.lua:3816
 #, lua-format
 msgctxt "commsTrade"
 msgid "     %s: %i\n"
-msgstr ""
+msgstr "     %s: %i\n"
 
 #: scripts/scenario_53_escape.lua:3810
 #, lua-format
 msgctxt "commsTrade"
 msgid "Current cargo aboard %s:\n"
-msgstr ""
+msgstr "Cargaison actuelle à bord de %s :\n"
 
 #: scripts/scenario_53_escape.lua:3820
 msgctxt "commsTrade"
 msgid "     Empty\n"
-msgstr ""
+msgstr "     Vide\n"
 
 #: scripts/scenario_53_escape.lua:3822
 #, lua-format
 msgctxt "commsTrade"
 msgid "Available Space: %i, Available Reputation: %i\n"
-msgstr ""
+msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 
 #: scripts/scenario_53_escape.lua:3825 scripts/scenario_53_escape.lua:4438
 #: scripts/scenario_53_escape.lua:4634 scripts/scenario_53_escape.lua:4697
@@ -1728,13 +1732,13 @@ msgstr ""
 #, lua-format
 msgctxt "commsTrade"
 msgid "Buy one %s for %i reputation"
-msgstr ""
+msgstr "Achetez 1 %s pour %i rép"
 
 #: scripts/scenario_53_escape.lua:3826
 #, lua-format
 msgctxt "commsTrade"
 msgid "Type: %s, Quantity: %i, Rep: %i"
-msgstr ""
+msgstr "Type : %s, Quantité : %i, Rép : %i"
 
 #: scripts/scenario_53_escape.lua:3828
 msgctxt "commsTrade"
@@ -1742,6 +1746,8 @@ msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
+"\n"
+"Espace de chargement insuffisant pour acheter"
 
 #: scripts/scenario_53_escape.lua:3830 scripts/scenario_53_escape.lua:3846
 msgctxt "commsTrade"
@@ -1749,6 +1755,8 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
+"Réputation insuffisante pour acheter"
 
 #: scripts/scenario_53_escape.lua:3832 scripts/scenario_53_escape.lua:3873
 #: scripts/scenario_53_escape.lua:3896 scripts/scenario_53_escape.lua:3919
@@ -1757,6 +1765,8 @@ msgid ""
 "\n"
 "Insufficient station inventory"
 msgstr ""
+"\n"
+"Stock insuffisant dans la station"
 
 #: scripts/scenario_53_escape.lua:3844
 msgctxt "commsTrade"
@@ -1764,18 +1774,20 @@ msgid ""
 "\n"
 "purchased"
 msgstr ""
+"\n"
+"Acheté"
 
 #: scripts/scenario_53_escape.lua:3856
 #, lua-format
 msgctxt "commsTrade"
 msgid "Sell one %s for %i reputation"
-msgstr ""
+msgstr "Vendre 1 %s pour %i rép"
 
 #: scripts/scenario_53_escape.lua:3857
 #, lua-format
 msgctxt "commsTrade"
 msgid "Type: %s,  Reputation price: %i"
-msgstr ""
+msgstr "Type : %s, Coût en rép : %i"
 
 #: scripts/scenario_53_escape.lua:3860
 msgctxt "commsTrade"
@@ -1783,19 +1795,21 @@ msgid ""
 "\n"
 "One sold"
 msgstr ""
+"\n"
+"1 vendu"
 
 #: scripts/scenario_53_escape.lua:3870
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade food for %s"
-msgstr ""
+msgstr "Échanger de la Nourriture (food) contre %s"
 
 #: scripts/scenario_53_escape.lua:3871 scripts/scenario_53_escape.lua:3894
 #: scripts/scenario_53_escape.lua:3917
 #, lua-format
 msgctxt "commsTrade"
 msgid "Type: %s,  Quantity: %i"
-msgstr ""
+msgstr "Type : %s, Quantité : %i"
 
 #: scripts/scenario_53_escape.lua:3884 scripts/scenario_53_escape.lua:3907
 #: scripts/scenario_53_escape.lua:3930
@@ -1804,19 +1818,21 @@ msgid ""
 "\n"
 "Traded"
 msgstr ""
+"\n"
+"Échangé"
 
 #: scripts/scenario_53_escape.lua:3893
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade medicine for %s"
-msgstr ""
+msgstr "Échanger des médicaments (medicine) contre %s"
 
 #: scripts/scenario_53_escape.lua:3916 scripts/scenario_53_escape.lua:4420
 #: scripts/scenario_53_escape.lua:4616
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade luxury for %s"
-msgstr ""
+msgstr "Échanger Produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_53_escape.lua:3946 scripts/scenario_53_escape.lua:4593
 #: scripts/scenario_53_escape.lua:4675
@@ -1879,17 +1895,18 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3991
 msgctxt "commsAmmo"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_53_escape.lua:3993
 msgctxt "commsAmmo"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
 
 #: scripts/scenario_53_escape.lua:4001 scripts/scenario_53_escape.lua:4016
 msgctxt "commsAmmo"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_53_escape.lua:4003
 msgctxt "commsAmmo"
@@ -1902,7 +1919,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4026
 msgctxt "commsAmmo"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Pas assez de réputation."
 
 #: scripts/scenario_53_escape.lua:4011
 msgctxt "commsAmmo"
@@ -1920,6 +1937,8 @@ msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
 
 #: scripts/scenario_53_escape.lua:4052
 msgctxt "commsStation"
@@ -1964,6 +1983,8 @@ msgid ""
 "\n"
 "   Nuke"
 msgstr ""
+"\n"
+"   Nuke"
 
 #: scripts/scenario_53_escape.lua:4099
 msgctxt "commsAmmo"
@@ -1971,6 +1992,8 @@ msgid ""
 "\n"
 "   EMP"
 msgstr ""
+"\n"
+"   EMP"
 
 #: scripts/scenario_53_escape.lua:4103
 msgctxt "commsAmmo"
@@ -1978,6 +2001,8 @@ msgid ""
 "\n"
 "   Homing"
 msgstr ""
+"\n"
+"   Homing"
 
 #: scripts/scenario_53_escape.lua:4107
 msgctxt "commsAmmo"
@@ -1985,6 +2010,8 @@ msgid ""
 "\n"
 "   Mine"
 msgstr ""
+"\n"
+"   Mine"
 
 #: scripts/scenario_53_escape.lua:4111
 msgctxt "commsAmmo"
@@ -1992,6 +2019,8 @@ msgid ""
 "\n"
 "   HVLI"
 msgstr ""
+"\n"
+"   HVLI"
 
 #: scripts/scenario_53_escape.lua:4114
 msgctxt "commsAmmo"
@@ -2747,49 +2776,49 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:5730 scripts/scenario_53_escape.lua:5779
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on reactor"
-msgstr ""
+msgstr "Réacteur complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5739 scripts/scenario_53_escape.lua:5788
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on beam weapons"
-msgstr ""
+msgstr "Faisceaux laser complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5748 scripts/scenario_53_escape.lua:5797
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on maneuver"
-msgstr ""
+msgstr "Système de manœuvre complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5757 scripts/scenario_53_escape.lua:5815
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on impulse engines"
-msgstr ""
+msgstr "Moteur à impulsions complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5766
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on shields"
-msgstr ""
+msgstr "Boucliers complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5806
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on missile weapons"
-msgstr ""
+msgstr "Système de missiles complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5824
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on warp drive"
-msgstr ""
+msgstr "Vitesse lumière complètement opérationnelle"
 
 #: scripts/scenario_53_escape.lua:5833
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on jump drive"
-msgstr ""
+msgstr "Téléportation complètement opérationnelle"
 
 #: scripts/scenario_53_escape.lua:5842
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on front shield"
-msgstr ""
+msgstr "Boucliers avant complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5851
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on rear shield"
-msgstr ""
+msgstr "Boucliers arrière complètement opérationnel"
