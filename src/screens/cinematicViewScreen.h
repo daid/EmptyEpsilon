@@ -27,12 +27,12 @@ private:
     float angle_pitch;
 
     glm::vec2 diff_2D{0, 0};
-    glm::vec3 diff_3D;
+    glm::vec3 diff_3D{};
     float distance_2D;
     float distance_3D;
 
     glm::vec2 target_position_2D{0, 0};
-    glm::vec3 target_position_3D;
+    glm::vec3 target_position_3D{};
     // camera_position is a Vector3, so no need to declare one here.
     glm::vec2 camera_position_2D{0, 0};
     float target_rotation;
@@ -40,9 +40,9 @@ private:
     P<SpaceObject> target_of_target;
 
     glm::vec2 tot_position_2D{0, 0};
-    glm::vec3 tot_position_3D;
+    glm::vec3 tot_position_3D{};
     glm::vec2 tot_diff_2D{0, 0};
-    glm::vec3 tot_diff_3D;
+    glm::vec3 tot_diff_3D{};
     float tot_angle;
     float tot_distance_2D;
     float tot_distance_3D;
