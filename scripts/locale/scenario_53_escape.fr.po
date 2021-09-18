@@ -104,33 +104,35 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:371
 msgctxt "scienceStationDescription"
 msgid "Mining and heavy industry"
-msgstr ""
+msgstr "Mines et industrie lourde"
 
 #: scripts/scenario_53_escape.lua:373
 msgctxt "scienceStationDescription"
 msgid "Baldwin Observatory"
-msgstr ""
+msgstr "Observatoire Baldwin"
 
 #: scripts/scenario_53_escape.lua:406
 msgctxt "scienceStationDescription"
 msgid "M class planet"
-msgstr ""
+msgstr "Planète de classe M"
 
 #: scripts/scenario_53_escape.lua:408
 msgctxt "scienceStationDescription"
 msgid "Malastare communications network hub"
-msgstr ""
+msgstr "Centre de communication de Malastare"
 
 #: scripts/scenario_53_escape.lua:1034
 msgctxt "scienceStationDescription"
 msgid "Optical Components"
-msgstr ""
+msgstr "Composants optiques"
 
 #: scripts/scenario_53_escape.lua:1046
 msgctxt "generalStationInformation"
 msgid ""
 "We make and supply optic components for various station and ship systems"
 msgstr ""
+"Nous fabriquons et fournissons des composants optiques pour divers systèmes "
+"de stations et de navires."
 
 #: scripts/scenario_53_escape.lua:1047
 msgctxt "stationHistory"
@@ -140,11 +142,15 @@ msgid ""
 "and the Japanese advanced low carbon (ALCA) electronic and optic research "
 "and development company"
 msgstr ""
+"Cette station gère les activités de la Terre sur la base de la fusion de "
+"plusieurs sociétés, dont Leica de Suisse, le fabricant de lentilles et la "
+"société japonaise de recherche et de développement électronique et optique à "
+"faible émission de carbone (ALCA)."
 
 #: scripts/scenario_53_escape.lua:1065
 msgctxt "scienceStationDescription"
 msgid "Battery and software engineering"
-msgstr ""
+msgstr "Ingénierie en batteries et logiciels"
 
 #: scripts/scenario_53_escape.lua:1077
 msgctxt "generalStationInformation"
@@ -152,6 +158,8 @@ msgid ""
 "We provide high quality high capacity batteries and specialized software for "
 "all shipboard systems"
 msgstr ""
+"Nous fournissons des batteries haute capacité de haute qualité et des "
+"logiciels spécialisés pour tous les systèmes de bord."
 
 #: scripts/scenario_53_escape.lua:1078
 msgctxt "stationHistory"
@@ -160,16 +168,19 @@ msgid ""
 "century movie depicting humanity unknowingly conquered by aliens and kept "
 "docile by software generated illusion"
 msgstr ""
+"La station porte le nom d'un ingénieur logiciel fictif dans un film de la "
+"fin du 20e siècle dépeignant l'humanité inconsciemment conquise par des "
+"extraterrestres et maintenue docile par une illusion générée par un logiciel."
 
 #: scripts/scenario_53_escape.lua:1091
 msgctxt "scienceStationDescription"
 msgid "Shield and Armor Research"
-msgstr ""
+msgstr "Recherche sur les boucliers et armures"
 
 #: scripts/scenario_53_escape.lua:1103
 msgctxt "generalStationInformation"
 msgid "The finest shield and armor manufacturer in the quadrant"
-msgstr ""
+msgstr "Le meilleur fabricant de boucliers et d'armures du quadrant."
 
 #: scripts/scenario_53_escape.lua:1104
 msgctxt "stationHistory"
@@ -177,16 +188,20 @@ msgid ""
 "We named this station for the pioneering spirit of the 22nd century "
 "Starfleet explorer, Captain Jonathan Archer"
 msgstr ""
+"Nous avons nommé cette station en mémoire à l'esprit pionnier de "
+"l'explorateur du Starfleet du 22ème siècle, le capitaine Jonathan Archer."
 
 #: scripts/scenario_53_escape.lua:1121
 msgctxt "scienceStationDescription"
 msgid "Energy and particle beam components"
-msgstr ""
+msgstr "Composants de faisceau d'énergie et de particules"
 
 #: scripts/scenario_53_escape.lua:1132
 msgctxt "generalStationInformation"
 msgid "We fabricate general and specialized components for ship beam systems"
 msgstr ""
+"Nous fabriquons des composants généraux et spécialisés pour les faisceaux "
+"des navires."
 
 #: scripts/scenario_53_escape.lua:1133
 msgctxt "stationHistory"
@@ -195,11 +210,14 @@ msgid ""
 "series of adjustable focal length mirrors to focus sunlight on a Roman naval "
 "fleet invading Syracuse, setting fire to it"
 msgstr ""
+"Cette station porte le nom d'Archimède qui, selon la légende, a utilisé une "
+"série de miroirs à focale réglable pour concentrer la lumière du soleil sur "
+"une flotte navale romaine envahissant Syracuse, y mettant le feu."
 
 #: scripts/scenario_53_escape.lua:1150
 msgctxt "scienceStationDescription"
 msgid "Warp and Impulse engine manufacturing"
-msgstr ""
+msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
 
 #: scripts/scenario_53_escape.lua:1163
 msgctxt "generalStationInformation"
@@ -207,6 +225,9 @@ msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
+"Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
+"téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
+"clients indépendants sur une base contractuelle."
 
 #: scripts/scenario_53_escape.lua:1164
 msgctxt "stationHistory"
@@ -216,11 +237,15 @@ msgid ""
 "entire space worthy vessels. In time, it transitioned into specializeing in "
 "propulsion systems."
 msgstr ""
+"La station porte le nom de l'astronaute de la fin du XIXe siècle ainsi que "
+"des stations fictives qui ont suivi. La station a initialement construit des "
+"navires dignes de tout l'espace. Avec le temps, elle s'est spécialisée dans "
+"les systèmes de propulsion."
 
 #: scripts/scenario_53_escape.lua:1177
 msgctxt "scienceStationDescription"
 msgid "Training and Coordination"
-msgstr ""
+msgstr "Formation et coordination"
 
 #: scripts/scenario_53_escape.lua:1188
 msgctxt "generalStationInformation"
@@ -228,6 +253,9 @@ msgid ""
 "We train naval cadets in routine and specialized functions aboard space "
 "vessels and coordinate naval activity throughout the sector"
 msgstr ""
+"Nous formons des élèves-officiers de la marine aux fonctions routinières et "
+"spécialisées à bord de vaisseaux spatiaux et coordonnons l'activité navale "
+"de l'ensemble du secteur."
 
 #: scripts/scenario_53_escape.lua:1189
 msgctxt "stationHistory"
@@ -238,11 +266,17 @@ msgid ""
 "then became a supply stop and as it has grown has become an educational and "
 "coordination hub for the region"
 msgstr ""
+"Les constructeurs de la station d'origine étaient des fans du scientifique "
+"et auteur de la fin du 20e siècle, Isaac Asimov. La station s'appelait "
+"initialement Foundation, mais fut plus tard simplement changée en Asimov. "
+"Elle a commencé comme observatoire stellaire, puis est devenue une station "
+"d'approvisionnement et au fur et à mesure qu'elle s'est développée, elle est "
+"devenue un centre d'éducation et de coordination pour la région."
 
 #: scripts/scenario_53_escape.lua:1202
 msgctxt "scienceStationDescription"
 msgid "Communication components"
-msgstr ""
+msgstr "Composants pour systèmes de communication"
 
 #: scripts/scenario_53_escape.lua:1214
 msgctxt "generalStationInformation"
@@ -250,6 +284,8 @@ msgid ""
 "We provide a range of communication equipment and software for use aboard "
 "ships"
 msgstr ""
+"Nous fournissons toute une gamme d'équipements et de logiciels de "
+"communication à utiliser à bord des navires."
 
 #: scripts/scenario_53_escape.lua:1215
 msgctxt "stationHistory"
@@ -259,16 +295,20 @@ msgid ""
 "singularity. Station personnel often refer to the station as the Broccoli "
 "station"
 msgstr ""
+"La station porte le nom de Reginald Barclay qui a établi le premier lien de "
+"communication transgalactique grâce à une application créative de "
+"singularité quantique. Le personnel de la station se réfère souvent à la "
+"station comme étant la station de brocoli."
 
 #: scripts/scenario_53_escape.lua:1232
 msgctxt "scienceStationDescription"
 msgid "Medical research"
-msgstr ""
+msgstr "Recherche médicale"
 
 #: scripts/scenario_53_escape.lua:1245
 msgctxt "generalStationInformation"
 msgid "We research and treat exotic medical conditions"
-msgstr ""
+msgstr "Nous recherchons et traitons des conditions médicales exotiques."
 
 #: scripts/scenario_53_escape.lua:1246
 msgctxt "stationHistory"
@@ -277,16 +317,21 @@ msgid ""
 "center based in Bethesda, Maryland on earth which was established in the mid "
 "20th century"
 msgstr ""
+"La station porte le nom du centre national de recherche médicale des États-"
+"Unis situé à Bethesda, dans le Maryland sur terre et qui a fût créé au "
+"milieu du 20e siècle."
 
 #: scripts/scenario_53_escape.lua:1253
 msgctxt "scienceStationDescription"
 msgid "Warp drive components"
-msgstr ""
+msgstr "Composants pour système de vitesse lumière"
 
 #: scripts/scenario_53_escape.lua:1265
 msgctxt "generalStationInformation"
 msgid "We provide warp drive engines and components"
 msgstr ""
+"Nous fournissons des moteurs et des composants pour système de vitesse "
+"lumière."
 
 #: scripts/scenario_53_escape.lua:1266
 msgctxt "stationHistory"
@@ -294,22 +339,27 @@ msgid ""
 "This station is named after Chris Van Den Broeck who did some initial "
 "research into the possibility of warp drive in the late 20th century on Earth"
 msgstr ""
+"Cette station porte le nom de Chris Van Den Broeck qui a initialement fait "
+"des recherches sur la possibilité de distorsion de l'espace et du temps à la "
+"fin du 20e siècle sur Terre."
 
 #: scripts/scenario_53_escape.lua:1284 scripts/scenario_53_escape.lua:1804
 #: scripts/scenario_53_escape.lua:1861 scripts/scenario_53_escape.lua:2738
 msgctxt "scienceStationDescription"
 msgid "Mining station"
-msgstr ""
+msgstr "Station minière"
 
 #: scripts/scenario_53_escape.lua:1308
 msgctxt "scienceStationDescription"
 msgid "Robotic research"
-msgstr ""
+msgstr "Recherche robotique"
 
 #: scripts/scenario_53_escape.lua:1320
 msgctxt "generalStationInformation"
 msgid "We research and provide robotic systems and components"
 msgstr ""
+"Nous faisons de la recherche et fournissons des systèmes et composants "
+"robotiques."
 
 #: scripts/scenario_53_escape.lua:1321
 msgctxt "stationHistory"
@@ -317,11 +367,13 @@ msgid ""
 "This station is named after Dr. Susan Calvin who pioneered robotic "
 "behavioral research and programming"
 msgstr ""
+"Cette station porte le nom du Dr Susan Calvin, pionnière de la recherche et "
+"de la programmation comportementales robotique."
 
 #: scripts/scenario_53_escape.lua:1336
 msgctxt "scienceStationDescription"
 msgid "Advanced Material components"
-msgstr ""
+msgstr "Composants de matériaux avancés"
 
 #: scripts/scenario_53_escape.lua:1347
 msgctxt "generalStationInformation"
@@ -329,6 +381,9 @@ msgid ""
 "We fabricate several different kinds of materials critical to various space "
 "industries like ship building, station construction and mineral extraction"
 msgstr ""
+"Nous fabriquons plusieurs types de matériaux essentiels à diverses "
+"industries spatiales telles que la construction navale, la construction de "
+"stations et l'extraction de minéraux."
 
 #: scripts/scenario_53_escape.lua:1348
 msgctxt "stationHistory"
@@ -336,11 +391,13 @@ msgid ""
 "We named our station after Dr. Cavor, the physicist that invented a barrier "
 "material for gravity waves - Cavorite"
 msgstr ""
+"Nous avons nommé notre station d'après le Dr Cavor, le physicien qui a "
+"inventé un matériau de confinage pour les ondes de gravité - Cavorite."
 
 #: scripts/scenario_53_escape.lua:1377 scripts/scenario_53_escape.lua:2080
 msgctxt "scienceStationDescription"
 msgid "Trading station"
-msgstr ""
+msgstr "Station de commerce"
 
 #: scripts/scenario_53_escape.lua:1388
 msgctxt "generalStationInformation"
@@ -348,6 +405,8 @@ msgid ""
 "Only the largest market and trading location in twenty sectors. You can find "
 "your heart's desire here"
 msgstr ""
+"Tout simplement le plus grand marché et lieu de négoce sur vingt secteurs à "
+"la ronde. Vous pouvez y trouver l'objet de tous vos désirs ici."
 
 #: scripts/scenario_53_escape.lua:1389
 msgctxt "stationHistory"
@@ -355,11 +414,14 @@ msgid ""
 "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
 "Designed and built with trade and commerce in mind"
 msgstr ""
+"Inspiré du bazar du début du 21e siècle sur Terre à Bangkok, en Thaïlande. "
+"Conçu et construit dans l'unique but de développer le commerce et les "
+"affaires."
 
 #: scripts/scenario_53_escape.lua:1402
 msgctxt "scienceStationDescription"
 msgid "Shielded circuitry fabrication"
-msgstr ""
+msgstr "Fabrication de circuits blindés"
 
 #: scripts/scenario_53_escape.lua:1414
 msgctxt "generalStationInformation"
@@ -367,6 +429,9 @@ msgid ""
 "We make a large variety of circuits for numerous ship systems shielded from "
 "sensor detection and external control interference"
 msgstr ""
+"Nous fabriquons une grande variété de circuits pour de nombreux systèmes de "
+"navires, blindés et protégés de la détection des capteurs et des "
+"interférences de contrôle externes."
 
 #: scripts/scenario_53_escape.lua:1415
 msgctxt "stationHistory"
@@ -375,16 +440,22 @@ msgid ""
 "which stationary electrically charged particals repel or attact each other - "
 "a fundamental principle in the design of our circuits"
 msgstr ""
+"Notre station est nommée d'après la loi qui quantifie la quantité de force "
+"avec laquelle les particules stationnaires chargées électriquement se "
+"repoussent ou s'attaquent - un principe fondamental dans la conception de "
+"nos circuits."
 
 #: scripts/scenario_53_escape.lua:1433 scripts/scenario_53_escape.lua:2426
 msgctxt "scienceStationDescription"
 msgid "Impulse engine components"
-msgstr ""
+msgstr "Composants de moteurs à impulsions"
 
 #: scripts/scenario_53_escape.lua:1444
 msgctxt "generalStationInformation"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
+"Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
+"pour une utilisation à bord des navires."
 
 #: scripts/scenario_53_escape.lua:1445
 msgctxt "stationHistory"
@@ -392,17 +463,20 @@ msgid ""
 "This station was named after the fictional engineer, Cyrus Smith created by "
 "19th century author Jules Verne"
 msgstr ""
+"Cette station a été nommée d'après l'ingénieur fictif Cyrus Smith créé par "
+"l'auteur du 19ème siècle Jules Verne."
 
 #: scripts/scenario_53_escape.lua:1463 scripts/scenario_53_escape.lua:2105
 #: scripts/scenario_53_escape.lua:2486
 msgctxt "scienceStationDescription"
 msgid "Android components"
-msgstr ""
+msgstr "Composants pour androïdes"
 
 #: scripts/scenario_53_escape.lua:1474
 msgctxt "generalStationInformation"
 msgid "Supplier of android components, programming and service"
 msgstr ""
+"Fournisseur de composants pour androïdes, de programmation et de service."
 
 #: scripts/scenario_53_escape.lua:1475
 msgctxt "stationHistory"
@@ -410,6 +484,8 @@ msgid ""
 "Named for Richard Deckard who inspired many of the sophisticated safety "
 "security algorithms now required for all androids"
 msgstr ""
+"Nommé en l'honneur de Richard Deckard qui a inspiré de nombreux algorithmes "
+"sophistiqués de sécurité désormais requis pour tous les androïdes."
 
 #: scripts/scenario_53_escape.lua:1491
 msgctxt "scienceStationDescription"
