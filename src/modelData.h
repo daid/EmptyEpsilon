@@ -14,8 +14,8 @@ class SpaceObject;
 class EngineEmitterData
 {
 public:
-    glm::vec3 position;
-    glm::vec3 color;
+    glm::vec3 position{};
+    glm::vec3 color{};
     float scale;
 
     EngineEmitterData(glm::vec3 position, glm::vec3 color, float scale) : position(position), color(color), scale(scale) {}
@@ -39,7 +39,7 @@ private:
     bool loaded;
 
     Mesh* mesh;
-    glm::vec3 mesh_offset;
+    glm::vec3 mesh_offset{};
     sf::Texture* texture;
     sf::Texture* specular_texture;
     sf::Texture* illumination_texture;

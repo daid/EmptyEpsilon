@@ -9,10 +9,10 @@ class BeamEffect : public SpaceObject, public Updatable
     float lifetime;
     int32_t sourceId;
     int32_t target_id;
-    glm::vec3 sourceOffset;
-    glm::vec3 targetOffset;
+    glm::vec3 sourceOffset{};
+    glm::vec3 targetOffset{};
     glm::vec2 targetLocation{};
-    glm::vec3 hitNormal;
+    glm::vec3 hitNormal{};
 public:
     bool fire_ring;
     string beam_texture;
