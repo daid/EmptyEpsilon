@@ -490,7 +490,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:1491
 msgctxt "scienceStationDescription"
 msgid "Repulsor and Tractor Beam Components"
-msgstr ""
+msgstr "Composants de faisceaux répulseur et tracteur"
 
 #: scripts/scenario_53_escape.lua:1504
 msgctxt "generalStationInformation"
@@ -498,6 +498,8 @@ msgid ""
 "We can meet all your pushing and pulling needs with specialized equipment "
 "custom made"
 msgstr ""
+"Nous pouvons répondre à tous vos besoins de poussée et de traction avec des "
+"équipements spécialisés fabriqués sur mesure."
 
 #: scripts/scenario_53_escape.lua:1505
 msgctxt "stationHistory"
@@ -506,11 +508,15 @@ msgid ""
 "Clifford D. Simak as well as from the 19th century developer John Deere who "
 "inspired a company that makes the Earth bound equivalents of our products"
 msgstr ""
+"Le nom de la station provient d'une nouvelle de l'auteur du 20e siècle "
+"Clifford D. Simak ainsi que du développeur du 19e siècle John Deere qui a "
+"inspiré une entreprise qui fabrique des équivalents terrestres de nos "
+"produits."
 
 #: scripts/scenario_53_escape.lua:1524 scripts/scenario_53_escape.lua:2136
 msgctxt "scienceStationDescription"
 msgid "Transporter components"
-msgstr ""
+msgstr "Composants de transporteur"
 
 #: scripts/scenario_53_escape.lua:1535
 msgctxt "generalStationInformation"
@@ -518,6 +524,8 @@ msgid ""
 "We provide transporters used aboard ships as well as the components for "
 "repair and maintenance"
 msgstr ""
+"Nous fournissons des transporteurs utilisés à bord des navires ainsi que des "
+"composants pour la réparation et l'entretien."
 
 #: scripts/scenario_53_escape.lua:1536
 msgctxt "stationHistory"
@@ -526,16 +534,20 @@ msgid ""
 "transporter, Dr. Emory Erickson. This station is proud to have received the "
 "endorsement of Admiral Leonard McCoy"
 msgstr ""
+"La station porte le nom de l'inventeur du transporteur au début du 22e "
+"siècle, le Dr Emory Erickson. Cette station est fière d'avoir reçu "
+"l'approbation de l'amiral Leonard McCoy."
 
 #: scripts/scenario_53_escape.lua:1554 scripts/scenario_53_escape.lua:1918
 msgctxt "scienceStationDescription"
 msgid "Autodoc components"
-msgstr ""
+msgstr "Composants Autodoc"
 
 #: scripts/scenario_53_escape.lua:1565
 msgctxt "generalStationInformation"
 msgid "We provide components for automated medical machinery"
 msgstr ""
+"Nous fournissons des composants pour des machines médicales automatisées."
 
 #: scripts/scenario_53_escape.lua:1566
 msgctxt "stationHistory"
@@ -543,16 +555,21 @@ msgid ""
 "The station is the evolution of the company that started automated "
 "pharmaceutical dispensing in the early 21st century on Earth in Finland"
 msgstr ""
+"Cette station est l'évolution de l'entreprise qui a commencé la distribution "
+"automatisée de produits pharmaceutiques au début du 21e siècle sur Terre en "
+"Finlande."
 
 #: scripts/scenario_53_escape.lua:1583
 msgctxt "scienceStationDescription"
 msgid "Nanotechnology research"
-msgstr ""
+msgstr "Recherche en nanotechnologie"
 
 #: scripts/scenario_53_escape.lua:1595
 msgctxt "generalStationInformation"
 msgid "We provide nanites and software for a variety of ship-board systems"
 msgstr ""
+"Nous fournissons des nanites et des logiciels pour une variété de systèmes "
+"embarqués."
 
 #: scripts/scenario_53_escape.lua:1596
 msgctxt "stationHistory"
@@ -560,17 +577,21 @@ msgid ""
 "This station's name recognizes one of the first scientific researchers into "
 "nanotechnology, physicist Richard Feynman"
 msgstr ""
+"Le nom de cette station rend hommage à l'un des premiers chercheurs "
+"scientifiques en nanotechnologie, le physicien Richard Feynman."
 
 #: scripts/scenario_53_escape.lua:1613 scripts/scenario_53_escape.lua:1734
 msgctxt "scienceStationDescription"
 msgid "Mining"
-msgstr ""
+msgstr "Exploitation minière"
 
 #: scripts/scenario_53_escape.lua:1625
 msgctxt "generalStationInformation"
 msgid ""
 "We mine nearby asteroids for precious minerals and process them for sale"
 msgstr ""
+"Nous extrayons des astéroïdes à proximité à la recherche de minéraux "
+"précieux et les traitons pour les vendre."
 
 #: scripts/scenario_53_escape.lua:1626
 msgctxt "stationHistory"
@@ -579,11 +600,14 @@ msgid ""
 "The station builders hoped to have a similar amount of minerals found "
 "amongst these asteroids"
 msgstr ""
+"Le nom de cette station est inspiré d'une grande mine d'or sur Terre en "
+"Indonésie. Les constructeurs de la station espéraient trouver une quantité "
+"similaire de minéraux parmi ces astéroïdes."
 
 #: scripts/scenario_53_escape.lua:1652
 msgctxt "scienceStationDescription"
 msgid "Observatory and stellar mapping"
-msgstr ""
+msgstr "Observatoire et cartographie stellaire"
 
 #: scripts/scenario_53_escape.lua:1663
 msgctxt "generalStationInformation"
@@ -591,6 +615,8 @@ msgid ""
 "We study the cosmos and map stellar phenomena. We also track moving "
 "asteroids. Look out! Just kidding"
 msgstr ""
+"Nous étudions le cosmos et cartographions les phénomènes stellaires. Nous "
+"suivons également les astéroïdes en mouvement. Attention ! Je rigole."
 
 #: scripts/scenario_53_escape.lua:1664
 msgctxt "stationHistory"
@@ -598,16 +624,21 @@ msgid ""
 "Station named in honor of Charles Hayden whose philanthropy continued "
 "astrophysical research and education on Earth in the early 20th century"
 msgstr ""
+"Station nommée en l'honneur de Charles Hayden dont la philanthropie a permis "
+"de continuer la recherche et l'éducation en astrophysique sur Terre au début "
+"du 20e siècle."
 
 #: scripts/scenario_53_escape.lua:1677 scripts/scenario_53_escape.lua:2651
 msgctxt "scienceStationDescription"
 msgid "Sensor components"
-msgstr ""
+msgstr "Composants de capteurs"
 
 #: scripts/scenario_53_escape.lua:1689
 msgctxt "generalStationInformation"
 msgid "We research and manufacture sensor components and systems"
 msgstr ""
+"Nous faisons de la rechercher et fabriquons des composants et des systèmes "
+"de capteurs."
 
 #: scripts/scenario_53_escape.lua:1690
 msgctxt "stationHistory"
@@ -616,16 +647,21 @@ msgid ""
 "electromagnetic sensors in the mid 20th century on Earth in the United "
 "Kingdom to assist blind human mobility"
 msgstr ""
+"La station porte le nom de Tony Heyes, l'inventeur de certains des premiers "
+"capteurs électromagnétiques du milieu du 20e siècle sur Terre au Royaume-Uni "
+"pour aider à la mobilité des humains non voyants."
 
 #: scripts/scenario_53_escape.lua:1703
 msgctxt "scienceStationDescription"
 msgid "Nanite supplier"
-msgstr ""
+msgstr "Fournisseur de nanites"
 
 #: scripts/scenario_53_escape.lua:1714
 msgctxt "generalStationInformation"
 msgid "We provide nanites for various organic and non-organic systems"
 msgstr ""
+"Nous fournissons des nanites pour divers systèmes organiques et non "
+"organiques."
 
 #: scripts/scenario_53_escape.lua:1715
 msgctxt "stationHistory"
@@ -633,16 +669,19 @@ msgid ""
 "This station is named after the nanotechnologist Hossam Haick from the early "
 "21st century on Earth in Israel"
 msgstr ""
+"Cette station porte le nom du nanotechnologue Hossam Haick du début du 21e "
+"siècle sur Terre en Israël."
 
 #: scripts/scenario_53_escape.lua:1746
 msgctxt "generalStationInformation"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr ""
+"Nous extrayons des astéroïdes à proximité pour trouver des minéraux précieux."
 
 #: scripts/scenario_53_escape.lua:1774
 msgctxt "scienceStationDescription"
 msgid "Xenopsychology training"
-msgstr ""
+msgstr "Formation en xénopsychologie"
 
 #: scripts/scenario_53_escape.lua:1785
 msgctxt "generalStationInformation"
@@ -650,6 +689,8 @@ msgid ""
 "We provide classes and simulation to help train diverse species in how to "
 "relate to each other"
 msgstr ""
+"Nous proposons des cours et des simulations pour aider à former diverses "
+"espèces sur la façon de les relier les unes aux autres."
 
 #: scripts/scenario_53_escape.lua:1786
 msgctxt "stationHistory"
@@ -658,6 +699,8 @@ msgid ""
 "the early 22nd century on Venus, supported by the application of these "
 "principles"
 msgstr ""
+"Poursuite des recherches initialement menées par le Dr Gennady Komov au "
+"début du 22ème siècle sur Vénus, appuyées par l'application de ces principes."
 
 #: scripts/scenario_53_escape.lua:1929
 msgctxt "generalStationInformation"
@@ -666,6 +709,9 @@ msgid ""
 "facilities designed for ships where a doctor cannot be a crew member "
 "(commonly called autodocs)"
 msgstr ""
+"Nous construisons, réparons et fournissons des composants et des mises à "
+"niveau pour des installations automatisées conçues pour les navires où un "
+"médecin ne peut pas être membre d'équipage (communément appelé autodocs)."
 
 #: scripts/scenario_53_escape.lua:1930
 msgctxt "stationHistory"
@@ -674,6 +720,10 @@ msgid ""
 "application around robot assisted surgery in the area of partial nephrectomy "
 "for renal tumors in the early 21st century on Earth"
 msgstr ""
+"La station porte le nom du Dr Lipkin qui a été le pionnier de certaines "
+"recherches et applications autour de la chirurgie assistée par robot dans le "
+"domaine de la néphrectomie partielle pour les tumeurs rénales au début du "
+"21e siècle sur Terre."
 
 #: scripts/scenario_53_escape.lua:1945
 msgctxt "scienceStationDescription"
