@@ -1381,7 +1381,7 @@ msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 #: scripts/scenario_53_escape.lua:3346
 msgctxt "commsAmmo"
 msgid "in restock function"
-msgstr ""
+msgstr "en cours de réapprovisionnement"
 
 #: scripts/scenario_53_escape.lua:3347
 msgctxt "commsAmmo"
@@ -1392,17 +1392,17 @@ msgstr "Quel genre de munitions ?"
 #, lua-format
 msgctxt "commsAmmo"
 msgid "player nuke weapon storage max: %.1f"
-msgstr ""
+msgstr "stock max d'armes nucléaires (nuke) du joueur : %1f"
 
 #: scripts/scenario_53_escape.lua:3350
 msgctxt "commsAmmo"
 msgid "player can fire nukes"
-msgstr ""
+msgstr "le joueur peut tirer des armes nucléaires (nuke)"
 
 #: scripts/scenario_53_escape.lua:3352
 msgctxt "commsAmmo"
 msgid "station has nukes available"
-msgstr ""
+msgstr "la station a des armes nucléaires (nuke) disponibles"
 
 #: scripts/scenario_53_escape.lua:3354
 msgctxt "commsAmmo"
@@ -1415,10 +1415,10 @@ msgid "We really need some nukes ("
 msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_53_escape.lua:3358
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "commsAmmo"
 msgid "nuke prompt: %s"
-msgstr ""
+msgstr "nuke rapide : %s"
 
 #: scripts/scenario_53_escape.lua:3359 scripts/scenario_53_escape.lua:3372
 #: scripts/scenario_53_escape.lua:3384 scripts/scenario_53_escape.lua:3396
@@ -1426,12 +1426,12 @@ msgstr ""
 #, lua-format
 msgctxt "commsAmmo"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rép chacun)"
 
 #: scripts/scenario_53_escape.lua:3360
 msgctxt "commsAmmo"
 msgid "going to handle weapon restock function"
-msgstr ""
+msgstr "va gérer la fonction de réapprovisionnement des armes"
 
 #: scripts/scenario_53_escape.lua:3368
 msgctxt "commsAmmo"
@@ -1476,7 +1476,7 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 #: scripts/scenario_53_escape.lua:3418
 msgctxt "commsCrewFriends"
 msgid "Talk to Kent's brother"
-msgstr ""
+msgstr "Parlez au frère de Kent"
 
 #: scripts/scenario_53_escape.lua:3419
 msgctxt "commsCrewFriends"
@@ -1485,23 +1485,28 @@ msgid ""
 "spend the rest of your life there. Thank you, captain, for helping Kent get "
 "out of there"
 msgstr ""
+"Kent ? C'est bien toi ? Tu a réussi à t'échapper de la base des Kraylor ? "
+"Nous pensions que tu allais y passer le reste de ta vie. Merci, capitaine, "
+"d'avoir sorti mon frère de là."
 
 #: scripts/scenario_53_escape.lua:3420
 msgctxt "commsCrewFriends"
 msgid "Can you help us with beam weapon repair?"
-msgstr ""
+msgstr "Pouvez-vous nous aider à réparer les faisceaux laser ?"
 
 #: scripts/scenario_53_escape.lua:3421
 msgctxt "commsCrewFriends"
 msgid ""
 "For the Repulse class? Absolutely. I used to work on those all the time."
 msgstr ""
+"Pour un navire de classe Repulse? Absolument. J'avais l'habitude de "
+"travailler dessus tout le temps."
 
 #: scripts/scenario_53_escape.lua:3426 scripts/scenario_53_escape.lua:3648
 #: scripts/scenario_53_escape.lua:3675 scripts/scenario_53_escape.lua:3705
 msgctxt "commsCrewFriends"
 msgid "Thanks"
-msgstr ""
+msgstr "Merci"
 
 #: scripts/scenario_53_escape.lua:3427
 msgctxt "commsCrewFriends"
@@ -1509,16 +1514,18 @@ msgid ""
 "You're quite welcome. While I was in there, I fixed up your beams so they "
 "could function at maximum potential"
 msgstr ""
+"De rien. Pendant que j'étais là-dedans, j'en ai profité pour booster vos "
+"faisceaux, qu'ils puissent fonctionner au maximum de leur potentiel."
 
 #: scripts/scenario_53_escape.lua:3429
 msgctxt "commsCrewFriends"
 msgid "Then double thanks!"
-msgstr ""
+msgstr "Alors encore merci !"
 
 #: scripts/scenario_53_escape.lua:3431
 msgctxt "commsCrewFriends"
 msgid "Thank *you* for getting my brother out of that Kraylor prison"
-msgstr ""
+msgstr "Merci à VOUS d'avoir fait sortir mon frère de cette prison Kraylor."
 
 #: scripts/scenario_53_escape.lua:3432 scripts/scenario_53_escape.lua:3434
 #: scripts/scenario_53_escape.lua:3436 scripts/scenario_53_escape.lua:3438
@@ -1564,75 +1571,83 @@ msgstr "Précédent"
 #: scripts/scenario_53_escape.lua:3444
 msgctxt "commsCrewFriends"
 msgid "Talk to Edwina's father"
-msgstr ""
+msgstr "Parlez au père d'Edwina"
 
 #: scripts/scenario_53_escape.lua:3445
 msgctxt "commsCrewFriends"
 msgid ""
 "I am glad to hear that Edwina escaped that prison. We were worried about her"
 msgstr ""
+"Je suis heureux d'apprendre qu'Edwina s'est échappée de cette prison "
+"Kraylor. Nous étions tellement inquiets pour elle."
 
 #: scripts/scenario_53_escape.lua:3446
 msgctxt "commsCrewFriends"
 msgid "Edwina says you do missile systems repair work"
 msgstr ""
+"Edwina dit que vous travaillez dans la réparation de systèmes de missiles. "
+"Pourriez-vous jeter un oeil ?"
 
 #: scripts/scenario_53_escape.lua:3447
 msgctxt "commsCrewFriends"
 msgid "Should be easy enough. I'm grateful to you for helping Edwina escape."
 msgstr ""
+"Cela devrait être assez facile. Je vous suis tellement reconnaissant d'avoir "
+"aidé ma ptite Edwina à s'échapper."
 
 #: scripts/scenario_53_escape.lua:3451
 msgctxt "commsCrewFriends"
 msgid "You're quite welcome"
-msgstr ""
+msgstr "A votre service."
 
 #: scripts/scenario_53_escape.lua:3463
 msgctxt "commsCrewFriends"
 msgid "Talk to Johnny"
-msgstr ""
+msgstr "Parlez à Johnny"
 
 #: scripts/scenario_53_escape.lua:3464
 msgctxt "commsCrewFriends"
 msgid "Mom? Wow, I thought you were toast. Good to hear your voice"
 msgstr ""
+"Maman ? Wow, je pensais que tu t'étais fais griller. C'est bon d'entendre ta "
+"voix."
 
 #: scripts/scenario_53_escape.lua:3465
 msgctxt "commsCrewFriends"
 msgid "Can you get our impulse drive working better"
-msgstr ""
+msgstr "Peux-tu améliorer le fonctionnement de nos moteurs a impulsion ?"
 
 #: scripts/scenario_53_escape.lua:3491
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Piece of cake. Thanks for the %s"
-msgstr ""
+msgstr "C'est du gâteau. Merci pour le %s"
 
 #: scripts/scenario_53_escape.lua:3496 scripts/scenario_53_escape.lua:3508
 msgctxt "commsCrewFriends"
 msgid "Thank you"
-msgstr ""
+msgstr "Merci encore"
 
 #: scripts/scenario_53_escape.lua:3497 scripts/scenario_53_escape.lua:3509
 msgctxt "commsCrewFriends"
 msgid "Sure. Mom, I'll see you at Christmas"
-msgstr ""
+msgstr "Bien sûr. Maman, je te verrai à Noël."
 
 #: scripts/scenario_53_escape.lua:3502
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Piece of cake, but I'll need %s"
-msgstr ""
+msgstr "C'est du gâteau, mais je vais avoir besoin de %s"
 
 #: scripts/scenario_53_escape.lua:3505
 msgctxt "commsCrewFriends"
 msgid "Piece of cake"
-msgstr ""
+msgstr "C'est du gâteau."
 
 #: scripts/scenario_53_escape.lua:3522
 msgctxt "commsCrewFriends"
 msgid "Talk to Nancy's brother"
-msgstr ""
+msgstr "Parlez au frère de Nancy"
 
 #: scripts/scenario_53_escape.lua:3523
 msgctxt "commsCrewFriends"
@@ -1641,11 +1656,14 @@ msgid ""
 "imprisoned. Good to know you won't be stuck there forever. What brings you "
 "here?"
 msgstr ""
+"Nancy ! Aux dernières nouvelles, ton vaisseau avait été capturé par les "
+"Kraylors et tu étais emprisonné. C'est bon de savoir que tu ne sera pas "
+"coincé là-bas pour toujours. Quel bon vent t'amène ?"
 
 #: scripts/scenario_53_escape.lua:3524
 msgctxt "commsCrewFriends"
 msgid "Our jump drive needs some tuning"
-msgstr ""
+msgstr "Notre téléporteur aurait bien besoin d'un réglage."
 
 #: scripts/scenario_53_escape.lua:3550
 #, lua-format
@@ -1654,16 +1672,20 @@ msgid ""
 "That should not be hard to do. I could probably do that in my sleep. Thanks "
 "for bringing %s"
 msgstr ""
+"Cela ne devrait pas être trop difficile à faire. Je pourrais probablement "
+"même le faire pendant mon sommeil. Merci de m'apporter %s"
 
 #: scripts/scenario_53_escape.lua:3555 scripts/scenario_53_escape.lua:3567
 msgctxt "commsCrewFriends"
 msgid "Thanks, bro"
-msgstr ""
+msgstr "Merci frangin."
 
 #: scripts/scenario_53_escape.lua:3556 scripts/scenario_53_escape.lua:3568
 msgctxt "commsCrewFriends"
 msgid "No problem. Treat your jump drive right and it'll always bring you home"
 msgstr ""
+"Aucun problème. Traitez votre téléporteur avec respect et il vous ramènera "
+"toujours à la maison."
 
 #: scripts/scenario_53_escape.lua:3561
 #, lua-format
@@ -1672,16 +1694,20 @@ msgid ""
 "That should not be hard to do. I could probably do that in my sleep. But "
 "I'll need some %s"
 msgstr ""
+"Cela ne devrait pas être trop difficile à faire. Je pourrais probablement "
+"même le faire pendant mon sommeil. Mais j'aurai besoin de %s"
 
 #: scripts/scenario_53_escape.lua:3564
 msgctxt "commsCrewFriends"
 msgid "That should not be hard to do. I could probably do that in my sleep"
 msgstr ""
+"Cela ne devrait pas être trop difficile à faire. Je pourrais probablement "
+"même le faire pendant mon sommeil."
 
 #: scripts/scenario_53_escape.lua:3581
 msgctxt "commsCrewFriends"
 msgid "Talk to Manuel's cousin"
-msgstr ""
+msgstr "Parlez au cousin de Manuel"
 
 #: scripts/scenario_53_escape.lua:3582
 msgctxt "commsCrewFriends"
@@ -1689,42 +1715,46 @@ msgid ""
 "Yo Manuel, why you want to scare us by getting captured, man? At least you "
 "escaped. Why you here?"
 msgstr ""
+"Yo Manuel, pourquoi tu veux nous faire peur en te faisant capturer, mec ? Au "
+"moins tu t'es échappé. C'est cool. Pourquoi êtes-vous ici ?"
 
 #: scripts/scenario_53_escape.lua:3583
 msgctxt "commsCrewFriends"
 msgid "The reactor is weak... real weak"
-msgstr ""
+msgstr "Notre réacteur est faible... vraiment faible."
 
 #: scripts/scenario_53_escape.lua:3584
 msgctxt "commsCrewFriends"
 msgid "Lemme see if I can get it to charge up right."
-msgstr ""
+msgstr "Laissez-moi voir si je peux le charger correctement."
 
 #: scripts/scenario_53_escape.lua:3587
 msgctxt "commsCrewFriends"
 msgid "The captain would appreciate it"
-msgstr ""
+msgstr "Le capitaine va apprécier."
 
 #: scripts/scenario_53_escape.lua:3588
 msgctxt "commsCrewFriends"
 msgid ""
 "You're all set. Don't overheat the reactor or you'll get a nasty surprise"
 msgstr ""
+"Vous êtes opérationnel. Ne surchauffez pas le réacteur ou vous risquez "
+"d'avoir une mauvaise surprise."
 
 #: scripts/scenario_53_escape.lua:3600
 msgctxt "commsCrewFriends"
 msgid "Talk to Fred's wife"
-msgstr ""
+msgstr "Parlez à la femme de Fred"
 
 #: scripts/scenario_53_escape.lua:3601
 msgctxt "commsCrewFriends"
 msgid "Fred! You escaped! We were worried sick"
-msgstr ""
+msgstr "Fred ! Tu t'es échappé ! Nous étions malades d'inquiétude."
 
 #: scripts/scenario_53_escape.lua:3602
 msgctxt "commsCrewFriends"
 msgid "We need to connect to the Human Navy network"
-msgstr ""
+msgstr "Nous devons nous connecter au réseau de la Marine."
 
 #: scripts/scenario_53_escape.lua:3603
 msgctxt "commsCrewFriends"
@@ -1732,31 +1762,35 @@ msgid ""
 "I can do that for you. However, that means you'll go from being Independent "
 "to being in the Human Navy"
 msgstr ""
+"Je peux faire ça pour vous. Cependant, cela signifie que vous allez passer "
+"du statut d'indépendant à celui de la marine."
 
 #: scripts/scenario_53_escape.lua:3604
 msgctxt "commsCrewFriends"
 msgid "I understand the consequences. Please proceed"
-msgstr ""
+msgstr "Je comprends les conséquences. S'il vous plait faites-le."
 
 #: scripts/scenario_53_escape.lua:3647
 msgctxt "commsCrewFriends"
 msgid "You're all fixed up"
-msgstr ""
+msgstr "Vos communications sont complètement rétablies"
 
 #: scripts/scenario_53_escape.lua:3649
 msgctxt "commsCrewFriends"
 msgid "You're welcome. Fred, honey, I'll see you after you get off work"
 msgstr ""
+"C'est la moindre des choses. Vous avez sorti mon mari d'une sale situation. "
+"Fred, mon chéri, je te verrai après le travail."
 
 #: scripts/scenario_53_escape.lua:3655
 msgctxt "commsCrewFriends"
 msgid "I'll check with the captain and get back to you"
-msgstr ""
+msgstr "Je vais en référer au capitaine et je te rappelle."
 
 #: scripts/scenario_53_escape.lua:3656
 msgctxt "commsCrewFriends"
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: scripts/scenario_53_escape.lua:3667 scripts/scenario_53_escape.lua:3736
 msgctxt "commsCrewFriends"
@@ -2097,7 +2131,7 @@ msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 #: scripts/scenario_53_escape.lua:3984
 msgctxt "commsAmmo"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
 #: scripts/scenario_53_escape.lua:3991
 msgctxt "commsAmmo"
@@ -2133,12 +2167,13 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_53_escape.lua:4011
 msgctxt "commsAmmo"
 msgid "You can't afford as much as I'd like to give you"
-msgstr ""
+msgstr "Vous ne pouvez pas recevoir autant que je voudrais vous donner"
 
 #: scripts/scenario_53_escape.lua:4012
+#, fuzzy
 msgctxt "commsAmmo"
 msgid "Get just one"
-msgstr ""
+msgstr "Prendre juste celui-là"
 
 #: scripts/scenario_53_escape.lua:4018
 msgctxt "commsAmmo"
@@ -2674,13 +2709,13 @@ msgstr "Oui ?"
 #: scripts/scenario_53_escape.lua:4580
 msgctxt "commsShip"
 msgid "Where are you headed?"
-msgstr ""
+msgstr "Où allez-vous ?"
 
 #: scripts/scenario_53_escape.lua:4658
 #, lua-format
 msgctxt "commsShip"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr ""
+msgstr "Où allez-vous? (coût : %f réputation)"
 
 #: scripts/scenario_53_escape.lua:4660
 msgctxt "commsShip"
