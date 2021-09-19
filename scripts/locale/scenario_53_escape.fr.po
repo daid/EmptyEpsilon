@@ -1012,6 +1012,8 @@ msgstr "Composants et recherche sur les boucliers"
 msgctxt "generalStationInformation"
 msgid "We research and fabricate components for ship shield systems"
 msgstr ""
+"Nous effectuons des recherches et fabriquons des composants pour les "
+"systèmes de boucliers de navire."
 
 #: scripts/scenario_53_escape.lua:2392
 msgctxt "stationHistory"
@@ -1021,16 +1023,21 @@ msgid ""
 "research into the feasability of generating an energy shield in the late "
 "20th century"
 msgstr ""
+"Cette station porte le nom de l'institut de recherche national Rutherford "
+"Appleton Laboratory au Royaume-Uni, qui a mené des recherches préliminaires "
+"sur la faisabilité de générer un bouclier énergétique à la fin du 20e siècle."
 
 #: scripts/scenario_53_escape.lua:2410 scripts/scenario_53_escape.lua:3095
 msgctxt "scienceStationDescription"
 msgid "Observatory"
-msgstr ""
+msgstr "Observatoire"
 
 #: scripts/scenario_53_escape.lua:2437
 msgctxt "generalStationInformation"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
+"Nous faisons de la recherche et fabriquons des composants et systèmes pour "
+"moteurs à impulsion."
 
 #: scripts/scenario_53_escape.lua:2438
 msgctxt "stationHistory"
@@ -1038,17 +1045,21 @@ msgid ""
 "The station is named after Roger Shawyer who built the first prototype "
 "impulse engine in the early 21st century"
 msgstr ""
+"La station porte le nom de Roger Shawyer qui a construit le premier "
+"prototype de moteur à impulsion au début du 21e siècle."
 
 #: scripts/scenario_53_escape.lua:2455
 msgctxt "scienceStationDescription"
 msgid "Repulsor and tractor beam components"
-msgstr ""
+msgstr "Composants de faisceaux répulseur et tracteur"
 
 #: scripts/scenario_53_escape.lua:2467
 msgctxt "generalStationInformation"
 msgid ""
 "We make ship systems designed to push or pull other objects around in space"
 msgstr ""
+"Nous fabriquons des systèmes pour vaisseaux conçus pour pousser ou tirer "
+"d'autres objets dans l'espace."
 
 #: scripts/scenario_53_escape.lua:2468
 msgctxt "stationHistory"
@@ -1058,11 +1069,15 @@ msgid ""
 "ocean-going vessels on earth as tractor and repulsor beams serve for space-"
 "going vessels today"
 msgstr ""
+"Notre station est nommée Shree d'après l'un des nombreux fabricants de "
+"remorqueurs du début du 21e siècle sur Terre en Inde. Les remorqueurs sur "
+"terre er sur les océans ont une fonction similaire aux navires spatiaux avec "
+"leur faisceaux tracteurs et répulseurs."
 
 #: scripts/scenario_53_escape.lua:2497
 msgctxt "generalStationInformation"
 msgid "We create androids and android components"
-msgstr ""
+msgstr "Nous créons des androïdes et des composants pour androïdes."
 
 #: scripts/scenario_53_escape.lua:2498
 msgctxt "stationHistory"
@@ -1070,11 +1085,13 @@ msgid ""
 "The station is named after Dr. Noonian Soong, the famous android researcher "
 "and builder"
 msgstr ""
+"La station porte le nom du Dr Noonian Soong, le célèbre chercheur et "
+"créateur d'androïdes."
 
 #: scripts/scenario_53_escape.lua:2513
 msgctxt "scienceStationDescription"
 msgid "Logistics coordination"
-msgstr ""
+msgstr "Coordination logistique"
 
 #: scripts/scenario_53_escape.lua:2524
 msgctxt "generalStationInformation"
@@ -1082,6 +1099,8 @@ msgid ""
 "We support the stations and ships in the area with planning and "
 "communication services"
 msgstr ""
+"Nous soutenons les stations et les vaisseaux de la région avec des services "
+"de planification et de communication."
 
 #: scripts/scenario_53_escape.lua:2525
 msgctxt "stationHistory"
@@ -1089,11 +1108,13 @@ msgid ""
 "We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
 "23rd century in our station name"
 msgstr ""
+"Nous reconnaissons l'influence du capitaine du Starfleet James Tiberius Kirk "
+"au 23e siècle dans le nom de notre station."
 
 #: scripts/scenario_53_escape.lua:2532
 msgctxt "scienceStationDescription"
 msgid "Advanced material components"
-msgstr ""
+msgstr "Composants de matériaux avancés"
 
 #: scripts/scenario_53_escape.lua:2543
 msgctxt "generalStationInformation"
@@ -1101,6 +1122,8 @@ msgid ""
 "We create multiple types of advanced material components. Our most popular "
 "products are our filaments"
 msgstr ""
+"Nous fabriquons plusieurs types de composants de matériaux avancés. Nos "
+"produits les plus populaires sont nos filaments."
 
 #: scripts/scenario_53_escape.lua:2544
 msgctxt "stationHistory"
@@ -1108,11 +1131,13 @@ msgid ""
 "We learned several of our critical industrial processes from the Tokra race, "
 "so we honor our fortune by naming the station after them"
 msgstr ""
+"Nous avons développé plusieurs de nos processus industriels grâce à la race "
+"Tokra, nous honorons donc notre succès en donnant leur nom à la station."
 
 #: scripts/scenario_53_escape.lua:2573
 msgctxt "scienceStationDescription"
 msgid "Shield and armor components and research"
-msgstr ""
+msgstr "Boucliers et armures : Composants et recherche"
 
 #: scripts/scenario_53_escape.lua:2584
 msgctxt "generalStationInformation"
@@ -2057,17 +2082,17 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3978
 msgctxt "commsAmmo"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_53_escape.lua:3982
 msgctxt "commsAmmo"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
 
 #: scripts/scenario_53_escape.lua:3983
 msgctxt "commsAmmo"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
 #: scripts/scenario_53_escape.lua:3984
 msgctxt "commsAmmo"
@@ -2096,6 +2121,8 @@ msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
 
 #: scripts/scenario_53_escape.lua:4006 scripts/scenario_53_escape.lua:4021
 #: scripts/scenario_53_escape.lua:4026
@@ -2148,6 +2175,9 @@ msgid ""
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
 msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
 
 #: scripts/scenario_53_escape.lua:4087
 msgctxt "commsStation"
@@ -2162,7 +2192,7 @@ msgstr "De quel genre d'informations avez-vous besoin ?"
 #: scripts/scenario_53_escape.lua:4089
 msgctxt "commsAmmo"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "De quelles munitions disposez-vous ?"
 
 #: scripts/scenario_53_escape.lua:4095
 msgctxt "commsAmmo"
@@ -2212,24 +2242,24 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4114
 msgctxt "commsAmmo"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 
 #: scripts/scenario_53_escape.lua:4116
 #, lua-format
 msgctxt "commsAmmo"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_53_escape.lua:4118
 #, lua-format
 msgctxt "commsAmmo"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_53_escape.lua:4132
 msgctxt "commsTrade"
 msgid "What goods do you have available for sale or trade?"
-msgstr ""
+msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
 
 #: scripts/scenario_53_escape.lua:4134
 #, lua-format
@@ -2238,6 +2268,8 @@ msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
+"Station %s :\n"
+"Marchandises ou composants disponibles : quantité, coût en réputation"
 
 #: scripts/scenario_53_escape.lua:4136
 #, lua-format
@@ -2246,11 +2278,13 @@ msgid ""
 "\n"
 "   %14s: %2i, %3i"
 msgstr ""
+"\n"
+"   %14s: %2i, %3i"
 
 #: scripts/scenario_53_escape.lua:4142
 msgctxt "commsTrade"
 msgid "Where can I find particular goods?"
-msgstr ""
+msgstr "Où puis-je trouver des marchandises particulières ?"
 
 #: scripts/scenario_53_escape.lua:4144
 msgctxt "commsTrade"
@@ -2258,12 +2292,15 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
+"Les stations amicales ont souvent de la nourriture ou des médicaments ou les "
+"deux. Les stations neutres peuvent échanger leurs marchandises contre de la "
+"nourriture, des médicaments ou du luxe."
 
 #: scripts/scenario_53_escape.lua:4184
 #, lua-format
 msgctxt "commsTrade"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr ""
+msgstr "La station %s dans le secteur %s possède %s pour %i rép"
 
 #: scripts/scenario_53_escape.lua:4189
 msgctxt "commsTrade"
@@ -2273,11 +2310,15 @@ msgid ""
 "What goods are you interested in?\n"
 "I've heard about these:"
 msgstr ""
+"\n"
+"\n"
+"Quels marchandises vous intéressent ?\n"
+"J'ai entendu parler de ça :"
 
 #: scripts/scenario_53_escape.lua:4191
 msgctxt "commsTrade"
 msgid " Beyond that, I have no knowledge of specific stations"
-msgstr ""
+msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
 
 #: scripts/scenario_53_escape.lua:4213
 #, lua-format
@@ -2379,7 +2420,7 @@ msgstr "Monsieur, comment pouvons-nous vous assister ?"
 #: scripts/scenario_53_escape.lua:4371 scripts/scenario_53_escape.lua:4558
 msgctxt "commsTrade"
 msgid "Do you have cargo you might sell?"
-msgstr ""
+msgstr "Avez-vous des marchandises que vous pourriez vendre ?"
 
 #: scripts/scenario_53_escape.lua:4373 scripts/scenario_53_escape.lua:4560
 msgctxt "commsTrade"
