@@ -1936,12 +1936,12 @@ msgstr "Oui, veuillez prendre le %s et réparer le bouclier."
 #: scripts/scenario_53_escape.lua:3749
 msgctxt "commsCrewFriends"
 msgid "Front shield fully functional"
-msgstr "Bouclier avant complètement opérationnel."
+msgstr "Boucliers avant complètement opérationnel."
 
 #: scripts/scenario_53_escape.lua:3753
 msgctxt "commsCrewFriends"
 msgid "Rear shield fully functional"
-msgstr "Bouclier arrière complètement opérationnel."
+msgstr "Boucliers arrière complètement opérationnel."
 
 #: scripts/scenario_53_escape.lua:3759
 #, lua-format
@@ -3237,7 +3237,7 @@ msgstr "Système de manœuvre complètement opérationnel"
 #: scripts/scenario_53_escape.lua:5757 scripts/scenario_53_escape.lua:5815
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on impulse engines"
-msgstr "Moteur à impulsions complètement opérationnel"
+msgstr "Moteurs à impulsion complètement opérationnel"
 
 #: scripts/scenario_53_escape.lua:5766
 msgctxt "msgEngineer"
