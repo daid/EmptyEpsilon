@@ -223,7 +223,7 @@ function addCommsReplySupply(args)
     local price = args.price
     local missile_type = args.missile_type
     addCommsReply(
-        string.format(args.request .. _(" (%d rep each)"), price),
+        string.format(args.request .. " " .. _("(%d rep each)"), price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage(_("You need to stay docked for that action."))
