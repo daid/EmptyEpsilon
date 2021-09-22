@@ -673,7 +673,7 @@ msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:1048
 msgid "What are my current orders?"
-msgstr "Quelles sont nos ordres cours ?"
+msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1051
 msgid ""

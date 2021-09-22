@@ -1529,7 +1529,7 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 #: scripts/scenario_53_escape.lua:3418
 msgctxt "commsCrewFriends"
 msgid "Talk to Kent's brother"
-msgstr "Parlez au frère de Kent"
+msgstr "Parler au frère de Kent"
 
 #: scripts/scenario_53_escape.lua:3419
 msgctxt "commsCrewFriends"
@@ -1545,14 +1545,14 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3420
 msgctxt "commsCrewFriends"
 msgid "Can you help us with beam weapon repair?"
-msgstr "Pouvez-vous nous aider à réparer les faisceaux laser ?"
+msgstr "Pouvez-vous nous aider à réparer les faisceaux laser ?"
 
 #: scripts/scenario_53_escape.lua:3421
 msgctxt "commsCrewFriends"
 msgid ""
 "For the Repulse class? Absolutely. I used to work on those all the time."
 msgstr ""
-"Pour un navire de classe Repulse? Absolument. J'avais l'habitude de "
+"Pour un navire de classe Repulse ? Absolument. J'avais l'habitude de "
 "travailler dessus tout le temps."
 
 #: scripts/scenario_53_escape.lua:3426 scripts/scenario_53_escape.lua:3648
@@ -1624,7 +1624,7 @@ msgstr "Précédent"
 #: scripts/scenario_53_escape.lua:3444
 msgctxt "commsCrewFriends"
 msgid "Talk to Edwina's father"
-msgstr "Parlez au père d'Edwina"
+msgstr "Parler au père d'Edwina"
 
 #: scripts/scenario_53_escape.lua:3445
 msgctxt "commsCrewFriends"
@@ -1656,7 +1656,7 @@ msgstr "A votre service."
 #: scripts/scenario_53_escape.lua:3463
 msgctxt "commsCrewFriends"
 msgid "Talk to Johnny"
-msgstr "Parlez à Johnny"
+msgstr "Parler à Johnny"
 
 #: scripts/scenario_53_escape.lua:3464
 msgctxt "commsCrewFriends"
@@ -1668,13 +1668,13 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3465
 msgctxt "commsCrewFriends"
 msgid "Can you get our impulse drive working better"
-msgstr "Peux-tu améliorer le fonctionnement de nos moteurs a impulsion ?"
+msgstr "Peux-tu améliorer le fonctionnement de nos moteurs à impulsion ?"
 
 #: scripts/scenario_53_escape.lua:3491
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Piece of cake. Thanks for the %s"
-msgstr "C'est du gâteau. Merci pour le %s"
+msgstr "C'est du gâteau. Merci pour le %s."
 
 #: scripts/scenario_53_escape.lua:3496 scripts/scenario_53_escape.lua:3508
 msgctxt "commsCrewFriends"
@@ -1690,7 +1690,7 @@ msgstr "Bien sûr. Maman, je te verrai à Noël."
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Piece of cake, but I'll need %s"
-msgstr "C'est du gâteau, mais je vais avoir besoin de %s"
+msgstr "C'est du gâteau, mais je vais avoir besoin de %s."
 
 #: scripts/scenario_53_escape.lua:3505
 msgctxt "commsCrewFriends"
@@ -1700,7 +1700,7 @@ msgstr "C'est du gâteau."
 #: scripts/scenario_53_escape.lua:3522
 msgctxt "commsCrewFriends"
 msgid "Talk to Nancy's brother"
-msgstr "Parlez au frère de Nancy"
+msgstr "Parler au frère de Nancy"
 
 #: scripts/scenario_53_escape.lua:3523
 msgctxt "commsCrewFriends"
@@ -1726,7 +1726,7 @@ msgid ""
 "for bringing %s"
 msgstr ""
 "Cela ne devrait pas être trop difficile à faire. Je pourrais probablement "
-"même le faire pendant mon sommeil. Merci de m'apporter %s"
+"même le faire pendant mon sommeil. Merci de m'apporter %s."
 
 #: scripts/scenario_53_escape.lua:3555 scripts/scenario_53_escape.lua:3567
 msgctxt "commsCrewFriends"
@@ -1748,7 +1748,7 @@ msgid ""
 "I'll need some %s"
 msgstr ""
 "Cela ne devrait pas être trop difficile à faire. Je pourrais probablement "
-"même le faire pendant mon sommeil. Mais j'aurai besoin de %s"
+"même le faire pendant mon sommeil. Mais j'aurai besoin de %s."
 
 #: scripts/scenario_53_escape.lua:3564
 msgctxt "commsCrewFriends"
@@ -1760,7 +1760,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3581
 msgctxt "commsCrewFriends"
 msgid "Talk to Manuel's cousin"
-msgstr "Parlez au cousin de Manuel"
+msgstr "Parler au cousin de Manuel"
 
 #: scripts/scenario_53_escape.lua:3582
 msgctxt "commsCrewFriends"
@@ -1797,7 +1797,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:3600
 msgctxt "commsCrewFriends"
 msgid "Talk to Fred's wife"
-msgstr "Parlez à la femme de Fred"
+msgstr "Parler à la femme de Fred"
 
 #: scripts/scenario_53_escape.lua:3601
 msgctxt "commsCrewFriends"
@@ -1826,7 +1826,7 @@ msgstr "Je comprends les conséquences. S'il vous plait faites-le."
 #: scripts/scenario_53_escape.lua:3647
 msgctxt "commsCrewFriends"
 msgid "You're all fixed up"
-msgstr "Vos communications sont complètement rétablies"
+msgstr "Vos communications sont complètement rétablies."
 
 #: scripts/scenario_53_escape.lua:3649
 msgctxt "commsCrewFriends"
@@ -1848,13 +1848,13 @@ msgstr "Ok"
 #: scripts/scenario_53_escape.lua:3667 scripts/scenario_53_escape.lua:3736
 msgctxt "commsCrewFriends"
 msgid "Talk to Amir's sister"
-msgstr "Parlez à la sœur d'Amir"
+msgstr "Parler à la sœur d'Amir"
 
 #: scripts/scenario_53_escape.lua:3668
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Welcome to %s! Any friend of Amir's is a friend of mine"
-msgstr "Bienvenue sur %s ! Les amis de mon frère sont mes amis."
+msgstr "Bienvenue sur %s ! Les amis de mon frère sont mes amis."
 
 #: scripts/scenario_53_escape.lua:3669
 msgctxt "commsCrewFriends"
@@ -1892,7 +1892,7 @@ msgid ""
 "at %s"
 msgstr ""
 "Certainement. Rapportez-moi %s pour réparer le bouclier arrière. Vous en "
-"trouverez peut-être sur %s"
+"trouverez peut-être sur %s."
 
 #: scripts/scenario_53_escape.lua:3701
 msgctxt "commsCrewFriends"
@@ -1916,7 +1916,7 @@ msgid ""
 "at %s"
 msgstr ""
 "Certainement. Ramenez-moi %s pour réparer le bouclier avant. Vous pourriez "
-"en trouver sur %s"
+"en trouver sur %s."
 
 #: scripts/scenario_53_escape.lua:3737
 #, lua-format
@@ -1925,7 +1925,7 @@ msgid ""
 "Welcome back. Did you bring some %s for me to finish fixing up your shields?"
 msgstr ""
 "Vous revoilà. Avez-vous apporté les %s ? Que je finisse de réparer vos "
-"boucliers ?"
+"boucliers ?"
 
 #: scripts/scenario_53_escape.lua:3743
 #, lua-format
@@ -1936,12 +1936,12 @@ msgstr "Oui, veuillez prendre le %s et réparer le bouclier."
 #: scripts/scenario_53_escape.lua:3749
 msgctxt "commsCrewFriends"
 msgid "Front shield fully functional"
-msgstr "Boucliers avant complètement opérationnel."
+msgstr "Boucliers avant complètement opérationnels."
 
 #: scripts/scenario_53_escape.lua:3753
 msgctxt "commsCrewFriends"
 msgid "Rear shield fully functional"
-msgstr "Boucliers arrière complètement opérationnel."
+msgstr "Boucliers arrière complètement opérationnels."
 
 #: scripts/scenario_53_escape.lua:3759
 #, lua-format
@@ -1957,7 +1957,7 @@ msgstr "D'accord, bonne chance."
 #: scripts/scenario_53_escape.lua:3769 scripts/scenario_53_escape.lua:4197
 msgctxt "commsStation"
 msgid "Tell me more about your station"
-msgstr "Dites m'en plus à propos de votre station"
+msgstr "Dites m'en plus à propos de votre station."
 
 #: scripts/scenario_53_escape.lua:3770 scripts/scenario_53_escape.lua:4198
 msgctxt "commsStation"
@@ -2017,7 +2017,7 @@ msgstr "     %s: %i\n"
 #, lua-format
 msgctxt "commsTrade"
 msgid "Current cargo aboard %s:\n"
-msgstr "Cargaison actuelle à bord de %s :\n"
+msgstr "Cargaison actuelle à bord de %s :\n"
 
 #: scripts/scenario_53_escape.lua:3820
 msgctxt "commsTrade"
@@ -2292,7 +2292,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:4087
 msgctxt "commsStation"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations"
+msgstr "j'aurai besoin d'informations."
 
 #: scripts/scenario_53_escape.lua:4088
 msgctxt "commsStation"
@@ -2410,7 +2410,7 @@ msgstr ""
 #, lua-format
 msgctxt "commsTrade"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède %s pour %i rép"
+msgstr "La station %s dans le secteur %s possède %s pour %i rép."
 
 #: scripts/scenario_53_escape.lua:4189
 msgctxt "commsTrade"
@@ -2453,7 +2453,7 @@ msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
-msgstr "%d"
+msgstr "Marqueur %d"
 
 #: scripts/scenario_53_escape.lua:4227
 #, lua-format
@@ -2574,7 +2574,7 @@ msgstr "Espace de chargement insuffisant"
 #: scripts/scenario_53_escape.lua:4459
 msgctxt "commsShip"
 msgid "Defend a waypoint"
-msgstr "Défendez un marqueur"
+msgstr "Défendez un marqueur."
 
 #: scripts/scenario_53_escape.lua:4461
 msgctxt "commsShip"
@@ -2592,7 +2592,7 @@ msgstr "Quel marqueur devons-nous défendre ?"
 #, lua-format
 msgctxt "commsShip"
 msgid "Defend WP %d"
-msgstr "Défendez le marqueur %d"
+msgstr "Défendez le marqueur %d."
 
 #: scripts/scenario_53_escape.lua:4468
 #, lua-format
@@ -2649,13 +2649,13 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "commsShip"
 msgid "%s Missiles: %d/%d\n"
-msgstr "%s Missiles: %d/%d\n"
+msgstr "%s Missiles : %d/%d\n"
 
 #: scripts/scenario_53_escape.lua:4507
 #, lua-format
 msgctxt "commsShip"
 msgid "Dock at %s"
-msgstr "Amarrez-vous à %s"
+msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_53_escape.lua:4508
 #, lua-format
@@ -2686,7 +2686,7 @@ msgid ""
 msgstr ""
 "Ktzzzsss.\n"
 "\n"
-"Vous allez mourir faibles créatures insignifiantes!"
+"Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_53_escape.lua:4525
 msgctxt "commsShipEnemy"
@@ -2790,7 +2790,7 @@ msgstr "Où allez-vous ?"
 #, lua-format
 msgctxt "commsShip"
 msgid "Where are you headed? (cost: %f reputation)"
-msgstr "Où allez-vous? (coût : %f réputation)"
+msgstr "Où allez-vous? (coût : %f réputation)"
 
 #: scripts/scenario_53_escape.lua:4660
 msgctxt "commsShip"
