@@ -18,6 +18,14 @@ public:
     void setArc(float arc);
     float getArc();
 
+    void setArcColor(glm::u8vec4 color);
+    glm::u8vec4 getArcColor();
+
+    void setArcFireColor(glm::u8vec4 color);
+    glm::u8vec4 getArcFireColor();
+
+    void setDamageType(EDamageType type);
+
     void setDirection(float direction);
     float getDirection();
 
@@ -69,6 +77,9 @@ protected:
     float damage;//Server side only
     float energy_per_beam_fire;//Server side only
     float heat_per_beam_fire;//Server side only
+    glm::u8vec4 arc_color;
+    glm::u8vec4 arc_color_fire;
+    EDamageType damage_type;
     //Beam runtime state
     float cooldown;
     string beam_texture;

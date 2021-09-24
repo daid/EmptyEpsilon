@@ -116,6 +116,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponEnergyPerFire);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponHeatPerFire);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponArcColor);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setBeamWeaponDamageType);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWeaponTubeLoadType);
@@ -450,42 +452,49 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             // effectively doesn't exist; exit if that's the case.
             if (beam_weapons[n].getRange() == 0.0) continue;
 
-            // Color beam arcs red.
-            // TODO: Make this color configurable.
-            glm::u8vec4 color = glm::u8vec4(255, 0, 0, 255);
-
             // If the beam is cooling down, flash and fade the arc color.
-            if (beam_weapons[n].getCooldown() > 0)
-                color = glm::u8vec4(255, 255 * (beam_weapons[n].getCooldown() / beam_weapons[n].getCycleTime()), 0, 255);
+            glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, beam_weapons[n].getCooldown()), 0, beam_weapons[n].getCycleTime(), beam_weapons[n].getArcColor(), beam_weapons[n].getArcFireColor());
 
             // Initialize variables from the beam's data.
             float beam_direction = beam_weapons[n].getDirection();
             float beam_arc = beam_weapons[n].getArc();
             float beam_range = beam_weapons[n].getRange();
 
-            // Set the beam's origin on radar to its relative position on the
-            // mesh.
+            // Set the beam's origin on radar to its relative position on the mesh.
             auto beam_offset = rotateVec2(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation()-rotation);
 
-            // Draw the beam's left bound.
-            glm::vec2 r = vec2FromAngle(getRotation()-rotation + (beam_direction + beam_arc / 2.0f));
-            renderer.drawLine(beam_offset + position, beam_offset + position + r * beam_range * scale, color);
-            renderer.drawLine(beam_offset + position + r * beam_range * scale, beam_offset + position + r * beam_range * scale * 1.3f, color, glm::u8vec4(color.r, color.g, color.b, 0));
-
-            // Draw the beam's right bound.
-            r = vec2FromAngle(getRotation()-rotation + (beam_direction - beam_arc / 2.0f));
-            renderer.drawLine(beam_offset + position, beam_offset + position + r * beam_range * scale, color);
-            renderer.drawLine(beam_offset + position + r * beam_range * scale, beam_offset + position + r * beam_range * scale * 1.3f, color, glm::u8vec4(color.r, color.g, color.b, 0));
-
-            // Draw the beam's arc.
-            int arcPoints = int(beam_arc / 10) + 1;
-            std::vector<glm::vec2> arc_line;
+            std::vector<glm::vec2> arc_points;
+            // begin point of the beam arc visual
+            arc_points.push_back(beam_offset + position);
+            //Arc points
+            int arcPoints = int((beam_arc - 5) / 10) + 1;
             for(int i=0; i<arcPoints; i++)
             {
-                arc_line.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (beam_direction - beam_arc / 2.0f + 10 * i)) * beam_range * scale);
+                arc_points.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (beam_direction - beam_arc / 2.0f + (beam_arc / arcPoints) * i)) * beam_range * scale);
             }
-            arc_line.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (beam_direction + beam_arc / 2.0f)) * beam_range * scale);
-            renderer.drawLine(arc_line, color);
+            arc_points.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (beam_direction + beam_arc / 2.0f)) * beam_range * scale);
+
+            std::vector<glm::vec2> arc_normals;
+            for(size_t n=0; n<arc_points.size(); n++)
+            {
+                auto normal = glm::normalize(arc_points[(n + 1) % arc_points.size()] - arc_points[n]);
+                arc_normals.emplace_back(-normal.y, normal.x);
+            }
+
+            for(size_t n=0; n<arc_points.size(); n++)
+            {
+                auto& p0 = arc_points[n];
+                auto& p1 = arc_points[(n + 1) % arc_points.size()];
+                auto n0 = arc_normals[(n + arc_points.size() - 1) % arc_points.size()];
+                auto n1 = arc_normals[n];
+                auto n2 = arc_normals[(n + 1) % arc_points.size()];
+                renderer.drawTexturedQuad("gradient.png",
+                    p0, p1,
+                    p1 + (n1 + n2) / (1.0f + glm::dot(n1, n2)) * 20.0f,
+                    p0 + (n0 + n1) / (1.0f + glm::dot(n0, n1)) * 20.0f,
+                    {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
+                    color);
+            }
 
             // If the beam is turreted, draw the turret's arc. Otherwise, exit.
             if (beam_weapons[n].getTurretArc() == 0.0)
@@ -499,25 +508,22 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             // TODO: Make this color configurable.
             color.a /= 2;
 
-            // Draw the turret's left bound. (We're reusing the beam's origin.)
-            r = vec2FromAngle(getRotation()-rotation + (turret_direction + turret_arc / 2.0f));
-            renderer.drawLine(beam_offset + position, beam_offset + position + r * beam_range * scale, color);
-            renderer.drawLine(beam_offset + position + r * beam_range * scale, beam_offset + position + r * beam_range * scale * 1.3f, color, glm::u8vec4(color.r, color.g, color.b, 0));
-
-            // Draw the turret's right bound.
-            r = vec2FromAngle(getRotation()-rotation + (turret_direction - turret_arc / 2.0f));
-            renderer.drawLine(beam_offset + position, beam_offset + position + r * beam_range * scale, color);
-            renderer.drawLine(beam_offset + position + r * beam_range * scale, beam_offset + position + r * beam_range * scale * 1.3f, color, glm::u8vec4(color.r, color.g, color.b, 0));
-
-            // Draw the turret's arc.
-            int turret_points = int(turret_arc / 10) + 1;
-            std::vector<glm::vec2> turret_line;
-            for(int i = 0; i < turret_points; i++)
-            {
-                turret_line.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (turret_direction - turret_arc / 2.0f + 10 * i)) * beam_range * scale);
-            }
-            turret_line.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (turret_direction + turret_arc / 2.0f)) * beam_range * scale);
-            renderer.drawLine(turret_line, color);
+            // Draw the turret bounds. (We're reusing the beam's origin.)
+            auto r0 = vec2FromAngle(getRotation()-rotation + (turret_direction + turret_arc / 2.0f));
+            auto r1 = vec2FromAngle(getRotation()-rotation + (turret_direction - turret_arc / 2.0f));
+            glm::vec2 n0{r0.y, -r0.x};
+            glm::vec2 n1{-r1.y, r1.x};
+            glm::vec2 n2 = (n0 + n1) / (1.0f + glm::dot(n0, n1));
+            renderer.drawTexturedQuad("gradient.png",
+                beam_offset + position, beam_offset + position + r0 * beam_range * 0.9f * scale,
+                beam_offset + position + r0 * beam_range * scale + n0 * 10.0f, beam_offset + position + n2 * 10.0f,
+                {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
+                color);
+            renderer.drawTexturedQuad("gradient.png",
+                beam_offset + position, beam_offset + position + r1 * beam_range * 0.9f * scale,
+                beam_offset + position + r1 * beam_range * scale + n1 * 10.0f, beam_offset + position + n2 * 10.0f,
+                {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
+                color);
         }
     }
     // If not on long-range radar ...

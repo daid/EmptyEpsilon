@@ -594,6 +594,17 @@ glm::mat4 SpaceObject::getModelMatrix() const
     return glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 }
 
+template<> void convert<EDamageType>::param(lua_State* L, int& idx, EDamageType& dt)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "energy")
+        dt = DT_Energy;
+    else if (str == "kinetic")
+        dt = DT_Kinetic;
+    else if (str == "emp")
+        dt = DT_EMP;
+}
+
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di)
 {

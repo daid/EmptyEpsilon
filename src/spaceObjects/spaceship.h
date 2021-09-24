@@ -475,8 +475,14 @@ public:
         beam_weapons[index].setBeamTexture(texture);
     }
 
-    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setEnergyPerFire(energy); }
-    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setHeatPerFire(heat); }
+    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; beam_weapons[index].setEnergyPerFire(energy); }
+    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; beam_weapons[index].setHeatPerFire(heat); }
+    void setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b) {
+        if (index < 0 || index >= max_beam_weapons) return;
+        beam_weapons[index].setArcColor(glm::u8vec4(r * 255, g * 255, b * 255, 128));
+        beam_weapons[index].setArcFireColor(glm::u8vec4(fire_r * 255, fire_g * 255, fire_b * 255, 255));
+    }
+    void setBeamWeaponDamageType(int index, EDamageType type) { if (index < 0 || index >= max_beam_weapons) return; beam_weapons[index].setDamageType(type); }
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
