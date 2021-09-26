@@ -5454,7 +5454,7 @@ function handleDockedState()
 			service_status = string.format("%s\nMay repair self destruct system",service_status)
 		end
 		setCommsMessage(service_status)
-		addCommsReply("Back", commsStation)
+		addCommsReply(_("Back"), commsStation)
 	end)
 	if comms_target.comms_data.jump_overcharge then
 		if comms_source:hasJumpDrive() then
@@ -5470,7 +5470,7 @@ function handleDockedState()
 					else
 						setCommsMessage("Insufficient reputation")
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 		end
@@ -5503,7 +5503,7 @@ function handleDockedState()
 						else
 							setCommsMessage("Insufficient reputation")
 						end
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -5516,7 +5516,7 @@ function handleDockedState()
 						else
 							setCommsMessage("Insufficient reputation")
 						end
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -5529,7 +5529,7 @@ function handleDockedState()
 						else
 							setCommsMessage("Insufficient reputation")
 						end
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -5542,7 +5542,7 @@ function handleDockedState()
 						else
 							setCommsMessage("Insufficient reputation")
 						end
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -5555,11 +5555,11 @@ function handleDockedState()
 						else
 							setCommsMessage("Insufficient reputation")
 						end
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
@@ -5570,7 +5570,7 @@ function handleDockedState()
 				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if math.random(1,5) <= (3 - difficulty) then
 			if comms_source:getRepairCrewCount() < comms_source.maxRepairCrew then
@@ -5600,7 +5600,7 @@ function handleDockedState()
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
 						setCommsMessage("Additional coolant purchased")
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 		end
@@ -5618,7 +5618,7 @@ function handleDockedState()
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage("Repair crew member hired")
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -5632,7 +5632,7 @@ function handleDockedState()
 					else
 						setCommsMessage("Insufficient reputation")
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 		end
@@ -5678,7 +5678,7 @@ function handleDockedState()
 					if hullUpgradeAvailable then
 						homeStationHullUpgrade()
 					end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 		end
@@ -5713,13 +5713,13 @@ function handleDockedState()
 			if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
 				addCommsReply("General information", function()
 					setCommsMessage(comms_target.comms_data.general_information)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
 				addCommsReply("Station history", function()
 					setCommsMessage(comms_target.comms_data.history)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_source:isFriendly(comms_target) then
@@ -5727,7 +5727,7 @@ function handleDockedState()
 					if random(1,100) < 50 then
 						addCommsReply("Gossip", function()
 							setCommsMessage(comms_target.comms_data.gossip)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -5790,7 +5790,7 @@ function handleDockedState()
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_target.comms_data.buy ~= nil then
@@ -5803,7 +5803,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. "\nOne sold"
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -5832,7 +5832,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -5860,7 +5860,7 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
@@ -5888,11 +5888,11 @@ function handleDockedState()
 							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
 						end
 						setCommsMessage(goodTransactionMessage)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		local player_good_count = 0
 		if comms_source.goods ~= nil then
@@ -5909,16 +5909,16 @@ function handleDockedState()
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(string.format("One %s jettisoned",good))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply("No tutorial covered goods or cargo. Explain", function()
 			setCommsMessage("Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)")
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 end
@@ -5965,7 +5965,7 @@ function homeStationSpinUpgrade()
 		addCommsReply(string.format("Where is %s?",spinBase:getCallSign()), function()
 			setCommsMessage(string.format("%s is in sector %s",spinBase:getCallSign(),spinBase:getSectorName()))
 			if spinReveal < 2 then spinReveal = 2 end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		addCommsReply(string.format("Where might I find some %s?",spinGood), function()
 			setCommsMessage(string.format("I think %s might have some",spinGoodBase:getCallSign()))
@@ -5974,12 +5974,12 @@ function homeStationSpinUpgrade()
 				addCommsReply(string.format("And where the heck is %s?",spinGoodBase:getCallSign()), function()
 					setCommsMessage(string.format("My, my, you're quite inquisitive.\n%s is in sector %s",spinGoodBase:getCallSign(),spinGoodBase:getSectorName()))
 					if spinReveal < 4 then spinReveal = 4 end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("Back", commsStation)
+		addCommsReply(_("Back"), commsStation)
 	end)
 end
 function homeStationBeamTimeUpgrade()
@@ -5989,7 +5989,7 @@ function homeStationBeamTimeUpgrade()
 		addCommsReply(string.format("I've never heard of %s. Where is %s?",beamTimeBase:getCallSign(),beamTimeBase:getCallSign()), function()
 			setCommsMessage(string.format("You haven't? I'm surprised. %s is in %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName()))
 			if beamTimeReveal < 2 then beamTimeReveal = 2 end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		addCommsReply(string.format("Can you direct me to a station with %s?",beamTimeGood), function()
 			setCommsMessage(string.format("%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted",beamTimeGoodBase:getCallSign(),beamTimeGood))
@@ -5998,12 +5998,12 @@ function homeStationBeamTimeUpgrade()
 				addCommsReply(string.format("Sounds tasty. Where is %s?",beamTimeGoodBase:getCallSign()), function()
 					setCommsMessage(string.format("It's in %s",beamTimeGoodBase:getSectorName()))
 					if beamTimeReveal < 4 then beamTimeReveal = 4 end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("Back", commsStation)
+		addCommsReply(_("Back"), commsStation)
 	end)
 end
 function homeStationRotateUpgrade()
@@ -6013,7 +6013,7 @@ function homeStationRotateUpgrade()
 		addCommsReply(string.format("Where is station %s?",rotateBase:getCallSign()), function()
 			setCommsMessage(string.format("%s is in %s",rotateBase:getCallSign(),rotateBase:getSectorName()))
 			if rotateReveal < 2 then rotateReveal = 2 end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if difficulty < 2 then
 			addCommsReply(string.format("Where could I get %s?",rotateGood), function()
@@ -6023,20 +6023,20 @@ function homeStationRotateUpgrade()
 					addCommsReply(string.format("Do you know where %s is located?",rotateGoodBase:getCallSign()), function()
 						setCommsMessage(string.format("Yes, it's in %s",rotateGoodBase:getSectorName()))
 						if rotateReveal < 4 then rotateReveal = 4 end
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("Back", commsStation)
+		addCommsReply(_("Back"), commsStation)
 	end)
 end
 function homeStationBaseIntelligence()
 	addCommsReply("What about that intelligence information you promised?", function()
 		setCommsMessage(string.format("I hear Marcy Sorenson just got back from an enemy scouting expedition. She was talking about enemy bases. She can probably tell you where some of these bases are located. She's based on %s",baseInt1:getCallSign()))
 		plot2reminder = string.format("Talk with Marcy Sorenson on %s",baseInt1:getCallSign())
-		addCommsReply("Back", commsStation)
+		addCommsReply(_("Back"), commsStation)
 	end)
 end
 function homeStationHullUpgrade()
@@ -6046,7 +6046,7 @@ function homeStationHullUpgrade()
 		addCommsReply(string.format("So, where is %s?",hullBase:getCallSign()), function()
 			setCommsMessage(string.format("%s is in sector %s",hullBase:getCallSign(),hullBase:getSectorName()))
 			if hullReveal < 2 then hullReveal = 2 end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		addCommsReply(string.format("Where could I find some %s?",hullGood), function()
 			setCommsMessage(string.format("I think %s may have some",hullGoodBase:getCallSign()))
@@ -6055,12 +6055,12 @@ function homeStationHullUpgrade()
 				addCommsReply(string.format("And just where is %s?",hullGoodBase:getCallSign()), function()
 					setCommsMessage(string.format("If you must know, %s is in sector %s",hullGoodBase:getCallSign(),hullGoodBase:getSectorName()))
 					if hullReveal < 4 then hullReveal = 4 end
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply("Back", commsStation)
+		addCommsReply(_("Back"), commsStation)
 	end)
 end
 function spinStation()
@@ -6080,7 +6080,7 @@ function spinStation()
 				else
 					setCommsMessage(string.format("You need to bring some %s for the upgrade",spinGood))
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -6136,7 +6136,7 @@ function rotateStation()
 				else
 					setCommsMessage(string.format("You need to bring some %s for the upgrade",rotateGood))
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -6150,9 +6150,9 @@ function intelligenceStation()
 			addCommsReply(string.format("Where exactly is %s?",baseInt2:getCallSign()), function()
 				setCommsMessage(string.format("%s is in %s",baseInt2:getCallSign(),baseInt2:getSectorName()))
 				plot2reminder = string.format("Talk with Marcy Sorenson on %s in %s",baseInt2:getCallSign(),baseInt2:getSectorName())
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		else
 			setCommsMessage("This is Marcy. Whatcha want?")
 			addCommsReply("Please tell me about the enemy bases found", function()
@@ -6168,9 +6168,9 @@ function intelligenceStation()
 				end
 				setCommsMessage(string.format("Sure. We found a couple of enemy stations in %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName()))
 				plot2reminder = string.format("Investigate enemy bases in %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName())
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end
 	end)
 end
@@ -6192,9 +6192,9 @@ function secondIntelligenceStation()
 				end
 				setCommsMessage(string.format("Sure. We found some enemy stations in %s, %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName()))
 				plot2reminder = string.format("Investigate enemy bases in %s, %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply("Back", commsStation)				
+			addCommsReply(_("Back"), commsStation)				
 		end)
 	end
 end
@@ -6215,7 +6215,7 @@ function hullStation()
 				else
 					setCommsMessage(string.format("We won't upgrade your hull until we have %s",hullGood))
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -6256,7 +6256,7 @@ function shieldExpertBase()
 			else
 				setCommsMessage("I know this couple (or former couple). Only gold, platinum, dilithium, tritanium or cobolt will work as a gift")
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 end
@@ -6357,7 +6357,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
@@ -6369,7 +6369,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 function getWeaponCost(weapon)
@@ -6446,7 +6446,7 @@ function handleUndockedState()
 				oMsg = "We have the following types of ordnance available for restock:" .. oMsg
 			end
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		local goodsAvailable = false
 		if comms_target.comms_data.goods ~= nil then
@@ -6463,7 +6463,7 @@ function handleUndockedState()
 					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply("Docking services status", function()
@@ -6527,7 +6527,7 @@ function handleUndockedState()
 				service_status = string.format("%s\nMay repair self destruct system",service_status)
 			end
 			setCommsMessage(service_status)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		addCommsReply("See any enemies in your area?", function()
 			if comms_source:isFriendly(comms_target) then
@@ -6548,11 +6548,11 @@ function handleUndockedState()
 					setCommsMessage("No enemies within 30U")
 					comms_source:addReputationPoints(1.0)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			else
 				setCommsMessage("Not really")
 				comms_source:addReputationPoints(1.0)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		addCommsReply("Where can I find particular goods?", function()
@@ -6596,7 +6596,7 @@ function handleUndockedState()
 					local goodName = good
 					local goodCost = comms_target.comms_data.goodsKnowledge[good]["cost"]
 					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
@@ -6605,12 +6605,12 @@ function handleUndockedState()
 				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
 			end
 			setCommsMessage(gkMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
 			addCommsReply("General station information", function()
 				setCommsMessage(comms_target.comms_data.general)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end)
@@ -6622,7 +6622,7 @@ function handleUndockedState()
 				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	--Diagnostic data is used to help test and debug the script while it is under construction
@@ -6687,7 +6687,7 @@ function handleUndockedState()
 			oMsg = oMsg .. "\nwfv: " .. wfv
 			oMsg = oMsg .. string.format("\nSupply drop: %s",comms_target.comms_data.services.supplydrop)
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
@@ -6709,11 +6709,11 @@ function handleUndockedState()
                         else
                             setCommsMessage("Not enough reputation!");
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
@@ -6730,11 +6730,11 @@ function handleUndockedState()
                         else
                             setCommsMessage("Not enough reputation!");
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -6779,14 +6779,14 @@ function friendlyComms(comms_data)
 	addCommsReply("Defend a waypoint", function()
 		if comms_source:getWaypointCount() == 0 then
 			setCommsMessage("No waypoints set. Please set a waypoint first.");
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		else
 			setCommsMessage("Which waypoint should we defend?");
 			for n=1,comms_source:getWaypointCount() do
 				addCommsReply("Defend WP" .. n, function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 					setCommsMessage("We are heading to assist at WP" .. n ..".");
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
@@ -6795,7 +6795,7 @@ function friendlyComms(comms_data)
 		addCommsReply("Assist me", function()
 			setCommsMessage("Heading toward you to assist.");
 			comms_target:orderDefendTarget(comms_source)
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 	end
 	addCommsReply("Report status", function()
@@ -6819,14 +6819,14 @@ function friendlyComms(comms_data)
 		end
 		
 		setCommsMessage(msg);
-		addCommsReply("Back", commsShip)
+		addCommsReply(_("Back"), commsShip)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply("Dock at " .. obj:getCallSign(), function()
 				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
 				comms_target:orderDock(obj)
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 	end
@@ -6878,7 +6878,7 @@ function neutralComms(comms_data)
 			-- Offer destination information
 			addCommsReply("Where are you headed?", function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if distance(comms_source,comms_target) < 5000 then
@@ -6898,11 +6898,11 @@ function neutralComms(comms_data)
 										comms_source.goods[good] = comms_source.goods[good] - 1
 										comms_source.cargo = comms_source.cargo + 1
 										setCommsMessage(string.format("One %s jettisoned",good))
-										addCommsReply("Back", commsShip)
+										addCommsReply(_("Back"), commsShip)
 									end)
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 					end
 					if comms_source.goods ~= nil and comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
@@ -6913,7 +6913,7 @@ function neutralComms(comms_data)
 									comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									setCommsMessage(string.format("Traded luxury for %s",good))
-									addCommsReply("Back", commsShip)
+									addCommsReply(_("Back"), commsShip)
 								end)
 							end
 						end	
@@ -6938,7 +6938,7 @@ function neutralComms(comms_data)
 								else
 									setCommsMessage("Insufficient reputation for purchase")
 								end
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 						end	--some on freighter
 					end	--freighter good loop
@@ -6954,7 +6954,7 @@ function neutralComms(comms_data)
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if distance(comms_source,comms_target) < 5000 then
@@ -6979,7 +6979,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -7005,7 +7005,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -7036,7 +7036,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
