@@ -5,10 +5,10 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: muerteFR\n"
 "Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "X-Generator: Poedit 2.4.3\n"
 
 # Scenario name
@@ -53,10 +53,6 @@ msgstr "Noël présent"
 #: scripts/scenario_62_whatTheDickens.lua:234
 msgid "Christmas Future"
 msgstr "Noël futur"
-
-#: scripts/scenario_62_whatTheDickens.lua:236
-msgid "end of init"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:274
 msgid "Easy"
@@ -351,55 +347,12 @@ msgstr ""
 "Salutations.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
-#: scripts/scenario_62_whatTheDickens.lua:493
-msgid "Diagnostic data"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:494
-#, lua-format
-msgid "Difficulty: %.1f"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:498
-#, lua-format
-msgid ""
-"\n"
-"plot1: %s"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:503
-#, lua-format
-msgid ""
-"\n"
-"plot2: %s"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:508
-#, lua-format
-msgid ""
-"\n"
-"plot3: %s"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:513
-#, lua-format
-msgid ""
-"\n"
-"plot4: %s"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:515
-#, lua-format
-msgid ""
-"\n"
-"wfv: %s"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:521
 #, lua-format
 msgctxt "classicComms"
-msgid "Can you send a supply drop? (%d rep"
+msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
 
 #: scripts/scenario_62_whatTheDickens.lua:523
 msgctxt "classicComms"
@@ -480,11 +433,6 @@ msgctxt "orders"
 msgid "Dock with Somerset"
 msgstr "Vous amarrer à Somerset."
 
-#: scripts/scenario_62_whatTheDickens.lua:621
-msgctxt "plotName"
-msgid "camdenSensorReading"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:627
 msgctxt "shipLog"
 msgid "Investigate unusual sensor readings near station Camden in A2"
@@ -498,11 +446,6 @@ msgctxt "orders"
 msgid "Investigate near station Camden in A2"
 msgstr "Enquêter près de la gare de Camden en secteur A2."
 
-#: scripts/scenario_62_whatTheDickens.lua:631
-msgctxt "plotName"
-msgid "arriveA2"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:639
 msgctxt "scienceArtifactDescription"
 msgid "Rusty Chain Link"
@@ -512,11 +455,6 @@ msgstr "Des maillons de chaîne rouillés"
 msgctxt "scienceArtifactDescription"
 msgid "Translucent but glowing rusty chain link"
 msgstr "Des maillons de chaîne rouillés translucides mais brillants"
-
-#: scripts/scenario_62_whatTheDickens.lua:641
-msgctxt "plotName"
-msgid "scanMarleyArtifact"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:647
 msgctxt "shipLog"
@@ -530,21 +468,6 @@ msgstr ""
 "missions précédentes ? Spécialement celle où la station Marley a été "
 "détruite ? Et bien je suis dorénavant voué à hanter cette zone de l'espace "
 "pour toujours. Faites attention ou subissez le même sort..."
-
-#: scripts/scenario_62_whatTheDickens.lua:650
-msgctxt "plotName"
-msgid "explosionDelay"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:660
-msgctxt "plotName"
-msgid "marleyMob"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:675
-msgctxt "plotName"
-msgid "destroyMarleyMob"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:705
 msgctxt "shipLog"
@@ -573,11 +496,6 @@ msgstr ""
 "Retournez à Somerset en secteur %s et préparez-vous pour trois visites "
 "fantomatiques..."
 
-#: scripts/scenario_62_whatTheDickens.lua:723
-msgctxt "plotName"
-msgid "startChristmasPast"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:731
 #, lua-format
 msgctxt "shipLog"
@@ -600,11 +518,6 @@ msgstr ""
 "Enquêter sur les particules de chroniton près de la station Millbank en "
 "secteur %s."
 
-#: scripts/scenario_62_whatTheDickens.lua:735
-msgctxt "plotName"
-msgid "arriveNearMillbank"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:743
 msgctxt "scienceArtifactDescription"
 msgid "Tiny escape pod"
@@ -615,59 +528,10 @@ msgctxt "scienceArtifactDescription"
 msgid "Tiny escape pod from a previous generation"
 msgstr "Petite capsule de sauvetage d'une ancienne génération"
 
-#: scripts/scenario_62_whatTheDickens.lua:746
-msgctxt "plotName"
-msgid "hopArt"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:748
-msgctxt "plotName"
-msgid "pastArtScan"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:767
-msgid "alternate fez"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:772
-msgctxt "plotName"
-msgid "fezEffect"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:775
-msgctxt "plotName"
-msgid "podToFez"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:799
-msgctxt "plotName"
-msgid "fez2Effect"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:807
-msgctxt "plotName"
-msgid "fez3Effect"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:820
-msgctxt "plotName"
-msgid "fezWelcomeMessage"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:828
 msgctxt "shipLog"
 msgid "Welcome to the Christmases of your past, Scrooge"
 msgstr "Bienvenue dans les Noëls de votre passé, équipage du HMS Scrooge."
-
-#: scripts/scenario_62_whatTheDickens.lua:831
-msgctxt "plotName"
-msgid "fezFleet"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:846
-msgctxt "plotName"
-msgid "destroyFezFleet"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:881
 #, lua-format
@@ -677,20 +541,10 @@ msgstr ""
 "[Ordres en cours]\n"
 "Belle est arrivée. Assurez-vous qu'elle arrive à Fezziwig dans le secteur %s."
 
-#: scripts/scenario_62_whatTheDickens.lua:887
-msgctxt "plotName"
-msgid "belleNemesis"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:888
 msgctxt "orders"
 msgid "Protect Belle"
 msgstr "Protéger Belle."
-
-#: scripts/scenario_62_whatTheDickens.lua:901
-msgctxt "plotName"
-msgid "destroyBelleFleet"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:933
 msgctxt "shipLog"
@@ -698,11 +552,6 @@ msgid "You protected Belle. Somerset awaits"
 msgstr ""
 "[Ordres en cours]\n"
 "Vous avez protégé Belle. Somerset vous attend."
-
-#: scripts/scenario_62_whatTheDickens.lua:937
-msgctxt "plotName"
-msgid "startChristmasPresent"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:951
 #, lua-format
@@ -727,11 +576,6 @@ msgid "Investigate unusual readings near Bedlam in %s"
 msgstr ""
 "Enquêter sur les lectures inhabituelles près de Bedlam dans le secteur %s."
 
-#: scripts/scenario_62_whatTheDickens.lua:955
-msgctxt "plotName"
-msgid "arriveNearBedlam"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:961
 msgctxt "shipLog"
 msgid ""
@@ -746,11 +590,6 @@ msgstr ""
 "sûrement décorer nos cieux avec des explosions de vaisseaux ennemis "
 "extraterrestres. Au pire des cas, nous aurions un ciel décoré par "
 "l'explosion de votre vaisseau."
-
-#: scripts/scenario_62_whatTheDickens.lua:969
-msgctxt "plotName"
-msgid "destroyCratchitFleet"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:970
 msgctxt "orders"
@@ -773,20 +612,10 @@ msgstr ""
 "Surprise devrait pouvoir nous aider. Pourriez-vous accoster rapidement à "
 "Bedlam et transporter Tim jusqu'au Turkey Surprise ?"
 
-#: scripts/scenario_62_whatTheDickens.lua:1007
-msgctxt "plotName"
-msgid "timIll"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1008
 msgctxt "orders"
 msgid "Take Tim from Bedlam to Turkey Surprise"
 msgstr "Aller chercher Tim à Bedlam et l'emmener à Turkey Surprise."
-
-#: scripts/scenario_62_whatTheDickens.lua:1011
-msgctxt "plotName"
-msgid "turkeyNemesis"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1016
 msgctxt "msgGlobal"
@@ -803,25 +632,10 @@ msgstr ""
 "tellement accablée de chagrin qu'elle a négligé un cycle de maintenance de "
 "routine causant une panne de moteur sur le HMS Scrooge."
 
-#: scripts/scenario_62_whatTheDickens.lua:1032
-msgctxt "plotName"
-msgid "presentHunters"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:1066
-msgctxt "plotName"
-msgid "presentOutrage"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1086
 msgctxt "shipLog"
 msgid "How dare you bring us here!"
 msgstr "Comment osez-vous nous amener ici !"
-
-#: scripts/scenario_62_whatTheDickens.lua:1089
-msgctxt "plotName"
-msgid "presentIntent"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1097
 msgctxt "shipLog"
@@ -877,11 +691,6 @@ msgstr ""
 "[Turkey Surprise]\n"
 "Nous avons transporté Tim et nos médecins l'examinent."
 
-#: scripts/scenario_62_whatTheDickens.lua:1136
-msgctxt "plotName"
-msgid "timHeal"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1137
 msgctxt "orders"
 msgid "Protect Turkey Surprise"
@@ -904,11 +713,6 @@ msgstr ""
 "Turkey Surprise nous informe que Tim va bien. En fait, il est même prêt à "
 "reprendre du service. Nous avons besoin de lui ici pour des réparations "
 "critiques. Voudriez-vous le ramener à la maison, s'il vous plaît ?"
-
-#: scripts/scenario_62_whatTheDickens.lua:1156
-msgctxt "plotName"
-msgid "returnTim"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1157
 msgctxt "orders"
@@ -936,11 +740,6 @@ msgstr ""
 "essentiel.\n"
 "Au fait, Somerset vous cherche."
 
-#: scripts/scenario_62_whatTheDickens.lua:1171
-msgctxt "plotName"
-msgid "endChristmasPast"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1183
 msgctxt "shipLog"
 msgid ""
@@ -950,11 +749,6 @@ msgstr ""
 "[Salle de téléportation]\n"
 "Tim a été transporté à bord. Bedlam attend qu'on le ramène afin qu'il se "
 "remette au travail sur les réparations."
-
-#: scripts/scenario_62_whatTheDickens.lua:1201
-msgctxt "plotName"
-msgid "startChristmasFuture"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1207
 #, lua-format
@@ -977,65 +771,20 @@ msgctxt "orders"
 msgid "Watch the City in %s"
 msgstr "Jeter un oeil à City (La Ville) en secteur %s."
 
-#: scripts/scenario_62_whatTheDickens.lua:1214
-msgctxt "plotName"
-msgid "futureEffect1"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:1225
-msgctxt "plotName"
-msgid "futureEffect2"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:1242
-msgctxt "plotName"
-msgid "futureEffect3"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:1260
-msgctxt "plotName"
-msgid "futureEffect4"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1289
 msgctxt "shipLog"
 msgid "Face your future"
 msgstr "Affrontez votre avenir."
-
-#: scripts/scenario_62_whatTheDickens.lua:1294
-msgctxt "plotName"
-msgid "orbitStations"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:1296
-msgctxt "plotName"
-msgid "futureCheck"
-msgstr ""
-
-#: scripts/scenario_62_whatTheDickens.lua:1413
-msgctxt "plotName"
-msgid "cleanFuture"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1465
 msgctxt "shipLog"
 msgid "You have faced your future"
 msgstr "Vous avez affronté votre avenir."
 
-#: scripts/scenario_62_whatTheDickens.lua:1484
-msgctxt "plotName"
-msgid "returnMsg1"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1488
 msgctxt "shipLog"
 msgid "Dock at Somerset for a well deserved Christmas break"
 msgstr "Amarrez-vous à Somerset pour une pause de Noël bien méritée."
-
-#: scripts/scenario_62_whatTheDickens.lua:1490
-msgctxt "plotName"
-msgid "returnMsg2"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1497
 msgctxt "shipLog"
@@ -1043,11 +792,6 @@ msgid "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"
 msgstr ""
 "[Jacob Marley] C'est bon de vous voir répandre la joie et soulager la "
 "douleur, HMS Scrooge."
-
-#: scripts/scenario_62_whatTheDickens.lua:1500
-msgctxt "plotName"
-msgid "returnMsg3"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1508
 msgctxt "shipLog"
@@ -1058,11 +802,6 @@ msgstr ""
 "Que les ombres des choses qui ont été continuent de vous rappeler la joie de "
 "Noël."
 
-#: scripts/scenario_62_whatTheDickens.lua:1511
-msgctxt "plotName"
-msgid "returnMsg4"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1519
 msgctxt "shipLog"
 msgid ""
@@ -1071,11 +810,6 @@ msgid ""
 msgstr ""
 "Malgré l'ignorance et le désir, les prisons et les maisons de correction, "
 "vivez pleinement chaque journée et célébrez-là, en particulier Noël."
-
-#: scripts/scenario_62_whatTheDickens.lua:1521
-msgctxt "plotName"
-msgid "returnMsg5"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1529
 msgctxt "shipLog"
@@ -1090,11 +824,6 @@ msgstr ""
 "Joyeux Noël à vous !\n"
 "Merci pour les shillings !"
 
-#: scripts/scenario_62_whatTheDickens.lua:1532
-msgctxt "plotName"
-msgid "returnMsg6"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1540
 msgctxt "shipLog"
 msgid ""
@@ -1103,11 +832,6 @@ msgid ""
 msgstr ""
 "[Fred de QE17] Joyeux Noël, mon oncle ! Faites donc une halte et partagez le "
 "dîner de Noël avec nous lorsque vous aurez fini votre service."
-
-#: scripts/scenario_62_whatTheDickens.lua:1543
-msgctxt "plotName"
-msgid "returnMsg7"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1551
 msgctxt "shipLog"
@@ -1118,30 +842,15 @@ msgstr ""
 "[Bob à bord du Cratchit Cruiser] Joyeux Noël, équipage du HMS Scrooge. Merci "
 "pour avoir aidé le petit Tim."
 
-#: scripts/scenario_62_whatTheDickens.lua:1554
-msgctxt "plotName"
-msgid "returnMsg8"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1562
 msgctxt "shipLog"
 msgid "[Tim on Cratchit Cruiser] God bless us every one"
 msgstr "[Tim sur Cratchit Cruiser] Que Dieu nous bénisse tous."
 
-#: scripts/scenario_62_whatTheDickens.lua:1565
-msgctxt "plotName"
-msgid "returnMsg9"
-msgstr ""
-
 #: scripts/scenario_62_whatTheDickens.lua:1574
 msgctxt "shipLog"
 msgid "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"
 msgstr "[Tim sur Cratchit Cruiser] Donne-moi un maudit lait de poule."
-
-#: scripts/scenario_62_whatTheDickens.lua:1578
-msgctxt "plotName"
-msgid "finalDock"
-msgstr ""
 
 #: scripts/scenario_62_whatTheDickens.lua:1584
 msgctxt "msgGlobal"

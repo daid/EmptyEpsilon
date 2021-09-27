@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: muerteFR\n"
 "Language-Team: MuerteFR\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.4.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -51,7 +51,7 @@ msgstr "Observatoire"
 #: scripts/scenario_51_deliverAmbassador.lua:35
 msgctxt "scienceStationsDescription"
 msgid "Balindor Prime Communications Nexus"
-msgstr "Liaison de communication Balindor Prime."
+msgstr "Liaison de communication Balindor Prime"
 
 #: scripts/scenario_51_deliverAmbassador.lua:39
 #: scripts/scenario_51_deliverAmbassador.lua:47
@@ -299,10 +299,9 @@ msgstr ""
 "impulsions"
 
 #: scripts/scenario_51_deliverAmbassador.lua:605
-#: scripts/scenario_51_deliverAmbassador.lua:813
 msgctxt "audioButton"
 msgid "|> AMBGREMUS021"
-msgstr ""
+msgstr "|> Quartiers VIP"
 
 #: scripts/scenario_51_deliverAmbassador.lua:627
 msgid ""
@@ -392,6 +391,11 @@ msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:730
 msgctxt "warningMsgScience"
+msgid "Warning"
+msgstr "Avertissement"
+
+#: scripts/scenario_51_deliverAmbassador.lua:730
+msgctxt "warningMsgScience"
 msgid "The readings on the Pangora artifact have changed"
 msgstr "Les analyses sur l'artefact de Pangora ont changé"
 
@@ -429,6 +433,11 @@ msgstr ""
 "transporté jusqu'ici, %s. Je me suis téléporté sur Goltin 7. Je vais avoir "
 "besoin de trouver des artefacts pour mener à bien les négociations. Veuillez "
 "en chercher et revenir m'informer dès que possible."
+
+#: scripts/scenario_51_deliverAmbassador.lua:813
+msgctxt "audioButton"
+msgid "|> AMBGREMUS032"
+msgstr "|> Station Goltin 7"
 
 #: scripts/scenario_51_deliverAmbassador.lua:837
 #, lua-format
@@ -664,6 +673,7 @@ msgid "Has anyone reported seeing artifacts near Science-37?"
 msgstr "Quelqu'un a-t-il signalé avoir vu des artefacts près de Science-37 ?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1041
+#: scripts/scenario_51_deliverAmbassador.lua:1259
 msgid ""
 "Freighters doing business here occasionally report an object on approximate "
 "heading zero from Science-37 station"
@@ -857,9 +867,3 @@ msgstr "Nous venons d'expédier %s pour vous aider au marqueur %d "
 #: scripts/scenario_51_deliverAmbassador.lua:1171
 msgid "Added a waypoint to your navigation system for Balindor Prime"
 msgstr "Ajout d'un marqueur à votre système de navigation pour Balindor Prime"
-
-#: scripts/scenario_51_deliverAmbassador.lua:1259
-msgid ""
-"Freighters doing business here occasionally report an objecton approximate "
-"heading zero from Science-37 station"
-msgstr ""
