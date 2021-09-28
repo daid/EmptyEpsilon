@@ -1,4 +1,5 @@
 #include <memory>
+#include <set>
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
@@ -7,6 +8,7 @@
 #include <sys/stat.h>
 #endif
 #include <sys/types.h>
+#include "graphics/freetypefont.h"
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
@@ -45,8 +47,8 @@
 glm::vec3 camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Font* main_font;
-sf::Font* bold_font;
+sp::Font* main_font;
+sp::Font* bold_font;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
@@ -172,7 +174,6 @@ int main(int argc, char** argv)
 #endif
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
-    textureManager.setAutoSprite(false);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
@@ -249,7 +250,7 @@ int main(int argc, char** argv)
         {
             float m[6];
             if (fscanf(f, "%f %f %f %f %f %f", &m[0], &m[1], &m[2], &m[3], &m[4], &m[5]) == 6)
-                InputHandler::mouse_transform = sf::Transform(m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1);
+                InputHandler::mouse_transform = {m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1};
             fclose(f);
         }
     }
@@ -261,12 +262,10 @@ int main(int argc, char** argv)
         PostProcessor::setEnable(false);
 
     P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BebasNeue Regular.otf"));
-    main_font = new sf::Font();
-    main_font->loadFromStream(**main_font_stream);
+    main_font = new sp::FreetypeFont(main_font_stream);
 
     P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BebasNeue Bold.otf"));
-    bold_font = new sf::Font();
-    bold_font->loadFromStream(**bold_font_stream);
+    bold_font = new sp::FreetypeFont(bold_font_stream);
 
     sp::RenderTarget::setDefaultFont(main_font);
 

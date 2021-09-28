@@ -24,7 +24,7 @@ public:
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
 
-    void onKey(sf::Event::KeyEvent key, int unicode);
+    void onKey(const SDL_KeyboardEvent& key, int unicode);
 };
 
 

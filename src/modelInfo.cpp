@@ -64,7 +64,7 @@ void ModelInfo::render(glm::vec2 position, float rotation)
     }
 }
 
-void ModelInfo::renderOverlay(sf::Texture* texture, float alpha)
+void ModelInfo::renderOverlay(sp::Texture* texture, float alpha)
 {
 #if FEATURE_3D_RENDERING
     if (!data)

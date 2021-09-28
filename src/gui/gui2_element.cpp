@@ -30,7 +30,7 @@ void GuiElement::onMouseUp(glm::vec2 position)
 {
 }
 
-bool GuiElement::onKey(sf::Event::KeyEvent key, int unicode)
+bool GuiElement::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
     return false;
 }
@@ -275,58 +275,6 @@ void GuiElement::updateRect(sp::Rect parent_rect)
     }
 }
 
-[[nodiscard]]
-bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
-{
-#ifdef SFML_SYSTEM_ANDROID
-    /* On GL ES systems, SFML runs on assumptions regarding
-    the available GL extensions, for instance considering packed depth/stencil is never available.[1]
-    Because of that unreliability, just forego render textures on those systems.
-
-      [1]: https://github.com/SFML/SFML/blob/2f11710abc5aa478503a7ff3f9e654bd2078ebab/src/SFML/Graphics/GLExtensions.hpp#L128
-    */
-    return false;
-#else
-    auto success = true;
-    P<WindowManager> window_manager = engine->getObject("windowManager");
-
-    //Hack the rectangle for this element so it sits perfectly on pixel boundaries.
-    auto pixel_coords = window_manager->mapCoordsToPixel(sf::Vector2f(rect.size.x, rect.size.y));
-
-    sf::Vector2u texture_size{ static_cast<uint32_t>(pixel_coords.x), static_cast<uint32_t>(pixel_coords.y) };
-    if (texture.getSize() != texture_size)
-    {
-        sf::ContextSettings settings{};
-        settings.stencilBits = 8;
-        success = texture.create(texture_size.x, texture_size.y, settings);
-    }
-
-    if (success)
-    {
-        //Set the view so it covers this elements normal rect. So we can draw exactly the same on this texture as no the normal screen.
-        texture.setView(sf::View{ sf::FloatRect(rect.position.x, rect.position.y, rect.size.x, rect.size.y) });
-    }
-
-    return success;
-#endif
-}
-
-void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, glm::u8vec4 color, const sf::RenderStates& states)
-{
-    texture.display();
-
-    sf::Sprite sprite(texture.getTexture());
-
-    sprite.setColor(sf::Color(color.r, color.g, color.b, color.a));
-    sprite.setPosition(rect.position.x, rect.position.y);
-
-    const auto& texture_size = texture.getSize();
-    const auto& texture_viewport = texture.getView().getViewport();
-    sprite.setScale(rect.size.x / float(texture_size.x * texture_viewport.width), rect.size.y / float(texture_size.y * texture_viewport.height));
-
-    window.draw(sprite, states);
-}
-
 glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
 {
     if (!enabled)
@@ -342,6 +290,7 @@ glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
 
 GuiElement::LineWrapResult GuiElement::doLineWrap(const string& text, float font_size, float width)
 {
+#warning SDL2 TODO should replace all of this legacy with proper sp::Font handling.
     LineWrapResult result;
     result.text = text;
     result.line_count = 1;
@@ -366,8 +315,13 @@ GuiElement::LineWrapResult GuiElement::doLineWrap(const string& text, float font
                 first_word = false;
             }
 
-            sf::Glyph glyph = main_font->getGlyph(currentChar, font_size, false);
-            currentOffset += glyph.advance;
+            auto charinfo = main_font->getCharacterInfo(&result.text[pos]);
+            if (charinfo.code > 0)
+            {
+                sp::Font::GlyphInfo ginfo;
+                if (main_font->getGlyphInfo(charinfo.code, 32, ginfo))
+                    currentOffset += ginfo.advance * font_size / 32.0f;
+            }
 
             if (!first_word && currentOffset > width)
             {

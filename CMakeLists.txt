@@ -530,8 +530,13 @@ target_link_libraries(${PROJECT_NAME}
         "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WIN32}>:iphlpapi>"
         "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
-        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"   
+        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"
 )
+if(WIN32)
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+        target_link_libraries(${PROJECT_NAME} PUBLIC "-mconsole")
+    endif()
+endif()
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES

@@ -36,7 +36,7 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
 
     if (show_timing_graph)
     {
-        auto window_size = renderer.getSFMLTarget().getView().getSize();
+        auto window_size = renderer.getPhysicalSize();
         if (timing_graph_points.size() > window_size.x)
             timing_graph_points.clear();
         timing_graph_points.push_back(engine->getEngineTiming());
@@ -80,14 +80,14 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
     renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
 }
 
-void DebugRenderer::handleKeyPress(sf::Event::KeyEvent key, int unicode)
+void DebugRenderer::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)
 {
-    if (key.code == sf::Keyboard::F10)
+    if (key.keysym.sym == SDLK_F10)
     {
         show_fps = !show_fps;
         show_datarate = !show_datarate;
     }
-    if (key.code == sf::Keyboard::F11)
+    if (key.keysym.sym == SDLK_F11)
     {
         show_timing_graph = !show_timing_graph;
         timing_graph_points.clear();

@@ -54,21 +54,21 @@ void SpectatorScreen::onMouseUp(glm::vec2 position)
 {
 }
 
-void SpectatorScreen::onKey(sf::Event::KeyEvent key, int unicode)
+void SpectatorScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
-    switch(key.code)
+    switch(key.keysym.sym)
     {
     //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
+    case SDLK_ESCAPE:
+    case SDLK_HOME:
         destroy();
         returnToShipSelection();
         break;
-    case sf::Keyboard::P:
+    case SDLK_p:
         if (game_server)
             engine->setGameSpeed(0.0);
         break;
-    case sf::Keyboard::C:
+    case SDLK_c:
         // Toggle callsigns.
         main_radar->showCallsigns(!main_radar->getCallsigns());
     default:

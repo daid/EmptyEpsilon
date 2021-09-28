@@ -7,8 +7,8 @@
 extern glm::vec3 camera_position;
 extern float camera_yaw;
 extern float camera_pitch;
-extern sf::Font* main_font;
-extern sf::Font* bold_font;
+extern sp::Font* main_font;
+extern sp::Font* bold_font;
 extern RenderLayer* mouseLayer;
 extern PostProcessor* glitchPostProcessor;
 extern PostProcessor* warpPostProcessor;

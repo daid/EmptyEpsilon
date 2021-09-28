@@ -9,7 +9,7 @@ MouseCalibrator::MouseCalibrator(string filename)
 : filename(filename)
 {
     state = 0;
-    InputHandler::mouse_transform = sf::Transform();
+    InputHandler::mouse_transform = {1,0,0, 0,1,0, 0,0,1};
 
     (new GuiLabel(this, "MAIN_LABEL", "Touch Calibration", 50))->setPosition(0, 100, sp::Alignment::TopCenter)->setSize(0, 300);
     screen_box[0] = new GuiPanel(this, "BOX_0");
@@ -34,7 +34,7 @@ MouseCalibrator::MouseCalibrator(string filename)
 
 void MouseCalibrator::update(float delta)
 {
-    if (InputHandler::mouseIsReleased(sf::Mouse::Left))
+    if (InputHandler::mouseIsReleased(0))
     {
         if (state < 3)
         {
@@ -81,7 +81,7 @@ void MouseCalibrator::calculateMatrix()
     float E = ((mouse_point[0].x - mouse_point[2].x) * (screen_point[1].y - screen_point[2].y)) - ((screen_point[0].y - screen_point[2].y) * (mouse_point[1].x - mouse_point[2].x));
     float F = (mouse_point[2].x * screen_point[1].y - mouse_point[1].x * screen_point[2].y) * mouse_point[0].y + (mouse_point[0].x * screen_point[2].y - mouse_point[2].x * screen_point[0].y) * mouse_point[1].y + (mouse_point[1].x * screen_point[0].y - mouse_point[0].x * screen_point[1].y) * mouse_point[2].y;
 
-    InputHandler::mouse_transform = sf::Transform(A/Q, B/Q, C/Q, D/Q, E/Q, F/Q, 0, 0, 1);
+    InputHandler::mouse_transform = {A/Q, B/Q, C/Q, D/Q, E/Q, F/Q, 0, 0, 1};
 
     FILE* f = fopen(filename.c_str(), "w");
     if (f)

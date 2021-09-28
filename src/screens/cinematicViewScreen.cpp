@@ -59,41 +59,41 @@ void CinematicViewScreen::update(float delta)
     }
 
     // TODO: Add mouselook.
-    if (InputHandler::keyboardIsDown(sf::Keyboard::W))
+    if (InputHandler::keyboardIsDown(SDLK_w))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.x;
         camera_position.y += xy_vector.y;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::S))
+    if (InputHandler::keyboardIsDown(SDLK_s))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.x;
         camera_position.y -= xy_vector.y;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::A))
+    if (InputHandler::keyboardIsDown(SDLK_a))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.y;
         camera_position.y -= xy_vector.x;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::D))
+    if (InputHandler::keyboardIsDown(SDLK_d))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.y;
         camera_position.y += xy_vector.x;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::R))
+    if (InputHandler::keyboardIsDown(SDLK_r))
         camera_position.z += delta * 100.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::F))
+    if (InputHandler::keyboardIsDown(SDLK_f))
         camera_position.z -= delta * 100.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Left))
+    if (InputHandler::keyboardIsDown(SDLK_LEFT))
         camera_yaw -= delta * 50.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Right))
+    if (InputHandler::keyboardIsDown(SDLK_RIGHT))
         camera_yaw += delta * 50.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Up))
+    if (InputHandler::keyboardIsDown(SDLK_UP))
         camera_pitch -= delta * 50.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Down))
+    if (InputHandler::keyboardIsDown(SDLK_DOWN))
         camera_pitch += delta * 50.0f;
 
     // Add and remove entries from the player ship list.
@@ -223,12 +223,12 @@ void CinematicViewScreen::update(float delta)
     }
 }
 
-void CinematicViewScreen::onKey(sf::Event::KeyEvent key, int unicode)
+void CinematicViewScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
-    switch(key.code)
+    switch(key.keysym.sym)
     {
     // Toggle UI visibility with the H key.
-    case sf::Keyboard::H:
+    case SDLK_h:
         if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
         {
             camera_lock_toggle->hide();
@@ -240,17 +240,17 @@ void CinematicViewScreen::onKey(sf::Event::KeyEvent key, int unicode)
         }
         break;
     // Toggle camera lock with the L key.
-    case sf::Keyboard::L:
+    case SDLK_l:
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
         break;
     // Cycle through player ships with the J and K keys.
-    case sf::Keyboard::J:
+    case SDLK_j:
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
         break;
-    case sf::Keyboard::K:
+    case SDLK_k:
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
@@ -259,13 +259,13 @@ void CinematicViewScreen::onKey(sf::Event::KeyEvent key, int unicode)
     // TODO: X resets the camera to a default relative position and heading.
     // TODO: This is more generic code and is duplicated.
     // Exit the screen with the escape or home keys.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
+    case SDLK_ESCAPE:
+    case SDLK_HOME:
         destroy();
         returnToShipSelection();
         break;
     // If this is the server, pause the game with the P key.
-    case sf::Keyboard::P:
+    case SDLK_p:
         if (game_server)
             engine->setGameSpeed(0.0);
         break;

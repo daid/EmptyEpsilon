@@ -3,7 +3,7 @@
 #define JOYSTICK_CONFIG_H
 
 #include <tuple>
-#include <SFML/Window/Event.hpp>
+#include <SDL.h>
 #include "stringImproved.h"
 #include "input.h"
 #include "hotkeyConfig.h"
@@ -27,7 +27,7 @@ public:
     string key;
     std::tuple<string, string> value;
     unsigned int joystickId;
-    sf::Joystick::Axis axis;
+    int axis;
     bool reversed;
     bool defined;
 
@@ -73,7 +73,7 @@ public:
     std::vector<string> getCategories();
     std::vector<std::pair<string, string>> listJoystickByCategory(string hotkey_category);
 
-    std::vector<AxisAction> getAxisAction(unsigned int joystickId, sf::Joystick::Axis axis, float position);
+    std::vector<AxisAction> getAxisAction(unsigned int joystickId, int axis, float position);
     std::vector<HotkeyResult> getButtonAction(unsigned int joystickId, unsigned int button);
 
 private:

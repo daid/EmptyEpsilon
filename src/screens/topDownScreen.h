@@ -21,7 +21,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual void onKey(const SDL_KeyboardEvent& key, int unicode) override;
 };
 
 #endif//TOP_DOWN_SCREEN_H

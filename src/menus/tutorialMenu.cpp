@@ -85,13 +85,13 @@ void TutorialMenu::selectTutorial(string filename)
     tutorial_description->setText(info.description);
 }
 
-void TutorialMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void TutorialMenu::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
-    switch(key.code)
+    switch(key.keysym.sym)
     {
     //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
+    case SDLK_ESCAPE:
+    case SDLK_HOME:
         destroy();
         returnToMainMenu();
         break;

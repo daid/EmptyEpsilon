@@ -25,8 +25,6 @@ public:
     typedef std::function<void(glm::vec2 position)> pfunc_t;
     typedef std::function<void(float position)>     ffunc_t;
 private:
-    sf::RenderTexture background_texture;
-
     class GhostDot
     {
     public:

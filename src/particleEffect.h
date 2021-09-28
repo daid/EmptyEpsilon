@@ -1,8 +1,6 @@
 #ifndef PARTICLE_EFFECT_H
 #define PARTICLE_EFFECT_H
 
-#include <SFML/Graphics.hpp>
-
 #include "engine.h"
 
 #include "glObjects.h"
@@ -81,7 +79,7 @@ private:
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
     
-    sf::Shader* shader = nullptr;
+    sp::Shader* shader = nullptr;
 #endif
 };
 

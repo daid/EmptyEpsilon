@@ -141,7 +141,8 @@ HotkeyConfig::HotkeyConfig()
     newKey("SELF_DESTRUCT_CANCEL", std::make_tuple(tr("hotkey_Engineering", "Cancel self-destruct"), ""));
 }
 
-static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
+static std::vector<std::pair<string, SDL_Keycode> > sfml_key_names = {
+    /*
     {"A", sf::Keyboard::A},
     {"B", sf::Keyboard::B},
     {"C", sf::Keyboard::C},
@@ -243,9 +244,10 @@ static std::vector<std::pair<string, sf::Keyboard::Key> > sfml_key_names = {
     {"F14", sf::Keyboard::F14},
     {"F15", sf::Keyboard::F15},
     {"Pause", sf::Keyboard::Pause},
+    */
 };
 
-string HotkeyConfig::getStringForKey(const sf::Keyboard::Key& key) const
+string HotkeyConfig::getStringForKey(SDL_Keycode key) const
 {
     for(const auto& key_name : sfml_key_names)
     {
@@ -277,14 +279,14 @@ void HotkeyConfig::load()
     }
 }
 
-std::vector<HotkeyResult> HotkeyConfig::getHotkey(const sf::Event::KeyEvent& key) const
+std::vector<HotkeyResult> HotkeyConfig::getHotkey(const SDL_KeyboardEvent& key) const
 {
     std::vector<HotkeyResult> results;
     for(const HotkeyConfigCategory& cat : categories)
     {
         for(const HotkeyConfigItem& item : cat.hotkeys)
         {
-            if (item.hotkey.code == key.code && item.hotkey.alt == key.alt && item.hotkey.control == key.control && item.hotkey.shift == key.shift && item.hotkey.system == key.system)
+            if (item.hotkey.keysym.sym == key.keysym.sym && item.hotkey.keysym.mod == key.keysym.mod)
             {
                 results.emplace_back(cat.key, item.key);
             }
@@ -333,14 +335,14 @@ std::vector<std::pair<string, string>> HotkeyConfig::listHotkeysByCategory(const
             {
                 for(auto key_name : sfml_key_names)
                 {
-                    if (key_name.second == item.hotkey.code)
+                    if (key_name.second == item.hotkey.keysym.sym)
                     {
                         string keyModifier = "";
-                        if (item.hotkey.shift) {
+                        if (item.hotkey.keysym.mod & KMOD_SHIFT) {
                             keyModifier = "Shift+";
-                        } else if (item.hotkey.control) {
+                        } else if (item.hotkey.keysym.mod & KMOD_CTRL) {
                             keyModifier = "Ctrl+";
-                        } else if (item.hotkey.alt){
+                        } else if (item.hotkey.keysym.mod & KMOD_ALT){
                             keyModifier = "Alt+";
                         }
                         ret.push_back({std::get<0>(item.value), keyModifier + key_name.first});
@@ -371,7 +373,7 @@ std::vector<std::pair<string, string>> HotkeyConfig::listAllHotkeysByCategory(co
     return ret;
 }
 
-sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const
+SDL_Keycode HotkeyConfig::getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const
 {
     for(const HotkeyConfigCategory& cat : categories)
     {
@@ -381,19 +383,21 @@ sf::Keyboard::Key HotkeyConfig::getKeyByHotkey(const string& hotkey_category, co
             {
                 if (item.key == hotkey_name)
                 {
-                    return item.hotkey.code;
+                    return item.hotkey.keysym.sym;
                 }
             }
         }
     }
 
     LOG(WARNING) << "Requested an SFML Key from hotkey " << hotkey_category << ", " << hotkey_name << ", but none was found.";
-    return sf::Keyboard::KeyCount;
+    return SDLK_UNKNOWN;
 }
 
 HotkeyConfigItem::HotkeyConfigItem(const string& key, const std::tuple<string, string>& value)
-    :key{key}, value{value}, hotkey{sf::Keyboard::KeyCount, false, false, false, false}
+    :key{key}, value{value}
 {
+    hotkey.keysym.sym = SDLK_UNKNOWN;
+    hotkey.keysym.mod = 0;
 }
 
 void HotkeyConfigItem::load(const string& key_config)
@@ -401,20 +405,20 @@ void HotkeyConfigItem::load(const string& key_config)
     for(const string& config : key_config.split(";"))
     {
         if (config == "[alt]")
-            hotkey.alt = true;
+            hotkey.keysym.mod |= KMOD_ALT;
         else if (config == "[control]")
-            hotkey.control = true;
+            hotkey.keysym.mod |= KMOD_CTRL;
         else if (config == "[shift]")
-            hotkey.shift = true;
+            hotkey.keysym.mod |= KMOD_SHIFT;
         else if (config == "[system]")
-            hotkey.system = true;
+            hotkey.keysym.mod |= KMOD_GUI;
         else
         {
             for(auto key_name : sfml_key_names)
             {
                 if (key_name.first.lower() == config.lower())
                 {
-                    hotkey.code = key_name.second;
+                    hotkey.keysym.sym = key_name.second;
                     break;
                 }
             }

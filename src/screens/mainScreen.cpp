@@ -137,7 +137,7 @@ void ScreenMainScreen::onClick(glm::vec2 mouse_position)
     if (!my_spaceship)
         return;
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left))
+    if (InputHandler::mouseIsPressed(0))
     {
         switch(my_spaceship->main_screen_setting)
         {
@@ -148,7 +148,7 @@ void ScreenMainScreen::onClick(glm::vec2 mouse_position)
         default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         }
     }
-    if (InputHandler::mouseIsPressed(sf::Mouse::Right))
+    if (InputHandler::mouseIsPressed(1))
     {
         switch(my_spaceship->main_screen_setting)
         {
@@ -159,7 +159,7 @@ void ScreenMainScreen::onClick(glm::vec2 mouse_position)
         default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         }
     }
-    if (InputHandler::mouseIsPressed(sf::Mouse::Middle))
+    if (InputHandler::mouseIsPressed(2))
     {
         switch(my_spaceship->main_screen_setting)
         {
@@ -204,24 +204,24 @@ void ScreenMainScreen::onHotkey(const HotkeyResult& key)
     }
 }
 
-void ScreenMainScreen::onKey(sf::Event::KeyEvent key, int unicode)
+void ScreenMainScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
-    switch (key.code)
+    switch (key.keysym.sym)
     {
     //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
+    case SDLK_ESCAPE:
+    case SDLK_HOME:
         soundManager->stopMusic();
         impulse_sound->stop();
         destroy();
         returnToShipSelection();
         break;
-    case sf::Keyboard::Slash:
-    case sf::Keyboard::F1:
+    case SDLK_SLASH:
+    case SDLK_F1:
         // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
         break;
-    case sf::Keyboard::P:
+    case SDLK_p:
         if (game_server)
             engine->setGameSpeed(0.0);
         break;

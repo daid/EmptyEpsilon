@@ -56,7 +56,7 @@ private:
 public:
     HotkeyMenu();
 
-    void onKey(sf::Event::KeyEvent key, int unicode);
+    void onKey(const SDL_KeyboardEvent& key, int unicode);
 };
 
 #endif //HOTKEYMENU_H

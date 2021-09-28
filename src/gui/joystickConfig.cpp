@@ -38,10 +38,11 @@ JoystickConfig::JoystickConfig()
     }
 }
 
-static std::vector<std::pair<string, sf::Joystick::Axis> > sfml_axis_names = {
-    {"X", sf::Joystick::X},
-    {"Y", sf::Joystick::Y},
-    {"Z", sf::Joystick::Z},
+static std::vector<std::pair<string, int> > sfml_axis_names = {
+    {"X", 0},
+    {"Y", 1},
+    {"Z", 2},
+    /*
     {"R", sf::Joystick::R},
     {"U", sf::Joystick::U},
     {"V", sf::Joystick::V},
@@ -55,6 +56,7 @@ static std::vector<std::pair<string, sf::Joystick::Axis> > sfml_axis_names = {
     {string(sf::Joystick::V), sf::Joystick::V},
     {string(sf::Joystick::PovX), sf::Joystick::PovX},
     {string(sf::Joystick::PovY), sf::Joystick::PovY},
+    */
 };
 
 void JoystickConfig::load()
@@ -92,7 +94,7 @@ void JoystickConfig::load()
     }
 }
 
-std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, sf::Joystick::Axis axis, float position)
+std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, int axis, float position)
 {
     std::vector<AxisAction> actions;
     for(JoystickConfigCategory& cat : categories)

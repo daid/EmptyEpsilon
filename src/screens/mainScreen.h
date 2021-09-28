@@ -33,7 +33,7 @@ public:
 
     virtual void onClick(glm::vec2 mouse_position) override;
     virtual void onHotkey(const HotkeyResult& key) override;
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual void onKey(const SDL_KeyboardEvent& key, int unicode) override;
 };
 
 #endif//MAIN_SCREEN_H

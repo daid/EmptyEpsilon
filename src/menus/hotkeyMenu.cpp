@@ -82,13 +82,13 @@ HotkeyMenu::HotkeyMenu()
     }))->setPosition(150, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 }
 
-void HotkeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void HotkeyMenu::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
-    switch(key.code)
+    switch(key.keysym.sym)
     {
         //TODO: This is more generic code and is duplicated.
-        case sf::Keyboard::Escape:
-        case sf::Keyboard::Home:
+        case SDLK_ESCAPE:
+        case SDLK_HOME:
             destroy();
             returnToOptionMenu();
             break;

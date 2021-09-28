@@ -74,7 +74,7 @@ public:
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
 private:
-    glm::vec3 worldToScreen(sf::RenderTarget& window, glm::vec3 world);
+    glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
 };
 
 #endif//VIEWPORT_3D_H

@@ -541,7 +541,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 #endif//FEATURE_3D_RENDERING
 }
 
-glm::vec3 GuiViewport3D::worldToScreen(sf::RenderTarget& window, glm::vec3 world)
+glm::vec3 GuiViewport3D::worldToScreen(sp::RenderTarget& window, glm::vec3 world)
 {
     world -= camera_position;
     auto view_pos = model_matrix * glm::vec4{ world.x, world.y, world.z, 1.f };
@@ -560,8 +560,9 @@ glm::vec3 GuiViewport3D::worldToScreen(sf::RenderTarget& window, glm::vec3 world
     //Set Z to distance into the screen (negative is behind the screen)
     ret.z = -view_pos.z;
 
-    ret.x = ret.x * window.getView().getSize().x / window.getSize().x;
-    ret.y = ret.y * window.getView().getSize().y / window.getSize().y;
-    ret.y = window.getView().getSize().y - ret.y;
+#warning SDL2 TODO
+    //ret.x = ret.x * window.getView().getSize().x / window.getSize().x;
+    //ret.y = ret.y * window.getView().getSize().y / window.getSize().y;
+    //ret.y = window.getView().getSize().y - ret.y;
     return ret;
 }

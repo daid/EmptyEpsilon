@@ -31,7 +31,7 @@ public:
 
     virtual void update(float delta) override;
     virtual void onHotkey(const HotkeyResult& key) override;
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual void onKey(const SDL_KeyboardEvent& key, int unicode) override;
 
 private:
     GuiElement* main_panel;

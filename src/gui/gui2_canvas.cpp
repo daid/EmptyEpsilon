@@ -26,20 +26,20 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
         drawDebugElements(window_rect, renderer);
     }
 
-    if (InputHandler::mouseIsPressed(sf::Mouse::Left) || InputHandler::mouseIsPressed(sf::Mouse::Right) || InputHandler::mouseIsPressed(sf::Mouse::Middle))
+    if (InputHandler::mouseIsPressed(0) || InputHandler::mouseIsPressed(1) || InputHandler::mouseIsPressed(2))
     {
         click_element = getClickElement(mouse_position);
         if (!click_element)
             onClick(mouse_position);
         focus(click_element);
     }
-    if (InputHandler::mouseIsDown(sf::Mouse::Left) || InputHandler::mouseIsDown(sf::Mouse::Right) || InputHandler::mouseIsDown(sf::Mouse::Middle))
+    if (InputHandler::mouseIsDown(0) || InputHandler::mouseIsDown(1) || InputHandler::mouseIsDown(2))
     {
         if (previous_mouse_position != mouse_position)
             if (click_element)
                 click_element->onMouseDrag(mouse_position);
     }
-    if (InputHandler::mouseIsReleased(sf::Mouse::Left) || InputHandler::mouseIsReleased(sf::Mouse::Right) || InputHandler::mouseIsReleased(sf::Mouse::Middle))
+    if (InputHandler::mouseIsReleased(0) || InputHandler::mouseIsReleased(1) || InputHandler::mouseIsReleased(2))
     {
         if (click_element)
         {
@@ -50,7 +50,7 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     previous_mouse_position = mouse_position;
 }
 
-void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
+void GuiCanvas::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)
 {
     if (focus_element)
         if (focus_element->onKey(key, unicode))
@@ -64,7 +64,7 @@ void GuiCanvas::handleKeyPress(sf::Event::KeyEvent key, int unicode)
     onKey(key, unicode);
 }
 
-void GuiCanvas::handleJoystickAxis(unsigned int joystickId, sf::Joystick::Axis axis, float position){
+void GuiCanvas::handleJoystickAxis(unsigned int joystickId, int axis, float position){
     for(AxisAction action : joystick.getAxisAction(joystickId, axis, position)){
         forwardJoystickAxisToElements(action);
     }
@@ -87,7 +87,7 @@ void GuiCanvas::onHotkey(const HotkeyResult& key)
 {
 }
 
-void GuiCanvas::onKey(sf::Event::KeyEvent key, int unicode)
+void GuiCanvas::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
 }
 

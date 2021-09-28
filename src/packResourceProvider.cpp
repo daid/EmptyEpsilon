@@ -131,7 +131,7 @@ PackResourceStream::~PackResourceStream()
         fclose(f);
 }
 
-sf::Int64 PackResourceStream::read(void* data, sf::Int64 size)
+size_t PackResourceStream::read(void* data, size_t size)
 {
     int ret;
     if (read_position + size > this->size)
@@ -142,19 +142,19 @@ sf::Int64 PackResourceStream::read(void* data, sf::Int64 size)
     return ret;
 }
 
-sf::Int64 PackResourceStream::seek(sf::Int64 position)
+size_t PackResourceStream::seek(size_t position)
 {
     read_position = position;
     fseek(f, this->position + read_position, SEEK_SET);
     return read_position;
 }
 
-sf::Int64 PackResourceStream::tell()
+size_t PackResourceStream::tell()
 {
     return read_position;
 }
 
-sf::Int64 PackResourceStream::getSize()
+size_t PackResourceStream::getSize()
 {
     return size;
 }

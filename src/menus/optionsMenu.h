@@ -28,6 +28,6 @@ private:
 public:
     OptionsMenu();
 
-    void onKey(sf::Event::KeyEvent key, int unicode);
+    void onKey(const SDL_KeyboardEvent& key, int unicode);
 };
 #endif//OPTIONS_MENU_H

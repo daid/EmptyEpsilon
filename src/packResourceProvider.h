@@ -6,10 +6,10 @@
 struct PackResourceInfo
 {
     PackResourceInfo() {}
-    PackResourceInfo(int position, int size) : position(position), size(size) {}
+    PackResourceInfo(size_t position, size_t size) : position(position), size(size) {}
 
-    int position;
-    int size;
+    size_t position;
+    size_t size;
 };
 
 class PackResourceProvider : public ResourceProvider
@@ -28,18 +28,18 @@ public:
 class PackResourceStream : public ResourceStream
 {
     FILE* f;
-    int position;
-    int size;
-    int read_position;
+    size_t position;
+    size_t size;
+    size_t read_position;
 
     PackResourceStream(string filename, PackResourceInfo info);
 public:
     virtual ~PackResourceStream();
 
-    virtual sf::Int64 read(void* data, sf::Int64 size);
-    virtual sf::Int64 seek(sf::Int64 position);
-    virtual sf::Int64 tell();
-    virtual sf::Int64 getSize();
+    virtual size_t read(void* data, size_t size) override;
+    virtual size_t seek(size_t position) override;
+    virtual size_t tell() override;
+    virtual size_t getSize() override;
 
     friend class PackResourceProvider;
 };

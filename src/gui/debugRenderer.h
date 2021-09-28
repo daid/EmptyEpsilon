@@ -19,7 +19,7 @@ public:
     DebugRenderer();
 
     virtual void render(sp::RenderTarget& target) override;
-    virtual void handleKeyPress(sf::Event::KeyEvent key, int unicode);
+    virtual void handleKeyPress(const SDL_KeyboardEvent& key, int unicode);
 };
 
 #endif//DEBUG_RENDERER_H

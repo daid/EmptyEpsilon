@@ -2,7 +2,7 @@
 #define HOTKEY_CONFIG_H
 
 #include <tuple>
-#include <SFML/Window/Event.hpp>
+#include <SDL.h>
 #include "stringImproved.h"
 
 class JoystickConfig;
@@ -12,7 +12,7 @@ class HotkeyConfigItem
 public:
     string key;
     std::tuple<string, string> value;
-    sf::Event::KeyEvent hotkey;
+    SDL_KeyboardEvent hotkey;
 
     HotkeyConfigItem(const string& key, const std::tuple<string, string>&);
 
@@ -46,10 +46,10 @@ public:
     std::vector<std::pair<string, string>> listHotkeysByCategory(const string& hotkey_category) const;
     std::vector<std::pair<string, string>> listAllHotkeysByCategory(const string& hotkey_category) const;
 
-    std::vector<HotkeyResult> getHotkey(const sf::Event::KeyEvent& key) const;
+    std::vector<HotkeyResult> getHotkey(const SDL_KeyboardEvent& key) const;
     bool setHotkey(const std::string& work_cat, const std::pair<string,string>& key, const string& new_value);
-    string getStringForKey(const sf::Keyboard::Key& key) const;
-    sf::Keyboard::Key getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const;
+    string getStringForKey(SDL_Keycode key) const;
+    SDL_Keycode getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const;
 private:
     HotkeyConfig();
     std::vector<HotkeyConfigCategory> categories;

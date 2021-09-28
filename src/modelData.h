@@ -40,9 +40,9 @@ private:
 
     Mesh* mesh;
     glm::vec3 mesh_offset{};
-    sf::Texture* texture;
-    sf::Texture* specular_texture;
-    sf::Texture* illumination_texture;
+    sp::Texture* texture;
+    sp::Texture* specular_texture;
+    sp::Texture* illumination_texture;
 #if FEATURE_3D_RENDERING
     ShaderRegistry::Shaders shader_id;
 #endif

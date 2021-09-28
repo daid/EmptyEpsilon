@@ -51,13 +51,8 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     float max_prefix_width = 0.0f;
     for(Entry& e : entries)
     {
-        float width = 0.0f;
-        for(char c : e.prefix)
-        {
-            sf::Glyph glyph = main_font->getGlyph(c, text_size, false);
-            width += glyph.advance;
-        }
-        max_prefix_width = std::max(max_prefix_width, width);
+        auto prepared = main_font->prepare(e.prefix, 32, text_size, {0, 0}, sp::Alignment::TopLeft, 0);
+        max_prefix_width = std::max(max_prefix_width, prepared.getUsedAreaSize().x);
     }
 
     //Calculate how many lines we can display properly

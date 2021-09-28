@@ -21,7 +21,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& window) override;
     virtual bool onMouseDown(glm::vec2 position) override;
-    virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual bool onKey(const SDL_KeyboardEvent& key, int unicode) override;
     virtual void onFocusGained() override;
     virtual void onFocusLost() override;
 

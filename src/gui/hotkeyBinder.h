@@ -14,7 +14,7 @@ public:
 
     virtual void onFocusGained() override;
     virtual void onFocusLost() override;
-    virtual bool onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual bool onKey(const SDL_KeyboardEvent& key, int unicode) override;
 };
 
 #endif //HOTKEYBINDER_H

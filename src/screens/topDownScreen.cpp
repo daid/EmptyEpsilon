@@ -97,12 +97,12 @@ void TopDownScreen::update(float delta)
     }
 }
 
-void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
+void TopDownScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
-    switch(key.code)
+    switch(key.keysym.sym)
     {
     // Toggle UI visibility with the H key.
-    case sf::Keyboard::H:
+    case SDLK_h:
         if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
         {
             camera_lock_toggle->hide();
@@ -113,47 +113,47 @@ void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
         }
         break;
     // Toggle camera lock with the L key.
-    case sf::Keyboard::L:
+    case SDLK_l:
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
         break;
     // Cycle through player ships with the J and K keys.
-    case sf::Keyboard::J:
+    case SDLK_j:
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
         break;
-    case sf::Keyboard::K:
+    case SDLK_k:
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
         break;
     // WASD controls for the unlocked camera.
-    case sf::Keyboard::W:
+    case SDLK_w:
         if (!camera_lock_toggle->getValue())
             camera_position.y = camera_position.y - (50 * (camera_position.z / 1000));
         break;
-    case sf::Keyboard::A:
+    case SDLK_a:
         if (!camera_lock_toggle->getValue())
             camera_position.x = camera_position.x - (50 * (camera_position.z / 1000));
         break;
-    case sf::Keyboard::S:
+    case SDLK_s:
         if (!camera_lock_toggle->getValue())
             camera_position.y = camera_position.y + (50 * (camera_position.z / 1000));
         break;
-    case sf::Keyboard::D:
+    case SDLK_d:
         if (!camera_lock_toggle->getValue())
             camera_position.x = camera_position.x + (50 * (camera_position.z / 1000));
         break;
     // Zoom the camera in and out with the R and F keys.
-    case sf::Keyboard::R:
+    case SDLK_r:
         if (camera_position.z > 1000.0)
             camera_position.z -= 100.0;
         else
             camera_position.z = 1000.0;
         break;
-    case sf::Keyboard::F:
+    case SDLK_f:
         if (camera_position.z < 10000.0)
             camera_position.z += 100.0;
         else
@@ -161,13 +161,13 @@ void TopDownScreen::onKey(sf::Event::KeyEvent key, int unicode)
         break;
     // TODO: This is more generic code and is duplicated.
     // Exit the screen with the escape or home keys.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
+    case SDLK_ESCAPE:
+    case SDLK_HOME:
         destroy();
         returnToShipSelection();
         break;
     // If this is the server, pause the game with the P key.
-    case sf::Keyboard::P:
+    case SDLK_p:
         if (game_server)
             engine->setGameSpeed(0.0);
         break;

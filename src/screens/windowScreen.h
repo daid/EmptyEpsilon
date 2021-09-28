@@ -16,7 +16,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual void onKey(const SDL_KeyboardEvent& key, int unicode) override;
 
     constexpr static uint8_t flag_callsigns = 0x04;
     constexpr static uint8_t flag_headings  = 0x02;
