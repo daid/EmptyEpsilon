@@ -61,7 +61,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     renderer.drawStretched(rect, "gui/widget/damagePowerOverlay.png", color);
 
     if (rect.size.y > rect.size.x)
-        renderer.drawVerticalText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color);
+        renderer.drawText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color, sp::Font::FlagVertical);
     else
         renderer.drawText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color);
 

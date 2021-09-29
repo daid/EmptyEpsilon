@@ -14,7 +14,7 @@ void GuiLabel::onDraw(sp::RenderTarget& renderer)
     if (bold)
         font = bold_font;
     if (vertical)
-        renderer.drawVerticalText(rect, text, text_alignment, text_size, font, color);
+        renderer.drawText(rect, text, text_alignment, text_size, font, color, sp::Font::FlagVertical);
     else
         renderer.drawText(rect, text, text_alignment, text_size, font, color);
 }
