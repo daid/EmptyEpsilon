@@ -105,6 +105,9 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         }
     }
 
+    // Make sure all the drawing up till now is no longer queued and passed to the GPU.
+    renderer.finish();
+
     //We must take some care to not overstep our bounds,
     // quite literally.
     // We use scissoring to define a 'box' in which all draw operations can happen.
@@ -130,6 +133,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     }
 
     // Stencil setup.
+    renderer.finish();
     glEnable(GL_STENCIL_TEST);
     glStencilMask(as_mask(RadarStencil::InBoundsAndVisible));
     
@@ -159,6 +163,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         // Draws the radar circle shape.
         // Note that this draws both in the stencil and the color buffer!
         renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.finish();
     }
 
     if (fog_style == NebulaFogOfWar)
@@ -178,6 +183,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     }
 
     // Stencil is setup!
+    renderer.finish();
     glStencilMask(as_mask(RadarStencil::None)); // disable writes.
     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Back to defaults.
 
@@ -203,6 +209,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     drawObjects(renderer);
 
     // Post masking
+    renderer.finish();
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     if (show_game_master_data)
         drawObjectsGM(renderer);
@@ -225,6 +232,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         }
     }
     // Done with the stencil.
+    renderer.finish();
     glDepthMask(GL_TRUE);
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_SCISSOR_TEST);
@@ -261,8 +269,10 @@ void GuiRadarView::drawBackground(sp::RenderTarget& renderer)
     // When drawing a non-rectangular radar (ie circle),
     // we need full transparency on the outer edge.
     // We then use the stencil mask to allow the actual drawing.
-#warning SDL2 TODO
-    //renderer.getSFMLTarget().clear(style == Rectangular ? sf::Color{ tint, tint, tint, background_alpha } : sf::Color(0, 0, 0, 0));
+    if (style == Rectangular)
+        renderer.fillRect(rect, {tint, tint, tint, background_alpha});
+    else
+        renderer.fillRect(rect, {0, 0, 0, 0});
 }
 
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
@@ -687,10 +697,6 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
 
     if (!targets)
         return;
-#warning SDL2 TODO
-/*
-    sf::Sprite target_sprite;
-    textureManager.setTexture(target_sprite, "redicule.png");
 
     for(P<SpaceObject> obj : targets->getTargets())
     {
@@ -699,8 +705,7 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.overlaps(object_rect))
         {
-            target_sprite.setPosition(object_position_on_screen.x, object_position_on_screen.y);
-            window.draw(target_sprite);
+            renderer.drawSprite("redicule.png", object_position_on_screen, 48);
         }
     }
 
@@ -708,10 +713,8 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
     {
         auto object_position_on_screen = worldToScreen(my_spaceship->waypoints[targets->getWaypointIndex()]);
 
-        target_sprite.setPosition(object_position_on_screen.x, object_position_on_screen.y - 10);
-        window.draw(target_sprite);
+        renderer.drawSprite("redicule.png", object_position_on_screen - glm::vec2{0, 10}, 48);
     }
-*/
 }
 
 void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
