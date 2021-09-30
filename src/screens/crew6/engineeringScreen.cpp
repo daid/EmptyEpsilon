@@ -227,7 +227,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             else
                 info.heat_arrow->setAngle(-90);
             info.heat_arrow->setVisible(heat > 0);
-            info.heat_arrow->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255 * fabs(heating_diff)))));
+            info.heat_arrow->setColor(glm::u8vec4(255, 255, 255, std::min(255, int(255.0f * fabs(heating_diff)))));
             if (heat > 0.9 && fmod(engine->getElapsedTime(), 0.5) < 0.25)
                 info.heat_icon->show();
             else

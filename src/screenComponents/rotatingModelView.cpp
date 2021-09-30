@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "featureDefs.h"
 #include "rotatingModelView.h"
@@ -24,14 +24,13 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     if (rect.size.x <= 0) return;
     if (rect.size.y <= 0) return;
     if (!model) return;
+    renderer.finish();
 
-    renderer.getSFMLTarget().setActive();
-
-    auto& window = renderer.getSFMLTarget();
     float camera_fov = 60.0f;
-    float sx = window.getSize().x * window.getView().getViewport().width / window.getView().getSize().x;
-    float sy = window.getSize().y * window.getView().getViewport().height / window.getView().getSize().y;
-    glViewport(rect.position.x * sx, (float(window.getView().getSize().y) - rect.size.y - rect.position.y) * sx, rect.size.x * sx, rect.size.y * sy);
+    auto p0 = renderer.virtualToPixelPosition(rect.position);
+    auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size) - p0;
+    LOG(Debug, p0, "->", p1, ":", rect.position, "->", rect.size);
+    glViewport(p0.x, p0.y, p1.x, p1.y);
 
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT);
@@ -47,7 +46,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glScalef(1,1,-1);
 
     glDisable(GL_BLEND);
-    sf::Texture::bind(NULL);
+    glBindTexture(GL_TEXTURE_2D, 0);
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
 
@@ -61,8 +60,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
         auto projection_location = shader.uniform(ShaderRegistry::Uniforms::Projection);
         if (projection_location != -1)
         {
-            auto handle = shader.get()->getNativeHandle();
-            glUseProgram(handle);
+            shader.get()->bind();
             glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
         }
     }
@@ -138,9 +136,9 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
         }
 #endif
     }
+    glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
-
-    window.resetGLStates();
-    window.setActive(false);
+    glEnable(GL_BLEND);
+    glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
 #endif//FEATURE_3D_RENDERING
 }

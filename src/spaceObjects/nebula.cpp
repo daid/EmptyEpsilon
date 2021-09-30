@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "main.h"
 #include "nebula.h"
@@ -86,7 +86,7 @@ void Nebula::draw3DTransparent()
             point.vertex = position;
         }
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Nebula" + string(cloud.texture) + ".png")->getNativeHandle());
+        textureManager.getTexture("Nebula" + string(cloud.texture) + ".png")->bind();
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());

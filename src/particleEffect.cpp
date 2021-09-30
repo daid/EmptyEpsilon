@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include "main.h"
 #include "featureDefs.h"
 #include "particleEffect.h"
@@ -62,16 +62,15 @@ ParticleEngine::ParticleEngine()
         // Cache shader info.
         shader = ShaderManager::getShader("shaders/particles");
 
-        auto handle = shader->getNativeHandle();
-        glValidateProgram(handle);
+        shader->bind();
 
-        uniforms[as_index(Uniforms::Projection)] = glGetUniformLocation(shader->getNativeHandle(), "projection");
-        uniforms[as_index(Uniforms::ModelView)] = glGetUniformLocation(shader->getNativeHandle(), "model_view");
+        uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
+        uniforms[as_index(Uniforms::ModelView)] = shader->getUniformLocation("model_view");
 
-        attributes[as_index(Attributes::Center)] = glGetAttribLocation(shader->getNativeHandle(), "center");
-        attributes[as_index(Attributes::TexCoords)] = glGetAttribLocation(shader->getNativeHandle(), "texcoords");
-        attributes[as_index(Attributes::Color)] = glGetAttribLocation(shader->getNativeHandle(), "color");
-        attributes[as_index(Attributes::Size)] = glGetAttribLocation(shader->getNativeHandle(), "size");
+        attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
+        attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
+        attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
+        attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
 
         std::array<uint8_t, instances_per_draw * elements_per_instance> elements;
 
@@ -122,11 +121,11 @@ ParticleEngine::ParticleEngine()
 
 void ParticleEngine::doRender(const glm::mat4& projection)
 {
-    sf::Shader::bind(shader);
+    shader->bind();
 
     // Setup shared state:
     // - Texture
-    gl::ScopedTexture particle_texture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
+    textureManager.getTexture("particle.png")->bind();
 
     // - Matrices
     glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection));
@@ -183,7 +182,6 @@ void ParticleEngine::doRender(const glm::mat4& projection)
             n += instance_count;
         }
     }
-    sf::Shader::bind(nullptr);
 }
 
 void ParticleEngine::doSpawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time)

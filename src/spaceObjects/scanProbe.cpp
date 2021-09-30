@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include "scanProbe.h"
 #include "explosionEffect.h"
 #include "main.h"

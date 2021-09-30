@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -51,10 +51,10 @@ void Asteroid::draw3D()
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->getNativeHandle());
+    textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
 
     glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->getNativeHandle());
+    textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->bind();
 
     Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
 
@@ -157,10 +157,10 @@ void VisualAsteroid::draw3D()
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->getNativeHandle());
+    textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
 
     glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->getNativeHandle());
+    textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->bind();
 
     Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
 

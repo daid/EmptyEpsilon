@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "particleEffect.h"
 #include "modelInfo.h"
@@ -78,7 +78,7 @@ void ModelInfo::renderOverlay(sp::Texture* texture, float alpha)
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, texture->getNativeHandle());
+        texture->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -104,7 +104,7 @@ void ModelInfo::renderShield(float alpha)
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/shield_hit_effect.png")->getNativeHandle());
+        textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -129,7 +129,7 @@ void ModelInfo::renderShield(float alpha, float angle)
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/shield_hit_effect.png")->getNativeHandle());
+        textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));

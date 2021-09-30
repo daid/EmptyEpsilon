@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include <unordered_map>
 #include "engine.h"
 #include "mesh.h"
@@ -22,7 +22,7 @@ namespace
 Mesh::Mesh(std::vector<MeshVertex>&& vertices)
     :vertices{vertices}, vbo{NO_BUFFER}
 {
-    if (!vertices.empty() && GLEW_VERSION_1_5)
+    if (!vertices.empty())
     {
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);

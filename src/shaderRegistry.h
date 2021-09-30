@@ -9,7 +9,7 @@
 
 #include <type_traits>
 
-namespace sf
+namespace sp
 {
 	class Shader;
 }
@@ -74,12 +74,12 @@ namespace ShaderRegistry
 
 	struct Shader
 	{
-		sf::Shader* get() const { return shader; }
+		sp::Shader* get() const { return shader; }
 		int32_t uniform(Uniforms id) const { return uniforms[Uniforms_t(id)]; }
 		int32_t attribute(Attributes id) const { return attributes[Attributes_t(id)]; }
 		static void initialize();
 	private:
-		sf::Shader* shader = nullptr;
+		sp::Shader* shader = nullptr;
 		std::array<int32_t, Uniforms_t(Uniforms::Count)> uniforms;
 		std::array<int32_t, Uniforms_t(Attributes::Count)> attributes;
 	};

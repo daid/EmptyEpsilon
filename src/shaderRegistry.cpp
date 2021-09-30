@@ -5,7 +5,7 @@
 #include <cassert>
 #include <tuple>
 
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "logging.h"
 #include "shaderManager.h"
@@ -66,22 +66,21 @@ namespace ShaderRegistry
 			
 			if (entry.shader)
 			{
-				auto handle = entry.shader->getNativeHandle();
+				entry.get()->bind();
 
 				// First update attribute locations.
 				for (auto attrib = 0U; attrib < attribute_names.size(); ++attrib)
 				{
-					entry.attributes[attrib] = glGetAttribLocation(handle, attribute_names[attrib]);
+					entry.attributes[attrib] = entry.get()->getAttributeLocation(attribute_names[attrib]);
 				}
 
 				// Find out uniform locations
 				for (auto uniform = 0U; uniform < uniform_names.size(); ++uniform)
 				{
-					entry.uniforms[uniform] = glGetUniformLocation(handle, uniform_names[uniform]);
+					entry.uniforms[uniform] = entry.get()->getUniformLocation(uniform_names[uniform]);
 				}
 
 				// Lockdown texture locations.
-				glUseProgram(entry.get()->getNativeHandle());
 				for (const auto& unit : texture_units)
 				{
 					auto location = entry.uniform(std::get<0>(unit));
@@ -103,7 +102,7 @@ namespace ShaderRegistry
 	ScopedShader::ScopedShader(Shaders id) noexcept
 		:shader{ &ShaderRegistry::get(id) }
 	{
-		glUseProgram(get().get()->getNativeHandle());
+		get().get()->bind();
 	}
 
 	ScopedShader::~ScopedShader() noexcept
@@ -126,7 +125,7 @@ namespace ShaderRegistry
 			other.shader = nullptr;
 		}
 
-		glUseProgram(get().get()->getNativeHandle());
+		get().get()->bind();
 
 		return *this;
 	}

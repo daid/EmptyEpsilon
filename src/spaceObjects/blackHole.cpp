@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "blackHole.h"
 #include "pathPlanner.h"
@@ -47,7 +47,7 @@ void BlackHole::draw3DTransparent()
         glm::vec3{}, {0.f, 0.f}
     };
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("blackHole3d.png")->getNativeHandle());
+    textureManager.getTexture("blackHole3d.png")->bind();
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 5000.f);

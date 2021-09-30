@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include "beamEffect.h"
 #include "spaceship.h"
 #include "mesh.h"
@@ -70,7 +70,7 @@ void BeamEffect::draw3DTransparent()
     glm::vec3 endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(beam_texture)->getNativeHandle());
+    textureManager.getTexture(beam_texture)->bind();
 
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
@@ -126,7 +126,7 @@ void BeamEffect::draw3DTransparent()
         quad[3].vertex = v4;
         quad[3].texcoords = { 0.f, 1.f };
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_ring.png")->getNativeHandle());
+        textureManager.getTexture("texture/fire_ring.png")->bind();
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
         std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };

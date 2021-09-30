@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "main.h"
 #include "playerInfo.h"
@@ -28,10 +28,10 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     {
         // Setup shader.
         starbox_shader = ShaderManager::getShader("shaders/starbox");
-        starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = glGetUniformLocation(starbox_shader->getNativeHandle(), "projection");
-        starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)] = glGetUniformLocation(starbox_shader->getNativeHandle(), "model_view");
+        starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = starbox_shader->getUniformLocation("projection");
+        starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)] = starbox_shader->getUniformLocation("model_view");
 
-        starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = glGetAttribLocation(starbox_shader->getNativeHandle(), "position");
+        starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("position");
 
         // Load up the cube texture.
         // Face setup
@@ -46,17 +46,17 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
         // Upload
         glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
-        sf::Image image;
+        sp::Image image;
         for (const auto& face : faces)
         {
             auto stream = getResourceStream(std::get<0>(face));
-            if (!stream || !image.loadFromStream(**stream))
+            if (!stream || !image.loadFromStream(stream))
             {
                 LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
-                image.create(8, 8, sf::Color(255, 0, 255, 128));
+                image = std::move(sp::Image({8, 8}, {255, 0, 255, 128}));
             }
 
-            glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+            glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
         }
 
         // Make it pretty.
@@ -111,12 +111,12 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
         // Setup spacedust
         spacedust_shader = ShaderManager::getShader("shaders/spacedust");
-        spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "projection");
-        spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "model_view");
-        spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = glGetUniformLocation(spacedust_shader->getNativeHandle(), "rotation");
+        spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = spacedust_shader->getUniformLocation("projection");
+        spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = spacedust_shader->getUniformLocation("model_view");
+        spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = spacedust_shader->getUniformLocation("rotation");
 
-        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = glGetAttribLocation(spacedust_shader->getNativeHandle(), "position");
-        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)] = glGetAttribLocation(spacedust_shader->getNativeHandle(), "sign_value");
+        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = spacedust_shader->getAttributeLocation("position");
+        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)] = spacedust_shader->getAttributeLocation("sign_value");
 
         // Reserve our GPU buffer.
         // Each dust particle consist of:
@@ -171,18 +171,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         soundManager->setListenerPosition(glm::vec2(camera_position.x, camera_position.y), camera_yaw);
     
     glActiveTexture(GL_TEXTURE0);
-    // SFML may rely on FBOs.
-    // calling setActive() ensures the *correct* one is bound,
-    // in case post process effects are on.
-    // Otherwise, gl*() calls go on the *wrong* target, and mayhem ensues
-    // ('mayhem' is ymmv, depending on your flavor of hardware/os/drivers).
-    // SFML docs warn that any library calls (into SFML that is) may
-    // freely change the active binding, so change with caution
-    // (the window.get*() below and shader/texture binding are 'fine').
-    renderer.getSFMLTarget().setActive();
 
     float camera_fov = 60.0f;
-    {
+    {/*
         // Translate our rect from view coordinates to window.
         const auto& view = renderer.getSFMLTarget().getView();
         const auto& view_size = view.getSize();
@@ -209,7 +200,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         auto top = view_size.y * (view_to_window.y + relative_viewport.top) - (window_rect.top + window_rect.height);
         
         // Setup 3D viewport.
-        glViewport(left, top, window_rect.width, window_rect.height);
+        glViewport(left, top, window_rect.width, window_rect.height);*/
     }
     glClearDepth(1.f);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -237,8 +228,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     // Draw starbox.
     glDepthMask(GL_FALSE);
     {
-        starbox_shader->setUniform("scale", 100.f);
-        sf::Shader::bind(starbox_shader);
+        glUniform1f(starbox_shader->getUniformLocation("scale"), 100.0f);
+        starbox_shader->bind();
 
         // Setup shared state (uniforms)
         glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
@@ -270,11 +261,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
-        sf::Shader::bind(nullptr);
     }
     glDepthMask(GL_TRUE);
-
-    sf::Texture::bind(NULL);
 
     class RenderInfo
     {
@@ -322,7 +310,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             const auto& shader = ShaderRegistry::get(ShaderRegistry::Shaders(i));
             if (shader.uniform(ShaderRegistry::Uniforms::Projection) != -1)
             {
-                glUseProgram(shader.get()->getNativeHandle());
+                shader.get()->bind();
                 glUniformMatrix4fv(shader.uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection));
             }
         }
@@ -388,7 +376,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             }
         }
 
-        sf::Shader::bind(spacedust_shader);
+        spacedust_shader->bind();
 
         // Upload matrices (only float 4x4 supported in es2)
         std::array<float, 16> matrix;
@@ -399,7 +387,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
 
         // Ship information for flying particles
-        spacedust_shader->setUniform("velocity", sf::Vector2f(dust_vector.x, dust_vector.y));
+        glUniform2f(spacedust_shader->getUniformLocation("velocity"), dust_vector.x, dust_vector.y);
         
         {
             gl::ScopedVertexAttribArray positions(spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)]);
@@ -416,7 +404,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glDrawArrays(GL_LINES, 0, 2 * spacedust_particle_count);
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
-        sf::Shader::bind(nullptr);
     }
     glPopMatrix();
 
@@ -430,7 +417,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
         glTranslatef(target->getPosition().x, target->getPosition().y, 0);
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("redicule2.png")->getNativeHandle());
+        textureManager.getTexture("redicule2.png")->bind();
         glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
@@ -499,10 +486,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
 #endif
 
-    renderer.getSFMLTarget().resetGLStates();
-    sf::Shader::bind(nullptr);
-    renderer.getSFMLTarget().resetGLStates();
-    renderer.getSFMLTarget().setActive(false);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
 
     if (show_callsigns && render_lists.size() > 0)
     {
@@ -515,7 +502,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             if (call_sign == "")
                 continue;
 
-            glm::vec3 screen_position = worldToScreen(renderer.getSFMLTarget(), glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
+            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
             if (screen_position.z < 0)
                 continue;
             if (screen_position.z > 10000.0)
@@ -532,7 +519,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         for(int angle = 0; angle < 360; angle += 30)
         {
             glm::vec2 world_pos = my_spaceship->getPosition() + vec2FromAngle(angle - 90.f) * distance;
-            glm::vec3 screen_pos = worldToScreen(renderer.getSFMLTarget(), glm::vec3(world_pos.x, world_pos.y, 0.0f));
+            glm::vec3 screen_pos = worldToScreen(renderer, glm::vec3(world_pos.x, world_pos.y, 0.0f));
             if (screen_pos.z > 0.0f)
                 renderer.drawText(sp::Rect(screen_pos.x, screen_pos.y, 0, 0), string(angle), sp::Alignment::Center, 30, bold_font, glm::u8vec4(255, 255, 255, 128));
         }

@@ -2,7 +2,7 @@
 
 #if FEATURE_3D_RENDERING
 
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include <type_traits>
 #include <cassert>
 
@@ -13,7 +13,7 @@ static_assert(std::is_same<uint32_t, GLuint>::value, "GLuint and uint32_t are *N
 #define GL_CHECK(statement) \
   do { \
     auto err = glGetError(); \
-    assert(err == GL_NO_ERROR && "Error before " GL_STRINGIFY(statement)); \
+    /*assert(err == GL_NO_ERROR && "Error before " GL_STRINGIFY(statement)); */ \
     statement; \
     err = glGetError(); \
     assert(err == GL_NO_ERROR && "Error after " GL_STRINGIFY(statement)); \
@@ -106,8 +106,7 @@ namespace gl
 
     bool isAvailable()
     {
-        // Works in "greater or equal than" fashion..
-        return GLEW_VERSION_2_0;
+        return true;
     }
 } // namespace gl
 

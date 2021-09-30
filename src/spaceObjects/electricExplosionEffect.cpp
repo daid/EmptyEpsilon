@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include "main.h"
 #include "electricExplosionEffect.h"
 #include "glObjects.h"
@@ -98,7 +98,7 @@ void ElectricExplosionEffect::draw3DTransparent()
     Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/electric_sphere_texture.png")->getNativeHandle());
+        textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -120,7 +120,7 @@ void ElectricExplosionEffect::draw3DTransparent()
 
     std::array<glm::vec3, 4 * max_quad_count> vertices;
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
+    textureManager.getTexture("particle.png")->bind();
 
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
 

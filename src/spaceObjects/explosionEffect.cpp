@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 #include "main.h"
 #include "explosionEffect.h"
 #include "glObjects.h"
@@ -101,7 +101,7 @@ void ExplosionEffect::draw3DTransparent()
 
     // Explosion sphere
     {
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_sphere_texture.png")->getNativeHandle());
+        textureManager.getTexture("texture/fire_sphere_texture.png")->bind();
 
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
 
@@ -119,7 +119,7 @@ void ExplosionEffect::draw3DTransparent()
 
     // Fire ring
     {
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_ring.png")->getNativeHandle());
+        textureManager.getTexture("texture/fire_ring.png")->bind();
         glScalef(1.5f, 1.5f, 1.5f);
 
         vertices[0] = glm::vec3(-1, -1, 0);
@@ -146,7 +146,7 @@ void ExplosionEffect::draw3DTransparent()
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
+    textureManager.getTexture("particle.png")->bind();
 
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 5.0f);
     float r = Tween<float>::easeInQuad(f, 0.0, 1.0, 1.0f, 0.0f);

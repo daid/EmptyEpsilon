@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "engine.h"
 #include "main.h"
@@ -219,18 +219,18 @@ void ModelData::render()
     ShaderRegistry::ScopedShader shader(shader_id);
 
     // Textures
-    glBindTexture(GL_TEXTURE_2D, texture->getNativeHandle());
+    texture->bind();
 
     if (specular_texture)
     {
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-        glBindTexture(GL_TEXTURE_2D, specular_texture->getNativeHandle());
+        specular_texture->bind();
     }
 
     if (illumination_texture)
     {
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
-        glBindTexture(GL_TEXTURE_2D, illumination_texture->getNativeHandle());
+        illumination_texture->bind();
     }
 
     // Draw

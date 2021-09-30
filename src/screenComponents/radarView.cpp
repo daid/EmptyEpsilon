@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <graphics/opengl.h>
 
 #include "main.h"
 #include "gameGlobalInfo.h"

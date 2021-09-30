@@ -54,14 +54,14 @@ class GuiViewport3D : public GuiElement
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::StarboxCount)> starbox_vertex_attributes;
     gl::Textures<1> starbox_texture;
     gl::Buffers<static_cast<size_t>(Buffers::StarboxCount)> starbox_buffers;
-    sf::Shader* starbox_shader = nullptr;
+    sp::Shader* starbox_shader = nullptr;
 
     // Spacedust
     static constexpr size_t spacedust_particle_count = 1024;
     std::array<uint32_t, static_cast<size_t>(Uniforms::SpacedustCount)> spacedust_uniforms;
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::SpacedustCount)> spacedust_vertex_attributes;
     gl::Buffers<static_cast<size_t>(Buffers::SpacedustCount)> spacedust_buffer;
-    sf::Shader* spacedust_shader = nullptr;
+    sp::Shader* spacedust_shader = nullptr;
 
     
 #endif
