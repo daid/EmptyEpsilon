@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 #include "beamEffect.h"
 #include "spaceship.h"
 #include "mesh.h"

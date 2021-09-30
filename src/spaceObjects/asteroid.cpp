@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"

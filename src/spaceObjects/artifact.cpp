@@ -1,4 +1,4 @@
-#include <SFML/OpenGL.hpp>
+#include "GL/glew.h"
 #include "artifact.h"
 #include "explosionEffect.h"
 #include "playerSpaceship.h"

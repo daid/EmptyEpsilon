@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 
 #include "main.h"
 #include "playerInfo.h"

@@ -1,9 +1,8 @@
-#include <GL/glew.h> 
+#include <GL/glew.h>
 
 #include "blackHole.h"
 #include "pathPlanner.h"
 #include "main.h"
-#include <SFML/OpenGL.hpp>
 
 #include "scriptInterface.h"
 #include "glObjects.h"

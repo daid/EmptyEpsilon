@@ -1,4 +1,4 @@
-#include <SFML/OpenGL.hpp>
+#include <GL/glew.h>
 #include "scanProbe.h"
 #include "explosionEffect.h"
 #include "main.h"

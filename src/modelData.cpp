@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 
 #include "engine.h"
 #include "main.h"

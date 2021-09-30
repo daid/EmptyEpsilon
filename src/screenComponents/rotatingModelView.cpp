@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 
 #include "featureDefs.h"
 #include "rotatingModelView.h"

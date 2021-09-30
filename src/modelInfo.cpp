@@ -1,5 +1,4 @@
 #include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
 
 #include "particleEffect.h"
 #include "modelInfo.h"

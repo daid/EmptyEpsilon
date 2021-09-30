@@ -1,6 +1,5 @@
 #include <GL/glew.h>
 #include "planet.h"
-#include <SFML/OpenGL.hpp>
 #include "main.h"
 #include "pathPlanner.h"
 
