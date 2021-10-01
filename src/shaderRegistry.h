@@ -2,9 +2,7 @@
 #define EMPTYEPSILON_SHADER_REGISTRY_H
 #include "featureDefs.h"
 
-#if FEATURE_3D_RENDERING
 #include <array>
-#include <bitset>
 #include <cstdint>
 
 #include <type_traits>
@@ -103,13 +101,5 @@ namespace ShaderRegistry
 		const Shader* shader = nullptr;
 	};
 }
-#else
-namespace ShaderRegistry
-{
-	struct Shader
-	{
-		static inline void initialize() {}
-	};
-}
-#endif // FEATURE_3D_RENDERING
+
 #endif // EMPTYEPSILON_SHADER_REGISTRY_H

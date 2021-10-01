@@ -1,7 +1,5 @@
 #include "shaderRegistry.h"
 
-#if FEATURE_3D_RENDERING
-
 #include <cassert>
 #include <tuple>
 
@@ -130,4 +128,3 @@ namespace ShaderRegistry
 		return *this;
 	}
 }
-#endif // FEATURE_3D_RENDERING

@@ -20,7 +20,6 @@ GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, P<Mod
 
 void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 {
-#if FEATURE_3D_RENDERING
     if (rect.size.x <= 0) return;
     if (rect.size.y <= 0) return;
     if (!model) return;
@@ -28,31 +27,29 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     float camera_fov = 60.0f;
     auto p0 = renderer.virtualToPixelPosition(rect.position);
-    auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size) - p0;
-    LOG(Debug, p0, "->", p1, ":", rect.position, "->", rect.size);
-    glViewport(p0.x, p0.y, p1.x, p1.y);
+    auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
+    glViewport(p0.x, renderer.getPhysicalSize().y - p1.y, p1.x - p0.x, p1.y - p0.y);
 
-    glClearDepth(1.f);
+    glClearDepthf(1.f);
     glClear(GL_DEPTH_BUFFER_BIT);
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
 
     auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glRotatef(90, 1, 0, 0);
-    glScalef(1,1,-1);
+    auto view_matrix = glm::mat4(1.0f);
+    view_matrix = glm::rotate(view_matrix, 90.0f / 180.0f * float(M_PI), {1.0f, 0.0f, 0.0f});
+    view_matrix = glm::scale(view_matrix, {1,1,-1});
 
     glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, 0);
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
 
-    glTranslatef(0, -200, 0);
-    glRotatef(-30, 1, 0, 0);
-    glRotatef(engine->getElapsedTime() * 360.0f / 10.0f, 0.0f, 0.0f, 1.0f);
+    view_matrix = glm::translate(view_matrix, {0, -200, 0});
+    view_matrix = glm::rotate(view_matrix, -30.0f / 180.0f * float(M_PI), {1, 0, 0});
+    view_matrix = glm::rotate(view_matrix, engine->getElapsedTime() * 360.0f / 10.0f / 180.0f * float(M_PI), {0.0f, 0.0f, 1.0f});
+    float scale = 100.0f / model->getRadius();
+    view_matrix = glm::scale(view_matrix, {scale, scale, scale});
 
     for (auto i = 0; i < ShaderRegistry::Shaders_t(ShaderRegistry::Shaders::Count); ++i)
     {
@@ -63,14 +60,13 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
             shader.get()->bind();
             glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
         }
+        shader.get()->bind();
+        glUniformMatrix4fv(shader.get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
     }
-    glUseProgram(GL_NONE);
 
     {
-        float scale = 100.0f / model->getRadius();
-        glScalef(scale, scale, scale);
         model->render();
-#ifdef DEBUG
+#ifdef DEBUGX
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
         {
             // Common state - matrices.
@@ -140,5 +136,4 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
-#endif//FEATURE_3D_RENDERING
 }

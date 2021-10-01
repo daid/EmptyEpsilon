@@ -43,9 +43,7 @@ private:
     sp::Texture* texture;
     sp::Texture* specular_texture;
     sp::Texture* illumination_texture;
-#if FEATURE_3D_RENDERING
     ShaderRegistry::Shaders shader_id;
-#endif
     float scale;
 
     float radius;

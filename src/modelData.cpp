@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "engine.h"
 #include "main.h"
@@ -33,10 +34,8 @@ ModelData::ModelData()
 :
     loaded(false), mesh(nullptr),
     texture(nullptr), specular_texture(nullptr), illumination_texture(nullptr),
-#if FEATURE_3D_RENDERING
     shader_id(ShaderRegistry::Shaders::Count),
-#endif
-scale(1.f), radius(1.f)
+    scale(1.f), radius(1.f)
 {
 }
 
@@ -166,7 +165,6 @@ void ModelData::load()
             specular_texture = textureManager.getTexture(specular_texture_name);
         if (illumination_texture_name != "")
             illumination_texture = textureManager.getTexture(illumination_texture_name);
-#if FEATURE_3D_RENDERING
         if (texture && specular_texture && illumination_texture)
             shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
         else if (texture && specular_texture)
@@ -175,7 +173,6 @@ void ModelData::load()
             shader_id = ShaderRegistry::Shaders::ObjectIllumination;
         else
             shader_id = ShaderRegistry::Shaders::Object;
-#endif
         loaded = true;
     }
 }
@@ -204,19 +201,19 @@ std::vector<string> ModelData::getModelDataNames()
 
 void ModelData::render()
 {
-#if FEATURE_3D_RENDERING
     load();
     if (!mesh)
         return;
 
-    glPushMatrix();
     // EE's coordinate flips to a Z-up left hand.
     // To account for that, flip the model around 180deg.
-    glRotatef(180.f, 0.f, 0.f, 1.f);
-    glScalef(scale, scale, scale);
-    glTranslatef(mesh_offset.x, mesh_offset.y, mesh_offset.z);
+    auto model_matrix = glm::mat4(1.0f);
+    model_matrix = glm::rotate(model_matrix, 180.f / 180.0f * float(M_PI), {0.f, 0.f, 1.f});
+    model_matrix = glm::scale(model_matrix, {scale, scale, scale});
+    model_matrix = glm::translate(model_matrix, mesh_offset);
 
     ShaderRegistry::ScopedShader shader(shader_id);
+    glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     // Textures
     texture->bind();
@@ -241,6 +238,4 @@ void ModelData::render()
 
     if (specular_texture || illumination_texture)
         glActiveTexture(GL_TEXTURE0);
-    glPopMatrix();
-#endif//FEATURE_3D_RENDERING
 }

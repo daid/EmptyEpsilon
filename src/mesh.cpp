@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include "engine.h"
 #include "mesh.h"
-#include "featureDefs.h"
 
 namespace
 {
@@ -39,7 +38,6 @@ Mesh::~Mesh()
 
 void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t normal_attrib)
 {
-#if FEATURE_3D_RENDERING
     if (vertices.empty())
         return;
 
@@ -59,7 +57,6 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
 
     if (vbo != NO_BUFFER)
         glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
-#endif//FEATURE_3D_RENDERING
 }
 
 glm::vec3 Mesh::randomPoint()

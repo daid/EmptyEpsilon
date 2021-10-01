@@ -1,26 +1,12 @@
 #include "glObjects.h"
 
-#if FEATURE_3D_RENDERING
-
 #include <graphics/opengl.h>
 #include <type_traits>
 #include <cassert>
 
 static_assert(std::is_same<uint32_t, GLuint>::value, "GLuint and uint32_t are *NOT* the same: troubles!");
 
-#ifndef NDEBUG
-#define GL_STRINGIFY(v) #v
-#define GL_CHECK(statement) \
-  do { \
-    auto err = glGetError(); \
-    /*assert(err == GL_NO_ERROR && "Error before " GL_STRINGIFY(statement)); */ \
-    statement; \
-    err = glGetError(); \
-    assert(err == GL_NO_ERROR && "Error after " GL_STRINGIFY(statement)); \
-  } while (false)
-#else
 #define GL_CHECK(statement) statement
-#endif
 
 namespace gl
 {
@@ -109,6 +95,3 @@ namespace gl
         return true;
     }
 } // namespace gl
-
-#endif // FEATURE_3D_RENDERING
-
