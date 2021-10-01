@@ -128,7 +128,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     {
         // Draw the radar's outline. First, and before any stencil kicks in.
         // this way, the outline is not even a part of the rendering area.
-        float r = std::min(rect.size.x, rect.size.y) / 2.0f;
+        float r = std::min(rect.size.x, rect.size.y) * 0.5f;
         renderer.drawCircleOutline(getCenterPoint(), r, 2.0f, colorConfig.radar_outline);
     }
 
@@ -162,7 +162,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
         // Draws the radar circle shape.
         // Note that this draws both in the stencil and the color buffer!
-        renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f - 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
         renderer.finish();
     }
 
