@@ -116,7 +116,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     auto extents = renderer.virtualToPixelPosition(rect.position + rect.size);
 
     glEnable(GL_SCISSOR_TEST);
-    glScissor(origin.x, origin.y, extents.x - origin.x, extents.y - origin.y);
+    glScissor(origin.x, renderer.getVirtualSize().y - extents.y, extents.x - origin.x, extents.y - origin.y);
 
     // Draw the initial background 'clear' color.
     if (style == Rectangular)

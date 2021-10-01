@@ -23,137 +23,133 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     show_spacedust = false;
 
     // Load up our starbox into a cubemap.
-#if FEATURE_3D_RENDERING
-    if (gl::isAvailable())
+    // Setup shader.
+    starbox_shader = ShaderManager::getShader("shaders/starbox");
+    starbox_shader->bind();
+    starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = starbox_shader->getUniformLocation("projection");
+    starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)] = starbox_shader->getUniformLocation("model_view");
+
+    starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("position");
+
+    // Load up the cube texture.
+    // Face setup
+    std::array<std::tuple<const char*, uint32_t>, 6> faces{
+        std::make_tuple("skybox/right.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
+        std::make_tuple("skybox/left.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
+        std::make_tuple("skybox/top.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
+        std::make_tuple("skybox/bottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
+        std::make_tuple("skybox/front.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
+        std::make_tuple("skybox/back.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
+    };
+
+    // Upload
+    glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
+    sp::Image image;
+    for (const auto& face : faces)
     {
-        // Setup shader.
-        starbox_shader = ShaderManager::getShader("shaders/starbox");
-        starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = starbox_shader->getUniformLocation("projection");
-        starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)] = starbox_shader->getUniformLocation("model_view");
-
-        starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("position");
-
-        // Load up the cube texture.
-        // Face setup
-        std::array<std::tuple<const char*, uint32_t>, 6> faces{
-            std::make_tuple("skybox/right.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
-            std::make_tuple("skybox/left.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
-            std::make_tuple("skybox/top.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
-            std::make_tuple("skybox/bottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
-            std::make_tuple("skybox/front.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
-            std::make_tuple("skybox/back.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
-        };
-
-        // Upload
-        glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
-        sp::Image image;
-        for (const auto& face : faces)
+        auto stream = getResourceStream(std::get<0>(face));
+        if (!stream || !image.loadFromStream(stream))
         {
-            auto stream = getResourceStream(std::get<0>(face));
-            if (!stream || !image.loadFromStream(stream))
-            {
-                LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
-                image = std::move(sp::Image({8, 8}, {255, 0, 255, 128}));
-            }
-
-            glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
+            LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
+            image = std::move(sp::Image({8, 8}, {255, 0, 255, 128}));
         }
 
-        // Make it pretty.
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-        for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T , GL_TEXTURE_WRAP_R })
-            glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
-
-        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
-
-        // Load up the ebo and vbo for the cube.
-        /*   
-               .2------6
-             .' |    .'|
-            3---+--7'  |
-            |   |  |   |
-            |  .0--+---4
-            |.'    | .'
-            1------5'
-        */
-        std::array<glm::vec3, 8> positions{
-            // Left face
-            glm::vec3{-1.f, -1.f, -1.f}, // 0
-            glm::vec3{-1.f, -1.f, 1.f},  // 1
-            glm::vec3{-1.f, 1.f, -1.f},  // 2
-            glm::vec3{-1.f, 1.f, 1.f},   // 3
-
-            // Right face
-            glm::vec3{1.f, -1.f, -1.f},  // 4
-            glm::vec3{1.f, -1.f, 1.f},   // 5
-            glm::vec3{1.f, 1.f, -1.f},   // 6
-            glm::vec3{1.f, 1.f, 1.f},    // 7
-        };
-
-        constexpr std::array<uint8_t, 6 * 6> elements{
-            2, 6, 4, 4, 0, 2, // Back
-            3, 2, 0, 0, 1, 3, // Left
-            6, 7, 5, 5, 4, 6, // Right
-            7, 3, 1, 1, 5, 7, // Front
-            6, 2, 3, 3, 7, 6, // Top
-            0, 4, 5, 5, 1, 0, // Bottom
-        };
-
-        // Upload to GPU.
-        glBindBuffer(GL_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Vertex)]);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
-
-        glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(glm::vec3), positions.data(), GL_STATIC_DRAW);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
-        // Setup spacedust
-        spacedust_shader = ShaderManager::getShader("shaders/spacedust");
-        spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = spacedust_shader->getUniformLocation("projection");
-        spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = spacedust_shader->getUniformLocation("model_view");
-        spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = spacedust_shader->getUniformLocation("rotation");
-
-        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = spacedust_shader->getAttributeLocation("position");
-        spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)] = spacedust_shader->getAttributeLocation("sign_value");
-
-        // Reserve our GPU buffer.
-        // Each dust particle consist of:
-        // - a worldpace position (Vector3f)
-        // - a sign value (single byte, passed as float).
-        // Both "arrays" are maintained separate:
-        // the signs are stable (they just tell us which "end" of the line we're on)
-        // The positions will get updated more frequently.
-        // It means each particle occupies 2*16B (assuming tight packing)
-        glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
-        glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(glm::vec3) + sizeof(float)), nullptr, GL_DYNAMIC_DRAW);
-
-        // Generate and update the alternating vertices signs.
-        std::array<float, 2 * spacedust_particle_count> signs;
-        
-        for (auto n = 0U; n < signs.size(); n += 2)
-        {
-            signs[n] = -1.f;
-            signs[n + 1] = 1.f;
-        }
-
-        // Update sign parts.
-        glBufferSubData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * sizeof(glm::vec3), signs.size() * sizeof(float), signs.data());
-        {
-            // zero out positions.
-            const std::vector<glm::vec3> zeroed_positions(2 * spacedust_particle_count);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(glm::vec3), zeroed_positions.data());
-        }
-        glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
-        
+        glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
     }
-#endif // FEATURE_3D_RENDERING
+
+    // Make it pretty.
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+#warning SDL2 TODO? GL_TEXTURE_WRAP_R does not exist in GLES2.0?
+    for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T /*, GL_TEXTURE_WRAP_R*/ })
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
+
+    glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
+
+    // Load up the ebo and vbo for the cube.
+    /*   
+           .2------6
+         .' |    .'|
+        3---+--7'  |
+        |   |  |   |
+        |  .0--+---4
+        |.'    | .'
+        1------5'
+    */
+    std::array<glm::vec3, 8> positions{
+        // Left face
+        glm::vec3{-1.f, -1.f, -1.f}, // 0
+        glm::vec3{-1.f, -1.f, 1.f},  // 1
+        glm::vec3{-1.f, 1.f, -1.f},  // 2
+        glm::vec3{-1.f, 1.f, 1.f},   // 3
+
+        // Right face
+        glm::vec3{1.f, -1.f, -1.f},  // 4
+        glm::vec3{1.f, -1.f, 1.f},   // 5
+        glm::vec3{1.f, 1.f, -1.f},   // 6
+        glm::vec3{1.f, 1.f, 1.f},    // 7
+    };
+
+    constexpr std::array<uint8_t, 6 * 6> elements{
+        2, 6, 4, 4, 0, 2, // Back
+        3, 2, 0, 0, 1, 3, // Left
+        6, 7, 5, 5, 4, 6, // Right
+        7, 3, 1, 1, 5, 7, // Front
+        6, 2, 3, 3, 7, 6, // Top
+        0, 4, 5, 5, 1, 0, // Bottom
+    };
+
+    // Upload to GPU.
+    glBindBuffer(GL_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Vertex)]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
+
+    glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(glm::vec3), positions.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
+    // Setup spacedust
+    spacedust_shader = ShaderManager::getShader("shaders/spacedust");
+    spacedust_shader->bind();
+    spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = spacedust_shader->getUniformLocation("projection");
+    spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = spacedust_shader->getUniformLocation("model_view");
+    spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = spacedust_shader->getUniformLocation("rotation");
+
+    spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = spacedust_shader->getAttributeLocation("position");
+    spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Sign)] = spacedust_shader->getAttributeLocation("sign_value");
+
+    // Reserve our GPU buffer.
+    // Each dust particle consist of:
+    // - a worldpace position (Vector3f)
+    // - a sign value (single byte, passed as float).
+    // Both "arrays" are maintained separate:
+    // the signs are stable (they just tell us which "end" of the line we're on)
+    // The positions will get updated more frequently.
+    // It means each particle occupies 2*16B (assuming tight packing)
+    glBindBuffer(GL_ARRAY_BUFFER, spacedust_buffer[0]);
+    glBufferData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * (sizeof(glm::vec3) + sizeof(float)), nullptr, GL_DYNAMIC_DRAW);
+
+    // Generate and update the alternating vertices signs.
+    std::array<float, 2 * spacedust_particle_count> signs;
+    
+    for (auto n = 0U; n < signs.size(); n += 2)
+    {
+        signs[n] = -1.f;
+        signs[n + 1] = 1.f;
+    }
+
+    // Update sign parts.
+    glBufferSubData(GL_ARRAY_BUFFER, 2 * spacedust_particle_count * sizeof(glm::vec3), signs.size() * sizeof(float), signs.data());
+    {
+        // zero out positions.
+        const std::vector<glm::vec3> zeroed_positions(2 * spacedust_particle_count);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, 2 * spacedust_particle_count * sizeof(glm::vec3), zeroed_positions.data());
+    }
+    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 }
 
 void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 {
-#if FEATURE_3D_RENDERING
     if (rect.size.x == 0.f)
     {
         // The GUI ticks before Updatables.
@@ -164,7 +160,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         // Since some gl calls don't really like an empty viewport, just ignore the draw.
         return;
     }
-        
+    renderer.finish();
+   
     if (my_spaceship)
         soundManager->setListenerPosition(my_spaceship->getPosition(), my_spaceship->getRotation());
     else
@@ -173,36 +170,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glActiveTexture(GL_TEXTURE0);
 
     float camera_fov = 60.0f;
-    {/*
-        // Translate our rect from view coordinates to window.
-        const auto& view = renderer.getSFMLTarget().getView();
-        const auto& view_size = view.getSize();
-
-        const auto& relative_viewport = view.getViewport();
-
-        // View's viewport in target coordinate system (= pixels)
-        const auto& window_viewport = renderer.getSFMLTarget().getViewport(view);
-
-        // Get the scaling factor - from logical size to pixels.
-        const sf::Vector2f view_to_window{ window_viewport.width / view_size.x, window_viewport.height / view_size.y };
-        
-        // Compute rect, applying logical -> pixel scaling.
-        const sf::IntRect window_rect{
-            static_cast<int32_t>(.5f + rect.position.x * view_to_window.x),
-            static_cast<int32_t>(.5f + rect.position.y * view_to_window.y),
-            static_cast<int32_t>(.5f + rect.size.x * view_to_window.x),
-            static_cast<int32_t>(.5f + rect.size.y * view_to_window.y)
-        };
-
-        // Apply current viewport translation.
-        // (top / bottom is flipped around)
-        auto left = view_size.x * relative_viewport.left + window_rect.left;
-        auto top = view_size.y * (view_to_window.y + relative_viewport.top) - (window_rect.top + window_rect.height);
-        
-        // Setup 3D viewport.
-        glViewport(left, top, window_rect.width, window_rect.height);*/
+    {
+        auto p0 = renderer.virtualToPixelPosition(rect.position);
+        auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
+        glViewport(p0.x, renderer.getPhysicalSize().y - p1.y, p1.x - p0.x, p1.y - p0.y);
     }
-    glClearDepth(1.f);
+    glClearDepthf(1.f);
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
     glEnable(GL_DEPTH_TEST);
@@ -210,38 +183,30 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
-    glColor4f(1,1,1,1);
-
     projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glm::mat4 view_matrix = glm::mat4(1.0f);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
-    glRotatef(90, 1, 0, 0); // -> X across (l-t-r), Y "towards", Z down 
-    glScalef(1,1,-1);  // -> X across (l-t-r), Y "towards", Z up
-    glRotatef(-camera_pitch, 1, 0, 0);
-    glRotatef(-(camera_yaw + 90), 0, 0, 1);
+    view_matrix = glm::rotate(view_matrix, 90.0f / 180.0f * float(M_PI), {1, 0, 0}); // -> X across (l-t-r), Y "towards", Z down 
+    view_matrix = glm::scale(view_matrix, {1,1,-1});  // -> X across (l-t-r), Y "towards", Z up
+    view_matrix = glm::rotate(view_matrix, -camera_pitch / 180.0f * float(M_PI), {1, 0, 0});
+    view_matrix = glm::rotate(view_matrix, -(camera_yaw + 90) / 180.0f * float(M_PI), {0, 0, 1});
 
-    glGetFloatv(GL_MODELVIEW_MATRIX, glm::value_ptr(model_matrix));
     glGetFloatv(GL_VIEWPORT, glm::value_ptr(viewport));
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
     {
-        glUniform1f(starbox_shader->getUniformLocation("scale"), 100.0f);
         starbox_shader->bind();
+        glUniform1f(starbox_shader->getUniformLocation("scale"), 100.0f);
 
         // Setup shared state (uniforms)
         glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
         
         // Uniform
         // Upload matrices (only float 4x4 supported in es2)
-        std::array<float, 16> matrix;
-
         glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-
-        glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
-        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
+        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view_matrix));
         
         // Bind our cube
         {
@@ -251,7 +216,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
             // Vertex attributes.
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
-
 
             glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_BYTE, (GLvoid*)0);
 
@@ -297,7 +261,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             render_lists.emplace_back();
         render_lists[render_list_index].emplace_back(*obj, depth);
     }
-
+/*
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
@@ -316,7 +280,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
         glUseProgram(GL_NONE);
 
-        glMatrixMode(GL_MODELVIEW);
         glDepthMask(true);
 
         glDisable(GL_BLEND);
@@ -379,12 +342,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         spacedust_shader->bind();
 
         // Upload matrices (only float 4x4 supported in es2)
-        std::array<float, 16> matrix;
-
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE,glm::value_ptr(projection_matrix));
-
-        glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view_matrix));
 
         // Ship information for flying particles
         glUniform2f(spacedust_shader->getUniformLocation("velocity"), dust_vector.x, dust_vector.y);
@@ -485,11 +444,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         }
     }
 #endif
+*/
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
-    glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
 
     if (show_callsigns && render_lists.size() > 0)
     {
@@ -524,13 +483,14 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 renderer.drawText(sp::Rect(screen_pos.x, screen_pos.y, 0, 0), string(angle), sp::Alignment::Center, 30, bold_font, glm::u8vec4(255, 255, 255, 128));
         }
     }
-#endif//FEATURE_3D_RENDERING
+
+    glViewport(0, 0, renderer.getPhysicalSize().x, renderer.getPhysicalSize().y);
 }
 
-glm::vec3 GuiViewport3D::worldToScreen(sp::RenderTarget& window, glm::vec3 world)
+glm::vec3 GuiViewport3D::worldToScreen(sp::RenderTarget& renderer, glm::vec3 world)
 {
     world -= camera_position;
-    auto view_pos = model_matrix * glm::vec4{ world.x, world.y, world.z, 1.f };
+    auto view_pos = view_matrix * glm::vec4{ world.x, world.y, world.z, 1.f };
     auto pos = projection_matrix * view_pos;
 
     // Perspective division
