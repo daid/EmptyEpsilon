@@ -352,6 +352,8 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
             renderer.drawPoint(worldToScreen(glm::vec2(x,y)), color);
         }
     }
+    //We finish the rendering here, to make sure the sector grid lines are drawn below anything else.
+    renderer.finish();
 }
 
 void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
