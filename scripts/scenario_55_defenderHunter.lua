@@ -74,11 +74,11 @@ function init()
 	setConstants()
 	diagnostic = false		
 	helpfulWarningDiagnostic = false
-	GMDiagnosticOn = "Turn On Diagnostic"
+	GMDiagnosticOn = _("GMButton", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	default_interwave_interval = 280
 	interWave = default_interwave_interval			
-	GMDelayNormalToSlow = "Delay normal to slow"
+	GMDelayNormalToSlow = _("GMButton", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 	buildStations()
 	wfv = "end of init"
@@ -500,12 +500,12 @@ function turnOnDiagnostic()
 -- Diagnostic enable/disable buttons on GM screen
 	diagnostic = true
 	removeGMFunction(GMDiagnosticOn)
-	addGMFunction("Turn Off Diagnostic",turnOffDiagnostic)
+	addGMFunction(_("GMButton", "Turn Off Diagnostic"),turnOffDiagnostic)
 end
 function turnOffDiagnostic()
 	diagnostic = false
 	removeGMFunction(GMDiagnosticOff)
-	addGMFunction("Turn On Diagnostic",turnOnDiagnostic)
+	addGMFunction(_("GMButton", "Turn On Diagnostic"),turnOnDiagnostic)
 end
 function populateStationPool()
 	station_pool = {
@@ -3771,17 +3771,17 @@ end
 function delayNormalToSlow()
 	interWave = 600
 	removeGMFunction(GMDelayNormalToSlow)
-	addGMFunction("Delay slow to fast",delaySlowToFast)
+	addGMFunction(_("GMButton", "Delay slow to fast"),delaySlowToFast)
 end
 function delaySlowToFast()
 	interwave = 20
 	removeGMFunction(GMDelaySlowToFast)
-	addGMFunction("Delay fast to normal",delayFastToNormal)
+	addGMFunction(_("GMButton", "Delay fast to normal"),delayFastToNormal)
 end
 function delayFastToNormal()
 	interwave = default_interwave_interval
 	removeGMFunction(GMDelayFastToNormal)
-	addGMFunction("Delay normal to slow",delayNormalToSlow)
+	addGMFunction(_("GMButton", "Delay normal to slow"),delayNormalToSlow)
 end
 -- dynamic universe functions: asteroids and nebulae in motion
 function setMovingNebulae()
@@ -4011,9 +4011,9 @@ function buildStations()
 	alderaan= Planet():setPosition(aldx,aldy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Alderaan")
 	alderaan:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	alderaan:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	alderaan:setAxialRotationTime(400.0):setDescription("Lush planet with only mild seasonal variations")
+	alderaan:setAxialRotationTime(400.0):setDescription(_("sciencePlanetDescription", "Lush planet with only mild seasonal variations"))
 	stationAnet = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
-	stationAnet:setPosition(aldx,aldy+3000):setCallSign("ANet"):setDescription("Alderaan communications network hub")
+	stationAnet:setPosition(aldx,aldy+3000):setCallSign("ANet"):setDescription(_("sciencePlanetDescription", "Alderaan communications network hub"))
 	stationAnet.angle = 90
 	gp = gp + 1
 	rn = math.random(1,#adjList)
@@ -5194,20 +5194,20 @@ function transportPlot(delta)
 			until(target ~= nil)
 			rnd = irandom(1,5)
 			if rnd == 1 then
-				name = "Personnel"
+				name = _("scienceShipsName", "Personnel")
 			elseif rnd == 2 then
-				name = "Goods"
+				name = _("scienceShipsName", "Goods")
 			elseif rnd == 3 then
-				name = "Garbage"
+				name = _("scienceShipsName", "Garbage")
 			elseif rnd == 4 then
-				name = "Equipment"
+				name = _("scienceShipsName", "Equipment")
 			else
-				name = "Fuel"
+				name = _("scienceShipsName", "Fuel")
 			end
 			if irandom(1,100) < 30 then
-				name = name .. " Jump Freighter " .. irandom(3, 5)
+				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
 			else
-				name = name .. " Freighter " .. irandom(1, 5)
+				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent'):setCommsScript(""):setCommsFunction(commsShip)
 			obj:setCallSign(generateCallSign(nil,"Independent"))
@@ -5338,7 +5338,7 @@ function handleDockedState()
 						else
 							nukePrompt = _("commsAmmo", "We really need some nukes (")
 						end
-						addCommsReply(nukePrompt .. getWeaponCost("Nuke") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
 							handleWeaponRestock("Nuke")
 						end)
 					end
@@ -5350,7 +5350,7 @@ function handleDockedState()
 						else
 							empPrompt = _("commsAmmo", "Got any EMPs? (")
 						end
-						addCommsReply(empPrompt .. getWeaponCost("EMP") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end
@@ -5362,7 +5362,7 @@ function handleDockedState()
 						else
 							homePrompt = _("commsAmmo", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(homePrompt .. getWeaponCost("Homing") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end
@@ -5374,7 +5374,7 @@ function handleDockedState()
 						else
 							minePrompt = _("commsAmmo", "How about mines? (")
 						end
-						addCommsReply(minePrompt .. getWeaponCost("Mine") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end
@@ -5386,7 +5386,7 @@ function handleDockedState()
 						else
 							hvliPrompt = _("commsAmmo", "Could you provide HVLI? (")
 						end
-						addCommsReply(hvliPrompt .. getWeaponCost("HVLI") .. " rep each)", function()
+						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end
@@ -5394,64 +5394,64 @@ function handleDockedState()
 			end)
 		end
 	end
-	addCommsReply("Docking services status", function()
-		local service_status = string.format("Station %s docking services status:",comms_target:getCallSign())
+	addCommsReply(_("DockingServicesStatus", "Docking services status"), function()
+		local service_status = string.format(_("DockingServicesStatus", "Station %s docking services status:"),comms_target:getCallSign())
 		if comms_target:getRestocksScanProbes() then
-			service_status = string.format("%s\nReplenish scan probes.",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nReplenish scan probes."),service_status)
 		else
 			if comms_target.probe_fail_reason == nil then
 				local reason_list = {
-					"Cannot replenish scan probes due to fabrication unit failure.",
-					"Parts shortage prevents scan probe replenishment.",
-					"Station management has curtailed scan probe replenishment for cost cutting reasons.",
+					_("DockingServicesStatus", "Cannot replenish scan probes due to fabrication unit failure."),
+					_("DockingServicesStatus", "Parts shortage prevents scan probe replenishment."),
+					_("DockingServicesStatus", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
 				}
 				comms_target.probe_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.probe_fail_reason)
+			service_status = string.format(_("DockingServicesStatus", "%s\n%s"),service_status,comms_target.probe_fail_reason)
 		end
 		if comms_target:getRepairDocked() then
-			service_status = string.format("%s\nShip hull repair.",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nShip hull repair."),service_status)
 		else
 			if comms_target.repair_fail_reason == nil then
 				reason_list = {
-					"We're out of the necessary materials and supplies for hull repair.",
-					"Hull repair automation unavailable while it is undergoing maintenance.",
-					"All hull repair technicians quarantined to quarters due to illness.",
+					_("DockingServicesStatus", "We're out of the necessary materials and supplies for hull repair."),
+					_("DockingServicesStatus", "Hull repair automation unavailable while it is undergoing maintenance."),
+					_("DockingServicesStatus", "All hull repair technicians quarantined to quarters due to illness."),
 				}
 				comms_target.repair_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.repair_fail_reason)
+			service_status = string.format(_("DockingServicesStatus", "%s\n%s"),service_status,comms_target.repair_fail_reason)
 		end
 		if comms_target:getSharesEnergyWithDocked() then
-			service_status = string.format("%s\nRecharge ship energy stores.",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nRecharge ship energy stores."),service_status)
 		else
 			if comms_target.energy_fail_reason == nil then
 				reason_list = {
-					"A recent reactor failure has put us on auxiliary power, so we cannot recharge ships.",
-					"A damaged power coupling makes it too dangerous to recharge ships.",
-					"An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now.",
+					_("DockingServicesStatus", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
+					_("DockingServicesStatus", "A damaged power coupling makes it too dangerous to recharge ships."),
+					_("DockingServicesStatus", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
 				}
 				comms_target.energy_fail_reason = reason_list[math.random(1,#reason_list)]
 			end
-			service_status = string.format("%s\n%s",service_status,comms_target.energy_fail_reason)
+			service_status = string.format(_("DockingServicesStatus", "%s\n%s"),service_status,comms_target.energy_fail_reason)
 		end
 		if comms_target.comms_data.jump_overcharge then
-			service_status = string.format("%s\nMay overcharge jump drive",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nMay overcharge jump drive"),service_status)
 		end
 		if comms_target.comms_data.probe_launch_repair then
-			service_status = string.format("%s\nMay repair probe launch system",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nMay repair probe launch system"),service_status)
 		end
 		if comms_target.comms_data.hack_repair then
-			service_status = string.format("%s\nMay repair hacking system",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nMay repair hacking system"),service_status)
 		end
 		if comms_target.comms_data.scan_repair then
-			service_status = string.format("%s\nMay repair scanners",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nMay repair scanners"),service_status)
 		end
 		if comms_target.comms_data.combat_maneuver_repair then
-			service_status = string.format("%s\nMay repair combat maneuver",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nMay repair combat maneuver"),service_status)
 		end
 		if comms_target.comms_data.self_destruct_repair then
-			service_status = string.format("%s\nMay repair self destruct system",service_status)
+			service_status = string.format(_("DockingServicesStatus", "%s\nMay repair self destruct system"),service_status)
 		end
 		setCommsMessage(service_status)
 		addCommsReply(_("Back"), commsStation)
@@ -5463,10 +5463,10 @@ function handleDockedState()
 				max_charge = 50000
 			end
 			if comms_source:getJumpDriveCharge() >= max_charge then
-				addCommsReply("Overcharge Jump Drive (10 Rep)",function()
+				addCommsReply(_("commsRepairs", "Overcharge Jump Drive (10 Rep)"),function()
 					if comms_source:takeReputationPoints(10) then
 						comms_source:setJumpDriveCharge(comms_source:getJumpDriveCharge() + max_charge)
-						setCommsMessage(string.format("Your jump drive has been overcharged to %ik",math.floor(comms_source:getJumpDriveCharge()/1000)))
+						setCommsMessage(string.format(_("commsRepairs", "Your jump drive has been overcharged to %ik"),math.floor(comms_source:getJumpDriveCharge()/1000)))
 					else
 						setCommsMessage(_("commsTrade", "Insufficient reputation"))
 					end
@@ -5492,14 +5492,14 @@ function handleDockedState()
 		offer_repair = true
 	end
 	if offer_repair then
-		addCommsReply("Repair ship system",function()
-			setCommsMessage("What system would you like repaired?")
+		addCommsReply(_("commsRepairs", "Repair ship system"),function()
+			setCommsMessage(_("commsRepairs", "What system would you like repaired?"))
 			if comms_target.comms_data.probe_launch_repair then
 				if not comms_source:getCanLaunchProbe() then
-					addCommsReply("Repair probe launch system (5 Rep)",function()
+					addCommsReply(_("commsRepairs", "Repair probe launch system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanLaunchProbe(true)
-							setCommsMessage("Your probe launch system has been repaired")
+							setCommsMessage(_("commsRepairs", "Your probe launch system has been repaired"))
 						else
 							setCommsMessage(_("commsTrade", "Insufficient reputation"))
 						end
@@ -5509,10 +5509,10 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.hack_repair then
 				if not comms_source:getCanHack() then
-					addCommsReply("Repair hacking system (5 Rep)",function()
+					addCommsReply(_("commsRepairs", "Repair hacking system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanHack(true)
-							setCommsMessage("Your hack system has been repaired")
+							setCommsMessage(_("commsRepairs", "Your hack system has been repaired"))
 						else
 							setCommsMessage(_("commsTrade", "Insufficient reputation"))
 						end
@@ -5522,10 +5522,10 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.scan_repair then
 				if not comms_source:getCanScan() then
-					addCommsReply("Repair scanners (5 Rep)",function()
+					addCommsReply(_("commsRepairs", "Repair scanners (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanScan(true)
-							setCommsMessage("Your scanners have been repaired")
+							setCommsMessage(_("commsRepairs", "Your scanners have been repaired"))
 						else
 							setCommsMessage(_("commsTrade", "Insufficient reputation"))
 						end
@@ -5535,10 +5535,10 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.combat_maneuver_repair then
 				if not comms_source:getCanCombatManeuver() then
-					addCommsReply("Repair combat maneuver (5 Rep)",function()
+					addCommsReply(_("commsRepairs", "Repair combat maneuver (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanCombatManeuver(true)
-							setCommsMessage("Your combat maneuver has been repaired")
+							setCommsMessage(_("commsRepairs", "Your combat maneuver has been repaired"))
 						else
 							setCommsMessage(_("commsTrade", "Insufficient reputation"))
 						end
@@ -5548,10 +5548,10 @@ function handleDockedState()
 			end
 			if comms_target.comms_data.self_destruct_repair then
 				if not comms_source:getCanSelfDestruct() then
-					addCommsReply("Repair self destruct system (5 Rep)",function()
+					addCommsReply(_("commsRepairs", "Repair self destruct system (5 Rep)"),function()
 						if comms_source:takeReputationPoints(5) then
 							comms_source:setCanSelfDestruct(true)
-							setCommsMessage("Your self destruct system has been repaired")
+							setCommsMessage(_("commsRepairs", "Your self destruct system has been repaired"))
 						else
 							setCommsMessage(_("commsTrade", "Insufficient reputation"))
 						end
@@ -5563,7 +5563,7 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("orders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
@@ -6615,7 +6615,7 @@ function handleUndockedState()
 		end
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
