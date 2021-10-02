@@ -21,12 +21,12 @@ void ModelInfo::setData(string name)
     }
 }
 
-void ModelInfo::render(glm::vec2 position, float rotation)
+void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& model_view)
 {
     if (!data)
         return;
 
-    data->render();
+    data->render(model_view);
 
     if (engine_scale > 0.0f)
     {

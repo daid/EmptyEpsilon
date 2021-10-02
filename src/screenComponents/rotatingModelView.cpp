@@ -60,12 +60,10 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
             shader.get()->bind();
             glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
         }
-        shader.get()->bind();
-        glUniformMatrix4fv(shader.get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
     }
 
     {
-        model->render();
+        model->render(view_matrix);
 #ifdef DEBUGX
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
         {

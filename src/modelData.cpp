@@ -199,7 +199,7 @@ std::vector<string> ModelData::getModelDataNames()
     return ret;
 }
 
-void ModelData::render()
+void ModelData::render(const glm::mat4& model_view)
 {
     load();
     if (!mesh)
@@ -213,6 +213,7 @@ void ModelData::render()
     model_matrix = glm::translate(model_matrix, mesh_offset);
 
     ShaderRegistry::ScopedShader shader(shader_id);
+    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(model_view));
     glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     // Textures
