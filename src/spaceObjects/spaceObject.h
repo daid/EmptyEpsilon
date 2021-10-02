@@ -171,8 +171,8 @@ public:
         on_destroyed = callback;
     }
 
-    virtual void draw3D();
-    virtual void draw3DTransparent() {}
+    virtual void draw3D(const glm::mat4& object_view_matrix);
+    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) {}
     virtual void drawOnRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void drawOnGMRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void destroy();

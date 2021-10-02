@@ -306,11 +306,9 @@ SpaceObject::~SpaceObject()
 {
 }
 
-void SpaceObject::draw3D()
+void SpaceObject::draw3D(const glm::mat4& object_view_matrix)
 {
-#if FEATURE_3D_RENDERING
     model_info.render(getPosition(), getRotation());
-#endif//FEATURE_3D_RENDERING
 }
 
 void SpaceObject::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool longRange)

@@ -7,27 +7,22 @@
 
 ParticleEngine* ParticleEngine::particleEngine = nullptr;
 
-#if FEATURE_3D_RENDERING
 // Helper function, to avoid verbose casting.
 template<typename Enum>
 static constexpr typename std::underlying_type<Enum>::type as_index(Enum entry)
 {
     return static_cast<typename std::underlying_type<Enum>::type>(entry);
 }
-#endif // FEATURE_3D_RENDERING
 
 
-void ParticleEngine::render(const glm::mat4& projection)
+void ParticleEngine::render(const glm::mat4& projection, const glm::mat4& view)
 {
-#if FEATURE_3D_RENDERING
     if (particleEngine)
-        particleEngine->doRender(projection);
-#endif//FEATURE_3D_RENDERING
+        particleEngine->doRender(projection, view);
 }
 
 void ParticleEngine::update(float delta)
 {
-#if FEATURE_3D_RENDERING
     // Update particles, move all freshly expired particles to the end.
     // Update our first_expired entry.
     first_expired = std::partition(std::begin(particles), first_expired, [delta](Particle& p)
@@ -35,12 +30,10 @@ void ParticleEngine::update(float delta)
         p.life_time += delta;
         return p.life_time <= p.max_life_time;
     });
-#endif // FEATURE_3D_RENDERING
 }
 
 void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time)
 {
-#if FEATURE_3D_RENDERING
     if (glm::length2(position - camera_position) / (size + end_size) < 0.1f*0.1f)
         return;
 
@@ -48,78 +41,72 @@ void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3
         particleEngine = new ParticleEngine();
 
     particleEngine->doSpawn(position, end_position, color, end_color, size, end_size, life_time);
-#endif
 }
 
-
-#if FEATURE_3D_RENDERING
 ParticleEngine::ParticleEngine()
     :first_expired{ std::end(particles) }
 {
-    if (gl::isAvailable())
+    buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
+    // Cache shader info.
+    shader = ShaderManager::getShader("shaders/particles");
+
+    shader->bind();
+
+    uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
+    uniforms[as_index(Uniforms::ModelView)] = shader->getUniformLocation("model_view");
+
+    attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
+    attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
+    attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
+    attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
+
+    std::array<uint8_t, instances_per_draw * elements_per_instance> elements;
+
+    std::array<glm::vec2, max_vertex_count> texcoords{};
+
+    // Hitting this means either needing to lower the number of instances / vertices per instance,
+    // Or switch the element index to a uint16_t.
+    static_assert((texcoords.size() - 1) <= std::numeric_limits<uint8_t>::max(), "Too many elements! Indices overflow.");
+
+    for (auto quad = 0U; quad < instances_per_draw; ++quad)
     {
-        buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
-        // Cache shader info.
-        shader = ShaderManager::getShader("shaders/particles");
+        auto base_vertex = static_cast<uint8_t>(vertices_per_instance * quad);
+        auto base_element = elements_per_instance * quad;
 
-        shader->bind();
+        // Each quad is two triangles
+        elements[base_element + 0] = base_vertex + 0;
+        elements[base_element + 1] = base_vertex + 3;
+        elements[base_element + 2] = base_vertex + 2;
+        elements[base_element + 3] = base_vertex + 0;
+        elements[base_element + 4] = base_vertex + 2;
+        elements[base_element + 5] = base_vertex + 1;
 
-        uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
-        uniforms[as_index(Uniforms::ModelView)] = shader->getUniformLocation("model_view");
+        // Setup texcoords.
+        // OpenGL origin is bottom left.
+        texcoords[base_vertex + 0] = { 0.f, 1.f };
+        texcoords[base_vertex + 1] = { 1.f, 1.f };
+        texcoords[base_vertex + 2] = { 1.f, 0.f };
+        texcoords[base_vertex + 3] = { 0.f, 0.f };
+    }
 
-        attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
-        attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
-        attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
-        attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
+    // Hand off to the GPU.
+    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
+    gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
 
-        std::array<uint8_t, instances_per_draw * elements_per_instance> elements;
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(glm::vec2)), nullptr, GL_DYNAMIC_DRAW);
+    {
+        // Ensure zero-initialization of the particle data.
+        std::array<ParticleData, max_vertex_count> particle_data{};
+        glBufferSubData(GL_ARRAY_BUFFER, 0, particle_data.size() * sizeof(ParticleData), particle_data.data());
 
-        std::array<glm::vec2, max_vertex_count> texcoords{};
-
-        // Hitting this means either needing to lower the number of instances / vertices per instance,
-        // Or switch the element index to a uint16_t.
-        static_assert((texcoords.size() - 1) <= std::numeric_limits<uint8_t>::max(), "Too many elements! Indices overflow.");
-
-        for (auto quad = 0U; quad < instances_per_draw; ++quad)
-        {
-            auto base_vertex = static_cast<uint8_t>(vertices_per_instance * quad);
-            auto base_element = elements_per_instance * quad;
-
-            // Each quad is two triangles
-            elements[base_element + 0] = base_vertex + 0;
-            elements[base_element + 1] = base_vertex + 3;
-            elements[base_element + 2] = base_vertex + 2;
-            elements[base_element + 3] = base_vertex + 0;
-            elements[base_element + 4] = base_vertex + 2;
-            elements[base_element + 5] = base_vertex + 1;
-
-            // Setup texcoords.
-            // OpenGL origin is bottom left.
-            texcoords[base_vertex + 0] = { 0.f, 1.f };
-            texcoords[base_vertex + 1] = { 1.f, 1.f };
-            texcoords[base_vertex + 2] = { 1.f, 0.f };
-            texcoords[base_vertex + 3] = { 0.f, 0.f };
-        }
-
-        // Hand off to the GPU.
-        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
-        gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
-
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
-        glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(glm::vec2)), nullptr, GL_DYNAMIC_DRAW);
-        {
-            // Ensure zero-initialization of the particle data.
-            std::array<ParticleData, max_vertex_count> particle_data{};
-            glBufferSubData(GL_ARRAY_BUFFER, 0, particle_data.size() * sizeof(ParticleData), particle_data.data());
-
-            // Upload texcoords once.
-            glBufferSubData(GL_ARRAY_BUFFER, particle_data.size() * sizeof(ParticleData), texcoords.size() * sizeof(glm::vec2), texcoords.data());
-        }
+        // Upload texcoords once.
+        glBufferSubData(GL_ARRAY_BUFFER, particle_data.size() * sizeof(ParticleData), texcoords.size() * sizeof(glm::vec2), texcoords.data());
     }
 }
 
 
-void ParticleEngine::doRender(const glm::mat4& projection)
+void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view)
 {
     shader->bind();
 
@@ -129,10 +116,7 @@ void ParticleEngine::doRender(const glm::mat4& projection)
 
     // - Matrices
     glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection));
-
-    std::array<float, 4*4> matrix;
-    glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
-    glUniformMatrix4fv(uniforms[as_index(Uniforms::ModelView)], 1, GL_FALSE, matrix.data());
+    glUniformMatrix4fv(uniforms[as_index(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view));
     
     {
         std::vector<ParticleData> particle_data(max_vertex_count);
@@ -206,4 +190,3 @@ void ParticleEngine::doSpawn(glm::vec3 position, glm::vec3 end_position, glm::ve
 
     ++first_expired;
 }
-#endif // FEATURE_3D_RENDERING

@@ -62,9 +62,9 @@ BeamEffect::~BeamEffect()
 {
 }
 
-#if FEATURE_3D_RENDERING
-void BeamEffect::draw3DTransparent()
+void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
+#if FEATURE_3D_RENDERING
     glTranslatef(-getPosition().x, -getPosition().y, 0);
     glm::vec3 startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     glm::vec3 endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
@@ -132,8 +132,8 @@ void BeamEffect::draw3DTransparent()
         std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
-}
 #endif//FEATURE_3D_RENDERING
+}
 
 void BeamEffect::update(float delta)
 {

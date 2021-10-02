@@ -261,7 +261,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             render_lists.emplace_back();
         render_lists[render_list_index].emplace_back(*obj, depth);
     }
-/*
+
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
@@ -287,14 +287,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         {
             SpaceObject* obj = info.object;
 
-            glPushMatrix();
-            glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
-            glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
-            glRotatef(obj->getRotation(), 0, 0, 1);
-            obj->draw3D();
-            glPopMatrix();
+            glm::mat4 object_matrix = glm::translate(view_matrix, -camera_position);
+            object_matrix = glm::translate(object_matrix, {obj->getPosition().x, obj->getPosition().y, 0.0f});
+            object_matrix = glm::rotate(object_matrix, obj->getRotation() / 180.0f * float(M_PI), {0, 0, 1});
+            obj->draw3D(object_matrix);
         }
-
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
         glDepthMask(false);
@@ -302,19 +299,15 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         {
             SpaceObject* obj = info.object;
 
-            glPushMatrix();
-            glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
-            glTranslatef(obj->getPosition().x, obj->getPosition().y, 0);
-            glRotatef(obj->getRotation(), 0, 0, 1);
-            obj->draw3DTransparent();
-            glPopMatrix();
+            glm::mat4 object_matrix = glm::translate(view_matrix, -camera_position);
+            object_matrix = glm::translate(object_matrix, {obj->getPosition().x, obj->getPosition().y, 0.0f});
+            object_matrix = glm::rotate(object_matrix, obj->getRotation() / 180.0f * float(M_PI), {0, 0, 1});
+            obj->draw3DTransparent(object_matrix);
         }
     }
+    ParticleEngine::render(projection_matrix, glm::translate(view_matrix, -camera_position));
 
-    glPushMatrix();
-    glTranslatef(-camera_position.x,-camera_position.y, -camera_position.z);
-    ParticleEngine::render(projection_matrix);
-
+    /*
     if (show_spacedust && my_spaceship)
     {
         static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
@@ -449,6 +442,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     if (show_callsigns && render_lists.size() > 0)
     {

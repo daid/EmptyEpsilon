@@ -39,7 +39,7 @@ Asteroid::Asteroid()
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 }
 
-void Asteroid::draw3D()
+void Asteroid::draw3D(const glm::mat4& object_view_matrix)
 {
 #if FEATURE_3D_RENDERING
     if (size != getRadius())
@@ -145,7 +145,7 @@ VisualAsteroid::VisualAsteroid()
     registerMemberReplication(&size);
 }
 
-void VisualAsteroid::draw3D()
+void VisualAsteroid::draw3D(const glm::mat4& object_view_matrix)
 {
 #if FEATURE_3D_RENDERING
     if (size != getRadius())

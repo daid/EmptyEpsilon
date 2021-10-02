@@ -13,7 +13,7 @@ public:
     virtual void update(float delta) override;
 
 #if FEATURE_3D_RENDERING
-    virtual void draw3DTransparent() override;
+    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
 #endif
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 

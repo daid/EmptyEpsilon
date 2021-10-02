@@ -22,7 +22,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void draw3D() override;
+    virtual void draw3D(const glm::mat4& object_view_matrix) override;
 
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 

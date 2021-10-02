@@ -84,7 +84,7 @@ void Artifact::update(float delta)
     }
 }
 
-void Artifact::draw3D()
+void Artifact::draw3D(const glm::mat4& object_view_matrix)
 {
 #if FEATURE_3D_RENDERING
     if (artifact_spin != 0.0) {
