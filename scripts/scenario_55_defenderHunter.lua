@@ -6772,49 +6772,49 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage("What do you want?");
+		setCommsMessage(_("commsShip", "What do you want?"));
 	else
-		setCommsMessage("Sir, how can we assist?");
+		setCommsMessage(_("commsShip", "Sir, how can we assist?"));
 	end
-	addCommsReply("Defend a waypoint", function()
+	addCommsReply(_("commsShip", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
+			setCommsMessage(_("commsShip", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), commsShip)
 		else
-			setCommsMessage("Which waypoint should we defend?");
+			setCommsMessage(_("commsShip", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply("Defend WP" .. n, function()
+				addCommsReply(string.format(_("commsShip", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage("We are heading to assist at WP" .. n ..".");
+					setCommsMessage(string.format(_("commsShip", "We are heading to assist at WP %d."), n));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply("Assist me", function()
-			setCommsMessage("Heading toward you to assist.");
+		addCommsReply(_("commsShip", "Assist me"), function()
+			setCommsMessage(_("commsShip", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
 			addCommsReply(_("Back"), commsShip)
 		end)
 	end
-	addCommsReply("Report status", function()
-		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+	addCommsReply(_("commsShip", "Report status"), function()
+		msg = string.format(_("commsShip", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
-			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			msg = msg .. string.format(_("commsShip", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 		elseif shields == 2 then
-			msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-			msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+			msg = msg .. string.format(_("commsShip", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("commsShip", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
 		else
 			for n=0,shields-1 do
-				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+				msg = msg .. string.format(_("commsShip", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
-					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
+					msg = msg .. string.format(_("commsShip", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
 		
@@ -6823,8 +6823,8 @@ function friendlyComms(comms_data)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply("Dock at " .. obj:getCallSign(), function()
-				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
+			addCommsReply(string.format(_("commsShip", "Dock at %s"), obj:getCallSign()), function()
+				setCommsMessage(string.format(_("commsShip", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -6835,27 +6835,27 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = "We will see to your destruction!"
-		taunt_success_reply = "Your bloodline will end here!"
-		taunt_failed_reply = "Your feeble threats are meaningless."
+		taunt_option = _("commsShipEnemy", "We will see to your destruction!")
+		taunt_success_reply = _("commsShipEnemy", "Your bloodline will end here!")
+		taunt_failed_reply = _("commsShipEnemy", "Your feeble threats are meaningless.")
 		if faction == "Kraylor" then
-			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+			setCommsMessage(_("commsShipEnemy", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 		elseif faction == "Arlenians" then
-			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+			setCommsMessage(_("commsShipEnemy", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
-			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+			setCommsMessage(_("commsShipEnemy", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-			taunt_option = "EXECUTE: SELFDESTRUCT"
-			taunt_success_reply = "Rogue command received. Targeting source."
-			taunt_failed_reply = "External command ignored."
+			setCommsMessage(_("commsShipEnemy", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("commsShipEnemy", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("commsShipEnemy", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("commsShipEnemy", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-			taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-			taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-			taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+			setCommsMessage(_("commsShipEnemy", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("commsShipEnemy", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("commsShipEnemy", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("commsShipEnemy", "The hive has greater priorities than exterminating pests.")
 		else
-			setCommsMessage("Mind your own business!");
+			setCommsMessage(_("commsShipEnemy", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -6876,7 +6876,7 @@ function neutralComms(comms_data)
 		if comms_data.friendlyness > 66 then
 			setCommsMessage("Yes?")
 			-- Offer destination information
-			addCommsReply("Where are you headed?", function()
+			addCommsReply(_("commsShip", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -6891,13 +6891,13 @@ function neutralComms(comms_data)
 					end
 					if goodCount > 0 then
 						addCommsReply("Jettison cargo", function()
-							setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+							setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 							for good, good_quantity in pairs(comms_source.goods) do
 								if good_quantity > 0 then
 									addCommsReply(good, function()
 										comms_source.goods[good] = comms_source.goods[good] - 1
 										comms_source.cargo = comms_source.cargo + 1
-										setCommsMessage(string.format("One %s jettisoned",good))
+										setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
 										addCommsReply(_("Back"), commsShip)
 									end)
 								end
@@ -6908,11 +6908,11 @@ function neutralComms(comms_data)
 					if comms_source.goods ~= nil and comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format("Trade luxury for %s",good), function()
+								addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
 									goodData.quantity = goodData.quantity - 1
 									comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 									comms_source.goods[good] = comms_source.goods[good] + 1
-									setCommsMessage(string.format("Traded luxury for %s",good))
+									setCommsMessage(string.format(_("commsTrade", "Traded luxury for %s"),good))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -6923,7 +6923,7 @@ function neutralComms(comms_data)
 				if comms_source.cargo > 0 then
 					for good, good_data in pairs(comms_data.goods) do
 						if good_data.quantity > 0 then
-							addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(good_data.cost)), function()
+							addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(good_data.cost)), function()
 								if comms_source:takeReputationPoints(good_data.cost) then
 									good_data.quantity = good_data.quantity - 1
 									if comms_source.goods == nil then
@@ -6934,9 +6934,9 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase")
 								end
 								addCommsReply(_("Back"), commsShip)
 							end)
@@ -6945,12 +6945,12 @@ function neutralComms(comms_data)
 				end	--room on player ship
 			end	--within 5 units
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage("What do you want?")
+			setCommsMessage(_("commsShip", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
+			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("commsTrade", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
@@ -6964,19 +6964,19 @@ function neutralComms(comms_data)
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
+						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
 							if comms_source.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
+								setCommsMessage(_("commsTrade", "Insufficient cargo space for purchase"))
 							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
+								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
+									setCommsMessage(_("commsTrade", "Purchased"))
 								end
 							end
 							addCommsReply(_("Back"), commsShip)
@@ -6990,19 +6990,19 @@ function neutralComms(comms_data)
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]*2
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
+						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
 							if comms_source.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
+								setCommsMessage(_("commsTrade", "Insufficient cargo space for purchase"))
 							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
+								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
+									setCommsMessage(_("commsTrade", "Purchased"))
 								end
 							end
 							addCommsReply(_("Back"), commsShip)
@@ -7012,7 +7012,7 @@ function neutralComms(comms_data)
 				end
 			end
 		else
-			setCommsMessage("Why are you bothering me?")
+			setCommsMessage(_("commsTrade", "Why are you bothering me?"))
 			-- Offer to sell goods if goods or equipment freighter double price
 			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -7021,19 +7021,19 @@ function neutralComms(comms_data)
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]*2
-						addCommsReply(string.format("Buy one %s for %i reputation",goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
+						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
 							if comms_source.cargo < 1 then
-								setCommsMessage("Insufficient cargo space for purchase")
+								setCommsMessage(_("commsTrade", "Insufficient cargo space for purchase"))
 							elseif goodsQuantity < 1 then
-								setCommsMessage("Insufficient inventory on freighter")
+								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
-									setCommsMessage("Purchased")
+									setCommsMessage(_("commsTrade", "Purchased"))
 								end
 							end
 							addCommsReply(_("Back"), commsShip)
@@ -7045,9 +7045,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+			setCommsMessage(_("commsShip", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage("We have nothing for you.\nGood day.");
+			setCommsMessage(_("commsShip", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true
