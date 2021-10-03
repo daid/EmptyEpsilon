@@ -10629,41 +10629,41 @@ function endStatistics()
 		end
 	end
 	destroyedEnemyStations = startingEnemyStations - enemyStationsSurvived
-	gMsg = string.format("Stations: %i\t survived: %i\t destroyed: %i",(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
-	gMsg = gMsg .. string.format("\nFriendly Stations: %i\t survived: %i\t destroyed: %i",startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
-	gMsg = gMsg .. string.format("\nNeutral Stations: %i\t survived: %i\t destroyed: %i",startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
-	gMsg = gMsg .. string.format("\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i",startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
---	gMsg = gMsg .. string.format("\n\n\n\nRequired missions completed: %i",requiredMissionCount)
+	gMsg = string.format(_("msgGlobal", "Stations: %i\t survived: %i\t destroyed: %i"),(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
+	gMsg = gMsg .. string.format(_("msgGlobal", "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"),startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
+	gMsg = gMsg .. string.format(_("msgGlobal", "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"),startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
+	gMsg = gMsg .. string.format(_("msgGlobal", "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"),startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
+--	gMsg = gMsg .. string.format(_("msgGlobal", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
 	rankVal = survivedFriendlyStations/startingFriendlyStations*.6 + survivedNeutralStations/startingNeutralStations*.2 + (1-enemyStationsSurvived/startingEnemyStations)*.2
 	if missionVictory then
 		if rankVal < .7 then
-			rank = "Ensign"
+			rank = _("msgGlobalRank", "Ensign")
 		elseif rankVal < .8 then
-			rank = "Lieutenant"
+			rank = _("msgGlobalRank", "Lieutenant")
 		elseif rankVal < .9 then
-			rank = "Commander"
+			rank = _("msgGlobalRank", "Commander")
 		elseif rankVal < .95 then
-			rank = "Captain"
+			rank = _("msgGlobalRank", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgGlobalRank", "Admiral")
 		end
-		gMsg = gMsg .. "\nEarned rank: " .. rank
+		gMsg = gMsg .. string.format(_("msgGlobalRank", "\nEarned rank:  %s"), rank)
 	else
 		if rankVal < .6 then
-			rank = "Ensign"
+			rank = _("msgGlobalRank", "Ensign")
 		elseif rankVal < .7 then
-			rank = "Lieutenant"
+			rank = _("msgGlobalRank", "Lieutenant")
 		elseif rankVal < .8 then
-			rank = "Commander"
+			rank = _("msgGlobalRank", "Commander")
 		elseif rankVal < .9 then
-			rank = "Captain"
+			rank = _("msgGlobalRank", "Captain")
 		else
-			rank = "Admiral"
+			rank = _("msgGlobalRank", "Admiral")
 		end
 		if string.find(getScenarioVariation(),"Hunter") then
-			gMsg = gMsg .. "\nPost Target Enemy Base Survival Rank: ".. rank
+			gMsg = gMsg .. string.format(_("msgGlobalRank", "\nPost Target Enemy Base Survival Rank: %s"), rank)
 		else
-			gMsg = gMsg .. "\nPost Home Base Destruction Rank: " .. rank
+			gMsg = gMsg .. string.format(_("msgGlobalRank", "\nPost Home Base Destruction Rank: %s"), rank)
 		end
 		-- Yes, the ranking is more forgiving when defeated for these reasons:
 		-- 1) With so many deaths on the station, leadership roles have opened up
@@ -10693,7 +10693,7 @@ function update(delta)
 			if shield_count > 1 then
 				shield_label = "WS"
 			end
-			home_station_health = string.format("%s %s:%i%% H:%i%%",homeStation:getCallSign(),shield_label,math.floor(lowest_shield/shield_max*100),math.floor(homeStation:getHull()/homeStation:getHullMax()*100))
+			home_station_health = string.format(_("homeStationHealth", "%s %s:%i%% H:%i%%"),homeStation:getCallSign(),shield_label,math.floor(lowest_shield/shield_max*100),math.floor(homeStation:getHull()/homeStation:getHullMax()*100))
 		else
 			home_station_health = nil
 		end
