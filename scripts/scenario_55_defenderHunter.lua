@@ -5194,20 +5194,20 @@ function transportPlot(delta)
 			until(target ~= nil)
 			rnd = irandom(1,5)
 			if rnd == 1 then
-				name = _("scienceShipsName", "Personnel")
+				name = "Personnel"
 			elseif rnd == 2 then
-				name = _("scienceShipsName", "Goods")
+				name = "Goods"
 			elseif rnd == 3 then
-				name = _("scienceShipsName", "Garbage")
+				name = "Garbage"
 			elseif rnd == 4 then
-				name = _("scienceShipsName", "Equipment")
+				name = "Equipment"
 			else
-				name = _("scienceShipsName", "Fuel")
+				name = "Fuel"
 			end
 			if irandom(1,100) < 30 then
-				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
+				name = string.format("%s Jump Freighter %d", name, irandom(3, 5))
 			else
-				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
+				name = string.format("%s Freighter %d", name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent'):setCommsScript(""):setCommsFunction(commsShip)
 			obj:setCallSign(generateCallSign(nil,"Independent"))
@@ -5583,7 +5583,7 @@ function handleDockedState()
 					setCommsMessage(_("commsTrade", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-					setCommsMessage("Repair crew member hired")
+					setCommsMessage(_("commsRepairs", "Repair crew member hired"))
 				end
 			end)
 		end
@@ -5593,12 +5593,12 @@ function handleDockedState()
 				if comms_source:getMaxCoolant() < comms_source.initialCoolant then
 					coolantCost = math.random(30,60)
 				end
-				addCommsReply(string.format("Purchase coolant for %i reputation",coolantCost), function()
+				addCommsReply(string.format(_("commsTrade", "Purchase coolant for %i reputation"),coolantCost), function()
 					if not comms_source:takeReputationPoints(coolantCost) then
 						setCommsMessage(_("commsTrade", "Insufficient reputation"))
 					else
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
-						setCommsMessage("Additional coolant purchased")
+						setCommsMessage(_("commsTrade", "Additional coolant purchased"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -8310,11 +8310,11 @@ function scanEnemyStation(delta)
 					p:addToShipLog("[Paul Straight] I've got my readings. Let me calibrate the transporter","95,158,160")
 					if p:hasPlayerAtPosition("Helms") then
 						inRangeMsg = "inRangeMsg"
-						p:addCustomMessage("Helms",inRangeMsg,"[Paul Straight] The ship is in range. I completed my scans. Thank you")
+						p:addCustomMessage("Helms",inRangeMsg,_("msgHelms", "[Paul Straight] The ship is in range. I completed my scans. Thank you"))
 					end
 					if p:hasPlayerAtPosition("Tactical") then
 						inRangeMsgTactical = "inRangeMsgTactical"
-						p:addCustomMessage("Tactical",inRangeMsgTactical,"[Paul Straight] The ship is in range. I completed my scans. Thank you")
+						p:addCustomMessage("Tactical",inRangeMsgTactical,_("msgTactical", "[Paul Straight] The ship is in range. I completed my scans. Thank you"))
 					end
 					plot4 = insertRunDelay
 				end
@@ -8368,11 +8368,11 @@ function insertRun(delta)
 				if distance(p,insertEnemyStation) <= 2500 then
 					if p:hasPlayerAtPosition("Science") then
 						straightTransportedMsg = "straightTransportedMsg"
-						p:addCustomMessage("Science",straightTransportedMsg,string.format("Paul Straight has transported aboard %s",insertEnemyStation:getCallSign()))
+						p:addCustomMessage("Science",straightTransportedMsg,string.format(_("msgScience", "Paul Straight has transported aboard %s"),insertEnemyStation:getCallSign()))
 					end
 					if p:hasPlayerAtPosition("Operations") then
 						straightTransportedMsgOps = "straightTransportedMsgOps"
-						p:addCustomMessage("Operations",straightTransportedMsgOps,string.format("Paul Straight has transported aboard %s",insertEnemyStation:getCallSign()))
+						p:addCustomMessage("Operations",straightTransportedMsgOps,string.format(_("msgOperations", "Paul Straight has transported aboard %s"),insertEnemyStation:getCallSign()))
 					end
 					plot4 = resultDelay
 					plot4reminder = string.format("Await intelligence results from Paul Straight on %s",insertEnemyStation:getCallSign())
@@ -8414,11 +8414,11 @@ function resultDelay(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8442,11 +8442,11 @@ function resultDelay2(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8470,11 +8470,11 @@ function straightExecution(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8492,11 +8492,11 @@ function agentDemise(delta)
 				if p ~= nil and p:isValid() and p.straight then
 					if p:hasPlayerAtPosition("Science") then
 						fatalMsg = "fatalMsg"
-						p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
+						p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 					end
 					if p:hasPlayerAtPosition("Operations") then
 						fatalMsgOps = "fatalMsgOps"
-						p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
+						p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 					end
 				end
 			end
@@ -8508,11 +8508,11 @@ function agentDemise(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,"Lifesign telemetry from Paul Straight's equipment has ceased")
+					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8550,11 +8550,11 @@ function repairBounty(delta)
 			p:addToShipLog("[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs","#ff4500")
 			if p:hasPlayerAtPosition("Engineering") then
 				transportRepairTechnicianButton = "transportRepairTechnicianButton"
-				p:addCustomButton("Engineering",transportRepairTechnicianButton,"Transport technician",transportRepairTechnician)
+				p:addCustomButton("Engineering",transportRepairTechnicianButton,_("buttonEngineer", "Transport technician"),transportRepairTechnician)
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				transportRepairTechnicianButtonPlus = "transportRepairTechnicianButtonPlus"
-				p:addCustomButton("Engineering+",transportRepairTechnicianButtonPlus,"Transport technician",transportRepairTechnician)
+				p:addCustomButton("Engineering+",transportRepairTechnicianButtonPlus,_("buttonEngineer+", "Transport technician"),transportRepairTechnician)
 			end
 			p.transportButton = true
 			plot4 = nil
@@ -10170,11 +10170,11 @@ function healthCheck(delta)
 						p:setRepairCrewCount(1)
 						if p:hasPlayerAtPosition("Engineering") then
 							local repairCrewRecovery = "repairCrewRecovery"
-							p:addCustomMessage("Engineering",repairCrewRecovery,"Medical team has revived one of your repair crew")
+							p:addCustomMessage("Engineering",repairCrewRecovery,_("msgEngineer", "Medical team has revived one of your repair crew"))
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							local repairCrewRecoveryPlus = "repairCrewRecoveryPlus"
-							p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,"Medical team has revived one of your repair crew")
+							p:addCustomMessage("Engineering+",repairCrewRecoveryPlus,_("msgEngineer+", "Medical team has revived one of your repair crew"))
 						end
 						resetPreviousSystemHealth(p)
 					end
@@ -10193,11 +10193,11 @@ function healthCheck(delta)
 							if noticable_reclaimed_coolant > 0 then
 								if p:hasPlayerAtPosition("Engineering") then
 									local coolant_recovery = "coolant_recovery"
-									p:addCustomMessage("Engineering",coolant_recovery,"Automated systems have recovered some coolant")
+									p:addCustomMessage("Engineering",coolant_recovery,_("msgEngineer", "Automated systems have recovered some coolant"))
 								end
 								if p:hasPlayerAtPosition("Engineering+") then
 									local coolant_recovery_plus = "coolant_recovery_plus"
-									p:addCustomMessage("Engineering+",coolant_recovery_plus,"Automated systems have recovered some coolant")
+									p:addCustomMessage("Engineering+",coolant_recovery_plus,_("msgEngineer+", "Automated systems have recovered some coolant"))
 								end
 							end
 							resetPreviousSystemHealth(p)
@@ -10261,11 +10261,11 @@ function crewFate(p, fatalityChance)
 			p:setRepairCrewCount(p:getRepairCrewCount() - 1)
 			if p:hasPlayerAtPosition("Engineering") then
 				local repairCrewFatality = "repairCrewFatality"
-				p:addCustomMessage("Engineering",repairCrewFatality,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering",repairCrewFatality,_("msgEngineer", "One of your repair crew has perished"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local repairCrewFatalityPlus = "repairCrewFatalityPlus"
-				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,"One of your repair crew has perished")
+				p:addCustomMessage("Engineering+",repairCrewFatalityPlus,_("msgEngineer+", "One of your repair crew has perished"))
 			end
 		elseif consequence == 2 then
 			local current_coolant = p:getMaxCoolant()
@@ -10282,77 +10282,77 @@ function crewFate(p, fatalityChance)
 			p.reclaimable_coolant = math.min(20,p.reclaimable_coolant + lost_coolant*random(.8,1))
 			if p:hasPlayerAtPosition("Engineering") then
 				local coolantLoss = "coolantLoss"
-				p:addCustomMessage("Engineering",coolantLoss,"Damage has caused a loss of coolant")
+				p:addCustomMessage("Engineering",coolantLoss,_("msgEngineer", "Damage has caused a loss of coolant"))
 			end
 			if p:hasPlayerAtPosition("Engineering+") then
 				local coolantLossPlus = "coolantLossPlus"
-				p:addCustomMessage("Engineering+",coolantLossPlus,"Damage has caused a loss of coolant")
+				p:addCustomMessage("Engineering+",coolantLossPlus,_("msgEngineer+", "Damage has caused a loss of coolant"))
 			end
 		else
 			local named_consequence = consequence_list[consequence-2]
 			if named_consequence == "probe" then
 				p:setCanLaunchProbe(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering","probe_launch_damage_message","The probe launch system has been damaged")
+					p:addCustomMessage("Engineering",_("msgEngineer", "probe_launch_damage_message","The probe launch system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+","probe_launch_damage_message_plus","The probe launch system has been damaged")
+					p:addCustomMessage("Engineering+",_("msgEngineer+", "probe_launch_damage_message_plus","The probe launch system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Relay") then
-					p:addCustomMessage("Relay","probe_launch_damage_message_relay","The probe launch system has been damaged")
+					p:addCustomMessage("Relay",_("msgRelay", "probe_launch_damage_message_relay","The probe launch system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
-					p:addCustomMessage("Operations","probe_launch_damage_message_ops","The probe launch system has been damaged")
+					p:addCustomMessage("Operations",_("msgOperations", "probe_launch_damage_message_ops","The probe launch system has been damaged"))
 				end
 			elseif named_consequence == "hack" then
 				p:setCanHack(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering","hack_damage_message","The hacking system has been damaged")
+					p:addCustomMessage("Engineering",_("msgEngineer", "hack_damage_message","The hacking system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+","hack_damage_message_plus","The hacking system has been damaged")
+					p:addCustomMessage("Engineering+",_("msgEngineer+", "hack_damage_message_plus","The hacking system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Relay") then
-					p:addCustomMessage("Relay","hack_damage_message_relay","The hacking system has been damaged")
+					p:addCustomMessage("Relay",_("msgRelay", "hack_damage_message_relay","The hacking system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
-					p:addCustomMessage("Operations","hack_damage_message_ops","The hacking system has been damaged")
+					p:addCustomMessage("Operations",_("msgOperations", "hack_damage_message_ops","The hacking system has been damaged"))
 				end
 			elseif named_consequence == "scan" then
 				p:setCanScan(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering","scan_damage_message","The scanners have been damaged")
+					p:addCustomMessage("Engineering",_("msgEngineer", "scan_damage_message","The scanners have been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+","scan_damage_message_plus","The scanners have been damaged")
+					p:addCustomMessage("Engineering+",_("msgEngineer+", "scan_damage_message_plus","The scanners have been damaged"))
 				end
 				if p:hasPlayerAtPosition("Science") then
-					p:addCustomMessage("Science","scan_damage_message_science","The scanners have been damaged")
+					p:addCustomMessage("Science",_("msgScience", "scan_damage_message_science","The scanners have been damaged"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
-					p:addCustomMessage("Operations","scan_damage_message_ops","The scanners have been damaged")
+					p:addCustomMessage("Operations",_("msgOperations", "scan_damage_message_ops","The scanners have been damaged"))
 				end
 			elseif named_consequence == "combat_maneuver" then
 				p:setCanCombatManeuver(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering","combat_maneuver_damage_message","Combat maneuver has been damaged")
+					p:addCustomMessage("Engineering",_("msgEngineer", "combat_maneuver_damage_message","Combat maneuver has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus","Combat maneuver has been damaged")
+					p:addCustomMessage("Engineering+",_("msgEngineer+", "combat_maneuver_damage_message_plus","Combat maneuver has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Helms") then
-					p:addCustomMessage("Helms","combat_maneuver_damage_message_helm","Combat maneuver has been damaged")
+					p:addCustomMessage("Helms",_("msgHelms", "combat_maneuver_damage_message_helm","Combat maneuver has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
-					p:addCustomMessage("Tactical","combat_maneuver_damage_message_tac","Combat maneuver has been damaged")
+					p:addCustomMessage("Tactical",_("msgTactical", "combat_maneuver_damage_message_tac","Combat maneuver has been damaged"))
 				end
 			elseif named_consequence == "self_destruct" then
 				p:setCanSelfDestruct(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering","self_destruct_damage_message","Self destruct system has been damaged")
+					p:addCustomMessage("Engineering",_("msgEngineer", "self_destruct_damage_message","Self destruct system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+","self_destruct_damage_message_plus","Self destruct system has been damaged")
+					p:addCustomMessage("Engineering+",_("msgEngineer+", "self_destruct_damage_message_plus","Self destruct system has been damaged"))
 				end
 			end
 		end	--coolant loss branch
@@ -10389,18 +10389,18 @@ function autoCoolant(delta)
 				if p:hasPlayerAtPosition("Engineering") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,"Auto cool",enableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Auto cool"),enableAutoCoolFunctionList[pidx])
 						tbi = "disableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,"Manual cool",disableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering",tbi,_("buttonEngineer+", "Manual cool"),disableAutoCoolFunctionList[pidx])
 						p.autoCoolButton = true
 					end
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,"Auto cool",enableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering+",tbi,_("buttonEngineer", "Auto cool"),enableAutoCoolFunctionList[pidx])
 						tbi = "disableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,"Manual cool",disableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Manual cool"),disableAutoCoolFunctionList[pidx])
 						p.autoCoolButton = true
 					end
 				end
@@ -10757,12 +10757,12 @@ function update(delta)
 					else
 						if p:hasPlayerAtPosition("Engineering") then
 							p.get_coolant_button = "get_coolant_button"
-							p:addCustomButton("Engineering",p.get_coolant_button,"Get Coolant",get_coolant_function[pidx])
+							p:addCustomButton("Engineering",p.get_coolant_button,_("buttonEngineer", "Get Coolant"),get_coolant_function[pidx])
 							p.get_coolant = true
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.get_coolant_button_plus = "get_coolant_button_plus"
-							p:addCustomButton("Engineering+",p.get_coolant_button_plus,"Get Coolant",get_coolant_function[pidx])
+							p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("buttonEngineer+", "Get Coolant"),get_coolant_function[pidx])
 							p.get_coolant = true
 						end
 					end
