@@ -5563,11 +5563,11 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("orders", "What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format("\n   %i Minutes remain in game",math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("commsOrders", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -5583,7 +5583,7 @@ function handleDockedState()
 					setCommsMessage(_("commsTrade", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-					setCommsMessage(_("commsRepairs", "Repair crew member hired"))
+					setCommsMessage(_("commsTrade", "Repair crew member hired"))
 				end
 			end)
 		end
@@ -5611,12 +5611,12 @@ function handleDockedState()
 			else
 				hireCost = math.random(60,120)
 			end
-			addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
+			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
 					setCommsMessage(_("commsTrade", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-					setCommsMessage("Repair crew member hired")
+					setCommsMessage(_("commsTrade", "Repair crew member hired"))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -5625,9 +5625,9 @@ function handleDockedState()
 	if comms_target == homeStation then
 		if homeStation.telemetry == nil then
 			if math.random(1,10) <= (5 - difficulty) then
-				addCommsReply(string.format("Establish defensive system telemetry (%i rep)",difficulty*10), function()
+				addCommsReply(string.format(_("commsTrade", "Establish defensive system telemetry (%i rep)"),difficulty*10), function()
 					if comms_source:takeReputationPoints(difficulty*10) then
-						setCommsMessage(string.format("Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs",homeStation:getCallSign()))
+						setCommsMessage(string.format(_("commsTrade", "Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs"),homeStation:getCallSign()))
 						homeStation.telemetry = true
 					else
 						setCommsMessage(_("commsTrade", "Insufficient reputation"))
@@ -5647,8 +5647,8 @@ function handleDockedState()
 					randomCargoAboard = true
 				end
 				if easyCargoAboard or randomCargoAboard then
-					addCommsReply("Provide cargo", function()
-						setCommsMessage("Do you have something for us?")
+					addCommsReply(_("commsTrade", "Provide cargo"), function()
+						setCommsMessage(_("commsTrade", "Do you have something for us?"))
 						if easyCargoAboard then
 							homeStationEasyDelivery()					
 						end
@@ -5661,8 +5661,8 @@ function handleDockedState()
 		end
 		if infoPromised then
 			if spinUpgradeAvailable or beamTimeUpgradeAvailable or rotateUpgradeAvailable or baseIntelligenceAvailable or hullUpgradeAvailable then
-				addCommsReply("Request promised information", function()
-					setCommsMessage("Remind me what information I promised")
+				addCommsReply(_("commsUpgrade", "Request promised information"), function()
+					setCommsMessage(_("commsUpgrade", "Remind me what information I promised"))
 					if spinUpgradeAvailable then
 						homeStationSpinUpgrade()
 					end
@@ -5901,7 +5901,7 @@ function handleDockedState()
 			end
 		end
 		if player_good_count > 0 then
-			addCommsReply("Jettison cargo", function()
+			addCommsReply(_("commsTrade", "Jettison cargo"), function()
 				setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 				for good, good_quantity in pairs(comms_source.goods) do
 					if good_quantity > 0 then
@@ -5923,56 +5923,56 @@ function handleDockedState()
 	end
 end
 function homeStationEasyDelivery()
-	addCommsReply(string.format("Provide %s as requested",easyDeliverGood), function()
+	addCommsReply(string.format(_("commsUpgrade", "Provide %s as requested"),easyDeliverGood), function()
 		comms_source.goods[easyDeliverGood] = comms_source.goods[easyDeliverGood] - 1
 		comms_source.cargo = comms_source.cargo + 1
 		comms_source:addReputationPoints(30)
-		setCommsMessage("Thanks, we really needed that.\n\nI have some information for you. Decide which one you want")
-		addCommsReply("Ship maneuver upgrade", function()
+		setCommsMessage(_("commsUpgrade", "Thanks, we really needed that.\n\nI have some information for you. Decide which one you want"))
+		addCommsReply(_("commsUpgrade", "Ship maneuver upgrade"), function()
 			plot2 = spinUpgradeStart
-			setCommsMessage("Check back shortly and I'll tell you all about it")
+			setCommsMessage(_("commsUpgrade", "Check back shortly and I'll tell you all about it"))
 		end)
 		addCommsReply("Intelligence", function()
 			plot2 = enemyBaseInfoStart
-			setCommsMessage("Check back shortly and I'll tell you all about it")
+			setCommsMessage(_("commsUpgrade", "Check back shortly and I'll tell you all about it"))
 		end)
 	end)
 end
 function homeStationRandomDelivery()
-	addCommsReply(string.format("Give %s as requested",randomDeliverGood), function()
+	addCommsReply(string.format(_("commsUpgrade", "Give %s as requested"),randomDeliverGood), function()
 		comms_source.goods[randomDeliverGood] = comms_source.goods[randomDeliverGood] - 1
 		comms_source.cargo = comms_source.cargo + 1
 		comms_source:addReputationPoints(35)
-		setCommsMessage(string.format("Thanks, we needed that %s.\n\nI have information for you. Decide which one you want",randomDeliverGood))
-		addCommsReply(string.format("Upgrade %s to auto-rotate",homeStation:getCallSign()), function()
+		setCommsMessage(string.format(_("commsUpgrade", "Thanks, we needed that %s.\n\nI have information for you. Decide which one you want"),randomDeliverGood))
+		addCommsReply(string.format(_("commsUpgrade", "Upgrade %s to auto-rotate"),homeStation:getCallSign()), function()
 			plot4 = rotateUpgradeStart
-			setCommsMessage("Check back in a bit and I'll tell you all about it")
+			setCommsMessage(_("commsUpgrade", "Check back in a bit and I'll tell you all about it"))
 		end)
-		addCommsReply("Upgrade beam weapon cycle time", function()
+		addCommsReply(_("commsUpgrade", "Upgrade beam weapon cycle time"), function()
 			plot4 = beamTimeUpgradeStart
-			setCommsMessage("Check back in a bit and I'll tell you all about it")
+			setCommsMessage(_("commsUpgrade", "Check back in a bit and I'll tell you all about it"))
 		end)
-		addCommsReply("Upgrade hull damage capacity", function()
+		addCommsReply(_("commsUpgrade", "Upgrade hull damage capacity"), function()
 			plot4 = hullUpgradeStart
-			setCommsMessage("Check back in a bit and I'll tell you all about it")
+			setCommsMessage(_("commsUpgrade", "Check back in a bit and I'll tell you all about it"))
 		end)
 	end)
 end
 function homeStationSpinUpgrade()
-	addCommsReply("What about that maneuver upgrade information you promised?", function()
-		setCommsMessage(string.format("I hear %s can upgrade your maneuverability, but they need %s to do the job",spinBase:getCallSign(),spinGood))
+	addCommsReply(_("commsUpgrade", "What about that maneuver upgrade information you promised?"), function()
+		setCommsMessage(string.format(_("commsUpgrade", "I hear %s can upgrade your maneuverability, but they need %s to do the job"),spinBase:getCallSign(),spinGood))
 		if spinReveal < 1 then spinReveal = 1 end
-		addCommsReply(string.format("Where is %s?",spinBase:getCallSign()), function()
-			setCommsMessage(string.format("%s is in sector %s",spinBase:getCallSign(),spinBase:getSectorName()))
+		addCommsReply(string.format(_("commsUpgrade", "Where is %s?"),spinBase:getCallSign()), function()
+			setCommsMessage(string.format(_("commsUpgrade", "%s is in sector %s"),spinBase:getCallSign(),spinBase:getSectorName()))
 			if spinReveal < 2 then spinReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(string.format("Where might I find some %s?",spinGood), function()
-			setCommsMessage(string.format("I think %s might have some",spinGoodBase:getCallSign()))
+		addCommsReply(string.format(_("commsUpgrade", "Where might I find some %s?"),spinGood), function()
+			setCommsMessage(string.format(_("commsUpgrade", "I think %s might have some"),spinGoodBase:getCallSign()))
 			if spinReveal < 3 then spinReveal = 3 end
 			if difficulty < 2 then
-				addCommsReply(string.format("And where the heck is %s?",spinGoodBase:getCallSign()), function()
-					setCommsMessage(string.format("My, my, you're quite inquisitive.\n%s is in sector %s",spinGoodBase:getCallSign(),spinGoodBase:getSectorName()))
+				addCommsReply(string.format(_("commsUpgrade", "And where the heck is %s?"),spinGoodBase:getCallSign()), function()
+					setCommsMessage(string.format(_("commsUpgrade", "My, my, you're quite inquisitive.\n%s is in sector %s"),spinGoodBase:getCallSign(),spinGoodBase:getSectorName()))
 					if spinReveal < 4 then spinReveal = 4 end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5983,11 +5983,11 @@ function homeStationSpinUpgrade()
 	end)
 end
 function homeStationBeamTimeUpgrade()
-	addCommsReply("You mentioned a beam weapon cycle time upgrade...", function()
-		setCommsMessage(string.format("Station %s can do that for %s",beamTimeBase:getCallSign(),beamTimeGood))
+	addCommsReply(_("commsUpgrade", "You mentioned a beam weapon cycle time upgrade..."), function()
+		setCommsMessage(string.format(_("commsUpgrade", "Station %s can do that for %s"),beamTimeBase:getCallSign(),beamTimeGood))
 		if beamTimeReveal < 1 then beamTimeReveal = 1 end
-		addCommsReply(string.format("I've never heard of %s. Where is %s?",beamTimeBase:getCallSign(),beamTimeBase:getCallSign()), function()
-			setCommsMessage(string.format("You haven't? I'm surprised. %s is in %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName()))
+		addCommsReply(string.format(_("commsUpgrade", "I've never heard of %s. Where is %s?"),beamTimeBase:getCallSign(),beamTimeBase:getCallSign()), function()
+			setCommsMessage(string.format(_("commsUpgrade", "You haven't? I'm surprised. %s is in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName()))
 			if beamTimeReveal < 2 then beamTimeReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -6890,7 +6890,7 @@ function neutralComms(comms_data)
 						end
 					end
 					if goodCount > 0 then
-						addCommsReply("Jettison cargo", function()
+						addCommsReply(_("commsTrade", "Jettison cargo"), function()
 							setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 							for good, good_quantity in pairs(comms_source.goods) do
 								if good_quantity > 0 then
@@ -8873,7 +8873,7 @@ end
 -----------------------------------------------------------------
 function setWormArt()
 	wormArt = Artifact():setPosition(random(-90000,90000),random(-90000,90000)):setModel("artifact4"):allowPickup(false):setScanningParameters(2,5)
-	wormArt:setDescriptions("sprightly unassuming object","Object shows rapidly building energy"):setRadarSignatureInfo(50,10,5)
+	wormArt:setDescriptions(_("scienceArtifactDescription", "sprightly unassuming object"),_("scienceArtifactDescription", "Object shows rapidly building energy")):setRadarSignatureInfo(50,10,5)
 	wormArt.travelAngle = random(0,360)
 	wormArt.tempAngle = -90
 	wormArt.travel = 5
