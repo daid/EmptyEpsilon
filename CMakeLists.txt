@@ -56,12 +56,6 @@ endif()
 
 # Dependencies
 
-# Setup OpenGL
-if(NOT ANDROID)
-    set(OpenGL_GL_PREFERENCE LEGACY)
-    find_package(OpenGL REQUIRED)
-endif()
-
 # SeriousProton
 # Use SP provided json library.
 set(SERIOUSPROTON_WITH_JSON ON CACHE BOOL "" FORCE)
@@ -518,15 +512,9 @@ target_include_directories(${PROJECT_NAME}
         "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src;${CMAKE_CURRENT_BINARY_DIR}/include>"
 )
 
-add_library(opengl INTERFACE)
-target_link_libraries(opengl
-    INTERFACE
-        "$<IF:$<BOOL:${ANDROID}>,GLESv1_CM;EGL,OpenGL::GL>"
-)
-
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        seriousproton opengl
+        seriousproton
         "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WIN32}>:iphlpapi>"
         "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
