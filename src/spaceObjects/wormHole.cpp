@@ -59,9 +59,9 @@ WormHole::WormHole()
     }
 }
 
-#if FEATURE_3D_RENDERING
-void WormHole::draw3DTransparent()
+void WormHole::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
+#if FEATURE_3D_RENDERING
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
     glTranslatef(-getPosition().x, -getPosition().y, 0);
 
@@ -95,9 +95,8 @@ void WormHole::draw3DTransparent()
         std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
-}
 #endif//FEATURE_3D_RENDERING
-
+}
 
 void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {

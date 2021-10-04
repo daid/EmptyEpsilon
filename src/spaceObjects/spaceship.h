@@ -212,9 +212,7 @@ public:
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();
 
-#if FEATURE_3D_RENDERING
     virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
-#endif
     /*!
      * Get this ship's radar signature dynamically modified by the state of its
      * systems and current activity.

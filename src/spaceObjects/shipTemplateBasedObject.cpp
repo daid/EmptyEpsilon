@@ -196,8 +196,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
     }
 }
 
-#if FEATURE_3D_RENDERING
-void ShipTemplateBasedObject::draw3DTransparent()
+void ShipTemplateBasedObject::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
     if (shield_count < 1)
         return;
@@ -218,7 +217,6 @@ void ShipTemplateBasedObject::draw3DTransparent()
         angle += arc;
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void ShipTemplateBasedObject::update(float delta)
 {

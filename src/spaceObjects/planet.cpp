@@ -245,9 +245,9 @@ void Planet::update(float delta)
         setRotation(getRotation() + delta / axial_rotation_time * 360.0f);
 }
 
-#if FEATURE_3D_RENDERING
-void Planet::draw3D()
+void Planet::draw3D(const glm::mat4& object_view_matrix)
 {
+#if FEATURE_3D_RENDERING
     float distance = glm::length(camera_position - glm::vec3(getPosition().x, getPosition().y, distance_from_movement_plane));
 
     //view_scale ~= about the size the planet is on the screen.
@@ -282,10 +282,12 @@ void Planet::draw3D()
             planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get());
         }
     }
+#endif
 }
 
-void Planet::draw3DTransparent()
+void Planet::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
+#if FEATURE_3D_RENDERING
     float distance = glm::length(camera_position - glm::vec3(getPosition().x, getPosition().y, distance_from_movement_plane));
 
     //view_scale ~= about the size the planet is on the screen.
@@ -347,8 +349,8 @@ void Planet::draw3DTransparent()
         std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
-}
 #endif
+}
 
 void Planet::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
