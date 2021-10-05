@@ -1,12 +1,11 @@
 #include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "main.h"
 #include "electricExplosionEffect.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
-#if FEATURE_3D_RENDERING
 gl::Buffers<2> ElectricExplosionEffect::particlesBuffers(gl::Unitialized{});
-#endif
 
 /// ElectricExplosionEffect is a visible electrical explosion, as seen from EMP missiles
 /// Example: ElectricExplosionEffect():setPosition(500,5000):setSize(20)
@@ -31,7 +30,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
 
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
-#if FEATURE_3D_RENDERING
+
     if (!particlesBuffers[0] && gl::isAvailable())
     {
         particlesBuffers = gl::Buffers<2>();
@@ -70,7 +69,6 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         // Upload indices
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint8_t), indices.data(), GL_STATIC_DRAW);
     }
-#endif
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -78,8 +76,7 @@ ElectricExplosionEffect::~ElectricExplosionEffect()
 {
 }
 
-#if FEATURE_3D_RENDERING
-void ElectricExplosionEffect::draw3DTransparent()
+void ElectricExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
     float f = (1.0f - (lifetime / maxLifetime));
     float scale;
@@ -94,9 +91,11 @@ void ElectricExplosionEffect::draw3DTransparent()
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
-    glPushMatrix();
+    auto model_matrix = glm::scale(glm::mat4(1.0f), {scale * size, scale * size, scale * size});
     Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
+        glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+        glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
         textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
 
@@ -104,14 +103,13 @@ void ElectricExplosionEffect::draw3DTransparent()
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
         gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
-        glScalef(scale * size, scale * size, scale * size);
         m->render(positions.get(), texcoords.get(), normals.get());
 
-        glScalef(0.5f, 0.5f, 0.5f);
+        model_matrix = glm::scale(model_matrix, {0.5, 0.5, 0.5});
+        glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
         m->render(positions.get(), texcoords.get(), normals.get());
         
     }
-    glPopMatrix();
 
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 3.0f);
     float r = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
@@ -128,6 +126,7 @@ void ElectricExplosionEffect::draw3DTransparent()
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
+    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
 
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
@@ -160,7 +159,6 @@ void ElectricExplosionEffect::draw3DTransparent()
         n += active_quads;
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void ElectricExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
