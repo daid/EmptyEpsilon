@@ -21,10 +21,10 @@ namespace ShaderRegistry
 			"shaders/basic",
 			"shaders/basicColor",
 			"shaders/billboard",
-			"shaders/objectShaderB",
-			"shaders/objectShaderBI",
-			"shaders/objectShaderBS",
-			"shaders/objectShaderBSI",
+			"shaders/objectShader",
+			"shaders/objectShader:ILLUMINATION",
+			"shaders/objectShader:SPECULAR",
+			"shaders/objectShader:ILLUMINATION:SPECULAR",
 			"shaders/planetShader"
 		};
 
