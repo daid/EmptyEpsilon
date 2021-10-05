@@ -305,7 +305,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     ParticleEngine::render(projection_matrix, glm::translate(view_matrix, -camera_position));
 
-    /*
     if (show_spacedust && my_spaceship)
     {
         static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
@@ -334,7 +333,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         // Upload matrices (only float 4x4 supported in es2)
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view_matrix));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(glm::translate(view_matrix, -camera_position)));
 
         // Ship information for flying particles
         glUniform2f(spacedust_shader->getUniformLocation("velocity"), dust_vector.x, dust_vector.y);
@@ -355,6 +354,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
     }
+    /*
     glPopMatrix();
 
     if (my_spaceship && my_spaceship->getTarget())

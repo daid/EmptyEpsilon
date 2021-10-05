@@ -1,5 +1,4 @@
-#version 120
-
+[vertex]
 // Program inputs.
 uniform mat4 projection;
 uniform mat4 model_view;
@@ -12,4 +11,13 @@ attribute float sign_value;
 void main()
 {    
     gl_Position = projection * model_view * vec4(position.xy + sign_value * velocity, position.z, 1.);
+}
+
+[fragment]
+// Shader constants
+const vec4 color = vec4(0.7, 0.5, 0.35, 0.07);
+
+void main()
+{
+    gl_FragColor = color;
 }
