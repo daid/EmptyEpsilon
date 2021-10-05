@@ -184,15 +184,13 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glFrontFace(GL_CCW);
 
     projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-    glm::mat4 view_matrix = glm::mat4(1.0f);
+    view_matrix = glm::mat4(1.0f);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
     view_matrix = glm::rotate(view_matrix, 90.0f / 180.0f * float(M_PI), {1, 0, 0}); // -> X across (l-t-r), Y "towards", Z down 
     view_matrix = glm::scale(view_matrix, {1,1,-1});  // -> X across (l-t-r), Y "towards", Z up
     view_matrix = glm::rotate(view_matrix, -camera_pitch / 180.0f * float(M_PI), {1, 0, 0});
     view_matrix = glm::rotate(view_matrix, -(camera_yaw + 90) / 180.0f * float(M_PI), {0, 0, 1});
-
-    glGetFloatv(GL_VIEWPORT, glm::value_ptr(viewport));
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
@@ -488,21 +486,21 @@ glm::vec3 GuiViewport3D::worldToScreen(sp::RenderTarget& renderer, glm::vec3 wor
     auto pos = projection_matrix * view_pos;
 
     // Perspective division
-    pos /= pos.w;
+    pos.x /= pos.w;
+    pos.y /= pos.w;
+    pos.z /= pos.w;
 
     //Window coordinates
     //Map x, y to range 0-1
     glm::vec3 ret;
-    ret.x = (pos.x * .5f + .5f) * viewport.z + viewport.x;
-    ret.y = (pos.y * .5f + .5f) * viewport.w + viewport.y;
+    ret.x = pos.x * .5f + .5f;
+    ret.y = pos.y * .5f + .5f;
     //This is only correct when glDepthRange(0.0, 1.0)
     //ret.z = (1.0+fTempo[6])*0.5;  //Between 0 and 1
     //Set Z to distance into the screen (negative is behind the screen)
     ret.z = -view_pos.z;
 
-#warning SDL2 TODO
-    //ret.x = ret.x * window.getView().getSize().x / window.getSize().x;
-    //ret.y = ret.y * window.getView().getSize().y / window.getSize().y;
-    //ret.y = window.getView().getSize().y - ret.y;
+    ret.x = rect.position.x + rect.size.x * ret.x;
+    ret.y = rect.position.y + rect.size.y * (1.0f - ret.y);
     return ret;
 }

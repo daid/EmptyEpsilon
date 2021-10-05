@@ -15,7 +15,6 @@ class GuiViewport3D : public GuiElement
 
     glm::mat4 projection_matrix;
     glm::mat4 view_matrix;
-    glm::vec4 viewport;
 
     enum class Uniforms : uint8_t
     {
