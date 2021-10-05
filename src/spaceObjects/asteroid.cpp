@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -41,15 +42,17 @@ Asteroid::Asteroid()
 
 void Asteroid::draw3D(const glm::mat4& object_view_matrix)
 {
-#if FEATURE_3D_RENDERING
     if (size != getRadius())
         setRadius(size);
 
-    glTranslatef(0, 0, z);
-    glRotatef(engine->getElapsedTime() * rotation_speed, 0, 0, 1);
-    glScalef(getRadius(), getRadius(), getRadius());
+    auto model_matrix = glm::translate(glm::mat4(1.0f), {0, 0, z});
+    model_matrix = glm::rotate(model_matrix, engine->getElapsedTime() * rotation_speed / 180.0f * float(M_PI), {0, 0, 1});
+    model_matrix = glm::scale(model_matrix, {getRadius(), getRadius(), getRadius()});
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
+
+    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+    glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
 
@@ -66,7 +69,6 @@ void Asteroid::draw3D(const glm::mat4& object_view_matrix)
 
 
     glActiveTexture(GL_TEXTURE0);
-#endif//FEATURE_3D_RENDERING
 }
 
 void Asteroid::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
