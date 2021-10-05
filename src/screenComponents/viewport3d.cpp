@@ -354,8 +354,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
     }
-    /*
-    glPopMatrix();
 
     if (my_spaceship && my_spaceship->getTarget())
     {
@@ -363,11 +361,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         P<SpaceObject> target = my_spaceship->getTarget();
         glDisable(GL_DEPTH_TEST);
-        glPushMatrix();
-        glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
-        glTranslatef(target->getPosition().x, target->getPosition().y, 0);
+        auto model_matrix = glm::translate(glm::mat4(1.0f), {-camera_position.x, -camera_position.y, -camera_position.z});
+        model_matrix = glm::translate(model_matrix, {target->getPosition().x, target->getPosition().y, 0});
 
         textureManager.getTexture("redicule2.png")->bind();
+        glUniformMatrix4fv(billboard.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view_matrix * model_matrix));
         glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
@@ -388,13 +386,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             std::initializer_list<uint8_t> indices{ 0, 2, 1, 0, 3, 2 };
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
         }
-        glPopMatrix();
     }
 
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
-
+/*
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
     
@@ -436,7 +433,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
 #endif
 */
-
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
