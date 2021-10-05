@@ -16,9 +16,9 @@ public:
     float warp_scale;
 
     void render(glm::vec2 position, float rotation, const glm::mat4& model_view);
-    void renderOverlay(sp::Texture* texture, float alpha);
-    void renderShield(float alpha);
-    void renderShield(float alpha, float angle);
+    void renderOverlay(const glm::mat4& model_view, sp::Texture* texture, float alpha);
+    void renderShield(const glm::mat4& model_view, float alpha);
+    void renderShield(const glm::mat4& model_view, float alpha, float angle);
 
     void setData(P<ModelData> data) { this->data = data; }
     void setData(string name);
