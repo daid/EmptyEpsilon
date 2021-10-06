@@ -17,7 +17,7 @@
 
 OptionsMenu::OptionsMenu()
 {
-    P<WindowManager> windowManager = engine->getObject("windowManager");
+    P<Window> window = engine->getObject("window");
 
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
@@ -49,12 +49,12 @@ OptionsMenu::OptionsMenu()
     // Fullscreen toggle.
     (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
     {
-        P<WindowManager> windowManager = engine->getObject("windowManager");
-        windowManager->setFullscreen(!windowManager->isFullscreen());
+        P<Window> window = engine->getObject("window");
+        window->setFullscreen(!window->isFullscreen());
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
     // FSAA configuration.
-    int fsaa = std::max(1, windowManager->getFSAA());
+    int fsaa = std::max(1, window->getFSAA());
     int fsaa_index = 0;
 
     // Convert selector index to an FSAA amount.
@@ -69,9 +69,9 @@ OptionsMenu::OptionsMenu()
     // FSAA selector.
     (new GuiSelector(graphics_page, "FSAA", [](int index, string value)
     {
-        P<WindowManager> windowManager = engine->getObject("windowManager");
+        P<Window> window = engine->getObject("window");
         static const int fsaa[] = { 0, 2, 4, 8 };
-        windowManager->setFSAA(fsaa[index]);
+        window->setFSAA(fsaa[index]);
     }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
 
     // Audio optionss

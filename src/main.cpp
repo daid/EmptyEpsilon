@@ -219,13 +219,12 @@ int main(int argc, char** argv)
             if (fsaa < 2)
                 fsaa = 2;
         }
-        P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
+        P<Window> window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
         if (PreferencesManager::get("instance_name") != "")
-            window_manager->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
+            window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         else
-            window_manager->setTitle("EmptyEpsilon");
-        window_manager->setAllowVirtualResize(true);
-        engine->registerObject("windowManager", window_manager);
+            window->setTitle("EmptyEpsilon");
+        engine->registerObject("window", window);
 
         if (gl::isAvailable())
         {
@@ -326,11 +325,11 @@ int main(int argc, char** argv)
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
-    P<WindowManager> windowManager = engine->getObject("windowManager");
-    if (windowManager)
+    P<Window> window = engine->getObject("window");
+    if (window)
     {
-        PreferencesManager::set("fsaa", windowManager->getFSAA());
-        PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
+        PreferencesManager::set("fsaa", window->getFSAA());
+        PreferencesManager::set("fullscreen", window->isFullscreen() ? 1 : 0);
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.

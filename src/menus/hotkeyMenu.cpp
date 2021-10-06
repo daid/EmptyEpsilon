@@ -13,8 +13,6 @@
 
 HotkeyMenu::HotkeyMenu()
 {
-    P<WindowManager> windowManager = engine->getObject("windowManager");
-
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 

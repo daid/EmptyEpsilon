@@ -91,9 +91,5 @@ void DebugRenderer::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)
     {
         show_timing_graph = !show_timing_graph;
         timing_graph_points.clear();
-        if (show_timing_graph)
-            P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(0);
-        else
-            P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(60);
     }
 }
