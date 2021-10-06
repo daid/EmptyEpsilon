@@ -86,14 +86,6 @@ private:
     void updateRect(sp::Rect parent_rect);
 protected:
     glm::u8vec4 selectColor(const ColorSet& color_set) const;
-
-    class LineWrapResult
-    {
-    public:
-        string text;
-        int line_count;
-    };
-    LineWrapResult doLineWrap(const string& text, float font_size, float width);
 };
 
 #endif//GUI2_ELEMENT_H

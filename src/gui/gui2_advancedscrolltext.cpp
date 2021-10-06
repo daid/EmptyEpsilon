@@ -45,8 +45,6 @@ GuiAdvancedScrollText* GuiAdvancedScrollText::clearEntries()
 
 void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 {
-    float line_spacing = main_font->getLineSpacing(text_size);
-
     //For all the entries, fix the maximum prefix width, so we know how much space we have for the text.
     float max_prefix_width = 0.0f;
     for(Entry& e : entries)
@@ -55,26 +53,23 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         max_prefix_width = std::max(max_prefix_width, prepared.getUsedAreaSize().x);
     }
 
-    //Calculate how many lines we can display properly
-    int max_lines = rect.size.y / line_spacing;
-
     //Draw the visible entries
-    int draw_offset = -scrollbar->getValue();
+    float draw_offset = -scrollbar->getValue();
     for(Entry& e : entries)
     {
-        LineWrapResult wrap = doLineWrap(e.text, text_size, rect.size.x - 50 - max_prefix_width);
-        if (draw_offset >= 0 && draw_offset < max_lines)
+        auto prepared_prefix = main_font->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
+        auto prepared_text = main_font->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
+        auto height = prepared_text.getUsedAreaSize().y;
+        if (draw_offset + height > 0)
         {
-            renderer.drawText(sp::Rect(rect.position.x, rect.position.y + line_spacing * draw_offset, rect.size.x - 50, rect.size.y), e.prefix, sp::Alignment::TopLeft, text_size);
+            for(auto& g : prepared_prefix.data)
+                g.position.y += draw_offset;
+            for(auto& g : prepared_text.data)
+                g.position.y += draw_offset;
+            renderer.drawText(rect, prepared_prefix, text_size, {255, 255, 255, 255}, sp::Font::FlagClip);
+            renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y, rect.size.x - 50 - max_prefix_width, rect.size.y), prepared_text, text_size, e.color, sp::Font::FlagClip);
         }
-        for(string line : wrap.text.split("\n"))
-        {
-            if (draw_offset >= 0 && draw_offset < max_lines)
-            {
-                renderer.drawText(sp::Rect(rect.position.x + max_prefix_width, rect.position.y + line_spacing * draw_offset, rect.size.x - 50 - max_prefix_width, rect.size.y), line, sp::Alignment::TopLeft, text_size, main_font, e.color);
-            }
-            draw_offset += 1;
-        }
+        draw_offset += height;
     }
 
     //Calculate how many lines we have to display in total.
@@ -85,7 +80,7 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     {
         int diff = line_count - scrollbar->getMax();
         scrollbar->setRange(0, line_count);
-        scrollbar->setValueSize(max_lines);
+        scrollbar->setValueSize(rect.size.y);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
