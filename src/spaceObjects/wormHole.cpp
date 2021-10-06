@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "main.h"
 #include "wormHole.h"
@@ -17,13 +18,11 @@
 #define AVOIDANCE_MULTIPLIER      1.2
 #define TARGET_SPREAD             500
 
-#if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
     glm::vec3 vertex;
     glm::vec2 texcoords;
 };
-#endif
 
 /// A wormhole object that drags objects toward it like a black hole, and then
 /// teleports them to another point when they reach its center.
@@ -59,11 +58,9 @@ WormHole::WormHole()
     }
 }
 
-#if FEATURE_3D_RENDERING
-void WormHole::draw3DTransparent()
+void WormHole::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
-    glTranslatef(-getPosition().x, -getPosition().y, 0);
 
     std::array<VertexAndTexCoords, 4> quad{
         glm::vec3{}, {0.f, 1.f},
@@ -89,6 +86,8 @@ void WormHole::draw3DTransparent()
 
         textureManager.getTexture("wormHole" + string(cloud.texture) + ".png")->bind();
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
+        auto model_matrix = glm::translate(glm::mat4(1.0f), {cloud.offset.x, cloud.offset.y, 0});
+        glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix * model_matrix));
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
@@ -96,8 +95,6 @@ void WormHole::draw3DTransparent()
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
 }
-#endif//FEATURE_3D_RENDERING
-
 
 void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {

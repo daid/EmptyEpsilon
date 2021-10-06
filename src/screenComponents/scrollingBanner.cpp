@@ -16,6 +16,7 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
         draw_offset = 0;
         return;
     }
+#warning SDL2
 /* TODO_GFX
     {
         sf::Texture* texture_ptr = textureManager.getTexture("gui/widget/ButtonBackground.png");

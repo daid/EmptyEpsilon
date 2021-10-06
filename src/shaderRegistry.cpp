@@ -21,11 +21,11 @@ namespace ShaderRegistry
 			"shaders/basic",
 			"shaders/basicColor",
 			"shaders/billboard",
-			"shaders/objectShaderB",
-			"shaders/objectShaderBI",
-			"shaders/objectShaderBS",
-			"shaders/objectShaderBSI",
-			"shaders/planetShader"
+			"shaders/objectShader",
+			"shaders/objectShader:ILLUMINATION",
+			"shaders/objectShader:SPECULAR",
+			"shaders/objectShader:ILLUMINATION:SPECULAR",
+			"shaders/planet"
 		};
 
 		std::array<const char*, Uniforms_t(Uniforms::Count)> uniform_names{

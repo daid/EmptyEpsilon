@@ -29,48 +29,30 @@ GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
 
 void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 {
-    LineWrapResult wrap = doLineWrap(this->text, text_size, rect.size.x - scrollbar->getSize().x);
+    auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
+    auto prepared = main_font->prepare(this->text, 32, text_size, text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    auto text_draw_size = prepared.getUsedAreaSize();
 
-    int start_pos = 0;
-    for(int n=0; n<scrollbar->getValue(); n++)
+    int scroll_max = text_draw_size.y;
+    if (scrollbar->getMax() != scroll_max)
     {
-        int next = wrap.text.find("\n", start_pos) + 1;
-        if (next > 0)
-            start_pos = next;
-    }
-    if (start_pos > 0)
-        wrap.text = wrap.text.substr(start_pos);
-    int max_lines = rect.size.y / main_font->getLineSpacing(text_size);
-    if (wrap.line_count - scrollbar->getValue() > max_lines)
-    {
-        int end_pos = 0;
-        for(int n=0; n<max_lines; n++)
-        {
-            int next = wrap.text.find("\n", end_pos) + 1;
-            if (next > 0)
-                end_pos = next;
-        }
-        if (end_pos > 0)
-            wrap.text = wrap.text.substr(0, end_pos);
-    }
-
-    if (scrollbar->getMax() != wrap.line_count)
-    {
-        int diff = wrap.line_count - scrollbar->getMax();
-        scrollbar->setRange(0, wrap.line_count);
-        scrollbar->setValueSize(max_lines);
+        int diff = scroll_max - scrollbar->getMax();
+        scrollbar->setRange(0, scroll_max);
+        scrollbar->setValueSize(text_rect.size.y);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
 
-    if (max_lines >= wrap.line_count)
+    if (text_rect.size.y >= text_draw_size.y)
     {
         scrollbar->hide();
+        renderer.drawText(rect, this->text, sp::Alignment::TopLeft, text_size, main_font, selectColor(colorConfig.textbox.forground), sp::Font::FlagClip | sp::Font::FlagLineWrap);
     }
     else
     {
+        for(auto& g : prepared.data)
+            g.position.y -= scrollbar->getValue();
         scrollbar->show();
+        renderer.drawText(text_rect, prepared, text_size, selectColor(colorConfig.textbox.forground), sp::Font::FlagClip | sp::Font::FlagLineWrap);
     }
-
-    renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y), wrap.text, sp::Alignment::TopLeft, text_size, main_font, selectColor(colorConfig.textbox.forground));
 }

@@ -184,15 +184,13 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glFrontFace(GL_CCW);
 
     projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-    glm::mat4 view_matrix = glm::mat4(1.0f);
+    view_matrix = glm::mat4(1.0f);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
     view_matrix = glm::rotate(view_matrix, 90.0f / 180.0f * float(M_PI), {1, 0, 0}); // -> X across (l-t-r), Y "towards", Z down 
     view_matrix = glm::scale(view_matrix, {1,1,-1});  // -> X across (l-t-r), Y "towards", Z up
     view_matrix = glm::rotate(view_matrix, -camera_pitch / 180.0f * float(M_PI), {1, 0, 0});
     view_matrix = glm::rotate(view_matrix, -(camera_yaw + 90) / 180.0f * float(M_PI), {0, 0, 1});
-
-    glGetFloatv(GL_VIEWPORT, glm::value_ptr(viewport));
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
@@ -307,7 +305,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
     ParticleEngine::render(projection_matrix, glm::translate(view_matrix, -camera_position));
 
-    /*
     if (show_spacedust && my_spaceship)
     {
         static std::vector<glm::vec3> space_dust(2 * spacedust_particle_count);
@@ -336,7 +333,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         // Upload matrices (only float 4x4 supported in es2)
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view_matrix));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(glm::translate(view_matrix, -camera_position)));
 
         // Ship information for flying particles
         glUniform2f(spacedust_shader->getUniformLocation("velocity"), dust_vector.x, dust_vector.y);
@@ -357,7 +354,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
         }
     }
-    glPopMatrix();
 
     if (my_spaceship && my_spaceship->getTarget())
     {
@@ -365,11 +361,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         P<SpaceObject> target = my_spaceship->getTarget();
         glDisable(GL_DEPTH_TEST);
-        glPushMatrix();
-        glTranslatef(-camera_position.x, -camera_position.y, -camera_position.z);
-        glTranslatef(target->getPosition().x, target->getPosition().y, 0);
+        auto model_matrix = glm::translate(glm::mat4(1.0f), {-camera_position.x, -camera_position.y, -camera_position.z});
+        model_matrix = glm::translate(model_matrix, {target->getPosition().x, target->getPosition().y, 0});
 
         textureManager.getTexture("redicule2.png")->bind();
+        glUniformMatrix4fv(billboard.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view_matrix * model_matrix));
         glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
@@ -390,13 +386,12 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             std::initializer_list<uint8_t> indices{ 0, 2, 1, 0, 3, 2 };
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
         }
-        glPopMatrix();
     }
 
     glDepthMask(true);
     glDisable(GL_BLEND);
     glEnable(GL_CULL_FACE);
-
+/*
 #ifdef DEBUG
     glDisable(GL_DEPTH_TEST);
     
@@ -438,7 +433,6 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     }
 #endif
 */
-
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
@@ -488,21 +482,21 @@ glm::vec3 GuiViewport3D::worldToScreen(sp::RenderTarget& renderer, glm::vec3 wor
     auto pos = projection_matrix * view_pos;
 
     // Perspective division
-    pos /= pos.w;
+    pos.x /= pos.w;
+    pos.y /= pos.w;
+    pos.z /= pos.w;
 
     //Window coordinates
     //Map x, y to range 0-1
     glm::vec3 ret;
-    ret.x = (pos.x * .5f + .5f) * viewport.z + viewport.x;
-    ret.y = (pos.y * .5f + .5f) * viewport.w + viewport.y;
+    ret.x = pos.x * .5f + .5f;
+    ret.y = pos.y * .5f + .5f;
     //This is only correct when glDepthRange(0.0, 1.0)
     //ret.z = (1.0+fTempo[6])*0.5;  //Between 0 and 1
     //Set Z to distance into the screen (negative is behind the screen)
     ret.z = -view_pos.z;
 
-#warning SDL2 TODO
-    //ret.x = ret.x * window.getView().getSize().x / window.getSize().x;
-    //ret.y = ret.y * window.getView().getSize().y / window.getSize().y;
-    //ret.y = window.getView().getSize().y - ret.y;
+    ret.x = rect.position.x + rect.size.x * ret.x;
+    ret.y = rect.position.y + rect.size.y * (1.0f - ret.y);
     return ret;
 }

@@ -351,11 +351,10 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 }
 
-#if FEATURE_3D_RENDERING
-void SpaceShip::draw3DTransparent()
+void SpaceShip::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
     if (!ship_template) return;
-    ShipTemplateBasedObject::draw3DTransparent();
+    ShipTemplateBasedObject::draw3DTransparent(object_view_matrix);
 
     if ((has_jump_drive && jump_delay > 0.0f) ||
         (wormhole_alpha > 0.0f))
@@ -364,10 +363,9 @@ void SpaceShip::draw3DTransparent()
         if (wormhole_alpha > 0.0f)
             delay = wormhole_alpha;
         float alpha = 1.0f - (delay / 10.0f);
-        model_info.renderOverlay(textureManager.getTexture("texture/electric_sphere_texture.png"), alpha);
+        model_info.renderOverlay(object_view_matrix, textureManager.getTexture("texture/electric_sphere_texture.png"), alpha);
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
 {

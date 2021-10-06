@@ -21,12 +21,10 @@ class Nebula : public SpaceObject
 public:
     Nebula();
 
-#if FEATURE_3D_RENDERING
-    virtual void draw3DTransparent(const glm::mat4& object_view_matrix);
-#endif
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range);
-    virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range);
-    virtual bool canHideInNebula() { return false; }
+    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
+    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
+    virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
+    virtual bool canHideInNebula() override { return false; }
 
     static bool inNebula(glm::vec2 position);
     static bool blockedByNebula(glm::vec2 start, glm::vec2 end, float radar_short_range);

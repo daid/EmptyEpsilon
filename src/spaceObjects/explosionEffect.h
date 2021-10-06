@@ -14,18 +14,14 @@ class ExplosionEffect : public SpaceObject, public Updatable
     string explosion_sound;
     glm::vec3 particleDirections[particleCount];
     bool on_radar;
-#if FEATURE_3D_RENDERING
     // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
     static constexpr size_t max_quad_count = 64;
     static gl::Buffers<2> particlesBuffers;
-#endif
 public:
     ExplosionEffect();
     virtual ~ExplosionEffect();
 
-#if FEATURE_3D_RENDERING
-    virtual void draw3DTransparent();
-#endif
+    virtual void draw3DTransparent(const glm::mat4& object_view_matrix);
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void update(float delta);
 

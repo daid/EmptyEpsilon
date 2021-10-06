@@ -196,8 +196,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
     }
 }
 
-#if FEATURE_3D_RENDERING
-void ShipTemplateBasedObject::draw3DTransparent()
+void ShipTemplateBasedObject::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
     if (shield_count < 1)
         return;
@@ -210,15 +209,14 @@ void ShipTemplateBasedObject::draw3DTransparent()
         {
             if (shield_count > 1)
             {
-                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
+                model_info.renderShield(object_view_matrix, (shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
             }else{
-                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+                model_info.renderShield(object_view_matrix, (shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
             }
         }
         angle += arc;
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void ShipTemplateBasedObject::update(float delta)
 {

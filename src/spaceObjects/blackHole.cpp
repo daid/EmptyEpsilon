@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "blackHole.h"
 #include "pathPlanner.h"
@@ -9,13 +10,11 @@
 #include "shaderRegistry.h"
 
 
-#if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
     glm::vec3 vertex;
     glm::vec2 texcoords;
 };
-#endif
 
 /// A blackhole has a 5km radius where it pulls in all near objects. At the center of the black hole everything gets a lot of damage.
 /// Which will lead to the eventual destruction of said object.
@@ -37,8 +36,7 @@ void BlackHole::update(float delta)
     update_delta = delta;
 }
 
-#if FEATURE_3D_RENDERING
-void BlackHole::draw3DTransparent()
+void BlackHole::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
     static std::array<VertexAndTexCoords, 4> quad{
         glm::vec3{}, {0.f, 1.f},
@@ -50,6 +48,7 @@ void BlackHole::draw3DTransparent()
     textureManager.getTexture("blackHole3d.png")->bind();
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
+    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 5000.f);
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -63,7 +62,6 @@ void BlackHole::draw3DTransparent()
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     glBlendFunc(GL_ONE, GL_ONE);
 }
-#endif
 
 void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {

@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "beamEffect.h"
 #include "spaceship.h"
 #include "mesh.h"
@@ -8,13 +9,11 @@
 
 #include <glm/ext/matrix_transform.hpp>
 
-#if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
     glm::vec3 vertex;
     glm::vec2 texcoords;
 };
-#endif
 
 /// BeamEffect is a beam weapon fire effect that will fade after 1 seond
 /// Example: BeamEffect():setSource(player):setTarget(enemy_ship)
@@ -64,8 +63,7 @@ BeamEffect::~BeamEffect()
 
 void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
 {
-#if FEATURE_3D_RENDERING
-    glTranslatef(-getPosition().x, -getPosition().y, 0);
+    auto model_matrix = glm::translate(glm::mat4(1.0f), {-getPosition().x, -getPosition().y, 0});
     glm::vec3 startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     glm::vec3 endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
@@ -75,6 +73,8 @@ void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), lifetime, lifetime, lifetime, 1.f);
+    glUniformMatrix4fv(beamShader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+    glUniformMatrix4fv(beamShader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
     
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -132,7 +132,6 @@ void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
         std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
     }
-#endif//FEATURE_3D_RENDERING
 }
 
 void BeamEffect::update(float delta)
