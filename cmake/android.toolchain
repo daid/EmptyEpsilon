@@ -85,28 +85,27 @@ set(ZIPALIGN "${ANDROID_SDK_PATH}/build-tools/${ANDROID_BUILD_TOOLS_VERSION}/zip
 set(ANDROID_PLATFORM_JAR "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}/android.jar")
 set(ADB "${ANDROID_SDK_PATH}/platform-tools/adb")
 
-set(SFML_SRC_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SFML/source")
-set(SFML_INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}/android/sdk/ndk-bundle/sources/third_party/sfml")
-if(NOT EXISTS "${SFML_SRC_PATH}")
-    file(DOWNLOAD https://www.sfml-dev.org/files/SFML-2.5.1-sources.zip "${CMAKE_CURRENT_LIST_DIR}/android/SFML/SFML_src.zip" SHOW_PROGRESS)
-    execute_process_ex(COMMAND ${UNZIP} SFML_src.zip WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML")
-    file(RENAME "${CMAKE_CURRENT_LIST_DIR}/android/SFML/SFML-2.5.1" "${SFML_SRC_PATH}")
-    #execute_process_ex(COMMAND ${PATCH} -p1 -i "${CMAKE_CURRENT_LIST_DIR}/../../android/sfml.patch" WORKING_DIRECTORY "${SFML_SRC_PATH}")
+set(SDL_SRC_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SDL/source")
+set(SDL_INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SDL/install")
+if(NOT EXISTS "${SDL_SRC_PATH}")
+    file(DOWNLOAD https://www.libsdl.org/release/SDL2-2.0.9.zip "${CMAKE_CURRENT_LIST_DIR}/android/SDL/SDL2_src.zip" SHOW_PROGRESS)
+    execute_process_ex(COMMAND ${UNZIP} SDL2_src.zip WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SDL")
+    file(RENAME "${CMAKE_CURRENT_LIST_DIR}/android/SDL/SDL2-2.0.9" "${CMAKE_CURRENT_LIST_DIR}/android/SDL/source")
+    execute_process_ex(COMMAND ${PATCH} -p1 -i "${CMAKE_CURRENT_LIST_DIR}/../android/sdl2.patch" WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SDL/source")
 endif()
-if(NOT EXISTS "${SFML_INSTALL_PATH}")
-    file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML/build")
+if(NOT EXISTS "${SDL_INSTALL_PATH}")
+    file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SDL/build")
     execute_process_ex(
-        COMMAND "${CMAKE_COMMAND}" "${SFML_SRC_PATH}" "-G" "${CMAKE_GENERATOR}"
-            "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}" "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_SDK_PATH}/ndk-bundle/build/cmake/android.toolchain.cmake"
-            "-DANDROID_ABI=${ANDROID_ABI}" "-DANDROID_PLATFORM=${ANDROID_PLATFORM}" "-DCMAKE_INSTALL_PREFIX=${SFML_INSTALL_PATH}" "-DCMAKE_BUILD_TYPE=Release"
-            "-DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=BOTH" "-DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH"
+        COMMAND "${CMAKE_COMMAND}" "${SDL_SRC_PATH}" "-G" "Ninja"
+            "-DCMAKE_TOOLCHAIN_FILE=${ANDROID_SDK_PATH}/ndk-bundle/build/cmake/android.toolchain.cmake"
+            "-DANDROID_ABI=${ANDROID_ABI}" "-DANDROID_PLATFORM=${ANDROID_PLATFORM}" "-DCMAKE_INSTALL_PREFIX=${SDL_INSTALL_PATH}" "-DCMAKE_BUILD_TYPE=Release"
             "-DCMAKE_SHARED_LINKER_FLAGS_RELEASE=-s"
-        WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML/build")
+        WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SDL/build")
     execute_process_ex(
-        COMMAND "${CMAKE_MAKE_PROGRAM}" "install"
-        WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SFML/build")
+        COMMAND "ninja" "install"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/android/SDL/build")
 endif()
-set(SFML_ROOT "${SFML_INSTALL_PATH}")
+set(SDL2_DIR "${SDL_INSTALL_PATH}/lib/cmake/SDL2")
 
 include("${ANDROID_SDK_PATH}/ndk-bundle/build/cmake/android.toolchain.cmake")
 
@@ -117,13 +116,6 @@ set(CMAKE_LIBRARY_ARCHITECTURE ${ANDROID_ABI})
 
 # Macro to build the android apk
 macro(android_apk NAME)
-    file(COPY "${SFML_INSTALL_PATH}/extlibs/lib/${ANDROID_ABI}/libopenal.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-window.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-network.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-audio.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-system.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-graphics.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-activity.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
     file(COPY "${ANDROID_SDK_PATH}/ndk-bundle/sources/cxx-stl/llvm-libc++/libs/${ANDROID_ABI}/libc++_shared.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/libemptyepsilon.so"
