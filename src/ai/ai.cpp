@@ -624,7 +624,11 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         //Formation flying code
         float r = owner->getRadius() * 5.0;
         owner->target_rotation = vec2ToAngle(diff);
-        if (distance > r)
+        if (distance > r * 3)
+        {
+            flyTowards(target_position);
+        }
+        else if (distance > r)
         {
             float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
             if (angle_diff > 10.0)
