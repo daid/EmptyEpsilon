@@ -37,10 +37,10 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
     if (show_timing_graph)
     {
         auto window_size = renderer.getPhysicalSize();
-        if (timing_graph_points.size() > window_size.x)
+        if (timing_graph_points.size() > size_t(window_size.x))
             timing_graph_points.clear();
         timing_graph_points.push_back(engine->getEngineTiming());
-        
+
         std::vector<glm::vec2> update_points;
         std::vector<glm::vec2> server_update_points;
         std::vector<glm::vec2> collision_points;

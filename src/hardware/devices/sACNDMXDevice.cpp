@@ -50,7 +50,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
     }
 
     run_thread = true;
-    update_thread = std::move(std::thread(&StreamingAcnDMXDevice::updateLoop, this));
+    update_thread = std::thread(&StreamingAcnDMXDevice::updateLoop, this);
     return true;
 }
 

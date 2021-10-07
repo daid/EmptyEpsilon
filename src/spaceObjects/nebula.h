@@ -31,7 +31,7 @@ public:
     static glm::vec2 getFirstBlockedPosition(glm::vec2 start, glm::vec2 end);
     static PVector<Nebula> getNebulas();
 
-    virtual string getExportLine() { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+    virtual string getExportLine() override { return "Nebula():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 
 protected:
     glm::mat4 getModelMatrix() const override;

@@ -51,7 +51,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         if (!stream || !image.loadFromStream(stream))
         {
             LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
-            image = std::move(sp::Image({8, 8}, {255, 0, 255, 128}));
+            image = sp::Image({8, 8}, {255, 0, 255, 128});
         }
 
         glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());

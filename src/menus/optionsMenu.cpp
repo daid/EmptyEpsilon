@@ -208,7 +208,7 @@ OptionsMenu::OptionsMenu()
 
     (new GuiLabel(right_container, "PREVIEW_LABEL", tr("Preview Soundtracks"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
-    GuiListbox* music_list = new GuiListbox(right_container, "MUSIC_PLAY", [this](int index, string value)
+    GuiListbox* music_list = new GuiListbox(right_container, "MUSIC_PLAY", [](int index, string value)
     {
         soundManager->playMusic(value);
     });
@@ -230,7 +230,7 @@ OptionsMenu::OptionsMenu()
         returnToMainMenu();
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
     // Save options button.
-    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), [this]()
+    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
     {
         if (getenv("HOME"))
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");

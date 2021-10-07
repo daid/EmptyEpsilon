@@ -166,7 +166,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
     if (username != "")
     {
         run_thread = true;
-        update_thread = std::move(std::thread(&PhilipsHueDevice::updateLoop, this));
+        update_thread = std::thread(&PhilipsHueDevice::updateLoop, this);
         return true;
     }
     return false;

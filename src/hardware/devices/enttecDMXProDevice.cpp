@@ -40,7 +40,7 @@ bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
     if (port)
     {
         run_thread = true;
-        update_thread = std::move(std::thread(&EnttecDMXProDevice::updateLoop, this));
+        update_thread = std::thread(&EnttecDMXProDevice::updateLoop, this);
         return true;
     }
     return false;
