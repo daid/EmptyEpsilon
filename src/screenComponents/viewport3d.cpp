@@ -61,7 +61,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-#warning SDL2 TODO? GL_TEXTURE_WRAP_R does not exist in GLES2.0?
+    //GL_TEXTURE_WRAP_R does not exist in GLES2.0?
     for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T /*, GL_TEXTURE_WRAP_R*/ })
         glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
 
