@@ -16,7 +16,6 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
         draw_offset = 0;
         return;
     }
-#warning SDL2
     renderer.drawStretchedHV(rect, 25.0f, "gui/widget/PanelBackground.png");
 
     {
