@@ -746,58 +746,29 @@ void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
         small_tig_interval = 10;
     }
 
-#warning TODO SDL2
-/*
-    sf::VertexArray tigs(sf::Lines, 360 / tig_interval * 2);
+    // Main radar tigs
     for(unsigned int n = 0; n < 360; n += tig_interval)
     {
-        tigs[n / tig_interval * 2].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 20);
-        tigs[n / tig_interval * 2 + 1].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 40);
+        renderer.drawLine(
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 20),
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 40),
+            {255, 255, 255, 255});
     }
-    window.draw(tigs);
-*/
 
-#warning TODO SDL2
-/*
-    sf::VertexArray small_tigs(sf::Lines, 360 / small_tig_interval * 2);
     for(unsigned int n = 0; n < 360; n += small_tig_interval)
     {
-        small_tigs[n / small_tig_interval * 2].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 20);
-        small_tigs[n / small_tig_interval * 2 + 1].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 30);
+        renderer.drawLine(
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 20),
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 30),
+            {255, 255, 255, 255});
     }
-    window.draw(small_tigs);
-*/
 
     for(unsigned int n = 0; n < 360; n += tig_interval)
     {
-#warning TODO SDL2
-/*
-        sf::Text text(string(n), *main_font, 15);
-        text.setPosition(radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 45));
-        text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
-        text.setRotation(n-view_rotation);
-        window.draw(text);
-*/
+        renderer.drawRotatedText(
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 50), n-view_rotation,
+            string(n), 15.0f, main_font, {255, 255, 255, 255});
     }
-}
-
-void GuiRadarView::drawRadarCutoff(sp::RenderTarget& renderer)
-{
-    auto radar_screen_center = rect.center();
-    float screen_size = std::min(rect.size.x, rect.size.y) / 2.0f;
-
-#warning SDL2 TODO
-/*
-    sf::Sprite cutOff;
-    textureManager.setTexture(cutOff, "gui/radarCutoff.png");
-    cutOff.setPosition(radar_screen_center.x, radar_screen_center.y);
-    cutOff.setScale(screen_size / float(cutOff.getTextureRect().width) * 2, screen_size / float(cutOff.getTextureRect().width) * 2);
-    window.draw(cutOff);
-*/
-    renderer.fillRect(sp::Rect(rect.position.x, rect.position.y, rect.size.x, radar_screen_center.y - screen_size - rect.position.y), glm::u8vec4(0, 0, 0, 255));
-    renderer.fillRect(sp::Rect(rect.position.x, radar_screen_center.y + screen_size, rect.size.x, rect.size.y - screen_size - (radar_screen_center.y - rect.position.y)), glm::u8vec4(0, 0, 0, 255));
-    renderer.fillRect(sp::Rect(rect.position.x, rect.position.y, radar_screen_center.x - screen_size - rect.position.x, rect.size.y), glm::u8vec4(0, 0, 0, 255));
-    renderer.fillRect(sp::Rect(radar_screen_center.x + screen_size, rect.position.y, rect.size.x - screen_size - (radar_screen_center.x - rect.position.x), rect.size.y), glm::u8vec4(0, 0, 0, 255));
 }
 
 glm::vec2 GuiRadarView::worldToScreen(glm::vec2 world_position)
