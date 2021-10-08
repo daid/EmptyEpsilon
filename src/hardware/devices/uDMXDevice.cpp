@@ -2,9 +2,10 @@
 #include "logging.h"
 
 #ifdef _WIN32
+    #include "dynamicLibrary.h"
     #include <windows.h>
 
-    HMODULE UDMX_dll;
+    std::unique_ptr<DynamicLibrary> UDMX_dll;
 
     extern "C" {
     bool (__stdcall *UDMX_Configure)();
@@ -18,31 +19,31 @@
 bool UDMXDevice::configure(std::unordered_map<string, string> settings)
 {
 #ifdef _WIN32
-    UDMX_dll = LoadLibrary("uDMX.dll");
+    UDMX_dll = DynamicLibrary::open("uDMX.dll");
     if (UDMX_dll == NULL)
     {
         LOG(ERROR) << "Failed to load uDMX.dll for uDMX hardware";
         return false;
     }
-    UDMX_Configure = (bool (__stdcall *)())GetProcAddress(UDMX_dll, "Configure");
+    UDMX_Configure = UDMX_dll->getFunction<decltype(UDMX_Configure)>("Configure");
     if (UDMX_Configure == NULL)
     {
         LOG(ERROR) << "Failed to find Configure function in uDMX.dll";
         return false;
     }
-    UDMX_Connected = (bool (__stdcall *)())GetProcAddress(UDMX_dll, "Connected");
+    UDMX_Connected = UDMX_dll->getFunction<decltype(UDMX_Connected)>("Connected");
     if (UDMX_Connected == NULL)
     {
         LOG(ERROR) << "Failed to find Connected function in uDMX.dll";
         return false;
     }
-    UDMX_ChannelSet = (bool (__stdcall *)(long Channel, long Value))GetProcAddress(UDMX_dll, "ChannelSet");
+    UDMX_ChannelSet = UDMX_dll->getFunction<decltype(UDMX_ChannelSet)>("ChannelSet");
     if (UDMX_ChannelSet == NULL)
     {
         LOG(ERROR) << "Failed to find ChannelSet function in uDMX.dll";
         return false;
     }
-    UDMX_ChannelsSet = (bool (__stdcall *)(long ChannelCnt, long Channel, long* Value))GetProcAddress(UDMX_dll, "ChannelsSet");
+    UDMX_ChannelsSet = UDMX_dll->getFunction<decltype(UDMX_ChannelsSet)>("ChannelsSet");
     if (UDMX_ChannelsSet == NULL)
     {
         LOG(ERROR) << "Failed to find ChannelsSet function in uDMX.dll";

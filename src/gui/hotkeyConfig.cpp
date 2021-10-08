@@ -297,7 +297,7 @@ std::vector<HotkeyResult> HotkeyConfig::getHotkey(const SDL_KeyboardEvent& key) 
 
 void HotkeyConfig::newCategory(const string& key, const string& name)
 {
-    categories.emplace_back(HotkeyConfigCategory{ key, name });
+    categories.emplace_back(HotkeyConfigCategory{ key, name, {} });
 }
 
 void HotkeyConfig::newKey(const string& key, const std::tuple<string, string>& value)

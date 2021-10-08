@@ -475,7 +475,7 @@ void ShipAI::runOrders()
                 owner->orderRetreat(new_target);
             }
         }
-        // no break; continue with docking or roaming
+        [[fallthrough]]; // continue with docking or roaming
     case AI_Dock:            //Dock with [order_target]
         if (owner->getOrderTarget())
         {
