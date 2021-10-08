@@ -361,7 +361,6 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
     if (!my_spaceship)
         return;
     auto scan_center = my_spaceship->getPosition();
-    auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     PVector<Nebula> nebulas = Nebula::getNebulas();
@@ -457,7 +456,6 @@ void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
 void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
 {
     const float seconds_per_distance_tick = 5.0f;
-    auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     if (my_spaceship && missile_tube_controls)

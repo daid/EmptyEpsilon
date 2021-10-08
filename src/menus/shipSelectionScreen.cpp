@@ -199,7 +199,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
             // Spawn a ship of the selected template near 0,0 and give it a random
             // heading.
-            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [this, ship_template_selector]() {
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
                 if (!gameGlobalInfo->allow_new_player_ships)
                     return;
                 P<PlayerSpaceship> ship = new PlayerSpaceship();

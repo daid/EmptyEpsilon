@@ -47,7 +47,7 @@ public:
 
     static const MissileWeaponData& getDataFor(EMissileWeapons type);
 
-    static const float convertSizeToCategoryModifier(EMissileSizes size);
-    static const EMissileSizes convertCategoryModifierToSize(float size);
+    static float convertSizeToCategoryModifier(EMissileSizes size);
+    static EMissileSizes convertCategoryModifierToSize(float size);
 };
 #endif//MISSILE_WEAPON_DATA_H

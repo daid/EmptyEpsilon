@@ -51,7 +51,7 @@ private:
 public:
     GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::ivec2 room_dimensions, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiShipRoom* setSystem(P<SpaceShip> ship, ESystem system) { this->ship = ship; this->system = system; return this; }
 
@@ -70,7 +70,7 @@ private:
 public:
     GuiShipDoor(GuiContainer* owner, string id, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiShipDoor* setHorizontal() { horizontal = true; return this; }
 

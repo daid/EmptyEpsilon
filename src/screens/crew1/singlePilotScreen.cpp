@@ -53,11 +53,11 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
             else if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
-        [this](glm::vec2 position) {
+        [](glm::vec2 position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
-        [this](glm::vec2 position) {
+        [](glm::vec2 position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         }
