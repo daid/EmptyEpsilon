@@ -19,7 +19,7 @@ bool EvasionAI::canSwitchAI()
 
 void EvasionAI::run(float delta)
 {
-    if (evasion_calculation_delay > 0.0)
+    if (evasion_calculation_delay > 0.0f)
         evasion_calculation_delay -= delta;
     ShipAI::run(delta);
 }
@@ -61,7 +61,7 @@ void EvasionAI::runOrders()
 
 bool EvasionAI::evadeIfNecessary()
 {
-    if (evasion_calculation_delay > 0.0){
+    if (evasion_calculation_delay > 0.0f){
         if (is_evading)
         {
             flyTowards(evasion_location, 100.0);
