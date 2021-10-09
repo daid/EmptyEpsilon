@@ -134,13 +134,6 @@ macro(android_apk NAME)
         COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
         COMMAND "${AAPT}" ARGS add "${APK}"
             lib/${ANDROID_ABI}/libemptyepsilon.so
-            lib/${ANDROID_ABI}/libopenal.so
-            lib/${ANDROID_ABI}/libsfml-window.so
-            lib/${ANDROID_ABI}/libsfml-network.so
-            lib/${ANDROID_ABI}/libsfml-audio.so
-            lib/${ANDROID_ABI}/libsfml-system.so
-            lib/${ANDROID_ABI}/libsfml-graphics.so
-            lib/${ANDROID_ABI}/libsfml-activity.so
             lib/${ANDROID_ABI}/libc++_shared.so
         COMMAND "${AAPT}" ARGS add "${APK}" ${ASSETS}
         COMMAND "${Java_JARSIGNER_EXECUTABLE}" ARGS -verbose -sigalg SHA1withRSA -digestalg SHA1 -storepass "${ANDROID_SIGN_KEY_PASSWORD}" "${APK}" "${ANDROID_SIGN_KEY_NAME}"
