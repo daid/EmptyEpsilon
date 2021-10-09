@@ -9,6 +9,7 @@ public:
     bool visible;
 
     MouseRenderer();
+    ~MouseRenderer() override final;
 
     virtual void render(sp::RenderTarget& window) override;
 };
