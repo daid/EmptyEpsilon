@@ -531,10 +531,6 @@ set_target_properties(${PROJECT_NAME}
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
         MACOSX_BUNDLE_ICON_FILE "${PROJECT_NAME}.icns")
 
-if(ANDROID)
-  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
-endif()
-
 include(InstallRequiredSystemLibraries)
 
 
