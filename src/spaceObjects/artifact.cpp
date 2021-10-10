@@ -86,7 +86,7 @@ void Artifact::update(float delta)
 
 void Artifact::draw3D(const glm::mat4& object_view_matrix)
 {
-    if (artifact_spin != 0.0) {
+    if (artifact_spin != 0.0f) {
         SpaceObject::draw3D(glm::rotate(object_view_matrix, engine->getElapsedTime() * artifact_spin / 180.0f * float(M_PI), {0, 0, 1}));
     } else {
         SpaceObject::draw3D(object_view_matrix);
@@ -100,17 +100,17 @@ void Artifact::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float
     if (radar_trace_scale > 0)
     {
         if (long_range)
-            size = radar_trace_scale * 0.7;
+            size = radar_trace_scale * 0.7f;
         else
             size = radar_trace_scale;
     }
     else
     {
         size = getRadius() * scale / 16;
-        if (size < 0.2)
-            size = 0.2;
+        if (size < 0.2f)
+            size = 0.2f;
     }
-    renderer.drawRotatedSprite(radar_trace_icon, position, size * 32.0, getRotation() - rotation, radar_trace_color);
+    renderer.drawRotatedSprite(radar_trace_icon, position, size * 32.0f, getRotation() - rotation, radar_trace_color);
 }
 
 void Artifact::collide(Collisionable* target, float force)

@@ -325,7 +325,7 @@ void SpaceShip::applyTemplateValues()
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
     combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
-    has_warp_drive = ship_template->warp_speed > 0.0;
+    has_warp_drive = ship_template->warp_speed > 0.0f;
     warp_speed_per_warp_level = ship_template->warp_speed;
     has_jump_drive = ship_template->has_jump_drive;
     jump_drive_min_distance = ship_template->jump_drive_min_distance;
@@ -629,9 +629,9 @@ void SpaceShip::update(float delta)
         rotationDiff = turnSpeed;
     }
 
-    if (rotationDiff > 1.0)
+    if (rotationDiff > 1.0f)
         setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
-    else if (rotationDiff < -1.0)
+    else if (rotationDiff < -1.0f)
         setAngularVelocity(-turn_speed * getSystemEffectiveness(SYS_Maneuver));
     else
         setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
@@ -639,7 +639,7 @@ void SpaceShip::update(float delta)
     //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
     float cap_speed = impulse_max_speed;
     
-    if(current_impulse < 0 && impulse_max_reverse_speed <= 0.01)
+    if(current_impulse < 0 && impulse_max_reverse_speed <= 0.01f)
     {
         current_impulse = 0; //we could get stuck with a ship with no reverse speed, not being able to accelerate
     }
@@ -657,46 +657,46 @@ void SpaceShip::update(float delta)
     }
     if (has_jump_drive && jump_delay > 0)
     {
-        if (current_impulse > 0.0)
+        if (current_impulse > 0.0f)
         {
             if (cap_speed > 0)
                 current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
-            if (current_impulse < 0.0)
+            if (current_impulse < 0.0f)
                 current_impulse = 0.0;
         }
-        if (current_impulse < 0.0)
+        if (current_impulse < 0.0f)
         {
             if (cap_speed > 0)
                 current_impulse += delta * (impulse_acceleration / cap_speed);
-            if (current_impulse > 0.0)
+            if (current_impulse > 0.0f)
                 current_impulse = 0.0;
         }
-        if (current_warp > 0.0)
+        if (current_warp > 0.0f)
         {
             current_warp -= delta;
-            if (current_warp < 0.0)
+            if (current_warp < 0.0f)
                 current_warp = 0.0;
         }
         jump_delay -= delta * getSystemEffectiveness(SYS_JumpDrive);
-        if (jump_delay <= 0.0)
+        if (jump_delay <= 0.0f)
         {
             executeJump(jump_distance);
             jump_delay = 0.0;
         }
     }else if (has_warp_drive && (warp_request > 0 || current_warp > 0))
     {
-        if (current_impulse > 0.0)
+        if (current_impulse > 0.0f)
         {
             if (cap_speed > 0)
                 current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
-            if (current_impulse < 0.0)
-                current_impulse = 0.0;
-        }else if (current_impulse < 0.0)
+            if (current_impulse < 0.0f)
+                current_impulse = 0.0f;
+        }else if (current_impulse < 0.0f)
         {
             if (cap_speed > 0)
                 current_impulse += delta * (impulse_acceleration / cap_speed);
-            if (current_impulse > 0.0)
-                current_impulse = 0.0;
+            if (current_impulse > 0.0f)
+                current_impulse = 0.0f;
         }else{
             if (current_warp < warp_request)
             {
@@ -1128,36 +1128,36 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
         if (info.system_target != SYS_None)
         {
             //Target specific system
-            float system_damage = (damage_amount / hull_max) * 2.0;
+            float system_damage = (damage_amount / hull_max) * 2.0f;
             if (info.type == DT_Energy)
-                system_damage *= 3.0;   //Beam weapons do more system damage, as they penetrate the hull easier.
+                system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[info.system_target].health -= system_damage;
-            if (systems[info.system_target].health < -1.0)
-                systems[info.system_target].health = -1.0;
+            if (systems[info.system_target].health < -1.0f)
+                systems[info.system_target].health = -1.0f;
 
             for(int n=0; n<2; n++)
             {
                 ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
                 //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull_max) * 1.0;
+                float system_damage = (damage_amount / hull_max) * 1.0f;
                 systems[random_system].health -= system_damage;
-                if (systems[random_system].health < -1.0)
-                    systems[random_system].health = -1.0;
+                if (systems[random_system].health < -1.0f)
+                    systems[random_system].health = -1.0f;
             }
 
             if (info.type == DT_Energy)
-                damage_amount *= 0.02;
+                damage_amount *= 0.02f;
             else
-                damage_amount *= 0.5;
+                damage_amount *= 0.5f;
         }else{
             ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
             //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-            float system_damage = (damage_amount / hull_max) * 3.0;
+            float system_damage = (damage_amount / hull_max) * 3.0f;
             if (info.type == DT_Energy)
-                system_damage *= 2.5;   //Beam weapons do more system damage, as they penetrate the hull easier.
+                system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[random_system].health -= system_damage;
-            if (systems[random_system].health < -1.0)
-                systems[random_system].health = -1.0;
+            if (systems[random_system].health < -1.0f)
+                systems[random_system].health = -1.0f;
         }
     }
 
@@ -1205,9 +1205,9 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_BeamWeapons:
         return true;
     case SYS_Maneuver:
-        return turn_speed > 0.0;
+        return turn_speed > 0.0f;
     case SYS_Impulse:
-        return impulse_max_speed > 0.0;
+        return impulse_max_speed > 0.0f;
     }
     return true;
 }
@@ -1222,9 +1222,9 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     // Degrade all systems except the reactor once energy level drops below 10.
     if (system != SYS_Reactor)
     {
-        if (energy_level < 10.0 && energy_level > 0.0 && power > 0.0)
+        if (energy_level < 10.0f && energy_level > 0.0f && power > 0.0f)
             power = std::min(power * energy_level / 10.0f, power);
-        else if (energy_level <= 0.0 || power <= 0.0)
+        else if (energy_level <= 0.0f || power <= 0.0f)
             power = 0.0f;
     }
 

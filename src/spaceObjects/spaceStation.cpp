@@ -28,11 +28,11 @@ SpaceStation::SpaceStation()
 
 void SpaceStation::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    float sprite_scale = scale * getRadius() * 1.5 / 32;
+    float sprite_scale = scale * getRadius() * 1.5f / 32;
 
     if (!long_range)
     {
-        sprite_scale *= 0.7;
+        sprite_scale *= 0.7f;
         drawShieldsOnRadar(renderer, position, scale, rotation, sprite_scale, true);
     }
     sprite_scale = std::max(0.15f, sprite_scale);
@@ -68,11 +68,11 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
         {
             for(int n=0; n<shield_count; n++)
             {
-                points += shield_max[n] * 0.1;
+                points += shield_max[n] * 0.1f;
             }
             points /= shield_count;
         }
-        points += hull_max * 0.1;
+        points += hull_max * 0.1f;
         if (isEnemy(info.instigator))
             info.instigator->addReputationPoints(points);
         else

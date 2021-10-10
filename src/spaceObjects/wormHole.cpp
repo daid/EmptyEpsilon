@@ -11,12 +11,12 @@
 
 #include <glm/ext/matrix_transform.hpp>
 
-#define FORCE_MULTIPLIER          50.0
-#define FORCE_MAX                 10000.0
-#define ALPHA_MULTIPLIER          10.0
-#define DEFAULT_COLLISION_RADIUS  2500
-#define AVOIDANCE_MULTIPLIER      1.2
-#define TARGET_SPREAD             500
+#define FORCE_MULTIPLIER          50.0f
+#define FORCE_MAX                 10000.0f
+#define ALPHA_MULTIPLIER          10.0f
+#define DEFAULT_COLLISION_RADIUS  2500.0f
+#define AVOIDANCE_MULTIPLIER      1.2f
+#define TARGET_SPREAD             500.0f
 
 struct VertexAndTexCoords
 {
@@ -80,8 +80,8 @@ void WormHole::draw3DTransparent(const glm::mat4& object_view_matrix)
         float size = cloud.size;
 
         float distance = glm::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+        float alpha = 1.0f - (distance / 10000.0f);
+        if (alpha < 0.0f)
             continue;
 
         textureManager.getTexture("wormHole" + string(cloud.texture) + ".png")->bind();
@@ -98,7 +98,7 @@ void WormHole::draw3DTransparent(const glm::mat4& object_view_matrix)
 
 void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRotation() - rotation, getRadius() * scale * 3.0);
+    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRotation() - rotation, getRadius() * scale * 3.0f);
 }
 
 // Draw a line toward the target position
@@ -118,7 +118,7 @@ void WormHole::update(float delta)
 
 void WormHole::collide(Collisionable* target, float collision_force)
 {
-    if (update_delta == 0.0)
+    if (update_delta == 0.0f)
         return;
 
     P<SpaceObject> obj = P<Collisionable>(target);

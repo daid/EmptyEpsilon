@@ -102,7 +102,7 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
 
 void GameGlobalInfo::update(float delta)
 {
-    if (global_message_timeout > 0.0)
+    if (global_message_timeout > 0.0f)
     {
         global_message_timeout -= delta;
     }

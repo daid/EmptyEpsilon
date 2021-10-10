@@ -154,11 +154,11 @@ void GameStateLogger::stop()
 
 void GameStateLogger::update(float delta)
 {
-    if (!log_file || delta == 0.0)
+    if (!log_file || delta == 0.0f)
         return;
 
     logging_delay -= delta;
-    if (logging_delay > 0.0)
+    if (logging_delay > 0.0f)
         return;
     logging_delay = logging_interval;
 

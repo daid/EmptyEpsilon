@@ -158,7 +158,7 @@ void RepairCrew::update(float delta)
         return;
     }
 
-    if (position.x < -0.5)
+    if (position.x < -0.5f)
     {
         ship->ship_template->interiorSize();
         int n=irandom(0, ship->ship_template->rooms.size() - 1);
@@ -168,12 +168,12 @@ void RepairCrew::update(float delta)
     }
 
     action_delay -= delta;
-    glm::ivec2 pos = glm::ivec2(position.x + 0.5, position.y + 0.5);
+    glm::ivec2 pos = glm::ivec2(position.x + 0.5f, position.y + 0.5f);
     switch(action)
     {
     case RC_Idle:
         {
-            action_delay = 1.0 / move_speed;
+            action_delay = 1.0f / move_speed;
             if (pos != target_position)
             {
                 ERepairCrewDirection new_direction = pathFind(pos, target_position, ship->ship_template);
@@ -189,17 +189,17 @@ void RepairCrew::update(float delta)
             if (system != SYS_None)
             {
                 ship->systems[system].health += repair_per_second * delta;
-                if (ship->systems[system].health > 1.0)
+                if (ship->systems[system].health > 1.0f)
                     ship->systems[system].health = 1.0;
                 ship->systems[system].hacked_level -= repair_per_second * delta;
-                if (ship->systems[system].hacked_level < 0.0)
+                if (ship->systems[system].hacked_level < 0.0f)
                     ship->systems[system].hacked_level = 0.0;
             }
             if (ship->auto_repair_enabled && pos == target_position && (system == SYS_None || !ship->hasSystem(system) || ship->systems[system].health == 1.0))
             {
                 int n=irandom(0, SYS_COUNT - 1);
 
-                if (ship->hasSystem(ESystem(n)) && ship->systems[n].health < 1.0)
+                if (ship->hasSystem(ESystem(n)) && ship->systems[n].health < 1.0f)
                 {
                     for(unsigned int idx=0; idx<ship->ship_template->rooms.size(); idx++)
                     {
@@ -221,7 +221,7 @@ void RepairCrew::update(float delta)
         case RC_Up: position.y -= delta * move_speed; break;
         case RC_Down: position.y += delta * move_speed; break;
         }
-        if (action_delay < 0.0)
+        if (action_delay < 0.0f)
             action = RC_Idle;
         break;
     }

@@ -225,7 +225,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         auto ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.size.x, rect.size.y) / 2.0f;
         if (ship_offset.x < -rect.size.x / 2.0f || ship_offset.x > rect.size.x / 2.0f || ship_offset.y < -rect.size.y / 2.0f || ship_offset.y > rect.size.y / 2.0f)
         {
-            glm::vec2 position(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0);
+            glm::vec2 position(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
             position += ship_offset / glm::length(ship_offset) * std::min(rect.size.x, rect.size.y) * 0.4f;
 
             renderer.drawRotatedSprite("waypoint.png", position, 32, vec2ToAngle(ship_offset) - 90);
@@ -305,7 +305,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
 void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
 {
     auto radar_screen_center = rect.center();
-    float scale = std::min(rect.size.x, rect.size.y) / 2.0 / distance;
+    float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     constexpr float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
@@ -439,7 +439,7 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
 {
-    if (range_indicator_step_size < 1.0)
+    if (range_indicator_step_size < 1.0f)
         return;
 
     glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
@@ -493,7 +493,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
             auto turn_center = vec2FromAngle(fire_angle + left_or_right) * turn_radius;
             auto turn_exit = turn_center + vec2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
-            float turn_distance = fabs(angle_diff) / 360.0 * (turn_radius * 2.0f * M_PI);
+            float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * M_PI);
             float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
             float length_after_turn = data.speed * lifetime_after_turn;
 
