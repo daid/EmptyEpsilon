@@ -196,7 +196,7 @@ static std::vector<std::pair<string, SDL_Keycode> > sdl_key_names = {
     {"Quote", SDLK_QUOTE},
     {"Slash", SDLK_SLASH},
     {"BackSlash", SDLK_BACKSLASH},
-    {"Tilde", SDL_SCANCODE_BACKSLASH},
+    {"Tilde", SDLK_BACKQUOTE},
     {"Equal", SDLK_EQUALS},
     {"Dash", SDLK_MINUS},
     {"Space", SDLK_SPACE},
