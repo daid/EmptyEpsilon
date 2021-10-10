@@ -20,7 +20,7 @@ public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 
     virtual void onDraw(sp::RenderTarget& window) override;
-    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
     virtual bool onKey(const SDL_KeyboardEvent& key, int unicode) override;
     virtual void onFocusGained() override;
     virtual void onFocusLost() override;

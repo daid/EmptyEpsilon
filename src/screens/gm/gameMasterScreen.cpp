@@ -28,7 +28,7 @@ GameMasterScreen::GameMasterScreen()
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
     main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
-        [this](glm::vec2 position) { this->onMouseDown(position); },
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(button, position); },
         [this](glm::vec2 position) { this->onMouseDrag(position); },
         [this](glm::vec2 position) { this->onMouseUp(position); }
     );
@@ -382,11 +382,11 @@ void GameMasterScreen::update(float delta)
     }
 }
 
-void GameMasterScreen::onMouseDown(glm::vec2 position)
+void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position)
 {
     if (click_and_drag_state != CD_None)
         return;
-    if (InputHandler::mouseIsDown(1))
+    if (button == sp::io::Pointer::Button::Right)
     {
         click_and_drag_state = CD_DragViewOrOrder;
     }

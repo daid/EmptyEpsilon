@@ -9,7 +9,7 @@ public:
     GuiPanel(GuiContainer* owner, string id);
 
     virtual void onDraw(sp::RenderTarget& window) override;
-    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
 };
 
 #endif//GUI2_PANEL_H

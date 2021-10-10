@@ -17,37 +17,51 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     auto window_size = renderer.getVirtualSize();
     sp::Rect window_rect(0, 0, window_size.x, window_size.y);
 
-    auto mouse_position = InputHandler::getMousePos();
-
     drawElements(window_rect, renderer);
 
     if (enable_debug_rendering)
     {
         drawDebugElements(window_rect, renderer);
     }
+}
 
-    if (InputHandler::mouseIsPressed(0) || InputHandler::mouseIsPressed(1) || InputHandler::mouseIsPressed(2))
+bool GuiCanvas::onPointerMove(glm::vec2 position, int id)
+{
+    return false;
+}
+
+void GuiCanvas::onPointerLeave(int id)
+{
+}
+
+bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+{
+    click_element = getClickElement(button, position, id);
+    focus(click_element);
+    return click_element != nullptr;
+}
+
+void GuiCanvas::onPointerDrag(glm::vec2 position, int id)
+{
+    if (click_element)
+        click_element->onMouseDrag(position, id);
+}
+
+void GuiCanvas::onPointerUp(glm::vec2 position, int id)
+{
+    if (click_element)
     {
-        click_element = getClickElement(mouse_position);
-        if (!click_element)
-            onClick(mouse_position);
-        focus(click_element);
+        click_element->onMouseUp(position, id);
+        click_element = nullptr;
     }
-    if (InputHandler::mouseIsDown(0) || InputHandler::mouseIsDown(1) || InputHandler::mouseIsDown(2))
-    {
-        if (previous_mouse_position != mouse_position)
-            if (click_element)
-                click_element->onMouseDrag(mouse_position);
-    }
-    if (InputHandler::mouseIsReleased(0) || InputHandler::mouseIsReleased(1) || InputHandler::mouseIsReleased(2))
-    {
-        if (click_element)
-        {
-            click_element->onMouseUp(mouse_position);
-            click_element = nullptr;
-        }
-    }
-    previous_mouse_position = mouse_position;
+}
+
+void GuiCanvas::onTextInput(const string& text)
+{
+}
+
+void GuiCanvas::onTextInput(sp::TextInputEvent e)
+{
 }
 
 void GuiCanvas::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)
@@ -77,10 +91,6 @@ void GuiCanvas::handleJoystickButton(unsigned int joystickId, unsigned int butto
             onHotkey(action);
         }
     }
-}
-
-void GuiCanvas::onClick(glm::vec2 mouse_position)
-{
 }
 
 void GuiCanvas::onHotkey(const HotkeyResult& key)

@@ -28,13 +28,13 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiBasicSlider::onMouseDown(glm::vec2 position)
+bool GuiBasicSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
-    onMouseDrag(position);
+    onMouseDrag(position, id);
     return true;
 }
 
-void GuiBasicSlider::onMouseDrag(glm::vec2 position)
+void GuiBasicSlider::onMouseDrag(glm::vec2 position, int id)
 {
     float new_value;
     if (rect.size.x > rect.size.y)
@@ -65,7 +65,7 @@ void GuiBasicSlider::onMouseDrag(glm::vec2 position)
     }
 }
 
-void GuiBasicSlider::onMouseUp(glm::vec2 position)
+void GuiBasicSlider::onMouseUp(glm::vec2 position, int id)
 {
 }
 
@@ -147,13 +147,13 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiSlider::onMouseDown(glm::vec2 position)
+bool GuiSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
-    onMouseDrag(position);
+    onMouseDrag(position, id);
     return true;
 }
 
-void GuiSlider::onMouseDrag(glm::vec2 position)
+void GuiSlider::onMouseDrag(glm::vec2 position, int id)
 {
     float new_value;
     if (rect.size.x > rect.size.y)
@@ -189,7 +189,7 @@ void GuiSlider::onMouseDrag(glm::vec2 position)
     }
 }
 
-void GuiSlider::onMouseUp(glm::vec2 position)
+void GuiSlider::onMouseUp(glm::vec2 position, int id)
 {
 }
 
@@ -235,13 +235,13 @@ void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
     renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + 25, y + 25), 50, color);
 }
 
-bool GuiSlider2D::onMouseDown(glm::vec2 position)
+bool GuiSlider2D::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
-    onMouseDrag(position);
+    onMouseDrag(position, id);
     return true;
 }
 
-void GuiSlider2D::onMouseDrag(glm::vec2 position)
+void GuiSlider2D::onMouseDrag(glm::vec2 position, int id)
 {
     glm::vec2 new_value;
     new_value.x = (position.x - rect.position.x - 25.0f) / (rect.size.x - 50.0f);
@@ -285,7 +285,7 @@ void GuiSlider2D::onMouseDrag(glm::vec2 position)
     }
 }
 
-void GuiSlider2D::onMouseUp(glm::vec2 position)
+void GuiSlider2D::onMouseUp(glm::vec2 position, int id)
 {
 }
 

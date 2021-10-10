@@ -20,7 +20,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     science = new ScienceScreen(this, operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
     science->science_radar->setCallbacks(
-        [this](glm::vec2 position) { // Down
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { // Down
             // If not our ship, or if we're scanning, ignore clicks.
             if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
                 return;

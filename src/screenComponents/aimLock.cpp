@@ -69,12 +69,12 @@ void AimLock::onDraw(sp::RenderTarget& renderer)
     renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
 }
 
-bool AimLock::onMouseDown(glm::vec2 position)
+bool AimLock::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
-    return GuiRotationDial::onMouseDown(position);
+    return GuiRotationDial::onMouseDown(button, position, id);
 }
 
-void AimLock::onMouseDrag(glm::vec2 position)
+void AimLock::onMouseDrag(glm::vec2 position, int id)
 {
     float view_rotation = radar->getViewRotation();
 
@@ -96,6 +96,6 @@ void AimLock::onMouseDrag(glm::vec2 position)
     }
 }
 
-void AimLock::onMouseUp(glm::vec2 position)
+void AimLock::onMouseUp(glm::vec2 position, int id)
 {
 }

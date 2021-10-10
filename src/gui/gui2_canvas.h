@@ -16,11 +16,18 @@ public:
     virtual ~GuiCanvas();
 
     virtual void render(sp::RenderTarget& window) override;
+    virtual bool onPointerMove(glm::vec2 position, int id) override;
+    virtual void onPointerLeave(int id) override;
+    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
+    virtual void onPointerDrag(glm::vec2 position, int id) override;
+    virtual void onPointerUp(glm::vec2 position, int id) override;
+    virtual void onTextInput(const string& text) override;
+    virtual void onTextInput(sp::TextInputEvent e) override;
+
     virtual void handleKeyPress(const SDL_KeyboardEvent& key, int unicode) override;
     virtual void handleJoystickAxis(unsigned int joystickId, int axis, float position) override;
     virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
 
-    virtual void onClick(glm::vec2 mouse_position);
     virtual void onHotkey(const HotkeyResult& key);
     virtual void onKey(const SDL_KeyboardEvent& key, int unicode);
 

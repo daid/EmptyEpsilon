@@ -18,7 +18,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     renderer.drawText(sp::Rect(rect.position.x + 16, rect.position.y, rect.size.x, rect.size.y), text + (typing_indicator && focus ? "_" : ""), sp::Alignment::CenterLeft, text_size, main_font, selectColor(colorConfig.text_entry.forground));
 }
 
-bool GuiTextEntry::onMouseDown(glm::vec2 position)
+bool GuiTextEntry::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     return true;
 }

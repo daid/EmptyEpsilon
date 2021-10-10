@@ -110,7 +110,6 @@ set(SOURCES
     src/pathPlanner.cpp
     src/epsilonServer.cpp
     src/particleEffect.cpp
-    src/mouseCalibrator.cpp
     src/httpScriptAccess.cpp
     src/modelInfo.cpp
     src/packResourceProvider.cpp
@@ -366,7 +365,6 @@ set(SOURCES
     src/missileWeaponData.h
     src/modelData.h
     src/modelInfo.h
-    src/mouseCalibrator.h
     src/packResourceProvider.h
     src/particleEffect.h
     src/pathPlanner.h

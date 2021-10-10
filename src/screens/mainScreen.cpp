@@ -132,13 +132,17 @@ void ScreenMainScreen::update(float delta)
     }
 }
 
-void ScreenMainScreen::onClick(glm::vec2 mouse_position)
+bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
+    if (GuiCanvas::onPointerDown(button, position, id))
+        return true;
     if (!my_spaceship)
-        return;
+        return false;
 
-    if (InputHandler::mouseIsPressed(0))
+    switch(button)
     {
+    case sp::io::Pointer::Button::Left:
+    case sp::io::Pointer::Button::Touch:
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Left); break;
@@ -147,9 +151,8 @@ void ScreenMainScreen::onClick(glm::vec2 mouse_position)
         case MSS_Right: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         }
-    }
-    if (InputHandler::mouseIsPressed(1))
-    {
+        break;
+    case sp::io::Pointer::Button::Right:
         switch(my_spaceship->main_screen_setting)
         {
         case MSS_Front: my_spaceship->commandMainScreenSetting(MSS_Right); break;
@@ -158,9 +161,8 @@ void ScreenMainScreen::onClick(glm::vec2 mouse_position)
         case MSS_Left: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         default: my_spaceship->commandMainScreenSetting(MSS_Front); break;
         }
-    }
-    if (InputHandler::mouseIsPressed(2))
-    {
+        break;
+    case sp::io::Pointer::Button::Middle:
         switch(my_spaceship->main_screen_setting)
         {
         default:
@@ -178,7 +180,11 @@ void ScreenMainScreen::onClick(glm::vec2 mouse_position)
                 my_spaceship->commandMainScreenSetting(MSS_Tactical);
             break;
         }
+        break;
+    default:
+        break;
     }
+    return true;
 }
 
 void ScreenMainScreen::onHotkey(const HotkeyResult& key)

@@ -7,7 +7,6 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
-#include "mouseCalibrator.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/tutorialMenu.h"
@@ -104,17 +103,6 @@ MainMenu::MainMenu()
         new TutorialMenu();
         destroy();
     }))->setPosition({370, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
-
-    if (InputHandler::touch_screen)
-    {
-        GuiButton* touch_calib = new GuiButton(this, "TOUCH_CALIB", "", [this]() {
-            destroy();
-            new MouseCalibrator("");
-        });
-        touch_calib->setPosition({-50, -50}, sp::Alignment::BottomRight)->setSize(200, 100);
-        (new GuiLabel(touch_calib, "TOUCH_CALIB_LABEL", tr("Calibrate\nTouchscreen"), 30)
-        )->setPosition(0, -15, sp::Alignment::Center);
-    }
 
     float y = 100;
     (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 25); y += 25;

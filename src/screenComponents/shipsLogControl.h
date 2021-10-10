@@ -12,7 +12,7 @@ public:
     ShipsLog(GuiContainer* owner);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
 private:
     bool open;
     GuiAdvancedScrollText* log_text;

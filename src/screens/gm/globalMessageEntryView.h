@@ -14,7 +14,7 @@ private:
 public:
     GuiGlobalMessageEntryView(GuiContainer* owner);
 
-    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
 };
 
 #endif//GLOBAL_MESSAGE_ENTRY_VIEW

@@ -31,7 +31,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void onClick(glm::vec2 mouse_position) override;
+    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
     virtual void onHotkey(const HotkeyResult& key) override;
     virtual void onKey(const SDL_KeyboardEvent& key, int unicode) override;
 };

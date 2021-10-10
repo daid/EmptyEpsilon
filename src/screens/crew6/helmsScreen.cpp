@@ -40,7 +40,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [this](glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (my_spaceship)
             {
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());

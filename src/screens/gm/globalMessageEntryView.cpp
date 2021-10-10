@@ -27,7 +27,7 @@ GuiGlobalMessageEntryView::GuiGlobalMessageEntryView(GuiContainer* owner)
     }))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 50);
 }
 
-bool GuiGlobalMessageEntryView::onMouseDown(glm::vec2 position)
+bool GuiGlobalMessageEntryView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {   //Catch clicks.
     return true;
 }

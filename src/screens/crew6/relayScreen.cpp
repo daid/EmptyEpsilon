@@ -29,7 +29,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
-        [this](glm::vec2 position) { //down
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
             {
                 if (glm::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)

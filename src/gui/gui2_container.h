@@ -20,7 +20,7 @@ public:
 protected:
     virtual void drawElements(sp::Rect parent_rect, sp::RenderTarget& window);
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
-    GuiElement* getClickElement(glm::vec2 mouse_position);
+    GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, int id);
     void forwardKeypressToElements(const HotkeyResult& key);
     bool forwardJoystickAxisToElements(const AxisAction& axisAction);
 

@@ -44,7 +44,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
 
     // Control targeting and piloting with radar interactions.
     radar->setCallbacks(
-        [this](glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_spaceship->commandSetTarget(targets.get());

@@ -65,7 +65,7 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
     }
 }
 
-GuiElement* GuiContainer::getClickElement(glm::vec2 mouse_position)
+GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     for(std::list<GuiElement*>::reverse_iterator it = elements.rbegin(); it != elements.rend(); it++)
     {
@@ -73,10 +73,10 @@ GuiElement* GuiContainer::getClickElement(glm::vec2 mouse_position)
 
         if (element->hover && element->visible && element->enabled)
         {
-            GuiElement* clicked = element->getClickElement(mouse_position);
+            GuiElement* clicked = element->getClickElement(button, position, id);
             if (clicked)
                 return clicked;
-            if (element->onMouseDown(mouse_position))
+            if (element->onMouseDown(button, position, id))
             {
                 return element;
             }

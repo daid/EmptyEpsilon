@@ -81,7 +81,7 @@ public:
 
     virtual void update(float delta);
 
-    void onMouseDown(glm::vec2 position);
+    void onMouseDown(sp::io::Pointer::Button button, glm::vec2 position);
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
 

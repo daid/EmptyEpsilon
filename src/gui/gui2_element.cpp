@@ -17,16 +17,16 @@ GuiElement::~GuiElement()
     }
 }
 
-bool GuiElement::onMouseDown(glm::vec2 position)
+bool GuiElement::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     return false;
 }
 
-void GuiElement::onMouseDrag(glm::vec2 position)
+void GuiElement::onMouseDrag(glm::vec2 position, int id)
 {
 }
 
-void GuiElement::onMouseUp(glm::vec2 position)
+void GuiElement::onMouseUp(glm::vec2 position, int id)
 {
 }
 

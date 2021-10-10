@@ -45,13 +45,13 @@ GuiProgressSlider* GuiProgressSlider::setDrawBackground(bool drawBackground)
     return this;
 }
 
-bool GuiProgressSlider::onMouseDown(glm::vec2 position)
+bool GuiProgressSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
-    onMouseDrag(position);
+    onMouseDrag(position, id);
     return true;
 }
 
-void GuiProgressSlider::onMouseDrag(glm::vec2 position)
+void GuiProgressSlider::onMouseDrag(glm::vec2 position, int id)
 {
     float new_value;
     if (rect.size.x > rect.size.y)
@@ -82,6 +82,6 @@ void GuiProgressSlider::onMouseDrag(glm::vec2 position)
     }
 }
 
-void GuiProgressSlider::onMouseUp(glm::vec2 position)
+void GuiProgressSlider::onMouseUp(glm::vec2 position, int id)
 {
 }

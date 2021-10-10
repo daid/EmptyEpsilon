@@ -37,9 +37,9 @@ public:
 
     virtual void onUpdate() {}
     virtual void onDraw(sp::RenderTarget& window) {}
-    virtual bool onMouseDown(glm::vec2 position);
-    virtual void onMouseDrag(glm::vec2 position);
-    virtual void onMouseUp(glm::vec2 position);
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id);
+    virtual void onMouseDrag(glm::vec2 position, int id);
+    virtual void onMouseUp(glm::vec2 position, int id);
     virtual bool onKey(const SDL_KeyboardEvent& key, int unicode);
     virtual void onHotkey(const HotkeyResult& key);
     virtual bool onJoystickAxis(const AxisAction& axisAction);

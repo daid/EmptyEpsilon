@@ -18,7 +18,6 @@
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
 #include "menus/optionsMenu.h"
-#include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
@@ -242,18 +241,6 @@ int main(int argc, char** argv)
 
     new DebugRenderer();
 
-    if (PreferencesManager::get("touchcalibfile") != "")
-    {
-        FILE* f = fopen(PreferencesManager::get("touchcalibfile").c_str(), "r");
-        if (f)
-        {
-            float m[6];
-            if (fscanf(f, "%f %f %f %f %f %f", &m[0], &m[1], &m[2], &m[3], &m[4], &m[5]) == 6)
-                InputHandler::mouse_transform = {m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1};
-            fclose(f);
-        }
-    }
-
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
@@ -391,10 +378,6 @@ void returnToMainMenu()
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
         new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
-    }
-    else if (PreferencesManager::get("touchcalib").toInt())
-    {
-        new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
     }
     else if (PreferencesManager::get("tutorial").toInt())
     {

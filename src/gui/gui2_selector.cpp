@@ -60,12 +60,12 @@ GuiSelector* GuiSelector::setTextSize(float size)
     return this;
 }
 
-bool GuiSelector::onMouseDown(glm::vec2 position)
+bool GuiSelector::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     return true;
 }
 
-void GuiSelector::onMouseUp(glm::vec2 position)
+void GuiSelector::onMouseUp(glm::vec2 position, int id)
 {
     if (rect.contains(position))
     {

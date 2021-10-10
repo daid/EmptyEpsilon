@@ -26,8 +26,8 @@ public:
     GuiListbox* scrollTo(int index);
 
     virtual void onDraw(sp::RenderTarget& target);
-    virtual bool onMouseDown(glm::vec2 position);
-    virtual void onMouseUp(glm::vec2 position);
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id);
+    virtual void onMouseUp(glm::vec2 position, int id);
 private:
     virtual void entriesChanged();
 };

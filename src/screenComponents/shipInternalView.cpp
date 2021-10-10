@@ -146,12 +146,12 @@ GuiShipRoomContainer::GuiShipRoomContainer(GuiContainer* owner, string id, float
 {
 }
 
-bool GuiShipRoomContainer::onMouseDown(glm::vec2 position)
+bool GuiShipRoomContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     return true;
 }
 
-void GuiShipRoomContainer::onMouseUp(glm::vec2 position)
+void GuiShipRoomContainer::onMouseUp(glm::vec2 position, int id)
 {
     if (rect.contains(position) && func)
     {
@@ -212,14 +212,14 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiShipRoom::onMouseDown(glm::vec2 position)
+bool GuiShipRoom::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     if (func)
         return true;
     return false;
 }
 
-void GuiShipRoom::onMouseUp(glm::vec2 position)
+void GuiShipRoom::onMouseUp(glm::vec2 position, int id)
 {
     if (rect.contains(position) && func)
     {
@@ -242,14 +242,14 @@ void GuiShipDoor::onDraw(sp::RenderTarget& renderer)
         renderer.drawRotatedSprite("room_door.png", getCenterPoint(), rect.size.y, 90);
 }
 
-bool GuiShipDoor::onMouseDown(glm::vec2 position)
+bool GuiShipDoor::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     if (func)
         return true;
     return false;
 }
 
-void GuiShipDoor::onMouseUp(glm::vec2 position)
+void GuiShipDoor::onMouseUp(glm::vec2 position, int id)
 {
     if (rect.contains(position) && func)
         func();
@@ -285,12 +285,12 @@ void GuiShipCrew::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiShipCrew::onMouseDown(glm::vec2 position)
+bool GuiShipCrew::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     return true;
 }
 
-void GuiShipCrew::onMouseUp(glm::vec2 position)
+void GuiShipCrew::onMouseUp(glm::vec2 position, int id)
 {
     if (rect.contains(position) && func)
         func(crew);

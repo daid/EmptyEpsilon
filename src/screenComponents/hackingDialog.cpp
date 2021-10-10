@@ -128,7 +128,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiHackingDialog::onMouseDown(glm::vec2 position)
+bool GuiHackingDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
     return true;
 }
