@@ -22,7 +22,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     science->science_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { // Down
             // If not our ship, or if we're scanning, ignore clicks.
-            if (!my_spaceship || my_spaceship->scanning_delay > 0.0)
+            if (!my_spaceship || my_spaceship->scanning_delay > 0.0f)
                 return;
 
             // If we're in target selection mode, there's a waypoint, and this
@@ -31,7 +31,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             {
                 // ... and we select something near a waypoint, switch to move
                 // waypoint mode.
-                if (glm::length(my_spaceship->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0)
+                if (glm::length(my_spaceship->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0f)
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = science->targets.getWaypointIndex();

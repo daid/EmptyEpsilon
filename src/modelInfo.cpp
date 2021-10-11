@@ -31,7 +31,7 @@ void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& mode
 
     if (engine_scale > 0.0f)
     {
-        if (engine->getElapsedTime() - last_engine_particle_time > 0.1)
+        if (engine->getElapsedTime() - last_engine_particle_time > 0.1f)
         {
             for (unsigned int n=0; n<data->engine_emitters.size(); n++)
             {
@@ -48,7 +48,7 @@ void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& mode
 
     if (warp_scale > 0.0f)
     {
-        if (engine->getElapsedTime() - last_warp_particle_time > 0.1)
+        if (engine->getElapsedTime() - last_warp_particle_time > 0.1f)
         {
             int count = warp_scale * 10.0f;
             for(int n=0; n<count; n++)

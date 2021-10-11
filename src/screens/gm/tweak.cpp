@@ -552,7 +552,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
         // Divide a large value for granularity.
         if (value > 0)
-            target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0);
+            target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0f);
         else
             target->beam_weapons[beam_index].setTurretRotationRate(0.0);
     });
@@ -582,7 +582,7 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 
 void GuiShipTweakBeamweapons::onDraw(sp::RenderTarget& renderer)
 {
-    target->drawOnRadar(renderer, glm::vec2(rect.position.x - 150.0f + rect.size.x / 2.0f, rect.position.y + rect.size.y * 0.66), 300.0f / 5000.0f, 0, false);
+    target->drawOnRadar(renderer, glm::vec2(rect.position.x - 150.0f + rect.size.x / 2.0f, rect.position.y + rect.size.y * 0.66f), 300.0f / 5000.0f, 0, false);
 
     arc_slider->setValue(target->beam_weapons[beam_index].getArc());
     direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));

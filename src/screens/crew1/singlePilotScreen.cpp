@@ -115,7 +115,7 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
-        heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
+        heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0f + 360.0f - 270.0f, 360.0f), 1));
         float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
 

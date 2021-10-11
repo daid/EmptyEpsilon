@@ -22,9 +22,9 @@ SpectatorScreen::SpectatorScreen()
 void SpectatorScreen::update(float delta)
 {
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = main_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
         if (view_distance > 100000)
             view_distance = 100000;
         if (view_distance < 5000)

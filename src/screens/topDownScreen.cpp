@@ -17,7 +17,7 @@ TopDownScreen::TopDownScreen()
     viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Set the camera's vertical position/zoom.
-    camera_position.z = 7000.0;
+    camera_position.z = 7000.0f;
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
@@ -60,9 +60,9 @@ void TopDownScreen::update(float delta)
 
     // Enable mouse wheel zoom.
     float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    if (mouse_wheel_delta != 0.0f)
     {
-        camera_position.z = camera_position.z * (1.0 - (mouse_wheel_delta) * 0.1f);
+        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 0.1f);
         if (camera_position.z > 10000)
             camera_position.z = 10000;
         if (camera_position.z < 1000)
@@ -148,16 +148,16 @@ void TopDownScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
         break;
     // Zoom the camera in and out with the R and F keys.
     case SDLK_r:
-        if (camera_position.z > 1000.0)
-            camera_position.z -= 100.0;
+        if (camera_position.z > 1000.0f)
+            camera_position.z -= 100.0f;
         else
-            camera_position.z = 1000.0;
+            camera_position.z = 1000.0f;
         break;
     case SDLK_f:
-        if (camera_position.z < 10000.0)
-            camera_position.z += 100.0;
+        if (camera_position.z < 10000.0f)
+            camera_position.z += 100.0f;
         else
-            camera_position.z = 10000.0;
+            camera_position.z = 10000.0f;
         break;
     // TODO: This is more generic code and is duplicated.
     // Exit the screen with the escape or home keys.

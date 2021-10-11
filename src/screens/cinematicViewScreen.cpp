@@ -151,7 +151,7 @@ void CinematicViewScreen::update(float delta)
 
         // Check if our selected ship has a weapons target.
         target_of_target = target->getTarget();
-        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0)
+        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0f)
             target_of_target = nullptr;
 
         // If it does, lock the camera onto that target.
@@ -181,7 +181,7 @@ void CinematicViewScreen::update(float delta)
                 camera_position.y = camera_position_2D.y;
             }
 
-            angle_pitch = (atan(camera_position.z / tot_distance_3D)) * (180 / pi);
+            angle_pitch = glm::degrees(atan(camera_position.z / tot_distance_3D));
         }
 
         if (distance_2D > max_camera_distance)
@@ -209,7 +209,7 @@ void CinematicViewScreen::update(float delta)
             {
                 // Calculate the angles between the camera and the ship.
                 angle_yaw = vec2ToAngle(diff_2D);
-                angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
+                angle_pitch = glm::degrees(atan(camera_position.z / distance_3D));
             }
         }
         // TODO: Park the camera at a photogenic angle at high speeds.

@@ -143,7 +143,7 @@ void GuiMissileTubeControls::onDraw(sp::RenderTarget& renderer)
             rows[n].loading_bar->hide();
         }
 
-        if (my_spaceship->current_warp > 0.0)
+        if (my_spaceship->current_warp > 0.0f)
         {
             rows[n].fire_button->disable();
         }

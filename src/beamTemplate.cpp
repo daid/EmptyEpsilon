@@ -105,12 +105,12 @@ float BeamTemplate::getTurretRotationRate()
 
 void BeamTemplate::setTurretRotationRate(float rotation_rate)
 {
-    if (rotation_rate < 0)
-        this->turret_rotation_rate = 0.0;
+    if (rotation_rate < 0.0f)
+        this->turret_rotation_rate = 0.0f;
     // 25 is an arbitrary limit. Values greater than 25.0 are nearly
     // instantaneous.
-    else if (rotation_rate > 25.0)
-        this->turret_rotation_rate = 25.0;
+    else if (rotation_rate > 25.0f)
+        this->turret_rotation_rate = 25.0f;
     else
         this->turret_rotation_rate = rotation_rate;
 }

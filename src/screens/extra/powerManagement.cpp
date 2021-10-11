@@ -78,7 +78,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         //Update the energy usage.
-        if (previous_energy_measurement == 0.0)
+        if (previous_energy_measurement == 0.0f)
         {
             previous_energy_level = my_spaceship->energy_level;
             previous_energy_measurement = engine->getElapsedTime();
@@ -88,7 +88,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
                 float delta_t = engine->getElapsedTime() - previous_energy_measurement;
                 float delta_e = my_spaceship->energy_level - previous_energy_level;
                 float delta_e_per_second = delta_e / delta_t;
-                average_energy_delta = average_energy_delta * 0.99 + delta_e_per_second * 0.01;
+                average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
 
                 previous_energy_level = my_spaceship->energy_level;
                 previous_energy_measurement = engine->getElapsedTime();
@@ -107,7 +107,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
             float heat = my_spaceship->systems[n].heat_level;
             float power = my_spaceship->systems[n].power_level;
             float coolant = my_spaceship->systems[n].coolant_level;
-            systems[n].heat_bar->setValue(heat)->setColor(glm::u8vec4(128, 128 * (1.0 - heat), 0, 255));
+            systems[n].heat_bar->setValue(heat)->setColor(glm::u8vec4(128, 128 * (1.0f - heat), 0, 255));
             systems[n].power_bar->setValue(power)->setColor(glm::u8vec4(255, 255, 0, 255));
             systems[n].coolant_bar->setValue(coolant)->setColor(glm::u8vec4(0, 128, 255, 255));
         }
@@ -212,12 +212,12 @@ bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
             {
                 ESystem system = ESystem(n);
                 if (axisAction.action == std::string("POWER_") + getSystemName(system)){
-                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.0 / 2.0);
+                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.0f / 2.0f);
                     my_spaceship->commandSetSystemPowerRequest(system, systems[n].power_slider->getValue());
                     return true;
                 }
                 if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
-                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0 / 2.0);
+                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0f / 2.0f);
                     my_spaceship->commandSetSystemCoolantRequest(system, systems[n].coolant_slider->getValue());
                     return true;
                 }
