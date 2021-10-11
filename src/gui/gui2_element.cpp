@@ -30,6 +30,14 @@ void GuiElement::onMouseUp(glm::vec2 position, int id)
 {
 }
 
+void GuiElement::onTextInput(const string& text)
+{
+}
+
+void GuiElement::onTextInput(sp::TextInputEvent e)
+{
+}
+
 bool GuiElement::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
     return false;

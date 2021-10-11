@@ -58,10 +58,14 @@ void GuiCanvas::onPointerUp(glm::vec2 position, int id)
 
 void GuiCanvas::onTextInput(const string& text)
 {
+    if (focus_element)
+        focus_element->onTextInput(text);
 }
 
 void GuiCanvas::onTextInput(sp::TextInputEvent e)
 {
+    if (focus_element)
+        focus_element->onTextInput(e);
 }
 
 void GuiCanvas::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)

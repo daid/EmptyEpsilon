@@ -23,52 +23,52 @@ bool GuiTextEntry::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
     return true;
 }
 
-bool GuiTextEntry::onKey(const SDL_KeyboardEvent& key, int unicode)
+void GuiTextEntry::onTextInput(const string& text)
 {
-    if (key.keysym.sym == SDLK_BACKSPACE && text.length() > 0)
+    this->text += text;
+    if (func)
     {
-        text = text.substr(0, -1);
-        if (func)
-        {
-            func_t f = func;
-            f(text);
-        }
-        return true;
+        func_t f = func;
+        f(text);
     }
-    if (key.keysym.sym == SDLK_RETURN)
+}
+
+void GuiTextEntry::onTextInput(sp::TextInputEvent e)
+{
+    switch(e)
     {
+    case sp::TextInputEvent::Backspace:
+        if (text.length() > 0)
+        {
+            text = text.substr(0, -1);
+            if (func)
+            {
+                func_t f = func;
+                f(text);
+            }
+        }
+        break;
+    case sp::TextInputEvent::Return:
         if (enter_func)
         {
             func_t f = enter_func;
             f(text);
         }
-        return true;
-    }
-    if (key.keysym.sym == SDLK_v && (key.keysym.mod & KMOD_CTRL))
-    {
-        for(int unicode : Clipboard::readClipboard())
-        {
-            if (unicode > 31 && unicode < 128)
-                text += string(char(unicode));
-        }
+        break;
+    case sp::TextInputEvent::Copy:
+        Clipboard::setClipboard(text);
+        break;
+    case sp::TextInputEvent::Paste:
+        text += Clipboard::readClipboard();
         if (func)
         {
             func_t f = func;
             f(text);
         }
-        return true;
+        break;
+    default:
+        break;
     }
-    if (unicode > 31 && unicode < 128)
-    {
-        text += string(char(unicode));
-        if (func)
-        {
-            func_t f = func;
-            f(text);
-        }
-        return true;
-    }
-    return true;
 }
 
 void GuiTextEntry::onFocusGained()
