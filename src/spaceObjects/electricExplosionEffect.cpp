@@ -83,7 +83,7 @@ void ElectricExplosionEffect::draw3DTransparent(const glm::mat4& object_view_mat
     float alpha = 0.5;
     if (f < 0.2f)
     {
-        scale = (f / 0.2f) * 0.8;
+        scale = (f / 0.2f) * 0.8f;
     }else{
         scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 0.8f, 1.0f);
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);

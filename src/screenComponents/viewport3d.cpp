@@ -187,10 +187,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     view_matrix = glm::mat4(1.0f);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
-    view_matrix = glm::rotate(view_matrix, 90.0f / 180.0f * float(M_PI), {1, 0, 0}); // -> X across (l-t-r), Y "towards", Z down 
+    view_matrix = glm::rotate(view_matrix, glm::radians(90.0f), {1, 0, 0}); // -> X across (l-t-r), Y "towards", Z down 
     view_matrix = glm::scale(view_matrix, {1,1,-1});  // -> X across (l-t-r), Y "towards", Z up
-    view_matrix = glm::rotate(view_matrix, -camera_pitch / 180.0f * float(M_PI), {1, 0, 0});
-    view_matrix = glm::rotate(view_matrix, -(camera_yaw + 90) / 180.0f * float(M_PI), {0, 0, 1});
+    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_pitch), {1, 0, 0});
+    view_matrix = glm::rotate(view_matrix, glm::radians(-(camera_yaw + 90)), {0, 0, 1});
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
@@ -239,8 +239,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     std::vector<std::vector<RenderInfo>> render_lists;
 
     auto viewVector = vec2FromAngle(camera_yaw);
-    float depth_cutoff_back = camera_position.z * -tanf((90+camera_pitch + camera_fov/2.f) / 180.f * M_PI);
-    float depth_cutoff_front = camera_position.z * -tanf((90+camera_pitch - camera_fov/2.f) / 180.f * M_PI);
+    float depth_cutoff_back = camera_position.z * -glm::degrees(tanf((90+camera_pitch + camera_fov/2.f)));
+    float depth_cutoff_front = camera_position.z * -glm::degrees(tanf((90+camera_pitch - camera_fov/2.f)));
     if (camera_pitch - camera_fov/2.f <= 0.f)
         depth_cutoff_front = std::numeric_limits<float>::infinity();
     if (camera_pitch + camera_fov/2.f >= 180.f)
@@ -252,7 +252,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             continue;
         if (depth - obj->getRadius() > depth_cutoff_front)
             continue;
-        if (depth > 0 && obj->getRadius() / depth < 1.0 / 500)
+        if (depth > 0 && obj->getRadius() / depth < 1.0f / 500)
             continue;
         int render_list_index = std::max(0, int((depth + obj->getRadius()) / 25000));
         while(render_list_index >= int(render_lists.size()))
@@ -450,9 +450,9 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 continue;
 
             glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
-            if (screen_position.z < 0)
+            if (screen_position.z < 0.0f)
                 continue;
-            if (screen_position.z > 10000.0)
+            if (screen_position.z > 10000.0f)
                 continue;
             float distance_factor = 1.0f - (screen_position.z / 10000.0f);
             renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), call_sign, sp::Alignment::Center, 20 * distance_factor, bold_font, glm::u8vec4(255, 255, 255, 128 * distance_factor));
