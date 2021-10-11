@@ -622,7 +622,7 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         float distance = glm::length(diff);
 
         //Formation flying code
-        float r = owner->getRadius() * 5.0;
+        float r = owner->getRadius() * 5.0f;
         owner->target_rotation = vec2ToAngle(diff);
         if (distance > r * 3)
         {
@@ -631,20 +631,20 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         else if (distance > r)
         {
             float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
-            if (angle_diff > 10.0)
-                owner->impulse_request = 0.0;
-            else if (angle_diff > 5.0)
-                owner->impulse_request = (10.0 - angle_diff) / 5.0;
+            if (angle_diff > 10.0f)
+                owner->impulse_request = 0.0f;
+            else if (angle_diff > 5.0f)
+                owner->impulse_request = (10.0f - angle_diff) / 5.0f;
             else
-                owner->impulse_request = 1.0;
+                owner->impulse_request = 1.0f;
         }else{
-            if (distance > r / 2.0)
+            if (distance > r / 2.0f)
             {
-                owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0 - distance / r);
+                owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0f - distance / r);
                 owner->impulse_request = distance / r;
             }else{
                 owner->target_rotation = target->getRotation();
-                owner->impulse_request = 0.0;
+                owner->impulse_request = 0.0f;
             }
         }
     }else{
@@ -783,7 +783,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         target_position += target->getVelocity() * fly_time;
 
         //If our "error" of hitting is less then double the radius of the target, fire.
-        if (std::abs(angle_diff) < 80.0 && target_distance * tanf(fabs(angle_diff) / 180.0f * M_PI) < target->getRadius() * 2.0)
+        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target->getRadius() * 2.0f)
             return fire_angle;
 
         return std::numeric_limits<float>::infinity();

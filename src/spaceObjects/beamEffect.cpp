@@ -175,12 +175,12 @@ void BeamEffect::setTarget(P<SpaceObject> target, glm::vec2 hitLocation)
     target_id = target->getMultiplayerId();
     float r = target->getRadius();
     hitLocation -= target->getPosition();
-    targetOffset = glm::vec3(hitLocation.x + random(-r/2.0, r/2.0), hitLocation.y + random(-r/2.0, r/2.0), random(-r/4.0, r/4.0));
+    targetOffset = glm::vec3(hitLocation.x + random(-r/2.0f, r/2.0f), hitLocation.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
 
     if (target->hasShield())
         targetOffset = glm::normalize(targetOffset) * r;
     else
-        targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0);
+        targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0f);
     update(0);
 
     glm::vec3 hitPos(targetLocation.x, targetLocation.y, targetOffset.z);

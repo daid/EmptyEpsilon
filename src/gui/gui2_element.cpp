@@ -233,7 +233,7 @@ void GuiElement::updateRect(sp::Rect parent_rect)
     case sp::Alignment::TopCenter:
     case sp::Alignment::Center:
     case sp::Alignment::BottomCenter:
-        rect.position.x = parent_rect.position.x + parent_rect.size.x * 0.5 + position.x - local_size.x * 0.5;
+        rect.position.x = parent_rect.position.x + parent_rect.size.x * 0.5f + position.x - local_size.x * 0.5f;
         break;
     case sp::Alignment::TopRight:
     case sp::Alignment::CenterRight:
@@ -252,7 +252,7 @@ void GuiElement::updateRect(sp::Rect parent_rect)
     case sp::Alignment::CenterLeft:
     case sp::Alignment::CenterRight:
     case sp::Alignment::Center:
-        rect.position.y = parent_rect.position.y + parent_rect.size.y / 2.0 + position.y - local_size.y / 2.0;
+        rect.position.y = parent_rect.position.y + parent_rect.size.y / 2.0f + position.y - local_size.y / 2.0f;
         break;
     case sp::Alignment::BottomLeft:
     case sp::Alignment::BottomRight:

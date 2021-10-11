@@ -19,12 +19,12 @@ void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
         float x;
         x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y, color);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, color);
     }else{
         float y;
         y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5, y + rect.size.x * 0.5), rect.size.x, color);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, color);
     }
 }
 
@@ -38,9 +38,9 @@ void GuiBasicSlider::onMouseDrag(glm::vec2 position, int id)
 {
     float new_value;
     if (rect.size.x > rect.size.y)
-        new_value = (position.x - rect.position.x - (rect.size.y / 2.0)) / (rect.size.x - rect.size.y);
+        new_value = (position.x - rect.position.x - (rect.size.y / 2.0f)) / (rect.size.x - rect.size.y);
     else
-        new_value = (position.y - rect.position.y - (rect.size.x / 2.0)) / (rect.size.y - rect.size.x);
+        new_value = (position.y - rect.position.y - (rect.size.x / 2.0f)) / (rect.size.y - rect.size.x);
     new_value = min_value + (max_value - min_value) * new_value;
     if (min_value < max_value)
     {
@@ -123,22 +123,22 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
         {
             x = rect.position.x + (rect.size.x - rect.size.y) * (point.value - min_value) / (max_value - min_value);
 
-            renderer.drawRotatedSprite("gui/widget/SliderTick.png", glm::vec2(x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y, 90, bg_color);
+            renderer.drawRotatedSprite("gui/widget/SliderTick.png", glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, 90, bg_color);
         }
         x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y, fg_color);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, fg_color);
     }else{
         float y;
         for(TSnapPoint& point : snap_points)
         {
             y = rect.position.y + (rect.size.y - rect.size.x) * (point.value - min_value) / (max_value - min_value);
 
-            renderer.drawSprite("gui/widget/SliderTick.png", glm::vec2(rect.position.x + rect.size.x * 0.5, y + rect.size.x * 0.5), rect.size.x, bg_color);
+            renderer.drawSprite("gui/widget/SliderTick.png", glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, bg_color);
         }
         y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5, y + rect.size.x * 0.5), rect.size.x, fg_color);
+        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, fg_color);
     }
 
     if (overlay_label)
@@ -157,9 +157,9 @@ void GuiSlider::onMouseDrag(glm::vec2 position, int id)
 {
     float new_value;
     if (rect.size.x > rect.size.y)
-        new_value = (position.x - rect.position.x - (rect.size.y / 2.0)) / (rect.size.x - rect.size.y);
+        new_value = (position.x - rect.position.x - (rect.size.y / 2.0f)) / (rect.size.x - rect.size.y);
     else
-        new_value = (position.y - rect.position.y - (rect.size.x / 2.0)) / (rect.size.y - rect.size.x);
+        new_value = (position.y - rect.position.y - (rect.size.x / 2.0f)) / (rect.size.y - rect.size.x);
     new_value = min_value + (max_value - min_value) * new_value;
     for(TSnapPoint& point : snap_points)
     {
@@ -229,8 +229,8 @@ void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 
     glm::u8vec4 color = selectColor(colorConfig.slider.forground);
 
-    float x = rect.position.x + (rect.size.x - 50.0) * (value.x - min_value.x) / (max_value.x - min_value.x);
-    float y = rect.position.y + (rect.size.y - 50.0) * (value.y - min_value.y) / (max_value.y - min_value.y);
+    float x = rect.position.x + (rect.size.x - 50.0f) * (value.x - min_value.x) / (max_value.x - min_value.x);
+    float y = rect.position.y + (rect.size.y - 50.0f) * (value.y - min_value.y) / (max_value.y - min_value.y);
 
     renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + 25, y + 25), 50, color);
 }

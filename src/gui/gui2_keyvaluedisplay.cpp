@@ -17,7 +17,7 @@ void GuiKeyValueDisplay::onDraw(sp::RenderTarget& renderer)
         renderer.drawText(sp::Rect(rect.position.x + rect.size.x * div_distance + div_size, rect.position.y, rect.size.x * (1.f - div_distance), rect.size.y), value, sp::Alignment::CenterLeft, text_size, bold_font);
         if (icon_texture != "")
         {
-            renderer.drawSprite(icon_texture, glm::vec2(rect.position.x + rect.size.y * 0.5, rect.position.y + rect.size.y * 0.5), rect.size.y * 0.8);
+            renderer.drawSprite(icon_texture, glm::vec2(rect.position.x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f);
         }
     }
     else

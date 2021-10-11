@@ -30,7 +30,7 @@ static inline glm::vec2 centerOfMass(const std::vector<glm::vec2>& path)
         p0 = p1;
     }
 
-    double area = polygonArea(path);
+    float area = polygonArea(path);
     x = x / 6 / area;
     y = y / 6 / area;
     return glm::vec2(x, y);

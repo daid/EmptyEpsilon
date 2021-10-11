@@ -47,9 +47,9 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
         if (dt.horizontal)
         {
             door->setHorizontal();
-            door->setPosition(glm::vec2(dt.position) * room_size - glm::vec2(0, room_size / 2.0));
+            door->setPosition(glm::vec2(dt.position) * room_size - glm::vec2(0, room_size / 2.0f));
         }else{
-            door->setPosition(glm::vec2(dt.position) * room_size - glm::vec2(room_size / 2.0, 0));
+            door->setPosition(glm::vec2(dt.position) * room_size - glm::vec2(room_size / 2.0f, 0));
         }
     }
     room_container->setSize(glm::vec2(max_size) * room_size);
@@ -170,7 +170,7 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
     float f = 1.0;
     if (ship && ship->hasSystem(system))
         f = std::max(0.0f, ship->systems[system].health);
-    renderer.drawStretchedHV(rect, rect.size.x * 0.25, "room_background", glm::u8vec4(255, 255 * f, 255 * f, 255));
+    renderer.drawStretchedHV(rect, rect.size.x * 0.25f, "room_background", glm::u8vec4(255, 255 * f, 255 * f, 255));
 
     if (system != SYS_None && ship && ship->hasSystem(system))
     {

@@ -207,7 +207,7 @@ void BeamWeapon::update(float delta)
         // We also only care if the target is within no more than its
         // range * 1.3, which is when we want to start rotating the turret.
         // TODO: Add a manual aim override similar to weapon tubes.
-        if (distance < range * 1.3)
+        if (distance < range * 1.3f)
         {
             float angle = vec2ToAngle(diff);
             float angle_diff = angleDifference(direction + parent->getRotation(), angle);
@@ -221,7 +221,7 @@ void BeamWeapon::update(float delta)
                 if (turret_rotation_rate > 0)
                 {
                     // ... and if the target is within the turret's arc ...
-                    if (fabsf(turret_angle_diff) < turret_arc / 2.0)
+                    if (fabsf(turret_angle_diff) < turret_arc / 2.0f)
                     {
                         // ... rotate the turret's beam toward the target.
                         if (fabsf(angle_diff) > 0)

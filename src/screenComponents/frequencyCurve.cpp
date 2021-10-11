@@ -27,15 +27,15 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                     f = frequencyVsFrequencyDamageFactor(n, frequency);
                 f = Tween<float>::linear(f, 0.5, 1.5, 0.1, 1.0);
                 float h = (rect.size.y - 50) * f;
-                sp::Rect bar_rect(x, rect.position.y + rect.size.y - 10 - h, w * 0.8, h);
+                sp::Rect bar_rect(x, rect.position.y + rect.size.y - 10 - h, w * 0.8f, h);
                 if (more_damage_is_positive)
-                    renderer.fillRect(bar_rect, glm::u8vec4(255 * (1.0 - f), 255 * f, 0, 255));
+                    renderer.fillRect(bar_rect, glm::u8vec4(255 * (1.0f - f), 255 * f, 0, 255));
                 else
-                    renderer.fillRect(bar_rect, glm::u8vec4(255 * f, 255 * (1.0 - f), 0, 255));
+                    renderer.fillRect(bar_rect, glm::u8vec4(255 * f, 255 * (1.0f - f), 0, 255));
 
                 if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
                 {
-                    renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", glm::vec2(x + w * 0.5, rect.position.y + rect.size.y - 20 - h), w, -90);
+                    renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", glm::vec2(x + w * 0.5f, rect.position.y + rect.size.y - 20 - h), w, -90);
                 }
             }
 

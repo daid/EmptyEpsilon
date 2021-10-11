@@ -47,7 +47,7 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 
     if (my_spaceship)
     {
-        if (my_spaceship->scanning_delay > 0.0 && my_spaceship->scanning_complexity > 0)
+        if (my_spaceship->scanning_delay > 0.0f && my_spaceship->scanning_complexity > 0)
         {
             if (!box->isVisible())
             {
@@ -84,7 +84,7 @@ bool GuiScanningDialog::onJoystickAxis(const AxisAction& axisAction){
         if (axisAction.category == "SCIENCE"){
             for(int n=0; n<max_sliders; n++) {
                 if (axisAction.action == std::string("SCAN_PARAM_") + string(n+1)){
-                    sliders[n]->setValue((axisAction.value + 1) / 2.0);
+                    sliders[n]->setValue((axisAction.value + 1) / 2.0f);
                     updateSignal();
                     return true;
                 }
@@ -112,7 +112,7 @@ void GuiScanningDialog::setupParameters()
     {
         target[n] = random(0.0, 1.0);
         sliders[n]->setValue(random(0.0, 1.0));
-        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2)
+        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2f)
             sliders[n]->setValue(random(0.0, 1.0));
     }
     updateSignal();

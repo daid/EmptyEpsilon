@@ -448,7 +448,7 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
         {
             // Draw beam arcs only if the beam has a range. A beam with range 0
             // effectively doesn't exist; exit if that's the case.
-            if (beam_weapons[n].getRange() == 0.0) continue;
+            if (beam_weapons[n].getRange() == 0.0f) continue;
 
             // If the beam is cooling down, flash and fade the arc color.
             glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, beam_weapons[n].getCooldown()), 0, beam_weapons[n].getCycleTime(), beam_weapons[n].getArcColor(), beam_weapons[n].getArcFireColor());
@@ -495,7 +495,7 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             }
 
             // If the beam is turreted, draw the turret's arc. Otherwise, exit.
-            if (beam_weapons[n].getTurretArc() == 0.0)
+            if (beam_weapons[n].getTurretArc() == 0.0f)
                 continue;
 
             // Initialize variables from the turret data.
@@ -591,7 +591,7 @@ void SpaceShip::update(float delta)
                 docking_state = DS_NotDocking;
             else
                 target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
-            if (fabs(angleDifference(target_rotation, getRotation())) < 10.0)
+            if (fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
                 impulse_request = -1.0;
             else
                 impulse_request = 0.0;
@@ -719,7 +719,7 @@ void SpaceShip::update(float delta)
                 if (jump_drive_charge < jump_drive_max_distance)
                 {
                     float extra_charge = (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
-                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge / 1000.0))
+                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge / 1000.0f))
                     {
                         jump_drive_charge += extra_charge;
                         if (jump_drive_charge >= jump_drive_max_distance)
@@ -733,10 +733,10 @@ void SpaceShip::update(float delta)
             }
         }
         current_warp = 0.0;
-        if (impulse_request > 1.0)
-            impulse_request = 1.0;
-        if (impulse_request < -1.0)
-            impulse_request = -1.0;
+        if (impulse_request > 1.0f)
+            impulse_request = 1.0f;
+        if (impulse_request < -1.0f)
+            impulse_request = -1.0f;
         if (current_impulse < impulse_request)
         {
             if (cap_speed > 0)
@@ -785,29 +785,29 @@ void SpaceShip::update(float delta)
     }
 
     // If the ship is making a combat maneuver ...
-    if (combat_maneuver_boost_active != 0.0 || combat_maneuver_strafe_active != 0.0)
+    if (combat_maneuver_boost_active != 0.0f || combat_maneuver_strafe_active != 0.0f)
     {
         // ... consume its combat maneuver boost.
         combat_maneuver_charge -= fabs(combat_maneuver_boost_active) * delta / combat_maneuver_boost_max_time;
         combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
 
         // Use boost only if we have boost available.
-        if (combat_maneuver_charge <= 0.0)
+        if (combat_maneuver_charge <= 0.0f)
         {
-            combat_maneuver_charge = 0.0;
-            combat_maneuver_boost_request = 0.0;
-            combat_maneuver_strafe_request = 0.0;
+            combat_maneuver_charge = 0.0f;
+            combat_maneuver_boost_request = 0.0f;
+            combat_maneuver_strafe_request = 0.0f;
         }else
         {
             setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             setVelocity(getVelocity() + vec2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
     // If the ship isn't making a combat maneuver, recharge its boost.
-    }else if (combat_maneuver_charge < 1.0)
+    }else if (combat_maneuver_charge < 1.0f)
     {
-        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * (getSystemEffectiveness(SYS_Maneuver) + getSystemEffectiveness(SYS_Impulse)) / 2.0;
-        if (combat_maneuver_charge > 1.0)
-            combat_maneuver_charge = 1.0;
+        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * (getSystemEffectiveness(SYS_Maneuver) + getSystemEffectiveness(SYS_Impulse)) / 2.0f;
+        if (combat_maneuver_charge > 1.0f)
+            combat_maneuver_charge = 1.0f;
     }
 
     // Add heat to systems consuming combat maneuver boost.
@@ -845,7 +845,7 @@ float SpaceShip::getShieldRechargeRate(int shield_index)
     {
         P<SpaceShip> docked_with_ship = docking_target;
         if (!docked_with_ship)
-            rate *= 4.0;
+            rate *= 4.0f;
     }
     return rate;
 }
@@ -860,10 +860,10 @@ P<SpaceObject> SpaceShip::getTarget()
 void SpaceShip::executeJump(float distance)
 {
     float f = systems[SYS_JumpDrive].health;
-    if (f <= 0.0)
+    if (f <= 0.0f)
         return;
 
-    distance = (distance * f) + (distance * (1.0 - f) * random(0.5, 1.5));
+    distance = (distance * f) + (distance * (1.0f - f) * random(0.5, 1.5));
     auto target_position = getPosition() + vec2FromAngle(getRotation()) * distance;
     target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
     setPosition(target_position);
@@ -883,7 +883,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 
 void SpaceShip::collide(Collisionable* other, float force)
 {
-    if (docking_state == DS_Docking && fabs(angleDifference(target_rotation, getRotation())) < 10.0)
+    if (docking_state == DS_Docking && fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
     {
         P<SpaceObject> dock_object = P<Collisionable>(other);
         if (dock_object == docking_target)
@@ -902,7 +902,7 @@ void SpaceShip::initializeJump(float distance)
         return;
     if (jump_drive_charge < jump_drive_max_distance) // You can only jump when the drive is fully charged
         return;
-    if (jump_delay <= 0.0)
+    if (jump_delay <= 0.0f)
     {
         jump_distance = distance;
         jump_delay = 10.0;
@@ -926,7 +926,7 @@ void SpaceShip::requestDock(P<SpaceObject> target)
 
 void SpaceShip::requestUndock()
 {
-    if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1)
+    if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1f)
     {
         docking_state = DS_NotDocking;
         impulse_request = 0.5;
@@ -1100,9 +1100,9 @@ float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 
     //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
     // This also greatly reduces the ineffectiveness at low power situations.
-    float shield_damage_exponent = 1.6;
-    float shield_damage_divider = 7.0;
-    float shield_damage_factor = 1.0 + powf(1.0, shield_damage_exponent) / shield_damage_divider-powf(getSystemEffectiveness(system), shield_damage_exponent) / shield_damage_divider;
+    float shield_damage_exponent = 1.6f;
+    float shield_damage_divider = 7.0f;
+    float shield_damage_factor = 1.0f + powf(1.0f, shield_damage_exponent) / shield_damage_divider-powf(getSystemEffectiveness(system), shield_damage_exponent) / shield_damage_divider;
 
     return shield_damage_factor * frequency_damage_factor;
 }
@@ -1167,7 +1167,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 void SpaceShip::destroyedByDamage(DamageInfo& info)
 {
     ExplosionEffect* e = new ExplosionEffect();
-    e->setSize(getRadius() * 1.5);
+    e->setSize(getRadius() * 1.5f);
     e->setPosition(getPosition());
     e->setRadarSignatureInfo(0.0, 0.2, 0.2);
 
@@ -1543,7 +1543,7 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
         return 1.0;
 
     float diff = abs(beam_frequency - shield_frequency);
-    float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, M_PI * (1.2 + shield_frequency * 0.05)) + M_PI / 2);
+    float f1 = sinf(Tween<float>::linear(diff, 0, SpaceShip::max_frequency, 0, float(M_PI) * (1.2f + shield_frequency * 0.05f)) + float(M_PI) / 2.0f);
     f1 = f1 * Tween<float>::easeInCubic(diff, 0, SpaceShip::max_frequency, 1.0, 0.1);
     f1 = Tween<float>::linear(f1, 1.0, -1.0, 0.5, 1.5);
     return f1;

@@ -242,7 +242,7 @@ void GuiRadarView::updateGhostDots()
 {
     if (next_ghost_dot_update < engine->getElapsedTime())
     {
-        next_ghost_dot_update = engine->getElapsedTime() + 5.0;
+        next_ghost_dot_update = engine->getElapsedTime() + 5.0f;
         foreach(SpaceObject, obj, space_object_list)
         {
             P<SpaceShip> ship = obj;
@@ -383,7 +383,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
                 renderer.fillCircle(worldToScreen(n->getPosition()), r, glm::u8vec4(0, 0, 0, 255));
 
                 float diff_angle = vec2ToAngle(diff);
-                float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
+                float angle = glm::degrees(acosf(n->getRadius() / diff_len));
 
                 auto pos_a = n->getPosition() - vec2FromAngle(diff_angle + angle) * n->getRadius();
                 auto pos_b = n->getPosition() - vec2FromAngle(diff_angle - angle) * n->getRadius();
@@ -482,7 +482,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
             }
 
             float angle_diff = angleDifference(missile_target_angle, fire_angle);
-            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
+            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
             if (data.turnrate == 0.0f)
                 turn_radius = 0.0f;
 
@@ -493,7 +493,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
             auto turn_center = vec2FromAngle(fire_angle + left_or_right) * turn_radius;
             auto turn_exit = turn_center + vec2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
-            float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * M_PI);
+            float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * float(M_PI));
             float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
             float length_after_turn = data.speed * lifetime_after_turn;
 

@@ -221,15 +221,15 @@ void HardwareController::update(float delta)
                 switch(event.compare_operator)
                 {
                 case HardwareMappingEvent::Change:
-                    if (fabs(event.previous_value - value) > 0.1)
+                    if (fabs(event.previous_value - value) > 0.1f)
                         trigger = true;
                     break;
                 case HardwareMappingEvent::Increase:
-                    if (value > event.previous_value + 0.1)
+                    if (value > event.previous_value + 0.1f)
                         trigger = true;
                     break;
                 case HardwareMappingEvent::Decrease:
-                    if (value < event.previous_value - 0.1)
+                    if (value < event.previous_value - 0.1f)
                         trigger = true;
                     break;
                 }
@@ -398,7 +398,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     for(int n=0; n<SYS_COUNT; n++)
     {
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Health", ship->systems[n].health);
-        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Power", ship->systems[n].power_level / 3.0);
+        SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Power", ship->systems[n].power_level / 3.0f);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Heat", ship->systems[n].heat_level);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Coolant", ship->systems[n].coolant_level);
         SHIP_VARIABLE(getSystemName(ESystem(n)).replace(" ", "") + "Hacked", ship->systems[n].hacked_level);

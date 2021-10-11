@@ -34,15 +34,15 @@ void GuiButton::onDraw(sp::RenderTarget& renderer)
         case sp::Alignment::CenterLeft:
         case sp::Alignment::TopLeft:
         case sp::Alignment::BottomLeft:
-            icon_x = rect.position.x + rect.size.y * 0.5;
+            icon_x = rect.position.x + rect.size.y * 0.5f;
             text_rect.position.x = rect.position.x + rect.size.y;
             break;
         default:
-            icon_x = rect.position.x + rect.size.x - rect.size.y * 0.5;
+            icon_x = rect.position.x + rect.size.x - rect.size.y * 0.5f;
             text_rect.size.x = rect.size.x - rect.size.y;
             text_align = sp::Alignment::CenterRight;
         }
-        renderer.drawSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5), rect.size.y * 0.8, text_color);
+        renderer.drawSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, text_color);
         renderer.drawText(text_rect, text, text_align, text_size, main_font, text_color);
     }else{
         renderer.drawText(rect, text, sp::Alignment::Center, text_size, main_font, text_color);

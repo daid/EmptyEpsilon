@@ -77,8 +77,8 @@ void Asteroid::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float
         setRadius(size);
 
     float size = getRadius() * scale / 64.0f;
-    if (size < 0.2)
-        size = 0.2;
+    if (size < 0.2f)
+        size = 0.2f;
     renderer.drawSprite("radar/blip.png", position, size * 32.0f, glm::u8vec4(255, 200, 100, 255));
 }
 

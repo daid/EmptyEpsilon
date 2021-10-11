@@ -37,7 +37,7 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->combat_maneuver_boost_speed <= 0.0 && my_spaceship->combat_maneuver_strafe_speed <= 0.0)
+        if (my_spaceship->combat_maneuver_boost_speed <= 0.0f && my_spaceship->combat_maneuver_strafe_speed <= 0.0f)
         {
             charge_bar->hide();
             slider->hide();

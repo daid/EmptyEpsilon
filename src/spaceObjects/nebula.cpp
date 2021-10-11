@@ -73,8 +73,8 @@ void Nebula::draw3DTransparent(const glm::mat4& object_view_matrix)
         float size = cloud.size;
 
         float distance = glm::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+        float alpha = 1.0f - (distance / 10000.0f);
+        if (alpha < 0.0f)
             continue;
 
         // setup our quad.
@@ -97,7 +97,7 @@ void Nebula::draw3DTransparent(const glm::mat4& object_view_matrix)
 
 void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0, getRotation()-rotation);
+    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0f, getRotation()-rotation);
 }
 
 void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -149,7 +149,7 @@ glm::vec2 Nebula::getFirstBlockedPosition(glm::vec2 start, glm::vec2 end)
     foreach(Nebula, n, nebula_list)
     {
         float f = glm::dot(startEndDiff, n->getPosition() - start) / startEndLength;
-        if (f < 0.0)
+        if (f < 0.0f)
             f = 0;
         glm::vec2 q = start + startEndDiff / startEndLength * f;
         if (glm::length2(q - n->getPosition()) < n->getRadius() * n->getRadius())

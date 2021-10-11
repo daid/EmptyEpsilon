@@ -123,7 +123,7 @@ void ScanProbe::update(float delta)
     // Tick down lifetime until expiration, then destroy the probe.
     lifetime -= delta;
 
-    if (lifetime <= 0.0)
+    if (lifetime <= 0.0f)
     {
         // Fire the onExpiration callback, if set.
         if (on_expiration.isSet())

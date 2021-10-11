@@ -58,7 +58,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
 void StreamingAcnDMXDevice::setChannelData(int channel, float value)
 {
     if (channel >= 0 && channel < channel_count)
-        channel_data[channel] = int((value * 255.0) + 0.5);
+        channel_data[channel] = int((value * 255.0f) + 0.5f);
 }
 
 //Return the number of output channels supported by this device.

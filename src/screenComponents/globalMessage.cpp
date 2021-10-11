@@ -17,7 +17,7 @@ GuiGlobalMessage::GuiGlobalMessage(GuiContainer* owner)
 
 void GuiGlobalMessage::onDraw(sp::RenderTarget& target)
 {
-    if (gameGlobalInfo->global_message_timeout > 0.0)
+    if (gameGlobalInfo->global_message_timeout > 0.0f)
     {
         box->show();
         label->setText(gameGlobalInfo->global_message);

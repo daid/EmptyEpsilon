@@ -72,7 +72,7 @@ void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 
 void BlackHole::collide(Collisionable* target, float collision_force)
 {
-    if (update_delta == 0.0)
+    if (update_delta == 0.0f)
         return;
 
     P<SpaceObject> obj = P<Collisionable>(target);
@@ -83,9 +83,9 @@ void BlackHole::collide(Collisionable* target, float collision_force)
     float distance = glm::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
     DamageInfo info(NULL, DT_Kinetic, getPosition());
-    if (force > 10000.0)
+    if (force > 10000.0f)
     {
-        force = 10000.0;
+        force = 10000.0f;
         if (isServer())
         {
             obj->takeDamage(100000.0, info); //try to destroy the object by inflicting a huge amount of damage
@@ -96,7 +96,7 @@ void BlackHole::collide(Collisionable* target, float collision_force)
             }
         }
     }
-    if (force > 100.0 && isServer())
+    if (force > 100.0f && isServer())
     {
         obj->takeDamage(force * update_delta / 10.0f, info);
     }

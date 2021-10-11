@@ -100,7 +100,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
     if (game->isGameComplete())
     {
-        if (reset_time - engine->getElapsedTime() < 0.0)
+        if (reset_time - engine->getElapsedTime() < 0.0f)
         {
             if (my_spaceship && last_game_success)
             {
