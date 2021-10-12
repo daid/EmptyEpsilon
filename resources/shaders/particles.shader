@@ -1,4 +1,4 @@
-#version 120
+[vertex]
 
 // Constants
 
@@ -25,4 +25,17 @@ void main()
     gl_Position = projection * (viewspace_center + viewspace_halfextents);
     fragtexcoords = texcoords;
     fragcolor = color;
+}
+
+[fragment]
+
+// Program inputs
+uniform samplerCube starbox;
+
+// Per-fragment inputs.
+varying vec3 texcoords;
+
+void main()
+{
+    gl_FragColor = textureCube(starbox, texcoords);
 }
