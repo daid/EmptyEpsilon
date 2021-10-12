@@ -239,8 +239,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     std::vector<std::vector<RenderInfo>> render_lists;
 
     auto viewVector = vec2FromAngle(camera_yaw);
-    float depth_cutoff_back = camera_position.z * -glm::degrees(tanf((90+camera_pitch + camera_fov/2.f)));
-    float depth_cutoff_front = camera_position.z * -glm::degrees(tanf((90+camera_pitch - camera_fov/2.f)));
+    float depth_cutoff_back = camera_position.z * -tanf(glm::radians(90+camera_pitch + camera_fov/2.f));
+    float depth_cutoff_front = camera_position.z * -tanf(glm::radians(90+camera_pitch - camera_fov/2.f));
     if (camera_pitch - camera_fov/2.f <= 0.f)
         depth_cutoff_front = std::numeric_limits<float>::infinity();
     if (camera_pitch + camera_fov/2.f >= 180.f)
