@@ -229,7 +229,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         return;
 
     float view_distance = science_radar->getDistance();
-    float mouse_wheel_delta=InputHandler::getMouseWheelDelta();
+    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta!=0)
     {
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));

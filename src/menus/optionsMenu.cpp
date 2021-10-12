@@ -239,18 +239,12 @@ OptionsMenu::OptionsMenu()
     }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
 }
 
-void OptionsMenu::onKey(const SDL_KeyboardEvent& key, int unicode)
+void OptionsMenu::update(float delta)
 {
-    switch(key.keysym.sym)
+    if (keys.escape.getDown())
     {
-    //TODO: This is more generic code and is duplicated.
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
         destroy();
         soundManager->stopMusic();
         returnToMainMenu();
-        break;
-    default:
-        break;
     }
 }

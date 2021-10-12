@@ -59,7 +59,7 @@ void TopDownScreen::update(float delta)
     }
 
     // Enable mouse wheel zoom.
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
+    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
         camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 0.1f);
@@ -69,36 +69,7 @@ void TopDownScreen::update(float delta)
             camera_position.z = 1000;
     }
 
-    // Add and remove entries from the player ship list.
-    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
-    {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
-        if (ship)
-        {
-            if (camera_lock_selector->indexByValue(string(n)) == -1)
-                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
-        }else{
-            if (camera_lock_selector->indexByValue(string(n)) != -1)
-                camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
-        }
-    }
-
-    // Enforce a top-down view with up pointing toward heading 0.
-    camera_yaw = -90.0f;
-    camera_pitch = 90.0f;
-
-    // If locked onto a player ship, move the camera along with it.
-    if (camera_lock_toggle->getValue() && target)
-    {
-        auto target_position = target->getPosition();
-
-        camera_position.x = target_position.x;
-        camera_position.y = target_position.y;
-    }
-}
-
-void TopDownScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
+    /* TODO hotkeys
     switch(key.keysym.sym)
     {
     // Toggle UI visibility with the H key.
@@ -146,32 +117,42 @@ void TopDownScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
         if (!camera_lock_toggle->getValue())
             camera_position.x = camera_position.x + (50 * (camera_position.z / 1000));
         break;
-    // Zoom the camera in and out with the R and F keys.
-    case SDLK_r:
-        if (camera_position.z > 1000.0f)
-            camera_position.z -= 100.0f;
-        else
-            camera_position.z = 1000.0f;
-        break;
-    case SDLK_f:
-        if (camera_position.z < 10000.0f)
-            camera_position.z += 100.0f;
-        else
-            camera_position.z = 10000.0f;
-        break;
-    // TODO: This is more generic code and is duplicated.
-    // Exit the screen with the escape or home keys.
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
+    */
+    if (keys.escape.getDown())
+    {
         destroy();
         returnToShipSelection();
-        break;
-    // If this is the server, pause the game with the P key.
-    case SDLK_p:
+    }
+    if (keys.pause.getDown())
+    {
         if (game_server)
             engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
+    }
+
+    // Add and remove entries from the player ship list.
+    for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
+    {
+        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        if (ship)
+        {
+            if (camera_lock_selector->indexByValue(string(n)) == -1)
+                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+        }else{
+            if (camera_lock_selector->indexByValue(string(n)) != -1)
+                camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
+        }
+    }
+
+    // Enforce a top-down view with up pointing toward heading 0.
+    camera_yaw = -90.0f;
+    camera_pitch = 90.0f;
+
+    // If locked onto a player ship, move the camera along with it.
+    if (camera_lock_toggle->getValue() && target)
+    {
+        auto target_position = target->getPosition();
+
+        camera_position.x = target_position.x;
+        camera_position.y = target_position.y;
     }
 }

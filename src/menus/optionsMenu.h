@@ -8,7 +8,7 @@ class GuiSelector;
 class GuiSlider;
 class GuiLabel;
 
-class OptionsMenu : public GuiCanvas
+class OptionsMenu : public GuiCanvas, public Updatable
 {
 private:
     GuiAutoLayout* left_container;
@@ -28,6 +28,6 @@ private:
 public:
     OptionsMenu();
 
-    void onKey(const SDL_KeyboardEvent& key, int unicode);
+    virtual void update(float delta) override;
 };
 #endif//OPTIONS_MENU_H

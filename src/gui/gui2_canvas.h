@@ -29,7 +29,6 @@ public:
     virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
 
     virtual void onHotkey(const HotkeyResult& key);
-    virtual void onKey(const SDL_KeyboardEvent& key, int unicode);
 
     void focus(GuiElement* element);
     //Called when an element is destroyed in this tree. Recursive tests if the given element or any of it's children currently has focus, and unsets that focus.

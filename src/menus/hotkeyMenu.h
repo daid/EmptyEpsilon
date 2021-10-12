@@ -17,7 +17,7 @@ class GuiPanel;
 class GuiScrollText;
 class GuiHotkeyBinder;
 
-class HotkeyMenu : public GuiCanvas
+class HotkeyMenu : public GuiCanvas, public Updatable
 {
 private:
     const int ROW_HEIGHT = 50;
@@ -56,7 +56,7 @@ private:
 public:
     HotkeyMenu();
 
-    void onKey(const SDL_KeyboardEvent& key, int unicode);
+    virtual void update(float delta) override;
 };
 
 #endif //HOTKEYMENU_H

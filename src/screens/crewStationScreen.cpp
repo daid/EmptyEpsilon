@@ -165,6 +165,24 @@ void CrewStationScreen::update(float delta)
         return;
     }
 
+    if (keys.escape.getDown())
+    {
+        destroy();
+        soundManager->stopMusic();
+        impulse_sound->stop();
+        returnToShipSelection();
+    }
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
+    }
+
     if (viewport)
     {
         // Responsively show/hide the 3D viewport.
@@ -226,32 +244,6 @@ void CrewStationScreen::onHotkey(const HotkeyResult& key)
             showTab(findTab(getCrewPositionName(scienceOfficer)));
         else if (key.hotkey == "STATION_RELAY")
             showTab(findTab(getCrewPositionName(relayOfficer)));
-    }
-}
-
-void CrewStationScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    switch(key.keysym.sym)
-    {
-    //TODO: This is more generic code and is duplicated.
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
-        destroy();
-        soundManager->stopMusic();
-        impulse_sound->stop();
-        returnToShipSelection();
-        break;
-    case SDLK_SLASH:
-    case SDLK_F1:
-        // Toggle keyboard help.
-        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
-        break;
-    case SDLK_p:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
     }
 }
 

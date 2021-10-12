@@ -38,11 +38,6 @@ void GuiElement::onTextInput(sp::TextInputEvent e)
 {
 }
 
-bool GuiElement::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    return false;
-}
-
 void GuiElement::onHotkey(const HotkeyResult& key)
 {
 }

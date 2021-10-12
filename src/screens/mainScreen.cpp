@@ -76,6 +76,24 @@ void ScreenMainScreen::destroy()
 
 void ScreenMainScreen::update(float delta)
 {
+    if (keys.escape.getDown())
+    {
+        soundManager->stopMusic();
+        impulse_sound->stop();
+        destroy();
+        returnToShipSelection();
+    }
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
+    }
+
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         soundManager->stopMusic();
@@ -207,31 +225,5 @@ void ScreenMainScreen::onHotkey(const HotkeyResult& key)
             my_spaceship->commandMainScreenSetting(MSS_LongRange);
         else if (key.hotkey == "FIRST_PERSON")
             viewport->first_person = !viewport->first_person;
-    }
-}
-
-void ScreenMainScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    switch (key.keysym.sym)
-    {
-    //TODO: This is more generic code and is duplicated.
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
-        soundManager->stopMusic();
-        impulse_sound->stop();
-        destroy();
-        returnToShipSelection();
-        break;
-    case SDLK_SLASH:
-    case SDLK_F1:
-        // Toggle keyboard help.
-        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
-        break;
-    case SDLK_p:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
     }
 }

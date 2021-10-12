@@ -58,6 +58,52 @@ void CinematicViewScreen::update(float delta)
         return;
     }
 
+    /* TODO hotkeys
+    switch(key.keysym.sym)
+    {
+    // Toggle UI visibility with the H key.
+    case SDLK_h:
+        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
+        {
+            camera_lock_toggle->hide();
+            camera_lock_selector->hide();
+            camera_lock_tot_toggle->hide();
+        }else{
+            camera_lock_toggle->show();
+            camera_lock_selector->show();
+        }
+        break;
+    // Toggle camera lock with the L key.
+    case SDLK_l:
+        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+        break;
+    // Cycle through player ships with the J and K keys.
+    case SDLK_j:
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
+        if (camera_lock_selector->getSelectionIndex() < 0)
+            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        break;
+    case SDLK_k:
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
+        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
+            camera_lock_selector->setSelectionIndex(0);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        break;
+    // TODO: X resets the camera to a default relative position and heading.
+    */
+    if (keys.escape.getDown())
+    {
+        destroy();
+        returnToShipSelection();
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
+    }
+
+    /* TODO hotkeys
     // TODO: Add mouselook.
     if (InputHandler::keyboardIsDown(SDLK_w))
     {
@@ -95,6 +141,7 @@ void CinematicViewScreen::update(float delta)
         camera_pitch -= delta * 50.0f;
     if (InputHandler::keyboardIsDown(SDLK_DOWN))
         camera_pitch += delta * 50.0f;
+    */
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.
@@ -220,56 +267,5 @@ void CinematicViewScreen::update(float delta)
     } else {
         // Hide the target-of-target camera lock button.
         camera_lock_tot_toggle->hide();
-    }
-}
-
-void CinematicViewScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    switch(key.keysym.sym)
-    {
-    // Toggle UI visibility with the H key.
-    case SDLK_h:
-        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
-        {
-            camera_lock_toggle->hide();
-            camera_lock_selector->hide();
-            camera_lock_tot_toggle->hide();
-        }else{
-            camera_lock_toggle->show();
-            camera_lock_selector->show();
-        }
-        break;
-    // Toggle camera lock with the L key.
-    case SDLK_l:
-        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
-        break;
-    // Cycle through player ships with the J and K keys.
-    case SDLK_j:
-        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
-        if (camera_lock_selector->getSelectionIndex() < 0)
-            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    case SDLK_k:
-        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
-        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
-            camera_lock_selector->setSelectionIndex(0);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    // TODO: X resets the camera to a default relative position and heading.
-    // TODO: This is more generic code and is duplicated.
-    // Exit the screen with the escape or home keys.
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
-        destroy();
-        returnToShipSelection();
-        break;
-    // If this is the server, pause the game with the P key.
-    case SDLK_p:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
     }
 }

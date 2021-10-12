@@ -197,7 +197,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
+    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));

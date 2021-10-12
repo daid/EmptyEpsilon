@@ -18,7 +18,7 @@ void GuiHotkeyBinder::onFocusLost()
     SDL_StopTextInput();
     has_focus = false;
 }
-
+/* TODO keybinds
 bool GuiHotkeyBinder::onKey(const SDL_KeyboardEvent& key, int unicode)
 {
     // If the field has focus and any known key is pressed ...
@@ -44,3 +44,4 @@ bool GuiHotkeyBinder::onKey(const SDL_KeyboardEvent& key, int unicode)
 
     return false;
 }
+*/

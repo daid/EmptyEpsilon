@@ -108,6 +108,8 @@ void TutorialGame::createScreens()
 
 void TutorialGame::update(float delta)
 {
+    if (keys.escape.getDown())
+        finish();
     if (my_spaceship)
     {
         float target_camera_yaw = my_spaceship->getRotation();
@@ -127,19 +129,6 @@ void TutorialGame::update(float delta)
 
         camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
         camera_yaw += angleDifference(camera_yaw, target_camera_yaw) * 0.1f;
-    }
-}
-
-void TutorialGame::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    switch(key.keysym.sym)
-    {
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
-        finish();
-        break;
-    default:
-        break;
     }
 }
 

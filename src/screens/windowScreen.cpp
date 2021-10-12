@@ -27,6 +27,19 @@ WindowScreen::WindowScreen(float angle, uint8_t flags)
 
 void WindowScreen::update(float delta)
 {
+    angle += (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+
+    if (keys.escape.getDown())
+    {
+        destroy();
+        returnToShipSelection();
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
+    }
+
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {
         destroy();
@@ -45,31 +58,5 @@ void WindowScreen::update(float delta)
         camera_position.x = position.x;
         camera_position.y = position.y;
         camera_position.z = 0.0;
-    }
-}
-
-void WindowScreen::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    switch(key.keysym.sym)
-    {
-    case SDLK_LEFT:
-        angle -= 5.0f;
-        break;
-    case SDLK_RIGHT:
-        angle += 5.0f;
-        break;
-
-    //TODO: This is more generic code and is duplicated.
-    case SDLK_ESCAPE:
-    case SDLK_HOME:
-        destroy();
-        returnToShipSelection();
-        break;
-    case SDLK_p:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
     }
 }

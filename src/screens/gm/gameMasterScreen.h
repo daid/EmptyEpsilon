@@ -85,8 +85,6 @@ public:
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
 
-    virtual void onKey(const SDL_KeyboardEvent& key, int unicode);
-
     PVector<SpaceObject> getSelection();
 
     string getScriptExport(bool selected_only);

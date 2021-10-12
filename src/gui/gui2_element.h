@@ -42,7 +42,6 @@ public:
     virtual void onMouseUp(glm::vec2 position, int id);
     virtual void onTextInput(const string& text);
     virtual void onTextInput(sp::TextInputEvent e);
-    virtual bool onKey(const SDL_KeyboardEvent& key, int unicode);
     virtual void onHotkey(const HotkeyResult& key);
     virtual bool onJoystickAxis(const AxisAction& axisAction);
     virtual void onFocusGained() {}

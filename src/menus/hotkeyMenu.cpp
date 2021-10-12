@@ -80,18 +80,12 @@ HotkeyMenu::HotkeyMenu()
     }))->setPosition(150, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 }
 
-void HotkeyMenu::onKey(const SDL_KeyboardEvent& key, int unicode)
+void HotkeyMenu::update(float delta)
 {
-    switch(key.keysym.sym)
+    if (keys.escape.getDown())
     {
-        //TODO: This is more generic code and is duplicated.
-        case SDLK_ESCAPE:
-        case SDLK_HOME:
-            destroy();
-            returnToOptionMenu();
-            break;
-        default:
-            break;
+        destroy();
+        returnToOptionMenu();
     }
 }
 
