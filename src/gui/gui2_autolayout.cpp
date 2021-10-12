@@ -9,7 +9,7 @@ void GuiAutoLayout::onDraw(sp::RenderTarget& target)
 {
 }
 
-void GuiAutoLayout::drawElements(sp::Rect parent_rect, sp::RenderTarget& renderer)
+void GuiAutoLayout::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
     glm::vec2 offset(0, 0);
     glm::vec2 scale(0, 0);
@@ -50,7 +50,7 @@ void GuiAutoLayout::drawElements(sp::Rect parent_rect, sp::RenderTarget& rendere
                 }
             }
         }
-        GuiContainer::drawElements(parent_rect, renderer);
+        GuiContainer::drawElements(mouse_position, parent_rect, renderer);
         return;
     case LayoutVerticalColumns:
         {
@@ -70,7 +70,7 @@ void GuiAutoLayout::drawElements(sp::Rect parent_rect, sp::RenderTarget& rendere
                 }
             }
         }
-        GuiContainer::drawElements(parent_rect, renderer);
+        GuiContainer::drawElements(mouse_position, parent_rect, renderer);
         return;
     }
     for(GuiElement* element : elements)
@@ -82,5 +82,5 @@ void GuiAutoLayout::drawElements(sp::Rect parent_rect, sp::RenderTarget& rendere
             offset.y += element->getSize().y * scale.y;
         }
     }
-    GuiContainer::drawElements(parent_rect, renderer);
+    GuiContainer::drawElements(mouse_position, parent_rect, renderer);
 }

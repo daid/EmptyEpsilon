@@ -44,7 +44,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             if (my_spaceship)
             {
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - glm::vec2(0, 50))->show();
+                auto draw_position = rect.center() + position / my_spaceship->getShortRangeRadarRange() * std::min(rect.size.x, rect.size.y) * 0.5f;
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
@@ -52,7 +53,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             if (my_spaceship)
             {
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - rect.position - glm::vec2(0, 50))->show();
+                auto draw_position = rect.center() + position / my_spaceship->getShortRangeRadarRange() * std::min(rect.size.x, rect.size.y) * 0.5f;
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },

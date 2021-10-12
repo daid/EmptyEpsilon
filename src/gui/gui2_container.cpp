@@ -12,9 +12,8 @@ GuiContainer::~GuiContainer()
     }
 }
 
-void GuiContainer::drawElements(sp::Rect parent_rect, sp::RenderTarget& renderer)
+void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    auto mouse_position = InputHandler::getMousePos();
     for(auto it = elements.begin(); it != elements.end(); )
     {
         GuiElement* element = *it;
@@ -39,7 +38,7 @@ void GuiContainer::drawElements(sp::Rect parent_rect, sp::RenderTarget& renderer
             if (element->visible)
             {
                 element->onDraw(renderer);
-                element->drawElements(element->rect, renderer);
+                element->drawElements(mouse_position, element->rect, renderer);
             }
 
             it++;
@@ -49,7 +48,6 @@ void GuiContainer::drawElements(sp::Rect parent_rect, sp::RenderTarget& renderer
 
 void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    auto mouse_position = InputHandler::getMousePos();
     for(GuiElement* element : elements)
     {
         if (element->visible)
@@ -59,8 +57,7 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
 
             element->drawDebugElements(element->rect, renderer);
 
-            if (element->rect.contains(mouse_position))
-                renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, main_font, glm::u8vec4(255, 0, 0, 255));
+            renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, main_font, glm::u8vec4(255, 0, 0, 255));
         }
     }
 }

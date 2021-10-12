@@ -17,7 +17,7 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     auto window_size = renderer.getVirtualSize();
     sp::Rect window_rect(0, 0, window_size.x, window_size.y);
 
-    drawElements(window_rect, renderer);
+    drawElements(mouse_position, window_rect, renderer);
 
     if (enable_debug_rendering)
     {
@@ -27,15 +27,18 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
 
 bool GuiCanvas::onPointerMove(glm::vec2 position, int id)
 {
+    mouse_position = position;
     return false;
 }
 
 void GuiCanvas::onPointerLeave(int id)
 {
+    mouse_position = {-100, -100};
 }
 
 bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
 {
+    mouse_position = position;
     click_element = getClickElement(button, position, id);
     focus(click_element);
     return click_element != nullptr;
@@ -43,12 +46,14 @@ bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position
 
 void GuiCanvas::onPointerDrag(glm::vec2 position, int id)
 {
+    mouse_position = position;
     if (click_element)
         click_element->onMouseDrag(position, id);
 }
 
 void GuiCanvas::onPointerUp(glm::vec2 position, int id)
 {
+    mouse_position = position;
     if (click_element)
     {
         click_element->onMouseUp(position, id);

@@ -10,10 +10,12 @@ class GuiFrequencyCurve : public GuiPanel
     bool enemy_has_equipment;   /*< True if target ship have beams/shields (which of those depends on frequency_is_beam) */
 
     int frequency;
+    glm::vec2 mouse_position;
 public:
     GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window) override;
 
     GuiFrequencyCurve* setFrequency(int frequency) { this->frequency = frequency; return this; }
 

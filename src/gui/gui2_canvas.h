@@ -9,7 +9,7 @@ class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandl
 private:
     GuiElement* click_element;
     GuiElement* focus_element;
-    glm::vec2 previous_mouse_position;
+    glm::vec2 mouse_position;
     bool enable_debug_rendering;
 public:
     GuiCanvas();

@@ -39,10 +39,10 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                 }
             }
 
-            int mouse_freq_nr = int((InputHandler::getMousePos().x - rect.position.x - 20) / w);
+            int mouse_freq_nr = int((mouse_position.x - rect.position.x - 20) / w);
 
             string text = "";
-            if (rect.contains(InputHandler::getMousePos()) && mouse_freq_nr >= 0 && mouse_freq_nr <= SpaceShip::max_frequency)
+            if (rect.contains(mouse_position) && mouse_freq_nr >= 0 && mouse_freq_nr <= SpaceShip::max_frequency)
             {
                 if (frequency_is_beam)
                     text = frequencyToString(mouse_freq_nr) + " " + string(int(frequencyVsFrequencyDamageFactor(frequency, mouse_freq_nr) * 100)) + "% dmg";
@@ -65,4 +65,10 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
     }else{
         renderer.drawText(rect, "No data", sp::Alignment::Center, 35);
     }
+}
+
+void GuiFrequencyCurve::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window)
+{
+    this->mouse_position = mouse_position;
+    GuiContainer::drawElements(mouse_position, parent_rect, window);
 }
