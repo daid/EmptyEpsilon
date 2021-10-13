@@ -1,6 +1,7 @@
 #include "packResourceProvider.h"
 
 #include <cstdio>
+#include <SDL_endian.h>
 
 #ifdef _WIN32
 #include <malloc.h>
@@ -19,10 +20,7 @@ static inline int readInt(FILE* f)
 {
     int32_t ret = 0;
     fread(&ret, sizeof(int32_t), 1, f);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ || defined(_WIN32)
-    return (ret & 0xFF) << 24 | (ret & 0xFF00) << 8 | (ret & 0xFF0000) >> 8 | (ret & 0xFF000000) >> 24;
-#endif
-    return ret;
+    return SDL_SwapBE32(ret);
 }
 
 static inline string readString(FILE *f)
