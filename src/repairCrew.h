@@ -35,10 +35,10 @@ public:
     RepairCrew();
     virtual ~RepairCrew();
 
-    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet);
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
     void commandSetTargetPosition(glm::ivec2 position);
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 private:
     bool isTargetPositionTaken(glm::ivec2 position);
 };

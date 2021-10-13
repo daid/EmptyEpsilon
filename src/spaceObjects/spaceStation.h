@@ -8,12 +8,12 @@ class SpaceStation : public ShipTemplateBasedObject
 public:
     SpaceStation();
 
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range);
-    virtual bool canBeDockedBy(P<SpaceObject> obj);
-    virtual void destroyedByDamage(DamageInfo& info);
-    virtual void applyTemplateValues();
+    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
+    virtual bool canBeDockedBy(P<SpaceObject> obj) override;
+    virtual void destroyedByDamage(DamageInfo& info) override;
+    virtual void applyTemplateValues() override;
 
-    virtual string getExportLine();
+    virtual string getExportLine() override;
 };
 
 #endif//SPACE_STATION_H

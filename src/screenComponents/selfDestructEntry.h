@@ -21,7 +21,7 @@ private:
 public:
     GuiSelfDestructEntry(GuiContainer* owner, string id);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     void enablePosition(ECrewPosition position) { has_position[position] = true; }
 };

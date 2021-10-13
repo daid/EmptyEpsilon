@@ -107,8 +107,8 @@ public:
     void reset();
     void startScenario(string filename);
 
-    virtual void update(float delta);
-    virtual void destroy();
+    virtual void update(float delta) override;
+    virtual void destroy() override;
 
     string getNextShipCallsign();
 };

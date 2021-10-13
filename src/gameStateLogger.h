@@ -27,7 +27,7 @@ public:
     void start();
     void stop();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
 private:
     FILE* log_file;

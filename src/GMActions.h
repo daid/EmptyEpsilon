@@ -16,7 +16,7 @@ public:
 
     void commandRunScript(string code);
     void commandSendGlobalMessage(string message);
-    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet);
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 };
 
 #endif//GM_ACTIONS

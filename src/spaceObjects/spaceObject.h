@@ -175,7 +175,7 @@ public:
     virtual void draw3DTransparent(const glm::mat4& object_view_matrix) {}
     virtual void drawOnRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void drawOnGMRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
-    virtual void destroy();
+    virtual void destroy() override;
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }

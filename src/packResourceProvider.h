@@ -19,8 +19,8 @@ class PackResourceProvider : public ResourceProvider
 public:
     PackResourceProvider(string filename);
 
-    virtual P<ResourceStream> getResourceStream(const string filename);
-    virtual std::vector<string> findResources(const string searchPattern);
+    virtual P<ResourceStream> getResourceStream(const string filename) override;
+    virtual std::vector<string> findResources(const string searchPattern) override;
 
     static void addPackResourcesForDirectory(const string directory);
 };

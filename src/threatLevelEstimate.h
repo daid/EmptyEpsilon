@@ -25,7 +25,7 @@ public:
     float getThreat() { return smoothed_threat_level; }
     void setCallbacks(func_t low, func_t high);
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 private:
     float getThreatFor(P<SpaceShip> ship);
 };

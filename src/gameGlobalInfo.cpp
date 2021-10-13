@@ -394,7 +394,7 @@ public:
     {
     }
 
-    virtual void update(float delta)
+    virtual void update(float delta) override
     {
         gameGlobalInfo->variation = variation;
         gameGlobalInfo->startScenario(script_name);

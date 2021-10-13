@@ -20,9 +20,9 @@ protected:
 public:
     GuiButton(GuiContainer* owner, string id, string text, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target);
-    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id);
-    virtual void onMouseUp(glm::vec2 position, int id);
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
+    virtual void onMouseUp(glm::vec2 position, int id) override;
 
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);

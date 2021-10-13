@@ -60,7 +60,7 @@ class ParticleEngine : public Updatable
 
 public:
     static void render(const glm::mat4& projection, const glm::mat4& view);
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
     static void spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time);
 

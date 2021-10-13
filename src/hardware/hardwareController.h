@@ -59,7 +59,7 @@ public:
 
     void loadConfiguration(string filename);
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
     bool getVariableValue(string variable_name, float& value);
 private:

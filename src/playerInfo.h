@@ -53,7 +53,7 @@ public:
     void commandSetMainScreen(bool enabled);
     void commandSetMainScreenControl(bool control);
     void commandSetName(const string& name);
-    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet);
+    virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 
     void spawnUI();
 };
