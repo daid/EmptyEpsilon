@@ -52,7 +52,7 @@ void main()
 	vec3 lightDir = normalize(vec3(light0_position) - viewspace_position);
 	vec3 lightDir2 = normalize(vec3(light1_position) - viewspace_position);
 	vec3 n = fragnormal;
-	float intensity = max(0.1, dot(lightDir, n));
+	float intensity = clamp(dot(lightDir, n), 0.1, 1.0);
 	float specularIntensity = min(1.0, pow(max(0.0, dot(lightDir2, n)) * 1.2, 20.0));
 	
 	vec4 base = texture2D(baseMap, fragtexcoords.st);

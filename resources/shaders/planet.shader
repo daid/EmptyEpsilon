@@ -42,7 +42,7 @@ varying vec2 fragtexcoords;
 void main()
 {
 	vec3 lightDir = normalize(vec3(light1_position) - viewspace_position);
-	float intensity = max(0.0, dot(lightDir, fragnormal));
+	float intensity = clamp(dot(lightDir, fragnormal), 0.0, 1.0);
 	
 	vec3 base = texture2D(baseMap, fragtexcoords.st).rgb;
 	
