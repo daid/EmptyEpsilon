@@ -27,7 +27,7 @@ public:
 
 class PackResourceStream : public ResourceStream
 {
-    FILE* f;
+    struct SDL_RWops* f;
     size_t position;
     size_t size;
     size_t read_position;

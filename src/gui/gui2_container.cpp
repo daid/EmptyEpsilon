@@ -68,7 +68,7 @@ GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::v
     {
         GuiElement* element = *it;
 
-        if (element->hover && element->visible && element->enabled)
+        if (element->visible && element->enabled && element->rect.contains(position))
         {
             GuiElement* clicked = element->getClickElement(button, position, id);
             if (clicked)
