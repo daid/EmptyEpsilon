@@ -30,12 +30,13 @@ void main()
 [fragment]
 
 // Program inputs
-uniform samplerCube starbox;
+uniform sampler2D textureMap;
 
-// Per-fragment inputs.
-varying vec3 texcoords;
+// Per-fragment inputs
+varying vec3 fragcolor;
+varying vec2 fragtexcoords;
 
 void main()
 {
-    gl_FragColor = textureCube(starbox, texcoords);
+    gl_FragColor = texture2D(textureMap, fragtexcoords.st) * vec4(fragcolor, 1.);
 }
