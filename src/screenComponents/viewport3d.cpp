@@ -365,7 +365,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         model_matrix = glm::translate(model_matrix, {target->getPosition().x, target->getPosition().y, 0});
 
         textureManager.getTexture("redicule2.png")->bind();
-        glUniformMatrix4fv(billboard.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view_matrix * model_matrix));
+        glUniformMatrix4fv(billboard.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(view_matrix * model_matrix));
         glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
