@@ -25,18 +25,18 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiCanvas::onPointerMove(glm::vec2 position, int id)
+bool GuiCanvas::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
 {
     mouse_position = position;
     return false;
 }
 
-void GuiCanvas::onPointerLeave(int id)
+void GuiCanvas::onPointerLeave(sp::io::Pointer::ID id)
 {
     mouse_position = {-100, -100};
 }
 
-bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     mouse_position = position;
     click_element = getClickElement(button, position, id);
@@ -44,14 +44,14 @@ bool GuiCanvas::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position
     return click_element != nullptr;
 }
 
-void GuiCanvas::onPointerDrag(glm::vec2 position, int id)
+void GuiCanvas::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     mouse_position = position;
     if (click_element)
         click_element->onMouseDrag(position, id);
 }
 
-void GuiCanvas::onPointerUp(glm::vec2 position, int id)
+void GuiCanvas::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     mouse_position = position;
     if (click_element)
