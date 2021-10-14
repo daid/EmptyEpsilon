@@ -107,7 +107,7 @@ endif()
 set(SDL2_DIR "${SDL_INSTALL_PATH}/lib/cmake/SDL2")
 
 # Macro to build the android apk
-macro(android_apk NAME)
+macro(android_apk NAME APK_WITH_PACKS)
     get_target_property(MAINLIB_NAME ${NAME} NAME)
     # Setup Android Manifest.
     configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/android/AndroidManifest.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml")
@@ -153,6 +153,11 @@ macro(android_apk NAME)
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
     file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/resources/music/")
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/scripts" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    
+    if(APK_WITH_PACKS)
+        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/packs" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
+    endif()
+
     file(GLOB_RECURSE ASSETS LIST_DIRECTORIES false RELATIVE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/*")
     
     add_custom_command(

@@ -4,6 +4,8 @@
 #include <tuple>
 
 #include <graphics/opengl.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "logging.h"
 #include "shaderManager.h"
@@ -32,6 +34,8 @@ namespace ShaderRegistry
 			"color",
 			"model_view_projection",
 			"projection",
+			"model",
+			"view",
 			"model_view",
 			"camera_position",
 			"atmosphereColor",
@@ -39,7 +43,10 @@ namespace ShaderRegistry
 			"textureMap",
 			"baseMap",
 			"specularMap",
-			"illuminationMap"
+			"illuminationMap",
+
+			"ambientLightDirection",
+			"specularLightDirection"
 		};
 
 		std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{
@@ -95,6 +102,19 @@ namespace ShaderRegistry
 	const Shader& get(Shaders shader)
 	{
 		return shaders[Shaders_t(shader)];
+	}
+
+	void setupLights(const Shader& shader, const glm::vec3& target_viewspace)
+	{
+		if (auto ambient = shader.uniform(ShaderRegistry::Uniforms::AmbientLightDirection); ambient != -1)
+		{
+			glUniform3fv(ambient, 1, glm::value_ptr(glm::normalize(ambientLightPosition - target_viewspace)));
+		}
+
+		if (auto specular = shader.uniform(ShaderRegistry::Uniforms::AmbientLightDirection); specular != -1)
+		{
+			glUniform3fv(specular, 1, glm::value_ptr(glm::normalize(specularLightPosition - target_viewspace)));
+		}
 	}
 
 	ScopedShader::ScopedShader(Shaders id) noexcept

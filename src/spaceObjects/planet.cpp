@@ -268,10 +268,12 @@ void Planet::draw3D(const glm::mat4& object_view_matrix)
 
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Planet);
 
-        glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-        glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
         glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::AtmosphereColor), 1, glm::value_ptr(glm::vec4(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, atmosphere_color.a) / 255.f));
+
+        ShaderRegistry::setupLights(shader.get(), object_view_matrix, model_matrix);
 
         textureManager.getTexture(planet_texture)->bind();
         {
@@ -310,10 +312,12 @@ void Planet::draw3DTransparent(const glm::mat4& object_view_matrix)
 
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Planet);
 
-        glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-        glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(cloud_model_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
         glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::AtmosphereColor), 1, glm::value_ptr(glm::vec4(0.f)));
+
+        ShaderRegistry::setupLights(shader.get(), object_view_matrix, cloud_model_matrix);
 
         textureManager.getTexture(cloud_texture)->bind();
         {
@@ -337,7 +341,7 @@ void Planet::draw3DTransparent(const glm::mat4& object_view_matrix)
 
         textureManager.getTexture(atmosphere_texture)->bind();
         glm::vec4 color(glm::vec3(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b) / 255.f, atmosphere_size * 2.0f);
-        glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix * model_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix * model_matrix));
         glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1, glm::value_ptr(color));
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));

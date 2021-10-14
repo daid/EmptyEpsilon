@@ -7,6 +7,10 @@
 
 #include <type_traits>
 
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+
 namespace sp
 {
 	class Shader;
@@ -14,6 +18,9 @@ namespace sp
 
 namespace ShaderRegistry
 {
+	constexpr glm::vec3 ambientLightPosition{ 20000.f, 20000.f, 20000.f };
+	constexpr glm::vec3 specularLightPosition{ 0.f, 0.f, 0.f };
+
 	enum class Shaders
 	{
 		Basic = 0,
@@ -35,6 +42,8 @@ namespace ShaderRegistry
 		Color = 0,
 		ModelViewProjection,
 		Projection,
+		Model,
+		View,
 		ModelView,
 		CameraPosition,
 		AtmosphereColor,
@@ -43,6 +52,9 @@ namespace ShaderRegistry
 		BaseMap,
 		SpecularMap,
 		IlluminationMap,
+
+		AmbientLightDirection,
+		SpecularLightDirection,
 
 		Count
 	};
@@ -82,7 +94,16 @@ namespace ShaderRegistry
 		std::array<int32_t, Uniforms_t(Attributes::Count)> attributes;
 	};
 
+	
+
 	const Shader& get(Shaders id);
+	void setupLights(const Shader& shader, const glm::vec3& target_viewspace);
+	inline void setupLights(const Shader& shader, const glm::mat4& view, const glm::mat4& model)
+	{
+		// Target center of model.
+		setupLights(shader, view * model * glm::vec4{ glm::vec3{0.f}, 1.f });
+	}
+	
 
 	class ScopedShader final
 	{

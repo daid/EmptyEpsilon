@@ -213,8 +213,12 @@ void ModelData::render(const glm::mat4& model_view)
     model_matrix = glm::translate(model_matrix, mesh_offset);
 
     ShaderRegistry::ScopedShader shader(shader_id);
-    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(model_view));
-    glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+
+    // Lights setup.
+    ShaderRegistry::setupLights(shader.get(), model_view, model_matrix);
 
     // Textures
     texture->bind();
@@ -235,6 +239,8 @@ void ModelData::render(const glm::mat4& model_view)
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
     gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+    
     mesh->render(positions.get(), texcoords.get(), normals.get());
 
     if (specular_texture || illumination_texture)

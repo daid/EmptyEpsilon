@@ -51,8 +51,8 @@ void Asteroid::draw3D(const glm::mat4& object_view_matrix)
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
 
-    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-    glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
 
@@ -65,6 +65,7 @@ void Asteroid::draw3D(const glm::mat4& object_view_matrix)
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
     gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
+    ShaderRegistry::setupLights(shader.get(), object_view_matrix, model_matrix);
     m->render(positions.get(), texcoords.get(), normals.get());
 
 
@@ -158,8 +159,8 @@ void VisualAsteroid::draw3D(const glm::mat4& object_view_matrix)
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
 
-    glUniformMatrix4fv(shader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-    glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
 
@@ -171,6 +172,8 @@ void VisualAsteroid::draw3D(const glm::mat4& object_view_matrix)
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
     gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+    ShaderRegistry::setupLights(shader.get(), object_view_matrix, model_matrix);
     m->render(positions.get(), texcoords.get(), normals.get());
 
     glActiveTexture(GL_TEXTURE0);
