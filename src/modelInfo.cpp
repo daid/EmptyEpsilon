@@ -79,8 +79,8 @@ void ModelInfo::renderOverlay(const glm::mat4& model_view, sp::Texture* texture,
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glUniformMatrix4fv(basicShader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(model_view));
-        glUniformMatrix4fv(basicShader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
         texture->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -104,8 +104,8 @@ void ModelInfo::renderShield(const glm::mat4& model_view, float alpha)
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glUniformMatrix4fv(basicShader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(model_view));
-        glUniformMatrix4fv(basicShader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
         textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -129,8 +129,8 @@ void ModelInfo::renderShield(const glm::mat4& model_view, float alpha, float ang
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glUniformMatrix4fv(basicShader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(model_view));
-        glUniformMatrix4fv(basicShader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
         textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));

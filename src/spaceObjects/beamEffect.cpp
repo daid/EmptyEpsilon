@@ -73,8 +73,8 @@ void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), lifetime, lifetime, lifetime, 1.f);
-    glUniformMatrix4fv(beamShader.get().get()->getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-    glUniformMatrix4fv(beamShader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
     
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
