@@ -121,7 +121,6 @@ jobs:
           -G "Visual Studio 16 2019" -A Win32
           -DSDL2_DIR:PATH="$env:GITHUB_WORKSPACE/externals"
           -DSERIOUS_PROTON_DIR="../SeriousProton"
-          -DWARNING_IS_ERROR=1
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: cmake --build . --config ${{ matrix.build_type }} --target package 
