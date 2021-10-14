@@ -10,7 +10,7 @@ public:
     {
     }
 
-    virtual void render(sp::RenderTarget& renderer)
+    virtual void render(sp::RenderTarget& renderer) override
     {
         device->render(renderer);
     }
