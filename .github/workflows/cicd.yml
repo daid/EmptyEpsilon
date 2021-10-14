@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p _build_win32
           cd _build_win32
-          cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton
+          cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton -DWARNING_IS_ERROR=1
           ninja package
   macos:
     name: MacOS
@@ -62,7 +62,7 @@ jobs:
         run: |
           mkdir -p _build_macos
           cd _build_macos
-          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_INSTALL_PREFIX=.
+          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_INSTALL_PREFIX=. -DWARNING_IS_ERROR=1
           ninja
           ninja install
   windows:
@@ -121,6 +121,7 @@ jobs:
           -G "Visual Studio 16 2019" -A Win32
           -DSDL2_DIR:PATH="$env:GITHUB_WORKSPACE/externals"
           -DSERIOUS_PROTON_DIR="../SeriousProton"
+          -DWARNING_IS_ERROR=1
       - name: Build
         working-directory: ${{github.workspace}}/build
         run: cmake --build . --config ${{ matrix.build_type }} --target package 
