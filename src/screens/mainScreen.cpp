@@ -150,7 +150,7 @@ void ScreenMainScreen::update(float delta)
     }
 }
 
-bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (GuiCanvas::onPointerDown(button, position, id))
         return true;

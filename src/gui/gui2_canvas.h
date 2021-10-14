@@ -16,11 +16,11 @@ public:
     virtual ~GuiCanvas();
 
     virtual void render(sp::RenderTarget& window) override;
-    virtual bool onPointerMove(glm::vec2 position, int id) override;
-    virtual void onPointerLeave(int id) override;
-    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
-    virtual void onPointerDrag(glm::vec2 position, int id) override;
-    virtual void onPointerUp(glm::vec2 position, int id) override;
+    virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onPointerLeave(sp::io::Pointer::ID id) override;
+    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onPointerUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
 

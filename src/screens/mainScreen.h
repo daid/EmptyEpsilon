@@ -31,7 +31,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
+    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onHotkey(const HotkeyResult& key) override;
 };
 
