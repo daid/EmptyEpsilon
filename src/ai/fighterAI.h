@@ -21,11 +21,11 @@ public:
      * Are we allowed to switch to a different AI right now?
      * When true is returned, and the CpuShip wants to change their AI this AI object will be destroyed and a new one will be created.
      */
-    virtual bool canSwitchAI();
+    virtual bool canSwitchAI() override;
 
-    virtual void run(float delta);
-    virtual void runOrders();
-    virtual void runAttack(P<SpaceObject> target);
+    virtual void run(float delta) override;
+    virtual void runOrders() override;
+    virtual void runAttack(P<SpaceObject> target) override;
 };
 
 

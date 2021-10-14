@@ -10,7 +10,7 @@ protected:
 public:
     GuiArrowButton(GuiContainer* owner, string id, float angle, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//GUI2_ARROWBUTTON_H

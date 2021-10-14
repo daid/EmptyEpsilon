@@ -20,7 +20,7 @@ class JoinServerScreen : public GuiCanvas, public Updatable
 public:
     JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip);
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 };
 
 #endif//JOIN_SERVER_MENU_H

@@ -21,9 +21,9 @@ public:
     ExplosionEffect();
     virtual ~ExplosionEffect();
 
-    virtual void draw3DTransparent(const glm::mat4& object_view_matrix);
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool longRange);
-    virtual void update(float delta);
+    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
+    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool longRange) override;
+    virtual void update(float delta) override;
 
     void setSize(float size) { this->size = size; }
     void setExplosionSound(string sound) { this->explosion_sound = sound; }

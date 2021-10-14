@@ -8,7 +8,7 @@ class HomingMissile : public MissileWeapon
 public:
     HomingMissile();
 
-    virtual void hitObject(P<SpaceObject> object);
+    virtual void hitObject(P<SpaceObject> object) override;
 };
 
 #endif//HOMING_MISSLE_H

@@ -21,8 +21,8 @@ public:
 
     virtual void onDraw(sp::RenderTarget& window) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
-    virtual void onTextInput(const string& text);
-    virtual void onTextInput(sp::TextInputEvent e);
+    virtual void onTextInput(const string& text) override;
+    virtual void onTextInput(sp::TextInputEvent e) override;
     virtual void onFocusGained() override;
     virtual void onFocusLost() override;
 
