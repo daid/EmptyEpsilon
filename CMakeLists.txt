@@ -114,9 +114,6 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
     GIT_TAG "v${MESHOPTIMIZER_VERSION}"
   )
   FetchContent_GetProperties(meshoptimizer)
-  if(NOT meshoptimizer_POPULATED)
-    FetchContent_Populate(meshoptimizer)
-  endif()
 else()
   # Poor man's FetchContent.
   set(MESHOPTIMIZER_BASE_PATH "${EXTERNALS_DIR}")
@@ -134,6 +131,9 @@ else()
 endif()
 
 if(NOT meshoptimizer_POPULATED)
+  if(COMMAND FetchContent_Populate)
+    FetchContent_Populate(meshoptimizer)
+  endif()
   add_subdirectory(${meshoptimizer_SOURCE_DIR} ${meshoptimizer_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 
