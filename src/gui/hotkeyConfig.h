@@ -2,6 +2,7 @@
 #define HOTKEY_CONFIG_H
 
 #include <tuple>
+#include <array>
 #include <SDL.h>
 #include <io/keybinding.h>
 #include "stringImproved.h"
@@ -10,6 +11,7 @@ class Keys
 {
 public:
     Keys();
+    void init();
 
     //Basic
     sp::io::Keybinding pause;
@@ -71,54 +73,9 @@ public:
     sp::io::Keybinding weapons_select_mine;
     sp::io::Keybinding weapons_select_emp;
     sp::io::Keybinding weapons_select_hvli;
-    sp::io::Keybinding weapons_load_tube1;
-    sp::io::Keybinding weapons_load_tube2;
-    sp::io::Keybinding weapons_load_tube3;
-    sp::io::Keybinding weapons_load_tube4;
-    sp::io::Keybinding weapons_load_tube5;
-    sp::io::Keybinding weapons_load_tube6;
-    sp::io::Keybinding weapons_load_tube7;
-    sp::io::Keybinding weapons_load_tube8;
-    sp::io::Keybinding weapons_load_tube9;
-    sp::io::Keybinding weapons_load_tube10;
-    sp::io::Keybinding weapons_load_tube11;
-    sp::io::Keybinding weapons_load_tube12;
-    sp::io::Keybinding weapons_load_tube13;
-    sp::io::Keybinding weapons_load_tube14;
-    sp::io::Keybinding weapons_load_tube15;
-    sp::io::Keybinding weapons_load_tube16;
-    sp::io::Keybinding weapons_unload_tube1;
-    sp::io::Keybinding weapons_unload_tube2;
-    sp::io::Keybinding weapons_unload_tube3;
-    sp::io::Keybinding weapons_unload_tube4;
-    sp::io::Keybinding weapons_unload_tube5;
-    sp::io::Keybinding weapons_unload_tube6;
-    sp::io::Keybinding weapons_unload_tube7;
-    sp::io::Keybinding weapons_unload_tube8;
-    sp::io::Keybinding weapons_unload_tube9;
-    sp::io::Keybinding weapons_unload_tube10;
-    sp::io::Keybinding weapons_unload_tube11;
-    sp::io::Keybinding weapons_unload_tube12;
-    sp::io::Keybinding weapons_unload_tube13;
-    sp::io::Keybinding weapons_unload_tube14;
-    sp::io::Keybinding weapons_unload_tube15;
-    sp::io::Keybinding weapons_unload_tube16;
-    sp::io::Keybinding weapons_fire_tube1;
-    sp::io::Keybinding weapons_fire_tube2;
-    sp::io::Keybinding weapons_fire_tube3;
-    sp::io::Keybinding weapons_fire_tube4;
-    sp::io::Keybinding weapons_fire_tube5;
-    sp::io::Keybinding weapons_fire_tube6;
-    sp::io::Keybinding weapons_fire_tube7;
-    sp::io::Keybinding weapons_fire_tube8;
-    sp::io::Keybinding weapons_fire_tube9;
-    sp::io::Keybinding weapons_fire_tube10;
-    sp::io::Keybinding weapons_fire_tube11;
-    sp::io::Keybinding weapons_fire_tube12;
-    sp::io::Keybinding weapons_fire_tube13;
-    sp::io::Keybinding weapons_fire_tube14;
-    sp::io::Keybinding weapons_fire_tube15;
-    sp::io::Keybinding weapons_fire_tube16;
+    std::array<sp::io::Keybinding, 16> weapons_load_tube;
+    std::array<sp::io::Keybinding, 16> weapons_unload_tube;
+    std::array<sp::io::Keybinding, 16> weapons_fire_tube;
     sp::io::Keybinding weapons_enemy_next_target;
     sp::io::Keybinding weapons_next_target;
     sp::io::Keybinding weapons_toggle_shields;
