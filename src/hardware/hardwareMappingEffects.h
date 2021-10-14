@@ -27,7 +27,7 @@ class HardwareMappingEffectStatic : public HardwareMappingEffect
 private:
     float value;
 public:
-    virtual bool configure(std::unordered_map<string, string> settings);
+    virtual bool configure(std::unordered_map<string, string> settings) override;
     virtual float onActive() override;
 };
 
