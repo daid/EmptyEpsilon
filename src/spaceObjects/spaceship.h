@@ -395,7 +395,7 @@ public:
             if (warp_speed_per_warp_level < 100.0f)
                 warp_speed_per_warp_level = 1000.0f;
         }else{
-            warp_request = 0.0f;
+            warp_request = 0;
             warp_speed_per_warp_level = 0;
         }
     }
