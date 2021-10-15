@@ -84,12 +84,12 @@ public:
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
-    constexpr static float jump_drive_charge_time = 90.0;   /*<Total charge time for the jump drive after a max range jump */
+    constexpr static float jump_drive_charge_time = 90.0f;   /*<Total charge time for the jump drive after a max range jump */
     constexpr static float jump_drive_energy_per_km_charge = 4.0f;
-    constexpr static float jump_drive_heat_per_jump = 0.35;
-    constexpr static float heat_per_combat_maneuver_boost = 0.2;
-    constexpr static float heat_per_combat_maneuver_strafe = 0.2;
-    constexpr static float heat_per_warp = 0.02;
+    constexpr static float jump_drive_heat_per_jump = 0.35f;
+    constexpr static float heat_per_combat_maneuver_boost = 0.2f;
+    constexpr static float heat_per_combat_maneuver_strafe = 0.2f;
+    constexpr static float heat_per_warp = 0.02f;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
     float energy_level;
@@ -395,7 +395,7 @@ public:
             if (warp_speed_per_warp_level < 100.0f)
                 warp_speed_per_warp_level = 1000.0f;
         }else{
-            warp_request = 0.0f;
+            warp_request = 0;
             warp_speed_per_warp_level = 0;
         }
     }
@@ -442,7 +442,7 @@ public:
     float getBeamWeaponHeatPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getHeatPerFire(); }
 
     int getShieldsFrequency(void){ return shield_frequency; }
-    void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
+    void setShieldsFrequency(int freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
     int getBeamFrequency(){ return beam_frequency; }
 
