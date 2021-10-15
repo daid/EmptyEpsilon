@@ -104,6 +104,39 @@ if(WITH_DISCORD)
   target_link_libraries(discord INTERFACE discord_h)
 endif()
 
+# Meshoptimizer
+set(MESHOPTIMIZER_VERSION 0.16)
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
+  include(FetchContent)
+  FetchContent_Declare(
+    meshoptimizer
+    GIT_REPOSITORY https://github.com/zeux/meshoptimizer/
+    GIT_TAG "v${MESHOPTIMIZER_VERSION}"
+  )
+  FetchContent_GetProperties(meshoptimizer)
+else()
+  # Poor man's FetchContent.
+  set(MESHOPTIMIZER_BASE_PATH "${EXTERNALS_DIR}")
+  set(meshoptimizer_POPULATED FALSE)
+  if(NOT EXISTS "${MESHOPTIMIZER_BASE_PATH}/meshoptimizer/CMakeLists.txt")
+    set(MESHOPTIMIZER_ZIP "${DOWNLOADS_DIR}/meshoptimizer.zip")
+    file(DOWNLOAD "https://github.com/zeux/meshoptimizer/archive/refs/tags/v${MESHOPTIMIZER_VERSION}.zip" "${MESHOPTIMIZER_ZIP}" TIMEOUT 60 TLS_VERIFY ON)
+
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${MESHOPTIMIZER_ZIP}" WORKING_DIRECTORY "${MESHOPTIMIZER_BASE_PATH}")
+    execute_process(COMMAND ${CMAKE_COMMAND} -E rename "meshoptimizer-${MESHOPTIMIZER_VERSION}" meshoptimizer WORKING_DIRECTORY "${MESHOPTIMIZER_BASE_PATH}")
+  endif()
+
+  set(meshoptimizer_SOURCE_DIR "${MESHOPTIMIZER_BASE_PATH}/meshoptimizer")
+  set(meshoptimizer_BINARY_DIR "${PROJECT_BINARY_DIR}/externals/meshoptimizer")
+endif()
+
+if(NOT meshoptimizer_POPULATED)
+  if(COMMAND FetchContent_Populate)
+    FetchContent_Populate(meshoptimizer)
+  endif()
+  add_subdirectory(${meshoptimizer_SOURCE_DIR} ${meshoptimizer_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 set(SOURCES
     src/main.cpp
     src/threatLevelEstimate.cpp
@@ -513,7 +546,7 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        seriousproton
+        seriousproton meshoptimizer
         "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WIN32}>:iphlpapi>"
         "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
