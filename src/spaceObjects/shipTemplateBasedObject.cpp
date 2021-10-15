@@ -407,7 +407,7 @@ ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
 {
     if (shield_count < 2)
         return SYS_FrontShield;
-    float angle = index * 360.0 / shield_count;
+    float angle = index * 360.0f / shield_count;
     if (std::abs(angleDifference(angle, 0.0f)) < 90)
         return SYS_FrontShield;
     return SYS_RearShield;

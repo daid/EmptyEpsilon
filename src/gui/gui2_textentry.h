@@ -13,7 +13,7 @@ protected:
     float text_size;
     func_t func;
     func_t enter_func;
-    const float blink_rate = 0.530;
+    const float blink_rate = 0.530f;
     sp::SystemTimer blink_timer;
     bool typing_indicator{false};
 public:
