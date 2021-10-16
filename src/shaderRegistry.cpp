@@ -106,12 +106,12 @@ namespace ShaderRegistry
 
 	void setupLights(const Shader& shader, const glm::vec3& target_viewspace)
 	{
-		if (auto ambient = shader.uniform(ShaderRegistry::Uniforms::AmbientLightDirection); ambient != -1)
+		if (auto ambient = shader.uniform(Uniforms::AmbientLightDirection); ambient != -1)
 		{
 			glUniform3fv(ambient, 1, glm::value_ptr(glm::normalize(ambientLightPosition - target_viewspace)));
 		}
 
-		if (auto specular = shader.uniform(ShaderRegistry::Uniforms::AmbientLightDirection); specular != -1)
+		if (auto specular = shader.uniform(Uniforms::SpecularLightDirection); specular != -1)
 		{
 			glUniform3fv(specular, 1, glm::value_ptr(glm::normalize(specularLightPosition - target_viewspace)));
 		}
