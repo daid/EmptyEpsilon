@@ -75,7 +75,7 @@ ExplosionEffect::~ExplosionEffect()
 {
 }
 
-void ExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
+void ExplosionEffect::draw3DTransparent()
 {
     float f = (1.0f - (lifetime / maxLifetime));
     float scale;
@@ -90,16 +90,13 @@ void ExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
     }
 
     std::array<glm::vec3, 4 * max_quad_count> vertices;
-
+    auto explosion_matrix = glm::scale(getModelMatrix(), glm::vec3(scale * size));
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
-
-    auto model_matrix = glm::scale(glm::mat4(1.0f), {scale * size, scale * size, scale * size});
     // Explosion sphere
     {
         textureManager.getTexture("texture/fire_sphere_texture.png")->bind();
 
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -117,9 +114,8 @@ void ExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
     {
         textureManager.getTexture("texture/fire_ring.png")->bind();
 
-        model_matrix = glm::scale(model_matrix, {1.5, 1.5, 1.5});
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        explosion_matrix = glm::scale(explosion_matrix, glm::vec3(1.5f));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
 
         vertices[0] = glm::vec3(-1, -1, 0);
         vertices[1] = glm::vec3(1, -1, 0);
@@ -139,6 +135,7 @@ void ExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
         }
     }
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
 
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -150,7 +147,6 @@ void ExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
     float g = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
     float b = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
 
     glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
     glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(vertices.size() * sizeof(glm::vec3)));

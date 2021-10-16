@@ -84,15 +84,6 @@ void Artifact::update(float delta)
     }
 }
 
-void Artifact::draw3D(const glm::mat4& object_view_matrix)
-{
-    if (artifact_spin != 0.0f) {
-        SpaceObject::draw3D(glm::rotate(object_view_matrix, engine->getElapsedTime() * artifact_spin / 180.0f * float(M_PI), {0, 0, 1}));
-    } else {
-        SpaceObject::draw3D(object_view_matrix);
-    }
-}
-
 void Artifact::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     // radar trace scaling, via script or automatically

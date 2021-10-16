@@ -22,12 +22,12 @@ void ModelInfo::setData(string name)
     }
 }
 
-void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& model_view)
+void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& model_matrix)
 {
     if (!data)
         return;
 
-    data->render(model_view);
+    data->render(model_matrix);
 
     if (engine_scale > 0.0f)
     {
@@ -64,23 +64,20 @@ void ModelInfo::render(glm::vec2 position, float rotation, const glm::mat4& mode
     }
 }
 
-void ModelInfo::renderOverlay(const glm::mat4& model_view, sp::Texture* texture, float alpha)
+void ModelInfo::renderOverlay(const glm::mat4& model_matrix, sp::Texture* texture, float alpha)
 {
     if (!data)
         return;
 
-    auto model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::rotate(model_matrix, 180.f / 180.0f * float(M_PI), {0.f, 0.f, 1.f});
-    model_matrix = glm::scale(model_matrix, {data->scale, data->scale, data->scale});
-    model_matrix = glm::translate(model_matrix, data->mesh_offset);
+    auto overlay_matrix = glm::scale(model_matrix, glm::vec3(data->scale));
+    overlay_matrix = glm::translate(overlay_matrix, glm::vec3(data->mesh_offset.x, data->mesh_offset.y, data->mesh_offset.z));
 
     glDepthFunc(GL_EQUAL);
     {
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
-        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(overlay_matrix));
         texture->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -93,19 +90,17 @@ void ModelInfo::renderOverlay(const glm::mat4& model_view, sp::Texture* texture,
     glDepthFunc(GL_LESS);
 }
 
-void ModelInfo::renderShield(const glm::mat4& model_view, float alpha)
+void ModelInfo::renderShield(const glm::mat4& model_matrix, float alpha)
 {
-    auto model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::rotate(model_matrix, engine->getElapsedTime() * 5 / 180.0f * float(M_PI), {0.f, 0.f, 1.f});
-    model_matrix = glm::scale(model_matrix, {data->radius * 1.2f, data->radius * 1.2f, data->radius * 1.2f});
+    auto shield_matrix = glm::rotate(model_matrix, glm::radians(engine->getElapsedTime() * 5), {0.f, 0.f, 1.f});
+    shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3{data->radius});
 
     Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
-        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
         textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -116,21 +111,19 @@ void ModelInfo::renderShield(const glm::mat4& model_view, float alpha)
     }
 }
 
-void ModelInfo::renderShield(const glm::mat4& model_view, float alpha, float angle)
+void ModelInfo::renderShield(const glm::mat4& model_matrix, float alpha, float angle)
 {
     if (!data)
         return;
-    auto model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::rotate(model_matrix, angle / 180.0f * float(M_PI), {0.f, 0.f, 1.f});
-    model_matrix = glm::rotate(model_matrix, engine->getElapsedTime() * 5 / 180.0f * float(M_PI), {1.f, 0.f, 0.f});
-    model_matrix = glm::scale(model_matrix, {data->radius * 1.2f, data->radius * 1.2f, data->radius * 1.2f});
+    auto shield_matrix = glm::rotate(model_matrix, glm::radians(angle), glm::vec3(0.f, 0.f, 1.f));
+        shield_matrix = glm::rotate(shield_matrix, glm::radians(engine->getElapsedTime() * 5), glm::vec3(0.f, 0.f, 1.f));
+        shield_matrix = glm::scale(shield_matrix, 1.2f * glm::vec3(data->radius));
     Mesh* m = Mesh::getMesh("mesh/half_sphere.obj");
     {
         ShaderRegistry::ScopedShader basicShader(ShaderRegistry::Shaders::Basic);
 
         glUniform4f(basicShader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
-        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(basicShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(shield_matrix));
         textureManager.getTexture("texture/shield_hit_effect.png")->bind();
 
         gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));

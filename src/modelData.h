@@ -122,7 +122,7 @@ public:
     float getRadius();
 
     void load();
-    void render(const glm::mat4& model_view);
+    void render(const glm::mat4& model_matrix);
 
     friend class ModelInfo;
     friend class GuiRotatingModelView;

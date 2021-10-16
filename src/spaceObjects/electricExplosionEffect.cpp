@@ -76,7 +76,7 @@ ElectricExplosionEffect::~ElectricExplosionEffect()
 {
 }
 
-void ElectricExplosionEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
+void ElectricExplosionEffect::draw3DTransparent()
 {
     float f = (1.0f - (lifetime / maxLifetime));
     float scale;
@@ -89,13 +89,13 @@ void ElectricExplosionEffect::draw3DTransparent(const glm::mat4& object_view_mat
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
 
+    auto model_matrix = getModelMatrix();
+    auto explosion_matrix = glm::scale(model_matrix, glm::vec3(scale * size));
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
-    auto model_matrix = glm::scale(glm::mat4(1.0f), {scale * size, scale * size, scale * size});
     Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
         textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
 
@@ -105,8 +105,7 @@ void ElectricExplosionEffect::draw3DTransparent(const glm::mat4& object_view_mat
 
         m->render(positions.get(), texcoords.get(), normals.get());
 
-        model_matrix = glm::scale(model_matrix, {0.5, 0.5, 0.5});
-        glUniformMatrix4fv(shader.get().get()->getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model_matrix));
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
         m->render(positions.get(), texcoords.get(), normals.get());
         
     }
@@ -122,11 +121,12 @@ void ElectricExplosionEffect::draw3DTransparent(const glm::mat4& object_view_mat
 
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
 
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
 
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);

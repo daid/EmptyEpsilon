@@ -40,41 +40,31 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     glEnable(GL_CULL_FACE);
 
     auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-    auto view_matrix = glm::mat4(1.0f);
-    view_matrix = glm::rotate(view_matrix, 90.0f / 180.0f * float(M_PI), {1.0f, 0.0f, 0.0f});
-    view_matrix = glm::scale(view_matrix, {1,1,-1});
+    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.f), glm::vec3(1.f, 0.f, 0.f));
+    view_matrix = glm::scale(view_matrix, glm::vec3(1.f, 1.f, -1.f));
+    view_matrix = glm::translate(view_matrix, glm::vec3(0.f, -200.f, 0.f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(-30.f), glm::vec3(1.f, 0.f, 0.f));
+    view_matrix = glm::rotate(view_matrix, glm::radians(engine->getElapsedTime() * 360.0f / 10.0f), glm::vec3(0.f, 0.f, 1.f));
 
     glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, 0);
     glDepthMask(true);
     glEnable(GL_DEPTH_TEST);
 
-    view_matrix = glm::translate(view_matrix, {0, -200, 0});
-    view_matrix = glm::rotate(view_matrix, -30.0f / 180.0f * float(M_PI), {1, 0, 0});
-    view_matrix = glm::rotate(view_matrix, engine->getElapsedTime() * 360.0f / 10.0f / 180.0f * float(M_PI), {0.0f, 0.0f, 1.0f});
-    float scale = 100.0f / model->getRadius();
-    view_matrix = glm::scale(view_matrix, {scale, scale, scale});
 
-    for (auto i = 0; i < ShaderRegistry::Shaders_t(ShaderRegistry::Shaders::Count); ++i)
-    {
-        auto& shader = ShaderRegistry::get(ShaderRegistry::Shaders(i));
-        auto projection_location = shader.uniform(ShaderRegistry::Uniforms::Projection);
-        if (projection_location != -1)
-        {
-            shader.get()->bind();
-            glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
-        }
-    }
+    ShaderRegistry::updateProjectionView(projection, view_matrix);
 
     {
-        model->render(view_matrix);
-#ifdef DEBUGX
+        float scale = 100.0f / model->getRadius();
+        auto model_matrix = glm::scale(glm::identity<glm::mat4>(), glm::vec3(scale));
+        model->render(model_matrix);
+#ifdef DEBUG
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::BasicColor);
         {
             // Common state - matrices.
-            std::array<float, 16> matrix;
-            glGetFloatv(GL_MODELVIEW_MATRIX, matrix.data());
-            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::ModelView), 1, GL_FALSE, matrix.data());
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection));
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(view_matrix));
+            glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
             // Vertex attrib
             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));

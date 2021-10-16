@@ -53,7 +53,7 @@ ParticleEngine::ParticleEngine()
     shader->bind();
 
     uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
-    uniforms[as_index(Uniforms::ModelView)] = shader->getUniformLocation("model_view");
+    uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("view");
 
     attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
     attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
@@ -116,7 +116,7 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
 
     // - Matrices
     glUniformMatrix4fv(uniforms[as_index(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(uniforms[as_index(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(uniforms[as_index(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view));
     
     {
         std::vector<ParticleData> particle_data(max_vertex_count);

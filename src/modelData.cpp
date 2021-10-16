@@ -199,7 +199,7 @@ std::vector<string> ModelData::getModelDataNames()
     return ret;
 }
 
-void ModelData::render(const glm::mat4& model_view)
+void ModelData::render(const glm::mat4& model_matrix)
 {
     load();
     if (!mesh)
@@ -207,18 +207,16 @@ void ModelData::render(const glm::mat4& model_view)
 
     // EE's coordinate flips to a Z-up left hand.
     // To account for that, flip the model around 180deg.
-    auto model_matrix = glm::mat4(1.0f);
-    model_matrix = glm::rotate(model_matrix, 180.f / 180.0f * float(M_PI), {0.f, 0.f, 1.f});
-    model_matrix = glm::scale(model_matrix, {scale, scale, scale});
-    model_matrix = glm::translate(model_matrix, mesh_offset);
+    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{scale});
+    modeldata_matrix = glm::translate(modeldata_matrix, mesh_offset);
 
     ShaderRegistry::ScopedShader shader(shader_id);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(model_view));
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
 
 
     // Lights setup.
-    ShaderRegistry::setupLights(shader.get(), model_view, model_matrix);
+    ShaderRegistry::setupLights(shader.get(), model_matrix);
 
     // Textures
     texture->bind();

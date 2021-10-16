@@ -15,6 +15,8 @@ namespace ShaderRegistry
 	namespace
 	{
 		std::array<Shader, Shaders_t(Shaders::Count)> shaders;
+		glm::mat4 projection;
+		glm::mat4 view;
 	}
 
 	void Shader::initialize()
@@ -36,7 +38,6 @@ namespace ShaderRegistry
 			"projection",
 			"model",
 			"view",
-			"model_view",
 			"camera_position",
 			"atmosphereColor",
 			
@@ -104,8 +105,45 @@ namespace ShaderRegistry
 		return shaders[Shaders_t(shader)];
 	}
 
-	void setupLights(const Shader& shader, const glm::vec3& target_viewspace)
+	void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection_in, std::optional<std::reference_wrapper<const glm::mat4>> view_in)
 	{
+		const auto has_projection = projection_in.has_value();
+		const auto has_view = view_in.has_value();
+		if (has_projection)
+			projection = projection_in.value();
+		if (has_view)
+			view = view_in.value();
+		for (auto i = 0; i < Shaders_t(Shaders::Count); ++i)
+		{
+			auto& shader = get(Shaders(i));
+			auto projection_location = shader.uniform(Uniforms::Projection);
+			auto view_location = shader.uniform(Uniforms::View);
+			if (projection_location != -1 || view_location != -1)
+			{
+				shader.get()->bind();
+
+				if (has_projection && projection_location != -1)
+					glUniformMatrix4fv(projection_location, 1, GL_FALSE, glm::value_ptr(projection));
+				if (has_view && view_location != -1)
+					glUniformMatrix4fv(view_location, 1, GL_FALSE, glm::value_ptr(view));
+			}
+		}
+		glUseProgram(GL_NONE);
+	}
+
+	glm::mat4 getActiveView()
+	{
+		return view;
+	}
+
+	glm::mat4 getActiveProjection()
+	{
+		return projection;
+	}
+
+	void setupLights(const Shader& shader, const glm::vec3& target_modelspace)
+	{
+		const glm::vec3 target_viewspace{ getActiveView() * glm::vec4{target_modelspace, 1.f} };
 		if (auto ambient = shader.uniform(Uniforms::AmbientLightDirection); ambient != -1)
 		{
 			glUniform3fv(ambient, 1, glm::value_ptr(glm::normalize(ambientLightPosition - target_viewspace)));
