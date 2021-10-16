@@ -280,8 +280,6 @@ void Keys::init()
     //Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
-    std::array<sp::io::Keybinding, 4> ;
-    std::array<sp::io::Keybinding, 4> ;
     for(auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
