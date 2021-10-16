@@ -219,12 +219,13 @@ int main(int argc, char** argv)
             if (fsaa < 2)
                 fsaa = 2;
         }
-        
+
         P<Window> window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
         if (PreferencesManager::get("instance_name") != "")
             window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         else
             window->setTitle("EmptyEpsilon");
+        engine->registerObject("window", window);
 
         if (gl::isAvailable())
         {
