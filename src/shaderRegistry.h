@@ -4,6 +4,8 @@
 
 #include <array>
 #include <cstdint>
+#include <functional>
+#include <optional>
 
 #include <type_traits>
 
@@ -44,7 +46,6 @@ namespace ShaderRegistry
 		Projection,
 		Model,
 		View,
-		ModelView,
 		CameraPosition,
 		AtmosphereColor,
 
@@ -97,11 +98,16 @@ namespace ShaderRegistry
 	
 
 	const Shader& get(Shaders id);
-	void setupLights(const Shader& shader, const glm::vec3& target_viewspace);
-	inline void setupLights(const Shader& shader, const glm::mat4& view, const glm::mat4& model)
+
+	void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection, std::optional<std::reference_wrapper<const glm::mat4>> view);
+	glm::mat4 getActiveView();
+	glm::mat4 getActiveProjection();
+
+	void setupLights(const Shader& shader, const glm::vec3& target_modelspace);
+	inline void setupLights(const Shader& shader, const glm::mat4& model)
 	{
 		// Target center of model.
-		setupLights(shader, view * model * glm::vec4{ glm::vec3{0.f}, 1.f });
+		setupLights(shader, model * glm::vec4{ glm::vec3{0.f}, 1.f });
 	}
 	
 

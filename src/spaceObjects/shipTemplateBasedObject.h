@@ -41,7 +41,7 @@ public:
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
-    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
+    virtual void draw3DTransparent() override;
     virtual void drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 

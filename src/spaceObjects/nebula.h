@@ -21,7 +21,7 @@ class Nebula : public SpaceObject
 public:
     Nebula();
 
-    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
+    virtual void draw3DTransparent() override;
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual bool canHideInNebula() override { return false; }

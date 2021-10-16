@@ -61,9 +61,8 @@ BeamEffect::~BeamEffect()
 {
 }
 
-void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
+void BeamEffect::draw3DTransparent()
 {
-    auto model_matrix = glm::translate(glm::mat4(1.0f), {-getPosition().x, -getPosition().y, 0});
     glm::vec3 startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     glm::vec3 endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
@@ -73,8 +72,7 @@ void BeamEffect::draw3DTransparent(const glm::mat4& object_view_matrix)
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), lifetime, lifetime, lifetime, 1.f);
-    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(object_view_matrix));
-    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
     
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));

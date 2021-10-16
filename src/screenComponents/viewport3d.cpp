@@ -27,7 +27,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     starbox_shader = ShaderManager::getShader("shaders/starbox");
     starbox_shader->bind();
     starbox_uniforms[static_cast<size_t>(Uniforms::Projection)] = starbox_shader->getUniformLocation("projection");
-    starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)] = starbox_shader->getUniformLocation("model_view");
+    starbox_uniforms[static_cast<size_t>(Uniforms::View)] = starbox_shader->getUniformLocation("view");
 
     starbox_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = starbox_shader->getAttributeLocation("position");
 
@@ -113,7 +113,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     spacedust_shader = ShaderManager::getShader("shaders/spacedust");
     spacedust_shader->bind();
     spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)] = spacedust_shader->getUniformLocation("projection");
-    spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)] = spacedust_shader->getUniformLocation("model_view");
+    spacedust_uniforms[static_cast<size_t>(Uniforms::View)] = spacedust_shader->getUniformLocation("view");
     spacedust_uniforms[static_cast<size_t>(Uniforms::Rotation)] = spacedust_shader->getUniformLocation("rotation");
 
     spacedust_vertex_attributes[static_cast<size_t>(VertexAttributes::Position)] = spacedust_shader->getAttributeLocation("position");
@@ -189,13 +189,15 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glFrontFace(GL_CCW);
 
     projection_matrix = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f);
-    view_matrix = glm::mat4(1.0f);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
-    view_matrix = glm::rotate(view_matrix, glm::radians(90.0f), {1, 0, 0}); // -> X across (l-t-r), Y "towards", Z down 
-    view_matrix = glm::scale(view_matrix, {1,1,-1});  // -> X across (l-t-r), Y "towards", Z up
-    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_pitch), {1, 0, 0});
-    view_matrix = glm::rotate(view_matrix, glm::radians(-(camera_yaw + 90)), {0, 0, 1});
+    auto view_matrix = glm::rotate(glm::identity<glm::mat4>(), glm::radians(90.0f), {1.f, 0.f, 0.f}); // -> X across (l-t-r), Y "towards", Z down 
+    view_matrix = glm::scale(view_matrix, {1.f,1.f,-1.f});  // -> X across (l-t-r), Y "towards", Z up
+    view_matrix = glm::rotate(view_matrix, glm::radians(-camera_pitch), {1.f, 0.f, 0.f});
+    view_matrix = glm::rotate(view_matrix, glm::radians(-(camera_yaw + 90.f)), {0.f, 0.f, 1.f});
+
+    // Translate camera
+    view_matrix = glm::translate(view_matrix, -camera_position);
 
     // Draw starbox.
     glDepthMask(GL_FALSE);
@@ -209,7 +211,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         // Uniform
         // Upload matrices (only float 4x4 supported in es2)
         glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(view_matrix));
+        glUniformMatrix4fv(starbox_uniforms[static_cast<size_t>(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view_matrix));
         
         // Bind our cube
         {
@@ -265,6 +267,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         render_lists[render_list_index].emplace_back(*obj, depth);
     }
 
+    // Update view matrix in shaders.
+    ShaderRegistry::updateProjectionView({}, view_matrix);
+
+
     for(int n=render_lists.size() - 1; n >= 0; n--)
     {
         auto& render_list = render_lists[n];
@@ -272,16 +278,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         auto projection = glm::perspective(glm::radians(camera_fov), rect.size.x / rect.size.y, 1.f, 25000.f * (n + 1));
         // Update projection matrix in shaders.
-        for (auto i = 0; i < ShaderRegistry::Shaders_t(ShaderRegistry::Shaders::Count); ++i)
-        {
-            const auto& shader = ShaderRegistry::get(ShaderRegistry::Shaders(i));
-            if (shader.uniform(ShaderRegistry::Uniforms::Projection) != -1)
-            {
-                shader.get()->bind();
-                glUniformMatrix4fv(shader.uniform(ShaderRegistry::Uniforms::Projection), 1, GL_FALSE, glm::value_ptr(projection));
-            }
-        }
-        glUseProgram(GL_NONE);
+        ShaderRegistry::updateProjectionView(projection, {});
 
         glDepthMask(true);
 
@@ -289,11 +286,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         for(auto info : render_list)
         {
             SpaceObject* obj = info.object;
-
-            glm::mat4 object_matrix = glm::translate(view_matrix, -camera_position);
-            object_matrix = glm::translate(object_matrix, {obj->getPosition().x, obj->getPosition().y, 0.0f});
-            object_matrix = glm::rotate(object_matrix, obj->getRotation() / 180.0f * float(M_PI), {0, 0, 1});
-            obj->draw3D(object_matrix);
+            obj->draw3D();
         }
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
@@ -301,14 +294,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
         for(auto info : render_list)
         {
             SpaceObject* obj = info.object;
-
-            glm::mat4 object_matrix = glm::translate(view_matrix, -camera_position);
-            object_matrix = glm::translate(object_matrix, {obj->getPosition().x, obj->getPosition().y, 0.0f});
-            object_matrix = glm::rotate(object_matrix, obj->getRotation() / 180.0f * float(M_PI), {0, 0, 1});
-            obj->draw3DTransparent(object_matrix);
+            obj->draw3DTransparent();
         }
     }
-    ParticleEngine::render(projection_matrix, glm::translate(view_matrix, -camera_position));
+    ParticleEngine::render(projection_matrix, view_matrix);
 
     if (show_spacedust && my_spaceship)
     {
@@ -338,7 +327,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         // Upload matrices (only float 4x4 supported in es2)
         glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::Projection)], 1, GL_FALSE, glm::value_ptr(projection_matrix));
-        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::ModelView)], 1, GL_FALSE, glm::value_ptr(glm::translate(view_matrix, -camera_position)));
+        glUniformMatrix4fv(spacedust_uniforms[static_cast<size_t>(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view_matrix));
 
         // Ship information for flying particles
         glUniform2f(spacedust_shader->getUniformLocation("velocity"), dust_vector.x, dust_vector.y);
@@ -366,11 +355,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         P<SpaceObject> target = my_spaceship->getTarget();
         glDisable(GL_DEPTH_TEST);
-        auto model_matrix = glm::translate(glm::mat4(1.0f), {-camera_position.x, -camera_position.y, -camera_position.z});
-        model_matrix = glm::translate(model_matrix, {target->getPosition().x, target->getPosition().y, 0});
+        auto model_matrix = glm::translate(glm::identity<glm::mat4>(), glm::vec3(target->getPosition(), 0.f));
+
 
         textureManager.getTexture("redicule2.png")->bind();
-        glUniformMatrix4fv(billboard.get().uniform(ShaderRegistry::Uniforms::View), 1, GL_FALSE, glm::value_ptr(view_matrix * model_matrix));
+        glUniformMatrix4fv(billboard.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
         glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
@@ -482,14 +471,11 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
 glm::vec3 GuiViewport3D::worldToScreen(sp::RenderTarget& renderer, glm::vec3 world)
 {
-    world -= camera_position;
-    auto view_pos = view_matrix * glm::vec4{ world.x, world.y, world.z, 1.f };
+    auto view_pos = view_matrix * glm::vec4(world, 1.f);
     auto pos = projection_matrix * view_pos;
 
     // Perspective division
-    pos.x /= pos.w;
-    pos.y /= pos.w;
-    pos.z /= pos.w;
+    pos /= pos.w;
 
     //Window coordinates
     //Map x, y to range 0-1

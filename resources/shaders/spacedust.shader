@@ -1,7 +1,7 @@
 [vertex]
 // Program inputs.
 uniform mat4 projection;
-uniform mat4 model_view;
+uniform mat4 view;
 uniform vec2 velocity;
 
 // Per-vertex inputs
@@ -10,7 +10,7 @@ attribute float sign_value;
 
 void main()
 {    
-    gl_Position = projection * model_view * vec4(position.xy + sign_value * velocity, position.z, 1.);
+    gl_Position = projection * view * vec4(position.xy + sign_value * velocity, position.z, 1.);
 }
 
 [fragment]

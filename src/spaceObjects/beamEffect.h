@@ -21,7 +21,7 @@ public:
     BeamEffect();
     virtual ~BeamEffect();
 
-    virtual void draw3DTransparent(const glm::mat4& object_view_matrix) override;
+    virtual void draw3DTransparent() override;
     virtual void update(float delta) override;
 
     void setSource(P<SpaceObject> source, glm::vec3 offset);

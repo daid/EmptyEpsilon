@@ -35,7 +35,7 @@ class ParticleEngine : public Updatable
     enum class Uniforms : uint8_t
     {
         Projection = 0,
-        ModelView,
+        View,
 
         Count
     };

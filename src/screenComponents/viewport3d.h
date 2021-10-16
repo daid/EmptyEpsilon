@@ -19,7 +19,7 @@ class GuiViewport3D : public GuiElement
     enum class Uniforms : uint8_t
     {
         Projection = 0,
-        ModelView,
+        View,
 
         StarboxCount,
 
