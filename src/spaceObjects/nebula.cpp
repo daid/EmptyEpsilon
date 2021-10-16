@@ -85,8 +85,8 @@ void Nebula::draw3DTransparent()
 
         textureManager.getTexture("Nebula" + string(cloud.texture) + ".png")->bind();
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
-        auto model_matrix = glm::translate(glm::mat4(1.0f), {cloud.offset.x, cloud.offset.y, 0});
-        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
+        auto model_matrix = glm::translate(getModelMatrix(), {cloud.offset.x, cloud.offset.y, 0});
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
