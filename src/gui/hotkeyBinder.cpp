@@ -2,46 +2,30 @@
 #include "hotkeyConfig.h"
 #include "hotkeyBinder.h"
 
-GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, string text)
-: GuiTextEntry(owner, id, text), has_focus(false)
+GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key)
+: GuiElement(owner, id), has_focus(false), key(key)
 {
 }
 
-void GuiHotkeyBinder::onFocusGained()
+bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    SDL_StartTextInput();
-    has_focus = true;
+    if (button != sp::io::Pointer::Button::Middle)
+        key->clearKeys();
+    if (button != sp::io::Pointer::Button::Right)
+        key->startUserRebind(sp::io::Keybinding::Type::Keyboard | sp::io::Keybinding::Type::Joystick | sp::io::Keybinding::Type::Controller | sp::io::Keybinding::Type::Virtual);
+    return true;
 }
 
-void GuiHotkeyBinder::onFocusLost()
+void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
 {
-    SDL_StopTextInput();
-    has_focus = false;
+    if (key->isUserRebinding())
+        renderer.drawStretched(rect, "gui/widget/TextEntryBackground.focused.png", selectColor(colorConfig.text_entry.background));
+    else
+        renderer.drawStretched(rect, "gui/widget/TextEntryBackground.png", selectColor(colorConfig.text_entry.background));
+    string text = key->getHumanReadableKeyName(0);
+    for(int n=1; key->getKeyType(n) != sp::io::Keybinding::Type::None; n++)
+        text += "," + key->getHumanReadableKeyName(n);
+    if (key->isUserRebinding())
+        text = "[Press new key]";
+    renderer.drawText(sp::Rect(rect.position.x + 16, rect.position.y, rect.size.x, rect.size.y), text, sp::Alignment::CenterLeft, 30, main_font, selectColor(colorConfig.text_entry.forground));
 }
-/* TODO keybinds
-bool GuiHotkeyBinder::onKey(const SDL_KeyboardEvent& key, int unicode)
-{
-    // If the field has focus and any known key is pressed ...
-    if (has_focus && key.keysym.sym != SDLK_UNKNOWN)
-    {
-        // Don't bind hardcoded "back" keys.
-        if (key.keysym.sym == SDLK_ESCAPE
-            || key.keysym.sym == SDLK_HOME
-            || key.keysym.sym == SDLK_F1)
-        {
-            text = "";
-            return true;
-        }
-
-        // Get the key's string name and display it.
-        string key_name = HotkeyConfig::get().getStringForKey(key.keysym.sym);
-
-        if (key_name.length() > 0) {
-            text = key_name;
-            return true;
-        }
-    }
-
-    return false;
-}
-*/

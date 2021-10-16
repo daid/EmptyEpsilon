@@ -1,20 +1,20 @@
 #ifndef HOTKEYBINDER_H
 #define HOTKEYBINDER_H
 
-#include "gui2_textentry.h"
+#include "gui2_element.h"
 
 class HotkeyConfig;
 
-class GuiHotkeyBinder : public GuiTextEntry
+class GuiHotkeyBinder : public GuiElement
 {
 private:
     bool has_focus;
+    sp::io::Keybinding* key;
 public:
-    GuiHotkeyBinder(GuiContainer* owner, string id, string text);
+    GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key);
 
-    virtual void onFocusGained() override;
-    virtual void onFocusLost() override;
-    //virtual bool onKey(const SDL_KeyboardEvent& key, int unicode) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onDraw(sp::RenderTarget& renderer) override;
 };
 
 #endif //HOTKEYBINDER_H

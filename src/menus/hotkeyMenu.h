@@ -48,10 +48,9 @@ private:
     string category = "";
     int category_index = 1;
     std::vector<string> category_list;
-    std::vector<std::pair<string, string>> hotkey_list;
+    std::vector<sp::io::Keybinding*> hotkey_list;
 
     void setCategory(int cat);
-    void saveHotkeys();
     void pageHotkeys(int direction);
 public:
     HotkeyMenu();
