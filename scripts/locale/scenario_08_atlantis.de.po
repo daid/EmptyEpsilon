@@ -113,7 +113,7 @@ msgstr ""
 "Waffensysteme testen, sollten wir zuerst die Schiffe identifizieren, um "
 "sicherzustellen, dass wir die richtigen zerstören.\n"
 "\n"
-"Teilen Sie dem Wiissenschaftspersonal mit, dass die Schiffe Dummy-1 und "
+"Teilen Sie dem Wissenschaftspersonal mit, dass die Schiffe Dummy-1 und "
 "Dummy-2 gescannt werden sollen, um sie richtig zu identifizieren."
 
 #: scripts/scenario_08_atlantis.lua:381
