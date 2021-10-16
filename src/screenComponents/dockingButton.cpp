@@ -30,6 +30,31 @@ void GuiDockingButton::click()
 void GuiDockingButton::onUpdate()
 {
     setVisible(my_spaceship && my_spaceship->getCanDock());
+
+    if (my_spaceship)
+    {
+        if (keys.helms_dock_action.getDown())
+        {
+            switch(my_spaceship->docking_state)
+            {
+            case DS_NotDocking:
+                my_spaceship->commandDock(findDockingTarget());
+                break;
+            case DS_Docking:
+                my_spaceship->commandAbortDock();
+                break;
+            case DS_Docked:
+                my_spaceship->commandUndock();
+                break;
+            }
+        }
+        else if (keys.helms_dock_request.getDown())
+            my_spaceship->commandDock(findDockingTarget());
+        else if (keys.helms_dock_abort.getDown())
+            my_spaceship->commandAbortDock();
+        else if (keys.helms_undock.getDown())
+            my_spaceship->commandUndock();
+    }
 }
 
 void GuiDockingButton::onDraw(sp::RenderTarget& renderer)
@@ -58,34 +83,6 @@ void GuiDockingButton::onDraw(sp::RenderTarget& renderer)
         }
     }
     GuiButton::onDraw(renderer);
-}
-
-void GuiDockingButton::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "HELMS" && my_spaceship)
-    {
-        if (key.hotkey == "DOCK_ACTION")
-        {
-            switch(my_spaceship->docking_state)
-            {
-            case DS_NotDocking:
-                my_spaceship->commandDock(findDockingTarget());
-                break;
-            case DS_Docking:
-                my_spaceship->commandAbortDock();
-                break;
-            case DS_Docked:
-                my_spaceship->commandUndock();
-                break;
-            }
-        }
-        else if (key.hotkey == "DOCK_REQUEST")
-            my_spaceship->commandDock(findDockingTarget());
-        else if (key.hotkey == "DOCK_ABORT")
-            my_spaceship->commandAbortDock();
-        else if (key.hotkey == "UNDOCK")
-            my_spaceship->commandUndock();
-    }
 }
 
 P<SpaceObject> GuiDockingButton::findDockingTarget()

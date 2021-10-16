@@ -37,12 +37,11 @@ public:
 
     virtual void onUpdate() {}
     virtual void onDraw(sp::RenderTarget& window) {}
-    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id);
-    virtual void onMouseDrag(glm::vec2 position, int id);
-    virtual void onMouseUp(glm::vec2 position, int id);
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id);
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onTextInput(const string& text);
     virtual void onTextInput(sp::TextInputEvent e);
-    virtual void onHotkey(const HotkeyResult& key);
     virtual bool onJoystickAxis(const AxisAction& axisAction);
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}

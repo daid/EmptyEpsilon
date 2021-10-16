@@ -18,6 +18,19 @@ DebugRenderer::DebugRenderer()
 
 void DebugRenderer::render(sp::RenderTarget& renderer)
 {
+    /* TODO hotkeys
+    if (keys.keysym.sym == SDLK_F10)
+    {
+        show_fps = !show_fps;
+        show_datarate = !show_datarate;
+    }
+    if (key.keysym.sym == SDLK_F11)
+    {
+        show_timing_graph = !show_timing_graph;
+        timing_graph_points.clear();
+    }
+    */
+
     fps_counter++;
     if (fps_counter > 30)
     {
@@ -78,18 +91,4 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{0,255,0,255});
     }
     renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
-}
-
-void DebugRenderer::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)
-{
-    if (key.keysym.sym == SDLK_F10)
-    {
-        show_fps = !show_fps;
-        show_datarate = !show_datarate;
-    }
-    if (key.keysym.sym == SDLK_F11)
-    {
-        show_timing_graph = !show_timing_graph;
-        timing_graph_points.clear();
-    }
 }

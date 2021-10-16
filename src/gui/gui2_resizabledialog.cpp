@@ -80,7 +80,7 @@ void GuiResizableDialog::onDraw(sp::RenderTarget& renderer)
     renderer.drawSprite("gui/widget/ResizeDialogCorner.png", rect.position + rect.size - glm::vec2(resize_icon_size * 0.5f, resize_icon_size * 0.5f), resize_icon_size);
 }
 
-bool GuiResizableDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiResizableDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     click_state = ClickState::None;
     if (title_bar->getRect().contains(position))
@@ -91,7 +91,7 @@ bool GuiResizableDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 p
     return true;
 }
 
-void GuiResizableDialog::onMouseDrag(glm::vec2 position, int id)
+void GuiResizableDialog::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     glm::vec2 offset = position - rect.position;
     switch(click_state)

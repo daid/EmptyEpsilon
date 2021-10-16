@@ -16,7 +16,6 @@ public:
 
     virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
 };
 
 #endif//SELF_DESTRUCT_BUTTON_H

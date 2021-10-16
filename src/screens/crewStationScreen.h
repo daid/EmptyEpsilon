@@ -30,7 +30,6 @@ public:
     void finishCreation();
 
     virtual void update(float delta) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
 
 private:
     GuiElement* main_panel;

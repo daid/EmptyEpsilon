@@ -224,27 +224,21 @@ void CrewStationScreen::update(float delta)
         // impulse engine sound.
         impulse_sound->stop();
     }
-}
 
-void CrewStationScreen::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "GENERAL")
-    {
-        if (key.hotkey == "NEXT_STATION")
-            showNextTab(1);
-        else if (key.hotkey == "PREV_STATION")
-            showNextTab(-1);
-        else if (key.hotkey == "STATION_HELMS")
-            showTab(findTab(getCrewPositionName(helmsOfficer)));
-        else if (key.hotkey == "STATION_WEAPONS")
-            showTab(findTab(getCrewPositionName(weaponsOfficer)));
-        else if (key.hotkey == "STATION_ENGINEERING")
-            showTab(findTab(getCrewPositionName(engineering)));
-        else if (key.hotkey == "STATION_SCIENCE")
-            showTab(findTab(getCrewPositionName(scienceOfficer)));
-        else if (key.hotkey == "STATION_RELAY")
-            showTab(findTab(getCrewPositionName(relayOfficer)));
-    }
+    if (keys.next_station.getDown())
+        showNextTab(1);
+    else if (keys.prev_station.getDown())
+        showNextTab(-1);
+    else if (keys.station_helms.getDown())
+        showTab(findTab(getCrewPositionName(helmsOfficer)));
+    else if (keys.station_weapons.getDown())
+        showTab(findTab(getCrewPositionName(weaponsOfficer)));
+    else if (keys.station_engineering.getDown())
+        showTab(findTab(getCrewPositionName(engineering)));
+    else if (keys.station_science.getDown())
+        showTab(findTab(getCrewPositionName(scienceOfficer)));
+    else if (keys.station_relay.getDown())
+        showTab(findTab(getCrewPositionName(relayOfficer)));
 }
 
 void CrewStationScreen::showNextTab(int offset)

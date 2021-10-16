@@ -89,11 +89,11 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
     }
 }
 
-void GuiShipInternalView::onHotkey(const HotkeyResult& key)
+void GuiShipInternalView::onUpdate()
 {
-    if (key.category == "ENGINEERING" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "NEXT_REPAIR_CREW")
+        if (keys.engineering_next_repair_crew.getDown())
         {
             PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
             P<RepairCrew> crew_member;
@@ -129,13 +129,13 @@ void GuiShipInternalView::onHotkey(const HotkeyResult& key)
         }
         if (selected_crew_member)
         {
-            if (key.hotkey == "REPAIR_CREW_MOVE_UP")
+            if (keys.engineering_repair_crew_up.getDown())
                 selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, -1));
-            if (key.hotkey == "REPAIR_CREW_MOVE_DOWN")
+            if (keys.engineering_repair_crew_down.getDown())
                 selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, 1));
-            if (key.hotkey == "REPAIR_CREW_MOVE_LEFT")
+            if (keys.engineering_repair_crew_left.getDown())
                 selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(-1, 0));
-            if (key.hotkey == "REPAIR_CREW_MOVE_RIGHT")
+            if (keys.engineering_repair_crew_right.getDown())
                 selected_crew_member->commandSetTargetPosition(glm::ivec2(selected_crew_member->position + glm::vec2(0.5, 0.5)) + glm::ivec2(1, 0));
         }
     }
@@ -146,12 +146,12 @@ GuiShipRoomContainer::GuiShipRoomContainer(GuiContainer* owner, string id, float
 {
 }
 
-bool GuiShipRoomContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiShipRoomContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }
 
-void GuiShipRoomContainer::onMouseUp(glm::vec2 position, int id)
+void GuiShipRoomContainer::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position) && func)
     {
@@ -212,14 +212,14 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiShipRoom::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiShipRoom::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (func)
         return true;
     return false;
 }
 
-void GuiShipRoom::onMouseUp(glm::vec2 position, int id)
+void GuiShipRoom::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position) && func)
     {
@@ -242,14 +242,14 @@ void GuiShipDoor::onDraw(sp::RenderTarget& renderer)
         renderer.drawRotatedSprite("room_door.png", getCenterPoint(), rect.size.y, 90);
 }
 
-bool GuiShipDoor::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiShipDoor::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (func)
         return true;
     return false;
 }
 
-void GuiShipDoor::onMouseUp(glm::vec2 position, int id)
+void GuiShipDoor::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position) && func)
         func();
@@ -285,12 +285,12 @@ void GuiShipCrew::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiShipCrew::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiShipCrew::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }
 
-void GuiShipCrew::onMouseUp(glm::vec2 position, int id)
+void GuiShipCrew::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position) && func)
         func(crew);

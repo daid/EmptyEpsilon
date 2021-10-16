@@ -136,13 +136,14 @@ bool HelmsScreen::onJoystickAxis(const AxisAction& axisAction){
     return false;
 }
 
-void HelmsScreen::onHotkey(const HotkeyResult& key)
+void HelmsScreen::onUpdate()
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "TURN_LEFT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
-        else if (key.hotkey == "TURN_RIGHT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
+        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+        if (angle != 0.0f)
+        {
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + angle);
+        }
     }
 }

@@ -362,81 +362,74 @@ bool EngineeringScreen::onJoystickAxis(const AxisAction& axisAction){
     return false;
 }
 
-void EngineeringScreen::onHotkey(const HotkeyResult& key)
+void EngineeringScreen::onUpdate()
 {
-    if (key.category == "ENGINEERING" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "SELECT_REACTOR") selectSystem(SYS_Reactor);
-        if (key.hotkey == "SELECT_BEAM_WEAPONS") selectSystem(SYS_BeamWeapons);
-        if (key.hotkey == "SELECT_MISSILE_SYSTEM") selectSystem(SYS_MissileSystem);
-        if (key.hotkey == "SELECT_MANEUVER") selectSystem(SYS_Maneuver);
-        if (key.hotkey == "SELECT_IMPULSE") selectSystem(SYS_Impulse);
-        if (key.hotkey == "SELECT_WARP") selectSystem(SYS_Warp);
-        if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
-        if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
-        if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
+        if (keys.engineering_select_reactor.getDown()) selectSystem(SYS_Reactor);
+        if (keys.engineering_select_beam_weapons.getDown()) selectSystem(SYS_BeamWeapons);
+        if (keys.engineering_select_missile_system.getDown()) selectSystem(SYS_MissileSystem);
+        if (keys.engineering_select_maneuvering_system.getDown()) selectSystem(SYS_Maneuver);
+        if (keys.engineering_select_impulse_system.getDown()) selectSystem(SYS_Impulse);
+        if (keys.engineering_select_warp_system.getDown()) selectSystem(SYS_Warp);
+        if (keys.engineering_select_jump_drive_system.getDown()) selectSystem(SYS_JumpDrive);
+        if (keys.engineering_select_front_shield_system.getDown()) selectSystem(SYS_FrontShield);
+        if (keys.engineering_select_rear_shield_system.getDown()) selectSystem(SYS_RearShield);
 
         if (selected_system != SYS_None)
         {
             // Note the code duplication with extra/powerManagement
-            if (key.hotkey == "SET_POWER_000")
+            if (keys.engineering_set_power_000.getDown())
             {
                 power_slider->setValue(0.0f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_030")
+            if (keys.engineering_set_power_030.getDown())
             {
                 power_slider->setValue(0.3f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_050")
+            if (keys.engineering_set_power_050.getDown())
             {
                 power_slider->setValue(0.5f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_100")
+            if (keys.engineering_set_power_100.getDown())
             {
                 power_slider->setValue(1.0f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_150")
+            if (keys.engineering_set_power_150.getDown())
             {
                 power_slider->setValue(1.5f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_200")
+            if (keys.engineering_set_power_200.getDown())
             {
                 power_slider->setValue(2.0f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_250")
+            if (keys.engineering_set_power_250.getDown())
             {
                 power_slider->setValue(2.5f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "SET_POWER_300")
+            if (keys.engineering_set_power_300.getDown())
             {
                 power_slider->setValue(3.0f);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "INCREASE_POWER")
+
+            auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
+            if (power_adjust != 0.0f)
             {
-                power_slider->setValue(my_spaceship->systems[selected_system].power_request + 0.1f);
+                power_slider->setValue(my_spaceship->systems[selected_system].power_request + power_adjust);
                 my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (key.hotkey == "DECREASE_POWER")
+            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
+            if (coolant_adjust != 0.0f)
             {
-                power_slider->setValue(my_spaceship->systems[selected_system].power_request - 0.1f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-            }
-            if (key.hotkey == "INCREASE_COOLANT")
-            {
-                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + 0.5f);
-                my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
-            }
-            if (key.hotkey == "DECREASE_COOLANT")
-            {
-                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request - 0.5f);
+                coolant_slider->setValue(my_spaceship->systems[selected_system].coolant_request + coolant_adjust);
                 my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
             }
         }

@@ -121,11 +121,11 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
 }
 
-void WeaponsScreen::onHotkey(const HotkeyResult& key)
+void WeaponsScreen::onUpdate()
 {
-    if (key.category == "WEAPONS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        if (keys.weapons_enemy_next_target.getDown())
         {
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
@@ -156,7 +156,7 @@ void WeaponsScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "NEXT_TARGET")
+        if (keys.weapons_next_target.getDown())
         {
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
@@ -187,18 +187,15 @@ void WeaponsScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "AIM_MISSILE_LEFT")
+        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        if (aim_adjust != 0.0f)
         {
-            missile_aim->setValue(missile_aim->getValue() - 5.0f);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
-        }
-        if (key.hotkey == "AIM_MISSILE_RIGHT")
-        {
-            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
         }
     }
 }
+
 bool WeaponsScreen::onJoystickAxis(const AxisAction& axisAction){
     if (axisAction.category == "WEAPONS" && my_spaceship){
         if (axisAction.action == "AIM_MISSILE"){

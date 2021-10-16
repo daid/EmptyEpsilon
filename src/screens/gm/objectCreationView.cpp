@@ -149,7 +149,7 @@ void GuiObjectCreationView::onDraw(sp::RenderTarget& target)
     }
 }
 
-bool GuiObjectCreationView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiObjectCreationView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {   //Catch clicks.
     return true;
 }

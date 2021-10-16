@@ -787,7 +787,7 @@ glm::vec2 GuiRadarView::screenToWorld(glm::vec2 screen_position)
     return view_position + glm::vec2(radar_position.x, radar_position.y);
 }
 
-bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (style == Circular || style == CircularMasked)
     {
@@ -802,13 +802,13 @@ bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
     return true;
 }
 
-void GuiRadarView::onMouseDrag(glm::vec2 position, int id)
+void GuiRadarView::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (mouse_drag_func)
         mouse_drag_func(screenToWorld(position));
 }
 
-void GuiRadarView::onMouseUp(glm::vec2 position, int id)
+void GuiRadarView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (mouse_up_func)
         mouse_up_func(screenToWorld(position));

@@ -25,7 +25,7 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
     renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), "gui/widget/ScrollbarSelection.png", glm::u8vec4{255,255,255,255});
 }
 
-bool GuiScrollbar::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiScrollbar::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     int range = (max_value - min_value);
     float arrow_size = rect.size.x / 2.0f;
@@ -44,7 +44,7 @@ bool GuiScrollbar::onMouseDown(sp::io::Pointer::Button button, glm::vec2 positio
     return true;
 }
 
-void GuiScrollbar::onMouseDrag(glm::vec2 position, int id)
+void GuiScrollbar::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (drag_scrollbar)
     {
@@ -64,7 +64,7 @@ void GuiScrollbar::onMouseDrag(glm::vec2 position, int id)
     }
 }
 
-void GuiScrollbar::onMouseUp(glm::vec2 position, int id)
+void GuiScrollbar::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (!drag_scrollbar)
     {

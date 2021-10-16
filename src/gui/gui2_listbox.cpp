@@ -84,11 +84,11 @@ void GuiListbox::entriesChanged()
     }
 }
 
-bool GuiListbox::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiListbox::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return false;
 }
 
-void GuiListbox::onMouseUp(glm::vec2 position, int id)
+void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }

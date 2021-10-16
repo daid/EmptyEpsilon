@@ -11,7 +11,6 @@ public:
 
     virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
 private:
     void click();
 

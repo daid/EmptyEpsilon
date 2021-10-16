@@ -62,7 +62,7 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
     }
 }
 
-GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, int id)
+GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     for(std::list<GuiElement*>::reverse_iterator it = elements.rbegin(); it != elements.rend(); it++)
     {
@@ -80,19 +80,6 @@ GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::v
         }
     }
     return nullptr;
-}
-
-void GuiContainer::forwardKeypressToElements(const HotkeyResult& key)
-{
-    for(GuiElement* element : elements)
-    {
-        if (element->isVisible())
-        {
-            if (element->isEnabled())
-                element->onHotkey(key);
-            element->forwardKeypressToElements(key);
-        }
-    }
 }
 
 bool GuiContainer::forwardJoystickAxisToElements(const AxisAction& axisAction)

@@ -148,6 +148,26 @@ void ScreenMainScreen::update(float delta)
         // engine sounds.
         impulse_sound->stop();
     }
+
+    if (my_spaceship)
+    {
+        if (keys.mainscreen_forward.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Front);
+        if (keys.mainscreen_left.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Left);
+        if (keys.mainscreen_right.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Right);
+        if (keys.mainscreen_back.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Back);
+        if (keys.mainscreen_target.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Target);
+        if (keys.mainscreen_tactical_radar.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+        if (keys.mainscreen_long_range_radar.getDown())
+            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+        if (keys.mainscreen_first_person.getDown())
+            viewport->first_person = !viewport->first_person;
+    }
 }
 
 bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -203,27 +223,4 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
         break;
     }
     return true;
-}
-
-void ScreenMainScreen::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "MAIN_SCREEN" && my_spaceship)
-    {
-        if (key.hotkey == "VIEW_FORWARD")
-            my_spaceship->commandMainScreenSetting(MSS_Front);
-        else if (key.hotkey == "VIEW_LEFT")
-            my_spaceship->commandMainScreenSetting(MSS_Left);
-        else if (key.hotkey == "VIEW_RIGHT")
-            my_spaceship->commandMainScreenSetting(MSS_Right);
-        else if (key.hotkey == "VIEW_BACK")
-            my_spaceship->commandMainScreenSetting(MSS_Back);
-        else if (key.hotkey == "VIEW_TARGET")
-            my_spaceship->commandMainScreenSetting(MSS_Target);
-        else if (key.hotkey == "TACTICAL_RADAR")
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
-        else if (key.hotkey == "LONG_RANGE_RADAR")
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
-        else if (key.hotkey == "FIRST_PERSON")
-            viewport->first_person = !viewport->first_person;
-    }
 }

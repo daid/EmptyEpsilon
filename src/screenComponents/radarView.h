@@ -105,9 +105,9 @@ public:
     glm::vec2 worldToScreen(glm::vec2 world_position);
     glm::vec2 screenToWorld(glm::vec2 screen_position);
 
-    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id) override;
-    virtual void onMouseDrag(glm::vec2 position, int id) override;
-    virtual void onMouseUp(glm::vec2 position, int id) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 private:
     void updateGhostDots();
 

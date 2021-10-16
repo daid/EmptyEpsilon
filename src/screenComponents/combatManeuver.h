@@ -16,7 +16,6 @@ public:
 
     virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
 
     void setBoostValue(float value);
     void setStrafeValue(float value);

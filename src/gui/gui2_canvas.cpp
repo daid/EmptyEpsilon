@@ -73,16 +73,6 @@ void GuiCanvas::onTextInput(sp::TextInputEvent e)
         focus_element->onTextInput(e);
 }
 
-void GuiCanvas::handleKeyPress(const SDL_KeyboardEvent& key, int unicode)
-{
-    std::vector<HotkeyResult> hotkey_list = HotkeyConfig::get().getHotkey(key);
-    for(HotkeyResult& result : hotkey_list)
-    {
-        forwardKeypressToElements(result);
-        onHotkey(result);
-    }
-}
-
 void GuiCanvas::handleJoystickAxis(unsigned int joystickId, int axis, float position){
     for(AxisAction action : joystick.getAxisAction(joystickId, axis, position)){
         forwardJoystickAxisToElements(action);
@@ -91,15 +81,7 @@ void GuiCanvas::handleJoystickAxis(unsigned int joystickId, int axis, float posi
 
 void GuiCanvas::handleJoystickButton(unsigned int joystickId, unsigned int button, bool state){
     if (state){
-        for(HotkeyResult& action : joystick.getButtonAction(joystickId, button)){
-            forwardKeypressToElements(action);
-            onHotkey(action);
-        }
     }
-}
-
-void GuiCanvas::onHotkey(const HotkeyResult& key)
-{
 }
 
 void GuiCanvas::focus(GuiElement* element)

@@ -49,12 +49,12 @@ void GuiButton::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiButton::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiButton::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }
 
-void GuiButton::onMouseUp(glm::vec2 position, int id)
+void GuiButton::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))
     {

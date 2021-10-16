@@ -3,7 +3,7 @@
 
 #include "engine.h"
 
-class DebugRenderer : public Renderable, public InputEventHandler
+class DebugRenderer : public Renderable
 {
 private:
     sp::SystemStopwatch fps_timer;
@@ -19,7 +19,6 @@ public:
     DebugRenderer();
 
     virtual void render(sp::RenderTarget& target) override;
-    virtual void handleKeyPress(const SDL_KeyboardEvent& key, int unicode) override;
 };
 
 #endif//DEBUG_RENDERER_H

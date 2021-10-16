@@ -4,7 +4,7 @@
 #include "engine.h"
 #include "gui2_container.h"
 
-class GuiCanvas : public Renderable, public GuiContainer, public InputEventHandler, private JoystickEventHandler
+class GuiCanvas : public Renderable, public GuiContainer, private JoystickEventHandler
 {
 private:
     GuiElement* click_element;
@@ -24,11 +24,8 @@ public:
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
 
-    virtual void handleKeyPress(const SDL_KeyboardEvent& key, int unicode) override;
     virtual void handleJoystickAxis(unsigned int joystickId, int axis, float position) override;
     virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
-
-    virtual void onHotkey(const HotkeyResult& key);
 
     void focus(GuiElement* element);
     //Called when an element is destroyed in this tree. Recursive tests if the given element or any of it's children currently has focus, and unsets that focus.

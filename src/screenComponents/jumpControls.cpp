@@ -60,15 +60,13 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
     }
 }
 
-void GuiJumpControls::onHotkey(const HotkeyResult& key)
+void GuiJumpControls::onUpdate()
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "INC_JUMP")
-            slider->setValue(slider->getValue() + 1000.0f);
-        if (key.hotkey == "DEC_JUMP")
-            slider->setValue(slider->getValue() - 1000.0f);
-        if (key.hotkey == "JUMP")
+        auto adjust = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
+        slider->setValue(slider->getValue() + 1000.0f * adjust);
+        if (keys.helms_execute_jump.getDown())
             my_spaceship->commandJump(slider->getValue());
     }
 }

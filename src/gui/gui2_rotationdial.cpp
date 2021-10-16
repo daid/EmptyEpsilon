@@ -18,7 +18,7 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f);
 }
 
-bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     auto center = getCenterPoint();
     float radius = std::min(rect.size.x, rect.size.y) / 2.0f;
@@ -33,7 +33,7 @@ bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
     return true;
 }
 
-void GuiRotationDial::onMouseDrag(glm::vec2 position, int id)
+void GuiRotationDial::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     auto center = getCenterPoint();
 
@@ -63,7 +63,7 @@ void GuiRotationDial::onMouseDrag(glm::vec2 position, int id)
     }
 }
 
-void GuiRotationDial::onMouseUp(glm::vec2 position, int id)
+void GuiRotationDial::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 

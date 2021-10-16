@@ -466,12 +466,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-void ScienceScreen::onHotkey(const HotkeyResult& key)
+void ScienceScreen::onUpdate()
 {
-    if (key.category == "SCIENCE" && my_spaceship)
+    if (my_spaceship)
     {
         // Initiate a scan on scannable objects.
-        if (key.hotkey == "SCAN_OBJECT" &&
+        if (keys.science_scan_object.getDown() &&
             my_spaceship->getCanScan() &&
             my_spaceship->scanning_delay == 0.0f)
         {
@@ -488,7 +488,7 @@ void ScienceScreen::onHotkey(const HotkeyResult& key)
         }
 
         // Cycle selection through scannable objects.
-        if (key.hotkey == "NEXT_SCANNABLE_OBJECT" &&
+        if (keys.science_select_next_scannable.getDown() &&
             my_spaceship->scanning_delay == 0.0f)
         {
             bool current_found = false;

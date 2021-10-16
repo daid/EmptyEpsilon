@@ -139,7 +139,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiIndicatorOverlays::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiIndicatorOverlays::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (pause_overlay->isVisible() || victory_overlay->isVisible())
         return true;

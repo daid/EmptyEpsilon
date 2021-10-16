@@ -17,16 +17,16 @@ GuiElement::~GuiElement()
     }
 }
 
-bool GuiElement::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, int id)
+bool GuiElement::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return false;
 }
 
-void GuiElement::onMouseDrag(glm::vec2 position, int id)
+void GuiElement::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
-void GuiElement::onMouseUp(glm::vec2 position, int id)
+void GuiElement::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
@@ -35,10 +35,6 @@ void GuiElement::onTextInput(const string& text)
 }
 
 void GuiElement::onTextInput(sp::TextInputEvent e)
-{
-}
-
-void GuiElement::onHotkey(const HotkeyResult& key)
 {
 }
 

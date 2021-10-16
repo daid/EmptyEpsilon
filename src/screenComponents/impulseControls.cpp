@@ -30,19 +30,18 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
     }
 }
 
-void GuiImpulseControls::onHotkey(const HotkeyResult& key)
+void GuiImpulseControls::onUpdate()
 {
-    if (key.category == "HELMS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "INC_IMPULSE")
-            my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
-        else if (key.hotkey == "DEC_IMPULSE")
-            my_spaceship->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
-        else if (key.hotkey == "ZERO_IMPULSE")
+        float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
+        if (change != 0.0f)
+            my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
+        if (keys.helms_zero_impulse.getDown())
             my_spaceship->commandImpulse(0.0f);
-        else if (key.hotkey == "MAX_IMPULSE")
+        if (keys.helms_max_impulse.getDown())
             my_spaceship->commandImpulse(1.0f);
-        else if (key.hotkey == "MIN_IMPULSE")
+        if (keys.helms_min_impulse.getDown())
             my_spaceship->commandImpulse(-1.0f);
     }
 }
