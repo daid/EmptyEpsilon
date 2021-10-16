@@ -46,8 +46,8 @@ ScreenMainScreen::ScreenMainScreen()
 
     keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
 
-    for (std::pair<string, string> shortcut : HotkeyConfig::get().listHotkeysByCategory("Main Screen"))
-        keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
+    for (auto binding : sp::io::Keybinding::listAllByCategory(tr("hotkey_menu", "Main Screen")))
+        keyboard_general += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
 
     keyboard_help->setText(keyboard_general);
 

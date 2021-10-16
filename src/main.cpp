@@ -186,7 +186,7 @@ int main(int argc, char** argv)
     }
 
     colorConfig.load();
-    HotkeyConfig::get().load();
+    sp::io::Keybinding::loadKeybindings("keybindings.json");
     keys.init();
     joystick.load();
 
@@ -352,6 +352,7 @@ int main(int argc, char** argv)
         {
             PreferencesManager::save("options.ini");
         }
+        sp::io::Keybinding::saveKeybindings("keybindings.json");
     }
 
     delete engine;

@@ -61,6 +61,7 @@ static std::vector<std::pair<string, int> > sfml_axis_names = {
 
 void JoystickConfig::load()
 {
+    /*
     for(JoystickConfigCategory& cat : categories)
     {
         for(AxisConfigItem& item : cat.axes)
@@ -92,6 +93,7 @@ void JoystickConfig::load()
             }
         }
     }
+    */
 }
 
 std::vector<AxisAction> JoystickConfig::getAxisAction(unsigned int joystickId, int axis, float position)

@@ -140,28 +140,6 @@ public:
 };
 extern Keys keys;
 
-class JoystickConfig;
-
-class HotkeyConfigItem
-{
-public:
-    string key;
-    std::tuple<string, string> value;
-    SDL_KeyboardEvent hotkey;
-
-    HotkeyConfigItem(const string& key, const std::tuple<string, string>&);
-
-    void load(const string& key_config);
-};
-
-class HotkeyConfigCategory
-{
-public:
-    string key;
-    string name;
-    std::vector<HotkeyConfigItem> hotkeys;
-};
-
 class HotkeyResult
 {
 public:
@@ -169,28 +147,6 @@ public:
 
     string category;
     string hotkey;
-};
-
-class HotkeyConfig
-{
-public:
-    static HotkeyConfig& get();
-
-    void load();
-    std::vector<string> getCategories() const;
-    std::vector<std::pair<string, string>> listHotkeysByCategory(const string& hotkey_category) const;
-    std::vector<std::pair<string, string>> listAllHotkeysByCategory(const string& hotkey_category) const;
-
-    bool setHotkey(const std::string& work_cat, const std::pair<string,string>& key, const string& new_value);
-    string getStringForKey(SDL_Keycode key) const;
-    SDL_Keycode getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const;
-private:
-    HotkeyConfig();
-    std::vector<HotkeyConfigCategory> categories;
-
-    void newCategory(const string& key, const string& name);
-    void newKey(const string& key, const std::tuple<string, string>&);
-friend class JoystickConfig;
 };
 
 #endif//HOTKEY_CONFIG_H

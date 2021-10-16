@@ -58,7 +58,6 @@ private:
 
     string listHotkeysLimited(string station);
     void tileViewport();
-    std::vector<std::pair<string, string>> listControlsByCategory(string category);
 };
 
 #endif//CREW_STATION_SCREEN_H
