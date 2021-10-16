@@ -97,6 +97,8 @@ public:
     //Science
     sp::io::Keybinding science_scan_object;
     sp::io::Keybinding science_select_next_scannable;
+    std::array<sp::io::Keybinding, 4> science_scan_param_increase;
+    std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
 
     //Engineering
     sp::io::Keybinding engineering_select_reactor;
@@ -179,7 +181,6 @@ public:
     std::vector<std::pair<string, string>> listHotkeysByCategory(const string& hotkey_category) const;
     std::vector<std::pair<string, string>> listAllHotkeysByCategory(const string& hotkey_category) const;
 
-    std::vector<HotkeyResult> getHotkey(const SDL_KeyboardEvent& key) const;
     bool setHotkey(const std::string& work_cat, const std::pair<string,string>& key, const string& new_value);
     string getStringForKey(SDL_Keycode key) const;
     SDL_Keycode getKeyByHotkey(const string& hotkey_category, const string& hotkey_name) const;

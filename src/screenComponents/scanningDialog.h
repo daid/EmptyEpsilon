@@ -31,7 +31,7 @@ public:
     GuiScanningDialog(GuiContainer* owner, string id);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
+    virtual void onUpdate() override;
 
     void setupParameters();
     void updateSignal();

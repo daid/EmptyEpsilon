@@ -6,7 +6,6 @@
 #include "rect.h"
 
 class GuiElement;
-class HotkeyResult;
 class AxisAction;
 class GuiContainer
 {
