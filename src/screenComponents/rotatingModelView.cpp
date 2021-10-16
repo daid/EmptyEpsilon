@@ -30,7 +30,11 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
     glViewport(p0.x, renderer.getPhysicalSize().y - p1.y, p1.x - p0.x, p1.y - p0.y);
 
-    glClearDepthf(1.f);
+    if (GLAD_GL_ES_VERSION_2_0)
+        glClearDepthf(1.f);
+    else
+        glClearDepth(1.f);
+
     glClear(GL_DEPTH_BUFFER_BIT);
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
