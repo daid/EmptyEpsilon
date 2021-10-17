@@ -21,6 +21,7 @@
 #include <jni.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include <SDL.h>
 #endif
 
 static inline int readInt(SDL_RWops* f)
