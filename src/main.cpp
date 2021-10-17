@@ -29,6 +29,8 @@
 #include "networkRecorder.h"
 #include "tutorialGame.h"
 
+#include "graphics/opengl.h"
+
 #include "hardware/hardwareController.h"
 #if WITH_DISCORD
 #include "discord.h"
@@ -221,6 +223,22 @@ int main(int argc, char** argv)
         }
         
         P<Window> window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
+#if defined(DEBUG)
+        // Synchronous gl debug output always in debug.
+        constexpr bool wants_gl_debug = true;
+        constexpr bool wants_gl_debug_synchronous = true;
+#else
+        auto wants_gl_debug = !PreferencesManager::get("gl_debug").empty();
+        auto wants_gl_debug_synchronous = !PreferencesManager::get("gl_debug_synchronous").empty();
+#endif
+        if (wants_gl_debug)
+        {
+            if (sp::gl::enableDebugOutput(wants_gl_debug_synchronous))
+                LOG(INFO, "GL Debug output enabled.");
+            else
+                LOG(WARNING, "GL Debug output requested but not available on this system.");
+        }
+
         if (PreferencesManager::get("instance_name") != "")
             window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         else
