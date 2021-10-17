@@ -10,8 +10,6 @@
 #include "logging.h"
 #include "shaderManager.h"
 
-extern glm::vec3 camera_position;
-
 namespace ShaderRegistry
 {
     namespace
@@ -155,7 +153,7 @@ namespace ShaderRegistry
 
     void setupLights(const Shader& shader, const glm::vec3& target_worldspace)
     {
-        constexpr auto lights = { 
+        const auto lights = { 
             std::tuple	{Uniforms::AmbientLightDirection, ambient_light_offset},
                         {Uniforms::SpecularLightDirection, specular_light_offset}
         };
