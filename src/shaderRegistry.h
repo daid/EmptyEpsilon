@@ -20,8 +20,9 @@ namespace sp
 
 namespace ShaderRegistry
 {
-	constexpr glm::vec3 ambientLightPosition{ 20000.f, 20000.f, 20000.f };
-	constexpr glm::vec3 specularLightPosition{ 0.f, 0.f, 0.f };
+	// Lights position, expressed as offset from the camera (world space).
+	constexpr glm::vec3 ambient_light_offset{ 20000.f, 20000.f, 20000.f };
+	constexpr glm::vec3 specular_light_offset{ 0.f, 0.f, 0.f };
 
 	enum class Shaders
 	{
@@ -102,8 +103,9 @@ namespace ShaderRegistry
 	void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection, std::optional<std::reference_wrapper<const glm::mat4>> view);
 	glm::mat4 getActiveView();
 	glm::mat4 getActiveProjection();
+	glm::vec3 getActiveCamera();
 
-	void setupLights(const Shader& shader, const glm::vec3& target_modelspace);
+	void setupLights(const Shader& shader, const glm::vec3& target_worldspace);
 	inline void setupLights(const Shader& shader, const glm::mat4& model)
 	{
 		// Target center of model.
