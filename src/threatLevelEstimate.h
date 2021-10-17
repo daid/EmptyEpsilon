@@ -2,6 +2,7 @@
 #define THREAT_LEVEL_ESTIMATE_H
 
 #include "Updatable.h"
+#include <functional>
 
 class SpaceShip;
 class ThreatLevelEstimate : public Updatable
