@@ -2,6 +2,7 @@
 #define PACK_RESOURCE_PROVIDER_H
 
 #include "resources.h"
+#include <unordered_map>
 
 struct PackResourceInfo
 {
