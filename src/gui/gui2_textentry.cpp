@@ -1,5 +1,7 @@
 #include "gui2_textentry.h"
 #include "input.h"
+#include "clipboard.h"
+
 
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text), text_size(30), func(nullptr)

@@ -3,6 +3,8 @@
 #include "main.h"
 #include "nebula.h"
 #include "playerInfo.h"
+#include "random.h"
+#include "textureManager.h"
 
 #include "scriptInterface.h"
 

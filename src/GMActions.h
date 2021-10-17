@@ -1,7 +1,7 @@
 #ifndef GM_ACTIONS
 #define GM_ACTIONS
 
-#include "engine.h"
+#include "multiplayer.h"
 
 
 class GameMasterActions;

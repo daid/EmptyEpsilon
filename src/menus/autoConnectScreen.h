@@ -3,8 +3,10 @@
 
 #include "gui/gui2_canvas.h"
 #include "playerInfo.h"
+#include "io/network/address.h"
 
 class GuiLabel;
+class ServerScanner;
 
 class AutoConnectScreen : public GuiCanvas, public Updatable
 {

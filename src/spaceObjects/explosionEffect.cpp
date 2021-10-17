@@ -3,6 +3,11 @@
 #include "main.h"
 #include "explosionEffect.h"
 #include "glObjects.h"
+#include "tween.h"
+#include "random.h"
+#include "soundManager.h"
+#include "textureManager.h"
+
 
 gl::Buffers<2> ExplosionEffect::particlesBuffers(gl::Unitialized{});
 

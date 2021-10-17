@@ -3,6 +3,7 @@
 #include "windowScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/indicatorOverlays.h"

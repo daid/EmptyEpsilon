@@ -1,5 +1,8 @@
 #include "scriptError.h"
 #include "main.h"
+#include "scriptInterface.h"
+#include "engine.h"
+
 
 ScriptErrorRenderer::ScriptErrorRenderer()
 : Renderable(mouseLayer)

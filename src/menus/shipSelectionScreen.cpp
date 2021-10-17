@@ -2,6 +2,9 @@
 
 #include "featureDefs.h"
 #include "glObjects.h"
+#include "soundManager.h"
+#include "random.h"
+#include "multiplayer_client.h"
 
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"

@@ -2,9 +2,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "main.h"
+#include "random.h"
 #include "wormHole.h"
 #include "spaceship.h"
 #include "scriptInterface.h"
+#include "textureManager.h"
 
 #include "glObjects.h"
 #include "shaderRegistry.h"

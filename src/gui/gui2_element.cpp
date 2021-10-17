@@ -210,9 +210,9 @@ void GuiElement::updateRect(sp::Rect parent_rect)
 {
     glm::vec2 local_size = size;
     if (local_size.x == GuiSizeMax)
-        local_size.x = parent_rect.size.x - fabs(position.x);
+        local_size.x = parent_rect.size.x - std::abs(position.x);
     if (local_size.y == GuiSizeMax)
-        local_size.y = parent_rect.size.y - fabs(position.y);
+        local_size.y = parent_rect.size.y - std::abs(position.y);
 
     if (local_size.x == GuiSizeMatchHeight)
         local_size.x = local_size.y;

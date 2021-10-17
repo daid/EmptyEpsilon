@@ -1,7 +1,7 @@
 #ifndef THREAT_LEVEL_ESTIMATE_H
 #define THREAT_LEVEL_ESTIMATE_H
 
-#include "engine.h"
+#include "updatable.h"
 
 class SpaceShip;
 class ThreatLevelEstimate : public Updatable

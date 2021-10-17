@@ -2,6 +2,8 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "preferenceManager.h"
+#include "soundManager.h"
+
 
 ImpulseSound::ImpulseSound(bool enabled)
 {

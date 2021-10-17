@@ -2,6 +2,8 @@
 #define RADAR_VIEW_H
 
 #include "gui/gui2_element.h"
+#include "engine.h"
+
 
 class GuiMissileTubeControls;
 class TargetsContainer;

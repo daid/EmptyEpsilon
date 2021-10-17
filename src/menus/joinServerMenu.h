@@ -3,6 +3,8 @@
 
 #include "gui/gui2_canvas.h"
 #include "serverBrowseMenu.h"
+#include "io/network/address.h"
+
 
 class GuiLabel;
 class GuiPanel;

@@ -2,7 +2,9 @@
 
 #include "scriptInterface.h"
 
+#include "tween.h"
 #include "i18n.h"
+
 
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 {

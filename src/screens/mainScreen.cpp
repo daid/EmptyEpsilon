@@ -4,6 +4,8 @@
 #include "main.h"
 #include "epsilonServer.h"
 #include "preferenceManager.h"
+#include "soundManager.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/selfDestructIndicator.h"

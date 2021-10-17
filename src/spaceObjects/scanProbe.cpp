@@ -2,6 +2,7 @@
 #include "scanProbe.h"
 #include "explosionEffect.h"
 #include "main.h"
+#include "random.h"
 
 #include "scriptInterface.h"
 

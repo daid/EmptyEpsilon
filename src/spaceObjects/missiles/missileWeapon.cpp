@@ -1,6 +1,10 @@
 #include "missileWeapon.h"
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
+#include "random.h"
+#include "multiplayer_server.h"
+#include "multiplayer_client.h"
+#include "soundManager.h"
 
 #include "i18n.h"
 

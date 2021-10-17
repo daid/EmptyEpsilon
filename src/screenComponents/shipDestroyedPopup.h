@@ -2,6 +2,8 @@
 #define SHIP_DESTROYED_POPUP_H
 
 #include "gui/gui2_element.h"
+#include "timer.h"
+
 
 class GuiPanel;
 class GuiCanvas;

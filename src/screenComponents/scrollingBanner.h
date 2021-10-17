@@ -2,6 +2,8 @@
 #define SCROLLING_BANNER_H
 
 #include "gui/gui2_element.h"
+#include "timer.h"
+
 
 class GuiScrollingBanner : public GuiElement
 {

@@ -1,7 +1,7 @@
 #ifndef MOUSE_RENDERER_H
 #define MOUSE_RENDERER_H
 
-#include "engine.h"
+#include "Renderable.h"
 
 class MouseRenderer : public Renderable
 {

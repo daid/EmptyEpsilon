@@ -1,5 +1,6 @@
 #include "signalQualityIndicator.h"
 #include "engine.h"
+#include "random.h"
 
 GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string id)
 : GuiElement(owner, id)

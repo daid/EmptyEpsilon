@@ -3,11 +3,13 @@
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
+#include "random.h"
 #include "pathPlanner.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
+#include "textureManager.h"
 
 #include <glm/ext/matrix_transform.hpp>
 

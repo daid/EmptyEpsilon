@@ -3,6 +3,7 @@
 
 #include "epsilonServer.h"
 #include "gui/gui2_canvas.h"
+#include "scriptInterface.h"
 
 class PlayerSpaceship;
 class GuiRadarView;

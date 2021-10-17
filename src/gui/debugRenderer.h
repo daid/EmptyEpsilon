@@ -1,7 +1,10 @@
 #ifndef DEBUG_RENDERER_H
 #define DEBUG_RENDERER_H
 
+#include "Renderable.h"
+#include "timer.h"
 #include "engine.h"
+
 
 class DebugRenderer : public Renderable
 {

@@ -3,6 +3,7 @@
 #include "explosionEffect.h"
 #include "playerSpaceship.h"
 #include "main.h"
+#include "random.h"
 
 #include <glm/ext/matrix_transform.hpp>
 

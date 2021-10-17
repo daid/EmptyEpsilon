@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "random.h"
 #include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"

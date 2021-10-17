@@ -3,6 +3,7 @@
 #include "cinematicViewScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"

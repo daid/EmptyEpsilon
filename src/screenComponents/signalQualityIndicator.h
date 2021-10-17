@@ -4,6 +4,8 @@
 #include <math.h>
 
 #include "gui/gui2_element.h"
+#include "timer.h"
+
 
 class GuiSignalQualityIndicator : public GuiElement
 {

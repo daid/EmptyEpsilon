@@ -1,5 +1,7 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
+#include "collisionable.h"
+#include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/missiles/missileWeapon.h"
 

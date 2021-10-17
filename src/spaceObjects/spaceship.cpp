@@ -5,6 +5,7 @@
 #include <i18n.h>
 
 #include "mesh.h"
+#include "random.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "spaceObjects/beamEffect.h"
@@ -12,6 +13,8 @@
 #include "spaceObjects/explosionEffect.h"
 #include "particleEffect.h"
 #include "spaceObjects/warpJammer.h"
+#include "textureManager.h"
+#include "multiplayer_client.h"
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"

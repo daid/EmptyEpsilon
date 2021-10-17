@@ -1,4 +1,7 @@
 #include "factionInfo.h"
+#include "scriptInterface.h"
+#include "multiplayer_server.h"
+
 
 REGISTER_SCRIPT_CLASS(FactionInfo)
 {

@@ -1,3 +1,4 @@
+#include "random.h"
 #include "hackingDialog.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"

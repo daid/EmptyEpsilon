@@ -1,7 +1,7 @@
 #ifndef MODEL_DATA_H
 #define MODEL_DATA_H
 
-#include "engine.h"
+#include "graphics/texture.h"
 
 #include "mesh.h"
 #include "shaderRegistry.h"

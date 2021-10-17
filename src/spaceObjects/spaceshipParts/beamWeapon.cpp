@@ -2,6 +2,8 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/spaceObject.h"
+#include "multiplayer_server.h"
+
 
 BeamWeapon::BeamWeapon()
 {

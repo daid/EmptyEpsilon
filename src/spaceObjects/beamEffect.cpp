@@ -3,7 +3,12 @@
 #include "beamEffect.h"
 #include "spaceship.h"
 #include "mesh.h"
+#include "random.h"
 #include "main.h"
+#include "textureManager.h"
+#include "soundManager.h"
+#include "multiplayer_server.h"
+#include "multiplayer_client.h"
 
 #include "shaderRegistry.h"
 

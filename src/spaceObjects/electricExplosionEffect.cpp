@@ -4,6 +4,11 @@
 #include "electricExplosionEffect.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
+#include "random.h"
+#include "tween.h"
+#include "soundManager.h"
+#include "textureManager.h"
+
 
 gl::Buffers<2> ElectricExplosionEffect::particlesBuffers(gl::Unitialized{});
 

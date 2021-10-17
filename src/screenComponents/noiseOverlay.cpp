@@ -1,6 +1,8 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "noiseOverlay.h"
+#include "random.h"
+
 
 GuiNoiseOverlay::GuiNoiseOverlay(GuiContainer* owner)
 : GuiElement(owner, "NOISE_OVERLAY")

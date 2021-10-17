@@ -2,6 +2,8 @@
 #include "spaceObjects/nebula.h"
 #include "ai/evasionAI.h"
 #include "ai/aiFactory.h"
+#include "random.h"
+
 
 REGISTER_SHIP_AI(EvasionAI, "evasion");
 

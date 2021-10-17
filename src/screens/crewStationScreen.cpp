@@ -4,6 +4,8 @@
 #include "preferenceManager.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "multiplayer_client.h"
+#include "soundManager.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"

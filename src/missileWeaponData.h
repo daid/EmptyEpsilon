@@ -1,7 +1,9 @@
 #ifndef MISSILE_WEAPON_DATA_H
 #define MISSILE_WEAPON_DATA_H
 
-#include "engine.h"
+#include "scriptInterface.h"
+#include "multiplayer.h"
+
 
 enum EMissileWeapons
 {

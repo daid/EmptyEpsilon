@@ -2,6 +2,7 @@
 #define GUI2_TEXTENTRY_H
 
 #include "gui2_element.h"
+#include "timer.h"
 
 class GuiTextEntry : public GuiElement
 {

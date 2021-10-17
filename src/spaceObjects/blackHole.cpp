@@ -4,6 +4,7 @@
 #include "blackHole.h"
 #include "pathPlanner.h"
 #include "main.h"
+#include "textureManager.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"

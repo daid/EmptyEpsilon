@@ -6,6 +6,9 @@
 #include "scriptInterface.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
+#include "textureManager.h"
+#include "multiplayer_server.h"
+#include "multiplayer_client.h"
 
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>

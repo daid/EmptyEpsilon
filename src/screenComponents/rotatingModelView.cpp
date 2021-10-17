@@ -1,5 +1,6 @@
 #include <graphics/opengl.h>
 
+#include "engine.h"
 #include "featureDefs.h"
 #include "rotatingModelView.h"
 
@@ -72,7 +73,7 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
             for (const EngineEmitterData& ee : model->engine_emitters)
             {
                 glm::vec3 offset = ee.position * model->scale;
-                float r = model->scale * ee.scale * 0.5;
+                float r = model->scale * ee.scale * 0.5f;
 
                 glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), ee.color.x, ee.color.y, ee.color.z, 1.f);
                 auto vertices = {

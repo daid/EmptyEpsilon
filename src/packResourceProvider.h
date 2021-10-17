@@ -1,7 +1,7 @@
 #ifndef PACK_RESOURCE_PROVIDER_H
 #define PACK_RESOURCE_PROVIDER_H
 
-#include "engine.h"
+#include "resources.h"
 
 struct PackResourceInfo
 {

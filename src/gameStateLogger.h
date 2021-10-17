@@ -1,7 +1,7 @@
 #ifndef GAME_STATE_LOGGER_H
 #define GAME_STATE_LOGGER_H
 
-#include "engine.h"
+#include "Updatable.h"
 
 class SpaceObject;
 class SpaceShip;

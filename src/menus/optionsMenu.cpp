@@ -4,6 +4,7 @@
 #include "hotkeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
+#include "soundManager.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_overlay.h"
@@ -14,6 +15,7 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
+
 
 OptionsMenu::OptionsMenu()
 {

@@ -2,7 +2,11 @@
 #include "main.h"
 #include "featureDefs.h"
 #include "particleEffect.h"
+#include "shaderManager.h"
+#include "textureManager.h"
+#include "tween.h"
 
+#include <glm/gtx/norm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 ParticleEngine* ParticleEngine::particleEngine = nullptr;

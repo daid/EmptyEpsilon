@@ -1,7 +1,7 @@
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "engine.h"
+#include "textureManager.h"
 #include "main.h"
 
 #include "spaceObjects/spaceObject.h"

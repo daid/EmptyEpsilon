@@ -1,7 +1,10 @@
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "engine.h"
 #include "particleEffect.h"
+#include "vectorUtils.h"
+#include "textureManager.h"
 #include "modelInfo.h"
 #include "featureDefs.h"
 #include "main.h"

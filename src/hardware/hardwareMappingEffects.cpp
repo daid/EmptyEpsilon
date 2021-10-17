@@ -1,6 +1,7 @@
 #include "hardwareMappingEffects.h"
 #include "logging.h"
 #include "tween.h"
+#include "random.h"
 #include "hardwareController.h"
 
 #define REQ_SETTING(key, variable, effect_name) \

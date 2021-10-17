@@ -8,6 +8,8 @@
 #include <sys/stat.h>
 #endif
 #include <sys/types.h>
+#include "textureManager.h"
+#include "soundManager.h"
 #include "graphics/freetypefont.h"
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"

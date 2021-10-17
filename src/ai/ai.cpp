@@ -3,6 +3,7 @@
 #include "spaceObjects/scanProbe.h"
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
+#include "random.h"
 
 REGISTER_SHIP_AI(ShipAI, "default");
 

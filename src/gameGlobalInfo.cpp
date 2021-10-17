@@ -2,6 +2,9 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scienceDatabase.h"
+#include "multiplayer_client.h"
+#include "soundManager.h"
+#include "random.h"
 #include "config.h"
 
 P<GameGlobalInfo> gameGlobalInfo;

@@ -1,4 +1,6 @@
 #include "pathPlanner.h"
+#include "spaceObjects/spaceObject.h"
+
 
 const float small_object_grid_size = 5000.0f;
 const float small_object_max_size = 1000.0f;

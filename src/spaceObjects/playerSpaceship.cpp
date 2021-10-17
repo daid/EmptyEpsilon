@@ -5,6 +5,8 @@
 #include "gameGlobalInfo.h"
 #include "main.h"
 #include "preferenceManager.h"
+#include "soundManager.h"
+#include "random.h"
 
 #include "scriptInterface.h"
 

@@ -1,5 +1,7 @@
 #include "debugRenderer.h"
 #include "main.h"
+#include "multiplayer_server.h"
+
 
 DebugRenderer::DebugRenderer()
 : Renderable(mouseLayer)

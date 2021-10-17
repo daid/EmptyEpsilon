@@ -3,6 +3,7 @@
 #include "shipTemplate.h"
 #include "spaceObjects/spaceObject.h"
 #include "mesh.h"
+#include "multiplayer_server.h"
 
 #include "scriptInterface.h"
 

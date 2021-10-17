@@ -5,6 +5,7 @@
 #include "spaceObjects/nebula.h"
 #include "preferenceManager.h"
 #include "shipTemplate.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"

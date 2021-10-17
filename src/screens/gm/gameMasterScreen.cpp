@@ -5,6 +5,7 @@
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
 #include "tweak.h"
+#include "clipboard.h"
 #include "chatDialog.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"

@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "script.h"
+#include "resources.h"
 
 /// Object which can be used to create and run another script.
 /// Other scripts have their own lifetime, update and init functions.

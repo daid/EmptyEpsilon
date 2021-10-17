@@ -1,4 +1,7 @@
 #include "repairCrew.h"
+#include "random.h"
+#include "multiplayer_client.h"
+#include "multiplayer_server.h"
 
 const static int16_t CMD_SET_TARGET_POSITION = 0x0000;
 

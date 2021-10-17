@@ -2,8 +2,10 @@
 #include <unordered_map>
 #include <SDL_endian.h>
 #include <meshoptimizer.h>
+#include <glm/gtx/norm.hpp>
 
-#include "engine.h"
+#include "resources.h"
+#include "random.h"
 #include "mesh.h"
 
 namespace

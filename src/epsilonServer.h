@@ -1,7 +1,7 @@
 #ifndef EPSILON_SERVER_H
 #define EPSILON_SERVER_H
 
-#include "engine.h"
+#include "multiplayer_server.h"
 
 class EpsilonServer : public GameServer
 {

@@ -1,7 +1,9 @@
 #include "rawScannerDataRadarOverlay.h"
 #include "radarView.h"
 #include "playerInfo.h"
+#include "random.h"
 #include "spaceObjects/playerSpaceship.h"
+
 
 RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id, float distance)
 : GuiElement(owner, id), radar(owner), distance(distance)

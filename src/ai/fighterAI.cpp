@@ -1,6 +1,7 @@
 #include "spaceObjects/cpuShip.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
+#include "random.h"
 
 
 REGISTER_SHIP_AI(FighterAI, "fighter");

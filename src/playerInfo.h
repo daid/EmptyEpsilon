@@ -1,7 +1,8 @@
 #ifndef PLAYER_INFO_H
 #define PLAYER_INFO_H
 
-#include "engine.h"
+#include "multiplayer.h"
+#include "scriptInterface.h"
 
 enum ECrewPosition
 {

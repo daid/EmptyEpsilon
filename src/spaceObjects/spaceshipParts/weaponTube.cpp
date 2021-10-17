@@ -5,6 +5,8 @@
 #include "spaceObjects/missiles/nuke.h"
 #include "spaceObjects/missiles/hvli.h"
 #include "spaceObjects/spaceship.h"
+#include "multiplayer_server.h"
+
 
 WeaponTube::WeaponTube()
 {

@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "hotkeyMenu.h"
 #include <regex>
+#include "soundManager.h"
 
 #include "gui/hotkeyBinder.h"
 #include "gui/gui2_autolayout.h"

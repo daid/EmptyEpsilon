@@ -4,6 +4,10 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "viewport3d.h"
+#include "shaderManager.h"
+#include "soundManager.h"
+#include "textureManager.h"
+#include "random.h"
 
 #include "particleEffect.h"
 #include "glObjects.h"

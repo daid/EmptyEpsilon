@@ -2,6 +2,7 @@
 #define PATH_PLANNER_H
 
 #include "spaceObjects/spaceObject.h"
+#include <list>
 
 class PathPlannerManager : public Updatable
 {

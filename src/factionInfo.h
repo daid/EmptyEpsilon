@@ -1,7 +1,10 @@
 #ifndef FACTION_INFO_H
 #define FACTION_INFO_H
 
-#include "engine.h"
+#include "P.h"
+#include "stringImproved.h"
+#include <glm/gtc/type_precision.hpp>
+
 
 class FactionInfo;
 extern PVector<FactionInfo> factionInfo;

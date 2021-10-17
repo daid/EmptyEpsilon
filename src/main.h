@@ -1,7 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "engine.h"
+#include <glm/vec3.hpp>
+#include "graphics/font.h"
+#include "Renderable.h"
+#include "postProcessManager.h"
 #include "config.h"
 
 extern glm::vec3 camera_position;

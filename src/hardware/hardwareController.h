@@ -3,6 +3,9 @@
 
 #include "engine.h"
 #include "hardwareOutputDevice.h"
+#include "timer.h"
+#include "Updatable.h"
+
 
 class HardwareOutputDevice;
 class HardwareMappingEffect;

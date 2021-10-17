@@ -1,7 +1,8 @@
 #ifndef PARTICLE_EFFECT_H
 #define PARTICLE_EFFECT_H
 
-#include "engine.h"
+#include "Updatable.h"
+#include "graphics/shader.h"
 
 #include "glObjects.h"
 
