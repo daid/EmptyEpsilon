@@ -20,6 +20,7 @@ endfunction()
 
 if(NOT SDL2_ROOT)
     set(WIN32_BASE "${CMAKE_CURRENT_LIST_DIR}/_win32/")
+    set(CMAKE_SYSROOT "${WIN32_BASE}")
 
     if(NOT IS_DIRECTORY "${WIN32_BASE}/SDL2-2.0.16")
         file(DOWNLOAD http://libsdl.org/release/SDL2-devel-2.0.16-mingw.tar.gz "${WIN32_BASE}/SDL2.tar.gz" SHOW_PROGRESS EXPECTED_HASH SHA256=2bfe48628aa9635c12eac7d421907e291525de1d0b04b3bca4a5bd6e6c881a6f)
