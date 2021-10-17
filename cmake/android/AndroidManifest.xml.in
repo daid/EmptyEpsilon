@@ -39,8 +39,8 @@
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
         android:hardwareAccelerated="true" >
 
-	    <activity android:name="eu.daid.${MAINLIB_NAME}.Activity"
-            android:label="${NAME}"
+	    <activity android:name=".Activity"
+            android:label="${MAINLIB_NAME}"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
