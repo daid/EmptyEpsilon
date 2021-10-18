@@ -25,6 +25,8 @@ private:
 
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;
+
+    void setupGraphicsOptions();
 public:
     OptionsMenu();
 
