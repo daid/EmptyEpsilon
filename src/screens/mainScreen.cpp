@@ -27,7 +27,8 @@ ScreenMainScreen::ScreenMainScreen()
     viewport = new GuiViewportMainScreen(this, "VIEWPORT");
     viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    (new GuiRadarView(viewport, "VIEWPORT_RADAR", nullptr))->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, sp::Alignment::TopRight);
+    main_screen_radar = new GuiRadarView(viewport, "VIEWPORT_RADAR", nullptr);
+    main_screen_radar->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, sp::Alignment::TopRight);
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -179,9 +180,47 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     if (!my_spaceship)
         return false;
 
+    if (button == sp::io::Pointer::Button::Touch && id != sp::io::Pointer::mouse)
+    {
+        // When the radar is up, clicking 'inside' toggles (middle mouse),
+        // 'outside' closes (Left mouse).
+        auto check_radar = [position](const auto& radar)
+        {
+            auto size = radar.getRect().size;
+            auto radius = std::min(size.x, size.y) / 2.f;
+            if (glm::length(position - radar.getCenterPoint()) < radius)
+                return sp::io::Pointer::Button::Middle;
+
+            return sp::io::Pointer::Button::Left;
+        };
+
+        switch (my_spaceship->main_screen_setting)
+        {
+        case MSS_Tactical:
+            button = check_radar(*tactical_radar);
+            break;
+        case MSS_LongRange:
+            button = check_radar(*long_range_radar);
+            break;
+        default:
+            // Tapping the radar brings it up (middle mouse)
+            if (main_screen_radar->getRect().contains(position))
+                button = sp::io::Pointer::Button::Middle;
+            else
+            {
+                // Split screen in two - tapping left rotates left (as if left mouse), and right... right.
+                if (position.x < viewport->getCenterPoint().x)
+                    button = sp::io::Pointer::Button::Left;
+                else
+                    button = sp::io::Pointer::Button::Right;
+            }
+        }
+    }
+
     switch(button)
     {
     case sp::io::Pointer::Button::Left:
+        [[fallthrough]];
     case sp::io::Pointer::Button::Touch:
         switch(my_spaceship->main_screen_setting)
         {
