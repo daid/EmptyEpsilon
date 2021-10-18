@@ -253,5 +253,20 @@ void OptionsMenu::setupGraphicsOptions()
             P<Window> window = engine->getObject("window");
             static const int fsaa[] = { 0, 2, 4, 8 };
             window->setFSAA(fsaa[index]);
-        }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+    }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+
+    // FoV slider.
+    auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov, [this](float fov)
+            {
+                fov = std::round(fov);
+                graphics_fov_slider->setValue(fov);
+                PreferencesManager::set("main_screen_camera_fov", fov);
+                graphics_fov_overlay_label->setText(tr("FoV: {fov}").format({ {"fov", string(fov, 0)} }));
+            });
+    graphics_fov_slider->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Override overlay label.
+    graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("FoV: {fov}").format({ {"fov", string(initial_fov, 0)} }), 30);
+    graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

@@ -8,7 +8,7 @@
 #include "soundManager.h"
 #include "textureManager.h"
 #include "random.h"
-
+#include "preferenceManager.h"
 #include "particleEffect.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
@@ -174,7 +174,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     
     glActiveTexture(GL_TEXTURE0);
 
-    float camera_fov = 60.0f;
+    float camera_fov = PreferencesManager::get("main_screen_camera_fov", "30").toFloat();
     {
         auto p0 = renderer.virtualToPixelPosition(rect.position);
         auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
