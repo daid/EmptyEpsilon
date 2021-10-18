@@ -51,7 +51,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         glBufferData(GL_ARRAY_BUFFER, max_quad_count * 4 * vertex_size, nullptr, GL_DYNAMIC_DRAW);
 
         // Create initial data.
-        std::array<uint8_t, 6 * max_quad_count> indices;
+        std::array<uint16_t, 6 * max_quad_count> indices;
         std::array<glm::vec2, 4 * max_quad_count> texcoords;
         for (auto i = 0U; i < max_quad_count; ++i)
         {
@@ -72,7 +72,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         // Update texcoords
         glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(glm::vec3), texcoords.size() * sizeof(glm::vec2), texcoords.data());
         // Upload indices
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint8_t), indices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
     }
 }
 
@@ -160,7 +160,7 @@ void ElectricExplosionEffect::draw3DTransparent()
         // upload
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
         
-        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_BYTE, nullptr);
+        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_SHORT, nullptr);
         n += active_quads;
     }
 }

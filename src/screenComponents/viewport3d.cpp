@@ -97,7 +97,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         glm::vec3{1.f, 1.f, 1.f},    // 7
     };
 
-    constexpr std::array<uint8_t, 6 * 6> elements{
+    constexpr std::array<uint16_t, 6 * 6> elements{
         2, 6, 4, 4, 0, 2, // Back
         3, 2, 0, 0, 1, 3, // Left
         6, 7, 5, 5, 4, 6, // Right
@@ -111,7 +111,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, starbox_buffers[static_cast<size_t>(Buffers::Element)]);
 
     glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(glm::vec3), positions.data(), GL_STATIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint16_t), elements.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
     // Setup spacedust
     spacedust_shader = ShaderManager::getShader("shaders/spacedust");
@@ -226,7 +226,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             // Vertex attributes.
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
 
-            glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_BYTE, (GLvoid*)0);
+            glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_SHORT, (GLvoid*)0);
 
             // Cleanup
             glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
@@ -381,8 +381,8 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 0.f, 0.f
             };
             glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)coords.begin());
-            std::initializer_list<uint8_t> indices{ 0, 2, 1, 0, 3, 2 };
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+            std::initializer_list<uint16_t> indices{ 0, 2, 1, 0, 3, 2 };
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
         }
     }
 
