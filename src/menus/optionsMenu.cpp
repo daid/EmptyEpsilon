@@ -47,34 +47,7 @@ OptionsMenu::OptionsMenu()
     interface_page = new GuiAutoLayout(left_container, "OPTIONS_INTERFACE", GuiAutoLayout::LayoutVerticalTopToBottom);
     interface_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
 
-    // Graphics options
-    // Fullscreen toggle.
-    (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
-    {
-        P<Window> window = engine->getObject("window");
-        window->setFullscreen(!window->isFullscreen());
-    }))->setSize(GuiElement::GuiSizeMax, 50);
-
-    // FSAA configuration.
-    int fsaa = std::max(1, window->getFSAA());
-    int fsaa_index = 0;
-
-    // Convert selector index to an FSAA amount.
-    switch(fsaa)
-    {
-        case 8: fsaa_index = 3; break;
-        case 4: fsaa_index = 2; break;
-        case 2: fsaa_index = 1; break;
-        default: fsaa_index = 0; break;
-    }
-
-    // FSAA selector.
-    (new GuiSelector(graphics_page, "FSAA", [](int index, string value)
-    {
-        P<Window> window = engine->getObject("window");
-        static const int fsaa[] = { 0, 2, 4, 8 };
-        window->setFSAA(fsaa[index]);
-    }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+    setupGraphicsOptions();
 
     // Audio optionss
     // Sound volume slider.
@@ -128,7 +101,7 @@ OptionsMenu::OptionsMenu()
     }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(impulse_enabled_index)->setSize(GuiElement::GuiSizeMax, 50);
 
     // Impulse engine volume slider.
-    impulse_volume_slider = new GuiSlider(audio_page, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("impulse_sound_volume", "50").toInt(), [this](float volume)
+    impulse_volume_slider = new GuiSlider(audio_page, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, static_cast<float>(PreferencesManager::get("impulse_sound_volume", "50").toInt()), [this](float volume)
     {
         PreferencesManager::set("impulse_sound_volume", volume);
         impulse_volume_overlay_label->setText(tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}));
@@ -187,7 +160,7 @@ OptionsMenu::OptionsMenu()
     auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
     if(default_elem != languages.end())
     {
-        default_index =  default_elem - languages.begin();
+        default_index =  static_cast<int>(default_elem - languages.begin());
     }
     
     (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
@@ -249,4 +222,36 @@ void OptionsMenu::update(float delta)
         soundManager->stopMusic();
         returnToMainMenu();
     }
+}
+
+void OptionsMenu::setupGraphicsOptions()
+{
+    P<Window> window = engine->getObject("window");
+    // Fullscreen toggle.
+    (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
+        {
+            P<Window> window = engine->getObject("window");
+            window->setFullscreen(!window->isFullscreen());
+        }))->setSize(GuiElement::GuiSizeMax, 50);
+
+    // FSAA configuration.
+    int fsaa = std::max(1, window->getFSAA());
+    int fsaa_index = 0;
+
+    // Convert selector index to an FSAA amount.
+    switch (fsaa)
+    {
+    case 8: fsaa_index = 3; break;
+    case 4: fsaa_index = 2; break;
+    case 2: fsaa_index = 1; break;
+    default: fsaa_index = 0; break;
+    }
+
+    // FSAA selector.
+    (new GuiSelector(graphics_page, "FSAA", [](int index, string value)
+        {
+            P<Window> window = engine->getObject("window");
+            static const int fsaa[] = { 0, 2, 4, 8 };
+            window->setFSAA(fsaa[index]);
+        }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
 }
