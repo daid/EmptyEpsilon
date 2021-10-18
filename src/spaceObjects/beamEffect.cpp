@@ -101,8 +101,8 @@ void BeamEffect::draw3DTransparent()
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
         // Draw the beam
-        std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
 
     }
 
@@ -132,8 +132,8 @@ void BeamEffect::draw3DTransparent()
         textureManager.getTexture("texture/fire_ring.png")->bind();
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-        std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
 

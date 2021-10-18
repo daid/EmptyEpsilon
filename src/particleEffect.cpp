@@ -64,17 +64,16 @@ ParticleEngine::ParticleEngine()
     attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
     attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
 
-    std::array<uint8_t, instances_per_draw * elements_per_instance> elements;
+    std::array<uint16_t, instances_per_draw * elements_per_instance> elements;
 
     std::array<glm::vec2, max_vertex_count> texcoords{};
 
-    // Hitting this means either needing to lower the number of instances / vertices per instance,
-    // Or switch the element index to a uint16_t.
-    static_assert((texcoords.size() - 1) <= std::numeric_limits<uint8_t>::max(), "Too many elements! Indices overflow.");
+    // Hitting this means needing to lower the number of instances / vertices per instance.
+    static_assert((texcoords.size() - 1) <= std::numeric_limits<uint16_t>::max(), "Too many elements! Indices overflow.");
 
     for (auto quad = 0U; quad < instances_per_draw; ++quad)
     {
-        auto base_vertex = static_cast<uint8_t>(vertices_per_instance * quad);
+        auto base_vertex = static_cast<uint16_t>(vertices_per_instance * quad);
         auto base_element = elements_per_instance * quad;
 
         // Each quad is two triangles
@@ -97,7 +96,7 @@ ParticleEngine::ParticleEngine()
     gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
     gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
 
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint8_t), elements.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint16_t), elements.data(), GL_STATIC_DRAW);
     glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(glm::vec2)), nullptr, GL_DYNAMIC_DRAW);
     {
         // Ensure zero-initialization of the particle data.
@@ -165,7 +164,7 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
             glBufferSubData(GL_ARRAY_BUFFER, 0, instance_count * vertices_per_instance * sizeof(ParticleData), particle_data.data());
         
             // Draw our instances
-            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_BYTE, nullptr);
+            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_SHORT, nullptr);
             
             n += instance_count;
         }
