@@ -16,7 +16,7 @@
 --- - Player fighters may activate auto-cooling and auto-repair in engineering
 ---
 --- Version 9 - Oct2020
--- Type: Replayable mission
+-- Type: Replayable Mission
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
 -- Variation[Timed Defender]: Victory if home station survives after 30 minutes

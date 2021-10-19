@@ -2,7 +2,7 @@
 -- Description: More than 60 Human Navy and Exuari ships face off in all-out war near a neutral station.
 ---
 --- (This scenario is designed for performance testing.)
--- Type: Basic
+-- Category: Development
 -- Variation[Large]: Larger battle. This increases the fleet sizes to 100 ships per side.
 -- Variation[Huge]: Huge battle. This increases the fleet sizes to 500 ships per side.
 

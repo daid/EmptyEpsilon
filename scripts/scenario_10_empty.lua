@@ -1,6 +1,6 @@
 -- Name: Empty space
 -- Description: Empty scenario, no enemies, no friendlies. Can be used by a GM player to setup a scenario in the GM screen. The F5 key can be used to copy the current layout to the clipboard for use in scenario scripts.
--- Type: Basic
+-- Type: Development
 
 --- Scenario
 -- @script scenario_10_empty

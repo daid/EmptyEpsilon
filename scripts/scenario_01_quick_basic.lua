@@ -4,7 +4,7 @@
 --- This scenario is designed to be ran at conventions, since you can run a 4-player crew with minimal experience through a game in 20 minutes.
 ---
 --- This scenario is designed for the provided player Phobos-type ship (or an Atlantis in the Advanced variant).
--- Type: Convention
+-- Type: Basic
 -- Variation[Advanced]: Give the players a stronger Atlantis instead of the Phobos. The Atlantis is more difficult to control, but has more firepower and defense. Also increases enemy strength.
 -- Variation[GM Start]: The scenario is not started until the GM signals for it to start. This gives some time for a new crew to get a feeling for the controls before the actual scenario starts.
 

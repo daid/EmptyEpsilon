@@ -2,7 +2,8 @@
 -- Description: Stay alive while scavenging treasures. Length: > 2 hours
 ---
 --- Version 0
--- Type: Single player ship mission, moderately replayable
+-- Type: Mission
+-- Type: Replayable Mission
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
 
