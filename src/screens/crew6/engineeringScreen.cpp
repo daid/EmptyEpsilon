@@ -329,39 +329,6 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
 }
 
-bool EngineeringScreen::onJoystickAxis(const AxisAction& axisAction){
-    if(my_spaceship){
-        if (axisAction.category == "ENGINEERING"){
-            if (selected_system != SYS_None){
-                if (axisAction.action == "POWER" || axisAction.action == std::string("POWER_") + getSystemName(selected_system)){
-                    power_slider->setValue((axisAction.value + 1.0f) * 3.0f / 2.0f);
-                    my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
-                    return true;
-                }
-                if (axisAction.action == "COOLANT" || axisAction.action == std::string("COOLANT_") + getSystemName(selected_system)){
-                    coolant_slider->setValue((axisAction.value + 1.0f) * 10.0f / 2.0f);
-                    my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
-                    return true;
-                }
-            } else {
-                for(int n=0; n<SYS_COUNT; n++)
-                {
-                    ESystem system = ESystem(n);
-                    if (axisAction.action == std::string("POWER_") + getSystemName(system)){
-                        my_spaceship->commandSetSystemPowerRequest(system, (axisAction.value + 1) * 3.0f / 2.0f);
-                        return true;
-                    }
-                    if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
-                        my_spaceship->commandSetSystemCoolantRequest(system, (axisAction.value + 1) * 10.0f / 2.0f);
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-    return false;
-}
-
 void EngineeringScreen::onUpdate()
 {
     if (my_spaceship)

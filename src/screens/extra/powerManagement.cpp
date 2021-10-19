@@ -196,25 +196,3 @@ void PowerManagementScreen::onUpdate()
         }
     }
 }
-
-bool PowerManagementScreen::onJoystickAxis(const AxisAction& axisAction){
-    if(my_spaceship){
-        if (axisAction.category == "ENGINEERING"){
-            for(int n=0; n<SYS_COUNT; n++)
-            {
-                ESystem system = ESystem(n);
-                if (axisAction.action == std::string("POWER_") + getSystemName(system)){
-                    systems[n].power_slider->setValue((axisAction.value + 1) * 3.0f / 2.0f);
-                    my_spaceship->commandSetSystemPowerRequest(system, systems[n].power_slider->getValue());
-                    return true;
-                }
-                if (axisAction.action == std::string("COOLANT_") + getSystemName(system)){
-                    systems[n].coolant_slider->setValue((axisAction.value + 1) * 10.0f / 2.0f);
-                    my_spaceship->commandSetSystemCoolantRequest(system, systems[n].coolant_slider->getValue());
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}

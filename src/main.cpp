@@ -266,13 +266,10 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    if (PreferencesManager::get("disable_shaders").toInt())
-        PostProcessor::setEnable(false);
-
-    P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BebasNeue Regular.otf"));
+    P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BigShouldersDisplay-SemiBold.ttf"));
     main_font = new sp::FreetypeFont(main_font_stream);
 
-    P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BebasNeue Bold.otf"));
+    P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BigShouldersDisplay-ExtraBold.ttf"));
     bold_font = new sp::FreetypeFont(bold_font_stream);
 
     sp::RenderTarget::setDefaultFont(main_font);
@@ -353,9 +350,6 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("engine_enabled").empty())
         PreferencesManager::set("engine_enabled", "2");
 
-    // Set shaders to default.
-    PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
-
     if (PreferencesManager::get("headless") == "")
     {
 #ifndef _MSC_VER
@@ -389,7 +383,6 @@ void returnToMainMenu()
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
         if (PreferencesManager::get("startpaused") != "1")

@@ -223,7 +223,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         // selection/server creation screen.
         (new GuiButton(left_container, "DISCONNECT", tr("Scenario selection"), [this]() {
             destroy();
-            new ServerCreationScreen();
+            new ServerScenarioSelectionScreen();
         }))->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
     }else{
         // If this is a client, the "back" button disconnects from the server

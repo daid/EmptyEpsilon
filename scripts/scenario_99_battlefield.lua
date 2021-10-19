@@ -24,7 +24,6 @@ function init()
     for n = 1, 5 do
         setCirclePos(CpuShip():setTemplate("Flavia"):setFaction("Independent"):setScanned(true), 0, -15000, random(0, 360), random(1000, 5000))
     end
-
     -- Scale fleet sizes based on the scenario variation.
     if getScenarioVariation() == "Large" then
         battle_scale = 3.3

@@ -77,12 +77,8 @@ MainMenu::MainMenu()
     })->setPosition({50, -350}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_SERVER", tr("Start server"), [this]() {
-        new EpsilonServer();
-        if (game_server)
-        {
-            new ServerCreationScreen();
-            destroy();
-        }
+        new ServerSetupScreen();
+        destroy();
     }))->setPosition({50, -230}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_CLIENT", tr("Start client"), [this]() {
