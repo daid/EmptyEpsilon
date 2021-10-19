@@ -73,9 +73,6 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_ibo[0]);
 
-    if (!indices.empty())
-        
-
     if (position_attrib != -1)
         glVertexAttribPointer(position_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, position));
     
