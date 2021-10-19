@@ -60,24 +60,23 @@ void ScenarioInfo::addKeyValue(string key, string value)
         additional = key.substr(key.find("[") + 1, -1);
         key = key.substr(0, key.find("["));
     }
-    key = key.lower();
-    if (key == "name")
+    if (key.lower() == "name")
     {
         name = value;
     }
-    else if (key == "description")
+    else if (key.lower() == "description")
     {
         description = value;
     }
-    else if (key == "author")
+    else if (key.lower() == "author")
     {
         author = value;
     }
-    else if (key == "type" || key == "category")
+    else if (key.lower() == "type" || key.lower() == "category")
     {
         categories.push_back(value);
     }
-    else if (key == "variation" && additional != "")
+    else if (key.lower() == "variation" && additional != "")
     {
         if (!addSettingOption("variation", additional, value))
         {
@@ -89,7 +88,7 @@ void ScenarioInfo::addKeyValue(string key, string value)
             addSettingOption("variation", additional, value);
         }
     }
-    else if (key == "setting" && additional != "")
+    else if (key.lower() == "setting" && additional != "")
     {
         Setting setting;
         setting.key = additional;
