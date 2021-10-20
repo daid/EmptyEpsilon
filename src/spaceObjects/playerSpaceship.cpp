@@ -726,30 +726,6 @@ void PlayerSpaceship::applyTemplateValues()
     // Apply default spaceship object values first.
     SpaceShip::applyTemplateValues();
 
-    // Override whether the ship has jump and warp drives based on the server
-    // setting.
-    switch(gameGlobalInfo->player_warp_jump_drive_setting)
-    {
-    default:
-        break;
-    case PWJ_WarpDrive:
-        setWarpDrive(true);
-        setJumpDrive(false);
-        break;
-    case PWJ_JumpDrive:
-        setWarpDrive(false);
-        setJumpDrive(true);
-        break;
-    case PWJ_WarpAndJumpDrive:
-        setWarpDrive(true);
-        setJumpDrive(true);
-        break;
-    case PWJ_None:
-        setWarpDrive(false);
-        setJumpDrive(false);
-        break;
-    }
-
     // Set the ship's number of repair crews in Engineering from the ship's
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);

@@ -26,7 +26,6 @@ GameGlobalInfo::GameGlobalInfo()
     }
 
     global_message_timeout = 0.0;
-    player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
     hacking_difficulty = 2;
     hacking_games = HG_All;
@@ -205,23 +204,6 @@ void GameGlobalInfo::destroy()
 {
     reset();
     MultiplayerObject::destroy();
-}
-
-string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
-{
-    switch(player_warp_jump_drive)
-    {
-    case PWJ_ShipDefault:
-        return "Ship default";
-    case PWJ_WarpDrive:
-        return "Warp-drive";
-    case PWJ_JumpDrive:
-        return "Jump-drive";
-    case PWJ_WarpAndJumpDrive:
-        return "Both";
-    default:
-        return "?";
-    }
 }
 
 string getSectorName(glm::vec2 position)

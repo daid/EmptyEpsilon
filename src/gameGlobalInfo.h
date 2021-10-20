@@ -57,7 +57,6 @@ public:
     string banner_string;
 
     std::vector<float> reputation_points;
-    EPlayerWarpJumpDrive player_warp_jump_drive_setting;
     EScanningComplexity scanning_complexity;
     //Hacking difficulty ranges from 0 to 3
     int hacking_difficulty;
@@ -113,7 +112,6 @@ public:
     string getNextShipCallsign();
 };
 
-string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
 string getSectorName(glm::vec2 position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
