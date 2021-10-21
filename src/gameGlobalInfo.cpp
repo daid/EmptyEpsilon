@@ -362,7 +362,22 @@ static int getScenarioVariation(lua_State* L)
 }
 /// getScenarioVariation()
 /// Returns the currently used scenario variation.
+/// Deprecated: Scenario settings are the replacement
+//      this returns the "variation" scenario setting for backwards compatibility
 REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
+
+static int getScenarioSetting(lua_State* L)
+{
+    auto key = luaL_checkstring(L, 1);
+    if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
+        lua_pushstring(L, gameGlobalInfo->scenario_settings[key].c_str());
+    else
+        lua_pushstring(L, "");
+    return 1;
+}
+/// getScenarioSetting(string key)
+/// Returns a scenario setting, or an empty string if the setting is not found.
+REGISTER_SCRIPT_FUNCTION(getScenarioSetting);
 
 static int getGameLanguage(lua_State* L)
 {
