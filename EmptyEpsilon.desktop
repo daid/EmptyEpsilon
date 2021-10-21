@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=EmptyEpsilon
+GenericName=EmptyEpsilon
+Comment=Spaceship bridge simulator game
+Exec=EmptyEpsilon
+Icon=EmptyEpsilon
+Terminal=false
+Type=Application
+Categories=Game;Simulation;
