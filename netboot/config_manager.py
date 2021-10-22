@@ -35,6 +35,8 @@ class Client:
                 key, value = map(str.strip, line.strip().split("=", 1))
                 if key == "instance_name":
                     self.__name = value
+                elif key == "autoconnect" and value is None:
+                    self.__auto_connect = False
                 elif key == "autoconnect" and value:
                     position = int(value)
                     if position <= 0:
