@@ -137,7 +137,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
         }
         else
         {
-            LOG(WARNING) << "Could not open directory";
+            LOG(WARNING) << "Could not open directory " << directory;
         }
     }
 #endif
