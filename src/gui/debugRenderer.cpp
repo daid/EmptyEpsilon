@@ -1,6 +1,7 @@
 #include "debugRenderer.h"
 #include "main.h"
 #include "multiplayer_server.h"
+#include "hotkeyConfig.h"
 
 
 DebugRenderer::DebugRenderer()
@@ -20,18 +21,16 @@ DebugRenderer::DebugRenderer()
 
 void DebugRenderer::render(sp::RenderTarget& renderer)
 {
-    /* TODO hotkeys
-    if (keys.keysym.sym == SDLK_F10)
+    if (keys.debug_show_fps.getDown())
     {
         show_fps = !show_fps;
         show_datarate = !show_datarate;
     }
-    if (key.keysym.sym == SDLK_F11)
+    if (keys.debug_show_timing.getDown())
     {
         show_timing_graph = !show_timing_graph;
         timing_graph_points.clear();
     }
-    */
 
     fps_counter++;
     if (fps_counter > 30)

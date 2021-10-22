@@ -72,7 +72,6 @@ void StreamingAcnDMXDevice::updateLoop()
     uint8_t sequence_number = 0;
     while(run_thread)
     {
-        //TODO:SOCKET: This is no longer correct after we modify the DataBuffer to save data
         std::vector<uint8_t> buffer;
         auto addU8 = [&buffer](uint8_t d) { buffer.resize(buffer.size() + 1); buffer[buffer.size()-1] = d; };
         auto addU16 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 2); buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };

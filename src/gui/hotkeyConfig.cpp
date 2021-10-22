@@ -188,7 +188,10 @@ Keys::Keys() :
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
 
-    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
+    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
+
+    debug_show_fps("DEBUG_SHOW_FPS", "F10"),
+    debug_show_timing("DEBUG_SHOW_TIMING", "F11")
 {
 }
 
@@ -323,4 +326,8 @@ void Keys::init()
 
     //Various
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_various", "Show callsigns (spectator)"));
+
+    //Debug
+    debug_show_fps.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show FPS"));
+    debug_show_timing.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show debug timing"));
 }
