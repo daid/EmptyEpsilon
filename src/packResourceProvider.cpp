@@ -10,18 +10,13 @@
 #include <alloca.h>
 #endif
 
-#ifdef _MSC_VER
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-#else
-#include <dirent.h>
-#endif
-
 #ifdef ANDROID
 #include <jni.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #include <SDL.h>
+#else
+#include <filesystem>
 #endif
 
 static inline int readInt(SDL_RWops* f)
@@ -87,29 +82,23 @@ std::vector<string> PackResourceProvider::findResources(const string searchPatte
 
 void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 {
-#if defined(_MSC_VER)
-    WIN32_FIND_DATAA data;
-    auto search_root = directory;
-    if (!search_root.endswith("/"))
+#if !defined(ANDROID)
+    namespace fs = std::filesystem;
+    fs::path root{ directory.c_str() };
+    if (fs::is_directory(root))
     {
-        search_root += "/";
-    }
-    HANDLE handle = FindFirstFileA((search_root + "*").c_str(), &data);
-    if (handle == INVALID_HANDLE_VALUE)
-        return;
-
-    do {
-        if (data.cFileName[0] == '.')
-            continue;
-        string name = directory + "/" + string(data.cFileName);
-        if (name.lower().endswith(".pack"))
+        constexpr auto traversal_options{ fs::directory_options::follow_directory_symlink | fs::directory_options::skip_permission_denied };
+        std::error_code error_code{};
+        for (const auto& entry : fs::directory_iterator(root, traversal_options, error_code))
         {
-            new PackResourceProvider(name);
+            if (!error_code)
+            {
+                if (!entry.is_directory() && string{ entry.path().extension().u8string() }.lower() == ".pack")
+                    new PackResourceProvider(entry.path().u8string());
+            }
         }
-    } while (FindNextFileA(handle, &data));
-
-    FindClose(handle);
-#elif defined(ANDROID)
+    }
+#else
     //Limitation : 
     //As far as I know, Android NDK won't provide a way to list subdirectories
     //So we will only list files in the first level directory 
@@ -126,7 +115,7 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 
         env->DeleteLocalRef(activity);
         env->DeleteLocalRef(clazz);
-}
+    }
 
     if (asset_manager)
     {
@@ -146,28 +135,11 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
             }
             AAssetDir_close(dir);
         }
-    else
-    {
-        LOG(WARNING) << "Could not open directory";
-    }
-    }
-#else
-    DIR* dir = opendir(directory.c_str());
-    if (!dir)
-        return;
-
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != nullptr)
-    {
-        if (entry->d_name[0] == '.')
-            continue;
-        string name = directory + "/" + string(entry->d_name);
-        if (name.lower().endswith(".pack"))
+        else
         {
-            new PackResourceProvider(name);
+            LOG(WARNING) << "Could not open directory";
         }
     }
-    closedir(dir);
 #endif
 }
 
@@ -188,12 +160,10 @@ PackResourceStream::~PackResourceStream()
 
 size_t PackResourceStream::read(void* data, size_t size)
 {
-    int ret;
     if (read_position + size > this->size)
         size = this->size - read_position;
-    ret = SDL_RWread(f, data, 1, size);
-    if (ret > 0)
-        read_position += ret;
+    auto ret = SDL_RWread(f, data, 1, size);
+    read_position += ret;
     return ret;
 }
 
