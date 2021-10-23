@@ -65,7 +65,6 @@ namespace {
 		return { fast_obj_read_with_callbacks("", &callbacks, new obj_vector::holder{mesh}), &fast_obj_destroy };
 	}
 
-#pragma optimize("", off)
 	std::vector<uint8_t> optimize_vertices(const Vertex* unindexed_vertices, size_t unindexed_count)
 	{
 		// Recreate index buffer.
@@ -86,12 +85,12 @@ namespace {
 		meshopt_optimizeVertexFetch(vertices.data(), indices.data(), indices.size(), vertices.data(), vertices.size(), sizeof(Vertex));
 
 		// model2: All little endian.
-		// Header is <vertex_count:u32><indices_count:u32>
-		// Indice type is based on the vertex count:
-		// - u16 if <= 65536
-		// - u32 otherwise.
-		// Then indices, [indice_type] * indice_count bytes.
-		// Followed by Vertex * vertex_count (8 ieee floats per)
+		// Header is
+		// <vertex_count:u32><indices_count:u32>
+		// <compressed_vtx_size:u32><compressed_idx_size:u32>
+		// 
+		// <compressed_vtx_data:compressed_vtx_size*u8>
+		// <compressed_idx_size:compressed_idx_size*u8>
 		size_t element_size = [](size_t vertex_count)
 		{
 			if (vertex_count <= 65536)
@@ -103,15 +102,29 @@ namespace {
 		auto vtx_compress_bound = meshopt_encodeVertexBufferBound(vertices.size(), sizeof(Vertex));
 		auto idx_compress_bound = meshopt_encodeIndexBufferBound(indices.size(), vertices.size());
 
-		std::vector<uint8_t> optimized(2 * sizeof(uint32_t) + vtx_compress_bound + idx_compress_bound);
-		*reinterpret_cast<uint32_t*>(optimized.data()) = to_little(static_cast<uint32_t>(vertices.size()));
-		*(reinterpret_cast<uint32_t*>(optimized.data()) + 1) = to_little(static_cast<uint32_t>(indices.size()));
+		struct header_t
+		{
+			uint32_t vertices{};
+			uint32_t indices{};
+			uint32_t encoded_vertices{};
+			uint32_t encoded_indices{};
+		};
 
-		auto offset = 2 * sizeof(uint32_t);
-		offset += meshopt_encodeVertexBuffer(optimized.data() + offset, optimized.size() - offset, vertices.data(), vertices.size(), sizeof(Vertex));
-		offset += meshopt_encodeIndexBuffer(optimized.data() + offset, optimized.size() - offset, indices.data(), indices.size());
-		
-		info(true, "[model]: %.2f" LF, float(offset) / (vertices.size() * sizeof(Vertex) + (indices.size() + 2) * sizeof(uint32_t)));
+		static_assert(sizeof(header_t) == 4 * sizeof(uint32_t), "padding.");
+		std::vector<uint8_t> optimized(sizeof(header_t) + vtx_compress_bound + idx_compress_bound);
+		auto header = reinterpret_cast<header_t*>(optimized.data());
+		header->vertices = to_little(static_cast<uint32_t>(vertices.size()));
+		header->indices = to_little(static_cast<uint32_t>(indices.size()));
+
+		auto offset = sizeof(header_t);
+		header->encoded_vertices = to_little(static_cast<uint32_t>(
+			meshopt_encodeVertexBuffer(optimized.data() + offset, optimized.size() - offset, vertices.data(), vertices.size(), sizeof(Vertex))
+		));
+		offset += header->encoded_vertices;
+		header->encoded_indices = to_little(static_cast<uint32_t>(
+			meshopt_encodeIndexBuffer(optimized.data() + offset, optimized.size() - offset, indices.data(), indices.size())
+		));
+		offset += header->encoded_indices;
 
 		optimized.resize(offset);
 
