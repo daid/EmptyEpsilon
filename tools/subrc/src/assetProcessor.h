@@ -18,7 +18,7 @@ protected:
 	pack::Builder& builder;
 };
 
-class NoopProcessor final : public AssetProcessor
+class CopyProcessor final : public AssetProcessor
 {
 public:
 	using AssetProcessor::AssetProcessor;

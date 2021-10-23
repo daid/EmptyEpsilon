@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 	processors.emplace_back(std::make_unique<ModelProcessor>(builder));
 
 	if (pack_everything)
-		processors.emplace_back(std::make_unique<NoopProcessor>(builder));
+		processors.emplace_back(std::make_unique<CopyProcessor>(builder));
 
 	for (const auto& arg: arguments)
 	{
