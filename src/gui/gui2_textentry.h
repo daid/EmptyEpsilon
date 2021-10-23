@@ -37,6 +37,7 @@ public:
     string getText() const;
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
+    GuiTextEntry* setMultiline(bool enabled=true);
     GuiTextEntry* callback(func_t func);
     GuiTextEntry* enterCallback(func_t func);
 
