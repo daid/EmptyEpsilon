@@ -22,6 +22,7 @@ class Mesh : sp::NonCopyable
     uint32_t face_count{};
 public:
     explicit Mesh(std::vector<MeshVertex>&& vertices);
+    Mesh(std::vector<MeshVertex>&& vertices, std::vector<uint16_t>&& indices);
 
     void render(int32_t position_attrib, int32_t texcoords_attrib, int32_t normal_attrib);
     glm::vec3 randomPoint();

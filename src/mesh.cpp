@@ -8,6 +8,9 @@
 #include "random.h"
 #include "mesh.h"
 
+#include <SDL_assert.h>
+#include <SDL_endian.h>
+
 namespace
 {
     inline int32_t readInt(const P<ResourceStream>& stream)
@@ -63,6 +66,22 @@ Mesh::Mesh(std::vector<MeshVertex>&& unindexed_vertices)
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, index_count * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
         }
+    }
+}
+
+Mesh::Mesh(std::vector<MeshVertex>&& vertices_in, std::vector<uint16_t>&& indices_in)
+    :vertices{std::move(vertices_in)}, indices{std::move(indices_in)}, face_count{ static_cast<uint32_t>(indices.size()) / 3}
+{
+    if (!vertices.empty() && !indices.empty())
+    {
+        vbo_ibo = gl::Buffers<2>{};
+        glBindBuffer(GL_ARRAY_BUFFER, vbo_ibo[0]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(MeshVertex)* vertices.size(), vertices.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_ibo[1]);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_NONE);
     }
 }
 
@@ -149,7 +168,78 @@ Mesh* Mesh::getMesh(const string& filename)
     if (ret)
         return ret;
 
-    P<ResourceStream> stream = getResourceStream(filename);
+    P<ResourceStream> stream;
+    // filename variants:
+    //  name
+    //  name.notanextension
+    //  name.ext
+    //  name.notanext.ext
+    // Attempt to load the best version.
+    auto last_dot = filename.find_last_of('.');
+    if (last_dot != std::string::npos)
+    {
+        // Extension found, try and substitute it.
+        stream = getResourceStream(filename.substr(0, static_cast<uint32_t>(last_dot)) + ".mdl2");
+    }
+    
+    if (!stream)
+    {
+        // No extension, or substitution failed (maybe it wasn't an extension), blindly add it.
+        stream = getResourceStream(filename + ".mdl2");
+    }
+
+    if (!stream)
+    {
+        // mdl2 not found, fallback.
+        stream = getResourceStream(filename);
+    }
+    else
+    {
+        // Load model2.
+        uint32_t value{};
+        struct header_t
+        {
+            uint32_t vertex_count{};
+            uint32_t index_count{};
+            uint32_t compressed_vertex_size{};
+            uint32_t compressed_index_size{};
+        } header;
+
+        static_assert(sizeof(header_t) == 4 * sizeof(uint32_t), "padding.");
+        stream->read(&header, sizeof(header));
+        header.vertex_count = SDL_SwapLE32(header.vertex_count);
+        header.index_count = SDL_SwapLE32(header.index_count);
+        header.compressed_vertex_size = SDL_SwapLE32(header.compressed_vertex_size);
+        header.compressed_index_size = SDL_SwapLE32(header.compressed_index_size);
+
+        std::vector<uint8_t> read_buffer(std::max(header.compressed_vertex_size, header.compressed_index_size));
+
+        std::vector<MeshVertex> vertices(header.vertex_count);
+        stream->read(read_buffer.data(), header.compressed_vertex_size);
+        meshopt_decodeVertexBuffer(vertices.data(), vertices.size(), sizeof(MeshVertex), read_buffer.data(), header.compressed_vertex_size);
+
+        Mesh* ret = nullptr;
+
+        if (header.index_count > 0)
+        {
+            stream->read(read_buffer.data(), header.compressed_index_size);
+            if (header.vertex_count <= std::numeric_limits<uint16_t>::max())
+            {
+                std::vector<uint16_t> indices(header.index_count);
+                meshopt_decodeIndexBuffer(indices.data(), indices.size(), read_buffer.data(), header.compressed_index_size);
+                ret = new Mesh(std::move(vertices), std::move(indices));
+            }
+            else
+            {
+                SDL_assert(false); // Unhandled (yet).
+            }
+        }
+
+        meshMap[filename] = ret;
+
+        return ret;
+    }
+    
     if (!stream)
         return NULL;
 
