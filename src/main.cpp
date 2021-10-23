@@ -30,6 +30,7 @@
 #include "preferenceManager.h"
 #include "networkRecorder.h"
 #include "tutorialGame.h"
+#include "windowManager.h"
 
 #include "graphics/opengl.h"
 
@@ -192,7 +193,6 @@ int main(int argc, char** argv)
     colorConfig.load();
     sp::io::Keybinding::loadKeybindings("keybindings.json");
     keys.init();
-    joystick.load();
 
     if (PreferencesManager::get("username", "") == "")
     {

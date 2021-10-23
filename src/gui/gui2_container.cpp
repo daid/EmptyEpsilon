@@ -1,7 +1,6 @@
 #include "gui2_container.h"
 #include "gui2_element.h"
 #include "gui2_canvas.h"
-#include "input.h"
 
 GuiContainer::~GuiContainer()
 {
@@ -80,20 +79,4 @@ GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::v
         }
     }
     return nullptr;
-}
-
-bool GuiContainer::forwardJoystickAxisToElements(const AxisAction& axisAction)
-{
-    for(GuiElement* element : elements)
-    {
-        if (element->isVisible())
-        {
-            if (element->isEnabled())
-                if (element->onJoystickAxis(axisAction))
-                    return true;
-            if (element->forwardJoystickAxisToElements(axisAction))
-                return true;
-        }
-    }
-    return false;
 }

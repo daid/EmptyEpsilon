@@ -27,7 +27,6 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
-    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
 };
 
 #endif//HELMS_SCREEN_H

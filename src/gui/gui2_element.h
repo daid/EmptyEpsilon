@@ -42,7 +42,6 @@ public:
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onTextInput(const string& text);
     virtual void onTextInput(sp::TextInputEvent e);
-    virtual bool onJoystickAxis(const AxisAction& axisAction);
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}
 

@@ -2,6 +2,7 @@
 #define OPTIONS_MENU_H
 
 #include "gui/gui2_canvas.h"
+#include "Updatable.h"
 
 class GuiAutoLayout;
 class GuiSelector;

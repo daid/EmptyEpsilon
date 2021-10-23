@@ -144,13 +144,4 @@ public:
 };
 extern Keys keys;
 
-class HotkeyResult
-{
-public:
-    HotkeyResult(string category, string hotkey) : category(category), hotkey(hotkey) {}
-
-    string category;
-    string hotkey;
-};
-
 #endif//HOTKEY_CONFIG_H

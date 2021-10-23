@@ -1,5 +1,4 @@
 #include "gui2_textentry.h"
-#include "input.h"
 #include "clipboard.h"
 
 

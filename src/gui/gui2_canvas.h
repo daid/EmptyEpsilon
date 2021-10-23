@@ -1,10 +1,10 @@
 #ifndef GUI2_CANVAS_H
 #define GUI2_CANVAS_H
 
-#include "engine.h"
+#include "Renderable.h"
 #include "gui2_container.h"
 
-class GuiCanvas : public Renderable, public GuiContainer, private JoystickEventHandler
+class GuiCanvas : public Renderable, public GuiContainer
 {
 private:
     GuiElement* click_element;
@@ -23,9 +23,6 @@ public:
     virtual void onPointerUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
-
-    virtual void handleJoystickAxis(unsigned int joystickId, int axis, float position) override;
-    virtual void handleJoystickButton(unsigned int joystickId, unsigned int button, bool state) override;
 
     void focus(GuiElement* element);
     //Called when an element is destroyed in this tree. Recursive tests if the given element or any of it's children currently has focus, and unsets that focus.

@@ -73,17 +73,6 @@ void GuiCanvas::onTextInput(sp::TextInputEvent e)
         focus_element->onTextInput(e);
 }
 
-void GuiCanvas::handleJoystickAxis(unsigned int joystickId, int axis, float position){
-    for(AxisAction action : joystick.getAxisAction(joystickId, axis, position)){
-        forwardJoystickAxisToElements(action);
-    }
-}
-
-void GuiCanvas::handleJoystickButton(unsigned int joystickId, unsigned int button, bool state){
-    if (state){
-    }
-}
-
 void GuiCanvas::focus(GuiElement* element)
 {
     if (element == focus_element)

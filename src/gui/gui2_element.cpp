@@ -38,11 +38,6 @@ void GuiElement::onTextInput(sp::TextInputEvent e)
 {
 }
 
-bool GuiElement::onJoystickAxis(const AxisAction& axisAction)
-{
-    return false;
-}
-
 GuiElement* GuiElement::setSize(glm::vec2 size)
 {
     this->size = size;

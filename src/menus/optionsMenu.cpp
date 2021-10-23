@@ -5,6 +5,7 @@
 #include "main.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
+#include "windowManager.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_overlay.h"
