@@ -100,13 +100,16 @@ int main(int argc, char* argv[])
 					return -1;
 				}
 
-				auto processor = std::find_if(std::begin(processors), std::end(processors), [&entry](const auto& proc) { return proc->accept(entry.path()); });
-				if (processor != std::end(processors))
+				if (!entry.is_directory())
 				{
-					if (!(*processor)->process(path, entry.path()))
+					auto processor = std::find_if(std::begin(processors), std::end(processors), [&entry](const auto& proc) { return proc->accept(entry.path()); });
+					if (processor != std::end(processors))
 					{
-						error("Failed to process %s." LF, entry.path().u8string().c_str());
-						return -1;
+						if (!(*processor)->process(path, entry.path()))
+						{
+							error("Failed to process %s." LF, entry.path().u8string().c_str());
+							return -1;
+						}
 					}
 				}
 			}
