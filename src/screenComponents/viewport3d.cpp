@@ -38,27 +38,39 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     // Load up the cube texture.
     // Face setup
     std::array<std::tuple<const char*, uint32_t>, 6> faces{
-        std::make_tuple("skybox/right.png", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
-        std::make_tuple("skybox/left.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
-        std::make_tuple("skybox/top.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
-        std::make_tuple("skybox/bottom.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
-        std::make_tuple("skybox/front.png", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
-        std::make_tuple("skybox/back.png", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
+        std::make_tuple("skybox/right.ktx2", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
+        std::make_tuple("skybox/left.ktx2", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
+        std::make_tuple("skybox/top.ktx2", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
+        std::make_tuple("skybox/bottom.ktx2", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
+        std::make_tuple("skybox/front.ktx2", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
+        std::make_tuple("skybox/back.ktx2", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
     };
 
     // Upload
     glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
-    sp::Image image;
+    
     for (const auto& face : faces)
     {
+        sp::Image image;
         auto stream = getResourceStream(std::get<0>(face));
-        if (!stream || !image.loadFromStream(stream))
+        if (stream)
+        {
+            image = sp::Texture::loadUASTC(std::get<0>(face), stream, {});
+        }
+
+        if (!stream || image.getSize().x == 0 || image.getSize().y == 0)
         {
             LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
             image = sp::Image({8, 8}, {255, 0, 255, 128});
         }
 
-        glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
+        if (image.getFormat() != 0)
+        {
+            auto compressed_size = sp::Texture::compressedSize(image);
+            glCompressedTexImage2D(std::get<1>(face), 0, image.getFormat(), image.getSize().x, image.getSize().y, 0, compressed_size, image.getPtr());
+        }
+        else
+            glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
     }
 
     // Make it pretty.
@@ -69,8 +81,6 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     for (auto wrap_axis : { GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T /*, GL_TEXTURE_WRAP_R*/ })
         glTexParameteri(GL_TEXTURE_CUBE_MAP, wrap_axis, GL_CLAMP_TO_EDGE);
 
-    if (GLAD_GL_ES_VERSION_2_0)
-        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
     glBindTexture(GL_TEXTURE_CUBE_MAP, GL_NONE);
 
     // Load up the ebo and vbo for the cube.
