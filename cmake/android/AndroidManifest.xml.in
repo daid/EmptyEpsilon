@@ -37,6 +37,7 @@
         android:icon="@drawable/ic_launcher"
         android:allowBackup="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:debuggable="${MAINLIB_DEBUGGABLE}"
         android:hardwareAccelerated="true" >
 
 	    <activity android:name=".Activity"

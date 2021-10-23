@@ -109,6 +109,10 @@ set(SDL2_DIR "${SDL_INSTALL_PATH}/lib/cmake/SDL2")
 # Macro to build the android apk
 macro(android_apk NAME APK_WITH_PACKS)
     get_target_property(MAINLIB_NAME ${NAME} NAME)
+    set(MAINLIB_DEBUGGABLE "false")
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+        set(MAINLIB_DEBUGGABLE "true")
+    endif()
     # Setup Android Manifest.
     configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/android/AndroidManifest.xml.in" "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml")
     configure_file("${CMAKE_CURRENT_LIST_DIR}/cmake/android/Activity.java.in" "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/Activity.java")
