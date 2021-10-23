@@ -55,7 +55,7 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         auto stream = getResourceStream(std::get<0>(face));
         if (stream)
         {
-            image = sp::Texture::loadUASTC(std::get<0>(face), stream, {});
+            image = sp::Texture::loadUASTC(stream, {});
         }
 
         if (!stream || image.getSize().x == 0 || image.getSize().y == 0)
