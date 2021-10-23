@@ -194,7 +194,6 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         }
         (new GuiLabel(container, "", setting.key, 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
         auto selector = new GuiSelector(container, "", [this, info, setting](int index, string value) {
-            LOG(Debug, "Set ", setting.key, " to ", value);
             gameGlobalInfo->scenario_settings[setting.key] = value;
             for(auto& option : setting.options)
                 if (option.first == value)
