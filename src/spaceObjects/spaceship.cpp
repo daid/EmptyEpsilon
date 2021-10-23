@@ -482,6 +482,8 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
                 arc_normals.emplace_back(-normal.y, normal.x);
             }
 
+            float outline_thickness = std::min(20.0f, beam_range * scale * 0.2f);
+            outline_thickness = std::min(outline_thickness, beam_range * scale * beam_arc / 360.0f * glm::pi<float>() * 0.5f);
             for(size_t n=0; n<arc_points.size(); n++)
             {
                 auto& p0 = arc_points[n];
@@ -491,8 +493,8 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
                 auto n2 = arc_normals[(n + 1) % arc_points.size()];
                 renderer.drawTexturedQuad("gradient.png",
                     p0, p1,
-                    p1 + (n1 + n2) / (1.0f + glm::dot(n1, n2)) * 20.0f,
-                    p0 + (n0 + n1) / (1.0f + glm::dot(n0, n1)) * 20.0f,
+                    p1 + (n1 + n2) / (1.0f + glm::dot(n1, n2)) * outline_thickness,
+                    p0 + (n0 + n1) / (1.0f + glm::dot(n0, n1)) * outline_thickness,
                     {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
                     color);
             }
