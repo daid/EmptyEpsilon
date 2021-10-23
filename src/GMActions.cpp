@@ -2,6 +2,7 @@
 
 #include "engine.h"
 #include "gameGlobalInfo.h"
+#include <SDL_assert.h>
 
 const static int16_t CMD_RUN_SCRIPT = 0x0000;
 const static int16_t CMD_SEND_GLOBAL_MESSAGE = 0x0001;
@@ -12,7 +13,7 @@ REGISTER_MULTIPLAYER_CLASS(GameMasterActions, "GameMasterActions")
 GameMasterActions::GameMasterActions()
 : MultiplayerObject("GameMasterActions")
 {
-    assert(!gameMasterActions);
+    SDL_assert(!gameMasterActions);
     gameMasterActions = this;
 }
 

@@ -2,6 +2,7 @@
 #include "random.h"
 #include "multiplayer_client.h"
 #include "multiplayer_server.h"
+#include <SDL_assert.h>
 
 const static int16_t CMD_SET_TARGET_POSITION = 0x0000;
 
@@ -61,7 +62,7 @@ public:
     }
 
     inline PathNode& Node(int x, int y) {
-        assert(x >= 0 && x < width && y >= 0 && y < height);
+        SDL_assert(x >= 0 && x < width && y >= 0 && y < height);
         return pathMap[y*width + x];
     }
 };

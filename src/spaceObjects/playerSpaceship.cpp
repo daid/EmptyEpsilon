@@ -10,6 +10,8 @@
 
 #include "scriptInterface.h"
 
+#include <SDL_assert.h>
+
 // PlayerSpaceship are ships controlled by a player crew.
 REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 {
@@ -396,7 +398,7 @@ PlayerSpaceship::PlayerSpaceship()
     // Initialize each subsystem to be powered with no coolant or heat.
     for(unsigned int n = 0; n < SYS_COUNT; n++)
     {
-        assert(n < default_system_power_factors.size());
+        SDL_assert(n < default_system_power_factors.size());
         systems[n].health = 1.0f;
         systems[n].power_level = 1.0f;
         systems[n].power_rate_per_second = ShipSystem::default_power_rate_per_second;
@@ -2105,7 +2107,7 @@ string PlayerSpaceship::getExportLine()
         auto system = static_cast<ESystem>(sys_index);
         if (hasSystem(system))
         {
-            assert(sys_index < default_system_power_factors.size());
+            SDL_assert(sys_index < default_system_power_factors.size());
             auto default_factor = default_system_power_factors[sys_index];
             auto current_factor = getSystemPowerFactor(system);
             auto difference = std::fabs(current_factor - default_factor) > std::numeric_limits<float>::epsilon();

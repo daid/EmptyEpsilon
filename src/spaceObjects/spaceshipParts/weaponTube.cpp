@@ -6,6 +6,7 @@
 #include "spaceObjects/missiles/hvli.h"
 #include "spaceObjects/spaceship.h"
 #include "multiplayer_server.h"
+#include <SDL_assert.h>
 
 
 WeaponTube::WeaponTube()
@@ -24,7 +25,7 @@ WeaponTube::WeaponTube()
 
 void WeaponTube::setParent(SpaceShip* parent)
 {
-    assert(!this->parent);
+    SDL_assert(!this->parent);
     this->parent = parent;
 
     parent->registerMemberReplication(&load_time);

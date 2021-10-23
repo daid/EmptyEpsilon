@@ -69,7 +69,7 @@ namespace ShaderRegistry
             auto& entry = shaders[i];
             entry.shader = ShaderManager::getShader(shader_names[i]);
 
-            assert(entry.shader);
+            SDL_assert(entry.shader);
             
             if (entry.shader)
             {

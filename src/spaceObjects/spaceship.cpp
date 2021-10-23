@@ -18,6 +18,9 @@
 #include "gameGlobalInfo.h"
 
 #include "scriptInterface.h"
+
+#include <SDL_assert.h>
+
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
 {
     /// [DEPRECATED]
@@ -246,7 +249,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
-        assert(n < default_system_power_factors.size());
+        SDL_assert(n < default_system_power_factors.size());
         systems[n].health = 1.0f;
         systems[n].health_max = 1.0f;
         systems[n].power_level = 1.0f;
