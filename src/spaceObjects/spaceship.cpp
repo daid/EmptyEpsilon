@@ -464,16 +464,23 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             // Set the beam's origin on radar to its relative position on the mesh.
             auto beam_offset = rotateVec2(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation()-rotation);
 
+            float outline_thickness = std::min(20.0f, beam_range * scale * 0.2f);
+            float beam_arc_curve_length = beam_range * scale * beam_arc / 180.0f * glm::pi<float>();
+            outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
+
             std::vector<glm::vec2> arc_points;
             // begin point of the beam arc visual
-            arc_points.push_back(beam_offset + position);
+            if (beam_arc < 359.0f)
+                arc_points.push_back(beam_offset + position);
             //Arc points
-            int arcPoints = int((beam_arc - 5) / 10) + 1;
-            for(int i=0; i<arcPoints; i++)
+            float angle0 = getRotation()-rotation + (beam_direction - beam_arc / 2.0f);
+            int curve_point_count = int((beam_arc - 5) / 10) + 1;
+            curve_point_count = int(beam_arc_curve_length / outline_thickness * 0.9f);
+            for(int i=0; i<curve_point_count; i++)
             {
-                arc_points.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (beam_direction - beam_arc / 2.0f + (beam_arc / arcPoints) * i)) * beam_range * scale);
+                arc_points.push_back(beam_offset + position + vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range * scale);
             }
-            arc_points.push_back(beam_offset + position + vec2FromAngle(getRotation()-rotation + (beam_direction + beam_arc / 2.0f)) * beam_range * scale);
+            arc_points.push_back(beam_offset + position + vec2FromAngle(angle0 + beam_arc) * beam_range * scale);
 
             std::vector<glm::vec2> arc_normals;
             for(size_t n=0; n<arc_points.size(); n++)
@@ -482,8 +489,6 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
                 arc_normals.emplace_back(-normal.y, normal.x);
             }
 
-            float outline_thickness = std::min(20.0f, beam_range * scale * 0.2f);
-            outline_thickness = std::min(outline_thickness, beam_range * scale * beam_arc / 360.0f * glm::pi<float>() * 0.5f);
             for(size_t n=0; n<arc_points.size(); n++)
             {
                 auto& p0 = arc_points[n];
