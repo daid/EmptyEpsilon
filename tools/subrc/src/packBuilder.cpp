@@ -37,7 +37,7 @@ namespace pack {
 	{}
 	void Builder::add(const std::filesystem::path& name, const uint8_t* data, size_t size)
 	{
-		entries.emplace_back(name.u8string().c_str(), 0, static_cast<int32_t>(size));
+		entries.emplace_back(name.generic_u8string().c_str(), 0, static_cast<int32_t>(size));
 		if (size > 0)
 		{
 			fwrite(data, size, 1, contents.get());
