@@ -94,11 +94,7 @@ void GuiTextEntry::onTextInput(const string& text)
         return;
     this->text = this->text.substr(0, std::min(selection_start, selection_end)) + text + this->text.substr(std::max(selection_start, selection_end));
     selection_end = selection_start = std::min(selection_start, selection_end) + text.length();
-    if (func)
-    {
-        func_t f = func;
-        f(text);
-    }
+    runChangeCallback();
 }
 
 void GuiTextEntry::onTextInput(sp::TextInputEvent e)
@@ -201,6 +197,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
         else
             text = text.substr(0, selection_start) + text.substr(selection_start + 1);
         selection_start = selection_end = std::min(selection_start, selection_end);
+        runChangeCallback();
         break;
     case sp::TextInputEvent::Backspace:
         if (readonly)
@@ -215,6 +212,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
             text = text.substr(0, selection_start - 1) + text.substr(selection_start);
             selection_start -= 1;
             selection_end = selection_start;
+            runChangeCallback();
         }
         break;
     case sp::TextInputEvent::Indent:
@@ -243,6 +241,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
                 selection_start += extra_length;
             else
                 selection_end += extra_length;
+            runChangeCallback();
         }
         break;
     case sp::TextInputEvent::Unindent:
@@ -268,6 +267,7 @@ void GuiTextEntry::onTextInput(sp::TextInputEvent e)
                 selection_start -= removed_length;
             else
                 selection_end -= removed_length;
+            runChangeCallback();
         }
         break;
     case sp::TextInputEvent::Return:
@@ -369,4 +369,14 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
         result = d.string_offset;
     }
     return result;
+}
+
+
+void GuiTextEntry::runChangeCallback()
+{
+    if (func)
+    {
+        func_t f = func;
+        f(text);
+    }
 }

@@ -42,6 +42,7 @@ public:
 
 protected:
     int getTextOffsetForPosition(glm::vec2 position);
+    void runChangeCallback();
 };
 
 #endif//GUI2_TEXTENTRY_H
