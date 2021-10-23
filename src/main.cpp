@@ -252,11 +252,7 @@ int main(int argc, char** argv)
             ShaderRegistry::Shader::initialize();
         }
     }
-    if (PreferencesManager::get("touchscreen").toInt())
-    {
-        InputHandler::touch_screen = true;
-    }
-    if (!InputHandler::touch_screen)
+    if (PreferencesManager::get("touchscreen").toInt() == 0)
     {
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
