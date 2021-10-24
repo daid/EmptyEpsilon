@@ -3,6 +3,8 @@
 #include <cassert>
 #include <tuple>
 
+#include <SDL_assert.h>
+
 #include <graphics/opengl.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
