@@ -1,6 +1,7 @@
 #include "assetProcessor.h"
 
 #include "io.h"
+#include "log.h"
 #include "packBuilder.h"
 
 AssetProcessor::AssetProcessor(pack::Builder& builder)
@@ -19,14 +20,14 @@ bool CopyProcessor::process(const std::filesystem::path& root, const std::filesy
 	auto source = open_file(file, "rb");
 	if (!source)
 	{
-		error("[copy]: ailed to open %s: %s" LF, file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "[copy]: ailed to open %s: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 
 	std::vector<uint8_t> data(std::filesystem::file_size(file));
 	if (fread(data.data(), data.size(), 1, source.get()) != 1)
 	{
-		error("[copy]: Could not read %s. Reason: %s" LF, file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "[copy]: Could not read %s. Reason: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 

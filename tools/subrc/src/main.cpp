@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <vector>
 
+#include "log.h"
+
 #include "io.h"
 #include "packBuilder.h"
 #include "assetProcessor.h"
@@ -12,10 +14,10 @@
 namespace {
 	void show_help()
 	{
-		error(
+		puts(
 			"(sub)space (r)ift (c)ompressor: Generates optimized assets for EmptyEpsilon." LF
 			"Processes .obj and various image formats." LF
-			"arguments: [--help] [--pack-everything] [--verbose] <output.pack> <dir> [<dir> ...]" LF
+			"arguments: [--help] [--pack-everything] [--log-level <level>] <output.pack> <dir> [<dir> ...]" LF
 				"\t<output.pack>:" LF
 					"\t\tTarget output pack file. Must be writeable." LF
 					LF
@@ -29,9 +31,11 @@ namespace {
 					"\t\tIf specified, all files encountered will be added to <output.pack>." LF
 					"\t\tDefault is to skip over unrecognized files." LF
 					LF
-				"\t--verbose:" LF
-					"\t\tDebug output (on standard output)." LF
-					LF
+				"\t--log-level <level>:" LF
+					"\t\tChange verbosity level." LF
+					"\t\t<level> can be either:" LF
+					"\t\t\t- one of INFO, WARNING, ERROR, or FATAL." LF
+					"\t\t\t- a numeric value between -2 (only errors) to 9 (extra verbose debug level)."
 		);
 	}
 
@@ -50,20 +54,30 @@ namespace {
 
 int main(int argc, char* argv[])
 {
+	{
+		loguru::g_preamble_thread = false; // Single threaded tool (mostly)
+		loguru::g_internal_verbosity = loglevel::Debug;
+		loguru::Options log_options{};
+		log_options.verbosity_flag = "--log-level";
+		loguru::init(argc, argv, log_options);
+		// Keep the log tight, only log details in debug (> INFO) levels.
+		loguru::g_preamble_file = loguru::g_stderr_verbosity > 0;
+		loguru::g_preamble_uptime = loguru::g_stderr_verbosity > 0;
+	}
+	
 	std::vector<std::string_view> arguments(argv + 1, argv + argc);
 	if (std::find(std::begin(arguments), std::end(arguments), "--help") != std::end(arguments))
 	{
 		show_help();
+		// Asking for help and getting it count as normal termination.
 		return 0;
 	}
 
 	auto pack_everything = has_option(arguments, "--pack-everything");
-	auto verbose = has_option(arguments, "--verbose");
 
 	if (arguments.size() < 2)
 	{
-		fputs("Unexpected number of arguments." LF, stderr);
-		show_help();
+		VLOG_F(loglevel::Error, "Unexpected number of arguments (got %zu, expected at least 2). Try --help for more info.", arguments.size());
 		return -1;
 	}
 
@@ -71,11 +85,14 @@ int main(int argc, char* argv[])
 	std::filesystem::path output_pack{ arguments[0] };
 	arguments.erase(std::begin(arguments));
 
+	VLOG_F(loglevel::Info, "Pack file will be generated at: %s", std::filesystem::absolute(output_pack).u8string().c_str());
+
 	pack::Builder builder;
 	std::vector<std::unique_ptr<AssetProcessor>> processors;
 	processors.emplace_back(std::make_unique<ImageProcessor>(builder));
 	processors.emplace_back(std::make_unique<ModelProcessor>(builder));
 
+	VLOG_F(loglevel::Debug, "Pack everything is %s", pack_everything ? "enabled" : "disabled");
 	if (pack_everything)
 		processors.emplace_back(std::make_unique<CopyProcessor>(builder));
 
@@ -84,6 +101,7 @@ int main(int argc, char* argv[])
 		std::filesystem::path path{ arg };
 		if (std::filesystem::is_directory(path))
 		{
+			VLOG_SCOPE_F(loglevel::Info, "Processing directory %s", path.u8string().c_str());
 			constexpr auto traversal_options{ std::filesystem::directory_options::follow_directory_symlink };
 			std::error_code error_code{};
 			for (const auto& entry : std::filesystem::recursive_directory_iterator(path, traversal_options, error_code))
@@ -92,11 +110,11 @@ int main(int argc, char* argv[])
 				{
 					if (error_code == std::errc::permission_denied)
 					{
-						warn("Skipped %s (permission denied)" LF, path.u8string().c_str());
+						VLOG_F(loglevel::Warning, "Skipped %s (permission denied)" LF, path.u8string().c_str());
 						continue;
 					}
 
-					error("Error gathering file in %s: %s" LF, path.u8string().c_str(), error_code.message().c_str());
+					VLOG_F(loglevel::Error, "Error gathering file in %s: %s" LF, path.u8string().c_str(), error_code.message().c_str());
 					return -1;
 				}
 
@@ -105,28 +123,31 @@ int main(int argc, char* argv[])
 					auto processor = std::find_if(std::begin(processors), std::end(processors), [&entry](const auto& proc) { return proc->accept(entry.path()); });
 					if (processor != std::end(processors))
 					{
+						VLOG_SCOPE_F(loglevel::Debug, "Processing file... %s", entry.path().u8string().c_str());
 						if (!(*processor)->process(path, entry.path()))
 						{
-							error("Failed to process %s." LF, entry.path().u8string().c_str());
+							VLOG_F(loglevel::Error, "Failed to process %s.", entry.path().u8string().c_str());
 							return -1;
 						}
 					}
+					else
+						VLOG_F(loglevel::Debug, "%s was skipped (unrecognized type)", entry.path().u8string().c_str());
 				}
 			}
 		}
 		else
 		{
-			error("%s is not a directory" LF, path.u8string().c_str());
+			VLOG_F(loglevel::Error, "%s is not a directory", path.u8string().c_str());
 			return -1;
 		}
 	}
 
 	if (!builder.flush(output_pack))
 	{
-		error("Failed to write to %s", output_pack.u8string().c_str());
+		VLOG_F(loglevel::Error, "Failed to write to %s", output_pack.u8string().c_str());
 		return -1;
 	}
 
-	
+	loguru::shutdown();
 	return 0;
 }

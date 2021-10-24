@@ -100,15 +100,22 @@ if(NOT meshoptimizer_POPULATED)
     add_subdirectory(${meshoptimizer_SOURCE_DIR} ${meshoptimizer_BINARY_DIR})
 endif()
 
-FetchGitHub(fastobj thisistherk/fast_obj v1.2)
-if(NOT fastobj_POPULATED)
-    FetchGitHub_Populate(fastobj)
-    add_subdirectory(${fastobj_SOURCE_DIR} ${fastobj_BINARY_DIR})
-endif()
-add_library(fastobj ALIAS fast_obj)
+# Single/two-file libs
+add_library(externals STATIC
+    # https://github.com/nothings/stb/
+    externals/stb_image.h
 
-# Single file lib
-file(DOWNLOAD https://github.com/nothings/stb/raw/master/stb_image.h "${CMAKE_BINARY_DIR}/single_files/stb_image.h" TLS_VERIFY ON )
+    # https://github.com/thisistherk/fast_obj/
+    externals/fast_obj.h
+
+    # https://github.com/emilk/loguru/
+    externals/loguru.hpp externals/loguru.cpp)
+
+target_include_directories(externals INTERFACE externals/ PRIVATE .)
+target_compile_features(externals PUBLIC cxx_std_17)
+
+# Loguru requirements.
+target_link_libraries(externals PUBLIC Threads::Threads ${CMAKE_DL_LIBS})
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
@@ -116,11 +123,11 @@ add_executable(${PROJECT_NAME}
     src/assetProcessor.h src/assetProcessor.cpp
     src/imageProcessor.h src/imageProcessor.cpp
     src/modelProcessor.h src/modelProcessor.cpp
-    src/io.h
-    "${CMAKE_BINARY_DIR}/single_files/stb_image.h"
+    src/io.h src/log.h
 )
 target_include_directories(${PROJECT_NAME} PUBLIC "${CMAKE_BINARY_DIR}/single_files")
+target_compile_definitions(${PROJECT_NAME} PUBLIC "$<$<CXX_COMPILER_ID:MSVC>:_CRT_SECURE_NO_WARNINGS>")
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
-target_link_libraries(${PROJECT_NAME} meshoptimizer fastobj basisu-encoder)
+target_link_libraries(${PROJECT_NAME} meshoptimizer externals basisu-encoder)
 
 install(TARGETS subrc)

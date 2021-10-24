@@ -66,38 +66,3 @@ inline file_ptr open_file(const std::filesystem::path& filename, std::string_vie
 {
 	return { fopen(filename.u8string().data(), mode.data()), &fclose };
 }
-
-inline void info(bool enabled, const char* message)
-{
-	if (enabled)
-		fputs(message, stdout);
-}
-
-template<typename... Args>
-void info(bool enabled, const char* fmt, Args&&... args)
-{
-	if (enabled)
-		fprintf(stdout, fmt, std::forward<Args>(args)...);
-}
-
-inline void warn(const char* message)
-{
-	info(true, message);
-}
-
-template<typename... Args>
-void warn(const char* fmt, Args&&... args)
-{
-	info(true, fmt, std::forward<Args>(args)...);
-}
-
-inline void error(const char* message)
-{
-	fputs(message, stderr);
-}
-
-template<typename... Args>
-void error(const char* fmt, Args&&... args)
-{
-	fprintf(stderr, fmt, std::forward<Args>(args)...);
-}

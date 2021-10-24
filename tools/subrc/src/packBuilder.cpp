@@ -2,6 +2,8 @@
 
 #include <cstring>
 
+#include "log.h"
+
 namespace {
 	bool write_int32(file_ptr& file, int32_t value) noexcept
 	{
@@ -37,11 +39,14 @@ namespace pack {
 	{}
 	void Builder::add(const std::filesystem::path& name, const uint8_t* data, size_t size)
 	{
+		VLOG_F(loglevel::Debug, "[builder]: adding entry %s", name.generic_u8string().c_str());
 		entries.emplace_back(name.generic_u8string().c_str(), 0, static_cast<int32_t>(size));
 		if (size > 0)
 		{
 			fwrite(data, size, 1, contents.get());
 		}
+		else
+			VLOG_F(loglevel::Warning, "[builder]: entry %s has no content.", name.generic_u8string().c_str());
 	}
 
 	bool Builder::flush(const std::filesystem::path& output)
@@ -49,7 +54,7 @@ namespace pack {
 		auto dest = open_file(output, "wb");
 		if (!dest)
 		{
-			fprintf(stderr, "failed to open %s for writing." LF, output.u8string().c_str());
+			VLOG_F(loglevel::Error, "failed to open %s for writing.", output.u8string().c_str());
 			return false;
 		}
 
@@ -87,7 +92,7 @@ namespace pack {
 			auto written = fwrite(buffer.data(), bytes, 1, dest.get());
 			if (written == 0)
 			{
-				error("Failed writing to %s. Reason: %s" LF, output.u8string().c_str(), strerror(errno));
+				VLOG_F(loglevel::Error, "Failed writing to %s. Reason: %s", output.u8string().c_str(), strerror(errno));
 				dest.reset();
 				remove(output.u8string().c_str());
 				return false;
@@ -96,7 +101,7 @@ namespace pack {
 
 		if (ferror(contents.get()) || !feof(contents.get()))
 		{
-			error("Reading back contents to write in %s. Reason: %s" LF, output.u8string().c_str(), strerror(errno));
+			VLOG_F(loglevel::Error, "Reading back contents to write in %s. Reason: %s", output.u8string().c_str(), strerror(errno));
 			dest.reset();
 			remove(output.u8string().c_str());
 			return false;

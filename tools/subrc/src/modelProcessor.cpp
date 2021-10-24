@@ -9,6 +9,7 @@
 #include <meshoptimizer.h>
 
 #include "io.h"
+#include "log.h"
 #include "packBuilder.h"
 
 namespace {
@@ -206,7 +207,7 @@ ModelProcessor::ModelProcessor(pack::Builder& builder)
 
 ModelProcessor::~ModelProcessor()
 {
-	info(true, "[model]: %zu KB -> %zu KB (%.2f)\n", size_in / 1024, size_out / 1024, float(size_out) / size_in);
+	VLOG_F(loglevel::Debug, "[model]: %zu KB -> %zu KB (%.2f)", size_in / 1024, size_out / 1024, float(size_out) / size_in);
 }
 
 bool ModelProcessor::accept(const std::filesystem::path& entry) const
@@ -220,7 +221,7 @@ bool ModelProcessor::process(const std::filesystem::path& root, const std::files
 	auto mesh_file = open_file(file, "rb");
 	if (!mesh_file)
 	{
-		error("Failed to open %s: %s" LF, file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "Failed to open %s: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 
@@ -229,7 +230,7 @@ bool ModelProcessor::process(const std::filesystem::path& root, const std::files
 	size_in += mesh_data.size();
 	if (fread(mesh_data.data(), mesh_data.size(), 1, mesh_file.get()) != 1)
 	{
-		error("Failed to read %s: %s" LF, file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "Failed to read %s: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 

@@ -16,6 +16,7 @@
 #include <stb_image.h>
 
 #include "io.h"
+#include "log.h"
 #include "packBuilder.h"
 
 namespace {
@@ -42,7 +43,7 @@ ImageProcessor::ImageProcessor(pack::Builder& builder)
 
 ImageProcessor::~ImageProcessor()
 {
-	info(true, "[image]: %zu MB -> %zu MB (%.2f)\n", size_in / (1024 * 1024), size_out / (1024 * 1024), float(size_out) / size_in);
+	VLOG_F(loglevel::Debug, "[image]: %zu MB -> %zu MB (%.2f)", size_in / (1024 * 1024), size_out / (1024 * 1024), float(size_out) / size_in);
 }
 
 bool ImageProcessor::accept(const std::filesystem::path& entry) const
@@ -56,7 +57,7 @@ bool ImageProcessor::process(const std::filesystem::path& root, const std::files
 	auto image_file = open_file(file, "rb");
 	if (!image_file)
 	{
-		error("[image]: Failed to open %s. Reason: %s" LF, file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "[image]: Failed to open %s. Reason: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 
@@ -64,7 +65,7 @@ bool ImageProcessor::process(const std::filesystem::path& root, const std::files
 	size_in += raw_data.size();
 	if (fread(raw_data.data(), raw_data.size(), 1, image_file.get()) != 1)
 	{
-		error("[image]: Could not read %s. Reason: %s" LF, file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "[image]: Could not read %s. Reason: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 
@@ -72,7 +73,7 @@ bool ImageProcessor::process(const std::filesystem::path& root, const std::files
 	image_ptr image_data{ stbi_load_from_memory(raw_data.data(), static_cast<int>(raw_data.size()), &width, &height, &channels, STBI_default), &stbi_image_free };
 	if (!image_data)
 	{
-		error("[image] failed to load data: %s" LF, stbi_failure_reason());
+		VLOG_F(loglevel::Error, "[image] failed to load data: %s", stbi_failure_reason());
 		return false;
 	}
 
@@ -98,48 +99,40 @@ bool ImageProcessor::process(const std::filesystem::path& root, const std::files
 
 	if (!impl->compressor.init(params))
 	{
-		fputs("Failed to initialize compressor" LF, stderr);
+		VLOG_F(loglevel::Error, "Failed to initialize compressor");
 		return false;
 	}
 
 	if (auto result = impl->compressor.process(); result != basisu::basis_compressor::cECSuccess)
 	{
-		fputs("Compression failed: ", stderr);
-		switch (result)
-		{
-		case basisu::basis_compressor::cECFailedReadingSourceImages:
-			fputs("failed reading source image." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedValidating:
-			fputs("failed validating." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedEncodeUASTC:
-			fputs("failed encode UASTC." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedFrontEnd:
-			fputs("generic frontend failure." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedFontendExtract:
-			fputs("failed front extract." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedBackend:
-			fputs("generic backend failure." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedCreateBasisFile:
-			fputs("failed creating basis file." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedWritingOutput:
-			fputs("failed writing output." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedUASTCRDOPostProcess:
-			fputs("failed UASTC RDO post process." LF, stderr);
-			break;
-		case basisu::basis_compressor::cECFailedCreateKTX2File:
-			fputs("failed creating KTX2 file." LF, stderr);
-			break;
-		default:
-			assert(false); // new errors?
-		}
+		VLOG_F(loglevel::Error, "Compression failed: %s", [result]()
+			{
+				switch (result)
+				{
+				case basisu::basis_compressor::cECFailedReadingSourceImages:
+					return "reading source image.";
+				case basisu::basis_compressor::cECFailedValidating:
+					return "validation failed.";
+				case basisu::basis_compressor::cECFailedEncodeUASTC:
+					return "encode UASTC.";
+				case basisu::basis_compressor::cECFailedFrontEnd:
+					return "generic frontend failure.";
+				case basisu::basis_compressor::cECFailedFontendExtract:
+					return "frontend extract.";
+				case basisu::basis_compressor::cECFailedBackend:
+					return "generic backend failure.";
+				case basisu::basis_compressor::cECFailedCreateBasisFile:
+					return "creating basis file.";
+				case basisu::basis_compressor::cECFailedWritingOutput:
+					return "writing output.";
+				case basisu::basis_compressor::cECFailedUASTCRDOPostProcess:
+					return "UASTC RDO post process.";
+				case basisu::basis_compressor::cECFailedCreateKTX2File:
+					return "creating KTX2 file.";
+				default:
+					return "unknown error."; // new errors?
+				}
+		}());
 
 		return false;
 	}
