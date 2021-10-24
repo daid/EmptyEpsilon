@@ -91,7 +91,7 @@ bool ImageProcessor::process(const std::filesystem::path& root, const std::files
 	// UASTC type, with mips.
 	params.m_uastc = true;
 	params.m_mip_gen = true;
-	params.m_mip_smallest_dimension = std::max(height / 4, width / 4);
+	params.m_mip_fast = false;
 	params.m_pJob_pool = &impl->job_pool;
 
 	params.m_status_output = false;
