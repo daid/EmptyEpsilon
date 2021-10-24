@@ -11,4 +11,4 @@ namespace loglevel {
 		Debug,
 		Trace
 	};
-} 
+}
