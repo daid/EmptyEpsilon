@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <graphics/ktx2texture.h>
 
 #include "main.h"
 #include "playerInfo.h"
@@ -48,29 +49,32 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 
     // Upload
     glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
-    
+    sp::KTX2Texture ktxtexture;
     for (const auto& face : faces)
     {
-        sp::Image image;
-        auto stream = getResourceStream(std::get<0>(face));
-        if (stream)
+        bool loaded = false;
+        if (auto stream = getResourceStream(std::get<0>(face)); stream)
         {
-            image = sp::Texture::loadUASTC(stream, {});
+            if (ktxtexture.loadFromStream(stream))
+            {
+                if (auto pixels = ktxtexture.toNative(); !pixels.empty())
+                {
+                    auto size = ktxtexture.getSize();
+                    if (ktxtexture.getNativeFormat() != GL_RGBA)
+                        glCompressedTexImage2D(std::get<1>(face), 0, ktxtexture.getNativeFormat(), size.x, size.y, 0, pixels.size(), pixels.data());
+                    else
+                        glTexImage2D(std::get<1>(face), 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
+                    loaded = true;
+                }
+            }
         }
-
-        if (!stream || image.getSize().x == 0 || image.getSize().y == 0)
+        
+        if (!loaded)
         {
             LOG(WARNING) << "Failed to load texture: " << std::get<0>(face);
-            image = sp::Image({8, 8}, {255, 0, 255, 128});
-        }
-
-        if (image.getFormat() != 0)
-        {
-            auto compressed_size = sp::Texture::compressedSize(image);
-            glCompressedTexImage2D(std::get<1>(face), 0, image.getFormat(), image.getSize().x, image.getSize().y, 0, compressed_size, image.getPtr());
-        }
-        else
+            sp::Image image({ 8, 8 }, { 255, 0, 255, 128 });
             glTexImage2D(std::get<1>(face), 0, GL_RGBA, image.getSize().x, image.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.getPtr());
+        }
     }
 
     // Make it pretty.
