@@ -5,7 +5,7 @@ project(subrc LANGUAGES C CXX VERSION 1.0.0)
 find_package(Threads)
 
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
-    #include(FetchContent)
+    include(FetchContent)
 endif()
 
 # Convenience macros to fetch a github repo.
