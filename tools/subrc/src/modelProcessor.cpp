@@ -87,6 +87,7 @@ namespace {
 
 		// model2: All little endian.
 		// Header is
+		// <version_and_flags:u32>
 		// <vertex_count:u32><indices_count:u32>
 		// <compressed_vtx_size:u32><compressed_idx_size:u32>
 		// 
@@ -105,15 +106,17 @@ namespace {
 
 		struct header_t
 		{
+			uint32_t version{};
 			uint32_t vertices{};
 			uint32_t indices{};
 			uint32_t encoded_vertices{};
 			uint32_t encoded_indices{};
 		};
 
-		static_assert(sizeof(header_t) == 4 * sizeof(uint32_t), "padding.");
+		static_assert(sizeof(header_t) == 5 * sizeof(uint32_t), "padding.");
 		std::vector<uint8_t> optimized(sizeof(header_t) + vtx_compress_bound + idx_compress_bound);
 		auto header = reinterpret_cast<header_t*>(optimized.data());
+		header->version = to_little(uint32_t{ 1 });
 		header->vertices = to_little(static_cast<uint32_t>(vertices.size()));
 		header->indices = to_little(static_cast<uint32_t>(indices.size()));
 

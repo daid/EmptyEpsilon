@@ -199,14 +199,17 @@ Mesh* Mesh::getMesh(const string& filename)
         uint32_t value{};
         struct header_t
         {
+            uint32_t version{};
             uint32_t vertex_count{};
             uint32_t index_count{};
             uint32_t compressed_vertex_size{};
             uint32_t compressed_index_size{};
         } header;
 
-        static_assert(sizeof(header_t) == 4 * sizeof(uint32_t), "padding.");
+        static_assert(sizeof(header_t) == 5 * sizeof(uint32_t), "padding.");
         stream->read(&header, sizeof(header));
+        header.version = SDL_SwapLE32(header.version);
+        SDL_assert(header.version == 1);
         header.vertex_count = SDL_SwapLE32(header.vertex_count);
         header.index_count = SDL_SwapLE32(header.index_count);
         header.compressed_vertex_size = SDL_SwapLE32(header.compressed_vertex_size);
