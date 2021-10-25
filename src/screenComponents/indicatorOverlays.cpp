@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "random.h"
 #include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"
@@ -42,7 +43,7 @@ GuiIndicatorOverlays::~GuiIndicatorOverlays()
 
 static float glow(float min, float max, float time)
 {
-    return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.0) - 1.0);
+    return min + (max - min) * std::abs(fmodf(engine->getElapsedTime() / time, 2.0f) - 1.0f);
 }
 
 void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
@@ -59,7 +60,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             if (my_spaceship->shield_level[n] < my_spaceship->shield_max[n] / 10.0f)
                 low_shields = true;
         }
-        shield_hit = (shield_hit - 0.5) / 0.5;
+        shield_hit = (shield_hit - 0.5f) / 0.5f;
         shield_hit_overlay->setAlpha(32 * shield_hit);
 
         if (low_shields)
@@ -69,7 +70,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             shield_low_warning_overlay->setAlpha(0);
         }
 
-        hull_hit_overlay->setAlpha(128 * (my_spaceship->hull_damage_indicator / 1.5));
+        hull_hit_overlay->setAlpha(128 * (my_spaceship->hull_damage_indicator / 1.5f));
     }else{
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);
@@ -78,22 +79,22 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        if (my_spaceship->jump_indicator > 0.0)
+        if (my_spaceship->jump_indicator > 0.0f)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0);
+            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0f);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->current_warp > 0.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+        if (my_spaceship->current_warp > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
-        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0 && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01f);
+        }else if (my_spaceship->jump_delay > 0.0f && my_spaceship->jump_delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
+            warpPostProcessor->setUniform("amount", (2.0f - my_spaceship->jump_delay) * 0.1f);
         }else{
             warpPostProcessor->enabled = false;
         }
@@ -102,7 +103,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         glitchPostProcessor->enabled = false;
     }
 
-    if (engine->getGameSpeed() == 0.0)
+    if (engine->getGameSpeed() == 0.0f)
     {
         warpPostProcessor->enabled = false;
         glitchPostProcessor->enabled = false;
@@ -139,7 +140,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiIndicatorOverlays::onMouseDown(glm::vec2 position)
+bool GuiIndicatorOverlays::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (pause_overlay->isVisible() || victory_overlay->isVisible())
         return true;

@@ -143,7 +143,7 @@ void GuiMissileTubeControls::onDraw(sp::RenderTarget& renderer)
             rows[n].loading_bar->hide();
         }
 
-        if (my_spaceship->current_warp > 0.0)
+        if (my_spaceship->current_warp > 0.0f)
         {
             rows[n].fire_button->disable();
         }
@@ -154,28 +154,28 @@ void GuiMissileTubeControls::onDraw(sp::RenderTarget& renderer)
     GuiAutoLayout::onDraw(renderer);
 }
 
-void GuiMissileTubeControls::onHotkey(const HotkeyResult& key)
+void GuiMissileTubeControls::onUpdate()
 {
-    if (key.category == "WEAPONS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "SELECT_MISSILE_TYPE_HOMING")
+        if (keys.weapons_select_homing.getDown())
             selectMissileWeapon(MW_Homing);
-        if (key.hotkey == "SELECT_MISSILE_TYPE_NUKE")
+        if (keys.weapons_select_nuke.getDown())
             selectMissileWeapon(MW_Nuke);
-        if (key.hotkey == "SELECT_MISSILE_TYPE_MINE")
+        if (keys.weapons_select_mine.getDown())
             selectMissileWeapon(MW_Mine);
-        if (key.hotkey == "SELECT_MISSILE_TYPE_EMP")
+        if (keys.weapons_select_emp.getDown())
             selectMissileWeapon(MW_EMP);
-        if (key.hotkey == "SELECT_MISSILE_TYPE_HVLI")
+        if (keys.weapons_select_hvli.getDown())
             selectMissileWeapon(MW_HVLI);
 
         for(int n=0; n<my_spaceship->weapon_tube_count; n++)
         {
-            if (key.hotkey == "LOAD_TUBE_" + string(n+1))
+            if (keys.weapons_load_tube[n].getDown())
                 my_spaceship->commandLoadTube(n, load_type);
-            if (key.hotkey == "UNLOAD_TUBE_" + string(n+1))
+            if (keys.weapons_unload_tube[n].getDown())
                 my_spaceship->commandUnloadTube(n);
-            if (key.hotkey == "FIRE_TUBE_" + string(n+1))
+            if (keys.weapons_fire_tube[n].getDown())
             {
                 float target_angle = missile_target_angle;
                 if (!manual_aim)

@@ -746,7 +746,7 @@
         <h2>Sandbox</h2>
         <p>You can send a request to this endpoint by entering function calls as URL parameters in the sandbox to the left, and then clicking the Send button. The results appear in the text area to the right.</p>
         <div class="sandboxes">
-          <textarea id="get-script" style="width: 50%; height: 400px; float: left;">callsign=getName()&hull=getHull()&nukes=getWeaponStorage("nuke")</textarea>
+          <textarea id="get-script" style="width: 50%; height: 400px; float: left;">callsign=getCallSign()&hull=getHull()&nukes=getWeaponStorage("nuke")</textarea>
           <textarea id="get-output" style="width: 50%; height: 400px; float: right;" readonly></textarea>
         </div>
         <button onclick="get_send()">Send</button>

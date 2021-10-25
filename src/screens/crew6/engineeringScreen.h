@@ -65,8 +65,7 @@ public:
     EngineeringScreen(GuiContainer* owner, ECrewPosition crew_position=engineering);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
-    virtual bool onJoystickAxis(const AxisAction& axisAction) override;
+    virtual void onUpdate() override;
 };
 
 #endif//ENGINEERING_SCREEN_H

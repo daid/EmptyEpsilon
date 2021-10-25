@@ -1,6 +1,8 @@
 #include "epsilonServer.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
+#include "soundManager.h"
+#include "multiplayer_client.h"
 #include "preferenceManager.h"
 #include "GMActions.h"
 #include "main.h"

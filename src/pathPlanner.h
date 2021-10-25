@@ -2,6 +2,7 @@
 #define PATH_PLANNER_H
 
 #include "spaceObjects/spaceObject.h"
+#include <list>
 
 class PathPlannerManager : public Updatable
 {
@@ -19,7 +20,7 @@ class PathPlannerManager : public Updatable
     std::unordered_map<uint32_t, std::list<PathPlannerAvoidObject> > small_objects;
 
 public:
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
     void addAvoidObject(P<SpaceObject> source, float size);
 

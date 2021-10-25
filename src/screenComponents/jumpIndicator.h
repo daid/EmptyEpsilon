@@ -14,7 +14,7 @@ private:
 public:
     GuiJumpIndicator(GuiContainer* owner);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//JUMP_INDICATOR_H

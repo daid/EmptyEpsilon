@@ -46,18 +46,18 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 650);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
-        [this](glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_spaceship->commandSetTarget(targets.get());
             else if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
-        [this](glm::vec2 position) {
+        [](glm::vec2 position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         },
-        [this](glm::vec2 position) {
+        [](glm::vec2 position) {
             if (my_spaceship)
                 my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
         }
@@ -115,7 +115,7 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         energy_display->setValue(string(int(my_spaceship->energy_level)));
-        heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0 + 360.0 - 270.0, 360.0), 1));
+        heading_display->setValue(string(fmodf(my_spaceship->getRotation() + 360.0f + 360.0f - 270.0f, 360.0f), 1));
         float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
 
@@ -142,49 +142,17 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
 }
 
-bool SinglePilotScreen::onJoystickAxis(const AxisAction& axisAction)
+void SinglePilotScreen::onUpdate()
 {
-    if(my_spaceship)
+    if (my_spaceship)
     {
-        if (axisAction.category == "HELMS")
+        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+        if (angle != 0.0f)
         {
-            if (axisAction.action == "IMPULSE")
-            {
-                my_spaceship->commandImpulse(axisAction.value);
-                return true;
-            }
-            if (axisAction.action == "ROTATE")
-            {
-                my_spaceship->commandTurnSpeed(axisAction.value);
-                return true;
-            }
-            if (axisAction.action == "STRAFE")
-            {
-                my_spaceship->commandCombatManeuverStrafe(axisAction.value);
-                return true;
-            }
-            if (axisAction.action == "BOOST")
-            {
-                my_spaceship->commandCombatManeuverBoost(axisAction.value);
-                return true;
-            }
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + angle);
         }
-    }
-    return false;
-}
 
-void SinglePilotScreen::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "HELMS" && my_spaceship)
-    {
-        if (key.hotkey == "TURN_LEFT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
-        else if (key.hotkey == "TURN_RIGHT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
-    }
-    if (key.category == "WEAPONS" && my_spaceship)
-    {
-        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        if (keys.weapons_enemy_next_target.getDown())
         {
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
@@ -215,7 +183,7 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "NEXT_TARGET")
+        if (keys.weapons_next_target.getDown())
         {
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
@@ -246,14 +214,11 @@ void SinglePilotScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "AIM_MISSILE_LEFT")
+
+        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        if (aim_adjust != 0.0f)
         {
-            missile_aim->setValue(missile_aim->getValue() - 5.0f);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
-        }
-        if (key.hotkey == "AIM_MISSILE_RIGHT")
-        {
-            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
         }
     }

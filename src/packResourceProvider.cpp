@@ -1,6 +1,8 @@
 #include "packResourceProvider.h"
 
 #include <cstdio>
+#include <SDL_endian.h>
+#include <SDL_rwops.h>
 
 #ifdef _WIN32
 #include <malloc.h>
@@ -8,30 +10,29 @@
 #include <alloca.h>
 #endif
 
-#ifdef _MSC_VER
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#ifdef ANDROID
+#include <jni.h>
+#include <android/asset_manager.h>
+#include <android/asset_manager_jni.h>
+#include <SDL.h>
 #else
-#include <dirent.h>
+#include <filesystem>
 #endif
 
-static inline int readInt(FILE* f)
+static inline int readInt(SDL_RWops* f)
 {
     int32_t ret = 0;
-    fread(&ret, sizeof(int32_t), 1, f);
-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ || defined(_WIN32)
-    return (ret & 0xFF) << 24 | (ret & 0xFF00) << 8 | (ret & 0xFF0000) >> 8 | (ret & 0xFF000000) >> 24;
-#endif
-    return ret;
+    SDL_RWread(f, &ret, sizeof(int32_t), 1);
+    return SDL_SwapBE32(ret);
 }
 
-static inline string readString(FILE *f)
+static inline string readString(SDL_RWops *f)
 {
     int8_t len = 0;
-    fread(&len, sizeof(int8_t), 1, f);
+    SDL_RWread(f, &len, sizeof(int8_t), 1);
     // MFC - MSVC doesn't support non-const [] initializers
     char *buffer = (char*)alloca(len + 1);
-    fread(buffer, len, 1, f);
+    SDL_RWread(f, buffer, len, 1);
     buffer[len] = '\0';
     return string(buffer);
 }
@@ -39,9 +40,12 @@ static inline string readString(FILE *f)
 PackResourceProvider::PackResourceProvider(string filename)
 : filename(filename)
 {
-    FILE* f = fopen(filename.c_str(), "rb");
+    auto f = SDL_RWFromFile(filename.c_str(), "rb");
     if (!f)
+    {
+        LOG(WARNING) << "Failed to open " << filename << ": " << SDL_GetError();
         return;
+    }
 
     int version = readInt(f);
     if (version == 0)
@@ -56,7 +60,11 @@ PackResourceProvider::PackResourceProvider(string filename)
             files[fileName] = PackResourceInfo(position, size);
         }
     }
-    fclose(f);
+    else
+    {
+        LOG(WARNING) << filename << " has unknown version " << version;
+    }
+    SDL_RWclose(f);
 }
 
 P<ResourceStream> PackResourceProvider::getResourceStream(const string filename)
@@ -74,52 +82,71 @@ std::vector<string> PackResourceProvider::findResources(const string searchPatte
 
 void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 {
-#ifdef _MSC_VER
-    WIN32_FIND_DATAA data;
-    auto search_root = directory;
-    if (!search_root.endswith("/"))
+#if !defined(ANDROID)
+    namespace fs = std::filesystem;
+    fs::path root{ directory.c_str() };
+    if (fs::is_directory(root))
     {
-        search_root += "/";
-    }
-    HANDLE handle = FindFirstFileA((search_root + "*").c_str(), &data);
-    if (handle == INVALID_HANDLE_VALUE)
-        return;
-
-    do {
-        if (data.cFileName[0] == '.')
-            continue;
-        string name = directory + "/" + string(data.cFileName);
-        if (name.lower().endswith(".pack"))
+        constexpr auto traversal_options{ fs::directory_options::follow_directory_symlink | fs::directory_options::skip_permission_denied };
+        std::error_code error_code{};
+        for (const auto& entry : fs::directory_iterator(root, traversal_options, error_code))
         {
-            new PackResourceProvider(name);
+            if (!error_code)
+            {
+                if (!entry.is_directory() && string{ entry.path().extension().u8string() }.lower() == ".pack")
+                    new PackResourceProvider(entry.path().u8string());
+            }
         }
-    } while (FindNextFileA(handle, &data));
-
-    FindClose(handle);
+    }
 #else
-    DIR* dir = opendir(directory.c_str());
-    if (!dir)
-        return;
-
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != nullptr)
+    //Limitation : 
+    //As far as I know, Android NDK won't provide a way to list subdirectories
+    //So we will only list files in the first level directory 
+    static jobject asset_manager_jobject;
+    static AAssetManager* asset_manager = nullptr;
+    if (!asset_manager)
     {
-        if (entry->d_name[0] == '.')
-            continue;
-        string name = directory + "/" + string(entry->d_name);
-        if (name.lower().endswith(".pack"))
+        JNIEnv* env = (JNIEnv*)SDL_AndroidGetJNIEnv();
+        jobject activity = (jobject)SDL_AndroidGetActivity();
+        jclass clazz(env->GetObjectClass(activity));
+        jmethodID method_id = env->GetMethodID(clazz, "getAssets", "()Landroid/content/res/AssetManager;");
+        asset_manager_jobject = env->CallObjectMethod(activity, method_id);
+        asset_manager = AAssetManager_fromJava(env, asset_manager_jobject);
+
+        env->DeleteLocalRef(activity);
+        env->DeleteLocalRef(clazz);
+    }
+
+    if (asset_manager)
+    {
+        LOG(INFO) << "Looking for packs in " << directory;
+        auto stripped = directory.rstrip("/");
+        AAssetDir* dir = AAssetManager_openDir(asset_manager, stripped.c_str());
+        if (dir)
         {
-            new PackResourceProvider(name);
+            const char* filename;
+            while ((filename = AAssetDir_getNextFileName(dir)) != nullptr)
+            {
+                string name = stripped + "/" + string(filename);
+                if (name.lower().endswith(".pack"))
+                {
+                    new PackResourceProvider(name);
+                }
+            }
+            AAssetDir_close(dir);
+        }
+        else
+        {
+            LOG(WARNING) << "Could not open directory " << directory;
         }
     }
-    closedir(dir);
 #endif
 }
 
 PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)
 : position(info.position), size(info. size)
 {
-    f = fopen(filename.c_str(), "rb");
+    f = SDL_RWFromFile(filename.c_str(), "rb");
     if (!f)
         destroy();
     else
@@ -128,33 +155,31 @@ PackResourceStream::PackResourceStream(string filename, PackResourceInfo info)
 PackResourceStream::~PackResourceStream()
 {
     if (f)
-        fclose(f);
+        SDL_RWclose(f);
 }
 
-sf::Int64 PackResourceStream::read(void* data, sf::Int64 size)
+size_t PackResourceStream::read(void* data, size_t size)
 {
-    int ret;
     if (read_position + size > this->size)
         size = this->size - read_position;
-    ret = fread(data, 1, size, f);
-    if (ret > 0)
-        read_position += ret;
+    auto ret = SDL_RWread(f, data, 1, size);
+    read_position += ret;
     return ret;
 }
 
-sf::Int64 PackResourceStream::seek(sf::Int64 position)
+size_t PackResourceStream::seek(size_t position)
 {
     read_position = position;
-    fseek(f, this->position + read_position, SEEK_SET);
+    SDL_RWseek(f, this->position + read_position, RW_SEEK_SET);
     return read_position;
 }
 
-sf::Int64 PackResourceStream::tell()
+size_t PackResourceStream::tell()
 {
     return read_position;
 }
 
-sf::Int64 PackResourceStream::getSize()
+size_t PackResourceStream::getSize()
 {
     return size;
 }

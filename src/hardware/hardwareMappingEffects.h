@@ -27,8 +27,8 @@ class HardwareMappingEffectStatic : public HardwareMappingEffect
 private:
     float value;
 public:
-    virtual bool configure(std::unordered_map<string, string> settings);
-    virtual float onActive();
+    virtual bool configure(std::unordered_map<string, string> settings) override;
+    virtual float onActive() override;
 };
 
 class HardwareMappingEffectGlow : public HardwareMappingEffect
@@ -39,9 +39,9 @@ private:
     sp::Timer timer;
     bool back;
 public:
-    virtual bool configure(std::unordered_map<string, string> settings);
-    virtual float onActive();
-    virtual void onInactive();
+    virtual bool configure(std::unordered_map<string, string> settings) override;
+    virtual float onActive() override;
+    virtual void onInactive() override;
 };
 
 class HardwareMappingEffectBlink : public HardwareMappingEffect
@@ -52,9 +52,9 @@ private:
     sp::Timer timer;
     bool on;
 public:
-    virtual bool configure(std::unordered_map<string, string> settings);
-    virtual float onActive();
-    virtual void onInactive();
+    virtual bool configure(std::unordered_map<string, string> settings) override;
+    virtual float onActive() override;
+    virtual void onInactive() override;
 };
 
 class HardwareMappingEffectVariable : public HardwareMappingEffect
@@ -67,8 +67,8 @@ private:
 public:
     HardwareMappingEffectVariable(HardwareController* controller);
 
-    virtual bool configure(std::unordered_map<string, string> settings);
-    virtual float onActive();
+    virtual bool configure(std::unordered_map<string, string> settings) override;
+    virtual float onActive() override;
 };
 
 class HardwareMappingEffectNoise : public HardwareMappingEffect
@@ -80,9 +80,9 @@ class HardwareMappingEffectNoise : public HardwareMappingEffect
     float start_value;
     float target_value;
 public:
-    virtual bool configure(std::unordered_map<string, string> settings);
-    virtual float onActive();
-    virtual void onInactive();
+    virtual bool configure(std::unordered_map<string, string> settings) override;
+    virtual float onActive() override;
+    virtual void onInactive() override;
 };
 
 #endif//HARDWARE_MAPPING_EFFECTS_H

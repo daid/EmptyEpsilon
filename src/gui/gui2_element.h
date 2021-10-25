@@ -37,12 +37,11 @@ public:
 
     virtual void onUpdate() {}
     virtual void onDraw(sp::RenderTarget& window) {}
-    virtual bool onMouseDown(glm::vec2 position);
-    virtual void onMouseDrag(glm::vec2 position);
-    virtual void onMouseUp(glm::vec2 position);
-    virtual bool onKey(sf::Event::KeyEvent key, int unicode);
-    virtual void onHotkey(const HotkeyResult& key);
-    virtual bool onJoystickAxis(const AxisAction& axisAction);
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id);
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);
+    virtual void onTextInput(const string& text);
+    virtual void onTextInput(sp::TextInputEvent e);
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}
 
@@ -85,23 +84,7 @@ public:
 private:
     void updateRect(sp::Rect parent_rect);
 protected:
-    /*! Setup (and creates) a RenderTexture with a view that fits this element.
-    * \param texture inout The RT target to update
-    * \return Whether the texture was successfully created/updated.
-    */
-    [[nodiscard]]
-    bool adjustRenderTexture(sf::RenderTexture& texture);
-    void drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, glm::u8vec4 color = glm::u8vec4{255,255,255,255}, const sf::RenderStates& states = sf::RenderStates::Default);
-
     glm::u8vec4 selectColor(const ColorSet& color_set) const;
-
-    class LineWrapResult
-    {
-    public:
-        string text;
-        int line_count;
-    };
-    LineWrapResult doLineWrap(const string& text, float font_size, float width);
 };
 
 #endif//GUI2_ELEMENT_H

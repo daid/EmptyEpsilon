@@ -45,6 +45,7 @@ if(NOT ANDROID)
     option(WITH_DISCORD "Build with Discord support" ${WITH_DISCORD_DEFAULT})
 else()
     set(WITH_DISCORD OFF)
+    option(APK_WITH_PACKS "Build APK with pack files (3D assets)" ON)
 endif()
 
 message(STATUS "EmptyEpsilon Version = ${PROJECT_VERSION}")
@@ -55,12 +56,6 @@ if((CMAKE_GENERATOR MATCHES "Ninja") AND (CMAKE_CXX_COMPILER_ID MATCHES "GNU"))
 endif()
 
 # Dependencies
-
-# Setup OpenGL
-if(NOT ANDROID)
-    set(OpenGL_GL_PREFERENCE LEGACY)
-    find_package(OpenGL REQUIRED)
-endif()
 
 # SeriousProton
 # Use SP provided json library.
@@ -109,6 +104,39 @@ if(WITH_DISCORD)
   target_link_libraries(discord INTERFACE discord_h)
 endif()
 
+# Meshoptimizer
+set(MESHOPTIMIZER_VERSION 0.16)
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
+  include(FetchContent)
+  FetchContent_Declare(
+    meshoptimizer
+    GIT_REPOSITORY https://github.com/zeux/meshoptimizer/
+    GIT_TAG "v${MESHOPTIMIZER_VERSION}"
+  )
+  FetchContent_GetProperties(meshoptimizer)
+else()
+  # Poor man's FetchContent.
+  set(MESHOPTIMIZER_BASE_PATH "${EXTERNALS_DIR}")
+  set(meshoptimizer_POPULATED FALSE)
+  if(NOT EXISTS "${MESHOPTIMIZER_BASE_PATH}/meshoptimizer/CMakeLists.txt")
+    set(MESHOPTIMIZER_ZIP "${DOWNLOADS_DIR}/meshoptimizer.zip")
+    file(DOWNLOAD "https://github.com/zeux/meshoptimizer/archive/refs/tags/v${MESHOPTIMIZER_VERSION}.zip" "${MESHOPTIMIZER_ZIP}" TIMEOUT 60 TLS_VERIFY ON)
+
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${MESHOPTIMIZER_ZIP}" WORKING_DIRECTORY "${MESHOPTIMIZER_BASE_PATH}")
+    execute_process(COMMAND ${CMAKE_COMMAND} -E rename "meshoptimizer-${MESHOPTIMIZER_VERSION}" meshoptimizer WORKING_DIRECTORY "${MESHOPTIMIZER_BASE_PATH}")
+  endif()
+
+  set(meshoptimizer_SOURCE_DIR "${MESHOPTIMIZER_BASE_PATH}/meshoptimizer")
+  set(meshoptimizer_BINARY_DIR "${PROJECT_BINARY_DIR}/externals/meshoptimizer")
+endif()
+
+if(NOT meshoptimizer_POPULATED)
+  if(COMMAND FetchContent_Populate)
+    FetchContent_Populate(meshoptimizer)
+  endif()
+  add_subdirectory(${meshoptimizer_SOURCE_DIR} ${meshoptimizer_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 set(SOURCES
     src/main.cpp
     src/threatLevelEstimate.cpp
@@ -116,7 +144,6 @@ set(SOURCES
     src/pathPlanner.cpp
     src/epsilonServer.cpp
     src/particleEffect.cpp
-    src/mouseCalibrator.cpp
     src/httpScriptAccess.cpp
     src/modelInfo.cpp
     src/packResourceProvider.cpp
@@ -372,7 +399,6 @@ set(SOURCES
     src/missileWeaponData.h
     src/modelData.h
     src/modelInfo.h
-    src/mouseCalibrator.h
     src/packResourceProvider.h
     src/particleEffect.h
     src/pathPlanner.h
@@ -518,29 +544,24 @@ target_include_directories(${PROJECT_NAME}
         "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src;${CMAKE_CURRENT_BINARY_DIR}/include>"
 )
 
-add_library(opengl INTERFACE)
-target_link_libraries(opengl
-    INTERFACE
-        "$<IF:$<BOOL:${ANDROID}>,GLESv1_CM;EGL,OpenGL::GL>"
-)
-
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        seriousproton opengl
+        seriousproton meshoptimizer
         "$<$<BOOL:${ANDROID}>:log;android>"
         "$<$<BOOL:${WIN32}>:iphlpapi>"
         "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
-        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"   
+        "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"
 )
+if(WIN32)
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+        target_link_libraries(${PROJECT_NAME} PUBLIC "-mconsole")
+    endif()
+endif()
 
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
         MACOSX_BUNDLE_ICON_FILE "${PROJECT_NAME}.icns")
-
-if(ANDROID)
-  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--whole-archive ${SFML_INSTALL_PATH}/lib/${ANDROID_ABI}/libsfml-main.a -Wl,--no-whole-archive")
-endif()
 
 include(InstallRequiredSystemLibraries)
 
@@ -559,7 +580,7 @@ elseif(APPLE)
   install(FILES logo.icns DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" RENAME "${PROJECT_NAME}.icns")
   install(DIRECTORY ${EE_RESOURCES} DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources")
 elseif(ANDROID)
-  android_apk(EmptyEpsilon)
+  android_apk(EmptyEpsilon ${APK_WITH_PACKS})
 else()
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
     install(DIRECTORY ${EE_RESOURCES} DESTINATION "${CMAKE_INSTALL_DATADIR}/emptyepsilon")

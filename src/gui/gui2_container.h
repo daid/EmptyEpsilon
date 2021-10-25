@@ -2,12 +2,14 @@
 #define GUI2_CONTAINER_H
 
 #include <list>
-#include <SFML/Graphics.hpp>
-#include "gui/joystickConfig.h"
 #include "rect.h"
+#include "io/pointer.h"
+
+namespace sp {
+    class RenderTarget;
+}
 
 class GuiElement;
-class HotkeyResult;
 class AxisAction;
 class GuiContainer
 {
@@ -19,11 +21,9 @@ public:
     virtual ~GuiContainer();
 
 protected:
-    virtual void drawElements(sp::Rect parent_rect, sp::RenderTarget& window);
+    virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window);
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
-    GuiElement* getClickElement(glm::vec2 mouse_position);
-    void forwardKeypressToElements(const HotkeyResult& key);
-    bool forwardJoystickAxisToElements(const AxisAction& axisAction);
+    GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
 
     friend class GuiElement;
 };

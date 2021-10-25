@@ -113,7 +113,7 @@ glm::vec2 WarpJammer::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
     foreach(WarpJammer, wj, jammer_list)
     {
         float f = glm::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
-        if (f < 0.0)
+        if (f < 0.0f)
             f = 0;
         glm::vec2 q = start + startEndDiff / startEndLength * f;
         if (glm::length2(q - wj->getPosition()) < wj->range*wj->range)
@@ -146,7 +146,7 @@ void WarpJammer::onDestruction(ScriptSimpleCallback callback)
 string WarpJammer::getExportLine()
 {
     string ret = "WarpJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
-    if (getRange()!=7000.0) {
+    if (getRange() != 7000.0f) {
 	    ret += ":setRange("+string(getRange())+")";
     }
     return ret;

@@ -17,7 +17,7 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
     renderer.drawStretched(rect, "gui/widget/ScrollbarBackground.png");
 
     int range = (max_value - min_value);
-    float arrow_size = rect.size.x / 2.0;
+    float arrow_size = rect.size.x / 2.0f;
     float move_height = (rect.size.y - arrow_size * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
@@ -25,10 +25,10 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
     renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), "gui/widget/ScrollbarSelection.png", glm::u8vec4{255,255,255,255});
 }
 
-bool GuiScrollbar::onMouseDown(glm::vec2 position)
+bool GuiScrollbar::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     int range = (max_value - min_value);
-    float arrow_size = rect.size.x / 2.0;
+    float arrow_size = rect.size.x / 2.0f;
     float move_height = (rect.size.y - arrow_size * 2);
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
@@ -44,11 +44,11 @@ bool GuiScrollbar::onMouseDown(glm::vec2 position)
     return true;
 }
 
-void GuiScrollbar::onMouseDrag(glm::vec2 position)
+void GuiScrollbar::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (drag_scrollbar)
     {
-        float arrow_size = rect.size.x / 2.0;
+        float arrow_size = rect.size.x / 2.0f;
         int range = (max_value - min_value);
         float move_height = (rect.size.y - arrow_size * 2);
         float bar_size = move_height * value_size / range;
@@ -64,11 +64,11 @@ void GuiScrollbar::onMouseDrag(glm::vec2 position)
     }
 }
 
-void GuiScrollbar::onMouseUp(glm::vec2 position)
+void GuiScrollbar::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (!drag_scrollbar)
     {
-        float arrow_size = rect.size.x / 2.0;
+        float arrow_size = rect.size.x / 2.0f;
         int range = (max_value - min_value);
         float move_height = (rect.size.y - arrow_size * 2);
         float bar_size = move_height * value_size / range;

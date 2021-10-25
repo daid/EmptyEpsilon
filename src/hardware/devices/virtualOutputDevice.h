@@ -33,13 +33,13 @@ public:
     virtual ~VirtualOutputDevice();
 
     //Configure the device.
-    virtual bool configure(std::unordered_map<string, string> settings);
+    virtual bool configure(std::unordered_map<string, string> settings) override;
 
     //Set a hardware channel output. Value is 0.0 to 1.0 for no to max output.
-    virtual void setChannelData(int channel, float value);
+    virtual void setChannelData(int channel, float value) override;
 
     //Return the number of output channels supported by this device.
-    virtual int getChannelCount();
+    virtual int getChannelCount() override;
 
     void render(sp::RenderTarget& renderer);
 };

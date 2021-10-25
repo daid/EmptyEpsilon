@@ -1,7 +1,8 @@
 #ifndef THREAT_LEVEL_ESTIMATE_H
 #define THREAT_LEVEL_ESTIMATE_H
 
-#include "engine.h"
+#include "Updatable.h"
+#include <functional>
 
 class SpaceShip;
 class ThreatLevelEstimate : public Updatable
@@ -25,7 +26,7 @@ public:
     float getThreat() { return smoothed_threat_level; }
     void setCallbacks(func_t low, func_t high);
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 private:
     float getThreatFor(P<SpaceShip> ship);
 };

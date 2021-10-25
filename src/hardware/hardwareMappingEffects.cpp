@@ -1,6 +1,7 @@
 #include "hardwareMappingEffects.h"
 #include "logging.h"
 #include "tween.h"
+#include "random.h"
 #include "hardwareController.h"
 
 #define REQ_SETTING(key, variable, effect_name) \
@@ -45,9 +46,9 @@ float HardwareMappingEffectGlow::onActive()
         back = !back;
     float f = timer.getProgress();
     if (back)
-        return min_value * (f - 1.0) + max_value * (2.0 - f);
+        return min_value * (f - 1.0f) + max_value * (2.0f - f);
     else
-        return min_value * (1.0 - f) + max_value * (f);
+        return min_value * (1.0f - f) + max_value * (f);
 }
 
 void HardwareMappingEffectGlow::onInactive()

@@ -4,8 +4,11 @@
 #include "epsilonServer.h"
 #include "gameGlobalInfo.h"
 #include "playerInfo.h"
+#include "multiplayer_client.h"
+#include "multiplayer_server_scanner.h"
 
 #include "gui/gui2_label.h"
+
 
 AutoConnectScreen::AutoConnectScreen(ECrewPosition crew_position, bool control_main_screen, string ship_filter)
 : crew_position(crew_position), control_main_screen(control_main_screen)

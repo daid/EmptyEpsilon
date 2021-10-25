@@ -11,7 +11,7 @@ private:
 public:
     GuiArrow(GuiContainer* owner, string id, float angle);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiArrow* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiArrow* setAngle(float angle) { this->angle = angle; return this; }

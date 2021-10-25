@@ -19,7 +19,7 @@ public:
     GuiJumpControls(GuiContainer* owner, string id);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onUpdate() override;
 };
 
 #endif//JUMP_CONTROLS_H

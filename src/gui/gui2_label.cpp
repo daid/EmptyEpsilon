@@ -10,11 +10,11 @@ void GuiLabel::onDraw(sp::RenderTarget& renderer)
     if (background)
         renderer.drawStretched(rect, "gui/widget/LabelBackground.png", selectColor(colorConfig.label.background));
     glm::u8vec4 color = selectColor(colorConfig.label.forground);
-    sf::Font* font = main_font;
+    sp::Font* font = main_font;
     if (bold)
         font = bold_font;
     if (vertical)
-        renderer.drawVerticalText(rect, text, text_alignment, text_size, font, color);
+        renderer.drawText(rect, text, text_alignment, text_size, font, color, sp::Font::FlagVertical);
     else
         renderer.drawText(rect, text, text_alignment, text_size, font, color);
 }

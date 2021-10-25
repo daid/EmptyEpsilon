@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "hotkeyMenu.h"
 #include <regex>
+#include "soundManager.h"
 
 #include "gui/hotkeyBinder.h"
 #include "gui/gui2_autolayout.h"
@@ -13,8 +14,6 @@
 
 HotkeyMenu::HotkeyMenu()
 {
-    P<WindowManager> windowManager = engine->getObject("windowManager");
-
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
@@ -39,7 +38,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Category selector
     // Get a list of hotkey categories
-    category_list = HotkeyConfig::get().getCategories();
+    category_list = sp::io::Keybinding::getCategories();
     (new GuiSelector(top_row, "Category", [this](int index, string value)
     {
         HotkeyMenu::setCategory(index);
@@ -74,26 +73,14 @@ HotkeyMenu::HotkeyMenu()
         soundManager->stopMusic();
         returnToOptionMenu();
     }))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
-
-    // Save hotkey values
-    (new GuiButton(bottom_row, "SAVE", tr("options", "Save"), [this]()
-    {
-        HotkeyMenu::saveHotkeys();
-    }))->setPosition(150, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 }
 
-void HotkeyMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void HotkeyMenu::update(float delta)
 {
-    switch(key.code)
+    if (keys.escape.getDown())
     {
-        //TODO: This is more generic code and is duplicated.
-        case sf::Keyboard::Escape:
-        case sf::Keyboard::Home:
-            destroy();
-            returnToOptionMenu();
-            break;
-        default:
-            break;
+        destroy();
+        returnToOptionMenu();
     }
 }
 
@@ -137,10 +124,10 @@ void HotkeyMenu::setCategory(int cat)
     int column_row_count = 0;
 
     // Get all hotkeys in this category.
-    hotkey_list = HotkeyConfig::get().listAllHotkeysByCategory(category);
+    hotkey_list = sp::io::Keybinding::listAllByCategory(category);
 
     // Begin rendering hotkey rebinding fields for this category.
-    for (std::pair<string, string> item : hotkey_list)
+    for (auto item : hotkey_list)
     {
         // If we've filled a column, or don't have any rows yet, make a new column.
         if (rebinding_rows.size() == 0 || column_row_count >= KEY_ROW_COUNT)
@@ -156,12 +143,12 @@ void HotkeyMenu::setCategory(int cat)
         rebinding_rows.back()->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
 
         // Add a label to the current row.
-        label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item.first, item.first, 30));
+        label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item->getName(), item->getLabel(), 30));
         label_entries.back()->setAlignment(sp::Alignment::CenterRight)->setSize(KEY_LABEL_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
 
         // Add a hotkey rebinding field to the current row.
-        text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_VALUE_" + item.first, item.second));
-        text_entries.back()->setTextSize(30)->setSize(KEY_FIELD_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
+        text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_VALUE_" + item->getName(), item));
+        text_entries.back()->setSize(KEY_FIELD_WIDTH, GuiElement::GuiSizeMax)->setMargins(0, 0, FRAME_MARGIN / 2, 0);
     }
 
     // Resize the rendering UI panel based on the number of columns.
@@ -178,61 +165,6 @@ void HotkeyMenu::setCategory(int cat)
     } else {
         previous_page->disable();
         next_page->disable();
-    }
-}
-
-void HotkeyMenu::saveHotkeys()
-{
-    // Save hotkeys
-    int i = 0;
-    std::string text = "";
-    bool hotkey_exists = false;
-
-    if (category == "basic")
-    {
-        error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", glm::u8vec4(0, 0, 0, 255));
-        error_window->setSize(500, 200)->setPosition(0, -100, sp::Alignment::Center)->setVisible(true);
-
-        // TODO: If basic hotkeys can't be modified, why are they editable in this menu?
-        (new GuiLabel(error_window, "ERROR_LABEL", "Basic hotkeys cannot be changed", 30))->setSize(300, 50)->setPosition(0, 50, sp::Alignment::TopCenter);
-        (new GuiButton(error_window, "ERROR_OK", "OK", [this]()
-        {
-            // Close this window
-            error_window->destroy();
-        }))->setSize(200, 50)->setPosition(0, -10, sp::Alignment::BottomCenter);
-
-        return;
-    }
-
-    // Read in all TextEntry values and update hotkeys
-    std::regex buttonIdExpression(R"((\[[JB][0-9]+\])+)"); // matches Joystick and keyboard button codes (loosely)
-    for (std::pair<string,string> item : hotkey_list)
-    {
-        text = text_entries[i]->getText();
-        hotkey_exists = HotkeyConfig::get().setHotkey(category, item, text);
-        std::smatch matches;
-        if (!hotkey_exists && !std::regex_match(text, matches, buttonIdExpression))
-        {
-            // Keys without equivalent SFML codes or joystick button code can't be accepted.
-            // Blank the corresponding key entry field.
-            text_entries[i]->setText("");
-
-            // Throw an error modal.
-            error_window = new GuiOverlay(container, "KEY_ERROR_OVERLAY", glm::u8vec4(0,0,0,255));
-            error_window->setSize(500, 200)->setPosition(0, -100, sp::Alignment::Center)->setVisible(true);
-
-            (new GuiLabel(error_window, "ERROR_LABEL", text.append(": This key can't be used"), 30))->setSize(300, 50)->setPosition(0, 50, sp::Alignment::TopCenter);
-            (new GuiButton(error_window, "ERROR_OK", "OK", [this]()
-            {
-                // Close this modal
-                error_window->destroy();
-            }))->setSize(200, 50)->setPosition(0, -10, sp::Alignment::BottomCenter);
-
-            // TODO: This return stops at the first non-extant hotkey.
-            // Others aren't flagged or removed. It should probably keep going.
-            return;
-        }
-        i++;
     }
 }
 

@@ -2,20 +2,28 @@
 #define EMPTYEPSILON_SHADER_REGISTRY_H
 #include "featureDefs.h"
 
-#if FEATURE_3D_RENDERING
 #include <array>
-#include <bitset>
 #include <cstdint>
+#include <functional>
+#include <optional>
 
 #include <type_traits>
 
-namespace sf
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+
+namespace sp
 {
 	class Shader;
 }
 
 namespace ShaderRegistry
 {
+	// Lights position, expressed as offset from the camera (world space).
+	constexpr glm::vec3 ambient_light_offset{ 20000.f, 20000.f, 20000.f };
+	constexpr glm::vec3 specular_light_offset{ 0.f, 0.f, 0.f };
+
 	enum class Shaders
 	{
 		Basic = 0,
@@ -37,7 +45,8 @@ namespace ShaderRegistry
 		Color = 0,
 		ModelViewProjection,
 		Projection,
-		ModelView,
+		Model,
+		View,
 		CameraPosition,
 		AtmosphereColor,
 
@@ -45,6 +54,9 @@ namespace ShaderRegistry
 		BaseMap,
 		SpecularMap,
 		IlluminationMap,
+
+		AmbientLightDirection,
+		SpecularLightDirection,
 
 		Count
 	};
@@ -74,17 +86,32 @@ namespace ShaderRegistry
 
 	struct Shader
 	{
-		sf::Shader* get() const { return shader; }
+		sp::Shader* get() const { return shader; }
 		int32_t uniform(Uniforms id) const { return uniforms[Uniforms_t(id)]; }
 		int32_t attribute(Attributes id) const { return attributes[Attributes_t(id)]; }
 		static void initialize();
 	private:
-		sf::Shader* shader = nullptr;
+		sp::Shader* shader = nullptr;
 		std::array<int32_t, Uniforms_t(Uniforms::Count)> uniforms;
 		std::array<int32_t, Uniforms_t(Attributes::Count)> attributes;
 	};
 
+	
+
 	const Shader& get(Shaders id);
+
+	void updateProjectionView(std::optional<std::reference_wrapper<const glm::mat4>> projection, std::optional<std::reference_wrapper<const glm::mat4>> view);
+	glm::mat4 getActiveView();
+	glm::mat4 getActiveProjection();
+	glm::vec3 getActiveCamera();
+
+	void setupLights(const Shader& shader, const glm::vec3& target_worldspace);
+	inline void setupLights(const Shader& shader, const glm::mat4& model)
+	{
+		// Target center of model.
+		setupLights(shader, model * glm::vec4{ glm::vec3{0.f}, 1.f });
+	}
+	
 
 	class ScopedShader final
 	{
@@ -103,13 +130,5 @@ namespace ShaderRegistry
 		const Shader* shader = nullptr;
 	};
 }
-#else
-namespace ShaderRegistry
-{
-	struct Shader
-	{
-		static inline void initialize() {}
-	};
-}
-#endif // FEATURE_3D_RENDERING
+
 #endif // EMPTYEPSILON_SHADER_REGISTRY_H

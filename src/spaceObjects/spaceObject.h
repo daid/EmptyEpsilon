@@ -1,11 +1,14 @@
 #ifndef SPACE_OBJECT_H
 #define SPACE_OBJECT_H
 
-#include "engine.h"
+#include "collisionable.h"
+#include "multiplayer.h"
+#include "scriptInterface.h"
 #include "featureDefs.h"
 #include "modelInfo.h"
 #include "factionInfo.h"
 #include "shipTemplate.h"
+#include "graphics/renderTarget.h"
 
 #include <glm/mat4x4.hpp>
 
@@ -175,7 +178,7 @@ public:
     virtual void draw3DTransparent() {}
     virtual void drawOnRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void drawOnGMRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
-    virtual void destroy();
+    virtual void destroy() override;
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }

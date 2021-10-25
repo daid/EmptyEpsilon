@@ -52,7 +52,7 @@ private:
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//RELAY_SCREEN_H

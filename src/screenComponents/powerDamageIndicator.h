@@ -9,7 +9,7 @@ class GuiPowerDamageIndicator : public GuiElement
 public:
     GuiPowerDamageIndicator(GuiContainer* owner, string name, ESystem system, sp::Alignment icon_align);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
 private:
     ESystem system;

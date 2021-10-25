@@ -40,11 +40,12 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [this](glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (my_spaceship)
             {
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - glm::vec2(0, 50))->show();
+                auto draw_position = rect.center() + position / my_spaceship->getShortRangeRadarRange() * std::min(rect.size.x, rect.size.y) * 0.5f;
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
@@ -52,7 +53,8 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             if (my_spaceship)
             {
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(InputHandler::getMousePos() - glm::vec2(0, 50))->show();
+                auto draw_position = rect.center() + position / my_spaceship->getShortRangeRadarRange() * std::min(rect.size.x, rect.size.y) * 0.5f;
+                heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
@@ -101,46 +103,14 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
 }
 
-bool HelmsScreen::onJoystickAxis(const AxisAction& axisAction){
+void HelmsScreen::onUpdate()
+{
     if (my_spaceship)
     {
-        if (axisAction.category == "HELMS")
+        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+        if (angle != 0.0f)
         {
-            if (axisAction.action == "IMPULSE")
-            {
-                my_spaceship->commandImpulse(axisAction.value);
-                return true;
-            }
-            if (axisAction.action == "ROTATE")
-            {
-                my_spaceship->commandTurnSpeed(axisAction.value);
-                return true;
-            }
-            if (my_spaceship->getCanCombatManeuver())
-            {
-                if (axisAction.action == "STRAFE")
-                {
-                    my_spaceship->commandCombatManeuverStrafe(axisAction.value);
-                    return true;
-                }
-                if (axisAction.action == "BOOST")
-                {
-                    my_spaceship->commandCombatManeuverBoost(axisAction.value);
-                    return true;
-                }
-            }
+            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + angle);
         }
-    }
-    return false;
-}
-
-void HelmsScreen::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "HELMS" && my_spaceship)
-    {
-        if (key.hotkey == "TURN_LEFT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() - 5.0f);
-        else if (key.hotkey == "TURN_RIGHT")
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + 5.0f);
     }
 }

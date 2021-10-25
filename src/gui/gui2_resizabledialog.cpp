@@ -25,7 +25,7 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
     title_bar->addBackground()->setAlignment(sp::Alignment::CenterLeft)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     contents = new GuiElement(this, "");
-    contents->setPosition(resize_icon_size / 2.0, title_bar_height, sp::Alignment::TopLeft);
+    contents->setPosition(resize_icon_size / 2.0f, title_bar_height, sp::Alignment::TopLeft);
 
     min_size = glm::vec2(200, title_bar_height + resize_icon_size);
     minimized = false;
@@ -77,10 +77,10 @@ void GuiResizableDialog::onDraw(sp::RenderTarget& renderer)
     if (minimized)
         return;
 
-    renderer.drawSprite("gui/widget/ResizeDialogCorner.png", rect.position + rect.size - glm::vec2(resize_icon_size * 0.5, resize_icon_size * 0.5), resize_icon_size);
+    renderer.drawSprite("gui/widget/ResizeDialogCorner.png", rect.position + rect.size - glm::vec2(resize_icon_size * 0.5f, resize_icon_size * 0.5f), resize_icon_size);
 }
 
-bool GuiResizableDialog::onMouseDown(glm::vec2 position)
+bool GuiResizableDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     click_state = ClickState::None;
     if (title_bar->getRect().contains(position))
@@ -91,7 +91,7 @@ bool GuiResizableDialog::onMouseDown(glm::vec2 position)
     return true;
 }
 
-void GuiResizableDialog::onMouseDrag(glm::vec2 position)
+void GuiResizableDialog::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     glm::vec2 offset = position - rect.position;
     switch(click_state)

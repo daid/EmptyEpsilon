@@ -11,7 +11,7 @@ class HVLI : public MissileWeapon
 public:
     HVLI();
 
-    virtual void hitObject(P<SpaceObject> object);
+    virtual void hitObject(P<SpaceObject> object) override;
 };
 
 #endif//HVLI_H

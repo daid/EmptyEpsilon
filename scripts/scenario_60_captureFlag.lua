@@ -7,7 +7,7 @@
 ---
 --- Current version designed for post pandemic event, but the pandemic lasted longer than anticipated. Event was held 23Jan2021 with 14 player ships participating. Enjoy this scenario in your own multiple player ship event.
 -- Author: Xansta & Kilted-Klingon
--- Type: Player ship vs. player ship, teams up to 16 ships per side
+-- Category: PvP
 -- Variation[Easy]: Easy enemies, told which opposing team ship picked up flag
 -- Variation[Hard]: Hard enemies, told nothing when opposing team picks up flag
 -- Variation[Small]: Smaller region: 50U, told when opposing team picks up flag

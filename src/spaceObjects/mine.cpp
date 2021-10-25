@@ -4,6 +4,8 @@
 #include "particleEffect.h"
 #include "explosionEffect.h"
 #include "pathPlanner.h"
+#include "random.h"
+#include "multiplayer_server.h"
 
 #include "scriptInterface.h"
 
@@ -66,7 +68,7 @@ void Mine::update(float delta)
         particleTimeout = 0.4;
     }
 
-    if (ejectTimeout > 0.0)
+    if (ejectTimeout > 0.0f)
     {
         ejectTimeout -= delta;
         setVelocity(vec2FromAngle(getRotation()) * data.speed);
@@ -84,7 +86,7 @@ void Mine::update(float delta)
 
 void Mine::collide(Collisionable* target, float force)
 {
-    if (!game_server || triggered || ejectTimeout > 0.0)
+    if (!game_server || triggered || ejectTimeout > 0.0f)
         return;
     P<SpaceObject> hitObject = P<Collisionable>(target);
     if (!hitObject || !hitObject->canBeTargetedBy(nullptr))
@@ -101,7 +103,7 @@ void Mine::eject()
 void Mine::explode()
 {
     DamageInfo info(owner, DT_Kinetic, getPosition());
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, blastRange / 2.0);
+    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, blastRange / 2.0f);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);

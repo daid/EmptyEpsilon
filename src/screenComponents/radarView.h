@@ -2,6 +2,8 @@
 #define RADAR_VIEW_H
 
 #include "gui/gui2_element.h"
+#include "engine.h"
+
 
 class GuiMissileTubeControls;
 class TargetsContainer;
@@ -22,11 +24,10 @@ public:
         FriendlysShortRangeFogOfWar
     };
 
+    typedef std::function<void(sp::io::Pointer::Button button, glm::vec2 position)> bpfunc_t;
     typedef std::function<void(glm::vec2 position)> pfunc_t;
     typedef std::function<void(float position)>     ffunc_t;
 private:
-    sf::RenderTexture background_texture;
-
     class GhostDot
     {
     public:
@@ -61,14 +62,14 @@ private:
     uint8_t background_alpha;
     ERadarStyle style;
     EFogOfWarStyle fog_style;
-    pfunc_t mouse_down_func;
+    bpfunc_t mouse_down_func;
     pfunc_t mouse_drag_func;
     pfunc_t mouse_up_func;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiRadarView* setDistance(float distance) { this->distance = distance; return this; }
     float getDistance() { return distance; }
@@ -97,7 +98,7 @@ public:
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
     bool getAutoRotating() { return auto_rotate_on_my_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
-    GuiRadarView* setCallbacks(pfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
@@ -106,9 +107,9 @@ public:
     glm::vec2 worldToScreen(glm::vec2 world_position);
     glm::vec2 screenToWorld(glm::vec2 screen_position);
 
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseDrag(glm::vec2 position) override;
-    virtual void onMouseUp(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 private:
     void updateGhostDots();
 
@@ -126,7 +127,6 @@ private:
     void drawObjectsGM(sp::RenderTarget& target);
     void drawTargets(sp::RenderTarget& target);
     void drawHeadingIndicators(sp::RenderTarget& target);
-    void drawRadarCutoff(sp::RenderTarget& target);
 };
 
 #endif//RADAR_VIEW_H

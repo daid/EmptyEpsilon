@@ -37,17 +37,17 @@ void GuiShieldFrequencySelect::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        calibrate_button->setEnable(my_spaceship->shield_calibration_delay <= 0.0);
-        new_frequency->setEnable(my_spaceship->shield_calibration_delay <= 0.0);
+        calibrate_button->setEnable(my_spaceship->shield_calibration_delay <= 0.0f);
+        new_frequency->setEnable(my_spaceship->shield_calibration_delay <= 0.0f);
     }
     GuiElement::onDraw(renderer);
 }
 
-void GuiShieldFrequencySelect::onHotkey(const HotkeyResult& key)
+void GuiShieldFrequencySelect::onUpdate()
 {
-    if ((key.category == "ENGINEERING" || key.category == "WEAPONS") && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "SHIELD_CAL_INC")
+        if (keys.weapons_shield_calibration_increase.getDown())
         {
             if (new_frequency->getSelectionIndex() >= new_frequency->entryCount() - 1)
             {
@@ -59,7 +59,7 @@ void GuiShieldFrequencySelect::onHotkey(const HotkeyResult& key)
             }
         }
 
-        if (key.hotkey == "SHIELD_CAL_DEC")
+        if (keys.weapons_shield_calibration_decrease.getDown())
         {
             if (new_frequency->getSelectionIndex() <= 0)
             {
@@ -71,7 +71,7 @@ void GuiShieldFrequencySelect::onHotkey(const HotkeyResult& key)
             }
         }
 
-        if (key.hotkey == "SHIELD_CAL_START")
+        if (keys.weapons_shield_calibration_start.getDown())
         {
             my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
         }

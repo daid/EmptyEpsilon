@@ -1,3 +1,4 @@
+#include "random.h"
 #include "hackingDialog.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
@@ -100,7 +101,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
     if (game->isGameComplete())
     {
-        if (reset_time - engine->getElapsedTime() < 0.0)
+        if (reset_time - engine->getElapsedTime() < 0.0f)
         {
             if (my_spaceship && last_game_success)
             {
@@ -128,7 +129,7 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool GuiHackingDialog::onMouseDown(glm::vec2 position)
+bool GuiHackingDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }

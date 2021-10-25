@@ -4,7 +4,8 @@
 --- Mission consists of one ship with a full crew. Engineer and Science will be busy
 ---
 --- Version 4 Adds more activity for the weapons officer (6Apr2020)
--- Type: Mission, somewhat replayable
+-- Type: Mission
+-- Type: Replayable Mission
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
 

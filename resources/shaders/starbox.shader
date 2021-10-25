@@ -1,8 +1,8 @@
-#version 120
+[vertex]
 
 // Program inputs
 uniform mat4 projection;
-uniform mat4 model_view;
+uniform mat4 view;
 uniform float scale;
 
 // Per-vertex inputs
@@ -18,5 +18,18 @@ void main()
     texcoords = vec3(position.x, position.z, -position.y);
 
     // We get rid of the translation component, so the box gets always centered around the camera.
-    gl_Position = projection * mat4(mat3(model_view)) * vec4(scale * position, 1.);
+    gl_Position = projection * mat4(mat3(view)) * vec4(scale * position, 1.);
+}
+
+[fragment]
+
+// Program inputs
+uniform samplerCube starbox;
+
+// Per-fragment inputs.
+varying vec3 texcoords;
+
+void main()
+{
+    gl_FragColor = textureCube(starbox, texcoords);
 }

@@ -1,13 +1,16 @@
-#include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "main.h"
 #include "electricExplosionEffect.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
+#include "random.h"
+#include "tween.h"
+#include "soundManager.h"
+#include "textureManager.h"
 
-#if FEATURE_3D_RENDERING
+
 gl::Buffers<2> ElectricExplosionEffect::particlesBuffers(gl::Unitialized{});
-#endif
 
 /// ElectricExplosionEffect is a visible electrical explosion, as seen from EMP missiles
 /// Example: ElectricExplosionEffect():setPosition(500,5000):setSize(20)
@@ -32,7 +35,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
 
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
-#if FEATURE_3D_RENDERING
+
     if (!particlesBuffers[0] && gl::isAvailable())
     {
         particlesBuffers = gl::Buffers<2>();
@@ -48,7 +51,7 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         glBufferData(GL_ARRAY_BUFFER, max_quad_count * 4 * vertex_size, nullptr, GL_DYNAMIC_DRAW);
 
         // Create initial data.
-        std::array<uint8_t, 6 * max_quad_count> indices;
+        std::array<uint16_t, 6 * max_quad_count> indices;
         std::array<glm::vec2, 4 * max_quad_count> texcoords;
         for (auto i = 0U; i < max_quad_count; ++i)
         {
@@ -69,9 +72,8 @@ ElectricExplosionEffect::ElectricExplosionEffect()
         // Update texcoords
         glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(glm::vec3), texcoords.size() * sizeof(glm::vec2), texcoords.data());
         // Upload indices
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint8_t), indices.data(), GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
     }
-#endif
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -79,7 +81,6 @@ ElectricExplosionEffect::~ElectricExplosionEffect()
 {
 }
 
-#if FEATURE_3D_RENDERING
 void ElectricExplosionEffect::draw3DTransparent()
 {
     float f = (1.0f - (lifetime / maxLifetime));
@@ -87,32 +88,32 @@ void ElectricExplosionEffect::draw3DTransparent()
     float alpha = 0.5;
     if (f < 0.2f)
     {
-        scale = (f / 0.2f) * 0.8;
+        scale = (f / 0.2f) * 0.8f;
     }else{
         scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 0.8f, 1.0f);
         alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
     }
 
+    auto model_matrix = getModelMatrix();
+    auto explosion_matrix = glm::scale(model_matrix, glm::vec3(scale * size));
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Basic);
 
-    glPushMatrix();
     Mesh* m = Mesh::getMesh("mesh/sphere.obj");
     {
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(explosion_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha, alpha, alpha, 1.f);
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/electric_sphere_texture.png")->getNativeHandle());
+        textureManager.getTexture("texture/electric_sphere_texture.png")->bind();
 
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
         gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
 
-        glScalef(scale * size, scale * size, scale * size);
         m->render(positions.get(), texcoords.get(), normals.get());
 
-        glScalef(0.5f, 0.5f, 0.5f);
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
         m->render(positions.get(), texcoords.get(), normals.get());
         
     }
-    glPopMatrix();
 
     scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 3.0f);
     float r = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
@@ -121,9 +122,11 @@ void ElectricExplosionEffect::draw3DTransparent()
 
     std::array<glm::vec3, 4 * max_quad_count> vertices;
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("particle.png")->getNativeHandle());
+    textureManager.getTexture("particle.png")->bind();
 
     shader = ShaderRegistry::ScopedShader(ShaderRegistry::Shaders::Billboard);
+
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -157,11 +160,10 @@ void ElectricExplosionEffect::draw3DTransparent()
         // upload
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
         
-        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_BYTE, nullptr);
+        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_SHORT, nullptr);
         n += active_quads;
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void ElectricExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {

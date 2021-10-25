@@ -1,7 +1,7 @@
-#include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
-#include "engine.h"
+#include "textureManager.h"
 #include "main.h"
 
 #include "spaceObjects/spaceObject.h"
@@ -34,10 +34,8 @@ ModelData::ModelData()
 :
     loaded(false), mesh(nullptr),
     texture(nullptr), specular_texture(nullptr), illumination_texture(nullptr),
-#if FEATURE_3D_RENDERING
     shader_id(ShaderRegistry::Shaders::Count),
-#endif
-scale(1.f), radius(1.f)
+    scale(1.f), radius(1.f)
 {
 }
 
@@ -167,7 +165,6 @@ void ModelData::load()
             specular_texture = textureManager.getTexture(specular_texture_name);
         if (illumination_texture_name != "")
             illumination_texture = textureManager.getTexture(illumination_texture_name);
-#if FEATURE_3D_RENDERING
         if (texture && specular_texture && illumination_texture)
             shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
         else if (texture && specular_texture)
@@ -176,7 +173,6 @@ void ModelData::load()
             shader_id = ShaderRegistry::Shaders::ObjectIllumination;
         else
             shader_id = ShaderRegistry::Shaders::Object;
-#endif
         loaded = true;
     }
 }
@@ -203,45 +199,48 @@ std::vector<string> ModelData::getModelDataNames()
     return ret;
 }
 
-void ModelData::render()
+void ModelData::render(const glm::mat4& model_matrix)
 {
-#if FEATURE_3D_RENDERING
     load();
     if (!mesh)
         return;
 
-    glPushMatrix();
     // EE's coordinate flips to a Z-up left hand.
     // To account for that, flip the model around 180deg.
-    glRotatef(180.f, 0.f, 0.f, 1.f);
-    glScalef(scale, scale, scale);
-    glTranslatef(mesh_offset.x, mesh_offset.y, mesh_offset.z);
+    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{scale});
+    modeldata_matrix = glm::translate(modeldata_matrix, mesh_offset);
 
     ShaderRegistry::ScopedShader shader(shader_id);
+    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(modeldata_matrix));
+
+
+    // Lights setup.
+    ShaderRegistry::setupLights(shader.get(), model_matrix);
 
     // Textures
-    glBindTexture(GL_TEXTURE_2D, texture->getNativeHandle());
+    texture->bind();
 
     if (specular_texture)
     {
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-        glBindTexture(GL_TEXTURE_2D, specular_texture->getNativeHandle());
+        specular_texture->bind();
     }
 
     if (illumination_texture)
     {
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
-        glBindTexture(GL_TEXTURE_2D, illumination_texture->getNativeHandle());
+        illumination_texture->bind();
     }
 
     // Draw
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
     gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+
+    
     mesh->render(positions.get(), texcoords.get(), normals.get());
 
     if (specular_texture || illumination_texture)
         glActiveTexture(GL_TEXTURE0);
-    glPopMatrix();
-#endif//FEATURE_3D_RENDERING
 }

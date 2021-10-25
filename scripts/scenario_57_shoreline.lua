@@ -4,7 +4,7 @@
 --- Maximum of 8 player ships supported by scenario. More player ships may experience strange results
 ---
 --- Version 2
--- Type: Re-playable Mission
+-- Type: Replayable Mission
 -- Variation[Timed]: Normal difficulty with a 45 minute time limit
 -- Variation[Very Easy]: Few or weak enemies
 -- Variation[Very Easy Timed]: Few or weak enemies with a 45 minute time limit

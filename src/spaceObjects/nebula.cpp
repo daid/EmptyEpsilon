@@ -1,9 +1,10 @@
-#include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
 
 #include "main.h"
 #include "nebula.h"
 #include "playerInfo.h"
+#include "random.h"
+#include "textureManager.h"
 
 #include "scriptInterface.h"
 
@@ -11,14 +12,13 @@
 #include "shaderRegistry.h"
 
 #include <glm/ext/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-#if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
     glm::vec3 vertex;
     glm::vec2 texcoords;
 };
-#endif
 
 
 /// Nebulae block long-range radar in a 5U range.
@@ -53,11 +53,9 @@ Nebula::Nebula()
     nebula_list.push_back(this);
 }
 
-#if FEATURE_3D_RENDERING
 void Nebula::draw3DTransparent()
 {
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
-    glTranslatef(-getPosition().x, -getPosition().y, 0);
 
     std::array<VertexAndTexCoords, 4> quad{
         glm::vec3{}, {0.f, 1.f},
@@ -77,8 +75,8 @@ void Nebula::draw3DTransparent()
         float size = cloud.size;
 
         float distance = glm::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+        float alpha = 1.0f - (distance / 10000.0f);
+        if (alpha < 0.0f)
             continue;
 
         // setup our quad.
@@ -87,20 +85,21 @@ void Nebula::draw3DTransparent()
             point.vertex = position;
         }
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("Nebula" + string(cloud.texture) + ".png")->getNativeHandle());
+        textureManager.getTexture("Nebula" + string(cloud.texture) + ".png")->bind();
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
+        auto model_matrix = glm::translate(getModelMatrix(), {cloud.offset.x, cloud.offset.y, 0});
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-        std::initializer_list<uint8_t> indices = { 0, 3, 2, 0, 2, 1 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+        std::initializer_list<uint16_t> indices = { 0, 3, 2, 0, 2, 1 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0, getRotation()-rotation);
+    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0f, getRotation()-rotation);
 }
 
 void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -152,7 +151,7 @@ glm::vec2 Nebula::getFirstBlockedPosition(glm::vec2 start, glm::vec2 end)
     foreach(Nebula, n, nebula_list)
     {
         float f = glm::dot(startEndDiff, n->getPosition() - start) / startEndLength;
-        if (f < 0.0)
+        if (f < 0.0f)
             f = 0;
         glm::vec2 q = start + startEndDiff / startEndLength * f;
         if (glm::length2(q - n->getPosition()) < n->getRadius() * n->getRadius())

@@ -2,6 +2,7 @@
 #include "main.h"
 #include "serverBrowseMenu.h"
 #include "joinServerMenu.h"
+#include "multiplayer_server_scanner.h"
 #include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"

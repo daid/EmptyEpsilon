@@ -20,6 +20,7 @@ private:
     GuiViewportMainScreen* viewport;
     GuiHelpOverlay* keyboard_help;
     string keyboard_general = "";
+    GuiRadarView* main_screen_radar;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
     GuiCommsOverlay* onscreen_comms;
@@ -31,9 +32,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void onClick(glm::vec2 mouse_position) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
+    virtual bool onPointerDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 #endif//MAIN_SCREEN_H

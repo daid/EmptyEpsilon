@@ -1,7 +1,7 @@
 #ifndef GAME_STATE_LOGGER_H
 #define GAME_STATE_LOGGER_H
 
-#include "engine.h"
+#include "Updatable.h"
 
 class SpaceObject;
 class SpaceShip;
@@ -27,7 +27,7 @@ public:
     void start();
     void stop();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
 private:
     FILE* log_file;

@@ -51,8 +51,6 @@ public:
     explicit CinematicViewScreen(int playerShip = 0);
 
     virtual void update(float delta) override;
-
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 };
 
 #endif//CINEMATIC_VIEW_SCREEN_H

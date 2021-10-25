@@ -18,13 +18,11 @@ public:
     SpectatorScreen();
     virtual ~SpectatorScreen() = default;
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
     void onMouseDown(glm::vec2 position);
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
-
-    void onKey(sf::Event::KeyEvent key, int unicode);
 };
 
 

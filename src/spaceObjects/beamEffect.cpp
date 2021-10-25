@@ -1,21 +1,24 @@
-#include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 #include "beamEffect.h"
 #include "spaceship.h"
 #include "mesh.h"
+#include "random.h"
 #include "main.h"
+#include "textureManager.h"
+#include "soundManager.h"
+#include "multiplayer_server.h"
+#include "multiplayer_client.h"
 
 #include "shaderRegistry.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
-#if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
     glm::vec3 vertex;
     glm::vec2 texcoords;
 };
-#endif
 
 /// BeamEffect is a beam weapon fire effect that will fade after 1 seond
 /// Example: BeamEffect():setSource(player):setTarget(enemy_ship)
@@ -63,19 +66,18 @@ BeamEffect::~BeamEffect()
 {
 }
 
-#if FEATURE_3D_RENDERING
 void BeamEffect::draw3DTransparent()
 {
-    glTranslatef(-getPosition().x, -getPosition().y, 0);
     glm::vec3 startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     glm::vec3 endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     glm::vec3 eyeNormal = glm::normalize(glm::cross(camera_position - startPoint, endPoint - startPoint));
 
-    glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(beam_texture)->getNativeHandle());
+    textureManager.getTexture(beam_texture)->bind();
 
     ShaderRegistry::ScopedShader beamShader(ShaderRegistry::Shaders::Basic);
 
     glUniform4f(beamShader.get().uniform(ShaderRegistry::Uniforms::Color), lifetime, lifetime, lifetime, 1.f);
+    glUniformMatrix4fv(beamShader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(getModelMatrix()));
     
     gl::ScopedVertexAttribArray positions(beamShader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(beamShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -99,8 +101,8 @@ void BeamEffect::draw3DTransparent()
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
         // Draw the beam
-        std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
 
     }
 
@@ -127,14 +129,13 @@ void BeamEffect::draw3DTransparent()
         quad[3].vertex = v4;
         quad[3].texcoords = { 0.f, 1.f };
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("texture/fire_ring.png")->getNativeHandle());
+        textureManager.getTexture("texture/fire_ring.png")->bind();
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-        std::initializer_list<uint8_t> indices = { 0, 1, 2, 2, 3, 0 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void BeamEffect::update(float delta)
 {
@@ -177,12 +178,12 @@ void BeamEffect::setTarget(P<SpaceObject> target, glm::vec2 hitLocation)
     target_id = target->getMultiplayerId();
     float r = target->getRadius();
     hitLocation -= target->getPosition();
-    targetOffset = glm::vec3(hitLocation.x + random(-r/2.0, r/2.0), hitLocation.y + random(-r/2.0, r/2.0), random(-r/4.0, r/4.0));
+    targetOffset = glm::vec3(hitLocation.x + random(-r/2.0f, r/2.0f), hitLocation.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
 
     if (target->hasShield())
         targetOffset = glm::normalize(targetOffset) * r;
     else
-        targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0);
+        targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0f);
     update(0);
 
     glm::vec3 hitPos(targetLocation.x, targetLocation.y, targetOffset.z);

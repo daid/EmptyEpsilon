@@ -1,7 +1,7 @@
 #ifndef MODEL_DATA_H
 #define MODEL_DATA_H
 
-#include "engine.h"
+#include "graphics/texture.h"
 
 #include "mesh.h"
 #include "shaderRegistry.h"
@@ -40,12 +40,10 @@ private:
 
     Mesh* mesh;
     glm::vec3 mesh_offset{};
-    sf::Texture* texture;
-    sf::Texture* specular_texture;
-    sf::Texture* illumination_texture;
-#if FEATURE_3D_RENDERING
+    sp::Texture* texture;
+    sp::Texture* specular_texture;
+    sp::Texture* illumination_texture;
     ShaderRegistry::Shaders shader_id;
-#endif
     float scale;
 
     float radius;
@@ -124,7 +122,7 @@ public:
     float getRadius();
 
     void load();
-    void render();
+    void render(const glm::mat4& model_matrix);
 
     friend class ModelInfo;
     friend class GuiRotatingModelView;

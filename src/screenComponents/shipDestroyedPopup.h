@@ -2,6 +2,8 @@
 #define SHIP_DESTROYED_POPUP_H
 
 #include "gui/gui2_element.h"
+#include "timer.h"
+
 
 class GuiPanel;
 class GuiCanvas;
@@ -17,7 +19,7 @@ private:
 public:
     GuiShipDestroyedPopup(GuiCanvas* owner);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//SHIP_DESTROYED_POPUP_H

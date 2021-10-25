@@ -79,13 +79,11 @@ public:
     GameMasterScreen();
     virtual ~GameMasterScreen();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
-    void onMouseDown(glm::vec2 position);
+    void onMouseDown(sp::io::Pointer::Button button, glm::vec2 position);
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
-
-    virtual void onKey(sf::Event::KeyEvent key, int unicode);
 
     PVector<SpaceObject> getSelection();
 

@@ -18,7 +18,7 @@ GuiJumpIndicator::GuiJumpIndicator(GuiContainer* owner)
 
 void GuiJumpIndicator::onDraw(sp::RenderTarget& target)
 {
-    if (my_spaceship && my_spaceship->jump_delay > 0.0)
+    if (my_spaceship && my_spaceship->jump_delay > 0.0f)
     {
         box->show();
         label->setText(tr("Jump in: {delay}").format({{"delay", string(int(ceilf(my_spaceship->jump_delay)))}}));

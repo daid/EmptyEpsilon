@@ -41,9 +41,7 @@ public:
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
-#if FEATURE_3D_RENDERING
     virtual void draw3DTransparent() override;
-#endif
     virtual void drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 
@@ -81,7 +79,7 @@ public:
     void setShields(std::vector<float> amounts);
     void setShieldsMax(std::vector<float> amounts);
 
-    int getShieldPercentage(int index) { if (index < 0 || index >= shield_count || shield_max[index] <= 0.0) return 0; return int(100 * shield_level[index] / shield_max[index]); }
+    int getShieldPercentage(int index) { if (index < 0 || index >= shield_count || shield_max[index] <= 0.0f) return 0; return int(100 * shield_level[index] / shield_max[index]); }
     ESystem getShieldSystemForShieldIndex(int index);
 
     ///Deprecated old script functions for shields

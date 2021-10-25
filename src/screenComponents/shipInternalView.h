@@ -22,7 +22,7 @@ public:
     GuiShipInternalView* setShip(P<SpaceShip> ship);
 
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual void onHotkey(const HotkeyResult& key) override;
+    virtual void onUpdate() override;
 };
 
 class GuiShipRoomContainer : public GuiElement
@@ -35,8 +35,8 @@ private:
 public:
     GuiShipRoomContainer(GuiContainer* owner, string id, float room_size, func_t func);
 
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseUp(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 class GuiShipRoom : public GuiElement
@@ -51,12 +51,12 @@ private:
 public:
     GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::ivec2 room_dimensions, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiShipRoom* setSystem(P<SpaceShip> ship, ESystem system) { this->ship = ship; this->system = system; return this; }
 
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseUp(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 class GuiShipDoor : public GuiElement
@@ -70,12 +70,12 @@ private:
 public:
     GuiShipDoor(GuiContainer* owner, string id, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiShipDoor* setHorizontal() { horizontal = true; return this; }
 
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseUp(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 class GuiShipCrew : public GuiElement
@@ -91,8 +91,8 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseUp(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };
 
 #endif//SHIP_INTERNAL_VIEW_H

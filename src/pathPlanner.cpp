@@ -1,7 +1,9 @@
 #include "pathPlanner.h"
+#include "spaceObjects/spaceObject.h"
 
-const double small_object_grid_size = 5000.0f;
-const double small_object_max_size = 1000.0f;
+
+const float small_object_grid_size = 5000.0f;
+const float small_object_max_size = 1000.0f;
 
 static uint32_t hashSector(uint32_t x, uint32_t y)
 {
@@ -159,7 +161,7 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
 {
     glm::vec2 startEndDiff = end - start;
     float startEndLength = glm::length(startEndDiff);
-    if (startEndLength < 100.0)
+    if (startEndLength < 100.0f)
         return false;
     float firstAvoidF = startEndLength;
     PathPlannerManager::PathPlannerAvoidObject avoidObject(NULL, 0);

@@ -21,10 +21,8 @@ public:
     BeamEffect();
     virtual ~BeamEffect();
 
-#if FEATURE_3D_RENDERING
-    virtual void draw3DTransparent();
-#endif
-    virtual void update(float delta);
+    virtual void draw3DTransparent() override;
+    virtual void update(float delta) override;
 
     void setSource(P<SpaceObject> source, glm::vec3 offset);
     void setTarget(P<SpaceObject> target, glm::vec2 hitLocation);

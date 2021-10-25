@@ -1,5 +1,6 @@
 #include "scenarioInfo.h"
 #include "resources.h"
+#include <unordered_set>
 
 ScenarioInfo::ScenarioInfo(string filename)
 {
@@ -34,14 +35,31 @@ ScenarioInfo::ScenarioInfo(string filename)
         }
     }
     addKeyValue(key, value);
-    if (type == "")
-        LOG(WARNING) << "No scenario type for: " << filename;
+    if (categories.size() == 0)
+    {
+        LOG(WARNING) << "No scenario category for: " << filename;
+        categories.push_back("Unknown");
+    }
+}
+
+bool ScenarioInfo::hasCategory(const string& category)
+{
+    for(auto& c : categories)
+        if (c == category)
+            return true;
+    return false;
 }
 
 void ScenarioInfo::addKeyValue(string key, string value)
 {
     if (key == "")
         return;
+    string additional;
+    if (key.find("[") >= 0 && key.endswith("]"))
+    {
+        additional = key.substr(key.find("[") + 1, -1);
+        key = key.substr(0, key.find("["));
+    }
     if (key.lower() == "name")
     {
         name = value;
@@ -54,14 +72,85 @@ void ScenarioInfo::addKeyValue(string key, string value)
     {
         author = value;
     }
-    else if (key.lower() == "type")
+    else if (key.lower() == "type" || key.lower() == "category")
     {
-        type = value;
+        categories.push_back(value);
     }
-    else if (key.lower().startswith("variation[") && key.endswith("]"))
+    else if (key.lower() == "variation" && additional != "")
     {
-        variations.emplace_back(key.substr(10, -1), value);
-    }else{
+        if (!addSettingOption("variation", additional, value))
+        {
+            Setting setting;
+            setting.key = "variation";
+            setting.description = "Select a scenario variation";
+            setting.options.emplace_back("None", "");
+            settings.push_back(setting);
+            addSettingOption("variation", additional, value);
+        }
+    }
+    else if (key.lower() == "setting" && additional != "")
+    {
+        Setting setting;
+        setting.key = additional;
+        setting.description = value;
+        settings.push_back(setting);
+    }
+    else if (additional == "" || !addSettingOption(key, additional, value))
+    {
         LOG(WARNING) << "Unknown scenario meta data: " << key << ": " << value;
     }
+}
+
+std::vector<string> ScenarioInfo::getCategories()
+{
+    std::vector<string> result;
+    std::unordered_set<string> known_categories;
+    // Fetch and sort all Lua files starting with "scenario_".
+    std::vector<string> scenario_filenames = findResources("scenario_*.lua");
+    std::sort(scenario_filenames.begin(), scenario_filenames.end());
+    // remove duplicates
+    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
+    for(auto& filename : scenario_filenames)
+    {
+        ScenarioInfo info(filename);
+        for(auto& category : info.categories)
+        {
+            if (known_categories.find(category) != known_categories.end())
+                continue;
+            result.push_back(category);
+            known_categories.insert(category);
+        }
+    }
+    return result;
+}
+
+bool ScenarioInfo::addSettingOption(string key, string option, string description)
+{
+    for(auto& setting : settings)
+    {
+        if (setting.key == key)
+        {
+            setting.options.emplace_back(option, description);
+            return true;
+        }
+    }
+    return false;
+}
+
+std::vector<ScenarioInfo> ScenarioInfo::getScenarios(const string& category)
+{
+    std::vector<ScenarioInfo> result;
+    
+    // Fetch and sort all Lua files starting with "scenario_".
+    std::vector<string> scenario_filenames = findResources("scenario_*.lua");
+    std::sort(scenario_filenames.begin(), scenario_filenames.end());
+    // remove duplicates
+    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
+    for(string filename : scenario_filenames)
+    {
+        ScenarioInfo info(filename);
+        if (info.hasCategory(category))
+            result.push_back(info);
+    }
+    return result;
 }

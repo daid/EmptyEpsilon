@@ -36,7 +36,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
-        [this](glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_spaceship->commandSetTarget(targets.get());
@@ -121,11 +121,11 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
 }
 
-void WeaponsScreen::onHotkey(const HotkeyResult& key)
+void WeaponsScreen::onUpdate()
 {
-    if (key.category == "WEAPONS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "NEXT_ENEMY_TARGET")
+        if (keys.weapons_enemy_next_target.getDown())
         {
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
@@ -156,7 +156,7 @@ void WeaponsScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "NEXT_TARGET")
+        if (keys.weapons_next_target.getDown())
         {
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
@@ -187,25 +187,11 @@ void WeaponsScreen::onHotkey(const HotkeyResult& key)
                 }
             }
         }
-        if (key.hotkey == "AIM_MISSILE_LEFT")
+        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        if (aim_adjust != 0.0f)
         {
-            missile_aim->setValue(missile_aim->getValue() - 5.0f);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
-        }
-        if (key.hotkey == "AIM_MISSILE_RIGHT")
-        {
-            missile_aim->setValue(missile_aim->getValue() + 5.0f);
+            missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
         }
     }
-}
-bool WeaponsScreen::onJoystickAxis(const AxisAction& axisAction){
-    if (axisAction.category == "WEAPONS" && my_spaceship){
-        if (axisAction.action == "AIM_MISSILE"){
-            missile_aim->setValue(axisAction.value * 180);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
-            return true;
-        }
-    }
-    return false;
 }

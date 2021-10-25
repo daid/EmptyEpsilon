@@ -74,7 +74,7 @@ void ShipsLog::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool ShipsLog::onMouseDown(glm::vec2 position)
+bool ShipsLog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     open = !open;
     if (open)

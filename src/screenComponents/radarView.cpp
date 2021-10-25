@@ -1,4 +1,4 @@
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
 
 #include "main.h"
 #include "gameGlobalInfo.h"
@@ -105,49 +105,35 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         }
     }
 
-    //Setup our texture for rendering
-    auto use_rendertexture = adjustRenderTexture(background_texture);
-    sp::RenderTarget background_texture_renderer(background_texture);
-    auto& radar_target = use_rendertexture ? background_texture_renderer : renderer;
+    // Make sure all the drawing up till now is no longer queued and passed to the GPU.
+    renderer.finish();
 
-    if (!use_rendertexture)
-    {
-        // When we are not using a render texture, we must take some care to not overstep our bounds,
-        // quite literally.
-        // We use scissoring to define a 'box' in which all draw operations can happen.
-        // This allows the side main screen to work correctly even when falling back in the non-render texture path.
-        auto origin = radar_target.getSFMLTarget().mapCoordsToPixel(sf::Vector2f{ rect.position.x, rect.position.y });
-        auto extents = radar_target.getSFMLTarget().mapCoordsToPixel(sf::Vector2f{ rect.size.x, rect.size.y });
+    //We must take some care to not overstep our bounds,
+    // quite literally.
+    // We use scissoring to define a 'box' in which all draw operations can happen.
+    // This allows the side main screen to work correctly even when falling back in the non-render texture path.
+    auto origin = renderer.virtualToPixelPosition(rect.position);
+    auto extents = renderer.virtualToPixelPosition(rect.position + rect.size);
 
-        radar_target.getSFMLTarget().setActive(true);
-
-        glEnable(GL_SCISSOR_TEST);
-        glScissor(origin.x, origin.y, extents.x, extents.y);
-    }
+    glEnable(GL_SCISSOR_TEST);
+    glScissor(origin.x, renderer.getPhysicalSize().y - extents.y, extents.x - origin.x, extents.y - origin.y);
 
     // Draw the initial background 'clear' color.
-    if (use_rendertexture || style == Rectangular)
+    if (style == Rectangular)
     {
-        drawBackground(radar_target);
+        drawBackground(renderer);
     }
     
     if ((style == CircularMasked || style == Circular))
     {
         // Draw the radar's outline. First, and before any stencil kicks in.
         // this way, the outline is not even a part of the rendering area.
-        float r = std::min(rect.size.x, rect.size.y) / 2.0f;
+        float r = std::min(rect.size.x, rect.size.y) * 0.5f;
         renderer.drawCircleOutline(getCenterPoint(), r, 2.0f, colorConfig.radar_outline);
     }
 
-    // Ensure the calls land in the context of the RT.
-    // Even if we don't use multithreading, there are still setup per platforms
-    // (for instance, FBO binding when they're used).
-    // Each SFML call may reset the binding,
-    // so we have to keep re-activating the target window all the time.
-    // We're relying on stencil buffer to draw the radar:
-    radar_target.getSFMLTarget().setActive(true);
-
     // Stencil setup.
+    renderer.finish();
     glEnable(GL_STENCIL_TEST);
     glStencilMask(as_mask(RadarStencil::InBoundsAndVisible));
     
@@ -176,39 +162,39 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
         // Draws the radar circle shape.
         // Note that this draws both in the stencil and the color buffer!
-        radar_target.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f - 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.finish();
     }
 
-    radar_target.getSFMLTarget().setActive(true);
     if (fog_style == NebulaFogOfWar)
     {
         // Draw the *blocked* areas.
         // In this cas, we want to clear the 'visible' bit,
         // for all the stencil that has the radar one.
         glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
-        drawNebulaBlockedAreas(radar_target);
+        drawNebulaBlockedAreas(renderer);
     }
     else if (fog_style == FriendlysShortRangeFogOfWar)
     {
         // Draws the *visible* areas.
         // Add the visible states to anything that's in friendly sight (and still in bounds)
         glStencilFunc(GL_EQUAL, as_mask(RadarStencil::InBoundsAndVisible), as_mask(RadarStencil::RadarBounds));
-        drawNoneFriendlyBlockedAreas(radar_target);
+        drawNoneFriendlyBlockedAreas(renderer);
     }
 
     // Stencil is setup!
-    radar_target.getSFMLTarget().setActive(true);
+    renderer.finish();
     glStencilMask(as_mask(RadarStencil::None)); // disable writes.
     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Back to defaults.
 
     // These always draw within the radar's confine.
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
-    drawSectorGrid(radar_target);
-    drawRangeIndicators(radar_target);
+    drawSectorGrid(renderer);
+    drawRangeIndicators(renderer);
     if (show_target_projection)
-        drawTargetProjections(radar_target);
+        drawTargetProjections(renderer);
     if (show_missile_tubes)
-        drawMissileTubes(radar_target);
+        drawMissileTubes(renderer);
 
     ///Start drawing of foreground
     // Foreground is radar confine + not blocked out.
@@ -217,59 +203,46 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     if (show_ghost_dots)
     {
         updateGhostDots();
-        drawGhostDots(radar_target);
+        drawGhostDots(renderer);
     }
 
-    drawObjects(radar_target);
+    drawObjects(renderer);
 
     // Post masking
-    radar_target.getSFMLTarget().setActive(true);
+    renderer.finish();
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     if (show_game_master_data)
-        drawObjectsGM(radar_target);
+        drawObjectsGM(renderer);
 
     if (show_waypoints)
-        drawWaypoints(radar_target);
+        drawWaypoints(renderer);
     if (show_heading_indicators)
-        drawHeadingIndicators(radar_target);
-    drawTargets(radar_target);
+        drawHeadingIndicators(renderer);
+    drawTargets(renderer);
 
     if (style == Rectangular && my_spaceship)
     {
         auto ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.size.x, rect.size.y) / 2.0f;
         if (ship_offset.x < -rect.size.x / 2.0f || ship_offset.x > rect.size.x / 2.0f || ship_offset.y < -rect.size.y / 2.0f || ship_offset.y > rect.size.y / 2.0f)
         {
-            glm::vec2 position(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0);
+            glm::vec2 position(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
             position += ship_offset / glm::length(ship_offset) * std::min(rect.size.x, rect.size.y) * 0.4f;
 
             renderer.drawRotatedSprite("waypoint.png", position, 32, vec2ToAngle(ship_offset) - 90);
         }
     }
     // Done with the stencil.
-    radar_target.getSFMLTarget().setActive(true);
+    renderer.finish();
     glDepthMask(GL_TRUE);
     glDisable(GL_STENCIL_TEST);
-    
-    if (!use_rendertexture)
-    {
-        glDisable(GL_SCISSOR_TEST);
-    }
-
-    radar_target.getSFMLTarget().setActive(false);
-
-    if (use_rendertexture)
-    {
-        //Render the final radar
-        drawRenderTexture(background_texture, renderer.getSFMLTarget());
-    }
-    
+    glDisable(GL_SCISSOR_TEST);
 }
 
 void GuiRadarView::updateGhostDots()
 {
     if (next_ghost_dot_update < engine->getElapsedTime())
     {
-        next_ghost_dot_update = engine->getElapsedTime() + 5.0;
+        next_ghost_dot_update = engine->getElapsedTime() + 5.0f;
         foreach(SpaceObject, obj, space_object_list)
         {
             P<SpaceShip> ship = obj;
@@ -296,7 +269,10 @@ void GuiRadarView::drawBackground(sp::RenderTarget& renderer)
     // When drawing a non-rectangular radar (ie circle),
     // we need full transparency on the outer edge.
     // We then use the stencil mask to allow the actual drawing.
-    renderer.getSFMLTarget().clear(style == Rectangular ? sf::Color{ tint, tint, tint, background_alpha } : sf::Color(0, 0, 0, 0));
+    if (style == Rectangular)
+        renderer.fillRect(rect, {tint, tint, tint, background_alpha});
+    else
+        renderer.fillRect(rect, {0, 0, 0, 0});
 }
 
 void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
@@ -305,7 +281,6 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
     {
         float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-        sf::CircleShape circle(0.f, 50);
         foreach(SpaceObject, obj, space_object_list)
         {
             P<ShipTemplateBasedObject> stb_obj = obj;
@@ -329,8 +304,8 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
 {
-    sf::Vector2f radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
-    float scale = std::min(rect.size.x, rect.size.y) / 2.0 / distance;
+    auto radar_screen_center = rect.center();
+    float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     constexpr float sector_size = 20000;
     const float sub_sector_size = sector_size / 8;
@@ -377,6 +352,8 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
             renderer.drawPoint(worldToScreen(glm::vec2(x,y)), color);
         }
     }
+    //We finish the rendering here, to make sure the sector grid lines are drawn below anything else.
+    renderer.finish();
 }
 
 void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
@@ -384,7 +361,6 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
     if (!my_spaceship)
         return;
     auto scan_center = my_spaceship->getPosition();
-    sf::Vector2f radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     PVector<Nebula> nebulas = Nebula::getNebulas();
@@ -407,7 +383,7 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
                 renderer.fillCircle(worldToScreen(n->getPosition()), r, glm::u8vec4(0, 0, 0, 255));
 
                 float diff_angle = vec2ToAngle(diff);
-                float angle = acosf(n->getRadius() / diff_len) / M_PI * 180.0f;
+                float angle = glm::degrees(acosf(n->getRadius() / diff_len));
 
                 auto pos_a = n->getPosition() - vec2FromAngle(diff_angle + angle) * n->getRadius();
                 auto pos_b = n->getPosition() - vec2FromAngle(diff_angle - angle) * n->getRadius();
@@ -463,7 +439,7 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
 {
-    if (range_indicator_step_size < 1.0)
+    if (range_indicator_step_size < 1.0f)
         return;
 
     glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
@@ -480,7 +456,6 @@ void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
 void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
 {
     const float seconds_per_distance_tick = 5.0f;
-    sf::Vector2f radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     if (my_spaceship && missile_tube_controls)
@@ -507,7 +482,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
             }
 
             float angle_diff = angleDifference(missile_target_angle, fire_angle);
-            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
+            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
             if (data.turnrate == 0.0f)
                 turn_radius = 0.0f;
 
@@ -518,11 +493,10 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
             auto turn_center = vec2FromAngle(fire_angle + left_or_right) * turn_radius;
             auto turn_exit = turn_center + vec2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
-            float turn_distance = fabs(angle_diff) / 360.0 * (turn_radius * 2.0f * M_PI);
+            float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * float(M_PI));
             float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
             float length_after_turn = data.speed * lifetime_after_turn;
 
-            sf::VertexArray a(sf::LinesStrip, 13);
             std::vector<glm::vec2> missile_path;
             missile_path.push_back(worldToScreen(fire_position));
             for(int cnt=0; cnt<10; cnt++)
@@ -593,8 +567,6 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 {
-    auto& window = renderer.getSFMLTarget();
-
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     std::unordered_set<SpaceObject*> visible_objects;
@@ -691,7 +663,6 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         }
     };
 
-    window.setActive(true);
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     for(SpaceObject* obj : visible_objects)
     {
@@ -722,13 +693,10 @@ void GuiRadarView::drawObjectsGM(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
 {
-    auto& window = renderer.getSFMLTarget();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     if (!targets)
         return;
-    sf::Sprite target_sprite;
-    textureManager.setTexture(target_sprite, "redicule.png");
 
     for(P<SpaceObject> obj : targets->getTargets())
     {
@@ -737,8 +705,7 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.overlaps(object_rect))
         {
-            target_sprite.setPosition(object_position_on_screen.x, object_position_on_screen.y);
-            window.draw(target_sprite);
+            renderer.drawSprite("redicule.png", object_position_on_screen, 48);
         }
     }
 
@@ -746,15 +713,13 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
     {
         auto object_position_on_screen = worldToScreen(my_spaceship->waypoints[targets->getWaypointIndex()]);
 
-        target_sprite.setPosition(object_position_on_screen.x, object_position_on_screen.y - 10);
-        window.draw(target_sprite);
+        renderer.drawSprite("redicule.png", object_position_on_screen - glm::vec2{0, 10}, 48);
     }
 }
 
 void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
 {
-    auto& window = renderer.getSFMLTarget();
-    sf::Vector2f radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
+    auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f;
 
     // If radar is 600-800px then tigs run every 20 degrees, small tigs every 5.
@@ -779,48 +744,29 @@ void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
         small_tig_interval = 10;
     }
 
-    sf::VertexArray tigs(sf::Lines, 360 / tig_interval * 2);
+    // Main radar tigs
     for(unsigned int n = 0; n < 360; n += tig_interval)
     {
-        tigs[n / tig_interval * 2].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 20);
-        tigs[n / tig_interval * 2 + 1].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 40);
+        renderer.drawLine(
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 20),
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 40),
+            {255, 255, 255, 255});
     }
-    window.draw(tigs);
 
-    sf::VertexArray small_tigs(sf::Lines, 360 / small_tig_interval * 2);
     for(unsigned int n = 0; n < 360; n += small_tig_interval)
     {
-        small_tigs[n / small_tig_interval * 2].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 20);
-        small_tigs[n / small_tig_interval * 2 + 1].position = radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 30);
+        renderer.drawLine(
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 20),
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 30),
+            {255, 255, 255, 255});
     }
-    window.draw(small_tigs);
 
     for(unsigned int n = 0; n < 360; n += tig_interval)
     {
-        sf::Text text(string(n), *main_font, 15);
-        text.setPosition(radar_screen_center + sf::vector2FromAngle(float(n) - 90 - view_rotation) * (scale - 45));
-        text.setOrigin(text.getLocalBounds().width / 2.0, text.getLocalBounds().height / 2.0);
-        text.setRotation(n-view_rotation);
-        window.draw(text);
+        renderer.drawRotatedText(
+            radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 50), n-view_rotation,
+            string(n), 15.0f, main_font, {255, 255, 255, 255});
     }
-}
-
-void GuiRadarView::drawRadarCutoff(sp::RenderTarget& renderer)
-{
-    auto& window = renderer.getSFMLTarget();
-    auto radar_screen_center = rect.center();
-    float screen_size = std::min(rect.size.x, rect.size.y) / 2.0f;
-
-    sf::Sprite cutOff;
-    textureManager.setTexture(cutOff, "gui/radarCutoff.png");
-    cutOff.setPosition(radar_screen_center.x, radar_screen_center.y);
-    cutOff.setScale(screen_size / float(cutOff.getTextureRect().width) * 2, screen_size / float(cutOff.getTextureRect().width) * 2);
-    window.draw(cutOff);
-
-    renderer.fillRect(sp::Rect(rect.position.x, rect.position.y, rect.size.x, radar_screen_center.y - screen_size - rect.position.y), glm::u8vec4(0, 0, 0, 255));
-    renderer.fillRect(sp::Rect(rect.position.x, radar_screen_center.y + screen_size, rect.size.x, rect.size.y - screen_size - (radar_screen_center.y - rect.position.y)), glm::u8vec4(0, 0, 0, 255));
-    renderer.fillRect(sp::Rect(rect.position.x, rect.position.y, radar_screen_center.x - screen_size - rect.position.x, rect.size.y), glm::u8vec4(0, 0, 0, 255));
-    renderer.fillRect(sp::Rect(radar_screen_center.x + screen_size, rect.position.y, rect.size.x - screen_size - (radar_screen_center.x - rect.position.x), rect.size.y), glm::u8vec4(0, 0, 0, 255));
 }
 
 glm::vec2 GuiRadarView::worldToScreen(glm::vec2 world_position)
@@ -841,7 +787,7 @@ glm::vec2 GuiRadarView::screenToWorld(glm::vec2 screen_position)
     return view_position + glm::vec2(radar_position.x, radar_position.y);
 }
 
-bool GuiRadarView::onMouseDown(glm::vec2 position)
+bool GuiRadarView::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (style == Circular || style == CircularMasked)
     {
@@ -852,17 +798,17 @@ bool GuiRadarView::onMouseDown(glm::vec2 position)
     if (!mouse_down_func && !mouse_drag_func && !mouse_up_func)
         return false;
     if (mouse_down_func)
-        mouse_down_func(screenToWorld(position));
+        mouse_down_func(button, screenToWorld(position));
     return true;
 }
 
-void GuiRadarView::onMouseDrag(glm::vec2 position)
+void GuiRadarView::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (mouse_drag_func)
         mouse_drag_func(screenToWorld(position));
 }
 
-void GuiRadarView::onMouseUp(glm::vec2 position)
+void GuiRadarView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (mouse_up_func)
         mouse_up_func(screenToWorld(position));

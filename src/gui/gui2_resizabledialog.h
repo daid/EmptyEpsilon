@@ -14,8 +14,8 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseDrag(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
 
     void minimize(bool minimize=true);
     bool isMinimized() const;

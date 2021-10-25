@@ -18,7 +18,7 @@ public:
     GuiPanel* frame;
 
     virtual void setText(string new_text);
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 
 #endif//HELP_OVERLAY_H

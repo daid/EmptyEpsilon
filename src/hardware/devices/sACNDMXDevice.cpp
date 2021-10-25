@@ -50,7 +50,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
     }
 
     run_thread = true;
-    update_thread = std::move(std::thread(&StreamingAcnDMXDevice::updateLoop, this));
+    update_thread = std::thread(&StreamingAcnDMXDevice::updateLoop, this);
     return true;
 }
 
@@ -58,7 +58,7 @@ bool StreamingAcnDMXDevice::configure(std::unordered_map<string, string> setting
 void StreamingAcnDMXDevice::setChannelData(int channel, float value)
 {
     if (channel >= 0 && channel < channel_count)
-        channel_data[channel] = int((value * 255.0) + 0.5);
+        channel_data[channel] = int((value * 255.0f) + 0.5f);
 }
 
 //Return the number of output channels supported by this device.
@@ -72,7 +72,6 @@ void StreamingAcnDMXDevice::updateLoop()
     uint8_t sequence_number = 0;
     while(run_thread)
     {
-        //TODO:SOCKET: This is no longer correct after we modify the DataBuffer to save data
         std::vector<uint8_t> buffer;
         auto addU8 = [&buffer](uint8_t d) { buffer.resize(buffer.size() + 1); buffer[buffer.size()-1] = d; };
         auto addU16 = [&buffer](uint16_t d) { buffer.resize(buffer.size() + 2); buffer[buffer.size()-2] = d >> 8; buffer[buffer.size()-1] = d; };

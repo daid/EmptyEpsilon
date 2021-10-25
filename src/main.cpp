@@ -1,4 +1,5 @@
 #include <memory>
+#include <set>
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
@@ -7,6 +8,9 @@
 #include <sys/stat.h>
 #endif
 #include <sys/types.h>
+#include "textureManager.h"
+#include "soundManager.h"
+#include "graphics/freetypefont.h"
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
@@ -16,7 +20,6 @@
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
 #include "menus/optionsMenu.h"
-#include "mouseCalibrator.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
@@ -27,6 +30,9 @@
 #include "preferenceManager.h"
 #include "networkRecorder.h"
 #include "tutorialGame.h"
+#include "windowManager.h"
+
+#include "graphics/opengl.h"
 
 #include "hardware/hardwareController.h"
 #if WITH_DISCORD
@@ -45,11 +51,12 @@
 glm::vec3 camera_position;
 float camera_yaw;
 float camera_pitch;
-sf::Font* main_font;
-sf::Font* bold_font;
+sp::Font* main_font;
+sp::Font* bold_font;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
+P<Window> main_window;
 
 int main(int argc, char** argv)
 {
@@ -172,7 +179,6 @@ int main(int argc, char** argv)
 #endif
     textureManager.setDefaultSmooth(true);
     textureManager.setDefaultRepeated(true);
-    textureManager.setAutoSprite(false);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
 
     if (PreferencesManager::get("httpserver").toInt() != 0)
@@ -186,8 +192,8 @@ int main(int argc, char** argv)
     }
 
     colorConfig.load();
-    HotkeyConfig::get().load();
-    joystick.load();
+    sp::io::Keybinding::loadKeybindings("keybindings.json");
+    keys.init();
 
     if (PreferencesManager::get("username", "") == "")
     {
@@ -218,55 +224,49 @@ int main(int argc, char** argv)
             if (fsaa < 2)
                 fsaa = 2;
         }
-        P<WindowManager> window_manager = new WindowManager(width, height, fullscreen, warpPostProcessor, fsaa);
+
+        main_window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
+#if defined(DEBUG)
+        // Synchronous gl debug output always in debug.
+        constexpr bool wants_gl_debug = true;
+        constexpr bool wants_gl_debug_synchronous = true;
+#else
+        auto wants_gl_debug = !PreferencesManager::get("gl_debug").empty();
+        auto wants_gl_debug_synchronous = !PreferencesManager::get("gl_debug_synchronous").empty();
+#endif
+        if (wants_gl_debug)
+        {
+            if (sp::gl::enableDebugOutput(wants_gl_debug_synchronous))
+                LOG(INFO, "GL Debug output enabled.");
+            else
+                LOG(WARNING, "GL Debug output requested but not available on this system.");
+        }
+
         if (PreferencesManager::get("instance_name") != "")
-            window_manager->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
+            main_window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         else
-            window_manager->setTitle("EmptyEpsilon");
-        window_manager->setAllowVirtualResize(true);
-        engine->registerObject("windowManager", window_manager);
+            main_window->setTitle("EmptyEpsilon");
 
         if (gl::isAvailable())
         {
             ShaderRegistry::Shader::initialize();
         }
     }
-    if (PreferencesManager::get("touchscreen").toInt())
-    {
-        InputHandler::touch_screen = true;
-    }
-    if (!InputHandler::touch_screen)
+    if (PreferencesManager::get("touchscreen").toInt() == 0)
     {
         engine->registerObject("mouseRenderer", new MouseRenderer());
     }
 
     new DebugRenderer();
 
-    if (PreferencesManager::get("touchcalibfile") != "")
-    {
-        FILE* f = fopen(PreferencesManager::get("touchcalibfile").c_str(), "r");
-        if (f)
-        {
-            float m[6];
-            if (fscanf(f, "%f %f %f %f %f %f", &m[0], &m[1], &m[2], &m[3], &m[4], &m[5]) == 6)
-                InputHandler::mouse_transform = sf::Transform(m[0], m[1], m[2], m[3], m[4], m[5], 0, 0, 1);
-            fclose(f);
-        }
-    }
-
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    if (PreferencesManager::get("disable_shaders").toInt())
-        PostProcessor::setEnable(false);
+    P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BigShouldersDisplay-SemiBold.ttf"));
+    main_font = new sp::FreetypeFont(main_font_stream);
 
-    P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BebasNeue Regular.otf"));
-    main_font = new sf::Font();
-    main_font->loadFromStream(**main_font_stream);
-
-    P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BebasNeue Bold.otf"));
-    bold_font = new sf::Font();
-    bold_font->loadFromStream(**bold_font_stream);
+    P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BigShouldersDisplay-ExtraBold.ttf"));
+    bold_font = new sp::FreetypeFont(bold_font_stream);
 
     sp::RenderTarget::setDefaultFont(main_font);
 
@@ -298,8 +298,8 @@ int main(int argc, char** argv)
 
     // Set up voice chat and key bindings.
     NetworkAudioRecorder* nar = new NetworkAudioRecorder();
-    nar->addKeyActivation(HotkeyConfig::get().getKeyByHotkey("BASIC", "VOICE_CHAT_ALL"), 0);
-    nar->addKeyActivation(HotkeyConfig::get().getKeyByHotkey("BASIC", "VOICE_CHAT_SHIP"), 1);
+    nar->addKeyActivation(&keys.voice_all, 0);
+    nar->addKeyActivation(&keys.voice_ship, 1);
 
     P<HardwareController> hardware_controller = new HardwareController();
 #ifdef CONFIG_DIR
@@ -327,11 +327,11 @@ int main(int argc, char** argv)
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
-    P<WindowManager> windowManager = engine->getObject("windowManager");
-    if (windowManager)
+    P<Window> window = main_window;
+    if (window)
     {
-        PreferencesManager::set("fsaa", windowManager->getFSAA());
-        PreferencesManager::set("fullscreen", windowManager->isFullscreen() ? 1 : 0);
+        PreferencesManager::set("fsaa", window->getFSAA());
+        PreferencesManager::set("fullscreen", window->isFullscreen() ? 1 : 0);
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.
@@ -345,9 +345,6 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("engine_enabled").empty())
         PreferencesManager::set("engine_enabled", "2");
-
-    // Set shaders to default.
-    PreferencesManager::set("disable_shaders", PostProcessor::isEnabled() ? 0 : 1);
 
     if (PreferencesManager::get("headless") == "")
     {
@@ -366,6 +363,7 @@ int main(int argc, char** argv)
         {
             PreferencesManager::save("options.ini");
         }
+        sp::io::Keybinding::saveKeybindings("keybindings.json");
     }
 
     delete engine;
@@ -381,7 +379,6 @@ void returnToMainMenu()
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        if (PreferencesManager::get("variation") != "") gameGlobalInfo->variation = PreferencesManager::get("variation");
         gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
         if (PreferencesManager::get("startpaused") != "1")
@@ -393,10 +390,6 @@ void returnToMainMenu()
         if (crew_position < 0) crew_position = 0;
         if (crew_position > max_crew_positions) crew_position = max_crew_positions;
         new AutoConnectScreen(ECrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
-    }
-    else if (PreferencesManager::get("touchcalib").toInt())
-    {
-        new MouseCalibrator(PreferencesManager::get("touchcalibfile"));
     }
     else if (PreferencesManager::get("tutorial").toInt())
     {

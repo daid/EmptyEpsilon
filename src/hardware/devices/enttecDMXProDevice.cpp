@@ -40,7 +40,7 @@ bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
     if (port)
     {
         run_thread = true;
-        update_thread = std::move(std::thread(&EnttecDMXProDevice::updateLoop, this));
+        update_thread = std::thread(&EnttecDMXProDevice::updateLoop, this);
         return true;
     }
     return false;
@@ -50,7 +50,7 @@ bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
 void EnttecDMXProDevice::setChannelData(int channel, float value)
 {
     if (channel >= 0 && channel < channel_count)
-        channel_data[channel] = int((value * 255.0) + 0.5);
+        channel_data[channel] = int((value * 255.0f) + 0.5f);
 }
 
 //Return the number of output channels supported by this device.

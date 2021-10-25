@@ -16,10 +16,10 @@ protected:
 public:
     GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& window);
-    virtual bool onMouseDown(glm::vec2 position);
-    virtual void onMouseDrag(glm::vec2 position);
-    virtual void onMouseUp(glm::vec2 position);
+    virtual void onDraw(sp::RenderTarget& window) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
     GuiBasicSlider* setValue(float value);
     GuiBasicSlider* setRange(float min, float max);
@@ -41,10 +41,10 @@ protected:
 public:
     GuiSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& window);
-    virtual bool onMouseDown(glm::vec2 position);
-    virtual void onMouseDrag(glm::vec2 position);
-    virtual void onMouseUp(glm::vec2 position);
+    virtual void onDraw(sp::RenderTarget& window) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
     GuiSlider* setValueSnapped(float value);
     GuiSlider* clearSnapValues();
@@ -71,10 +71,10 @@ protected:
 public:
     GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func);
 
-    virtual void onDraw(sp::RenderTarget& window);
-    virtual bool onMouseDown(glm::vec2 position);
-    virtual void onMouseDrag(glm::vec2 position);
-    virtual void onMouseUp(glm::vec2 position);
+    virtual void onDraw(sp::RenderTarget& window) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
     GuiSlider2D* clearSnapValues();
     GuiSlider2D* addSnapValue(glm::vec2 value, glm::vec2 range);

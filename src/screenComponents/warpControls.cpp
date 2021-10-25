@@ -54,44 +54,44 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
     }
 }
 
-void GuiWarpControls::onHotkey(const HotkeyResult& key)
+void GuiWarpControls::onUpdate()
 {
     // Handle hotkey input. Warp is a HELMS-category shortcut.
-    if (key.category == "HELMS" && my_spaceship)
+    if (my_spaceship)
     {
-        if (key.hotkey == "WARP_0")
+        if (keys.helms_warp0.getDown())
         {
             my_spaceship->commandWarp(0);
             slider->setValue(0);
         }
-        else if (key.hotkey == "WARP_1")
+        if (keys.helms_warp1.getDown())
         {
             my_spaceship->commandWarp(1);
             slider->setValue(1);
         }
-        else if (key.hotkey == "WARP_2")
+        if (keys.helms_warp2.getDown())
         {
             my_spaceship->commandWarp(2);
             slider->setValue(2);
         }
-        else if (key.hotkey == "WARP_3")
+        if (keys.helms_warp3.getDown())
         {
             my_spaceship->commandWarp(3);
             slider->setValue(3);
         }
-        else if (key.hotkey == "WARP_4")
+        if (keys.helms_warp4.getDown())
         {
             my_spaceship->commandWarp(4);
             slider->setValue(4);
         }
-        else if (key.hotkey == "INC_WARP")
+        if (keys.helms_increase_warp.getDown())
         {
             if (my_spaceship->warp_request < 4) {
                 my_spaceship->commandWarp(my_spaceship->warp_request+1);
                 slider->setValue(my_spaceship->warp_request+1);
             }
         }
-        else if (key.hotkey == "DEC_WARP")
+        else if (keys.helms_decrease_warp.getDown())
         {
             if (my_spaceship->warp_request > 0) {
                 my_spaceship->commandWarp(my_spaceship->warp_request-1);

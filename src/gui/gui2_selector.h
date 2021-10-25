@@ -18,8 +18,8 @@ public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
     virtual void onDraw(sp::RenderTarget& window) override;
-    virtual bool onMouseDown(glm::vec2 position) override;
-    virtual void onMouseUp(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
     GuiSelector* setTextSize(float size);
 };

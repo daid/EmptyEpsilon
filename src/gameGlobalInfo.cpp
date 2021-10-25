@@ -2,7 +2,11 @@
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "scienceDatabase.h"
+#include "multiplayer_client.h"
+#include "soundManager.h"
+#include "random.h"
 #include "config.h"
+#include <SDL_assert.h>
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -10,7 +14,7 @@ REGISTER_MULTIPLAYER_CLASS(GameGlobalInfo, "GameGlobalInfo")
 GameGlobalInfo::GameGlobalInfo()
 : MultiplayerObject("GameGlobalInfo")
 {
-    assert(!gameGlobalInfo);
+    SDL_assert(!gameGlobalInfo);
 
     callsign_counter = 0;
     victory_faction = -1;
@@ -23,7 +27,6 @@ GameGlobalInfo::GameGlobalInfo()
     }
 
     global_message_timeout = 0.0;
-    player_warp_jump_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
     hacking_difficulty = 2;
     hacking_games = HG_All;
@@ -62,7 +65,7 @@ GameGlobalInfo::~GameGlobalInfo()
 
 P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 {
-    assert(index >= 0 && index < max_player_ships);
+    SDL_assert(index >= 0 && index < max_player_ships);
     if (game_server)
         return game_server->getObjectById(playerShipId[index]);
     return game_client->getObjectById(playerShipId[index]);
@@ -70,8 +73,8 @@ P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
 
 void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
 {
-    assert(index >= 0 && index < max_player_ships);
-    assert(game_server);
+    SDL_assert(index >= 0 && index < max_player_ships);
+    SDL_assert(game_server);
 
     if (ship)
         playerShipId[index] = ship->getMultiplayerId();
@@ -102,7 +105,7 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
 
 void GameGlobalInfo::update(float delta)
 {
-    if (global_message_timeout > 0.0)
+    if (global_message_timeout > 0.0f)
     {
         global_message_timeout -= delta;
     }
@@ -156,8 +159,6 @@ void GameGlobalInfo::reset()
 
     flushDatabaseData();
 
-    foreach(GameEntity, e, entityList)
-        e->destroy();
     foreach(SpaceObject, o, space_object_list)
         o->destroy();
     if (engine->getObject("scenario"))
@@ -204,23 +205,6 @@ void GameGlobalInfo::destroy()
 {
     reset();
     MultiplayerObject::destroy();
-}
-
-string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
-{
-    switch(player_warp_jump_drive)
-    {
-    case PWJ_ShipDefault:
-        return "Ship default";
-    case PWJ_WarpDrive:
-        return "Warp-drive";
-    case PWJ_JumpDrive:
-        return "Jump-drive";
-    case PWJ_WarpAndJumpDrive:
-        return "Both";
-    default:
-        return "?";
-    }
 }
 
 string getSectorName(glm::vec2 position)
@@ -371,12 +355,30 @@ REGISTER_SCRIPT_FUNCTION(getAllObjects);
 
 static int getScenarioVariation(lua_State* L)
 {
-    lua_pushstring(L, gameGlobalInfo->variation.c_str());
+    if (gameGlobalInfo->scenario_settings.find("variation") != gameGlobalInfo->scenario_settings.end())
+        lua_pushstring(L, gameGlobalInfo->scenario_settings["variation"].c_str());
+    else
+        lua_pushstring(L, "None");
     return 1;
 }
 /// getScenarioVariation()
 /// Returns the currently used scenario variation.
+/// Deprecated: Scenario settings are the replacement
+//      this returns the "variation" scenario setting for backwards compatibility
 REGISTER_SCRIPT_FUNCTION(getScenarioVariation);
+
+static int getScenarioSetting(lua_State* L)
+{
+    auto key = luaL_checkstring(L, 1);
+    if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
+        lua_pushstring(L, gameGlobalInfo->scenario_settings[key].c_str());
+    else
+        lua_pushstring(L, "");
+    return 1;
+}
+/// getScenarioSetting(string key)
+/// Returns a scenario setting, or an empty string if the setting is not found.
+REGISTER_SCRIPT_FUNCTION(getScenarioSetting);
 
 static int getGameLanguage(lua_State* L)
 {
@@ -391,20 +393,20 @@ REGISTER_SCRIPT_FUNCTION(getGameLanguage);
 class ScenarioChanger : public Updatable
 {
 public:
-    ScenarioChanger(string script_name, string variation)
-    : script_name(script_name), variation(variation)
+    ScenarioChanger(string script_name, const std::unordered_map<string, string>& settings)
+    : script_name(script_name), settings(settings)
     {
     }
 
-    virtual void update(float delta)
+    virtual void update(float delta) override
     {
-        gameGlobalInfo->variation = variation;
+        gameGlobalInfo->scenario_settings = settings;
         gameGlobalInfo->startScenario(script_name);
         destroy();
     }
 private:
     string script_name;
-    string variation;
+    std::unordered_map<string, string> settings;
 };
 
 static int setScenario(lua_State* L)
@@ -415,7 +417,7 @@ static int setScenario(lua_State* L)
     // Calling GameGlobalInfo::startScenario is unsafe at this point,
     // as this will destroy the lua state that this function is running in.
     //So use the ScenarioChanger object which will do the change in the update loop. Which is safe.
-    new ScenarioChanger(script_name, variation);
+    new ScenarioChanger(script_name, {{"variation", variation}});
     return 0;
 }
 /// setScenario(script_name, variation_name)

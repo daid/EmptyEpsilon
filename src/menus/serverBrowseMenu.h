@@ -2,13 +2,14 @@
 #define SERVER_BROWSE_MENU_H
 
 #include "gui/gui2_canvas.h"
-
+#include "multiplayer_client.h"
 #include <optional>
 
 class GuiTextEntry;
 class GuiButton;
 class GuiListbox;
 class GuiSelector;
+class ServerScanner;
 
 class ServerBrowserMenu : public GuiCanvas
 {

@@ -20,7 +20,7 @@ public:
 
     void open(P<SpaceObject> target);
     virtual void onDraw(sp::RenderTarget& target) override;
-    virtual bool onMouseDown(glm::vec2 position) override;
+    virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     void onMiniGameComplete(bool success);
 
 private:

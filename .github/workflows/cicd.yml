@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - master
+      - SDL2
   pull_request:
 jobs:
   linux:
@@ -13,7 +13,7 @@ jobs:
     - name: Update apt index
       run: sudo apt-get update -qq
     - name: Install SFML
-      run: sudo apt-get install libsfml-dev
+      run: sudo apt-get install libsdl2-dev
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
     - name: Build and test
@@ -30,7 +30,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: daid/SeriousProton
-          path: SeriousProton  
+          path: SeriousProton
+          ref: SDL2  
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -39,21 +40,20 @@ jobs:
         run: |
           mkdir -p _build_win32
           cd _build_win32
-          cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton
+          cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton -DWARNING_IS_ERROR=1
           ninja package
   macos:
-    # https://github.com/actions/virtual-environments/issues/841
-    # Mac builds are flaky, disable for now.
     name: MacOS
     runs-on: macos-latest
     steps:
       - name: Dependencies
-        run: brew install cmake sfml ninja
+        run: brew install cmake sdl2 ninja
       - name: SeriousProton Checkout
         uses: actions/checkout@v2
         with:
           repository: daid/SeriousProton
-          path: SeriousProton  
+          path: SeriousProton
+          ref: SDL2 
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -62,7 +62,7 @@ jobs:
         run: |
           mkdir -p _build_macos
           cd _build_macos
-          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_INSTALL_PREFIX=.
+          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_INSTALL_PREFIX=. -DWARNING_IS_ERROR=1
           ninja
           ninja install
   windows:
@@ -74,10 +74,34 @@ jobs:
     steps:
       - name: Dependencies
         run: |
-          $sfml_link = “https://www.sfml-dev.org/files/SFML-2.5.1-windows-vc15-32-bit.zip”
-          $sfml_zip = "${{github.workspace}}/sfml-dev.zip"
-          (new-object System.Net.WebClient).DownloadFile($sfml_link, $sfml_zip)
-          Expand-Archive -LiteralPath $sfml_zip -DestinationPath "${{github.workspace}}/externals"
+          $sdl_version = "2.0.16"
+          $sdl_link = "https://libsdl.org/release/SDL2-devel-$sdl_version-VC.zip"
+          $sdl_zip = "$env:GITHUB_WORKSPACE/sdl-dev.zip"
+          (new-object System.Net.WebClient).DownloadFile($sdl_link, $sdl_zip)
+          Expand-Archive -LiteralPath $sdl_zip -DestinationPath "$env:GITHUB_WORKSPACE/externals"
+          $sdl_config = @"
+          set(flavor x86)
+          if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+              set(flavor x64)
+          endif()
+          set(_SDL2_prefix "`${CMAKE_CURRENT_LIST_DIR}/SDL2-$sdl_version")
+
+          add_library(SDL2::SDL2main STATIC IMPORTED)
+          set_target_properties(SDL2::SDL2main PROPERTIES
+          IMPORTED_LOCATION "`${_SDL2_prefix}/lib/`${flavor}/SDL2main.lib"
+          )
+
+          add_library(SDL2::SDL2 SHARED IMPORTED)
+          set_target_properties(SDL2::SDL2 PROPERTIES
+          IMPORTED_LOCATION "`${_SDL2_prefix}/lib/`${flavor}/SDL2.dll"
+          IMPORTED_IMPLIB "`${_SDL2_prefix}/lib/`${flavor}/SDL2.lib"
+          INTERFACE_INCLUDE_DIRECTORIES "`${_SDL2_prefix}/include"
+          )
+
+          target_link_libraries(SDL2::SDL2 INTERFACE SDL2::SDL2main)
+          "@
+          Set-Content -Path "$env:GITHUB_WORKSPACE/externals/sdl2-config.cmake" -Value $sdl_config
+          Get-Content "$env:GITHUB_WORKSPACE/externals/sdl2-config.cmake"
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -87,6 +111,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
+          ref: SDL2
       - name: Create Build Environment
         run: cmake -E make_directory ${{github.workspace}}/build
       - name: Configure CMake
@@ -94,8 +119,7 @@ jobs:
         run: >
           cmake ../EmptyEpsilon
           -G "Visual Studio 16 2019" -A Win32
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -DSFML_ROOT="../externals/SFML-2.5.1"
+          -DSDL2_DIR:PATH="$env:GITHUB_WORKSPACE/externals"
           -DSERIOUS_PROTON_DIR="../SeriousProton"
       - name: Build
         working-directory: ${{github.workspace}}/build

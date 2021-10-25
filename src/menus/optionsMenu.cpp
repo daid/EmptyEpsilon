@@ -4,6 +4,8 @@
 #include "hotkeyMenu.h"
 #include "main.h"
 #include "preferenceManager.h"
+#include "soundManager.h"
+#include "windowManager.h"
 
 #include "gui/gui2_autolayout.h"
 #include "gui/gui2_overlay.h"
@@ -15,10 +17,9 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
+
 OptionsMenu::OptionsMenu()
 {
-    P<WindowManager> windowManager = engine->getObject("windowManager");
-
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
@@ -45,34 +46,7 @@ OptionsMenu::OptionsMenu()
     interface_page = new GuiAutoLayout(left_container, "OPTIONS_INTERFACE", GuiAutoLayout::LayoutVerticalTopToBottom);
     interface_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
 
-    // Graphics options
-    // Fullscreen toggle.
-    (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []()
-    {
-        P<WindowManager> windowManager = engine->getObject("windowManager");
-        windowManager->setFullscreen(!windowManager->isFullscreen());
-    }))->setSize(GuiElement::GuiSizeMax, 50);
-
-    // FSAA configuration.
-    int fsaa = std::max(1, windowManager->getFSAA());
-    int fsaa_index = 0;
-
-    // Convert selector index to an FSAA amount.
-    switch(fsaa)
-    {
-        case 8: fsaa_index = 3; break;
-        case 4: fsaa_index = 2; break;
-        case 2: fsaa_index = 1; break;
-        default: fsaa_index = 0; break;
-    }
-
-    // FSAA selector.
-    (new GuiSelector(graphics_page, "FSAA", [](int index, string value)
-    {
-        P<WindowManager> windowManager = engine->getObject("windowManager");
-        static const int fsaa[] = { 0, 2, 4, 8 };
-        windowManager->setFSAA(fsaa[index]);
-    }))->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+    setupGraphicsOptions();
 
     // Audio optionss
     // Sound volume slider.
@@ -126,7 +100,7 @@ OptionsMenu::OptionsMenu()
     }))->setOptions({tr("Disabled"), tr("Enabled"), tr("Main Screen only")})->setSelectionIndex(impulse_enabled_index)->setSize(GuiElement::GuiSizeMax, 50);
 
     // Impulse engine volume slider.
-    impulse_volume_slider = new GuiSlider(audio_page, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, PreferencesManager::get("impulse_sound_volume", "50").toInt(), [this](float volume)
+    impulse_volume_slider = new GuiSlider(audio_page, "IMPULSE_VOLUME_SLIDER", 0.0f, 100.0f, static_cast<float>(PreferencesManager::get("impulse_sound_volume", "50").toInt()), [this](float volume)
     {
         PreferencesManager::set("impulse_sound_volume", volume);
         impulse_volume_overlay_label->setText(tr("Impulse Volume: {volume}%").format({{"volume", string(PreferencesManager::get("impulse_sound_volume", "50").toInt())}}));
@@ -185,7 +159,7 @@ OptionsMenu::OptionsMenu()
     auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
     if(default_elem != languages.end())
     {
-        default_index =  default_elem - languages.begin();
+        default_index =  static_cast<int>(default_elem - languages.begin());
     }
     
     (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
@@ -208,7 +182,7 @@ OptionsMenu::OptionsMenu()
 
     (new GuiLabel(right_container, "PREVIEW_LABEL", tr("Preview Soundtracks"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
-    GuiListbox* music_list = new GuiListbox(right_container, "MUSIC_PLAY", [this](int index, string value)
+    GuiListbox* music_list = new GuiListbox(right_container, "MUSIC_PLAY", [](int index, string value)
     {
         soundManager->playMusic(value);
     });
@@ -230,7 +204,7 @@ OptionsMenu::OptionsMenu()
         returnToMainMenu();
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
     // Save options button.
-    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), [this]()
+    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
     {
         if (getenv("HOME"))
             PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
@@ -239,18 +213,53 @@ OptionsMenu::OptionsMenu()
     }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
 }
 
-void OptionsMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void OptionsMenu::update(float delta)
 {
-    switch(key.code)
+    if (keys.escape.getDown())
     {
-    //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
         destroy();
         soundManager->stopMusic();
         returnToMainMenu();
-        break;
-    default:
-        break;
     }
+}
+
+void OptionsMenu::setupGraphicsOptions()
+{
+    // Fullscreen toggle.
+    (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []() {
+        main_window->setFullscreen(!main_window->isFullscreen());
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+
+    // FSAA configuration.
+    int fsaa = std::max(1, main_window->getFSAA());
+    int fsaa_index = 0;
+
+    // Convert selector index to an FSAA amount.
+    switch (fsaa)
+    {
+    case 8: fsaa_index = 3; break;
+    case 4: fsaa_index = 2; break;
+    case 2: fsaa_index = 1; break;
+    default: fsaa_index = 0; break;
+    }
+
+    // FSAA selector.
+    (new GuiSelector(graphics_page, "FSAA", [](int index, string value) {
+        static const int fsaa[] = { 0, 2, 4, 8 };
+        main_window->setFSAA(fsaa[index]);
+    }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+
+    // FoV slider.
+    auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov, [this](float fov) {
+        fov = std::round(fov);
+        graphics_fov_slider->setValue(fov);
+        PreferencesManager::set("main_screen_camera_fov", fov);
+        graphics_fov_overlay_label->setText(tr("FoV: {fov}").format({ {"fov", string(fov, 0)} }));
+    });
+    graphics_fov_slider->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Override overlay label.
+    graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("FoV: {fov}").format({ {"fov", string(initial_fov, 0)} }), 30);
+    graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

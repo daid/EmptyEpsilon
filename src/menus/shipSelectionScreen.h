@@ -49,7 +49,7 @@ private:
 public:
     ShipSelectionScreen();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 private:
     /**!
      * \brief check if this console can be mainscreen.

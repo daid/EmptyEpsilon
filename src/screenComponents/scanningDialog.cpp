@@ -1,6 +1,7 @@
 #include "scanningDialog.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
+#include "random.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_slider.h"
@@ -47,7 +48,7 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 
     if (my_spaceship)
     {
-        if (my_spaceship->scanning_delay > 0.0 && my_spaceship->scanning_complexity > 0)
+        if (my_spaceship->scanning_delay > 0.0f && my_spaceship->scanning_complexity > 0)
         {
             if (!box->isVisible())
             {
@@ -79,19 +80,21 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
         }
     }
 }
-bool GuiScanningDialog::onJoystickAxis(const AxisAction& axisAction){
-    if(my_spaceship){
-        if (axisAction.category == "SCIENCE"){
-            for(int n=0; n<max_sliders; n++) {
-                if (axisAction.action == std::string("SCAN_PARAM_") + string(n+1)){
-                    sliders[n]->setValue((axisAction.value + 1) / 2.0);
-                    updateSignal();
-                    return true;
-                }
+
+void GuiScanningDialog::onUpdate()
+{
+    if(my_spaceship)
+    {
+        for(int n=0; n<max_sliders; n++)
+        {
+            float adjust = (keys.science_scan_param_increase[n].getValue() - keys.science_scan_param_decrease[n].getValue()) * 0.01f;
+            if (adjust != 0.0f)
+            {
+                sliders[n]->setValue(sliders[n]->getValue() + adjust);
+                updateSignal();
             }
         }
     }
-    return false;
 }
 
 void GuiScanningDialog::setupParameters()
@@ -112,7 +115,7 @@ void GuiScanningDialog::setupParameters()
     {
         target[n] = random(0.0, 1.0);
         sliders[n]->setValue(random(0.0, 1.0));
-        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2)
+        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2f)
             sliders[n]->setValue(random(0.0, 1.0));
     }
     updateSignal();

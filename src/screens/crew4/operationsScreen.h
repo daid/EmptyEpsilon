@@ -32,6 +32,6 @@ private:
     glm::vec2 mouse_down_position{0, 0};
 public:
     OperationScreen(GuiContainer* owner);
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 };
 #endif//OPERATIONS_SCREEN_H

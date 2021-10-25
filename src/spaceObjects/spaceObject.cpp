@@ -308,9 +308,7 @@ SpaceObject::~SpaceObject()
 
 void SpaceObject::draw3D()
 {
-#if FEATURE_3D_RENDERING
-    model_info.render(getPosition(), getRotation());
-#endif//FEATURE_3D_RENDERING
+    model_info.render(getPosition(), getRotation(), getModelMatrix());
 }
 
 void SpaceObject::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool longRange)
@@ -559,8 +557,8 @@ void SpaceObject::addReputationPoints(float amount)
     if (gameGlobalInfo->reputation_points.size() < faction_id)
         return;
     gameGlobalInfo->reputation_points[faction_id] += amount;
-    if (gameGlobalInfo->reputation_points[faction_id] < 0.0)
-        gameGlobalInfo->reputation_points[faction_id] = 0.0;
+    if (gameGlobalInfo->reputation_points[faction_id] < 0.0f)
+        gameGlobalInfo->reputation_points[faction_id] = 0.0f;
 }
 
 string SpaceObject::getSectorName()

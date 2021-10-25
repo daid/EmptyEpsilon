@@ -1,9 +1,6 @@
 #ifndef EMPTYEPSILON_GLOBJECTS_H
 #define EMPTYEPSILON_GLOBJECTS_H
 
-#include "featureDefs.h"
-
-#if FEATURE_3D_RENDERING
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -191,10 +188,5 @@ namespace gl
 
     bool isAvailable();
 }
-#else
-namespace gl
-{
-    constexpr bool isAvailable() { return false;  }
-}
-#endif // FEATURE_3D_RENDERING
+
 #endif // EMPTYEPSILON_GLOBJECTS_H

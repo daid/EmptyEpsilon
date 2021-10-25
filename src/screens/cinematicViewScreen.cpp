@@ -3,6 +3,7 @@
 #include "cinematicViewScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "multiplayer_client.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
@@ -58,43 +59,90 @@ void CinematicViewScreen::update(float delta)
         return;
     }
 
+    /* TODO hotkeys
+    switch(key.keysym.sym)
+    {
+    // Toggle UI visibility with the H key.
+    case SDLK_h:
+        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
+        {
+            camera_lock_toggle->hide();
+            camera_lock_selector->hide();
+            camera_lock_tot_toggle->hide();
+        }else{
+            camera_lock_toggle->show();
+            camera_lock_selector->show();
+        }
+        break;
+    // Toggle camera lock with the L key.
+    case SDLK_l:
+        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
+        break;
+    // Cycle through player ships with the J and K keys.
+    case SDLK_j:
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
+        if (camera_lock_selector->getSelectionIndex() < 0)
+            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        break;
+    case SDLK_k:
+        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
+        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
+            camera_lock_selector->setSelectionIndex(0);
+        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
+        break;
+    // TODO: X resets the camera to a default relative position and heading.
+    */
+    if (keys.escape.getDown())
+    {
+        destroy();
+        returnToShipSelection();
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
+    }
+
+    /* TODO hotkeys
     // TODO: Add mouselook.
-    if (InputHandler::keyboardIsDown(sf::Keyboard::W))
+    if (InputHandler::keyboardIsDown(SDLK_w))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.x;
         camera_position.y += xy_vector.y;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::S))
+    if (InputHandler::keyboardIsDown(SDLK_s))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.x;
         camera_position.y -= xy_vector.y;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::A))
+    if (InputHandler::keyboardIsDown(SDLK_a))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.y;
         camera_position.y -= xy_vector.x;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::D))
+    if (InputHandler::keyboardIsDown(SDLK_d))
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.y;
         camera_position.y += xy_vector.x;
     }
-    if (InputHandler::keyboardIsDown(sf::Keyboard::R))
+    if (InputHandler::keyboardIsDown(SDLK_r))
         camera_position.z += delta * 100.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::F))
+    if (InputHandler::keyboardIsDown(SDLK_f))
         camera_position.z -= delta * 100.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Left))
+    if (InputHandler::keyboardIsDown(SDLK_LEFT))
         camera_yaw -= delta * 50.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Right))
+    if (InputHandler::keyboardIsDown(SDLK_RIGHT))
         camera_yaw += delta * 50.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Up))
+    if (InputHandler::keyboardIsDown(SDLK_UP))
         camera_pitch -= delta * 50.0f;
-    if (InputHandler::keyboardIsDown(sf::Keyboard::Down))
+    if (InputHandler::keyboardIsDown(SDLK_DOWN))
         camera_pitch += delta * 50.0f;
+    */
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.
@@ -151,7 +199,7 @@ void CinematicViewScreen::update(float delta)
 
         // Check if our selected ship has a weapons target.
         target_of_target = target->getTarget();
-        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0)
+        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0f)
             target_of_target = nullptr;
 
         // If it does, lock the camera onto that target.
@@ -181,7 +229,7 @@ void CinematicViewScreen::update(float delta)
                 camera_position.y = camera_position_2D.y;
             }
 
-            angle_pitch = (atan(camera_position.z / tot_distance_3D)) * (180 / pi);
+            angle_pitch = glm::degrees(atan(camera_position.z / tot_distance_3D));
         }
 
         if (distance_2D > max_camera_distance)
@@ -209,7 +257,7 @@ void CinematicViewScreen::update(float delta)
             {
                 // Calculate the angles between the camera and the ship.
                 angle_yaw = vec2ToAngle(diff_2D);
-                angle_pitch = (atan(camera_position.z / distance_3D)) * (180 / pi);
+                angle_pitch = glm::degrees(atan(camera_position.z / distance_3D));
             }
         }
         // TODO: Park the camera at a photogenic angle at high speeds.
@@ -220,56 +268,5 @@ void CinematicViewScreen::update(float delta)
     } else {
         // Hide the target-of-target camera lock button.
         camera_lock_tot_toggle->hide();
-    }
-}
-
-void CinematicViewScreen::onKey(sf::Event::KeyEvent key, int unicode)
-{
-    switch(key.code)
-    {
-    // Toggle UI visibility with the H key.
-    case sf::Keyboard::H:
-        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
-        {
-            camera_lock_toggle->hide();
-            camera_lock_selector->hide();
-            camera_lock_tot_toggle->hide();
-        }else{
-            camera_lock_toggle->show();
-            camera_lock_selector->show();
-        }
-        break;
-    // Toggle camera lock with the L key.
-    case sf::Keyboard::L:
-        camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
-        break;
-    // Cycle through player ships with the J and K keys.
-    case sf::Keyboard::J:
-        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
-        if (camera_lock_selector->getSelectionIndex() < 0)
-            camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    case sf::Keyboard::K:
-        camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
-        if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
-            camera_lock_selector->setSelectionIndex(0);
-        target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    // TODO: X resets the camera to a default relative position and heading.
-    // TODO: This is more generic code and is duplicated.
-    // Exit the screen with the escape or home keys.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
-        destroy();
-        returnToShipSelection();
-        break;
-    // If this is the server, pause the game with the P key.
-    case sf::Keyboard::P:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
     }
 }

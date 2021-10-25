@@ -16,7 +16,7 @@ protected:
 public:
     GuiLabel(GuiContainer* owner, string id, string text, float text_size);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiLabel* setText(string text);
     string getText() const;

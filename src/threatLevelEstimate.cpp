@@ -1,5 +1,7 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
+#include "collisionable.h"
+#include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/missiles/missileWeapon.h"
 
@@ -16,13 +18,13 @@ void ThreatLevelEstimate::update(float delta)
     if (!gameGlobalInfo)
         return;
 
-    float max_threat = 0.0;
+    float max_threat = 0.0f;
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
         max_threat = std::max(max_threat, getThreatFor(gameGlobalInfo->getPlayerShip(n)));
     }
     float f = delta / threat_drop_off_time;
-    smoothed_threat_level = ((1.0 - f) * smoothed_threat_level) + (max_threat * f);
+    smoothed_threat_level = ((1.0f - f) * smoothed_threat_level) + (max_threat * f);
 
     if (!threat_high && smoothed_threat_level > threat_high_level)
     {

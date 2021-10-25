@@ -5,6 +5,7 @@
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
 #include "tweak.h"
+#include "clipboard.h"
 #include "chatDialog.h"
 #include "spaceObjects/cpuShip.h"
 #include "spaceObjects/spaceStation.h"
@@ -28,7 +29,7 @@ GameMasterScreen::GameMasterScreen()
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
     main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
-        [this](glm::vec2 position) { this->onMouseDown(position); },
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(button, position); },
         [this](glm::vec2 position) { this->onMouseDrag(position); },
         [this](glm::vec2 position) { this->onMouseUp(position); }
     );
@@ -233,10 +234,10 @@ GameMasterScreen::~GameMasterScreen()
 
 void GameMasterScreen::update(float delta)
 {
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = main_radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
         if (view_distance > 100000)
             view_distance = 100000;
         if (view_distance < 5000)
@@ -246,6 +247,30 @@ void GameMasterScreen::update(float delta)
             main_radar->shortRange();
         else
             main_radar->longRange();
+    }
+
+    if (keys.gm_delete.getDown())
+    {
+        for(P<SpaceObject> obj : targets.getTargets())
+        {
+            if (obj)
+                obj->destroy();
+        }
+    }
+    if (keys.gm_clipboardcopy.getDown())
+    {
+        Clipboard::setClipboard(getScriptExport(false));
+    }
+
+    if (keys.escape.getDown())
+    {
+        destroy();
+        returnToShipSelection();
+    }
+    if (keys.pause.getDown())
+    {
+        if (game_server)
+            engine->setGameSpeed(0.0);
     }
 
     bool has_object = false;
@@ -382,11 +407,11 @@ void GameMasterScreen::update(float delta)
     }
 }
 
-void GameMasterScreen::onMouseDown(glm::vec2 position)
+void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position)
 {
     if (click_and_drag_state != CD_None)
         return;
-    if (InputHandler::mouseIsDown(sf::Mouse::Right))
+    if (button == sp::io::Pointer::Button::Right)
     {
         click_and_drag_state = CD_DragViewOrOrder;
     }
@@ -445,7 +470,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     case CD_DragViewOrOrder:
         {
             //Right click
-            bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);
+            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             P<SpaceObject> target;
             PVector<Collisionable> list = CollisionManager::queryArea(position, position);
             foreach(Collisionable, collisionable, list)
@@ -508,10 +533,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
         break;
     case CD_BoxSelect:
         {
-            bool shift_down = InputHandler::keyboardIsDown(sf::Keyboard::LShift) || InputHandler::keyboardIsDown(sf::Keyboard::RShift);
-            //Using sf::Keyboard::isKeyPressed, as CTRL does not seem to generate keydown/key up events in SFML.
-            bool ctrl_down = sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::RControl);
-            bool alt_down = InputHandler::keyboardIsDown(sf::Keyboard::LAlt) || InputHandler::keyboardIsDown(sf::Keyboard::RAlt);
+            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
+            bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
+            bool alt_down = SDL_GetModState() & KMOD_ALT;
             PVector<Collisionable> objects = CollisionManager::queryArea(drag_start_position, position);
             PVector<SpaceObject> space_objects;
             foreach(Collisionable, c, objects)
@@ -544,36 +568,6 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     }
     click_and_drag_state = CD_None;
     box_selection_overlay->hide();
-}
-
-void GameMasterScreen::onKey(sf::Event::KeyEvent key, int unicode)
-{
-    switch(key.code)
-    {
-    case sf::Keyboard::Delete:
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            if (obj)
-                obj->destroy();
-        }
-        break;
-    case sf::Keyboard::F5:
-        Clipboard::setClipboard(getScriptExport(false));
-        break;
-
-    //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
-        destroy();
-        returnToShipSelection();
-        break;
-    case sf::Keyboard::P:
-        if (game_server)
-            engine->setGameSpeed(0.0);
-        break;
-    default:
-        break;
-    }
 }
 
 PVector<SpaceObject> GameMasterScreen::getSelection()

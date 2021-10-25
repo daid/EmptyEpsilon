@@ -29,10 +29,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
-        [this](glm::vec2 position) { //down
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { //down
             if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                if (glm::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0)
+                if (glm::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0f)
                 {
                     mode = MoveWaypoint;
                     drag_waypoint_index = targets.getWaypointIndex();
@@ -197,10 +197,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
-    float mouse_wheel_delta = InputHandler::getMouseWheelDelta();
-    if (mouse_wheel_delta != 0.0)
+    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = radar->getDistance() * (1.0 - (mouse_wheel_delta * 0.1f));
+        float view_distance = radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
         if (view_distance > 50000.0f)
             view_distance = 50000.0f;
         if (view_distance < 6250.0f)

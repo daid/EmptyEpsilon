@@ -6,6 +6,8 @@
 #include <optional>
 #include "engine.h"
 #include "modelData.h"
+#include "scriptInterfaceMagic.h"
+#include "multiplayer.h"
 
 #include "beamTemplate.h"
 #include "missileWeaponData.h"

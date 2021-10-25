@@ -1,5 +1,8 @@
 #include "debugRenderer.h"
 #include "main.h"
+#include "multiplayer_server.h"
+#include "hotkeyConfig.h"
+
 
 DebugRenderer::DebugRenderer()
 : Renderable(mouseLayer)
@@ -18,6 +21,17 @@ DebugRenderer::DebugRenderer()
 
 void DebugRenderer::render(sp::RenderTarget& renderer)
 {
+    if (keys.debug_show_fps.getDown())
+    {
+        show_fps = !show_fps;
+        show_datarate = !show_datarate;
+    }
+    if (keys.debug_show_timing.getDown())
+    {
+        show_timing_graph = !show_timing_graph;
+        timing_graph_points.clear();
+    }
+
     fps_counter++;
     if (fps_counter > 30)
     {
@@ -36,11 +50,11 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
 
     if (show_timing_graph)
     {
-        auto window_size = renderer.getSFMLTarget().getView().getSize();
-        if (timing_graph_points.size() > window_size.x)
+        auto window_size = renderer.getPhysicalSize();
+        if (timing_graph_points.size() > size_t(window_size.x))
             timing_graph_points.clear();
         timing_graph_points.push_back(engine->getEngineTiming());
-        
+
         std::vector<glm::vec2> update_points;
         std::vector<glm::vec2> server_update_points;
         std::vector<glm::vec2> collision_points;
@@ -78,22 +92,4 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             sp::Alignment::BottomLeft, 18, nullptr, glm::u8vec4{0,255,0,255});
     }
     renderer.drawText(sp::Rect(0, 0, 0, 0), text, sp::Alignment::TopLeft, 18);
-}
-
-void DebugRenderer::handleKeyPress(sf::Event::KeyEvent key, int unicode)
-{
-    if (key.code == sf::Keyboard::F10)
-    {
-        show_fps = !show_fps;
-        show_datarate = !show_datarate;
-    }
-    if (key.code == sf::Keyboard::F11)
-    {
-        show_timing_graph = !show_timing_graph;
-        timing_graph_points.clear();
-        if (show_timing_graph)
-            P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(0);
-        else
-            P<WindowManager>(engine->getObject("windowManager"))->setFrameLimit(60);
-    }
 }

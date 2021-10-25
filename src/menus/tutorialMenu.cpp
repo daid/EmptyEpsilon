@@ -85,17 +85,11 @@ void TutorialMenu::selectTutorial(string filename)
     tutorial_description->setText(info.description);
 }
 
-void TutorialMenu::onKey(sf::Event::KeyEvent key, int unicode)
+void TutorialMenu::update(float delta)
 {
-    switch(key.code)
+    if (keys.escape.getDown())
     {
-    //TODO: This is more generic code and is duplicated.
-    case sf::Keyboard::Escape:
-    case sf::Keyboard::Home:
         destroy();
         returnToMainMenu();
-        break;
-    default:
-        break;
     }
 }

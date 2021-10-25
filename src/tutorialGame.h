@@ -3,6 +3,7 @@
 
 #include "epsilonServer.h"
 #include "gui/gui2_canvas.h"
+#include "scriptInterface.h"
 
 class PlayerSpaceship;
 class GuiRadarView;
@@ -29,7 +30,6 @@ public:
     TutorialGame(bool repeated_tutorial = false, string filename = "tutorial.lua");
 
     virtual void update(float delta) override;
-    virtual void onKey(sf::Event::KeyEvent key, int unicode) override;
 
     void setPlayerShip(P<PlayerSpaceship> ship);
 

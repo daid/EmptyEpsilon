@@ -15,11 +15,11 @@ GuiBeamTargetSelector::GuiBeamTargetSelector(GuiContainer* owner, string id)
         hide();
 }
 
-void GuiBeamTargetSelector::onHotkey(const HotkeyResult& key)
+void GuiBeamTargetSelector::onUpdate()
 {
-    if (key.category == "WEAPONS" && my_spaceship && gameGlobalInfo->use_system_damage)
+    if (my_spaceship && gameGlobalInfo->use_system_damage)
     {
-        if (key.hotkey == "BEAM_SUBSYSTEM_TARGET_NEXT")
+        if (keys.weapons_beam_subsystem_target_next.getDown())
         {
             if (getSelectionIndex() >= (int)entries.size() - 1)
                 setSelectionIndex(0);
@@ -27,7 +27,7 @@ void GuiBeamTargetSelector::onHotkey(const HotkeyResult& key)
                 setSelectionIndex(getSelectionIndex() + 1);
             callback();
         }
-        if (key.hotkey == "BEAM_SUBSYSTEM_TARGET_PREV")
+        if (keys.weapons_beam_subsystem_target_previous.getDown())
         {
             if (getSelectionIndex() <= 0)
                 setSelectionIndex(entries.size() - 1);

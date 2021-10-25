@@ -17,31 +17,25 @@ GuiElement::~GuiElement()
     }
 }
 
-bool GuiElement::onMouseDown(glm::vec2 position)
+bool GuiElement::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return false;
 }
 
-void GuiElement::onMouseDrag(glm::vec2 position)
+void GuiElement::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
-void GuiElement::onMouseUp(glm::vec2 position)
+void GuiElement::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
-bool GuiElement::onKey(sf::Event::KeyEvent key, int unicode)
-{
-    return false;
-}
-
-void GuiElement::onHotkey(const HotkeyResult& key)
+void GuiElement::onTextInput(const string& text)
 {
 }
 
-bool GuiElement::onJoystickAxis(const AxisAction& axisAction)
+void GuiElement::onTextInput(sp::TextInputEvent e)
 {
-    return false;
 }
 
 GuiElement* GuiElement::setSize(glm::vec2 size)
@@ -211,9 +205,9 @@ void GuiElement::updateRect(sp::Rect parent_rect)
 {
     glm::vec2 local_size = size;
     if (local_size.x == GuiSizeMax)
-        local_size.x = parent_rect.size.x - fabs(position.x);
+        local_size.x = parent_rect.size.x - std::abs(position.x);
     if (local_size.y == GuiSizeMax)
-        local_size.y = parent_rect.size.y - fabs(position.y);
+        local_size.y = parent_rect.size.y - std::abs(position.y);
 
     if (local_size.x == GuiSizeMatchHeight)
         local_size.x = local_size.y;
@@ -233,7 +227,7 @@ void GuiElement::updateRect(sp::Rect parent_rect)
     case sp::Alignment::TopCenter:
     case sp::Alignment::Center:
     case sp::Alignment::BottomCenter:
-        rect.position.x = parent_rect.position.x + parent_rect.size.x * 0.5 + position.x - local_size.x * 0.5;
+        rect.position.x = parent_rect.position.x + parent_rect.size.x * 0.5f + position.x - local_size.x * 0.5f;
         break;
     case sp::Alignment::TopRight:
     case sp::Alignment::CenterRight:
@@ -252,7 +246,7 @@ void GuiElement::updateRect(sp::Rect parent_rect)
     case sp::Alignment::CenterLeft:
     case sp::Alignment::CenterRight:
     case sp::Alignment::Center:
-        rect.position.y = parent_rect.position.y + parent_rect.size.y / 2.0 + position.y - local_size.y / 2.0;
+        rect.position.y = parent_rect.position.y + parent_rect.size.y / 2.0f + position.y - local_size.y / 2.0f;
         break;
     case sp::Alignment::BottomLeft:
     case sp::Alignment::BottomRight:
@@ -275,58 +269,6 @@ void GuiElement::updateRect(sp::Rect parent_rect)
     }
 }
 
-[[nodiscard]]
-bool GuiElement::adjustRenderTexture(sf::RenderTexture& texture)
-{
-#ifdef SFML_SYSTEM_ANDROID
-    /* On GL ES systems, SFML runs on assumptions regarding
-    the available GL extensions, for instance considering packed depth/stencil is never available.[1]
-    Because of that unreliability, just forego render textures on those systems.
-
-      [1]: https://github.com/SFML/SFML/blob/2f11710abc5aa478503a7ff3f9e654bd2078ebab/src/SFML/Graphics/GLExtensions.hpp#L128
-    */
-    return false;
-#else
-    auto success = true;
-    P<WindowManager> window_manager = engine->getObject("windowManager");
-
-    //Hack the rectangle for this element so it sits perfectly on pixel boundaries.
-    auto pixel_coords = window_manager->mapCoordsToPixel(sf::Vector2f(rect.size.x, rect.size.y));
-
-    sf::Vector2u texture_size{ static_cast<uint32_t>(pixel_coords.x), static_cast<uint32_t>(pixel_coords.y) };
-    if (texture.getSize() != texture_size)
-    {
-        sf::ContextSettings settings{};
-        settings.stencilBits = 8;
-        success = texture.create(texture_size.x, texture_size.y, settings);
-    }
-
-    if (success)
-    {
-        //Set the view so it covers this elements normal rect. So we can draw exactly the same on this texture as no the normal screen.
-        texture.setView(sf::View{ sf::FloatRect(rect.position.x, rect.position.y, rect.size.x, rect.size.y) });
-    }
-
-    return success;
-#endif
-}
-
-void GuiElement::drawRenderTexture(sf::RenderTexture& texture, sf::RenderTarget& window, glm::u8vec4 color, const sf::RenderStates& states)
-{
-    texture.display();
-
-    sf::Sprite sprite(texture.getTexture());
-
-    sprite.setColor(sf::Color(color.r, color.g, color.b, color.a));
-    sprite.setPosition(rect.position.x, rect.position.y);
-
-    const auto& texture_size = texture.getSize();
-    const auto& texture_viewport = texture.getView().getViewport();
-    sprite.setScale(rect.size.x / float(texture_size.x * texture_viewport.width), rect.size.y / float(texture_size.y * texture_viewport.height));
-
-    window.draw(sprite, states);
-}
-
 glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
 {
     if (!enabled)
@@ -338,46 +280,4 @@ glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
     if (focus)
         return color_set.focus;
     return color_set.normal;
-}
-
-GuiElement::LineWrapResult GuiElement::doLineWrap(const string& text, float font_size, float width)
-{
-    LineWrapResult result;
-    result.text = text;
-    result.line_count = 1;
-    {
-        float currentOffset = 0;
-        bool first_word = true;
-        std::size_t wordBegining = 0;
-
-        for (std::size_t pos(0); pos < result.text.length(); ++pos)
-        {
-            char currentChar = result.text[pos];
-            if (currentChar == '\n')
-            {
-                currentOffset = 0;
-                first_word = true;
-                result.line_count += 1;
-                continue;
-            }
-            else if (currentChar == ' ')
-            {
-                wordBegining = pos;
-                first_word = false;
-            }
-
-            sf::Glyph glyph = main_font->getGlyph(currentChar, font_size, false);
-            currentOffset += glyph.advance;
-
-            if (!first_word && currentOffset > width)
-            {
-                pos = wordBegining;
-                result.text[pos] = '\n';
-                first_word = true;
-                currentOffset = 0;
-                result.line_count += 1;
-            }
-        }
-    }
-    return result;
 }

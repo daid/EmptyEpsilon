@@ -1,8 +1,9 @@
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
 #include "artifact.h"
 #include "explosionEffect.h"
 #include "playerSpaceship.h"
 #include "main.h"
+#include "random.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -84,16 +85,6 @@ void Artifact::update(float delta)
     }
 }
 
-void Artifact::draw3D()
-{
-#if FEATURE_3D_RENDERING
-    if (artifact_spin != 0.0) {
-        glRotatef(engine->getElapsedTime() * artifact_spin, 0, 0, 1);
-    }
-    SpaceObject::draw3D();
-#endif//FEATURE_3D_RENDERING
-}
-
 void Artifact::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     // radar trace scaling, via script or automatically
@@ -101,17 +92,17 @@ void Artifact::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float
     if (radar_trace_scale > 0)
     {
         if (long_range)
-            size = radar_trace_scale * 0.7;
+            size = radar_trace_scale * 0.7f;
         else
             size = radar_trace_scale;
     }
     else
     {
         size = getRadius() * scale / 16;
-        if (size < 0.2)
-            size = 0.2;
+        if (size < 0.2f)
+            size = 0.2f;
     }
-    renderer.drawRotatedSprite(radar_trace_icon, position, size * 32.0, getRotation() - rotation, radar_trace_color);
+    renderer.drawRotatedSprite(radar_trace_icon, position, size * 32.0f, getRotation() - rotation, radar_trace_color);
 }
 
 void Artifact::collide(Collisionable* target, float force)

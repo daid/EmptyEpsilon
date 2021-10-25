@@ -8,7 +8,7 @@
 --- Both the neighboring Human Navy and Kraylor are worried that the breakdown of order in Shangri-La could tilt the balance of power in their opponent's favor, and sent "peacekeepers" to shift the situation to their own advantage.
 ---
 --- The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in an all-out battle for Shangri-La.
--- Type: PvP
+-- Category: PvP
 
 --- Scenario
 -- @script scenario_81_pvp

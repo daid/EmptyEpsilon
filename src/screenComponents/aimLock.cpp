@@ -20,25 +20,22 @@ AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeContr
     setIcon("gui/icons/lock");
 }
 
-void AimLockButton::onHotkey(const HotkeyResult& key)
+void AimLockButton::onUpdate()
 {
-    if (key.category == "WEAPONS" && my_spaceship)
+    if (keys.weapons_toggle_aim_lock.getDown())
     {
-        if (key.hotkey == "TOGGLE_AIM_LOCK")
-        {
-            setAimLock(!getValue());
-            setValue(!getValue());
-        }
-        if (key.hotkey == "ENABLE_AIM_LOCK")
-        {
-            setAimLock(true);
-            setValue(true);
-        }
-        if (key.hotkey == "DISABLE_AIM_LOCK")
-        {
-            setAimLock(false);
-            setValue(false);
-        }
+        setAimLock(!getValue());
+        setValue(!getValue());
+    }
+    if (keys.weapons_enable_aim_lock.getDown())
+    {
+        setAimLock(true);
+        setValue(true);
+    }
+    if (keys.weapons_disable_aim_lock.getDown())
+    {
+        setAimLock(false);
+        setValue(false);
     }
 }
 
@@ -69,12 +66,12 @@ void AimLock::onDraw(sp::RenderTarget& renderer)
     renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
 }
 
-bool AimLock::onMouseDown(glm::vec2 position)
+bool AimLock::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    return GuiRotationDial::onMouseDown(position);
+    return GuiRotationDial::onMouseDown(button, position, id);
 }
 
-void AimLock::onMouseDrag(glm::vec2 position)
+void AimLock::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
     float view_rotation = radar->getViewRotation();
 
@@ -96,6 +93,6 @@ void AimLock::onMouseDrag(glm::vec2 position)
     }
 }
 
-void AimLock::onMouseUp(glm::vec2 position)
+void AimLock::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }

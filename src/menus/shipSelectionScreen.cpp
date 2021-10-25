@@ -2,6 +2,9 @@
 
 #include "featureDefs.h"
 #include "glObjects.h"
+#include "soundManager.h"
+#include "random.h"
+#include "multiplayer_client.h"
 
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
@@ -52,7 +55,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     crew_type_selector->setOptions({tr("6/5 player crew"), tr("4/3 player crew"), tr("1 player crew/extras"), tr("Alternative options")})->setSize(GuiElement::GuiSizeMax, 50);
 
     // Main screen button
-    main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", tr("Main screen"), [this](bool value) {
+    main_screen_button = new GuiToggleButton(stations_layout, "MAIN_SCREEN_BUTTON", tr("Main screen"), [](bool value) {
         my_player_info->commandSetMainScreen(value);
     });
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
@@ -60,7 +63,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     // Crew position buttons, with icons if they have them
     for(int n = 0; n < max_crew_positions; n++)
     {
-        crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
+        crew_position_button[n] = new GuiToggleButton(stations_layout, "CREW_" + getCrewPositionName(ECrewPosition(n)) + "_BUTTON", getCrewPositionName(ECrewPosition(n)), [n](bool value){
             my_player_info->commandSetCrewPosition(ECrewPosition(n), value);
         });
         crew_position_button[n]->setSize(GuiElement::GuiSizeMax, 50);
@@ -199,7 +202,7 @@ ShipSelectionScreen::ShipSelectionScreen()
 
             // Spawn a ship of the selected template near 0,0 and give it a random
             // heading.
-            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [this, ship_template_selector]() {
+            (new GuiButton(left_container, "CREATE_SHIP_BUTTON", tr("Spawn player ship"), [ship_template_selector]() {
                 if (!gameGlobalInfo->allow_new_player_ships)
                     return;
                 P<PlayerSpaceship> ship = new PlayerSpaceship();
@@ -220,7 +223,7 @@ ShipSelectionScreen::ShipSelectionScreen()
         // selection/server creation screen.
         (new GuiButton(left_container, "DISCONNECT", tr("Scenario selection"), [this]() {
             destroy();
-            new ServerCreationScreen();
+            new ServerScenarioSelectionScreen();
         }))->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
     }else{
         // If this is a client, the "back" button disconnects from the server
@@ -431,12 +434,7 @@ void ShipSelectionScreen::update(float delta)
 
 bool ShipSelectionScreen::canDoMainScreen() const
 {
-#if FEATURE_3D_RENDERING
-    return PostProcessor::isEnabled() && sf::Shader::isAvailable() && gl::isAvailable();
-#else
-    // Don't bother checking anything without 3D rendering feature on.
-    return false;
-#endif
+    return true;
 }
 
 void ShipSelectionScreen::updateReadyButton()

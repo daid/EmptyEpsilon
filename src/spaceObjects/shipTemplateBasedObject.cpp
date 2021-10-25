@@ -2,7 +2,9 @@
 
 #include "scriptInterface.h"
 
+#include "tween.h"
 #include "i18n.h"
+
 
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 {
@@ -154,7 +156,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
             float level = shield_level[0] / shield_max[0];
             color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
         }
-        if (shield_hit_effect[0] > 0.0)
+        if (shield_hit_effect[0] > 0.0f)
         {
             color = Tween<glm::u8vec4>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
         }
@@ -171,7 +173,7 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
                 float level = shield_level[n] / shield_max[n];
                 color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
             }
-            if (shield_hit_effect[n] > 0.0)
+            if (shield_hit_effect[n] > 0.0f)
             {
                 color = Tween<glm::u8vec4>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
             }
@@ -196,7 +198,6 @@ void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm
     }
 }
 
-#if FEATURE_3D_RENDERING
 void ShipTemplateBasedObject::draw3DTransparent()
 {
     if (shield_count < 1)
@@ -204,21 +205,21 @@ void ShipTemplateBasedObject::draw3DTransparent()
 
     float angle = 0.0;
     float arc = 360.0f / shield_count;
+    const auto model_matrix = getModelMatrix();
     for(int n = 0; n<shield_count; n++)
     {
         if (shield_hit_effect[n] > 0)
         {
             if (shield_count > 1)
             {
-                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
+                model_info.renderShield(model_matrix, (shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
             }else{
-                model_info.renderShield((shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+                model_info.renderShield(model_matrix, (shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
             }
         }
         angle += arc;
     }
 }
-#endif//FEATURE_3D_RENDERING
 
 void ShipTemplateBasedObject::update(float delta)
 {
@@ -300,13 +301,13 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         } else {
             shield_hit_effect[shield_index] = 1.0;
         }
-        if (damage_amount < 0.0)
+        if (damage_amount < 0.0f)
         {
             damage_amount = 0.0;
         }
     }
 
-    if (info.type != DT_EMP && damage_amount > 0.0)
+    if (info.type != DT_EMP && damage_amount > 0.0f)
     {
         takeHullDamage(damage_amount, info);
     }
@@ -328,11 +329,11 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 void ShipTemplateBasedObject::takeHullDamage(float damage_amount, DamageInfo& info)
 {
     hull_strength -= damage_amount;
-    if (hull_strength <= 0.0 && !can_be_destroyed)
+    if (hull_strength <= 0.0f && !can_be_destroyed)
     {
         hull_strength = 1;
     }
-    if (hull_strength <= 0.0)
+    if (hull_strength <= 0.0f)
     {
         destroyedByDamage(info);
         if (on_destruction.isSet())
@@ -409,7 +410,7 @@ ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
 {
     if (shield_count < 2)
         return SYS_FrontShield;
-    float angle = index * 360.0 / shield_count;
+    float angle = index * 360.0f / shield_count;
     if (std::abs(angleDifference(angle, 0.0f)) < 90)
         return SYS_FrontShield;
     return SYS_RearShield;

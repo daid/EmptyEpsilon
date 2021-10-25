@@ -2,6 +2,7 @@
 #define SCAN_PROBE_H
 
 #include "spaceObject.h"
+#include "multiplayer_server.h"
 
 class ScanProbe : public SpaceObject, public Updatable
 {
@@ -38,7 +39,7 @@ public:
     bool hasArrived() { return has_arrived; }
     void setTarget(glm::vec2 target) { target_position = target; }
     glm::vec2 getTarget() { return target_position; }
-    P<SpaceObject> getOwner() { return game_server->getObjectById(owner_id); }
+    P<SpaceObject> getOwner() { return game_server ? game_server->getObjectById(owner_id) : nullptr; }
     void setOwner(P<SpaceObject> owner);
 
     void onArrival(ScriptSimpleCallback callback);

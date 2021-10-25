@@ -1,0 +1,13 @@
+package eu.daid.${MAINLIB_NAME};
+
+public class Activity extends org.libsdl.app.SDLActivity {
+	protected String[] getLibraries() {
+		return new String[] {
+			"hidapi",
+			"SDL2",
+		    "${MAINLIB_NAME}"
+	    };
+	}
+
+}
+

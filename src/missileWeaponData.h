@@ -1,7 +1,9 @@
 #ifndef MISSILE_WEAPON_DATA_H
 #define MISSILE_WEAPON_DATA_H
 
-#include "engine.h"
+#include "scriptInterface.h"
+#include "multiplayer.h"
+
 
 enum EMissileWeapons
 {
@@ -47,7 +49,7 @@ public:
 
     static const MissileWeaponData& getDataFor(EMissileWeapons type);
 
-    static const float convertSizeToCategoryModifier(EMissileSizes size);
-    static const EMissileSizes convertCategoryModifierToSize(float size);
+    static float convertSizeToCategoryModifier(EMissileSizes size);
+    static EMissileSizes convertCategoryModifierToSize(float size);
 };
 #endif//MISSILE_WEAPON_DATA_H

@@ -14,14 +14,12 @@ class GuiViewport3D : public GuiElement
     bool show_spacedust;
 
     glm::mat4 projection_matrix;
-    glm::mat4 model_matrix;
-    glm::vec4 viewport;
+    glm::mat4 view_matrix;
 
-#if FEATURE_3D_RENDERING
     enum class Uniforms : uint8_t
     {
         Projection = 0,
-        ModelView,
+        View,
 
         StarboxCount,
 
@@ -54,27 +52,25 @@ class GuiViewport3D : public GuiElement
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::StarboxCount)> starbox_vertex_attributes;
     gl::Textures<1> starbox_texture;
     gl::Buffers<static_cast<size_t>(Buffers::StarboxCount)> starbox_buffers;
-    sf::Shader* starbox_shader = nullptr;
+    sp::Shader* starbox_shader = nullptr;
 
     // Spacedust
     static constexpr size_t spacedust_particle_count = 1024;
     std::array<uint32_t, static_cast<size_t>(Uniforms::SpacedustCount)> spacedust_uniforms;
     std::array<uint32_t, static_cast<size_t>(VertexAttributes::SpacedustCount)> spacedust_vertex_attributes;
     gl::Buffers<static_cast<size_t>(Buffers::SpacedustCount)> spacedust_buffer;
-    sf::Shader* spacedust_shader = nullptr;
+    sp::Shader* spacedust_shader = nullptr;
 
-    
-#endif
 public:
     GuiViewport3D(GuiContainer* owner, string id);
 
-    virtual void onDraw(sp::RenderTarget& target);
+    virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiViewport3D* showCallsigns() { show_callsigns = true; return this; }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
 private:
-    glm::vec3 worldToScreen(sf::RenderTarget& window, glm::vec3 world);
+    glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
 };
 
 #endif//VIEWPORT_3D_H

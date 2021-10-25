@@ -8,6 +8,8 @@
 #include "playerInfo.h"
 #include "pathPlanner.h"
 #include "nebula.h"
+#include "random.h"
+#include "multiplayer_server.h"
 
 #include "scriptInterface.h"
 

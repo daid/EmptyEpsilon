@@ -2,13 +2,15 @@
 #define OPTIONS_MENU_H
 
 #include "gui/gui2_canvas.h"
+#include "Updatable.h"
 
 class GuiAutoLayout;
 class GuiSelector;
+class GuiBasicSlider;
 class GuiSlider;
 class GuiLabel;
 
-class OptionsMenu : public GuiCanvas
+class OptionsMenu : public GuiCanvas, public Updatable
 {
 private:
     GuiAutoLayout* left_container;
@@ -23,11 +25,16 @@ private:
     GuiLabel* sound_volume_overlay_label;
     GuiLabel* music_volume_overlay_label;
 
+    GuiBasicSlider* graphics_fov_slider{};
+    GuiLabel* graphics_fov_overlay_label{};
+
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;
+
+    void setupGraphicsOptions();
 public:
     OptionsMenu();
 
-    void onKey(sf::Event::KeyEvent key, int unicode);
+    virtual void update(float delta) override;
 };
 #endif//OPTIONS_MENU_H

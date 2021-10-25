@@ -10,13 +10,10 @@
 -- @script scenario_08_atlantis
 
 --[[Problems
-no rep at start....
-Unclear who to contact for first mission
 jump ship under attack after first jump
 not clear that you need to escape
 warp scramblers not visible
 nebula in kraylor defense line makes it unclear
-jump jammers not always blocking jump?
 --]]
 
 require("utils.lua")
@@ -100,7 +97,7 @@ function init()
     shipyard_gamma = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Shipyard-Gamma"):setPosition(25276, 134550)
     shipyard_gamma:setCommsFunction(shipyardGammaComms)
     player:commandDock(shipyard_gamma)
-    player:addReputationPoints(5) -- Initial reputation
+    player:addReputationPoints(50) -- Initial reputation
     supply_station_6 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Supply-6"):setPosition(14491, 126412)
     supply_station_6.comms_data = {
         -- Do not allow supply drops or reinforcements from the supply station.
@@ -402,7 +399,7 @@ function phase1DestroyDummyShips(delta)
             player,
             _([[Good, all weapons are operational. Atlantis-1 seems to be in perfect operating condition.
 
-When you are ready to take on your first mission, contact us. You can also dock with Supply-6 to resupply.]])
+When you are ready to take on your first mission, contact us at Shipyard-Gamma. You can also dock with Supply-6 to resupply.]])
         )
         mission_state = phase1WaitForContact
         player:addReputationPoints(5)

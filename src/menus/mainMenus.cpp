@@ -7,7 +7,6 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceship.h"
-#include "mouseCalibrator.h"
 #include "menus/serverCreationScreen.h"
 #include "menus/optionsMenu.h"
 #include "menus/tutorialMenu.h"
@@ -69,7 +68,7 @@ MainMenu::MainMenu()
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
-    (new GuiImage(this, "LOGO", "logo_full"))->setPosition(0, title_y, sp::Alignment::TopCenter)->setSize(logo_size_x, logo_size_y);
+    (new GuiImage(this, "LOGO", "logo_full.png"))->setPosition(0, title_y, sp::Alignment::TopCenter)->setSize(logo_size_x, logo_size_y);
     (new GuiLabel(this, "VERSION", tr("Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, sp::Alignment::TopCenter)->setSize(0, 20);
 
     (new GuiLabel(this, "", tr("Your name:"), 30))->setAlignment(sp::Alignment::CenterLeft)->setPosition({50, -400}, sp::Alignment::BottomLeft)->setSize(300, 50);
@@ -78,12 +77,8 @@ MainMenu::MainMenu()
     })->setPosition({50, -350}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_SERVER", tr("Start server"), [this]() {
-        new EpsilonServer();
-        if (game_server)
-        {
-            new ServerCreationScreen();
-            destroy();
-        }
+        new ServerSetupScreen();
+        destroy();
     }))->setPosition({50, -230}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     (new GuiButton(this, "START_CLIENT", tr("Start client"), [this]() {
@@ -104,17 +99,6 @@ MainMenu::MainMenu()
         new TutorialMenu();
         destroy();
     }))->setPosition({370, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
-
-    if (InputHandler::touch_screen)
-    {
-        GuiButton* touch_calib = new GuiButton(this, "TOUCH_CALIB", "", [this]() {
-            destroy();
-            new MouseCalibrator("");
-        });
-        touch_calib->setPosition({-50, -50}, sp::Alignment::BottomRight)->setSize(200, 100);
-        (new GuiLabel(touch_calib, "TOUCH_CALIB_LABEL", tr("Calibrate\nTouchscreen"), 30)
-        )->setPosition(0, -15, sp::Alignment::Center);
-    }
 
     float y = 100;
     (new GuiLabel(this, "CREDITS", "Credits", 25))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 25); y += 25;

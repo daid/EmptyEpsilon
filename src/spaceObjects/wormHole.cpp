@@ -1,30 +1,30 @@
-#include <GL/glew.h>
-#include <SFML/OpenGL.hpp>
+#include <graphics/opengl.h>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "main.h"
+#include "random.h"
 #include "wormHole.h"
 #include "spaceship.h"
 #include "scriptInterface.h"
+#include "textureManager.h"
 
 #include "glObjects.h"
 #include "shaderRegistry.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
-#define FORCE_MULTIPLIER          50.0
-#define FORCE_MAX                 10000.0
-#define ALPHA_MULTIPLIER          10.0
-#define DEFAULT_COLLISION_RADIUS  2500
-#define AVOIDANCE_MULTIPLIER      1.2
-#define TARGET_SPREAD             500
+#define FORCE_MULTIPLIER          50.0f
+#define FORCE_MAX                 10000.0f
+#define ALPHA_MULTIPLIER          10.0f
+#define DEFAULT_COLLISION_RADIUS  2500.0f
+#define AVOIDANCE_MULTIPLIER      1.2f
+#define TARGET_SPREAD             500.0f
 
-#if FEATURE_3D_RENDERING
 struct VertexAndTexCoords
 {
     glm::vec3 vertex;
     glm::vec2 texcoords;
 };
-#endif
 
 /// A wormhole object that drags objects toward it like a black hole, and then
 /// teleports them to another point when they reach its center.
@@ -60,11 +60,9 @@ WormHole::WormHole()
     }
 }
 
-#if FEATURE_3D_RENDERING
 void WormHole::draw3DTransparent()
 {
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
-    glTranslatef(-getPosition().x, -getPosition().y, 0);
 
     std::array<VertexAndTexCoords, 4> quad{
         glm::vec3{}, {0.f, 1.f},
@@ -84,25 +82,25 @@ void WormHole::draw3DTransparent()
         float size = cloud.size;
 
         float distance = glm::length(camera_position - position);
-        float alpha = 1.0 - (distance / 10000.0f);
-        if (alpha < 0.0)
+        float alpha = 1.0f - (distance / 10000.0f);
+        if (alpha < 0.0f)
             continue;
 
-        glBindTexture(GL_TEXTURE_2D, textureManager.getTexture("wormHole" + string(cloud.texture) + ".png")->getNativeHandle());
+        textureManager.getTexture("wormHole" + string(cloud.texture) + ".png")->bind();
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), alpha * 0.8f, alpha * 0.8f, alpha * 0.8f, size);
+        auto model_matrix = glm::translate(getModelMatrix(), {cloud.offset.x, cloud.offset.y, 0});
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
 
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
-        std::initializer_list<uint8_t> indices = { 0, 2, 1, 0, 3, 2 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, std::begin(indices));
+        std::initializer_list<uint16_t> indices = { 0, 2, 1, 0, 3, 2 };
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
-#endif//FEATURE_3D_RENDERING
-
 
 void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRotation() - rotation, getRadius() * scale * 3.0);
+    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRotation() - rotation, getRadius() * scale * 3.0f);
 }
 
 // Draw a line toward the target position
@@ -122,7 +120,7 @@ void WormHole::update(float delta)
 
 void WormHole::collide(Collisionable* target, float collision_force)
 {
-    if (update_delta == 0.0)
+    if (update_delta == 0.0f)
         return;
 
     P<SpaceObject> obj = P<Collisionable>(target);

@@ -31,13 +31,20 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 void GuiCombatManeuver::onUpdate()
 {
     setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+
+    float strafe = keys.helms_combat_right.getValue() + keys.helms_combat_left.getValue();
+    float boost = keys.helms_combat_boost.getValue();
+    if (strafe != 0.0f)
+        setStrafeValue(strafe);
+    if (boost > 0.0f)
+        setBoostValue(boost);
 }
 
 void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->combat_maneuver_boost_speed <= 0.0 && my_spaceship->combat_maneuver_strafe_speed <= 0.0)
+        if (my_spaceship->combat_maneuver_boost_speed <= 0.0f && my_spaceship->combat_maneuver_strafe_speed <= 0.0f)
         {
             charge_bar->hide();
             slider->hide();
@@ -45,19 +52,6 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
             charge_bar->setValue(my_spaceship->combat_maneuver_charge)->show();
             slider->show();
         }
-    }
-}
-
-void GuiCombatManeuver::onHotkey(const HotkeyResult& key)
-{
-    if (key.category == "HELMS" && my_spaceship && isVisible())
-    {
-        if (key.hotkey == "COMBAT_LEFT")
-        {}//TODO
-        else if (key.hotkey == "COMBAT_RIGHT")
-        {}//TODO
-        else if (key.hotkey == "COMBAT_BOOST")
-        {}//TODO
     }
 }
 

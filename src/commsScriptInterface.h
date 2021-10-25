@@ -1,7 +1,7 @@
 #ifndef COMMS_SCRIPT_INTERFACE_H
 #define COMMS_SCRIPT_INTERFACE_H
 
-#include "engine.h"
+#include "scriptInterface.h"
 
 ///Forward declarations
 class ScriptObject;

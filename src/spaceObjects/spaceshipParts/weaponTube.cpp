@@ -5,6 +5,9 @@
 #include "spaceObjects/missiles/nuke.h"
 #include "spaceObjects/missiles/hvli.h"
 #include "spaceObjects/spaceship.h"
+#include "multiplayer_server.h"
+#include <SDL_assert.h>
+
 
 WeaponTube::WeaponTube()
 {
@@ -22,7 +25,7 @@ WeaponTube::WeaponTube()
 
 void WeaponTube::setParent(SpaceShip* parent)
 {
-    assert(!this->parent);
+    SDL_assert(!this->parent);
     this->parent = parent;
 
     parent->registerMemberReplication(&load_time);
@@ -91,7 +94,7 @@ void WeaponTube::fire(float target_angle)
     parent->didAnOffensiveAction();
 
     if (parent->docking_state != DS_NotDocking) return;
-    if (parent->current_warp > 0.0) return;
+    if (parent->current_warp > 0.0f) return;
     if (state != WTS_Loaded) return;
 
     if (type_loaded == MW_HVLI)
@@ -212,7 +215,7 @@ void WeaponTube::forceUnload()
 
 void WeaponTube::update(float delta)
 {
-    if (delay > 0.0)
+    if (delay > 0.0f)
     {
         delay -= delta * parent->getSystemEffectiveness(SYS_MissileSystem);
     }else{
@@ -277,7 +280,7 @@ bool WeaponTube::isFiring()
 
 float WeaponTube::getLoadProgress()
 {
-    return 1.0 - delay / load_time;
+    return 1.0f - delay / load_time;
 }
 
 float WeaponTube::getUnloadProgress()
@@ -315,7 +318,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
     auto target_velocity = target->getVelocity();
     float target_velocity_length = glm::length(target_velocity);
     float missile_angle = vec2ToAngle(target_position - parent->getPosition());
-    float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * M_PI);
+    float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
     float missile_exit_angle = parent->getRotation() + direction;
 
     for(int iterations=0; iterations<10; iterations++)
@@ -348,7 +351,7 @@ float WeaponTube::calculateFiringSolution(P<SpaceObject> target)
             float time_target = glm::length((target_position - intersection)) / target_velocity_length;
             float time_missile = glm::length(turn_exit - intersection) / data.speed + turn_time;
             //Calculate the time in which the radius will be on the intersection, to know in which time range we need to hit.
-            float time_radius = (target->getRadius() / 2.0) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
+            float time_radius = (target->getRadius() / 2.0f) / target_velocity_length;//TODO: This value could be improved, as it is allowed to be bigger when the angle between the missile and the ship is low
             // When both the missile and the target are at the same position at the same time, we can take a shot!
             if (fabsf(time_target - time_missile) < time_radius)
                 return missile_angle;

@@ -2,6 +2,8 @@
 #include "spaceObjects/nebula.h"
 #include "ai/evasionAI.h"
 #include "ai/aiFactory.h"
+#include "random.h"
+
 
 REGISTER_SHIP_AI(EvasionAI, "evasion");
 
@@ -19,7 +21,7 @@ bool EvasionAI::canSwitchAI()
 
 void EvasionAI::run(float delta)
 {
-    if (evasion_calculation_delay > 0.0)
+    if (evasion_calculation_delay > 0.0f)
         evasion_calculation_delay -= delta;
     ShipAI::run(delta);
 }
@@ -61,7 +63,7 @@ void EvasionAI::runOrders()
 
 bool EvasionAI::evadeIfNecessary()
 {
-    if (evasion_calculation_delay > 0.0){
+    if (evasion_calculation_delay > 0.0f){
         if (is_evading)
         {
             flyTowards(evasion_location, 100.0);
@@ -96,7 +98,7 @@ bool EvasionAI::evadeIfNecessary()
         evasion_vector += vec;
     }
 
-    if (glm::length2(evasion_vector) > 0.0) // if: evasion is necessary
+    if (glm::length2(evasion_vector) > 0.0f) // if: evasion is necessary
     {
         // have a bias to your original target.
         // this makes ships fly around enemies rather than straight running from them
@@ -107,7 +109,7 @@ bool EvasionAI::evadeIfNecessary()
         }
 
         float distance = 12000.0f; // should be big enough for jump drive to be considered
-        if (glm::length(target_position) > 0.0)
+        if (glm::length(target_position) > 0.0f)
         {
             // ships with warp or jump drives have a tendency to fly past enemies quickly
             evasion_vector += glm::normalize(target_position - position) * (owner->hasWarpDrive() || owner->hasJumpDrive() ? 15.0f : 5.0f);
@@ -146,12 +148,12 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
         {
             if (beam.getRange() > enemy_max_beam_range)
                 enemy_max_beam_range = beam.getRange();
-            if (beam.getCycleTime() > 0.0)
+            if (beam.getCycleTime() > 0.0f)
                 enemy_beam_dps += beam.getDamage() / beam.getCycleTime();
         }
     }
 
-    if (enemy_missile_strength <= 0.0 && (enemy_beam_dps <= 0.0 || enemy_max_beam_range <= 0.0))
+    if (enemy_missile_strength <= 0.0f && (enemy_beam_dps <= 0.0f || enemy_max_beam_range <= 0.0f))
     {
         // enemy is not a threat
         return 0.0;
@@ -162,19 +164,21 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
     enemy_max_beam_range += ship->getRadius() + owner->getRadius();
 
     float danger = 0.0;
-    if (enemy_missile_strength > 0.0)
+    if (enemy_missile_strength > 0.0f)
     {
         danger += enemy_missile_strength / 10.f * (scan_radius - std::max(distance, 5000.0f)) / (scan_radius - 4000.0f);
     }
 
-    if (enemy_max_beam_range > 0.0 && distance < 4*enemy_max_beam_range)
+    if (enemy_max_beam_range > 0.0f && distance < 4*enemy_max_beam_range)
     {
         // danger falls off the further we are away from beam range
         danger += enemy_beam_dps * (4*enemy_max_beam_range - std::max(distance, enemy_max_beam_range)) / (3 * enemy_max_beam_range);
     }
 
     if (std::max(ship->getImpulseMaxSpeed().forward,ship->getImpulseMaxSpeed().reverse) 
-            > std::max(owner->getImpulseMaxSpeed().forward, owner->getImpulseMaxSpeed().reverse)) danger *= 1.5; //yes that sound stupid somebody had mounted its forward reactor on reverse but...
-    if (P<CpuShip>(ship->getTarget()) == P<CpuShip>(owner)) danger = (danger + 1) * 2;
+            > std::max(owner->getImpulseMaxSpeed().forward, owner->getImpulseMaxSpeed().reverse))
+        danger *= 1.5f; //yes that sound stupid somebody had mounted its forward reactor on reverse but...
+    if (P<CpuShip>(ship->getTarget()) == P<CpuShip>(owner))
+        danger = (danger + 1) * 2;
     return danger;
 }

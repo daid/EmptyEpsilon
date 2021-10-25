@@ -1,17 +1,21 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include "engine.h"
+#include <glm/vec3.hpp>
+#include "graphics/font.h"
+#include "Renderable.h"
+#include "postProcessManager.h"
 #include "config.h"
 
 extern glm::vec3 camera_position;
 extern float camera_yaw;
 extern float camera_pitch;
-extern sf::Font* main_font;
-extern sf::Font* bold_font;
+extern sp::Font* main_font;
+extern sp::Font* bold_font;
 extern RenderLayer* mouseLayer;
 extern PostProcessor* glitchPostProcessor;
 extern PostProcessor* warpPostProcessor;
+extern P<Window> main_window;
 
 void returnToMainMenu();
 void returnToShipSelection();

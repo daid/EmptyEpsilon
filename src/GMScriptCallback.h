@@ -1,7 +1,7 @@
 #ifndef GM_SCRIPT_CALLBACK_H
 #define GM_SCRIPT_CALLBACK_H
 
-#include "engine.h"
+#include "scriptInterface.h"
 
 class GMScriptCallback
 {

@@ -10,7 +10,7 @@ void GuiPanel::onDraw(sp::RenderTarget& renderer)
     renderer.drawStretchedHV(rect, 25.0f, "gui/widget/PanelBackground.png");
 }
 
-bool GuiPanel::onMouseDown(glm::vec2 position)
+bool GuiPanel::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     return true;
 }

@@ -47,7 +47,7 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
             system_health[n]->setValue(string(int(my_spaceship->systems[n].health * 100)) + "%");
             if (my_spaceship->systems[n].health < 0)
                 system_health[n]->setColor(glm::u8vec4(255, 0, 0, 255));
-            else if (my_spaceship->systems[n].health_max < 1.0)
+            else if (my_spaceship->systems[n].health_max < 1.0f)
                 system_health[n]->setColor(glm::u8vec4(255, 255, 0, 255));
             else
                 system_health[n]->setColor(glm::u8vec4{255,255,255,255});

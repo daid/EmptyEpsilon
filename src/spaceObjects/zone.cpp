@@ -53,7 +53,7 @@ void Zone::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float sca
 
     if (label.length() > 0)
     {
-        int font_size = getRadius() * scale / label.length();
+        float font_size = getRadius() * scale / label.length();
         renderer.drawText(sp::Rect(position.x, position.y, 0, 0), label, sp::Alignment::Center, font_size, main_font, glm::u8vec4(color.r, color.g, color.b, 128));
     }
 }

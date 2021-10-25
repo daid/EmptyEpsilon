@@ -1,3 +1,4 @@
+#include "random.h"
 #include "mineSweeper.h"
 #include "miniGame.h"
 #include "hackingDialog.h"
