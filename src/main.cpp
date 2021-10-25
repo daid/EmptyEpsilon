@@ -151,6 +151,7 @@ int main(int argc, char** argv)
     if (PreferencesManager::get("headless") != "")
         textureManager.setDisabled(true);
 
+    textureManager.setBaseMipLevel(PreferencesManager::get("texture_base_mip_level", "0").toInt());
     if (PreferencesManager::get("mod") != "")
     {
         string mod = PreferencesManager::get("mod");

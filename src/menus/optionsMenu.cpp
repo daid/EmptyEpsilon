@@ -5,6 +5,7 @@
 #include "main.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
+#include "textureManager.h"
 #include "windowManager.h"
 
 #include "gui/gui2_autolayout.h"
@@ -270,4 +271,19 @@ void OptionsMenu::setupGraphicsOptions()
     // Override overlay label.
     graphics_fov_overlay_label = new GuiLabel(graphics_fov_slider, "GRAPHICS_FOV_SLIDER_LABEL", tr("FoV: {fov}").format({ {"fov", string(initial_fov, 0)} }), 30);
     graphics_fov_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Texture resolution.
+    (new GuiLabel(graphics_page, "TEXTURE_RESOLUTION_LABEL", tr("Texture (requires restart)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    auto texture_resolution_selector = new GuiSelector(graphics_page, "TEXTURE_RESOLUTION", [](int index, const string& value)
+    {
+        PreferencesManager::set("texture_base_mip_level", string(index));
+        textureManager.setBaseMipLevel(PreferencesManager::get("texture_base_mip_level", "0").toInt());
+    });
+    texture_resolution_selector->setOptions({
+        tr("texture_resolution", "Full Res."),
+        tr("texture_resolution", "Half Res."),
+        tr("texture_resolution", "Quarter Res.")
+    });
+    texture_resolution_selector->setSelectionIndex(PreferencesManager::get("texture_base_mip_level", "0").toInt());
+    texture_resolution_selector->setSize(GuiElement::GuiSizeMax, 50);
 }
