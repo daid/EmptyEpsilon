@@ -732,3 +732,8 @@ set(CPACK_INSTALL_CMAKE_PROJECTS
 )
 
 include(CPack)
+
+if(UNIX AND NOT APPLE)
+  install(FILES EmptyEpsilon.desktop DESTINATION "share/applications")
+  install(FILES logo.png DESTINATION "share/icons" RENAME "EmptyEpsilon.png")
+endif()
