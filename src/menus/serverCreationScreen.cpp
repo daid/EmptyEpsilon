@@ -87,11 +87,65 @@ ServerSetupScreen::ServerSetupScreen()
         game_server->setPassword(server_password->getText().upper());
         gameGlobalInfo->gm_control_code = gm_password->getText().upper();
         if (server_visibility->getSelectionIndex() == 1)
+        {
             game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-
-        new ServerScenarioSelectionScreen();
+            new ServerSetupMasterServerRegistrationScreen();
+        }
+        else
+        {
+            new ServerScenarioSelectionScreen();
+        }
         destroy();
     }))->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
+}
+
+ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationScreen()
+{
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+
+    info_label = new GuiLabel(this, "INFO", "", 30);
+    info_label->setPosition({0, 0}, sp::Alignment::Center);
+
+    (new GuiButton(this, "CLOSE_SERVER", tr("Close"), [this]() {
+        disconnectFromServer();
+        new ServerSetupScreen();        
+        destroy();
+    }))->setPosition(-250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
+
+    // Start server button.
+    continue_button = new GuiButton(this, "CONTINUE", tr("Continue"), [this]() {
+        new ServerScenarioSelectionScreen();
+        destroy();
+    });
+    continue_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
+}
+
+void ServerSetupMasterServerRegistrationScreen::update(float delta)
+{
+    switch(game_server->getMasterServerState())
+    {
+    case GameServer::MasterServerState::Disabled:
+        info_label->setText("Not connecting to masterserver?");
+        continue_button->enable();
+        break;
+    case GameServer::MasterServerState::Registering:
+        info_label->setText("Connecting to master server");
+        continue_button->disable();
+        break;
+    case GameServer::MasterServerState::Success:
+        info_label->setText("Master server connection successful");
+        continue_button->enable();
+        break;
+    case GameServer::MasterServerState::FailedToReachMasterServer:
+        info_label->setText("Failed to reach the master server.");
+        continue_button->disable();
+        break;
+    case GameServer::MasterServerState::FailedPortForwarding:
+        info_label->setText("Port forwarding check failed.");
+        continue_button->disable();
+        break;
+    }
 }
 
 ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()

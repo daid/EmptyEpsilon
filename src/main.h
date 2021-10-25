@@ -15,6 +15,7 @@ extern sp::Font* bold_font;
 extern RenderLayer* mouseLayer;
 extern PostProcessor* glitchPostProcessor;
 extern PostProcessor* warpPostProcessor;
+extern P<Window> main_window;
 
 void returnToMainMenu();
 void returnToShipSelection();

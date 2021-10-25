@@ -56,6 +56,7 @@ sp::Font* bold_font;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
+P<Window> main_window;
 
 int main(int argc, char** argv)
 {
@@ -225,7 +226,7 @@ int main(int argc, char** argv)
                 fsaa = 2;
         }
 
-        P<Window> window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
+        main_window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
 #if defined(DEBUG)
         // Synchronous gl debug output always in debug.
         constexpr bool wants_gl_debug = true;
@@ -243,10 +244,9 @@ int main(int argc, char** argv)
         }
 
         if (PreferencesManager::get("instance_name") != "")
-            window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
+            main_window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
         else
-            window->setTitle("EmptyEpsilon");
-        engine->registerObject("window", window);
+            main_window->setTitle("EmptyEpsilon");
 
         if (gl::isAvailable())
         {
@@ -328,7 +328,7 @@ int main(int argc, char** argv)
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
-    P<Window> window = engine->getObject("window");
+    P<Window> window = main_window;
     if (window)
     {
         PreferencesManager::set("fsaa", window->getFSAA());
