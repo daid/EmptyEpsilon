@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - SDL2
+      - master
   pull_request:
 jobs:
   linux:
@@ -31,7 +31,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
-          ref: SDL2  
+          ref: master
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -53,7 +53,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
-          ref: SDL2 
+          ref: master
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -111,7 +111,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
-          ref: SDL2
+          ref: master
       - name: Create Build Environment
         run: cmake -E make_directory ${{github.workspace}}/build
       - name: Configure CMake
