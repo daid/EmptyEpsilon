@@ -57,9 +57,10 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
         {
             if (ktxtexture.loadFromStream(stream))
             {
-                if (auto pixels = ktxtexture.toNative(); !pixels.empty())
+                auto mip_level = std::min(ktxtexture.getMipCount() - 1, textureManager.getBaseMipLevel());
+                if (auto pixels = ktxtexture.toNative(mip_level); !pixels.empty())
                 {
-                    auto size = ktxtexture.getSize();
+                    auto size = ktxtexture.getSize(mip_level);
                     if (ktxtexture.getNativeFormat() != GL_RGBA)
                         glCompressedTexImage2D(std::get<1>(face), 0, ktxtexture.getNativeFormat(), size.x, size.y, 0, pixels.size(), pixels.data());
                     else
