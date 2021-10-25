@@ -11,6 +11,7 @@ class GuiImpulseControls : public GuiElement
 private:
     GuiKeyValueDisplay* label;
     GuiSlider* slider;
+    bool set_active = false;
 public:
     GuiImpulseControls(GuiContainer* owner, string id);
 

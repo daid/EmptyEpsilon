@@ -43,5 +43,12 @@ void GuiImpulseControls::onUpdate()
             my_spaceship->commandImpulse(1.0f);
         if (keys.helms_min_impulse.getDown())
             my_spaceship->commandImpulse(-1.0f);
+        
+        float set_value = keys.helms_set_impulse.getValue();
+        if (set_value != my_spaceship->impulse_request && (set_value != 0.0f || set_active))
+        {
+            my_spaceship->commandImpulse(set_value);
+            set_active = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+        }
     }
 }

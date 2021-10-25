@@ -37,6 +37,7 @@ Keys::Keys() :
     //helms
     helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
     helms_decrease_impulse("HELMS_IMPULSE_DECREASE", "Down"),
+    helms_set_impulse("HELMS_SET_IMPULSE", {"joy:0:axis:1", "gamecontroller:0:axis:lefty"}),
     helms_zero_impulse("HELMS_IMPULSE_ZERO", "Space"),
     helms_max_impulse("HELMS_IMPULSE_MAX"),
     helms_min_impulse("HELMS_IMPULSE_MIN"),
@@ -227,6 +228,7 @@ void Keys::init()
     //helms
     helms_increase_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse"));
     helms_decrease_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse"));
+    helms_set_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set impulse (joystick)"));
     helms_zero_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero impulse"));
     helms_max_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max impulse"));
     helms_min_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max reverse impulse"));
