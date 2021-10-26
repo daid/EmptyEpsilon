@@ -1,8 +1,12 @@
 # Set minimum target macOS version: https://cmake.org/cmake/help/v3.8/variable/CMAKE_OSX_DEPLOYMENT_TARGET.html#variable:CMAKE_OSX_DEPLOYMENT_TARGET
-# SFML targets 10.7, however EE targets C++17 features only available in 10.15+ (Catalina, June 2019).
+# SDL2 targets 10.5, however EE targets C++17 features only available in 10.15+ (Catalina, June 2019).
 # Must be first!
-if(NOT DEFINED ENV{MACOSX_DEPLOYMENT_TARGET})
-  set(ENV{MACOSX_DEPLOYMENT_TARGET} "10.15")
+if(APPLE)
+  if(NOT DEFINED ENV{MACOSX_DEPLOYMENT_TARGET})
+    set(ENV{MACOSX_DEPLOYMENT_TARGET} "10.15")
+  endif()
+  
+  message(STATUS "Mac deployment target is: $ENV{MACOSX_DEPLOYMENT_TARGET}")
 endif()
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
@@ -661,7 +665,7 @@ if(NOT DEFINED CPACK_GENERATOR)
     set(CPACK_GENERATOR "ZIP")
   elseif(UNIX)
     set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsfml-dev")
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS libfreetype6 libsd2)
   endif()
 endif()
 
@@ -671,23 +675,17 @@ set(CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/CPackProjectConfig.cmake")
 
 if(APPLE)
   if("DragNDrop" IN_LIST CPACK_GENERATOR)
-    if(DEFINED SFML_ROOT)
-      if(SFML_ROOT MATCHES "Frameworks$")
-        # Copy SFML and its extlibs to binary dir.
-	      # SFML_ROOT *should* be the Frameworks folder!
-	      execute_process(
-		      COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_ROOT}/" "${CMAKE_BINARY_DIR}/Frameworks/"
-		      COMMAND ${CMAKE_COMMAND} -E copy_directory "${SFML_ROOT}/../extlibs/" "${CMAKE_BINARY_DIR}/Frameworks/")
-	      install(CODE "
-  		    include(BundleUtilities)
-  		    fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${CMAKE_BINARY_DIR};${CMAKE_BINARY_DIR}/Frameworks\")
-	      ")
-      else()
-        message(WARNING "macOS DMG packaging: SFML_ROOT *must* point to SFML's Frameworks folder (no trailing slashes). The bundle will not be fixed up properly.")
-      endif()
+    if(SDL2_LIBRARIES MATCHES "\\.framework$")
+      # SDL2_LIBRARIES points to the framework itself.
+      # For fixup_bundle to pick it up, we need to get its parent directory as the 'root'.
+      # SDL2 also depends on hidapi.framework, which comes with the official DMG (https://libsdl.org/download-2.0.php)
+      # Same idea - need the path to it for the dependency manager to pick it up.
+      install(CODE "
+        include(BundleUtilities)
+        fixup_bundle(\"\${CMAKE_INSTALL_PREFIX}/EmptyEpsilon.app\" \"\" \"${SDL2_LIBRARIES}/..;${SDL2_LIBRARIES}/Versions/Current/Frameworks\")
+      ")
     else()
-      # This is usually the case when using sfml from homebrew, which sadly not portable enough for DMG packages.
-      message(WARNING "macOS DMG package requested - please set SFML_ROOT, otherwise the bundle will not be fixed up properly.")
+      message(WARNING "macOS DMG packaging: ${SDL2_LIBRARIES} does not appear to be a framework. The bundle will not be fixed up properly.")
     endif()
   endif()
 endif()

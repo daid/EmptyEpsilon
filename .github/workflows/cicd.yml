@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Update apt index
       run: sudo apt-get update -qq
-    - name: Install SFML
+    - name: Install SDL2
       run: sudo apt-get install libsdl2-dev
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
@@ -130,7 +130,7 @@ jobs:
     steps:
     - name: Update apt index
       run: sudo apt-get update -qq
-    - name: Install SFML
+    - name: Install dependencies
       run: sudo apt-get install lua5.3
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
