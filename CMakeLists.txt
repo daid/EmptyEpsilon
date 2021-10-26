@@ -62,8 +62,6 @@ endif()
 # Dependencies
 
 # SeriousProton
-# Use SP provided json library.
-set(SERIOUSPROTON_WITH_JSON ON CACHE BOOL "" FORCE)
 add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" EXCLUDE_FROM_ALL)
 
 set(EXTERNALS_DIR "${PROJECT_BINARY_DIR}/externals")
@@ -665,7 +663,7 @@ if(NOT DEFINED CPACK_GENERATOR)
     set(CPACK_GENERATOR "ZIP")
   elseif(UNIX)
     set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS libfreetype6 libsd2)
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS libfreetype6 libsdl2)
   endif()
 endif()
 
