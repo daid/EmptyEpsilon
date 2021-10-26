@@ -62,8 +62,6 @@ endif()
 # Dependencies
 
 # SeriousProton
-# Use SP provided json library.
-set(SERIOUSPROTON_WITH_JSON ON CACHE BOOL "" FORCE)
 add_subdirectory("${SERIOUS_PROTON_DIR}" "${PROJECT_BINARY_DIR}/SeriousProton" EXCLUDE_FROM_ALL)
 
 set(EXTERNALS_DIR "${PROJECT_BINARY_DIR}/externals")
