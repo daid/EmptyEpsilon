@@ -12,7 +12,7 @@ static inline float polygonArea(const std::vector<glm::vec2>& path)
         a += (path[j].x + path[i].x) * (path[j].y - path[i].y);
         j = i;
     }
-    return std::abs(a * 0.5f);
+    return a * -0.5f;
 }
 
 
