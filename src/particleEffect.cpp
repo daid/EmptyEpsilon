@@ -52,7 +52,7 @@ void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3
 ParticleEngine::ParticleEngine()
     :first_expired{ std::end(particles) }
 {
-    ebo = gl::Buffers<1>{};
+    ebo_vbo = gl::Buffers<2>{};
     // Cache shader info.
     shader = ShaderManager::getShader("shaders/particles");
 
@@ -61,13 +61,13 @@ ParticleEngine::ParticleEngine()
     uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
     uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("view");
 
-    attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
+    attributes[as_index(Attributes::CenterAndSize)] = shader->getAttributeLocation("center_and_size");
     attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
     attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
-    attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
 
     std::vector<uint16_t> elements(instances_per_draw * elements_per_instance);
-
+    texcoords_data.resize(max_vertex_count);
+    particle_data.resize(max_vertex_count);
     for (auto quad = 0U; quad < instances_per_draw; ++quad)
     {
         auto base_vertex = static_cast<uint16_t>(vertices_per_instance * quad);
@@ -80,10 +80,17 @@ ParticleEngine::ParticleEngine()
         elements[base_element + 3] = base_vertex + 0;
         elements[base_element + 4] = base_vertex + 2;
         elements[base_element + 5] = base_vertex + 1;
+
+        // Setup texcoords.
+        // OpenGL origin is bottom left.
+        texcoords_data[base_vertex + 0] = { 0, 1 };
+        texcoords_data[base_vertex + 1] = { 1, 1 };
+        texcoords_data[base_vertex + 2] = { 1, 0 };
+        texcoords_data[base_vertex + 3] = { 0, 0 };
     }
 
     // Hand off to the GPU.
-    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, ebo[0]);
+    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, ebo_vbo[0]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint16_t), elements.data(), GL_STATIC_DRAW);
 }
 
@@ -101,103 +108,57 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
     glUniformMatrix4fv(uniforms[as_index(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view));
     
     {
-        gl::ScopedVertexAttribArray centers(attributes[as_index(Attributes::Center)]);
+        gl::ScopedVertexAttribArray centers_and_sizes(attributes[as_index(Attributes::CenterAndSize)]);
         gl::ScopedVertexAttribArray texcoords(attributes[as_index(Attributes::TexCoords)]);
         gl::ScopedVertexAttribArray colors(attributes[as_index(Attributes::Color)]);
-        gl::ScopedVertexAttribArray sizes(attributes[as_index(Attributes::Size)]);
-        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, ebo[0]);
- 
+
+        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, ebo_vbo[0]);
+        gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, ebo_vbo[1]);
+
+        
+        glVertexAttribPointer(centers_and_sizes.get(), 4, GL_FLOAT, GL_FALSE, sizeof(ParticleRenderData), reinterpret_cast<const GLvoid*>(offsetof(ParticleRenderData, position_and_size)));
+        glVertexAttribPointer(colors.get(), 3, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ParticleRenderData), reinterpret_cast<const GLvoid*>(offsetof(ParticleRenderData, color)));
+        
+        constexpr auto texcoords_start_offset = max_vertex_count * sizeof(ParticleRenderData);
+        glVertexAttribPointer(texcoords.get(), 2, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(glm::u8vec2), reinterpret_cast<const GLvoid*>(texcoords_start_offset));
+
         // Process only non-expired
         size_t live_particle_count = first_expired - std::begin(particles);
-        std::vector<ParticleData> particle_data(max_vertex_count);
-
-        // how many vbos do we need?
-        auto vbo_required_count = (live_particle_count * vertices_per_instance + std::numeric_limits<uint16_t>::max() - 1) / std::numeric_limits<uint16_t>::max();
-        if (vbos.size() < vbo_required_count)
-        {
-            // Need to reallocate some!.
-            auto current_count = vbos.size();
-            vbos.resize(vbo_required_count);
-            auto missing_index = current_count;
-
-            // Generate the missing buffers.
-            glGenBuffers(static_cast<GLsizei>(vbo_required_count - current_count), vbos.data() + missing_index);
-            
-            // Fill them.
-            std::vector<glm::vec2> texcoords(max_vertex_count);
-
-            // Hitting this means needing to lower the number of instances / vertices per instance.
-            SDL_assert((texcoords.size() - 1) <= std::numeric_limits<uint16_t>::max());
-
-            for (auto quad = 0U; quad < instances_per_draw; ++quad)
-            {
-                auto base_vertex = static_cast<uint16_t>(vertices_per_instance * quad);
-
-                // Setup texcoords.
-                // OpenGL origin is bottom left.
-                texcoords[base_vertex + 0] = { 0.f, 1.f };
-                texcoords[base_vertex + 1] = { 1.f, 1.f };
-                texcoords[base_vertex + 2] = { 1.f, 0.f };
-                texcoords[base_vertex + 3] = { 0.f, 0.f };
-            }
-
-            auto total_particle_size = static_cast<GLsizei>(particle_data.size() * sizeof(ParticleData));
-            for (auto i = missing_index; i < vbo_required_count; ++i)
-            {
-                glBindBuffer(GL_ARRAY_BUFFER, vbos[i]);
-                glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(glm::vec2)), nullptr, GL_DYNAMIC_DRAW);
-
-                // Ensure zero-initialization of the particle data. 
-                glBufferSubData(GL_ARRAY_BUFFER, 0, total_particle_size, particle_data.data());
-
-                // Upload texcoords once.
-                glBufferSubData(GL_ARRAY_BUFFER, total_particle_size, static_cast<GLsizei>(texcoords.size() * sizeof(glm::vec2)), texcoords.data());
-            }
-        }
-
-        auto vbo_index = 0;
         for (size_t n = 0U; n < live_particle_count;)
         {
             auto instance_count = std::min(live_particle_count - n, instances_per_draw);
+            auto total_vertex_count = instance_count * vertices_per_instance; 
+
+            // Orphan+reacquire.
+            glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleRenderData) + sizeof(glm::u8vec2)), nullptr, GL_STREAM_DRAW);
+
 
             // setup the instances (individual particles)
             for (auto instance = 0U; instance < instance_count; ++instance)
             {
                 const auto& p = particles[n + instance];
                 auto position = Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.position, p.end.position);
-                auto color = Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
+                auto color = 255.f * Tween<glm::vec3>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.color, p.end.color);
                 auto size = Tween<float>::easeOutQuad(p.life_time, 0, p.max_life_time, p.start.size, p.end.size);
 
+                glm::vec4 position_and_size(position, size);
                 auto base_vertex = vertices_per_instance * instance;
                 for (auto v = 0U; v < vertices_per_instance; ++v)
                 {
-                    particle_data[base_vertex + v].position = position;
+                    particle_data[base_vertex + v].position_and_size = position_and_size;
                     particle_data[base_vertex + v].color = color;
-                    particle_data[base_vertex + v].size = size;
                 }
             }
 
-            // Send instances to shader.
-            glBindBuffer(GL_ARRAY_BUFFER, vbos[vbo_index]);
-
-            glVertexAttribPointer(centers.get(), 3, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, position)));
-            glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), reinterpret_cast<const GLvoid*>(max_vertex_count * sizeof(ParticleData)));
-            glVertexAttribPointer(colors.get(), 3, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, color)));
-            glVertexAttribPointer(sizes.get(), 1, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid*>(offsetof(ParticleData, size)));
-
-            
-            glBufferSubData(GL_ARRAY_BUFFER, 0, instance_count * vertices_per_instance * sizeof(ParticleData), particle_data.data());
+            glBufferSubData(GL_ARRAY_BUFFER, 0, total_vertex_count * sizeof(ParticleRenderData), particle_data.data());
+            glBufferSubData(GL_ARRAY_BUFFER, texcoords_start_offset, total_vertex_count * sizeof(glm::u8vec2), texcoords_data.data());
             
             // Draw our instances
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_SHORT, nullptr);
 
             n += instance_count;
-
-            ++vbo_index; // Move on to next array buffer.
         }
     }
-
-    glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
 }
 
 void ParticleEngine::doSpawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time)

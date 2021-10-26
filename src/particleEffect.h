@@ -51,10 +51,9 @@ class ParticleEngine : public Updatable
 
     enum class Attributes : uint8_t
     {
-        Center = 0,
+        CenterAndSize = 0,
         TexCoords,
         Color,
-        Size,
 
         Count
     };
@@ -72,11 +71,20 @@ private:
 
     std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> uniforms;
     std::array<uint32_t, static_cast<size_t>(Attributes::Count)> attributes{};
-    gl::Buffers<1> ebo{ gl::Unitialized{} };
+    gl::Buffers<2> ebo_vbo{ gl::Unitialized{} };
 
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
-    std::vector<uint32_t> vbos;
+
+    struct ParticleRenderData
+    {
+        glm::vec4 position_and_size{};
+        glm::u8vec3 color{};
+        // Should be 1B padding.
+    };
+
+    std::vector<glm::u8vec2> texcoords_data;
+    std::vector<ParticleRenderData> particle_data;
     sp::Shader* shader = nullptr;
 };
 
