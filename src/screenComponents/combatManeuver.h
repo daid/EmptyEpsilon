@@ -11,6 +11,8 @@ class GuiCombatManeuver : public GuiElement
 private:
     GuiSnapSlider2D* slider;
     GuiProgressbar* charge_bar;
+    bool hotkey_strafe_active = false;
+    bool hotkey_boost_active = false;
 public:
     GuiCombatManeuver(GuiContainer* owner, string id);
 
