@@ -663,7 +663,7 @@ if(NOT DEFINED CPACK_GENERATOR)
     set(CPACK_GENERATOR "ZIP")
   elseif(UNIX)
     set(CPACK_GENERATOR "DEB")
-    set(CPACK_DEBIAN_PACKAGE_DEPENDS libfreetype6 libsdl2)
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libfreetype6, libsdl2-2.0-0")
   endif()
 endif()
 
