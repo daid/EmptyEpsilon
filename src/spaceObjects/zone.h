@@ -24,7 +24,7 @@ public:
 private:
     glm::u8vec4 color{255,255,255,255};
     std::vector<glm::vec2> outline;
-    std::vector<glm::vec2> triangles;
+    std::vector<uint16_t> triangles;
     string label;
 };
 

@@ -8,8 +8,9 @@ class Triangulate
 {
 public:
     typedef std::vector<glm::vec2> Path;
+    typedef std::vector<uint16_t> Indices;
 
-    static bool process(const Path& input, Path& output)
+    static bool process(const Path& input, Indices& output)
     {
         int n = input.size();
         if (n < 3)
@@ -50,9 +51,9 @@ public:
                 a = indexes[u]; b = indexes[v]; c = indexes[w];
 
                 /* output Triangle */
-                output.push_back(input[a]);
-                output.push_back(input[b]);
-                output.push_back(input[c]);
+                output.push_back(a);
+                output.push_back(b);
+                output.push_back(c);
 
                 m++;
 
