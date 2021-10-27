@@ -52,7 +52,7 @@ void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3
 ParticleEngine::ParticleEngine()
     :first_expired{ std::end(particles) }
 {
-    ebo_vbo = gl::Buffers<2>{};
+    buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
     // Cache shader info.
     shader = ShaderManager::getShader("shaders/particles");
 
@@ -90,7 +90,7 @@ ParticleEngine::ParticleEngine()
     }
 
     // Hand off to the GPU.
-    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, ebo_vbo[0]);
+    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint16_t), elements.data(), GL_STATIC_DRAW);
 }
 
@@ -112,8 +112,8 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
         gl::ScopedVertexAttribArray texcoords(attributes[as_index(Attributes::TexCoords)]);
         gl::ScopedVertexAttribArray colors(attributes[as_index(Attributes::Color)]);
 
-        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, ebo_vbo[0]);
-        gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, ebo_vbo[1]);
+        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
+        gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
 
         
         glVertexAttribPointer(centers_and_sizes.get(), 4, GL_FLOAT, GL_FALSE, sizeof(ParticleRenderData), reinterpret_cast<const GLvoid*>(offsetof(ParticleRenderData, position_and_size)));
@@ -128,10 +128,6 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
         {
             auto instance_count = std::min(live_particle_count - n, instances_per_draw);
             auto total_vertex_count = instance_count * vertices_per_instance; 
-
-            // Orphan+reacquire.
-            glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleRenderData) + sizeof(glm::u8vec2)), nullptr, GL_STREAM_DRAW);
-
 
             // setup the instances (individual particles)
             for (auto instance = 0U; instance < instance_count; ++instance)
@@ -150,6 +146,9 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
                 }
             }
 
+            // Orphan+reacquire.
+            // See https://www.khronos.org/opengl/wiki/Buffer_Object_Streaming#Buffer_re-specification for more details.
+            glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleRenderData) + sizeof(glm::u8vec2)), nullptr, GL_STREAM_DRAW);
             glBufferSubData(GL_ARRAY_BUFFER, 0, total_vertex_count * sizeof(ParticleRenderData), particle_data.data());
             glBufferSubData(GL_ARRAY_BUFFER, texcoords_start_offset, total_vertex_count * sizeof(glm::u8vec2), texcoords_data.data());
             

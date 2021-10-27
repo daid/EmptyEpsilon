@@ -71,7 +71,7 @@ private:
 
     std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> uniforms;
     std::array<uint32_t, static_cast<size_t>(Attributes::Count)> attributes{};
-    gl::Buffers<2> ebo_vbo{ gl::Unitialized{} };
+    gl::Buffers<static_cast<size_t>(Buffers::Count)> buffers{ gl::Unitialized{} };
 
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
