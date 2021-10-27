@@ -14,7 +14,7 @@ public:
     virtual bool canHideInNebula()  override { return false; }
 
     void setColor(int r, int g, int b);
-    void setPoints(std::vector<glm::vec2> points);
+    void setPoints(const std::vector<glm::vec2>& points);
     void setLabel(string label);
     string getLabel();
     bool isInside(P<SpaceObject> obj);
