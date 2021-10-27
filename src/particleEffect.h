@@ -52,8 +52,7 @@ class ParticleEngine : public Updatable
     enum class Attributes : uint8_t
     {
         CenterAndSize = 0,
-        TexCoords,
-        Color,
+        ColorAndTexCoords,
 
         Count
     };
@@ -78,12 +77,10 @@ private:
 
     struct ParticleRenderData
     {
-        glm::vec4 position_and_size{};
-        glm::u8vec3 color{};
-        // Should be 1B padding.
+        glm::vec4 position_and_size{};      // 4 * 4
+        glm::u8vec4 color_and_texcoords{};  // 1 * 4 = 20
     };
 
-    std::vector<glm::u8vec2> texcoords_data;
     std::vector<ParticleRenderData> particle_data;
     sp::Shader* shader = nullptr;
 };
