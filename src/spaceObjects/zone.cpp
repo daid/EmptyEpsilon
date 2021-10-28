@@ -71,20 +71,20 @@ void Zone::setColor(int r, int g, int b)
     color = glm::u8vec4(r, g, b, 255);
 }
 
-void Zone::setPoints(std::vector<glm::vec2> points)
+void Zone::setPoints(const std::vector<glm::vec2>& points)
 {
     triangles.clear();
+    outline = points;
 
-    glm::vec2 position = centerOfMass(points);
+    glm::vec2 position = centerOfMass(outline);
     float radius = 1;
-    for(auto& p : points)
+    for(auto& p : outline)
     {
         p -= position;
         radius = std::max(radius, glm::length(p));
     }
-
-    outline = points;
-    Triangulate::process(points, triangles);
+    
+    Triangulate::process(outline, triangles);
 
     setPosition(position);
     setRadius(radius);

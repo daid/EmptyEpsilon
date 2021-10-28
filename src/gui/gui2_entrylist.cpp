@@ -5,10 +5,11 @@ GuiEntryList::GuiEntryList(GuiContainer* owner, string id, func_t func)
 {
 }
 
-GuiEntryList* GuiEntryList::setOptions(std::vector<string> options)
+GuiEntryList* GuiEntryList::setOptions(const std::vector<string>& options)
 {
     entries.clear();
-    for(string option : options)
+    entries.reserve(options.size());
+    for(const auto& option : options)
     {
         entries.emplace_back(option, option);
     }
@@ -16,12 +17,13 @@ GuiEntryList* GuiEntryList::setOptions(std::vector<string> options)
     return this;
 }
 
-GuiEntryList* GuiEntryList::setOptions(std::vector<string> options, std::vector<string> values)
+GuiEntryList* GuiEntryList::setOptions(const std::vector<string>& options, const std::vector<string>& values)
 {
-    for(unsigned int n=0; n<options.size(); n++)
+    auto count = std::min(options.size(), values.size());
+    entries.reserve(entries.size() + count);
+    for(unsigned int n=0; n<count; n++)
     {
-        if (n < values.size())
-            entries.emplace_back(options[n], values[n]);
+        entries.emplace_back(options[n], values[n]);
     }
     entriesChanged();
     return this;

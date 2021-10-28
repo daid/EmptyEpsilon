@@ -327,7 +327,7 @@ void ShipTemplate::setCollisionData(P<SpaceObject> object)
     model_data->setCollisionData(object);
 }
 
-void ShipTemplate::setShields(std::vector<float> values)
+void ShipTemplate::setShields(const std::vector<float>& values)
 {
     shield_count = std::min(max_shield_count, int(values.size()));
     for(int n=0; n<shield_count; n++)
@@ -415,7 +415,7 @@ void ShipTemplate::setDefaultAI(string default_ai_name)
     this->default_ai_name = default_ai_name;
 }
 
-void ShipTemplate::setDockClasses(std::vector<string> classes)
+void ShipTemplate::setDockClasses(const std::vector<string>& classes)
 {
     can_be_docked_by_class = std::unordered_set<string>(classes.begin(), classes.end());
 }
