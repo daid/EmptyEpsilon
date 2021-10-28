@@ -30,7 +30,7 @@ class ParticleEngine : public Updatable
 
     static constexpr size_t vertices_per_instance = 4; // a quad...
     static constexpr size_t elements_per_instance = 6; // ... made of two triangles (ES2 has no support for GL_QUADS)
-    static constexpr size_t instances_per_draw = (std::numeric_limits<uint8_t>::max() + 1) / vertices_per_instance; // Number of particles that a single draw can handle.
+    static constexpr size_t instances_per_draw = (std::numeric_limits<uint16_t>::max() + 1) / vertices_per_instance; // Number of particles that a single draw can handle.
     static constexpr size_t max_vertex_count = instances_per_draw * vertices_per_instance; // Maximum number of vertices per draw call.
 
     enum class Uniforms : uint8_t
@@ -77,6 +77,7 @@ private:
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
     
+    std::vector<ParticleData> particles_renderdata;
     sp::Shader* shader = nullptr;
 };
 
