@@ -6,6 +6,8 @@
 #include "textureManager.h"
 #include "tween.h"
 
+#include <SDL_assert.h>
+
 #include <glm/gtx/norm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -64,12 +66,13 @@ ParticleEngine::ParticleEngine()
     attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
     attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
 
-    std::array<uint16_t, instances_per_draw * elements_per_instance> elements;
+    std::vector<uint16_t> elements(instances_per_draw * elements_per_instance);
 
-    std::array<glm::vec2, max_vertex_count> texcoords{};
+    std::vector<glm::vec2> texcoords(max_vertex_count);
+    particles_renderdata.resize(max_vertex_count);
 
     // Hitting this means needing to lower the number of instances / vertices per instance.
-    static_assert((texcoords.size() - 1) <= std::numeric_limits<uint16_t>::max(), "Too many elements! Indices overflow.");
+    SDL_assert((texcoords.size() - 1) <= std::numeric_limits<uint16_t>::max());
 
     for (auto quad = 0U; quad < instances_per_draw; ++quad)
     {
@@ -100,11 +103,10 @@ ParticleEngine::ParticleEngine()
     glBufferData(GL_ARRAY_BUFFER, max_vertex_count * (sizeof(ParticleData) + sizeof(glm::vec2)), nullptr, GL_DYNAMIC_DRAW);
     {
         // Ensure zero-initialization of the particle data.
-        std::array<ParticleData, max_vertex_count> particle_data{};
-        glBufferSubData(GL_ARRAY_BUFFER, 0, particle_data.size() * sizeof(ParticleData), particle_data.data());
+        glBufferSubData(GL_ARRAY_BUFFER, 0, particles_renderdata.size() * sizeof(ParticleData), particles_renderdata.data());
 
         // Upload texcoords once.
-        glBufferSubData(GL_ARRAY_BUFFER, particle_data.size() * sizeof(ParticleData), texcoords.size() * sizeof(glm::vec2), texcoords.data());
+        glBufferSubData(GL_ARRAY_BUFFER, particles_renderdata.size() * sizeof(ParticleData), texcoords.size() * sizeof(glm::vec2), texcoords.data());
     }
 }
 
@@ -122,14 +124,12 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
     glUniformMatrix4fv(uniforms[as_index(Uniforms::View)], 1, GL_FALSE, glm::value_ptr(view));
     
     {
-        std::vector<ParticleData> particle_data(max_vertex_count);
-
-        gl::ScopedVertexAttribArray centers(particleEngine->attributes[as_index(Attributes::Center)]);
-        gl::ScopedVertexAttribArray texcoords(particleEngine->attributes[as_index(Attributes::TexCoords)]);
-        gl::ScopedVertexAttribArray colors(particleEngine->attributes[as_index(Attributes::Color)]);
-        gl::ScopedVertexAttribArray sizes(particleEngine->attributes[as_index(Attributes::Size)]);
-        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, particleEngine->buffers[as_index(Buffers::Element)]);
-        gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, particleEngine->buffers[as_index(Buffers::Vertex)]);
+        gl::ScopedVertexAttribArray centers(attributes[as_index(Attributes::Center)]);
+        gl::ScopedVertexAttribArray texcoords(attributes[as_index(Attributes::TexCoords)]);
+        gl::ScopedVertexAttribArray colors(attributes[as_index(Attributes::Color)]);
+        gl::ScopedVertexAttribArray sizes(attributes[as_index(Attributes::Size)]);
+        gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
+        gl::ScopedBufferBinding vertex_buffer(GL_ARRAY_BUFFER, buffers[as_index(Buffers::Vertex)]);
 
         glVertexAttribPointer(centers.get(), 3, GL_FLOAT, GL_FALSE, sizeof(ParticleData), reinterpret_cast<const GLvoid *>(offsetof(ParticleData, position)));
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), reinterpret_cast<const GLvoid*>(max_vertex_count * sizeof(ParticleData)));
@@ -154,14 +154,14 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
                 auto base_vertex = vertices_per_instance * instance;
                 for (auto v = 0U; v < vertices_per_instance; ++v)
                 {
-                    particle_data[base_vertex + v].position = position;
-                    particle_data[base_vertex + v].color = color;
-                    particle_data[base_vertex + v].size = size;
+                    particles_renderdata[base_vertex + v].position = position;
+                    particles_renderdata[base_vertex + v].color = color;
+                    particles_renderdata[base_vertex + v].size = size;
                 }
             }
 
             // Send instances to shader.
-            glBufferSubData(GL_ARRAY_BUFFER, 0, instance_count * vertices_per_instance * sizeof(ParticleData), particle_data.data());
+            glBufferSubData(GL_ARRAY_BUFFER, 0, instance_count * vertices_per_instance * sizeof(ParticleData), particles_renderdata.data());
         
             // Draw our instances
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_SHORT, nullptr);
