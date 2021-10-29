@@ -9,9 +9,6 @@
 #include "soundManager.h"
 #include "textureManager.h"
 
-
-gl::Buffers<2> ElectricExplosionEffect::particlesBuffers(gl::Unitialized{});
-
 /// ElectricExplosionEffect is a visible electrical explosion, as seen from EMP missiles
 /// Example: ElectricExplosionEffect():setPosition(500,5000):setSize(20)
 REGISTER_SCRIPT_SUBCLASS(ElectricExplosionEffect, SpaceObject)
@@ -26,54 +23,17 @@ ElectricExplosionEffect::ElectricExplosionEffect()
 {
     has_weight = false;
     on_radar = false;
-    size = 1.0;
+    size = 1.f;
 
     setCollisionRadius(1.0);
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
-        particleDirections[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8, 1.2);
+        particleDirections[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8f, 1.2f);
 
     registerMemberReplication(&size);
     registerMemberReplication(&on_radar);
 
-    if (!particlesBuffers[0] && gl::isAvailable())
-    {
-        particlesBuffers = gl::Buffers<2>();
-
-        
-        // Each vertex is a position and a texcoords.
-        // The two arrays are maintained separately (texcoords are fixed, vertices position change).
-        constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2);
-        gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
-        gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
-
-        // VBO
-        glBufferData(GL_ARRAY_BUFFER, max_quad_count * 4 * vertex_size, nullptr, GL_DYNAMIC_DRAW);
-
-        // Create initial data.
-        std::array<uint16_t, 6 * max_quad_count> indices;
-        std::array<glm::vec2, 4 * max_quad_count> texcoords;
-        for (auto i = 0U; i < max_quad_count; ++i)
-        {
-            auto quad_offset = 4 * i;
-            texcoords[quad_offset + 0] = { 0.f, 1.f };
-            texcoords[quad_offset + 1] = { 1.f, 1.f };
-            texcoords[quad_offset + 2] = { 1.f, 0.f };
-            texcoords[quad_offset + 3] = { 0.f, 0.f };
-
-            indices[6 * i + 0] = quad_offset + 0;
-            indices[6 * i + 1] = quad_offset + 2;
-            indices[6 * i + 2] = quad_offset + 1;
-            indices[6 * i + 3] = quad_offset + 0;
-            indices[6 * i + 4] = quad_offset + 3;
-            indices[6 * i + 5] = quad_offset + 2;
-        }
-
-        // Update texcoords
-        glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(glm::vec3), texcoords.size() * sizeof(glm::vec2), texcoords.data());
-        // Upload indices
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
-    }
+    static_assert(4 * max_quad_count <= std::numeric_limits<uint16_t>::max(), "Quad count is too large, busts u16 indices size!");
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -85,13 +45,13 @@ void ElectricExplosionEffect::draw3DTransparent()
 {
     float f = (1.0f - (lifetime / maxLifetime));
     float scale;
-    float alpha = 0.5;
+    float alpha = 0.5f;
     if (f < 0.2f)
     {
         scale = (f / 0.2f) * 0.8f;
     }else{
-        scale = Tween<float>::easeOutQuad(f, 0.2, 1.0, 0.8f, 1.0f);
-        alpha = Tween<float>::easeInQuad(f, 0.2, 1.0, 0.5f, 0.0f);
+        scale = Tween<float>::easeOutQuad(f, 0.2f, 1.f, 0.8f, 1.0f);
+        alpha = Tween<float>::easeInQuad(f, 0.2f, 1.f, 0.5f, 0.0f);
     }
 
     auto model_matrix = getModelMatrix();
@@ -115,12 +75,12 @@ void ElectricExplosionEffect::draw3DTransparent()
         
     }
 
-    scale = Tween<float>::easeInCubic(f, 0.0, 1.0, 0.3f, 3.0f);
-    float r = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
-    float g = Tween<float>::easeOutQuad(f, 0.0, 1.0, 1.0f, 0.0f);
-    float b = Tween<float>::easeInQuad(f, 0.0, 1.0, 1.0f, 0.0f);
+    scale = Tween<float>::easeInCubic(f, 0.f, 1.f, 0.3f, 3.0f);
+    float r = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+    float g = Tween<float>::easeOutQuad(f, 0.f, 1.f, 1.0f, 0.0f);
+    float b = Tween<float>::easeInQuad(f, 0.f, 1.f, 1.0f, 0.0f);
 
-    std::array<glm::vec3, 4 * max_quad_count> vertices;
+    std::vector<glm::vec3> vertices(4 * max_quad_count);
 
     textureManager.getTexture("particle.png")->bind();
 
@@ -132,6 +92,9 @@ void ElectricExplosionEffect::draw3DTransparent()
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
 
     glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), r, g, b, size / 32.0f);
+
+    if (!particlesBuffers[0])
+        initializeParticles();
 
     gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
     gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
@@ -160,7 +123,7 @@ void ElectricExplosionEffect::draw3DTransparent()
         // upload
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(glm::vec3), vertices.data());
         
-        glDrawElements(GL_TRIANGLES, 6 * active_quads, GL_UNSIGNED_SHORT, nullptr);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(6 * active_quads), GL_UNSIGNED_SHORT, nullptr);
         n += active_quads;
     }
 }
@@ -182,4 +145,43 @@ void ElectricExplosionEffect::update(float delta)
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
+}
+
+void ElectricExplosionEffect::initializeParticles()
+{
+    particlesBuffers = gl::Buffers<2>();
+
+
+    // Each vertex is a position and a texcoords.
+    // The two arrays are maintained separately (texcoords are fixed, vertices position change).
+    constexpr size_t vertex_size = sizeof(glm::vec3) + sizeof(glm::vec2);
+    gl::ScopedBufferBinding vbo(GL_ARRAY_BUFFER, particlesBuffers[0]);
+    gl::ScopedBufferBinding ebo(GL_ELEMENT_ARRAY_BUFFER, particlesBuffers[1]);
+
+    // VBO
+    glBufferData(GL_ARRAY_BUFFER, max_quad_count * 4 * vertex_size, nullptr, GL_STREAM_DRAW);
+
+    // Create initial data.
+    std::vector<uint16_t> indices(6 * max_quad_count);
+    std::vector<glm::vec2> texcoords(4* max_quad_count);
+    for (auto i = 0U; i < max_quad_count; ++i)
+    {
+        auto quad_offset = 4 * i;
+        texcoords[quad_offset + 0] = { 0.f, 1.f };
+        texcoords[quad_offset + 1] = { 1.f, 1.f };
+        texcoords[quad_offset + 2] = { 1.f, 0.f };
+        texcoords[quad_offset + 3] = { 0.f, 0.f };
+
+        indices[6 * i + 0] = quad_offset + 0;
+        indices[6 * i + 1] = quad_offset + 2;
+        indices[6 * i + 2] = quad_offset + 1;
+        indices[6 * i + 3] = quad_offset + 0;
+        indices[6 * i + 4] = quad_offset + 3;
+        indices[6 * i + 5] = quad_offset + 2;
+    }
+
+    // Update texcoords
+    glBufferSubData(GL_ARRAY_BUFFER, max_quad_count * 4 * sizeof(glm::vec3), texcoords.size() * sizeof(glm::vec2), texcoords.data());
+    // Upload indices
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint16_t), indices.data(), GL_STATIC_DRAW);
 }

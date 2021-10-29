@@ -6,7 +6,7 @@
 
 class ElectricExplosionEffect : public SpaceObject, public Updatable
 {
-    constexpr static float maxLifetime = 4.0;
+    constexpr static float maxLifetime = 4.f;
     constexpr static int particleCount = 1000;
 
     float lifetime;
@@ -14,9 +14,8 @@ class ElectricExplosionEffect : public SpaceObject, public Updatable
     glm::vec3 particleDirections[particleCount];
     bool on_radar;
 
-    // Fit elements in a uint8 - at 4 vertices per quad, that's (256 / 4 =) 64 quads.
-    static constexpr size_t max_quad_count = 64;
-    static gl::Buffers<2> particlesBuffers;
+    static constexpr size_t max_quad_count = particleCount;
+    gl::Buffers<2> particlesBuffers{ gl::Unitialized{} };
 public:
     ElectricExplosionEffect();
     virtual ~ElectricExplosionEffect();
@@ -27,6 +26,8 @@ public:
 
     void setSize(float size) { this->size = size; }
     void setOnRadar(bool on_radar) { this->on_radar = on_radar; }
+private:
+    void initializeParticles();
 };
 
 #endif//ELECTRIC_EXPLOSION_EFFECT_H
