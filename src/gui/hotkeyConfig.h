@@ -44,6 +44,7 @@ public:
     //helms
     sp::io::Keybinding helms_increase_impulse;
     sp::io::Keybinding helms_decrease_impulse;
+    sp::io::Keybinding helms_set_impulse;
     sp::io::Keybinding helms_zero_impulse;
     sp::io::Keybinding helms_max_impulse;
     sp::io::Keybinding helms_min_impulse;

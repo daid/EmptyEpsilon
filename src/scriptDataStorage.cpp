@@ -1,6 +1,6 @@
 #include <unordered_map>
 #include "scriptInterface.h"
-#include <json11/json11.hpp>
+#include "io/json.h"
 
 
 class ScriptStorage : public PObject
@@ -27,11 +27,17 @@ public:
             fclose(f);
 
             std::string err;
-            json11::Json json = json11::Json::parse(s, err);
-            for(auto it : json.object_items())
+            if (auto parsed_json = sp::json::parse(s, err); parsed_json)
             {
-                data[it.first] = it.second.string_value();
+                auto json = parsed_json.value();
+                for (const auto& [key, value] : json.items())
+                {
+                    data[key] = value.get<std::string>();
+                }
             }
+            else
+                LOG(WARNING, "Unable to parse ", scriptstorage_path, ": ", err);
+            
         }
     }
 
@@ -47,8 +53,7 @@ public:
 
         if (f)
         {
-            json11::Json json{data};
-            auto s = json.dump();
+            auto s = nlohmann::json(data).dump();
             fwrite(s.data(), s.size(), 1, f);
             fclose(f);
         }

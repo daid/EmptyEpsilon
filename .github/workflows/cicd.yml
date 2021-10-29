@@ -3,7 +3,7 @@ name: CI/CD
 on:
   push:
     branches:
-      - SDL2
+      - master
   pull_request:
 jobs:
   linux:
@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Update apt index
       run: sudo apt-get update -qq
-    - name: Install SFML
+    - name: Install SDL2
       run: sudo apt-get install libsdl2-dev
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
-          ref: SDL2  
+          ref: master
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -53,7 +53,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
-          ref: SDL2 
+          ref: master
       - name: EmptyEpsilon Checkout
         uses: actions/checkout@v2
         with:
@@ -111,7 +111,7 @@ jobs:
         with:
           repository: daid/SeriousProton
           path: SeriousProton
-          ref: SDL2
+          ref: master
       - name: Create Build Environment
         run: cmake -E make_directory ${{github.workspace}}/build
       - name: Configure CMake
@@ -130,7 +130,7 @@ jobs:
     steps:
     - name: Update apt index
       run: sudo apt-get update -qq
-    - name: Install SFML
+    - name: Install dependencies
       run: sudo apt-get install lua5.3
     - name: Checkout EmptyEpsilon
       uses: actions/checkout@v2

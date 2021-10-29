@@ -28,7 +28,7 @@ const vec4 light0_position = vec4(20000., 20000., 20000., 1.0);
 const vec4 light1_position = vec4(0., 0., 0., 1.);
 
 // Program inputs
-uniform vec3 ambientLightDirection;
+uniform vec3 specularLightDirection;
 uniform sampler2D baseMap;
 uniform vec4 color;
 uniform vec4 atmosphereColor;
@@ -39,7 +39,7 @@ varying vec2 fragtexcoords;
 
 void main()
 {
-	float intensity = max(0.0, dot(ambientLightDirection, fragnormal));
+	float intensity = max(0.0, dot(specularLightDirection, fragnormal));
 	
 	vec3 base = texture2D(baseMap, fragtexcoords.st).rgb;
 	

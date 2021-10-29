@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"X-Generator: Poedit 2.3\n"
+
+# Scenario name
+msgid "Quick Basic"
+msgstr "Schnelles Basic-Szenario"
+
+# Scenario description
+msgid ""
+"Different version of the Basic scenario intended to play out quicker. There "
+"is only a single small station to defend.This scenario is designed to be ran "
+"at conventions, since you can run a 4-player crew with minimal experience "
+"through a game in 20 minutes.This scenario is designed for the provided "
+"player Phobos-type ship (or an Atlantis in the Advanced variant)."
+msgstr ""
+"Eine andere Version des Basic-Szenarios, die schneller ablaufen soll. Dieses "
+"Szenario ist für den Einsatz auf Conventions gedacht, da Sie hier eine 4-"
+"köpfige Crew mit minimaler Erfahrung innerhalb von 20 Minuten durch ein "
+"Spiel führen können. Dieses Szenario ist ausgelegt für ein Schiff vom Typ "
+"Phobos (oder ein Schiff vom Atlantis-Typ in der Fortgeschrittenen-Variante)."
+
+#: scripts/scenario_01_quick_basic.lua:333
+#, lua-format
+msgid ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Please inform your Captain and crew that you have a total of %d minutes for "
+"this mission.\n"
+"\n"
+"The mission started at the arrival of this message.\n"
+"\n"
+"Good luck."
+msgstr ""
+"%s, Ihr Ziel ist es, den bevorstehenden  Kraylor-Angriff abzuwehren.\n"
+"\n"
+"Bitte teilen Sie Captain und Crew mit, dass Sie insgesamt %d Minuten für "
+"diese Mission haben.\n"
+"\n"
+"Die Mission beginnt mit dem Erhalt dieser Botschaft.\n"
+"\n"
+"Viel Glück."
+
+#: scripts/scenario_01_quick_basic.lua:346
+msgid "green"
+msgstr "Grün"
+
+#: scripts/scenario_01_quick_basic.lua:349
+msgid "yellow"
+msgstr "Gelb"
+
+#: scripts/scenario_01_quick_basic.lua:353
+msgid "red"
+msgstr "Rot"
+
+#: scripts/scenario_01_quick_basic.lua:365
+msgid "Mission: FAILED (ship lost before mission started)"
+msgstr "Mission: GESCHEITERT (Schiff vor Start der Mission verloren)"
+
+#: scripts/scenario_01_quick_basic.lua:370
+msgid "Mission: PREPARING"
+msgstr "Mission: VORBEREITUNG"
+
+#: scripts/scenario_01_quick_basic.lua:380
+msgid "Mission: FAILED (time has run out)"
+msgstr "Mission: GESCHEITERT (Die Zeit ist abgelaufen)"
+
+#: scripts/scenario_01_quick_basic.lua:387
+#, lua-format
+msgid "%s, you have %d minute remaining."
+msgstr "%s, Sie haben noch %d Minuten verbleibende Zeit."
+
+#: scripts/scenario_01_quick_basic.lua:390
+#, lua-format
+msgid "%s, you have %d minutes remaining."
+msgstr "%s, Sie haben noch %d Minuten verbleibende Zeit."
+
+#: scripts/scenario_01_quick_basic.lua:393
+#, lua-format
+msgid "%s, you have %d minutes remaining of mission time."
+msgstr "%s, Sie haben noch %d Minuten verbleibende Missionszeit."
+
+#: scripts/scenario_01_quick_basic.lua:416
+#, lua-format
+msgid "Mission: SUCCESS (%d seconds left)"
+msgstr "Mission: ERFOLGREICH (%d Sekunden noch verfügbar)"
+
+#: scripts/scenario_01_quick_basic.lua:425
+msgid "Mission: FAILED (all your ships destroyed)"
+msgstr "Mission: GESCHEITERT (alle Ihre Schiffe wurden zerstört)"
+
+#: scripts/scenario_01_quick_basic.lua:434
+msgid "Mission: FAILED (no friendlies left)"
+msgstr "Mission: GESCHEITERT (keine freundlichen Einheiten mehr im Spiel)"
+
+#: scripts/scenario_01_quick_basic.lua:450
+#, lua-format
+msgid "Mission in progress - Time left: %d:%02d - Enemies: %d - Condition: %s"
+msgstr ""
+"Mission in Arbeit - Verbleibende Zeit: %d:%02d - Feinde: %d - Zustand: %s"

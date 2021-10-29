@@ -76,8 +76,8 @@ public:
     float getShieldLevel(int index) { if (index < 0 || index >= shield_count) return 0; return shield_level[index]; }
     float getShieldMax(int index) { if (index < 0 || index >= shield_count) return 0; return shield_max[index]; }
     int getShieldCount() { return shield_count; }
-    void setShields(std::vector<float> amounts);
-    void setShieldsMax(std::vector<float> amounts);
+    void setShields(const std::vector<float>& amounts);
+    void setShieldsMax(const std::vector<float>& amounts);
 
     int getShieldPercentage(int index) { if (index < 0 || index >= shield_count || shield_max[index] <= 0.0f) return 0; return int(100 * shield_level[index] / shield_max[index]); }
     ESystem getShieldSystemForShieldIndex(int index);
