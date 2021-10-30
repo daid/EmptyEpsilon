@@ -67,6 +67,7 @@ private:
     ParticleEngine();
     void doRender(const glm::mat4& projection, const glm::mat4& view);
     void doSpawn(glm::vec3 position, glm::vec3 end_position, glm::vec3 color, glm::vec3 end_color, float size, float end_size, float life_time);
+    void initialize();
 
     std::array<uint32_t, static_cast<size_t>(Uniforms::Count)> uniforms;
     std::array<uint32_t, static_cast<size_t>(Attributes::Count)> attributes{};
@@ -81,7 +82,7 @@ private:
         glm::u8vec4 color_and_texcoords{};  // 1 * 4 = 20
     };
 
-    std::vector<ParticleRenderData> particle_data;
+    std::vector<ParticleRenderData> particle_renderdata;
     sp::Shader* shader = nullptr;
 };
 

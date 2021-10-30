@@ -52,41 +52,13 @@ void ParticleEngine::spawn(glm::vec3 position, glm::vec3 end_position, glm::vec3
 ParticleEngine::ParticleEngine()
     :first_expired{ std::end(particles) }
 {
-    buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
-    // Cache shader info.
-    shader = ShaderManager::getShader("shaders/particles");
-
-    shader->bind();
-
-    uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
-    uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("view");
-
-    attributes[as_index(Attributes::CenterAndSize)] = shader->getAttributeLocation("center_and_size");
-    attributes[as_index(Attributes::ColorAndTexCoords)] = shader->getAttributeLocation("color_and_texcoords");
-
-    std::vector<uint16_t> elements(instances_per_draw * elements_per_instance);
-    particle_data.resize(max_vertex_count);
-    for (auto quad = 0U; quad < instances_per_draw; ++quad)
-    {
-        auto base_vertex = static_cast<uint16_t>(vertices_per_instance * quad);
-        auto base_element = elements_per_instance * quad;
-
-        // Each quad is two triangles
-        elements[base_element + 0] = base_vertex + 0;
-        elements[base_element + 1] = base_vertex + 3;
-        elements[base_element + 2] = base_vertex + 2;
-        elements[base_element + 3] = base_vertex + 0;
-        elements[base_element + 4] = base_vertex + 2;
-        elements[base_element + 5] = base_vertex + 1;
-    }
-
-    // Hand off to the GPU.
-    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint16_t), elements.data(), GL_STATIC_DRAW);
 }
 
 void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view)
 {
+    if (!buffers[0])
+        initialize();
+
     shader->bind();
 
     // Setup shared state:
@@ -131,15 +103,14 @@ void ParticleEngine::doRender(const glm::mat4& projection, const glm::mat4& view
                 auto base_vertex = vertices_per_instance * instance;
                 for (auto v = 0U; v < vertices_per_instance; ++v)
                 {
-                    particle_data[base_vertex + v].position_and_size = position_and_size;
-                    particle_data[base_vertex + v].color_and_texcoords = glm::u8vec4(color, 255.f * texcoords_mapping[v]);
+                    particle_renderdata[base_vertex + v].position_and_size = position_and_size;
+                    particle_renderdata[base_vertex + v].color_and_texcoords = glm::u8vec4(color, 255.f * texcoords_mapping[v]);
                 }
             }
 
             // Orphan+reacquire.
             // See https://www.khronos.org/opengl/wiki/Buffer_Object_Streaming#Buffer_re-specification for more details.
-            glBufferData(GL_ARRAY_BUFFER, total_vertex_count * sizeof(ParticleRenderData), particle_data.data(), GL_STREAM_DRAW);
-            //glBufferSubData(GL_ARRAY_BUFFER, 0, total_vertex_count * sizeof(ParticleRenderData), particle_data.data());
+            glBufferData(GL_ARRAY_BUFFER, total_vertex_count * sizeof(ParticleRenderData), particle_renderdata.data(), GL_STREAM_DRAW);
             
             // Draw our instances
             glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(elements_per_instance * instance_count), GL_UNSIGNED_SHORT, nullptr);
@@ -170,4 +141,42 @@ void ParticleEngine::doSpawn(glm::vec3 position, glm::vec3 end_position, glm::ve
     first_expired->max_life_time = life_time;
 
     ++first_expired;
+}
+
+void ParticleEngine::initialize()
+{
+    buffers = gl::Buffers<static_cast<size_t>(Buffers::Count)>{};
+    // Cache shader info.
+    shader = ShaderManager::getShader("shaders/particles");
+
+    shader->bind();
+
+    uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
+    uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("view");
+
+    attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
+    attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
+    attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
+    attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
+
+    std::vector<uint16_t> elements(instances_per_draw * elements_per_instance);
+    particles_renderdata.resize(max_vertex_count);
+
+    for (auto quad = 0U; quad < instances_per_draw; ++quad)
+    {
+        auto base_vertex = static_cast<uint16_t>(vertices_per_instance * quad);
+        auto base_element = elements_per_instance * quad;
+
+        // Each quad is two triangles
+        elements[base_element + 0] = base_vertex + 0;
+        elements[base_element + 1] = base_vertex + 3;
+        elements[base_element + 2] = base_vertex + 2;
+        elements[base_element + 3] = base_vertex + 0;
+        elements[base_element + 4] = base_vertex + 2;
+        elements[base_element + 5] = base_vertex + 1;
+    }
+
+    // Hand off to the GPU.
+    gl::ScopedBufferBinding element_buffer(GL_ELEMENT_ARRAY_BUFFER, buffers[as_index(Buffers::Element)]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(uint16_t), elements.data(), GL_STATIC_DRAW);
 }

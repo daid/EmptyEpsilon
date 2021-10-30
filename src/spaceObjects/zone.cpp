@@ -41,13 +41,11 @@ void Zone::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float sca
 {
     if (!long_range || color.a == 0 || !outline.size())
         return;
-    std::vector<glm::vec2> triangle_points;
-    for(auto p : triangles)
-        triangle_points.push_back(position + rotateVec2(p * scale, -rotation));
-    renderer.drawTriangleStrip(triangle_points, glm::u8vec4(color.r, color.g, color.b, 64));
     std::vector<glm::vec2> outline_points;
     for(auto p : outline)
         outline_points.push_back(position + rotateVec2(p * scale, -rotation));
+    renderer.drawTriangles(outline_points, triangles, glm::u8vec4(color.r, color.g, color.b, 64));
+    
     outline_points.push_back(position + rotateVec2(outline[0] * scale, -rotation));
     renderer.drawLine(outline_points, glm::u8vec4(color.r, color.g, color.b, 128));
 
@@ -73,20 +71,20 @@ void Zone::setColor(int r, int g, int b)
     color = glm::u8vec4(r, g, b, 255);
 }
 
-void Zone::setPoints(std::vector<glm::vec2> points)
+void Zone::setPoints(const std::vector<glm::vec2>& points)
 {
     triangles.clear();
+    outline = points;
 
-    glm::vec2 position = centerOfMass(points);
+    glm::vec2 position = centerOfMass(outline);
     float radius = 1;
-    for(auto& p : points)
+    for(auto& p : outline)
     {
         p -= position;
         radius = std::max(radius, glm::length(p));
     }
-
-    outline = points;
-    Triangulate::process(points, triangles);
+    
+    Triangulate::process(outline, triangles);
 
     setPosition(position);
     setRadius(radius);

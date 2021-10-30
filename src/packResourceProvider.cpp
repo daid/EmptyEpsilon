@@ -84,19 +84,19 @@ void PackResourceProvider::addPackResourcesForDirectory(const string directory)
 {
 #if !defined(ANDROID)
     namespace fs = std::filesystem;
-    fs::path root{ directory.c_str() };
-    if (fs::is_directory(root))
+    const fs::path root{ directory.data() };
+
+    constexpr auto traversal_options{ fs::directory_options::follow_directory_symlink | fs::directory_options::skip_permission_denied };
+    std::error_code error_code{};
+    for (const auto& entry : fs::directory_iterator(root, traversal_options, error_code))
     {
-        constexpr auto traversal_options{ fs::directory_options::follow_directory_symlink | fs::directory_options::skip_permission_denied };
-        std::error_code error_code{};
-        for (const auto& entry : fs::directory_iterator(root, traversal_options, error_code))
+        if (!error_code)
         {
-            if (!error_code)
-            {
-                if (!entry.is_directory() && string{ entry.path().extension().u8string() }.lower() == ".pack")
-                    new PackResourceProvider(entry.path().u8string());
-            }
+            if (!entry.is_directory() && string { entry.path().extension().u8string() }.lower() == ".pack")
+                new PackResourceProvider(entry.path().u8string());
         }
+        else
+            LOG(WARNING, entry.path().u8string(), " encountered an error: ", error_code.message());
     }
 #else
     //Limitation : 

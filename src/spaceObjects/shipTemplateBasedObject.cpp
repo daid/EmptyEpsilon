@@ -388,7 +388,7 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     applyTemplateValues();
 }
 
-void ShipTemplateBasedObject::setShields(std::vector<float> amounts)
+void ShipTemplateBasedObject::setShields(const std::vector<float>& amounts)
 {
     for(int n=0; n<std::min(int(amounts.size()), shield_count); n++)
     {
@@ -396,7 +396,7 @@ void ShipTemplateBasedObject::setShields(std::vector<float> amounts)
     }
 }
 
-void ShipTemplateBasedObject::setShieldsMax(std::vector<float> amounts)
+void ShipTemplateBasedObject::setShieldsMax(const std::vector<float>& amounts)
 {
     shield_count = std::min(max_shield_count, int(amounts.size()));
     for(int n=0; n<shield_count; n++)
