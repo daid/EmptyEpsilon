@@ -5923,38 +5923,38 @@ function handleDockedState()
 	end
 end
 function homeStationEasyDelivery()
-	addCommsReply(string.format(_("commsUpgrade", "Provide %s as requested"),easyDeliverGood), function()
+	addCommsReply(string.format(_("commsTrade", "Provide %s as requested"),easyDeliverGood), function()
 		comms_source.goods[easyDeliverGood] = comms_source.goods[easyDeliverGood] - 1
 		comms_source.cargo = comms_source.cargo + 1
 		comms_source:addReputationPoints(30)
-		setCommsMessage(_("commsUpgrade", "Thanks, we really needed that.\n\nI have some information for you. Decide which one you want"))
-		addCommsReply(_("commsUpgrade", "Ship maneuver upgrade"), function()
+		setCommsMessage(_("commsTrade", "Thanks, we really needed that.\n\nI have some information for you. Decide which one you want"))
+		addCommsReply(_("commsTrade", "Ship maneuver upgrade"), function()
 			plot2 = spinUpgradeStart
-			setCommsMessage(_("commsUpgrade", "Check back shortly and I'll tell you all about it"))
+			setCommsMessage(_("commsTrade", "Check back shortly and I'll tell you all about it"))
 		end)
-		addCommsReply("Intelligence", function()
+		addCommsReply(_("commsIntelligence", "Intelligence"), function()
 			plot2 = enemyBaseInfoStart
-			setCommsMessage(_("commsUpgrade", "Check back shortly and I'll tell you all about it"))
+			setCommsMessage(_("commsTrade", "Check back shortly and I'll tell you all about it"))
 		end)
 	end)
 end
 function homeStationRandomDelivery()
-	addCommsReply(string.format(_("commsUpgrade", "Give %s as requested"),randomDeliverGood), function()
+	addCommsReply(string.format(_("commsTrade", "Give %s as requested"),randomDeliverGood), function()
 		comms_source.goods[randomDeliverGood] = comms_source.goods[randomDeliverGood] - 1
 		comms_source.cargo = comms_source.cargo + 1
 		comms_source:addReputationPoints(35)
-		setCommsMessage(string.format(_("commsUpgrade", "Thanks, we needed that %s.\n\nI have information for you. Decide which one you want"),randomDeliverGood))
-		addCommsReply(string.format(_("commsUpgrade", "Upgrade %s to auto-rotate"),homeStation:getCallSign()), function()
+		setCommsMessage(string.format(_("commsTrade", "Thanks, we needed that %s.\n\nI have information for you. Decide which one you want"),randomDeliverGood))
+		addCommsReply(string.format(_("commsTrade", "Upgrade %s to auto-rotate"),homeStation:getCallSign()), function()
 			plot4 = rotateUpgradeStart
-			setCommsMessage(_("commsUpgrade", "Check back in a bit and I'll tell you all about it"))
+			setCommsMessage(_("commsTrade", "Check back in a bit and I'll tell you all about it"))
 		end)
-		addCommsReply(_("commsUpgrade", "Upgrade beam weapon cycle time"), function()
+		addCommsReply(_("commsTrade", "Upgrade beam weapon cycle time"), function()
 			plot4 = beamTimeUpgradeStart
-			setCommsMessage(_("commsUpgrade", "Check back in a bit and I'll tell you all about it"))
+			setCommsMessage(_("commsTrade", "Check back in a bit and I'll tell you all about it"))
 		end)
-		addCommsReply(_("commsUpgrade", "Upgrade hull damage capacity"), function()
+		addCommsReply(_("commsTrade", "Upgrade hull damage capacity"), function()
 			plot4 = hullUpgradeStart
-			setCommsMessage(_("commsUpgrade", "Check back in a bit and I'll tell you all about it"))
+			setCommsMessage(_("commsTrade", "Check back in a bit and I'll tell you all about it"))
 		end)
 	end)
 end
@@ -5991,12 +5991,12 @@ function homeStationBeamTimeUpgrade()
 			if beamTimeReveal < 2 then beamTimeReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(string.format("Can you direct me to a station with %s?",beamTimeGood), function()
-			setCommsMessage(string.format("%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted",beamTimeGoodBase:getCallSign(),beamTimeGood))
+		addCommsReply(string.format(_("commsUpgrade", "Can you direct me to a station with %s?"),beamTimeGood), function()
+			setCommsMessage(string.format(_("commsUpgrade", "%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted"),beamTimeGoodBase:getCallSign(),beamTimeGood))
 			if beamTimeReveal < 3 then beamTimeReveal = 3 end
 			if difficulty < 2 then
-				addCommsReply(string.format("Sounds tasty. Where is %s?",beamTimeGoodBase:getCallSign()), function()
-					setCommsMessage(string.format("It's in %s",beamTimeGoodBase:getSectorName()))
+				addCommsReply(string.format(_("commsUpgrade", "Sounds tasty. Where is %s?"),beamTimeGoodBase:getCallSign()), function()
+					setCommsMessage(string.format(_("commsUpgrade", "It's in %s"),beamTimeGoodBase:getSectorName()))
 					if beamTimeReveal < 4 then beamTimeReveal = 4 end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6007,21 +6007,21 @@ function homeStationBeamTimeUpgrade()
 	end)
 end
 function homeStationRotateUpgrade()
-	addCommsReply("Where's that station rotation upgrade information?", function()
-		setCommsMessage(string.format("station %s has the technical knowledge but lacks the %s",rotateBase:getCallSign(),rotateGood))
+	addCommsReply(_("commsUpgrade", "Where's that station rotation upgrade information?"), function()
+		setCommsMessage(string.format(_("commsUpgrade", "station %s has the technical knowledge but lacks the %s"),rotateBase:getCallSign(),rotateGood))
 		if rotateReveal < 1 then rotateReveal = 1 end
-		addCommsReply(string.format("Where is station %s?",rotateBase:getCallSign()), function()
-			setCommsMessage(string.format("%s is in %s",rotateBase:getCallSign(),rotateBase:getSectorName()))
+		addCommsReply(string.format(_("commsUpgrade", "Where is station %s?"),rotateBase:getCallSign()), function()
+			setCommsMessage(string.format(_("commsUpgrade", "%s is in %s"),rotateBase:getCallSign(),rotateBase:getSectorName()))
 			if rotateReveal < 2 then rotateReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if difficulty < 2 then
-			addCommsReply(string.format("Where could I get %s?",rotateGood), function()
-				setCommsMessage(string.format("%s should have %s",rotateGoodBase:getCallSign(),rotateGood))
+			addCommsReply(string.format(_("commsUpgrade", "Where could I get %s?"),rotateGood), function()
+				setCommsMessage(string.format(_("commsUpgrade", "%s should have %s"),rotateGoodBase:getCallSign(),rotateGood))
 				if rotateReveal < 3 then rotateReveal = 3 end
 				if difficulty < 1 then
-					addCommsReply(string.format("Do you know where %s is located?",rotateGoodBase:getCallSign()), function()
-						setCommsMessage(string.format("Yes, it's in %s",rotateGoodBase:getSectorName()))
+					addCommsReply(string.format(_("commsUpgrade", "Do you know where %s is located?"),rotateGoodBase:getCallSign()), function()
+						setCommsMessage(string.format(_("commsUpgrade", "Yes, it's in %s"),rotateGoodBase:getSectorName()))
 						if rotateReveal < 4 then rotateReveal = 4 end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -6033,27 +6033,27 @@ function homeStationRotateUpgrade()
 	end)
 end
 function homeStationBaseIntelligence()
-	addCommsReply("What about that intelligence information you promised?", function()
-		setCommsMessage(string.format("I hear Marcy Sorenson just got back from an enemy scouting expedition. She was talking about enemy bases. She can probably tell you where some of these bases are located. She's based on %s",baseInt1:getCallSign()))
-		plot2reminder = string.format("Talk with Marcy Sorenson on %s",baseInt1:getCallSign())
+	addCommsReply(_("commsIntelligence", "What about that intelligence information you promised?"), function()
+		setCommsMessage(string.format(_("commsIntelligence", "I hear Marcy Sorenson just got back from an enemy scouting expedition. She was talking about enemy bases. She can probably tell you where some of these bases are located. She's based on %s"),baseInt1:getCallSign()))
+		plot2reminder = string.format(_("commsIntelligence", "Talk with Marcy Sorenson on %s"),baseInt1:getCallSign())
 		addCommsReply(_("Back"), commsStation)
 	end)
 end
 function homeStationHullUpgrade()
-	addCommsReply("Remember, you promised some ship hull upgrade information?", function()
-		setCommsMessage(string.format("Oh yes, %s can upgrade your hull, but they want %s to do the job",hullBase:getCallSign(),hullGood))
+	addCommsReply(_("commsUpgrade", "Remember, you promised some ship hull upgrade information?"), function()
+		setCommsMessage(string.format(_("commsUpgrade", "Oh yes, %s can upgrade your hull, but they want %s to do the job"),hullBase:getCallSign(),hullGood))
 		if hullReveal < 1 then hullReveal = 1 end
-		addCommsReply(string.format("So, where is %s?",hullBase:getCallSign()), function()
-			setCommsMessage(string.format("%s is in sector %s",hullBase:getCallSign(),hullBase:getSectorName()))
+		addCommsReply(string.format(_("commsUpgrade", "So, where is %s?"),hullBase:getCallSign()), function()
+			setCommsMessage(string.format(_("commsUpgrade", "%s is in sector %s"),hullBase:getCallSign(),hullBase:getSectorName()))
 			if hullReveal < 2 then hullReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(string.format("Where could I find some %s?",hullGood), function()
-			setCommsMessage(string.format("I think %s may have some",hullGoodBase:getCallSign()))
+		addCommsReply(string.format(_("commsUpgrade", "Where could I find some %s?"),hullGood), function()
+			setCommsMessage(string.format(_("commsUpgrade", "I think %s may have some"),hullGoodBase:getCallSign()))
 			if hullReveal < 3 then hullReveal = 3 end
 			if difficulty < 2 then
-				addCommsReply(string.format("And just where is %s?",hullGoodBase:getCallSign()), function()
-					setCommsMessage(string.format("If you must know, %s is in sector %s",hullGoodBase:getCallSign(),hullGoodBase:getSectorName()))
+				addCommsReply(string.format(_("commsUpgrade", "And just where is %s?"),hullGoodBase:getCallSign()), function()
+					setCommsMessage(string.format(_("commsUpgrade", "If you must know, %s is in sector %s"),hullGoodBase:getCallSign(),hullGoodBase:getSectorName()))
 					if hullReveal < 4 then hullReveal = 4 end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6066,7 +6066,7 @@ end
 function spinStation()
 	if spinUpgradeAvailable then
 		if not comms_source.spinUpgrade then
-			addCommsReply("Upgrade maneuverability", function()
+			addCommsReply(_("commsUpgrade", "Upgrade maneuverability"), function()
 				local spinUpgradePartQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[spinGood] ~= nil and comms_source.goods[spinGood] > 0 then
 					spinUpgradePartQuantity = comms_source.goods[spinGood]
@@ -6076,9 +6076,9 @@ function spinStation()
 					comms_source.goods[spinGood] = comms_source.goods[spinGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*1.5)
-					setCommsMessage("Upgraded maneuverability")
+					setCommsMessage(_("commsUpgrade", "Upgraded maneuverability"))
 				else
-					setCommsMessage(string.format("You need to bring some %s for the upgrade",spinGood))
+					setCommsMessage(string.format(_("commsUpgrade", "You need to bring some %s for the upgrade"),spinGood))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -6088,9 +6088,9 @@ end
 function beamTimeStation()
 	if beamTimeUpgradeAvailable then
 		if not comms_source.beamTimeUpgrade then
-			addCommsReply("Upgrade beam cycle time", function()
+			addCommsReply(_("commsUpgrade", "Upgrade beam cycle time"), function()
 				if comms_source:getBeamWeaponRange(0) < 1 then
-					setCommsMessage("Your ship type does not support a beam weapon upgrade.")
+					setCommsMessage(_("commsUpgrade", "Your ship type does not support a beam weapon upgrade."))
 				else
 					local beamTimeUpgradePartQuantity = 0
 					if comms_source.goods ~= nil and comms_source.goods[beamTimeGood] ~= nil and comms_source.goods[beamTimeGood] > 0 then
@@ -6110,9 +6110,9 @@ function beamTimeStation()
 							comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc * .8,tempDmg)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage("Beam cycle time reduced by 20%")
+						setCommsMessage(_("commsUpgrade", "Beam cycle time reduced by 20%"))
 					else
-						setCommsMessage(string.format("We require %s before we can upgrade your beam weapons",beamTimeGood))
+						setCommsMessage(string.format(_("commsUpgrade", "We require %s before we can upgrade your beam weapons"),beamTimeGood))
 					end
 				end
 			end)
@@ -6122,7 +6122,7 @@ end
 function rotateStation()
 	if rotateUpgradeAvailable then
 		if not homeStationRotationEnabled then
-			addCommsReply(string.format("Upgrade %s to auto-rotate",homeStation:getCallSign()), function()
+			addCommsReply(string.format(_("commsUpgrade", "Upgrade %s to auto-rotate"),homeStation:getCallSign()), function()
 				local rotateUpgradePartQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[rotateGood] ~= nil and comms_source.goods[rotateGood] > 0 then
 					rotateUpgradePartQuantity = comms_source.goods[rotateGood]
@@ -6131,10 +6131,10 @@ function rotateStation()
 					homeStationRotationEnabled = true
 					comms_source.goods[rotateGood] = comms_source.goods[rotateGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
-					setCommsMessage(string.format("%s was just what we needed. The technical details have been transmitted to %s. The auto-rotation has begun",rotateGood,homeStation:getCallSign()))
+					setCommsMessage(string.format(_("commsUpgrade", "%s was just what we needed. The technical details have been transmitted to %s. The auto-rotation has begun"),rotateGood,homeStation:getCallSign()))
 					plot4reminder = nil
 				else
-					setCommsMessage(string.format("You need to bring some %s for the upgrade",rotateGood))
+					setCommsMessage(string.format(_("commsUpgrade", "You need to bring some %s for the upgrade"),rotateGood))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -6142,20 +6142,20 @@ function rotateStation()
 	end
 end
 function intelligenceStation()
-	addCommsReply("May I speak with Marcy Sorenson?", function()
+	addCommsReply(_("commsIntelligence", "May I speak with Marcy Sorenson?"), function()
 		baseInt1Visit = true
 		if baseInt2 ~= nil then
-			setCommsMessage(string.format("She transferred to %s",baseInt2:getCallSign()))
-			plot2reminder = string.format("Talk with Marcy Sorenson on %s",baseInt2:getCallSign())
-			addCommsReply(string.format("Where exactly is %s?",baseInt2:getCallSign()), function()
-				setCommsMessage(string.format("%s is in %s",baseInt2:getCallSign(),baseInt2:getSectorName()))
-				plot2reminder = string.format("Talk with Marcy Sorenson on %s in %s",baseInt2:getCallSign(),baseInt2:getSectorName())
+			setCommsMessage(string.format(_("commsIntelligence", "She transferred to %s"),baseInt2:getCallSign()))
+			plot2reminder = string.format(_("commsIntelligence", "Talk with Marcy Sorenson on %s"),baseInt2:getCallSign())
+			addCommsReply(string.format(_("commsIntelligence", "Where exactly is %s?"),baseInt2:getCallSign()), function()
+				setCommsMessage(string.format(_("commsIntelligence", "%s is in %s"),baseInt2:getCallSign(),baseInt2:getSectorName()))
+				plot2reminder = string.format(_("commsIntelligence", "Talk with Marcy Sorenson on %s in %s"),baseInt2:getCallSign(),baseInt2:getSectorName())
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)
 		else
-			setCommsMessage("This is Marcy. Whatcha want?")
-			addCommsReply("Please tell me about the enemy bases found", function()
+			setCommsMessage(_("commsIntelligence", "This is Marcy. Whatcha want?"))
+			addCommsReply(_("commsIntelligence", "Please tell me about the enemy bases found"), function()
 				for i=1,#enemyStationList do
 					if enemyStationList[i]:isValid() then
 						if enemyInt1 == nil then
@@ -6166,8 +6166,8 @@ function intelligenceStation()
 						end
 					end
 				end
-				setCommsMessage(string.format("Sure. We found a couple of enemy stations in %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName()))
-				plot2reminder = string.format("Investigate enemy bases in %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName())
+				setCommsMessage(string.format(_("commsIntelligence", "Sure. We found a couple of enemy stations in %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName()))
+				plot2reminder = string.format(_("commsOrders", "Investigate enemy bases in %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName())
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)
@@ -6176,9 +6176,9 @@ function intelligenceStation()
 end
 function secondIntelligenceStation()
 	if baseInt1Visit then
-		addCommsReply("May I speak with Marcy Sorenson, please?", function()
-			setCommsMessage("This is Marcy. Whatcha want?")
-			addCommsReply("Please tell me about the enemy bases found", function()
+		addCommsReply(_("commsIntelligence", "May I speak with Marcy Sorenson, please?"), function()
+			setCommsMessage(_("commsIntelligence", "This is Marcy. Whatcha want?"))
+			addCommsReply(_("commsIntelligence", "Please tell me about the enemy bases found"), function()
 				for i=1,#enemyStationList do
 					if enemyStationList[i]:isValid() then
 						if enemyInt1 == nil then
@@ -6190,8 +6190,8 @@ function secondIntelligenceStation()
 						end
 					end
 				end
-				setCommsMessage(string.format("Sure. We found some enemy stations in %s, %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName()))
-				plot2reminder = string.format("Investigate enemy bases in %s, %s and %s",enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
+				setCommsMessage(string.format(_("commsIntelligence", "Sure. We found some enemy stations in %s, %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName()))
+				plot2reminder = string.format(_("commsOrders", "Investigate enemy bases in %s, %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)				
@@ -6201,7 +6201,7 @@ end
 function hullStation()
 	if hullUpgradeAvailable then
 		if not comms_source.hullUpgrade then
-			addCommsReply("Upgrade hull damage capacity", function()
+			addCommsReply(_("commsUpgrade", "Upgrade hull damage capacity"), function()
 				local hullUpgradePartQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[hullGood] ~= nil and comms_source.goods[hullGood] > 0 then
 					hullUpgradePartQuantity = comms_source.goods[hullGood]
@@ -6211,9 +6211,9 @@ function hullStation()
 					comms_source.goods[hullGood] = comms_source.goods[hullGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setHullMax(comms_source:getHullMax() * 1.2)
-					setCommsMessage("Upgraded hull capacity for damage by 20%")
+					setCommsMessage(_("commsUpgrade", "Upgraded hull capacity for damage by 20%"))
 				else
-					setCommsMessage(string.format("We won't upgrade your hull until we have %s",hullGood))
+					setCommsMessage(string.format(_("commsUpgrade", "We won't upgrade your hull until we have %s"),hullGood))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -6222,7 +6222,7 @@ function hullStation()
 end
 function shieldExpertBase()
 	if plot4 == giftForBeau then
-		addCommsReply("Offer gift on behalf of Maria Shrivner", function()
+		addCommsReply(_("commsExpert", "Offer gift on behalf of Maria Shrivner"), function()
 			local giftQuantity = 0
 			local giftList = {}
 			if comms_source.goods ~= nil then
@@ -6252,9 +6252,9 @@ function shieldExpertBase()
 				local gifti = math.random(1,#giftList)
 				comms_source.goods[giftList[gifti]] = comms_source.goods[giftList[gifti]] - 1
 				comms_source.cargo = comms_source.cargo + 1
-				setCommsMessage("Thanks. He's impressed with the gift to such a degree that he's speechless")
+				setCommsMessage(_("commsExpert", "Thanks. He's impressed with the gift to such a degree that he's speechless"))
 			else
-				setCommsMessage("I know this couple (or former couple). Only gold, platinum, dilithium, tritanium or cobolt will work as a gift")
+				setCommsMessage(_("commsExpert", "I know this couple (or former couple). Only gold, platinum, dilithium, tritanium or cobolt will work as a gift"))
 			end
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -6268,13 +6268,13 @@ function setOptionalOrders()
 			if spinReveal == 0 then
 				optionalOrders = "\nOptional:\n" .. plot2reminder
 			elseif spinReveal == 1 then
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s for %s",spinBase:getCallSign(),spinGood)
+				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s for %s"),spinBase:getCallSign(),spinGood)
 			elseif spinReveal == 2 then
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s",spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
+				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
 			elseif spinReveal == 3 then
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s",spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
+				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
 			else
-				optionalOrders = string.format("\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s",spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
+				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
 			end
 		else
 			optionalOrders = "\nOptional:\n" .. plot2reminder
@@ -6292,37 +6292,37 @@ function setOptionalOrders()
 			if rotateReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif rotateReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
 			elseif rotateReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s in %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
 			elseif rotateReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format("Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may have %s",homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
 			end
 		elseif plot4reminder == "Get beam cycle time upgrade" then
 			if beamTimeReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif beamTimeReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s for %s",beamTimeBase:getCallSign(),beamTimeGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s for %s"),beamTimeBase:getCallSign(),beamTimeGood)
 			elseif beamTimeReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s in %s for %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
 			elseif beamTimeReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format("Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s",beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
 			end
 		elseif plot4reminder == "Get hull upgrade" then
 			if hullReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif hullReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s to upgrade hull for %s",hullBase:getCallSign(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s to upgrade hull for %s"),hullBase:getCallSign(),hullGood)
 			elseif hullReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s in %s to upgrade hull for %s",hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
 			elseif hullReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s in %s to upgrade hull for %s\n    %s might have %s",hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s\n    %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format("Get %s in %s to upgrade hull for %s\n    %s in %s might have %s",hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s\n    %s in %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
 			end
 		else
 			optionalOrders = optionalOrders .. ifs .. plot4reminder
@@ -8599,11 +8599,11 @@ function stationShieldDelay(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s",homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("commsExpert", "Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s"),homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
 			end
 		end
 		playSoundFile("audio/scenario/55/sa_55_Commander3.ogg")
-		plot4reminder = string.format("Find shield expert at station %s in %s",shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName())
+		plot4reminder = string.format(_("commsExpert", "Find shield expert at station %s in %s"),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName())
 		plot4 = visitShieldExpertStation
 	end
 end
@@ -8623,9 +8623,9 @@ function visitShieldExpertStation(delta)
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				if p:isDocked(shieldExpertStation) then
-					p:addToShipLog(string.format("We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
+					p:addToShipLog(string.format(_("commsExpert", "We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
 					plot4 = meetShieldExportTransportHeartbroken
-					plot4reminder = string.format("Meet transport %s last reported in %s to find Maria Shrivner",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
+					plot4reminder = string.format(_("commsExpert", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
 					playSoundFile("audio/scenario/55/sa_55_BaseChief.ogg")
 				end
 			end
@@ -8635,16 +8635,16 @@ function visitShieldExpertStation(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format("We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
+					p:addToShipLog(string.format(_("commsExpert", "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
 					plot4 = meetShieldExportTransport
-					plot4reminder = stringFormat("Meet transport %s last reported in %s to find Maria Shrivner",shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
+					plot4reminder = stringFormat(_("commsExpert", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
 				end
 			end
 		else
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog("Station %s has been destroyed leaving no hints for shield upgrade followup","Magenta")
+					p:addToShipLog(_("commsExpert", "Station %s has been destroyed leaving no hints for shield upgrade followup"),"Magenta")
 				end
 			end
 			choooseNextPlot4line()
@@ -8659,10 +8659,10 @@ function meetShieldExportTransport(delta)
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
-				p:addToShipLog(string.format("[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness",shieldExpertStation:getCallSign(),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
+				p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness"),shieldExpertStation:getCallSign(),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
 				playSoundFile("audio/scenario/55/sa_55_Maria1.ogg")
 				plot4 = returnHomeForShields
-				plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
+				plot4reminder = _("commsExpert", "Return to home base with Maria Shrivner to double shield capacity")
 				break
 			end
 		end
@@ -8676,11 +8676,11 @@ function meetShieldExportTransportHeartbroken(delta)
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
-				p:addToShipLog(string.format("[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness",homeStation:getCallSign()),"Yellow")
+				p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness"),homeStation:getCallSign()),"Yellow")
 				playSoundFile("audio/scenario/55/sa_55_Maria2.ogg")
 				plot4 = giftForBeau
 				beauGift = false
-				plot4reminder = string.format("Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s",shieldExpertStation:getCallSign())
+				plot4reminder = string.format(_("commsExpert", "Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s"),shieldExpertStation:getCallSign())
 				break
 			end
 		end
@@ -8696,10 +8696,10 @@ function giftForBeau(delta)
 				if p:isDocked(shieldExpertStation) then
 					if p.shieldExpert then
 						if beauGift then
-							p:addToShipLog(string.format("[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded",homeStation:getCallSign()),"Yellow")
+							p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded"),homeStation:getCallSign()),"Yellow")
 							playSoundFile("audio/scenario/55/sa_55_Maria3.ogg")
 							plot4 = returnHomeForShields
-							plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
+							plot4reminder = _("commsExpert", "Return to home base with Maria Shrivner to double shield capacity")
 						end
 					end
 				end
@@ -8709,12 +8709,12 @@ function giftForBeau(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("We were just notified that station %s has been destroyed",shieldExpertStation:getCallSign()),"Magenta")
+				p:addToShipLog(string.format(_("commsExpert", "We were just notified that station %s has been destroyed"),shieldExpertStation:getCallSign()),"Magenta")
 				if p.shieldExpert then
-					p:addToShipLog(string.format("[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity",homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
+					p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity"),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
 					playSoundFile("audio/scenario/55/sa_55_Maria4.ogg")
 					plot4 = returnHomeForShields
-					plot4reminder = "Return to home base with Maria Shrivner to double shield capacity"
+					plot4reminder = _("commsExpert", "Return to home base with Maria Shrivner to double shield capacity")
 				end
 			end
 		end
@@ -8740,7 +8740,7 @@ function returnHomeForShields(delta)
 							homeStation:setShieldsMax(newMax,newMax,newMax,newMax)
 						end
 					end
-					p:addToShipLog(string.format("[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually",homeStation:getCallSign()),"Yellow")
+					p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually"),homeStation:getCallSign()),"Yellow")
 					playSoundFile("audio/scenario/55/sa_55_Maria5.ogg")
 					choooseNextPlot4line()
 					homeStation.shieldUpgrade = true
