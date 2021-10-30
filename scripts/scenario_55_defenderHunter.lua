@@ -7646,14 +7646,14 @@ function hunterTransition1(delta)
 	plot3name = "hunterTransition1"
 	hunterTransition1Timer = hunterTransition1Timer - delta
 	if hunterTransition1Timer < 0 then
-		iuMsg = string.format("The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f",dangerValue)
+		iuMsg = string.format(_("commsThreat", "The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f"),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Find enemy bases. Stop enemy incursions. TA:%.1f",dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Find enemy bases. Stop enemy incursions. TA:%.1f"),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7684,7 +7684,7 @@ function hunterTransition2(delta)
 	plot3name = "hunterTransition2"
 	hunterTransition2Timer = hunterTransition2Timer - delta
 	if hunterTransition2Timer < 0 then
-		iuMsg = string.format("Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f",dangerValue)
+		iuMsg = string.format(_("commsThreat", "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"),dangerValue)
 		playSoundFile("audio/scenario/55/sa_55_Commander2.ogg")
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
@@ -7692,7 +7692,7 @@ function hunterTransition2(delta)
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f",dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f"),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7732,14 +7732,14 @@ function hunterTransition3(delta)
 		if enemyInt4 == nil then
 			enemyInt4 = targetEnemyStation
 		end
-		iuMsg = string.format("Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f",enemyInt4:getSectorName(),dangerValue)
+		iuMsg = string.format(_("commsThreat", "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt4:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f",enemyInt4:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7779,14 +7779,14 @@ function hunterTransition4(delta)
 		if enemyInt5 == nil then
 			enemyInt5 = targetEnemyStation
 		end
-		iuMsg = string.format("Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f",enemyInt5:getSectorName(),dangerValue)
+		iuMsg = string.format(_("commsThreat", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt5:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:%.1f",enemyInt4:getSectorName(),enemyInt5:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),enemyInt5:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7826,14 +7826,14 @@ function hunterTransition5(delta)
 		if enemyInt6 == nil then
 			enemyInt6 = targetEnemyStation
 		end
-		iuMsg = string.format("Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f",enemyInt6:getSectorName(),dangerValue)
+		iuMsg = string.format(_("commsThreat", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt6:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f",enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7862,14 +7862,14 @@ function hunterTransition6(delta)
 	plot3name = "hunterTransition6"
 	hunterTransition6Timer = hunterTransition6Timer - delta
 	if hunterTransition6Timer < 0 then
-		iuMsg = string.format("Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f",targetEnemyStation:getSectorName(),dangerValue)
+		iuMsg = string.format(_("commsThreat", "Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f"),targetEnemyStation:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f",targetEnemyStation:getSectorName(),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"),targetEnemyStation:getSectorName(),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7898,14 +7898,14 @@ function hunterTransition7(delta)
 	plot3name = "hunterTransition7"
 	hunterTransition7Timer = hunterTransition7Timer - delta
 	if hunterTransition7Timer < 0 then
-		iuMsg = string.format("We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
+		iuMsg = string.format(_("commsThreat", "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format("Destroy enemy base %s in %s. TA:%.1f",targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base %s in %s. TA:%.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -8269,8 +8269,8 @@ function insertAgentDelay(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s",homeStation:getCallSign()),"Magenta")
-				plot4reminder = string.format("Get Paul Straight at station %s",homeStation:getCallSign())
+				p:addToShipLog(string.format(_("commsPaulStraight", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
+				plot4reminder = string.format(_("commsPaulStraight", "Get Paul Straight at station %s"),homeStation:getCallSign())
 			end
 		end
 		plot4 = getAgentStraight
@@ -8291,8 +8291,8 @@ function getAgentStraight(delta)
 					end
 				end
 			end
-			p:addToShipLog(string.format("[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s",insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"95,158,160")
-			plot4reminder = string.format("Take Paul Straight to within 20U of %s in %s",insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
+			p:addToShipLog(string.format(_("commsPaulStraight", "[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"95,158,160")
+			plot4reminder = string.format(_("commsPaulStraight", "Take Paul Straight to within 20U of %s in %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
 			plot4 = scanEnemyStation
 			break
 		end
@@ -8307,7 +8307,7 @@ function scanEnemyStation(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 20000 then
 					insertRunDelayTimer = 15
-					p:addToShipLog("[Paul Straight] I've got my readings. Let me calibrate the transporter","95,158,160")
+					p:addToShipLog(_("commsPaulStraight", "[Paul Straight] I've got my readings. Let me calibrate the transporter"),"95,158,160")
 					if p:hasPlayerAtPosition("Helms") then
 						inRangeMsg = "inRangeMsg"
 						p:addCustomMessage("Helms",inRangeMsg,_("msgHelms", "[Paul Straight] The ship is in range. I completed my scans. Thank you"))
@@ -8324,7 +8324,7 @@ function scanEnemyStation(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog("[Paul Straight] It's too bad the station was destroyed","95,158,160")
+				p:addToShipLog(_("commsPaulStraight", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
 				break
 			end
@@ -8340,8 +8340,8 @@ function insertRunDelay(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog(string.format("[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed",insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
-					plot4reminder = string.format("Get ship within 2.5U of %s in %s to secretly transport Paul Straight",insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
+					p:addToShipLog(string.format(_("commsPaulStraight", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
+					plot4reminder = string.format(_("commsPaulStraight", "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
 					plot4 = insertRun
 					break
 				end
@@ -8350,7 +8350,7 @@ function insertRunDelay(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog("[Paul Straight] It's too bad the station was destroyed","95,158,160")
+					p:addToShipLog(_("commsPaulStraight", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 					choooseNextPlot4line()
 					break
 				end
@@ -8375,7 +8375,7 @@ function insertRun(delta)
 						p:addCustomMessage("Operations",straightTransportedMsgOps,string.format(_("msgOperations", "Paul Straight has transported aboard %s"),insertEnemyStation:getCallSign()))
 					end
 					plot4 = resultDelay
-					plot4reminder = string.format("Await intelligence results from Paul Straight on %s",insertEnemyStation:getCallSign())
+					plot4reminder = string.format(_("commsPaulStraight", "Await intelligence results from Paul Straight on %s"),insertEnemyStation:getCallSign())
 					resultDelayTimer = random(30,60)
 				end
 			end
@@ -8384,7 +8384,7 @@ function insertRun(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog("[Paul Straight] It's too bad the station was destroyed","95,158,160")
+				p:addToShipLog(_("commsPaulStraight", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
 				break
 			end
@@ -8397,10 +8397,10 @@ function resultDelay(delta)
 	if insertEnemyStation:isValid() then
 		resultDelayTimer = resultDelayTimer - delta
 		if resultDelayTimer < 0 then
-			locationResultMsg = "[Paul Straight] I discovered the location of the enemy bases in the area:"
+			locationResultMsg = _("commsPaulStraight", "[Paul Straight] I discovered the location of the enemy bases in the area:")
 			for eidx=1,#enemyStationList do
 				if enemyStationList[eidx]:isValid() then
-					locationResultMsg = locationResultMsg .. string.format("\n%s in %s",enemyStationList[eidx]:getCallSign(),enemyStationList[eidx]:getSectorName())
+					locationResultMsg = locationResultMsg .. string.format(_("commsPaulStraight", "\n%s in %s"),enemyStationList[eidx]:getCallSign(),enemyStationList[eidx]:getSectorName())
 				end
 			end
 			p = closestPlayerTo(insertEnemyStation)
@@ -8432,7 +8432,7 @@ function resultDelay2(delta)
 		resultDelay2Timer = resultDelay2Timer - delta
 		if resultDelay2Timer < 0 then
 			p = closestPlayerTo(insertEnemyStation)
-			p:addToShipLog(string.format("[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming...",targetEnemyStation:getCallSign()),"95,158,160")
+			p:addToShipLog(string.format(_("commsPaulStraight", "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming..."),targetEnemyStation:getCallSign()),"95,158,160")
 			straightExecutionTimer = random(40,80)
 			plot4 = straightExecution
 		end
@@ -8460,7 +8460,7 @@ function straightExecution(delta)
 		straightExecutionTimer = straightExecutionTimer - delta
 		if straightExecutionTimer < 0 then
 			p = closestPlayerTo(insertEnemyStation)
-			insertEnemyStation:sendCommsMessage(p,"We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities")
+			insertEnemyStation:sendCommsMessage(p,_("commsPaulStraight", "We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities"))
 			plot4 = agentDemise
 			agentDemiseTimer = random (40,80)
 		end
@@ -8533,8 +8533,8 @@ function repairBountyDelay(delta)
 		hmsBounty:setSystemHealth("jumpdrive", -0.5):setPosition(((hx+ex)/2)+bx,((hy+ey)/2)+by)
 		hmsBounty.repaired = false
 		p = closestPlayerTo(hmsBounty)
-		p:addToShipLog(string.format("[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. Can you help? We are in %s",hmsBounty:getSectorName()),"#ff4500")
-		plot4reminder = string.format("Help HMS Bounty in %s",hmsBounty:getSectorName())
+		p:addToShipLog(string.format(_("CommsHMSBounty", "[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. Can you help? We are in %s"),hmsBounty:getSectorName()),"#ff4500")
+		plot4reminder = string.format(_("CommsHMSBounty", "Help HMS Bounty in %s"),hmsBounty:getSectorName())
 		ntf = spawnEnemies((hx+ex)/2,(hy+ey)/2,dangerValue,targetEnemyStation:getFaction())
 		for _, enemy in ipairs(ntf) do
 			enemy:orderAttack(hmsBounty)
@@ -8547,7 +8547,7 @@ function repairBounty(delta)
 	p = closestPlayerTo(hmsBounty)
 	if hmsBounty:isValid() then
 		if distance(p,hmsBounty) < 2500 then
-			p:addToShipLog("[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs","#ff4500")
+			p:addToShipLog(_("CommsHMSBounty", "[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs"),"#ff4500")
 			if p:hasPlayerAtPosition("Engineering") then
 				transportRepairTechnicianButton = "transportRepairTechnicianButton"
 				p:addCustomButton("Engineering",transportRepairTechnicianButton,_("buttonEngineer", "Transport technician"),transportRepairTechnician)
@@ -8560,7 +8560,7 @@ function repairBounty(delta)
 			plot4 = nil
 		end
 	else
-		p:addToShipLog("HMS Bounty has been destroyed","Magenta")
+		p:addToShipLog(_("CommsHMSBounty", "HMS Bounty has been destroyed"),"Magenta")
 		plot4 = nil
 		plot4reminder = nil
 	end
@@ -8579,7 +8579,7 @@ function transportRepairTechnician()
 				if transportRepairTechnicianButtonPlus ~= nil then
 					p:removeCustom(transportRepairTechnicianButtonPlus)
 				end
-				p:addToShipLog("[HMS Bounty] Our engines have been repaired. We stand ready to assist","#ff4500")
+				p:addToShipLog(_("CommsHMSBounty", "[HMS Bounty] Our engines have been repaired. We stand ready to assist"),"#ff4500")
 			end
 		end
 	end
@@ -10534,10 +10534,10 @@ function updateCoolantGivenPlayer(p, delta)
 				end
 			end
 		else
-			gather_coolant_status = string.format("Deploying Collectors %i",math.ceil(p.deploy_coolant_timer - delta))
+			gather_coolant_status = string.format(_("Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
 		end
 	else
-		gather_coolant_status = string.format("Configuring Collectors %i",math.ceil(p.configure_coolant_timer - delta))
+		gather_coolant_status = string.format(_("Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
 	end
 	if p:hasPlayerAtPosition("Engineering") then
 		p.gather_coolant = "gather_coolant"
