@@ -332,8 +332,8 @@ int main(int argc, char** argv)
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
-    P<Window> window = main_window;
-    if (window)
+    
+    if (P<Window> window = main_window; window)
     {
         PreferencesManager::set("fsaa", window->getFSAA());
         PreferencesManager::set("fullscreen", window->isFullscreen() ? 1 : 0);
@@ -370,7 +370,7 @@ int main(int argc, char** argv)
         }
         sp::io::Keybinding::saveKeybindings("keybindings.json");
     }
-
+    main_window = nullptr;
     delete engine;
 
     return 0;
