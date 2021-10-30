@@ -5563,11 +5563,11 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("commsOrders", "What are my current orders?"), function()
+		addCommsReply(_("What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format(_("commsOrders", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -6167,7 +6167,7 @@ function intelligenceStation()
 					end
 				end
 				setCommsMessage(string.format(_("commsIntelligence", "Sure. We found a couple of enemy stations in %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName()))
-				plot2reminder = string.format(_("commsOrders", "Investigate enemy bases in %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName())
+				plot2reminder = string.format(_("commsIntelligence", "Investigate enemy bases in %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName())
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)
@@ -6191,7 +6191,7 @@ function secondIntelligenceStation()
 					end
 				end
 				setCommsMessage(string.format(_("commsIntelligence", "Sure. We found some enemy stations in %s, %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName()))
-				plot2reminder = string.format(_("commsOrders", "Investigate enemy bases in %s, %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
+				plot2reminder = string.format(_("commsIntelligence", "Investigate enemy bases in %s, %s and %s"),enemyInt1:getSectorName(),enemyInt2:getSectorName(),enemyInt3:getSectorName())
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)				
@@ -6264,9 +6264,9 @@ function setOptionalOrders()
 	optionalOrders = ""
 	optionalOrdersPresent = false
 	if plot2reminder ~= nil then
-		if plot2reminder == "Get ship maneuver upgrade" then
+		if plot2reminder == _("commsUpgrade", "Get ship maneuver upgrade") then
 			if spinReveal == 0 then
-				optionalOrders = "\nOptional:\n" .. plot2reminder
+				optionalOrders = _("commsUpgrade", "\nOptional:\n") .. plot2reminder
 			elseif spinReveal == 1 then
 				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s for %s"),spinBase:getCallSign(),spinGood)
 			elseif spinReveal == 2 then
@@ -6277,7 +6277,7 @@ function setOptionalOrders()
 				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
 			end
 		else
-			optionalOrders = "\nOptional:\n" .. plot2reminder
+			optionalOrders = _("commsUpgrade", "\nOptional:\n") .. plot2reminder
 		end
 		optionalOrdersPresent = true
 	end
@@ -6285,10 +6285,10 @@ function setOptionalOrders()
 		if optionalOrdersPresent then
 			ifs = "\n"
 		else
-			ifs = "\nOptional:\n"
+			ifs = _("commsUpgrade", "\nOptional:\n")
 			optionalOrdersPresent = true
 		end
-		if plot4reminder == string.format("Upgrade %s to rotate",homeStation:getCallSign()) then
+		if plot4reminder == string.format(_("commsUpgrade", "Upgrade %s to rotate"),homeStation:getCallSign()) then
 			if rotateReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif rotateReveal == 1 then
@@ -6300,7 +6300,7 @@ function setOptionalOrders()
 			else
 				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
 			end
-		elseif plot4reminder == "Get beam cycle time upgrade" then
+		elseif plot4reminder == _("commsUpgrade", "Get beam cycle time upgrade") then
 			if beamTimeReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif beamTimeReveal == 1 then
@@ -6312,7 +6312,7 @@ function setOptionalOrders()
 			else
 				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
 			end
-		elseif plot4reminder == "Get hull upgrade" then
+		elseif plot4reminder == _("commsUpgrade", "Get hull upgrade") then
 			if hullReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif hullReveal == 1 then
@@ -6615,11 +6615,11 @@ function handleUndockedState()
 		end
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("commsOrders", "What are my current orders?"), function()
+		addCommsReply(_("What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format(_("commsOrders", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -7395,8 +7395,8 @@ function easyDelivery(delta)
 				plot2 = nil
 				plot2reminder = nil
 			else
-				p:addToShipLog(string.format("[%s] We need some goods of type %s. Can you help? I hear %s has some",homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
-				plot2reminder = string.format("Bring %s to %s. Possible source: %s",easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
+				p:addToShipLog(string.format(_("commsTrade", "[%s] We need some goods of type %s. Can you help? I hear %s has some"),homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
+				plot2reminder = string.format(_("commsTrade", "Bring %s to %s. Possible source: %s"),easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
 				playSoundFile("audio/scenario/55/sa_55_Manager1.ogg")
 			end
 			easyDeliveryMsg = "sent"
@@ -7406,10 +7406,10 @@ end
 
 function spinUpgradeStart(delta)
 	plot2name = "spinUpgradeStart"
-	if plot_2_diagnostic then print("plot 2 spin upgrade start") end
+	if plot_2_diagnostic then print(_("commsUpgrade", "plot 2 spin upgrade start")) end
 	infoPromised = true
 	spinUpgradeAvailable = false
-	plot2reminder = "Get ship maneuver upgrade"
+	plot2reminder = _("commsUpgrade", "Get ship maneuver upgrade")
 	local candidate = nil
 	if pickSpinBase == nil then
 		p = closestPlayerTo(homeStation)
@@ -7991,8 +7991,8 @@ function randomDelivery(delta)
 				plot4delay = 100
 				plot4 = delayef4v2
 			else
-				p:addToShipLog(string.format("[%s] We are running low on goods of type %s. Can you help? %s in %s should have some",homeStation:getCallSign(),randomDeliverGood,randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName()),"85,107,47")
-				plot4reminder = string.format("Bring %s to %s. Possible source: %s in %s",randomDeliverGood,homeStation:getCallSign(),randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName())
+				p:addToShipLog(string.format(_("commsTrade", "[%s] We are running low on goods of type %s. Can you help? %s in %s should have some"),homeStation:getCallSign(),randomDeliverGood,randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName()),"85,107,47")
+				plot4reminder = string.format(_("commsTrade", "Bring %s to %s. Possible source: %s in %s"),randomDeliverGood,homeStation:getCallSign(),randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName())
 				playSoundFile("audio/scenario/55/sa_55_Manager2.ogg")
 			end
 			randomDeliveryMsg = "sent"
@@ -8005,7 +8005,7 @@ function rotateUpgradeStart(delta)
 	infoPromised = true
 	homeStationRotationEnabled = false
 	rotateUpgradeAvailable = false
-	plot4reminder = string.format("Upgrade %s to rotate",homeStation:getCallSign())
+	plot4reminder = string.format(_("commsUpgrade", "Upgrade %s to rotate"),homeStation:getCallSign())
 	if pickRotateBase == nil then
 		repeat
 			local candidate = stationList[math.random(13,#stationList)]
@@ -8062,7 +8062,7 @@ function beamTimeUpgradeStart(delta)
 	plot4name = "beamTimeUpgradeStart"
 	infoPromised = true
 	beamTimeUpgradeAvailable = false
-	plot4reminder = "Get beam cycle time upgrade"
+	plot4reminder = _("commsUpgrade", "Get beam cycle time upgrade")
 	if pickBeamTimeBase == nil then
 		repeat
 			candidate = stationList[math.random(13,#stationList)]
@@ -8137,7 +8137,7 @@ function hullUpgradeStart(delta)
 	plot4name = "hullUpgradeStart"
 	infoPromised = true
 	hullUpgradeAvailable = false
-	plot4reminder = "Get hull upgrade"
+	plot4reminder = _("commsUpgrade", "Get hull upgrade")
 	if pickHullBase == nil then
 		repeat
 			candidate = stationList[math.random(13,#stationList)]
@@ -8773,48 +8773,48 @@ function helpfulWarning(delta)
 							--tempObjType = obj:getTypeName()
 							--if not string.find(tempObjType,"Station") then
 							if detected_enemy_ship then
-								wMsg = string.format("[%s] Our sensors detect enemies nearby",stationList[i]:getCallSign())
+								wMsg = string.format(_("commsHelpfullWarning", "[%s] Our sensors detect enemies nearby"),stationList[i]:getCallSign())
 								if diagnostic or difficulty < 1 then
-									wMsg = wMsg .. string.format(" - Type: %s",obj:getTypeName())
+									wMsg = wMsg .. string.format(_("commsHelpfullWarning", " - Type: %s"),obj:getTypeName())
 								end
 								p:addToShipLog(wMsg,"Red")
 								if i == 1 then
-									if helpfulWarningDiagnostic then print("home station warning details") end
+									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "home station warning details")) end
 									local stationShields = homeStation:getShieldCount()
-									if helpfulWarningDiagnostic then print("number of shields around home station: " .. stationShields) end
+									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "number of shields around home station: ") .. stationShields) end
 									local shieldsDamaged = false
 									if stationShields == 1 then
-										if helpfulWarningDiagnostic then print("station has only one shield") end
+										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "station has only one shield")) end
 										local sLevel = homeStation:getShieldLevel(0)
-										if helpfulWarningDiagnostic then print("shield level for the one shield: " .. sLevel) end
+										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield level for the one shield: ") .. sLevel) end
 										local sMax = homeStation:getShieldMax(0)
-										if helpfulWarningDiagnostic then print("shield maximum for the one shield: " .. sMax) end
+										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield maximum for the one shield: ") .. sMax) end
 										if sLevel < sMax then
-											if helpfulWarningDiagnostic then print("shield not fully charged") end
-											sLine = string.format("   Shield: %.1f%% (%.1f/%.1f) ",sLevel/sMax*100,sLevel,sMax)
+											if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield not fully charged")) end
+											sLine = string.format(_("commsHelpfullWarning", "   Shield: %.1f%% (%.1f/%.1f) "),sLevel/sMax*100,sLevel,sMax)
 											shieldsDamaged = true
 										end
 									else
-										if helpfulWarningDiagnostic then print("station has multiple shields") end
-										sdMsg = string.format("   Shield count: %i ",stationShields)
-										if helpfulWarningDiagnostic then print("about to start shield loop") end
+										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "station has multiple shields")) end
+										sdMsg = string.format(_("commsHelpfullWarning", "   Shield count: %i "),stationShields)
+										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "about to start shield loop")) end
 										shieldStatusLines = {}
 										for j=1,stationShields do
-											if helpfulWarningDiagnostic then print(string.format("loop index: %i, shield number: %i",j,j-1)) end
+											if helpfulWarningDiagnostic then print(string.format(_("commsHelpfullWarning", "loop index: %i, shield number: %i"),j,j-1)) end
 											sLevel = homeStation:getShieldLevel(j-1)
-											if helpfulWarningDiagnostic then print("shield level: " .. sLevel) end
+											if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield level: ") .. sLevel) end
 											sMax = homeStation:getShieldMax(j-1)
-											if helpfulWarningDiagnostic then print("max: " .. sMax) end
+											if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "max: ") .. sMax) end
 											if sLevel < sMax then
-												if helpfulWarningDiagnostic then print("shield not fully charged") end
-												sLine = string.format("      Shield %i: %i%% (%.1f/%i) ",j,math.floor(sLevel/sMax*100),sLevel,sMax)
+												if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield not fully charged")) end
+												sLine = string.format(_("commsHelpfullWarning", "      Shield %i: %i%% (%.1f/%i) "),j,math.floor(sLevel/sMax*100),sLevel,sMax)
 												table.insert(shieldStatusLines,sLine)
 												shieldsDamaged = true
 											end
 										end
 									end
 									if shieldsDamaged then
-										p:addToShipLog("Station Status:","Red")
+										p:addToShipLog(_("commsHelpfullWarning", "Station Status:"),"Red")
 										if stationShields == 1 then
 											p:addToShipLog(sLine,"Red")
 										else
@@ -8823,17 +8823,17 @@ function helpfulWarning(delta)
 											end
 										end
 									end
-									if helpfulWarningDiagnostic then print("Done with shield status, check hull status") end
+									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "Done with shield status, check hull status")) end
 									hl = homeStation:getHull()
-									if helpfulWarningDiagnostic then print("current hull: " .. hl) end
+									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "current hull: ") .. hl) end
 									hm = homeStation:getHullMax()
-									if helpfulWarningDiagnostic then print("max hull: " .. hm) end
+									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "max hull: ") .. hm) end
 									if hl < hm then
-										if helpfulWarningDiagnostic then print("hull not fully repaired") end
+										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "hull not fully repaired")) end
 										if not shieldsDamaged then
-											p:addToShipLog("Station Status:","Red")										
+											p:addToShipLog(_("commsHelpfullWarning", "Station Status:"),"Red")										
 										end
-										local hLine = string.format("   Hull: %i%% (%.1f/%i)",math.floor(hl/hm*100),hl,hm)
+										local hLine = string.format(_("commsHelpfullWarning", "   Hull: %i%% (%.1f/%i)"),math.floor(hl/hm*100),hl,hm)
 										p:addToShipLog(hLine,"Red")
 									end
 								end
