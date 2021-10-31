@@ -12,6 +12,7 @@ public:
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual bool canHideInNebula()  override { return false; }
+    virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::Background; }
 
     void setColor(int r, int g, int b);
     void setPoints(const std::vector<glm::vec2>& points);
