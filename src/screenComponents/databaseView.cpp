@@ -159,11 +159,14 @@ void DatabaseViewComponent::display()
         if (selected_entry->hasModelData())
         {
             (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry->getModelData()))->setMargins(-100, -50)->setSize(GuiElement::GuiSizeMax, has_text ? GuiElement::GuiSizeMax : 450);
+            if(selected_entry->getImage() != "")
+            {
+                (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setMargins(0)->setSize(32, 32);
+            }
         }
-
-        if(selected_entry->getImage() != "")
+        else if(selected_entry->getImage() != "")
         {
-            (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setMargins(0)->setSize(32, 32);
+            (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
         }
     }
     if (has_text)
