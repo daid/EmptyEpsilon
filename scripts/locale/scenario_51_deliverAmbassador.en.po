@@ -248,7 +248,6 @@ msgid "Also increased the top speed of your impulse engine"
 msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:605
-#: scripts/scenario_51_deliverAmbassador.lua:813
 msgctxt "audioButton"
 msgid "|> AMBGREMUS021"
 msgstr ""
@@ -322,6 +321,11 @@ msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:730
 msgctxt "warningMsgScience"
+msgid "Warning"
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:730
+msgctxt "warningMsgScience"
 msgid "The readings on the Pangora artifact have changed"
 msgstr ""
 
@@ -350,6 +354,11 @@ msgid ""
 "[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will "
 "need artifact research for successful negotiation. Please return with that "
 "research when you can."
+msgstr ""
+
+#: scripts/scenario_51_deliverAmbassador.lua:813
+msgctxt "audioButton"
+msgid "|> AMBGREMUS032"
 msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:837
@@ -568,6 +577,7 @@ msgid "Has anyone reported seeing artifacts near Science-37?"
 msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:1041
+#: scripts/scenario_51_deliverAmbassador.lua:1259
 msgid ""
 "Freighters doing business here occasionally report an object on approximate "
 "heading zero from Science-37 station"
@@ -734,10 +744,4 @@ msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:1171
 msgid "Added a waypoint to your navigation system for Balindor Prime"
-msgstr ""
-
-#: scripts/scenario_51_deliverAmbassador.lua:1259
-msgid ""
-"Freighters doing business here occasionally report an objecton approximate "
-"heading zero from Science-37 station"
 msgstr ""

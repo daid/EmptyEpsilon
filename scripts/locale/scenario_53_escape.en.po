@@ -9,61 +9,61 @@ msgid ""
 "weapons officer (6Apr2020)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:103 scripts/scenario_53_escape.lua:106
-#: scripts/scenario_53_escape.lua:109
+#: scripts/scenario_53_escape.lua:104 scripts/scenario_53_escape.lua:107
+#: scripts/scenario_53_escape.lua:110
 msgctxt "scienceDebrisDescription"
 msgid "Debris"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:103
+#: scripts/scenario_53_escape.lua:104
 msgctxt "scienceDebrisDescription"
 msgid ""
 "Debris: Various broken ship components. Possibly useful for engine or "
 "weapons systems repair"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:106
+#: scripts/scenario_53_escape.lua:107
 msgctxt "scienceDebrisDescription"
 msgid ""
 "Debris: Various broken ship components. Possibly useful for shield or beam "
 "systems repair"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:109
+#: scripts/scenario_53_escape.lua:110
 msgctxt "scienceDebrisDescription"
 msgid ""
 "Debris: Various broken ship components. Possibly useful for hull or reactor "
 "systems repair"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:116 scripts/scenario_53_escape.lua:119
-#: scripts/scenario_53_escape.lua:122
+#: scripts/scenario_53_escape.lua:117 scripts/scenario_53_escape.lua:120
+#: scripts/scenario_53_escape.lua:123
 msgctxt "scienceBuoyDescription"
 msgid "Space Message Buoy"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:116
+#: scripts/scenario_53_escape.lua:117
 msgctxt "scienceBuoyDescription"
 msgid ""
 "Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in "
 "the Kraylor language"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:119
+#: scripts/scenario_53_escape.lua:120
 msgctxt "scienceBuoyDescription"
 msgid ""
 "Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an "
 "asteroid for the kids' in the Kraylor language"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:122
+#: scripts/scenario_53_escape.lua:123
 msgctxt "scienceBuoyDescription"
 msgid ""
 "Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in "
 "the Kraylor language"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:203
+#: scripts/scenario_53_escape.lua:204
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -74,38 +74,38 @@ msgid ""
 "space station"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:371
+#: scripts/scenario_53_escape.lua:372
 msgctxt "scienceStationDescription"
 msgid "Mining and heavy industry"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:373
+#: scripts/scenario_53_escape.lua:374
 msgctxt "scienceStationDescription"
 msgid "Baldwin Observatory"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:406
+#: scripts/scenario_53_escape.lua:407
 msgctxt "scienceStationDescription"
 msgid "M class planet"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:408
+#: scripts/scenario_53_escape.lua:409
 msgctxt "scienceStationDescription"
 msgid "Malastare communications network hub"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1034
+#: scripts/scenario_53_escape.lua:1035
 msgctxt "scienceStationDescription"
 msgid "Optical Components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1046
+#: scripts/scenario_53_escape.lua:1047
 msgctxt "generalStationInformation"
 msgid ""
 "We make and supply optic components for various station and ship systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1047
+#: scripts/scenario_53_escape.lua:1048
 msgctxt "stationHistory"
 msgid ""
 "This station continues the businesses from Earth based on the merging of "
@@ -114,19 +114,19 @@ msgid ""
 "and development company"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1065
+#: scripts/scenario_53_escape.lua:1066
 msgctxt "scienceStationDescription"
 msgid "Battery and software engineering"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1077
+#: scripts/scenario_53_escape.lua:1078
 msgctxt "generalStationInformation"
 msgid ""
 "We provide high quality high capacity batteries and specialized software for "
 "all shipboard systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1078
+#: scripts/scenario_53_escape.lua:1079
 msgctxt "stationHistory"
 msgid ""
 "The station is named after a fictional software engineer in a late 20th "
@@ -134,34 +134,34 @@ msgid ""
 "docile by software generated illusion"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1091
+#: scripts/scenario_53_escape.lua:1092
 msgctxt "scienceStationDescription"
 msgid "Shield and Armor Research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1103
+#: scripts/scenario_53_escape.lua:1104
 msgctxt "generalStationInformation"
 msgid "The finest shield and armor manufacturer in the quadrant"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1104
+#: scripts/scenario_53_escape.lua:1105
 msgctxt "stationHistory"
 msgid ""
 "We named this station for the pioneering spirit of the 22nd century "
 "Starfleet explorer, Captain Jonathan Archer"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1121
+#: scripts/scenario_53_escape.lua:1122
 msgctxt "scienceStationDescription"
 msgid "Energy and particle beam components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1132
+#: scripts/scenario_53_escape.lua:1133
 msgctxt "generalStationInformation"
 msgid "We fabricate general and specialized components for ship beam systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1133
+#: scripts/scenario_53_escape.lua:1134
 msgctxt "stationHistory"
 msgid ""
 "This station was named after Archimedes who, according to legend, used a "
@@ -169,19 +169,19 @@ msgid ""
 "fleet invading Syracuse, setting fire to it"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1150
+#: scripts/scenario_53_escape.lua:1151
 msgctxt "scienceStationDescription"
 msgid "Warp and Impulse engine manufacturing"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1163
+#: scripts/scenario_53_escape.lua:1164
 msgctxt "generalStationInformation"
 msgid ""
 "We manufacture warp, impulse and jump engines for the human navy fleet as "
 "well as other independent clients on a contract basis"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1164
+#: scripts/scenario_53_escape.lua:1165
 msgctxt "stationHistory"
 msgid ""
 "The station is named after the late 19th century astronaut as well as the "
@@ -190,19 +190,19 @@ msgid ""
 "propulsion systems."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1177
+#: scripts/scenario_53_escape.lua:1178
 msgctxt "scienceStationDescription"
 msgid "Training and Coordination"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1188
+#: scripts/scenario_53_escape.lua:1189
 msgctxt "generalStationInformation"
 msgid ""
 "We train naval cadets in routine and specialized functions aboard space "
 "vessels and coordinate naval activity throughout the sector"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1189
+#: scripts/scenario_53_escape.lua:1190
 msgctxt "stationHistory"
 msgid ""
 "The original station builders were fans of the late 20th century scientist "
@@ -212,19 +212,19 @@ msgid ""
 "coordination hub for the region"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1202
+#: scripts/scenario_53_escape.lua:1203
 msgctxt "scienceStationDescription"
 msgid "Communication components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1214
+#: scripts/scenario_53_escape.lua:1215
 msgctxt "generalStationInformation"
 msgid ""
 "We provide a range of communication equipment and software for use aboard "
 "ships"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1215
+#: scripts/scenario_53_escape.lua:1216
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Reginald Barclay who established the first "
@@ -233,17 +233,17 @@ msgid ""
 "station"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1232
+#: scripts/scenario_53_escape.lua:1233
 msgctxt "scienceStationDescription"
 msgid "Medical research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1245
+#: scripts/scenario_53_escape.lua:1246
 msgctxt "generalStationInformation"
 msgid "We research and treat exotic medical conditions"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1246
+#: scripts/scenario_53_escape.lua:1247
 msgctxt "stationHistory"
 msgid ""
 "The station is named after the United States national medical research "
@@ -251,97 +251,97 @@ msgid ""
 "20th century"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1253
+#: scripts/scenario_53_escape.lua:1254
 msgctxt "scienceStationDescription"
 msgid "Warp drive components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1265
+#: scripts/scenario_53_escape.lua:1266
 msgctxt "generalStationInformation"
 msgid "We provide warp drive engines and components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1266
+#: scripts/scenario_53_escape.lua:1267
 msgctxt "stationHistory"
 msgid ""
 "This station is named after Chris Van Den Broeck who did some initial "
 "research into the possibility of warp drive in the late 20th century on Earth"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1284 scripts/scenario_53_escape.lua:1804
-#: scripts/scenario_53_escape.lua:1861 scripts/scenario_53_escape.lua:2738
+#: scripts/scenario_53_escape.lua:1285 scripts/scenario_53_escape.lua:1805
+#: scripts/scenario_53_escape.lua:1862 scripts/scenario_53_escape.lua:2739
 msgctxt "scienceStationDescription"
 msgid "Mining station"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1308
+#: scripts/scenario_53_escape.lua:1309
 msgctxt "scienceStationDescription"
 msgid "Robotic research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1320
+#: scripts/scenario_53_escape.lua:1321
 msgctxt "generalStationInformation"
 msgid "We research and provide robotic systems and components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1321
+#: scripts/scenario_53_escape.lua:1322
 msgctxt "stationHistory"
 msgid ""
 "This station is named after Dr. Susan Calvin who pioneered robotic "
 "behavioral research and programming"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1336
+#: scripts/scenario_53_escape.lua:1337
 msgctxt "scienceStationDescription"
 msgid "Advanced Material components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1347
+#: scripts/scenario_53_escape.lua:1348
 msgctxt "generalStationInformation"
 msgid ""
 "We fabricate several different kinds of materials critical to various space "
 "industries like ship building, station construction and mineral extraction"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1348
+#: scripts/scenario_53_escape.lua:1349
 msgctxt "stationHistory"
 msgid ""
 "We named our station after Dr. Cavor, the physicist that invented a barrier "
 "material for gravity waves - Cavorite"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1377 scripts/scenario_53_escape.lua:2080
+#: scripts/scenario_53_escape.lua:1378 scripts/scenario_53_escape.lua:2081
 msgctxt "scienceStationDescription"
 msgid "Trading station"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1388
+#: scripts/scenario_53_escape.lua:1389
 msgctxt "generalStationInformation"
 msgid ""
 "Only the largest market and trading location in twenty sectors. You can find "
 "your heart's desire here"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1389
+#: scripts/scenario_53_escape.lua:1390
 msgctxt "stationHistory"
 msgid ""
 "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
 "Designed and built with trade and commerce in mind"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1402
+#: scripts/scenario_53_escape.lua:1403
 msgctxt "scienceStationDescription"
 msgid "Shielded circuitry fabrication"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1414
+#: scripts/scenario_53_escape.lua:1415
 msgctxt "generalStationInformation"
 msgid ""
 "We make a large variety of circuits for numerous ship systems shielded from "
 "sensor detection and external control interference"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1415
+#: scripts/scenario_53_escape.lua:1416
 msgctxt "stationHistory"
 msgid ""
 "Our station is named after the law which quantifies the amount of force with "
@@ -349,54 +349,54 @@ msgid ""
 "a fundamental principle in the design of our circuits"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1433 scripts/scenario_53_escape.lua:2426
+#: scripts/scenario_53_escape.lua:1434 scripts/scenario_53_escape.lua:2427
 msgctxt "scienceStationDescription"
 msgid "Impulse engine components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1444
+#: scripts/scenario_53_escape.lua:1445
 msgctxt "generalStationInformation"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1445
+#: scripts/scenario_53_escape.lua:1446
 msgctxt "stationHistory"
 msgid ""
 "This station was named after the fictional engineer, Cyrus Smith created by "
 "19th century author Jules Verne"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1463 scripts/scenario_53_escape.lua:2105
-#: scripts/scenario_53_escape.lua:2486
+#: scripts/scenario_53_escape.lua:1464 scripts/scenario_53_escape.lua:2106
+#: scripts/scenario_53_escape.lua:2487
 msgctxt "scienceStationDescription"
 msgid "Android components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1474
+#: scripts/scenario_53_escape.lua:1475
 msgctxt "generalStationInformation"
 msgid "Supplier of android components, programming and service"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1475
+#: scripts/scenario_53_escape.lua:1476
 msgctxt "stationHistory"
 msgid ""
 "Named for Richard Deckard who inspired many of the sophisticated safety "
 "security algorithms now required for all androids"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1491
+#: scripts/scenario_53_escape.lua:1492
 msgctxt "scienceStationDescription"
 msgid "Repulsor and Tractor Beam Components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1504
+#: scripts/scenario_53_escape.lua:1505
 msgctxt "generalStationInformation"
 msgid ""
 "We can meet all your pushing and pulling needs with specialized equipment "
 "custom made"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1505
+#: scripts/scenario_53_escape.lua:1506
 msgctxt "stationHistory"
 msgid ""
 "The station name comes from a short story by the 20th century author "
@@ -404,19 +404,19 @@ msgid ""
 "inspired a company that makes the Earth bound equivalents of our products"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1524 scripts/scenario_53_escape.lua:2136
+#: scripts/scenario_53_escape.lua:1525 scripts/scenario_53_escape.lua:2137
 msgctxt "scienceStationDescription"
 msgid "Transporter components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1535
+#: scripts/scenario_53_escape.lua:1536
 msgctxt "generalStationInformation"
 msgid ""
 "We provide transporters used aboard ships as well as the components for "
 "repair and maintenance"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1536
+#: scripts/scenario_53_escape.lua:1537
 msgctxt "stationHistory"
 msgid ""
 "The station is named after the early 22nd century inventor of the "
@@ -424,52 +424,52 @@ msgid ""
 "endorsement of Admiral Leonard McCoy"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1554 scripts/scenario_53_escape.lua:1918
+#: scripts/scenario_53_escape.lua:1555 scripts/scenario_53_escape.lua:1919
 msgctxt "scienceStationDescription"
 msgid "Autodoc components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1565
+#: scripts/scenario_53_escape.lua:1566
 msgctxt "generalStationInformation"
 msgid "We provide components for automated medical machinery"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1566
+#: scripts/scenario_53_escape.lua:1567
 msgctxt "stationHistory"
 msgid ""
 "The station is the evolution of the company that started automated "
 "pharmaceutical dispensing in the early 21st century on Earth in Finland"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1583
+#: scripts/scenario_53_escape.lua:1584
 msgctxt "scienceStationDescription"
 msgid "Nanotechnology research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1595
+#: scripts/scenario_53_escape.lua:1596
 msgctxt "generalStationInformation"
 msgid "We provide nanites and software for a variety of ship-board systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1596
+#: scripts/scenario_53_escape.lua:1597
 msgctxt "stationHistory"
 msgid ""
 "This station's name recognizes one of the first scientific researchers into "
 "nanotechnology, physicist Richard Feynman"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1613 scripts/scenario_53_escape.lua:1734
+#: scripts/scenario_53_escape.lua:1614 scripts/scenario_53_escape.lua:1735
 msgctxt "scienceStationDescription"
 msgid "Mining"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1625
+#: scripts/scenario_53_escape.lua:1626
 msgctxt "generalStationInformation"
 msgid ""
 "We mine nearby asteroids for precious minerals and process them for sale"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1626
+#: scripts/scenario_53_escape.lua:1627
 msgctxt "stationHistory"
 msgid ""
 "This station's name is inspired by a large gold mine on Earth in Indonesia. "
@@ -477,36 +477,36 @@ msgid ""
 "amongst these asteroids"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1652
+#: scripts/scenario_53_escape.lua:1653
 msgctxt "scienceStationDescription"
 msgid "Observatory and stellar mapping"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1663
+#: scripts/scenario_53_escape.lua:1664
 msgctxt "generalStationInformation"
 msgid ""
 "We study the cosmos and map stellar phenomena. We also track moving "
 "asteroids. Look out! Just kidding"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1664
+#: scripts/scenario_53_escape.lua:1665
 msgctxt "stationHistory"
 msgid ""
 "Station named in honor of Charles Hayden whose philanthropy continued "
 "astrophysical research and education on Earth in the early 20th century"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1677 scripts/scenario_53_escape.lua:2651
+#: scripts/scenario_53_escape.lua:1678 scripts/scenario_53_escape.lua:2652
 msgctxt "scienceStationDescription"
 msgid "Sensor components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1689
+#: scripts/scenario_53_escape.lua:1690
 msgctxt "generalStationInformation"
 msgid "We research and manufacture sensor components and systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1690
+#: scripts/scenario_53_escape.lua:1691
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Tony Heyes the inventor of some of the earliest "
@@ -514,41 +514,41 @@ msgid ""
 "Kingdom to assist blind human mobility"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1703
+#: scripts/scenario_53_escape.lua:1704
 msgctxt "scienceStationDescription"
 msgid "Nanite supplier"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1714
+#: scripts/scenario_53_escape.lua:1715
 msgctxt "generalStationInformation"
 msgid "We provide nanites for various organic and non-organic systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1715
+#: scripts/scenario_53_escape.lua:1716
 msgctxt "stationHistory"
 msgid ""
 "This station is named after the nanotechnologist Hossam Haick from the early "
 "21st century on Earth in Israel"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1746
+#: scripts/scenario_53_escape.lua:1747
 msgctxt "generalStationInformation"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1774
+#: scripts/scenario_53_escape.lua:1775
 msgctxt "scienceStationDescription"
 msgid "Xenopsychology training"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1785
+#: scripts/scenario_53_escape.lua:1786
 msgctxt "generalStationInformation"
 msgid ""
 "We provide classes and simulation to help train diverse species in how to "
 "relate to each other"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1786
+#: scripts/scenario_53_escape.lua:1787
 msgctxt "stationHistory"
 msgid ""
 "A continuation of the research initially conducted by Dr. Gennady Komov in "
@@ -556,7 +556,7 @@ msgid ""
 "principles"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1929
+#: scripts/scenario_53_escape.lua:1930
 msgctxt "generalStationInformation"
 msgid ""
 "We build and repair and provide components and upgrades for automated "
@@ -564,7 +564,7 @@ msgid ""
 "(commonly called autodocs)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1930
+#: scripts/scenario_53_escape.lua:1931
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Dr. Lipkin who pioneered some of the research and "
@@ -572,17 +572,17 @@ msgid ""
 "for renal tumors in the early 21st century on Earth"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1945
+#: scripts/scenario_53_escape.lua:1946
 msgctxt "scienceStationDescription"
 msgid "Zero gravity sports and entertainment"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1956
+#: scripts/scenario_53_escape.lua:1957
 msgctxt "generalStationInformation"
 msgid "Come take in a game or two or perhaps see a show"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1957
+#: scripts/scenario_53_escape.lua:1958
 msgctxt "stationHistory"
 msgid ""
 "Named after Madison Square Gardens from 21st century Earth, this station was "
@@ -590,34 +590,34 @@ msgid ""
 "entertainment"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1974
+#: scripts/scenario_53_escape.lua:1975
 msgctxt "scienceStationDescription"
 msgid "Energy beam components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1986
+#: scripts/scenario_53_escape.lua:1987
 msgctxt "generalStationInformation"
 msgid "We research and manufacture energy beam components and systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:1987
+#: scripts/scenario_53_escape.lua:1988
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Theodore Maiman who researched and built the "
 "first laser in the mid 20th century on Earth"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2004
+#: scripts/scenario_53_escape.lua:2005
 msgctxt "scienceStationDescription"
 msgid "Energy Beam Components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2015
+#: scripts/scenario_53_escape.lua:2016
 msgctxt "generalStationInformation"
 msgid "We manufacture energy beam components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2016
+#: scripts/scenario_53_escape.lua:2017
 msgctxt "stationHistory"
 msgid ""
 "Station named after Guglielmo Marconi an Italian inventor from early 20th "
@@ -625,46 +625,46 @@ msgid ""
 "ray or particle beam weapon"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2034
+#: scripts/scenario_53_escape.lua:2035
 msgctxt "scienceStationDescription"
 msgid "Medical Research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2047
+#: scripts/scenario_53_escape.lua:2048
 msgctxt "generalStationInformation"
 msgid "We research exotic diseases and other human medical conditions"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2048
+#: scripts/scenario_53_escape.lua:2049
 msgctxt "stationHistory"
 msgid ""
 "We continue the medical work started by William Worrall Mayo in the late "
 "19th century on Earth"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2055
+#: scripts/scenario_53_escape.lua:2056
 msgctxt "scienceStationDescription"
 msgid "Exobiology research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2066
+#: scripts/scenario_53_escape.lua:2067
 msgctxt "generalStationInformation"
 msgid "We study recently discovered life forms not native to Earth"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2067
+#: scripts/scenario_53_escape.lua:2068
 msgctxt "stationHistory"
 msgid ""
 "This station was named after one of the early exobiologists from mid 20th "
 "century Earth, Dr. Stanley Miller"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2091
+#: scripts/scenario_53_escape.lua:2092
 msgctxt "generalStationInformation"
 msgid "Come to Muddvile for all your trade and commerce needs and desires"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2092
+#: scripts/scenario_53_escape.lua:2093
 msgctxt "stationHistory"
 msgid ""
 "Upon retirement, Harry Mudd started this commercial venture using his "
@@ -672,47 +672,47 @@ msgid ""
 "stars as a salesman"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2118
+#: scripts/scenario_53_escape.lua:2119
 msgctxt "generalStationInformation"
 msgid ""
 "We research and manufacture android components and systems. Our design our "
 "androids to maximize their likeness to humans"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2119
+#: scripts/scenario_53_escape.lua:2120
 msgctxt "stationHistory"
 msgid ""
 "We named the station after the ground breaking android model produced by the "
 "Tyrell corporation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2147
+#: scripts/scenario_53_escape.lua:2148
 msgctxt "generalStationInformation"
 msgid ""
 "We research and fabricate high quality transporters and transporter "
 "components for use aboard ships"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2148
+#: scripts/scenario_53_escape.lua:2149
 msgctxt "stationHistory"
 msgid ""
 "Miles O'Brien started this business after his experience as a transporter "
 "chief"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2167
+#: scripts/scenario_53_escape.lua:2168
 msgctxt "scienceStationDescription"
 msgid "Optical components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2178
+#: scripts/scenario_53_escape.lua:2179
 msgctxt "generalStationInformation"
 msgid ""
 "We fabricate optical lenses and related equipment as well as fiber optic "
 "cabling and components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2179
+#: scripts/scenario_53_escape.lua:2180
 msgctxt "stationHistory"
 msgid ""
 "This station grew out of the Olympus company based on earth in the early "
@@ -720,44 +720,44 @@ msgid ""
 "comapnies before branching out into space based industry"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2197
+#: scripts/scenario_53_escape.lua:2198
 msgctxt "scienceStationDescription"
 msgid "Diplomatic training"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2208
+#: scripts/scenario_53_escape.lua:2209
 msgctxt "generalStationInformation"
 msgid ""
 "The premeire academy for leadership and diplomacy training in the region"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2209
+#: scripts/scenario_53_escape.lua:2210
 msgctxt "stationHistory"
 msgid ""
 "Established by the royal family so critical during the political upheaval era"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2216
+#: scripts/scenario_53_escape.lua:2217
 msgctxt "scienceStationDescription"
 msgid "Mining and trade"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2254
+#: scripts/scenario_53_escape.lua:2255
 msgctxt "scienceStationDescription"
 msgid "Mining and gambling"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2293 scripts/scenario_53_escape.lua:2350
+#: scripts/scenario_53_escape.lua:2294 scripts/scenario_53_escape.lua:2351
 msgctxt "scienceStationDescription"
 msgid "Load lifters and components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2304
+#: scripts/scenario_53_escape.lua:2305
 msgctxt "generalStationInformation"
 msgid "We provide load lifters and components for various ship systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2305
+#: scripts/scenario_53_escape.lua:2306
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Lars Owen. After his extensive eperience with "
@@ -767,46 +767,46 @@ msgid ""
 "cousins, moisture vaporators"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2320
+#: scripts/scenario_53_escape.lua:2321
 msgctxt "scienceStationDescription"
 msgid "Optic components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2331
+#: scripts/scenario_53_escape.lua:2332
 msgctxt "generalStationInformation"
 msgid "We provide optic components for various ship systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2332
+#: scripts/scenario_53_escape.lua:2333
 msgctxt "stationHistory"
 msgid ""
 "This station is an outgrowth of the Panduit corporation started in the mid "
 "20th century on Earth in the United States"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2361
+#: scripts/scenario_53_escape.lua:2362
 msgctxt "generalStationInformation"
 msgid "We provide load lifters and components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2362
+#: scripts/scenario_53_escape.lua:2363
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Ellen Ripley who made creative and effective use "
 "of one of our load lifters when defending her ship"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2380
+#: scripts/scenario_53_escape.lua:2381
 msgctxt "scienceStationDescription"
 msgid "Shield components and research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2391
+#: scripts/scenario_53_escape.lua:2392
 msgctxt "generalStationInformation"
 msgid "We research and fabricate components for ship shield systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2392
+#: scripts/scenario_53_escape.lua:2393
 msgctxt "stationHistory"
 msgid ""
 "This station was named after the national research institution Rutherford "
@@ -815,35 +815,35 @@ msgid ""
 "20th century"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2410 scripts/scenario_53_escape.lua:3095
+#: scripts/scenario_53_escape.lua:2411 scripts/scenario_53_escape.lua:3096
 msgctxt "scienceStationDescription"
 msgid "Observatory"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2437
+#: scripts/scenario_53_escape.lua:2438
 msgctxt "generalStationInformation"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2438
+#: scripts/scenario_53_escape.lua:2439
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Roger Shawyer who built the first prototype "
 "impulse engine in the early 21st century"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2455
+#: scripts/scenario_53_escape.lua:2456
 msgctxt "scienceStationDescription"
 msgid "Repulsor and tractor beam components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2467
+#: scripts/scenario_53_escape.lua:2468
 msgctxt "generalStationInformation"
 msgid ""
 "We make ship systems designed to push or pull other objects around in space"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2468
+#: scripts/scenario_53_escape.lua:2469
 msgctxt "stationHistory"
 msgid ""
 "Our station is named Shree after one of many tugboat manufacturers in the "
@@ -852,69 +852,69 @@ msgid ""
 "going vessels today"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2497
+#: scripts/scenario_53_escape.lua:2498
 msgctxt "generalStationInformation"
 msgid "We create androids and android components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2498
+#: scripts/scenario_53_escape.lua:2499
 msgctxt "stationHistory"
 msgid ""
 "The station is named after Dr. Noonian Soong, the famous android researcher "
 "and builder"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2513
+#: scripts/scenario_53_escape.lua:2514
 msgctxt "scienceStationDescription"
 msgid "Logistics coordination"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2524
+#: scripts/scenario_53_escape.lua:2525
 msgctxt "generalStationInformation"
 msgid ""
 "We support the stations and ships in the area with planning and "
 "communication services"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2525
+#: scripts/scenario_53_escape.lua:2526
 msgctxt "stationHistory"
 msgid ""
 "We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
 "23rd century in our station name"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2532
+#: scripts/scenario_53_escape.lua:2533
 msgctxt "scienceStationDescription"
 msgid "Advanced material components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2543
+#: scripts/scenario_53_escape.lua:2544
 msgctxt "generalStationInformation"
 msgid ""
 "We create multiple types of advanced material components. Our most popular "
 "products are our filaments"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2544
+#: scripts/scenario_53_escape.lua:2545
 msgctxt "stationHistory"
 msgid ""
 "We learned several of our critical industrial processes from the Tokra race, "
 "so we honor our fortune by naming the station after them"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2573
+#: scripts/scenario_53_escape.lua:2574
 msgctxt "scienceStationDescription"
 msgid "Shield and armor components and research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2584
+#: scripts/scenario_53_escape.lua:2585
 msgctxt "generalStationInformation"
 msgid ""
 "We research and make general and specialized components for ship shield and "
 "ship armor systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2585
+#: scripts/scenario_53_escape.lua:2586
 msgctxt "stationHistory"
 msgid ""
 "This station was named after one of the earliest researchers in shield "
@@ -922,12 +922,12 @@ msgid ""
 "construct shields due to the physics involved."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2602 scripts/scenario_53_escape.lua:3172
+#: scripts/scenario_53_escape.lua:2603 scripts/scenario_53_escape.lua:3173
 msgctxt "scienceStationDescription"
 msgid "Ship building and maintenance facility"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2613
+#: scripts/scenario_53_escape.lua:2614
 msgctxt "generalStationInformation"
 msgid ""
 "We work on all aspects of naval ship building and maintenance. Many of the "
@@ -936,33 +936,33 @@ msgid ""
 "possible given the tremendous capabilities of the modern naval vessel"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2626
+#: scripts/scenario_53_escape.lua:2627
 msgctxt "scienceStationDescription"
 msgid "Shielded Circuitry Fabrication"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2637
+#: scripts/scenario_53_escape.lua:2638
 msgctxt "generalStationInformation"
 msgid ""
 "We specialize in circuitry shielded from external hacking suitable for ship "
 "systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2638
+#: scripts/scenario_53_escape.lua:2639
 msgctxt "stationHistory"
 msgid ""
 "We started as an expansion from the lunar based chip manufacturer of Earth "
 "legacy Intel electronic chips"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2662
+#: scripts/scenario_53_escape.lua:2663
 msgctxt "generalStationInformation"
 msgid ""
 "We research and construct components for the most powerful and accurate "
 "sensors used aboard ships along with the software to make them easy to use"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2663
+#: scripts/scenario_53_escape.lua:2664
 msgctxt "stationHistory"
 msgid ""
 "The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
@@ -973,109 +973,109 @@ msgid ""
 "and Quanergy"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2681
+#: scripts/scenario_53_escape.lua:2682
 msgctxt "scienceStationDescription"
 msgid "Warp engine components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2692
+#: scripts/scenario_53_escape.lua:2693
 msgctxt "generalStationInformation"
 msgid ""
 "We specialize in the esoteric components necessary to make warp drives "
 "function properly"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2693
+#: scripts/scenario_53_escape.lua:2694
 msgctxt "stationHistory"
 msgid ""
 "Zefram Cochrane constructed the first warp drive in human history. We named "
 "our station after him because of the specialized warp systems work we do"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2712
+#: scripts/scenario_53_escape.lua:2713
 msgctxt "scienceStationDescription"
 msgid "Commerce and gambling"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2723
+#: scripts/scenario_53_escape.lua:2724
 msgctxt "generalStationInformation"
 msgid "Come play some games and shop. House take does not exceed 4 percent"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2791
+#: scripts/scenario_53_escape.lua:2792
 msgctxt "scienceStationDescription"
 msgid "Casino and Gambling"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2815
+#: scripts/scenario_53_escape.lua:2816
 msgctxt "scienceStationDescription"
 msgid "Gambling and resupply"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2826
+#: scripts/scenario_53_escape.lua:2827
 msgctxt "generalStationInformation"
 msgid "Relax and meet some interesting players"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2841
+#: scripts/scenario_53_escape.lua:2842
 msgctxt "scienceStationDescription"
 msgid "Commerce and recreation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2857
+#: scripts/scenario_53_escape.lua:2858
 msgctxt "scienceStationDescription"
 msgid "Xenopsychology research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2882 scripts/scenario_53_escape.lua:2922
-#: scripts/scenario_53_escape.lua:3010 scripts/scenario_53_escape.lua:3189
+#: scripts/scenario_53_escape.lua:2883 scripts/scenario_53_escape.lua:2923
+#: scripts/scenario_53_escape.lua:3011 scripts/scenario_53_escape.lua:3190
 msgctxt "scienceStationDescription"
 msgid "Resupply"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2938
+#: scripts/scenario_53_escape.lua:2939
 msgctxt "scienceStationDescription"
 msgid "Textiles and fashion"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2962
+#: scripts/scenario_53_escape.lua:2963
 msgctxt "scienceStationDescription"
 msgid "Stress Psychology Research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:2986
+#: scripts/scenario_53_escape.lua:2987
 msgctxt "scienceStationDescription"
 msgid "Low gravity research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3021
+#: scripts/scenario_53_escape.lua:3022
 msgctxt "generalStationInformation"
 msgid "Get your energy here! Grab a drink before you go!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3028
+#: scripts/scenario_53_escape.lua:3029
 msgctxt "scienceStationDescription"
 msgid "Research Lab and Observatory"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3052
+#: scripts/scenario_53_escape.lua:3053
 msgctxt "scienceStationDescription"
 msgid "Biotech research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3076
+#: scripts/scenario_53_escape.lua:3077
 msgctxt "scienceStationDescription"
 msgid "Routine maintenance and entertainment"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3087
+#: scripts/scenario_53_escape.lua:3088
 msgctxt "generalStationInformation"
 msgid ""
 "Stop by for repairs. Take in one of our juggling shows featuring the four-"
 "armed Skandars"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3088
+#: scripts/scenario_53_escape.lua:3089
 msgctxt "stationHistory"
 msgid ""
 "The nomadic Skandars have set up at this station to practice their "
@@ -1083,165 +1083,165 @@ msgid ""
 "Skandars can relax"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3119
+#: scripts/scenario_53_escape.lua:3120
 msgctxt "scienceStationDescription"
 msgid "Automated weapons systems"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3130
+#: scripts/scenario_53_escape.lua:3131
 msgctxt "generalStationInformation"
 msgid ""
 "We research and create automated weapons systems to improve ship combat "
 "capability"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3145
+#: scripts/scenario_53_escape.lua:3146
 msgctxt "scienceStationDescription"
 msgid "Biotechnology research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3156
+#: scripts/scenario_53_escape.lua:3157
 msgctxt "generalStationInformation"
 msgid "Merging the organic and inorganic through research"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3157
+#: scripts/scenario_53_escape.lua:3158
 msgctxt "stationHistory"
 msgid ""
 "Continued from the Tandon school of engineering started on Earth in the "
 "early 21st century"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3312
+#: scripts/scenario_53_escape.lua:3313
 msgctxt "commsStation"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3325
+#: scripts/scenario_53_escape.lua:3326
 msgctxt "commsStation"
 msgid ""
 "Good day, officer!\n"
 "What can we do for you today?\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3327
+#: scripts/scenario_53_escape.lua:3328
 msgctxt "commsStation"
 msgid "Welcome to our lovely station.\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3330
+#: scripts/scenario_53_escape.lua:3331
 msgctxt "commsStation"
 msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3344
+#: scripts/scenario_53_escape.lua:3345
 msgctxt "commsAmmo"
 msgid "I need ordnance restocked"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3346
+#: scripts/scenario_53_escape.lua:3347
 msgctxt "commsAmmo"
 msgid "in restock function"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3347
+#: scripts/scenario_53_escape.lua:3348
 msgctxt "commsAmmo"
 msgid "What type of ordnance?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3348
+#: scripts/scenario_53_escape.lua:3349
 #, lua-format
 msgctxt "commsAmmo"
 msgid "player nuke weapon storage max: %.1f"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3350
+#: scripts/scenario_53_escape.lua:3351
 msgctxt "commsAmmo"
 msgid "player can fire nukes"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3352
+#: scripts/scenario_53_escape.lua:3353
 msgctxt "commsAmmo"
 msgid "station has nukes available"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3354
+#: scripts/scenario_53_escape.lua:3355
 msgctxt "commsAmmo"
 msgid "Can you supply us with some nukes? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3356
+#: scripts/scenario_53_escape.lua:3357
 msgctxt "commsAmmo"
 msgid "We really need some nukes ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3358
+#: scripts/scenario_53_escape.lua:3359
 #, lua-format
 msgctxt "commsAmmo"
 msgid "nuke prompt: %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3359 scripts/scenario_53_escape.lua:3372
-#: scripts/scenario_53_escape.lua:3384 scripts/scenario_53_escape.lua:3396
-#: scripts/scenario_53_escape.lua:3408
+#: scripts/scenario_53_escape.lua:3360 scripts/scenario_53_escape.lua:3373
+#: scripts/scenario_53_escape.lua:3385 scripts/scenario_53_escape.lua:3397
+#: scripts/scenario_53_escape.lua:3409
 #, lua-format
 msgctxt "commsAmmo"
 msgid "%s%d rep each)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3360
+#: scripts/scenario_53_escape.lua:3361
 msgctxt "commsAmmo"
 msgid "going to handle weapon restock function"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3368
+#: scripts/scenario_53_escape.lua:3369
 msgctxt "commsAmmo"
 msgid "Please re-stock our EMP missiles. ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3370
+#: scripts/scenario_53_escape.lua:3371
 msgctxt "commsAmmo"
 msgid "Got any EMPs? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3380
+#: scripts/scenario_53_escape.lua:3381
 msgctxt "commsAmmo"
 msgid "Do you have spare homing missiles for us? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3382
+#: scripts/scenario_53_escape.lua:3383
 msgctxt "commsAmmo"
 msgid "Do you have extra homing missiles? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3392
+#: scripts/scenario_53_escape.lua:3393
 msgctxt "commsAmmo"
 msgid "We could use some mines. ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3394
+#: scripts/scenario_53_escape.lua:3395
 msgctxt "commsAmmo"
 msgid "How about mines? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3404
+#: scripts/scenario_53_escape.lua:3405
 msgctxt "commsAmmo"
 msgid "What about HVLI? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3406
+#: scripts/scenario_53_escape.lua:3407
 msgctxt "commsAmmo"
 msgid "Could you provide HVLI? ("
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3418
+#: scripts/scenario_53_escape.lua:3419
 msgctxt "commsCrewFriends"
 msgid "Talk to Kent's brother"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3419
+#: scripts/scenario_53_escape.lua:3420
 msgctxt "commsCrewFriends"
 msgid ""
 "Kent? You made it out of the Kraylor base? We thought you were going to "
@@ -1249,155 +1249,155 @@ msgid ""
 "out of there"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3420
+#: scripts/scenario_53_escape.lua:3421
 msgctxt "commsCrewFriends"
 msgid "Can you help us with beam weapon repair?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3421
+#: scripts/scenario_53_escape.lua:3422
 msgctxt "commsCrewFriends"
 msgid ""
 "For the Repulse class? Absolutely. I used to work on those all the time."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3426 scripts/scenario_53_escape.lua:3648
-#: scripts/scenario_53_escape.lua:3675 scripts/scenario_53_escape.lua:3705
+#: scripts/scenario_53_escape.lua:3427 scripts/scenario_53_escape.lua:3649
+#: scripts/scenario_53_escape.lua:3676 scripts/scenario_53_escape.lua:3706
 msgctxt "commsCrewFriends"
 msgid "Thanks"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3427
+#: scripts/scenario_53_escape.lua:3428
 msgctxt "commsCrewFriends"
 msgid ""
 "You're quite welcome. While I was in there, I fixed up your beams so they "
 "could function at maximum potential"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3429
+#: scripts/scenario_53_escape.lua:3430
 msgctxt "commsCrewFriends"
 msgid "Then double thanks!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3431
+#: scripts/scenario_53_escape.lua:3432
 msgctxt "commsCrewFriends"
 msgid "Thank *you* for getting my brother out of that Kraylor prison"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3432 scripts/scenario_53_escape.lua:3434
-#: scripts/scenario_53_escape.lua:3436 scripts/scenario_53_escape.lua:3438
-#: scripts/scenario_53_escape.lua:3453 scripts/scenario_53_escape.lua:3455
-#: scripts/scenario_53_escape.lua:3457 scripts/scenario_53_escape.lua:3499
-#: scripts/scenario_53_escape.lua:3511 scripts/scenario_53_escape.lua:3514
-#: scripts/scenario_53_escape.lua:3516 scripts/scenario_53_escape.lua:3558
-#: scripts/scenario_53_escape.lua:3570 scripts/scenario_53_escape.lua:3573
-#: scripts/scenario_53_escape.lua:3575 scripts/scenario_53_escape.lua:3590
-#: scripts/scenario_53_escape.lua:3592 scripts/scenario_53_escape.lua:3594
-#: scripts/scenario_53_escape.lua:3651 scripts/scenario_53_escape.lua:3653
-#: scripts/scenario_53_escape.lua:3657 scripts/scenario_53_escape.lua:3659
-#: scripts/scenario_53_escape.lua:3661 scripts/scenario_53_escape.lua:3697
-#: scripts/scenario_53_escape.lua:3699 scripts/scenario_53_escape.lua:3727
-#: scripts/scenario_53_escape.lua:3729 scripts/scenario_53_escape.lua:3731
-#: scripts/scenario_53_escape.lua:3733 scripts/scenario_53_escape.lua:3756
-#: scripts/scenario_53_escape.lua:3761 scripts/scenario_53_escape.lua:3764
-#: scripts/scenario_53_escape.lua:3773 scripts/scenario_53_escape.lua:3778
-#: scripts/scenario_53_escape.lua:3786 scripts/scenario_53_escape.lua:3850
-#: scripts/scenario_53_escape.lua:3863 scripts/scenario_53_escape.lua:3887
-#: scripts/scenario_53_escape.lua:3910 scripts/scenario_53_escape.lua:3933
-#: scripts/scenario_53_escape.lua:3937 scripts/scenario_53_escape.lua:3954
-#: scripts/scenario_53_escape.lua:3958 scripts/scenario_53_escape.lua:3963
-#: scripts/scenario_53_escape.lua:3995 scripts/scenario_53_escape.lua:4042
-#: scripts/scenario_53_escape.lua:4121 scripts/scenario_53_escape.lua:4139
-#: scripts/scenario_53_escape.lua:4185 scripts/scenario_53_escape.lua:4194
-#: scripts/scenario_53_escape.lua:4201 scripts/scenario_53_escape.lua:4206
-#: scripts/scenario_53_escape.lua:4231 scripts/scenario_53_escape.lua:4235
-#: scripts/scenario_53_escape.lua:4252 scripts/scenario_53_escape.lua:4256
-#: scripts/scenario_53_escape.lua:4405 scripts/scenario_53_escape.lua:4409
-#: scripts/scenario_53_escape.lua:4425 scripts/scenario_53_escape.lua:4453
-#: scripts/scenario_53_escape.lua:4462 scripts/scenario_53_escape.lua:4469
-#: scripts/scenario_53_escape.lua:4478 scripts/scenario_53_escape.lua:4503
-#: scripts/scenario_53_escape.lua:4510 scripts/scenario_53_escape.lua:4582
-#: scripts/scenario_53_escape.lua:4601 scripts/scenario_53_escape.lua:4605
-#: scripts/scenario_53_escape.lua:4621 scripts/scenario_53_escape.lua:4649
-#: scripts/scenario_53_escape.lua:4664 scripts/scenario_53_escape.lua:4683
-#: scripts/scenario_53_escape.lua:4687 scripts/scenario_53_escape.lua:4716
-#: scripts/scenario_53_escape.lua:4748
+#: scripts/scenario_53_escape.lua:3433 scripts/scenario_53_escape.lua:3435
+#: scripts/scenario_53_escape.lua:3437 scripts/scenario_53_escape.lua:3439
+#: scripts/scenario_53_escape.lua:3454 scripts/scenario_53_escape.lua:3456
+#: scripts/scenario_53_escape.lua:3458 scripts/scenario_53_escape.lua:3500
+#: scripts/scenario_53_escape.lua:3512 scripts/scenario_53_escape.lua:3515
+#: scripts/scenario_53_escape.lua:3517 scripts/scenario_53_escape.lua:3559
+#: scripts/scenario_53_escape.lua:3571 scripts/scenario_53_escape.lua:3574
+#: scripts/scenario_53_escape.lua:3576 scripts/scenario_53_escape.lua:3591
+#: scripts/scenario_53_escape.lua:3593 scripts/scenario_53_escape.lua:3595
+#: scripts/scenario_53_escape.lua:3652 scripts/scenario_53_escape.lua:3654
+#: scripts/scenario_53_escape.lua:3658 scripts/scenario_53_escape.lua:3660
+#: scripts/scenario_53_escape.lua:3662 scripts/scenario_53_escape.lua:3698
+#: scripts/scenario_53_escape.lua:3700 scripts/scenario_53_escape.lua:3728
+#: scripts/scenario_53_escape.lua:3730 scripts/scenario_53_escape.lua:3732
+#: scripts/scenario_53_escape.lua:3734 scripts/scenario_53_escape.lua:3757
+#: scripts/scenario_53_escape.lua:3762 scripts/scenario_53_escape.lua:3765
+#: scripts/scenario_53_escape.lua:3774 scripts/scenario_53_escape.lua:3779
+#: scripts/scenario_53_escape.lua:3787 scripts/scenario_53_escape.lua:3851
+#: scripts/scenario_53_escape.lua:3864 scripts/scenario_53_escape.lua:3888
+#: scripts/scenario_53_escape.lua:3911 scripts/scenario_53_escape.lua:3934
+#: scripts/scenario_53_escape.lua:3938 scripts/scenario_53_escape.lua:3955
+#: scripts/scenario_53_escape.lua:3959 scripts/scenario_53_escape.lua:3964
+#: scripts/scenario_53_escape.lua:3996 scripts/scenario_53_escape.lua:4043
+#: scripts/scenario_53_escape.lua:4122 scripts/scenario_53_escape.lua:4140
+#: scripts/scenario_53_escape.lua:4186 scripts/scenario_53_escape.lua:4195
+#: scripts/scenario_53_escape.lua:4202 scripts/scenario_53_escape.lua:4207
+#: scripts/scenario_53_escape.lua:4232 scripts/scenario_53_escape.lua:4236
+#: scripts/scenario_53_escape.lua:4253 scripts/scenario_53_escape.lua:4257
+#: scripts/scenario_53_escape.lua:4406 scripts/scenario_53_escape.lua:4410
+#: scripts/scenario_53_escape.lua:4426 scripts/scenario_53_escape.lua:4454
+#: scripts/scenario_53_escape.lua:4463 scripts/scenario_53_escape.lua:4470
+#: scripts/scenario_53_escape.lua:4479 scripts/scenario_53_escape.lua:4504
+#: scripts/scenario_53_escape.lua:4511 scripts/scenario_53_escape.lua:4583
+#: scripts/scenario_53_escape.lua:4602 scripts/scenario_53_escape.lua:4606
+#: scripts/scenario_53_escape.lua:4622 scripts/scenario_53_escape.lua:4650
+#: scripts/scenario_53_escape.lua:4665 scripts/scenario_53_escape.lua:4684
+#: scripts/scenario_53_escape.lua:4688 scripts/scenario_53_escape.lua:4717
+#: scripts/scenario_53_escape.lua:4749
 msgid "Back"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3444
+#: scripts/scenario_53_escape.lua:3445
 msgctxt "commsCrewFriends"
 msgid "Talk to Edwina's father"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3445
+#: scripts/scenario_53_escape.lua:3446
 msgctxt "commsCrewFriends"
 msgid ""
 "I am glad to hear that Edwina escaped that prison. We were worried about her"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3446
+#: scripts/scenario_53_escape.lua:3447
 msgctxt "commsCrewFriends"
 msgid "Edwina says you do missile systems repair work"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3447
+#: scripts/scenario_53_escape.lua:3448
 msgctxt "commsCrewFriends"
 msgid "Should be easy enough. I'm grateful to you for helping Edwina escape."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3451
+#: scripts/scenario_53_escape.lua:3452
 msgctxt "commsCrewFriends"
 msgid "You're quite welcome"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3463
+#: scripts/scenario_53_escape.lua:3464
 msgctxt "commsCrewFriends"
 msgid "Talk to Johnny"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3464
+#: scripts/scenario_53_escape.lua:3465
 msgctxt "commsCrewFriends"
 msgid "Mom? Wow, I thought you were toast. Good to hear your voice"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3465
+#: scripts/scenario_53_escape.lua:3466
 msgctxt "commsCrewFriends"
 msgid "Can you get our impulse drive working better"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3491
+#: scripts/scenario_53_escape.lua:3492
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Piece of cake. Thanks for the %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3496 scripts/scenario_53_escape.lua:3508
+#: scripts/scenario_53_escape.lua:3497 scripts/scenario_53_escape.lua:3509
 msgctxt "commsCrewFriends"
 msgid "Thank you"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3497 scripts/scenario_53_escape.lua:3509
+#: scripts/scenario_53_escape.lua:3498 scripts/scenario_53_escape.lua:3510
 msgctxt "commsCrewFriends"
 msgid "Sure. Mom, I'll see you at Christmas"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3502
+#: scripts/scenario_53_escape.lua:3503
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Piece of cake, but I'll need %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3505
+#: scripts/scenario_53_escape.lua:3506
 msgctxt "commsCrewFriends"
 msgid "Piece of cake"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3522
+#: scripts/scenario_53_escape.lua:3523
 msgctxt "commsCrewFriends"
 msgid "Talk to Nancy's brother"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3523
+#: scripts/scenario_53_escape.lua:3524
 msgctxt "commsCrewFriends"
 msgid ""
 "Nancy! Last I heard, your ship had been captured by Kraylors and you were "
@@ -1405,12 +1405,12 @@ msgid ""
 "here?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3524
+#: scripts/scenario_53_escape.lua:3525
 msgctxt "commsCrewFriends"
 msgid "Our jump drive needs some tuning"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3550
+#: scripts/scenario_53_escape.lua:3551
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid ""
@@ -1418,17 +1418,17 @@ msgid ""
 "for bringing %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3555 scripts/scenario_53_escape.lua:3567
+#: scripts/scenario_53_escape.lua:3556 scripts/scenario_53_escape.lua:3568
 msgctxt "commsCrewFriends"
 msgid "Thanks, bro"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3556 scripts/scenario_53_escape.lua:3568
+#: scripts/scenario_53_escape.lua:3557 scripts/scenario_53_escape.lua:3569
 msgctxt "commsCrewFriends"
 msgid "No problem. Treat your jump drive right and it'll always bring you home"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3561
+#: scripts/scenario_53_escape.lua:3562
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid ""
@@ -1436,127 +1436,127 @@ msgid ""
 "I'll need some %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3564
+#: scripts/scenario_53_escape.lua:3565
 msgctxt "commsCrewFriends"
 msgid "That should not be hard to do. I could probably do that in my sleep"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3581
+#: scripts/scenario_53_escape.lua:3582
 msgctxt "commsCrewFriends"
 msgid "Talk to Manuel's cousin"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3582
+#: scripts/scenario_53_escape.lua:3583
 msgctxt "commsCrewFriends"
 msgid ""
 "Yo Manuel, why you want to scare us by getting captured, man? At least you "
 "escaped. Why you here?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3583
+#: scripts/scenario_53_escape.lua:3584
 msgctxt "commsCrewFriends"
 msgid "The reactor is weak... real weak"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3584
+#: scripts/scenario_53_escape.lua:3585
 msgctxt "commsCrewFriends"
 msgid "Lemme see if I can get it to charge up right."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3587
+#: scripts/scenario_53_escape.lua:3588
 msgctxt "commsCrewFriends"
 msgid "The captain would appreciate it"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3588
+#: scripts/scenario_53_escape.lua:3589
 msgctxt "commsCrewFriends"
 msgid ""
 "You're all set. Don't overheat the reactor or you'll get a nasty surprise"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3600
+#: scripts/scenario_53_escape.lua:3601
 msgctxt "commsCrewFriends"
 msgid "Talk to Fred's wife"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3601
+#: scripts/scenario_53_escape.lua:3602
 msgctxt "commsCrewFriends"
 msgid "Fred! You escaped! We were worried sick"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3602
+#: scripts/scenario_53_escape.lua:3603
 msgctxt "commsCrewFriends"
 msgid "We need to connect to the Human Navy network"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3603
+#: scripts/scenario_53_escape.lua:3604
 msgctxt "commsCrewFriends"
 msgid ""
 "I can do that for you. However, that means you'll go from being Independent "
 "to being in the Human Navy"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3604
+#: scripts/scenario_53_escape.lua:3605
 msgctxt "commsCrewFriends"
 msgid "I understand the consequences. Please proceed"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3647
+#: scripts/scenario_53_escape.lua:3648
 msgctxt "commsCrewFriends"
 msgid "You're all fixed up"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3649
+#: scripts/scenario_53_escape.lua:3650
 msgctxt "commsCrewFriends"
 msgid "You're welcome. Fred, honey, I'll see you after you get off work"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3655
+#: scripts/scenario_53_escape.lua:3656
 msgctxt "commsCrewFriends"
 msgid "I'll check with the captain and get back to you"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3656
+#: scripts/scenario_53_escape.lua:3657
 msgctxt "commsCrewFriends"
 msgid "Ok"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3667 scripts/scenario_53_escape.lua:3736
+#: scripts/scenario_53_escape.lua:3668 scripts/scenario_53_escape.lua:3737
 msgctxt "commsCrewFriends"
 msgid "Talk to Amir's sister"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3668
+#: scripts/scenario_53_escape.lua:3669
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Welcome to %s! Any friend of Amir's is a friend of mine"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3669
+#: scripts/scenario_53_escape.lua:3670
 msgctxt "commsCrewFriends"
 msgid "Can you help us with our shields?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3670
+#: scripts/scenario_53_escape.lua:3671
 msgctxt "commsCrewFriends"
 msgid ""
 "Yes, I can. However, I can only help with one: front or rear. I need more "
 "parts to do both"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3671
+#: scripts/scenario_53_escape.lua:3672
 msgctxt "commsCrewFriends"
 msgid "Repair front shield"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3672
+#: scripts/scenario_53_escape.lua:3673
 msgctxt "commsCrewFriends"
 msgid ""
 "Your front shields are now fully operational. Your repair crew can finish "
 "the rest"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3695
+#: scripts/scenario_53_escape.lua:3696
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid ""
@@ -1564,19 +1564,19 @@ msgid ""
 "at %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3701
+#: scripts/scenario_53_escape.lua:3702
 msgctxt "commsCrewFriends"
 msgid "Repair rear shield"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3702
+#: scripts/scenario_53_escape.lua:3703
 msgctxt "commsCrewFriends"
 msgid ""
 "Your rear shields are now fully operational. Your repair crew can finish the "
 "rest"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3725
+#: scripts/scenario_53_escape.lua:3726
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid ""
@@ -1584,71 +1584,71 @@ msgid ""
 "at %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3737
+#: scripts/scenario_53_escape.lua:3738
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid ""
 "Welcome back. Did you bring some %s for me to finish fixing up your shields?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3743
+#: scripts/scenario_53_escape.lua:3744
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Yes, please take the %s and fix the shields"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3749
+#: scripts/scenario_53_escape.lua:3750
 msgctxt "commsCrewFriends"
 msgid "Front shield fully functional"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3753
+#: scripts/scenario_53_escape.lua:3754
 msgctxt "commsCrewFriends"
 msgid "Rear shield fully functional"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3759
+#: scripts/scenario_53_escape.lua:3760
 #, lua-format
 msgctxt "commsCrewFriends"
 msgid "Oops, no %s aboard"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3760
+#: scripts/scenario_53_escape.lua:3761
 msgctxt "commsCrewFriends"
 msgid "Ok, good luck"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3769 scripts/scenario_53_escape.lua:4197
+#: scripts/scenario_53_escape.lua:3770 scripts/scenario_53_escape.lua:4198
 msgctxt "commsStation"
 msgid "Tell me more about your station"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3770 scripts/scenario_53_escape.lua:4198
+#: scripts/scenario_53_escape.lua:3771 scripts/scenario_53_escape.lua:4199
 msgctxt "commsStation"
 msgid "What would you like to know?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3771 scripts/scenario_53_escape.lua:4199
+#: scripts/scenario_53_escape.lua:3772 scripts/scenario_53_escape.lua:4200
 msgctxt "commsStation"
 msgid "General information"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3776 scripts/scenario_53_escape.lua:4204
+#: scripts/scenario_53_escape.lua:3777 scripts/scenario_53_escape.lua:4205
 msgctxt "commsStation"
 msgid "Station history"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3784
+#: scripts/scenario_53_escape.lua:3785
 msgctxt "commsStation"
 msgid "Gossip"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3798
+#: scripts/scenario_53_escape.lua:3799
 msgctxt "commsTrade"
 msgid "Buy, sell, trade"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3800
+#: scripts/scenario_53_escape.lua:3801
 #, lua-format
 msgctxt "commsTrade"
 msgid ""
@@ -1656,144 +1656,144 @@ msgid ""
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3802
+#: scripts/scenario_53_escape.lua:3803
 #, lua-format
 msgctxt "commsTrade"
 msgid "     %s: %i, %i\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3805
+#: scripts/scenario_53_escape.lua:3806
 msgctxt "commsTrade"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3807 scripts/scenario_53_escape.lua:3816
+#: scripts/scenario_53_escape.lua:3808 scripts/scenario_53_escape.lua:3817
 #, lua-format
 msgctxt "commsTrade"
 msgid "     %s: %i\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3810
+#: scripts/scenario_53_escape.lua:3811
 #, lua-format
 msgctxt "commsTrade"
 msgid "Current cargo aboard %s:\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3820
+#: scripts/scenario_53_escape.lua:3821
 msgctxt "commsTrade"
 msgid "     Empty\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3822
+#: scripts/scenario_53_escape.lua:3823
 #, lua-format
 msgctxt "commsTrade"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3825 scripts/scenario_53_escape.lua:4438
-#: scripts/scenario_53_escape.lua:4634 scripts/scenario_53_escape.lua:4697
-#: scripts/scenario_53_escape.lua:4729
+#: scripts/scenario_53_escape.lua:3826 scripts/scenario_53_escape.lua:4439
+#: scripts/scenario_53_escape.lua:4635 scripts/scenario_53_escape.lua:4698
+#: scripts/scenario_53_escape.lua:4730
 #, lua-format
 msgctxt "commsTrade"
 msgid "Buy one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3826
+#: scripts/scenario_53_escape.lua:3827
 #, lua-format
 msgctxt "commsTrade"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3828
+#: scripts/scenario_53_escape.lua:3829
 msgctxt "commsTrade"
 msgid ""
 "\n"
 "Insufficient cargo space for purchase"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3830 scripts/scenario_53_escape.lua:3846
+#: scripts/scenario_53_escape.lua:3831 scripts/scenario_53_escape.lua:3847
 msgctxt "commsTrade"
 msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3832 scripts/scenario_53_escape.lua:3873
-#: scripts/scenario_53_escape.lua:3896 scripts/scenario_53_escape.lua:3919
+#: scripts/scenario_53_escape.lua:3833 scripts/scenario_53_escape.lua:3874
+#: scripts/scenario_53_escape.lua:3897 scripts/scenario_53_escape.lua:3920
 msgctxt "commsTrade"
 msgid ""
 "\n"
 "Insufficient station inventory"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3844
+#: scripts/scenario_53_escape.lua:3845
 msgctxt "commsTrade"
 msgid ""
 "\n"
 "purchased"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3856
+#: scripts/scenario_53_escape.lua:3857
 #, lua-format
 msgctxt "commsTrade"
 msgid "Sell one %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3857
+#: scripts/scenario_53_escape.lua:3858
 #, lua-format
 msgctxt "commsTrade"
 msgid "Type: %s,  Reputation price: %i"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3860
+#: scripts/scenario_53_escape.lua:3861
 msgctxt "commsTrade"
 msgid ""
 "\n"
 "One sold"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3870
+#: scripts/scenario_53_escape.lua:3871
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade food for %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3871 scripts/scenario_53_escape.lua:3894
-#: scripts/scenario_53_escape.lua:3917
+#: scripts/scenario_53_escape.lua:3872 scripts/scenario_53_escape.lua:3895
+#: scripts/scenario_53_escape.lua:3918
 #, lua-format
 msgctxt "commsTrade"
 msgid "Type: %s,  Quantity: %i"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3884 scripts/scenario_53_escape.lua:3907
-#: scripts/scenario_53_escape.lua:3930
+#: scripts/scenario_53_escape.lua:3885 scripts/scenario_53_escape.lua:3908
+#: scripts/scenario_53_escape.lua:3931
 msgctxt "commsTrade"
 msgid ""
 "\n"
 "Traded"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3893
+#: scripts/scenario_53_escape.lua:3894
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade medicine for %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3916 scripts/scenario_53_escape.lua:4420
-#: scripts/scenario_53_escape.lua:4616
+#: scripts/scenario_53_escape.lua:3917 scripts/scenario_53_escape.lua:4421
+#: scripts/scenario_53_escape.lua:4617
 #, lua-format
 msgctxt "commsTrade"
 msgid "Trade luxury for %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3946 scripts/scenario_53_escape.lua:4593
-#: scripts/scenario_53_escape.lua:4675
+#: scripts/scenario_53_escape.lua:3947 scripts/scenario_53_escape.lua:4594
+#: scripts/scenario_53_escape.lua:4676
 msgctxt "commsTrade"
 msgid "Jettison cargo"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3947 scripts/scenario_53_escape.lua:4398
-#: scripts/scenario_53_escape.lua:4594 scripts/scenario_53_escape.lua:4676
+#: scripts/scenario_53_escape.lua:3948 scripts/scenario_53_escape.lua:4399
+#: scripts/scenario_53_escape.lua:4595 scripts/scenario_53_escape.lua:4677
 #, lua-format
 msgctxt "commsTrade"
 msgid ""
@@ -1801,19 +1801,19 @@ msgid ""
 "What would you like to jettison?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3953 scripts/scenario_53_escape.lua:4404
-#: scripts/scenario_53_escape.lua:4600 scripts/scenario_53_escape.lua:4682
+#: scripts/scenario_53_escape.lua:3954 scripts/scenario_53_escape.lua:4405
+#: scripts/scenario_53_escape.lua:4601 scripts/scenario_53_escape.lua:4683
 #, lua-format
 msgctxt "commsTrade"
 msgid "One %s jettisoned"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3961
+#: scripts/scenario_53_escape.lua:3962
 msgctxt "commsTrade"
 msgid "No tutorial covered goods or cargo. Explain"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3962
+#: scripts/scenario_53_escape.lua:3963
 msgctxt "commsTrade"
 msgid ""
 "Different types of cargo or goods may be obtained from stations, freighters "
@@ -1824,86 +1824,86 @@ msgid ""
 "(typically food, medicine or luxury)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3978
+#: scripts/scenario_53_escape.lua:3979
 msgctxt "commsAmmo"
 msgid "You need to stay docked for that action."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3982
+#: scripts/scenario_53_escape.lua:3983
 msgctxt "commsAmmo"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3983
+#: scripts/scenario_53_escape.lua:3984
 msgctxt "commsAmmo"
 msgid "We do not deal in weapons of mass disruption."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3984
+#: scripts/scenario_53_escape.lua:3985
 msgctxt "commsAmmo"
 msgid "We do not deal in those weapons."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3991
+#: scripts/scenario_53_escape.lua:3992
 msgctxt "commsAmmo"
 msgid "All nukes are charged and primed for destruction."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:3993
+#: scripts/scenario_53_escape.lua:3994
 msgctxt "commsAmmo"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4001 scripts/scenario_53_escape.lua:4016
+#: scripts/scenario_53_escape.lua:4002 scripts/scenario_53_escape.lua:4017
 msgctxt "commsAmmo"
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4003
+#: scripts/scenario_53_escape.lua:4004
 msgctxt "commsAmmo"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4006 scripts/scenario_53_escape.lua:4021
-#: scripts/scenario_53_escape.lua:4026
+#: scripts/scenario_53_escape.lua:4007 scripts/scenario_53_escape.lua:4022
+#: scripts/scenario_53_escape.lua:4027
 msgctxt "commsAmmo"
 msgid "Not enough reputation."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4011
+#: scripts/scenario_53_escape.lua:4012
 msgctxt "commsAmmo"
 msgid "You can't afford as much as I'd like to give you"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4012
+#: scripts/scenario_53_escape.lua:4013
 msgctxt "commsAmmo"
 msgid "Get just one"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4018
+#: scripts/scenario_53_escape.lua:4019
 msgctxt "commsAmmo"
 msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4052
+#: scripts/scenario_53_escape.lua:4053
 msgctxt "commsStation"
 msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4054
+#: scripts/scenario_53_escape.lua:4055
 msgctxt "commsStation"
 msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4057
+#: scripts/scenario_53_escape.lua:4058
 msgctxt "commsStation"
 msgid ""
 "\n"
@@ -1911,79 +1911,79 @@ msgid ""
 "conduct business with you."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4087
+#: scripts/scenario_53_escape.lua:4088
 msgctxt "commsStation"
 msgid "I need information"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4088
+#: scripts/scenario_53_escape.lua:4089
 msgctxt "commsStation"
 msgid "What kind of information do you need?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4089
+#: scripts/scenario_53_escape.lua:4090
 msgctxt "commsAmmo"
 msgid "What ordnance do you have available for restock?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4095
+#: scripts/scenario_53_escape.lua:4096
 msgctxt "commsAmmo"
 msgid ""
 "\n"
 "   Nuke"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4099
+#: scripts/scenario_53_escape.lua:4100
 msgctxt "commsAmmo"
 msgid ""
 "\n"
 "   EMP"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4103
+#: scripts/scenario_53_escape.lua:4104
 msgctxt "commsAmmo"
 msgid ""
 "\n"
 "   Homing"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4107
+#: scripts/scenario_53_escape.lua:4108
 msgctxt "commsAmmo"
 msgid ""
 "\n"
 "   Mine"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4111
+#: scripts/scenario_53_escape.lua:4112
 msgctxt "commsAmmo"
 msgid ""
 "\n"
 "   HVLI"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4114
+#: scripts/scenario_53_escape.lua:4115
 msgctxt "commsAmmo"
 msgid "We have no ordnance available for restock"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4116
+#: scripts/scenario_53_escape.lua:4117
 #, lua-format
 msgctxt "commsAmmo"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4118
+#: scripts/scenario_53_escape.lua:4119
 #, lua-format
 msgctxt "commsAmmo"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4132
+#: scripts/scenario_53_escape.lua:4133
 msgctxt "commsTrade"
 msgid "What goods do you have available for sale or trade?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4134
+#: scripts/scenario_53_escape.lua:4135
 #, lua-format
 msgctxt "commsTrade"
 msgid ""
@@ -1991,7 +1991,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4136
+#: scripts/scenario_53_escape.lua:4137
 #, lua-format
 msgctxt "commsTrade"
 msgid ""
@@ -1999,25 +1999,25 @@ msgid ""
 "   %14s: %2i, %3i"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4142
+#: scripts/scenario_53_escape.lua:4143
 msgctxt "commsTrade"
 msgid "Where can I find particular goods?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4144
+#: scripts/scenario_53_escape.lua:4145
 msgctxt "commsTrade"
 msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4184
+#: scripts/scenario_53_escape.lua:4185
 #, lua-format
 msgctxt "commsTrade"
 msgid "Station %s in sector %s has %s for %i reputation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4189
+#: scripts/scenario_53_escape.lua:4190
 msgctxt "commsTrade"
 msgid ""
 "\n"
@@ -2026,270 +2026,270 @@ msgid ""
 "I've heard about these:"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4191
+#: scripts/scenario_53_escape.lua:4192
 msgctxt "commsTrade"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4213
+#: scripts/scenario_53_escape.lua:4214
 #, lua-format
 msgctxt "commsStation"
-msgid "Can you send a supply drop? (%d rep"
+msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4215
+#: scripts/scenario_53_escape.lua:4216
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4217
+#: scripts/scenario_53_escape.lua:4218
 msgctxt "commsStation"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4219 scripts/scenario_53_escape.lua:4245
+#: scripts/scenario_53_escape.lua:4220 scripts/scenario_53_escape.lua:4246
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4227
+#: scripts/scenario_53_escape.lua:4228
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4229 scripts/scenario_53_escape.lua:4250
+#: scripts/scenario_53_escape.lua:4230 scripts/scenario_53_escape.lua:4251
 msgctxt "commsStation"
 msgid "Not enough reputation!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4239
+#: scripts/scenario_53_escape.lua:4240
 #, lua-format
 msgctxt "commsStation"
 msgid "Please send reinforcements! (%d rep)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4241
+#: scripts/scenario_53_escape.lua:4242
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4243
+#: scripts/scenario_53_escape.lua:4244
 msgctxt "commsStation"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4248
+#: scripts/scenario_53_escape.lua:4249
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4287
+#: scripts/scenario_53_escape.lua:4288
 msgctxt "commsStation"
 msgid " and will trade it for medicine"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4292
+#: scripts/scenario_53_escape.lua:4293
 msgctxt "commsStation"
 msgid " or food"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4294
+#: scripts/scenario_53_escape.lua:4295
 msgctxt "commsStation"
 msgid " and will trade it for food"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4300
+#: scripts/scenario_53_escape.lua:4301
 msgctxt "commsStation"
 msgid " or luxury"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4302
+#: scripts/scenario_53_escape.lua:4303
 msgctxt "commsStation"
 msgid " and will trade it for luxury"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4365 scripts/scenario_53_escape.lua:4655
+#: scripts/scenario_53_escape.lua:4366 scripts/scenario_53_escape.lua:4656
 msgctxt "commsShip"
 msgid "What do you want?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4367
+#: scripts/scenario_53_escape.lua:4368
 msgctxt "commsShip"
 msgid "Sir, how can we assist?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4371 scripts/scenario_53_escape.lua:4558
+#: scripts/scenario_53_escape.lua:4372 scripts/scenario_53_escape.lua:4559
 msgctxt "commsTrade"
 msgid "Do you have cargo you might sell?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4373 scripts/scenario_53_escape.lua:4560
+#: scripts/scenario_53_escape.lua:4374 scripts/scenario_53_escape.lua:4561
 msgctxt "commsTrade"
 msgid "We've got "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4377 scripts/scenario_53_escape.lua:4564
+#: scripts/scenario_53_escape.lua:4378 scripts/scenario_53_escape.lua:4565
 msgctxt "commsTrade"
 msgid ", "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4385 scripts/scenario_53_escape.lua:4572
+#: scripts/scenario_53_escape.lua:4386 scripts/scenario_53_escape.lua:4573
 msgctxt "commsTrade"
 msgid "nothing"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4424 scripts/scenario_53_escape.lua:4620
+#: scripts/scenario_53_escape.lua:4425 scripts/scenario_53_escape.lua:4621
 msgctxt "commsTrade"
 msgid "Traded"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4446 scripts/scenario_53_escape.lua:4642
-#: scripts/scenario_53_escape.lua:4709 scripts/scenario_53_escape.lua:4741
+#: scripts/scenario_53_escape.lua:4447 scripts/scenario_53_escape.lua:4643
+#: scripts/scenario_53_escape.lua:4710 scripts/scenario_53_escape.lua:4742
 #, lua-format
 msgctxt "commsTrade"
 msgid "Purchased %s from %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4448 scripts/scenario_53_escape.lua:4644
-#: scripts/scenario_53_escape.lua:4711 scripts/scenario_53_escape.lua:4743
+#: scripts/scenario_53_escape.lua:4449 scripts/scenario_53_escape.lua:4645
+#: scripts/scenario_53_escape.lua:4712 scripts/scenario_53_escape.lua:4744
 msgctxt "commsTrade"
 msgid "Insufficient reputation for purchase"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4451 scripts/scenario_53_escape.lua:4647
-#: scripts/scenario_53_escape.lua:4714 scripts/scenario_53_escape.lua:4746
+#: scripts/scenario_53_escape.lua:4452 scripts/scenario_53_escape.lua:4648
+#: scripts/scenario_53_escape.lua:4715 scripts/scenario_53_escape.lua:4747
 msgctxt "commsTrade"
 msgid "Insufficient cargo space"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4459
+#: scripts/scenario_53_escape.lua:4460
 msgctxt "commsShip"
 msgid "Defend a waypoint"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4461
+#: scripts/scenario_53_escape.lua:4462
 msgctxt "commsShip"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4464
+#: scripts/scenario_53_escape.lua:4465
 msgctxt "commsShip"
 msgid "Which waypoint should we defend?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4466
+#: scripts/scenario_53_escape.lua:4467
 #, lua-format
 msgctxt "commsShip"
 msgid "Defend WP %d"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4468
+#: scripts/scenario_53_escape.lua:4469
 #, lua-format
 msgctxt "commsShip"
 msgid "We are heading to assist at WP %d."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4475
+#: scripts/scenario_53_escape.lua:4476
 msgctxt "commsShip"
 msgid "Assist me"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4476
+#: scripts/scenario_53_escape.lua:4477
 msgctxt "commsShip"
 msgid "Heading toward you to assist."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4481
+#: scripts/scenario_53_escape.lua:4482
 msgctxt "commsShip"
 msgid "Report status"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4482
+#: scripts/scenario_53_escape.lua:4483
 #, lua-format
 msgctxt "commsShip"
 msgid "Hull: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4485
+#: scripts/scenario_53_escape.lua:4486
 #, lua-format
 msgctxt "commsShip"
 msgid "Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4487
+#: scripts/scenario_53_escape.lua:4488
 #, lua-format
 msgctxt "commsShip"
 msgid "Front Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4488
+#: scripts/scenario_53_escape.lua:4489
 #, lua-format
 msgctxt "commsShip"
 msgid "Rear Shield: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4491
+#: scripts/scenario_53_escape.lua:4492
 #, lua-format
 msgctxt "commsShip"
 msgid "Shield %s: %d%%\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4498
+#: scripts/scenario_53_escape.lua:4499
 #, lua-format
 msgctxt "commsShip"
 msgid "%s Missiles: %d/%d\n"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4507
+#: scripts/scenario_53_escape.lua:4508
 #, lua-format
 msgctxt "commsShip"
 msgid "Dock at %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4508
+#: scripts/scenario_53_escape.lua:4509
 #, lua-format
 msgctxt "commsShip"
 msgid "Docking at %s."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4519
+#: scripts/scenario_53_escape.lua:4520
 msgctxt "commsShipEnemy"
 msgid "We will see to your destruction!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4520
+#: scripts/scenario_53_escape.lua:4521
 msgctxt "commsShipEnemy"
 msgid "Your bloodline will end here!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4521
+#: scripts/scenario_53_escape.lua:4522
 msgctxt "commsShipEnemy"
 msgid "Your feeble threats are meaningless."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4523
+#: scripts/scenario_53_escape.lua:4524
 msgctxt "commsShipEnemy"
 msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4525
+#: scripts/scenario_53_escape.lua:4526
 msgctxt "commsShipEnemy"
 msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4527
+#: scripts/scenario_53_escape.lua:4528
 msgctxt "commsShipEnemy"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4529
+#: scripts/scenario_53_escape.lua:4530
 msgctxt "commsShipEnemy"
 msgid ""
 "One zero one.\n"
@@ -2300,22 +2300,22 @@ msgid ""
 "Communication halted."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4530
+#: scripts/scenario_53_escape.lua:4531
 msgctxt "commsShipEnemy"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4531
+#: scripts/scenario_53_escape.lua:4532
 msgctxt "commsShipEnemy"
 msgid "Rogue command received. Targeting source."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4532
+#: scripts/scenario_53_escape.lua:4533
 msgctxt "commsShipEnemy"
 msgid "External command ignored."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4534
+#: scripts/scenario_53_escape.lua:4535
 msgctxt "commsShipEnemy"
 msgid ""
 "The hive suffers no threats. Opposition to any of us is opposition to us "
@@ -2323,92 +2323,92 @@ msgid ""
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4535
+#: scripts/scenario_53_escape.lua:4536
 msgctxt "commsShipEnemy"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4536
+#: scripts/scenario_53_escape.lua:4537
 msgctxt "commsShipEnemy"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4537
+#: scripts/scenario_53_escape.lua:4538
 msgctxt "commsShipEnemy"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4539
+#: scripts/scenario_53_escape.lua:4540
 msgctxt "commsShipEnemy"
 msgid "Mind your own business!"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4557 scripts/scenario_53_escape.lua:4578
+#: scripts/scenario_53_escape.lua:4558 scripts/scenario_53_escape.lua:4579
 msgctxt "commsShip"
 msgid "Yes?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4580
+#: scripts/scenario_53_escape.lua:4581
 msgctxt "commsShip"
 msgid "Where are you headed?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4658
+#: scripts/scenario_53_escape.lua:4659
 #, lua-format
 msgctxt "commsShip"
 msgid "Where are you headed? (cost: %f reputation)"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4660
+#: scripts/scenario_53_escape.lua:4661
 msgctxt "commsShip"
 msgid "Insufficient reputation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4722
+#: scripts/scenario_53_escape.lua:4723
 msgctxt "commsTrade"
 msgid "Why are you bothering me?"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4757
+#: scripts/scenario_53_escape.lua:4758
 msgctxt "commsShip"
 msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4759
+#: scripts/scenario_53_escape.lua:4760
 msgctxt "commsShip"
 msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4796
+#: scripts/scenario_53_escape.lua:4797
 msgctxt "msgTimerTab"
 msgid "Suffocation"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4807 scripts/scenario_53_escape.lua:4815
+#: scripts/scenario_53_escape.lua:4808 scripts/scenario_53_escape.lua:4816
 msgctxt "msgEngineer"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4823
+#: scripts/scenario_53_escape.lua:4824
 msgctxt "msgScience"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4831
+#: scripts/scenario_53_escape.lua:4832
 msgctxt "msgOperations"
 msgid "Environmental systems show limited air remaining"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4837
+#: scripts/scenario_53_escape.lua:4838
 msgctxt "msgGlobal"
 msgid "You suffocated while aboard the fighter hulk"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4867
+#: scripts/scenario_53_escape.lua:4868
 #, lua-format
 msgctxt "msgEngineer"
 msgid ""
@@ -2418,7 +2418,7 @@ msgid ""
 "remaining in the transporters."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4871
+#: scripts/scenario_53_escape.lua:4872
 #, lua-format
 msgctxt "msgEngineer+"
 msgid ""
@@ -2428,24 +2428,24 @@ msgid ""
 "remaining in the transporters."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4884
+#: scripts/scenario_53_escape.lua:4885
 msgctxt "buttonEngineer"
 msgid "Transfer to Repulse"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4888
+#: scripts/scenario_53_escape.lua:4889
 msgctxt "buttonEengineer+"
 msgid "Transfer to Repulse"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4949
+#: scripts/scenario_53_escape.lua:4950
 msgctxt "shipLog"
 msgid ""
 "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently "
 "registered as Independent"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4959
+#: scripts/scenario_53_escape.lua:4960
 msgid ""
 "Need a repair crew? We used to be posted on that ship. We would be happy to "
 "return to our repair duty and get away from these Kraylors. We left the "
@@ -2453,24 +2453,24 @@ msgid ""
 "You should find an activation switch at the weapons console"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4964
+#: scripts/scenario_53_escape.lua:4965
 msgctxt "buttonWeapons"
 msgid "Return Transport"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4970
+#: scripts/scenario_53_escape.lua:4971
 msgctxt "buttonTactical"
 msgid "Return Transport"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:4993
+#: scripts/scenario_53_escape.lua:4994
 msgctxt "shipLog"
 msgid ""
 "Repair crew reports that the port beam weapon emplacement is currently non-"
 "functional. No applicable spare parts found aboard"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5004
+#: scripts/scenario_53_escape.lua:5005
 msgctxt "shipLog"
 msgid ""
 "Repair crew reports the jump drive not operational. However, they may be "
@@ -2478,28 +2478,28 @@ msgid ""
 "replacement parts. They are starting the fabrication process now"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5008
+#: scripts/scenario_53_escape.lua:5009
 msgctxt "shipLog"
 msgid ""
 "Repair crew reports the jump drive inoperative. Additional parts are "
 "necessary"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5019
+#: scripts/scenario_53_escape.lua:5020
 msgctxt "shipLog"
 msgid ""
 "Repair crew says the missle weapons systems are not repairable with "
 "available components"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5030
+#: scripts/scenario_53_escape.lua:5031
 msgctxt "shipLog"
 msgid ""
 "Repair crew applied some of the parts picked up to make some repairs on the "
 "hull"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5046
+#: scripts/scenario_53_escape.lua:5047
 msgctxt "shipLog"
 msgid ""
 "Repair crew reports they have repaired as much as they can. Additional parts "
@@ -2508,7 +2508,7 @@ msgid ""
 "Human Navy stations."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5066
+#: scripts/scenario_53_escape.lua:5067
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2516,7 +2516,7 @@ msgid ""
 "years of experience. He's on %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5082
+#: scripts/scenario_53_escape.lua:5083
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2524,7 +2524,7 @@ msgid ""
 "easily get our shields working. She works at a shop on %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5098
+#: scripts/scenario_53_escape.lua:5099
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2533,7 +2533,7 @@ msgid ""
 "full capacity"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5114
+#: scripts/scenario_53_escape.lua:5115
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2542,7 +2542,7 @@ msgid ""
 "back up to the Human Navy communication network"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5130
+#: scripts/scenario_53_escape.lua:5131
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2550,7 +2550,7 @@ msgid ""
 "fixes jump drives and he could get ours working"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5146
+#: scripts/scenario_53_escape.lua:5147
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2558,58 +2558,58 @@ msgid ""
 "can fix us up. He does work on reactors on %s"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5151
+#: scripts/scenario_53_escape.lua:5152
 msgctxt "buttonRelay"
 msgid "crew fixers"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5157
+#: scripts/scenario_53_escape.lua:5158
 msgctxt "buttonOperations"
 msgid "crew fixers"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5191
+#: scripts/scenario_53_escape.lua:5192
 #, lua-format
 msgctxt "crewRepair"
 msgid " Missiles:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5194
+#: scripts/scenario_53_escape.lua:5195
 #, lua-format
 msgctxt "crewRepair"
 msgid " Shields:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5197
+#: scripts/scenario_53_escape.lua:5198
 #, lua-format
 msgctxt "crewRepair"
 msgid " Impulse:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5200
+#: scripts/scenario_53_escape.lua:5201
 #, lua-format
 msgctxt "crewRepair"
 msgid " Communications:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5203
+#: scripts/scenario_53_escape.lua:5204
 #, lua-format
 msgctxt "crewRepair"
 msgid " Jump:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5206
+#: scripts/scenario_53_escape.lua:5207
 #, lua-format
 msgctxt "crewRepair"
 msgid " Reactor:%s(%s) "
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5216
+#: scripts/scenario_53_escape.lua:5217
 msgctxt "shipLog"
 msgid "Repair crew suggested locations for ship fixes:"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5240
+#: scripts/scenario_53_escape.lua:5241
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2617,7 +2617,7 @@ msgid ""
 "beam weapon"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5273
+#: scripts/scenario_53_escape.lua:5274
 #, lua-format
 msgctxt "shipLog"
 msgid ""
@@ -2625,62 +2625,62 @@ msgid ""
 "us."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5274
+#: scripts/scenario_53_escape.lua:5275
 #, lua-format
 msgctxt "shipLog"
 msgid "[Engineering tech] With our hull at %i, we better hope our shields hold"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5287
+#: scripts/scenario_53_escape.lua:5288
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] You won't get away so easily"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5289
+#: scripts/scenario_53_escape.lua:5290
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] You can run, but you can't hide"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5291
+#: scripts/scenario_53_escape.lua:5292
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] I will get you yet"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5304
+#: scripts/scenario_53_escape.lua:5305
 msgid ""
 "You don't steal from Boris Junk Yard without consequences. I'm coming for you"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5306
+#: scripts/scenario_53_escape.lua:5307
 msgid "I saw you steal that ship. You'll rue the day"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5308
+#: scripts/scenario_53_escape.lua:5309
 msgid "Stealing a ship, eh? We'll just see about that"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5320
+#: scripts/scenario_53_escape.lua:5321
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] You can't get rid of me that easily"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5322
+#: scripts/scenario_53_escape.lua:5323
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] I'll be back"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5324
+#: scripts/scenario_53_escape.lua:5325
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] I've got plenty of ships"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5340
+#: scripts/scenario_53_escape.lua:5341
 msgctxt "shipLog"
 msgid ""
 "Repair crew thinks they can use the space debris recently acquired to make "
@@ -2688,76 +2688,76 @@ msgid ""
 "now."
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5349
+#: scripts/scenario_53_escape.lua:5350
 msgctxt "shipLog"
 msgid ""
 "Repair crew finished jump drive part fabrication. They believe the jump "
 "drive should be functional soon"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5574 scripts/scenario_53_escape.lua:5648
+#: scripts/scenario_53_escape.lua:5575 scripts/scenario_53_escape.lua:5649
 #, lua-format
 msgctxt "scienceShipsName"
 msgid "%s Jump Freighter %d"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5576 scripts/scenario_53_escape.lua:5650
+#: scripts/scenario_53_escape.lua:5577 scripts/scenario_53_escape.lua:5651
 #, lua-format
 msgctxt "scienceShipsName"
 msgid "%s Freighter %d"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5697
+#: scripts/scenario_53_escape.lua:5698
 msgctxt "scienceJunkDescription"
 msgid "Boris Junk Yard"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5730 scripts/scenario_53_escape.lua:5779
+#: scripts/scenario_53_escape.lua:5731 scripts/scenario_53_escape.lua:5780
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on reactor"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5739 scripts/scenario_53_escape.lua:5788
+#: scripts/scenario_53_escape.lua:5740 scripts/scenario_53_escape.lua:5789
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on beam weapons"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5748 scripts/scenario_53_escape.lua:5797
+#: scripts/scenario_53_escape.lua:5749 scripts/scenario_53_escape.lua:5798
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on maneuver"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5757 scripts/scenario_53_escape.lua:5815
+#: scripts/scenario_53_escape.lua:5758 scripts/scenario_53_escape.lua:5816
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on impulse engines"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5766
+#: scripts/scenario_53_escape.lua:5767
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on shields"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5806
+#: scripts/scenario_53_escape.lua:5807
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on missile weapons"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5824
+#: scripts/scenario_53_escape.lua:5825
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on warp drive"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5833
+#: scripts/scenario_53_escape.lua:5834
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on jump drive"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5842
+#: scripts/scenario_53_escape.lua:5843
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on front shield"
 msgstr ""
 
-#: scripts/scenario_53_escape.lua:5851
+#: scripts/scenario_53_escape.lua:5852
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on rear shield"
 msgstr ""
