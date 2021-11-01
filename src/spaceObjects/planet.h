@@ -22,9 +22,9 @@ public:
     float getCollisionSize();
 
     void setPlanetAtmosphereColor(float r, float g, float b);
-    void setPlanetAtmosphereTexture(string texture_name);
-    void setPlanetSurfaceTexture(string texture_name);
-    void setPlanetCloudTexture(string texture_name);
+    void setPlanetAtmosphereTexture(std::string_view texture_name);
+    void setPlanetSurfaceTexture(std::string_view texture_name);
+    void setPlanetCloudTexture(std::string_view texture_name);
     void setPlanetRadius(float size);
     void setPlanetCloudRadius(float size);
     void setDistanceFromMovementPlane(float distance_from_movement_plane);
@@ -44,7 +44,7 @@ private:
     string planet_texture;
     string cloud_texture;
     string atmosphere_texture;
-    glm::u8vec4 atmosphere_color;
+    glm::u8vec3 atmosphere_color;
     float distance_from_movement_plane;
 
     float axial_rotation_time;
