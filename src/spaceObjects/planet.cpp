@@ -157,7 +157,7 @@ Planet::Planet()
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
 {
-    atmosphere_color = glm::vec3{ r, g, b } *255.f;
+    atmosphere_color = glm::vec3{ r, g, b } * 255.f;
 }
 
 void Planet::setPlanetAtmosphereTexture(std::string_view texture_name)
