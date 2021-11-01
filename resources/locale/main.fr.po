@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-09-11 13:31+0200\n"
+"PO-Revision-Date: 2021-11-01 14:07+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -418,37 +418,33 @@ msgid "LAN only"
 msgstr "Seulement LAN"
 
 #: src/menus/serverCreationScreen.cpp:62
-#, fuzzy
 msgid "Server info"
-msgstr "Nom du serveur : "
+msgstr "Infos serveur"
 
 #: src/menus/serverCreationScreen.cpp:66
-#, fuzzy
 msgid "Server IP: "
 msgstr "IP du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:78 src/menus/serverCreationScreen.cpp:110
 #: src/menus/serverCreationScreen.cpp:194
-#, fuzzy
 msgid "Close"
-msgstr "Fermer"
+msgstr "Retour"
 
 #: src/menus/serverCreationScreen.cpp:117
 msgid "Continue"
-msgstr ""
+msgstr "Continuer"
 
 #: src/menus/serverCreationScreen.cpp:166
 msgid "Category"
-msgstr ""
+msgstr "Catégories"
 
 #: src/menus/serverCreationScreen.cpp:177
 msgid "Scenario"
 msgstr "Choix du scénario"
 
 #: src/menus/serverCreationScreen.cpp:185
-#, fuzzy
 msgid "Description"
-msgstr "Description scan complet :"
+msgstr "Description"
 
 #: src/menus/serverCreationScreen.cpp:201
 #: src/menus/serverCreationScreen.cpp:275
@@ -551,7 +547,7 @@ msgstr "Activer plein écran"
 
 #: src/menus/optionsMenu.cpp:258 src/menus/optionsMenu.cpp:263
 msgid "FoV: {fov}"
-msgstr ""
+msgstr "Champ de vision : {fov}"
 
 #: src/menus/shipSelectionScreen.cpp:49
 msgid "Select your station"
@@ -1952,12 +1948,12 @@ msgstr "Retourner au menu vaisseau/postes"
 #: src/gui/hotkeyConfig.cpp:204
 msgctxt "hotkey_Basic"
 msgid "Zoom in on zoomable stations"
-msgstr ""
+msgstr "Zoomer sur les stations zoomables"
 
 #: src/gui/hotkeyConfig.cpp:205
 msgctxt "hotkey_Basic"
 msgid "Zoom out on zoomable stations"
-msgstr ""
+msgstr "Dézoomer sur les stations zoomables"
 
 #: src/gui/hotkeyConfig.cpp:206
 msgctxt "hotkey_Basic"
@@ -2083,7 +2079,7 @@ msgstr "Décélérer (moteurs principaux)"
 #, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Set impulse (joystick)"
-msgstr "Sélectionner les moteurs à impulsion"
+msgstr "Activer les moteurs (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:232
 msgctxt "hotkey_Helms"
@@ -2183,17 +2179,17 @@ msgstr "Activer le saut (téléportation)"
 #: src/gui/hotkeyConfig.cpp:251
 msgctxt "hotkey_Helms"
 msgid "Combat boost left"
-msgstr ""
+msgstr "Manœuvre de combat gauche"
 
 #: src/gui/hotkeyConfig.cpp:252
 msgctxt "hotkey_Helms"
 msgid "Combat boost right"
-msgstr ""
+msgstr "Manœuvre de combat droite"
 
 #: src/gui/hotkeyConfig.cpp:253
 msgctxt "hotkey_Helms"
 msgid "Combat boost forwards"
-msgstr ""
+msgstr "Manœuvre de combat avant"
 
 #: src/gui/hotkeyConfig.cpp:256 src/gui/hotkeyConfig.cpp:257
 #: src/gui/hotkeyConfig.cpp:258 src/gui/hotkeyConfig.cpp:259
@@ -2323,10 +2319,9 @@ msgid "Enable missile aim lock"
 msgstr "Activer le verrouillage des missiles"
 
 #: src/gui/hotkeyConfig.cpp:281
-#, fuzzy
 msgctxt "hotkey_Weapons"
 msgid "Disable"
-msgstr "Désactivé"
+msgstr "Désactiver le verrouillage des missiles"
 
 #: src/gui/hotkeyConfig.cpp:282
 msgctxt "hotkey_Weapons"
@@ -2357,12 +2352,12 @@ msgstr "Sélectionner l'objet suivant à scanner"
 #: src/gui/hotkeyConfig.cpp:290
 msgctxt "hotkey_Science"
 msgid "Scanning parameter {number} increase"
-msgstr ""
+msgstr "Scan niveau {number} vers la droite"
 
 #: src/gui/hotkeyConfig.cpp:291
 msgctxt "hotkey_Science"
 msgid "Scanning parameter {number} decrease"
-msgstr ""
+msgstr "Scan niveau {number} vers la gauche"
 
 #: src/gui/hotkeyConfig.cpp:295 src/gui/hotkeyConfig.cpp:296
 #: src/gui/hotkeyConfig.cpp:297 src/gui/hotkeyConfig.cpp:298
@@ -2531,38 +2526,39 @@ msgstr "Annuler l'autodestruction"
 #: src/gui/hotkeyConfig.cpp:326 src/gui/hotkeyConfig.cpp:327
 msgctxt "hotkey_menu"
 msgid "GM"
-msgstr ""
+msgstr "Maître de jeu"
 
 #: src/gui/hotkeyConfig.cpp:326
 msgctxt "hotkey_GM"
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: src/gui/hotkeyConfig.cpp:327
 msgctxt "hotkey_GM"
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copier dans le presse-papier"
 
 #: src/gui/hotkeyConfig.cpp:330 src/gui/hotkeyConfig.cpp:333
 #: src/gui/hotkeyConfig.cpp:334
 msgctxt "hotkey_menu"
 msgid "Various"
-msgstr ""
+msgstr "Divers"
 
 #: src/gui/hotkeyConfig.cpp:330
 msgctxt "hotkey_various"
 msgid "Show callsigns (spectator)"
-msgstr ""
+msgstr "Afficher noms des vaisseaux (spectateurs)"
 
 #: src/gui/hotkeyConfig.cpp:333
 msgctxt "hotkey_debug"
 msgid "Show FPS"
-msgstr ""
+msgstr "Afficher les FPS"
 
 #: src/gui/hotkeyConfig.cpp:334
+#, fuzzy
 msgctxt "hotkey_debug"
 msgid "Show debug timing"
-msgstr ""
+msgstr "Afficher la durée de débogage"
 
 #: src/spaceObjects/missiles/missileWeapon.cpp:194
 #: src/spaceObjects/mine.cpp:148
@@ -3577,16 +3573,14 @@ msgstr ""
 #: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
 #: scripts/shiptemplates/exuari.lua:201 scripts/shiptemplates/exuari.lua:221
 #: scripts/shiptemplates/exuari.lua:250
-#, fuzzy
 msgctxt "class"
 msgid "Exuari"
-msgstr "Éxuari"
+msgstr "Éxuaris"
 
 #: scripts/shiptemplates/exuari.lua:77
-#, fuzzy
 msgctxt "subclass"
 msgid "Starfighter - Fighter"
-msgstr "Chasseurs stellaires"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:80
 msgid ""
@@ -3597,12 +3591,21 @@ msgid ""
 "death and do not care much about the enemies weapons ranges. Fighters are "
 "easy to take out, but should not be underestimated."
 msgstr ""
+"Le chasseur Éxuari 'Dagger' est un vaisseau monoplace, très rapide et agile, "
+"qui ne fait pas beaucoup de dégâts, mais qui se déplace généralement en "
+"groupe plus important.\n"
+"\n"
+"Ils sont capables d'esquiver la plupart des missiles et d'attaquer les zones "
+"sans défense de leurs adversaires. Cependant, la plupart des pilotes de "
+"chasse Éxuari s'attendent à leur propre mort et ne se soucient guère de la "
+"puissance des armes ennemies.\n"
+"\n"
+"Les chasseurs sont faciles à éliminer, mais ne doivent pas être sous-estimés."
 
 #: scripts/shiptemplates/exuari.lua:90
-#, fuzzy
 msgctxt "subclass"
 msgid "Starfighter - Interceptor"
-msgstr "Chasseurs stellaires"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:92
 msgid ""
@@ -3612,6 +3615,13 @@ msgid ""
 "are often considered as fearless, but most of them are just consumed by "
 "their instinct for hunting."
 msgstr ""
+"L'intercepteur Éxuari 'Blade' est un chasseur amélioré, conçu à l'origine "
+"pour traquer les chasseurs récalcitrants.\n"
+"\n"
+"De nos jours, les Blades sont souvent considérées comme la première vague "
+"d'attaque d'un assaut plus large, suivie de près par les Daggers. Les "
+"pilotes de Blades sont souvent considérés comme intrépides, mais la plupart "
+"d'entre eux sont simplement consumés par leur instinct de chasse."
 
 #: scripts/shiptemplates/exuari.lua:97
 msgctxt "subclass"
@@ -3629,12 +3639,23 @@ msgid ""
 "(and often lethal) activity within the Exuari society, so don't expect "
 "experienced pilots."
 msgstr ""
+"Le bombardier léger Éxuari 'Gunner' est un vaisseau monoplace, conçu pour "
+"contourner les lignes de défense de leurs ennemis et amener sa charge "
+"mortelle sur des cibles se déplaçant lentement.\n"
+"\n"
+"Les Gunners ne sont pas aussi agiles que les autres chasseurs, mais restent "
+"plus rapides que la plupart des vaisseaux. Un groupe de Gunners peut "
+"infliger beaucoup de dégâts à une seule cible stationnaire s'il n'est pas "
+"détruit avant que sa cible ne soit à portée de son arme.\n"
+"\n"
+"Piloter un Gunner est considéré comme une activité récréative (et souvent "
+"mortelle) au sein de la société Exuari, alors ne vous attendez pas à des "
+"pilotes expérimentés."
 
 #: scripts/shiptemplates/exuari.lua:112
-#, fuzzy
 msgctxt "subclass"
 msgid "Starfighter - Bomber"
-msgstr "Chasseurs stellaires"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:113
 msgid ""
@@ -3645,6 +3666,15 @@ msgid ""
 "it's long reload cycle a Shooter may easily be destroyed between its attack "
 "runs."
 msgstr ""
+"Le bombardier Éxuari 'Shooter' transporte deux séries de HVLI. Pour garder "
+"le navire à faible coût, il n'a pas de système de recharge automatique des "
+"missiles, de sorte que le pilote unique doit charger le deuxième tour "
+"manuellement.\n"
+"\n"
+"Les pilotes de Shooters ont tendance à rester sur le champ de bataille, même "
+"sans munitions, et apprécient la propagation de la mort. En raison de son "
+"cycle de rechargement long, un Shooter peut facilement être détruit entre "
+"ses attaques."
 
 #: scripts/shiptemplates/exuari.lua:118
 msgctxt "subclass"
@@ -3657,6 +3687,9 @@ msgid ""
 "HVLIs. Those are considered to be hull-penetrating and cause multiple times "
 "the damage of Gunner HVLIs."
 msgstr ""
+"Le bombardier lourd Éxuari 'Jagger' ne transporte qu'une seule série de HVLI "
+"améliorés. Ceux-ci sont considérés comme pénétrant la coque et causent bien "
+"plus de dégâts que les Gunner HVLI."
 
 #: scripts/shiptemplates/exuari.lua:124
 msgctxt "subclass"
@@ -3664,7 +3697,6 @@ msgid "Striker"
 msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:126
-#, fuzzy
 msgid ""
 "The Exuari alpha striker 'Racer' is a warp-drive equipped Figter build for "
 "quick strikes. This spacecraft runs on a small crew and is often used as "
@@ -3672,11 +3704,14 @@ msgid ""
 "but the striker beams do not cause an extreme amount of damage. Like all "
 "strikers, it lacks in rear shields."
 msgstr ""
-"Le Navire de frappe est un vaisseau de combat équipé de la vitesse lumière "
-"et conçu pour des frappes éclairs.\n"
+"Le frappeur alpha Éxuari 'Racer' est un chasseur équipé de la vitesse "
+"lumière pour des frappes rapides.\n"
 "\n"
-"Il est rapide, agile mais n'inflige pas une quantité extrême de dégâts et "
-"manque de boucliers arrière."
+"Ce vaisseau fonctionne avec un petit équipage et est souvent utilisé comme "
+"éclaireur, intercepteur ou pour effectuer des frappes préventives. C'est "
+"rapide, agile, mais les faisceaux laser de ce frappeur ne causent pas une "
+"quantité extrême de dégâts. Comme tous les frappeurs, il manque de boucliers "
+"arrière."
 
 #: scripts/shiptemplates/exuari.lua:137
 msgid ""
@@ -3686,6 +3721,16 @@ msgid ""
 "of striker beams and improved front shields. It's fast, it's agile, and can "
 "clean up what is left of the enemies fleet after an initial strike."
 msgstr ""
+"Le frappeur bêta Éxuari 'Hunter' est un chasseur de renfort équipé de la "
+"vitesse lumière.\n"
+"\n"
+"Ce vaisseau fonctionne avec un petit équipage et est souvent envoyé au "
+"combat pour aider d'autres navires Éxuari lorsqu'ils s'engagent dans la "
+"bataille. Il a une paire supplémentaire de faisceaux laser et des boucliers "
+"avant améliorés.\n"
+"\n"
+"Il est rapide, agile et peut nettoyer ce qui reste de la flotte ennemie "
+"après une première frappe."
 
 #: scripts/shiptemplates/exuari.lua:146
 msgid ""
@@ -3694,6 +3739,12 @@ msgid ""
 "runs on a small crew and is equipped with HVLIs and an EMP. It's fast, it's "
 "agile, and can do a great amount of damage in short time."
 msgstr ""
+"Le frappeur gamma Éxuari 'Strike' est un bombardier tactique équipé de la "
+"vitesse lumière pour des frappes rapides contre des cibles blindées "
+"puissantes.\n"
+"\n"
+"Ce vaisseau fonctionne avec un petit équipage et est équipé de HVLI et d'un "
+"EMP. C'est rapide, agile et peut faire beaucoup de dégâts en peu de temps."
 
 #: scripts/shiptemplates/exuari.lua:154
 msgid ""
@@ -3702,13 +3753,18 @@ msgid ""
 "combines reinforced front shields with a good amount of HVLIs. It's fast, "
 "it's agile, and can take some damage."
 msgstr ""
+"Le frappeur delta Éxuari 'Dash' est un bombardier d'endurance équipé de la "
+"vitesse lumière pour des frappes prolongées.\n"
+"\n"
+"Ce vaisseau fonctionne avec un petit équipage et combine des boucliers avant "
+"renforcés avec une bonne quantité de HVLI. Il est rapide, agile et peut "
+"encaisser des dégâts."
 
 #: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
 #: scripts/shiptemplates/exuari.lua:201
-#, fuzzy
 msgctxt "subclass"
 msgid "Frigate"
-msgstr "Frégates"
+msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:168
 msgid ""
@@ -3718,27 +3774,32 @@ msgid ""
 "beams and a large stock of different missiles, including homing missiles and "
 "mines."
 msgstr ""
+"Le 'Guard' Éxuari n'est pas impressionnant, se voulant être un vaisseau "
+"d'escorte ou de défense.\n"
+"\n"
+"Il a des problèmes de puissance, ce qui fait que le cycle de rechargement "
+"des faisceaux laser et des missiles prend plus de temps que prévu. Le Gard "
+"est équipé de tourelles à faisceaux et d'un grand stock de missiles "
+"différents, y compris des missiles à tête chercheuse et des mines."
 
 #: scripts/shiptemplates/exuari.lua:187
-#, fuzzy
 msgid ""
 "The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
 "low-damage point-defense turret beams to quickly take out starfighters."
 msgstr ""
-"Le Nirvana R5 est un croiseur anti-chasseur.\n"
+"Le 'Sentinel' Éxuari est une frégate anti-chasseur.\n"
 "\n"
-"Il dispose de plusieurs faisceaux laser à tir rapide et à faibles dégâts "
-"pour éliminer rapidement les chasseurs stellaires."
+"Il dispose de plusieurs tourelles à faisceaux de défense à tir rapide et à "
+"faibles dégâts pour éliminer rapidement les chasseurs stellaires."
 
 #: scripts/shiptemplates/exuari.lua:203
-#, fuzzy
 msgid ""
 "The Exuari Warden is a heavy artillery frigate, it fires bunches of missiles "
 "from forward facing tubes. Only a single point defense turret is present."
 msgstr ""
-"Croiseur d'artillerie lourde,\n"
-"le Tempête tire des salves de missiles à partir de tubes orientés vers "
-"l'avant."
+"Le 'Warden' Éxuari est une frégate d'artillerie lourde, elle tire des tas de "
+"missiles à partir de tubes orientés vers l'avant. Seule une tourelle de "
+"défense est présente."
 
 #: scripts/shiptemplates/exuari.lua:221
 msgctxt "subclass"
@@ -3746,46 +3807,44 @@ msgid "Artillery"
 msgstr ""
 
 #: scripts/shiptemplates/exuari.lua:223
-#, fuzzy
 msgid ""
 "The Exuari Flash is a special artillery sniper, built to deal a large "
 "amounts of damage quickly and from a distance before escaping. It's a basic "
 "freighter that carries nuclear weapons. Some say, this is what happens to "
 "freighters, when they fall into the hands of the Exuari."
 msgstr ""
-"Le sniper Ranus U est conçu pour infliger de gros dégâts rapidement et à "
-"distance avant de s'échapper.\n"
+"Le 'Flash' Éxuari est un sniper d'artillerie spécial, conçu pour infliger de "
+"grandes quantités de dégâts rapidement et à distance avant de s'échapper.\n"
 "\n"
-"C'est la seule frégate de base équipée d'armes nucléaires, même si c'est "
-"aussi le plus petit de tous les navires de classe frégate."
+"C'est un cargo basique qui transporte des armes nucléaires. Certains disent "
+"que c'est ce qui arrive aux cargos lorsqu'ils tombent entre les mains des "
+"Exuari."
 
 #: scripts/shiptemplates/exuari.lua:234
-#, fuzzy
 msgid ""
 "The Exuari Ranger is a special sniper, built to deal large amounts of damage "
 "over a large area and from a distance before escaping. It's a basic frigate "
 "that carries nuclear weapons, even though it's also one of the smallest of "
 "all frigate-class ships."
 msgstr ""
-"Le sniper Ranus U est conçu pour infliger de gros dégâts rapidement et à "
-"distance avant de s'échapper.\n"
+"Le 'Ranger' Éxuari est un sniper spécial, conçu pour infliger de gros dégâts "
+"sur une grande surface et à distance avant de s'échapper.\n"
 "\n"
-"C'est la seule frégate de base équipée d'armes nucléaires, même si c'est "
-"aussi le plus petit de tous les navires de classe frégate."
+"C'est une frégate de base qui transporte des armes nucléaires, même si c'est "
+"aussi l'un des plus petits de tous les navires de classe frégate."
 
 #: scripts/shiptemplates/exuari.lua:242
-#, fuzzy
 msgid ""
 "The Exuari Buster is a special sniper, built to deal a large amount of "
 "damage quickly and from a distance before escaping. It's a basic frigate "
 "that carries nuclear weapons, even though it's also one of the smallest of "
 "all frigate-class ships."
 msgstr ""
-"Le sniper Ranus U est conçu pour infliger de gros dégâts rapidement et à "
-"distance avant de s'échapper.\n"
+"Le 'Buster' Éxuari est un sniper spécial, conçu pour infliger une grande "
+"quantité de dégâts rapidement et à distance avant de s'échapper.\n"
 "\n"
-"C'est la seule frégate de base équipée d'armes nucléaires, même si c'est "
-"aussi le plus petit de tous les navires de classe frégate."
+"C'est une frégate de base qui transporte des armes nucléaires. C'est aussi "
+"l'un des plus petits de tous les navires de classe frégate."
 
 #: scripts/shiptemplates/exuari.lua:250
 msgctxt "subclass"
@@ -3802,6 +3861,17 @@ msgid ""
 "sensor range of the desired target, while fighters and artillery start from "
 "the carrier."
 msgstr ""
+"Le 'Ryder' Éxuari est un imposant vaisseau de transport avec de nombreuses "
+"caractéristiques défensives.\n"
+"\n"
+"Il peut être amarré par de plus petits navires pour les ravitailler ou les "
+"transporter. Contrairement à une station, il est équipé d'un lent moteur à "
+"impulsion et est capable de se déplacer. Il sert d'habitation pour les "
+"équipages Éxuari et dispose d'un hangar.\n"
+"\n"
+"Une stratégie d'assaut commune Éxuari consiste à maintenir un Ryder hors de "
+"portée des capteurs de la cible souhaitée, tandis que les chasseurs et "
+"l'artillerie partent du transporteur."
 
 #: scripts/shiptemplates/exuari.lua:277
 msgid ""
@@ -3810,6 +3880,13 @@ msgid ""
 "equipped with a slow impulse drive. The shields of this base carrier are "
 "saied to be undestroyable."
 msgstr ""
+"Le 'Fortress' Éxuari est un énorme transporteur avec de nombreuses "
+"caractéristiques défensives.\n"
+"\n"
+"Il peut être amarré par de plus petits navires pour les ravitailler ou les "
+"transporter. Contrairement à une station, il est équipé d'un moteur à "
+"impulsion lent. Les boucliers de cette base de transport sont dits "
+"indestructibles."
 
 #: scripts/shiptemplates/frigates.lua:14
 msgctxt "ship"
