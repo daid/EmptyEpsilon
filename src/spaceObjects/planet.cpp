@@ -129,7 +129,6 @@ Planet::Planet()
     planet_texture = "";
     cloud_texture = "";
     atmosphere_texture = "";
-    atmosphere_color = glm::u8vec4(0, 0, 0, 0);
     atmosphere_size = 0;
     distance_from_movement_plane = 0;
     axial_rotation_time = 0.0;
@@ -157,7 +156,7 @@ Planet::Planet()
 
 void Planet::setPlanetAtmosphereColor(float r, float g, float b)
 {
-    atmosphere_color = glm::vec3{ r, g, b } * 255.f;
+    atmosphere_color = glm::vec3{ r, g, b };
 }
 
 void Planet::setPlanetAtmosphereTexture(std::string_view texture_name)
@@ -269,7 +268,7 @@ void Planet::draw3D()
         auto planet_matrix = glm::scale(getModelMatrix(), glm::vec3(planet_size));
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(planet_matrix));
         glUniform4f(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 1.f, 1.f, 1.f);
-        glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::AtmosphereColor), 1, glm::value_ptr(glm::vec4(glm::vec3{ atmosphere_color } / 255.f, 1.f)));
+        glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::AtmosphereColor), 1, glm::value_ptr(glm::vec4(atmosphere_color, 1.f)));
 
         ShaderRegistry::setupLights(shader.get(), planet_matrix);
 
@@ -337,7 +336,7 @@ void Planet::draw3DTransparent()
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);
 
         textureManager.getTexture(atmosphere_texture)->bind();
-        glm::vec4 color(glm::vec3(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b) / 255.f, atmosphere_size * 2.0f);
+        glm::vec4 color(atmosphere_color, atmosphere_size * 2.0f);
         glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::Color), 1, glm::value_ptr(color));
         glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(planet_matrix));
         
@@ -356,7 +355,7 @@ void Planet::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float s
 {
     if (collision_size > 0)
     {
-        renderer.fillCircle(position, collision_size * scale, glm::u8vec4(atmosphere_color.r, atmosphere_color.g, atmosphere_color.b, 128));
+        renderer.fillCircle(position, collision_size * scale, glm::u8vec4(atmosphere_color * 255.f, 128));
     }
 }
 
@@ -390,9 +389,9 @@ string Planet::getExportLine()
 {
     string ret="Planet():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + "):setPlanetRadius(" + string(getPlanetRadius(), 0) + ")";
     
-    if (atmosphere_color != glm::u8vec3{})
+    if (atmosphere_color != glm::vec3{})
     {
-        ret += ":setPlanetAtmosphereColor(" + string(atmosphere_color.r/255.0f) + "," + string(atmosphere_color.g/255.0f) + "," + string(atmosphere_color.b/255.0f) + ")";
+        ret += ":setPlanetAtmosphereColor(" + string(atmosphere_color.r) + "," + string(atmosphere_color.g) + "," + string(atmosphere_color.b) + ")";
     }
 
     if (distance_from_movement_plane != 0.f)
