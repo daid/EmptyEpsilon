@@ -8,6 +8,7 @@
 -- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
 -- Enemies[Empty]: No enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy ships are destroyed.
 -- Enemies[Easy]: Fewer enemies. Recommended for inexperienced crews.
+-- Enemies[Normal|Default]: Normal amount of enemies. Recommended for a normal crew.
 -- Enemies[Hard]: More enemies. Recommended if you have multiple player-controlled ships.
 -- Enemies[Extreme]: Many enemies. Inexperienced player crews will pretty surely be overwhelmed.
 
@@ -274,8 +275,7 @@ function init()
     local counts = {
         ["Extreme"] = 20,
         ["Hard"] = 8,
-        -- default:
-        ["None"] = 5,
+        ["Normal"] = 5,
         ["Easy"] = 3,
         ["Empty"] = 0
     }
