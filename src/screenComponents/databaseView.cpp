@@ -166,7 +166,9 @@ void DatabaseViewComponent::display()
         }
         else if(selected_entry->getImage() != "")
         {
-            (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+            auto image = new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image);
+            image->setMargins(-100, -50);
+            image->setSize(GuiElement::GuiSizeMax, has_text ? GuiElement::GuiSizeMax : 450);
         }
     }
     if (has_text)

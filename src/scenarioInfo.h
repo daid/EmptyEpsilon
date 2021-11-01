@@ -11,6 +11,7 @@ public:
     public:
         string key;
         string description;
+        string default_option;
         std::vector<std::pair<string, string>> options;
     };
 

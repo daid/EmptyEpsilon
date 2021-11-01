@@ -126,11 +126,19 @@ std::vector<string> ScenarioInfo::getCategories()
 
 bool ScenarioInfo::addSettingOption(string key, string option, string description)
 {
+    string tag = "";
+    if (option.find('|') > 0)
+    {
+        tag = option.substr(option.find('|') + 1).lower();
+        option = option.substr(0, option.find('|'));
+    }
     for(auto& setting : settings)
     {
         if (setting.key == key)
         {
             setting.options.emplace_back(option, description);
+            if (tag == "default")
+                setting.default_option = option;
             return true;
         }
     }
