@@ -151,6 +151,20 @@ public:
         sp::io::Keybinding tilt_down;
         sp::io::Keybinding tilt_up;
     } cinematic;
+
+    // Top-down View
+    struct TopDownKeys {
+        TopDownKeys();
+        void init();
+        sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding lock_camera;
+        sp::io::Keybinding previous_player_ship;
+        sp::io::Keybinding next_player_ship;
+        sp::io::Keybinding pan_up;
+        sp::io::Keybinding pan_down;
+        sp::io::Keybinding pan_left;
+        sp::io::Keybinding pan_right;
+    } topdown;
    
 
     //GM

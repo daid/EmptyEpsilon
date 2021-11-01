@@ -43,6 +43,31 @@ void Keys::CinematicKeys::init()
     tilt_up.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt up"));
 }
 
+Keys::TopDownKeys::TopDownKeys() :
+    toggle_ui("TOPDOWN_TOGGLE_UI", "H"),
+    lock_camera("TOPDOWN_LOCK_CAMERA", "L"),
+    previous_player_ship("TOPDOWN_PREVIOUS_PLAYER_SHIP", "J"),
+    next_player_ship("TOPDOWN_NEXT_PLAYER_SHIP", "K"),
+    pan_up("TOPDOWN_PAN_UP", "W"),
+    pan_down("TOPDOWN_PAN_DOWN", "S"),
+    pan_left("TOPDOWN_PAN_LEFT", "A"),
+    pan_right("TOPDOWN_PAN_RIGHT", "D")
+{}
+
+void Keys::TopDownKeys::init()
+{
+    const auto localized_category = tr("hotkey_menu", "Top-down View");
+    toggle_ui.setLabel(localized_category, tr("hotkey_Topdown", "Toggle UI"));
+    lock_camera.setLabel(localized_category, tr("hotkey_Topdown", "Camera lock"));
+    previous_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle previous player ship"));
+    next_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle next player ship"));
+    pan_up.setLabel(localized_category, tr("hotkey_Topdown", "Pan up"));
+    pan_down.setLabel(localized_category, tr("hotkey_Topdown", "Pan down"));
+    pan_left.setLabel(localized_category, tr("hotkey_Topdown", "Pan left"));
+    pan_right.setLabel(localized_category, tr("hotkey_Topdown", "Pan right"));
+
+}
+
 Keys::Keys() :
     //Basic
     pause("PAUSE", "P"),
@@ -361,6 +386,7 @@ void Keys::init()
     engineering_self_destruct_cancel.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Cancel self-destruct"));
 
     cinematic.init();
+    topdown.init();
     //GM
     gm_delete.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Delete"));
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Copy to clipboard"));
