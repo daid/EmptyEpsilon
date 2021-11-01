@@ -64,62 +64,71 @@ void TopDownScreen::update(float delta)
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
-        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 0.1f);
+        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);
         if (camera_position.z > 10000)
             camera_position.z = 10000;
         if (camera_position.z < 1000)
             camera_position.z = 1000;
     }
 
-    /* TODO hotkeys
-    switch(key.keysym.sym)
+    if (keys.topdown.toggle_ui.getDown())
     {
-    // Toggle UI visibility with the H key.
-    case SDLK_h:
         if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible())
         {
             camera_lock_toggle->hide();
             camera_lock_selector->hide();
-        }else{
+        }
+        else {
             camera_lock_toggle->show();
             camera_lock_selector->show();
         }
-        break;
-    // Toggle camera lock with the L key.
-    case SDLK_l:
+    }
+
+    if (keys.topdown.lock_camera.getDown())
+    {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
-        break;
-    // Cycle through player ships with the J and K keys.
-    case SDLK_j:
+    }
+
+    if (keys.topdown.previous_player_ship.getDown())
+    {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    case SDLK_k:
+    }
+
+    if (keys.topdown.next_player_ship.getDown())
+    {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    // WASD controls for the unlocked camera.
-    case SDLK_w:
+    }
+
+    if (keys.topdown.pan_up.get())
+    {
         if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y - (50 * (camera_position.z / 1000));
-        break;
-    case SDLK_a:
+            camera_position.y = camera_position.y - ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.topdown.pan_left.get())
+    {
         if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x - (50 * (camera_position.z / 1000));
-        break;
-    case SDLK_s:
+            camera_position.x = camera_position.x - ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.topdown.pan_down.get())
+    {
         if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y + (50 * (camera_position.z / 1000));
-        break;
-    case SDLK_d:
+            camera_position.y = camera_position.y + ((3 * delta * camera_position.z) / 10);
+    }
+
+    if (keys.topdown.pan_right.get())
+    {
         if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x + (50 * (camera_position.z / 1000));
-        break;
-    */
+            camera_position.x = camera_position.x + ((3 * delta * camera_position.z) / 10);
+    }
+
     if (keys.escape.getDown())
     {
         destroy();
