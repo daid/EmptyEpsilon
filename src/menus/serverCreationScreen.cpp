@@ -256,7 +256,14 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         });
         selector->setSize(GuiElement::GuiSizeMax, 50);
         for(auto& option : setting.options)
+        {
             selector->addEntry(option.first.capitalize(), option.first);
+            if (option.first == setting.default_option)
+            {
+                selector->setSelectionIndex(selector->entryCount() - 1);
+                gameGlobalInfo->scenario_settings[setting.key] = option.first;
+            }
+        }
         auto description = new GuiScrollText(container, "", setting.description);
         description->setSize(GuiElement::GuiSizeMax, 300);
         count++;
@@ -281,5 +288,6 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         returnToShipSelection();
         new ScriptErrorRenderer();
     });
-    start_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50)->disable();
+    start_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
+    start_button->setEnable(gameGlobalInfo->scenario_settings.size() >= info.settings.size());
 }
