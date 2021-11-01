@@ -5,10 +5,20 @@
 ---
 --- Other player ships can be spawned, but the strength of enemy ships is independent of the number and types of player ships.
 -- Type: Basic
--- Variation[Empty]: No enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy ships are destroyed.
--- Variation[Easy]: Fewer enemies. Recommended for inexperienced crews.
--- Variation[Hard]: More enemies. Recommended if you have multiple player-controlled ships.
--- Variation[Extreme]: Many enemies. Inexperienced player crews will pretty surely be overwhelmed.
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Empty]: No enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy ships are destroyed.
+-- Enemies[Easy]: Fewer enemies. Recommended for inexperienced crews.
+-- Enemies[Normal|Default]: Normal amount of enemies. Recommended for a normal crew.
+-- Enemies[Hard]: More enemies. Recommended if you have multiple player-controlled ships.
+-- Enemies[Extreme]: Many enemies. Inexperienced player crews will pretty surely be overwhelmed.
+-- Setting[Time]: Sets up how much time the players have for the scenario
+-- Time[Unlimited|Default]: No time limit
+-- Time[20min]: Automatic loss after 20 minutes
+-- Time[30min]: Automatic loss after 30 minutes
+-- Time[60min]: Automatic loss after 60 minutes
+-- Setting[PlayerShip]: Sets the default player ship
+-- PlayerShip[Atlantis|Default]: Powerful ship with sidewards missile tubes. Requires more advanced play.
+-- PlayerShip[Phobos M3P]: Simpler, less powerful ship. But easier to handler. Recommended for new crews.
 
 --- Scenario
 -- @script scenario_00_basic
@@ -28,7 +38,80 @@ require("utils.lua")
 local enemyList
 local friendlyList
 local stationList
+local playerList
 local addWavesToGMPosition      -- If set to true, add wave will require GM to click on the map to position, where the wave should be spawned. 
+
+local gametimeleft = nil -- Maximum game time in seconds.
+local timewarning = nil -- Used for checking when to give a warning, and to update it so the warning happens once.
+
+local ship_names = {
+    "SS Epsilon",
+    "Ironic Gentleman",
+    "Binary Sunset",
+    "USS Roddenberry",
+    "Earthship Sagan",
+    "Explorer",
+    "ISV Phantom",
+    "Keelhaul",
+    "Peacekeeper",
+    "WarMonger",
+    "Death Bringer",
+    "Executor",
+    "Excaliber",
+    "Voyager",
+    "Khan's Wrath",
+    "Kronos' Savior",
+    "HMS Captor",
+    "Imperial Stature",
+    "ESS Hellfire",
+    "Helen's Fury",
+    "Venus' Light",
+    "Blackbeard's Way",
+    "ISV Monitor",
+    "Argent",
+    "Echo One",
+    "Earth's Might",
+    "ESS Tomahawk",
+    "Sabretooth",
+    "Hiro-maru",
+    "USS Nimoy",
+    "Earthship Tyson",
+    "Destiny's Tear",
+    "HMS SuperNova",
+    "Alma del Terra",
+    "DreadHeart",
+    "Devil's Maw",
+    "Cougar's Claw",
+    "Blood-oath",
+    "Imperial Fist",
+    "HMS Promise",
+    "ESS Catalyst",
+    "Hercules Ascendant",
+    "Heavens Mercy",
+    "HMS Adams",
+    "Explorer",
+    "Discovery",
+    "Stratosphere",
+    "USS Kelly",
+    "HMS Honour",
+    "Devilfish",
+    "Minnow",
+    "Earthship Nye",
+    "Starcruiser Solo",
+    "Starcruiser Reynolds",
+    "Starcruiser Hunt",
+    "Starcruiser Lipinski",
+    "Starcruiser Tylor",
+    "Starcruiser Kato",
+    "Starcruiser Picard",
+    "Starcruiser Janeway",
+    "Starcruiser Archer",
+    "Starcruiser Sisko",
+    "Starcruiser Kirk",
+    "Aluminum Falcon",
+    "SS Essess",
+    "Jenny"
+}
 
 --- Wrapper to adding an enemy wave
 --
@@ -209,11 +292,17 @@ end
 --- Initialize scenario.
 function init()
     -- Spawn a player Atlantis.
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(getScenarioSetting("PlayerShip"))
+    player:setCallSign(ship_names[irandom(1, #ship_names)])
 
     enemyList = {}
     friendlyList = {}
     stationList = {}
+    playerList = {player}
+
+    onNewPlayerShip(function(ship)
+        table.insert(playerList, ship)
+    end)
     
     addWavesToGMPosition = false
 
@@ -273,13 +362,23 @@ function init()
     local counts = {
         ["Extreme"] = 20,
         ["Hard"] = 8,
-        -- default:
-        ["None"] = 5,
+        ["Normal"] = 5,
         ["Easy"] = 3,
         ["Empty"] = 0
     }
-    local enemy_group_count = counts[getScenarioVariation()]
-    assert(enemy_group_count, "unknown variation " .. getScenarioVariation() .. " could not set enemy_group_count")
+    local enemy_group_count = counts[getScenarioSetting("Enemies")]
+    assert(enemy_group_count, "unknown enemies setting: " .. getScenarioSetting("Enemies") .. " could not set enemy_group_count")
+
+    local timesetting = {
+        ["Unlimited"] = nil,
+        ["20min"] = 20 * 60,
+        ["30min"] = 30 * 60,
+        ["60min"] = 60 * 60,
+    }
+    gametimeleft = timesetting[getScenarioSetting("Time")]
+    if gametimeleft ~= nil then
+        timewarning = gametimeleft
+    end
 
     -- If not in the Empty variation, spawn the corresponding number of random
     -- enemy waves at distributed random headings and semi-random distances
@@ -365,6 +464,36 @@ function init()
     
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
+
+
+    local station = friendlyList[1]
+    if gametimeleft ~= nil then
+        station:sendCommsMessage(
+            player, string.format(_([[%s, your objective is to fend off the incoming Kraylor attack.
+
+Please inform your Captain and crew that you have a total of %d minutes for this mission.
+
+The mission started at the arrival of this message.
+
+Good luck.]]), player:getCallSign(), gametimeleft / 60)
+        )
+    else
+        station:sendCommsMessage(
+            player, string.format(_([[%s, your objective is to fend off the incoming Kraylor attack.
+
+Good luck.]]), player:getCallSign())
+        )
+    end
+end
+
+function countValid(objectList)
+    local object_count = 0
+    for i_, object in ipairs(objectList) do
+        if object:isValid() then
+            object_count = object_count + 1
+        end
+    end
+    return object_count
 end
 
 --- Update.
@@ -372,18 +501,9 @@ end
 -- @tparam number delta the time delta (in seconds)
 function update(delta)
     -- Count all surviving enemies and allies.
-    local enemy_count = 0
-    for i_, enemy in ipairs(enemyList) do
-        if enemy:isValid() then
-            enemy_count = enemy_count + 1
-        end
-    end
-    local friendly_count = 0
-    for i_, friendly in ipairs(friendlyList) do
-        if friendly:isValid() then
-            friendly_count = friendly_count + 1
-        end
-    end
+    local enemy_count = countValid(enemyList)
+    local friendly_count = countValid(friendlyList)
+    local player_count = countValid(playerList)
 
     -- If not playing the Empty variation, declare victory for the
     -- Humans (players) once all enemies are destroyed. Note that players can win
@@ -391,13 +511,52 @@ function update(delta)
     --
     -- In the Empty variation, the GM must use the Win button to declare
     -- a Human victory.
-    if (enemy_count == 0 and getScenarioVariation() ~= "Empty") then
+    if (enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty") then
         victory("Human Navy")
+        if gametimeleft ~= nil then
+            local text = string.format(_("Mission: SUCCESS (%d seconds left)"), math.floor(gametimeleft))
+            globalMessage(text)
+            setBanner(text)
+            return
+        end
+    end
+
+    if gametimeleft ~= nil then
+        gametimeleft = gametimeleft - delta
+        if gametimeleft < 0 then
+            victory("Kraylor")
+            local text = _("Mission: FAILED (time has run out)")
+            globalMessage(text)
+            setBanner(text)
+            return
+        end
+        if gametimeleft < timewarning then
+            if timewarning <= 1 * 60 then -- Less then 1 minutes left.
+                for _, player in ipairs(playerList) do
+                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minute remaining.]]), player:getCallSign(), timewarning / 60))
+                end
+                timewarning = timewarning - 2 * 60
+            elseif timewarning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
+                for _, player in ipairs(playerList) do
+                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining.]]), player:getCallSign(), timewarning / 60))
+                end
+                timewarning = timewarning - 2 * 60
+            else
+                for _, player in ipairs(playerList) do
+                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining of mission time.]]), player:getCallSign(), timewarning / 60))
+                end
+                timewarning = timewarning - 5 * 60
+            end
+        end
     end
 
     -- If all allies are destroyed, the Humans (players) lose.
     if friendly_count == 0 then
         victory("Kraylor")
+        local text = _("Mission: FAILED (no friendlies left)")
+        globalMessage(text)
+        setBanner(text)
+        return
     else
         -- As the battle continues, award reputation based on
         -- the players' progress and number of surviving allies.
@@ -406,5 +565,19 @@ function update(delta)
                 friendly:addReputationPoints(delta * friendly_count * 0.1)
             end
         end
+    end
+
+    -- If last player ship is destroyed, the Humans (players) lose.
+    if player_count == 0 then
+        victory("Kraylor")
+        local text = _("Mission: FAILED (all your ships destroyed)")
+        globalMessage(text)
+        setBanner(text)
+        return
+    end
+    
+    -- Set banner for cinematic and top down views.
+    if gametimeleft ~= nil then
+        setBanner(string.format(_("Mission in progress - Time left: %d:%02d - Enemies: %d"), math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count))
     end
 end

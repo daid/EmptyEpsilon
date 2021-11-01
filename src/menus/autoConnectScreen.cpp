@@ -99,6 +99,7 @@ void AutoConnectScreen::update(float delta)
                         my_player_info = i;
                 if (my_player_info && gameGlobalInfo)
                 {
+                    my_player_info->commandSetName(PreferencesManager::get("username"));
                     if (!connect_to_address.getHumanReadable().empty())
                         status_label->setText("Waiting for ship on " + connect_to_address.getHumanReadable()[0] + "...");
                     else
