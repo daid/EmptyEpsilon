@@ -5,10 +5,11 @@
 ---
 --- Other player ships can be spawned, but the strength of enemy ships is independent of the number and types of player ships.
 -- Type: Basic
--- Variation[Empty]: No enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy ships are destroyed.
--- Variation[Easy]: Fewer enemies. Recommended for inexperienced crews.
--- Variation[Hard]: More enemies. Recommended if you have multiple player-controlled ships.
--- Variation[Extreme]: Many enemies. Inexperienced player crews will pretty surely be overwhelmed.
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Empty]: No enemies. Recommended for GM-controlled scenarios and rookie crew orientation. The scenario continues until the GM declares victory or all Human Navy ships are destroyed.
+-- Enemies[Easy]: Fewer enemies. Recommended for inexperienced crews.
+-- Enemies[Hard]: More enemies. Recommended if you have multiple player-controlled ships.
+-- Enemies[Extreme]: Many enemies. Inexperienced player crews will pretty surely be overwhelmed.
 
 --- Scenario
 -- @script scenario_00_basic
@@ -278,8 +279,8 @@ function init()
         ["Easy"] = 3,
         ["Empty"] = 0
     }
-    local enemy_group_count = counts[getScenarioVariation()]
-    assert(enemy_group_count, "unknown variation " .. getScenarioVariation() .. " could not set enemy_group_count")
+    local enemy_group_count = counts[getScenarioSetting("Enemies")]
+    assert(enemy_group_count, "unknown enemies setting: " .. getScenarioSetting("Enemies") .. " could not set enemy_group_count")
 
     -- If not in the Empty variation, spawn the corresponding number of random
     -- enemy waves at distributed random headings and semi-random distances
@@ -391,7 +392,7 @@ function update(delta)
     --
     -- In the Empty variation, the GM must use the Win button to declare
     -- a Human victory.
-    if (enemy_count == 0 and getScenarioVariation() ~= "Empty") then
+    if (enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty") then
         victory("Human Navy")
     end
 
