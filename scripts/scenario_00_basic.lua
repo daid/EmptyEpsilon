@@ -532,13 +532,19 @@ function update(delta)
         end
         if gametimeleft < timewarning then
             if timewarning <= 1 * 60 then -- Less then 1 minutes left.
-                friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minute remaining.]]), player:getCallSign(), timewarning / 60))
+                for _, player in ipairs(playerList) do
+                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minute remaining.]]), player:getCallSign(), timewarning / 60))
+                end
                 timewarning = timewarning - 2 * 60
             elseif timewarning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
-                friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining.]]), player:getCallSign(), timewarning / 60))
+                for _, player in ipairs(playerList) do
+                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining.]]), player:getCallSign(), timewarning / 60))
+                end
                 timewarning = timewarning - 2 * 60
             else
-                friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining of mission time.]]), player:getCallSign(), timewarning / 60))
+                for _, player in ipairs(playerList) do
+                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining of mission time.]]), player:getCallSign(), timewarning / 60))
+                end
                 timewarning = timewarning - 5 * 60
             end
         end
