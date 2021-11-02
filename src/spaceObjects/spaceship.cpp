@@ -449,6 +449,82 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
     // ships.
     if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
     {
+        auto draw_arc = [&renderer](auto arc_center, auto angle0, auto arc_angle, auto arc_radius, auto color)
+        {
+            // Initialize variables from the beam's data.
+            float beam_arc = arc_angle;
+            float beam_range = arc_radius;
+
+            // Set the beam's origin on radar to its relative position on the mesh.
+            float outline_thickness = std::min(20.0f, beam_range * 0.2f);
+            float beam_arc_curve_length = beam_range * beam_arc / 180.0f * glm::pi<float>();
+            outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
+
+            size_t curve_point_count = 0;
+            if (outline_thickness > 0.f)
+                curve_point_count = static_cast<size_t>(beam_arc_curve_length / (outline_thickness * 0.9f));
+
+            struct ArcPoint {
+                glm::vec2 point;
+                glm::vec2 normal; // Direction towards the center.
+            };
+
+            //Arc points
+            std::vector<ArcPoint> arc_points;
+            arc_points.reserve(curve_point_count + 1);
+            
+            for (int i = 0; i < curve_point_count; i++)
+            {
+                auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
+                arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
+            }
+            {
+                auto angle = vec2FromAngle(angle0 + beam_arc) * beam_range;
+                arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
+            }
+
+            for (size_t n = 0; n < arc_points.size() - 1; n++)
+            {
+                const auto& p0 = arc_points[n].point;
+                const auto& p1 = arc_points[n + 1].point;
+                const auto& n0 = arc_points[n].normal;
+                const auto& n1 = arc_points[n + 1].normal;
+                renderer.drawTexturedQuad("gradient.png",
+                    p0, p0 - n0 * outline_thickness,
+                    p1 - n1 * outline_thickness, p1,
+                    { 0.f, 0.f }, { 1.f, 0.f }, { 1.f, 1.f }, { 0.f, 1.f },
+                    color);
+            }
+
+            if (beam_arc < 360.f)
+            {
+                // Arc bounds.
+                // We use the left- and right-most edges as lines, going inwards, parallel to the center.
+                const auto& left_edge = arc_points[0].point;
+                const auto& right_edge = arc_points.back().point;
+
+                // Edge vectors.
+                const auto left_edge_vector = left_edge - arc_center;
+                const auto right_edge_vector = right_edge - arc_center;
+
+                // Edge normals, inwards.
+                const auto left_edge_normal = glm::normalize(glm::vec2{ left_edge_vector.y, -left_edge_vector.x });
+                const auto right_edge_normal = glm::normalize(glm::vec2{ -right_edge_vector.y, right_edge_vector.x });
+
+                renderer.drawTexturedQuad("gradient.png",
+                    arc_center, arc_center - left_edge_normal * outline_thickness,
+                    left_edge - left_edge_normal * outline_thickness, left_edge,
+                    { 0.f, 0.f }, { 1.f, 0.f }, { 1.f, 1.f }, { 0.f, 1.f },
+                    color);
+
+                renderer.drawTexturedQuad("gradient.png",
+                    arc_center, arc_center - right_edge_normal * outline_thickness,
+                    right_edge - right_edge_normal * outline_thickness, right_edge,
+                    { 0.f, 0.f }, { 1.f, 0.f }, { 1.f, 1.f }, { 0.f, 1.f },
+                    color);
+            }
+        };
+
         // For each beam ...
         for(int n = 0; n < max_beam_weapons; n++)
         {
@@ -459,6 +535,7 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             // If the beam is cooling down, flash and fade the arc color.
             glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, beam_weapons[n].getCooldown()), 0, beam_weapons[n].getCycleTime(), beam_weapons[n].getArcColor(), beam_weapons[n].getArcFireColor());
 
+            
             // Initialize variables from the beam's data.
             float beam_direction = beam_weapons[n].getDirection();
             float beam_arc = beam_weapons[n].getArc();
@@ -466,46 +543,10 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 
             // Set the beam's origin on radar to its relative position on the mesh.
             auto beam_offset = rotateVec2(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation()-rotation);
+            auto arc_center = beam_offset + position;
 
-            float outline_thickness = std::min(20.0f, beam_range * scale * 0.2f);
-            float beam_arc_curve_length = beam_range * scale * beam_arc / 180.0f * glm::pi<float>();
-            outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
-
-            std::vector<glm::vec2> arc_points;
-            // begin point of the beam arc visual
-            if (beam_arc < 359.0f)
-                arc_points.push_back(beam_offset + position);
-            //Arc points
-            float angle0 = getRotation()-rotation + (beam_direction - beam_arc / 2.0f);
-            int curve_point_count = int((beam_arc - 5) / 10) + 1;
-            curve_point_count = int(beam_arc_curve_length / outline_thickness * 0.9f);
-            for(int i=0; i<curve_point_count; i++)
-            {
-                arc_points.push_back(beam_offset + position + vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range * scale);
-            }
-            arc_points.push_back(beam_offset + position + vec2FromAngle(angle0 + beam_arc) * beam_range * scale);
-
-            std::vector<glm::vec2> arc_normals;
-            for(size_t n=0; n<arc_points.size(); n++)
-            {
-                auto normal = glm::normalize(arc_points[(n + 1) % arc_points.size()] - arc_points[n]);
-                arc_normals.emplace_back(-normal.y, normal.x);
-            }
-
-            for(size_t n=0; n<arc_points.size(); n++)
-            {
-                auto& p0 = arc_points[n];
-                auto& p1 = arc_points[(n + 1) % arc_points.size()];
-                auto n0 = arc_normals[(n + arc_points.size() - 1) % arc_points.size()];
-                auto n1 = arc_normals[n];
-                auto n2 = arc_normals[(n + 1) % arc_points.size()];
-                renderer.drawTexturedQuad("gradient.png",
-                    p0, p1,
-                    p1 + (n1 + n2) / (1.0f + glm::dot(n1, n2)) * outline_thickness,
-                    p0 + (n0 + n1) / (1.0f + glm::dot(n0, n1)) * outline_thickness,
-                    {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
-                    color);
-            }
+            draw_arc(arc_center, getRotation() - rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
+           
 
             // If the beam is turreted, draw the turret's arc. Otherwise, exit.
             if (beam_weapons[n].getTurretArc() == 0.0f)
@@ -517,24 +558,9 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 
             // Draw the turret's bounds, at half the transparency of the beam's.
             // TODO: Make this color configurable.
-            color.a /= 2;
+            color.a /= 4;
 
-            // Draw the turret bounds. (We're reusing the beam's origin.)
-            auto r0 = vec2FromAngle(getRotation()-rotation + (turret_direction + turret_arc / 2.0f));
-            auto r1 = vec2FromAngle(getRotation()-rotation + (turret_direction - turret_arc / 2.0f));
-            glm::vec2 n0{r0.y, -r0.x};
-            glm::vec2 n1{-r1.y, r1.x};
-            glm::vec2 n2 = (n0 + n1) / (1.0f + glm::dot(n0, n1));
-            renderer.drawTexturedQuad("gradient.png",
-                beam_offset + position, beam_offset + position + r0 * beam_range * 0.9f * scale,
-                beam_offset + position + r0 * beam_range * scale + n0 * 10.0f, beam_offset + position + n2 * 10.0f,
-                {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
-                color);
-            renderer.drawTexturedQuad("gradient.png",
-                beam_offset + position, beam_offset + position + r1 * beam_range * 0.9f * scale,
-                beam_offset + position + r1 * beam_range * scale + n1 * 10.0f, beam_offset + position + n2 * 10.0f,
-                {0, 0}, {0, 1}, {0.99, 0}, {0.99, 1},
-                color);
+            draw_arc(arc_center, getRotation() - rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
         }
     }
     // If not on long-range radar ...
