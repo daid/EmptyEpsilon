@@ -460,32 +460,35 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             float beam_arc_curve_length = beam_range * beam_arc / 180.0f * glm::pi<float>();
             outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
 
-            std::vector<glm::vec2> arc_points;
+            size_t curve_point_count = 0;
+            if (outline_thickness > 0.f)
+                curve_point_count = static_cast<size_t>(beam_arc_curve_length / (outline_thickness * 0.9f));
+
+            struct ArcPoint {
+                glm::vec2 point;
+                glm::vec2 normal; // Direction towards the center.
+            };
 
             //Arc points
-            int curve_point_count = int(beam_arc_curve_length / (outline_thickness * 0.9f));
+            std::vector<ArcPoint> arc_points;
+            arc_points.reserve(curve_point_count + 1);
+            
             for (int i = 0; i < curve_point_count; i++)
             {
-                arc_points.push_back(arc_center + vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range);
+                auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
+                arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
             }
-
-            arc_points.push_back(arc_center + vec2FromAngle(angle0 + beam_arc) * beam_range);
-
-            // Directions towards the center.
-            std::vector<glm::vec2> arc_normals;
-            for (size_t n = 0; n < arc_points.size(); n++)
             {
-                auto normal = glm::normalize(arc_points[n] - arc_center);
-                arc_normals.emplace_back(normal);
+                auto angle = vec2FromAngle(angle0 + beam_arc) * beam_range;
+                arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
             }
 
             for (size_t n = 0; n < arc_points.size() - 1; n++)
             {
-                //if (n % 2) continue;
-                auto& p0 = arc_points[n];
-                auto& p1 = arc_points[n + 1];
-                auto n0 = arc_normals[n];
-                auto n1 = arc_normals[n + 1];
+                const auto& p0 = arc_points[n].point;
+                const auto& p1 = arc_points[n + 1].point;
+                const auto& n0 = arc_points[n].normal;
+                const auto& n1 = arc_points[n + 1].normal;
                 renderer.drawTexturedQuad("gradient.png",
                     p0, p0 - n0 * outline_thickness,
                     p1 - n1 * outline_thickness, p1,
@@ -497,8 +500,8 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             {
                 // Arc bounds.
                 // We use the left- and right-most edges as lines, going inwards, parallel to the center.
-                const auto& left_edge = arc_points[0];
-                const auto& right_edge = arc_points.back();
+                const auto& left_edge = arc_points[0].point;
+                const auto& right_edge = arc_points.back().point;
 
                 // Edge vectors.
                 const auto left_edge_vector = left_edge - arc_center;
