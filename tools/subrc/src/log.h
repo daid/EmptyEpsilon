@@ -3,12 +3,12 @@
 #include <loguru.hpp>
 
 namespace loglevel {
-	enum Verbosity : loguru::Verbosity
-	{
-		Error = -2,
-		Warning,
-		Info,
-		Debug,
-		Trace
-	};
+    enum Verbosity : loguru::Verbosity
+    {
+        Error = -2,
+        Warning,
+        Info,
+        Debug,
+        Trace
+    };
 }
