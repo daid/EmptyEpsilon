@@ -39,28 +39,29 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
     // Load up the cube texture.
     // Face setup
     std::array<std::tuple<const char*, uint32_t>, 6> faces{
-        std::make_tuple("skybox/right.ktx2", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
-        std::make_tuple("skybox/left.ktx2", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
-        std::make_tuple("skybox/top.ktx2", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
-        std::make_tuple("skybox/bottom.ktx2", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
-        std::make_tuple("skybox/front.ktx2", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
-        std::make_tuple("skybox/back.ktx2", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
+        std::make_tuple("skybox/right", GL_TEXTURE_CUBE_MAP_POSITIVE_X),
+        std::make_tuple("skybox/left", GL_TEXTURE_CUBE_MAP_NEGATIVE_X),
+        std::make_tuple("skybox/top", GL_TEXTURE_CUBE_MAP_POSITIVE_Y),
+        std::make_tuple("skybox/bottom", GL_TEXTURE_CUBE_MAP_NEGATIVE_Y),
+        std::make_tuple("skybox/front", GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
+        std::make_tuple("skybox/back", GL_TEXTURE_CUBE_MAP_NEGATIVE_Z),
     };
 
     // Upload
     glBindTexture(GL_TEXTURE_CUBE_MAP, starbox_texture[0]);
-    sp::KTX2Texture ktxtexture;
+    
     for (const auto& face : faces)
     {
+        // Try loading ktx2 first, then png.
         bool loaded = false;
-        if (auto stream = getResourceStream(std::get<0>(face)); stream)
+        if (auto stream = getResourceStream(string{ std::get<0>(face) } + ".ktx2"); stream)
         {
+            sp::KTX2Texture ktxtexture;
             if (ktxtexture.loadFromStream(stream))
             {
                 auto mip_level = std::min(ktxtexture.getMipCount() - 1, textureManager.getBaseMipLevel());
                 if (auto pixels = ktxtexture.toNative(mip_level); !pixels.empty())
                 {
-                    
                     if (ktxtexture.getNativeFormat() != GL_RGBA)
                     {
                         auto size = ktxtexture.getNativeSize(mip_level);
@@ -72,6 +73,18 @@ GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
                         glTexImage2D(std::get<1>(face), 0, GL_RGBA, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels.data());
                     }
                         
+                    loaded = true;
+                }
+            }
+        }
+        else
+        {
+            if (auto stream = getResourceStream(string{ std::get<0>(face) } + ".png"); stream)
+            {
+                sp::Image texture;
+                if (texture.loadFromStream(stream))
+                {
+                    glTexImage2D(std::get<1>(face), 0, GL_RGBA, texture.getSize().x, texture.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, texture.getPtr());
                     loaded = true;
                 }
             }
