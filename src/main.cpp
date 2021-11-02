@@ -399,6 +399,12 @@ void returnToMainMenu()
     else if (PreferencesManager::get("tutorial").toInt())
     {
         new TutorialGame(true);
+    }
+    else if (PreferencesManager::get("server_scenario") != "")
+    {
+        new EpsilonServer();
+        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
+        new ShipSelectionScreen();
     }else{
         new MainMenu();
     }
