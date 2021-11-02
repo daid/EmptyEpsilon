@@ -1,8 +1,8 @@
 ![EmptyEpsilon logo](https://raw.githubusercontent.com/daid/EmptyEpsilon/master/resources/logo_full.png)
 
-Started as a cross-platform, open-source "clone" of [Artemis Spaceship Bridge Simulator](http://artemis.eochu.com/), **EmptyEpsilon** has already deviated from Artemis with new features and gameplay, including a Game Master mode and multiple AI factions. We strive to get EmptyEpsilon working on all major platforms (Windows, Linux, and OS X), but only Windows support is guaranteed.
+Started as a cross-platform, open-source "clone" of [Artemis Spaceship Bridge Simulator](https://www.artemisspaceshipbridge.com/), **EmptyEpsilon** has already deviated from Artemis with new features and gameplay, including a Game Master mode and multiple AI factions. We strive to get EmptyEpsilon working on all major platforms (Windows, Linux, and OS X), but only Windows support is guaranteed.
 
-The game is written in C++ with the [SeriousProton](https://github.com/daid/SeriousProton) engine and uses [SFML](http://www.sfml-dev.org/) for most of the heavy lifting.
+The game is written in C++ with the [SeriousProton](https://github.com/daid/SeriousProton) engine and uses [SDL2](http://www.libsdl.org/) for most of the heavy lifting.
 
 Contributing
 ===========
