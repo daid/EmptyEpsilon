@@ -23,6 +23,7 @@ namespace {
 	static_assert(sizeof(Vertex) == 32, "Padding to handle!");
 
 
+	/*! fast_obj interface. */
 	namespace obj_vector
 	{
 		struct holder
@@ -57,6 +58,7 @@ namespace {
 
 	}
 
+	/*! Opens and load a .obj file through fast_obj. */
 	obj_ptr open_obj(const std::vector<uint8_t>& mesh)
 	{
 		fastObjCallbacks callbacks{
@@ -91,6 +93,7 @@ namespace {
 		// <vertex_count:u32><indices_count:u32>
 		// <compressed_vtx_size:u32><compressed_idx_size:u32>
 		// 
+		// then data;
 		// <compressed_vtx_data:compressed_vtx_size*u8>
 		// <compressed_idx_size:compressed_idx_size*u8>
 		size_t element_size = [](size_t vertex_count)
@@ -101,14 +104,15 @@ namespace {
 			return sizeof(uint32_t);
 		}(vertices.size());
 
+		// For allocation purposes.
 		auto vtx_compress_bound = meshopt_encodeVertexBufferBound(vertices.size(), sizeof(Vertex));
 		auto idx_compress_bound = meshopt_encodeIndexBufferBound(indices.size(), vertices.size());
 
 		struct header_t
 		{
 			uint32_t version{};
-			uint32_t vertices{};
-			uint32_t indices{};
+			uint32_t vertex_count{};
+			uint32_t index_count{};
 			uint32_t encoded_vertices{};
 			uint32_t encoded_indices{};
 		};
@@ -117,24 +121,30 @@ namespace {
 		std::vector<uint8_t> optimized(sizeof(header_t) + vtx_compress_bound + idx_compress_bound);
 		auto header = reinterpret_cast<header_t*>(optimized.data());
 		header->version = to_little(uint32_t{ 1 });
-		header->vertices = to_little(static_cast<uint32_t>(vertices.size()));
-		header->indices = to_little(static_cast<uint32_t>(indices.size()));
+		header->vertex_count = to_little(static_cast<uint32_t>(vertices.size()));
+		header->index_count = to_little(static_cast<uint32_t>(indices.size()));
 
 		auto offset = sizeof(header_t);
+		
+		// Write vertices.
 		header->encoded_vertices = to_little(static_cast<uint32_t>(
 			meshopt_encodeVertexBuffer(optimized.data() + offset, optimized.size() - offset, vertices.data(), vertices.size(), sizeof(Vertex))
 		));
 		offset += header->encoded_vertices;
+		
+		// Write indices.
 		header->encoded_indices = to_little(static_cast<uint32_t>(
 			meshopt_encodeIndexBuffer(optimized.data() + offset, optimized.size() - offset, indices.data(), indices.size())
 		));
 		offset += header->encoded_indices;
 
+		// Trim to actual size (remove worst-case overhead)
 		optimized.resize(offset);
 
 		return optimized;
 	}
 
+	/*! Upgrade a .model to new format. */
 	std::vector<uint8_t> optimize_model(const std::vector<uint8_t>& mesh)
 	{
 		auto vertex_count = from_big(*reinterpret_cast<const int32_t*>(mesh.data()));
@@ -150,7 +160,11 @@ namespace {
 	{
 		auto obj = open_obj(mesh);
 		if (!obj)
+		{
+			VLOG_F(loglevel::Error, "Failed to load .obj");
 			return {};
+		}
+			
 
 		// Move everything into one buffer,
 		// triangularize
@@ -189,8 +203,8 @@ namespace {
 			for (auto v = 2u; v < obj->face_vertices[face]; ++v)
 			{
 				copy_vertex(current_vertex, indices[0]);
-				copy_vertex(current_vertex + 2, indices[v]); // 2
-				copy_vertex(current_vertex + 1, indices[v - 1]); // 1
+				copy_vertex(current_vertex + 2, indices[v]);
+				copy_vertex(current_vertex + 1, indices[v - 1]);
 
 				current_vertex += 3;
 			}
@@ -205,6 +219,7 @@ namespace {
 ModelProcessor::ModelProcessor(pack::Builder& builder)
 	:AssetProcessor{ builder }
 {
+	// Use the improved encoder.
 	meshopt_encodeIndexVersion(1);
 }
 
@@ -230,7 +245,6 @@ bool ModelProcessor::process(const std::filesystem::path& root, const std::files
 
 
 	std::vector<uint8_t> mesh_data(std::filesystem::file_size(file));
-	size_in += mesh_data.size();
 	if (fread(mesh_data.data(), mesh_data.size(), 1, mesh_file.get()) != 1)
 	{
 		VLOG_F(loglevel::Error, "Failed to read %s: %s", file.u8string().c_str(), strerror(errno));
@@ -238,7 +252,10 @@ bool ModelProcessor::process(const std::filesystem::path& root, const std::files
 	}
 
 	std::vector<uint8_t> optimized = file.extension() == ".obj" ? optimize_obj(mesh_data) : optimize_model(mesh_data);
+	
+	size_in += mesh_data.size();
 	size_out += optimized.size();
+	
 	builder.add(std::filesystem::relative(file, root).replace_extension(".mdl2"), optimized.data(), optimized.size());
 	return true;
 }

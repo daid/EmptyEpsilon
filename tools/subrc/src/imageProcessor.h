@@ -1,6 +1,7 @@
 #pragma once
 #include "assetProcessor.h"
 
+/*! Process images into textures. */
 class ImageProcessor final : public AssetProcessor
 {
 public:

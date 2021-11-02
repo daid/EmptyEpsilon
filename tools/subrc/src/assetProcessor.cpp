@@ -12,6 +12,7 @@ AssetProcessor::~AssetProcessor() = default;
 
 bool CopyProcessor::accept(const std::filesystem::path&) const
 {
+	// copy processor accepts everything.
 	return true;
 }
 
@@ -20,7 +21,7 @@ bool CopyProcessor::process(const std::filesystem::path& root, const std::filesy
 	auto source = open_file(file, "rb");
 	if (!source)
 	{
-		VLOG_F(loglevel::Error, "[copy]: ailed to open %s: %s", file.u8string().c_str(), strerror(errno));
+		VLOG_F(loglevel::Error, "[copy]: failed to open %s: %s", file.u8string().c_str(), strerror(errno));
 		return false;
 	}
 

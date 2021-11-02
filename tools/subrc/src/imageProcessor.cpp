@@ -6,11 +6,10 @@
 #include <encoder/basisu_enc.h>
 #include <encoder/basisu_comp.h>
 
-#define STBI_ONLY_PNG
-#define STBI_ONLY_JPEG
-#define STBI_ONLY_BMP
-#define STBI_ONLY_TGA
 #define STB_IMAGE_STATIC
+#define STBI_NO_PSD
+#define STBI_NO_HDR
+#define STBI_NO_PIC
 #define STBI_NO_STDIO
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -43,12 +42,13 @@ ImageProcessor::ImageProcessor(pack::Builder& builder)
 
 ImageProcessor::~ImageProcessor()
 {
+	// Output some debug stats.
 	VLOG_F(loglevel::Debug, "[image]: %zu MB -> %zu MB (%.2f)", size_in / (1024 * 1024), size_out / (1024 * 1024), float(size_out) / size_in);
 }
 
 bool ImageProcessor::accept(const std::filesystem::path& entry) const
 {
-	static constexpr std::array accepted{ ".tga", ".bmp", ".jpg", ".jpeg", ".png" };
+	static constexpr std::array accepted{ ".jpg", ".jpeg", ".png", ".bmp", ".tga", ".gif", ".ppm", ".pgm"};
 	return std::find(std::cbegin(accepted), std::cend(accepted), entry.extension()) != std::cend(accepted);
 }
 
@@ -95,6 +95,10 @@ bool ImageProcessor::process(const std::filesystem::path& root, const std::files
 	params.m_pJob_pool = &impl->job_pool;
 
 	params.m_status_output = false;
+
+	// Debugging.
+	params.m_debug = loguru::g_stderr_verbosity >= loglevel::Debug;
+	params.m_validate = params.m_debug;
 
 
 	if (!impl->compressor.init(params))

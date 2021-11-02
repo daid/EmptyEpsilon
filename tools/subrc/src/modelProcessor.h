@@ -1,6 +1,7 @@
 #pragma once
 #include "assetProcessor.h"
 
+/*! Process .obj into EE model format. */
 class ModelProcessor final : public AssetProcessor
 {
 public:

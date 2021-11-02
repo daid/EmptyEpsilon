@@ -36,10 +36,18 @@ namespace pack {
 
 	Builder::Builder()
 		:contents{ tmpfile(), &fclose }
-	{}
-	void Builder::add(const std::filesystem::path& name, const uint8_t* data, size_t size)
+	{
+		// All the content is write to a temp file,
+		// so we don't have to worry about ram usage.
+		// (and we let the OS cleanup if the processing failed for one reason or other)
+		// Note that the tempfile is *technically* a .pack file minus the header.
+	}
+
+	void Builder::add(const std::filesystem::path& name, const void* data, size_t size)
 	{
 		VLOG_F(loglevel::Debug, "[builder]: adding entry %s", name.generic_u8string().c_str());
+
+		// Empty files are added as entry.
 		entries.emplace_back(name.generic_u8string().c_str(), 0, static_cast<int32_t>(size));
 		if (size > 0)
 		{
@@ -58,7 +66,7 @@ namespace pack {
 			return false;
 		}
 
-		// Get header size.
+		// Compute header size.
 		auto header_size{2 * sizeof(int32_t)};
 		for (const auto& entry : entries)
 		{
@@ -83,11 +91,11 @@ namespace pack {
 		// Readback from the tmpfile 8MB at a time.
 		std::vector<uint8_t> buffer(8 * 1024 * 1024);
 		rewind(contents.get());
-		for (;;)
+		while (true)
 		{
 			auto bytes = fread(buffer.data(), 1, buffer.size(), contents.get());
 			if (bytes == 0)
-				break;
+				break; // Finished reading, should be EOF.
 			
 			auto written = fwrite(buffer.data(), bytes, 1, dest.get());
 			if (written == 0)
