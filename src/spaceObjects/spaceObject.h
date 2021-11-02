@@ -78,6 +78,15 @@ enum EScannedState
     SS_FullScan
 };
 
+/*! Radar rendering layer.
+* Allow relative ordering of objects for drawing
+*/
+enum class ERadarLayer
+{
+    Background,
+    Default
+};
+
 class SpaceObject;
 class PlayerSpaceship;
 extern PVector<SpaceObject> space_object_list;
@@ -125,6 +134,7 @@ public:
     float getRadarSignatureGravity() { return radar_signature.gravity; }
     float getRadarSignatureElectrical() { return radar_signature.electrical; }
     float getRadarSignatureBiological() { return radar_signature.biological; }
+    virtual ERadarLayer getRadarLayer() const { return ERadarLayer::Default; }
 
     string getDescription(EScannedState state)
     {

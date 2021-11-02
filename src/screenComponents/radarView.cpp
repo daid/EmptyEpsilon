@@ -650,6 +650,14 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         break;
     }
 
+    std::vector objects_to_draw(std::begin(visible_objects), std::end(visible_objects));
+    std::sort(std::begin(objects_to_draw), std::end(objects_to_draw), [](const auto& lhs, const auto& rhs)
+    {
+        const auto lhsLayer = lhs->getRadarLayer();
+        const auto rhsLayer = rhs->getRadarLayer();
+        return lhsLayer < rhsLayer || (lhsLayer == rhsLayer && lhs->canHideInNebula() && !rhs->canHideInNebula());
+    });
+
     auto draw_object = [&renderer, this, scale](SpaceObject* obj)
     {
         auto object_position_on_screen = worldToScreen(obj->getPosition());
@@ -664,7 +672,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     };
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
-    for(SpaceObject* obj : visible_objects)
+    for(SpaceObject* obj : objects_to_draw)
     {
             draw_object(obj);
     }
