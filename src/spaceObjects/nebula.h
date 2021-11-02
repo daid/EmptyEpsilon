@@ -25,6 +25,7 @@ public:
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual bool canHideInNebula() override { return false; }
+    virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::Background; }
 
     static bool inNebula(glm::vec2 position);
     static bool blockedByNebula(glm::vec2 start, glm::vec2 end, float radar_short_range);
