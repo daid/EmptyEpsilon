@@ -113,8 +113,8 @@ namespace {
 			uint32_t version{};
 			uint32_t vertex_count{};
 			uint32_t index_count{};
-			uint32_t encoded_vertices{};
-			uint32_t encoded_indices{};
+			uint32_t compressed_vertex_size{};
+			uint32_t compressed_index_size{};
 		};
 
 		static_assert(sizeof(header_t) == 5 * sizeof(uint32_t), "padding.");
@@ -127,16 +127,16 @@ namespace {
 		auto offset = sizeof(header_t);
 		
 		// Write vertices.
-		header->encoded_vertices = to_little(static_cast<uint32_t>(
+		header->compressed_vertex_size = to_little(static_cast<uint32_t>(
 			meshopt_encodeVertexBuffer(optimized.data() + offset, optimized.size() - offset, vertices.data(), vertices.size(), sizeof(Vertex))
 		));
-		offset += header->encoded_vertices;
+		offset += header->compressed_vertex_size;
 		
 		// Write indices.
-		header->encoded_indices = to_little(static_cast<uint32_t>(
+		header->compressed_index_size = to_little(static_cast<uint32_t>(
 			meshopt_encodeIndexBuffer(optimized.data() + offset, optimized.size() - offset, indices.data(), indices.size())
 		));
-		offset += header->encoded_indices;
+		offset += header->compressed_index_size;
 
 		// Trim to actual size (remove worst-case overhead)
 		optimized.resize(offset);
