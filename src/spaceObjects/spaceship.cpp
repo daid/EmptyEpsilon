@@ -473,7 +473,7 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             std::vector<ArcPoint> arc_points;
             arc_points.reserve(curve_point_count + 1);
             
-            for (int i = 0; i < curve_point_count; i++)
+            for (size_t i = 0; i < curve_point_count; i++)
             {
                 auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
                 arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
@@ -492,7 +492,7 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
                 renderer.drawTexturedQuad("gradient.png",
                     p0, p0 - n0 * outline_thickness,
                     p1 - n1 * outline_thickness, p1,
-                    { 0.f, 0.f }, { 1.f, 0.f }, { 1.f, 1.f }, { 0.f, 1.f },
+                    { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
             }
 
@@ -514,13 +514,13 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
                 renderer.drawTexturedQuad("gradient.png",
                     arc_center, arc_center - left_edge_normal * outline_thickness,
                     left_edge - left_edge_normal * outline_thickness, left_edge,
-                    { 0.f, 0.f }, { 1.f, 0.f }, { 1.f, 1.f }, { 0.f, 1.f },
+                    { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
 
                 renderer.drawTexturedQuad("gradient.png",
                     arc_center, arc_center - right_edge_normal * outline_thickness,
                     right_edge - right_edge_normal * outline_thickness, right_edge,
-                    { 0.f, 0.f }, { 1.f, 0.f }, { 1.f, 1.f }, { 0.f, 1.f },
+                    { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
             }
         };
