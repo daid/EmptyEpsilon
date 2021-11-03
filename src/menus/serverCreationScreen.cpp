@@ -15,7 +15,6 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "scenarioInfo.h"
-#include "menus/mainMenus.h"
 #include "main.h"
 
 
@@ -78,10 +77,7 @@ ServerSetupScreen::ServerSetupScreen()
     // Close server button.
     (new GuiButton(this, "CLOSE_SERVER", tr("Close"), [this]() {
         destroy();
-        if (PreferencesManager::get("server_scenario")=="")
-            returnToMainMenu();
-        else
-            new MainMenu(); // If there is an auto scenario set, avoid endless loops and go directly to the Main Menu
+        returnToMainMenu();
     }))->setPosition(-250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Start server button.
