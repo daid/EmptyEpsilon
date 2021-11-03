@@ -328,7 +328,15 @@ int main(int argc, char** argv)
     }
 #endif // WITH_DISCORD
 
-    returnToMainMenu();
+    if (PreferencesManager::get("server_scenario") == "")
+        returnToMainMenu();
+    else
+    {
+        new EpsilonServer();
+        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
+        new ShipSelectionScreen();
+    }
+
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
