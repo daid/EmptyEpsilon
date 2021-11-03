@@ -500,26 +500,38 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             {
                 // Arc bounds.
                 // We use the left- and right-most edges as lines, going inwards, parallel to the center.
-                const auto& left_edge = arc_points[0].point;
-                const auto& right_edge = arc_points.back().point;
+                const auto left_edge = arc_points[0].point;
+                const auto right_edge = arc_points.back().point;
+                auto middle = glm::normalize(left_edge + (right_edge - left_edge) / 2.f - arc_center);
 
                 // Edge vectors.
-                const auto left_edge_vector = left_edge - arc_center;
-                const auto right_edge_vector = right_edge - arc_center;
+                const auto left_edge_vector = glm::normalize(left_edge - arc_center);
+                const auto right_edge_vector = glm::normalize(right_edge - arc_center);
 
                 // Edge normals, inwards.
-                const auto left_edge_normal = glm::normalize(glm::vec2{ left_edge_vector.y, -left_edge_vector.x });
-                const auto right_edge_normal = glm::normalize(glm::vec2{ -right_edge_vector.y, right_edge_vector.x });
+                const auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
+                const auto right_edge_normal = glm::vec2{ -right_edge_vector.y, right_edge_vector.x };
 
+                // Remap the cosine within [0,1] flipped (we want to shrink when it gets closer to zero). 
+                auto thickness_scale = (1.f - glm::dot(left_edge_vector, middle)) / 2.f;
+
+                auto inner_inside = arc_center - left_edge_normal * thickness_scale * outline_thickness;
+                if (glm::dot(left_edge_normal, middle) < 0.f)
+                    inner_inside = arc_center + middle * (1.f - thickness_scale) * outline_thickness;
+
+                
                 renderer.drawTexturedQuad("gradient.png",
-                    arc_center, arc_center - left_edge_normal * outline_thickness,
+                    arc_center, inner_inside,
                     left_edge - left_edge_normal * outline_thickness, left_edge,
                     { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
 
+                inner_inside = arc_center - right_edge_normal * thickness_scale * outline_thickness;
+                if (glm::dot(middle, right_edge_normal) < 0.f)
+                    inner_inside = arc_center + middle * (1.f - thickness_scale) * outline_thickness;
                 renderer.drawTexturedQuad("gradient.png",
-                    arc_center, arc_center - right_edge_normal * outline_thickness,
-                    right_edge - right_edge_normal * outline_thickness, right_edge,
+                    arc_center, inner_inside,
+                     right_edge - right_edge_normal * outline_thickness, right_edge,
                     { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
             }
