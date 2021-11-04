@@ -500,38 +500,53 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             {
                 // Arc bounds.
                 // We use the left- and right-most edges as lines, going inwards, parallel to the center.
-                const auto left_edge = arc_points[0].point;
-                const auto right_edge = arc_points.back().point;
-                auto middle = glm::normalize(left_edge + (right_edge - left_edge) / 2.f - arc_center);
+                const auto left_edge = vec2FromAngle(angle0) * beam_range;
+                const auto right_edge = vec2FromAngle(angle0 + beam_arc) * beam_range;
+            
+                // Compute the half point, always going clockwise from the left edge.
+                // This makes sure the algorithm never takes the short road.
+                auto halfway_angle = vec2FromAngle(angle0 + beam_arc / 2.f) * beam_range;
+                auto middle = glm::normalize(halfway_angle);
 
                 // Edge vectors.
-                const auto left_edge_vector = glm::normalize(left_edge - arc_center);
-                const auto right_edge_vector = glm::normalize(right_edge - arc_center);
+                const auto left_edge_vector = glm::normalize(left_edge);
+                const auto right_edge_vector = glm::normalize(right_edge);
 
                 // Edge normals, inwards.
-                const auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
+                auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
                 const auto right_edge_normal = glm::vec2{ -right_edge_vector.y, right_edge_vector.x };
 
-                // Remap the cosine within [0,1] flipped (we want to shrink when it gets closer to zero). 
-                auto thickness_scale = (1.f - glm::dot(left_edge_vector, middle)) / 2.f;
+                // Initial offset, follow along the edges' normals, inwards.
+                auto left_inner_offset = -left_edge_normal * outline_thickness;
+                auto right_inner_offset = -right_edge_normal * outline_thickness;
 
-                auto inner_inside = arc_center - left_edge_normal * thickness_scale * outline_thickness;
-                if (glm::dot(left_edge_normal, middle) < 0.f)
-                    inner_inside = arc_center + middle * (1.f - thickness_scale) * outline_thickness;
+                if (beam_arc < 180.f)
+                {
+                    // The thickness being perpendicular from the edges,
+                    // the inner lines just crosses path on the height,
+                    // so just use that point.
+                    left_inner_offset = middle * outline_thickness / sinf(glm::radians(beam_arc / 2.f));
+                    right_inner_offset = left_inner_offset;
+                }
+                else
+                {
+                    // Make it shrink nicely as it grows up to 360 deg.
+                    // For that, we use the edge's normal against the height which will change from 0 to 90deg.
+                    // Also flip the direction so our points stay inside the beam.
+                    auto thickness_scale = -glm::dot(middle, right_edge_normal);
+                    left_inner_offset *= thickness_scale;
+                    right_inner_offset *= thickness_scale;
+                }
 
-                
                 renderer.drawTexturedQuad("gradient.png",
-                    arc_center, inner_inside,
-                    left_edge - left_edge_normal * outline_thickness, left_edge,
+                    arc_center, arc_center + left_inner_offset,
+                    arc_center + left_edge - left_edge_normal * outline_thickness, arc_center + left_edge,
                     { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
 
-                inner_inside = arc_center - right_edge_normal * thickness_scale * outline_thickness;
-                if (glm::dot(middle, right_edge_normal) < 0.f)
-                    inner_inside = arc_center + middle * (1.f - thickness_scale) * outline_thickness;
                 renderer.drawTexturedQuad("gradient.png",
-                    arc_center, inner_inside,
-                     right_edge - right_edge_normal * outline_thickness, right_edge,
+                    arc_center, arc_center + right_inner_offset,
+                    arc_center + right_edge - right_edge_normal * outline_thickness, arc_center + right_edge,
                     { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
                     color);
             }
@@ -929,7 +944,7 @@ bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     if (!ship || !ship->ship_template)
         return false;
     return (ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) +
-	   ship_template->can_be_docked_by_class.count(ship->ship_template->getSubClass())) > 0;
+       ship_template->can_be_docked_by_class.count(ship->ship_template->getSubClass())) > 0;
 }
 
 void SpaceShip::collide(Collisionable* other, float force)
