@@ -21,10 +21,12 @@ msgstr ""
 
 # Scenario description
 msgid ""
-"The Beacon of Light scenario, built from the series at EmptyEpsilon.org.Near "
-"the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat went "
-"missing, and your first mission is to recover him.This scenario is limited "
-"to one player ship: the Atlantis Epsilon."
+"The Beacon of Light scenario, built from the series at EmptyEpsilon.org.\n"
+"\n"
+"Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat "
+"went missing, and your first mission is to recover him.\n"
+"\n"
+"This scenario is limited to one player ship: the Atlantis Epsilon."
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:69

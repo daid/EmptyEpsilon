@@ -17,11 +17,13 @@ msgid "Waves"
 msgstr "Vagues"
 
 # Scenario description
+#, fuzzy
 msgid ""
 "Waves of increasingly difficult enemies attack friendly stations. There is "
-"no victory. How many waves can you destroy?Spawn the player ships you want. "
-"The strength of enemy ships is independent of the number and type of player "
-"ships."
+"no victory. How many waves can you destroy?\n"
+"\n"
+"Spawn the player ships you want. The strength of enemy ships is independent "
+"of the number and type of player ships."
 msgstr ""
 "Des vagues d'ennemis de plus en plus difficiles à contenir attaquent les "
 "stations amies. Il n'y a pas de victoire. Combien de vagues pouvez-vous "

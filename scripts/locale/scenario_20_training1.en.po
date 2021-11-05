@@ -4,11 +4,17 @@ msgstr ""
 
 # Scenario description
 msgid ""
-"Basic Training CourceObjective: Destroy all enemy ships in the area."
-"Description:During this training your will learn to coordinate the actions "
-"of your crew and destoy an Exuari training ground.Your ship is a Phobos "
-"light cruiser - the most common vessel in the navy.This is a short mission "
-"for inexperienced players."
+"Basic Training Cource\n"
+"\n"
+"Objective: Destroy all enemy ships in the area.\n"
+"\n"
+"Description:\n"
+"During this training your will learn to coordinate the actions of your crew "
+"and destoy an Exuari training ground.\n"
+"\n"
+"Your ship is a Phobos light cruiser - the most common vessel in the navy.\n"
+"\n"
+"This is a short mission for inexperienced players."
 msgstr ""
 
 #: scripts/scenario_20_training1.lua:78

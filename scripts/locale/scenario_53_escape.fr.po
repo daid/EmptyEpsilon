@@ -18,10 +18,14 @@ msgid "Escape"
 msgstr "S'échapper"
 
 # Scenario description
+#, fuzzy
 msgid ""
-"Escape imprisonment and return home.Mission consists of one ship with a full "
-"crew. Engineer and Science will be busyVersion 4 Adds more activity for the "
-"weapons officer (6Apr2020)"
+"Escape imprisonment and return home.\n"
+"\n"
+"Mission consists of one ship with a full crew. Engineer and Science will be "
+"busy\n"
+"\n"
+"Version 4 Adds more activity for the weapons officer (6Apr2020)"
 msgstr ""
 "- Mission - Durée 2h - Difficulté Moyenne - 1 navire -\n"
 "\n"

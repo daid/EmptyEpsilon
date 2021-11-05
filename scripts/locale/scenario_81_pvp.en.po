@@ -2,7 +2,29 @@
 msgid "Clash in Shangri-La (PVP)"
 msgstr ""
 
-#: scenario_81_pvp.lua:90
+# Scenario description
+msgid ""
+"Since its creation, the Shangri-La station was governed by a multi-ethnic "
+"consortium that assured the station's independence across the conflicts that "
+"shook the sector.\n"
+"\n"
+"However, the station's tranquility came to an abrupt end when most of the "
+"governing consortium's members were assassinated under a Exuari false flag "
+"operation.\n"
+"\n"
+"Now the station is in a state of civil war, with infighting breaking out "
+"between warring factions.\n"
+"\n"
+"Both the neighboring Human Navy and Kraylor are worried that the breakdown "
+"of order in Shangri-La could tilt the balance of power in their opponent's "
+"favor, and sent \"peacekeepers\" to shift the situation to their own "
+"advantage.\n"
+"\n"
+"The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in "
+"an all-out battle for Shangri-La."
+msgstr ""
+
+#: scripts/scenario_81_pvp.lua:90
 msgid ""
 "Captain, it seems that the Kraylor are moving to take the Shangri-La station "
 "in sector F5!\n"
@@ -12,7 +34,7 @@ msgid ""
 "Good luck, and stay safe."
 msgstr ""
 
-#: scenario_81_pvp.lua:99
+#: scripts/scenario_81_pvp.lua:99
 msgid ""
 "Greetings, Crusader.\n"
 "\n"
@@ -23,177 +45,178 @@ msgid ""
 "transports, and cleanse all enemy opposition!"
 msgstr ""
 
-#: scenario_81_pvp.lua:130
+#: scripts/scenario_81_pvp.lua:130
 msgid "Here's the latest news from the front."
 msgstr ""
 
-#: scenario_81_pvp.lua:131
+#: scripts/scenario_81_pvp.lua:131
 #, lua-format
 msgid "Human dominance: %d"
 msgstr ""
 
-#: scenario_81_pvp.lua:132
+#: scripts/scenario_81_pvp.lua:132
 #, lua-format
 msgid "Kraylor dominance: %d"
 msgstr ""
 
-#: scenario_81_pvp.lua:133
+#: scripts/scenario_81_pvp.lua:133
 #, lua-format
 msgid "Time elapsed: %.0f"
 msgstr ""
 
-#: scenario_81_pvp.lua:143
+#: scripts/scenario_81_pvp.lua:143
 msgid ""
 "Your faction's militia commander picks up:\n"
 "\n"
 "What can we do for you, Captain?"
 msgstr ""
 
-#: scenario_81_pvp.lua:147
+#: scripts/scenario_81_pvp.lua:147
 msgid "Give us a status report."
 msgstr ""
 
-#: scenario_81_pvp.lua:161
+#: scripts/scenario_81_pvp.lua:161
 msgid ""
 "A dispatcher responds:\n"
 "\n"
 "Greetings, Captain. If you want supplies, please dock with us."
 msgstr ""
 
-#: scenario_81_pvp.lua:165
+#: scripts/scenario_81_pvp.lua:165
 msgid ""
 "A dispatcher responds:\n"
 "\n"
 "Greetings, Captain. What can we do for you?"
 msgstr ""
 
-#: scenario_81_pvp.lua:171
+#: scripts/scenario_81_pvp.lua:171
 msgid "I need a status report."
 msgstr ""
 
-#: scenario_81_pvp.lua:178
+#: scripts/scenario_81_pvp.lua:178
 msgid "Send in more troops. (100 reputation)"
 msgstr ""
 
-#: scenario_81_pvp.lua:181 scenario_81_pvp.lua:203 scenario_81_pvp.lua:233
+#: scripts/scenario_81_pvp.lua:181 scripts/scenario_81_pvp.lua:203
+#: scripts/scenario_81_pvp.lua:233
 msgid "Not enough reputation."
 msgstr ""
 
-#: scenario_81_pvp.lua:184
+#: scripts/scenario_81_pvp.lua:184
 msgid ""
 "Aye, Captain. We've deployed a squad with fighter escort to support the "
 "assault on Shangri-La."
 msgstr ""
 
-#: scenario_81_pvp.lua:200
+#: scripts/scenario_81_pvp.lua:200
 msgid "We need some space-based firepower. (150 reputation)"
 msgstr ""
 
-#: scenario_81_pvp.lua:206
+#: scripts/scenario_81_pvp.lua:206
 msgid ""
 "Confirmed. We've dispatched a strike wing to support space superiority "
 "around Shangri-La."
 msgstr ""
 
-#: scenario_81_pvp.lua:214
+#: scripts/scenario_81_pvp.lua:214
 msgid "We need supplies."
 msgstr ""
 
-#: scenario_81_pvp.lua:217
+#: scripts/scenario_81_pvp.lua:217
 msgid "We'll bring your destruction!"
 msgstr ""
 
-#: scenario_81_pvp.lua:226
+#: scripts/scenario_81_pvp.lua:226
 #, lua-format
 msgid "(%d rep each)"
 msgstr ""
 
-#: scenario_81_pvp.lua:229
+#: scripts/scenario_81_pvp.lua:229
 msgid "You need to stay docked for that action."
 msgstr ""
 
-#: scenario_81_pvp.lua:238 scenario_81_pvp.lua:242
+#: scripts/scenario_81_pvp.lua:238 scripts/scenario_81_pvp.lua:242
 msgid "Back"
 msgstr ""
 
-#: scenario_81_pvp.lua:250
+#: scripts/scenario_81_pvp.lua:250
 msgid "What supplies do you need?"
 msgstr ""
 
-#: scenario_81_pvp.lua:255
+#: scripts/scenario_81_pvp.lua:255
 msgid "Do you have spare homing missiles for us?"
 msgstr ""
 
-#: scenario_81_pvp.lua:256
+#: scripts/scenario_81_pvp.lua:256
 msgid "Sorry, Captain, but you are fully stocked with homing missiles."
 msgstr ""
 
-#: scenario_81_pvp.lua:257
+#: scripts/scenario_81_pvp.lua:257
 msgid "We've replenished your homing missile supply."
 msgstr ""
 
-#: scenario_81_pvp.lua:263
+#: scripts/scenario_81_pvp.lua:263
 msgid "Please re-stock our mines."
 msgstr ""
 
-#: scenario_81_pvp.lua:264
+#: scripts/scenario_81_pvp.lua:264
 msgid "Captain, you already have all the mines you can fit in that ship."
 msgstr ""
 
-#: scenario_81_pvp.lua:265
+#: scripts/scenario_81_pvp.lua:265
 msgid "These mines are yours."
 msgstr ""
 
-#: scenario_81_pvp.lua:271
+#: scripts/scenario_81_pvp.lua:271
 msgid "Can you supply us with some nukes?"
 msgstr ""
 
-#: scenario_81_pvp.lua:272
+#: scripts/scenario_81_pvp.lua:272
 msgid "Your nukes are already charged and primed for destruction."
 msgstr ""
 
-#: scenario_81_pvp.lua:273
+#: scripts/scenario_81_pvp.lua:273
 msgid "You are fully loaded and ready to explode things."
 msgstr ""
 
-#: scenario_81_pvp.lua:279
+#: scripts/scenario_81_pvp.lua:279
 msgid "Please re-stock our EMP missiles."
 msgstr ""
 
-#: scenario_81_pvp.lua:280
+#: scripts/scenario_81_pvp.lua:280
 msgid "All storage for EMP missiles is already full, Captain."
 msgstr ""
 
-#: scenario_81_pvp.lua:281
+#: scripts/scenario_81_pvp.lua:281
 msgid ""
 "We've recalibrated the electronics and fitted you with all the EMP missiles "
 "you can carry."
 msgstr ""
 
-#: scenario_81_pvp.lua:287
+#: scripts/scenario_81_pvp.lua:287
 msgid "Can you restock us with HVLI?"
 msgstr ""
 
-#: scenario_81_pvp.lua:288
+#: scripts/scenario_81_pvp.lua:288
 msgid "Sorry, Captain, but you are fully stocked with HVLIs."
 msgstr ""
 
-#: scenario_81_pvp.lua:289
+#: scripts/scenario_81_pvp.lua:289
 msgid "We've replenished your HVLI supply."
 msgstr ""
 
-#: scenario_81_pvp.lua:292
+#: scripts/scenario_81_pvp.lua:292
 msgid "Back to main menu"
 msgstr ""
 
-#: scenario_81_pvp.lua:341
+#: scripts/scenario_81_pvp.lua:341
 msgid ""
 "Well done, Crusader!\n"
 "\n"
 "The pathetic Human flagship has been disabled. Go for the victory!"
 msgstr ""
 
-#: scenario_81_pvp.lua:353
+#: scripts/scenario_81_pvp.lua:353
 msgid ""
 "Good job, Captain!\n"
 "\n"

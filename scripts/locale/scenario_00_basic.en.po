@@ -2,7 +2,19 @@
 msgid "Basic"
 msgstr ""
 
-#: scenario_00_basic.lua:472
+# Scenario description
+msgid ""
+"A few random stations are under attack by enemies, with random terrain "
+"around them. Destroy all enemies to win.\n"
+"\n"
+"The scenario provides a single player-controlled Atlantis, which is "
+"sufficient to win even in the \"Extreme\" variant.\n"
+"\n"
+"Other player ships can be spawned, but the strength of enemy ships is "
+"independent of the number and types of player ships."
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:472
 #, lua-format
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
@@ -15,7 +27,7 @@ msgid ""
 "Good luck."
 msgstr ""
 
-#: scenario_00_basic.lua:482
+#: scripts/scenario_00_basic.lua:482
 #, lua-format
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
@@ -23,39 +35,39 @@ msgid ""
 "Good luck."
 msgstr ""
 
-#: scenario_00_basic.lua:517
+#: scripts/scenario_00_basic.lua:517
 #, lua-format
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr ""
 
-#: scenario_00_basic.lua:528
+#: scripts/scenario_00_basic.lua:528
 msgid "Mission: FAILED (time has run out)"
 msgstr ""
 
-#: scenario_00_basic.lua:536
+#: scripts/scenario_00_basic.lua:536
 #, lua-format
 msgid "%s, you have %d minute remaining."
 msgstr ""
 
-#: scenario_00_basic.lua:541
+#: scripts/scenario_00_basic.lua:541
 #, lua-format
 msgid "%s, you have %d minutes remaining."
 msgstr ""
 
-#: scenario_00_basic.lua:546
+#: scripts/scenario_00_basic.lua:546
 #, lua-format
 msgid "%s, you have %d minutes remaining of mission time."
 msgstr ""
 
-#: scenario_00_basic.lua:556
+#: scripts/scenario_00_basic.lua:556
 msgid "Mission: FAILED (no friendlies left)"
 msgstr ""
 
-#: scenario_00_basic.lua:573
+#: scripts/scenario_00_basic.lua:573
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr ""
 
-#: scenario_00_basic.lua:581
+#: scripts/scenario_00_basic.lua:581
 #, lua-format
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr ""
