@@ -156,6 +156,7 @@ Mesh* Mesh::getMesh(const string& filename)
     std::vector<MeshVertex> mesh_vertices;
     if (filename.endswith(".obj"))
     {
+        bool parsing_ok = true;
         std::vector<glm::vec3> vertices;
         std::vector<glm::vec3> normals;
         std::vector<glm::vec2> texCoords;
@@ -171,54 +172,105 @@ Mesh* Mesh::getMesh(const string& filename)
                     continue;
                 if (parts[0] == "v")
                 {
-                    vertices.emplace_back(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
+                    if (parts.size() == 4)
+                    {
+                        vertices.emplace_back(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad vertex line: ", line);
+                        parsing_ok = false;
+                    }
+
                 }else if (parts[0] == "vn")
                 {
-                    normals.push_back(glm::normalize(glm::vec3(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
+                    if (parts.size() == 4)
+                    {
+                        normals.push_back(glm::normalize(glm::vec3(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad normal line: ", line);
+                        parsing_ok = false;
+                    }
+                    
                 }else if (parts[0] == "vt")
                 {
-                    texCoords.push_back(glm::vec2(parts[1].toFloat(), parts[2].toFloat()));
+                    if (parts.size() == 3)
+                    {
+                        texCoords.push_back(glm::vec2(parts[1].toFloat(), parts[2].toFloat()));
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad vertex texcoord line: ", line);
+                        parsing_ok = false;
+                    }
+                    
                 }else if (parts[0] == "f")
                 {
-                    for(unsigned int n=3; n<parts.size(); n++)
+                    if (parts.size() >= 4)
                     {
-                        std::vector<string> p0 = parts[1].split("/");
-                        std::vector<string> p1 = parts[n].split("/");
-                        std::vector<string> p2 = parts[n-1].split("/");
+                        for (unsigned int n = 3; parsing_ok && n < parts.size(); n++)
+                        {
+                            std::vector<string> p0 = parts[1].split("/");
+                            std::vector<string> p1 = parts[n].split("/");
+                            std::vector<string> p2 = parts[n - 1].split("/");
 
-                        IndexInfo info;
-                        info.v = p0[0].toInt() - 1;
-                        info.t = p0[1].toInt() - 1;
-                        info.n = p0[2].toInt() - 1;
-                        indices.push_back(info);
-                        info.v = p2[0].toInt() - 1;
-                        info.t = p2[1].toInt() - 1;
-                        info.n = p2[2].toInt() - 1;
-                        indices.push_back(info);
-                        info.v = p1[0].toInt() - 1;
-                        info.t = p1[1].toInt() - 1;
-                        info.n = p1[2].toInt() - 1;
-                        indices.push_back(info);
+                            if (p0.size() == 3 && p1.size() == 3 && p2.size() == 3)
+                            {
+                                IndexInfo info;
+                                info.v = p0[0].toInt() - 1;
+                                info.t = p0[1].toInt() - 1;
+                                info.n = p0[2].toInt() - 1;
+                                indices.push_back(info);
+                                info.v = p2[0].toInt() - 1;
+                                info.t = p2[1].toInt() - 1;
+                                info.n = p2[2].toInt() - 1;
+                                indices.push_back(info);
+                                info.v = p1[0].toInt() - 1;
+                                info.t = p1[1].toInt() - 1;
+                                info.n = p1[2].toInt() - 1;
+                                indices.push_back(info);
+                            }
+                            else
+                            {
+                                LOG(ERROR, "Bad face triangle: ", line);
+                                parsing_ok = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        LOG(ERROR, "Bad face line: ", line);
+                        parsing_ok = false;
                     }
                 }else{
-                    //printf("%s\n", parts[0].c_str());
+                    LOG(DEBUG, "mesh: ignored: ", line);
                 }
             }
-        }while(stream->tell() < stream->getSize());
+        }while(parsing_ok && stream->tell() < stream->getSize());
 
-        
-        mesh_vertices.resize(indices.size());
-        for(unsigned int n=0; n<indices.size(); n++)
+        if (parsing_ok)
         {
-            mesh_vertices[n].position[0] = vertices[indices[n].v].x;
-            mesh_vertices[n].position[1] = vertices[indices[n].v].z;
-            mesh_vertices[n].position[2] = vertices[indices[n].v].y;
-            mesh_vertices[n].normal[0] = normals[indices[n].n].x;
-            mesh_vertices[n].normal[1] = normals[indices[n].n].z;
-            mesh_vertices[n].normal[2] = normals[indices[n].n].y;
-            mesh_vertices[n].uv[0] = texCoords[indices[n].t].x;
-            mesh_vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
+            mesh_vertices.resize(indices.size());
+            for (unsigned int n = 0; n < indices.size(); n++)
+            {
+                mesh_vertices[n].position[0] = vertices[indices[n].v].x;
+                mesh_vertices[n].position[1] = vertices[indices[n].v].z;
+                mesh_vertices[n].position[2] = vertices[indices[n].v].y;
+                mesh_vertices[n].normal[0] = normals[indices[n].n].x;
+                mesh_vertices[n].normal[1] = normals[indices[n].n].z;
+                mesh_vertices[n].normal[2] = normals[indices[n].n].y;
+                mesh_vertices[n].uv[0] = texCoords[indices[n].t].x;
+                mesh_vertices[n].uv[1] = 1.f - texCoords[indices[n].t].y;
+            }
         }
+        else
+        {
+            LOG(ERROR, "Failed to parse ", filename);
+        }
+        
+        
     }else if (filename.endswith(".model"))
     {
         mesh_vertices.resize(readInt(stream));
@@ -227,8 +279,12 @@ Mesh* Mesh::getMesh(const string& filename)
         LOG(ERROR) << "Unknown mesh format: " << filename;
     }
 
-    ret = new Mesh(std::move(mesh_vertices));
-    meshMap[filename] = ret;
+    if (!mesh_vertices.empty())
+    {
+        ret = new Mesh(std::move(mesh_vertices));
+        meshMap[filename] = ret;
+    }
+
    
     return ret;
 }
