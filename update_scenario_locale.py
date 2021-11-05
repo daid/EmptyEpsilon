@@ -38,14 +38,10 @@ for scenario in glob.glob("scripts/scenario_*.lua"):
         f.write("msgstr \"\"\n")
     if "description" in info:
         f.write("# Scenario description\n")
-        if "\n" in info["description"]:
-            f.write("msgid \"\"\n")
-            for desc in info["description"].split("\n"):
-                f.write("    %s\n" % (json.dumps(desc)))
-        else:
-            f.write("msgid %s\n" % (json.dumps(info["description"])))
+        f.write("msgid %s\n" % (json.dumps(info["description"].replace("\r", ""))))
         f.write("msgstr \"\"\n")
     f.close()
+    print(open(output, "rt").read())
     cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--omit-header", "-j", "-d", output[:-3], "-C", "-"]
     subprocess.run(cmd, check=True, input=b"")
     pre = open(output, "rt").read()
