@@ -758,24 +758,26 @@ msgstr ""
 
 #: scripts/tutorial/00_all.lua:322 scripts/tutorial/00_all.lua:398
 msgid "You successfully opened communications. Congratulations."
-msgstr ""
+msgstr "Glückwunsch, du hast erfolgreich einen Kommunikationskanal geöffnet. "
 
 #: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:399
 msgid "Tell me more!"
-msgstr ""
+msgstr "Erzählen Sie mir mehr!"
 
 #: scripts/tutorial/00_all.lua:324 scripts/tutorial/00_all.lua:400
 msgid "Sorry, there's nothing more to tell you."
-msgstr ""
+msgstr "Es tut mir leid, es gibt nichts weiteres zu sagen."
 
 #: scripts/tutorial/00_all.lua:326 scripts/tutorial/00_all.lua:402
 msgid "Continue with the tutorial."
-msgstr ""
+msgstr "Fahre mit dem Tutorial fort."
 
 #: scripts/tutorial/00_all.lua:327 scripts/tutorial/00_all.lua:403
 msgid ""
 "The tutorial will continue when you close communications with this station."
 msgstr ""
+"Das Tutorial wird fortgesetzt, sobald du die Kommunikation mit der Station "
+"beendest."
 
 #: scripts/tutorial/00_all.lua:331 scripts/tutorial/00_all.lua:407
 msgid "Open communications with the station near you to continue the tutorial."
@@ -842,7 +844,6 @@ msgstr ""
 "einer Station andockst."
 
 #: scripts/tutorial/00_all.lua:365
-#, fuzzy
 msgid ""
 "Welcome, operations officer.\n"
 "\n"
@@ -850,7 +851,7 @@ msgid ""
 "information. From your station, you can detect and scan objects at a range "
 "of up to 30u."
 msgstr ""
-"Willkommen auf der Wissenschafts-Station!\n"
+"Willkommen auf der OPS-Station!\n"
 "\n"
 "Du bist die Augen und Ohren des Schiffes. Deine Aufgabe ist es, Captain und "
 "Crew mit Informationen zu versorgen. Von deiner Station aus kannst du in "
