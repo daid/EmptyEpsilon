@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Scenario name
+msgid "Basic"
+msgstr "Basis-Szenario"
+
+#: scenario_00_basic.lua:472
+#, lua-format
+msgid ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Please inform your Captain and crew that you have a total of %d minutes for "
+"this mission.\n"
+"\n"
+"The mission started at the arrival of this message.\n"
+"\n"
+"Good luck."
+msgstr ""
+"%s, Ihr Ziel ist es, den bevorstehenden  Kraylor-Angriff abzuwehren.\n"
+"\n"
+"Bitte teilen Sie Captain und Crew mit, dass Sie insgesamt %d Minuten für "
+"diese Mission haben.\n"
+"\n"
+"Die Mission beginnt mit dem Erhalt dieser Botschaft.\n"
+"\n"
+"Viel Glück."
+
+#: scenario_00_basic.lua:482
+#, lua-format
+msgid ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Good luck."
+msgstr ""
+"%s, your objective is to fend off the incoming Kraylor attack.\n"
+"\n"
+"Viel Glück."
+
+#: scenario_00_basic.lua:517
+#, lua-format
+msgid "Mission: SUCCESS (%d seconds left)"
+msgstr "Mission ERFOLGREICH!  (%d Sekunden verbleibend)"
+
+#: scenario_00_basic.lua:528
+msgid "Mission: FAILED (time has run out)"
+msgstr "Mission FEHLGESCHLAGEN (Zeit abgelaufen)"
+
+#: scenario_00_basic.lua:536
+#, lua-format
+msgid "%s, you have %d minute remaining."
+msgstr "%s, Sie haben noch %d Minuten Zeit."
+
+#: scenario_00_basic.lua:541
+#, lua-format
+msgid "%s, you have %d minutes remaining."
+msgstr "%s, Sie haben noch %d Minuten Zeit."
+
+#: scenario_00_basic.lua:546
+#, lua-format
+msgid "%s, you have %d minutes remaining of mission time."
+msgstr "%s, Sie haben noch %d Minuten Zeit für die Mission."
+
+#: scenario_00_basic.lua:556
+msgid "Mission: FAILED (no friendlies left)"
+msgstr "Mission: FEHLGESCHLAGEN (keine verbündeten Einheiten mehr im Spiel)"
+
+#: scenario_00_basic.lua:573
+msgid "Mission: FAILED (all your ships destroyed)"
+msgstr "Mission: FEHLGESCHLAGEN (alle eigenen Schiffe wurden zerstört)"
+
+#: scenario_00_basic.lua:581
+#, lua-format
+msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
+msgstr "Mission läuft. Verbleibende Zeit: %d:%02d - Feinde: %d"
