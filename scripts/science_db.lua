@@ -5,7 +5,6 @@
 space_objects = ScienceDatabase():setName(_('Natural'))
 item = space_objects:addEntry(_('Asteroid'))
 item:setLongDescription(_([[Asteroids are minor planets, usually smaller than a few kilometers. Larger variants are sometimes refered to as planetoids.]]))
-item:setImage("redicule2.png")
 item = space_objects:addEntry(_('Nebula'))
 item:setLongDescription(_([[Nebulae are the birthing places of new stars. These gas fields, usually created by the death of an old star, slowly form new stars due to the gravitational pull of its gas molecules. Because of the ever-changing nature of gas nebulae, most radar and scanning technologies are unable to penetrate them. Science officers are therefore advised to rely on probes and visual observations.]]))
 
