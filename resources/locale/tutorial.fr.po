@@ -839,8 +839,8 @@ msgid ""
 msgstr ""
 "Bienvenue aux communications !\n"
 "\n"
-"Votre travail consiste à communiquer avec les stations et les navires.\n"
-"Vous avez également accès aux données radar à courte portée des navires et "
+"Votre travail consiste à communiquer avec les stations et les vaisseaux.\n"
+"Vous avez également accès aux données radar à courte portée des vaisseaux et "
 "stations amis, vous pouvez placer des marqueurs de navigation et lancer des "
 "sondes de scan."
 
@@ -851,35 +851,46 @@ msgid ""
 "You can target any station or ship and attempt to communicate with it. Other "
 "ships can also attempt to contact you."
 msgstr ""
+"Votre première responsabilité est de coordonner les communications du "
+"vaisseau.\n"
+"\n"
+"Vous pouvez choisir n'importe quelle station ou vaisseau et tenter de "
+"communiquer avec lui. D'autres vaisseaux peuvent également tenter de vous "
+"contacter."
 
 #: scripts/tutorial/00_all.lua:322 scripts/tutorial/00_all.lua:398
 msgid "You successfully opened communications. Congratulations."
 msgstr ""
+"Vous avez ouvert avec succès les communications. Toutes nos félicitations."
 
 #: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:399
 msgid "Tell me more!"
-msgstr ""
+msgstr "Dites m'en plus !"
 
 #: scripts/tutorial/00_all.lua:324 scripts/tutorial/00_all.lua:400
 msgid "Sorry, there's nothing more to tell you."
-msgstr ""
+msgstr "Désolé, il n'y a rien de plus à vous dire."
 
 #: scripts/tutorial/00_all.lua:326 scripts/tutorial/00_all.lua:402
 msgid "Continue with the tutorial."
-msgstr ""
+msgstr "Continuez avec le tutoriel."
 
 #: scripts/tutorial/00_all.lua:327 scripts/tutorial/00_all.lua:403
 msgid ""
 "The tutorial will continue when you close communications with this station."
 msgstr ""
+"Le didacticiel se poursuivra lorsque vous fermerez les communications avec "
+"cette station."
 
 #: scripts/tutorial/00_all.lua:331 scripts/tutorial/00_all.lua:407
 msgid "Open communications with the station near you to continue the tutorial."
 msgstr ""
+"Ouvrez les communications avec cette station proche de votre position pour "
+"continuer le didacticiel."
 
 #: scripts/tutorial/00_all.lua:333 scripts/tutorial/00_all.lua:409
 msgid "Now finish your talk with the station."
-msgstr ""
+msgstr "Maintenant terminez votre conversation avec la station."
 
 #: scripts/tutorial/00_all.lua:336 scripts/tutorial/00_all.lua:412
 msgid ""
@@ -889,6 +900,14 @@ msgid ""
 "for backup, or resupply your weapons. This is all part of your "
 "responsibilities as relay officer."
 msgstr ""
+"Selon le scénario, vous pouvez avoir différentes options lors des "
+"communications établies avec les stations.\n"
+"\n"
+"Vous pouvez vous informer de nouveaux objectifs ou de la progression de "
+"votre mission, demander des renforts ou réapprovisionner vos armes.\n"
+"\n"
+"Tout cela fait partie de vos responsabilités en tant qu'officier des "
+"communications."
 
 #: scripts/tutorial/00_all.lua:342
 msgid ""
@@ -899,12 +918,25 @@ msgid ""
 "you a different view from the science officer, because you can scan the "
 "contents of nebulae."
 msgstr ""
+"Votre console comprend également cette carte radar.\n"
+"\n"
+"Sur cette carte sans limite de taille, vous pouvez détecter des objets à "
+"courte portée radar de tous les vaisseaux et stations alliés ainsi que les "
+"éléments naturels de grande taille.\n"
+"\n"
+"Tout le reste vous est invisible.\n"
+"Cela vous donne une vue différente et complémentaire de celle de l'officier "
+"scientifique. Vous pouvez par exemple scanner le contenu des nébuleuses."
 
 #: scripts/tutorial/00_all.lua:345
 msgid ""
 "Finally, you control your ship's probes. Probes can expand your radar view. "
 "Launch a probe to the top right, toward the ship designated DMY-01."
 msgstr ""
+"Enfin, vous contrôlez les sondes de votre vaisseau.\n"
+"Les sondes vous permettent d'étendre votre vue radar.\n"
+"\n"
+"Lancez une sonde en haut à droite, vers le vaisseau désigné DMY-01."
 
 #: scripts/tutorial/00_all.lua:356
 msgid ""
@@ -912,6 +944,11 @@ msgid ""
 "explore nebulae. However, you have a limited supply of them and can't "
 "replenish them until you to dock with a station."
 msgstr ""
+"Les sondes peuvent étendre vos capacités de détection au-delà de votre "
+"portée normale et explorer également les nébuleuses.\n"
+"\n"
+"Cependant, vous en avez une quantité limitée et vous ne pouvez pas les "
+"reconstituer tant que vous ne vous êtes pas amarré à une station."
 
 #: scripts/tutorial/00_all.lua:365
 msgid ""
