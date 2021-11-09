@@ -139,7 +139,7 @@ addToSequence(weaponsTutorial, _([[Good! Notice that your beam weapons did not f
 
 Next up: shield controls.]]))
 addToSequence(weaponsTutorial, function() prev_object:destroy() end)
-addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(-700, 0):setRotation(0):orderAttack(player):setScanned(true) end)
+addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setAI("default"):setPosition(-700, 0):setRotation(0):orderAttack(player):setScanned(true) end)
 addToSequence(weaponsTutorial, _([[As you might notice, you are being shot at. Do not worry, you cannot die right now.
 
 You are taking damage, however, so enable your shields to protect yourself.]]), function()
