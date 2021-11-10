@@ -223,6 +223,92 @@ class DocumentationGenerator(object):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
         stream.write('<link href="http://daid.github.io/EmptyEpsilon/jquery-ui.min.css" rel="stylesheet">')
         stream.write('<link href="http://daid.github.io/EmptyEpsilon/main.css" rel="stylesheet">')
+
+	stream.write("""
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+rel="stylesheet"
+/>
+
+<style>
+  body {
+    background-image: none;
+    background-color: #050505;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  .ui-widget {
+    font-family: "JetBrains Mono", "Courier New", Courier, monospace;
+  }
+
+  .ui-widget-content {
+    background: rgba(16, 19, 23, 0.8);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  dl {
+    padding-bottom: 2rem;
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  ul > li {
+    list-style-type: none;
+    font-weight: bold;
+    line-height: 2.5rem;
+    background: rgba(36, 40, 44, 0.8);
+    padding-left: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  ul > li > ul {
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  ul > li > ul > li {
+    border: 0;
+    background-color: rgba(36, 40, 44, 0.2);
+  }
+
+  dt {
+    font-weight: bold;
+    line-height: 2.5rem;
+    background: rgba(36, 40, 44, 0.8);
+    padding-left: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  dd {
+    margin-left: 0;
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+    padding-bottom: 0.5rem;
+    background: rgba(55, 62, 70, 0.2);
+  }
+
+  dd:empty {
+    display: none;
+  }
+
+  li > dd {
+    background: rgba(16, 19, 23, 0.8);
+    margin-left: -1rem;
+  }
+</style>
+""")
+	
         stream.write('</head>')
         stream.write('<body>')
 
