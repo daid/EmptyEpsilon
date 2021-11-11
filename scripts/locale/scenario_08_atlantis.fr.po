@@ -18,7 +18,6 @@ msgid "Birth of the Atlantis"
 msgstr "Naissance de l'Atlantis"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "You are the first crew of a new and improved version of the Atlantis space "
 "explorer.\n"
@@ -27,12 +26,17 @@ msgid ""
 "\n"
 "This scenario is limited to one player ship: the Atlantis Atlantis-1."
 msgstr ""
+"- Durée approx. : 2h\n"
+"- Difficulté : Facile\n"
+"- Vaisseaux joueurs : 1\n"
+"\n"
 "Vous êtes le 1er équipage d'une nouvelle version améliorée du vaisseau "
 "d'exploration Atlantis.\n"
-"Vous devez vérifier les systèmes du vaisseau et accomplir une mission de "
+"\n"
+"Vous devez vérifier les systèmes du navire et accomplir une mission de "
 "base.\n"
 "\n"
-"Ce scénario est limité à un vaisseau joueur : l'Atlantis-1."
+"Ce scénario est limité à un seul vaisseau joueurs : l'Atlantis-1."
 
 #: scripts/scenario_08_atlantis.lua:158 scripts/scenario_08_atlantis.lua:174
 #: scripts/scenario_08_atlantis.lua:178
