@@ -1,0 +1,281 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Clash in Shangri-La (PVP)"
+msgstr "Affrontement à Shangri-La (PVP)"
+
+# Scenario description
+msgid ""
+"Since its creation, the Shangri-La station was governed by a multi-ethnic "
+"consortium that assured the station's independence across the conflicts that "
+"shook the sector.\n"
+"\n"
+"However, the station's tranquility came to an abrupt end when most of the "
+"governing consortium's members were assassinated under a Exuari false flag "
+"operation.\n"
+"\n"
+"Now the station is in a state of civil war, with infighting breaking out "
+"between warring factions.\n"
+"\n"
+"Both the neighboring Human Navy and Kraylor are worried that the breakdown "
+"of order in Shangri-La could tilt the balance of power in their opponent's "
+"favor, and sent \"peacekeepers\" to shift the situation to their own "
+"advantage.\n"
+"\n"
+"The Human Navy's HNS Gallipoli and Kraylor's Crusader Naa'Tvek face off in "
+"an all-out battle for Shangri-La."
+msgstr ""
+
+#: scripts/scenario_81_pvp.lua:90
+msgid ""
+"Captain, it seems that the Kraylor are moving to take the Shangri-La station "
+"in sector F5!\n"
+"\n"
+"Provide cover while our troop transports board the station to reclaim it.\n"
+"\n"
+"Good luck, and stay safe."
+msgstr ""
+"Capitaine, il semble que les Kraylors se déplacent pour capturer la station "
+"Shangri-La dans le secteur F5 !\n"
+"\n"
+"Fournissez une couverture pendant que nos transports de troupes abordent la "
+"station pour la récupérer.\n"
+"\n"
+"Bonne chance et soyez prudents."
+
+#: scripts/scenario_81_pvp.lua:99
+msgid ""
+"Greetings, Crusader.\n"
+"\n"
+"Your mission is to secure the Shangri-La station in sector F5. The feeble "
+"humans think it's theirs for the taking.\n"
+"\n"
+"Support our glorious soldiers by preventing the heretics from harming our "
+"transports, and cleanse all enemy opposition!"
+msgstr ""
+"Salutations, Crusader.\n"
+"\n"
+"Votre mission est de sécuriser la station Shangri-La dans le secteur F5. Ces "
+"faibles humains s'imaginent qu'elle leur appartient et ils veulent s'en "
+"emparer.\n"
+"\n"
+"Soutenez nos glorieux soldats en empêchant ces hérétiques de nuire à nos "
+"transports et nettoyez toute opposition ennemie !"
+
+#: scripts/scenario_81_pvp.lua:130
+msgid "Here's the latest news from the front."
+msgstr "Voici les dernières nouvelles du front."
+
+#: scripts/scenario_81_pvp.lua:131
+#, lua-format
+msgid "Human dominance: %d"
+msgstr "Domination des Humains : %d"
+
+#: scripts/scenario_81_pvp.lua:132
+#, lua-format
+msgid "Kraylor dominance: %d"
+msgstr "Domination des Kraylors : %d"
+
+#: scripts/scenario_81_pvp.lua:133
+#, lua-format
+msgid "Time elapsed: %.0f"
+msgstr "Temps écoulé : %.0f"
+
+#: scripts/scenario_81_pvp.lua:143
+msgid ""
+"Your faction's militia commander picks up:\n"
+"\n"
+"What can we do for you, Captain?"
+msgstr ""
+"Le commandant de milice de votre faction vous contacte :\n"
+"\n"
+"Que pouvons-nous faire pour vous, capitaine ?"
+
+#: scripts/scenario_81_pvp.lua:147
+msgid "Give us a status report."
+msgstr "Faites-nous un rapport de la situation."
+
+#: scripts/scenario_81_pvp.lua:161
+msgid ""
+"A dispatcher responds:\n"
+"\n"
+"Greetings, Captain. If you want supplies, please dock with us."
+msgstr ""
+"Un contrôleur répond :\n"
+"\n"
+"Salutations, capitaine. Si vous souhaitez vous réapprovisionner, veuillez "
+"vous amarrer à notre station."
+
+#: scripts/scenario_81_pvp.lua:165
+msgid ""
+"A dispatcher responds:\n"
+"\n"
+"Greetings, Captain. What can we do for you?"
+msgstr ""
+"Un contrôleur répond :\n"
+"\n"
+"Salutations, capitaine. Que pouvons-nous faire pour vous ?"
+
+#: scripts/scenario_81_pvp.lua:171
+msgid "I need a status report."
+msgstr "J'ai besoin d'un rapport de situation."
+
+#: scripts/scenario_81_pvp.lua:178
+msgid "Send in more troops. (100 reputation)"
+msgstr "Envoyez plus de troupes. (100 rép.)"
+
+#: scripts/scenario_81_pvp.lua:181 scripts/scenario_81_pvp.lua:203
+#: scripts/scenario_81_pvp.lua:233
+msgid "Not enough reputation."
+msgstr "Pas assez de réputation."
+
+#: scripts/scenario_81_pvp.lua:184
+msgid ""
+"Aye, Captain. We've deployed a squad with fighter escort to support the "
+"assault on Shangri-La."
+msgstr ""
+"A vos ordres, capitaine. Nous venons de déployer une escouade avec une "
+"escorte de chasseurs pour soutenir l'assaut sur Shangri-La."
+
+#: scripts/scenario_81_pvp.lua:200
+msgid "We need some space-based firepower. (150 reputation)"
+msgstr "Nous avons besoin d'une puissance de feu spatiale. (150 rép.)"
+
+#: scripts/scenario_81_pvp.lua:206
+msgid ""
+"Confirmed. We've dispatched a strike wing to support space superiority "
+"around Shangri-La."
+msgstr ""
+"Bien reçu. Nous vous envoyons une escouade d'attaque pour soutenir notre "
+"supériorité spatiale autour de Shangri-La."
+
+#: scripts/scenario_81_pvp.lua:214
+msgid "We need supplies."
+msgstr "Nous avons besoin de nous réapprovisionner."
+
+#: scripts/scenario_81_pvp.lua:217
+msgid "We'll bring your destruction!"
+msgstr "Nous allons vous détruire !"
+
+#: scripts/scenario_81_pvp.lua:226
+#, lua-format
+msgid "(%d rep each)"
+msgstr "(%d rép chacun)"
+
+#: scripts/scenario_81_pvp.lua:229
+msgid "You need to stay docked for that action."
+msgstr "Vous devez rester amarré pour cette action."
+
+#: scripts/scenario_81_pvp.lua:238 scripts/scenario_81_pvp.lua:242
+msgid "Back"
+msgstr "Précédent"
+
+#: scripts/scenario_81_pvp.lua:250
+msgid "What supplies do you need?"
+msgstr "De quoi avez-vous besoin ?"
+
+#: scripts/scenario_81_pvp.lua:255
+msgid "Do you have spare homing missiles for us?"
+msgstr "Auriez-vous des homing missiles pour nous ?"
+
+#: scripts/scenario_81_pvp.lua:256
+msgid "Sorry, Captain, but you are fully stocked with homing missiles."
+msgstr "Désolé, capitaine, mais vous êtes déjà au max en homing missiles."
+
+#: scripts/scenario_81_pvp.lua:257
+msgid "We've replenished your homing missile supply."
+msgstr "Nous avons reconstitué votre stock de homing missiles."
+
+#: scripts/scenario_81_pvp.lua:263
+msgid "Please re-stock our mines."
+msgstr "Merci de réapprovisionner notre stock de mines."
+
+#: scripts/scenario_81_pvp.lua:264
+msgid "Captain, you already have all the mines you can fit in that ship."
+msgstr ""
+"Capitaine, vous avez déjà toutes les mines que vous pouvez stocker dans ce "
+"vaisseau."
+
+#: scripts/scenario_81_pvp.lua:265
+msgid "These mines are yours."
+msgstr "Ces mines sont à vous."
+
+#: scripts/scenario_81_pvp.lua:271
+msgid "Can you supply us with some nukes?"
+msgstr "Avez-vous des missiles nucléaires nukes ?"
+
+#: scripts/scenario_81_pvp.lua:272
+msgid "Your nukes are already charged and primed for destruction."
+msgstr "Vos nukes sont en capacité maximale et prêtes à servir !"
+
+#: scripts/scenario_81_pvp.lua:273
+msgid "You are fully loaded and ready to explode things."
+msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+
+#: scripts/scenario_81_pvp.lua:279
+msgid "Please re-stock our EMP missiles."
+msgstr "Avez-vous des missiles EMP ?"
+
+#: scripts/scenario_81_pvp.lua:280
+msgid "All storage for EMP missiles is already full, Captain."
+msgstr "Votre stock de missiles EMP est déjà plein, capitaine."
+
+#: scripts/scenario_81_pvp.lua:281
+msgid ""
+"We've recalibrated the electronics and fitted you with all the EMP missiles "
+"you can carry."
+msgstr ""
+"Nous avons recalibré l'électronique et vous avons équipé de tous les "
+"missiles EMP que vous pouvez transporter."
+
+#: scripts/scenario_81_pvp.lua:287
+msgid "Can you restock us with HVLI?"
+msgstr "Pouvez-vous nous réapprovisionner en HVLIs ?"
+
+#: scripts/scenario_81_pvp.lua:288
+msgid "Sorry, Captain, but you are fully stocked with HVLIs."
+msgstr "Désolé, capitaine, mais vous êtes entièrement approvisionné en HVLIs."
+
+#: scripts/scenario_81_pvp.lua:289
+msgid "We've replenished your HVLI supply."
+msgstr "Nous avons reconstitué votre stock de HVLIs."
+
+#: scripts/scenario_81_pvp.lua:292
+msgid "Back to main menu"
+msgstr "Retour au menu principal"
+
+#: scripts/scenario_81_pvp.lua:341
+msgid ""
+"Well done, Crusader!\n"
+"\n"
+"The pathetic Human flagship has been disabled. Go for the victory!"
+msgstr ""
+"Bien joué, Crusader !\n"
+"\n"
+"Le pathétique vaisseau amiral Humain a été désactivé. Allez chercher la "
+"victoire !"
+
+#: scripts/scenario_81_pvp.lua:353
+msgid ""
+"Good job, Captain!\n"
+"\n"
+"With the Kraylor flagship out of the way, we can land the final blow!"
+msgstr ""
+"Bon travail, capitaine !\n"
+"\n"
+"Avec le vaisseau amiral Kraylor hors service, nous pouvons porter le coup "
+"final !"
