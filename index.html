@@ -905,7 +905,7 @@ function updateDownloadList(prerelease=false)
 		{
 			var release = data[idx]
             var release_name = release["tag_name"];
-            if (release["prerelease"] == prerelease)
+            if (release["prerelease"] != prerelease)
                 continue;
 
 			for(var idx2 in release["assets"])
