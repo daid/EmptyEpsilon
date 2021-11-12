@@ -941,6 +941,8 @@ function updateDownloadList(div_id, prerelease=false)
     			html += row;
                 if (os == "android")
                     html += " [BETA]";
+                if (prerelease)
+                    html += " [PRERELEASE]";
 			}
             if (first)
                 html += "<tr><th>OS<th>File<th>version";
