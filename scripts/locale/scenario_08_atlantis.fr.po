@@ -36,7 +36,9 @@ msgstr ""
 "Vous devez vérifier les systèmes du navire et accomplir une mission de "
 "base.\n"
 "\n"
-"Ce scénario est limité à un seul vaisseau joueurs : l'Atlantis-1."
+"Ce scénario est limité à un seul vaisseau joueurs : l'Atlantis-1.\n"
+"\n"
+"Titre original : Birth of the Atlantis"
 
 #: scripts/scenario_08_atlantis.lua:158 scripts/scenario_08_atlantis.lua:174
 #: scripts/scenario_08_atlantis.lua:178
@@ -150,7 +152,6 @@ msgstr ""
 "puissent pas les pénétrer."
 
 #: scripts/scenario_08_atlantis.lua:400
-#, fuzzy
 msgid ""
 "Good, all weapons are operational. Atlantis-1 seems to be in perfect "
 "operating condition.\n"
@@ -158,12 +159,12 @@ msgid ""
 "When you are ready to take on your first mission, contact us at Shipyard-"
 "Gamma. You can also dock with Supply-6 to resupply."
 msgstr ""
-"Bien, toutes les armes sont opérationnelles.\n"
-"Le vaisseau semble être en parfait état de fonctionnement.\n"
+"Bon, toutes les armes sont opérationnelles. Atlantis-1 semble être en "
+"parfait état de fonctionnement.\n"
 "\n"
-"Quand vous vous sentirez prêt à entreprendre votre première mission. "
-"Contactez nous.\n"
-"Vous pouvez accoster de nouveau sur Supply-6 pour vous réapprovisionner."
+"Lorsque vous vous sentirez prêt à entreprendre votre première mission, "
+"contactez-nous sur Shipyard-Gamma.\n"
+"Vous pouvez également accoster sur Supply-6 pour vous réapprovisionner."
 
 #: scripts/scenario_08_atlantis.lua:415
 msgid "Hold on tight, heading for sector B20."
