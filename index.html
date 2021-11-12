@@ -934,7 +934,7 @@ function updateDownloadList(prerelease=false)
 		html += '</table>';
 		$('#downloads-info').html(html);
 	}, "json");
-});
+}
 
 $(function() {
 	$("#tabs").tabs({activate: updateHashFromTab});
@@ -994,7 +994,7 @@ $(function() {
 		$("#" + key).tabs("option", "active", hashData[key]);
 	}
     updateDownloadList();
-}
+});
 </script>
 <script src="jquery.magnific-popup.min.js"></script>
 <script type="text/javascript">
