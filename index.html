@@ -894,6 +894,48 @@ function updateHashFromTab(event, ui)
 	location.hash = hash.join(",");
 }
 
+function updateDownloadList(prerelease=false)
+{
+	$.get("https://api.github.com/repos/daid/EmptyEpsilon/releases", function(data) {
+		var files = {}
+		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
+        var first = true;
+        data.sort(function(a, b) {return b["tag_name"].localeCompare(a["tag_name"]);});
+		for(var idx in data)
+		{
+			var release = data[idx]
+            var release_name = release["tag_name"];
+            if (release["prerelease"] == prerelease)
+                continue;
+
+			for(var idx2 in release["assets"])
+			{
+                var asset = release["assets"][idx2];
+                var title = asset["name"];
+				var url = asset["browser_download_url"];
+                var os = "unknown";
+                if (title.startsWith("Win32_"))
+                    os = "windows";
+                if (title.endsWith("-win32.zip"))
+                    os = "windows";
+                if (title.endsWith(".apk"))
+                    os = "android";
+                if (title.endsWith(".deb"))
+                    os = "debian";
+				var row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + release_name;
+    			html += row;
+                if (os == "android")
+                    html += " [BETA]";
+			}
+            if (first)
+                html += "<tr><th>OS<th>File<th>version";
+            first = false;
+		}
+		html += '</table>';
+		$('#downloads-info').html(html);
+	}, "json");
+});
+
 $(function() {
 	$("#tabs").tabs({activate: updateHashFromTab});
 	$("#station-tabs").tabs({activate: updateHashFromTab});
@@ -951,44 +993,8 @@ $(function() {
 	{
 		$("#" + key).tabs("option", "active", hashData[key]);
 	}
-
-	$.get("https://api.github.com/repos/daid/EmptyEpsilon/releases", function(data) {
-		var files = {}
-		var html = '<table class="downloads"><tr><th>OS<th>File<th>version';
-        var first = true;
-        data.sort(function(a, b) {return b["tag_name"].localeCompare(a["tag_name"]);});
-		for(var idx in data)
-		{
-			var release = data[idx]
-            var release_name = release["tag_name"];
-
-			for(var idx2 in release["assets"])
-			{
-                var asset = release["assets"][idx2];
-                var title = asset["name"];
-				var url = asset["browser_download_url"];
-                var os = "unknown";
-                if (title.startsWith("Win32_"))
-                    os = "windows";
-                if (title.endsWith("-win32.zip"))
-                    os = "windows";
-                if (title.endsWith(".apk"))
-                    os = "android";
-                if (title.endsWith(".deb"))
-                    os = "debian";
-				var row = '<tr class="' + os + '"><td><a href="' + url + '"><img src="images/os_' + os + '.svg" width="24"></a><td><a href="' + url + '" class="download ' + os + '">' + title + '</a><td>' + release_name;
-    			html += row;
-                if (os == "android")
-                    html += " [BETA]";
-			}
-            if (first)
-                html += "<tr><th>OS<th>File<th>version";
-            first = false;
-		}
-		html += '</table>';
-		$('#downloads-info').html(html);
-	}, "json");
-});
+    updateDownloadList();
+}
 </script>
 <script src="jquery.magnific-popup.min.js"></script>
 <script type="text/javascript">
