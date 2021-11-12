@@ -15,10 +15,9 @@ msgstr ""
 
 # Scenario name
 msgid "Escape"
-msgstr "S'échapper"
+msgstr "Évasion"
 
 # Scenario description
-#, fuzzy
 msgid ""
 "Escape imprisonment and return home.\n"
 "\n"
@@ -27,12 +26,20 @@ msgid ""
 "\n"
 "Version 4 Adds more activity for the weapons officer (6Apr2020)"
 msgstr ""
-"- Mission - Durée 2h - Difficulté Moyenne - 1 navire -\n"
+"- Durée approx. : 2h\n"
+"- Difficulté : Moyenne (variable)\n"
+"- Vaisseaux joueurs : 1\n"
 "\n"
-"S'échapper de prison et retourner à la base.\n"
-"La mission nécessite un navire avec un équipage complet. Les communications, "
-"l'ingénierie, la science et la navigation seront occupés, l'armement le sera "
-"beaucoup moins. (6Apr2020)"
+"Vous devez vous échapper de prison et rentrer chez vous.\n"
+"\n"
+"La mission nécessite un navire avec un équipage complet. L'ingénierie et la "
+"science seront les 2 postes les plus occupés.\n"
+"\n"
+"La version 4 ajoute plus d'activité pour l'officier des armes (6 avril "
+"2020)\n"
+"\n"
+"Titre original : Escape\n"
+"Auteur : Xansta"
 
 #: scripts/scenario_53_escape.lua:104 scripts/scenario_53_escape.lua:107
 #: scripts/scenario_53_escape.lua:110
