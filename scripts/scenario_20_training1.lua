@@ -1,5 +1,4 @@
 -- Name: Training: Cruiser
--- Type: Mission
 -- Description: Basic Training Cource
 ---
 --- Objective: Destroy all enemy ships in the area.
@@ -10,6 +9,7 @@
 --- Your ship is a Phobos light cruiser - the most common vessel in the navy.
 ---
 --- This is a short mission for inexperienced players.
+-- Type: Basic
 
 require("utils.lua")
 
