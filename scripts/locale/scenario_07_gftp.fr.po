@@ -48,7 +48,8 @@ msgstr ""
 "[Nécessite des fréquences faisceau/bouclier] [Difficile]\n"
 "Ce scénario est limité à un seul vaisseau joueurs : l'Atlantis Epsilon.\n"
 "\n"
-"Titre original : Ghost from the Past"
+"Titre original : Ghost from the Past\n"
+"Auteur : Fouindor"
 
 #: scripts/scenario_07_gftp.lua:17
 msgid "A merchant and entertainment hub."

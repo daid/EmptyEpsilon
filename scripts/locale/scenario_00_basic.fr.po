@@ -43,7 +43,9 @@ msgstr ""
 "\n"
 "D'autres vaisseaux joueurs peuvent être ajoutés, mais la force des "
 "vaisseaux ennemis est indépendante du nombre et du type de vaisseaux "
-"joueurs."
+"joueurs.\n"
+"\n"
+"Auteur : Daid"
 
 #: scripts/scenario_00_basic.lua:472
 #, lua-format
