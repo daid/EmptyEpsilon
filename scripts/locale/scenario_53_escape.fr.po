@@ -751,7 +751,7 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:1946
 msgctxt "scienceStationDescription"
 msgid "Zero gravity sports and entertainment"
-msgstr "Sports et divertissement sans gravité"
+msgstr "Sports et divertissement en apesanteur"
 
 #: scripts/scenario_53_escape.lua:1957
 msgctxt "generalStationInformation"
@@ -850,7 +850,7 @@ msgid ""
 "This station was named after one of the early exobiologists from mid 20th "
 "century Earth, Dr. Stanley Miller"
 msgstr ""
-"Cette station porte le nomd'un des premiers exobiologistes de la Terre du "
+"Cette station porte le nom d'un des premiers exobiologistes de la Terre du "
 "milieu du 20e siècle, le Dr Stanley Miller."
 
 #: scripts/scenario_53_escape.lua:2092
@@ -1456,7 +1456,7 @@ msgstr "Quel genre de munitions ?"
 #, lua-format
 msgctxt "commsAmmo"
 msgid "player nuke weapon storage max: %.1f"
-msgstr "stock max d'armes nucléaires (nuke) du joueur : %1f"
+msgstr "stock max d'armes nucléaires (nuke) du joueur : %1f"
 
 #: scripts/scenario_53_escape.lua:3351
 msgctxt "commsAmmo"
@@ -1482,7 +1482,7 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 #, fuzzy, lua-format
 msgctxt "commsAmmo"
 msgid "nuke prompt: %s"
-msgstr "nuke rapide : %s"
+msgstr "nuke rapide : %s"
 
 #: scripts/scenario_53_escape.lua:3360 scripts/scenario_53_escape.lua:3373
 #: scripts/scenario_53_escape.lua:3385 scripts/scenario_53_escape.lua:3397
@@ -1505,12 +1505,12 @@ msgstr "Veuillez réapprovisionner nos missiles EMP. ("
 #: scripts/scenario_53_escape.lua:3371
 msgctxt "commsAmmo"
 msgid "Got any EMPs? ("
-msgstr "Avez-vous des EMP ? ("
+msgstr "Avez-vous des EMP ? ("
 
 #: scripts/scenario_53_escape.lua:3381
 msgctxt "commsAmmo"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
 
 #: scripts/scenario_53_escape.lua:3383
 msgctxt "commsAmmo"
@@ -2002,7 +2002,7 @@ msgid ""
 "Station %s:\n"
 "Goods or components available for sale: quantity, cost in reputation\n"
 msgstr ""
-"Station %s :\n"
+"Station %s :\n"
 "Marchandises ou composants disponibles à la vente : quantité, coût en "
 "réputation\n"
 
@@ -2163,7 +2163,7 @@ msgid ""
 "Available space: %i\n"
 "What would you like to jettison?"
 msgstr ""
-"Espace disponible : %i\n"
+"Espace disponible : %i\n"
 "Que voudriez-vous larguer ?"
 
 #: scripts/scenario_53_escape.lua:3954 scripts/scenario_53_escape.lua:4405
@@ -2389,7 +2389,7 @@ msgid ""
 "Station %s:\n"
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
-"Station %s :\n"
+"Station %s :\n"
 "Marchandises ou composants disponibles : quantité, coût en réputation"
 
 #: scripts/scenario_53_escape.lua:4137
