@@ -97,7 +97,7 @@ a.download:hover {
 }
 
 a.discord::after {
-    content: "&nbsp;";
+    content: " ";
     background: url(discord.svg);
     background-size: contain;
 }
