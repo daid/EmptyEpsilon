@@ -486,8 +486,8 @@ function placeAlcaleica()
 		tradeMedicine[stationAlcaleica] = true
 	end
 	stationAlcaleica.publicRelations = true
-	stationAlcaleica.generalInformation = "We make and supply optic components for various station and ship systems"
-	stationAlcaleica.stationHistory = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon electronic and optic company"
+	stationAlcaleica.generalInformation = _("generalStationInformation", "We make and supply optic components for various station and ship systems")
+	stationAlcaleica.stationHistory = _("stationHistory", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon electronic and optic company")
 	return stationAlcaleica
 end
 
@@ -506,8 +506,8 @@ function placeAnderson()
 	end
 	tradeLuxury[stationAnderson] = true
 	stationAnderson.publicRelations = true
-	stationAnderson.generalInformation = "We provide high quality high capacity batteries and specialized software for all shipboard systems"
-	stationAnderson.stationHistory = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"
+	stationAnderson.generalInformation = _("generalStationInformation", "We provide high quality high capacity batteries and specialized software for all shipboard systems")
+	stationAnderson.stationHistory = _("stationHistory", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion")
 	return stationAnderson
 end
 
@@ -528,8 +528,8 @@ function placeArcher()
 	end
 	tradeLuxury[stationArcher] = true
 	stationArcher.publicRelations = true
-	stationArcher.generalInformation = "The finest shield and armor manufacturer in the quadrant"
-	stationArcher.stationHistory = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"
+	stationArcher.generalInformation = _("generalStationInformation", "The finest shield and armor manufacturer in the quadrant")
+	stationArcher.stationHistory = _("stationHistory", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer")
 	return stationArcher
 end
 
@@ -550,8 +550,8 @@ function placeArchimedes()
 	end
 	tradeLuxury[stationArchimedes] = true
 	stationArchimedes.publicRelations = true
-	stationArchimedes.generalInformation = "We fabricate general and specialized components for ship beam systems"
-	stationArchimedes.stationHistory = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"
+	stationArchimedes.generalInformation = _("generalStationInformation", "We fabricate general and specialized components for ship beam systems")
+	stationArchimedes.stationHistory = _("stationHistory", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it")
 	return stationArchimedes
 end
 
@@ -570,8 +570,8 @@ function placeArmstrong()
 	end
 --	table.insert(goods[stationArmstrong],{"warp",5,77})
 	stationArmstrong.publicRelations = true
-	stationArmstrong.generalInformation = "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"
-	stationArmstrong.stationHistory = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."
+	stationArmstrong.generalInformation = _("generalStationInformation", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis")
+	stationArmstrong.stationHistory = _("stationHistory", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems.")
 	return stationArmstrong
 end
 
@@ -589,8 +589,8 @@ function placeAsimov()
 		goods[stationAsimov] = {{"tractor",5,48}}
 	end
 	stationAsimov.publicRelations = true
-	stationAsimov.generalInformation = "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"
-	stationAsimov.stationHistory = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"
+	stationAsimov.generalInformation = _("generalStationInformation", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector")
+	stationAsimov.stationHistory = _("stationHistory", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region")
 	return stationAsimov
 end
 
@@ -610,8 +610,8 @@ function placeBarclay()
 		tradeMedicine[stationBarclay] = true
 	end
 	stationBarclay.publicRelations = true
-	stationBarclay.generalInformation = "We provide a range of communication equipment and software for use aboard ships"
-	stationBarclay.stationHistory = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"
+	stationBarclay.generalInformation = _("generalStationInformation", "We provide a range of communication equipment and software for use aboard ships")
+	stationBarclay.stationHistory = _("stationHistory", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station")
 	return stationBarclay
 end
 
@@ -621,8 +621,8 @@ function placeBethesda()
 	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription(_("scienceStationDescription", "Medical research"))
 	goods[stationBethesda] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,36}}
 	stationBethesda.publicRelations = true
-	stationBethesda.generalInformation = "We research and treat exotic medical conditions"
-	stationBethesda.stationHistory = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"
+	stationBethesda.generalInformation = _("generalStationInformation", "We research and treat exotic medical conditions")
+	stationBethesda.stationHistory = _("stationHistory", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century")
 	return stationBethesda
 end
 
@@ -646,8 +646,8 @@ function placeBroeck()
 		if random(1,100) < 62 then tradeLuxury[stationBroeck] = true end
 	end
 	stationBroeck.publicRelations = true
-	stationBroeck.generalInformation = "We provide warp drive engines and components"
-	stationBroeck.stationHistory = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"
+	stationBroeck.generalInformation = _("generalStationInformation", "We provide warp drive engines and components")
+	stationBroeck.stationHistory = _("stationHistory", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth")
 	return stationBroeck
 end
 
@@ -683,8 +683,8 @@ function placeCalvin()
 	end
 	tradeLuxury[stationCalvin] = true
 	stationCalvin.publicRelations = true
-	stationCalvin.generalInformation = "We research and provide robotic systems and components"
-	stationCalvin.stationHistory = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"
+	stationCalvin.generalInformation = _("generalStationInformation", "We research and provide robotic systems and components")
+	stationCalvin.stationHistory = _("stationHistory", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming")
 	return stationCalvin
 end
 
@@ -716,8 +716,8 @@ function placeCavor()
 		end
 	end
 	stationCavor.publicRelations = true
-	stationCavor.generalInformation = "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"
-	stationCavor.stationHistory = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"
+	stationCavor.generalInformation = _("generalStationInformation", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction")
+	stationCavor.stationHistory = _("stationHistory", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite")
 	return stationCavor
 end
 
@@ -735,8 +735,8 @@ function placeChatuchak()
 		goods[stationChatuchak] = {{"luxury",5,60}}		
 	end
 	stationChatuchak.publicRelations = true
-	stationChatuchak.generalInformation = "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"
-	stationChatuchak.stationHistory = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"
+	stationChatuchak.generalInformation = _("generalStationInformation", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here")
+	stationChatuchak.stationHistory = _("stationHistory", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind")
 	return stationChatuchak
 end
 
@@ -758,8 +758,8 @@ function placeCoulomb()
 	end
 	if random(1,100) < 82 then tradeLuxury[stationCoulomb] = true end
 	stationCoulomb.publicRelations = true
-	stationCoulomb.generalInformation = "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"
-	stationCoulomb.stationHistory = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"
+	stationCoulomb.generalInformation = _("generalStationInformation", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference")
+	stationCoulomb.stationHistory = _("stationHistory", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits")
 	return stationCoulomb
 end
 
@@ -781,8 +781,8 @@ function placeCyrus()
 	end
 	if random(1,100) < 78 then tradeLuxury[stationCyrus] = true end
 	stationCyrus.publicRelations = true
-	stationCyrus.generalInformation = "We supply high quality impulse engines and parts for use aboard ships"
-	stationCyrus.stationHistory = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"
+	stationCyrus.generalInformation = _("generalStationInformation", "We supply high quality impulse engines and parts for use aboard ships")
+	stationCyrus.stationHistory = _("stationHistory", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne")
 	return stationCyrus
 end
 
@@ -802,8 +802,8 @@ function placeDeckard()
 	end
 	tradeLuxury[stationDeckard] = true
 	stationDeckard.publicRelations = true
-	stationDeckard.generalInformation = "Supplier of android components, programming and service"
-	stationDeckard.stationHistory = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"
+	stationDeckard.generalInformation = _("generalStationInformation", "Supplier of android components, programming and service")
+	stationDeckard.stationHistory = _("stationHistory", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids")
 	return stationDeckard
 end
 
@@ -825,8 +825,8 @@ function placeDeer()
 	end
 	tradeLuxury[stationDeer] = true
 	stationDeer.publicRelations = true
-	stationDeer.generalInformation = "We can meet all your pushing and pulling needs with specialized equipment custom made"
-	stationDeer.stationHistory = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"
+	stationDeer.generalInformation = _("generalStationInformation", "We can meet all your pushing and pulling needs with specialized equipment custom made")
+	stationDeer.stationHistory = _("stationHistory", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products")
 	return stationDeer
 end
 
@@ -848,8 +848,8 @@ function placeErickson()
 	end
 	tradeLuxury[stationErickson] = true 
 	stationErickson.publicRelations = true
-	stationErickson.generalInformation = "We provide transporters used aboard ships as well as the components for repair and maintenance"
-	stationErickson.stationHistory = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"
+	stationErickson.generalInformation = _("generalStationInformation", "We provide transporters used aboard ships as well as the components for repair and maintenance")
+	stationErickson.stationHistory = _("stationHistory", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy")
 	return stationErickson
 end
 
@@ -870,8 +870,8 @@ function placeEvondos()
 	end
 	if random(1,100) < 41 then tradeLuxury[stationEvondos] = true end
 	stationEvondos.publicRelations = true
-	stationEvondos.generalInformation = "We provide components for automated medical machinery"
-	stationEvondos.stationHistory = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"
+	stationEvondos.generalInformation = _("generalStationInformation", "We provide components for automated medical machinery")
+	stationEvondos.stationHistory = _("stationHistory", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland")
 	return stationEvondos
 end
 
@@ -892,8 +892,8 @@ function placeFeynman()
 	end
 	tradeLuxury[stationFeynman] = true
 	stationFeynman.publicRelations = true
-	stationFeynman.generalInformation = "We provide nanites and software for a variety of ship-board systems"
-	stationFeynman.stationHistory = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"
+	stationFeynman.generalInformation = _("generalStationInformation", "We provide nanites and software for a variety of ship-board systems")
+	stationFeynman.stationHistory = _("stationHistory", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman")
 	return stationFeynman
 end
 
@@ -903,8 +903,8 @@ function placeGrasberg()
 	stationGrasberg = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationGrasberg:setPosition(psx,psy):setCallSign("Grasberg"):setDescription(_("scienceStationDescription", "Mining"))
 	stationGrasberg.publicRelations = true
-	stationGrasberg.generalInformation = "We mine nearby asteroids for precious minerals and process them for sale"
-	stationGrasberg.stationHistory = "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"
+	stationGrasberg.generalInformation = _("generalStationInformation", "We mine nearby asteroids for precious minerals and process them for sale")
+	stationGrasberg.stationHistory = _("stationHistory", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids")
 	grasbergGoods = random(1,100)
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
@@ -957,7 +957,7 @@ function placeHayden()
 		goods[stationHayden] = {{"nanites",5,65}}		
 	end
 	stationHayden.publicRelations = true
-	stationHayden.generalInformation = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"
+	stationHayden.generalInformation = _("generalStationInformation", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding")
 	return stationHayden
 end
 
@@ -976,8 +976,8 @@ function placeHeyes()
 	end
 	tradeLuxury[stationHeyes] = true 
 	stationHeyes.publicRelations = true
-	stationHeyes.generalInformation = "We research and manufacture sensor components and systems"
-	stationHeyes.stationHistory = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"
+	stationHeyes.generalInformation = _("generalStationInformation", "We research and manufacture sensor components and systems")
+	stationHeyes.stationHistory = _("stationHistory", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility")
 	return stationHeyes
 end
 
@@ -999,8 +999,8 @@ function placeHossam()
 	end
 	if random(1,100) < 63 then tradeLuxury[stationHossam] = true end
 	stationHossam.publicRelations = true
-	stationHossam.generalInformation = "We provide nanites for various organic and non-organic systems"
-	stationHossam.stationHistory = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"
+	stationHossam.generalInformation = _("generalStationInformation", "We provide nanites for various organic and non-organic systems")
+	stationHossam.stationHistory = _("stationHistory", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel")
 	return stationHossam
 end
 
@@ -1012,7 +1012,7 @@ function placeImpala()
 	tradeFood[stationImpala] = true
 	tradeLuxury[stationImpala] = true
 	stationImpala.publicRelations = true
-	stationImpala.generalInformation = "We mine nearby asteroids for precious minerals"
+	stationImpala.generalInformation = _("generalStationInformation", "We mine nearby asteroids for precious minerals")
 	impalaGoods = random(1,100)
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
@@ -1068,8 +1068,8 @@ function placeKomov()
 		if random(1,100) < 24 then tradeFood[stationKomov] = true end
 	end
 	stationKomov.publicRelations = true
-	stationKomov.generalInformation = "We provide classes and simulation to help train diverse species in how to relate to each other"
-	stationKomov.stationHistory = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"
+	stationKomov.generalInformation = _("generalStationInformation", "We provide classes and simulation to help train diverse species in how to relate to each other")
+	stationKomov.stationHistory = _("stationHistory", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles")
 	return stationKomov
 end
 
@@ -1171,8 +1171,8 @@ function placeLipkin()
 	end
 	tradeLuxury[stationLipkin] = true 
 	stationLipkin.publicRelations = true
-	stationLipkin.generalInformation = "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)"
-	stationLipkin.stationHistory = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"
+	stationLipkin.generalInformation = _("generalStationInformation", "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)")
+	stationLipkin.stationHistory = _("stationHistory", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth")
 	return stationLipkin
 end
 
@@ -1192,8 +1192,8 @@ function placeMadison()
 		tradeMedicine[stationMadison] = true 
 	end
 	stationMadison.publicRelations = true
-	stationMadison.generalInformation = "Come take in a game or two or perhaps see a show"
-	stationMadison.stationHistory = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"
+	stationMadison.generalInformation = _("generalStationInformation", "Come take in a game or two or perhaps see a show")
+	stationMadison.stationHistory = _("stationHistory", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment")
 	return stationMadison
 end
 
@@ -1213,8 +1213,8 @@ function placeMaiman()
 		tradeMedicine[stationMaiman] = true 
 	end
 	stationMaiman.publicRelations = true
-	stationMaiman.generalInformation = "We research and manufacture energy beam components and systems"
-	stationMaiman.stationHistory = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th centuryon Earth"
+	stationMaiman.generalInformation = _("generalStationInformation", "We research and manufacture energy beam components and systems")
+	stationMaiman.stationHistory = _("stationHistory", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th centuryon Earth")
 	return stationMaiman
 end
 
@@ -1236,8 +1236,8 @@ function placeMarconi()
 	end
 	tradeLuxury[stationMarconi] = true
 	stationMarconi.publicRelations = true
-	stationMarconi.generalInformation = "We manufacture energy beam components"
-	stationMarconi.stationHistory = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"
+	stationMarconi.generalInformation = _("generalStationInformation", "We manufacture energy beam components")
+	stationMarconi.stationHistory = _("stationHistory", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon")
 	return stationMarconi
 end
 
@@ -1247,8 +1247,8 @@ function placeMayo()
 	stationMayo:setPosition(psx,psy):setCallSign("Mayo"):setDescription(_("scienceStationDescription", "Medical Research"))
 	goods[stationMayo] = {{"food",5,1},{"medicine",5,5},{"autodoc",5,128}}
 	stationMayo.publicRelations = true
-	stationMayo.generalInformation = "We research exotic diseases and other human medical conditions"
-	stationMayo.stationHistory = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"
+	stationMayo.generalInformation = _("generalStationInformation", "We research exotic diseases and other human medical conditions")
+	stationMayo.stationHistory = _("stationHistory", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth")
 	return stationMayo
 end
 
@@ -1266,8 +1266,8 @@ function placeMiller()
 		goods[stationMiller] = {{"optic",10,60}}		
 	end
 	stationMiller.publicRelations = true
-	stationMiller.generalInformation = "We study recently discovered life forms not native to Earth"
-	stationMiller.stationHistory = "This station was named after one the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"
+	stationMiller.generalInformation = _("generalStationInformation", "We study recently discovered life forms not native to Earth")
+	stationMiller.stationHistory = _("stationHistory", "This station was named after one the early exobiologists from mid 20th century Earth, Dr. Stanley Miller")
 	return stationMiller
 end
 
@@ -1285,8 +1285,8 @@ function placeMuddville()
 		goods[stationMudd] = {{"luxury",10,60}}		
 	end
 	stationMudd.publicRelations = true
-	stationMudd.generalInformation = "Come to Muddvile for all your trade and commerce needs and desires"
-	stationMudd.stationHistory = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"
+	stationMudd.generalInformation = _("generalStationInformation", "Come to Muddvile for all your trade and commerce needs and desires")
+	stationMudd.stationHistory = _("stationHistory", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman")
 	return stationMudd
 end
 
@@ -1306,8 +1306,8 @@ function placeNexus6()
 		tradeMedicine[stationNexus6] = true 
 	end
 	stationNexus6.publicRelations = true
-	stationNexus6.generalInformation = "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans"
-	stationNexus6.stationHistory = "The station is named after the ground breaking model of android produced by the Tyrell corporation"
+	stationNexus6.generalInformation = _("generalStationInformation", "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans")
+	stationNexus6.stationHistory = _("stationHistory", "The station is named after the ground breaking model of android produced by the Tyrell corporation")
 	return stationNexus6
 end
 
@@ -1330,8 +1330,8 @@ function placeOBrien()
 	end
 	if random(1,100) < 43 then tradeLuxury[stationOBrien] = true end
 	stationOBrien.publicRelations = true
-	stationOBrien.generalInformation = "We research and fabricate high quality transporters and transporter components for use aboard ships"
-	stationOBrien.stationHistory = "Miles O'Brien started this business after his experience as a transporter chief"
+	stationOBrien.generalInformation = _("generalStationInformation", "We research and fabricate high quality transporters and transporter components for use aboard ships")
+	stationOBrien.stationHistory = _("stationHistory", "Miles O'Brien started this business after his experience as a transporter chief")
 	return stationOBrien
 end
 
@@ -1352,8 +1352,8 @@ function placeOlympus()
 		tradeMedicine[stationOlympus] = true
 	end
 	stationOlympus.publicRelations = true
-	stationOlympus.generalInformation = "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"
-	stationOlympus.stationHistory = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"
+	stationOlympus.generalInformation = _("generalStationInformation", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components")
+	stationOlympus.stationHistory = _("stationHistory", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry")
 	return stationOlympus
 end
 
@@ -1363,8 +1363,8 @@ function placeOrgana()
 	stationOrgana:setPosition(psx,psy):setCallSign("Organa"):setDescription(_("scienceStationDescription", "Diplomatic training"))
 	goods[stationOrgana] = {{"luxury",5,96}}		
 	stationOrgana.publicRelations = true
-	stationOrgana.generalInformation = "The premeire academy for leadership and diplomacy training in the region"
-	stationOrgana.stationHistory = "Established by the royal family so critical during the political upheaval era"
+	stationOrgana.generalInformation = _("generalStationInformation", "The premeire academy for leadership and diplomacy training in the region")
+	stationOrgana.stationHistory = _("stationHistory", "Established by the royal family so critical during the political upheaval era")
 	return stationOrgana
 end
 
@@ -1474,8 +1474,8 @@ function placeOwen()
 	end
 	tradeLuxury[stationOwen] = true 
 	stationOwen.publicRelations = true
-	stationOwen.generalInformation = "We provide load lifters and components for various ship systems"
-	stationOwen.stationHistory = "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators"
+	stationOwen.generalInformation = _("generalStationInformation", "We provide load lifters and components for various ship systems")
+	stationOwen.stationHistory = _("stationHistory", "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators")
 	return stationOwen
 end
 
@@ -1497,8 +1497,8 @@ function placePanduit()
 	end
 	tradeLuxury[stationPanduit] = true
 	stationPanduit.publicRelations = true
-	stationPanduit.generalInformation = "We provide optic components for various ship systems"
-	stationPanduit.stationHistory = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"
+	stationPanduit.generalInformation = _("generalStationInformation", "We provide optic components for various ship systems")
+	stationPanduit.stationHistory = _("stationHistory", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States")
 	return stationPanduit
 end
 
@@ -1520,8 +1520,8 @@ function placeRipley()
 	end
 	if random(1,100) < 47 then tradeLuxury[stationRipley] = true end
 	stationRipley.publicRelations = true
-	stationRipley.generalInformation = "We provide load lifters and components"
-	stationRipley.stationHistory = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"
+	stationRipley.generalInformation = _("generalStationInformation", "We provide load lifters and components")
+	stationRipley.stationHistory = _("stationHistory", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship")
 	return stationRipley
 end
 
@@ -1543,8 +1543,8 @@ function placeRutherford()
 	tradeMedicine[stationRutherford] = true
 	if random(1,100) < 43 then tradeLuxury[stationRutherford] = true end
 	stationRutherford.publicRelations = true
-	stationRutherford.generalInformation = "We research and fabricate components for ship shield systems"
-	stationRutherford.stationHistory = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"
+	stationRutherford.generalInformation = _("generalStationInformation", "We research and fabricate components for ship shield systems")
+	stationRutherford.stationHistory = _("stationHistory", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century")
 	return stationRutherford
 end
 
@@ -1573,8 +1573,8 @@ function placeShawyer()
 	end
 	tradeLuxury[stationShawyer] = true 
 	stationShawyer.publicRelations = true
-	stationShawyer.generalInformation = "We research and manufacture impulse engine components and systems"
-	stationShawyer.stationHistory = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"
+	stationShawyer.generalInformation = _("generalStationInformation", "We research and manufacture impulse engine components and systems")
+	stationShawyer.stationHistory =_("stationHistory", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century")
 	return stationShawyer
 end
 
@@ -1596,8 +1596,8 @@ function placeShree()
 	end
 	tradeLuxury[stationShree] = true 
 	stationShree.publicRelations = true
-	stationShree.generalInformation = "We make ship systems designed to push or pull other objects around in space"
-	stationShree.stationHistory = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"
+	stationShree.generalInformation = _("generalStationInformation", "We make ship systems designed to push or pull other objects around in space")
+	stationShree.stationHistory = _("stationHistory", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today")
 	return stationShree
 end
 
@@ -1617,8 +1617,8 @@ function placeSoong()
 	end
 	tradeLuxury[stationSoong] = true 
 	stationSoong.publicRelations = true
-	stationSoong.generalInformation = "We create androids and android components"
-	stationSoong.stationHistory = "The station is named after Dr. Noonian Soong, the famous android researcher and builder"
+	stationSoong.generalInformation = _("generalStationInformation", "We create androids and android components")
+	stationSoong.stationHistory = _("stationHistory", "The station is named after Dr. Noonian Soong, the famous android researcher and builder")
 	return stationSoong
 end
 
@@ -1628,8 +1628,8 @@ function placeTiberius()
 	stationTiberius:setPosition(psx,psy):setCallSign("Tiberius"):setDescription(_("scienceStationDescription", "Logistics coordination"))
 	goods[stationTiberius] = {{"food",5,1}}
 	stationTiberius.publicRelations = true
-	stationTiberius.generalInformation = "We support the stations and ships in the area with planning and communication services"
-	stationTiberius.stationHistory = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"
+	stationTiberius.generalInformation = _("generalStationInformation", "We support the stations and ships in the area with planning and communication services")
+	stationTiberius.stationHistory = _("stationHistory", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name")
 	return stationTiberius
 end
 
@@ -1661,8 +1661,8 @@ function placeTokra()
 		end
 	end
 	stationTokra.publicRelations = true
-	stationTokra.generalInformation = "We create multiple types of advanced material components. Our most popular products are our filaments"
-	stationTokra.stationHistory = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"
+	stationTokra.generalInformation = _("generalStationInformation", "We create multiple types of advanced material components. Our most popular products are our filaments")
+	stationTokra.stationHistory = _("stationHistory", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them")
 	return stationTokra
 end
 
@@ -1683,8 +1683,8 @@ function placeToohie()
 	end
 	tradeLuxury[stationToohie] = true
 	stationToohie.publicRelations = true
-	stationToohie.generalInformation = "We research and make general and specialized components for ship shield and ship armor systems"
-	stationToohie.stationHistory = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."
+	stationToohie.generalInformation = _("generalStationInformation", "We research and make general and specialized components for ship shield and ship armor systems")
+	stationToohie.stationHistory = _("stationHistory", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")
 	return stationToohie
 end
 
@@ -1702,7 +1702,7 @@ function placeUtopiaPlanitia()
 		goods[stationUtopiaPlanitia] = {{"warp",5,167}}
 	end
 	stationUtopiaPlanitia.publicRelations = true
-	stationUtopiaPlanitia.generalInformation = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"
+	stationUtopiaPlanitia.generalInformation = _("generalStationInformation", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel")
 	return stationUtopiaPlanitia
 end
 
@@ -1720,8 +1720,8 @@ function placeVactel()
 		goods[stationVactel] = {{"circuit",5,50}}		
 	end
 	stationVactel.publicRelations = true
-	stationVactel.generalInformation = "We specialize in circuitry shielded from external hacking suitable for ship systems"
-	stationVactel.stationHistory = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"
+	stationVactel.generalInformation = _("generalStationInformation", "We specialize in circuitry shielded from external hacking suitable for ship systems")
+	stationVactel.stationHistory = _("stationHistory", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips")
 	return stationVactel
 end
 
@@ -1742,8 +1742,8 @@ function placeVeloquan()
 		tradeFood[stationVeloquan] = true 
 	end
 	stationVeloquan.publicRelations = true
-	stationVeloquan.generalInformation = "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"
-	stationVeloquan.stationHistory = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"
+	stationVeloquan.generalInformation = _("generalStationInformation", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use")
+	stationVeloquan.stationHistory = _("stationHistory", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy")
 	return stationVeloquan
 end
 
@@ -1765,8 +1765,8 @@ function placeZefram()
 	end
 	tradeLuxury[stationZefram] = true
 	stationZefram.publicRelations = true
-	stationZefram.generalInformation = "We specialize in the esoteric components necessary to make warp drives function properly"
-	stationZefram.stationHistory = "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"
+	stationZefram.generalInformation = _("generalStationInformation", "We specialize in the esoteric components necessary to make warp drives function properly")
+	stationZefram.stationHistory = _("stationHistory", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do")
 	return stationZefram
 end
 --[[-------------------------------------------------------------------
@@ -1777,7 +1777,7 @@ function placeJabba()
 	stationJabba = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationJabba:setPosition(psx,psy):setCallSign("Jabba"):setDescription(_("scienceStationDescription", "Commerce and gambling"))
 	stationJabba.publicRelations = true
-	stationJabba.generalInformation = "Come play some games and shop. House take does not exceed 4 percent"
+	stationJabba.generalInformation = _("generalStationInformation", "Come play some games and shop. House take does not exceed 4 percent")
 	return stationJabba
 end
 
@@ -1834,7 +1834,7 @@ function placeMaverick()
 	stationMaverick = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationMaverick:setPosition(psx,psy):setCallSign("Maverick"):setDescription(_("scienceStationDescription", "Gambling and resupply"))
 	stationMaverick.publicRelations = true
-	stationMaverick.generalInformation = "Relax and meet some interesting players"
+	stationMaverick.generalInformation = _("generalStationInformation", "Relax and meet some interesting players")
 	return stationMaverick
 end
 
@@ -1903,7 +1903,7 @@ function placeRubis()
 	stationRubis:setPosition(psx,psy):setCallSign("Rubis"):setDescription(_("scienceStationDescription", "Resupply"))
 	goods[stationRubis] = {{"luxury",5,76}}
 	stationRubis.publicRelations = true
-	stationRubis.generalInformation = "Get your energy here! Grab a drink before you go!"
+	stationRubis.generalInformation = _("generalStationInformation", "Get your energy here! Grab a drink before you go!")
 	return stationRubis
 end
 
@@ -1927,8 +1927,8 @@ function placeSkandar()
 	stationSkandar:setPosition(psx,psy):setCallSign("Skandar"):setDescription(_("scienceStationDescription", "Routine maintenance and entertainment"))
 	goods[stationSkandar] = {{"luxury",5,87}}
 	stationSkandar.publicRelations = true
-	stationSkandar.generalInformation = "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"
-	stationSkandar.stationHistory = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"
+	stationSkandar.generalInformation = _("generalStationInformation", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars")
+	stationSkandar.stationHistory = _("stationHistory", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax")
 	return stationSkandar
 end
 
@@ -1944,7 +1944,7 @@ function placeStarnet()
 	stationStarnet = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription(_("scienceStationDescription", "Automated weapons systems"))
 	stationStarnet.publicRelations = true
-	stationStarnet.generalInformation = "We research and create automated weapons systems to improve ship combat capability"
+	stationStarnet.generalInformation = _("generalStationInformation", "We research and create automated weapons systems to improve ship combat capability")
 	return stationStarnet
 end
 
@@ -2225,7 +2225,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage(_("commsStation", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -2238,12 +2238,12 @@ end
 
 function handleDockedState()
     if player:isFriendly(comms_target) then
-		oMsg = "Good day, officer!\nWhat can we do for you today?\n"
+		oMsg = _("commsStation", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = "Welcome to our lovely station.\n"
+		oMsg = _("commsStation", "Welcome to our lovely station.\n")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby."
+		oMsg = oMsg .. _("commsStation", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
@@ -2391,7 +2391,7 @@ function handleDockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not southMet then
@@ -2411,7 +2411,7 @@ function handleDockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not eastMet then
@@ -2431,7 +2431,7 @@ function handleDockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not westMet then
@@ -2451,12 +2451,12 @@ function handleDockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		if math.random(1,6) <= (4 - difficulty) then
 			if player:getRepairCrewCount() < player.maxRepairCrew then
@@ -2491,24 +2491,24 @@ function handleDockedState()
 		end
 	end
 	if comms_target.publicRelations then
-		addCommsReply("Tell me more about your station", function()
-			setCommsMessage("What would you like to know?")
-			addCommsReply("General information", function()
+		addCommsReply(_("commsStation", "Tell me more about your station"), function()
+			setCommsMessage(_("commsStation", "What would you like to know?"))
+			addCommsReply(_("commsStation", "General information"), function()
 				setCommsMessage(comms_target.generalInformation)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 			if comms_target.stationHistory ~= nil then
-				addCommsReply("Station history", function()
+				addCommsReply(_("commsStation", "Station history"), function()
 					setCommsMessage(comms_target.stationHistory)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if player:isFriendly(comms_target) then
 				if comms_target.gossip ~= nil then
 					if random(1,100) < 50 then
-						addCommsReply("Gossip", function()
+						addCommsReply(_("commsStation", "Gossip"), function()
 							setCommsMessage(comms_target.gossip)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
@@ -2569,7 +2569,7 @@ function handleDockedState()
 						end
 					end
 					setCommsMessage(oMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 				gi = gi + 1
 			until(gi > #goods[comms_target])
@@ -2599,7 +2599,7 @@ function handleDockedState()
 								oMsg = oMsg .. "\nTraded"
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -2631,7 +2631,7 @@ function handleDockedState()
 								oMsg = oMsg .. "\nTraded"
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -2663,13 +2663,13 @@ function handleDockedState()
 								oMsg = oMsg .. "\nTraded"
 							end
 							setCommsMessage(oMsg)
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
 				end
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		gi = 1
 		cargoHoldEmpty = true
@@ -2693,12 +2693,12 @@ function handleDockedState()
 							decrementPlayerGoods(goodsType)
 							player.cargo = player.cargo + 1
 							setCommsMessage(string.format("One %s jettisoned",goodsType))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 					gi = gi + 1
 				until(gi > #goods[player])
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end
@@ -2803,7 +2803,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
             setCommsMessage("Not enough reputation.")
@@ -2815,7 +2815,7 @@ function handleWeaponRestock(weapon)
         else
             setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
         end
-        addCommsReply("Back", commsStation)
+        addCommsReply(_("Back"), commsStation)
     end
 end
 
@@ -2826,12 +2826,12 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("commsStation", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("commsStation", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("commsStation", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	if comms_target.nukeAvail == nil then
 		if math.random(1,10) <= (4 - difficulty) then
@@ -2865,8 +2865,8 @@ function handleUndockedState()
 		end
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
+ 	addCommsReply(_("commsStation", "I need information"), function()
+		setCommsMessage(_("commsStation", "What kind of information do you need?"))
 		addCommsReply("What ordnance do you have available for restock?", function()
 			missileTypeAvailableCount = 0
 			oMsg = ""
@@ -2898,7 +2898,7 @@ function handleUndockedState()
 				oMsg = "We have the following types of ordnance available for restock:" .. oMsg
 			end
 			setCommsMessage(oMsg)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 		goodsQuantityAvailable = 0
 		gi = 1
@@ -2920,7 +2920,7 @@ function handleUndockedState()
 					gi = gi + 1
 				until(gi > #goods[comms_target])
 				setCommsMessage(oMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 		addCommsReply("See any enemies in your area?", function()
@@ -2942,11 +2942,11 @@ function handleUndockedState()
 					setCommsMessage("No enemies within 30U")
 					player:addReputationPoints(1.0)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			else
 				setCommsMessage("Not really")
 				player:addReputationPoints(1.0)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		addCommsReply("Where can I find particular goods?", function()
@@ -2954,7 +2954,7 @@ function handleUndockedState()
 			if comms_target.goodsKnowledge == nil then
 				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations.\n\nCheck back later, someone else may have better knowledge"
 				setCommsMessage(gkMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 				fillStationBrains()
 			else
 				if #comms_target.goodsKnowledge == 0 then
@@ -2964,18 +2964,18 @@ function handleUndockedState()
 					for gk=1,#comms_target.goodsKnowledge do
 						addCommsReply(comms_target.goodsKnowledgeType[gk],function()
 							setCommsMessage(string.format("Station %s in sector %s has %s%s",comms_target.goodsKnowledge[gk],comms_target.goodsKnowledgeSector[gk],comms_target.goodsKnowledgeType[gk],comms_target.goodsKnowledgeTrade[gk]))
-							addCommsReply("Back", commsStation)
+							addCommsReply(_("Back"), commsStation)
 						end)
 					end
 				end
 				setCommsMessage(gkMsg)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end
 		end)
 		if comms_target.publicRelations then
-			addCommsReply("General station information", function()
+			addCommsReply(_("commsStation", "General station information"), function()
 				setCommsMessage(comms_target.generalInformation)
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
 		end
 	end)
@@ -3015,7 +3015,7 @@ function handleUndockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not southMet then
@@ -3035,7 +3035,7 @@ function handleUndockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not eastMet then
@@ -3055,7 +3055,7 @@ function handleUndockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not westMet then
@@ -3075,12 +3075,12 @@ function handleUndockedState()
 						end
 						cMsg = cMsg .. string.format("\nSensors refresh every %i seconds",gapCheckInterval)
 						setCommsMessage(cMsg)
-						addCommsReply("Back", commsStation)
+						addCommsReply(_("Back"), commsStation)
 					end)
 				end
-				addCommsReply("Back", commsStation)
+				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	--Diagnostic data is used to help test and debug the script while it is under construction
@@ -3110,20 +3110,20 @@ function handleUndockedState()
 						end
 					end
 					setCommsMessage(sMsg)
-					addCommsReply("Back", commsStation)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
-			addCommsReply("Back", commsStation)
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
+        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
+                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
+                setCommsMessage(_("commsStation", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -3131,36 +3131,36 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                            setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("commsStation", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
+        addCommsReply(string.format(_("commsStation", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
+                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
+                setCommsMessage(_("commsStation", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("commsStation", "Not enough reputation!"));
                         end
-                        addCommsReply("Back", commsStation)
+                        addCommsReply(_("Back"), commsStation)
                     end)
                 end
             end
-            addCommsReply("Back", commsStation)
+            addCommsReply(_("Back"), commsStation)
         end)
     end
 end
@@ -3267,14 +3267,14 @@ function friendlyComms(comms_data)
 	addCommsReply("Defend a waypoint", function()
 		if player:getWaypointCount() == 0 then
 			setCommsMessage("No waypoints set. Please set a waypoint first.");
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		else
 			setCommsMessage("Which waypoint should we defend?");
 			for n=1,player:getWaypointCount() do
 				addCommsReply("Defend WP" .. n, function()
 					comms_target:orderDefendLocation(player:getWaypoint(n))
 					setCommsMessage("We are heading to assist at WP" .. n ..".");
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
@@ -3283,7 +3283,7 @@ function friendlyComms(comms_data)
 		addCommsReply("Assist me", function()
 			setCommsMessage("Heading toward you to assist.");
 			comms_target:orderDefendTarget(player)
-			addCommsReply("Back", commsShip)
+			addCommsReply(_("Back"), commsShip)
 		end)
 	end
 	addCommsReply("Report status", function()
@@ -3308,14 +3308,14 @@ function friendlyComms(comms_data)
 		end
 		
 		setCommsMessage(msg);
-		addCommsReply("Back", commsShip)
+		addCommsReply(_("Back"), commsShip)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
 			addCommsReply("Dock at " .. obj:getCallSign(), function()
 				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
 				comms_target:orderDock(obj)
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 		end
 	end
@@ -3369,7 +3369,7 @@ function neutralComms(comms_data)
 			-- Offer destination information
 			addCommsReply("Where are you headed?", function()
 				setCommsMessage(comms_target.target:getCallSign())
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
 			if distance(player,comms_target) < 5000 then
@@ -3396,14 +3396,14 @@ function neutralComms(comms_data)
 									decrementPlayerGoods("luxury")
 									setCommsMessage("Traded")
 								end
-								addCommsReply("Back", commsShip)
+								addCommsReply(_("Back"), commsShip)
 							end)
 							gi = gi + 1
 						until(gi > #goods[comms_target])
 					else
 						setCommsMessage("Insufficient luxury to trade")
 					end
-					addCommsReply("Back", commsShip)
+					addCommsReply(_("Back"), commsShip)
 				else
 					-- Offer to sell goods
 					gi = 1
@@ -3426,7 +3426,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -3442,7 +3442,7 @@ function neutralComms(comms_data)
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
-				addCommsReply("Back", commsShip)
+				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to sell goods if goods or equipment freighter
 			if distance(player,comms_target) < 5000 then
@@ -3467,7 +3467,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -3493,7 +3493,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
@@ -3524,7 +3524,7 @@ function neutralComms(comms_data)
 									setCommsMessage("Purchased")
 								end
 							end
-							addCommsReply("Back", commsShip)
+							addCommsReply(_("Back"), commsShip)
 						end)
 						gi = gi + 1
 					until(gi > #goods[comms_target])
