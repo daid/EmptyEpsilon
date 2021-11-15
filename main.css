@@ -97,9 +97,10 @@ a.download:hover {
 }
 
 a.discord::after {
-    content: " ";
-    background: url(discord.svg);
-    background-size: contain;
+    content: url(discord.svg);
+    margin-left: 4px;
+    position: relative;
+    top: 3px;
 }
 
 #icons {
