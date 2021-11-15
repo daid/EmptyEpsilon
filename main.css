@@ -96,6 +96,12 @@ a.download:hover {
 	color: #fff;
 }
 
+a.discord::after {
+    content: "&nbsp;";
+    background: url(discord.svg);
+    background-size: contain;
+}
+
 #icons {
 	margin: 0;
 	padding: 0;
