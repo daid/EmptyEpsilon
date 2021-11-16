@@ -3941,6 +3941,18 @@ function checkGaps(delta)
 				victory("Human Navy")
 			end
 		end
+			if homeStation == nil or not homeStation:isValid() then
+				local mine_count = 0
+				for pidx=1,32 do
+					local p = getPlayerShip(pidx)
+					if p ~= nil and p:isValid() then
+						mine_count = mine_count + p:getWeaponStorage("Mine")
+					end
+				end
+				if mine_count == 0 then
+					victory("Kraylor")
+				end
+			end
 		gapCheckDelayTimer = delta + gapCheckInterval
 	end
 end
@@ -4349,6 +4361,7 @@ function update(delta)
 		setPlayers()
 		return
 	end
+	allowNewPlayerShips(false)    --no more ships once you've unpaused
 	if plotH ~= nil then	--health
 		plotH(delta)
 	end
