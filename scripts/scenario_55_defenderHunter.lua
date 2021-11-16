@@ -5563,11 +5563,11 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("commsStation", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format(_("\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("commsStation", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -6615,11 +6615,11 @@ function handleUndockedState()
 		end
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("commsStation", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
-				ordMsg = ordMsg .. string.format(_("\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
+				ordMsg = ordMsg .. string.format(_("commsStation", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
