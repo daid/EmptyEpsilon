@@ -2506,7 +2506,7 @@ function handleDockedState()
 			if player:isFriendly(comms_target) then
 				if comms_target.gossip ~= nil then
 					if random(1,100) < 50 then
-						addCommsReply(_("commsStation", "Gossip"), function()
+						addCommsReply(_("gossipSnippets", "Gossip"), function()
 							setCommsMessage(comms_target.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)

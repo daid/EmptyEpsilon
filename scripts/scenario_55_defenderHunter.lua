@@ -5725,7 +5725,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" then
 					if random(1,100) < 50 then
-						addCommsReply(_("commsStation", "Gossip"), function()
+						addCommsReply(_("gossipSnippets", "Gossip"), function()
 							setCommsMessage(comms_target.comms_data.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)

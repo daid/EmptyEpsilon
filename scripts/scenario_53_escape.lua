@@ -3782,7 +3782,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if ctd.gossip ~= nil then
 					if random(1,100) < (100 - (30 * (difficulty - .5))) then
-						addCommsReply(_("commsStation", "Gossip"), function()
+						addCommsReply(_("gossipSnippets", "Gossip"), function()
 							setCommsMessage(ctd.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -4285,22 +4285,22 @@ function fillStationBrains()
 					tradeString = ""
 					stationTrades = false
 					if tradeMedicine[stationList[sti]] ~= nil then
-						tradeString = _("commsStation", " and will trade it for medicine")
+						tradeString = _("commsTrade", " and will trade it for medicine")
 						stationTrades = true
 					end
 					if tradeFood[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. _("commsStation", " or food")
+							tradeString = tradeString .. _("commsTrade", " or food")
 						else
-							tradeString = tradeString .. _("commsStation", " and will trade it for food")
+							tradeString = tradeString .. _("commsTrade", " and will trade it for food")
 							stationTrades = true
 						end
 					end
 					if tradeLuxury[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. _("commsStation", " or luxury")
+							tradeString = tradeString .. _("commsTrade", " or luxury")
 						else
-							tradeString = tradeString .. _("commsStation", " and will trade it for luxury")
+							tradeString = tradeString .. _("commsTrade", " and will trade it for luxury")
 						end
 					end
 					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
