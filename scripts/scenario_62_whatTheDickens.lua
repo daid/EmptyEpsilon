@@ -403,7 +403,7 @@ function handleDockedState()
         end)
     end
 	if player:isFriendly(comms_target) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("commsStation", "What are my current orders?"), function()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -483,7 +483,7 @@ function handleUndockedState()
         setCommsMessage(_("classicComms", "Greetings.\nIf you want to do business, please dock with us first."))
     end
  	if player:isFriendly(comms_target) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("commsStation", "What are my current orders?"), function()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)

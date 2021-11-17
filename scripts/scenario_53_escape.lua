@@ -5572,9 +5572,9 @@ function kraylorTransportPlot(delta)
 				name = "Fuel"
 			end
 			if random(1,100) < 30 then
-				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
+				name = string.format("%s Jump Freighter %d", name, irandom(3, 5))
 			else
-				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
+				name = string.format("%s Freighter %d", name, irandom(1, 5))
 			end
 			kobj = CpuShip():setTemplate(name):setFaction('Kraylor'):setCommsScript(""):setCommsFunction(commsShip)
 			kobj.target = target
@@ -5646,9 +5646,9 @@ function independentTransportPlot(delta)
 				name = "Fuel"
 			end
 			if irandom(1,100) < 30 then
-				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
+				name = string.format("%s Jump Freighter %d", name, irandom(3, 5))
 			else
-				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
+				name = string.format("%s Freighter %d", name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent'):setCommsScript(""):setCommsFunction(commsShip)
 			obj.target = target

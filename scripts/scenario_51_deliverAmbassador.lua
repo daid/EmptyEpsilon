@@ -218,20 +218,20 @@ function transportSpawn(delta)
 		if target:isValid() then
 			rnd = irandom(1,5)
 			if rnd == 1 then
-				name = _("scienceShipsName", "Personnel")
+				name = "Personnel"
 			elseif rnd == 2 then
-				name = _("scienceShipsName", "Goods")
+				name = "Goods"
 			elseif rnd == 3 then
-				name = _("scienceShipsName", "Garbage")
+				name = "Garbage"
 			elseif rnd == 4 then
-				name = _("scienceShipsName", "Equipment")
+				name = "Equipment"
 			else
-				name = _("scienceShipsName", "Fuel")
+				name = "Fuel"
 			end
 			if irandom(1,100) < 15 then
-				name = string.format(_("scienceShipsName", "%s Jump Freighter %d"), name, irandom(3, 5))
+				name = string.format("%s Jump Freighter %d", name, irandom(3, 5))
 			else
-				name = string.format(_("scienceShipsName", "%s Freighter %d"), name, irandom(1, 5))
+				name = string.format("%s Freighter %d", name, irandom(1, 5))
 			end
 			obj = CpuShip():setTemplate(name):setFaction('Independent')
 			obj.target = target
@@ -1045,7 +1045,7 @@ function handleDockedState()
 	end
 	-- Include orders upon request for when they are missed
 	if isAllowedTo(askForOrders) then
-		addCommsReply(_("What are my current orders?"), function()
+		addCommsReply(_("commsStation", "What are my current orders?"), function()
 			oMessage = ""
 			if plot1 == chasePlayer or plot1 == getAmbassador or plot1 == ambassadorAboard then
 				oMessage = _("Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
