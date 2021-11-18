@@ -486,7 +486,7 @@ function placeAlcaleica()
 		tradeMedicine[stationAlcaleica] = true
 	end
 	stationAlcaleica.publicRelations = true
-	stationAlcaleica.generalInformation = _("generalStationInformation", "We make and supply optic components for various station and ship systems")
+	stationAlcaleica.generalInformation = _("stationGeneralInformation", "We make and supply optic components for various station and ship systems")
 	stationAlcaleica.stationHistory = _("stationHistory", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon electronic and optic company")
 	return stationAlcaleica
 end
@@ -506,7 +506,7 @@ function placeAnderson()
 	end
 	tradeLuxury[stationAnderson] = true
 	stationAnderson.publicRelations = true
-	stationAnderson.generalInformation = _("generalStationInformation", "We provide high quality high capacity batteries and specialized software for all shipboard systems")
+	stationAnderson.generalInformation = _("stationGeneralInformation", "We provide high quality high capacity batteries and specialized software for all shipboard systems")
 	stationAnderson.stationHistory = _("stationHistory", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion")
 	return stationAnderson
 end
@@ -528,7 +528,7 @@ function placeArcher()
 	end
 	tradeLuxury[stationArcher] = true
 	stationArcher.publicRelations = true
-	stationArcher.generalInformation = _("generalStationInformation", "The finest shield and armor manufacturer in the quadrant")
+	stationArcher.generalInformation = _("stationGeneralInformation", "The finest shield and armor manufacturer in the quadrant")
 	stationArcher.stationHistory = _("stationHistory", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer")
 	return stationArcher
 end
@@ -550,7 +550,7 @@ function placeArchimedes()
 	end
 	tradeLuxury[stationArchimedes] = true
 	stationArchimedes.publicRelations = true
-	stationArchimedes.generalInformation = _("generalStationInformation", "We fabricate general and specialized components for ship beam systems")
+	stationArchimedes.generalInformation = _("stationGeneralInformation", "We fabricate general and specialized components for ship beam systems")
 	stationArchimedes.stationHistory = _("stationHistory", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it")
 	return stationArchimedes
 end
@@ -570,7 +570,7 @@ function placeArmstrong()
 	end
 --	table.insert(goods[stationArmstrong],{"warp",5,77})
 	stationArmstrong.publicRelations = true
-	stationArmstrong.generalInformation = _("generalStationInformation", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis")
+	stationArmstrong.generalInformation = _("stationGeneralInformation", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis")
 	stationArmstrong.stationHistory = _("stationHistory", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems.")
 	return stationArmstrong
 end
@@ -589,7 +589,7 @@ function placeAsimov()
 		goods[stationAsimov] = {{"tractor",5,48}}
 	end
 	stationAsimov.publicRelations = true
-	stationAsimov.generalInformation = _("generalStationInformation", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector")
+	stationAsimov.generalInformation = _("stationGeneralInformation", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector")
 	stationAsimov.stationHistory = _("stationHistory", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region")
 	return stationAsimov
 end
@@ -610,7 +610,7 @@ function placeBarclay()
 		tradeMedicine[stationBarclay] = true
 	end
 	stationBarclay.publicRelations = true
-	stationBarclay.generalInformation = _("generalStationInformation", "We provide a range of communication equipment and software for use aboard ships")
+	stationBarclay.generalInformation = _("stationGeneralInformation", "We provide a range of communication equipment and software for use aboard ships")
 	stationBarclay.stationHistory = _("stationHistory", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station")
 	return stationBarclay
 end
@@ -621,7 +621,7 @@ function placeBethesda()
 	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription(_("scienceStationDescription", "Medical research"))
 	goods[stationBethesda] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,36}}
 	stationBethesda.publicRelations = true
-	stationBethesda.generalInformation = _("generalStationInformation", "We research and treat exotic medical conditions")
+	stationBethesda.generalInformation = _("stationGeneralInformation", "We research and treat exotic medical conditions")
 	stationBethesda.stationHistory = _("stationHistory", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century")
 	return stationBethesda
 end
@@ -646,7 +646,7 @@ function placeBroeck()
 		if random(1,100) < 62 then tradeLuxury[stationBroeck] = true end
 	end
 	stationBroeck.publicRelations = true
-	stationBroeck.generalInformation = _("generalStationInformation", "We provide warp drive engines and components")
+	stationBroeck.generalInformation = _("stationGeneralInformation", "We provide warp drive engines and components")
 	stationBroeck.stationHistory = _("stationHistory", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth")
 	return stationBroeck
 end
@@ -683,7 +683,7 @@ function placeCalvin()
 	end
 	tradeLuxury[stationCalvin] = true
 	stationCalvin.publicRelations = true
-	stationCalvin.generalInformation = _("generalStationInformation", "We research and provide robotic systems and components")
+	stationCalvin.generalInformation = _("stationGeneralInformation", "We research and provide robotic systems and components")
 	stationCalvin.stationHistory = _("stationHistory", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming")
 	return stationCalvin
 end
@@ -716,7 +716,7 @@ function placeCavor()
 		end
 	end
 	stationCavor.publicRelations = true
-	stationCavor.generalInformation = _("generalStationInformation", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction")
+	stationCavor.generalInformation = _("stationGeneralInformation", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction")
 	stationCavor.stationHistory = _("stationHistory", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite")
 	return stationCavor
 end
@@ -735,7 +735,7 @@ function placeChatuchak()
 		goods[stationChatuchak] = {{"luxury",5,60}}		
 	end
 	stationChatuchak.publicRelations = true
-	stationChatuchak.generalInformation = _("generalStationInformation", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here")
+	stationChatuchak.generalInformation = _("stationGeneralInformation", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here")
 	stationChatuchak.stationHistory = _("stationHistory", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind")
 	return stationChatuchak
 end
@@ -758,7 +758,7 @@ function placeCoulomb()
 	end
 	if random(1,100) < 82 then tradeLuxury[stationCoulomb] = true end
 	stationCoulomb.publicRelations = true
-	stationCoulomb.generalInformation = _("generalStationInformation", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference")
+	stationCoulomb.generalInformation = _("stationGeneralInformation", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference")
 	stationCoulomb.stationHistory = _("stationHistory", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits")
 	return stationCoulomb
 end
@@ -781,7 +781,7 @@ function placeCyrus()
 	end
 	if random(1,100) < 78 then tradeLuxury[stationCyrus] = true end
 	stationCyrus.publicRelations = true
-	stationCyrus.generalInformation = _("generalStationInformation", "We supply high quality impulse engines and parts for use aboard ships")
+	stationCyrus.generalInformation = _("stationGeneralInformation", "We supply high quality impulse engines and parts for use aboard ships")
 	stationCyrus.stationHistory = _("stationHistory", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne")
 	return stationCyrus
 end
@@ -802,7 +802,7 @@ function placeDeckard()
 	end
 	tradeLuxury[stationDeckard] = true
 	stationDeckard.publicRelations = true
-	stationDeckard.generalInformation = _("generalStationInformation", "Supplier of android components, programming and service")
+	stationDeckard.generalInformation = _("stationGeneralInformation", "Supplier of android components, programming and service")
 	stationDeckard.stationHistory = _("stationHistory", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids")
 	return stationDeckard
 end
@@ -825,7 +825,7 @@ function placeDeer()
 	end
 	tradeLuxury[stationDeer] = true
 	stationDeer.publicRelations = true
-	stationDeer.generalInformation = _("generalStationInformation", "We can meet all your pushing and pulling needs with specialized equipment custom made")
+	stationDeer.generalInformation = _("stationGeneralInformation", "We can meet all your pushing and pulling needs with specialized equipment custom made")
 	stationDeer.stationHistory = _("stationHistory", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products")
 	return stationDeer
 end
@@ -848,7 +848,7 @@ function placeErickson()
 	end
 	tradeLuxury[stationErickson] = true 
 	stationErickson.publicRelations = true
-	stationErickson.generalInformation = _("generalStationInformation", "We provide transporters used aboard ships as well as the components for repair and maintenance")
+	stationErickson.generalInformation = _("stationGeneralInformation", "We provide transporters used aboard ships as well as the components for repair and maintenance")
 	stationErickson.stationHistory = _("stationHistory", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy")
 	return stationErickson
 end
@@ -870,7 +870,7 @@ function placeEvondos()
 	end
 	if random(1,100) < 41 then tradeLuxury[stationEvondos] = true end
 	stationEvondos.publicRelations = true
-	stationEvondos.generalInformation = _("generalStationInformation", "We provide components for automated medical machinery")
+	stationEvondos.generalInformation = _("stationGeneralInformation", "We provide components for automated medical machinery")
 	stationEvondos.stationHistory = _("stationHistory", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland")
 	return stationEvondos
 end
@@ -892,7 +892,7 @@ function placeFeynman()
 	end
 	tradeLuxury[stationFeynman] = true
 	stationFeynman.publicRelations = true
-	stationFeynman.generalInformation = _("generalStationInformation", "We provide nanites and software for a variety of ship-board systems")
+	stationFeynman.generalInformation = _("stationGeneralInformation", "We provide nanites and software for a variety of ship-board systems")
 	stationFeynman.stationHistory = _("stationHistory", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman")
 	return stationFeynman
 end
@@ -903,7 +903,7 @@ function placeGrasberg()
 	stationGrasberg = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationGrasberg:setPosition(psx,psy):setCallSign("Grasberg"):setDescription(_("scienceStationDescription", "Mining"))
 	stationGrasberg.publicRelations = true
-	stationGrasberg.generalInformation = _("generalStationInformation", "We mine nearby asteroids for precious minerals and process them for sale")
+	stationGrasberg.generalInformation = _("stationGeneralInformation", "We mine nearby asteroids for precious minerals and process them for sale")
 	stationGrasberg.stationHistory = _("stationHistory", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids")
 	grasbergGoods = random(1,100)
 	if stationFaction == "Human Navy" then
@@ -957,7 +957,7 @@ function placeHayden()
 		goods[stationHayden] = {{"nanites",5,65}}		
 	end
 	stationHayden.publicRelations = true
-	stationHayden.generalInformation = _("generalStationInformation", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding")
+	stationHayden.generalInformation = _("stationGeneralInformation", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding")
 	return stationHayden
 end
 
@@ -976,7 +976,7 @@ function placeHeyes()
 	end
 	tradeLuxury[stationHeyes] = true 
 	stationHeyes.publicRelations = true
-	stationHeyes.generalInformation = _("generalStationInformation", "We research and manufacture sensor components and systems")
+	stationHeyes.generalInformation = _("stationGeneralInformation", "We research and manufacture sensor components and systems")
 	stationHeyes.stationHistory = _("stationHistory", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility")
 	return stationHeyes
 end
@@ -999,7 +999,7 @@ function placeHossam()
 	end
 	if random(1,100) < 63 then tradeLuxury[stationHossam] = true end
 	stationHossam.publicRelations = true
-	stationHossam.generalInformation = _("generalStationInformation", "We provide nanites for various organic and non-organic systems")
+	stationHossam.generalInformation = _("stationGeneralInformation", "We provide nanites for various organic and non-organic systems")
 	stationHossam.stationHistory = _("stationHistory", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel")
 	return stationHossam
 end
@@ -1012,7 +1012,7 @@ function placeImpala()
 	tradeFood[stationImpala] = true
 	tradeLuxury[stationImpala] = true
 	stationImpala.publicRelations = true
-	stationImpala.generalInformation = _("generalStationInformation", "We mine nearby asteroids for precious minerals")
+	stationImpala.generalInformation = _("stationGeneralInformation", "We mine nearby asteroids for precious minerals")
 	impalaGoods = random(1,100)
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
@@ -1068,7 +1068,7 @@ function placeKomov()
 		if random(1,100) < 24 then tradeFood[stationKomov] = true end
 	end
 	stationKomov.publicRelations = true
-	stationKomov.generalInformation = _("generalStationInformation", "We provide classes and simulation to help train diverse species in how to relate to each other")
+	stationKomov.generalInformation = _("stationGeneralInformation", "We provide classes and simulation to help train diverse species in how to relate to each other")
 	stationKomov.stationHistory = _("stationHistory", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles")
 	return stationKomov
 end
@@ -1171,7 +1171,7 @@ function placeLipkin()
 	end
 	tradeLuxury[stationLipkin] = true 
 	stationLipkin.publicRelations = true
-	stationLipkin.generalInformation = _("generalStationInformation", "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)")
+	stationLipkin.generalInformation = _("stationGeneralInformation", "We build and repair and provide components and upgrades for automated facilities designed for ships where a doctor cannot be a crew member (commonly called autodocs)")
 	stationLipkin.stationHistory = _("stationHistory", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth")
 	return stationLipkin
 end
@@ -1192,7 +1192,7 @@ function placeMadison()
 		tradeMedicine[stationMadison] = true 
 	end
 	stationMadison.publicRelations = true
-	stationMadison.generalInformation = _("generalStationInformation", "Come take in a game or two or perhaps see a show")
+	stationMadison.generalInformation = _("stationGeneralInformation", "Come take in a game or two or perhaps see a show")
 	stationMadison.stationHistory = _("stationHistory", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment")
 	return stationMadison
 end
@@ -1213,7 +1213,7 @@ function placeMaiman()
 		tradeMedicine[stationMaiman] = true 
 	end
 	stationMaiman.publicRelations = true
-	stationMaiman.generalInformation = _("generalStationInformation", "We research and manufacture energy beam components and systems")
+	stationMaiman.generalInformation = _("stationGeneralInformation", "We research and manufacture energy beam components and systems")
 	stationMaiman.stationHistory = _("stationHistory", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th centuryon Earth")
 	return stationMaiman
 end
@@ -1236,7 +1236,7 @@ function placeMarconi()
 	end
 	tradeLuxury[stationMarconi] = true
 	stationMarconi.publicRelations = true
-	stationMarconi.generalInformation = _("generalStationInformation", "We manufacture energy beam components")
+	stationMarconi.generalInformation = _("stationGeneralInformation", "We manufacture energy beam components")
 	stationMarconi.stationHistory = _("stationHistory", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon")
 	return stationMarconi
 end
@@ -1247,7 +1247,7 @@ function placeMayo()
 	stationMayo:setPosition(psx,psy):setCallSign("Mayo"):setDescription(_("scienceStationDescription", "Medical Research"))
 	goods[stationMayo] = {{"food",5,1},{"medicine",5,5},{"autodoc",5,128}}
 	stationMayo.publicRelations = true
-	stationMayo.generalInformation = _("generalStationInformation", "We research exotic diseases and other human medical conditions")
+	stationMayo.generalInformation = _("stationGeneralInformation", "We research exotic diseases and other human medical conditions")
 	stationMayo.stationHistory = _("stationHistory", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth")
 	return stationMayo
 end
@@ -1266,7 +1266,7 @@ function placeMiller()
 		goods[stationMiller] = {{"optic",10,60}}		
 	end
 	stationMiller.publicRelations = true
-	stationMiller.generalInformation = _("generalStationInformation", "We study recently discovered life forms not native to Earth")
+	stationMiller.generalInformation = _("stationGeneralInformation", "We study recently discovered life forms not native to Earth")
 	stationMiller.stationHistory = _("stationHistory", "This station was named after one the early exobiologists from mid 20th century Earth, Dr. Stanley Miller")
 	return stationMiller
 end
@@ -1285,7 +1285,7 @@ function placeMuddville()
 		goods[stationMudd] = {{"luxury",10,60}}		
 	end
 	stationMudd.publicRelations = true
-	stationMudd.generalInformation = _("generalStationInformation", "Come to Muddvile for all your trade and commerce needs and desires")
+	stationMudd.generalInformation = _("stationGeneralInformation", "Come to Muddvile for all your trade and commerce needs and desires")
 	stationMudd.stationHistory = _("stationHistory", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman")
 	return stationMudd
 end
@@ -1306,7 +1306,7 @@ function placeNexus6()
 		tradeMedicine[stationNexus6] = true 
 	end
 	stationNexus6.publicRelations = true
-	stationNexus6.generalInformation = _("generalStationInformation", "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans")
+	stationNexus6.generalInformation = _("stationGeneralInformation", "We research and manufacture android components and systems. Our design our androids to maximize their likeness to humans")
 	stationNexus6.stationHistory = _("stationHistory", "The station is named after the ground breaking model of android produced by the Tyrell corporation")
 	return stationNexus6
 end
@@ -1330,7 +1330,7 @@ function placeOBrien()
 	end
 	if random(1,100) < 43 then tradeLuxury[stationOBrien] = true end
 	stationOBrien.publicRelations = true
-	stationOBrien.generalInformation = _("generalStationInformation", "We research and fabricate high quality transporters and transporter components for use aboard ships")
+	stationOBrien.generalInformation = _("stationGeneralInformation", "We research and fabricate high quality transporters and transporter components for use aboard ships")
 	stationOBrien.stationHistory = _("stationHistory", "Miles O'Brien started this business after his experience as a transporter chief")
 	return stationOBrien
 end
@@ -1352,7 +1352,7 @@ function placeOlympus()
 		tradeMedicine[stationOlympus] = true
 	end
 	stationOlympus.publicRelations = true
-	stationOlympus.generalInformation = _("generalStationInformation", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components")
+	stationOlympus.generalInformation = _("stationGeneralInformation", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components")
 	stationOlympus.stationHistory = _("stationHistory", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry")
 	return stationOlympus
 end
@@ -1363,7 +1363,7 @@ function placeOrgana()
 	stationOrgana:setPosition(psx,psy):setCallSign("Organa"):setDescription(_("scienceStationDescription", "Diplomatic training"))
 	goods[stationOrgana] = {{"luxury",5,96}}		
 	stationOrgana.publicRelations = true
-	stationOrgana.generalInformation = _("generalStationInformation", "The premeire academy for leadership and diplomacy training in the region")
+	stationOrgana.generalInformation = _("stationGeneralInformation", "The premeire academy for leadership and diplomacy training in the region")
 	stationOrgana.stationHistory = _("stationHistory", "Established by the royal family so critical during the political upheaval era")
 	return stationOrgana
 end
@@ -1474,7 +1474,7 @@ function placeOwen()
 	end
 	tradeLuxury[stationOwen] = true 
 	stationOwen.publicRelations = true
-	stationOwen.generalInformation = _("generalStationInformation", "We provide load lifters and components for various ship systems")
+	stationOwen.generalInformation = _("stationGeneralInformation", "We provide load lifters and components for various ship systems")
 	stationOwen.stationHistory = _("stationHistory", "The station is named after Lars Owen. After his extensive eperience with tempermental machinery on Tatooine, he used his subject matter expertise to expand into building and manufacturing the equipment adding innovations based on his years of experience using load lifters and their relative cousins, moisture vaporators")
 	return stationOwen
 end
@@ -1497,7 +1497,7 @@ function placePanduit()
 	end
 	tradeLuxury[stationPanduit] = true
 	stationPanduit.publicRelations = true
-	stationPanduit.generalInformation = _("generalStationInformation", "We provide optic components for various ship systems")
+	stationPanduit.generalInformation = _("stationGeneralInformation", "We provide optic components for various ship systems")
 	stationPanduit.stationHistory = _("stationHistory", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States")
 	return stationPanduit
 end
@@ -1520,7 +1520,7 @@ function placeRipley()
 	end
 	if random(1,100) < 47 then tradeLuxury[stationRipley] = true end
 	stationRipley.publicRelations = true
-	stationRipley.generalInformation = _("generalStationInformation", "We provide load lifters and components")
+	stationRipley.generalInformation = _("stationGeneralInformation", "We provide load lifters and components")
 	stationRipley.stationHistory = _("stationHistory", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship")
 	return stationRipley
 end
@@ -1543,7 +1543,7 @@ function placeRutherford()
 	tradeMedicine[stationRutherford] = true
 	if random(1,100) < 43 then tradeLuxury[stationRutherford] = true end
 	stationRutherford.publicRelations = true
-	stationRutherford.generalInformation = _("generalStationInformation", "We research and fabricate components for ship shield systems")
+	stationRutherford.generalInformation = _("stationGeneralInformation", "We research and fabricate components for ship shield systems")
 	stationRutherford.stationHistory = _("stationHistory", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century")
 	return stationRutherford
 end
@@ -1573,7 +1573,7 @@ function placeShawyer()
 	end
 	tradeLuxury[stationShawyer] = true 
 	stationShawyer.publicRelations = true
-	stationShawyer.generalInformation = _("generalStationInformation", "We research and manufacture impulse engine components and systems")
+	stationShawyer.generalInformation = _("stationGeneralInformation", "We research and manufacture impulse engine components and systems")
 	stationShawyer.stationHistory =_("stationHistory", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century")
 	return stationShawyer
 end
@@ -1596,7 +1596,7 @@ function placeShree()
 	end
 	tradeLuxury[stationShree] = true 
 	stationShree.publicRelations = true
-	stationShree.generalInformation = _("generalStationInformation", "We make ship systems designed to push or pull other objects around in space")
+	stationShree.generalInformation = _("stationGeneralInformation", "We make ship systems designed to push or pull other objects around in space")
 	stationShree.stationHistory = _("stationHistory", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today")
 	return stationShree
 end
@@ -1617,7 +1617,7 @@ function placeSoong()
 	end
 	tradeLuxury[stationSoong] = true 
 	stationSoong.publicRelations = true
-	stationSoong.generalInformation = _("generalStationInformation", "We create androids and android components")
+	stationSoong.generalInformation = _("stationGeneralInformation", "We create androids and android components")
 	stationSoong.stationHistory = _("stationHistory", "The station is named after Dr. Noonian Soong, the famous android researcher and builder")
 	return stationSoong
 end
@@ -1628,7 +1628,7 @@ function placeTiberius()
 	stationTiberius:setPosition(psx,psy):setCallSign("Tiberius"):setDescription(_("scienceStationDescription", "Logistics coordination"))
 	goods[stationTiberius] = {{"food",5,1}}
 	stationTiberius.publicRelations = true
-	stationTiberius.generalInformation = _("generalStationInformation", "We support the stations and ships in the area with planning and communication services")
+	stationTiberius.generalInformation = _("stationGeneralInformation", "We support the stations and ships in the area with planning and communication services")
 	stationTiberius.stationHistory = _("stationHistory", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name")
 	return stationTiberius
 end
@@ -1661,7 +1661,7 @@ function placeTokra()
 		end
 	end
 	stationTokra.publicRelations = true
-	stationTokra.generalInformation = _("generalStationInformation", "We create multiple types of advanced material components. Our most popular products are our filaments")
+	stationTokra.generalInformation = _("stationGeneralInformation", "We create multiple types of advanced material components. Our most popular products are our filaments")
 	stationTokra.stationHistory = _("stationHistory", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them")
 	return stationTokra
 end
@@ -1683,7 +1683,7 @@ function placeToohie()
 	end
 	tradeLuxury[stationToohie] = true
 	stationToohie.publicRelations = true
-	stationToohie.generalInformation = _("generalStationInformation", "We research and make general and specialized components for ship shield and ship armor systems")
+	stationToohie.generalInformation = _("stationGeneralInformation", "We research and make general and specialized components for ship shield and ship armor systems")
 	stationToohie.stationHistory = _("stationHistory", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")
 	return stationToohie
 end
@@ -1702,7 +1702,7 @@ function placeUtopiaPlanitia()
 		goods[stationUtopiaPlanitia] = {{"warp",5,167}}
 	end
 	stationUtopiaPlanitia.publicRelations = true
-	stationUtopiaPlanitia.generalInformation = _("generalStationInformation", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel")
+	stationUtopiaPlanitia.generalInformation = _("stationGeneralInformation", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel")
 	return stationUtopiaPlanitia
 end
 
@@ -1720,7 +1720,7 @@ function placeVactel()
 		goods[stationVactel] = {{"circuit",5,50}}		
 	end
 	stationVactel.publicRelations = true
-	stationVactel.generalInformation = _("generalStationInformation", "We specialize in circuitry shielded from external hacking suitable for ship systems")
+	stationVactel.generalInformation = _("stationGeneralInformation", "We specialize in circuitry shielded from external hacking suitable for ship systems")
 	stationVactel.stationHistory = _("stationHistory", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips")
 	return stationVactel
 end
@@ -1742,7 +1742,7 @@ function placeVeloquan()
 		tradeFood[stationVeloquan] = true 
 	end
 	stationVeloquan.publicRelations = true
-	stationVeloquan.generalInformation = _("generalStationInformation", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use")
+	stationVeloquan.generalInformation = _("stationGeneralInformation", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use")
 	stationVeloquan.stationHistory = _("stationHistory", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy")
 	return stationVeloquan
 end
@@ -1765,7 +1765,7 @@ function placeZefram()
 	end
 	tradeLuxury[stationZefram] = true
 	stationZefram.publicRelations = true
-	stationZefram.generalInformation = _("generalStationInformation", "We specialize in the esoteric components necessary to make warp drives function properly")
+	stationZefram.generalInformation = _("stationGeneralInformation", "We specialize in the esoteric components necessary to make warp drives function properly")
 	stationZefram.stationHistory = _("stationHistory", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do")
 	return stationZefram
 end
@@ -1777,7 +1777,7 @@ function placeJabba()
 	stationJabba = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationJabba:setPosition(psx,psy):setCallSign("Jabba"):setDescription(_("scienceStationDescription", "Commerce and gambling"))
 	stationJabba.publicRelations = true
-	stationJabba.generalInformation = _("generalStationInformation", "Come play some games and shop. House take does not exceed 4 percent")
+	stationJabba.generalInformation = _("stationGeneralInformation", "Come play some games and shop. House take does not exceed 4 percent")
 	return stationJabba
 end
 
@@ -1834,7 +1834,7 @@ function placeMaverick()
 	stationMaverick = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationMaverick:setPosition(psx,psy):setCallSign("Maverick"):setDescription(_("scienceStationDescription", "Gambling and resupply"))
 	stationMaverick.publicRelations = true
-	stationMaverick.generalInformation = _("generalStationInformation", "Relax and meet some interesting players")
+	stationMaverick.generalInformation = _("stationGeneralInformation", "Relax and meet some interesting players")
 	return stationMaverick
 end
 
@@ -1903,7 +1903,7 @@ function placeRubis()
 	stationRubis:setPosition(psx,psy):setCallSign("Rubis"):setDescription(_("scienceStationDescription", "Resupply"))
 	goods[stationRubis] = {{"luxury",5,76}}
 	stationRubis.publicRelations = true
-	stationRubis.generalInformation = _("generalStationInformation", "Get your energy here! Grab a drink before you go!")
+	stationRubis.generalInformation = _("stationGeneralInformation", "Get your energy here! Grab a drink before you go!")
 	return stationRubis
 end
 
@@ -1927,7 +1927,7 @@ function placeSkandar()
 	stationSkandar:setPosition(psx,psy):setCallSign("Skandar"):setDescription(_("scienceStationDescription", "Routine maintenance and entertainment"))
 	goods[stationSkandar] = {{"luxury",5,87}}
 	stationSkandar.publicRelations = true
-	stationSkandar.generalInformation = _("generalStationInformation", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars")
+	stationSkandar.generalInformation = _("stationGeneralInformation", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars")
 	stationSkandar.stationHistory = _("stationHistory", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax")
 	return stationSkandar
 end
@@ -1944,7 +1944,7 @@ function placeStarnet()
 	stationStarnet = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
 	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription(_("scienceStationDescription", "Automated weapons systems"))
 	stationStarnet.publicRelations = true
-	stationStarnet.generalInformation = _("generalStationInformation", "We research and create automated weapons systems to improve ship combat capability")
+	stationStarnet.generalInformation = _("stationGeneralInformation", "We research and create automated weapons systems to improve ship combat capability")
 	return stationStarnet
 end
 
