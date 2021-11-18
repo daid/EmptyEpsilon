@@ -32,7 +32,7 @@ function init()
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
 	diagnostic = false			
-	GMDiagnosticOn = "Turn On Diagnostic"
+	GMDiagnosticOn = _("GMButton", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	independentTransportSpawnDelay = 20
 	independentTransportList = {}
@@ -3344,21 +3344,21 @@ function handleDockedState()
 			(ctd.weapon_available.HVLI   and comms_source:getWeaponStorageMax("HVLI") > 0)   then
 			addCommsReply(_("commsAmmo", "I need ordnance restocked"), function()
 				local ctd = comms_target.comms_data
-				if stationCommsDiagnostic then print(_("commsAmmo", "in restock function")) end
+				if stationCommsDiagnostic then print("in restock function") end
 				setCommsMessage(_("commsAmmo", "What type of ordnance?"))
-				if stationCommsDiagnostic then print(string.format(_("commsAmmo", "player nuke weapon storage max: %.1f"),comms_source:getWeaponStorageMax("Nuke"))) end
+				if stationCommsDiagnostic then print(string.format("player nuke weapon storage max: %.1f",comms_source:getWeaponStorageMax("Nuke"))) end
 				if comms_source:getWeaponStorageMax("Nuke") > 0 then
-					if stationCommsDiagnostic then print(_("commsAmmo", "player can fire nukes")) end
+					if stationCommsDiagnostic then print("player can fire nukes") end
 					if ctd.weapon_available.Nuke then
-						if stationCommsDiagnostic then print(_("commsAmmo", "station has nukes available")) end
+						if stationCommsDiagnostic then print("station has nukes available") end
 						if math.random(1,10) <= 5 then
 							nukePrompt = _("commsAmmo", "Can you supply us with some nukes? (")
 						else
 							nukePrompt = _("commsAmmo", "We really need some nukes (")
 						end
-						if stationCommsDiagnostic then print(string.format(_("commsAmmo", "nuke prompt: %s"), nukePrompt)) end
+						if stationCommsDiagnostic then print(string.format("nuke prompt: %s", nukePrompt)) end
 						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
-							if stationCommsDiagnostic then print(_("commsAmmo", "going to handle weapon restock function")) end
+							if stationCommsDiagnostic then print("going to handle weapon restock function") end
 							handleWeaponRestock("Nuke")
 						end)
 					end	--end station has nuke available if branch

@@ -227,11 +227,11 @@ function init()
 	graveyardSpawned = false
 	cemeteryDocked = false
 	necropolisDocked = false
-	GMChristmasPast = _("Christmas Past")
+	GMChristmasPast = _("GMButton", "Christmas Past")
 	addGMFunction(GMChristmasPast,christmasPast)
-	GMChristmasPresent = _("Christmas Present")
+	GMChristmasPresent = _("GMButton", "Christmas Present")
 	addGMFunction(GMChristmasPresent,christmasPresent)
-	GMChristmasFuture = _("Christmas Future")
+	GMChristmasFuture = _("GMButton", "Christmas Future")
 	addGMFunction(GMChristmasFuture,christmasFuture)
 	wfv = "end of init"
 end

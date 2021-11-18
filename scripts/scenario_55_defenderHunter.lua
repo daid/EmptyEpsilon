@@ -7406,7 +7406,7 @@ end
 
 function spinUpgradeStart(delta)
 	plot2name = "spinUpgradeStart"
-	if plot_2_diagnostic then print(_("commsUpgrade", "plot 2 spin upgrade start")) end
+	if plot_2_diagnostic then print("plot 2 spin upgrade start") end
 	infoPromised = true
 	spinUpgradeAvailable = false
 	plot2reminder = _("commsUpgrade", "Get ship maneuver upgrade")
@@ -8779,34 +8779,34 @@ function helpfulWarning(delta)
 								end
 								p:addToShipLog(wMsg,"Red")
 								if i == 1 then
-									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "home station warning details")) end
+									if helpfulWarningDiagnostic then print("home station warning details") end
 									local stationShields = homeStation:getShieldCount()
-									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "number of shields around home station: ") .. stationShields) end
+									if helpfulWarningDiagnostic then print("number of shields around home station: " .. stationShields) end
 									local shieldsDamaged = false
 									if stationShields == 1 then
-										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "station has only one shield")) end
+										if helpfulWarningDiagnostic then print("station has only one shield") end
 										local sLevel = homeStation:getShieldLevel(0)
-										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield level for the one shield: ") .. sLevel) end
+										if helpfulWarningDiagnostic then print("shield level for the one shield: " .. sLevel) end
 										local sMax = homeStation:getShieldMax(0)
-										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield maximum for the one shield: ") .. sMax) end
+										if helpfulWarningDiagnostic then print("shield maximum for the one shield: " .. sMax) end
 										if sLevel < sMax then
-											if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield not fully charged")) end
+											if helpfulWarningDiagnostic then print("shield not fully charged") end
 											sLine = string.format(_("commsHelpfullWarning", "   Shield: %.1f%% (%.1f/%.1f) "),sLevel/sMax*100,sLevel,sMax)
 											shieldsDamaged = true
 										end
 									else
-										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "station has multiple shields")) end
+										if helpfulWarningDiagnostic then print("station has multiple shields") end
 										sdMsg = string.format(_("commsHelpfullWarning", "   Shield count: %i "),stationShields)
-										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "about to start shield loop")) end
+										if helpfulWarningDiagnostic then print("about to start shield loop") end
 										shieldStatusLines = {}
 										for j=1,stationShields do
-											if helpfulWarningDiagnostic then print(string.format(_("commsHelpfullWarning", "loop index: %i, shield number: %i"),j,j-1)) end
+											if helpfulWarningDiagnostic then print(string.format("loop index: %i, shield number: %i",j,j-1)) end
 											sLevel = homeStation:getShieldLevel(j-1)
-											if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield level: ") .. sLevel) end
+											if helpfulWarningDiagnostic then print("shield level: " .. sLevel) end
 											sMax = homeStation:getShieldMax(j-1)
-											if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "max: ") .. sMax) end
+											if helpfulWarningDiagnostic then print("max: " .. sMax) end
 											if sLevel < sMax then
-												if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "shield not fully charged")) end
+												if helpfulWarningDiagnostic then print("shield not fully charged") end
 												sLine = string.format(_("commsHelpfullWarning", "      Shield %i: %i%% (%.1f/%i) "),j,math.floor(sLevel/sMax*100),sLevel,sMax)
 												table.insert(shieldStatusLines,sLine)
 												shieldsDamaged = true
@@ -8823,13 +8823,13 @@ function helpfulWarning(delta)
 											end
 										end
 									end
-									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "Done with shield status, check hull status")) end
+									if helpfulWarningDiagnostic then print("Done with shield status, check hull status") end
 									hl = homeStation:getHull()
-									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "current hull: ") .. hl) end
+									if helpfulWarningDiagnostic then print("current hull: " .. hl) end
 									hm = homeStation:getHullMax()
-									if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "max hull: ") .. hm) end
+									if helpfulWarningDiagnostic then print("max hull: " .. hm) end
 									if hl < hm then
-										if helpfulWarningDiagnostic then print(_("commsHelpfullWarning", "hull not fully repaired")) end
+										if helpfulWarningDiagnostic then print("hull not fully repaired") end
 										if not shieldsDamaged then
 											p:addToShipLog(_("commsHelpfullWarning", "Station Status:"),"Red")										
 										end
