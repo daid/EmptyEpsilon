@@ -18,37 +18,37 @@ function init()
 	player:setPosition(22400, 18200):setCallSign(playerCallSign)
 	-- Create various stations of various size, purpose and faction.
     outpost41 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-    outpost41:setPosition(22400, 16100):setCallSign("Outpost-41"):setDescription(_("scienceStationsDescription", "Strategically located human station"))
+    outpost41:setPosition(22400, 16100):setCallSign("Outpost-41"):setDescription(_("scienceStationDescription", "Strategically located human station"))
     outpost17 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     outpost17:setPosition(52400, -26150):setCallSign("Outpost-17")
     outpost26 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     outpost26:setPosition(-42400, -32150):setCallSign("Outpost-26")
     outpost13 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	outpost13:setPosition(12600, 27554):setCallSign("Outpost-13"):setDescription(_("scienceStationsDescription", "Gathering point for asteroid miners"))
+	outpost13:setPosition(12600, 27554):setCallSign("Outpost-13"):setDescription(_("scienceStationDescription", "Gathering point for asteroid miners"))
     outpost57 = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor")
 	outpost57:setPosition(63630, 47554):setCallSign("Outpost-57")
     science22 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	science22:setPosition(11200, 67554):setCallSign("Science-22")
     science37 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	science37:setPosition(-18200, -32554):setCallSign("Science-37"):setDescription(_("scienceStationsDescription", "Observatory"))
+	science37:setPosition(-18200, -32554):setCallSign("Science-37"):setDescription(_("scienceStationDescription", "Observatory"))
     bpcommnex = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	bpcommnex:setPosition(-53500,84000):setCallSign("BP Comm Nex"):setDescription(_("scienceStationsDescription", "Balindor Prime Communications Nexus"))
+	bpcommnex:setPosition(-53500,84000):setCallSign("BP Comm Nex"):setDescription(_("scienceStationDescription", "Balindor Prime Communications Nexus"))
     goltincomms = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	goltincomms:setPosition(93150,24387):setCallSign("Goltin Comms")
     stationOrdinkal = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrdinkal:setPosition(-14600, 47554):setCallSign("Ordinkal"):setDescription(_("scienceStationsDescription", "Trading Post"))
+	stationOrdinkal:setPosition(-14600, 47554):setCallSign("Ordinkal"):setDescription(_("scienceStationDescription", "Trading Post"))
     stationNakor = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationNakor:setPosition(-34310, -37554):setCallSign("Nakor"):setDescription(_("scienceStationsDescription", "Science and trading hub"))
+	stationNakor:setPosition(-34310, -37554):setCallSign("Nakor"):setDescription(_("scienceStationDescription", "Science and trading hub"))
     stationKelfist = SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor")
 	stationKelfist:setPosition(44640, 13554):setCallSign("Kelfist")
     stationFranklin = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFranklin:setPosition(-24640, -13554):setCallSign("Franklin"):setDescription(_("scienceStationsDescription", "Civilian and military station"))
+	stationFranklin:setPosition(-24640, -13554):setCallSign("Franklin"):setDescription(_("scienceStationDescription", "Civilian and military station"))
     stationBroad = SpaceStation():setTemplate("Large Station"):setFaction("Independent")
-	stationBroad:setPosition(44340, 63554):setCallSign("Broad"):setDescription(_("scienceStationsDescription", "Trading Post"))
+	stationBroad:setPosition(44340, 63554):setCallSign("Broad"):setDescription(_("scienceStationDescription", "Trading Post"))
     stationBazamoana = SpaceStation():setTemplate("Large Station"):setFaction("Independent")
-	stationBazamoana:setPosition(35, 87):setCallSign("Bazamoana"):setDescription(_("scienceStationsDescription", "Trading Nexus"))
+	stationBazamoana:setPosition(35, 87):setCallSign("Bazamoana"):setDescription(_("scienceStationDescription", "Trading Nexus"))
     stationPangora = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("scienceStationsDescription", "Major military installation"))
+	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("scienceStationDescription", "Major military installation"))
 	-- Give out some initial reputation points. Give more for easier difficulty levels
 	stationFranklin:addReputationPoints(50.0)
 	if getScenarioVariation() ~= "Hard" then
@@ -1089,7 +1089,7 @@ function handleWeaponRestock(weapon)
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("classicComms", "Not enough reputation."))
+            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
@@ -1126,7 +1126,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("classicComms", "We have dispatched a supply ship toward WP%d"), n));
                         else
-                            setCommsMessage(_("classicComms", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -1147,7 +1147,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage(string.format(_("classicComms", "We have dispatched %s to assist at WP%d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("classicComms", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)

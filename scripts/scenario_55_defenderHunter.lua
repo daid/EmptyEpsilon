@@ -5468,7 +5468,7 @@ function handleDockedState()
 						comms_source:setJumpDriveCharge(comms_source:getJumpDriveCharge() + max_charge)
 						setCommsMessage(string.format(_("commsRepairs", "Your jump drive has been overcharged to %ik"),math.floor(comms_source:getJumpDriveCharge()/1000)))
 					else
-						setCommsMessage(_("commsTrade", "Insufficient reputation"))
+						setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5501,7 +5501,7 @@ function handleDockedState()
 							comms_source:setCanLaunchProbe(true)
 							setCommsMessage(_("commsRepairs", "Your probe launch system has been repaired"))
 						else
-							setCommsMessage(_("commsTrade", "Insufficient reputation"))
+							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5514,7 +5514,7 @@ function handleDockedState()
 							comms_source:setCanHack(true)
 							setCommsMessage(_("commsRepairs", "Your hack system has been repaired"))
 						else
-							setCommsMessage(_("commsTrade", "Insufficient reputation"))
+							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5527,7 +5527,7 @@ function handleDockedState()
 							comms_source:setCanScan(true)
 							setCommsMessage(_("commsRepairs", "Your scanners have been repaired"))
 						else
-							setCommsMessage(_("commsTrade", "Insufficient reputation"))
+							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5540,7 +5540,7 @@ function handleDockedState()
 							comms_source:setCanCombatManeuver(true)
 							setCommsMessage(_("commsRepairs", "Your combat maneuver has been repaired"))
 						else
-							setCommsMessage(_("commsTrade", "Insufficient reputation"))
+							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5553,7 +5553,7 @@ function handleDockedState()
 							comms_source:setCanSelfDestruct(true)
 							setCommsMessage(_("commsRepairs", "Your self destruct system has been repaired"))
 						else
-							setCommsMessage(_("commsTrade", "Insufficient reputation"))
+							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5580,7 +5580,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsTrade", "Insufficient reputation"))
+					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -5595,7 +5595,7 @@ function handleDockedState()
 				end
 				addCommsReply(string.format(_("commsTrade", "Purchase coolant for %i reputation"),coolantCost), function()
 					if not comms_source:takeReputationPoints(coolantCost) then
-						setCommsMessage(_("commsTrade", "Insufficient reputation"))
+						setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 					else
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
 						setCommsMessage(_("commsTrade", "Additional coolant purchased"))
@@ -5613,7 +5613,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsTrade", "Insufficient reputation"))
+					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -5630,7 +5630,7 @@ function handleDockedState()
 						setCommsMessage(string.format(_("commsTrade", "Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs"),homeStation:getCallSign()))
 						homeStation.telemetry = true
 					else
-						setCommsMessage(_("commsTrade", "Insufficient reputation"))
+						setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5711,13 +5711,13 @@ function handleDockedState()
 		addCommsReply(_("commsStation", "Tell me more about your station"), function()
 			setCommsMessage(_("commsStation", "What would you like to know?"))
 			if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
-				addCommsReply(_("commsStation", "General information"), function()
+				addCommsReply(_("stationGeneralInformation", "General information"), function()
 					setCommsMessage(comms_target.comms_data.general_information)
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "" then
-				addCommsReply(_("commsStation", "Station history"), function()
+				addCommsReply(_("stationHistory", "Station history"), function()
 					setCommsMessage(comms_target.comms_data.history)
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6707,7 +6707,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("commsStation", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -6728,7 +6728,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("commsStation", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -6950,7 +6950,7 @@ function neutralComms(comms_data)
 			destRep = random(1,5)
 			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage(_("commsTrade", "Insufficient reputation"))
+					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end

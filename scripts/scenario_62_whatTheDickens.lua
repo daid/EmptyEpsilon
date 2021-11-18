@@ -534,7 +534,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("classicComms", "We have dispatched a supply ship toward WP%d"), n));
                         else
-                            setCommsMessage(_("classicComms", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -555,7 +555,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage(string.format(_("classicComms", "We have dispatched %s to assist at WP%d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("classicComms", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)

@@ -2466,7 +2466,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not player:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsTrade", "Insufficient reputation"))
+					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 				else
 					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -2482,7 +2482,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not player:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsTrade", "Insufficient reputation"))
+					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 				else
 					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -2493,12 +2493,12 @@ function handleDockedState()
 	if comms_target.publicRelations then
 		addCommsReply(_("commsStation", "Tell me more about your station"), function()
 			setCommsMessage(_("commsStation", "What would you like to know?"))
-			addCommsReply(_("commsStation", "General information"), function()
+			addCommsReply(_("stationGeneralInformation", "General information"), function()
 				setCommsMessage(comms_target.generalInformation)
 				addCommsReply(_("Back"), commsStation)
 			end)
 			if comms_target.stationHistory ~= nil then
-				addCommsReply(_("commsStation", "Station history"), function()
+				addCommsReply(_("stationHistory", "Station history"), function()
 					setCommsMessage(comms_target.stationHistory)
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -3133,7 +3133,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("commsStation", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -3154,7 +3154,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("commsStation", "Not enough reputation!"));
+                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -3438,7 +3438,7 @@ function neutralComms(comms_data)
 			destRep = random(1,5)
 			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not player:takeReputationPoints(destRep) then
-					setCommsMessage(_("commsShip", "Insufficient reputation"))
+					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
