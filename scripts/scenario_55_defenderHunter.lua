@@ -6360,7 +6360,7 @@ function handleWeaponRestock(weapon)
         addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("commsAmmo", "Not enough reputation."))
+            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
             return
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
@@ -6936,7 +6936,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								end
 								addCommsReply(_("Back"), commsShip)
 							end)
@@ -6971,7 +6971,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -6997,7 +6997,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -7028,7 +7028,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)

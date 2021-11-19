@@ -2806,7 +2806,7 @@ function handleWeaponRestock(weapon)
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("commsAmmo", "Not enough reputation."))
+            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
@@ -3418,7 +3418,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3459,7 +3459,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3485,7 +3485,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3516,7 +3516,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)

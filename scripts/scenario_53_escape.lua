@@ -4004,7 +4004,7 @@ function handleWeaponRestock(weapon)
 					setCommsMessage(_("commsAmmo", "We generously resupplied you with some weapon charges.\nPut them to good use."))
 				end
 			else
-				setCommsMessage(_("commsAmmo", "Not enough reputation."))
+				setCommsMessage(_("commsNeedRep", "Not enough reputation."))
 				return
 			end
 		else
@@ -4019,12 +4019,12 @@ function handleWeaponRestock(weapon)
 							setCommsMessage(_("commsAmmo", "We generously resupplied you with one weapon charge.\nPut it to good use."))
 						end
 					else
-						setCommsMessage(_("commsAmmo", "Not enough reputation."))
+						setCommsMessage(_("commsNeedRep", "Not enough reputation."))
 					end
 					return
 				end)
 			else
-				setCommsMessage(_("commsAmmo", "Not enough reputation."))
+				setCommsMessage(_("commsNeedRep", "Not enough reputation."))
 				return				
 			end
 		end
@@ -4446,7 +4446,7 @@ function friendlyComms(comms_data)
 								comms_source.cargo = comms_source.cargo - 1
 								setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 							else
-								setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+								setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 							end
 						else
 							setCommsMessage(_("commsTrade", "Insufficient cargo space"))
@@ -4642,7 +4642,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								end
 							else
 								setCommsMessage(_("commsTrade", "Insufficient cargo space"))
@@ -4709,7 +4709,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 								end
 							else
 								setCommsMessage(_("commsTrade", "Insufficient cargo space"))
@@ -4741,7 +4741,7 @@ function neutralComms(comms_data)
 										comms_source.cargo = comms_source.cargo - 1
 										setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
-										setCommsMessage(_("commsTrade", "Insufficient reputation for purchase"))
+										setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
 									end
 								else
 									setCommsMessage(_("commsTrade", "Insufficient cargo space"))
@@ -4886,7 +4886,7 @@ function hugRepulse(delta)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseTransferButtonEPlus = "repulseTransferButtonEPlus"
-			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("buttonEengineer+", "Transfer to Repulse"),repulseTransfer)
+			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("buttonEngineer+", "Transfer to Repulse"),repulseTransfer)
 		end
 		if repulseTransferButtonEPlus ~= nil or repulseTransferButton ~= nil then
 			plot1 = nil

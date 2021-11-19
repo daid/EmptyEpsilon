@@ -1048,15 +1048,15 @@ function handleDockedState()
 		addCommsReply(_("commsStation", "What are my current orders?"), function()
 			oMessage = ""
 			if plot1 == chasePlayer or plot1 == getAmbassador or plot1 == ambassadorAboard then
-				oMessage = _("Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
+				oMessage = _("commsStation", "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
 			elseif plot1 == gotoNingling then
-				oMessage = _("Current Orders: Transport ambassador Gremus to Ningling. ")
+				oMessage = _("commsStation", "Current Orders: Transport ambassador Gremus to Ningling. ")
 			elseif plot1 == waitForAmbassador then
-				oMessage = _("Current Orders: Wait for ambassador Gremus to complete business at Ningling. ")
+				oMessage = __("commsStation", "Current Orders: Wait for ambassador Gremus to complete business at Ningling. ")
 			elseif plot1 == getFromNingling then
-				oMessage = _("Current Orders: Dock with Ningling to get ambassador Gremus. ")
+				oMessage = _("commsStation", "Current Orders: Dock with Ningling to get ambassador Gremus. ")
 			elseif plot1 == travelGoltin then
-				oMessage = _("Current Orders: Transport ambassador Gremus to Goltin 7. ")
+				oMessage = _("commsStation", "Current Orders: Transport ambassador Gremus to Goltin 7. ")
 			end
 			if plot3 == artifactResearch or plot3 == artifactByStation then
 				oMessage = oMessage.. _("Additional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. ")
