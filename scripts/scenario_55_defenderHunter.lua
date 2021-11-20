@@ -74,11 +74,11 @@ function init()
 	setConstants()
 	diagnostic = false		
 	helpfulWarningDiagnostic = false
-	GMDiagnosticOn = _("GMButton", "Turn On Diagnostic")
+	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	default_interwave_interval = 280
 	interWave = default_interwave_interval			
-	GMDelayNormalToSlow = _("GMButton", "Delay normal to slow")
+	GMDelayNormalToSlow = _("ButtonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 	buildStations()
 	wfv = "end of init"
@@ -500,12 +500,12 @@ function turnOnDiagnostic()
 -- Diagnostic enable/disable buttons on GM screen
 	diagnostic = true
 	removeGMFunction(GMDiagnosticOn)
-	addGMFunction(_("GMButton", "Turn Off Diagnostic"),turnOffDiagnostic)
+	addGMFunction(_("buttonGM", "Turn Off Diagnostic"),turnOffDiagnostic)
 end
 function turnOffDiagnostic()
 	diagnostic = false
 	removeGMFunction(GMDiagnosticOff)
-	addGMFunction(_("GMButton", "Turn On Diagnostic"),turnOnDiagnostic)
+	addGMFunction(_("buttonGM", "Turn On Diagnostic"),turnOnDiagnostic)
 end
 function populateStationPool()
 	station_pool = {
@@ -3771,17 +3771,17 @@ end
 function delayNormalToSlow()
 	interWave = 600
 	removeGMFunction(GMDelayNormalToSlow)
-	addGMFunction(_("GMButton", "Delay slow to fast"),delaySlowToFast)
+	addGMFunction(_("buttonGM", "Delay slow to fast"),delaySlowToFast)
 end
 function delaySlowToFast()
 	interwave = 20
 	removeGMFunction(GMDelaySlowToFast)
-	addGMFunction(_("GMButton", "Delay fast to normal"),delayFastToNormal)
+	addGMFunction(_("buttonGM", "Delay fast to normal"),delayFastToNormal)
 end
 function delayFastToNormal()
 	interwave = default_interwave_interval
 	removeGMFunction(GMDelayFastToNormal)
-	addGMFunction(_("GMButton", "Delay normal to slow"),delayNormalToSlow)
+	addGMFunction(_("buttonGM", "Delay normal to slow"),delayNormalToSlow)
 end
 -- dynamic universe functions: asteroids and nebulae in motion
 function setMovingNebulae()
@@ -10293,66 +10293,66 @@ function crewFate(p, fatalityChance)
 			if named_consequence == "probe" then
 				p:setCanLaunchProbe(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering",_("msgEngineer", "probe_launch_damage_message","The probe launch system has been damaged"))
+					p:addCustomMessage("Engineering","probe_launch_damage_message",_("msgEngineer", "The probe launch system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+",_("msgEngineer+", "probe_launch_damage_message_plus","The probe launch system has been damaged"))
+					p:addCustomMessage("Engineering+","probe_launch_damage_message_plus",_("msgEngineer+", "The probe launch system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Relay") then
-					p:addCustomMessage("Relay",_("msgRelay", "probe_launch_damage_message_relay","The probe launch system has been damaged"))
+					p:addCustomMessage("Relay","probe_launch_damage_message_relay",_("msgRelay", "The probe launch system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
-					p:addCustomMessage("Operations",_("msgOperations", "probe_launch_damage_message_ops","The probe launch system has been damaged"))
+					p:addCustomMessage("Operations","probe_launch_damage_message_ops",_("msgOperations", "The probe launch system has been damaged"))
 				end
 			elseif named_consequence == "hack" then
 				p:setCanHack(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering",_("msgEngineer", "hack_damage_message","The hacking system has been damaged"))
+					p:addCustomMessage("Engineering","hack_damage_message",_("msgEngineer", "The hacking system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+",_("msgEngineer+", "hack_damage_message_plus","The hacking system has been damaged"))
+					p:addCustomMessage("Engineering+","hack_damage_message_plus",_("msgEngineer+", "The hacking system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Relay") then
-					p:addCustomMessage("Relay",_("msgRelay", "hack_damage_message_relay","The hacking system has been damaged"))
+					p:addCustomMessage("Relay","hack_damage_message_relay",_("msgRelay", "The hacking system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
-					p:addCustomMessage("Operations",_("msgOperations", "hack_damage_message_ops","The hacking system has been damaged"))
+					p:addCustomMessage("Operations","hack_damage_message_ops",_("msgOperations", "The hacking system has been damaged"))
 				end
 			elseif named_consequence == "scan" then
 				p:setCanScan(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering",_("msgEngineer", "scan_damage_message","The scanners have been damaged"))
+					p:addCustomMessage("Engineering","scan_damage_message",_("msgEngineer", "The scanners have been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+",_("msgEngineer+", "scan_damage_message_plus","The scanners have been damaged"))
+					p:addCustomMessage("Engineering+","scan_damage_message_plus",_("msgEngineer+", "The scanners have been damaged"))
 				end
 				if p:hasPlayerAtPosition("Science") then
-					p:addCustomMessage("Science",_("msgScience", "scan_damage_message_science","The scanners have been damaged"))
+					p:addCustomMessage("Science","scan_damage_message_science",_("msgScience", "The scanners have been damaged"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
-					p:addCustomMessage("Operations",_("msgOperations", "scan_damage_message_ops","The scanners have been damaged"))
+					p:addCustomMessage("Operations","scan_damage_message_ops",_("msgOperations", "The scanners have been damaged"))
 				end
 			elseif named_consequence == "combat_maneuver" then
 				p:setCanCombatManeuver(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering",_("msgEngineer", "combat_maneuver_damage_message","Combat maneuver has been damaged"))
+					p:addCustomMessage("Engineering","combat_maneuver_damage_message",_("msgEngineer", "Combat maneuver has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+",_("msgEngineer+", "combat_maneuver_damage_message_plus","Combat maneuver has been damaged"))
+					p:addCustomMessage("Engineering+","combat_maneuver_damage_message_plus",_("msgEngineer+", "Combat maneuver has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Helms") then
-					p:addCustomMessage("Helms",_("msgHelms", "combat_maneuver_damage_message_helm","Combat maneuver has been damaged"))
+					p:addCustomMessage("Helms","combat_maneuver_damage_message_helm",_("msgHelms", "Combat maneuver has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Tactical") then
-					p:addCustomMessage("Tactical",_("msgTactical", "combat_maneuver_damage_message_tac","Combat maneuver has been damaged"))
+					p:addCustomMessage("Tactical","combat_maneuver_damage_message_tac",_("msgTactical", "Combat maneuver has been damaged"))
 				end
 			elseif named_consequence == "self_destruct" then
 				p:setCanSelfDestruct(false)
 				if p:hasPlayerAtPosition("Engineering") then
-					p:addCustomMessage("Engineering",_("msgEngineer", "self_destruct_damage_message","Self destruct system has been damaged"))
+					p:addCustomMessage("Engineering","self_destruct_damage_message",_("msgEngineer", "Self destruct system has been damaged"))
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
-					p:addCustomMessage("Engineering+",_("msgEngineer+", "self_destruct_damage_message_plus","Self destruct system has been damaged"))
+					p:addCustomMessage("Engineering+","self_destruct_damage_message_plus",_("msgEngineer+", "Self destruct system has been damaged"))
 				end
 			end
 		end	--coolant loss branch
@@ -10517,7 +10517,7 @@ function updateCoolantGivenPlayer(p, delta)
 		end
 		p.deploy_coolant_timer = p.deploy_coolant_timer - delta
 		if p.deploy_coolant_timer < 0 then
-			gather_coolant_status = "Gathering Coolant"
+			gather_coolant_status = _("tabEngineer", "Gathering Coolant")
 			p:setMaxCoolant(p:getMaxCoolant() + coolant_gain)
 			if p:getMaxCoolant() > 50 and random(1,100) <= 13 then
 				local engine_choice = math.random(1,3)
@@ -10534,10 +10534,10 @@ function updateCoolantGivenPlayer(p, delta)
 				end
 			end
 		else
-			gather_coolant_status = string.format(_("Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
+			gather_coolant_status = string.format(_("tabEngineer", "Deploying Collectors %i"),math.ceil(p.deploy_coolant_timer - delta))
 		end
 	else
-		gather_coolant_status = string.format(_("Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
+		gather_coolant_status = string.format(_("tabEngineer", "Configuring Collectors %i"),math.ceil(p.configure_coolant_timer - delta))
 	end
 	if p:hasPlayerAtPosition("Engineering") then
 		p.gather_coolant = "gather_coolant"
@@ -10629,41 +10629,41 @@ function endStatistics()
 		end
 	end
 	destroyedEnemyStations = startingEnemyStations - enemyStationsSurvived
-	gMsg = string.format(_("msgGlobal", "Stations: %i\t survived: %i\t destroyed: %i"),(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
-	gMsg = gMsg .. string.format(_("msgGlobal", "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"),startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
-	gMsg = gMsg .. string.format(_("msgGlobal", "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"),startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
-	gMsg = gMsg .. string.format(_("msgGlobal", "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"),startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
---	gMsg = gMsg .. string.format(_("msgGlobal", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
+	gMsg = string.format(_("msgMainscreen", "Stations: %i\t survived: %i\t destroyed: %i"),(startingFriendlyStations + startingNeutralStations),survivedStations,destroyedStations)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nFriendly Stations: %i\t survived: %i\t destroyed: %i"),startingFriendlyStations,survivedFriendlyStations,destroyedFriendlyStations)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\nNeutral Stations: %i\t survived: %i\t destroyed: %i"),startingNeutralStations,survivedNeutralStations,destroyedNeutralStations)
+	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nEnemy Stations: %i\t survived: %i\t destroyed: %i"),startingEnemyStations,enemyStationsSurvived,enemyStationsSurvived)
+--	gMsg = gMsg .. string.format(_("msgMainscreen", "\n\n\n\nRequired missions completed: %i"),requiredMissionCount)
 	rankVal = survivedFriendlyStations/startingFriendlyStations*.6 + survivedNeutralStations/startingNeutralStations*.2 + (1-enemyStationsSurvived/startingEnemyStations)*.2
 	if missionVictory then
 		if rankVal < .7 then
-			rank = _("msgGlobalRank", "Ensign")
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .8 then
-			rank = _("msgGlobalRank", "Lieutenant")
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .9 then
-			rank = _("msgGlobalRank", "Commander")
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .95 then
-			rank = _("msgGlobalRank", "Captain")
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = _("msgGlobalRank", "Admiral")
+			rank = _("msgMainscreen", "Admiral")
 		end
-		gMsg = gMsg .. string.format(_("msgGlobalRank", "\nEarned rank:  %s"), rank)
+		gMsg = gMsg .. string.format(_("msgMainscreen", "\nEarned rank:  %s"), rank)
 	else
 		if rankVal < .6 then
-			rank = _("msgGlobalRank", "Ensign")
+			rank = _("msgMainscreen", "Ensign")
 		elseif rankVal < .7 then
-			rank = _("msgGlobalRank", "Lieutenant")
+			rank = _("msgMainscreen", "Lieutenant")
 		elseif rankVal < .8 then
-			rank = _("msgGlobalRank", "Commander")
+			rank = _("msgMainscreen", "Commander")
 		elseif rankVal < .9 then
-			rank = _("msgGlobalRank", "Captain")
+			rank = _("msgMainscreen", "Captain")
 		else
-			rank = _("msgGlobalRank", "Admiral")
+			rank = _("msgMainscreen", "Admiral")
 		end
 		if string.find(getScenarioVariation(),"Hunter") then
-			gMsg = gMsg .. string.format(_("msgGlobalRank", "\nPost Target Enemy Base Survival Rank: %s"), rank)
+			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Target Enemy Base Survival Rank: %s"), rank)
 		else
-			gMsg = gMsg .. string.format(_("msgGlobalRank", "\nPost Home Base Destruction Rank: %s"), rank)
+			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Home Base Destruction Rank: %s"), rank)
 		end
 		-- Yes, the ranking is more forgiving when defeated for these reasons:
 		-- 1) With so many deaths on the station, leadership roles have opened up

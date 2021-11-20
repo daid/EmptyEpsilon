@@ -4957,7 +4957,7 @@ function augmentRepairCrew(delta)
 --Former repair crew asks to be rescued to take up their jobs again
 	augmentRepairCrewTimer = augmentRepairCrewTimer - delta
 	if augmentRepairCrewTimer < 0 then
-		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
+		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("commsShipCrew", "Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
 		if brigHailed then
 			if playerRepulse:hasPlayerAtPosition("Weapons") then
 				if retrieveRepairCrewButton == nil then
@@ -5302,11 +5302,11 @@ function borisChase(delta)
 				junkChaser:onDestruction(resetBoris)
 				chaserMsgChoice = math.random(1,3)
 				if chaserMsgChoice == 1 then
-					junkChaser:sendCommsMessage(playerRepulse,_("You don't steal from Boris Junk Yard without consequences. I'm coming for you"))
+					junkChaser:sendCommsMessage(playerRepulse,_("commsShipBoris", "You don't steal from Boris Junk Yard without consequences. I'm coming for you"))
 				elseif chaserMsgChoice == 2 then
-					junkChaser:sendCommsMessage(playerRepulse,_("I saw you steal that ship. You'll rue the day"))
+					junkChaser:sendCommsMessage(playerRepulse,_("commsShipBoris", "I saw you steal that ship. You'll rue the day"))
 				else
-					junkChaser:sendCommsMessage(playerRepulse,_("Stealing a ship, eh? We'll just see about that"))
+					junkChaser:sendCommsMessage(playerRepulse,_("commsShipBoris", "Stealing a ship, eh? We'll just see about that"))
 				end
 			end
 		end
