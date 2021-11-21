@@ -59,7 +59,6 @@ PlayerInfo::PlayerInfo()
 void PlayerInfo::reset()
 {
     ship_id = -1;
-    client_id = -1;
     main_screen_control = false;
 
     for(int n=0; n<max_crew_positions; n++)
