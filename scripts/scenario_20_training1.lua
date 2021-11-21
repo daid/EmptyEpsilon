@@ -75,7 +75,7 @@ end
 function commsInstr()
     if not instr1 and timer > 8.0 then
         instr1 = true
-        command:sendCommsMessage(player, _([[This is Commander Saberhagen.
+        command:sendCommsMessage(player, _("msgComms", [[This is Commander Saberhagen.
 
 In this training mission you will practice the basic controls of a Phobos light cruiser.
 Since this is not a tutorial, you will be on your own to decide how to destroy all enemy targets in an Exuari training ground.
@@ -97,7 +97,7 @@ function finished(delta)
         if not bonus:isValid() then
             bonusString = _("bonusTarget", "destroyed.")
         end
-        globalMessage(string.format(_("globalMsg", [[Mission Complete.
+        globalMessage(string.format(_("msgMainscreen", [[Mission Complete.
 Your Time: %d
 Bonus target %s
 
