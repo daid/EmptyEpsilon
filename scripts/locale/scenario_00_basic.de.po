@@ -16,7 +16,141 @@ msgstr ""
 msgid "Basic"
 msgstr "Basis-Szenario"
 
-#: scenario_00_basic.lua:472
+# Scenario description
+msgid ""
+"A few random stations are under attack by enemies, with random terrain "
+"around them. Destroy all enemies to win.\n"
+"\n"
+"The scenario provides a single player-controlled Atlantis, which is "
+"sufficient to win even in the \"Extreme\" variant.\n"
+"\n"
+"Other player ships can be spawned, but the strength of enemy ships is "
+"independent of the number and types of player ships."
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr ""
+
+msgctxt "enemies"
+msgid "empty"
+msgstr ""
+
+msgctxt "enemies"
+msgid ""
+"No enemies. Recommended for GM-controlled scenarios and rookie crew "
+"orientation. The scenario continues until the GM declares victory or all "
+"Human Navy ships are destroyed."
+msgstr ""
+
+msgctxt "enemies"
+msgid "easy"
+msgstr ""
+
+msgctxt "enemies"
+msgid "Fewer enemies. Recommended for inexperienced crews."
+msgstr ""
+
+msgctxt "enemies"
+msgid "normal"
+msgstr ""
+
+msgctxt "enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr ""
+
+msgctxt "enemies"
+msgid "hard"
+msgstr ""
+
+msgctxt "enemies"
+msgid "More enemies. Recommended if you have multiple player-controlled ships."
+msgstr ""
+
+msgctxt "enemies"
+msgid "extreme"
+msgstr ""
+
+msgctxt "enemies"
+msgid ""
+"Many enemies. Inexperienced player crews will pretty surely be overwhelmed."
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "time"
+msgstr ""
+
+msgctxt "setting"
+msgid "Sets up how much time the players have for the scenario"
+msgstr ""
+
+msgctxt "time"
+msgid "unlimited"
+msgstr ""
+
+msgctxt "time"
+msgid "No time limit"
+msgstr ""
+
+msgctxt "time"
+msgid "20min"
+msgstr ""
+
+msgctxt "time"
+msgid "Automatic loss after 20 minutes"
+msgstr ""
+
+msgctxt "time"
+msgid "30min"
+msgstr ""
+
+msgctxt "time"
+msgid "Automatic loss after 30 minutes"
+msgstr ""
+
+msgctxt "time"
+msgid "60min"
+msgstr ""
+
+msgctxt "time"
+msgid "Automatic loss after 60 minutes"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "playership"
+msgstr ""
+
+msgctxt "setting"
+msgid "Sets the default player ship"
+msgstr ""
+
+msgctxt "playership"
+msgid "atlantis"
+msgstr ""
+
+msgctxt "playership"
+msgid ""
+"Powerful ship with sidewards missile tubes. Requires more advanced play."
+msgstr ""
+
+msgctxt "playership"
+msgid "phobos m3p"
+msgstr ""
+
+msgctxt "playership"
+msgid ""
+"Simpler, less powerful ship. But easier to handler. Recommended for new "
+"crews."
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:475
 #, lua-format
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
@@ -37,7 +171,7 @@ msgstr ""
 "\n"
 "Viel Glück."
 
-#: scenario_00_basic.lua:482
+#: scripts/scenario_00_basic.lua:485
 #, lua-format
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
@@ -48,39 +182,39 @@ msgstr ""
 "\n"
 "Viel Glück."
 
-#: scenario_00_basic.lua:517
+#: scripts/scenario_00_basic.lua:520
 #, lua-format
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr "Mission ERFOLGREICH!  (%d Sekunden verbleibend)"
 
-#: scenario_00_basic.lua:528
+#: scripts/scenario_00_basic.lua:531
 msgid "Mission: FAILED (time has run out)"
 msgstr "Mission FEHLGESCHLAGEN (Zeit abgelaufen)"
 
-#: scenario_00_basic.lua:536
+#: scripts/scenario_00_basic.lua:539
 #, lua-format
 msgid "%s, you have %d minute remaining."
 msgstr "%s, Sie haben noch %d Minuten Zeit."
 
-#: scenario_00_basic.lua:541
+#: scripts/scenario_00_basic.lua:544
 #, lua-format
 msgid "%s, you have %d minutes remaining."
 msgstr "%s, Sie haben noch %d Minuten Zeit."
 
-#: scenario_00_basic.lua:546
+#: scripts/scenario_00_basic.lua:549
 #, lua-format
 msgid "%s, you have %d minutes remaining of mission time."
 msgstr "%s, Sie haben noch %d Minuten Zeit für die Mission."
 
-#: scenario_00_basic.lua:556
+#: scripts/scenario_00_basic.lua:559
 msgid "Mission: FAILED (no friendlies left)"
 msgstr "Mission: FEHLGESCHLAGEN (keine verbündeten Einheiten mehr im Spiel)"
 
-#: scenario_00_basic.lua:573
+#: scripts/scenario_00_basic.lua:576
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr "Mission: FEHLGESCHLAGEN (alle eigenen Schiffe wurden zerstört)"
 
-#: scenario_00_basic.lua:581
+#: scripts/scenario_00_basic.lua:584
 #, lua-format
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr "Mission läuft. Verbleibende Zeit: %d:%02d - Feinde: %d"
