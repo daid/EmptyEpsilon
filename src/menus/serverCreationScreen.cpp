@@ -250,18 +250,18 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
         auto selector = new GuiSelector(container, "", [this, info, setting](int index, string value) {
             gameGlobalInfo->scenario_settings[setting.key] = value;
             for(auto& option : setting.options)
-                if (option.first == value)
-                    description_per_setting[setting.key]->setText(option.second);
+                if (option.value == value)
+                    description_per_setting[setting.key]->setText(option.description);
             start_button->setEnable(gameGlobalInfo->scenario_settings.size() >= info.settings.size());
         });
         selector->setSize(GuiElement::GuiSizeMax, 50);
         for(auto& option : setting.options)
         {
-            selector->addEntry(option.first.capitalize(), option.first);
-            if (option.first == setting.default_option)
+            selector->addEntry(option.value_localized, option.value);
+            if (option.value == setting.default_option)
             {
                 selector->setSelectionIndex(selector->entryCount() - 1);
-                gameGlobalInfo->scenario_settings[setting.key] = option.first;
+                gameGlobalInfo->scenario_settings[setting.key] = option.value;
             }
         }
         auto description = new GuiScrollText(container, "", setting.description);

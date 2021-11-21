@@ -1,18 +1,27 @@
 #ifndef SCENARIO_INFO_H
 #define SCENARIO_INFO_H
 
+#include <i18n.h>
 #include "stringImproved.h"
 
 class ScenarioInfo
 {
 public:
+    class SettingOption
+    {
+    public:
+        string value;
+        string value_localized;
+        string description;
+    };
     class Setting
     {
     public:
         string key;
+        string key_localized;
         string description;
         string default_option;
-        std::vector<std::pair<string, string>> options;
+        std::vector<SettingOption> options;
     };
 
     string filename;
