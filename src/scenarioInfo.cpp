@@ -84,7 +84,7 @@ void ScenarioInfo::addKeyValue(string key, string value)
     }
     else if (key.lower() == "variation" && additional != "")
     {
-        if (!addSettingOption("variation", additional, locale->tr(value)))
+        if (!addSettingOption("variation", additional, value))
         {
             Setting setting;
             setting.key = "variation";
@@ -92,7 +92,7 @@ void ScenarioInfo::addKeyValue(string key, string value)
             setting.description = "Select a scenario variation";
             setting.options.push_back({"None", "None", ""});
             settings.push_back(setting);
-            addSettingOption("variation", additional, locale->tr(value));
+            addSettingOption("variation", additional, value);
         }
     }
     else if (key.lower() == "setting" && additional != "")
@@ -100,10 +100,10 @@ void ScenarioInfo::addKeyValue(string key, string value)
         Setting setting;
         setting.key = additional;
         setting.key_localized = locale->tr("setting", additional);
-        setting.description = locale->tr(value);
+        setting.description = locale->tr("setting", value);
         settings.push_back(setting);
     }
-    else if (additional == "" || !addSettingOption(key, additional, locale->tr(value)))
+    else if (additional == "" || !addSettingOption(key, additional, value))
     {
         LOG(WARNING) << "Unknown scenario meta data: " << key << ": " << value;
     }
@@ -144,7 +144,7 @@ bool ScenarioInfo::addSettingOption(string key, string option, string descriptio
     {
         if (setting.key == key)
         {
-            setting.options.push_back({option, locale->tr(key, option), description});
+            setting.options.push_back({option, locale->tr(key, option), locale->tr(key, description)});
             if (tag == "default")
                 setting.default_option = option;
             return true;
