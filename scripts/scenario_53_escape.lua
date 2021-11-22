@@ -32,7 +32,7 @@ function init()
 	componentGoods = {"impulse","warp","shield","tractor","repulsor","beam","optic","robotic","filament","transporter","sensor","communication","autodoc","lifter","android","nanites","software","circuit","battery"}
 	mineralGoods = {"nickel","platinum","gold","dilithium","tritanium","cobalt"}
 	diagnostic = false			
-	GMDiagnosticOn = _("GMButton", "Turn On Diagnostic")
+	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	independentTransportSpawnDelay = 20
 	independentTransportList = {}
@@ -4835,7 +4835,7 @@ function checkForSuffocationOnFighter(delta)
 			playerFighter:addCustomInfo("Operations",playerFighter.suffocation_timer_ops,suffocation_label)
 		end
 		if suffocation_timer < 0 then
-			globalMessage(_("msgGlobal", "You suffocated while aboard the fighter hulk"))
+			globalMessage(_("msgMainscreen", "You suffocated while aboard the fighter hulk"))
 			victory("Kraylor")
 			if playerFighter.suffocation_timer ~= nil then
 				playerFighter:removeCustom(playerFighter.suffocation_timer)

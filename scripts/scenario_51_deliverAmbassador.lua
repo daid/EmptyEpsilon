@@ -279,10 +279,10 @@ end
 -- Tell player to get the ambassador. Create the planet. Start the revolution delay timer
 function getAmbassador(delta)
 	outpost41:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: CMDMICHL012"))
-	player:addToShipLog(string.format(_("audioshiplog", "[CMDMICHL012](Commander Michael) %s, avoid contact where possible. Get ambassador Gremus at Balindor Prime"), playerCallSign),"Yellow")
+	player:addToShipLog(string.format(_("audioShipLog", "[CMDMICHL012](Commander Michael) %s, avoid contact where possible. Get ambassador Gremus at Balindor Prime"), playerCallSign),"Yellow")
 	if playMsgMichaelButton == nil then
 		playMsgMichaelButton = "play"
-		player:addCustomButton("Relay",playMsgMichaelButton,_("buttonRelay&Stratmap", "|> CMDMICHL012"),playMsgMichael)
+		player:addCustomButton("Relay",playMsgMichaelButton,_("audioButtonRelay&Stratmap", "|> CMDMICHL012"),playMsgMichael)
 	end
 	balindorPrime = Planet():setPosition(-50500,84000):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0):setAxialRotationTime(400.0)
 	plot1 = ambassadorAboard
@@ -304,10 +304,10 @@ function revolutionFomenting(delta)
 	fomentTimer = fomentTimer + delta
 	if fomentTimer > 60 then
 		bpcommnex:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS001"))
-		player:addToShipLog(_("audioshiplog", "[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There is serious unrest here on Balindor Prime. I am not sure how long I am going to survive. Please hurry, I can hear a mob outside my compound."),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There is serious unrest here on Balindor Prime. I am not sure how long I am going to survive. Please hurry, I can hear a mob outside my compound."),"Yellow")
 		if playMsgGremus1Button == nil then
 			playMsgGremus1Button = "play"
-			player:addCustomButton("Relay",playMsgGremus1Button,_("buttonRelay&Stratmap", "|> AMBGREMUS001"),playMsgGremus1)
+			player:addCustomButton("Relay",playMsgGremus1Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS001"),playMsgGremus1)
 		end
 		breakoutTimer = 60 * 5
 		plot2 = revolutionOccurs
@@ -326,14 +326,14 @@ function revolutionOccurs(delta)
 	if breakoutTimer < 0 then
 		if ambassadorEscapedBalindor then
 			bpcommnex:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: GREMUSGRD003"))
-			player:addToShipLog(_("audioshiplog", "[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon."),"Yellow")
+			player:addToShipLog(_("audioShipLog", "[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon."),"Yellow")
 			if playMsgSentry1Button == nil then
 				playMsgSentry1Button = "play"
-				player:addCustomButton("Relay",playMsgSentry1Button,_("buttonRelay&Stratmap", "|> GREMUSGRD003"),playMsgSentry1)
+				player:addCustomButton("Relay",playMsgSentry1Button,_("audioButtonRelay&Stratmap", "|> GREMUSGRD003"),playMsgSentry1)
 			end
 			plot2 = nil
 		else
-			globalMessage(_("msgMainscreen", [[Ambassador lost to hostile mob. The Kraylors are victorious]]))
+			globalMessage(_("audioMsgMainscreen", [[Ambassador lost to hostile mob. The Kraylors are victorious]]))
 			bpcommnex:sendCommsMessage(player, _("audioMsgComms", [[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]]))
 			playSoundFile("audio/scenario/51/sa_51_Sentry2.ogg")
 			plot2 = defeat
@@ -347,7 +347,7 @@ function revolutionOccurs(delta)
 			player.mob_timer_ops = nil
 		end
 	else
-		local mob_label = _("tabRelay&Ops&Stratmap", "Mob Action")
+		local mob_label = _("audioTabRelay&Ops&Stratmap", "Mob Action")
 		local mob_minutes = math.floor(breakoutTimer / 60)
 		local mob_seconds = math.floor(breakoutTimer % 60)
 		if mob_minutes <= 0 then
@@ -432,10 +432,10 @@ function ambassadorAboard(delta)
 	if distance(player, balindorPrime) < 3300 then
 		ambassadorEscapedBalindor = true
 		bpcommnex:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS004"))
-		player:addToShipLog(_("audioshiplog", "[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please transport me to Ningling."),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please transport me to Ningling."),"Yellow")
 		if playMsgGremus2Button == nil then
 			playMsgGremus2Button = "play"
-			player:addCustomButton("Relay",playMsgGremus2Button,_("buttonRelay&Stratmap", "|> AMBGREMUS004"),playMsgGremus2)
+			player:addCustomButton("Relay",playMsgGremus2Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS004"),playMsgGremus2)
 		end		
 		ningling = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 		ningling:setPosition(12200,-62600):setCallSign("Ningling")
@@ -519,10 +519,10 @@ function gotoNingling(delta)
 	end
 	if player:isDocked(ningling) then
 		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: NINGPCLO002"))
-		player:addToShipLog(_("audioshiplog", "[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The ambassador is scheduled for a brief meeting with liaison Fordina. After that meeting, you will be asked to transport the ambassador to Goltin 7. We will contact you after the meeting."),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The ambassador is scheduled for a brief meeting with liaison Fordina. After that meeting, you will be asked to transport the ambassador to Goltin 7. We will contact you after the meeting."),"Yellow")
 		if playMsgProtocolButton == nil then
 			playMsgProtocolButton = "play"
-			player:addCustomButton("Relay",playMsgProtocolButton,_("buttonRelay&Stratmap", "|> NINGPCLO002"),playMsgProtocol)
+			player:addCustomButton("Relay",playMsgProtocolButton,_("audioButtonRelay&Stratmap", "|> NINGPCLO002"),playMsgProtocol)
 		end
 		plot1 = waitForAmbassador
 		meetingTimer = 0.0
@@ -572,10 +572,10 @@ function waitForAmbassador(delta)
 	meetingTimer = meetingTimer + delta
 	if meetingTimer > 60 * 5 and not player:isDocked(ningling) then
 		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS007"))
-		player:addToShipLog(string.format(_("audioshiplog", "[AMBGREMUS007](Ambassador Gremus) %s, I am ready to be transported to Goltin 7. Please dock with Ningling"), playerCallSign),"Yellow")
+		player:addToShipLog(string.format(_("audioShipLog", "[AMBGREMUS007](Ambassador Gremus) %s, I am ready to be transported to Goltin 7. Please dock with Ningling"), playerCallSign),"Yellow")
 		if playMsgGremus3Button == nil then
 			playMsgGremus3Button = "play"
-			player:addCustomButton("Relay",playMsgGremus3Button,_("buttonRelay&Stratmap", "|> AMBGREMUS007"),playMsgGremus3)
+			player:addCustomButton("Relay",playMsgGremus3Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS007"),playMsgGremus3)
 		end
 		plot1 = getFromNingling
 	end
@@ -594,15 +594,15 @@ function getFromNingling(delta)
 	end
 	if player:isDocked(ningling) then
 		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021"))
-		player:addToShipLog(_("audioshiplog", "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"),"Yellow")
 		player:addToShipLog(_("shipLog", "Reconfigured beam weapons: pointed one forward and increased its range and narrowed its focus"),"Magenta")
 		if getScenarioVariation() ~= "Hard" then
 			player:setImpulseMaxSpeed(75)
-			player:addToShipLog(_("shiplog", "Also increased the top speed of your impulse engine"),"Magenta")
+			player:addToShipLog(_("shipLog", "Also increased the top speed of your impulse engine"),"Magenta")
 		end
 		if playMsgGremus4Button == nil then
 			playMsgGremus4Button = "play"
-			player:addCustomButton("Relay",playMsgGremus4Button,_("buttonRelay&Stratmap", "|> AMBGREMUS021"),playMsgGremus4)
+			player:addCustomButton("Relay",playMsgGremus4Button,_("AudioButtonRelay&Stratmap", "|> AMBGREMUS021"),playMsgGremus4)
 		end
 		player:setTypeName("Flavia P. Falcon MK2")
 		player:setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
@@ -625,10 +625,10 @@ end
 function artifactResearch(delta)
 	if distance(player, ningling) > 10000 then
 		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: LSNFRDNA009"))
-		player:addToShipLog(_("audioshiplog", "[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that follow-up information from Goltin 7 we spoke of. It seems they want additional information about several artifacts. Some of these have been reported by stations in the area: Pangora, Nakor and Science-37."),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that follow-up information from Goltin 7 we spoke of. It seems they want additional information about several artifacts. Some of these have been reported by stations in the area: Pangora, Nakor and Science-37."),"Yellow")
 		if playMsgFordinaButton == nil then
 			playMsgFordinaButton = "play"
-			player:addCustomButton("Relay",playMsgFordinaButton,_("buttonRelay&Stratmap", "|> LSNFRDNA009"),playMsgFordina)
+			player:addCustomButton("Relay",playMsgFordinaButton,_("audioButtonRelay&Stratmap", "|> LSNFRDNA009"),playMsgFordina)
 		end
 		askForPangoraLocation = "ready"
 		askForNakorLocation = "ready"
@@ -807,10 +807,10 @@ function travelGoltin(delta)
 	else
 		if distance(player, goltin) < 3300 then
 			goltincomms:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS032"))
-			player:addToShipLog(string.format(_("audioshiplog", "[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."),playerCallSign),"Yellow")
+			player:addToShipLog(string.format(_("audioshipLog", "[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."),playerCallSign),"Yellow")
 			if playMsgGremus6Button == nil then
 				playMsgGremus6Button = "play"
-				player:addCustomButton("Relay",playMsgGremus6Button,_("buttonRelay&Stratmap", "|> AMBGREMUS032"),playMsgGremus6)
+				player:addCustomButton("Relay",playMsgGremus6Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS032"),playMsgGremus6)
 			end			
 			plot1 = departForResearch
 		end

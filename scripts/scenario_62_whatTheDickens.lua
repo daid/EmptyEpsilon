@@ -227,11 +227,11 @@ function init()
 	graveyardSpawned = false
 	cemeteryDocked = false
 	necropolisDocked = false
-	GMChristmasPast = _("GMButton", "Christmas Past")
+	GMChristmasPast = _("buttonGM", "Christmas Past")
 	addGMFunction(GMChristmasPast,christmasPast)
-	GMChristmasPresent = _("GMButton", "Christmas Present")
+	GMChristmasPresent = _("buttonGM", "Christmas Present")
 	addGMFunction(GMChristmasPresent,christmasPresent)
-	GMChristmasFuture = _("GMButton", "Christmas Future")
+	GMChristmasFuture = _("buttonGM", "Christmas Future")
 	addGMFunction(GMChristmasFuture,christmasFuture)
 	wfv = "end of init"
 end
@@ -624,7 +624,7 @@ end
 
 function camdenSensorReading(delta)
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(_("shipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
+		player:addToShipLog(_("audioShipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London1.ogg")
 		secondaryOrders = _("orders", "Investigate near station Camden in A2")
 		plot1 = arriveA2
@@ -644,7 +644,7 @@ end
 
 function scanMarleyArtifact(delta)
 	if marleyArt:isScannedBy(player) then
-		player:addToShipLog(_("shipLog", "[Jacob Marley] Do you remember your partner from previous missions? Especially the one where Marley station was destroyed? I am doomed to haunt this area of space forever. Take care or suffer the same fate."),"Red")
+		player:addToShipLog(_("audioShipLog", "[Jacob Marley] Do you remember your partner from previous missions? Especially the one where Marley station was destroyed? I am doomed to haunt this area of space forever. Take care or suffer the same fate."),"Red")
 		playSoundFile("audio/scenario/62/sa_62_Marley1.ogg")
 		plot1 = explosionDelay
 		plot1name = "explosionDelay"
@@ -702,7 +702,7 @@ function marleyMob(delta)
 				table.insert(marleyList, enemyBind)
 			end
 		end
-		player:addToShipLog(_("shipLog", "[Jacob Marley] You must defeat the chains that bind you in the form of Kraylor ships"),"Red")
+		player:addToShipLog(_("audioShipLog", "[Jacob Marley] You must defeat the chains that bind you in the form of Kraylor ships"),"Red")
 		playSoundFile("audio/scenario/62/sa_62_Marley2.ogg")
 		secondaryOrders = _("orders", "Defeat Kraylors")
 	end
@@ -717,7 +717,7 @@ function destroyMarleyMob(delta)
 	end
 	if marleyMobCount == 0 then
 		player:addReputationPoints(50)
-		player:addToShipLog(string.format(_("shipLog", "[Jacob Marley] Defeating the Kraylors gives you an idea of what is to come. Return to Somerset in %s and prepare for three ghostly visits"),stationSomerset:getSectorName()),"Red")
+		player:addToShipLog(string.format(_("audioShipLog", "[Jacob Marley] Defeating the Kraylors gives you an idea of what is to come. Return to Somerset in %s and prepare for three ghostly visits"),stationSomerset:getSectorName()),"Red")
 		playSoundFile("audio/scenario/62/sa_62_Marley3.ogg")
 		plot1 = startChristmasPast
 		plot1name = "startChristmasPast"
@@ -728,7 +728,7 @@ end
 
 function startChristmasPast(delta)
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(string.format(_("shipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
+		player:addToShipLog(string.format(_("audioShipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London2.ogg")
 		secondaryOrders = string.format(_("orders", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
 		plot1 = arriveNearMillbank
@@ -878,7 +878,7 @@ function destroyFezFleet(delta)
 	end
 	if fezFleetCount == 0 then
 		player:addReputationPoints(50)
-		player:addToShipLog(string.format(_("shipLog", "Belle has come. Be sure she makes it to Fezziwig in %s"),stationFezziwig:getSectorName()),"Blue")
+		player:addToShipLog(string.format(_("audioShipLog", "Belle has come. Be sure she makes it to Fezziwig in %s"),stationFezziwig:getSectorName()),"Blue")
 		playSoundFile("audio/scenario/62/sa_62_Child2.ogg")
 		belleAngle = random(170,190)
 		vx, vy = vectorFromAngle(belleAngle,20000)
@@ -930,7 +930,7 @@ function destroyBelleFleet(delta)
 	end
 	if belleFleetCount == 0 or distance(friendBelle,stationFezziwig) < 1000 then
 		player:addReputationPoints(50)
-		player:addToShipLog(_("shipLog", "You protected Belle. Somerset awaits"),"Blue")
+		player:addToShipLog(_("audioShipLog", "You protected Belle. Somerset awaits"),"Blue")
 		playSoundFile("audio/scenario/62/sa_62_Child3.ogg")
 		plot1 = startChristmasPresent
 		secondaryOrders = _("orders", "Dock with Somerset")
@@ -948,7 +948,7 @@ end
 
 function startChristmasPresent(delta)
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(string.format(_("shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
+		player:addToShipLog(string.format(_("audioShipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London3.ogg")
 		secondaryOrders = string.format(_("orders", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
 		plot1 = arriveNearBedlam
@@ -958,7 +958,7 @@ end
 
 function arriveNearBedlam(delta)
 	if distance(player,stationBedlam) < 3000 then
-		player:addToShipLog(_("shipLog", "[Bob Cratchit on station Bedlam] Happy Christmas, Scrooge! You are just in time to make our holiday bright. I know it is against your nature, but surely you can decorate our skies with alien enemy ship explosions. In the worst case, we will get a sky decorated with your ship exploding."),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[Bob Cratchit on station Bedlam] Happy Christmas, Scrooge! You are just in time to make our holiday bright. I know it is against your nature, but surely you can decorate our skies with alien enemy ship explosions. In the worst case, we will get a sky decorated with your ship exploding."),"Yellow")
 		playSoundFile("audio/scenario/62/sa_62_BobCratchit1.ogg")
 		cratchitList = {}
 		px, py = player:getPosition()
@@ -997,7 +997,7 @@ function destroyCratchitFleet(delta)
 	if cratchitFleetCount == 0 then
 		if stationBedlam:isValid() then
 			player:addReputationPoints(50)
-			player:addToShipLog(_("shipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
+			player:addToShipLog(_("audioShipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
 			playSoundFile("audio/scenario/62/sa_62_BobCratchit2.ogg")
 			turkeyAngle = random(90,180)
 			bx, by = stationBedlam:getPosition()
@@ -1013,7 +1013,7 @@ function destroyCratchitFleet(delta)
 			timLifeTimer = 240
 			timHalfLife = timLifeTimer/2
 		else
-			globalMessage(_("msgGlobal", "[Ghost of Christmas present] While you fought off the ships near Bedlam, Tiny Tim, Bob Cratchit's maintenance technician perished along with the others aboard station Bedlam. Your engineering crew were so overcome with grief that they neglected a routie maintenance cycle causing engine failure on HMS Scrooge."),"Red")
+			globalMessage(_("msgMainscreen", "[Ghost of Christmas present] While you fought off the ships near Bedlam, Tiny Tim, Bob Cratchit's maintenance technician perished along with the others aboard station Bedlam. Your engineering crew were so overcome with grief that they neglected a routie maintenance cycle causing engine failure on HMS Scrooge."),"Red")
 			victory("Ghosts")
 		end
 	end
@@ -1083,7 +1083,7 @@ end
 function presentOutrage(delta)
 	presentOutrageTimer = presentOutrageTimer - delta
 	if presentOutrageTimer < 0 then
-		player:addToShipLog(_("shipLog", "How dare you bring us here!"),"#556b2f")
+		player:addToShipLog(_("audioShipLog", "How dare you bring us here!"),"#556b2f")
 		playSoundFile("audio/scenario/62/sa_62_Kralien1.ogg")
 		plot2 = presentIntent
 		plot2name = "presentIntent"
@@ -1094,7 +1094,7 @@ end
 function presentIntent(delta)
 	presentIntentTimer = presentIntentTimer - delta
 	if presentIntentTimer < 0 then
-		player:addToShipLog(_("shipLog", "Silence! Since we are here, let us destroy Somerset"),"#556b2f")
+		player:addToShipLog(_("audioShipLog", "Silence! Since we are here, let us destroy Somerset"),"#556b2f")
 		playSoundFile("audio/scenario/62/sa_62_Kralien2.ogg")
 		plot2 = nil
 		plot2name = ""
@@ -1126,11 +1126,11 @@ function timIll(delta)
 				if player:getShieldsActive() then
 					if shieldsOnMsg == nil then
 						shieldsOnMsg = "sent"
-						player:addToShipLog(_("shipLog", "[Turkey Surprise] We cannot transport through your shields. Please lower them"),"Cyan")
+						player:addToShipLog(_("audioShipLog", "[Turkey Surprise] We cannot transport through your shields. Please lower them"),"Cyan")
 						playSoundFile("audio/scenario/62/sa_62_Turkey1.ogg")
 					end
 				else
-					player:addToShipLog(_("shipLog", "[Turkey Surprise] We have transported Tim and our doctors are examining him"),"Cyan")
+					player:addToShipLog(_("audioShipLog", "[Turkey Surprise] We have transported Tim and our doctors are examining him"),"Cyan")
 					playSoundFile("audio/scenario/62/sa_62_Turkey3.ogg")
 					plot1 = timHeal
 					plot1name = "timHeal"
@@ -1141,7 +1141,7 @@ function timIll(delta)
 		end
 	end
 	if timLifeTimer < 0 then
-		globalMessage(string.format(_("msgGlobal", "Tim dies. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
+		globalMessage(string.format(_("msgMainscreen", "Tim dies. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
 		victory("Ghosts")
 	end
 end
@@ -1149,7 +1149,7 @@ end
 function timHeal(delta)
 	timHealTimer = timHealTimer - delta
 	if timHealTimer < 0 then
-		player:addToShipLog(_("shipLog", "[Bob Cratchit] Turkey Surprise tells me Tim is doing fine. In fact, he's ready to return to duty. We need him here for critical repairs. Would you bring him home, please?"),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[Bob Cratchit] Turkey Surprise tells me Tim is doing fine. In fact, he's ready to return to duty. We need him here for critical repairs. Would you bring him home, please?"),"Yellow")
 		playSoundFile("audio/scenario/62/sa_62_BobCratchit3.ogg")
 		timAboard = false
 		plot1 = returnTim
@@ -1157,7 +1157,7 @@ function timHeal(delta)
 		secondaryOrders = _("orders", "Return Tim to Bedlam")
 	end
 	if not friendTurkeySurprise:isValid() then
-		globalMessage(string.format(_("msgGlobal", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
+		globalMessage(string.format(_("msgMainscreen", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
 		victory("Ghosts")
 	end
 end
@@ -1165,7 +1165,7 @@ end
 function returnTim(delta)
 	if timAboard then
 		if player:isDocked(stationBedlam) then
-			player:addToShipLog(_("shipLog", "[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you"),"Yellow")
+			player:addToShipLog(_("audioShipLog", "[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you"),"Yellow")
 			playSoundFile("audio/scenario/62/sa_62_BobCratchit4.ogg")
 			plot1 = endChristmasPast
 			plot1name = "endChristmasPast"
@@ -1176,7 +1176,7 @@ function returnTim(delta)
 			if player:getShieldsActive() then
 				if shieldsOnMsg == nil then
 					shieldsOnMsg = "sent"
-					player:addToShipLog(_("shipLog", "[Turkey Surprise] We cannot transport through your shields. Please lower them"),"Cyan")
+					player:addToShipLog(_("audioShipLog", "[Turkey Surprise] We cannot transport through your shields. Please lower them"),"Cyan")
 					playSoundFile("audio/scenario/62/sa_62_Turkey2.ogg")
 				end
 			else
@@ -1185,7 +1185,7 @@ function returnTim(delta)
 			end
 		end
 		if not friendTurkeySurprise:isValid() then
-			globalMessage(string.format(_("msgGlobal", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
+			globalMessage(string.format(_("msgMainscreen", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
 			victory("Ghosts")
 		end
 	end
@@ -1204,7 +1204,7 @@ end
 function startChristmasFuture(delta)
 	secondaryOrders = _("orders", "Dock with Somerset")
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(string.format(_("shipLog", "We are glad you took care of those Ghosts in the machine. They came out of nowhere! We still saw some impossible sensor readings even after our sensor overhaul. We are now conducting a level 5 diagnostic and repair regimen. Keep an eye on the City in %s"),stationCity:getSectorName()),"Magenta")
+		player:addToShipLog(string.format(_("audioShipLog", "We are glad you took care of those Ghosts in the machine. They came out of nowhere! We still saw some impossible sensor readings even after our sensor overhaul. We are now conducting a level 5 diagnostic and repair regimen. Keep an eye on the City in %s"),stationCity:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London4.ogg")
 		secondaryOrders = string.format(_("orders", "Watch the City in %s"),stationCity:getSectorName())
 		cx, cy = stationCity:getPosition()
@@ -1494,7 +1494,7 @@ end
 function returnMsg2(delta)
 	returnMsg2Timer = returnMsg2Timer - delta
 	if returnMsg2Timer < 0 and distance(player,stationSomerset) < 80000 then
-		player:addToShipLog(_("shipLog", "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"),"Red")
+		player:addToShipLog(_("audioShipLog", "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"),"Red")
 		playSoundFile("audio/scenario/62/sa_62_Marley4.ogg")
 		plot1 = returnMsg3
 		plot1name = "returnMsg3"
@@ -1505,7 +1505,7 @@ end
 function returnMsg3(delta)
 	returnMsg3Timer = returnMsg3Timer - delta
 	if returnMsg3Timer < 0 and distance(player,stationSomerset) < 70000 then
-		player:addToShipLog(_("shipLog", "May the shadows of the things that have been continue to remind you of the joy of Christmas"),"Blue")
+		player:addToShipLog(_("audioShipLog", "May the shadows of the things that have been continue to remind you of the joy of Christmas"),"Blue")
 		playSoundFile("audio/scenario/62/sa_62_Child4.ogg")
 		plot1 = returnMsg4
 		plot1name = "returnMsg4"
@@ -1526,7 +1526,7 @@ end
 function returnMsg5(delta)
 	returnMsg5Timer = returnMsg5Timer - delta
 	if returnMsg5Timer < 0 and distance(player,stationSomerset) < 50000 then
-		player:addToShipLog(_("shipLog", "[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!"),"Cyan")
+		player:addToShipLog(_("audioShipLog", "[Urchin Express]\nHappy Christmas, sir!\nTop o' the day to ya!\nThanks for the shillings!"),"Cyan")
 		playSoundFile("audio/scenario/62/sa_62_Urchins.ogg")
 		plot1 = returnMsg6
 		plot1name = "returnMsg6"
@@ -1537,7 +1537,7 @@ end
 function returnMsg6(delta)
 	returnMsg6Timer = returnMsg6Timer - delta
 	if returnMsg6Timer < 0 and distance(player,stationSomerset) < 40000 then
-		player:addToShipLog(_("shipLog", "[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty"),"Green")
+		player:addToShipLog(_("audioShipLog", "[Fred from QE17] Merry Christmas, uncle! Stop by and share Christmas dinner with us when you're off duty"),"Green")
 		playSoundFile("audio/scenario/62/sa_62_Fred.ogg")
 		plot1 = returnMsg7
 		plot1name = "returnMsg7"
@@ -1548,7 +1548,7 @@ end
 function returnMsg7(delta)
 	returnMsg7Timer = returnMsg7Timer - delta
 	if returnMsg7Timer < 0 and distance(player,stationSomerset) < 30000 then
-		player:addToShipLog(_("shipLog", "[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim"),"Yellow")
+		player:addToShipLog(_("audioShipLog", "[Bob on Cratchit Cruiser] Happy Christmas, Mr. Scrooge. Thanks for the raise and for helping Tiny Tim"),"Yellow")
 		playSoundFile("audio/scenario/62/sa_62_BobCratchit5.ogg")
 		plot1 = returnMsg8
 		plot1name = "returnMsg8"
@@ -1559,7 +1559,7 @@ end
 function returnMsg8(delta)
 	returnMsg8Timer = returnMsg8Timer - delta
 	if returnMsg8Timer < 0 and distance(player,stationSomerset) < 20000 then
-		player:addToShipLog(_("shipLog", "[Tim on Cratchit Cruiser] God bless us every one"),"White")
+		player:addToShipLog(_("audioShipLog", "[Tim on Cratchit Cruiser] God bless us every one"),"White")
 		playSoundFile("audio/scenario/62/sa_62_Tim.ogg")
 		plot1 = returnMsg9
 		plot1name = "returnMsg9"
@@ -1571,7 +1571,7 @@ function returnMsg9(delta)
 	returnMsg9Timer = returnMsg9Timer - delta
 	if returnMsg9Timer < 0 and distance(player,stationSomerset) < 10000 then
 		if difficulty > 1 then
-			player:addToShipLog(_("shipLog", "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"),"White")
+			player:addToShipLog(_("audioShipLog", "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"),"White")
 			playSoundFile("audio/scenario/62/sa_62_Tim2.ogg")
 		end
 		plot1 = finalDock
@@ -1581,7 +1581,7 @@ end
 
 function finalDock(delta)
 	if player:isDocked(stationSomerset) then
-		globalMessage(_("msgGlobal", "Merry Christmas!"))
+		globalMessage(_("msgMainscreen", "Merry Christmas!"))
 		victory("Human Navy")
 	end
 end
@@ -1592,7 +1592,7 @@ function update(delta)
 		--game paused
 	end
 	if not stationSomerset:isValid() then
-		globalMessage(string.format(_("msgGlobal", "Somerset destroyed. %s dishonored and meaner. Christmas is ruined"),player:getCallSign()))
+		globalMessage(string.format(_("msgMainscreen", "Somerset destroyed. %s dishonored and meaner. Christmas is ruined"),player:getCallSign()))
 		victory("Kraylor")
 	end
 	if plot1 ~= nil then

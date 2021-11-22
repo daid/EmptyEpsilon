@@ -76,10 +76,10 @@ function init()
 					{"battery",0}	}
 	diagnostic = false		
 	spawnStrings = {}
-	GMDiagnosticOn = _("GMButton", "Turn On Diagnostic")
+	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	interWave = 150
-	GMDelayNormalToSlow = _("GMButton", "Delay normal to slow")
+	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 	goods = {}					--overall tracking of goods
 	stationList = {}			--friendly and neutral stations
@@ -281,13 +281,13 @@ end
 function turnOnDiagnostic()
 	diagnostic = true
 	removeGMFunction(GMDiagnosticOn)
-	GMDiagnosticOff = _("GMButton", "Turn Off Diagnostic")
+	GMDiagnosticOff = _("buttonGM", "Turn Off Diagnostic")
 	addGMFunction(GMDiagnosticOff,turnOffDiagnostic)
 end
 function turnOffDiagnostic()
 	diagnostic = false
 	removeGMFunction(GMDiagnosticOff)
-	GMDiagnosticOn = _("GMButton", "Turn On Diagnostic")
+	GMDiagnosticOn = _("buttonGM", "Turn On Diagnostic")
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 end
 ------- In game GM buttons to change the delay between waves -------
@@ -299,19 +299,19 @@ end
 function delayNormalToSlow()
 	interWave = 600
 	removeGMFunction(GMDelayNormalToSlow)
-	GMDelaySlowToFast = _("GMButton", "Delay slow to fast")
+	GMDelaySlowToFast = _("buttonGM", "Delay slow to fast")
 	addGMFunction(GMDelaySlowToFast,delaySlowToFast)
 end
 function delaySlowToFast()
 	interWave = 20
 	removeGMFunction(GMDelaySlowToFast)
-	GMDelayFastToNormal = _("GMButton", "Delay fast to normal")
+	GMDelayFastToNormal = _("buttonGM", "Delay fast to normal")
 	addGMFunction(GMDelayFastToNormal,delayFastToNormal)
 end
 function delayFastToNormal()
 	interWave = 150
 	removeGMFunction(GMDelayFastToNormal)
-	GMDelayNormalToSlow = _("GMButton", "Delay normal to slow")
+	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 end
 --translate variations into a numeric difficulty value

@@ -6685,7 +6685,7 @@ function handleUndockedState()
 				end
 			end
 			oMsg = oMsg .. "\nwfv: " .. wfv
-			oMsg = oMsg .. string.format(_("\nSupply drop: %s"),comms_target.comms_data.services.supplydrop)
+			oMsg = oMsg .. string.format("\nSupply drop: %s",comms_target.comms_data.services.supplydrop)
 			setCommsMessage(oMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -7108,8 +7108,8 @@ function initialOrders(delta)
 				local p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
 					foundPlayer = true
-					p:addToShipLog(string.format(_("You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
-					primaryOrders = string.format(_("Protect %s"),homeStation:getCallSign())
+					p:addToShipLog(string.format(_("audioGoalShipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
+					primaryOrders = string.format(_("commsStation", "Protect %s"),homeStation:getCallSign())
 					playSoundFile("audio/scenario/55/sa_55_Commander1.ogg")
 				end
 			end
@@ -7395,7 +7395,7 @@ function easyDelivery(delta)
 				plot2 = nil
 				plot2reminder = nil
 			else
-				p:addToShipLog(string.format(_("commsTrade", "[%s] We need some goods of type %s. Can you help? I hear %s has some"),homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
+				p:addToShipLog(string.format(_("audioTradeShipLog", "[%s] We need some goods of type %s. Can you help? I hear %s has some"),homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
 				plot2reminder = string.format(_("commsTrade", "Bring %s to %s. Possible source: %s"),easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
 				playSoundFile("audio/scenario/55/sa_55_Manager1.ogg")
 			end
@@ -8269,7 +8269,7 @@ function insertAgentDelay(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format(_("commsPaulStraight", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
+				p:addToShipLog(string.format(_("PaulShiplog", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
 				plot4reminder = string.format(_("commsPaulStraight", "Get Paul Straight at station %s"),homeStation:getCallSign())
 			end
 		end
@@ -8291,7 +8291,7 @@ function getAgentStraight(delta)
 					end
 				end
 			end
-			p:addToShipLog(string.format(_("commsPaulStraight", "[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"95,158,160")
+			p:addToShipLog(string.format(_("PaulShiplog", "[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"95,158,160")
 			plot4reminder = string.format(_("commsPaulStraight", "Take Paul Straight to within 20U of %s in %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
 			plot4 = scanEnemyStation
 			break
@@ -8307,7 +8307,7 @@ function scanEnemyStation(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 20000 then
 					insertRunDelayTimer = 15
-					p:addToShipLog(_("commsPaulStraight", "[Paul Straight] I've got my readings. Let me calibrate the transporter"),"95,158,160")
+					p:addToShipLog(_("PaulShiplog", "[Paul Straight] I've got my readings. Let me calibrate the transporter"),"95,158,160")
 					if p:hasPlayerAtPosition("Helms") then
 						inRangeMsg = "inRangeMsg"
 						p:addCustomMessage("Helms",inRangeMsg,_("msgHelms", "[Paul Straight] The ship is in range. I completed my scans. Thank you"))
@@ -8324,7 +8324,7 @@ function scanEnemyStation(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog(_("commsPaulStraight", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
+				p:addToShipLog(_("PaulShiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
 				break
 			end
@@ -8340,7 +8340,7 @@ function insertRunDelay(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog(string.format(_("commsPaulStraight", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
+					p:addToShipLog(string.format(_("PaulShiplog", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
 					plot4reminder = string.format(_("commsPaulStraight", "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
 					plot4 = insertRun
 					break
@@ -8350,7 +8350,7 @@ function insertRunDelay(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog(_("commsPaulStraight", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
+					p:addToShipLog(_("PaulShiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 					choooseNextPlot4line()
 					break
 				end
@@ -8384,7 +8384,7 @@ function insertRun(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog(_("commsPaulStraight", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
+				p:addToShipLog(_("PaulShiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
 				break
 			end
@@ -8432,7 +8432,7 @@ function resultDelay2(delta)
 		resultDelay2Timer = resultDelay2Timer - delta
 		if resultDelay2Timer < 0 then
 			p = closestPlayerTo(insertEnemyStation)
-			p:addToShipLog(string.format(_("commsPaulStraight", "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming..."),targetEnemyStation:getCallSign()),"95,158,160")
+			p:addToShipLog(string.format(_("PaulMsgComms", "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming..."),targetEnemyStation:getCallSign()),"95,158,160")
 			straightExecutionTimer = random(40,80)
 			plot4 = straightExecution
 		end
@@ -8460,7 +8460,7 @@ function straightExecution(delta)
 		straightExecutionTimer = straightExecutionTimer - delta
 		if straightExecutionTimer < 0 then
 			p = closestPlayerTo(insertEnemyStation)
-			insertEnemyStation:sendCommsMessage(p,_("commsPaulStraight", "We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities"))
+			insertEnemyStation:sendCommsMessage(p,_("PaulMsgComms", "We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities"))
 			plot4 = agentDemise
 			agentDemiseTimer = random (40,80)
 		end
