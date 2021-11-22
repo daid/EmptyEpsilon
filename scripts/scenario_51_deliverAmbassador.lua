@@ -278,11 +278,11 @@ end
 
 -- Tell player to get the ambassador. Create the planet. Start the revolution delay timer
 function getAmbassador(delta)
-	outpost41:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: CMDMICHL012"))
-	player:addToShipLog(string.format(_("audioShipLog", "[CMDMICHL012](Commander Michael) %s, avoid contact where possible. Get ambassador Gremus at Balindor Prime"), playerCallSign),"Yellow")
+	outpost41:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: CMDMICHL012"))
+	player:addToShipLog(string.format(_("audio-shipLog", "[CMDMICHL012](Commander Michael) %s, avoid contact where possible. Get ambassador Gremus at Balindor Prime"), playerCallSign),"Yellow")
 	if playMsgMichaelButton == nil then
 		playMsgMichaelButton = "play"
-		player:addCustomButton("Relay",playMsgMichaelButton,_("audioButtonRelay&Stratmap", "|> CMDMICHL012"),playMsgMichael)
+		player:addCustomButton("Relay",playMsgMichaelButton,_("audio-buttonRelay&Stratmap", "|> CMDMICHL012"),playMsgMichael)
 	end
 	balindorPrime = Planet():setPosition(-50500,84000):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0):setAxialRotationTime(400.0)
 	plot1 = ambassadorAboard
@@ -303,11 +303,11 @@ end
 function revolutionFomenting(delta)
 	fomentTimer = fomentTimer + delta
 	if fomentTimer > 60 then
-		bpcommnex:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS001"))
-		player:addToShipLog(_("audioShipLog", "[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There is serious unrest here on Balindor Prime. I am not sure how long I am going to survive. Please hurry, I can hear a mob outside my compound."),"Yellow")
+		bpcommnex:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS001"))
+		player:addToShipLog(_("audio-shipLog", "[AMBGREMUS001](Ambassador Gremus) I am glad you are coming to get me. There is serious unrest here on Balindor Prime. I am not sure how long I am going to survive. Please hurry, I can hear a mob outside my compound."),"Yellow")
 		if playMsgGremus1Button == nil then
 			playMsgGremus1Button = "play"
-			player:addCustomButton("Relay",playMsgGremus1Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS001"),playMsgGremus1)
+			player:addCustomButton("Relay",playMsgGremus1Button,_("audio-buttonRelay&Stratmap", "|> AMBGREMUS001"),playMsgGremus1)
 		end
 		breakoutTimer = 60 * 5
 		plot2 = revolutionOccurs
@@ -325,16 +325,16 @@ function revolutionOccurs(delta)
 	breakoutTimer = breakoutTimer - delta
 	if breakoutTimer < 0 then
 		if ambassadorEscapedBalindor then
-			bpcommnex:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: GREMUSGRD003"))
-			player:addToShipLog(_("audioShipLog", "[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon."),"Yellow")
+			bpcommnex:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: GREMUSGRD003"))
+			player:addToShipLog(_("audio-shipLog", "[GREMUSGRD003](Compound Sentry) You got ambassador Gremus just in time. We barely escaped the mob with our lives. I don't recommend bringing the ambassador back anytime soon."),"Yellow")
 			if playMsgSentry1Button == nil then
 				playMsgSentry1Button = "play"
-				player:addCustomButton("Relay",playMsgSentry1Button,_("audioButtonRelay&Stratmap", "|> GREMUSGRD003"),playMsgSentry1)
+				player:addCustomButton("Relay",playMsgSentry1Button,_("audio-buttonRelay&Stratmap", "|> GREMUSGRD003"),playMsgSentry1)
 			end
 			plot2 = nil
 		else
 			globalMessage(_("audioMsgMainscreen", [[Ambassador lost to hostile mob. The Kraylors are victorious]]))
-			bpcommnex:sendCommsMessage(player, _("audioMsgComms", [[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]]))
+			bpcommnex:sendCommsMessage(player, _("audio-msgComms", [[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]]))
 			playSoundFile("audio/scenario/51/sa_51_Sentry2.ogg")
 			plot2 = defeat
 		end
@@ -347,7 +347,7 @@ function revolutionOccurs(delta)
 			player.mob_timer_ops = nil
 		end
 	else
-		local mob_label = _("audioTabRelay&Ops&Stratmap", "Mob Action")
+		local mob_label = _("audio-tabRelay&Ops&Stratmap", "Mob Action")
 		local mob_minutes = math.floor(breakoutTimer / 60)
 		local mob_seconds = math.floor(breakoutTimer % 60)
 		if mob_minutes <= 0 then
@@ -431,11 +431,11 @@ end
 function ambassadorAboard(delta)
 	if distance(player, balindorPrime) < 3300 then
 		ambassadorEscapedBalindor = true
-		bpcommnex:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS004"))
-		player:addToShipLog(_("audioShipLog", "[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please transport me to Ningling."),"Yellow")
+		bpcommnex:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS004"))
+		player:addToShipLog(_("audio-shipLog", "[AMBGREMUS004](Ambassador Gremus) Thanks for bringing me aboard. Please transport me to Ningling."),"Yellow")
 		if playMsgGremus2Button == nil then
 			playMsgGremus2Button = "play"
-			player:addCustomButton("Relay",playMsgGremus2Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS004"),playMsgGremus2)
+			player:addCustomButton("Relay",playMsgGremus2Button,_("audio-buttonRelay&Stratmap", "|> AMBGREMUS004"),playMsgGremus2)
 		end		
 		ningling = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 		ningling:setPosition(12200,-62600):setCallSign("Ningling")
@@ -518,11 +518,11 @@ function gotoNingling(delta)
 		victory("Kraylor")
 	end
 	if player:isDocked(ningling) then
-		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: NINGPCLO002"))
-		player:addToShipLog(_("audioShipLog", "[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The ambassador is scheduled for a brief meeting with liaison Fordina. After that meeting, you will be asked to transport the ambassador to Goltin 7. We will contact you after the meeting."),"Yellow")
+		ningling:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: NINGPCLO002"))
+		player:addToShipLog(_("audio-shipLog", "[NINGPCLO002](Ningling Protocol Officer) Ambassador Gremus arrived. The ambassador is scheduled for a brief meeting with liaison Fordina. After that meeting, you will be asked to transport the ambassador to Goltin 7. We will contact you after the meeting."),"Yellow")
 		if playMsgProtocolButton == nil then
 			playMsgProtocolButton = "play"
-			player:addCustomButton("Relay",playMsgProtocolButton,_("audioButtonRelay&Stratmap", "|> NINGPCLO002"),playMsgProtocol)
+			player:addCustomButton("Relay",playMsgProtocolButton,_("audio-buttonRelay&Stratmap", "|> NINGPCLO002"),playMsgProtocol)
 		end
 		plot1 = waitForAmbassador
 		meetingTimer = 0.0
@@ -571,11 +571,11 @@ function waitForAmbassador(delta)
 	end
 	meetingTimer = meetingTimer + delta
 	if meetingTimer > 60 * 5 and not player:isDocked(ningling) then
-		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS007"))
-		player:addToShipLog(string.format(_("audioShipLog", "[AMBGREMUS007](Ambassador Gremus) %s, I am ready to be transported to Goltin 7. Please dock with Ningling"), playerCallSign),"Yellow")
+		ningling:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS007"))
+		player:addToShipLog(string.format(_("audio-shipLog", "[AMBGREMUS007](Ambassador Gremus) %s, I am ready to be transported to Goltin 7. Please dock with Ningling"), playerCallSign),"Yellow")
 		if playMsgGremus3Button == nil then
 			playMsgGremus3Button = "play"
-			player:addCustomButton("Relay",playMsgGremus3Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS007"),playMsgGremus3)
+			player:addCustomButton("Relay",playMsgGremus3Button,_("audio-buttonRelay&Stratmap", "|> AMBGREMUS007"),playMsgGremus3)
 		end
 		plot1 = getFromNingling
 	end
@@ -593,8 +593,8 @@ function getFromNingling(delta)
 		victory("Kraylor")
 	end
 	if player:isDocked(ningling) then
-		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021"))
-		player:addToShipLog(_("audioShipLog", "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"),"Yellow")
+		ningling:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021"))
+		player:addToShipLog(_("audio-shipLog", "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"),"Yellow")
 		player:addToShipLog(_("shipLog", "Reconfigured beam weapons: pointed one forward and increased its range and narrowed its focus"),"Magenta")
 		if getScenarioVariation() ~= "Hard" then
 			player:setImpulseMaxSpeed(75)
@@ -602,7 +602,7 @@ function getFromNingling(delta)
 		end
 		if playMsgGremus4Button == nil then
 			playMsgGremus4Button = "play"
-			player:addCustomButton("Relay",playMsgGremus4Button,_("AudioButtonRelay&Stratmap", "|> AMBGREMUS021"),playMsgGremus4)
+			player:addCustomButton("Relay",playMsgGremus4Button,_("Audio-buttonRelay&Stratmap", "|> AMBGREMUS021"),playMsgGremus4)
 		end
 		player:setTypeName("Flavia P. Falcon MK2")
 		player:setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
@@ -624,11 +624,11 @@ end
 -- Expand artifact sub-plot after player leaves Ningling
 function artifactResearch(delta)
 	if distance(player, ningling) > 10000 then
-		ningling:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: LSNFRDNA009"))
-		player:addToShipLog(_("audioShipLog", "[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that follow-up information from Goltin 7 we spoke of. It seems they want additional information about several artifacts. Some of these have been reported by stations in the area: Pangora, Nakor and Science-37."),"Yellow")
+		ningling:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: LSNFRDNA009"))
+		player:addToShipLog(_("audio-shipLog", "[LSNFRDNA009](Liaison Fordina) Ambassador Gremus, we just received that follow-up information from Goltin 7 we spoke of. It seems they want additional information about several artifacts. Some of these have been reported by stations in the area: Pangora, Nakor and Science-37."),"Yellow")
 		if playMsgFordinaButton == nil then
 			playMsgFordinaButton = "play"
-			player:addCustomButton("Relay",playMsgFordinaButton,_("audioButtonRelay&Stratmap", "|> LSNFRDNA009"),playMsgFordina)
+			player:addCustomButton("Relay",playMsgFordinaButton,_("audio-buttonRelay&Stratmap", "|> LSNFRDNA009"),playMsgFordina)
 		end
 		askForPangoraLocation = "ready"
 		askForNakorLocation = "ready"
@@ -657,7 +657,7 @@ function artifactByStation(delta)
 			nPangora.gravity_disruption = irandom(1,21)
 			nPangora.ionic_phase_shift = irandom(5,32)
 			nPangora.doppler_instability = irandom(1,9)
-			nPangora:setDescriptions(_("scienceArtifactDescription", "Unusual object floating in space"), string.format(_("scienceArtifactDescription", [[Object gives off unusual readings:
+			nPangora:setDescriptions(_("scienceDescription-artifact", "Unusual object floating in space"), string.format(_("scienceDescription-artifact", [[Object gives off unusual readings:
 			Beta radiation: %i
 			Gravity disruption: %i
 			Ionic phase shift: %i
@@ -674,7 +674,7 @@ function artifactByStation(delta)
 			nNakor.gamma_radiation = irandom(1,9)
 			nNakor.organic_decay = irandom(3,43)
 			nNakor.gravity_disruption = irandom(2,13)
-			nNakor:setDescription(_("scienceArtifactDescription", "Object with unusual visual properties"), string.format(_("scienceArtifactDescription", [[Sensor readings of interest:
+			nNakor:setDescription(_("scienceDescription-artifact", "Object with unusual visual properties"), string.format(_("scienceDescription-artifact", [[Sensor readings of interest:
 			Gamma radiation: %i
 			Organic decay: %i
 			Gravity disruption: %i]]), nNakor.gamma_radiation, nNakor.organic_decay, nNakor.gravity_disruption))
@@ -690,7 +690,7 @@ function artifactByStation(delta)
 			nScience37.ionic_phase_shift = irandom(1,9)
 			nScience37.organic_decay = irandom(3,13)
 			nScience37.theta_particle_emission = irandom(1,15)
-			nScience37:setDescription(_("scienceArtifactDescription", "Small object floating in space"), string.format(_("scienceArtifactDescription", [[Sensors show:
+			nScience37:setDescription(_("scienceDescription-artifact", "Small object floating in space"), string.format(_("scienceDescription-artifact", [[Sensors show:
 			Ionic pase shift: %i
 			Organic decay: %i
 			Theta particle emission: %i]]),nScience37.ionic_phase_shift, nScience37.organic_decay, nScience37.theta_particle_emission))
@@ -705,7 +705,7 @@ function artifactByStation(delta)
 		if distance(player,nPangora) < 5000 then
 			pangoraExplodeCountdown = 0.0
 			nPangora.gravity_disruption = nPangora.gravity_disruption + 1
-			nPangora:setDescriptions(_("scienceArtifactDescription", "Unusual object floating in space"), string.format(_("scienceArtifactDescription", [[Object gives off unusual readings:
+			nPangora:setDescriptions(_("scienceDescription-artifact", "Unusual object floating in space"), string.format(_("scienceDescription-artifact", [[Object gives off unusual readings:
 			Beta radiation: %i
 			Gravity disruption: %i
 			Ionic phase shift: %i
@@ -727,7 +727,7 @@ end
 
 function pangoraArtifactChange(delta)
 	if player.pangora_reading_change_message == nil then
-		player:addCustomMessage("Science", _("msgScience", "Warning"), _("msgScience", "The readings on the Pangora artifact have changed"))
+		player:sendCommsMessage("Science", _("msgScience", "Warning"), _("msgScience", "The readings on the Pangora artifact have changed"))
 		player.pangora_reading_change_message = "sent"
 	end
 	plot4 = pangoraArtifactExplode
@@ -799,18 +799,18 @@ function travelGoltin(delta)
 	if artifactResearchCount > 0 then
 		if distance(player,goltin) < 3300 then
 			globalMessage(_("msgMainscreen", [[Goltin 7 welcomes ambassador Gremus]]))
-			goltincomms:sendCommsMessage(player, string.format(_("audioMsgComms", "(Ambassador Gremus) Thanks for transporting me, %s. Tensions are high, but I think negotiations will succeed.\nIn the meantime, be careful of hostile ships."), playerCallSign))
+			goltincomms:sendCommsMessage(player, string.format(_("audio-msgComms", "(Ambassador Gremus) Thanks for transporting me, %s. Tensions are high, but I think negotiations will succeed.\nIn the meantime, be careful of hostile ships."), playerCallSign))
 			playSoundFile("audio/scenario/51/sa_51_Gremus5.ogg")
 			lastMessage = 0.0
 			plot1 = finalMessage
 		end
 	else
 		if distance(player, goltin) < 3300 then
-			goltincomms:sendCommsMessage(player, _("audioMsgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS032"))
-			player:addToShipLog(string.format(_("audioshipLog", "[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."),playerCallSign),"Yellow")
+			goltincomms:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS032"))
+			player:addToShipLog(string.format(_("audio-shipLog", "[AMBGREMUS032](Ambassador Gremus) Thanks for transporting me, %s. I will need artifact research for successful negotiation. Please return with that research when you can."),playerCallSign),"Yellow")
 			if playMsgGremus6Button == nil then
 				playMsgGremus6Button = "play"
-				player:addCustomButton("Relay",playMsgGremus6Button,_("audioButtonRelay&Stratmap", "|> AMBGREMUS032"),playMsgGremus6)
+				player:addCustomButton("Relay",playMsgGremus6Button,_("audio-buttonRelay&Stratmap", "|> AMBGREMUS032"),playMsgGremus6)
 			end			
 			plot1 = departForResearch
 		end
@@ -834,7 +834,7 @@ function goltinAndResearch(delta)
 	if artifactResearchCount > 0 then
 		if distance(player,goltin) < 3300 then
 			globalMessage(_("msgMainscreen", [[Goltin 7 welcomes ambassador Gremus]]))
-			goltincomms:sendCommsMessage(player, string.format(_("audioMsgComms", "(Ambassador Gremus) Thanks for researching the artifacts, %d. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships."), playerCallSign))
+			goltincomms:sendCommsMessage(player, string.format(_("audio-msgComms", "(Ambassador Gremus) Thanks for researching the artifacts, %d. Tensions are high, but I think negotiations will succeed. In the meantime, be careful of hostile ships."), playerCallSign))
 			playSoundFile("audio/scenario/51/sa_51_Gremus7.ogg")
 			lastMessage = 0.0
 			plot1 = finalMessage			
@@ -894,7 +894,7 @@ function commsStation()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("classicComms", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("commsStation", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -908,39 +908,39 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("classicComms", "Good day, officer!\nWhat can we do for you today?"))
+        setCommsMessage(_("commsStation", "Good day, officer!\nWhat can we do for you today?"))
     else
-        setCommsMessage(_("classicComms", "Welcome to our lovely station."))
+        setCommsMessage(_("commsStation", "Welcome to our lovely station."))
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(string.format(_("classicComms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
+        addCommsReply(string.format(_("commsAmmo", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
             handleWeaponRestock("Homing")
         end)
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(string.format(_("classicComms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
+        addCommsReply(string.format(_("commsAmmo", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
             handleWeaponRestock("HVLI")
         end)
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(string.format(_("classicComms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
+        addCommsReply(string.format(_("commsAmmo", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
             handleWeaponRestock("Mine")
         end)
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(string.format(_("classicComms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
+        addCommsReply(string.format(_("commsAmmo", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
             handleWeaponRestock("Nuke")
         end)
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(string.format(_("classicComms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
+        addCommsReply(string.format(_("commsAmmo", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
             handleWeaponRestock("EMP")
         end)
     end
 	-- Include helpful location waypoint providers for handling large map
 	if isAllowedTo(askForBalindorLocation) then
-		addCommsReply(_("commsPath", "Where is Balindor Prime?"), function()
+		addCommsReply(_("path-comms", "Where is Balindor Prime?"), function()
 			local replace_waypoint = false
 			if player:getWaypointCount() >= 9 then
 				player:commandRemoveWaypoint(9)
@@ -948,28 +948,28 @@ function handleDockedState()
 			end
 			player:commandAddWaypoint(-50500,84000)
 			if replace_waypoint then
-				setCommsMessage(_("commsPath", "Replaced former waypoint 9 with new waypoint 9 for Balindor Prime.\nYou reached the 9 waypoint maximum."))
+				setCommsMessage(_("path-comms", "Replaced former waypoint 9 with new waypoint 9 for Balindor Prime.\nYou reached the 9 waypoint maximum."))
 			else
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i to your navigation system for Balindor Prime"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i to your navigation system for Balindor Prime"), player:getWaypointCount()))
 			end
 			askForBalindorLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForNingLocation) then
-		addCommsReply(_("commsPath", "Where is Ningling?"), function()
+		addCommsReply(_("path-comms", "Where is Ningling?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Ningling station is in sector %s"), ningling:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Ningling station is in sector %s"), ningling:getSectorName()))
 			else
 				player:commandAddWaypoint(12200,-62600)
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Ningling station"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Ningling station"), player:getWaypointCount()))
 			end
 			askForNingLocation = "complete"
 			addCommsReply(_("Back"), commsStation)			
 		end)
 	end
 	if isAllowedTo(askForGoltinLocation) then
-		addCommsReply(_("commsPath", "Where is Goltin 7?"), function()
+		addCommsReply(_("path-comms", "Where is Goltin 7?"), function()
 			local replace_waypoint = false
 			if player:getWaypointCount() >= 9 then
 				player:commandRemoveWaypoint(9)
@@ -977,45 +977,45 @@ function handleDockedState()
 			end
 			player:commandAddWaypoint(93150,21387)
 			if replace_waypoint then
-				setCommsMessage(_("commsPath", "Replaced former waypoint 9 with new waypoint 9 for Goltin 7.\nYou reached the 9 waypoint maximum."))
+				setCommsMessage(_("path-comms", "Replaced former waypoint 9 with new waypoint 9 for Goltin 7.\nYou reached the 9 waypoint maximum."))
 			else
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Goltin 7"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Goltin 7"), player:getWaypointCount()))
 			end
 			askForGoltinLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForPangoraLocation) then
-		addCommsReply(_("commsPath", "Where is Pangora?"), function()
+		addCommsReply(_("path-comms", "Where is Pangora?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Pangora is in sector %s"), stationPangora:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Pangora is in sector %s"), stationPangora:getSectorName()))
 			else
 				player:commandAddWaypoint(stationPangora:getPosition())
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Pangora station"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Pangora station"), player:getWaypointCount()))
 			end
 			askForPangoraLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForNakorLocation) then
-		addCommsReply(_("commsPath", "Where is Nakor?"), function()
+		addCommsReply(_("path-comms", "Where is Nakor?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Nakor is in sector %s"), stationNakor:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Nakor is in sector %s"), stationNakor:getSectorName()))
 			else
 				player:commandAddWaypoint(stationNakor:getPosition())
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Nakor station"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Nakor station"), player:getWaypointCount()))
 			end
 			askForNakorLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForScience37Location) then
-		addCommsReply(_("commsPath", "Where is Science-37?"), function()
+		addCommsReply(_("path-comms", "Where is Science-37?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Science-37 is in sector %s"), science37:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Science-37 is in sector %s"), science37:getSectorName()))
 			else
 				player:commandAddWaypoint(science37:getPosition())
-				setCommsMessage(string.format(_("commsPath", "Added a waypoint %i for station Science-37"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added a waypoint %i for station Science-37"), player:getWaypointCount()))
 			end
 			askForScience37Location = "complete"
 			addCommsReply(_("Back"), commsStation)
@@ -1023,29 +1023,29 @@ function handleDockedState()
 	end
 	-- Include clue messages for artifacts near identified stations
 	if isAllowedTo(askForPangoraArtifactLocation) then
-		addCommsReply(_("commsArtefact", "Any reports of artifacts near Pangora?"), function()
-			setCommsMessage(_("commsArtefact", "Some freighters report seeing an artifact on approximate heading 135 from Pangora"))
+		addCommsReply(_("artifact-comms", "Any reports of artifacts near Pangora?"), function()
+			setCommsMessage(_("artifact-comms", "Some freighters report seeing an artifact on approximate heading 135 from Pangora"))
 			askForPangoraArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForNakorArtifactLocation) then
-		addCommsReply(_("commsArtefact", "Heard of any artifacts near Nakor?"), function()
-			setCommsMessage(_("commsArtefact", "Some have reported seeing object on approximate heading of 315 from Nakor station"))
+		addCommsReply(_("artifact-comms", "Heard of any artifacts near Nakor?"), function()
+			setCommsMessage(_("artifact-comms", "Some have reported seeing object on approximate heading of 315 from Nakor station"))
 			askForNakorArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForScience37ArtifactLocation) then
-		addCommsReply(_("commsArtefact", "Has anyone reported seeing artifacts near Science-37?"), function()
-			setCommsMessage(_("commsArtefact", "Freighters doing business here occasionally report an object on approximate heading zero from Science-37 station"))
+		addCommsReply(_("artifact-comms", "Has anyone reported seeing artifacts near Science-37?"), function()
+			setCommsMessage(_("artifact-comms", "Freighters doing business here occasionally report an object on approximate heading zero from Science-37 station"))
 			askForScience37ArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	-- Include orders upon request for when they are missed
 	if isAllowedTo(askForOrders) then
-		addCommsReply(_("commsStation", "What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			oMessage = ""
 			if plot1 == chasePlayer or plot1 == getAmbassador or plot1 == ambassadorAboard then
 				oMessage = _("commsStation", "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
@@ -1059,9 +1059,9 @@ function handleDockedState()
 				oMessage = _("commsStation", "Current Orders: Transport ambassador Gremus to Goltin 7. ")
 			end
 			if plot3 == artifactResearch or plot3 == artifactByStation then
-				oMessage = oMessage.. _("commsArtefact", "Additional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. ")
+				oMessage = oMessage.. _("artifact-comms", "Additional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. ")
 				if plot1 == departForResearch or plot1 == goltinAndResearch then
-					oMessage = oMessage.. _("commsArtefact", "Provide artifact research to ambassador Gremus on Goltin 7. ")
+					oMessage = oMessage.. _("artifact-comms", "Provide artifact research to ambassador Gremus on Goltin 7. ")
 				end
 			end
 			setCommsMessage(oMessage)
@@ -1105,18 +1105,18 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("classicComms", "Good day, officer.\nIf you need supplies, please dock with us first."))
+        setCommsMessage(_("commsStation", "Good day, officer.\nIf you need supplies, please dock with us first."))
     else
-        setCommsMessage(_("classicComms", "Greetings.\nIf you want to do business, please dock with us first."))
+        setCommsMessage(_("commsStation", "Greetings.\nIf you want to do business, please dock with us first."))
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("classicComms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("classicComms", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("classicComms", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("commsStation", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("WP%d"), n), function()
+                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -1124,7 +1124,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("classicComms", "We have dispatched a supply ship toward WP%d"), n));
+                            setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
                             setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
@@ -1136,16 +1136,16 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("classicComms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("commsStation", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("classicComms", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("classicComms", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("commsStation", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("classicComms", "WP%d"), n), function()
+                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("classicComms", "We have dispatched %s to assist at WP%d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
                         else
                             setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
                         end
@@ -1158,7 +1158,7 @@ function handleUndockedState()
     end
 	-- Add helpful waypoint creation messages
 	if isAllowedTo(askForBalindorLocation) then
-		addCommsReply(_("commsPath", "Where is Balindor Prime?"), function()
+		addCommsReply(_("path-comms", "Where is Balindor Prime?"), function()
 			local replace_waypoint = false
 			if player:getWaypointCount() >= 9 then
 				player:commandRemoveWaypoint(9)
@@ -1166,28 +1166,28 @@ function handleUndockedState()
 			end
 			player:commandAddWaypoint(-50500,84000)
 			if replace_waypoint then
-				setCommsMessage(_("commsPath", "Replaced former waypoint 9 with new waypoint 9 for Balindor Prime.\nYou reached the 9 waypoint maximum."))
+				setCommsMessage(_("path-comms", "Replaced former waypoint 9 with new waypoint 9 for Balindor Prime.\nYou reached the 9 waypoint maximum."))
 			else
-				setCommsMessage(_("commsPath", "Added a waypoint to your navigation system for Balindor Prime"))
+				setCommsMessage(_("path-comms", "Added a waypoint to your navigation system for Balindor Prime"))
 			end
 			askForBalindorLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForNingLocation) then
-		addCommsReply(_("commsPath", "Where is Ningling?"), function()
+		addCommsReply(_("path-comms", "Where is Ningling?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Ningling station is in sector %s"), ningling:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Ningling station is in sector %s"), ningling:getSectorName()))
 			else
 				player:commandAddWaypoint(12200,-62600)
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Ningling station"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Ningling station"), player:getWaypointCount()))
 			end
 			askForNingLocation = "complete"
 			addCommsReply(_("Back"), commsStation)			
 		end)
 	end
 	if isAllowedTo(askForGoltinLocation) then
-		addCommsReply(_("commsPath", "Where is Goltin 7?"), function()
+		addCommsReply(_("path-comms", "Where is Goltin 7?"), function()
 			local replace_waypoint = false
 			if player:getWaypointCount() >= 9 then
 				player:commandRemoveWaypoint(9)
@@ -1195,45 +1195,45 @@ function handleUndockedState()
 			end
 			player:commandAddWaypoint(93150,21387)
 			if replace_waypoint then
-				setCommsMessage(_("commsPath", "Replaced former waypoint 9 with new waypoint 9 for Goltin 7.\nYou reached the 9 waypoint maximum."))
+				setCommsMessage(_("path-comms", "Replaced former waypoint 9 with new waypoint 9 for Goltin 7.\nYou reached the 9 waypoint maximum."))
 			else
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Goltin 7"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Goltin 7"), player:getWaypointCount()))
 			end
 			askForGoltinLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForPangoraLocation) then
-		addCommsReply(_("commsPath", "Where is Pangora?"), function()
+		addCommsReply(_("path-comms", "Where is Pangora?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Pangora is in sector %s"), stationPangora:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Pangora is in sector %s"), stationPangora:getSectorName()))
 			else
 				player:commandAddWaypoint(stationPangora:getPosition())
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Pangora station"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Pangora station"), player:getWaypointCount()))
 			end
 			askForPangoraLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForNakorLocation) then
-		addCommsReply(_("commsPath", "Where is Nakor?"), function()
+		addCommsReply(_("path-comms", "Where is Nakor?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Nakor is in sector %s"), stationNakor:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Nakor is in sector %s"), stationNakor:getSectorName()))
 			else
 				player:commandAddWaypoint(stationNakor:getPosition())
-				setCommsMessage(string.format(_("commsPath", "Added waypoint %i for Nakor station"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added waypoint %i for Nakor station"), player:getWaypointCount()))
 			end
 			askForNakorLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForScience37Location) then
-		addCommsReply(_("commsPath", "Where is Science-37?"), function()
+		addCommsReply(_("path-comms", "Where is Science-37?"), function()
 			if player:getWaypointCount() >= 9 then
-				setCommsMessage(string.format(_("commsPath", "Science-37 is in sector %s"), science37:getSectorName()))
+				setCommsMessage(string.format(_("path-comms", "Science-37 is in sector %s"), science37:getSectorName()))
 			else
 				player:commandAddWaypoint(science37:getPosition())
-				setCommsMessage(string.format(_("commsPath", "Added a waypoint %i for station Science-37"), player:getWaypointCount()))
+				setCommsMessage(string.format(_("path-comms", "Added a waypoint %i for station Science-37"), player:getWaypointCount()))
 			end
 			askForScience37Location = "complete"
 			addCommsReply(_("Back"), commsStation)
@@ -1241,22 +1241,22 @@ function handleUndockedState()
 	end
 	-- Add artifact location clues
 	if isAllowedTo(askForPangoraArtifactLocation) then
-		addCommsReply(_("commsArtifact", "Any reports of artifacts near Pangora?"), function()
-			setCommsMessage(_("commsArtifact", "Some freighters report seeing an artifact on approximate heading 135 from Pangora"))
+		addCommsReply(_("artifact-comms", "Any reports of artifacts near Pangora?"), function()
+			setCommsMessage(_("artifact-comms", "Some freighters report seeing an artifact on approximate heading 135 from Pangora"))
 			askForPangoraArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForNakorArtifactLocation) then
-		addCommsReply(_("commsArtifact", "Heard of any artifacts near Nakor?"), function()
-			setCommsMessage(_("commsArtifact", "Some have reported seeing object on approximate heading of 315 from Nakor station"))
+		addCommsReply(_("artifact-comms", "Heard of any artifacts near Nakor?"), function()
+			setCommsMessage(_("artifact-comms", "Some have reported seeing object on approximate heading of 315 from Nakor station"))
 			askForNakorArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if isAllowedTo(askForScience37ArtifactLocation) then
-		addCommsReply(_("commsArtifact", "Has anyone reported seeing artifacts near Science-37?"), function()
-			setCommsMessage(_("commsArtifact", "Freighters doing business here occasionally report an object on approximate heading zero from Science-37 station"))
+		addCommsReply(_("artifact-comms", "Has anyone reported seeing artifacts near Science-37?"), function()
+			setCommsMessage(_("artifact-comms", "Freighters doing business here occasionally report an object on approximate heading zero from Science-37 station"))
 			askForScience37ArtifactLocation = "complete"
 			addCommsReply(_("Back"), commsStation)
 		end)

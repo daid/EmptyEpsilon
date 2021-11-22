@@ -2356,7 +2356,7 @@ function handleDockedState()
 		end
 	end
 	if player:isFriendly(comms_target) then
-		addCommsReply(_("commsStation", "What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
@@ -2980,7 +2980,7 @@ function handleUndockedState()
 		end
 	end)
 	if player:isFriendly(comms_target) then
-		addCommsReply(_("commsStation", "What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then

@@ -101,26 +101,26 @@ function init()
 	junkYardDebrisY = {150504, 150317, 148005}
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris1 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(2,1):onPickUp(function(debris, pGrab) string.format("");pGrab.debris1 = true end)
-	debris1:setDescriptions(_("scienceDebrisDescription", "Debris"),_("scienceDebrisDescription", "Debris: Various broken ship components. Possibly useful for engine or weapons systems repair"))
+	debris1:setDescriptions(_("scienceDescription-debris", "Debris"),_("scienceDescription-debris", "Debris: Various broken ship components. Possibly useful for engine or weapons systems repair"))
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris2 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(1,3):onPickUp(function(debris, pGrab) string.format("");pGrab.debris2 = true end)
-	debris2:setDescriptions(_("scienceDebrisDescription", "Debris"),_("scienceDebrisDescription", "Debris: Various broken ship components. Possibly useful for shield or beam systems repair"))
+	debris2:setDescriptions(_("scienceDescription-debris", "Debris"),_("scienceDescription-debris", "Debris: Various broken ship components. Possibly useful for shield or beam systems repair"))
 	debrisx, debrisy = pickCoordinate(junkYardDebrisX,junkYardDebrisY)
 	debris3 = Artifact():setPosition(debrisx, debrisy):setModel("ammo_box"):allowPickup(true):setScanningParameters(2,1):onPickUp(function(debris, pGrab) string.format("");pGrab.debris3 = true end)
-	debris3:setDescriptions(_("scienceDebrisDescription", "Debris"),_("scienceDebrisDescription", "Debris: Various broken ship components. Possibly useful for hull or reactor systems repair"))
+	debris3:setDescriptions(_("scienceDescription-debris", "Debris"),_("scienceDescription-debris", "Debris: Various broken ship components. Possibly useful for hull or reactor systems repair"))
 	--Signs
 	junkYardSignX = {914126, 905479, 910303}
 	junkYardSignY = {151100, 148728, 147102}
 	junkZone = Zone():setPoints(905479, 148728, 906490, 146843, 910303, 147102, 914126, 151100, 912635, 154012, 905801, 151274)
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign1 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign1:setDescriptions(_("scienceBuoyDescription", "Space Message Buoy"),_("scienceBuoyDescription", "Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in the Kraylor language"))
+	Sign1:setDescriptions(_("scienceDescription-buoy", "Space Message Buoy"),_("scienceDescription-buoy", "Space Message Buoy reading 'Welcome to the Boris Junk Yard and Emporium' in the Kraylor language"))
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign2 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign2:setDescriptions(_("scienceBuoyDescription", "Space Message Buoy"),_("scienceBuoyDescription", "Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an asteroid for the kids' in the Kraylor language"))
+	Sign2:setDescriptions(_("scienceDescription-buoy", "Space Message Buoy"),_("scienceDescription-buoy", "Space Message Buoy reading 'Boris Junk Yard: Browse for parts, take home an asteroid for the kids' in the Kraylor language"))
 	signx, signy = pickCoordinate(junkYardSignX, junkYardSignY)
 	Sign3 = Artifact():setPosition(signx, signy):setModel("SensorBuoyMKI"):allowPickup(false):setScanningParameters(1,1)
-	Sign3:setDescriptions(_("scienceBuoyDescription", "Space Message Buoy"),_("scienceBuoyDescription", "Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language"))
+	Sign3:setDescriptions(_("scienceDescription-buoy", "Space Message Buoy"),_("scienceDescription-buoy", "Space Message Buoy reading 'Boris Junk Yard: Best prices in 20 sectors' in the Kraylor language"))
 	plotSign = billboardUpdate	
 	--Initial player ship
 	playerFighter = PlayerSpaceship():setFaction("Human Navy"):setTemplate("MP52 Hornet"):setCallSign("Scrag"):setPosition(912035, 152062)
@@ -201,7 +201,7 @@ function init()
     junkSupply = SupplyDrop():setFaction("Independent"):setPosition(909362, 151445):setEnergy(500):setWeaponStorage("Homing", 1):setWeaponStorage("Nuke", 0):setWeaponStorage("Mine", 0):setWeaponStorage("EMP", 0)
 	plotH = shipHealth				--enable ship health check plot
 	playerShipHealth = scragHealth	--set function to constrain player ship health
-	playerFighter:addToShipLog(string.format(_("shipLog", "You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station"), brigStation:getCallSign()),"Magenta")
+	playerFighter:addToShipLog(string.format(_("goal-shipLog", "You escaped the brig of station %s and transported yourselves onto one of the spaceship hulks in a nearby holding area for junked spacecraft. You carry critical information for the Human Navy regarding Kraylor activity in this area. You need to make good your escape and dock with a Human Navy space station"), brigStation:getCallSign()),"Magenta")
 	plot1 = scanRepulse				--enable first plot mission goal
 	--print("end of init")
 end
@@ -4030,7 +4030,7 @@ function handleWeaponRestock(weapon)
 		end
 --[[	
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage("Not enough reputation.")
+            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
@@ -4947,7 +4947,7 @@ function repulseTransfer()
 	playerShipHealth = plunderHealth	--switch player health check function to repulse
 	augmentRepairCrewTimer = 45			--time to repair crew escape
 	plot1 = augmentRepairCrew
-	playerRepulse:addToShipLog(_("shipLog", "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently registered as Independent"),"Magenta")
+	playerRepulse:addToShipLog(_("RepulseTransfert-shipLog", "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently registered as Independent"),"Magenta")
 	player = playerRepulse
 	plotKP = kraylorPatrol				--start sending out Kraylor patrols
 	plotSuffocate = nil
@@ -4957,7 +4957,7 @@ function augmentRepairCrew(delta)
 --Former repair crew asks to be rescued to take up their jobs again
 	augmentRepairCrewTimer = augmentRepairCrewTimer - delta
 	if augmentRepairCrewTimer < 0 then
-		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("commsShipCrew", "Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
+		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("crew-msgComms", "Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
 		if brigHailed then
 			if playerRepulse:hasPlayerAtPosition("Weapons") then
 				if retrieveRepairCrewButton == nil then
@@ -4991,7 +4991,7 @@ function beamDamageReport(delta)
 --Report on damaged beams on port side, start second plot
 	beamDamageReportTimer = beamDamageReportTimer - delta
 	if beamDamageReportTimer < 0 then
-		playerRepulse:addToShipLog(_("shipLog", "Repair crew reports that the port beam weapon emplacement is currently non-functional. No applicable spare parts found aboard"),"Magenta")
+		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew reports that the port beam weapon emplacement is currently non-functional. No applicable spare parts found aboard"),"Magenta")
 		plot1 = jumpDamageReport
 		plot2 = portBeamEnable
 		jumpDamageReportTimer = 30
@@ -5002,11 +5002,11 @@ function jumpDamageReport(delta)
 	jumpDamageReportTimer = jumpDamageReportTimer - delta
 	if jumpDamageReportTimer < 0 then
 		if playerRepulse.debris1 then
-			playerRepulse:addToShipLog(_("shipLog", "Repair crew reports the jump drive not operational. However, they may be able to adapt some of the space debris picked up earlier into suitable replacement parts. They are starting the fabrication process now"),"Magenta")
+			playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew reports the jump drive not operational. However, they may be able to adapt some of the space debris picked up earlier into suitable replacement parts. They are starting the fabrication process now"),"Magenta")
 			plot3 = jumpPartFabrication
 			jumpPartFabricationTimer = 60
 		else
-			playerRepulse:addToShipLog(_("shipLog", "Repair crew reports the jump drive inoperative. Additional parts are necessary"),"Magenta")
+			playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew reports the jump drive inoperative. Additional parts are necessary"),"Magenta")
 			plot3 = jumpPartGathering
 		end
 		plot1 = missileDamageReport
@@ -5017,7 +5017,7 @@ function missileDamageReport(delta)
 --Report on damaged missile systems
 	missileDamageReportTimer = missileDamageReportTimer - delta
 	if missileDamageReportTimer < 0 then
-		playerRepulse:addToShipLog(_("shipLog", "Repair crew says the missle weapons systems are not repairable with available components"),"Magenta")
+		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew says the missle weapons systems are not repairable with available components"),"Magenta")
 		hull_damage_report_timer = 80
 		plot1 = hullDamageReport
 	end
@@ -5028,7 +5028,7 @@ function hullDamageReport(delta)
 		plot1 = damageSummaryReport
 		if playerRepulse.debris3 then
 			playerRepulse:setHull(playerRepulse:getHull()*2)
-			playerRepulse:addToShipLog(_("shipLog", "Repair crew applied some of the parts picked up to make some repairs on the hull"),"Magenta")
+			playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew applied some of the parts picked up to make some repairs on the hull"),"Magenta")
 		end
 	end
 end
@@ -5044,7 +5044,7 @@ function damageSummaryReport(delta)
 	totalDiff = totalDiff + math.abs(playerRepulse.maxFrontShield - playerRepulse:getSystemHealth("frontshield"))
 	totalDiff = totalDiff + math.abs(playerRepulse.maxRearShield - playerRepulse:getSystemHealth("rearshield"))
 	if totalDiff < .1 then
-		playerRepulse:addToShipLog(_("shipLog", "Repair crew reports they have repaired as much as they can. Additional parts may be available in the junk yard. We have not been able to get long range communications online, so we are as yet unable to locate or contact any Human Navy stations."),"Magenta")
+		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew reports they have repaired as much as they can. Additional parts may be available in the junk yard. We have not been able to get long range communications online, so we are as yet unable to locate or contact any Human Navy stations."),"Magenta")
 		plot1 = nil
 	end
 end
@@ -5064,7 +5064,7 @@ function fixFlood(delta)
 		end
 		if missileFixStation ~= nil then
 			if missileFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format(_("shipLog", "[Edwina (repair crew member)] My dad can fix our missile systems. He's got years of experience. He's on %s"),missileFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Edwina (repair crew member)] My dad can fix our missile systems. He's got years of experience. He's on %s"),missileFixStation:getCallSign()),"Magenta")
 				missileFixStationMessage = "sent"
 			end
 		end
@@ -5080,7 +5080,7 @@ function fixFlood(delta)
 		end
 		if shieldFixStation ~= nil then
 			if shieldFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format(_("shipLog", "[Amir (repair crew member)] My sister fixes shield systems. I bet she could easily get our shields working. She works at a shop on %s"),shieldFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Amir (repair crew member)] My sister fixes shield systems. I bet she could easily get our shields working. She works at a shop on %s"),shieldFixStation:getCallSign()),"Magenta")
 				shieldFixStationMessage = "sent"
 			end
 		end
@@ -5096,7 +5096,7 @@ function fixFlood(delta)
 		end
 		if impulseFixStation ~= nil then
 			if impulseFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format(_("shipLog", "[Janet (repair crew member)] Johnny, my son, does practical research on impulse drives. He's on %s. He can probably get our impulse engines up to full capacity"),impulseFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Janet (repair crew member)] Johnny, my son, does practical research on impulse drives. He's on %s. He can probably get our impulse engines up to full capacity"),impulseFixStation:getCallSign()),"Magenta")
 				impulseFixStationMessage = "sent"
 			end
 		end
@@ -5112,7 +5112,7 @@ function fixFlood(delta)
 		end
 		if longRangeFixStation ~= nil then
 			if longRangeFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format(_("shipLog", "[Fred (repair crew member)] The outfit my wife works for on %s specializes in long range communication. She could probably get our systems connected back up to the Human Navy communication network"),longRangeFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Fred (repair crew member)] The outfit my wife works for on %s specializes in long range communication. She could probably get our systems connected back up to the Human Navy communication network"),longRangeFixStation:getCallSign()),"Magenta")
 				longRangeFixStationMessage = "sent"
 			end
 		end
@@ -5128,7 +5128,7 @@ function fixFlood(delta)
 		end
 		if jumpFixStation ~= nil then
 			if jumpFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format(_("shipLog", "[Nancy (repair crew member)] Our jump drive needs help. My brother on %s fixes jump drives and he could get ours working"),jumpFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Nancy (repair crew member)] Our jump drive needs help. My brother on %s fixes jump drives and he could get ours working"),jumpFixStation:getCallSign()),"Magenta")
 				jumpFixStationMessage = "sent"
 			end
 		end
@@ -5144,7 +5144,7 @@ function fixFlood(delta)
 		end
 		if reactorFixStation ~= nil then
 			if reactorFixStationMessage == nil then
-				playerRepulse:addToShipLog(string.format(_("shipLog", "[Manuel (repair crew member)] The reactor could use some tuning. My cousin can fix us up. He does work on reactors on %s"),reactorFixStation:getCallSign()),"Magenta")
+				playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Manuel (repair crew member)] The reactor could use some tuning. My cousin can fix us up. He does work on reactors on %s"),reactorFixStation:getCallSign()),"Magenta")
 				reactorFixStationMessage = "sent"
 				if playerRepulse:hasPlayerAtPosition("Relay") then
 					if crewFixButtonMsg == nil then
@@ -5189,22 +5189,22 @@ end
 function showCrewFixers()
 	oMsg = ""
 	if not playerRepulse.missileFix then
-		oMsg = oMsg .. string.format(_("crewRepair", " Missiles:%s(%s) "),missileFixStation:getCallSign(),missileFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairComms", " Missiles:%s(%s) "),missileFixStation:getCallSign(),missileFixStation:getSectorName())
 	end
 	if not playerRepulse.frontShieldFix and not playerRepulse.rearShieldFix then
-		oMsg = oMsg .. string.format(_("crewRepair", " Shields:%s(%s) "),shieldFixStation:getCallSign(),shieldFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairComms", " Shields:%s(%s) "),shieldFixStation:getCallSign(),shieldFixStation:getSectorName())
 	end
 	if not playerRepulse.impulseFix then
-		oMsg = oMsg .. string.format(_("crewRepair", " Impulse:%s(%s) "),impulseFixStation:getCallSign(),impulseFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairComms", " Impulse:%s(%s) "),impulseFixStation:getCallSign(),impulseFixStation:getSectorName())
 	end
 	if not playerRepulse.longRangeFix then
-		oMsg = oMsg .. string.format(_("crewRepair", " Communications:%s(%s) "),longRangeFixStation:getCallSign(),longRangeFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairComms", " Communications:%s(%s) "),longRangeFixStation:getCallSign(),longRangeFixStation:getSectorName())
 	end
 	if not playerRepulse.jumpFix then
-		oMsg = oMsg .. string.format(_("crewRepair", " Jump:%s(%s) "),jumpFixStation:getCallSign(),jumpFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairComms", " Jump:%s(%s) "),jumpFixStation:getCallSign(),jumpFixStation:getSectorName())
 	end
 	if not playerRepulse.reactorFix then
-		oMsg = oMsg .. string.format(_("crewRepair", " Reactor:%s(%s) "),reactorFixStation:getCallSign(),reactorFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairComms", " Reactor:%s(%s) "),reactorFixStation:getCallSign(),reactorFixStation:getSectorName())
 	end
 	if oMsg == nil then
 		if crewFixButtonMsg ~= nil then
@@ -5214,7 +5214,7 @@ function showCrewFixers()
 			playerRepulse:removeCustom(crewFixButtonMsgOp)		
 		end
 	else
-		playerRepulse:addToShipLog(_("shipLog", "Repair crew suggested locations for ship fixes:"),"Magenta")
+		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew suggested locations for ship fixes:"),"Magenta")
 		playerRepulse:addToShipLog(oMsg,"Magenta")
 	end
 end
@@ -5238,7 +5238,7 @@ function suggestBeamFix(delta)
 					beamFixStation = candidate
 				end
 			until(beamFixStation ~= nil)
-			playerRepulse:addToShipLog(string.format(_("shipLog", "[Kent (repair crew member)] My brother on %s in %s can fix our port side beam weapon"),beamFixStation:getCallSign(),beamFixStation:getSectorName()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("crewFriends-shipLog", "[Kent (repair crew member)] My brother on %s in %s can fix our port side beam weapon"),beamFixStation:getCallSign(),beamFixStation:getSectorName()),"Magenta")
 			plot2 = chaseTrigger
 		end
 	end
@@ -5271,8 +5271,8 @@ function junkYardDog(delta)
 			plot2 = borisChase
 		end
 		if playerRepulse.junk_yard_dog_warning == nil then
-			playerRepulse:addToShipLog(string.format(_("shipLog", "[Sensor tech] Looks like %s figured out where we went and has sicced %s on us."),brigStation:getCallSign(),junk_yard_dog:getCallSign()),"Magenta")
-			playerRepulse:addToShipLog(string.format(_("shipLog", "[Engineering tech] With our hull at %i, we better hope our shields hold"),playerRepulse:getHull()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("crew-shipLog", "[Sensor tech] Looks like %s figured out where we went and has sicced %s on us."),brigStation:getCallSign(),junk_yard_dog:getCallSign()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("crew-shipLog", "[Engineering tech] With our hull at %i, we better hope our shields hold"),playerRepulse:getHull()),"Magenta")
 			playerRepulse.junk_yard_dog_warning = "sent"
 		end
 	end
@@ -5285,11 +5285,11 @@ function borisChase(delta)
 			if junkChaser ~= nil and junkChaser:isValid() then
 				chaserMsgChoice = math.random(1,3)
 				if chaserMsgChoice == 1 then
-					playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] You won't get away so easily"),junkChaser:getCallSign()),"Red")
+					playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[%s] You won't get away so easily"),junkChaser:getCallSign()),"Red")
 				elseif chaserMsgChoice == 2 then
-					playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] You can run, but you can't hide"),junkChaser:getCallSign()),"Red")
+					playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[%s] You can run, but you can't hide"),junkChaser:getCallSign()),"Red")
 				else
-					playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] I will get you yet"),junkChaser:getCallSign()),"Red")
+					playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[%s] I will get you yet"),junkChaser:getCallSign()),"Red")
 				end
 			else
 				if difficulty < 1 then
@@ -5302,11 +5302,11 @@ function borisChase(delta)
 				junkChaser:onDestruction(resetBoris)
 				chaserMsgChoice = math.random(1,3)
 				if chaserMsgChoice == 1 then
-					junkChaser:sendCommsMessage(playerRepulse,_("commsShipBoris", "You don't steal from Boris Junk Yard without consequences. I'm coming for you"))
+					junkChaser:sendCommsMessage(playerRepulse,_("Boris-msgComms", "You don't steal from Boris Junk Yard without consequences. I'm coming for you"))
 				elseif chaserMsgChoice == 2 then
-					junkChaser:sendCommsMessage(playerRepulse,_("commsShipBoris", "I saw you steal that ship. You'll rue the day"))
+					junkChaser:sendCommsMessage(playerRepulse,_("Boris-msgComms", "I saw you steal that ship. You'll rue the day"))
 				else
-					junkChaser:sendCommsMessage(playerRepulse,_("commsShipBoris", "Stealing a ship, eh? We'll just see about that"))
+					junkChaser:sendCommsMessage(playerRepulse,_("Boris-msgComms", "Stealing a ship, eh? We'll just see about that"))
 				end
 			end
 		end
@@ -5318,11 +5318,11 @@ function resetBoris(self, instigator)
 	end
 	chaserMsgChoice = math.random(1,3)
 	if chaserMsgChoice == 1 then
-		playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] You can't get rid of me that easily"),self:getCallSign()),"Red")
+		playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[%s] You can't get rid of me that easily"),self:getCallSign()),"Red")
 	elseif chaserMsgChoice == 2 then
-		playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] I'll be back"),self:getCallSign()),"Red")
+		playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[%s] I'll be back"),self:getCallSign()),"Red")
 	else
-		playerRepulse:addToShipLog(string.format(_("shipLog", "[%s] I've got plenty of ships"),self:getCallSign()),"Red")
+		playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[%s] I've got plenty of ships"),self:getCallSign()),"Red")
 	end
 end
 ------------------------------------
@@ -5338,7 +5338,7 @@ function jumpPartRecognition(delta)
 --Identify debris as useful for repair of jump drive
 	jumpPartRecognitionTimer = jumpPartRecognitionTimer - delta
 	if jumpPartRecognitionTimer < 0 then
-		playerRepulse:addToShipLog(_("shipLog", "Repair crew thinks they can use the space debris recently acquired to make repair parts for the jump drive. They are starting the fabrication process now."),"Magenta")
+		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew thinks they can use the space debris recently acquired to make repair parts for the jump drive. They are starting the fabrication process now."),"Magenta")
 		plot3 = jumpPartFabrication
 		jumpPartFabricationTimer = 60
 	end
@@ -5347,7 +5347,7 @@ function jumpPartFabrication(delta)
 --Jump drive repairable 
 	jumpPartFabricationTimer = jumpPartFabricationTimer - delta
 	if jumpPartFabricationTimer < 0 then
-		playerRepulse:addToShipLog(_("shipLog", "Repair crew finished jump drive part fabrication. They believe the jump drive should be functional soon"),"Magenta")
+		playerRepulse:addToShipLog(_("crewRepair-shipLog", "Repair crew finished jump drive part fabrication. They believe the jump drive should be functional soon"),"Magenta")
 		playerRepulse.maxJump = .5
 		plot3 = nil
 	end
@@ -5695,7 +5695,7 @@ function billboardUpdate(delta)
 		junkZone:setColor(128,0,128)
 	end
 	if signsScanned >= 3 then
-		junkZone:setLabel(_("scienceJunkDescription", "Boris Junk Yard"))
+		junkZone:setLabel(_("scienceDescription-junk", "Boris Junk Yard"))
 		junkZone.color = "purple"
 		flashTimer = 5
 		plotSign = billboardFlash

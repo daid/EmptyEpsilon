@@ -5563,7 +5563,7 @@ function handleDockedState()
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("commsStation", "What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
@@ -6615,7 +6615,7 @@ function handleUndockedState()
 		end
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply(_("commsStation", "What are my current orders?"), function()
+		addCommsReply(_("commsOrders", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
@@ -7108,7 +7108,7 @@ function initialOrders(delta)
 				local p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
 					foundPlayer = true
-					p:addToShipLog(string.format(_("audioGoalShipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("audioGoal-shipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
 					primaryOrders = string.format(_("commsStation", "Protect %s"),homeStation:getCallSign())
 					playSoundFile("audio/scenario/55/sa_55_Commander1.ogg")
 				end
@@ -8873,7 +8873,7 @@ end
 -----------------------------------------------------------------
 function setWormArt()
 	wormArt = Artifact():setPosition(random(-90000,90000),random(-90000,90000)):setModel("artifact4"):allowPickup(false):setScanningParameters(2,5)
-	wormArt:setDescriptions(_("scienceArtifactDescription", "sprightly unassuming object"),_("scienceArtifactDescription", "Object shows rapidly building energy")):setRadarSignatureInfo(50,10,5)
+	wormArt:setDescriptions(_("scienceDescription-artifact", "sprightly unassuming object"),_("scienceDescription-artifact", "Object shows rapidly building energy")):setRadarSignatureInfo(50,10,5)
 	wormArt.travelAngle = random(0,360)
 	wormArt.tempAngle = -90
 	wormArt.travel = 5

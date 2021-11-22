@@ -87,7 +87,7 @@ function init()
     -- Brief the players
     shipyard_human:sendCommsMessage(
         gallipoli,
-        _([[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
+        _("msgComms", [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
 
 Provide cover while our troop transports board the station to reclaim it.
 
@@ -96,7 +96,7 @@ Good luck, and stay safe.]])
 
     shipyard_kraylor:sendCommsMessage(
         crusader,
-        _([[Greetings, Crusader.
+        _("msgComms", [[Greetings, Crusader.
 
 Your mission is to secure the Shangri-La station in sector F5. The feeble humans think it's theirs for the taking.
 
@@ -178,7 +178,7 @@ Greetings, Captain. What can we do for you?]]))
             _("Send in more troops. (100 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(100) then
-                    setCommsMessage(_("Not enough reputation."))
+                    setCommsMessage(_("commsNeedRep", "Not enough reputation."))
                     return
                 end
                 setCommsMessage(_("Aye, Captain. We've deployed a squad with fighter escort to support the assault on Shangri-La."))
@@ -200,7 +200,7 @@ Greetings, Captain. What can we do for you?]]))
             _("We need some space-based firepower. (150 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(150) then
-                    setCommsMessage(_("Not enough reputation."))
+                    setCommsMessage(_("commsNeedRep", "Not enough reputation."))
                     return
                 end
                 setCommsMessage(_("Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La."))
@@ -230,7 +230,7 @@ function addCommsReplySupply(args)
                 return
             end
             if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
-                setCommsMessage(_("Not enough reputation."))
+                setCommsMessage(_("commsNeedRep", "Not enough reputation."))
                 return
             end
             if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
@@ -338,7 +338,7 @@ function update(delta)
     if (not gallipoli:isValid()) then
         shipyard_kraylor:sendCommsMessage(
             crusader,
-            _([[Well done, Crusader!
+            _("msgComms", [[Well done, Crusader!
 
 The pathetic Human flagship has been disabled. Go for the victory!]])
         )
@@ -350,7 +350,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
     if (not crusader:isValid()) then
         shipyard_human:sendCommsMessage(
             gallipoli,
-            _([[Good job, Captain!
+            _("msgComms", [[Good job, Captain!
 
 With the Kraylor flagship out of the way, we can land the final blow!]])
         )
