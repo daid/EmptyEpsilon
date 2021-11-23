@@ -333,7 +333,7 @@ function revolutionOccurs(delta)
 			end
 			plot2 = nil
 		else
-			globalMessage(_("audioMsgMainscreen", [[Ambassador lost to hostile mob. The Kraylors are victorious]]))
+			globalMessage(_("audio-msgMainscreen", [[Ambassador lost to hostile mob. The Kraylors are victorious]]))
 			bpcommnex:sendCommsMessage(player, _("audio-msgComms", [[(Compound Sentry) I'm sad to report the loss of ambassador Gremus to a hostile mob.]]))
 			playSoundFile("audio/scenario/51/sa_51_Sentry2.ogg")
 			plot2 = defeat
@@ -595,14 +595,14 @@ function getFromNingling(delta)
 	if player:isDocked(ningling) then
 		ningling:sendCommsMessage(player, _("audio-msgComms", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021"))
 		player:addToShipLog(_("audio-shipLog", "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"),"Yellow")
-		player:addToShipLog(_("shipLog", "Reconfigured beam weapons: pointed one forward and increased its range and narrowed its focus"),"Magenta")
+		player:addToShipLog(_("upgrade-shipLog", "Reconfigured beam weapons: pointed one forward and increased its range and narrowed its focus"),"Magenta")
 		if getScenarioVariation() ~= "Hard" then
 			player:setImpulseMaxSpeed(75)
-			player:addToShipLog(_("shipLog", "Also increased the top speed of your impulse engine"),"Magenta")
+			player:addToShipLog(_("upgrade-shipLog", "Also increased the top speed of your impulse engine"),"Magenta")
 		end
 		if playMsgGremus4Button == nil then
 			playMsgGremus4Button = "play"
-			player:addCustomButton("Relay",playMsgGremus4Button,_("Audio-buttonRelay&Stratmap", "|> AMBGREMUS021"),playMsgGremus4)
+			player:addCustomButton("Relay",playMsgGremus4Button,_("audio-buttonRelay&Stratmap", "|> AMBGREMUS021"),playMsgGremus4)
 		end
 		player:setTypeName("Flavia P. Falcon MK2")
 		player:setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
@@ -1045,18 +1045,18 @@ function handleDockedState()
 	end
 	-- Include orders upon request for when they are missed
 	if isAllowedTo(askForOrders) then
-		addCommsReply(_("commsOrders", "What are my current orders?"), function()
+		addCommsReply(_("ordersComms", "What are my current orders?"), function()
 			oMessage = ""
 			if plot1 == chasePlayer or plot1 == getAmbassador or plot1 == ambassadorAboard then
-				oMessage = _("commsStation", "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
+				oMessage = _("ordersComms", "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
 			elseif plot1 == gotoNingling then
-				oMessage = _("commsStation", "Current Orders: Transport ambassador Gremus to Ningling. ")
+				oMessage = _("ordersComms", "Current Orders: Transport ambassador Gremus to Ningling. ")
 			elseif plot1 == waitForAmbassador then
-				oMessage = __("commsStation", "Current Orders: Wait for ambassador Gremus to complete business at Ningling. ")
+				oMessage = __("ordersComms", "Current Orders: Wait for ambassador Gremus to complete business at Ningling. ")
 			elseif plot1 == getFromNingling then
-				oMessage = _("commsStation", "Current Orders: Dock with Ningling to get ambassador Gremus. ")
+				oMessage = _("ordersComms", "Current Orders: Dock with Ningling to get ambassador Gremus. ")
 			elseif plot1 == travelGoltin then
-				oMessage = _("commsStation", "Current Orders: Transport ambassador Gremus to Goltin 7. ")
+				oMessage = _("ordersComms", "Current Orders: Transport ambassador Gremus to Goltin 7. ")
 			end
 			if plot3 == artifactResearch or plot3 == artifactByStation then
 				oMessage = oMessage.. _("artifact-comms", "Additional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. ")
@@ -1071,20 +1071,20 @@ function handleDockedState()
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage(_("classicComms", "You need to stay docked for that action.")); return end
+    if not player:isDocked(comms_target) then setCommsMessage(_("commsAmmo", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("classicComms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("classicComms", "We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("classicComms", "We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("commsAmmo", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("classicComms", "All nukes are charged and primed for destruction."));
+            setCommsMessage(_("commsAmmo", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("classicComms", "Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("commsAmmo", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
@@ -1094,9 +1094,9 @@ function handleWeaponRestock(weapon)
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("classicComms", "You are fully loaded and ready to explode things."))
+            setCommsMessage(_("commsAmmo", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("classicComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("commsAmmo", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
