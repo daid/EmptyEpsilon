@@ -378,27 +378,27 @@ function handleDockedState()
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(string.format(_("commsAmmo", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
+        addCommsReply(string.format(_("ammoComms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
             handleWeaponRestock("Homing")
         end)
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(string.format(_("commsAmmo", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
+        addCommsReply(string.format(_("ammoComms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
             handleWeaponRestock("HVLI")
         end)
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(string.format(_("commsAmmo", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
+        addCommsReply(string.format(_("ammoComms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
             handleWeaponRestock("Mine")
         end)
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(string.format(_("commsAmmo", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
+        addCommsReply(string.format(_("ammoComms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
             handleWeaponRestock("Nuke")
         end)
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(string.format(_("commsAmmo", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
+        addCommsReply(string.format(_("ammoComms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
             handleWeaponRestock("EMP")
         end)
     end
@@ -408,34 +408,34 @@ function handleDockedState()
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(_("commsAreaDescription", "Interesting points in the area"), function()
-			setCommsMessage(_("commsAreaDescription", "You may be interested in one or more of these:"))
-			addCommsReply(_("commsAreaDescription", "City"), function()
-				setCommsMessage(_("commsAreaDescription", "The City station represents one of the most developed stations in the area. Correlating the station to olde Earth, this would be where the walled medieval area of London would have been located"))
+		addCommsReply(_("comms-areaDescription", "Interesting points in the area"), function()
+			setCommsMessage(_("comms-areaDescription", "You may be interested in one or more of these:"))
+			addCommsReply(_("comms-areaDescription", "City"), function()
+				setCommsMessage(_("comms-areaDescription", "The City station represents one of the most developed stations in the area. Correlating the station to olde Earth, this would be where the walled medieval area of London would have been located"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("commsAreaDescription", "Change"), function()
-				setCommsMessage(_("commsAreaDescription", "Much of the area's financial business is handled at the station named Change. The station name is an oblique reference to the Royal Exchange of London"))
+			addCommsReply(_("comms-areaDescription", "Change"), function()
+				setCommsMessage(_("comms-areaDescription", "Much of the area's financial business is handled at the station named Change. The station name is an oblique reference to the Royal Exchange of London"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("commsAreaDescription", "Foundling"), function()
-				setCommsMessage(_("commsAreaDescription", "Foundling station specializes in medical research for children. The station name honors Foundling Hospital in London, an orphanage established in 1739 by Captain Thomas Coram, a retired seaman"))
+			addCommsReply(_("comms-areaDescription", "Foundling"), function()
+				setCommsMessage(_("comms-areaDescription", "Foundling station specializes in medical research for children. The station name honors Foundling Hospital in London, an orphanage established in 1739 by Captain Thomas Coram, a retired seaman"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("commsAreaDescription", "Thames"), function()
-				setCommsMessage(_("commsAreaDescription", "The zone running through this area colored blue is named Thames after the river Thames in London of olde Earth. Ships should avoid entering this zoneexcept by bridges designated due to the adverse effects it has on ship systems. This is why navigation systems automatically show this region for all ships in the area."))
+			addCommsReply(_("comms-areaDescription", "Thames"), function()
+				setCommsMessage(_("comms-areaDescription", "The zone running through this area colored blue is named Thames after the river Thames in London of olde Earth. Ships should avoid entering this zoneexcept by bridges designated due to the adverse effects it has on ship systems. This is why navigation systems automatically show this region for all ships in the area."))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("commsAreaDescription", "Covent"), function()
-				setCommsMessage(_("commsAreaDescription", "Most of the area's food supply comes from station Covent. It specializes in hydroponics. THe station derives its name from Covent Garden from olde Earth London where fruits, vegetables and flowers were bought and sold"))
+			addCommsReply(_("comms-areaDescription", "Covent"), function()
+				setCommsMessage(_("comms-areaDescription", "Most of the area's food supply comes from station Covent. It specializes in hydroponics. THe station derives its name from Covent Garden from olde Earth London where fruits, vegetables and flowers were bought and sold"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("commsAreaDescription", "Cheshire"), function()
-				setCommsMessage(_("commsAreaDescription", "You can find fine dining and drinking at Cheshire station. The name alludes to the Ye Olde Cheshire Cheese pub from London on olde earth"))
+			addCommsReply(_("comms-areaDescription", "Cheshire"), function()
+				setCommsMessage(_("comms-areaDescription", "You can find fine dining and drinking at Cheshire station. The name alludes to the Ye Olde Cheshire Cheese pub from London on olde earth"))
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("commsAreaDescription", "Tower"), function()
-				setCommsMessage(_("commsAreaDescription", "Station Tower serves as a residence for the wealthiest members of the London area community"))
+			addCommsReply(_("comms-areaDescription", "Tower"), function()
+				setCommsMessage(_("comms-areaDescription", "Station Tower serves as a residence for the wealthiest members of the London area community"))
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("Back"), commsStation)
@@ -444,32 +444,32 @@ function handleDockedState()
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage(_("commsAmmo", "You need to stay docked for that action.")); return end
+    if not player:isDocked(comms_target) then setCommsMessage(_("ammoComms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("commsAmmo", "We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammoComms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("commsAmmo", "All nukes are charged and primed for destruction."));
+            setCommsMessage(_("ammoComms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("commsAmmo", "Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("ammoComms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
+            setCommsMessage(_("needRepComms", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("commsAmmo", "You are fully loaded and ready to explode things."))
+            setCommsMessage(_("ammoComms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("commsAmmo", "We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("ammoComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -534,7 +534,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
+                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -555,7 +555,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
+                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)

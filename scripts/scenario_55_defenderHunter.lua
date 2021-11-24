@@ -386,17 +386,17 @@ function setConstants()
 --	setListOfStations()
 	--gossip will have meaning for a future mission addition. Right now, it's just color
 	gossipSnippets = {}
-	table.insert(gossipSnippets,_("gossipSnippets", "I hear the head of operations has a thing for his administrative assistant"))	--1
-	table.insert(gossipSnippets,_("gossipSnippets", "My mining friends tell me Krak or Kruk is about to strike it rich"))			--2
-	table.insert(gossipSnippets,_("gossipSnippets", "Did you know you can usually hire replacement repair crew cheaper at friendly stations?"))		--3
-	table.insert(gossipSnippets,_("gossipSnippets", "Under their uniforms, the Kraylors have an extra appendage. I wonder what they use it for"))	--4
-	table.insert(gossipSnippets,_("gossipSnippets", "The Kraylors may be human navy enemies, but they make some mighty fine BBQ Mynock"))			--5
-	table.insert(gossipSnippets,_("gossipSnippets", "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. That'd be bad news for us"))		--6
-	table.insert(gossipSnippets,_("gossipSnippets", "Docking bay 7 has interesting mind altering substances for sale, but they're monitored between 1900 and 2300"))	--7
-	table.insert(gossipSnippets,_("gossipSnippets", "Watch the sky tonight in quadrant J around 2243. It should be spectacular"))					--8
-	table.insert(gossipSnippets,_("gossipSnippets", "I think the shuttle pilot has a tame miniature Ktlitan caged in his quarters. Sometimes I hear it at night"))	--9
-	table.insert(gossipSnippets,_("gossipSnippets", "Did you hear the screaming chase in the corridors on level 4 last night? Three Kraylors were captured and put in the brig"))	--10
-	table.insert(gossipSnippets,_("gossipSnippets", "Rumor has it that the two Lichten brothers are on the verge of a new discovery. And it's not another wine flavor either"))		--11
+	table.insert(gossipSnippets,_("gossipComms", "I hear the head of operations has a thing for his administrative assistant"))	--1
+	table.insert(gossipSnippets,_("gossipComms", "My mining friends tell me Krak or Kruk is about to strike it rich"))			--2
+	table.insert(gossipSnippets,_("gossipComms", "Did you know you can usually hire replacement repair crew cheaper at friendly stations?"))		--3
+	table.insert(gossipSnippets,_("gossipComms", "Under their uniforms, the Kraylors have an extra appendage. I wonder what they use it for"))	--4
+	table.insert(gossipSnippets,_("gossipComms", "The Kraylors may be human navy enemies, but they make some mighty fine BBQ Mynock"))			--5
+	table.insert(gossipSnippets,_("gossipComms", "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. That'd be bad news for us"))		--6
+	table.insert(gossipSnippets,_("gossipComms", "Docking bay 7 has interesting mind altering substances for sale, but they're monitored between 1900 and 2300"))	--7
+	table.insert(gossipSnippets,_("gossipComms", "Watch the sky tonight in quadrant J around 2243. It should be spectacular"))					--8
+	table.insert(gossipSnippets,_("gossipComms", "I think the shuttle pilot has a tame miniature Ktlitan caged in his quarters. Sometimes I hear it at night"))	--9
+	table.insert(gossipSnippets,_("gossipComms", "Did you hear the screaming chase in the corridors on level 4 last night? Three Kraylors were captured and put in the brig"))	--10
+	table.insert(gossipSnippets,_("gossipComms", "Rumor has it that the two Lichten brothers are on the verge of a new discovery. And it's not another wine flavor either"))		--11
 	--Player ship name lists to supplant standard randomized call sign generation
 	playerShipNamesFor = {}
 	-- TODO switch to spelling with space or dash matching the type name
@@ -5329,16 +5329,16 @@ function handleDockedState()
 			end
 		end
 		if comms_target.nukeAvail or comms_target.empAvail or comms_target.homeAvail or comms_target.mineAvail or comms_target.hvliAvail then
-			addCommsReply(_("commsAmmo", "I need ordnance restocked"), function()
-				setCommsMessage(_("commsAmmo", "What type of ordnance?"))
+			addCommsReply(_("ammoComms", "I need ordnance restocked"), function()
+				setCommsMessage(_("ammoComms", "What type of ordnance?"))
 				if comms_source:getWeaponStorageMax("Nuke") > 0 then
 					if comms_target.nukeAvail then
 						if math.random(1,10) <= 5 then
-							nukePrompt = _("commsAmmo", "Can you supply us with some nukes? (")
+							nukePrompt = _("ammoComms", "Can you supply us with some nukes? (")
 						else
-							nukePrompt = _("commsAmmo", "We really need some nukes (")
+							nukePrompt = _("ammoComms", "We really need some nukes (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
 							handleWeaponRestock("Nuke")
 						end)
 					end
@@ -5346,11 +5346,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("EMP") > 0 then
 					if comms_target.empAvail then
 						if math.random(1,10) <= 5 then
-							empPrompt = _("commsAmmo", "Please re-stock our EMP missiles. (")
+							empPrompt = _("ammoComms", "Please re-stock our EMP missiles. (")
 						else
-							empPrompt = _("commsAmmo", "Got any EMPs? (")
+							empPrompt = _("ammoComms", "Got any EMPs? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end
@@ -5358,11 +5358,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Homing") > 0 then
 					if comms_target.homeAvail then
 						if math.random(1,10) <= 5 then
-							homePrompt = _("commsAmmo", "Do you have spare homing missiles for us? (")
+							homePrompt = _("ammoComms", "Do you have spare homing missiles for us? (")
 						else
-							homePrompt = _("commsAmmo", "Do you have extra homing missiles? (")
+							homePrompt = _("ammoComms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end
@@ -5370,11 +5370,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("Mine") > 0 then
 					if comms_target.mineAvail then
 						if math.random(1,10) <= 5 then
-							minePrompt = _("commsAmmo", "We could use some mines. (")
+							minePrompt = _("ammoComms", "We could use some mines. (")
 						else
-							minePrompt = _("commsAmmo", "How about mines? (")
+							minePrompt = _("ammoComms", "How about mines? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end
@@ -5382,11 +5382,11 @@ function handleDockedState()
 				if comms_source:getWeaponStorageMax("HVLI") > 0 then
 					if comms_target.hvliAvail then
 						if math.random(1,10) <= 5 then
-							hvliPrompt = _("commsAmmo", "What about HVLI? (")
+							hvliPrompt = _("ammoComms", "What about HVLI? (")
 						else
-							hvliPrompt = _("commsAmmo", "Could you provide HVLI? (")
+							hvliPrompt = _("ammoComms", "Could you provide HVLI? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end
@@ -5468,7 +5468,7 @@ function handleDockedState()
 						comms_source:setJumpDriveCharge(comms_source:getJumpDriveCharge() + max_charge)
 						setCommsMessage(string.format(_("commsRepairs", "Your jump drive has been overcharged to %ik"),math.floor(comms_source:getJumpDriveCharge()/1000)))
 					else
-						setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+						setCommsMessage(_("needRepComms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5501,7 +5501,7 @@ function handleDockedState()
 							comms_source:setCanLaunchProbe(true)
 							setCommsMessage(_("commsRepairs", "Your probe launch system has been repaired"))
 						else
-							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+							setCommsMessage(_("needRepComms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5514,7 +5514,7 @@ function handleDockedState()
 							comms_source:setCanHack(true)
 							setCommsMessage(_("commsRepairs", "Your hack system has been repaired"))
 						else
-							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+							setCommsMessage(_("needRepComms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5527,7 +5527,7 @@ function handleDockedState()
 							comms_source:setCanScan(true)
 							setCommsMessage(_("commsRepairs", "Your scanners have been repaired"))
 						else
-							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+							setCommsMessage(_("needRepComms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5540,7 +5540,7 @@ function handleDockedState()
 							comms_source:setCanCombatManeuver(true)
 							setCommsMessage(_("commsRepairs", "Your combat maneuver has been repaired"))
 						else
-							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+							setCommsMessage(_("needRepComms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5553,7 +5553,7 @@ function handleDockedState()
 							comms_source:setCanSelfDestruct(true)
 							setCommsMessage(_("commsRepairs", "Your self destruct system has been repaired"))
 						else
-							setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+							setCommsMessage(_("needRepComms", "Insufficient reputation"))
 						end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5580,7 +5580,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+					setCommsMessage(_("needRepComms", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -5595,7 +5595,7 @@ function handleDockedState()
 				end
 				addCommsReply(string.format(_("commsTrade", "Purchase coolant for %i reputation"),coolantCost), function()
 					if not comms_source:takeReputationPoints(coolantCost) then
-						setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+						setCommsMessage(_("needRepComms", "Insufficient reputation"))
 					else
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
 						setCommsMessage(_("commsTrade", "Additional coolant purchased"))
@@ -5613,7 +5613,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+					setCommsMessage(_("needRepComms", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -5630,7 +5630,7 @@ function handleDockedState()
 						setCommsMessage(string.format(_("commsTrade", "Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs"),homeStation:getCallSign()))
 						homeStation.telemetry = true
 					else
-						setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+						setCommsMessage(_("needRepComms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5725,7 +5725,7 @@ function handleDockedState()
 			if comms_source:isFriendly(comms_target) then
 				if comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" then
 					if random(1,100) < 50 then
-						addCommsReply(_("gossipSnippets", "Gossip"), function()
+						addCommsReply(_("gossipComms", "Gossip"), function()
 							setCommsMessage(comms_target.comms_data.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -6340,34 +6340,34 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage(_("commsAmmo", "You need to stay docked for that action."))
+		setCommsMessage(_("ammoComms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("commsAmmo", "We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammoComms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("commsAmmo", "All nukes are charged and primed for destruction."));
+            setCommsMessage(_("ammoComms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("commsAmmo", "Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("ammoComms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
+            setCommsMessage(_("needRepComms", "Not enough reputation."))
             return
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
         if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("commsAmmo", "You are fully loaded and ready to explode things."))
+            setCommsMessage(_("ammoComms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("commsAmmo", "We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("ammoComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -6415,35 +6415,35 @@ function handleUndockedState()
 	setCommsMessage(oMsg)
  	addCommsReply(_("commsStation", "I need information"), function()
 		setCommsMessage(_("commsStation", "What kind of information do you need?"))
-		addCommsReply(_("commsAmmo", "What ordnance do you have available for restock?"), function()
+		addCommsReply(_("ammoComms", "What ordnance do you have available for restock?"), function()
 			missileTypeAvailableCount = 0
 			oMsg = ""
 			if comms_target.nukeAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   Nuke")
+				oMsg = oMsg .. _("ammoComms", "\n   Nuke")
 			end
 			if comms_target.empAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   EMP")
+				oMsg = oMsg .. _("ammoComms", "\n   EMP")
 			end
 			if comms_target.homeAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   Homing")
+				oMsg = oMsg .. _("ammoComms", "\n   Homing")
 			end
 			if comms_target.mineAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   Mine")
+				oMsg = oMsg .. _("ammoComms", "\n   Mine")
 			end
 			if comms_target.hvliAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   HVLI")
+				oMsg = oMsg .. _("ammoComms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				oMsg = _("commsAmmo", "We have no ordnance available for restock")
+				oMsg = _("ammoComms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				oMsg = string.format(_("commsAmmo", "We have the following type of ordnance available for restock:%s"), oMsg)
+				oMsg = string.format(_("ammoComms", "We have the following type of ordnance available for restock:%s"), oMsg)
 			else
-				oMsg = string.format(_("commsAmmo", "We have the following types of ordnance available for restock:%s"), oMsg)
+				oMsg = string.format(_("ammoComms", "We have the following types of ordnance available for restock:%s"), oMsg)
 			end
 			setCommsMessage(oMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -6707,7 +6707,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
+                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -6728,7 +6728,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
                             setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
+                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -6936,7 +6936,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								end
 								addCommsReply(_("Back"), commsShip)
 							end)
@@ -6950,7 +6950,7 @@ function neutralComms(comms_data)
 			destRep = random(1,5)
 			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+					setCommsMessage(_("needRepComms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
@@ -6971,7 +6971,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -6997,7 +6997,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
@@ -7028,7 +7028,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)

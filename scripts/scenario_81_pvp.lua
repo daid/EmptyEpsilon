@@ -87,7 +87,7 @@ function init()
     -- Brief the players
     shipyard_human:sendCommsMessage(
         gallipoli,
-        _("msgComms", [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
+        _("incCall", [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
 
 Provide cover while our troop transports board the station to reclaim it.
 
@@ -96,7 +96,7 @@ Good luck, and stay safe.]])
 
     shipyard_kraylor:sendCommsMessage(
         crusader,
-        _("msgComms", [[Greetings, Crusader.
+        _("incCall", [[Greetings, Crusader.
 
 Your mission is to secure the Shangri-La station in sector F5. The feeble humans think it's theirs for the taking.
 
@@ -178,7 +178,7 @@ Greetings, Captain. What can we do for you?]]))
             _("Send in more troops. (100 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(100) then
-                    setCommsMessage(_("commsNeedRep", "Not enough reputation."))
+                    setCommsMessage(_("needRepComms", "Not enough reputation."))
                     return
                 end
                 setCommsMessage(_("Aye, Captain. We've deployed a squad with fighter escort to support the assault on Shangri-La."))
@@ -200,7 +200,7 @@ Greetings, Captain. What can we do for you?]]))
             _("We need some space-based firepower. (150 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(150) then
-                    setCommsMessage(_("commsNeedRep", "Not enough reputation."))
+                    setCommsMessage(_("needRepComms", "Not enough reputation."))
                     return
                 end
                 setCommsMessage(_("Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La."))
@@ -226,11 +226,11 @@ function addCommsReplySupply(args)
         string.format(args.request .. " " .. _("(%d rep each)"), price),
         function()
             if not comms_source:isDocked(comms_target) then
-                setCommsMessage(_("commsAmmo", "You need to stay docked for that action."))
+                setCommsMessage(_("ammoComms", "You need to stay docked for that action."))
                 return
             end
             if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
-                setCommsMessage(_("commsNeedRep", "Not enough reputation."))
+                setCommsMessage(_("needRepComms", "Not enough reputation."))
                 return
             end
             if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
@@ -247,46 +247,46 @@ end
 
 --- Comms supplyDialogue.
 function supplyDialogue()
-    setCommsMessage(_("commsAmmo", "What supplies do you need?"))
+    setCommsMessage(_("ammoComms", "What supplies do you need?"))
 
     addCommsReplySupply {
         missile_type = "Homing",
         price = 2,
-        request = _("commsAmmo", "Do you have spare homing missiles for us?"),
-        reply_full = _("commsAmmo", "Sorry, Captain, but you are fully stocked with homing missiles."),
-        reply_filled = _("commsAmmo", "We've replenished your homing missile supply.")
+        request = _("ammoComms", "Do you have spare homing missiles for us?"),
+        reply_full = _("ammoComms", "Sorry, Captain, but you are fully stocked with homing missiles."),
+        reply_filled = _("ammoComms", "We've replenished your homing missile supply.")
     }
 
     addCommsReplySupply {
         missile_type = "Mine",
         price = 2,
-        request = _("commsAmmo", "Please re-stock our mines."),
-        reply_full = _("commsAmmo", "Captain, you already have all the mines you can fit in that ship."),
-        reply_filled = _("commsAmmo", "These mines are yours.")
+        request = _("ammoComms", "Please re-stock our mines."),
+        reply_full = _("ammoComms", "Captain, you already have all the mines you can fit in that ship."),
+        reply_filled = _("ammoComms", "These mines are yours.")
     }
 
     addCommsReplySupply {
         missile_type = "Nuke",
         price = 15,
-        request = _("commsAmmo", "Can you supply us with some nukes?"),
-        reply_full = _("commsAmmo", "Your nukes are already charged and primed for destruction."),
-        reply_filled = _("commsAmmo", "You are fully loaded and ready to explode things.")
+        request = _("ammoComms", "Can you supply us with some nukes?"),
+        reply_full = _("ammoComms", "Your nukes are already charged and primed for destruction."),
+        reply_filled = _("ammoComms", "You are fully loaded and ready to explode things.")
     }
 
     addCommsReplySupply {
         missile_type = "EMP",
         price = 10,
-        request = _("commsAmmo", "Please re-stock our EMP missiles."),
-        reply_full = _("commsAmmo", "All storage for EMP missiles is already full, Captain."),
-        reply_filled = _("commsAmmo", "We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
+        request = _("ammoComms", "Please re-stock our EMP missiles."),
+        reply_full = _("ammoComms", "All storage for EMP missiles is already full, Captain."),
+        reply_filled = _("ammoComms", "We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
     }
 
     addCommsReplySupply {
         missile_type = "HVLI",
         price = 2,
-        request = _("commsAmmo", "Can you restock us with HVLI?"),
-        reply_full = _("commsAmmo", "Sorry, Captain, but you are fully stocked with HVLIs."),
-        reply_filled = _("commsAmmo", "We've replenished your HVLI supply.")
+        request = _("ammoComms", "Can you restock us with HVLI?"),
+        reply_full = _("ammoComms", "Sorry, Captain, but you are fully stocked with HVLIs."),
+        reply_filled = _("ammoComms", "We've replenished your HVLI supply.")
     }
 
     addCommsReply(_("Back to main menu"), stationComms)
@@ -338,7 +338,7 @@ function update(delta)
     if (not gallipoli:isValid()) then
         shipyard_kraylor:sendCommsMessage(
             crusader,
-            _("msgComms", [[Well done, Crusader!
+            _("incCall", [[Well done, Crusader!
 
 The pathetic Human flagship has been disabled. Go for the victory!]])
         )
@@ -350,7 +350,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
     if (not crusader:isValid()) then
         shipyard_human:sendCommsMessage(
             gallipoli,
-            _("msgComms", [[Good job, Captain!
+            _("incCall", [[Good job, Captain!
 
 With the Kraylor flagship out of the way, we can land the final blow!]])
         )

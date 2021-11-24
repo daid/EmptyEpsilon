@@ -472,7 +472,7 @@ end
 function placeAlcaleica()
 	--Alcaleica
 	stationAlcaleica = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAlcaleica:setPosition(psx,psy):setCallSign("Alcaleica"):setDescription(_("scienceStationDescription", "Optical Components"))
+	stationAlcaleica:setPosition(psx,psy):setCallSign("Alcaleica"):setDescription(_("scienceDescriptionStation", "Optical Components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationAlcaleica] = {{"food",math.random(5,10),1},{"medicine",5,5},{"optic",5,66}}
@@ -494,7 +494,7 @@ end
 function placeAnderson()
 	--Anderson 
 	stationAnderson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAnderson:setPosition(psx,psy):setCallSign("Anderson"):setDescription(_("scienceStationDescription", "Battery and software engineering"))
+	stationAnderson:setPosition(psx,psy):setCallSign("Anderson"):setDescription(_("scienceDescriptionStation", "Battery and software engineering"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationAnderson] = {{"food",math.random(5,10),1},{"medicine",5,5},{"battery",5,65},{"software",5,115}}
@@ -514,7 +514,7 @@ end
 function placeArcher()
 	--Archer 
 	stationArcher = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationArcher:setPosition(psx,psy):setCallSign("Archer"):setDescription(_("scienceStationDescription", "Shield and Armor Research"))
+	stationArcher:setPosition(psx,psy):setCallSign("Archer"):setDescription(_("scienceDescriptionStation", "Shield and Armor Research"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationArcher] = {{"food",math.random(5,10),1},{"medicine",5,5},{"shield",5,90}}
@@ -536,7 +536,7 @@ end
 function placeArchimedes()
 	--Archimedes
 	stationArchimedes = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationArchimedes:setPosition(psx,psy):setCallSign("Archimedes"):setDescription(_("scienceStationDescription", "Energy and particle beam components"))
+	stationArchimedes:setPosition(psx,psy):setCallSign("Archimedes"):setDescription(_("scienceDescriptionStation", "Energy and particle beam components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationArchimedes] = {{"food",math.random(5,10),1},{"medicine",5,5},{"beam",5,80}}
@@ -558,7 +558,7 @@ end
 function placeArmstrong()
 	--Armstrong
 	stationArmstrong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationArmstrong:setPosition(psx,psy):setCallSign("Armstrong"):setDescription(_("scienceStationDescription", "Warp and Impulse engine manufacturing"))
+	stationArmstrong:setPosition(psx,psy):setCallSign("Armstrong"):setDescription(_("scienceDescriptionStation", "Warp and Impulse engine manufacturing"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationArmstrong] = {{"food",math.random(5,10),1},{"medicine",5,5},{"repulsor",5,62}}
@@ -578,7 +578,7 @@ end
 function placeAsimov()
 	--Asimov
 	stationAsimov = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationAsimov:setCallSign("Asimov"):setDescription(_("scienceStationDescription", "Training and Coordination")):setPosition(psx,psy)
+	stationAsimov:setCallSign("Asimov"):setDescription(_("scienceDescriptionStation", "Training and Coordination")):setPosition(psx,psy)
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationAsimov] = {{"food",math.random(5,10),1},{"medicine",5,5},{"tractor",5,48}}
@@ -597,7 +597,7 @@ end
 function placeBarclay()
 	--Barclay
 	stationBarclay = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationBarclay:setPosition(psx,psy):setCallSign("Barclay"):setDescription(_("scienceStationDescription", "Communication components"))
+	stationBarclay:setPosition(psx,psy):setCallSign("Barclay"):setDescription(_("scienceDescriptionStation", "Communication components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationBarclay] = {{"food",math.random(5,10),1},{"medicine",5,5},{"communication",5,58}}
@@ -618,7 +618,7 @@ end
 function placeBethesda()
 	--Bethesda 
 	stationBethesda = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription(_("scienceStationDescription", "Medical research"))
+	stationBethesda:setPosition(psx,psy):setCallSign("Bethesda"):setDescription(_("scienceDescriptionStation", "Medical research"))
 	goods[stationBethesda] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,36}}
 	stationBethesda.publicRelations = true
 	stationBethesda.generalInformation = _("stationGeneralInformation", "We research and treat exotic medical conditions")
@@ -629,7 +629,7 @@ end
 function placeBroeck()
 	--Broeck
 	stationBroeck = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationBroeck:setPosition(psx,psy):setCallSign("Broeck"):setDescription(_("scienceStationDescription", "Warp drive components"))
+	stationBroeck:setPosition(psx,psy):setCallSign("Broeck"):setDescription(_("scienceDescriptionStation", "Warp drive components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationBroeck] = {{"food",math.random(5,10),1},{"medicine",5,5},{"warp",5,130}}
@@ -654,7 +654,7 @@ end
 function placeCalifornia()
 	--California
 	stationCalifornia = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalifornia:setPosition(psx,psy):setCallSign("California"):setDescription(_("scienceStationDescription", "Mining station"))
+	stationCalifornia:setPosition(psx,psy):setCallSign("California"):setDescription(_("scienceDescriptionStation", "Mining station"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationCalifornia] = {{"food",math.random(5,10),1},{"medicine",5,5},{"gold",5,25},{"dilithium",2,25}}
@@ -670,7 +670,7 @@ end
 function placeCalvin()
 	--Calvin 
 	stationCalvin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCalvin:setPosition(psx,psy):setCallSign("Calvin"):setDescription(_("scienceStationDescription", "Robotic research"))
+	stationCalvin:setPosition(psx,psy):setCallSign("Calvin"):setDescription(_("scienceDescriptionStation", "Robotic research"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationCalvin] = {{"food",math.random(5,10),1},{"medicine",5,5},{"robotic",5,87}}
@@ -691,7 +691,7 @@ end
 function placeCavor()
 	--Cavor 
 	stationCavor = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCavor:setPosition(psx,psy):setCallSign("Cavor"):setDescription(_("scienceStationDescription", "Advanced Material components"))
+	stationCavor:setPosition(psx,psy):setCallSign("Cavor"):setDescription(_("scienceDescriptionStation", "Advanced Material components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationCavor] = {{"food",math.random(5,10),1},{"medicine",5,5},{"filament",5,42}}
@@ -724,7 +724,7 @@ end
 function placeChatuchak()
 	--Chatuchak
 	stationChatuchak = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationChatuchak:setPosition(psx,psy):setCallSign("Chatuchak"):setDescription(_("scienceStationDescription", "Trading station"))
+	stationChatuchak:setPosition(psx,psy):setCallSign("Chatuchak"):setDescription(_("scienceDescriptionStation", "Trading station"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationChatuchak] = {{"food",math.random(5,10),1},{"medicine",5,5},{"luxury",5,60}}
@@ -743,7 +743,7 @@ end
 function placeCoulomb()
 	--Coulomb
 	stationCoulomb = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCoulomb:setPosition(psx,psy):setCallSign("Coulomb"):setDescription(_("scienceStationDescription", "Shielded circuitry fabrication"))
+	stationCoulomb:setPosition(psx,psy):setCallSign("Coulomb"):setDescription(_("scienceDescriptionStation", "Shielded circuitry fabrication"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationCoulomb] = {{"food",math.random(5,10),1},{"medicine",5,5},{"circuit",5,50}}
@@ -766,7 +766,7 @@ end
 function placeCyrus()
 	--Cyrus
 	stationCyrus = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationCyrus:setPosition(psx,psy):setCallSign("Cyrus"):setDescription(_("scienceStationDescription", "Impulse engine components"))
+	stationCyrus:setPosition(psx,psy):setCallSign("Cyrus"):setDescription(_("scienceDescriptionStation", "Impulse engine components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationCyrus] = {{"food",math.random(5,10),1},{"medicine",5,5},{"impulse",5,124}}
@@ -789,7 +789,7 @@ end
 function placeDeckard()
 	--Deckard
 	stationDeckard = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeckard:setPosition(psx,psy):setCallSign("Deckard"):setDescription(_("scienceStationDescription", "Android components"))
+	stationDeckard:setPosition(psx,psy):setCallSign("Deckard"):setDescription(_("scienceDescriptionStation", "Android components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationDeckard] = {{"food",math.random(5,10),1},{"medicine",5,5},{"android",5,73}}
@@ -810,7 +810,7 @@ end
 function placeDeer()
 	--Deer
 	stationDeer = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeer:setPosition(psx,psy):setCallSign("Deer"):setDescription(_("scienceStationDescription", "Repulsor and Tractor Beam Components"))
+	stationDeer:setPosition(psx,psy):setCallSign("Deer"):setDescription(_("scienceDescriptionStation", "Repulsor and Tractor Beam Components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationDeer] = {{"food",math.random(5,10),1},{"medicine",5,5},{"tractor",5,90},{"repulsor",5,95}}
@@ -833,7 +833,7 @@ end
 function placeErickson()
 	--Erickson
 	stationErickson = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationErickson:setPosition(psx,psy):setCallSign("Erickson"):setDescription(_("scienceStationDescription", "Transporter components"))
+	stationErickson:setPosition(psx,psy):setCallSign("Erickson"):setDescription(_("scienceDescriptionStation", "Transporter components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationErickson] = {{"food",math.random(5,10),1},{"medicine",5,5},{"transporter",5,63}}
@@ -856,7 +856,7 @@ end
 function placeEvondos()
 	--Evondos
 	stationEvondos = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationEvondos:setPosition(psx,psy):setCallSign("Evondos"):setDescription(_("scienceStationDescription", "Autodoc components"))
+	stationEvondos:setPosition(psx,psy):setCallSign("Evondos"):setDescription(_("scienceDescriptionStation", "Autodoc components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationEvondos] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,56}}
@@ -878,7 +878,7 @@ end
 function placeFeynman()
 	--Feynman 
 	stationFeynman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationFeynman:setPosition(psx,psy):setCallSign("Feynman"):setDescription(_("scienceStationDescription", "Nanotechnology research"))
+	stationFeynman:setPosition(psx,psy):setCallSign("Feynman"):setDescription(_("scienceDescriptionStation", "Nanotechnology research"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationFeynman] = {{"food",math.random(5,10),1},{"medicine",5,5},{"nanites",5,79},{"software",5,115}}
@@ -901,7 +901,7 @@ function placeGrasberg()
 	--Grasberg
 	placeRandomAroundPoint(Asteroid,15,1,15000,psx,psy)
 	stationGrasberg = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationGrasberg:setPosition(psx,psy):setCallSign("Grasberg"):setDescription(_("scienceStationDescription", "Mining"))
+	stationGrasberg:setPosition(psx,psy):setCallSign("Grasberg"):setDescription(_("scienceDescriptionStation", "Mining"))
 	stationGrasberg.publicRelations = true
 	stationGrasberg.generalInformation = _("stationGeneralInformation", "We mine nearby asteroids for precious minerals and process them for sale")
 	stationGrasberg.stationHistory = _("stationHistory", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids")
@@ -946,7 +946,7 @@ end
 function placeHayden()
 	--Hayden
 	stationHayden = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationHayden:setPosition(psx,psy):setCallSign("Hayden"):setDescription(_("scienceStationDescription", "Observatory and stellar mapping"))
+	stationHayden:setPosition(psx,psy):setCallSign("Hayden"):setDescription(_("scienceDescriptionStation", "Observatory and stellar mapping"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationHayden] = {{"food",math.random(5,10),1},{"medicine",5,5},{"nanites",5,65}}
@@ -964,7 +964,7 @@ end
 function placeHeyes()
 	--Heyes
 	stationHeyes = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationHeyes:setPosition(psx,psy):setCallSign("Heyes"):setDescription(_("scienceStationDescription", "Sensor components"))
+	stationHeyes:setPosition(psx,psy):setCallSign("Heyes"):setDescription(_("scienceDescriptionStation", "Sensor components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationHeyes] = {{"food",math.random(5,10),1},{"medicine",5,5},{"sensor",5,72}}
@@ -984,7 +984,7 @@ end
 function placeHossam()
 	--Hossam
 	stationHossam = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationHossam:setPosition(psx,psy):setCallSign("Hossam"):setDescription(_("scienceStationDescription", "Nanite supplier"))
+	stationHossam:setPosition(psx,psy):setCallSign("Hossam"):setDescription(_("scienceDescriptionStation", "Nanite supplier"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationHossam] = {{"food",math.random(5,10),1},{"medicine",5,5},{"nanites",5,48}}
@@ -1008,7 +1008,7 @@ function placeImpala()
 	--Impala
 	placeRandomAroundPoint(Asteroid,15,1,15000,psx,psy)
 	stationImpala = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationImpala:setPosition(psx,psy):setCallSign("Impala"):setDescription(_("scienceStationDescription", "Mining"))
+	stationImpala:setPosition(psx,psy):setCallSign("Impala"):setDescription(_("scienceDescriptionStation", "Mining"))
 	tradeFood[stationImpala] = true
 	tradeLuxury[stationImpala] = true
 	stationImpala.publicRelations = true
@@ -1054,7 +1054,7 @@ end
 function placeKomov()
 	--Komov
 	stationKomov = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKomov:setPosition(psx,psy):setCallSign("Komov"):setDescription(_("scienceStationDescription", "Xenopsychology training"))
+	stationKomov:setPosition(psx,psy):setCallSign("Komov"):setDescription(_("scienceDescriptionStation", "Xenopsychology training"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationKomov] = {{"food",math.random(5,10),1},{"medicine",5,5},{"filament",5,46}}
@@ -1076,7 +1076,7 @@ end
 function placeKrak()
 	--Krak
 	stationKrak = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKrak:setPosition(psx,psy):setCallSign("Krak"):setDescription(_("scienceStationDescription", "Mining station"))
+	stationKrak:setPosition(psx,psy):setCallSign("Krak"):setDescription(_("scienceDescriptionStation", "Mining station"))
 	posAxisKrak = random(0,360)
 	posKrak = random(10000,60000)
 	negKrak = random(10000,60000)
@@ -1117,7 +1117,7 @@ end
 function placeKruk()
 	--Kruk
 	stationKruk = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKruk:setPosition(psx,psy):setCallSign("Kruk"):setDescription(_("scienceStationDescription", "Mining station"))
+	stationKruk:setPosition(psx,psy):setCallSign("Kruk"):setDescription(_("scienceDescriptionStation", "Mining station"))
 	posAxisKruk = random(0,360)
 	posKruk = random(10000,60000)
 	negKruk = random(10000,60000)
@@ -1158,7 +1158,7 @@ end
 function placeLipkin()
 	--Lipkin
 	stationLipkin = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationLipkin:setPosition(psx,psy):setCallSign("Lipkin"):setDescription(_("scienceStationDescription", "Autodoc components"))
+	stationLipkin:setPosition(psx,psy):setCallSign("Lipkin"):setDescription(_("scienceDescriptionStation", "Autodoc components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationLipkin] = {{"food",math.random(5,10),1},{"medicine",5,5},{"autodoc",5,76}}
@@ -1179,7 +1179,7 @@ end
 function placeMadison()
 	--Madison
 	stationMadison = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMadison:setPosition(psx,psy):setCallSign("Madison"):setDescription(_("scienceStationDescription", "Zero gravity sports and entertainment"))
+	stationMadison:setPosition(psx,psy):setCallSign("Madison"):setDescription(_("scienceDescriptionStation", "Zero gravity sports and entertainment"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationMadison] = {{"food",math.random(5,10),1},{"medicine",5,5},{"luxury",5,70}}
@@ -1200,7 +1200,7 @@ end
 function placeMaiman()
 	--Maiman
 	stationMaiman = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMaiman:setPosition(psx,psy):setCallSign("Maiman"):setDescription(_("scienceStationDescription", "Energy beam components"))
+	stationMaiman:setPosition(psx,psy):setCallSign("Maiman"):setDescription(_("scienceDescriptionStation", "Energy beam components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationMaiman] = {{"food",math.random(5,10),1},{"medicine",5,5},{"beam",5,70}}
@@ -1221,7 +1221,7 @@ end
 function placeMarconi()
 	--Marconi 
 	stationMarconi = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMarconi:setPosition(psx,psy):setCallSign("Marconi"):setDescription(_("scienceStationDescription", "Energy Beam Components"))
+	stationMarconi:setPosition(psx,psy):setCallSign("Marconi"):setDescription(_("scienceDescriptionStation", "Energy Beam Components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationMarconi] = {{"food",math.random(5,10),1},{"medicine",5,5},{"beam",5,80}}
@@ -1244,7 +1244,7 @@ end
 function placeMayo()
 	--Mayo
 	stationMayo = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMayo:setPosition(psx,psy):setCallSign("Mayo"):setDescription(_("scienceStationDescription", "Medical Research"))
+	stationMayo:setPosition(psx,psy):setCallSign("Mayo"):setDescription(_("scienceDescriptionStation", "Medical Research"))
 	goods[stationMayo] = {{"food",5,1},{"medicine",5,5},{"autodoc",5,128}}
 	stationMayo.publicRelations = true
 	stationMayo.generalInformation = _("stationGeneralInformation", "We research exotic diseases and other human medical conditions")
@@ -1255,7 +1255,7 @@ end
 function placeMiller()
 	--Miller
 	stationMiller = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMiller:setPosition(psx,psy):setCallSign("Miller"):setDescription(_("scienceStationDescription", "Exobiology research"))
+	stationMiller:setPosition(psx,psy):setCallSign("Miller"):setDescription(_("scienceDescriptionStation", "Exobiology research"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationMiller] = {{"food",math.random(5,10),1},{"medicine",5,5},{"optic",10,60}}
@@ -1274,7 +1274,7 @@ end
 function placeMuddville()
 	--Muddville 
 	stationMudd = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMudd:setPosition(psx,psy):setCallSign("Muddville"):setDescription(_("scienceStationDescription", "Trading station"))
+	stationMudd:setPosition(psx,psy):setCallSign("Muddville"):setDescription(_("scienceDescriptionStation", "Trading station"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationMudd] = {{"food",math.random(5,10),1},{"medicine",5,5},{"luxury",10,60}}
@@ -1293,7 +1293,7 @@ end
 function placeNexus6()
 	--Nexus-6
 	stationNexus6 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationNexus6:setPosition(psx,psy):setCallSign("Nexus-6"):setDescription(_("scienceStationDescription", "Android components"))
+	stationNexus6:setPosition(psx,psy):setCallSign("Nexus-6"):setDescription(_("scienceDescriptionStation", "Android components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationNexus6] = {{"food",math.random(5,10),1},{"medicine",5,5},{"android",5,93}}
@@ -1314,7 +1314,7 @@ end
 function placeOBrien()
 	--O'Brien
 	stationOBrien = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOBrien:setPosition(psx,psy):setCallSign("O'Brien"):setDescription(_("scienceStationDescription", "Transporter components"))
+	stationOBrien:setPosition(psx,psy):setCallSign("O'Brien"):setDescription(_("scienceDescriptionStation", "Transporter components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationOBrien] = {{"food",math.random(5,10),1},{"medicine",5,5},{"transporter",5,76}}
@@ -1338,7 +1338,7 @@ end
 function placeOlympus()
 	--Olympus
 	stationOlympus = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOlympus:setPosition(psx,psy):setCallSign("Olympus"):setDescription(_("scienceStationDescription", "Optical components"))
+	stationOlympus:setPosition(psx,psy):setCallSign("Olympus"):setDescription(_("scienceDescriptionStation", "Optical components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationOlympus] = {{"food",math.random(5,10),1},{"medicine",5,5},{"optic",5,66}}
@@ -1360,7 +1360,7 @@ end
 function placeOrgana()
 	--Organa
 	stationOrgana = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrgana:setPosition(psx,psy):setCallSign("Organa"):setDescription(_("scienceStationDescription", "Diplomatic training"))
+	stationOrgana:setPosition(psx,psy):setCallSign("Organa"):setDescription(_("scienceDescriptionStation", "Diplomatic training"))
 	goods[stationOrgana] = {{"luxury",5,96}}		
 	stationOrgana.publicRelations = true
 	stationOrgana.generalInformation = _("stationGeneralInformation", "The premeire academy for leadership and diplomacy training in the region")
@@ -1371,7 +1371,7 @@ end
 function placeOutpost15()
 	--Outpost 15
 	stationOutpost15 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost15:setPosition(psx,psy):setCallSign("Outpost-15"):setDescription(_("scienceStationDescription", "Mining and trade"))
+	stationOutpost15:setPosition(psx,psy):setCallSign("Outpost-15"):setDescription(_("scienceDescriptionStation", "Mining and trade"))
 	tradeFood[stationOutpost15] = true
 	outpost15Goods = random(1,100)
 	if stationFaction == "Human Navy" then
@@ -1415,7 +1415,7 @@ end
 function placeOutpost21()
 	--Outpost 21
 	stationOutpost21 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost21:setPosition(psx,psy):setCallSign("Outpost-21"):setDescription(_("scienceStationDescription", "Mining and gambling"))
+	stationOutpost21:setPosition(psx,psy):setCallSign("Outpost-21"):setDescription(_("scienceDescriptionStation", "Mining and gambling"))
 	placeRandomAroundPoint(Asteroid,15,1,15000,psx,psy)
 	outpost21Goods = random(1,100)
 	if stationFaction == "Human Navy" then
@@ -1461,7 +1461,7 @@ end
 function placeOwen()
 	--Owen
 	stationOwen = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOwen:setPosition(psx,psy):setCallSign("Owen"):setDescription(_("scienceStationDescription", "Load lifters and components"))
+	stationOwen:setPosition(psx,psy):setCallSign("Owen"):setDescription(_("scienceDescriptionStation", "Load lifters and components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationOwen] = {{"food",math.random(5,10),1},{"medicine",5,5},{"lifter",5,61}}
@@ -1482,7 +1482,7 @@ end
 function placePanduit()
 	--Panduit
 	stationPanduit = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationPanduit:setPosition(psx,psy):setCallSign("Panduit"):setDescription(_("scienceStationDescription", "Optic components"))
+	stationPanduit:setPosition(psx,psy):setCallSign("Panduit"):setDescription(_("scienceDescriptionStation", "Optic components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationPanduit] = {{"food",math.random(5,10),1},{"medicine",5,5},{"optic",5,79}}
@@ -1505,7 +1505,7 @@ end
 function placeRipley()
 	--Ripley
 	stationRipley = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationRipley:setPosition(psx,psy):setCallSign("Ripley"):setDescription(_("scienceStationDescription", "Load lifters and components"))
+	stationRipley:setPosition(psx,psy):setCallSign("Ripley"):setDescription(_("scienceDescriptionStation", "Load lifters and components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationRipley] = {{"food",math.random(5,10),1},{"medicine",5,5},{"lifter",5,82}}
@@ -1528,7 +1528,7 @@ end
 function placeRutherford()
 	--Rutherford
 	stationRutherford = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationRutherford:setPosition(psx,psy):setCallSign("Rutherford"):setDescription(_("scienceStationDescription", "Shield components and research"))
+	stationRutherford:setPosition(psx,psy):setCallSign("Rutherford"):setDescription(_("scienceDescriptionStation", "Shield components and research"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationRutherford] = {{"food",math.random(5,10),1},{"medicine",5,5},{"shield",5,90}}
@@ -1551,7 +1551,7 @@ end
 function placeScience7()
 	--Science 7
 	stationScience7 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience7:setPosition(psx,psy):setCallSign("Science-7"):setDescription(_("scienceStationDescription", "Observatory"))
+	stationScience7:setPosition(psx,psy):setCallSign("Science-7"):setDescription(_("scienceDescriptionStation", "Observatory"))
 	goods[stationScience7] = {{"food",2,1}}
 	return stationScience7
 end
@@ -1559,7 +1559,7 @@ end
 function placeShawyer()
 	--Shawyer
 	stationShawyer = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationShawyer:setPosition(psx,psy):setCallSign("Shawyer"):setDescription(_("scienceStationDescription", "Impulse engine components"))
+	stationShawyer:setPosition(psx,psy):setCallSign("Shawyer"):setDescription(_("scienceDescriptionStation", "Impulse engine components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationShawyer] = {{"food",math.random(5,10),1},{"medicine",5,5},{"impulse",5,100}}
@@ -1581,7 +1581,7 @@ end
 function placeShree()
 	--Shree
 	stationShree = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationShree:setPosition(psx,psy):setCallSign("Shree"):setDescription(_("scienceStationDescription", "Repulsor and tractor beam components"))
+	stationShree:setPosition(psx,psy):setCallSign("Shree"):setDescription(_("scienceDescriptionStation", "Repulsor and tractor beam components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationShree] = {{"food",math.random(5,10),1},{"medicine",5,5},{"tractor",5,90},{"repulsor",5,95}}
@@ -1604,7 +1604,7 @@ end
 function placeSoong()
 	--Soong 
 	stationSoong = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationSoong:setPosition(psx,psy):setCallSign("Soong"):setDescription(_("scienceStationDescription", "Android components"))
+	stationSoong:setPosition(psx,psy):setCallSign("Soong"):setDescription(_("scienceDescriptionStation", "Android components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationSoong] = {{"food",math.random(5,10),1},{"medicine",5,5},{"android",5,73}}
@@ -1625,7 +1625,7 @@ end
 function placeTiberius()
 	--Tiberius
 	stationTiberius = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationTiberius:setPosition(psx,psy):setCallSign("Tiberius"):setDescription(_("scienceStationDescription", "Logistics coordination"))
+	stationTiberius:setPosition(psx,psy):setCallSign("Tiberius"):setDescription(_("scienceDescriptionStation", "Logistics coordination"))
 	goods[stationTiberius] = {{"food",5,1}}
 	stationTiberius.publicRelations = true
 	stationTiberius.generalInformation = _("stationGeneralInformation", "We support the stations and ships in the area with planning and communication services")
@@ -1636,7 +1636,7 @@ end
 function placeTokra()
 	--Tokra
 	stationTokra = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationTokra:setPosition(psx,psy):setCallSign("Tokra"):setDescription(_("scienceStationDescription", "Advanced material components"))
+	stationTokra:setPosition(psx,psy):setCallSign("Tokra"):setDescription(_("scienceDescriptionStation", "Advanced material components"))
 	whatTrade = random(1,100)
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
@@ -1669,7 +1669,7 @@ end
 function placeToohie()
 	--Toohie
 	stationToohie = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationToohie:setPosition(psx,psy):setCallSign("Toohie"):setDescription(_("scienceStationDescription", "Shield and armor components and research"))
+	stationToohie:setPosition(psx,psy):setCallSign("Toohie"):setDescription(_("scienceDescriptionStation", "Shield and armor components and research"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationToohie] = {{"food",math.random(5,10),1},{"medicine",5,5},{"shield",5,90}}
@@ -1691,7 +1691,7 @@ end
 function placeUtopiaPlanitia()
 	--Utopia Planitia
 	stationUtopiaPlanitia = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationUtopiaPlanitia:setPosition(psx,psy):setCallSign("Utopia Planitia"):setDescription(_("scienceStationDescription", "Ship building and maintenance facility"))
+	stationUtopiaPlanitia:setPosition(psx,psy):setCallSign("Utopia Planitia"):setDescription(_("scienceDescriptionStation", "Ship building and maintenance facility"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationUtopiaPlanitia] = {{"food",math.random(5,10),1},{"medicine",5,5},{"warp",5,167}}
@@ -1709,7 +1709,7 @@ end
 function placeVactel()
 	--Vactel
 	stationVactel = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationVactel:setPosition(psx,psy):setCallSign("Vactel"):setDescription(_("scienceStationDescription", "Shielded Circuitry Fabrication"))
+	stationVactel:setPosition(psx,psy):setCallSign("Vactel"):setDescription(_("scienceDescriptionStation", "Shielded Circuitry Fabrication"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationVactel] = {{"food",math.random(5,10),1},{"medicine",5,5},{"circuit",5,50}}
@@ -1728,7 +1728,7 @@ end
 function placeVeloquan()
 	--Veloquan
 	stationVeloquan = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationVeloquan:setPosition(psx,psy):setCallSign("Veloquan"):setDescription(_("scienceStationDescription", "Sensor components"))
+	stationVeloquan:setPosition(psx,psy):setCallSign("Veloquan"):setDescription(_("scienceDescriptionStation", "Sensor components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationVeloquan] = {{"food",math.random(5,10),1},{"medicine",5,5},{"sensor",5,68}}
@@ -1750,7 +1750,7 @@ end
 function placeZefram()
 	--Zefram
 	stationZefram = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationZefram:setPosition(psx,psy):setCallSign("Zefram"):setDescription(_("scienceStationDescription", "Warp engine components"))
+	stationZefram:setPosition(psx,psy):setCallSign("Zefram"):setDescription(_("scienceDescriptionStation", "Warp engine components"))
 	if stationFaction == "Human Navy" then
 		if random(1,5) <= 1 then
 			goods[stationZefram] = {{"food",math.random(5,10),1},{"medicine",5,5},{"warp",5,140}}
@@ -1775,7 +1775,7 @@ end
 function placeJabba()
 	--Jabba
 	stationJabba = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationJabba:setPosition(psx,psy):setCallSign("Jabba"):setDescription(_("scienceStationDescription", "Commerce and gambling"))
+	stationJabba:setPosition(psx,psy):setCallSign("Jabba"):setDescription(_("scienceDescriptionStation", "Commerce and gambling"))
 	stationJabba.publicRelations = true
 	stationJabba.generalInformation = _("stationGeneralInformation", "Come play some games and shop. House take does not exceed 4 percent")
 	return stationJabba
@@ -1784,7 +1784,7 @@ end
 function placeKrik()
 	--Krik
 	stationKrik = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationKrik:setPosition(psx,psy):setCallSign("Krik"):setDescription(_("scienceStationDescription", "Mining station"))
+	stationKrik:setPosition(psx,psy):setCallSign("Krik"):setDescription(_("scienceDescriptionStation", "Mining station"))
 	posAxisKrik = random(0,360)
 	posKrik = random(30000,80000)
 	negKrik = random(20000,60000)
@@ -1825,14 +1825,14 @@ end
 function placeLando()
 	--Lando
 	stationLando = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationLando:setPosition(psx,psy):setCallSign("Lando"):setDescription(_("scienceStationDescription", "Casino and Gambling"))
+	stationLando:setPosition(psx,psy):setCallSign("Lando"):setDescription(_("scienceDescriptionStation", "Casino and Gambling"))
 	return stationLando
 end
 
 function placeMaverick()
 	--Maverick
 	stationMaverick = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationMaverick:setPosition(psx,psy):setCallSign("Maverick"):setDescription(_("scienceStationDescription", "Gambling and resupply"))
+	stationMaverick:setPosition(psx,psy):setCallSign("Maverick"):setDescription(_("scienceDescriptionStation", "Gambling and resupply"))
 	stationMaverick.publicRelations = true
 	stationMaverick.generalInformation = _("stationGeneralInformation", "Relax and meet some interesting players")
 	return stationMaverick
@@ -1841,7 +1841,7 @@ end
 function placeNefatha()
 	--Nefatha
 	stationNefatha = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationNefatha:setPosition(psx,psy):setCallSign("Nefatha"):setDescription(_("scienceStationDescription", "Commerce and recreation"))
+	stationNefatha:setPosition(psx,psy):setCallSign("Nefatha"):setDescription(_("scienceDescriptionStation", "Commerce and recreation"))
 	goods[stationNefatha] = {{"luxury",5,70}}
 	return stationNefatha
 end
@@ -1849,14 +1849,14 @@ end
 function placeOkun()
 	--Okun
 	stationOkun = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOkun:setPosition(psx,psy):setCallSign("Okun"):setDescription(_("scienceStationDescription", "Xenopsychology research"))
+	stationOkun:setPosition(psx,psy):setCallSign("Okun"):setDescription(_("scienceDescriptionStation", "Xenopsychology research"))
 	return stationOkun
 end
 
 function placeOutpost7()
 	--Outpost 7
 	stationOutpost7 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost7:setPosition(psx,psy):setCallSign("Outpost-7"):setDescription(_("scienceStationDescription", "Resupply"))
+	stationOutpost7:setPosition(psx,psy):setCallSign("Outpost-7"):setDescription(_("scienceDescriptionStation", "Resupply"))
 	goods[stationOutpost7] = {{"luxury",5,80}}
 	return stationOutpost7
 end
@@ -1871,7 +1871,7 @@ end
 function placeOutpost33()
 	--Outpost 33
 	stationOutpost33 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationOutpost33:setPosition(psx,psy):setCallSign("Outpost-33"):setDescription(_("scienceStationDescription", "Resupply"))
+	stationOutpost33:setPosition(psx,psy):setCallSign("Outpost-33"):setDescription(_("scienceDescriptionStation", "Resupply"))
 	goods[stationOutpost33] = {{"luxury",5,75}}
 	return stationOutpost33
 end
@@ -1879,28 +1879,28 @@ end
 function placePrada()
 	--Prada
 	stationPrada = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationPrada:setPosition(psx,psy):setCallSign("Prada"):setDescription(_("scienceStationDescription", "Textiles and fashion"))
+	stationPrada:setPosition(psx,psy):setCallSign("Prada"):setDescription(_("scienceDescriptionStation", "Textiles and fashion"))
 	return stationPrada
 end
 
 function placeResearch11()
 	--Research-11
 	stationResearch11 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationResearch11:setPosition(psx,psy):setCallSign("Research-11"):setDescription(_("scienceStationDescription", "Stress Psychology Research"))
+	stationResearch11:setPosition(psx,psy):setCallSign("Research-11"):setDescription(_("scienceDescriptionStation", "Stress Psychology Research"))
 	return stationResearch11
 end
 
 function placeResearch19()
 	--Research-19
 	stationResearch19 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationResearch19:setPosition(psx,psy):setCallSign("Research-19"):setDescription(_("scienceStationDescription", "Low gravity research"))
+	stationResearch19:setPosition(psx,psy):setCallSign("Research-19"):setDescription(_("scienceDescriptionStation", "Low gravity research"))
 	return stationResearch19
 end
 
 function placeRubis()
 	--Rubis
 	stationRubis = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationRubis:setPosition(psx,psy):setCallSign("Rubis"):setDescription(_("scienceStationDescription", "Resupply"))
+	stationRubis:setPosition(psx,psy):setCallSign("Rubis"):setDescription(_("scienceDescriptionStation", "Resupply"))
 	goods[stationRubis] = {{"luxury",5,76}}
 	stationRubis.publicRelations = true
 	stationRubis.generalInformation = _("stationGeneralInformation", "Get your energy here! Grab a drink before you go!")
@@ -1910,21 +1910,21 @@ end
 function placeScience2()
 	--Science 2
 	stationScience2 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience2:setPosition(psx,psy):setCallSign("Science-2"):setDescription(_("scienceStationDescription", "Research Lab and Observatory"))
+	stationScience2:setPosition(psx,psy):setCallSign("Science-2"):setDescription(_("scienceDescriptionStation", "Research Lab and Observatory"))
 	return stationScience2
 end
 
 function placeScience4()
 	--Science 4
 	stationScience4 = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationScience4:setPosition(psx,psy):setCallSign("Science-4"):setDescription(_("scienceStationDescription", "Biotech research"))
+	stationScience4:setPosition(psx,psy):setCallSign("Science-4"):setDescription(_("scienceDescriptionStation", "Biotech research"))
 	return stationScience4
 end
 
 function placeSkandar()
 	--Skandar
 	stationSkandar = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationSkandar:setPosition(psx,psy):setCallSign("Skandar"):setDescription(_("scienceStationDescription", "Routine maintenance and entertainment"))
+	stationSkandar:setPosition(psx,psy):setCallSign("Skandar"):setDescription(_("scienceDescriptionStation", "Routine maintenance and entertainment"))
 	goods[stationSkandar] = {{"luxury",5,87}}
 	stationSkandar.publicRelations = true
 	stationSkandar.generalInformation = _("stationGeneralInformation", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars")
@@ -1935,14 +1935,14 @@ end
 function placeSpot()
 	--Spot
 	stationSpot = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationSpot:setPosition(psx,psy):setCallSign("Spot"):setDescription(_("scienceStationDescription", "Observatory"))
+	stationSpot:setPosition(psx,psy):setCallSign("Spot"):setDescription(_("scienceDescriptionStation", "Observatory"))
 	return stationSpot
 end
 
 function placeStarnet()
 	--Starnet 
 	stationStarnet = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription(_("scienceStationDescription", "Automated weapons systems"))
+	stationStarnet:setPosition(psx,psy):setCallSign("Starnet"):setDescription(_("scienceDescriptionStation", "Automated weapons systems"))
 	stationStarnet.publicRelations = true
 	stationStarnet.generalInformation = _("stationGeneralInformation", "We research and create automated weapons systems to improve ship combat capability")
 	return stationStarnet
@@ -1951,14 +1951,14 @@ end
 function placeTandon()
 	--Tandon
 	stationTandon = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationTandon:setPosition(psx,psy):setCallSign("Tandon"):setDescription(_("scienceStationDescription", "Biotechnology research"))
+	stationTandon:setPosition(psx,psy):setCallSign("Tandon"):setDescription(_("scienceDescriptionStation", "Biotechnology research"))
 	return stationTandon
 end
 
 function placeVaiken()
 	--Vaiken
 	stationVaiken = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationVaiken:setPosition(psx,psy):setCallSign("Vaiken"):setDescription(_("scienceStationDescription", "Ship building and maintenance facility"))
+	stationVaiken:setPosition(psx,psy):setCallSign("Vaiken"):setDescription(_("scienceDescriptionStation", "Ship building and maintenance facility"))
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
 	return stationVaiken
 end
@@ -1966,7 +1966,7 @@ end
 function placeValero()
 	--Valero
 	stationValero = SpaceStation():setTemplate(szt()):setFaction(stationFaction):setCommsScript(""):setCommsFunction(commsStation)
-	stationValero:setPosition(psx,psy):setCallSign("Valero"):setDescription(_("scienceStationDescription", "Resupply"))
+	stationValero:setPosition(psx,psy):setCallSign("Valero"):setDescription(_("scienceDescriptionStation", "Resupply"))
 	goods[stationValero] = {{"luxury",5,77}}
 	return stationValero
 end
@@ -2283,16 +2283,16 @@ function handleDockedState()
 			end
 		end
 		if comms_target.nukeAvail or comms_target.empAvail or comms_target.homeAvail or comms_target.mineAvail or comms_target.hvliAvail then
-			addCommsReply(_("commsAmmo", "I need ordnance restocked"), function()
-				setCommsMessage(_("commsAmmo", "What type of ordnance?"))
+			addCommsReply(_("ammoComms", "I need ordnance restocked"), function()
+				setCommsMessage(_("ammoComms", "What type of ordnance?"))
 				if player:getWeaponStorageMax("Nuke") > 0 then
 					if comms_target.nukeAvail then
 						if math.random(1,10) <= 5 then
-							nukePrompt = _("commsAmmo", "Can you supply us with some nukes? (")
+							nukePrompt = _("ammoComms", "Can you supply us with some nukes? (")
 						else
-							nukePrompt = _("commsAmmo", "We really need some nukes (")
+							nukePrompt = _("ammoComms", "We really need some nukes (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), nukePrompt, getWeaponCost("Nuke")), function()
 							handleWeaponRestock("Nuke")
 						end)
 					end
@@ -2300,11 +2300,11 @@ function handleDockedState()
 				if player:getWeaponStorageMax("EMP") > 0 then
 					if comms_target.empAvail then
 						if math.random(1,10) <= 5 then
-							empPrompt = _("commsAmmo", "Please re-stock our EMP missiles. (")
+							empPrompt = _("ammoComms", "Please re-stock our EMP missiles. (")
 						else
-							empPrompt = _("commsAmmo", "Got any EMPs? (")
+							empPrompt = _("ammoComms", "Got any EMPs? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), empPrompt, getWeaponCost("EMP")), function()
 							handleWeaponRestock("EMP")
 						end)
 					end
@@ -2312,11 +2312,11 @@ function handleDockedState()
 				if player:getWeaponStorageMax("Homing") > 0 then
 					if comms_target.homeAvail then
 						if math.random(1,10) <= 5 then
-							homePrompt = _("commsAmmo", "Do you have spare homing missiles for us? (")
+							homePrompt = _("ammoComms", "Do you have spare homing missiles for us? (")
 						else
-							homePrompt = _("commsAmmo", "Do you have extra homing missiles? (")
+							homePrompt = _("ammoComms", "Do you have extra homing missiles? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), homePrompt, getWeaponCost("Homing")), function()
 							handleWeaponRestock("Homing")
 						end)
 					end
@@ -2325,17 +2325,17 @@ function handleDockedState()
 					if comms_target.mineAvail then
 						minePromptChoice = math.random(1,5)
 						if minePromptChoice == 1 then
-							minePrompt = _("commsAmmo", "We could use some mines. (")
+							minePrompt = _("ammoComms", "We could use some mines. (")
 						elseif minePromptChoice == 2 then
-							minePrompt = _("commsAmmo", "How about mines? (")
+							minePrompt = _("ammoComms", "How about mines? (")
 						elseif minePromptChoice == 3 then
-							minePrompt = _("commsAmmo", "More mines (")
+							minePrompt = _("ammoComms", "More mines (")
 						elseif minePromptChoice == 4 then
-							minePrompt = _("commsAmmo", "All the mines we can take. (")
+							minePrompt = _("ammoComms", "All the mines we can take. (")
 						else
-							minePrompt = _("commsAmmo", "Mines! What else? (")
+							minePrompt = _("ammoComms", "Mines! What else? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), minePrompt, getWeaponCost("Mine")), function()
 							handleWeaponRestock("Mine")
 						end)
 					end
@@ -2343,11 +2343,11 @@ function handleDockedState()
 				if player:getWeaponStorageMax("HVLI") > 0 then
 					if comms_target.hvliAvail then
 						if math.random(1,10) <= 5 then
-							hvliPrompt = _("commsAmmo", "What about HVLI? (")
+							hvliPrompt = _("ammoComms", "What about HVLI? (")
 						else
-							hvliPrompt = _("commsAmmo", "Could you provide HVLI? (")
+							hvliPrompt = _("ammoComms", "Could you provide HVLI? (")
 						end
-						addCommsReply(string.format(_("commsAmmo", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
+						addCommsReply(string.format(_("ammoComms", "%s%d rep each)"), hvliPrompt, getWeaponCost("HVLI")), function()
 							handleWeaponRestock("HVLI")
 						end)
 					end
@@ -2466,7 +2466,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not player:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+					setCommsMessage(_("needRepComms", "Insufficient reputation"))
 				else
 					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -2482,7 +2482,7 @@ function handleDockedState()
 			end
 			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not player:takeReputationPoints(hireCost) then
-					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+					setCommsMessage(_("needRepComms", "Insufficient reputation"))
 				else
 					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
 					setCommsMessage(_("commsTrade", "Repair crew member hired"))
@@ -2506,7 +2506,7 @@ function handleDockedState()
 			if player:isFriendly(comms_target) then
 				if comms_target.gossip ~= nil then
 					if random(1,100) < 50 then
-						addCommsReply(_("gossipSnippets", "Gossip"), function()
+						addCommsReply(_("gossipComms", "Gossip"), function()
 							setCommsMessage(comms_target.gossip)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -2786,34 +2786,34 @@ end
 
 function handleWeaponRestock(weapon)
     if not player:isDocked(comms_target) then 
-		setCommsMessage(_("commsAmmo", "You need to stay docked for that action."))
+		setCommsMessage(_("ammoComms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("commsAmmo", "We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("commsAmmo", "We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammoComms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("commsAmmo", "All nukes are charged and primed for destruction."));
+            setCommsMessage(_("ammoComms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("commsAmmo", "Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("ammoComms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("commsNeedRep", "Not enough reputation."))
+            setCommsMessage(_("needRepComms", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("commsAmmo", "You are fully loaded and ready to explode things."))
+            setCommsMessage(_("ammoComms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("commsAmmo", "We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("ammoComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -2867,35 +2867,35 @@ function handleUndockedState()
 	setCommsMessage(oMsg)
  	addCommsReply(_("commsStation", "I need information"), function()
 		setCommsMessage(_("commsStation", "What kind of information do you need?"))
-		addCommsReply(_("commsAmmo", "What ordnance do you have available for restock?"), function()
+		addCommsReply(_("ammoComms", "What ordnance do you have available for restock?"), function()
 			missileTypeAvailableCount = 0
 			oMsg = ""
 			if comms_target.nukeAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   Nuke")
+				oMsg = oMsg .. _("ammoComms", "\n   Nuke")
 			end
 			if comms_target.empAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   EMP")
+				oMsg = oMsg .. _("ammoComms", "\n   EMP")
 			end
 			if comms_target.homeAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   Homing")
+				oMsg = oMsg .. _("ammoComms", "\n   Homing")
 			end
 			if comms_target.mineAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   Mine")
+				oMsg = oMsg .. _("ammoComms", "\n   Mine")
 			end
 			if comms_target.hvliAvail then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				oMsg = oMsg .. _("commsAmmo", "\n   HVLI")
+				oMsg = oMsg .. _("ammoComms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				oMsg = _("commsAmmo", "We have no ordnance available for restock")
+				oMsg = _("ammoComms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				oMsg = string.format(_("commsAmmo", "We have the following type of ordnance available for restock:%s"), oMsg)
+				oMsg = string.format(_("ammoComms", "We have the following type of ordnance available for restock:%s"), oMsg)
 			else
-				oMsg = string.format(_("commsAmmo", "We have the following types of ordnance available for restock:%s"), oMsg)
+				oMsg = string.format(_("ammoComms", "We have the following types of ordnance available for restock:%s"), oMsg)
 			end
 			setCommsMessage(oMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -3133,7 +3133,7 @@ function handleUndockedState()
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
                             setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
+                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -3154,7 +3154,7 @@ function handleUndockedState()
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
                             setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("commsNeedRep", "Not enough reputation!"));
+                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -3418,7 +3418,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3438,7 +3438,7 @@ function neutralComms(comms_data)
 			destRep = random(1,5)
 			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not player:takeReputationPoints(destRep) then
-					setCommsMessage(_("commsNeedRep", "Insufficient reputation"))
+					setCommsMessage(_("needRepComms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
@@ -3459,7 +3459,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3485,7 +3485,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3516,7 +3516,7 @@ function neutralComms(comms_data)
 								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
 							else
 								if not player:takeReputationPoints(goodsRep) then
-									setCommsMessage(_("commsNeedRep", "Insufficient reputation for purchase"))
+									setCommsMessage(_("needRepComms", "Insufficient reputation for purchase"))
 								else
 									player.cargo = player.cargo - 1
 									decrementShipGoods(goodsType)
@@ -3868,7 +3868,7 @@ function initialInstructions(delta)
 	plot1name = "initialInstructions"
 	initialOrderTimer = initialOrderTimer - delta
 	if initialOrderTimer < 0 then
-		player:addToShipLog(string.format(_("commsMinefield", "Since %s is so isolated and so close to enemy territory, we need you to lay a minefield across each gap in the surrounding asteroids"),homeStation:getCallSign()),"Magenta")
+		player:addToShipLog(string.format(_("minefield-shiplogP", "Since %s is so isolated and so close to enemy territory, we need you to lay a minefield across each gap in the surrounding asteroids"),homeStation:getCallSign()),"Magenta")
 		primaryOrders = _("commsMinefield", "Lay minefield across each gap in surrounding asteroids.")
 		plot1 = checkGaps
 		plot1name = "checkGaps"
@@ -3887,7 +3887,7 @@ function checkGaps(delta)
 			southClosed = checkSouthernGap()
 			if prevSouthClosed and southClosed then
 				southMet = true
-				player:addToShipLog(string.format(_("commsMinefield", "Congratulations, You've closed the gap at heading 180 from %s"),homeStation:getCallSign()),"Magenta")
+				player:addToShipLog(string.format(_("minefield-shiplogP", "Congratulations, You've closed the gap at heading 180 from %s"),homeStation:getCallSign()),"Magenta")
 				primaryOrders = primaryOrders .. _("commsMinefield", " South gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
@@ -3898,7 +3898,7 @@ function checkGaps(delta)
 			northClosed = checkNorthernGap()
 			if prevNorthClosed and northClosed then
 				northMet = true
-				player:addToShipLog(string.format(_("commsMinefield", "Congratulations, You've closed the gap at heading 0 from %s"),homeStation:getCallSign()),"Magenta")
+				player:addToShipLog(string.format(_("minefield-shiplogP", "Congratulations, You've closed the gap at heading 0 from %s"),homeStation:getCallSign()),"Magenta")
 				primaryOrders = primaryOrders .. _("commsMinefield", " North gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
@@ -3909,7 +3909,7 @@ function checkGaps(delta)
 			westClosed = checkWesternernGap()
 			if prevWestClosed and westClosed then
 				westMet = true
-				player:addToShipLog(string.format(_("commsMinefield", "Congratulations, You've closed the gap at heading 270 from %s"),homeStation:getCallSign()),"Magenta")
+				player:addToShipLog(string.format(_("minefield-shiplogP", "Congratulations, You've closed the gap at heading 270 from %s"),homeStation:getCallSign()),"Magenta")
 				primaryOrders = primaryOrders .. _("commsMinefield", " West gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
@@ -3920,7 +3920,7 @@ function checkGaps(delta)
 			eastClosed = checkEasternernGap()
 			if prevEastClosed and eastClosed then
 				eastMet = true
-				player:addToShipLog(string.format(_("commsMinefield", "Congratulations, You've closed the gap at heading 90 from %s"),homeStation:getCallSign()),"Magenta")
+				player:addToShipLog(string.format(_("minefield-shiplogP", "Congratulations, You've closed the gap at heading 90 from %s"),homeStation:getCallSign()),"Magenta")
 				primaryOrders = primaryOrders .. _("commsMinefield", " East gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
@@ -3931,7 +3931,7 @@ function checkGaps(delta)
 					p = getPlayerShip(pidx)
 					if p ~= nil and p:isValid() then
 						p:addReputationPoints(100)
-						p:addToShipLog(string.format(_("commsMinefield", "You've closed the gaps. Now for the Quixotic part: go destroy the enemy bases surrounding us while keeping %s alive. You'll find them straight out from the gaps"),homeStation:getCallSign()),"Magenta")
+						p:addToShipLog(string.format(_("minefield-shiplogP", "You've closed the gaps. Now for the Quixotic part: go destroy the enemy bases surrounding us while keeping %s alive. You'll find them straight out from the gaps"),homeStation:getCallSign()),"Magenta")
 						primaryOrders = string.format(_("commsMinefield", "Protect %s. Destroy enemy bases straight out from gaps"),homeStation:getCallSign())
 					end
 				end
