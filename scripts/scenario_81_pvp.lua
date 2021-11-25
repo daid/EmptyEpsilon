@@ -178,7 +178,7 @@ Greetings, Captain. What can we do for you?]]))
             _("Send in more troops. (100 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(100) then
-                    setCommsMessage(_("needRepComms", "Not enough reputation."))
+                    setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
                 setCommsMessage(_("Aye, Captain. We've deployed a squad with fighter escort to support the assault on Shangri-La."))
@@ -200,7 +200,7 @@ Greetings, Captain. What can we do for you?]]))
             _("We need some space-based firepower. (150 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(150) then
-                    setCommsMessage(_("needRepComms", "Not enough reputation."))
+                    setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
                 setCommsMessage(_("Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La."))
@@ -226,11 +226,11 @@ function addCommsReplySupply(args)
         string.format(args.request .. " " .. _("(%d rep each)"), price),
         function()
             if not comms_source:isDocked(comms_target) then
-                setCommsMessage(_("ammoComms", "You need to stay docked for that action."))
+                setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                 return
             end
             if not comms_source:takeReputationPoints(price * (comms_source:getWeaponStorageMax(missile_type) - comms_source:getWeaponStorage(missile_type))) then
-                setCommsMessage(_("needRepComms", "Not enough reputation."))
+                setCommsMessage(_("needRep-comms", "Not enough reputation."))
                 return
             end
             if comms_source:getWeaponStorage(missile_type) >= comms_source:getWeaponStorageMax(missile_type) then
@@ -247,46 +247,46 @@ end
 
 --- Comms supplyDialogue.
 function supplyDialogue()
-    setCommsMessage(_("ammoComms", "What supplies do you need?"))
+    setCommsMessage(_("ammo-comms", "What supplies do you need?"))
 
     addCommsReplySupply {
         missile_type = "Homing",
         price = 2,
-        request = _("ammoComms", "Do you have spare homing missiles for us?"),
-        reply_full = _("ammoComms", "Sorry, Captain, but you are fully stocked with homing missiles."),
-        reply_filled = _("ammoComms", "We've replenished your homing missile supply.")
+        request = _("ammo-comms", "Do you have spare homing missiles for us?"),
+        reply_full = _("ammo-comms", "Sorry, Captain, but you are fully stocked with homing missiles."),
+        reply_filled = _("ammo-comms", "We've replenished your homing missile supply.")
     }
 
     addCommsReplySupply {
         missile_type = "Mine",
         price = 2,
-        request = _("ammoComms", "Please re-stock our mines."),
-        reply_full = _("ammoComms", "Captain, you already have all the mines you can fit in that ship."),
-        reply_filled = _("ammoComms", "These mines are yours.")
+        request = _("ammo-comms", "Please re-stock our mines."),
+        reply_full = _("ammo-comms", "Captain, you already have all the mines you can fit in that ship."),
+        reply_filled = _("ammo-comms", "These mines are yours.")
     }
 
     addCommsReplySupply {
         missile_type = "Nuke",
         price = 15,
-        request = _("ammoComms", "Can you supply us with some nukes?"),
-        reply_full = _("ammoComms", "Your nukes are already charged and primed for destruction."),
-        reply_filled = _("ammoComms", "You are fully loaded and ready to explode things.")
+        request = _("ammo-comms", "Can you supply us with some nukes?"),
+        reply_full = _("ammo-comms", "Your nukes are already charged and primed for destruction."),
+        reply_filled = _("ammo-comms", "You are fully loaded and ready to explode things.")
     }
 
     addCommsReplySupply {
         missile_type = "EMP",
         price = 10,
-        request = _("ammoComms", "Please re-stock our EMP missiles."),
-        reply_full = _("ammoComms", "All storage for EMP missiles is already full, Captain."),
-        reply_filled = _("ammoComms", "We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
+        request = _("ammo-comms", "Please re-stock our EMP missiles."),
+        reply_full = _("ammo-comms", "All storage for EMP missiles is already full, Captain."),
+        reply_filled = _("ammo-comms", "We've recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
     }
 
     addCommsReplySupply {
         missile_type = "HVLI",
         price = 2,
-        request = _("ammoComms", "Can you restock us with HVLI?"),
-        reply_full = _("ammoComms", "Sorry, Captain, but you are fully stocked with HVLIs."),
-        reply_filled = _("ammoComms", "We've replenished your HVLI supply.")
+        request = _("ammo-comms", "Can you restock us with HVLI?"),
+        reply_full = _("ammo-comms", "Sorry, Captain, but you are fully stocked with HVLIs."),
+        reply_filled = _("ammo-comms", "We've replenished your HVLI supply.")
     }
 
     addCommsReply(_("Back to main menu"), stationComms)

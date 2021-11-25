@@ -220,7 +220,7 @@ function init()
 	plot1timer = 5
 	plot1 = missionMessage
 	plot1name = "missionMessage"
-	primaryOrders = string.format(_("ordersComms", "Protect Somerset in %s"),stationSomerset:getSectorName())
+	primaryOrders = string.format(_("orders-comms", "Protect Somerset in %s"),stationSomerset:getSectorName())
 	secondaryOrders = ""
 	optionalOrders = ""
 	graveyardDocked = false
@@ -358,7 +358,7 @@ function commsStation()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("commsStation", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("stationClassic-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -372,38 +372,38 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("commsStation", "Good day, officer!\nWhat can we do for you today?"))
+        setCommsMessage(_("stationClassic-comms", "Good day, officer!\nWhat can we do for you today?"))
     else
-        setCommsMessage(_("commsStation", "Welcome to our lovely station."))
+        setCommsMessage(_("stationClassic-comms", "Welcome to our lovely station."))
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
+        addCommsReply(string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
             handleWeaponRestock("Homing")
         end)
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
+        addCommsReply(string.format(_("ammo-comms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
             handleWeaponRestock("HVLI")
         end)
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
+        addCommsReply(string.format(_("ammo-comms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
             handleWeaponRestock("Mine")
         end)
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
+        addCommsReply(string.format(_("ammo-comms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
             handleWeaponRestock("Nuke")
         end)
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
+        addCommsReply(string.format(_("ammo-comms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
             handleWeaponRestock("EMP")
         end)
     end
 	if player:isFriendly(comms_target) then
-		addCommsReply(_("ordersComms", "What are my current orders?"), function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -444,32 +444,32 @@ function handleDockedState()
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage(_("ammoComms", "You need to stay docked for that action.")); return end
+    if not player:isDocked(comms_target) then setCommsMessage(_("ammo-comms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("ammoComms", "We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("ammoComms", "All nukes are charged and primed for destruction."));
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("ammoComms", "Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("needRepComms", "Not enough reputation."))
+            setCommsMessage(_("needRep-comms", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("ammoComms", "You are fully loaded and ready to explode things."))
+            setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("ammoComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -478,12 +478,12 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("commsStation", "Good day, officer.\nIf you need supplies, please dock with us first."))
+        setCommsMessage(_("stationClassic-comms", "Good day, officer.\nIf you need supplies, please dock with us first."))
     else
-        setCommsMessage(_("commsStation", "Greetings.\nIf you want to do business, please dock with us first."))
+        setCommsMessage(_("stationClassic-comms", "Greetings.\nIf you want to do business, please dock with us first."))
     end
  	if player:isFriendly(comms_target) then
-		addCommsReply(_("ordersComms", "What are my current orders?"), function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders .. "\n" .. secondaryOrders .. optionalOrders
 			setCommsMessage(ordMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -518,13 +518,13 @@ function handleUndockedState()
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("stationClassic-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("commsStation", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("stationClassic-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -532,9 +532,9 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -544,18 +544,18 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("commsStation", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("stationClassic-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("commsStation", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("stationClassic-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -615,8 +615,8 @@ function missionMessage(delta)
 	plot1timer = plot1timer - delta
 	if plot1timer < 0 then
 		player:addToShipLog(string.format(_("goal-shipLog", "Your mission is to protect station Somerset in %s. Other missions may be added. Dock with Somerset for additional mission parameters. Welcome to the london area of human navy influence"),stationSomerset:getSectorName()),"Magenta")
-		primaryOrders = string.format(_("ordersComms", "Protect Somerset in %s"),stationSomerset:getSectorName())
-		secondaryOrders = _("ordersComms", "Dock with Somerset")
+		primaryOrders = string.format(_("orders-comms", "Protect Somerset in %s"),stationSomerset:getSectorName())
+		secondaryOrders = _("orders-comms", "Dock with Somerset")
 		plot1 = camdenSensorReading
 		plot1name = "camdenSensorReading"
 	end
@@ -626,7 +626,7 @@ function camdenSensorReading(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(_("ordersAudio-shipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London1.ogg")
-		secondaryOrders = _("ordersComms", "Investigate near station Camden in A2")
+		secondaryOrders = _("orders-comms", "Investigate near station Camden in A2")
 		plot1 = arriveA2
 		plot1name = "arriveA2"
 	end
@@ -704,7 +704,7 @@ function marleyMob(delta)
 		end
 		player:addToShipLog(_("ordersAudio-shipLog", "[Jacob Marley] You must defeat the chains that bind you in the form of Kraylor ships"),"Red")
 		playSoundFile("audio/scenario/62/sa_62_Marley2.ogg")
-		secondaryOrders = _("ordersComms", "Defeat Kraylors")
+		secondaryOrders = _("orders-comms", "Defeat Kraylors")
 	end
 end
 
@@ -721,7 +721,7 @@ function destroyMarleyMob(delta)
 		playSoundFile("audio/scenario/62/sa_62_Marley3.ogg")
 		plot1 = startChristmasPast
 		plot1name = "startChristmasPast"
-		secondaryOrders = _("ordersComms", "Dock with Somerset")
+		secondaryOrders = _("orders-comms", "Dock with Somerset")
 		removeGMFunction(GMChristmasPast)
 	end
 end
@@ -730,7 +730,7 @@ function startChristmasPast(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("ordersAudio-shipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London2.ogg")
-		secondaryOrders = string.format(_("ordersComms", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
+		secondaryOrders = string.format(_("orders-comms", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
 		plot1 = arriveNearMillbank
 		plot1name = "arriveNearMillbank"
 	end
@@ -885,7 +885,7 @@ function destroyFezFleet(delta)
 		friendBelle = CpuShip():setFaction("Human Navy"):setCallSign("Belle"):setTemplate("Goods Freighter 3"):orderDock(stationFezziwig):setPosition(fezx+vx,fezy+vy):setRotation(belleAngle+180):setScannedByFaction("Human Navy",true)
 		plot1 = belleNemesis
 		plot1name = "belleNemesis"
-		secondaryOrders = _("ordersComms", "Protect Belle")
+		secondaryOrders = _("orders-comms", "Protect Belle")
 		belleNemesisTimer = 10
 	end
 end
@@ -933,7 +933,7 @@ function destroyBelleFleet(delta)
 		player:addToShipLog(_("ordersAudio-shipLog", "You protected Belle. Somerset awaits"),"Blue")
 		playSoundFile("audio/scenario/62/sa_62_Child3.ogg")
 		plot1 = startChristmasPresent
-		secondaryOrders = _("ordersComms", "Dock with Somerset")
+		secondaryOrders = _("orders-comms", "Dock with Somerset")
 		plot1name = "startChristmasPresent"
 		removeGMFunction(GMChristmasPresent)
 		stationFezziwig:destroy()
@@ -950,7 +950,7 @@ function startChristmasPresent(delta)
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("OrdersAudio-shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London3.ogg")
-		secondaryOrders = string.format(_("ordersComms", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
+		secondaryOrders = string.format(_("orders-comms", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
 		plot1 = arriveNearBedlam
 		plot1name = "arriveNearBedlam"
 	end
@@ -967,7 +967,7 @@ function arriveNearBedlam(delta)
 		table.insert(cratchitList, enemyHolly)
 		plot1 = destroyCratchitFleet
 		plot1name = "destroyCratchitFleet"
-		secondaryOrders = _("ordersComms", "Destroy marauding enemies")
+		secondaryOrders = _("orders-comms", "Destroy marauding enemies")
 		if difficulty >= 1 then
 			vx, vy = vectorFromAngle(random(0,300),random(8000,12000))
 			enemyWreath = CpuShip():setFaction("Ghosts"):setCallSign("Wreath"):setTemplate("Phobos T3"):orderRoaming():setPosition(px+vx,py+vy)
@@ -1005,7 +1005,7 @@ function destroyCratchitFleet(delta)
 			friendTurkeySurprise = CpuShip():setFaction("Human Navy"):setCallSign("Turkey Surprise"):setTemplate("Equipment Freighter 3"):orderDock(stationSomerset):setPosition(bx+vx,by+vy):setScannedByFaction("Human Navy",true)
 			plot1 = timIll
 			plot1name = "timIll"
-			secondaryOrders = _("ordersComms", "Take Tim from Bedlam to Turkey Surprise")
+			secondaryOrders = _("orders-comms", "Take Tim from Bedlam to Turkey Surprise")
 			timAboard = false
 			plot2 = turkeyNemesis
 			plot2name = "turkeyNemesis"
@@ -1134,7 +1134,7 @@ function timIll(delta)
 					playSoundFile("audio/scenario/62/sa_62_Turkey3.ogg")
 					plot1 = timHeal
 					plot1name = "timHeal"
-					secondaryOrders = _("ordersComms", "Protect Turkey Surprise")
+					secondaryOrders = _("orders-comms", "Protect Turkey Surprise")
 					timHealTimer = 50
 				end
 			end
@@ -1154,7 +1154,7 @@ function timHeal(delta)
 		timAboard = false
 		plot1 = returnTim
 		plot1name = "returnTim"
-		secondaryOrders = _("ordersComms", "Return Tim to Bedlam")
+		secondaryOrders = _("orders-comms", "Return Tim to Bedlam")
 	end
 	if not friendTurkeySurprise:isValid() then
 		globalMessage(string.format(_("msgMainscreen", "Tim dies with Turkey Surprise. %s disabled by a broken heart (engine failure)"),player:getCallSign()))
@@ -1169,7 +1169,7 @@ function returnTim(delta)
 			playSoundFile("audio/scenario/62/sa_62_BobCratchit4.ogg")
 			plot1 = endChristmasPast
 			plot1name = "endChristmasPast"
-			secondaryOrders = _("ordersComms", "Dock with Somerset")
+			secondaryOrders = _("orders-comms", "Dock with Somerset")
 		end
 	else
 		if distance(friendTurkeySurprise,player) < 500 then
@@ -1202,11 +1202,11 @@ function endChristmasPast(delta)
 end
 
 function startChristmasFuture(delta)
-	secondaryOrders = _("ordersComms", "Dock with Somerset")
+	secondaryOrders = _("orders-comms", "Dock with Somerset")
 	if player:isDocked(stationSomerset) then
 		player:addToShipLog(string.format(_("ordersAudio-shipLog", "We are glad you took care of those Ghosts in the machine. They came out of nowhere! We still saw some impossible sensor readings even after our sensor overhaul. We are now conducting a level 5 diagnostic and repair regimen. Keep an eye on the City in %s"),stationCity:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London4.ogg")
-		secondaryOrders = string.format(_("ordersComms", "Watch the City in %s"),stationCity:getSectorName())
+		secondaryOrders = string.format(_("orders-comms", "Watch the City in %s"),stationCity:getSectorName())
 		cx, cy = stationCity:getPosition()
 		futx = cx + 5000
 		futy = cy - 5000

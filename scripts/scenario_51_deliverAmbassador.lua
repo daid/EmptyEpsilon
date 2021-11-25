@@ -18,37 +18,37 @@ function init()
 	player:setPosition(22400, 18200):setCallSign(playerCallSign)
 	-- Create various stations of various size, purpose and faction.
     outpost41 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-    outpost41:setPosition(22400, 16100):setCallSign("Outpost-41"):setDescription(_("scienceDescriptionStation", "Strategically located human station"))
+    outpost41:setPosition(22400, 16100):setCallSign("Outpost-41"):setDescription(_("scienceDescription-station", "Strategically located human station"))
     outpost17 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     outpost17:setPosition(52400, -26150):setCallSign("Outpost-17")
     outpost26 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
     outpost26:setPosition(-42400, -32150):setCallSign("Outpost-26")
     outpost13 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	outpost13:setPosition(12600, 27554):setCallSign("Outpost-13"):setDescription(_("scienceDescriptionStation", "Gathering point for asteroid miners"))
+	outpost13:setPosition(12600, 27554):setCallSign("Outpost-13"):setDescription(_("scienceDescription-station", "Gathering point for asteroid miners"))
     outpost57 = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor")
 	outpost57:setPosition(63630, 47554):setCallSign("Outpost-57")
     science22 = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	science22:setPosition(11200, 67554):setCallSign("Science-22")
     science37 = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	science37:setPosition(-18200, -32554):setCallSign("Science-37"):setDescription(_("scienceDescriptionStation", "Observatory"))
+	science37:setPosition(-18200, -32554):setCallSign("Science-37"):setDescription(_("scienceDescription-station", "Observatory"))
     bpcommnex = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	bpcommnex:setPosition(-53500,84000):setCallSign("BP Comm Nex"):setDescription(_("scienceDescriptionStation", "Balindor Prime Communications Nexus"))
+	bpcommnex:setPosition(-53500,84000):setCallSign("BP Comm Nex"):setDescription(_("scienceDescription-station", "Balindor Prime Communications Nexus"))
     goltincomms = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	goltincomms:setPosition(93150,24387):setCallSign("Goltin Comms")
     stationOrdinkal = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationOrdinkal:setPosition(-14600, 47554):setCallSign("Ordinkal"):setDescription(_("scienceDescriptionStation", "Trading Post"))
+	stationOrdinkal:setPosition(-14600, 47554):setCallSign("Ordinkal"):setDescription(_("scienceDescription-station", "Trading Post"))
     stationNakor = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationNakor:setPosition(-34310, -37554):setCallSign("Nakor"):setDescription(_("scienceDescriptionStation", "Science and trading hub"))
+	stationNakor:setPosition(-34310, -37554):setCallSign("Nakor"):setDescription(_("scienceDescription-station", "Science and trading hub"))
     stationKelfist = SpaceStation():setTemplate("Medium Station"):setFaction("Kraylor")
 	stationKelfist:setPosition(44640, 13554):setCallSign("Kelfist")
     stationFranklin = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationFranklin:setPosition(-24640, -13554):setCallSign("Franklin"):setDescription(_("scienceDescriptionStation", "Civilian and military station"))
+	stationFranklin:setPosition(-24640, -13554):setCallSign("Franklin"):setDescription(_("scienceDescription-station", "Civilian and military station"))
     stationBroad = SpaceStation():setTemplate("Large Station"):setFaction("Independent")
-	stationBroad:setPosition(44340, 63554):setCallSign("Broad"):setDescription(_("scienceDescriptionStation", "Trading Post"))
+	stationBroad:setPosition(44340, 63554):setCallSign("Broad"):setDescription(_("scienceDescription-station", "Trading Post"))
     stationBazamoana = SpaceStation():setTemplate("Large Station"):setFaction("Independent")
-	stationBazamoana:setPosition(35, 87):setCallSign("Bazamoana"):setDescription(_("scienceDescriptionStation", "Trading Nexus"))
+	stationBazamoana:setPosition(35, 87):setCallSign("Bazamoana"):setDescription(_("scienceDescription-station", "Trading Nexus"))
     stationPangora = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("scienceDescriptionStation", "Major military installation"))
+	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("scienceDescription-station", "Major military installation"))
 	-- Give out some initial reputation points. Give more for easier difficulty levels
 	stationFranklin:addReputationPoints(50.0)
 	if getScenarioVariation() ~= "Hard" then
@@ -894,7 +894,7 @@ function commsStation()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("commsStation", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("stationClassic-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -908,33 +908,33 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("commsStation", "Good day, officer!\nWhat can we do for you today?"))
+        setCommsMessage(_("stationClassic-comms", "Good day, officer!\nWhat can we do for you today?"))
     else
-        setCommsMessage(_("commsStation", "Welcome to our lovely station."))
+        setCommsMessage(_("stationClassic-comms", "Welcome to our lovely station."))
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
+        addCommsReply(string.format(_("ammo-comms", "Do you have spare homing missiles for us? (%d rep each)"), getWeaponCost("Homing")), function()
             handleWeaponRestock("Homing")
         end)
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
+        addCommsReply(string.format(_("ammo-comms", "Can you restock us with HVLI? (%d rep each)"), getWeaponCost("HVLI")), function()
             handleWeaponRestock("HVLI")
         end)
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
+        addCommsReply(string.format(_("ammo-comms", "Please re-stock our mines. (%d rep each)"), getWeaponCost("Mine")), function()
             handleWeaponRestock("Mine")
         end)
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
+        addCommsReply(string.format(_("ammo-comms", "Can you supply us with some nukes? (%d rep each)"), getWeaponCost("Nuke")), function()
             handleWeaponRestock("Nuke")
         end)
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply(string.format(_("ammoComms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
+        addCommsReply(string.format(_("ammo-comms", "Please re-stock our EMP missiles. (%d rep each)"), getWeaponCost("EMP")), function()
             handleWeaponRestock("EMP")
         end)
     end
@@ -1045,18 +1045,18 @@ function handleDockedState()
 	end
 	-- Include orders upon request for when they are missed
 	if isAllowedTo(askForOrders) then
-		addCommsReply(_("ordersComms", "What are my current orders?"), function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			oMessage = ""
 			if plot1 == chasePlayer or plot1 == getAmbassador or plot1 == ambassadorAboard then
-				oMessage = _("ordersComms", "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
+				oMessage = _("orders-comms", "Current Orders: Get ambassador Gremus from Balindor Prime. Avoid contact if possible. ")
 			elseif plot1 == gotoNingling then
-				oMessage = _("ordersComms", "Current Orders: Transport ambassador Gremus to Ningling. ")
+				oMessage = _("orders-comms", "Current Orders: Transport ambassador Gremus to Ningling. ")
 			elseif plot1 == waitForAmbassador then
-				oMessage = __("ordersComms", "Current Orders: Wait for ambassador Gremus to complete business at Ningling. ")
+				oMessage = __("orders-comms", "Current Orders: Wait for ambassador Gremus to complete business at Ningling. ")
 			elseif plot1 == getFromNingling then
-				oMessage = _("ordersComms", "Current Orders: Dock with Ningling to get ambassador Gremus. ")
+				oMessage = _("orders-comms", "Current Orders: Dock with Ningling to get ambassador Gremus. ")
 			elseif plot1 == travelGoltin then
-				oMessage = _("ordersComms", "Current Orders: Transport ambassador Gremus to Goltin 7. ")
+				oMessage = _("orders-comms", "Current Orders: Transport ambassador Gremus to Goltin 7. ")
 			end
 			if plot3 == artifactResearch or plot3 == artifactByStation then
 				oMessage = oMessage.. _("artifact-comms", "Additional Orders: Research artifacts. Some artifacts reported near Pangora, Nakor and Science-37. ")
@@ -1071,32 +1071,32 @@ function handleDockedState()
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage(_("ammoComms", "You need to stay docked for that action.")); return end
+    if not player:isDocked(comms_target) then setCommsMessage(_("ammo-comms", "You need to stay docked for that action.")); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass destruction."))
-        elseif weapon == "EMP" then setCommsMessage(_("ammoComms", "We do not deal in weapons of mass disruption."))
-        else setCommsMessage(_("ammoComms", "We do not deal in those weapons.")) end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage(_("ammoComms", "All nukes are charged and primed for destruction."));
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage(_("ammoComms", "Sorry, sir, but you are as fully stocked as I can allow."));
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage(_("needRepComms", "Not enough reputation."))
+            setCommsMessage(_("needRep-comms", "Not enough reputation."))
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage(_("ammoComms", "You are fully loaded and ready to explode things."))
+            setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage(_("ammoComms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
+            setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -1105,18 +1105,18 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("commsStation", "Good day, officer.\nIf you need supplies, please dock with us first."))
+        setCommsMessage(_("stationClassic-comms", "Good day, officer.\nIf you need supplies, please dock with us first."))
     else
-        setCommsMessage(_("commsStation", "Greetings.\nIf you want to do business, please dock with us first."))
+        setCommsMessage(_("stationClassic-comms", "Greetings.\nIf you want to do business, please dock with us first."))
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("commsStation", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("stationClassic-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("commsStation", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("stationClassic-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -1124,9 +1124,9 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("commsStation", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -1136,18 +1136,18 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("commsStation", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("stationClassic-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("commsStation", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("commsStation", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("stationClassic-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("commsStation", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("commsStation", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
                         else
-                            setCommsMessage(_("needRepComms", "Not enough reputation!"));
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
