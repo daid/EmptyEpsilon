@@ -3959,8 +3959,8 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply(_("explainGoods", "No tutorial covered goods or cargo. Explain"), function()
-			setCommsMessage(_("explainGoods", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
+		addCommsReply(_("explainGoods-comms", "No tutorial covered goods or cargo. Explain"), function()
+			setCommsMessage(_("explainGoods-comms", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
