@@ -727,7 +727,7 @@ end
 
 function pangoraArtifactChange(delta)
 	if player.pangora_reading_change_message == nil then
-		player:addCustomMessage("Science", _("msgScience", "Warning"), _("msgScience", "The readings on the Pangora artifact have changed"))
+		player:addCustomMessage("Science", _("artifact-msgScience", "Warning"), _("artifact-msgScience", "The readings on the Pangora artifact have changed"))
 		player.pangora_reading_change_message = "sent"
 	end
 	plot4 = pangoraArtifactExplode
@@ -894,7 +894,7 @@ function commsStation()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("stationClassic-comms", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -908,9 +908,9 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("stationClassic-comms", "Good day, officer!\nWhat can we do for you today?"))
+        setCommsMessage(_("station-comms", "Good day, officer!\nWhat can we do for you today?"))
     else
-        setCommsMessage(_("stationClassic-comms", "Welcome to our lovely station."))
+        setCommsMessage(_("station-comms", "Welcome to our lovely station."))
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
@@ -1105,18 +1105,18 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("stationClassic-comms", "Good day, officer.\nIf you need supplies, please dock with us first."))
+        setCommsMessage(_("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first."))
     else
-        setCommsMessage(_("stationClassic-comms", "Greetings.\nIf you want to do business, please dock with us first."))
+        setCommsMessage(_("station-comms", "Greetings.\nIf you want to do business, please dock with us first."))
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("stationClassic-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -1124,7 +1124,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -1136,16 +1136,16 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("stationClassic-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end

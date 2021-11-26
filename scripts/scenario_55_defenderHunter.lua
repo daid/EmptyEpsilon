@@ -547,7 +547,7 @@ function populateStationPool()
 		        	medicine =		false, 
 		        	luxury =		false,
 		        },
-				description = _("scienceStationsDescription", "Training and Coordination"), 
+				description = _("scienceDescription-station", "Training and Coordination"), 
 				general = _("stationGeneralInfo-comms", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"), 
 				history = _("stationStory-comms", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"),
 			},
@@ -587,7 +587,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Warp and Impulse engine manufacturing"), 
+				description = _("scienceDescription-station", "Warp and Impulse engine manufacturing"), 
 				general = _("stationGeneralInfo-comms", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"), 
 				history = _("stationStory-comms", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."),
 			},
@@ -623,7 +623,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Warp drive components"), 
+				description = _("scienceDescription-station", "Warp drive components"), 
 				general = _("stationGeneralInfo-comms", "We provide warp drive engines and components"), 
 				history = _("stationStory-comms", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"),
 			},
@@ -663,7 +663,7 @@ function populateStationPool()
 				buy =	{
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Shielded circuitry fabrication"), 
+				description = _("scienceDescription-station", "Shielded circuitry fabrication"), 
 				general = _("stationGeneralInfo-comms", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"), 
 				history = _("stationStory-comms", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"),
 			},
@@ -703,7 +703,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Sensor components"), 
+				description = _("scienceDescription-station", "Sensor components"), 
 				general = _("stationGeneralInfo-comms", "We research and manufacture sensor components and systems"), 
 				history = _("stationStory-comms", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"),
 			},
@@ -740,7 +740,7 @@ function populateStationPool()
 					medicine = random(1,100) < 44, 
 					luxury = random(1,100) < 63,
 				},
-				description = _("scienceStationsDescription", "Nanite supplier"), 
+				description = _("scienceDescription-station", "Nanite supplier"), 
 				general = _("stationGeneralInfo-comms", "We provide nanites for various organic and non-organic systems"), 
 				history = _("stationStory-comms", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"),
 			},
@@ -780,7 +780,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Energy beam components"), 
+				description = _("scienceDescription-station", "Energy beam components"), 
 				general = _("stationGeneralInfo-comms", "We research and manufacture energy beam components and systems"), 
 				history = _("stationStory-comms", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"),
 			},
@@ -812,7 +812,7 @@ function populateStationPool()
     				medicine = false, 
     				luxury = false,
     			},
-    			description = _("scienceStationsDescription", "Gambling and resupply"),
+    			description = _("scienceDescription-station", "Gambling and resupply"),
 		        general = _("stationGeneralInfo-comms", "The oldest station in the quadrant"),
 		        history = "",
 			},
@@ -849,7 +849,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Energy Beam Components"), 
+				description = _("scienceDescription-station", "Energy Beam Components"), 
 				general = _("stationGeneralInfo-comms", "We manufacture energy beam components"), 
 				history = _("stationStory-comms", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"),
 			},
@@ -886,7 +886,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Exobiology research"), 
+				description = _("scienceDescription-station", "Exobiology research"), 
 				general = _("stationGeneralInfo-comms", "We study recently discovered life forms not native to Earth"), 
 				history = _("stationStory-comms", "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"),
 			},
@@ -923,7 +923,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Impulse engine components"), 
+				description = _("scienceDescription-station", "Impulse engine components"), 
 				general = _("stationGeneralInfo-comms", "We research and manufacture impulse engine components and systems"), 
 				history = _("stationStory-comms", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"),
 			},
@@ -962,7 +962,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Energy and particle beam components"), 
+				description = _("scienceDescription-station", "Energy and particle beam components"), 
 				general = _("stationGeneralInfo-comms", "We fabricate general and specialized components for ship beam systems"), 
 				history = _("stationStory-comms", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"),
 			},
@@ -999,7 +999,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Trading station"), 
+				description = _("scienceDescription-station", "Trading station"), 
 				general = _("stationGeneralInfo-comms", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"), 
 				history = _("stationStory-comms", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"),
 			},
@@ -1039,7 +1039,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Mining"), 
+				description = _("scienceDescription-station", "Mining"), 
 				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals and process them for sale"), 
 				history = _("stationStory-comms", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"),
 			},
@@ -1076,7 +1076,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Observatory and stellar mapping"), 
+				description = _("scienceDescription-station", "Observatory and stellar mapping"), 
 				general = _("stationGeneralInfo-comms", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"), 
 				history = _("stationStory-comms", "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"),
 			},
@@ -1113,7 +1113,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Autodoc components"), 
+				description = _("scienceDescription-station", "Autodoc components"), 
 				general = "", 
 				history = _("stationStory-comms", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"),
 			},
@@ -1150,7 +1150,7 @@ function populateStationPool()
 					medicine = true, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Zero gravity sports and entertainment"), 
+				description = _("scienceDescription-station", "Zero gravity sports and entertainment"), 
 				general = _("stationGeneralInfo-comms", "Come take in a game or two or perhaps see a show"), 
 				history = _("stationStory-comms", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"),
 			},
@@ -1187,7 +1187,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 43,
 				},
-				description = _("scienceStationsDescription", "Shield components and research"), 
+				description = _("scienceDescription-station", "Shield components and research"), 
 				general = _("stationGeneralInfo-comms", "We research and fabricate components for ship shield systems"), 
 				history = _("stationStory-comms", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"),
 			},
@@ -1224,7 +1224,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Shield and armor components and research"), 
+				description = _("scienceDescription-station", "Shield and armor components and research"), 
 				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"), 
 				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")},
 		},
@@ -1266,7 +1266,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Battery and software engineering"), 
+				description = _("scienceDescription-station", "Battery and software engineering"), 
 				general = _("stationGeneralInfo-comms", "We provide high quality high capacity batteries and specialized software for all shipboard systems"), 
 				history = _("stationStory-comms", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"),
 			},
@@ -1302,7 +1302,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Shield and Armor Research"), 
+				description = _("scienceDescription-station", "Shield and Armor Research"), 
 				general = _("stationGeneralInfo-comms", "The finest shield and armor manufacturer in the quadrant"), 
 				history = _("stationStory-comms", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"),
 			},
@@ -1338,7 +1338,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Communication components"), 
+				description = _("scienceDescription-station", "Communication components"), 
 				general = _("stationGeneralInfo-comms", "We provide a range of communication equipment and software for use aboard ships"), 
 				history = _("stationStory-comms", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"),
 			},
@@ -1374,7 +1374,7 @@ function populateStationPool()
 				buy =	{
 					[randomComponent("robotic")] = math.random(40,200)
 				},
-				description = _("scienceStationsDescription", "Robotic research"), 
+				description = _("scienceDescription-station", "Robotic research"), 
 				general = _("stationGeneralInfo-comms", "We research and provide robotic systems and components"), 
 				history = _("stationStory-comms", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"),
 			},
@@ -1411,7 +1411,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Advanced Material components"), 
+				description = _("scienceDescription-station", "Advanced Material components"), 
 				general = _("stationGeneralInfo-comms", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"), 
 				history = _("stationStory-comms", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"),
 			},
@@ -1448,7 +1448,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 78,
 				},
-				description = _("scienceStationsDescription", "Impulse engine components"), 
+				description = _("scienceDescription-station", "Impulse engine components"), 
 				general = _("stationGeneralInfo-comms", "We supply high quality impulse engines and parts for use aboard ships"), 
 				history = _("stationStory-comms", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"),
 			},
@@ -1485,7 +1485,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Android components"), 
+				description = _("scienceDescription-station", "Android components"), 
 				general = _("stationGeneralInfo-comms", "Supplier of android components, programming and service"), 
 				history = _("stationStory-comms", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"),
 			},
@@ -1518,7 +1518,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Transporter components"), 
+				description = _("scienceDescription-station", "Transporter components"), 
 				general = _("stationGeneralInfo-comms", "We provide transporters used aboard ships as well as the components for repair and maintenance"), 
 				history = _("stationStory-comms", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"),
 			},
@@ -1555,7 +1555,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Commerce and gambling"), 
+				description = _("scienceDescription-station", "Commerce and gambling"), 
 				general = _("stationGeneralInfo-comms", "Come play some games and shop. House take does not exceed 4 percent"), 
 				history = "",
 			},			
@@ -1592,7 +1592,7 @@ function populateStationPool()
  					medicine = false, 
  					luxury = false,
  				},
-				description = _("scienceStationsDescription", "Xenopsychology training"), 
+				description = _("scienceDescription-station", "Xenopsychology training"), 
 				general = _("stationGeneralInfo-comms", "We provide classes and simulation to help train diverse species in how to relate to each other"), 
 				history = _("stationStory-comms", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"),
 			},
@@ -1630,7 +1630,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Casino and Gambling"), 
+				description = _("scienceDescription-station", "Casino and Gambling"), 
 				general = "", 
 				history = "",
 			},			
@@ -1663,7 +1663,7 @@ function populateStationPool()
 					medicine = true, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Trading station"), 
+				description = _("scienceDescription-station", "Trading station"), 
 				general = _("stationGeneralInfo-comms", "Come to Muddvile for all your trade and commerce needs and desires"), 
 				history = _("stationStory-comms", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"),
 			},
@@ -1704,7 +1704,7 @@ function populateStationPool()
 					[randomMineral()] = math.random(40,200),
 					[randomComponent("android")] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Android components"), 
+				description = _("scienceDescription-station", "Android components"), 
 				general = _("stationGeneralInfo-comms", "Androids, their parts, maintenance and recylcling"), 
 				history = _("stationStory-comms", "We named the station after the ground breaking android model produced by the Tyrell corporation"),
 			},
@@ -1741,7 +1741,7 @@ function populateStationPool()
 					medicine = true, 
 					luxury = random(1,100) < 43,
 				},
-				description = _("scienceStationsDescription", "Transporter components"), 
+				description = _("scienceDescription-station", "Transporter components"), 
 				general = _("stationGeneralInfo-comms", "We research and fabricate high quality transporters and transporter components for use aboard ships"), 
 				history = _("stationStory-comms", "Miles O'Brien started this business after his experience as a transporter chief"),
 			},
@@ -1778,7 +1778,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Diplomatic training"), 
+				description = _("scienceDescription-station", "Diplomatic training"), 
 				general = _("stationGeneralInfo-comms", "The premeire academy for leadership and diplomacy training in the region"), 
 				history = _("stationStory-comms", "Established by the royal family so critical during the political upheaval era"),
 			},
@@ -1815,7 +1815,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Load lifters and components"), 
+				description = _("scienceDescription-station", "Load lifters and components"), 
 				general = _("stationGeneralInfo-comms", "We provide load lifters and components for various ship systems"), 
 				history = _("stationStory-comms", "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"),
 			},
@@ -1852,7 +1852,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 47,
 				},
-				description = _("scienceStationsDescription", "Load lifters and components"), 
+				description = _("scienceDescription-station", "Load lifters and components"), 
 				general = _("stationGeneralInfo-comms", "We provide load lifters and components"), 
 				history = _("stationStory-comms", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"),
 			},
@@ -1889,7 +1889,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Routine maintenance and entertainment"), 
+				description = _("scienceDescription-station", "Routine maintenance and entertainment"), 
 				general = _("stationGeneralInfo-comms", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"), 
 				history = _("stationStory-comms", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"),
 			},			
@@ -1926,7 +1926,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Android components"), 
+				description = _("scienceDescription-station", "Android components"), 
 				general = _("stationGeneralInfo-comms", "We create androids and android components"), 
 				history = _("stationStory-comms", "The station is named after Dr. Noonian Soong, the famous android researcher and builder"),
 			},
@@ -1963,7 +1963,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Automated weapons systems"), 
+				description = _("scienceDescription-station", "Automated weapons systems"), 
 				general = _("stationGeneralInfo-comms", "We research and create automated weapons systems to improve ship combat capability"), 
 				history = _("stationStory-comms", "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"),
 			},			
@@ -1996,7 +1996,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Logistics coordination"), 
+				description = _("scienceDescription-station", "Logistics coordination"), 
 				general = _("stationGeneralInfo-comms", "We support the stations and ships in the area with planning and communication services"), 
 				history = _("stationStory-comms", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"),
 			},
@@ -2033,7 +2033,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Advanced material components"), 
+				description = _("scienceDescription-station", "Advanced material components"), 
 				general = _("stationGeneralInfo-comms", "We create multiple types of advanced material components. Our most popular products are our filaments"), 
 				history = _("stationStory-comms", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"),
 			},
@@ -2066,7 +2066,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false 
 		        },
-				description = _("scienceStationsDescription", "Ship building and maintenance facility"), 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
 				general = _("stationGeneralInfo-comms", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"), 
 				history = ""
 			},
@@ -2107,7 +2107,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Ship building and maintenance facility"), 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
 				general = "", 
 				history = "",
 			},			
@@ -2144,7 +2144,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = true,
 		        },
-				description = _("scienceStationsDescription", "Warp engine components"), 
+				description = _("scienceDescription-station", "Warp engine components"), 
 				general = _("stationGeneralInfo-comms", "We specialize in the esoteric components necessary to make warp drives function properly"), 
 				history = _("stationStory-comms", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"),
 			},
@@ -2182,7 +2182,7 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Optical Components"), 
+				description = _("scienceDescription-station", "Optical Components"), 
 				general = _("stationGeneralInfo-comms", "We make and supply optic components for various station and ship systems"), 
 				history = _("stationStory-comms", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"),
 			},
@@ -2227,7 +2227,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Medical research"), 
+				description = _("scienceDescription-station", "Medical research"), 
 				general = _("stationGeneralInfo-comms", "We research and treat exotic medical conditions"), 
 				history = _("stationStory-comms", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"),
 			},
@@ -2264,7 +2264,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Repulsor and Tractor Beam Components"), 
+				description = _("scienceDescription-station", "Repulsor and Tractor Beam Components"), 
 				general = _("stationGeneralInfo-comms", "We can meet all your pushing and pulling needs with specialized equipment custom made"), 
 				history = _("stationStory-comms", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"),
 			},
@@ -2301,7 +2301,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 41,
 				},
-				description = _("scienceStationsDescription", "Autodoc components"), 
+				description = _("scienceDescription-station", "Autodoc components"), 
 				general = _("stationGeneralInfo-comms", "We provide components for automated medical machinery"), 
 				history = _("stationStory-comms", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"),
 			},
@@ -2342,7 +2342,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = true,
 		        },
-				description = _("scienceStationsDescription", "Nanotechnology research"), 
+				description = _("scienceDescription-station", "Nanotechnology research"), 
 				general = _("stationGeneralInfo-comms", "We provide nanites and software for a variety of ship-board systems"), 
 				history = _("stationStory-comms", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"),
 			},
@@ -2383,7 +2383,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Medical Research"), 
+				description = _("scienceDescription-station", "Medical Research"), 
 				general = _("stationGeneralInfo-comms", "We research exotic diseases and other human medical conditions"), 
 				history = _("stationStory-comms", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"),
 			},
@@ -2420,7 +2420,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Optical components"), 
+				description = _("scienceDescription-station", "Optical components"), 
 				general = _("stationGeneralInfo-comms", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"), 
 				history = _("stationStory-comms", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"),
 			},
@@ -2457,7 +2457,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Optic components"), 
+				description = _("scienceDescription-station", "Optic components"), 
 				general = _("stationGeneralInfo-comms", "We provide optic components for various ship systems"), 
 				history = _("stationStory-comms", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"),
 			},
@@ -2498,7 +2498,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = _("scienceStationsDescription", "Repulsor and tractor beam components"), 
+				description = _("scienceDescription-station", "Repulsor and tractor beam components"), 
 				general = _("stationGeneralInfo-comms", "We make ship systems designed to push or pull other objects around in space"), 
 				history = _("stationStory-comms", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"),
 			},
@@ -2531,7 +2531,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Shielded Circuitry Fabrication"), 
+				description = _("scienceDescription-station", "Shielded Circuitry Fabrication"), 
 				general = _("stationGeneralInfo-comms", "We specialize in circuitry shielded from external hacking suitable for ship systems"), 
 				history = _("stationStory-comms", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"),
 			},
@@ -2568,7 +2568,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Sensor components"), 
+				description = _("scienceDescription-station", "Sensor components"), 
 				general = _("stationGeneralInfo-comms", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"), 
 				history = _("stationStory-comms", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"),
 			},
@@ -2600,7 +2600,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Biotechnology research"),
+				description = _("scienceDescription-station", "Biotechnology research"),
 				general = _("stationGeneralInfo-comms", "Merging the organic and inorganic through research"), 
 				history = _("stationStory-comms", "Continued from the Tandon school of engineering started on Earth in the early 21st century"),
 			},
@@ -2639,7 +2639,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Mining station"), 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2679,7 +2679,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Mining"), 
+				description = _("scienceDescription-station", "Mining"), 
 				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals"), 
 				history = "",
 			},
@@ -2719,7 +2719,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Mining station"), 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2756,7 +2756,7 @@ function populateStationPool()
 					medicine = true, 
 					luxury = random(1,100) < 50,
 				},
-				description = _("scienceStationsDescription", "Mining station"), 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2795,7 +2795,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = _("scienceStationsDescription", "Mining station"), 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2828,7 +2828,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Gambling and resupply"), 
+				description = _("scienceDescription-station", "Gambling and resupply"), 
 				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players"), 
 				history = "",
 			},
@@ -2865,7 +2865,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Commerce and recreation"), 
+				description = _("scienceDescription-station", "Commerce and recreation"), 
 				general = "", 
 				history = "",
 			},
@@ -2897,7 +2897,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Xenopsychology research"), 
+				description = _("scienceDescription-station", "Xenopsychology research"), 
 				general = "", 
 				history = "",
 			},
@@ -2934,7 +2934,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Mining and trade"), 
+				description = _("scienceDescription-station", "Mining and trade"), 
 				general = "", 
 				history = "",
 			},
@@ -2971,7 +2971,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Mining and gambling"), 
+				description = _("scienceDescription-station", "Mining and gambling"), 
 				general = "", 
 				history = "",
 			},
@@ -3008,7 +3008,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Resupply"), 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -3082,7 +3082,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Resupply"), 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -3114,7 +3114,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Textiles and fashion"), 
+				description = _("scienceDescription-station", "Textiles and fashion"), 
 				general = "", 
 				history = "",
 			},
@@ -3151,7 +3151,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Stress Psychology Research"), 
+				description = _("scienceDescription-station", "Stress Psychology Research"), 
 				general = "", 
 				history = "",
 			},
@@ -3183,7 +3183,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false,
 		        },
-				description = _("scienceStationsDescription", "Low gravity research"), 
+				description = _("scienceDescription-station", "Low gravity research"), 
 				general = "", 
 				history = "",
 			},
@@ -3220,7 +3220,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Resupply"), 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = _("stationGeneralInfo-comms", "Get your energy here! Grab a drink before you go!"), 
 				history = "",
 			},
@@ -3253,7 +3253,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Research Lab and Observatory"), 
+				description = _("scienceDescription-station", "Research Lab and Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -3294,7 +3294,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Biotech research"), 
+				description = _("scienceDescription-station", "Biotech research"), 
 				general = "", 
 				history = "",
 			},
@@ -3327,7 +3327,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Observatory"), 
+				description = _("scienceDescription-station", "Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -3359,7 +3359,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false,
 		        },
-				description = _("scienceStationsDescription", "Observatory"), 
+				description = _("scienceDescription-station", "Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -3396,7 +3396,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = _("scienceStationsDescription", "Resupply"), 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -5275,7 +5275,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("stationClassic-comms", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -5287,12 +5287,12 @@ function commsStation()
 end
 function handleDockedState()
     if comms_source:isFriendly(comms_target) then
-		oMsg = _("stationClassic-comms", "Good day, officer!\nWhat can we do for you today?\n")
+		oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = _("stationClassic-comms", "Welcome to our lovely station.\n")
+		oMsg = _("station-comms", "Welcome to our lovely station.\n")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. _("stationClassic-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
+		oMsg = oMsg .. _("station-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
@@ -5708,8 +5708,8 @@ function handleDockedState()
 	if (comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "") or
 		(comms_target.comms_data.history ~= nil and comms_target.comms_data.history ~= "") or
 		(comms_source:isFriendly(comms_target) and comms_target.comms_data.gossip ~= nil and comms_target.comms_data.gossip ~= "" and has_gossip) then
-		addCommsReply(_("stationClassic-comms", "Tell me more about your station"), function()
-			setCommsMessage(_("stationClassic-comms", "What would you like to know?"))
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
 			if comms_target.comms_data.general ~= nil and comms_target.comms_data.general ~= "" then
 				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(comms_target.comms_data.general_information)
@@ -6378,12 +6378,12 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if comms_source:isFriendly(comms_target) then
-        oMsg = _("stationClassic-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = _("stationClassic-comms", "Greetings.\nIf you want to do business, please dock with us first.")
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. _("stationClassic-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	if comms_target.nukeAvail == nil then
 		if math.random(1,10) <= (4 - difficulty) then
@@ -6413,8 +6413,8 @@ function handleUndockedState()
 		end
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply(_("stationClassic-comms", "I need information"), function()
-		setCommsMessage(_("stationClassic-comms", "What kind of information do you need?"))
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			missileTypeAvailableCount = 0
 			oMsg = ""
@@ -6691,13 +6691,13 @@ function handleUndockedState()
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("stationClassic-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if comms_source:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = comms_source:getWaypoint(n)
@@ -6705,7 +6705,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -6717,16 +6717,16 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("stationClassic-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if comms_source:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -6772,49 +6772,49 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("commsShip", "What do you want?"));
+		setCommsMessage(_("shipAssist-comms", "What do you want?"));
 	else
-		setCommsMessage(_("commsShip", "Sir, how can we assist?"));
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
-	addCommsReply(_("commsShip", "Defend a waypoint"), function()
+	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage(_("commsShip", "No waypoints set. Please set a waypoint first."));
+			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), commsShip)
 		else
-			setCommsMessage(_("commsShip", "Which waypoint should we defend?"));
+			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("commsShip", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("commsShip", "We are heading to assist at WP %d."), n));
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply(_("commsShip", "Assist me"), function()
-			setCommsMessage(_("commsShip", "Heading toward you to assist."));
+		addCommsReply(_("shipAssist-comms", "Assist me"), function()
+			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
 			addCommsReply(_("Back"), commsShip)
 		end)
 	end
-	addCommsReply(_("commsShip", "Report status"), function()
-		msg = string.format(_("commsShip", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
+	addCommsReply(_("shipAssist-comms", "Report status"), function()
+		msg = string.format(_("shipAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
-			msg = msg .. string.format(_("commsShip", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 		elseif shields == 2 then
-			msg = msg .. string.format(_("commsShip", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
-			msg = msg .. string.format(_("commsShip", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
 		else
 			for n=0,shields-1 do
-				msg = msg .. string.format(_("commsShip", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
+				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
-					msg = msg .. string.format(_("commsShip", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
+					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
 		
@@ -6823,8 +6823,8 @@ function friendlyComms(comms_data)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply(string.format(_("commsShip", "Dock at %s"), obj:getCallSign()), function()
-				setCommsMessage(string.format(_("commsShip", "Docking at %s."), obj:getCallSign()));
+			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
+				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -6835,27 +6835,27 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = _("commsShipEnemy", "We will see to your destruction!")
-		taunt_success_reply = _("commsShipEnemy", "Your bloodline will end here!")
-		taunt_failed_reply = _("commsShipEnemy", "Your feeble threats are meaningless.")
+		taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+		taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+		taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
 		if faction == "Kraylor" then
-			setCommsMessage(_("commsShipEnemy", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
+			setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 		elseif faction == "Arlenians" then
-			setCommsMessage(_("commsShipEnemy", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
+			setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
-			setCommsMessage(_("commsShipEnemy", "Stay out of our way, or your death will amuse us extremely!"));
+			setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
-			setCommsMessage(_("commsShipEnemy", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
-			taunt_option = _("commsShipEnemy", "EXECUTE: SELFDESTRUCT")
-			taunt_success_reply = _("commsShipEnemy", "Rogue command received. Targeting source.")
-			taunt_failed_reply = _("commsShipEnemy", "External command ignored.")
+			setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage(_("commsShipEnemy", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
-			taunt_option = _("commsShipEnemy", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
-			taunt_success_reply = _("commsShipEnemy", "We do not need permission to pluck apart such an insignificant threat.")
-			taunt_failed_reply = _("commsShipEnemy", "The hive has greater priorities than exterminating pests.")
+			setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 		else
-			setCommsMessage(_("commsShipEnemy", "Mind your own business!"));
+			setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -6874,9 +6874,9 @@ function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
 		if comms_data.friendlyness > 66 then
-			setCommsMessage(_("commsShip", "Yes?"))
+			setCommsMessage(_("shipNeutral-comms", "Yes?"))
 			-- Offer destination information
-			addCommsReply(_("commsShip", "Where are you headed?"), function()
+			addCommsReply(_("shipNeutral-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -6945,10 +6945,10 @@ function neutralComms(comms_data)
 				end	--room on player ship
 			end	--within 5 units
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("commsShip", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
+			addCommsReply(string.format(_("shipAssist-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
@@ -7045,9 +7045,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage(_("commsShip", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
+			setCommsMessage(_("ship-coms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage(_("commsShip", "We have nothing for you.\nGood day."));
+			setCommsMessage(_("ship-coms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true

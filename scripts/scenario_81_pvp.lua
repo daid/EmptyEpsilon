@@ -87,7 +87,7 @@ function init()
     -- Brief the players
     shipyard_human:sendCommsMessage(
         gallipoli,
-        _("incCall", [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
+        _("goal-incCall", [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
 
 Provide cover while our troop transports board the station to reclaim it.
 
@@ -96,7 +96,7 @@ Good luck, and stay safe.]])
 
     shipyard_kraylor:sendCommsMessage(
         crusader,
-        _("incCall", [[Greetings, Crusader.
+        _("goal-incCall", [[Greetings, Crusader.
 
 Your mission is to secure the Shangri-La station in sector F5. The feeble humans think it's theirs for the taking.
 
@@ -127,10 +127,10 @@ end
 function getStatusReport()
     return table.concat(
         {
-            _("Here's the latest news from the front."),
-            string.format(_("Human dominance: %d"), points_human),
-            string.format(_("Kraylor dominance: %d"), points_kraylor),
-            string.format(_("Time elapsed: %.0f"), time)
+            _("situationReport-comms", "Here's the latest news from the front."),
+            string.format(_("situationReport-comms", "Human dominance: %d"), points_human),
+            string.format(_("situationReport-comms", "Kraylor dominance: %d"), points_kraylor),
+            string.format(_("situationReport-comms", "Time elapsed: %.0f"), time)
         },
         "\n"
     )
@@ -140,11 +140,11 @@ end
 --
 -- If players call Shangri-La, provide a status report
 function shangrilaComms()
-    setCommsMessage(_([[Your faction's militia commander picks up:
+    setCommsMessage(_("station-comms", [[Your faction's militia commander picks up:
 
 What can we do for you, Captain?]]))
     addCommsReply(
-        _("Give us a status report."),
+        _("situationReport-comms", "Give us a status report."),
         function()
             setCommsMessage(getStatusReport())
         end
@@ -158,7 +158,7 @@ end
 function stationComms()
     if comms_source:isFriendly(comms_target) then
         if not comms_source:isDocked(comms_target) then
-            setCommsMessage(_([[A dispatcher responds:
+            setCommsMessage(_("station-comms", [[A dispatcher responds:
 
 Greetings, Captain. If you want supplies, please dock with us.]]))
         else
@@ -168,20 +168,20 @@ Greetings, Captain. What can we do for you?]]))
         end
 
         addCommsReply(
-            _("I need a status report."),
+            _("situationReport-comms", "I need a status report."),
             function()
                 setCommsMessage(getStatusReport())
             end
         )
 
         addCommsReply(
-            _("Send in more troops. (100 reputation)"),
+            _("reinforcements-comms", "Send in more troops. (100 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(100) then
                     setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
-                setCommsMessage(_("Aye, Captain. We've deployed a squad with fighter escort to support the assault on Shangri-La."))
+                setCommsMessage(_("reinforcements-comms", "Aye, Captain. We've deployed a squad with fighter escort to support the assault on Shangri-La."))
                 if comms_target:getFaction() == "Human Navy" then
                     local transport = spawnTransport():setFaction("Human Navy"):setPosition(comms_target:getPosition()):orderDock(shangri_la):setScannedByFaction("Human Navy", true)
                     table.insert(troops_human, transport)
@@ -197,13 +197,13 @@ Greetings, Captain. What can we do for you?]]))
         )
 
         addCommsReply(
-            _("We need some space-based firepower. (150 reputation)"),
+            _("reinforcements-comms", "We need some space-based firepower. (150 reputation)"),
             function()
                 if not comms_source:takeReputationPoints(150) then
                     setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
-                setCommsMessage(_("Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La."))
+                setCommsMessage(_("reinforcements-comms", "Confirmed. We've dispatched a strike wing to support space superiority around Shangri-La."))
                 local strike_leader = CpuShip():setTemplate("Phobos T3"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderDefendTarget(shangri_la):setScannedByFaction(comms_source:getFaction(), true)
                 CpuShip():setTemplate("MU52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderFlyFormation(strike_leader, -1000, 0):setScannedByFaction(comms_source:getFaction(), true)
                 CpuShip():setTemplate("MU52 Hornet"):setFaction(comms_target:getFaction()):setPosition(comms_target:getPosition()):orderFlyFormation(strike_leader, 1000, 0):setScannedByFaction(comms_source:getFaction(), true)
@@ -211,10 +211,10 @@ Greetings, Captain. What can we do for you?]]))
         )
 
         if comms_source:isDocked(comms_target) then
-            addCommsReply(_("We need supplies."), supplyDialogue)
+            addCommsReply(_("ammo-comms", "We need supplies."), supplyDialogue)
         end
     else
-        setCommsMessage(_("We'll bring your destruction!"))
+        setCommsMessage(_("shipEnemy-comms", "We'll bring your destruction!"))
     end
 end
 
@@ -223,7 +223,7 @@ function addCommsReplySupply(args)
     local price = args.price
     local missile_type = args.missile_type
     addCommsReply(
-        string.format(args.request .. " " .. _("(%d rep each)"), price),
+        string.format(args.request .. " " .. _("ammo-comms", "(%d rep each)"), price),
         function()
             if not comms_source:isDocked(comms_target) then
                 setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
@@ -338,7 +338,7 @@ function update(delta)
     if (not gallipoli:isValid()) then
         shipyard_kraylor:sendCommsMessage(
             crusader,
-            _("incCall", [[Well done, Crusader!
+            _([[Well done, Crusader!
 
 The pathetic Human flagship has been disabled. Go for the victory!]])
         )
@@ -350,7 +350,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
     if (not crusader:isValid()) then
         shipyard_human:sendCommsMessage(
             gallipoli,
-            _("incCall", [[Good job, Captain!
+            _([[Good job, Captain!
 
 With the Kraylor flagship out of the way, we can land the final blow!]])
         )

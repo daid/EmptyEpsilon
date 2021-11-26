@@ -3310,7 +3310,7 @@ function commsStation()
         return false
     end
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("stationClassic-comms", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not comms_source:isDocked(comms_target) then
@@ -3323,12 +3323,12 @@ end
 function handleDockedState()
     local ctd = comms_target.comms_data
     if player:isFriendly(comms_target) then
-		oMsg = _("stationClassic-comms", "Good day, officer!\nWhat can we do for you today?\n")
+		oMsg = _("station-comms", "Good day, officer!\nWhat can we do for you today?\n")
     else
-		oMsg = _("stationClassic-comms", "Welcome to our lovely station.\n")
+		oMsg = _("station-comms", "Welcome to our lovely station.\n")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. _("stationClassic-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
+		oMsg = oMsg .. _("station-comms", "Forgive us if we seem a little distracted. We are carefully monitoring the enemies nearby.")
 	end
 	setCommsMessage(oMsg)
 	missilePresence = 0
@@ -3767,8 +3767,8 @@ function handleDockedState()
 		end
 	end
 	if ctd.public_relations then
-		addCommsReply(_("stationClassic-comms", "Tell me more about your station"), function()
-			setCommsMessage(_("stationClassic-comms", "What would you like to know?"))
+		addCommsReply(_("station-comms", "Tell me more about your station"), function()
+			setCommsMessage(_("station-comms", "What would you like to know?"))
 			addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 				setCommsMessage(ctd.general_information)
 				addCommsReply(_("Back"), commsStation)
@@ -4050,12 +4050,12 @@ function handleUndockedState()
     --Handle communications when we are not docked with the station.
     local ctd = comms_target.comms_data
     if player:isFriendly(comms_target) then
-        oMsg = _("stationClassic-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = _("stationClassic-comms", "Greetings.\nIf you want to do business, please dock with us first.")
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. _("stationClassic-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	if comms_target.nukeAvail == nil then
 		if math.random(1,10) <= (4 - difficulty) then
@@ -4085,8 +4085,8 @@ function handleUndockedState()
 		end
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply(_("stationClassic-comms", "I need information"), function()
-		setCommsMessage(_("stationClassic-comms", "What kind of information do you need?"))
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
 		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
@@ -4195,8 +4195,8 @@ function handleUndockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if ctd.public_relations then
-			addCommsReply(_("stationClassic-comms", "Tell me more about your station"), function()
-				setCommsMessage(_("stationClassic-comms", "What would you like to know?"))
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
 				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(ctd.general_information)
 					addCommsReply(_("Back"), commsStation)
@@ -4211,13 +4211,13 @@ function handleUndockedState()
 		end	--end public relations if branch
 	end)
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("stationClassic-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -4225,7 +4225,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -4237,16 +4237,16 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("stationClassic-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -4363,9 +4363,9 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage(_("commsShip", "What do you want?"));
+		setCommsMessage(_("shipAssist-comms", "What do you want?"));
 	else
-		setCommsMessage(_("commsShip", "Sir, how can we assist?"));
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
@@ -4457,46 +4457,46 @@ function friendlyComms(comms_data)
 			end	--freighter goods loop
 		end
 	end
-	addCommsReply(_("commsShip", "Defend a waypoint"), function()
+	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage(_("commsShip", "No waypoints set. Please set a waypoint first."));
+			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), commsShip)
 		else
-			setCommsMessage(_("commsShip", "Which waypoint should we defend?"));
+			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("commsShip", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("commsShip", "We are heading to assist at WP %d."), n));
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply(_("commsShip", "Assist me"), function()
-			setCommsMessage(_("commsShip", "Heading toward you to assist."));
+		addCommsReply(_("shipAssist-comms", "Assist me"), function()
+			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
 			addCommsReply(_("Back"), commsShip)
 		end)
 	end
-	addCommsReply(_("commsShip", "Report status"), function()
-		msg = string.format(_("commsShip", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
+	addCommsReply(_("shipAssist-comms", "Report status"), function()
+		msg = string.format(_("shipAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
-			msg = msg .. string.format(_("commsShip", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 		elseif shields == 2 then
-			msg = msg .. string.format(_("commsShip", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
-			msg = msg .. string.format(_("commsShip", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
 		else
 			for n=0,shields-1 do
-				msg = msg .. string.format(_("commsShip", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
+				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
 
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
-					msg = msg .. string.format(_("commsShip", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
+					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
 		
@@ -4505,8 +4505,8 @@ function friendlyComms(comms_data)
 	end)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply(string.format(_("commsShip", "Dock at %s"), obj:getCallSign()), function()
-				setCommsMessage(string.format(_("commsShip", "Docking at %s."), obj:getCallSign()));
+			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
+				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -4517,27 +4517,27 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = _("commsShipEnemy", "We will see to your destruction!")
-		taunt_success_reply = _("commsShipEnemy", "Your bloodline will end here!")
-		taunt_failed_reply = _("commsShipEnemy", "Your feeble threats are meaningless.")
+		taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+		taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+		taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
 		if faction == "Kraylor" then
-			setCommsMessage(_("commsShipEnemy", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
+			setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 		elseif faction == "Arlenians" then
-			setCommsMessage(_("commsShipEnemy", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
+			setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
-			setCommsMessage(_("commsShipEnemy", "Stay out of our way, or your death will amuse us extremely!"));
+			setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
-			setCommsMessage(_("commsShipEnemy", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
-			taunt_option = _("commsShipEnemy", "EXECUTE: SELFDESTRUCT")
-			taunt_success_reply = _("commsShipEnemy", "Rogue command received. Targeting source.")
-			taunt_failed_reply = _("commsShipEnemy", "External command ignored.")
+			setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage(_("commsShipEnemy", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
-			taunt_option = _("commsShipEnemy", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
-			taunt_success_reply = _("commsShipEnemy", "We do not need permission to pluck apart such an insignificant threat.")
-			taunt_failed_reply = _("commsShipEnemy", "The hive has greater priorities than exterminating pests.")
+			setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 		else
-			setCommsMessage(_("commsShipEnemy", "Mind your own business!"));
+			setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -4555,7 +4555,7 @@ end
 function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		setCommsMessage(_("commsShip", "Yes?"))
+		setCommsMessage(_("shipNeutral-comms", "Yes?"))
 		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
 			local cargoMsg = _("trade-comms", "We've got ")
@@ -4576,9 +4576,9 @@ function neutralComms(comms_data)
 		end)
 		local freighter_multiplier = 1
 		if comms_data.friendlyness > 66 then
-			setCommsMessage(_("commsShip", "Yes?"))
+			setCommsMessage(_("shipNeutral-comms", "Yes?"))
 			-- Offer destination information
-			addCommsReply(_("commsShip", "Where are you headed?"), function()
+			addCommsReply(_("shipNeutral-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -4653,10 +4653,10 @@ function neutralComms(comms_data)
 				end	--freighter goods loop
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("commsShip", "What do you want?"))
+			setCommsMessage(_("shipAssist-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format(_("commsShip", "Where are you headed? (cost: %f reputation)"),destRep), function()
+			addCommsReply(string.format(_("shipAssist-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
@@ -4755,9 +4755,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage(_("commsShip", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
+			setCommsMessage(_("ship-coms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage(_("commsShip", "We have nothing for you.\nGood day."));
+			setCommsMessage(_("ship-coms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true

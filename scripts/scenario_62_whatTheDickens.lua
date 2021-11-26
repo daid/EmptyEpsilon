@@ -31,7 +31,7 @@ function init()
 	stationCavendish = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
 	stationCavendish:setCallSign("Cavendish"):setPosition(-77000, -36000)
 	stationFoundling = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationFoundling:setCallSign("Foundling"):setPosition(-5000, -63000):setDescription(_("scienceStationsDescription", "Medical research and support"))
+	stationFoundling:setCallSign("Foundling"):setPosition(-5000, -63000):setDescription(_("scienceDescription-station", "Medical research and support"))
 	stationSoho = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
 	stationSoho:setCallSign("Soho"):setPosition(-40000, -28000)
 	stationGrosvenor = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
@@ -39,9 +39,9 @@ function init()
 	stationPentonville = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
 	stationPentonville:setCallSign("Pentonville"):setPosition(50, -78000)
 	stationCovent = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationCovent:setCallSign("Covent"):setPosition(-15000, -14000):setDescription(_("scienceStationsDescription", "Hydroponics and plant life"))
+	stationCovent:setCallSign("Covent"):setPosition(-15000, -14000):setDescription(_("scienceDescription-station", "Hydroponics and plant life"))
 	stationCheshire = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
-	stationCheshire:setCallSign("Cheshire"):setPosition(23000, -23000):setDescription(_("scienceStationsDescription", "Cheese, food, drink"))
+	stationCheshire:setCallSign("Cheshire"):setPosition(23000, -23000):setDescription(_("scienceDescription-station", "Cheese, food, drink"))
 	stationSouthwark = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
 	stationSouthwark:setCallSign("Southwark"):setPosition(52000, 19000)
 	stationLambeth = SpaceStation():setTemplate("Medium Station"):setFaction(stationFaction)
@@ -358,7 +358,7 @@ function commsStation()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage(_("stationClassic-comms", "We are under attack! No time for chatting!"));
+        setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"));
         return true
     end
     if not player:isDocked(comms_target) then
@@ -372,9 +372,9 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("stationClassic-comms", "Good day, officer!\nWhat can we do for you today?"))
+        setCommsMessage(_("station-comms", "Good day, officer!\nWhat can we do for you today?"))
     else
-        setCommsMessage(_("stationClassic-comms", "Welcome to our lovely station."))
+        setCommsMessage(_("station-comms", "Welcome to our lovely station."))
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
@@ -478,9 +478,9 @@ end
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage(_("stationClassic-comms", "Good day, officer.\nIf you need supplies, please dock with us first."))
+        setCommsMessage(_("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first."))
     else
-        setCommsMessage(_("stationClassic-comms", "Greetings.\nIf you want to do business, please dock with us first."))
+        setCommsMessage(_("station-comms", "Greetings.\nIf you want to do business, please dock with us first."))
     end
  	if player:isFriendly(comms_target) then
 		addCommsReply(_("orders-comms", "What are my current orders?"), function()
@@ -518,13 +518,13 @@ function handleUndockedState()
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply(string.format(_("stationClassic-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request backup."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we deliver your supplies?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -532,7 +532,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -544,16 +544,16 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply(string.format(_("stationClassic-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
+        addCommsReply(string.format(_("stationAssist-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage(_("stationClassic-comms", "You need to set a waypoint before you can request reinforcements."));
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage(_("stationClassic-comms", "To which waypoint should we dispatch the reinforcements?"));
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationClassic-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationClassic-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -948,7 +948,7 @@ end
 
 function startChristmasPresent(delta)
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(string.format(_("OrdersAudio-shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
+		player:addToShipLog(string.format(_("ordersAudio-shipLog", "Our sensors indicated nebulas forming then disappearing. That is impossible, of course. We started level three diagnostics on our sensors to discover what's wrong. Just before starting the diagnostic, we picked up unusual readings near Bedlam in %s. Perhaps you should investigate"),stationBedlam:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London3.ogg")
 		secondaryOrders = string.format(_("orders-comms", "Investigate unusual readings near Bedlam in %s"),stationBedlam:getSectorName())
 		plot1 = arriveNearBedlam
@@ -997,7 +997,7 @@ function destroyCratchitFleet(delta)
 	if cratchitFleetCount == 0 then
 		if stationBedlam:isValid() then
 			player:addReputationPoints(50)
-			player:addToShipLog(_("OrderAudio-shipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
+			player:addToShipLog(_("orderAudio-shipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
 			playSoundFile("audio/scenario/62/sa_62_BobCratchit2.ogg")
 			turkeyAngle = random(90,180)
 			bx, by = stationBedlam:getPosition()
@@ -1130,7 +1130,7 @@ function timIll(delta)
 						playSoundFile("audio/scenario/62/sa_62_Turkey1.ogg")
 					end
 				else
-					player:addToShipLog(_("OrdersAudio-shipLog", "[Turkey Surprise] We have transported Tim and our doctors are examining him"),"Cyan")
+					player:addToShipLog(_("ordersAudio-shipLog", "[Turkey Surprise] We have transported Tim and our doctors are examining him"),"Cyan")
 					playSoundFile("audio/scenario/62/sa_62_Turkey3.ogg")
 					plot1 = timHeal
 					plot1name = "timHeal"
@@ -1165,7 +1165,7 @@ end
 function returnTim(delta)
 	if timAboard then
 		if player:isDocked(stationBedlam) then
-			player:addToShipLog(_("OrdersAudio-shipLog", "[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you"),"Yellow")
+			player:addToShipLog(_("ordersAudio-shipLog", "[Bob Cratchit] We are so glad Tim is better. He serves a critical role here. Somerset is looking for you"),"Yellow")
 			playSoundFile("audio/scenario/62/sa_62_BobCratchit4.ogg")
 			plot1 = endChristmasPast
 			plot1name = "endChristmasPast"
