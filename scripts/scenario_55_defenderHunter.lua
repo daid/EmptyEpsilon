@@ -5578,12 +5578,12 @@ function handleDockedState()
 			else
 				hireCost = math.random(45,90)
 			end
-			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
+			addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-					setCommsMessage(_("commsTrade", "Repair crew member hired"))
+					setCommsMessage(_("trade-comms", "Repair crew member hired"))
 				end
 			end)
 		end
@@ -5593,12 +5593,12 @@ function handleDockedState()
 				if comms_source:getMaxCoolant() < comms_source.initialCoolant then
 					coolantCost = math.random(30,60)
 				end
-				addCommsReply(string.format(_("commsTrade", "Purchase coolant for %i reputation"),coolantCost), function()
+				addCommsReply(string.format(_("trade-comms", "Purchase coolant for %i reputation"),coolantCost), function()
 					if not comms_source:takeReputationPoints(coolantCost) then
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
 						comms_source:setMaxCoolant(comms_source:getMaxCoolant() + 2)
-						setCommsMessage(_("commsTrade", "Additional coolant purchased"))
+						setCommsMessage(_("trade-comms", "Additional coolant purchased"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5611,12 +5611,12 @@ function handleDockedState()
 			else
 				hireCost = math.random(60,120)
 			end
-			addCommsReply(string.format(_("commsTrade", "Recruit repair crew member for %i reputation"),hireCost), function()
+			addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 				if not comms_source:takeReputationPoints(hireCost) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-					setCommsMessage(_("commsTrade", "Repair crew member hired"))
+					setCommsMessage(_("trade-comms", "Repair crew member hired"))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -5625,9 +5625,9 @@ function handleDockedState()
 	if comms_target == homeStation then
 		if homeStation.telemetry == nil then
 			if math.random(1,10) <= (5 - difficulty) then
-				addCommsReply(string.format(_("commsTrade", "Establish defensive system telemetry (%i rep)"),difficulty*10), function()
+				addCommsReply(string.format(_("defTelemetry-comms", "Establish defensive system telemetry (%i rep)"),difficulty*10), function()
 					if comms_source:takeReputationPoints(difficulty*10) then
-						setCommsMessage(string.format(_("commsTrade", "Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs"),homeStation:getCallSign()))
+						setCommsMessage(string.format(_("defTelemetry-comms", "Defensive telemetry established with station %s.\nDamage should show on Relay when it occurs"),homeStation:getCallSign()))
 						homeStation.telemetry = true
 					else
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
@@ -5647,8 +5647,8 @@ function handleDockedState()
 					randomCargoAboard = true
 				end
 				if easyCargoAboard or randomCargoAboard then
-					addCommsReply(_("commsTrade", "Provide cargo"), function()
-						setCommsMessage(_("commsTrade", "Do you have something for us?"))
+					addCommsReply(_("-comms", "Provide cargo"), function()
+						setCommsMessage(_("-comms", "Do you have something for us?"))
 						if easyCargoAboard then
 							homeStationEasyDelivery()					
 						end
@@ -5739,40 +5739,40 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	if goodCount > 0 then
-		addCommsReply(_("commsTrade", "Buy, sell, trade"), function()
-			local goodsReport = string.format(_("commsTrade", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
+		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
+			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(comms_target.comms_data.goods) do
-				goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
+				goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
 			end
 			if comms_target.comms_data.buy ~= nil then
-				goodsReport = goodsReport .. _("commsTrade", "Goods or components station will buy: price in reputation\n")
+				goodsReport = goodsReport .. _("trade-comms", "Goods or components station will buy: price in reputation\n")
 				for good, price in pairs(comms_target.comms_data.buy) do
-					goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i\n"),good,price)
+					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,price)
 				end
 			end
-			goodsReport = goodsReport .. string.format(_("commsTrade", "Current cargo aboard %s:\n"),comms_source:getCallSign())
+			goodsReport = goodsReport .. string.format(_("trade-comms", "Current cargo aboard %s:\n"),comms_source:getCallSign())
 			local cargoHoldEmpty = true
 			local player_good_count = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
 					player_good_count = player_good_count + 1
-					goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i\n"),good,goodQuantity)
+					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,goodQuantity)
 				end
 			end
 			if player_good_count < 1 then
-				goodsReport = goodsReport .. _("commsTrade", "     Empty\n")
+				goodsReport = goodsReport .. _("trade-comms", "     Empty\n")
 			end
-			goodsReport = goodsReport .. string.format(_("commsTrade", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
+			goodsReport = goodsReport .. string.format(_("trade-comms", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
 			setCommsMessage(goodsReport)
 			for good, goodData in pairs(comms_target.comms_data.goods) do
-				addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
-					local goodTransactionMessage = string.format(_("commsTrade", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
+				addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
+					local goodTransactionMessage = string.format(_("trade-comms", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
 					if comms_source.cargo < 1 then
-						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient cargo space for purchase")
+						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodData["cost"] > math.floor(comms_source:getReputationPoints()) then
-						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient reputation for purchase")
+						goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodData["quantity"] < 1 then
-						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 					else
 						if comms_source:takeReputationPoints(goodData["cost"]) then
 							comms_source.cargo = comms_source.cargo - 1
@@ -5784,9 +5784,9 @@ function handleDockedState()
 								comms_source.goods[good] = 0
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\npurchased")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\npurchased")
 						else
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient reputation for purchase")
+							goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
@@ -5796,11 +5796,11 @@ function handleDockedState()
 			if comms_target.comms_data.buy ~= nil then
 				for good, price in pairs(comms_target.comms_data.buy) do
 					if comms_source.goods ~= nil and comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
-						addCommsReply(string.format(_("commsTrade", "Sell one %s for %i reputation"),good,price), function()
-							local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Reputation price: %i"),good,price)
+						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
+							local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Reputation price: %i"),good,price)
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source:addReputationPoints(price)
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nOne sold")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
 							addCommsReply(_("Back"), commsStation)
@@ -5815,10 +5815,10 @@ function handleDockedState()
 				comms_source.goods.food ~= nil and 
 				comms_source.goods.food > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
-					addCommsReply(string.format(_("commsTrade", "Trade food for %s"),good), function()
-						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -5829,7 +5829,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["food"] = comms_source.goods["food"] - 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -5843,10 +5843,10 @@ function handleDockedState()
 				comms_source.goods.medicine ~= nil and 
 				comms_source.goods.medicine > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
-					addCommsReply(string.format(_("commsTrade", "Trade medicine for %s"),good), function()
-						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -5857,7 +5857,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["medicine"] = comms_source.goods["medicine"] - 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -5871,10 +5871,10 @@ function handleDockedState()
 				comms_source.goods.luxury ~= nil and 
 				comms_source.goods.luxury > 0 then
 				for good, goodData in pairs(comms_target.comms_data.goods) do
-					addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
-						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData[quantity] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -5885,7 +5885,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -5901,14 +5901,14 @@ function handleDockedState()
 			end
 		end
 		if player_good_count > 0 then
-			addCommsReply(_("commsTrade", "Jettison cargo"), function()
-				setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
+			addCommsReply(_("trade-comms", "Jettison cargo"), function()
+				setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 				for good, good_quantity in pairs(comms_source.goods) do
 					if good_quantity > 0 then
 						addCommsReply(good, function()
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source.cargo = comms_source.cargo + 1
-							setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+							setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 							addCommsReply(_("Back"), commsStation)
 						end)
 					end
@@ -5916,19 +5916,19 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply(_("commsTrade", "No tutorial covered goods or cargo. Explain"), function()
-			setCommsMessage(_("commsTrade", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
+		addCommsReply(_("explainGoods-comms", "No tutorial covered goods or cargo. Explain"), function()
+			setCommsMessage(_("explainGoods-comms", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 end
 function homeStationEasyDelivery()
-	addCommsReply(string.format(_("commsTrade", "Provide %s as requested"),easyDeliverGood), function()
+	addCommsReply(string.format(_("-comms", "Provide %s as requested"),easyDeliverGood), function()
 		comms_source.goods[easyDeliverGood] = comms_source.goods[easyDeliverGood] - 1
 		comms_source.cargo = comms_source.cargo + 1
 		comms_source:addReputationPoints(30)
-		setCommsMessage(_("commsTrade", "Thanks, we really needed that.\n\nI have some information for you. Decide which one you want"))
-		addCommsReply(_("commsTrade", "Ship maneuver upgrade"), function()
+		setCommsMessage(_("-comms", "Thanks, we really needed that.\n\nI have some information for you. Decide which one you want"))
+		addCommsReply(_("upgrade-comms", "Ship maneuver upgrade"), function()
 			plot2 = spinUpgradeStart
 			setCommsMessage(_("commsTrade", "Check back shortly and I'll tell you all about it"))
 		end)
@@ -6457,10 +6457,10 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply(_("commsTrade", "What goods do you have available for sale or trade?"), function()
-				local goodsAvailableMsg = string.format(_("commsTrade", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(comms_target.comms_data.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("commsTrade", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
@@ -6555,8 +6555,8 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end
 		end)
-		addCommsReply(_("commsTrade", "Where can I find particular goods?"), function()
-			gkMsg = _("commsTrade", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if comms_target.comms_data.goodsKnowledge == nil then
 				comms_target.comms_data.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -6595,14 +6595,14 @@ function handleUndockedState()
 					local sectorName = comms_target.comms_data.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = comms_target.comms_data.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format(_("commsTrade", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. _("commsTrade", "\n\nWhat goods are you interested in?\nI've heard about these:")
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. _("commsTrade", " Beyond that, I have no knowledge of specific stations")
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -6890,14 +6890,14 @@ function neutralComms(comms_data)
 						end
 					end
 					if goodCount > 0 then
-						addCommsReply(_("commsTrade", "Jettison cargo"), function()
-							setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
+						addCommsReply(_("trade-comms", "Jettison cargo"), function()
+							setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 							for good, good_quantity in pairs(comms_source.goods) do
 								if good_quantity > 0 then
 									addCommsReply(good, function()
 										comms_source.goods[good] = comms_source.goods[good] - 1
 										comms_source.cargo = comms_source.cargo + 1
-										setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+										setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 										addCommsReply(_("Back"), commsShip)
 									end)
 								end
@@ -6908,11 +6908,11 @@ function neutralComms(comms_data)
 					if comms_source.goods ~= nil and comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
+								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 									goodData.quantity = goodData.quantity - 1
 									comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 									comms_source.goods[good] = comms_source.goods[good] + 1
-									setCommsMessage(string.format(_("commsTrade", "Traded luxury for %s"),good))
+									setCommsMessage(string.format(_("trade-comms", "Traded luxury for %s"),good))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -6923,7 +6923,7 @@ function neutralComms(comms_data)
 				if comms_source.cargo > 0 then
 					for good, good_data in pairs(comms_data.goods) do
 						if good_data.quantity > 0 then
-							addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(good_data.cost)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(good_data.cost)), function()
 								if comms_source:takeReputationPoints(good_data.cost) then
 									good_data.quantity = good_data.quantity - 1
 									if comms_source.goods == nil then
@@ -6934,7 +6934,7 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
@@ -6964,11 +6964,11 @@ function neutralComms(comms_data)
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]
-						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]), function()
 							if comms_source.cargo < 1 then
-								setCommsMessage(_("commsTrade", "Insufficient cargo space for purchase"))
+								setCommsMessage(_("trade-comms", "Insufficient cargo space for purchase"))
 							elseif goodsQuantity < 1 then
-								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
+								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
@@ -6976,7 +6976,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
-									setCommsMessage(_("commsTrade", "Purchased"))
+									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
 							addCommsReply(_("Back"), commsShip)
@@ -6990,11 +6990,11 @@ function neutralComms(comms_data)
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]*2
-						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
 							if comms_source.cargo < 1 then
-								setCommsMessage(_("commsTrade", "Insufficient cargo space for purchase"))
+								setCommsMessage(_("trade-comms", "Insufficient cargo space for purchase"))
 							elseif goodsQuantity < 1 then
-								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
+								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
@@ -7002,7 +7002,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
-									setCommsMessage(_("commsTrade", "Purchased"))
+									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
 							addCommsReply(_("Back"), commsShip)
@@ -7012,7 +7012,7 @@ function neutralComms(comms_data)
 				end
 			end
 		else
-			setCommsMessage(_("commsTrade", "Why are you bothering me?"))
+			setCommsMessage(_("trade-comms", "Why are you bothering me?"))
 			-- Offer to sell goods if goods or equipment freighter double price
 			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
@@ -7021,11 +7021,11 @@ function neutralComms(comms_data)
 						local goodsType = goods[comms_target][gi][1]
 						local goodsQuantity = goods[comms_target][gi][2]
 						local goodsRep = goods[comms_target][gi][3]*2
-						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),goods[comms_target][gi][1],goods[comms_target][gi][3]*2), function()
 							if comms_source.cargo < 1 then
-								setCommsMessage(_("commsTrade", "Insufficient cargo space for purchase"))
+								setCommsMessage(_("trade-comms", "Insufficient cargo space for purchase"))
 							elseif goodsQuantity < 1 then
-								setCommsMessage(_("commsTrade", "Insufficient inventory on freighter"))
+								setCommsMessage(_("trade-comms", "Insufficient inventory on freighter"))
 							else
 								if not comms_source:takeReputationPoints(goodsRep) then
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
@@ -7033,7 +7033,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									decrementShipGoods(goodsType)
 									incrementPlayerGoods(goodsType)
-									setCommsMessage(_("commsTrade", "Purchased"))
+									setCommsMessage(_("trade-comms", "Purchased"))
 								end
 							end
 							addCommsReply(_("Back"), commsShip)
@@ -7108,8 +7108,8 @@ function initialOrders(delta)
 				local p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
 					foundPlayer = true
-					p:addToShipLog(string.format(_("audioGoal-shipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
-					primaryOrders = string.format(_("orders-comms", "Protect %s"),homeStation:getCallSign())
+					p:addToShipLog(string.format(_("goalAudio-shipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
+					primaryOrders = string.format(_("goal-comms", "Protect %s"),homeStation:getCallSign())
 					playSoundFile("audio/scenario/55/sa_55_Commander1.ogg")
 				end
 			end
@@ -7395,8 +7395,8 @@ function easyDelivery(delta)
 				plot2 = nil
 				plot2reminder = nil
 			else
-				p:addToShipLog(string.format(_("audioTrade-shipLog", "[%s] We need some goods of type %s. Can you help? I hear %s has some"),homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
-				plot2reminder = string.format(_("commsTrade", "Bring %s to %s. Possible source: %s"),easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
+				p:addToShipLog(string.format(_("intelligenceOrdersAudio-shipLog", "[%s] We need some goods of type %s. Can you help? I hear %s has some"),homeStation:getCallSign(),easyDeliverGood,easyStation:getCallSign()),"85,107,47")
+				plot2reminder = string.format(_("intelligenceOrders-comms", "Bring %s to %s. Possible source: %s"),easyDeliverGood,homeStation:getCallSign(),easyStation:getCallSign())
 				playSoundFile("audio/scenario/55/sa_55_Manager1.ogg")
 			end
 			easyDeliveryMsg = "sent"
@@ -7409,7 +7409,7 @@ function spinUpgradeStart(delta)
 	if plot_2_diagnostic then print("plot 2 spin upgrade start") end
 	infoPromised = true
 	spinUpgradeAvailable = false
-	plot2reminder = _("commsUpgrade", "Get ship maneuver upgrade")
+	plot2reminder = _("upgrade-comms", "Get ship maneuver upgrade")
 	local candidate = nil
 	if pickSpinBase == nil then
 		p = closestPlayerTo(homeStation)
@@ -7646,14 +7646,14 @@ function hunterTransition1(delta)
 	plot3name = "hunterTransition1"
 	hunterTransition1Timer = hunterTransition1Timer - delta
 	if hunterTransition1Timer < 0 then
-		iuMsg = string.format(_("commsThreat", "The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f"),dangerValue)
+		iuMsg = string.format(_("intelligenceOrders-comms", "The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f"),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Find enemy bases. Stop enemy incursions. TA:%.1f"),dangerValue)
+		secondaryOrders = string.format(_("intelligenceOrders-comms", "Find enemy bases. Stop enemy incursions. TA:%.1f"),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7684,7 +7684,7 @@ function hunterTransition2(delta)
 	plot3name = "hunterTransition2"
 	hunterTransition2Timer = hunterTransition2Timer - delta
 	if hunterTransition2Timer < 0 then
-		iuMsg = string.format(_("commsThreat", "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"),dangerValue)
+		iuMsg = string.format(_("intelligenceOrdersAudio-shipLog", "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"),dangerValue)
 		playSoundFile("audio/scenario/55/sa_55_Commander2.ogg")
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
@@ -7692,7 +7692,7 @@ function hunterTransition2(delta)
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f"),dangerValue)
+		secondaryOrders = string.format(_("intelligenceOrders-comms", "Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f"),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7732,14 +7732,14 @@ function hunterTransition3(delta)
 		if enemyInt4 == nil then
 			enemyInt4 = targetEnemyStation
 		end
-		iuMsg = string.format(_("commsThreat", "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt4:getSectorName(),dangerValue)
+		iuMsg = string.format(_("intelligenceOrders-comms", "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt4:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("intelligenceOrders-comms", "Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7779,14 +7779,14 @@ function hunterTransition4(delta)
 		if enemyInt5 == nil then
 			enemyInt5 = targetEnemyStation
 		end
-		iuMsg = string.format(_("commsThreat", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt5:getSectorName(),dangerValue)
+		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt5:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),enemyInt5:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("intelligenceOrders-comms", "Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),enemyInt5:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7826,14 +7826,14 @@ function hunterTransition5(delta)
 		if enemyInt6 == nil then
 			enemyInt6 = targetEnemyStation
 		end
-		iuMsg = string.format(_("commsThreat", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt6:getSectorName(),dangerValue)
+		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt6:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("IntelligenceOrders-comms", "Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7862,14 +7862,14 @@ function hunterTransition6(delta)
 	plot3name = "hunterTransition6"
 	hunterTransition6Timer = hunterTransition6Timer - delta
 	if hunterTransition6Timer < 0 then
-		iuMsg = string.format(_("commsThreat", "Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f"),targetEnemyStation:getSectorName(),dangerValue)
+		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f"),targetEnemyStation:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"),targetEnemyStation:getSectorName(),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("intelligenceOrders-comms", "Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor aboard. TA:%.1f"),targetEnemyStation:getSectorName(),enemyInt4:getSectorName(),enemyInt5:getSectorName(),enemyInt6:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7898,14 +7898,14 @@ function hunterTransition7(delta)
 	plot3name = "hunterTransition7"
 	hunterTransition7Timer = hunterTransition7Timer - delta
 	if hunterTransition7Timer < 0 then
-		iuMsg = string.format(_("commsThreat", "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
+		iuMsg = string.format(_("intelligenceOrders-comms", "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
 		end
-		secondaryOrders = string.format(_("commsThreat", "Destroy enemy base %s in %s. TA:%.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
+		secondaryOrders = string.format(_("intelligenceOrders-comms", "Destroy enemy base %s in %s. TA:%.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
 		scx, scy = homeStation:getPosition()
 		cpx, cpy = vectorFromAngle(random(0,360),random(30000,40000))
 		ef3 = spawnEnemies(scx+cpx,scy+cpy,1)
@@ -7991,8 +7991,8 @@ function randomDelivery(delta)
 				plot4delay = 100
 				plot4 = delayef4v2
 			else
-				p:addToShipLog(string.format(_("commsTrade", "[%s] We are running low on goods of type %s. Can you help? %s in %s should have some"),homeStation:getCallSign(),randomDeliverGood,randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName()),"85,107,47")
-				plot4reminder = string.format(_("commsTrade", "Bring %s to %s. Possible source: %s in %s"),randomDeliverGood,homeStation:getCallSign(),randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName())
+				p:addToShipLog(string.format(_("upgradeOrdersAudio-shipLog", "[%s] We are running low on goods of type %s. Can you help? %s in %s should have some"),homeStation:getCallSign(),randomDeliverGood,randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName()),"85,107,47")
+				plot4reminder = string.format(_("upgradeOrders-comms", "Bring %s to %s. Possible source: %s in %s"),randomDeliverGood,homeStation:getCallSign(),randomDeliverStation:getCallSign(),randomDeliverStation:getSectorName())
 				playSoundFile("audio/scenario/55/sa_55_Manager2.ogg")
 			end
 			randomDeliveryMsg = "sent"
@@ -8005,7 +8005,7 @@ function rotateUpgradeStart(delta)
 	infoPromised = true
 	homeStationRotationEnabled = false
 	rotateUpgradeAvailable = false
-	plot4reminder = string.format(_("commsUpgrade", "Upgrade %s to rotate"),homeStation:getCallSign())
+	plot4reminder = string.format(_("upgrade-comms", "Upgrade %s to rotate"),homeStation:getCallSign())
 	if pickRotateBase == nil then
 		repeat
 			local candidate = stationList[math.random(13,#stationList)]
@@ -8062,7 +8062,7 @@ function beamTimeUpgradeStart(delta)
 	plot4name = "beamTimeUpgradeStart"
 	infoPromised = true
 	beamTimeUpgradeAvailable = false
-	plot4reminder = _("commsUpgrade", "Get beam cycle time upgrade")
+	plot4reminder = _("upgrade-comms", "Get beam cycle time upgrade")
 	if pickBeamTimeBase == nil then
 		repeat
 			candidate = stationList[math.random(13,#stationList)]
@@ -8137,7 +8137,7 @@ function hullUpgradeStart(delta)
 	plot4name = "hullUpgradeStart"
 	infoPromised = true
 	hullUpgradeAvailable = false
-	plot4reminder = _("commsUpgrade", "Get hull upgrade")
+	plot4reminder = _("upgrade-comms", "Get hull upgrade")
 	if pickHullBase == nil then
 		repeat
 			candidate = stationList[math.random(13,#stationList)]
@@ -8269,8 +8269,8 @@ function insertAgentDelay(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format(_("PaulShiplog", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
-				plot4reminder = string.format(_("commsPaulStraight", "Get Paul Straight at station %s"),homeStation:getCallSign())
+				p:addToShipLog(string.format(_("PaulOrders-shiplog", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
+				plot4reminder = string.format(_("PaulOrders-comms", "Get Paul Straight at station %s"),homeStation:getCallSign())
 			end
 		end
 		plot4 = getAgentStraight
@@ -8291,8 +8291,8 @@ function getAgentStraight(delta)
 					end
 				end
 			end
-			p:addToShipLog(string.format(_("PaulShiplog", "[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"95,158,160")
-			plot4reminder = string.format(_("commsPaulStraight", "Take Paul Straight to within 20U of %s in %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
+			p:addToShipLog(string.format(_("PaulOrders-shiplog", "[Paul Straight] I've been studying enemy station %s in %s: traffic patterns, communication traffic, energy signature, etc. I've built a specialized short range transporter that should be able to beam me onto the station through their shields. I need to get refined readings from 20 units or closer for final calibration. Please take me to within 20 units of %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName(),insertEnemyStation:getCallSign()),"95,158,160")
+			plot4reminder = string.format(_("PaulOrders-comms", "Take Paul Straight to within 20U of %s in %s"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
 			plot4 = scanEnemyStation
 			break
 		end
@@ -8307,7 +8307,7 @@ function scanEnemyStation(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 20000 then
 					insertRunDelayTimer = 15
-					p:addToShipLog(_("PaulShiplog", "[Paul Straight] I've got my readings. Let me calibrate the transporter"),"95,158,160")
+					p:addToShipLog(_("Paul-shiplog", "[Paul Straight] I've got my readings. Let me calibrate the transporter"),"95,158,160")
 					if p:hasPlayerAtPosition("Helms") then
 						inRangeMsg = "inRangeMsg"
 						p:addCustomMessage("Helms",inRangeMsg,_("msgHelms", "[Paul Straight] The ship is in range. I completed my scans. Thank you"))
@@ -8324,7 +8324,7 @@ function scanEnemyStation(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog(_("PaulShiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
+				p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
 				break
 			end
@@ -8340,8 +8340,8 @@ function insertRunDelay(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog(string.format(_("PaulShiplog", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
-					plot4reminder = string.format(_("commsPaulStraight", "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
+					p:addToShipLog(string.format(_("PaulOrders-shiplog", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
+					plot4reminder = string.format(_("PaulOrders-comms", "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
 					plot4 = insertRun
 					break
 				end
@@ -8350,7 +8350,7 @@ function insertRunDelay(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() and p.straight then
-					p:addToShipLog(_("PaulShiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
+					p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 					choooseNextPlot4line()
 					break
 				end
@@ -8372,10 +8372,10 @@ function insertRun(delta)
 					end
 					if p:hasPlayerAtPosition("Operations") then
 						straightTransportedMsgOps = "straightTransportedMsgOps"
-						p:addCustomMessage("Operations",straightTransportedMsgOps,string.format(_("msgOperations", "Paul Straight has transported aboard %s"),insertEnemyStation:getCallSign()))
+						p:addCustomMessage("Operations",straightTransportedMsgOps,string.format(_("Paul-msgOperations", "Paul Straight has transported aboard %s"),insertEnemyStation:getCallSign()))
 					end
 					plot4 = resultDelay
-					plot4reminder = string.format(_("commsPaulStraight", "Await intelligence results from Paul Straight on %s"),insertEnemyStation:getCallSign())
+					plot4reminder = string.format(_("Paul-comms", "Await intelligence results from Paul Straight on %s"),insertEnemyStation:getCallSign())
 					resultDelayTimer = random(30,60)
 				end
 			end
@@ -8384,7 +8384,7 @@ function insertRun(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() and p.straight then
-				p:addToShipLog(_("PaulShiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
+				p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
 				break
 			end
@@ -8397,10 +8397,10 @@ function resultDelay(delta)
 	if insertEnemyStation:isValid() then
 		resultDelayTimer = resultDelayTimer - delta
 		if resultDelayTimer < 0 then
-			locationResultMsg = _("commsPaulStraight", "[Paul Straight] I discovered the location of the enemy bases in the area:")
+			locationResultMsg = _("Paul-comms", "[Paul Straight] I discovered the location of the enemy bases in the area:")
 			for eidx=1,#enemyStationList do
 				if enemyStationList[eidx]:isValid() then
-					locationResultMsg = locationResultMsg .. string.format(_("commsPaulStraight", "\n%s in %s"),enemyStationList[eidx]:getCallSign(),enemyStationList[eidx]:getSectorName())
+					locationResultMsg = locationResultMsg .. string.format(_("Paul-comms", "\n%s in %s"),enemyStationList[eidx]:getCallSign(),enemyStationList[eidx]:getSectorName())
 				end
 			end
 			p = closestPlayerTo(insertEnemyStation)
@@ -8414,11 +8414,11 @@ function resultDelay(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Science",fatalMsg,_("Paul-msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Operations",fatalMsgOps,_("Paul-msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8432,7 +8432,7 @@ function resultDelay2(delta)
 		resultDelay2Timer = resultDelay2Timer - delta
 		if resultDelay2Timer < 0 then
 			p = closestPlayerTo(insertEnemyStation)
-			p:addToShipLog(string.format(_("PaulMsgComms", "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming..."),targetEnemyStation:getCallSign()),"95,158,160")
+			p:addToShipLog(string.format(_("Paul-shipLog", "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is coming..."),targetEnemyStation:getCallSign()),"95,158,160")
 			straightExecutionTimer = random(40,80)
 			plot4 = straightExecution
 		end
@@ -8442,11 +8442,11 @@ function resultDelay2(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Science",fatalMsg,_("Paul-msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Operations",fatalMsgOps,_("Paul-msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8460,7 +8460,7 @@ function straightExecution(delta)
 		straightExecutionTimer = straightExecutionTimer - delta
 		if straightExecutionTimer < 0 then
 			p = closestPlayerTo(insertEnemyStation)
-			insertEnemyStation:sendCommsMessage(p,_("PaulMsgComms", "We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities"))
+			insertEnemyStation:sendCommsMessage(p,_("Paul-incCall", "We discovered your perfidious spy aboard our station. He will be executed for his treasonous activities"))
 			plot4 = agentDemise
 			agentDemiseTimer = random (40,80)
 		end
@@ -8470,11 +8470,11 @@ function straightExecution(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Science",fatalMsg,_("Paul-msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Operations",fatalMsgOps,_("Paul-msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8492,11 +8492,11 @@ function agentDemise(delta)
 				if p ~= nil and p:isValid() and p.straight then
 					if p:hasPlayerAtPosition("Science") then
 						fatalMsg = "fatalMsg"
-						p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+						p:addCustomMessage("Science",fatalMsg,_("Paul-msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 					end
 					if p:hasPlayerAtPosition("Operations") then
 						fatalMsgOps = "fatalMsgOps"
-						p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+						p:addCustomMessage("Operations",fatalMsgOps,_("Paul-msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 					end
 				end
 			end
@@ -8508,11 +8508,11 @@ function agentDemise(delta)
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
-					p:addCustomMessage("Science",fatalMsg,_("msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Science",fatalMsg,_("Paul-msgScience", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 				if p:hasPlayerAtPosition("Operations") then
 					fatalMsgOps = "fatalMsgOps"
-					p:addCustomMessage("Operations",fatalMsgOps,_("msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
+					p:addCustomMessage("Operations",fatalMsgOps,_("Paul-msgOperations", "Lifesign telemetry from Paul Straight's equipment has ceased"))
 				end
 			end
 		end
@@ -8533,8 +8533,8 @@ function repairBountyDelay(delta)
 		hmsBounty:setSystemHealth("jumpdrive", -0.5):setPosition(((hx+ex)/2)+bx,((hy+ey)/2)+by)
 		hmsBounty.repaired = false
 		p = closestPlayerTo(hmsBounty)
-		p:addToShipLog(string.format(_("CommsHMSBounty", "[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. Can you help? We are in %s"),hmsBounty:getSectorName()),"#ff4500")
-		plot4reminder = string.format(_("CommsHMSBounty", "Help HMS Bounty in %s"),hmsBounty:getSectorName())
+		p:addToShipLog(string.format(_("HMSBounty-shipLog", "[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. Can you help? We are in %s"),hmsBounty:getSectorName()),"#ff4500")
+		plot4reminder = string.format(_("HMSBounty-comms", "Help HMS Bounty in %s"),hmsBounty:getSectorName())
 		ntf = spawnEnemies((hx+ex)/2,(hy+ey)/2,dangerValue,targetEnemyStation:getFaction())
 		for _, enemy in ipairs(ntf) do
 			enemy:orderAttack(hmsBounty)
@@ -8547,7 +8547,7 @@ function repairBounty(delta)
 	p = closestPlayerTo(hmsBounty)
 	if hmsBounty:isValid() then
 		if distance(p,hmsBounty) < 2500 then
-			p:addToShipLog(_("CommsHMSBounty", "[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs"),"#ff4500")
+			p:addToShipLog(_("HMSBounty-shipLogs", "[HMS Bounty] Please ask your engineer to transport a spare repair technician to help with repairs"),"#ff4500")
 			if p:hasPlayerAtPosition("Engineering") then
 				transportRepairTechnicianButton = "transportRepairTechnicianButton"
 				p:addCustomButton("Engineering",transportRepairTechnicianButton,_("buttonEngineer", "Transport technician"),transportRepairTechnician)
@@ -8560,7 +8560,7 @@ function repairBounty(delta)
 			plot4 = nil
 		end
 	else
-		p:addToShipLog(_("CommsHMSBounty", "HMS Bounty has been destroyed"),"Magenta")
+		p:addToShipLog(_("HMSBounty-shipLog", "HMS Bounty has been destroyed"),"Magenta")
 		plot4 = nil
 		plot4reminder = nil
 	end
@@ -8579,7 +8579,7 @@ function transportRepairTechnician()
 				if transportRepairTechnicianButtonPlus ~= nil then
 					p:removeCustom(transportRepairTechnicianButtonPlus)
 				end
-				p:addToShipLog(_("CommsHMSBounty", "[HMS Bounty] Our engines have been repaired. We stand ready to assist"),"#ff4500")
+				p:addToShipLog(_("HMSBounty-shipLog", "[HMS Bounty] Our engines have been repaired. We stand ready to assist"),"#ff4500")
 			end
 		end
 	end
@@ -8599,11 +8599,11 @@ function stationShieldDelay(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format(_("commsExpert", "Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s"),homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
+				p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s"),homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
 			end
 		end
 		playSoundFile("audio/scenario/55/sa_55_Commander3.ogg")
-		plot4reminder = string.format(_("commsExpert", "Find shield expert at station %s in %s"),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName())
+		plot4reminder = string.format(_("MariaOrders-comms", "Find shield expert at station %s in %s"),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName())
 		plot4 = visitShieldExpertStation
 	end
 end
@@ -8623,9 +8623,9 @@ function visitShieldExpertStation(delta)
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
 				if p:isDocked(shieldExpertStation) then
-					p:addToShipLog(string.format(_("commsExpert", "We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
+					p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
 					plot4 = meetShieldExportTransportHeartbroken
-					plot4reminder = string.format(_("commsExpert", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
+					plot4reminder = string.format(_("MariaOrders-comms", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
 					playSoundFile("audio/scenario/55/sa_55_BaseChief.ogg")
 				end
 			end
@@ -8635,16 +8635,16 @@ function visitShieldExpertStation(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(string.format(_("commsExpert", "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
+					p:addToShipLog(string.format(_("Maria-shipLog", "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
 					plot4 = meetShieldExportTransport
-					plot4reminder = stringFormat(_("commsExpert", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
+					plot4reminder = stringFormat(_("Maria-comms", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
 				end
 			end
 		else
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog(_("commsExpert", "Station %s has been destroyed leaving no hints for shield upgrade followup"),"Magenta")
+					p:addToShipLog(_("Maria-comms", "Station %s has been destroyed leaving no hints for shield upgrade followup"),"Magenta")
 				end
 			end
 			choooseNextPlot4line()
@@ -8659,10 +8659,10 @@ function meetShieldExportTransport(delta)
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
-				p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness"),shieldExpertStation:getCallSign(),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
+				p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and I'll double %s's shield effectiveness"),shieldExpertStation:getCallSign(),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
 				playSoundFile("audio/scenario/55/sa_55_Maria1.ogg")
 				plot4 = returnHomeForShields
-				plot4reminder = _("commsExpert", "Return to home base with Maria Shrivner to double shield capacity")
+				plot4reminder = _("MariaOrders-comms", "Return to home base with Maria Shrivner to double shield capacity")
 				break
 			end
 		end
@@ -8676,11 +8676,11 @@ function meetShieldExportTransportHeartbroken(delta)
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
-				p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness"),homeStation:getCallSign()),"Yellow")
+				p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "[Maria Shrivner] I should not have broken up with him, it was all a misunderstanding. Help me get him some rare material as a gift and I'll double %s's shield effectiveness"),homeStation:getCallSign()),"Yellow")
 				playSoundFile("audio/scenario/55/sa_55_Maria2.ogg")
 				plot4 = giftForBeau
 				beauGift = false
-				plot4reminder = string.format(_("commsExpert", "Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s"),shieldExpertStation:getCallSign())
+				plot4reminder = string.format(_("MariaOrders-comms", "Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria Shrivner to %s"),shieldExpertStation:getCallSign())
 				break
 			end
 		end
@@ -8696,10 +8696,10 @@ function giftForBeau(delta)
 				if p:isDocked(shieldExpertStation) then
 					if p.shieldExpert then
 						if beauGift then
-							p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded"),homeStation:getCallSign()),"Yellow")
+							p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. Take me to %s and let's get those shields upgraded"),homeStation:getCallSign()),"Yellow")
 							playSoundFile("audio/scenario/55/sa_55_Maria3.ogg")
 							plot4 = returnHomeForShields
-							plot4reminder = _("commsExpert", "Return to home base with Maria Shrivner to double shield capacity")
+							plot4reminder = _("MariaOrders-comms", "Return to home base with Maria Shrivner to double shield capacity")
 						end
 					end
 				end
@@ -8709,12 +8709,12 @@ function giftForBeau(delta)
 		for pidx=1,8 do
 			p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format(_("commsExpert", "We were just notified that station %s has been destroyed"),shieldExpertStation:getCallSign()),"Magenta")
+				p:addToShipLog(string.format(_("Maria-shipLog", "We were just notified that station %s has been destroyed"),shieldExpertStation:getCallSign()),"Magenta")
 				if p.shieldExpert then
-					p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity"),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
+					p:addToShipLog(string.format(_("expertOrdersAudio-shipLog", "[Maria Shrivner] Oh no! I'm too late! Now we'll never be reconciled. *sniff* Well, the least I can do is upgrade %s's shields. Take me there and I'll double %s's shield capacity"),homeStation:getCallSign(),homeStation:getCallSign()),"Yellow")
 					playSoundFile("audio/scenario/55/sa_55_Maria4.ogg")
 					plot4 = returnHomeForShields
-					plot4reminder = _("commsExpert", "Return to home base with Maria Shrivner to double shield capacity")
+					plot4reminder = _("MariaOrders-comms", "Return to home base with Maria Shrivner to double shield capacity")
 				end
 			end
 		end
@@ -8740,7 +8740,7 @@ function returnHomeForShields(delta)
 							homeStation:setShieldsMax(newMax,newMax,newMax,newMax)
 						end
 					end
-					p:addToShipLog(string.format(_("commsExpert", "[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually"),homeStation:getCallSign()),"Yellow")
+					p:addToShipLog(string.format(_("Maria-comms", "[Maria Shrivner] %s's shield capacity has been doubled. They should charge up to their new capacity eventually"),homeStation:getCallSign()),"Yellow")
 					playSoundFile("audio/scenario/55/sa_55_Maria5.ogg")
 					choooseNextPlot4line()
 					homeStation.shieldUpgrade = true
@@ -8773,7 +8773,7 @@ function helpfulWarning(delta)
 							--tempObjType = obj:getTypeName()
 							--if not string.find(tempObjType,"Station") then
 							if detected_enemy_ship then
-								wMsg = string.format(_("commsHelpfullWarning", "[%s] Our sensors detect enemies nearby"),stationList[i]:getCallSign())
+								wMsg = string.format(_("HelpfullWarning", "[%s] Our sensors detect enemies nearby"),stationList[i]:getCallSign())
 								if diagnostic or difficulty < 1 then
 									wMsg = wMsg .. string.format(_("commsHelpfullWarning", " - Type: %s"),obj:getTypeName())
 								end

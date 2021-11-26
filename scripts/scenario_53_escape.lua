@@ -3796,41 +3796,41 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	if goodCount > 0 then
-		addCommsReply(_("commsTrade", "Buy, sell, trade"), function()
+		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
-			local goodsReport = string.format(_("commsTrade", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
+			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
-				goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
+				goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
 			end
 			if ctd.buy ~= nil then
-				goodsReport = goodsReport .. _("commsTrade", "Goods or components station will buy: price in reputation\n")
+				goodsReport = goodsReport .. _("trade-comms", "Goods or components station will buy: price in reputation\n")
 				for good, price in pairs(ctd.buy) do
-					goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i\n"),good,price)
+					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,price)
 				end
 			end
-			goodsReport = goodsReport .. string.format(_("commsTrade", "Current cargo aboard %s:\n"),comms_source:getCallSign())
+			goodsReport = goodsReport .. string.format(_("trade-comms", "Current cargo aboard %s:\n"),comms_source:getCallSign())
 			local cargoHoldEmpty = true
 			local player_good_count = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
 					player_good_count = player_good_count + 1
-					goodsReport = goodsReport .. string.format(_("commsTrade", "     %s: %i\n"),good,goodQuantity)
+					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,goodQuantity)
 				end
 			end
 			if player_good_count < 1 then
-				goodsReport = goodsReport .. _("commsTrade", "     Empty\n")
+				goodsReport = goodsReport .. _("trade-comms", "     Empty\n")
 			end
-			goodsReport = goodsReport .. string.format(_("commsTrade", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
+			goodsReport = goodsReport .. string.format(_("trade-comms", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
 			setCommsMessage(goodsReport)
 			for good, goodData in pairs(ctd.goods) do
-				addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
-					local goodTransactionMessage = string.format(_("commsTrade", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
+				addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
+					local goodTransactionMessage = string.format(_("trade-comms", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
 					if comms_source.cargo < 1 then
-						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient cargo space for purchase")
+						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodData["cost"] > math.floor(comms_source:getReputationPoints()) then
-						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient reputation for purchase")
+						goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodData["quantity"] < 1 then
-						goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 					else
 						if comms_source:takeReputationPoints(goodData["cost"]) then
 							comms_source.cargo = comms_source.cargo - 1
@@ -3842,9 +3842,9 @@ function handleDockedState()
 								comms_source.goods[good] = 0
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\npurchased")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\npurchased")
 						else
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient reputation for purchase")
+							goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
@@ -3854,11 +3854,11 @@ function handleDockedState()
 			if ctd.buy ~= nil then
 				for good, price in pairs(ctd.buy) do
 					if comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
-						addCommsReply(string.format(_("commsTrade", "Sell one %s for %i reputation"),good,price), function()
-							local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Reputation price: %i"),good,price)
+						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
+							local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Reputation price: %i"),good,price)
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source:addReputationPoints(price)
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nOne sold")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
 							addCommsReply(_("Back"), commsStation)
@@ -3868,10 +3868,10 @@ function handleDockedState()
 			end
 			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods.food ~= nil and comms_source.goods.food.quantity > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format(_("commsTrade", "Trade food for %s"),good), function()
-						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -3882,7 +3882,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["food"] = comms_source.goods["food"] - 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -3891,10 +3891,10 @@ function handleDockedState()
 			end
 			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods.medicine ~= nil and comms_source.goods.medicine.quantity > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format(_("commsTrade", "Trade medicine for %s"),good), function()
-						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -3905,7 +3905,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["medicine"] = comms_source.goods["medicine"] - 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -3914,10 +3914,10 @@ function handleDockedState()
 			end
 			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods.luxury ~= nil and comms_source.goods.luxury.quantity > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
-						local goodTransactionMessage = string.format(_("commsTrade", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData[quantity] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nInsufficient station inventory")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -3928,7 +3928,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
-							goodTransactionMessage = goodTransactionMessage .. _("commsTrade", "\nTraded")
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -3944,14 +3944,14 @@ function handleDockedState()
 			end
 		end
 		if player_good_count > 0 then
-			addCommsReply(_("commsTrade", "Jettison cargo"), function()
-				setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
+			addCommsReply(_("trade-comms", "Jettison cargo"), function()
+				setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 				for good, good_quantity in pairs(comms_source.goods) do
 					if good_quantity > 0 then
 						addCommsReply(good, function()
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source.cargo = comms_source.cargo + 1
-							setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+							setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 							addCommsReply(_("Back"), commsStation)
 						end)
 					end
@@ -3959,8 +3959,8 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply(_("commsTrade", "No tutorial covered goods or cargo. Explain"), function()
-			setCommsMessage(_("commsTrade", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
+		addCommsReply(_("explainGoods", "No tutorial covered goods or cargo. Explain"), function()
+			setCommsMessage(_("explainGoods", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
@@ -4130,19 +4130,19 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply(_("commsTrade", "What goods do you have available for sale or trade?"), function()
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format(_("commsTrade", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("commsTrade", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply(_("commsTrade", "Where can I find particular goods?"), function()
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = _("commsTrade", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -4182,14 +4182,14 @@ function handleUndockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format(_("commsTrade", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. _("commsTrade", "\n\nWhat goods are you interested in?\nI've heard about these:")
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. _("commsTrade", " Beyond that, I have no knowledge of specific stations")
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -4285,22 +4285,22 @@ function fillStationBrains()
 					tradeString = ""
 					stationTrades = false
 					if tradeMedicine[stationList[sti]] ~= nil then
-						tradeString = _("commsTrade", " and will trade it for medicine")
+						tradeString = _("trade-comms", " and will trade it for medicine")
 						stationTrades = true
 					end
 					if tradeFood[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. _("commsTrade", " or food")
+							tradeString = tradeString .. _("trade-comms", " or food")
 						else
-							tradeString = tradeString .. _("commsTrade", " and will trade it for food")
+							tradeString = tradeString .. _("trade-comms", " and will trade it for food")
 							stationTrades = true
 						end
 					end
 					if tradeLuxury[stationList[sti]] ~= nil then
 						if stationTrades then
-							tradeString = tradeString .. _("commsTrade", " or luxury")
+							tradeString = tradeString .. _("trade-comms", " or luxury")
 						else
-							tradeString = tradeString .. _("commsTrade", " and will trade it for luxury")
+							tradeString = tradeString .. _("trade-comms", " and will trade it for luxury")
 						end
 					end
 					table.insert(comms_target.goodsKnowledgeTrade,tradeString)
@@ -4369,13 +4369,13 @@ function friendlyComms(comms_data)
 	end
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		addCommsReply(_("commsTrade", "Do you have cargo you might sell?"), function()
+		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
-			local cargoMsg = _("commsTrade", "We've got ")
+			local cargoMsg = _("trade-comms", "We've got ")
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. _("commsTrade", ", ") .. good
+						cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -4383,7 +4383,7 @@ function friendlyComms(comms_data)
 				goodCount = goodCount + goodData.quantity
 			end
 			if goodCount == 0 then
-				cargoMsg = cargoMsg .. _("commsTrade", "nothing")
+				cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 			end
 			setCommsMessage(cargoMsg)
 		end)
@@ -4396,13 +4396,13 @@ function friendlyComms(comms_data)
 			end
 			if goodCount > 0 then
 				addCommsReply("Jettison cargo", function()
-					setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
+					setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 					for good, good_quantity in pairs(comms_source.goods) do
 						if good_quantity > 0 then
 							addCommsReply(good, function()
 								comms_source.goods[good] = comms_source.goods[good] - 1
 								comms_source.cargo = comms_source.cargo + 1
-								setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+								setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
@@ -4418,11 +4418,11 @@ function friendlyComms(comms_data)
 				if luxuryQuantity > 0 then
 					for good, goodData in pairs(comms_data.goods) do
 						if goodData.quantity > 0 then
-							addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
+							addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 								comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 								if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 								comms_source.goods[good] = comms_source.goods[good] + 1
-								setCommsMessage(_("commsTrade", "Traded"))
+								setCommsMessage(_("trade-comms", "Traded"))
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
@@ -4436,7 +4436,7 @@ function friendlyComms(comms_data)
 			end
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
-					addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
+					addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 						if comms_source.cargo > 0 then
 							if comms_source:takeReputationPoints(goodData.cost) then
 								goodData.quantity = goodData.quantity - 1
@@ -4444,12 +4444,12 @@ function friendlyComms(comms_data)
 								if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 								comms_source.goods[good] = comms_source.goods[good] + 1
 								comms_source.cargo = comms_source.cargo - 1
-								setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
+								setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 							else
 								setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 							end
 						else
-							setCommsMessage(_("commsTrade", "Insufficient cargo space"))
+							setCommsMessage(_("trade-comms", "Insufficient cargo space"))
 						end
 						addCommsReply(_("Back"), commsShip)
 					end)
@@ -4556,13 +4556,13 @@ function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
 		setCommsMessage(_("commsShip", "Yes?"))
-		addCommsReply(_("commsTrade", "Do you have cargo you might sell?"), function()
+		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
-			local cargoMsg = _("commsTrade", "We've got ")
+			local cargoMsg = _("trade-comms", "We've got ")
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
-						cargoMsg = cargoMsg .. _("commsTrade", ", ") .. good
+						cargoMsg = cargoMsg .. _("trade-comms", ", ") .. good
 					else
 						cargoMsg = cargoMsg .. good
 					end
@@ -4570,7 +4570,7 @@ function neutralComms(comms_data)
 				goodCount = goodCount + goodData.quantity
 			end
 			if goodCount == 0 then
-				cargoMsg = cargoMsg .. _("commsTrade", "nothing")
+				cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 			end
 			setCommsMessage(cargoMsg)
 		end)
@@ -4591,14 +4591,14 @@ function neutralComms(comms_data)
 					end
 				end
 				if goodCount > 0 then
-					addCommsReply(_("commsTrade", "Jettison cargo"), function()
-						setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
+					addCommsReply(_("trade-comms", "Jettison cargo"), function()
+						setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then
 								addCommsReply(good, function()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+									setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -4614,11 +4614,11 @@ function neutralComms(comms_data)
 					if luxuryQuantity > 0 then
 						for good, goodData in pairs(comms_data.goods) do
 							if goodData.quantity > 0 then
-								addCommsReply(string.format(_("commsTrade", "Trade luxury for %s"),good), function()
+								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 									comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 									if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 									comms_source.goods[good] = comms_source.goods[good] + 1
-									setCommsMessage(_("commsTrade", "Traded"))
+									setCommsMessage(_("trade-comms", "Traded"))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -4632,7 +4632,7 @@ function neutralComms(comms_data)
 				end
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
-						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 							if comms_source.cargo > 0 then
 								if comms_source:takeReputationPoints(goodData.cost) then
 									goodData.quantity = goodData.quantity - 1
@@ -4640,12 +4640,12 @@ function neutralComms(comms_data)
 									if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							else
-								setCommsMessage(_("commsTrade", "Insufficient cargo space"))
+								setCommsMessage(_("trade-comms", "Insufficient cargo space"))
 							end
 							addCommsReply(_("Back"), commsShip)
 						end)
@@ -4673,14 +4673,14 @@ function neutralComms(comms_data)
 					end
 				end
 				if goodCount > 0 then
-					addCommsReply(_("commsTrade", "Jettison cargo"), function()
-						setCommsMessage(string.format(_("commsTrade", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
+					addCommsReply(_("trade-comms", "Jettison cargo"), function()
+						setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then
 								addCommsReply(good, function()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format(_("commsTrade", "One %s jettisoned"),good))
+									setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -4695,7 +4695,7 @@ function neutralComms(comms_data)
 				end
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
-						addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 							if comms_source.cargo > 0 then
 								if comms_source:takeReputationPoints(goodData.cost*freighter_multiplier) then
 									goodData.quantity = goodData.quantity - 1
@@ -4707,12 +4707,12 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 							else
-								setCommsMessage(_("commsTrade", "Insufficient cargo space"))
+								setCommsMessage(_("trade-comms", "Insufficient cargo space"))
 							end
 							addCommsReply(_("Back"), commsShip)
 						end)
@@ -4720,14 +4720,14 @@ function neutralComms(comms_data)
 				end	--freighter goods loop
 			end
 		else	--least friendly
-			setCommsMessage(_("commsTrade", "Why are you bothering me?"))
+			setCommsMessage(_("trade-comms", "Why are you bothering me?"))
 			-- Offer to sell goods if goods or equipment freighter double price
 			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					freighter_multiplier = 3
 					for good, goodData in pairs(comms_data.goods) do
 						if goodData.quantity > 0 then
-							addCommsReply(string.format(_("commsTrade", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 								if comms_source.cargo > 0 then
 									if comms_source:takeReputationPoints(goodData.cost*freighter_multiplier) then
 										goodData.quantity = goodData.quantity - 1
@@ -4739,12 +4739,12 @@ function neutralComms(comms_data)
 										end
 										comms_source.goods[good] = comms_source.goods[good] + 1
 										comms_source.cargo = comms_source.cargo - 1
-										setCommsMessage(string.format(_("commsTrade", "Purchased %s from %s"),good,comms_target:getCallSign()))
+										setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 									else
 										setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 									end
 								else
-									setCommsMessage(_("commsTrade", "Insufficient cargo space"))
+									setCommsMessage(_("trade-comms", "Insufficient cargo space"))
 								end
 								addCommsReply(_("Back"), commsShip)
 							end)
