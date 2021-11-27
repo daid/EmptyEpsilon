@@ -162,7 +162,7 @@ function stationComms()
 
 Greetings, Captain. If you want supplies, please dock with us.]]))
         else
-            setCommsMessage(_([[A dispatcher responds:
+            setCommsMessage(_("station-comms", [[A dispatcher responds:
 
 Greetings, Captain. What can we do for you?]]))
         end

@@ -6874,9 +6874,9 @@ function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
 		if comms_data.friendlyness > 66 then
-			setCommsMessage(_("shipNeutral-comms", "Yes?"))
+			setCommsMessage(_("trade-comms", "Yes?"))
 			-- Offer destination information
-			addCommsReply(_("shipNeutral-comms", "Where are you headed?"), function()
+			addCommsReply(_("trade-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -6945,10 +6945,10 @@ function neutralComms(comms_data)
 				end	--room on player ship
 			end	--within 5 units
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("shipAssist-comms", "What do you want?"))
+			setCommsMessage(_("trade-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format(_("shipAssist-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
+			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else

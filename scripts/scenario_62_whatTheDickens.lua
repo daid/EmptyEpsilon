@@ -997,7 +997,7 @@ function destroyCratchitFleet(delta)
 	if cratchitFleetCount == 0 then
 		if stationBedlam:isValid() then
 			player:addReputationPoints(50)
-			player:addToShipLog(_("orderAudio-shipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
+			player:addToShipLog(_("ordersAudio-shipLog", "[Bob Cratchit on station Bedlam] I hate to dampen your spirits, but my young maintenance technician, Tim, has become seriously ill. Our medical facilities cannot diagnose, much less treat him. The medical ship Turkey Surprise should be able to help. Could you dock with Bedlam and transport Tim to Turkey Surprise?"),"Yellow")
 			playSoundFile("audio/scenario/62/sa_62_BobCratchit2.ogg")
 			turkeyAngle = random(90,180)
 			bx, by = stationBedlam:getPosition()

@@ -3416,20 +3416,20 @@ function handleDockedState()
 	end	--end missles used on player ship if branch
 	if comms_target == beamFixStation then
 		if playerRepulse.beamFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Kent's brother"), function()
-				setCommsMessage(_("commsCrewFriends", "Kent? You made it out of the Kraylor base? We thought you were going to spend the rest of your life there. Thank you, captain, for helping Kent get out of there"))
-				addCommsReply(_("commsCrewFriends", "Can you help us with beam weapon repair?"), function()
-					setCommsMessage(_("commsCrewFriends", "For the Repulse class? Absolutely. I used to work on those all the time."))
+			addCommsReply(_("crewFriends-comms", "Talk to Kent's brother"), function()
+				setCommsMessage(_("crewFriends-comms", "Kent? You made it out of the Kraylor base? We thought you were going to spend the rest of your life there. Thank you, captain, for helping Kent get out of there"))
+				addCommsReply(_("crewFriends-comms", "Can you help us with beam weapon repair?"), function()
+					setCommsMessage(_("crewFriends-comms", "For the Repulse class? Absolutely. I used to work on those all the time."))
 					playerRepulse:setBeamWeapon(1, 10,-90, 1200.0, 6.0, 5)
 					playerRepulse.beamFix = "done"
 					fixFloodTimer = 30
 					plot1 = fixFlood
-					addCommsReply(_("commsCrewFriends", "Thanks"), function()
-						setCommsMessage(_("commsCrewFriends", "You're quite welcome. While I was in there, I fixed up your beams so they could function at maximum potential"))
+					addCommsReply(_("crewFriends-comms", "Thanks"), function()
+						setCommsMessage(_("crewFriends-comms", "You're quite welcome. While I was in there, I fixed up your beams so they could function at maximum potential"))
 						playerRepulse.maxBeam = 1
-						addCommsReply(_("commsCrewFriends", "Then double thanks!"), function()
+						addCommsReply(_("crewFriends-comms", "Then double thanks!"), function()
 							playerRepulse:addReputationPoints(30)
-							setCommsMessage(_("commsCrewFriends", "Thank *you* for getting my brother out of that Kraylor prison"))
+							setCommsMessage(_("crewFriends-comms", "Thank *you* for getting my brother out of that Kraylor prison"))
 							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("Back"), commsStation)
@@ -3442,14 +3442,14 @@ function handleDockedState()
 	end
 	if comms_target == missileFixStation then
 		if playerRepulse.missileFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Edwina's father"), function()
-				setCommsMessage(_("commsCrewFriends", "I am glad to hear that Edwina escaped that prison. We were worried about her"))
-				addCommsReply(_("commsCrewFriends", "Edwina says you do missile systems repair work"), function()
-					setCommsMessage(_("commsCrewFriends", "Should be easy enough. I'm grateful to you for helping Edwina escape."))
+			addCommsReply(_("crewFriends-comms", "Talk to Edwina's father"), function()
+				setCommsMessage(_("crewFriends-comms", "I am glad to hear that Edwina escaped that prison. We were worried about her"))
+				addCommsReply(_("crewFriends-comms", "Edwina says you do missile systems repair work"), function()
+					setCommsMessage(_("crewFriends-comms", "Should be easy enough. I'm grateful to you for helping Edwina escape."))
 					playerRepulse.maxMissile = 1
 					playerRepulse.missileFix = "done"
 					addCommsReply("Thanks", function()
-						setCommsMessage(_("commsCrewFriends", "You're quite welcome"))
+						setCommsMessage(_("crewFriends-comms", "You're quite welcome"))
 						playerRepulse:addReputationPoints(30)
 						addCommsReply(_("Back"),commsStation)
 					end)
@@ -3461,9 +3461,9 @@ function handleDockedState()
 	end
 	if comms_target == impulseFixStation then
 		if playerRepulse.impulseFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Johnny"), function()
-				setCommsMessage(_("commsCrewFriends", "Mom? Wow, I thought you were toast. Good to hear your voice"))
-				addCommsReply(_("commsCrewFriends", "Can you get our impulse drive working better"), function()
+			addCommsReply(_("crewFriends-comms", "Talk to Johnny"), function()
+				setCommsMessage(_("crewFriends-comms", "Mom? Wow, I thought you were toast. Good to hear your voice"))
+				addCommsReply(_("crewFriends-comms", "Can you get our impulse drive working better"), function()
 					if difficulty > 1 then
 						if impulseFixStation.good_base == nil then
 							repeat
@@ -3489,25 +3489,25 @@ function handleDockedState()
 							impulse_good_quantity = comms_source.goods[impulseFixStation.impulse_good]
 						end
 						if impulse_good_quantity > 0 then
-							setCommsMessage(string.format(_("commsCrewFriends", "Piece of cake. Thanks for the %s"),impulseFixStation.impulse_good))
+							setCommsMessage(string.format(_("crewFriends-comms", "Piece of cake. Thanks for the %s"),impulseFixStation.impulse_good))
 							playerRepulse.maxImpulse = 1
 							playerRepulse.impulseFix = "done"
 							comms_source.goods[impulseFixStation.impulse_good] = comms_source.goods[impulseFixStation.impulse_good] - 1
 							comms_source.cargo = comms_source.cargo + 1
-							addCommsReply(_("commsCrewFriends", "Thank you"), function()
-								setCommsMessage(_("commsCrewFriends", "Sure. Mom, I'll see you at Christmas"))
+							addCommsReply(_("crewFriends-comms", "Thank you"), function()
+								setCommsMessage(_("crewFriends-comms", "Sure. Mom, I'll see you at Christmas"))
 								playerRepulse:addReputationPoints(30)
 								addCommsReply(_("Back"),commsStation)
 							end)
 						else
-							setCommsMessage(string.format(_("commsCrewFriends", "Piece of cake, but I'll need %s"),impulseFixStation.impulse_good))
+							setCommsMessage(string.format(_("crewFriends-comms", "Piece of cake, but I'll need %s"),impulseFixStation.impulse_good))
 						end
 					else
-						setCommsMessage(_("commsCrewFriends", "Piece of cake"))
+						setCommsMessage(_("crewFriends-comms", "Piece of cake"))
 						playerRepulse.maxImpulse = 1
 						playerRepulse.impulseFix = "done"
-						addCommsReply(_("commsCrewFriends", "Thank you"), function()
-							setCommsMessage(_("commsCrewFriends", "Sure. Mom, I'll see you at Christmas"))
+						addCommsReply(_("crewFriends-comms", "Thank you"), function()
+							setCommsMessage(_("crewFriends-comms", "Sure. Mom, I'll see you at Christmas"))
 							playerRepulse:addReputationPoints(30)
 							addCommsReply(_("Back"),commsStation)
 						end)
@@ -3520,9 +3520,9 @@ function handleDockedState()
 	end
 	if comms_target == jumpFixStation then
 		if playerRepulse.jumpFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Nancy's brother"), function()
-				setCommsMessage(_("commsCrewFriends", "Nancy! Last I heard, your ship had been captured by Kraylors and you were imprisoned. Good to know you won't be stuck there forever. What brings you here?"))
-				addCommsReply(_("commsCrewFriends", "Our jump drive needs some tuning"), function()
+			addCommsReply(_("crewFriends-comms", "Talk to Nancy's brother"), function()
+				setCommsMessage(_("crewFriends-comms", "Nancy! Last I heard, your ship had been captured by Kraylors and you were imprisoned. Good to know you won't be stuck there forever. What brings you here?"))
+				addCommsReply(_("crewFriends-comms", "Our jump drive needs some tuning"), function()
 					if difficulty >= 1 then
 						if jumpFixStation.good_base == nil then
 							repeat
@@ -3548,25 +3548,25 @@ function handleDockedState()
 							jump_good_quantity = comms_source.goods[jumpFixStation.jump_good]
 						end
 						if jump_good_quantity > 0 then
-							setCommsMessage(string.format(_("commsCrewFriends", "That should not be hard to do. I could probably do that in my sleep. Thanks for bringing %s"),jumpFixStation.jump_good))
+							setCommsMessage(string.format(_("crewFriends-comms", "That should not be hard to do. I could probably do that in my sleep. Thanks for bringing %s"),jumpFixStation.jump_good))
 							comms_source.goods[jumpFixStation.jump_good] = comms_source.goods[jumpFixStation.jump_good] - 1
 							player.cargo = player.cargo + 1
 							playerRepulse.maxJump = 1
 							playerRepulse.jumpFix = "done"
-							addCommsReply(_("commsCrewFriends", "Thanks, bro"), function()
-								setCommsMessage(_("commsCrewFriends", "No problem. Treat your jump drive right and it'll always bring you home"))
+							addCommsReply(_("crewFriends-comms", "Thanks, bro"), function()
+								setCommsMessage(_("crewFriends-comms", "No problem. Treat your jump drive right and it'll always bring you home"))
 								playerRepulse:addReputationPoints(30)
 								addCommsReply(_("Back"),commsStation)
 							end)
 						else
-							setCommsMessage(string.format(_("commsCrewFriends", "That should not be hard to do. I could probably do that in my sleep. But I'll need some %s"),jumpFixStation.jump_good))
+							setCommsMessage(string.format(_("crewFriends-comms", "That should not be hard to do. I could probably do that in my sleep. But I'll need some %s"),jumpFixStation.jump_good))
 						end
 					else
-						setCommsMessage(_("commsCrewFriends", "That should not be hard to do. I could probably do that in my sleep"))
+						setCommsMessage(_("crewFriends-comms", "That should not be hard to do. I could probably do that in my sleep"))
 						playerRepulse.maxJump = 1
 						playerRepulse.jumpFix = "done"
-						addCommsReply(_("commsCrewFriends", "Thanks, bro"), function()
-							setCommsMessage(_("commsCrewFriends", "No problem. Treat your jump drive right and it'll always bring you home"))
+						addCommsReply(_("crewFriends-comms", "Thanks, bro"), function()
+							setCommsMessage(_("crewFriends-comms", "No problem. Treat your jump drive right and it'll always bring you home"))
 							playerRepulse:addReputationPoints(30)
 							addCommsReply(_("Back"),commsStation)
 						end)
@@ -3579,14 +3579,14 @@ function handleDockedState()
 	end
 	if comms_target == reactorFixStation then
 		if playerRepulse.reactorFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Manuel's cousin"), function()
-				setCommsMessage(_("commsCrewFriends", "Yo Manuel, why you want to scare us by getting captured, man? At least you escaped. Why you here?"))
-				addCommsReply(_("commsCrewFriends", "The reactor is weak... real weak"), function()
-					setCommsMessage(_("commsCrewFriends", "Lemme see if I can get it to charge up right."))
+			addCommsReply(_("crewFriends-comms", "Talk to Manuel's cousin"), function()
+				setCommsMessage(_("crewFriends-comms", "Yo Manuel, why you want to scare us by getting captured, man? At least you escaped. Why you here?"))
+				addCommsReply(_("crewFriends-comms", "The reactor is weak... real weak"), function()
+					setCommsMessage(_("crewFriends-comms", "Lemme see if I can get it to charge up right."))
 					playerRepulse.maxReactor = 1
 					playerRepulse.reactorFix = "done"
-					addCommsReply(_("commsCrewFriends", "The captain would appreciate it"), function()
-						setCommsMessage(_("commsCrewFriends", "You're all set. Don't overheat the reactor or you'll get a nasty surprise"))
+					addCommsReply(_("crewFriends-comms", "The captain would appreciate it"), function()
+						setCommsMessage(_("crewFriends-comms", "You're all set. Don't overheat the reactor or you'll get a nasty surprise"))
 						playerRepulse:addReputationPoints(30)
 						addCommsReply(_("Back"),commsStation)
 					end)
@@ -3598,11 +3598,11 @@ function handleDockedState()
 	end
 	if comms_target == longRangeFixStation then
 		if playerRepulse.longRangeFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Fred's wife"), function()
-				setCommsMessage(_("commsCrewFriends", "Fred! You escaped! We were worried sick"))
-				addCommsReply(_("commsCrewFriends", "We need to connect to the Human Navy network"), function()
-					setCommsMessage(_("commsCrewFriends", "I can do that for you. However, that means you'll go from being Independent to being in the Human Navy"))
-					addCommsReply(_("commsCrewFriends", "I understand the consequences. Please proceed"), function()
+			addCommsReply(_("crewFriends-comms", "Talk to Fred's wife"), function()
+				setCommsMessage(_("crewFriends-comms", "Fred! You escaped! We were worried sick"))
+				addCommsReply(_("crewFriends-comms", "We need to connect to the Human Navy network"), function()
+					setCommsMessage(_("crewFriends-comms", "I can do that for you. However, that means you'll go from being Independent to being in the Human Navy"))
+					addCommsReply(_("crewFriends-comms", "I understand the consequences. Please proceed"), function()
 						playerRepulse.longRangeFix = "done"
 						playerRepulse:setFaction("Human Navy")
 						stationFaction = "Human Navy"
@@ -3645,16 +3645,16 @@ function handleDockedState()
 							gy = adjList[rn][2]
 						end
 						plot4 = returnHome
-						setCommsMessage(_("commsCrewFriends", "You're all fixed up"))
-						addCommsReply(_("commsCrewFriends", "Thanks"), function()
-							setCommsMessage(_("commsCrewFriends", "You're welcome. Fred, honey, I'll see you after you get off work"))
+						setCommsMessage(_("crewFriends-comms", "You're all fixed up"))
+						addCommsReply(_("crewFriends-comms", "Thanks"), function()
+							setCommsMessage(_("crewFriends-comms", "You're welcome. Fred, honey, I'll see you after you get off work"))
 							playerRepulse:addReputationPoints(30)
 							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply(_("commsCrewFriends", "I'll check with the captain and get back to you"), function()
-						setCommsMessage(_("commsCrewFriends", "Ok"))
+					addCommsReply(_("crewFriends-comms", "I'll check with the captain and get back to you"), function()
+						setCommsMessage(_("crewFriends-comms", "Ok"))
 						addCommsReply(_("Back"), commsStation)
 					end)
 					addCommsReply(_("Back"),commsStation)
@@ -3665,15 +3665,15 @@ function handleDockedState()
 	end
 	if comms_target == shieldFixStation then
 		if playerRepulse.frontShieldFix == nil and playerRepulse.rearShieldFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Amir's sister"), function()
-				setCommsMessage(string.format(_("commsCrewFriends", "Welcome to %s! Any friend of Amir's is a friend of mine"),shieldFixStation:getCallSign()))
-				addCommsReply(_("commsCrewFriends", "Can you help us with our shields?"), function()
-					setCommsMessage(_("commsCrewFriends", "Yes, I can. However, I can only help with one: front or rear. I need more parts to do both"))
-					addCommsReply(_("commsCrewFriends", "Repair front shield"), function()
-						setCommsMessage(_("commsCrewFriends", "Your front shields are now fully operational. Your repair crew can finish the rest"))
+			addCommsReply(_("crewFriends-comms", "Talk to Amir's sister"), function()
+				setCommsMessage(string.format(_("crewFriends-comms", "Welcome to %s! Any friend of Amir's is a friend of mine"),shieldFixStation:getCallSign()))
+				addCommsReply(_("crewFriends-comms", "Can you help us with our shields?"), function()
+					setCommsMessage(_("crewFriends-comms", "Yes, I can. However, I can only help with one: front or rear. I need more parts to do both"))
+					addCommsReply(_("crewFriends-comms", "Repair front shield"), function()
+						setCommsMessage(_("crewFriends-comms", "Your front shields are now fully operational. Your repair crew can finish the rest"))
 						playerRepulse.maxFrontShield = 1
 						playerRepulse.frontShieldFix = "done"
-						addCommsReply(_("commsCrewFriends", "Thanks"), function()
+						addCommsReply(_("crewFriends-comms", "Thanks"), function()
 							if shieldGoodBase == nil then
 								repeat
 									candidate = stationList[math.random(1,#stationList)]
@@ -3693,17 +3693,17 @@ function handleDockedState()
 									end
 								until(shieldGoodBase ~= nil)
 							end
-							setCommsMessage(string.format(_("commsCrewFriends", "Certainly. Bring back %s to get the rear shield fixed. You might find some at %s"),shieldGood,shieldGoodBase:getCallSign()))
+							setCommsMessage(string.format(_("crewFriends-comms", "Certainly. Bring back %s to get the rear shield fixed. You might find some at %s"),shieldGood,shieldGoodBase:getCallSign()))
 							playerRepulse:addReputationPoints(30)
 							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("Back"), commsStation)
 					end)
-					addCommsReply(_("commsCrewFriends", "Repair rear shield"), function()
-						setCommsMessage(_("commsCrewFriends", "Your rear shields are now fully operational. Your repair crew can finish the rest"))
+					addCommsReply(_("crewFriends-comms", "Repair rear shield"), function()
+						setCommsMessage(_("crewFriends-comms", "Your rear shields are now fully operational. Your repair crew can finish the rest"))
 						playerRepulse.maxRearShield = 1
 						playerRepulse.rearShieldFix = "done"
-						addCommsReply(_("commsCrewFriends", "Thanks"), function()
+						addCommsReply(_("crewFriends-comms", "Thanks"), function()
 							if shieldGoodBase == nil then
 								repeat
 									candidate = stationList[math.random(1,#stationList)]
@@ -3723,7 +3723,7 @@ function handleDockedState()
 									end
 								until(shieldGoodBase ~= nil)
 							end
-							setCommsMessage(string.format(_("commsCrewFriends", "Certainly. Bring back %s to get the front shield fixed. You might find some at %s"),shieldGood,shieldGoodBase:getCallSign()))
+							setCommsMessage(string.format(_("crewFriends-comms", "Certainly. Bring back %s to get the front shield fixed. You might find some at %s"),shieldGood,shieldGoodBase:getCallSign()))
 							playerRepulse:addReputationPoints(30)
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -3734,31 +3734,31 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		elseif playerRepulse.frontShieldFix == nil or playerRepulse.rearShieldFix == nil then
-			addCommsReply(_("commsCrewFriends", "Talk to Amir's sister"), function()
-				setCommsMessage(string.format(_("commsCrewFriends", "Welcome back. Did you bring some %s for me to finish fixing up your shields?"),shieldGood))
+			addCommsReply(_("crewFriends-comms", "Talk to Amir's sister"), function()
+				setCommsMessage(string.format(_("crewFriends-comms", "Welcome back. Did you bring some %s for me to finish fixing up your shields?"),shieldGood))
 				local shieldGoodQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[shieldGood] ~= nil and comms_source.goods[shieldGood] > 0 then
 					shieldGoodQuantity = comms_source.goods[shieldGood]
 				end
 				if shieldGoodQuantity > 0 then
-					addCommsReply(string.format(_("commsCrewFriends", "Yes, please take the %s and fix the shields"),shieldGood), function()
+					addCommsReply(string.format(_("crewFriends-comms", "Yes, please take the %s and fix the shields"),shieldGood), function()
 						comms_source.goods[shieldGood] = comms_source.goods[shieldGood] - 1
 						player.cargo = player.cargo + 1
 						if playerRepulse.frontShieldFix == nil then
 							playerRepulse.maxFrontShield = 1
 							playerRepulse.frontShieldFix = "done"
-							setCommsMessage(_("commsCrewFriends", "Front shield fully functional"))
+							setCommsMessage(_("crewFriends-comms", "Front shield fully functional"))
 						else
 							playerRepulse.maxRearShield = 1
 							playerRepulse.rearShieldFix = "done"
-							setCommsMessage(_("commsCrewFriends", "Rear shield fully functional"))
+							setCommsMessage(_("crewFriends-comms", "Rear shield fully functional"))
 						end
 						playerRepulse:addReputationPoints(30)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				else
-					addCommsReply(string.format(_("commsCrewFriends", "Oops, no %s aboard"),shieldGood), function()
-						setCommsMessage(_("commsCrewFriends", "Ok, good luck"))
+					addCommsReply(string.format(_("crewFriends-comms", "Oops, no %s aboard"),shieldGood), function()
+						setCommsMessage(_("crewFriends-comms", "Ok, good luck"))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
@@ -4555,7 +4555,7 @@ end
 function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		setCommsMessage(_("shipNeutral-comms", "Yes?"))
+		setCommsMessage(_("trade-comms", "Yes?"))
 		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
 			local cargoMsg = _("trade-comms", "We've got ")
@@ -4576,9 +4576,9 @@ function neutralComms(comms_data)
 		end)
 		local freighter_multiplier = 1
 		if comms_data.friendlyness > 66 then
-			setCommsMessage(_("shipNeutral-comms", "Yes?"))
+			setCommsMessage(_("trade-comms", "Yes?"))
 			-- Offer destination information
-			addCommsReply(_("shipNeutral-comms", "Where are you headed?"), function()
+			addCommsReply(_("trade-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -4653,10 +4653,10 @@ function neutralComms(comms_data)
 				end	--freighter goods loop
 			end
 		elseif comms_data.friendlyness > 33 then
-			setCommsMessage(_("shipAssist-comms", "What do you want?"))
+			setCommsMessage(_("trade-comms", "What do you want?"))
 			-- Offer to sell destination information
 			destRep = random(1,5)
-			addCommsReply(string.format(_("shipAssist-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
+			addCommsReply(string.format(_("trade-comms", "Where are you headed? (cost: %f reputation)"),destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
@@ -4794,7 +4794,7 @@ function checkForSuffocationOnFighter(delta)
 			end
 		end
 		suffocation_timer = suffocation_timer - delta
-		local suffocation_label = _("msgTimerTab", "Suffocation")
+		local suffocation_label = _("airTimer-tabScience&Eng&Eng+&Ops", "Suffocation")
 		local suffocation_label_minutes = math.floor(suffocation_timer / 60)
 		local suffocation_label_seconds = math.floor(suffocation_timer % 60)
 		if suffocation_label_minutes <= 0 then
@@ -4805,7 +4805,7 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			if playerFighter.suffocation_message == nil then
 				playerFighter.suffocation_message = "suffocation_message"
-				playerFighter:addCustomMessage("Engineering",playerFighter.suffocation_message,_("msgEngineer", "Environmental systems show limited air remaining"))
+				playerFighter:addCustomMessage("Engineering",playerFighter.suffocation_message,_("air-msgEngineer", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer = "suffocation_timer"
 			playerFighter:addCustomInfo("Engineering",playerFighter.suffocation_timer,suffocation_label)
@@ -4813,7 +4813,7 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			if playerFighter.suffocation_message_eng_plus == nil then
 				playerFighter.suffocation_message_eng_plus = "suffocation_message_eng_plus"
-				playerFighter:addCustomMessage("Engineering+",playerFighter.suffocation_message_eng_plus,_("msgEngineer", "Environmental systems show limited air remaining"))
+				playerFighter:addCustomMessage("Engineering+",playerFighter.suffocation_message_eng_plus,_("air-msgEngineer+", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer_eng_plus = "suffocation_timer_eng_plus"
 			playerFighter:addCustomInfo("Engineering+",playerFighter.suffocation_timer_eng_plus,suffocation_label)
@@ -4821,7 +4821,7 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Science") then
 			if playerFighter.suffocation_message_science == nil then
 				playerFighter.suffocation_message_science = "suffocation_message_science"
-				playerFighter:addCustomMessage("Science",playerFighter.suffocation_message_science,_("msgScience", "Environmental systems show limited air remaining"))
+				playerFighter:addCustomMessage("Science",playerFighter.suffocation_message_science,_("air-msgScience", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer_science = "suffocation_timer_science"
 			playerFighter:addCustomInfo("Science",playerFighter.suffocation_timer_science,suffocation_label)
@@ -4829,13 +4829,13 @@ function checkForSuffocationOnFighter(delta)
 		if playerFighter:hasPlayerAtPosition("Operations") then
 			if playerFighter.suffocation_message_ops == nil then
 				playerFighter.suffocation_message_ops = "suffocation_message_ops"
-				playerFighter:addCustomMessage("Operations",playerFighter.suffocation_message_ops,_("msgOperations", "Environmental systems show limited air remaining"))
+				playerFighter:addCustomMessage("Operations",playerFighter.suffocation_message_ops,_("air-msgOperations", "Environmental systems show limited air remaining"))
 			end
 			playerFighter.suffocation_timer_ops = "suffocation_timer_ops"
 			playerFighter:addCustomInfo("Operations",playerFighter.suffocation_timer_ops,suffocation_label)
 		end
 		if suffocation_timer < 0 then
-			globalMessage(_("msgMainscreen", "You suffocated while aboard the fighter hulk"))
+			globalMessage(_("air-msgMainscreen", "You suffocated while aboard the fighter hulk"))
 			victory("Kraylor")
 			if playerFighter.suffocation_timer ~= nil then
 				playerFighter:removeCustom(playerFighter.suffocation_timer)
@@ -4865,11 +4865,11 @@ function hintRepulse(delta)
 	if hintRepulseTimer < 0 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			repulseHintMessage = "repulseHintMessage"
-			playerFighter:addCustomMessage("Engineering",repulseHintMessage,string.format(_("msgEngineer", "Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters."),junkRepulse:getCallSign(),playerFighter:getCallSign()))
+			playerFighter:addCustomMessage("Engineering",repulseHintMessage,string.format(_("transfer-msgEngineer", "Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters."),junkRepulse:getCallSign(),playerFighter:getCallSign()))
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseHintMessageEPlus = "repulseHintMessageEPlus"
-			playerFighter:addCustomMessage("Engineering+",repulseHintMessageEPlus,string.format(_("msgEngineer+", "Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters."),junkRepulse:getCallSign(),playerFighter:getCallSign()))
+			playerFighter:addCustomMessage("Engineering+",repulseHintMessageEPlus,string.format(_("transfer-msgEngineer+", "Reading through the scan data provided by science, you see that there could be a working jump drive on %s. However, if the crew wishes to transport over there, %s will need to get very close due to the minimal amount of energy remaining in the transporters."),junkRepulse:getCallSign(),playerFighter:getCallSign()))
 		end
 		plot1 = hugRepulse
 	end
@@ -4882,11 +4882,11 @@ function hugRepulse(delta)
 	if distance(playerFighter,junkRepulse) < 500 then
 		if playerFighter:hasPlayerAtPosition("Engineering") then
 			repulseTransferButton = "repulseTransferButton"
-			playerFighter:addCustomButton("Engineering",repulseTransferButton,_("buttonEngineer", "Transfer to Repulse"),repulseTransfer)
+			playerFighter:addCustomButton("Engineering",repulseTransferButton,_("transfer-buttonEngineer", "Transfer to Repulse"),repulseTransfer)
 		end
 		if playerFighter:hasPlayerAtPosition("Engineering+") then
 			repulseTransferButtonEPlus = "repulseTransferButtonEPlus"
-			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("buttonEngineer+", "Transfer to Repulse"),repulseTransfer)
+			playerFighter:addCustomButton("Engineering+",repulseTransferButtonEPlus,_("transfer-buttonEngineer+", "Transfer to Repulse"),repulseTransfer)
 		end
 		if repulseTransferButtonEPlus ~= nil or repulseTransferButton ~= nil then
 			plot1 = nil
@@ -4947,7 +4947,7 @@ function repulseTransfer()
 	playerShipHealth = plunderHealth	--switch player health check function to repulse
 	augmentRepairCrewTimer = 45			--time to repair crew escape
 	plot1 = augmentRepairCrew
-	playerRepulse:addToShipLog(_("RepulseTransfert-shipLog", "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently registered as Independent"),"Magenta")
+	playerRepulse:addToShipLog(_("transfer-shipLog", "Welcome aboard the Repulse class ship, rechristened HMS Plunder, currently registered as Independent"),"Magenta")
 	player = playerRepulse
 	plotKP = kraylorPatrol				--start sending out Kraylor patrols
 	plotSuffocate = nil
@@ -4957,18 +4957,18 @@ function augmentRepairCrew(delta)
 --Former repair crew asks to be rescued to take up their jobs again
 	augmentRepairCrewTimer = augmentRepairCrewTimer - delta
 	if augmentRepairCrewTimer < 0 then
-		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("crew-incCall", "Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
+		brigHailed = brigStation:sendCommsMessage(playerRepulse,_("crewImport-incCall", "Need a repair crew? We used to be posted on that ship. We would be happy to return to our repair duty and get away from these Kraylors. We left the transporters locked on us, but the Kraylors destroyed our remote activator. You should find an activation switch at the weapons console"))
 		if brigHailed then
 			if playerRepulse:hasPlayerAtPosition("Weapons") then
 				if retrieveRepairCrewButton == nil then
 					retrieveRepairCrewButton = "retrieveRepairCrewButton"
-					playerRepulse:addCustomButton("Weapons",retrieveRepairCrewButton,_("buttonWeapons", "Return Transport"),returnRepairCrew)
+					playerRepulse:addCustomButton("Weapons",retrieveRepairCrewButton,_("crewImport-buttonWeapons", "Return Transport"),returnRepairCrew)
 				end
 			end
 			if playerRepulse:hasPlayerAtPosition("Tactical") then
 				if retrieveRepairCrewButtonTac == nil then
 					retrieveRepairCrewButtonTac = "retrieveRepairCrewButtonTac"
-					playerRepulse:addCustomButton("Tactical",retrieveRepairCrewButtonTac,_("buttonTactical", "Return Transport"),returnRepairCrew)
+					playerRepulse:addCustomButton("Tactical",retrieveRepairCrewButtonTac,_("crewImport-buttonTactical", "Return Transport"),returnRepairCrew)
 				end
 			end
 			plot1 = beamDamageReport
@@ -5149,13 +5149,13 @@ function fixFlood(delta)
 				if playerRepulse:hasPlayerAtPosition("Relay") then
 					if crewFixButtonMsg == nil then
 						crewFixButtonMsg = "crewFixButtonMsg"
-						playerRepulse:addCustomButton("Relay",crewFixButtonMsg,_("buttonRelay", "crew fixers"),showCrewFixers)
+						playerRepulse:addCustomButton("Relay",crewFixButtonMsg,_("crewRepairStatut-buttonRelay", "crew fixers"),showCrewFixers)
 					end
 				end
 				if playerRepulse:hasPlayerAtPosition("Operations") then
 					if crewFixButtonMsgOp == nil then
 						crewFixButtonMsgOp = "crewFixButtonMsgOp"
-						playerRepulse:addCustomButton("Operations",crewFixButtonMsgOp,_("buttonOperations", "crew fixers"),showCrewFixers)
+						playerRepulse:addCustomButton("Operations",crewFixButtonMsgOp,_("crewRepairStatut-buttonOperations", "crew fixers"),showCrewFixers)
 					end
 				end
 				harassment_timer = 350
@@ -5189,22 +5189,22 @@ end
 function showCrewFixers()
 	oMsg = ""
 	if not playerRepulse.missileFix then
-		oMsg = oMsg .. string.format(_("crewRepairComms", " Missiles:%s(%s) "),missileFixStation:getCallSign(),missileFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairStatut-msgRelay&Operations", " Missiles:%s(%s) "),missileFixStation:getCallSign(),missileFixStation:getSectorName())
 	end
 	if not playerRepulse.frontShieldFix and not playerRepulse.rearShieldFix then
-		oMsg = oMsg .. string.format(_("crewRepairComms", " Shields:%s(%s) "),shieldFixStation:getCallSign(),shieldFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairStatut-msgRelay&Operations", " Shields:%s(%s) "),shieldFixStation:getCallSign(),shieldFixStation:getSectorName())
 	end
 	if not playerRepulse.impulseFix then
-		oMsg = oMsg .. string.format(_("crewRepairComms", " Impulse:%s(%s) "),impulseFixStation:getCallSign(),impulseFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairStatut-msgRelay&Operations", " Impulse:%s(%s) "),impulseFixStation:getCallSign(),impulseFixStation:getSectorName())
 	end
 	if not playerRepulse.longRangeFix then
-		oMsg = oMsg .. string.format(_("crewRepairComms", " Communications:%s(%s) "),longRangeFixStation:getCallSign(),longRangeFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairStatut-msgRelay&Operations", " Communications:%s(%s) "),longRangeFixStation:getCallSign(),longRangeFixStation:getSectorName())
 	end
 	if not playerRepulse.jumpFix then
-		oMsg = oMsg .. string.format(_("crewRepairComms", " Jump:%s(%s) "),jumpFixStation:getCallSign(),jumpFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairStatut-msgRelay&Operations", " Jump:%s(%s) "),jumpFixStation:getCallSign(),jumpFixStation:getSectorName())
 	end
 	if not playerRepulse.reactorFix then
-		oMsg = oMsg .. string.format(_("crewRepairComms", " Reactor:%s(%s) "),reactorFixStation:getCallSign(),reactorFixStation:getSectorName())
+		oMsg = oMsg .. string.format(_("crewRepairStatut-msgRelay&Operations", " Reactor:%s(%s) "),reactorFixStation:getCallSign(),reactorFixStation:getSectorName())
 	end
 	if oMsg == nil then
 		if crewFixButtonMsg ~= nil then
@@ -5271,8 +5271,8 @@ function junkYardDog(delta)
 			plot2 = borisChase
 		end
 		if playerRepulse.junk_yard_dog_warning == nil then
-			playerRepulse:addToShipLog(string.format(_("crew-shipLog", "[Sensor tech] Looks like %s figured out where we went and has sicced %s on us."),brigStation:getCallSign(),junk_yard_dog:getCallSign()),"Magenta")
-			playerRepulse:addToShipLog(string.format(_("crew-shipLog", "[Engineering tech] With our hull at %i, we better hope our shields hold"),playerRepulse:getHull()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[Sensor tech] Looks like %s figured out where we went and has sicced %s on us."),brigStation:getCallSign(),junk_yard_dog:getCallSign()),"Magenta")
+			playerRepulse:addToShipLog(string.format(_("Boris-shipLog", "[Engineering tech] With our hull at %i, we better hope our shields hold"),playerRepulse:getHull()),"Magenta")
 			playerRepulse.junk_yard_dog_warning = "sent"
 		end
 	end
@@ -5695,7 +5695,7 @@ function billboardUpdate(delta)
 		junkZone:setColor(128,0,128)
 	end
 	if signsScanned >= 3 then
-		junkZone:setLabel(_("scienceDescription-junk", "Boris Junk Yard"))
+		junkZone:setLabel(_("scienceDescription-junkZoneLabel", "Boris Junk Yard"))
 		junkZone.color = "purple"
 		flashTimer = 5
 		plotSign = billboardFlash
