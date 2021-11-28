@@ -369,7 +369,7 @@ function buildNearbyStations()
 	bwx = brigx + (gRegion[sri][1] - (gbHigh/2))*gSize
 	bwy = brigy + (gRegion[sri][2] - (gbHigh/2))*gSize
 	planetBaldwin = Planet():setPosition(bwx,bwy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Baldwin")
-	planetBaldwin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription(_("scienceDescription-station", "Mining and heavy industry"))
+	planetBaldwin:setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(300):setDescription(_("scienceDescription-planet", "Mining and heavy industry"))
 	stationWig = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor")
 	stationWig:setPosition(bwx, bwy+3000):setCallSign("BOBS"):setDescription(_("scienceDescription-station", "Baldwin Observatory"))
 	stationWig.angle = 90
@@ -404,7 +404,7 @@ function buildNearbyStations()
 	planetMal = Planet():setPosition(msx,msy):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setCallSign("Malastare")
 	planetMal:setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png")
 	planetMal:setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetAtmosphereColor(0.2,0.2,1.0)
-	planetMal:setAxialRotationTime(400.0):setDescription(_("scienceDescription-station", "M class planet"))
+	planetMal:setAxialRotationTime(400.0):setDescription(_("scienceDescription-planet", "M class planet"))
 	stationMal = SpaceStation():setTemplate("Small Station"):setFaction("Independent")
 	stationMal:setPosition(msx,msy+3000):setCallSign("MalNet"):setDescription(_("scienceDescription-station", "Malastare communications network hub"))
 	stationMal.angle = 90
@@ -5695,7 +5695,7 @@ function billboardUpdate(delta)
 		junkZone:setColor(128,0,128)
 	end
 	if signsScanned >= 3 then
-		junkZone:setLabel(_("scienceDescription-junkZoneLabel", "Boris Junk Yard"))
+		junkZone:setLabel(_("ZoneLabelDescription-junk", "Boris Junk Yard"))
 		junkZone.color = "purple"
 		flashTimer = 5
 		plotSign = billboardFlash
