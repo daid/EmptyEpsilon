@@ -127,7 +127,7 @@ msgid ""
 "\n"
 "What can we do for you, Captain?"
 msgstr ""
-"Le commandant de milice de votre faction vous contacte :\n"
+"Le commandant de milice de votre faction vous réponds :\n"
 "\n"
 "Que pouvons-nous faire pour vous, capitaine ?"
 

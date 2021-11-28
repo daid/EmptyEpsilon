@@ -5661,8 +5661,8 @@ function handleDockedState()
 		end
 		if infoPromised then
 			if spinUpgradeAvailable or beamTimeUpgradeAvailable or rotateUpgradeAvailable or baseIntelligenceAvailable or hullUpgradeAvailable then
-				addCommsReply(_("commsUpgrade", "Request promised information"), function()
-					setCommsMessage(_("commsUpgrade", "Remind me what information I promised"))
+				addCommsReply(_("upgrade-comms", "Request promised information"), function()
+					setCommsMessage(_("upgrade-comms", "Remind me what information I promised"))
 					if spinUpgradeAvailable then
 						homeStationSpinUpgrade()
 					end
@@ -5959,20 +5959,20 @@ function homeStationRandomDelivery()
 	end)
 end
 function homeStationSpinUpgrade()
-	addCommsReply(_("commsUpgrade", "What about that maneuver upgrade information you promised?"), function()
-		setCommsMessage(string.format(_("commsUpgrade", "I hear %s can upgrade your maneuverability, but they need %s to do the job"),spinBase:getCallSign(),spinGood))
+	addCommsReply(_("upgrade-comms", "What about that maneuver upgrade information you promised?"), function()
+		setCommsMessage(string.format(_("upgrade-comms", "I hear %s can upgrade your maneuverability, but they need %s to do the job"),spinBase:getCallSign(),spinGood))
 		if spinReveal < 1 then spinReveal = 1 end
-		addCommsReply(string.format(_("commsUpgrade", "Where is %s?"),spinBase:getCallSign()), function()
-			setCommsMessage(string.format(_("commsUpgrade", "%s is in sector %s"),spinBase:getCallSign(),spinBase:getSectorName()))
+		addCommsReply(string.format(_("upgrade-comms", "Where is %s?"),spinBase:getCallSign()), function()
+			setCommsMessage(string.format(_("upgrade-comms", "%s is in sector %s"),spinBase:getCallSign(),spinBase:getSectorName()))
 			if spinReveal < 2 then spinReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(string.format(_("commsUpgrade", "Where might I find some %s?"),spinGood), function()
-			setCommsMessage(string.format(_("commsUpgrade", "I think %s might have some"),spinGoodBase:getCallSign()))
+		addCommsReply(string.format(_("upgrade-comms", "Where might I find some %s?"),spinGood), function()
+			setCommsMessage(string.format(_("upgrade-comms", "I think %s might have some"),spinGoodBase:getCallSign()))
 			if spinReveal < 3 then spinReveal = 3 end
 			if difficulty < 2 then
-				addCommsReply(string.format(_("commsUpgrade", "And where the heck is %s?"),spinGoodBase:getCallSign()), function()
-					setCommsMessage(string.format(_("commsUpgrade", "My, my, you're quite inquisitive.\n%s is in sector %s"),spinGoodBase:getCallSign(),spinGoodBase:getSectorName()))
+				addCommsReply(string.format(_("upgrade-comms", "And where the heck is %s?"),spinGoodBase:getCallSign()), function()
+					setCommsMessage(string.format(_("upgrade-comms", "My, my, you're quite inquisitive.\n%s is in sector %s"),spinGoodBase:getCallSign(),spinGoodBase:getSectorName()))
 					if spinReveal < 4 then spinReveal = 4 end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -5983,20 +5983,20 @@ function homeStationSpinUpgrade()
 	end)
 end
 function homeStationBeamTimeUpgrade()
-	addCommsReply(_("commsUpgrade", "You mentioned a beam weapon cycle time upgrade..."), function()
-		setCommsMessage(string.format(_("commsUpgrade", "Station %s can do that for %s"),beamTimeBase:getCallSign(),beamTimeGood))
+	addCommsReply(_("upgrade-comms", "You mentioned a beam weapon cycle time upgrade..."), function()
+		setCommsMessage(string.format(_("upgrade-comms", "Station %s can do that for %s"),beamTimeBase:getCallSign(),beamTimeGood))
 		if beamTimeReveal < 1 then beamTimeReveal = 1 end
-		addCommsReply(string.format(_("commsUpgrade", "I've never heard of %s. Where is %s?"),beamTimeBase:getCallSign(),beamTimeBase:getCallSign()), function()
-			setCommsMessage(string.format(_("commsUpgrade", "You haven't? I'm surprised. %s is in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName()))
+		addCommsReply(string.format(_("upgrade-comms", "I've never heard of %s. Where is %s?"),beamTimeBase:getCallSign(),beamTimeBase:getCallSign()), function()
+			setCommsMessage(string.format(_("upgrade-comms", "You haven't? I'm surprised. %s is in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName()))
 			if beamTimeReveal < 2 then beamTimeReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(string.format(_("commsUpgrade", "Can you direct me to a station with %s?"),beamTimeGood), function()
-			setCommsMessage(string.format(_("commsUpgrade", "%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted"),beamTimeGoodBase:getCallSign(),beamTimeGood))
+		addCommsReply(string.format(_("upgrade-comms", "Can you direct me to a station with %s?"),beamTimeGood), function()
+			setCommsMessage(string.format(_("upgrade-comms", "%s has %s *and* they have the best indigenous Kraylor honey you've ever tasted"),beamTimeGoodBase:getCallSign(),beamTimeGood))
 			if beamTimeReveal < 3 then beamTimeReveal = 3 end
 			if difficulty < 2 then
-				addCommsReply(string.format(_("commsUpgrade", "Sounds tasty. Where is %s?"),beamTimeGoodBase:getCallSign()), function()
-					setCommsMessage(string.format(_("commsUpgrade", "It's in %s"),beamTimeGoodBase:getSectorName()))
+				addCommsReply(string.format(_("upgrade-comms", "Sounds tasty. Where is %s?"),beamTimeGoodBase:getCallSign()), function()
+					setCommsMessage(string.format(_("upgrade-comms", "It's in %s"),beamTimeGoodBase:getSectorName()))
 					if beamTimeReveal < 4 then beamTimeReveal = 4 end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6007,21 +6007,21 @@ function homeStationBeamTimeUpgrade()
 	end)
 end
 function homeStationRotateUpgrade()
-	addCommsReply(_("commsUpgrade", "Where's that station rotation upgrade information?"), function()
-		setCommsMessage(string.format(_("commsUpgrade", "station %s has the technical knowledge but lacks the %s"),rotateBase:getCallSign(),rotateGood))
+	addCommsReply(_("upgrade-comms", "Where's that station rotation upgrade information?"), function()
+		setCommsMessage(string.format(_("upgrade-comms", "station %s has the technical knowledge but lacks the %s"),rotateBase:getCallSign(),rotateGood))
 		if rotateReveal < 1 then rotateReveal = 1 end
-		addCommsReply(string.format(_("commsUpgrade", "Where is station %s?"),rotateBase:getCallSign()), function()
-			setCommsMessage(string.format(_("commsUpgrade", "%s is in %s"),rotateBase:getCallSign(),rotateBase:getSectorName()))
+		addCommsReply(string.format(_("upgrade-comms", "Where is station %s?"),rotateBase:getCallSign()), function()
+			setCommsMessage(string.format(_("upgrade-comms", "%s is in %s"),rotateBase:getCallSign(),rotateBase:getSectorName()))
 			if rotateReveal < 2 then rotateReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
 		if difficulty < 2 then
-			addCommsReply(string.format(_("commsUpgrade", "Where could I get %s?"),rotateGood), function()
-				setCommsMessage(string.format(_("commsUpgrade", "%s should have %s"),rotateGoodBase:getCallSign(),rotateGood))
+			addCommsReply(string.format(_("upgrade-comms", "Where could I get %s?"),rotateGood), function()
+				setCommsMessage(string.format(_("upgrade-comms", "%s should have %s"),rotateGoodBase:getCallSign(),rotateGood))
 				if rotateReveal < 3 then rotateReveal = 3 end
 				if difficulty < 1 then
-					addCommsReply(string.format(_("commsUpgrade", "Do you know where %s is located?"),rotateGoodBase:getCallSign()), function()
-						setCommsMessage(string.format(_("commsUpgrade", "Yes, it's in %s"),rotateGoodBase:getSectorName()))
+					addCommsReply(string.format(_("upgrade-comms", "Do you know where %s is located?"),rotateGoodBase:getCallSign()), function()
+						setCommsMessage(string.format(_("upgrade-comms", "Yes, it's in %s"),rotateGoodBase:getSectorName()))
 						if rotateReveal < 4 then rotateReveal = 4 end
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -6040,20 +6040,20 @@ function homeStationBaseIntelligence()
 	end)
 end
 function homeStationHullUpgrade()
-	addCommsReply(_("commsUpgrade", "Remember, you promised some ship hull upgrade information?"), function()
-		setCommsMessage(string.format(_("commsUpgrade", "Oh yes, %s can upgrade your hull, but they want %s to do the job"),hullBase:getCallSign(),hullGood))
+	addCommsReply(_("upgrade-comms", "Remember, you promised some ship hull upgrade information?"), function()
+		setCommsMessage(string.format(_("upgrade-comms", "Oh yes, %s can upgrade your hull, but they want %s to do the job"),hullBase:getCallSign(),hullGood))
 		if hullReveal < 1 then hullReveal = 1 end
-		addCommsReply(string.format(_("commsUpgrade", "So, where is %s?"),hullBase:getCallSign()), function()
-			setCommsMessage(string.format(_("commsUpgrade", "%s is in sector %s"),hullBase:getCallSign(),hullBase:getSectorName()))
+		addCommsReply(string.format(_("upgrade-comms", "So, where is %s?"),hullBase:getCallSign()), function()
+			setCommsMessage(string.format(_("upgrade-comms", "%s is in sector %s"),hullBase:getCallSign(),hullBase:getSectorName()))
 			if hullReveal < 2 then hullReveal = 2 end
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(string.format(_("commsUpgrade", "Where could I find some %s?"),hullGood), function()
-			setCommsMessage(string.format(_("commsUpgrade", "I think %s may have some"),hullGoodBase:getCallSign()))
+		addCommsReply(string.format(_("upgrade-comms", "Where could I find some %s?"),hullGood), function()
+			setCommsMessage(string.format(_("upgrade-comms", "I think %s may have some"),hullGoodBase:getCallSign()))
 			if hullReveal < 3 then hullReveal = 3 end
 			if difficulty < 2 then
-				addCommsReply(string.format(_("commsUpgrade", "And just where is %s?"),hullGoodBase:getCallSign()), function()
-					setCommsMessage(string.format(_("commsUpgrade", "If you must know, %s is in sector %s"),hullGoodBase:getCallSign(),hullGoodBase:getSectorName()))
+				addCommsReply(string.format(_("upgrade-comms", "And just where is %s?"),hullGoodBase:getCallSign()), function()
+					setCommsMessage(string.format(_("upgrade-comms", "If you must know, %s is in sector %s"),hullGoodBase:getCallSign(),hullGoodBase:getSectorName()))
 					if hullReveal < 4 then hullReveal = 4 end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -6066,7 +6066,7 @@ end
 function spinStation()
 	if spinUpgradeAvailable then
 		if not comms_source.spinUpgrade then
-			addCommsReply(_("commsUpgrade", "Upgrade maneuverability"), function()
+			addCommsReply(_("upgrade-comms", "Upgrade maneuverability"), function()
 				local spinUpgradePartQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[spinGood] ~= nil and comms_source.goods[spinGood] > 0 then
 					spinUpgradePartQuantity = comms_source.goods[spinGood]
@@ -6076,9 +6076,9 @@ function spinStation()
 					comms_source.goods[spinGood] = comms_source.goods[spinGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*1.5)
-					setCommsMessage(_("commsUpgrade", "Upgraded maneuverability"))
+					setCommsMessage(_("upgrade-comms", "Upgraded maneuverability"))
 				else
-					setCommsMessage(string.format(_("commsUpgrade", "You need to bring some %s for the upgrade"),spinGood))
+					setCommsMessage(string.format(_("upgrade-comms", "You need to bring some %s for the upgrade"),spinGood))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -6088,9 +6088,9 @@ end
 function beamTimeStation()
 	if beamTimeUpgradeAvailable then
 		if not comms_source.beamTimeUpgrade then
-			addCommsReply(_("commsUpgrade", "Upgrade beam cycle time"), function()
+			addCommsReply(_("upgrade-comms", "Upgrade beam cycle time"), function()
 				if comms_source:getBeamWeaponRange(0) < 1 then
-					setCommsMessage(_("commsUpgrade", "Your ship type does not support a beam weapon upgrade."))
+					setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))
 				else
 					local beamTimeUpgradePartQuantity = 0
 					if comms_source.goods ~= nil and comms_source.goods[beamTimeGood] ~= nil and comms_source.goods[beamTimeGood] > 0 then
@@ -6110,9 +6110,9 @@ function beamTimeStation()
 							comms_source:setBeamWeapon(bi,tempArc,tempDir,tempRng,tempCyc * .8,tempDmg)
 							bi = bi + 1
 						until(comms_source:getBeamWeaponRange(bi) < 1)
-						setCommsMessage(_("commsUpgrade", "Beam cycle time reduced by 20%"))
+						setCommsMessage(_("upgrade-comms", "Beam cycle time reduced by 20%"))
 					else
-						setCommsMessage(string.format(_("commsUpgrade", "We require %s before we can upgrade your beam weapons"),beamTimeGood))
+						setCommsMessage(string.format(_("upgrade-comms", "We require %s before we can upgrade your beam weapons"),beamTimeGood))
 					end
 				end
 			end)
@@ -6122,7 +6122,7 @@ end
 function rotateStation()
 	if rotateUpgradeAvailable then
 		if not homeStationRotationEnabled then
-			addCommsReply(string.format(_("commsUpgrade", "Upgrade %s to auto-rotate"),homeStation:getCallSign()), function()
+			addCommsReply(string.format(_("upgrade-comms", "Upgrade %s to auto-rotate"),homeStation:getCallSign()), function()
 				local rotateUpgradePartQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[rotateGood] ~= nil and comms_source.goods[rotateGood] > 0 then
 					rotateUpgradePartQuantity = comms_source.goods[rotateGood]
@@ -6131,10 +6131,10 @@ function rotateStation()
 					homeStationRotationEnabled = true
 					comms_source.goods[rotateGood] = comms_source.goods[rotateGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
-					setCommsMessage(string.format(_("commsUpgrade", "%s was just what we needed. The technical details have been transmitted to %s. The auto-rotation has begun"),rotateGood,homeStation:getCallSign()))
+					setCommsMessage(string.format(_("upgrade-comms", "%s was just what we needed. The technical details have been transmitted to %s. The auto-rotation has begun"),rotateGood,homeStation:getCallSign()))
 					plot4reminder = nil
 				else
-					setCommsMessage(string.format(_("commsUpgrade", "You need to bring some %s for the upgrade"),rotateGood))
+					setCommsMessage(string.format(_("upgrade-comms", "You need to bring some %s for the upgrade"),rotateGood))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -6201,7 +6201,7 @@ end
 function hullStation()
 	if hullUpgradeAvailable then
 		if not comms_source.hullUpgrade then
-			addCommsReply(_("commsUpgrade", "Upgrade hull damage capacity"), function()
+			addCommsReply(_("upgrade-comms", "Upgrade hull damage capacity"), function()
 				local hullUpgradePartQuantity = 0
 				if comms_source.goods ~= nil and comms_source.goods[hullGood] ~= nil and comms_source.goods[hullGood] > 0 then
 					hullUpgradePartQuantity = comms_source.goods[hullGood]
@@ -6211,9 +6211,9 @@ function hullStation()
 					comms_source.goods[hullGood] = comms_source.goods[hullGood] - 1
 					comms_source.cargo = comms_source.cargo + 1
 					comms_source:setHullMax(comms_source:getHullMax() * 1.2)
-					setCommsMessage(_("commsUpgrade", "Upgraded hull capacity for damage by 20%"))
+					setCommsMessage(_("upgrade-comms", "Upgraded hull capacity for damage by 20%"))
 				else
-					setCommsMessage(string.format(_("commsUpgrade", "We won't upgrade your hull until we have %s"),hullGood))
+					setCommsMessage(string.format(_("upgrade-comms", "We won't upgrade your hull until we have %s"),hullGood))
 				end
 				addCommsReply(_("Back"), commsStation)
 			end)
@@ -6264,20 +6264,20 @@ function setOptionalOrders()
 	optionalOrders = ""
 	optionalOrdersPresent = false
 	if plot2reminder ~= nil then
-		if plot2reminder == _("commsUpgrade", "Get ship maneuver upgrade") then
+		if plot2reminder == _("upgradeOrders-comms", "Get ship maneuver upgrade") then
 			if spinReveal == 0 then
-				optionalOrders = _("commsUpgrade", "\nOptional:\n") .. plot2reminder
+				optionalOrders = _("upgradeOrders-comms", "\nOptional:\n") .. plot2reminder
 			elseif spinReveal == 1 then
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s for %s"),spinBase:getCallSign(),spinGood)
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s for %s"),spinBase:getCallSign(),spinGood)
 			elseif spinReveal == 2 then
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
 			elseif spinReveal == 3 then
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
 			else
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
 			end
 		else
-			optionalOrders = _("commsUpgrade", "\nOptional:\n") .. plot2reminder
+			optionalOrders = _("upgradeOrders-comms", "\nOptional:\n") .. plot2reminder
 		end
 		optionalOrdersPresent = true
 	end
@@ -6285,44 +6285,44 @@ function setOptionalOrders()
 		if optionalOrdersPresent then
 			ifs = "\n"
 		else
-			ifs = _("commsUpgrade", "\nOptional:\n")
+			ifs = _("upgradeOrders-comms", "\nOptional:\n")
 			optionalOrdersPresent = true
 		end
-		if plot4reminder == string.format(_("commsUpgrade", "Upgrade %s to rotate"),homeStation:getCallSign()) then
+		if plot4reminder == string.format(_("upgradeOrders-comms", "Upgrade %s to rotate"),homeStation:getCallSign()) then
 			if rotateReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif rotateReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
 			elseif rotateReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
 			elseif rotateReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may have %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
 			end
-		elseif plot4reminder == _("commsUpgrade", "Get beam cycle time upgrade") then
+		elseif plot4reminder == _("upgradeOrders-comms", "Get beam cycle time upgrade") then
 			if beamTimeReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif beamTimeReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s for %s"),beamTimeBase:getCallSign(),beamTimeGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s for %s"),beamTimeBase:getCallSign(),beamTimeGood)
 			elseif beamTimeReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s in %s for %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
 			elseif beamTimeReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
 			end
-		elseif plot4reminder == _("commsUpgrade", "Get hull upgrade") then
+		elseif plot4reminder == _("upgradeOrders-comms", "Get hull upgrade") then
 			if hullReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif hullReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s to upgrade hull for %s"),hullBase:getCallSign(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s to upgrade hull for %s"),hullBase:getCallSign(),hullGood)
 			elseif hullReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s in %s to upgrade hull for %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
 			elseif hullReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s\n    %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s in %s to upgrade hull for %s\n    %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s\n    %s in %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s in %s to upgrade hull for %s\n    %s in %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
 			end
 		else
 			optionalOrders = optionalOrders .. ifs .. plot4reminder
@@ -6529,7 +6529,7 @@ function handleUndockedState()
 			setCommsMessage(service_status)
 			addCommsReply(_("Back"), commsStation)
 		end)
-		addCommsReply(_("commsHelpfullWarning", "See any enemies in your area?"), function()
+		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if comms_source:isFriendly(comms_target) then
 				enemiesInRange = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
@@ -6539,18 +6539,18 @@ function handleUndockedState()
 				end
 				if enemiesInRange > 0 then
 					if enemiesInRange > 1 then
-						setCommsMessage(string.format(_("commsHelpfullWarning", "Yes, we see %i enemies within 30U"),enemiesInRange))
+						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage(_("commsHelpfullWarning", "Yes, we see one enemy within 30U"))						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
 					end
 					comms_source:addReputationPoints(2.0)					
 				else
-					setCommsMessage(_("commsHelpfullWarning", "No enemies within 30U"))
+					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
 				end
 				addCommsReply(_("Back"), commsStation)
 			else
-				setCommsMessage(_("commsHelpfullWarning", "Not really"))
+				setCommsMessage(_("helpfullWarning-comms", "Not really"))
 				comms_source:addReputationPoints(1.0)
 				addCommsReply(_("Back"), commsStation)
 			end
@@ -7045,9 +7045,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage(_("ship-coms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage(_("ship-coms", "We have nothing for you.\nGood day."));
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true
@@ -8773,9 +8773,9 @@ function helpfulWarning(delta)
 							--tempObjType = obj:getTypeName()
 							--if not string.find(tempObjType,"Station") then
 							if detected_enemy_ship then
-								wMsg = string.format(_("HelpfullWarning", "[%s] Our sensors detect enemies nearby"),stationList[i]:getCallSign())
+								wMsg = string.format(_("helpfullWarning-shipLog", "[%s] Our sensors detect enemies nearby"),stationList[i]:getCallSign())
 								if diagnostic or difficulty < 1 then
-									wMsg = wMsg .. string.format(_("commsHelpfullWarning", " - Type: %s"),obj:getTypeName())
+									wMsg = wMsg .. string.format(_("helpfullWarning-shipLog", " - Type: %s"),obj:getTypeName())
 								end
 								p:addToShipLog(wMsg,"Red")
 								if i == 1 then
@@ -8791,12 +8791,12 @@ function helpfulWarning(delta)
 										if helpfulWarningDiagnostic then print("shield maximum for the one shield: " .. sMax) end
 										if sLevel < sMax then
 											if helpfulWarningDiagnostic then print("shield not fully charged") end
-											sLine = string.format(_("commsHelpfullWarning", "   Shield: %.1f%% (%.1f/%.1f) "),sLevel/sMax*100,sLevel,sMax)
+											sLine = string.format(_("helpfullWarning-shipLog", "   Shield: %.1f%% (%.1f/%.1f) "),sLevel/sMax*100,sLevel,sMax)
 											shieldsDamaged = true
 										end
 									else
 										if helpfulWarningDiagnostic then print("station has multiple shields") end
-										sdMsg = string.format(_("commsHelpfullWarning", "   Shield count: %i "),stationShields)
+										sdMsg = string.format(_("helpfullWarning", "   Shield count: %i "),stationShields)
 										if helpfulWarningDiagnostic then print("about to start shield loop") end
 										shieldStatusLines = {}
 										for j=1,stationShields do
@@ -8807,14 +8807,14 @@ function helpfulWarning(delta)
 											if helpfulWarningDiagnostic then print("max: " .. sMax) end
 											if sLevel < sMax then
 												if helpfulWarningDiagnostic then print("shield not fully charged") end
-												sLine = string.format(_("commsHelpfullWarning", "      Shield %i: %i%% (%.1f/%i) "),j,math.floor(sLevel/sMax*100),sLevel,sMax)
+												sLine = string.format(_("helpfullWarning-shipLog", "      Shield %i: %i%% (%.1f/%i) "),j,math.floor(sLevel/sMax*100),sLevel,sMax)
 												table.insert(shieldStatusLines,sLine)
 												shieldsDamaged = true
 											end
 										end
 									end
 									if shieldsDamaged then
-										p:addToShipLog(_("commsHelpfullWarning", "Station Status:"),"Red")
+										p:addToShipLog(_("helpfullWarning-shipLog", "Station Status:"),"Red")
 										if stationShields == 1 then
 											p:addToShipLog(sLine,"Red")
 										else
@@ -8831,9 +8831,9 @@ function helpfulWarning(delta)
 									if hl < hm then
 										if helpfulWarningDiagnostic then print("hull not fully repaired") end
 										if not shieldsDamaged then
-											p:addToShipLog(_("commsHelpfullWarning", "Station Status:"),"Red")										
+											p:addToShipLog(_("helpfullWarning-shipLog", "Station Status:"),"Red")										
 										end
-										local hLine = string.format(_("commsHelpfullWarning", "   Hull: %i%% (%.1f/%i)"),math.floor(hl/hm*100),hl,hm)
+										local hLine = string.format(_("helpfullWarning-shipLog", "   Hull: %i%% (%.1f/%i)"),math.floor(hl/hm*100),hl,hm)
 										p:addToShipLog(hLine,"Red")
 									end
 								end

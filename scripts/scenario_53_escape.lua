@@ -4755,9 +4755,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage(_("ship-coms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage(_("ship-coms", "We have nothing for you.\nGood day."));
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true

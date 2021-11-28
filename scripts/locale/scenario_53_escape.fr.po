@@ -27,7 +27,7 @@ msgid ""
 "Version 4 Adds more activity for the weapons officer (6Apr2020)"
 msgstr ""
 "- Durée approx. : 2h\n"
-"- Difficulté : Moyenne (variable)\n"
+"- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1\n"
 "\n"
 "Vous devez vous échapper de prison et rentrer chez vous.\n"
@@ -3063,12 +3063,12 @@ msgstr ""
 #: scripts/scenario_53_escape.lua:5152
 msgctxt "buttonRelay"
 msgid "crew fixers"
-msgstr "Réparateurs"
+msgstr "Réparations"
 
 #: scripts/scenario_53_escape.lua:5158
 msgctxt "buttonOperations"
 msgid "crew fixers"
-msgstr "Réparateurs"
+msgstr "Réparations"
 
 #: scripts/scenario_53_escape.lua:5192
 #, lua-format
@@ -3110,8 +3110,7 @@ msgstr " Réacteur :%s(%s) "
 msgctxt "shipLog"
 msgid "Repair crew suggested locations for ship fixes:"
 msgstr ""
-"L'équipe de réparation a suggéré plusieurs endroits pour réparer le "
-"vaisseau :"
+"L'équipe de réparation suggère plusieurs endroits pour réparer le vaisseau :"
 
 #: scripts/scenario_53_escape.lua:5241
 #, lua-format
@@ -3185,7 +3184,7 @@ msgstr "[%s] Vous ne vous débarrasserez pas de moi aussi facilement"
 #, lua-format
 msgctxt "shipLog"
 msgid "[%s] I'll be back"
-msgstr "[%s] Comme l'a dis un célèbre androïde, je reviendrai"
+msgstr "[%s] Comme l'a dis un célèbre cyborg, je reviendrai"
 
 #: scripts/scenario_53_escape.lua:5325
 #, lua-format

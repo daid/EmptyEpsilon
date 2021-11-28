@@ -2363,93 +2363,93 @@ function handleDockedState()
 				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply(_("commsMinefield", "What is a minefield?"), function()
-				mMsg = string.format(_("commsMinefield", "For the automated sensors on station %s to register a minefield as completed across a gap, it must meet the following criteria:"),homeStation:getCallSign())
-				mMsg = mMsg .. _("commsMinefield", "\n   1. Must contain at least 12 mines: Nautilus class standard load")
-				mMsg = mMsg .. _("commsMinefield", "\n   2. Must be within a 1.5U radius of sector corner in gap")
+			addCommsReply(_("minefield-comms", "What is a minefield?"), function()
+				mMsg = string.format(_("minefield-comms", "For the automated sensors on station %s to register a minefield as completed across a gap, it must meet the following criteria:"),homeStation:getCallSign())
+				mMsg = mMsg .. _("minefield-comms", "\n   1. Must contain at least 12 mines: Nautilus class standard load")
+				mMsg = mMsg .. _("minefield-comms", "\n   2. Must be within a 1.5U radius of sector corner in gap")
 				if difficulty > .5 then
-					mMsg = mMsg .. _("commsMinefield", "\n   3. Must be centered: 6 on one side and 6 on the other")
+					mMsg = mMsg .. _("minefield-comms", "\n   3. Must be centered: 6 on one side and 6 on the other")
 				end
 				if difficulty > 1 then
-					mMsg = mMsg .. _("commsMinefield", "\n   4. Must be along 20U distance from station line connecting asteroids")
+					mMsg = mMsg .. _("minefield-comms", "\n   4. Must be along 20U distance from station line connecting asteroids")
 				end
 				setCommsMessage(mMsg)
 				if not northMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the north gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the north gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),northObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),northObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle on the right: %i"),ndiv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle on the left: %i"),ndiv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the left: %i"),ndiv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the right: %i"),ndiv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle on the right: %i"),ndiv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle on the left: %i"),ndiv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the left: %i"),ndiv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the right: %i"),ndiv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count on the right: %i"),ndiv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount on the left: %i"),ndiv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count on the right: %i"),ndiv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount on the left: %i"),ndiv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not southMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the south gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the south gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),southObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),southObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle on the right: %i"),sdiv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle on the left: %i"),sdiv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the left: %i"),sdiv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the right: %i"),sdiv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle on the right: %i"),sdiv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle on the left: %i"),sdiv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the left: %i"),sdiv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the right: %i"),sdiv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count on the right: %i"),sdiv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount on the left: %i"),sdiv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count on the right: %i"),sdiv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount on the left: %i"),sdiv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not eastMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the east gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the east gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),eastObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),eastObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle below: %i"),ediv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle above: %i"),ediv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids above: %i"),ediv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids below: %i"),ediv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle below: %i"),ediv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle above: %i"),ediv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids above: %i"),ediv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids below: %i"),ediv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count below: %i"),ediv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount above: %i"),ediv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count below: %i"),ediv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount above: %i"),ediv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not westMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the west gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the west gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),westObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),westObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle below: %i"),wdiv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle above: %i"),wdiv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids above: %i"),wdiv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids below: %i"),wdiv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle below: %i"),wdiv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle above: %i"),wdiv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids above: %i"),wdiv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids below: %i"),wdiv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count below: %i"),wdiv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount above: %i"),wdiv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count below: %i"),wdiv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount above: %i"),wdiv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -2708,20 +2708,20 @@ function setOptionalOrders()
 	optionalOrders = ""
 	optionalOrdersPresent = false
 	if plot2reminder ~= nil then
-		if plot2reminder == _("commsUpgrade", "Get ship maneuver upgrade") then
+		if plot2reminder == _("upgradeOrders-comms", "Get ship maneuver upgrade") then
 			if spinReveal == 0 then
-				optionalOrders = _("commsUpgrade", "\nOptional:\n") .. plot2reminder
+				optionalOrders = _("upgradeOrders-comms", "\nOptional:\n") .. plot2reminder
 			elseif spinReveal == 1 then
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s for %s"),spinBase:getCallSign(),spinGood)
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s for %s"),spinBase:getCallSign(),spinGood)
 			elseif spinReveal == 2 then
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood)
 			elseif spinReveal == 3 then
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign())
 			else
-				optionalOrders = string.format(_("commsUpgrade", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
+				optionalOrders = string.format(_("upgradeOrders-comms", "\nOptional:\nGet ship maneuver upgrade from %s in sector %s for %s.\n    You might find %s at %s in sector %s"),spinBase:getCallSign(),spinBase:getSectorName(),spinGood,spinGood,spinGoodBase:getCallSign(),spinGoodBase:getSectorName())
 			end
 		else
-			optionalOrders = _("commsUpgrade", "\nOptional:\n") .. plot2reminder
+			optionalOrders = _("upgradeOrders-comms", "\nOptional:\n") .. plot2reminder
 		end
 		optionalOrdersPresent = true
 	end
@@ -2729,44 +2729,44 @@ function setOptionalOrders()
 		if optionalOrdersPresent then
 			ifs = "\n"
 		else
-			ifs = _("commsUpgrade", "\nOptional:\n")
+			ifs = _("upgradeOrders-comms", "\nOptional:\n")
 			optionalOrdersPresent = true
 		end
-		if plot4reminder == string.format(_("commsUpgrade", "Upgrade %s to rotate"),homeStation:getCallSign()) then
+		if plot4reminder == string.format(_("upgradeOrders-comms", "Upgrade %s to rotate"),homeStation:getCallSign()) then
 			if rotateReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif rotateReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign())
 			elseif rotateReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName()) 
 			elseif rotateReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may bave %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s may bave %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGood)
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may bave %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Upgrade %s to auto-rotate by taking %s to %s in %s.\n    %s in %s may bave %s"),homeStation:getCallSign(),rotateGood,rotateBase:getCallSign(),rotateBase:getSectorName(),rotateGoodBase:getCallSign(),rotateGoodBase:getSectorName(),rotateGood)
 			end
-		elseif plot4reminder == _("commsUpgrade", "Get beam cycle time upgrade") then
+		elseif plot4reminder == _("upgradeOrders-comms", "Get beam cycle time upgrade") then
 			if beamTimeReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif beamTimeReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s for %s"),beamTimeBase:getCallSign(),beamTimeGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s for %s"),beamTimeBase:getCallSign(),beamTimeGood)
 			elseif beamTimeReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s in %s for %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood)
 			elseif beamTimeReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign())
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get beam cycle time upgrade from %s in %s for %s\n    You might find %s at %s in %s"),beamTimeBase:getCallSign(),beamTimeBase:getSectorName(),beamTimeGood,beamTimeGood,beamTimeGoodBase:getCallSign(),beamTimeGoodBase:getSectorName())
 			end
-		elseif plot4reminder == _("commsUpgrade", "Get hull upgrade") then
+		elseif plot4reminder == _("upgradeOrders-comms", "Get hull upgrade") then
 			if hullReveal == 0 then
 				optionalOrders = optionalOrders .. ifs .. plot4reminder
 			elseif hullReveal == 1 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s to upgrade hull for %s"),hullBase:getCallSign(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s to upgrade hull for %s"),hullBase:getCallSign(),hullGood)
 			elseif hullReveal == 2 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s in %s to upgrade hull for %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood)
 			elseif hullReveal == 3 then
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s\n    %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s in %s to upgrade hull for %s\n    %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGood)
 			else
-				optionalOrders = optionalOrders .. ifs .. string.format(_("commsUpgrade", "Get %s in %s to upgrade hull for %s\n    %s in %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
+				optionalOrders = optionalOrders .. ifs .. string.format(_("upgradeOrders-comms", "Get %s in %s to upgrade hull for %s\n    %s in %s might have %s"),hullBase:getCallSign(),hullBase:getSectorName(),hullGood,hullGoodBase:getCallSign(),hullGoodBase:getSectorName(),hullGood)
 			end
 		else
 			optionalOrders = optionalOrders .. ifs .. plot4reminder
@@ -2923,7 +2923,7 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply(_("commsHelpfullWarning", "See any enemies in your area?"), function()
+		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if player:isFriendly(comms_target) then
 				enemiesInRange = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
@@ -2933,18 +2933,18 @@ function handleUndockedState()
 				end
 				if enemiesInRange > 0 then
 					if enemiesInRange > 1 then
-						setCommsMessage(string.format(_("commsHelpfullWarning", "Yes, we see %i enemies within 30U"),enemiesInRange))
+						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage(_("commsHelpfullWarning", "Yes, we see one enemy within 30U"))						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
 					end
 					player:addReputationPoints(2.0)					
 				else
-					setCommsMessage(_("commsHelpfullWarning", "No enemies within 30U"))
+					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					player:addReputationPoints(1.0)
 				end
 				addCommsReply(_("Back"), commsStation)
 			else
-				setCommsMessage(_("commsHelpfullWarning", "Not really"))
+				setCommsMessage(_("helpfullWarning-comms", "Not really"))
 				player:addReputationPoints(1.0)
 				addCommsReply(_("Back"), commsStation)
 			end
@@ -2987,93 +2987,93 @@ function handleUndockedState()
 				ordMsg = ordMsg .. string.format(_("orders-comms", "\n   %i Minutes remain in game"),math.floor(gameTimeLimit/60))
 			end
 			setCommsMessage(ordMsg)
-			addCommsReply(_("commsMinefield", "What is a minefield?"), function()
-				mMsg = string.format(_("commsMinefield", "For the automated sensors on station %s to register a minefield as completed across a gap, it must meet the following criteria:"),homeStation:getCallSign())
-				mMsg = mMsg .. _("commsMinefield", "\n   1. Must contain at least 12 mines: Nautilus class standard load")
-				mMsg = mMsg .. _("commsMinefield", "\n   2. Must be within a 1.5U radius of sector corner in gap")
+			addCommsReply(_("minefield-comms", "What is a minefield?"), function()
+				mMsg = string.format(_("minefield-comms", "For the automated sensors on station %s to register a minefield as completed across a gap, it must meet the following criteria:"),homeStation:getCallSign())
+				mMsg = mMsg .. _("minefield-comms", "\n   1. Must contain at least 12 mines: Nautilus class standard load")
+				mMsg = mMsg .. _("minefield-comms", "\n   2. Must be within a 1.5U radius of sector corner in gap")
 				if difficulty > .5 then
-					mMsg = mMsg .. _("commsMinefield", "\n   3. Must be centered: 6 on one side and 6 on the other")
+					mMsg = mMsg .. _("minefield-comms", "\n   3. Must be centered: 6 on one side and 6 on the other")
 				end
 				if difficulty > 1 then
-					mMsg = mMsg .. _("commsMinefield", "\n   4. Must be along 20U distance from station line connecting asteroids")
+					mMsg = mMsg .. _("minefield-comms", "\n   4. Must be along 20U distance from station line connecting asteroids")
 				end
 				setCommsMessage(mMsg)
 				if not northMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the north gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the north gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),northObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),northObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle on the right: %i"),ndiv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle on the left: %i"),ndiv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the left: %i"),ndiv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the right: %i"),ndiv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle on the right: %i"),ndiv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle on the left: %i"),ndiv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the left: %i"),ndiv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the right: %i"),ndiv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count on the right: %i"),ndiv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount on the left: %i"),ndiv1s2)
-							cMsg = cMsg .._("commsMinefield",  "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count on the right: %i"),ndiv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount on the left: %i"),ndiv1s2)
+							cMsg = cMsg .._("minefield-comms",  "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not southMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the south gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the south gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),southObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),southObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle on the right: %i"),sdiv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle on the left: %i"),sdiv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the left: %i"),sdiv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids on the right: %i"),sdiv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle on the right: %i"),sdiv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle on the left: %i"),sdiv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the left: %i"),sdiv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids on the right: %i"),sdiv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count on the right: %i"),sdiv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount on the left: %i"),sdiv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count on the right: %i"),sdiv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount on the left: %i"),sdiv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not eastMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the east gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the east gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),eastObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),eastObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle below: %i"),ediv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle above: %i"),ediv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids above: %i"),ediv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids below: %i"),ediv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle below: %i"),ediv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle above: %i"),ediv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids above: %i"),ediv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids below: %i"),ediv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count above: %i"),ediv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount below: %i"),ediv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count above: %i"),ediv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount below: %i"),ediv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
 				end
 				if not westMet then
-					addCommsReply(_("commsMinefield", "What do the sensors show for the west gap?"), function()
+					addCommsReply(_("minefield-comms", "What do the sensors show for the west gap?"), function()
 						if difficulty < 1 then
-							cMsg = string.format(_("commsMinefield", "Count within radius: %i"),westObjCount)
+							cMsg = string.format(_("minefield-comms", "Count within radius: %i"),westObjCount)
 						elseif difficulty > 1 then
-							cMsg = string.format(_("commsMinefield", "Count near middle below: %i"),wdiv2s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near middle above: %i"),wdiv2s2)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids above: %i"),wdiv2s3)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount near asteroids below: %i"),wdiv2s4)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need three in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count near middle below: %i"),wdiv2s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near middle above: %i"),wdiv2s2)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids above: %i"),wdiv2s3)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount near asteroids below: %i"),wdiv2s4)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need three in each sensor scan area")
 						else
-							cMsg = string.format(_("commsMinefield", "Count above: %i"),wdiv1s1)
-							cMsg = cMsg .. string.format(_("commsMinefield", "\nCount below: %i"),wdiv1s2)
-							cMsg = cMsg .. _("commsMinefield", "\n\nYou need six in each sensor scan area")
+							cMsg = string.format(_("minefield-comms", "Count above: %i"),wdiv1s1)
+							cMsg = cMsg .. string.format(_("minefield-comms", "\nCount below: %i"),wdiv1s2)
+							cMsg = cMsg .. _("minefield-comms", "\n\nYou need six in each sensor scan area")
 						end
-						cMsg = cMsg .. string.format(_("commsMinefield", "\nSensors refresh every %i seconds"),gapCheckInterval)
+						cMsg = cMsg .. string.format(_("minefield-comms", "\nSensors refresh every %i seconds"),gapCheckInterval)
 						setCommsMessage(cMsg)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -3533,9 +3533,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage(_("ship-coms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage(_("ship-coms", "We have nothing for you.\nGood day."));
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true
@@ -3868,8 +3868,8 @@ function initialInstructions(delta)
 	plot1name = "initialInstructions"
 	initialOrderTimer = initialOrderTimer - delta
 	if initialOrderTimer < 0 then
-		player:addToShipLog(string.format(_("minefield-shiplog", "Since %s is so isolated and so close to enemy territory, we need you to lay a minefield across each gap in the surrounding asteroids"),homeStation:getCallSign()),"Magenta")
-		primaryOrders = _("commsMinefield", "Lay minefield across each gap in surrounding asteroids.")
+		player:addToShipLog(string.format(_("goal-shiplog", "Since %s is so isolated and so close to enemy territory, we need you to lay a minefield across each gap in the surrounding asteroids"),homeStation:getCallSign()),"Magenta")
+		primaryOrders = _("orders-comms", "Lay minefield across each gap in surrounding asteroids.")
 		plot1 = checkGaps
 		plot1name = "checkGaps"
 		waveTimer = interWave
@@ -3888,7 +3888,7 @@ function checkGaps(delta)
 			if prevSouthClosed and southClosed then
 				southMet = true
 				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 180 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _("commsMinefield", " South gap closed.")
+				primaryOrders = primaryOrders .. _(" South gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3899,7 +3899,7 @@ function checkGaps(delta)
 			if prevNorthClosed and northClosed then
 				northMet = true
 				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 0 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _("commsMinefield", " North gap closed.")
+				primaryOrders = primaryOrders .. _(" North gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3910,7 +3910,7 @@ function checkGaps(delta)
 			if prevWestClosed and westClosed then
 				westMet = true
 				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 270 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _("commsMinefield", " West gap closed.")
+				primaryOrders = primaryOrders .. _(" West gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3921,7 +3921,7 @@ function checkGaps(delta)
 			if prevEastClosed and eastClosed then
 				eastMet = true
 				player:addToShipLog(string.format(_("minefield-shiplog", "Congratulations, You've closed the gap at heading 90 from %s"),homeStation:getCallSign()),"Magenta")
-				primaryOrders = primaryOrders .. _("commsMinefield", " East gap closed.")
+				primaryOrders = primaryOrders .. _(" East gap closed.")
 				player:addReputationPoints(20-(difficulty*6))
 			end
 		end
@@ -3932,7 +3932,7 @@ function checkGaps(delta)
 					if p ~= nil and p:isValid() then
 						p:addReputationPoints(100)
 						p:addToShipLog(string.format(_("minefield-shiplog", "You've closed the gaps. Now for the Quixotic part: go destroy the enemy bases surrounding us while keeping %s alive. You'll find them straight out from the gaps"),homeStation:getCallSign()),"Magenta")
-						primaryOrders = string.format(_("commsMinefield", "Protect %s. Destroy enemy bases straight out from gaps"),homeStation:getCallSign())
+						primaryOrders = string.format(_("orders-comms", "Protect %s. Destroy enemy bases straight out from gaps"),homeStation:getCallSign())
 					end
 				end
 				plot1name = "destroyEnemyBases"
