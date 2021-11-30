@@ -5,7 +5,7 @@
 ---
 --- Player ship: Template model: Flavia P. Falcon. Suggest turning music volume to 10% and sound volume to 100% on server
 ---
---- Version 4
+--- Version 4 - 
 -- Type: Mission
 -- Variation[Hard]: More enemies
 -- Variation[Easy]: Fewer enemies

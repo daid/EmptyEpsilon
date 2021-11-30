@@ -16,6 +16,7 @@
 --- - Player fighters may activate auto-cooling and auto-repair in engineering
 ---
 --- Version 9 - Oct2020
+---
 -- Type: Replayable Mission
 -- Variation[Easy]: Easy goals and/or enemies
 -- Variation[Hard]: Hard goals and/or enemies
@@ -8796,7 +8797,7 @@ function helpfulWarning(delta)
 										end
 									else
 										if helpfulWarningDiagnostic then print("station has multiple shields") end
-										sdMsg = string.format(_("helpfullWarning", "   Shield count: %i "),stationShields)
+										sdMsg = string.format(_("helpfullWarning-shipLog", "   Shield count: %i "),stationShields)
 										if helpfulWarningDiagnostic then print("about to start shield loop") end
 										shieldStatusLines = {}
 										for j=1,stationShields do
@@ -10693,7 +10694,7 @@ function update(delta)
 			if shield_count > 1 then
 				shield_label = "WS"
 			end
-			home_station_health = string.format(_("tab-homeStationHealth", "%s %s:%i%% H:%i%%"),homeStation:getCallSign(),shield_label,math.floor(lowest_shield/shield_max*100),math.floor(homeStation:getHull()/homeStation:getHullMax()*100))
+			home_station_health = string.format(_("tabRelay&Ops-homeStationHealth", "%s %s:%i%% H:%i%%"),homeStation:getCallSign(),shield_label,math.floor(lowest_shield/shield_max*100),math.floor(homeStation:getHull()/homeStation:getHullMax()*100))
 		else
 			home_station_health = nil
 		end

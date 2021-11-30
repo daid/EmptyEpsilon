@@ -1,6 +1,8 @@
 -- Name: Close the Gaps
 -- Description: Using Nautilus class mine layer, lay mines across the space lanes expected to be used by invading enemies
 ---
+--- Version 1 - Nov2021
+---
 --- Mission advice: It's better to hit an asteroid than a mine
 -- Type: Mission
 -- Variation[Easy]: Easy goals and/or enemies

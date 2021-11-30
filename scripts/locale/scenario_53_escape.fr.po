@@ -1510,7 +1510,7 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_53_escape.lua:3381
 msgctxt "commsAmmo"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_53_escape.lua:3383
 msgctxt "commsAmmo"
@@ -2546,7 +2546,7 @@ msgstr "Avez-vous des marchandises que vous pourriez vendre ?"
 #: scripts/scenario_53_escape.lua:4374 scripts/scenario_53_escape.lua:4561
 msgctxt "commsTrade"
 msgid "We've got "
-msgstr "Nous avons"
+msgstr "Nous avons "
 
 #: scripts/scenario_53_escape.lua:4378 scripts/scenario_53_escape.lua:4565
 msgctxt "commsTrade"
