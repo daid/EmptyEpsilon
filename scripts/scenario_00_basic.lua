@@ -472,7 +472,7 @@ function init()
     local station = friendlyList[1]
     if gametimeleft ~= nil then
         station:sendCommsMessage(
-            player, string.format(_([[%s, your objective is to fend off the incoming Kraylor attack.
+            player, string.format(_("goal-incCall", [[%s, your objective is to fend off the incoming Kraylor attack.
 
 Please inform your Captain and crew that you have a total of %d minutes for this mission.
 
@@ -482,7 +482,7 @@ Good luck.]]), player:getCallSign(), gametimeleft / 60)
         )
     else
         station:sendCommsMessage(
-            player, string.format(_([[%s, your objective is to fend off the incoming Kraylor attack.
+            player, string.format(_("goal-incCall", [[%s, your objective is to fend off the incoming Kraylor attack.
 
 Good luck.]]), player:getCallSign())
         )
@@ -517,7 +517,7 @@ function update(delta)
     if (enemy_count == 0 and getScenarioSetting("Enemies") ~= "Empty") then
         victory("Human Navy")
         if gametimeleft ~= nil then
-            local text = string.format(_("Mission: SUCCESS (%d seconds left)"), math.floor(gametimeleft))
+            local text = string.format(_("msgMainscreen&Spectbanner", "Mission: SUCCESS (%d seconds left)"), math.floor(gametimeleft))
             globalMessage(text)
             setBanner(text)
             return
@@ -528,7 +528,7 @@ function update(delta)
         gametimeleft = gametimeleft - delta
         if gametimeleft < 0 then
             victory("Kraylor")
-            local text = _("Mission: FAILED (time has run out)")
+            local text = _("msgMainscreen&Spectbanner", "Mission: FAILED (time has run out)")
             globalMessage(text)
             setBanner(text)
             return
@@ -536,17 +536,17 @@ function update(delta)
         if gametimeleft < timewarning then
             if timewarning <= 1 * 60 then -- Less then 1 minutes left.
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minute remaining.]]), player:getCallSign(), timewarning / 60))
+                    friendlyList[1]:sendCommsMessage(player, string.format(_("time-incCall", [[%s, you have %d minute remaining.]]), player:getCallSign(), timewarning / 60))
                 end
                 timewarning = timewarning - 2 * 60
             elseif timewarning <= 5 * 60 then -- Less then 5 minutes left. Warn ever 2 minutes instead of every 5.
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining.]]), player:getCallSign(), timewarning / 60))
+                    friendlyList[1]:sendCommsMessage(player, string.format(_("time-incCall", [[%s, you have %d minutes remaining.]]), player:getCallSign(), timewarning / 60))
                 end
                 timewarning = timewarning - 2 * 60
             else
                 for idx, player in ipairs(playerList) do
-                    friendlyList[1]:sendCommsMessage(player, string.format(_([[%s, you have %d minutes remaining of mission time.]]), player:getCallSign(), timewarning / 60))
+                    friendlyList[1]:sendCommsMessage(player, string.format(_("time-incCall", [[%s, you have %d minutes remaining of mission time.]]), player:getCallSign(), timewarning / 60))
                 end
                 timewarning = timewarning - 5 * 60
             end
@@ -556,7 +556,7 @@ function update(delta)
     -- If all allies are destroyed, the Humans (players) lose.
     if friendly_count == 0 then
         victory("Kraylor")
-        local text = _("Mission: FAILED (no friendlies left)")
+        local text = _("msgMainscreen&Spectbanner", "Mission: FAILED (no friendlies left)")
         globalMessage(text)
         setBanner(text)
         return
@@ -573,7 +573,7 @@ function update(delta)
     -- If last player ship is destroyed, the Humans (players) lose.
     if player_count == 0 then
         victory("Kraylor")
-        local text = _("Mission: FAILED (all your ships destroyed)")
+        local text = _("msgMainscreen&Spectbanner", "Mission: FAILED (all your ships destroyed)")
         globalMessage(text)
         setBanner(text)
         return
@@ -581,6 +581,6 @@ function update(delta)
     
     -- Set banner for cinematic and top down views.
     if gametimeleft ~= nil then
-        setBanner(string.format(_("Mission in progress - Time left: %d:%02d - Enemies: %d"), math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count))
+        setBanner(string.format(_("msgSpectbanner", "Mission in progress - Time left: %d:%02d - Enemies: %d"), math.floor(gametimeleft / 60), math.floor(gametimeleft % 60), enemy_count))
     end
 end
