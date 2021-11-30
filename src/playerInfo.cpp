@@ -56,6 +56,15 @@ PlayerInfo::PlayerInfo()
     player_info_list.push_back(this);
 }
 
+void PlayerInfo::reset()
+{
+    ship_id = -1;
+    main_screen_control = false;
+
+    for(int n=0; n<max_crew_positions; n++)
+        crew_position[n] = false;
+}
+
 bool PlayerInfo::isOnlyMainScreen()
 {
     if (!main_screen)

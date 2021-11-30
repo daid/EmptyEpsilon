@@ -294,6 +294,9 @@ function init()
     -- Spawn a player Atlantis.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(getScenarioSetting("PlayerShip"))
     player:setCallSign(ship_names[irandom(1, #ship_names)])
+    if not player:hasWarpDrive() and not player:hasJumpDrive() then
+        player:setWarpDrive(true)
+    end
 
     enemyList = {}
     friendlyList = {}

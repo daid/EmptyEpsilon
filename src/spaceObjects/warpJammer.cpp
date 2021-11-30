@@ -112,17 +112,16 @@ glm::vec2 WarpJammer::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
     glm::vec2 first_jammer_q{0, 0};
     foreach(WarpJammer, wj, jammer_list)
     {
-        float f = glm::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
-        if (f < 0.0f)
-            f = 0;
-        glm::vec2 q = start + startEndDiff / startEndLength * f;
-        if (glm::length2(q - wj->getPosition()) < wj->range*wj->range)
+        float f_inf = glm::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
+	float f_limited = std::min(std::max(0.0f, f_inf), startEndLength);
+        glm::vec2 q_limited = start + startEndDiff / startEndLength * f_limited;
+        if (glm::length2(q_limited - wj->getPosition()) < wj->range*wj->range)
         {
-            if (!first_jammer || f < first_jammer_f)
+            if (!first_jammer || f_limited < first_jammer_f)
             {
                 first_jammer = wj;
-                first_jammer_f = f;
-                first_jammer_q = q;
+                first_jammer_f = f_limited;
+                first_jammer_q = start + startEndDiff / startEndLength * f_inf;
             }
         }
     }

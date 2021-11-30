@@ -174,6 +174,14 @@ void GameGlobalInfo::reset()
     callsign_counter = 0;
     victory_faction = -1;
     allow_new_player_ships = true;
+
+    //Pause the game
+    engine->setGameSpeed(0.0);
+
+    foreach(PlayerInfo, p, player_info_list)
+    {
+        p->reset();
+    }
 }
 
 void GameGlobalInfo::startScenario(string filename)
