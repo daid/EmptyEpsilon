@@ -1,4 +1,5 @@
 -- Name: Training: Cruiser
+-- Type: Basic
 -- Description: Basic Training Cource
 ---
 --- Objective: Destroy all enemy ships in the area.
@@ -9,7 +10,7 @@
 --- Your ship is a Phobos light cruiser - the most common vessel in the navy.
 ---
 --- This is a short mission for inexperienced players.
--- Type: Basic
+
 
 require("utils.lua")
 
@@ -75,7 +76,7 @@ end
 function commsInstr()
     if not instr1 and timer > 8.0 then
         instr1 = true
-        command:sendCommsMessage(player, _("msgComms", [[This is Commander Saberhagen.
+        command:sendCommsMessage(player, _("goal-incCall", [[This is Commander Saberhagen.
 
 In this training mission you will practice the basic controls of a Phobos light cruiser.
 Since this is not a tutorial, you will be on your own to decide how to destroy all enemy targets in an Exuari training ground.
@@ -93,9 +94,9 @@ function finished(delta)
     end
     if finishedFlag == false then
         finishedFlag = true
-        local bonusString = _("bonusTarget", "escaped.")
+        local bonusString = _("msgMainscreen-bonusTarget", "escaped.")
         if not bonus:isValid() then
-            bonusString = _("bonusTarget", "destroyed.")
+            bonusString = _("msgMainscreen-bonusTarget", "destroyed.")
         end
         globalMessage(string.format(_("msgMainscreen", [[Mission Complete.
 Your Time: %d
