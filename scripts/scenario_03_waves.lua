@@ -3,8 +3,10 @@
 ---
 --- Spawn the player ships you want. The strength of enemy ships is independent of the number and type of player ships.
 -- Type: Basic
--- Variation[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. Players are overwhelmed more quickly, leading to shorter games.
--- Variation[Easy]: Decreases the number of ships in each wave. Good for new players, but takes longer for the players to be overwhelmed.
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Easy]: Decreases the number of ships in each wave. Good for new players, but takes longer for the players to be overwhelmed.
+-- Enemies[Normal|Default]: Normal amount of enemies. Recommended for a normal crew.
+-- Enemies[Hard]: Difficulty starts at wave 5 and increases by 1.5 after the players defeat each wave. Players are overwhelmed more quickly, leading to shorter games.
 
 --- Scenario
 -- @script scenario_03_waves
@@ -40,7 +42,7 @@ function init()
     PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 
     -- Give the mission to the (first) player ship
-    local text = _([[At least one friendly base must survive.
+    local text = _("goal-shipLog", [[At least one friendly base must survive.
 
 Destroy all enemy ships. After a short delay, the next wave will appear. And so on ...
 
@@ -122,7 +124,7 @@ end
 
 function spawnWave()
     waveNumber = waveNumber + 1
-    getPlayerShip(-1):addToShipLog(string.format(_("Wave %d"), waveNumber), "red")
+    getPlayerShip(-1):addToShipLog(string.format(_("shipLog", "Wave %d"), waveNumber), "red")
     friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
 
     enemyList = {}
@@ -214,7 +216,7 @@ function spawnWave()
         end
     end
 
-    globalMessage(string.format(_("Wave %d"), waveNumber))
+    globalMessage(string.format(_("msgMainscreen", "Wave %d"), waveNumber))
 end
 
 function update(delta)
@@ -247,8 +249,8 @@ function update(delta)
     -- Continue ...
     if enemy_count == 0 then
         spawnWaveDelay = 15.0
-        globalMessage(_("Wave cleared!"))
-        getPlayerShip(-1):addToShipLog(string.format(_("Wave %d cleared."), waveNumber), "green")
+        globalMessage(_("msgMainscreen", "Wave cleared!"))
+        getPlayerShip(-1):addToShipLog(string.format(_("shipLog", "Wave %d cleared."), waveNumber), "green")
     end
     -- ... or lose
     if friendly_count == 0 then
