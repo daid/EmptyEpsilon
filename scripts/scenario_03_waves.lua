@@ -131,9 +131,9 @@ function spawnWave()
 
     -- Calculate score of wave
     local totalScoreRequirement  -- actually: remainingScoreRequirement
-    if getScenarioVariation() == "Hard" then
+    if getScenarioSettings() == "Hard" then
         totalScoreRequirement = math.pow(waveNumber * 1.5 + 4, 1.3) * 10
-    elseif getScenarioVariation() == "Easy" then
+    elseif getScenarioSettings() == "Easy" then
         totalScoreRequirement = math.pow(waveNumber * 0.8, 1.3) * 9
     else
         totalScoreRequirement = math.pow(waveNumber, 1.3) * 10
