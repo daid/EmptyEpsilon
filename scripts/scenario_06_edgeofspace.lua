@@ -29,19 +29,19 @@ function init()
     Player:setWeaponStorageMax("Mine", 0)
 
     -- Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the station Nirvana was intended to serve as a sort of timer for the inspection job.
-    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign("Technical Officer"):setPosition(1530000, 411000):orderIdle()
+    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign(_("callsign", "Technical Officer")):setPosition(1530000, 411000):orderIdle()
     Technical_Officer:setCommsScript("") -- Disable the comms script for the Technical Officer station (though really, they should never find it all the way out in sector Z81).
     -- Create a station called "Nirvana" for "Technical Officer" to approach. Surplus to requirements now but a good example of the crazy stuff a newbie might try.
     Nirvana = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(1530000, 412000):setCallSign("Nirvana")
 
-    EOS_Station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(60500, 42100):setCallSign("E.O.S. scope")
+    EOS_Station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(60500, 42100):setCallSign(_("callsign", "E.O.S. scope"))
     EOS_Station:setCommsScript("") -- Disable the comms script for the EOS Scope station.
-    Midspace_Station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(34643, 39301):setCallSign("Midspace Support")
-    Central_Command = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setPosition(14500, 19100):setCallSign("Central Command")
+    Midspace_Station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(34643, 39301):setCallSign(_("callsign",  "Midspace Support"))
+    Central_Command = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setPosition(14500, 19100):setCallSign(_("callsign", "Central Command"))
     Central_Command:setCommsFunction(commsCentralCommandStation)
 
-    Kraylor_Eline = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor"):setPosition(79200, 38800):setCallSign("K-Endline")
-    Kraylor_Mline = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(101830, 26725):setCallSign("K-Midline")
+    Kraylor_Eline = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor"):setPosition(79200, 38800):setCallSign(_("callsign", "K-Endline"))
+    Kraylor_Mline = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(101830, 26725):setCallSign(_("callsign", "K-Midline"))
 
     Science_Galileo = SpaceStation():setTemplate("Medium Station"):setFaction("Arlenians"):setPosition(11100, -49150):setCallSign("Galileo")
 
@@ -188,7 +188,7 @@ function init()
     -- Expanded text to attempt to explain why Apollo is shuttling this data around physically.
     Central_Command:sendCommsMessage(
         Player,
-        _([[Apollo, come in.
+        _("centralcommandGoal-incCall", [[Apollo, come in.
 
 Our edge-of-space telescope has been malfunctioning for the past few days. We expect the cause to be a mechanical failure, but we want you to take a look.
 
@@ -236,7 +236,7 @@ function update(delta)
         if not Kraylor_Eline:isValid() then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, you've incited a war! What a disaster...]])
+                _("centralcommand-incCall", [[Apollo, you've incited a war! What a disaster...]])
             )
             victory("Kraylor")
         end
@@ -245,7 +245,7 @@ function update(delta)
         if distance(Player, Kraylor_Eline) < 10000 and kraylor_warning == 0 then
             Kraylor_Eline:sendCommsMessage(
                 Player,
-                _([[A Human Naval cruiser encroaching on Kraylor space?
+                _("KraylorEndline-incCall", [[A Human Naval cruiser encroaching on Kraylor space?
 
 Be warned: if you venture near our Endline territory, we will have no choice but to view your actions as hostile. Our indestructible fleet will make short work of you.]])
             )
@@ -257,7 +257,7 @@ Be warned: if you venture near our Endline territory, we will have no choice but
         if distance(Player, Kraylor_Eline) < 40000 and command_warning == 0 then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[The Kraylor's Endline station is near our E.O.S. scope.
+                _("centralcommand-incCall", [[The Kraylor's Endline station is near our E.O.S. scope.
 
 Do not confront them; we're not trying to start a war.]])
             )
@@ -271,7 +271,7 @@ Do not confront them; we're not trying to start a war.]])
                 if kraylor_threat == 0 then
                     Kraylor_Eline:sendCommsMessage(
                         Player,
-                        _([[Attention Human Naval vessel:
+                        _("KraylorEndline-incCall", [[Attention Human Naval vessel:
 
 We have noted your expansion toward Kraylor Endline territory. Know that even the slightest act of aggression will be met with a forceful purging of all human ships and stations from our sector of space.
 
@@ -291,10 +291,10 @@ Do what maintenance you must while you are here, but know also that we consider 
     -- When the Apollo is docked with EOS_Station a message is received from the Technical Officer advising that his team is beginning their inspection
     if Central_Command.mission_state == 2 then
         if Player:isDocked(EOS_Station) and inspection_init == 0 then
-            globalMessage("Away Team in transit.")
+            globalMessage(_("msgMainscreen", "Away Team in transit."))
             Technical_Officer:sendCommsMessage(
                 Player,
-                _([[We're beginning our inspection of the E.O.S. scope facility.
+                _("technicalofficer-incCall", [[We're beginning our inspection of the E.O.S. scope facility.
 
 This shouldn't take long.]])
             )
@@ -309,7 +309,7 @@ This shouldn't take long.]])
                 if tech_databanks == 0 then
                     Technical_Officer:sendCommsMessage(
                         Player,
-                        _([[It looks like the databanks are still in good working order.
+                        _("technicalofficer-incCall", [[It looks like the databanks are still in good working order.
 
 We'll retrieve what we can.]])
                     )
@@ -328,7 +328,7 @@ We'll retrieve what we can.]])
                         if tech_stranded == 0 then -- Without this the Technical Officer will always be harrassing the Apollo for pick-up once this event has triggered
                             Technical_Officer:sendCommsMessage(
                                 Player,
-                                _([[Is something wrong Apollo? We're still in the facility.
+                                _("technicalofficer-incCall", [[Is something wrong Apollo? We're still in the facility.
 
 Please dock so we can come aboard.]])
                             )
@@ -345,10 +345,10 @@ Please dock so we can come aboard.]])
         if Player:isDocked(EOS_Station) then -- If the ship is not docked, the Tech Officer will complain.
             if inspection_init == 1 and inspection_complete == 0 then
                 if inspection_progress > 50 then
-                    globalMessage("Away Team have returned.")
+                    globalMessage(_("msgMainscreen", "Away Team have returned."))
                     Technical_Officer:sendCommsMessage(
                         Player,
-                        _([[Our inspection of the scope facility is complete. We retrieved much of the data recorded over the past few days, though proper analysis will require an expert.
+                        _("technicalofficer-incCall", [[Our inspection of the scope facility is complete. We retrieved much of the data recorded over the past few days, though proper analysis will require an expert.
 
 We should hurry back to Central Command with this so they can begin work.]])
                     )
@@ -365,7 +365,7 @@ We should hurry back to Central Command with this so they can begin work.]])
         if not Kraylor_Eline:isValid() then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, you've incited a war! What a disaster...]])
+                _("centralcommand-incCall", [[Apollo, you've incited a war! What a disaster...]])
             )
             victory("Kraylor")
         end
@@ -373,7 +373,7 @@ We should hurry back to Central Command with this so they can begin work.]])
         if Player:isDocked(Central_Command) then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[It appears the damage was mechanical, but Kraylor ships in the area have been spotted in surveillance data you recovered from the E.O.S. scope. It's possible this was sabotage.
+                _("centralcommand-incCall", [[It appears the damage was mechanical, but Kraylor ships in the area have been spotted in surveillance data you recovered from the E.O.S. scope. It's possible this was sabotage.
 
 Whatever the case, we need you to rendezvous with science station Galileo in sector C5. We've contracted this Arlenian station to interpret and analyze data retrieved from our various scope stations.]]
                 )
@@ -389,7 +389,7 @@ Whatever the case, we need you to rendezvous with science station Galileo in sec
         if not Kraylor_Eline:isValid() then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, you've incited a war! What a disaster...]])
+                _("centralcommand-incCall", [[Apollo, you've incited a war! What a disaster...]])
             )
             victory("Kraylor")
         end
@@ -397,7 +397,7 @@ Whatever the case, we need you to rendezvous with science station Galileo in sec
         if distance(Player, Science_Galileo) < 30000 then
             Science_Galileo:sendCommsMessage(
                 Player,
-                _([[Distress signal incoming from Galileo station:
+                _("Galileo-incCall", [[Distress signal incoming from Galileo station:
 
 Kraylor ships are in our vicinity, and we believe they intend to attack us! Please, you are the only battle-ready ship near our sector. Assist us!]])
             )
@@ -416,7 +416,7 @@ Kraylor ships are in our vicinity, and we believe they intend to attack us! Plea
         if not Kraylor_Eline:isValid() then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, you've incited a war! What a disaster...]])
+                _("centralcommand-incCall", [[Apollo, you've incited a war! What a disaster...]])
             )
             victory("Kraylor")
         end
@@ -424,7 +424,7 @@ Kraylor ships are in our vicinity, and we believe they intend to attack us! Plea
         if not kraylor_g1:isValid() and not kraylor_g2:isValid() and not kraylor_g3:isValid() then
             Science_Galileo:sendCommsMessage(
                 Player,
-                _([[We don't know why Kraylor ships were attacking us. We had just recieved word that your ship was on its way with data from the edge-of-space telescopic station when they began interrupting transmissions.
+                _("Galileo-incCall", [[We don't know why Kraylor ships were attacking us. We had just recieved word that your ship was on its way with data from the edge-of-space telescopic station when they began interrupting transmissions.
 
 Thank you for defending our station. Please dock with us, and we'll analyze the data from the E.O.S. scope.]])
             )
@@ -438,7 +438,7 @@ Thank you for defending our station. Please dock with us, and we'll analyze the 
         if Player:isDocked(Science_Galileo) then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, come in!
+                _("centralcommand-incCall", [[Apollo, come in!
 
 Leave the E.O.S. data with Galileo for now, we've confirmed reports that Kraylor are brazen enough to attack our E.O.S. scope directly! All available ships should converge on E.O.S. territory in sector H8!
 
@@ -466,7 +466,7 @@ That means you, Apollo!]])
                 if Human_m1:isValid() then
                     Human_m1:sendCommsMessage(
                         Player,
-                        _([[Apollo, HM1 here.
+                        _("human-incCall", [[Apollo, HM1 here.
 
 Central Command has no choice but to declare war. We're moving into Kraylor territory for our retaliatory strike. Attack the Kraylor Endline station!]])
                     )
@@ -487,7 +487,7 @@ Central Command has no choice but to declare war. We're moving into Kraylor terr
                 if not Human_m1:isValid() then
                     Central_Command:sendCommsMessage(
                         Player,
-                        _([[Apollo, come in.
+                        _("centralcommand-incCall", [[Apollo, come in.
 
 We have no choice but to declare war. Move into Kraylor territory and retaliate on their defenseless Endline station!]])
                     )
@@ -510,7 +510,7 @@ We have no choice but to declare war. Move into Kraylor territory and retaliate 
                 if not kraylor_m1:isValid() and not kraylor_m2:isValid() and not kraylor_m3:isValid() and not kraylor_m4:isValid() then
                     Central_Command:sendCommsMessage(
                         Player,
-                        _([[Apollo, come in.
+                        _("centralcommand-incCall", [[Apollo, come in.
 
 Our cease-fire with the Kraylor is at a bitter end, and aggression will only rise from here. It is imperative that our ships be equipped with all counter-measures necessary to keep them safe.
 
@@ -529,7 +529,7 @@ Dock with the E.O.S. scope. We are re-fitting your ship in preparation for warti
                     if Kraylor_Mline:isValid() then
                         Kraylor_Mline:sendCommsMessage(
                             Player,
-                            _([[Broadcast on all Human Naval frequencies:
+                            _("KraylorMline-incCall", [[Broadcast on all Human Naval frequencies:
 
 Human scum, we warned you to stay out of Kraylor territory!]])
                         )
@@ -549,7 +549,7 @@ Human scum, we warned you to stay out of Kraylor territory!]])
                     if not Kraylor_Mline:isValid() then
                         Central_Command:sendCommsMessage(
                             Player,
-                            _([[Apollo, come in.
+                            _("centralcommand-incCall", [[Apollo, come in.
 
 Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining Kraylor ships threatening our E.O.S. territory!]])
                         )
@@ -577,7 +577,7 @@ Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining Kraylo
             if not kraylor_m1:isValid() and not kraylor_m2:isValid() and not kraylor_m3:isValid() and not kraylor_m4:isValid() then
                 Central_Command:sendCommsMessage(
                     Player,
-                    _([[Apollo, come in.
+                    _("centralcommand-incCall", [[Apollo, come in.
 
 Our cease-fire with the Kraylor is at a bitter end, and aggression will only rise from here. It is imperative that our ships be equipped with all counter-measures necessary to keep them safe.
 
@@ -595,7 +595,7 @@ Dock with the E.O.S. scope. We are re-fitting your ship in preparation for warti
                 if Kraylor_Mline:isValid() then
                     Kraylor_Mline:sendCommsMessage(
                         Player,
-                        _([[Broadcast on all Human Naval frequencies:
+                        _("KraylorMline-incCall", [[Broadcast on all Human Naval frequencies:
 
 Human scum, we warned you to stay out of Kraylor territory!]])
                     )
@@ -615,7 +615,7 @@ Human scum, we warned you to stay out of Kraylor territory!]])
                 if not Kraylor_Mline:isValid() then
                     Central_Command:sendCommsMessage(
                         Player,
-                        _([[Apollo, come in.
+                        _("centralcommand-incCall", [[Apollo, come in.
 
 Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining Kraylor ships threatening our E.O.S. territory!]])
                     )
@@ -645,7 +645,7 @@ Our cease-fire with the Kraylor is at a bitter end. Destroy the remaining Kraylo
         if not kraylor_m1:isValid() and not kraylor_m2:isValid() and not kraylor_m3:isValid() and not kraylor_m4:isValid() then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, come in.
+                _("centralcommand-incCall", [[Apollo, come in.
 
 Kraylor aggression will only rise from here. It is imperative that our ships be equipped with all counter-measures necessary to keep them safe.
 
@@ -685,7 +685,7 @@ Dock with the E.O.S. scope. We are re-fitting your ship in preparation for warti
 
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Science station Galileo has completed their analysis of the E.O.S. scope data.
+                _("centralcommand-incCall", [[Science station Galileo has completed their analysis of the E.O.S. scope data.
 
 Edge-of-space sensors picked up sparse signals from the super-nebula in Kraylor space that indicate they have some kind of wormhole. Intelligence suggests they intend to use it to infiltrate human space and attack us where we are defenseless!
 
@@ -701,7 +701,7 @@ When your ship is finished being outfitted for war, move up to the nebula, but b
         if distance(Player, Kraylor_hole) < 10000 then
             Central_Command:sendCommsMessage(
                 Player,
-                _([[Apollo, come in!
+                _("centralcommand-incCall", [[Apollo, come in!
 
 Reports are coming in from core human space that a massive Kraylor strike force is attacking! Get through that wormhole and attack from within their ranks to hold them off. We'll send all our available ships to converge there.]])
             )
@@ -772,78 +772,78 @@ function commsCentralCommandStation()
     if comms_source:isFriendly(comms_target) then
         -----------------------------------------------
         -- Edge of space additions
-        if comms_target:getCallSign() == "Central Command" and not comms_source:isDocked(comms_target) then
+        if comms_target:getCallSign() == _("callsign", "Central Command") and not comms_source:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
-                setCommsMessage([[The E.O.S. scope is in sector H8, right on the edge of Kraylor territory.
+                setCommsMessage(_("centralcommand-comms", [[The E.O.S. scope is in sector H8, right on the edge of Kraylor territory.
 
-Be careful out there.]])
+Be careful out there.]]))
                 return true
             end
 
             if comms_target.mission_state == 2 then
-                setCommsMessage("Return to Central Command with your report on the malfunction.")
+                setCommsMessage(_("centralcommandOrders-comms", "Return to Central Command with your report on the malfunction."))
                 return true
             end
 
             if comms_target.mission_state == 3 then
-                setCommsMessage("The Arlenian science station Galileo is in sector C5. Lay in a course bearing 356 from Central Command and deliver the E.O.S. scope data there.")
+                setCommsMessage(_("centralcommandOrders-comms", "The Arlenian science station Galileo is in sector C5. Lay in a course bearing 356 from Central Command and deliver the E.O.S. scope data there."))
                 return true
             end
 
             if comms_target.mission_state == 4 then
-                setCommsMessage("Save Galileo station! They're under attack in sector C5, and we need them to analyze that data!")
+                setCommsMessage(_("centralcommandOrders-comms", "Save Galileo station! They're under attack in sector C5, and we need them to analyze that data!"))
                 return true
             end
 
             if comms_target.mission_state == 5 then
-                setCommsMessage("Dock with Galileo station in sector C5 and deliver the E.O.S. scope data.")
+                setCommsMessage(_("centralcommandOrders-comms", "Dock with Galileo station in sector C5 and deliver the E.O.S. scope data."))
                 return true
             end
 
             if comms_target.mission_state == 6 then
-                setCommsMessage([[Kraylor ships are directly attacking the E.O.S. scope! Get down there as quickly as possible and help defend it!
+                setCommsMessage(_("centralcommandOrders-comms", [[Kraylor ships are directly attacking the E.O.S. scope! Get down there as quickly as possible and help defend it!
 
-If you need more assistance, request it from Midspace Support.]])
+If you need more assistance, request it from Midspace Support.]]))
                 return true
             end
 
             if comms_target.mission_state == 7 then
-                setCommsMessage("We've declared war on the Kraylor. Retaliate on their defenseless Endline station!")
+                setCommsMessage(_("centralcommandOrders-comms", "We've declared war on the Kraylor. Retaliate on their defenseless Endline station!"))
                 return true
             end
 
             if comms_target.mission_state == 8 then
-                setCommsMessage("Destroy the remaining Kraylor ships threatening our E.O.S. scope!")
+                setCommsMessage(_("centralcommandOrders-comms", "Destroy the remaining Kraylor ships threatening our E.O.S. scope!"))
                 return true
             end
 
             if comms_target.mission_state == 9 then
-                setCommsMessage("Dock at the E.O.S. scope to be refitted for wartime, and standby for orders.")
+                setCommsMessage(_("centralcommandOrders-comms", "Dock at the E.O.S. scope to be refitted for wartime, and standby for orders."))
                 return true
             end
 
             if comms_target.mission_state == 10 then
-                setCommsMessage("The Kraylor super-nebula hides a wormhole that we believe will be used in an attack on human space. There is an entrance into the nebula in sector F10, but be careful of traps!")
+                setCommsMessage(_("centralcommandOrders-comms", "The Kraylor super-nebula hides a wormhole that we believe will be used in an attack on human space. There is an entrance into the nebula in sector F10, but be careful of traps!"))
                 return true
             end
         end
         -----------------------------------------------
 
         if comms_target:areEnemiesInRange(5000) then
-            setCommsMessage("We are under attack! No time for chatting!")
+            setCommsMessage(_("station-comms", "We are under attack! No time for chatting!"))
             return true
         end
         if not comms_source:isDocked(comms_target) then
-            setCommsMessage([[Good day, officer.
+            setCommsMessage(_("station-comms", [[Good day, officer.
 
-If you need supplies, please dock with us first.]])
+If you need supplies, please dock with us first.]]))
             addCommsReply(
-                "Can you send a supply drop? (100rep)",
+                _("stationAssist-comms", "Can you send a supply drop? (100rep)"),
                 function()
                     if comms_source:getWaypointCount() < 1 then
-                        setCommsMessage("You need to set a waypoint before you can request backup.")
+                        setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."))
                     else
-                        setCommsMessage("Where do we need to drop off your supplies?")
+                        setCommsMessage(_("stationAssist-comms", "Where do we need to drop off your supplies?"))
                         for n = 1, comms_source:getWaypointCount() do
                             addCommsReply(
                                 "WP" .. n,
@@ -855,131 +855,131 @@ If you need supplies, please dock with us first.]])
                                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                                         script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                                        setCommsMessage("We have dispatched a supply ship toward WP" .. n)
+                                        setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n))
                                     else
-                                        setCommsMessage("Not enough reputation.")
+                                        setCommsMessage(_("needRep-comms", "Not enough reputation."))
                                     end
-                                    addCommsReply("Back", commsStationMainMenu)
+                                    addCommsReply(_("Back"), commsStationMainMenu)
                                 end
                             )
                         end
                     end
-                    addCommsReply("Back", commsStationMainMenu)
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             )
             addCommsReply(
-                "Please send backup! (150rep)",
+                _("stationAssist-comms", "Please send backup! (150rep)"),
                 function()
                     if comms_source:getWaypointCount() < 1 then
-                        setCommsMessage("You need to set a waypoint before you can request backup.")
+                        setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."))
                     else
-                        setCommsMessage("Where does the backup need to go?")
+                        setCommsMessage(_("stationAssist-comms", "Where does the backup need to go?"))
                         for n = 1, comms_source:getWaypointCount() do
                             addCommsReply(
                                 "WP" .. n,
                                 function()
                                     if comms_source:takeReputationPoints(150) then
                                         ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                                        setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n .. ".")
+                                        setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d."), ship:getCallSign(), n))
                                     else
-                                        setCommsMessage("Not enough rep!")
+                                        setCommsMessage(_("needRep-comms", "Not enough rep!"))
                                     end
-                                    addCommsReply("Back", commsStationMainMenu)
+                                    addCommsReply(_("Back"), commsStationMainMenu)
                                 end
                             )
                         end
                     end
-                    addCommsReply("Back", commsStationMainMenu)
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             )
             return true
         end
 
         -- Friendly station, docked.
-        setCommsMessage([[Good day, officer.
+        setCommsMessage(_("station-comms",[[Good day, officer.
 
-What can we do for you today?]])
+What can we do for you today?]]))
         addCommsReply(
-            "Do you have spare homing missiles for us? (2rep each)",
+            _("ammo-comms", "Do you have spare homing missiles for us? (2rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage("You need to stay docked for that action.")
+                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Homing") - comms_source:getWeaponStorage("Homing"))) then
-                    setCommsMessage("Not enough reputation.")
+                    setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
-                    setCommsMessage("Sorry, sir, but you are fully stocked with homing missiles.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "Sorry, sir, but you are fully stocked with homing missiles."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
-                    setCommsMessage("We have refilled your missile supply.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "We have refilled your missile supply."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Please re-stock our mines. (2rep each)",
+            _("ammo-comms", "Please re-stock our mines. (2rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage("You need to stay docked for that action.")
+                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(2 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
-                    setCommsMessage("Not enough reputation.")
+                    setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
                 if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
-                    setCommsMessage("Captain, your ship is already fully stocked with mines.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "Captain, your ship is already fully stocked with mines."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
-                    setCommsMessage("These mines are yours.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "These mines are yours."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Can you supply us with some nukes? (15rep each)",
+            _("ammo-comms", "Can you supply us with some nukes? (15rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage("You need to stay docked for that action.")
+                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(15 * (comms_source:getWeaponStorageMax("Nuke") - comms_source:getWeaponStorage("Nuke"))) then
-                    setCommsMessage("Not enough reputation.")
+                    setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
                 if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
-                    setCommsMessage("All nukes are charged and primed for destruction.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
-                    setCommsMessage("You are fully loaded and ready to explode things.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Please re-stock our EMP missiles. (10rep each)",
+            _("ammo-comms", "Please re-stock our EMP missiles. (10rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage("You need to stay docked for that action.")
+                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                     return
                 end
                 if not comms_source:takeReputationPoints(10 * (comms_source:getWeaponStorageMax("EMP") - comms_source:getWeaponStorage("EMP"))) then
-                    setCommsMessage("Not enough reputation.")
+                    setCommsMessage(_("needRep-comms", "Not enough reputation."))
                     return
                 end
                 if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
-                    setCommsMessage("All storage for EMP missiles is filled, sir.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "All storage for EMP missiles is filled, sir."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 else
                     comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
-                    setCommsMessage("Recalibrated the electronics and fitted you with all the EMP missiles you can carry.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "Recalibrated the electronics and fitted you with all the EMP missiles you can carry."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             end
         )
@@ -987,70 +987,70 @@ What can we do for you today?]])
         -- not friendly (and not enemy)
 
         if not comms_source:isDocked(comms_target) then
-            setCommsMessage([[Greetings, sir.
+            setCommsMessage(_("station-comms", [[Greetings, sir.
 
-If you want to do business, please dock with us first.]])
+If you want to do business, please dock with us first.]]))
             return true
         end
 
         -- Neutral station, docked
-        setCommsMessage("Welcome to our lovely station.")
+        setCommsMessage(_("station-comms", "Welcome to our lovely station."))
         addCommsReply(
-            "Do you have spare homing missiles for us? (5rep each)",
+            _("ammo-comms", "Do you have spare homing missiles for us? (5rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage("You need to stay docked for that action.")
+                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                     return
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") / 2 then
-                    setCommsMessage("You seem to have more than enough missiles.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "You seem to have more than enough missiles."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 else
                     if not comms_source:takeReputationPoints(5 * ((comms_source:getWeaponStorageMax("Homing") / 2) - comms_source:getWeaponStorage("Homing"))) then
-                        setCommsMessage("Not enough reputation.")
+                        setCommsMessage(_("needRep-comms", "Not enough reputation."))
                         return
                     end
                     comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing") / 2)
-                    setCommsMessage([[We generously resupplied you with some free homing missiles.
+                    setCommsMessage(_("ammo-comms", [[We generously resupplied you with some free homing missiles.
 
-Put them to good use.]])
-                    addCommsReply("Back", commsStationMainMenu)
+Put them to good use.]]))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Please re-stock our mines. (5rep each)",
+            _("ammo-comms", "Please re-stock our mines. (5rep each)"),
             function()
                 if not comms_source:isDocked(comms_target) then
-                    setCommsMessage("You need to stay docked for that action.")
+                    setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
                     return
                 end
                 if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
-                    setCommsMessage("You are fully stocked with mines.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "You are fully stocked with mines."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 else
                     if not comms_source:takeReputationPoints(5 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
-                        setCommsMessage("Not enough reputation.")
+                        setCommsMessage(_("needRep-comms", "Not enough reputation."))
                         return
                     end
                     comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
-                    setCommsMessage("Here, have some mines. Mines are good defensive weapons.")
-                    addCommsReply("Back", commsStationMainMenu)
+                    setCommsMessage(_("ammo-comms", "Here, have some mines. Mines are good defensive weapons."))
+                    addCommsReply(_("Back"), commsStationMainMenu)
                 end
             end
         )
         addCommsReply(
-            "Can you supply us with some nukes?",
+            _("ammo-comms", "Can you supply us with some nukes?"),
             function()
-                setCommsMessage("We do not deal in weapons of mass destruction.")
-                addCommsReply("Back", commsStationMainMenu)
+                setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+                addCommsReply(_("Back"), commsStationMainMenu)
             end
         )
         addCommsReply(
-            "Please re-stock our EMP missiles.",
+            _("ammo-comms", "Please re-stock our EMP missiles."),
             function()
-                setCommsMessage("We do not deal in weapons of mass disruption.")
-                addCommsReply("Back", commsStationMainMenu)
+                setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+                addCommsReply(_("Back"), commsStationMainMenu)
             end
         )
     end
