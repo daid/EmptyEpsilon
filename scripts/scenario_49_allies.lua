@@ -1,15 +1,16 @@
 -- Name: Allies and Enemies
 -- Description: The Arlenians are your allies. The Kraylors and Exuari are your enemies and will try to prevent you from completing your missions. Duration: approximately 30 minutes
 ---
---- Version 0 - Sept2019
+--- Version 1 - Nov2021
 ---
 --- Three missions available in current version. Tested with EE version 20190910
 -- Type: Replayable Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
--- Variation[One]: Only one mission randomly chosen from several possible missions (Default is all missions in random order)
--- Variation[Easy One]: Easy goals and/or enemies, only one mission randomly chosen from several possible missions (Default is all missions in random order)
--- Variation[Hard One]: Hard goals and/or enemies, only one mission randomly chosen from several possible missions (Default is all missions in random order)
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Easy]: Easy goals and/or enemies
+-- Enemies[Hard]: Hard goals and/or enemies
+-- Enemies[One]: Only one mission randomly chosen from several possible missions (Default is all missions in random order)
+-- Enemies[Easy One]: Easy goals and/or enemies, only one mission randomly chosen from several possible missions (Default is all missions in random order)
+-- Enemies[Hard One]: Hard goals and/or enemies, only one mission randomly chosen from several possible missions (Default is all missions in random order)
 
 require("utils.lua")
 
@@ -121,12 +122,12 @@ function triggerDoomsday()
 	end
 end
 function setVariations()
-	if string.find(getScenarioVariation(),"Easy") then
+	if string.find(getScenarioSetting(),"Easy") then
 		difficulty = .5
 		adverseEffect = .999
 		coolant_loss = .99999
 		coolant_gain = .01
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting(),"Hard") then
 		difficulty = 2
 		adverseEffect = .99
 		coolant_loss = .9999
@@ -137,12 +138,12 @@ function setVariations()
 		coolant_loss = .99995
 		coolant_gain = .001
 	end
-	if string.find(getScenarioVariation(),"One") then
+	if string.find(getScenarioSetting(),"One") then
 		onlyOneMission = true
 	else
 		onlyOneMission = false
 	end
-	if string.find(getScenarioVariation(),"Timed") then
+	if string.find(getScenarioSetting(),"Timed") then
 		playWithTimeLimit = true
 		gameTimeLimit = defaultGameTimeLimitInMinutes*60		
 		plotTimed = timedGame
