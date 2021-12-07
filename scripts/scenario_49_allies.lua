@@ -7,6 +7,7 @@
 -- Type: Replayable Mission
 -- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
 -- Enemies[Easy]: Easy goals and/or enemies
+-- Enemies[Normal|Default]: Normal amount of enemies. Recommended for a normal crew.
 -- Enemies[Hard]: Hard goals and/or enemies
 -- Enemies[One]: Only one mission randomly chosen from several possible missions (Default is all missions in random order)
 -- Enemies[Easy One]: Easy goals and/or enemies, only one mission randomly chosen from several possible missions (Default is all missions in random order)
@@ -29,7 +30,7 @@ function init()
 	healthDiagnostic = false
 	defaultGameTimeLimitInMinutes = 30	--final: 30 (lowered for test) Drop time limit: short missions, inherent time limits
 	repeatExitBoundary = 100
-	setVariations()
+	setSettings()
 	setConstants()	--missle type names, template names and scores, deployment directions, player ship names, etc.
 	local universeCreateRetryCount = 0
 	repeat
@@ -121,7 +122,7 @@ function triggerDoomsday()
 		nextPlot = doomsday
 	end
 end
-function setVariations()
+function setSettings()
 	if string.find(getScenarioSetting(),"Easy") then
 		difficulty = .5
 		adverseEffect = .999
@@ -132,7 +133,7 @@ function setVariations()
 		adverseEffect = .99
 		coolant_loss = .9999
 		coolant_gain = .0001
-	else
+	elseif string.find(getScenarioSetting(),"Normal") then
 		difficulty = 1		--default (normal)
 		adverseEffect = .995
 		coolant_loss = .99995
