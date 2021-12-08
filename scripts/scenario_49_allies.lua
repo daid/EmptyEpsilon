@@ -123,6 +123,7 @@ function triggerDoomsday()
 	end
 end
 function setSettings()
+	difficulty = 1 --default (normal)
 	if string.find(getScenarioSetting("Enemies"),"Easy") then
 		difficulty = .5
 		adverseEffect = .999
