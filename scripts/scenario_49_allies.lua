@@ -123,28 +123,28 @@ function triggerDoomsday()
 	end
 end
 function setSettings()
-	if string.find(getScenarioSetting(),"Easy") then
+	if string.find(getScenarioSetting("Enemies"),"Easy") then
 		difficulty = .5
 		adverseEffect = .999
 		coolant_loss = .99999
 		coolant_gain = .01
-	elseif string.find(getScenarioSetting(),"Hard") then
+	elseif string.find(getScenarioSetting("Enemies"),"Hard") then
 		difficulty = 2
 		adverseEffect = .99
 		coolant_loss = .9999
 		coolant_gain = .0001
-	elseif string.find(getScenarioSetting(),"Normal") then
+	elseif string.find(getScenarioSetting("Enemies"),"Normal") then
 		difficulty = 1		--default (normal)
 		adverseEffect = .995
 		coolant_loss = .99995
 		coolant_gain = .001
 	end
-	if string.find(getScenarioSetting(),"One") then
+	if string.find(getScenarioSetting("Enemies"),"One") then
 		onlyOneMission = true
 	else
 		onlyOneMission = false
 	end
-	if string.find(getScenarioSetting(),"Timed") then
+	if string.find(getScenarioSetting("Enemies"),"Timed") then
 		playWithTimeLimit = true
 		gameTimeLimit = defaultGameTimeLimitInMinutes*60		
 		plotTimed = timedGame
