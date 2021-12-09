@@ -267,7 +267,7 @@ template:setHull(100)
 template:setShields(250)
 --Reputation Score: 35
 template:setSpeed(20, 1.5, 3)
-template:setDockClasses("Exuari")
+template:setDockClasses(_("class", "Exuari"))
 template:setSharesEnergyWithDocked(true)
 template:setRepairDocked(true)
 template:setRestocksMissilesDocked(true)
