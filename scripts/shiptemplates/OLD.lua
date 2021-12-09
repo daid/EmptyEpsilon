@@ -384,7 +384,7 @@ template:setHull(100)
 template:setShields(2500)
 template:setSpeed(20, 1.5, 3)
 template:setJumpDrive(true)
-template:setDockClasses("Starfighter", "Frigate", "Corvette")
+template:setDockClasses(_("class", "Starfighter"), _("class", "Frigate"), _("class", "Corvette"))
 template:setSharesEnergyWithDocked(true)
 
 variation = template:copy("Ender"):setType("playership"):setLocaleName(_("playerShip", "Ender"))
