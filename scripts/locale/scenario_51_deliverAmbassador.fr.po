@@ -234,7 +234,7 @@ msgstr ""
 
 #: scripts/scenario_51_deliverAmbassador.lua:350
 msgid "Mob Action"
-msgstr "Temps restant"
+msgstr "Temps restant :"
 
 #: scripts/scenario_51_deliverAmbassador.lua:434
 msgid ""
@@ -508,9 +508,7 @@ msgstr "Bienvenue dans notre charmante petite station."
 #, lua-format
 msgctxt "classicComms"
 msgid "Do you have spare homing missiles for us? (%d rep each)"
-msgstr ""
-"Auriez-vous des missiles à tête chercheuse de rechange pour nous ? (%d rép "
-"chacun)"
+msgstr "Auriez-vous des homing missiles pour nous ? (%d rép chacun)"
 
 #: scripts/scenario_51_deliverAmbassador.lua:922
 #, lua-format

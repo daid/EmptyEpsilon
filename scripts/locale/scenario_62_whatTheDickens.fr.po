@@ -503,9 +503,8 @@ msgid ""
 "Return to Somerset in %s and prepare for three ghostly visits"
 msgstr ""
 "[Jacob Marley]\n"
-"Avoir vaincu les Kraylors vous donne une idée de ce qui vous attend. "
-"Retournez à Somerset en secteur %s et préparez-vous pour trois visites "
-"fantomatiques..."
+"Vaincre ces Kraylors vous a donné une idée de ce qui vous attend. Retournez "
+"à Somerset en secteur %s et préparez-vous pour trois visites fantomatiques..."
 
 #: scripts/scenario_62_whatTheDickens.lua:731
 #, lua-format
