@@ -297,12 +297,12 @@ end
 -- Returns the coordinates for the top-left of the sector: x,y
 function sectorToXY(sector)
   local sectorsize = 20000
-  local alphaPart, intPart, x, y
+  local intPart, x, y
   -- Y axis is complicated
   if sector:sub(2,2):match('[A-Za-z]') then
     -- Case with two letters
-    a1 = sector:byte(1,1)
-    a2 = sector:byte(2,2)
+    local a1 = sector:byte(1,1)
+    local a2 = sector:byte(2,2)
     intPart = tonumber(sector:sub(3,-1))
     if a1 >= 97 then -- 97 is ascii 'a'
       -- Case with two lowercase letters (zz10) counting down towards the North
@@ -313,7 +313,7 @@ function sectorToXY(sector)
     end
   else
     -- Case with just one letter (A9/a9)
-    alphaPart = sector:sub(1,1):upper():byte()
+    local alphaPart = sector:sub(1,1):upper():byte()
     intPart = tonumber(sector:sub(2,-1))
     y = (alphaPart - 70) * sectorsize -- 70 is ascii 'F'
   end
