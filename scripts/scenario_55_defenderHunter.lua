@@ -18,14 +18,16 @@
 --- Version 9 - Oct2020
 ---
 -- Type: Replayable Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
--- Variation[Timed Defender]: Victory if home station survives after 30 minutes
--- Variation[Timed Hunter]: Victory if target enemy base destroyed in 30 minutes
--- Variation[Easy Timed Defender]: Easy goals and/or enemies, victory if home station survives after 30 minutes
--- Variation[Easy Timed Hunter]: Easy goals and/or enemies, victory if target enemy base destroyed in 30 minutes
--- Variation[Hard Timed Defender]: Hard goals and/or enemies, victory if home station survives after 30 minutes
--- Variation[Hard Timed Hunter]: Hard goals and/or enemies, victory if target enemy base destroyed in 30 minutes
+-- Setting[Settings]: Configures time/goal/the amount of enemies spawned in the scenario.
+-- Settings[Easy]: Easy goals and/or enemies.
+-- Settings[Normal|Default]: Normal goals and/or enemies.
+-- Settings[Hard]: Hard goals and/or enemies.
+-- Settings[Timed Defender]: Victory if home station survives after 30 minutes.
+-- Settings[Timed Hunter]: Victory if target enemy base destroyed in 30 minutes.
+-- Settings[Easy Timed Defender]: Easy goals and/or enemies, victory if home station survives after 30 minutes.
+-- Settings[Easy Timed Hunter]: Easy goals and/or enemies, victory if target enemy base destroyed in 30 minutes.
+-- Settings[Hard Timed Defender]: Hard goals and/or enemies, victory if home station survives after 30 minutes.
+-- Settings[Hard Timed Hunter]: Hard goals and/or enemies, victory if target enemy base destroyed in 30 minutes.
 
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
@@ -68,7 +70,7 @@ function init()
 	wfv = "nowhere"		--wolf fence value - used for debugging
 	plot_1_diagnostic = false
 	plot_2_diagnostic = false
-	setVariations()
+	setSettings()
 	setMovingAsteroids()
 	setMovingNebulae()
 	setWormArt()
@@ -448,14 +450,14 @@ function setConstants()
 	table.insert(plot4choices,repairBountyDelay)
 	table.insert(plot4choices,insertAgentDelay)
 end
-function setVariations()
+function setSettings()
 --translate variations into a numeric difficulty value
-	if string.find(getScenarioVariation(),"Easy") then
+	if string.find(getScenarioSetting("Settings"),"Easy") then
 		difficulty = .5
 		adverseEffect = .999
 		coolant_loss = .99999
 		coolant_gain = .005
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting("Settings"),"Hard") then
 		difficulty = 2
 		adverseEffect = .99
 		coolant_loss = .9999
@@ -467,7 +469,7 @@ function setVariations()
 		coolant_gain = .001
 	end
 	gameTimeLimit = 0
-	if string.find(getScenarioVariation(),"Timed") then
+	if string.find(getScenarioSetting("Settings"),"Timed") then
 		timedIntelligenceInterval = 200
 		playWithTimeLimit = true
 		gameTimeLimit = 30*60		
@@ -8858,7 +8860,7 @@ end
 function timedGame(delta)
 	gameTimeLimit = gameTimeLimit - delta
 	if gameTimeLimit < 0 then
-		if string.find(getScenarioVariation(),"Defender") then
+		if string.find(getScenarioSetting("Settings"),"Defender") then
 			missionVictory = true
 			endStatistics()
 			victory("Human Navy")
@@ -10661,7 +10663,7 @@ function endStatistics()
 		else
 			rank = _("msgMainscreen", "Admiral")
 		end
-		if string.find(getScenarioVariation(),"Hunter") then
+		if string.find(getScenarioSetting("Settings"),"Hunter") then
 			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Target Enemy Base Survival Rank: %s"), rank)
 		else
 			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Home Base Destruction Rank: %s"), rank)
