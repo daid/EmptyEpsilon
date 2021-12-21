@@ -17,7 +17,7 @@ require("utils.lua")
 -------------------------------
 function init()
 	wfv = "nowhere"		--wolf fence value - used for debugging
-	setVariations()
+	setSettings()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
 	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
@@ -223,7 +223,7 @@ function pickCoordinate(coordinateArrayX,coordinateArrayY)
 	end
 	return rx, ry
 end
-function setVariations()
+function setSettings()
 --translate variations into a numeric difficulty value
 	if string.find(getScenarioSetting("Enemies"),"Easy") then
 		difficulty = .5
