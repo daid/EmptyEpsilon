@@ -67,6 +67,7 @@ msgstr ""
 "Auteur : Fouindor (révision par capt-t, oznogon)"
 
 #: scripts/scenario_81_pvp.lua:90
+msgctxt "goal-incCall"
 msgid ""
 "Captain, it seems that the Kraylor are moving to take the Shangri-La station "
 "in sector F5!\n"
@@ -84,6 +85,7 @@ msgstr ""
 "Bonne chance et soyez prudents."
 
 #: scripts/scenario_81_pvp.lua:99
+msgctxt "goal-incCall"
 msgid ""
 "Greetings, Crusader.\n"
 "\n"
@@ -103,25 +105,30 @@ msgstr ""
 "transports et nettoyez toute opposition ennemie !"
 
 #: scripts/scenario_81_pvp.lua:130
+msgctxt "situationReport-comms"
 msgid "Here's the latest news from the front."
 msgstr "Voici les dernières nouvelles du front."
 
 #: scripts/scenario_81_pvp.lua:131
 #, lua-format
+msgctxt "situationReport-comms"
 msgid "Human dominance: %d"
 msgstr "Domination des Humains : %d"
 
 #: scripts/scenario_81_pvp.lua:132
 #, lua-format
+msgctxt "situationReport-comms"
 msgid "Kraylor dominance: %d"
 msgstr "Domination des Kraylors : %d"
 
 #: scripts/scenario_81_pvp.lua:133
 #, lua-format
+msgctxt "situationReport-comms"
 msgid "Time elapsed: %.0f"
 msgstr "Temps écoulé : %.0f"
 
 #: scripts/scenario_81_pvp.lua:143
+msgctxt "station-comms"
 msgid ""
 "Your faction's militia commander picks up:\n"
 "\n"
@@ -132,10 +139,12 @@ msgstr ""
 "Que pouvons-nous faire pour vous, capitaine ?"
 
 #: scripts/scenario_81_pvp.lua:147
+msgctxt "situationReport-comms"
 msgid "Give us a status report."
 msgstr "Faites-nous un rapport de la situation."
 
 #: scripts/scenario_81_pvp.lua:161
+msgctxt "station-comms"
 msgid ""
 "A dispatcher responds:\n"
 "\n"
@@ -147,6 +156,7 @@ msgstr ""
 "vous amarrer à notre station."
 
 #: scripts/scenario_81_pvp.lua:165
+msgctxt "station-comms"
 msgid ""
 "A dispatcher responds:\n"
 "\n"
@@ -157,19 +167,23 @@ msgstr ""
 "Salutations, capitaine. Que pouvons-nous faire pour vous ?"
 
 #: scripts/scenario_81_pvp.lua:171
+msgctxt "situationReport-comms"
 msgid "I need a status report."
 msgstr "J'ai besoin d'un rapport de situation."
 
 #: scripts/scenario_81_pvp.lua:178
+msgctxt "reinforcements-comms"
 msgid "Send in more troops. (100 reputation)"
 msgstr "Envoyez plus de troupes. (100 rép.)"
 
 #: scripts/scenario_81_pvp.lua:181 scripts/scenario_81_pvp.lua:203
 #: scripts/scenario_81_pvp.lua:233
+msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
 
 #: scripts/scenario_81_pvp.lua:184
+msgctxt "reinforcements-comms"
 msgid ""
 "Aye, Captain. We've deployed a squad with fighter escort to support the "
 "assault on Shangri-La."
@@ -178,10 +192,12 @@ msgstr ""
 "escorte de chasseurs pour soutenir l'assaut sur Shangri-La."
 
 #: scripts/scenario_81_pvp.lua:200
+msgctxt "reinforcements-comms"
 msgid "We need some space-based firepower. (150 reputation)"
 msgstr "Nous avons besoin d'une puissance de feu spatiale. (150 rép.)"
 
 #: scripts/scenario_81_pvp.lua:206
+msgctxt "reinforcements-comms"
 msgid ""
 "Confirmed. We've dispatched a strike wing to support space superiority "
 "around Shangri-La."
@@ -190,19 +206,23 @@ msgstr ""
 "supériorité spatiale autour de Shangri-La."
 
 #: scripts/scenario_81_pvp.lua:214
+msgctxt "ammo-comms"
 msgid "We need supplies."
 msgstr "Nous avons besoin de nous réapprovisionner."
 
 #: scripts/scenario_81_pvp.lua:217
+msgctxt "shipEnemy-comms"
 msgid "We'll bring your destruction!"
 msgstr "Nous allons vous détruire !"
 
 #: scripts/scenario_81_pvp.lua:226
 #, lua-format
+msgctxt "ammo-comms"
 msgid "(%d rep each)"
 msgstr "(%d rép chacun)"
 
 #: scripts/scenario_81_pvp.lua:229
+msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré pour cette action."
 
@@ -211,56 +231,69 @@ msgid "Back"
 msgstr "Précédent"
 
 #: scripts/scenario_81_pvp.lua:250
+msgctxt "ammo-comms"
 msgid "What supplies do you need?"
 msgstr "De quoi avez-vous besoin ?"
 
 #: scripts/scenario_81_pvp.lua:255
+msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us?"
 msgstr "Auriez-vous des homing missiles pour nous ?"
 
 #: scripts/scenario_81_pvp.lua:256
+msgctxt "ammo-comms"
 msgid "Sorry, Captain, but you are fully stocked with homing missiles."
 msgstr "Désolé, capitaine, mais vous êtes déjà au max en homing missiles."
 
 #: scripts/scenario_81_pvp.lua:257
+msgctxt "ammo-comms"
 msgid "We've replenished your homing missile supply."
 msgstr "Nous avons reconstitué votre stock de homing missiles."
 
 #: scripts/scenario_81_pvp.lua:263
+msgctxt "ammo-comms"
 msgid "Please re-stock our mines."
 msgstr "Merci de réapprovisionner notre stock de mines."
 
 #: scripts/scenario_81_pvp.lua:264
+msgctxt "ammo-comms"
 msgid "Captain, you already have all the mines you can fit in that ship."
 msgstr ""
 "Capitaine, vous avez déjà toutes les mines que vous pouvez stocker dans ce "
 "vaisseau."
 
 #: scripts/scenario_81_pvp.lua:265
+msgctxt "ammo-comms"
 msgid "These mines are yours."
 msgstr "Ces mines sont à vous."
 
 #: scripts/scenario_81_pvp.lua:271
+msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr "Avez-vous des missiles nucléaires nukes ?"
 
 #: scripts/scenario_81_pvp.lua:272
+msgctxt "ammo-comms"
 msgid "Your nukes are already charged and primed for destruction."
 msgstr "Vos nukes sont en capacité maximale et prêtes à servir !"
 
 #: scripts/scenario_81_pvp.lua:273
+msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargés au max et prêt à tout faire péter."
 
 #: scripts/scenario_81_pvp.lua:279
+msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr "Avez-vous des missiles EMP ?"
 
 #: scripts/scenario_81_pvp.lua:280
+msgctxt "ammo-comms"
 msgid "All storage for EMP missiles is already full, Captain."
 msgstr "Votre stock de missiles EMP est déjà plein, capitaine."
 
 #: scripts/scenario_81_pvp.lua:281
+msgctxt "ammo-comms"
 msgid ""
 "We've recalibrated the electronics and fitted you with all the EMP missiles "
 "you can carry."
@@ -269,14 +302,17 @@ msgstr ""
 "missiles EMP que vous pouvez transporter."
 
 #: scripts/scenario_81_pvp.lua:287
+msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI?"
 msgstr "Pouvez-vous nous réapprovisionner en HVLIs ?"
 
 #: scripts/scenario_81_pvp.lua:288
+msgctxt "ammo-comms"
 msgid "Sorry, Captain, but you are fully stocked with HVLIs."
 msgstr "Désolé, capitaine, mais vous êtes entièrement approvisionné en HVLIs."
 
 #: scripts/scenario_81_pvp.lua:289
+msgctxt "ammo-comms"
 msgid "We've replenished your HVLI supply."
 msgstr "Nous avons reconstitué votre stock de HVLIs."
 
