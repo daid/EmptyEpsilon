@@ -170,7 +170,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         for(const auto& info : ScenarioInfo::getScenarios(value))
             scenario_list->addEntry(info.name, info.filename);
         start_button->disable();
-        description_text->setText("Select a scenario...");
+        description_text->setText(tr("Select a scenario..."));
     });
     category_list->setSize(GuiElement::GuiSizeMax, 700);
 
