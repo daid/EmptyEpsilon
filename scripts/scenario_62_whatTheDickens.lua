@@ -1,14 +1,16 @@
 -- Name: What the Dickens
 -- Description: Patrol around the London area during Christmas. Bah! Humbug!
 -- Type: Mission
--- Variation[Easy]: Easy goals and/or enemies. Good for solo players, short handed crews or less experienced crews.
--- Variation[Hard]: Hard goals and/or enemies. Good for experienced crews looking for a challenge.
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Easy]: Easy goals and/or enemies. Good for solo players, short handed crews or less experienced crews.
+-- Enemies[Normal|Default]: Normal goals and/or enemies. Good for a normal crew.
+-- Enemies[Hard]: Hard goals and/or enemies. Good for experienced crews looking for a challenge.
 
 require("utils.lua")
 
 function init()
 	diagnostic = true
-	setVariations()
+	setSettings()
 	stationFaction = "Human Navy"
 	stationBedlam = SpaceStation():setTemplate("Small Station"):setFaction(stationFaction)
 	stationBedlam:setCallSign("Bedlam"):setPosition(27333, 54000)
@@ -270,10 +272,10 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 	end
 end
 
-function setVariations()
-	if string.find(getScenarioVariation(),"Easy") then
+function setSettings()
+	if string.find(getScenarioSetting("Enemies"),"Easy") then
 		difficulty = .5
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting("Enemies"),"Hard") then
 		difficulty = 2
 	else
 		difficulty = 1		--default (normal)
