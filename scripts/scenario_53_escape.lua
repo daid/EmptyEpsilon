@@ -4,10 +4,11 @@
 --- Mission consists of one ship with a full crew. Engineer and Science will be busy
 ---
 --- Version 4 Adds more activity for the weapons officer (6Apr2020)
--- Type: Mission
 -- Type: Replayable Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Easy]: Easy goals and/or enemies.
+-- Enemies[Normal|Default]: Normal goals and/or enemies.
+-- Enemies[Hard]: Hard goals and/or enemies.
 
 require("utils.lua")
 
@@ -224,9 +225,9 @@ function pickCoordinate(coordinateArrayX,coordinateArrayY)
 end
 function setVariations()
 --translate variations into a numeric difficulty value
-	if string.find(getScenarioVariation(),"Easy") then
+	if string.find(getScenarioSetting("Enemies"),"Easy") then
 		difficulty = .5
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting("Enemies"),"Hard") then
 		difficulty = 2
 	else
 		difficulty = 1		--default (normal)
