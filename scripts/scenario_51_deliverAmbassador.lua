@@ -7,8 +7,11 @@
 ---
 --- Version 4 - 
 -- Type: Mission
--- Variation[Hard]: More enemies
--- Variation[Easy]: Fewer enemies
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Easy]: Fewer enemies.
+-- Enemies[Normal|Default]: Normal amount of enemies.
+-- Enemies[Hard]: More enemies.
+
 
 require("utils.lua")
 
@@ -51,7 +54,7 @@ function init()
 	stationPangora:setPosition(72340, -23554):setCallSign("Pangora"):setDescription(_("scienceDescription-station", "Major military installation"))
 	-- Give out some initial reputation points. Give more for easier difficulty levels
 	stationFranklin:addReputationPoints(50.0)
-	if getScenarioVariation() ~= "Hard" then
+	if getScenarioSetting("Enemies") ~= "Hard" then
 		stationFranklin:addReputationPoints(100.0)
 	end
 	-- Create some asteroids and nebulae
@@ -69,12 +72,12 @@ function init()
 	kraylorChaser1 = CpuShip():setTemplate("Phobos T3"):setFaction("Kraylor"):setPosition(24000,18200):setHeading(270)
 	kraylorChaser1:orderAttack(player):setScanned(true)
 	table.insert(kraylorChaserList,kraylorChaser1)
-	if getScenarioVariation() ~= "Easy" then
+	if getScenarioSetting("Enemies") ~= "Easy" then
 		kraylorChaser2 = CpuShip():setTemplate("Phobos T3"):setFaction("Kraylor"):setPosition(24000,18600):setHeading(270)
 		kraylorChaser2:orderFlyFormation(kraylorChaser1,0,400):setScanned(true)
 		table.insert(kraylorChaserList,kraylorChaser2)
 	end
-	if getScenarioVariation() == "Hard" then
+	if getScenarioSetting("Enemies") == "Hard" then
 		kraylorChaser3 = CpuShip():setTemplate("Phobos T3"):setFaction("Kraylor"):setPosition(24000,17800):setHeading(270)
 		kraylorChaser3:orderFlyFormation(kraylorChaser1,0,-400):setScanned(true)
 		table.insert(kraylorChaserList,kraylorChaser3)
@@ -395,7 +398,7 @@ function balindorInterceptor(delta)
 		kraylorBalindorInterceptor4 = CpuShip():setTemplate("Piranha F8"):setFaction("Kraylor"):setPosition(x+ao+fo,y-ao):setHeading(225)
 		kraylorBalindorInterceptor4:orderFlyFormation(kraylorBalindorInterceptor3,-fo,0)
 		table.insert(kraylorBalindorInterceptorList,kraylorBalindorInterceptor4)
-		if getScenarioVariation() ~= "Easy" then
+		if getScenarioSetting("Enemies") ~= "Easy" then
 			kraylorBalindorInterceptor5 = CpuShip():setTemplate("Piranha F8"):setFaction("Kraylor"):setPosition(x-ao,y+ao+fo):setHeading(45)
 			kraylorBalindorInterceptor5:orderFlyFormation(kraylorBalindorInterceptor1,0,fo)
 			table.insert(kraylorBalindorInterceptorList,kraylorBalindorInterceptor5)
@@ -409,7 +412,7 @@ function balindorInterceptor(delta)
 			kraylorBalindorInterceptor8:orderFlyFormation(kraylorBalindorInterceptor3,-fo,-fo)
 			table.insert(kraylorBalindorInterceptorList,kraylorBalindorInterceptor8)
 		end
-		if getScenarioVariation() == "Hard" then
+		if getScenarioSetting("Enemies") == "Hard" then
 			kraylorBalindorInterceptor9 = CpuShip():setTemplate("Piranha F8"):setFaction("Kraylor"):setPosition(x-ao,y+ao+fo*2):setHeading(45)
 			kraylorBalindorInterceptor9:orderFlyFormation(kraylorBalindorInterceptor1,0,fo*2)
 			table.insert(kraylorBalindorInterceptorList,kraylorBalindorInterceptor9)
@@ -440,7 +443,7 @@ function ambassadorAboard(delta)
 		ningling = SpaceStation():setTemplate("Large Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
 		ningling:setPosition(12200,-62600):setCallSign("Ningling")
 		stationFranklin:addReputationPoints(25.0)
-		if getScenarioVariation() ~= "Hard" then
+		if getScenarioSetting("Enemies") ~= "Hard" then
 			stationFranklin:addReputationPoints(25.0)
 		end
 		plot1 = gotoNingling
@@ -480,7 +483,7 @@ function ningAttack(delta)
 --		kraylorNing6 = CpuShip():setTemplate("Stalker Q7"):setFaction("Kraylor"):setPosition(x+fo*2,y+ao):setHeading(0)
 --		kraylorNing6:orderFlyFormation(kraylorNing4,fo*2,0)
 --		table.insert(kraylorNingList,kraylorNing6)
-		if getScenarioVariation() ~= "Easy" then
+		if getScenarioSetting("Enemies") ~= "Easy" then
 			kraylorNing7 = CpuShip():setTemplate("Stalker Q7"):setFaction("Kraylor"):setPosition(x-fo,y-ao-fo*2):setHeading(180)
 			kraylorNing7:orderFlyFormation(kraylorNing1,-fo,-fo*2)
 			table.insert(kraylorNingList,kraylorNing7)
@@ -494,7 +497,7 @@ function ningAttack(delta)
 --			kraylorNing10:orderFlyFormation(kraylorNing4,fo,fo*2)
 --			table.insert(kraylorNingList,kraylorNing10)
 		end
-		if getScenarioVariation() == "Hard" then
+		if getScenarioSetting("Enemies") == "Hard" then
 			kraylorNing11 = CpuShip():setTemplate("Stalker Q7"):setFaction("Kraylor"):setPosition(x-fo,y-ao+fo*2):setHeading(180)
 			kraylorNing11:orderFlyFormation(kraylorNing1,-fo,fo*2)
 			table.insert(kraylorNingList,kraylorNing11)
@@ -545,7 +548,7 @@ function ningWait(delta)
 	waitNing1 = CpuShip():setTemplate("MT52 Hornet"):setFaction("Kraylor"):setPosition(x+ao,y+ao):setHeading(315)
 	waitNing1:orderAttack(player)
 	table.insert(waitNingList,waitNing1)
-	if getScenarioVariation() ~= "Easy" then
+	if getScenarioSetting("Enemies") ~= "Easy" then
 		waitNing2 = CpuShip():setTemplate("MU52 Hornet"):setFaction("Kraylor"):setPosition(x+ao+fo,y+ao):setHeading(315)
 		waitNing2:orderFlyFormation(waitNing1,fo,0)
 		table.insert(waitNingList,waitNing2)
@@ -553,7 +556,7 @@ function ningWait(delta)
 		waitNing3:orderFlyFormation(waitNing1,0,fo)
 		table.insert(waitNingList,waitNing3)
 	end
-	if getScenarioVariation() == "Hard" then
+	if getScenarioSetting("Enemies") == "Hard" then
 		waitNing4 = CpuShip():setTemplate("Adder MK5"):setFaction("Kraylor"):setPosition(x+ao+fo*2,y+ao):setHeading(315)
 		waitNing4:orderFlyFormation(waitNing1,fo*2,0)
 		table.insert(waitNingList,waitNing4)
@@ -596,7 +599,7 @@ function getFromNingling(delta)
 		ningling:sendCommsMessage(player, _("audio-incCall", "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021"))
 		player:addToShipLog(_("audio-shipLog", "[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!"),"Yellow")
 		player:addToShipLog(_("upgrade-shipLog", "Reconfigured beam weapons: pointed one forward and increased its range and narrowed its focus"),"Magenta")
-		if getScenarioVariation() ~= "Hard" then
+		if getScenarioSetting("Enemies") ~= "Hard" then
 			player:setImpulseMaxSpeed(75)
 			player:addToShipLog(_("upgrade-shipLog", "Also increased the top speed of your impulse engine"),"Magenta")
 		end
@@ -768,7 +771,7 @@ function lastSabotage(delta)
 		goltin3 = CpuShip():setTemplate("Stalker Q7"):setFaction("Kraylor"):setPosition(x+ao,y):setHeading(270)
 		goltin3:orderAttack(player)
 		table.insert(goltinList,goltin3)
-		if getScenarioVariation() ~= "Easy" then
+		if getScenarioSetting("Enemies") ~= "Easy" then
 			goltin4 = CpuShip():setTemplate("Stalker R7"):setFaction("Kraylor"):setPosition(x+ao+fo,y+ao-fo):setHeading(315)
 			goltin4:orderAttack(player)
 			table.insert(goltinList,goltin4)
@@ -779,7 +782,7 @@ function lastSabotage(delta)
 			goltin6:orderAttack(player)
 			table.insert(goltinList,goltin6)
 		end
-		if getScenarioVariation() == "Hard" then
+		if getScenarioSetting("Enemies") == "Hard" then
 			goltin7 = CpuShip():setTemplate("Nirvana R5"):setFaction("Kraylor"):setPosition(x+ao-fo,y+ao+fo):setHeading(315)
 			goltin7:orderAttack(player)
 			table.insert(goltinList,goltin7)
