@@ -29,19 +29,19 @@ function init()
     Player:setWeaponStorageMax("Mine", 0)
 
     -- Create a "Technical Officer" entity hidden in sector Z81 to talk to Relay and prompt the Captain to give the order to return to Central Command. The position of this ship in relation to the station Nirvana was intended to serve as a sort of timer for the inspection job.
-    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign(_("callsign", "Technical Officer")):setPosition(1530000, 411000):orderIdle()
+    Technical_Officer = CpuShip():setFaction("Human Navy"):setTemplate("Flavia"):setCallSign(_("callsign-ship", "Technical Officer")):setPosition(1530000, 411000):orderIdle()
     Technical_Officer:setCommsScript("") -- Disable the comms script for the Technical Officer station (though really, they should never find it all the way out in sector Z81).
     -- Create a station called "Nirvana" for "Technical Officer" to approach. Surplus to requirements now but a good example of the crazy stuff a newbie might try.
     Nirvana = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(1530000, 412000):setCallSign("Nirvana")
 
-    EOS_Station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(60500, 42100):setCallSign(_("callsign", "E.O.S. scope"))
+    EOS_Station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setPosition(60500, 42100):setCallSign(_("callsign-station", "E.O.S. scope"))
     EOS_Station:setCommsScript("") -- Disable the comms script for the EOS Scope station.
-    Midspace_Station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(34643, 39301):setCallSign(_("callsign",  "Midspace Support"))
-    Central_Command = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setPosition(14500, 19100):setCallSign(_("callsign", "Central Command"))
+    Midspace_Station = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setPosition(34643, 39301):setCallSign(_("callsign-station",  "Midspace Support"))
+    Central_Command = SpaceStation():setTemplate("Huge Station"):setFaction("Human Navy"):setPosition(14500, 19100):setCallSign(_("callsign-station", "Central Command"))
     Central_Command:setCommsFunction(commsCentralCommandStation)
 
-    Kraylor_Eline = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor"):setPosition(79200, 38800):setCallSign(_("callsign", "K-Endline"))
-    Kraylor_Mline = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(101830, 26725):setCallSign(_("callsign", "K-Midline"))
+    Kraylor_Eline = SpaceStation():setTemplate("Small Station"):setFaction("Kraylor"):setPosition(79200, 38800):setCallSign(_("callsign-station", "K-Endline"))
+    Kraylor_Mline = SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(101830, 26725):setCallSign(_("callsign-station", "K-Midline"))
 
     Science_Galileo = SpaceStation():setTemplate("Medium Station"):setFaction("Arlenians"):setPosition(11100, -49150):setCallSign("Galileo")
 
