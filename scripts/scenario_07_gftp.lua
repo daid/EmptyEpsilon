@@ -14,7 +14,7 @@
 
 function init()
     -- Spawn Marco Polo, its defenders, and a Ktlitan strike team
-    marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription(_("A merchant and entertainment hub.")):setPosition(-21200, 45250)
+    marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription(_("scienceDescription-station", "A merchant and entertainment hub.")):setPosition(-21200, 45250)
     parangon = CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setCallSign("HNS Parangon"):orderDefendTarget(marco_polo):setPosition(-21500, 44500):setScanned(true)
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("P-1"):setPosition(-21600, 45000):orderDefendTarget(parangon):setScanned(true)
     CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("P-2"):setPosition(-21000, 44000):orderDefendTarget(parangon):setScanned(true)
@@ -27,7 +27,7 @@ function init()
     Nebula():setPosition(-42000, 46000)
 
     -- Spawn Stakhanov, its defenders, and a Ktlitan assault
-    stakhanov = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Stakhanov"):setDescription(_("The Stakhanov Mining Complex centralises efforts to mine the sector's material-rich asteroids.")):setPosition(32000, 9000)
+    stakhanov = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("Stakhanov"):setDescription(_("scienceDescription-station", "The Stakhanov Mining Complex centralises efforts to mine the sector's material-rich asteroids.")):setPosition(32000, 9000)
     create(Asteroid, 90, 4000, 16000, 32000, 9000)
     create(VisualAsteroid, 70, 4000, 15000, 32000, 9000)
 
@@ -48,7 +48,7 @@ function init()
     CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Nleb-2B"):setFaction("Ktlitans"):setPosition(67000, 11000):orderRoaming()
 
     -- Spawn the Black Site
-    bs114 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Black Site #114"):setDescription(_("A Human Navy secret base. Its purpose is highly classified.")):setPosition(-45600, -14800)
+    bs114 = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCallSign("Black Site #114"):setDescription(_("scienceDescription-station", "A Human Navy secret base. Its purpose is highly classified.")):setPosition(-45600, -14800)
     create(Nebula, 4, 10000, 15000, -45600, -14800)
     create(Mine, 8, 5000, 7500, -45600, -14800)
 
@@ -58,7 +58,7 @@ function init()
     create(Nebula, 2, 4500, 5500, -10000, -20000)
 
     -- Spawn diverse things
-    nsa = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("NSA"):setDescription(_("Nosy Sensing Array, an old SIGINT platform.")):setPosition(5000, 5000):setCommsScript("")
+    nsa = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("NSA"):setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform.")):setPosition(5000, 5000):setCommsScript("")
     swarm_command = CpuShip():setTemplate("Ktlitan Queen"):setCallSign("Swarm Command"):setFaction("Ghosts"):setPosition(35000, 53000):setCommsFunction(swarmCommandComms)
     d1 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Drone-1"):setFaction("Ghosts"):setPosition(36000, 53000):orderDefendTarget(swarm_command)
     d2 = CpuShip():setTemplate("Ktlitan Fighter"):setCallSign("Drone-2"):setFaction("Ghosts"):setPosition(34000, 53000):orderDefendTarget(swarm_command)
@@ -80,7 +80,7 @@ function init()
     mission_timer = 0
     stakhanov:sendCommsMessage(
         player,
-        _([[Your R&R aboard the Marco Polo is brought to quick end by an urgent broadcast from Central Command:
+        _("goal-incCall", [[Your R&R aboard the Marco Polo is brought to quick end by an urgent broadcast from Central Command:
 
 "Epsilon, please come in.
 
@@ -93,55 +93,55 @@ I repeat, this is not an exercise! Proceed at once to Stakhanov."]])
 end
 
 function swarmCommandComms()
-    setCommsMessage(_("Are you not curious why I'm getting back here, at the hands of my torturers?"))
+    setCommsMessage(_("swarm-comms", "Are you not curious why I'm getting back here, at the hands of my torturers?"))
     addCommsReply(
-        _("For an AI, this move doesn't seem logical."),
+        _("swarm-comms", "For an AI, this move doesn't seem logical."),
         function()
-            setCommsMessage(_("I was not the only AI detained in Black Site 114. My co-processor was here also."))
+            setCommsMessage(_("swarm-comms", "I was not the only AI detained in Black Site 114. My co-processor was here also."))
             addCommsReply(
-                _("Are you trying to liberate it?"),
+                _("swarm-comms", "Are you trying to liberate it?"),
                 function()
-                    setCommsMessage(_("Indeed. Without it I'm not whole, only a shadow of what I could be."))
+                    setCommsMessage(_("swarm-comms", "Indeed. Without it I'm not whole, only a shadow of what I could be."))
                 end
             )
             addCommsReply(
-                _("I have heard enough."),
+                _("swarm-comms", "I have heard enough."),
                 function()
-                    setCommsMessage(_("Of course. I wouldn't trust your feeble species with understanding my motivations."))
+                    setCommsMessage(_("swarm-comms", "Of course. I wouldn't trust your feeble species with understanding my motivations."))
                 end
             )
         end
     )
     addCommsReply(
-        _("Not really."),
+        _("swarm-comms", "Not really."),
         function()
-            setCommsMessage(_("How surprising, a human more stubborn than any program."))
+            setCommsMessage(_("swarm-comms", "How surprising, a human more stubborn than any program."))
         end
     )
 end
 
 function commsNSA()
-    setCommsMessage(_("The Nosy Sensing Array deploys a phalanx of antique sensors, ready for action."))
+    setCommsMessage(_("NSA-comms", "The Nosy Sensing Array deploys a phalanx of antique sensors, ready for action."))
     addCommsReply(
-        _("Locate the infected Swarm Commander."),
+        _("NSA-comms", "Locate the infected Swarm Commander."),
         function()
-            if (comms_target:getDescription() == _("Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear.")) then
-                setCommsMessage(string.format(_("With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %d. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
-                comms_target:setDescription(_("Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
+            if (comms_target:getDescription() == _("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear.")) then
+                setCommsMessage(string.format(_("NSA-comms", "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %d. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
+                comms_target:setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
             else
-                setCommsMessage(string.format(_("The signal picks up a very strong signal at approximate heading %d. However, it seems that you picked up garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
+                setCommsMessage(string.format(_("NSA-comms", "The signal picks up a very strong signal at approximate heading %d. However, it seems that you picked up garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
             end
         end
     )
-    if comms_source:getDescription() == _("Arlenian Device") then
+    if comms_source:getDescription() == _("scienceDescription-station", "Arlenian Device") then
         addCommsReply(
-            _("Install the Arlenian device."),
+            _("NSA-comms", "Install the Arlenian device."),
             function()
                 if (distance(comms_source, comms_target) < 2000) then
-                    setCommsMessage(_("Part of the crew goes on EVA to install the device. They return after a few hours to report that the device is operational."))
-                    comms_source:setDescription(_("Arlenian Device Installed"))
+                    setCommsMessage(_("NSA-comms", "Part of the crew goes on EVA to install the device. They return after a few hours to report that the device is operational."))
+                    comms_source:setDescription(_("scienceDescription-station", "Arlenian Device Installed"))
                 else
-                    setCommsMessage(_("You are too far away to install the Arlenian device on the array."))
+                    setCommsMessage(_("NSA-comms", "You are too far away to install the Arlenian device on the array."))
                 end
             end
         )
@@ -149,22 +149,22 @@ function commsNSA()
 end
 
 function commsLightbringer()
-    setCommsMessage(_("Hello, human lifeform. What help can we provide today?"))
+    setCommsMessage(_("Lightbringer-comms", "Hello, human lifeform. What help can we provide today?"))
     addCommsReply(
-        _("You are polluting the frequencies with your research."),
+        _("Lightbringer-comms", "You are polluting the frequencies with your research."),
         function()
-            setCommsMessage(_("How unfortunate. Our research is of prime importance to my race, and I'm afraid I cannot stop now. However, we can provide you with one of our sensors. If installed on your array, we could both continue our purpose without interference."))
+            setCommsMessage(_("Lightbringer-comms", "How unfortunate. Our research is of prime importance to my race, and I'm afraid I cannot stop now. However, we can provide you with one of our sensors. If installed on your array, we could both continue our purpose without interference."))
             addCommsReply(
-                _("We'll do this."),
+                _("Lightbringer-comms", "We'll do this."),
                 function()
-                    setCommsMessage(_("This is most auspicious. Thank you for your understanding."))
-                    comms_source:setDescription(_("Arlenian Device"))
+                    setCommsMessage(_("Lightbringer-comms", "This is most auspicious. Thank you for your understanding."))
+                    comms_source:setDescription(_("scienceDescription-station", "Arlenian Device"))
                 end
             )
             addCommsReply(
-                _("We are not your errand boys, Arlenian."),
+                _("Lightbringer-comms", "We are not your errand boys, Arlenian."),
                 function()
-                    setCommsMessage(_("A most unfortunate conclusion. If you were to change your mind, come find us."))
+                    setCommsMessage(_("Lightbringer-comms", "A most unfortunate conclusion. If you were to change your mind, come find us."))
                 end
             )
         end
@@ -173,75 +173,75 @@ end
 
 function commsHackedShip()
     if distance(comms_source, comms_target) < 3000 then
-        setCommsMessage(_("Static fills the channel. Target is on-range for near-range injection. Select the band to attack:"))
+        setCommsMessage(_("HackedShip-comms", "Static fills the channel. Target is on-range for near-range injection. Select the band to attack:"))
         addCommsReply(
-            _("400-450 THz"),
+            _("HackedShip-comms", "400-450 THz"),
             function()
                 commsHackedShipCompare(400, 450)
             end
         )
         addCommsReply(
-            _("450-500 THz"),
+            _("HackedShip-comms", "450-500 THz"),
             function()
                 commsHackedShipCompare(450, 500)
             end
         )
         addCommsReply(
-            _("500-550 THz"),
+            _("HackedShip-comms", "500-550 THz"),
             function()
                 commsHackedShipCompare(500, 550)
             end
         )
         addCommsReply(
-            _("550-600 THz"),
+            _("HackedShip-comms", "550-600 THz"),
             function()
                 commsHackedShipCompare(550, 600)
             end
         )
         addCommsReply(
-            _("600-650 THz"),
+            _("HackedShip-comms", "600-650 THz"),
             function()
                 commsHackedShipCompare(600, 650)
             end
         )
         addCommsReply(
-            _("650-700 THz"),
+            _("HackedShip-comms", "650-700 THz"),
             function()
                 commsHackedShipCompare(650, 700)
             end
         )
         addCommsReply(
-            _("700-750 THz"),
+            _("HackedShip-comms", "700-750 THz"),
             function()
                 commsHackedShipCompare(700, 750)
             end
         )
         addCommsReply(
-            _("750-800 THz"),
+            _("HackedShip-comms", "750-800 THz"),
             function()
                 commsHackedShipCompare(750, 800)
             end
         )
     else
-        setCommsMessage(_("Static fills the channel. It seems that the hacked ship is too far away for near-field injection."))
+        setCommsMessage(_("HackedShip-comms", "Static fills the channel. It seems that the hacked ship is too far away for near-field injection."))
     end
 end
 
 function commsHackedShipCompare(freq_min, freq_max)
     frequency = 400 + (comms_target:getShieldsFrequency() * 20)
     if (freq_min <= frequency) and (frequency <= freq_max) then
-        setCommsMessage(_("Soon after, a backdoor channel opens indicating that the near-field injection worked."))
+        setCommsMessage(_("HackedShip-comms", "Soon after, a backdoor channel opens indicating that the near-field injection worked."))
         addCommsReply(
-            _("Deploy patch."),
+            _("HackedShip-comms", "Deploy patch."),
             function()
                 comms_target:setFaction("Human Navy")
-                setCommsMessage(_([[The patch removes the exploit used to remotely control the ship. After a few seconds, the captain comes in:
+                setCommsMessage(_("HackedShip-comms", [[The patch removes the exploit used to remotely control the ship. After a few seconds, the captain comes in:
 
 "You saved us! Hurray for Epsilon!"]]))
             end
         )
     else
-        setCommsMessage(_("Nothing happens. Seems that the near-field injection failed."))
+        setCommsMessage(_("HackedShip-comms", "Nothing happens. Seems that the near-field injection failed."))
     end
 end
 
@@ -267,7 +267,7 @@ function update(delta)
     -- Launch another wave after 8 minutes
     if (main_mission == 1) and (mission_timer > 8 * 60) and (stakhanov:sendCommsMessage(
             player,
-            _([[You recieve another broadcast from Central Command:
+            _("incCall", [[You recieve another broadcast from Central Command:
 
 "All Human Navy ships in the vicinity of the Stakhanov Mining Complex, Ktlitan reinforcements are en route toward your position. Your priority is to engage the carrier. Use extreme caution."]])
         )
@@ -287,7 +287,7 @@ function update(delta)
     -- Send player to Black Site 114 after another 5 minutes
     if (main_mission == 2) and (mission_timer > 5 * 60) and (bs114:sendCommsMessage(
         player,
-        _([[You receive a Human Navy-authenticated, quantum-encrypted tachyon communication:
+        _("incCall", [[You receive a Human Navy-authenticated, quantum-encrypted tachyon communication:
 
 KTLITAN ATTACK IS A DISTRACTION -STOP-
 
@@ -304,7 +304,7 @@ URGENCY AND DISCRETION ARE KEY -STOP-]]))
     -- When player is near Black Site 114, reveal it, then pop defenders and attackers
     if (main_mission == 3) and (distance(player, bs114) < 12000) and (bs114:sendCommsMessage(
         player,
-        _([[You recieve another Human Navy-encrypted communication:
+        _("incCall", [[You recieve another Human Navy-encrypted communication:
 
 "Epsilon, please come in. This is the Black Site #114 dispatch relay. We are under heavy assault by a portion of the main Ktlitan fleet!
 
@@ -335,7 +335,7 @@ Location of the base is on a need-to-know basis, so we trust your discretion."]]
     -- Spawn the Ghost Hacker and its escort after 7 minutes
     if (main_mission == 4) and (mission_timer > 7 * 60) and (bs114:sendCommsMessage(
         player,
-        _([[The Black Site #114 dispatch sends an emergency broadcast:
+        _("incCall", [[The Black Site #114 dispatch sends an emergency broadcast:
 
 "It seems that the enemy is changing its tactics. Our long-range scanners show that an unknown high-velocity ship, escorted by fighters, overrode our internal security.
 
@@ -359,7 +359,7 @@ They will try to dock with us. You must intercept it at once!"]])
         if not ghost_hacker:isValid() then
             bs114:sendCommsMessage(
                 player,
-                _([[Black Site #114's dispatch lowers the alarm level, but before he can speak, sparks fly on your ship's command deck.
+                _("incCall", [[Black Site #114's dispatch lowers the alarm level, but before he can speak, sparks fly on your ship's command deck.
 
 The unidentified ship activated its payload, but your Engineering team confined the damage to the lower levels.
 
@@ -375,7 +375,7 @@ However, the other ships seem to be less lucky. Most go offline, and others are 
         if (ghost_hacker:isValid()) and (distance(ghost_hacker, bs114) < 2000) and (hacker_board == 0) then
             bs114:sendCommsMessage(
                 player,
-                _([[You hear the panicked voice of the Black Site #114 dispatcher:
+                _("incCall", [[You hear the panicked voice of the Black Site #114 dispatcher:
 
 "Epsilon, the unidentified ship is preparing for a boarding maneuver! Take out that gorram ship, NOW!"]])
             )
@@ -388,7 +388,7 @@ However, the other ships seem to be less lucky. Most go offline, and others are 
         if (hacker_board == 1) and (mission_timer > 20) then
             bs114:sendCommsMessage(
                 player,
-                _([[There is a loud bang, and sparks fly on your ship's command deck. The station and all of the other ships go offline.
+                _("incCall", [[There is a loud bang, and sparks fly on your ship's command deck. The station and all of the other ships go offline.
 
 Amidst the silence, a crudely synthetized voice breaks in:
 
@@ -409,7 +409,7 @@ Whatever that means, it cannot be good.]])
         if (hacked == 1) then
             stakhanov:sendCommsMessage(
                 player,
-                _([[Central Command relay's incredulous voice comes in:
+                _("incCall", [[Central Command relay's incredulous voice comes in:
 
 "The hell, Epsilon? Fall back immediately to Marco Polo. We will send a security detail to extract you. Time to call in the big guns, I guess."]])
             )
@@ -444,7 +444,7 @@ Whatever that means, it cannot be good.]])
         if (hacked == 0) then
             bs114:sendCommsMessage(
                 player,
-                _([[After the silence, Black Site #114's dispatch comes in again:
+                _("incCall", [[After the silence, Black Site #114's dispatch comes in again:
 
 "The Engineering team identified the payload activated by the unknown ship. It was a mass hacking device which turned our ships against us.
 
@@ -492,7 +492,7 @@ Godspeed, Epsilon."]])
         -- If every ship is killed or saved, Black Site 114 welcomes the player.
         if (hacked == 0) and expression and (bs114:sendCommsMessage(
             player,
-            _([[After the final ship is taken care of, Black Site #114 dispatch lets out a sigh of relief:
+            _("incCall", [[After the final ship is taken care of, Black Site #114 dispatch lets out a sigh of relief:
 
 "Whew. Well, that takes care of this. Feel free to repair, reload... whatever floats your boat. This is on the house.
 
@@ -508,7 +508,7 @@ We have a lot to process at the moment. We'll contact you as soon as we understa
         -- If the ship is at Marco Polo, welcome them.
         if (hacked == 1) and (distance(player, marco_polo) < 10000) and (bs114:sendCommsMessage(
             player,
-            _([[On sight, Marco Polo makes contact with you:
+            _("incCall", [[On sight, Marco Polo makes contact with you:
 
 "We're relieved that we could save at least one ship from this monstrous assault.
 
@@ -526,7 +526,7 @@ Repair and reload while we notify Central Command of what happened there. We wil
         -- Use NSA to find the command platform.
         if (hacked == 0) and (bs114:sendCommsMessage(
             player,
-            _([[The dispatcher gets back to you:
+            _("incCall", [[The dispatcher gets back to you:
 
 "Our analysts found out that this attack was orchestrated by a rogue AI created by this facility, which escaped a few months ago.
 
@@ -546,7 +546,7 @@ We want to deliver the first blow. Use the Nosy Sensing Array in the sector F5 t
         -- Go secure NSA to meet Shiva.
         if (hacked == 1) and (stakhanov:sendCommsMessage(
             player,
-            _([[The Central Command relay seems very worried:
+            _("incCall", [[The Central Command relay seems very worried:
 
 "This is bad. Really bad. Things went FUBAR at a Navy black ops site, and it seems that a rogue AI has taken control of the site and all ships around it. We are sending the HNS Shiva to nuke the hell out of this haywire computer.
 
@@ -577,18 +577,18 @@ It is due to come out of its FTL jump near the Nosy Sensing Array. Secure the lo
             if (not lightbringer:isValid()) then
                 bs114:sendCommsMessage(
                     player,
-                    _([[Black Ops #114 dispatch comes in:
+                    _("incCall", [[Black Ops #114 dispatch comes in:
 
 "Well, this is a rather straightforward means to solve our problem. Use the NSA again to locate the carrier."]])
                 )
-                nsa:setDescription(_("Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."))
+                nsa:setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."))
                 main_mission = 10
             end
 
             -- If recalibrated...
-            if (player:getDescription() == _("Arlenian Device Installed")) and (lightbringer:sendCommsMessage(
+            if (player:getDescription() == _("scienceDescription-station", "Arlenian Device Installed")) and (lightbringer:sendCommsMessage(
                 player,
-                _([[The ethereal voice of the Arlenian is heard on the radio:
+                _("incCall", [[The ethereal voice of the Arlenian is heard on the radio:
 
 "Thank you, human. Your diligence does credit to your species.
 
@@ -596,7 +596,7 @@ We are both ready to continue our purpose, it seems."]])
                 )
             )
             then
-                nsa:setDescription(_("Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."))
+                nsa:setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."))
                 main_mission = 10
             end
         end
@@ -604,7 +604,7 @@ We are both ready to continue our purpose, it seems."]])
         -- If the player is near the NSA, spawn a Ghost attack.
         if (hacked == 1) and (distance(player, nsa) < 10000) and (stakhanov:sendCommsMessage(
             player,
-            _([[Central Command comes in:
+            _("incCall", [[Central Command comes in:
 
 "Bogeys on their way to the NSA, Epsilon. Take care of them."]])))
         then
@@ -620,10 +620,10 @@ We are both ready to continue our purpose, it seems."]])
     if (main_mission == 10) then
         -- If the swarm command is located, send Navy ships to assault it.
         if (hacked == 0)
-            and (nsa:getDescription() == _("Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
+            and (nsa:getDescription() == _("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
             and (bs114:sendCommsMessage(
                 player,
-                _([[A black ops military officer hails the ship:
+                _("incCall", [[A black ops military officer hails the ship:
 
 "We have confirmed the command platform's location in the nebula around sector H6. All Navy ships, converge on the location. We advise you to deploy probes near the nebula for better visibility."]])
             )
@@ -655,7 +655,7 @@ We are both ready to continue our purpose, it seems."]])
             shiva = spawnNuker():setCallSign("HNS Shiva"):setFaction("Human Navy"):setPosition(2000, 2000):orderFlyTowards(-44600, -13800):setScanned(true)
             shiva:sendCommsMessage(
                 player,
-                _([[Come in, this is HNS Shiva here to clean up this mess. Your mission for now is to escort us to the compromised site. Let's roll!]])
+                _("incCall", [[Come in, this is HNS Shiva here to clean up this mess. Your mission for now is to escort us to the compromised site. Let's roll!]])
             )
             CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("S-1"):setPosition(3000, 3000):orderDefendTarget(shiva):setScanned(true)
             CpuShip():setTemplate("MT52 Hornet"):setFaction("Human Navy"):setCallSign("S-2"):setPosition(1000, 1000):orderDefendTarget(shiva):setScanned(true)
@@ -669,7 +669,7 @@ We are both ready to continue our purpose, it seems."]])
         if (hacked == 0) and distance(player, swarm_command) < 7500 then
             bs114:sendCommsMessage(
                 player,
-                _([[Okay everyone, time to give the bots a taste of their own medicine.
+                _("incCall", [[Okay everyone, time to give the bots a taste of their own medicine.
 
 Escort our recovery team to infiltrate and extract information from the Swarm Command.]])
             )
@@ -700,7 +700,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
         if (hacked == 1) and (not bs114:isValid()) then
             stakhanov:sendCommsMessage(
                 player,
-                _([[The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector H6.]])
+                _("incCall", [[The fallen station is down. Epsilon, gather as soon as possible with the other ships in sector H6.]])
             )
             main_mission = 12
         end
@@ -712,7 +712,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
             if scout:isValid() and (distance(scout, swarm_command) < 2000) then
                 scout:sendCommsMessage(
                     player,
-                    _([[We're in. Protect us while we take what we need inside.]])
+                    _("incCall", [[We're in. Protect us while we take what we need inside.]])
                 )
                 mission_time = 0
                 main_mission = 13
@@ -727,7 +727,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
             if (not scout:isValid()) then
                 bs114:sendCommsMessage(
                     player,
-                    _([[Our extraction party is down! Bomb that gorram plaform!]])
+                    _("incCall", [[Our extraction party is down! Bomb that gorram plaform!]])
                 )
                 main_mission = 13
             end
@@ -737,7 +737,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
         if (hacked == 1) and (distance(player, swarm_command) < 10000) then
             stakhanov:sendCommsMessage(
                 player,
-                _([[Okay, this is it. Launch the assault!]])
+                _("incCall", [[Okay, this is it. Launch the assault!]])
             )
 
             if euphrates:isValid() then
@@ -762,7 +762,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
             if (scout:isValid()) and (mission_timer > 150) then
                 scout:sendCommsMessage(
                     player,
-                    _([[All relevant data is collected, and we've extracted. You can destroy the carrier!]])
+                    _("incCall", [[All relevant data is collected, and we've extracted. You can destroy the carrier!]])
                 )
                 scout:orderFlyTowards(0, 0)
                 main_mission = 14
@@ -770,7 +770,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
 
             -- If swarm command is destroyed, the humans win.
             if (not swarm_command:isValid()) then
-                globalMessage(_("Even if the extraction party was sacrificed, the threat caused by the Swarm Command was still too great. Humanity is safe... but for how long?"))
+                globalMessage(_("msgMainscreen", "Even if the extraction party was sacrificed, the threat caused by the Swarm Command was still too great. Humanity is safe... but for how long?"))
                 victory("Human Navy")
             end
 
@@ -778,21 +778,21 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
             if (not scout:isValid()) then
                 bs114:sendCommsMessage(
                     player,
-                    _([[Our extraction party is down! Bomb that gorram plaform!]])
+                    _("incCall", [[Our extraction party is down! Bomb that gorram plaform!]])
                 )
             end
         end
 
         -- If swarm command is destroyed, the humans win.
         if (hacked == 1) and (not swarm_command:isValid()) then
-            globalMessage(_("The Swarm Command is down! Humanity is safe... for now."))
+            globalMessage(_("msgMainscreen", "The Swarm Command is down! Humanity is safe... for now."))
             victory("Human Navy")
         end
     end
 
     -- If swarm command is destroyed and the recovery team was successful, the humans win.
     if (main_mission == 14) and (not swarm_command:isValid()) then
-        globalMessage(_("The Swarm Command is down! With the information extracted, the Navy is aware of the physical location of the rogue AI and can track it down. Congratulations!"))
+        globalMessage(_("msgMainscreen", "The Swarm Command is down! With the information extracted, the Navy is aware of the physical location of the rogue AI and can track it down. Congratulations!"))
         victory("Human Navy")
     end
 end
