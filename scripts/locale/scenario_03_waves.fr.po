@@ -40,7 +40,50 @@ msgstr ""
 "\n"
 "Titre original : Waves"
 
-#: scripts/scenario_03_waves.lua:43
+# Scenario setting
+msgctxt "setting"
+msgid "enemies"
+msgstr "Ennemis"
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr "Définit le nombre d'ennemis générés dans le scénario."
+
+msgctxt "enemies"
+msgid "easy"
+msgstr "Facile"
+
+msgctxt "enemies"
+msgid ""
+"Decreases the number of ships in each wave. Good for new players, but takes "
+"longer for the players to be overwhelmed."
+msgstr ""
+"Diminue le nombre de vaisseaux à chaque vague. Moins difficile mais plus "
+"long. Idéal pour les nouveaux joueurs."
+
+msgctxt "enemies"
+msgid "normal"
+msgstr "Normal"
+
+msgctxt "enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
+
+msgctxt "enemies"
+msgid "hard"
+msgstr "Difficile"
+
+msgctxt "enemies"
+msgid ""
+"Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
+"each wave. Players are overwhelmed more quickly, leading to shorter games."
+msgstr ""
+"La difficulté commence à la vague n°5 et augmente de 1,5 après chaque "
+"succès. Les joueurs sont submergés plus rapidement, ce qui conduit à des "
+"parties plus courtes."
+
+#: scripts/scenario_03_waves.lua:45
+msgctxt "goal-shipLog"
 msgid ""
 "At least one friendly base must survive.\n"
 "\n"
@@ -54,17 +97,26 @@ msgstr ""
 "prochaine vague apparaîtra. Et ainsi de suite…\n"
 "Combien de vagues serez-vous en mesure de détruire ?"
 
-#: scripts/scenario_03_waves.lua:125 scripts/scenario_03_waves.lua:217
+#: scripts/scenario_03_waves.lua:127
 #, lua-format
+msgctxt "shipLog"
 msgid "Wave %d"
 msgstr "Vague n° %d"
 
-#: scripts/scenario_03_waves.lua:250
+#: scripts/scenario_03_waves.lua:219
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Wave %d"
+msgstr "Vague n° %d"
+
+#: scripts/scenario_03_waves.lua:252
+msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr "Vague éliminée !"
 
-#: scripts/scenario_03_waves.lua:251
+#: scripts/scenario_03_waves.lua:253
 #, lua-format
+msgctxt "shipLog"
 msgid "Wave %d cleared."
 msgstr "Vague %d éliminée !"
 
