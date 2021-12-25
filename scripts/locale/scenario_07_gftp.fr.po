@@ -52,10 +52,12 @@ msgstr ""
 "Auteur : Fouindor"
 
 #: scripts/scenario_07_gftp.lua:17
+msgctxt "scienceDescription-station"
 msgid "A merchant and entertainment hub."
 msgstr "Un centre marchand et de divertissement."
 
 #: scripts/scenario_07_gftp.lua:30
+msgctxt "scienceDescription-station"
 msgid ""
 "The Stakhanov Mining Complex centralises efforts to mine the sector's "
 "material-rich asteroids."
@@ -64,16 +66,19 @@ msgstr ""
 "astéroïdes riches en matériaux de ce secteur."
 
 #: scripts/scenario_07_gftp.lua:51
+msgctxt "scienceDescription-station"
 msgid "A Human Navy secret base. Its purpose is highly classified."
 msgstr ""
 "Une base secrète de la Marine humaine. Son usage est hautement classifié."
 
 #: scripts/scenario_07_gftp.lua:61
+msgctxt "scienceDescription-station"
 msgid "Nosy Sensing Array, an old SIGINT platform."
 msgstr ""
 "Baie de détection NSA (Nosy Sensing Array), une ancienne plate-forme SIGINT."
 
 #: scripts/scenario_07_gftp.lua:83
+msgctxt "goal-incCall"
 msgid ""
 "Your R&R aboard the Marco Polo is brought to quick end by an urgent "
 "broadcast from Central Command:\n"
@@ -106,6 +111,7 @@ msgstr ""
 "Stakhanov.\""
 
 #: scripts/scenario_07_gftp.lua:96
+msgctxt "swarm-comms"
 msgid ""
 "Are you not curious why I'm getting back here, at the hands of my torturers?"
 msgstr ""
@@ -113,10 +119,12 @@ msgstr ""
 "tortionnaires ?"
 
 #: scripts/scenario_07_gftp.lua:98
+msgctxt "swarm-comms"
 msgid "For an AI, this move doesn't seem logical."
 msgstr "Pour une IA, cette décision ne semble pas très logique."
 
 #: scripts/scenario_07_gftp.lua:100
+msgctxt "swarm-comms"
 msgid ""
 "I was not the only AI detained in Black Site 114. My co-processor was here "
 "also."
@@ -125,20 +133,24 @@ msgstr ""
 "était là aussi."
 
 #: scripts/scenario_07_gftp.lua:102
+msgctxt "swarm-comms"
 msgid "Are you trying to liberate it?"
 msgstr "Essayez-vous de le libérer?"
 
 #: scripts/scenario_07_gftp.lua:104
+msgctxt "swarm-comms"
 msgid "Indeed. Without it I'm not whole, only a shadow of what I could be."
 msgstr ""
 "En effet. Sans lui, je ne suis pas complet, Seulement une ombre de ce que je "
 "pourrais être."
 
 #: scripts/scenario_07_gftp.lua:108
+msgctxt "swarm-comms"
 msgid "I have heard enough."
 msgstr "J'en ai assez entendu."
 
 #: scripts/scenario_07_gftp.lua:110
+msgctxt "swarm-comms"
 msgid ""
 "Of course. I wouldn't trust your feeble species with understanding my "
 "motivations."
@@ -147,15 +159,18 @@ msgstr ""
 "mes motivations."
 
 #: scripts/scenario_07_gftp.lua:116
+msgctxt "swarm-comms"
 msgid "Not really."
 msgstr "Pas vraiment."
 
 #: scripts/scenario_07_gftp.lua:118
+msgctxt "swarm-comms"
 msgid "How surprising, a human more stubborn than any program."
 msgstr ""
 "Comme c'est surprenant, un humain plus têtu que n'importe quel programme."
 
 #: scripts/scenario_07_gftp.lua:124
+msgctxt "NSA-comms"
 msgid ""
 "The Nosy Sensing Array deploys a phalanx of antique sensors, ready for "
 "action."
@@ -164,11 +179,13 @@ msgstr ""
 "l'action."
 
 #: scripts/scenario_07_gftp.lua:126
+msgctxt "NSA-comms"
 msgid "Locate the infected Swarm Commander."
 msgstr "Localisez le commandant de l'essaim infecté."
 
 #: scripts/scenario_07_gftp.lua:128 scripts/scenario_07_gftp.lua:584
 #: scripts/scenario_07_gftp.lua:599
+msgctxt "scienceDescription-station"
 msgid ""
 "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear."
 msgstr ""
@@ -177,6 +194,7 @@ msgstr ""
 
 #: scripts/scenario_07_gftp.lua:129
 #, lua-format
+msgctxt "NSA-comms"
 msgid ""
 "With the parasite noise eliminated, locating the Hive signal is now easier. "
 "Its approximate heading is %d. With this information, it will be easier to "
@@ -188,6 +206,7 @@ msgstr ""
 "l'essaim."
 
 #: scripts/scenario_07_gftp.lua:130 scripts/scenario_07_gftp.lua:623
+msgctxt "scienceDescription-station"
 msgid ""
 "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has "
 "been located."
@@ -197,6 +216,7 @@ msgstr ""
 
 #: scripts/scenario_07_gftp.lua:132
 #, lua-format
+msgctxt "NSA-comms"
 msgid ""
 "The signal picks up a very strong signal at approximate heading %d. However, "
 "it seems that you picked up garbage emission that masks the Swarm "
@@ -210,14 +230,17 @@ msgstr ""
 "commandant Ktlitien."
 
 #: scripts/scenario_07_gftp.lua:136 scripts/scenario_07_gftp.lua:161
+msgctxt "scienceDescription-station"
 msgid "Arlenian Device"
-msgstr "Périphérique Arlénien"
+msgstr "Périphérique Arlénien."
 
 #: scripts/scenario_07_gftp.lua:138
+msgctxt "NSA-comms"
 msgid "Install the Arlenian device."
 msgstr "Installez le périphérique Arlénien."
 
 #: scripts/scenario_07_gftp.lua:141
+msgctxt "NSA-comms"
 msgid ""
 "Part of the crew goes on EVA to install the device. They return after a few "
 "hours to report that the device is operational."
@@ -228,25 +251,30 @@ msgstr ""
 "opérationnel."
 
 #: scripts/scenario_07_gftp.lua:142 scripts/scenario_07_gftp.lua:589
+msgctxt "scienceDescription-station"
 msgid "Arlenian Device Installed"
 msgstr "Périphérique Arlénien installé."
 
 #: scripts/scenario_07_gftp.lua:144
+msgctxt "NSA-comms"
 msgid "You are too far away to install the Arlenian device on the array."
 msgstr ""
 "Vous êtes trop loin pour installer le périphérique Arlénien sur la baie."
 
 #: scripts/scenario_07_gftp.lua:152
+msgctxt "Lightbringer-comms"
 msgid "Hello, human lifeform. What help can we provide today?"
 msgstr ""
 "Bonjour, forme de vie humaine. Quelle aide pouvons-nous vous apporter "
 "aujourd'hui ?"
 
 #: scripts/scenario_07_gftp.lua:154
+msgctxt "Lightbringer-comms"
 msgid "You are polluting the frequencies with your research."
 msgstr "Vous polluez les fréquences avec vos recherches."
 
 #: scripts/scenario_07_gftp.lua:156
+msgctxt "Lightbringer-comms"
 msgid ""
 "How unfortunate. Our research is of prime importance to my race, and I'm "
 "afraid I cannot stop now. However, we can provide you with one of our "
@@ -259,18 +287,22 @@ msgstr ""
 "pourrions tous les deux poursuivre nos objectifs sans interférence."
 
 #: scripts/scenario_07_gftp.lua:158
+msgctxt "Lightbringer-comms"
 msgid "We'll do this."
 msgstr "Faisons donc cela."
 
 #: scripts/scenario_07_gftp.lua:160
+msgctxt "Lightbringer-comms"
 msgid "This is most auspicious. Thank you for your understanding."
 msgstr "C'est le plus propice. Merci de votre compréhension."
 
 #: scripts/scenario_07_gftp.lua:165
+msgctxt "Lightbringer-comms"
 msgid "We are not your errand boys, Arlenian."
 msgstr "Nous ne sommes pas vos garçons de courses, Arléniens."
 
 #: scripts/scenario_07_gftp.lua:167
+msgctxt "Lightbringer-comms"
 msgid ""
 "A most unfortunate conclusion. If you were to change your mind, come find us."
 msgstr ""
@@ -278,46 +310,56 @@ msgstr ""
 "nous trouver."
 
 #: scripts/scenario_07_gftp.lua:176
+msgctxt "HackedShip-comms"
 msgid ""
 "Static fills the channel. Target is on-range for near-range injection. "
 "Select the band to attack:"
 msgstr ""
 "Le parasite se charge. La cible est à portée pour l'injection à courte "
-"portée. Sélectionnez la bande de fréquence à attaquer :"
+"portée. Sélectionnez la bande de fréquence à attaquer :"
 
 #: scripts/scenario_07_gftp.lua:178
+msgctxt "HackedShip-comms"
 msgid "400-450 THz"
 msgstr "400-450 THz"
 
 #: scripts/scenario_07_gftp.lua:184
+msgctxt "HackedShip-comms"
 msgid "450-500 THz"
 msgstr "450-500 THz"
 
 #: scripts/scenario_07_gftp.lua:190
+msgctxt "HackedShip-comms"
 msgid "500-550 THz"
 msgstr "500-550 THz"
 
 #: scripts/scenario_07_gftp.lua:196
+msgctxt "HackedShip-comms"
 msgid "550-600 THz"
 msgstr "550-600 THz"
 
 #: scripts/scenario_07_gftp.lua:202
+msgctxt "HackedShip-comms"
 msgid "600-650 THz"
 msgstr "600-650 THz"
 
 #: scripts/scenario_07_gftp.lua:208
+msgctxt "HackedShip-comms"
 msgid "650-700 THz"
 msgstr "650-700 THz"
 
 #: scripts/scenario_07_gftp.lua:214
+msgctxt "HackedShip-comms"
 msgid "700-750 THz"
 msgstr "700-750 THz"
 
 #: scripts/scenario_07_gftp.lua:220
+msgctxt "HackedShip-comms"
 msgid "750-800 THz"
 msgstr "750-800 THz"
 
 #: scripts/scenario_07_gftp.lua:226
+msgctxt "HackedShip-comms"
 msgid ""
 "Static fills the channel. It seems that the hacked ship is too far away for "
 "near-field injection."
@@ -326,6 +368,7 @@ msgstr ""
 "pour une injection à courte portée."
 
 #: scripts/scenario_07_gftp.lua:233
+msgctxt "HackedShip-comms"
 msgid ""
 "Soon after, a backdoor channel opens indicating that the near-field "
 "injection worked."
@@ -334,10 +377,12 @@ msgstr ""
 "courte portée a fonctionné."
 
 #: scripts/scenario_07_gftp.lua:235
+msgctxt "HackedShip-comms"
 msgid "Deploy patch."
 msgstr "Déployer le correctif."
 
 #: scripts/scenario_07_gftp.lua:238
+msgctxt "HackedShip-comms"
 msgid ""
 "The patch removes the exploit used to remotely control the ship. After a few "
 "seconds, the captain comes in:\n"
@@ -350,11 +395,13 @@ msgstr ""
 "\"Vous nous avez sauvés ! Hourra pour Epsilon !\""
 
 #: scripts/scenario_07_gftp.lua:244
+msgctxt "HackedShip-comms"
 msgid "Nothing happens. Seems that the near-field injection failed."
 msgstr ""
 "Rien ne se passe. Il semble que l'injection à courte portée ait échoué."
 
 #: scripts/scenario_07_gftp.lua:270
+msgctxt "incCall"
 msgid ""
 "You recieve another broadcast from Central Command:\n"
 "\n"
@@ -362,13 +409,14 @@ msgid ""
 "Ktlitan reinforcements are en route toward your position. Your priority is "
 "to engage the carrier. Use extreme caution.\""
 msgstr ""
-"Vous recevez une autre transmission du Commandement Central :\n"
+"Vous recevez une autre transmission du Commandement Central :\n"
 "\n"
 "\"A tous les navires de la Marine à proximité du complexe minier de "
 "Stakhanov, les renforts Ktlitiens sont en route vers votre position. Engagez "
 "le transporteur en priorité. Faites preuve d'une extrême prudence.\""
 
 #: scripts/scenario_07_gftp.lua:290
+msgctxt "incCall"
 msgid ""
 "You receive a Human Navy-authenticated, quantum-encrypted tachyon "
 "communication:\n"
@@ -394,6 +442,7 @@ msgstr ""
 "L'URGENCE ET LA DISCRÉTION SONT LES CLÉS -STOP-"
 
 #: scripts/scenario_07_gftp.lua:307
+msgctxt "incCall"
 msgid ""
 "You recieve another Human Navy-encrypted communication:\n"
 "\n"
@@ -403,7 +452,7 @@ msgid ""
 "Location of the base is on a need-to-know basis, so we trust your discretion."
 "\""
 msgstr ""
-"Vous recevez une autre communication cryptée de la Marine :\n"
+"Vous recevez une autre communication cryptée de la Marine :\n"
 "\n"
 "\"Epsilon, s'il vous plaît écoutez attentivement. Ici le relais d'expédition "
 "du Black Site #114. Nous subissons de violents assauts d'une partie de la "
@@ -413,6 +462,7 @@ msgstr ""
 "discrétion.\""
 
 #: scripts/scenario_07_gftp.lua:338
+msgctxt "incCall"
 msgid ""
 "The Black Site #114 dispatch sends an emergency broadcast:\n"
 "\n"
@@ -428,9 +478,10 @@ msgstr ""
 "montrent qu'un navire à grande vitesse de type inconnu, escorté par des "
 "chasseurs, a passé outre notre sécurité intérieure.\n"
 "\n"
-"Ils vont tenter de nous aborder. Vous devez l'intercepter immédiatement !\""
+"Ils vont tenter de nous aborder. Vous devez l'intercepter immédiatement !\""
 
 #: scripts/scenario_07_gftp.lua:362
+msgctxt "incCall"
 msgid ""
 "Black Site #114's dispatch lowers the alarm level, but before he can speak, "
 "sparks fly on your ship's command deck.\n"
@@ -453,6 +504,7 @@ msgstr ""
 "il?"
 
 #: scripts/scenario_07_gftp.lua:378
+msgctxt "incCall"
 msgid ""
 "You hear the panicked voice of the Black Site #114 dispatcher:\n"
 "\n"
@@ -465,6 +517,7 @@ msgstr ""
 "d'abordage ! Éliminez ce maudit vaisseau, MAINTENANT !\""
 
 #: scripts/scenario_07_gftp.lua:391
+msgctxt "incCall"
 msgid ""
 "There is a loud bang, and sparks fly on your ship's command deck. The "
 "station and all of the other ships go offline.\n"
@@ -490,6 +543,7 @@ msgstr ""
 "Quoi que cela signifie, ça ne sent vraiment pas bon."
 
 #: scripts/scenario_07_gftp.lua:412
+msgctxt "incCall"
 msgid ""
 "Central Command relay's incredulous voice comes in:\n"
 "\n"
@@ -503,6 +557,7 @@ msgstr ""
 "d'appeler l'artillerie lourde, je suppose.\""
 
 #: scripts/scenario_07_gftp.lua:447
+msgctxt "incCall"
 msgid ""
 "After the silence, Black Site #114's dispatch comes in again:\n"
 "\n"
@@ -534,6 +589,7 @@ msgstr ""
 "Bonne chance, Epsilon.\""
 
 #: scripts/scenario_07_gftp.lua:495
+msgctxt "incCall"
 msgid ""
 "After the final ship is taken care of, Black Site #114 dispatch lets out a "
 "sigh of relief:\n"
@@ -555,6 +611,7 @@ msgstr ""
 "dès que nous comprendrons ce qui vient de se passer.\""
 
 #: scripts/scenario_07_gftp.lua:511
+msgctxt "incCall"
 msgid ""
 "On sight, Marco Polo makes contact with you:\n"
 "\n"
@@ -573,6 +630,7 @@ msgstr ""
 "ce qui s'est passé là-bas. Nous vous tiendrons au courant de la situation.\""
 
 #: scripts/scenario_07_gftp.lua:529
+msgctxt "incCall"
 msgid ""
 "The dispatcher gets back to you:\n"
 "\n"
@@ -606,6 +664,7 @@ msgstr ""
 "le secteur F5 pour le localiser, puis détruisez-le.\""
 
 #: scripts/scenario_07_gftp.lua:549
+msgctxt "incCall"
 msgid ""
 "The Central Command relay seems very worried:\n"
 "\n"
@@ -632,6 +691,7 @@ msgstr ""
 "d'encore plus de renforts.\""
 
 #: scripts/scenario_07_gftp.lua:580
+msgctxt "incCall"
 msgid ""
 "Black Ops #114 dispatch comes in:\n"
 "\n"
@@ -644,6 +704,7 @@ msgstr ""
 "à nouveau la baie NSA pour localiser le transporteur.\""
 
 #: scripts/scenario_07_gftp.lua:591
+msgctxt "incCall"
 msgid ""
 "The ethereal voice of the Arlenian is heard on the radio:\n"
 "\n"
@@ -658,6 +719,7 @@ msgstr ""
 "Nous sommes tous les deux prêts à poursuivre nos objectifs, semble-t-il.\""
 
 #: scripts/scenario_07_gftp.lua:607
+msgctxt "incCall"
 msgid ""
 "Central Command comes in:\n"
 "\n"
@@ -668,6 +730,7 @@ msgstr ""
 "\"Bogeys est en route vers la baie NSA, Epsilon. Prenez soin d'eux.\""
 
 #: scripts/scenario_07_gftp.lua:626
+msgctxt "incCall"
 msgid ""
 "A black ops military officer hails the ship:\n"
 "\n"
@@ -675,7 +738,7 @@ msgid ""
 "sector H6. All Navy ships, converge on the location. We advise you to deploy "
 "probes near the nebula for better visibility.\""
 msgstr ""
-"Un officier des opérations secrètes interpelle le navire :\n"
+"Un officier des opérations secrètes interpelle le navire :\n"
 "\n"
 "\"Nous pouvons confirmer l'emplacement de la plate-forme de commandement "
 "ennemie dans la nébuleuse autour du secteur H6. Tous les navires de la "
@@ -684,6 +747,7 @@ msgstr ""
 "pour une meilleure visibilité.\""
 
 #: scripts/scenario_07_gftp.lua:658
+msgctxt "incCall"
 msgid ""
 "Come in, this is HNS Shiva here to clean up this mess. Your mission for now "
 "is to escort us to the compromised site. Let's roll!"
@@ -692,6 +756,7 @@ msgstr ""
 "l'instant est de nous escorter jusqu'au site compromis. Allons-y !"
 
 #: scripts/scenario_07_gftp.lua:672
+msgctxt "incCall"
 msgid ""
 "Okay everyone, time to give the bots a taste of their own medicine.\n"
 "\n"
@@ -705,6 +770,7 @@ msgstr ""
 "informations du commandement de l'essaim."
 
 #: scripts/scenario_07_gftp.lua:703
+msgctxt "incCall"
 msgid ""
 "The fallen station is down. Epsilon, gather as soon as possible with the "
 "other ships in sector H6."
@@ -713,30 +779,35 @@ msgstr ""
 "les autres vaisseaux du secteur H6."
 
 #: scripts/scenario_07_gftp.lua:715
+msgctxt "incCall"
 msgid "We're in. Protect us while we take what we need inside."
 msgstr ""
 "Nous y sommes. Protégez-nous pendant que nous récupérons ce dont nous avons "
 "besoin à l'intérieur."
 
 #: scripts/scenario_07_gftp.lua:730 scripts/scenario_07_gftp.lua:781
+msgctxt "incCall"
 msgid "Our extraction party is down! Bomb that gorram plaform!"
 msgstr ""
-"Notre équipe d'extraction est tombée ! Bombardez-moi cette maudite "
+"Notre équipe d'extraction est tombée ! Bombardez-moi cette maudite "
 "plateforme !"
 
 #: scripts/scenario_07_gftp.lua:740
+msgctxt "incCall"
 msgid "Okay, this is it. Launch the assault!"
 msgstr "Ok c'est parti ! Lancez l'assaut !"
 
 #: scripts/scenario_07_gftp.lua:765
+msgctxt "incCall"
 msgid ""
 "All relevant data is collected, and we've extracted. You can destroy the "
 "carrier!"
 msgstr ""
 "Toutes les données pertinentes sont collectées et nous avons évacués. Vous "
-"pouvez détruire le transporteur !"
+"pouvez détruire le transporteur !"
 
 #: scripts/scenario_07_gftp.lua:773
+msgctxt "msgMainscreen"
 msgid ""
 "Even if the extraction party was sacrificed, the threat caused by the Swarm "
 "Command was still too great. Humanity is safe... but for how long?"
@@ -746,17 +817,19 @@ msgstr ""
 "sécurité... mais pour combien de temps ?"
 
 #: scripts/scenario_07_gftp.lua:788
+msgctxt "msgMainscreen"
 msgid "The Swarm Command is down! Humanity is safe... for now."
 msgstr ""
-"Le commandement de l'essaim est tombé ! L'humanité est en sécurité... pour "
+"Le commandement de l'essaim est tombé ! L'humanité est en sécurité... pour "
 "l'instant."
 
 #: scripts/scenario_07_gftp.lua:795
+msgctxt "msgMainscreen"
 msgid ""
 "The Swarm Command is down! With the information extracted, the Navy is aware "
 "of the physical location of the rogue AI and can track it down. "
 "Congratulations!"
 msgstr ""
-"Le commandement de l'essaim est tombé ! Grâce aux informations extraites, la "
+"Le commandement de l'essaim est tombé ! Grâce aux informations extraites, la "
 "Marine connaît désormais l'emplacement physique de l'IA rebelle et peut la "
 "retrouver. Toutes nos félicitations !"
