@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-22 01:46+0100\n"
+"PO-Revision-Date: 2021-12-26 14:03+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -49,33 +49,32 @@ msgstr ""
 "Auteur : Visjammer"
 
 #: scripts/scenario_06_edgeofspace.lua:32
-msgctxt "callsign"
+msgctxt "callsign-ship"
 msgid "Technical Officer"
 msgstr "Officier technique"
 
 #: scripts/scenario_06_edgeofspace.lua:37
-msgctxt "callsign"
+msgctxt "callsign-station"
 msgid "E.O.S. scope"
 msgstr "Télescope E.O.S."
 
 #: scripts/scenario_06_edgeofspace.lua:39
-msgctxt "callsign"
+msgctxt "callsign-station"
 msgid "Midspace Support"
 msgstr "Soutien Central"
 
 #: scripts/scenario_06_edgeofspace.lua:40
-#: scripts/scenario_06_edgeofspace.lua:775
-msgctxt "callsign"
+msgctxt "callsign-station"
 msgid "Central Command"
 msgstr "Quartier Général"
 
 #: scripts/scenario_06_edgeofspace.lua:43
-msgctxt "callsign"
+msgctxt "callsign-station"
 msgid "K-Endline"
 msgstr "K-Frontière"
 
 #: scripts/scenario_06_edgeofspace.lua:44
-msgctxt "callsign"
+msgctxt "callsign-station"
 msgid "K-Midline"
 msgstr "K-Centre"
 
@@ -443,6 +442,11 @@ msgstr ""
 "de frappe Kraylor massive est en train d'attaquer ! Passez à travers ce trou "
 "de ver et attaquez leurs rangs de l'intérieur pour les retenir autant que "
 "possible. Nous envoyons tous nos vaisseaux disponibles pour vous soutenir."
+
+#: scripts/scenario_06_edgeofspace.lua:775
+msgctxt "callsign"
+msgid "Central Command"
+msgstr "Quartier Général"
 
 #: scripts/scenario_06_edgeofspace.lua:777
 msgctxt "centralcommand-comms"
