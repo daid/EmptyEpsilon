@@ -51,7 +51,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à 8\n"
 "\n"
-"  <<TRADUCTION EN COURS : 62%>>\n"
+"  <<TRADUCTION EN COURS : 70%>>\n"
 "\n"
 "Mission : Défendre votre base et traquer les ennemis\n"
 "\n"
@@ -205,11 +205,15 @@ msgctxt "gossip-comms"
 msgid ""
 "I hear the head of operations has a thing for his administrative assistant"
 msgstr ""
+"J'ai entendu dire que le chef des opérations avait un faible pour son "
+"adjointe administrative."
 
 #: scripts/scenario_55_defenderHunter.lua:393
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
 msgstr ""
+"Mes amis mineurs m'ont dit que Krak or Kruk était sur le point de devenir "
+"riche."
 
 #: scripts/scenario_55_defenderHunter.lua:394
 msgctxt "gossip-comms"
@@ -217,6 +221,8 @@ msgid ""
 "Did you know you can usually hire replacement repair crew cheaper at "
 "friendly stations?"
 msgstr ""
+"Savez-vous que vous pouvez généralement embaucher une équipe de réparation "
+"de remplacement moins cher dans les stations amies ?"
 
 #: scripts/scenario_55_defenderHunter.lua:395
 msgctxt "gossip-comms"
@@ -224,6 +230,8 @@ msgid ""
 "Under their uniforms, the Kraylors have an extra appendage. I wonder what "
 "they use it for"
 msgstr ""
+"Sous leur uniforme, les Kraylors ont un appendice supplémentaire. Je me "
+"demande à quoi ça leur sert."
 
 #: scripts/scenario_55_defenderHunter.lua:396
 msgctxt "gossip-comms"
@@ -231,6 +239,8 @@ msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
 msgstr ""
+"Les Kraylors sont peut-être les ennemis de la marine humaine, mais ils "
+"fabriquent de très bons BBQ Mynock, On peut au moins leur accorder ça."
 
 #: scripts/scenario_55_defenderHunter.lua:397
 msgctxt "gossip-comms"
@@ -238,6 +248,8 @@ msgid ""
 "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. "
 "That'd be bad news for us"
 msgstr ""
+"Les Kraylors et les Ktlitiens se rapprocheraient d'un cessez-le-feu d'après "
+"ce que j'ai entendu. Ce ne serait pas vraiment une bonne nouvelle pour nous."
 
 #: scripts/scenario_55_defenderHunter.lua:398
 msgctxt "gossip-comms"
@@ -245,12 +257,16 @@ msgid ""
 "Docking bay 7 has interesting mind altering substances for sale, but they're "
 "monitored between 1900 and 2300"
 msgstr ""
+"La baie d'amarrage n°7 proposerait des substances psychotropes intéressantes "
+"à vendre, mais elles seraient surveillées entre 19h00 et 23h00."
 
 #: scripts/scenario_55_defenderHunter.lua:399
 msgctxt "gossip-comms"
 msgid ""
 "Watch the sky tonight in quadrant J around 2243. It should be spectacular"
 msgstr ""
+"Regardez le ciel ce soir dans le quadrant J vers 22h43. Ça devrait être "
+"spectaculaire."
 
 #: scripts/scenario_55_defenderHunter.lua:400
 msgctxt "gossip-comms"
@@ -258,6 +274,8 @@ msgid ""
 "I think the shuttle pilot has a tame miniature Ktlitan caged in his "
 "quarters. Sometimes I hear it at night"
 msgstr ""
+"Je pense que le pilote de la navette a un Ktlitien miniature apprivoisé en "
+"cage dans ses quartiers. Parfois je l'entends la nuit."
 
 #: scripts/scenario_55_defenderHunter.lua:401
 msgctxt "gossip-comms"
@@ -265,6 +283,8 @@ msgid ""
 "Did you hear the screaming chase in the corridors on level 4 last night? "
 "Three Kraylors were captured and put in the brig"
 msgstr ""
+"Avez-vous entendu la poursuite et les hurlements dans les couloirs du niveau "
+"4 la nuit dernière ? Trois Kraylors ont été capturés et mis en prison."
 
 #: scripts/scenario_55_defenderHunter.lua:402
 msgctxt "gossip-comms"
@@ -272,6 +292,8 @@ msgid ""
 "Rumor has it that the two Lichten brothers are on the verge of a new "
 "discovery. And it's not another wine flavor either"
 msgstr ""
+"La rumeur veut que les deux frères Lichten soient sur le point de faire une "
+"nouvelle découverte. Et ce n'est pas une autre saveur de vin non plus."
 
 #: scripts/scenario_55_defenderHunter.lua:506
 msgctxt "buttonGM"
@@ -2391,7 +2413,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5938
 msgctxt "intelligence-comms"
 msgid "Intelligence"
-msgstr ""
+msgstr "Intelligence"
 
 #: scripts/scenario_55_defenderHunter.lua:5945
 #, lua-format
@@ -2584,6 +2606,7 @@ msgstr ""
 msgctxt "intelligence-comms"
 msgid "What about that intelligence information you promised?"
 msgstr ""
+"Qu'en est-il des informations de renseignement que vous avez promises ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6040
 #, lua-format
@@ -2593,13 +2616,16 @@ msgid ""
 "was talking about enemy bases. She can probably tell you where some of these "
 "bases are located. She's based on %s"
 msgstr ""
+"J'ai entendu Marcy Sorenson rentrer tout juste de mission de reconnaissance. "
+"Elle parlait de bases ennemies. Elle pourra probablement vous dire où se "
+"trouvent certaines de ces bases. Elle est basée sur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6041
 #: scripts/scenario_55_defenderHunter.lua:6152
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Talk with Marcy Sorenson on %s"
-msgstr ""
+msgstr "Parler avec Marcy Sorenson sur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6046
 msgctxt "upgrade-comms"
@@ -2691,72 +2717,76 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6148
 msgctxt "intelligence-comms"
 msgid "May I speak with Marcy Sorenson?"
-msgstr ""
+msgstr "Puis-je parler à Marcy Sorenson ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6151
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "She transferred to %s"
-msgstr ""
+msgstr "Elle a été transférée sur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6153
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Where exactly is %s?"
-msgstr ""
+msgstr "Où se trouve %s exactement ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6154
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "%s is in %s"
-msgstr ""
+msgstr "%s se situe en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6155
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Talk with Marcy Sorenson on %s in %s"
-msgstr ""
+msgstr "Parler avec Marcy Sorenson de %s en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6160
 #: scripts/scenario_55_defenderHunter.lua:6183
 msgctxt "intelligence-comms"
 msgid "This is Marcy. Whatcha want?"
-msgstr ""
+msgstr "Je suis Marcy. Que me voulez-vous ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6161
 #: scripts/scenario_55_defenderHunter.lua:6184
 msgctxt "intelligence-comms"
 msgid "Please tell me about the enemy bases found"
-msgstr ""
+msgstr "Pourriez-vous me parler des bases ennemies trouvées ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6172
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Sure. We found a couple of enemy stations in %s and %s"
 msgstr ""
+"Bien sûr. Nous avons trouvé quelques stations ennemies dans les secteurs %s "
+"et %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6173
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Investigate enemy bases in %s and %s"
-msgstr ""
+msgstr "Enquêter sur les bases ennemies dans les secteurs %s et %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6182
 msgctxt "intelligence-comms"
 msgid "May I speak with Marcy Sorenson, please?"
-msgstr ""
+msgstr "Puis-je parler à Marcy Sorenson, s'il vous plaît ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6196
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Sure. We found some enemy stations in %s, %s and %s"
 msgstr ""
+"Bien sûr. Nous avons trouvé des stations ennemies dans les secteurs %s, %s "
+"et %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6197
 #, lua-format
 msgctxt "intelligence-comms"
 msgid "Investigate enemy bases in %s, %s and %s"
-msgstr ""
+msgstr "Enquêter sur les bases ennemies dans les secteurs %s, %s et %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6217
 msgctxt "upgrade-comms"
@@ -3131,28 +3161,28 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6535
 msgctxt "helpfullWarning-comms"
 msgid "See any enemies in your area?"
-msgstr ""
+msgstr "Apercevez-vous des ennemis dans votre région ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6545
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
-msgstr ""
+msgstr "Oui, nous comptons %i ennemis dans un rayon de 30U."
 
 #: scripts/scenario_55_defenderHunter.lua:6547
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
-msgstr ""
+msgstr "Oui, nous observons 1 ennemi à moins de 30U."
 
 #: scripts/scenario_55_defenderHunter.lua:6551
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
-msgstr ""
+msgstr "Aucun ennemi à moins de 30U."
 
 #: scripts/scenario_55_defenderHunter.lua:6556
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
-msgstr ""
+msgstr "Pas vraiment."
 
 #: scripts/scenario_55_defenderHunter.lua:6561
 msgctxt "trade-comms"
@@ -3571,6 +3601,8 @@ msgid ""
 "You are to protect your home base, %s, against enemy attack. Respond to "
 "other requests as you see fit"
 msgstr ""
+"Vous devez protéger votre base d'attache, %s, contre les attaques ennemies. "
+"Répondez aux autres missions comme bon vous semble."
 
 #: scripts/scenario_55_defenderHunter.lua:7115
 #, lua-format
@@ -3868,12 +3900,14 @@ msgid ""
 "[HMS Bounty] We stole a Kraylor ship, but were damaged during the escape. "
 "Can you help? We are in %s"
 msgstr ""
+"[HMS Bounty] Nous avons volé un vaisseau Kraylor, mais il a été endommagé "
+"pendant l'évasion. Pouvez-vous aider ? Nous sommes dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8540
 #, lua-format
 msgctxt "HMSBounty-comms"
 msgid "Help HMS Bounty in %s"
-msgstr ""
+msgstr "Aidez HMS Bounty en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8553
 msgctxt "HMSBounty-shipLog"
@@ -3881,6 +3915,8 @@ msgid ""
 "[HMS Bounty] Please ask your engineer to transport a spare repair technician "
 "to help with repairs"
 msgstr ""
+"[HMS Bounty] Veuillez demander à votre ingénieur de transporter un "
+"technicien de réparation supplémentaire pour aider aux réparations."
 
 #: scripts/scenario_55_defenderHunter.lua:8556
 msgctxt "buttonEngineer"
@@ -3895,12 +3931,12 @@ msgstr "Transport technicien"
 #: scripts/scenario_55_defenderHunter.lua:8566
 msgctxt "HMSBounty-shipLog"
 msgid "HMS Bounty has been destroyed"
-msgstr ""
+msgstr "Le HMS Bounty a été détruit."
 
 #: scripts/scenario_55_defenderHunter.lua:8585
 msgctxt "HMSBounty-shipLog"
 msgid "[HMS Bounty] Our engines have been repaired. We stand ready to assist"
-msgstr ""
+msgstr "[HMS Bounty] Nos moteurs ont été réparés. Nous sommes prêts à aider."
 
 #: scripts/scenario_55_defenderHunter.lua:8605
 #, lua-format
@@ -4018,43 +4054,43 @@ msgstr ""
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "[%s] Our sensors detect enemies nearby"
-msgstr ""
+msgstr "[%s] Nos capteurs détectent des ennemis à proximité."
 
 #: scripts/scenario_55_defenderHunter.lua:8781
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid " - Type: %s"
-msgstr ""
+msgstr " - Type : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:8797
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "   Shield: %.1f%% (%.1f/%.1f) "
-msgstr ""
+msgstr "   Bouclier : %.1f%% (%.1f/%.1f) "
 
 #: scripts/scenario_55_defenderHunter.lua:8802
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "   Shield count: %i "
-msgstr ""
+msgstr "   Nombre de boucliers : %i "
 
 #: scripts/scenario_55_defenderHunter.lua:8813
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "      Shield %i: %i%% (%.1f/%i) "
-msgstr ""
+msgstr "      Bouclier %i : %i%% (%.1f/%i) "
 
 #: scripts/scenario_55_defenderHunter.lua:8820
 #: scripts/scenario_55_defenderHunter.lua:8837
 msgctxt "helpfullWarning-shipLog"
 msgid "Station Status:"
-msgstr ""
+msgstr "État de la station :"
 
 #: scripts/scenario_55_defenderHunter.lua:8839
 #, lua-format
 msgctxt "helpfullWarning-shipLog"
 msgid "   Hull: %i%% (%.1f/%i)"
-msgstr ""
+msgstr "   Coque : %i%% (%.1f/%i)"
 
 #: scripts/scenario_55_defenderHunter.lua:8879
 msgctxt "scienceDescription-artifact"
