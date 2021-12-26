@@ -81,7 +81,7 @@ function init()
 	addGMFunction(GMDiagnosticOn,turnOnDiagnostic)
 	default_interwave_interval = 280
 	interWave = default_interwave_interval			
-	GMDelayNormalToSlow = _("ButtonGM", "Delay normal to slow")
+	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 	buildStations()
 	wfv = "end of init"
