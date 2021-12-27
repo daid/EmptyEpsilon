@@ -51,8 +51,6 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à 8\n"
 "\n"
-"  <<TRADUCTION EN COURS : 93%>>\n"
-"\n"
 "Mission : Défendre votre base et traquer les ennemis\n"
 "\n"
 "Au départ, vous êtes chargé de défendre votre base. Au fil du temps, vous en "
@@ -2488,32 +2486,32 @@ msgstr ""
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where is %s?"
-msgstr ""
+msgstr "Où se trouve %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5969
 #: scripts/scenario_55_defenderHunter.lua:6050
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s is in sector %s"
-msgstr ""
+msgstr "%s se trouve dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:5973
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where might I find some %s?"
-msgstr ""
+msgstr "Où puis-je trouver des %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5974
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "I think %s might have some"
-msgstr ""
+msgstr "Je pense que %s pourrait en avoir."
 
 #: scripts/scenario_55_defenderHunter.lua:5977
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "And where the heck is %s?"
-msgstr ""
+msgstr "Et où diable se trouve %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5978
 #, lua-format
@@ -2522,35 +2520,38 @@ msgid ""
 "My, my, you're quite inquisitive.\n"
 "%s is in sector %s"
 msgstr ""
+"...Vous posez beaucoup de question je trouve.\n"
+"%s se situe dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:5989
 msgctxt "upgrade-comms"
 msgid "You mentioned a beam weapon cycle time upgrade..."
 msgstr ""
+"Vous avez mentionné une mise à niveau du temps de cycle de l'arme à rayon..."
 
 #: scripts/scenario_55_defenderHunter.lua:5990
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Station %s can do that for %s"
-msgstr ""
+msgstr "La station %s peut le faire pour du %s."
 
 #: scripts/scenario_55_defenderHunter.lua:5992
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "I've never heard of %s. Where is %s?"
-msgstr ""
+msgstr "Je n'ai jamais entendu parler de %s. Où se trouve %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5993
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "You haven't? I'm surprised. %s is in %s"
-msgstr ""
+msgstr "Vous n'en avez pas ? Je suis surpris. %s se trouve dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:5997
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Can you direct me to a station with %s?"
-msgstr ""
+msgstr "Pouvez-vous me diriger vers une station possédant du %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5998
 #, lua-format
@@ -2559,65 +2560,69 @@ msgid ""
 "%s has %s *and* they have the best indigenous Kraylor honey you've ever "
 "tasted"
 msgstr ""
+"%s possède du %s *et* ils ont le meilleur miel indigène Kraylor que vous "
+"ayez jamais goûté."
 
 #: scripts/scenario_55_defenderHunter.lua:6001
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Sounds tasty. Where is %s?"
-msgstr ""
+msgstr "Ça semble appétissant. Où est %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6002
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "It's in %s"
-msgstr ""
+msgstr "Dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6013
 msgctxt "upgrade-comms"
 msgid "Where's that station rotation upgrade information?"
 msgstr ""
+"Où pouvons-nous trouver les informations sur la mise à niveau de la rotation "
+"des stations ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6014
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "station %s has the technical knowledge but lacks the %s"
-msgstr ""
+msgstr "la station %s a les connaissances techniques mais n'a pas les %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6016
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where is station %s?"
-msgstr ""
+msgstr "Où se situe la station %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6017
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s is in %s"
-msgstr ""
+msgstr "%s se trouve dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6022
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where could I get %s?"
-msgstr ""
+msgstr "Où puis-je obtenir du %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6023
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "%s should have %s"
-msgstr ""
+msgstr "%s devrait avoir du %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6026
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Do you know where %s is located?"
-msgstr ""
+msgstr "Savez-vous où se trouve %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6027
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Yes, it's in %s"
-msgstr ""
+msgstr "Oui, en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6039
 msgctxt "intelligence-comms"
@@ -2648,80 +2653,87 @@ msgstr "Parler avec Marcy Sorenson sur %s."
 msgctxt "upgrade-comms"
 msgid "Remember, you promised some ship hull upgrade information?"
 msgstr ""
+"Rappelez-vous, vous nous avez promis des informations sur la mise à niveau "
+"de la coque du vaisseau ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6047
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Oh yes, %s can upgrade your hull, but they want %s to do the job"
 msgstr ""
+"Oh oui, %s peut améliorer votre coque, mais ils veulent que %s fasse le "
+"boulot."
 
 #: scripts/scenario_55_defenderHunter.lua:6049
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "So, where is %s?"
-msgstr ""
+msgstr "Alors, où se trouve %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6054
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Where could I find some %s?"
-msgstr ""
+msgstr "Où pourrais-je trouver du %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6055
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "I think %s may have some"
-msgstr ""
+msgstr "Je pense que %s peut en avoir."
 
 #: scripts/scenario_55_defenderHunter.lua:6058
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "And just where is %s?"
-msgstr ""
+msgstr "Et où se trouve donc %s ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6059
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "If you must know, %s is in sector %s"
-msgstr ""
+msgstr "Si cela vous intéresse, %s se trouve en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6072
 msgctxt "upgrade-comms"
 msgid "Upgrade maneuverability"
-msgstr ""
+msgstr "Mettre à jour le système de manoeuvre."
 
 #: scripts/scenario_55_defenderHunter.lua:6082
 msgctxt "upgrade-comms"
 msgid "Upgraded maneuverability"
-msgstr ""
+msgstr "Système de manœuvre amélioré."
 
 #: scripts/scenario_55_defenderHunter.lua:6084
 #: scripts/scenario_55_defenderHunter.lua:6140
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "You need to bring some %s for the upgrade"
-msgstr ""
+msgstr "Vous devez apporter des %s pour la mise à niveau."
 
 #: scripts/scenario_55_defenderHunter.lua:6094
 msgctxt "upgrade-comms"
 msgid "Upgrade beam cycle time"
-msgstr ""
+msgstr "Mettre à niveau la durée de cycle des faisceaux laser."
 
 #: scripts/scenario_55_defenderHunter.lua:6096
 msgctxt "upgrade-comms"
 msgid "Your ship type does not support a beam weapon upgrade."
 msgstr ""
+"Votre type de vaisseau ne prend pas en charge les mises à niveau de "
+"faisceaux laser."
 
 #: scripts/scenario_55_defenderHunter.lua:6116
 msgctxt "upgrade-comms"
 msgid "Beam cycle time reduced by 20%"
-msgstr ""
+msgstr "Durée de cycle des faisceaux laser réduite de 20%."
 
 #: scripts/scenario_55_defenderHunter.lua:6118
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We require %s before we can upgrade your beam weapons"
 msgstr ""
+"Nous avons besoin de %s avant de pouvoir améliorer vos faisceaux laser."
 
 #: scripts/scenario_55_defenderHunter.lua:6137
 #, lua-format
@@ -2730,6 +2742,8 @@ msgid ""
 "%s was just what we needed. The technical details have been transmitted to "
 "%s. The auto-rotation has begun"
 msgstr ""
+"%s était exactement ce dont nous avions besoin. Les détails techniques ont "
+"été transmis à %s. L'auto-rotation a commencé."
 
 #: scripts/scenario_55_defenderHunter.lua:6148
 msgctxt "intelligence-comms"
@@ -2808,13 +2822,13 @@ msgstr "Enquêter sur les bases ennemies dans les secteurs %s, %s et %s."
 #: scripts/scenario_55_defenderHunter.lua:6217
 msgctxt "upgrade-comms"
 msgid "Upgraded hull capacity for damage by 20%"
-msgstr ""
+msgstr "Capacité de la coque à encaisser les dégâts améliorée de 20%."
 
 #: scripts/scenario_55_defenderHunter.lua:6219
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "We won't upgrade your hull until we have %s"
-msgstr ""
+msgstr "Nous n'améliorerons pas votre coque tant que nous n'aurons pas de %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6228
 msgctxt "Maria-comms"
@@ -3688,7 +3702,7 @@ msgstr "Apporter %s à %s. Source possible : %s"
 #: scripts/scenario_55_defenderHunter.lua:7415
 msgctxt "upgrade-comms"
 msgid "Get ship maneuver upgrade"
-msgstr ""
+msgstr "Obtenir la mise à niveau de la manœuvre du vaisseau."
 
 #: scripts/scenario_55_defenderHunter.lua:7652
 #, lua-format
