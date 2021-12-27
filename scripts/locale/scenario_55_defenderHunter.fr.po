@@ -51,7 +51,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à 8\n"
 "\n"
-"  <<TRADUCTION EN COURS : 70%>>\n"
+"  <<TRADUCTION EN COURS : 85%>>\n"
 "\n"
 "Mission : Défendre votre base et traquer les ennemis\n"
 "\n"
@@ -924,8 +924,8 @@ msgstr "Commerce et jeux d'argent"
 msgctxt "stationGeneralInfo-comms"
 msgid "Come play some games and shop. House take does not exceed 4 percent"
 msgstr ""
-"Venez jouer à quelques jeux et faire du shopping. La taxe de maison ne "
-"dépasse pas 4 pour cent."
+"Venez jouer à quelques jeux et faire du shopping. La taxe maison ne dépasse "
+"pas 4%."
 
 #: scripts/scenario_55_defenderHunter.lua:1598
 msgctxt "scienceDescription-station"
@@ -2212,7 +2212,7 @@ msgstr "Cargaison actuelle à bord de %s :\n"
 #: scripts/scenario_55_defenderHunter.lua:5766
 msgctxt "trade-comms"
 msgid "     Empty\n"
-msgstr "Vide\n"
+msgstr "     Vide\n"
 
 #: scripts/scenario_55_defenderHunter.lua:5768
 #, lua-format
@@ -3789,12 +3789,14 @@ msgid ""
 "Agent Paul Straight has information on enemies in the area and a proposal. "
 "Pick him and his equipment up at station %s"
 msgstr ""
+"L'agent Paul Straight a des informations sur les ennemis de la région et une "
+"proposition. Récupérez-le avec son équipement à la station %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8276
 #, lua-format
 msgctxt "PaulOrders-comms"
 msgid "Get Paul Straight at station %s"
-msgstr ""
+msgstr "Récupérer Paul Straight à la station %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8297
 #, lua-format
@@ -3806,27 +3808,36 @@ msgid ""
 "their shields. I need to get refined readings from 20 units or closer for "
 "final calibration. Please take me to within 20 units of %s"
 msgstr ""
+"[Paul Straight] J'ai étudié la station ennemie %s en %s : modèles de trafic, "
+"communications, signature énergétique, etc. J'ai construit un téléporteur "
+"spécialisé à courte portée qui devrait être capable de me téléporter sur la "
+"station à travers leurs boucliers . J'ai besoin d'obtenir des lectures "
+"affinées à partir de 20 unités ou plus pour l'étalonnage final. Veuillez "
+"m'amener à moins de 20 unités de %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8298
 #, lua-format
 msgctxt "PaulOrders-comms"
 msgid "Take Paul Straight to within 20U of %s in %s"
-msgstr ""
+msgstr "Transporter Paul Straight à moins de 20U de %s en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8313
 msgctxt "Paul-shiplog"
 msgid "[Paul Straight] I've got my readings. Let me calibrate the transporter"
 msgstr ""
+"[Paul Straight] J'ai mes lectures. Laissez-moi calibrer le téléporteur."
 
 #: scripts/scenario_55_defenderHunter.lua:8316
 msgctxt "msgHelms"
 msgid "[Paul Straight] The ship is in range. I completed my scans. Thank you"
 msgstr ""
+"[Paul Straight] Le vaisseau est à portée. J'ai terminé mes scans. Merci."
 
 #: scripts/scenario_55_defenderHunter.lua:8320
 msgctxt "msgTactical"
 msgid "[Paul Straight] The ship is in range. I completed my scans. Thank you"
 msgstr ""
+"[Paul Straight] Le vaisseau est à portée. J'ai terminé mes scans. Merci."
 
 #: scripts/scenario_55_defenderHunter.lua:8330
 #: scripts/scenario_55_defenderHunter.lua:8356
@@ -3834,6 +3845,7 @@ msgstr ""
 msgctxt "Paul-shiplog"
 msgid "[Paul Straight] It's too bad the station was destroyed"
 msgstr ""
+"[Paul Straight] C'est vraiment dommage que la station ait été détruite."
 
 #: scripts/scenario_55_defenderHunter.lua:8346
 #, lua-format
@@ -3845,36 +3857,46 @@ msgid ""
 "flying so close to the station. After I am aboard %s, I will gether "
 "intelligence and transmit it back. I'm ready to proceed"
 msgstr ""
+"[Paul Straight] Mon téléporteur est prêt. Je me suis déguisé en technicien "
+"Kraylor. J'ai besoin que vous rapprochiez le vaisseau à moins de 2,5U de %s. "
+"Vous n'avez pas besoin d'éliminer les patrouilles, mais naviguer si près de "
+"la station pourrait éveiller l'intérêt de l'ennemi. Une fois que je serai à "
+"bord de %s, je rassemblerai des renseignements et les retransmettrai. je "
+"suis prêt à y aller."
 
 #: scripts/scenario_55_defenderHunter.lua:8347
 #, lua-format
 msgctxt "PaulOrders-comms"
 msgid "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"
 msgstr ""
+"Récupérer le vaisseau à moins de 2,5U de %s dans le secteur %s pour "
+"transporter secrètement Paul Straight."
 
 #: scripts/scenario_55_defenderHunter.lua:8374
 #, lua-format
 msgctxt "msgScience"
 msgid "Paul Straight has transported aboard %s"
-msgstr ""
+msgstr "Paul Straight a été transporté à bord de %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8378
 #, lua-format
 msgctxt "msgOperations"
 msgid "Paul Straight has transported aboard %s"
-msgstr ""
+msgstr "Paul Straight a été transporté à bord de %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8381
 #, lua-format
 msgctxt "Paul-comms"
 msgid "Await intelligence results from Paul Straight on %s"
-msgstr ""
+msgstr "En attente des résultats des renseignements de Paul Straight sur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8403
 msgctxt "Paul-comms"
 msgid ""
 "[Paul Straight] I discovered the location of the enemy bases in the area:"
 msgstr ""
+"[Paul Straight] J'ai découvert l'emplacement des bases ennemies dans la "
+"zone :"
 
 #: scripts/scenario_55_defenderHunter.lua:8406
 #, lua-format
@@ -3893,6 +3915,7 @@ msgstr ""
 msgctxt "msgScience"
 msgid "Lifesign telemetry from Paul Straight's equipment has ceased"
 msgstr ""
+"L'indicateur de vie de l'équipement de Paul Straight a cessé d'émettre."
 
 #: scripts/scenario_55_defenderHunter.lua:8424
 #: scripts/scenario_55_defenderHunter.lua:8452
@@ -3902,6 +3925,7 @@ msgstr ""
 msgctxt "msgOperations"
 msgid "Lifesign telemetry from Paul Straight's equipment has ceased"
 msgstr ""
+"L'indicateur de vie de l'équipement de Paul Straight a cessé d'émettre."
 
 #: scripts/scenario_55_defenderHunter.lua:8438
 #, lua-format
@@ -3910,6 +3934,8 @@ msgid ""
 "[Paul Straight] Prefect Ghalantor is on station %s. Wait, someone is "
 "coming..."
 msgstr ""
+"[Paul Straight] Le préfet Ghalantor est à la station %s. Attendez, quelqu'un "
+"arrive..."
 
 #: scripts/scenario_55_defenderHunter.lua:8466
 msgctxt "Paul-incCall"
@@ -3917,11 +3943,14 @@ msgid ""
 "We discovered your perfidious spy aboard our station. He will be executed "
 "for his treasonous activities"
 msgstr ""
+"Nous avons découvert votre perfide espion à bord de notre station. Il sera "
+"exécuté pour ses activités de trahison."
 
 #: scripts/scenario_55_defenderHunter.lua:8476
 msgctxt "Paul-msgScience"
 msgid "Lifesign telemetry from Paul Straight's equipment has ceased"
 msgstr ""
+"L'indicateur de vie de l'équipement de Paul Straight a cessé d'émettre."
 
 #: scripts/scenario_55_defenderHunter.lua:8539
 #, lua-format
@@ -4158,142 +4187,142 @@ msgstr "   Coque : %i%% (%.1f/%i)"
 #: scripts/scenario_55_defenderHunter.lua:8879
 msgctxt "scienceDescription-artifact"
 msgid "sprightly unassuming object"
-msgstr ""
+msgstr "Objet sans intérêt"
 
 #: scripts/scenario_55_defenderHunter.lua:8879
 msgctxt "scienceDescription-artifact"
 msgid "Object shows rapidly building energy"
-msgstr ""
+msgstr "L'objet indique une énergie qui augmente rapidement"
 
 #: scripts/scenario_55_defenderHunter.lua:10176
 msgctxt "msgEngineer"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_55_defenderHunter.lua:10180
 msgctxt "msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
-msgstr ""
+msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
 #: scripts/scenario_55_defenderHunter.lua:10199
 msgctxt "msgEngineer"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_55_defenderHunter.lua:10203
 msgctxt "msgEngineer+"
 msgid "Automated systems have recovered some coolant"
-msgstr ""
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
 
 #: scripts/scenario_55_defenderHunter.lua:10267
 msgctxt "msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_55_defenderHunter.lua:10271
 msgctxt "msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_55_defenderHunter.lua:10288
 msgctxt "msgEngineer"
 msgid "Damage has caused a loss of coolant"
-msgstr ""
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_55_defenderHunter.lua:10292
 msgctxt "msgEngineer+"
 msgid "Damage has caused a loss of coolant"
-msgstr ""
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
 
 #: scripts/scenario_55_defenderHunter.lua:10299
 msgctxt "msgEngineer"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10302
 msgctxt "msgEngineer+"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10305
 msgctxt "msgRelay"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10308
 msgctxt "msgOperations"
 msgid "The probe launch system has been damaged"
-msgstr ""
+msgstr "Le système de lancement des sondes a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10313
 msgctxt "msgEngineer"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10316
 msgctxt "msgEngineer+"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10319
 msgctxt "msgRelay"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10322
 msgctxt "msgOperations"
 msgid "The hacking system has been damaged"
-msgstr ""
+msgstr "Le système de piratage a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10327
 msgctxt "msgEngineer"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_55_defenderHunter.lua:10330
 msgctxt "msgEngineer+"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_55_defenderHunter.lua:10333
 msgctxt "msgScience"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_55_defenderHunter.lua:10336
 msgctxt "msgOperations"
 msgid "The scanners have been damaged"
-msgstr ""
+msgstr "Les scanners ont été endommagés."
 
 #: scripts/scenario_55_defenderHunter.lua:10341
 msgctxt "msgEngineer"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_55_defenderHunter.lua:10344
 msgctxt "msgEngineer+"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_55_defenderHunter.lua:10347
 msgctxt "msgHelms"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_55_defenderHunter.lua:10350
 msgctxt "msgTactical"
 msgid "Combat maneuver has been damaged"
-msgstr ""
+msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_55_defenderHunter.lua:10355
 msgctxt "msgEngineer"
 msgid "Self destruct system has been damaged"
-msgstr ""
+msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10358
 msgctxt "msgEngineer+"
 msgid "Self destruct system has been damaged"
-msgstr ""
+msgstr "Le système d'autodestruction a été endommagé."
 
 #: scripts/scenario_55_defenderHunter.lua:10395
 #: scripts/scenario_55_defenderHunter.lua:10404
@@ -4310,25 +4339,25 @@ msgstr "Liq. de ref. manuel"
 #: scripts/scenario_55_defenderHunter.lua:10523
 msgctxt "tabEngineer"
 msgid "Gathering Coolant"
-msgstr ""
+msgstr "Collecter Liq. de ref."
 
 #: scripts/scenario_55_defenderHunter.lua:10540
 #, lua-format
 msgctxt "tabEngineer"
 msgid "Deploying Collectors %i"
-msgstr ""
+msgstr "Déploiement des collecteurs %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10543
 #, lua-format
 msgctxt "tabEngineer"
 msgid "Configuring Collectors %i"
-msgstr ""
+msgstr "Configuration des collecteurs %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10635
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Stations: %i\t survived: %i\t destroyed: %i"
-msgstr ""
+msgstr "Stations : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10636
 #, lua-format
@@ -4337,6 +4366,8 @@ msgid ""
 "\n"
 "Friendly Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
+"\n"
+"Stations amies : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10637
 #, lua-format
@@ -4345,6 +4376,8 @@ msgid ""
 "\n"
 "Neutral Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
+"\n"
+"Stations neutres : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10638
 #, lua-format
@@ -4356,36 +4389,41 @@ msgid ""
 "\n"
 "Enemy Stations: %i\t survived: %i\t destroyed: %i"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"\n"
+"Stations ennemies : %i sauvées : %i détruites : %i"
 
 #: scripts/scenario_55_defenderHunter.lua:10643
 #: scripts/scenario_55_defenderHunter.lua:10656
 msgctxt "msgMainscreen"
 msgid "Ensign"
-msgstr ""
+msgstr "Grade"
 
 #: scripts/scenario_55_defenderHunter.lua:10645
 #: scripts/scenario_55_defenderHunter.lua:10658
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
-msgstr ""
+msgstr "Lieutenant"
 
 #: scripts/scenario_55_defenderHunter.lua:10647
 #: scripts/scenario_55_defenderHunter.lua:10660
 msgctxt "msgMainscreen"
 msgid "Commander"
-msgstr ""
+msgstr "Commandant"
 
 #: scripts/scenario_55_defenderHunter.lua:10649
 #: scripts/scenario_55_defenderHunter.lua:10662
 msgctxt "msgMainscreen"
 msgid "Captain"
-msgstr ""
+msgstr "Capitaine"
 
 #: scripts/scenario_55_defenderHunter.lua:10651
 #: scripts/scenario_55_defenderHunter.lua:10664
 msgctxt "msgMainscreen"
 msgid "Admiral"
-msgstr ""
+msgstr "Amiral"
 
 #: scripts/scenario_55_defenderHunter.lua:10653
 #, lua-format
@@ -4394,6 +4432,8 @@ msgid ""
 "\n"
 "Earned rank:  %s"
 msgstr ""
+"\n"
+"Rang obtenu : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:10667
 #, lua-format
@@ -4402,6 +4442,8 @@ msgid ""
 "\n"
 "Post Target Enemy Base Survival Rank: %s"
 msgstr ""
+"\n"
+"Rang de survie de la base ennemie : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:10669
 #, lua-format
@@ -4410,6 +4452,8 @@ msgid ""
 "\n"
 "Post Home Base Destruction Rank: %s"
 msgstr ""
+"\n"
+"Rang de destruction de la base d'accueil : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:10699
 #, lua-format
