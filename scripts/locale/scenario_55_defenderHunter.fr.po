@@ -2802,13 +2802,14 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6228
 msgctxt "Maria-comms"
 msgid "Offer gift on behalf of Maria Shrivner"
-msgstr ""
+msgstr "Offrir un cadeau au nom de Maria Shrivner."
 
 #: scripts/scenario_55_defenderHunter.lua:6258
 msgctxt "Maria-comms"
 msgid ""
 "Thanks. He's impressed with the gift to such a degree that he's speechless"
 msgstr ""
+"Merci. Il est tellement impressionné par le cadeau qu'il est sans voix."
 
 #: scripts/scenario_55_defenderHunter.lua:6260
 msgctxt "Maria-comms"
@@ -2816,6 +2817,9 @@ msgid ""
 "I know this couple (or former couple). Only gold, platinum, dilithium, "
 "tritanium or cobolt will work as a gift"
 msgstr ""
+"Je connais ce couple (ou ancien couple). Seuls l'or (gold), le platine "
+"(platinum), le dilithium, le tritanium ou le cobalt fonctionneront comme "
+"cadeau."
 
 #: scripts/scenario_55_defenderHunter.lua:6270
 msgctxt "upgradeOrders-comms"
@@ -3615,12 +3619,14 @@ msgstr "Protéger %s"
 msgctxt "intelligenceOrdersAudio-shipLog"
 msgid "[%s] We need some goods of type %s. Can you help? I hear %s has some"
 msgstr ""
+"[%s] Nous avons besoin de marchandises de type %s. Pouvez-vous aider ? J'ai "
+"entendu dire que %s en avait."
 
 #: scripts/scenario_55_defenderHunter.lua:7402
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Bring %s to %s. Possible source: %s"
-msgstr ""
+msgstr "Apporter %s à %s. Source possible : %s"
 
 #: scripts/scenario_55_defenderHunter.lua:7415
 msgctxt "upgrade-comms"
@@ -3634,12 +3640,14 @@ msgid ""
 "The enemy activity has been traced back to enemy bases nearby. Find these "
 "bases and stop these incursions. Threat Assessment: %.1f"
 msgstr ""
+"L'activité ennemie a été retracée jusqu'aux bases ennemies à proximité. "
+"Trouvez ces bases et arrêtez ces incursions. Évaluation de la menace : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7659
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Find enemy bases. Stop enemy incursions. TA:%.1f"
-msgstr ""
+msgstr "Trouver les bases ennemies. Stopper les incursions ennemies. TA : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7690
 #, lua-format
@@ -3648,12 +3656,16 @@ msgid ""
 "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy "
 "that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"
 msgstr ""
+"Le préfet Kraylor, Ghalontor, s'est réfugié sur l'une des stations ennemies. "
+"Détruisez cette station et l'invasion Kraylor s'effondrera. Évaluation de la "
+"menace : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7698
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Destroy enemy base with Prefect Ghalontor aboard. TA:%.1f"
 msgstr ""
+"Détruire la base ennemie avec le préfet Ghalontor à son bord. TA : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7738
 #, lua-format
@@ -3661,6 +3673,8 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"
 msgstr ""
+"Base ennemie située en %s. D'autres attendues à proximité. Évaluation de la "
+"menace : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7745
 #, lua-format
@@ -3668,6 +3682,8 @@ msgctxt "intelligenceOrders-comms"
 msgid ""
 "Destroy enemy base possibly near %s with Prefect Ghalontor aboard. TA:%.1f"
 msgstr ""
+"Détruire la base ennemie se trouvant surement près du secteur %s avec le "
+"préfet Ghalontor à son bord. TA : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7785
 #: scripts/scenario_55_defenderHunter.lua:7832
@@ -3677,6 +3693,8 @@ msgid ""
 "Another enemy base located in %s. Others expected nearby. Threat Assessment: "
 "%.1f"
 msgstr ""
+"Une autre base ennemie située en %s. D'autres attendues à proximité. "
+"Évaluation de la menace : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7792
 #, lua-format
@@ -3685,6 +3703,8 @@ msgid ""
 "Destroy enemy base possibly near %s or %s with Prefect Ghalontor aboard. TA:"
 "%.1f"
 msgstr ""
+"Détruire la base ennemie possiblement près du secteur %s ou %s avec le "
+"préfet Ghalontor à bord. TA : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7839
 #, lua-format
@@ -3693,6 +3713,8 @@ msgid ""
 "Destroy enemy base possibly near %s, %s or %s with Prefect Ghalontor aboard. "
 "TA:%.1f"
 msgstr ""
+"Détruire la base ennemie surement près de %s, %s ou %s avec le préfet "
+"Ghalontor à bord. TA : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7868
 #, lua-format
@@ -3701,6 +3723,8 @@ msgid ""
 "Another enemy base located in %s. Others expected nearby: Threat Assessment: "
 "%.1f"
 msgstr ""
+"Une autre base ennemie située en secteur %s. D'autres attendues à "
+"proximité : Évaluation de la menace : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7875
 #, lua-format
@@ -3709,6 +3733,8 @@ msgid ""
 "Destroy enemy base possibly near %s, %s, %s or %s with Prefect Ghalontor "
 "aboard. TA:%.1f"
 msgstr ""
+"Détruire la base ennemie se trouvant surement près de %s, %s, %s ou %s avec "
+"le préfet Ghalontor à bord. TA : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7904
 #, lua-format
@@ -3717,12 +3743,14 @@ msgid ""
 "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat "
 "Assessment: %.1f"
 msgstr ""
+"Nous confirmont que le préfet Ghalontor est à bord de la station ennemie %s "
+"en %s. Évaluation de la menace : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7911
 #, lua-format
 msgctxt "intelligenceOrders-comms"
 msgid "Destroy enemy base %s in %s. TA:%.1f"
-msgstr ""
+msgstr "Détruire la base ennemie %s en %s. AT : %.1f"
 
 #: scripts/scenario_55_defenderHunter.lua:7997
 #, lua-format
@@ -3855,6 +3883,8 @@ msgid ""
 "\n"
 "%s in %s"
 msgstr ""
+"\n"
+"%s en %s"
 
 #: scripts/scenario_55_defenderHunter.lua:8420
 #: scripts/scenario_55_defenderHunter.lua:8448
@@ -3946,12 +3976,15 @@ msgid ""
 "shield strength of station %s. The analysis shows that the technical expert "
 "can be found on station %s in sector %s"
 msgstr ""
+"L'analyse du renseignement montre des recherches sur le réseau qui "
+"pourraient doubler la puissance du bouclier de la station %s. L'analyse "
+"montre que l'expert technique se trouve sur la station %s dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8609
 #, lua-format
 msgctxt "MariaOrders-comms"
 msgid "Find shield expert at station %s in %s"
-msgstr ""
+msgstr "Trouver un expert en bouclier à la station %s en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8629
 #, lua-format
@@ -3963,6 +3996,12 @@ msgid ""
 "the station after a severe romantic breakup with her supervisor. She took a "
 "job on a freighter %s which was last reported in %s"
 msgstr ""
+"Nous avons entendu dire que vous recherchiez notre ancienne technicienne de "
+"maintenance des boucliers, Maria Shrivner, qui a publié des conseils sur les "
+"progrès de la technologie des boucliers. Nous l'avons recherchée. Nous "
+"venons tout juste d'apprendre qu'elle a quitté la station après une grosse "
+"rupture amoureuse avec son superviseur. Elle a pris un emploi sur le cargo "
+"%s qui a été signalé pour la dernière fois en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8631
 #: scripts/scenario_55_defenderHunter.lua:8643
@@ -3970,6 +4009,8 @@ msgstr ""
 msgctxt "MariaOrders-comms"
 msgid "Meet transport %s last reported in %s to find Maria Shrivner"
 msgstr ""
+"Trouver le transport %s signalé pour la dernière fois dans le secteur %s "
+"pour rencontrer Maria Shrivner."
 
 #: scripts/scenario_55_defenderHunter.lua:8641
 #, lua-format
@@ -3979,6 +4020,10 @@ msgid ""
 "their final records we see that Maria Shrivner left the station to take a "
 "job on freighter %s which was last reported in %s"
 msgstr ""
+"Nous avons appris que la station %s a été détruite. Cependant, dans certains "
+"de leurs derniers enregistrements, nous pouvons voir Maria Shrivner quitter "
+"la station pour prendre un emploi sur le cargo %s qui a été signalé pour la "
+"dernière fois en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8650
 #, lua-format
@@ -3986,6 +4031,8 @@ msgctxt "Maria-shipLog"
 msgid ""
 "Station %s has been destroyed leaving no hints for shield upgrade followup"
 msgstr ""
+"La station %s a été détruite, ne laissant aucun indice pour le suivi de la "
+"mise à niveau du bouclier."
 
 #: scripts/scenario_55_defenderHunter.lua:8665
 #, lua-format
@@ -3994,6 +4041,8 @@ msgid ""
 "[Maria Shrivner] It was tragic that %s was destroyed. Bring me to %s and "
 "I'll double %s's shield effectiveness"
 msgstr ""
+"[Maria Shrivner] Ca été tragique que %s ait été détruit. Amenez-moi sur %s "
+"et je doublerai l'efficacité du bouclier de %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8668
 #: scripts/scenario_55_defenderHunter.lua:8705
@@ -4001,6 +4050,7 @@ msgstr ""
 msgctxt "MariaOrders-comms"
 msgid "Return to home base with Maria Shrivner to double shield capacity"
 msgstr ""
+"Retourner à la base avec Maria Shrivner pour doubler la capacité du bouclier."
 
 #: scripts/scenario_55_defenderHunter.lua:8682
 #, lua-format
@@ -4010,6 +4060,9 @@ msgid ""
 "misunderstanding. Help me get him some rare material as a gift and I'll "
 "double %s's shield effectiveness"
 msgstr ""
+"[Maria Shrivner] Je n'aurais jamais dû rompre avec lui, c'était une erreur. "
+"Aidez-moi à lui offrir du matériel rare et je doublerai l'efficacité du "
+"bouclier de %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8686
 #, lua-format
@@ -4018,6 +4071,8 @@ msgid ""
 "Get gold, platinum, dilithium, tritanium or cobalt and bring it and Maria "
 "Shrivner to %s"
 msgstr ""
+"Obtenir de l'or (gold), du platine (platinum), du dilithium, du tritanium ou "
+"du cobalt et l'apporter à Maria Shrivner sur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:8702
 #, lua-format
@@ -4026,12 +4081,14 @@ msgid ""
 "[Maria Shrivner] Well, he's at least thinking about it. He liked the gift. "
 "Take me to %s and let's get those shields upgraded"
 msgstr ""
+"[Maria Shrivner] Eh bien, il y pense au moins. Il a aimé le cadeau. Emmenez-"
+"moi sur %s et mettons ces boucliers à niveau."
 
 #: scripts/scenario_55_defenderHunter.lua:8715
 #, lua-format
 msgctxt "Maria-shipLog"
 msgid "We were just notified that station %s has been destroyed"
-msgstr ""
+msgstr "Nous venons juste d'être informés que la station %s a été détruite."
 
 #: scripts/scenario_55_defenderHunter.lua:8717
 #, lua-format
@@ -4041,6 +4098,10 @@ msgid ""
 "Well, the least I can do is upgrade %s's shields. Take me there and I'll "
 "double %s's shield capacity"
 msgstr ""
+"[Maria Shrivner] Oh non ! J'arrive trop tard ! Maintenant, nous ne serons "
+"jamais réconciliés. *sniff* Eh bien, le moins que je puisse faire est "
+"d'améliorer les boucliers de %s. Emmenez-moi sur %s et je doublerai la "
+"capacité du bouclier."
 
 #: scripts/scenario_55_defenderHunter.lua:8746
 #, lua-format
@@ -4049,6 +4110,8 @@ msgid ""
 "[Maria Shrivner] %s's shield capacity has been doubled. They should charge "
 "up to their new capacity eventually"
 msgstr ""
+"[Maria Shrivner] La capacité du bouclier de %s a été doublée. Il devrait "
+"éventuellement se charger jusqu'à sa nouvelle capacité."
 
 #: scripts/scenario_55_defenderHunter.lua:8779
 #, lua-format
