@@ -51,7 +51,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à 8\n"
 "\n"
-"  <<TRADUCTION EN COURS : 85%>>\n"
+"  <<TRADUCTION EN COURS : 93%>>\n"
 "\n"
 "Mission : Défendre votre base et traquer les ennemis\n"
 "\n"
@@ -975,7 +975,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:1711
 msgctxt "stationGeneralInfo-comms"
 msgid "Androids, their parts, maintenance and recylcling"
-msgstr ""
+msgstr "Androïdes : pièces, entretien et recyclage."
 
 #: scripts/scenario_55_defenderHunter.lua:1712
 msgctxt "stationStory-comms"
@@ -1047,6 +1047,11 @@ msgid ""
 "and protocols. The station name recognizes the tragic loss of our founder to "
 "Imperial violence"
 msgstr ""
+"Owens a démarré dans le domaine des vaporisateurs d'humidité sur Tattooine, "
+"puis s'est diversifié dans les élévateurs de charge sur la base de "
+"l'acquisition de logiciels et de protocoles propriétaires. Le nom de la "
+"station reconnaît la perte tragique de notre fondateur due à la violence "
+"impériale."
 
 #: scripts/scenario_55_defenderHunter.lua:1859
 msgctxt "stationGeneralInfo-comms"
@@ -1122,6 +1127,8 @@ msgid ""
 "Lost the history memory bank. Recovery efforts only brought back the phrase, "
 "'I'll be back'"
 msgstr ""
+"Nous avons perdu la banque de mémoire de notre historique. Les efforts de "
+"récupération n'ont fait que retrouver la phrase \"Je reviendrai\"."
 
 #: scripts/scenario_55_defenderHunter.lua:2002
 msgctxt "scienceDescription-station"
@@ -1587,12 +1594,12 @@ msgstr "Vitesse Normal à Lent"
 #: scripts/scenario_55_defenderHunter.lua:4017
 msgctxt "scienceDescription-planet"
 msgid "Lush planet with only mild seasonal variations"
-msgstr ""
+msgstr "Planète luxuriante avec seulement de légères variations saisonnières"
 
 #: scripts/scenario_55_defenderHunter.lua:4019
 msgctxt "scienceDescription-station"
 msgid "Alderaan communications network hub"
-msgstr ""
+msgstr "Hub du réseau de communication d'Alderaan"
 
 #: scripts/scenario_55_defenderHunter.lua:5281
 msgctxt "station-comms"
@@ -1626,7 +1633,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:5335
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+msgstr "Nous avons besoin de nous réapprovisionner en munitions."
 
 #: scripts/scenario_55_defenderHunter.lua:5336
 msgctxt "ammo-comms"
@@ -1765,7 +1772,7 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 "%s\n"
-"Réparer la coque."
+"Réparation de la coque."
 
 #: scripts/scenario_55_defenderHunter.lua:5420
 #: scripts/scenario_55_defenderHunter.lua:6493
@@ -2104,7 +2111,7 @@ msgstr "Acheter du liquide de refroidissement pour %i de réputation"
 #: scripts/scenario_55_defenderHunter.lua:5604
 msgctxt "trade-comms"
 msgid "Additional coolant purchased"
-msgstr ""
+msgstr "Liquide de refroidissement supplémentaire acheté"
 
 #: scripts/scenario_55_defenderHunter.lua:5631
 #, lua-format
@@ -2136,12 +2143,12 @@ msgstr "Auriez-vous quelque chose pour nous?"
 #: scripts/scenario_55_defenderHunter.lua:5667
 msgctxt "upgrade-comms"
 msgid "Request promised information"
-msgstr ""
+msgstr "Demander les informations promises"
 
 #: scripts/scenario_55_defenderHunter.lua:5668
 msgctxt "upgrade-comms"
 msgid "Remind me what information I promised"
-msgstr ""
+msgstr "Rappelez-moi les informations que j'ai promises."
 
 #: scripts/scenario_55_defenderHunter.lua:5714
 msgctxt "station-comms"
@@ -2194,7 +2201,7 @@ msgstr "     %s: %i, %i\n"
 msgctxt "trade-comms"
 msgid "Goods or components station will buy: price in reputation\n"
 msgstr ""
-"Marchandises ou composants que la station achètera : prix en réputation\n"
+"Marchandises ou composants que la station achètera : (prix en réputation)\n"
 
 #: scripts/scenario_55_defenderHunter.lua:5753
 #: scripts/scenario_55_defenderHunter.lua:5762
@@ -2333,7 +2340,7 @@ msgstr "Échanger des Médicaments (medicine) contre %s"
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
-msgstr "Échanger Produits de luxe (luxury) contre %s"
+msgstr "Échanger des produits de luxe (luxury) contre %s"
 
 #: scripts/scenario_55_defenderHunter.lua:5907
 #: scripts/scenario_55_defenderHunter.lua:6896
@@ -2389,7 +2396,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Provide %s as requested"
-msgstr ""
+msgstr "%s fourni comme demandé"
 
 #: scripts/scenario_55_defenderHunter.lua:5933
 msgctxt "trade-comms"
@@ -2398,17 +2405,20 @@ msgid ""
 "\n"
 "I have some information for you. Decide which one you want"
 msgstr ""
+"Merci, nous en avions vraiment besoin.\n"
+"\n"
+"J'ai quelques informations pour vous. Décidez laquelle vous voulez."
 
 #: scripts/scenario_55_defenderHunter.lua:5934
 msgctxt "upgrade-comms"
 msgid "Ship maneuver upgrade"
-msgstr ""
+msgstr "Amélioration de la manœuvre du navire."
 
 #: scripts/scenario_55_defenderHunter.lua:5936
 #: scripts/scenario_55_defenderHunter.lua:5940
 msgctxt "upgrade-comms"
 msgid "Check back shortly and I'll tell you all about it"
-msgstr ""
+msgstr "Revenez sous peu et je vous dirai tout à ce sujet."
 
 #: scripts/scenario_55_defenderHunter.lua:5938
 msgctxt "intelligence-comms"
@@ -2419,7 +2429,7 @@ msgstr "Intelligence"
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Give %s as requested"
-msgstr ""
+msgstr "Donner %s comme demandé."
 
 #: scripts/scenario_55_defenderHunter.lua:5949
 #, lua-format
@@ -2429,36 +2439,41 @@ msgid ""
 "\n"
 "I have information for you. Decide which one you want"
 msgstr ""
+"Merci, nous avions besoin de ce %s.\n"
+"\n"
+"J'ai des informations pour vous. Décidez laquelle vous voulez."
 
 #: scripts/scenario_55_defenderHunter.lua:5950
 #: scripts/scenario_55_defenderHunter.lua:6128
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Upgrade %s to auto-rotate"
-msgstr ""
+msgstr "Mettre à niveau %s pour l'auto-rotation."
 
 #: scripts/scenario_55_defenderHunter.lua:5952
 #: scripts/scenario_55_defenderHunter.lua:5956
 #: scripts/scenario_55_defenderHunter.lua:5960
 msgctxt "upgrade-comms"
 msgid "Check back in a bit and I'll tell you all about it"
-msgstr ""
+msgstr "Revenez un peu plus tard et je vous dirai tout à ce sujet."
 
 #: scripts/scenario_55_defenderHunter.lua:5954
 msgctxt "upgrade-comms"
 msgid "Upgrade beam weapon cycle time"
-msgstr ""
+msgstr "Améliorer la durée de cycle des faisceaux laser."
 
 #: scripts/scenario_55_defenderHunter.lua:5958
 #: scripts/scenario_55_defenderHunter.lua:6207
 msgctxt "upgrade-comms"
 msgid "Upgrade hull damage capacity"
-msgstr ""
+msgstr "Améliorer la capacité d'encaissement de dommages à la coque."
 
 #: scripts/scenario_55_defenderHunter.lua:5965
 msgctxt "upgrade-comms"
 msgid "What about that maneuver upgrade information you promised?"
 msgstr ""
+"Qu'en est-il des informations de mise à niveau de manœuvre que vous avez "
+"promises ?"
 
 #: scripts/scenario_55_defenderHunter.lua:5966
 #, lua-format
@@ -2466,6 +2481,8 @@ msgctxt "upgrade-comms"
 msgid ""
 "I hear %s can upgrade your maneuverability, but they need %s to do the job"
 msgstr ""
+"J'ai entendu dire que %s peut améliorer votre système de manœuvre, mais ils "
+"ont besoin de %s pour faire le travail."
 
 #: scripts/scenario_55_defenderHunter.lua:5968
 #, lua-format
@@ -2824,7 +2841,7 @@ msgstr ""
 #: scripts/scenario_55_defenderHunter.lua:6270
 msgctxt "upgradeOrders-comms"
 msgid "Get ship maneuver upgrade"
-msgstr ""
+msgstr "Obtenir la mise à niveau de la manœuvre du vaisseau."
 
 #: scripts/scenario_55_defenderHunter.lua:6272
 #: scripts/scenario_55_defenderHunter.lua:6283
@@ -2834,6 +2851,8 @@ msgid ""
 "\n"
 "Optional:\n"
 msgstr ""
+"\n"
+"Mission optionnelle :\n"
 
 #: scripts/scenario_55_defenderHunter.lua:6274
 #, lua-format
@@ -2843,6 +2862,9 @@ msgid ""
 "Optional:\n"
 "Get ship maneuver upgrade from %s for %s"
 msgstr ""
+"\n"
+"Mission optionnelle :\n"
+"Obtenir une amélioration de la manœuvre du navire à partir de %s pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6276
 #, lua-format
@@ -2852,6 +2874,10 @@ msgid ""
 "Optional:\n"
 "Get ship maneuver upgrade from %s in sector %s for %s"
 msgstr ""
+"\n"
+"Mission optionnelle :\n"
+"Obtenir une amélioration de la manœuvre du vaisseau à partir de %s dans le "
+"secteur %s pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6278
 #, lua-format
@@ -2862,6 +2888,11 @@ msgid ""
 "Get ship maneuver upgrade from %s in sector %s for %s.\n"
 "    You might find %s at %s"
 msgstr ""
+"\n"
+"Mission optionnelle :\n"
+"Obtenir une amélioration de la manœuvre du vaisseau à partir de %s dans le "
+"secteur %s pour %s.\n"
+"    Vous pourriez trouver %s à %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6280
 #, lua-format
@@ -2872,24 +2903,30 @@ msgid ""
 "Get ship maneuver upgrade from %s in sector %s for %s.\n"
 "    You might find %s at %s in sector %s"
 msgstr ""
+"\n"
+"Mission optionnelle :\n"
+"Obtenir une amélioration de la manœuvre du vaisseau à partir de %s dans le "
+"secteur %s pour %s.\n"
+"    Vous pourriez trouver %s à %s dans le secteur %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6294
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Upgrade %s to rotate"
-msgstr ""
+msgstr "Mettre à niveau %s pour la rotation."
 
 #: scripts/scenario_55_defenderHunter.lua:6298
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Upgrade %s to auto-rotate by taking %s to %s"
-msgstr ""
+msgstr "Mettre à niveau %s pour la rotation automatique en prenant %s vers %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6300
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Upgrade %s to auto-rotate by taking %s to %s in %s"
 msgstr ""
+"Mettre à niveau %s pour la rotation automatique en prenant %s vers %s en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6302
 #, lua-format
@@ -2898,6 +2935,9 @@ msgid ""
 "Upgrade %s to auto-rotate by taking %s to %s in %s.\n"
 "    %s may have %s"
 msgstr ""
+"Mettre à niveau %s pour la rotation automatique en prenant %s vers %s en "
+"%s.\n"
+"     %s peut avoir %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6304
 #, lua-format
@@ -2906,23 +2946,30 @@ msgid ""
 "Upgrade %s to auto-rotate by taking %s to %s in %s.\n"
 "    %s in %s may have %s"
 msgstr ""
+"Mettre à niveau %s pour la rotation automatique en prenant %s vers %s en "
+"%s.\n"
+"     %s en %s peut avoir %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6306
 msgctxt "upgradeOrders-comms"
 msgid "Get beam cycle time upgrade"
-msgstr ""
+msgstr "Obtenir une mise à niveau de la durée de cycle des faisceaux laser."
 
 #: scripts/scenario_55_defenderHunter.lua:6310
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get beam cycle time upgrade from %s for %s"
 msgstr ""
+"Obtenir une mise à niveau de la durée de cycle des faisceaux laser à partir "
+"de %s pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6312
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get beam cycle time upgrade from %s in %s for %s"
 msgstr ""
+"Obtenir une mise à niveau de la durée de cycle des faisceaux laser à partir "
+"de %s en %s pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6314
 #, lua-format
@@ -2931,6 +2978,9 @@ msgid ""
 "Get beam cycle time upgrade from %s in %s for %s\n"
 "    You might find %s at %s"
 msgstr ""
+"Obtenir une mise à niveau de la durée de cycle des faisceaux laser à partir "
+"de %s en %s pour %s.\n"
+"     Vous pourriez trouver %s à %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6316
 #, lua-format
@@ -2939,23 +2989,26 @@ msgid ""
 "Get beam cycle time upgrade from %s in %s for %s\n"
 "    You might find %s at %s in %s"
 msgstr ""
+"Obtenir une mise à niveau de la durée de cycle des faisceaux laser à partir "
+"de %s en %s pour %s.\n"
+"     Vous pourriez trouver %s à %s en %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6318
 msgctxt "upgradeOrders-comms"
 msgid "Get hull upgrade"
-msgstr ""
+msgstr "Obtenir une mise à niveau de la coque."
 
 #: scripts/scenario_55_defenderHunter.lua:6322
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get %s to upgrade hull for %s"
-msgstr ""
+msgstr "Obtenir %s pour améliorer la coque pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6324
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Get %s in %s to upgrade hull for %s"
-msgstr ""
+msgstr "Obtenir %s en %s pour améliorer la coque pour %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6326
 #, lua-format
@@ -2964,6 +3017,8 @@ msgid ""
 "Get %s in %s to upgrade hull for %s\n"
 "    %s might have %s"
 msgstr ""
+"Obtenir %s en %s pour améliorer la coque pour %s.\n"
+"     %s pourrait avoir %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6328
 #, lua-format
@@ -2972,6 +3027,8 @@ msgid ""
 "Get %s in %s to upgrade hull for %s\n"
 "    %s in %s might have %s"
 msgstr ""
+"Obtenir %s en %s pour améliorer la coque pour %s.\n"
+"     %s en %s pourrait avoir %s."
 
 #: scripts/scenario_55_defenderHunter.lua:6346
 msgctxt "ammo-comms"
@@ -3143,7 +3200,7 @@ msgid ""
 "Goods or components available: quantity, cost in reputation"
 msgstr ""
 "Station %s :\n"
-"Marchandises ou composants disponibles : quantité, coût en réputation"
+"Marchandises ou composants disponibles : (quantité, coût en réputation)"
 
 #: scripts/scenario_55_defenderHunter.lua:6466
 #, lua-format
@@ -3199,9 +3256,9 @@ msgid ""
 "Friendly stations often have food or medicine or both. Neutral stations may "
 "trade their goods for food, medicine or luxury."
 msgstr ""
-"Les stations amicales ont souvent de la nourriture ou des médicaments ou les "
-"deux. Les stations neutres peuvent échanger leurs marchandises contre de la "
-"nourriture, des médicaments ou du luxe."
+"Les stations amicales ont souvent de la nourriture (food) ou des médicaments "
+"(medicine) ou les deux. Les stations neutres peuvent échanger leurs "
+"marchandises contre de la nourriture, des médicaments ou du luxe (luxury)."
 
 #: scripts/scenario_55_defenderHunter.lua:6601
 #, lua-format
@@ -3759,28 +3816,30 @@ msgid ""
 "[%s] We are running low on goods of type %s. Can you help? %s in %s should "
 "have some"
 msgstr ""
+"[%s] Nous manquons de marchandises de type %s. Pouvez-vous nous aider ? %s "
+"en %s devrait en avoir."
 
 #: scripts/scenario_55_defenderHunter.lua:7998
 #, lua-format
 msgctxt "upgradeOrders-comms"
 msgid "Bring %s to %s. Possible source: %s in %s"
-msgstr ""
+msgstr "Apporter %s à %s. Source possible : %s en %s"
 
 #: scripts/scenario_55_defenderHunter.lua:8011
 #, lua-format
 msgctxt "upgrade-comms"
 msgid "Upgrade %s to rotate"
-msgstr ""
+msgstr "Mettre à niveau %s pour la rotation."
 
 #: scripts/scenario_55_defenderHunter.lua:8068
 msgctxt "upgrade-comms"
 msgid "Get beam cycle time upgrade"
-msgstr ""
+msgstr "Obtenir une mise à niveau de la durée de cycle des faisceaux laser."
 
 #: scripts/scenario_55_defenderHunter.lua:8143
 msgctxt "upgrade-comms"
 msgid "Get hull upgrade"
-msgstr ""
+msgstr "Obtenir une mise à niveau de la coque."
 
 #: scripts/scenario_55_defenderHunter.lua:8275
 #, lua-format
@@ -4459,7 +4518,7 @@ msgstr ""
 #, lua-format
 msgctxt "tabRelay&Ops-homeStationHealth"
 msgid "%s %s:%i%% H:%i%%"
-msgstr ""
+msgstr "%s %s :%i%% H :%i%%"
 
 #: scripts/scenario_55_defenderHunter.lua:10763
 msgctxt "buttonEngineer"
