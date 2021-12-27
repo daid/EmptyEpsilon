@@ -3278,7 +3278,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s for %i reputation"
-msgstr "La station %s dans le secteur %s possède %s pour %i rép."
+msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
 
 #: scripts/scenario_55_defenderHunter.lua:6606
 msgctxt "trade-comms"
