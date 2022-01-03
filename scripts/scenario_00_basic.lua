@@ -380,7 +380,7 @@ function init()
     }
     gametimeleft = timesetting[getScenarioSetting("Time")]
     if gametimeleft ~= nil then
-        timewarning = gametimeleft
+        timewarning = gametimeleft - 5 * 60
     end
 
     -- If not in the Empty variation, spawn the corresponding number of random
