@@ -1,0 +1,3374 @@
+# Scenario name
+msgid "Allies and Enemies"
+msgstr ""
+
+# Scenario description
+msgid ""
+"The Arlenians are your allies. The Kraylors and Exuari are your enemies and "
+"will try to prevent you from completing your missions. Duration: "
+"approximately 30 minutes\n"
+"\n"
+"Version 1 - Nov2021\n"
+"\n"
+"Three missions available in current version. Tested with EE version 20190910"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy goals and/or enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard goals and/or enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "One"
+msgstr ""
+
+msgctxt "Enemies"
+msgid ""
+"Only one mission randomly chosen from several possible missions (Default is "
+"all missions in random order)"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy One"
+msgstr ""
+
+msgctxt "Enemies"
+msgid ""
+"Easy goals and/or enemies, only one mission randomly chosen from several "
+"possible missions (Default is all missions in random order)"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard One"
+msgstr ""
+
+msgctxt "Enemies"
+msgid ""
+"Hard goals and/or enemies, only one mission randomly chosen from several "
+"possible missions (Default is all missions in random order)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:64
+msgctxt "buttonGM"
+msgid "Mining"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:66
+msgctxt "buttonGM"
+msgid "Admiral"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:68
+msgctxt "buttonGM"
+msgid "Doomsday"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:408
+msgctxt "gossip-comms"
+msgid ""
+"I hear the head of operations has a thing for his administrative assistant"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:409
+msgctxt "gossip-comms"
+msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:410
+msgctxt "gossip-comms"
+msgid ""
+"Did you know you can usually hire replacement repair crew cheaper at "
+"friendly stations?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:411
+msgctxt "gossip-comms"
+msgid ""
+"Under their uniforms, the Kraylors have an extra appendage. I wonder what "
+"they use it for"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:412
+msgctxt "gossip-comms"
+msgid ""
+"The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
+"Mynock"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:413
+msgctxt "gossip-comms"
+msgid ""
+"The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. "
+"That'd be bad news for us"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:414
+msgctxt "gossip-comms"
+msgid ""
+"Docking bay 7 has interesting mind altering substances for sale, but they're "
+"monitored between 1900 and 2300"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:415
+msgctxt "gossip-comms"
+msgid ""
+"Watch the sky tonight in quadrant J around 2243. It should be spectacular"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:416
+msgctxt "gossip-comms"
+msgid ""
+"I think the shuttle pilot has a tame miniature Ktlitan caged in his "
+"quarters. Sometimes I hear it at night"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:417
+msgctxt "gossip-comms"
+msgid ""
+"Did you hear the screaming chase in the corridors on level 4 last night? "
+"Three Kraylors were captured and put in the brig"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:418
+msgctxt "gossip-comms"
+msgid ""
+"Rumor has it that the two Lichten brothers are on the verge of a new "
+"discovery. And it's not another wine flavor either"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:799
+msgctxt "ZoneLabelDescription-faction"
+msgid "Human"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:800
+msgctxt "ZoneLabelDescription-faction"
+msgid "Arlenian"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:801
+msgctxt "ZoneLabelDescription-faction"
+msgid "Kraylor"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:802
+msgctxt "ZoneLabelDescription-faction"
+msgid "Exuari"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1512
+msgctxt "scienceDescription-station"
+msgid "Optical Components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1526
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make and supply optic components for various station and ship systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1527
+msgctxt "stationStory-comms"
+msgid ""
+"This station continues the businesses from Earth based on the merging of "
+"several companies including Leica from Switzerland, the lens manufacturer "
+"and the Japanese advanced low carbon electronic and optic company"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1533
+msgctxt "scienceDescription-station"
+msgid "Battery and software engineering"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1545
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide high quality high capacity batteries and specialized software for "
+"all shipboard systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1546
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after a fictional software engineer in a late 20th "
+"century movie depicting humanity unknowingly conquered by aliens and kept "
+"docile by software generated illusion"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1552
+msgctxt "scienceDescription-station"
+msgid "Shield and Armor Research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1566
+msgctxt "stationGeneralInfo-comms"
+msgid "The finest shield and armor manufacturer in the quadrant"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1567
+msgctxt "stationStory-comms"
+msgid ""
+"We named this station for the pioneering spirit of the 22nd century "
+"Starfleet explorer, Captain Jonathan Archer"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1573
+msgctxt "scienceDescription-station"
+msgid "Energy and particle beam components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1587
+msgctxt "stationGeneralInfo-comms"
+msgid "We fabricate general and specialized components for ship beam systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1588
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after Archimedes who, according to legend, used a "
+"series of adjustable focal length mirrors to focus sunlight on a Roman naval "
+"fleet invading Syracuse, setting fire to it"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1594
+msgctxt "scienceDescription-station"
+msgid "Warp and Impulse engine manufacturing"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1606
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We manufacture warp, impulse and jump engines for the human navy fleet as "
+"well as other independent clients on a contract basis"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1607
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the late 19th century astronaut as well as the "
+"fictionlized stations that followed. The station initially constructed "
+"entire space worthy vessels. In time, it transitioned into specializeing in "
+"propulsion systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1613
+msgctxt "scienceDescription-station"
+msgid "Training and Coordination"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1624
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We train naval cadets in routine and specialized functions aboard space "
+"vessels and coordinate naval activity throughout the sector"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1625
+msgctxt "stationStory-comms"
+msgid ""
+"The original station builders were fans of the late 20th century scientist "
+"and author Isaac Asimov. The station was initially named Foundation, but was "
+"later changed simply to Asimov. It started off as a stellar observatory, "
+"then became a supply stop and as it has grown has become an educational and "
+"coordination hub for the region"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1631
+msgctxt "scienceDescription-station"
+msgid "Communication components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1644
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide a range of communication equipment and software for use aboard "
+"ships"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1645
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Reginald Barclay who established the first "
+"transgalactic com link through the creative application of a quantum "
+"singularity. Station personnel often refer to the station as the Broccoli "
+"station"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1651
+msgctxt "scienceDescription-station"
+msgid "Medical research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1654
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and treat exotic medical conditions"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1655
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the United States national medical research "
+"center based in Bethesda, Maryland on earth which was established in the mid "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1661
+msgctxt "scienceDescription-station"
+msgid "Warp drive components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1678
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide warp drive engines and components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1679
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Chris Van Den Broeck who did some initial "
+"research into the possibility of warp drive in the late 20th century on Earth"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1685 scripts/scenario_49_allies.lua:2090
+#: scripts/scenario_49_allies.lua:2130 scripts/scenario_49_allies.lua:2776
+msgctxt "scienceDescription-station"
+msgid "Mining station"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1700
+msgctxt "scienceDescription-station"
+msgid "Robotic research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1713
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and provide robotic systems and components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1714
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after Dr. Susan Calvin who pioneered robotic "
+"behavioral research and programming"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1720
+msgctxt "scienceDescription-station"
+msgid "Advanced Material components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1745
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate several different kinds of materials critical to various space "
+"industries like ship building, station construction and mineral extraction"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1746
+msgctxt "stationStory-comms"
+msgid ""
+"We named our station after Dr. Cavor, the physicist that invented a barrier "
+"material for gravity waves - Cavorite"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1752 scripts/scenario_49_allies.lua:2280
+msgctxt "scienceDescription-station"
+msgid "Trading station"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1763
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Only the largest market and trading location in twenty sectors. You can find "
+"your heart's desire here"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1764
+msgctxt "stationStory-comms"
+msgid ""
+"Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. "
+"Designed and built with trade and commerce in mind"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1770
+msgctxt "scienceDescription-station"
+msgid "Shielded circuitry fabrication"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1785
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make a large variety of circuits for numerous ship systems shielded from "
+"sensor detection and external control interference"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1786
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named after the law which quantifies the amount of force with "
+"which stationary electrically charged particals repel or attact each other - "
+"a fundamental principle in the design of our circuits"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1792 scripts/scenario_49_allies.lua:2553
+msgctxt "scienceDescription-station"
+msgid "Impulse engine components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1807
+msgctxt "stationGeneralInfo-comms"
+msgid "We supply high quality impulse engines and parts for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1808
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the fictional engineer, Cyrus Smith created by "
+"19th century author Jules Verne"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1814 scripts/scenario_49_allies.lua:2298
+#: scripts/scenario_49_allies.lua:2596
+msgctxt "scienceDescription-station"
+msgid "Android components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1827
+msgctxt "stationGeneralInfo-comms"
+msgid "Supplier of android components, programming and service"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1828
+msgctxt "stationStory-comms"
+msgid ""
+"Named for Richard Deckard who inspired many of the sophisticated safety "
+"security algorithms now required for all androids"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1834
+msgctxt "scienceDescription-station"
+msgid "Repulsor and Tractor Beam Components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1849
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We can meet all your pushing and pulling needs with specialized equipment "
+"custom made"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1850
+msgctxt "stationStory-comms"
+msgid ""
+"The station name comes from a short story by the 20th century author "
+"Clifford D. Simak as well as from the 19th century developer John Deere who "
+"inspired a company that makes the Earth bound equivalents of our products"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1856 scripts/scenario_49_allies.lua:2318
+msgctxt "scienceDescription-station"
+msgid "Transporter components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1871
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide transporters used aboard ships as well as the components for "
+"repair and maintenance"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1872
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the early 22nd century inventor of the "
+"transporter, Dr. Emory Erickson. This station is proud to have received the "
+"endorsement of Admiral Leonard McCoy"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1878 scripts/scenario_49_allies.lua:2170
+msgctxt "scienceDescription-station"
+msgid "Autodoc components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1892
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide components for automated medical machinery"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1893
+msgctxt "stationStory-comms"
+msgid ""
+"The station is the evolution of the company that started automated "
+"pharmaceutical dispensing in the early 21st century on Earth in Finland"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1899
+msgctxt "scienceDescription-station"
+msgid "Nanotechnology research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1913
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites and software for a variety of ship-board systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1914
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name recognizes one of the first scientific researchers into "
+"nanotechnology, physicist Richard Feynman"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1921 scripts/scenario_49_allies.lua:2024
+msgctxt "scienceDescription-station"
+msgid "Mining"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1923
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We mine nearby asteroids for precious minerals and process them for sale"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1924
+msgctxt "stationStory-comms"
+msgid ""
+"This station's name is inspired by a large gold mine on Earth in Indonesia. "
+"The station builders hoped to have a similar amount of minerals found "
+"amongst these asteroids"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1965
+msgctxt "scienceDescription-station"
+msgid "Observatory and stellar mapping"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1976
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We study the cosmos and map stellar phenomena. We also track moving "
+"asteroids. Look out! Just kidding"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1982 scripts/scenario_49_allies.lua:2714
+msgctxt "scienceDescription-station"
+msgid "Sensor components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1994
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture sensor components and systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:1995
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Tony Heyes the inventor of some of the earliest "
+"electromagnetic sensors in the mid 20th century on Earth in the United "
+"Kingdom to assist blind human mobility"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2001
+msgctxt "scienceDescription-station"
+msgid "Nanite supplier"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2016
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide nanites for various organic and non-organic systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2017
+msgctxt "stationStory-comms"
+msgid ""
+"This station is named after the nanotechnologist Hossam Haick from the early "
+"21st century on Earth in Israel"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2028
+msgctxt "stationGeneralInfo-comms"
+msgid "We mine nearby asteroids for precious minerals"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2069
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology training"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2083
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We provide classes and simulation to help train diverse species in how to "
+"relate to each other"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2084
+msgctxt "stationStory-comms"
+msgid ""
+"A continuation of the research initially conducted by Dr. Gennady Komov in "
+"the early 22nd century on Venus, supported by the application of these "
+"principles"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2183
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We build and repair and provide components and upgrades for automated "
+"facilities designed for ships where a doctor cannot be a crew member "
+"(commonly called autodocs)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2184
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Lipkin who pioneered some of the research and "
+"application around robot assisted surgery in the area of partial nephrectomy "
+"for renal tumors in the early 21st century on Earth"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2190
+msgctxt "scienceDescription-station"
+msgid "Zero gravity sports and entertainment"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2203
+msgctxt "stationGeneralInfo-comms"
+msgid "Come take in a game or two or perhaps see a show"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2204
+msgctxt "stationStory-comms"
+msgid ""
+"Named after Madison Square Gardens from 21st century Earth, this station was "
+"designed to serve similar purposes in space - a venue for sports and "
+"entertainment"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2210
+msgctxt "scienceDescription-station"
+msgid "Energy beam components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2223
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture energy beam components and systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2224
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Theodore Maiman who researched and built the "
+"first laser in the mid 20th centuryon Earth"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2230
+msgctxt "scienceDescription-station"
+msgid "Energy Beam Components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2245
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture energy beam components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2246
+msgctxt "stationStory-comms"
+msgid ""
+"Station named after Guglielmo Marconi an Italian inventor from early 20th "
+"century Earth who, along with Nicolo Tesla, claimed to have invented a death "
+"ray or particle beam weapon"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2252
+msgctxt "scienceDescription-station"
+msgid "Medical Research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2255
+msgctxt "stationGeneralInfo-comms"
+msgid "We research exotic diseases and other human medical conditions"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2256
+msgctxt "stationStory-comms"
+msgid ""
+"We continue the medical work started by William Worrall Mayo in the late "
+"19th century on Earth"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2262
+msgctxt "scienceDescription-station"
+msgid "Exobiology research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2273
+msgctxt "stationGeneralInfo-comms"
+msgid "We study recently discovered life forms not native to Earth"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2274
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one the early exobiologists from mid 20th "
+"century Earth, Dr. Stanley Miller"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2291
+msgctxt "stationGeneralInfo-comms"
+msgid "Come to Muddvile for all your trade and commerce needs and desires"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2292
+msgctxt "stationStory-comms"
+msgid ""
+"Upon retirement, Harry Mudd started this commercial venture using his "
+"leftover inventory and extensive connections obtained while he traveled the "
+"stars as a salesman"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2311
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and manufacture android components and systems. Our design our "
+"androids to maximize their likeness to humans"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2312
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after the ground breaking model of android produced by "
+"the Tyrell corporation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2334
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and fabricate high quality transporters and transporter "
+"components for use aboard ships"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2335
+msgctxt "stationStory-comms"
+msgid ""
+"Miles O'Brien started this business after his experience as a transporter "
+"chief"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2341
+msgctxt "scienceDescription-station"
+msgid "Optical components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2355
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We fabricate optical lenses and related equipment as well as fiber optic "
+"cabling and components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2356
+msgctxt "stationStory-comms"
+msgid ""
+"This station grew out of the Olympus company based on earth in the early "
+"21st century. It merged with Infinera, then bought several software "
+"comapnies before branching out into space based industry"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2362
+msgctxt "scienceDescription-station"
+msgid "Diplomatic training"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2365
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"The premeire academy for leadership and diplomacy training in the region"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2366
+msgctxt "stationStory-comms"
+msgid ""
+"Established by the royal family so critical during the political upheaval era"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2372
+msgctxt "scienceDescription-station"
+msgid "Mining and trade"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2415
+msgctxt "scienceDescription-station"
+msgid "Mining and gambling"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2460 scripts/scenario_49_allies.lua:2502
+msgctxt "scienceDescription-station"
+msgid "Load lifters and components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2473
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2474
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Lars Owen. After his extensive eperience with "
+"tempermental machinery on Tatooine, he used his subject matter expertise to "
+"expand into building and manufacturing the equipment adding innovations "
+"based on his years of experience using load lifters and their relative "
+"cousins, moisture vaporators"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2480
+msgctxt "scienceDescription-station"
+msgid "Optic components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2495
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide optic components for various ship systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2496
+msgctxt "stationStory-comms"
+msgid ""
+"This station is an outgrowth of the Panduit corporation started in the mid "
+"20th century on Earth in the United States"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2517
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide load lifters and components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2518
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Ellen Ripley who made creative and effective use "
+"of one of our load lifters when defending her ship"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2524
+msgctxt "scienceDescription-station"
+msgid "Shield components and research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2539
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and fabricate components for ship shield systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2540
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after the national research institution Rutherford "
+"Appleton Laboratory in the United Kingdom which conducted some preliminary "
+"research into the feasability of generating an energy shield in the late "
+"20th century"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2546 scripts/scenario_49_allies.lua:2984
+msgctxt "scienceDescription-station"
+msgid "Observatory"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2567
+msgctxt "stationGeneralInfo-comms"
+msgid "We research and manufacture impulse engine components and systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2568
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Roger Shawyer who built the first prototype "
+"impulse engine in the early 21st century"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2574
+msgctxt "scienceDescription-station"
+msgid "Repulsor and tractor beam components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2589
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We make ship systems designed to push or pull other objects around in space"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2590
+msgctxt "stationStory-comms"
+msgid ""
+"Our station is named Shree after one of many tugboat manufacturers in the "
+"early 21st century on Earth in India. Tugboats serve a similar purpose for "
+"ocean-going vessels on earth as tractor and repulsor beams serve for space-"
+"going vessels today"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2609
+msgctxt "stationGeneralInfo-comms"
+msgid "We create androids and android components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2610
+msgctxt "stationStory-comms"
+msgid ""
+"The station is named after Dr. Noonian Soong, the famous android researcher "
+"and builder"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2616
+msgctxt "scienceDescription-station"
+msgid "Logistics coordination"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2619
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We support the stations and ships in the area with planning and "
+"communication services"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2620
+msgctxt "stationStory-comms"
+msgid ""
+"We recognize the influence of Starfleet Captain James Tiberius Kirk in the "
+"23rd century in our station name"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2626
+msgctxt "scienceDescription-station"
+msgid "Advanced material components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2651
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We create multiple types of advanced material components. Our most popular "
+"products are our filaments"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2652
+msgctxt "stationStory-comms"
+msgid ""
+"We learned several of our critical industrial processes from the Tokra race, "
+"so we honor our fortune by naming the station after them"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2658
+msgctxt "scienceDescription-station"
+msgid "Shield and armor components and research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2672
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and make general and specialized components for ship shield and "
+"ship armor systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2673
+msgctxt "stationStory-comms"
+msgid ""
+"This station was named after one of the earliest researchers in shield "
+"technology, Alexander Toohie back when it was considered impractical to "
+"construct shields due to the physics involved."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2679 scripts/scenario_49_allies.lua:3028
+msgctxt "scienceDescription-station"
+msgid "Ship building and maintenance facility"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2690
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We work on all aspects of naval ship building and maintenance. Many of the "
+"naval models are researched, designed and built right here on this station. "
+"Our design goals seek to make the space faring experience as simple as "
+"possible given the tremendous capabilities of the modern naval vessel"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2696
+msgctxt "scienceDescription-station"
+msgid "Shielded Circuitry Fabrication"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2707
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in circuitry shielded from external hacking suitable for ship "
+"systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2708
+msgctxt "stationStory-comms"
+msgid ""
+"We started as an expansion from the lunar based chip manufacturer of Earth "
+"legacy Intel electronic chips"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2728
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and construct components for the most powerful and accurate "
+"sensors used aboard ships along with the software to make them easy to use"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2729
+msgctxt "stationStory-comms"
+msgid ""
+"The Veloquan company has its roots in the manufacturing of LIDAR sensors in "
+"the early 21st century on Earth in the United States for autonomous ground-"
+"based vehicles. They expanded research and manufacturing operations to "
+"include various sensors for space vehicles. Veloquan was the result of "
+"numerous mergers and acquisitions of several companies including Velodyne "
+"and Quanergy"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2735
+msgctxt "scienceDescription-station"
+msgid "Warp engine components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2750
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We specialize in the esoteric components necessary to make warp drives "
+"function properly"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2751
+msgctxt "stationStory-comms"
+msgid ""
+"Zefram Cochrane constructed the first warp drive in human history. We named "
+"our station after him because of the specialized warp systems work we do"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2760
+msgctxt "scienceDescription-station"
+msgid "Commerce and gambling"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2770
+msgctxt "stationGeneralInfo-comms"
+msgid "Come play some games and shop. House take does not exceed 4 percent"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2816
+msgctxt "scienceDescription-station"
+msgid "Casino and Gambling"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2830
+msgctxt "scienceDescription-station"
+msgid "Gambling and resupply"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2840
+msgctxt "stationGeneralInfo-comms"
+msgid "Relax and meet some interesting players"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2846
+msgctxt "scienceDescription-station"
+msgid "Commerce and recreation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2853
+msgctxt "scienceDescription-station"
+msgid "Xenopsychology research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2867 scripts/scenario_49_allies.lua:2888
+#: scripts/scenario_49_allies.lua:2937 scripts/scenario_49_allies.lua:3035
+msgctxt "scienceDescription-station"
+msgid "Resupply"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2895
+msgctxt "scienceDescription-station"
+msgid "Textiles and fashion"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2909
+msgctxt "scienceDescription-station"
+msgid "Stress Psychology Research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2923
+msgctxt "scienceDescription-station"
+msgid "Low gravity research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2940
+msgctxt "stationGeneralInfo-comms"
+msgid "Get your energy here! Grab a drink before you go!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2946
+msgctxt "scienceDescription-station"
+msgid "Research Lab and Observatory"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2960
+msgctxt "scienceDescription-station"
+msgid "Biotech research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2974
+msgctxt "scienceDescription-station"
+msgid "Routine maintenance and entertainment"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2977
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"Stop by for repairs. Take in one of our juggling shows featuring the four-"
+"armed Skandars"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2978
+msgctxt "stationStory-comms"
+msgid ""
+"The nomadic Skandars have set up at this station to practice their "
+"entertainment and maintenance skills as well as build a community where "
+"Skandars can relax"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:2998
+msgctxt "scienceDescription-station"
+msgid "Automated weapons systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3008
+msgctxt "stationGeneralInfo-comms"
+msgid ""
+"We research and create automated weapons systems to improve ship combat "
+"capability"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3014
+msgctxt "scienceDescription-station"
+msgid "Biotechnology research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3549
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3561
+msgctxt "station-comms"
+msgid ""
+"Good day, officer!\n"
+"What can we do for you today?\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3563
+msgctxt "station-comms"
+msgid "Welcome to our lovely station.\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3566
+msgctxt "station-comms"
+msgid ""
+"Forgive us if we seem a little distracted. We are carefully monitoring the "
+"enemies nearby."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3603
+msgctxt "ammo-comms"
+msgid "I need ordnance restocked"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3604
+msgctxt "ammo-comms"
+msgid "What type of ordnance?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3608
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3610
+msgctxt "ammo-comms"
+msgid "We really need some nukes ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3612 scripts/scenario_49_allies.lua:3624
+#: scripts/scenario_49_allies.lua:3636 scripts/scenario_49_allies.lua:3648
+#: scripts/scenario_49_allies.lua:3660
+#, lua-format
+msgctxt "ammo-comms"
+msgid "%s%d rep each)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3620
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles. ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3622
+msgctxt "ammo-comms"
+msgid "Got any EMPs? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3632
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3634
+msgctxt "ammo-comms"
+msgid "Do you have extra homing missiles? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3644
+msgctxt "ammo-comms"
+msgid "We could use some mines. ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3646
+msgctxt "ammo-comms"
+msgid "How about mines? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3656
+msgctxt "ammo-comms"
+msgid "What about HVLI? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3658
+msgctxt "ammo-comms"
+msgid "Could you provide HVLI? ("
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3669 scripts/scenario_49_allies.lua:4568
+msgctxt "station-comms"
+msgid "Tell me more about your station"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3670 scripts/scenario_49_allies.lua:4569
+msgctxt "station-comms"
+msgid "What would you like to know?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3671 scripts/scenario_49_allies.lua:4570
+msgctxt "stationGeneralInfo-comms"
+msgid "General information"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3673 scripts/scenario_49_allies.lua:3678
+#: scripts/scenario_49_allies.lua:3686 scripts/scenario_49_allies.lua:3832
+#: scripts/scenario_49_allies.lua:3950 scripts/scenario_49_allies.lua:3952
+#: scripts/scenario_49_allies.lua:3954 scripts/scenario_49_allies.lua:3956
+#: scripts/scenario_49_allies.lua:3981 scripts/scenario_49_allies.lua:3993
+#: scripts/scenario_49_allies.lua:4035 scripts/scenario_49_allies.lua:4047
+#: scripts/scenario_49_allies.lua:4049 scripts/scenario_49_allies.lua:4104
+#: scripts/scenario_49_allies.lua:4134 scripts/scenario_49_allies.lua:4166
+#: scripts/scenario_49_allies.lua:4198 scripts/scenario_49_allies.lua:4204
+#: scripts/scenario_49_allies.lua:4228 scripts/scenario_49_allies.lua:4233
+#: scripts/scenario_49_allies.lua:4264 scripts/scenario_49_allies.lua:4278
+#: scripts/scenario_49_allies.lua:4295 scripts/scenario_49_allies.lua:4339
+#: scripts/scenario_49_allies.lua:4374 scripts/scenario_49_allies.lua:4424
+#: scripts/scenario_49_allies.lua:4433 scripts/scenario_49_allies.lua:4435
+#: scripts/scenario_49_allies.lua:4445 scripts/scenario_49_allies.lua:4447
+#: scripts/scenario_49_allies.lua:4449 scripts/scenario_49_allies.lua:4473
+#: scripts/scenario_49_allies.lua:4485 scripts/scenario_49_allies.lua:4519
+#: scripts/scenario_49_allies.lua:4541 scripts/scenario_49_allies.lua:4549
+#: scripts/scenario_49_allies.lua:4559 scripts/scenario_49_allies.lua:4564
+#: scripts/scenario_49_allies.lua:4572 scripts/scenario_49_allies.lua:4577
+#: scripts/scenario_49_allies.lua:4585 scripts/scenario_49_allies.lua:4603
+#: scripts/scenario_49_allies.lua:4625 scripts/scenario_49_allies.lua:4629
+#: scripts/scenario_49_allies.lua:4648 scripts/scenario_49_allies.lua:4652
+#: scripts/scenario_49_allies.lua:4669 scripts/scenario_49_allies.lua:4673
+#: scripts/scenario_49_allies.lua:4690 scripts/scenario_49_allies.lua:4694
+#: scripts/scenario_49_allies.lua:4797 scripts/scenario_49_allies.lua:4804
+#: scripts/scenario_49_allies.lua:4813 scripts/scenario_49_allies.lua:4838
+#: scripts/scenario_49_allies.lua:4845 scripts/scenario_49_allies.lua:4877
+#: scripts/scenario_49_allies.lua:4903 scripts/scenario_49_allies.lua:4933
+#: scripts/scenario_49_allies.lua:4958 scripts/scenario_49_allies.lua:4988
+#: scripts/scenario_49_allies.lua:5054 scripts/scenario_49_allies.lua:5065
+#: scripts/scenario_49_allies.lua:5092 scripts/scenario_49_allies.lua:5099
+#: scripts/scenario_49_allies.lua:5121 scripts/scenario_49_allies.lua:5137
+#: scripts/scenario_49_allies.lua:5162 scripts/scenario_49_allies.lua:5187
+#: scripts/scenario_49_allies.lua:5218
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3676 scripts/scenario_49_allies.lua:4575
+msgctxt "stationStory-comms"
+msgid "Station history"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3684 scripts/scenario_49_allies.lua:4583
+msgctxt "gossip-comms"
+msgid "Gossip"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3695 scripts/scenario_49_allies.lua:4429
+msgctxt "doomsday-comms"
+msgid "Tell me about Gregory Unruh"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3696
+msgctxt "doomsday-comms"
+msgid "He's a retired scientist here. He's on C deck if you'd like to visit"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3697
+msgctxt "doomsday-comms"
+msgid "Visit Gregory Unruh on C deck"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3698
+msgctxt "doomsday-comms"
+msgid "[Gregory Unruh] What can I do for you?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3699
+msgctxt "doomsday-comms"
+msgid "We need your plans for a doomsday device defense mechanism"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3700
+msgctxt "doomsday-comms"
+msgid ""
+"Ah, I see someone is taking my research seriously. Here is my incomplete "
+"prototype along with the plans. You'll notice that certain components are "
+"still required."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3710 scripts/scenario_49_allies.lua:4439
+msgctxt "doctor-comms"
+msgid "Tell me about Morrigan Thultris"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3711
+msgctxt "doctor-comms"
+msgid "She does medical research here"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3712
+msgctxt "doctor-comms"
+msgid "May I speak with her?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3713
+msgctxt "doctor-comms"
+msgid ""
+"She won't come to the communications nexus, but you may visit her in her "
+"quarters"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3714
+msgctxt "doctor-comms"
+msgid "Visit Dr. Thultris"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3715
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"Who is it?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3716
+#, lua-format
+msgctxt "doctor-comms"
+msgid "I am an officer from the Human Navy ship, %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3717
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"What do you want?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3718
+msgctxt "doctor-comms"
+msgid "We need your help"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3720
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris opens her door]\n"
+"With what?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3721 scripts/scenario_49_allies.lua:3797
+#: scripts/scenario_49_allies.lua:3839 scripts/scenario_49_allies.lua:3877
+#: scripts/scenario_49_allies.lua:3915
+msgctxt "doctor-comms"
+msgid "Grab Dr. Thultris"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3723 scripts/scenario_49_allies.lua:3761
+#: scripts/scenario_49_allies.lua:3799 scripts/scenario_49_allies.lua:3841
+#: scripts/scenario_49_allies.lua:3879 scripts/scenario_49_allies.lua:3917
+msgctxt "doctor-comms"
+msgid ""
+"As you pull her down the corridor back to the ship, explaining why you've "
+"come for her, she protests initially then eventually runs back with you, "
+"convinced of the urgency of the situation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3727 scripts/scenario_49_allies.lua:3765
+#: scripts/scenario_49_allies.lua:3803 scripts/scenario_49_allies.lua:3845
+#: scripts/scenario_49_allies.lua:3883 scripts/scenario_49_allies.lua:3921
+msgctxt "doctor-comms"
+msgid "She slams the door in your face as you reach for her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3731
+msgctxt "doctor-comms"
+msgid "A dying patient needs your expertise"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3733
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] Then let's get going to help the patient\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3737
+msgctxt "doctor-comms"
+msgid ""
+"People die all the time\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3741
+msgctxt "doctor-comms"
+msgid "An Arlenian Admiral shows symptoms like those you published"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3743
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] Take me to the admiral\n"
+"\n"
+"As you both return to the ship, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3747
+msgctxt "doctor-comms"
+msgid ""
+"An Arlenian Admiral? Who cares!\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3752
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"Go away, I'm busy"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3756
+msgctxt "doctor-comms"
+msgid "Medical team suggested your research for a patient"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3758
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris opens her door]\n"
+"How does my research apply to a patient?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3759
+msgctxt "Doctor-comms"
+msgid "Grab Dr. Thultris"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3769
+msgctxt "doctor-comms"
+msgid "The symptoms closely correlate to your research"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3771
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] I think I can help\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3775
+msgctxt "doctor-comms"
+msgid ""
+"Let me know what happens with the patient\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3779
+msgctxt "doctor-comms"
+msgid "Your research may save an Arlenian Admiral's life"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3781
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] I would love to apply my research\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3785
+msgctxt "doctor-comms"
+msgid ""
+"Diplomacy and military matters bore me\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3790
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"That's nice. Leave me alone"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3794
+msgctxt "doctor-comms"
+msgid "Arlenian with an unusual disease is near death"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3796
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris opens her door]\n"
+"Why come to me?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3807
+msgctxt "doctor-comms"
+msgid "The Arlenian medical team referred us to you"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3809
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] Nice to be recognized outside of human space\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3813
+msgctxt "doctor-comms"
+msgid ""
+"What do the Arlenians know?\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3817
+msgctxt "doctor-comms"
+msgid "Your research accurately describes the symptoms"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3819
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] I would like to see the patient\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3823
+msgctxt "doctor-comms"
+msgid ""
+"Coincidental, I'm sure\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3828
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"My condolences. Goodbye"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3834
+msgctxt "doctor-comms"
+msgid "I am an admirer of your research and have questions"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3835
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"Really? What is it about my research you admire?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3836
+msgctxt "doctor-comms"
+msgid "The depth of your most recent publication"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3838
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris opens her door]\n"
+"Why does this research interest you?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3849
+msgctxt "doctor-comms"
+msgid "I know of a patient that might benefit"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3851
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] Those are rare. May I see the patient?\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3855
+msgctxt "doctor-comms"
+msgid ""
+"My research is unlikely to apply\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3859
+msgctxt "doctor-comms"
+msgid "Your research could help a sick Arlenian Admiral"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3861
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] I would like to see my research in the Arlenian context\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3865
+msgctxt "doctor-comms"
+msgid ""
+"I don't think it applies to Arlenians\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3870
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"Publish a review and we'll talk"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3874
+msgctxt "doctor-comms"
+msgid "The breadth of knowledge you demonstrate"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3876
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris opens her door]\n"
+"I doubt that. Why are you *really* here?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3887
+msgctxt "doctor-comms"
+msgid "We need your help with a dying Arlenian Admiral"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3889 scripts/scenario_49_allies.lua:3927
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] Why didn't you say so? Of course I'll help\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3893
+msgctxt "doctor-comms"
+msgid ""
+"Your first story was better\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3897
+msgctxt "doctor-comms"
+msgid "An Arlenian medical team thinks you can help a dying patient"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3899
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] That's reasonable. Let's go\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3903
+msgctxt "doctor-comms"
+msgid ""
+"I'm not concerned with Arlenian patients\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3908
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"Faint praise insults me. Go away"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3912
+msgctxt "doctor-comms"
+msgid "Your superb publication presentation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3914
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris opens her door]\n"
+"Ha! Is that why you're here?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3925
+msgctxt "doctor-comms"
+msgid "Not really. We need your help"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3931
+msgctxt "doctor-comms"
+msgid ""
+"I'm sorry, but I'm too busy right now\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3935
+msgctxt "doctor-comms"
+msgid "Of course! I've got a case study for you to examine"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3937
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris] An application for my research?! Goody Goody!\n"
+"\n"
+"As you both return, you explain the situation to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3941
+msgctxt "doctor-comms"
+msgid ""
+"Sounds interesting, but not right now, thanks\n"
+"[Dr. Thultris closes her door]"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3946
+msgctxt "doctor-comms"
+msgid ""
+"[Dr. Thultris behind closed quarters door]\n"
+"Get a writing advisor and get out of here"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3961 scripts/scenario_49_allies.lua:4453
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Tell me about %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3968 scripts/scenario_49_allies.lua:4460
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "Never heard of %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3970 scripts/scenario_49_allies.lua:4462
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s died last week. The funeral was yesterday"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3972 scripts/scenario_49_allies.lua:4464
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "%s? Who's %s? There's nobody here named %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3974 scripts/scenario_49_allies.lua:4466
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "We don't talk about %s. They are gone and good riddance"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3976 scripts/scenario_49_allies.lua:4468
+#, lua-format
+msgctxt "characterInfo-comms"
+msgid "I think %s moved away"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3985 scripts/scenario_49_allies.lua:4477
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:3990 scripts/scenario_49_allies.lua:4482
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"   %i Minutes remain in game"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4001 scripts/scenario_49_allies.lua:4017
+#, lua-format
+msgctxt "trade-comms"
+msgid "Recruit repair crew member for %i reputation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4003 scripts/scenario_49_allies.lua:4019
+#: scripts/scenario_49_allies.lua:5133
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4006 scripts/scenario_49_allies.lua:4022
+msgctxt "trade-comms"
+msgid "Repair crew member hired"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4029 scripts/scenario_49_allies.lua:4422
+#: scripts/scenario_49_allies.lua:5052
+msgctxt "path-comms"
+msgid "Where is Bespin?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4031
+#, lua-format
+msgctxt "path-comms"
+msgid "Bespin is in %s and enemies are within 30U of Cloud City"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4033 scripts/scenario_49_allies.lua:4423
+#: scripts/scenario_49_allies.lua:5053
+#, lua-format
+msgctxt "path-comms"
+msgid "Bespin is in %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4040
+msgctxt "explainGoods-comms"
+msgid "No tutorial covered goods or cargo. Explain"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4041
+msgctxt "explainGoods-comms"
+msgid ""
+"Different types of cargo or goods may be obtained from stations, freighters "
+"or other sources. They go by one word descriptions such as dilithium, optic, "
+"warp, etc. Certain mission goals may require a particular type or types of "
+"cargo. Each player ship differs in cargo carrying capacity. Goods may be "
+"obtained by spending reputation points or by trading other types of cargo "
+"(typically food, medicine or luxury)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4042
+msgctxt "explainGoodsComponent-comms"
+msgid "Explain the component goods"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4043
+msgctxt "explainGoodsMineral-comms"
+msgid "Explain the mineral goods"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4044
+msgctxt "explainGoodsTrade-comms"
+msgid "Explain the trade goods"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4045
+msgctxt "explainGoodsVapor-comms"
+msgid "Explain vapor goods"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4046
+msgctxt "explainGoodsVapor-comms"
+msgid ""
+"On rare occasions, the system cannot determine an appropriate good. In that "
+"case one of these 'vapor' or fake goods will be listed:\n"
+"   gold pressed latinum, unobtanium, eludium, impossibrium\n"
+"\n"
+"If you see one of these, that means that the good is not available. The need "
+"or desire for that good will go unmet or the mission will have to be "
+"satisfied in some other fashion."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4051
+msgctxt "trade-comms"
+msgid "Buy, sell, trade"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4052 scripts/scenario_49_allies.lua:4531
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Station %s:\n"
+"Goods or components available: quantity, cost in reputation\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4058
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i, %i\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4061
+msgctxt "trade-comms"
+msgid "Current Cargo:\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4068
+#, lua-format
+msgctxt "trade-comms"
+msgid "     %s: %i\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4074
+msgctxt "trade-comms"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4077
+#, lua-format
+msgctxt "trade-comms"
+msgid "Available Space: %i, Available Reputation: %i\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4085 scripts/scenario_49_allies.lua:4888
+#: scripts/scenario_49_allies.lua:4918 scripts/scenario_49_allies.lua:4943
+#: scripts/scenario_49_allies.lua:4973 scripts/scenario_49_allies.lua:5106
+#: scripts/scenario_49_allies.lua:5147 scripts/scenario_49_allies.lua:5172
+#: scripts/scenario_49_allies.lua:5203
+#, lua-format
+msgctxt "trade-comms"
+msgid "Buy one %s for %i reputation"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4086
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s, Quantity: %i, Rep: %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4088
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4090 scripts/scenario_49_allies.lua:4095
+msgctxt "needRep-comms"
+msgid ""
+"\n"
+"Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4092 scripts/scenario_49_allies.lua:4126
+#: scripts/scenario_49_allies.lua:4158 scripts/scenario_49_allies.lua:4190
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Insufficient station inventory"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4100
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"purchased"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4123
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade food for %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4124 scripts/scenario_49_allies.lua:4156
+#: scripts/scenario_49_allies.lua:4188
+#, lua-format
+msgctxt "trade-comms"
+msgid "Type: %s,  Quantity: %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4131 scripts/scenario_49_allies.lua:4163
+#: scripts/scenario_49_allies.lua:4195
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"Traded"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4155 scripts/scenario_49_allies.lua:4868
+#: scripts/scenario_49_allies.lua:5083
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade luxury for %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4187
+#, lua-format
+msgctxt "trade-comms"
+msgid "Trade medicine for %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4217
+msgctxt "trade-comms"
+msgid "Jettison cargo"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4218
+#, lua-format
+msgctxt "trade-comms"
+msgid ""
+"Available space: %i\n"
+"What would you like to jettison?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4227
+#, lua-format
+msgctxt "trade-comms"
+msgid "One %s jettisoned"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4240
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Technicians use impulse components to fix or enhance impulse engines or "
+"related impulse systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4241
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers use warp components to fix or enhance warp engines, warp cores and/"
+"or other related warp technology based systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4242
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Technicians use shield components to enhance or fix shield capacitors, "
+"shield charging systems and other shield or energy field generation systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4243
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers and technicians use tractor components to repair or enhance "
+"systems designed to pull objects towards the ship."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4244
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Technicians use repulsor components to repair or enhance systems designed to "
+"move objects away from the ship."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4245
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers and weapon systems repair specialists use beam components to fix, "
+"improve and/or tune beam weapons or related beam systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4246
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Repair crew use optic components in a variety of ship systems. Optic "
+"components serve as the information pathways and linkages between many ship "
+"systems"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4247
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers often use robotic components to facilitate missile loading. Other "
+"typical systems needing robotic components include medical bays, food "
+"preparation, automated repair systems, etc."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4248
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Some of the esoteric ship systems have specialized material requirements. "
+"These are typically satisfied with a filament component of some kind"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4249
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers use transporter components to fix systems designed to move objects "
+"from one location to another. The movement methods range from simple belt "
+"rollers to atomic disassembly and reassembly."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4250
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Repair crew use sensor components to fix or repair those systems that "
+"support the Science console in gathering information about the universe "
+"around the ship."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4251
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Technicians use communication components to fix the various systems used to "
+"connect the ship to other ships, stations and/or alien entities on the Relay "
+"console."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4252
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Technicians use autodoc components to repair or maintain the automated "
+"medical facilities used on many ships in place of a medical doctor or "
+"medical staff."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4253
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers need lifter components for a variety of systems needing to "
+"temporarily move mechanisms or portions of mechanisms against the "
+"acceleration or gravity aboard a ship."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4254
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Engineers use android components to build, repair and maintain androids that "
+"serve on ships. Repair crews on many ships consist largely of androids."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4255
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Technicians and engineers use nanites in a number of systems including "
+"shield, reactor, impulse engines, jump drives and warp drives. The nanites "
+"are programmed to fix things at the molecular level, often in conditions "
+"hazardous to organic beings such as humans."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4256
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"With all the automated systems on a ship, technicians often need software "
+"components to upgrade or adjust systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4257
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Many systems have specialized circuits that need upgrading or replacing via "
+"one or more circuit components."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4258
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"Batteries on a ship range in size from the ones that provide most of the "
+"energy to run the ship to tiny ones used in EVA space suits. Battery "
+"components help maintain and improve these systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4260
+msgctxt "explainGoodsComponent-comms"
+msgid ""
+"These are the typical component goods available. Which one would you like a "
+"greater explanation of?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4269
+msgctxt "explainGoodsTrade-comms"
+msgid ""
+"These are the typical trade goods available. Which one would you like a "
+"greater explanation of?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4271
+msgctxt "explainGoodsTrade-comms"
+msgid ""
+"Many people want or need food to sustain themselves or to enjoy. A good "
+"Relay officer will try to keep at least one food on board for the potential "
+"trade benefit. When offered for sale, it's usually very cheap."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4272
+msgctxt "explainGoodsTrade-comms"
+msgid ""
+"Many people need medicine to cure illness or symptoms associated with "
+"illness. Medicine is almost as cheap as food. The trade benefits are usually "
+"very high. A good Relay officer will try to keep at least on medicine on "
+"board for the potential trade benefit."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4273
+msgctxt "explainGoodsTrade-comms"
+msgid ""
+"A luxury good is anything someone considers valuable. Luxury types include "
+"jewelry, specialized clothing, rare art, etc. The trade value of luxury is "
+"not as high as food or medicine, but can still give some trade benefit. A "
+"good Relay officer will be watching for relatively low priced luxury which "
+"can be used to trade for higher priced components or minerals."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4283
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"These are the typical mineral goods available. Which one would you like a "
+"greater explanation of?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4285
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"Nickel is one of the most common metals found among asteroids. As such, it "
+"has become the defacto standard metal for most of the structure of ships."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4286
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"Platinum has electronic, explosive and medical applications, so techniciams "
+"use it to repair and upgrade a variety of ship systems."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4287
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"Civilians and military technicians value gold for a variety of reasons "
+"including use in jewelry and electronics."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4288
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"Due to its high potential for energy storage, engineers value dilithium in "
+"ship engines and shields."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4289
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"Designers and engineers use tritanium in many aspects of ship construction "
+"due to how it interacts with warp fields and jump mechanics."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4290
+msgctxt "explainGoodsMineral-comms"
+msgid ""
+"Engineers value cobalt due to its magnetic, alloy and energy storage "
+"applications."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4316
+msgctxt "ammo-comms"
+msgid "You need to stay docked for that action."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4320
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4321
+msgctxt "ammo-comms"
+msgid "We do not deal in weapons of mass disruption."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4322
+msgctxt "ammo-comms"
+msgid "We do not deal in those weapons."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4327
+msgctxt "ammo-comms"
+msgid ""
+" The Kraylor threat to mineral resources has reduced ordnance availablilty"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4335
+msgctxt "ammo-comms"
+msgid "All nukes are charged and primed for destruction."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4337
+msgctxt "ammo-comms"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4345 scripts/scenario_49_allies.lua:4360
+msgctxt "ammo-comms"
+msgid "You are fully loaded and ready to explode things."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4347
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4350 scripts/scenario_49_allies.lua:4365
+#: scripts/scenario_49_allies.lua:4370
+msgctxt "needRep-comms"
+msgid "Not enough reputation."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4355
+msgctxt "ammo-comms"
+msgid "You can't afford as much as I'd like to give you"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4356
+msgctxt "ammo-comms"
+msgid "Get just one"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4362
+msgctxt "ammo-comms"
+msgid ""
+"We generously resupplied you with one weapon charge.\n"
+"Put it to good use."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4383
+msgctxt "station-comms"
+msgid ""
+"Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4385
+msgctxt "station-comms"
+msgid ""
+"Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4388
+msgctxt "station-comms"
+msgid ""
+"\n"
+"Be aware that if enemies in the area get much closer, we will be too busy to "
+"conduct business with you."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4418
+msgctxt "station-comms"
+msgid "I need information"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4419
+msgctxt "station-comms"
+msgid "What kind of information do you need?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4430
+msgctxt "doomsday-comms"
+msgid "He's got nice retirement quarters here"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4431
+msgctxt "doomsday-comms"
+msgid "May we speak with him?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4432
+msgctxt "doomsday-comms"
+msgid ""
+"He won't talk with anyone from the Human Navy. He's still bitter over early "
+"retirement. You'll need to visit in person"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4440
+msgctxt "doctor-comms"
+msgid "She does research here"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4441
+msgctxt "doctor-comms"
+msgid "We need her skills. May I speak with her?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4442
+msgctxt "doctor-comms"
+msgid ""
+"She refuses to come to the communications nexus except on her terms. This "
+"usually means only outgoing communications. There is a very short list of "
+"contacts she will respond to and you are not on that list. If you wish to "
+"speak with her, you will need to dock and visit in person"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4443
+msgctxt "doctor-comms"
+msgid "The Arlenian Admiral is critically ill and she could help"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4444
+msgctxt "doctor-comms"
+msgid ""
+"There could be a deadly plague covering all of Human and Arlenian space and "
+"she would remain in her quarters tending to her research until the plague "
+"destroyed all other personnel on the station. Even then, it might take her a "
+"few days to realize everyone else was dead. You really will need to dock to "
+"talk to her"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4488
+msgctxt "ammo-comms"
+msgid "What ordnance do you have available for restock?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4493
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Nuke"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4497
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   EMP"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4501
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Homing"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4505
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   Mine"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4509
+msgctxt "ammo-comms"
+msgid ""
+"\n"
+"   HVLI"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4512
+msgctxt "ammo-comms"
+msgid "We have no ordnance available for restock"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4514
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following type of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4516
+#, lua-format
+msgctxt "ammo-comms"
+msgid "We have the following types of ordnance available for restock:%s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4530
+msgctxt "trade-comms"
+msgid "What goods do you have available for sale or trade?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4537
+#, lua-format
+msgctxt "trade-comms"
+msgid "   %14s: %2i, %3i\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4544
+msgctxt "trade-comms"
+msgid "Where can I find particular goods?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4545
+msgctxt "trade-comms"
+msgid ""
+"Friendly stations generally have food or medicine or both. Neutral stations "
+"often trade their goods for food, medicine or luxury."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4547
+msgctxt "trade-comms"
+msgid ""
+" Beyond that, I have no knowledge of specific stations.\n"
+"\n"
+"Check back later, someone else may have better knowledge"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4553
+msgctxt "trade-comms"
+msgid " Beyond that, I have no knowledge of specific stations"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4555
+msgctxt "trade-comms"
+msgid ""
+"\n"
+"\n"
+"What goods are you interested in?\n"
+"I've heard about these:"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4558
+#, lua-format
+msgctxt "trade-comms"
+msgid "Station %s in sector %s has %s%s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4592
+msgctxt "station-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4593
+#, lua-format
+msgctxt "station-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4596
+#, lua-format
+msgctxt "station-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4599
+#, lua-format
+msgctxt "station-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4607
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Can you send a supply drop? (%.1f rep)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4609
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request supplies."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4611
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4613 scripts/scenario_49_allies.lua:4639
+#: scripts/scenario_49_allies.lua:4660 scripts/scenario_49_allies.lua:4681
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Waypoint %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4621
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched a supply ship toward waypoint %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4623 scripts/scenario_49_allies.lua:4646
+#: scripts/scenario_49_allies.lua:4667 scripts/scenario_49_allies.lua:4688
+msgctxt "needRep-comms"
+msgid "Not enough reputation!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4633
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Adder MK5 reinforcements! (%.1f rep)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4635 scripts/scenario_49_allies.lua:4656
+#: scripts/scenario_49_allies.lua:4677
+msgctxt "stationAssist-comms"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4637 scripts/scenario_49_allies.lua:4658
+#: scripts/scenario_49_allies.lua:4679
+msgctxt "stationAssist-comms"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4644 scripts/scenario_49_allies.lua:4665
+#: scripts/scenario_49_allies.lua:4686
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "We have dispatched %s to assist at waypoint %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4654
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Phobos T3 reinforcements! (%.1f rep)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4675
+#, lua-format
+msgctxt "stationAssist-comms"
+msgid "Please send Stalker Q7 reinforcements! (%.1f rep)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4725
+msgctxt "trade-comms"
+msgid " and will trade it for medicine"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4730
+msgctxt "trade-comms"
+msgid " or food"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4732
+msgctxt "trade-comms"
+msgid " and will trade it for food"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4738
+msgctxt "trade-comms"
+msgid " or luxury"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4740
+msgctxt "trade-comms"
+msgid " and will trade it for luxury"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4790
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4792
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4794
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4796
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4799
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4801
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend waypoint %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4803
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at waypoint %i."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4810
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4811
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4816
+msgctxt "shipAssist-comms"
+msgid "Report status"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4817
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Hull: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4820
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4822
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Front Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4823
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Rear Shield: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4826
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Shield %s: %d%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4833
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "%s Missiles: %d/%d\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4842
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Dock at %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4843
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Docking at %s."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4870 scripts/scenario_49_allies.lua:5085
+msgctxt "trade-comms"
+msgid "Insufficient inventory on freighter for trade"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4875 scripts/scenario_49_allies.lua:5090
+msgctxt "trade-comms"
+msgid "Traded"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4890 scripts/scenario_49_allies.lua:4920
+#: scripts/scenario_49_allies.lua:4945 scripts/scenario_49_allies.lua:4975
+#: scripts/scenario_49_allies.lua:5108 scripts/scenario_49_allies.lua:5149
+#: scripts/scenario_49_allies.lua:5174 scripts/scenario_49_allies.lua:5205
+msgctxt "trade-comms"
+msgid "Insufficient cargo space for purchase"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4892 scripts/scenario_49_allies.lua:4922
+#: scripts/scenario_49_allies.lua:4947 scripts/scenario_49_allies.lua:4977
+#: scripts/scenario_49_allies.lua:5110 scripts/scenario_49_allies.lua:5151
+#: scripts/scenario_49_allies.lua:5176 scripts/scenario_49_allies.lua:5207
+msgctxt "trade-comms"
+msgid "Insufficient inventory on freighter"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4895 scripts/scenario_49_allies.lua:4925
+#: scripts/scenario_49_allies.lua:4950 scripts/scenario_49_allies.lua:4980
+#: scripts/scenario_49_allies.lua:5113 scripts/scenario_49_allies.lua:5154
+#: scripts/scenario_49_allies.lua:5179 scripts/scenario_49_allies.lua:5210
+msgctxt "needRep-comms"
+msgid "Insufficient reputation for purchase"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:4900 scripts/scenario_49_allies.lua:4930
+#: scripts/scenario_49_allies.lua:4955 scripts/scenario_49_allies.lua:4985
+#: scripts/scenario_49_allies.lua:5118 scripts/scenario_49_allies.lua:5159
+#: scripts/scenario_49_allies.lua:5184 scripts/scenario_49_allies.lua:5215
+msgctxt "trade-comms"
+msgid "Purchased"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5001
+msgctxt "shipEnemy-comms"
+msgid "We will see to your destruction!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5002
+msgctxt "shipEnemy-comms"
+msgid "Your bloodline will end here!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5003
+msgctxt "shipEnemy-comms"
+msgid "Your feeble threats are meaningless."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5005
+msgctxt "shipEnemy-comms"
+msgid ""
+"Ktzzzsss.\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5008
+msgctxt "shipEnemy-comms"
+msgid "We will destroy you"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5009
+msgctxt "shipEnemy-comms"
+msgid "We think not. It is you who will experience destruction!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5011
+msgctxt "shipEnemy-comms"
+msgid "You have no honor"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5012
+msgctxt "shipEnemy-comms"
+msgid "Your insult has brought our wrath upon you. Prepare to die."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5013
+msgctxt "shipEnemy-comms"
+msgid "Your comments about honor have no meaning to us"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5015
+msgctxt "shipEnemy-comms"
+msgid "We pity your pathetic race"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5016
+msgctxt "shipEnemy-comms"
+msgid "Pathetic? You will regret your disparagement!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5017
+msgctxt "shipEnemy-comms"
+msgid "We don't care what you think of us"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5020
+msgctxt "shipEnemy-comms"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"End of transmission."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5022
+msgctxt "shipEnemy-comms"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5024
+msgctxt "shipEnemy-comms"
+msgid ""
+"One zero one.\n"
+"No binary communication detected.\n"
+"Switching to universal speech.\n"
+"Generating appropriate response for target from human language archives.\n"
+":Do not cross us:\n"
+"Communication halted."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5025
+msgctxt "shipEnemy-comms"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5026
+msgctxt "shipEnemy-comms"
+msgid "Rogue command received. Targeting source."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5027
+msgctxt "shipEnemy-comms"
+msgid "External command ignored."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5029
+msgctxt "shipEnemy-comms"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5030
+msgctxt "shipEnemy-comms"
+msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5031
+msgctxt "shipEnemy-comms"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5032
+msgctxt "shipEnemy-comms"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5034
+msgctxt "shipEnemy-comms"
+msgid "Mind your own business!"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5061
+msgctxt "trade-comms"
+msgid "Yes?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5063
+msgctxt "trade-comms"
+msgid "Where are you headed?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5097
+msgctxt "trade-comms"
+msgid "Insufficient luxury to trade"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5128
+msgctxt "trade-comms"
+msgid "What do you want?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5131
+#, lua-format
+msgctxt "trade-comms"
+msgid "Where are you headed? (cost: %.1f reputation)"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5194
+msgctxt "trade-comms"
+msgid "Why are you bothering me?"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5227
+msgctxt "ship-comms"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"We are on an important mission."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5229
+msgctxt "ship-comms"
+msgid ""
+"We have nothing for you.\n"
+"Good day."
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5459
+msgctxt "inventory-buttonRelay"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5466
+msgctxt "inventory-buttonOperations"
+msgid "Inventory"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5476 scripts/scenario_49_allies.lua:5495
+#: scripts/scenario_49_allies.lua:5514 scripts/scenario_49_allies.lua:5533
+#: scripts/scenario_49_allies.lua:5552 scripts/scenario_49_allies.lua:5571
+#: scripts/scenario_49_allies.lua:5590 scripts/scenario_49_allies.lua:5609
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "%s Current cargo:"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5483 scripts/scenario_49_allies.lua:5502
+#: scripts/scenario_49_allies.lua:5521 scripts/scenario_49_allies.lua:5540
+#: scripts/scenario_49_allies.lua:5559 scripts/scenario_49_allies.lua:5578
+#: scripts/scenario_49_allies.lua:5597 scripts/scenario_49_allies.lua:5616
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "     %s: %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5489 scripts/scenario_49_allies.lua:5508
+#: scripts/scenario_49_allies.lua:5527 scripts/scenario_49_allies.lua:5546
+#: scripts/scenario_49_allies.lua:5565 scripts/scenario_49_allies.lua:5584
+#: scripts/scenario_49_allies.lua:5603 scripts/scenario_49_allies.lua:5622
+msgctxt "inventory-shipLog"
+msgid "     Empty\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5491 scripts/scenario_49_allies.lua:5510
+#: scripts/scenario_49_allies.lua:5529 scripts/scenario_49_allies.lua:5548
+#: scripts/scenario_49_allies.lua:5567 scripts/scenario_49_allies.lua:5586
+#: scripts/scenario_49_allies.lua:5605 scripts/scenario_49_allies.lua:5624
+#, lua-format
+msgctxt "inventory-shipLog"
+msgid "Available space: %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5652
+msgctxt "coolant-buttonEngineer"
+msgid "Get Coolant"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5657
+msgctxt "coolant-buttonEngineer+"
+msgid "Get Coolant"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5701
+msgctxt "coolant-tabEngineer"
+msgid "Gathering Coolant"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5704
+#, lua-format
+msgctxt "coolant-tabEngineer"
+msgid "Deploying Collectors %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5707
+#, lua-format
+msgctxt "coolant-tabEngineer"
+msgid "Configuring Collectors %i"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5772
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Player survived for %i minutes"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5797
+msgctxt "msgMainscreen"
+msgid "Single selected mission completed"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5809
+msgctxt "msgMainscreen"
+msgid "All missions completed"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5844
+msgctxt "doomsdayGoal-shipLog"
+msgid ""
+"Intelligence tells us the Exuari have nearly completed a 'doomsday' device. "
+"Retired scientist, Gregory Unruh warned us before he retired about this "
+"possibility, but we did not take him seriously. He was working on a defense "
+"mechanism. Find professor Unruh and get the plans for his defense mechanism"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5847
+msgctxt "doomsdayOrders-comms"
+msgid "Find professor Unruh for doomsday defense mechanism plans"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5873
+#, lua-format
+msgctxt "doomsday-comms"
+msgid "Gregory Unruh resides on station %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5947
+#, lua-format
+msgctxt "doomsday-shipLog"
+msgid ""
+"Intelligence estimates %i minutes remain before the Exuari deploy the "
+"doomsday device. Exuari and Kraylors both seem to be on a pillaging rampage"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5954
+#, lua-format
+msgctxt "doomsdayOrders-comms"
+msgid "Get %s, %s and %s to build doomsday defense mechanism"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5960
+#, lua-format
+msgctxt "doomsday-shipLog"
+msgid "The instructions list %s, %s and %s as necessary components"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5970
+#, lua-format
+msgctxt "doomsday-shipLog"
+msgid ""
+"Further inspection of Gregory Unruh's plans reveal notes in the margin: %s "
+"on %s, %s on %s, %s on %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:5999
+msgctxt "doomsday-shipLog"
+msgid ""
+"With all three components obtained, Engineering and Science quickly complete "
+"and deploy the doomsday device defense mechanism"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6051 scripts/scenario_49_allies.lua:6057
+msgctxt "doomsday-tabEngineer&Engineer+"
+msgid "Doomsday Device:"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6053
+msgctxt "doomsday-tabEngineer&Engineer+"
+msgid "Doomsday Device Built"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6089
+msgctxt "doomsday-msgMainscreen"
+msgid "All human stations destroyed"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6185
+msgctxt "doctorGoal-shipLog"
+msgid ""
+"Our allies, the Arlenians tell us that Admiral Koshenz has contracted a "
+"severe disease. The Arlenian doctors have struggled for days with the "
+"disease with minimal change in his condition. They fear he does not have "
+"much longer to live. They have asked for assistance from any Human "
+"researchers in Arlenian disease. One of their medical team referred to a Dr. "
+"Morrigan Thultris who recently published information regarding a disease "
+"that shares symptoms and characteristics with the admiral's affliction. Dr. "
+"Thultris does not show up on our military registry implying she works in "
+"relative seclusion. Search the Human Navy stations and find her and enlist "
+"her aid if applicable. Do it quickly, Admiral Koshenz likely does not have "
+"long to live"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6188
+msgctxt "doctorOrders-comms"
+msgid "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6212
+#, lua-format
+msgctxt "doctor-comms"
+msgid "Dr. Thultris resides on station %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6228
+msgctxt "doctor-msgMainscreen"
+msgid "Arlenian Admiral Koshenz dies"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6238
+msgctxt "doctor-shipLog"
+msgid ""
+"The Arlenians say that they think the admiral has less than three minutes to "
+"live"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6256
+#, lua-format
+msgctxt "doctor-shipLog"
+msgid ""
+"The Kraylors seem to have discovered the location of Admiral Koshenz. We "
+"detect Kraylor ships en route to %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6274
+#, lua-format
+msgctxt "doctor-shipLog"
+msgid "Admiral Koshenz is on %s in %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6277
+#, lua-format
+msgctxt "doctorOrders-comms"
+msgid "Take Dr. Thultris to %s in %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6284
+msgctxt "doctor-shipLog"
+msgid "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6302
+msgctxt "doctor-tabScience&Operations"
+msgid "Koshenz Death:"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6331
+msgctxt "BespinGoal-shipLog"
+msgid ""
+"Our allies, the Arlenians tell us that the Kraylors are attacking the mining "
+"facility around the planet Bespin. We rely heavily on that mineral supply "
+"for commerce and military operations. Contact the Arlenians and render "
+"assistance"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6334
+msgctxt "BespinOrders-comms"
+msgid "Contact Arlenians and render assistance with Kraylor attack"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6337
+msgctxt "scienceDescription-planet"
+msgid "Gas giant suitable for mining"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6339
+msgctxt "scienceDescription-station"
+msgid "Bespin Gas Mining"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6416
+msgctxt "Bespin-shipLog"
+msgid ""
+"Looks like the Exuari are taking advantage of the Kraylor mining incident by "
+"sending forces against us and the Arlenians"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6432
+msgctxt "Bespin-shipLog"
+msgid ""
+"The Arlenians thanked us for the help with the Kraylors around Cloud City"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6440
+msgctxt "Bespin-msgMainscreen"
+msgid "Mining station Cloud City destroyed"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6548
+msgctxt "msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6552
+msgctxt "msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6970
+msgctxt "msgMainscreen"
+msgid "statistics unavailable"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6976
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Allied stations: Human: survived: %.1f%%, strength: %.1f%%; Arlenian: "
+"survived: %.1f%%, strength: %.1f%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6978
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"Enemy stations: Kraylor: survived: %.1f%%, strength: %.1f%%; Exuari: "
+"survived: %.1f%%, strength: %.1f%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6981
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Neutral stations: survived: %.1f%%, strength: %.1f%%"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6986
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Allied ships: Human: strength: %.1f%%, Arlenian: strength: %.1f%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6988
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Enemy ships: Kraylor: strength: %.1f%%, Exuari: strength: %.1f%%\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6993
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Allied value: %.2f, Enemy value: %.2f"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:6997
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Mission ended because %s\n"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7003 scripts/scenario_49_allies.lua:7018
+msgctxt "msgMainscreen"
+msgid "Ensign"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7005 scripts/scenario_49_allies.lua:7020
+msgctxt "msgMainscreen"
+msgid "Lieutenant"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7007 scripts/scenario_49_allies.lua:7022
+msgctxt "msgMainscreen"
+msgid "Commander"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7009 scripts/scenario_49_allies.lua:7024
+msgctxt "msgMainscreen"
+msgid "Captain"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7011 scripts/scenario_49_allies.lua:7026
+msgctxt "msgMainscreen"
+msgid "Admiral"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7013
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Earned rank: %s"
+msgstr ""
+
+#: scripts/scenario_49_allies.lua:7028
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Rank after military reductions due to ignominious defeat: %s"
+msgstr ""
