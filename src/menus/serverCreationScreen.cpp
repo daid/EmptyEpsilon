@@ -192,7 +192,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     });
     scenario_list->setSize(GuiElement::GuiSizeMax, 700);
     (new GuiLabel(right, "GENERAL_LABEL", tr("Description"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    description_text = new GuiScrollText(right, "SCENARIO_DESCRIPTION", "Select a scenario...");
+    description_text = new GuiScrollText(right, "SCENARIO_DESCRIPTION", tr("Select a scenario..."));
     description_text->setSize(GuiElement::GuiSizeMax, 700);
 
     for(const auto& category : ScenarioInfo::getCategories())
