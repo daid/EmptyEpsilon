@@ -111,13 +111,14 @@ int main(int argc, char** argv)
     Logging::setLogFile("EmptyEpsilon.log");
 #endif
     LOG(Info, "Starting...");
-#ifdef CONFIG_DIR
-    PreferencesManager::load(CONFIG_DIR "options.ini");
-#endif
+    string configuration_path = ".";
     if (getenv("HOME"))
-        PreferencesManager::load(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-    else
-        PreferencesManager::load("options.ini");
+        configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
+#ifdef CONFIG_DIR
+    if (std::filesystem::exists(CONFIG_DIR))
+        configuration_path = CONFIG_DIR;
+#endif
+    PreferencesManager::load(configuration_path + "/options.ini");
 
     for(int n=1; n<argc; n++)
     {
@@ -192,7 +193,7 @@ int main(int argc, char** argv)
     }
 
     colorConfig.load();
-    sp::io::Keybinding::loadKeybindings("keybindings.json");
+    sp::io::Keybinding::loadKeybindings(configuration_path + "/keybindings.json");
     keys.init();
 
     if (PreferencesManager::get("username", "") == "")
@@ -307,13 +308,7 @@ int main(int argc, char** argv)
 #endif
 
     P<HardwareController> hardware_controller = new HardwareController();
-#ifdef CONFIG_DIR
-    hardware_controller->loadConfiguration(CONFIG_DIR "hardware.ini");
-#endif
-    if (getenv("HOME"))
-        hardware_controller->loadConfiguration(string(getenv("HOME")) + "/.emptyepsilon/hardware.ini");
-    else
-        hardware_controller->loadConfiguration("hardware.ini");
+    hardware_controller->loadConfiguration(configuration_path + "/hardware.ini");
 
 #if WITH_DISCORD
     {
@@ -361,22 +356,13 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("headless") == "")
     {
-#ifndef _MSC_VER
-        // MFC TODO: Fix me -- save prefs to user prefs dir on Windows.
-        if (getenv("HOME"))
-        {
 #ifdef _WIN32
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str());
+        mkdir(configuration_path.c_str());
 #else
-            mkdir((string(getenv("HOME")) + "/.emptyepsilon").c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 #endif
-            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-        }else
-#endif
-        {
-            PreferencesManager::save("options.ini");
-        }
-        sp::io::Keybinding::saveKeybindings("keybindings.json");
+        PreferencesManager::save(configuration_path + "/options.ini");
+        sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
     main_window = nullptr;
     delete engine;
