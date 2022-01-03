@@ -7592,7 +7592,7 @@ function exuariHarassment(delta)
 		if difficulty < 1 then
 			help_message = string.format("%s\n\nWe think there is an Exuari base hiding in a nebula in sector %s",help_message,concealing_nebula:getSectorName())
 		end
-		player.harass_message_sent = first_station:sendCommsMessage(player,help_message)
+		player.harass_message_sent = first_station:sendCommsMessageNoLog(player,help_message)
 		if player.harass_message_sent then
 			plot1_message = string.format("%s has asked for help against the Exuari",first_station:getCallSign())
 			plot1_type = "optional"

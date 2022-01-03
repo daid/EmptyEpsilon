@@ -121,15 +121,24 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Hails a PlayerSpaceship from this object. The players' comms station is
     /// notified and can accept or deny the hail. If the hail is answered, the
     /// specified message is displayed to the player.
-    /// WARNING/TOFIX: If the PlayerSpaceship refuses the hail, the script
-    /// DOES NOT receive any feedback.
+    /// Returns true when the hail is accepted.
+    /// Returns false when the target player cannot be hailed right now, for
+    /// example because it's already communicating with something else.
+    /// A message will be logged in the comms log about this.
+    /// Requires a target option and message. The message can be an empty
+    /// string.
+    /// Example: obj:sendCommsMessage(player, "Prepare to die")
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
+    /// Hails a PlayerSpaceship from this object. The players' comms station is
+    /// notified and can accept or deny the hail. If the hail is answered, the
+    /// specified message is displayed to the player.
     /// Returns true when the hail is accepted.
     /// Returns false when the target player cannot be hailed right now, for
     /// example because it's already communicating with something else.
     /// Requires a target option and message. The message can be an empty
     /// string.
-    /// Example: obj:sendCommsMessage(player, "Prepare to die")
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessage);
+    /// Example: obj:sendCommsMessageNoLog(player, "Prepare to die")
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessageNoLog);
     /// As sendCommsMessage, but sends an empty string as the message.
     /// Example: obj:openCommsTo(player)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, openCommsTo);
@@ -582,6 +591,14 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
         target->addToShipLogBy(message, this);
     }
     return result;
+}
+
+bool SpaceObject::sendCommsMessageNoLog(P<PlayerSpaceship> target, string message)
+{
+    if (!target)
+        return false;
+
+    return target->hailByObject(this, message);
 }
 
 glm::mat4 SpaceObject::getModelMatrix() const

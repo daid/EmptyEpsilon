@@ -265,7 +265,7 @@ function update(delta)
     end
 
     -- Launch another wave after 8 minutes
-    if (main_mission == 1) and (mission_timer > 8 * 60) and (stakhanov:sendCommsMessage(
+    if (main_mission == 1) and (mission_timer > 8 * 60) and (stakhanov:sendCommsMessageNoLog(
             player,
             _("incCall", [[You recieve another broadcast from Central Command:
 
@@ -285,7 +285,7 @@ function update(delta)
     end
 
     -- Send player to Black Site 114 after another 5 minutes
-    if (main_mission == 2) and (mission_timer > 5 * 60) and (bs114:sendCommsMessage(
+    if (main_mission == 2) and (mission_timer > 5 * 60) and (bs114:sendCommsMessageNoLog(
         player,
         _("incCall", [[You receive a Human Navy-authenticated, quantum-encrypted tachyon communication:
 
@@ -302,7 +302,7 @@ URGENCY AND DISCRETION ARE KEY -STOP-]]))
     end
 
     -- When player is near Black Site 114, reveal it, then pop defenders and attackers
-    if (main_mission == 3) and (distance(player, bs114) < 12000) and (bs114:sendCommsMessage(
+    if (main_mission == 3) and (distance(player, bs114) < 12000) and (bs114:sendCommsMessageNoLog(
         player,
         _("incCall", [[You recieve another Human Navy-encrypted communication:
 
@@ -333,7 +333,7 @@ Location of the base is on a need-to-know basis, so we trust your discretion."]]
     end
 
     -- Spawn the Ghost Hacker and its escort after 7 minutes
-    if (main_mission == 4) and (mission_timer > 7 * 60) and (bs114:sendCommsMessage(
+    if (main_mission == 4) and (mission_timer > 7 * 60) and (bs114:sendCommsMessageNoLog(
         player,
         _("incCall", [[The Black Site #114 dispatch sends an emergency broadcast:
 
@@ -490,7 +490,7 @@ Godspeed, Epsilon."]])
             ((not k5:isValid()) or (k5:getFaction() == "Human Navy"))
 
         -- If every ship is killed or saved, Black Site 114 welcomes the player.
-        if (hacked == 0) and expression and (bs114:sendCommsMessage(
+        if (hacked == 0) and expression and (bs114:sendCommsMessageNoLog(
             player,
             _("incCall", [[After the final ship is taken care of, Black Site #114 dispatch lets out a sigh of relief:
 
@@ -506,7 +506,7 @@ We have a lot to process at the moment. We'll contact you as soon as we understa
         end
 
         -- If the ship is at Marco Polo, welcome them.
-        if (hacked == 1) and (distance(player, marco_polo) < 10000) and (bs114:sendCommsMessage(
+        if (hacked == 1) and (distance(player, marco_polo) < 10000) and (bs114:sendCommsMessageNoLog(
             player,
             _("incCall", [[On sight, Marco Polo makes contact with you:
 
@@ -524,7 +524,7 @@ Repair and reload while we notify Central Command of what happened there. We wil
     -- Give the player 2 minutes to catch their breath :)
     if (main_mission == 8) and (mission_timer > 120) then
         -- Use NSA to find the command platform.
-        if (hacked == 0) and (bs114:sendCommsMessage(
+        if (hacked == 0) and (bs114:sendCommsMessageNoLog(
             player,
             _("incCall", [[The dispatcher gets back to you:
 
@@ -544,7 +544,7 @@ We want to deliver the first blow. Use the Nosy Sensing Array in the sector F5 t
         end
 
         -- Go secure NSA to meet Shiva.
-        if (hacked == 1) and (stakhanov:sendCommsMessage(
+        if (hacked == 1) and (stakhanov:sendCommsMessageNoLog(
             player,
             _("incCall", [[The Central Command relay seems very worried:
 
@@ -586,7 +586,7 @@ It is due to come out of its FTL jump near the Nosy Sensing Array. Secure the lo
             end
 
             -- If recalibrated...
-            if (player:getDescription() == _("scienceDescription-station", "Arlenian Device Installed")) and (lightbringer:sendCommsMessage(
+            if (player:getDescription() == _("scienceDescription-station", "Arlenian Device Installed")) and (lightbringer:sendCommsMessageNoLog(
                 player,
                 _("incCall", [[The ethereal voice of the Arlenian is heard on the radio:
 
@@ -602,7 +602,7 @@ We are both ready to continue our purpose, it seems."]])
         end
 
         -- If the player is near the NSA, spawn a Ghost attack.
-        if (hacked == 1) and (distance(player, nsa) < 10000) and (stakhanov:sendCommsMessage(
+        if (hacked == 1) and (distance(player, nsa) < 10000) and (stakhanov:sendCommsMessageNoLog(
             player,
             _("incCall", [[Central Command comes in:
 
@@ -621,7 +621,7 @@ We are both ready to continue our purpose, it seems."]])
         -- If the swarm command is located, send Navy ships to assault it.
         if (hacked == 0)
             and (nsa:getDescription() == _("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
-            and (bs114:sendCommsMessage(
+            and (bs114:sendCommsMessageNoLog(
                 player,
                 _("incCall", [[A black ops military officer hails the ship:
 
