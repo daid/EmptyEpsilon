@@ -1,5 +1,6 @@
 #include <memory>
 #include <set>
+#include <filesystem>
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
