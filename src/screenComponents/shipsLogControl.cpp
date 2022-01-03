@@ -16,7 +16,7 @@ ShipsLog::ShipsLog(GuiContainer* owner)
 
     log_text = new GuiAdvancedScrollText(this, "");
     log_text->enableAutoScrollDown();
-    log_text->setMargins(15, 15, 15, 0)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    log_text->setMargins(15, 4, 15, 0)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void ShipsLog::onDraw(sp::RenderTarget& renderer)
