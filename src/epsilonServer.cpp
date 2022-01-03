@@ -7,8 +7,8 @@
 #include "GMActions.h"
 #include "main.h"
 
-EpsilonServer::EpsilonServer()
-: GameServer("Server", VERSION_NUMBER)
+EpsilonServer::EpsilonServer(int server_port)
+: GameServer("Server", VERSION_NUMBER, server_port)
 {
     if (game_server)
     {

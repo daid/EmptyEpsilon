@@ -332,7 +332,7 @@ int main(int argc, char** argv)
         returnToMainMenu();
     else
     {
-        new EpsilonServer();
+        new EpsilonServer(defaultServerPort);
         gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
         new ShipSelectionScreen();
     }
@@ -388,7 +388,7 @@ void returnToMainMenu()
 {
     if (PreferencesManager::get("headless") != "")
     {
-        new EpsilonServer();
+        new EpsilonServer(defaultServerPort);
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));

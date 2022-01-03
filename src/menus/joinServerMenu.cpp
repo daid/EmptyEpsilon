@@ -10,8 +10,8 @@
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_button.h"
 
-JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip)
-: ip(ip)
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip, int port)
+: ip(ip), port(port)
 {
     this->source = source;
 
@@ -35,7 +35,7 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::i
         game_client->sendPassword(password_entry->getText().upper());
     }))->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
 
-    new GameClient(VERSION_NUMBER, ip);
+    new GameClient(VERSION_NUMBER, ip, port);
 }
 
 void JoinServerScreen::update(float delta)
@@ -68,7 +68,12 @@ void JoinServerScreen::update(float delta)
         break;
     case GameClient::Connected:
         if (!this->ip.getHumanReadable().empty())
-            PreferencesManager::set("last_server", this->ip.getHumanReadable()[0]);
+        {
+            string last_server = this->ip.getHumanReadable()[0];
+            if (port != defaultServerPort)
+                last_server += ":" + string(port);
+            PreferencesManager::set("last_server", last_server);
+        }
         if (game_client->getClientId() > 0)
         {
             foreach(PlayerInfo, i, player_info_list)

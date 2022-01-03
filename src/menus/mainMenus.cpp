@@ -149,7 +149,7 @@ MainMenu::MainMenu()
 
 #ifdef DEBUG
     (new GuiButton(this, "", "TO DA GM!", [this]() {
-        new EpsilonServer();
+        new EpsilonServer(defaultServerPort);
         if (game_server)
         {
             gameGlobalInfo->startScenario("scenario_10_empty.lua");

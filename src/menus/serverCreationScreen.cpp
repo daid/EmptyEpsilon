@@ -55,9 +55,15 @@ ServerSetupScreen::ServerSetupScreen()
     // LAN/Internet row.
     row = new GuiAutoLayout(main_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("Server visibility: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "LAN_INTERNET_LABEL", tr("List on master server: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
     server_visibility = new GuiSelector(row, "LAN_INTERNET_SELECT", [](int index, string value) { });
-    server_visibility->setOptions({tr("LAN only"), tr("Internet")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    server_visibility->setOptions({tr("No"), tr("Yes")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    row = new GuiAutoLayout(main_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "SERVER_PORT", tr("Server port: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    server_port = new GuiTextEntry(row, "SERVER_PORT", string(defaultServerPort));
+    server_port->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     (new GuiLabel(main_panel, "GENERAL_LABEL", tr("Server info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     // Server IP row.
@@ -82,7 +88,10 @@ ServerSetupScreen::ServerSetupScreen()
 
     // Start server button.
     (new GuiButton(this, "START_SERVER", tr("Start server"), [this]() {
-        new EpsilonServer();
+        int port = server_port->getText().toInt();
+        if (port < 1)
+            port = defaultServerPort;
+        new EpsilonServer(port);
         game_server->setServerName(server_name->getText());
         game_server->setPassword(server_password->getText().upper());
         gameGlobalInfo->gm_control_code = gm_password->getText().upper();

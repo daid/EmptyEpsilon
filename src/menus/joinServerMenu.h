@@ -12,6 +12,7 @@ class GuiTextEntry;
 
 class JoinServerScreen : public GuiCanvas, public Updatable
 {
+    int port;
     sp::io::network::Address ip;
     GuiLabel* status_label;
     GuiPanel* password_entry_box;
@@ -20,7 +21,7 @@ class JoinServerScreen : public GuiCanvas, public Updatable
 
     ServerBrowserMenu::SearchSource source;
 public:
-    JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip);
+    JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip, int port);
 
     virtual void update(float delta) override;
 };

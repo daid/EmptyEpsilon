@@ -69,7 +69,14 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
     lan_internet_selector->setOptions({tr("LAN"), tr("Internet")})->setSelectionIndex(source == Local ? 0 : 1)->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     connect_button = new GuiButton(this, "CONNECT", tr("screenLan", "Connect"), [this]() {
-        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(manual_ip->getText()));
+        string host = manual_ip->getText().strip();
+        int port = defaultServerPort;
+        if (host.find(":") != -1)
+        {
+            port = host.substr(host.find(":") + 1).toInt();
+            host = host.substr(0, host.find(":"));
+        }
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(host), port);
         destroy();
     });
     connect_button->setPosition(-50, -50, sp::Alignment::BottomRight)->setSize(300, 50);
@@ -77,7 +84,14 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
     manual_ip = new GuiTextEntry(this, "IP", "");
     manual_ip->setPosition(-50, -120, sp::Alignment::BottomRight)->setSize(300, 50);
     manual_ip->enterCallback([this](string text) {
-        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(text.strip()));
+        string host = text.strip();
+        int port = defaultServerPort;
+        if (host.find(":") != -1)
+        {
+            port = host.substr(host.find(":") + 1).toInt();
+            host = host.substr(0, host.find(":"));
+        }
+        new JoinServerScreen(lan_internet_selector->getSelectionIndex() == 0 ? Local : Internet, sp::io::network::Address(host), port);
         destroy();
     });
     server_list = new GuiListbox(this, "SERVERS", [this](int index, string value) {
