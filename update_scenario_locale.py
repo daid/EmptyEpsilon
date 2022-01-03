@@ -28,7 +28,12 @@ for scenario in glob.glob("scripts/scenario_*.lua"):
                 info[key] = info[key] + "\n" + line[3:].strip()
         elif ":" in line:
             key, _, value = line[2:].partition(":")
-            key = key.strip().lower()
+            if '[' in key and key.endswith(']'):
+                additional = key[key.find('[')+1:-1]
+                key = key[:key.find('[')].lower().strip()
+                key = "%s[%s]" % (key, additional)
+            else:
+                key = key.strip().lower()
             value = value.strip()
             info[key] = value
     f = open(output, "wt")
@@ -51,7 +56,7 @@ for scenario in glob.glob("scripts/scenario_*.lua"):
             f.write("msgid %s\n" % (json.dumps(value)))
             f.write("msgstr \"\"\n")
             for key2, value2 in info.items():
-                if key2.startswith(setting_name + "[") and key2.endswith("]"):
+                if key2.startswith(setting_name.lower() + "[") and key2.endswith("]"):
                     setting_value = key2[len(setting_name) + 1:-1]
                     if "|" in setting_value:
                         setting_value = setting_value[:setting_value.find("|")]
