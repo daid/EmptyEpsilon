@@ -142,86 +142,86 @@ msgstr "{loadtime} sec"
 msgid "Storage {weapon}"
 msgstr "Equipaggiamento di {weapon}"
 
-#: src/playerInfo.cpp:221
+#: src/playerInfo.cpp:230
 #, fuzzy
 msgctxt "station"
 msgid "Helms"
 msgstr "Timone"
 
-#: src/playerInfo.cpp:222
+#: src/playerInfo.cpp:231
 #, fuzzy
 msgctxt "station"
 msgid "Weapons"
 msgstr "Armi"
 
-#: src/playerInfo.cpp:223
+#: src/playerInfo.cpp:232
 #, fuzzy
 msgctxt "station"
 msgid "Engineering"
 msgstr "Ingegneria"
 
-#: src/playerInfo.cpp:224
+#: src/playerInfo.cpp:233
 #, fuzzy
 msgctxt "station"
 msgid "Science"
 msgstr "Scienza"
 
-#: src/playerInfo.cpp:225
+#: src/playerInfo.cpp:234
 #, fuzzy
 msgctxt "station"
 msgid "Relay"
 msgstr "Comunicazioni"
 
-#: src/playerInfo.cpp:226
+#: src/playerInfo.cpp:235
 #, fuzzy
 msgctxt "station"
 msgid "Tactical"
 msgstr "Tattico"
 
-#: src/playerInfo.cpp:227
+#: src/playerInfo.cpp:236
 msgctxt "station"
 msgid "Engineering+"
 msgstr "Ingegneria+"
 
-#: src/playerInfo.cpp:228
+#: src/playerInfo.cpp:237
 msgctxt "station"
 msgid "Operations"
 msgstr "Operazioni"
 
-#: src/playerInfo.cpp:229
+#: src/playerInfo.cpp:238
 #, fuzzy
 msgctxt "station"
 msgid "Single Pilot"
 msgstr "Pilota singolo"
 
-#: src/playerInfo.cpp:230
+#: src/playerInfo.cpp:239
 #, fuzzy
 msgctxt "station"
 msgid "Damage Control"
 msgstr "Controllo danni"
 
-#: src/playerInfo.cpp:231
+#: src/playerInfo.cpp:240
 msgctxt "station"
 msgid "Power Management"
 msgstr "Gestione energia"
 
-#: src/playerInfo.cpp:232
+#: src/playerInfo.cpp:241
 #, fuzzy
 msgctxt "station"
 msgid "Database"
 msgstr "Database"
 
-#: src/playerInfo.cpp:233
+#: src/playerInfo.cpp:242
 msgctxt "station"
 msgid "Strategic Map"
 msgstr "Mappa strategica"
 
-#: src/playerInfo.cpp:234
+#: src/playerInfo.cpp:243
 msgctxt "station"
 msgid "Comms"
 msgstr "Comunicazioni"
 
-#: src/playerInfo.cpp:235
+#: src/playerInfo.cpp:244
 msgctxt "station"
 msgid "Ship's Log"
 msgstr "Diario di bordo"
@@ -278,6 +278,10 @@ msgstr "Generatore di scudi anteriore"
 msgctxt "system"
 msgid "Rear Shield Generator"
 msgstr "Generatore di scudi posteriore"
+
+#: src/scenarioInfo.cpp:102 src/scenarioInfo.cpp:103
+msgid "setting"
+msgstr ""
 
 #: src/tutorialGame.cpp:92
 msgid "Next"
@@ -367,7 +371,7 @@ msgstr ""
 msgid "LAN"
 msgstr "LAN"
 
-#: src/menus/serverBrowseMenu.cpp:69 src/menus/serverCreationScreen.cpp:60
+#: src/menus/serverBrowseMenu.cpp:69
 msgid "Internet"
 msgstr "Internet"
 
@@ -376,7 +380,7 @@ msgctxt "screenLan"
 msgid "Connect"
 msgstr "Connetti"
 
-#: src/menus/serverBrowseMenu.cpp:87
+#: src/menus/serverBrowseMenu.cpp:101
 msgid "Last Session ({last})"
 msgstr "Ultima sessione ({last})"
 
@@ -388,7 +392,7 @@ msgstr "Versione: {version}"
 msgid "Your name:"
 msgstr "Il tuo nome:"
 
-#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:84
+#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:90
 msgid "Start server"
 msgstr "Avvia server"
 
@@ -425,52 +429,68 @@ msgid "GM control code: "
 msgstr "Codice di controllo del GM: "
 
 #: src/menus/serverCreationScreen.cpp:58
-msgid "Server visibility: "
-msgstr "Visibilità del server: "
+msgid "List on master server: "
+msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:60
-msgid "LAN only"
-msgstr "Solo LAN"
+#, fuzzy
+msgid "No"
+msgstr "Nessuna"
 
-#: src/menus/serverCreationScreen.cpp:62
+#: src/menus/serverCreationScreen.cpp:60
+msgid "Yes"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:64
+#, fuzzy
+msgid "Server port: "
+msgstr "Password del server: "
+
+#: src/menus/serverCreationScreen.cpp:68
 #, fuzzy
 msgid "Server info"
 msgstr "Nome del server: "
 
-#: src/menus/serverCreationScreen.cpp:66
+#: src/menus/serverCreationScreen.cpp:72
 #, fuzzy
 msgid "Server IP: "
 msgstr "IP del server: "
 
-#: src/menus/serverCreationScreen.cpp:78 src/menus/serverCreationScreen.cpp:110
-#: src/menus/serverCreationScreen.cpp:194
+#: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:119
+#: src/menus/serverCreationScreen.cpp:203
 #, fuzzy
 msgid "Close"
 msgstr "Chiudi"
 
-#: src/menus/serverCreationScreen.cpp:117
+#: src/menus/serverCreationScreen.cpp:126
 msgid "Continue"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:166
+#: src/menus/serverCreationScreen.cpp:175
 msgid "Category"
 msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:177
+#: src/menus/serverCreationScreen.cpp:182
+#: src/menus/serverCreationScreen.cpp:195
+#, fuzzy
+msgid "Select a scenario..."
+msgstr "Avvia scenario"
+
+#: src/menus/serverCreationScreen.cpp:186
 msgid "Scenario"
 msgstr "Scenario"
 
-#: src/menus/serverCreationScreen.cpp:185
+#: src/menus/serverCreationScreen.cpp:194
 #, fuzzy
 msgid "Description"
 msgstr "Descrizione scansione completa:"
 
-#: src/menus/serverCreationScreen.cpp:201
-#: src/menus/serverCreationScreen.cpp:275
+#: src/menus/serverCreationScreen.cpp:210
+#: src/menus/serverCreationScreen.cpp:291
 msgid "Start scenario"
 msgstr "Avvia scenario"
 
-#: src/menus/serverCreationScreen.cpp:269
+#: src/menus/serverCreationScreen.cpp:285
 #, fuzzy
 msgid "Back"
 msgstr "Indietro"
@@ -2705,28 +2725,28 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Dimensioni"
 
-#: src/spaceObjects/spaceship.cpp:1538
+#: src/spaceObjects/spaceship.cpp:1591
 #, fuzzy
 msgctxt "missile"
 msgid "Homing"
 msgstr "Autoguidati"
 
-#: src/spaceObjects/spaceship.cpp:1540
+#: src/spaceObjects/spaceship.cpp:1593
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nucleari"
 
-#: src/spaceObjects/spaceship.cpp:1542
+#: src/spaceObjects/spaceship.cpp:1595
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1544
+#: src/spaceObjects/spaceship.cpp:1597
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1546
+#: src/spaceObjects/spaceship.cpp:1599
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"
@@ -3030,7 +3050,9 @@ msgstr "Nautilus"
 
 #: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
 #: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
-#: scripts/shiptemplates/OLD.lua:474 scripts/shiptemplates/frigates.lua:14
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
+#: scripts/shiptemplates/corvette.lua:223
+#: scripts/shiptemplates/corvette.lua:310 scripts/shiptemplates/frigates.lua:14
 #: scripts/shiptemplates/frigates.lua:87 scripts/shiptemplates/frigates.lua:116
 #: scripts/shiptemplates/frigates.lua:133
 #: scripts/shiptemplates/frigates.lua:179
@@ -3192,6 +3214,8 @@ msgid "Strikeship"
 msgstr "Assaltatore"
 
 #: scripts/shiptemplates/OLD.lua:293 scripts/shiptemplates/OLD.lua:305
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/corvette.lua:223
+#: scripts/shiptemplates/corvette.lua:310
 #: scripts/shiptemplates/starFighters.lua:13
 #: scripts/shiptemplates/starFighters.lua:65
 #: scripts/shiptemplates/starFighters.lua:121
@@ -3300,6 +3324,23 @@ msgstr ""
 "La stazione da battaglia è un'enorme nave con molte caratteristiche "
 "difensive. Vi possono approdare navi più piccole."
 
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/corvette.lua:14
+#: scripts/shiptemplates/corvette.lua:83 scripts/shiptemplates/corvette.lua:101
+#: scripts/shiptemplates/corvette.lua:157
+#: scripts/shiptemplates/corvette.lua:217
+#: scripts/shiptemplates/corvette.lua:235
+#: scripts/shiptemplates/corvette.lua:248
+#: scripts/shiptemplates/corvette.lua:261
+#: scripts/shiptemplates/corvette.lua:274
+#: scripts/shiptemplates/corvette.lua:287
+#: scripts/shiptemplates/corvette.lua:301
+#: scripts/shiptemplates/corvette.lua:310
+#: scripts/shiptemplates/corvette.lua:314
+#, fuzzy
+msgctxt "class"
+msgid "Corvette"
+msgstr "Corvetta"
+
 #: scripts/shiptemplates/OLD.lua:390
 msgctxt "playerShip"
 msgid "Ender"
@@ -3345,22 +3386,6 @@ msgstr ""
 msgctxt "ship"
 msgid "Atlantis X23"
 msgstr "Atlantis X23"
-
-#: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
-#: scripts/shiptemplates/corvette.lua:101
-#: scripts/shiptemplates/corvette.lua:157
-#: scripts/shiptemplates/corvette.lua:217
-#: scripts/shiptemplates/corvette.lua:235
-#: scripts/shiptemplates/corvette.lua:248
-#: scripts/shiptemplates/corvette.lua:261
-#: scripts/shiptemplates/corvette.lua:274
-#: scripts/shiptemplates/corvette.lua:287
-#: scripts/shiptemplates/corvette.lua:301
-#: scripts/shiptemplates/corvette.lua:314
-#, fuzzy
-msgctxt "class"
-msgid "Corvette"
-msgstr "Corvetta"
 
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 #, fuzzy
@@ -3716,7 +3741,7 @@ msgstr ""
 #: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
 #: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
 #: scripts/shiptemplates/exuari.lua:201 scripts/shiptemplates/exuari.lua:221
-#: scripts/shiptemplates/exuari.lua:250
+#: scripts/shiptemplates/exuari.lua:250 scripts/shiptemplates/exuari.lua:270
 #, fuzzy
 msgctxt "class"
 msgid "Exuari"
@@ -5542,11 +5567,11 @@ msgstr ""
 "Gli asteroidi sono pianeti minori, generalmente più piccoli di pochi "
 "chilometri. Le varianti più grandi sono a volte indicate come planetoidi."
 
-#: scripts/science_db.lua:9
+#: scripts/science_db.lua:8
 msgid "Nebula"
 msgstr "Nebulosa"
 
-#: scripts/science_db.lua:10
+#: scripts/science_db.lua:9
 msgid ""
 "Nebulae are the birthing places of new stars. These gas fields, usually "
 "created by the death of an old star, slowly form new stars due to the "
@@ -5563,11 +5588,11 @@ msgstr ""
 "penetrarle. Si consiglia pertanto agli ufficiali scientifici di fare "
 "affidamento su sonde e osservazioni visive."
 
-#: scripts/science_db.lua:12
+#: scripts/science_db.lua:11
 msgid "Black hole"
 msgstr "Buco nero"
 
-#: scripts/science_db.lua:13
+#: scripts/science_db.lua:12
 msgid ""
 "A black hole is a point of supercondensed mass with a gravitational pull so "
 "powerful that not even light can escape it. It has no locally detectable "
@@ -5595,11 +5620,11 @@ msgstr ""
 "attirato verso il suo centro e rapidamente lacerato dalle forze "
 "gravitazionali."
 
-#: scripts/science_db.lua:17
+#: scripts/science_db.lua:16
 msgid "Wormhole"
 msgstr "Wormhole"
 
-#: scripts/science_db.lua:18
+#: scripts/science_db.lua:17
 msgid ""
 "A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that "
 "connects two points of spacetime. Jump drives operate in a similar fashion, "
@@ -5627,11 +5652,11 @@ msgstr ""
 "generano un'enorme attività dei sensori, che un astuto ufficiale scientifico "
 "può rilevare anche attraverso interruzioni come le nebulose."
 
-#: scripts/science_db.lua:22
+#: scripts/science_db.lua:21
 msgid "Weapons"
 msgstr "Armi"
 
-#: scripts/science_db.lua:23
+#: scripts/science_db.lua:22
 msgid ""
 "This database only covers the basic versions of the missiles used throughout "
 "the galaxy.\n"
@@ -5662,21 +5687,21 @@ msgstr ""
 "Infliggono solo la metà del danno delle loro controparti di base, ma a che "
 "serve un missile se non colpisce il bersaglio?"
 
-#: scripts/science_db.lua:29
+#: scripts/science_db.lua:28
 #, fuzzy
 msgid "Homing missile"
 msgstr "Missile autoguidato"
 
-#: scripts/science_db.lua:30 scripts/science_db.lua:35
-#: scripts/science_db.lua:54 scripts/science_db.lua:61
+#: scripts/science_db.lua:29 scripts/science_db.lua:34
+#: scripts/science_db.lua:53 scripts/science_db.lua:60
 msgid "Range"
 msgstr "Portata"
 
-#: scripts/science_db.lua:31 scripts/science_db.lua:62
+#: scripts/science_db.lua:30 scripts/science_db.lua:61
 msgid "Damage"
 msgstr "Danno"
 
-#: scripts/science_db.lua:32
+#: scripts/science_db.lua:31
 msgid ""
 "This target-seeking missile is the workhorse of many space combat arsenals. "
 "It's compact enough to be fitted on frigates, and packs enough punch to be "
@@ -5687,28 +5712,28 @@ msgstr ""
 "fregate e ha una potenza sufficiente per essere utilizzato su navi più "
 "grandi, sebbene di solito in più di un singolo tubo missilistico."
 
-#: scripts/science_db.lua:34
+#: scripts/science_db.lua:33
 msgid "Nuke"
 msgstr "Nucleari"
 
-#: scripts/science_db.lua:36 scripts/science_db.lua:46
-#: scripts/science_db.lua:55
+#: scripts/science_db.lua:35 scripts/science_db.lua:45
+#: scripts/science_db.lua:54
 msgid "Blast radius"
 msgstr "Raggio esplosione"
 
-#: scripts/science_db.lua:37 scripts/science_db.lua:47
-#: scripts/science_db.lua:56
+#: scripts/science_db.lua:36 scripts/science_db.lua:46
+#: scripts/science_db.lua:55
 #, fuzzy
 msgid "Damage at center"
 msgstr "Danno al centro"
 
-#: scripts/science_db.lua:38 scripts/science_db.lua:48
-#: scripts/science_db.lua:57
+#: scripts/science_db.lua:37 scripts/science_db.lua:47
+#: scripts/science_db.lua:56
 #, fuzzy
 msgid "Damage at edge"
 msgstr "Danno al bordo"
 
-#: scripts/science_db.lua:39
+#: scripts/science_db.lua:38
 msgid ""
 "A nuclear missile is similar to a homing missile in that it can seek a "
 "target, but it moves and turns more slowly and explodes a greatly increased "
@@ -5733,21 +5758,21 @@ msgstr ""
 "sapere se il rivestimento dello scafo o gli scudi possono fornire una "
 "protezione sufficiente."
 
-#: scripts/science_db.lua:43
+#: scripts/science_db.lua:42
 #, fuzzy
 msgid "Mine"
 msgstr "Mine"
 
-#: scripts/science_db.lua:44
+#: scripts/science_db.lua:43
 #, fuzzy
 msgid "Drop distance"
 msgstr "Distanza di rilascio"
 
-#: scripts/science_db.lua:45
+#: scripts/science_db.lua:44
 msgid "Trigger distance"
 msgstr "Distanza di innesco"
 
-#: scripts/science_db.lua:49
+#: scripts/science_db.lua:48
 msgid ""
 "Mines are often placed in defensive perimeters around stations. There are "
 "also old minefields scattered around the galaxy from older wars.\n"
@@ -5763,12 +5788,12 @@ msgstr ""
 "detonazione ritardata e il raggio dell'esplosione rendono questo uso "
 "rischioso nel migliore dei casi."
 
-#: scripts/science_db.lua:53
+#: scripts/science_db.lua:52
 #, fuzzy
 msgid "EMP"
 msgstr "EMP"
 
-#: scripts/science_db.lua:58
+#: scripts/science_db.lua:57
 #, fuzzy
 msgid ""
 "The electromagnetic pulse missile (EMP) reproduces the disruptive effects of "
@@ -5788,17 +5813,17 @@ msgstr ""
 "abbattere gli scudi dei bersagli prima di avvicinarsi per disabilitarli "
 "sparando raggi focalizzati."
 
-#: scripts/science_db.lua:60
+#: scripts/science_db.lua:59
 #, fuzzy
 msgid "HVLI"
 msgstr "HVLI"
 
-#: scripts/science_db.lua:63
+#: scripts/science_db.lua:62
 #, fuzzy
 msgid "Burst"
 msgstr "Esplosione"
 
-#: scripts/science_db.lua:64
+#: scripts/science_db.lua:63
 msgid ""
 "A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high "
 "velocity. This weapon is usually found in simpler ships since it does not "
@@ -5814,6 +5839,12 @@ msgstr ""
 "semplici poiché non richiede computer di guida. Ciò significa anche che i "
 "suoi proiettili volano in linea retta dal suo tubo e non possono inseguire "
 "un bersaglio.\n"
+
+#~ msgid "Server visibility: "
+#~ msgstr "Visibilità del server: "
+
+#~ msgid "LAN only"
+#~ msgstr "Solo LAN"
 
 #~ msgid ""
 #~ "Calibrate\n"
@@ -5924,10 +5955,6 @@ msgstr ""
 
 #~ msgid "Close server"
 #~ msgstr "Chiudi server"
-
-#~ msgctxt "variation"
-#~ msgid "None"
-#~ msgstr "Nessuna"
 
 #~ msgid "No variation selected. Play the scenario as intended."
 #~ msgstr "Nessuna variazione selezionata. Gioca lo scenario come previsto."

@@ -13,6 +13,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:69
+msgctxt "goal-incCall"
 msgid ""
 "Epsilon, please come in.\n"
 "\n"
@@ -26,6 +27,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
+msgctxt "incCall"
 msgid ""
 "RT-4 has been destroyed, but not before it launched an escape pod.\n"
 "\n"
@@ -35,10 +37,12 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:96
+msgctxt "incCall"
 msgid "And destroy those Exuari scum while you are at it!"
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:123
+msgctxt "incCall"
 msgid ""
 "J.J. Johnson seems to have suffocated. This is a great loss for our cause of "
 "peace.\n"
@@ -48,6 +52,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:133
+msgctxt "incCall"
 msgid ""
 "Just received message that Sir Johnson is safely aboard your ship! Great "
 "job!\n"
@@ -57,12 +62,14 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:146
+msgctxt "incCall"
 msgid ""
 "J.J. Johnson thanks you for rescuing him and tells you about his mission.\n"
 "\n"
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:148 scripts/scenario_05_beacon.lua:161
+msgctxt "incCall"
 msgid ""
 "He just returned from a mission from the Refugee-X station, a neutral "
 "station in the area known to house anyone regardless of their history.\n"
@@ -79,18 +86,21 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:159
+msgctxt "incCall"
 msgid ""
 "J.J. Johnson's message toward Orion-5 is clear:\n"
 "\n"
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:185
+msgctxt "incCall"
 msgid ""
 "J.J. Johnson transmitted his mission details to Orion-5 before he passed "
 "away. Head to Orion-5 for details."
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:195
+msgctxt "incCall"
 msgid ""
 "Two tough-looking criminals board your ship. They are already cuffed and do "
 "not look too happy about the situation.\n"
@@ -105,6 +115,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:218
+msgctxt "incCall"
 msgid ""
 "Sllaaami graa kully fartsy!\n"
 "\n"
@@ -114,6 +125,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:239
+msgctxt "incCall"
 msgid ""
 "Good job dealing with those Exuari scum. The criminals are safely in our "
 "custody, and we'll send a protection detail to Refugee-X.\n"
@@ -125,18 +137,22 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:243 scripts/scenario_05_beacon.lua:270
+msgctxt "incCall"
 msgid "We have refitted your nukes and EMPs."
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:243
+msgctxt "incCall"
 msgid "Awesome job taking out the Exuari without those."
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:270
+msgctxt "incCall"
 msgid "Now to get those Exuari!"
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:280
+msgctxt "incCall"
 msgid ""
 "Scan the transports to identify the Exuari one. When you have identified it, "
 "do NOT destroy it.\n"
@@ -146,15 +162,18 @@ msgstr ""
 
 #: scripts/scenario_05_beacon.lua:299 scripts/scenario_05_beacon.lua:316
 #: scripts/scenario_05_beacon.lua:340
+msgctxt "incCall"
 msgid "What the hell? I told you NOT to destroy the transport."
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:305
+msgctxt "incCall"
 msgid ""
 "Transport identified. Take out their impulse engines so we can capture it."
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:322
+msgctxt "incCall"
 msgid ""
 "The transport is disabled. We're dispatching a recovery team and need you to "
 "defend the transport from the Exuari, who will likely destroy it rather then "
@@ -162,6 +181,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:365
+msgctxt "incCall"
 msgid ""
 "Transport recovery team coming in:\n"
 "\n"
@@ -170,6 +190,7 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:377
+msgctxt "incCall"
 msgid ""
 "Thanks to the captured Exuari death squad, we now know the location of the "
 "Exuari base in the area.\n"

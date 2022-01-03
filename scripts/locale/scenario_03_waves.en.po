@@ -11,7 +11,45 @@ msgid ""
 "of the number and type of player ships."
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:43
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid ""
+"Decreases the number of ships in each wave. Good for new players, but takes "
+"longer for the players to be overwhelmed."
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid ""
+"Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
+"each wave. Players are overwhelmed more quickly, leading to shorter games."
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:45
+msgctxt "goal-shipLog"
 msgid ""
 "At least one friendly base must survive.\n"
 "\n"
@@ -21,16 +59,25 @@ msgid ""
 "How many waves can you destroy?"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:125 scripts/scenario_03_waves.lua:217
+#: scripts/scenario_03_waves.lua:127
 #, lua-format
+msgctxt "shipLog"
 msgid "Wave %d"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:250
+#: scripts/scenario_03_waves.lua:219
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Wave %d"
+msgstr ""
+
+#: scripts/scenario_03_waves.lua:252
+msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:251
+#: scripts/scenario_03_waves.lua:253
 #, lua-format
+msgctxt "shipLog"
 msgid "Wave %d cleared."
 msgstr ""

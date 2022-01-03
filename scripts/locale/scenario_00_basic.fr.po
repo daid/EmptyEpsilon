@@ -47,19 +47,22 @@ msgstr ""
 "Auteur : Daid"
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
-msgid "enemies"
+msgid "Enemies"
 msgstr "Ennemis"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
-msgctxt "enemies"
-msgid "empty"
+#, fuzzy
+msgctxt "Enemies"
+msgid "Empty"
 msgstr "Vide"
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid ""
 "No enemies. Recommended for GM-controlled scenarios and rookie crew "
 "orientation. The scenario continues until the GM declares victory or all "
@@ -70,37 +73,43 @@ msgstr ""
 "MJ déclare la victoire ou que tous les vaisseaux de la Marine Humaine soient "
 "détruits."
 
-msgctxt "enemies"
-msgid "easy"
-msgstr "Facile"
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Fewer enemies. Recommended for inexperienced crews."
 msgstr "Moins d'ennemis. Recommandé pour les équipages inexpérimentés."
 
-msgctxt "enemies"
-msgid "normal"
+#, fuzzy
+msgctxt "Enemies"
+msgid "Normal"
 msgstr "Normal"
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
 msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
 
-msgctxt "enemies"
-msgid "hard"
-msgstr "Difficile"
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "More enemies. Recommended if you have multiple player-controlled ships."
 msgstr ""
 "Plus d'ennemis. Recommandé si vous avez plusieurs vaisseaux contrôlés par "
 "des joueurs."
 
-msgctxt "enemies"
-msgid "extreme"
+#, fuzzy
+msgctxt "Enemies"
+msgid "Extreme"
 msgstr "Extrême"
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid ""
 "Many enemies. Inexperienced player crews will pretty surely be overwhelmed."
 msgstr ""
@@ -109,70 +118,81 @@ msgstr ""
 
 # Scenario setting
 msgctxt "setting"
-msgid "time"
-msgstr "Durée"
+msgid "Time"
+msgstr ""
 
 msgctxt "setting"
 msgid "Sets up how much time the players have for the scenario"
 msgstr "Définit le temps dont disposent les joueurs pour le scénario."
 
-msgctxt "time"
-msgid "unlimited"
+#, fuzzy
+msgctxt "Time"
+msgid "Unlimited"
 msgstr "illimitée"
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "No time limit"
 msgstr "Sans limite de temps."
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "20min"
 msgstr "20 min"
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "Automatic loss after 20 minutes"
 msgstr "Défaite automatique après 20 minutes."
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "30min"
 msgstr "30 min"
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "Automatic loss after 30 minutes"
 msgstr "Défaite automatique après 30 minutes."
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "60min"
 msgstr "60 min"
 
-msgctxt "time"
+#, fuzzy
+msgctxt "Time"
 msgid "Automatic loss after 60 minutes"
 msgstr "Défaite automatique après 60 minutes."
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
-msgid "playership"
+msgid "PlayerShip"
 msgstr "Vaisseau joueurs"
 
 msgctxt "setting"
 msgid "Sets the default player ship"
 msgstr "Définit le vaisseau joueurs par défaut."
 
-msgctxt "playership"
-msgid "atlantis"
+msgctxt "PlayerShip"
+msgid "Atlantis"
 msgstr ""
 
-msgctxt "playership"
+#, fuzzy
+msgctxt "PlayerShip"
 msgid ""
 "Powerful ship with sidewards missile tubes. Requires more advanced play."
 msgstr ""
 "Vaisseau puissant avec tubes lance-missiles latéraux. Nécessite un peu "
 "d'expérience."
 
-msgctxt "playership"
-msgid "phobos m3p"
+msgctxt "PlayerShip"
+msgid "Phobos M3P"
 msgstr ""
 
-msgctxt "playership"
+#, fuzzy
+msgctxt "PlayerShip"
 msgid ""
 "Simpler, less powerful ship. But easier to handler. Recommended for new "
 "crews."
@@ -258,3 +278,16 @@ msgstr "Mission : ECHEC (tous vos vaisseaux détruits)"
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr "Mission en cours - Temps restant : %d:%02d - Ennemis : %d"
+
+#~ msgctxt "enemies"
+#~ msgid "easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "enemies"
+#~ msgid "hard"
+#~ msgstr "Difficile"
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "time"
+#~ msgstr "Durée"

@@ -17,7 +17,8 @@ msgid ""
 "This is a short mission for inexperienced players."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:78
+#: scripts/scenario_20_training1.lua:79
+msgctxt "goal-incCall"
 msgid ""
 "This is Commander Saberhagen.\n"
 "\n"
@@ -32,19 +33,19 @@ msgid ""
 "Commander Saberhagen out."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:96
-msgctxt "bonusTarget"
+#: scripts/scenario_20_training1.lua:97
+msgctxt "msgMainscreen-bonusTarget"
 msgid "escaped."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:98
-msgctxt "bonusTarget"
+#: scripts/scenario_20_training1.lua:99
+msgctxt "msgMainscreen-bonusTarget"
 msgid "destroyed."
 msgstr ""
 
-#: scripts/scenario_20_training1.lua:100
+#: scripts/scenario_20_training1.lua:101
 #, lua-format
-msgctxt "globalMsg"
+msgctxt "msgMainscreen"
 msgid ""
 "Mission Complete.\n"
 "Your Time: %d\n"
