@@ -68,7 +68,6 @@ msgstr ""
 "Auteur : Xansta"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
@@ -79,28 +78,24 @@ msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Fewer enemies."
 msgstr "Moins d'ennemis."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal amount of enemies."
 msgstr "Quantité d'ennemis par défaut."
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "More enemies."
 msgstr "Plus d'ennemis."
@@ -229,7 +224,7 @@ msgstr "|> Balindor Prime"
 #: scripts/scenario_51_deliverAmbassador.lua:339
 msgctxt "audio-msgMainscreen"
 msgid "Ambassador lost to hostile mob. The Kraylors are victorious"
-msgstr "Trop tard. L'ambassadeur s'est fait capturer par la foule"
+msgstr "Trop tard. L'ambassadeur s'est fait capturer par la foule."
 
 #: scripts/scenario_51_deliverAmbassador.lua:340
 msgctxt "audio-incCall"
@@ -309,7 +304,7 @@ msgid ""
 "7. Please dock with Ningling"
 msgstr ""
 "[Ambassadeur Gremus - Station Ningling] %s, je suis prêt à être transporté "
-"sur Goltin 7. Veuillez accoster que je puisse remonter à bord"
+"sur Goltin 7. Veuillez accoster que je puisse remonter à bord."
 
 #: scripts/scenario_51_deliverAmbassador.lua:581
 msgctxt "audio-buttonRelay"
@@ -349,7 +344,7 @@ msgctxt "upgrade-shipLog"
 msgid "Also increased the top speed of your impulse engine"
 msgstr ""
 "Nous avons également augmenté la vitesse de pointe de votre moteur à "
-"impulsions"
+"impulsions."
 
 #: scripts/scenario_51_deliverAmbassador.lua:608
 msgctxt "audio-buttonRelay"
@@ -400,7 +395,7 @@ msgid ""
 "\t\t\tIonic phase shift: %i\n"
 "\t\t\tDoppler instability: %i"
 msgstr ""
-"L'objet émet des lectures inhabituelles :\n"
+"L'objet émet des lectures inhabituelles :\n"
 "\t\t\tRayonnement bêta : %i\n"
 "\t\t\tPerturbation de la gravité : %i\n"
 "\t\t\tDéphasage ionique : %i\n"
@@ -452,13 +447,13 @@ msgstr "Avertissement"
 #: scripts/scenario_51_deliverAmbassador.lua:733
 msgctxt "artifact-msgScience"
 msgid "The readings on the Pangora artifact have changed"
-msgstr "Les analyses sur l'artefact de Pangora ont changé"
+msgstr "Les analyses sur l'artefact de Pangora ont changé."
 
 #: scripts/scenario_51_deliverAmbassador.lua:804
 #: scripts/scenario_51_deliverAmbassador.lua:839
 msgctxt "msgMainscreen"
 msgid "Goltin 7 welcomes ambassador Gremus"
-msgstr "Goltin 7 accueille l'ambassadeur Gremus"
+msgstr "Goltin 7 accueille l'ambassadeur Gremus."
 
 #: scripts/scenario_51_deliverAmbassador.lua:805
 #, lua-format
@@ -581,7 +576,8 @@ msgstr ""
 #, lua-format
 msgctxt "path-comms"
 msgid "Added waypoint %i to your navigation system for Balindor Prime"
-msgstr "Ajout du marqueur %i à votre système de navigation pour Balindor Prime"
+msgstr ""
+"Ajout du marqueur %i à votre système de navigation pour Balindor Prime."
 
 #: scripts/scenario_51_deliverAmbassador.lua:959
 #: scripts/scenario_51_deliverAmbassador.lua:971
@@ -622,14 +618,14 @@ msgstr "Où se trouve la station Ningling ?"
 #, lua-format
 msgctxt "path-comms"
 msgid "Ningling station is in sector %s"
-msgstr "La station Ningling se trouve en secteur %s"
+msgstr "La station Ningling se trouve en secteur %s."
 
 #: scripts/scenario_51_deliverAmbassador.lua:968
 #: scripts/scenario_51_deliverAmbassador.lua:1186
 #, lua-format
 msgctxt "path-comms"
 msgid "Added waypoint %i for Ningling station"
-msgstr "Ajout du marqueur %i pour la station Ningling"
+msgstr "Ajout du marqueur %i pour la station Ningling."
 
 #: scripts/scenario_51_deliverAmbassador.lua:975
 #: scripts/scenario_51_deliverAmbassador.lua:1193
@@ -653,7 +649,7 @@ msgstr ""
 #, lua-format
 msgctxt "path-comms"
 msgid "Added waypoint %i for Goltin 7"
-msgstr "Marqueur %i ajouté pour la station Goltin 7"
+msgstr "Marqueur %i ajouté pour la station Goltin 7."
 
 #: scripts/scenario_51_deliverAmbassador.lua:992
 #: scripts/scenario_51_deliverAmbassador.lua:1210
@@ -666,14 +662,14 @@ msgstr "Où se trouve la station Pangora ?"
 #, lua-format
 msgctxt "path-comms"
 msgid "Pangora is in sector %s"
-msgstr "Pangora est dans le secteur %s"
+msgstr "Pangora est dans le secteur %s."
 
 #: scripts/scenario_51_deliverAmbassador.lua:997
 #: scripts/scenario_51_deliverAmbassador.lua:1215
 #, lua-format
 msgctxt "path-comms"
 msgid "Added waypoint %i for Pangora station"
-msgstr "Le marqueur %i a été ajouté pour la station Pangora"
+msgstr "Le marqueur %i a été ajouté pour la station Pangora."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1004
 #: scripts/scenario_51_deliverAmbassador.lua:1222
@@ -686,14 +682,14 @@ msgstr "Où est Nakor ?"
 #, lua-format
 msgctxt "path-comms"
 msgid "Nakor is in sector %s"
-msgstr "Nakor est dans le secteur %s"
+msgstr "Nakor est dans le secteur %s."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1009
 #: scripts/scenario_51_deliverAmbassador.lua:1227
 #, lua-format
 msgctxt "path-comms"
 msgid "Added waypoint %i for Nakor station"
-msgstr "Marqueur %i ajouté pour la station Nakor"
+msgstr "Marqueur %i ajouté pour la station Nakor."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1016
 #: scripts/scenario_51_deliverAmbassador.lua:1234
@@ -706,14 +702,14 @@ msgstr "Où se situe Science-37 ?"
 #, lua-format
 msgctxt "path-comms"
 msgid "Science-37 is in sector %s"
-msgstr "Science-37 se situe dans le secteur %s"
+msgstr "Science-37 se situe dans le secteur %s."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1021
 #: scripts/scenario_51_deliverAmbassador.lua:1239
 #, lua-format
 msgctxt "path-comms"
 msgid "Added a waypoint %i for station Science-37"
-msgstr "Marqueur %i ajouté pour la station Science-37"
+msgstr "Marqueur %i ajouté pour la station Science-37."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1029
 #: scripts/scenario_51_deliverAmbassador.lua:1247
@@ -735,7 +731,7 @@ msgstr ""
 #: scripts/scenario_51_deliverAmbassador.lua:1254
 msgctxt "artifact-comms"
 msgid "Heard of any artifacts near Nakor?"
-msgstr "Entendu parler d'artefacts près de Nakor ?"
+msgstr "Entendu parler d'artefacts près de Nakor ?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1037
 #: scripts/scenario_51_deliverAmbassador.lua:1255
@@ -745,13 +741,13 @@ msgid ""
 "station"
 msgstr ""
 "Certains ont signalé avoir vu un objet sur la route de Nakor. Cap "
-"approximatif 315 depuis la station Nakor"
+"approximatif 315 depuis la station Nakor."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1043
 #: scripts/scenario_51_deliverAmbassador.lua:1261
 msgctxt "artifact-comms"
 msgid "Has anyone reported seeing artifacts near Science-37?"
-msgstr "Quelqu'un a-t-il signalé avoir vu des artefacts près de Science-37 ?"
+msgstr "Quelqu'un a-t-il signalé avoir vu des artefacts près de Science-37 ?"
 
 #: scripts/scenario_51_deliverAmbassador.lua:1044
 #: scripts/scenario_51_deliverAmbassador.lua:1262
@@ -761,7 +757,7 @@ msgid ""
 "heading zero from Science-37 station"
 msgstr ""
 "Des cargos faisant affaire ici signalent parfois un objet inerte en "
-"direction du cap zéro depuis la station Science-37"
+"direction du cap zéro depuis la station Science-37."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1051
 msgctxt "orders-comms"
@@ -835,7 +831,7 @@ msgstr "Nous ne vendons pas ce type d'armes. Trop dangereux."
 #: scripts/scenario_51_deliverAmbassador.lua:1088
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
+msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir."
 
 #: scripts/scenario_51_deliverAmbassador.lua:1090
 msgctxt "ammo-comms"
@@ -945,7 +941,7 @@ msgstr "Nous venons d'expédier %s pour vous aider au marqueur %d "
 #: scripts/scenario_51_deliverAmbassador.lua:1174
 msgctxt "path-comms"
 msgid "Added a waypoint to your navigation system for Balindor Prime"
-msgstr "Ajout d'un marqueur à votre système de navigation pour Balindor Prime"
+msgstr "Ajout d'un marqueur à votre système de navigation pour Balindor Prime."
 
 #~ msgctxt "enemies"
 #~ msgid "easy"
