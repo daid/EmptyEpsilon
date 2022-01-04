@@ -150,7 +150,7 @@ msgid ""
 "\n"
 "Finally! We thought we lost you. You are not out of the woods yet, though.\n"
 "\n"
-"Try to get to sector ZU5. We are sending JC88 to get you out of there."
+"Try to get to sector zu5. We are sending JC88 to get you out of there."
 msgstr ""
 
 #: scripts/scenario_08_atlantis.lua:515
@@ -160,7 +160,7 @@ msgid ""
 "\n"
 "Finally! We thought we lost you. You are not out of the woods yet, though.\n"
 "\n"
-"Search for a hole in the Kraylor defenses, then try to get to sector ZU5. We "
+"Search for a hole in the Kraylor defenses, then try to get to sector zu5. We "
 "are sending JC88 to get you out of there."
 msgstr ""
 

@@ -223,13 +223,13 @@ string getSectorName(glm::vec2 position)
     string y;
     string x;
     if (sector_y >= 0)
-        y = string(char('A' + (sector_y)));
+        if (sector_y < 26)
+            y = string(char('A' + (sector_y)));
+        else
+            y = string(char('A' - 1 + (sector_y / 26))) + string(char('A' + (sector_y % 26)));
     else
-        y = string(char('z' + sector_y / 26)) + string(char('z' + 1 + (sector_y % 26)));
-    if (sector_x >= 0)
-        x = string(sector_x);
-    else
-        x = string(100 + sector_x);
+        y = string(char('z' + ((sector_y + 1) / 26))) + ((sector_y  % 26) == 0 ? "a" : string(char('z' + 1 + (sector_y  % 26))));
+    x = string(sector_x);
     return y + x;
 }
 
