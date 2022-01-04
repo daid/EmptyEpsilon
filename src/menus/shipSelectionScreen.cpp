@@ -179,6 +179,61 @@ ShipSelectionScreen::ShipSelectionScreen()
     });
     spectator_button->setSize(GuiElement::GuiSizeMax, 50);
 
+    if (game_server)
+    {
+        auto extra_settings_panel = new GuiPanel(this, "");
+        extra_settings_panel->setSize(600, 325)->setPosition(0, 0, sp::Alignment::Center)->hide();
+        auto extra_settings = new GuiAutoLayout(extra_settings_panel, "", GuiAutoLayout::LayoutVerticalTopToBottom);
+        extra_settings->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(25);
+        // Science scan complexity selector.
+        auto row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+        row->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLabel(row, "GAME_SCANNING_COMPLEXITY_LABEL", tr("Scan complexity: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        (new GuiSelector(row, "GAME_SCANNING_COMPLEXITY", [](int index, string value) {
+            gameGlobalInfo->scanning_complexity = EScanningComplexity(index);
+        }))->setOptions({tr("scanning", "None (delay)"), tr("scanning", "Simple"), tr("scanning", "Normal"), tr("scanning", "Advanced")})->setSelectionIndex((int)gameGlobalInfo->scanning_complexity)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Hacking difficulty selector.
+        row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+        row->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        (new GuiSelector(row, "GAME_HACKING_DIFFICULTY", [](int index, string value) {
+            gameGlobalInfo->hacking_difficulty = index;
+        }))->setOptions({tr("hacking", "Simple"), tr("hacking", "Normal"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Hacking games selector.
+        row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+        row->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", tr("Hacking type: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
+        (new GuiSelector(row, "GAME_HACKING_GAME", [](int index, string value) {
+            gameGlobalInfo->hacking_games = EHackingGames(index);
+        }))->setOptions({tr("hacking", "Mine"), tr("hacking", "Lights"), tr("hacking", "All")})->setSelectionIndex((int)gameGlobalInfo->hacking_games)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        // Frequency and system damage row.
+        row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+        row->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiToggleButton(row, "GAME_FREQUENCIES_TOGGLE", tr("Beam/shield frequencies"), [](bool value) {
+            gameGlobalInfo->use_beam_shield_frequencies = value == 1;
+        }))->setValue(gameGlobalInfo->use_beam_shield_frequencies)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterLeft);
+
+        (new GuiToggleButton(row, "GAME_SYS_DAMAGE_TOGGLE", tr("Per-system damage"), [](bool value) {
+            gameGlobalInfo->use_system_damage = value == 1;
+        }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterRight);
+
+        auto close_button = new GuiButton(extra_settings_panel, "", tr("Close"), [this, extra_settings_panel](){
+            extra_settings_panel->hide();
+            container->show();
+        });
+        close_button->setSize(200, 50)->setPosition(0, -25, sp::Alignment::BottomCenter);
+
+        //Additional options
+        auto extra_settings_button = new GuiButton(right_content, "", tr("Extra settings"), [this, extra_settings_panel]() {
+            extra_settings_panel->show();
+            container->hide();
+        });
+        extra_settings_button->setSize(GuiElement::GuiSizeMax, 50);
+    }
+
     // If this is the server, add a panel to create player ships.
     if (game_server && gameGlobalInfo->allow_new_player_ships)
     {
