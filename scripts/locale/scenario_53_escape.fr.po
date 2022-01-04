@@ -42,7 +42,6 @@ msgstr ""
 "Auteur : Xansta"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
@@ -53,28 +52,24 @@ msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Easy goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis faciles."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis par défaut."
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Hard goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis difficiles."

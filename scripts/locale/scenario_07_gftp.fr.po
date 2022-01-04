@@ -129,13 +129,13 @@ msgid ""
 "I was not the only AI detained in Black Site 114. My co-processor was here "
 "also."
 msgstr ""
-"Je n'étais pas la seule IA détenue dans le Black Site 114. Mon co-processeur "
+"Je n'étais pas la seule IA détenue dans le Black Site 114. Mon coprocesseur "
 "était là aussi."
 
 #: scripts/scenario_07_gftp.lua:102
 msgctxt "swarm-comms"
 msgid "Are you trying to liberate it?"
-msgstr "Essayez-vous de le libérer?"
+msgstr "Essayez-vous de le libérer ?"
 
 #: scripts/scenario_07_gftp.lua:104
 msgctxt "swarm-comms"
@@ -501,7 +501,7 @@ msgstr ""
 "\n"
 "Cependant, les autres navires semblent avoir eu moins de chance. La plupart "
 "sont privés de communications et d'autres sont à la dérive. Que se passe-t-"
-"il?"
+"il ?"
 
 #: scripts/scenario_07_gftp.lua:378
 msgctxt "incCall"

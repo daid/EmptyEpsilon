@@ -47,7 +47,6 @@ msgstr ""
 "Auteur : Daid"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
@@ -56,12 +55,10 @@ msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Empty"
 msgstr "Vide"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid ""
 "No enemies. Recommended for GM-controlled scenarios and rookie crew "
@@ -75,40 +72,34 @@ msgstr ""
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Fewer enemies. Recommended for inexperienced crews."
 msgstr "Moins d'ennemis. Recommandé pour les équipages inexpérimentés."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
 msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "More enemies. Recommended if you have multiple player-controlled ships."
 msgstr ""
 "Plus d'ennemis. Recommandé si vous avez plusieurs vaisseaux contrôlés par "
 "des joueurs."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Extreme"
 msgstr "Extrême"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid ""
 "Many enemies. Inexperienced player crews will pretty surely be overwhelmed."
@@ -119,54 +110,45 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Time"
-msgstr ""
+msgstr "Durée"
 
 msgctxt "setting"
 msgid "Sets up how much time the players have for the scenario"
 msgstr "Définit le temps dont disposent les joueurs pour le scénario."
 
-#, fuzzy
 msgctxt "Time"
 msgid "Unlimited"
-msgstr "illimitée"
+msgstr "Illimitée"
 
-#, fuzzy
 msgctxt "Time"
 msgid "No time limit"
 msgstr "Sans limite de temps."
 
-#, fuzzy
 msgctxt "Time"
 msgid "20min"
 msgstr "20 min"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Automatic loss after 20 minutes"
 msgstr "Défaite automatique après 20 minutes."
 
-#, fuzzy
 msgctxt "Time"
 msgid "30min"
 msgstr "30 min"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Automatic loss after 30 minutes"
 msgstr "Défaite automatique après 30 minutes."
 
-#, fuzzy
 msgctxt "Time"
 msgid "60min"
 msgstr "60 min"
 
-#, fuzzy
 msgctxt "Time"
 msgid "Automatic loss after 60 minutes"
 msgstr "Défaite automatique après 60 minutes."
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "PlayerShip"
 msgstr "Vaisseau joueurs"
@@ -179,7 +161,6 @@ msgctxt "PlayerShip"
 msgid "Atlantis"
 msgstr ""
 
-#, fuzzy
 msgctxt "PlayerShip"
 msgid ""
 "Powerful ship with sidewards missile tubes. Requires more advanced play."
@@ -191,13 +172,12 @@ msgctxt "PlayerShip"
 msgid "Phobos M3P"
 msgstr ""
 
-#, fuzzy
 msgctxt "PlayerShip"
 msgid ""
 "Simpler, less powerful ship. But easier to handler. Recommended for new "
 "crews."
 msgstr ""
-"Navire plus simple et moins puissant mais plus facile à maîtriser que "
+"Vaisseau plus simple et moins puissant mais plus facile à maîtriser que "
 "l'Atlantis. Recommandé pour les nouveaux équipages."
 
 #: scripts/scenario_00_basic.lua:475
