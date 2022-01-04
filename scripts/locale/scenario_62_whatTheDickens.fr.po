@@ -32,7 +32,6 @@ msgstr ""
 "Auteur : Xansta"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
@@ -41,12 +40,10 @@ msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Easy"
 msgstr "Facile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid ""
 "Easy goals and/or enemies. Good for solo players, short handed crews or less "
@@ -55,24 +52,20 @@ msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Adapté pour les joueurs en solo, "
 "les équipages réduits ou moins expérimentés."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal goals and/or enemies. Good for a normal crew."
 msgstr ""
 "Objectifs et/ou quantité d'ennemis par défaut. Adapté pour un équipage "
 "standard."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Hard"
 msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid ""
 "Hard goals and/or enemies. Good for experienced crews looking for a "
