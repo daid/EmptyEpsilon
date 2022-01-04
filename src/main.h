@@ -18,8 +18,8 @@ extern PostProcessor* warpPostProcessor;
 extern PVector<Window> windows;
 extern std::vector<RenderLayer*> window_render_layers;
 
-void returnToMainMenu();
-void returnToShipSelection();
+void returnToMainMenu(RenderLayer*);
+void returnToShipSelection(RenderLayer*);
 void returnToOptionMenu();
 
 #endif//MAIN_H

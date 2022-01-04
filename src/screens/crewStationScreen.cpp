@@ -162,7 +162,7 @@ void CrewStationScreen::update(float delta)
         soundManager->stopMusic();
         impulse_sound->stop();
         disconnectFromServer();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
         return;
     }
 
@@ -171,7 +171,7 @@ void CrewStationScreen::update(float delta)
         destroy();
         soundManager->stopMusic();
         impulse_sound->stop();
-        returnToShipSelection();
+        returnToShipSelection(getRenderLayer());
     }
     if (keys.help.getDown())
     {

@@ -85,7 +85,7 @@ void ScreenMainScreen::update(float delta)
         soundManager->stopMusic();
         impulse_sound->stop();
         destroy();
-        returnToShipSelection();
+        returnToShipSelection(getRenderLayer());
     }
     if (keys.help.getDown())
     {
@@ -104,7 +104,7 @@ void ScreenMainScreen::update(float delta)
         impulse_sound->stop();
         destroy();
         disconnectFromServer();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
         return;
     }
 

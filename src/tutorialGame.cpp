@@ -230,7 +230,7 @@ void TutorialGame::finish()
         destroy();
 
         disconnectFromServer();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }
 }
 

@@ -83,7 +83,7 @@ ServerSetupScreen::ServerSetupScreen()
     // Close server button.
     (new GuiButton(this, "CLOSE_SERVER", tr("Close"), [this]() {
         destroy();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }))->setPosition(-250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Start server button.
@@ -220,7 +220,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
 
             // Destroy this screen and move on to ship selection.
             destroy();
-            returnToShipSelection();
+            returnToShipSelection(getRenderLayer());
             new ScriptErrorRenderer();
         }
         else
@@ -294,7 +294,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
 
         // Destroy this screen and move on to ship selection.
         destroy();
-        returnToShipSelection();
+        returnToShipSelection(getRenderLayer());
         new ScriptErrorRenderer();
     });
     start_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);

@@ -33,7 +33,7 @@ void WindowScreen::update(float delta)
     if (keys.escape.getDown())
     {
         destroy();
-        returnToShipSelection();
+        returnToShipSelection(getRenderLayer());
     }
     if (keys.pause.getDown())
     {
@@ -45,7 +45,7 @@ void WindowScreen::update(float delta)
     {
         destroy();
         disconnectFromServer();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
         return;
     }
 

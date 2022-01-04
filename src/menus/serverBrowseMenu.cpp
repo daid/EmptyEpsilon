@@ -50,7 +50,7 @@ ServerBrowserMenu::ServerBrowserMenu(SearchSource source, std::optional<GameClie
 
     (new GuiButton(this, "BACK", tr("button", "Back"), [this]() {
         destroy();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     if (last_attempt)

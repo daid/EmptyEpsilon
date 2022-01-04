@@ -67,7 +67,7 @@ TutorialMenu::TutorialMenu()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(300, GuiElement::GuiSizeMax);
 
     // Select the first scenario in the list by default.
@@ -90,6 +90,6 @@ void TutorialMenu::update(float delta)
     if (keys.escape.getDown())
     {
         destroy();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }
 }

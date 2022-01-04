@@ -201,7 +201,7 @@ OptionsMenu::OptionsMenu()
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
     // Save options button.
     (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
@@ -219,7 +219,7 @@ void OptionsMenu::update(float delta)
     {
         destroy();
         soundManager->stopMusic();
-        returnToMainMenu();
+        returnToMainMenu(getRenderLayer());
     }
 }
 

@@ -81,7 +81,7 @@ void JoinServerScreen::update(float delta)
                     my_player_info = i;
             if (my_player_info && gameGlobalInfo)
             {
-                returnToShipSelection();
+                returnToShipSelection(getRenderLayer());
                 destroy();
             }
         }

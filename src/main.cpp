@@ -123,6 +123,7 @@ int main(int argc, char** argv)
     if (std::filesystem::exists(CONFIG_DIR, ec))
         configuration_path = CONFIG_DIR;
 #endif
+    LOG(Info, "Using", configuration_path, "as configuration path");
     PreferencesManager::load(configuration_path + "/options.ini");
 
     for(int n=1; n<argc; n++)
@@ -334,7 +335,7 @@ int main(int argc, char** argv)
 #endif // WITH_DISCORD
 
     if (PreferencesManager::get("server_scenario") == "")
-        returnToMainMenu();
+        returnToMainMenu(defaultRenderLayer);
     else
     {
         new EpsilonServer(defaultServerPort);
@@ -379,8 +380,14 @@ int main(int argc, char** argv)
     return 0;
 }
 
-void returnToMainMenu()
+void returnToMainMenu(RenderLayer* render_layer)
 {
+    if (render_layer != defaultRenderLayer) // Handle secondary monitors
+    {
+        returnToShipSelection(render_layer);
+        return;
+    }
+
     if (PreferencesManager::get("headless") != "")
     {
         new EpsilonServer(defaultServerPort);
@@ -407,16 +414,23 @@ void returnToMainMenu()
     }
 }
 
-void returnToShipSelection()
+void returnToShipSelection(RenderLayer* render_layer)
 {
-    if (PreferencesManager::get("autoconnect").toInt())
+    if (render_layer != defaultRenderLayer)
     {
-        //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
-        returnToMainMenu();
-    }
-    else
-    {
-        new ShipSelectionScreen();
+        for(size_t n=0; n<window_render_layers.size(); n++)
+            if (window_render_layers[n] == render_layer)
+                new SecondMonitorScreen(n);
+    } else {
+        if (PreferencesManager::get("autoconnect").toInt())
+        {
+            //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
+            returnToMainMenu(render_layer);
+        }
+        else
+        {
+            new ShipSelectionScreen();
+        }
     }
 }
 
