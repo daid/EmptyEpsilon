@@ -5,7 +5,8 @@
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/radarView.h"
 
-SpectatorScreen::SpectatorScreen()
+SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
+: GuiCanvas(render_layer)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, nullptr);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();

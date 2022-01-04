@@ -15,7 +15,7 @@ private:
     glm::vec2 drag_start_position{};
     glm::vec2 drag_previous_position{};
 public:
-    SpectatorScreen();
+    SpectatorScreen(RenderLayer* render_layer);
     virtual ~SpectatorScreen() = default;
 
     virtual void update(float delta) override;

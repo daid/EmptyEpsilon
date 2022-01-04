@@ -12,7 +12,7 @@ private:
     glm::vec2 mouse_position;
     bool enable_debug_rendering;
 public:
-    GuiCanvas();
+    GuiCanvas(RenderLayer* renderLayer=nullptr);
     virtual ~GuiCanvas();
 
     virtual void render(sp::RenderTarget& window) override;

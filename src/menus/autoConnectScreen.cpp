@@ -118,7 +118,7 @@ void AutoConnectScreen::update(float delta)
                         if (my_spaceship->getMultiplayerId() == my_player_info->ship_id && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
                         {
                             destroy();
-                            my_player_info->spawnUI();
+                            my_player_info->spawnUI(0, getRenderLayer());
                         }
                     }
                 }else{
@@ -182,8 +182,8 @@ void AutoConnectScreen::connectToShip(int index)
 
     if (crew_position != max_crew_positions)    //If we are not the main screen, setup the right crew position.
     {
-        my_player_info->commandSetCrewPosition(crew_position, true);
-        my_player_info->commandSetMainScreenControl(control_main_screen);
+        my_player_info->commandSetCrewPosition(0, crew_position, true);
+        my_player_info->commandSetMainScreenControl(0, control_main_screen);
     }
     my_player_info->commandSetShipId(ship->getMultiplayerId());
 }

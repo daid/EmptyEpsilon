@@ -76,7 +76,7 @@ private:
     GuiButton* cancel_action_button;
 public:
 
-    GameMasterScreen();
+    GameMasterScreen(RenderLayer* render_layer);
     virtual ~GameMasterScreen();
 
     virtual void update(float delta) override;

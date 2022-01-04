@@ -10,7 +10,8 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
-TopDownScreen::TopDownScreen()
+TopDownScreen::TopDownScreen(RenderLayer* render_layer)
+: GuiCanvas(render_layer)
 {
     // Create a full-screen viewport and draw callsigns on ships.
     viewport = new GuiViewport3D(this, "VIEWPORT");

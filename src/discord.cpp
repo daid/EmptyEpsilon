@@ -84,7 +84,7 @@ void DiscordRichPresence::update(float delta)
                 break;
             }
         }
-        if (my_player_info->isOnlyMainScreen())
+        if (my_player_info->isOnlyMainScreen(0))
         {
             strncpy(activity.state, "Captain", sizeof(activity.state));
             strcpy(activity.assets.small_image, "captain_white");

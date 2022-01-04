@@ -17,7 +17,7 @@ private:
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
 public:
-    TopDownScreen();
+    TopDownScreen(RenderLayer* render_layer);
 
     virtual void update(float delta) override;
 };

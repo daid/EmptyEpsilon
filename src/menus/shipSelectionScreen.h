@@ -3,6 +3,7 @@
 
 #include "playerInfo.h"
 #include "gui/gui2_canvas.h"
+#include "gui/gui2_panel.h"
 
 class GuiAutoLayout;
 class GuiLabel;
@@ -14,6 +15,8 @@ class GuiPanel;
 class GuiButton;
 class GuiToggleButton;
 class GuiTextEntry;
+class CrewPositionSelection;
+class PasswordDialog;
 
 class ShipSelectionScreen : public GuiCanvas, public Updatable
 {
@@ -24,43 +27,36 @@ private:
 
     GuiLabel* no_ships_label;
     GuiListbox* player_ship_list;
-    GuiButton* ready_button;
-    GuiSelector* crew_type_selector;
-    GuiOverlay* password_overlay;
-    GuiLabel* password_label;
-    GuiPanel* password_entry_box;
-    GuiTextEntry* password_entry;
-    GuiButton* password_entry_ok;
-    GuiButton* password_cancel;
-    GuiButton* password_confirmation;
 
-    GuiToggleButton* main_screen_button;
-    GuiToggleButton* crew_position_button[max_crew_positions];
-    GuiToggleButton* main_screen_controls_button;
-    GuiToggleButton* game_master_button;
-    GuiToggleButton* spectator_button;
-    GuiAutoLayout* window_button_row;
-    GuiToggleButton* window_button;
-    GuiSlider* window_angle;
-    GuiLabel* window_angle_label;
-    GuiToggleButton* topdown_button;
-    GuiToggleButton* cinematic_view_button;
+    GuiOverlay* crew_position_selection_overlay;
+    CrewPositionSelection* crew_position_selection;
 
+    PasswordDialog* password_dialog;
 public:
     ShipSelectionScreen();
 
     virtual void update(float delta) override;
+};
+
+class CrewPositionSelection : public GuiPanel
+{
+public:
+    CrewPositionSelection(GuiContainer* owner, string id, int window_index, std::function<void()> on_cancel, std::function<void()> on_ready);
+
+    virtual void onUpdate() override;
+    void spawnUI(RenderLayer* render_layer);
 private:
-    /**!
-     * \brief check if this console can be mainscreen.
-     * Being a main screen requires a bit more than the normal GUI, so we need to do some checks.
-     */
-    bool canDoMainScreen() const;
+    void disableAllExcept(GuiToggleButton* button);
 
-    void updateReadyButton();
-    void updateCrewTypeOptions();
-
-    void onReadyClick();
+    int window_index;
+    GuiButton* ready_button;
+    GuiToggleButton* main_screen_button;
+    GuiToggleButton* crew_position_button[max_crew_positions];
+    GuiToggleButton* main_screen_controls_button;
+    GuiToggleButton* window_button;
+    GuiSlider* window_angle;
+    GuiLabel* window_angle_label;
+    GuiToggleButton* topdown_button;
 };
 
 #endif//SHIP_SELECTION_SCREEN_H

@@ -1,8 +1,9 @@
 #include "gui2_canvas.h"
 #include "gui2_element.h"
 
-GuiCanvas::GuiCanvas()
-: click_element(nullptr), focus_element(nullptr)
+
+GuiCanvas::GuiCanvas(RenderLayer* renderLayer)
+: Renderable(renderLayer), click_element(nullptr), focus_element(nullptr)
 {
     enable_debug_rendering = false;
 }

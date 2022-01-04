@@ -156,7 +156,7 @@ MainMenu::MainMenu()
 
             my_player_info->commandSetShipId(-1);
             destroy();
-            new GameMasterScreen();
+            new GameMasterScreen(nullptr);
         }
     }))->setPosition({370, -150}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
