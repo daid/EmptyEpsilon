@@ -58,10 +58,10 @@ msgid ""
 "Doppler instability: %i"
 msgstr ""
 "Nous l'avons trouvé. Cet objet dégage d'étranges radiations.\n"
-"Lectures des capteurs :\n"
-"Rayonnement bêta : %i\n"
-"Perturbation de la gravité : %i\n"
-"Déphasage ionique : %i\n"
+"Lectures des capteurs :\n"
+"Rayonnement bêta : %i\n"
+"Perturbation de la gravité : %i\n"
+"Déphasage ionique : %i\n"
 "Instabilité Doppler : %i"
 
 #: scripts/scenario_08_atlantis.lua:174 scripts/scenario_08_atlantis.lua:178
@@ -208,6 +208,9 @@ msgid ""
 "It would be good to get some more reading a bit closer, as the nebula causes "
 "our sensor "
 msgstr ""
+"Il semble que l'artefact se stabilise.\n"
+"Ce serait bien d'avoir un peu plus de lectures, car la nébuleuse gêne nos "
+"capteurs."
 
 #: scripts/scenario_08_atlantis.lua:461
 msgctxt "JumpCarrier-incCall"
@@ -515,7 +518,7 @@ msgstr ""
 #: scripts/scenario_08_atlantis.lua:739
 msgctxt "msgMainscreen"
 msgid "Bonus points for destroying the battlestation!"
-msgstr "Points bonus pour avoir détruit la station de combat !"
+msgstr "Points bonus pour avoir détruit la station de combat !"
 
 #: scripts/scenario_08_atlantis.lua:777
 msgctxt "station-comms"
@@ -598,7 +601,7 @@ msgstr ""
 msgctxt "artifact-comms"
 msgid "Atlantis-1, did you find the source of the odd sensor readings?"
 msgstr ""
-"Atlantis-1, avez-vous trouvé la source de ces étranges lectures de capteurs ?"
+"Atlantis-1, avez-vous trouvé la source de ces étranges lectures de capteurs ?"
 
 #: scripts/scenario_08_atlantis.lua:832
 msgctxt "artifact-comms"
@@ -616,7 +619,7 @@ msgstr ""
 "Génial, car nos lectures de capteurs ne sont pas concluantes. Pouvez-vous "
 "nous faire part des vôtres ?\n"
 "\n"
-"Tout d'abord, quelle est la lecture du rayonnement bêta?"
+"Tout d'abord, quelle est la lecture du rayonnement bêta ?"
 
 #: scripts/scenario_08_atlantis.lua:841
 msgctxt "artifact-comms"
@@ -626,7 +629,7 @@ msgstr "Ensuite, quelle est la lecture du déphasage ionique ?"
 #: scripts/scenario_08_atlantis.lua:846
 msgctxt "artifact-comms"
 msgid "Next, what is the gravity disruption reading?"
-msgstr "Ensuite, quelle est la lecture de la perturbation de la gravité ?"
+msgstr "Ensuite, quelle est la lecture de la perturbation de la gravité ?"
 
 #: scripts/scenario_08_atlantis.lua:851
 msgctxt "artifact-comms"
@@ -656,7 +659,7 @@ msgstr ""
 "En êtes-vous sûr? Ces lectures sont vraiment hors de l'échelle normale.\n"
 "\n"
 "Pouvez-vous vous rapprocher de l'objet pour voir si vous pouvez améliorer "
-"ces lectures ? La nébuleuse pourrait interférer avec vos capteurs."
+"ces lectures ? La nébuleuse pourrait interférer avec vos capteurs."
 
 #: scripts/scenario_08_atlantis.lua:869
 msgctxt "artifact-comms"
@@ -664,8 +667,8 @@ msgid ""
 "Can you confirm your readings and report back? These numbers do not match "
 "our readings at all."
 msgstr ""
-"Pouvez-vous re-vérifier vos résultats et nous les confirmer ? Ces chiffres "
-"ne correspondent pas du tout à nos relevés."
+"Pouvez-vous revérifier vos résultats et nous les confirmer ? Ces chiffres ne "
+"correspondent pas du tout à nos relevés."
 
 #: scripts/scenario_08_atlantis.lua:886
 msgctxt "artifact-comms"
