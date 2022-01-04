@@ -1,8 +1,8 @@
 #include "mouseRenderer.h"
 #include "main.h"
 
-MouseRenderer::MouseRenderer()
-: Renderable(mouseLayer)
+MouseRenderer::MouseRenderer(RenderLayer* render_layer)
+: Renderable(render_layer)
 {
     visible = true;
 }
@@ -16,19 +16,23 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
 
 bool MouseRenderer::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    if (id == -1)
+    if (id == -1) {
         this->position = position;
+        visible = true;
+    }
     return false;
 }
 
 void MouseRenderer::onPointerLeave(sp::io::Pointer::ID id)
 {
     if (id == -1)
-        this->position = {-1, -1};
+        visible = false;
 }
 
 void MouseRenderer::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    if (id == -1)
+    if (id == -1) {
         this->position = position;
+        visible = true;
+    }
 }

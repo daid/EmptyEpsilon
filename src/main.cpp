@@ -59,7 +59,8 @@ sp::Font* bold_font;
 RenderLayer* mouseLayer;
 PostProcessor* glitchPostProcessor;
 PostProcessor* warpPostProcessor;
-P<Window> main_window;
+PVector<Window> windows;
+std::vector<RenderLayer*> window_render_layers;
 
 int main(int argc, char** argv)
 {
@@ -230,7 +231,14 @@ int main(int argc, char** argv)
                 fsaa = 2;
         }
 
-        main_window = new Window({width, height}, fullscreen, warpPostProcessor, fsaa);
+        if (PreferencesManager::get("touchscreen").toInt() == 0)
+        {
+            engine->registerObject("mouseRenderer", new MouseRenderer(mouseLayer));
+        }
+
+        windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
+        window_render_layers.push_back(defaultRenderLayer);
+
 #if defined(DEBUG)
         // Synchronous gl debug output always in debug.
         constexpr bool wants_gl_debug = true;
@@ -247,19 +255,17 @@ int main(int argc, char** argv)
                 LOG(WARNING, "GL Debug output requested but not available on this system.");
         }
 
-        if (PreferencesManager::get("instance_name") != "")
-            main_window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
-        else
-            main_window->setTitle("EmptyEpsilon");
+        foreach(Window, window, windows) {
+            if (PreferencesManager::get("instance_name") != "")
+                window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
+            else
+                window->setTitle("EmptyEpsilon");
+        }
 
         if (gl::isAvailable())
         {
             ShaderRegistry::Shader::initialize();
         }
-    }
-    if (PreferencesManager::get("touchscreen").toInt() == 0)
-    {
-        engine->registerObject("mouseRenderer", new MouseRenderer());
     }
 
     new DebugRenderer();
@@ -339,11 +345,10 @@ int main(int argc, char** argv)
     engine->runMainLoop();
 
     // Set FSAA and fullscreen defaults from windowManager.
-    
-    if (P<Window> window = main_window; window)
+    if (windows.size() > 0)
     {
-        PreferencesManager::set("fsaa", window->getFSAA());
-        PreferencesManager::set("fullscreen", window->isFullscreen() ? 1 : 0);
+        PreferencesManager::set("fsaa", windows[0]->getFSAA());
+        PreferencesManager::set("fullscreen", windows[0]->isFullscreen() ? 1 : 0);
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.
@@ -368,7 +373,7 @@ int main(int argc, char** argv)
         PreferencesManager::save(configuration_path + "/options.ini");
         sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
-    main_window = nullptr;
+    windows.clear();
     delete engine;
 
     return 0;

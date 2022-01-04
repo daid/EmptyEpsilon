@@ -22,7 +22,7 @@ class CrewStationScreen : public GuiCanvas, public Updatable
 {
     P<ThreatLevelEstimate> threat_estimate;
 public:
-    explicit CrewStationScreen(bool with_main_screen);
+    explicit CrewStationScreen(RenderLayer* render_layer, bool with_main_screen);
     virtual void destroy() override;
 
     GuiContainer* getTabContainer();

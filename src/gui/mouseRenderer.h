@@ -8,7 +8,7 @@ class MouseRenderer : public Renderable
 public:
     bool visible;
 
-    MouseRenderer();
+    MouseRenderer(RenderLayer* render_layer);
 
     virtual void render(sp::RenderTarget& window) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;

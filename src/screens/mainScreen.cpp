@@ -20,7 +20,8 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_overlay.h"
 
-ScreenMainScreen::ScreenMainScreen()
+ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
+: GuiCanvas(render_layer)
 {
     new GuiOverlay(this, "", glm::u8vec4(0,0,0,255));
 

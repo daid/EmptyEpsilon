@@ -227,11 +227,13 @@ void OptionsMenu::setupGraphicsOptions()
 {
     // Fullscreen toggle.
     (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []() {
-        main_window->setFullscreen(!main_window->isFullscreen());
+        foreach(Window, window, windows) {
+            window->setFullscreen(!window->isFullscreen());
+        }
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
     // FSAA configuration.
-    int fsaa = std::max(1, main_window->getFSAA());
+    int fsaa = std::max(1, windows[0]->getFSAA());
     int fsaa_index = 0;
 
     // Convert selector index to an FSAA amount.
@@ -246,7 +248,9 @@ void OptionsMenu::setupGraphicsOptions()
     // FSAA selector.
     (new GuiSelector(graphics_page, "FSAA", [](int index, string value) {
         static const int fsaa[] = { 0, 2, 4, 8 };
-        main_window->setFSAA(fsaa[index]);
+        foreach(Window, window, windows) {
+            window->setFSAA(fsaa[index]);
+        }
     }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
 
     // FoV slider.

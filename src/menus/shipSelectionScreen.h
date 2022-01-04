@@ -59,4 +59,15 @@ private:
     GuiToggleButton* topdown_button;
 };
 
+class SecondMonitorScreen : public GuiCanvas, public Updatable
+{
+public:
+    SecondMonitorScreen(int window_index);
+
+    virtual void update(float delta) override;
+private:
+    int monitor_index;
+    CrewPositionSelection* crew_position_selection = nullptr;
+};
+
 #endif//SHIP_SELECTION_SCREEN_H

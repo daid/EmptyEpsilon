@@ -562,3 +562,26 @@ void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
         my_player_info->spawnUI(window_index, render_layer);
     }
 }
+
+SecondMonitorScreen::SecondMonitorScreen(int monitor_index)
+: GuiCanvas(window_render_layers[monitor_index]), monitor_index(monitor_index)
+{
+    new GuiOverlay(this, "", colorConfig.background);
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+}
+
+void SecondMonitorScreen::update(float delta)
+{
+    if (!crew_position_selection && my_player_info) {
+        crew_position_selection = new CrewPositionSelection(this, "", monitor_index, [](){
+            //cancel?
+        }, [this](){
+            crew_position_selection->spawnUI(getRenderLayer());
+            destroy();
+        });
+    }
+    if (crew_position_selection && !my_player_info) {
+        crew_position_selection->destroy();
+        crew_position_selection = nullptr;
+    }
+}

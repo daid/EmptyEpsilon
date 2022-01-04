@@ -164,11 +164,11 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
 {
     if (my_player_info->isOnlyMainScreen(monitor_index))
     {
-        new ScreenMainScreen();
+        new ScreenMainScreen(render_layer);
     }
     else
     {
-        CrewStationScreen* screen = new CrewStationScreen{ bool(main_screen & (1 << monitor_index)) };
+        CrewStationScreen* screen = new CrewStationScreen(render_layer, bool(main_screen & (1 << monitor_index)));
         auto container = screen->getTabContainer();
 
         //Crew 6/5
