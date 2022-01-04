@@ -47,6 +47,7 @@ public:
     void spawnUI(RenderLayer* render_layer);
 private:
     void disableAllExcept(GuiToggleButton* button);
+    void unselectSingleOptions();
 
     int window_index;
     GuiButton* ready_button;

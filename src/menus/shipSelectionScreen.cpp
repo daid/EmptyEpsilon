@@ -427,12 +427,13 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     auto layout = new GuiAutoLayout(one, "", GuiAutoLayout::LayoutVerticalTopToBottom);
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_screen_button = new GuiToggleButton(layout, "", tr("Main screen"), [this](bool value) {
-        
+        unselectSingleOptions();
     });
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
     auto create_crew_position_button = [this](GuiElement* layout, int n) {
         auto button = new GuiToggleButton(layout, "", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
             my_player_info->commandSetCrewPosition(window_index, ECrewPosition(n), value);
+            unselectSingleOptions();
         });
         button->setSize(GuiElement::GuiSizeMax, 50);
         button->setIcon(getCrewPositionIcon(ECrewPosition(n)));
@@ -540,6 +541,12 @@ void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
         window_button->setValue(false);
     if (topdown_button != button)
         topdown_button->setValue(false);
+}
+
+void CrewPositionSelection::unselectSingleOptions()
+{
+    window_button->setValue(false);
+    topdown_button->setValue(false);
 }
 
 void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
