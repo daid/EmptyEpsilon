@@ -123,7 +123,7 @@ int main(int argc, char** argv)
     if (std::filesystem::exists(CONFIG_DIR, ec))
         configuration_path = CONFIG_DIR;
 #endif
-    LOG(Info, "Using", configuration_path, "as configuration path");
+    LOG(Info, "Using ", configuration_path, " as configuration path");
     PreferencesManager::load(configuration_path + "/options.ini");
 
     for(int n=1; n<argc; n++)
