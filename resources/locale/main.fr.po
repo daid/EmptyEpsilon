@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-31 17:19+0100\n"
+"PO-Revision-Date: 2022-01-04 21:27+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -140,77 +140,77 @@ msgstr "{loadtime} sec"
 msgid "Storage {weapon}"
 msgstr "Stockage {weapon}"
 
-#: src/playerInfo.cpp:230
+#: src/playerInfo.cpp:242
 msgctxt "station"
 msgid "Helms"
 msgstr "Navigation"
 
-#: src/playerInfo.cpp:231
+#: src/playerInfo.cpp:243
 msgctxt "station"
 msgid "Weapons"
 msgstr "Armement"
 
-#: src/playerInfo.cpp:232
+#: src/playerInfo.cpp:244
 msgctxt "station"
 msgid "Engineering"
 msgstr "Ingénierie"
 
-#: src/playerInfo.cpp:233
+#: src/playerInfo.cpp:245
 msgctxt "station"
 msgid "Science"
 msgstr "Science"
 
-#: src/playerInfo.cpp:234
+#: src/playerInfo.cpp:246
 msgctxt "station"
 msgid "Relay"
 msgstr "Communications"
 
-#: src/playerInfo.cpp:235
+#: src/playerInfo.cpp:247
 msgctxt "station"
 msgid "Tactical"
 msgstr "Radar tactique"
 
-#: src/playerInfo.cpp:236
+#: src/playerInfo.cpp:248
 msgctxt "station"
 msgid "Engineering+"
 msgstr "Ingénierie+"
 
-#: src/playerInfo.cpp:237
+#: src/playerInfo.cpp:249
 msgctxt "station"
 msgid "Operations"
 msgstr "Opérations"
 
-#: src/playerInfo.cpp:238
+#: src/playerInfo.cpp:250
 msgctxt "station"
 msgid "Single Pilot"
 msgstr "Pilotage - armement"
 
-#: src/playerInfo.cpp:239
+#: src/playerInfo.cpp:251
 msgctxt "station"
 msgid "Damage Control"
 msgstr "Réparation systèmes"
 
-#: src/playerInfo.cpp:240
+#: src/playerInfo.cpp:252
 msgctxt "station"
 msgid "Power Management"
 msgstr "Gestion puissance"
 
-#: src/playerInfo.cpp:241
+#: src/playerInfo.cpp:253
 msgctxt "station"
 msgid "Database"
 msgstr "Base de données"
 
-#: src/playerInfo.cpp:242
+#: src/playerInfo.cpp:254
 msgctxt "station"
 msgid "Strategic Map"
 msgstr "Carte tactique"
 
-#: src/playerInfo.cpp:243
+#: src/playerInfo.cpp:255
 msgctxt "station"
 msgid "Comms"
 msgstr "Communications"
 
-#: src/playerInfo.cpp:244
+#: src/playerInfo.cpp:256
 msgctxt "station"
 msgid "Ship's Log"
 msgstr "Journal de bord"
@@ -285,8 +285,8 @@ msgctxt "connectserver"
 msgid "Connecting..."
 msgstr "Connexion en cours..."
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:257
-#: src/screens/gm/gameMasterScreen.cpp:91
+#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:45
+#: src/menus/shipSelectionScreen.cpp:489 src/screens/gm/gameMasterScreen.cpp:91
 #: src/screens/gm/objectCreationView.cpp:135
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -415,20 +415,19 @@ msgstr "Code du MJ : "
 
 #: src/menus/serverCreationScreen.cpp:58
 msgid "List on master server: "
-msgstr ""
+msgstr "Visible sur le serveur maître : "
 
 #: src/menus/serverCreationScreen.cpp:60
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: src/menus/serverCreationScreen.cpp:60
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: src/menus/serverCreationScreen.cpp:64
-#, fuzzy
 msgid "Server port: "
-msgstr "Mot de passe du serveur : "
+msgstr "Port du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:68
 msgid "Server info"
@@ -439,7 +438,7 @@ msgid "Server IP: "
 msgstr "IP du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:119
-#: src/menus/serverCreationScreen.cpp:203
+#: src/menus/serverCreationScreen.cpp:203 src/menus/shipSelectionScreen.cpp:223
 msgid "Close"
 msgstr "Retour"
 
@@ -563,110 +562,19 @@ msgstr "Sauvegarder"
 msgid "Fullscreen toggle"
 msgstr "Activer plein écran"
 
-#: src/menus/optionsMenu.cpp:258 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:262 src/menus/optionsMenu.cpp:267
 msgid "FoV: {fov}"
 msgstr "Champ de vision : {fov}"
 
-#: src/menus/shipSelectionScreen.cpp:49
-msgid "Select your station"
-msgstr "Sélection postes"
-
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "6/5 player crew"
-msgstr "Équipage 5/6 joueurs"
-
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "4/3 player crew"
-msgstr "Équipage 3/4 joueurs"
-
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "1 player crew/extras"
-msgstr "Postes extras"
-
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "Alternative options"
-msgstr "Options alternatives"
-
-#: src/menus/shipSelectionScreen.cpp:58
-msgid "Main screen"
-msgstr "Écran principal"
-
-#: src/menus/shipSelectionScreen.cpp:74
-msgid "Main screen controls"
-msgstr "Contrôle de l'écran principal"
-
-#: src/menus/shipSelectionScreen.cpp:80
-msgid "Game master"
-msgstr "Maître de jeu"
-
-#: src/menus/shipSelectionScreen.cpp:91
-msgid "Ship window"
-msgstr "Vue fenêtre"
-
-#: src/menus/shipSelectionScreen.cpp:100
-msgctxt "shipwindow"
-msgid "{angle} degrees"
-msgstr "{angle} degrés"
-
-#: src/menus/shipSelectionScreen.cpp:103
-msgctxt "shipwindow"
-msgid "0 degrees"
-msgstr "0 degrés"
-
-#: src/menus/shipSelectionScreen.cpp:107
-msgid "Top-down 3D view"
-msgstr "Vue de haut en 3D"
-
-#: src/menus/shipSelectionScreen.cpp:116
-msgid "Cinematic view"
-msgstr "Vue cinématique"
-
-#: src/menus/shipSelectionScreen.cpp:125
-msgid "Spectate (view all)"
-msgstr "Vue spectateur (carte)"
-
-#: src/menus/shipSelectionScreen.cpp:134
-msgid "Enter the GM control code:"
-msgstr "Entrer le code de contrôle MJ :"
-
-#: src/menus/shipSelectionScreen.cpp:150
-msgid "Select ship"
-msgstr "Sélection vaisseau"
-
-#: src/menus/shipSelectionScreen.cpp:151
-msgid "Waiting for server to spawn a ship"
-msgstr "En attente du serveur pour embarquement"
-
-#: src/menus/shipSelectionScreen.cpp:205
-msgid "Spawn player ship"
-msgstr "Créer vaisseau joueur"
-
-#: src/menus/shipSelectionScreen.cpp:224
-msgid "Scenario selection"
-msgstr "Retour scénario"
-
-#: src/menus/shipSelectionScreen.cpp:231
-msgid "Disconnect"
-msgstr "Déconnexion"
-
-#: src/menus/shipSelectionScreen.cpp:239
-msgid "Ready"
-msgstr "Démarrer"
-
-#: src/menus/shipSelectionScreen.cpp:253 src/menus/shipSelectionScreen.cpp:259
-#: src/menus/shipSelectionScreen.cpp:338
+#: src/menus/shipSelectionScreen.cpp:41 src/menus/shipSelectionScreen.cpp:264
 msgid "Enter this ship's control code:"
 msgstr "Veuillez saisir le code de contrôle du vaisseau :"
 
-#: src/menus/shipSelectionScreen.cpp:274
+#: src/menus/shipSelectionScreen.cpp:54
 msgid "Ok"
 msgstr "Ok"
 
-#: src/menus/shipSelectionScreen.cpp:285
-msgid "Incorrect control code. Re-enter GM code:"
-msgstr "Code de contrôle incorrect. Veuillez réessayer :"
-
-#: src/menus/shipSelectionScreen.cpp:291
+#: src/menus/shipSelectionScreen.cpp:60
 msgid ""
 "Control code accepted.\n"
 "Granting access."
@@ -674,23 +582,159 @@ msgstr ""
 "Code de contrôle valide.\n"
 "Accès accordé."
 
-#: src/menus/shipSelectionScreen.cpp:310
-msgid "Incorrect control code. Re-enter code for {callsign}:"
-msgstr "Code de contrôle incorrect. Veuillez réessayer {callsign} :"
+#: src/menus/shipSelectionScreen.cpp:69
+msgid "Incorrect control code. Re-enter code:"
+msgstr "Code de contrôle incorrect. Veuillez réessayer :"
 
-#: src/menus/shipSelectionScreen.cpp:319
-msgid ""
-"Control code accepted.\n"
-"Granting access to {callsign}."
-msgstr ""
-"Code de contrôle valide.\n"
-"Accès accordé à {callsign}."
-
-#: src/menus/shipSelectionScreen.cpp:333
+#: src/menus/shipSelectionScreen.cpp:76
 msgid "OK"
 msgstr "OK"
 
-#: src/screens/cinematicViewScreen.cpp:40 src/screens/topDownScreen.cpp:32
+#: src/menus/shipSelectionScreen.cpp:132
+msgid "Game master"
+msgstr "Maître de jeu"
+
+#: src/menus/shipSelectionScreen.cpp:136 src/menus/shipSelectionScreen.cpp:162
+msgid "Enter the GM control code:"
+msgstr "Entrer le code de contrôle MJ :"
+
+#: src/menus/shipSelectionScreen.cpp:158
+msgid "Spectate (view all)"
+msgstr "Vue spectateur (carte)"
+
+#: src/menus/shipSelectionScreen.cpp:191
+msgid "Scan complexity: "
+msgstr "Complexité du scan : "
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "None (delay)"
+msgstr "Aucune (délai)"
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "Simple"
+msgstr "Simple"
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "Normal"
+msgstr "Normale"
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "Advanced"
+msgstr "Avancée"
+
+#: src/menus/shipSelectionScreen.cpp:199
+msgid "Hacking difficulty: "
+msgstr "Difficulté de piratage : "
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Simple"
+msgstr "Simple"
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Normal"
+msgstr "Normale"
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Difficult"
+msgstr "Difficile"
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Fiendish"
+msgstr "Diabolique"
+
+#: src/menus/shipSelectionScreen.cpp:207
+msgid "Hacking type: "
+msgstr "Type de piratage : "
+
+#: src/menus/shipSelectionScreen.cpp:210
+msgctxt "hacking"
+msgid "Mine"
+msgstr "Mines"
+
+#: src/menus/shipSelectionScreen.cpp:210
+msgctxt "hacking"
+msgid "Lights"
+msgstr "Lumières"
+
+#: src/menus/shipSelectionScreen.cpp:210
+msgctxt "hacking"
+msgid "All"
+msgstr "Les deux"
+
+#: src/menus/shipSelectionScreen.cpp:215
+msgid "Beam/shield frequencies"
+msgstr "Fréq. faisceaux/bouclier"
+
+#: src/menus/shipSelectionScreen.cpp:219
+msgid "Per-system damage"
+msgstr "Dégâts par systèmes"
+
+#: src/menus/shipSelectionScreen.cpp:230
+msgid "Extra settings"
+msgstr "Réglages : scan, fréquences, piratage..."
+
+#: src/menus/shipSelectionScreen.cpp:245
+msgid "Select ship"
+msgstr "Sélection vaisseau"
+
+#: src/menus/shipSelectionScreen.cpp:246
+msgid "Waiting for server to spawn a ship"
+msgstr "En attente du serveur pour embarquement"
+
+#: src/menus/shipSelectionScreen.cpp:309
+msgid "Spawn player ship"
+msgstr "Créer vaisseau joueur"
+
+#: src/menus/shipSelectionScreen.cpp:330
+msgid "Scenario selection"
+msgstr "Retour scénario"
+
+#: src/menus/shipSelectionScreen.cpp:337
+msgid "Disconnect"
+msgstr "Déconnexion"
+
+#: src/menus/shipSelectionScreen.cpp:426
+msgid "6/5 player crew"
+msgstr "Équipage 5/6 joueurs"
+
+#: src/menus/shipSelectionScreen.cpp:429
+msgid "Main screen"
+msgstr "Écran principal"
+
+#: src/menus/shipSelectionScreen.cpp:448
+msgid "4/3/1 player crew"
+msgstr "Équipage 1/3/4 joueurs"
+
+#: src/menus/shipSelectionScreen.cpp:456
+msgid "Alternative options"
+msgstr "Options alternatives"
+
+#: src/menus/shipSelectionScreen.cpp:463
+msgid "Main screen controls"
+msgstr "Contrôle de l'écran principal"
+
+#: src/menus/shipSelectionScreen.cpp:471
+msgid "Ship window"
+msgstr "Vue fenêtre"
+
+#: src/menus/shipSelectionScreen.cpp:484
+msgid "Top-down 3D view"
+msgstr "Vue de haut en 3D"
+
+#: src/menus/shipSelectionScreen.cpp:492
+msgctxt "button"
+msgid "Ready"
+msgstr "Démarrer la partie"
+
+#: src/screens/cinematicViewScreen.cpp:40 src/screens/topDownScreen.cpp:33
 msgctxt "button"
 msgid "Lock camera on ship"
 msgstr "Verrouiller caméra vaisseau"
@@ -700,7 +744,7 @@ msgctxt "button"
 msgid "Lock camera on ship's target"
 msgstr "Verrouiller caméra cible"
 
-#: src/screens/mainScreen.cpp:52 src/gui/hotkeyConfig.cpp:219
+#: src/screens/mainScreen.cpp:53 src/gui/hotkeyConfig.cpp:219
 #: src/gui/hotkeyConfig.cpp:220 src/gui/hotkeyConfig.cpp:221
 #: src/gui/hotkeyConfig.cpp:222 src/gui/hotkeyConfig.cpp:223
 #: src/gui/hotkeyConfig.cpp:224 src/gui/hotkeyConfig.cpp:225
@@ -5857,6 +5901,33 @@ msgstr ""
 "les cotés du vaisseau. Le tir atteint son plein potentiel de dégâts dans un "
 "rayon de 2u."
 
+#~ msgid "Select your station"
+#~ msgstr "Sélection postes"
+
+#~ msgid "1 player crew/extras"
+#~ msgstr "Postes extras"
+
+#~ msgctxt "shipwindow"
+#~ msgid "{angle} degrees"
+#~ msgstr "{angle} degrés"
+
+#~ msgctxt "shipwindow"
+#~ msgid "0 degrees"
+#~ msgstr "0 degrés"
+
+#~ msgid "Cinematic view"
+#~ msgstr "Vue cinématique"
+
+#~ msgid "Incorrect control code. Re-enter code for {callsign}:"
+#~ msgstr "Code de contrôle incorrect. Veuillez réessayer {callsign} :"
+
+#~ msgid ""
+#~ "Control code accepted.\n"
+#~ "Granting access to {callsign}."
+#~ msgstr ""
+#~ "Code de contrôle valide.\n"
+#~ "Accès accordé à {callsign}."
+
 #~ msgid "Server visibility: "
 #~ msgstr "Visibilité du serveur : "
 
@@ -5907,65 +5978,6 @@ msgstr ""
 
 #~ msgid "Game rules"
 #~ msgstr "Options de jeu"
-
-#~ msgid "Scan complexity: "
-#~ msgstr "Complexité du scan : "
-
-#~ msgctxt "scanning"
-#~ msgid "None (delay)"
-#~ msgstr "Aucune (délai)"
-
-#~ msgctxt "scanning"
-#~ msgid "Simple"
-#~ msgstr "Simple"
-
-#~ msgctxt "scanning"
-#~ msgid "Normal"
-#~ msgstr "Normale"
-
-#~ msgctxt "scanning"
-#~ msgid "Advanced"
-#~ msgstr "Avancée"
-
-#~ msgid "Hacking difficulty: "
-#~ msgstr "Difficulté de piratage : "
-
-#~ msgctxt "hacking"
-#~ msgid "Simple"
-#~ msgstr "Simple"
-
-#~ msgctxt "hacking"
-#~ msgid "Normal"
-#~ msgstr "Normale"
-
-#~ msgctxt "hacking"
-#~ msgid "Difficult"
-#~ msgstr "Difficile"
-
-#~ msgctxt "hacking"
-#~ msgid "Fiendish"
-#~ msgstr "Diabolique"
-
-#~ msgid "Hacking type: "
-#~ msgstr "Type de piratage : "
-
-#~ msgctxt "hacking"
-#~ msgid "Mine"
-#~ msgstr "Mines"
-
-#~ msgctxt "hacking"
-#~ msgid "Lights"
-#~ msgstr "Lumières"
-
-#~ msgctxt "hacking"
-#~ msgid "All"
-#~ msgstr "Les deux"
-
-#~ msgid "Beam/shield frequencies"
-#~ msgstr "Fréq. faisceaux/bouclier"
-
-#~ msgid "Per-system damage"
-#~ msgstr "Dégâts des systèmes"
 
 #~ msgid "Variation: "
 #~ msgstr "Variante : "
