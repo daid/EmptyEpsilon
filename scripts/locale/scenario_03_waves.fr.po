@@ -41,7 +41,6 @@ msgstr ""
 "Titre original : Waves"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
@@ -52,9 +51,8 @@ msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid ""
 "Decreases the number of ships in each wave. Good for new players, but takes "
@@ -63,21 +61,18 @@ msgstr ""
 "Diminue le nombre de vaisseaux à chaque vague. Moins difficile mais plus "
 "long. Idéal pour les nouveaux joueurs."
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
 msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Enemies"
 msgid ""
 "Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
