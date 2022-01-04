@@ -255,7 +255,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
             container->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(350, GuiElement::GuiSizeMax);
             count = 0;
         }
-        (new GuiLabel(container, "", setting.key, 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLabel(container, "", setting.key_localized, 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
         auto selector = new GuiSelector(container, "", [this, info, setting](int index, string value) {
             gameGlobalInfo->scenario_settings[setting.key] = value;
             for(auto& option : setting.options)
