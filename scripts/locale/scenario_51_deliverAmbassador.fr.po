@@ -68,35 +68,40 @@ msgstr ""
 "Auteur : Xansta"
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
-msgid "enemies"
+msgid "Enemies"
 msgstr "Ennemis"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
-msgctxt "enemies"
-msgid "easy"
-msgstr "Facile"
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Fewer enemies."
 msgstr "Moins d'ennemis."
 
-msgctxt "enemies"
-msgid "normal"
+#, fuzzy
+msgctxt "Enemies"
+msgid "Normal"
 msgstr "Normal"
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Normal amount of enemies."
 msgstr "Quantité d'ennemis par défaut."
 
-msgctxt "enemies"
-msgid "hard"
-msgstr "Difficile"
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "More enemies."
 msgstr "Plus d'ennemis."
 
@@ -941,6 +946,14 @@ msgstr "Nous venons d'expédier %s pour vous aider au marqueur %d "
 msgctxt "path-comms"
 msgid "Added a waypoint to your navigation system for Balindor Prime"
 msgstr "Ajout d'un marqueur à votre système de navigation pour Balindor Prime"
+
+#~ msgctxt "enemies"
+#~ msgid "easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "enemies"
+#~ msgid "hard"
+#~ msgstr "Difficile"
 
 #~ msgid ""
 #~ "Current Orders: Wait for ambassador Gremus to complete business at "

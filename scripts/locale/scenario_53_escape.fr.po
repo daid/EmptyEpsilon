@@ -42,35 +42,40 @@ msgstr ""
 "Auteur : Xansta"
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
-msgid "enemies"
+msgid "Enemies"
 msgstr "Ennemis"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
-msgctxt "enemies"
-msgid "easy"
-msgstr "Facile"
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Easy goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis faciles."
 
-msgctxt "enemies"
-msgid "normal"
+#, fuzzy
+msgctxt "Enemies"
+msgid "Normal"
 msgstr "Normal"
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Normal goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis par défaut."
 
-msgctxt "enemies"
-msgid "hard"
-msgstr "Difficile"
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Hard goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis difficiles."
 
@@ -3285,6 +3290,14 @@ msgstr "Boucliers avant complètement opérationnel"
 msgctxt "msgEngineer"
 msgid "Reached maximum repair on rear shield"
 msgstr "Boucliers arrière complètement opérationnel"
+
+#~ msgctxt "enemies"
+#~ msgid "easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "enemies"
+#~ msgid "hard"
+#~ msgstr "Difficile"
 
 #~ msgctxt "commsAmmo"
 #~ msgid "in restock function"

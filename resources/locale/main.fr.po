@@ -356,7 +356,7 @@ msgstr "Erreur de connexion : {message}"
 msgid "LAN"
 msgstr "LAN"
 
-#: src/menus/serverBrowseMenu.cpp:69 src/menus/serverCreationScreen.cpp:60
+#: src/menus/serverBrowseMenu.cpp:69
 msgid "Internet"
 msgstr "Internet"
 
@@ -365,7 +365,7 @@ msgctxt "screenLan"
 msgid "Connect"
 msgstr "Connexion"
 
-#: src/menus/serverBrowseMenu.cpp:87
+#: src/menus/serverBrowseMenu.cpp:101
 msgid "Last Session ({last})"
 msgstr "Dernière session ({last})"
 
@@ -377,7 +377,7 @@ msgstr "Version : {version}"
 msgid "Your name:"
 msgstr "Votre nom :"
 
-#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:84
+#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:90
 msgid "Start server"
 msgstr "Démarrer le serveur"
 
@@ -414,52 +414,62 @@ msgid "GM control code: "
 msgstr "Code du MJ : "
 
 #: src/menus/serverCreationScreen.cpp:58
-msgid "Server visibility: "
-msgstr "Visibilité du serveur : "
+msgid "List on master server: "
+msgstr ""
 
 #: src/menus/serverCreationScreen.cpp:60
-msgid "LAN only"
-msgstr "Seulement LAN"
+msgid "No"
+msgstr ""
 
-#: src/menus/serverCreationScreen.cpp:62
+#: src/menus/serverCreationScreen.cpp:60
+msgid "Yes"
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:64
+#, fuzzy
+msgid "Server port: "
+msgstr "Mot de passe du serveur : "
+
+#: src/menus/serverCreationScreen.cpp:68
 msgid "Server info"
 msgstr "Infos serveur"
 
-#: src/menus/serverCreationScreen.cpp:66
+#: src/menus/serverCreationScreen.cpp:72
 msgid "Server IP: "
 msgstr "IP du serveur : "
 
-#: src/menus/serverCreationScreen.cpp:78 src/menus/serverCreationScreen.cpp:110
-#: src/menus/serverCreationScreen.cpp:194
+#: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:119
+#: src/menus/serverCreationScreen.cpp:203
 msgid "Close"
 msgstr "Retour"
 
-#: src/menus/serverCreationScreen.cpp:117
+#: src/menus/serverCreationScreen.cpp:126
 msgid "Continue"
 msgstr "Continuer"
 
-#: src/menus/serverCreationScreen.cpp:166
+#: src/menus/serverCreationScreen.cpp:175
 msgid "Category"
 msgstr "Catégories"
 
-#: src/menus/serverCreationScreen.cpp:173
+#: src/menus/serverCreationScreen.cpp:182
+#: src/menus/serverCreationScreen.cpp:195
 msgid "Select a scenario..."
 msgstr "Choisir un scénario..."
 
-#: src/menus/serverCreationScreen.cpp:177
+#: src/menus/serverCreationScreen.cpp:186
 msgid "Scenario"
 msgstr "Choix du scénario"
 
-#: src/menus/serverCreationScreen.cpp:185
+#: src/menus/serverCreationScreen.cpp:194
 msgid "Description"
 msgstr "Description"
 
-#: src/menus/serverCreationScreen.cpp:201
-#: src/menus/serverCreationScreen.cpp:282
+#: src/menus/serverCreationScreen.cpp:210
+#: src/menus/serverCreationScreen.cpp:291
 msgid "Start scenario"
 msgstr "Démarrer le scénario"
 
-#: src/menus/serverCreationScreen.cpp:276
+#: src/menus/serverCreationScreen.cpp:285
 msgid "Back"
 msgstr "Retour"
 
@@ -5846,6 +5856,12 @@ msgstr ""
 "precis pour être efficace, surtout si les tubes de lancement se trouvent sur "
 "les cotés du vaisseau. Le tir atteint son plein potentiel de dégâts dans un "
 "rayon de 2u."
+
+#~ msgid "Server visibility: "
+#~ msgstr "Visibilité du serveur : "
+
+#~ msgid "LAN only"
+#~ msgstr "Seulement LAN"
 
 #~ msgid ""
 #~ "Calibrate\n"

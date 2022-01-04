@@ -92,71 +92,84 @@ msgstr ""
 "Auteur : Xansta\n"
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
-msgid "settings"
+msgid "Settings"
 msgstr "Réglages"
 
 msgctxt "setting"
 msgid "Configures time/goal/the amount of enemies spawned in the scenario."
 msgstr "Définit le temps/objectifs/nombre d'ennemis générés dans le scénario."
 
-msgctxt "settings"
-msgid "easy"
-msgstr "Facile"
+msgctxt "Settings"
+msgid "Easy"
+msgstr ""
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid "Easy goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis faciles."
 
-msgctxt "settings"
-msgid "normal"
+#, fuzzy
+msgctxt "Settings"
+msgid "Normal"
 msgstr "Normal"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid "Normal goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis par défaut."
 
-msgctxt "settings"
-msgid "hard"
-msgstr "Difficile"
+msgctxt "Settings"
+msgid "Hard"
+msgstr ""
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid "Hard goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis difficiles."
 
-msgctxt "settings"
-msgid "timed defender"
+#, fuzzy
+msgctxt "Settings"
+msgid "Timed Defender"
 msgstr "Défenseur chronométré"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid "Victory if home station survives after 30 minutes."
 msgstr "Victoire si votre station d'attache survit après 30 minutes."
 
-msgctxt "settings"
-msgid "timed hunter"
+#, fuzzy
+msgctxt "Settings"
+msgid "Timed Hunter"
 msgstr "Chasseur chronométré"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid "Victory if target enemy base destroyed in 30 minutes."
 msgstr ""
 "Victoire si la base ennemie ciblée est détruite en moins de 30 minutes."
 
-msgctxt "settings"
-msgid "easy timed defender"
+#, fuzzy
+msgctxt "Settings"
+msgid "Easy Timed Defender"
 msgstr "Défenseur chronométré facile"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid ""
 "Easy goals and/or enemies, victory if home station survives after 30 minutes."
 msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Victoire si votre station "
 "d'attache survit après 30 minutes."
 
-msgctxt "settings"
-msgid "easy timed hunter"
+#, fuzzy
+msgctxt "Settings"
+msgid "Easy Timed Hunter"
 msgstr "Chasseur chronométré facile"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid ""
 "Easy goals and/or enemies, victory if target enemy base destroyed in 30 "
 "minutes."
@@ -164,22 +177,26 @@ msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Victoire si la base ennemie "
 "ciblée est détruite en moins de 30 minutes."
 
-msgctxt "settings"
-msgid "hard timed defender"
+#, fuzzy
+msgctxt "Settings"
+msgid "Hard Timed Defender"
 msgstr "Défenseur chronométré difficile"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid ""
 "Hard goals and/or enemies, victory if home station survives after 30 minutes."
 msgstr ""
 "Objectifs et/ou quantité d'ennemis difficiles. Victoire si votre station "
 "d'attache survit après 30 minutes."
 
-msgctxt "settings"
-msgid "hard timed hunter"
+#, fuzzy
+msgctxt "Settings"
+msgid "Hard Timed Hunter"
 msgstr "Chasseur chronométré difficile"
 
-msgctxt "settings"
+#, fuzzy
+msgctxt "Settings"
 msgid ""
 "Hard goals and/or enemies, victory if target enemy base destroyed in 30 "
 "minutes."
@@ -194,7 +211,8 @@ msgid "Turn On Diagnostic"
 msgstr "Activer diagnostic"
 
 #: scripts/scenario_55_defenderHunter.lua:84
-msgctxt "ButtonGM"
+#: scripts/scenario_55_defenderHunter.lua:3787
+msgctxt "buttonGM"
 msgid "Delay normal to slow"
 msgstr "Vitesse Normal à Lent"
 
@@ -1583,11 +1601,6 @@ msgstr "Vitesse Lent à Rapide"
 msgctxt "buttonGM"
 msgid "Delay fast to normal"
 msgstr "Vitesse Rapide à Normal"
-
-#: scripts/scenario_55_defenderHunter.lua:3787
-msgctxt "buttonGM"
-msgid "Delay normal to slow"
-msgstr "Vitesse Normal à Lent"
 
 #: scripts/scenario_55_defenderHunter.lua:4017
 msgctxt "scienceDescription-planet"
@@ -4543,6 +4556,18 @@ msgstr "Obtenir liq. de ref."
 msgctxt "buttonEngineer+"
 msgid "Get Coolant"
 msgstr "Obtenir liq. de ref."
+
+#~ msgctxt "settings"
+#~ msgid "easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "settings"
+#~ msgid "hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "ButtonGM"
+#~ msgid "Delay normal to slow"
+#~ msgstr "Vitesse Normal à Lent"
 
 #~ msgid ""
 #~ "\n"

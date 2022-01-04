@@ -30,128 +30,129 @@ msgstr ""
 
 # Scenario setting
 msgctxt "setting"
-msgid "enemies"
+msgid "Enemies"
 msgstr ""
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr ""
 
-msgctxt "enemies"
-msgid "empty"
+msgctxt "Enemies"
+msgid "Empty"
 msgstr ""
 
-msgctxt "enemies"
+msgctxt "Enemies"
 msgid ""
 "No enemies. Recommended for GM-controlled scenarios and rookie crew "
 "orientation. The scenario continues until the GM declares victory or all "
 "Human Navy ships are destroyed."
 msgstr ""
 
-msgctxt "enemies"
-msgid "easy"
+msgctxt "Enemies"
+msgid "Easy"
 msgstr ""
 
-msgctxt "enemies"
+msgctxt "Enemies"
 msgid "Fewer enemies. Recommended for inexperienced crews."
 msgstr ""
 
-msgctxt "enemies"
-msgid "normal"
+msgctxt "Enemies"
+msgid "Normal"
 msgstr ""
 
-msgctxt "enemies"
+msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
 msgstr ""
 
-msgctxt "enemies"
-msgid "hard"
+msgctxt "Enemies"
+msgid "Hard"
 msgstr ""
 
-msgctxt "enemies"
+msgctxt "Enemies"
 msgid "More enemies. Recommended if you have multiple player-controlled ships."
 msgstr ""
 
-msgctxt "enemies"
-msgid "extreme"
+msgctxt "Enemies"
+msgid "Extreme"
 msgstr ""
 
-msgctxt "enemies"
+msgctxt "Enemies"
 msgid ""
 "Many enemies. Inexperienced player crews will pretty surely be overwhelmed."
 msgstr ""
 
 # Scenario setting
 msgctxt "setting"
-msgid "time"
+msgid "Time"
 msgstr ""
 
 msgctxt "setting"
 msgid "Sets up how much time the players have for the scenario"
 msgstr ""
 
-msgctxt "time"
-msgid "unlimited"
+msgctxt "Time"
+msgid "Unlimited"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "No time limit"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "20min"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "Automatic loss after 20 minutes"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "30min"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "Automatic loss after 30 minutes"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "60min"
 msgstr ""
 
-msgctxt "time"
+msgctxt "Time"
 msgid "Automatic loss after 60 minutes"
 msgstr ""
 
 # Scenario setting
 msgctxt "setting"
-msgid "playership"
+msgid "PlayerShip"
 msgstr ""
 
 msgctxt "setting"
 msgid "Sets the default player ship"
 msgstr ""
 
-msgctxt "playership"
-msgid "atlantis"
+msgctxt "PlayerShip"
+msgid "Atlantis"
 msgstr ""
 
-msgctxt "playership"
+msgctxt "PlayerShip"
 msgid ""
 "Powerful ship with sidewards missile tubes. Requires more advanced play."
 msgstr ""
 
-msgctxt "playership"
-msgid "phobos m3p"
+msgctxt "PlayerShip"
+msgid "Phobos M3P"
 msgstr ""
 
-msgctxt "playership"
+msgctxt "PlayerShip"
 msgid ""
 "Simpler, less powerful ship. But easier to handler. Recommended for new "
 "crews."
 msgstr ""
 
 #: scripts/scenario_00_basic.lua:475
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "goal-incCall"
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
 "\n"
@@ -172,7 +173,8 @@ msgstr ""
 "Viel Glück."
 
 #: scripts/scenario_00_basic.lua:485
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "goal-incCall"
 msgid ""
 "%s, your objective is to fend off the incoming Kraylor attack.\n"
 "\n"
@@ -183,38 +185,49 @@ msgstr ""
 "Viel Glück."
 
 #: scripts/scenario_00_basic.lua:520
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: SUCCESS (%d seconds left)"
 msgstr "Mission ERFOLGREICH!  (%d Sekunden verbleibend)"
 
 #: scripts/scenario_00_basic.lua:531
+#, fuzzy
+msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (time has run out)"
 msgstr "Mission FEHLGESCHLAGEN (Zeit abgelaufen)"
 
 #: scripts/scenario_00_basic.lua:539
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "time-incCall"
 msgid "%s, you have %d minute remaining."
 msgstr "%s, Sie haben noch %d Minuten Zeit."
 
 #: scripts/scenario_00_basic.lua:544
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "time-incCall"
 msgid "%s, you have %d minutes remaining."
 msgstr "%s, Sie haben noch %d Minuten Zeit."
 
 #: scripts/scenario_00_basic.lua:549
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "time-incCall"
 msgid "%s, you have %d minutes remaining of mission time."
 msgstr "%s, Sie haben noch %d Minuten Zeit für die Mission."
 
 #: scripts/scenario_00_basic.lua:559
+#, fuzzy
+msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (no friendlies left)"
 msgstr "Mission: FEHLGESCHLAGEN (keine verbündeten Einheiten mehr im Spiel)"
 
 #: scripts/scenario_00_basic.lua:576
+#, fuzzy
+msgctxt "msgMainscreen&Spectbanner"
 msgid "Mission: FAILED (all your ships destroyed)"
 msgstr "Mission: FEHLGESCHLAGEN (alle eigenen Schiffe wurden zerstört)"
 
 #: scripts/scenario_00_basic.lua:584
-#, lua-format
+#, fuzzy, lua-format
+msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr "Mission läuft. Verbleibende Zeit: %d:%02d - Feinde: %d"

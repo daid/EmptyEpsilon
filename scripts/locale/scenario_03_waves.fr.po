@@ -41,19 +41,21 @@ msgstr ""
 "Titre original : Waves"
 
 # Scenario setting
+#, fuzzy
 msgctxt "setting"
-msgid "enemies"
+msgid "Enemies"
 msgstr "Ennemis"
 
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
 
-msgctxt "enemies"
-msgid "easy"
-msgstr "Facile"
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid ""
 "Decreases the number of ships in each wave. Good for new players, but takes "
 "longer for the players to be overwhelmed."
@@ -61,19 +63,22 @@ msgstr ""
 "Diminue le nombre de vaisseaux à chaque vague. Moins difficile mais plus "
 "long. Idéal pour les nouveaux joueurs."
 
-msgctxt "enemies"
-msgid "normal"
+#, fuzzy
+msgctxt "Enemies"
+msgid "Normal"
 msgstr "Normal"
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
 msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
 
-msgctxt "enemies"
-msgid "hard"
-msgstr "Difficile"
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
 
-msgctxt "enemies"
+#, fuzzy
+msgctxt "Enemies"
 msgid ""
 "Difficulty starts at wave 5 and increases by 1.5 after the players defeat "
 "each wave. Players are overwhelmed more quickly, leading to shorter games."
@@ -119,6 +124,14 @@ msgstr "Vague éliminée !"
 msgctxt "shipLog"
 msgid "Wave %d cleared."
 msgstr "Vague %d éliminée !"
+
+#~ msgctxt "enemies"
+#~ msgid "easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "enemies"
+#~ msgid "hard"
+#~ msgstr "Difficile"
 
 #~ msgid " cleared."
 #~ msgstr " éliminée !"

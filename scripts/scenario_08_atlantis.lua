@@ -507,7 +507,7 @@ function phase3FindHoleInTheKraylorDefenseLine(delta)
 
 Finally! We thought we lost you. You are not out of the woods yet, though.
 
-Try to get to sector ZU5. We are sending JC88 to get you out of there.]])
+Try to get to sector zu5. We are sending JC88 to get you out of there.]])
             )
         else
             shipyard_gamma:sendCommsMessage(
@@ -516,7 +516,7 @@ Try to get to sector ZU5. We are sending JC88 to get you out of there.]])
 
 Finally! We thought we lost you. You are not out of the woods yet, though.
 
-Search for a hole in the Kraylor defenses, then try to get to sector ZU5. We are sending JC88 to get you out of there.]]))
+Search for a hole in the Kraylor defenses, then try to get to sector zu5. We are sending JC88 to get you out of there.]]))
         end
 
         jc88:orderFlyTowardsBlind(10000, -210000)
