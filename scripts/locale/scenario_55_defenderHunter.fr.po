@@ -92,7 +92,6 @@ msgstr ""
 "Auteur : Xansta\n"
 
 # Scenario setting
-#, fuzzy
 msgctxt "setting"
 msgid "Settings"
 msgstr "Réglages"
@@ -103,59 +102,49 @@ msgstr "Définit le temps/objectifs/nombre d'ennemis générés dans le scénari
 
 msgctxt "Settings"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Easy goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis faciles."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Normal goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis par défaut."
 
 msgctxt "Settings"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Hard goals and/or enemies."
 msgstr "Objectifs et/ou quantité d'ennemis difficiles."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Timed Defender"
 msgstr "Défenseur chronométré"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Victory if home station survives after 30 minutes."
 msgstr "Victoire si votre station d'attache survit après 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Timed Hunter"
 msgstr "Chasseur chronométré"
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Victory if target enemy base destroyed in 30 minutes."
 msgstr ""
 "Victoire si la base ennemie ciblée est détruite en moins de 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Easy Timed Defender"
 msgstr "Défenseur chronométré facile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid ""
 "Easy goals and/or enemies, victory if home station survives after 30 minutes."
@@ -163,12 +152,10 @@ msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Victoire si votre station "
 "d'attache survit après 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Easy Timed Hunter"
 msgstr "Chasseur chronométré facile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid ""
 "Easy goals and/or enemies, victory if target enemy base destroyed in 30 "
@@ -177,12 +164,10 @@ msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Victoire si la base ennemie "
 "ciblée est détruite en moins de 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Hard Timed Defender"
 msgstr "Défenseur chronométré difficile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid ""
 "Hard goals and/or enemies, victory if home station survives after 30 minutes."
@@ -190,12 +175,10 @@ msgstr ""
 "Objectifs et/ou quantité d'ennemis difficiles. Victoire si votre station "
 "d'attache survit après 30 minutes."
 
-#, fuzzy
 msgctxt "Settings"
 msgid "Hard Timed Hunter"
 msgstr "Chasseur chronométré difficile"
 
-#, fuzzy
 msgctxt "Settings"
 msgid ""
 "Hard goals and/or enemies, victory if target enemy base destroyed in 30 "
