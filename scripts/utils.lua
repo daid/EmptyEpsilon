@@ -292,36 +292,6 @@ function placeRandomObjects(object_type, density, perlin_z, x, y, x_grids, y_gri
     end
 end
 
--- Convert a sector name to x,y coordinates
--- Examples: sectorToXY("A0") sectorToXY("zz-23") sectorToXY("BA12")
--- Returns the coordinates for the top-left of the sector: x,y
-function sectorToXY(sector)
-  local sectorsize = 20000
-  local intPart, x, y
-  -- Y axis is complicated
-  if sector:sub(2,2):match('[A-Za-z]') then
-    -- Case with two letters
-    local a1 = sector:byte(1,1)
-    local a2 = sector:byte(2,2)
-    intPart = tonumber(sector:sub(3,-1))
-    if a1 >= 97 then -- 97 is ascii 'a'
-      -- Case with two lowercase letters (zz10) counting down towards the North
-      y = (((122 - a1) * 26) + (122 - a2 + 6)) * -sectorsize -- 122 is ascii 'z', 6 is the offset from F5 to zz5
-    else
-      -- Case with two uppercase letters (AB20) counting up towards the South
-      y = (((a1 - 65) * 26) + (a2 - 65 + 21)) * sectorsize -- 65 is ascii 'A', 21 is the offset from F5 to AA5
-    end
-  else
-    -- Case with just one letter (A9/a9)
-    local alphaPart = sector:sub(1,1):upper():byte()
-    intPart = tonumber(sector:sub(2,-1))
-    y = (alphaPart - 70) * sectorsize -- 70 is ascii 'F'
-  end
-  -- X axis is simple
-  local x = (intPart - 5) * sectorsize -- 5 is the numeric component of the F5 origin
-  return x, y
-end
-
 -- Extract coordinates between two objects, two points, object and point or point and object
 -- This is only helper function for distance(a,b,c,d) and angle(a,b,c,d). 
 -- Returns two sets of coordinates: x1, y1, x2, y2.

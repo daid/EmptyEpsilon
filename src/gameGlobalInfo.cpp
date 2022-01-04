@@ -244,6 +244,56 @@ int getSectorName(lua_State* L)
 /// Return the sector name for the point with coordinates (x, y). Compare SpaceObject:getSectorName().
 REGISTER_SCRIPT_FUNCTION(getSectorName);
 
+glm::vec2 sectorToXY(string sector)
+{
+    constexpr float sector_size = 20000;
+    int x, y, intpart;
+
+    // Y axis is complicated
+    if(sector[0] >= char('A') && sector[1] >= char('A')){
+        // Case with two letters
+        char a1 = sector[0];
+        char a2 = sector[1];
+        try{
+            intpart = stoi(sector.substr(2));
+        }
+        catch(const std::exception& e){
+            return glm::vec2(0,0);
+        }
+        if(a1 > char('a')){
+            // Case with two lowercase letters (zz10) counting down towards the North
+            y = (((char('z') - a1) * 26) + (char('z') - a2 + 6)) * -sector_size; // 6 is the offset from F5 to zz5
+        }else{
+            // Case with two uppercase letters (AB20) counting up towards the South
+            y = (((a1 - char('A')) * 26) + (a2 - char('A') + 21)) * sector_size; // 21 is the offset from F5 to AA5
+        }
+    }else{
+        //Case with just one letter (A9/a9 - these are the same sector, as case only matters in the two-letter sectors)
+        char alphaPart = toupper(sector[0]);
+        try{
+            intpart = stoi(sector.substr(1));
+        }catch(const std::exception& e){
+            return glm::vec2(0,0);
+        }
+        y = (alphaPart - char('F')) * sector_size;
+    }
+    // X axis is simple
+    x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
+    return glm::vec2(x, y);
+}
+
+int sectorToXY(lua_State* L)
+{
+    glm::vec2 v = sectorToXY(luaL_checklstring(L, 1, NULL));
+    lua_pushinteger(L, v.x);
+    lua_pushinteger(L, v.y);
+    return 2;
+}
+/// sectorToXY(string)
+/// Convert a sector name to x,y coordinates for the top-left of the sector
+/// sectorToXY("A0") sectorToXY("zz-23") sectorToXY("BA12")
+REGISTER_SCRIPT_FUNCTION(sectorToXY);
+
 static int victory(lua_State* L)
 {
     gameGlobalInfo->setVictory(luaL_checkstring(L, 1));
