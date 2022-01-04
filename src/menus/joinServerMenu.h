@@ -12,8 +12,8 @@ class GuiTextEntry;
 
 class JoinServerScreen : public GuiCanvas, public Updatable
 {
-    int port;
     sp::io::network::Address ip;
+    int port;
     GuiLabel* status_label;
     GuiPanel* password_entry_box;
     GuiTextEntry* password_entry;
