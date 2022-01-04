@@ -4,7 +4,9 @@
 #include <string.h>
 #include <i18n.h>
 #include <multiplayer_proxy.h>
-#ifndef _MSC_VER
+#ifdef _MSC_VER
+#include <direct.h>
+#else
 #include <unistd.h>
 #include <sys/stat.h>
 #endif
