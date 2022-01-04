@@ -115,8 +115,9 @@ int main(int argc, char** argv)
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
-#ifdef CONFIG_DIR
-    if (std::filesystem::exists(CONFIG_DIR))
+#if defined(CONFIG_DIR)
+    std::error_code ec;
+    if (std::filesystem::exists(CONFIG_DIR, ec))
         configuration_path = CONFIG_DIR;
 #endif
     PreferencesManager::load(configuration_path + "/options.ini");
