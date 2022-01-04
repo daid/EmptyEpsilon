@@ -23,6 +23,8 @@ protected:
     const float blink_rate = 0.530f;
     sp::SystemTimer blink_timer;
     bool typing_indicator{false};
+
+    glm::vec2 render_offset{0, 0};
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
 
