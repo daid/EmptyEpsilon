@@ -579,7 +579,7 @@ SecondMonitorScreen::SecondMonitorScreen(int monitor_index)
 
 void SecondMonitorScreen::update(float delta)
 {
-    if (!crew_position_selection && my_player_info) {
+    if (!crew_position_selection && my_player_info && my_spaceship) {
         crew_position_selection = new CrewPositionSelection(this, "", monitor_index, [](){
             //cancel?
         }, [this](){
@@ -587,7 +587,7 @@ void SecondMonitorScreen::update(float delta)
             destroy();
         });
     }
-    if (crew_position_selection && !my_player_info) {
+    if (crew_position_selection && (!my_player_info || !my_spaceship)) {
         crew_position_selection->destroy();
         crew_position_selection = nullptr;
     }
