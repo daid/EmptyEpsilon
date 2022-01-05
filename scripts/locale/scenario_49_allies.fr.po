@@ -32,10 +32,11 @@ msgstr ""
 "- Difficulté : <<…>> (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 2%>>\n"
+"<<TRADUCTION EN COURS : 11%>>\n"
 "\n"
-"Les Arléniens sont vos alliés. Les Kraylors et Éxuaris sont vos ennemis et "
-"tenteront de vous empêcher de terminer vos missions.\n"
+"Les Arléniens sont vos alliés.\n"
+"Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
+"terminer vos missions.\n"
 "3 missions sont disponibles dans la version actuelle.\n"
 "\n"
 "Version 1 - nov 2021\n"
@@ -132,11 +133,15 @@ msgctxt "gossip-comms"
 msgid ""
 "I hear the head of operations has a thing for his administrative assistant"
 msgstr ""
+"J'ai entendu dire que le chef des opérations avait un faible pour son "
+"adjointe administrative."
 
 #: scripts/scenario_49_allies.lua:409
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
 msgstr ""
+"Mes amis mineurs m'ont dit que Krak or Kruk était sur le point de devenir "
+"riche."
 
 #: scripts/scenario_49_allies.lua:410
 msgctxt "gossip-comms"
@@ -144,6 +149,8 @@ msgid ""
 "Did you know you can usually hire replacement repair crew cheaper at "
 "friendly stations?"
 msgstr ""
+"Savez-vous que vous pouvez généralement embaucher une équipe de réparation "
+"de remplacement moins cher dans les stations amies ?"
 
 #: scripts/scenario_49_allies.lua:411
 msgctxt "gossip-comms"
@@ -151,6 +158,8 @@ msgid ""
 "Under their uniforms, the Kraylors have an extra appendage. I wonder what "
 "they use it for"
 msgstr ""
+"Sous leur uniforme, les Kraylors ont un appendice supplémentaire. Je me "
+"demande à quoi ça leur sert."
 
 #: scripts/scenario_49_allies.lua:412
 msgctxt "gossip-comms"
@@ -158,6 +167,8 @@ msgid ""
 "The Kraylors may be human navy enemies, but they make some mighty fine BBQ "
 "Mynock"
 msgstr ""
+"Les Kraylors sont peut-être les ennemis de la marine humaine, mais ils "
+"fabriquent de très bons BBQ Mynock, On peut au moins leur accorder ça."
 
 #: scripts/scenario_49_allies.lua:413
 msgctxt "gossip-comms"
@@ -165,6 +176,8 @@ msgid ""
 "The Kraylors and the Ktlitans may be nearing a cease fire from what I hear. "
 "That'd be bad news for us"
 msgstr ""
+"Les Kraylors et les Ktlitiens se rapprocheraient d'un cessez-le-feu d'après "
+"ce que j'ai entendu. Ce ne serait pas vraiment une bonne nouvelle pour nous."
 
 #: scripts/scenario_49_allies.lua:414
 msgctxt "gossip-comms"
@@ -172,12 +185,16 @@ msgid ""
 "Docking bay 7 has interesting mind altering substances for sale, but they're "
 "monitored between 1900 and 2300"
 msgstr ""
+"La baie d'amarrage n°7 proposerait des substances psychotropes intéressantes "
+"à vendre, mais elles seraient surveillées entre 19h00 et 23h00."
 
 #: scripts/scenario_49_allies.lua:415
 msgctxt "gossip-comms"
 msgid ""
 "Watch the sky tonight in quadrant J around 2243. It should be spectacular"
 msgstr ""
+"Regardez le ciel ce soir dans le quadrant J vers 22h43. Ça devrait être "
+"spectaculaire."
 
 #: scripts/scenario_49_allies.lua:416
 msgctxt "gossip-comms"
@@ -185,6 +202,8 @@ msgid ""
 "I think the shuttle pilot has a tame miniature Ktlitan caged in his "
 "quarters. Sometimes I hear it at night"
 msgstr ""
+"Je pense que le pilote de la navette a un Ktlitien miniature apprivoisé en "
+"cage dans ses quartiers. Parfois je l'entends la nuit."
 
 #: scripts/scenario_49_allies.lua:417
 msgctxt "gossip-comms"
@@ -192,6 +211,8 @@ msgid ""
 "Did you hear the screaming chase in the corridors on level 4 last night? "
 "Three Kraylors were captured and put in the brig"
 msgstr ""
+"Avez-vous entendu la poursuite et les hurlements dans les couloirs du niveau "
+"4 la nuit dernière ? Trois Kraylors ont été capturés et mis en prison."
 
 #: scripts/scenario_49_allies.lua:418
 msgctxt "gossip-comms"
@@ -199,6 +220,8 @@ msgid ""
 "Rumor has it that the two Lichten brothers are on the verge of a new "
 "discovery. And it's not another wine flavor either"
 msgstr ""
+"La rumeur veut que les deux frères Lichten soient sur le point de faire une "
+"nouvelle découverte. Et ce n'est pas une autre saveur de vin non plus."
 
 #: scripts/scenario_49_allies.lua:799
 msgctxt "ZoneLabelDescription-faction"
@@ -1245,22 +1268,22 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3603
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "Nous avons besoin de nous réapprovisionner en munitions."
 
 #: scripts/scenario_49_allies.lua:3604
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
-msgstr ""
+msgstr "Quel genre de munitions ?"
 
 #: scripts/scenario_49_allies.lua:3608
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 
 #: scripts/scenario_49_allies.lua:3610
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
 
 #: scripts/scenario_49_allies.lua:3612 scripts/scenario_49_allies.lua:3624
 #: scripts/scenario_49_allies.lua:3636 scripts/scenario_49_allies.lua:3648
@@ -1268,47 +1291,47 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rép chacun)"
 
 #: scripts/scenario_49_allies.lua:3620
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Veuillez réapprovisionner nos missiles EMP. ("
 
 #: scripts/scenario_49_allies.lua:3622
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Avez-vous des EMP ? ("
 
 #: scripts/scenario_49_allies.lua:3632
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 
 #: scripts/scenario_49_allies.lua:3634
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
 
 #: scripts/scenario_49_allies.lua:3644
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "Nous pourrions avoir besoin de quelques mines. ("
 
 #: scripts/scenario_49_allies.lua:3646
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "Et concernant les mines ? ("
 
 #: scripts/scenario_49_allies.lua:3656
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "Concernant les HVLI ? ("
 
 #: scripts/scenario_49_allies.lua:3658
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Pourriez-vous fournir des HVLI ? ("
 
 #: scripts/scenario_49_allies.lua:3669 scripts/scenario_49_allies.lua:4568
 msgctxt "station-comms"
@@ -1371,7 +1394,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3684 scripts/scenario_49_allies.lua:4583
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Rumeurs"
 
 #: scripts/scenario_49_allies.lua:3695 scripts/scenario_49_allies.lua:4429
 msgctxt "doomsday-comms"
@@ -1929,6 +1952,7 @@ msgstr ""
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
 msgstr ""
+"Aucun tutoriel n'explique les marchandises ou cargaisons. Explication :"
 
 #: scripts/scenario_49_allies.lua:4041
 msgctxt "explainGoods-comms"
@@ -1940,6 +1964,15 @@ msgid ""
 "obtained by spending reputation points or by trading other types of cargo "
 "(typically food, medicine or luxury)"
 msgstr ""
+"Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
+"des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
+"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
+"objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"marchandises particulières. Chaque navire joueur diffère par sa capacité de "
+"transport de marchandises. Les marchandises peuvent être obtenues en "
+"dépensant des points de réputation ou en échangeant d'autres types de "
+"marchandises (généralement de la nourriture, des médicaments ou des produits "
+"de luxe)."
 
 #: scripts/scenario_49_allies.lua:4042
 msgctxt "explainGoodsComponent-comms"
@@ -2348,43 +2381,46 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4316
 msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_49_allies.lua:4320
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
 
 #: scripts/scenario_49_allies.lua:4321
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
 #: scripts/scenario_49_allies.lua:4322
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
 #: scripts/scenario_49_allies.lua:4327
 msgctxt "ammo-comms"
 msgid ""
 " The Kraylor threat to mineral resources has reduced ordnance availablilty"
 msgstr ""
+" La menace Kraylor pesant sur les ressources minérales a réduit la "
+"disponibilité des munitions."
 
 #: scripts/scenario_49_allies.lua:4335
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_49_allies.lua:4337
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
 
 #: scripts/scenario_49_allies.lua:4345 scripts/scenario_49_allies.lua:4360
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_49_allies.lua:4347
 msgctxt "ammo-comms"
@@ -2392,6 +2428,8 @@ msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
 
 #: scripts/scenario_49_allies.lua:4350 scripts/scenario_49_allies.lua:4365
 #: scripts/scenario_49_allies.lua:4370
@@ -2402,12 +2440,12 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4355
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
-msgstr ""
+msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
 
 #: scripts/scenario_49_allies.lua:4356
 msgctxt "ammo-comms"
 msgid "Get just one"
-msgstr ""
+msgstr "Prendre juste celui-là."
 
 #: scripts/scenario_49_allies.lua:4362
 msgctxt "ammo-comms"
@@ -2415,6 +2453,8 @@ msgid ""
 "We generously resupplied you with one weapon charge.\n"
 "Put it to good use."
 msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
 
 #: scripts/scenario_49_allies.lua:4383
 msgctxt "station-comms"
@@ -2502,7 +2542,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4488
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "De quelles munitions disposez-vous ?"
 
 #: scripts/scenario_49_allies.lua:4493
 msgctxt "ammo-comms"
@@ -2510,6 +2550,8 @@ msgid ""
 "\n"
 "   Nuke"
 msgstr ""
+"\n"
+"   Nuke"
 
 #: scripts/scenario_49_allies.lua:4497
 msgctxt "ammo-comms"
@@ -2517,6 +2559,8 @@ msgid ""
 "\n"
 "   EMP"
 msgstr ""
+"\n"
+"   EMP"
 
 #: scripts/scenario_49_allies.lua:4501
 msgctxt "ammo-comms"
@@ -2524,6 +2568,8 @@ msgid ""
 "\n"
 "   Homing"
 msgstr ""
+"\n"
+"   Homing"
 
 #: scripts/scenario_49_allies.lua:4505
 msgctxt "ammo-comms"
@@ -2531,6 +2577,8 @@ msgid ""
 "\n"
 "   Mine"
 msgstr ""
+"\n"
+"   Mine"
 
 #: scripts/scenario_49_allies.lua:4509
 msgctxt "ammo-comms"
@@ -2538,23 +2586,25 @@ msgid ""
 "\n"
 "   HVLI"
 msgstr ""
+"\n"
+"   HVLI"
 
 #: scripts/scenario_49_allies.lua:4512
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 
 #: scripts/scenario_49_allies.lua:4514
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_49_allies.lua:4516
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_49_allies.lua:4530
 msgctxt "trade-comms"
