@@ -32,7 +32,7 @@ msgstr ""
 "- Difficulté : <<…>> (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 11%>>\n"
+"<<TRADUCTION EN COURS : 24%>>\n"
 "\n"
 "Les Arléniens sont vos alliés.\n"
 "Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
@@ -246,7 +246,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1512
 msgctxt "scienceDescription-station"
 msgid "Optical Components"
-msgstr ""
+msgstr "Composants optiques"
 
 #: scripts/scenario_49_allies.lua:1526
 msgctxt "stationGeneralInfo-comms"
@@ -265,7 +265,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1533
 msgctxt "scienceDescription-station"
 msgid "Battery and software engineering"
-msgstr ""
+msgstr "Ingénierie en batteries et logiciels"
 
 #: scripts/scenario_49_allies.lua:1545
 msgctxt "stationGeneralInfo-comms"
@@ -285,7 +285,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1552
 msgctxt "scienceDescription-station"
 msgid "Shield and Armor Research"
-msgstr ""
+msgstr "Recherche sur les boucliers et armures"
 
 #: scripts/scenario_49_allies.lua:1566
 msgctxt "stationGeneralInfo-comms"
@@ -302,7 +302,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1573
 msgctxt "scienceDescription-station"
 msgid "Energy and particle beam components"
-msgstr ""
+msgstr "Composants de faisceau d'énergie et de particules"
 
 #: scripts/scenario_49_allies.lua:1587
 msgctxt "stationGeneralInfo-comms"
@@ -320,7 +320,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1594
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
-msgstr ""
+msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
 
 #: scripts/scenario_49_allies.lua:1606
 msgctxt "stationGeneralInfo-comms"
@@ -341,7 +341,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1613
 msgctxt "scienceDescription-station"
 msgid "Training and Coordination"
-msgstr ""
+msgstr "Formation et coordination"
 
 #: scripts/scenario_49_allies.lua:1624
 msgctxt "stationGeneralInfo-comms"
@@ -363,7 +363,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1631
 msgctxt "scienceDescription-station"
 msgid "Communication components"
-msgstr ""
+msgstr "Composants pour systèmes de communication"
 
 #: scripts/scenario_49_allies.lua:1644
 msgctxt "stationGeneralInfo-comms"
@@ -384,7 +384,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1651
 msgctxt "scienceDescription-station"
 msgid "Medical research"
-msgstr ""
+msgstr "Recherche médicale"
 
 #: scripts/scenario_49_allies.lua:1654
 msgctxt "stationGeneralInfo-comms"
@@ -402,7 +402,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1661
 msgctxt "scienceDescription-station"
 msgid "Warp drive components"
-msgstr ""
+msgstr "Composants pour système de vitesse lumière"
 
 #: scripts/scenario_49_allies.lua:1678
 msgctxt "stationGeneralInfo-comms"
@@ -420,12 +420,12 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2130 scripts/scenario_49_allies.lua:2776
 msgctxt "scienceDescription-station"
 msgid "Mining station"
-msgstr ""
+msgstr "Station minière"
 
 #: scripts/scenario_49_allies.lua:1700
 msgctxt "scienceDescription-station"
 msgid "Robotic research"
-msgstr ""
+msgstr "Recherche robotique"
 
 #: scripts/scenario_49_allies.lua:1713
 msgctxt "stationGeneralInfo-comms"
@@ -442,7 +442,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1720
 msgctxt "scienceDescription-station"
 msgid "Advanced Material components"
-msgstr ""
+msgstr "Composants de matériaux avancés"
 
 #: scripts/scenario_49_allies.lua:1745
 msgctxt "stationGeneralInfo-comms"
@@ -461,7 +461,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1752 scripts/scenario_49_allies.lua:2280
 msgctxt "scienceDescription-station"
 msgid "Trading station"
-msgstr ""
+msgstr "Station de commerce"
 
 #: scripts/scenario_49_allies.lua:1763
 msgctxt "stationGeneralInfo-comms"
@@ -480,7 +480,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1770
 msgctxt "scienceDescription-station"
 msgid "Shielded circuitry fabrication"
-msgstr ""
+msgstr "Fabrication de circuits blindés"
 
 #: scripts/scenario_49_allies.lua:1785
 msgctxt "stationGeneralInfo-comms"
@@ -500,7 +500,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1792 scripts/scenario_49_allies.lua:2553
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
-msgstr ""
+msgstr "Composants de moteurs à impulsions"
 
 #: scripts/scenario_49_allies.lua:1807
 msgctxt "stationGeneralInfo-comms"
@@ -518,7 +518,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2596
 msgctxt "scienceDescription-station"
 msgid "Android components"
-msgstr ""
+msgstr "Composants pour androïdes"
 
 #: scripts/scenario_49_allies.lua:1827
 msgctxt "stationGeneralInfo-comms"
@@ -535,7 +535,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1834
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
-msgstr ""
+msgstr "Composants de faisceaux répulseur et tracteur"
 
 #: scripts/scenario_49_allies.lua:1849
 msgctxt "stationGeneralInfo-comms"
@@ -555,7 +555,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1856 scripts/scenario_49_allies.lua:2318
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
-msgstr ""
+msgstr "Composants de transporteur"
 
 #: scripts/scenario_49_allies.lua:1871
 msgctxt "stationGeneralInfo-comms"
@@ -575,7 +575,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1878 scripts/scenario_49_allies.lua:2170
 msgctxt "scienceDescription-station"
 msgid "Autodoc components"
-msgstr ""
+msgstr "Composants Autodoc"
 
 #: scripts/scenario_49_allies.lua:1892
 msgctxt "stationGeneralInfo-comms"
@@ -592,7 +592,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1899
 msgctxt "scienceDescription-station"
 msgid "Nanotechnology research"
-msgstr ""
+msgstr "Recherche en nanotechnologie"
 
 #: scripts/scenario_49_allies.lua:1913
 msgctxt "stationGeneralInfo-comms"
@@ -609,7 +609,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1921 scripts/scenario_49_allies.lua:2024
 msgctxt "scienceDescription-station"
 msgid "Mining"
-msgstr ""
+msgstr "Exploitation minière"
 
 #: scripts/scenario_49_allies.lua:1923
 msgctxt "stationGeneralInfo-comms"
@@ -628,7 +628,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1965
 msgctxt "scienceDescription-station"
 msgid "Observatory and stellar mapping"
-msgstr ""
+msgstr "Observatoire et cartographie stellaire"
 
 #: scripts/scenario_49_allies.lua:1976
 msgctxt "stationGeneralInfo-comms"
@@ -640,7 +640,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:1982 scripts/scenario_49_allies.lua:2714
 msgctxt "scienceDescription-station"
 msgid "Sensor components"
-msgstr ""
+msgstr "Composants de capteurs"
 
 #: scripts/scenario_49_allies.lua:1994
 msgctxt "stationGeneralInfo-comms"
@@ -658,7 +658,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2001
 msgctxt "scienceDescription-station"
 msgid "Nanite supplier"
-msgstr ""
+msgstr "Fournisseur de nanites"
 
 #: scripts/scenario_49_allies.lua:2016
 msgctxt "stationGeneralInfo-comms"
@@ -680,7 +680,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2069
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology training"
-msgstr ""
+msgstr "Formation en xénopsychologie"
 
 #: scripts/scenario_49_allies.lua:2083
 msgctxt "stationGeneralInfo-comms"
@@ -716,7 +716,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2190
 msgctxt "scienceDescription-station"
 msgid "Zero gravity sports and entertainment"
-msgstr ""
+msgstr "Sports et divertissement en apesanteur"
 
 #: scripts/scenario_49_allies.lua:2203
 msgctxt "stationGeneralInfo-comms"
@@ -734,7 +734,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2210
 msgctxt "scienceDescription-station"
 msgid "Energy beam components"
-msgstr ""
+msgstr "Composants de faisceau d'énergie"
 
 #: scripts/scenario_49_allies.lua:2223
 msgctxt "stationGeneralInfo-comms"
@@ -751,7 +751,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2230
 msgctxt "scienceDescription-station"
 msgid "Energy Beam Components"
-msgstr ""
+msgstr "Composants de faisceau d'énergie"
 
 #: scripts/scenario_49_allies.lua:2245
 msgctxt "stationGeneralInfo-comms"
@@ -769,7 +769,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2252
 msgctxt "scienceDescription-station"
 msgid "Medical Research"
-msgstr ""
+msgstr "Recherche médicale"
 
 #: scripts/scenario_49_allies.lua:2255
 msgctxt "stationGeneralInfo-comms"
@@ -786,7 +786,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2262
 msgctxt "scienceDescription-station"
 msgid "Exobiology research"
-msgstr ""
+msgstr "Recherche en exobiologie"
 
 #: scripts/scenario_49_allies.lua:2273
 msgctxt "stationGeneralInfo-comms"
@@ -844,7 +844,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2341
 msgctxt "scienceDescription-station"
 msgid "Optical components"
-msgstr ""
+msgstr "Composants optiques"
 
 #: scripts/scenario_49_allies.lua:2355
 msgctxt "stationGeneralInfo-comms"
@@ -864,7 +864,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2362
 msgctxt "scienceDescription-station"
 msgid "Diplomatic training"
-msgstr ""
+msgstr "Formation diplomatique"
 
 #: scripts/scenario_49_allies.lua:2365
 msgctxt "stationGeneralInfo-comms"
@@ -881,17 +881,17 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2372
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
-msgstr ""
+msgstr "Exploitation minière et commerce"
 
 #: scripts/scenario_49_allies.lua:2415
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
-msgstr ""
+msgstr "Exploitation minière et jeux de hasard"
 
 #: scripts/scenario_49_allies.lua:2460 scripts/scenario_49_allies.lua:2502
 msgctxt "scienceDescription-station"
 msgid "Load lifters and components"
-msgstr ""
+msgstr "Élévateurs de charge et composants"
 
 #: scripts/scenario_49_allies.lua:2473
 msgctxt "stationGeneralInfo-comms"
@@ -911,7 +911,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2480
 msgctxt "scienceDescription-station"
 msgid "Optic components"
-msgstr ""
+msgstr "Composants optiques"
 
 #: scripts/scenario_49_allies.lua:2495
 msgctxt "stationGeneralInfo-comms"
@@ -940,7 +940,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2524
 msgctxt "scienceDescription-station"
 msgid "Shield components and research"
-msgstr ""
+msgstr "Composants et recherche sur les boucliers"
 
 #: scripts/scenario_49_allies.lua:2539
 msgctxt "stationGeneralInfo-comms"
@@ -959,7 +959,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2546 scripts/scenario_49_allies.lua:2984
 msgctxt "scienceDescription-station"
 msgid "Observatory"
-msgstr ""
+msgstr "Observatoire"
 
 #: scripts/scenario_49_allies.lua:2567
 msgctxt "stationGeneralInfo-comms"
@@ -976,7 +976,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2574
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
-msgstr ""
+msgstr "Composants de faisceaux répulseur et tracteur"
 
 #: scripts/scenario_49_allies.lua:2589
 msgctxt "stationGeneralInfo-comms"
@@ -1008,7 +1008,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2616
 msgctxt "scienceDescription-station"
 msgid "Logistics coordination"
-msgstr ""
+msgstr "Coordination logistique"
 
 #: scripts/scenario_49_allies.lua:2619
 msgctxt "stationGeneralInfo-comms"
@@ -1027,7 +1027,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2626
 msgctxt "scienceDescription-station"
 msgid "Advanced material components"
-msgstr ""
+msgstr "Composants de matériaux avancés"
 
 #: scripts/scenario_49_allies.lua:2651
 msgctxt "stationGeneralInfo-comms"
@@ -1046,7 +1046,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2658
 msgctxt "scienceDescription-station"
 msgid "Shield and armor components and research"
-msgstr ""
+msgstr "Boucliers et armures : Composants et recherche"
 
 #: scripts/scenario_49_allies.lua:2672
 msgctxt "stationGeneralInfo-comms"
@@ -1066,7 +1066,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2679 scripts/scenario_49_allies.lua:3028
 msgctxt "scienceDescription-station"
 msgid "Ship building and maintenance facility"
-msgstr ""
+msgstr "Construction de navires et établissement d'entretien"
 
 #: scripts/scenario_49_allies.lua:2690
 msgctxt "stationGeneralInfo-comms"
@@ -1080,7 +1080,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2696
 msgctxt "scienceDescription-station"
 msgid "Shielded Circuitry Fabrication"
-msgstr ""
+msgstr "Fabrication de circuits blindés"
 
 #: scripts/scenario_49_allies.lua:2707
 msgctxt "stationGeneralInfo-comms"
@@ -1117,7 +1117,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2735
 msgctxt "scienceDescription-station"
 msgid "Warp engine components"
-msgstr ""
+msgstr "Composants pour moteurs à vitesse lumière"
 
 #: scripts/scenario_49_allies.lua:2750
 msgctxt "stationGeneralInfo-comms"
@@ -1136,7 +1136,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2760
 msgctxt "scienceDescription-station"
 msgid "Commerce and gambling"
-msgstr ""
+msgstr "Commerce et jeux d'argent"
 
 #: scripts/scenario_49_allies.lua:2770
 msgctxt "stationGeneralInfo-comms"
@@ -1146,12 +1146,12 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2816
 msgctxt "scienceDescription-station"
 msgid "Casino and Gambling"
-msgstr ""
+msgstr "Casino et jeux d'argent"
 
 #: scripts/scenario_49_allies.lua:2830
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
-msgstr ""
+msgstr "Jeu d'argent et réapprovisionnement"
 
 #: scripts/scenario_49_allies.lua:2840
 msgctxt "stationGeneralInfo-comms"
@@ -1161,33 +1161,33 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2846
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
-msgstr ""
+msgstr "Commerce et loisirs"
 
 #: scripts/scenario_49_allies.lua:2853
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
-msgstr ""
+msgstr "Recherche en xénopsychologie"
 
 #: scripts/scenario_49_allies.lua:2867 scripts/scenario_49_allies.lua:2888
 #: scripts/scenario_49_allies.lua:2937 scripts/scenario_49_allies.lua:3035
 msgctxt "scienceDescription-station"
 msgid "Resupply"
-msgstr ""
+msgstr "Ravitaillement"
 
 #: scripts/scenario_49_allies.lua:2895
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
-msgstr ""
+msgstr "Mode et textile"
 
 #: scripts/scenario_49_allies.lua:2909
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
-msgstr ""
+msgstr "Recherche en psychologie du stress"
 
 #: scripts/scenario_49_allies.lua:2923
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
-msgstr ""
+msgstr "Recherche sur la basse gravité"
 
 #: scripts/scenario_49_allies.lua:2940
 msgctxt "stationGeneralInfo-comms"
@@ -1197,17 +1197,17 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2946
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
-msgstr ""
+msgstr "Laboratoire de recherche et observatoire"
 
 #: scripts/scenario_49_allies.lua:2960
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
-msgstr ""
+msgstr "Recherche en biotechnologie"
 
 #: scripts/scenario_49_allies.lua:2974
 msgctxt "scienceDescription-station"
 msgid "Routine maintenance and entertainment"
-msgstr ""
+msgstr "Maintenance courante et divertissement"
 
 #: scripts/scenario_49_allies.lua:2977
 msgctxt "stationGeneralInfo-comms"
@@ -1227,7 +1227,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:2998
 msgctxt "scienceDescription-station"
 msgid "Automated weapons systems"
-msgstr ""
+msgstr "Systèmes d'armes automatisées"
 
 #: scripts/scenario_49_allies.lua:3008
 msgctxt "stationGeneralInfo-comms"
@@ -1239,7 +1239,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3014
 msgctxt "scienceDescription-station"
 msgid "Biotechnology research"
-msgstr ""
+msgstr "Recherche en biotechnologie"
 
 #: scripts/scenario_49_allies.lua:3549
 msgctxt "station-comms"
@@ -1902,7 +1902,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3985 scripts/scenario_49_allies.lua:4477
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr ""
+msgstr "Quels sont nos ordres en cours ?"
 
 #: scripts/scenario_49_allies.lua:3990 scripts/scenario_49_allies.lua:4482
 #, lua-format
@@ -1911,6 +1911,8 @@ msgid ""
 "\n"
 "   %i Minutes remain in game"
 msgstr ""
+"\n"
+"   %i minutes restantes "
 
 #: scripts/scenario_49_allies.lua:4001 scripts/scenario_49_allies.lua:4017
 #, lua-format
@@ -1922,7 +1924,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:5133
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Réputation insuffisante."
 
 #: scripts/scenario_49_allies.lua:4006 scripts/scenario_49_allies.lua:4022
 msgctxt "trade-comms"
@@ -2076,6 +2078,8 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
+"Réputation insuffisante pour acheter."
 
 #: scripts/scenario_49_allies.lua:4092 scripts/scenario_49_allies.lua:4126
 #: scripts/scenario_49_allies.lua:4158 scripts/scenario_49_allies.lua:4190
@@ -2435,7 +2439,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4370
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Pas assez de réputation."
 
 #: scripts/scenario_49_allies.lua:4355
 msgctxt "ammo-comms"
@@ -2713,7 +2717,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4667 scripts/scenario_49_allies.lua:4688
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Pas assez de réputation !"
 
 #: scripts/scenario_49_allies.lua:4633
 #, lua-format
@@ -2909,7 +2913,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:5179 scripts/scenario_49_allies.lua:5210
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Réputation insuffisante pour acheter."
 
 #: scripts/scenario_49_allies.lua:4900 scripts/scenario_49_allies.lua:4930
 #: scripts/scenario_49_allies.lua:4955 scripts/scenario_49_allies.lua:4985
@@ -3364,12 +3368,12 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:6548
 msgctxt "msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_49_allies.lua:6552
 msgctxt "msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_49_allies.lua:6970
 msgctxt "msgMainscreen"
