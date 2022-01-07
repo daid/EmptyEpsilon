@@ -427,6 +427,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     auto layout = new GuiAutoLayout(one, "", GuiAutoLayout::LayoutVerticalTopToBottom);
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_screen_button = new GuiToggleButton(layout, "", tr("Main screen"), [this](bool value) {
+        my_player_info->commandSetMainScreen(window_index, value);
         unselectSingleOptions();
     });
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
