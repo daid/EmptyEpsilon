@@ -32,7 +32,7 @@ msgstr ""
 "- Difficulté : <<…>> (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 24%>>\n"
+"<<TRADUCTION EN COURS : 37%>>\n"
 "\n"
 "Les Arléniens sont vos alliés.\n"
 "Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
@@ -1245,6 +1245,7 @@ msgstr "Recherche en biotechnologie"
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
+"Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
 
 #: scripts/scenario_49_allies.lua:3561
 msgctxt "station-comms"
@@ -1252,11 +1253,13 @@ msgid ""
 "Good day, officer!\n"
 "What can we do for you today?\n"
 msgstr ""
+"Bonjour officier !\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?\n"
 
 #: scripts/scenario_49_allies.lua:3563
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
-msgstr ""
+msgstr "Bienvenue dans notre charmante petite station.\n"
 
 #: scripts/scenario_49_allies.lua:3566
 msgctxt "station-comms"
@@ -1264,6 +1267,8 @@ msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
+"Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+"attentivement les ennemis à proximité."
 
 #: scripts/scenario_49_allies.lua:3603
 msgctxt "ammo-comms"
@@ -1336,12 +1341,12 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 #: scripts/scenario_49_allies.lua:3669 scripts/scenario_49_allies.lua:4568
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Dites m'en plus à propos de votre station."
 
 #: scripts/scenario_49_allies.lua:3670 scripts/scenario_49_allies.lua:4569
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "Qu'aimeriez-vous savoir ?"
 
 #: scripts/scenario_49_allies.lua:3671 scripts/scenario_49_allies.lua:4570
 msgctxt "stationGeneralInfo-comms"
@@ -2466,6 +2471,9 @@ msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
 
 #: scripts/scenario_49_allies.lua:4385
 msgctxt "station-comms"
@@ -2473,6 +2481,8 @@ msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_49_allies.lua:4388
 msgctxt "station-comms"
@@ -2481,16 +2491,19 @@ msgid ""
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
 msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
 
 #: scripts/scenario_49_allies.lua:4418
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "j'aurai besoin d'informations."
 
 #: scripts/scenario_49_allies.lua:4419
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "De quel genre d'informations avez-vous besoin ?"
 
 #: scripts/scenario_49_allies.lua:4430
 msgctxt "doomsday-comms"
@@ -2664,54 +2677,59 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4592
 msgctxt "station-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_49_allies.lua:4593
 #, lua-format
 msgctxt "station-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4596
 #, lua-format
 msgctxt "station-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4599
 #, lua-format
 msgctxt "station-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4607
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%.1f rep)"
 msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%.1f rep)"
 
 #: scripts/scenario_49_allies.lua:4609
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request supplies."
 msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de "
+"réapprovisionnement."
 
 #: scripts/scenario_49_allies.lua:4611
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 
 #: scripts/scenario_49_allies.lua:4613 scripts/scenario_49_allies.lua:4639
 #: scripts/scenario_49_allies.lua:4660 scripts/scenario_49_allies.lua:4681
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %i"
-msgstr ""
+msgstr "Marqueur %i"
 
 #: scripts/scenario_49_allies.lua:4621
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward waypoint %i"
 msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"réapprovisionnement au marqueur %i."
 
 #: scripts/scenario_49_allies.lua:4623 scripts/scenario_49_allies.lua:4646
 #: scripts/scenario_49_allies.lua:4667 scripts/scenario_49_allies.lua:4688
@@ -2723,19 +2741,19 @@ msgstr "Pas assez de réputation !"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%.1f rep)"
-msgstr ""
+msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%.1f rep)"
 
 #: scripts/scenario_49_allies.lua:4635 scripts/scenario_49_allies.lua:4656
 #: scripts/scenario_49_allies.lua:4677
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
 
 #: scripts/scenario_49_allies.lua:4637 scripts/scenario_49_allies.lua:4658
 #: scripts/scenario_49_allies.lua:4679
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
 #: scripts/scenario_49_allies.lua:4644 scripts/scenario_49_allies.lua:4665
 #: scripts/scenario_49_allies.lua:4686
@@ -2743,18 +2761,20 @@ msgstr ""
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at waypoint %i"
 msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %i."
 
 #: scripts/scenario_49_allies.lua:4654
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Phobos T3 reinforcements! (%.1f rep)"
-msgstr ""
+msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%.1f rep)"
 
 #: scripts/scenario_49_allies.lua:4675
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%.1f rep)"
-msgstr ""
+msgstr "Merci de nous envoyer un Stalker Q7 en renforts ! (%.1f rep)"
 
 #: scripts/scenario_49_allies.lua:4725
 msgctxt "trade-comms"
@@ -2784,102 +2804,104 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4790
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "Que voulez-vous ?"
 
 #: scripts/scenario_49_allies.lua:4792
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_49_allies.lua:4794
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Défendez un marqueur."
 
 #: scripts/scenario_49_allies.lua:4796
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
 
 #: scripts/scenario_49_allies.lua:4799
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_49_allies.lua:4801
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %i"
-msgstr ""
+msgstr "Défendez le marqueur %i."
 
 #: scripts/scenario_49_allies.lua:4803
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %i."
-msgstr ""
+msgstr "Nous partons pour défendre le marqueur %i."
 
 #: scripts/scenario_49_allies.lua:4810
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_49_allies.lua:4811
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_49_allies.lua:4816
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_49_allies.lua:4817
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
-msgstr ""
+msgstr "Coque : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4820
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4822
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers avant : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4823
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
-msgstr ""
+msgstr "Boucliers arrière : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4826
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
-msgstr ""
+msgstr "Bouclier %s : %d%%\n"
 
 #: scripts/scenario_49_allies.lua:4833
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%s Missiles : %d/%d\n"
 
 #: scripts/scenario_49_allies.lua:4842
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_49_allies.lua:4843
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_49_allies.lua:4870 scripts/scenario_49_allies.lua:5085
 msgctxt "trade-comms"
@@ -2926,17 +2948,17 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:5001
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "Nous allons vous détruire !"
 
 #: scripts/scenario_49_allies.lua:5002
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Votre race va s'éteindre ici et maintenant !"
 
 #: scripts/scenario_49_allies.lua:5003
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/scenario_49_allies.lua:5005
 msgctxt "shipEnemy-comms"
@@ -2944,46 +2966,49 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_49_allies.lua:5008
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr ""
+msgstr "Nous allons vous détruire !"
 
 #: scripts/scenario_49_allies.lua:5009
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
-msgstr ""
+msgstr "Nous ne pensons pas. C'est vous qui subirez la destruction !"
 
 #: scripts/scenario_49_allies.lua:5011
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr ""
+msgstr "Vous n'avez pas aucun honneur."
 
 #: scripts/scenario_49_allies.lua:5012
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
-msgstr ""
+msgstr "Vos insultes ont attiré sur vous notre colère. Préparez-vous à mourir."
 
 #: scripts/scenario_49_allies.lua:5013
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
-msgstr ""
+msgstr "Vos commentaires sur l'honneur ne signifient rien pour nous."
 
 #: scripts/scenario_49_allies.lua:5015
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
-msgstr ""
+msgstr "Nous avons pitié de votre race pathétique."
 
 #: scripts/scenario_49_allies.lua:5016
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
-msgstr ""
+msgstr "Pathétique? Vous allez regretter votre dénigrement !"
 
 #: scripts/scenario_49_allies.lua:5017
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
-msgstr ""
+msgstr "Nous ne nous soucions guère de ce que vous pensez de nous"
 
 #: scripts/scenario_49_allies.lua:5020
 msgctxt "shipEnemy-comms"
@@ -2991,11 +3016,16 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
+"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+"\n"
+"Fin de transmission."
 
 #: scripts/scenario_49_allies.lua:5022
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
 
 #: scripts/scenario_49_allies.lua:5024
 msgctxt "shipEnemy-comms"
@@ -3007,21 +3037,32 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
+"000110011010...Grzzzz..\n"
+"\n"
+"Communication binaire non détectée..Grzzz Nous passons en communication "
+"universelle..Grrzzz\n"
+"\n"
+"Générer une réponse appropriée pour la cible en langage humain à partir des "
+"archives...Grrzzzz\n"
+"\n"
+"Ne nous approchez pas! Grrzzz\n"
+"\n"
+"Communication interrompue."
 
 #: scripts/scenario_49_allies.lua:5025
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
 
 #: scripts/scenario_49_allies.lua:5026
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Commande non autorisée reçue. Cible verrouillée."
 
 #: scripts/scenario_49_allies.lua:5027
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_49_allies.lua:5029
 msgctxt "shipEnemy-comms"
@@ -3030,26 +3071,32 @@ msgid ""
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_49_allies.lua:5030
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
 
 #: scripts/scenario_49_allies.lua:5031
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
 
 #: scripts/scenario_49_allies.lua:5032
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
 
 #: scripts/scenario_49_allies.lua:5034
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_49_allies.lua:5061
 msgctxt "trade-comms"
@@ -3088,6 +3135,9 @@ msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"\n"
+"Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_49_allies.lua:5229
 msgctxt "ship-comms"
@@ -3095,6 +3145,9 @@ msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"\n"
+"Bonne journée."
 
 #: scripts/scenario_49_allies.lua:5459
 msgctxt "inventory-buttonRelay"
