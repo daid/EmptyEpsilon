@@ -5,13 +5,15 @@
 ---
 --- Mission advice: It's better to hit an asteroid than a mine
 -- Type: Mission
--- Variation[Easy]: Easy goals and/or enemies
--- Variation[Hard]: Hard goals and/or enemies
--- Variation[Quixotic]: Practically impossible goals and/or enemies, definitely time consuming
--- Variation[Timed]: Complete the mission in less than 30 minutes
--- Variation[Timed Easy]: Easy goals and/or enemies, Complete the mission in less than 30 minutes
--- Variation[Timed Hard]: Hard goals and/or enemies, Complete the mission in less than 30 minutes
--- Variation[Timed Quixotic]: Practically impossible goals and/or enemies, Complete the mission in less than 30 minutes
+-- Setting[Settings]: Configures time/goal/the amount of enemies spawned in the scenario.
+-- Settings[Easy]: Easy goals and/or enemies
+-- Settings[Normal|Default]: Normal goals and/or enemies.
+-- Settings[Hard]: Hard goals and/or enemies
+-- Settings[Quixotic]: Practically impossible goals and/or enemies, definitely time consuming
+-- Settings[Timed Normal]: Complete the mission in less than 30 minutes
+-- Settings[Timed Easy]: Easy goals and/or enemies, Complete the mission in less than 30 minutes
+-- Settings[Timed Hard]: Hard goals and/or enemies, Complete the mission in less than 30 minutes
+-- Settings[Timed Quixotic]: Practically impossible goals and/or enemies, Complete the mission in less than 30 minutes
 
 require("utils.lua")
 
@@ -19,7 +21,7 @@ require("utils.lua")
 	Initialization routines
 --]]-------------------------------------------------------------------
 function init()
-	setVariations()
+	setSettings()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 	--Ship Template Name List
 	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin","Fighter","Cruiser","Missile Cruiser","Strikeship","Adv. Striker","Dreadnought","Battlestation","Blockade Runner","Ktlitan Fighter","Ktlitan Breaker","Ktlitan Worker","Ktlitan Drone","Ktlitan Feeder","Ktlitan Scout","Ktlitan Destroyer","Storm"}
@@ -316,16 +318,16 @@ function delayFastToNormal()
 	GMDelayNormalToSlow = _("buttonGM", "Delay normal to slow")
 	addGMFunction(GMDelayNormalToSlow,delayNormalToSlow)
 end
---translate variations into a numeric difficulty value
-function setVariations()
+--translate settings into a numeric difficulty value
+function setSettings()
 	missionLength = 1
-	if string.find(getScenarioVariation(),"Easy") then
+	if string.find(getScenarioSetting("Settings"),"Easy") then
 		difficulty = .5
 		gapCheckDelayTimer = 5
-	elseif string.find(getScenarioVariation(),"Hard") then
+	elseif string.find(getScenarioSetting("Settings"),"Hard") then
 		difficulty = 2
 		gapCheckDelayTimer = 15
-	elseif string.find(getScenarioVariation(),"Quixotic") then
+	elseif string.find(getScenarioSetting("Settings"),"Quixotic") then
 		difficulty = 3
 		gapCheckDelayTimer = 30
 		missionLength = 2
@@ -335,7 +337,7 @@ function setVariations()
 	end
 	gapCheckInterval = gapCheckDelayTimer
 	gameTimeLimit = 0
-	if string.find(getScenarioVariation(),"Timed") then
+	if string.find(getScenarioSetting("Settings"),"Timed") then
 		playWithTimeLimit = true
 		gameTimeLimit = 30*60		
 	else
