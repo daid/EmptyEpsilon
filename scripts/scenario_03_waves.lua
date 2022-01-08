@@ -201,6 +201,7 @@ function spawnWave()
         -- Destroy ship if it was too strong else take it
         if score > totalScoreRequirement * 1.1 + 5 then
             ship:destroy()
+            if ship == spawnPointLeader then spawnPointLeader = nil end
         else
             table.insert(enemyList, ship)
             totalScoreRequirement = totalScoreRequirement - score
