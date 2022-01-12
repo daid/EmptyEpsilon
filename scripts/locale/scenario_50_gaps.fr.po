@@ -31,8 +31,6 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 89%>>\n"
-"\n"
 "À l'aide du Nautilus de classe \"Poseur de mines\", déployez des mines sur "
 "les voies spatiales qui pourraient être utilisées par les ennemis "
 "envahisseurs pour attaquer votre station.\n"
@@ -1518,7 +1516,7 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:2370 scripts/scenario_50_gaps.lua:2994
 msgctxt "minefield-comms"
 msgid "What is a minefield?"
-msgstr ""
+msgstr "Qu'est-ce qu'un champ de mines ?"
 
 #: scripts/scenario_50_gaps.lua:2371 scripts/scenario_50_gaps.lua:2995
 #, lua-format
@@ -1527,6 +1525,9 @@ msgid ""
 "For the automated sensors on station %s to register a minefield as completed "
 "across a gap, it must meet the following criteria:"
 msgstr ""
+"Afin que les capteurs automatisés de la station %s enregistrent un champ de "
+"mines comme terminé à travers une brèche, il doit répondre aux critères "
+"suivants :"
 
 #: scripts/scenario_50_gaps.lua:2372 scripts/scenario_50_gaps.lua:2996
 msgctxt "minefield-comms"
@@ -1534,6 +1535,8 @@ msgid ""
 "\n"
 "   1. Must contain at least 12 mines: Nautilus class standard load"
 msgstr ""
+"\n"
+"    1. Doit contenir au moins 12 mines : charge standard de classe Nautilus."
 
 #: scripts/scenario_50_gaps.lua:2373 scripts/scenario_50_gaps.lua:2997
 msgctxt "minefield-comms"
@@ -1541,6 +1544,9 @@ msgid ""
 "\n"
 "   2. Must be within a 1.5U radius of sector corner in gap"
 msgstr ""
+"\n"
+"    2. Doit se trouver dans un rayon de 1,5U max du coin des secteurs de la "
+"brèche."
 
 #: scripts/scenario_50_gaps.lua:2375 scripts/scenario_50_gaps.lua:2999
 msgctxt "minefield-comms"
@@ -1548,6 +1554,8 @@ msgid ""
 "\n"
 "   3. Must be centered: 6 on one side and 6 on the other"
 msgstr ""
+"\n"
+"    3. Doit être centré : 6 mines d'un côté et 6 de l'autre."
 
 #: scripts/scenario_50_gaps.lua:2378 scripts/scenario_50_gaps.lua:3002
 msgctxt "minefield-comms"
@@ -1555,11 +1563,14 @@ msgid ""
 "\n"
 "   4. Must be along 20U distance from station line connecting asteroids"
 msgstr ""
+"\n"
+"    4. Doit se trouver à une distance de 20U min de la ligne de la station "
+"reliant les astéroïdes."
 
 #: scripts/scenario_50_gaps.lua:2382 scripts/scenario_50_gaps.lua:3006
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the north gap?"
-msgstr ""
+msgstr "Que montrent les capteurs pour la brèche nord ?"
 
 #: scripts/scenario_50_gaps.lua:2384 scripts/scenario_50_gaps.lua:2404
 #: scripts/scenario_50_gaps.lua:2424 scripts/scenario_50_gaps.lua:2444
@@ -1568,14 +1579,14 @@ msgstr ""
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count within radius: %i"
-msgstr ""
+msgstr "Recensé à l'intérieur du rayon : %i"
 
 #: scripts/scenario_50_gaps.lua:2386 scripts/scenario_50_gaps.lua:2406
 #: scripts/scenario_50_gaps.lua:3010 scripts/scenario_50_gaps.lua:3030
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count near middle on the right: %i"
-msgstr ""
+msgstr "Recensé près du milieu à droite : %i"
 
 #: scripts/scenario_50_gaps.lua:2387 scripts/scenario_50_gaps.lua:2407
 #: scripts/scenario_50_gaps.lua:3011 scripts/scenario_50_gaps.lua:3031
@@ -1585,6 +1596,8 @@ msgid ""
 "\n"
 "Count near middle on the left: %i"
 msgstr ""
+"\n"
+"Recensé près du milieu à gauche : %i"
 
 #: scripts/scenario_50_gaps.lua:2388 scripts/scenario_50_gaps.lua:2408
 #: scripts/scenario_50_gaps.lua:3012 scripts/scenario_50_gaps.lua:3032
@@ -1594,6 +1607,8 @@ msgid ""
 "\n"
 "Count near asteroids on the left: %i"
 msgstr ""
+"\n"
+"Recensé près des astéroïdes à gauche : %i"
 
 #: scripts/scenario_50_gaps.lua:2389 scripts/scenario_50_gaps.lua:2409
 #: scripts/scenario_50_gaps.lua:3013 scripts/scenario_50_gaps.lua:3033
@@ -1603,6 +1618,8 @@ msgid ""
 "\n"
 "Count near asteroids on the right: %i"
 msgstr ""
+"\n"
+"Recensé près des astéroïdes à droite : %i"
 
 #: scripts/scenario_50_gaps.lua:2390 scripts/scenario_50_gaps.lua:2410
 #: scripts/scenario_50_gaps.lua:2430 scripts/scenario_50_gaps.lua:2450
@@ -1614,13 +1631,16 @@ msgid ""
 "\n"
 "You need three in each sensor scan area"
 msgstr ""
+"\n"
+"\n"
+"Vous avez besoin de 3 mines dans chaque zone de capteurs."
 
 #: scripts/scenario_50_gaps.lua:2392 scripts/scenario_50_gaps.lua:2412
 #: scripts/scenario_50_gaps.lua:3016 scripts/scenario_50_gaps.lua:3036
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count on the right: %i"
-msgstr ""
+msgstr "Recensé à droite : %i"
 
 #: scripts/scenario_50_gaps.lua:2393 scripts/scenario_50_gaps.lua:2413
 #: scripts/scenario_50_gaps.lua:3017 scripts/scenario_50_gaps.lua:3037
@@ -1630,6 +1650,8 @@ msgid ""
 "\n"
 "Count on the left: %i"
 msgstr ""
+"\n"
+"Recensé à gauche : %i"
 
 #: scripts/scenario_50_gaps.lua:2394 scripts/scenario_50_gaps.lua:2414
 #: scripts/scenario_50_gaps.lua:2434 scripts/scenario_50_gaps.lua:2454
@@ -1641,6 +1663,9 @@ msgid ""
 "\n"
 "You need six in each sensor scan area"
 msgstr ""
+"\n"
+"\n"
+"Vous avez besoin de 6 mines dans chaque zone de capteurs."
 
 #: scripts/scenario_50_gaps.lua:2396 scripts/scenario_50_gaps.lua:2416
 #: scripts/scenario_50_gaps.lua:2436 scripts/scenario_50_gaps.lua:2456
@@ -1652,6 +1677,8 @@ msgid ""
 "\n"
 "Sensors refresh every %i seconds"
 msgstr ""
+"\n"
+"Les capteurs s'actualisent toutes les %i secondes."
 
 #: scripts/scenario_50_gaps.lua:2398 scripts/scenario_50_gaps.lua:2418
 #: scripts/scenario_50_gaps.lua:2438 scripts/scenario_50_gaps.lua:2458
@@ -1685,19 +1712,19 @@ msgstr "Précédent"
 #: scripts/scenario_50_gaps.lua:2402 scripts/scenario_50_gaps.lua:3026
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the south gap?"
-msgstr ""
+msgstr "Que montrent les capteurs pour la brèche sud ?"
 
 #: scripts/scenario_50_gaps.lua:2422 scripts/scenario_50_gaps.lua:3046
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the east gap?"
-msgstr ""
+msgstr "Que montrent les capteurs pour la brèche est ?"
 
 #: scripts/scenario_50_gaps.lua:2426 scripts/scenario_50_gaps.lua:2446
 #: scripts/scenario_50_gaps.lua:3050 scripts/scenario_50_gaps.lua:3070
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count near middle below: %i"
-msgstr ""
+msgstr "Recensé près du centre en dessous : %i"
 
 #: scripts/scenario_50_gaps.lua:2427 scripts/scenario_50_gaps.lua:2447
 #: scripts/scenario_50_gaps.lua:3051 scripts/scenario_50_gaps.lua:3071
@@ -1707,6 +1734,8 @@ msgid ""
 "\n"
 "Count near middle above: %i"
 msgstr ""
+"\n"
+"Recensé près du centre au-dessus : %i"
 
 #: scripts/scenario_50_gaps.lua:2428 scripts/scenario_50_gaps.lua:2448
 #: scripts/scenario_50_gaps.lua:3052 scripts/scenario_50_gaps.lua:3072
@@ -1716,6 +1745,8 @@ msgid ""
 "\n"
 "Count near asteroids above: %i"
 msgstr ""
+"\n"
+"Recensé près des astéroïdes au-dessus : %i"
 
 #: scripts/scenario_50_gaps.lua:2429 scripts/scenario_50_gaps.lua:2449
 #: scripts/scenario_50_gaps.lua:3053 scripts/scenario_50_gaps.lua:3073
@@ -1725,12 +1756,14 @@ msgid ""
 "\n"
 "Count near asteroids below: %i"
 msgstr ""
+"\n"
+"Recensé près des astéroïdes en dessous : %i"
 
 #: scripts/scenario_50_gaps.lua:2432 scripts/scenario_50_gaps.lua:2452
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count below: %i"
-msgstr ""
+msgstr "Recensé en dessous : %i"
 
 #: scripts/scenario_50_gaps.lua:2433 scripts/scenario_50_gaps.lua:2453
 #, lua-format
@@ -1739,11 +1772,13 @@ msgid ""
 "\n"
 "Count above: %i"
 msgstr ""
+"\n"
+"Recensé au-dessus : %i"
 
 #: scripts/scenario_50_gaps.lua:2442 scripts/scenario_50_gaps.lua:3066
 msgctxt "minefield-comms"
 msgid "What do the sensors show for the west gap?"
-msgstr ""
+msgstr "Que montrent les capteurs pour la brèche ouest ?"
 
 #: scripts/scenario_50_gaps.lua:2471 scripts/scenario_50_gaps.lua:2487
 #, lua-format
@@ -1785,7 +1820,7 @@ msgstr "L'histoire de la station"
 #: scripts/scenario_50_gaps.lua:2513
 msgctxt "gossip-comms"
 msgid "Gossip"
-msgstr ""
+msgstr "Rumeurs"
 
 #: scripts/scenario_50_gaps.lua:2523
 msgctxt "trade-comms"
@@ -2299,28 +2334,28 @@ msgstr "   %14s: %2i, %3i\n"
 #: scripts/scenario_50_gaps.lua:2930
 msgctxt "helpfullWarning-comms"
 msgid "See any enemies in your area?"
-msgstr ""
+msgstr "Apercevez-vous des ennemis dans votre région ?"
 
 #: scripts/scenario_50_gaps.lua:2940
 #, lua-format
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see %i enemies within 30U"
-msgstr ""
+msgstr "Oui, nous comptons %i ennemis dans un rayon de 30U."
 
 #: scripts/scenario_50_gaps.lua:2942
 msgctxt "helpfullWarning-comms"
 msgid "Yes, we see one enemy within 30U"
-msgstr ""
+msgstr "Oui, nous observons 1 ennemi à moins de 30U."
 
 #: scripts/scenario_50_gaps.lua:2946
 msgctxt "helpfullWarning-comms"
 msgid "No enemies within 30U"
-msgstr ""
+msgstr "Aucun ennemi à moins de 30U."
 
 #: scripts/scenario_50_gaps.lua:2951
 msgctxt "helpfullWarning-comms"
 msgid "Not really"
-msgstr ""
+msgstr "Pas vraiment."
 
 #: scripts/scenario_50_gaps.lua:2956
 msgctxt "trade-comms"
@@ -2381,7 +2416,7 @@ msgstr "Informations générales sur la station"
 #, lua-format
 msgctxt "minefield-comms"
 msgid "Count above: %i"
-msgstr ""
+msgstr "Recensé au-dessus : %i"
 
 #: scripts/scenario_50_gaps.lua:3057 scripts/scenario_50_gaps.lua:3077
 #, lua-format
@@ -2390,6 +2425,8 @@ msgid ""
 "\n"
 "Count below: %i"
 msgstr ""
+"\n"
+"Recensé en dessous : %i"
 
 #: scripts/scenario_50_gaps.lua:3124
 #, lua-format
@@ -2781,12 +2818,12 @@ msgstr ""
 #: scripts/scenario_50_gaps.lua:3862
 msgctxt "msgEngineer"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_50_gaps.lua:3866
 msgctxt "msgEngineer+"
 msgid "One of your repair crew has perished"
-msgstr ""
+msgstr "Un de vos réparateurs a péri."
 
 #: scripts/scenario_50_gaps.lua:3875
 #, lua-format
@@ -2795,17 +2832,23 @@ msgid ""
 "Since %s is so isolated and so close to enemy territory, we need you to lay "
 "a minefield across each gap in the surrounding asteroids"
 msgstr ""
+"%s se trouve très isolé et très proche du territoire ennemi. Votre mission "
+"est de poser des champs de mines au travers de chaque passage se trouvant "
+"dans les astéroïdes environnants afin de les sécuriser et de protéger la "
+"station."
 
 #: scripts/scenario_50_gaps.lua:3876
 msgctxt "orders-comms"
 msgid "Lay minefield across each gap in surrounding asteroids."
 msgstr ""
+"Poser un champ de mines au travers de chaque brèche dans les astéroïdes "
+"environnants."
 
 #: scripts/scenario_50_gaps.lua:3894
 #, lua-format
 msgctxt "minefield-shiplog"
 msgid "Congratulations, You've closed the gap at heading 180 from %s"
-msgstr ""
+msgstr "Félicitations, vous avez sécurisé la brèche au cap 180 de %s."
 
 #: scripts/scenario_50_gaps.lua:3895
 msgid " South gap closed."
@@ -2815,7 +2858,7 @@ msgstr "Brèche sud sécurisée."
 #, lua-format
 msgctxt "minefield-shiplog"
 msgid "Congratulations, You've closed the gap at heading 0 from %s"
-msgstr ""
+msgstr "Félicitations, vous avez sécurisé la brèche au cap 0 de %s."
 
 #: scripts/scenario_50_gaps.lua:3906
 msgid " North gap closed."
@@ -2825,7 +2868,7 @@ msgstr "Brèche nord sécurisée."
 #, lua-format
 msgctxt "minefield-shiplog"
 msgid "Congratulations, You've closed the gap at heading 270 from %s"
-msgstr ""
+msgstr "Félicitations, vous avez sécurisé la brèche au cap 270 de %s."
 
 #: scripts/scenario_50_gaps.lua:3917
 msgid " West gap closed."
@@ -2835,7 +2878,7 @@ msgstr "Brèche ouest sécurisée."
 #, lua-format
 msgctxt "minefield-shiplog"
 msgid "Congratulations, You've closed the gap at heading 90 from %s"
-msgstr ""
+msgstr "Félicitations, vous avez sécurisé la brèche au cap 90 de %s."
 
 #: scripts/scenario_50_gaps.lua:3928
 msgid " East gap closed."
@@ -2849,12 +2892,15 @@ msgid ""
 "bases surrounding us while keeping %s alive. You'll find them straight out "
 "from the gaps"
 msgstr ""
+"Vous avez sécurisé les brèches. Maintenant pour la partie Chimérique : vous "
+"devez détruire toutes les bases ennemies qui vous entourent tout en gardant "
+"%s en vie. Vous les trouverez en passant par les brèches."
 
 #: scripts/scenario_50_gaps.lua:3939
 #, lua-format
 msgctxt "orders-comms"
 msgid "Protect %s. Destroy enemy bases straight out from gaps"
-msgstr ""
+msgstr "Protéger %s. Détruire les bases ennemies en sortant par les brèches."
 
 #~ msgid "Waves"
 #~ msgstr "Vagues"
