@@ -731,5 +731,5 @@ include(CPack)
 
 if(UNIX AND NOT APPLE)
   install(FILES EmptyEpsilon.desktop DESTINATION "share/applications")
-  install(FILES logo.png DESTINATION "share/icons" RENAME "EmptyEpsilon.png")
+  install(FILES logo.png DESTINATION "share/icons/hicolor/1024x1024/apps" RENAME "EmptyEpsilon.png")
 endif()
