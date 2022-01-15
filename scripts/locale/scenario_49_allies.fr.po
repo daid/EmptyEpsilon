@@ -32,7 +32,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 76%>>\n"
+"<<TRADUCTION EN COURS : 86%>>\n"
 "\n"
 "Les Arléniens sont vos alliés.\n"
 "Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
@@ -122,7 +122,7 @@ msgstr "Exploitation minière"
 #: scripts/scenario_49_allies.lua:66
 msgctxt "buttonGM"
 msgid "Admiral"
-msgstr "Amiral"
+msgstr "Amiral Koshenz"
 
 #: scripts/scenario_49_allies.lua:68
 msgctxt "buttonGM"
@@ -1824,7 +1824,7 @@ msgid ""
 "[Dr. Thultris closes her door]"
 msgstr ""
 "Un amiral Arlénien ? Qui s'en soucie !\n"
-"[Dr. Thultris ferme sa porte]"
+"[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3752
 msgctxt "doctor-comms"
@@ -1832,7 +1832,7 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Go away, I'm busy"
 msgstr ""
-"[Dr. Thultris derrière la porte fermée]\n"
+"[Dr. Thultris à travers sa porte]\n"
 "Allez-vous en, je suis occupé."
 
 #: scripts/scenario_49_allies.lua:3756
@@ -1902,6 +1902,8 @@ msgid ""
 "Diplomacy and military matters bore me\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"La diplomatie et les affaires militaires m'ennuient.\n"
+"[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3790
 msgctxt "doctor-comms"
@@ -1909,11 +1911,14 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "That's nice. Leave me alone"
 msgstr ""
+"[Dr. Thultris derrière la porte fermée]\n"
+"C'est bien. Laissez-moi tranquille."
 
 #: scripts/scenario_49_allies.lua:3794
 msgctxt "doctor-comms"
 msgid "Arlenian with an unusual disease is near death"
 msgstr ""
+"Un Arlénien est atteint d'une maladie inhabituelle et est proche de la mort."
 
 #: scripts/scenario_49_allies.lua:3796
 msgctxt "doctor-comms"
@@ -1921,11 +1926,13 @@ msgid ""
 "[Dr. Thultris opens her door]\n"
 "Why come to me?"
 msgstr ""
+"[Dr. Thultris ouvre sa porte]\n"
+"Pourquoi venir me voir moi ?"
 
 #: scripts/scenario_49_allies.lua:3807
 msgctxt "doctor-comms"
 msgid "The Arlenian medical team referred us to you"
-msgstr ""
+msgstr "L'équipe médicale Arlénienne nous a envoyé vers vous."
 
 #: scripts/scenario_49_allies.lua:3809
 msgctxt "doctor-comms"
@@ -1934,6 +1941,11 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] C'est toujours agréable d'être reconnue en dehors de l'espace "
+"humain.\n"
+"\n"
+"Lorsque vous revenez tous les deux au vaisseau, vous lui expliquez la "
+"situation."
 
 #: scripts/scenario_49_allies.lua:3813
 msgctxt "doctor-comms"
@@ -1941,11 +1953,13 @@ msgid ""
 "What do the Arlenians know?\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Que savent les Arléniens ?\n"
+"[Dr. Thultris ferme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3817
 msgctxt "doctor-comms"
 msgid "Your research accurately describes the symptoms"
-msgstr ""
+msgstr "Vos recherches décrivent avec précision les symptômes."
 
 #: scripts/scenario_49_allies.lua:3819
 msgctxt "doctor-comms"
@@ -1954,6 +1968,10 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] Je voudrais voir le patient.\n"
+"\n"
+"Lorsque vous revenez tous les deux au vaisseau, vous lui expliquez la "
+"situation."
 
 #: scripts/scenario_49_allies.lua:3823
 msgctxt "doctor-comms"
@@ -1961,6 +1979,8 @@ msgid ""
 "Coincidental, I'm sure\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Coïncidence, j'en suis sûr.\n"
+"[Dr. Thultris vous claque sa porte au nez]"
 
 #: scripts/scenario_49_allies.lua:3828
 msgctxt "doctor-comms"
@@ -1968,11 +1988,13 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "My condolences. Goodbye"
 msgstr ""
+"[Dr. Thultris derrière sa porte fermée]\n"
+"Mes condoléances. Au revoir."
 
 #: scripts/scenario_49_allies.lua:3834
 msgctxt "doctor-comms"
 msgid "I am an admirer of your research and have questions"
-msgstr ""
+msgstr "Je suis un admirateur de vos recherches et j'aurai des questions."
 
 #: scripts/scenario_49_allies.lua:3835
 msgctxt "doctor-comms"
@@ -1980,11 +2002,13 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Really? What is it about my research you admire?"
 msgstr ""
+"[Dr. Thultris derrière la porte de ses quartiers]\n"
+"Ah bon ? Et qu'est-ce que vous admirez dans mes recherches ?"
 
 #: scripts/scenario_49_allies.lua:3836
 msgctxt "doctor-comms"
 msgid "The depth of your most recent publication"
-msgstr ""
+msgstr "La profondeur de votre publication la plus récente."
 
 #: scripts/scenario_49_allies.lua:3838
 msgctxt "doctor-comms"
@@ -1992,11 +2016,13 @@ msgid ""
 "[Dr. Thultris opens her door]\n"
 "Why does this research interest you?"
 msgstr ""
+"[Dr. Thultris ouvre sa porte]\n"
+"Pourquoi cette recherche vous intéresse-t-elle ?"
 
 #: scripts/scenario_49_allies.lua:3849
 msgctxt "doctor-comms"
 msgid "I know of a patient that might benefit"
-msgstr ""
+msgstr "Je connais un patient qui pourrait en bénéficier."
 
 #: scripts/scenario_49_allies.lua:3851
 msgctxt "doctor-comms"
@@ -2005,6 +2031,9 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] C'est rare. Puis-je voir le patient ?\n"
+"\n"
+"En revenant tous les deux au vaisseau, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3855
 msgctxt "doctor-comms"
@@ -2012,11 +2041,13 @@ msgid ""
 "My research is unlikely to apply\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Ma recherche est peu susceptible de s'appliquer.\n"
+"[Dr. Thultris ferme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3859
 msgctxt "doctor-comms"
 msgid "Your research could help a sick Arlenian Admiral"
-msgstr ""
+msgstr "Vos recherches pourraient aider un amiral Arlénien très malade."
 
 #: scripts/scenario_49_allies.lua:3861
 msgctxt "doctor-comms"
@@ -2025,6 +2056,10 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] J'aimerais utiliser mes recherches dans le contexte "
+"Arlénien.\n"
+"\n"
+"En revenant tous les deux au vaisseau, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3865
 msgctxt "doctor-comms"
@@ -2032,6 +2067,8 @@ msgid ""
 "I don't think it applies to Arlenians\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Je ne pense pas que cela puisse s'appliquer aux Arléniens. Je suis désolée.\n"
+"[Dr. Thultris ferme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3870
 msgctxt "doctor-comms"
@@ -2039,11 +2076,13 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Publish a review and we'll talk"
 msgstr ""
+"[Dr. Thultris derrière la porte de ses quartiers]\n"
+"Publiez un avis et nous en reparlerons."
 
 #: scripts/scenario_49_allies.lua:3874
 msgctxt "doctor-comms"
 msgid "The breadth of knowledge you demonstrate"
-msgstr ""
+msgstr "L'étendue des connaissances dont vous faites preuve."
 
 #: scripts/scenario_49_allies.lua:3876
 msgctxt "doctor-comms"
@@ -2051,11 +2090,13 @@ msgid ""
 "[Dr. Thultris opens her door]\n"
 "I doubt that. Why are you *really* here?"
 msgstr ""
+"[Dr. Thultris ouvre sa porte]\n"
+"J'en doute. Pourquoi êtes-vous *vraiment* ici ?"
 
 #: scripts/scenario_49_allies.lua:3887
 msgctxt "doctor-comms"
 msgid "We need your help with a dying Arlenian Admiral"
-msgstr ""
+msgstr "Nous avons besoin de votre aide avec un amiral Arlénien mourant."
 
 #: scripts/scenario_49_allies.lua:3889 scripts/scenario_49_allies.lua:3927
 msgctxt "doctor-comms"
@@ -2064,6 +2105,10 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] Pourquoi ne l'avez-vous pas dit plus tôt ? Bien sûr, je vais "
+"aider.\n"
+"\n"
+"En revenant tous les deux au vaisseau, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3893
 msgctxt "doctor-comms"
@@ -2071,11 +2116,15 @@ msgid ""
 "Your first story was better\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Votre premier mensonge était meilleur.\n"
+"[Dr. Thultris claque sa porte]"
 
 #: scripts/scenario_49_allies.lua:3897
 msgctxt "doctor-comms"
 msgid "An Arlenian medical team thinks you can help a dying patient"
 msgstr ""
+"Une équipe médicale Arlénienne pense que vous pouvez aider un patient "
+"mourant."
 
 #: scripts/scenario_49_allies.lua:3899
 msgctxt "doctor-comms"
@@ -2084,6 +2133,9 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] Ca me semble raisonnable. Allons-y.\n"
+"\n"
+"En revenant tous les deux au vaisseau, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3903
 msgctxt "doctor-comms"
@@ -2091,6 +2143,8 @@ msgid ""
 "I'm not concerned with Arlenian patients\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Les patients Arléniens ne sont pas mon problème.\n"
+"[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3908
 msgctxt "doctor-comms"
@@ -2098,11 +2152,14 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Faint praise insults me. Go away"
 msgstr ""
+"[Dr. Thultris à travers la porte de ses quartiers]\n"
+"Vos compliments hypocrites sont une insulte à mon intelligence. Allez-vous-"
+"en."
 
 #: scripts/scenario_49_allies.lua:3912
 msgctxt "doctor-comms"
 msgid "Your superb publication presentation"
-msgstr ""
+msgstr "Votre superbe présentation de publication."
 
 #: scripts/scenario_49_allies.lua:3914
 msgctxt "doctor-comms"
@@ -2110,11 +2167,13 @@ msgid ""
 "[Dr. Thultris opens her door]\n"
 "Ha! Is that why you're here?"
 msgstr ""
+"[Dr. Thultris ouvre sa porte]\n"
+"Ha ! C'est pour ça que vous êtes là ?"
 
 #: scripts/scenario_49_allies.lua:3925
 msgctxt "doctor-comms"
 msgid "Not really. We need your help"
-msgstr ""
+msgstr "Pas vraiment. Nous avons besoin de votre aide."
 
 #: scripts/scenario_49_allies.lua:3931
 msgctxt "doctor-comms"
@@ -2122,11 +2181,13 @@ msgid ""
 "I'm sorry, but I'm too busy right now\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Je suis désolé, mais je suis trop occupée en ce moment.\n"
+"[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3935
 msgctxt "doctor-comms"
 msgid "Of course! I've got a case study for you to examine"
-msgstr ""
+msgstr "Bien sûr ! J'ai un cas d'école pour vous à examiner."
 
 #: scripts/scenario_49_allies.lua:3937
 msgctxt "doctor-comms"
@@ -2135,6 +2196,9 @@ msgid ""
 "\n"
 "As you both return, you explain the situation to her"
 msgstr ""
+"[Dr. Thultris] Une application pour mes recherches ?! Bien, bien !\n"
+"\n"
+"En rejoignant le vaisseau avec le docteur, vous lui expliquez la situation."
 
 #: scripts/scenario_49_allies.lua:3941
 msgctxt "doctor-comms"
@@ -3627,11 +3691,26 @@ msgid ""
 "her aid if applicable. Do it quickly, Admiral Koshenz likely does not have "
 "long to live"
 msgstr ""
+"Nos alliés, les Arléniens, nous informent que leur amiral Koshenz a "
+"contracté une grave maladie. Les médecins Arléniens ont lutté pendant des "
+"jours contre cette maladie mais avec très peu de résultats. Ils craignent "
+"que l'amiral Koshenz n'ait plus longtemps à vivre. Ils ont demandé l'aide de "
+"n'importe quel chercheur humain sur cette maladie Arlénienne. Un membre de "
+"leur équipe médicale a fait référence au Dr Morrigan Thultris qui a "
+"récemment publié des informations concernant une maladie qui partage des "
+"symptômes et des caractéristiques similaires à la maladie de l'amiral. Le Dr "
+"Thultris n'apparaît pas sur notre registre militaire, ce qui implique "
+"qu'elle travaille dans un isolement relatif.\n"
+"Fouillez les stations de la marine humaine, trouvez-la et demandez son aide, "
+"le cas échéant.\n"
+"Faites-le vite, l'amiral Koshenz n'a plus longtemps à vivre."
 
 #: scripts/scenario_49_allies.lua:6188
 msgctxt "doctorOrders-comms"
 msgid "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
 msgstr ""
+"Trouver le Dr Thultris afin d'obtenir son aide auprès de l'amiral Arlénien "
+"Koshenz."
 
 #: scripts/scenario_49_allies.lua:6212
 #, lua-format
@@ -3642,7 +3721,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:6228
 msgctxt "doctor-msgMainscreen"
 msgid "Arlenian Admiral Koshenz dies"
-msgstr ""
+msgstr "Décès de l'amiral Arlénien Koshenz."
 
 #: scripts/scenario_49_allies.lua:6238
 msgctxt "doctor-shipLog"
@@ -3669,7 +3748,7 @@ msgstr ""
 #, lua-format
 msgctxt "doctorOrders-comms"
 msgid "Take Dr. Thultris to %s in %s"
-msgstr ""
+msgstr "Emmener le Dr Thultris à %s en %s."
 
 #: scripts/scenario_49_allies.lua:6284
 msgctxt "doctor-shipLog"
@@ -3679,7 +3758,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:6302
 msgctxt "doctor-tabScience&Operations"
 msgid "Koshenz Death:"
-msgstr ""
+msgstr "Décès de l'amiral :"
 
 #: scripts/scenario_49_allies.lua:6331
 msgctxt "BespinGoal-shipLog"
