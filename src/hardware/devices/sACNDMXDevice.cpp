@@ -19,6 +19,7 @@ StreamingAcnDMXDevice::StreamingAcnDMXDevice()
     memset(source_name, 0, sizeof(source_name));
     strcpy((char*)source_name, "EmptyEpsilon");
     run_thread = false;
+    socket.bind(acn_port - 1);
 }
 
 StreamingAcnDMXDevice::~StreamingAcnDMXDevice()
