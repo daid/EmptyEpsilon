@@ -67,7 +67,7 @@ void PlayerInfo::reset()
 
 bool PlayerInfo::isOnlyMainScreen(int monitor_index)
 {
-    if (main_screen & (1 << monitor_index))
+    if (!(main_screen & (1 << monitor_index)))
         return false;
     for(int n=0; n<max_crew_positions; n++)
         if (crew_position[n] & (1 << monitor_index))

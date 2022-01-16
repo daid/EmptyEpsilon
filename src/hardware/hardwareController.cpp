@@ -148,10 +148,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 for(std::pair<string, string> item : settings)
                 {
                     std::vector<string> values = item.second.split(",");
-                    if (values.size() > idx)
-                        per_channel_settings[item.first] = values[idx].strip();
-                    else
-                        per_channel_settings[item.first] = values[values.size() - 1].strip();
+                    per_channel_settings[item.first] = values[idx % values.size()].strip();
                 }
                 createNewHardwareMappingState(channel_numbers[idx], per_channel_settings);
             }
@@ -169,10 +166,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 for(std::pair<string, string> item : settings)
                 {
                     std::vector<string> values = item.second.split(",");
-                    if (values.size() > idx)
-                        per_channel_settings[item.first] = values[idx];
-                    else
-                        per_channel_settings[item.first] = values[values.size() - 1];
+                    per_channel_settings[item.first] = values[idx % values.size()];
                 }
                 createNewHardwareMappingEvent(channel_numbers[idx], per_channel_settings);
             }

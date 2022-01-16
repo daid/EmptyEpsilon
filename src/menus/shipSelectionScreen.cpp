@@ -430,6 +430,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         my_player_info->commandSetMainScreen(window_index, value);
         unselectSingleOptions();
     });
+    main_screen_button->setValue(my_player_info->main_screen & (1 << window_index));
     main_screen_button->setSize(GuiElement::GuiSizeMax, 50);
     auto create_crew_position_button = [this](GuiElement* layout, int n) {
         auto button = new GuiToggleButton(layout, "", getCrewPositionName(ECrewPosition(n)), [this, n](bool value){
@@ -532,10 +533,18 @@ void CrewPositionSelection::onUpdate()
 void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
 {
     for(int n = 0; n < max_crew_positions; n++)
+    {
         if (crew_position_button[n] != button)
+        {
             crew_position_button[n]->setValue(false);
+            my_player_info->commandSetCrewPosition(window_index, ECrewPosition(n), false);
+        }
+    }
     if (main_screen_button != button)
+    {
         main_screen_button->setValue(false);
+        my_player_info->commandSetMainScreen(window_index, false);
+    }
     if (main_screen_controls_button != button)
         main_screen_controls_button->setValue(false);
     if (window_button != button)
