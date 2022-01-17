@@ -81,7 +81,10 @@ void PlayerInfo::commandSetCrewPosition(int monitor_index, ECrewPosition positio
     packet << CMD_UPDATE_CREW_POSITION << uint32_t(monitor_index) << int32_t(position) << active;
     sendClientCommand(packet);
 
-    crew_position[position] = active;
+    if (active)
+        crew_position[position] |= (1 << monitor_index);
+    else
+        crew_position[position] &=~(1 << monitor_index);
 }
 
 void PlayerInfo::commandSetShipId(int32_t id)
@@ -97,7 +100,10 @@ void PlayerInfo::commandSetMainScreen(int monitor_index, bool enabled)
     packet << CMD_UPDATE_MAIN_SCREEN << uint32_t(monitor_index) << enabled;
     sendClientCommand(packet);
 
-    main_screen = enabled;
+    if (enabled)
+        main_screen |= (1 << monitor_index);
+    else
+        main_screen &=~(1 << monitor_index);
 }
 
 void PlayerInfo::commandSetMainScreenControl(int monitor_index, bool control)
@@ -106,7 +112,10 @@ void PlayerInfo::commandSetMainScreenControl(int monitor_index, bool control)
     packet << CMD_UPDATE_MAIN_SCREEN_CONTROL << uint32_t(monitor_index) << control;
     sendClientCommand(packet);
 
-    main_screen_control = control;
+    if (control)
+        main_screen_control |= (1 << monitor_index);
+    else
+        main_screen_control &=~(1 << monitor_index);
 }
 
 void PlayerInfo::commandSetName(const string& name)
