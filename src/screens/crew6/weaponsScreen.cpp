@@ -130,6 +130,8 @@ void WeaponsScreen::onUpdate()
             bool current_found = false;
             foreach(SpaceObject, obj, space_object_list)
             {
+                if (obj == my_spaceship)
+                    continue;
                 if (obj == targets.get())
                 {
                     current_found = true;
