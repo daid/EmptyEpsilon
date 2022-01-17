@@ -249,6 +249,10 @@ glm::vec2 sectorToXY(string sector)
     constexpr float sector_size = 20000;
     int x, y, intpart;
 
+    if(sector.length() < 2){
+        return glm::vec2(0,0);
+    }
+
     // Y axis is complicated
     if(sector[0] >= char('A') && sector[1] >= char('A')){
         // Case with two letters
