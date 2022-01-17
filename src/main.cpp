@@ -270,11 +270,16 @@ int main(int argc, char** argv)
                 LOG(WARNING, "GL Debug output requested but not available on this system.");
         }
 
-        foreach(Window, window, windows) {
+        for(size_t n=0; n<windows.size(); n++)
+        {
+            P<Window> window = windows[n];
+            string postfix = "";
+            if (n > 0)
+                postfix = " - " + string(int(n));
             if (PreferencesManager::get("instance_name") != "")
-                window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name"));
+                window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name") + postfix);
             else
-                window->setTitle("EmptyEpsilon");
+                window->setTitle("EmptyEpsilon" + postfix);
         }
 
         if (gl::isAvailable())
