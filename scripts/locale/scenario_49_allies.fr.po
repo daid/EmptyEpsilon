@@ -32,7 +32,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 86%>>\n"
+"<<TRADUCTION EN COURS : 90%>>\n"
 "\n"
 "Les Arléniens sont vos alliés.\n"
 "Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
@@ -127,7 +127,7 @@ msgstr "Amiral Koshenz"
 #: scripts/scenario_49_allies.lua:68
 msgctxt "buttonGM"
 msgid "Doomsday"
-msgstr "Le jugement dernier"
+msgstr "Arme apocalyptique"
 
 #: scripts/scenario_49_allies.lua:408
 msgctxt "gossip-comms"
@@ -1647,27 +1647,31 @@ msgstr "Rumeurs"
 #: scripts/scenario_49_allies.lua:3695 scripts/scenario_49_allies.lua:4429
 msgctxt "doomsday-comms"
 msgid "Tell me about Gregory Unruh"
-msgstr ""
+msgstr "Parlez-moi de Gregory Unruh."
 
 #: scripts/scenario_49_allies.lua:3696
 msgctxt "doomsday-comms"
 msgid "He's a retired scientist here. He's on C deck if you'd like to visit"
 msgstr ""
+"Eh bien, c'est un scientifique à la retraite ici. Ses quartiers se trouvent "
+"sur le pont C si vous souhaitez le rencontrer."
 
 #: scripts/scenario_49_allies.lua:3697
 msgctxt "doomsday-comms"
 msgid "Visit Gregory Unruh on C deck"
-msgstr ""
+msgstr "Rendre visite à Gregory Unruh sur le pont C."
 
 #: scripts/scenario_49_allies.lua:3698
 msgctxt "doomsday-comms"
 msgid "[Gregory Unruh] What can I do for you?"
-msgstr ""
+msgstr "[Gregory Unruh] Que puis-je faire pour vous ?"
 
 #: scripts/scenario_49_allies.lua:3699
 msgctxt "doomsday-comms"
 msgid "We need your plans for a doomsday device defense mechanism"
 msgstr ""
+"Nous avons besoin de vos plans pour construire un système de défense contre "
+"une arme apocalyptique."
 
 #: scripts/scenario_49_allies.lua:3700
 msgctxt "doomsday-comms"
@@ -1676,6 +1680,9 @@ msgid ""
 "prototype along with the plans. You'll notice that certain components are "
 "still required."
 msgstr ""
+"Ah, je vois que quelqu'un prend mes recherches au sérieux. Voici mon "
+"prototype incomplet accompagné des plans. Vous remarquerez que certains "
+"composants sont encore requis."
 
 #: scripts/scenario_49_allies.lua:3710 scripts/scenario_49_allies.lua:4439
 msgctxt "doctor-comms"
@@ -1698,7 +1705,7 @@ msgid ""
 "She won't come to the communications nexus, but you may visit her in her "
 "quarters"
 msgstr ""
-"Elle ne viendra pas au rapport de communication, mais vous pouvez lui rendre "
+"Elle ne viendra pas au poste de communication, mais vous pouvez lui rendre "
 "visite dans ses quartiers."
 
 #: scripts/scenario_49_allies.lua:3714
@@ -2206,6 +2213,8 @@ msgid ""
 "Sounds interesting, but not right now, thanks\n"
 "[Dr. Thultris closes her door]"
 msgstr ""
+"Cela semble intéressant, mais pas pour le moment, merci.\n"
+"[Dr. Thultris referme sa porte]"
 
 #: scripts/scenario_49_allies.lua:3946
 msgctxt "doctor-comms"
@@ -2213,6 +2222,8 @@ msgid ""
 "[Dr. Thultris behind closed quarters door]\n"
 "Get a writing advisor and get out of here"
 msgstr ""
+"[Dr. Thultris à travers la porte de ses quartiers]\n"
+"Prenez un conseiller en rédaction et sortez d'ici."
 
 #: scripts/scenario_49_allies.lua:3961 scripts/scenario_49_allies.lua:4453
 #, lua-format
@@ -2867,12 +2878,12 @@ msgstr "De quel genre d'informations avez-vous besoin ?"
 #: scripts/scenario_49_allies.lua:4430
 msgctxt "doomsday-comms"
 msgid "He's got nice retirement quarters here"
-msgstr ""
+msgstr "Il y a de beaux quartiers de retraite ici."
 
 #: scripts/scenario_49_allies.lua:4431
 msgctxt "doomsday-comms"
 msgid "May we speak with him?"
-msgstr ""
+msgstr "Pouvons-nous lui parler ?"
 
 #: scripts/scenario_49_allies.lua:4432
 msgctxt "doomsday-comms"
@@ -2880,16 +2891,19 @@ msgid ""
 "He won't talk with anyone from the Human Navy. He's still bitter over early "
 "retirement. You'll need to visit in person"
 msgstr ""
+"Il ne parlera à personne de la marine humaine. Il est toujours amer au sujet "
+"de sa retraite anticipée. Vous devrez vous rendre sur place en personne si "
+"vous tenez tant à lui parler."
 
 #: scripts/scenario_49_allies.lua:4440
 msgctxt "doctor-comms"
 msgid "She does research here"
-msgstr ""
+msgstr "Elle effectue des recherches ici."
 
 #: scripts/scenario_49_allies.lua:4441
 msgctxt "doctor-comms"
 msgid "We need her skills. May I speak with her?"
-msgstr ""
+msgstr "Nous avons besoin de ses compétences. Puis-je lui parler ?"
 
 #: scripts/scenario_49_allies.lua:4442
 msgctxt "doctor-comms"
@@ -2899,11 +2913,16 @@ msgid ""
 "contacts she will respond to and you are not on that list. If you wish to "
 "speak with her, you will need to dock and visit in person"
 msgstr ""
+"Elle refuse de venir au poste de communication, sauf à ses conditions. Cela "
+"signifie généralement uniquement les communications sortantes. Il y a une "
+"très courte liste de contacts auxquels elle répondra et vous n'êtes pas sur "
+"cette liste. Si vous souhaitez lui parler, vous devrez accoster et lui "
+"rendre visite en personne."
 
 #: scripts/scenario_49_allies.lua:4443
 msgctxt "doctor-comms"
 msgid "The Arlenian Admiral is critically ill and she could help"
-msgstr ""
+msgstr "L'amiral Arlénien est gravement malade et elle pourrait aider."
 
 #: scripts/scenario_49_allies.lua:4444
 msgctxt "doctor-comms"
@@ -2914,6 +2933,12 @@ msgid ""
 "few days to realize everyone else was dead. You really will need to dock to "
 "talk to her"
 msgstr ""
+"Il pourrait y avoir une peste mortelle couvrant tout l'espace humain et "
+"Arlénien qu'elle resterait dans ses quartiers pour s'occuper de ses "
+"recherches jusqu'à ce que la peste détruise tous les autres membres du "
+"personnel de la station. Alors mêmes, cela pourrait lui prendre quelques "
+"jours encore pour réaliser que tout le monde est mort. Vous aurez vraiment "
+"besoin d'accoster pour lui parler."
 
 #: scripts/scenario_49_allies.lua:4488
 msgctxt "ammo-comms"
@@ -3614,17 +3639,28 @@ msgid ""
 "possibility, but we did not take him seriously. He was working on a defense "
 "mechanism. Find professor Unruh and get the plans for his defense mechanism"
 msgstr ""
+"Nos services de renseignement nous signalent que les Éxuaris sont sur le "
+"point de finaliser un système d'arme \"apocalyptique\". Les Nukes seraient "
+"des jouets à coté.\n"
+"Gregory Unruh, un de nos anciens scientifiques, nous avait prévenus de cette "
+"possibilité, mais nous ne l'avions pas pris au sérieux. Il travaillait sur "
+"un mécanisme de défense quand nous l'avons mis en retraite forcée.\n"
+"Trouvez le professeur Unruh le plus rapidement possible et obtenez les plans "
+"de son mécanisme de défense.\n"
+"Ne trainez pas, il en va de notre survie !"
 
 #: scripts/scenario_49_allies.lua:5847
 msgctxt "doomsdayOrders-comms"
 msgid "Find professor Unruh for doomsday defense mechanism plans"
 msgstr ""
+"Trouver le professeur Unruh pour récupérer les plans de son mécanisme de "
+"défense contre l'arme apocalyptique."
 
 #: scripts/scenario_49_allies.lua:5873
 #, lua-format
 msgctxt "doomsday-comms"
 msgid "Gregory Unruh resides on station %s"
-msgstr ""
+msgstr "Gregory Unruh réside à la station %s."
 
 #: scripts/scenario_49_allies.lua:5947
 #, lua-format
@@ -3633,18 +3669,23 @@ msgid ""
 "Intelligence estimates %i minutes remain before the Exuari deploy the "
 "doomsday device. Exuari and Kraylors both seem to be on a pillaging rampage"
 msgstr ""
+"Les services de renseignement estiment qu'il reste environ %i minutes avant "
+"que les Exuari ne déploient l'appareil apocalyptique. Les Éxuaris et les "
+"Kraylors semblent tous deux piller la région massivement."
 
 #: scripts/scenario_49_allies.lua:5954
 #, lua-format
 msgctxt "doomsdayOrders-comms"
 msgid "Get %s, %s and %s to build doomsday defense mechanism"
 msgstr ""
+"Obtenir %s, %s et %s pour finaliser le mécanisme de défense contre l'arme "
+"apocalyptique."
 
 #: scripts/scenario_49_allies.lua:5960
 #, lua-format
 msgctxt "doomsday-shipLog"
 msgid "The instructions list %s, %s and %s as necessary components"
-msgstr ""
+msgstr "Les instructions indiquent %s, %s et %s comme composants nécessaires."
 
 #: scripts/scenario_49_allies.lua:5970
 #, lua-format
@@ -3653,6 +3694,8 @@ msgid ""
 "Further inspection of Gregory Unruh's plans reveal notes in the margin: %s "
 "on %s, %s on %s, %s on %s"
 msgstr ""
+"Une inspection plus approfondie des plans de Gregory Unruh révèle des notes "
+"dans la marge : %s sur %s, %s sur %s, %s sur %s."
 
 #: scripts/scenario_49_allies.lua:5999
 msgctxt "doomsday-shipLog"
@@ -3660,21 +3703,24 @@ msgid ""
 "With all three components obtained, Engineering and Science quickly complete "
 "and deploy the doomsday device defense mechanism"
 msgstr ""
+"Avec les trois composants ainsi récupérés, l'ingénierie et la science "
+"finalisent et déploient rapidement le système de défense contre l'arme "
+"apocalyptique."
 
 #: scripts/scenario_49_allies.lua:6051 scripts/scenario_49_allies.lua:6057
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device:"
-msgstr ""
+msgstr "Arme apocalyptique :"
 
 #: scripts/scenario_49_allies.lua:6053
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device Built"
-msgstr ""
+msgstr "Arme apocalyptique activée"
 
 #: scripts/scenario_49_allies.lua:6089
 msgctxt "doomsday-msgMainscreen"
 msgid "All human stations destroyed"
-msgstr ""
+msgstr "Toutes les stations humaines détruites"
 
 #: scripts/scenario_49_allies.lua:6185
 msgctxt "doctorGoal-shipLog"
@@ -3716,7 +3762,7 @@ msgstr ""
 #, lua-format
 msgctxt "doctor-comms"
 msgid "Dr. Thultris resides on station %s"
-msgstr ""
+msgstr "Le Dr Thultris réside à la station %s."
 
 #: scripts/scenario_49_allies.lua:6228
 msgctxt "doctor-msgMainscreen"
@@ -3729,6 +3775,8 @@ msgid ""
 "The Arlenians say that they think the admiral has less than three minutes to "
 "live"
 msgstr ""
+"Les Arléniens disent qu'ils pensent que l'amiral a moins de 3 minutes à "
+"vivre."
 
 #: scripts/scenario_49_allies.lua:6256
 #, lua-format
@@ -3737,12 +3785,14 @@ msgid ""
 "The Kraylors seem to have discovered the location of Admiral Koshenz. We "
 "detect Kraylor ships en route to %s"
 msgstr ""
+"Les Kraylors semblent avoir découvert l'emplacement de l'Amiral Koshenz. "
+"Nous détectons des navires Kraylor en route vers %s."
 
 #: scripts/scenario_49_allies.lua:6274
 #, lua-format
 msgctxt "doctor-shipLog"
 msgid "Admiral Koshenz is on %s in %s"
-msgstr ""
+msgstr "L'amiral Koshenz se trouve sur %s en %s."
 
 #: scripts/scenario_49_allies.lua:6277
 #, lua-format
@@ -3754,6 +3804,8 @@ msgstr "Emmener le Dr Thultris à %s en %s."
 msgctxt "doctor-shipLog"
 msgid "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
 msgstr ""
+"Le Dr Thultris a appliqué ses connaissances et l'état de l'amiral Koshenz "
+"s'améliore."
 
 #: scripts/scenario_49_allies.lua:6302
 msgctxt "doctor-tabScience&Operations"
