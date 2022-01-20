@@ -32,8 +32,6 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 95%>>\n"
-"\n"
 "Les Arléniens sont vos alliés.\n"
 "Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
 "terminer vos missions.\n"
@@ -1126,7 +1124,7 @@ msgctxt "stationGeneralInfo-comms"
 msgid "We research and fabricate components for ship shield systems"
 msgstr ""
 "Nous effectuons des recherches et fabriquons des composants pour les "
-"systèmes de boucliers de navire."
+"systèmes de boucliers de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:2540
 msgctxt "stationStory-comms"
@@ -1259,7 +1257,7 @@ msgid ""
 "ship armor systems"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des composants généraux et "
-"spécialisés pour les systèmes de bouclier et d'armures de navire."
+"spécialisés pour les systèmes de bouclier et d'armures de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:2673
 msgctxt "stationStory-comms"
@@ -1516,7 +1514,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:3603
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr "Nous avons besoin de nous réapprovisionner en munitions."
+msgstr "Nous avons besoin de nous réapprovisionner en munitions"
 
 #: scripts/scenario_49_allies.lua:3604
 msgctxt "ammo-comms"
@@ -1584,7 +1582,7 @@ msgstr "Pourriez-vous fournir des HVLI ? ("
 #: scripts/scenario_49_allies.lua:3669 scripts/scenario_49_allies.lua:4568
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr "Dites m'en plus à propos de votre station."
+msgstr "Dites m'en plus à propos de votre station"
 
 #: scripts/scenario_49_allies.lua:3670 scripts/scenario_49_allies.lua:4569
 msgctxt "station-comms"
@@ -1769,7 +1767,7 @@ msgid ""
 "come for her, she protests initially then eventually runs back with you, "
 "convinced of the urgency of the situation"
 msgstr ""
-"Alors que vous la tirez dans le couloir jusqu'au navire, lui expliquant "
+"Alors que vous la tirez dans le couloir jusqu'au vaisseau, lui expliquant "
 "pourquoi vous êtes venu la chercher, elle proteste d'abord puis vient "
 "finalement avec vous, convaincue de l'urgence de la situation."
 
@@ -2291,7 +2289,7 @@ msgstr "Réputation insuffisante."
 #: scripts/scenario_49_allies.lua:4006 scripts/scenario_49_allies.lua:4022
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr "Réparateur embauché"
+msgstr "Réparateur embauché."
 
 #: scripts/scenario_49_allies.lua:4029 scripts/scenario_49_allies.lua:4422
 #: scripts/scenario_49_allies.lua:5052
@@ -2332,8 +2330,8 @@ msgstr ""
 "des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
 "dilithium, de l'optique, des moteurs de vitesse lumière, etc.\n"
 "Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
-"marchandises particulières. Chaque navire joueur diffère par sa capacité de "
-"transport de marchandises.\n"
+"marchandises particulières. Chaque vaisseau joueur diffère par sa capacité "
+"de transport de marchandises.\n"
 "Les marchandises peuvent être obtenues en dépensant des points de réputation "
 "ou en échangeant d'autres types de marchandises (généralement de la "
 "nourriture, des médicaments ou des produits de luxe)."
@@ -2568,7 +2566,7 @@ msgid ""
 msgstr ""
 "Les ingénieurs et les techniciens utilisent des composants de traction pour "
 "réparer ou améliorer des systèmes conçus pour tirer des objets vers le "
-"navire."
+"vaisseau."
 
 #: scripts/scenario_49_allies.lua:4244
 msgctxt "explainGoodsComponent-comms"
@@ -2577,7 +2575,7 @@ msgid ""
 "move objects away from the ship."
 msgstr ""
 "Les techniciens utilisent des composants de répulseur pour réparer ou "
-"améliorer les systèmes conçus pour éloigner les objets du vaisseau."
+"améliorer les systèmes conçus pour repousser les objets du vaisseau."
 
 #: scripts/scenario_49_allies.lua:4245
 msgctxt "explainGoodsComponent-comms"
@@ -2643,7 +2641,7 @@ msgid ""
 msgstr ""
 "L'équipe de réparation utilise des composants de capteur pour réparer les "
 "systèmes qui prennent en charge la console Science dans la collecte "
-"d'informations sur l'univers autour du navire."
+"d'informations sur l'univers autour du vaisseau."
 
 #: scripts/scenario_49_allies.lua:4251
 msgctxt "explainGoodsComponent-comms"
@@ -2652,6 +2650,9 @@ msgid ""
 "connect the ship to other ships, stations and/or alien entities on the Relay "
 "console."
 msgstr ""
+"Les techniciens utilisent des composants de communication pour réparer les "
+"différents systèmes utilisés pour connecter le vaisseau à d'autres "
+"vaisseaux, stations et/ou entités extraterrestres sur la console Relay."
 
 #: scripts/scenario_49_allies.lua:4252
 msgctxt "explainGoodsComponent-comms"
@@ -2660,6 +2661,9 @@ msgid ""
 "medical facilities used on many ships in place of a medical doctor or "
 "medical staff."
 msgstr ""
+"Les techniciens utilisent des composants autodoc pour réparer ou entretenir "
+"les installations médicales automatisées utilisées sur de nombreux vaisseaux "
+"à la place d'un médecin ou d'un personnel médical."
 
 #: scripts/scenario_49_allies.lua:4253
 msgctxt "explainGoodsComponent-comms"
@@ -2668,6 +2672,9 @@ msgid ""
 "temporarily move mechanisms or portions of mechanisms against the "
 "acceleration or gravity aboard a ship."
 msgstr ""
+"Les ingénieurs ont besoin de composants d'élévateur pour une variété de "
+"systèmes devant déplacer temporairement des mécanismes ou des parties de "
+"mécanismes contre l'accélération ou la gravité à bord d'un vaisseau."
 
 #: scripts/scenario_49_allies.lua:4254
 msgctxt "explainGoodsComponent-comms"
@@ -2675,6 +2682,10 @@ msgid ""
 "Engineers use android components to build, repair and maintain androids that "
 "serve on ships. Repair crews on many ships consist largely of androids."
 msgstr ""
+"Les ingénieurs utilisent des composants androïdes pour fabriquer, réparer et "
+"entretenir les androïdes qui servent sur les vaisseaux. Les équipes de "
+"réparation sur de nombreux vaisseaux se composent en grande partie "
+"d'androïdes."
 
 #: scripts/scenario_49_allies.lua:4255
 msgctxt "explainGoodsComponent-comms"
@@ -2684,6 +2695,11 @@ msgid ""
 "are programmed to fix things at the molecular level, often in conditions "
 "hazardous to organic beings such as humans."
 msgstr ""
+"Les techniciens et les ingénieurs se servent des nanites pour un certain "
+"nombre de systèmes, notamment les boucliers, les réacteurs, les moteurs à "
+"impulsion, les téléporteurs et les moteurs à vitesse lumière. Les nanites "
+"sont programmées pour réparer les choses au niveau moléculaire, souvent dans "
+"des conditions dangereuses pour les êtres organiques tels que les humains."
 
 #: scripts/scenario_49_allies.lua:4256
 msgctxt "explainGoodsComponent-comms"
@@ -2691,6 +2707,9 @@ msgid ""
 "With all the automated systems on a ship, technicians often need software "
 "components to upgrade or adjust systems."
 msgstr ""
+"Avec tous les systèmes automatisés d'un vaisseau, les techniciens ont "
+"souvent besoin de composants logiciels pour mettre à niveau ou ajuster les "
+"systèmes."
 
 #: scripts/scenario_49_allies.lua:4257
 msgctxt "explainGoodsComponent-comms"
@@ -2698,6 +2717,8 @@ msgid ""
 "Many systems have specialized circuits that need upgrading or replacing via "
 "one or more circuit components."
 msgstr ""
+"De nombreux systèmes ont des circuits spécialisés qui doivent être mis à "
+"niveau ou remplacés via un ou plusieurs composants de circuit."
 
 #: scripts/scenario_49_allies.lua:4258
 msgctxt "explainGoodsComponent-comms"
@@ -2706,6 +2727,10 @@ msgid ""
 "energy to run the ship to tiny ones used in EVA space suits. Battery "
 "components help maintain and improve these systems."
 msgstr ""
+"Les batteries d'un vaisseau varient en taille, allant de celles qui "
+"fournissent la majeure partie de l'énergie pour faire fonctionner le "
+"vaisseau aux plus petites utilisées dans les combinaisons spatiales EVA. Les "
+"composants de batterie aident à maintenir et à améliorer ces systèmes."
 
 #: scripts/scenario_49_allies.lua:4260
 msgctxt "explainGoodsComponent-comms"
@@ -2948,7 +2973,7 @@ msgstr ""
 #: scripts/scenario_49_allies.lua:4418
 msgctxt "station-comms"
 msgid "I need information"
-msgstr "j'aurai besoin d'informations."
+msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_49_allies.lua:4419
 msgctxt "station-comms"
@@ -3640,7 +3665,7 @@ msgstr "Stock"
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
-msgstr "%s Cargaison actuelle :"
+msgstr "%s Cargaison en cours :"
 
 #: scripts/scenario_49_allies.lua:5483 scripts/scenario_49_allies.lua:5502
 #: scripts/scenario_49_allies.lua:5521 scripts/scenario_49_allies.lua:5540
@@ -3681,7 +3706,7 @@ msgstr "Obtenir liq. de ref."
 #: scripts/scenario_49_allies.lua:5701
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
-msgstr "Collecter Liq. de ref."
+msgstr "Collecte du liq. de ref."
 
 #: scripts/scenario_49_allies.lua:5704
 #, lua-format
@@ -3699,17 +3724,17 @@ msgstr "Configuration des collecteurs %i"
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Player survived for %i minutes"
-msgstr ""
+msgstr "Le joueur a survécu pendant %i minutes"
 
 #: scripts/scenario_49_allies.lua:5797
 msgctxt "msgMainscreen"
 msgid "Single selected mission completed"
-msgstr ""
+msgstr "Mission unique sélectionnée terminée"
 
 #: scripts/scenario_49_allies.lua:5809
 msgctxt "msgMainscreen"
 msgid "All missions completed"
-msgstr ""
+msgstr "Toutes les missions terminées"
 
 #: scripts/scenario_49_allies.lua:5844
 msgctxt "doomsdayGoal-shipLog"
@@ -3957,7 +3982,7 @@ msgstr "Un de vos réparateurs a péri."
 #: scripts/scenario_49_allies.lua:6970
 msgctxt "msgMainscreen"
 msgid "statistics unavailable"
-msgstr ""
+msgstr "statistiques indisponibles"
 
 #: scripts/scenario_49_allies.lua:6976
 #, lua-format
@@ -3966,6 +3991,8 @@ msgid ""
 "Allied stations: Human: survived: %.1f%%, strength: %.1f%%; Arlenian: "
 "survived: %.1f%%, strength: %.1f%%\n"
 msgstr ""
+"Stations alliées : Humain : survivants : %.1f%%, force : %.1f%% ; Arlénien : "
+"survivants : %.1f%%, force : %.1f%%\n"
 
 #: scripts/scenario_49_allies.lua:6978
 #, lua-format
@@ -3974,73 +4001,78 @@ msgid ""
 "Enemy stations: Kraylor: survived: %.1f%%, strength: %.1f%%; Exuari: "
 "survived: %.1f%%, strength: %.1f%%\n"
 msgstr ""
+"Stations ennemies : Kraylor : survivant : %.1f%%, force : %.1f%% ; Éxuari : "
+"%.1f%%, force : %.1f%%\n"
 
 #: scripts/scenario_49_allies.lua:6981
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: survived: %.1f%%, strength: %.1f%%"
-msgstr ""
+msgstr "Stations neutres : %.1f%%, force : %.1f%%"
 
 #: scripts/scenario_49_allies.lua:6986
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied ships: Human: strength: %.1f%%, Arlenian: strength: %.1f%%\n"
 msgstr ""
+"Vaisseaux alliés : Humain : force : %.1f%%, Arlénien : force : %.1f%%\n"
 
 #: scripts/scenario_49_allies.lua:6988
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Enemy ships: Kraylor: strength: %.1f%%, Exuari: strength: %.1f%%\n"
 msgstr ""
+"Vaisseaux ennemis : Kraylor : force : %.1f%%, Éxuari : force : %.1f%%\n"
 
 #: scripts/scenario_49_allies.lua:6993
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied value: %.2f, Enemy value: %.2f"
-msgstr ""
+msgstr "Rang allié : %.2f, rang ennemi : %.2f"
 
 #: scripts/scenario_49_allies.lua:6997
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Mission ended because %s\n"
-msgstr ""
+msgstr "Mission terminée car %s\n"
 
 #: scripts/scenario_49_allies.lua:7003 scripts/scenario_49_allies.lua:7018
 msgctxt "msgMainscreen"
 msgid "Ensign"
-msgstr ""
+msgstr "Officier"
 
 #: scripts/scenario_49_allies.lua:7005 scripts/scenario_49_allies.lua:7020
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
-msgstr ""
+msgstr "Lieutenant"
 
 #: scripts/scenario_49_allies.lua:7007 scripts/scenario_49_allies.lua:7022
 msgctxt "msgMainscreen"
 msgid "Commander"
-msgstr ""
+msgstr "Commandant"
 
 #: scripts/scenario_49_allies.lua:7009 scripts/scenario_49_allies.lua:7024
 msgctxt "msgMainscreen"
 msgid "Captain"
-msgstr ""
+msgstr "Capitaine"
 
 #: scripts/scenario_49_allies.lua:7011 scripts/scenario_49_allies.lua:7026
 msgctxt "msgMainscreen"
 msgid "Admiral"
-msgstr ""
+msgstr "Amiral"
 
 #: scripts/scenario_49_allies.lua:7013
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Earned rank: %s"
-msgstr ""
+msgstr "Rang obtenu : %s"
 
 #: scripts/scenario_49_allies.lua:7028
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Rank after military reductions due to ignominious defeat: %s"
 msgstr ""
+"Rang après les réductions militaires dues à une défaite ignominieuse : %s"
 
 #~ msgid "Waves"
 #~ msgstr "Vagues"
