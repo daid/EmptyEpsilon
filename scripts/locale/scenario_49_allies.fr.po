@@ -32,7 +32,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"<<TRADUCTION EN COURS : 90%>>\n"
+"<<TRADUCTION EN COURS : 95%>>\n"
 "\n"
 "Les Arléniens sont vos alliés.\n"
 "Les Kraylors et Éxuaris sont vos ennemis et tenteront de vous empêcher de "
@@ -2264,7 +2264,7 @@ msgstr "Je pense que %s a déménagé."
 #: scripts/scenario_49_allies.lua:3985 scripts/scenario_49_allies.lua:4477
 msgctxt "orders-comms"
 msgid "What are my current orders?"
-msgstr "Quels sont nos ordres en cours ?"
+msgstr "Ordres en cours"
 
 #: scripts/scenario_49_allies.lua:3990 scripts/scenario_49_allies.lua:4482
 #, lua-format
@@ -2280,7 +2280,7 @@ msgstr ""
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i rép."
 
 #: scripts/scenario_49_allies.lua:4003 scripts/scenario_49_allies.lua:4019
 #: scripts/scenario_49_allies.lua:5133
@@ -2316,8 +2316,7 @@ msgstr "Bespin se trouve dans %s."
 #: scripts/scenario_49_allies.lua:4040
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
-msgstr ""
-"Aucun tutoriel n'explique les marchandises ou cargaisons. Explication :"
+msgstr "Explications sur les marchandises et cargaisons"
 
 #: scripts/scenario_49_allies.lua:4041
 msgctxt "explainGoods-comms"
@@ -2331,33 +2330,33 @@ msgid ""
 msgstr ""
 "Différents types de marchandises ou cargaisons peuvent être obtenus auprès "
 "des stations, des cargos ou d'autres sources. Ces ressources peuvent être du "
-"dilithium, de l'optique, des moteurs de vitesse lumière, etc. Certains "
-"objectifs de mission peuvent nécessiter un ou plusieurs types de "
+"dilithium, de l'optique, des moteurs de vitesse lumière, etc.\n"
+"Certains objectifs de mission peuvent nécessiter un ou plusieurs types de "
 "marchandises particulières. Chaque navire joueur diffère par sa capacité de "
-"transport de marchandises. Les marchandises peuvent être obtenues en "
-"dépensant des points de réputation ou en échangeant d'autres types de "
-"marchandises (généralement de la nourriture, des médicaments ou des produits "
-"de luxe)."
+"transport de marchandises.\n"
+"Les marchandises peuvent être obtenues en dépensant des points de réputation "
+"ou en échangeant d'autres types de marchandises (généralement de la "
+"nourriture, des médicaments ou des produits de luxe)."
 
 #: scripts/scenario_49_allies.lua:4042
 msgctxt "explainGoodsComponent-comms"
 msgid "Explain the component goods"
-msgstr ""
+msgstr "Composants"
 
 #: scripts/scenario_49_allies.lua:4043
 msgctxt "explainGoodsMineral-comms"
 msgid "Explain the mineral goods"
-msgstr ""
+msgstr "Biens minéraux"
 
 #: scripts/scenario_49_allies.lua:4044
 msgctxt "explainGoodsTrade-comms"
 msgid "Explain the trade goods"
-msgstr ""
+msgstr "Marchandises commerciales"
 
 #: scripts/scenario_49_allies.lua:4045
 msgctxt "explainGoodsVapor-comms"
 msgid "Explain vapor goods"
-msgstr ""
+msgstr "Marchandises \"vapeur\""
 
 #: scripts/scenario_49_allies.lua:4046
 msgctxt "explainGoodsVapor-comms"
@@ -2370,6 +2369,14 @@ msgid ""
 "or desire for that good will go unmet or the mission will have to be "
 "satisfied in some other fashion."
 msgstr ""
+"En de rares occasions, le système ne peut pas déterminer un bien approprié. "
+"Dans ce cas, l'une de ces marchandises \"vapeur\" ou contrefaçons sera "
+"listé :\n"
+"   or pressé, latinum, unobtanium, eludium, impossibrium\n"
+"\n"
+"Si vous en voyez une, cela signifie que le bien n'est pas disponible. Le "
+"besoin de ce bien ne sera pas satisfait et/ou la mission devra être "
+"satisfaite d'une autre manière."
 
 #: scripts/scenario_49_allies.lua:4051
 msgctxt "trade-comms"
@@ -2530,6 +2537,8 @@ msgid ""
 "Technicians use impulse components to fix or enhance impulse engines or "
 "related impulse systems."
 msgstr ""
+"Les techniciens utilisent des composants d'impulsion pour réparer ou "
+"améliorer les moteurs à impulsion et les systèmes d'impulsion associés."
 
 #: scripts/scenario_49_allies.lua:4241
 msgctxt "explainGoodsComponent-comms"
@@ -2537,6 +2546,9 @@ msgid ""
 "Engineers use warp components to fix or enhance warp engines, warp cores and/"
 "or other related warp technology based systems."
 msgstr ""
+"Les ingénieurs utilisent des composants de distorsion pour réparer ou "
+"améliorer les moteurs à vitesse lumière, les noyaux de distorsion et/ou "
+"d'autres systèmes basés sur la technologie de distorsion (vitesse lumière)."
 
 #: scripts/scenario_49_allies.lua:4242
 msgctxt "explainGoodsComponent-comms"
@@ -2544,6 +2556,9 @@ msgid ""
 "Technicians use shield components to enhance or fix shield capacitors, "
 "shield charging systems and other shield or energy field generation systems."
 msgstr ""
+"Les techniciens utilisent des composants de blindage pour améliorer ou "
+"réparer les condensateurs de blindage, les systèmes de charge de blindage et "
+"d'autres systèmes de génération de champ d'énergie ou de blindage."
 
 #: scripts/scenario_49_allies.lua:4243
 msgctxt "explainGoodsComponent-comms"
@@ -2551,6 +2566,9 @@ msgid ""
 "Engineers and technicians use tractor components to repair or enhance "
 "systems designed to pull objects towards the ship."
 msgstr ""
+"Les ingénieurs et les techniciens utilisent des composants de traction pour "
+"réparer ou améliorer des systèmes conçus pour tirer des objets vers le "
+"navire."
 
 #: scripts/scenario_49_allies.lua:4244
 msgctxt "explainGoodsComponent-comms"
@@ -2558,6 +2576,8 @@ msgid ""
 "Technicians use repulsor components to repair or enhance systems designed to "
 "move objects away from the ship."
 msgstr ""
+"Les techniciens utilisent des composants de répulseur pour réparer ou "
+"améliorer les systèmes conçus pour éloigner les objets du vaisseau."
 
 #: scripts/scenario_49_allies.lua:4245
 msgctxt "explainGoodsComponent-comms"
@@ -2565,6 +2585,9 @@ msgid ""
 "Engineers and weapon systems repair specialists use beam components to fix, "
 "improve and/or tune beam weapons or related beam systems."
 msgstr ""
+"Les ingénieurs et les spécialistes de la réparation de systèmes d'armement "
+"utilisent des composants de faisceau pour réparer, améliorer et/ou régler "
+"les faisceaux laser et les systèmes associés."
 
 #: scripts/scenario_49_allies.lua:4246
 msgctxt "explainGoodsComponent-comms"
@@ -2573,6 +2596,9 @@ msgid ""
 "components serve as the information pathways and linkages between many ship "
 "systems"
 msgstr ""
+"L'équipe de réparation utilise des composants optiques dans de nombreux "
+"systèmes de vaisseaux. Les composants optiques servent de voies "
+"d'information et de liens entre de nombreux systèmes de navires."
 
 #: scripts/scenario_49_allies.lua:4247
 msgctxt "explainGoodsComponent-comms"
@@ -2581,6 +2607,10 @@ msgid ""
 "typical systems needing robotic components include medical bays, food "
 "preparation, automated repair systems, etc."
 msgstr ""
+"Les ingénieurs utilisent souvent des composants robotiques pour faciliter le "
+"chargement des missiles. D'autres systèmes classiques nécessitent des "
+"composants robotiques : les baies médicales, la préparation des aliments, "
+"les systèmes de réparation automatisés, etc."
 
 #: scripts/scenario_49_allies.lua:4248
 msgctxt "explainGoodsComponent-comms"
@@ -2588,6 +2618,9 @@ msgid ""
 "Some of the esoteric ship systems have specialized material requirements. "
 "These are typically satisfied with a filament component of some kind"
 msgstr ""
+"Certains des systèmes de vaisseaux ésotériques ont des exigences matérielles "
+"spécialisées. Ceux-ci se contentent généralement d'un composant de filament "
+"quelconque."
 
 #: scripts/scenario_49_allies.lua:4249
 msgctxt "explainGoodsComponent-comms"
@@ -2596,6 +2629,10 @@ msgid ""
 "from one location to another. The movement methods range from simple belt "
 "rollers to atomic disassembly and reassembly."
 msgstr ""
+"Les ingénieurs utilisent des composants de transporteur pour réparer les "
+"systèmes conçus pour déplacer des objets d'un endroit à un autre. Les "
+"méthodes de mouvement vont des simples rouleaux de courroie au démontage et "
+"remontage atomique."
 
 #: scripts/scenario_49_allies.lua:4250
 msgctxt "explainGoodsComponent-comms"
@@ -2604,6 +2641,9 @@ msgid ""
 "support the Science console in gathering information about the universe "
 "around the ship."
 msgstr ""
+"L'équipe de réparation utilise des composants de capteur pour réparer les "
+"systèmes qui prennent en charge la console Science dans la collecte "
+"d'informations sur l'univers autour du navire."
 
 #: scripts/scenario_49_allies.lua:4251
 msgctxt "explainGoodsComponent-comms"
@@ -2673,6 +2713,8 @@ msgid ""
 "These are the typical component goods available. Which one would you like a "
 "greater explanation of?"
 msgstr ""
+"Ce sont les composants classiques disponibles. Sur lequel aimeriez-vous une "
+"plus grande explication ?"
 
 #: scripts/scenario_49_allies.lua:4269
 msgctxt "explainGoodsTrade-comms"
@@ -2680,6 +2722,8 @@ msgid ""
 "These are the typical trade goods available. Which one would you like a "
 "greater explanation of?"
 msgstr ""
+"Ce sont les marchandises commerciales classiques disponibles. Sur laquelle "
+"aimeriez-vous une plus grande explication ?"
 
 #: scripts/scenario_49_allies.lua:4271
 msgctxt "explainGoodsTrade-comms"
@@ -2688,6 +2732,10 @@ msgid ""
 "Relay officer will try to keep at least one food on board for the potential "
 "trade benefit. When offered for sale, it's usually very cheap."
 msgstr ""
+"Beaucoup de gens veulent ou ont besoin de nourriture pour subvenir à leurs "
+"besoins ou pour s'amuser. Un bon officier de relai essaiera de garder au "
+"moins un aliment à bord pour le bénéfice commercial potentiel.\n"
+"Lorsqu'il est proposé à la vente, il est généralement très bon marché."
 
 #: scripts/scenario_49_allies.lua:4272
 msgctxt "explainGoodsTrade-comms"
@@ -2697,6 +2745,12 @@ msgid ""
 "very high. A good Relay officer will try to keep at least on medicine on "
 "board for the potential trade benefit."
 msgstr ""
+"De nombreuses personnes ont besoin de médicaments pour soigner une maladie "
+"ou des symptômes associés à une maladie. Les médicaments sont presque aussi "
+"bon marché que la nourriture.\n"
+"Les avantages commerciaux sont généralement très élevés. Un bon officier de "
+"relai essaiera de garder au moins quelques médicaments à bord pour le "
+"bénéfice commercial potentiel."
 
 #: scripts/scenario_49_allies.lua:4273
 msgctxt "explainGoodsTrade-comms"
@@ -2707,6 +2761,15 @@ msgid ""
 "good Relay officer will be watching for relatively low priced luxury which "
 "can be used to trade for higher priced components or minerals."
 msgstr ""
+"Un produit de luxe est tout ce que quelqu'un considère comme précieux. Les "
+"types de produits de luxe comprennent les bijoux, les vêtements spécialisés, "
+"les objets d'art rares, etc.\n"
+"La valeur commerciale du luxe n'est pas aussi élevée que celle de la "
+"nourriture ou des médicaments, mais peut tout de même apporter certains "
+"avantages commerciaux.\n"
+"Un bon officier de relai surveillera les produits de luxe à prix "
+"relativement bas qui peuvent être utilisés en échange avec des composants ou "
+"des minéraux à prix plus élevé."
 
 #: scripts/scenario_49_allies.lua:4283
 msgctxt "explainGoodsMineral-comms"
@@ -2714,6 +2777,8 @@ msgid ""
 "These are the typical mineral goods available. Which one would you like a "
 "greater explanation of?"
 msgstr ""
+"Ce sont les produits minéraux typiques disponibles. Sur lequel aimeriez-vous "
+"une plus grande explication ?"
 
 #: scripts/scenario_49_allies.lua:4285
 msgctxt "explainGoodsMineral-comms"
@@ -2721,6 +2786,9 @@ msgid ""
 "Nickel is one of the most common metals found among asteroids. As such, it "
 "has become the defacto standard metal for most of the structure of ships."
 msgstr ""
+"Le nickel est l'un des métaux les plus courants extrait des astéroïdes. En "
+"tant que tel, il est devenu le métal standard de référence pour la plupart "
+"des structures de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4286
 msgctxt "explainGoodsMineral-comms"
@@ -2728,6 +2796,9 @@ msgid ""
 "Platinum has electronic, explosive and medical applications, so techniciams "
 "use it to repair and upgrade a variety of ship systems."
 msgstr ""
+"Le platine a des applications électroniques, explosives et médicales, si "
+"bien que les techniciens l'utilisent pour réparer et mettre à niveau bon "
+"nombre de systèmes de vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4287
 msgctxt "explainGoodsMineral-comms"
@@ -2735,6 +2806,8 @@ msgid ""
 "Civilians and military technicians value gold for a variety of reasons "
 "including use in jewelry and electronics."
 msgstr ""
+"Les techniciens civils et militaires apprécient l'or pour une multitude de "
+"raisons, notamment son utilisation dans la joaillerie et l'électronique."
 
 #: scripts/scenario_49_allies.lua:4288
 msgctxt "explainGoodsMineral-comms"
@@ -2742,6 +2815,8 @@ msgid ""
 "Due to its high potential for energy storage, engineers value dilithium in "
 "ship engines and shields."
 msgstr ""
+"En raison de son potentiel élevé de stockage d'énergie, les ingénieurs "
+"apprécient le dilithium dans les moteurs et les boucliers des vaisseaux."
 
 #: scripts/scenario_49_allies.lua:4289
 msgctxt "explainGoodsMineral-comms"
@@ -2749,6 +2824,9 @@ msgid ""
 "Designers and engineers use tritanium in many aspects of ship construction "
 "due to how it interacts with warp fields and jump mechanics."
 msgstr ""
+"Les concepteurs et ingénieurs utilisent le tritanium dans de nombreux "
+"aspects de la construction navale spatiale en raison de la façon dont il "
+"interagit avec les champs de distorsion et la mécanique des sauts."
 
 #: scripts/scenario_49_allies.lua:4290
 msgctxt "explainGoodsMineral-comms"
@@ -2756,6 +2834,8 @@ msgid ""
 "Engineers value cobalt due to its magnetic, alloy and energy storage "
 "applications."
 msgstr ""
+"Les ingénieurs apprécient le cobalt en raison de ses applications "
+"magnétiques, d'alliage et de stockage d'énergie."
 
 #: scripts/scenario_49_allies.lua:4316
 msgctxt "ammo-comms"
@@ -3741,12 +3821,13 @@ msgstr ""
 "contracté une grave maladie. Les médecins Arléniens ont lutté pendant des "
 "jours contre cette maladie mais avec très peu de résultats. Ils craignent "
 "que l'amiral Koshenz n'ait plus longtemps à vivre. Ils ont demandé l'aide de "
-"n'importe quel chercheur humain sur cette maladie Arlénienne. Un membre de "
-"leur équipe médicale a fait référence au Dr Morrigan Thultris qui a "
-"récemment publié des informations concernant une maladie qui partage des "
-"symptômes et des caractéristiques similaires à la maladie de l'amiral. Le Dr "
-"Thultris n'apparaît pas sur notre registre militaire, ce qui implique "
+"n'importe quel chercheur humain sur cette maladie Arlénienne.\n"
+"Un membre de leur équipe médicale a fait référence au Dr Morrigan Thultris "
+"qui a récemment publié des informations concernant une maladie qui partage "
+"des symptômes et des caractéristiques similaires à la maladie de l'amiral. "
+"Le Dr Thultris n'apparaît pas sur notre registre militaire, ce qui implique "
 "qu'elle travaille dans un isolement relatif.\n"
+"\n"
 "Fouillez les stations de la marine humaine, trouvez-la et demandez son aide, "
 "le cas échéant.\n"
 "Faites-le vite, l'amiral Koshenz n'a plus longtemps à vivre."
