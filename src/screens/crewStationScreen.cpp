@@ -49,7 +49,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
 
     message_text = new GuiScrollText(message_frame, "", "");
     message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
-    message_close_button = new GuiButton(message_frame, "", "Close", [this]() {
+    message_close_button = new GuiButton(message_frame, "", tr("button_F1", "Close"), [this]() {
         if (my_spaceship)
         {
             for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
@@ -64,10 +64,10 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
-    keyboard_help = new GuiHelpOverlay(main_panel, "Keyboard Shortcuts");
+    keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
 
     for (auto binding : sp::io::Keybinding::listAllByCategory("General"))
-        keyboard_general += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
+        keyboard_general += binding->getLabel() + tr("hotkey_F1", ":\t") + binding->getHumanReadableKeyName(0) + "\n";
 
 #ifndef __ANDROID__
     if (PreferencesManager::get("music_enabled") == "1")
