@@ -48,10 +48,10 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);
 
-    keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
+    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
 
     for (auto binding : sp::io::Keybinding::listAllByCategory(tr("hotkey_menu", "Main Screen")))
-        keyboard_general += binding->getLabel() + ":\t" + binding->getHumanReadableKeyName(0) + "\n";
+        keyboard_general += binding->getLabel() + tr("hotkey_F1", ":\t") + binding->getHumanReadableKeyName(0) + "\n";
 
     keyboard_help->setText(keyboard_general);
 
