@@ -7890,8 +7890,8 @@ function hunterTransition7(delta)
 	hunterTransition7Timer = hunterTransition7Timer - delta
 	if hunterTransition7Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrders-comms", "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -8106,8 +8106,8 @@ end
 function cleanUpBeamTimers(delta)
 	plot4name = "cleanUpBeamTimers"
 	noBeamTimeCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, pc in ipairs(players) do
 		if pc ~= nil and pc:isValid() then
 			if not pc.beamTimeUpgrade then
 				noBeamTimeCount = noBeamTimeCount + 1
@@ -8181,8 +8181,8 @@ end
 function cleanUpHullers(delta)
 	plot4name = "cleanUpHullers"
 	noHullCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, pc in ipairs(players) do
 		if pc ~= nil and pc:isValid() then
 			if not pc.hullUpgrade then
 				noHullCount = noHullCount + 1
@@ -8257,8 +8257,8 @@ function insertAgentDelay(delta)
 	plot4name = "insertAgentDelay"
 	plot4delayTimer = plot4delayTimer - delta
 	if plot4delayTimer < 0 then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(string.format(_("PaulOrders-shiplog", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
 				plot4reminder = string.format(_("PaulOrders-comms", "Get Paul Straight at station %s"),homeStation:getCallSign())
@@ -8270,8 +8270,8 @@ end
 
 function getAgentStraight(delta)
 	plot4name = "getAgentStraight"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() and p:isDocked(homeStation) then
 			p.straight = true
 			if #enemyStationList > 0 then
@@ -8293,8 +8293,8 @@ end
 function scanEnemyStation(delta)
 	plot4name = "scanEnemyStation"
 	if insertEnemyStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 20000 then
 					insertRunDelayTimer = 15
@@ -8312,8 +8312,8 @@ function scanEnemyStation(delta)
 			end
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
@@ -8328,8 +8328,8 @@ function insertRunDelay(delta)
 	insertRunDelayTimer = insertRunDelayTimer - delta
 	if insertRunDelayTimer < 0 then
 		if insertEnemyStation:isValid() then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() and p.straight then
 					p:addToShipLog(string.format(_("PaulOrders-shiplog", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
 					plot4reminder = string.format(_("PaulOrders-comms", "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
@@ -8338,8 +8338,8 @@ function insertRunDelay(delta)
 				end
 			end
 		else
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() and p.straight then
 					p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 					choooseNextPlot4line()
@@ -8353,8 +8353,8 @@ end
 function insertRun(delta)
 	plot4name = "insertRun"
 	if insertEnemyStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 2500 then
 					if p:hasPlayerAtPosition("Science") then
@@ -8372,8 +8372,8 @@ function insertRun(delta)
 			end
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
@@ -8400,8 +8400,8 @@ function resultDelay(delta)
 			plot4 = resultDelay2
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8428,8 +8428,8 @@ function resultDelay2(delta)
 			plot4 = straightExecution
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8456,8 +8456,8 @@ function straightExecution(delta)
 			agentDemiseTimer = random (40,80)
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8478,8 +8478,8 @@ function agentDemise(delta)
 	if insertEnemyStation:isValid() then
 		agentDemiseTimer = agentDemiseTimer - delta
 		if agentDemiseTimer < 0 then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() and p.straight then
 					if p:hasPlayerAtPosition("Science") then
 						fatalMsg = "fatalMsg"
@@ -8494,8 +8494,8 @@ function agentDemise(delta)
 			choooseNextPlot4line()
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8560,8 +8560,8 @@ end
 function transportRepairTechnician()
 	hmsBounty:setSystemHealth("warp",1)
 	hmsBounty:setSystemHealth("impulse",1)
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if p.transportButton then
 				if transportRepairTechnicianButton ~= nil then
@@ -8587,8 +8587,8 @@ function stationShieldDelay(delta)
 				shieldExpertStation = candidate
 			end
 		until(shieldExpertStation ~= nil)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s"),homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
 			end
@@ -8610,8 +8610,8 @@ function visitShieldExpertStation(delta)
 		until(shieldExpertTransport ~= nil)
 	end
 	if shieldExpertStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				if p:isDocked(shieldExpertStation) then
 					p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
@@ -8623,8 +8623,8 @@ function visitShieldExpertStation(delta)
 		end
 	else
 		if shieldExpertTransport:isValid() then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() then
 					p:addToShipLog(string.format(_("Maria-shipLog", "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
 					plot4 = meetShieldExportTransport
@@ -8632,8 +8632,8 @@ function visitShieldExpertStation(delta)
 				end
 			end
 		else
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() then
 					p:addToShipLog(_("Maria-shipLog", "Station %s has been destroyed leaving no hints for shield upgrade followup"),"Magenta")
 				end
@@ -8645,8 +8645,8 @@ end
 
 function meetShieldExportTransport(delta)
 	plot4name = "meetShieldExportTransport"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
