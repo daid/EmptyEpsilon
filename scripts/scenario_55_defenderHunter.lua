@@ -3,31 +3,26 @@
 --- 
 --- Initially, you're tasked with defending your home base.  Over time, you'll discover more about the enemies harassing you and you'll be ordered to find and destroy the enemies responsible.  There may be various missions given along the way, but the enemy harassment will continue.  You must balance your two missions.
 ---
---- Designed for 1-8 cooperating player ships.  Randomization makes many details different for each game, but the primary goals remain the same.  Untimed variations can take an hour or longer for full mission completion.  Different sub-missions may be chosen by the players or will be chosen at random.  Achieving victory in a timed hunter variation is quite a challenge.  Like the Waves scenario, the enemies get harder over time.
+--- Designed for any number of cooperating player ships. Randomization makes many details different for each game, but the primary goals remain the same. Untimed variations can take an hour or longer for full mission completion. Different sub-missions may be chosen by the players or will be chosen at random. Achieving victory in a timed hunter variation is quite a challenge. Like the Waves scenario, the enemies get harder over time.
 ---
---- Features: 
---- - Randomly selected player ship names based on type (not just the default call sign generation)
---- - Simple mix of variations based on time and difficulty
---- - Named stations with cargo type often related to name
---- - Some cargo based missions
---- - Mortal but replaceable at station repair crew
---- - Asteroids and nebulae in motion
---- - Intense pacing
---- - Player fighters may activate auto-cooling and auto-repair in engineering
----
---- Version 9 - Oct2020
----
+--- Version 10 - Jan2022
 -- Type: Replayable Mission
--- Setting[Settings]: Configures time/goal/the amount of enemies spawned in the scenario.
--- Settings[Easy]: Easy goals and/or enemies.
--- Settings[Normal|Default]: Normal goals and/or enemies.
--- Settings[Hard]: Hard goals and/or enemies.
--- Settings[Timed Defender]: Victory if home station survives after 30 minutes.
--- Settings[Timed Hunter]: Victory if target enemy base destroyed in 30 minutes.
--- Settings[Easy Timed Defender]: Easy goals and/or enemies, victory if home station survives after 30 minutes.
--- Settings[Easy Timed Hunter]: Easy goals and/or enemies, victory if target enemy base destroyed in 30 minutes.
--- Settings[Hard Timed Defender]: Hard goals and/or enemies, victory if home station survives after 30 minutes.
--- Settings[Hard Timed Hunter]: Hard goals and/or enemies, victory if target enemy base destroyed in 30 minutes.
+-- Setting[Enemies]: Configures the number and type of enemies
+-- Enemies[Normal|Default]: Normal difficulty
+-- Enemies[Hard]: More and/or stronger enemy ships
+-- Enemies[Easy]: Fewer and/or weaker enemy ships
+-- Enemies[Extreme]: Many more or much stronger enemy ships
+-- Enemies[Quixotic]: Enemies likely to overwhelm you
+-- Setting[Time]: Sets the length of time for the scenario
+-- Time[Unlimited|Default]: No time limit. Protect home station and hunt and destroy designated enemy station.
+-- Time[30min]: Scenario ends in 30 minutes
+-- Setting[Goal]: Sets primary goal. Pertinent to timed scenario
+-- Goal[Defender|Default]: Protect home station. If timed scenario, victory after time runs out if home station survives.
+-- Goal[Hunter]: Protect home station and hunt down designated enemy station. If timed scenario, defeat after time runs out if designated enemy station survives.
+-- Setting[Murphy]: Configures the perversity of the universe according to Murphy's law
+-- Murphy[Normal|Default]: Random factors are normal
+-- Murphy[Hard]: Random factors are more against you
+-- Murphy[Easy]: Random factors are more in your favor
 
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
@@ -68,9 +63,12 @@ end
 -------------------------------
 function init()
 	wfv = "nowhere"		--wolf fence value - used for debugging
+	scenario_version = "10.0.0"
+	print(string.format("    ----    Scenario: Defender Hunter    ----    Version %s    ----    EE version: %s    ----",scenario_version,getEEVersion()))
+	print(_VERSION)
 	plot_1_diagnostic = false
 	plot_2_diagnostic = false
-	setSettings()
+	setSetting()
 	setMovingAsteroids()
 	setMovingNebulae()
 	setWormArt()
@@ -335,15 +333,6 @@ function setConstants()
 	}		
 	prefix_length = 0
 	suffix_index = 0
-	get_coolant_function = {}
-	table.insert(get_coolant_function,getCoolant1)
-	table.insert(get_coolant_function,getCoolant2)
-	table.insert(get_coolant_function,getCoolant3)
-	table.insert(get_coolant_function,getCoolant4)
-	table.insert(get_coolant_function,getCoolant5)
-	table.insert(get_coolant_function,getCoolant6)
-	table.insert(get_coolant_function,getCoolant7)
-	table.insert(get_coolant_function,getCoolant8)
 	--list of goods available to buy, sell or trade (sell still under development)
 	goodsList = {	{"food",0},
 					{"medicine",0},
@@ -450,34 +439,33 @@ function setConstants()
 	table.insert(plot4choices,repairBountyDelay)
 	table.insert(plot4choices,insertAgentDelay)
 end
-function setSettings()
+function setSetting()
 --translate variations into a numeric difficulty value
-	if string.find(getScenarioSetting("Settings"),"Easy") then
-		difficulty = .5
-		adverseEffect = .999
-		coolant_loss = .99999
-		coolant_gain = .005
-	elseif string.find(getScenarioSetting("Settings"),"Hard") then
-		difficulty = 2
-		adverseEffect = .99
-		coolant_loss = .9999
-		coolant_gain = .0001
-	else
-		difficulty = 1		--default (normal)
-		adverseEffect = .995
-		coolant_loss = .99995
-		coolant_gain = .001
-	end
-	gameTimeLimit = 0
-	if string.find(getScenarioSetting("Settings"),"Timed") then
-		timedIntelligenceInterval = 200
-		playWithTimeLimit = true
-		gameTimeLimit = 30*60		
-		plot6 = timedGame
-	else
-		timedIntelligenceInterval = 300
-		playWithTimeLimit = false
-	end
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+		["Extreme"] =	{number = 3},
+		["Quixotic"] =	{number = 5},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Easy"] =		{number = .5,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
+		["Normal"] =	{number = 1,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
+		["Hard"] =		{number = 2,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
+	adverseEffect =	murphy_config[getScenarioSetting("Murphy")].adverse
+	coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_coolant
+	coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_coolant
+	local time_config = {
+		["Unlimited"] = {interval = 300,	limit = false,	time = 0,		plot = nil			},
+		["30min"] =		{interval = 200,	limit = true,	time = 30 * 60,	plot = timedGame	},
+	}
+	timedIntelligenceInterval =	time_config[getScenarioSetting("Time")].interval
+	playWithTimeLimit =			time_config[getScenarioSetting("Time")].limit
+	gameTimeLimit =				time_config[getScenarioSetting("Time")].time
+	plot6 =						time_config[getScenarioSetting("Time")].plot
 end
 function GMSpawnsEnemies()
 -- Let the GM spawn a random group of enemies to attack a player
@@ -3836,8 +3824,8 @@ function setMovingAsteroids()
 		local xAst = random(-100000,100000)
 		local yAst = random(-100000,100000)
 		local outRange = true
-		for p2idx=1,8 do
-			local p2obj = getPlayerShip(p2idx)
+		local players = getActivePlayerShips()
+		for pidx, p2obj in ipairs(players) do
 			if p2obj ~= nil and p2obj:isValid() then
 				if distance(p2obj,xAst,yAst) < 30000 then
 					outRange = false
@@ -7107,8 +7095,8 @@ function initialOrders(delta)
 	if initialOrderTimer < 0 then
 		if initialOrdersMsg == nil then
 			local foundPlayer = false
-			for pidx=1,8 do
-				local p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() then
 					foundPlayer = true
 					p:addToShipLog(string.format(_("goalAudio-shipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
@@ -7475,8 +7463,8 @@ end
 function cleanupSpinners(delta)
 	plot2name = "cleanupSpinners"
 	noSpinCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, pc in ipairs(players) do
 		if pc ~= nil and pc:isValid() then
 			if not pc.spinUpgrade then
 				noSpinCount = noSpinCount + 1
@@ -7562,8 +7550,8 @@ end
 
 function warpJamLineSpring(delta)
 	plot2name = "warpJamLineSpring"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() and wjCenter:isValid() then
 			if distance(p,wjCenter) < 10000 then
 				plot2 = warpJamLineRelease
@@ -7650,8 +7638,8 @@ function hunterTransition1(delta)
 	hunterTransition1Timer = hunterTransition1Timer - delta
 	if hunterTransition1Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrders-comms", "The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f"),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7689,8 +7677,8 @@ function hunterTransition2(delta)
 	if hunterTransition2Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrdersAudio-shipLog", "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"),dangerValue)
 		playSoundFile("audio/scenario/55/sa_55_Commander2.ogg")
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7736,8 +7724,8 @@ function hunterTransition3(delta)
 			enemyInt4 = targetEnemyStation
 		end
 		iuMsg = string.format(_("intelligenceOrders-comms", "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt4:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7783,8 +7771,8 @@ function hunterTransition4(delta)
 			enemyInt5 = targetEnemyStation
 		end
 		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt5:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7830,8 +7818,8 @@ function hunterTransition5(delta)
 			enemyInt6 = targetEnemyStation
 		end
 		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt6:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7866,8 +7854,8 @@ function hunterTransition6(delta)
 	hunterTransition6Timer = hunterTransition6Timer - delta
 	if hunterTransition6Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f"),targetEnemyStation:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
