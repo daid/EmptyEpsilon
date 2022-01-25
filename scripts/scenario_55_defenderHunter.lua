@@ -8662,8 +8662,8 @@ end
 
 function meetShieldExportTransportHeartbroken(delta)
 	plot4name = "meetShieldExportTransportHeartbroken"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
@@ -8681,8 +8681,8 @@ end
 function giftForBeau(delta)
 	plot4name = "giftForBeau"
 	if shieldExpertStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				if p:isDocked(shieldExpertStation) then
 					if p.shieldExpert then
@@ -8697,8 +8697,8 @@ function giftForBeau(delta)
 			end
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(string.format(_("Maria-shipLog", "We were just notified that station %s has been destroyed"),shieldExpertStation:getCallSign()),"Magenta")
 				if p.shieldExpert then
@@ -8714,8 +8714,8 @@ end
 
 function returnHomeForShields(delta)
 	plot4name = "returnHomeForShields"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if p:isDocked(homeStation) then
 				if homeStation.shieldUpgrade == nil then
@@ -8848,7 +8848,7 @@ end
 function timedGame(delta)
 	gameTimeLimit = gameTimeLimit - delta
 	if gameTimeLimit < 0 then
-		if string.find(getScenarioSetting("Settings"),"Defender") then
+		if getScenarioSetting("Goal") == "Defender" then
 			missionVictory = true
 			endStatistics()
 			victory("Human Navy")
@@ -9013,7 +9013,7 @@ function spawnEnemies(origin_x, origin_y, danger, faction, strength, pool_size, 
 	end
 --	print("danger in spawnEnemies: " .. danger)
 	if strength == nil then
-		strength = math.max(danger * difficulty * playerPower(), 5)
+		strength = math.max(danger * enemy_power * playerPower(), 5)
 	end
 	if pool_size == nil then
 		pool_size = 5
@@ -9060,8 +9060,8 @@ end
 --evaluate the players for enemy strength and size spawning purposes
 function playerPower()
 	playerShipScore = 0
-	for p5idx=1,8 do
-		p5obj = getPlayerShip(p5idx)
+	local players = getActivePlayerShips()
+	for pidx, p5obj in ipairs(players) do
 		if p5obj ~= nil and p5obj:isValid() then
 			if p5obj.shipScore == nil then
 				playerShipScore = playerShipScore + 24
@@ -9872,8 +9872,8 @@ function closestPlayerTo(obj)
 	if obj ~= nil and obj:isValid() then
 		local closestDistance = 9999999
 		closestPlayer = nil
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				local currentDistance = distance(p,obj)
 				if currentDistance < closestDistance then
@@ -9892,8 +9892,8 @@ function farthestPlayerFrom(obj)
 	if obj ~= nil and obj:isValid() then
 		local farthestDistance = 0
 		farthestPlayer = nil
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				local currentDistance = distance(p,obj)
 				if currentDistance > farthestDistance then
@@ -9950,8 +9950,8 @@ end
 function setPlayers()
 --set up players with name, goods, cargo space, reputation and either a warp drive or a jump drive if applicable
 	concurrentPlayerCount = 0
-	for p1idx=1,8 do
-		pobj = getPlayerShip(p1idx)
+	local players = getActivePlayerShips()
+	for pidx, pobj in ipairs(players) do
 		if pobj ~= nil and pobj:isValid() then
 			concurrentPlayerCount = concurrentPlayerCount + 1
 			if goods[pobj] == nil then
@@ -10100,8 +10100,8 @@ function healthCheck(delta)
 	healthCheckTimer = healthCheckTimer - delta
 	if healthCheckTimer < 0 then
 		healthCheckCount = healthCheckCount + 1
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				if p:getRepairCrewCount() > 0 then
 					fatalityChance = 0
