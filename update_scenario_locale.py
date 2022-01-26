@@ -75,7 +75,7 @@ for scenario in glob.glob("scripts/scenario_*.lua"):
     cmd = ["xgettext", "--keyword=_:1c,2", "--keyword=_:1", "--omit-header", "-j", "-d", output[:-3], scenario]
     subprocess.run(cmd, check=True)
     post = open(output, "rt").read()
-    if pre == post:
+    if False:
         os.unlink(output)
         print("Skipped %s" % (scenario))
     else:
