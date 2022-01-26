@@ -8,9 +8,9 @@
 --- Version 10 - Jan2022
 -- Type: Replayable Mission
 -- Setting[Enemies]: Configures the number and type of enemies
+-- Enemies[Easy]: Fewer and/or weaker enemy ships
 -- Enemies[Normal|Default]: Normal difficulty
 -- Enemies[Hard]: More and/or stronger enemy ships
--- Enemies[Easy]: Fewer and/or weaker enemy ships
 -- Enemies[Extreme]: Many more or much stronger enemy ships
 -- Enemies[Quixotic]: Enemies likely to overwhelm you
 -- Setting[Time]: Sets the length of time for the scenario
@@ -20,9 +20,10 @@
 -- Goal[Defender|Default]: Protect home station. If timed scenario, victory after time runs out if home station survives.
 -- Goal[Hunter]: Protect home station and hunt down designated enemy station. If timed scenario, defeat after time runs out if designated enemy station survives.
 -- Setting[Murphy]: Configures the perversity of the universe according to Murphy's law
+-- Murphy[Easy]: Random factors are more in your favor
 -- Murphy[Normal|Default]: Random factors are normal
 -- Murphy[Hard]: Random factors are more against you
--- Murphy[Easy]: Random factors are more in your favor
+
 
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
@@ -10351,47 +10352,45 @@ function crewFate(p, fatalityChance)
 end
 
 function autoCoolant(delta)
-	if enableAutoCoolFunctionList == nil then
-		enableAutoCoolFunctionList = {}
-		table.insert(enableAutoCoolFunctionList,enableAutoCool1)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool2)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool3)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool4)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool5)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool6)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool7)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool8)
-	end
-	if disableAutoCoolFunctionList == nil then
-		disableAutoCoolFunctionList = {}
-		table.insert(disableAutoCoolFunctionList,disableAutoCool1)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool2)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool3)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool4)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool5)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool6)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool7)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool8)
-	end
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if p.autoCoolant ~= nil then
 				if p:hasPlayerAtPosition("Engineering") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Auto cool"),enableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Auto cool"),function()
+							string.format("")
+							p:setAutoCoolant(true)
+							p:commandSetAutoRepair(true)
+							p.autoCoolant = true
+						end)
 						tbi = "disableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,_("buttonEngineer+", "Manual cool"),disableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Manual cool"),function()
+							string.format("")
+							p:setAutoCoolant(false)
+							p:commandSetAutoRepair(false)
+							p.autoCoolant = false
+						end)
 						p.autoCoolButton = true
 					end
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,_("buttonEngineer", "Auto cool"),enableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Auto cool"),function()
+							string.format("")
+							p:setAutoCoolant(true)
+							p:commandSetAutoRepair(true)
+							p.autoCoolant = true
+						end)
 						tbi = "disableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Manual cool"),disableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Manual cool"),function()
+							string.format("")
+							p:setAutoCoolant(false)
+							p:commandSetAutoRepair(false)
+							p.autoCoolant = false
+						end)
 						p.autoCoolButton = true
 					end
 				end
@@ -10400,102 +10399,6 @@ function autoCoolant(delta)
 	end
 end
 
-function enableAutoCool1()
-	p = getPlayerShip(1)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool1()
-	p = getPlayerShip(1)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool2()
-	p = getPlayerShip(2)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool2()
-	p = getPlayerShip(2)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool3()
-	p = getPlayerShip(3)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool3()
-	p = getPlayerShip(3)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool4()
-	p = getPlayerShip(4)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool4()
-	p = getPlayerShip(4)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool5()
-	p = getPlayerShip(5)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool5()
-	p = getPlayerShip(5)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool6()
-	p = getPlayerShip(6)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool6()
-	p = getPlayerShip(6)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool7()
-	p = getPlayerShip(7)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool7()
-	p = getPlayerShip(7)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool8()
-	p = getPlayerShip(8)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool8()
-	p = getPlayerShip(8)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
 --gain/lose coolant from nebula functions
 function updateCoolantGivenPlayer(p, delta)
 	if p.configure_coolant_timer == nil then
@@ -10553,38 +10456,6 @@ function getCoolantGivenPlayer(p)
 		end
 	end
 	p.coolant_trigger = true
-end
-function getCoolant1()
-	local p = getPlayerShip(1)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant2()
-	local p = getPlayerShip(2)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant3()
-	local p = getPlayerShip(3)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant4()
-	local p = getPlayerShip(4)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant5()
-	local p = getPlayerShip(5)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant6()
-	local p = getPlayerShip(6)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant7()
-	local p = getPlayerShip(7)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant8()
-	local p = getPlayerShip(8)
-	getCoolantGivenPlayer(p)
 end
 --final page for victory or defeat on main streen. Station stats only for now
 function endStatistics()
@@ -10651,7 +10522,7 @@ function endStatistics()
 		else
 			rank = _("msgMainscreen", "Admiral")
 		end
-		if string.find(getScenarioSetting("Settings"),"Hunter") then
+		if getScenarioSetting("Goal") == "Hunter" then
 			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Target Enemy Base Survival Rank: %s"), rank)
 		else
 			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Home Base Destruction Rank: %s"), rank)
@@ -10689,8 +10560,8 @@ function update(delta)
 			home_station_health = nil
 		end
 	end
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil then
 			concurrentPlayerCount = concurrentPlayerCount + 1
 			if p:isValid() then
@@ -10748,12 +10619,18 @@ function update(delta)
 					else
 						if p:hasPlayerAtPosition("Engineering") then
 							p.get_coolant_button = "get_coolant_button"
-							p:addCustomButton("Engineering",p.get_coolant_button,_("buttonEngineer", "Get Coolant"),get_coolant_function[pidx])
+							p:addCustomButton("Engineering",p.get_coolant_button,_("buttonEngineer", "Get Coolant"),function()
+								string.format("")
+								getCoolantGivenPlayer(p)
+							end)
 							p.get_coolant = true
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.get_coolant_button_plus = "get_coolant_button_plus"
-							p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("buttonEngineer+", "Get Coolant"),get_coolant_function[pidx])
+							p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("buttonEngineer+", "Get Coolant"),function()
+								string.format("")
+								getCoolantGivenPlayer(p)
+							end)
 							p.get_coolant = true
 						end
 					end
