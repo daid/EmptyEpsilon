@@ -24,7 +24,6 @@
 -- Murphy[Normal|Default]: Random factors are normal
 -- Murphy[Hard]: Random factors are more against you
 
-
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
 --	"Blue"			Blue
