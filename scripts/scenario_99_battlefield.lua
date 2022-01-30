@@ -2,9 +2,11 @@
 -- Description: More than 60 Human Navy and Exuari ships face off in all-out war near a neutral station.
 ---
 --- (This scenario is designed for performance testing.)
--- Category: Development
--- Variation[Large]: Larger battle. This increases the fleet sizes to 100 ships per side.
--- Variation[Huge]: Huge battle. This increases the fleet sizes to 500 ships per side.
+-- Type: Development
+-- Setting[Enemies]: Configures the amount of enemies spawned in the scenario.
+-- Enemies[Large]: Larger battle. This increases the fleet sizes to 100 ships per side.
+-- Enemies[Medium|Default]: Medium battle. 60 ships per side.
+-- Enemies[Huge]: Huge battle. This increases the fleet sizes to 500 ships per side.
 
 --- Scenario
 -- @script scenario_99_battlefield
@@ -24,11 +26,11 @@ function init()
     for n = 1, 5 do
         setCirclePos(CpuShip():setTemplate("Flavia"):setFaction("Independent"):setScanned(true), 0, -15000, random(0, 360), random(1000, 5000))
     end
-    -- Scale fleet sizes based on the scenario variation.
-    if getScenarioVariation() == "Large" then
+    -- Scale fleet sizes based on the scenario settings.
+    if getScenarioSetting("Enemies") == "Large" then
         battle_scale = 3.3
         location_scale = 1.5
-    elseif getScenarioVariation() == "Huge" then
+    elseif getScenarioSetting("Enemies") == "Huge" then
         battle_scale = 16.6
         location_scale = 3
     else
