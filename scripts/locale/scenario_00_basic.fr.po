@@ -44,6 +44,7 @@ msgstr ""
 "D'autres vaisseaux joueurs peuvent être ajoutés, mais la force des vaisseaux "
 "ennemis est indépendante du nombre et du type de vaisseaux joueurs.\n"
 "\n"
+"Titre original : Basic\n"
 "Auteur : Daid"
 
 # Scenario setting
