@@ -8,6 +8,12 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
     blink_timer.repeat(blink_rate);
 }
 
+GuiTextEntry::~GuiTextEntry()
+{
+    if (focus)
+        SDL_StopTextInput();
+}
+
 void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 {
     if (focus)

@@ -27,6 +27,7 @@ protected:
     glm::vec2 render_offset{0, 0};
 public:
     GuiTextEntry(GuiContainer* owner, string id, string text);
+    virtual ~GuiTextEntry();
 
     virtual void onDraw(sp::RenderTarget& window) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
