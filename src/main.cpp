@@ -233,10 +233,12 @@ int main(int argc, char** argv)
                 fsaa = 2;
         }
 
+#ifndef ANDROID
         if (PreferencesManager::get("touchscreen").toInt() == 0)
         {
             engine->registerObject("mouseRenderer", new MouseRenderer(mouseLayer));
         }
+#endif
 
         windows.push_back(new Window({width, height}, fullscreen, warpPostProcessor, fsaa));
         window_render_layers.push_back(defaultRenderLayer);
