@@ -85,7 +85,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.coolant_bar->setColor(glm::u8vec4(32, 128, 128, 128))->setSize(100, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage){
             info.damage_bar->hide();
-            info.health_max_bar->hide();
             info.heat_bar->setSize(150, GuiElement::GuiSizeMax);
             info.power_bar->setSize(150, GuiElement::GuiSizeMax);
             info.coolant_bar->setSize(150, GuiElement::GuiSizeMax);
