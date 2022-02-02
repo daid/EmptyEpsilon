@@ -584,3 +584,25 @@ for type=1,5 do
         model:setIllumination("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_illumination.png")
     end
 end
+
+model = ModelData()
+model:setName("battleship_destroyer_5_upgraded_2")	--Cruiser PII
+model:setMesh("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded.model")
+model:setTexture("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_color.jpg")
+model:setSpecular("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_specular.jpg")
+model:setIllumination("battleship_destroyer_5_upgraded/battleship_destroyer_5_upgraded_illumination.jpg")
+model:setScale(4)
+model:setRadius(200)
+
+-- Visual positions of the beams/missiletubes (blender: -X, Y, Z)
+model:addBeamPosition(-2, -31, -0.5)
+model:addBeamPosition(-2,  31, -0.5)
+model:addBeamPosition(35, -11, 0)
+model:addBeamPosition(35,  11, 0)
+model:addTubePosition(27, 0, -0.5)
+model:addTubePosition(27, 0, -0.5)
+model:addEngineEmitter(-33, 0, 0,  1.0, 0.2, 0.1, 16.0)
+model:addEngineEmitter(-28, 13, -0,  1.0, 0.2, 0.1, 13.0)
+model:addEngineEmitter(-28,-13, -0,  1.0, 0.2, 0.1, 13.0)
+model:addEngineEmitter(-27, 24, 0,  1.0, 0.2, 0.1, 5.0)
+model:addEngineEmitter(-27,-24, 0,  1.0, 0.2, 0.1, 5.0)
