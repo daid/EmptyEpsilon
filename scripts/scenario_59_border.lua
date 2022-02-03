@@ -14998,7 +14998,7 @@ function phobosR2(enemyFaction)
 		phobos_r2_db:setKeyValue("Tube 0","60 sec")
 		phobos_r2_db:setKeyValue("Storage Homing","6")
 		phobos_r2_db:setKeyValue("Storage HVLI","20")
-		phobos_r2_db:setImage("radar_cruiser.png")
+		phobos_r2_db:setImage("radar/cruiser.png")
 		--]]
 	end
 	return ship
@@ -15039,7 +15039,7 @@ function hornetMV52(enemyFaction)
 		hornet_mv52_db:setKeyValue("Move speed","7.8 U/min")
 		hornet_mv52_db:setKeyValue("Turn speed","31.0 deg/sec")
 		hornet_mv52_db:setKeyValue("Beam weapon 0:30","3.0 Dmg / 4.0 sec")
-		hornet_mv52_db:setImage("radar_fighter.png")
+		hornet_mv52_db:setImage("radar/fighter.png")
 		--]]
 	end
 	return ship
@@ -15073,7 +15073,7 @@ function k2fighter(enemyFaction)
 		k2_fighter_db:setKeyValue("Move speed","8.4 U/min")
 		k2_fighter_db:setKeyValue("Turn speed","30.0 deg/sec")
 		k2_fighter_db:setKeyValue("Beam weapon 0:60","6.0 Dmg / 2.5 sec")
-		k2_fighter_db:setImage("radar_ktlitan_fighter.png")
+		k2_fighter_db:setImage("radar/ktlitan_fighter.png")
 		--]]
 	end
 	return ship
@@ -15107,7 +15107,7 @@ function k3fighter(enemyFaction)
 		k3_fighter_db:setKeyValue("Move speed","8.4 U/min")
 		k3_fighter_db:setKeyValue("Turn speed","30.0 deg/sec")
 		k3_fighter_db:setKeyValue("Beam weapon 0:60","9.0 Dmg / 2.5 sec")
-		k3_fighter_db:setImage("radar_ktlitan_fighter.png")
+		k3_fighter_db:setImage("radar/ktlitan_fighter.png")
 		--]]
 	end
 	return ship
@@ -15153,7 +15153,7 @@ function waddle5(enemyFaction)
 		waddle_5_db:setKeyValue("Beam weapon 0:35","2.0 Dmg / 5.0 sec")
 		waddle_5_db:setKeyValue("Beam weapon 30:70","2.0 Dmg / 5.0 sec")
 		waddle_5_db:setKeyValue("Beam weapon -35:70","2.0 Dmg / 5.0 sec")
-		waddle_5_db:setImage("radar_fighter.png")
+		waddle_5_db:setImage("radar/fighter.png")
 		--]]
 	end
 	return ship
@@ -15200,7 +15200,7 @@ function jade5(enemyFaction)
 		jade_5_db:setKeyValue("Beam weapon 0:35","2.0 Dmg / 5.0 sec")
 		jade_5_db:setKeyValue("Beam weapon 30:70","2.0 Dmg / 5.0 sec")
 		jade_5_db:setKeyValue("Beam weapon -35:70","2.0 Dmg / 5.0 sec")
-		jade_5_db:setImage("radar_fighter.png")
+		jade_5_db:setImage("radar/fighter.png")
 		--]]
 	end
 	return ship
@@ -15236,7 +15236,7 @@ function droneLite(enemyFaction)
 		drone_lite_db:setKeyValue("Move speed","7.8 U/min")
 		drone_lite_db:setKeyValue("Turn speed","20 deg/sec")
 		drone_lite_db:setKeyValue("Beam weapon 0:40","4.0 Dmg / 4.0 sec")
-		drone_lite_db:setImage("radar_ktlitan_drone.png")
+		drone_lite_db:setImage("radar/ktlitan_drone.png")
 		--]]
 	end
 	return ship
@@ -15271,7 +15271,7 @@ function droneHeavy(enemyFaction)
 		drone_heavy_db:setKeyValue("Move speed","6.6 U/min")
 		drone_heavy_db:setKeyValue("Turn speed","10 deg/sec")
 		drone_heavy_db:setKeyValue("Beam weapon 0:40","8.0 Dmg / 4.0 sec")
-		drone_heavy_db:setImage("radar_ktlitan_drone.png")
+		drone_heavy_db:setImage("radar/ktlitan_drone.png")
 		--]]
 	end
 	return ship
@@ -15313,7 +15313,7 @@ function droneJacket(enemyFaction)
 		drone_jacket_db:setKeyValue("Move speed","6.6 U/min")
 		drone_jacket_db:setKeyValue("Turn speed","10 deg/sec")
 		drone_jacket_db:setKeyValue("Beam weapon 0:40","4.0 Dmg / 4.0 sec")
-		drone_jacket_db:setImage("radar_ktlitan_drone.png")
+		drone_jacket_db:setImage("radar/ktlitan_drone.png")
 		--]]
 	end
 	return ship
@@ -15363,7 +15363,7 @@ function wzLindworm(enemyFaction)
 		wz_lindworm_db:setKeyValue("Storage Homing","4")
 		wz_lindworm_db:setKeyValue("Storage Nuke","2")
 		wz_lindworm_db:setKeyValue("Storage HVLI","12")
-		wz_lindworm_db:setImage("radar_fighter.png")
+		wz_lindworm_db:setImage("radar/fighter.png")
 		--]]
 	end
 	return ship
@@ -15441,7 +15441,7 @@ function tempest(enemyFaction)
 		tempest_db:setKeyValue("Storage Homing","16")
 		tempest_db:setKeyValue("Storage Nuke","8")
 		tempest_db:setKeyValue("Storage HVLI","34")
-		tempest_db:setImage("radar_piranha.png")
+		tempest_db:setImage("radar/piranha.png")
 		--]]
 	end
 	return ship
@@ -15513,7 +15513,7 @@ function enforcer(enemyFaction)
 		enforcer_db:setKeyValue("Tube 30","20 sec")
 		enforcer_db:setKeyValue("Storage Homing","18")
 		--]]
-		enforcer_db:setImage("radar_ktlitan_destroyer.png")		--override default radar image
+		enforcer_db:setImage("radar/ktlitan_destroyer.png")		--override default radar image
 	end
 	return ship		
 end
@@ -15604,7 +15604,7 @@ function predator(enemyFaction)
 		predator_db:setKeyValue("Tube 120","12 sec")
 		predator_db:setKeyValue("Storage Homing","32")
 		--]]
-		predator_db:setImage("radar_missile_cruiser.png")		--override default radar image
+		predator_db:setImage("radar/missile_cruiser.png")		--override default radar image
 	end
 	return ship		
 end
@@ -15665,7 +15665,7 @@ function atlantisY42(enemyFaction)
 		atlantis_y42_db:setKeyValue(" Tube 90","10 sec")
 		atlantis_y42_db:setKeyValue("Storage Homing","4")
 		atlantis_y42_db:setKeyValue("Storage HVLI","20")
-		atlantis_y42_db:setImage("radar_dread.png")
+		atlantis_y42_db:setImage("radar/dread.png")
 		--]]
 	end
 	return ship		
@@ -15726,7 +15726,7 @@ function starhammerV(enemyFaction)
 		starhammer_v_db:setKeyValue("Storage Homing","16")
 		starhammer_v_db:setKeyValue("Storage EMP","2")
 		starhammer_v_db:setKeyValue("Storage HVLI","36")
-		starhammer_v_db:setImage("radar_dread.png")
+		starhammer_v_db:setImage("radar/dread.png")
 		--]]
 	end
 	return ship		
@@ -15795,7 +15795,7 @@ function tyr(enemyFaction)
 		tyr_db:setKeyValue("  Beam weapon -120:90","8.0 Dmg / 6.0 sec")
 		tyr_db:setKeyValue("  Beam weapon 60:90","8.0 Dmg / 6.0 sec")
 		tyr_db:setKeyValue("  Beam weapon 120:90","8.0 Dmg / 6.0 sec")
-		tyr_db:setImage("radar_battleship.png")
+		tyr_db:setImage("radar/battleship.png")
 		--]]
 	end
 	return ship
