@@ -372,6 +372,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 0.f, 0.f, 0.f,
                 0.f, 0.f, 0.f,
                 0.f, 0.f, 0.f,
+                0.f, 0.f, 0.f
             };
             glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)vertices.begin());
             auto coords = {
