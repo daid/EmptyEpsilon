@@ -3,31 +3,26 @@
 --- 
 --- Initially, you're tasked with defending your home base.  Over time, you'll discover more about the enemies harassing you and you'll be ordered to find and destroy the enemies responsible.  There may be various missions given along the way, but the enemy harassment will continue.  You must balance your two missions.
 ---
---- Designed for 1-8 cooperating player ships.  Randomization makes many details different for each game, but the primary goals remain the same.  Untimed variations can take an hour or longer for full mission completion.  Different sub-missions may be chosen by the players or will be chosen at random.  Achieving victory in a timed hunter variation is quite a challenge.  Like the Waves scenario, the enemies get harder over time.
+--- Designed for any number of cooperating player ships. Randomization makes many details different for each game, but the primary goals remain the same. Untimed variations can take an hour or longer for full mission completion. Different sub-missions may be chosen by the players or will be chosen at random. Achieving victory in a timed hunter variation is quite a challenge. Like the Waves scenario, the enemies get harder over time.
 ---
---- Features: 
---- - Randomly selected player ship names based on type (not just the default call sign generation)
---- - Simple mix of variations based on time and difficulty
---- - Named stations with cargo type often related to name
---- - Some cargo based missions
---- - Mortal but replaceable at station repair crew
---- - Asteroids and nebulae in motion
---- - Intense pacing
---- - Player fighters may activate auto-cooling and auto-repair in engineering
----
---- Version 9 - Oct2020
----
+--- Version 10 - Jan2022
 -- Type: Replayable Mission
--- Setting[Settings]: Configures time/goal/the amount of enemies spawned in the scenario.
--- Settings[Easy]: Easy goals and/or enemies.
--- Settings[Normal|Default]: Normal goals and/or enemies.
--- Settings[Hard]: Hard goals and/or enemies.
--- Settings[Timed Defender]: Victory if home station survives after 30 minutes.
--- Settings[Timed Hunter]: Victory if target enemy base destroyed in 30 minutes.
--- Settings[Easy Timed Defender]: Easy goals and/or enemies, victory if home station survives after 30 minutes.
--- Settings[Easy Timed Hunter]: Easy goals and/or enemies, victory if target enemy base destroyed in 30 minutes.
--- Settings[Hard Timed Defender]: Hard goals and/or enemies, victory if home station survives after 30 minutes.
--- Settings[Hard Timed Hunter]: Hard goals and/or enemies, victory if target enemy base destroyed in 30 minutes.
+-- Setting[Enemies]: Configures the number and type of enemies
+-- Enemies[Easy]: Fewer and/or weaker enemy ships
+-- Enemies[Normal|Default]: Normal difficulty
+-- Enemies[Hard]: More and/or stronger enemy ships
+-- Enemies[Extreme]: Many more or much stronger enemy ships
+-- Enemies[Quixotic]: Enemies likely to overwhelm you
+-- Setting[Time]: Sets the length of time for the scenario
+-- Time[Unlimited|Default]: No time limit. Protect home station and hunt and destroy designated enemy station.
+-- Time[30min]: Scenario ends in 30 minutes
+-- Setting[Goal]: Sets primary goal. Pertinent to timed scenario
+-- Goal[Defender|Default]: Protect home station. If timed scenario, victory after time runs out if home station survives.
+-- Goal[Hunter]: Protect home station and hunt down designated enemy station. If timed scenario, defeat after time runs out if designated enemy station survives.
+-- Setting[Murphy]: Configures the perversity of the universe according to Murphy's law
+-- Murphy[Easy]: Random factors are more in your favor
+-- Murphy[Normal|Default]: Random factors are normal
+-- Murphy[Hard]: Random factors are more against you
 
 -- typical colors used in ship log
 -- 	"Red"			Red									Enemies spotted
@@ -68,9 +63,12 @@ end
 -------------------------------
 function init()
 	wfv = "nowhere"		--wolf fence value - used for debugging
+	scenario_version = "10.0.0"
+	print(string.format("    ----    Scenario: Defender Hunter    ----    Version %s    ----    EE version: %s    ----",scenario_version,getEEVersion()))
+	print(_VERSION)
 	plot_1_diagnostic = false
 	plot_2_diagnostic = false
-	setSettings()
+	setSetting()
 	setMovingAsteroids()
 	setMovingNebulae()
 	setWormArt()
@@ -335,15 +333,6 @@ function setConstants()
 	}		
 	prefix_length = 0
 	suffix_index = 0
-	get_coolant_function = {}
-	table.insert(get_coolant_function,getCoolant1)
-	table.insert(get_coolant_function,getCoolant2)
-	table.insert(get_coolant_function,getCoolant3)
-	table.insert(get_coolant_function,getCoolant4)
-	table.insert(get_coolant_function,getCoolant5)
-	table.insert(get_coolant_function,getCoolant6)
-	table.insert(get_coolant_function,getCoolant7)
-	table.insert(get_coolant_function,getCoolant8)
 	--list of goods available to buy, sell or trade (sell still under development)
 	goodsList = {	{"food",0},
 					{"medicine",0},
@@ -450,34 +439,33 @@ function setConstants()
 	table.insert(plot4choices,repairBountyDelay)
 	table.insert(plot4choices,insertAgentDelay)
 end
-function setSettings()
+function setSetting()
 --translate variations into a numeric difficulty value
-	if string.find(getScenarioSetting("Settings"),"Easy") then
-		difficulty = .5
-		adverseEffect = .999
-		coolant_loss = .99999
-		coolant_gain = .005
-	elseif string.find(getScenarioSetting("Settings"),"Hard") then
-		difficulty = 2
-		adverseEffect = .99
-		coolant_loss = .9999
-		coolant_gain = .0001
-	else
-		difficulty = 1		--default (normal)
-		adverseEffect = .995
-		coolant_loss = .99995
-		coolant_gain = .001
-	end
-	gameTimeLimit = 0
-	if string.find(getScenarioSetting("Settings"),"Timed") then
-		timedIntelligenceInterval = 200
-		playWithTimeLimit = true
-		gameTimeLimit = 30*60		
-		plot6 = timedGame
-	else
-		timedIntelligenceInterval = 300
-		playWithTimeLimit = false
-	end
+	local enemy_config = {
+		["Easy"] =		{number = .5},
+		["Normal"] =	{number = 1},
+		["Hard"] =		{number = 2},
+		["Extreme"] =	{number = 3},
+		["Quixotic"] =	{number = 5},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local murphy_config = {
+		["Easy"] =		{number = .5,	adverse = .999,	lose_coolant = .99999,	gain_coolant = .005},
+		["Normal"] =	{number = 1,	adverse = .995,	lose_coolant = .99995,	gain_coolant = .001},
+		["Hard"] =		{number = 2,	adverse = .99,	lose_coolant = .9999,	gain_coolant = .0001},
+	}
+	difficulty =	murphy_config[getScenarioSetting("Murphy")].number
+	adverseEffect =	murphy_config[getScenarioSetting("Murphy")].adverse
+	coolant_loss =	murphy_config[getScenarioSetting("Murphy")].lose_coolant
+	coolant_gain =	murphy_config[getScenarioSetting("Murphy")].gain_coolant
+	local time_config = {
+		["Unlimited"] = {interval = 300,	limit = false,	time = 0,		plot = nil			},
+		["30min"] =		{interval = 200,	limit = true,	time = 30 * 60,	plot = timedGame	},
+	}
+	timedIntelligenceInterval =	time_config[getScenarioSetting("Time")].interval
+	playWithTimeLimit =			time_config[getScenarioSetting("Time")].limit
+	gameTimeLimit =				time_config[getScenarioSetting("Time")].time
+	plot6 =						time_config[getScenarioSetting("Time")].plot
 end
 function GMSpawnsEnemies()
 -- Let the GM spawn a random group of enemies to attack a player
@@ -3836,8 +3824,8 @@ function setMovingAsteroids()
 		local xAst = random(-100000,100000)
 		local yAst = random(-100000,100000)
 		local outRange = true
-		for p2idx=1,8 do
-			local p2obj = getPlayerShip(p2idx)
+		local players = getActivePlayerShips()
+		for pidx, p2obj in ipairs(players) do
 			if p2obj ~= nil and p2obj:isValid() then
 				if distance(p2obj,xAst,yAst) < 30000 then
 					outRange = false
@@ -7107,8 +7095,8 @@ function initialOrders(delta)
 	if initialOrderTimer < 0 then
 		if initialOrdersMsg == nil then
 			local foundPlayer = false
-			for pidx=1,8 do
-				local p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() then
 					foundPlayer = true
 					p:addToShipLog(string.format(_("goalAudio-shipLog", "You are to protect your home base, %s, against enemy attack. Respond to other requests as you see fit"),homeStation:getCallSign()),"Magenta")
@@ -7475,8 +7463,8 @@ end
 function cleanupSpinners(delta)
 	plot2name = "cleanupSpinners"
 	noSpinCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, pc in ipairs(players) do
 		if pc ~= nil and pc:isValid() then
 			if not pc.spinUpgrade then
 				noSpinCount = noSpinCount + 1
@@ -7562,8 +7550,8 @@ end
 
 function warpJamLineSpring(delta)
 	plot2name = "warpJamLineSpring"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() and wjCenter:isValid() then
 			if distance(p,wjCenter) < 10000 then
 				plot2 = warpJamLineRelease
@@ -7650,8 +7638,8 @@ function hunterTransition1(delta)
 	hunterTransition1Timer = hunterTransition1Timer - delta
 	if hunterTransition1Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrders-comms", "The enemy activity has been traced back to enemy bases nearby. Find these bases and stop these incursions. Threat Assessment: %.1f"),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7689,8 +7677,8 @@ function hunterTransition2(delta)
 	if hunterTransition2Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrdersAudio-shipLog", "Kraylor prefect Ghalontor has moved to one of the enemy stations. Destroy that station and the Kraylor incursion will crumble. Threat Assessment: %.1f"),dangerValue)
 		playSoundFile("audio/scenario/55/sa_55_Commander2.ogg")
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7736,8 +7724,8 @@ function hunterTransition3(delta)
 			enemyInt4 = targetEnemyStation
 		end
 		iuMsg = string.format(_("intelligenceOrders-comms", "Enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt4:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7783,8 +7771,8 @@ function hunterTransition4(delta)
 			enemyInt5 = targetEnemyStation
 		end
 		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt5:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7830,8 +7818,8 @@ function hunterTransition5(delta)
 			enemyInt6 = targetEnemyStation
 		end
 		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby. Threat Assessment: %.1f"),enemyInt6:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7866,8 +7854,8 @@ function hunterTransition6(delta)
 	hunterTransition6Timer = hunterTransition6Timer - delta
 	if hunterTransition6Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrders-comms", "Another enemy base located in %s. Others expected nearby: Threat Assessment: %.1f"),targetEnemyStation:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -7902,8 +7890,8 @@ function hunterTransition7(delta)
 	hunterTransition7Timer = hunterTransition7Timer - delta
 	if hunterTransition7Timer < 0 then
 		iuMsg = string.format(_("intelligenceOrders-comms", "We confirmed Prefect Ghalontor is aboard enemy station %s in %s. Threat Assessment: %.1f"),targetEnemyStation:getCallSign(),targetEnemyStation:getSectorName(),dangerValue)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(iuMsg,"Magenta")
 			end
@@ -8118,8 +8106,8 @@ end
 function cleanUpBeamTimers(delta)
 	plot4name = "cleanUpBeamTimers"
 	noBeamTimeCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, pc in ipairs(players) do
 		if pc ~= nil and pc:isValid() then
 			if not pc.beamTimeUpgrade then
 				noBeamTimeCount = noBeamTimeCount + 1
@@ -8193,8 +8181,8 @@ end
 function cleanUpHullers(delta)
 	plot4name = "cleanUpHullers"
 	noHullCount = 0
-	for pidx=1,8 do
-		pc = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, pc in ipairs(players) do
 		if pc ~= nil and pc:isValid() then
 			if not pc.hullUpgrade then
 				noHullCount = noHullCount + 1
@@ -8269,8 +8257,8 @@ function insertAgentDelay(delta)
 	plot4name = "insertAgentDelay"
 	plot4delayTimer = plot4delayTimer - delta
 	if plot4delayTimer < 0 then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(string.format(_("PaulOrders-shiplog", "Agent Paul Straight has information on enemies in the area and a proposal. Pick him and his equipment up at station %s"),homeStation:getCallSign()),"Magenta")
 				plot4reminder = string.format(_("PaulOrders-comms", "Get Paul Straight at station %s"),homeStation:getCallSign())
@@ -8282,8 +8270,8 @@ end
 
 function getAgentStraight(delta)
 	plot4name = "getAgentStraight"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() and p:isDocked(homeStation) then
 			p.straight = true
 			if #enemyStationList > 0 then
@@ -8305,8 +8293,8 @@ end
 function scanEnemyStation(delta)
 	plot4name = "scanEnemyStation"
 	if insertEnemyStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 20000 then
 					insertRunDelayTimer = 15
@@ -8324,8 +8312,8 @@ function scanEnemyStation(delta)
 			end
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
@@ -8340,8 +8328,8 @@ function insertRunDelay(delta)
 	insertRunDelayTimer = insertRunDelayTimer - delta
 	if insertRunDelayTimer < 0 then
 		if insertEnemyStation:isValid() then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() and p.straight then
 					p:addToShipLog(string.format(_("PaulOrders-shiplog", "[Paul Straight] My transporter is ready. I've disguised myself as a Kraylor technician. I need you to take the ship within 2.5U of %s. You don't need to defeat any patrols, but there might be some enemy interest in your ship flying so close to the station. After I am aboard %s, I will gether intelligence and transmit it back. I'm ready to proceed"),insertEnemyStation:getCallSign(),insertEnemyStation:getCallSign()),"95,158,160")
 					plot4reminder = string.format(_("PaulOrders-comms", "Get ship within 2.5U of %s in %s to secretly transport Paul Straight"),insertEnemyStation:getCallSign(),insertEnemyStation:getSectorName())
@@ -8350,8 +8338,8 @@ function insertRunDelay(delta)
 				end
 			end
 		else
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() and p.straight then
 					p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 					choooseNextPlot4line()
@@ -8365,8 +8353,8 @@ end
 function insertRun(delta)
 	plot4name = "insertRun"
 	if insertEnemyStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if distance(p,insertEnemyStation) <= 2500 then
 					if p:hasPlayerAtPosition("Science") then
@@ -8384,8 +8372,8 @@ function insertRun(delta)
 			end
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				p:addToShipLog(_("Paul-shiplog", "[Paul Straight] It's too bad the station was destroyed"),"95,158,160")
 				choooseNextPlot4line()
@@ -8412,8 +8400,8 @@ function resultDelay(delta)
 			plot4 = resultDelay2
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8440,8 +8428,8 @@ function resultDelay2(delta)
 			plot4 = straightExecution
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8468,8 +8456,8 @@ function straightExecution(delta)
 			agentDemiseTimer = random (40,80)
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8490,8 +8478,8 @@ function agentDemise(delta)
 	if insertEnemyStation:isValid() then
 		agentDemiseTimer = agentDemiseTimer - delta
 		if agentDemiseTimer < 0 then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() and p.straight then
 					if p:hasPlayerAtPosition("Science") then
 						fatalMsg = "fatalMsg"
@@ -8506,8 +8494,8 @@ function agentDemise(delta)
 			choooseNextPlot4line()
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() and p.straight then
 				if p:hasPlayerAtPosition("Science") then
 					fatalMsg = "fatalMsg"
@@ -8572,8 +8560,8 @@ end
 function transportRepairTechnician()
 	hmsBounty:setSystemHealth("warp",1)
 	hmsBounty:setSystemHealth("impulse",1)
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if p.transportButton then
 				if transportRepairTechnicianButton ~= nil then
@@ -8599,8 +8587,8 @@ function stationShieldDelay(delta)
 				shieldExpertStation = candidate
 			end
 		until(shieldExpertStation ~= nil)
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "Intelligence analysis shows research on the network that could double the shield strength of station %s. The analysis shows that the technical expert can be found on station %s in sector %s"),homeStation:getCallSign(),shieldExpertStation:getCallSign(),shieldExpertStation:getSectorName()),"Magenta")
 			end
@@ -8622,8 +8610,8 @@ function visitShieldExpertStation(delta)
 		until(shieldExpertTransport ~= nil)
 	end
 	if shieldExpertStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				if p:isDocked(shieldExpertStation) then
 					p:addToShipLog(string.format(_("MariaOrdersAudio-shipLog", "We heard you were looking for our former shield maintenance technician, Maria Shrivner who's been publishing hints about advances in shield technology. We've been looking for her. We only just found out that she left the station after a severe romantic breakup with her supervisor. She took a job on a freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"186,85,211")
@@ -8635,8 +8623,8 @@ function visitShieldExpertStation(delta)
 		end
 	else
 		if shieldExpertTransport:isValid() then
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() then
 					p:addToShipLog(string.format(_("Maria-shipLog", "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
 					plot4 = meetShieldExportTransport
@@ -8644,8 +8632,8 @@ function visitShieldExpertStation(delta)
 				end
 			end
 		else
-			for pidx=1,8 do
-				p = getPlayerShip(pidx)
+			local players = getActivePlayerShips()
+			for pidx, p in ipairs(players) do
 				if p ~= nil and p:isValid() then
 					p:addToShipLog(_("Maria-shipLog", "Station %s has been destroyed leaving no hints for shield upgrade followup"),"Magenta")
 				end
@@ -8657,8 +8645,8 @@ end
 
 function meetShieldExportTransport(delta)
 	plot4name = "meetShieldExportTransport"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
@@ -8674,8 +8662,8 @@ end
 
 function meetShieldExportTransportHeartbroken(delta)
 	plot4name = "meetShieldExportTransportHeartbroken"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if distance(p,shieldExpertTransport) < 500 then
 				p.shieldExpert = true
@@ -8693,8 +8681,8 @@ end
 function giftForBeau(delta)
 	plot4name = "giftForBeau"
 	if shieldExpertStation:isValid() then
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				if p:isDocked(shieldExpertStation) then
 					if p.shieldExpert then
@@ -8709,8 +8697,8 @@ function giftForBeau(delta)
 			end
 		end
 	else
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				p:addToShipLog(string.format(_("Maria-shipLog", "We were just notified that station %s has been destroyed"),shieldExpertStation:getCallSign()),"Magenta")
 				if p.shieldExpert then
@@ -8726,8 +8714,8 @@ end
 
 function returnHomeForShields(delta)
 	plot4name = "returnHomeForShields"
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if p:isDocked(homeStation) then
 				if homeStation.shieldUpgrade == nil then
@@ -8764,7 +8752,7 @@ function helpfulWarning(delta)
 			if stationList[i]:isValid() then
 				p = closestPlayerTo(stationList[i])
 				if p ~= nil then
-					for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
+					for index, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
 						if obj:isEnemy(p) then
 							local detected_enemy_ship = false
 							local obj_type_name = obj.typeName
@@ -8860,7 +8848,7 @@ end
 function timedGame(delta)
 	gameTimeLimit = gameTimeLimit - delta
 	if gameTimeLimit < 0 then
-		if string.find(getScenarioSetting("Settings"),"Defender") then
+		if getScenarioSetting("Goal") == "Defender" then
 			missionVictory = true
 			endStatistics()
 			victory("Human Navy")
@@ -9025,7 +9013,7 @@ function spawnEnemies(origin_x, origin_y, danger, faction, strength, pool_size, 
 	end
 --	print("danger in spawnEnemies: " .. danger)
 	if strength == nil then
-		strength = math.max(danger * difficulty * playerPower(), 5)
+		strength = math.max(danger * enemy_power * playerPower(), 5)
 	end
 	if pool_size == nil then
 		pool_size = 5
@@ -9072,8 +9060,8 @@ end
 --evaluate the players for enemy strength and size spawning purposes
 function playerPower()
 	playerShipScore = 0
-	for p5idx=1,8 do
-		p5obj = getPlayerShip(p5idx)
+	local players = getActivePlayerShips()
+	for pidx, p5obj in ipairs(players) do
 		if p5obj ~= nil and p5obj:isValid() then
 			if p5obj.shipScore == nil then
 				playerShipScore = playerShipScore + 24
@@ -9884,8 +9872,8 @@ function closestPlayerTo(obj)
 	if obj ~= nil and obj:isValid() then
 		local closestDistance = 9999999
 		closestPlayer = nil
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				local currentDistance = distance(p,obj)
 				if currentDistance < closestDistance then
@@ -9904,8 +9892,8 @@ function farthestPlayerFrom(obj)
 	if obj ~= nil and obj:isValid() then
 		local farthestDistance = 0
 		farthestPlayer = nil
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				local currentDistance = distance(p,obj)
 				if currentDistance > farthestDistance then
@@ -9962,8 +9950,8 @@ end
 function setPlayers()
 --set up players with name, goods, cargo space, reputation and either a warp drive or a jump drive if applicable
 	concurrentPlayerCount = 0
-	for p1idx=1,8 do
-		pobj = getPlayerShip(p1idx)
+	local players = getActivePlayerShips()
+	for pidx, pobj in ipairs(players) do
 		if pobj ~= nil and pobj:isValid() then
 			concurrentPlayerCount = concurrentPlayerCount + 1
 			if goods[pobj] == nil then
@@ -10112,8 +10100,8 @@ function healthCheck(delta)
 	healthCheckTimer = healthCheckTimer - delta
 	if healthCheckTimer < 0 then
 		healthCheckCount = healthCheckCount + 1
-		for pidx=1,8 do
-			p = getPlayerShip(pidx)
+		local players = getActivePlayerShips()
+		for pidx, p in ipairs(players) do
 			if p ~= nil and p:isValid() then
 				if p:getRepairCrewCount() > 0 then
 					fatalityChance = 0
@@ -10363,47 +10351,45 @@ function crewFate(p, fatalityChance)
 end
 
 function autoCoolant(delta)
-	if enableAutoCoolFunctionList == nil then
-		enableAutoCoolFunctionList = {}
-		table.insert(enableAutoCoolFunctionList,enableAutoCool1)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool2)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool3)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool4)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool5)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool6)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool7)
-		table.insert(enableAutoCoolFunctionList,enableAutoCool8)
-	end
-	if disableAutoCoolFunctionList == nil then
-		disableAutoCoolFunctionList = {}
-		table.insert(disableAutoCoolFunctionList,disableAutoCool1)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool2)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool3)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool4)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool5)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool6)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool7)
-		table.insert(disableAutoCoolFunctionList,disableAutoCool8)
-	end
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil and p:isValid() then
 			if p.autoCoolant ~= nil then
 				if p:hasPlayerAtPosition("Engineering") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Auto cool"),enableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Auto cool"),function()
+							string.format("")
+							p:setAutoCoolant(true)
+							p:commandSetAutoRepair(true)
+							p.autoCoolant = true
+						end)
 						tbi = "disableAutoCool" .. p:getCallSign()
-						p:addCustomButton("Engineering",tbi,_("buttonEngineer+", "Manual cool"),disableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering",tbi,_("buttonEngineer", "Manual cool"),function()
+							string.format("")
+							p:setAutoCoolant(false)
+							p:commandSetAutoRepair(false)
+							p.autoCoolant = false
+						end)
 						p.autoCoolButton = true
 					end
 				end
 				if p:hasPlayerAtPosition("Engineering+") then
 					if p.autoCoolButton == nil then
 						tbi = "enableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,_("buttonEngineer", "Auto cool"),enableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Auto cool"),function()
+							string.format("")
+							p:setAutoCoolant(true)
+							p:commandSetAutoRepair(true)
+							p.autoCoolant = true
+						end)
 						tbi = "disableAutoCoolPlus" .. p:getCallSign()
-						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Manual cool"),disableAutoCoolFunctionList[pidx])
+						p:addCustomButton("Engineering+",tbi,_("buttonEngineer+", "Manual cool"),function()
+							string.format("")
+							p:setAutoCoolant(false)
+							p:commandSetAutoRepair(false)
+							p.autoCoolant = false
+						end)
 						p.autoCoolButton = true
 					end
 				end
@@ -10412,102 +10398,6 @@ function autoCoolant(delta)
 	end
 end
 
-function enableAutoCool1()
-	p = getPlayerShip(1)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool1()
-	p = getPlayerShip(1)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool2()
-	p = getPlayerShip(2)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool2()
-	p = getPlayerShip(2)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool3()
-	p = getPlayerShip(3)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool3()
-	p = getPlayerShip(3)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool4()
-	p = getPlayerShip(4)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool4()
-	p = getPlayerShip(4)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool5()
-	p = getPlayerShip(5)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool5()
-	p = getPlayerShip(5)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool6()
-	p = getPlayerShip(6)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool6()
-	p = getPlayerShip(6)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool7()
-	p = getPlayerShip(7)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool7()
-	p = getPlayerShip(7)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
-function enableAutoCool8()
-	p = getPlayerShip(8)
-	p:setAutoCoolant(true)
-	p:commandSetAutoRepair(true)
-	p.autoCoolant = true
-end
-function disableAutoCool8()
-	p = getPlayerShip(8)
-	p:setAutoCoolant(false)
-	p:commandSetAutoRepair(false)
-	p.autoCoolant = false
-end
 --gain/lose coolant from nebula functions
 function updateCoolantGivenPlayer(p, delta)
 	if p.configure_coolant_timer == nil then
@@ -10565,38 +10455,6 @@ function getCoolantGivenPlayer(p)
 		end
 	end
 	p.coolant_trigger = true
-end
-function getCoolant1()
-	local p = getPlayerShip(1)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant2()
-	local p = getPlayerShip(2)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant3()
-	local p = getPlayerShip(3)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant4()
-	local p = getPlayerShip(4)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant5()
-	local p = getPlayerShip(5)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant6()
-	local p = getPlayerShip(6)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant7()
-	local p = getPlayerShip(7)
-	getCoolantGivenPlayer(p)
-end
-function getCoolant8()
-	local p = getPlayerShip(8)
-	getCoolantGivenPlayer(p)
 end
 --final page for victory or defeat on main streen. Station stats only for now
 function endStatistics()
@@ -10663,7 +10521,7 @@ function endStatistics()
 		else
 			rank = _("msgMainscreen", "Admiral")
 		end
-		if string.find(getScenarioSetting("Settings"),"Hunter") then
+		if getScenarioSetting("Goal") == "Hunter" then
 			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Target Enemy Base Survival Rank: %s"), rank)
 		else
 			gMsg = gMsg .. string.format(_("msgMainscreen", "\nPost Home Base Destruction Rank: %s"), rank)
@@ -10701,8 +10559,8 @@ function update(delta)
 			home_station_health = nil
 		end
 	end
-	for pidx=1,8 do
-		p = getPlayerShip(pidx)
+	local players = getActivePlayerShips()
+	for pidx, p in ipairs(players) do
 		if p ~= nil then
 			concurrentPlayerCount = concurrentPlayerCount + 1
 			if p:isValid() then
@@ -10760,12 +10618,18 @@ function update(delta)
 					else
 						if p:hasPlayerAtPosition("Engineering") then
 							p.get_coolant_button = "get_coolant_button"
-							p:addCustomButton("Engineering",p.get_coolant_button,_("buttonEngineer", "Get Coolant"),get_coolant_function[pidx])
+							p:addCustomButton("Engineering",p.get_coolant_button,_("buttonEngineer", "Get Coolant"),function()
+								string.format("")
+								getCoolantGivenPlayer(p)
+							end)
 							p.get_coolant = true
 						end
 						if p:hasPlayerAtPosition("Engineering+") then
 							p.get_coolant_button_plus = "get_coolant_button_plus"
-							p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("buttonEngineer+", "Get Coolant"),get_coolant_function[pidx])
+							p:addCustomButton("Engineering+",p.get_coolant_button_plus,_("buttonEngineer+", "Get Coolant"),function()
+								string.format("")
+								getCoolantGivenPlayer(p)
+							end)
 							p.get_coolant = true
 						end
 					end
