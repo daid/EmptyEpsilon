@@ -8752,7 +8752,7 @@ function helpfulWarning(delta)
 			if stationList[i]:isValid() then
 				p = closestPlayerTo(stationList[i])
 				if p ~= nil then
-					for _, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
+					for index, obj in ipairs(stationList[i]:getObjectsInRange(30000)) do
 						if obj:isEnemy(p) then
 							local detected_enemy_ship = false
 							local obj_type_name = obj.typeName
