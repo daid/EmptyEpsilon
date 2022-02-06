@@ -571,6 +571,18 @@ void PlayerSpaceship::update(float delta)
         // Consume power based on subsystem requests and state.
         energy_level += delta * getNetSystemEnergyUsage();
 
+        // Check how much coolant we have requested in total, and if that's beyond the
+        //  amount of coolant we have, see how much we need to adjust our request.
+        float total_coolant_request = 0.0f;
+        for(int n = 0; n < SYS_COUNT; n++)
+        {
+            if (!hasSystem(ESystem(n))) continue;
+            total_coolant_request += systems[n].coolant_request;
+        }
+        float coolant_request_factor = 1.0f;
+        if (total_coolant_request > max_coolant)
+            coolant_request_factor = max_coolant / total_coolant_request;
+
         for(int n = 0; n < SYS_COUNT; n++)
         {
             if (!hasSystem(ESystem(n))) continue;
@@ -588,17 +600,18 @@ void PlayerSpaceship::update(float delta)
                     systems[n].power_level = systems[n].power_request;
             }
 
-            if (systems[n].coolant_request > systems[n].coolant_level)
+            float coolant_request = systems[n].coolant_request * coolant_request_factor;
+            if (coolant_request > systems[n].coolant_level)
             {
                 systems[n].coolant_level += delta * systems[n].coolant_rate_per_second;
-                if (systems[n].coolant_level > systems[n].coolant_request)
-                    systems[n].coolant_level = systems[n].coolant_request;
+                if (systems[n].coolant_level > coolant_request)
+                    systems[n].coolant_level = coolant_request;
             }
-            else if (systems[n].coolant_request < systems[n].coolant_level)
+            else if (coolant_request < systems[n].coolant_level)
             {
                 systems[n].coolant_level -= delta * systems[n].coolant_rate_per_second;
-                if (systems[n].coolant_level < systems[n].coolant_request)
-                    systems[n].coolant_level = systems[n].coolant_request;
+                if (systems[n].coolant_level < coolant_request)
+                    systems[n].coolant_level = coolant_request;
             }
 
             // Add heat to overpowered subsystems.
@@ -768,71 +781,11 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
 void PlayerSpaceship::setMaxCoolant(float coolant)
 {
     max_coolant = std::max(coolant, 0.0f);
-    float total_coolant = 0;
-
-    for(int n = 0; n < SYS_COUNT; n++)
-    {
-        if (!hasSystem(ESystem(n))) continue;
-
-        total_coolant += systems[n].coolant_request;
-    }
-
-    if (total_coolant > max_coolant)
-    {
-        for(int n = 0; n < SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-
-            systems[n].coolant_request *= max_coolant / total_coolant;
-        }
-    } else {
-        if (total_coolant > 0)
-        {
-            for(int n = 0; n < SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                systems[n].coolant_request = std::min(systems[n].coolant_request * max_coolant / total_coolant, (float) max_coolant_per_system);
-            }
-        }
-    }
 }
 
 void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
 {
     request = std::max(0.0f, std::min(request, std::min((float) max_coolant_per_system, max_coolant)));
-    // Set coolant levels on a system.
-    float total_coolant = 0;
-    int cnt = 0;
-    for(int n = 0; n < SYS_COUNT; n++)
-    {
-        if (!hasSystem(ESystem(n))) continue;
-        if (n == system) continue;
-
-        total_coolant += systems[n].coolant_request;
-        cnt++;
-    }
-    if (total_coolant > max_coolant - request)
-    {
-        for(int n = 0; n < SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-            if (n == system) continue;
-
-            systems[n].coolant_request *= (max_coolant - request) / total_coolant;
-        }
-    }else{
-        for(int n = 0; n < SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-            if (n == system) continue;
-
-            if (total_coolant > 0)
-                systems[n].coolant_request = std::min(systems[n].coolant_request * (max_coolant - request) / total_coolant, (float) max_coolant_per_system);
-            else
-                systems[n].coolant_request = std::min((max_coolant - request) / float(cnt), float(max_coolant_per_system));
-        }
-    }
-
     systems[system].coolant_request = request;
 }
 

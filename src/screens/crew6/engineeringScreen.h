@@ -45,6 +45,7 @@ private:
         GuiImage* heat_icon;
         GuiProgressSlider* power_bar;
         GuiProgressSlider* coolant_bar;
+        GuiImage* coolant_max_indicator;
     };
     std::vector<SystemRow> system_rows;
     GuiAutoLayout* system_effects_container;
