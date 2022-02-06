@@ -184,6 +184,8 @@ void AutoConnectScreen::connectToShip(int index)
     {
         my_player_info->commandSetCrewPosition(0, crew_position, true);
         my_player_info->commandSetMainScreenControl(0, control_main_screen);
+    } else {
+        my_player_info->commandSetMainScreen(0, true);
     }
     my_player_info->commandSetShipId(ship->getMultiplayerId());
 }
