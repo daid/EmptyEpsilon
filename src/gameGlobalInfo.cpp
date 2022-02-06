@@ -174,6 +174,8 @@ void GameGlobalInfo::reset()
     callsign_counter = 0;
     victory_faction = -1;
     allow_new_player_ships = true;
+    global_message = "";
+    global_message_timeout = 0.0f;
 
     //Pause the game
     engine->setGameSpeed(0.0);
