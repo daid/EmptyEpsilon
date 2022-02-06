@@ -87,7 +87,7 @@ public:
     constexpr static float warp_charge_time = 4.0f;
     constexpr static float warp_decharge_time = 2.0f;
     constexpr static float jump_drive_charge_time = 90.0f;   /*<Total charge time for the jump drive after a max range jump */
-    constexpr static float jump_drive_energy_per_km_charge = 4.0f;
+    constexpr static float jump_drive_energy_per_km_charge = 2.0f;
     constexpr static float jump_drive_heat_per_jump = 0.35f;
     constexpr static float heat_per_combat_maneuver_boost = 0.2f;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2f;

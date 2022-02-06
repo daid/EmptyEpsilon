@@ -819,7 +819,7 @@ void SpaceShip::update(float delta)
     }
 
     // Add heat based on warp factor.
-    addHeat(SYS_Warp, current_warp * delta * heat_per_warp);
+    addHeat(SYS_Warp, current_warp * delta * heat_per_warp * getSystemEffectiveness(SYS_Warp));
 
     // Determine forward direction and velocity.
     auto forward = vec2FromAngle(getRotation());

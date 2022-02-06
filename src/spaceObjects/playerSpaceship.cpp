@@ -648,7 +648,7 @@ void PlayerSpaceship::update(float delta)
         {
             // If warping, consume energy at a rate of 120% the warp request.
             // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(getEnergyWarpPerSecond() * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.2f) * (shields_active ? 1.5f : 1.0f)))
+            if (!useEnergy(getEnergyWarpPerSecond() * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.3f) * (shields_active ? 1.7f : 1.0f)))
                 // If there's not enough energy, fall out of warp.
                 warp_request = 0;
         }
