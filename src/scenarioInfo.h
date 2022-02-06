@@ -32,13 +32,16 @@ public:
     std::vector<Setting> settings;
 
     ScenarioInfo(string filename);
-    bool hasCategory(const string& category);
+    bool hasCategory(const string& category) const;
 
     static std::vector<string> getCategories();
     static std::vector<ScenarioInfo> getScenarios(const string& category);
 private:
     void addKeyValue(string key, string value);
     bool addSettingOption(string key, string option, string description);
+
+    static const std::vector<ScenarioInfo>& getCachedFullList();
+    static std::vector<ScenarioInfo> cached_full_list;
 };
 
 #endif//SCENARIO_INFO_H

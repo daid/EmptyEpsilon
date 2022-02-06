@@ -5,6 +5,7 @@
 #include <unordered_set>
 
 static std::unique_ptr<i18n::Catalogue> locale;
+std::vector<ScenarioInfo> ScenarioInfo::cached_full_list;
 
 ScenarioInfo::ScenarioInfo(string filename)
 {
@@ -48,7 +49,7 @@ ScenarioInfo::ScenarioInfo(string filename)
     locale.reset();
 }
 
-bool ScenarioInfo::hasCategory(const string& category)
+bool ScenarioInfo::hasCategory(const string& category) const
 {
     for(auto& c : categories)
         if (c == category)
@@ -113,14 +114,8 @@ std::vector<string> ScenarioInfo::getCategories()
 {
     std::vector<string> result;
     std::unordered_set<string> known_categories;
-    // Fetch and sort all Lua files starting with "scenario_".
-    std::vector<string> scenario_filenames = findResources("scenario_*.lua");
-    std::sort(scenario_filenames.begin(), scenario_filenames.end());
-    // remove duplicates
-    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
-    for(auto& filename : scenario_filenames)
+    for(const auto& info : getCachedFullList())
     {
-        ScenarioInfo info(filename);
         for(auto& category : info.categories)
         {
             if (known_categories.find(category) != known_categories.end())
@@ -157,16 +152,26 @@ std::vector<ScenarioInfo> ScenarioInfo::getScenarios(const string& category)
 {
     std::vector<ScenarioInfo> result;
     
-    // Fetch and sort all Lua files starting with "scenario_".
-    std::vector<string> scenario_filenames = findResources("scenario_*.lua");
-    std::sort(scenario_filenames.begin(), scenario_filenames.end());
-    // remove duplicates
-    scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
-    for(string filename : scenario_filenames)
+    for(const auto& info : getCachedFullList())
     {
-        ScenarioInfo info(filename);
         if (info.hasCategory(category))
             result.push_back(info);
     }
     return result;
+}
+
+const std::vector<ScenarioInfo>& ScenarioInfo::getCachedFullList()
+{
+    if (cached_full_list.empty())
+    {
+        // Fetch and sort all Lua files starting with "scenario_".
+        std::vector<string> scenario_filenames = findResources("scenario_*.lua");
+        std::sort(scenario_filenames.begin(), scenario_filenames.end());
+        // remove duplicates
+        scenario_filenames.erase(std::unique(scenario_filenames.begin(), scenario_filenames.end()), scenario_filenames.end());
+
+        for(string filename : scenario_filenames)
+            cached_full_list.emplace_back(filename);
+    }
+    return cached_full_list;
 }
