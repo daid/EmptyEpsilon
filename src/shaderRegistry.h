@@ -89,7 +89,7 @@ namespace ShaderRegistry
 		sp::Shader* get() const { return shader; }
 		int32_t uniform(Uniforms id) const { return uniforms[Uniforms_t(id)]; }
 		int32_t attribute(Attributes id) const { return attributes[Attributes_t(id)]; }
-		static void initialize();
+		static bool initialize();
 	private:
 		sp::Shader* shader = nullptr;
 		std::array<int32_t, Uniforms_t(Uniforms::Count)> uniforms;

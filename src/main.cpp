@@ -286,7 +286,12 @@ int main(int argc, char** argv)
 
         if (gl::isAvailable())
         {
-            ShaderRegistry::Shader::initialize();
+            if (!ShaderRegistry::Shader::initialize())
+            {
+                LOG(ERROR, "Failed to initialize shaders, exiting.");
+                SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to initialize shaders (possible cause: cannot find shader files)", nullptr);
+                return 1;
+            }
         }
     }
 
@@ -296,6 +301,12 @@ int main(int argc, char** argv)
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
     P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BigShouldersDisplay-SemiBold.ttf"));
+    if (!main_font_stream)
+    {
+        LOG(ERROR, "Failed to load main font, exiting.");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to find main font file.", nullptr);
+        return 1;
+    }
     main_font = new sp::FreetypeFont(main_font_stream);
 
     P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BigShouldersDisplay-ExtraBold.ttf"));

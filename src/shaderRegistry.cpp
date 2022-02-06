@@ -20,7 +20,7 @@ namespace ShaderRegistry
         glm::vec3 camera; // World space camera position.
     }
 
-    void Shader::initialize()
+    bool Shader::initialize()
     {
         std::array<const char*, Shaders_t(Shaders::Count)> shader_names{
             "shaders/basic",
@@ -69,7 +69,8 @@ namespace ShaderRegistry
             auto& entry = shaders[i];
             entry.shader = ShaderManager::getShader(shader_names[i]);
 
-            SDL_assert(entry.shader);
+            if (!entry.shader)
+                return false;
             
             if (entry.shader)
             {
@@ -99,6 +100,7 @@ namespace ShaderRegistry
                 glUseProgram(GL_NONE);
             }
         }
+        return true;
     }
 
     const Shader& get(Shaders shader)
