@@ -201,6 +201,9 @@ void GameGlobalInfo::startScenario(string filename)
     scienceInfoScript->destroy();
 
     P<ScriptObject> script = new ScriptObject();
+    int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
+    if (max_cycles > 0)
+        script->setMaxRunCycles(max_cycles);
     script->run(filename);
     engine->registerObject("scenario", script);
 
