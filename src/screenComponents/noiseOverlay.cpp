@@ -15,5 +15,5 @@ void GuiNoiseOverlay::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
         return;
 
-    renderer.drawTiled(sp::Rect{rect.position - glm::vec2{random(rect.size.x, 0), random(rect.size.y, 0)}, rect.size*2.0f}, "noise.png");
+    renderer.drawTiled(rect, "noise.png", {random(0, 1), random(0, 1)});
 }
