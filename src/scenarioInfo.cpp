@@ -114,7 +114,7 @@ std::vector<string> ScenarioInfo::getCategories()
 {
     std::vector<string> result;
     std::unordered_set<string> known_categories;
-    for(const auto& info : getCachedFullList())
+    for(const auto& info : getScenarios())
     {
         for(auto& category : info.categories)
         {
@@ -148,19 +148,7 @@ bool ScenarioInfo::addSettingOption(string key, string option, string descriptio
     return false;
 }
 
-std::vector<ScenarioInfo> ScenarioInfo::getScenarios(const string& category)
-{
-    std::vector<ScenarioInfo> result;
-    
-    for(const auto& info : getCachedFullList())
-    {
-        if (info.hasCategory(category))
-            result.push_back(info);
-    }
-    return result;
-}
-
-const std::vector<ScenarioInfo>& ScenarioInfo::getCachedFullList()
+const std::vector<ScenarioInfo>& ScenarioInfo::getScenarios()
 {
     if (cached_full_list.empty())
     {
@@ -174,4 +162,16 @@ const std::vector<ScenarioInfo>& ScenarioInfo::getCachedFullList()
             cached_full_list.emplace_back(filename);
     }
     return cached_full_list;
+}
+
+std::vector<ScenarioInfo> ScenarioInfo::getScenarios(const string& category)
+{
+    std::vector<ScenarioInfo> result;
+    
+    for(const auto& info : getScenarios())
+    {
+        if (info.hasCategory(category))
+            result.push_back(info);
+    }
+    return result;
 }

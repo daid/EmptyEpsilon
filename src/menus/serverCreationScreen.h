@@ -44,6 +44,7 @@ public:
     ServerScenarioSelectionScreen();
 
 private:
+    void loadScenarioList(const string& category);
     GuiListbox* category_list;
     GuiListbox* scenario_list;
     GuiScrollText* description_text;

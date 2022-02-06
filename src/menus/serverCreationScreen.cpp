@@ -174,12 +174,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
 
     (new GuiLabel(left, "GENERAL_LABEL", tr("Category"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     category_list = new GuiListbox(left, "SCENARIO_CATEGORY", [this](int index, string value) {
-        scenario_list->setSelectionIndex(-1);
-        scenario_list->setOptions({});
-        for(const auto& info : ScenarioInfo::getScenarios(value))
-            scenario_list->addEntry(info.name, info.filename);
-        start_button->disable();
-        description_text->setText(tr("Select a scenario..."));
+        loadScenarioList(value);
     });
     category_list->setSize(GuiElement::GuiSizeMax, 700);
 
@@ -216,6 +211,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
         if (info.settings.empty())
         {
             // Start the selected scenario.
+            gameGlobalInfo->scenario = info.name;
             gameGlobalInfo->startScenario(filename);
 
             // Destroy this screen and move on to ship selection.
@@ -231,8 +227,42 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     });
     start_button->setPosition(250, -50, sp::Alignment::BottomCenter)->setSize(300, 50)->disable();
 
+    // Select the previously selected scenario.
+    for(const auto& info : ScenarioInfo::getScenarios()) {
+        if (info.name == gameGlobalInfo->scenario) {
+            for(int n=0; n<category_list->entryCount(); n++) {
+                if (info.hasCategory(category_list->getEntryValue(n))) {
+                    category_list->setSelectionIndex(n);
+                    category_list->scrollTo(n);
+                    loadScenarioList(category_list->getEntryValue(n));
+                    break;
+                }
+            }
+            for(int n=0; n<scenario_list->entryCount(); n++) {
+                if (info.filename == scenario_list->getEntryValue(n))
+                {
+                    scenario_list->setSelectionIndex(n);
+                    scenario_list->scrollTo(n);
+                    description_text->setText(info.description);
+                    start_button->enable();
+                    break;
+                }
+            }
+        }
+    }
+
     gameGlobalInfo->reset();
     gameGlobalInfo->scenario_settings.clear();
+}
+
+void ServerScenarioSelectionScreen::loadScenarioList(const string& category)
+{
+    scenario_list->setSelectionIndex(-1);
+    scenario_list->setOptions({});
+    for(const auto& info : ScenarioInfo::getScenarios(category))
+        scenario_list->addEntry(info.name, info.filename);
+    start_button->disable();
+    description_text->setText(tr("Select a scenario..."));
 }
 
 ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
@@ -288,8 +318,9 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     }))->setPosition(-250, -50, sp::Alignment::BottomCenter)->setSize(300, 50);
 
     // Start server button.
-    start_button = new GuiButton(this, "START_SCENARIO", tr("Start scenario"), [this, filename]() {
+    start_button = new GuiButton(this, "START_SCENARIO", tr("Start scenario"), [this, info, filename]() {
         // Start the selected scenario.
+        gameGlobalInfo->scenario = info.name;
         gameGlobalInfo->startScenario(filename);
 
         // Destroy this screen and move on to ship selection.

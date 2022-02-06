@@ -35,12 +35,12 @@ public:
     bool hasCategory(const string& category) const;
 
     static std::vector<string> getCategories();
+    static const std::vector<ScenarioInfo>& getScenarios();
     static std::vector<ScenarioInfo> getScenarios(const string& category);
 private:
     void addKeyValue(string key, string value);
     bool addSettingOption(string key, string option, string description);
 
-    static const std::vector<ScenarioInfo>& getCachedFullList();
     static std::vector<ScenarioInfo> cached_full_list;
 };
 
