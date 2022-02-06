@@ -673,7 +673,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
     for(SpaceObject* obj : objects_to_draw)
     {
-            draw_object(obj);
+        draw_object(obj);
     }
 
     if (my_spaceship)
