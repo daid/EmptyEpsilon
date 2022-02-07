@@ -307,7 +307,8 @@ template:setSpeed(50, 6, 10)
 template:setRadarTrace("transport.png")
 template:setJumpDrive(true)
 template:setJumpDriveRange(5000, 100 * 50000) -- The jump carrier can jump a 100x longer distance then normal jump drives.
-template:setDockClasses(_("class", "Starfighter"), _("class", "Frigate"), _("class", "Corvette"))
+template:setExternalDockClasses(_("class", "Frigate"), _("class", "Corvette"))
+template:setInternalDockClasses(_("class", "Starfighter"))
 template:setDefaultAI("evasion")
 
 

@@ -2015,6 +2015,8 @@ void PlayerSpaceship::onReceiveServerCommand(sp::io::DataBuffer& packet)
 
 void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
+    if (docked_style == DockStyle::Internal) return;
+
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
 
     if (long_range)

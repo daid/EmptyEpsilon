@@ -28,7 +28,14 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Set the 3D model to be used for this template. The model referers to data set in the model_data.lua file.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setModel);
     /// Supply a list of ship classes that can be docked to this ship. setDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
+    /// (Same as setExternalDockClasses)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setDockClasses);
+    /// Supply a list of ship classes that can be docked to this ship. setExternalDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
+    /// External docking will keep the ship attached to the side of this ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setExternalDockClasses);
+    /// Supply a list of ship classes that can be docked to this ship. setInternalDockClasses("Starfighter") will allow all small starfighter type ships to dock with this ship.
+    /// Internal docking will hide the docked ship inside the other ship.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setInternalDockClasses);
     /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairCrewCount);
@@ -417,7 +424,17 @@ void ShipTemplate::setDefaultAI(string default_ai_name)
 
 void ShipTemplate::setDockClasses(const std::vector<string>& classes)
 {
-    can_be_docked_by_class = std::unordered_set<string>(classes.begin(), classes.end());
+    external_dock_classes = std::unordered_set<string>(classes.begin(), classes.end());
+}
+
+void ShipTemplate::setExternalDockClasses(const std::vector<string>& classes)
+{
+    external_dock_classes = std::unordered_set<string>(classes.begin(), classes.end());
+}
+
+void ShipTemplate::setInternalDockClasses(const std::vector<string>& classes)
+{
+    internal_dock_classes = std::unordered_set<string>(classes.begin(), classes.end());
 }
 
 void ShipTemplate::setSpeed(float impulse, float turn, float acceleration, std::optional<float> reverse_speed, std::optional<float> reverse_acceleration)
@@ -529,7 +546,8 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->type = type;
     result->model_data = model_data;
 
-    result->can_be_docked_by_class = can_be_docked_by_class;
+    result->external_dock_classes = external_dock_classes;
+    result->internal_dock_classes = internal_dock_classes;
     result->energy_storage_amount = energy_storage_amount;
     result->repair_crew_count = repair_crew_count;
 

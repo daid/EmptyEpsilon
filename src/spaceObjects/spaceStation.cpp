@@ -80,14 +80,14 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     }
 }
 
-bool SpaceStation::canBeDockedBy(P<SpaceObject> obj)
+DockStyle SpaceStation::canBeDockedBy(P<SpaceObject> obj)
 {
     if (isEnemy(obj))
-        return false;
+        return DockStyle::None;
     P<SpaceShip> ship = obj;
     if (!ship)
-        return false;
-    return true;
+        return DockStyle::None;
+    return DockStyle::External;
 }
 
 string SpaceStation::getExportLine()

@@ -297,6 +297,8 @@ void CpuShip::orderDock(P<SpaceObject> object)
 
 void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
+    if (docked_style == DockStyle::Internal) return;
+
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
     if (game_server && ai)
         ai->drawOnGMRadar(renderer, position, scale);

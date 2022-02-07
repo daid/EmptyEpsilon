@@ -829,7 +829,7 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
         P<SpaceObject> space_object = obj;
         if (!space_object || !owner->isFriendly(space_object) || space_object == target)
             continue;
-        if (!space_object->canBeDockedBy(owner) || !space_object->canRestockMissiles())
+        if (space_object->canBeDockedBy(owner) == DockStyle::None || !space_object->canRestockMissiles())
             continue;
         //calculate score
         auto position_difference = space_object->getPosition() - owner_position;

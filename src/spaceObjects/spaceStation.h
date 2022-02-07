@@ -9,7 +9,7 @@ public:
     SpaceStation();
 
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
-    virtual bool canBeDockedBy(P<SpaceObject> obj) override;
+    virtual DockStyle canBeDockedBy(P<SpaceObject> obj) override;
     virtual void destroyedByDamage(DamageInfo& info) override;
     virtual void applyTemplateValues() override;
 

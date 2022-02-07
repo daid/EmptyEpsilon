@@ -237,6 +237,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
     registerMemberReplication(&docking_state);
+    registerMemberReplication(&docked_style);
     registerMemberReplication(&beam_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5f);
     registerMemberReplication(&combat_maneuver_boost_request);
@@ -357,9 +358,16 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 }
 
+void SpaceShip::draw3D()
+{
+    if (docked_style == DockStyle::Internal) return;
+    ShipTemplateBasedObject::draw3D();
+}
+
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
+    if (docked_style == DockStyle::Internal) return;
     ShipTemplateBasedObject::draw3DTransparent();
 
     if ((has_jump_drive && jump_delay > 0.0f) ||
@@ -445,6 +453,8 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
+    if (docked_style == DockStyle::Internal) return;
+
     // Draw beam arcs on short-range radar only, and only for fully scanned
     // ships.
     if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
@@ -639,6 +649,8 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 
 void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
+    if (docked_style == DockStyle::Internal) return;
+
     if (!long_range)
     {
         renderer.fillRect(sp::Rect(position.x - 30, position.y - 30, 60 * hull_strength / hull_max, 5), glm::u8vec4(128, 255, 128, 128));
@@ -648,6 +660,14 @@ void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, fl
 void SpaceShip::update(float delta)
 {
     ShipTemplateBasedObject::update(delta);
+
+    if (hasCollisionShape() != (docked_style != DockStyle::Internal))
+    {
+        if (docked_style == DockStyle::Internal)
+            setCollisionRadius(0);
+        else if (ship_template)
+            ship_template->setCollisionData(this);
+    }
 
     if (game_server)
     {
@@ -667,6 +687,7 @@ void SpaceShip::update(float delta)
             if (!docking_target)
             {
                 docking_state = DS_NotDocking;
+                docked_style = DockStyle::None;
             }else{
                 setPosition(docking_target->getPosition() + rotateVec2(docking_offset, docking_target->getRotation()));
                 target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
@@ -936,15 +957,22 @@ void SpaceShip::executeJump(float distance)
     addHeat(SYS_JumpDrive, jump_drive_heat_per_jump);
 }
 
-bool SpaceShip::canBeDockedBy(P<SpaceObject> obj)
+DockStyle SpaceShip::canBeDockedBy(P<SpaceObject> obj)
 {
     if (isEnemy(obj) || !ship_template)
-        return false;
+        return DockStyle::None;
     P<SpaceShip> ship = obj;
     if (!ship || !ship->ship_template)
-        return false;
-    return (ship_template->can_be_docked_by_class.count(ship->ship_template->getClass()) +
-       ship_template->can_be_docked_by_class.count(ship->ship_template->getSubClass())) > 0;
+        return DockStyle::None;
+    if (ship_template->external_dock_classes.count(ship->ship_template->getClass()) > 0)
+        return DockStyle::External;
+    if (ship_template->external_dock_classes.count(ship->ship_template->getSubClass()) > 0)
+        return DockStyle::External;
+    if (ship_template->internal_dock_classes.count(ship->ship_template->getClass()) > 0)
+        return DockStyle::Internal;
+    if (ship_template->internal_dock_classes.count(ship->ship_template->getSubClass()) > 0)
+        return DockStyle::Internal;
+    return DockStyle::None;
 }
 
 void SpaceShip::collide(Collisionable* other, float force)
@@ -955,6 +983,7 @@ void SpaceShip::collide(Collisionable* other, float force)
         if (dock_object == docking_target)
         {
             docking_state = DS_Docked;
+            docked_style = docking_target->canBeDockedBy(this);
             docking_offset = rotateVec2(getPosition() - other->getPosition(), -other->getRotation());
             float length = glm::length(docking_offset);
             docking_offset = docking_offset / length * (length + 2.0f);
@@ -978,7 +1007,7 @@ void SpaceShip::initializeJump(float distance)
 
 void SpaceShip::requestDock(P<SpaceObject> target)
 {
-    if (!target || docking_state != DS_NotDocking || !target->canBeDockedBy(this))
+    if (!target || docking_state != DS_NotDocking || target->canBeDockedBy(this) == DockStyle::None)
         return;
     if (glm::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
@@ -994,6 +1023,7 @@ void SpaceShip::requestUndock()
 {
     if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1f)
     {
+        docked_style = DockStyle::None;
         docking_state = DS_NotDocking;
         impulse_request = 0.5;
     }
