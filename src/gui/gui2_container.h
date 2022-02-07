@@ -3,6 +3,7 @@
 
 #include <list>
 #include "rect.h"
+#include "nonCopyable.h"
 #include "io/pointer.h"
 
 namespace sp {
@@ -11,7 +12,7 @@ namespace sp {
 
 class GuiElement;
 class AxisAction;
-class GuiContainer
+class GuiContainer : sp::NonCopyable
 {
 protected:
     std::list<GuiElement*> elements;
