@@ -18,7 +18,7 @@
 -- Time[60min]: Automatic loss after 60 minutes
 -- Setting[PlayerShip]: Sets the default player ship
 -- PlayerShip[Atlantis|Default]: Powerful ship with sidewards missile tubes. Requires more advanced play.
--- PlayerShip[Phobos M3P]: Simpler, less powerful ship. But easier to handler. Recommended for new crews.
+-- PlayerShip[Phobos M3P]: Simpler, less powerful ship. But easier to handle. Recommended for new crews.
 
 --- Scenario
 -- @script scenario_00_basic
