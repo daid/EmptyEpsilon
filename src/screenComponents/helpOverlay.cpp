@@ -6,6 +6,8 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 
+#include <i18n.h>
+
 GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string title, string contents)
 : GuiElement(owner, "HELP_OVERLAY")
 {

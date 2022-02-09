@@ -19,6 +19,8 @@
 #include "gui/gui2_scrolltext.h"
 #include "gui/joystickConfig.h"
 
+#include <i18n.h>
+
 CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_screen)
 : GuiCanvas(render_layer)
 {
