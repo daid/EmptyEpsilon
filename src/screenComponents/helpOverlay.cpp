@@ -6,6 +6,8 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 
+#include <i18n.h>
+
 GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string title, string contents)
 : GuiElement(owner, "HELP_OVERLAY")
 {
@@ -19,7 +21,7 @@ GuiHelpOverlay::GuiHelpOverlay(GuiContainer* owner, string title, string content
     text = new GuiScrollText(frame, "HELP_TEXT", contents);
     text->setTextSize(30)->setPosition(0, 110, sp::Alignment::TopCenter)->setSize(450, 520);
 
-    (new GuiButton(frame, "HELP_BUTTON", "Close", [this]() {
+    (new GuiButton(frame, "HELP_BUTTON", tr("hotkey_F1", "Close"), [this]() {
         frame->hide();
     }))->setPosition(0, -25, sp::Alignment::BottomCenter)->setSize(300, 50);
 }
