@@ -3,9 +3,9 @@
 
 
 GuiElement::GuiElement(GuiContainer* owner, const string& id)
-: position_alignment(sp::Alignment::TopLeft), owner(owner), rect(0, 0, 0, 0), visible(true), enabled(true), hover(false), focus(false), active(false), id(id)
+: owner(owner), visible(true), enabled(true), hover(false), focus(false), active(false), id(id)
 {
-    owner->elements.push_back(this);
+    owner->children.push_back(this);
     destroyed = false;
 }
 
@@ -40,62 +40,74 @@ void GuiElement::onTextInput(sp::TextInputEvent e)
 
 GuiElement* GuiElement::setSize(glm::vec2 size)
 {
-    this->size = size;
+    layout.size = size;
+    layout.match_content_size = false;
+
+    if (size.x == GuiSizeMax)
+        layout.fill_width = true;
+    if (size.y == GuiSizeMax)
+        layout.fill_height = true;
+    if (size.x == GuiSizeMatchHeight) {
+        layout.size.x = layout.size.y;
+        layout.lock_aspect_ratio = true;
+    }
+    if (size.y == GuiSizeMatchWidth) {
+        layout.size.y = layout.size.x;
+        layout.lock_aspect_ratio = true;
+    }
     return this;
 }
 
 GuiElement* GuiElement::setSize(float x, float y)
 {
-    this->size.x = x;
-    this->size.y = y;
-    return this;
+    return setSize({x, y});
 }
 
 glm::vec2 GuiElement::getSize() const
 {
-    return size;
+    return layout.size;
 }
 
 GuiElement* GuiElement::setMargins(float n)
 {
-    margins.left = margins.top = margins.right = margins.bottom = n;
+    layout.margin.left = layout.margin.top = layout.margin.right = layout.margin.bottom = n;
     return this;
 }
 
 GuiElement* GuiElement::setMargins(float x, float y)
 {
-    margins.left = margins.right = x;
-    margins.top = margins.bottom = y;
+    layout.margin.left = layout.margin.right = x;
+    layout.margin.top = layout.margin.bottom = y;
     return this;
 }
 
 GuiElement* GuiElement::setMargins(float left, float top, float right, float bottom)
 {
-    margins.left = left;
-    margins.top = top;
-    margins.right = right;
-    margins.bottom = bottom;
+    layout.margin.left = left;
+    layout.margin.top = top;
+    layout.margin.right = right;
+    layout.margin.bottom = bottom;
     return this;
 }
 
 GuiElement* GuiElement::setPosition(float x, float y, sp::Alignment alignment)
 {
-    this->position.x = x;
-    this->position.y = y;
-    this->position_alignment = alignment;
+    layout.position.x = x;
+    layout.position.y = y;
+    layout.alignment = alignment;
     return this;
 }
 
 GuiElement* GuiElement::setPosition(glm::vec2 position, sp::Alignment alignment)
 {
-    this->position = position;
-    this->position_alignment = alignment;
+    layout.position = position;
+    layout.alignment = alignment;
     return this;
 }
 
 glm::vec2 GuiElement::getPositionOffset() const
 {
-    return position;
+    return layout.position;
 }
 
 GuiElement* GuiElement::setVisible(bool visible)
@@ -159,8 +171,8 @@ void GuiElement::moveToFront()
 {
     if (owner)
     {
-        owner->elements.remove(this);
-        owner->elements.push_back(this);
+        owner->children.remove(this);
+        owner->children.push_back(this);
     }
 }
 
@@ -168,8 +180,8 @@ void GuiElement::moveToBack()
 {
     if (owner)
     {
-        owner->elements.remove(this);
-        owner->elements.push_front(this);
+        owner->children.remove(this);
+        owner->children.push_front(this);
     }
 }
 
@@ -199,74 +211,6 @@ void GuiElement::destroy()
 bool GuiElement::isDestroyed()
 {
     return destroyed;
-}
-
-void GuiElement::updateRect(sp::Rect parent_rect)
-{
-    glm::vec2 local_size = size;
-    if (local_size.x == GuiSizeMax)
-        local_size.x = parent_rect.size.x - std::abs(position.x);
-    if (local_size.y == GuiSizeMax)
-        local_size.y = parent_rect.size.y - std::abs(position.y);
-
-    if (local_size.x == GuiSizeMatchHeight)
-        local_size.x = local_size.y;
-    if (local_size.y == GuiSizeMatchWidth)
-        local_size.y = local_size.x;
-
-    local_size.x -= margins.right + margins.left;
-    local_size.y -= margins.bottom + margins.top;
-
-    switch(position_alignment)
-    {
-    case sp::Alignment::TopLeft:
-    case sp::Alignment::CenterLeft:
-    case sp::Alignment::BottomLeft:
-        rect.position.x = parent_rect.position.x + position.x + margins.left;
-        break;
-    case sp::Alignment::TopCenter:
-    case sp::Alignment::Center:
-    case sp::Alignment::BottomCenter:
-        rect.position.x = parent_rect.position.x + parent_rect.size.x * 0.5f + position.x - local_size.x * 0.5f;
-        break;
-    case sp::Alignment::TopRight:
-    case sp::Alignment::CenterRight:
-    case sp::Alignment::BottomRight:
-        rect.position.x = parent_rect.position.x + parent_rect.size.x + position.x - local_size.x - margins.right;
-        break;
-    }
-
-    switch(position_alignment)
-    {
-    case sp::Alignment::TopLeft:
-    case sp::Alignment::TopRight:
-    case sp::Alignment::TopCenter:
-        rect.position.y = parent_rect.position.y + position.y + margins.top;
-        break;
-    case sp::Alignment::CenterLeft:
-    case sp::Alignment::CenterRight:
-    case sp::Alignment::Center:
-        rect.position.y = parent_rect.position.y + parent_rect.size.y / 2.0f + position.y - local_size.y / 2.0f;
-        break;
-    case sp::Alignment::BottomLeft:
-    case sp::Alignment::BottomRight:
-    case sp::Alignment::BottomCenter:
-        rect.position.y = parent_rect.position.y + parent_rect.size.y + position.y - local_size.y - margins.bottom;
-        break;
-    }
-
-    rect.size.x = local_size.x;
-    rect.size.y = local_size.y;
-    if (rect.size.x < 0)
-    {
-        rect.position.x += rect.size.x;
-        rect.size.x = -rect.size.x;
-    }
-    if (rect.size.y < 0)
-    {
-        rect.position.y += rect.size.y;
-        rect.size.y = -rect.size.y;
-    }
 }
 
 glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const

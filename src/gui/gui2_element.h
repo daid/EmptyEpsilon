@@ -6,21 +6,17 @@
 #include "colorConfig.h"
 #include "hotkeyConfig.h"
 #include "gui2_container.h"
+#include "gui/layout/layout.h"
 #include "main.h"
 
+
+class Layout;
 class GuiElement : public GuiContainer
 {
 private:
-    glm::vec2 position{0, 0};
-    glm::vec2 size{0, 0};
-    struct Margins {
-        float left, top, right, bottom;
-    } margins {0, 0, 0, 0};
-    sp::Alignment position_alignment;
     bool destroyed;
 protected:
     GuiContainer* owner;
-    sp::Rect rect;
     bool visible;
     bool enabled;
     bool hover;
@@ -63,7 +59,6 @@ public:
     GuiElement* disable();
     GuiElement* setActive(bool active);
     bool isActive() const;
-    sp::Rect getRect() const { return rect; }
     bool isEnabled() const;
 
     void moveToFront();
@@ -81,8 +76,7 @@ public:
 
     friend class GuiContainer;
     friend class GuiCanvas;
-private:
-    void updateRect(sp::Rect parent_rect);
+
 protected:
     glm::u8vec4 selectColor(const ColorSet& color_set) const;
 };

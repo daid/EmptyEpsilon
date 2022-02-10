@@ -4,7 +4,7 @@
 
 GuiContainer::~GuiContainer()
 {
-    for(GuiElement* element : elements)
+    for(GuiElement* element : children)
     {
         element->owner = nullptr;
         delete element;
@@ -13,7 +13,7 @@ GuiContainer::~GuiContainer()
 
 void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    for(auto it = elements.begin(); it != elements.end(); )
+    for(auto it = children.begin(); it != children.end(); )
     {
         GuiElement* element = *it;
         if (element->destroyed)
@@ -24,13 +24,12 @@ void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, 
                 canvas->unfocusElementTree(element);
 
             //Delete it from our list.
-            it = elements.erase(it);
+            it = children.erase(it);
 
             // Free up the memory used by the element.
             element->owner = nullptr;
             delete element;
         }else{
-            element->updateRect(parent_rect);
             element->hover = element->rect.contains(mouse_position);
             element->onUpdate();
 
@@ -47,7 +46,7 @@ void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, 
 
 void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    for(GuiElement* element : elements)
+    for(GuiElement* element : children)
     {
         if (element->visible)
         {
@@ -63,7 +62,7 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
 
 GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    for(std::list<GuiElement*>::reverse_iterator it = elements.rbegin(); it != elements.rend(); it++)
+    for(auto it = children.rbegin(); it != children.rend(); it++)
     {
         GuiElement* element = *it;
 
@@ -79,4 +78,39 @@ GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::v
         }
     }
     return nullptr;
+}
+
+void GuiContainer::updateLayout(const sp::Rect& rect)
+{
+    this->rect = rect;
+    if (layout_manager || !children.empty())
+    {
+        if (!layout_manager)
+            layout_manager = std::make_unique<GuiLayout>();
+
+        glm::vec2 padding_size(layout.padding.left + layout.padding.right, layout.padding.top + layout.padding.bottom);
+        layout_manager->updateLoop(*this, sp::Rect(rect.position + glm::vec2{layout.padding.left, layout.padding.top}, rect.size - padding_size));
+        if (layout.match_content_size)
+        {
+            glm::vec2 content_size_min(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+            glm::vec2 content_size_max(std::numeric_limits<float>::min(), std::numeric_limits<float>::min());
+            for(auto w : children)
+            {
+                if (w && w->isVisible())
+                {
+                    glm::vec2 p0 = w->rect.position;
+                    glm::vec2 p1 = p0 + w->rect.size;
+                    content_size_min.x = std::min(content_size_min.x, p0.x - w->layout.margin.left);
+                    content_size_min.y = std::min(content_size_min.y, p0.y - w->layout.margin.bottom);
+                    content_size_max.x = std::max(content_size_max.x, p1.x + w->layout.margin.right);
+                    content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.top);
+                }
+            }
+            if (content_size_max.x != std::numeric_limits<float>::min())
+            {
+                this->rect.size = (content_size_max - content_size_min) + padding_size;
+                layout.size = this->rect.size;
+            }
+        }
+    }
 }

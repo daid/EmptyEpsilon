@@ -35,12 +35,12 @@ void GuiAutoLayout::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect,
     case LayoutHorizontalRows:
         {
             int count = 0;
-            for(GuiElement* element : elements)
+            for(GuiElement* element : children)
             {
                 if (!element->isDestroyed() && element->isVisible())
                     count += 1;
             }
-            for(GuiElement* element : elements)
+            for(GuiElement* element : children)
             {
                 if (!element->isDestroyed() && element->isVisible())
                 {
@@ -55,12 +55,12 @@ void GuiAutoLayout::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect,
     case LayoutVerticalColumns:
         {
             int count = 0;
-            for(GuiElement* element : elements)
+            for(GuiElement* element : children)
             {
                 if (!element->isDestroyed() && element->isVisible())
                     count += 1;
             }
-            for(GuiElement* element : elements)
+            for(GuiElement* element : children)
             {
                 if (!element->isDestroyed() && element->isVisible())
                 {
@@ -73,7 +73,7 @@ void GuiAutoLayout::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect,
         GuiContainer::drawElements(mouse_position, parent_rect, renderer);
         return;
     }
-    for(GuiElement* element : elements)
+    for(GuiElement* element : children)
     {
         if (!element->isDestroyed() && element->isVisible())
         {

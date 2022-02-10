@@ -18,6 +18,7 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     auto window_size = renderer.getVirtualSize();
     sp::Rect window_rect(0, 0, window_size.x, window_size.y);
 
+    updateLayout(window_rect);
     drawElements(mouse_position, window_rect, renderer);
 
     if (enable_debug_rendering)
@@ -98,6 +99,6 @@ void GuiCanvas::unfocusElementTree(GuiElement* element)
         focus_element = nullptr;
     if (click_element == element)
         click_element = nullptr;
-    for(GuiElement* child : element->elements)
+    for(GuiElement* child : element->children)
         unfocusElementTree(child);
 }
