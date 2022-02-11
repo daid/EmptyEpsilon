@@ -4,6 +4,8 @@
 #include <nonCopyable.h>
 #include <stringImproved.h>
 #include <rect.h>
+#include <memory>
+#include <functional>
 
 
 class GuiContainer;
