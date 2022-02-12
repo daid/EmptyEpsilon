@@ -13,7 +13,7 @@ class GuiMissileTubeControls : public GuiAutoLayout
 {
 private:
     struct TubeRow {
-        GuiAutoLayout* layout;
+        GuiElement* layout;
         GuiButton* load_button;
         GuiButton* fire_button;
         GuiProgressbar* loading_bar;
@@ -22,7 +22,7 @@ private:
     std::vector<TubeRow> rows;
     class TypeRow {
     public:
-        GuiAutoLayout* layout;
+        GuiElement* layout;
         GuiToggleButton* button;
     };
     TypeRow load_type_rows[MW_Count];

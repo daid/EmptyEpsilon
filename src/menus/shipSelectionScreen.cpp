@@ -186,32 +186,32 @@ ShipSelectionScreen::ShipSelectionScreen()
         auto extra_settings = new GuiAutoLayout(extra_settings_panel, "", GuiAutoLayout::LayoutVerticalTopToBottom);
         extra_settings->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(25);
         // Science scan complexity selector.
-        auto row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-        row->setSize(GuiElement::GuiSizeMax, 50);
+        auto row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "GAME_SCANNING_COMPLEXITY_LABEL", tr("Scan complexity: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
         (new GuiSelector(row, "GAME_SCANNING_COMPLEXITY", [](int index, string value) {
             gameGlobalInfo->scanning_complexity = EScanningComplexity(index);
         }))->setOptions({tr("scanning", "None (delay)"), tr("scanning", "Simple"), tr("scanning", "Normal"), tr("scanning", "Advanced")})->setSelectionIndex((int)gameGlobalInfo->scanning_complexity)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         // Hacking difficulty selector.
-        row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-        row->setSize(GuiElement::GuiSizeMax, 50);
+        row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
         (new GuiSelector(row, "GAME_HACKING_DIFFICULTY", [](int index, string value) {
             gameGlobalInfo->hacking_difficulty = index;
         }))->setOptions({tr("hacking", "Simple"), tr("hacking", "Normal"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         // Hacking games selector.
-        row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-        row->setSize(GuiElement::GuiSizeMax, 50);
+        row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", tr("Hacking type: "), 30))->setAlignment(sp::Alignment::CenterRight)->setSize(250, GuiElement::GuiSizeMax);
         (new GuiSelector(row, "GAME_HACKING_GAME", [](int index, string value) {
             gameGlobalInfo->hacking_games = EHackingGames(index);
         }))->setOptions({tr("hacking", "Mine"), tr("hacking", "Lights"), tr("hacking", "All")})->setSelectionIndex((int)gameGlobalInfo->hacking_games)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         // Frequency and system damage row.
-        row = new GuiAutoLayout(extra_settings, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-        row->setSize(GuiElement::GuiSizeMax, 50);
+        row = new GuiElement(extra_settings, "");
+        row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         (new GuiToggleButton(row, "GAME_FREQUENCIES_TOGGLE", tr("Beam/shield frequencies"), [](bool value) {
             gameGlobalInfo->use_beam_shield_frequencies = value == 1;
         }))->setValue(gameGlobalInfo->use_beam_shield_frequencies)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterLeft);
@@ -469,8 +469,8 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     main_screen_controls_button->setValue(my_player_info->main_screen_control)->setSize(GuiElement::GuiSizeMax, 50);
 
     // Window
-    auto window_button_row = new GuiAutoLayout(layout, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    window_button_row->setSize(GuiElement::GuiSizeMax, 50);
+    auto window_button_row = new GuiElement(layout, "");
+    window_button_row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
     window_button = new GuiToggleButton(window_button_row, "WINDOW_BUTTON", tr("Ship window"), [this](bool value) {
         disableAllExcept(window_button);
     });

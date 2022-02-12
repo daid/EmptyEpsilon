@@ -42,6 +42,6 @@ public:
 };
 
 #define GUI_REGISTER_LAYOUT(name, class_name) \
-    GuiLayoutClassRegistry layout_class_registry ## class_name (name, []() { return std::make_unique<class_name>(); });
+    GuiLayoutClassRegistry layout_class_registry ## class_name (name, []() { return std::unique_ptr<GuiLayout>(new class_name()); });
 
 #endif//GUI_LAYOUT_H

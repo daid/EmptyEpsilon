@@ -35,7 +35,7 @@ private:
     class SystemRow
     {
     public:
-        GuiAutoLayout* layout;
+        GuiElement* row;
         GuiToggleButton* button;
         GuiProgressbar* damage_bar;
         GuiImage* damage_icon;

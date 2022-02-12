@@ -18,8 +18,8 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     for (int n = max_weapon_tubes - 1; n >= 0; n--)
     {
         TubeRow row;
-        row.layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
-        row.layout->setSize(GuiElement::GuiSizeMax, 50);
+        row.layout = new GuiElement(this, id + "_ROW_" + string(n));
+        row.layout->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         row.load_button = new GuiButton(row.layout, id + "_" + string(n) + "_LOAD_BUTTON", "Load", [this, n]() {
             if (!my_spaceship)
                 return;
@@ -64,8 +64,8 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 
     for (int n = MW_Count-1; n >= 0; n--)
     {
-        load_type_rows[n].layout = new GuiAutoLayout(this, id + "_ROW_" + string(n), LayoutHorizontalLeftToRight);
-        load_type_rows[n].layout->setSize(GuiElement::GuiSizeMax, 40);
+        load_type_rows[n].layout = new GuiElement(this, id + "_ROW_" + string(n));
+        load_type_rows[n].layout->setSize(GuiElement::GuiSizeMax, 40)->setAttribute("layout", "horizontal");
 
         load_type_rows[n].button = new GuiToggleButton(load_type_rows[n].layout, id + "_MW_" + string(n), getLocaleMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
             if (value)

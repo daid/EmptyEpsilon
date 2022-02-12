@@ -53,10 +53,14 @@ GuiElement* GuiElement::setSize(glm::vec2 size)
     layout.size = size;
     layout.match_content_size = false;
 
-    if (size.x == GuiSizeMax)
+    if (size.x == GuiSizeMax) {
+        layout.size.x = 1.0;
         layout.fill_width = true;
-    if (size.y == GuiSizeMax)
+    }
+    if (layout.size.y == GuiSizeMax) {
+        layout.size.y = 1.0;
         layout.fill_height = true;
+    }
     if (size.x == GuiSizeMatchHeight) {
         layout.size.x = layout.size.y;
         layout.lock_aspect_ratio = true;

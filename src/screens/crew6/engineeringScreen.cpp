@@ -54,31 +54,32 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     {
         string id = "SYSTEM_ROW_" + getSystemName(ESystem(n));
         SystemRow info;
-        info.layout = new GuiAutoLayout(system_row_layouts, id, GuiAutoLayout::LayoutHorizontalLeftToRight);
-        info.layout->setSize(GuiElement::GuiSizeMax, 50);
+        info.row = new GuiElement(system_row_layouts, id);
+        info.row->setAttribute("layout", "horizontal");
+        info.row->setSize(GuiElement::GuiSizeMax, 50);
 
-        info.button = new GuiToggleButton(info.layout, id + "_SELECT", getLocaleSystemName(ESystem(n)), [this, n](bool value){
+        info.button = new GuiToggleButton(info.row, id + "_SELECT", getLocaleSystemName(ESystem(n)), [this, n](bool value){
             selectSystem(ESystem(n));
         });
         info.button->setSize(300, GuiElement::GuiSizeMax);
-        info.damage_bar = new GuiProgressbar(info.layout, id + "_DAMAGE", 0.0f, 1.0f, 0.0f);
+        info.damage_bar = new GuiProgressbar(info.row, id + "_DAMAGE", 0.0f, 1.0f, 0.0f);
         info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
         info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
         info.damage_icon->setColor(colorConfig.overlay_damaged)->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-        info.heat_bar = new GuiProgressbar(info.layout, id + "_HEAT", 0.0f, 1.0f, 0.0f);
+        info.heat_bar = new GuiProgressbar(info.row, id + "_HEAT", 0.0f, 1.0f, 0.0f);
         info.heat_bar->setSize(100, GuiElement::GuiSizeMax);
         info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0);
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_icon = new GuiImage(info.heat_bar, "", "gui/icons/status_overheat");
         info.heat_icon->setColor(colorConfig.overlay_overheating)->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
-        info.power_bar = new GuiProgressSlider(info.layout, id + "_POWER", 0.0f, 3.0f, 0.0f, [this,n](float value){
+        info.power_bar = new GuiProgressSlider(info.row, id + "_POWER", 0.0f, 3.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
                 my_spaceship->commandSetSystemPowerRequest(ESystem(n), value);
         });
         info.power_bar->setColor(glm::u8vec4(192, 192, 32, 128))->setSize(100, GuiElement::GuiSizeMax);
-        info.coolant_bar = new GuiProgressSlider(info.layout, id + "_COOLANT", 0.0f, 10.0f, 0.0f, [this,n](float value){
+        info.coolant_bar = new GuiProgressSlider(info.row, id + "_COOLANT", 0.0f, 10.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
                 my_spaceship->commandSetSystemCoolantRequest(ESystem(n), value);
         });
@@ -95,7 +96,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.coolant_max_indicator->setColor({255,255,255,0});
 
 
-        info.layout->moveToBack();
+        info.row->moveToBack();
         system_rows.push_back(info);
     }
 
@@ -213,7 +214,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
         {
             SystemRow info = system_rows[n];
             auto& system = my_spaceship->systems[n];
-            info.layout->setVisible(my_spaceship->hasSystem(ESystem(n)));
+            info.row->setVisible(my_spaceship->hasSystem(ESystem(n)));
 
             float health = system.health;
             if (health < 0.0f)
