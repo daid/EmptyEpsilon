@@ -38,6 +38,16 @@ void GuiElement::onTextInput(sp::TextInputEvent e)
 {
 }
 
+void GuiElement::setAttribute(const string& key, const string& value)
+{
+    if (key == "visible")
+        setVisible(value.toBool());
+    else if (key == "enabled")
+        setEnable(value.toBool());
+    else
+        GuiContainer::setAttribute(key, value);
+}
+
 GuiElement* GuiElement::setSize(glm::vec2 size)
 {
     layout.size = size;

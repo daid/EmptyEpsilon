@@ -5,6 +5,7 @@
 #include <memory>
 #include "rect.h"
 #include "nonCopyable.h"
+#include "stringImproved.h"
 #include "io/pointer.h"
 #include "graphics/alignment.h"
 
@@ -51,6 +52,8 @@ public:
     template<typename T> void setLayout() { layout_manager = std::make_unique<T>(); }
     void updateLayout(const sp::Rect& rect);
     const sp::Rect& getRect() const { return rect; }
+
+    virtual void setAttribute(const string& key, const string& value);
 protected:
     virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window);
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);

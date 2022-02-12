@@ -114,3 +114,139 @@ void GuiContainer::updateLayout(const sp::Rect& rect)
         }
     }
 }
+
+void GuiContainer::setAttribute(const string& key, const string& value)
+{
+    if (key == "size")
+    {
+        auto p = value.partition(",");
+        layout.size.x = p.first.strip().toFloat();
+        layout.size.y = p.second.strip().toFloat();
+        layout.match_content_size = false;
+    }
+    else if (key == "width")
+    {
+        layout.size.x = value.toFloat();
+        layout.match_content_size = false;
+    }
+    else if (key == "height")
+    {
+        layout.size.y = value.toFloat();
+        layout.match_content_size = false;
+    }
+    else if (key == "position")
+    {
+        auto p = value.partition(",");
+        layout.position.x = p.first.strip().toFloat();
+        layout.position.y = p.first.strip().toFloat();
+    }
+    else if (key == "margin")
+    {
+        auto values = value.split(",", 3);
+        if (values.size() == 1)
+        {
+            layout.margin.top = layout.margin.bottom = layout.margin.left = layout.margin.right = values[0].strip().toFloat();
+        }
+        else if (values.size() == 2)
+        {
+            layout.margin.left = layout.margin.right = values[0].strip().toFloat();
+            layout.margin.top = layout.margin.bottom = values[1].strip().toFloat();
+        }
+        else if (values.size() == 3)
+        {
+            layout.margin.left = layout.margin.right = values[0].strip().toFloat();
+            layout.margin.top = values[1].strip().toFloat();
+            layout.margin.bottom = values[2].strip().toFloat();
+        }
+        else if (values.size() == 4)
+        {
+            layout.margin.left = values[0].strip().toFloat();
+            layout.margin.right = values[1].strip().toFloat();
+            layout.margin.top = values[2].strip().toFloat();
+            layout.margin.bottom = values[3].strip().toFloat();
+        }
+    }
+    else if (key == "padding")
+    {
+        auto values = value.split(",", 3);
+        if (values.size() == 1)
+        {
+            layout.padding.top = layout.padding.bottom = layout.padding.left = layout.padding.right = values[0].strip().toFloat();
+        }
+        else if (values.size() == 2)
+        {
+            layout.padding.left = layout.padding.right = values[0].strip().toFloat();
+            layout.padding.top = layout.padding.bottom = values[1].strip().toFloat();
+        }
+        else if (values.size() == 3)
+        {
+            layout.padding.left = layout.padding.right = values[0].strip().toFloat();
+            layout.padding.top = values[1].strip().toFloat();
+            layout.padding.bottom = values[2].strip().toFloat();
+        }
+        else if (values.size() == 4)
+        {
+            layout.padding.left = values[0].strip().toFloat();
+            layout.padding.right = values[1].strip().toFloat();
+            layout.padding.top = values[2].strip().toFloat();
+            layout.padding.bottom = values[3].strip().toFloat();
+        }
+    }
+    else if (key == "span")
+    {
+        auto p = value.partition(",");
+        layout.span.x = p.first.strip().toInt();
+        layout.span.y = p.second.strip().toInt();
+    }
+    else if (key == "alignment")
+    {
+        string v = value.lower();
+        if (v == "topleft" || v == "lefttop") layout.alignment = sp::Alignment::TopLeft;
+        else if (v == "top" || v == "topcenter" || v == "centertop") layout.alignment = sp::Alignment::TopCenter;
+        else if (v == "topright" || v == "righttop") layout.alignment = sp::Alignment::TopRight;
+        else if (v == "left" || v == "leftcenter" || v == "centerleft") layout.alignment = sp::Alignment::CenterLeft;
+        else if (v == "center") layout.alignment = sp::Alignment::Center;
+        else if (v == "right" || v == "rightcenter" || v == "centerright") layout.alignment = sp::Alignment::CenterRight;
+        else if (v == "bottomleft" || v == "leftbottom") layout.alignment = sp::Alignment::BottomLeft;
+        else if (v == "bottom" || v == "bottomcenter" || v == "centerbottom") layout.alignment = sp::Alignment::BottomCenter;
+        else if (v == "bottomright" || v == "rightbottom") layout.alignment = sp::Alignment::BottomRight;
+        else LOG(Warning, "Unknown alignment:", value);
+    }
+    else if (key == "layout")
+    {
+        GuiLayoutClassRegistry* reg;
+        for(reg = GuiLayoutClassRegistry::first; reg != nullptr; reg = reg->next)
+        {
+            if (value == reg->name)
+                break;
+        }
+        if (reg)
+        {
+            layout_manager = reg->creation_function();
+        }else{
+            LOG(Error, "Failed to find layout type:", value);
+        }
+    }
+    else if (key == "stretch")
+    {
+        if (value == "aspect")
+            layout.fill_height = layout.fill_width = layout.lock_aspect_ratio = true;
+        else
+            layout.fill_height = layout.fill_width = value.toBool();
+        layout.match_content_size = false;
+    }
+    else if (key == "fill_height")
+    {
+        layout.fill_height = value.toBool();
+        layout.match_content_size = false;
+    }
+    else if (key == "fill_width")
+    {
+        layout.fill_width = value.toBool();
+        layout.match_content_size = false;
+    }
+    else
+    {
+        LOG(Warning, "Tried to set unknown widget attribute:", key, "to", value);
+    }
+}

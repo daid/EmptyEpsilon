@@ -41,6 +41,7 @@ public:
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}
 
+    virtual void setAttribute(const string& key, const string& value) override;
     GuiElement* setSize(glm::vec2 size);
     GuiElement* setSize(float x, float y);
     glm::vec2 getSize() const;
