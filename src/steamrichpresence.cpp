@@ -1,4 +1,4 @@
-#include "discord.h"
+#include "steamrichpresence.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
