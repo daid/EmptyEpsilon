@@ -43,6 +43,7 @@
 #endif
 #if STEAMSDK
 #include "steam/steam_api.h"
+#include "steamrichpresence.h"
 #endif
 
 #ifdef __APPLE__
@@ -379,6 +380,9 @@ int main(int argc, char** argv)
         new DiscordRichPresence(discord_sdk);
     }
 #endif // WITH_DISCORD
+#if STEAMSDK
+    new SteamRichPresence();
+#endif //STEAMSDK
 
     if (PreferencesManager::get("server_scenario") == "")
         returnToMainMenu(defaultRenderLayer);
