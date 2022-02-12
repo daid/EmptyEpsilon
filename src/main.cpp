@@ -41,6 +41,9 @@
 #if WITH_DISCORD
 #include "discord.h"
 #endif
+#if STEAMSDK
+#include "steam/steam_api.h"
+#endif
 
 #ifdef __APPLE__
 #include <CoreFoundation/CoreFoundation.h>
@@ -122,6 +125,13 @@ int main(int argc, char** argv)
     std::error_code ec;
     if (std::filesystem::exists(CONFIG_DIR, ec))
         configuration_path = CONFIG_DIR;
+#endif
+#ifdef STEAMSDK
+    {
+        char path_buffer[1024];
+        if (SteamUser()->GetUserDataFolder(path_buffer, sizeof(path_buffer)))
+            configuration_path = path_buffer;
+    }
 #endif
     LOG(Info, "Using ", configuration_path, " as configuration path");
     PreferencesManager::load(configuration_path + "/options.ini");
@@ -205,10 +215,14 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("username", "") == "")
     {
+#ifdef STEAMSDK
+        PreferencesManager::set("username", SteamFriends()->GetPlayerNickname(SteamUser()->GetSteamID()));
+#else
         if (getenv("USERNAME"))
             PreferencesManager::set("username", getenv("USERNAME"));
         else if (getenv("USER"))
             PreferencesManager::set("username", getenv("USER"));
+#endif
     }
 
     if (PreferencesManager::get("headless") == "")
