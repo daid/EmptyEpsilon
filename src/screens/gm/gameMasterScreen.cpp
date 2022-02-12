@@ -34,6 +34,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         [this](glm::vec2 position) { this->onMouseUp(position); }
     );
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", glm::u8vec4(255, 255, 255, 32));
+    box_selection_overlay->layout.fill_height = false;
+    box_selection_overlay->layout.fill_width = false;
     box_selection_overlay->hide();
 
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [](bool value) {
@@ -458,9 +460,15 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
         }
         break;
     case CD_BoxSelect:
-        box_selection_overlay->show();
-        box_selection_overlay->setPosition(main_radar->worldToScreen(drag_start_position), sp::Alignment::TopLeft);
-        box_selection_overlay->setSize(main_radar->worldToScreen(position) - main_radar->worldToScreen(drag_start_position));
+        {
+            auto p0 = main_radar->worldToScreen(drag_start_position);
+            auto p1 = main_radar->worldToScreen(position);
+            if (p0.x > p1.x) std::swap(p0.x, p1.x);
+            if (p0.y > p1.y) std::swap(p0.y, p1.y);
+            box_selection_overlay->show();
+            box_selection_overlay->setPosition(p0, sp::Alignment::TopLeft);
+            box_selection_overlay->setSize(p1 - p0);
+        }
         break;
     default:
         break;
