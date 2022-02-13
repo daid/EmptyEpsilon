@@ -58,8 +58,8 @@ HotkeyMenu::HotkeyMenu()
     next_page->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMatchHeight, ROW_HEIGHT)->disable();
 
     // Middle: Rebinding UI frame
-    rebinding_container = new GuiAutoLayout(rebinding_ui, "HOTKEY_CONFIG_CONTAINER", GuiAutoLayout::ELayoutMode::LayoutHorizontalLeftToRight);
-    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN);
+    rebinding_container = new GuiElement(rebinding_ui, "HOTKEY_CONFIG_CONTAINER");
+    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN)->setAttribute("layout", "horizontal");
 
     // Show category 1 ("General")
     HotkeyMenu::setCategory(1);
@@ -94,19 +94,19 @@ void HotkeyMenu::setCategory(int cat)
     }
     text_entries.clear();
 
-    for (GuiLabel* label : label_entries)
+    for (auto label : label_entries)
     {
         label->destroy();
     }
     label_entries.clear();
 
-    for (GuiAutoLayout* row : rebinding_rows)
+    for (auto row : rebinding_rows)
     {
         row->destroy();
     }
     rebinding_rows.clear();
 
-    for (GuiAutoLayout* column : rebinding_columns)
+    for (auto column : rebinding_columns)
     {
         column->destroy();
     }
@@ -139,8 +139,8 @@ void HotkeyMenu::setCategory(int cat)
 
         // Add a rebinding row to the current column.
         column_row_count += 1;
-        rebinding_rows.push_back(new GuiAutoLayout(rebinding_columns.back(), "", GuiAutoLayout::ELayoutMode::LayoutHorizontalLeftToRight));
-        rebinding_rows.back()->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
+        rebinding_rows.push_back(new GuiElement(rebinding_columns.back(), ""));
+        rebinding_rows.back()->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT)->setAttribute("layout", "horizontal");
 
         // Add a label to the current row.
         label_entries.push_back(new GuiLabel(rebinding_rows.back(), "HOTKEY_LABEL_" + item->getName(), item->getLabel(), 30));

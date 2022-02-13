@@ -11,27 +11,27 @@ OnScreenKeyboardControl::OnScreenKeyboardControl(GuiContainer* owner, GuiTextEnt
     GuiAutoLayout* rows = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalTopToBottom);
     rows->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    GuiAutoLayout* row = new GuiAutoLayout(rows, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    row->setSize(GuiElement::GuiSizeMax, 50);
+    auto row = new GuiElement(rows, "");
+    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
     addButtonsToRow(row, "qwertyuiop[]");
     addButtonsToRow(row, "789");
 
-    row = new GuiAutoLayout(rows, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    row->setSize(GuiElement::GuiSizeMax, 50);
+    row = new GuiElement(rows, "");
+    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
     (new GuiElement(row, ""))->setSize(25, 50);
     addButtonsToRow(row, "asdfghjkl;'");
     (new GuiElement(row, ""))->setSize(25, 50);
     addButtonsToRow(row, "456");
 
-    row = new GuiAutoLayout(rows, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    row->setSize(GuiElement::GuiSizeMax, 50);
+    row = new GuiElement(rows, "");
+    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
     (new GuiElement(row, ""))->setSize(50, 50);
     addButtonsToRow(row, "zxcvbnm,./");
     (new GuiElement(row, ""))->setSize(50, 50);
     addButtonsToRow(row, "123");
 
-    row = new GuiAutoLayout(rows, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    row->setSize(GuiElement::GuiSizeMax, 50);
+    row = new GuiElement(rows, "");
+    row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
     (new GuiElement(row, ""))->setSize(25, 50);
     (new GuiButton(row, "", "", [this](){
         target->setText(target->getText() + " ");

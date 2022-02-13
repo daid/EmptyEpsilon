@@ -26,8 +26,9 @@ void GuiLayout::update(GuiContainer& container, const sp::Rect& rect)
 {
     for(GuiElement* w : container.children)
     {
-        if (w->isDestroyed() || !w->isVisible())
+        if (w->isDestroyed() || !w->isVisible()) {
             continue;
+        }
         basicLayout(rect, *w);
     }
 }

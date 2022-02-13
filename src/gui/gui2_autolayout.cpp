@@ -16,14 +16,6 @@ void GuiAutoLayout::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect,
     sp::Alignment alignment = sp::Alignment::CenterLeft;
     switch(mode)
     {
-    case LayoutHorizontalLeftToRight:
-        alignment = sp::Alignment::CenterLeft;
-        scale.x = 1.0;
-        break;
-    case LayoutHorizontalRightToLeft:
-        alignment = sp::Alignment::CenterRight;
-        scale.x = -1.0;
-        break;
     case LayoutVerticalTopToBottom:
         alignment = sp::Alignment::TopCenter;
         scale.y = 1.0;

@@ -14,8 +14,8 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
 : GuiElement(owner, id)
 {
     (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    GuiElement* calibration_row = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    calibration_row->setPosition(0, 50, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    GuiElement* calibration_row = new GuiElement(this, "");
+    calibration_row->setPosition(0, 50, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontalright");
 
     new_frequency = new GuiSelector(calibration_row, "", nullptr);
     new_frequency->setSize(120, 50);

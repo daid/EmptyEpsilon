@@ -100,8 +100,8 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         system_rows.push_back(info);
     }
 
-    GuiAutoLayout* icon_layout = new GuiAutoLayout(system_row_layouts, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
-    icon_layout->setSize(GuiElement::GuiSizeMax, 48);
+    GuiElement* icon_layout = new GuiElement(system_row_layouts, "");
+    icon_layout->setSize(GuiElement::GuiSizeMax, 48)->setAttribute("layout", "horizontal");
     (new GuiElement(icon_layout, "FILLER"))->setSize(300, GuiElement::GuiSizeMax);
     if (gameGlobalInfo->use_system_damage){
         (new GuiImage(icon_layout, "SYSTEM_HEALTH_ICON", "gui/icons/system_health"))->setSize(150, GuiElement::GuiSizeMax);

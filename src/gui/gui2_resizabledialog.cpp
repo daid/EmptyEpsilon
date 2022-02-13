@@ -7,8 +7,8 @@
 GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string title)
 : GuiPanel(owner, id)
 {
-    GuiAutoLayout* title_bar_layout = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    title_bar_layout->setMargins(25, 0)->setSize(GuiElement::GuiSizeMax, title_bar_height);
+    auto title_bar_layout = new GuiElement(this, "");
+    title_bar_layout->setMargins(25, 0)->setSize(GuiElement::GuiSizeMax, title_bar_height)->setAttribute("layout", "horizontalright");
 
     close_button = new GuiButton(title_bar_layout, "", "x", [this](){
         onClose();

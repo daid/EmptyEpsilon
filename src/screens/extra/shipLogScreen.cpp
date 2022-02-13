@@ -6,11 +6,12 @@
 #include "gui/gui2_advancedscrolltext.h"
 #include "screenComponents/customShipFunctions.h"
 
+
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
 : GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
 {
-    GuiAutoLayout* shiplog_layout = new GuiAutoLayout(this, "SHIPLOG_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
-    shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    GuiElement* shiplog_layout = new GuiElement(this, "SHIPLOG_LAYOUT");
+    shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontalright");
     custom_function_sidebar= new GuiCustomShipFunctions(shiplog_layout, shipLog, "");
     custom_function_sidebar->setSize(270, GuiElement::GuiSizeMax);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");

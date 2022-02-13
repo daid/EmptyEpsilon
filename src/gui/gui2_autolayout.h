@@ -9,8 +9,6 @@ public:
     enum ELayoutMode
     {
         /* Various layout options, set the position of children */
-        LayoutHorizontalLeftToRight,
-        LayoutHorizontalRightToLeft,
         LayoutVerticalTopToBottom,
         LayoutVerticalBottomToTop,
 
