@@ -124,8 +124,8 @@ ShipSelectionScreen::ShipSelectionScreen()
 
     auto right_panel = new GuiPanel(right_container, "DIRECT_OPTIONS_PANEL");
     right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
-    auto right_content = new GuiAutoLayout(right_panel, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_content->setMargins(50)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    auto right_content = new GuiElement(right_panel, "");
+    right_content->setMargins(50)->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     // Game master button
     if (game_server) {
@@ -183,8 +183,8 @@ ShipSelectionScreen::ShipSelectionScreen()
     {
         auto extra_settings_panel = new GuiPanel(this, "");
         extra_settings_panel->setSize(600, 325)->setPosition(0, 0, sp::Alignment::Center)->hide();
-        auto extra_settings = new GuiAutoLayout(extra_settings_panel, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-        extra_settings->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(25);
+        auto extra_settings = new GuiElement(extra_settings_panel, "");
+        extra_settings->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(25)->setAttribute("layout", "vertical");
         // Science scan complexity selector.
         auto row = new GuiElement(extra_settings, "");
         row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
@@ -424,8 +424,8 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     auto one = new GuiPanel(container, "");
     one->setMargins(50, 50, 25, 100);
     (new GuiLabel(one, "CREW_POSITION_SELECT_LABEL", tr("6/5 player crew"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
-    auto layout = new GuiAutoLayout(one, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    auto layout = new GuiElement(one, "");
+    layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     main_screen_button = new GuiToggleButton(layout, "", tr("Main screen"), [this](bool value) {
         my_player_info->commandSetMainScreen(window_index, value);
         unselectSingleOptions();
@@ -449,16 +449,16 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     auto two = new GuiPanel(container, "");
     two->setMargins(25, 50, 25, 100);
     (new GuiLabel(two, "CREW_POSITION_SELECT_LABEL", tr("4/3/1 player crew"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
-    layout = new GuiAutoLayout(two, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    layout = new GuiElement(two, "");
+    layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     for(int n=int(tacticalOfficer); n<=int(singlePilot); n++)
         create_crew_position_button(layout, n);
 
     auto three = new GuiPanel(container, "");
     three->setMargins(25, 50, 50, 100);
     (new GuiLabel(three, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
-    layout = new GuiAutoLayout(three, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    layout = new GuiElement(three, "");
+    layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     for(int n=int(singlePilot) + 1; n<int(max_crew_positions); n++)
         create_crew_position_button(layout, n);
 

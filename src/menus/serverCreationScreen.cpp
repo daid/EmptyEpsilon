@@ -24,8 +24,8 @@ ServerSetupScreen::ServerSetupScreen()
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // Create main layout
-    GuiElement* main_panel = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    main_panel->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(750, GuiElement::GuiSizeMax);
+    GuiElement* main_panel = new GuiElement(this, "");
+    main_panel->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(750, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     // Left column contents.
     // General section.
@@ -165,12 +165,12 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     GuiElement* container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
     container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    GuiElement* left = new GuiAutoLayout(new GuiElement(container, ""), "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax);
-    GuiElement* middle = new GuiAutoLayout(new GuiElement(container, ""), "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    middle->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax);
-    GuiElement* right = new GuiAutoLayout(new GuiElement(container, ""), "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax);
+    GuiElement* left = new GuiElement(new GuiElement(container, ""), "");
+    left->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    GuiElement* middle = new GuiElement(new GuiElement(container, ""), "");
+    middle->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    GuiElement* right = new GuiElement(new GuiElement(container, ""), "");
+    right->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     (new GuiLabel(left, "GENERAL_LABEL", tr("Category"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     category_list = new GuiListbox(left, "SCENARIO_CATEGORY", [this](int index, string value) {
@@ -275,14 +275,14 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     GuiElement* column_container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
     column_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    GuiAutoLayout* container = nullptr;
+    GuiElement* container = nullptr;
     int count = 0;
     for(auto& setting : info.settings)
     {
         if (!container || count == 2)
         {
-            container = new GuiAutoLayout(new GuiElement(column_container, ""), "", GuiAutoLayout::LayoutVerticalTopToBottom);
-            container->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(350, GuiElement::GuiSizeMax);
+            container = new GuiElement(new GuiElement(column_container, ""), "");
+            container->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(350, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
             count = 0;
         }
         (new GuiLabel(container, "", setting.key_localized, 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);

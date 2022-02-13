@@ -5,7 +5,6 @@
 #include "Updatable.h"
 
 class GuiScrollText;
-class GuiAutoLayout;
 class GuiSelector;
 class GuiTextEntry;
 class GuiListbox;

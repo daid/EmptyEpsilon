@@ -16,34 +16,6 @@ void GuiAutoLayout::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect,
     sp::Alignment alignment = sp::Alignment::CenterLeft;
     switch(mode)
     {
-    case LayoutVerticalTopToBottom:
-        alignment = sp::Alignment::TopCenter;
-        scale.y = 1.0;
-        break;
-    case LayoutVerticalBottomToTop:
-        alignment = sp::Alignment::BottomCenter;
-        scale.y = -1.0;
-        break;
-    case LayoutHorizontalRows:
-        {
-            int count = 0;
-            for(GuiElement* element : children)
-            {
-                if (!element->isDestroyed() && element->isVisible())
-                    count += 1;
-            }
-            for(GuiElement* element : children)
-            {
-                if (!element->isDestroyed() && element->isVisible())
-                {
-                    element->setSize(GuiElement::GuiSizeMax, parent_rect.size.y / count);
-                    element->setPosition(offset.x, offset.y);
-                    offset.y += parent_rect.size.y / count;
-                }
-            }
-        }
-        GuiContainer::drawElements(mouse_position, parent_rect, renderer);
-        return;
     case LayoutVerticalColumns:
         {
             int count = 0;

@@ -8,8 +8,8 @@ OnScreenKeyboardControl::OnScreenKeyboardControl(GuiContainer* owner, GuiTextEnt
 : GuiElement(owner, "")
 {
     this->target = _target;
-    GuiAutoLayout* rows = new GuiAutoLayout(this, "", GuiAutoLayout::LayoutVerticalTopToBottom);
-    rows->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    auto rows = new GuiElement(this, "");
+    rows->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     auto row = new GuiElement(rows, "");
     row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");

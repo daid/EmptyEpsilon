@@ -11,7 +11,6 @@ class GuiRadarView;
 class GuiKeyValueDisplay;
 class GuiFrequencyCurve;
 class GuiScrollText;
-class GuiAutoLayout;
 class GuiButton;
 class GuiScanTargetButton;
 class GuiToggleButton;
@@ -38,7 +37,7 @@ public:
     GuiLabel* zoom_label;
 
     GuiSelector* sidebar_selector;
-    GuiAutoLayout* info_sidebar;
+    GuiElement* info_sidebar;
     GuiCustomShipFunctions* custom_function_sidebar;
     GuiSelector* sidebar_pager;
     GuiScanTargetButton* scan_button;

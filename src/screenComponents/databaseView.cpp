@@ -150,8 +150,8 @@ void DatabaseViewComponent::display()
     {
         left_column_width = 400;
     }
-    GuiAutoLayout* right = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_RIGHT", GuiAutoLayout::LayoutHorizontalRows);
-    right->setPosition(left_column_width, 0, sp::Alignment::TopLeft)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    auto right = new GuiElement(database_entry, "DATABASE_ENTRY_RIGHT");
+    right->setPosition(left_column_width, 0, sp::Alignment::TopLeft)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     if (has_image_or_model)
     {
         GuiElement* visual = (new GuiElement(right, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -189,8 +189,8 @@ void DatabaseViewComponent::display()
     // we render the left column second so it overlays the rotating 3D model
     if (has_key_values)
     {
-        GuiAutoLayout* left = new GuiAutoLayout(database_entry, "DATABASE_ENTRY_LEFT", GuiAutoLayout::LayoutVerticalTopToBottom);
-        left->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(0, 0, 20, 0)->setSize(left_column_width, GuiElement::GuiSizeMax);
+        auto left = new GuiElement(database_entry, "DATABASE_ENTRY_LEFT");
+        left->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(0, 0, 20, 0)->setSize(left_column_width, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
         for(unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
         {

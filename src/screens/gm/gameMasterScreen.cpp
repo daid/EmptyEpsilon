@@ -141,8 +141,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     player_comms_hail->setPosition(20, -170, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
-    info_layout = new GuiAutoLayout(this, "INFO_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    info_layout->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax);
+    info_layout = new GuiElement(this, "INFO_LAYOUT");
+    info_layout->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     info_clock = new GuiKeyValueDisplay(info_layout, "INFO_CLOCK", 0.5, tr("Clock"), "");
     info_clock->setSize(GuiElement::GuiSizeMax, 30);
@@ -163,8 +163,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     gm_script_options->setPosition(20, 130, sp::Alignment::TopLeft)->setSize(250, 500);
 
-    order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalBottomToTop);
-    order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax);
+    order_layout = new GuiElement(this, "ORDER_LAYOUT");
+    order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
         for(P<SpaceObject> obj : targets.getTargets())

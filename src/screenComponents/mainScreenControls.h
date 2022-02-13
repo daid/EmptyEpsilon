@@ -1,12 +1,12 @@
 #ifndef MAIN_SCREEN_CONTROLS_H
 #define MAIN_SCREEN_CONTROLS_H
 
-#include "gui/gui2_autolayout.h"
+#include "gui/gui2_element.h"
 
 class GuiToggleButton;
 class GuiButton;
 
-class GuiMainScreenControls : public GuiAutoLayout
+class GuiMainScreenControls : public GuiElement
 {
 private:
     GuiToggleButton* open_button = nullptr;

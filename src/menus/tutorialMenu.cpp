@@ -22,8 +22,8 @@ TutorialMenu::TutorialMenu()
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // Draw a one-column autolayout container with margins.
-    container = new GuiAutoLayout(this, "TUTORIAL_CONTAINER", GuiAutoLayout::ELayoutMode::LayoutVerticalTopToBottom);
-    container->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(50);
+    container = new GuiElement(this, "TUTORIAL_CONTAINER");
+    container->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(50)->setAttribute("layout", "vertical");
 
     // Tutorial section.
     (new GuiLabel(container, "TUTORIAL_LABEL", tr("title", "Tutorials"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);

@@ -9,7 +9,6 @@ class GuiSelfDestructButton;
 class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiSlider;
-class GuiAutoLayout;
 class GuiImage;
 class GuiArrow;
 class GuiToggleButton;
@@ -48,7 +47,7 @@ private:
         GuiImage* coolant_max_indicator;
     };
     std::vector<SystemRow> system_rows;
-    GuiAutoLayout* system_effects_container;
+    GuiElement* system_effects_container;
     std::vector<GuiKeyValueDisplay*> system_effects;
     unsigned int system_effects_index;
     ESystem selected_system;

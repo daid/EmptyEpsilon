@@ -62,8 +62,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
-    GuiAutoLayout* stats = new GuiAutoLayout(this, "STATS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160);
+    auto stats = new GuiElement(this, "STATS");
+    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 160)->setAttribute("layout", "vertical");
 
     // Ship statistics in the top left corner.
     energy_display = new GuiKeyValueDisplay(stats, "ENERGY_DISPLAY", 0.45, tr("Energy"), "");

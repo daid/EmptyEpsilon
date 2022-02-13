@@ -9,7 +9,7 @@ class GuiProgressbar;
 class GuiLabel;
 class GuiToggleButton;
 
-class GuiMissileTubeControls : public GuiAutoLayout
+class GuiMissileTubeControls : public GuiElement
 {
 private:
     struct TubeRow {

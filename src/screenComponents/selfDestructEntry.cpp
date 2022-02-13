@@ -17,8 +17,8 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
 
     box = new GuiPanel(this, id + "_BOX");
     box->setPosition(0, 0, sp::Alignment::Center);
-    GuiAutoLayout* layout = new GuiAutoLayout(box, id + "_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    auto layout = new GuiElement(box, id + "_LAYOUT");
+    layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     (new GuiLabel(layout, id + "_LABEL", tr("Self destruct activated!"), 50))->setSize(GuiElement::GuiSizeMax, 80);
     code_label = new GuiLabel(layout, id + "_CODE_LABEL", "", 30);
     code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);

@@ -24,11 +24,11 @@ OptionsMenu::OptionsMenu()
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // Initialize autolayout columns.
-    left_container = new GuiAutoLayout(this, "OPTIONS_LEFT_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
-    left_container->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax);
+    left_container = new GuiElement(this, "OPTIONS_LEFT_CONTAINER");
+    left_container->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    right_container = new GuiAutoLayout(this, "OPTIONS_RIGHT_CONTAINER", GuiAutoLayout::LayoutVerticalTopToBottom);
-    right_container->setPosition(-50, 50, sp::Alignment::TopRight)->setSize(600, GuiElement::GuiSizeMax);
+    right_container = new GuiElement(this, "OPTIONS_RIGHT_CONTAINER");
+    right_container->setPosition(-50, 50, sp::Alignment::TopRight)->setSize(600, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     // Options pager
     options_pager = new GuiSelector(left_container, "OPTIONS_PAGER", [this](int index, string value)
@@ -39,12 +39,12 @@ OptionsMenu::OptionsMenu()
     });
     options_pager->setOptions({tr("Graphics options"), tr("Audio options"), tr("Interface options")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, 50);
 
-    graphics_page = new GuiAutoLayout(left_container, "OPTIONS_GRAPHICS", GuiAutoLayout::LayoutVerticalTopToBottom);
-    graphics_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->show();
-    audio_page = new GuiAutoLayout(left_container, "OPTIONS_AUDIO", GuiAutoLayout::LayoutVerticalTopToBottom);
-    audio_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
-    interface_page = new GuiAutoLayout(left_container, "OPTIONS_INTERFACE", GuiAutoLayout::LayoutVerticalTopToBottom);
-    interface_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    graphics_page = new GuiElement(left_container, "OPTIONS_GRAPHICS");
+    graphics_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->show()->setAttribute("layout", "vertical");
+    audio_page = new GuiElement(left_container, "OPTIONS_AUDIO");
+    audio_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "vertical");
+    interface_page = new GuiElement(left_container, "OPTIONS_INTERFACE");
+    interface_page->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "vertical");
 
     setupGraphicsOptions();
 

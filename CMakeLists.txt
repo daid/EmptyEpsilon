@@ -285,6 +285,7 @@ set(SOURCES
     src/gui/gui2_overlay.cpp
     src/gui/layout/layout.cpp
     src/gui/layout/horizontal.cpp
+    src/gui/layout/vertical.cpp
     src/spaceObjects/missiles/missileWeapon.cpp
     src/spaceObjects/missiles/EMPMissile.cpp
     src/spaceObjects/missiles/homingMissile.cpp
@@ -372,6 +373,7 @@ set(SOURCES
     src/gui/gui2_togglebutton.h
     src/gui/layout/layout.h
     src/gui/layout/horizontal.h
+    src/gui/layout/vertical.h
     src/gui/hotkeyBinder.h
     src/gui/hotkeyConfig.h
     src/gui/joystickConfig.h

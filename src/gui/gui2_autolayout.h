@@ -8,11 +8,6 @@ class GuiAutoLayout : public GuiElement
 public:
     enum ELayoutMode
     {
-        /* Various layout options, set the position of children */
-        LayoutVerticalTopToBottom,
-        LayoutVerticalBottomToTop,
-
-        LayoutHorizontalRows,   /* Evenly spaced horizontal rows. Using up all space. Sets the position and size of children */
         LayoutVerticalColumns   /* Evenly spaced vertical columns. Using up all space. Sets the position and size of children */
     };
 private:

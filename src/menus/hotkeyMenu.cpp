@@ -133,8 +133,8 @@ void HotkeyMenu::setCategory(int cat)
         if (rebinding_rows.size() == 0 || column_row_count >= KEY_ROW_COUNT)
         {
             column_row_count = 0;
-            rebinding_columns.push_back(new GuiAutoLayout(rebinding_container, "", GuiAutoLayout::ELayoutMode::LayoutVerticalTopToBottom));
-            rebinding_columns.back()->setSize(KEY_COLUMN_WIDTH, KEY_COLUMN_HEIGHT)->setMargins(0, 50);
+            rebinding_columns.push_back(new GuiElement(rebinding_container, ""));
+            rebinding_columns.back()->setSize(KEY_COLUMN_WIDTH, KEY_COLUMN_HEIGHT)->setMargins(0, 50)->setAttribute("layout", "vertical");
         }
 
         // Add a rebinding row to the current column.

@@ -5,8 +5,9 @@
 #include "gui/gui2_label.h"
 
 GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPosition position, string id)
-: GuiAutoLayout(owner, id, GuiAutoLayout::LayoutVerticalTopToBottom), position(position)
+: GuiElement(owner, id), position(position)
 {
+    setAttribute("layout", "vertical");
 }
 
 void GuiCustomShipFunctions::onDraw(sp::RenderTarget& target)

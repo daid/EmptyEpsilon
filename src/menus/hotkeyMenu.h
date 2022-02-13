@@ -8,7 +8,6 @@
 #include "gui/hotkeyBinder.h"
 
 class GuiArrowButton;
-class GuiAutoLayout;
 class GuiOverlay;
 class GuiSlider;
 class GuiLabel;

@@ -14,8 +14,8 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    GuiAutoLayout* system_health_layout = new GuiAutoLayout(this, "DAMCON_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
-    system_health_layout->setPosition(0, 0, sp::Alignment::CenterLeft)->setSize(300, 600);
+    auto system_health_layout = new GuiElement(this, "DAMCON_LAYOUT");
+    system_health_layout->setPosition(0, 0, sp::Alignment::CenterLeft)->setSize(300, 600)->setAttribute("layout", "vertical");
 
     hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8, tr("damagecontrol", "Hull"), "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40);
