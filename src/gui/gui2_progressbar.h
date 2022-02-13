@@ -3,6 +3,8 @@
 
 #include "gui2_element.h"
 
+
+class GuiThemeStyle;
 class GuiProgressbar : public GuiElement
 {
 private:
@@ -11,6 +13,8 @@ private:
     float value;
     glm::u8vec4 color;
     bool drawBackground;
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
 
     string text;
 public:

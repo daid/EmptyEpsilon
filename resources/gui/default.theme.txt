@@ -26,6 +26,11 @@
                 color.disabled: #FF00004D
             }
         }
+        [button.arrow] {
+            image: gui/widget/SelectorArrow.png
+            color.hover: #CCCCCC
+            color.disabled: #FFFFFF4D
+        }
     }
     
     [label] {
@@ -54,6 +59,31 @@
             image: gui/widget/SliderKnob.png
             color.disabled: #404040
             color.hover: #CCCCCC
+        }
+    }
+    
+    [scrollbar] {
+        [scrollbar.back] {
+            image: gui/widget/ScrollbarBackground.png
+        }
+        [scrollbar.front] {
+            image: gui/widget/ScrollbarSelection.png
+            color.disabled: #404040
+            color.hover: #CCCCCC
+        }
+    }
+    
+    [panel] {
+        size: 25.0
+        image: gui/widget/PanelBackground.png
+    }
+    
+    [progressbar] {
+        [progressbar.back] {
+            image: gui/widget/ProgressbarBackground.png
+        }
+        [progressbar.front] {
+            image: gui/widget/ProgressbarFill.png
         }
     }
     

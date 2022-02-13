@@ -19,8 +19,8 @@ GuiTextEntry::~GuiTextEntry()
 
 void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 {
-    auto back = back_style->get(getState());
-    auto front = front_style->get(getState());
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
     renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
     if (blink_timer.isExpired())

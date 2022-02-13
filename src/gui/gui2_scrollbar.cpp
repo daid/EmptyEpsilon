@@ -1,9 +1,14 @@
 #include "gui2_scrollbar.h"
 #include "gui2_arrowbutton.h"
+#include "theme.h"
+
 
 GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int max_value, int start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), desired_value(start_value), value_size(1), func(func)
 {
+    back_style = theme->getStyle("scrollbar.back");
+    front_style = theme->getStyle("scrollbar.front");
+
     (new GuiArrowButton(this, id + "_UP_ARROW", 90, [this]() {
         setValue(getValue() - 1);
     }))->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
@@ -14,7 +19,10 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
 
 void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawStretched(rect, "gui/widget/ScrollbarBackground.png");
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
+
+    renderer.drawStretched(rect, back.texture, back.color);
 
     int range = (max_value - min_value);
     float arrow_size = rect.size.x / 2.0f;
@@ -22,7 +30,7 @@ void GuiScrollbar::onDraw(sp::RenderTarget& renderer)
     float bar_size = move_height * value_size / range;
     if (bar_size > move_height)
         bar_size = move_height;
-    renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), "gui/widget/ScrollbarSelection.png", glm::u8vec4{255,255,255,255});
+    renderer.drawStretched(sp::Rect(rect.position.x, rect.position.y + arrow_size + move_height * getValue() / range, rect.size.x, bar_size), front.texture, front.color);
 }
 
 bool GuiScrollbar::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

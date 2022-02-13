@@ -14,8 +14,8 @@ GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, 
 
 void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 {
-    auto back = back_style->get(getState());
-    auto front = front_style->get(getState());
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
     renderer.drawStretched(rect, back.texture, back.color);
 
@@ -116,9 +116,9 @@ GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_
 
 void GuiSlider::onDraw(sp::RenderTarget& renderer)
 {
-    auto back = back_style->get(getState());
-    auto tick = tick_style->get(getState());
-    auto front = front_style->get(getState());
+    const auto& back = back_style->get(getState());
+    const auto& tick = tick_style->get(getState());
+    const auto& front = front_style->get(getState());
 
     renderer.drawStretched(rect, back.texture, back.color);
 
@@ -234,8 +234,8 @@ GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, gl
 
 void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 {
-    auto back = back_style->get(getState());
-    auto front = front_style->get(getState());
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
     renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
 

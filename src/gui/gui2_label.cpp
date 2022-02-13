@@ -11,8 +11,8 @@ GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
 
 void GuiLabel::onDraw(sp::RenderTarget& renderer)
 {
-    auto back = back_style->get(getState());
-    auto front = front_style->get(getState());
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
     
     if (background)
         renderer.drawStretched(rect, back.texture, back.color);

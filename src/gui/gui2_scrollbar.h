@@ -3,6 +3,8 @@
 
 #include "gui2_element.h"
 
+
+class GuiThemeStyle;
 class GuiScrollbar : public GuiElement
 {
     typedef std::function<void(int value)> func_t;
@@ -16,6 +18,9 @@ protected:
 
     bool drag_scrollbar;
     float drag_select_offset;
+
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
 public:
     GuiScrollbar(GuiContainer* owner, string id, int min_value, int max_value, int start_value, func_t func);
 

@@ -23,8 +23,8 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
 {
     focus = key->isUserRebinding();
-    auto back = back_style->get(getState());
-    auto front = front_style->get(getState());
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
     renderer.drawStretched(rect, back.texture, back.color);
 

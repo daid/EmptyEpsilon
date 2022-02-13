@@ -3,8 +3,12 @@
 
 #include "gui2_element.h"
 
+
+class GuiThemeStyle;
 class GuiPanel : public GuiElement
 {
+protected:
+    const GuiThemeStyle* style;
 public:
     GuiPanel(GuiContainer* owner, string id);
 
