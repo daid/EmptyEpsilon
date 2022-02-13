@@ -1,4 +1,5 @@
 #include "gui2_element.h"
+#include "theme.h"
 #include "main.h"
 
 
@@ -7,6 +8,7 @@ GuiElement::GuiElement(GuiContainer* owner, const string& id)
 {
     owner->children.push_back(this);
     destroyed = false;
+    theme = owner->theme;
 }
 
 GuiElement::~GuiElement()
@@ -238,4 +240,17 @@ glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
     if (focus)
         return color_set.focus;
     return color_set.normal;
+}
+
+GuiElement::State GuiElement::getState() const
+{
+    if (!enabled)
+        return State::Disabled;
+    if (active)
+        return State::Active;
+    if (hover)
+        return State::Hover;
+    if (focus)
+        return State::Focus;
+    return State::Normal;
 }

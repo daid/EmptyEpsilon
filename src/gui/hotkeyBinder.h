@@ -3,13 +3,16 @@
 
 #include "gui2_element.h"
 
-class HotkeyConfig;
 
+class GuiThemeStyle;
 class GuiHotkeyBinder : public GuiElement
 {
 private:
     bool has_focus;
     sp::io::Keybinding* key;
+
+    const GuiThemeStyle* front_style;
+    const GuiThemeStyle* back_style;
 public:
     GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key);
 

@@ -3,6 +3,8 @@
 
 #include "gui2_element.h"
 
+
+class GuiThemeStyle;
 class GuiLabel : public GuiElement
 {
 protected:
@@ -13,6 +15,8 @@ protected:
     bool background;
     bool bold;
     bool vertical;
+    const GuiThemeStyle* front_style;
+    const GuiThemeStyle* back_style;
 public:
     GuiLabel(GuiContainer* owner, string id, string text, float text_size);
 
@@ -23,7 +27,6 @@ public:
     GuiLabel* setAlignment(sp::Alignment alignment);
     GuiLabel* addBackground();
     GuiLabel* setVertical();
-    GuiLabel* setBold(bool bold=true);
 };
 
 #endif//GUI2_LABEL_H

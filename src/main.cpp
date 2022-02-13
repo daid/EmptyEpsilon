@@ -17,6 +17,7 @@
 #include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "gui/colorConfig.h"
+#include "gui/theme.h"
 #include "gui/hotkeyConfig.h"
 #include "gui/joystickConfig.h"
 #include "menus/mainMenus.h"
@@ -314,17 +315,21 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    P<ResourceStream> main_font_stream = getResourceStream(PreferencesManager::get("font_regular", "gui/fonts/BigShouldersDisplay-SemiBold.ttf"));
-    if (!main_font_stream)
+    if (!GuiTheme::loadTheme("default", PreferencesManager::get("guitheme", "gui/default.theme.txt")))
     {
-        LOG(ERROR, "Failed to load main font, exiting.");
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to find main font file.", nullptr);
+        LOG(ERROR, "Failed to load default theme, exiting.");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing?", nullptr);
         return 1;
     }
-    main_font = new sp::FreetypeFont(main_font_stream);
 
-    P<ResourceStream> bold_font_stream = getResourceStream(PreferencesManager::get("font_bold", "gui/fonts/BigShouldersDisplay-ExtraBold.ttf"));
-    bold_font = new sp::FreetypeFont(bold_font_stream);
+    main_font = GuiTheme::getTheme("default")->getStyle("base")->states[0].font;
+    bold_font = GuiTheme::getTheme("default")->getStyle("bold")->states[0].font;
+    if (!main_font || !bold_font)
+    {
+        LOG(ERROR, "Missing font or bold font.");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load main or bold font, resources missing?", nullptr);
+        return 1;
+    }
 
     sp::RenderTarget::setDefaultFont(main_font);
 

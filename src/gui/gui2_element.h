@@ -28,6 +28,16 @@ public:
     constexpr static float GuiSizeMatchWidth = -1.0;
     constexpr static float GuiSizeMax = -2.0;
 
+    enum class State
+    {
+        Normal,
+        Active,
+        Disabled,
+        Hover,
+        Focus,
+        COUNT
+    };
+
     GuiElement(GuiContainer* owner, const string& id);
     virtual ~GuiElement();
 
@@ -80,6 +90,7 @@ public:
 
 protected:
     glm::u8vec4 selectColor(const ColorSet& color_set) const;
+    State getState() const;
 };
 
 #endif//GUI2_ELEMENT_H

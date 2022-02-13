@@ -1,4 +1,5 @@
 #include "gui2_textentry.h"
+#include "theme.h"
 #include "clipboard.h"
 
 
@@ -6,6 +7,8 @@ GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text), text_size(30), func(nullptr)
 {
     blink_timer.repeat(blink_rate);
+    front_style = theme->getStyle("textentry.front");
+    back_style = theme->getStyle("textentry.back");
 }
 
 GuiTextEntry::~GuiTextEntry()
@@ -16,15 +19,15 @@ GuiTextEntry::~GuiTextEntry()
 
 void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 {
-    if (focus)
-        renderer.drawStretchedHV(rect, text_size, "gui/widget/TextEntryBackground.focused.png", selectColor(colorConfig.text_entry.background));
-    else
-        renderer.drawStretchedHV(rect, text_size, "gui/widget/TextEntryBackground.png", selectColor(colorConfig.text_entry.background));
+    auto back = back_style->get(getState());
+    auto front = front_style->get(getState());
+
+    renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
     if (blink_timer.isExpired())
         typing_indicator = !typing_indicator;
 
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
-    auto prepared = main_font->prepare(text, 32, text_size, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
+    auto prepared = front.font->prepare(text, 32, text_size, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
     for(auto& d : prepared.data)
         d.position += render_offset;
 

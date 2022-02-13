@@ -15,6 +15,7 @@ namespace sp {
 
 class GuiElement;
 class GuiLayout;
+class GuiTheme;
 class GuiContainer : sp::NonCopyable
 {
 public:
@@ -45,6 +46,8 @@ public:
 
     LayoutInfo layout;    
     std::list<GuiElement*> children;
+protected:
+    GuiTheme* theme;
 public:
     GuiContainer() = default;
     virtual ~GuiContainer();

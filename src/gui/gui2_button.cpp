@@ -1,28 +1,21 @@
 #include "soundManager.h"
-#include "colorConfig.h"
+#include "theme.h"
 #include "gui2_button.h"
 #include "preferenceManager.h"
 
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 : GuiElement(owner, id), text(text), func(func)
 {
-    text_size = 30;
-    color_set = colorConfig.button;
+    text_size = -1;
+    back_style = theme->getStyle("button.back");
+    front_style = theme->getStyle("button.front");
 }
 
 void GuiButton::onDraw(sp::RenderTarget& renderer)
 {
-    glm::u8vec4 color = selectColor(color_set.background);
-    glm::u8vec4 text_color = selectColor(color_set.forground);
-
-    if (!enabled)
-        renderer.drawStretched(rect, "gui/widget/ButtonBackground.disabled.png", color);
-    else if (active)
-        renderer.drawStretched(rect, "gui/widget/ButtonBackground.active.png", color);
-    else if (hover)
-        renderer.drawStretched(rect, "gui/widget/ButtonBackground.hover.png", color);
-    else
-        renderer.drawStretched(rect, "gui/widget/ButtonBackground.png", color);
+    auto back = back_style->get(getState());
+    auto front = front_style->get(getState());
+    renderer.drawStretched(rect, back.texture, back.color);
 
     if (icon_name != "")
     {
@@ -42,10 +35,10 @@ void GuiButton::onDraw(sp::RenderTarget& renderer)
             text_rect.size.x = rect.size.x - rect.size.y;
             text_align = sp::Alignment::CenterRight;
         }
-        renderer.drawSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, text_color);
-        renderer.drawText(text_rect, text, text_align, text_size, main_font, text_color);
+        renderer.drawSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, front.color);
+        renderer.drawText(text_rect, text, text_align, text_size > 0 ? text_size : front.size, front.font, front.color);
     }else{
-        renderer.drawText(rect, text, sp::Alignment::Center, text_size, main_font, text_color);
+        renderer.drawText(rect, text, sp::Alignment::Center, text_size > 0 ? text_size : front.size, front.font, front.color);
     }
 }
 
@@ -92,18 +85,14 @@ GuiButton* GuiButton::setIcon(string icon_name, sp::Alignment icon_alignment, fl
     return this;
 }
 
-GuiButton* GuiButton::setColors(WidgetColorSet color_set)
+GuiButton* GuiButton::setStyle(const string& style)
 {
-    this->color_set = color_set;
+    back_style = theme->getStyle(style + ".back");
+    front_style = theme->getStyle(style + ".front");
     return this;
 }
 
 string GuiButton::getIcon() const
 {
     return icon_name;
-}
-
-WidgetColorSet GuiButton::getColors() const
-{
-    return color_set;
 }

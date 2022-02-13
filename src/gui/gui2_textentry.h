@@ -4,6 +4,8 @@
 #include "gui2_element.h"
 #include "timer.h"
 
+
+class GuiThemeStyle;
 class GuiTextEntry : public GuiElement
 {
 public:
@@ -17,6 +19,8 @@ protected:
     float text_size;
     bool multiline = false;
     bool readonly = false;
+    const GuiThemeStyle* front_style;
+    const GuiThemeStyle* back_style;
     func_t func;
     func_t enter_func;
 

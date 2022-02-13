@@ -1,10 +1,14 @@
 #include "engine.h"
 #include "hotkeyConfig.h"
 #include "hotkeyBinder.h"
+#include "theme.h"
+
 
 GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key)
 : GuiElement(owner, id), has_focus(false), key(key)
 {
+    front_style = theme->getStyle("textentry.front");
+    back_style = theme->getStyle("textentry.back");
 }
 
 bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -18,14 +22,16 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 
 void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
 {
-    if (key->isUserRebinding())
-        renderer.drawStretched(rect, "gui/widget/TextEntryBackground.focused.png", selectColor(colorConfig.text_entry.background));
-    else
-        renderer.drawStretched(rect, "gui/widget/TextEntryBackground.png", selectColor(colorConfig.text_entry.background));
+    focus = key->isUserRebinding();
+    auto back = back_style->get(getState());
+    auto front = front_style->get(getState());
+
+    renderer.drawStretched(rect, back.texture, back.color);
+
     string text = key->getHumanReadableKeyName(0);
     for(int n=1; key->getKeyType(n) != sp::io::Keybinding::Type::None; n++)
         text += "," + key->getHumanReadableKeyName(n);
     if (key->isUserRebinding())
         text = "[Press new key]";
-    renderer.drawText(sp::Rect(rect.position.x + 16, rect.position.y, rect.size.x, rect.size.y), text, sp::Alignment::CenterLeft, 30, main_font, selectColor(colorConfig.text_entry.forground));
+    renderer.drawText(sp::Rect(rect.position.x + 16, rect.position.y, rect.size.x, rect.size.y), text, sp::Alignment::CenterLeft, front.size, front.font, front.color);
 }

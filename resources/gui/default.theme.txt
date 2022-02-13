@@ -1,0 +1,64 @@
+[base] {
+    font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+    
+    [button] {
+        color: #ffffff
+        size: 30
+        [button.back] {
+            image: gui/widget/ButtonBackground.png
+            image.active: gui/widget/ButtonBackground.active.png
+            image.hover: gui/widget/ButtonBackground.hover.png
+            image.disabled: gui/widget/ButtonBackground.disabled.png
+            color.disabled: #808080
+            
+            [button.selfdestruct.back] {
+                color: #FF0000
+                color.disabled: #A08080
+            }
+        }
+        [button.front] {
+            color.disabled: #FFFFFF4D
+            color.active: #120A00
+
+            [button.selfdestruct.front] {
+                color: #FF0000
+                color.active: #120000
+                color.disabled: #FF00004D
+            }
+        }
+    }
+    
+    [label] {
+        [label.back] {
+            image: gui/widget/LabelBackground.png
+        }
+    }
+    
+    [textentry] {
+        size: 30
+        [textentry.back] {
+            image: gui/widget/TextEntryBackground.png
+            image.focus: gui/widget/TextEntryBackground.focused.png
+        }
+    }
+    
+    [slider] {
+        [slider.back] {
+            size: 25
+            image: gui/widget/SliderBackground.png
+        }
+        [slider.tick] {
+            image: gui/widget/SliderTick.png
+        }
+        [slider.front] {
+            image: gui/widget/SliderKnob.png
+            color.disabled: #404040
+            color.hover: #CCCCCC
+        }
+    }
+    
+    # Stronger font used at a few locations without UI widgets.
+    [bold] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+    }
+}

@@ -1,11 +1,13 @@
 #include "gui2_canvas.h"
 #include "gui2_element.h"
+#include "theme.h"
 
 
 GuiCanvas::GuiCanvas(RenderLayer* renderLayer)
 : Renderable(renderLayer), click_element(nullptr), focus_element(nullptr)
 {
     enable_debug_rendering = false;
+    theme = GuiTheme::getTheme("default");
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined

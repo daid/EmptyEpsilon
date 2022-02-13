@@ -10,7 +10,7 @@ GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, ECrewPositio
     setAttribute("layout", "vertical");
 }
 
-void GuiCustomShipFunctions::onDraw(sp::RenderTarget& target)
+void GuiCustomShipFunctions::onUpdate()
 {
     if (!my_spaceship)
         return;

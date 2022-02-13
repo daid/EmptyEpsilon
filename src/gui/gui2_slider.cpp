@@ -2,29 +2,34 @@
 
 #include "gui2_slider.h"
 #include "preferenceManager.h"
+#include "theme.h"
+
 
 GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
+    front_style = theme->getStyle("slider.front");
+    back_style = theme->getStyle("slider.back");
 }
 
 void GuiBasicSlider::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawStretched(rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
+    auto back = back_style->get(getState());
+    auto front = front_style->get(getState());
 
-    glm::u8vec4 color = selectColor(colorConfig.slider.forground);
+    renderer.drawStretched(rect, back.texture, back.color);
 
     if (rect.size.x > rect.size.y)
     {
         float x;
         x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, color);
+        renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
     }else{
         float y;
         y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, color);
+        renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
     }
 }
 
@@ -106,14 +111,16 @@ GuiSlider::GuiSlider(GuiContainer* owner, string id, float min_value, float max_
 : GuiBasicSlider(owner, id, min_value, max_value, start_value, func)
 {
     overlay_label = nullptr;
+    tick_style = theme->getStyle("slider.tick");
 }
 
 void GuiSlider::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawStretched(rect, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
+    auto back = back_style->get(getState());
+    auto tick = tick_style->get(getState());
+    auto front = front_style->get(getState());
 
-    auto fg_color = selectColor(colorConfig.slider.forground);
-    auto bg_color = selectColor(colorConfig.slider.background);
+    renderer.drawStretched(rect, back.texture, back.color);
 
     if (rect.size.x > rect.size.y)
     {
@@ -123,22 +130,22 @@ void GuiSlider::onDraw(sp::RenderTarget& renderer)
         {
             x = rect.position.x + (rect.size.x - rect.size.y) * (point.value - min_value) / (max_value - min_value);
 
-            renderer.drawRotatedSprite("gui/widget/SliderTick.png", glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, 90, bg_color);
+            renderer.drawRotatedSprite(tick.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, 90, tick.color);
         }
         x = rect.position.x + (rect.size.x - rect.size.y) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, fg_color);
+        renderer.drawSprite(front.texture, glm::vec2(x + rect.size.y * 0.5f, rect.position.y + rect.size.y * 0.5f), rect.size.y, front.color);
     }else{
         float y;
         for(TSnapPoint& point : snap_points)
         {
             y = rect.position.y + (rect.size.y - rect.size.x) * (point.value - min_value) / (max_value - min_value);
 
-            renderer.drawSprite("gui/widget/SliderTick.png", glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, bg_color);
+            renderer.drawSprite(tick.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, tick.color);
         }
         y = rect.position.y + (rect.size.y - rect.size.x) * (value - min_value) / (max_value - min_value);
 
-        renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, fg_color);
+        renderer.drawSprite(front.texture, glm::vec2(rect.position.x + rect.size.x * 0.5f, y + rect.size.x * 0.5f), rect.size.x, front.color);
     }
 
     if (overlay_label)
@@ -221,18 +228,21 @@ GuiSlider* GuiSlider::addOverlay()
 GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
+    front_style = theme->getStyle("slider.front");
+    back_style = theme->getStyle("slider.back");
 }
 
 void GuiSlider2D::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawStretchedHV(rect, 25.0f, "gui/widget/SliderBackground.png", selectColor(colorConfig.slider.background));
+    auto back = back_style->get(getState());
+    auto front = front_style->get(getState());
 
-    glm::u8vec4 color = selectColor(colorConfig.slider.forground);
+    renderer.drawStretchedHV(rect, back.size, back.texture, back.color);
 
     float x = rect.position.x + (rect.size.x - 50.0f) * (value.x - min_value.x) / (max_value.x - min_value.x);
     float y = rect.position.y + (rect.size.y - 50.0f) * (value.y - min_value.y) / (max_value.y - min_value.y);
 
-    renderer.drawSprite("gui/widget/SliderKnob.png", glm::vec2(x + 25, y + 25), 50, color);
+    renderer.drawSprite(front.texture, glm::vec2(x + 25, y + 25), 50, front.color);
 }
 
 bool GuiSlider2D::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

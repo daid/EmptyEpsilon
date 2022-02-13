@@ -282,6 +282,7 @@ set(SOURCES
     src/gui/gui2_container.cpp
     src/gui/gui2_panel.cpp
     src/gui/gui2_overlay.cpp
+    src/gui/theme.cpp
     src/gui/layout/layout.cpp
     src/gui/layout/horizontal.cpp
     src/gui/layout/vertical.cpp
@@ -369,6 +370,7 @@ set(SOURCES
     src/gui/gui2_slider.h
     src/gui/gui2_textentry.h
     src/gui/gui2_togglebutton.h
+    src/gui/theme.h
     src/gui/layout/layout.h
     src/gui/layout/horizontal.h
     src/gui/layout/vertical.h

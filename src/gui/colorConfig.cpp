@@ -41,13 +41,6 @@ void ColorConfig::load()
     DEF_COLOR(log_receive_friendly);
     DEF_COLOR(log_receive_enemy);
     DEF_COLOR(log_receive_neutral);
-    DEF_WIDGETCOLORSET(button);
-    DEF_WIDGETCOLORSET(button_red);
-    DEF_WIDGETCOLORSET(button_green);
-    DEF_WIDGETCOLORSET(button_blue);
-    DEF_WIDGETCOLORSET(label);
-    DEF_WIDGETCOLORSET(text_entry);
-    DEF_WIDGETCOLORSET(slider);
     DEF_WIDGETCOLORSET(textbox);
     DEF_COLOR(overlay_damaged);
     DEF_COLOR(overlay_jammed);
