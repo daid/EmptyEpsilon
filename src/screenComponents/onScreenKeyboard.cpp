@@ -2,7 +2,6 @@
 
 #include "gui/gui2_button.h"
 #include "gui/gui2_textentry.h"
-#include "gui/gui2_autolayout.h"
 
 OnScreenKeyboardControl::OnScreenKeyboardControl(GuiContainer* owner, GuiTextEntry* _target)
 : GuiElement(owner, "")

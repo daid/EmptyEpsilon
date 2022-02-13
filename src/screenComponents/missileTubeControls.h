@@ -1,7 +1,7 @@
 #ifndef MISSILE_TUBE_CONTROLS_H
 #define MISSILE_TUBE_CONTROLS_H
 
-#include "gui/gui2_autolayout.h"
+#include "gui/gui2_element.h"
 #include "missileWeaponData.h"
 
 class GuiButton;

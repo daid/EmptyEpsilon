@@ -6,7 +6,6 @@
 #include "epsilonServer.h"
 #include "gui/scriptError.h"
 #include "gui/gui2_overlay.h"
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -162,14 +161,14 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
-    GuiElement* container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    GuiElement* container = new GuiElement(this, "");
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontal");
 
-    GuiElement* left = new GuiElement(new GuiElement(container, ""), "");
+    GuiElement* left = new GuiElement((new GuiElement(container, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax), "");
     left->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    GuiElement* middle = new GuiElement(new GuiElement(container, ""), "");
+    GuiElement* middle = new GuiElement((new GuiElement(container, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax), "");
     middle->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    GuiElement* right = new GuiElement(new GuiElement(container, ""), "");
+    GuiElement* right = new GuiElement((new GuiElement(container, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax), "");
     right->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     (new GuiLabel(left, "GENERAL_LABEL", tr("Category"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
@@ -272,8 +271,8 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
-    GuiElement* column_container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
-    column_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    GuiElement* column_container = new GuiElement(this, "");
+    column_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontal");
 
     GuiElement* container = nullptr;
     int count = 0;
@@ -281,7 +280,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
     {
         if (!container || count == 2)
         {
-            container = new GuiElement(new GuiElement(column_container, ""), "");
+            container = new GuiElement((new GuiElement(column_container, ""))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax), "");
             container->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(350, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
             count = 0;
         }

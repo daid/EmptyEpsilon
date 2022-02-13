@@ -4,7 +4,6 @@
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_image.h"
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_scrolltext.h"
 

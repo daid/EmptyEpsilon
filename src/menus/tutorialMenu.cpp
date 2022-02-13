@@ -6,7 +6,6 @@
 #include "tutorialGame.h"
 #include "scenarioInfo.h"
 #include "gui/gui2_overlay.h"
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_label.h"

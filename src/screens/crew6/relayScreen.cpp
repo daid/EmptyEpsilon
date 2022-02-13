@@ -12,7 +12,6 @@
 #include "screenComponents/hackingDialog.h"
 #include "screenComponents/customShipFunctions.h"
 
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"

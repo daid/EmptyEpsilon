@@ -5,7 +5,6 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_panel.h"
 
-class GuiAutoLayout;
 class GuiLabel;
 class GuiListbox;
 class GuiOverlay;
@@ -21,7 +20,7 @@ class PasswordDialog;
 class ShipSelectionScreen : public GuiCanvas, public Updatable
 {
 private:
-    GuiAutoLayout* container;
+    GuiElement* container;
     GuiElement* left_container;
     GuiElement* right_container;
 

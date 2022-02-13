@@ -1,5 +1,4 @@
 #include "gui2_resizabledialog.h"
-#include "gui2_autolayout.h"
 
 #include "gui2_label.h"
 #include "gui2_togglebutton.h"

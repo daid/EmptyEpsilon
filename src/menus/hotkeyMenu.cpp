@@ -5,7 +5,6 @@
 #include "soundManager.h"
 
 #include "gui/hotkeyBinder.h"
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_textentry.h"

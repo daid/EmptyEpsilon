@@ -266,7 +266,6 @@ set(SOURCES
     src/gui/gui2_textentry.cpp
     src/gui/gui2_label.cpp
     src/gui/gui2_image.cpp
-    src/gui/gui2_autolayout.cpp
     src/gui/gui2_arrowbutton.cpp
     src/gui/gui2_entrylist.cpp
     src/gui/gui2_progressbar.cpp
@@ -349,7 +348,6 @@ set(SOURCES
     src/gui/gui2_advancedscrolltext.h
     src/gui/gui2_arrowbutton.h
     src/gui/gui2_arrow.h
-    src/gui/gui2_autolayout.h
     src/gui/gui2_button.h
     src/gui/gui2_canvas.h
     src/gui/gui2_container.h

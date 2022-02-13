@@ -7,7 +7,6 @@
 #include "soundManager.h"
 #include "windowManager.h"
 
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_togglebutton.h"

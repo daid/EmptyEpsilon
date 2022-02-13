@@ -17,7 +17,6 @@
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
 
-#include "gui/gui2_autolayout.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
@@ -116,11 +115,12 @@ ShipSelectionScreen::ShipSelectionScreen()
     soundManager->disablePositionalSound();
 
     // Draw a container with two columns.
-    container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    container = new GuiElement(this, "");
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontal");
     left_container = new GuiElement(container, "");
+    left_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     right_container = new GuiElement(container, "");
-
+    right_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     auto right_panel = new GuiPanel(right_container, "DIRECT_OPTIONS_PANEL");
     right_panel->setPosition(0, 50, sp::Alignment::TopCenter)->setSize(550, 560);
@@ -418,11 +418,11 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     setPosition(0, 0, sp::Alignment::Center);
     setMargins(50);
 
-    auto container = new GuiAutoLayout(this, "", GuiAutoLayout::ELayoutMode::LayoutVerticalColumns);
-    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    auto container = new GuiElement(this, "");
+    container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontal");
 
     auto one = new GuiPanel(container, "");
-    one->setMargins(50, 50, 25, 100);
+    one->setMargins(50, 50, 25, 100)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(one, "CREW_POSITION_SELECT_LABEL", tr("6/5 player crew"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
     auto layout = new GuiElement(one, "");
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
@@ -447,7 +447,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         create_crew_position_button(layout, n);
 
     auto two = new GuiPanel(container, "");
-    two->setMargins(25, 50, 25, 100);
+    two->setMargins(25, 50, 25, 100)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);;
     (new GuiLabel(two, "CREW_POSITION_SELECT_LABEL", tr("4/3/1 player crew"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
     layout = new GuiElement(two, "");
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
@@ -455,7 +455,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         create_crew_position_button(layout, n);
 
     auto three = new GuiPanel(container, "");
-    three->setMargins(25, 50, 50, 100);
+    three->setMargins(25, 50, 50, 100)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);;
     (new GuiLabel(three, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
     layout = new GuiElement(three, "");
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
