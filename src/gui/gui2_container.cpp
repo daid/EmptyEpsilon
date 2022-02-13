@@ -31,7 +31,6 @@ void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, 
             delete element;
         }else{
             element->hover = element->rect.contains(mouse_position);
-            element->onUpdate();
 
             if (element->visible)
             {

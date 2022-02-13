@@ -18,6 +18,7 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
     auto window_size = renderer.getVirtualSize();
     sp::Rect window_rect(0, 0, window_size.x, window_size.y);
 
+    runUpdates(this);
     updateLayout(window_rect);
     drawElements(mouse_position, window_rect, renderer);
 
@@ -101,4 +102,32 @@ void GuiCanvas::unfocusElementTree(GuiElement* element)
         click_element = nullptr;
     for(GuiElement* child : element->children)
         unfocusElementTree(child);
+}
+
+void GuiCanvas::runUpdates(GuiContainer* parent)
+{
+    for(auto it = parent->children.begin(); it != parent->children.end(); )
+    {
+        GuiElement* element = *it;
+        if (element->destroyed)
+        {
+            //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
+            unfocusElementTree(element);
+
+            //Delete it from our list.
+            it = parent->children.erase(it);
+
+            // Free up the memory used by the element.
+            element->owner = nullptr;
+            delete element;
+        }else{
+            element->hover = element->rect.contains(mouse_position);
+
+            element->onUpdate();
+            if (element->isVisible())
+                runUpdates(element);
+
+            it++;
+        }
+    }
 }
