@@ -39,20 +39,22 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
     radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [radar, this](sp::io::Pointer::Button button, glm::vec2 position) {
             if (my_spaceship)
             {
+                auto r = radar->getRect();
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                auto draw_position = rect.center() + position / my_spaceship->getShortRangeRadarRange() * std::min(rect.size.x, rect.size.y) * 0.5f;
+                auto draw_position = rect.center() + (position - my_spaceship->getPosition()) / my_spaceship->getShortRangeRadarRange() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
         },
-        [this](glm::vec2 position) {
+        [radar, this](glm::vec2 position) {
             if (my_spaceship)
             {
+                auto r = radar->getRect();
                 float angle = vec2ToAngle(position - my_spaceship->getPosition());
-                auto draw_position = rect.center() + position / my_spaceship->getShortRangeRadarRange() * std::min(rect.size.x, rect.size.y) * 0.5f;
+                auto draw_position = rect.center() + (position - my_spaceship->getPosition()) / my_spaceship->getShortRangeRadarRange() * std::min(r.size.x, r.size.y) * 0.5f;
                 heading_hint->setText(string(fmodf(angle + 90.f + 360.f, 360.f), 1))->setPosition(draw_position - rect.position - glm::vec2(0, 50))->show();
                 my_spaceship->commandTargetRotation(angle);
             }
