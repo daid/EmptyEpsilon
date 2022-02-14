@@ -226,6 +226,13 @@ int main(int argc, char** argv)
 #endif
     }
 
+    if (!GuiTheme::loadTheme("default", PreferencesManager::get("guitheme", "gui/default.theme.txt")))
+    {
+        LOG(ERROR, "Failed to load default theme, exiting.");
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing?", nullptr);
+        return 1;
+    }
+
     if (PreferencesManager::get("headless") == "")
     {
         //Setup the rendering layers.
@@ -314,13 +321,6 @@ int main(int argc, char** argv)
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
-
-    if (!GuiTheme::loadTheme("default", PreferencesManager::get("guitheme", "gui/default.theme.txt")))
-    {
-        LOG(ERROR, "Failed to load default theme, exiting.");
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing?", nullptr);
-        return 1;
-    }
 
     main_font = GuiTheme::getTheme("default")->getStyle("base")->states[0].font;
     bold_font = GuiTheme::getTheme("default")->getStyle("bold")->states[0].font;
