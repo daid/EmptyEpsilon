@@ -21,6 +21,7 @@ class FactionInfo : public MultiplayerObject, public Updatable
 {
 public:
     FactionInfo();
+    virtual ~FactionInfo();
 
     virtual void update(float delta) override;
     /*!
