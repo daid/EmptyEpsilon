@@ -15,7 +15,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
     faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
     for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getLocaleName(), info->getName());
+        if (info)
+            faction_selector->addEntry(info->getLocaleName(), info->getName());
     faction_selector->setSelectionIndex(0);
     faction_selector->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(300, 50);
 

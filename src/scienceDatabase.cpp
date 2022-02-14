@@ -327,13 +327,17 @@ void fillDefaultDatabaseData()
     factionDatabase->setName(tr("database", "Factions"));
     for(unsigned int n=0; n<factionInfo.size(); n++)
     {
+        if (!factionInfo[n])
+            continue;
         P<ScienceDatabase> entry = factionDatabase->addEntry(factionInfo[n]->getLocaleName());
         for(unsigned int m=0; m<factionInfo.size(); m++)
         {
             if (n == m) continue;
+            if (!factionInfo[m])
+                continue;
 
             string stance = tr("stance", "Neutral");
-            switch(factionInfo[n]->states[m])
+            switch(FactionInfo::getState(n, m))
             {
                 case FVF_Neutral: stance = tr("stance", "Neutral"); break;
                 case FVF_Enemy: stance = tr("stance", "Enemy"); break;

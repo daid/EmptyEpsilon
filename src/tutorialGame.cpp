@@ -53,6 +53,11 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/tutorial." + PreferencesManager::get("language", "en") + ".po");
+
+    P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
+    if (factionInfoScript->getError() != "") exit(1);
+    factionInfoScript->destroy();
+
     script = new ScriptObject();
     script->registerObject(this, "tutorial");
     script->run(filename);

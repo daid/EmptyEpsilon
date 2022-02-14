@@ -642,7 +642,8 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             color = glm::u8vec4(192, 192, 192, 255);
         }
     }else{
-        color = factionInfo[getFactionId()]->gm_color;
+        if (factionInfo[getFactionId()])
+            color = factionInfo[getFactionId()]->getGMColor();
     }
     renderer.drawRotatedSprite(object_sprite, position, long_range ? 22.f : 32.f, getRotation() - rotation, color);
 }
@@ -1438,7 +1439,7 @@ void SpaceShip::addBroadcast(int threshold, string message)
                 color = glm::u8vec4(154, 255, 154, 255); //ally = light green
                 addtolog = 1;
             }
-            else if ((factionInfo[this->getFactionId()]->states[ship->getFactionId()] == FVF_Neutral) && ((threshold >= FVF_Neutral)))
+            else if ((FactionInfo::getState(this->getFactionId(), ship->getFactionId()) == FVF_Neutral) && ((threshold >= FVF_Neutral)))
             {
                 color = glm::u8vec4(128,128,128, 255); //neutral = grey
                 addtolog = 1;

@@ -276,14 +276,16 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
         info_callsign->setValue(obj->getCallSign());
 
-        if (ship)
-        {
-            if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+        if (factionInfo[obj->getFactionId()]) {
+            if (ship)
             {
+                if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+                {
+                    info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+                }
+            }else{
                 info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
             }
-        }else{
-            info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
         }
 
         if (probe && my_spaceship && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))

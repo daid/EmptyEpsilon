@@ -13,21 +13,55 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
 }
 
-PVector<FactionInfo> factionInfo;
+std::array<P<FactionInfo>, 32> factionInfo;
 
-FactionInfo::FactionInfo()
+static int getFactionInfo(lua_State* L)
 {
-    if (game_server) { LOG(ERROR) << "FactionInfo objects can not be created during a scenario right now."; destroy(); return; }
-
-    foreach(FactionInfo, i, factionInfo)
-        i->states.push_back(FVF_Neutral);
-    factionInfo.push_back(this);
-
+    auto name = luaL_checkstring(L, 1);
     for(unsigned int n = 0; n < factionInfo.size(); n++)
-        states.push_back(FVF_Neutral);
-    for(unsigned int n = 0; n < factionInfo.size(); n++)
-        if (factionInfo[n] == this)
-            states[n] = FVF_Friendly;
+        if (factionInfo[n] && factionInfo[n]->getName() == name)
+            return convert<P<FactionInfo>>::returnType(L, factionInfo[n]);
+    return 0;
+}
+/// Get a reference to a FactionInfo object, which can be used to modify faction to faction states.
+REGISTER_SCRIPT_FUNCTION(getFactionInfo);
+
+
+REGISTER_MULTIPLAYER_CLASS(FactionInfo, "FactionInfo");
+FactionInfo::FactionInfo()
+: MultiplayerObject("FactionInfo")
+{
+    index = 255;
+    enemy_mask = 0;
+    friend_mask = 0;
+
+    registerMemberReplication(&index);
+    registerMemberReplication(&gm_color);
+    registerMemberReplication(&name);
+    registerMemberReplication(&locale_name);
+    registerMemberReplication(&description);
+    registerMemberReplication(&enemy_mask);
+    registerMemberReplication(&friend_mask);
+
+    if (game_server) {
+        for(size_t n=0; n<factionInfo.size(); n++)
+        {
+            if (!factionInfo[n]) {
+                factionInfo[n] = this;
+                index = n;
+                setFriendly(this);
+                return;
+            }
+        }
+        LOG(ERROR) << "There is a limit of 32 factions.";
+        destroy();
+    }
+}
+
+void FactionInfo::update(float delta)
+{
+    if (index != 255)
+        factionInfo[index] = this;
 }
 
 void FactionInfo::setEnemy(P<FactionInfo> other)
@@ -38,20 +72,10 @@ void FactionInfo::setEnemy(P<FactionInfo> other)
         return;
     }
 
-    int id1 = -1;
-    int id2 = -1;
-    for(unsigned int n = 0; n < factionInfo.size(); n++)
-    {
-        if (factionInfo[n] == this)
-            id1 = n;
-        if (factionInfo[n] == other)
-            id2 = n;
-    }
-    if (id1 != -1 && id2 != -1)
-    {
-        factionInfo[id1]->states[id2] = FVF_Enemy;
-        factionInfo[id2]->states[id1] = FVF_Enemy;
-    }
+    friend_mask &=~(1U << other->index);
+    other->friend_mask &=~(1U << index);
+    enemy_mask |= (1 << other->index);
+    other->enemy_mask |= (1 << index);
 }
 
 void FactionInfo::setFriendly(P<FactionInfo> other)
@@ -62,26 +86,32 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
         return;
     }
 
-    int id1 = -1;
-    int id2 = -1;
-    for(unsigned int n = 0; n < factionInfo.size(); n++)
-    {
-        if (factionInfo[n] == this)
-            id1 = n;
-        if (factionInfo[n] == other)
-            id2 = n;
-    }
-    if (id1 != -1 && id2 != -1)
-    {
-        factionInfo[id1]->states[id2] = FVF_Friendly;
-        factionInfo[id2]->states[id1] = FVF_Friendly;
-    }
+    friend_mask |= (1U << other->index);
+    other->friend_mask |= (1U << index);
+    enemy_mask &=~(1 << other->index);
+    other->enemy_mask &=~(1 << index);
+}
+
+EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
+{
+    if (!other) return FVF_Neutral;
+    if (enemy_mask & (1 << other->index)) return FVF_Enemy;
+    if (friend_mask & (1 << other->index)) return FVF_Friendly;
+    return FVF_Neutral;
+}
+
+EFactionVsFactionState FactionInfo::getState(uint8_t idx0, uint8_t idx1)
+{
+    if (idx0 >= factionInfo.size()) return FVF_Neutral;
+    if (idx1 >= factionInfo.size()) return FVF_Neutral;
+    if (!factionInfo[idx0] || !factionInfo[idx1]) return FVF_Neutral;
+    return factionInfo[idx0]->getState(factionInfo[idx1]);
 }
 
 unsigned int FactionInfo::findFactionId(string name)
 {
     for(unsigned int n = 0; n < factionInfo.size(); n++)
-        if (factionInfo[n]->name == name)
+        if (factionInfo[n] && factionInfo[n]->name == name)
             return n;
     LOG(ERROR) << "Failed to find faction: " << name;
     return 0;
@@ -89,4 +119,7 @@ unsigned int FactionInfo::findFactionId(string name)
 
 void FactionInfo::reset()
 {
+    for(unsigned int n = 0; n < factionInfo.size(); n++)
+        if (factionInfo[n])
+            factionInfo[n]->destroy();
 }

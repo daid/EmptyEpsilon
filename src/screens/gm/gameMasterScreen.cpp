@@ -57,7 +57,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         }
     });
     for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getLocaleName(), info->getName());
+        if (info)
+            faction_selector->addEntry(info->getLocaleName(), info->getName());
     faction_selector->setPosition(20, 70, sp::Alignment::TopLeft)->setSize(250, 50);
 
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {

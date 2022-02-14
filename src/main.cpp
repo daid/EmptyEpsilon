@@ -342,10 +342,6 @@ int main(int argc, char** argv)
         if (shipTemplatesScript->getError() != "") exit(1);
         shipTemplatesScript->destroy();
 
-        P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");
-        if (factionInfoScript->getError() != "") exit(1);
-        factionInfoScript->destroy();
-
         //Find out which model data isn't used by ship templates and output that to log.
         std::set<string> used_model_data;
         for(string template_name : ShipTemplate::getAllTemplateNames())

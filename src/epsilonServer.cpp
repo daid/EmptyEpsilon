@@ -18,8 +18,6 @@ EpsilonServer::EpsilonServer(int server_port)
         info->client_id = 0;
         my_player_info = info;
         engine->setGameSpeed(0.0);
-        for(unsigned int n=0; n<factionInfo.size(); n++)
-            factionInfo[n]->reset();
 
         for(auto proxy : PreferencesManager::get("serverproxy").split(":"))
         {

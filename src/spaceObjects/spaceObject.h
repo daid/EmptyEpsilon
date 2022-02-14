@@ -232,8 +232,8 @@ public:
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
     void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
-    string getFaction() { return factionInfo[this->faction_id]->getName(); }
-    string getLocaleFaction() { return factionInfo[this->faction_id]->getLocaleName(); }
+    string getFaction() { if (factionInfo[faction_id]) return factionInfo[this->faction_id]->getName(); return ""; }
+    string getLocaleFaction() { if (factionInfo[faction_id]) return factionInfo[this->faction_id]->getLocaleName(); return ""; }
     void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
     unsigned int getFactionId() { return faction_id; }
     void setReputationPoints(float amount);
