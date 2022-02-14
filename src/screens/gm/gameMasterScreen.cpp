@@ -275,9 +275,9 @@ void GameMasterScreen::update(float delta)
             engine->setGameSpeed(0.0);
     }
     if (engine->getGameSpeed() == 0.0f) {
-        pause_button->setActive(true);
+        pause_button->setValue(true);
     } else {
-        pause_button->setActive(false);
+        pause_button->setValue(false);
     }
 
     bool has_object = false;

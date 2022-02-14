@@ -6,24 +6,33 @@
         size: 30
         [button.back] {
             image: gui/widget/ButtonBackground.png
-            image.active: gui/widget/ButtonBackground.active.png
             image.hover: gui/widget/ButtonBackground.hover.png
             image.disabled: gui/widget/ButtonBackground.disabled.png
-            color.disabled: #808080
             
             [button.selfdestruct.back] {
                 color: #FF0000
                 color.disabled: #A08080
             }
+            [button.toggle.off.back] {
+            }
+            [button.toggle.on.back] {
+                image: gui/widget/ButtonBackground.active.png
+                image.hover: gui/widget/ButtonBackground.active.png
+                image.disabled: gui/widget/ButtonBackground.active.png
+            }
         }
         [button.front] {
             color.disabled: #FFFFFF4D
-            color.active: #120A00
 
             [button.selfdestruct.front] {
                 color: #FF0000
                 color.active: #120000
                 color.disabled: #FF00004D
+            }
+            [button.toggle.off.front] {
+            }
+            [button.toggle.on.front] {
+                color: #120A00
             }
         }
         [button.arrow] {

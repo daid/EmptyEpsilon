@@ -10,7 +10,6 @@ public:
     glm::u8vec4 hover;
     glm::u8vec4 focus;
     glm::u8vec4 disabled;
-    glm::u8vec4 active;
 };
 class WidgetColorSet
 {

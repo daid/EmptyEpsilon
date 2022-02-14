@@ -21,7 +21,6 @@ protected:
     bool enabled;
     bool hover;
     bool focus;
-    bool active;
     string id;
 public:
     constexpr static float GuiSizeMatchHeight = -1.0;
@@ -31,7 +30,6 @@ public:
     enum class State
     {
         Normal,
-        Active,
         Disabled,
         Hover,
         Focus,
@@ -68,8 +66,6 @@ public:
     GuiElement* setEnable(bool enable);
     GuiElement* enable();
     GuiElement* disable();
-    GuiElement* setActive(bool active);
-    bool isActive() const;
     bool isEnabled() const;
 
     void moveToFront();

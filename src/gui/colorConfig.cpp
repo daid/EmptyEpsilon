@@ -9,7 +9,6 @@
         MAP_COLOR(color_name, color_variable.hover); \
         MAP_COLOR(color_name, color_variable.focus); \
         MAP_COLOR(color_name, color_variable.disabled); \
-        MAP_COLOR(color_name, color_variable.active); \
     } while(0)
 
 #define DEF_COLOR(color_name) do { MAP_COLOR( #color_name, color_name); color_name = glm::u8vec4(255, 0, 255, 255); } while(0)
@@ -19,7 +18,6 @@
         DEF_COLOR( color_name.hover ); \
         DEF_COLOR( color_name.focus ); \
         DEF_COLOR( color_name.disabled ); \
-        DEF_COLOR( color_name.active ); \
     } while(0)
 #define DEF_WIDGETCOLORSET(color_name) do { \
         MAP_COLORSET( #color_name, color_name.forground); \

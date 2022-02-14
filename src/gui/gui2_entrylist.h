@@ -2,8 +2,8 @@
 #define GUI2_ENTRYLIST_H
 
 #include "gui2_element.h"
-#include "gui2_button.h"
 #include "gui2_scrollbar.h"
+
 
 class GuiEntryList : public GuiElement
 {

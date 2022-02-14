@@ -59,12 +59,12 @@ void GuiListbox::entriesChanged()
     while(buttons.size() < entries.size() && (int)buttons.size() < max_buttons)
     {
         int offset = buttons.size();
-        GuiButton* button = new GuiButton(this, id + "_BUTTON_" + string(offset), "", [this, offset]() {
+        auto button = new GuiToggleButton(this, id + "_BUTTON_" + string(offset), "", [this, offset](bool) {
             setSelectionIndex(offset + scroll->getValue());
             callback();
         });
         button->setPosition(0, offset * button_height, sp::Alignment::TopLeft);
-        button->setActive(false);
+        button->setValue(false);
         buttons.push_back(button);
     }
     while(buttons.size() > entries.size())
@@ -78,9 +78,9 @@ void GuiListbox::entriesChanged()
         buttons[n]->setText(entries[n + scroll->getValue()].name);
         buttons[n]->setSize(button_width, button_height);
         if (n + scroll->getValue() == selection_index)
-            buttons[n]->setActive(true);
+            buttons[n]->setValue(true);
         else
-            buttons[n]->setActive(false);
+            buttons[n]->setValue(false);
     }
 }
 

@@ -4,7 +4,7 @@
 
 
 GuiElement::GuiElement(GuiContainer* owner, const string& id)
-: owner(owner), visible(true), enabled(true), hover(false), focus(false), active(false), id(id)
+: owner(owner), visible(true), enabled(true), hover(false), focus(false), id(id)
 {
     owner->children.push_back(this);
     destroyed = false;
@@ -172,17 +172,6 @@ bool GuiElement::isEnabled() const
     return enabled;
 }
 
-GuiElement* GuiElement::setActive(bool active)
-{
-    this->active = active;
-    return this;
-}
-
-bool GuiElement::isActive() const
-{
-    return active;
-}
-
 void GuiElement::moveToFront()
 {
     if (owner)
@@ -233,8 +222,6 @@ glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
 {
     if (!enabled)
         return color_set.disabled;
-    if (active)
-        return color_set.active;
     if (hover)
         return color_set.hover;
     if (focus)
@@ -246,8 +233,6 @@ GuiElement::State GuiElement::getState() const
 {
     if (!enabled)
         return State::Disabled;
-    if (active)
-        return State::Active;
     if (hover)
         return State::Hover;
     if (focus)

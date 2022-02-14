@@ -93,9 +93,6 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             case GuiElement::State::Normal:
                 postfix = "normal";
                 break;
-            case GuiElement::State::Active:
-                postfix = "active";
-                break;
             case GuiElement::State::Disabled:
                 postfix = "disabled";
                 break;

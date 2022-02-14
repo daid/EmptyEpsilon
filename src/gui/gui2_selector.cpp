@@ -74,7 +74,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         {
             if (popup_buttons.size() <= n)
             {
-                popup_buttons.push_back(new GuiButton(popup, "", entries[n].name, [this, n]()
+                popup_buttons.push_back(new GuiToggleButton(popup, "", entries[n].name, [this, n](bool b)
                 {
                     setSelectionIndex(n);
                     callback();
@@ -84,7 +84,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             }else{
                 popup_buttons[n]->setText(entries[n].name);
             }
-            popup_buttons[n]->setActive(int(n) == selection_index);
+            popup_buttons[n]->setValue(int(n) == selection_index);
             popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
         }
         for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)

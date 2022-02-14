@@ -2,6 +2,8 @@
 #define GUI2_SELECTOR_H
 
 #include "gui2_entrylist.h"
+#include "gui2_togglebutton.h"
+
 
 class GuiArrowButton;
 
@@ -13,7 +15,7 @@ protected:
     GuiArrowButton* left;
     GuiArrowButton* right;
     GuiElement* popup;
-    std::vector<GuiButton*> popup_buttons;
+    std::vector<GuiToggleButton*> popup_buttons;
 public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
