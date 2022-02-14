@@ -31,15 +31,15 @@ public:
     {
         max_iterations = iterations;
 
-        createFace(0, glm::vec3(0, 0, 1), glm::vec3(0, 1, 0), glm::vec3(1, 0, 0), glm::vec2(0, 0), glm::vec2(0, 0.5), glm::vec2(0.25, 0.5));
-        createFace(0, glm::vec3(0, 0, 1), glm::vec3(1, 0, 0), glm::vec3(0,-1, 0), glm::vec2(0.25, 0), glm::vec2(0.25, 0.5), glm::vec2(0.5, 0.5));
-        createFace(0, glm::vec3(0, 0, 1), glm::vec3(0,-1, 0), glm::vec3(-1, 0, 0), glm::vec2(0.5, 0), glm::vec2(0.5, 0.5), glm::vec2(0.75, 0.5));
-        createFace(0, glm::vec3(0, 0, 1), glm::vec3(-1, 0, 0), glm::vec3(0, 1, 0), glm::vec2(0.75, 0), glm::vec2(0.75, 0.5), glm::vec2(1.0, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(0, 1, 0), glm::vec3(1, 0, 0), glm::vec2(0, 1), glm::vec2(0, 0.5), glm::vec2(0.25, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(1, 0, 0), glm::vec3(0,-1, 0), glm::vec2(0.25, 1), glm::vec2(0.25, 0.5), glm::vec2(0.5, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(0,-1, 0), glm::vec3(-1, 0, 0), glm::vec2(0.5, 1), glm::vec2(0.5, 0.5), glm::vec2(0.75, 0.5));
+        createFace(0, glm::vec3(0, 0, 1), glm::vec3(-1, 0, 0), glm::vec3(0, 1, 0), glm::vec2(0.75, 1), glm::vec2(0.75, 0.5), glm::vec2(1.0, 0.5));
 
-        createFace(0, glm::vec3(0, 0,-1), glm::vec3(1, 0, 0), glm::vec3(0, 1, 0), glm::vec2(0, 1.0), glm::vec2(0.25, 0.5), glm::vec2(0.0, 0.5));
-        createFace(0, glm::vec3(0, 0,-1), glm::vec3(0,-1, 0), glm::vec3(1, 0, 0), glm::vec2(0.25, 1.0), glm::vec2(0.5, 0.5), glm::vec2(0.25, 0.5));
-        createFace(0, glm::vec3(0, 0,-1), glm::vec3(-1, 0, 0), glm::vec3(0,-1, 0), glm::vec2(0.5, 1.0), glm::vec2(0.75, 0.5), glm::vec2(0.5, 0.5));
-        createFace(0, glm::vec3(0, 0,-1), glm::vec3(0,1, 0), glm::vec3(-1, 0, 0), glm::vec2(0.75, 1.0), glm::vec2(1.0, 0.5), glm::vec2(0.75, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(1, 0, 0), glm::vec3(0, 1, 0), glm::vec2(0, 0), glm::vec2(0.25, 0.5), glm::vec2(0.0, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(0,-1, 0), glm::vec3(1, 0, 0), glm::vec2(0.25, 0), glm::vec2(0.5, 0.5), glm::vec2(0.25, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(-1, 0, 0), glm::vec3(0,-1, 0), glm::vec2(0.5, 0), glm::vec2(0.75, 0.5), glm::vec2(0.5, 0.5));
+        createFace(0, glm::vec3(0, 0,-1), glm::vec3(0,1, 0), glm::vec3(-1, 0, 0), glm::vec2(0.75, 0), glm::vec2(1.0, 0.5), glm::vec2(0.75, 0.5));
 
         for(unsigned int n=0; n<vertices.size(); n++)
         {
@@ -49,7 +49,7 @@ public:
             if (std::abs(u - vertices[n].uv[0]) > 0.5f)
                 u += 1.0f;
             vertices[n].uv[0] = u;
-            vertices[n].uv[1] = 0.5f + vec2ToAngle(glm::vec2(glm::length(glm::vec2(vertices[n].position[0], vertices[n].position[1])), vertices[n].position[2])) / 180.0f;
+            vertices[n].uv[1] = 0.5f + vec2ToAngle(glm::vec2(glm::length(glm::vec2(vertices[n].position[0], vertices[n].position[1])), -vertices[n].position[2])) / 180.0f;
         }
     }
 
