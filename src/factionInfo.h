@@ -5,6 +5,7 @@
 #include "stringImproved.h"
 #include "multiplayer.h"
 #include <glm/gtc/type_precision.hpp>
+#include <array>
 
 
 class FactionInfo;
