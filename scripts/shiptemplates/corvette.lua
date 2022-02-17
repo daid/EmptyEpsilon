@@ -356,3 +356,48 @@ var2:setBeamWeaponTurret( 0, 90,   0, 6)
 var2:setBeamWeaponTurret( 1, 90, 180, 6)
 var2:setJumpDrive(false)
 var2:setWarpSpeed(750)
+
+template = ShipTemplate():setName("Cruzeiro"):setLocaleName(_("Cruzeiro")):setClass(_("class", "Corvette"), _("subclass", "Destroyer")):setModel("battleship_destroyer_5_upgraded_2"):setType("playership")
+template:setRadarTrace("cruiser.png")
+--                 Arc, Dir,  Range, CycleTime, Dmg
+template:setBeam(0, 90, -15, 1000.0, 6.0, 8)
+template:setBeam(1, 90,  15, 1000.0, 6.0, 8)
+template:setBeam(2, 60, -15,  800.0, 6.0, 5)
+template:setBeam(3, 60,  15,  800.0, 6.0, 5)
+-- Setup 3 missile tubes. 2 forward at a slight angle, and 1 in the rear exclusive for mines.
+template:setTubes(3, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+template:setTubeDirection(0, -5):weaponTubeDisallowMissle(0, "Mine")
+template:setTubeDirection(1, 5):weaponTubeDisallowMissle(1, "Mine")
+template:setTubeDirection(2, 180):setWeaponTubeExclusiveFor(2, "Mine")
+template:setHull(200)
+template:setShields(100, 100)
+template:setSpeed(80, 12, 20)
+template:setWarpSpeed(0)
+template:setJumpDrive(true)
+template:setCombatManeuver(400, 250)
+template:setWeaponStorage("Homing", 12)
+template:setWeaponStorage("Nuke", 3)
+template:setWeaponStorage("Mine", 6)
+template:setWeaponStorage("EMP", 5)
+
+template:setRepairCrewCount(4)
+template:addRoomSystem(2, 0, 2, 1, "BeamWeapons")
+template:addRoomSystem(1, 1, 2, 2, "Warp")
+template:addRoomSystem(3, 2, 2, 1, "Maneuver")
+template:addRoomSystem(0, 3, 2, 2, "RearShield")
+template:addRoomSystem(2, 3, 2, 2, "Reactor")
+template:addRoom(4, 3, 2, 2)
+template:addRoomSystem(6, 3, 1, 2, "FrontShield")
+template:addRoomSystem(1, 5, 2, 2, "JumpDrive")
+template:addRoomSystem(3, 5, 2, 1, "MissileSystem")
+template:addRoomSystem(2, 7, 2, 1, "Impulse")
+
+template:addDoor(2, 1, true);
+template:addDoor(3, 2, false);
+template:addDoor(1, 3, true);
+template:addDoor(2, 3, false);
+template:addDoor(1, 5, true);
+template:addDoor(3, 5, true);
+template:addDoor(4, 3, false);
+template:addDoor(6, 4, false);
+template:addDoor(2, 7, true);
