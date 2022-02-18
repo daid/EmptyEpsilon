@@ -577,8 +577,7 @@ include(InstallRequiredSystemLibraries)
 
 
 set(EE_RESOURCES resources scripts packs)
-if(WIN32)
-    
+if(WIN32 OR STEAMSDK)
     install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION .)
     install(DIRECTORY ${EE_RESOURCES} DESTINATION .)
 
@@ -620,7 +619,7 @@ if(PYTHONINTERP_FOUND)
     add_custom_target(script_reference ALL DEPENDS "${SCRIPT_REFERENCE_HTML}")
   
   # Matches install logic above.
-  if(WIN32)
+  if(WIN32 OR STEAMSDK)
     install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION . OPTIONAL)
   elseif(APPLE)
     install(FILES "${SCRIPT_REFERENCE_HTML}" DESTINATION "$<TARGET_BUNDLE_CONTENT_DIR:${PROJECT_NAME}>/Resources" OPTIONAL)
@@ -667,7 +666,7 @@ set(CPACK_WIX_PROPERTY_ARPURLUPDATEINFO "https://daid.github.io/EmptyEpsilon/#ta
 set(CPACK_WIX_PRODUCT_ICON "${CMAKE_CURRENT_SOURCE_DIR}/logo.ico")
 
 if(NOT DEFINED CPACK_GENERATOR)
-  if(WIN32)
+  if(WIN32 OR STEAMSDK)
     set(CPACK_GENERATOR "ZIP")
   elseif(UNIX)
     set(CPACK_GENERATOR "DEB")
@@ -737,7 +736,7 @@ set(CPACK_INSTALL_CMAKE_PROJECTS
 
 include(CPack)
 
-if(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE AND NOT STEAMSDK)
   install(FILES EmptyEpsilon.desktop DESTINATION "share/applications")
   install(FILES logo.png DESTINATION "share/icons/hicolor/1024x1024/apps" RENAME "EmptyEpsilon.png")
 endif()
