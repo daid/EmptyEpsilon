@@ -21,7 +21,7 @@ struct VertexAndTexCoords
 };
 
 /// BeamEffect is a beam weapon fire effect that will fade after 1 seond
-/// Example: BeamEffect():setSource(player):setTarget(enemy_ship)
+/// Example: BeamEffect():setSource(player, 0, 0, 0):setTarget(enemy_ship, 0, 0)
 REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
