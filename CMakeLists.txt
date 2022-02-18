@@ -544,7 +544,7 @@ endif()
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC
         # Set RESOURCE_BASE_DIR on Unix so the built binary is able to find resources
-        $<$<BOOL:${UNIX}>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
+        $<$<AND:$<BOOL:${UNIX}>,$<NOT:$<BOOL:${STEAMSDK}>>>:RESOURCE_BASE_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
         $<$<BOOL:${CONFIG_DIR}>:CONFIG_DIR="${CONFIG_DIR}">
         $<$<NOT:$<BOOL:${CONFIG_DIR}>>:CONFIG_DIR="${CMAKE_INSTALL_FULL_DATADIR}/emptyepsilon/">
 )
@@ -697,7 +697,7 @@ endif()
 
 set(sp_runtime_root "/")
 
-if ("WIX" IN_LIST CPACK_GENERATOR)    
+if ("WIX" IN_LIST CPACK_GENERATOR)
     if (EmptyEpsilon_VERSION_MAJOR GREATER 100)
 	    # WIX does not like major version number > 256.
 	    # So if we're above 100, assume it's a year-like format and strip out century/millenium.
