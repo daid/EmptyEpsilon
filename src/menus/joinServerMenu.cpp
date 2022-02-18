@@ -42,7 +42,6 @@ void JoinServerScreen::update(float delta)
 {
     switch(game_client->getStatus())
     {
-    case GameClient::ReadyToConnect:
     case GameClient::Connecting:
     case GameClient::Authenticating:
         //If we are still trying to connect, do nothing.

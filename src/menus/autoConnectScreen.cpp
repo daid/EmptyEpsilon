@@ -77,7 +77,6 @@ void AutoConnectScreen::update(float delta)
     }else{
         switch(game_client->getStatus())
         {
-        case GameClient::ReadyToConnect:
         case GameClient::Connecting:
         case GameClient::Authenticating:
             if (!connect_to_address.getHumanReadable().empty())
