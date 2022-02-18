@@ -26,6 +26,8 @@ private:
     GuiSelector* lan_internet_selector;
 
     P<ServerScanner> scanner;
+
+    void connect(string host);
 public:
     ServerBrowserMenu(SearchSource source, std::optional<GameClient::DisconnectReason> last_attempt = {});
     virtual ~ServerBrowserMenu();

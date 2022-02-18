@@ -7,11 +7,11 @@
 #include "gameGlobalInfo.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_panel.h"
+
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_button.h"
 
-JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip, int port)
-: ip(ip), port(port)
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source)
 {
     this->source = source;
 
@@ -34,9 +34,24 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::i
         password_focused = false;
         game_client->sendPassword(password_entry->getText().upper());
     }))->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
+}
+
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, sp::io::network::Address ip, int port)
+: JoinServerScreen(source)
+{
+    this->ip = ip;
+    this->port = port;
 
     new GameClient(VERSION_NUMBER, ip, port);
 }
+
+#ifdef STEAMSDK
+JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source, uint64_t steam_id)
+: JoinServerScreen(source)
+{
+    new GameClient(VERSION_NUMBER, steam_id);
+}
+#endif
 
 void JoinServerScreen::update(float delta)
 {
@@ -55,16 +70,13 @@ void JoinServerScreen::update(float delta)
             focus(password_entry);
         }
         break;
-    case GameClient::Disconnected:
-    {
+    case GameClient::Disconnected: {
         auto reason = game_client->getDisconnectReason();
         destroy();
         disconnectFromServer();
         
         new ServerBrowserMenu(this->source, reason);
-    }
-        
-        break;
+        } break;
     case GameClient::Connected:
         if (!this->ip.getHumanReadable().empty())
         {
