@@ -96,6 +96,17 @@
         }
     }
     
+    [keyvalue] {
+        [keyvalue.back] {
+            image: gui/widget/KeyValueBackground.png
+        }
+        [keyvalue.key] {
+        }
+        [keyvalue.value] {
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        }
+    }
+    
     # Stronger font used at a few locations without UI widgets.
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
