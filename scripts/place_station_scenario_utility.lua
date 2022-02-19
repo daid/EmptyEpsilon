@@ -2573,7 +2573,7 @@ function populateStationPool()
 					luxury = false,
 				},
 				description = _("scienceDescription-station", "Gambling and resupply"), 
-				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players", 
+				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players"), 
 				history = "",
 			},
 			["Nefatha"] = {
