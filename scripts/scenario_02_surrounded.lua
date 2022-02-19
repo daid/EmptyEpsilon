@@ -13,8 +13,12 @@ function setCirclePos(obj, angle, distance)
     obj:setPosition(math.sin(angle / 180 * math.pi) * distance, -math.cos(angle / 180 * math.pi) * distance)
 end
 
+local enemyList
+
 --- Initialize scenario.
 function init()
+    enemyList = {}
+
     -- a station near the center
     -- (Currently, it is not necessary to defend it.)
     SpaceStation():setTemplate("Small Station"):setPosition(0, -500):setRotation(random(0, 360)):setFaction("Independent")
@@ -22,12 +26,14 @@ function init()
     -- several single Phobos
     for _ = 1, 5 do
         local ship = CpuShip():setTemplate("Phobos T3"):orderRoaming()
+        table.insert(enemyList, ship)
         setCirclePos(ship, random(0, 360), random(7000, 10000))
     end
 
     -- several single Piranha
     for _ = 1, 2 do
         local ship = CpuShip():setTemplate("Piranha F12"):orderRoaming()
+        table.insert(enemyList, ship)
         setCirclePos(ship, random(0, 360), random(7000, 10000))
     end
 
@@ -36,20 +42,24 @@ function init()
         local a = random(0, 360)
         local d = 9000
         local ship = CpuShip():setTemplate("Atlantis X23"):setRotation(a + 180):orderRoaming()
+        table.insert(enemyList, ship)
         setCirclePos(ship, a, d)
 
         do
             local wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
+            table.insert(enemyList, wingman)
             setCirclePos(wingman, a - 5, d + 100)
             wingman:orderFlyFormation(ship, 500, 100)
         end
         do
             local wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
+            table.insert(enemyList, wingman)
             setCirclePos(wingman, a + 5, d + 100)
             wingman:orderFlyFormation(ship, -500, 100)
         end
         do
             local wingman = CpuShip():setTemplate("MT52 Hornet"):setRotation(a + 180)
+            table.insert(enemyList, wingman)
             setCirclePos(wingman, a + random(-5, 5), d - 500)
             wingman:orderFlyFormation(ship, 0, 600)
         end
@@ -68,5 +78,13 @@ end
 
 --- Update scenario.
 function update(delta)
-    -- No victory condition
+    local enemy_count = 0
+    for i_, object in ipairs(enemyList) do
+        if object:isValid() then
+            enemy_count = enemy_count + 1
+        end
+    end
+    if enemy_count == 0 then
+        victory("Human Navy")
+    end
 end
