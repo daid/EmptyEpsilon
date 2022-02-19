@@ -189,7 +189,7 @@ void CrewStationScreen::update(float delta)
     if (viewport)
     {
         // Responsively show/hide the 3D viewport.
-        if (viewport->getRect().size.x < viewport->getRect().size.y / 3.0f)
+        if (getRect().size.x < 1250)
         {
             viewport->hide();
             main_panel->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -350,9 +350,11 @@ void CrewStationScreen::tileViewport()
     if (current_position == singlePilot)
     {
         main_panel->setSize(1000, GuiElement::GuiSizeMax);
+        main_panel->layout.fill_width = false;
         viewport->setPosition(1000, 0, sp::Alignment::TopLeft);
     } else {
         main_panel->setSize(1200, GuiElement::GuiSizeMax);
+        main_panel->layout.fill_width = false;
         viewport->setPosition(1200, 0, sp::Alignment::TopLeft);
     }
 }
