@@ -784,7 +784,7 @@ function populateStationPool()
 					[randomComponent()] = math.random(40,200),
 				},
 				description = _("scienceDescription-station", "Mining"), 
-				general ="We mine nearby asteroids for precious minerals and process them for sale"), 
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals and process them for sale"), 
 				history = _("stationStory-comms", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"),
 			},
 			["Hayden"] = {
