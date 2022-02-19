@@ -32,6 +32,7 @@ FactionInfo::FactionInfo()
 : MultiplayerObject("FactionInfo")
 {
     index = 255;
+    gm_color = {255,255,255,255};
     enemy_mask = 0;
     friend_mask = 0;
 

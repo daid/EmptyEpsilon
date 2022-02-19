@@ -13,7 +13,8 @@ RepairCrew::RepairCrew()
 : MultiplayerObject("RepairCrew")
 {
     ship_id = -1;
-    position.x = -1;
+    position = {-1, -1};
+    target_position = {0, 0};
     action = RC_Idle;
     direction = ERepairCrewDirection(irandom(RC_Up, RC_Right + 1));
 

@@ -65,6 +65,7 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
     {
         room_container->destroy();
         room_container = nullptr;
+        crew_list.clear();
     }else{
         PVector<RepairCrew> crew = getRepairCrewFor(viewing_ship);
         if (crew.size() != crew_list.size())
