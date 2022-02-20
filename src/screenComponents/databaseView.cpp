@@ -178,5 +178,6 @@ void DatabaseViewComponent::display()
         }
     } else {
         keyvalue_container->destroy();
+        keyvalue_container = nullptr;
     }
 }
