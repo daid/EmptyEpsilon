@@ -21,8 +21,9 @@ private:
     void display();
 
     P<ScienceDatabase> selected_entry;
-    GuiListbox* item_list;
-    GuiElement* database_entry;
+    GuiListbox* item_list = nullptr;
+    GuiElement* keyvalue_container = nullptr;
+    GuiElement* details_container = nullptr;
 
     static constexpr int navigation_width = 400;
 };

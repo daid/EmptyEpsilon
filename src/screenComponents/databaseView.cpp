@@ -12,9 +12,6 @@
 DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 : GuiElement(owner, "DATABASE_VIEW")
 {
-    database_entry = nullptr;
-    selected_entry = nullptr;
-
     item_list = new GuiListbox(this, "DATABASE_ITEM_LIST", [this](int index, string value) {
         P<ScienceDatabase> entry;
 
@@ -22,7 +19,8 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         selected_entry = findEntryById(id);
         display();
     });
-    item_list->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(20, 20, 20, 130)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    setAttribute("layout", "horizontal");
+    item_list->setMargins(20)->setSize(navigation_width, GuiElement::GuiSizeMax);
     display();
 }
 
@@ -129,11 +127,16 @@ void DatabaseViewComponent::fillListBox()
 
 void DatabaseViewComponent::display()
 {
-    if (database_entry)
-        database_entry->destroy();
+    if (keyvalue_container)
+        keyvalue_container->destroy();
+    if (details_container)
+        details_container->destroy();
 
-    database_entry = new GuiElement(this, "DATABASE_ENTRY");
-    database_entry->setPosition(navigation_width, 0, sp::Alignment::TopLeft)->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    keyvalue_container = new GuiElement(this, "KEY_VALUE_CONTAINER");
+    keyvalue_container->setMargins(20)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+
+    details_container = new GuiElement(this, "DETAILS_CONTAINER");
+    details_container->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     fillListBox();
 
@@ -144,20 +147,13 @@ void DatabaseViewComponent::display()
     bool has_image_or_model = selected_entry->hasModelData() || selected_entry->getImage() != "";
     bool has_text = selected_entry->getLongDescription().length() > 0;
 
-    int left_column_width = 0;
-    if (has_key_values)
-    {
-        left_column_width = 400;
-    }
-    auto right = new GuiElement(database_entry, "DATABASE_ENTRY_RIGHT");
-    right->setPosition(left_column_width, 0, sp::Alignment::TopLeft)->setMargins(0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
     if (has_image_or_model)
     {
-        GuiElement* visual = (new GuiElement(right, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        GuiElement* visual = (new GuiElement(details_container, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
 
         if (selected_entry->hasModelData())
         {
-            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry->getModelData()))->setMargins(-100, -50)->setSize(GuiElement::GuiSizeMax, has_text ? GuiElement::GuiSizeMax : 450);
+            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry->getModelData()))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
             if(selected_entry->getImage() != "")
             {
                 (new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image))->setMargins(0)->setSize(32, 32);
@@ -166,34 +162,21 @@ void DatabaseViewComponent::display()
         else if(selected_entry->getImage() != "")
         {
             auto image = new GuiImage(visual, "DATABASE_IMAGE", selected_entry->image);
-            image->setMargins(-100, -50);
-            image->setSize(GuiElement::GuiSizeMax, has_text ? GuiElement::GuiSizeMax : 450);
+            image->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
     }
     if (has_text)
     {
-        if (!has_image_or_model)
-        {
-            // make sure station and main screen buttons don't overlay the text
-            if (!has_key_values)
-            {
-                right->setMargins(0, 10, 270, 0);
-            } else {
-                right->setMargins(0, 120, 0, 0);
-            }
-        }
-        (new GuiScrollText(right, "DATABASE_LONG_DESCRIPTION", selected_entry->getLongDescription()))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiScrollText(details_container, "DATABASE_LONG_DESCRIPTION", selected_entry->getLongDescription()))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 
-    // we render the left column second so it overlays the rotating 3D model
     if (has_key_values)
     {
-        auto left = new GuiElement(database_entry, "DATABASE_ENTRY_LEFT");
-        left->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(0, 0, 20, 0)->setSize(left_column_width, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-
         for(unsigned int n=0; n<selected_entry->keyValuePairs.size(); n++)
         {
-            (new GuiKeyValueDisplay(left, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
+            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, selected_entry->keyValuePairs[n].key, selected_entry->keyValuePairs[n].value))->setSize(GuiElement::GuiSizeMax, 40);
         }
+    } else {
+        keyvalue_container->destroy();
     }
 }
