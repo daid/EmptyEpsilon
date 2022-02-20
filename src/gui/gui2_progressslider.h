@@ -12,6 +12,9 @@ private:
     glm::u8vec4 color;
     bool drawBackground;
 
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
+
     string text;
 public:
     GuiProgressSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);

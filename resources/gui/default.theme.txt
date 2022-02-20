@@ -92,6 +92,7 @@
             image: gui/widget/ProgressbarBackground.png
         }
         [progressbar.front] {
+            size: 25
             image: gui/widget/ProgressbarFill.png
         }
     }

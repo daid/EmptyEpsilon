@@ -25,13 +25,13 @@ void GuiProgressbar::onDraw(sp::RenderTarget& renderer)
         fill_rect.size.x *= f;
         if (max_value < min_value)
             fill_rect.position.x = rect.position.x + rect.size.x - fill_rect.size.x;
-        renderer.drawStretchedH(fill_rect, front.texture, color);
+        renderer.drawStretchedHVClipped(rect, fill_rect, front.size, front.texture, color);
     }
     else
     {
         fill_rect.size.y *= f;
         fill_rect.position.y = rect.position.y + rect.size.y - fill_rect.size.y;
-        renderer.drawStretchedV(fill_rect, front.texture, color);
+        renderer.drawStretchedHVClipped(rect, fill_rect, front.size, front.texture, color);
     }
     renderer.drawText(rect, text, sp::Alignment::Center);
 }
