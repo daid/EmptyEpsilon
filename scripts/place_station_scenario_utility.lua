@@ -291,9 +291,9 @@ function populateStationPool()
 		        	medicine =		false, 
 		        	luxury =		false,
 		        },
-				description = "Training and Coordination", 
-				general = "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector", 
-				history = "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region",
+				description = _("scienceDescription-station", "Training and Coordination"), 
+				general = _("stationGeneralInfo-comms", "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"), 
+				history = _("stationStory-comms", "The original station builders were fans of the late 20th century scientist and author Isaac Asimov. The station was initially named Foundation, but was later changed simply to Asimov. It started off as a stellar observatory, then became a supply stop and as it has grown has become an educational and coordination hub for the region"),
 			},
 			["Armstrong"] =	{
 		        weapon_available = {
@@ -331,9 +331,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Warp and Impulse engine manufacturing", 
-				general = "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis", 
-				history = "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems.",
+				description = _("scienceDescription-station", "Warp and Impulse engine manufacturing"), 
+				general = _("stationGeneralInfo-comms", "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"), 
+				history = _("stationStory-comms", "The station is named after the late 19th century astronaut as well as the fictionlized stations that followed. The station initially constructed entire space worthy vessels. In time, it transitioned into specializeing in propulsion systems."),
 			},
 			["Broeck"] = {
 		        weapon_available = {
@@ -367,9 +367,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Warp drive components", 
-				general = "We provide warp drive engines and components", 
-				history = "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth",
+				description = _("scienceDescription-station", "Warp drive components"), 
+				general = _("stationGeneralInfo-comms", "We provide warp drive engines and components"), 
+				history = _("stationStory-comms", "This station is named after Chris Van Den Broeck who did some initial research into the possibility of warp drive in the late 20th century on Earth"),
 			},
 			["Coulomb"] = {
 		        weapon_available = 	{
@@ -407,9 +407,9 @@ function populateStationPool()
 				buy =	{
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Shielded circuitry fabrication", 
-				general = "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference", 
-				history = "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits",
+				description = _("scienceDescription-station", "Shielded circuitry fabrication"), 
+				general = _("stationGeneralInfo-comms", "We make a large variety of circuits for numerous ship systems shielded from sensor detection and external control interference"), 
+				history = _("stationStory-comms", "Our station is named after the law which quantifies the amount of force with which stationary electrically charged particals repel or attact each other - a fundamental principle in the design of our circuits"),
 			},
 			["Heyes"] = {
 		        weapon_available = {
@@ -447,9 +447,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Sensor components", 
-				general = "We research and manufacture sensor components and systems", 
-				history = "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility",
+				description = _("scienceDescription-station", "Sensor components"), 
+				general = _("stationGeneralInfo-comms", "We research and manufacture sensor components and systems"), 
+				history = _("stationStory-comms", "The station is named after Tony Heyes the inventor of some of the earliest electromagnetic sensors in the mid 20th century on Earth in the United Kingdom to assist blind human mobility"),
 			},
 			["Hossam"] = {
 		        weapon_available = {
@@ -484,9 +484,9 @@ function populateStationPool()
 					medicine = random(1,100) < 44, 
 					luxury = random(1,100) < 63,
 				},
-				description = "Nanite supplier", 
-				general = "We provide nanites for various organic and non-organic systems", 
-				history = "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel",
+				description = _("scienceDescription-station", "Nanite supplier"), 
+				general = _("stationGeneralInfo-comms", "We provide nanites for various organic and non-organic systems"), 
+				history = _("stationStory-comms", "This station is named after the nanotechnologist Hossam Haick from the early 21st century on Earth in Israel"),
 			},
 			["Maiman"] = {
 		        weapon_available = {
@@ -524,9 +524,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Energy beam components", 
-				general = "We research and manufacture energy beam components and systems", 
-				history = "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth",
+				description = _("scienceDescription-station", "Energy beam components"), 
+				general = _("stationGeneralInfo-comms", "We research and manufacture energy beam components and systems"), 
+				history = _("stationStory-comms", "The station is named after Theodore Maiman who researched and built the first laser in the mid 20th century on Earth"),
 			},
 			["Malthus"] = {
 		        weapon_available = {
@@ -556,8 +556,8 @@ function populateStationPool()
     				medicine = false, 
     				luxury = false,
     			},
-    			description = "Gambling and resupply",
-		        general = "The oldest station in the quadrant",
+    			description = _("scienceDescription-station", "Gambling and resupply"),
+		        general = _("stationGeneralInfo-comms", "The oldest station in the quadrant"),
 		        history = "",
 			},
 			["Marconi"] = {
@@ -593,9 +593,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Energy Beam Components", 
-				general = "We manufacture energy beam components", 
-				history = "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon",
+				description = _("scienceDescription-station", "Energy Beam Components"), 
+				general = _("stationGeneralInfo-comms", "We manufacture energy beam components"), 
+				history = _("stationStory-comms", "Station named after Guglielmo Marconi an Italian inventor from early 20th century Earth who, along with Nicolo Tesla, claimed to have invented a death ray or particle beam weapon"),
 			},
 			["Miller"] = {
 		        weapon_available = {
@@ -630,9 +630,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Exobiology research", 
-				general = "We study recently discovered life forms not native to Earth", 
-				history = "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller",
+				description = _("scienceDescription-station", "Exobiology research"), 
+				general = _("stationGeneralInfo-comms", "We study recently discovered life forms not native to Earth"), 
+				history = _("stationStory-comms", "This station was named after one of the early exobiologists from mid 20th century Earth, Dr. Stanley Miller"),
 			},
 			["Shawyer"] = {
 		        weapon_available = {
@@ -667,9 +667,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Impulse engine components", 
-				general = "We research and manufacture impulse engine components and systems", 
-				history = "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century",
+				description = _("scienceDescription-station", "Impulse engine components"), 
+				general = _("stationGeneralInfo-comms", "We research and manufacture impulse engine components and systems"), 
+				history = _("stationStory-comms", "The station is named after Roger Shawyer who built the first prototype impulse engine in the early 21st century"),
 			},
 		},
 		["History"] = {
@@ -706,9 +706,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Energy and particle beam components", 
-				general = "We fabricate general and specialized components for ship beam systems", 
-				history = "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it",
+				description = _("scienceDescription-station", "Energy and particle beam components"), 
+				general = _("stationGeneralInfo-comms", "We fabricate general and specialized components for ship beam systems"), 
+				history = _("stationStory-comms", "This station was named after Archimedes who, according to legend, used a series of adjustable focal length mirrors to focus sunlight on a Roman naval fleet invading Syracuse, setting fire to it"),
 			},
 			["Chatuchak"] =	{
 		        weapon_available = {
@@ -743,9 +743,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Trading station", 
-				general = "Only the largest market and trading location in twenty sectors. You can find your heart's desire here", 
-				history = "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind",
+				description = _("scienceDescription-station", "Trading station"), 
+				general = _("stationGeneralInfo-comms", "Only the largest market and trading location in twenty sectors. You can find your heart's desire here"), 
+				history = _("stationStory-comms", "Modeled after the early 21st century bazaar on Earth in Bangkok, Thailand. Designed and built with trade and commerce in mind"),
 			},
 			["Grasberg"] = {
 		        weapon_available = {
@@ -783,9 +783,9 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining", 
-				general ="We mine nearby asteroids for precious minerals and process them for sale", 
-				history = "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids",
+				description = _("scienceDescription-station", "Mining"), 
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals and process them for sale"), 
+				history = _("stationStory-comms", "This station's name is inspired by a large gold mine on Earth in Indonesia. The station builders hoped to have a similar amount of minerals found amongst these asteroids"),
 			},
 			["Hayden"] = {
 		        weapon_available = {
@@ -820,9 +820,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Observatory and stellar mapping", 
-				general = "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding", 
-				history = "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century",
+				description = _("scienceDescription-station", "Observatory and stellar mapping"), 
+				general = _("stationGeneralInfo-comms", "We study the cosmos and map stellar phenomena. We also track moving asteroids. Look out! Just kidding"), 
+				history = _("stationStory-comms", "Station named in honor of Charles Hayden whose philanthropy continued astrophysical research and education on Earth in the early 20th century"),
 			},
 			["Lipkin"] = {
 		        weapon_available = {
@@ -857,9 +857,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Autodoc components", 
+				description = _("scienceDescription-station", "Autodoc components"), 
 				general = "", 
-				history = "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth",
+				history = _("stationStory-comms", "The station is named after Dr. Lipkin who pioneered some of the research and application around robot assisted surgery in the area of partial nephrectomy for renal tumors in the early 21st century on Earth"),
 			},
 			["Madison"] = {
 		        weapon_available = {
@@ -894,9 +894,9 @@ function populateStationPool()
 					medicine = true, 
 					luxury = false,
 				},
-				description = "Zero gravity sports and entertainment", 
-				general = "Come take in a game or two or perhaps see a show", 
-				history = "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment",
+				description = _("scienceDescription-station", "Zero gravity sports and entertainment"), 
+				general = _("stationGeneralInfo-comms", "Come take in a game or two or perhaps see a show"), 
+				history = _("stationStory-comms", "Named after Madison Square Gardens from 21st century Earth, this station was designed to serve similar purposes in space - a venue for sports and entertainment"),
 			},
 			["Rutherford"] = {
 		        weapon_available = {
@@ -931,9 +931,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 43,
 				},
-				description = "Shield components and research", 
-				general = "We research and fabricate components for ship shield systems", 
-				history = "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century",
+				description = _("scienceDescription-station", "Shield components and research"), 
+				general = _("stationGeneralInfo-comms", "We research and fabricate components for ship shield systems"), 
+				history = _("stationStory-comms", "This station was named after the national research institution Rutherford Appleton Laboratory in the United Kingdom which conducted some preliminary research into the feasability of generating an energy shield in the late 20th century"),
 			},
 			["Toohie"] = {
 		        weapon_available = {
@@ -968,9 +968,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Shield and armor components and research", 
-				general = "We research and make general and specialized components for ship shield and ship armor systems", 
-				history = "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."},
+				description = _("scienceDescription-station", "Shield and armor components and research"), 
+				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"), 
+				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")},
 		},
 		["Pop Sci Fi"] = {
 			["Anderson"] = {
@@ -1010,9 +1010,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Battery and software engineering", 
-				general = "We provide high quality high capacity batteries and specialized software for all shipboard systems", 
-				history = "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion",
+				description = _("scienceDescription-station", "Battery and software engineering"), 
+				general = _("stationGeneralInfo-comms", "We provide high quality high capacity batteries and specialized software for all shipboard systems"), 
+				history = _("stationStory-comms", "The station is named after a fictional software engineer in a late 20th century movie depicting humanity unknowingly conquered by aliens and kept docile by software generated illusion"),
 			},
 			["Archer"] = {
 		        weapon_available = {
@@ -1046,9 +1046,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Shield and Armor Research", 
-				general = "The finest shield and armor manufacturer in the quadrant", 
-				history = "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer",
+				description = _("scienceDescription-station", "Shield and Armor Research"), 
+				general = _("stationGeneralInfo-comms", "The finest shield and armor manufacturer in the quadrant"), 
+				history = _("stationStory-comms", "We named this station for the pioneering spirit of the 22nd century Starfleet explorer, Captain Jonathan Archer"),
 			},
 			["Barclay"] = {
 		        weapon_available = {
@@ -1082,9 +1082,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Communication components", 
-				general = "We provide a range of communication equipment and software for use aboard ships", 
-				history = "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station",
+				description = _("scienceDescription-station", "Communication components"), 
+				general = _("stationGeneralInfo-comms", "We provide a range of communication equipment and software for use aboard ships"), 
+				history = _("stationStory-comms", "The station is named after Reginald Barclay who established the first transgalactic com link through the creative application of a quantum singularity. Station personnel often refer to the station as the Broccoli station"),
 			},
 			["Calvin"] = {
 		        weapon_available = {
@@ -1118,9 +1118,9 @@ function populateStationPool()
 				buy =	{
 					[randomComponent("robotic")] = math.random(40,200)
 				},
-				description = "Robotic research", 
-				general = "We research and provide robotic systems and components", 
-				history = "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming",
+				description = _("scienceDescription-station", "Robotic research"), 
+				general = _("stationGeneralInfo-comms", "We research and provide robotic systems and components"), 
+				history = _("stationStory-comms", "This station is named after Dr. Susan Calvin who pioneered robotic behavioral research and programming"),
 			},
 			["Cavor"] = {
 		        weapon_available = {
@@ -1155,9 +1155,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Advanced Material components", 
-				general = "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction", 
-				history = "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite",
+				description = _("scienceDescription-station", "Advanced Material components"), 
+				general = _("stationGeneralInfo-comms", "We fabricate several different kinds of materials critical to various space industries like ship building, station construction and mineral extraction"), 
+				history = _("stationStory-comms", "We named our station after Dr. Cavor, the physicist that invented a barrier material for gravity waves - Cavorite"),
 			},
 			["Cyrus"] = {
 		        weapon_available = {
@@ -1192,9 +1192,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 78,
 				},
-				description = "Impulse engine components", 
-				general = "We supply high quality impulse engines and parts for use aboard ships", 
-				history = "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne",
+				description = _("scienceDescription-station", "Impulse engine components"), 
+				general = _("stationGeneralInfo-comms", "We supply high quality impulse engines and parts for use aboard ships"), 
+				history = _("stationStory-comms", "This station was named after the fictional engineer, Cyrus Smith created by 19th century author Jules Verne"),
 			},
 			["Deckard"] = {
 		        weapon_available = {
@@ -1229,9 +1229,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Android components", 
-				general = "Supplier of android components, programming and service", 
-				history = "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids",
+				description = _("scienceDescription-station", "Android components"), 
+				general = _("stationGeneralInfo-comms", "Supplier of android components, programming and service"), 
+				history = _("stationStory-comms", "Named for Richard Deckard who inspired many of the sophisticated safety security algorithms now required for all androids"),
 			},
 			["Erickson"] = {
 		        weapon_available = {
@@ -1262,9 +1262,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Transporter components", 
-				general = "We provide transporters used aboard ships as well as the components for repair and maintenance", 
-				history = "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy",
+				description = _("scienceDescription-station", "Transporter components"), 
+				general = _("stationGeneralInfo-comms", "We provide transporters used aboard ships as well as the components for repair and maintenance"), 
+				history = _("stationStory-comms", "The station is named after the early 22nd century inventor of the transporter, Dr. Emory Erickson. This station is proud to have received the endorsement of Admiral Leonard McCoy"),
 			},
 			["Jabba"] = {
 		        weapon_available = {
@@ -1299,8 +1299,8 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Commerce and gambling", 
-				general = "Come play some games and shop. House take does not exceed 4 percent", 
+				description = _("scienceDescription-station", "Commerce and gambling"), 
+				general = _("stationGeneralInfo-comms", "Come play some games and shop. House take does not exceed 4 percent"), 
 				history = "",
 			},			
 			["Komov"] = {
@@ -1336,9 +1336,9 @@ function populateStationPool()
  					medicine = false, 
  					luxury = false,
  				},
-				description = "Xenopsychology training", 
-				general = "We provide classes and simulation to help train diverse species in how to relate to each other", 
-				history = "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles",
+				description = _("scienceDescription-station", "Xenopsychology training"), 
+				general = _("stationGeneralInfo-comms", "We provide classes and simulation to help train diverse species in how to relate to each other"), 
+				history = _("stationStory-comms", "A continuation of the research initially conducted by Dr. Gennady Komov in the early 22nd century on Venus, supported by the application of these principles"),
 			},
 			["Lando"] = {
 		        weapon_available = {
@@ -1374,7 +1374,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Casino and Gambling", 
+				description = _("scienceDescription-station", "Casino and Gambling"), 
 				general = "", 
 				history = "",
 			},			
@@ -1407,9 +1407,9 @@ function populateStationPool()
 					medicine = true, 
 					luxury = false,
 				},
-				description = "Trading station", 
-				general = "Come to Muddvile for all your trade and commerce needs and desires", 
-				history = "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman",
+				description = _("scienceDescription-station", "Trading station"), 
+				general = _("stationGeneralInfo-comms", "Come to Muddvile for all your trade and commerce needs and desires"), 
+				history = _("stationStory-comms", "Upon retirement, Harry Mudd started this commercial venture using his leftover inventory and extensive connections obtained while he traveled the stars as a salesman"),
 			},
 			["Nexus-6"] = {
 		        weapon_available = {
@@ -1448,9 +1448,9 @@ function populateStationPool()
 					[randomMineral()] = math.random(40,200),
 					[randomComponent("android")] = math.random(40,200),
 				},
-				description = "Android components", 
-				general = "Androids, their parts, maintenance and recylcling", 
-				history = "We named the station after the ground breaking android model produced by the Tyrell corporation",
+				description = _("scienceDescription-station", "Android components"), 
+				general = _("stationGeneralInfo-comms", "Androids, their parts, maintenance and recylcling"), 
+				history = _("stationStory-comms", "We named the station after the ground breaking android model produced by the Tyrell corporation"),
 			},
 			["O'Brien"] = {
 		        weapon_available = {
@@ -1485,9 +1485,9 @@ function populateStationPool()
 					medicine = true, 
 					luxury = random(1,100) < 43,
 				},
-				description = "Transporter components", 
-				general = "We research and fabricate high quality transporters and transporter components for use aboard ships", 
-				history = "Miles O'Brien started this business after his experience as a transporter chief",
+				description = _("scienceDescription-station", "Transporter components"), 
+				general = _("stationGeneralInfo-comms", "We research and fabricate high quality transporters and transporter components for use aboard ships"), 
+				history = _("stationStory-comms", "Miles O'Brien started this business after his experience as a transporter chief"),
 			},
 			["Organa"] = {
 		        weapon_available = {
@@ -1522,9 +1522,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Diplomatic training", 
-				general = "The premeire academy for leadership and diplomacy training in the region", 
-				history = "Established by the royal family so critical during the political upheaval era",
+				description = _("scienceDescription-station", "Diplomatic training"), 
+				general = _("stationGeneralInfo-comms", "The premeire academy for leadership and diplomacy training in the region"), 
+				history = _("stationStory-comms", "Established by the royal family so critical during the political upheaval era"),
 			},
 			["Owen"] = {
 		        weapon_available = {
@@ -1559,9 +1559,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Load lifters and components", 
-				general = "We provide load lifters and components for various ship systems", 
-				history = "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence",
+				description = _("scienceDescription-station", "Load lifters and components"), 
+				general = _("stationGeneralInfo-comms", "We provide load lifters and components for various ship systems"), 
+				history = _("stationStory-comms", "Owens started off in the moisture vaporator business on Tattooine then branched out into load lifters based on acquisition of proprietary software and protocols. The station name recognizes the tragic loss of our founder to Imperial violence"),
 			},
 			["Ripley"] = {
 		        weapon_available = {
@@ -1596,9 +1596,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 47,
 				},
-				description = "Load lifters and components", 
-				general = "We provide load lifters and components", 
-				history = "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship",
+				description = _("scienceDescription-station", "Load lifters and components"), 
+				general = _("stationGeneralInfo-comms", "We provide load lifters and components"), 
+				history = _("stationStory-comms", "The station is named after Ellen Ripley who made creative and effective use of one of our load lifters when defending her ship"),
 			},
 			["Skandar"] = {
 		        weapon_available = {
@@ -1633,9 +1633,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Routine maintenance and entertainment", 
-				general = "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars", 
-				history = "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax",
+				description = _("scienceDescription-station", "Routine maintenance and entertainment"), 
+				general = _("stationGeneralInfo-comms", "Stop by for repairs. Take in one of our juggling shows featuring the four-armed Skandars"), 
+				history = _("stationStory-comms", "The nomadic Skandars have set up at this station to practice their entertainment and maintenance skills as well as build a community where Skandars can relax"),
 			},			
 			["Soong"] = {
 		        weapon_available = {
@@ -1670,9 +1670,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Android components", 
-				general = "We create androids and android components", 
-				history = "The station is named after Dr. Noonian Soong, the famous android researcher and builder",
+				description = _("scienceDescription-station", "Android components"), 
+				general = _("stationGeneralInfo-comms", "We create androids and android components"), 
+				history = _("stationStory-comms", "The station is named after Dr. Noonian Soong, the famous android researcher and builder"),
 			},
 			["Starnet"] = {
 		        weapon_available = {
@@ -1707,9 +1707,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Automated weapons systems", 
-				general = "We research and create automated weapons systems to improve ship combat capability", 
-				history = "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'",
+				description = _("scienceDescription-station", "Automated weapons systems"), 
+				general = _("stationGeneralInfo-comms", "We research and create automated weapons systems to improve ship combat capability"), 
+				history = _("stationStory-comms", "Lost the history memory bank. Recovery efforts only brought back the phrase, 'I'll be back'"),
 			},			
 			["Tiberius"] = {
 		        weapon_available = {
@@ -1740,9 +1740,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Logistics coordination", 
-				general = "We support the stations and ships in the area with planning and communication services", 
-				history = "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name",
+				description = _("scienceDescription-station", "Logistics coordination"), 
+				general = _("stationGeneralInfo-comms", "We support the stations and ships in the area with planning and communication services"), 
+				history = _("stationStory-comms", "We recognize the influence of Starfleet Captain James Tiberius Kirk in the 23rd century in our station name"),
 			},
 			["Tokra"] = {
 		        weapon_available = {
@@ -1777,9 +1777,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Advanced material components", 
-				general = "We create multiple types of advanced material components. Our most popular products are our filaments", 
-				history = "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them",
+				description = _("scienceDescription-station", "Advanced material components"), 
+				general = _("stationGeneralInfo-comms", "We create multiple types of advanced material components. Our most popular products are our filaments"), 
+				history = _("stationStory-comms", "We learned several of our critical industrial processes from the Tokra race, so we honor our fortune by naming the station after them"),
 			},
 			["Utopia Planitia"] = {
 		        weapon_available = 	{
@@ -1810,8 +1810,8 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false 
 		        },
-				description = "Ship building and maintenance facility", 
-				general = "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel", 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
+				general = _("stationGeneralInfo-comms", "We work on all aspects of naval ship building and maintenance. Many of the naval models are researched, designed and built right here on this station. Our design goals seek to make the space faring experience as simple as possible given the tremendous capabilities of the modern naval vessel"), 
 				history = ""
 			},
 			["Vaiken"] = {
@@ -1851,7 +1851,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Ship building and maintenance facility", 
+				description = _("scienceDescription-station", "Ship building and maintenance facility"), 
 				general = "", 
 				history = "",
 			},			
@@ -1888,9 +1888,9 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = true,
 		        },
-				description = "Warp engine components", 
-				general = "We specialize in the esoteric components necessary to make warp drives function properly", 
-				history = "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do",
+				description = _("scienceDescription-station", "Warp engine components"), 
+				general = _("stationGeneralInfo-comms", "We specialize in the esoteric components necessary to make warp drives function properly"), 
+				history = _("stationStory-comms", "Zefram Cochrane constructed the first warp drive in human history. We named our station after him because of the specialized warp systems work we do"),
 			},
 		},
 		["Spec Sci Fi"] = {
@@ -1926,9 +1926,9 @@ function populateStationPool()
 				buy = {
 					[randomMineral()] = math.random(40,200),
 				},
-				description = "Optical Components", 
-				general = "We make and supply optic components for various station and ship systems", 
-				history = "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company",
+				description = _("scienceDescription-station", "Optical Components"), 
+				general = _("stationGeneralInfo-comms", "We make and supply optic components for various station and ship systems"), 
+				history = _("stationStory-comms", "This station continues the businesses from Earth based on the merging of several companies including Leica from Switzerland, the lens manufacturer and the Japanese advanced low carbon (ALCA) electronic and optic research and development company"),
 			},
 			["Bethesda"] = {
 		        weapon_available = {
@@ -1971,9 +1971,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Medical research", 
-				general = "We research and treat exotic medical conditions", 
-				history = "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century",
+				description = _("scienceDescription-station", "Medical research"), 
+				general = _("stationGeneralInfo-comms", "We research and treat exotic medical conditions"), 
+				history = _("stationStory-comms", "The station is named after the United States national medical research center based in Bethesda, Maryland on earth which was established in the mid 20th century"),
 			},
 			["Deer"] = {
 		        weapon_available = {
@@ -2008,9 +2008,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Repulsor and Tractor Beam Components", 
-				general = "We can meet all your pushing and pulling needs with specialized equipment custom made", 
-				history = "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products",
+				description = _("scienceDescription-station", "Repulsor and Tractor Beam Components"), 
+				general = _("stationGeneralInfo-comms", "We can meet all your pushing and pulling needs with specialized equipment custom made"), 
+				history = _("stationStory-comms", "The station name comes from a short story by the 20th century author Clifford D. Simak as well as from the 19th century developer John Deere who inspired a company that makes the Earth bound equivalents of our products"),
 			},
 			["Evondos"] = {
 		        weapon_available = {
@@ -2045,9 +2045,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = random(1,100) < 41,
 				},
-				description = "Autodoc components", 
-				general = "We provide components for automated medical machinery", 
-				history = "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland",
+				description = _("scienceDescription-station", "Autodoc components"), 
+				general = _("stationGeneralInfo-comms", "We provide components for automated medical machinery"), 
+				history = _("stationStory-comms", "The station is the evolution of the company that started automated pharmaceutical dispensing in the early 21st century on Earth in Finland"),
 			},
 			["Feynman"] = {
 		        weapon_available = 	{
@@ -2086,9 +2086,9 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = true,
 		        },
-				description = "Nanotechnology research", 
-				general = "We provide nanites and software for a variety of ship-board systems", 
-				history = "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman",
+				description = _("scienceDescription-station", "Nanotechnology research"), 
+				general = _("stationGeneralInfo-comms", "We provide nanites and software for a variety of ship-board systems"), 
+				history = _("stationStory-comms", "This station's name recognizes one of the first scientific researchers into nanotechnology, physicist Richard Feynman"),
 			},
 			["Mayo"] = {
 		        weapon_available = {
@@ -2127,9 +2127,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Medical Research", 
-				general = "We research exotic diseases and other human medical conditions", 
-				history = "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth",
+				description = _("scienceDescription-station", "Medical Research"), 
+				general = _("stationGeneralInfo-comms", "We research exotic diseases and other human medical conditions"), 
+				history = _("stationStory-comms", "We continue the medical work started by William Worrall Mayo in the late 19th century on Earth"),
 			},
 			["Olympus"] = {
 		        weapon_available = {
@@ -2164,9 +2164,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Optical components", 
-				general = "We fabricate optical lenses and related equipment as well as fiber optic cabling and components", 
-				history = "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry",
+				description = _("scienceDescription-station", "Optical components"), 
+				general = _("stationGeneralInfo-comms", "We fabricate optical lenses and related equipment as well as fiber optic cabling and components"), 
+				history = _("stationStory-comms", "This station grew out of the Olympus company based on earth in the early 21st century. It merged with Infinera, then bought several software comapnies before branching out into space based industry"),
 			},
 			["Panduit"] = {
 		        weapon_available = {
@@ -2201,9 +2201,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Optic components", 
-				general = "We provide optic components for various ship systems", 
-				history = "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States",
+				description = _("scienceDescription-station", "Optic components"), 
+				general = _("stationGeneralInfo-comms", "We provide optic components for various ship systems"), 
+				history = _("stationStory-comms", "This station is an outgrowth of the Panduit corporation started in the mid 20th century on Earth in the United States"),
 			},
 			["Shree"] = {
 		        weapon_available = {
@@ -2242,9 +2242,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = true,
 				},
-				description = "Repulsor and tractor beam components", 
-				general = "We make ship systems designed to push or pull other objects around in space", 
-				history = "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today",
+				description = _("scienceDescription-station", "Repulsor and tractor beam components"), 
+				general = _("stationGeneralInfo-comms", "We make ship systems designed to push or pull other objects around in space"), 
+				history = _("stationStory-comms", "Our station is named Shree after one of many tugboat manufacturers in the early 21st century on Earth in India. Tugboats serve a similar purpose for ocean-going vessels on earth as tractor and repulsor beams serve for space-going vessels today"),
 			},
 			["Vactel"] = {
 		        weapon_available = {
@@ -2275,9 +2275,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Shielded Circuitry Fabrication", 
-				general = "We specialize in circuitry shielded from external hacking suitable for ship systems", 
-				history = "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips",
+				description = _("scienceDescription-station", "Shielded Circuitry Fabrication"), 
+				general = _("stationGeneralInfo-comms", "We specialize in circuitry shielded from external hacking suitable for ship systems"), 
+				history = _("stationStory-comms", "We started as an expansion from the lunar based chip manufacturer of Earth legacy Intel electronic chips"),
 			},
 			["Veloquan"] = {
 		        weapon_available = {
@@ -2312,9 +2312,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Sensor components", 
-				general = "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use", 
-				history = "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy",
+				description = _("scienceDescription-station", "Sensor components"), 
+				general = _("stationGeneralInfo-comms", "We research and construct components for the most powerful and accurate sensors used aboard ships along with the software to make them easy to use"), 
+				history = _("stationStory-comms", "The Veloquan company has its roots in the manufacturing of LIDAR sensors in the early 21st century on Earth in the United States for autonomous ground-based vehicles. They expanded research and manufacturing operations to include various sensors for space vehicles. Veloquan was the result of numerous mergers and acquisitions of several companies including Velodyne and Quanergy"),
 			},
 			["Tandon"] = {
 		        weapon_available = {
@@ -2344,9 +2344,9 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Biotechnology research",
-				general = "Merging the organic and inorganic through research", 
-				history = "Continued from the Tandon school of engineering started on Earth in the early 21st century",
+				description = _("scienceDescription-station", "Biotechnology research"),
+				general = _("stationGeneralInfo-comms", "Merging the organic and inorganic through research"), 
+				history = _("stationStory-comms", "Continued from the Tandon school of engineering started on Earth in the early 21st century"),
 			},
 		},
 		["Generic"] = {
@@ -2383,7 +2383,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2423,8 +2423,8 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining", 
-				general = "We mine nearby asteroids for precious minerals", 
+				description = _("scienceDescription-station", "Mining"), 
+				general = _("stationGeneralInfo-comms", "We mine nearby asteroids for precious minerals"), 
 				history = "",
 			},
 			["Krak"] = {
@@ -2463,7 +2463,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2500,7 +2500,7 @@ function populateStationPool()
 					medicine = true, 
 					luxury = random(1,100) < 50,
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2539,7 +2539,7 @@ function populateStationPool()
 				buy = {
 					[randomComponent()] = math.random(40,200),
 				},
-				description = "Mining station", 
+				description = _("scienceDescription-station", "Mining station"), 
 				general = "", 
 				history = "",
 			},
@@ -2572,8 +2572,8 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Gambling and resupply", 
-				general = "Relax and meet some interesting players", 
+				description = _("scienceDescription-station", "Gambling and resupply"), 
+				general = _("stationGeneralInfo-comms", "Relax and meet some interesting players"), 
 				history = "",
 			},
 			["Nefatha"] = {
@@ -2609,7 +2609,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Commerce and recreation", 
+				description = _("scienceDescription-station", "Commerce and recreation"), 
 				general = "", 
 				history = "",
 			},
@@ -2641,7 +2641,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Xenopsychology research", 
+				description = _("scienceDescription-station", "Xenopsychology research"), 
 				general = "", 
 				history = "",
 			},
@@ -2678,7 +2678,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Mining and trade", 
+				description = _("scienceDescription-station", "Mining and trade"), 
 				general = "", 
 				history = "",
 			},
@@ -2715,7 +2715,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Mining and gambling", 
+				description = _("scienceDescription-station", "Mining and gambling"), 
 				general = "", 
 				history = "",
 			},
@@ -2752,7 +2752,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -2826,7 +2826,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
@@ -2858,7 +2858,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Textiles and fashion", 
+				description = _("scienceDescription-station", "Textiles and fashion"), 
 				general = "", 
 				history = "",
 			},
@@ -2895,7 +2895,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Stress Psychology Research", 
+				description = _("scienceDescription-station", "Stress Psychology Research"), 
 				general = "", 
 				history = "",
 			},
@@ -2927,7 +2927,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false,
 		        },
-				description = "Low gravity research", 
+				description = _("scienceDescription-station", "Low gravity research"), 
 				general = "", 
 				history = "",
 			},
@@ -2964,8 +2964,8 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
-				general = "Get your energy here! Grab a drink before you go!", 
+				description = _("scienceDescription-station", "Resupply"), 
+				general = _("stationGeneralInfo-comms", "Get your energy here! Grab a drink before you go!"), 
 				history = "",
 			},
 			["Science-2"] = {
@@ -2997,7 +2997,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Research Lab and Observatory", 
+				description = _("scienceDescription-station", "Research Lab and Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -3038,7 +3038,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Biotech research", 
+				description = _("scienceDescription-station", "Biotech research"), 
 				general = "", 
 				history = "",
 			},
@@ -3071,7 +3071,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Observatory", 
+				description = _("scienceDescription-station", "Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -3103,7 +3103,7 @@ function populateStationPool()
 		        	medicine = false, 
 		        	luxury = false,
 		        },
-				description = "Observatory", 
+				description = _("scienceDescription-station", "Observatory"), 
 				general = "", 
 				history = "",
 			},
@@ -3140,7 +3140,7 @@ function populateStationPool()
 					medicine = false, 
 					luxury = false,
 				},
-				description = "Resupply", 
+				description = _("scienceDescription-station", "Resupply"), 
 				general = "", 
 				history = "",
 			},
