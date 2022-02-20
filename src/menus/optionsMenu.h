@@ -12,8 +12,7 @@ class GuiLabel;
 class OptionsMenu : public GuiCanvas, public Updatable
 {
 private:
-    GuiElement* left_container;
-    GuiElement* right_container;
+    GuiElement* container;
     GuiSelector* options_pager;
     GuiElement* graphics_page;
     GuiElement* audio_page;
@@ -31,6 +30,7 @@ private:
     GuiLabel* impulse_volume_overlay_label;
 
     void setupGraphicsOptions();
+    void setupAudioOptions();
 public:
     OptionsMenu();
 
