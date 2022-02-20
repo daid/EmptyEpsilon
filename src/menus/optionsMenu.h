@@ -7,13 +7,16 @@
 class GuiSelector;
 class GuiBasicSlider;
 class GuiSlider;
+class GuiToggleButton;
 class GuiLabel;
 
 class OptionsMenu : public GuiCanvas, public Updatable
 {
 private:
     GuiElement* container;
-    GuiSelector* options_pager;
+    GuiToggleButton* graphics_button;
+    GuiToggleButton* audio_button;
+    GuiToggleButton* interface_button;
     GuiElement* graphics_page;
     GuiElement* audio_page;
     GuiElement* interface_page;

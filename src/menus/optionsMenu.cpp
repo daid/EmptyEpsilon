@@ -30,13 +30,35 @@ OptionsMenu::OptionsMenu()
     container->setMargins(20, 70, 20, 20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Options pager
-    options_pager = new GuiSelector(main_panel, "OPTIONS_PAGER", [this](int index, string value)
-    {
-        graphics_page->setVisible(index == 0);
-        audio_page->setVisible(index == 1);
-        interface_page->setVisible(index == 2);
+    auto button_row = new GuiElement(main_panel, "");
+    button_row->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
+    graphics_button = new GuiToggleButton(button_row, "", tr("Graphics options"), [this](bool value) {
+        graphics_button->setValue(true);
+        audio_button->setValue(false);
+        interface_button->setValue(false);
+        graphics_page->show();
+        audio_page->hide();
+        interface_page->hide();
     });
-    options_pager->setOptions({tr("Graphics options"), tr("Audio options"), tr("Interface options")})->setSelectionIndex(0)->setSize(GuiElement::GuiSizeMax, 50);
+    graphics_button->setValue(true)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    audio_button = new GuiToggleButton(button_row, "", tr("Audio options"), [this](bool value) {
+        graphics_button->setValue(false);
+        audio_button->setValue(true);
+        interface_button->setValue(false);
+        graphics_page->hide();
+        audio_page->show();
+        interface_page->hide();
+    });
+    audio_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    interface_button = new GuiToggleButton(button_row, "", tr("Interface options"), [this](bool value) {
+        graphics_button->setValue(false);
+        audio_button->setValue(false);
+        interface_button->setValue(true);
+        graphics_page->hide();
+        audio_page->hide();
+        interface_page->show();
+    });
+    interface_button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     graphics_page = new GuiElement(container, "OPTIONS_GRAPHICS");
     graphics_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->show()->setAttribute("layout", "vertical");
