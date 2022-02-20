@@ -20,7 +20,7 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         display();
     });
     setAttribute("layout", "horizontal");
-    item_list->setMargins(20)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    item_list->setMargins(20, 20, 20, 120)->setSize(navigation_width, GuiElement::GuiSizeMax);
     display();
 }
 
@@ -149,7 +149,7 @@ void DatabaseViewComponent::display()
 
     if (has_image_or_model)
     {
-        GuiElement* visual = (new GuiElement(details_container, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMatchWidth);
+        GuiElement* visual = (new GuiElement(details_container, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         if (selected_entry->hasModelData())
         {
