@@ -10,10 +10,10 @@ GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int ma
     front_style = theme->getStyle("scrollbar.front");
 
     (new GuiArrowButton(this, id + "_UP_ARROW", 90, [this]() {
-        setValue(getValue() - 1);
+        setValue(getValue() - click_change);
     }))->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
     (new GuiArrowButton(this, id + "_DOWN_ARROW", -90, [this]() {
-        setValue(getValue() + 1);
+        setValue(getValue() + click_change);
     }))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(GuiSizeMax, GuiSizeMatchWidth);
 }
 
@@ -101,6 +101,11 @@ void GuiScrollbar::setRange(int min_value, int max_value)
 void GuiScrollbar::setValueSize(int size)
 {
     value_size = size;
+}
+
+void GuiScrollbar::setClickChange(int change)
+{
+    click_change = change;
 }
 
 void GuiScrollbar::setValue(int value)

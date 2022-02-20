@@ -14,6 +14,7 @@ protected:
     // WARNING: this value could be out of bounds. Use getValue() to ensure a value between min_value and max_value.
     int desired_value;
     int value_size;
+    int click_change = 1;
     func_t func;
 
     bool drag_scrollbar;
@@ -31,6 +32,7 @@ public:
 
     void setRange(int min_value, int max_value);
     void setValueSize(int size);
+    void setClickChange(int change);
 
     void setValue(int value);
     int getValue() const;

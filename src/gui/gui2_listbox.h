@@ -9,14 +9,16 @@
 class GuiListbox : public GuiEntryList
 {
 protected:
-    std::vector<GuiToggleButton*> buttons;
     float text_size;
     float button_height;
     sp::Alignment text_alignment;
-    glm::u8vec4 selected_color;
-    glm::u8vec4 unselected_color;
     GuiScrollbar* scroll;
     sp::Rect last_rect;
+
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
+    const GuiThemeStyle* back_selected_style;
+    const GuiThemeStyle* front_selected_style;
 public:
     GuiListbox(GuiContainer* owner, string id, func_t func);
 
@@ -28,8 +30,6 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
-private:
-    virtual void entriesChanged() override;
 };
 
 #endif//GUI2_LISTBOX_H

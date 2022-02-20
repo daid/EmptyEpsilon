@@ -107,6 +107,28 @@
             font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
         }
     }
+
+    [listbox] {
+        color: #ffffff
+        [listbox.back] {
+            image: gui/widget/ButtonBackground.png
+            image.hover: gui/widget/ButtonBackground.hover.png
+            image.disabled: gui/widget/ButtonBackground.disabled.png
+            
+            [listbox.selected.back] {
+                image: gui/widget/ButtonBackground.active.png
+                image.hover: gui/widget/ButtonBackground.active.png
+                image.disabled: gui/widget/ButtonBackground.active.png
+            }
+        }
+        [listbox.front] {
+            color.disabled: #FFFFFF4D
+
+            [listbox.selected.front] {
+                color: #120A00
+            }
+        }
+    }
     
     # Stronger font used at a few locations without UI widgets.
     [bold] {
