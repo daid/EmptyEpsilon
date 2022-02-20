@@ -58,7 +58,7 @@ HotkeyMenu::HotkeyMenu()
 
     // Middle: Rebinding UI frame
     rebinding_container = new GuiElement(rebinding_ui, "HOTKEY_CONFIG_CONTAINER");
-    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setMargins(FRAME_MARGIN)->setAttribute("layout", "horizontal");
+    rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setAttribute("layout", "horizontal");
 
     // Show category 1 ("General")
     HotkeyMenu::setCategory(1);
