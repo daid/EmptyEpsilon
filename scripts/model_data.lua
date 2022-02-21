@@ -584,3 +584,46 @@ for type=1,5 do
         model:setIllumination("transport_space_ship_" .. type .. "/transport_space_ship_" .. type .. "_illumination.png")
     end
 end
+
+-------- Civil cuboid satellite
+
+model = ModelData()
+model:setName("cubesat")
+model:setMesh("mesh/various/cubesat.obj")
+model:setTexture("mesh/various/cubesat.png")
+model:setSpecular("mesh/various/cubesat-specular.png")
+model:setScale(10)
+model:setRadius(100)
+
+model:addEngineEmitter(.7, -.35, 0,  0.2, 0.2, 0.7, 0.5)
+model:addEngineEmitter(.7,  .35, 0,  0.2, 0.2, 0.7, 0.5)
+
+-------- Military satellite
+
+model = ModelData()
+model:setName("combatsat")
+model:setMesh("mesh/various/combatsat.obj")
+model:setTexture("mesh/various/combatsat.png")
+model:setSpecular("mesh/various/combatsat-specular.png")
+model:setScale(10)
+model:setRadius(55)
+-- Visual positions of the beams/missiletubes (blender: -X, Y, Z)
+model:addBeamPosition(2.7,-0.5,0)
+model:addBeamPosition(2.7, 0.5,0)
+model:addEngineEmitter(-1.5, -.4, 0,  0.2, 0.2, 0.7, 0.5)
+model:addEngineEmitter(-1.5,  .4, 0,  0.2, 0.2, 0.7, 0.5)
+
+-------- Debris
+
+model = ModelData()
+model:setName("debris-cubesat")
+model:setMesh("mesh/various/debris-cubesat.obj")
+model:setTexture("mesh/various/cubesat.png")
+model:setScale(10)
+model:setRadius(100)
+
+model = ModelData():setName("debris-blob")
+model:setScale(2):setRadius(100)
+model:setMesh("mesh/various/debris-blob.obj")
+model:setTexture("mesh/various/debris-blob.jpg")
+model:setSpecular("mesh/various/debris-blob-specular.jpg")
