@@ -137,6 +137,7 @@ void DatabaseViewComponent::display()
 
     details_container = new GuiElement(this, "DETAILS_CONTAINER");
     details_container->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    details_container->layout.padding.top = 50;
 
     fillListBox();
 
