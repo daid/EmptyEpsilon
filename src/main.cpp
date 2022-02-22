@@ -246,7 +246,7 @@ int main(int argc, char** argv)
         int width = 1200;
         int height = 900;
         int fsaa = 0;
-        bool fullscreen = PreferencesManager::get("fullscreen", "1").toInt();
+        Window::Mode fullscreen = (Window::Mode)PreferencesManager::get("fullscreen", "1").toInt();
 
         if (PreferencesManager::get("fsaa").toInt() > 0)
         {
@@ -399,7 +399,7 @@ int main(int argc, char** argv)
     if (windows.size() > 0)
     {
         PreferencesManager::set("fsaa", windows[0]->getFSAA());
-        PreferencesManager::set("fullscreen", windows[0]->isFullscreen() ? 1 : 0);
+        PreferencesManager::set("fullscreen", (int)windows[0]->getMode());
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.

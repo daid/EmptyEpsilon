@@ -163,7 +163,7 @@ void OptionsMenu::setupGraphicsOptions()
     // Fullscreen toggle.
     (new GuiButton(graphics_page, "FULLSCREEN_TOGGLE", tr("Fullscreen toggle"), []() {
         foreach(Window, window, windows) {
-            window->setFullscreen(!window->isFullscreen());
+            window->setMode(window->getMode() == Window::Mode::Window ? Window::Mode::Fullscreen : Window::Mode::Window);
         }
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
