@@ -94,7 +94,7 @@ OptionsMenu::OptionsMenu()
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Control configuration
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
 
     // Keyboard config (hotkeys/keybindings)
     (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard"), [this]()
@@ -104,7 +104,7 @@ OptionsMenu::OptionsMenu()
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
     //Select the language
-    (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
     
     std::vector<string> languages = findResources("locale/main.*.po");
     
@@ -224,7 +224,7 @@ void OptionsMenu::setupAudioOptions()
     sound_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Music playback state.
-    (new GuiLabel(left, "MUSIC_PLAYBACK_LABEL", tr("Music Playback"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left, "MUSIC_PLAYBACK_LABEL", tr("Music Playback"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;;
 
     // Determine when music is enabled.
     int music_enabled_index = PreferencesManager::get("music_enabled", "2").toInt();
@@ -249,7 +249,7 @@ void OptionsMenu::setupAudioOptions()
     music_volume_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Engine playback state.
-    (new GuiLabel(left, "IMPULSE_SOUND_LABEL", tr("Impulse Engine sound"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left, "IMPULSE_SOUND_LABEL", tr("Impulse Engine sound"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;;
 
     // Determine when engine sound effects are enabled.
     int impulse_enabled_index = PreferencesManager::get("impulse_sound_enabled", "2").toInt();
