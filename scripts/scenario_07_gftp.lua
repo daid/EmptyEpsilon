@@ -3,7 +3,7 @@
 ---
 --- However, when an inbound FTL-capable Ktlitan swarm is announced, you must scramble to save the sector!
 ---
---- [Requires beam/shield frequenies] [Hard]
+--- [Requires beam/shield frequencies] [Hard]
 ---
 --- This scenario is limited to one player ship: the Atlantis Epsilon.
 -- Type: Mission
