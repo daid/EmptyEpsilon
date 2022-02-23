@@ -1,9 +1,9 @@
 -- Name: Beacon of Light series
 -- Description: The Beacon of Light scenario, built from the series at EmptyEpsilon.org.
 ---
---- Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat went missing, and your first mission is to recover him.
+--- Near the far outpost of Orion-5, Exuari attacks are increasing. A diplomat went missing, and your first mission is to recover him.
 ---
---- This scenario is limited to one player ship: the Atlantis Epsilon.
+--- This scenario is limited to one player ship: the Atlantis Epsilon. Estimated duration: 1 hour
 -- Type: Mission
 
 --- Scenario
@@ -87,7 +87,7 @@ function missionRT4UnderAttack(delta)
     if not transport_RT4:isValid() then
         -- RT-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
         mission_state = missionRT4EscapeDropped
-        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions("Life Pod","J. J. Johnson in Life Pod"):setScanningParameters(1,1)
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
@@ -100,7 +100,7 @@ Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johns
         -- Not sure how you did it, but you managed to destroy the two Exauri ships before they destroyed RT-4...
         transport_RT4:destroy()
         mission_state = missionRT4EscapeDropped
-        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250)
+        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions("Life Pod","J. J. Johnson on Life Pod"):setScanningParameters(1,1)
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
@@ -207,7 +207,7 @@ function missionWaitForAmbush(delta)
     if distance(player, main_station) < 50000 then
         -- We can jump to the Orion-5 station in 1 jump. So ambush the player!
         x, y = player:getPosition()
-        WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711)
+        WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711):setDescriptions("High powered field generator","Warp/Jump Jammer. Radius visible if jammer visible"):setScanningParameters(1,1)
         ambush_main = CpuShip():setFaction("Exuari"):setTemplate("Starhammer II"):setScanned(true):setPosition(x - 1667, y + 2611):setRotation(-80):orderAttack(player)
         ambush_side1 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
         ambush_side2 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
@@ -348,12 +348,18 @@ function missionTransportWaitForRecovery(delta)
     if mission_timer < 0 then
         mission_timer = random(90, 120)
 
-        local x, y = transport_target:getPosition()
-        local distance = random(8000, 12000)
-        local r = random(0, 360)
-        x = x + math.cos(r / 180 * math.pi) * distance
-        y = y + math.sin(r / 180 * math.pi) * distance
-        CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(x, y):orderAttack(player)
+        if wait_enemy_count == nil then
+        	wait_enemy_count = 1
+        end
+        for i=1,wait_enemy_count do
+			local x, y = transport_target:getPosition()
+			local distance = random(8000, 12000)
+			local r = random(0, 360)
+			x = x + math.cos(r / 180 * math.pi) * distance
+			y = y + math.sin(r / 180 * math.pi) * distance
+			CpuShip():setTemplate("MT52 Hornet"):setFaction("Exuari"):setPosition(x, y):orderAttack(player)
+		end
+		wait_enemy_count = wait_enemy_count + 1
     end
 
     if distance(transport_recovery_team, transport_target) < 1000 then
