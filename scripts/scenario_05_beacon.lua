@@ -100,7 +100,7 @@ Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johns
         -- Not sure how you did it, but you managed to destroy the two Exauri ships before they destroyed RT-4...
         transport_RT4:destroy()
         mission_state = missionRT4EscapeDropped
-        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions(_("scienceDescription-lifepod", "Life Pod"),_("scienceDescription-lifepod", "J. J. Johnson on Life Pod")):setScanningParameters(1,1)
+        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions(_("scienceDescription-lifepod", "Life Pod"),_("scienceDescription-lifepod", "J. J. Johnson in Life Pod")):setScanningParameters(1,1)
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
