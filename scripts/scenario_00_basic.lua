@@ -202,8 +202,8 @@ end
 --- Initializes main GM Menu
 function gmButtons()
     clearGMFunctions()
-    addGMFunction("+Named Waves",namedWaves)
-    addGMFunction("Random wave",function()
+    addGMFunction(_("buttonGM", "+Named Waves"),namedWaves)
+    addGMFunction(_("buttonGM", "Random wave"),function()
         addWave(
             enemyList,
             random(0,10),
@@ -214,7 +214,7 @@ function gmButtons()
     
     -- Let the GM spawn random reinforcements. Their distance from the
     -- players' spawn point is about half that of enemy waves.
-    addGMFunction("Random friendly", function()
+    addGMFunction(_("buttonGM", "Random friendly"), function()
         local friendlyShip = {"Phobos T3", "MU52 Hornet", "Piranha F12"}
         local friendlyShipIndex = math.random(#friendlyShip)
         
@@ -235,30 +235,30 @@ function gmButtons()
     addGMPositionToggle()
     
     -- End scenario with Human Navy (players) victorious.
-    addGMFunction("Win",gmVictoryYesNo)
+    addGMFunction(_("buttonGM", "Win"),gmVictoryYesNo)
 end
 
 --- Shows Yes/No question dialogue GM submenu with question if Human Navy should win. 
 function gmVictoryYesNo()
     clearGMFunctions()
-    addGMFunction("Victory?", function() string.format("") end)
-    addGMFunction("Yes", function() 
+    addGMFunction(_("buttonGM", "Victory?"), function() string.format("") end)
+    addGMFunction(_("buttonGM", "Yes"), function() 
         victory("Human Navy")
         clearGMFunctions()
-        addGMFunction("Players have won", function() string.format("") end)
-        addGMFunction("Scenario ended", function() string.format("") end)
+        addGMFunction(_("buttonGM", "Players have won"), function() string.format("") end)
+        addGMFunction(_("buttonGM", "Scenario ended"), function() string.format("") end)
     end)
-    addGMFunction("No", gmButtons)
+    addGMFunction(_("buttonGM", "No"), gmButtons)
 end
 
 --- Generate GM Toggle button for changing wave positioning variant. 
 function addGMPositionToggle()
-    local name = "Position: "
+    local name = _("buttonGM", "Position: ")
 
     if(addWavesToGMPosition) then
-        name = name.."GM"
+        name = name.._("buttonGM", "GM")
     else
-        name = name.."Random"
+        name = name.._("buttonGM", "Random")
     end
 
     addGMFunction(name, function()
@@ -271,16 +271,16 @@ end
 --- Shows "Named waves" GM submenu (that allows spawning more waves).
 function namedWaves()
     local wave_names = {
-        [0] = "Strikeship",
-        [1] = "Fighter",
-        [2] = "Gunship",
-        [4] = "Dreadnought",
-        [5] = "Missile Cruiser",
-        [6] = "Cruiser",
-        [9] = "Adv. striker",
+        [0] = _("buttonGM", "Strikeship"),
+        [1] = _("buttonGM", "Fighter"),
+        [2] = _("buttonGM", "Gunship"),
+        [4] = _("buttonGM", "Dreadnought"),
+        [5] = _("buttonGM", "Missile Cruiser"),
+        [6] = _("buttonGM", "Cruiser"),
+        [9] = _("buttonGM", "Adv. striker"),
     }
     clearGMFunctions()
-    addGMFunction("-From Named Waves",gmButtons)
+    addGMFunction(_("buttonGM", "-From Named Waves"),gmButtons)
     for index, name in pairs(wave_names) do
         addGMFunction(name,function()
             string.format("")
