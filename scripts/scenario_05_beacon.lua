@@ -87,7 +87,7 @@ function missionRT4UnderAttack(delta)
     if not transport_RT4:isValid() then
         -- RT-4 destroyed, send a transmission to the player, create a supply drop to indicate an escape pod.
         mission_state = missionRT4EscapeDropped
-        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions("Life Pod","J. J. Johnson in Life Pod"):setScanningParameters(1,1)
+        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions(_("scienceDescription-lifepod", "Life Pod"),_("scienceDescription-lifepod", "J. J. Johnson in Life Pod")):setScanningParameters(1,1)
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
@@ -100,7 +100,7 @@ Life signs are detected in the pod. Please retrieve the pod to see if J.J. Johns
         -- Not sure how you did it, but you managed to destroy the two Exauri ships before they destroyed RT-4...
         transport_RT4:destroy()
         mission_state = missionRT4EscapeDropped
-        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions("Life Pod","J. J. Johnson on Life Pod"):setScanningParameters(1,1)
+        transport_RT4_drop = SupplyDrop():setFaction("Human Navy"):setPosition(3750, 31250):setDescriptions(_("scienceDescription-lifepod", "Life Pod"),_("scienceDescription-lifepod", "J. J. Johnson in Life Pod")):setScanningParameters(1,1)
         transport_RT4_drop_time = 0.0
         research_station:sendCommsMessage(
             player,
@@ -207,7 +207,7 @@ function missionWaitForAmbush(delta)
     if distance(player, main_station) < 50000 then
         -- We can jump to the Orion-5 station in 1 jump. So ambush the player!
         x, y = player:getPosition()
-        WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711):setDescriptions("High powered field generator","Warp/Jump Jammer. Radius visible if jammer visible"):setScanningParameters(1,1)
+        WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711):setDescriptions(_("scienceDescription-artifact", "High powered field generator"),_("scienceDescription-artifact", "Warp/Jump Jammer. Radius visible if jammer visible")):setScanningParameters(1,1)
         ambush_main = CpuShip():setFaction("Exuari"):setTemplate("Starhammer II"):setScanned(true):setPosition(x - 1667, y + 2611):setRotation(-80):orderAttack(player)
         ambush_side1 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
         ambush_side2 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
