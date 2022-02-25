@@ -63,8 +63,11 @@ msgstr ""
 "Le HNS Gallipoli de la Marine humaine et le Crusader Naa'Tvek des Kraylors "
 "s'affrontent dans une bataille sans merci pour Shangri-La.\n"
 "\n"
-"Titre original : Clash in Shangri-La\n"
-"Auteur : Fouindor (révision par capt-t, oznogon)"
+"- Titre original : Clash in Shangri-La\n"
+"- Auteur : Fouindor (révision par capt-t, oznogon)\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 #: scripts/scenario_81_pvp.lua:90
 msgctxt "goal-incCall"

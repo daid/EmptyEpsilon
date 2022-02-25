@@ -38,7 +38,11 @@ msgstr ""
 "\n"
 "Ce scénario est limité à un seul vaisseau joueurs : l'Atlantis-1.\n"
 "\n"
-"Titre original : Birth of the Atlantis"
+"- Titre original : Birth of the Atlantis\n"
+"- Auteur : Daid\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 #: scripts/scenario_08_atlantis.lua:158 scripts/scenario_08_atlantis.lua:174
 #: scripts/scenario_08_atlantis.lua:178

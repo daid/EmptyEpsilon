@@ -34,8 +34,11 @@ msgstr ""
 "\n"
 "Ce scénario est conçu pour tester les performances de votre matériel.\n"
 "\n"
-"Titre original : Battlefield\n"
-"Auteur : Daid"
+"- Titre original : Battlefield\n"
+"- Auteur : Daid\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"

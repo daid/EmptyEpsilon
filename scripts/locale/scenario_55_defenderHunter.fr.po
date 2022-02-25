@@ -65,8 +65,11 @@ msgstr ""
 "\n"
 "Version 10 - janvier 2022\n"
 "\n"
-"Titre original : Defender Hunter\n"
-"Auteur : Xansta"
+"- Titre original : Defender Hunter\n"
+"- Auteur : Xansta\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"

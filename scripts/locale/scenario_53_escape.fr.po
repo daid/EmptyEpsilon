@@ -38,8 +38,11 @@ msgstr ""
 "La version 4 ajoute plus d'activité pour l'officier des armes (6 avril "
 "2020)\n"
 "\n"
-"Titre original : Escape\n"
-"Auteur : Xansta"
+"- Titre original : Escape\n"
+"- Auteur : Xansta\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"

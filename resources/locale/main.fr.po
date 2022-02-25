@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-02-21 22:25+0100\n"
+"PO-Revision-Date: 2022-02-26 00:15+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -341,9 +341,10 @@ msgstr "Erreur non spécifiée {error}"
 #: src/screenComponents/databaseView.cpp:106 scripts/comms_ship.lua:47
 #: scripts/comms_ship.lua:57 scripts/comms_ship.lua:70
 #: scripts/comms_ship.lua:78 scripts/comms_ship.lua:88
-#: scripts/comms_station.lua:147 scripts/comms_station.lua:161
-#: scripts/comms_station.lua:225 scripts/comms_station.lua:230
-#: scripts/comms_station.lua:254 scripts/comms_station.lua:259
+#: scripts/comms_station.lua:151 scripts/comms_station.lua:165
+#: scripts/comms_station.lua:229 scripts/comms_station.lua:234
+#: scripts/comms_station.lua:263 scripts/comms_station.lua:289
+#: scripts/comms_station.lua:294
 msgctxt "button"
 msgid "Back"
 msgstr "Retour"
@@ -5038,14 +5039,14 @@ msgctxt "commsShipAssist"
 msgid "WP %d"
 msgstr "Marqueur %d"
 
-#: scripts/comms_station.lua:69
+#: scripts/comms_station.lua:73
 msgctxt "commsStation"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 "Nous sommes sous le feu de l'ennemi !\n"
 "Pas le temps de bavarder !"
 
-#: scripts/comms_station.lua:87
+#: scripts/comms_station.lua:91
 #, lua-format
 msgctxt "commsStation"
 msgid ""
@@ -5055,88 +5056,88 @@ msgstr ""
 "Bonjour officier ! Bienvenue sur %s.\n"
 "Que pouvons-nous faire pour vous aujourd'hui ?"
 
-#: scripts/comms_station.lua:89
+#: scripts/comms_station.lua:93
 #, lua-format
 msgctxt "commsStation"
 msgid "Welcome to our lovely station %s."
 msgstr "Bienvenue dans notre charmante station orbitale %s."
 
-#: scripts/comms_station.lua:94
+#: scripts/comms_station.lua:98
 msgctxt "commsStation"
 msgid "Do you have spare homing missiles for us?"
 msgstr "Auriez-vous des homing missiles pour nous ?"
 
-#: scripts/comms_station.lua:95
+#: scripts/comms_station.lua:99
 msgctxt "commsStation"
 msgid "Can you restock us with HVLI?"
 msgstr "Pouvez-vous nous réapprovisionner en HVLI ? "
 
-#: scripts/comms_station.lua:96
+#: scripts/comms_station.lua:100
 msgctxt "commsStation"
 msgid "Please re-stock our mines."
 msgstr "Merci de réapprovisionner notre stock de mines, c'est urgent."
 
-#: scripts/comms_station.lua:97
+#: scripts/comms_station.lua:101
 msgctxt "commsStation"
 msgid "Can you supply us with some nukes?"
 msgstr "Avez-vous des missiles nucléaires nukes ?"
 
-#: scripts/comms_station.lua:98
+#: scripts/comms_station.lua:102
 msgctxt "commsStation"
 msgid "Please re-stock our EMP missiles."
 msgstr "Avez-vous des missiles EMP ?"
 
-#: scripts/comms_station.lua:104
+#: scripts/comms_station.lua:108
 #, lua-format
 msgctxt "commsStation"
 msgid "%s (%d rep each)"
 msgstr "%s (%d rép chacun)"
 
-#: scripts/comms_station.lua:120
+#: scripts/comms_station.lua:124
 msgctxt "commsStation"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarrés à la station pour cette action."
 
-#: scripts/comms_station.lua:127
+#: scripts/comms_station.lua:131
 msgctxt "commsStation"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 "Nous ne fournissons pas ce type d'armes de destruction massive. \n"
 "Nous sommes pour la paix dans l'univers."
 
-#: scripts/comms_station.lua:129
+#: scripts/comms_station.lua:133
 msgctxt "commsStation"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
-#: scripts/comms_station.lua:131
+#: scripts/comms_station.lua:135
 msgctxt "commsStation"
 msgid "We do not deal in those weapons."
 msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
-#: scripts/comms_station.lua:142
+#: scripts/comms_station.lua:146
 msgctxt "commsStation"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
 
-#: scripts/comms_station.lua:144
+#: scripts/comms_station.lua:148
 msgctxt "commsStation"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 "Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
 "fournir."
 
-#: scripts/comms_station.lua:150
+#: scripts/comms_station.lua:154
 msgctxt "commsStation"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
 
-#: scripts/comms_station.lua:156
+#: scripts/comms_station.lua:160
 msgctxt "commsStation"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargés au max et prêt à tout faire péter."
 
-#: scripts/comms_station.lua:158
+#: scripts/comms_station.lua:162
 msgctxt "commsStation"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
@@ -5145,7 +5146,7 @@ msgstr ""
 "Nous vous avons généreusement réapprovisionné en munitions.\n"
 "Faites-en bon usage."
 
-#: scripts/comms_station.lua:172
+#: scripts/comms_station.lua:176
 #, lua-format
 msgctxt "commsStation"
 msgid ""
@@ -5156,7 +5157,7 @@ msgstr ""
 "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
 "station au préalable."
 
-#: scripts/comms_station.lua:174
+#: scripts/comms_station.lua:178
 #, lua-format
 msgctxt "commsStation"
 msgid ""
@@ -5166,32 +5167,32 @@ msgstr ""
 "Ici la station %s. Salutations.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
-#: scripts/comms_station.lua:181
+#: scripts/comms_station.lua:185
 #, lua-format
 msgctxt "commsStation"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 "Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
 
-#: scripts/comms_station.lua:190
+#: scripts/comms_station.lua:194
 #, lua-format
 msgctxt "commsStation"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Merci de nous envoyer des renforts ! (%d rep)"
 
-#: scripts/comms_station.lua:205
+#: scripts/comms_station.lua:209
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Vous devez définir un marqueur avant de faire une demande de "
 "réapprovisionnement."
 
-#: scripts/comms_station.lua:207
+#: scripts/comms_station.lua:211
 msgctxt "commsStation"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 
-#: scripts/comms_station.lua:220
+#: scripts/comms_station.lua:224
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched a supply ship toward %s."
@@ -5199,22 +5200,57 @@ msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
 "réapprovisionnement au marqueur %s."
 
-#: scripts/comms_station.lua:222 scripts/comms_station.lua:251
+#: scripts/comms_station.lua:226 scripts/comms_station.lua:286
 msgctxt "commsStation"
 msgid "Not enough reputation!"
 msgstr "Pas assez de points de réputation !"
 
-#: scripts/comms_station.lua:239
+#: scripts/comms_station.lua:242
+msgctxt "commsStation"
+msgid "What kind of reinforcement ship would you like?"
+msgstr "Quel type de vaisseau de renfort souhaitez-vous ?"
+
+#: scripts/comms_station.lua:243
+#, lua-format
+msgctxt "commsStation"
+msgid "Adder MK3 (%d rep)"
+msgstr "Adder MK3 (%d rép)"
+
+#: scripts/comms_station.lua:247
+#, lua-format
+msgctxt "commsStation"
+msgid "MU52 Hornet (%d rep)"
+msgstr "MU52 Hornet (%d rép)"
+
+#: scripts/comms_station.lua:251
+#, lua-format
+msgctxt "commsStation"
+msgid "Standard Adder MK5 (%d rep)"
+msgstr "Adder MK5 standart (%d rép)"
+
+#: scripts/comms_station.lua:255
+#, lua-format
+msgctxt "commsStation"
+msgid "Adder MK8 (%d rep)"
+msgstr "Adder MK8 (%d rép)"
+
+#: scripts/comms_station.lua:259
+#, lua-format
+msgctxt "commsStation"
+msgid "Phobos T3 (%d rep)"
+msgstr "Phobos T3 (%d rép)"
+
+#: scripts/comms_station.lua:267
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Vous devez définir un marqueur avant de demander des renforts."
 
-#: scripts/comms_station.lua:241
+#: scripts/comms_station.lua:269
 msgctxt "commsStation"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
-#: scripts/comms_station.lua:249
+#: scripts/comms_station.lua:284
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched %s to assist at %s."
@@ -5222,7 +5258,7 @@ msgstr ""
 "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
 "marqueur %s."
 
-#: scripts/comms_station.lua:320
+#: scripts/comms_station.lua:355
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
