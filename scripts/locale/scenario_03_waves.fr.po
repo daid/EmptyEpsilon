@@ -38,8 +38,11 @@ msgstr ""
 "Ajoutez les vaisseaux joueurs de votre choix. La force des vaisseaux ennemis "
 "est indépendante du nombre et du type de vaisseaux joueurs.\n"
 "\n"
-"Titre original : Waves\n"
-"Auteur : Daid"
+"- Titre original : Waves\n"
+"- Auteur : Daid\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"
@@ -104,18 +107,18 @@ msgctxt "shipLog"
 msgid "Wave %d"
 msgstr "Vague n° %d"
 
-#: scripts/scenario_03_waves.lua:219
+#: scripts/scenario_03_waves.lua:220
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %d"
 msgstr "Vague n° %d"
 
-#: scripts/scenario_03_waves.lua:252
+#: scripts/scenario_03_waves.lua:253
 msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr "Vague éliminée !"
 
-#: scripts/scenario_03_waves.lua:253
+#: scripts/scenario_03_waves.lua:254
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %d cleared."

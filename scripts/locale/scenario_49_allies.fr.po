@@ -40,8 +40,11 @@ msgstr ""
 "\n"
 "Version 1 - nov 2021\n"
 "\n"
-"Titre original : Allies and Enemies\n"
-"Auteur : Xansta"
+"- Titre original : Allies and Enemies\n"
+"- Auteur : Xansta\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"

@@ -48,8 +48,11 @@ msgstr ""
 "\n"
 "Cet entrainement est parfaitement adapté aux joueurs inexpérimentés.\n"
 "\n"
-"Titre original : Training: Cruiser\n"
-"Auteur : Piglit"
+"- Titre original : Training: Cruiser\n"
+"- Auteur : Piglit\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 #: scripts/scenario_20_training1.lua:79
 msgctxt "goal-incCall"

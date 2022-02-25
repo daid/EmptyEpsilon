@@ -28,8 +28,11 @@ msgstr ""
 "\n"
 "Bah ! Fumisterie !\n"
 "\n"
-"Titre original : What the Dickens\n"
-"Auteur : Xansta"
+"- Titre original : What the Dickens\n"
+"- Auteur : Xansta\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"

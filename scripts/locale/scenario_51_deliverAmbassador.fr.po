@@ -64,8 +64,11 @@ msgstr ""
 "Version 4\n"
 "Fichiers audio FR disponibles\n"
 "\n"
-"Titre original : Deliver Ambassador Gremus\n"
-"Auteur : Xansta"
+"- Titre original : Deliver Ambassador Gremus\n"
+"- Auteur : Xansta\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
 
 # Scenario setting
 msgctxt "setting"
