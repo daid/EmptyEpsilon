@@ -375,44 +375,8 @@ rel="stylesheet"
         stream.write("</div>")
 
         for d in self._definitions:
-            if isinstance(d, ScriptClass):
-                stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
-                stream.write('<h2><a name="class_%s">%s</a></h2>\n' % (d.name, d.name))
-                stream.write(
-                    "<div>%s</div>"
-                    % (d.description.replace("<", "&lt;").replace("\n", "<br>"))
-                )
-                if d.parent is not None:
-                    stream.write(
-                        'Subclass of: <a href="#class_%s">%s</a>'
-                        % (d.parent.name, d.parent.name)
-                    )
-                stream.write("<dl>")
-                for func in d.functions:
-                    if func.parameters is None:
-                        stream.write(
-                            "<dt>%s:%s [NOT FOUND; see SeriousProton]</dt>"
-                            % (d.name, func.name)
-                        )
-                        print("Failed to find parameters for %s:%s" % (d.name, func.name))
-                    else:
-                        stream.write(
-                            "<dt>%s:%s(%s)</dt>"
-                            % (d.name, func.name, func.parameters.replace("<", "&lt;"))
-                        )
-                    stream.write(
-                        "<dd>%s</dd>"
-                        % (func.description.replace("<", "&lt;").replace("\n", "<br>"))
-                    )
-                for member in d.members:
-                    stream.write("<dt>%s:%s</dt>" % (d.name, member.name))
-                    stream.write(
-                        "<dd>%s</dd>"
-                        % (member.description.replace("<", "&lt;").replace("\n", "<br>")
-                        )
-                    )
-                stream.write("</dl>")
-                stream.write("</div>")
+            if isinstance(d, ScriptClass) and d.parent is None:
+                self.outputClasses(d, stream)
 
         stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery.min.js"></script>')
         stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery-ui.min.js"></script>')
@@ -427,6 +391,48 @@ rel="stylesheet"
             for c in sorted_children:
                 self.outputClassTree(c, stream)
             stream.write("</ul>\n")
+
+    def outputClasses(self, scriptClass, stream):
+        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
+        stream.write('<h2><a name="class_%s">%s</a></h2>\n' % (scriptClass.name, scriptClass.name))
+        stream.write(
+            "<div>%s</div>"
+            % (scriptClass.description.replace("<", "&lt;").replace("\n", "<br>"))
+        )
+        if scriptClass.parent is not None:
+            stream.write(
+                'Subclass of: <a href="#class_%s">%s</a>'
+                % (scriptClass.parent.name, scriptClass.parent.name)
+            )
+        stream.write("<dl>")
+        for func in scriptClass.functions:
+            if func.parameters is None:
+                stream.write(
+                    "<dt>%s:%s [NOT FOUND; see SeriousProton]</dt>"
+                    % (scriptClass.name, func.name)
+                )
+                print("Failed to find parameters for %s:%s" % (scriptClass.name, func.name))
+            else:
+                stream.write(
+                    "<dt>%s:%s(%s)</dt>"
+                    % (scriptClass.name, func.name, func.parameters.replace("<", "&lt;"))
+                )
+            stream.write(
+                "<dd>%s</dd>"
+                % (func.description.replace("<", "&lt;").replace("\n", "<br>"))
+            )
+        for member in scriptClass.members:
+            stream.write("<dt>%s:%s</dt>" % (scriptClass.name, member.name))
+            stream.write(
+                "<dd>%s</dd>"
+                % (member.description.replace("<", "&lt;").replace("\n", "<br>")
+                   )
+            )
+        stream.write("</dl>")
+        stream.write("</div>")
+        sorted_children = sorted(scriptClass.children, key=lambda definition: definition.name)
+        for c in sorted_children:
+            self.outputClasses(c, stream)
 
 
 if __name__ == "__main__":
