@@ -124,11 +124,6 @@ int main(int argc, char** argv)
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";
-#if defined(CONFIG_DIR) && !defined(ANDROID)
-    std::error_code ec;
-    if (std::filesystem::exists(CONFIG_DIR, ec))
-        configuration_path = CONFIG_DIR;
-#endif
 #ifdef STEAMSDK
     {
         char path_buffer[1024];
