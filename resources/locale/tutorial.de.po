@@ -61,7 +61,7 @@ msgid ""
 msgstr ""
 "Dies sind Raumstationen. Raumstationen können in verschiedenen Größen "
 "vorkommen und unterschiedlichen Fraktionen angehören. Die Farbe des Symbols "
-"weißt darauf hin, ob die Station freundlich (grün), neutral (hellblau) oder "
+"weist darauf hin, ob die Station freundlich (grün), neutral (hellblau) oder "
 "feindlich (rot) gesinnt ist."
 
 #: scripts/tutorial/00_all.lua:49
@@ -405,7 +405,7 @@ msgid ""
 msgstr ""
 "Willkommen im Maschinenraum.\n"
 "Diese Konsole unterteilt sich in zwei Bereiche. Der obere Teil zeigt das "
-"Innere des Schiffs, inklusive der Standorte der Reperaturteams.\n"
+"Innere des Schiffs, inklusive der Standorte der Reparaturteams.\n"
 "Der untere Teil steuert Energiezufuhr und Kühlung der Schiffssysteme."
 
 #: scripts/tutorial/00_all.lua:217
@@ -758,7 +758,7 @@ msgstr ""
 
 #: scripts/tutorial/00_all.lua:322 scripts/tutorial/00_all.lua:398
 msgid "You successfully opened communications. Congratulations."
-msgstr "Glückwunsch, du hast erfolgreich einen Kommunikationskanal geöffnet. "
+msgstr "Glückwunsch, du hast erfolgreich einen Kommunikationskanal geöffnet."
 
 #: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:399
 msgid "Tell me more!"
