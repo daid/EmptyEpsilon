@@ -79,14 +79,6 @@ class ScriptClass(object):
             ret += ":%s" % (func)
         return "{%s}" % (ret)
 
-    def outputClassTree(self, stream):
-        stream.write('<li><a href="#class_%s">%s</a>\n' % (self.name, self.name))
-        if len(self.children) > 0:
-            stream.write("<ul>")
-            for c in self.children:
-                c.outputClassTree(stream)
-            stream.write("</ul>\n")
-
 
 class DocumentationGenerator(object):
     def __init__(self):
@@ -365,7 +357,7 @@ rel="stylesheet"
         stream.write("<ul>")
         for d in self._definitions:
             if isinstance(d, ScriptClass) and d.parent is None:
-                d.outputClassTree(stream)
+                self.outputClassTree(d, stream)
         stream.write("</ul>")
         stream.write("</div>")
 
@@ -426,6 +418,15 @@ rel="stylesheet"
         stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery-ui.min.js"></script>')
         stream.write("</body>")
         stream.write("</html>")
+
+    def outputClassTree(self, scriptClass, stream):
+        stream.write('<li><a href="#class_%s">%s</a>\n' % (scriptClass.name, scriptClass.name))
+        if len(scriptClass.children) > 0:
+            sorted_children = sorted(scriptClass.children, key=lambda definition: definition.name)
+            stream.write("<ul>")
+            for c in sorted_children:
+                self.outputClassTree(c, stream)
+            stream.write("</ul>\n")
 
 
 if __name__ == "__main__":
