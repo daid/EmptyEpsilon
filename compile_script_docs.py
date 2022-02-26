@@ -113,7 +113,7 @@ class DocumentationGenerator(object):
                     self.addFile(os.path.join(os.path.dirname(filename), m.group(1)))
 
     def readFunctionInfo(self):
-        for filename in self._files:
+        for filename in sorted(self._files):
             if not filename.endswith(".h"):
                 continue
             description = ""
@@ -140,7 +140,7 @@ class DocumentationGenerator(object):
                             )
 
     def readScriptDefinitions(self):
-        for filename in self._files:
+        for filename in sorted(self._files):
             description = ""
             current_class = None
             # print("Processing: %s" % (filename))
