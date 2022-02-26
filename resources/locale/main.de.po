@@ -9,8 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: src/scienceDatabase.cpp:300
 msgctxt "database direction"
@@ -37,245 +37,245 @@ msgctxt "database"
 msgid "Factions"
 msgstr "Fraktionen"
 
-#: src/scienceDatabase.cpp:335 src/scienceDatabase.cpp:338
+#: src/scienceDatabase.cpp:339 src/scienceDatabase.cpp:342
 msgctxt "stance"
 msgid "Neutral"
 msgstr "Neutral"
 
-#: src/scienceDatabase.cpp:339
+#: src/scienceDatabase.cpp:343
 msgctxt "stance"
 msgid "Enemy"
 msgstr "Feindlich"
 
-#: src/scienceDatabase.cpp:340
+#: src/scienceDatabase.cpp:344
 msgctxt "stance"
 msgid "Friendly"
 msgstr "Verbündet"
 
-#: src/scienceDatabase.cpp:348
+#: src/scienceDatabase.cpp:352
 msgctxt "database"
 msgid "Ships"
 msgstr "Schiffe"
 
-#: src/scienceDatabase.cpp:387
+#: src/scienceDatabase.cpp:391
 msgctxt "database"
 msgid "Class"
 msgstr "Klasse"
 
-#: src/scienceDatabase.cpp:388
+#: src/scienceDatabase.cpp:392
 msgctxt "database"
 msgid "Sub-class"
 msgstr "Unterklasse"
 
-#: src/scienceDatabase.cpp:389
+#: src/scienceDatabase.cpp:393
 msgctxt "database"
 msgid "Size"
 msgstr "Größe"
 
-#: src/scienceDatabase.cpp:399
+#: src/scienceDatabase.cpp:403
 msgctxt "database"
 msgid "Shield"
 msgstr "Schilde"
 
-#: src/scienceDatabase.cpp:401
+#: src/scienceDatabase.cpp:405
 msgid "Hull"
 msgstr "Hülle"
 
-#: src/scienceDatabase.cpp:405
+#: src/scienceDatabase.cpp:409
 msgctxt "database"
 msgid "Move speed"
 msgstr "Geschwindigkeit"
 
-#: src/scienceDatabase.cpp:406
+#: src/scienceDatabase.cpp:410
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr "Geschw. rückwärts"
 
-#: src/scienceDatabase.cpp:409
+#: src/scienceDatabase.cpp:413
 msgctxt "database"
 msgid "Turn speed"
 msgstr "Wendigkeit"
 
-#: src/scienceDatabase.cpp:413
+#: src/scienceDatabase.cpp:417
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Warpgeschwindigkeit"
 
-#: src/scienceDatabase.cpp:417
+#: src/scienceDatabase.cpp:421
 msgctxt "database"
 msgid "Jump range"
 msgstr "Sprungreichweite"
 
-#: src/scienceDatabase.cpp:424
+#: src/scienceDatabase.cpp:428
 msgid "{direction} beam weapon"
 msgstr "Laser {direction}"
 
-#: src/scienceDatabase.cpp:425
+#: src/scienceDatabase.cpp:429
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
 msgstr "{damage} Schaden / {interval} sek"
 
-#: src/scienceDatabase.cpp:434
+#: src/scienceDatabase.cpp:438
 msgctxt "database"
 msgid "{direction} tube"
 msgstr "Raketen {direction}"
 
-#: src/scienceDatabase.cpp:437
+#: src/scienceDatabase.cpp:441
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr "kl. Raketen {direction}"
 
-#: src/scienceDatabase.cpp:441
+#: src/scienceDatabase.cpp:445
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr "gr. Raketen {direction}"
 
-#: src/scienceDatabase.cpp:445
+#: src/scienceDatabase.cpp:449
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr "{loadtime} Sek. Ladezeit"
 
-#: src/scienceDatabase.cpp:452
+#: src/scienceDatabase.cpp:456
 msgid "Storage {weapon}"
 msgstr "Ladung {weapon}"
 
-#: src/playerInfo.cpp:230
+#: src/playerInfo.cpp:251
 msgctxt "station"
 msgid "Helms"
 msgstr "Steuerkonsole"
 
-#: src/playerInfo.cpp:231
+#: src/playerInfo.cpp:252
 msgctxt "station"
 msgid "Weapons"
 msgstr "Waffen"
 
-#: src/playerInfo.cpp:232
+#: src/playerInfo.cpp:253
 msgctxt "station"
 msgid "Engineering"
 msgstr "Maschinenraum"
 
-#: src/playerInfo.cpp:233
+#: src/playerInfo.cpp:254
 msgctxt "station"
 msgid "Science"
 msgstr "Wissenschaft"
 
-#: src/playerInfo.cpp:234
+#: src/playerInfo.cpp:255
 msgctxt "station"
 msgid "Relay"
 msgstr "Kommunikation"
 
-#: src/playerInfo.cpp:235
+#: src/playerInfo.cpp:256
 msgctxt "station"
 msgid "Tactical"
 msgstr "Taktik"
 
-#: src/playerInfo.cpp:236
+#: src/playerInfo.cpp:257
 msgctxt "station"
 msgid "Engineering+"
 msgstr "Maschinenraum+"
 
-#: src/playerInfo.cpp:237
+#: src/playerInfo.cpp:258
 msgctxt "station"
 msgid "Operations"
 msgstr "Ops"
 
-#: src/playerInfo.cpp:238
+#: src/playerInfo.cpp:259
 msgctxt "station"
 msgid "Single Pilot"
 msgstr "Einzelplatzsteuerung"
 
-#: src/playerInfo.cpp:239
+#: src/playerInfo.cpp:260
 msgctxt "station"
 msgid "Damage Control"
 msgstr "Schadenskontrolle"
 
-#: src/playerInfo.cpp:240
+#: src/playerInfo.cpp:261
 msgctxt "station"
 msgid "Power Management"
 msgstr "Energie-Management"
 
-#: src/playerInfo.cpp:241
+#: src/playerInfo.cpp:262
 msgctxt "station"
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/playerInfo.cpp:242
+#: src/playerInfo.cpp:263
 msgctxt "station"
 msgid "Strategic Map"
 msgstr "Strategische Karte"
 
-#: src/playerInfo.cpp:243
+#: src/playerInfo.cpp:264
 msgctxt "station"
 msgid "Comms"
 msgstr "Nachrichten"
 
-#: src/playerInfo.cpp:244
+#: src/playerInfo.cpp:265
 msgctxt "station"
 msgid "Ship's Log"
 msgstr "Schiffslog"
 
-#: src/shipTemplate.cpp:130
+#: src/shipTemplate.cpp:137
 msgid "No class"
 msgstr "Keine Klasse"
 
-#: src/shipTemplate.cpp:131
+#: src/shipTemplate.cpp:138
 msgid "No sub-class"
 msgstr "Keine Unterklasse"
 
-#: src/shipTemplate.cpp:389
+#: src/shipTemplate.cpp:396
 msgctxt "system"
 msgid "Reactor"
 msgstr "Reaktor"
 
-#: src/shipTemplate.cpp:390
+#: src/shipTemplate.cpp:397
 msgctxt "system"
 msgid "Beam Weapons"
 msgstr "Laser"
 
-#: src/shipTemplate.cpp:391
+#: src/shipTemplate.cpp:398
 msgctxt "system"
 msgid "Missile System"
 msgstr "Raketensystem"
 
-#: src/shipTemplate.cpp:392
+#: src/shipTemplate.cpp:399
 msgctxt "system"
 msgid "Maneuvering"
 msgstr "Manövriertriebwerke"
 
-#: src/shipTemplate.cpp:393
+#: src/shipTemplate.cpp:400
 msgctxt "system"
 msgid "Impulse Engines"
 msgstr "Impulsantrieb"
 
-#: src/shipTemplate.cpp:394
+#: src/shipTemplate.cpp:401
 msgctxt "system"
 msgid "Warp Drive"
 msgstr "Warpantrieb"
 
-#: src/shipTemplate.cpp:395
+#: src/shipTemplate.cpp:402
 msgctxt "system"
 msgid "Jump Drive"
 msgstr "Sprungantrieb"
 
-#: src/shipTemplate.cpp:396
+#: src/shipTemplate.cpp:403
 msgctxt "system"
 msgid "Front Shield Generator"
 msgstr "Schildgenerator Front"
 
-#: src/shipTemplate.cpp:397
+#: src/shipTemplate.cpp:404
 msgctxt "system"
 msgid "Rear Shield Generator"
 msgstr "Schildgenerator Heck"
 
-#: src/scenarioInfo.cpp:102 src/scenarioInfo.cpp:103
+#: src/scenarioInfo.cpp:103 src/scenarioInfo.cpp:104
 msgid "setting"
 msgstr "Einstellung"
 
-#: src/tutorialGame.cpp:92
+#: src/tutorialGame.cpp:97
 msgid "Next"
 msgstr "Weiter"
 
-#: src/tutorialGame.cpp:99
+#: src/tutorialGame.cpp:104
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -284,9 +284,9 @@ msgctxt "connectserver"
 msgid "Connecting..."
 msgstr "Verbinde..."
 
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:257
-#: src/screens/gm/gameMasterScreen.cpp:91
-#: src/screens/gm/objectCreationView.cpp:135
+#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:44
+#: src/menus/shipSelectionScreen.cpp:492 src/screens/gm/gameMasterScreen.cpp:93
+#: src/screens/gm/objectCreationView.cpp:136
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
 #: src/screenComponents/commsOverlay.cpp:25
@@ -295,7 +295,7 @@ msgctxt "button"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/menus/joinServerMenu.cpp:51
+#: src/menus/joinServerMenu.cpp:65
 msgid "Please enter the server password:"
 msgstr "Server-Passwort eingeben:"
 
@@ -334,15 +334,16 @@ msgctxt "game_client_disconnect_reason"
 msgid "unspecified error {error}"
 msgstr "nicht benannter Fehler"
 
-#: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:66
-#: src/menus/optionsMenu.cpp:199 src/menus/hotkeyMenu.cpp:69
-#: src/screenComponents/databaseView.cpp:105
-#: src/screenComponents/databaseView.cpp:109 scripts/comms_ship.lua:47
+#: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
+#: src/menus/optionsMenu.cpp:134 src/menus/hotkeyMenu.cpp:68
+#: src/screenComponents/databaseView.cpp:102
+#: src/screenComponents/databaseView.cpp:106 scripts/comms_ship.lua:47
 #: scripts/comms_ship.lua:57 scripts/comms_ship.lua:70
 #: scripts/comms_ship.lua:78 scripts/comms_ship.lua:88
-#: scripts/comms_station.lua:147 scripts/comms_station.lua:161
-#: scripts/comms_station.lua:225 scripts/comms_station.lua:230
-#: scripts/comms_station.lua:254 scripts/comms_station.lua:259
+#: scripts/comms_station.lua:151 scripts/comms_station.lua:165
+#: scripts/comms_station.lua:229 scripts/comms_station.lua:234
+#: scripts/comms_station.lua:263 scripts/comms_station.lua:289
+#: scripts/comms_station.lua:294
 msgctxt "button"
 msgid "Back"
 msgstr "Zurück"
@@ -364,7 +365,7 @@ msgctxt "screenLan"
 msgid "Connect"
 msgstr "Verbinden"
 
-#: src/menus/serverBrowseMenu.cpp:101
+#: src/menus/serverBrowseMenu.cpp:85
 msgid "Last Session ({last})"
 msgstr "Letzte Sitzung ({last})"
 
@@ -376,7 +377,7 @@ msgstr "Version: {version}"
 msgid "Your name:"
 msgstr "Dein Name:"
 
-#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:90
+#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:89
 msgid "Start server"
 msgstr "Starte Server"
 
@@ -396,277 +397,188 @@ msgstr "Beenden"
 msgid "Tutorials"
 msgstr "Tutorials"
 
-#: src/menus/serverCreationScreen.cpp:32
+#: src/menus/serverCreationScreen.cpp:31
 msgid "Server configuration"
 msgstr "Server-Einstellungen"
 
-#: src/menus/serverCreationScreen.cpp:37
+#: src/menus/serverCreationScreen.cpp:36
 msgid "Server name: "
 msgstr "Servername: "
 
-#: src/menus/serverCreationScreen.cpp:44
+#: src/menus/serverCreationScreen.cpp:43
 msgid "Server password: "
 msgstr "Serverpasswort: "
 
-#: src/menus/serverCreationScreen.cpp:51
+#: src/menus/serverCreationScreen.cpp:50
 msgid "GM control code: "
 msgstr "SL-Kontrollcode: "
 
-#: src/menus/serverCreationScreen.cpp:58
+#: src/menus/serverCreationScreen.cpp:57
 msgid "List on master server: "
-msgstr ""
+msgstr "Auf Master-Server sichtbar:"
 
-#: src/menus/serverCreationScreen.cpp:60
+#: src/menus/serverCreationScreen.cpp:59
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
-#: src/menus/serverCreationScreen.cpp:60
+#: src/menus/serverCreationScreen.cpp:59
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
-#: src/menus/serverCreationScreen.cpp:64
-#, fuzzy
+#: src/menus/serverCreationScreen.cpp:63
 msgid "Server port: "
-msgstr "Serverpasswort: "
+msgstr "Serverport: "
 
-#: src/menus/serverCreationScreen.cpp:68
+#: src/menus/serverCreationScreen.cpp:67
 msgid "Server info"
 msgstr "Serverinfo"
 
-#: src/menus/serverCreationScreen.cpp:72
+#: src/menus/serverCreationScreen.cpp:71
 msgid "Server IP: "
 msgstr "Server-IP:"
 
-#: src/menus/serverCreationScreen.cpp:84 src/menus/serverCreationScreen.cpp:119
-#: src/menus/serverCreationScreen.cpp:203
+#: src/menus/serverCreationScreen.cpp:83 src/menus/serverCreationScreen.cpp:118
+#: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:223
 msgid "Close"
 msgstr "Schließen"
 
-#: src/menus/serverCreationScreen.cpp:126
+#: src/menus/serverCreationScreen.cpp:125
 msgid "Continue"
 msgstr "Weiter"
 
-#: src/menus/serverCreationScreen.cpp:175
+#: src/menus/serverCreationScreen.cpp:174
 msgid "Category"
 msgstr "Kategorie"
 
-#: src/menus/serverCreationScreen.cpp:182
-#: src/menus/serverCreationScreen.cpp:195
-#, fuzzy
-msgid "Select a scenario..."
-msgstr "Szenario starten"
-
-#: src/menus/serverCreationScreen.cpp:186
+#: src/menus/serverCreationScreen.cpp:180
 msgid "Scenario"
 msgstr "Szenario"
 
-#: src/menus/serverCreationScreen.cpp:194
+#: src/menus/serverCreationScreen.cpp:188
 msgid "Description"
 msgstr "Beschreibung"
 
-#: src/menus/serverCreationScreen.cpp:210
-#: src/menus/serverCreationScreen.cpp:291
+#: src/menus/serverCreationScreen.cpp:189
+#: src/menus/serverCreationScreen.cpp:264
+msgid "Select a scenario..."
+msgstr "Szenario auswählen"
+
+#: src/menus/serverCreationScreen.cpp:204
+#: src/menus/serverCreationScreen.cpp:320
 msgid "Start scenario"
 msgstr "Szenario starten"
 
-#: src/menus/serverCreationScreen.cpp:285
+#: src/menus/serverCreationScreen.cpp:314
 msgid "Back"
 msgstr "Zurück"
 
-#: src/menus/tutorialMenu.cpp:29
+#: src/menus/tutorialMenu.cpp:28
 msgctxt "title"
 msgid "Tutorials"
 msgstr "Tutorials"
 
-#: src/menus/tutorialMenu.cpp:59
+#: src/menus/tutorialMenu.cpp:58
 msgid "Start Tutorial"
 msgstr "Starte Tutorial"
 
-#: src/menus/optionsMenu.cpp:40
+#: src/menus/optionsMenu.cpp:35
 msgid "Graphics options"
 msgstr "Grafikoptionen"
 
-#: src/menus/optionsMenu.cpp:40
+#: src/menus/optionsMenu.cpp:44
 msgid "Audio options"
 msgstr "Audio-Optionen"
 
-#: src/menus/optionsMenu.cpp:40
+#: src/menus/optionsMenu.cpp:53
 msgid "Interface options"
 msgstr "Schnittstellen-Optionen"
 
-#: src/menus/optionsMenu.cpp:56 src/menus/optionsMenu.cpp:61
-msgid "Sound Volume: {volume}%"
-msgstr "Lautstärke: {volume}%"
+#: src/menus/optionsMenu.cpp:74
+msgid "Radar Rotation"
+msgstr "Radar statt Schiffs-Icon drehen"
 
-#: src/menus/optionsMenu.cpp:65
-msgid "Music Playback"
-msgstr "Musik-Playback"
-
-#: src/menus/optionsMenu.cpp:75 src/menus/optionsMenu.cpp:100
-msgid "Disabled"
-msgstr "Deaktiviert"
-
-#: src/menus/optionsMenu.cpp:75 src/menus/optionsMenu.cpp:100
-msgid "Enabled"
-msgstr "Aktiviert"
-
-#: src/menus/optionsMenu.cpp:75 src/menus/optionsMenu.cpp:100
-msgid "Main Screen only"
-msgstr "Nur Hauptschirm"
-
-#: src/menus/optionsMenu.cpp:81 src/menus/optionsMenu.cpp:86
-msgid "Music Volume: {volume}%"
-msgstr "Musiklautstärke"
-
-#: src/menus/optionsMenu.cpp:90
-msgid "Impulse Engine sound"
-msgstr "Impulsantriebs-Sound"
-
-#: src/menus/optionsMenu.cpp:106 src/menus/optionsMenu.cpp:111
-msgid "Impulse Volume: {volume}%"
-msgstr "Impulslautstärke: {volume}%"
-
-#: src/menus/optionsMenu.cpp:116
+#: src/menus/optionsMenu.cpp:76
 msgid "Helms Radar Lock"
 msgstr "Rotierendes Piloten-Radar"
 
-#: src/menus/optionsMenu.cpp:124
+#: src/menus/optionsMenu.cpp:84
 msgid "Weapons Radar Lock"
 msgstr "Rotierendes Waffen-Radar"
 
-#: src/menus/optionsMenu.cpp:130
+#: src/menus/optionsMenu.cpp:90
 msgid "Science Radar Lock"
-msgstr "Rot. Wissenschafts-Radar"
+msgstr "Rotierendes Wissenschafts-Radar"
 
-#: src/menus/optionsMenu.cpp:137
+#: src/menus/optionsMenu.cpp:97
 msgid "Control Options"
-msgstr "Tastenbelegung"
+msgstr "Steuerung"
 
-#: src/menus/optionsMenu.cpp:140 src/menus/hotkeyMenu.cpp:37
+#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:36
 msgid "Configure Keyboard"
 msgstr "Tastenbelegung"
 
-#: src/menus/optionsMenu.cpp:147
+#: src/menus/optionsMenu.cpp:107
 msgid "Language (applies on back)"
 msgstr "Sprache"
 
-#: src/menus/optionsMenu.cpp:183
-msgid "Preview Soundtracks"
-msgstr "Vorschau Soundtracks"
-
-#: src/menus/optionsMenu.cpp:207
+#: src/menus/optionsMenu.cpp:142
 msgctxt "options"
 msgid "Save"
 msgstr "Speichern"
 
-#: src/menus/optionsMenu.cpp:229
+#: src/menus/optionsMenu.cpp:164
 msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
 
-#: src/menus/optionsMenu.cpp:258 src/menus/optionsMenu.cpp:263
+#: src/menus/optionsMenu.cpp:197 src/menus/optionsMenu.cpp:202
 msgid "FoV: {fov}"
-msgstr ""
+msgstr "FoV: {fov}"
 
-#: src/menus/shipSelectionScreen.cpp:49
-msgid "Select your station"
-msgstr "Stations-Auswahl"
+#: src/menus/optionsMenu.cpp:218 src/menus/optionsMenu.cpp:223
+msgid "Sound Volume: {volume}%"
+msgstr "Lautstärke: {volume}%"
 
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "6/5 player crew"
-msgstr "Crewstärke: 5-6 Personen"
+#: src/menus/optionsMenu.cpp:227
+msgid "Music Playback"
+msgstr "Musik-Playback"
 
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "4/3 player crew"
-msgstr "Crewstärke: 3-4 Personen"
+#: src/menus/optionsMenu.cpp:237 src/menus/optionsMenu.cpp:262
+msgid "Disabled"
+msgstr "Deaktiviert"
 
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "1 player crew/extras"
-msgstr "Solo-Crew/Extras"
+#: src/menus/optionsMenu.cpp:237 src/menus/optionsMenu.cpp:262
+msgid "Enabled"
+msgstr "Aktiviert"
 
-#: src/menus/shipSelectionScreen.cpp:55
-msgid "Alternative options"
-msgstr "Weitere Optionen"
+#: src/menus/optionsMenu.cpp:237 src/menus/optionsMenu.cpp:262
+msgid "Main Screen only"
+msgstr "Nur Hauptschirm"
 
-#: src/menus/shipSelectionScreen.cpp:58
-msgid "Main screen"
-msgstr "Hauptschirm"
+#: src/menus/optionsMenu.cpp:243 src/menus/optionsMenu.cpp:248
+msgid "Music Volume: {volume}%"
+msgstr "Musiklautstärke"
 
-#: src/menus/shipSelectionScreen.cpp:74
-msgid "Main screen controls"
-msgstr "Hauptschirm-Steuerung"
+#: src/menus/optionsMenu.cpp:252
+msgid "Impulse Engine sound"
+msgstr "Impulsantriebs-Sound"
 
-#: src/menus/shipSelectionScreen.cpp:80
-msgid "Game master"
-msgstr "Spielleitung"
+#: src/menus/optionsMenu.cpp:268 src/menus/optionsMenu.cpp:273
+msgid "Impulse Volume: {volume}%"
+msgstr "Impulslautstärke: {volume}%"
 
-#: src/menus/shipSelectionScreen.cpp:91
-msgid "Ship window"
-msgstr "Schiffsfenster"
+#: src/menus/optionsMenu.cpp:285
+msgid "Preview Soundtracks"
+msgstr "Vorschau Soundtracks"
 
-#: src/menus/shipSelectionScreen.cpp:100
-msgctxt "shipwindow"
-msgid "{angle} degrees"
-msgstr "{angle} Grad"
-
-#: src/menus/shipSelectionScreen.cpp:103
-msgctxt "shipwindow"
-msgid "0 degrees"
-msgstr "0 Grad"
-
-#: src/menus/shipSelectionScreen.cpp:107
-msgid "Top-down 3D view"
-msgstr "3D-Draufsicht"
-
-#: src/menus/shipSelectionScreen.cpp:116
-msgid "Cinematic view"
-msgstr "Cinematische Ansicht"
-
-#: src/menus/shipSelectionScreen.cpp:125
-msgid "Spectate (view all)"
-msgstr "Zuschauer (alles sichtbar)"
-
-#: src/menus/shipSelectionScreen.cpp:134
-msgid "Enter the GM control code:"
-msgstr "SL-Kontrollcode eingeben :"
-
-#: src/menus/shipSelectionScreen.cpp:150
-msgid "Select ship"
-msgstr "Wähle Schiff"
-
-#: src/menus/shipSelectionScreen.cpp:151
-msgid "Waiting for server to spawn a ship"
-msgstr "Kein Schiff verfügbar - Warte auf Server"
-
-#: src/menus/shipSelectionScreen.cpp:205
-msgid "Spawn player ship"
-msgstr "Neues Spielerschiff"
-
-#: src/menus/shipSelectionScreen.cpp:224
-msgid "Scenario selection"
-msgstr "Szenario-Auswahl"
-
-#: src/menus/shipSelectionScreen.cpp:231
-msgid "Disconnect"
-msgstr "Verbindung trennen"
-
-#: src/menus/shipSelectionScreen.cpp:239
-msgid "Ready"
-msgstr "Bereit"
-
-#: src/menus/shipSelectionScreen.cpp:253 src/menus/shipSelectionScreen.cpp:259
-#: src/menus/shipSelectionScreen.cpp:338
+#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:264
 msgid "Enter this ship's control code:"
 msgstr "Schiffs-Kontrollcde eingeben:"
 
-#: src/menus/shipSelectionScreen.cpp:274
+#: src/menus/shipSelectionScreen.cpp:53
 msgid "Ok"
 msgstr "OK"
 
-#: src/menus/shipSelectionScreen.cpp:285
-msgid "Incorrect control code. Re-enter GM code:"
-msgstr "Falscher Zugangscode. SL-Code erneut eingeben:"
-
-#: src/menus/shipSelectionScreen.cpp:291
+#: src/menus/shipSelectionScreen.cpp:59
 msgid ""
 "Control code accepted.\n"
 "Granting access."
@@ -674,23 +586,159 @@ msgstr ""
 "Kontrollcode akzeptiert.\n"
 "Gewähre Zugang"
 
-#: src/menus/shipSelectionScreen.cpp:310
-msgid "Incorrect control code. Re-enter code for {callsign}:"
-msgstr "Falscher Zugangscode. Code für {callsign} erneut eingeben:"
+#: src/menus/shipSelectionScreen.cpp:68
+msgid "Incorrect control code. Re-enter code:"
+msgstr "Falscher Zugangscode. Code erneut eingeben:"
 
-#: src/menus/shipSelectionScreen.cpp:319
-msgid ""
-"Control code accepted.\n"
-"Granting access to {callsign}."
-msgstr ""
-"Kontrollcode akzeptiert.\n"
-"Gewähre Zugang zu {callsign}."
-
-#: src/menus/shipSelectionScreen.cpp:333
+#: src/menus/shipSelectionScreen.cpp:75
 msgid "OK"
 msgstr "OK"
 
-#: src/screens/cinematicViewScreen.cpp:40 src/screens/topDownScreen.cpp:32
+#: src/menus/shipSelectionScreen.cpp:132
+msgid "Game master"
+msgstr "Spielleitung"
+
+#: src/menus/shipSelectionScreen.cpp:136 src/menus/shipSelectionScreen.cpp:162
+msgid "Enter the GM control code:"
+msgstr "SL-Kontrollcode eingeben :"
+
+#: src/menus/shipSelectionScreen.cpp:158
+msgid "Spectate (view all)"
+msgstr "Zuschauer (alles sichtbar)"
+
+#: src/menus/shipSelectionScreen.cpp:191
+msgid "Scan complexity: "
+msgstr "Scankomplexität: "
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "None (delay)"
+msgstr "Keine (Wartezeit)"
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "Simple"
+msgstr "Einfach"
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "Normal"
+msgstr "Normal"
+
+#: src/menus/shipSelectionScreen.cpp:194
+msgctxt "scanning"
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: src/menus/shipSelectionScreen.cpp:199
+msgid "Hacking difficulty: "
+msgstr "Hacking-Schwierigkeit: "
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Simple"
+msgstr "Einfach"
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Normal"
+msgstr "Normal"
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Difficult"
+msgstr "Schwierig"
+
+#: src/menus/shipSelectionScreen.cpp:202
+msgctxt "hacking"
+msgid "Fiendish"
+msgstr "Wahnsinning"
+
+#: src/menus/shipSelectionScreen.cpp:207
+msgid "Hacking type: "
+msgstr "Hacking-Art: "
+
+#: src/menus/shipSelectionScreen.cpp:210
+msgctxt "hacking"
+msgid "Mine"
+msgstr "Minen"
+
+#: src/menus/shipSelectionScreen.cpp:210
+msgctxt "hacking"
+msgid "Lights"
+msgstr "Lichter"
+
+#: src/menus/shipSelectionScreen.cpp:210
+msgctxt "hacking"
+msgid "All"
+msgstr "Alle"
+
+#: src/menus/shipSelectionScreen.cpp:215
+msgid "Beam/shield frequencies"
+msgstr "Frequenzen"
+
+#: src/menus/shipSelectionScreen.cpp:219
+msgid "Per-system damage"
+msgstr "Schaden pro System"
+
+#: src/menus/shipSelectionScreen.cpp:230
+msgid "Extra settings"
+msgstr "Zusätzliche Einstellungen"
+
+#: src/menus/shipSelectionScreen.cpp:245
+msgid "Select ship"
+msgstr "Wähle Schiff"
+
+#: src/menus/shipSelectionScreen.cpp:246
+msgid "Waiting for server to spawn a ship"
+msgstr "Kein Schiff verfügbar - Warte auf Server"
+
+#: src/menus/shipSelectionScreen.cpp:309
+msgid "Spawn player ship"
+msgstr "Neues Spielerschiff"
+
+#: src/menus/shipSelectionScreen.cpp:330
+msgid "Scenario selection"
+msgstr "Szenario-Auswahl"
+
+#: src/menus/shipSelectionScreen.cpp:337
+msgid "Disconnect"
+msgstr "Verbindung trennen"
+
+#: src/menus/shipSelectionScreen.cpp:426
+msgid "6/5 player crew"
+msgstr "Crewstärke: 5-6 Personen"
+
+#: src/menus/shipSelectionScreen.cpp:429
+msgid "Main screen"
+msgstr "Hauptschirm"
+
+#: src/menus/shipSelectionScreen.cpp:451
+msgid "4/3/1 player crew"
+msgstr "Crewstärke: 4/3/1 Personen"
+
+#: src/menus/shipSelectionScreen.cpp:459
+msgid "Alternative options"
+msgstr "Weitere Optionen"
+
+#: src/menus/shipSelectionScreen.cpp:466
+msgid "Main screen controls"
+msgstr "Hauptschirm-Steuerung"
+
+#: src/menus/shipSelectionScreen.cpp:474
+msgid "Ship window"
+msgstr "Schiffsfenster"
+
+#: src/menus/shipSelectionScreen.cpp:487
+msgid "Top-down 3D view"
+msgstr "Draufsicht"
+
+#: src/menus/shipSelectionScreen.cpp:495
+msgctxt "button"
+msgid "Ready"
+msgstr "Bereit"
+
+#: src/screens/cinematicViewScreen.cpp:40 src/screens/topDownScreen.cpp:33
 msgctxt "button"
 msgid "Lock camera on ship"
 msgstr "Kamera folgt Schiff"
@@ -700,7 +748,25 @@ msgctxt "button"
 msgid "Lock camera on ship's target"
 msgstr "Kamera folgt Ziel"
 
-#: src/screens/mainScreen.cpp:52 src/gui/hotkeyConfig.cpp:219
+#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:222
+#: src/screens/gm/tweak.cpp:93 src/screenComponents/commsOverlay.cpp:110
+#: src/screenComponents/commsOverlay.cpp:140
+#: src/screenComponents/hackingDialog.cpp:42
+msgctxt "button"
+msgid "Close"
+msgstr "Schließen"
+
+#: src/screens/crewStationScreen.cpp:69 src/screens/mainScreen.cpp:53
+msgctxt "hotkey_F1"
+msgid "Keyboard Shortcuts"
+msgstr "Tastenkürzel"
+
+#: src/screens/crewStationScreen.cpp:72 src/screens/mainScreen.cpp:56
+msgctxt "hotkey_F1"
+msgid "{label}:\t{button}\n"
+msgstr ""
+
+#: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:219
 #: src/gui/hotkeyConfig.cpp:220 src/gui/hotkeyConfig.cpp:221
 #: src/gui/hotkeyConfig.cpp:222 src/gui/hotkeyConfig.cpp:223
 #: src/gui/hotkeyConfig.cpp:224 src/gui/hotkeyConfig.cpp:225
@@ -710,46 +776,46 @@ msgid "Main Screen"
 msgstr "Hauptschirm"
 
 #: src/screens/crew4/operationsScreen.cpp:67
-#: src/screens/crew6/relayScreen.cpp:101
+#: src/screens/crew6/relayScreen.cpp:100
 #: src/screens/crew1/singlePilotScreen.cpp:102
 msgid "Open Comms"
 msgstr "Öffne Verbindung"
 
 #: src/screens/crew4/operationsScreen.cpp:70
-#: src/screens/crew6/relayScreen.cpp:130
+#: src/screens/crew6/relayScreen.cpp:129
 msgid "Place Waypoint"
 msgstr "Setze Wegpunkt"
 
 #: src/screens/crew4/operationsScreen.cpp:75
-#: src/screens/crew6/relayScreen.cpp:135
+#: src/screens/crew6/relayScreen.cpp:134
 msgid "Delete Waypoint"
 msgstr "Lösche Wegpunkt"
 
 #: src/screens/crew4/operationsScreen.cpp:84
-#: src/screens/crew6/relayScreen.cpp:151
+#: src/screens/crew6/relayScreen.cpp:150
 msgid "Reputation"
 msgstr "Ruf"
 
 #: src/screens/crew4/operationsScreen.cpp:88
-#: src/screens/crew6/relayScreen.cpp:155
-#: src/screens/gm/gameMasterScreen.cpp:145
+#: src/screens/crew6/relayScreen.cpp:154
+#: src/screens/gm/gameMasterScreen.cpp:147
 msgid "Clock"
 msgstr "Missionszeit"
 
 #: src/screens/crew4/tacticalScreen.cpp:69
-#: src/screens/crew6/engineeringScreen.cpp:34
-#: src/screens/crew6/weaponsScreen.cpp:80 src/screens/crew6/helmsScreen.cpp:72
+#: src/screens/crew6/engineeringScreen.cpp:33
+#: src/screens/crew6/weaponsScreen.cpp:80 src/screens/crew6/helmsScreen.cpp:73
 #: src/screens/crew1/singlePilotScreen.cpp:73
-#: src/screens/extra/powerManagement.cpp:20
+#: src/screens/extra/powerManagement.cpp:19
 msgid "Energy"
 msgstr "Energie"
 
-#: src/screens/crew4/tacticalScreen.cpp:71 src/screens/crew6/helmsScreen.cpp:74
+#: src/screens/crew4/tacticalScreen.cpp:71 src/screens/crew6/helmsScreen.cpp:75
 #: src/screens/crew1/singlePilotScreen.cpp:75
 msgid "Heading"
 msgstr "Richtung"
 
-#: src/screens/crew4/tacticalScreen.cpp:73 src/screens/crew6/helmsScreen.cpp:76
+#: src/screens/crew4/tacticalScreen.cpp:73 src/screens/crew6/helmsScreen.cpp:77
 #: src/screens/crew1/singlePilotScreen.cpp:77
 msgid "Speed"
 msgstr "Geschwind."
@@ -764,195 +830,195 @@ msgid "Beams"
 msgstr "Laser"
 
 #: src/screens/crew4/tacticalScreen.cpp:121
-#: src/screens/crew6/helmsScreen.cpp:98
+#: src/screens/crew6/helmsScreen.cpp:99
 msgid "{value} {unit}/min"
 msgstr "{value} {unit}/min"
 
-#: src/screens/crew6/engineeringScreen.cpp:36
+#: src/screens/crew6/engineeringScreen.cpp:35
 msgctxt "health"
 msgid "Hull"
 msgstr "Hülle"
 
-#: src/screens/crew6/engineeringScreen.cpp:38
+#: src/screens/crew6/engineeringScreen.cpp:37
 #: src/screens/crew6/weaponsScreen.cpp:82
 msgctxt "shields"
 msgid "Front"
 msgstr "Front"
 
-#: src/screens/crew6/engineeringScreen.cpp:40
+#: src/screens/crew6/engineeringScreen.cpp:39
 #: src/screens/crew6/weaponsScreen.cpp:84
 msgctxt "shields"
 msgid "Rear"
 msgstr "Heck"
 
-#: src/screens/crew6/engineeringScreen.cpp:42
+#: src/screens/crew6/engineeringScreen.cpp:41
 msgctxt "total"
 msgid "Coolant"
 msgstr "Kühlm."
 
-#: src/screens/crew6/engineeringScreen.cpp:126
+#: src/screens/crew6/engineeringScreen.cpp:129
 msgctxt "slider"
 msgid "Power"
 msgstr "Leistung"
 
-#: src/screens/crew6/engineeringScreen.cpp:128
+#: src/screens/crew6/engineeringScreen.cpp:131
 msgctxt "slider"
 msgid "Coolant"
 msgstr "Kühlmittel"
 
-#: src/screens/crew6/engineeringScreen.cpp:179
-#: src/screens/crew6/engineeringScreen.cpp:259
+#: src/screens/crew6/engineeringScreen.cpp:182
+#: src/screens/crew6/engineeringScreen.cpp:270
 msgid "{energy}/min"
 msgstr "{energy}/min"
 
-#: src/screens/crew6/engineeringScreen.cpp:243
+#: src/screens/crew6/engineeringScreen.cpp:254
 msgctxt "slider"
 msgid "Power: {current_level}% / {requested}%"
 msgstr "Leistung: {current_level}% / {requested}%"
 
-#: src/screens/crew6/engineeringScreen.cpp:245
+#: src/screens/crew6/engineeringScreen.cpp:256
 msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
 msgstr "Kühlmittel: {current_level}% / {requested}%"
 
-#: src/screens/crew6/engineeringScreen.cpp:259
+#: src/screens/crew6/engineeringScreen.cpp:270
 msgid "Energy production"
 msgstr "Energieproduktion"
 
-#: src/screens/crew6/engineeringScreen.cpp:262
+#: src/screens/crew6/engineeringScreen.cpp:273
 msgid "Firing rate"
 msgstr "Feuerrate"
 
-#: src/screens/crew6/engineeringScreen.cpp:275
+#: src/screens/crew6/engineeringScreen.cpp:286
 msgctxt "missile"
 msgid "Reload rate"
 msgstr "Nachladegeschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:278
+#: src/screens/crew6/engineeringScreen.cpp:289
 msgid "Turning speed"
 msgstr "Wendigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:280
-#: src/screens/crew6/engineeringScreen.cpp:285
+#: src/screens/crew6/engineeringScreen.cpp:291
+#: src/screens/crew6/engineeringScreen.cpp:296
 msgid "Combat recharge rate"
 msgstr "Manöver-Nachladegeschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:283
+#: src/screens/crew6/engineeringScreen.cpp:294
 msgid "Impulse speed"
 msgstr "Impuls-Geschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:288
+#: src/screens/crew6/engineeringScreen.cpp:299
 msgid "Warp drive speed"
 msgstr "Warpantrieb Geschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:291
+#: src/screens/crew6/engineeringScreen.cpp:302
 msgid "Jump drive recharge rate"
 msgstr "Sprung-Aufladegeschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:292
+#: src/screens/crew6/engineeringScreen.cpp:303
 msgid "Jump drive jump speed"
 msgstr "Sprunggeschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:296
-#: src/screens/crew6/engineeringScreen.cpp:310
+#: src/screens/crew6/engineeringScreen.cpp:307
+#: src/screens/crew6/engineeringScreen.cpp:321
 msgctxt "shields"
 msgid "Calibration speed"
 msgstr "Kalibrier-Geschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:297
-#: src/screens/crew6/engineeringScreen.cpp:311
+#: src/screens/crew6/engineeringScreen.cpp:308
+#: src/screens/crew6/engineeringScreen.cpp:322
 msgctxt "shields"
 msgid "Charge rate"
 msgstr "Aufladegeschwindigkeit"
 
-#: src/screens/crew6/engineeringScreen.cpp:303
-#: src/screens/crew6/engineeringScreen.cpp:317
+#: src/screens/crew6/engineeringScreen.cpp:314
+#: src/screens/crew6/engineeringScreen.cpp:328
 msgid "Extra damage"
 msgstr "Zusatzschaden"
 
-#: src/screens/crew6/engineeringScreen.cpp:305
-#: src/screens/crew6/engineeringScreen.cpp:319
+#: src/screens/crew6/engineeringScreen.cpp:316
+#: src/screens/crew6/engineeringScreen.cpp:330
 msgid "Damage negate"
 msgstr "Schadensreduktion"
 
-#: src/screens/crew6/scienceScreen.cpp:97 src/screens/crew6/relayScreen.cpp:81
+#: src/screens/crew6/scienceScreen.cpp:96 src/screens/crew6/relayScreen.cpp:80
 msgid "Callsign"
 msgstr "Rufzeichen"
 
-#: src/screens/crew6/scienceScreen.cpp:99
+#: src/screens/crew6/scienceScreen.cpp:98
 msgctxt "science"
 msgid "Distance"
 msgstr "Entfernung"
 
-#: src/screens/crew6/scienceScreen.cpp:101
+#: src/screens/crew6/scienceScreen.cpp:100
 msgid "Bearing"
 msgstr "Richtung"
 
-#: src/screens/crew6/scienceScreen.cpp:103
+#: src/screens/crew6/scienceScreen.cpp:102
 msgid "Rel. Speed"
 msgstr "Rel. Geschwind."
 
-#: src/screens/crew6/scienceScreen.cpp:105 src/screens/crew6/relayScreen.cpp:84
+#: src/screens/crew6/scienceScreen.cpp:104 src/screens/crew6/relayScreen.cpp:83
 msgid "Faction"
 msgstr "Fraktion"
 
-#: src/screens/crew6/scienceScreen.cpp:107
+#: src/screens/crew6/scienceScreen.cpp:106
 msgctxt "science"
 msgid "Type"
 msgstr "Typ"
 
-#: src/screens/crew6/scienceScreen.cpp:109
+#: src/screens/crew6/scienceScreen.cpp:108
 msgctxt "database"
 msgid "DB"
 msgstr "DB"
 
-#: src/screens/crew6/scienceScreen.cpp:123
+#: src/screens/crew6/scienceScreen.cpp:122
 msgctxt "science"
 msgid "Shields"
 msgstr "Schilde"
 
-#: src/screens/crew6/scienceScreen.cpp:125
+#: src/screens/crew6/scienceScreen.cpp:124
 msgctxt "science"
 msgid "Hull"
 msgstr "Hülle"
 
-#: src/screens/crew6/scienceScreen.cpp:179
+#: src/screens/crew6/scienceScreen.cpp:178
 msgctxt "button"
 msgid "Probe View"
 msgstr "Sondenansicht"
 
-#: src/screens/crew6/scienceScreen.cpp:205
-#: src/screens/crew6/scienceScreen.cpp:247 src/screens/crew6/relayScreen.cpp:88
+#: src/screens/crew6/scienceScreen.cpp:204
+#: src/screens/crew6/scienceScreen.cpp:246 src/screens/crew6/relayScreen.cpp:87
 msgid "Zoom: {zoom}x"
 msgstr "Zoom: {zoom}x"
 
-#: src/screens/crew6/scienceScreen.cpp:218
+#: src/screens/crew6/scienceScreen.cpp:217
 msgctxt "button"
 msgid "Radar"
 msgstr "Radar"
 
-#: src/screens/crew6/scienceScreen.cpp:218
+#: src/screens/crew6/scienceScreen.cpp:217
 msgctxt "button"
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/screens/crew6/relayScreen.cpp:103
+#: src/screens/crew6/relayScreen.cpp:102
 msgid "Link to Comms"
 msgstr "Verbindung zu Komm"
 
-#: src/screens/crew6/relayScreen.cpp:107
+#: src/screens/crew6/relayScreen.cpp:106
 msgid "Start hacking"
 msgstr "Starte Hacking"
 
-#: src/screens/crew6/relayScreen.cpp:117
+#: src/screens/crew6/relayScreen.cpp:116
 msgid "Link to Science"
-msgstr "Verbinde mit Wissenschaft"
+msgstr "mit Wissenschaft koppeln"
 
-#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:321
+#: src/screens/crew6/relayScreen.cpp:143 src/screens/crew6/relayScreen.cpp:322
 msgid "Launch Probe"
 msgstr "Starte Sonde"
 
-#: src/screens/crew6/relayScreen.cpp:163
+#: src/screens/crew6/relayScreen.cpp:162
 msgid "Alert level"
 msgstr "Alarmstufe"
 
@@ -965,162 +1031,154 @@ msgctxt "damagecontrol"
 msgid "Hull"
 msgstr "Hülle"
 
-#: src/screens/extra/powerManagement.cpp:22
+#: src/screens/extra/powerManagement.cpp:21
 msgid "Coolant"
 msgstr "Kühlmittel"
 
-#: src/screens/extra/powerManagement.cpp:40
+#: src/screens/extra/powerManagement.cpp:39
 msgctxt "button"
 msgid "Power"
 msgstr "Leistung"
 
-#: src/screens/extra/powerManagement.cpp:41
+#: src/screens/extra/powerManagement.cpp:40
 msgctxt "button"
 msgid "Coolant"
 msgstr "Kühlmittel"
 
-#: src/screens/extra/powerManagement.cpp:42
+#: src/screens/extra/powerManagement.cpp:41
 msgctxt "button"
 msgid "Heat"
 msgstr "Wärme"
 
-#: src/screens/gm/gameMasterScreen.cpp:39
+#: src/screens/gm/gameMasterScreen.cpp:40
 msgctxt "button"
 msgid "Pause"
 msgstr "Pause"
 
-#: src/screens/gm/gameMasterScreen.cpp:47
+#: src/screens/gm/gameMasterScreen.cpp:48
 msgctxt "button"
 msgid "Intercept all comms"
 msgstr "Alle Nachrichten abfangen"
 
-#: src/screens/gm/gameMasterScreen.cpp:62
+#: src/screens/gm/gameMasterScreen.cpp:64
 msgctxt "button"
 msgid "Global message"
 msgstr "Globale Nachricht"
 
-#: src/screens/gm/gameMasterScreen.cpp:76
+#: src/screens/gm/gameMasterScreen.cpp:78
 msgctxt "button"
 msgid "Create..."
 msgstr "Erstelle..."
 
-#: src/screens/gm/gameMasterScreen.cpp:81
+#: src/screens/gm/gameMasterScreen.cpp:83
 msgctxt "button"
 msgid "Copy scenario"
 msgstr "Szenario kopieren"
 
-#: src/screens/gm/gameMasterScreen.cpp:86
+#: src/screens/gm/gameMasterScreen.cpp:88
 msgctxt "button"
 msgid "Copy selected"
 msgstr "Auswahl kopieren"
 
-#: src/screens/gm/gameMasterScreen.cpp:96
+#: src/screens/gm/gameMasterScreen.cpp:98
 msgctxt "button"
 msgid "Tweak"
 msgstr "Anpassen"
 
-#: src/screens/gm/gameMasterScreen.cpp:130
+#: src/screens/gm/gameMasterScreen.cpp:132
 msgctxt "button"
 msgid "Hail ship"
 msgstr "Schiff rufen"
 
-#: src/screens/gm/gameMasterScreen.cpp:167
+#: src/screens/gm/gameMasterScreen.cpp:169
 msgid "Defend location"
 msgstr "Verteitigungspunkt"
 
-#: src/screens/gm/gameMasterScreen.cpp:172
+#: src/screens/gm/gameMasterScreen.cpp:174
 msgid "Stand ground"
 msgstr "Halte Position"
 
-#: src/screens/gm/gameMasterScreen.cpp:177
+#: src/screens/gm/gameMasterScreen.cpp:179
 msgid "Roaming"
 msgstr "Patrouille"
 
-#: src/screens/gm/gameMasterScreen.cpp:182
+#: src/screens/gm/gameMasterScreen.cpp:184
 msgid "Idle"
 msgstr "Inaktiv"
 
-#: src/screens/gm/gameMasterScreen.cpp:187
+#: src/screens/gm/gameMasterScreen.cpp:189
 msgid "Orders:"
 msgstr "Befehle:"
 
-#: src/screens/gm/gameMasterScreen.cpp:220 src/screens/gm/tweak.cpp:94
-#: src/screenComponents/commsOverlay.cpp:110
-#: src/screenComponents/commsOverlay.cpp:140
-#: src/screenComponents/hackingDialog.cpp:42
-msgctxt "button"
-msgid "Close"
-msgstr "Schließen"
-
-#: src/screens/gm/gameMasterScreen.cpp:342
+#: src/screens/gm/gameMasterScreen.cpp:349
 msgid "*mixed*"
 msgstr "*diverse*"
 
-#: src/screens/gm/gameMasterScreen.cpp:349
+#: src/screens/gm/gameMasterScreen.cpp:356
 msgctxt "gm_info"
 msgid "Position"
 msgstr "Position"
 
-#: src/screens/gm/gameMasterScreen.cpp:361
+#: src/screens/gm/gameMasterScreen.cpp:368
 msgid "gm_info"
 msgstr ""
 
-#: src/screens/gm/objectCreationView.cpp:35
+#: src/screens/gm/objectCreationView.cpp:36
 msgctxt "create"
 msgid "cpu ship"
 msgstr "CPU-Schip"
 
-#: src/screens/gm/objectCreationView.cpp:36
+#: src/screens/gm/objectCreationView.cpp:37
 msgctxt "create"
 msgid "player ship"
 msgstr "Spielerschiff"
 
-#: src/screens/gm/objectCreationView.cpp:57
+#: src/screens/gm/objectCreationView.cpp:58
 msgctxt "create"
 msgid "Artifact"
 msgstr "Artefakt"
 
-#: src/screens/gm/objectCreationView.cpp:61
+#: src/screens/gm/objectCreationView.cpp:62
 msgctxt "create"
 msgid "Warp Jammer"
 msgstr "Störsender"
 
-#: src/screens/gm/objectCreationView.cpp:65
+#: src/screens/gm/objectCreationView.cpp:66
 msgctxt "create"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/screens/gm/objectCreationView.cpp:70
+#: src/screens/gm/objectCreationView.cpp:71
 msgctxt "create"
 msgid "Supply Drop"
 msgstr "Lieferung"
 
-#: src/screens/gm/objectCreationView.cpp:74
+#: src/screens/gm/objectCreationView.cpp:75
 msgctxt "create"
 msgid "Asteroid"
 msgstr "Asteroid"
 
-#: src/screens/gm/objectCreationView.cpp:78
+#: src/screens/gm/objectCreationView.cpp:79
 msgctxt "create"
 msgid "Visual Asteroid"
 msgstr "Visueller Asteroid"
 
-#: src/screens/gm/objectCreationView.cpp:82
+#: src/screens/gm/objectCreationView.cpp:83
 msgctxt "create"
 msgid "Planet"
 msgstr "Planet"
 
-#: src/screens/gm/objectCreationView.cpp:86
+#: src/screens/gm/objectCreationView.cpp:87
 msgctxt "create"
 msgid "BlackHole"
 msgstr "Schwarzes Loch"
 
-#: src/screens/gm/objectCreationView.cpp:90
+#: src/screens/gm/objectCreationView.cpp:91
 msgctxt "create"
 msgid "Nebula"
 msgstr "Nebel"
 
-#: src/screens/gm/objectCreationView.cpp:94
+#: src/screens/gm/objectCreationView.cpp:95
 msgctxt "create"
 msgid "Worm Hole"
 msgstr "Wurmloch"
@@ -1171,414 +1229,414 @@ msgctxt "chatGM"
 msgid "{callsign} - Communicating as {target}"
 msgstr "{callsign} - Kommuniziere als {target}"
 
-#: src/screens/gm/tweak.cpp:32
+#: src/screens/gm/tweak.cpp:31
 msgctxt "tab"
 msgid "Base"
 msgstr "Allgemein"
 
-#: src/screens/gm/tweak.cpp:37
+#: src/screens/gm/tweak.cpp:36
 msgctxt "tab"
 msgid "Ship"
 msgstr "Schiff"
 
-#: src/screens/gm/tweak.cpp:43
+#: src/screens/gm/tweak.cpp:42
 msgctxt "tab"
 msgid "Asteroid"
 msgstr "Asteroid"
 
-#: src/screens/gm/tweak.cpp:49
+#: src/screens/gm/tweak.cpp:48
 msgctxt "tab"
 msgid "Jammer"
 msgstr "Störsender"
 
-#: src/screens/gm/tweak.cpp:55
+#: src/screens/gm/tweak.cpp:54
 msgctxt "tab"
 msgid "Shields"
 msgstr "Schilde"
 
-#: src/screens/gm/tweak.cpp:61
+#: src/screens/gm/tweak.cpp:60
 msgctxt "tab"
 msgid "Tubes"
 msgstr "Abschussrohre"
 
-#: src/screens/gm/tweak.cpp:63
+#: src/screens/gm/tweak.cpp:62
 msgctxt "tab"
 msgid "Missiles"
 msgstr "Raketen"
 
-#: src/screens/gm/tweak.cpp:65
+#: src/screens/gm/tweak.cpp:64
 msgctxt "tab"
 msgid "Beams"
 msgstr "Laser"
 
-#: src/screens/gm/tweak.cpp:67
+#: src/screens/gm/tweak.cpp:66
 msgctxt "tab"
 msgid "Systems"
 msgstr "Systeme"
 
-#: src/screens/gm/tweak.cpp:69
+#: src/screens/gm/tweak.cpp:68
 msgctxt "tab"
 msgid "Power"
 msgstr "Leistung"
 
-#: src/screens/gm/tweak.cpp:71
+#: src/screens/gm/tweak.cpp:70
 msgctxt "tab"
 msgid "Coolant Rate"
 msgstr "Kühlmittelrate"
 
-#: src/screens/gm/tweak.cpp:73
+#: src/screens/gm/tweak.cpp:72
 msgctxt "tab"
 msgid "Heat Rate"
 msgstr "Wärmerate"
 
-#: src/screens/gm/tweak.cpp:75
+#: src/screens/gm/tweak.cpp:74
 msgctxt "tab"
 msgid "Power Rate"
 msgstr "Leistungsrate"
 
-#: src/screens/gm/tweak.cpp:81
+#: src/screens/gm/tweak.cpp:80
 msgctxt "tab"
 msgid "Player"
 msgstr "Spieler"
 
-#: src/screens/gm/tweak.cpp:83
+#: src/screens/gm/tweak.cpp:82
 msgctxt "tab"
 msgid "Player 2"
 msgstr "Spieler 2"
 
-#: src/screens/gm/tweak.cpp:128
+#: src/screens/gm/tweak.cpp:127
 msgid "Type name:"
 msgstr "Typ-Name:"
 
-#: src/screens/gm/tweak.cpp:136
+#: src/screens/gm/tweak.cpp:135
 msgid "Impulse speed:"
 msgstr "Impuls-Geschwindigkeit:"
 
-#: src/screens/gm/tweak.cpp:142
+#: src/screens/gm/tweak.cpp:141
 msgid "Impulse reverse speed:"
 msgstr "Impuls rückwärts:"
 
-#: src/screens/gm/tweak.cpp:148
+#: src/screens/gm/tweak.cpp:147
 msgid "Turn speed:"
 msgstr "Wendigkeit:"
 
-#: src/screens/gm/tweak.cpp:154
+#: src/screens/gm/tweak.cpp:153
 msgid "Jump Min Distance:"
 msgstr "Minimale Sprungweite:"
 
-#: src/screens/gm/tweak.cpp:160
+#: src/screens/gm/tweak.cpp:159
 msgid "Jump Max Distance:"
 msgstr "Maximale Sprungweite:"
 
-#: src/screens/gm/tweak.cpp:166
+#: src/screens/gm/tweak.cpp:165
 msgid "Jump charge:"
 msgstr "Sprung-Aufladung:"
 
-#: src/screens/gm/tweak.cpp:174
+#: src/screens/gm/tweak.cpp:173
 msgid "Hull max:"
 msgstr "Max. Hülle:"
 
-#: src/screens/gm/tweak.cpp:181
+#: src/screens/gm/tweak.cpp:180
 msgid "Hull current:"
 msgstr "Hülle aktuell:"
 
-#: src/screens/gm/tweak.cpp:188
+#: src/screens/gm/tweak.cpp:187
 msgid "Could be destroyed"
 msgstr "Kann zerstört werden"
 
-#: src/screens/gm/tweak.cpp:194
+#: src/screens/gm/tweak.cpp:193
 msgctxt "tweak_ship"
 msgid "Special drives:"
 msgstr "Spezialantriebe:"
 
-#: src/screens/gm/tweak.cpp:195
+#: src/screens/gm/tweak.cpp:194
 msgid "Warp Drive"
 msgstr "Warpantrieb"
 
-#: src/screens/gm/tweak.cpp:200
+#: src/screens/gm/tweak.cpp:199
 msgid "Jump Drive"
 msgstr "Sprungantrieb"
 
-#: src/screens/gm/tweak.cpp:206
+#: src/screens/gm/tweak.cpp:205
 msgid "Short-range radar range:"
 msgstr "Kurzstreckenradar-Reichw:"
 
-#: src/screens/gm/tweak.cpp:212
+#: src/screens/gm/tweak.cpp:211
 msgid "Long-range radar range:"
 msgstr "Langstreckeckenradar Reichw.:"
 
-#: src/screens/gm/tweak.cpp:258
+#: src/screens/gm/tweak.cpp:257
 msgctxt "missiles"
 msgid "Storage space:"
 msgstr "Lagerplatz:"
 
-#: src/screens/gm/tweak.cpp:271
+#: src/screens/gm/tweak.cpp:270
 msgctxt "missiles"
 msgid "Stored amount:"
 msgstr "Geladen:"
 
-#: src/screens/gm/tweak.cpp:292
+#: src/screens/gm/tweak.cpp:291
 msgid "Jammer Range:"
 msgstr "Störsender-Reichweite:"
 
-#: src/screens/gm/tweak.cpp:319
+#: src/screens/gm/tweak.cpp:318
 msgid "Asteroid Size:"
 msgstr "Asteroidengröße:"
 
-#: src/screens/gm/tweak.cpp:365
+#: src/screens/gm/tweak.cpp:364
 msgid "Tube count:"
 msgstr "Abschuss-Schächte:"
 
-#: src/screens/gm/tweak.cpp:389
+#: src/screens/gm/tweak.cpp:388
 msgid "Tube: {id_tube}"
 msgstr "Schacht :{id_tube}"
 
-#: src/screens/gm/tweak.cpp:392
+#: src/screens/gm/tweak.cpp:391
 msgctxt "tube"
 msgid "Direction:"
 msgstr "Richtung:"
 
-#: src/screens/gm/tweak.cpp:398
+#: src/screens/gm/tweak.cpp:397
 msgctxt "tube"
 msgid "Load time:"
 msgstr "Ladezeit:"
 
-#: src/screens/gm/tweak.cpp:404
+#: src/screens/gm/tweak.cpp:403
 msgctxt "tube"
 msgid "Size:"
 msgstr "Größe:"
 
-#: src/screens/gm/tweak.cpp:409
+#: src/screens/gm/tweak.cpp:408
 msgctxt "tube"
 msgid "Small"
 msgstr "Klein"
 
-#: src/screens/gm/tweak.cpp:410
+#: src/screens/gm/tweak.cpp:409
 msgctxt "tube"
 msgid "Medium"
 msgstr "Mittel"
 
-#: src/screens/gm/tweak.cpp:411
+#: src/screens/gm/tweak.cpp:410
 msgctxt "tube"
 msgid "large"
 msgstr "groß"
 
-#: src/screens/gm/tweak.cpp:415
+#: src/screens/gm/tweak.cpp:414
 msgctxt "tube"
 msgid "Allowed use:"
 msgstr "Erlaubte Nutzung:"
 
-#: src/screens/gm/tweak.cpp:458
+#: src/screens/gm/tweak.cpp:457
 msgid "Shield {id_shield} max:"
 msgstr "Schild {id_shield} max:"
 
-#: src/screens/gm/tweak.cpp:468
+#: src/screens/gm/tweak.cpp:467
 msgid "Shield {id_shield}:"
 msgstr "Schild {id_shield}:"
 
-#: src/screens/gm/tweak.cpp:522
+#: src/screens/gm/tweak.cpp:521
 msgid "Beam: {id_beam}"
 msgstr "Laser: {id_beam}"
 
-#: src/screens/gm/tweak.cpp:525
+#: src/screens/gm/tweak.cpp:524
 msgctxt "beam"
 msgid "Arc:"
 msgstr "Winkel:"
 
-#: src/screens/gm/tweak.cpp:531
+#: src/screens/gm/tweak.cpp:530
 msgctxt "beam"
 msgid "Direction:"
 msgstr "Richtung:"
 
-#: src/screens/gm/tweak.cpp:537
+#: src/screens/gm/tweak.cpp:536
 msgctxt "beam"
 msgid "Turret arc:"
 msgstr "Turmwinkel:"
 
-#: src/screens/gm/tweak.cpp:543
+#: src/screens/gm/tweak.cpp:542
 msgctxt "beam"
 msgid "Turret direction:"
 msgstr "Turmrichtung:"
 
-#: src/screens/gm/tweak.cpp:549
+#: src/screens/gm/tweak.cpp:548
 msgctxt "beam"
 msgid "Turret rotation rate:"
 msgstr "Turmdrehgeschwindigkeit:"
 
-#: src/screens/gm/tweak.cpp:564
+#: src/screens/gm/tweak.cpp:563
 msgctxt "beam"
 msgid "Range:"
 msgstr "Reichweite:"
 
-#: src/screens/gm/tweak.cpp:570
+#: src/screens/gm/tweak.cpp:569
 msgctxt "beam"
 msgid "Cycle time:"
 msgstr "Abklingzeit:"
 
-#: src/screens/gm/tweak.cpp:576
+#: src/screens/gm/tweak.cpp:575
 msgctxt "beam"
 msgid "Damage:"
 msgstr "Schaden:"
 
-#: src/screens/gm/tweak.cpp:617
+#: src/screens/gm/tweak.cpp:616
 msgid "{system} health"
 msgstr "{system} : Zustand"
 
-#: src/screens/gm/tweak.cpp:626
+#: src/screens/gm/tweak.cpp:625
 msgid "{system} health max"
 msgstr "{system} : max. Zustand"
 
-#: src/screens/gm/tweak.cpp:636
+#: src/screens/gm/tweak.cpp:635
 msgid "{system} heat"
 msgstr "{system}: Wärme"
 
-#: src/screens/gm/tweak.cpp:679
+#: src/screens/gm/tweak.cpp:678
 msgid "current factor"
 msgstr "Faktor aktuell:"
 
-#: src/screens/gm/tweak.cpp:680
+#: src/screens/gm/tweak.cpp:679
 msgid "desired factor"
 msgstr "gewünschter Faktor"
 
-#: src/screens/gm/tweak.cpp:685 src/screens/gm/tweak.cpp:748
+#: src/screens/gm/tweak.cpp:684 src/screens/gm/tweak.cpp:747
 msgid "{system}"
 msgstr "{system}"
 
-#: src/screens/gm/tweak.cpp:709 src/screens/gm/tweak.cpp:772
+#: src/screens/gm/tweak.cpp:708 src/screens/gm/tweak.cpp:771
 msgid "Applies on [Enter]"
 msgstr "Übernehmen mit [Enter]"
 
-#: src/screens/gm/tweak.cpp:742
+#: src/screens/gm/tweak.cpp:741
 msgid "current rate"
 msgstr "Rate aktuell:"
 
-#: src/screens/gm/tweak.cpp:743
+#: src/screens/gm/tweak.cpp:742
 msgid "desired rate"
 msgstr "gewünschte Rate"
 
-#: src/screens/gm/tweak.cpp:844
+#: src/screens/gm/tweak.cpp:843
 msgid "Control code:"
 msgstr "Kontrollcode: "
 
-#: src/screens/gm/tweak.cpp:853
+#: src/screens/gm/tweak.cpp:852
 msgid "Reputation:"
 msgstr "Ruf:"
 
-#: src/screens/gm/tweak.cpp:861
+#: src/screens/gm/tweak.cpp:860
 msgid "Max energy:"
 msgstr "Max. Energie:"
 
-#: src/screens/gm/tweak.cpp:869
+#: src/screens/gm/tweak.cpp:868
 msgid "Current energy:"
 msgstr "Aktuelle Energie:"
 
-#: src/screens/gm/tweak.cpp:877
+#: src/screens/gm/tweak.cpp:876
 msgid "Boost Speed:"
 msgstr "Boost-Geschwindigkeit:"
 
-#: src/screens/gm/tweak.cpp:883
+#: src/screens/gm/tweak.cpp:882
 msgid "Strafe Speed:"
 msgstr "Ausweich-Geschwind."
 
-#: src/screens/gm/tweak.cpp:891 src/screens/gm/tweak.cpp:933
+#: src/screens/gm/tweak.cpp:890 src/screens/gm/tweak.cpp:932
 msgid "Positions occupied: "
 msgstr "Besetzte Positionen: "
 
-#: src/screens/gm/tweak.cpp:925
+#: src/screens/gm/tweak.cpp:924
 msgid "position"
 msgstr "Position"
 
-#: src/screens/gm/tweak.cpp:974
+#: src/screens/gm/tweak.cpp:973
 msgid "Coolant:"
 msgstr "Kühlm.:"
 
-#: src/screens/gm/tweak.cpp:981
+#: src/screens/gm/tweak.cpp:980
 msgid "Max Scan Probes:"
 msgstr "Maximal Sondenanzahl:"
 
-#: src/screens/gm/tweak.cpp:987
+#: src/screens/gm/tweak.cpp:986
 msgid "Scan Probes:"
 msgstr "Sonden:"
 
-#: src/screens/gm/tweak.cpp:1037
+#: src/screens/gm/tweak.cpp:1036
 msgctxt "button"
 msgid "Can scan"
 msgstr "Kann scannen"
 
-#: src/screens/gm/tweak.cpp:1043
+#: src/screens/gm/tweak.cpp:1042
 msgctxt "button"
 msgid "Can hack"
 msgstr "Kann hacken"
 
-#: src/screens/gm/tweak.cpp:1049
+#: src/screens/gm/tweak.cpp:1048
 msgctxt "button"
 msgid "Can dock"
 msgstr "Kann docken"
 
-#: src/screens/gm/tweak.cpp:1055
+#: src/screens/gm/tweak.cpp:1054
 msgctxt "button"
 msgid "Can combat maneuver"
 msgstr "Kann Flugmanöver"
 
-#: src/screens/gm/tweak.cpp:1061
+#: src/screens/gm/tweak.cpp:1060
 msgctxt "button"
 msgid "Can self destruct"
 msgstr "Kann Selbstzertst."
 
-#: src/screens/gm/tweak.cpp:1067
+#: src/screens/gm/tweak.cpp:1066
 msgctxt "button"
 msgid "Can launch probes"
 msgstr "Kann Sonden starten"
 
-#: src/screens/gm/tweak.cpp:1072
+#: src/screens/gm/tweak.cpp:1071
 msgctxt "button"
 msgid "Auto coolant"
 msgstr "Auto-Kühlung"
 
-#: src/screens/gm/tweak.cpp:1077
+#: src/screens/gm/tweak.cpp:1076
 msgctxt "button"
 msgid "Auto repair"
 msgstr "Autoreparatur"
 
-#: src/screens/gm/tweak.cpp:1097
+#: src/screens/gm/tweak.cpp:1096
 msgctxt "player_tweak"
 msgid "Warp (E/s): {energy_per_second}"
 msgstr "Warp (E/s): {energy_per_second}"
 
-#: src/screens/gm/tweak.cpp:1098
+#: src/screens/gm/tweak.cpp:1097
 msgctxt "player_tweak"
 msgid "Shields (E/s): {energy_per_second}"
 msgstr "Shilde (E/s): {energy_per_second}"
 
-#: src/screens/gm/tweak.cpp:1123
+#: src/screens/gm/tweak.cpp:1122
 msgid "Callsign:"
 msgstr "Rufzeichen:"
 
-#: src/screens/gm/tweak.cpp:1134
+#: src/screens/gm/tweak.cpp:1133
 msgid "Unscanned description:"
 msgstr "Beschreibung ungescannt.:"
 
-#: src/screens/gm/tweak.cpp:1141
+#: src/screens/gm/tweak.cpp:1140
 msgid "Friend or Foe Description:"
 msgstr "Beschreibung Freund/Feind:"
 
-#: src/screens/gm/tweak.cpp:1148
+#: src/screens/gm/tweak.cpp:1147
 msgid "Simple Scan Description:"
 msgstr "Beschreibung einfacher Scan:"
 
-#: src/screens/gm/tweak.cpp:1155
+#: src/screens/gm/tweak.cpp:1154
 msgid "Full Scan Description:"
 msgstr "Beschreibung:"
 
-#: src/screens/gm/tweak.cpp:1165
+#: src/screens/gm/tweak.cpp:1164
 msgid "Heading:"
 msgstr "Richtung:"
 
-#: src/screens/gm/tweak.cpp:1171
+#: src/screens/gm/tweak.cpp:1170
 msgid "Scanning Complexity:"
 msgstr "Scankomplexität:"
 
-#: src/screens/gm/tweak.cpp:1177
+#: src/screens/gm/tweak.cpp:1176
 msgid "Scanning Depth:"
 msgstr "Scantiefe:"
 
@@ -1587,35 +1645,42 @@ msgctxt "missile"
 msgid "Lock"
 msgstr "Auto"
 
-#: src/screenComponents/missileTubeControls.cpp:108
-#: src/screenComponents/missileTubeControls.cpp:122
-#: src/screenComponents/missileTubeControls.cpp:140
+#: src/screenComponents/helpOverlay.cpp:24
+#, fuzzy
+#| msgid "Close"
+msgctxt "hotkey_F1"
+msgid "Close"
+msgstr "Schließen"
+
+#: src/screenComponents/missileTubeControls.cpp:109
+#: src/screenComponents/missileTubeControls.cpp:123
+#: src/screenComponents/missileTubeControls.cpp:141
 msgctxt "missile"
 msgid "Load"
 msgstr "Laden"
 
-#: src/screenComponents/missileTubeControls.cpp:110
+#: src/screenComponents/missileTubeControls.cpp:111
 msgctxt "missile"
 msgid "Empty"
 msgstr "Leer"
 
-#: src/screenComponents/missileTubeControls.cpp:115
-#: src/screenComponents/missileTubeControls.cpp:131
+#: src/screenComponents/missileTubeControls.cpp:116
+#: src/screenComponents/missileTubeControls.cpp:132
 msgctxt "missile"
 msgid "Unload"
 msgstr "Entladen"
 
-#: src/screenComponents/missileTubeControls.cpp:127
+#: src/screenComponents/missileTubeControls.cpp:128
 msgctxt "missile"
 msgid "Loading"
 msgstr "Laden"
 
-#: src/screenComponents/missileTubeControls.cpp:136
+#: src/screenComponents/missileTubeControls.cpp:137
 msgctxt "missile"
 msgid "Unloading"
 msgstr "Entladen"
 
-#: src/screenComponents/missileTubeControls.cpp:142
+#: src/screenComponents/missileTubeControls.cpp:143
 msgctxt "missile"
 msgid "Firing"
 msgstr "Feuert"
@@ -1636,15 +1701,15 @@ msgstr "Einen schönen Tag noch."
 msgid "This ship will self-destruct in {seconds} seconds."
 msgstr "Dieses Schiff wird sich in {seconds} Sekunden selbst zerstören."
 
-#: src/screenComponents/selfDestructEntry.cpp:22
+#: src/screenComponents/selfDestructEntry.cpp:21
 msgid "Self destruct activated!"
 msgstr "Selbstzerstörung aktiviert!"
 
-#: src/screenComponents/selfDestructEntry.cpp:67
+#: src/screenComponents/selfDestructEntry.cpp:66
 msgid "Code [{letter}]: {self_destruct_code}"
 msgstr "Code ({letter}): {self_destruct_code}"
 
-#: src/screenComponents/selfDestructEntry.cpp:80
+#: src/screenComponents/selfDestructEntry.cpp:79
 msgctxt "selfdestruct"
 msgid "Enter [{letter}]"
 msgstr "[{letter}] eingeben"
@@ -1693,7 +1758,7 @@ msgctxt "selfdestruct"
 msgid "Confirm!"
 msgstr "Bestätige!"
 
-#: src/screenComponents/shieldFreqencySelect.cpp:23
+#: src/screenComponents/shieldFreqencySelect.cpp:22
 msgctxt "shields"
 msgid "Calibrate"
 msgstr "Kalibriere"
@@ -1735,7 +1800,7 @@ msgstr "Schaden am Schild"
 #: src/screenComponents/frequencyCurve.cpp:61
 msgctxt "scienceFrequencyGraph"
 msgid "No enemy beams"
-msgstr "Keine gegnersichen Lase"
+msgstr "Keine gegnerischen Laser"
 
 #: src/screenComponents/frequencyCurve.cpp:63
 msgctxt "scienceFrequencyGraph"
@@ -1798,13 +1863,13 @@ msgstr "Verloren!"
 msgid "Victory!"
 msgstr "Gewonnen!"
 
-#: src/screenComponents/indicatorOverlays.cpp:133
+#: src/screenComponents/indicatorOverlays.cpp:134
 msgid "{faction} wins"
 msgstr "{faction} gewinnt"
 
 #: src/screenComponents/combatManeuver.cpp:16
 msgid "Combat maneuver"
-msgstr "Flugmanöver"
+msgstr "Ausweichmanöver"
 
 #: src/screenComponents/shipDestroyedPopup.cpp:19
 msgid "SHIP DESTROYED!"
@@ -1862,52 +1927,52 @@ msgctxt "scanning"
 msgid "LOCKED"
 msgstr "ERFOLGREICH"
 
-#: src/screenComponents/mainScreenControls.cpp:14
+#: src/screenComponents/mainScreenControls.cpp:15
 msgctxt "controlbutton"
 msgid "Main screen"
 msgstr "Hauptschirm"
 
-#: src/screenComponents/mainScreenControls.cpp:31
+#: src/screenComponents/mainScreenControls.cpp:32
 msgctxt "mainscreen"
 msgid "Front"
 msgstr "Front"
 
-#: src/screenComponents/mainScreenControls.cpp:39
+#: src/screenComponents/mainScreenControls.cpp:40
 msgctxt "mainscreen"
 msgid "Back"
 msgstr "Zurück"
 
-#: src/screenComponents/mainScreenControls.cpp:47
+#: src/screenComponents/mainScreenControls.cpp:48
 msgctxt "mainscreen"
 msgid "Left"
 msgstr "Links"
 
-#: src/screenComponents/mainScreenControls.cpp:55
+#: src/screenComponents/mainScreenControls.cpp:56
 msgctxt "mainscreen"
 msgid "Right"
 msgstr "Rechts"
 
-#: src/screenComponents/mainScreenControls.cpp:68
+#: src/screenComponents/mainScreenControls.cpp:69
 msgctxt "mainscreen"
 msgid "Target lock"
 msgstr "Erfasstes Ziel"
 
-#: src/screenComponents/mainScreenControls.cpp:80
+#: src/screenComponents/mainScreenControls.cpp:81
 msgctxt "mainscreen"
 msgid "Tactical"
 msgstr "Taktik"
 
-#: src/screenComponents/mainScreenControls.cpp:91
+#: src/screenComponents/mainScreenControls.cpp:92
 msgctxt "mainscreen"
 msgid "Long Range"
 msgstr "Langstreckeckenradar"
 
-#: src/screenComponents/mainScreenControls.cpp:105
+#: src/screenComponents/mainScreenControls.cpp:106
 msgctxt "mainscreen"
 msgid "Show comms"
 msgstr "Gespräche anzeigen"
 
-#: src/screenComponents/mainScreenControls.cpp:116
+#: src/screenComponents/mainScreenControls.cpp:117
 msgctxt "mainscreen"
 msgid "Hide comms"
 msgstr "Gespräche verbergen"
@@ -2196,17 +2261,17 @@ msgstr "Sprung einleiten"
 #: src/gui/hotkeyConfig.cpp:251
 msgctxt "hotkey_Helms"
 msgid "Combat boost left"
-msgstr "Flugmanöver links"
+msgstr "Ausweichmanöver links"
 
 #: src/gui/hotkeyConfig.cpp:252
 msgctxt "hotkey_Helms"
 msgid "Combat boost right"
-msgstr "Flugmanöber rechts"
+msgstr "Ausweichmanöver rechts"
 
 #: src/gui/hotkeyConfig.cpp:253
 msgctxt "hotkey_Helms"
 msgid "Combat boost forwards"
-msgstr "Flugmanöver vorwärts"
+msgstr "Ausweichmanöver vorwärts"
 
 #: src/gui/hotkeyConfig.cpp:256 src/gui/hotkeyConfig.cpp:257
 #: src/gui/hotkeyConfig.cpp:258 src/gui/hotkeyConfig.cpp:259
@@ -2228,7 +2293,7 @@ msgstr "Waffen"
 #: src/gui/hotkeyConfig.cpp:256
 msgctxt "hotkey_Weapons"
 msgid "Select homing"
-msgstr "Wähle Lenkrakete"
+msgstr "Wähle Zielsuchrakete"
 
 #: src/gui/hotkeyConfig.cpp:257
 msgctxt "hotkey_Weapons"
@@ -2603,27 +2668,27 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Größe"
 
-#: src/spaceObjects/spaceship.cpp:1591
+#: src/spaceObjects/spaceship.cpp:1622
 msgctxt "missile"
 msgid "Homing"
 msgstr "Zielsuch"
 
-#: src/spaceObjects/spaceship.cpp:1593
+#: src/spaceObjects/spaceship.cpp:1624
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/spaceObjects/spaceship.cpp:1595
+#: src/spaceObjects/spaceship.cpp:1626
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1597
+#: src/spaceObjects/spaceship.cpp:1628
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1599
+#: src/spaceObjects/spaceship.cpp:1630
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HGBI"
@@ -2678,62 +2743,62 @@ msgctxt "cpulog"
 msgid "Moving to attack {callsign}!"
 msgstr "Greife {object} an!"
 
-#: src/spaceObjects/cpuShip.cpp:308
+#: src/spaceObjects/cpuShip.cpp:310
 msgctxt "gm_info"
 msgid "Orders"
 msgstr "Befehle"
 
-#: src/spaceObjects/cpuShip.cpp:366
+#: src/spaceObjects/cpuShip.cpp:368
 msgctxt "orderscpu"
 msgid "Idle"
 msgstr "Inaktiv"
 
-#: src/spaceObjects/cpuShip.cpp:367
+#: src/spaceObjects/cpuShip.cpp:369
 msgctxt "orderscpu"
 msgid "Roaming"
 msgstr "Patrouillieren"
 
-#: src/spaceObjects/cpuShip.cpp:368
+#: src/spaceObjects/cpuShip.cpp:370
 msgctxt "orderscpu"
 msgid "Retreat"
 msgstr "Rückzug"
 
-#: src/spaceObjects/cpuShip.cpp:369
+#: src/spaceObjects/cpuShip.cpp:371
 msgctxt "orderscpu"
 msgid "Stand Ground"
 msgstr "Halte Position"
 
-#: src/spaceObjects/cpuShip.cpp:370
+#: src/spaceObjects/cpuShip.cpp:372
 msgctxt "orderscpu"
 msgid "Defend Location"
 msgstr "Verteidige Ort"
 
-#: src/spaceObjects/cpuShip.cpp:371
+#: src/spaceObjects/cpuShip.cpp:373
 msgctxt "orderscpu"
 msgid "Defend Target"
 msgstr "Verteidige Ziel"
 
-#: src/spaceObjects/cpuShip.cpp:372
+#: src/spaceObjects/cpuShip.cpp:374
 msgctxt "orderscpu"
 msgid "Fly in formation"
 msgstr "Fliege in Formation"
 
-#: src/spaceObjects/cpuShip.cpp:373
+#: src/spaceObjects/cpuShip.cpp:375
 msgctxt "orderscpu"
 msgid "Fly towards"
 msgstr "Fliege zu"
 
-#: src/spaceObjects/cpuShip.cpp:374
+#: src/spaceObjects/cpuShip.cpp:376
 msgctxt "orderscpu"
 msgid "Fly towards (ignore all)"
 msgstr "Fliege zu (ignoriere alles)"
 
-#: src/spaceObjects/cpuShip.cpp:375
+#: src/spaceObjects/cpuShip.cpp:377
 msgctxt "orderscpu"
 msgid "Attack"
 msgstr "Greife an"
 
-#: src/spaceObjects/cpuShip.cpp:376
+#: src/spaceObjects/cpuShip.cpp:378
 msgctxt "orderscpu"
 msgid "Dock"
 msgstr "Docke an"
@@ -2758,80 +2823,80 @@ msgctxt "shiplog"
 msgid "Start of log"
 msgstr "Beginn des Logbuchs"
 
-#: src/spaceObjects/playerSpaceship.cpp:1141
+#: src/spaceObjects/playerSpaceship.cpp:1098
 msgctxt "shiplog"
 msgid "Hailed by {name}"
 msgstr "Gerufen von {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1195
+#: src/spaceObjects/playerSpaceship.cpp:1152
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
 msgstr "Verbindung wurde durch die andere Seite beendet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1205
+#: src/spaceObjects/playerSpaceship.cpp:1162
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
 msgstr "Ruf von {callsign} wurde abgebrochen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1209
+#: src/spaceObjects/playerSpaceship.cpp:1166
 msgctxt "shiplog"
 msgid "Communication channel closed"
 msgstr "Verbindung beendet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1380
-#: src/spaceObjects/playerSpaceship.cpp:1457
+#: src/spaceObjects/playerSpaceship.cpp:1337
+#: src/spaceObjects/playerSpaceship.cpp:1414
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
 msgstr "Verbindung mit {name} hergestellt"
 
-#: src/spaceObjects/playerSpaceship.cpp:1381
+#: src/spaceObjects/playerSpaceship.cpp:1338
 msgctxt "shiplog"
 msgid "Hailing: {name}"
 msgstr "Ruf: {name}Verbindung zu {callsign} geöffnet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1404
-#: src/spaceObjects/playerSpaceship.cpp:1405
+#: src/spaceObjects/playerSpaceship.cpp:1361
+#: src/spaceObjects/playerSpaceship.cpp:1362
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
 msgstr "Verbindung mit {callsign} hergestellt"
 
-#: src/spaceObjects/playerSpaceship.cpp:1406
-#: src/spaceObjects/playerSpaceship.cpp:1407
+#: src/spaceObjects/playerSpaceship.cpp:1363
+#: src/spaceObjects/playerSpaceship.cpp:1364
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
 msgstr "Verbindung zu {callsign} geöffnet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1409
+#: src/spaceObjects/playerSpaceship.cpp:1366
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
 msgstr "Verbindung von {callsign} abgewiesen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1410
+#: src/spaceObjects/playerSpaceship.cpp:1367
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
 msgstr "Verbindung nach {callsign} abgewiesen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1419
+#: src/spaceObjects/playerSpaceship.cpp:1376
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
 msgstr "Ruf abgebrochen."
 
-#: src/spaceObjects/playerSpaceship.cpp:1422
+#: src/spaceObjects/playerSpaceship.cpp:1379
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
 msgstr "Ruf von {callsign} angenommen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1442
+#: src/spaceObjects/playerSpaceship.cpp:1399
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
 msgstr "Ruf von {callsign}  abgewiesen"
 
-#: src/spaceObjects/playerSpaceship.cpp:1456
+#: src/spaceObjects/playerSpaceship.cpp:1413
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
 msgstr "Verbindung zu {name} geöffnet"
 
-#: src/spaceObjects/playerSpaceship.cpp:1459
+#: src/spaceObjects/playerSpaceship.cpp:1416
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Ruf von {name} abgewiesen"
@@ -2876,301 +2941,13 @@ msgctxt "tube"
 msgid "Rear"
 msgstr "Heck"
 
-#: scripts/shiptemplates/OLD.lua:6
-msgctxt "playerShip"
-msgid "Player Cruiser"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:63
-msgctxt "playerShip"
-msgid "Player Missile Cr."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:118
-msgctxt "playerShip"
-msgid "Player Fighter"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:159
+#: scripts/shiptemplates/corvette.lua:14
 msgctxt "ship"
-msgid "Tug"
+msgid "Atlantis X23"
 msgstr ""
 
-#: scripts/shiptemplates/OLD.lua:168
-msgid ""
-"The tugboat is a reliable, but small and un-armed transport ship. Due to "
-"it's low cost, it is a favourite ship to teach the ropes to fledgeling "
-"captains, without risking friendly fire."
-msgstr ""
-"Dieses Schleppschiff ist ein zuverlässiges, aber unbewaffnetes "
-"Transportschiff. Aufgrund seiner niedrigen Kosten wird das gerne genutzt um "
-"neue Captains einzuweisen - Ohne das Risiko, durch versehentliches "
-"Waffenfeuer eine Katastrophe anzurichten."
-
-#: scripts/shiptemplates/OLD.lua:176
-msgctxt "playerShip"
-msgid "Nautilus"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
-#: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
-#: scripts/shiptemplates/corvette.lua:223
-#: scripts/shiptemplates/corvette.lua:310 scripts/shiptemplates/frigates.lua:14
-#: scripts/shiptemplates/frigates.lua:87 scripts/shiptemplates/frigates.lua:116
-#: scripts/shiptemplates/frigates.lua:133
-#: scripts/shiptemplates/frigates.lua:179
-#: scripts/shiptemplates/frigates.lua:272
-#: scripts/shiptemplates/frigates.lua:299
-#: scripts/shiptemplates/frigates.lua:312
-#: scripts/shiptemplates/frigates.lua:369
-#: scripts/shiptemplates/frigates.lua:414
-msgctxt "class"
-msgid "Frigate"
-msgstr "Fregatte"
-
-#: scripts/shiptemplates/OLD.lua:176
-msgctxt "subclass"
-msgid "Mine Layer"
-msgstr "Minenleger"
-
-#: scripts/shiptemplates/OLD.lua:177
-msgid "Small mine laying vessel with minimal armament, shields and hull"
-msgstr ""
-"Kleines Minen-legendes Schiff mit minimaler Bewaffnung, Schilden und Hülle"
-
-#: scripts/shiptemplates/OLD.lua:223
-msgctxt "ship"
-msgid "Fighter"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:226
-msgid ""
-"Fighters are quick agile ships that do not do a lot of damage, but usually "
-"come in larger groups. They are easy to take out, but should not be "
-"underestimated."
-msgstr ""
-"Jäger sind schnelle und wendige Schiffe, die nicht viel Schaden verursachen, "
-"aber üblicherweise in großen Gruppen unterwegs sind. Sie sind leicht "
-"auszuschalten, sollten aber nicht unterschätzt werden."
-
-#: scripts/shiptemplates/OLD.lua:239
-msgctxt "ship"
-msgid "Karnack"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:239 scripts/shiptemplates/frigates.lua:14
-msgctxt "subclass"
-msgid "Cruiser"
-msgstr "Kreuzer"
-
-#: scripts/shiptemplates/OLD.lua:241
-msgid ""
-"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
-"found wide adaptation in most factions. Most factions have extensively "
-"retrofitted these ships to suit their combat doctrines. Because it's an "
-"older model, most factions have been selling stripped versions. This "
-"practice has led to this ship becoming an all time favorite with smugglers "
-"and other civilian parties. However, they have used it's adaptable nature to "
-"re-fit them with (illegal) weaponry."
-msgstr ""
-"Hergestellt von: Repulse shipyards. Aufgrund seiner Vielseitigkeit wurde "
-"dieses Schiff von den meisten Fraktionen adaptiert. Die meisten haben es "
-"stark umgebaut, um ihrer jeweiligen Strategie gerecht zu werden. Da es sich "
-"um ein älteres Modell handelt, verkaufen viele Gruppierungen "
-"ausgeschlachtete Modelle. Dadurch wurde es schnell zu einem beliebten Modell "
-"für Schmuggler und andere Zivilen Gruppierungen. Die leichte Anpassbarkeit "
-"wurde auch dazu genutzt, es mit (illegalen) Waffen aufzurüsten."
-
-#: scripts/shiptemplates/OLD.lua:253
-msgctxt "ship"
-msgid "Karnack MK2"
-msgstr "Karnack MK2"
-
-#: scripts/shiptemplates/OLD.lua:254
-msgid ""
-"Fabricated by: Repulse shipyards. The successor to the widely successful "
-"mark I Karnack cruiser. This ship has several notable improvements over the "
-"original ship, including better armor, slightly improved weaponry and "
-"customization by the shipyards. The latter improvement was the most "
-"requested feature by several factions once they realized that their old "
-"surplus mark I ships were used for less savory purposes."
-msgstr ""
-"Hergestellt von: Repulse shipyards. Der Nachfolger des erfolgreichen "
-"Kreuzers Karnack Mk 1. Dieses Schiff besitzt mehrere Verbesserungen "
-"gegenüber des Vorgängers wie bessere Panzerung, leicht verbesserte Waffen "
-"und spezielle Anpassungen durch die Schiffswerft. Letzteres wurde von vielen "
-"Fraktionen stark nachgefragt, nachdem sie bemerkten, dass die alte MK1 für "
-"weniger redliche Zwecke genutzt wurde."
-
-#: scripts/shiptemplates/OLD.lua:264
-msgctxt "ship"
-msgid "Missile Cruiser"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:264
-msgctxt "subclass"
-msgid "Cruiser: Missile"
-msgstr "Kreuzer: Raketenkreuzer"
-
-#: scripts/shiptemplates/OLD.lua:266
-msgid ""
-"Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
-"missile cruiser is a long range missile firing platform. It cannot handle a "
-"lot of damage, but can do a lot of damage if not dealt with properly."
-msgstr ""
-"Polaris-Raketenkreuzer MK1 Hergestellt von Repulse shipyards. Dieser "
-"Raketenkreuzer ist eine Langstrecken-Raketenplattform. Er hält nicht allzu "
-"viel  Schaden aus, aber kann sehr viel Schaden anrichten."
-
-#: scripts/shiptemplates/OLD.lua:275
-msgctxt "ship"
-msgid "Gunship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:275 scripts/shiptemplates/frigates.lua:414
-#: scripts/shiptemplates/starFighters.lua:65
-msgctxt "subclass"
-msgid "Gunship"
-msgstr "Kanonenboot"
-
-#: scripts/shiptemplates/OLD.lua:277
-msgid ""
-"The gunship is a ship equipped with a homing missile tube to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-"Das Kanonenboot ist mit einem Lenkraketenwerfer ausgestattet, um "
-"vorbereitend Schaden zu verursachen, und dann dann mit den beiden Lasern "
-"auszuschalten. Es wurde dazu entwickelt, um schnell Schiffe auszuschalten, "
-"die kleiner sind als es selbst."
-
-#: scripts/shiptemplates/OLD.lua:288
-msgctxt "ship"
-msgid "Adv. Gunship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:289
-msgid ""
-"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-"Das verbesserte Kanonenboot ist mit zwei Lenkraketenwerfern ausgestattet, um "
-"vorbereitend Schaden zu verursachen, und dann dann mit den beiden Lasern "
-"auszuschalten. Es wurde dazu entwickelt, um schnell Schiffe auszuschalten, "
-"die kleiner sind als es selbst."
-
-#: scripts/shiptemplates/OLD.lua:293
-msgctxt "ship"
-msgid "Strikeship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:293 scripts/shiptemplates/OLD.lua:305
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/corvette.lua:223
-#: scripts/shiptemplates/corvette.lua:310
-#: scripts/shiptemplates/starFighters.lua:13
-#: scripts/shiptemplates/starFighters.lua:65
-#: scripts/shiptemplates/starFighters.lua:121
-msgctxt "class"
-msgid "Starfighter"
-msgstr "Raumjäger"
-
-#: scripts/shiptemplates/OLD.lua:293
-msgctxt "subclass"
-msgid "Strike"
-msgstr "Angriffs-schiff"
-
-#: scripts/shiptemplates/OLD.lua:295
-msgid ""
-"The Strikeship is a warp-drive equipped fighter build for quick strikes, "
-"it's fast, it's agile, but does not do an extreme amount of damage, and "
-"lacks in rear shields."
-msgstr ""
-"Das Strikeship ist ein Raumjäger, der mit einem Warpantrieb ausgestattet ist "
-"und für schnelle Angriffe konzipiert ist. Es ist wendig, aber verursacht "
-"nicht all zu viel Schaden. Außerdem sind die Heckschilde sehr schwach."
-
-#: scripts/shiptemplates/OLD.lua:305
-msgctxt "ship"
-msgid "Adv. Striker"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:305
-msgctxt "subclass"
-msgid "Patrol"
-msgstr "Patroulle"
-
-#: scripts/shiptemplates/OLD.lua:307
-msgid ""
-"The Advanced Striker is a jump-drive equipped fighter build for quick "
-"strikes, it's slow but very agile, but does not do an extreme amount of "
-"damage, and lacks in shields. However, due to the jump drive, it's quick to "
-"get into the action."
-msgstr ""
-"Diese verbesserter Version der Striker ist ein mit einem Sprungantrieb "
-"ausgestatteter Jäger für schnelle Angriffe. Er ist langsam aber sehr wendig, "
-"er macht nicht viel Schaden, und hat nur schwache Schilde. Durch seinen "
-"Sprungantrieb kann er allerdings schnell ins Geschehen eingreifen."
-
-#: scripts/shiptemplates/OLD.lua:316
-msgctxt "playerShip"
-msgid "Striker"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:317
-msgid ""
-"The Striker is the predecessor to the advanced striker, slow but agile, but "
-"does not do an extreme amount of damage, and lacks in shields"
-msgstr ""
-"Die Striker ist das Vorgängermodell der verbesserten Striker, langsam aber "
-"wendig, verursacht wenig Schaden, und verfügt nur über schwache Schilde."
-
-#: scripts/shiptemplates/OLD.lua:352
-msgctxt "ship"
-msgid "Dreadnought"
-msgstr "Dreadnought"
-
-#: scripts/shiptemplates/OLD.lua:352 scripts/shiptemplates/OLD.lua:367
-#: scripts/shiptemplates/dreadnaught.lua:9
-msgctxt "class"
-msgid "Dreadnought"
-msgstr "Schlachtschiff"
-
-#: scripts/shiptemplates/OLD.lua:352
-msgctxt "subclass"
-msgid "Assault"
-msgstr "Dreadnought"
-
-#: scripts/shiptemplates/OLD.lua:354
-msgid ""
-"The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
-"huge amount of beam weapons in the front. Taking it head-on is suicide."
-msgstr ""
-"Die Dreadnaught ist eine fliegende Festung. Sie ist langsam, kann sich nur "
-"langsam drehen, aber besitzt eine große Anzahl an Laserwaffen am Bug. Sie "
-"frontal anzugreifen grenzt an Selbstmord."
-
-#: scripts/shiptemplates/OLD.lua:367
-msgctxt "ship"
-msgid "Battlestation"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:367
-msgctxt "subclass"
-msgid "Battlecruiser"
-msgstr "Schlachtkreuzer"
-
-#: scripts/shiptemplates/OLD.lua:369
-msgid ""
-"The battle station is a huge ship with many defensive features. It can be "
-"docked by smaller ships."
-msgstr ""
-"Die \"battle station\" ist ein großes Schiff mit vielen defensiven "
-"Merkmalen. Kleinere Schiffe können an sie andocken."
-
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/corvette.lua:14
-#: scripts/shiptemplates/corvette.lua:83 scripts/shiptemplates/corvette.lua:101
+#: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
+#: scripts/shiptemplates/corvette.lua:101
 #: scripts/shiptemplates/corvette.lua:157
 #: scripts/shiptemplates/corvette.lua:217
 #: scripts/shiptemplates/corvette.lua:235
@@ -3180,53 +2957,10 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:287
 #: scripts/shiptemplates/corvette.lua:301
 #: scripts/shiptemplates/corvette.lua:310
-#: scripts/shiptemplates/corvette.lua:314
+#: scripts/shiptemplates/corvette.lua:315 scripts/shiptemplates/OLD.lua:387
 msgctxt "class"
 msgid "Corvette"
 msgstr "Korvette"
-
-#: scripts/shiptemplates/OLD.lua:390
-msgctxt "playerShip"
-msgid "Ender"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:459
-msgctxt "ship"
-msgid "Weapons platform"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:461
-msgid ""
-"The weapons-platform is a stationary platform with beam-weapons. It's "
-"extremely slow to turn, but it's beam weapons do a huge amount of damage."
-msgstr ""
-"Diese Waffenplattform ist eine stationäre Plattform mit Laserwaffen. Sie "
-"dreht sich nur extrem langsam, aber ihre Laserwaffen verursachen extrem viel "
-"Schaden."
-
-#: scripts/shiptemplates/OLD.lua:474
-msgctxt "ship"
-msgid "Blockade Runner"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:474
-msgctxt "subclass"
-msgid "High Punch"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:476
-msgid ""
-"Blockade runner is a reasonably fast, high shield, slow on weapons ship "
-"designed to break through defense lines and deliver goods."
-msgstr ""
-"Die Blockade Runner ist ein relativ schnelles Schiff mit starken Schilden "
-"und langsamen Waffen, das entwickelt wurde um durch Verteidigungslinien u "
-"brechen und Versorgungsgüter zu liefern."
-
-#: scripts/shiptemplates/corvette.lua:14
-msgctxt "ship"
-msgid "Atlantis X23"
-msgstr ""
 
 #: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
 msgctxt "subclass"
@@ -3261,8 +2995,8 @@ msgid ""
 "modified Atlantis for an Atlantis X23 would be a deadly mistake."
 msgstr ""
 "Eine umgerüstete Atlantis, welche dadurch noch mehr zu einem Vielzweckschiff "
-"wird. Das grosse Schildsystem wurde durch ein hochentwickeltes "
-"Flugmanöversystem und zusätzliche Impulstriebwerke ersetzt. Seine "
+"wird. Das große Schildsystem wurde durch ein hochentwickeltes "
+"Ausweichmanöver-system und zusätzliche Impulstriebwerke ersetzt. Seine "
 "Waffenvorräte sind ebenfalls vielfältiger. Die modifizierte Atlantis mit "
 "einer Atlantis X23 zu verwechseln, kann ein tödlicher Fehler sein."
 
@@ -3348,6 +3082,33 @@ msgstr ""
 "Laserwaffen ausgestattet, und ist in der Lage, sich langsam zu drehen. "
 "Größere Systeme nutzen diese Plattformen oft, um Patrouillenschiffe zu "
 "versorgen."
+
+#: scripts/shiptemplates/corvette.lua:223
+#: scripts/shiptemplates/corvette.lua:311 scripts/shiptemplates/OLD.lua:293
+#: scripts/shiptemplates/OLD.lua:305 scripts/shiptemplates/OLD.lua:387
+#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starFighters.lua:65
+#: scripts/shiptemplates/starFighters.lua:121
+msgctxt "class"
+msgid "Starfighter"
+msgstr "Raumjäger"
+
+#: scripts/shiptemplates/corvette.lua:223
+#: scripts/shiptemplates/corvette.lua:310 scripts/shiptemplates/frigates.lua:14
+#: scripts/shiptemplates/frigates.lua:87 scripts/shiptemplates/frigates.lua:116
+#: scripts/shiptemplates/frigates.lua:133
+#: scripts/shiptemplates/frigates.lua:179
+#: scripts/shiptemplates/frigates.lua:272
+#: scripts/shiptemplates/frigates.lua:299
+#: scripts/shiptemplates/frigates.lua:312
+#: scripts/shiptemplates/frigates.lua:369
+#: scripts/shiptemplates/frigates.lua:414 scripts/shiptemplates/OLD.lua:176
+#: scripts/shiptemplates/OLD.lua:239 scripts/shiptemplates/OLD.lua:264
+#: scripts/shiptemplates/OLD.lua:275 scripts/shiptemplates/OLD.lua:387
+#: scripts/shiptemplates/OLD.lua:474
+msgctxt "class"
+msgid "Frigate"
+msgstr "Fregatte"
 
 #: scripts/shiptemplates/corvette.lua:235
 #, lua-format
@@ -3485,26 +3246,26 @@ msgstr ""
 "Er wurde entwickelt um andere Schiffe über immense Strecken zu "
 "transportieren. Daher besitzt er spezielle Andockbuchten für andere Schiffe."
 
-#: scripts/shiptemplates/corvette.lua:314
+#: scripts/shiptemplates/corvette.lua:315
 msgctxt "playerShip"
 msgid "Benedict"
 msgstr ""
 
-#: scripts/shiptemplates/corvette.lua:314
+#: scripts/shiptemplates/corvette.lua:315
 msgctxt "subclass"
 msgid "Freighter/Carrier"
 msgstr "Frachter/Trägerschiff"
 
-#: scripts/shiptemplates/corvette.lua:315
+#: scripts/shiptemplates/corvette.lua:316
 msgid "Benedict is an improved version of the Jump Carrier"
 msgstr "Die Benedict ist eine verbesserte Version des Sprung-Trägers"
 
-#: scripts/shiptemplates/corvette.lua:348
+#: scripts/shiptemplates/corvette.lua:349
 msgctxt "playerShip"
 msgid "Kiriya"
 msgstr ""
 
-#: scripts/shiptemplates/corvette.lua:349
+#: scripts/shiptemplates/corvette.lua:350
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
 msgstr ""
 "Die Kiriya ist eine verbesserte Version des Sprung-Trägers mit Warp-Antrieb"
@@ -3513,6 +3274,12 @@ msgstr ""
 msgctxt "ship"
 msgid "Odin"
 msgstr ""
+
+#: scripts/shiptemplates/dreadnaught.lua:9 scripts/shiptemplates/OLD.lua:352
+#: scripts/shiptemplates/OLD.lua:367
+msgctxt "class"
+msgid "Dreadnought"
+msgstr "Schlachtschiff"
 
 #: scripts/shiptemplates/dreadnaught.lua:9
 msgctxt "subclass"
@@ -3859,6 +3626,11 @@ msgctxt "ship"
 msgid "Phobos T3"
 msgstr ""
 
+#: scripts/shiptemplates/frigates.lua:14 scripts/shiptemplates/OLD.lua:239
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr "Kreuzer"
+
 #: scripts/shiptemplates/frigates.lua:16
 msgid ""
 "The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. "
@@ -4063,7 +3835,7 @@ msgid ""
 "maneuvering systems, and a jump drive."
 msgstr ""
 "Diese auf den Kampf spezialisierte Piranha besitzt zusätzliche "
-"Minenschächte, ein Flugmanöversystem und einen Sprungantrieb."
+"Minenschächte, ein Ausweichmanöver-system und einen Sprungantrieb."
 
 #: scripts/shiptemplates/frigates.lua:272
 msgctxt "ship"
@@ -4218,6 +3990,12 @@ msgctxt "ship"
 msgid "Fiend G3"
 msgstr ""
 
+#: scripts/shiptemplates/frigates.lua:414 scripts/shiptemplates/OLD.lua:275
+#: scripts/shiptemplates/starFighters.lua:65
+msgctxt "subclass"
+msgid "Gunship"
+msgstr "Kanonenboot"
+
 #: scripts/shiptemplates/frigates.lua:416
 msgid ""
 "The Fiend G3 was the first model produced by Conversions R Us. They got a "
@@ -4230,7 +4008,7 @@ msgstr ""
 "sie konnten eine Flotte gebrauchter Kanonenboote günstig ersteigern. Im "
 "wesentlichen baute die Firma einen günstigen Sprungantrieb in jedes Schiff "
 "ein und voila! Die Fiend G3 war geboren. Wie das Kanonenboot hat verfügt es "
-"über Lenkraketen und Laser um schwächere Schiffe auszuschalten. In "
+"über Zielsuchraketen und Laser um schwächere Schiffe auszuschalten. In "
 "Verbindung mit dem Sprungantrieb ist es im Vergleich zum normalen "
 "Kanonenboot das wesentlich gefährlichere Schiff."
 
@@ -4251,7 +4029,7 @@ msgstr ""
 "produziert wurde. Sie konnten eine Flotte gebrauchter Kanonenboote günstig "
 "ersteigern. Im wesentlichen baute die Firma einen günstigen Warpantrieb in "
 "jedes Schiff ein und voila! die Fiend G4 war geboren. Wie das Kanonenboot "
-"hat verfügt es über Lenkraketen und Laser um schwächere Schiffe "
+"hat verfügt es über Zielsuchraketen und Laser um schwächere Schiffe "
 "auszuschalten. In Verbindung mit dem Warpantrieb ist es im Vergleich zum "
 "normalen Kanonenboot das wesentlich gefährlichere Schiff."
 
@@ -4334,6 +4112,293 @@ msgstr ""
 msgctxt "ship"
 msgid "Ktlitan Queen"
 msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:6
+msgctxt "playerShip"
+msgid "Player Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:63
+msgctxt "playerShip"
+msgid "Player Missile Cr."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:118
+msgctxt "playerShip"
+msgid "Player Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:159
+msgctxt "ship"
+msgid "Tug"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:168
+msgid ""
+"The tugboat is a reliable, but small and un-armed transport ship. Due to "
+"it's low cost, it is a favourite ship to teach the ropes to fledgeling "
+"captains, without risking friendly fire."
+msgstr ""
+"Dieses Schleppschiff ist ein zuverlässiges, aber unbewaffnetes "
+"Transportschiff. Aufgrund seiner niedrigen Kosten wird das gerne genutzt um "
+"neue Captains einzuweisen - Ohne das Risiko, durch versehentliches "
+"Waffenfeuer eine Katastrophe anzurichten."
+
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "playerShip"
+msgid "Nautilus"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "subclass"
+msgid "Mine Layer"
+msgstr "Minenleger"
+
+#: scripts/shiptemplates/OLD.lua:177
+msgid "Small mine laying vessel with minimal armament, shields and hull"
+msgstr ""
+"Kleines Minen-legendes Schiff mit minimaler Bewaffnung, Schilden und Hülle"
+
+#: scripts/shiptemplates/OLD.lua:223
+msgctxt "ship"
+msgid "Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:226
+msgid ""
+"Fighters are quick agile ships that do not do a lot of damage, but usually "
+"come in larger groups. They are easy to take out, but should not be "
+"underestimated."
+msgstr ""
+"Jäger sind schnelle und wendige Schiffe, die nicht viel Schaden verursachen, "
+"aber üblicherweise in großen Gruppen unterwegs sind. Sie sind leicht "
+"auszuschalten, sollten aber nicht unterschätzt werden."
+
+#: scripts/shiptemplates/OLD.lua:239
+msgctxt "ship"
+msgid "Karnack"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:241
+msgid ""
+"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
+"found wide adaptation in most factions. Most factions have extensively "
+"retrofitted these ships to suit their combat doctrines. Because it's an "
+"older model, most factions have been selling stripped versions. This "
+"practice has led to this ship becoming an all time favorite with smugglers "
+"and other civilian parties. However, they have used it's adaptable nature to "
+"re-fit them with (illegal) weaponry."
+msgstr ""
+"Hergestellt von: Repulse shipyards. Aufgrund seiner Vielseitigkeit wurde "
+"dieses Schiff von den meisten Fraktionen adaptiert. Die meisten haben es "
+"stark umgebaut, um ihrer jeweiligen Strategie gerecht zu werden. Da es sich "
+"um ein älteres Modell handelt, verkaufen viele Gruppierungen "
+"ausgeschlachtete Modelle. Dadurch wurde es schnell zu einem beliebten Modell "
+"für Schmuggler und andere Zivilen Gruppierungen. Die leichte Anpassbarkeit "
+"wurde auch dazu genutzt, es mit (illegalen) Waffen aufzurüsten."
+
+#: scripts/shiptemplates/OLD.lua:253
+msgctxt "ship"
+msgid "Karnack MK2"
+msgstr "Karnack MK2"
+
+#: scripts/shiptemplates/OLD.lua:254
+msgid ""
+"Fabricated by: Repulse shipyards. The successor to the widely successful "
+"mark I Karnack cruiser. This ship has several notable improvements over the "
+"original ship, including better armor, slightly improved weaponry and "
+"customization by the shipyards. The latter improvement was the most "
+"requested feature by several factions once they realized that their old "
+"surplus mark I ships were used for less savory purposes."
+msgstr ""
+"Hergestellt von: Repulse shipyards. Der Nachfolger des erfolgreichen "
+"Kreuzers Karnack Mk 1. Dieses Schiff besitzt mehrere Verbesserungen "
+"gegenüber des Vorgängers wie bessere Panzerung, leicht verbesserte Waffen "
+"und spezielle Anpassungen durch die Schiffswerft. Letzteres wurde von vielen "
+"Fraktionen stark nachgefragt, nachdem sie bemerkten, dass die alte MK1 für "
+"weniger redliche Zwecke genutzt wurde."
+
+#: scripts/shiptemplates/OLD.lua:264
+msgctxt "ship"
+msgid "Missile Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:264
+msgctxt "subclass"
+msgid "Cruiser: Missile"
+msgstr "Kreuzer: Raketenkreuzer"
+
+#: scripts/shiptemplates/OLD.lua:266
+msgid ""
+"Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
+"missile cruiser is a long range missile firing platform. It cannot handle a "
+"lot of damage, but can do a lot of damage if not dealt with properly."
+msgstr ""
+"Polaris-Raketenkreuzer MK1 Hergestellt von Repulse shipyards. Dieser "
+"Raketenkreuzer ist eine Langstrecken-Raketenplattform. Er hält nicht allzu "
+"viel  Schaden aus, aber kann sehr viel Schaden anrichten."
+
+#: scripts/shiptemplates/OLD.lua:275
+msgctxt "ship"
+msgid "Gunship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:277
+msgid ""
+"The gunship is a ship equipped with a homing missile tube to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself."
+msgstr ""
+"Das Kanonenboot ist mit einem Zielsuchraketenwerfer ausgestattet, um "
+"vorbereitend Schaden zu verursachen, und dann dann mit den beiden Lasern "
+"auszuschalten. Es wurde dazu entwickelt, um schnell Schiffe auszuschalten, "
+"die kleiner sind als es selbst."
+
+#: scripts/shiptemplates/OLD.lua:288
+msgctxt "ship"
+msgid "Adv. Gunship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:289
+msgid ""
+"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself."
+msgstr ""
+"Das verbesserte Kanonenboot ist mit zwei Zielsuchraketenwerfern "
+"ausgestattet, um vorbereitend Schaden zu verursachen, und dann dann mit den "
+"beiden Lasern auszuschalten. Es wurde dazu entwickelt, um schnell Schiffe "
+"auszuschalten, die kleiner sind als es selbst."
+
+#: scripts/shiptemplates/OLD.lua:293
+msgctxt "ship"
+msgid "Strikeship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:293
+msgctxt "subclass"
+msgid "Strike"
+msgstr "Angriffs-schiff"
+
+#: scripts/shiptemplates/OLD.lua:295
+msgid ""
+"The Strikeship is a warp-drive equipped fighter build for quick strikes, "
+"it's fast, it's agile, but does not do an extreme amount of damage, and "
+"lacks in rear shields."
+msgstr ""
+"Das Strikeship ist ein Raumjäger, der mit einem Warpantrieb ausgestattet ist "
+"und für schnelle Angriffe konzipiert ist. Es ist wendig, aber verursacht "
+"nicht all zu viel Schaden. Außerdem sind die Heckschilde sehr schwach."
+
+#: scripts/shiptemplates/OLD.lua:305
+msgctxt "ship"
+msgid "Adv. Striker"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:305
+msgctxt "subclass"
+msgid "Patrol"
+msgstr "Patroulle"
+
+#: scripts/shiptemplates/OLD.lua:307
+msgid ""
+"The Advanced Striker is a jump-drive equipped fighter build for quick "
+"strikes, it's slow but very agile, but does not do an extreme amount of "
+"damage, and lacks in shields. However, due to the jump drive, it's quick to "
+"get into the action."
+msgstr ""
+"Diese verbesserter Version der Striker ist ein mit einem Sprungantrieb "
+"ausgestatteter Jäger für schnelle Angriffe. Er ist langsam aber sehr wendig, "
+"er macht nicht viel Schaden, und hat nur schwache Schilde. Durch seinen "
+"Sprungantrieb kann er allerdings schnell ins Geschehen eingreifen."
+
+#: scripts/shiptemplates/OLD.lua:316
+msgctxt "playerShip"
+msgid "Striker"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:317
+msgid ""
+"The Striker is the predecessor to the advanced striker, slow but agile, but "
+"does not do an extreme amount of damage, and lacks in shields"
+msgstr ""
+"Die Striker ist das Vorgängermodell der verbesserten Striker, langsam aber "
+"wendig, verursacht wenig Schaden, und verfügt nur über schwache Schilde."
+
+#: scripts/shiptemplates/OLD.lua:352
+msgctxt "ship"
+msgid "Dreadnought"
+msgstr "Dreadnought"
+
+#: scripts/shiptemplates/OLD.lua:352
+msgctxt "subclass"
+msgid "Assault"
+msgstr "Dreadnought"
+
+#: scripts/shiptemplates/OLD.lua:354
+msgid ""
+"The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
+"huge amount of beam weapons in the front. Taking it head-on is suicide."
+msgstr ""
+"Die Dreadnaught ist eine fliegende Festung. Sie ist langsam, kann sich nur "
+"langsam drehen, aber besitzt eine große Anzahl an Laserwaffen am Bug. Sie "
+"frontal anzugreifen grenzt an Selbstmord."
+
+#: scripts/shiptemplates/OLD.lua:367
+msgctxt "ship"
+msgid "Battlestation"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:367
+msgctxt "subclass"
+msgid "Battlecruiser"
+msgstr "Schlachtkreuzer"
+
+#: scripts/shiptemplates/OLD.lua:369
+msgid ""
+"The battle station is a huge ship with many defensive features. It can be "
+"docked by smaller ships."
+msgstr ""
+"Die \"battle station\" ist ein großes Schiff mit vielen defensiven "
+"Merkmalen. Kleinere Schiffe können an sie andocken."
+
+#: scripts/shiptemplates/OLD.lua:390
+msgctxt "playerShip"
+msgid "Ender"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:459
+msgctxt "ship"
+msgid "Weapons platform"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:461
+msgid ""
+"The weapons-platform is a stationary platform with beam-weapons. It's "
+"extremely slow to turn, but it's beam weapons do a huge amount of damage."
+msgstr ""
+"Diese Waffenplattform ist eine stationäre Plattform mit Laserwaffen. Sie "
+"dreht sich nur extrem langsam, aber ihre Laserwaffen verursachen extrem viel "
+"Schaden."
+
+#: scripts/shiptemplates/OLD.lua:474
+msgctxt "ship"
+msgid "Blockade Runner"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:474
+msgctxt "subclass"
+msgid "High Punch"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:476
+msgid ""
+"Blockade runner is a reasonably fast, high shield, slow on weapons ship "
+"designed to break through defense lines and deliver goods."
+msgstr ""
+"Die Blockade Runner ist ein relativ schnelles Schiff mit starken Schilden "
+"und langsamen Waffen, das entwickelt wurde um durch Verteidigungslinien u "
+"brechen und Versorgungsgüter zu liefern."
 
 #: scripts/shiptemplates/starFighters.lua:13
 msgctxt "ship"
@@ -4873,12 +4938,12 @@ msgctxt "commsShipAssist"
 msgid "WP %d"
 msgstr "WP %d"
 
-#: scripts/comms_station.lua:69
+#: scripts/comms_station.lua:73
 msgctxt "commsStation"
 msgid "We are under attack! No time for chatting!"
 msgstr "Wir werden angegriffen! Keine Zeit zu plaudern!"
 
-#: scripts/comms_station.lua:87
+#: scripts/comms_station.lua:91
 #, lua-format
 msgctxt "commsStation"
 msgid ""
@@ -4888,84 +4953,84 @@ msgstr ""
 "Guten Tag! Willkommen bei %s.\n"
 "Was kömmem wir für sie tun?"
 
-#: scripts/comms_station.lua:89
+#: scripts/comms_station.lua:93
 #, lua-format
 msgctxt "commsStation"
 msgid "Welcome to our lovely station %s."
 msgstr "Willkommen auf unserer wundervollen Station %s."
 
-#: scripts/comms_station.lua:94
+#: scripts/comms_station.lua:98
 msgctxt "commsStation"
 msgid "Do you have spare homing missiles for us?"
-msgstr "Haben Sie Lenkraketen für uns?"
+msgstr "Haben Sie Zielsuchraketen für uns?"
 
-#: scripts/comms_station.lua:95
+#: scripts/comms_station.lua:99
 msgctxt "commsStation"
 msgid "Can you restock us with HVLI?"
 msgstr "Können sie unsere HGBIs wieder auffüllen?"
 
-#: scripts/comms_station.lua:96
+#: scripts/comms_station.lua:100
 msgctxt "commsStation"
 msgid "Please re-stock our mines."
 msgstr "Bitte füllen Sie unsere Minen wieder auf."
 
-#: scripts/comms_station.lua:97
+#: scripts/comms_station.lua:101
 msgctxt "commsStation"
 msgid "Can you supply us with some nukes?"
 msgstr "Können Sie unsere Nukes wieder auffüllen?"
 
-#: scripts/comms_station.lua:98
+#: scripts/comms_station.lua:102
 msgctxt "commsStation"
 msgid "Please re-stock our EMP missiles."
 msgstr "Bitte füllen Sie unsere EMPs wieder auf."
 
-#: scripts/comms_station.lua:104
+#: scripts/comms_station.lua:108
 #, lua-format
 msgctxt "commsStation"
 msgid "%s (%d rep each)"
 msgstr "%s (%d Ruf jeweils)"
 
-#: scripts/comms_station.lua:120
+#: scripts/comms_station.lua:124
 msgctxt "commsStation"
 msgid "You need to stay docked for that action."
 msgstr "Für diese Aktion müssen Sie angedockt bleiben."
 
-#: scripts/comms_station.lua:127
+#: scripts/comms_station.lua:131
 msgctxt "commsStation"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Wir handeln nicht mit Massenvernichtungswaffen."
 
-#: scripts/comms_station.lua:129
+#: scripts/comms_station.lua:133
 msgctxt "commsStation"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Wir handen nicht mit Störwaffen."
 
-#: scripts/comms_station.lua:131
+#: scripts/comms_station.lua:135
 msgctxt "commsStation"
 msgid "We do not deal in those weapons."
 msgstr "Mit dieser Art Waffen handeln wir nicht."
 
-#: scripts/comms_station.lua:142
+#: scripts/comms_station.lua:146
 msgctxt "commsStation"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Alle Nukes sind geladen."
 
-#: scripts/comms_station.lua:144
+#: scripts/comms_station.lua:148
 msgctxt "commsStation"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr "Es tut mir leid, aber dieser Vorrat ist bereits randvoll."
 
-#: scripts/comms_station.lua:150
+#: scripts/comms_station.lua:154
 msgctxt "commsStation"
 msgid "Not enough reputation."
 msgstr "Nicht genug Ruf."
 
-#: scripts/comms_station.lua:156
+#: scripts/comms_station.lua:160
 msgctxt "commsStation"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Sie sind voll aufgestockt und bereit Dinge in die Luft zu sprengen."
 
-#: scripts/comms_station.lua:158
+#: scripts/comms_station.lua:162
 msgctxt "commsStation"
 msgid ""
 "We generously resupplied you with some weapon charges.\n"
@@ -4974,7 +5039,7 @@ msgstr ""
 "Wir haben ihren Munitionsvorrat entsprechend aufgefüllt.\n"
 "Setzen Sie die Geschosse weise ein."
 
-#: scripts/comms_station.lua:172
+#: scripts/comms_station.lua:176
 #, lua-format
 msgctxt "commsStation"
 msgid ""
@@ -4984,7 +5049,7 @@ msgstr ""
 "Guten Tag, hier spricht %s.\n"
 "Wenn Sie Vorräte benötigen, docken Sie bitte bei uns an."
 
-#: scripts/comms_station.lua:174
+#: scripts/comms_station.lua:178
 #, lua-format
 msgctxt "commsStation"
 msgid ""
@@ -4994,58 +5059,93 @@ msgstr ""
 "Guten Tag, hier spricht %s.\n"
 "Wenn Sie mit uns Geschäfte machen wollen, docken Sie bitte bei uns an."
 
-#: scripts/comms_station.lua:181
+#: scripts/comms_station.lua:185
 #, lua-format
 msgctxt "commsStation"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr "Können Sie uns eine Munitionslieferung schicken?  (%d rep)"
 
-#: scripts/comms_station.lua:190
+#: scripts/comms_station.lua:194
 #, lua-format
 msgctxt "commsStation"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Bitte senden Sie Verstärkung! (%d rep)"
 
-#: scripts/comms_station.lua:205
+#: scripts/comms_station.lua:209
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Sie müssen einen Wegpunkt setzen, bevor Sie eine Lieferung anfordern können."
 
-#: scripts/comms_station.lua:207
+#: scripts/comms_station.lua:211
 msgctxt "commsStation"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "An welchen Wegpunkt sollen wir die Lieferung schicken?"
 
-#: scripts/comms_station.lua:220
+#: scripts/comms_station.lua:224
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched a supply ship toward %s."
 msgstr "Wir haben ein Versorgungsschiff nach %s geschickt."
 
-#: scripts/comms_station.lua:222 scripts/comms_station.lua:251
+#: scripts/comms_station.lua:226 scripts/comms_station.lua:286
 msgctxt "commsStation"
 msgid "Not enough reputation!"
 msgstr "Nicht genug Ruf!"
 
-#: scripts/comms_station.lua:239
+#: scripts/comms_station.lua:242
+msgctxt "commsStation"
+msgid "What kind of reinforcement ship would you like?"
+msgstr ""
+
+#: scripts/comms_station.lua:243
+#, lua-format
+msgctxt "commsStation"
+msgid "Adder MK3 (%d rep)"
+msgstr ""
+
+#: scripts/comms_station.lua:247
+#, lua-format
+msgctxt "commsStation"
+msgid "MU52 Hornet (%d rep)"
+msgstr ""
+
+#: scripts/comms_station.lua:251
+#, lua-format
+msgctxt "commsStation"
+msgid "Standard Adder MK5 (%d rep)"
+msgstr ""
+
+#: scripts/comms_station.lua:255
+#, lua-format
+msgctxt "commsStation"
+msgid "Adder MK8 (%d rep)"
+msgstr ""
+
+#: scripts/comms_station.lua:259
+#, lua-format
+msgctxt "commsStation"
+msgid "Phobos T3 (%d rep)"
+msgstr ""
+
+#: scripts/comms_station.lua:267
 msgctxt "commsStation"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr ""
 "Sie müssen einen Wegpunkt setzen, bevor Sie Verstärkung anfordern können."
 
-#: scripts/comms_station.lua:241
+#: scripts/comms_station.lua:269
 msgctxt "commsStation"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "Zu welchem Wegpunkt sollen wir die Verstärkung schicken?"
 
-#: scripts/comms_station.lua:249
+#: scripts/comms_station.lua:284
 #, lua-format
 msgctxt "commsStation"
 msgid "We have dispatched %s to assist at %s."
 msgstr "Wir haben %s ausgeschickt um  bei %s zu unterstützen."
 
-#: scripts/comms_station.lua:320
+#: scripts/comms_station.lua:355
 #, lua-format
 msgctxt "commsStation"
 msgid "WP %d"
@@ -5442,11 +5542,11 @@ msgstr ""
 "Asteroiden sind kleinere Himmelskörper, üblicherweise nur wenige Kilometer "
 "groß - größere Varianten werden manchmal als Planetoiden bezeichnet."
 
-#: scripts/science_db.lua:8
+#: scripts/science_db.lua:9
 msgid "Nebula"
 msgstr "Nebel"
 
-#: scripts/science_db.lua:9
+#: scripts/science_db.lua:10
 msgid ""
 "Nebulae are the birthing places of new stars. These gas fields, usually "
 "created by the death of an old star, slowly form new stars due to the "
@@ -5462,11 +5562,11 @@ msgstr ""
 "sind daher dazu angehalten, sich auf Sonden und visuelle Beobachtungen zu "
 "verlassen."
 
-#: scripts/science_db.lua:11
+#: scripts/science_db.lua:12
 msgid "Black hole"
 msgstr "Schwarzes Loch"
 
-#: scripts/science_db.lua:12
+#: scripts/science_db.lua:13
 msgid ""
 "A black hole is a point of supercondensed mass with a gravitational pull so "
 "powerful that not even light can escape it. It has no locally detectable "
@@ -5493,11 +5593,11 @@ msgstr ""
 "den Ereignishorizont gezogen und durch die Gezeitenkräfte "
 "auseinandergerissen."
 
-#: scripts/science_db.lua:16
+#: scripts/science_db.lua:18
 msgid "Wormhole"
 msgstr "Wurmloch"
 
-#: scripts/science_db.lua:17
+#: scripts/science_db.lua:19
 msgid ""
 "A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that "
 "connects two points of spacetime. Jump drives operate in a similar fashion, "
@@ -5526,11 +5626,11 @@ msgstr ""
 "Signalverzerrungen auf den Sensoren, wodurch ein guter Wissenschaftsoffizier "
 "in der Lage ist, sie auch durch Störquellen wie Nebel hindurch aufzuspüren."
 
-#: scripts/science_db.lua:21
+#: scripts/science_db.lua:24
 msgid "Weapons"
 msgstr "Waffen"
 
-#: scripts/science_db.lua:22
+#: scripts/science_db.lua:25
 msgid ""
 "This database only covers the basic versions of the missiles used throughout "
 "the galaxy.\n"
@@ -5559,20 +5659,20 @@ msgstr ""
 "Verglichen mit der Standard-Variante verursachen Sie nur halben Schaden, "
 "aber was nützt eine große Rakete wenn sie ihr Ziel verfehlt?"
 
-#: scripts/science_db.lua:28
+#: scripts/science_db.lua:31
 msgid "Homing missile"
 msgstr "Zielsuchrakete"
 
-#: scripts/science_db.lua:29 scripts/science_db.lua:34
-#: scripts/science_db.lua:53 scripts/science_db.lua:60
+#: scripts/science_db.lua:32 scripts/science_db.lua:37
+#: scripts/science_db.lua:56 scripts/science_db.lua:63
 msgid "Range"
 msgstr "Reichweite"
 
-#: scripts/science_db.lua:30 scripts/science_db.lua:61
+#: scripts/science_db.lua:33 scripts/science_db.lua:64
 msgid "Damage"
 msgstr "Schaden"
 
-#: scripts/science_db.lua:31
+#: scripts/science_db.lua:34
 msgid ""
 "This target-seeking missile is the workhorse of many space combat arsenals. "
 "It's compact enough to be fitted on frigates, and packs enough punch to be "
@@ -5583,26 +5683,26 @@ msgstr ""
 "genug um auch auf größeren Schiffen genutzt zu werden, wobei sie dort "
 "üblicherweise mit mehr als einem Waffenschacht benutzt werden."
 
-#: scripts/science_db.lua:33
+#: scripts/science_db.lua:36
 msgid "Nuke"
 msgstr "Nuke"
 
-#: scripts/science_db.lua:35 scripts/science_db.lua:45
-#: scripts/science_db.lua:54
+#: scripts/science_db.lua:38 scripts/science_db.lua:48
+#: scripts/science_db.lua:57
 msgid "Blast radius"
 msgstr "Explosionsradius"
 
-#: scripts/science_db.lua:36 scripts/science_db.lua:46
-#: scripts/science_db.lua:55
+#: scripts/science_db.lua:39 scripts/science_db.lua:49
+#: scripts/science_db.lua:58
 msgid "Damage at center"
 msgstr "Schaden im Zentrum"
 
-#: scripts/science_db.lua:37 scripts/science_db.lua:47
-#: scripts/science_db.lua:56
+#: scripts/science_db.lua:40 scripts/science_db.lua:50
+#: scripts/science_db.lua:59
 msgid "Damage at edge"
 msgstr "Schaden am Rand"
 
-#: scripts/science_db.lua:38
+#: scripts/science_db.lua:41
 msgid ""
 "A nuclear missile is similar to a homing missile in that it can seek a "
 "target, but it moves and turns more slowly and explodes a greatly increased "
@@ -5627,19 +5727,19 @@ msgstr ""
 "welcher Schaden entstanden ist, und ob Schilde oder Panzerung wirklich "
 "genügend Schutz bieten."
 
-#: scripts/science_db.lua:42
+#: scripts/science_db.lua:45
 msgid "Mine"
 msgstr "Mine"
 
-#: scripts/science_db.lua:43
+#: scripts/science_db.lua:46
 msgid "Drop distance"
 msgstr "Abwurf-Weite"
 
-#: scripts/science_db.lua:44
+#: scripts/science_db.lua:47
 msgid "Trigger distance"
 msgstr "Auslöse-Distanz"
 
-#: scripts/science_db.lua:48
+#: scripts/science_db.lua:51
 msgid ""
 "Mines are often placed in defensive perimeters around stations. There are "
 "also old minefields scattered around the galaxy from older wars.\n"
@@ -5655,11 +5755,11 @@ msgstr ""
 "verzögerte Explosion und der grosse Explosionsradius machen dies zu einem "
 "sehr riskanten Unterfangen."
 
-#: scripts/science_db.lua:52
+#: scripts/science_db.lua:55
 msgid "EMP"
 msgstr "EMP"
 
-#: scripts/science_db.lua:57
+#: scripts/science_db.lua:60
 msgid ""
 "The electromagnetic pulse missile (EMP) reproduces the disruptive effects of "
 "a nuclear explosion, but without the destructive properties. This causes it "
@@ -5678,15 +5778,15 @@ msgstr ""
 "Schilde des Zieles auszuschalten bevor sie sich nähern und es mit gezielten "
 "Schüssen der Laser kampfunfähig machen."
 
-#: scripts/science_db.lua:59
+#: scripts/science_db.lua:62
 msgid "HVLI"
 msgstr "HGBI"
 
-#: scripts/science_db.lua:62
+#: scripts/science_db.lua:65
 msgid "Burst"
 msgstr "Einzelgeschosse"
 
-#: scripts/science_db.lua:63
+#: scripts/science_db.lua:66
 msgid ""
 "A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high "
 "velocity. This weapon is usually found in simpler ships since it does not "
@@ -5705,6 +5805,37 @@ msgstr ""
 "\n"
 "Jeder Schuss mit einer HGBI ist ein Feuerstoß aus 5 Projektilen, was die "
 "Trefferchance erhöht, aber dennoch ein genaues Zielen erfordert."
+
+#~ msgctxt "button_F1"
+#~ msgid "Close"
+#~ msgstr "Schließen"
+
+#~ msgid "Select your station"
+#~ msgstr "Stations-Auswahl"
+
+#~ msgid "1 player crew/extras"
+#~ msgstr "Solo-Crew/Extras"
+
+#~ msgctxt "shipwindow"
+#~ msgid "{angle} degrees"
+#~ msgstr "{angle} Grad"
+
+#~ msgctxt "shipwindow"
+#~ msgid "0 degrees"
+#~ msgstr "0 Grad"
+
+#~ msgid "Cinematic view"
+#~ msgstr "Filmische Ansicht"
+
+#~ msgid "Incorrect control code. Re-enter code for {callsign}:"
+#~ msgstr "Falscher Zugangscode. Code für {callsign} erneut eingeben:"
+
+#~ msgid ""
+#~ "Control code accepted.\n"
+#~ "Granting access to {callsign}."
+#~ msgstr ""
+#~ "Kontrollcode akzeptiert.\n"
+#~ "Gewähre Zugang zu {callsign}."
 
 #~ msgid "Server visibility: "
 #~ msgstr "Serversichtbarkeit: "
@@ -5754,65 +5885,6 @@ msgstr ""
 
 #~ msgid "Game rules"
 #~ msgstr "Spielregeln"
-
-#~ msgid "Scan complexity: "
-#~ msgstr "Scankomplexität: "
-
-#~ msgctxt "scanning"
-#~ msgid "None (delay)"
-#~ msgstr "Keine (Wartezeit)"
-
-#~ msgctxt "scanning"
-#~ msgid "Simple"
-#~ msgstr "Einfach"
-
-#~ msgctxt "scanning"
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgctxt "scanning"
-#~ msgid "Advanced"
-#~ msgstr "Erweitert"
-
-#~ msgid "Hacking difficulty: "
-#~ msgstr "Hacking-Schwierigkeit: "
-
-#~ msgctxt "hacking"
-#~ msgid "Simple"
-#~ msgstr "Einfach"
-
-#~ msgctxt "hacking"
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgctxt "hacking"
-#~ msgid "Difficult"
-#~ msgstr "Schwierig"
-
-#~ msgctxt "hacking"
-#~ msgid "Fiendish"
-#~ msgstr "Wahnsinning"
-
-#~ msgid "Hacking type: "
-#~ msgstr "Hacking-Art: "
-
-#~ msgctxt "hacking"
-#~ msgid "Mine"
-#~ msgstr "Minen"
-
-#~ msgctxt "hacking"
-#~ msgid "Lights"
-#~ msgstr "Lichter"
-
-#~ msgctxt "hacking"
-#~ msgid "All"
-#~ msgstr "Alle"
-
-#~ msgid "Beam/shield frequencies"
-#~ msgstr "Frequenzen"
-
-#~ msgid "Per-system damage"
-#~ msgstr "Schaden pro System"
 
 #~ msgid "Variation: "
 #~ msgstr "Variante: "
