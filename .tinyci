@@ -17,14 +17,14 @@ commands =
     ninja -j 2 package
 artifacts = EmptyEpsilon.zip
 
-[build-linux]
+[build-linux-steam]
 directory = _build_native_steam
 commands =
     rm -rf script_reference.html
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSTEAMSDK=/data/steamsdk/
     ninja -j 2 package
 
-[build-win32]
+[build-win32-steam]
 directory = _build_win32_steam
 commands =
     rm -rf script_reference.html
