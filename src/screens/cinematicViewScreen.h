@@ -48,7 +48,7 @@ private:
     float tot_distance_3D;
 
 public:
-    explicit CinematicViewScreen(int playerShip = 0);
+    explicit CinematicViewScreen(RenderLayer* render_layer, int playerShip = 0);
 
     virtual void update(float delta) override;
 };

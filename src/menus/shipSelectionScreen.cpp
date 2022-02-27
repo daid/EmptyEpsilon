@@ -179,6 +179,14 @@ ShipSelectionScreen::ShipSelectionScreen()
     });
     spectator_button->setSize(GuiElement::GuiSizeMax, 50);
 
+    // Spectator view button
+    auto cinematic_button = new GuiButton(right_content, "", tr("Cinematic"), [this]() {
+        my_player_info->commandSetShipId(-1);
+        destroy();
+        new CinematicViewScreen(getRenderLayer());
+    });
+    cinematic_button->setSize(GuiElement::GuiSizeMax, 50);
+
     if (game_server)
     {
         auto extra_settings_panel = new GuiPanel(this, "");

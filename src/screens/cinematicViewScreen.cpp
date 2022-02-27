@@ -10,7 +10,8 @@
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
-CinematicViewScreen::CinematicViewScreen(int32_t playerShip /* = 0 */)
+CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t playerShip /* = 0 */)
+: GuiCanvas(render_layer)
 {
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
