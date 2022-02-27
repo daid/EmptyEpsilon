@@ -20,6 +20,7 @@ require("shiptemplates/dreadnaught.lua")
 require("shiptemplates/exuari.lua")
 require("shiptemplates/ktlitan.lua")
 require("shiptemplates/transport.lua")
+require("shiptemplates/satellites.lua")
 
 --For now, we add our old ship templates as well. These should be removed at some point.
 require("shiptemplates/OLD.lua")
