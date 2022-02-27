@@ -114,7 +114,9 @@ class DocumentationGenerator(object):
 
     def readFunctionInfo(self):
         for filename in sorted(self._files):
-            if not filename.endswith(".h"):
+            # scriptDataStorage.cpp has no header file. If we start needing this workaround for multiple files,
+            # we might want to look for a smarter solution for this
+            if not filename.endswith(".h") and not filename.endswith("scriptDataStorage.cpp"):
                 continue
             description = ""
             current_class = None
@@ -132,7 +134,7 @@ class DocumentationGenerator(object):
                         current_class = res.group(1)
                     if current_class is not None:
                         res = re.search(
-                            "^ *([a-zA-Z0-9 \:\<\>]+) +([a-zA-Z0-9]+)\(([^\)]*)\)", line
+                            "^ *([a-zA-Z0-9 \:\<\>_,]+) +([a-zA-Z0-9]+)\(([^\)]*)\)", line
                         )
                         if res != None and res.group(2) != "":
                             self._function_info.append(
