@@ -1,4 +1,4 @@
--- Name: Basic
+-- Name: Basic Battle
 -- Description: A few random stations are under attack by enemies, with random terrain around them. Destroy all enemies to win.
 ---
 --- The scenario provides a single player-controlled Atlantis, which is sufficient to win even in the "Extreme" variant.
