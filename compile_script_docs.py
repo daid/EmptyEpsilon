@@ -132,7 +132,7 @@ class DocumentationGenerator(object):
                         current_class = res.group(1)
                     if current_class is not None:
                         res = re.search(
-                            "^ *([a-zA-Z0-9 \:\<\>]+) +([a-zA-Z0-9]+)\(([^\)]*)\)", line
+                            "^ *([a-zA-Z0-9 \:\<\>_,]+) +([a-zA-Z0-9]+)\(([^\)]*)\)", line
                         )
                         if res != None and res.group(2) != "":
                             self._function_info.append(
