@@ -31,7 +31,7 @@ static sp::Font* getFont(const string& s)
         fonts[s] = nullptr;
         return nullptr;
     }
-    auto result = new sp::FreetypeFont(font_stream);
+    auto result = new sp::FreetypeFont(s, font_stream);
     fonts[s] = result;
     return result;
 }
