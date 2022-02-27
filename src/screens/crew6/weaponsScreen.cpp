@@ -123,7 +123,7 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 
 void WeaponsScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (my_spaceship && isVisible())
     {
         if (keys.weapons_enemy_next_target.getDown())
         {

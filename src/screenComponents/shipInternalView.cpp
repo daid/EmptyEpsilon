@@ -92,7 +92,7 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
 
 void GuiShipInternalView::onUpdate()
 {
-    if (my_spaceship)
+    if (my_spaceship && isVisible())
     {
         if (keys.engineering_next_repair_crew.getDown())
         {

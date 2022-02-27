@@ -83,7 +83,7 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 
 void GuiScanningDialog::onUpdate()
 {
-    if(my_spaceship)
+    if(my_spaceship && isVisible())
     {
         for(int n=0; n<max_sliders; n++)
         {

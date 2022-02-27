@@ -15,7 +15,7 @@ GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string i
 
 void GuiBeamFrequencySelector::onUpdate()
 {
-    if (my_spaceship && gameGlobalInfo->use_beam_shield_frequencies)
+    if (my_spaceship && gameGlobalInfo->use_beam_shield_frequencies && isVisible())
     {
         if (keys.weapons_beam_frequence_increase.getDown())
         {

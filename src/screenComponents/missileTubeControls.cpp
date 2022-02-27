@@ -87,7 +87,7 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
 
 void GuiMissileTubeControls::onUpdate()
 {
-    if (!my_spaceship)
+    if (!my_spaceship || !isVisible())
         return;
     for (int n = 0; n < MW_Count; n++)
     {

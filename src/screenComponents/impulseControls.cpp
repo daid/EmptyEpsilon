@@ -32,7 +32,7 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 
 void GuiImpulseControls::onUpdate()
 {
-    if (my_spaceship)
+    if (my_spaceship && isVisible())
     {
         float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
         if (change != 0.0f)

@@ -32,14 +32,17 @@ void GuiCombatManeuver::onUpdate()
 {
     setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
 
-    float strafe = keys.helms_combat_right.getValue() - keys.helms_combat_left.getValue();
-    float boost = std::max(0.0f, keys.helms_combat_boost.getValue());
-    if (strafe != 0.0f || hotkey_strafe_active)
-        setStrafeValue(strafe);
-    hotkey_strafe_active = strafe != 0.0f;
-    if (boost > 0.0f || hotkey_boost_active)
-        setBoostValue(boost);
-    hotkey_boost_active = boost > 0.0f;
+    if (isVisible())
+    {
+        float strafe = keys.helms_combat_right.getValue() - keys.helms_combat_left.getValue();
+        float boost = std::max(0.0f, keys.helms_combat_boost.getValue());
+        if (strafe != 0.0f || hotkey_strafe_active)
+            setStrafeValue(strafe);
+        hotkey_strafe_active = strafe != 0.0f;
+        if (boost > 0.0f || hotkey_boost_active)
+            setBoostValue(boost);
+        hotkey_boost_active = boost > 0.0f;
+    }
 }
 
 void GuiCombatManeuver::onDraw(sp::RenderTarget& target)

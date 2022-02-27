@@ -106,7 +106,7 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 
 void HelmsScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (my_spaceship && isVisible())
     {
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
         if (angle != 0.0f)

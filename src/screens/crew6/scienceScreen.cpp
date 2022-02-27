@@ -225,7 +225,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
     P<ScanProbe> probe;
 
-    if (!my_spaceship)
+    if (!my_spaceship || !isVisible())
         return;
 
     float view_distance = science_radar->getDistance();

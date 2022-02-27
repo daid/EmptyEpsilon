@@ -36,7 +36,7 @@ void GuiSelfDestructButton::onUpdate()
 {
     activate_button->setVisible(my_spaceship && my_spaceship->getCanSelfDestruct());
 
-    if (my_spaceship)
+    if (my_spaceship && isVisible())
     {
         if (keys.engineering_self_destruct_start.getDown() && activate_button->isVisible())
         {

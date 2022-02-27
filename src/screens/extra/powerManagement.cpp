@@ -115,7 +115,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
 void PowerManagementScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (my_spaceship && isVisible())
     {
         if (keys.engineering_select_reactor.getDown()) selected_system = SYS_Reactor;
         if (keys.engineering_select_beam_weapons.getDown()) selected_system = SYS_BeamWeapons;
