@@ -13,8 +13,8 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 # Scenario name
-msgid "Basic"
-msgstr "Basis-Szenario"
+msgid "Basic Battle"
+msgstr ""
 
 # Scenario description
 msgid ""
@@ -345,3 +345,7 @@ msgstr "Mission FEHLGESCHLAGEN (alle eigenen Schiffe zerstört)"
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr "Mission läuft. Verbleibende Zeit: %d:%02d - Feinde: %d"
+
+# Scenario name
+#~ msgid "Basic"
+#~ msgstr "Basis-Szenario"

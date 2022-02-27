@@ -15,8 +15,8 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 # Scenario name
-msgid "Basic"
-msgstr "Basic"
+msgid "Basic Battle"
+msgstr ""
 
 # Scenario description
 msgid ""
@@ -361,6 +361,10 @@ msgstr "Mission : ECHEC (tous vos vaisseaux détruits)"
 msgctxt "msgSpectbanner"
 msgid "Mission in progress - Time left: %d:%02d - Enemies: %d"
 msgstr "Mission en cours - Temps restant : %d:%02d - Ennemis : %d"
+
+# Scenario name
+#~ msgid "Basic"
+#~ msgstr "Basic"
 
 #~ msgctxt "enemies"
 #~ msgid "easy"

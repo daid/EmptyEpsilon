@@ -1,0 +1,267 @@
+#: scripts/shiptemplates/OLD.lua:6
+msgctxt "playerShip"
+msgid "Player Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:63
+msgctxt "playerShip"
+msgid "Player Missile Cr."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:118
+msgctxt "playerShip"
+msgid "Player Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:159
+msgctxt "ship"
+msgid "Tug"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:168
+msgid ""
+"The tugboat is a reliable, but small and un-armed transport ship. Due to "
+"it's low cost, it is a favourite ship to teach the ropes to fledgeling "
+"captains, without risking friendly fire."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "playerShip"
+msgid "Nautilus"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
+#: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
+msgctxt "class"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "subclass"
+msgid "Mine Layer"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:177
+msgid "Small mine laying vessel with minimal armament, shields and hull"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:223
+msgctxt "ship"
+msgid "Fighter"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:226
+msgid ""
+"Fighters are quick agile ships that do not do a lot of damage, but usually "
+"come in larger groups. They are easy to take out, but should not be "
+"underestimated."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:239
+msgctxt "ship"
+msgid "Karnack"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:239
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:241
+msgid ""
+"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
+"found wide adaptation in most factions. Most factions have extensively "
+"retrofitted these ships to suit their combat doctrines. Because it's an "
+"older model, most factions have been selling stripped versions. This "
+"practice has led to this ship becoming an all time favorite with smugglers "
+"and other civilian parties. However, they have used it's adaptable nature to "
+"re-fit them with (illegal) weaponry."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:253
+msgctxt "ship"
+msgid "Karnack MK2"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:254
+msgid ""
+"Fabricated by: Repulse shipyards. The successor to the widely successful "
+"mark I Karnack cruiser. This ship has several notable improvements over the "
+"original ship, including better armor, slightly improved weaponry and "
+"customization by the shipyards. The latter improvement was the most "
+"requested feature by several factions once they realized that their old "
+"surplus mark I ships were used for less savory purposes."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:264
+msgctxt "ship"
+msgid "Missile Cruiser"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:264
+msgctxt "subclass"
+msgid "Cruiser: Missile"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:266
+msgid ""
+"Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
+"missile cruiser is a long range missile firing platform. It cannot handle a "
+"lot of damage, but can do a lot of damage if not dealt with properly."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:275
+msgctxt "ship"
+msgid "Gunship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:275
+msgctxt "subclass"
+msgid "Gunship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:277
+msgid ""
+"The gunship is a ship equipped with a homing missile tube to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:288
+msgctxt "ship"
+msgid "Adv. Gunship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:289
+msgid ""
+"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:293
+msgctxt "ship"
+msgid "Strikeship"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:293 scripts/shiptemplates/OLD.lua:305
+#: scripts/shiptemplates/OLD.lua:387
+msgctxt "class"
+msgid "Starfighter"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:293
+msgctxt "subclass"
+msgid "Strike"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:295
+msgid ""
+"The Strikeship is a warp-drive equipped fighter build for quick strikes, "
+"it's fast, it's agile, but does not do an extreme amount of damage, and "
+"lacks in rear shields."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:305
+msgctxt "ship"
+msgid "Adv. Striker"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:305
+msgctxt "subclass"
+msgid "Patrol"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:307
+msgid ""
+"The Advanced Striker is a jump-drive equipped fighter build for quick "
+"strikes, it's slow but very agile, but does not do an extreme amount of "
+"damage, and lacks in shields. However, due to the jump drive, it's quick to "
+"get into the action."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:316
+msgctxt "playerShip"
+msgid "Striker"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:317
+msgid ""
+"The Striker is the predecessor to the advanced striker, slow but agile, but "
+"does not do an extreme amount of damage, and lacks in shields"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:352
+msgctxt "ship"
+msgid "Dreadnought"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:352 scripts/shiptemplates/OLD.lua:367
+msgctxt "class"
+msgid "Dreadnought"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:352
+msgctxt "subclass"
+msgid "Assault"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:354
+msgid ""
+"The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
+"huge amount of beam weapons in the front. Taking it head-on is suicide."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:367
+msgctxt "ship"
+msgid "Battlestation"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:367
+msgctxt "subclass"
+msgid "Battlecruiser"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:369
+msgid ""
+"The battle station is a huge ship with many defensive features. It can be "
+"docked by smaller ships."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:387
+msgctxt "class"
+msgid "Corvette"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:390
+msgctxt "playerShip"
+msgid "Ender"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:459
+msgctxt "ship"
+msgid "Weapons platform"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:461
+msgid ""
+"The weapons-platform is a stationary platform with beam-weapons. It's "
+"extremely slow to turn, but it's beam weapons do a huge amount of damage."
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:474
+msgctxt "ship"
+msgid "Blockade Runner"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:474
+msgctxt "subclass"
+msgid "High Punch"
+msgstr ""
+
+#: scripts/shiptemplates/OLD.lua:476
+msgid ""
+"Blockade runner is a reasonably fast, high shield, slow on weapons ship "
+"designed to break through defense lines and deliver goods."
+msgstr ""

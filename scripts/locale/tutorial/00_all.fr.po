@@ -14,6 +14,14 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 
+# Scenario name
+msgid "Run All"
+msgstr ""
+
+# Scenario description
+msgid "All Station Tutorials. This cycles through all the stations."
+msgstr ""
+
 #: scripts/tutorial/00_all.lua:28
 msgid ""
 "This is the main screen, which displays your ship and the surrounding "
@@ -977,20 +985,19 @@ msgstr ""
 "Bien que nous ayons couvert les bases, il existe des fonctionnalités plus "
 "avancées dans le jeu que vous pourrez découvrir en cours de partie."
 
-#: scripts/tutorialUtils.lua:6
-msgid ""
-"Welcome to the EmptyEpsilon tutorial.\n"
-"Note that this tutorial is designed to give you a quick overview of the "
-"basic options for the game, but does not cover every single aspect.\n"
-"\n"
-"Press next to continue..."
-msgstr ""
-"Bienvenue dans le tutoriel EmptyEpsilon,\n"
-"\n"
-"Notez que ce tutoriel est conçu pour vous donner un aperçu rapide des "
-"options de base du jeu, mais qu'il n'en couvre pas tous les aspects.\n"
-"\n"
-"Appuyez sur suivant pour continuer..."
+#~ msgid ""
+#~ "Welcome to the EmptyEpsilon tutorial.\n"
+#~ "Note that this tutorial is designed to give you a quick overview of the "
+#~ "basic options for the game, but does not cover every single aspect.\n"
+#~ "\n"
+#~ "Press next to continue..."
+#~ msgstr ""
+#~ "Bienvenue dans le tutoriel EmptyEpsilon,\n"
+#~ "\n"
+#~ "Notez que ce tutoriel est conçu pour vous donner un aperçu rapide des "
+#~ "options de base du jeu, mais qu'il n'en couvre pas tous les aspects.\n"
+#~ "\n"
+#~ "Appuyez sur suivant pour continuer..."
 
 #~ msgid ""
 #~ "This concludes main screen and radar tutorial. While we have covered the "

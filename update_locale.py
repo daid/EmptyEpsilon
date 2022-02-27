@@ -16,7 +16,7 @@ def update_other_languages(base):
 
 
 os.makedirs("scripts/locale", exist_ok=True)
-for script in glob.glob("scripts/*.lua", recursive=True):
+for script in glob.glob("scripts/**/*.lua", recursive=True):
     output = script.replace(".lua", ".en.po").replace("scripts/", "scripts/locale/")
     info = {}
     key = None

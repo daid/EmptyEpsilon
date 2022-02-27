@@ -1,5 +1,5 @@
 # Scenario name
-msgid "Basic"
+msgid "Basic Battle"
 msgstr ""
 
 # Scenario description

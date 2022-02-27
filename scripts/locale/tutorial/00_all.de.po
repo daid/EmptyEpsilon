@@ -12,6 +12,14 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# Scenario name
+msgid "Run All"
+msgstr ""
+
+# Scenario description
+msgid "All Station Tutorials. This cycles through all the stations."
+msgstr ""
+
 #: scripts/tutorial/00_all.lua:28
 msgid ""
 "This is the main screen, which displays your ship and the surrounding "
@@ -880,19 +888,18 @@ msgstr ""
 "das Spiel auch noch erweiterte Funktionen bereit, welche du nach und nach "
 "entdecken wirst."
 
-#: scripts/tutorialUtils.lua:6
-msgid ""
-"Welcome to the EmptyEpsilon tutorial.\n"
-"Note that this tutorial is designed to give you a quick overview of the "
-"basic options for the game, but does not cover every single aspect.\n"
-"\n"
-"Press next to continue..."
-msgstr ""
-"Willkommen zum EmptyEpsilon-Tutorial\n"
-"Dieses Tutorial gibt dir einen kurzen Überblick über die Grundlagen des "
-"Spiels, deckt allerdings nicht jeden einzelnen Aspekt ab.\n"
-"\n"
-"Drücke \"weiter\" um fortzusetzen..."
+#~ msgid ""
+#~ "Welcome to the EmptyEpsilon tutorial.\n"
+#~ "Note that this tutorial is designed to give you a quick overview of the "
+#~ "basic options for the game, but does not cover every single aspect.\n"
+#~ "\n"
+#~ "Press next to continue..."
+#~ msgstr ""
+#~ "Willkommen zum EmptyEpsilon-Tutorial\n"
+#~ "Dieses Tutorial gibt dir einen kurzen Überblick über die Grundlagen des "
+#~ "Spiels, deckt allerdings nicht jeden einzelnen Aspekt ab.\n"
+#~ "\n"
+#~ "Drücke \"weiter\" um fortzusetzen..."
 
 #~ msgid ""
 #~ "This concludes main screen and radar tutorial. While we have covered the "

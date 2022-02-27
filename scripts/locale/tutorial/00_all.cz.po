@@ -12,6 +12,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
+# Scenario name
+msgid "Run All"
+msgstr ""
+
+# Scenario description
+msgid "All Station Tutorials. This cycles through all the stations."
+msgstr ""
+
 #: scripts/tutorial/00_all.lua:28
 msgid ""
 "This is the main screen, which displays your ship and the surrounding "
@@ -840,19 +848,18 @@ msgstr ""
 "Tímto zakončujeme výuku. I když jsme probrali jen základy, ve hře je více "
 "pokročilejších funkcí, které můžete ještě objevit."
 
-#: scripts/tutorialUtils.lua:6
-msgid ""
-"Welcome to the EmptyEpsilon tutorial.\n"
-"Note that this tutorial is designed to give you a quick overview of the "
-"basic options for the game, but does not cover every single aspect.\n"
-"\n"
-"Press next to continue..."
-msgstr ""
-"Vítejte ve výuce EmptyEpsilon.\n"
-"Mějte na paměti, že tato výuka vás má v rychlosti seznámit se základními "
-"možnostmi hry, ale nepokrývá úplně všechny aspekty hry.\n"
-"\n"
-"Stiskněte další pro pokračování..."
+#~ msgid ""
+#~ "Welcome to the EmptyEpsilon tutorial.\n"
+#~ "Note that this tutorial is designed to give you a quick overview of the "
+#~ "basic options for the game, but does not cover every single aspect.\n"
+#~ "\n"
+#~ "Press next to continue..."
+#~ msgstr ""
+#~ "Vítejte ve výuce EmptyEpsilon.\n"
+#~ "Mějte na paměti, že tato výuka vás má v rychlosti seznámit se základními "
+#~ "možnostmi hry, ale nepokrývá úplně všechny aspekty hry.\n"
+#~ "\n"
+#~ "Stiskněte další pro pokračování..."
 
 #~ msgid ""
 #~ "This concludes main screen and radar tutorial. While we have covered the "

@@ -1,0 +1,16 @@
+#: scripts/shiptemplates/satellites.lua:1
+msgctxt "class"
+msgid "Satellites"
+msgstr ""
+
+#: scripts/shiptemplates/satellites.lua:1
+msgctxt "subclass"
+msgid "Sentry Series"
+msgstr ""
+
+#: scripts/shiptemplates/satellites.lua:2
+msgid ""
+"Military satellite from the old days, back when the earth's population was "
+"much more divided than today. Its original purpose was probably to take out "
+"other satellites."
+msgstr ""
