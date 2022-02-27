@@ -114,7 +114,9 @@ class DocumentationGenerator(object):
 
     def readFunctionInfo(self):
         for filename in sorted(self._files):
-            if not filename.endswith(".h"):
+            # scriptDataStorage.cpp has no header file. If we start needing this workaround for multiple files,
+            # we might want to look for a smarter solution for this
+            if not filename.endswith(".h") and not filename.endswith("scriptDataStorage.cpp"):
                 continue
             description = ""
             current_class = None
