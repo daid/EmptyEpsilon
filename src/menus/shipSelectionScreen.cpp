@@ -489,8 +489,10 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     });
     topdown_button->setSize(GuiElement::GuiSizeMax, 50);
 
-    auto cancel_button = new GuiButton(this, "CANCEL", tr("button", "Cancel"), on_cancel);
-    cancel_button->setSize(300, 50)->setPosition(100, -25, sp::Alignment::BottomLeft);
+    if (on_cancel) {
+        auto cancel_button = new GuiButton(this, "CANCEL", tr("button", "Cancel"), on_cancel);
+        cancel_button->setSize(300, 50)->setPosition(100, -25, sp::Alignment::BottomLeft);
+    }
 
     ready_button = new GuiButton(this, "READY", tr("button", "Ready"), on_ready);
     ready_button->setSize(300, 50)->setPosition(-100, -25, sp::Alignment::BottomRight);
@@ -590,9 +592,7 @@ SecondMonitorScreen::SecondMonitorScreen(int monitor_index)
 void SecondMonitorScreen::update(float delta)
 {
     if (!crew_position_selection && my_player_info && my_spaceship) {
-        crew_position_selection = new CrewPositionSelection(this, "", monitor_index, [](){
-            //cancel?
-        }, [this](){
+        crew_position_selection = new CrewPositionSelection(this, "", monitor_index, nullptr, [this](){
             crew_position_selection->spawnUI(getRenderLayer());
             destroy();
         });
