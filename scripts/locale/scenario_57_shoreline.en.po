@@ -1,0 +1,15 @@
+# Scenario name
+msgid "Shoreline Version 2"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Waves of increasingly difficult enemies. Warp capable ship is strongly "
+"suggested. At least one required mission and several optional missions. "
+"Missions selected at random unless game master intervenes\n"
+"\n"
+"Maximum of 8 player ships supported by scenario. More player ships may "
+"experience strange results\n"
+"\n"
+"Version 2"
+msgstr ""

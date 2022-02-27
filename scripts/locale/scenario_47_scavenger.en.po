@@ -1,0 +1,10 @@
+# Scenario name
+msgid "Scurvy Scavenger"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Stay alive while scavenging treasures. Length: > 2 hours\n"
+"\n"
+"Version 0"
+msgstr ""

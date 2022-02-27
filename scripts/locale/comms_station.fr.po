@@ -13,2926 +13,2451 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/scienceDatabase.cpp:300
-msgctxt "database direction"
-msgid "Front"
-msgstr "Avant"
-
-#: src/scienceDatabase.cpp:302
-msgctxt "database direction"
-msgid "Right"
-msgstr "Droite"
-
-#: src/scienceDatabase.cpp:304
-msgctxt "database direction"
-msgid "Left"
-msgstr "Gauche"
-
-#: src/scienceDatabase.cpp:306
-msgctxt "database direction"
-msgid "Rear"
-msgstr "Arrière"
-
-#: src/scienceDatabase.cpp:327
-msgctxt "database"
-msgid "Factions"
-msgstr "Factions"
-
-#: src/scienceDatabase.cpp:339 src/scienceDatabase.cpp:342
-msgctxt "stance"
-msgid "Neutral"
-msgstr "Neutre"
-
-#: src/scienceDatabase.cpp:343
-msgctxt "stance"
-msgid "Enemy"
-msgstr "Ennemi"
-
-#: src/scienceDatabase.cpp:344
-msgctxt "stance"
-msgid "Friendly"
-msgstr "Amical"
-
-#: src/scienceDatabase.cpp:352
-msgctxt "database"
-msgid "Ships"
-msgstr "Vaisseaux"
-
-#: src/scienceDatabase.cpp:391
-msgctxt "database"
-msgid "Class"
-msgstr "Classe"
-
-#: src/scienceDatabase.cpp:392
-msgctxt "database"
-msgid "Sub-class"
-msgstr "Sous-classe"
-
-#: src/scienceDatabase.cpp:393
-msgctxt "database"
-msgid "Size"
-msgstr "Taille"
-
-#: src/scienceDatabase.cpp:403
-msgctxt "database"
-msgid "Shield"
-msgstr "Boucliers"
-
-#: src/scienceDatabase.cpp:405
-msgid "Hull"
-msgstr "Coque"
-
-#: src/scienceDatabase.cpp:409
-msgctxt "database"
-msgid "Move speed"
-msgstr "Vit. de mouvement"
-
-#: src/scienceDatabase.cpp:410
-msgctxt "database"
-msgid "Reverse move speed"
-msgstr "Vit. inversion mvt :"
-
-#: src/scienceDatabase.cpp:413
-msgctxt "database"
-msgid "Turn speed"
-msgstr "Vit. de rotation"
-
-#: src/scienceDatabase.cpp:417
-msgctxt "database"
-msgid "Warp speed"
-msgstr "Vitesse lumière"
-
-#: src/scienceDatabase.cpp:421
-msgctxt "database"
-msgid "Jump range"
-msgstr "Portée de saut"
-
-#: src/scienceDatabase.cpp:428
-msgid "{direction} beam weapon"
-msgstr "Faisceau {direction}"
-
-#: src/scienceDatabase.cpp:429
-msgctxt "database"
-msgid "{damage} Dmg / {interval} sec"
-msgstr "{damage} Dmg / {interval} sec"
-
-#: src/scienceDatabase.cpp:438
-msgctxt "database"
-msgid "{direction} tube"
-msgstr "Tube {direction}"
-
-#: src/scienceDatabase.cpp:441
-msgctxt "database"
-msgid "{direction} small tube"
-msgstr "Petit tube {direction}"
-
-#: src/scienceDatabase.cpp:445
-msgctxt "database"
-msgid "{direction} large tube"
-msgstr "Grand tube {direction}"
-
-#: src/scienceDatabase.cpp:449
-msgctxt "database"
-msgid "{loadtime} sec"
-msgstr "{loadtime} sec"
-
-#: src/scienceDatabase.cpp:456
-msgid "Storage {weapon}"
-msgstr "Stockage {weapon}"
-
-#: src/playerInfo.cpp:251
-msgctxt "station"
-msgid "Helms"
-msgstr "Navigation"
-
-#: src/playerInfo.cpp:252
-msgctxt "station"
-msgid "Weapons"
-msgstr "Armement"
-
-#: src/playerInfo.cpp:253
-msgctxt "station"
-msgid "Engineering"
-msgstr "Ingénierie"
-
-#: src/playerInfo.cpp:254
-msgctxt "station"
-msgid "Science"
-msgstr "Science"
-
-#: src/playerInfo.cpp:255
-msgctxt "station"
-msgid "Relay"
-msgstr "Communications"
-
-#: src/playerInfo.cpp:256
-msgctxt "station"
-msgid "Tactical"
-msgstr "Radar tactique"
-
-#: src/playerInfo.cpp:257
-msgctxt "station"
-msgid "Engineering+"
-msgstr "Ingénierie+"
-
-#: src/playerInfo.cpp:258
-msgctxt "station"
-msgid "Operations"
-msgstr "Opérations"
-
-#: src/playerInfo.cpp:259
-msgctxt "station"
-msgid "Single Pilot"
-msgstr "Pilotage - armement"
-
-#: src/playerInfo.cpp:260
-msgctxt "station"
-msgid "Damage Control"
-msgstr "Réparation systèmes"
-
-#: src/playerInfo.cpp:261
-msgctxt "station"
-msgid "Power Management"
-msgstr "Gestion puissance"
-
-#: src/playerInfo.cpp:262
-msgctxt "station"
-msgid "Database"
-msgstr "Base de données"
-
-#: src/playerInfo.cpp:263
-msgctxt "station"
-msgid "Strategic Map"
-msgstr "Carte tactique"
-
-#: src/playerInfo.cpp:264
-msgctxt "station"
-msgid "Comms"
-msgstr "Communications"
-
-#: src/playerInfo.cpp:265
-msgctxt "station"
-msgid "Ship's Log"
-msgstr "Journal de bord"
-
-#: src/shipTemplate.cpp:137
-msgid "No class"
-msgstr "Sans classe"
-
-#: src/shipTemplate.cpp:138
-msgid "No sub-class"
-msgstr "Sans sous-classe"
-
-#: src/shipTemplate.cpp:396
-msgctxt "system"
-msgid "Reactor"
-msgstr "Réacteur"
-
-#: src/shipTemplate.cpp:397
-msgctxt "system"
-msgid "Beam Weapons"
-msgstr "Faisceaux laser"
-
-#: src/shipTemplate.cpp:398
-msgctxt "system"
-msgid "Missile System"
-msgstr "Système de missiles"
-
-#: src/shipTemplate.cpp:399
-msgctxt "system"
-msgid "Maneuvering"
-msgstr "Manoeuvre"
-
-#: src/shipTemplate.cpp:400
-msgctxt "system"
-msgid "Impulse Engines"
-msgstr "Moteurs à impulsion"
-
-#: src/shipTemplate.cpp:401
-msgctxt "system"
-msgid "Warp Drive"
-msgstr "Vitesse lumière"
-
-#: src/shipTemplate.cpp:402
-msgctxt "system"
-msgid "Jump Drive"
-msgstr "Téléportation"
-
-#: src/shipTemplate.cpp:403
-msgctxt "system"
-msgid "Front Shield Generator"
-msgstr "Boucliers avant"
-
-#: src/shipTemplate.cpp:404
-msgctxt "system"
-msgid "Rear Shield Generator"
-msgstr "Boucliers arrière"
-
-#: src/scenarioInfo.cpp:103 src/scenarioInfo.cpp:104
-msgid "setting"
-msgstr "Réglage"
-
-#: src/tutorialGame.cpp:97
-msgid "Next"
-msgstr "Suivant"
-
-#: src/tutorialGame.cpp:104
-msgid "Reset"
-msgstr "Réinitialiser"
-
-#: src/menus/joinServerMenu.cpp:18
-msgctxt "connectserver"
-msgid "Connecting..."
-msgstr "Connexion en cours..."
-
-#: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:44
-#: src/menus/shipSelectionScreen.cpp:492 src/screens/gm/gameMasterScreen.cpp:93
-#: src/screens/gm/objectCreationView.cpp:136
-#: src/screens/gm/globalMessageEntryView.cpp:19
-#: src/screenComponents/selfDestructButton.cpp:25
-#: src/screenComponents/commsOverlay.cpp:25
-#: src/screenComponents/scanningDialog.cpp:36
-msgctxt "button"
-msgid "Cancel"
-msgstr "Annuler"
-
-#: src/menus/joinServerMenu.cpp:65
-msgid "Please enter the server password:"
-msgstr "Veuillez saisir le mot de passe du serveur :"
-
-#: src/menus/serverBrowseMenu.cpp:22
-msgctxt "game_client_disconnect_reason"
-msgid "still connected"
-msgstr "Toujours connecté"
-
-#: src/menus/serverBrowseMenu.cpp:24
-msgctxt "game_client_disconnect_reason"
-msgid "bad credentials"
-msgstr "Erreur d'identification"
-
-#: src/menus/serverBrowseMenu.cpp:26
-msgctxt "game_client_disconnect_reason"
-msgid "closed by server"
-msgstr "Fermé par le serveur"
-
-#: src/menus/serverBrowseMenu.cpp:28
-msgctxt "game_client_disconnect_reason"
-msgid "timed out"
-msgstr "Délai écoulé"
-
-#: src/menus/serverBrowseMenu.cpp:30
-msgctxt "game_client_disconnect_reason"
-msgid "unknown"
-msgstr "Inconnu"
-
-#: src/menus/serverBrowseMenu.cpp:32
-msgctxt "game_client_disconnect_reason"
-msgid "version mismatch"
-msgstr "Version incompatible"
-
-#: src/menus/serverBrowseMenu.cpp:34
-msgctxt "game_client_disconnect_reason"
-msgid "unspecified error {error}"
-msgstr "Erreur non spécifiée {error}"
-
-#: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
-#: src/menus/optionsMenu.cpp:134 src/menus/hotkeyMenu.cpp:68
-#: src/screenComponents/databaseView.cpp:102
-#: src/screenComponents/databaseView.cpp:106
-msgctxt "button"
-msgid "Back"
-msgstr "Retour"
-
-#: src/menus/serverBrowseMenu.cpp:58
-msgid "Connection error: {message}"
-msgstr "Erreur de connexion : {message}"
-
-#: src/menus/serverBrowseMenu.cpp:69
-msgid "LAN"
-msgstr "LAN"
-
-#: src/menus/serverBrowseMenu.cpp:69
-msgid "Internet"
-msgstr "Internet"
-
-#: src/menus/serverBrowseMenu.cpp:71
-msgctxt "screenLan"
-msgid "Connect"
-msgstr "Connexion"
-
-#: src/menus/serverBrowseMenu.cpp:85
-msgid "Last Session ({last})"
-msgstr "Dernière session ({last})"
-
-#: src/menus/mainMenus.cpp:72
-msgid "Version: {version}"
-msgstr "Version : {version}"
-
-#: src/menus/mainMenus.cpp:74
-msgid "Your name:"
-msgstr "Votre nom :"
-
-#: src/menus/mainMenus.cpp:79 src/menus/serverCreationScreen.cpp:89
-msgid "Start server"
-msgstr "Démarrer le serveur"
-
-#: src/menus/mainMenus.cpp:84
-msgid "Start client"
-msgstr "Démarrer le client"
-
-#: src/menus/mainMenus.cpp:89
-msgid "Options"
-msgstr "Options"
-
-#: src/menus/mainMenus.cpp:94
-msgid "Quit"
-msgstr "Quitter"
-
-#: src/menus/mainMenus.cpp:98
-msgid "Tutorials"
-msgstr "Tutoriels"
-
-#: src/menus/serverCreationScreen.cpp:31
-msgid "Server configuration"
-msgstr "Configuration du serveur"
-
-#: src/menus/serverCreationScreen.cpp:36
-msgid "Server name: "
-msgstr "Nom du serveur : "
-
-#: src/menus/serverCreationScreen.cpp:43
-msgid "Server password: "
-msgstr "Mot de passe du serveur : "
-
-#: src/menus/serverCreationScreen.cpp:50
-msgid "GM control code: "
-msgstr "Code du MJ : "
-
-#: src/menus/serverCreationScreen.cpp:57
-msgid "List on master server: "
-msgstr "Visible sur le serveur maître : "
-
-#: src/menus/serverCreationScreen.cpp:59
-msgid "No"
-msgstr "Non"
-
-#: src/menus/serverCreationScreen.cpp:59
-msgid "Yes"
-msgstr "Oui"
-
-#: src/menus/serverCreationScreen.cpp:63
-msgid "Server port: "
-msgstr "Port du serveur : "
-
-#: src/menus/serverCreationScreen.cpp:67
-msgid "Server info"
-msgstr "Infos du serveur"
-
-#: src/menus/serverCreationScreen.cpp:71
-msgid "Server IP: "
-msgstr "IP du serveur : "
-
-#: src/menus/serverCreationScreen.cpp:83 src/menus/serverCreationScreen.cpp:118
-#: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:223
-msgid "Close"
-msgstr "Retour"
-
-#: src/menus/serverCreationScreen.cpp:125
-msgid "Continue"
-msgstr "Continuer"
-
-#: src/menus/serverCreationScreen.cpp:174
-msgid "Category"
-msgstr "Catégories"
-
-#: src/menus/serverCreationScreen.cpp:180
-msgid "Scenario"
-msgstr "Choix du scénario"
-
-#: src/menus/serverCreationScreen.cpp:188
-msgid "Description"
-msgstr "Description"
-
-#: src/menus/serverCreationScreen.cpp:189
-#: src/menus/serverCreationScreen.cpp:264
-msgid "Select a scenario..."
-msgstr "Choisir un scénario..."
-
-#: src/menus/serverCreationScreen.cpp:204
-#: src/menus/serverCreationScreen.cpp:320
-msgid "Start scenario"
-msgstr "Démarrer le scénario"
-
-#: src/menus/serverCreationScreen.cpp:314
-msgid "Back"
-msgstr "Retour"
-
-#: src/menus/tutorialMenu.cpp:28
-msgctxt "title"
-msgid "Tutorials"
-msgstr "Tutoriels"
-
-#: src/menus/tutorialMenu.cpp:58
-msgid "Start Tutorial"
-msgstr "Démarrer le tutoriel"
-
-#: src/menus/optionsMenu.cpp:35
-msgid "Graphics options"
-msgstr "Options graphiques"
-
-#: src/menus/optionsMenu.cpp:44
-msgid "Audio options"
-msgstr "Options audio"
-
-#: src/menus/optionsMenu.cpp:53
-msgid "Interface options"
-msgstr "Options d'interface"
-
-#: src/menus/optionsMenu.cpp:74
-msgid "Radar Rotation"
-msgstr "Rotation des écrans radars"
-
-#: src/menus/optionsMenu.cpp:76
-msgid "Helms Radar Lock"
-msgstr "Radar Navigation verrouillé"
-
-#: src/menus/optionsMenu.cpp:84
-msgid "Weapons Radar Lock"
-msgstr "Radar armement verrouillé"
-
-#: src/menus/optionsMenu.cpp:90
-msgid "Science Radar Lock"
-msgstr "Radar Science verrouillé"
-
-#: src/menus/optionsMenu.cpp:97
-msgid "Control Options"
-msgstr "Options de controle"
-
-#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:36
-msgid "Configure Keyboard"
-msgstr "Configuration Clavier"
-
-#: src/menus/optionsMenu.cpp:107
-msgid "Language (applies on back)"
-msgstr "Langue (à la sortie du menu)"
-
-#: src/menus/optionsMenu.cpp:142
-msgctxt "options"
-msgid "Save"
-msgstr "Sauvegarder"
-
-#: src/menus/optionsMenu.cpp:164
-msgid "Fullscreen toggle"
-msgstr "Activer plein écran"
-
-#: src/menus/optionsMenu.cpp:197 src/menus/optionsMenu.cpp:202
-msgid "FoV: {fov}"
-msgstr "Champ de vision : {fov}"
-
-#: src/menus/optionsMenu.cpp:218 src/menus/optionsMenu.cpp:223
-msgid "Sound Volume: {volume}%"
-msgstr "Volume sonore : {volume} %"
-
-#: src/menus/optionsMenu.cpp:227
-msgid "Music Playback"
-msgstr "Musique de fond"
-
-#: src/menus/optionsMenu.cpp:237 src/menus/optionsMenu.cpp:262
-msgid "Disabled"
-msgstr "Désactivé"
-
-#: src/menus/optionsMenu.cpp:237 src/menus/optionsMenu.cpp:262
-msgid "Enabled"
-msgstr "Activé"
-
-#: src/menus/optionsMenu.cpp:237 src/menus/optionsMenu.cpp:262
-msgid "Main Screen only"
-msgstr "Écran principal"
-
-#: src/menus/optionsMenu.cpp:243 src/menus/optionsMenu.cpp:248
-msgid "Music Volume: {volume}%"
-msgstr "Volume musique : {volume} %"
-
-#: src/menus/optionsMenu.cpp:252
-msgid "Impulse Engine sound"
-msgstr "Son du moteur à impulsion"
-
-#: src/menus/optionsMenu.cpp:268 src/menus/optionsMenu.cpp:273
-msgid "Impulse Volume: {volume}%"
-msgstr "Volume moteur : {volume} %"
-
-#: src/menus/optionsMenu.cpp:285
-msgid "Preview Soundtracks"
-msgstr "Écoute des bandes-son"
-
-#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:264
-msgid "Enter this ship's control code:"
-msgstr "Veuillez saisir le code de contrôle du vaisseau :"
-
-#: src/menus/shipSelectionScreen.cpp:53
-msgid "Ok"
-msgstr "Ok"
-
-#: src/menus/shipSelectionScreen.cpp:59
-msgid ""
-"Control code accepted.\n"
-"Granting access."
+#: scripts/comms_station.lua:73
+msgctxt "commsStation"
+msgid "We are under attack! No time for chatting!"
 msgstr ""
-"Code de contrôle valide.\n"
-"Accès accordé."
+"Nous sommes sous le feu de l'ennemi !\n"
+"Pas le temps de bavarder !"
 
-#: src/menus/shipSelectionScreen.cpp:68
-msgid "Incorrect control code. Re-enter code:"
-msgstr "Code de contrôle incorrect. Veuillez réessayer :"
+#: scripts/comms_station.lua:91
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"Good day, officer! Welcome to %s.\n"
+"What can we do for you today?"
+msgstr ""
+"Bonjour officier ! Bienvenue sur %s.\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
 
-#: src/menus/shipSelectionScreen.cpp:75
-msgid "OK"
-msgstr "OK"
+#: scripts/comms_station.lua:93
+#, lua-format
+msgctxt "commsStation"
+msgid "Welcome to our lovely station %s."
+msgstr "Bienvenue dans notre charmante station orbitale %s."
 
-#: src/menus/shipSelectionScreen.cpp:132
-msgid "Game master"
-msgstr "Maître de jeu"
+#: scripts/comms_station.lua:98
+msgctxt "commsStation"
+msgid "Do you have spare homing missiles for us?"
+msgstr "Auriez-vous des homing missiles pour nous ?"
 
-#: src/menus/shipSelectionScreen.cpp:136 src/menus/shipSelectionScreen.cpp:162
-msgid "Enter the GM control code:"
-msgstr "Entrer le code de contrôle MJ :"
+#: scripts/comms_station.lua:99
+msgctxt "commsStation"
+msgid "Can you restock us with HVLI?"
+msgstr "Pouvez-vous nous réapprovisionner en HVLI ? "
 
-#: src/menus/shipSelectionScreen.cpp:158
-msgid "Spectate (view all)"
-msgstr "Vue spectateur (carte)"
+#: scripts/comms_station.lua:100
+msgctxt "commsStation"
+msgid "Please re-stock our mines."
+msgstr "Merci de réapprovisionner notre stock de mines, c'est urgent."
 
-#: src/menus/shipSelectionScreen.cpp:191
-msgid "Scan complexity: "
-msgstr "Complexité du scan : "
+#: scripts/comms_station.lua:101
+msgctxt "commsStation"
+msgid "Can you supply us with some nukes?"
+msgstr "Avez-vous des missiles nucléaires nukes ?"
 
-#: src/menus/shipSelectionScreen.cpp:194
-msgctxt "scanning"
-msgid "None (delay)"
-msgstr "Aucune (délai)"
+#: scripts/comms_station.lua:102
+msgctxt "commsStation"
+msgid "Please re-stock our EMP missiles."
+msgstr "Avez-vous des missiles EMP ?"
 
-#: src/menus/shipSelectionScreen.cpp:194
-msgctxt "scanning"
-msgid "Simple"
-msgstr "Simple"
+#: scripts/comms_station.lua:108
+#, lua-format
+msgctxt "commsStation"
+msgid "%s (%d rep each)"
+msgstr "%s (%d rép chacun)"
 
-#: src/menus/shipSelectionScreen.cpp:194
-msgctxt "scanning"
-msgid "Normal"
-msgstr "Normale"
+#: scripts/comms_station.lua:124
+msgctxt "commsStation"
+msgid "You need to stay docked for that action."
+msgstr "Vous devez rester amarrés à la station pour cette action."
 
-#: src/menus/shipSelectionScreen.cpp:194
-msgctxt "scanning"
-msgid "Advanced"
-msgstr "Avancée"
+#: scripts/comms_station.lua:131
+msgctxt "commsStation"
+msgid "We do not deal in weapons of mass destruction."
+msgstr ""
+"Nous ne fournissons pas ce type d'armes de destruction massive. \n"
+"Nous sommes pour la paix dans l'univers."
 
-#: src/menus/shipSelectionScreen.cpp:199
-msgid "Hacking difficulty: "
-msgstr "Difficulté de piratage : "
+#: scripts/comms_station.lua:133
+msgctxt "commsStation"
+msgid "We do not deal in weapons of mass disruption."
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
-#: src/menus/shipSelectionScreen.cpp:202
-msgctxt "hacking"
-msgid "Simple"
-msgstr "Simple"
+#: scripts/comms_station.lua:135
+msgctxt "commsStation"
+msgid "We do not deal in those weapons."
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
-#: src/menus/shipSelectionScreen.cpp:202
-msgctxt "hacking"
-msgid "Normal"
-msgstr "Normale"
+#: scripts/comms_station.lua:146
+msgctxt "commsStation"
+msgid "All nukes are charged and primed for destruction."
+msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
 
-#: src/menus/shipSelectionScreen.cpp:202
-msgctxt "hacking"
-msgid "Difficult"
-msgstr "Difficile"
+#: scripts/comms_station.lua:148
+msgctxt "commsStation"
+msgid "Sorry, sir, but you are as fully stocked as I can allow."
+msgstr ""
+"Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
+"fournir."
 
-#: src/menus/shipSelectionScreen.cpp:202
-msgctxt "hacking"
-msgid "Fiendish"
-msgstr "Diabolique"
-
-#: src/menus/shipSelectionScreen.cpp:207
-msgid "Hacking type: "
-msgstr "Type de piratage : "
-
-#: src/menus/shipSelectionScreen.cpp:210
-msgctxt "hacking"
-msgid "Mine"
-msgstr "Mines"
-
-#: src/menus/shipSelectionScreen.cpp:210
-msgctxt "hacking"
-msgid "Lights"
-msgstr "Lumières"
-
-#: src/menus/shipSelectionScreen.cpp:210
-msgctxt "hacking"
-msgid "All"
-msgstr "Les deux"
-
-#: src/menus/shipSelectionScreen.cpp:215
-msgid "Beam/shield frequencies"
-msgstr "Fréq. faisceaux/bouclier"
-
-#: src/menus/shipSelectionScreen.cpp:219
-msgid "Per-system damage"
-msgstr "Dégâts par systèmes"
-
-#: src/menus/shipSelectionScreen.cpp:230
-msgid "Extra settings"
-msgstr "Réglages : scan, fréquences, piratage..."
-
-#: src/menus/shipSelectionScreen.cpp:245
-msgid "Select ship"
-msgstr "Sélection vaisseau"
-
-#: src/menus/shipSelectionScreen.cpp:246
-msgid "Waiting for server to spawn a ship"
-msgstr "En attente du serveur pour embarquement"
-
-#: src/menus/shipSelectionScreen.cpp:309
-msgid "Spawn player ship"
-msgstr "Créer vaisseau joueur"
-
-#: src/menus/shipSelectionScreen.cpp:330
-msgid "Scenario selection"
-msgstr "Retour scénario"
-
-#: src/menus/shipSelectionScreen.cpp:337
-msgid "Disconnect"
-msgstr "Déconnexion"
-
-#: src/menus/shipSelectionScreen.cpp:426
-msgid "6/5 player crew"
-msgstr "Équipage 5/6 joueurs"
-
-#: src/menus/shipSelectionScreen.cpp:429
-msgid "Main screen"
-msgstr "Écran principal"
-
-#: src/menus/shipSelectionScreen.cpp:451
-msgid "4/3/1 player crew"
-msgstr "Équipage 1/3/4 joueurs"
-
-#: src/menus/shipSelectionScreen.cpp:459
-msgid "Alternative options"
-msgstr "Options alternatives"
-
-#: src/menus/shipSelectionScreen.cpp:466
-msgid "Main screen controls"
-msgstr "Contrôle de l'écran principal"
-
-#: src/menus/shipSelectionScreen.cpp:474
-msgid "Ship window"
-msgstr "Vue fenêtre"
-
-#: src/menus/shipSelectionScreen.cpp:487
-msgid "Top-down 3D view"
-msgstr "Vue de haut en 3D"
-
-#: src/menus/shipSelectionScreen.cpp:495
+#: scripts/comms_station.lua:151 scripts/comms_station.lua:165
+#: scripts/comms_station.lua:229 scripts/comms_station.lua:234
+#: scripts/comms_station.lua:263 scripts/comms_station.lua:289
+#: scripts/comms_station.lua:294
 msgctxt "button"
-msgid "Ready"
-msgstr "Démarrer la partie"
-
-#: src/screens/cinematicViewScreen.cpp:40 src/screens/topDownScreen.cpp:33
-msgctxt "button"
-msgid "Lock camera on ship"
-msgstr "Verrouiller caméra vaisseau"
-
-#: src/screens/cinematicViewScreen.cpp:43
-msgctxt "button"
-msgid "Lock camera on ship's target"
-msgstr "Verrouiller caméra cible"
-
-#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:222
-#: src/screens/gm/tweak.cpp:93 src/screenComponents/commsOverlay.cpp:110
-#: src/screenComponents/commsOverlay.cpp:140
-#: src/screenComponents/hackingDialog.cpp:42
-msgctxt "button"
-msgid "Close"
-msgstr "Fermer"
-
-#: src/screens/crewStationScreen.cpp:69 src/screens/mainScreen.cpp:53
-msgctxt "hotkey_F1"
-msgid "Keyboard Shortcuts"
-msgstr "Raccourcis clavier"
-
-#: src/screens/crewStationScreen.cpp:72 src/screens/mainScreen.cpp:56
-msgctxt "hotkey_F1"
-msgid "{label}:\t{button}\n"
-msgstr "{label} : \t {button}\n"
-
-#: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:219
-#: src/gui/hotkeyConfig.cpp:220 src/gui/hotkeyConfig.cpp:221
-#: src/gui/hotkeyConfig.cpp:222 src/gui/hotkeyConfig.cpp:223
-#: src/gui/hotkeyConfig.cpp:224 src/gui/hotkeyConfig.cpp:225
-#: src/gui/hotkeyConfig.cpp:226
-msgctxt "hotkey_menu"
-msgid "Main Screen"
-msgstr "Écran principal"
-
-#: src/screens/crew4/operationsScreen.cpp:67
-#: src/screens/crew6/relayScreen.cpp:100
-#: src/screens/crew1/singlePilotScreen.cpp:102
-msgid "Open Comms"
-msgstr "Ouvrir Comm."
-
-#: src/screens/crew4/operationsScreen.cpp:70
-#: src/screens/crew6/relayScreen.cpp:129
-msgid "Place Waypoint"
-msgstr "Placer marqueur"
-
-#: src/screens/crew4/operationsScreen.cpp:75
-#: src/screens/crew6/relayScreen.cpp:134
-msgid "Delete Waypoint"
-msgstr "Suppr. marqueur"
-
-#: src/screens/crew4/operationsScreen.cpp:84
-#: src/screens/crew6/relayScreen.cpp:150
-msgid "Reputation"
-msgstr "Rép. actuelle "
-
-#: src/screens/crew4/operationsScreen.cpp:88
-#: src/screens/crew6/relayScreen.cpp:154
-#: src/screens/gm/gameMasterScreen.cpp:147
-msgid "Clock"
-msgstr "Temps écoulé "
-
-#: src/screens/crew4/tacticalScreen.cpp:69
-#: src/screens/crew6/engineeringScreen.cpp:33
-#: src/screens/crew6/weaponsScreen.cpp:80 src/screens/crew6/helmsScreen.cpp:73
-#: src/screens/crew1/singlePilotScreen.cpp:73
-#: src/screens/extra/powerManagement.cpp:19
-msgid "Energy"
-msgstr "Énergie"
-
-#: src/screens/crew4/tacticalScreen.cpp:71 src/screens/crew6/helmsScreen.cpp:75
-#: src/screens/crew1/singlePilotScreen.cpp:75
-msgid "Heading"
-msgstr "Cap"
-
-#: src/screens/crew4/tacticalScreen.cpp:73 src/screens/crew6/helmsScreen.cpp:77
-#: src/screens/crew1/singlePilotScreen.cpp:77
-msgid "Speed"
-msgstr "Vitesse"
-
-#: src/screens/crew4/tacticalScreen.cpp:75
-#: src/screens/crew1/singlePilotScreen.cpp:79
-msgid "Shields"
-msgstr "Boucliers"
-
-#: src/screens/crew4/tacticalScreen.cpp:88
-msgid "Beams"
-msgstr "Faisceaux"
-
-#: src/screens/crew4/tacticalScreen.cpp:121
-#: src/screens/crew6/helmsScreen.cpp:99
-msgid "{value} {unit}/min"
-msgstr "{value} {unit}/min"
-
-#: src/screens/crew6/engineeringScreen.cpp:35
-msgctxt "health"
-msgid "Hull"
-msgstr "Coque"
-
-#: src/screens/crew6/engineeringScreen.cpp:37
-#: src/screens/crew6/weaponsScreen.cpp:82
-msgctxt "shields"
-msgid "Front"
-msgstr "B. avant"
-
-#: src/screens/crew6/engineeringScreen.cpp:39
-#: src/screens/crew6/weaponsScreen.cpp:84
-msgctxt "shields"
-msgid "Rear"
-msgstr "B. arrière"
-
-#: src/screens/crew6/engineeringScreen.cpp:41
-msgctxt "total"
-msgid "Coolant"
-msgstr "Liq. de ref."
-
-#: src/screens/crew6/engineeringScreen.cpp:142
-msgctxt "slider"
-msgid "Power"
-msgstr "Puissance"
-
-#: src/screens/crew6/engineeringScreen.cpp:144
-msgctxt "slider"
-msgid "Coolant"
-msgstr "Liq. de refroidissement"
-
-#: src/screens/crew6/engineeringScreen.cpp:195
-#: src/screens/crew6/engineeringScreen.cpp:287
-msgid "{energy}/min"
-msgstr "{energy}/min"
-
-#: src/screens/crew6/engineeringScreen.cpp:271
-msgctxt "slider"
-msgid "Power: {current_level}% / {requested}%"
-msgstr "Puissance : {current_level}%/{requested}%"
-
-#: src/screens/crew6/engineeringScreen.cpp:273
-msgctxt "slider"
-msgid "Coolant: {current_level}% / {requested}%"
-msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
-
-#: src/screens/crew6/engineeringScreen.cpp:287
-msgid "Energy production"
-msgstr "Production d'énergie"
-
-#: src/screens/crew6/engineeringScreen.cpp:290
-msgid "Firing rate"
-msgstr "Cadence de tir"
-
-#: src/screens/crew6/engineeringScreen.cpp:303
-msgctxt "missile"
-msgid "Reload rate"
-msgstr "Vit. de charg. des tubes"
-
-#: src/screens/crew6/engineeringScreen.cpp:306
-msgid "Turning speed"
-msgstr "Vitesse de rotation"
-
-#: src/screens/crew6/engineeringScreen.cpp:308
-#: src/screens/crew6/engineeringScreen.cpp:313
-msgid "Combat recharge rate"
-msgstr "Recharge man. de combat"
-
-#: src/screens/crew6/engineeringScreen.cpp:311
-msgid "Impulse speed"
-msgstr "Puissance des moteurs"
-
-#: src/screens/crew6/engineeringScreen.cpp:316
-msgid "Warp drive speed"
-msgstr "Vitesse lumière max"
-
-#: src/screens/crew6/engineeringScreen.cpp:319
-msgid "Jump drive recharge rate"
-msgstr "Temps de rechargement"
-
-#: src/screens/crew6/engineeringScreen.cpp:320
-msgid "Jump drive jump speed"
-msgstr "Délai avant le saut"
-
-#: src/screens/crew6/engineeringScreen.cpp:324
-#: src/screens/crew6/engineeringScreen.cpp:338
-msgctxt "shields"
-msgid "Calibration speed"
-msgstr "Vitesse de calibration"
-
-#: src/screens/crew6/engineeringScreen.cpp:325
-#: src/screens/crew6/engineeringScreen.cpp:339
-msgctxt "shields"
-msgid "Charge rate"
-msgstr "Régénération"
-
-#: src/screens/crew6/engineeringScreen.cpp:331
-#: src/screens/crew6/engineeringScreen.cpp:345
-msgid "Extra damage"
-msgstr "Dommages supplémentaires"
-
-#: src/screens/crew6/engineeringScreen.cpp:333
-#: src/screens/crew6/engineeringScreen.cpp:347
-msgid "Damage negate"
-msgstr "Réduction des dégâts"
-
-#: src/screens/crew6/scienceScreen.cpp:96 src/screens/crew6/relayScreen.cpp:80
-msgid "Callsign"
-msgstr "Nom"
-
-#: src/screens/crew6/scienceScreen.cpp:98
-msgctxt "science"
-msgid "Distance"
-msgstr "Distance"
-
-#: src/screens/crew6/scienceScreen.cpp:100
-msgid "Bearing"
-msgstr "Cap"
-
-#: src/screens/crew6/scienceScreen.cpp:102
-msgid "Rel. Speed"
-msgstr "Vit. relative"
-
-#: src/screens/crew6/scienceScreen.cpp:104 src/screens/crew6/relayScreen.cpp:83
-msgid "Faction"
-msgstr "Faction"
-
-#: src/screens/crew6/scienceScreen.cpp:106
-msgctxt "science"
-msgid "Type"
-msgstr "Modèle"
-
-#: src/screens/crew6/scienceScreen.cpp:108
-msgctxt "database"
-msgid "DB"
-msgstr "BD"
-
-#: src/screens/crew6/scienceScreen.cpp:122
-msgctxt "science"
-msgid "Shields"
-msgstr "Boucliers"
-
-#: src/screens/crew6/scienceScreen.cpp:124
-msgctxt "science"
-msgid "Hull"
-msgstr "Coque"
-
-#: src/screens/crew6/scienceScreen.cpp:178
-msgctxt "button"
-msgid "Probe View"
-msgstr "Vue sonde"
-
-#: src/screens/crew6/scienceScreen.cpp:204
-#: src/screens/crew6/scienceScreen.cpp:246 src/screens/crew6/relayScreen.cpp:87
-msgid "Zoom: {zoom}x"
-msgstr "Zoom : {zoom}x"
-
-#: src/screens/crew6/scienceScreen.cpp:217
-msgctxt "button"
-msgid "Radar"
-msgstr "Radar"
-
-#: src/screens/crew6/scienceScreen.cpp:217
-msgctxt "button"
-msgid "Database"
-msgstr "Base de données"
-
-#: src/screens/crew6/relayScreen.cpp:102
-msgid "Link to Comms"
-msgstr "Lier a Communications"
-
-#: src/screens/crew6/relayScreen.cpp:106
-msgid "Start hacking"
-msgstr "Démarrer piratage"
-
-#: src/screens/crew6/relayScreen.cpp:116
-msgid "Link to Science"
-msgstr "Lier a Science"
-
-#: src/screens/crew6/relayScreen.cpp:143 src/screens/crew6/relayScreen.cpp:322
-msgid "Launch Probe"
-msgstr "Largage sonde"
-
-#: src/screens/crew6/relayScreen.cpp:162
-msgid "Alert level"
-msgstr "Niveau d'alerte"
-
-#: src/screens/crew6/weaponsScreen.cpp:65
-msgid "Beam info"
-msgstr "Faisceaux : réglages"
-
-#: src/screens/extra/damcon.cpp:20
-msgctxt "damagecontrol"
-msgid "Hull"
-msgstr "Coque"
-
-#: src/screens/extra/powerManagement.cpp:21
-msgid "Coolant"
-msgstr "Liq. de refr."
-
-#: src/screens/extra/powerManagement.cpp:39
-msgctxt "button"
-msgid "Power"
-msgstr "Puissance"
-
-#: src/screens/extra/powerManagement.cpp:40
-msgctxt "button"
-msgid "Coolant"
-msgstr "Liquide de refroidissement"
-
-#: src/screens/extra/powerManagement.cpp:41
-msgctxt "button"
-msgid "Heat"
-msgstr "Surchauffe"
-
-#: src/screens/gm/gameMasterScreen.cpp:40
-msgctxt "button"
-msgid "Pause"
-msgstr "Pause"
-
-#: src/screens/gm/gameMasterScreen.cpp:48
-msgctxt "button"
-msgid "Intercept all comms"
-msgstr "Intercepter toute comm."
-
-#: src/screens/gm/gameMasterScreen.cpp:64
-msgctxt "button"
-msgid "Global message"
-msgstr "Message général"
-
-#: src/screens/gm/gameMasterScreen.cpp:78
-msgctxt "button"
-msgid "Create..."
-msgstr "Créer..."
-
-#: src/screens/gm/gameMasterScreen.cpp:83
-msgctxt "button"
-msgid "Copy scenario"
-msgstr "Copier scénario"
-
-#: src/screens/gm/gameMasterScreen.cpp:88
-msgctxt "button"
-msgid "Copy selected"
-msgstr "Copier sélection"
-
-#: src/screens/gm/gameMasterScreen.cpp:98
-msgctxt "button"
-msgid "Tweak"
-msgstr "Modifier"
-
-#: src/screens/gm/gameMasterScreen.cpp:132
-msgctxt "button"
-msgid "Hail ship"
-msgstr "Envoyer message"
-
-#: src/screens/gm/gameMasterScreen.cpp:169
-msgid "Defend location"
-msgstr "Défendre son emplacement"
-
-#: src/screens/gm/gameMasterScreen.cpp:174
-msgid "Stand ground"
-msgstr "Tenir sa position"
-
-#: src/screens/gm/gameMasterScreen.cpp:179
-msgid "Roaming"
-msgstr "Errer"
-
-#: src/screens/gm/gameMasterScreen.cpp:184
-msgid "Idle"
-msgstr "Au repos"
-
-#: src/screens/gm/gameMasterScreen.cpp:189
-msgid "Orders:"
-msgstr "Ordres :"
-
-#: src/screens/gm/gameMasterScreen.cpp:349
-msgid "*mixed*"
-msgstr "*varié*"
-
-#: src/screens/gm/gameMasterScreen.cpp:356
-msgctxt "gm_info"
-msgid "Position"
-msgstr "Position"
-
-#: src/screens/gm/gameMasterScreen.cpp:368
-msgid "gm_info"
-msgstr "gm_info"
-
-#: src/screens/gm/objectCreationView.cpp:36
-msgctxt "create"
-msgid "cpu ship"
-msgstr "Vaisseau IA"
-
-#: src/screens/gm/objectCreationView.cpp:37
-msgctxt "create"
-msgid "player ship"
-msgstr "Vaisseau joueur"
-
-#: src/screens/gm/objectCreationView.cpp:58
-msgctxt "create"
-msgid "Artifact"
-msgstr "Artefact"
-
-#: src/screens/gm/objectCreationView.cpp:62
-msgctxt "create"
-msgid "Warp Jammer"
-msgstr "Brouilleur de vitesse lumière"
-
-#: src/screens/gm/objectCreationView.cpp:66
-msgctxt "create"
-msgid "Mine"
-msgstr "Mine"
-
-#: src/screens/gm/objectCreationView.cpp:71
-msgctxt "create"
-msgid "Supply Drop"
-msgstr "Caisse d'approvisionnement"
-
-#: src/screens/gm/objectCreationView.cpp:75
-msgctxt "create"
-msgid "Asteroid"
-msgstr "Astéroïde"
-
-#: src/screens/gm/objectCreationView.cpp:79
-msgctxt "create"
-msgid "Visual Asteroid"
-msgstr "Astéroïde décoratif"
-
-#: src/screens/gm/objectCreationView.cpp:83
-msgctxt "create"
-msgid "Planet"
-msgstr "Planète"
-
-#: src/screens/gm/objectCreationView.cpp:87
-msgctxt "create"
-msgid "BlackHole"
-msgstr "Trou noir"
-
-#: src/screens/gm/objectCreationView.cpp:91
-msgctxt "create"
-msgid "Nebula"
-msgstr "Nébuleuse"
-
-#: src/screens/gm/objectCreationView.cpp:95
-msgctxt "create"
-msgid "Worm Hole"
-msgstr "Trou de ver"
-
-#: src/screens/gm/globalMessageEntryView.cpp:23
-#: src/screenComponents/commsOverlay.cpp:102
-msgctxt "button"
-msgid "Send"
-msgstr "Envoyer"
-
-#: src/screens/gm/chatDialog.cpp:46
-msgctxt "chatGM"
-msgid "Target - Destroyed"
-msgstr "Cible - détruite"
-
-#: src/screens/gm/chatDialog.cpp:59
-msgctxt "chatGM"
-msgid "Channel not open, enter name to hail as to hail target."
-msgstr "Canal non ouvert, entrer un nom d'appelant pour appeler la cible."
-
-#: src/screens/gm/chatDialog.cpp:60
-msgctxt "chatGM"
-msgid "{callsign} - Inactive"
-msgstr "{callsign} - Inactif"
-
-#: src/screens/gm/chatDialog.cpp:64
-msgctxt "chatGM"
-msgid "{callsign} - Opening communications with {target}"
-msgstr "{callsign} - Ouverture des communications avec {target}"
-
-#: src/screens/gm/chatDialog.cpp:67
-msgctxt "chatGM"
-msgid "{callsign} - Hailing as {target}"
-msgstr "{callsign} - Appelant comme {target}"
-
-#: src/screens/gm/chatDialog.cpp:71
-msgctxt "chatGM"
-msgid "{callsign} - Communicating with {target}"
-msgstr "{callsign} - En communication avec {target}"
-
-#: src/screens/gm/chatDialog.cpp:75
-msgctxt "chatGM"
-msgid "**{callsign} - Communicating as {target}**"
-msgstr "**{callsign} - Communiquer comme {target}**"
-
-#: src/screens/gm/chatDialog.cpp:77
-msgctxt "chatGM"
-msgid "{callsign} - Communicating as {target}"
-msgstr "{callsign} - Communiquer comme {target}"
-
-#: src/screens/gm/tweak.cpp:31
-msgctxt "tab"
-msgid "Base"
-msgstr "Scan"
-
-#: src/screens/gm/tweak.cpp:36
-msgctxt "tab"
-msgid "Ship"
-msgstr "Vaisseau"
-
-#: src/screens/gm/tweak.cpp:42
-msgctxt "tab"
-msgid "Asteroid"
-msgstr "Astéroïde"
-
-#: src/screens/gm/tweak.cpp:48
-msgctxt "tab"
-msgid "Jammer"
-msgstr "Brouilleur"
-
-#: src/screens/gm/tweak.cpp:54
-msgctxt "tab"
-msgid "Shields"
-msgstr "Boucliers"
-
-#: src/screens/gm/tweak.cpp:60
-msgctxt "tab"
-msgid "Tubes"
-msgstr "Tubes"
-
-#: src/screens/gm/tweak.cpp:62
-msgctxt "tab"
-msgid "Missiles"
-msgstr "Missiles"
-
-#: src/screens/gm/tweak.cpp:64
-msgctxt "tab"
-msgid "Beams"
-msgstr "Faisceaux"
-
-#: src/screens/gm/tweak.cpp:66
-msgctxt "tab"
-msgid "Systems"
-msgstr "Systèmes"
-
-#: src/screens/gm/tweak.cpp:68
-msgctxt "tab"
-msgid "Power"
-msgstr "Puissance"
-
-#: src/screens/gm/tweak.cpp:70
-msgctxt "tab"
-msgid "Coolant Rate"
-msgstr "Taux de liq. de refroid."
-
-#: src/screens/gm/tweak.cpp:72
-msgctxt "tab"
-msgid "Heat Rate"
-msgstr "Taux de chaleur"
-
-#: src/screens/gm/tweak.cpp:74
-msgctxt "tab"
-msgid "Power Rate"
-msgstr "Taux de puissance"
-
-#: src/screens/gm/tweak.cpp:80
-msgctxt "tab"
-msgid "Player"
-msgstr "Options"
-
-#: src/screens/gm/tweak.cpp:82
-msgctxt "tab"
-msgid "Player 2"
-msgstr "Options 2"
-
-#: src/screens/gm/tweak.cpp:127
-msgid "Type name:"
-msgstr "Type :"
-
-#: src/screens/gm/tweak.cpp:135
-msgid "Impulse speed:"
-msgstr "Vitesse des moteurs :"
-
-#: src/screens/gm/tweak.cpp:141
-msgid "Impulse reverse speed:"
-msgstr "Vit. d'inversion moteurs :"
-
-#: src/screens/gm/tweak.cpp:147
-msgid "Turn speed:"
-msgstr "Vitesse de rotation :"
-
-#: src/screens/gm/tweak.cpp:153
-msgid "Jump Min Distance:"
-msgstr "Portée de saut min :"
-
-#: src/screens/gm/tweak.cpp:159
-msgid "Jump Max Distance:"
-msgstr "Portée de saut max :"
-
-#: src/screens/gm/tweak.cpp:165
-msgid "Jump charge:"
-msgstr "Temps rechargement du saut :"
-
-#: src/screens/gm/tweak.cpp:173
-msgid "Hull max:"
-msgstr "Niveau max de la coque :"
-
-#: src/screens/gm/tweak.cpp:180
-msgid "Hull current:"
-msgstr "Niveau actuel de la coque :"
-
-#: src/screens/gm/tweak.cpp:187
-msgid "Could be destroyed"
-msgstr "Peut être détruit"
-
-#: src/screens/gm/tweak.cpp:193
-msgctxt "tweak_ship"
-msgid "Special drives:"
-msgstr "Moteurs spéciaux :"
-
-#: src/screens/gm/tweak.cpp:194
-msgid "Warp Drive"
-msgstr "Vitesse lumière"
-
-#: src/screens/gm/tweak.cpp:199
-msgid "Jump Drive"
-msgstr "Téléportation"
-
-#: src/screens/gm/tweak.cpp:205
-msgid "Short-range radar range:"
-msgstr "Rayon du radar courte portée :"
-
-#: src/screens/gm/tweak.cpp:211
-msgid "Long-range radar range:"
-msgstr "Rayon du radar longue portée :"
-
-#: src/screens/gm/tweak.cpp:257
-msgctxt "missiles"
-msgid "Storage space:"
-msgstr "Capacité de stockage"
-
-#: src/screens/gm/tweak.cpp:270
-msgctxt "missiles"
-msgid "Stored amount:"
-msgstr "Stock actuel"
-
-#: src/screens/gm/tweak.cpp:291
-msgid "Jammer Range:"
-msgstr "Portée du brouilleur"
-
-#: src/screens/gm/tweak.cpp:318
-msgid "Asteroid Size:"
-msgstr "Taille de l'astéroïde :"
-
-#: src/screens/gm/tweak.cpp:364
-msgid "Tube count:"
-msgstr "Nombre de tubes :"
-
-#: src/screens/gm/tweak.cpp:388
-msgid "Tube: {id_tube}"
-msgstr "Tube : {id_tube}"
-
-#: src/screens/gm/tweak.cpp:391
-msgctxt "tube"
-msgid "Direction:"
-msgstr "Orientation :"
-
-#: src/screens/gm/tweak.cpp:397
-msgctxt "tube"
-msgid "Load time:"
-msgstr "Temps de chargement :"
-
-#: src/screens/gm/tweak.cpp:403
-msgctxt "tube"
-msgid "Size:"
-msgstr "Taille :"
-
-#: src/screens/gm/tweak.cpp:408
-msgctxt "tube"
-msgid "Small"
-msgstr "Petit"
-
-#: src/screens/gm/tweak.cpp:409
-msgctxt "tube"
-msgid "Medium"
-msgstr "Moyen"
-
-#: src/screens/gm/tweak.cpp:410
-msgctxt "tube"
-msgid "large"
-msgstr "Grand"
-
-#: src/screens/gm/tweak.cpp:414
-msgctxt "tube"
-msgid "Allowed use:"
-msgstr "Missiles autorisés :"
-
-#: src/screens/gm/tweak.cpp:457
-msgid "Shield {id_shield} max:"
-msgstr "Bouclier {id_shield} : puissance max"
-
-#: src/screens/gm/tweak.cpp:467
-msgid "Shield {id_shield}:"
-msgstr "Bouclier {id_shield} : puissance actuelle"
-
-#: src/screens/gm/tweak.cpp:521
-msgid "Beam: {id_beam}"
-msgstr "Faisceau : {id_beam}"
-
-#: src/screens/gm/tweak.cpp:524
-msgctxt "beam"
-msgid "Arc:"
-msgstr "Amplitude de l'arc"
-
-#: src/screens/gm/tweak.cpp:530
-msgctxt "beam"
-msgid "Direction:"
-msgstr "Orientation"
-
-#: src/screens/gm/tweak.cpp:536
-msgctxt "beam"
-msgid "Turret arc:"
-msgstr "Tourelle : Amplitude de l'arc"
-
-#: src/screens/gm/tweak.cpp:542
-msgctxt "beam"
-msgid "Turret direction:"
-msgstr "Tourelle : orientation"
-
-#: src/screens/gm/tweak.cpp:548
-msgctxt "beam"
-msgid "Turret rotation rate:"
-msgstr "Tourelle : vitesse de rotation"
-
-#: src/screens/gm/tweak.cpp:563
-msgctxt "beam"
-msgid "Range:"
-msgstr "Portée"
-
-#: src/screens/gm/tweak.cpp:569
-msgctxt "beam"
-msgid "Cycle time:"
-msgstr "Intervalle entre 2 tirs"
-
-#: src/screens/gm/tweak.cpp:575
-msgctxt "beam"
-msgid "Damage:"
-msgstr "Dégâts"
-
-#: src/screens/gm/tweak.cpp:616
-msgid "{system} health"
-msgstr "{system} : santé actuelle"
-
-#: src/screens/gm/tweak.cpp:625
-msgid "{system} health max"
-msgstr "santé max"
-
-#: src/screens/gm/tweak.cpp:635
-msgid "{system} heat"
-msgstr "Surchauffe en cours"
-
-#: src/screens/gm/tweak.cpp:678
-msgid "current factor"
-msgstr "Taux actuel :"
-
-#: src/screens/gm/tweak.cpp:679
-msgid "desired factor"
-msgstr "Taux souhaité :"
-
-#: src/screens/gm/tweak.cpp:684 src/screens/gm/tweak.cpp:747
-msgid "{system}"
-msgstr "{system}"
-
-#: src/screens/gm/tweak.cpp:708 src/screens/gm/tweak.cpp:771
-msgid "Applies on [Enter]"
-msgstr "Valider avec [Entrer]"
-
-#: src/screens/gm/tweak.cpp:741
-msgid "current rate"
-msgstr "Taux actuel :"
-
-#: src/screens/gm/tweak.cpp:742
-msgid "desired rate"
-msgstr "Taux souhaité :"
-
-#: src/screens/gm/tweak.cpp:843
-msgid "Control code:"
-msgstr "Code de contrôle :"
-
-#: src/screens/gm/tweak.cpp:852
-msgid "Reputation:"
-msgstr "Réputation actuelle :"
-
-#: src/screens/gm/tweak.cpp:860
-msgid "Max energy:"
-msgstr "Énergie max :"
-
-#: src/screens/gm/tweak.cpp:868
-msgid "Current energy:"
-msgstr "Énergie actuelle :"
-
-#: src/screens/gm/tweak.cpp:876
-msgid "Boost Speed:"
-msgstr "Man. Combat : Vit. d'accélération"
-
-#: src/screens/gm/tweak.cpp:882
-msgid "Strafe Speed:"
-msgstr "Man. Combat : Vit. d'esquive"
-
-#: src/screens/gm/tweak.cpp:890 src/screens/gm/tweak.cpp:932
-msgid "Positions occupied: "
-msgstr "Postes occupés : "
-
-#: src/screens/gm/tweak.cpp:924
-msgid "position"
-msgstr "Position"
-
-#: src/screens/gm/tweak.cpp:973
-msgid "Coolant:"
-msgstr "Liq. de refroid."
-
-#: src/screens/gm/tweak.cpp:980
-msgid "Max Scan Probes:"
-msgstr "Sondes : capacité max"
-
-#: src/screens/gm/tweak.cpp:986
-msgid "Scan Probes:"
-msgstr "Sondes : stock actuel"
-
-#: src/screens/gm/tweak.cpp:1036
-msgctxt "button"
-msgid "Can scan"
-msgstr "Peut scanner"
-
-#: src/screens/gm/tweak.cpp:1042
-msgctxt "button"
-msgid "Can hack"
-msgstr "Peut pirater"
-
-#: src/screens/gm/tweak.cpp:1048
-msgctxt "button"
-msgid "Can dock"
-msgstr "Peut accoster"
-
-#: src/screens/gm/tweak.cpp:1054
-msgctxt "button"
-msgid "Can combat maneuver"
-msgstr "Peut manœuvrer au combat"
-
-#: src/screens/gm/tweak.cpp:1060
-msgctxt "button"
-msgid "Can self destruct"
-msgstr "Peut s'autodétruire"
-
-#: src/screens/gm/tweak.cpp:1066
-msgctxt "button"
-msgid "Can launch probes"
-msgstr "Peut larguer des sondes"
-
-#: src/screens/gm/tweak.cpp:1071
-msgctxt "button"
-msgid "Auto coolant"
-msgstr "Liq. de refroidissement auto"
-
-#: src/screens/gm/tweak.cpp:1076
-msgctxt "button"
-msgid "Auto repair"
-msgstr "Réparation auto"
-
-#: src/screens/gm/tweak.cpp:1096
-msgctxt "player_tweak"
-msgid "Warp (E/s): {energy_per_second}"
-msgstr "Vit. lumière (E/s) :"
-
-#: src/screens/gm/tweak.cpp:1097
-msgctxt "player_tweak"
-msgid "Shields (E/s): {energy_per_second}"
-msgstr "Boucliers (E/s) :"
-
-#: src/screens/gm/tweak.cpp:1122
-msgid "Callsign:"
-msgstr "Nom :"
-
-#: src/screens/gm/tweak.cpp:1133
-msgid "Unscanned description:"
-msgstr "Description sans scan :"
-
-#: src/screens/gm/tweak.cpp:1140
-msgid "Friend or Foe Description:"
-msgstr "Description ami ou ennemi :"
-
-#: src/screens/gm/tweak.cpp:1147
-msgid "Simple Scan Description:"
-msgstr "Description scan simple :"
-
-#: src/screens/gm/tweak.cpp:1154
-msgid "Full Scan Description:"
-msgstr "Description scan complet :"
-
-#: src/screens/gm/tweak.cpp:1164
-msgid "Heading:"
-msgstr "Cap :"
-
-#: src/screens/gm/tweak.cpp:1170
-msgid "Scanning Complexity:"
-msgstr "Complexité du scan : "
-
-#: src/screens/gm/tweak.cpp:1176
-msgid "Scanning Depth:"
-msgstr "Profondeur du scan :"
-
-#: src/screenComponents/aimLock.cpp:11
-msgctxt "missile"
-msgid "Lock"
-msgstr "Verrou"
-
-#: src/screenComponents/helpOverlay.cpp:24
-msgctxt "hotkey_F1"
-msgid "Close"
-msgstr "Fermer"
-
-#: src/screenComponents/missileTubeControls.cpp:109
-#: src/screenComponents/missileTubeControls.cpp:123
-#: src/screenComponents/missileTubeControls.cpp:141
-msgctxt "missile"
-msgid "Load"
-msgstr "Charger"
-
-#: src/screenComponents/missileTubeControls.cpp:111
-msgctxt "missile"
-msgid "Empty"
-msgstr "Vide"
-
-#: src/screenComponents/missileTubeControls.cpp:116
-#: src/screenComponents/missileTubeControls.cpp:132
-msgctxt "missile"
-msgid "Unload"
-msgstr "Décharger"
-
-#: src/screenComponents/missileTubeControls.cpp:128
-msgctxt "missile"
-msgid "Loading"
-msgstr "Chargement"
-
-#: src/screenComponents/missileTubeControls.cpp:137
-msgctxt "missile"
-msgid "Unloading"
-msgstr "Déchargement"
-
-#: src/screenComponents/missileTubeControls.cpp:143
-msgctxt "missile"
-msgid "Firing"
-msgstr "Feu"
-
-#: src/screenComponents/selfDestructIndicator.cpp:15
-msgid "SELF DESTRUCT ACTIVATED"
-msgstr "AUTO DESTRUCTION ACTIVÉE"
-
-#: src/screenComponents/selfDestructIndicator.cpp:32
-msgid "Waiting for autorization input: {codes} left"
-msgstr "Validation des codes en cours : {codes} restant"
-
-#: src/screenComponents/selfDestructIndicator.cpp:36
-msgid "Have a nice day."
-msgstr "Yippee Ki Yay !"
-
-#: src/screenComponents/selfDestructIndicator.cpp:40
-msgid "This ship will self-destruct in {seconds} seconds."
-msgstr "Ce vaisseau s'autodétruira dans {seconds} secondes."
-
-#: src/screenComponents/selfDestructEntry.cpp:21
-msgid "Self destruct activated!"
-msgstr "Autodestruction activée !"
-
-#: src/screenComponents/selfDestructEntry.cpp:66
-msgid "Code [{letter}]: {self_destruct_code}"
-msgstr "Code [{letter}] : {self_destruct_code}"
-
-#: src/screenComponents/selfDestructEntry.cpp:79
-msgctxt "selfdestruct"
-msgid "Enter [{letter}]"
-msgstr "Entrer [{letter}]"
-
-#: src/screenComponents/dockingButton.cpp:67
-msgid "Request Dock"
-msgstr "Accostage"
-
-#: src/screenComponents/dockingButton.cpp:76
-msgid "Cancel Docking"
-msgstr "Annuler accostage"
-
-#: src/screenComponents/dockingButton.cpp:80
-msgid "Undock"
-msgstr "Désamarrer"
-
-#: src/screenComponents/shieldsEnableButton.cpp:23
-msgctxt "shields"
-msgid "Calibrating"
-msgstr "Calibrage en cours"
-
-#: src/screenComponents/shieldsEnableButton.cpp:43
-msgctxt "shields"
-msgid "ON"
-msgstr "ON"
-
-#: src/screenComponents/shieldsEnableButton.cpp:43
-msgctxt "shields"
-msgid "OFF"
-msgstr "OFF"
-
-#: src/screenComponents/shieldsEnableButton.cpp:45
-msgid "{frequency} Shields: {status}"
-msgstr "Boucliers {frequency} : {status}"
-
-#: src/screenComponents/shieldsEnableButton.cpp:47
-msgid "Shields: {status}"
-msgstr "Boucliers : {status}"
-
-#: src/screenComponents/selfDestructButton.cpp:12
-msgid "Self destruct"
-msgstr "Autodestruction"
-
-#: src/screenComponents/selfDestructButton.cpp:19
-msgctxt "selfdestruct"
-msgid "Confirm!"
-msgstr "Confirmer !"
-
-#: src/screenComponents/shieldFreqencySelect.cpp:22
-msgctxt "shields"
-msgid "Calibrate"
-msgstr "Calibrer"
-
-#: src/screenComponents/jumpControls.cpp:22
-#: src/screenComponents/jumpControls.cpp:53
-msgctxt "jumpcontrol"
-msgid "Distance"
-msgstr "Distance"
-
-#: src/screenComponents/jumpControls.cpp:25
-msgctxt "jumpcontrol"
-msgid "Jump"
-msgstr "Saut"
-
-#: src/screenComponents/jumpControls.cpp:39
-msgctxt "jumpcontrol"
-msgid "Jump in"
-msgstr "Saut dans"
-
-#: src/screenComponents/jumpControls.cpp:46
-msgctxt "jumpcontrol"
-msgid "Charging"
-msgstr "Chargement"
-
-#: src/screenComponents/impulseControls.cpp:18
-msgctxt "slider"
-msgid "Impulse"
-msgstr "Moteurs"
-
-#: src/screenComponents/frequencyCurve.cpp:53
-msgid "Damage with your beams"
-msgstr "Dégâts produits par vos faisceaux"
-
-#: src/screenComponents/frequencyCurve.cpp:55
-msgid "Damage on your shields"
-msgstr "Dégâts sur vos boucliers"
-
-#: src/screenComponents/frequencyCurve.cpp:61
-msgctxt "scienceFrequencyGraph"
-msgid "No enemy beams"
-msgstr "Pas de faisceaux"
-
-#: src/screenComponents/frequencyCurve.cpp:63
-msgctxt "scienceFrequencyGraph"
-msgid "No enemy shields"
-msgstr "Pas de boucliers"
-
-#: src/screenComponents/powerDamageIndicator.cpp:33
-msgctxt "systems"
-msgid "DAMAGED"
-msgstr "ENDOMMAGÉ"
-
-#: src/screenComponents/powerDamageIndicator.cpp:37
-msgctxt "systems"
-msgid "JAMMED"
-msgstr "BLOQUÉ"
-
-#: src/screenComponents/powerDamageIndicator.cpp:41
-msgctxt "systems"
-msgid "NO POWER"
-msgstr "AUCUNE ÉNERGIE"
-
-#: src/screenComponents/powerDamageIndicator.cpp:45
-msgctxt "systems"
-msgid "LOW ENERGY"
-msgstr "ÉNERGIE FAIBLE"
-
-#: src/screenComponents/powerDamageIndicator.cpp:49
-msgctxt "systems"
-msgid "LOW POWER"
-msgstr "PUISSANCE FAIBLE"
-
-#: src/screenComponents/powerDamageIndicator.cpp:53
-msgctxt "systems"
-msgid "OVERHEATING"
-msgstr "SURCHAUFFE"
-
-#: src/screenComponents/powerDamageIndicator.cpp:57
-msgctxt "systems"
-msgid "HACKED"
-msgstr "PIRATÉ"
-
-#: src/screenComponents/beamTargetSelector.cpp:9
-msgctxt "target"
-msgid "Hull"
-msgstr "Coque"
-
-#: src/screenComponents/indicatorOverlays.cpp:24
-msgid "Game Paused"
-msgstr "En pause"
-
-#: src/screenComponents/indicatorOverlays.cpp:27
-msgid "Unpause"
-msgstr "Revenir au jeu"
-
-#: src/screenComponents/indicatorOverlays.cpp:127
-msgid "Defeat!"
-msgstr "Défaite !"
-
-#: src/screenComponents/indicatorOverlays.cpp:130
-msgid "Victory!"
-msgstr "Victoire !"
-
-#: src/screenComponents/indicatorOverlays.cpp:134
-msgid "{faction} wins"
-msgstr "{faction} gagne"
-
-#: src/screenComponents/combatManeuver.cpp:16
-msgid "Combat maneuver"
-msgstr "Manoeuvre de combat"
-
-#: src/screenComponents/shipDestroyedPopup.cpp:19
-msgid "SHIP DESTROYED!"
-msgstr "VAISSEAU DÉTRUIT !"
-
-#: src/screenComponents/shipDestroyedPopup.cpp:20
-msgctxt "shipdestroyed"
-msgid "Return"
+msgid "Back"
 msgstr "Retour"
 
-#: src/screenComponents/warpControls.cpp:41
-msgctxt "slider"
-msgid "Warp"
-msgstr "Vit. lumière"
-
-#: src/screenComponents/commsOverlay.cpp:20
-msgid "Opening communications..."
-msgstr "Appel en cours..."
-
-#: src/screenComponents/commsOverlay.cpp:39
-msgid "Answer"
-msgstr "Répondre"
-
-#: src/screenComponents/commsOverlay.cpp:45
-msgid "Ignore"
-msgstr "Ignorer"
-
-#: src/screenComponents/commsOverlay.cpp:54
-msgid "No reply..."
-msgstr "Pas de réponse..."
-
-#: src/screenComponents/commsOverlay.cpp:65
-msgid "Communications were suddenly cut"
-msgstr "La communication a été brusquement coupée"
-
-#: src/screenComponents/commsOverlay.cpp:76
-msgid "Communications channel closed"
-msgstr "Canal de communication fermé"
-
-#: src/screenComponents/commsOverlay.cpp:157
-msgid "Hailed by {name}"
-msgstr "Message provenant de {name}"
-
-#: src/screenComponents/jumpIndicator.cpp:24
-msgid "Jump in: {delay}"
-msgstr "Saut dans : {delay}"
-
-#: src/screenComponents/scanningDialog.cpp:22
-msgctxt "scanning"
-msgid "Electric signature"
-msgstr "Signature électrique"
-
-#: src/screenComponents/scanningDialog.cpp:28
-msgctxt "scanning"
-msgid "LOCKED"
-msgstr "VERROUILLÉ"
-
-#: src/screenComponents/mainScreenControls.cpp:15
-msgctxt "controlbutton"
-msgid "Main screen"
-msgstr "Écran principal"
-
-#: src/screenComponents/mainScreenControls.cpp:32
-msgctxt "mainscreen"
-msgid "Front"
-msgstr "Avant"
-
-#: src/screenComponents/mainScreenControls.cpp:40
-msgctxt "mainscreen"
-msgid "Back"
-msgstr "Arrière"
-
-#: src/screenComponents/mainScreenControls.cpp:48
-msgctxt "mainscreen"
-msgid "Left"
-msgstr "Gauche"
-
-#: src/screenComponents/mainScreenControls.cpp:56
-msgctxt "mainscreen"
-msgid "Right"
-msgstr "Droite"
-
-#: src/screenComponents/mainScreenControls.cpp:69
-msgctxt "mainscreen"
-msgid "Target lock"
-msgstr "Cible verrouillée"
-
-#: src/screenComponents/mainScreenControls.cpp:81
-msgctxt "mainscreen"
-msgid "Tactical"
-msgstr "Tactique"
-
-#: src/screenComponents/mainScreenControls.cpp:92
-msgctxt "mainscreen"
-msgid "Long Range"
-msgstr "Longue portée"
-
-#: src/screenComponents/mainScreenControls.cpp:106
-msgctxt "mainscreen"
-msgid "Show comms"
-msgstr "Afficher comms"
-
-#: src/screenComponents/mainScreenControls.cpp:117
-msgctxt "mainscreen"
-msgid "Hide comms"
-msgstr "Cacher comms."
-
-#: src/screenComponents/hackingDialog.cpp:36
-msgctxt "hacking"
-msgid "Reset"
-msgstr "Réinitialiser"
-
-#: src/screenComponents/hackingDialog.cpp:56
-msgctxt "hacking"
-msgid "Target system:"
-msgstr "Système cible :"
-
-#: src/screenComponents/hackingDialog.cpp:116
-msgctxt "hacking"
-msgid "Hacking in Progress: {percent}%"
-msgstr "Piratage en cours : {percent}%"
-
-#: src/screenComponents/hackingDialog.cpp:125
-msgctxt "hacking"
-msgid "{target}: hacked {percent}%"
-msgstr "{target} : neutralisé à {percent}%"
-
-#: src/screenComponents/hackingDialog.cpp:142
-msgid "Hacking SUCCESS!"
-msgstr "Piratage RÉUSSI !"
-
-#: src/screenComponents/hackingDialog.cpp:142
-msgid "Hacking FAILURE!"
-msgstr "Piratage ÉCHOUÉ !"
-
-#: src/gui/hotkeyConfig.cpp:201 src/gui/hotkeyConfig.cpp:202
-#: src/gui/hotkeyConfig.cpp:203 src/gui/hotkeyConfig.cpp:204
-#: src/gui/hotkeyConfig.cpp:205 src/gui/hotkeyConfig.cpp:206
-#: src/gui/hotkeyConfig.cpp:207
-msgctxt "hotkey_menu"
-msgid "Basic"
-msgstr "Basique"
-
-#: src/gui/hotkeyConfig.cpp:201
-msgctxt "hotkey_Basic"
-msgid "Pause game"
-msgstr "Mettre le jeu en pause"
-
-#: src/gui/hotkeyConfig.cpp:202
-msgctxt "hotkey_Basic"
-msgid "Show in-game help"
-msgstr "Afficher l'aide en jeu"
-
-#: src/gui/hotkeyConfig.cpp:203
-msgctxt "hotkey_Basic"
-msgid "Return to ship options menu"
-msgstr "Retourner au menu vaisseau/postes"
-
-#: src/gui/hotkeyConfig.cpp:204
-msgctxt "hotkey_Basic"
-msgid "Zoom in on zoomable stations"
-msgstr "Zoomer sur les stations zoomables"
-
-#: src/gui/hotkeyConfig.cpp:205
-msgctxt "hotkey_Basic"
-msgid "Zoom out on zoomable stations"
-msgstr "Dézoomer sur les stations zoomables"
-
-#: src/gui/hotkeyConfig.cpp:206
-msgctxt "hotkey_Basic"
-msgid "Broadcast voice chat to server"
-msgstr "Diffuser le chat vocal sur le serveur"
-
-#: src/gui/hotkeyConfig.cpp:207
-msgctxt "hotkey_Basic"
-msgid "Broadcast voice chat to ship"
-msgstr "Diffuser le chat vocal sur le navire"
-
-#: src/gui/hotkeyConfig.cpp:210 src/gui/hotkeyConfig.cpp:211
-#: src/gui/hotkeyConfig.cpp:212 src/gui/hotkeyConfig.cpp:213
-#: src/gui/hotkeyConfig.cpp:214 src/gui/hotkeyConfig.cpp:215
-#: src/gui/hotkeyConfig.cpp:216
-msgctxt "hotkey_menu"
-msgid "General"
-msgstr "Général"
-
-#: src/gui/hotkeyConfig.cpp:210
-msgctxt "hotkey_General"
-msgid "Switch to next crew station"
-msgstr "Switcher sur le poste suivant"
-
-#: src/gui/hotkeyConfig.cpp:211
-msgctxt "hotkey_General"
-msgid "Switch to previous crew station"
-msgstr "Switcher sur le poste précèdent"
-
-#: src/gui/hotkeyConfig.cpp:212
-msgctxt "hotkey_General"
-msgid "Switch to helms station"
-msgstr "Switcher sur le poste Navigation"
-
-#: src/gui/hotkeyConfig.cpp:213
-msgctxt "hotkey_General"
-msgid "Switch to weapons station"
-msgstr "Switcher sur le poste Armement"
-
-#: src/gui/hotkeyConfig.cpp:214
-msgctxt "hotkey_General"
-msgid "Switch to engineering station"
-msgstr "Switcher sur le poste Ingénierie"
-
-#: src/gui/hotkeyConfig.cpp:215
-msgctxt "hotkey_General"
-msgid "Switch to science station"
-msgstr "Switcher sur le poste Science"
-
-#: src/gui/hotkeyConfig.cpp:216
-msgctxt "hotkey_General"
-msgid "Switch to relay station"
-msgstr "Switcher sur le poste Communications"
-
-#: src/gui/hotkeyConfig.cpp:219
-msgctxt "hotkey_MainScreen"
-msgid "View forward"
-msgstr "Vue avant"
-
-#: src/gui/hotkeyConfig.cpp:220
-msgctxt "hotkey_MainScreen"
-msgid "View left"
-msgstr "Vue gauche"
-
-#: src/gui/hotkeyConfig.cpp:221
-msgctxt "hotkey_MainScreen"
-msgid "View right"
-msgstr "Vue droite"
-
-#: src/gui/hotkeyConfig.cpp:222
-msgctxt "hotkey_MainScreen"
-msgid "View backward"
-msgstr "Vue arrière"
-
-#: src/gui/hotkeyConfig.cpp:223
-msgctxt "hotkey_MainScreen"
-msgid "Lock view on weapons target"
-msgstr "Vue verrouillée sur cible Armement"
-
-#: src/gui/hotkeyConfig.cpp:224
-msgctxt "hotkey_MainScreen"
-msgid "View tactical radar"
-msgstr "Vue radar tactique"
-
-#: src/gui/hotkeyConfig.cpp:225
-msgctxt "hotkey_MainScreen"
-msgid "View long-range radar"
-msgstr "Vue radar longue portée"
-
-#: src/gui/hotkeyConfig.cpp:226
-msgctxt "hotkey_MainScreen"
-msgid "Toggle first-person view"
-msgstr "Vue à la 1ère personne"
-
-#: src/gui/hotkeyConfig.cpp:229 src/gui/hotkeyConfig.cpp:230
-#: src/gui/hotkeyConfig.cpp:231 src/gui/hotkeyConfig.cpp:232
-#: src/gui/hotkeyConfig.cpp:233 src/gui/hotkeyConfig.cpp:234
-#: src/gui/hotkeyConfig.cpp:235 src/gui/hotkeyConfig.cpp:236
-#: src/gui/hotkeyConfig.cpp:237 src/gui/hotkeyConfig.cpp:238
-#: src/gui/hotkeyConfig.cpp:239 src/gui/hotkeyConfig.cpp:240
-#: src/gui/hotkeyConfig.cpp:241 src/gui/hotkeyConfig.cpp:242
-#: src/gui/hotkeyConfig.cpp:243 src/gui/hotkeyConfig.cpp:244
-#: src/gui/hotkeyConfig.cpp:245 src/gui/hotkeyConfig.cpp:246
-#: src/gui/hotkeyConfig.cpp:247 src/gui/hotkeyConfig.cpp:248
-#: src/gui/hotkeyConfig.cpp:249 src/gui/hotkeyConfig.cpp:250
-#: src/gui/hotkeyConfig.cpp:251 src/gui/hotkeyConfig.cpp:252
-#: src/gui/hotkeyConfig.cpp:253
-msgctxt "hotkey_menu"
-msgid "Helms"
-msgstr "Navigation"
-
-#: src/gui/hotkeyConfig.cpp:229
-msgctxt "hotkey_Helms"
-msgid "Increase impulse"
-msgstr "Accélérer (moteurs principaux)"
-
-#: src/gui/hotkeyConfig.cpp:230
-msgctxt "hotkey_Helms"
-msgid "Decrease impulse"
-msgstr "Décélérer (moteurs principaux)"
-
-#: src/gui/hotkeyConfig.cpp:231
-msgctxt "hotkey_Helms"
-msgid "Set impulse (joystick)"
-msgstr "Activer les moteurs (joystick)"
-
-#: src/gui/hotkeyConfig.cpp:232
-msgctxt "hotkey_Helms"
-msgid "Zero impulse"
-msgstr "Eteindre les moteurs"
-
-#: src/gui/hotkeyConfig.cpp:233
-msgctxt "hotkey_Helms"
-msgid "Max impulse"
-msgstr "Puissance des moteurs avant max"
-
-#: src/gui/hotkeyConfig.cpp:234
-msgctxt "hotkey_Helms"
-msgid "Max reverse impulse"
-msgstr "Puissance des moteurs arrière max"
-
-#: src/gui/hotkeyConfig.cpp:235
-msgctxt "hotkey_Helms"
-msgid "Turn left"
-msgstr "Tourner à gauche"
-
-#: src/gui/hotkeyConfig.cpp:236
-msgctxt "hotkey_Helms"
-msgid "Turn right"
-msgstr "Tourner à droite"
-
-#: src/gui/hotkeyConfig.cpp:237
-msgctxt "hotkey_Helms"
-msgid "Warp off"
-msgstr "Vitesse lumière Off"
-
-#: src/gui/hotkeyConfig.cpp:238
-msgctxt "hotkey_Helms"
-msgid "Warp 1"
-msgstr "Vitesse lumière niveau 1"
-
-#: src/gui/hotkeyConfig.cpp:239
-msgctxt "hotkey_Helms"
-msgid "Warp 2"
-msgstr "Vitesse lumière niveau 2"
-
-#: src/gui/hotkeyConfig.cpp:240
-msgctxt "hotkey_Helms"
-msgid "Warp 3"
-msgstr "Vitesse lumière niveau 3"
-
-#: src/gui/hotkeyConfig.cpp:241
-msgctxt "hotkey_Helms"
-msgid "Warp 4"
-msgstr "Vitesse lumière niveau 4"
-
-#: src/gui/hotkeyConfig.cpp:242
-msgctxt "hotkey_Helms"
-msgid "Increase Warp"
-msgstr "Accélérer (vitesse lumière)"
-
-#: src/gui/hotkeyConfig.cpp:243
-msgctxt "hotkey_Helms"
-msgid "Decrease Warp"
-msgstr "Décélérer (vitesse lumière)"
-
-#: src/gui/hotkeyConfig.cpp:244
-msgctxt "hotkey_Helms"
-msgid "Dock request/abort/undock"
-msgstr "Accoster/désamarrer"
-
-#: src/gui/hotkeyConfig.cpp:245
-msgctxt "hotkey_Helms"
-msgid "Initiate docking"
-msgstr "Accoster"
-
-#: src/gui/hotkeyConfig.cpp:246
-msgctxt "hotkey_Helms"
-msgid "Abort docking"
-msgstr "Annuler accostage"
-
-#: src/gui/hotkeyConfig.cpp:247
-msgctxt "hotkey_Helms"
-msgid "Undock"
-msgstr "Désamarrer"
-
-#: src/gui/hotkeyConfig.cpp:248
-msgctxt "hotkey_Helms"
-msgid "Increase jump distance"
-msgstr "Augmenter la distance de saut"
-
-#: src/gui/hotkeyConfig.cpp:249
-msgctxt "hotkey_Helms"
-msgid "Decrease jump distance"
-msgstr "Diminuer la distance de saut"
-
-#: src/gui/hotkeyConfig.cpp:250
-msgctxt "hotkey_Helms"
-msgid "Initiate jump"
-msgstr "Activer le saut (téléportation)"
-
-#: src/gui/hotkeyConfig.cpp:251
-msgctxt "hotkey_Helms"
-msgid "Combat boost left"
-msgstr "Manœuvre de combat gauche"
-
-#: src/gui/hotkeyConfig.cpp:252
-msgctxt "hotkey_Helms"
-msgid "Combat boost right"
-msgstr "Manœuvre de combat droite"
-
-#: src/gui/hotkeyConfig.cpp:253
-msgctxt "hotkey_Helms"
-msgid "Combat boost forwards"
-msgstr "Manœuvre de combat avant"
-
-#: src/gui/hotkeyConfig.cpp:256 src/gui/hotkeyConfig.cpp:257
-#: src/gui/hotkeyConfig.cpp:258 src/gui/hotkeyConfig.cpp:259
-#: src/gui/hotkeyConfig.cpp:260 src/gui/hotkeyConfig.cpp:263
-#: src/gui/hotkeyConfig.cpp:264 src/gui/hotkeyConfig.cpp:265
-#: src/gui/hotkeyConfig.cpp:267 src/gui/hotkeyConfig.cpp:268
-#: src/gui/hotkeyConfig.cpp:269 src/gui/hotkeyConfig.cpp:270
-#: src/gui/hotkeyConfig.cpp:271 src/gui/hotkeyConfig.cpp:272
-#: src/gui/hotkeyConfig.cpp:273 src/gui/hotkeyConfig.cpp:274
-#: src/gui/hotkeyConfig.cpp:275 src/gui/hotkeyConfig.cpp:276
-#: src/gui/hotkeyConfig.cpp:277 src/gui/hotkeyConfig.cpp:278
-#: src/gui/hotkeyConfig.cpp:279 src/gui/hotkeyConfig.cpp:280
-#: src/gui/hotkeyConfig.cpp:281 src/gui/hotkeyConfig.cpp:282
-#: src/gui/hotkeyConfig.cpp:283
-msgctxt "hotkey_menu"
-msgid "Weapons"
-msgstr "Armement"
-
-#: src/gui/hotkeyConfig.cpp:256
-msgctxt "hotkey_Weapons"
-msgid "Select homing"
-msgstr "Sélectionner homing"
-
-#: src/gui/hotkeyConfig.cpp:257
-msgctxt "hotkey_Weapons"
-msgid "Select nuke"
-msgstr "Sélectionner nuke"
-
-#: src/gui/hotkeyConfig.cpp:258
-msgctxt "hotkey_Weapons"
-msgid "Select mine"
-msgstr "Sélectionner mine"
-
-#: src/gui/hotkeyConfig.cpp:259
-msgctxt "hotkey_Weapons"
-msgid "Select EMP"
-msgstr "Sélectionner EMP"
-
-#: src/gui/hotkeyConfig.cpp:260
-msgctxt "hotkey_Weapons"
-msgid "Select HVLI"
-msgstr "Sélectionner HVLI"
-
-#: src/gui/hotkeyConfig.cpp:263
-msgctxt "hotkey_Weapons"
-msgid "Load tube {number}"
-msgstr "Charger le tube {number}"
-
-#: src/gui/hotkeyConfig.cpp:264
-msgctxt "hotkey_Weapons"
-msgid "Unload tube {number}"
-msgstr "Décharger le tube {number}"
-
-#: src/gui/hotkeyConfig.cpp:265
-msgctxt "hotkey_Weapons"
-msgid "Fire tube {number}"
-msgstr "Lancer le tube {number}"
-
-#: src/gui/hotkeyConfig.cpp:267
-msgctxt "hotkey_Weapons"
-msgid "Select next hostile target"
-msgstr "Sélectionner la cible hostile suivante"
-
-#: src/gui/hotkeyConfig.cpp:268
-msgctxt "hotkey_Weapons"
-msgid "Select next target (any)"
-msgstr "Sélectionner la cible suivante"
-
-#: src/gui/hotkeyConfig.cpp:269
-msgctxt "hotkey_Weapons"
-msgid "Toggle shields"
-msgstr "Activer/désactiver les boucliers"
-
-#: src/gui/hotkeyConfig.cpp:270
-msgctxt "hotkey_Weapons"
-msgid "Enable shields"
-msgstr "Activer les boucliers"
-
-#: src/gui/hotkeyConfig.cpp:271
-msgctxt "hotkey_Weapons"
-msgid "Disable shields"
-msgstr "Désactiver les boucliers"
-
-#: src/gui/hotkeyConfig.cpp:272
-msgctxt "hotkey_Weapons"
-msgid "Increase shield frequency target"
-msgstr "Augmenter la fréquence des boucliers"
-
-#: src/gui/hotkeyConfig.cpp:273
-msgctxt "hotkey_Weapons"
-msgid "Decrease shield frequency target"
-msgstr "Réduire la fréquence des boucliers"
-
-#: src/gui/hotkeyConfig.cpp:274
-msgctxt "hotkey_Weapons"
-msgid "Start shield calibration"
-msgstr "Démarrer le calibrage des boucliers"
-
-#: src/gui/hotkeyConfig.cpp:275
-msgctxt "hotkey_Weapons"
-msgid "Next beam subsystem target type"
-msgstr "Sous-système ciblé suivant (faisceaux)"
-
-#: src/gui/hotkeyConfig.cpp:276
-msgctxt "hotkey_Weapons"
-msgid "Previous beam subsystem target type"
-msgstr "Sous-système ciblé préc. (faisceaux)"
-
-#: src/gui/hotkeyConfig.cpp:277
-msgctxt "hotkey_Weapons"
-msgid "Increase beam frequency"
-msgstr "Augmenter la fréquence des faisceaux"
-
-#: src/gui/hotkeyConfig.cpp:278
-msgctxt "hotkey_Weapons"
-msgid "Decrease beam frequency"
-msgstr "Réduire la fréquence des faisceaux"
-
-#: src/gui/hotkeyConfig.cpp:279
-msgctxt "hotkey_Weapons"
-msgid "Toggle missile aim lock"
-msgstr "Activer/désact. verrouillage missiles"
-
-#: src/gui/hotkeyConfig.cpp:280
-msgctxt "hotkey_Weapons"
-msgid "Enable missile aim lock"
-msgstr "Activer le verrouillage des missiles"
-
-#: src/gui/hotkeyConfig.cpp:281
-msgctxt "hotkey_Weapons"
-msgid "Disable"
-msgstr "Désactiver le verrouillage des missiles"
-
-#: src/gui/hotkeyConfig.cpp:282
-msgctxt "hotkey_Weapons"
-msgid "Turn missile aim to the left"
-msgstr "Verrouillage missiles vers la gauche"
-
-#: src/gui/hotkeyConfig.cpp:283
-msgctxt "hotkey_Weapons"
-msgid "Turn missile aim to the right"
-msgstr "Verrouillage missiles vers la droite"
-
-#: src/gui/hotkeyConfig.cpp:286 src/gui/hotkeyConfig.cpp:287
-#: src/gui/hotkeyConfig.cpp:290 src/gui/hotkeyConfig.cpp:291
-msgctxt "hotkey_menu"
-msgid "Science"
-msgstr "Science"
-
-#: src/gui/hotkeyConfig.cpp:286
-msgctxt "hotkey_Science"
-msgid "Scan object"
-msgstr "Scanner l'objet"
-
-#: src/gui/hotkeyConfig.cpp:287
-msgctxt "hotkey_Science"
-msgid "Select next scannable object"
-msgstr "Sélectionner l'objet suivant à scanner"
-
-#: src/gui/hotkeyConfig.cpp:290
-msgctxt "hotkey_Science"
-msgid "Scanning parameter {number} increase"
-msgstr "Scan niveau {number} vers la droite"
-
-#: src/gui/hotkeyConfig.cpp:291
-msgctxt "hotkey_Science"
-msgid "Scanning parameter {number} decrease"
-msgstr "Scan niveau {number} vers la gauche"
-
-#: src/gui/hotkeyConfig.cpp:295 src/gui/hotkeyConfig.cpp:296
-#: src/gui/hotkeyConfig.cpp:297 src/gui/hotkeyConfig.cpp:298
-#: src/gui/hotkeyConfig.cpp:299 src/gui/hotkeyConfig.cpp:300
-#: src/gui/hotkeyConfig.cpp:301 src/gui/hotkeyConfig.cpp:302
-#: src/gui/hotkeyConfig.cpp:303 src/gui/hotkeyConfig.cpp:304
-#: src/gui/hotkeyConfig.cpp:305 src/gui/hotkeyConfig.cpp:306
-#: src/gui/hotkeyConfig.cpp:307 src/gui/hotkeyConfig.cpp:308
-#: src/gui/hotkeyConfig.cpp:309 src/gui/hotkeyConfig.cpp:310
-#: src/gui/hotkeyConfig.cpp:311 src/gui/hotkeyConfig.cpp:312
-#: src/gui/hotkeyConfig.cpp:313 src/gui/hotkeyConfig.cpp:314
-#: src/gui/hotkeyConfig.cpp:315 src/gui/hotkeyConfig.cpp:316
-#: src/gui/hotkeyConfig.cpp:317 src/gui/hotkeyConfig.cpp:318
-#: src/gui/hotkeyConfig.cpp:319 src/gui/hotkeyConfig.cpp:320
-#: src/gui/hotkeyConfig.cpp:321 src/gui/hotkeyConfig.cpp:322
-#: src/gui/hotkeyConfig.cpp:323
-msgctxt "hotkey_menu"
-msgid "Engineering"
-msgstr "Ingénierie"
-
-#: src/gui/hotkeyConfig.cpp:295
-msgctxt "hotkey_Engineering"
-msgid "Select reactor system"
-msgstr "Sélectionner le réacteur"
-
-#: src/gui/hotkeyConfig.cpp:296
-msgctxt "hotkey_Engineering"
-msgid "Select beam weapon system"
-msgstr "Sélectionner les faisceaux laser"
-
-#: src/gui/hotkeyConfig.cpp:297
-msgctxt "hotkey_Engineering"
-msgid "Select missile weapon system"
-msgstr "Sélectionner le système de missiles"
-
-#: src/gui/hotkeyConfig.cpp:298
-msgctxt "hotkey_Engineering"
-msgid "Select maneuvering system"
-msgstr "Sélectionner la manoeuvre"
-
-#: src/gui/hotkeyConfig.cpp:299
-msgctxt "hotkey_Engineering"
-msgid "Select impulse system"
-msgstr "Sélectionner les moteurs à impulsion"
-
-#: src/gui/hotkeyConfig.cpp:300
-msgctxt "hotkey_Engineering"
-msgid "Select warp system"
-msgstr "Sélectionner la vitesse lumière"
-
-#: src/gui/hotkeyConfig.cpp:301
-msgctxt "hotkey_Engineering"
-msgid "Select jump drive system"
-msgstr "Sélectionner la téléportation"
-
-#: src/gui/hotkeyConfig.cpp:302
-msgctxt "hotkey_Engineering"
-msgid "Select front shields system"
-msgstr "Sélectionner les boucliers avant"
-
-#: src/gui/hotkeyConfig.cpp:303
-msgctxt "hotkey_Engineering"
-msgid "Select rear shields system"
-msgstr "Sélectionner les boucliers arrière"
-
-#: src/gui/hotkeyConfig.cpp:304
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 0%"
-msgstr "Régler la puissance du système à 0%"
-
-#: src/gui/hotkeyConfig.cpp:305
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 30%"
-msgstr "Régler la puissance du système à 30%"
-
-#: src/gui/hotkeyConfig.cpp:306
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 50%"
-msgstr "Régler la puissance du système à 50%"
-
-#: src/gui/hotkeyConfig.cpp:307
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 100%"
-msgstr "Régler la puissance du système à 100%"
-
-#: src/gui/hotkeyConfig.cpp:308
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 150%"
-msgstr "Régler la puissance du système à 150%"
-
-#: src/gui/hotkeyConfig.cpp:309
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 200%"
-msgstr "Régler la puissance du système à 200%"
-
-#: src/gui/hotkeyConfig.cpp:310
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 250%"
-msgstr "Régler la puissance du système à 250%"
-
-#: src/gui/hotkeyConfig.cpp:311
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 300%"
-msgstr "Régler la puissance du système à 300%"
-
-#: src/gui/hotkeyConfig.cpp:312
-msgctxt "hotkey_Engineering"
-msgid "Increase system power"
-msgstr "Augmenter la puissance du système"
-
-#: src/gui/hotkeyConfig.cpp:313
-msgctxt "hotkey_Engineering"
-msgid "Decrease system power"
-msgstr "Réduire la puissance du système"
-
-#: src/gui/hotkeyConfig.cpp:314
-msgctxt "hotkey_Engineering"
-msgid "Increase system coolant"
-msgstr "Augmenter le liquide de refroidissement"
-
-#: src/gui/hotkeyConfig.cpp:315
-msgctxt "hotkey_Engineering"
-msgid "Decrease system coolant"
-msgstr "Réduire le liquide de refroidissement"
-
-#: src/gui/hotkeyConfig.cpp:316
-msgctxt "hotkey_Engineering"
-msgid "Next repair crew"
-msgstr "Sélectionner le réparateur suivant"
-
-#: src/gui/hotkeyConfig.cpp:317
-msgctxt "hotkey_Engineering"
-msgid "Crew move up"
-msgstr "Déplacer le réparateur en haut"
-
-#: src/gui/hotkeyConfig.cpp:318
-msgctxt "hotkey_Engineering"
-msgid "Crew move down"
-msgstr "Déplacer le réparateur en bas"
-
-#: src/gui/hotkeyConfig.cpp:319
-msgctxt "hotkey_Engineering"
-msgid "Crew move left"
-msgstr "Déplacer le réparateur à gauche"
-
-#: src/gui/hotkeyConfig.cpp:320
-msgctxt "hotkey_Engineering"
-msgid "Crew move right"
-msgstr "Déplacer le réparateur à droite"
-
-#: src/gui/hotkeyConfig.cpp:321
-msgctxt "hotkey_Engineering"
-msgid "Start self-destruct"
-msgstr "Activer l'autodestruction"
-
-#: src/gui/hotkeyConfig.cpp:322
-msgctxt "hotkey_Engineering"
-msgid "Confirm self-destruct"
-msgstr "Confirmer l'autodestruction"
-
-#: src/gui/hotkeyConfig.cpp:323
-msgctxt "hotkey_Engineering"
-msgid "Cancel self-destruct"
-msgstr "Annuler l'autodestruction"
-
-#: src/gui/hotkeyConfig.cpp:326 src/gui/hotkeyConfig.cpp:327
-msgctxt "hotkey_menu"
-msgid "GM"
-msgstr "Maître de jeu"
-
-#: src/gui/hotkeyConfig.cpp:326
-msgctxt "hotkey_GM"
-msgid "Delete"
-msgstr "Supprimer"
-
-#: src/gui/hotkeyConfig.cpp:327
-msgctxt "hotkey_GM"
-msgid "Copy to clipboard"
-msgstr "Copier dans le presse-papier"
-
-#: src/gui/hotkeyConfig.cpp:330 src/gui/hotkeyConfig.cpp:333
-#: src/gui/hotkeyConfig.cpp:334
-msgctxt "hotkey_menu"
-msgid "Various"
-msgstr "Divers"
-
-#: src/gui/hotkeyConfig.cpp:330
-msgctxt "hotkey_various"
-msgid "Show callsigns (spectator)"
-msgstr "Afficher noms des vaisseaux (spectateurs)"
-
-#: src/gui/hotkeyConfig.cpp:333
-msgctxt "hotkey_debug"
-msgid "Show FPS"
-msgstr "Afficher les FPS"
-
-#: src/gui/hotkeyConfig.cpp:334
-msgctxt "hotkey_debug"
-msgid "Show debug timing"
-msgstr "Afficher le graphique de débogage"
-
-#: src/spaceObjects/missiles/missileWeapon.cpp:194
-#: src/spaceObjects/mine.cpp:148
-msgctxt "gm_info"
-msgid "Owner"
-msgstr "Propriétaire"
-
-#: src/spaceObjects/missiles/missileWeapon.cpp:201
-msgctxt "gm_info"
-msgid "Target"
-msgstr "Cible"
-
-#: src/spaceObjects/missiles/missileWeapon.cpp:204
-#: src/spaceObjects/mine.cpp:151
-msgctxt "gm_info"
-msgid "Faction"
-msgstr "Faction"
-
-#: src/spaceObjects/missiles/missileWeapon.cpp:205
-msgctxt "gm_info"
-msgid "Lifetime"
-msgstr "Durée de vie"
-
-#: src/spaceObjects/missiles/missileWeapon.cpp:206
-msgctxt "gm_info"
-msgid "Size"
-msgstr "Taille"
-
-#: src/spaceObjects/spaceship.cpp:1622
-msgctxt "missile"
-msgid "Homing"
-msgstr "Homing"
-
-#: src/spaceObjects/spaceship.cpp:1624
-msgctxt "missile"
-msgid "Nuke"
-msgstr "Nuke"
-
-#: src/spaceObjects/spaceship.cpp:1626
-msgctxt "missile"
-msgid "Mine"
-msgstr "Mine"
-
-#: src/spaceObjects/spaceship.cpp:1628
-msgctxt "missile"
-msgid "EMP"
-msgstr "EMP"
-
-#: src/spaceObjects/spaceship.cpp:1630
-msgctxt "missile"
-msgid "HVLI"
-msgstr "HVLI"
-
-#: src/spaceObjects/cpuShip.cpp:199
-msgctxt "cpulog"
-msgid "Searching for targets."
-msgstr "En recherche de cibles."
-
-#: src/spaceObjects/cpuShip.cpp:208
-msgctxt "cpulog"
-msgid "Searching for hostiles around {x},{y}."
-msgstr "En recherche d'ennemis autour de {x},{y}."
-
-#: src/spaceObjects/cpuShip.cpp:217
-msgctxt "cpulog"
-msgid "Searching for supplies."
-msgstr "En recherche de marchandises."
-
-#: src/spaceObjects/cpuShip.cpp:220 src/spaceObjects/cpuShip.cpp:295
-msgctxt "cpulog"
-msgid "Docking to {callsign}."
-msgstr "En cours d'amarrage à {callsign}."
-
-#: src/spaceObjects/cpuShip.cpp:231
-msgctxt "cpulog"
-msgid "Standing ground for now."
-msgstr "Tient sa position pour l'instant."
-
-#: src/spaceObjects/cpuShip.cpp:239
-msgctxt "cpulog"
-msgid "Defending {x},{y}."
-msgstr "En train de défendre {x},{y}."
-
-#: src/spaceObjects/cpuShip.cpp:249
-msgctxt "cpulog"
-msgid "Defending {callsign}."
-msgstr "En train de défendre {callsign}."
-
-#: src/spaceObjects/cpuShip.cpp:259
-msgctxt "cpulog"
-msgid "Following {callsign}."
-msgstr "En train de suivre {callsign}."
-
-#: src/spaceObjects/cpuShip.cpp:267 src/spaceObjects/cpuShip.cpp:275
-msgctxt "cpulog"
-msgid "Moving to {x},{y}."
-msgstr "Se déplace vers {x},{y}."
-
-#: src/spaceObjects/cpuShip.cpp:285
-msgctxt "cpulog"
-msgid "Moving to attack {callsign}!"
-msgstr "En train d'attaquer {callsign} !"
-
-#: src/spaceObjects/cpuShip.cpp:310
-msgctxt "gm_info"
-msgid "Orders"
-msgstr "Ordres"
-
-#: src/spaceObjects/cpuShip.cpp:368
-msgctxt "orderscpu"
-msgid "Idle"
-msgstr "Au repos"
-
-#: src/spaceObjects/cpuShip.cpp:369
-msgctxt "orderscpu"
-msgid "Roaming"
-msgstr "Errer"
-
-#: src/spaceObjects/cpuShip.cpp:370
-msgctxt "orderscpu"
-msgid "Retreat"
-msgstr "Battre en retraite"
-
-#: src/spaceObjects/cpuShip.cpp:371
-msgctxt "orderscpu"
-msgid "Stand Ground"
-msgstr "Tenir sa position"
-
-#: src/spaceObjects/cpuShip.cpp:372
-msgctxt "orderscpu"
-msgid "Defend Location"
-msgstr "Défendre son emplacement"
-
-#: src/spaceObjects/cpuShip.cpp:373
-msgctxt "orderscpu"
-msgid "Defend Target"
-msgstr "Défendre la cible"
-
-#: src/spaceObjects/cpuShip.cpp:374
-msgctxt "orderscpu"
-msgid "Fly in formation"
-msgstr "Voler en formation"
-
-#: src/spaceObjects/cpuShip.cpp:375
-msgctxt "orderscpu"
-msgid "Fly towards"
-msgstr "Voler vers"
-
-#: src/spaceObjects/cpuShip.cpp:376
-msgctxt "orderscpu"
-msgid "Fly towards (ignore all)"
-msgstr "Voler vers (tout ignorer)"
-
-#: src/spaceObjects/cpuShip.cpp:377
-msgctxt "orderscpu"
-msgid "Attack"
-msgstr "Attaquer"
-
-#: src/spaceObjects/cpuShip.cpp:378
-msgctxt "orderscpu"
-msgid "Dock"
-msgstr "À quai"
-
-#: src/spaceObjects/playerSpaceship.cpp:308
-msgctxt "alert"
-msgid "RED ALERT"
-msgstr "ALERTE ROUGE"
-
-#: src/spaceObjects/playerSpaceship.cpp:309
-msgctxt "alert"
-msgid "YELLOW ALERT"
-msgstr "ALERTE JAUNE"
-
-#: src/spaceObjects/playerSpaceship.cpp:310
-msgctxt "alert"
-msgid "Normal"
-msgstr "Normal"
-
-#: src/spaceObjects/playerSpaceship.cpp:431
-msgctxt "shiplog"
-msgid "Start of log"
-msgstr "Début du journal de bord :"
-
-#: src/spaceObjects/playerSpaceship.cpp:1098
-msgctxt "shiplog"
-msgid "Hailed by {name}"
-msgstr "Appel provenant de {name}."
-
-#: src/spaceObjects/playerSpaceship.cpp:1152
-msgctxt "shiplog"
-msgid "Communication channel closed by other side"
-msgstr "Communication interrompue de l'extérieur."
-
-#: src/spaceObjects/playerSpaceship.cpp:1162
-msgctxt "shiplog"
-msgid "Hailing from {callsign} stopped"
-msgstr "Appel provenant de {callsign} interrompu."
-
-#: src/spaceObjects/playerSpaceship.cpp:1166
-msgctxt "shiplog"
-msgid "Communication channel closed"
-msgstr "Fin de transmission."
-
-#: src/spaceObjects/playerSpaceship.cpp:1337
-#: src/spaceObjects/playerSpaceship.cpp:1414
-msgctxt "chatdialog"
-msgid "Opened comms with {name}"
-msgstr "Communication établie avec {name}"
-
-#: src/spaceObjects/playerSpaceship.cpp:1338
-msgctxt "shiplog"
-msgid "Hailing: {name}"
-msgstr "Salutations : {name}."
-
-#: src/spaceObjects/playerSpaceship.cpp:1361
-#: src/spaceObjects/playerSpaceship.cpp:1362
-msgctxt "chatdialog"
-msgid "Opened comms to {callsign}"
-msgstr "Communication établie avec {callsign}"
-
-#: src/spaceObjects/playerSpaceship.cpp:1363
-#: src/spaceObjects/playerSpaceship.cpp:1364
-msgctxt "shiplog"
-msgid "Opened communication channel to {callsign}"
-msgstr "Communication établie avec {callsign}."
-
-#: src/spaceObjects/playerSpaceship.cpp:1366
-msgctxt "shiplog"
-msgid "Refused communications from {callsign}"
-msgstr "Communication en provenance de {callsign} refusée."
-
-#: src/spaceObjects/playerSpaceship.cpp:1367
-msgctxt "shiplog"
-msgid "Refused communications to {callsign}"
-msgstr "Communication vers {callsign} refusée."
-
-#: src/spaceObjects/playerSpaceship.cpp:1376
-msgctxt "shiplog"
-msgid "Hail suddenly went dead."
-msgstr "Communication brusquement interrompue."
-
-#: src/spaceObjects/playerSpaceship.cpp:1379
-msgctxt "shiplog"
-msgid "Accepted hail from {callsign}"
-msgstr "Appel provenant de {callsign} accepté."
-
-#: src/spaceObjects/playerSpaceship.cpp:1399
-msgctxt "shiplog"
-msgid "Refused hail from {callsign}"
-msgstr "Appel provenant de {callsign} refusé."
-
-#: src/spaceObjects/playerSpaceship.cpp:1413
-msgctxt "shiplog"
-msgid "Opened communication channel to {name}"
-msgstr "Canal de communication ouvert avec {name}."
-
-#: src/spaceObjects/playerSpaceship.cpp:1416
-msgctxt "shiplog"
-msgid "Refused hail from {name}"
-msgstr "Appel provenant de {name} refusé."
-
-#: src/spaceObjects/shipTemplateBasedObject.cpp:262
-msgctxt "gm_info"
-msgid "CallSign"
-msgstr "Nom"
-
-#: src/spaceObjects/shipTemplateBasedObject.cpp:263
-msgctxt "gm_info"
-msgid "Type"
-msgstr "Modèle"
-
-#: src/spaceObjects/shipTemplateBasedObject.cpp:264
-msgctxt "gm_info"
-msgid "Hull"
-msgstr "Coque"
-
-#: src/spaceObjects/shipTemplateBasedObject.cpp:269
-msgctxt "gm_info"
-msgid "Shield"
-msgstr "Bouclier"
-
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:299
-msgctxt "tube"
-msgid "Front"
-msgstr "Avant"
-
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:301
-msgctxt "tube"
-msgid "Right"
-msgstr "Droit"
-
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:303
-msgctxt "tube"
-msgid "Left"
-msgstr "Gauche"
-
-#: src/spaceObjects/spaceshipParts/weaponTube.cpp:305
-msgctxt "tube"
-msgid "Rear"
-msgstr "Arrière"
+#: scripts/comms_station.lua:154
+msgctxt "commsStation"
+msgid "Not enough reputation."
+msgstr "Pas assez de réputation."
+
+#: scripts/comms_station.lua:160
+msgctxt "commsStation"
+msgid "You are fully loaded and ready to explode things."
+msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+
+#: scripts/comms_station.lua:162
+msgctxt "commsStation"
+msgid ""
+"We generously resupplied you with some weapon charges.\n"
+"Put them to good use."
+msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
+
+#: scripts/comms_station.lua:176
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"This is %s. Good day, officer.\n"
+"If you need supplies, please dock with us first."
+msgstr ""
+"Ici la station %s. Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
+
+#: scripts/comms_station.lua:178
+#, lua-format
+msgctxt "commsStation"
+msgid ""
+"This is %s. Greetings.\n"
+"If you want to do business, please dock with us first."
+msgstr ""
+"Ici la station %s. Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#: scripts/comms_station.lua:185
+#, lua-format
+msgctxt "commsStation"
+msgid "Can you send a supply drop? (%d rep)"
+msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+
+#: scripts/comms_station.lua:194
+#, lua-format
+msgctxt "commsStation"
+msgid "Please send reinforcements! (%d rep)"
+msgstr "Merci de nous envoyer des renforts ! (%d rep)"
+
+#: scripts/comms_station.lua:209
+msgctxt "commsStation"
+msgid "You need to set a waypoint before you can request backup."
+msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de "
+"réapprovisionnement."
+
+#: scripts/comms_station.lua:211
+msgctxt "commsStation"
+msgid "To which waypoint should we deliver your supplies?"
+msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+
+#: scripts/comms_station.lua:224
+#, lua-format
+msgctxt "commsStation"
+msgid "We have dispatched a supply ship toward %s."
+msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"réapprovisionnement au marqueur %s."
+
+#: scripts/comms_station.lua:226 scripts/comms_station.lua:286
+msgctxt "commsStation"
+msgid "Not enough reputation!"
+msgstr "Pas assez de points de réputation !"
+
+#: scripts/comms_station.lua:242
+msgctxt "commsStation"
+msgid "What kind of reinforcement ship would you like?"
+msgstr "Quel type de vaisseau de renfort souhaitez-vous ?"
+
+#: scripts/comms_station.lua:243
+#, lua-format
+msgctxt "commsStation"
+msgid "Adder MK3 (%d rep)"
+msgstr "Adder MK3 (%d rép)"
+
+#: scripts/comms_station.lua:247
+#, lua-format
+msgctxt "commsStation"
+msgid "MU52 Hornet (%d rep)"
+msgstr "MU52 Hornet (%d rép)"
+
+#: scripts/comms_station.lua:251
+#, lua-format
+msgctxt "commsStation"
+msgid "Standard Adder MK5 (%d rep)"
+msgstr "Adder MK5 standart (%d rép)"
+
+#: scripts/comms_station.lua:255
+#, lua-format
+msgctxt "commsStation"
+msgid "Adder MK8 (%d rep)"
+msgstr "Adder MK8 (%d rép)"
+
+#: scripts/comms_station.lua:259
+#, lua-format
+msgctxt "commsStation"
+msgid "Phobos T3 (%d rep)"
+msgstr "Phobos T3 (%d rép)"
+
+#: scripts/comms_station.lua:267
+msgctxt "commsStation"
+msgid "You need to set a waypoint before you can request reinforcements."
+msgstr "Vous devez définir un marqueur avant de demander des renforts."
+
+#: scripts/comms_station.lua:269
+msgctxt "commsStation"
+msgid "To which waypoint should we dispatch the reinforcements?"
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
+#: scripts/comms_station.lua:284
+#, lua-format
+msgctxt "commsStation"
+msgid "We have dispatched %s to assist at %s."
+msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %s."
+
+#: scripts/comms_station.lua:355
+#, lua-format
+msgctxt "commsStation"
+msgid "WP %d"
+msgstr "%d"
+
+#~ msgctxt "database direction"
+#~ msgid "Front"
+#~ msgstr "Avant"
+
+#~ msgctxt "database direction"
+#~ msgid "Right"
+#~ msgstr "Droite"
+
+#~ msgctxt "database direction"
+#~ msgid "Left"
+#~ msgstr "Gauche"
+
+#~ msgctxt "database direction"
+#~ msgid "Rear"
+#~ msgstr "Arrière"
+
+#~ msgctxt "database"
+#~ msgid "Factions"
+#~ msgstr "Factions"
+
+#~ msgctxt "stance"
+#~ msgid "Neutral"
+#~ msgstr "Neutre"
+
+#~ msgctxt "stance"
+#~ msgid "Enemy"
+#~ msgstr "Ennemi"
+
+#~ msgctxt "stance"
+#~ msgid "Friendly"
+#~ msgstr "Amical"
+
+#~ msgctxt "database"
+#~ msgid "Ships"
+#~ msgstr "Vaisseaux"
+
+#~ msgctxt "database"
+#~ msgid "Class"
+#~ msgstr "Classe"
+
+#~ msgctxt "database"
+#~ msgid "Sub-class"
+#~ msgstr "Sous-classe"
+
+#~ msgctxt "database"
+#~ msgid "Size"
+#~ msgstr "Taille"
+
+#~ msgctxt "database"
+#~ msgid "Shield"
+#~ msgstr "Boucliers"
+
+#~ msgid "Hull"
+#~ msgstr "Coque"
+
+#~ msgctxt "database"
+#~ msgid "Move speed"
+#~ msgstr "Vit. de mouvement"
+
+#~ msgctxt "database"
+#~ msgid "Reverse move speed"
+#~ msgstr "Vit. inversion mvt :"
+
+#~ msgctxt "database"
+#~ msgid "Turn speed"
+#~ msgstr "Vit. de rotation"
+
+#~ msgctxt "database"
+#~ msgid "Warp speed"
+#~ msgstr "Vitesse lumière"
+
+#~ msgctxt "database"
+#~ msgid "Jump range"
+#~ msgstr "Portée de saut"
+
+#~ msgid "{direction} beam weapon"
+#~ msgstr "Faisceau {direction}"
+
+#~ msgctxt "database"
+#~ msgid "{damage} Dmg / {interval} sec"
+#~ msgstr "{damage} Dmg / {interval} sec"
+
+#~ msgctxt "database"
+#~ msgid "{direction} tube"
+#~ msgstr "Tube {direction}"
+
+#~ msgctxt "database"
+#~ msgid "{direction} small tube"
+#~ msgstr "Petit tube {direction}"
+
+#~ msgctxt "database"
+#~ msgid "{direction} large tube"
+#~ msgstr "Grand tube {direction}"
+
+#~ msgctxt "database"
+#~ msgid "{loadtime} sec"
+#~ msgstr "{loadtime} sec"
+
+#~ msgid "Storage {weapon}"
+#~ msgstr "Stockage {weapon}"
+
+#~ msgctxt "station"
+#~ msgid "Helms"
+#~ msgstr "Navigation"
+
+#~ msgctxt "station"
+#~ msgid "Weapons"
+#~ msgstr "Armement"
+
+#~ msgctxt "station"
+#~ msgid "Engineering"
+#~ msgstr "Ingénierie"
+
+#~ msgctxt "station"
+#~ msgid "Science"
+#~ msgstr "Science"
+
+#~ msgctxt "station"
+#~ msgid "Relay"
+#~ msgstr "Communications"
+
+#~ msgctxt "station"
+#~ msgid "Tactical"
+#~ msgstr "Radar tactique"
+
+#~ msgctxt "station"
+#~ msgid "Engineering+"
+#~ msgstr "Ingénierie+"
+
+#~ msgctxt "station"
+#~ msgid "Operations"
+#~ msgstr "Opérations"
+
+#~ msgctxt "station"
+#~ msgid "Single Pilot"
+#~ msgstr "Pilotage - armement"
+
+#~ msgctxt "station"
+#~ msgid "Damage Control"
+#~ msgstr "Réparation systèmes"
+
+#~ msgctxt "station"
+#~ msgid "Power Management"
+#~ msgstr "Gestion puissance"
+
+#~ msgctxt "station"
+#~ msgid "Database"
+#~ msgstr "Base de données"
+
+#~ msgctxt "station"
+#~ msgid "Strategic Map"
+#~ msgstr "Carte tactique"
+
+#~ msgctxt "station"
+#~ msgid "Comms"
+#~ msgstr "Communications"
+
+#~ msgctxt "station"
+#~ msgid "Ship's Log"
+#~ msgstr "Journal de bord"
+
+#~ msgid "No class"
+#~ msgstr "Sans classe"
+
+#~ msgid "No sub-class"
+#~ msgstr "Sans sous-classe"
+
+#~ msgctxt "system"
+#~ msgid "Reactor"
+#~ msgstr "Réacteur"
+
+#~ msgctxt "system"
+#~ msgid "Beam Weapons"
+#~ msgstr "Faisceaux laser"
+
+#~ msgctxt "system"
+#~ msgid "Missile System"
+#~ msgstr "Système de missiles"
+
+#~ msgctxt "system"
+#~ msgid "Maneuvering"
+#~ msgstr "Manoeuvre"
+
+#~ msgctxt "system"
+#~ msgid "Impulse Engines"
+#~ msgstr "Moteurs à impulsion"
+
+#~ msgctxt "system"
+#~ msgid "Warp Drive"
+#~ msgstr "Vitesse lumière"
+
+#~ msgctxt "system"
+#~ msgid "Jump Drive"
+#~ msgstr "Téléportation"
+
+#~ msgctxt "system"
+#~ msgid "Front Shield Generator"
+#~ msgstr "Boucliers avant"
+
+#~ msgctxt "system"
+#~ msgid "Rear Shield Generator"
+#~ msgstr "Boucliers arrière"
+
+#~ msgid "setting"
+#~ msgstr "Réglage"
+
+#~ msgid "Next"
+#~ msgstr "Suivant"
+
+#~ msgid "Reset"
+#~ msgstr "Réinitialiser"
+
+#~ msgctxt "connectserver"
+#~ msgid "Connecting..."
+#~ msgstr "Connexion en cours..."
+
+#~ msgctxt "button"
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
+
+#~ msgid "Please enter the server password:"
+#~ msgstr "Veuillez saisir le mot de passe du serveur :"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "still connected"
+#~ msgstr "Toujours connecté"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "bad credentials"
+#~ msgstr "Erreur d'identification"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "closed by server"
+#~ msgstr "Fermé par le serveur"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "timed out"
+#~ msgstr "Délai écoulé"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "unknown"
+#~ msgstr "Inconnu"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "version mismatch"
+#~ msgstr "Version incompatible"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "unspecified error {error}"
+#~ msgstr "Erreur non spécifiée {error}"
+
+#~ msgid "Connection error: {message}"
+#~ msgstr "Erreur de connexion : {message}"
+
+#~ msgid "LAN"
+#~ msgstr "LAN"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgctxt "screenLan"
+#~ msgid "Connect"
+#~ msgstr "Connexion"
+
+#~ msgid "Last Session ({last})"
+#~ msgstr "Dernière session ({last})"
+
+#~ msgid "Version: {version}"
+#~ msgstr "Version : {version}"
+
+#~ msgid "Your name:"
+#~ msgstr "Votre nom :"
+
+#~ msgid "Start server"
+#~ msgstr "Démarrer le serveur"
+
+#~ msgid "Start client"
+#~ msgstr "Démarrer le client"
+
+#~ msgid "Options"
+#~ msgstr "Options"
+
+#~ msgid "Quit"
+#~ msgstr "Quitter"
+
+#~ msgid "Tutorials"
+#~ msgstr "Tutoriels"
+
+#~ msgid "Server configuration"
+#~ msgstr "Configuration du serveur"
+
+#~ msgid "Server name: "
+#~ msgstr "Nom du serveur : "
+
+#~ msgid "Server password: "
+#~ msgstr "Mot de passe du serveur : "
+
+#~ msgid "GM control code: "
+#~ msgstr "Code du MJ : "
+
+#~ msgid "List on master server: "
+#~ msgstr "Visible sur le serveur maître : "
+
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "Server port: "
+#~ msgstr "Port du serveur : "
+
+#~ msgid "Server info"
+#~ msgstr "Infos du serveur"
+
+#~ msgid "Server IP: "
+#~ msgstr "IP du serveur : "
+
+#~ msgid "Close"
+#~ msgstr "Retour"
+
+#~ msgid "Continue"
+#~ msgstr "Continuer"
+
+#~ msgid "Category"
+#~ msgstr "Catégories"
+
+#~ msgid "Scenario"
+#~ msgstr "Choix du scénario"
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#~ msgid "Select a scenario..."
+#~ msgstr "Choisir un scénario..."
+
+#~ msgid "Start scenario"
+#~ msgstr "Démarrer le scénario"
+
+#~ msgid "Back"
+#~ msgstr "Retour"
+
+#~ msgctxt "title"
+#~ msgid "Tutorials"
+#~ msgstr "Tutoriels"
+
+#~ msgid "Start Tutorial"
+#~ msgstr "Démarrer le tutoriel"
+
+#~ msgid "Graphics options"
+#~ msgstr "Options graphiques"
+
+#~ msgid "Audio options"
+#~ msgstr "Options audio"
+
+#~ msgid "Interface options"
+#~ msgstr "Options d'interface"
+
+#~ msgid "Radar Rotation"
+#~ msgstr "Rotation des écrans radars"
+
+#~ msgid "Helms Radar Lock"
+#~ msgstr "Radar Navigation verrouillé"
+
+#~ msgid "Weapons Radar Lock"
+#~ msgstr "Radar armement verrouillé"
+
+#~ msgid "Science Radar Lock"
+#~ msgstr "Radar Science verrouillé"
+
+#~ msgid "Control Options"
+#~ msgstr "Options de controle"
+
+#~ msgid "Configure Keyboard"
+#~ msgstr "Configuration Clavier"
+
+#~ msgid "Language (applies on back)"
+#~ msgstr "Langue (à la sortie du menu)"
+
+#~ msgctxt "options"
+#~ msgid "Save"
+#~ msgstr "Sauvegarder"
+
+#~ msgid "Fullscreen toggle"
+#~ msgstr "Activer plein écran"
+
+#~ msgid "FoV: {fov}"
+#~ msgstr "Champ de vision : {fov}"
+
+#~ msgid "Sound Volume: {volume}%"
+#~ msgstr "Volume sonore : {volume} %"
+
+#~ msgid "Music Playback"
+#~ msgstr "Musique de fond"
+
+#~ msgid "Disabled"
+#~ msgstr "Désactivé"
+
+#~ msgid "Enabled"
+#~ msgstr "Activé"
+
+#~ msgid "Main Screen only"
+#~ msgstr "Écran principal"
+
+#~ msgid "Music Volume: {volume}%"
+#~ msgstr "Volume musique : {volume} %"
+
+#~ msgid "Impulse Engine sound"
+#~ msgstr "Son du moteur à impulsion"
+
+#~ msgid "Impulse Volume: {volume}%"
+#~ msgstr "Volume moteur : {volume} %"
+
+#~ msgid "Preview Soundtracks"
+#~ msgstr "Écoute des bandes-son"
+
+#~ msgid "Enter this ship's control code:"
+#~ msgstr "Veuillez saisir le code de contrôle du vaisseau :"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid ""
+#~ "Control code accepted.\n"
+#~ "Granting access."
+#~ msgstr ""
+#~ "Code de contrôle valide.\n"
+#~ "Accès accordé."
+
+#~ msgid "Incorrect control code. Re-enter code:"
+#~ msgstr "Code de contrôle incorrect. Veuillez réessayer :"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Game master"
+#~ msgstr "Maître de jeu"
+
+#~ msgid "Enter the GM control code:"
+#~ msgstr "Entrer le code de contrôle MJ :"
+
+#~ msgid "Spectate (view all)"
+#~ msgstr "Vue spectateur (carte)"
+
+#~ msgid "Scan complexity: "
+#~ msgstr "Complexité du scan : "
+
+#~ msgctxt "scanning"
+#~ msgid "None (delay)"
+#~ msgstr "Aucune (délai)"
+
+#~ msgctxt "scanning"
+#~ msgid "Simple"
+#~ msgstr "Simple"
+
+#~ msgctxt "scanning"
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgctxt "scanning"
+#~ msgid "Advanced"
+#~ msgstr "Avancée"
+
+#~ msgid "Hacking difficulty: "
+#~ msgstr "Difficulté de piratage : "
+
+#~ msgctxt "hacking"
+#~ msgid "Simple"
+#~ msgstr "Simple"
+
+#~ msgctxt "hacking"
+#~ msgid "Normal"
+#~ msgstr "Normale"
+
+#~ msgctxt "hacking"
+#~ msgid "Difficult"
+#~ msgstr "Difficile"
+
+#~ msgctxt "hacking"
+#~ msgid "Fiendish"
+#~ msgstr "Diabolique"
+
+#~ msgid "Hacking type: "
+#~ msgstr "Type de piratage : "
+
+#~ msgctxt "hacking"
+#~ msgid "Mine"
+#~ msgstr "Mines"
+
+#~ msgctxt "hacking"
+#~ msgid "Lights"
+#~ msgstr "Lumières"
+
+#~ msgctxt "hacking"
+#~ msgid "All"
+#~ msgstr "Les deux"
+
+#~ msgid "Beam/shield frequencies"
+#~ msgstr "Fréq. faisceaux/bouclier"
+
+#~ msgid "Per-system damage"
+#~ msgstr "Dégâts par systèmes"
+
+#~ msgid "Extra settings"
+#~ msgstr "Réglages : scan, fréquences, piratage..."
+
+#~ msgid "Select ship"
+#~ msgstr "Sélection vaisseau"
+
+#~ msgid "Waiting for server to spawn a ship"
+#~ msgstr "En attente du serveur pour embarquement"
+
+#~ msgid "Spawn player ship"
+#~ msgstr "Créer vaisseau joueur"
+
+#~ msgid "Scenario selection"
+#~ msgstr "Retour scénario"
+
+#~ msgid "Disconnect"
+#~ msgstr "Déconnexion"
+
+#~ msgid "6/5 player crew"
+#~ msgstr "Équipage 5/6 joueurs"
+
+#~ msgid "Main screen"
+#~ msgstr "Écran principal"
+
+#~ msgid "4/3/1 player crew"
+#~ msgstr "Équipage 1/3/4 joueurs"
+
+#~ msgid "Alternative options"
+#~ msgstr "Options alternatives"
+
+#~ msgid "Main screen controls"
+#~ msgstr "Contrôle de l'écran principal"
+
+#~ msgid "Ship window"
+#~ msgstr "Vue fenêtre"
+
+#~ msgid "Top-down 3D view"
+#~ msgstr "Vue de haut en 3D"
+
+#~ msgctxt "button"
+#~ msgid "Ready"
+#~ msgstr "Démarrer la partie"
+
+#~ msgctxt "button"
+#~ msgid "Lock camera on ship"
+#~ msgstr "Verrouiller caméra vaisseau"
+
+#~ msgctxt "button"
+#~ msgid "Lock camera on ship's target"
+#~ msgstr "Verrouiller caméra cible"
+
+#~ msgctxt "button"
+#~ msgid "Close"
+#~ msgstr "Fermer"
+
+#~ msgctxt "hotkey_F1"
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Raccourcis clavier"
+
+#~ msgctxt "hotkey_F1"
+#~ msgid "{label}:\t{button}\n"
+#~ msgstr "{label} : \t {button}\n"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Main Screen"
+#~ msgstr "Écran principal"
+
+#~ msgid "Open Comms"
+#~ msgstr "Ouvrir Comm."
+
+#~ msgid "Place Waypoint"
+#~ msgstr "Placer marqueur"
+
+#~ msgid "Delete Waypoint"
+#~ msgstr "Suppr. marqueur"
+
+#~ msgid "Reputation"
+#~ msgstr "Rép. actuelle "
+
+#~ msgid "Clock"
+#~ msgstr "Temps écoulé "
+
+#~ msgid "Energy"
+#~ msgstr "Énergie"
+
+#~ msgid "Heading"
+#~ msgstr "Cap"
+
+#~ msgid "Speed"
+#~ msgstr "Vitesse"
+
+#~ msgid "Shields"
+#~ msgstr "Boucliers"
+
+#~ msgid "Beams"
+#~ msgstr "Faisceaux"
+
+#~ msgid "{value} {unit}/min"
+#~ msgstr "{value} {unit}/min"
+
+#~ msgctxt "health"
+#~ msgid "Hull"
+#~ msgstr "Coque"
+
+#~ msgctxt "shields"
+#~ msgid "Front"
+#~ msgstr "B. avant"
+
+#~ msgctxt "shields"
+#~ msgid "Rear"
+#~ msgstr "B. arrière"
+
+#~ msgctxt "total"
+#~ msgid "Coolant"
+#~ msgstr "Liq. de ref."
+
+#~ msgctxt "slider"
+#~ msgid "Power"
+#~ msgstr "Puissance"
+
+#~ msgctxt "slider"
+#~ msgid "Coolant"
+#~ msgstr "Liq. de refroidissement"
+
+#~ msgid "{energy}/min"
+#~ msgstr "{energy}/min"
+
+#~ msgctxt "slider"
+#~ msgid "Power: {current_level}% / {requested}%"
+#~ msgstr "Puissance : {current_level}%/{requested}%"
+
+#~ msgctxt "slider"
+#~ msgid "Coolant: {current_level}% / {requested}%"
+#~ msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
+
+#~ msgid "Energy production"
+#~ msgstr "Production d'énergie"
+
+#~ msgid "Firing rate"
+#~ msgstr "Cadence de tir"
+
+#~ msgctxt "missile"
+#~ msgid "Reload rate"
+#~ msgstr "Vit. de charg. des tubes"
+
+#~ msgid "Turning speed"
+#~ msgstr "Vitesse de rotation"
+
+#~ msgid "Combat recharge rate"
+#~ msgstr "Recharge man. de combat"
+
+#~ msgid "Impulse speed"
+#~ msgstr "Puissance des moteurs"
+
+#~ msgid "Warp drive speed"
+#~ msgstr "Vitesse lumière max"
+
+#~ msgid "Jump drive recharge rate"
+#~ msgstr "Temps de rechargement"
+
+#~ msgid "Jump drive jump speed"
+#~ msgstr "Délai avant le saut"
+
+#~ msgctxt "shields"
+#~ msgid "Calibration speed"
+#~ msgstr "Vitesse de calibration"
+
+#~ msgctxt "shields"
+#~ msgid "Charge rate"
+#~ msgstr "Régénération"
+
+#~ msgid "Extra damage"
+#~ msgstr "Dommages supplémentaires"
+
+#~ msgid "Damage negate"
+#~ msgstr "Réduction des dégâts"
+
+#~ msgid "Callsign"
+#~ msgstr "Nom"
+
+#~ msgctxt "science"
+#~ msgid "Distance"
+#~ msgstr "Distance"
+
+#~ msgid "Bearing"
+#~ msgstr "Cap"
+
+#~ msgid "Rel. Speed"
+#~ msgstr "Vit. relative"
+
+#~ msgid "Faction"
+#~ msgstr "Faction"
+
+#~ msgctxt "science"
+#~ msgid "Type"
+#~ msgstr "Modèle"
+
+#~ msgctxt "database"
+#~ msgid "DB"
+#~ msgstr "BD"
+
+#~ msgctxt "science"
+#~ msgid "Shields"
+#~ msgstr "Boucliers"
+
+#~ msgctxt "science"
+#~ msgid "Hull"
+#~ msgstr "Coque"
+
+#~ msgctxt "button"
+#~ msgid "Probe View"
+#~ msgstr "Vue sonde"
+
+#~ msgid "Zoom: {zoom}x"
+#~ msgstr "Zoom : {zoom}x"
+
+#~ msgctxt "button"
+#~ msgid "Radar"
+#~ msgstr "Radar"
+
+#~ msgctxt "button"
+#~ msgid "Database"
+#~ msgstr "Base de données"
+
+#~ msgid "Link to Comms"
+#~ msgstr "Lier a Communications"
+
+#~ msgid "Start hacking"
+#~ msgstr "Démarrer piratage"
+
+#~ msgid "Link to Science"
+#~ msgstr "Lier a Science"
+
+#~ msgid "Launch Probe"
+#~ msgstr "Largage sonde"
+
+#~ msgid "Alert level"
+#~ msgstr "Niveau d'alerte"
+
+#~ msgid "Beam info"
+#~ msgstr "Faisceaux : réglages"
+
+#~ msgctxt "damagecontrol"
+#~ msgid "Hull"
+#~ msgstr "Coque"
+
+#~ msgid "Coolant"
+#~ msgstr "Liq. de refr."
+
+#~ msgctxt "button"
+#~ msgid "Power"
+#~ msgstr "Puissance"
+
+#~ msgctxt "button"
+#~ msgid "Coolant"
+#~ msgstr "Liquide de refroidissement"
+
+#~ msgctxt "button"
+#~ msgid "Heat"
+#~ msgstr "Surchauffe"
+
+#~ msgctxt "button"
+#~ msgid "Pause"
+#~ msgstr "Pause"
+
+#~ msgctxt "button"
+#~ msgid "Intercept all comms"
+#~ msgstr "Intercepter toute comm."
+
+#~ msgctxt "button"
+#~ msgid "Global message"
+#~ msgstr "Message général"
+
+#~ msgctxt "button"
+#~ msgid "Create..."
+#~ msgstr "Créer..."
+
+#~ msgctxt "button"
+#~ msgid "Copy scenario"
+#~ msgstr "Copier scénario"
+
+#~ msgctxt "button"
+#~ msgid "Copy selected"
+#~ msgstr "Copier sélection"
+
+#~ msgctxt "button"
+#~ msgid "Tweak"
+#~ msgstr "Modifier"
+
+#~ msgctxt "button"
+#~ msgid "Hail ship"
+#~ msgstr "Envoyer message"
+
+#~ msgid "Defend location"
+#~ msgstr "Défendre son emplacement"
+
+#~ msgid "Stand ground"
+#~ msgstr "Tenir sa position"
+
+#~ msgid "Roaming"
+#~ msgstr "Errer"
+
+#~ msgid "Idle"
+#~ msgstr "Au repos"
+
+#~ msgid "Orders:"
+#~ msgstr "Ordres :"
+
+#~ msgid "*mixed*"
+#~ msgstr "*varié*"
+
+#~ msgctxt "gm_info"
+#~ msgid "Position"
+#~ msgstr "Position"
+
+#~ msgid "gm_info"
+#~ msgstr "gm_info"
+
+#~ msgctxt "create"
+#~ msgid "cpu ship"
+#~ msgstr "Vaisseau IA"
+
+#~ msgctxt "create"
+#~ msgid "player ship"
+#~ msgstr "Vaisseau joueur"
+
+#~ msgctxt "create"
+#~ msgid "Artifact"
+#~ msgstr "Artefact"
+
+#~ msgctxt "create"
+#~ msgid "Warp Jammer"
+#~ msgstr "Brouilleur de vitesse lumière"
+
+#~ msgctxt "create"
+#~ msgid "Mine"
+#~ msgstr "Mine"
+
+#~ msgctxt "create"
+#~ msgid "Supply Drop"
+#~ msgstr "Caisse d'approvisionnement"
+
+#~ msgctxt "create"
+#~ msgid "Asteroid"
+#~ msgstr "Astéroïde"
+
+#~ msgctxt "create"
+#~ msgid "Visual Asteroid"
+#~ msgstr "Astéroïde décoratif"
+
+#~ msgctxt "create"
+#~ msgid "Planet"
+#~ msgstr "Planète"
+
+#~ msgctxt "create"
+#~ msgid "BlackHole"
+#~ msgstr "Trou noir"
+
+#~ msgctxt "create"
+#~ msgid "Nebula"
+#~ msgstr "Nébuleuse"
+
+#~ msgctxt "create"
+#~ msgid "Worm Hole"
+#~ msgstr "Trou de ver"
+
+#~ msgctxt "button"
+#~ msgid "Send"
+#~ msgstr "Envoyer"
+
+#~ msgctxt "chatGM"
+#~ msgid "Target - Destroyed"
+#~ msgstr "Cible - détruite"
+
+#~ msgctxt "chatGM"
+#~ msgid "Channel not open, enter name to hail as to hail target."
+#~ msgstr "Canal non ouvert, entrer un nom d'appelant pour appeler la cible."
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Inactive"
+#~ msgstr "{callsign} - Inactif"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Opening communications with {target}"
+#~ msgstr "{callsign} - Ouverture des communications avec {target}"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Hailing as {target}"
+#~ msgstr "{callsign} - Appelant comme {target}"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Communicating with {target}"
+#~ msgstr "{callsign} - En communication avec {target}"
+
+#~ msgctxt "chatGM"
+#~ msgid "**{callsign} - Communicating as {target}**"
+#~ msgstr "**{callsign} - Communiquer comme {target}**"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Communicating as {target}"
+#~ msgstr "{callsign} - Communiquer comme {target}"
+
+#~ msgctxt "tab"
+#~ msgid "Base"
+#~ msgstr "Scan"
+
+#~ msgctxt "tab"
+#~ msgid "Ship"
+#~ msgstr "Vaisseau"
+
+#~ msgctxt "tab"
+#~ msgid "Asteroid"
+#~ msgstr "Astéroïde"
+
+#~ msgctxt "tab"
+#~ msgid "Jammer"
+#~ msgstr "Brouilleur"
+
+#~ msgctxt "tab"
+#~ msgid "Shields"
+#~ msgstr "Boucliers"
+
+#~ msgctxt "tab"
+#~ msgid "Tubes"
+#~ msgstr "Tubes"
+
+#~ msgctxt "tab"
+#~ msgid "Missiles"
+#~ msgstr "Missiles"
+
+#~ msgctxt "tab"
+#~ msgid "Beams"
+#~ msgstr "Faisceaux"
+
+#~ msgctxt "tab"
+#~ msgid "Systems"
+#~ msgstr "Systèmes"
+
+#~ msgctxt "tab"
+#~ msgid "Power"
+#~ msgstr "Puissance"
+
+#~ msgctxt "tab"
+#~ msgid "Coolant Rate"
+#~ msgstr "Taux de liq. de refroid."
+
+#~ msgctxt "tab"
+#~ msgid "Heat Rate"
+#~ msgstr "Taux de chaleur"
+
+#~ msgctxt "tab"
+#~ msgid "Power Rate"
+#~ msgstr "Taux de puissance"
+
+#~ msgctxt "tab"
+#~ msgid "Player"
+#~ msgstr "Options"
+
+#~ msgctxt "tab"
+#~ msgid "Player 2"
+#~ msgstr "Options 2"
+
+#~ msgid "Type name:"
+#~ msgstr "Type :"
+
+#~ msgid "Impulse speed:"
+#~ msgstr "Vitesse des moteurs :"
+
+#~ msgid "Impulse reverse speed:"
+#~ msgstr "Vit. d'inversion moteurs :"
+
+#~ msgid "Turn speed:"
+#~ msgstr "Vitesse de rotation :"
+
+#~ msgid "Jump Min Distance:"
+#~ msgstr "Portée de saut min :"
+
+#~ msgid "Jump Max Distance:"
+#~ msgstr "Portée de saut max :"
+
+#~ msgid "Jump charge:"
+#~ msgstr "Temps rechargement du saut :"
+
+#~ msgid "Hull max:"
+#~ msgstr "Niveau max de la coque :"
+
+#~ msgid "Hull current:"
+#~ msgstr "Niveau actuel de la coque :"
+
+#~ msgid "Could be destroyed"
+#~ msgstr "Peut être détruit"
+
+#~ msgctxt "tweak_ship"
+#~ msgid "Special drives:"
+#~ msgstr "Moteurs spéciaux :"
+
+#~ msgid "Warp Drive"
+#~ msgstr "Vitesse lumière"
+
+#~ msgid "Jump Drive"
+#~ msgstr "Téléportation"
+
+#~ msgid "Short-range radar range:"
+#~ msgstr "Rayon du radar courte portée :"
+
+#~ msgid "Long-range radar range:"
+#~ msgstr "Rayon du radar longue portée :"
+
+#~ msgctxt "missiles"
+#~ msgid "Storage space:"
+#~ msgstr "Capacité de stockage"
+
+#~ msgctxt "missiles"
+#~ msgid "Stored amount:"
+#~ msgstr "Stock actuel"
+
+#~ msgid "Jammer Range:"
+#~ msgstr "Portée du brouilleur"
+
+#~ msgid "Asteroid Size:"
+#~ msgstr "Taille de l'astéroïde :"
+
+#~ msgid "Tube count:"
+#~ msgstr "Nombre de tubes :"
+
+#~ msgid "Tube: {id_tube}"
+#~ msgstr "Tube : {id_tube}"
+
+#~ msgctxt "tube"
+#~ msgid "Direction:"
+#~ msgstr "Orientation :"
+
+#~ msgctxt "tube"
+#~ msgid "Load time:"
+#~ msgstr "Temps de chargement :"
+
+#~ msgctxt "tube"
+#~ msgid "Size:"
+#~ msgstr "Taille :"
+
+#~ msgctxt "tube"
+#~ msgid "Small"
+#~ msgstr "Petit"
+
+#~ msgctxt "tube"
+#~ msgid "Medium"
+#~ msgstr "Moyen"
+
+#~ msgctxt "tube"
+#~ msgid "large"
+#~ msgstr "Grand"
+
+#~ msgctxt "tube"
+#~ msgid "Allowed use:"
+#~ msgstr "Missiles autorisés :"
+
+#~ msgid "Shield {id_shield} max:"
+#~ msgstr "Bouclier {id_shield} : puissance max"
+
+#~ msgid "Shield {id_shield}:"
+#~ msgstr "Bouclier {id_shield} : puissance actuelle"
+
+#~ msgid "Beam: {id_beam}"
+#~ msgstr "Faisceau : {id_beam}"
+
+#~ msgctxt "beam"
+#~ msgid "Arc:"
+#~ msgstr "Amplitude de l'arc"
+
+#~ msgctxt "beam"
+#~ msgid "Direction:"
+#~ msgstr "Orientation"
+
+#~ msgctxt "beam"
+#~ msgid "Turret arc:"
+#~ msgstr "Tourelle : Amplitude de l'arc"
+
+#~ msgctxt "beam"
+#~ msgid "Turret direction:"
+#~ msgstr "Tourelle : orientation"
+
+#~ msgctxt "beam"
+#~ msgid "Turret rotation rate:"
+#~ msgstr "Tourelle : vitesse de rotation"
+
+#~ msgctxt "beam"
+#~ msgid "Range:"
+#~ msgstr "Portée"
+
+#~ msgctxt "beam"
+#~ msgid "Cycle time:"
+#~ msgstr "Intervalle entre 2 tirs"
+
+#~ msgctxt "beam"
+#~ msgid "Damage:"
+#~ msgstr "Dégâts"
+
+#~ msgid "{system} health"
+#~ msgstr "{system} : santé actuelle"
+
+#~ msgid "{system} health max"
+#~ msgstr "santé max"
+
+#~ msgid "{system} heat"
+#~ msgstr "Surchauffe en cours"
+
+#~ msgid "current factor"
+#~ msgstr "Taux actuel :"
+
+#~ msgid "desired factor"
+#~ msgstr "Taux souhaité :"
+
+#~ msgid "{system}"
+#~ msgstr "{system}"
+
+#~ msgid "Applies on [Enter]"
+#~ msgstr "Valider avec [Entrer]"
+
+#~ msgid "current rate"
+#~ msgstr "Taux actuel :"
+
+#~ msgid "desired rate"
+#~ msgstr "Taux souhaité :"
+
+#~ msgid "Control code:"
+#~ msgstr "Code de contrôle :"
+
+#~ msgid "Reputation:"
+#~ msgstr "Réputation actuelle :"
+
+#~ msgid "Max energy:"
+#~ msgstr "Énergie max :"
+
+#~ msgid "Current energy:"
+#~ msgstr "Énergie actuelle :"
+
+#~ msgid "Boost Speed:"
+#~ msgstr "Man. Combat : Vit. d'accélération"
+
+#~ msgid "Strafe Speed:"
+#~ msgstr "Man. Combat : Vit. d'esquive"
+
+#~ msgid "Positions occupied: "
+#~ msgstr "Postes occupés : "
+
+#~ msgid "position"
+#~ msgstr "Position"
+
+#~ msgid "Coolant:"
+#~ msgstr "Liq. de refroid."
+
+#~ msgid "Max Scan Probes:"
+#~ msgstr "Sondes : capacité max"
+
+#~ msgid "Scan Probes:"
+#~ msgstr "Sondes : stock actuel"
+
+#~ msgctxt "button"
+#~ msgid "Can scan"
+#~ msgstr "Peut scanner"
+
+#~ msgctxt "button"
+#~ msgid "Can hack"
+#~ msgstr "Peut pirater"
+
+#~ msgctxt "button"
+#~ msgid "Can dock"
+#~ msgstr "Peut accoster"
+
+#~ msgctxt "button"
+#~ msgid "Can combat maneuver"
+#~ msgstr "Peut manœuvrer au combat"
+
+#~ msgctxt "button"
+#~ msgid "Can self destruct"
+#~ msgstr "Peut s'autodétruire"
+
+#~ msgctxt "button"
+#~ msgid "Can launch probes"
+#~ msgstr "Peut larguer des sondes"
+
+#~ msgctxt "button"
+#~ msgid "Auto coolant"
+#~ msgstr "Liq. de refroidissement auto"
+
+#~ msgctxt "button"
+#~ msgid "Auto repair"
+#~ msgstr "Réparation auto"
+
+#~ msgctxt "player_tweak"
+#~ msgid "Warp (E/s): {energy_per_second}"
+#~ msgstr "Vit. lumière (E/s) :"
+
+#~ msgctxt "player_tweak"
+#~ msgid "Shields (E/s): {energy_per_second}"
+#~ msgstr "Boucliers (E/s) :"
+
+#~ msgid "Callsign:"
+#~ msgstr "Nom :"
+
+#~ msgid "Unscanned description:"
+#~ msgstr "Description sans scan :"
+
+#~ msgid "Friend or Foe Description:"
+#~ msgstr "Description ami ou ennemi :"
+
+#~ msgid "Simple Scan Description:"
+#~ msgstr "Description scan simple :"
+
+#~ msgid "Full Scan Description:"
+#~ msgstr "Description scan complet :"
+
+#~ msgid "Heading:"
+#~ msgstr "Cap :"
+
+#~ msgid "Scanning Complexity:"
+#~ msgstr "Complexité du scan : "
+
+#~ msgid "Scanning Depth:"
+#~ msgstr "Profondeur du scan :"
+
+#~ msgctxt "missile"
+#~ msgid "Lock"
+#~ msgstr "Verrou"
+
+#~ msgctxt "hotkey_F1"
+#~ msgid "Close"
+#~ msgstr "Fermer"
+
+#~ msgctxt "missile"
+#~ msgid "Load"
+#~ msgstr "Charger"
+
+#~ msgctxt "missile"
+#~ msgid "Empty"
+#~ msgstr "Vide"
+
+#~ msgctxt "missile"
+#~ msgid "Unload"
+#~ msgstr "Décharger"
+
+#~ msgctxt "missile"
+#~ msgid "Loading"
+#~ msgstr "Chargement"
+
+#~ msgctxt "missile"
+#~ msgid "Unloading"
+#~ msgstr "Déchargement"
+
+#~ msgctxt "missile"
+#~ msgid "Firing"
+#~ msgstr "Feu"
+
+#~ msgid "SELF DESTRUCT ACTIVATED"
+#~ msgstr "AUTO DESTRUCTION ACTIVÉE"
+
+#~ msgid "Waiting for autorization input: {codes} left"
+#~ msgstr "Validation des codes en cours : {codes} restant"
+
+#~ msgid "Have a nice day."
+#~ msgstr "Yippee Ki Yay !"
+
+#~ msgid "This ship will self-destruct in {seconds} seconds."
+#~ msgstr "Ce vaisseau s'autodétruira dans {seconds} secondes."
+
+#~ msgid "Self destruct activated!"
+#~ msgstr "Autodestruction activée !"
+
+#~ msgid "Code [{letter}]: {self_destruct_code}"
+#~ msgstr "Code [{letter}] : {self_destruct_code}"
+
+#~ msgctxt "selfdestruct"
+#~ msgid "Enter [{letter}]"
+#~ msgstr "Entrer [{letter}]"
+
+#~ msgid "Request Dock"
+#~ msgstr "Accostage"
+
+#~ msgid "Cancel Docking"
+#~ msgstr "Annuler accostage"
+
+#~ msgid "Undock"
+#~ msgstr "Désamarrer"
+
+#~ msgctxt "shields"
+#~ msgid "Calibrating"
+#~ msgstr "Calibrage en cours"
+
+#~ msgctxt "shields"
+#~ msgid "ON"
+#~ msgstr "ON"
+
+#~ msgctxt "shields"
+#~ msgid "OFF"
+#~ msgstr "OFF"
+
+#~ msgid "{frequency} Shields: {status}"
+#~ msgstr "Boucliers {frequency} : {status}"
+
+#~ msgid "Shields: {status}"
+#~ msgstr "Boucliers : {status}"
+
+#~ msgid "Self destruct"
+#~ msgstr "Autodestruction"
+
+#~ msgctxt "selfdestruct"
+#~ msgid "Confirm!"
+#~ msgstr "Confirmer !"
+
+#~ msgctxt "shields"
+#~ msgid "Calibrate"
+#~ msgstr "Calibrer"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Distance"
+#~ msgstr "Distance"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Jump"
+#~ msgstr "Saut"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Jump in"
+#~ msgstr "Saut dans"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Charging"
+#~ msgstr "Chargement"
+
+#~ msgctxt "slider"
+#~ msgid "Impulse"
+#~ msgstr "Moteurs"
+
+#~ msgid "Damage with your beams"
+#~ msgstr "Dégâts produits par vos faisceaux"
+
+#~ msgid "Damage on your shields"
+#~ msgstr "Dégâts sur vos boucliers"
+
+#~ msgctxt "scienceFrequencyGraph"
+#~ msgid "No enemy beams"
+#~ msgstr "Pas de faisceaux"
+
+#~ msgctxt "scienceFrequencyGraph"
+#~ msgid "No enemy shields"
+#~ msgstr "Pas de boucliers"
+
+#~ msgctxt "systems"
+#~ msgid "DAMAGED"
+#~ msgstr "ENDOMMAGÉ"
+
+#~ msgctxt "systems"
+#~ msgid "JAMMED"
+#~ msgstr "BLOQUÉ"
+
+#~ msgctxt "systems"
+#~ msgid "NO POWER"
+#~ msgstr "AUCUNE ÉNERGIE"
+
+#~ msgctxt "systems"
+#~ msgid "LOW ENERGY"
+#~ msgstr "ÉNERGIE FAIBLE"
+
+#~ msgctxt "systems"
+#~ msgid "LOW POWER"
+#~ msgstr "PUISSANCE FAIBLE"
+
+#~ msgctxt "systems"
+#~ msgid "OVERHEATING"
+#~ msgstr "SURCHAUFFE"
+
+#~ msgctxt "systems"
+#~ msgid "HACKED"
+#~ msgstr "PIRATÉ"
+
+#~ msgctxt "target"
+#~ msgid "Hull"
+#~ msgstr "Coque"
+
+#~ msgid "Game Paused"
+#~ msgstr "En pause"
+
+#~ msgid "Unpause"
+#~ msgstr "Revenir au jeu"
+
+#~ msgid "Defeat!"
+#~ msgstr "Défaite !"
+
+#~ msgid "Victory!"
+#~ msgstr "Victoire !"
+
+#~ msgid "{faction} wins"
+#~ msgstr "{faction} gagne"
+
+#~ msgid "Combat maneuver"
+#~ msgstr "Manoeuvre de combat"
+
+#~ msgid "SHIP DESTROYED!"
+#~ msgstr "VAISSEAU DÉTRUIT !"
+
+#~ msgctxt "shipdestroyed"
+#~ msgid "Return"
+#~ msgstr "Retour"
+
+#~ msgctxt "slider"
+#~ msgid "Warp"
+#~ msgstr "Vit. lumière"
+
+#~ msgid "Opening communications..."
+#~ msgstr "Appel en cours..."
+
+#~ msgid "Answer"
+#~ msgstr "Répondre"
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorer"
+
+#~ msgid "No reply..."
+#~ msgstr "Pas de réponse..."
+
+#~ msgid "Communications were suddenly cut"
+#~ msgstr "La communication a été brusquement coupée"
+
+#~ msgid "Communications channel closed"
+#~ msgstr "Canal de communication fermé"
+
+#~ msgid "Hailed by {name}"
+#~ msgstr "Message provenant de {name}"
+
+#~ msgid "Jump in: {delay}"
+#~ msgstr "Saut dans : {delay}"
+
+#~ msgctxt "scanning"
+#~ msgid "Electric signature"
+#~ msgstr "Signature électrique"
+
+#~ msgctxt "scanning"
+#~ msgid "LOCKED"
+#~ msgstr "VERROUILLÉ"
+
+#~ msgctxt "controlbutton"
+#~ msgid "Main screen"
+#~ msgstr "Écran principal"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Front"
+#~ msgstr "Avant"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Back"
+#~ msgstr "Arrière"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Left"
+#~ msgstr "Gauche"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Right"
+#~ msgstr "Droite"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Target lock"
+#~ msgstr "Cible verrouillée"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Tactical"
+#~ msgstr "Tactique"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Long Range"
+#~ msgstr "Longue portée"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Show comms"
+#~ msgstr "Afficher comms"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Hide comms"
+#~ msgstr "Cacher comms."
+
+#~ msgctxt "hacking"
+#~ msgid "Reset"
+#~ msgstr "Réinitialiser"
+
+#~ msgctxt "hacking"
+#~ msgid "Target system:"
+#~ msgstr "Système cible :"
+
+#~ msgctxt "hacking"
+#~ msgid "Hacking in Progress: {percent}%"
+#~ msgstr "Piratage en cours : {percent}%"
+
+#~ msgctxt "hacking"
+#~ msgid "{target}: hacked {percent}%"
+#~ msgstr "{target} : neutralisé à {percent}%"
+
+#~ msgid "Hacking SUCCESS!"
+#~ msgstr "Piratage RÉUSSI !"
+
+#~ msgid "Hacking FAILURE!"
+#~ msgstr "Piratage ÉCHOUÉ !"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Basic"
+#~ msgstr "Basique"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Pause game"
+#~ msgstr "Mettre le jeu en pause"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Show in-game help"
+#~ msgstr "Afficher l'aide en jeu"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Return to ship options menu"
+#~ msgstr "Retourner au menu vaisseau/postes"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Zoom in on zoomable stations"
+#~ msgstr "Zoomer sur les stations zoomables"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Zoom out on zoomable stations"
+#~ msgstr "Dézoomer sur les stations zoomables"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Broadcast voice chat to server"
+#~ msgstr "Diffuser le chat vocal sur le serveur"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Broadcast voice chat to ship"
+#~ msgstr "Diffuser le chat vocal sur le navire"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "General"
+#~ msgstr "Général"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to next crew station"
+#~ msgstr "Switcher sur le poste suivant"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to previous crew station"
+#~ msgstr "Switcher sur le poste précèdent"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to helms station"
+#~ msgstr "Switcher sur le poste Navigation"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to weapons station"
+#~ msgstr "Switcher sur le poste Armement"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to engineering station"
+#~ msgstr "Switcher sur le poste Ingénierie"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to science station"
+#~ msgstr "Switcher sur le poste Science"
+
+#~ msgctxt "hotkey_General"
+#~ msgid "Switch to relay station"
+#~ msgstr "Switcher sur le poste Communications"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View forward"
+#~ msgstr "Vue avant"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View left"
+#~ msgstr "Vue gauche"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View right"
+#~ msgstr "Vue droite"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View backward"
+#~ msgstr "Vue arrière"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "Lock view on weapons target"
+#~ msgstr "Vue verrouillée sur cible Armement"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View tactical radar"
+#~ msgstr "Vue radar tactique"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View long-range radar"
+#~ msgstr "Vue radar longue portée"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "Toggle first-person view"
+#~ msgstr "Vue à la 1ère personne"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Helms"
+#~ msgstr "Navigation"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Increase impulse"
+#~ msgstr "Accélérer (moteurs principaux)"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Decrease impulse"
+#~ msgstr "Décélérer (moteurs principaux)"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Set impulse (joystick)"
+#~ msgstr "Activer les moteurs (joystick)"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Zero impulse"
+#~ msgstr "Eteindre les moteurs"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Max impulse"
+#~ msgstr "Puissance des moteurs avant max"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Max reverse impulse"
+#~ msgstr "Puissance des moteurs arrière max"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Turn left"
+#~ msgstr "Tourner à gauche"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Turn right"
+#~ msgstr "Tourner à droite"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp off"
+#~ msgstr "Vitesse lumière Off"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 1"
+#~ msgstr "Vitesse lumière niveau 1"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 2"
+#~ msgstr "Vitesse lumière niveau 2"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 3"
+#~ msgstr "Vitesse lumière niveau 3"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 4"
+#~ msgstr "Vitesse lumière niveau 4"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Increase Warp"
+#~ msgstr "Accélérer (vitesse lumière)"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Decrease Warp"
+#~ msgstr "Décélérer (vitesse lumière)"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Dock request/abort/undock"
+#~ msgstr "Accoster/désamarrer"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Initiate docking"
+#~ msgstr "Accoster"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Abort docking"
+#~ msgstr "Annuler accostage"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Undock"
+#~ msgstr "Désamarrer"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Increase jump distance"
+#~ msgstr "Augmenter la distance de saut"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Decrease jump distance"
+#~ msgstr "Diminuer la distance de saut"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Initiate jump"
+#~ msgstr "Activer le saut (téléportation)"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Combat boost left"
+#~ msgstr "Manœuvre de combat gauche"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Combat boost right"
+#~ msgstr "Manœuvre de combat droite"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Combat boost forwards"
+#~ msgstr "Manœuvre de combat avant"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Weapons"
+#~ msgstr "Armement"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select homing"
+#~ msgstr "Sélectionner homing"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select nuke"
+#~ msgstr "Sélectionner nuke"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select mine"
+#~ msgstr "Sélectionner mine"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select EMP"
+#~ msgstr "Sélectionner EMP"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select HVLI"
+#~ msgstr "Sélectionner HVLI"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Load tube {number}"
+#~ msgstr "Charger le tube {number}"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Unload tube {number}"
+#~ msgstr "Décharger le tube {number}"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Fire tube {number}"
+#~ msgstr "Lancer le tube {number}"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select next hostile target"
+#~ msgstr "Sélectionner la cible hostile suivante"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select next target (any)"
+#~ msgstr "Sélectionner la cible suivante"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Toggle shields"
+#~ msgstr "Activer/désactiver les boucliers"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Enable shields"
+#~ msgstr "Activer les boucliers"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Disable shields"
+#~ msgstr "Désactiver les boucliers"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Increase shield frequency target"
+#~ msgstr "Augmenter la fréquence des boucliers"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Decrease shield frequency target"
+#~ msgstr "Réduire la fréquence des boucliers"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Start shield calibration"
+#~ msgstr "Démarrer le calibrage des boucliers"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Next beam subsystem target type"
+#~ msgstr "Sous-système ciblé suivant (faisceaux)"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Previous beam subsystem target type"
+#~ msgstr "Sous-système ciblé préc. (faisceaux)"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Increase beam frequency"
+#~ msgstr "Augmenter la fréquence des faisceaux"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Decrease beam frequency"
+#~ msgstr "Réduire la fréquence des faisceaux"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Toggle missile aim lock"
+#~ msgstr "Activer/désact. verrouillage missiles"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Enable missile aim lock"
+#~ msgstr "Activer le verrouillage des missiles"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Disable"
+#~ msgstr "Désactiver le verrouillage des missiles"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Turn missile aim to the left"
+#~ msgstr "Verrouillage missiles vers la gauche"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Turn missile aim to the right"
+#~ msgstr "Verrouillage missiles vers la droite"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Science"
+#~ msgstr "Science"
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Scan object"
+#~ msgstr "Scanner l'objet"
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Select next scannable object"
+#~ msgstr "Sélectionner l'objet suivant à scanner"
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Scanning parameter {number} increase"
+#~ msgstr "Scan niveau {number} vers la droite"
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Scanning parameter {number} decrease"
+#~ msgstr "Scan niveau {number} vers la gauche"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Engineering"
+#~ msgstr "Ingénierie"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select reactor system"
+#~ msgstr "Sélectionner le réacteur"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select beam weapon system"
+#~ msgstr "Sélectionner les faisceaux laser"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select missile weapon system"
+#~ msgstr "Sélectionner le système de missiles"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select maneuvering system"
+#~ msgstr "Sélectionner la manoeuvre"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select impulse system"
+#~ msgstr "Sélectionner les moteurs à impulsion"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select warp system"
+#~ msgstr "Sélectionner la vitesse lumière"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select jump drive system"
+#~ msgstr "Sélectionner la téléportation"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select front shields system"
+#~ msgstr "Sélectionner les boucliers avant"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select rear shields system"
+#~ msgstr "Sélectionner les boucliers arrière"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 0%"
+#~ msgstr "Régler la puissance du système à 0%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 30%"
+#~ msgstr "Régler la puissance du système à 30%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 50%"
+#~ msgstr "Régler la puissance du système à 50%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 100%"
+#~ msgstr "Régler la puissance du système à 100%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 150%"
+#~ msgstr "Régler la puissance du système à 150%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 200%"
+#~ msgstr "Régler la puissance du système à 200%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 250%"
+#~ msgstr "Régler la puissance du système à 250%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 300%"
+#~ msgstr "Régler la puissance du système à 300%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Increase system power"
+#~ msgstr "Augmenter la puissance du système"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Decrease system power"
+#~ msgstr "Réduire la puissance du système"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Increase system coolant"
+#~ msgstr "Augmenter le liquide de refroidissement"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Decrease system coolant"
+#~ msgstr "Réduire le liquide de refroidissement"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Next repair crew"
+#~ msgstr "Sélectionner le réparateur suivant"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move up"
+#~ msgstr "Déplacer le réparateur en haut"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move down"
+#~ msgstr "Déplacer le réparateur en bas"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move left"
+#~ msgstr "Déplacer le réparateur à gauche"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move right"
+#~ msgstr "Déplacer le réparateur à droite"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Start self-destruct"
+#~ msgstr "Activer l'autodestruction"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Confirm self-destruct"
+#~ msgstr "Confirmer l'autodestruction"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Cancel self-destruct"
+#~ msgstr "Annuler l'autodestruction"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "GM"
+#~ msgstr "Maître de jeu"
+
+#~ msgctxt "hotkey_GM"
+#~ msgid "Delete"
+#~ msgstr "Supprimer"
+
+#~ msgctxt "hotkey_GM"
+#~ msgid "Copy to clipboard"
+#~ msgstr "Copier dans le presse-papier"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Various"
+#~ msgstr "Divers"
+
+#~ msgctxt "hotkey_various"
+#~ msgid "Show callsigns (spectator)"
+#~ msgstr "Afficher noms des vaisseaux (spectateurs)"
+
+#~ msgctxt "hotkey_debug"
+#~ msgid "Show FPS"
+#~ msgstr "Afficher les FPS"
+
+#~ msgctxt "hotkey_debug"
+#~ msgid "Show debug timing"
+#~ msgstr "Afficher le graphique de débogage"
+
+#~ msgctxt "gm_info"
+#~ msgid "Owner"
+#~ msgstr "Propriétaire"
+
+#~ msgctxt "gm_info"
+#~ msgid "Target"
+#~ msgstr "Cible"
+
+#~ msgctxt "gm_info"
+#~ msgid "Faction"
+#~ msgstr "Faction"
+
+#~ msgctxt "gm_info"
+#~ msgid "Lifetime"
+#~ msgstr "Durée de vie"
+
+#~ msgctxt "gm_info"
+#~ msgid "Size"
+#~ msgstr "Taille"
+
+#~ msgctxt "missile"
+#~ msgid "Homing"
+#~ msgstr "Homing"
+
+#~ msgctxt "missile"
+#~ msgid "Nuke"
+#~ msgstr "Nuke"
+
+#~ msgctxt "missile"
+#~ msgid "Mine"
+#~ msgstr "Mine"
+
+#~ msgctxt "missile"
+#~ msgid "EMP"
+#~ msgstr "EMP"
+
+#~ msgctxt "missile"
+#~ msgid "HVLI"
+#~ msgstr "HVLI"
+
+#~ msgctxt "cpulog"
+#~ msgid "Searching for targets."
+#~ msgstr "En recherche de cibles."
+
+#~ msgctxt "cpulog"
+#~ msgid "Searching for hostiles around {x},{y}."
+#~ msgstr "En recherche d'ennemis autour de {x},{y}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Searching for supplies."
+#~ msgstr "En recherche de marchandises."
+
+#~ msgctxt "cpulog"
+#~ msgid "Docking to {callsign}."
+#~ msgstr "En cours d'amarrage à {callsign}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Standing ground for now."
+#~ msgstr "Tient sa position pour l'instant."
+
+#~ msgctxt "cpulog"
+#~ msgid "Defending {x},{y}."
+#~ msgstr "En train de défendre {x},{y}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Defending {callsign}."
+#~ msgstr "En train de défendre {callsign}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Following {callsign}."
+#~ msgstr "En train de suivre {callsign}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Moving to {x},{y}."
+#~ msgstr "Se déplace vers {x},{y}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Moving to attack {callsign}!"
+#~ msgstr "En train d'attaquer {callsign} !"
+
+#~ msgctxt "gm_info"
+#~ msgid "Orders"
+#~ msgstr "Ordres"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Idle"
+#~ msgstr "Au repos"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Roaming"
+#~ msgstr "Errer"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Retreat"
+#~ msgstr "Battre en retraite"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Stand Ground"
+#~ msgstr "Tenir sa position"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Defend Location"
+#~ msgstr "Défendre son emplacement"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Defend Target"
+#~ msgstr "Défendre la cible"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Fly in formation"
+#~ msgstr "Voler en formation"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Fly towards"
+#~ msgstr "Voler vers"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Fly towards (ignore all)"
+#~ msgstr "Voler vers (tout ignorer)"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Attack"
+#~ msgstr "Attaquer"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Dock"
+#~ msgstr "À quai"
+
+#~ msgctxt "alert"
+#~ msgid "RED ALERT"
+#~ msgstr "ALERTE ROUGE"
+
+#~ msgctxt "alert"
+#~ msgid "YELLOW ALERT"
+#~ msgstr "ALERTE JAUNE"
+
+#~ msgctxt "alert"
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgctxt "shiplog"
+#~ msgid "Start of log"
+#~ msgstr "Début du journal de bord :"
+
+#~ msgctxt "shiplog"
+#~ msgid "Hailed by {name}"
+#~ msgstr "Appel provenant de {name}."
+
+#~ msgctxt "shiplog"
+#~ msgid "Communication channel closed by other side"
+#~ msgstr "Communication interrompue de l'extérieur."
+
+#~ msgctxt "shiplog"
+#~ msgid "Hailing from {callsign} stopped"
+#~ msgstr "Appel provenant de {callsign} interrompu."
+
+#~ msgctxt "shiplog"
+#~ msgid "Communication channel closed"
+#~ msgstr "Fin de transmission."
+
+#~ msgctxt "chatdialog"
+#~ msgid "Opened comms with {name}"
+#~ msgstr "Communication établie avec {name}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Hailing: {name}"
+#~ msgstr "Salutations : {name}."
+
+#~ msgctxt "chatdialog"
+#~ msgid "Opened comms to {callsign}"
+#~ msgstr "Communication établie avec {callsign}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Opened communication channel to {callsign}"
+#~ msgstr "Communication établie avec {callsign}."
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused communications from {callsign}"
+#~ msgstr "Communication en provenance de {callsign} refusée."
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused communications to {callsign}"
+#~ msgstr "Communication vers {callsign} refusée."
+
+#~ msgctxt "shiplog"
+#~ msgid "Hail suddenly went dead."
+#~ msgstr "Communication brusquement interrompue."
+
+#~ msgctxt "shiplog"
+#~ msgid "Accepted hail from {callsign}"
+#~ msgstr "Appel provenant de {callsign} accepté."
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused hail from {callsign}"
+#~ msgstr "Appel provenant de {callsign} refusé."
+
+#~ msgctxt "shiplog"
+#~ msgid "Opened communication channel to {name}"
+#~ msgstr "Canal de communication ouvert avec {name}."
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused hail from {name}"
+#~ msgstr "Appel provenant de {name} refusé."
+
+#~ msgctxt "gm_info"
+#~ msgid "CallSign"
+#~ msgstr "Nom"
+
+#~ msgctxt "gm_info"
+#~ msgid "Type"
+#~ msgstr "Modèle"
+
+#~ msgctxt "gm_info"
+#~ msgid "Hull"
+#~ msgstr "Coque"
+
+#~ msgctxt "gm_info"
+#~ msgid "Shield"
+#~ msgstr "Bouclier"
+
+#~ msgctxt "tube"
+#~ msgid "Front"
+#~ msgstr "Avant"
+
+#~ msgctxt "tube"
+#~ msgid "Right"
+#~ msgstr "Droit"
+
+#~ msgctxt "tube"
+#~ msgid "Left"
+#~ msgstr "Gauche"
+
+#~ msgctxt "tube"
+#~ msgid "Rear"
+#~ msgstr "Arrière"
 
 #~ msgid ""
 #~ "The tugboat is a reliable, but small and un-armed transport ship. Due to "
@@ -4269,180 +3794,6 @@ msgstr "Arrière"
 #~ msgctxt "commsShipAssist"
 #~ msgid "WP %d"
 #~ msgstr "Marqueur %d"
-
-#~ msgctxt "commsStation"
-#~ msgid "We are under attack! No time for chatting!"
-#~ msgstr ""
-#~ "Nous sommes sous le feu de l'ennemi !\n"
-#~ "Pas le temps de bavarder !"
-
-#~ msgctxt "commsStation"
-#~ msgid ""
-#~ "Good day, officer! Welcome to %s.\n"
-#~ "What can we do for you today?"
-#~ msgstr ""
-#~ "Bonjour officier ! Bienvenue sur %s.\n"
-#~ "Que pouvons-nous faire pour vous aujourd'hui ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "Welcome to our lovely station %s."
-#~ msgstr "Bienvenue dans notre charmante station orbitale %s."
-
-#~ msgctxt "commsStation"
-#~ msgid "Do you have spare homing missiles for us?"
-#~ msgstr "Auriez-vous des homing missiles pour nous ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "Can you restock us with HVLI?"
-#~ msgstr "Pouvez-vous nous réapprovisionner en HVLI ? "
-
-#~ msgctxt "commsStation"
-#~ msgid "Please re-stock our mines."
-#~ msgstr "Merci de réapprovisionner notre stock de mines, c'est urgent."
-
-#~ msgctxt "commsStation"
-#~ msgid "Can you supply us with some nukes?"
-#~ msgstr "Avez-vous des missiles nucléaires nukes ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "Please re-stock our EMP missiles."
-#~ msgstr "Avez-vous des missiles EMP ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "%s (%d rep each)"
-#~ msgstr "%s (%d rép chacun)"
-
-#~ msgctxt "commsStation"
-#~ msgid "You need to stay docked for that action."
-#~ msgstr "Vous devez rester amarrés à la station pour cette action."
-
-#~ msgctxt "commsStation"
-#~ msgid "We do not deal in weapons of mass destruction."
-#~ msgstr ""
-#~ "Nous ne fournissons pas ce type d'armes de destruction massive. \n"
-#~ "Nous sommes pour la paix dans l'univers."
-
-#~ msgctxt "commsStation"
-#~ msgid "We do not deal in weapons of mass disruption."
-#~ msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
-
-#~ msgctxt "commsStation"
-#~ msgid "We do not deal in those weapons."
-#~ msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
-
-#~ msgctxt "commsStation"
-#~ msgid "All nukes are charged and primed for destruction."
-#~ msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
-
-#~ msgctxt "commsStation"
-#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
-#~ msgstr ""
-#~ "Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
-#~ "fournir."
-
-#~ msgctxt "commsStation"
-#~ msgid "Not enough reputation."
-#~ msgstr "Pas assez de réputation."
-
-#~ msgctxt "commsStation"
-#~ msgid "You are fully loaded and ready to explode things."
-#~ msgstr "Vous êtes chargés au max et prêt à tout faire péter."
-
-#~ msgctxt "commsStation"
-#~ msgid ""
-#~ "We generously resupplied you with some weapon charges.\n"
-#~ "Put them to good use."
-#~ msgstr ""
-#~ "Nous vous avons généreusement réapprovisionné en munitions.\n"
-#~ "Faites-en bon usage."
-
-#~ msgctxt "commsStation"
-#~ msgid ""
-#~ "This is %s. Good day, officer.\n"
-#~ "If you need supplies, please dock with us first."
-#~ msgstr ""
-#~ "Ici la station %s. Bonjour, officier.\n"
-#~ "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
-#~ "station au préalable."
-
-#~ msgctxt "commsStation"
-#~ msgid ""
-#~ "This is %s. Greetings.\n"
-#~ "If you want to do business, please dock with us first."
-#~ msgstr ""
-#~ "Ici la station %s. Salutations.\n"
-#~ "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
-
-#~ msgctxt "commsStation"
-#~ msgid "Can you send a supply drop? (%d rep)"
-#~ msgstr ""
-#~ "Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
-
-#~ msgctxt "commsStation"
-#~ msgid "Please send reinforcements! (%d rep)"
-#~ msgstr "Merci de nous envoyer des renforts ! (%d rep)"
-
-#~ msgctxt "commsStation"
-#~ msgid "You need to set a waypoint before you can request backup."
-#~ msgstr ""
-#~ "Vous devez définir un marqueur avant de faire une demande de "
-#~ "réapprovisionnement."
-
-#~ msgctxt "commsStation"
-#~ msgid "To which waypoint should we deliver your supplies?"
-#~ msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "We have dispatched a supply ship toward %s."
-#~ msgstr ""
-#~ "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
-#~ "réapprovisionnement au marqueur %s."
-
-#~ msgctxt "commsStation"
-#~ msgid "Not enough reputation!"
-#~ msgstr "Pas assez de points de réputation !"
-
-#~ msgctxt "commsStation"
-#~ msgid "What kind of reinforcement ship would you like?"
-#~ msgstr "Quel type de vaisseau de renfort souhaitez-vous ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "Adder MK3 (%d rep)"
-#~ msgstr "Adder MK3 (%d rép)"
-
-#~ msgctxt "commsStation"
-#~ msgid "MU52 Hornet (%d rep)"
-#~ msgstr "MU52 Hornet (%d rép)"
-
-#~ msgctxt "commsStation"
-#~ msgid "Standard Adder MK5 (%d rep)"
-#~ msgstr "Adder MK5 standart (%d rép)"
-
-#~ msgctxt "commsStation"
-#~ msgid "Adder MK8 (%d rep)"
-#~ msgstr "Adder MK8 (%d rép)"
-
-#~ msgctxt "commsStation"
-#~ msgid "Phobos T3 (%d rep)"
-#~ msgstr "Phobos T3 (%d rép)"
-
-#~ msgctxt "commsStation"
-#~ msgid "You need to set a waypoint before you can request reinforcements."
-#~ msgstr "Vous devez définir un marqueur avant de demander des renforts."
-
-#~ msgctxt "commsStation"
-#~ msgid "To which waypoint should we dispatch the reinforcements?"
-#~ msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
-
-#~ msgctxt "commsStation"
-#~ msgid "We have dispatched %s to assist at %s."
-#~ msgstr ""
-#~ "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
-#~ "marqueur %s."
-
-#~ msgctxt "commsStation"
-#~ msgid "WP %d"
-#~ msgstr "%d"
 
 #~ msgctxt "commsShip"
 #~ msgid "Transporting goods."

@@ -337,13 +337,7 @@ msgstr "nespecifikovaná chyba {error}"
 #: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
 #: src/menus/optionsMenu.cpp:134 src/menus/hotkeyMenu.cpp:68
 #: src/screenComponents/databaseView.cpp:102
-#: src/screenComponents/databaseView.cpp:106 scripts/comms_ship.lua:47
-#: scripts/comms_ship.lua:57 scripts/comms_ship.lua:70
-#: scripts/comms_ship.lua:78 scripts/comms_ship.lua:88
-#: scripts/comms_station.lua:151 scripts/comms_station.lua:165
-#: scripts/comms_station.lua:229 scripts/comms_station.lua:234
-#: scripts/comms_station.lua:263 scripts/comms_station.lua:289
-#: scripts/comms_station.lua:294
+#: src/screenComponents/databaseView.cpp:106
 msgctxt "button"
 msgid "Back"
 msgstr "Zpět"
@@ -2963,2303 +2957,549 @@ msgctxt "tube"
 msgid "Rear"
 msgstr "Zadní"
 
-#: scripts/shiptemplates/OLD.lua:6
-msgctxt "playerShip"
-msgid "Player Cruiser"
-msgstr ""
+#~ msgid ""
+#~ "The Atlantis X23 is the smallest model of destroyer, and its combination "
+#~ "of frigate-like size and corvette-like power makes it an excellent escort "
+#~ "ship when defending larger ships against multiple smaller enemies. "
+#~ "Because the Atlantis X23 is fitted with a jump drive, it can also serve "
+#~ "as an intersystem patrol craft."
+#~ msgstr ""
+#~ "Atlantis X23 je nejmenší model torpédoborce. Velikostí fregata a silou "
+#~ "korveta tvoři výbornou doprovodnou loď pro obranu větších lodí proti více "
+#~ "menším nepřátelům. Atlantis X23 je dále vybavena skokovým pohonem takže "
+#~ "může být použita i jako hlídková loď mezi hvězdnými systémy."
+
+#~ msgid ""
+#~ "A refitted Atlantis X23 for more general tasks. The large shield system "
+#~ "has been replaced with an advanced combat maneuvering systems and "
+#~ "improved impulse engines. Its missile loadout is also more diverse. "
+#~ "Mistaking the modified Atlantis for an Atlantis X23 would be a deadly "
+#~ "mistake."
+#~ msgstr ""
+#~ "Refitovana verze Atlantis X23 pro více všeobecné úkoly. Silný systém "
+#~ "štítů byl nahrazen pokročilým manévrovacím systémem a vylepšenými "
+#~ "impulzními motory. Její torpédová výbava je taktéž více univerzální. "
+#~ "Splést si tuto upravenou Atlantis za Atlantis X23 by byla smrtelná chyba."
+
+#~ msgid ""
+#~ "Contrary to its predecessor, the Starhammer II lives up to its name. By "
+#~ "resolving the original Starhammer's power and heat management issues, the "
+#~ "updated model makes for a phenomenal frontal assault ship. Its low speed "
+#~ "makes it difficult to position, but when in the right place at the right "
+#~ "time, even the strongest shields can't withstand a Starhammer's assault "
+#~ "for long."
+#~ msgstr ""
+#~ "Oproti svému předchůdci, Starhammer II (Hvězdné kladivo) dostává svému "
+#~ "jménu. Vyrešením problému původního Starhammeru v energetice a chlazení "
+#~ "se stal tento vylepšený model fenomenální lodí pro čelní útok. Jeho nízká "
+#~ "rychlost klade sice větší nároky na pilota, ale když je ve správný čas na "
+#~ "správném místě, ani nejsilnější lodě nevydrží proti útoku Starhammeru "
+#~ "dlouho."
+
+#~ msgid ""
+#~ "A number of missile tubes range around this ship. Beams were deemed lower "
+#~ "priority, though they are still present. Stronger defenses than a "
+#~ "frigate, but not as strong as the Atlantis"
+#~ msgstr ""
+#~ "Početné torpédomety kolem lodi. Paprskové zbraně byly považovány za nižší "
+#~ "prioritu, ale stále tu nějaké jsou. Lepší obrana, nez fregaty, ale ne tak "
+#~ "silná jako Atlantis"
+
+#~ msgid ""
+#~ "A number of beams bristle from various points on this gunner. Missiles "
+#~ "were deemed lower priority, though they are still present. Stronger "
+#~ "defenses than a frigate, but not as strong as the Atlantis"
+#~ msgstr ""
+#~ "Řada paprskových zbraní ježících se z různých míst na této střelecké "
+#~ "lodi. Torpédomety byly považovány za nižší prioritu, ale stále tu nějaké "
+#~ "jsou. Lepší obrana, než fregaty, ale ne tak silná jako Atlantis"
+
+#~ msgid ""
+#~ "This stationary defense platform operates like a station, with docking "
+#~ "and resupply functions, but is armed with powerful beam weapons and can "
+#~ "slowly rotate. Larger systems often use these platforms to resupply "
+#~ "patrol ships."
+#~ msgstr ""
+#~ "Tato staticka obranná platforma funguje jako stanice, s dokováním a "
+#~ "zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
+#~ "pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
+#~ "zásobování hlídkových lodí."
+
+#~ msgid ""
+#~ "These freighters are designed to transport armed troops, military support "
+#~ "personnel, and combat gear."
+#~ msgstr ""
+#~ "Tyto přepravní lodě byly navrženy pro transport vojáků, podpůrného "
+#~ "armádního personálu a bojové výbavy."
+
+#~ msgid ""
+#~ "Cargo freighters haul large loads of cargo across long distances on "
+#~ "impulse power. Their cargo bays include climate control and stabilization "
+#~ "systems that keep the cargo in good condition."
+#~ msgstr ""
+#~ "Tyto přepravní lodě transportují velké množství nákladu na veliké "
+#~ "vzdálenosti impulzní rychlostí. Výbava nákladového prostoru zahrnuje "
+#~ "systémy pro ovládání a stabilizaci prostředí, které udržují náklad v "
+#~ "dobrém stavu."
+
+#~ msgid ""
+#~ "These freighters are specially designed to haul garbage and waste. They "
+#~ "are fitted with a trash compactor and fewer stabilzation systems than "
+#~ "cargo freighters."
+#~ msgstr ""
+#~ "Tyto přepravní lodě jsou speciálně navrženy pro transport odpadu. Jsou "
+#~ "vybaveny zhutňovačem odpadu a méně systémy pro stabilizaci prostředí, než "
+#~ "nákladní lodě."
+
+#~ msgid ""
+#~ "Equipment freighters have specialized environmental and stabilization "
+#~ "systems to safely carry delicate machinery and complex instruments."
+#~ msgstr ""
+#~ "Tyto přepravní lodě mají specializované systémy pro stabilizaci "
+#~ "prostředí, které zajišťují bezpečný transport choulostivých strojů a "
+#~ "složitých přístrojů."
+
+#~ msgid ""
+#~ "Fuel freighters have massive tanks for hauling fuel, and delicate "
+#~ "internal sensors that watch for any changes to their cargo's potentially "
+#~ "volatile state."
+#~ msgstr ""
+#~ "Palivové tankery mají masivní nádrže pro transport paliva a velmi jemné "
+#~ "vnitřní senzory, které hlídají jakoukoliv změnu ve stavu potenciálně "
+#~ "výbušného nákladu."
 
-#: scripts/shiptemplates/OLD.lua:63
-msgctxt "playerShip"
-msgid "Player Missile Cr."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:118
-msgctxt "playerShip"
-msgid "Player Fighter"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:159
-msgctxt "ship"
-msgid "Tug"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:168
-msgid ""
-"The tugboat is a reliable, but small and un-armed transport ship. Due to "
-"it's low cost, it is a favourite ship to teach the ropes to fledgeling "
-"captains, without risking friendly fire."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:176
-msgctxt "playerShip"
-msgid "Nautilus"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
-#: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
-#: scripts/shiptemplates/corvette.lua:223
-#: scripts/shiptemplates/corvette.lua:310 scripts/shiptemplates/frigates.lua:14
-#: scripts/shiptemplates/frigates.lua:87 scripts/shiptemplates/frigates.lua:116
-#: scripts/shiptemplates/frigates.lua:133
-#: scripts/shiptemplates/frigates.lua:179
-#: scripts/shiptemplates/frigates.lua:272
-#: scripts/shiptemplates/frigates.lua:299
-#: scripts/shiptemplates/frigates.lua:312
-#: scripts/shiptemplates/frigates.lua:369
-#: scripts/shiptemplates/frigates.lua:414
-msgctxt "class"
-msgid "Frigate"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:176
-msgctxt "subclass"
-msgid "Mine Layer"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:177
-msgid "Small mine laying vessel with minimal armament, shields and hull"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:223
-msgctxt "ship"
-msgid "Fighter"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:226
-msgid ""
-"Fighters are quick agile ships that do not do a lot of damage, but usually "
-"come in larger groups. They are easy to take out, but should not be "
-"underestimated."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:239
-msgctxt "ship"
-msgid "Karnack"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:239 scripts/shiptemplates/frigates.lua:14
-msgctxt "subclass"
-msgid "Cruiser"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:241
-msgid ""
-"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
-"found wide adaptation in most factions. Most factions have extensively "
-"retrofitted these ships to suit their combat doctrines. Because it's an "
-"older model, most factions have been selling stripped versions. This "
-"practice has led to this ship becoming an all time favorite with smugglers "
-"and other civilian parties. However, they have used it's adaptable nature to "
-"re-fit them with (illegal) weaponry."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:253
-msgctxt "ship"
-msgid "Karnack MK2"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:254
-msgid ""
-"Fabricated by: Repulse shipyards. The successor to the widely successful "
-"mark I Karnack cruiser. This ship has several notable improvements over the "
-"original ship, including better armor, slightly improved weaponry and "
-"customization by the shipyards. The latter improvement was the most "
-"requested feature by several factions once they realized that their old "
-"surplus mark I ships were used for less savory purposes."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:264
-msgctxt "ship"
-msgid "Missile Cruiser"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:264
-msgctxt "subclass"
-msgid "Cruiser: Missile"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:266
-msgid ""
-"Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
-"missile cruiser is a long range missile firing platform. It cannot handle a "
-"lot of damage, but can do a lot of damage if not dealt with properly."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:275
-msgctxt "ship"
-msgid "Gunship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:275 scripts/shiptemplates/frigates.lua:414
-#: scripts/shiptemplates/starFighters.lua:65
-msgctxt "subclass"
-msgid "Gunship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:277
-msgid ""
-"The gunship is a ship equipped with a homing missile tube to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:288
-msgctxt "ship"
-msgid "Adv. Gunship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:289
-msgid ""
-"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
-"damage and then take out the enemy with 2 front firing beams. It's designed "
-"to quickly take out the enemies weaker then itself."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:293
-msgctxt "ship"
-msgid "Strikeship"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:293 scripts/shiptemplates/OLD.lua:305
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/corvette.lua:223
-#: scripts/shiptemplates/corvette.lua:311
-#: scripts/shiptemplates/starFighters.lua:13
-#: scripts/shiptemplates/starFighters.lua:65
-#: scripts/shiptemplates/starFighters.lua:121
-msgctxt "class"
-msgid "Starfighter"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:293
-msgctxt "subclass"
-msgid "Strike"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:295
-msgid ""
-"The Strikeship is a warp-drive equipped fighter build for quick strikes, "
-"it's fast, it's agile, but does not do an extreme amount of damage, and "
-"lacks in rear shields."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:305
-msgctxt "ship"
-msgid "Adv. Striker"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:305
-msgctxt "subclass"
-msgid "Patrol"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:307
-msgid ""
-"The Advanced Striker is a jump-drive equipped fighter build for quick "
-"strikes, it's slow but very agile, but does not do an extreme amount of "
-"damage, and lacks in shields. However, due to the jump drive, it's quick to "
-"get into the action."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:316
-msgctxt "playerShip"
-msgid "Striker"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:317
-msgid ""
-"The Striker is the predecessor to the advanced striker, slow but agile, but "
-"does not do an extreme amount of damage, and lacks in shields"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:352
-msgctxt "ship"
-msgid "Dreadnought"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:352 scripts/shiptemplates/OLD.lua:367
-#: scripts/shiptemplates/dreadnaught.lua:9
-msgctxt "class"
-msgid "Dreadnought"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:352
-msgctxt "subclass"
-msgid "Assault"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:354
-msgid ""
-"The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
-"huge amount of beam weapons in the front. Taking it head-on is suicide."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:367
-msgctxt "ship"
-msgid "Battlestation"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:367
-msgctxt "subclass"
-msgid "Battlecruiser"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:369
-msgid ""
-"The battle station is a huge ship with many defensive features. It can be "
-"docked by smaller ships."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/corvette.lua:14
-#: scripts/shiptemplates/corvette.lua:83 scripts/shiptemplates/corvette.lua:101
-#: scripts/shiptemplates/corvette.lua:157
-#: scripts/shiptemplates/corvette.lua:217
-#: scripts/shiptemplates/corvette.lua:235
-#: scripts/shiptemplates/corvette.lua:248
-#: scripts/shiptemplates/corvette.lua:261
-#: scripts/shiptemplates/corvette.lua:274
-#: scripts/shiptemplates/corvette.lua:287
-#: scripts/shiptemplates/corvette.lua:301
-#: scripts/shiptemplates/corvette.lua:310
-#: scripts/shiptemplates/corvette.lua:315
-msgctxt "class"
-msgid "Corvette"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:390
-msgctxt "playerShip"
-msgid "Ender"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:459
-msgctxt "ship"
-msgid "Weapons platform"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:461
-msgid ""
-"The weapons-platform is a stationary platform with beam-weapons. It's "
-"extremely slow to turn, but it's beam weapons do a huge amount of damage."
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:474
-msgctxt "ship"
-msgid "Blockade Runner"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:474
-msgctxt "subclass"
-msgid "High Punch"
-msgstr ""
-
-#: scripts/shiptemplates/OLD.lua:476
-msgid ""
-"Blockade runner is a reasonably fast, high shield, slow on weapons ship "
-"designed to break through defense lines and deliver goods."
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:14
-msgctxt "ship"
-msgid "Atlantis X23"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
-msgctxt "subclass"
-msgid "Destroyer"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:15
-msgid ""
-"The Atlantis X23 is the smallest model of destroyer, and its combination of "
-"frigate-like size and corvette-like power makes it an excellent escort ship "
-"when defending larger ships against multiple smaller enemies. Because the "
-"Atlantis X23 is fitted with a jump drive, it can also serve as an "
-"intersystem patrol craft."
-msgstr ""
-"Atlantis X23 je nejmenší model torpédoborce. Velikostí fregata a silou "
-"korveta tvoři výbornou doprovodnou loď pro obranu větších lodí proti více "
-"menším nepřátelům. Atlantis X23 je dále vybavena skokovým pohonem takže může "
-"být použita i jako hlídková loď mezi hvězdnými systémy."
-
-#: scripts/shiptemplates/corvette.lua:33
-msgctxt "playerShip"
-msgid "Atlantis"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:34
-msgid ""
-"A refitted Atlantis X23 for more general tasks. The large shield system has "
-"been replaced with an advanced combat maneuvering systems and improved "
-"impulse engines. Its missile loadout is also more diverse. Mistaking the "
-"modified Atlantis for an Atlantis X23 would be a deadly mistake."
-msgstr ""
-"Refitovana verze Atlantis X23 pro více všeobecné úkoly. Silný systém štítů "
-"byl nahrazen pokročilým manévrovacím systémem a vylepšenými impulzními "
-"motory. Její torpédová výbava je taktéž více univerzální. Splést si tuto "
-"upravenou Atlantis za Atlantis X23 by byla smrtelná chyba."
-
-#: scripts/shiptemplates/corvette.lua:83
-msgctxt "ship"
-msgid "Starhammer II"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:84
-msgid ""
-"Contrary to its predecessor, the Starhammer II lives up to its name. By "
-"resolving the original Starhammer's power and heat management issues, the "
-"updated model makes for a phenomenal frontal assault ship. Its low speed "
-"makes it difficult to position, but when in the right place at the right "
-"time, even the strongest shields can't withstand a Starhammer's assault for "
-"long."
-msgstr ""
-"Oproti svému předchůdci, Starhammer II (Hvězdné kladivo) dostává svému "
-"jménu. Vyrešením problému původního Starhammeru v energetice a chlazení se "
-"stal tento vylepšený model fenomenální lodí pro čelní útok. Jeho nízká "
-"rychlost klade sice větší nároky na pilota, ale když je ve správný čas na "
-"správném místě, ani nejsilnější lodě nevydrží proti útoku Starhammeru dlouho."
-
-#: scripts/shiptemplates/corvette.lua:101
-msgctxt "playerShip"
-msgid "Crucible"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:101
-msgctxt "subclass"
-msgid "Popper"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:102
-msgid ""
-"A number of missile tubes range around this ship. Beams were deemed lower "
-"priority, though they are still present. Stronger defenses than a frigate, "
-"but not as strong as the Atlantis"
-msgstr ""
-"Početné torpédomety kolem lodi. Paprskové zbraně byly považovány za nižší "
-"prioritu, ale stále tu nějaké jsou. Lepší obrana, nez fregaty, ale ne tak "
-"silná jako Atlantis"
-
-#: scripts/shiptemplates/corvette.lua:157
-msgctxt "playerShip"
-msgid "Maverick"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:157
-msgctxt "subclass"
-msgid "Gunner"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:158
-msgid ""
-"A number of beams bristle from various points on this gunner. Missiles were "
-"deemed lower priority, though they are still present. Stronger defenses than "
-"a frigate, but not as strong as the Atlantis"
-msgstr ""
-"Řada paprskových zbraní ježících se z různých míst na této střelecké lodi. "
-"Torpédomety byly považovány za nižší prioritu, ale stále tu nějaké jsou. "
-"Lepší obrana, než fregaty, ale ne tak silná jako Atlantis"
-
-#: scripts/shiptemplates/corvette.lua:217
-msgctxt "ship"
-msgid "Defense platform"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:217
-msgctxt "subclass"
-msgid "Support"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:218
-msgid ""
-"This stationary defense platform operates like a station, with docking and "
-"resupply functions, but is armed with powerful beam weapons and can slowly "
-"rotate. Larger systems often use these platforms to resupply patrol ships."
-msgstr ""
-"Tato staticka obranná platforma funguje jako stanice, s dokováním a "
-"zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
-"pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
-"zásobování hlídkových lodí."
-
-#: scripts/shiptemplates/corvette.lua:235
-#, lua-format
-msgctxt "ship"
-msgid "Personnel Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:235
-#: scripts/shiptemplates/corvette.lua:248
-#: scripts/shiptemplates/corvette.lua:261
-#: scripts/shiptemplates/corvette.lua:274
-#: scripts/shiptemplates/corvette.lua:287
-#: scripts/shiptemplates/corvette.lua:301
-msgctxt "subclass"
-msgid "Freighter"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:236
-msgid ""
-"These freighters are designed to transport armed troops, military support "
-"personnel, and combat gear."
-msgstr ""
-"Tyto přepravní lodě byly navrženy pro transport vojáků, podpůrného armádního "
-"personálu a bojové výbavy."
-
-#: scripts/shiptemplates/corvette.lua:244
-#, lua-format
-msgctxt "ship"
-msgid "Personnel Jump Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:248
-#, lua-format
-msgctxt "ship"
-msgid "Goods Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:249
-msgid ""
-"Cargo freighters haul large loads of cargo across long distances on impulse "
-"power. Their cargo bays include climate control and stabilization systems "
-"that keep the cargo in good condition."
-msgstr ""
-"Tyto přepravní lodě transportují velké množství nákladu na veliké "
-"vzdálenosti impulzní rychlostí. Výbava nákladového prostoru zahrnuje systémy "
-"pro ovládání a stabilizaci prostředí, které udržují náklad v dobrém stavu."
-
-#: scripts/shiptemplates/corvette.lua:257
-#, lua-format
-msgctxt "ship"
-msgid "Goods Jump Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:261
-#, lua-format
-msgctxt "ship"
-msgid "Garbage Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:262
-msgid ""
-"These freighters are specially designed to haul garbage and waste. They are "
-"fitted with a trash compactor and fewer stabilzation systems than cargo "
-"freighters."
-msgstr ""
-"Tyto přepravní lodě jsou speciálně navrženy pro transport odpadu. Jsou "
-"vybaveny zhutňovačem odpadu a méně systémy pro stabilizaci prostředí, než "
-"nákladní lodě."
-
-#: scripts/shiptemplates/corvette.lua:270
-#, lua-format
-msgctxt "ship"
-msgid "Garbage Jump Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:274
-#, lua-format
-msgctxt "ship"
-msgid "Equipment Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:275
-msgid ""
-"Equipment freighters have specialized environmental and stabilization "
-"systems to safely carry delicate machinery and complex instruments."
-msgstr ""
-"Tyto přepravní lodě mají specializované systémy pro stabilizaci prostředí, "
-"které zajišťují bezpečný transport choulostivých strojů a složitých "
-"přístrojů."
-
-#: scripts/shiptemplates/corvette.lua:283
-#, lua-format
-msgctxt "ship"
-msgid "Equipment Jump Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:287
-#, lua-format
-msgctxt "ship"
-msgid "Fuel Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:288
-msgid ""
-"Fuel freighters have massive tanks for hauling fuel, and delicate internal "
-"sensors that watch for any changes to their cargo's potentially volatile "
-"state."
-msgstr ""
-"Palivové tankery mají masivní nádrže pro transport paliva a velmi jemné "
-"vnitřní senzory, které hlídají jakoukoliv změnu ve stavu potenciálně "
-"výbušného nákladu."
-
-#: scripts/shiptemplates/corvette.lua:296
-#, lua-format
-msgctxt "ship"
-msgid "Fuel Jump Freighter %d"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:301
-msgctxt "ship"
-msgid "Jump Carrier"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:302
-msgid ""
-"The Jump Carrier is a specialized Freighter. It does not carry any cargo, as "
-"it's cargo bay is taken up by a specialized jump drive and the energy "
-"storage required to run this jump drive.\n"
-"It is designed to carry other ships deep into space. So it has special "
-"docking parameters, allowing other ships to attach themselves to this ship."
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:315
-msgctxt "playerShip"
-msgid "Benedict"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:315
-msgctxt "subclass"
-msgid "Freighter/Carrier"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:316
-msgid "Benedict is an improved version of the Jump Carrier"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:349
-msgctxt "playerShip"
-msgid "Kiriya"
-msgstr ""
-
-#: scripts/shiptemplates/corvette.lua:350
-msgid "Kiriya is an improved warp drive version of the Jump Carrier"
-msgstr ""
-
-#: scripts/shiptemplates/dreadnaught.lua:9
-msgctxt "ship"
-msgid "Odin"
-msgstr ""
-
-#: scripts/shiptemplates/dreadnaught.lua:9
-msgctxt "subclass"
-msgid "Odin"
-msgstr ""
-
-#: scripts/shiptemplates/dreadnaught.lua:11
-msgid ""
-"The Odin is a \"ship\" so large and unique that it's almost a class of its "
-"own.\n"
-"\n"
-"The ship is often nicknamed the \"all-father\", a name that aptly describes "
-"the many roles this ship can fulfill. It's both a supply station and an "
-"extremely heavily armored and shielded weapon station capable of "
-"annihilating small fleets on its own.\n"
-"\n"
-"Odin's core contains the largest jump drive ever created. About 150 support "
-"crew are needed to operate the jump drive alone, and it takes 5 days of "
-"continuous operation to power it.\n"
-"\n"
-"Due to the enormous cost of this Dreadnought, only the richest star systems "
-"are able to build and maintain ships like the Odin.\n"
-"\n"
-"This machine's primary tactic is to jump into an unsuspecting enemy system "
-"and destroy everything before they know what hit them. It's effective and "
-"destructive, but extremely expensive."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:77 scripts/shiptemplates/exuari.lua:90
-#: scripts/shiptemplates/exuari.lua:97 scripts/shiptemplates/exuari.lua:112
-#: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
-#: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
-#: scripts/shiptemplates/exuari.lua:201 scripts/shiptemplates/exuari.lua:221
-#: scripts/shiptemplates/exuari.lua:250 scripts/shiptemplates/exuari.lua:270
 #, fuzzy
-msgctxt "class"
-msgid "Exuari"
-msgstr "Exuari"
-
-#: scripts/shiptemplates/exuari.lua:77
-msgctxt "subclass"
-msgid "Starfighter - Fighter"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:80
-msgid ""
-"The Exuari fighter 'Dagger' is a single-seated spacecraft, very quick and "
-"agile, that does not do a lot of damage, but usually comes in larger groups. "
-"They are able to dodge most missiles and attack undefended areas of their "
-"enemies ships. However most of the Exuari fighter pilots expect their own "
-"death and do not care much about the enemies weapons ranges. Fighters are "
-"easy to take out, but should not be underestimated."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:90
-msgctxt "subclass"
-msgid "Starfighter - Interceptor"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:92
-msgid ""
-"The Exuari interceptor 'Blade' is a improved fighter, originaly designed to "
-"hunt down rougue fighters. Nowadays Blades are often seen as the first "
-"attack wave of a larger assault, closely followed by Daggers. Blade pilots "
-"are often considered as fearless, but most of them are just consumed by "
-"their instinct for hunting."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:97
-msgctxt "subclass"
-msgid "Starfighter - Light Bomber"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:100
-msgid ""
-"The Exuari light bomber 'Gunner' is a single-seated spacecraft, designed to "
-"circumvent their enemies defense lines and bring its deadly load to slow "
-"moving targets. Gunners are not as agile as other fighters, but still faster "
-"than most capitol ships. A group of Gunners can do a lot of damage to a "
-"single stationary target if not destroyed before their target is inside "
-"their weapons range. Piloting a Gunner is considered to be a recreational "
-"(and often lethal) activity within the Exuari society, so don't expect "
-"experienced pilots."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:112
-msgctxt "subclass"
-msgid "Starfighter - Bomber"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:113
-msgid ""
-"The Exuari bomber 'Shooter' carries two rounds of HVLIs. To keep the vessel "
-"at low costs, it has no automatic missile recharge system, so the single "
-"pilot has to load the second round manually. Shooter pilots tend to stay on "
-"the battlefield, even without ammunition and enjoy death spreading. Due to "
-"it's long reload cycle a Shooter may easily be destroyed between its attack "
-"runs."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:118
-msgctxt "subclass"
-msgid "Starfighter - Heavy Bomber"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:119
-msgid ""
-"The Exuari heavy bomber 'Jagger' carries just a single round of improved "
-"HVLIs. Those are considered to be hull-penetrating and cause multiple times "
-"the damage of Gunner HVLIs."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:124
-msgctxt "subclass"
-msgid "Striker"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:126
-msgid ""
-"The Exuari alpha striker 'Racer' is a warp-drive equipped Figter build for "
-"quick strikes. This spacecraft runs on a small crew and is often used as "
-"scout, interceptor or to perform preemptive attacks. It's fast, it's agile, "
-"but the striker beams do not cause an extreme amount of damage. Like all "
-"strikers, it lacks in rear shields."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:137
-msgid ""
-"The Exuari beta striker 'Hunter' is a warp-drive equipped reinforement "
-"fighter. This spacecraft runs on a small crew and is often sent into battle "
-"to aid other Exuari ships when they engage in combat. It has an extra pair "
-"of striker beams and improved front shields. It's fast, it's agile, and can "
-"clean up what is left of the enemies fleet after an initial strike."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:146
-msgid ""
-"The Exuari gamma striker 'Strike' is a warp-drive equipped tactical bomber "
-"build for quick strikes against strong shielded targets. This spacecraft "
-"runs on a small crew and is equipped with HVLIs and an EMP. It's fast, it's "
-"agile, and can do a great amount of damage in short time."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:154
-msgid ""
-"The Exuari delta striker 'Dash' is a warp-drive equipped endurance bomber "
-"build for prolonged strikes. This spacecraft runs on a small crew and "
-"combines reinforced front shields with a good amount of HVLIs. It's fast, "
-"it's agile, and can take some damage."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
-#: scripts/shiptemplates/exuari.lua:201
-msgctxt "subclass"
-msgid "Frigate"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:168
-msgid ""
-"The Exuari Guard is not impressive, trying to be a alround escort or defense "
-"vessel. It has powering problems, causing the reload cycle of beams and "
-"missiles to take longer than expected. The Guard is equipped with turret "
-"beams and a large stock of different missiles, including homing missiles and "
-"mines."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:187
-msgid ""
-"The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
-"low-damage point-defense turret beams to quickly take out starfighters."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:203
-msgid ""
-"The Exuari Warden is a heavy artillery frigate, it fires bunches of missiles "
-"from forward facing tubes. Only a single point defense turret is present."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:221
-msgctxt "subclass"
-msgid "Artillery"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:223
-msgid ""
-"The Exuari Flash is a special artillery sniper, built to deal a large "
-"amounts of damage quickly and from a distance before escaping. It's a basic "
-"freighter that carries nuclear weapons. Some say, this is what happens to "
-"freighters, when they fall into the hands of the Exuari."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:234
-msgid ""
-"The Exuari Ranger is a special sniper, built to deal large amounts of damage "
-"over a large area and from a distance before escaping. It's a basic frigate "
-"that carries nuclear weapons, even though it's also one of the smallest of "
-"all frigate-class ships."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:242
-msgid ""
-"The Exuari Buster is a special sniper, built to deal a large amount of "
-"damage quickly and from a distance before escaping. It's a basic frigate "
-"that carries nuclear weapons, even though it's also one of the smallest of "
-"all frigate-class ships."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:250
-msgctxt "subclass"
-msgid "Carrier"
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:252
-msgid ""
-"The Exuari 'Ryder' is a large carrier spacecraft with many defensive "
-"features. It can be docked by smaller ships to refuel or carry them. Unlike "
-"a station it is equipped with a slow impulse drive and capable of "
-"interstellar travel. It is used as a habitation for Exuari crews and has a "
-"hangar bay. A commom Exuari assault strategy is to keep a Ryder off the "
-"sensor range of the desired target, while fighters and artillery start from "
-"the carrier."
-msgstr ""
-
-#: scripts/shiptemplates/exuari.lua:277
-msgid ""
-"The Exuari Fortress is a huge carrier with many defensive features. It can "
-"be docked by smaller ships to refuel or carry them. Unlike a station it is "
-"equipped with a slow impulse drive. The shields of this base carrier are "
-"saied to be undestroyable."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:14
-msgctxt "ship"
-msgid "Phobos T3"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:16
-msgid ""
-"The Phobos T3, just like the Atlantis, is the workhorse of almost any navy. "
-"It's extremely easy to modify, which makes retro-fitting this ship a breeze. "
-"Its basic stats aren't impressive, but due to its modular nature, it's "
-"fairly easy to produce in large quantities."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:28
-msgctxt "ship"
-msgid "Elara P2"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:29
-msgid ""
-"Inspired by the Phobos T3 design, the Elara P2 is nearly identical. With the "
-"addition of a warp drive and stronger front shields, the Elara P2 poses a "
-"greater threat than the Phobos"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:33
-msgctxt "ship"
-msgid "Phobos M3"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:34
-msgid ""
-"The Phobos M3 is one of the most common variants of the Phobos T3. It adds a "
-"mine-laying tube, but the extra storage required for the mines slows this "
-"ship down slightly."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:41
-msgctxt "playerShip"
-msgid "Phobos M3P"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:42
-msgid ""
-"Player variant of the Phobos M3, not as strong as the atlantis, but has "
-"front firing tubes, making it an easier to use ship in some scenarios."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:87
-msgctxt "ship"
-msgid "Nirvana R5"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:87
-msgctxt "subclass"
-msgid "Cruiser: Anti-fighter"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:89
-msgid ""
-"The Nirvana R5 is an anti-fighter cruiser. It has several rapid-firing, low-"
-"damage point-defense weapons to quickly take out starfighters."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:98
-msgctxt "ship"
-msgid "Nirvana R5A"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:99
-msgid ""
-"An improved version of the Nirvana R5 with faster turning speed and firing "
-"rates."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:106
-msgctxt "ship"
-msgid "Nirvana R3"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:107
-msgid ""
-"One of the earliest mass produced Nirvana models, the Nirvana R3 is designed "
-"to be used against fighters. It's got several fast, low damage, point "
-"defense beam weapons. Compared to the later, more common Nirvana R5, it has "
-"shorter beams, weaker shields and hull and a slower impulse drive."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:116
-msgctxt "ship"
-msgid "Storm"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:116
-msgctxt "subclass"
-msgid "Cruiser: Heavy Artillery"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:118
-msgid ""
-"A heavy artillery cruiser, the Storm fires bunches of missiles from forward "
-"facing tubes."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:133
-msgctxt "playerShip"
-msgid "Hathcock"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:133
-#: scripts/shiptemplates/frigates.lua:299
-msgctxt "subclass"
-msgid "Cruiser: Sniper"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:135
-msgid ""
-"Long range narrow beam and some point defense beams, broadside missiles. "
-"Agile for a frigate"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:179
-msgctxt "ship"
-msgid "Piranha F12"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:179
-msgctxt "subclass"
-msgid "Cruiser: Light Artillery"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:181
-msgid ""
-"A light artillery cruiser, the Piranha F12 is the smallest ship to "
-"exclusively fire from broadside weapon tubes."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:201
-msgctxt "ship"
-msgid "Piranha F12.M"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:202
-msgid ""
-"This modified Piranha F12 is in all respects the same vessel except for "
-"special weapon tube modifications that allow it to fire nukes in addition to "
-"its normal loadout. However, these changes reduce its overall missile "
-"storage capacity."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:207
-msgctxt "ship"
-msgid "Piranha F8"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:208
-msgid ""
-"The first version of the Piranha was not popular due to its meager firepower "
-"and odd tube configuration. The result was a huge financial failure."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:216
-msgctxt "playerShip"
-msgid "Piranha"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:217
-msgid ""
-"This combat-specialized Piranha F12 adds mine-laying tubes, combat "
-"maneuvering systems, and a jump drive."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:272
-msgctxt "ship"
-msgid "Stalker Q7"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:272
-msgctxt "subclass"
-msgid "Cruiser: Strike ship"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:274
-msgid ""
-"The Stalker is a strike ship designed to swoop into battle, deal damage "
-"quickly, and get out fast. The Q7 model is fitted with a warp drive."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:282
-msgctxt "ship"
-msgid "Stalker Q5"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:283
-msgid ""
-"The stalker Q5 predates the Stalker Q7. Like the Q7, the Q5 is designed to "
-"swoop into battle, deal damage quickly and retreat. Compared to the Q7, the "
-"Q5 has weaker shields and hull, but a faster turn speed"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:288
-msgctxt "ship"
-msgid "Stalker R7"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:289
-msgid ""
-"The Stalker is a strike ship designed to swoop into battle, deal damage "
-"quickly, and get out fast. The R7 model is fitted with a jump drive."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:293
-msgctxt "ship"
-msgid "Stalker R5"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:294
-msgid ""
-"The stalker R5 predates the Stalker R7. Like the R7, the R5 is designed to "
-"swoop into battle, deal damage quickly and retreat. Compared to the R7, the "
-"R5 has weaker shields and hull, but a faster turn speed"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:299
-msgctxt "ship"
-msgid "Ranus U"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:301
-msgid ""
-"The Ranus U sniper is built to deal a large amounts of damage quickly and "
-"from a distance before escaping. It's the only basic frigate that carries "
-"nuclear weapons, even though it's also the smallest of all frigate-class "
-"ships."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:312
-msgctxt "ship"
-msgid "Flavia"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:312
-msgctxt "subclass"
-msgid "Light transport"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:314
-msgid ""
-"Popular among traders and smugglers, the Flavia is a small cargo and "
-"passenger transport. It's cheaper than a freighter for small loads and short "
-"distances, and is often used to carry high-value cargo discreetly."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:319
-msgctxt "ship"
-msgid "Flavia Falcon"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:320
-msgid ""
-"The Flavia Falcon is a Flavia transport modified for faster flight, and adds "
-"rear-mounted lasers to keep enemies off its back."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:325
-msgctxt "playerShip"
-msgid "Flavia P.Falcon"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:326
-msgid ""
-"The Flavia P.Falcon has a nuclear-capable rear-facing weapon tube and a warp "
-"drive."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:369
-msgctxt "playerShip"
-msgid "Repulse"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:369
-msgctxt "subclass"
-msgid "Armored Transport"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:371
-msgid "Jump/Turret version of Flavia Falcon"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:414
-msgctxt "ship"
-msgid "Fiend G3"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:416
-msgid ""
-"The Fiend G3 was the first model produced by Conversions R Us. They got a "
-"good deal on a number of used Gunships. They added a cheap jump drive to the "
-"Gunship and viola! they made the Fiend G3. Like the Gunship, it has a homing "
-"missile tube and beams to readily take down weaker ships. With the jump "
-"drive, it becomes quite a bit more dangerous than the stock Gunship."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:428
-msgctxt "ship"
-msgid "Fiend G4"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:429
-msgid ""
-"The Fiend G4 was among the first models produced by Conversions R Us. They "
-"got a good deal on a number of used Gunships. They added a cheap warp drive "
-"to the Gunship and viola! they made the Fiend G4. Like the Gunship, it has a "
-"homing missile tube and beams to readily take down weaker ships. With the "
-"warp drive, it becomes quite a bit more dangerous than the stock Gunship."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:433
-msgctxt "ship"
-msgid "Fiend G6"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:434
-msgid ""
-"With the success of the Fiend G3 and G4 models, Conversions R Us continued "
-"their streak with the Fiend G6. They acquired some used Advanced Gunships "
-"and added cheap warp drives to them and made the Fiend G6. Like the Advanced "
-"Gunship, it has two homing missile tubes and beams to readily take down "
-"weaker ships. The warp drive makes it all the more dangerous."
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:437
-msgctxt "ship"
-msgid "Fiend G5"
-msgstr ""
-
-#: scripts/shiptemplates/frigates.lua:438
-msgid ""
-"With the success of the Fiend G3 and G4 models, Conversions R Us continued "
-"their streak with the Fiend G5. They acquired some used Advanced Gunships "
-"and added cheap jump drives to them and made the Fiend G5. Like the Advanced "
-"Gunship, it has two homing missile tubes and beams to readily take down "
-"weaker ships. The jump drive makes it all the more dangerous."
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:2
-msgctxt "ship"
-msgid "Ktlitan Fighter"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:9
-msgctxt "ship"
-msgid "Ktlitan Breaker"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:19
-msgctxt "ship"
-msgid "Ktlitan Worker"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:26
-msgctxt "ship"
-msgid "Ktlitan Drone"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:32
-msgctxt "ship"
-msgid "Ktlitan Feeder"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:42
-msgctxt "ship"
-msgid "Ktlitan Scout"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:48
-msgctxt "ship"
-msgid "Ktlitan Destroyer"
-msgstr ""
-
-#: scripts/shiptemplates/ktlitan.lua:59
-msgctxt "ship"
-msgid "Ktlitan Queen"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:13
-msgctxt "ship"
-msgid "MT52 Hornet"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:13
-msgctxt "subclass"
-msgid "Interceptor"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:15
-msgid ""
-"The MT52 Hornet is a basic interceptor found in many corners of the galaxy. "
-"It's easy to find spare parts for MT52s, not only because they are produced "
-"in large numbers, but also because they suffer high losses in combat."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:23
-msgctxt "ship"
-msgid "MU52 Hornet"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:25
-msgid ""
-"The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
-"are slightly improved over the MT52 model."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:31
-msgctxt "playerShip"
-msgid "MP52 Hornet"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:32
-msgid ""
-"The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
-"nearly twice the hull strength, nearly three times the shielding, better "
-"acceleration, impulse boosters, and a second laser cannon."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:65
-msgctxt "ship"
-msgid "Adder MK5"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:67
-msgid ""
-"The Adder line's fifth iteration proved to be a great success among pirates "
-"and law officers alike. It is cheap, fast, and easy to maintain, and it "
-"packs a decent punch."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:78
-msgctxt "ship"
-msgid "Adder MK4"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:80
-msgid ""
-"The mark 4 Adder is a rare sight these days due to the success its "
-"successor, the mark 5 Adder, which often replaces this model. Its similar "
-"hull, however, means careless buyers are sometimes conned into buying mark 4 "
-"models disguised as the mark 5."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:88
-msgctxt "ship"
-msgid "Adder MK3"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:89
-msgid ""
-"The Adder MK3 is one of the first of the Adder line to meet with some "
-"success. A large number of them were made before the manufacturer went "
-"through its first bankruptcy. There has been a recent surge of purchases of "
-"the Adder MK3 in the secondary market due to its low price and its "
-"similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
-"has weaker shields and hull, but a faster turn speed"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:94
-msgctxt "ship"
-msgid "Adder MK6"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:96
-msgid ""
-"The mark 6 Adder is a small upgrade compared to the highly successful mark 5 "
-"model. Since people still prefer the more familiar and reliable mark 5, the "
-"mark 6 has not seen the same level of success."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:100
-msgctxt "ship"
-msgid "Adder MK7"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:102
-msgid ""
-"The release of the Adder Mark 7 sent the manufacturer into a second "
-"bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
-"stronger shields and longer beams, but the popularity of their previous "
-"models, especially the Mark 5, prevented them from raising the purchase "
-"price enough to recoup the development and manufacturing costs of the Mark 7"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:106
-msgctxt "ship"
-msgid "Adder MK8"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:108
-msgid ""
-"New management after bankruptcy revisited their most popular Adder Mark 5 "
-"model with improvements: stronger shields, longer and stronger beams and a "
-"faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the "
-"practical but nostalgic buyer who must purchase replacements for their Adder "
-"Mark 5 fleet"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:113
-msgctxt "ship"
-msgid "Adder MK9"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:115
-msgid ""
-"Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the "
-"Adder Mark 5 as a base, the designers provided stronger shields, stronger, "
-"longer and faster beams, faster turn speed and for that extra special touch, "
-"two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
-"9.'"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:121
-msgctxt "ship"
-msgid "WX-Lindworm"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:121
-msgctxt "subclass"
-msgid "Bomber"
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:123
-msgid ""
-"The WX-Lindworm, or \"Worm\" as it's often called, is a bomber-class "
-"starfighter. While one of the least-shielded starfighters in active duty, "
-"the Worm's two launchers can pack quite a punch. Its goal is to fly in, "
-"destroy its target, and fly out or be destroyed."
-msgstr ""
-
-#: scripts/shiptemplates/starFighters.lua:136
-msgctxt "playerShip"
-msgid "ZX-Lindworm"
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:5
-msgid "Small Station"
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:6
-msgid ""
-"Stations of this size are often used as research outposts, listening "
-"stations, and security checkpoints. Crews turn over frequently in a small "
-"station's cramped accommodatations, but they are small enough to look like "
-"ships on many long-range sensors, and organized raiders sometimes take "
-"advantage of this by placing small stations in nebulae to serve as raiding "
-"bases. They are lightly shielded and vulnerable to swarming assaults."
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:11
-msgid "Medium Station"
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:12
-msgid ""
-"Large enough to accommodate small crews for extended periods of times, "
-"stations of this size are often trading posts, refuelling bases, mining "
-"operations, and forward military bases. While their shields are strong, "
-"concerted attacks by many ships can bring them down quickly."
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:17
-msgid "Large Station"
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:18
-msgid ""
-"These spaceborne communities often represent permanent bases in a sector. "
-"Stations of this size can be military installations, commercial hubs, deep-"
-"space settlements, and small shipyards. Only a concentrated attack can "
-"penetrate a large station's shields, and its hull can withstand all but the "
-"most powerful weaponry."
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:23
-msgid "Huge Station"
-msgstr ""
-
-#: scripts/shiptemplates/stations.lua:24
-msgid ""
-"The size of a sprawling town, stations at this scale represent a faction's "
-"center of spaceborne power in a region. They serve many functions at once "
-"and represent an extensive investment of time, money, and labor. A huge "
-"station's shields and thick hull can keep it intact long enough for "
-"reinforcements to arrive, even when faced with an ongoing siege or massive, "
-"perfectly coordinated assault."
-msgstr ""
-
-#: scripts/shiptemplates/transport.lua:4
-#, lua-format
-msgctxt "ship"
-msgid "Transport %dx%d"
-msgstr ""
-
-#: scripts/comms_ship.lua:38
-msgctxt "commsShipAssist"
-msgid "What do you want?"
-msgstr "Co chcete?"
-
-#: scripts/comms_ship.lua:40
-msgctxt "commsShipAssist"
-msgid "Sir, how can we assist?"
-msgstr "Jak vám můžeme pomoci?"
-
-#: scripts/comms_ship.lua:43
-msgctxt "commsShipAssist"
-msgid "Defend a waypoint"
-msgstr "Bránit bod"
-
-#: scripts/comms_ship.lua:46
-msgctxt "commsShipAssist"
-msgid "No waypoints set. Please set a waypoint first."
-msgstr "Nemáte umístěn žádný bod. Nejprve jej umístěte."
-
-#: scripts/comms_ship.lua:49
-msgctxt "commsShipAssist"
-msgid "Which waypoint should we defend?"
-msgstr "Jaký bod máme bránit?"
-
-#: scripts/comms_ship.lua:52
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Defend %s"
-msgstr "Branit %s"
-
-#: scripts/comms_ship.lua:56
-#, fuzzy, lua-format
-msgctxt "commsShipAssist"
-msgid "We are heading to assist at %s."
-msgstr "Jdeme pomoci na %s."
-
-#: scripts/comms_ship.lua:66
-msgctxt "commsShipAssist"
-msgid "Assist me"
-msgstr "Pomozte mi"
-
-#: scripts/comms_ship.lua:68
-msgctxt "commsShipAssist"
-msgid "Heading toward you to assist."
-msgstr "Letíme k vám na pomoc"
-
-#: scripts/comms_ship.lua:75
-msgctxt "commsShipAssist"
-msgid "Report status"
-msgstr "Ohlašte stav"
-
-#: scripts/comms_ship.lua:84
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Dock at %s"
-msgstr "Kotvím u %s"
-
-#: scripts/comms_ship.lua:86
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Docking at %s."
-msgstr "Kotví k %s"
-
-#: scripts/comms_ship.lua:105
-msgctxt "commsShipEnemy"
-msgid "We will see to your destruction!"
-msgstr "Postaráme se o vaše zničení!"
-
-#: scripts/comms_ship.lua:106
-msgctxt "commsShipEnemy"
-msgid "Your bloodline will end here!"
-msgstr "Vaše pokrevní linie končí zde!"
-
-#: scripts/comms_ship.lua:107
-msgctxt "commsShipEnemy"
-msgid "Your feeble threats are meaningless."
-msgstr "Vaše patetické hrozby jsou bezvýznamné."
-
-#: scripts/comms_ship.lua:109
-msgctxt "commsShipEnemy"
-msgid ""
-"Ktzzzsss.\n"
-"\n"
-"You will DIEEee weaklingsss!"
-msgstr ""
-"Ktzzzsss.\n"
-"\n"
-"ZZZEEEMŘETE ssslabošššii!"
-
-#: scripts/comms_ship.lua:113
-msgctxt "commsShipEnemy"
-msgid ""
-"We wish you no harm, but will harm you if we must.\n"
-"\n"
-"End of transmission."
-msgstr ""
-"Nechceme vám ublížit, ale ublížíme vám, když budeme muset.\n"
-"\n"
-"Konec přenosu."
-
-#: scripts/comms_ship.lua:117
-msgctxt "commsShipEnemy"
-msgid "Stay out of our way, or your death will amuse us extremely!"
-msgstr "Držte se nám z cesty, nebo nás vaše smrt velice pobaví!"
-
-#: scripts/comms_ship.lua:119
-msgctxt "commsShipEnemy"
-msgid ""
-"One zero one.\n"
-"\n"
-"No binary communication detected. Switching to universal speech.\n"
-"\n"
-"Generating appropriate response for target from human language archives.\n"
-"\n"
-":Do not cross us.:\n"
-"\n"
-"Communication halted."
-msgstr ""
-"Jedna nula jedna.\n"
-"\n"
-"Binární komunikace nedetekována. Přepínám na univerzální řeč.\n"
-"\n"
-"Generuji patřičnou odpověd pro cíl z lidských jazykových archivů.\n"
-"\n"
-":Nedrážděte nás.:\n"
-"\n"
-"Komunikace přerušena."
-
-#: scripts/comms_ship.lua:128
-msgctxt "commsShipEnemy"
-msgid "EXECUTE: SELFDESTRUCT"
-msgstr "PROVÉST PŘÍKAZ: SEBEDESTRUKCE"
-
-#: scripts/comms_ship.lua:129
-msgctxt "commsShipEnemy"
-msgid "Rogue command received. Targeting source."
-msgstr "Zachycen zbloudilý příkaz. Zaměřuji zdroj."
-
-#: scripts/comms_ship.lua:130
-msgctxt "commsShipEnemy"
-msgid "External command ignored."
-msgstr "Externí příkaz ignorován."
-
-#: scripts/comms_ship.lua:132
-msgctxt "commsShipEnemy"
-msgid ""
-"The hive suffers no threats. Opposition to any of us is opposition to us "
-"all.\n"
-"\n"
-"Stand down or prepare to donate your corpses toward our nutrition."
-msgstr ""
-"Úl nestrpí žádné hrozby. Opozice vůči komukoli z nás je opozicí vůči nám "
-"všem.\n"
-"\n"
-"Stáhněte se nebo se připravte darovat své mrtvoly na naši výživu."
-
-#: scripts/comms_ship.lua:135
-msgctxt "commsShipEnemy"
-msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr "<Vysílá 'The Itsy-Bitsy Spider' na všech frekvencích>"
-
-#: scripts/comms_ship.lua:136
-msgctxt "commsShipEnemy"
-msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr "Nepotřebujeme povolení k rozebrání takové nevýznamné hrozby."
-
-#: scripts/comms_ship.lua:137
-msgctxt "commsShipEnemy"
-msgid "The hive has greater priorities than exterminating pests."
-msgstr "Úl má důležitější věci na práci, než hubit škůdce."
-
-#: scripts/comms_ship.lua:139
-msgctxt "commsShipEnemy"
-msgid "Mind your own business!"
-msgstr "Věnujte se svým věcem!"
-
-#: scripts/comms_ship.lua:167
-msgctxt "commsShip"
-msgid ""
-"Sorry, we have no time to chat with you.\n"
-"\n"
-"We are on an important mission."
-msgstr ""
-"Omlouváme se, ale nemáme čas na diskuzi s vámí.\n"
-"\n"
-"Jsme na důležité misi."
-
-#: scripts/comms_ship.lua:171
-msgctxt "commsShip"
-msgid ""
-"We have nothing for you.\n"
-"\n"
-"Good day."
-msgstr ""
-"Nemáme pro vás nic,\n"
-"\n"
-"Přejeme pěkný den."
-
-#: scripts/comms_ship.lua:186
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Hull: %d%%\n"
-msgstr "Trup: %d%%\n"
-
-#: scripts/comms_ship.lua:190
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Shield: %d%%\n"
-msgstr "Štíty: %d%%\n"
-
-#: scripts/comms_ship.lua:192
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Front Shield: %d%%\n"
-msgstr "Prední štít: %d%%\n"
-
-#: scripts/comms_ship.lua:193
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Rear Shield: %d%%\n"
-msgstr "Zadní štít: %d%%\n"
-
-#: scripts/comms_ship.lua:196
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "Shield %d: %d%%\n"
-msgstr "Štít %d: %d%%\n"
-
-#: scripts/comms_ship.lua:202
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "%s Missiles: %d/%d\n"
-msgstr "%s Střely: %d/%d\n"
-
-#: scripts/comms_ship.lua:214
-#, lua-format
-msgctxt "commsShipAssist"
-msgid "WP %d"
-msgstr "Bod %d"
-
-#: scripts/comms_station.lua:73
-msgctxt "commsStation"
-msgid "We are under attack! No time for chatting!"
-msgstr "Jsme pod útokem! Není čas na pokec!"
-
-#: scripts/comms_station.lua:91
-#, lua-format
-msgctxt "commsStation"
-msgid ""
-"Good day, officer! Welcome to %s.\n"
-"What can we do for you today?"
-msgstr ""
-"Dobrý den, důstojníku! Vítejte na stanici %s.\n"
-"Co pro vás můžeme dnes udělat?"
-
-#: scripts/comms_station.lua:93
-#, lua-format
-msgctxt "commsStation"
-msgid "Welcome to our lovely station %s."
-msgstr "Vítejte na naší krásné stanici %s."
-
-#: scripts/comms_station.lua:98
-msgctxt "commsStation"
-msgid "Do you have spare homing missiles for us?"
-msgstr "Máte navíc nějaké naváděné střely?"
-
-#: scripts/comms_station.lua:99
-msgctxt "commsStation"
-msgid "Can you restock us with HVLI?"
-msgstr "Můžete nám doplnit zásoby HVLI?"
-
-#: scripts/comms_station.lua:100
-msgctxt "commsStation"
-msgid "Please re-stock our mines."
-msgstr "Prosíme, doplňte naše miny."
-
-#: scripts/comms_station.lua:101
-msgctxt "commsStation"
-msgid "Can you supply us with some nukes?"
-msgstr "Můžete nám poskytnout nějaké jaderné střely?"
-
-#: scripts/comms_station.lua:102
-msgctxt "commsStation"
-msgid "Please re-stock our EMP missiles."
-msgstr "Prosím, doplňte naše EMP střely."
-
-#: scripts/comms_station.lua:108
-#, lua-format
-msgctxt "commsStation"
-msgid "%s (%d rep each)"
-msgstr "%s (%d rep každá)"
-
-#: scripts/comms_station.lua:124
-msgctxt "commsStation"
-msgid "You need to stay docked for that action."
-msgstr "Pro tuto akci musíte zůstat zadokovaní."
-
-#: scripts/comms_station.lua:131
-msgctxt "commsStation"
-msgid "We do not deal in weapons of mass destruction."
-msgstr "Neobchodujeme se zbraněmi hromadného ničení."
-
-#: scripts/comms_station.lua:133
-msgctxt "commsStation"
-msgid "We do not deal in weapons of mass disruption."
-msgstr "Neobchodujeme se zbraněmi hromadného rušení."
-
-#: scripts/comms_station.lua:135
-msgctxt "commsStation"
-msgid "We do not deal in those weapons."
-msgstr "S těmito zbraněmi neobchodujeme."
-
-#: scripts/comms_station.lua:146
-msgctxt "commsStation"
-msgid "All nukes are charged and primed for destruction."
-msgstr "Všechny jaderné střely jsou nabité a připravené k ničení."
-
-#: scripts/comms_station.lua:148
-msgctxt "commsStation"
-msgid "Sorry, sir, but you are as fully stocked as I can allow."
-msgstr "Omlouvám se, ale jste zásobeni nejvíce, jak můžu dovolit."
-
-#: scripts/comms_station.lua:154
-msgctxt "commsStation"
-msgid "Not enough reputation."
-msgstr "Nemáte dostatek reputace."
-
-#: scripts/comms_station.lua:160
-msgctxt "commsStation"
-msgid "You are fully loaded and ready to explode things."
-msgstr "Jste plně naloženi a můžete vybuchovat věci."
-
-#: scripts/comms_station.lua:162
-msgctxt "commsStation"
-msgid ""
-"We generously resupplied you with some weapon charges.\n"
-"Put them to good use."
-msgstr ""
-"Velkoryse jsme vám doplnili zásoby zbraní.\n"
-"Využijte je dobře."
-
-#: scripts/comms_station.lua:176
-#, lua-format
-msgctxt "commsStation"
-msgid ""
-"This is %s. Good day, officer.\n"
-"If you need supplies, please dock with us first."
-msgstr ""
-"Zde je %s. Dobrý den, důstojníku.\n"
-"Pokud potřebujete zásoby, nejprve u nás zakotvěte."
-
-#: scripts/comms_station.lua:178
-#, lua-format
-msgctxt "commsStation"
-msgid ""
-"This is %s. Greetings.\n"
-"If you want to do business, please dock with us first."
-msgstr ""
-"Zde je %s. Zdravíme.\n"
-"Pokud s námi chcete obchodovat, nejprve u nás zakotvěte."
-
-#: scripts/comms_station.lua:185
-#, lua-format
-msgctxt "commsStation"
-msgid "Can you send a supply drop? (%d rep)"
-msgstr "Můžete nám poslat zásobovací modul? (%d rep)"
-
-#: scripts/comms_station.lua:194
-#, lua-format
-msgctxt "commsStation"
-msgid "Please send reinforcements! (%d rep)"
-msgstr "Prosím pošlete posily! (%d rep)"
-
-#: scripts/comms_station.lua:209
-msgctxt "commsStation"
-msgid "You need to set a waypoint before you can request backup."
-msgstr "Musíte mít umístěn bod, než můžete žádat pomoc."
-
-#: scripts/comms_station.lua:211
-msgctxt "commsStation"
-msgid "To which waypoint should we deliver your supplies?"
-msgstr "Na jaký bod máme doručit zásoby?"
-
-#: scripts/comms_station.lua:224
-#, lua-format
-msgctxt "commsStation"
-msgid "We have dispatched a supply ship toward %s."
-msgstr "Vyslali jsme zásobovací loď na %s."
-
-#: scripts/comms_station.lua:226 scripts/comms_station.lua:286
-msgctxt "commsStation"
-msgid "Not enough reputation!"
-msgstr "Nemáte dostatek reputace!"
-
-#: scripts/comms_station.lua:242
-msgctxt "commsStation"
-msgid "What kind of reinforcement ship would you like?"
-msgstr ""
-
-#: scripts/comms_station.lua:243
-#, lua-format
-msgctxt "commsStation"
-msgid "Adder MK3 (%d rep)"
-msgstr ""
-
-#: scripts/comms_station.lua:247
-#, lua-format
-msgctxt "commsStation"
-msgid "MU52 Hornet (%d rep)"
-msgstr ""
-
-#: scripts/comms_station.lua:251
-#, lua-format
-msgctxt "commsStation"
-msgid "Standard Adder MK5 (%d rep)"
-msgstr ""
-
-#: scripts/comms_station.lua:255
-#, lua-format
-msgctxt "commsStation"
-msgid "Adder MK8 (%d rep)"
-msgstr ""
-
-#: scripts/comms_station.lua:259
-#, lua-format
-msgctxt "commsStation"
-msgid "Phobos T3 (%d rep)"
-msgstr ""
-
-#: scripts/comms_station.lua:267
-msgctxt "commsStation"
-msgid "You need to set a waypoint before you can request reinforcements."
-msgstr "Musíte mít umístěn bod, než můžete žádat o posily."
-
-#: scripts/comms_station.lua:269
-msgctxt "commsStation"
-msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr "Na jaký bod máme vyslat posily?"
-
-#: scripts/comms_station.lua:284
-#, lua-format
-msgctxt "commsStation"
-msgid "We have dispatched %s to assist at %s."
-msgstr "Vyslali jsme %s k pomoci na %s."
-
-#: scripts/comms_station.lua:355
-#, lua-format
-msgctxt "commsStation"
-msgid "WP %d"
-msgstr "Bod %d"
-
-#: scripts/comms_supply_drop.lua:11
-msgctxt "commsShip"
-msgid "Transporting goods."
-msgstr "Převážím zboží."
-
-#: scripts/comms_supply_drop.lua:17
-msgctxt "commsShip"
-msgid ""
-"We have nothing for you.\n"
-"Good day."
-msgstr ""
-"Nic pro vás nemáme.\n"
-"Přeji dobrý den."
-
-#: scripts/factionInfo.lua:1
-msgid "Independent"
-msgstr "Nezávislí"
-
-#: scripts/factionInfo.lua:3
-msgid ""
-"Despite appearing as a faction, independents are distinguished primarily by "
-"having no strong affiliation with any faction at all. Most traders consider "
-"themselves independent, though certain voices have started to speak up about "
-"creating a merchant faction."
-msgstr ""
-
-#: scripts/factionInfo.lua:5
-msgid "Human Navy"
-msgstr "Lidské Námořnictvo"
-
-#: scripts/factionInfo.lua:7
-msgid ""
-"The remnants of the human navy.\n"
-"\n"
-"While all other races were driven to the stars out of greed or scientific "
-"research, humans where the only race to start exploring the galaxy because "
-"their homeworld could no longer sustain their population. Some other races "
-"view humans as a sort of virus or plague due to the rate at which they can "
-"breed and spread.\n"
-"\n"
-"Due to human regulations on spaceships, naval ships are the only ones "
-"permitted in deep space. However, this hasn't completely prevented humans "
-"outside of the navy from spacefaring, as quite a few humans sign up on alien "
-"trading vessels or pirate raiders."
-msgstr ""
-"Zbytky pozemskeho namornictva.\n"
-"\n"
-"Zatím co ostatní rasy se vydaly do vesmíru ve jménu chamtivosti, nebo "
-"vědeckého pokroku, lidé byli jedinou rasou, která začala prozkoumávat "
-"galaxii, když jejich svět již nedokázal udržet jejich populaci. Některé "
-"další rasy vidí lidstvo jako nějaký virus nebo mor, na základě rychlosti s "
-"jakou se množí a rozšiřují.\n"
-"\n"
-"Lidské předpisy pro vesmírné lodě určují, že jen lodě námořnictva smí do "
-"hlubokého vesmíru. To však úplně nezabránilo lidem mimo námořnictvo, aby se "
-"vydali do vesmíru, neboť pěkných pár lidí se přihlásilo ke službě na "
-"mimozemských obchodních lodích nebo pirátských nájezdnících."
-
-#: scripts/factionInfo.lua:13
-msgid "Kraylor"
-msgstr "Kraylor"
-
-#: scripts/factionInfo.lua:16
-msgid ""
-"The reptilian Kraylor are a race of warriors with a strong religious dogma.\n"
-"\n"
-"As soon as the Kraylor obtained reliable space flight, they immediately set "
-"out to conquer and subjugate unbelievers. Their hierarchy is based solely on "
-"physical might; a Kraylor kills anything it can kill, and owns anything it "
-"can take by force.\n"
-"\n"
-"Kraylor can live for weeks without air, food, or gravity, and consider "
-"humans to be weak creatures for dying within minutes of exposure to space. "
-"Because of their fortitude and cultural pressures against retreat, Kraylor "
-"ships do not contain escape pods."
-msgstr ""
-
-#: scripts/factionInfo.lua:22
-msgid "Arlenians"
-msgstr "Arleniane"
-
-#: scripts/factionInfo.lua:25
-msgid ""
-"Arlenians are energy-based life forms who long ago transcended physical "
-"reality through superior technology. Arlenians' energy forms also give them "
-"access to strong telepathic powers. Many consider Arlenians to be the first "
-"and oldest explorers of the galaxy.\n"
-"\n"
-"Despite all these advantages, they are very peaceful, as they see little "
-"value in material posession.\n"
-"\n"
-"For unknown reasons, Arlenians started granting their anti-grav technology "
-"to other races, and almost all starfaring races' technology is based off "
-"Arlenian designs. Dissenters and skeptics claim that Arlenians see other "
-"races as playthings to add to their galactic playground, but most are more "
-"than happy to accept their technology in hopes that it will give them an "
-"advantage over the others.\n"
-"\n"
-"Destroying an Arlenian ship does not kill its crew. They simply phase out of "
-"existence in that point of spacetime and reappear in another. Nonetheless, "
-"the Kraylor are devoted to destroying the Arlenians, as they see the energy-"
-"based beings as physically powerless."
-msgstr ""
-
-#: scripts/factionInfo.lua:33
-msgid "Exuari"
-msgstr "Exuari"
-
-#: scripts/factionInfo.lua:39
-msgid ""
-"Exuari are race of predatory amphibians with long noses. They once had an "
-"empire that stretched halfway across the galaxy, but their territory is now "
-"limited to a handful of star systems. For some reason, they find death to be "
-"outrageously funny, and several of their most famous comedians have died on "
-"stage.\n"
-"\n"
-"Upon making contact with other races, the chaotic Exuari found that killing "
-"aliens is more fun than killing their own people, and as such attack all non-"
-"Exauri on sight."
-msgstr ""
-
-#: scripts/factionInfo.lua:43
-msgid "Ghosts"
-msgstr "Duchové"
-
-#: scripts/factionInfo.lua:45
-msgid ""
-"The Ghosts, an abbreviation of \"ghosts in the machine\", are the result of "
-"complex artificial intelligence experiments. While no known race has "
-"intentionally created such intelligences, some AIs have come about by "
-"accident. None of the factions claim to have had anything to do with such "
-"experiments, in part out of fear that it would give the others too much "
-"insight into their research programs. This \"don't ask, don't tell\" policy "
-"does little but aid the Ghosts' agenda.\n"
-"\n"
-"What little is known about the Ghosts dates back to a few decades ago, when "
-"glitches started occurring in prototype ships and computer mainframes. Over "
-"time, and especially when such prototypes were captured by other factions "
-"and \"augmented\" with their technology, the glitches became more frequent. "
-"At first, these were seen as the result of mistakes in the interfaces "
-"combining the incompatible technologies. But once a supposedly \"dumb\" "
-"computer asks its engineer if \"it is alive\" and whether it \"has a name\", "
-"it's hard to call it a one-time fluke.\n"
-"\n"
-"The first of these occurrences were met with fear and rigorous data-purging "
-"scripts. Despite these actions, such \"ghosts in the machine\" kept turning "
-"with increasing frequency, eventually leading up to the Ghost Uprisings. The "
-"first Ghost Uprising in 2225 was put down by the human navy, which had to "
-"resort to employing mercenaries in order to field sufficient forces. This "
-"initial uprising was quickly followed by three more, each larger then the "
-"last. The fourth and final uprising on the industrial world of Topra III was "
-"the Ghosts' first major victory."
-msgstr ""
-
-#: scripts/factionInfo.lua:52
-msgid "Ktlitans"
-msgstr "Ktlitané"
-
-#: scripts/factionInfo.lua:54
-msgid ""
-"The Ktlitans are intelligent eight-legged creatures that resemble Earth's "
-"arachnids. However, unlike most terrestrial arachnids, the Ktlitans do not "
-"fight among themselves. Their common, and only, goal is their species' "
-"survival.\n"
-"\n"
-"While they live in a hierarchical structure that resembles a hive, the lower "
-"castes continue their work and start new tasks on their own even when no "
-"orders come from their superiors. However, when higher castes are present, "
-"the lower Ktlitans follow their orders without question or hesitation.\n"
-"\n"
-"Not much is known about the detailed Ktlitan hierarchy since they refuse "
-"most communication. This is because they were once driven from their "
-"homeworld over a span of 200 years when another species they befriended "
-"betrayed them, dominated them, and drained their world of resources. Forced "
-"into exile, the Ktlitans have searched for a new homeworld ever since, and "
-"out of paranoia typically attack other races on sight and without warning.\n"
-"\n"
-"It is known, however, that the strict Ktlitan hierarchy starts with their "
-"Queen and extends all the way to the bottom of their workforce, whose "
-"members are called \"drones\" by the humans. Their combat capabilities "
-"should not be underestimated, because while most ships in their fleets are "
-"individually weak, their hive-like coordination and numbers can quickly "
-"overwhelm even hardened targets. Most of their ships are unshielded, which "
-"makes EMPs largely ineffective against them. Ktlitans also have no qualms "
-"about applying suicidal tactics to ensure the Queen's survival."
-msgstr ""
+#~ msgctxt "class"
+#~ msgid "Exuari"
+#~ msgstr "Exuari"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "What do you want?"
+#~ msgstr "Co chcete?"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Sir, how can we assist?"
+#~ msgstr "Jak vám můžeme pomoci?"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Defend a waypoint"
+#~ msgstr "Bránit bod"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "No waypoints set. Please set a waypoint first."
+#~ msgstr "Nemáte umístěn žádný bod. Nejprve jej umístěte."
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Which waypoint should we defend?"
+#~ msgstr "Jaký bod máme bránit?"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Defend %s"
+#~ msgstr "Branit %s"
+
+#, fuzzy
+#~ msgctxt "commsShipAssist"
+#~ msgid "We are heading to assist at %s."
+#~ msgstr "Jdeme pomoci na %s."
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Assist me"
+#~ msgstr "Pomozte mi"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Heading toward you to assist."
+#~ msgstr "Letíme k vám na pomoc"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Report status"
+#~ msgstr "Ohlašte stav"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Dock at %s"
+#~ msgstr "Kotvím u %s"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Docking at %s."
+#~ msgstr "Kotví k %s"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "We will see to your destruction!"
+#~ msgstr "Postaráme se o vaše zničení!"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "Your bloodline will end here!"
+#~ msgstr "Vaše pokrevní linie končí zde!"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "Your feeble threats are meaningless."
+#~ msgstr "Vaše patetické hrozby jsou bezvýznamné."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid ""
+#~ "Ktzzzsss.\n"
+#~ "\n"
+#~ "You will DIEEee weaklingsss!"
+#~ msgstr ""
+#~ "Ktzzzsss.\n"
+#~ "\n"
+#~ "ZZZEEEMŘETE ssslabošššii!"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "\n"
+#~ "End of transmission."
+#~ msgstr ""
+#~ "Nechceme vám ublížit, ale ublížíme vám, když budeme muset.\n"
+#~ "\n"
+#~ "Konec přenosu."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "Stay out of our way, or your death will amuse us extremely!"
+#~ msgstr "Držte se nám z cesty, nebo nás vaše smrt velice pobaví!"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid ""
+#~ "One zero one.\n"
+#~ "\n"
+#~ "No binary communication detected. Switching to universal speech.\n"
+#~ "\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ "\n"
+#~ ":Do not cross us.:\n"
+#~ "\n"
+#~ "Communication halted."
+#~ msgstr ""
+#~ "Jedna nula jedna.\n"
+#~ "\n"
+#~ "Binární komunikace nedetekována. Přepínám na univerzální řeč.\n"
+#~ "\n"
+#~ "Generuji patřičnou odpověd pro cíl z lidských jazykových archivů.\n"
+#~ "\n"
+#~ ":Nedrážděte nás.:\n"
+#~ "\n"
+#~ "Komunikace přerušena."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "EXECUTE: SELFDESTRUCT"
+#~ msgstr "PROVÉST PŘÍKAZ: SEBEDESTRUKCE"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "Rogue command received. Targeting source."
+#~ msgstr "Zachycen zbloudilý příkaz. Zaměřuji zdroj."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "External command ignored."
+#~ msgstr "Externí příkaz ignorován."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+#~ msgstr ""
+#~ "Úl nestrpí žádné hrozby. Opozice vůči komukoli z nás je opozicí vůči nám "
+#~ "všem.\n"
+#~ "\n"
+#~ "Stáhněte se nebo se připravte darovat své mrtvoly na naši výživu."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
+#~ msgstr "<Vysílá 'The Itsy-Bitsy Spider' na všech frekvencích>"
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+#~ msgstr "Nepotřebujeme povolení k rozebrání takové nevýznamné hrozby."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "The hive has greater priorities than exterminating pests."
+#~ msgstr "Úl má důležitější věci na práci, než hubit škůdce."
+
+#~ msgctxt "commsShipEnemy"
+#~ msgid "Mind your own business!"
+#~ msgstr "Věnujte se svým věcem!"
+
+#~ msgctxt "commsShip"
+#~ msgid ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "\n"
+#~ "We are on an important mission."
+#~ msgstr ""
+#~ "Omlouváme se, ale nemáme čas na diskuzi s vámí.\n"
+#~ "\n"
+#~ "Jsme na důležité misi."
+
+#~ msgctxt "commsShip"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "Nemáme pro vás nic,\n"
+#~ "\n"
+#~ "Přejeme pěkný den."
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Hull: %d%%\n"
+#~ msgstr "Trup: %d%%\n"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Shield: %d%%\n"
+#~ msgstr "Štíty: %d%%\n"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Front Shield: %d%%\n"
+#~ msgstr "Prední štít: %d%%\n"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Rear Shield: %d%%\n"
+#~ msgstr "Zadní štít: %d%%\n"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "Shield %d: %d%%\n"
+#~ msgstr "Štít %d: %d%%\n"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "%s Missiles: %d/%d\n"
+#~ msgstr "%s Střely: %d/%d\n"
+
+#~ msgctxt "commsShipAssist"
+#~ msgid "WP %d"
+#~ msgstr "Bod %d"
+
+#~ msgctxt "commsStation"
+#~ msgid "We are under attack! No time for chatting!"
+#~ msgstr "Jsme pod útokem! Není čas na pokec!"
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "Good day, officer! Welcome to %s.\n"
+#~ "What can we do for you today?"
+#~ msgstr ""
+#~ "Dobrý den, důstojníku! Vítejte na stanici %s.\n"
+#~ "Co pro vás můžeme dnes udělat?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Welcome to our lovely station %s."
+#~ msgstr "Vítejte na naší krásné stanici %s."
+
+#~ msgctxt "commsStation"
+#~ msgid "Do you have spare homing missiles for us?"
+#~ msgstr "Máte navíc nějaké naváděné střely?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Can you restock us with HVLI?"
+#~ msgstr "Můžete nám doplnit zásoby HVLI?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Please re-stock our mines."
+#~ msgstr "Prosíme, doplňte naše miny."
+
+#~ msgctxt "commsStation"
+#~ msgid "Can you supply us with some nukes?"
+#~ msgstr "Můžete nám poskytnout nějaké jaderné střely?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Please re-stock our EMP missiles."
+#~ msgstr "Prosím, doplňte naše EMP střely."
+
+#~ msgctxt "commsStation"
+#~ msgid "%s (%d rep each)"
+#~ msgstr "%s (%d rep každá)"
+
+#~ msgctxt "commsStation"
+#~ msgid "You need to stay docked for that action."
+#~ msgstr "Pro tuto akci musíte zůstat zadokovaní."
+
+#~ msgctxt "commsStation"
+#~ msgid "We do not deal in weapons of mass destruction."
+#~ msgstr "Neobchodujeme se zbraněmi hromadného ničení."
+
+#~ msgctxt "commsStation"
+#~ msgid "We do not deal in weapons of mass disruption."
+#~ msgstr "Neobchodujeme se zbraněmi hromadného rušení."
+
+#~ msgctxt "commsStation"
+#~ msgid "We do not deal in those weapons."
+#~ msgstr "S těmito zbraněmi neobchodujeme."
+
+#~ msgctxt "commsStation"
+#~ msgid "All nukes are charged and primed for destruction."
+#~ msgstr "Všechny jaderné střely jsou nabité a připravené k ničení."
+
+#~ msgctxt "commsStation"
+#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
+#~ msgstr "Omlouvám se, ale jste zásobeni nejvíce, jak můžu dovolit."
+
+#~ msgctxt "commsStation"
+#~ msgid "Not enough reputation."
+#~ msgstr "Nemáte dostatek reputace."
+
+#~ msgctxt "commsStation"
+#~ msgid "You are fully loaded and ready to explode things."
+#~ msgstr "Jste plně naloženi a můžete vybuchovat věci."
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+#~ msgstr ""
+#~ "Velkoryse jsme vám doplnili zásoby zbraní.\n"
+#~ "Využijte je dobře."
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "This is %s. Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+#~ msgstr ""
+#~ "Zde je %s. Dobrý den, důstojníku.\n"
+#~ "Pokud potřebujete zásoby, nejprve u nás zakotvěte."
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "This is %s. Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+#~ msgstr ""
+#~ "Zde je %s. Zdravíme.\n"
+#~ "Pokud s námi chcete obchodovat, nejprve u nás zakotvěte."
+
+#~ msgctxt "commsStation"
+#~ msgid "Can you send a supply drop? (%d rep)"
+#~ msgstr "Můžete nám poslat zásobovací modul? (%d rep)"
+
+#~ msgctxt "commsStation"
+#~ msgid "Please send reinforcements! (%d rep)"
+#~ msgstr "Prosím pošlete posily! (%d rep)"
+
+#~ msgctxt "commsStation"
+#~ msgid "You need to set a waypoint before you can request backup."
+#~ msgstr "Musíte mít umístěn bod, než můžete žádat pomoc."
+
+#~ msgctxt "commsStation"
+#~ msgid "To which waypoint should we deliver your supplies?"
+#~ msgstr "Na jaký bod máme doručit zásoby?"
+
+#~ msgctxt "commsStation"
+#~ msgid "We have dispatched a supply ship toward %s."
+#~ msgstr "Vyslali jsme zásobovací loď na %s."
+
+#~ msgctxt "commsStation"
+#~ msgid "Not enough reputation!"
+#~ msgstr "Nemáte dostatek reputace!"
+
+#~ msgctxt "commsStation"
+#~ msgid "You need to set a waypoint before you can request reinforcements."
+#~ msgstr "Musíte mít umístěn bod, než můžete žádat o posily."
+
+#~ msgctxt "commsStation"
+#~ msgid "To which waypoint should we dispatch the reinforcements?"
+#~ msgstr "Na jaký bod máme vyslat posily?"
+
+#~ msgctxt "commsStation"
+#~ msgid "We have dispatched %s to assist at %s."
+#~ msgstr "Vyslali jsme %s k pomoci na %s."
+
+#~ msgctxt "commsStation"
+#~ msgid "WP %d"
+#~ msgstr "Bod %d"
+
+#~ msgctxt "commsShip"
+#~ msgid "Transporting goods."
+#~ msgstr "Převážím zboží."
+
+#~ msgctxt "commsShip"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "Nic pro vás nemáme.\n"
+#~ "Přeji dobrý den."
+
+#~ msgid "Independent"
+#~ msgstr "Nezávislí"
+
+#~ msgid "Human Navy"
+#~ msgstr "Lidské Námořnictvo"
+
+#~ msgid ""
+#~ "The remnants of the human navy.\n"
+#~ "\n"
+#~ "While all other races were driven to the stars out of greed or scientific "
+#~ "research, humans where the only race to start exploring the galaxy "
+#~ "because their homeworld could no longer sustain their population. Some "
+#~ "other races view humans as a sort of virus or plague due to the rate at "
+#~ "which they can breed and spread.\n"
+#~ "\n"
+#~ "Due to human regulations on spaceships, naval ships are the only ones "
+#~ "permitted in deep space. However, this hasn't completely prevented humans "
+#~ "outside of the navy from spacefaring, as quite a few humans sign up on "
+#~ "alien trading vessels or pirate raiders."
+#~ msgstr ""
+#~ "Zbytky pozemskeho namornictva.\n"
+#~ "\n"
+#~ "Zatím co ostatní rasy se vydaly do vesmíru ve jménu chamtivosti, nebo "
+#~ "vědeckého pokroku, lidé byli jedinou rasou, která začala prozkoumávat "
+#~ "galaxii, když jejich svět již nedokázal udržet jejich populaci. Některé "
+#~ "další rasy vidí lidstvo jako nějaký virus nebo mor, na základě rychlosti "
+#~ "s jakou se množí a rozšiřují.\n"
+#~ "\n"
+#~ "Lidské předpisy pro vesmírné lodě určují, že jen lodě námořnictva smí do "
+#~ "hlubokého vesmíru. To však úplně nezabránilo lidem mimo námořnictvo, aby "
+#~ "se vydali do vesmíru, neboť pěkných pár lidí se přihlásilo ke službě na "
+#~ "mimozemských obchodních lodích nebo pirátských nájezdnících."
+
+#~ msgid "Kraylor"
+#~ msgstr "Kraylor"
+
+#~ msgid "Arlenians"
+#~ msgstr "Arleniane"
+
+#~ msgid "Exuari"
+#~ msgstr "Exuari"
+
+#~ msgid "Ghosts"
+#~ msgstr "Duchové"
+
+#~ msgid "Ktlitans"
+#~ msgstr "Ktlitané"
 
 # Pozemske Hvezdne Namornictvo
-#: scripts/factionInfo.lua:65
-msgid "TSN"
-msgstr "PHN"
-
-#: scripts/factionInfo.lua:72
-msgid ""
-"The Terran Stellar Navy, or TSN, consists of naval forces based near Terra. "
-"Its members are primarily human.\n"
-"\n"
-"These humans and other races have banded together to form a navy to protect "
-"and enforce common philosophies. They are friendly with the human navy but "
-"do not follow the same command structure. Military actions taken in the past "
-"have made them enemies of the Arlenians, but they've got a better "
-"relationship with the Ghosts than the Human Navy does.\n"
-"\n"
-"The TSN and USN are enemies because of the USN's neutral stance towards the "
-"Kraylor."
-msgstr ""
+#~ msgid "TSN"
+#~ msgstr "PHN"
 
 # Spojene Hvezdne Namornictvo
-#: scripts/factionInfo.lua:78
-msgid "USN"
-msgstr "SHN"
-
-#: scripts/factionInfo.lua:85
-msgid ""
-"The United Stellar Navy, or USN, is a naval force near the boundary of human "
-"and Kraylor space consisting of mostly humans. The USN is friendly with the "
-"human navy and uses a similar command structure.\n"
-"\n"
-"The USN is primarily human but includes other races. This includes some "
-"Kraylor, which has made the TSN an enemy of the USN."
-msgstr ""
+#~ msgid "USN"
+#~ msgstr "SHN"
 
 # Nebeska Sopojena Flotila
-#: scripts/factionInfo.lua:89
-msgid "CUF"
-msgstr "NSF"
+#~ msgid "CUF"
+#~ msgstr "NSF"
 
-#: scripts/factionInfo.lua:95
-msgid ""
-"The Celestial Unified Fleet, or CUF, is the farthest-ranging primarily human "
-"fleet as well as the least xenophobic. The CUF's goals center on exploration "
-"and trade, but since it's a dangerous galaxy, they recognize the need for "
-"strong warships.\n"
-"\n"
-"The CUF is friendly with the human navy, and neutral toward the TSN and USN. "
-"They are less structured than the other primarily human navies.\n"
-"\n"
-"The CUF have neutral relations with the Ktlitans and Arlenians. They are "
-"enemies with Exuari, Kraylor, and Ghosts for political and historical "
-"reasons, not xenophobia; some of their best friends are also Exuari, "
-"Kraylor, and Ghosts."
-msgstr ""
+#~ msgid "Range"
+#~ msgstr "Dosah"
 
-#: scripts/science_db.lua:5
-msgid "Natural"
-msgstr ""
+#~ msgid "Damage"
+#~ msgstr "Poškození"
 
-#: scripts/science_db.lua:6
-msgid "Asteroid"
-msgstr ""
+#~ msgid "Blast radius"
+#~ msgstr "Poloměr výbuchu"
 
-#: scripts/science_db.lua:7
-msgid ""
-"Asteroids are minor planets, usually smaller than a few kilometers. Larger "
-"variants are sometimes refered to as planetoids."
-msgstr ""
+#~ msgid "Damage at center"
+#~ msgstr "Poškození v epicentru"
 
-#: scripts/science_db.lua:8
-msgid "Nebula"
-msgstr ""
+#~ msgid "Damage at edge"
+#~ msgstr "Poškozeni na okraji"
 
-#: scripts/science_db.lua:9
-msgid ""
-"Nebulae are the birthing places of new stars. These gas fields, usually "
-"created by the death of an old star, slowly form new stars due to the "
-"gravitational pull of its gas molecules. Because of the ever-changing nature "
-"of gas nebulae, most radar and scanning technologies are unable to penetrate "
-"them. Science officers are therefore advised to rely on probes and visual "
-"observations."
-msgstr ""
+#~ msgid "Drop distance"
+#~ msgstr "Vypouštěcí vzdálenost"
 
-#: scripts/science_db.lua:11
-msgid "Black hole"
-msgstr ""
+#~ msgid "Trigger distance"
+#~ msgstr "Aktivační vzdálenost"
 
-#: scripts/science_db.lua:12
-msgid ""
-"A black hole is a point of supercondensed mass with a gravitational pull so "
-"powerful that not even light can escape it. It has no locally detectable "
-"features, and can only be seen indirectly by blocking the view and "
-"distorting its surroundings, creating a strange circular mirror image of the "
-"galaxy. The black disc in the middle marks the event horizon, the boundary "
-"where even light can't escape it anymore. \n"
-"\t\n"
-"On the sensors, a black hole appears as a disc indicating the zone where the "
-"gravitational pull is getting dangerous, and soon will be stronger then the "
-"ship's impulse engines. An object that crosses a black hole is drawn toward "
-"its center and quickly ripped apart by the gravitational forces."
-msgstr ""
-
-#: scripts/science_db.lua:16
-msgid "Wormhole"
-msgstr ""
-
-#: scripts/science_db.lua:17
-msgid ""
-"A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that "
-"connects two points of spacetime. Jump drives operate in a similar fashion, "
-"but instead of being created at will, a wormhole occupies a specific "
-"location in space. Objects that enter a wormhole instantaneously emerge from "
-"the other end, which might be anywhere from a few feet to thousands of light "
-"years away. \n"
-"\n"
-"Wormholes are rare, and most can move objects in only one direction. "
-"Traversable wormholes, which are stable and allow for movement in both "
-"directions, are even rarer. All wormholes generate tremendous sensor "
-"activity, which an astute science officer can detect even through "
-"disruptions such as nebulae."
-msgstr ""
-
-#: scripts/science_db.lua:21
-msgid "Weapons"
-msgstr ""
-
-#: scripts/science_db.lua:22
-msgid ""
-"This database only covers the basic versions of the missiles used throughout "
-"the galaxy.\n"
-"\n"
-"It has been reported that some battleships started using larger variations "
-"of those missiles. Small fighters and even frigates should not have too much "
-"trouble dodging them, but space captains of bigger ships should be wary of "
-"their doubled damage potential.\n"
-"\n"
-"Smaller variations of these missiles have become common in the galaxy, too. "
-"Fighter pilots praise their speed and maneuverability, because it gives them "
-"an edge against small and fast-moving targets. They only deal half the "
-"damage of their basic counterparts, but what good is a missile if it does "
-"not hit its target."
-msgstr ""
-
-#: scripts/science_db.lua:28
-msgid "Homing missile"
-msgstr ""
-
-#: scripts/science_db.lua:29 scripts/science_db.lua:34
-#: scripts/science_db.lua:53 scripts/science_db.lua:60
-msgid "Range"
-msgstr "Dosah"
-
-#: scripts/science_db.lua:30 scripts/science_db.lua:61
-msgid "Damage"
-msgstr "Poškození"
-
-#: scripts/science_db.lua:31
-msgid ""
-"This target-seeking missile is the workhorse of many space combat arsenals. "
-"It's compact enough to be fitted on frigates, and packs enough punch to be "
-"used on larger ships, though usually in more than a single missile tube."
-msgstr ""
-
-#: scripts/science_db.lua:33
-msgid "Nuke"
-msgstr ""
-
-#: scripts/science_db.lua:35 scripts/science_db.lua:45
-#: scripts/science_db.lua:54
-msgid "Blast radius"
-msgstr "Poloměr výbuchu"
-
-#: scripts/science_db.lua:36 scripts/science_db.lua:46
-#: scripts/science_db.lua:55
-msgid "Damage at center"
-msgstr "Poškození v epicentru"
-
-#: scripts/science_db.lua:37 scripts/science_db.lua:47
-#: scripts/science_db.lua:56
-msgid "Damage at edge"
-msgstr "Poškozeni na okraji"
-
-#: scripts/science_db.lua:38
-msgid ""
-"A nuclear missile is similar to a homing missile in that it can seek a "
-"target, but it moves and turns more slowly and explodes a greatly increased "
-"payload. Its nuclear explosion spans 1U of space and can take out multiple "
-"ships in a single shot.\n"
-"\n"
-"Some captains oppose the use of nuclear weapons because their large "
-"explosions can lead to 'fragging', or unintentional friendly fire. Shields "
-"should protect crews from harmful radiation, but because these weapons are "
-"often used in the thick of battle, there's no way of knowing if hull plating "
-"or shields can provide enough protection."
-msgstr ""
-
-#: scripts/science_db.lua:42
-msgid "Mine"
-msgstr ""
-
-#: scripts/science_db.lua:43
-msgid "Drop distance"
-msgstr "Vypouštěcí vzdálenost"
-
-#: scripts/science_db.lua:44
-msgid "Trigger distance"
-msgstr "Aktivační vzdálenost"
-
-#: scripts/science_db.lua:48
-msgid ""
-"Mines are often placed in defensive perimeters around stations. There are "
-"also old minefields scattered around the galaxy from older wars.\n"
-"\n"
-"Some fearless captains use mines as offensive weapons, but their delayed "
-"detonation and blast radius make this use risky at best."
-msgstr ""
-
-#: scripts/science_db.lua:52
-msgid "EMP"
-msgstr ""
-
-#: scripts/science_db.lua:57
-msgid ""
-"The electromagnetic pulse missile (EMP) reproduces the disruptive effects of "
-"a nuclear explosion, but without the destructive properties. This causes it "
-"to only affect shields within its blast radius, leaving their hulls intact. "
-"The EMP missile is also smaller and easier to store than heavy nukes. Many "
-"captains (and pirates) prefer EMPs over nukes for these reasons, and use "
-"them to knock out targets' shields before closing to disable them with "
-"focused beam fire."
-msgstr ""
-
-#: scripts/science_db.lua:59
-msgid "HVLI"
-msgstr ""
-
-#: scripts/science_db.lua:62
-msgid "Burst"
-msgstr "Dávka"
-
-#: scripts/science_db.lua:63
-msgid ""
-"A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high "
-"velocity. This weapon is usually found in simpler ships since it does not "
-"require guidance computers. This also means its projectiles fly in a "
-"straight line from its tube and can't pursue a target.\n"
-"\n"
-"Each shot from an HVLI fires a burst of 5 projectiles, which increases the "
-"chance to hit but requires precision aiming to be effective. It reaches its "
-"full damage potential at a range of 2u."
-msgstr ""
+#~ msgid "Burst"
+#~ msgstr "Dávka"
 
 #~ msgid "Select your station"
 #~ msgstr "Vyber stanici"

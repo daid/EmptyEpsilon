@@ -1,0 +1,2818 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EmptyEpsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: hemmond\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+
+#: scripts/comms_ship.lua:38
+msgctxt "commsShipAssist"
+msgid "What do you want?"
+msgstr "Co chcete?"
+
+#: scripts/comms_ship.lua:40
+msgctxt "commsShipAssist"
+msgid "Sir, how can we assist?"
+msgstr "Jak vám můžeme pomoci?"
+
+#: scripts/comms_ship.lua:43
+msgctxt "commsShipAssist"
+msgid "Defend a waypoint"
+msgstr "Bránit bod"
+
+#: scripts/comms_ship.lua:46
+msgctxt "commsShipAssist"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr "Nemáte umístěn žádný bod. Nejprve jej umístěte."
+
+#: scripts/comms_ship.lua:47 scripts/comms_ship.lua:57
+#: scripts/comms_ship.lua:70 scripts/comms_ship.lua:78
+#: scripts/comms_ship.lua:88
+msgctxt "button"
+msgid "Back"
+msgstr "Zpět"
+
+#: scripts/comms_ship.lua:49
+msgctxt "commsShipAssist"
+msgid "Which waypoint should we defend?"
+msgstr "Jaký bod máme bránit?"
+
+#: scripts/comms_ship.lua:52
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Defend %s"
+msgstr "Branit %s"
+
+#: scripts/comms_ship.lua:56
+#, fuzzy, lua-format
+msgctxt "commsShipAssist"
+msgid "We are heading to assist at %s."
+msgstr "Jdeme pomoci na %s."
+
+#: scripts/comms_ship.lua:66
+msgctxt "commsShipAssist"
+msgid "Assist me"
+msgstr "Pomozte mi"
+
+#: scripts/comms_ship.lua:68
+msgctxt "commsShipAssist"
+msgid "Heading toward you to assist."
+msgstr "Letíme k vám na pomoc"
+
+#: scripts/comms_ship.lua:75
+msgctxt "commsShipAssist"
+msgid "Report status"
+msgstr "Ohlašte stav"
+
+#: scripts/comms_ship.lua:84
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Dock at %s"
+msgstr "Kotvím u %s"
+
+#: scripts/comms_ship.lua:86
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Docking at %s."
+msgstr "Kotví k %s"
+
+#: scripts/comms_ship.lua:105
+msgctxt "commsShipEnemy"
+msgid "We will see to your destruction!"
+msgstr "Postaráme se o vaše zničení!"
+
+#: scripts/comms_ship.lua:106
+msgctxt "commsShipEnemy"
+msgid "Your bloodline will end here!"
+msgstr "Vaše pokrevní linie končí zde!"
+
+#: scripts/comms_ship.lua:107
+msgctxt "commsShipEnemy"
+msgid "Your feeble threats are meaningless."
+msgstr "Vaše patetické hrozby jsou bezvýznamné."
+
+#: scripts/comms_ship.lua:109
+msgctxt "commsShipEnemy"
+msgid ""
+"Ktzzzsss.\n"
+"\n"
+"You will DIEEee weaklingsss!"
+msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"ZZZEEEMŘETE ssslabošššii!"
+
+#: scripts/comms_ship.lua:113
+msgctxt "commsShipEnemy"
+msgid ""
+"We wish you no harm, but will harm you if we must.\n"
+"\n"
+"End of transmission."
+msgstr ""
+"Nechceme vám ublížit, ale ublížíme vám, když budeme muset.\n"
+"\n"
+"Konec přenosu."
+
+#: scripts/comms_ship.lua:117
+msgctxt "commsShipEnemy"
+msgid "Stay out of our way, or your death will amuse us extremely!"
+msgstr "Držte se nám z cesty, nebo nás vaše smrt velice pobaví!"
+
+#: scripts/comms_ship.lua:119
+msgctxt "commsShipEnemy"
+msgid ""
+"One zero one.\n"
+"\n"
+"No binary communication detected. Switching to universal speech.\n"
+"\n"
+"Generating appropriate response for target from human language archives.\n"
+"\n"
+":Do not cross us.:\n"
+"\n"
+"Communication halted."
+msgstr ""
+"Jedna nula jedna.\n"
+"\n"
+"Binární komunikace nedetekována. Přepínám na univerzální řeč.\n"
+"\n"
+"Generuji patřičnou odpověd pro cíl z lidských jazykových archivů.\n"
+"\n"
+":Nedrážděte nás.:\n"
+"\n"
+"Komunikace přerušena."
+
+#: scripts/comms_ship.lua:128
+msgctxt "commsShipEnemy"
+msgid "EXECUTE: SELFDESTRUCT"
+msgstr "PROVÉST PŘÍKAZ: SEBEDESTRUKCE"
+
+#: scripts/comms_ship.lua:129
+msgctxt "commsShipEnemy"
+msgid "Rogue command received. Targeting source."
+msgstr "Zachycen zbloudilý příkaz. Zaměřuji zdroj."
+
+#: scripts/comms_ship.lua:130
+msgctxt "commsShipEnemy"
+msgid "External command ignored."
+msgstr "Externí příkaz ignorován."
+
+#: scripts/comms_ship.lua:132
+msgctxt "commsShipEnemy"
+msgid ""
+"The hive suffers no threats. Opposition to any of us is opposition to us "
+"all.\n"
+"\n"
+"Stand down or prepare to donate your corpses toward our nutrition."
+msgstr ""
+"Úl nestrpí žádné hrozby. Opozice vůči komukoli z nás je opozicí vůči nám "
+"všem.\n"
+"\n"
+"Stáhněte se nebo se připravte darovat své mrtvoly na naši výživu."
+
+#: scripts/comms_ship.lua:135
+msgctxt "commsShipEnemy"
+msgid "<Transmits 'The Itsy-Bitsy Spider' on all wavelengths>"
+msgstr "<Vysílá 'The Itsy-Bitsy Spider' na všech frekvencích>"
+
+#: scripts/comms_ship.lua:136
+msgctxt "commsShipEnemy"
+msgid "We do not need permission to pluck apart such an insignificant threat."
+msgstr "Nepotřebujeme povolení k rozebrání takové nevýznamné hrozby."
+
+#: scripts/comms_ship.lua:137
+msgctxt "commsShipEnemy"
+msgid "The hive has greater priorities than exterminating pests."
+msgstr "Úl má důležitější věci na práci, než hubit škůdce."
+
+#: scripts/comms_ship.lua:139
+msgctxt "commsShipEnemy"
+msgid "Mind your own business!"
+msgstr "Věnujte se svým věcem!"
+
+#: scripts/comms_ship.lua:167
+msgctxt "commsShip"
+msgid ""
+"Sorry, we have no time to chat with you.\n"
+"\n"
+"We are on an important mission."
+msgstr ""
+"Omlouváme se, ale nemáme čas na diskuzi s vámí.\n"
+"\n"
+"Jsme na důležité misi."
+
+#: scripts/comms_ship.lua:171
+msgctxt "commsShip"
+msgid ""
+"We have nothing for you.\n"
+"\n"
+"Good day."
+msgstr ""
+"Nemáme pro vás nic,\n"
+"\n"
+"Přejeme pěkný den."
+
+#: scripts/comms_ship.lua:186
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Hull: %d%%\n"
+msgstr "Trup: %d%%\n"
+
+#: scripts/comms_ship.lua:190
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Shield: %d%%\n"
+msgstr "Štíty: %d%%\n"
+
+#: scripts/comms_ship.lua:192
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Front Shield: %d%%\n"
+msgstr "Prední štít: %d%%\n"
+
+#: scripts/comms_ship.lua:193
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Rear Shield: %d%%\n"
+msgstr "Zadní štít: %d%%\n"
+
+#: scripts/comms_ship.lua:196
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "Shield %d: %d%%\n"
+msgstr "Štít %d: %d%%\n"
+
+#: scripts/comms_ship.lua:202
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "%s Missiles: %d/%d\n"
+msgstr "%s Střely: %d/%d\n"
+
+#: scripts/comms_ship.lua:214
+#, lua-format
+msgctxt "commsShipAssist"
+msgid "WP %d"
+msgstr "Bod %d"
+
+#~ msgctxt "database direction"
+#~ msgid "Front"
+#~ msgstr "Přední"
+
+#~ msgctxt "database direction"
+#~ msgid "Right"
+#~ msgstr "Pravá"
+
+#~ msgctxt "database direction"
+#~ msgid "Left"
+#~ msgstr "Levá"
+
+#~ msgctxt "database direction"
+#~ msgid "Rear"
+#~ msgstr "Zadní"
+
+#~ msgctxt "database"
+#~ msgid "Factions"
+#~ msgstr "Frakce"
+
+#~ msgctxt "stance"
+#~ msgid "Neutral"
+#~ msgstr "Neutrální"
+
+#~ msgctxt "stance"
+#~ msgid "Enemy"
+#~ msgstr "Nepřátelské"
+
+#~ msgctxt "stance"
+#~ msgid "Friendly"
+#~ msgstr "Pratelské"
+
+#~ msgctxt "database"
+#~ msgid "Ships"
+#~ msgstr "Lodě"
+
+#~ msgctxt "database"
+#~ msgid "Class"
+#~ msgstr "Třída"
+
+#~ msgctxt "database"
+#~ msgid "Sub-class"
+#~ msgstr "Podtřída"
+
+#~ msgctxt "database"
+#~ msgid "Size"
+#~ msgstr "Velikost"
+
+#~ msgctxt "database"
+#~ msgid "Shield"
+#~ msgstr "Štíty"
+
+#~ msgid "Hull"
+#~ msgstr "Trup"
+
+#~ msgctxt "database"
+#~ msgid "Move speed"
+#~ msgstr "Rychlost pohybu"
+
+#~ msgctxt "database"
+#~ msgid "Reverse move speed"
+#~ msgstr "Rychlost pohybu vzad"
+
+#~ msgctxt "database"
+#~ msgid "Turn speed"
+#~ msgstr "Rychlost otáčení"
+
+#~ msgctxt "database"
+#~ msgid "Warp speed"
+#~ msgstr "Warp rychlost"
+
+#~ msgctxt "database"
+#~ msgid "Jump range"
+#~ msgstr "Dosah skoku"
+
+#~ msgid "{direction} beam weapon"
+#~ msgstr "{direction} paprsková zbraň"
+
+#~ msgctxt "database"
+#~ msgid "{damage} Dmg / {interval} sec"
+#~ msgstr "{damage} Poškození / {interval} sec"
+
+#~ msgctxt "database"
+#~ msgid "{direction} tube"
+#~ msgstr "{direction} torpédomet"
+
+#~ msgctxt "database"
+#~ msgid "{direction} small tube"
+#~ msgstr "{direction} malý torpédomet"
+
+#~ msgctxt "database"
+#~ msgid "{direction} large tube"
+#~ msgstr "{direction} velký torpédomet"
+
+#~ msgctxt "database"
+#~ msgid "{loadtime} sec"
+#~ msgstr "{loadtime} sec"
+
+#~ msgid "Storage {weapon}"
+#~ msgstr "{weapon} střely"
+
+#~ msgctxt "station"
+#~ msgid "Helms"
+#~ msgstr "Navigace"
+
+#~ msgctxt "station"
+#~ msgid "Weapons"
+#~ msgstr "Zbraně"
+
+#~ msgctxt "station"
+#~ msgid "Engineering"
+#~ msgstr "Strojovna"
+
+#~ msgctxt "station"
+#~ msgid "Science"
+#~ msgstr "Vědecké st."
+
+#~ msgctxt "station"
+#~ msgid "Relay"
+#~ msgstr "Komunikace+"
+
+#~ msgctxt "station"
+#~ msgid "Tactical"
+#~ msgstr "Taktické st."
+
+#~ msgctxt "station"
+#~ msgid "Engineering+"
+#~ msgstr "Strojovna+"
+
+#~ msgctxt "station"
+#~ msgid "Operations"
+#~ msgstr "Operační"
+
+#~ msgctxt "station"
+#~ msgid "Single Pilot"
+#~ msgstr "Jeden pilot"
+
+#~ msgctxt "station"
+#~ msgid "Damage Control"
+#~ msgstr "Kontrola škod"
+
+#~ msgctxt "station"
+#~ msgid "Power Management"
+#~ msgstr "Správa napájení"
+
+#~ msgctxt "station"
+#~ msgid "Database"
+#~ msgstr "Databáze"
+
+#~ msgctxt "station"
+#~ msgid "Strategic Map"
+#~ msgstr "Strategická mapa"
+
+#~ msgctxt "station"
+#~ msgid "Comms"
+#~ msgstr "Komunikace"
+
+#~ msgctxt "station"
+#~ msgid "Ship's Log"
+#~ msgstr "Lodní deník"
+
+#~ msgid "No class"
+#~ msgstr "Žádná třída"
+
+#~ msgid "No sub-class"
+#~ msgstr "Žádná podtřída"
+
+#~ msgctxt "system"
+#~ msgid "Reactor"
+#~ msgstr "Reaktor"
+
+#~ msgctxt "system"
+#~ msgid "Beam Weapons"
+#~ msgstr "Paprskové zbraně"
+
+#~ msgctxt "system"
+#~ msgid "Missile System"
+#~ msgstr "Torpédomety"
+
+#~ msgctxt "system"
+#~ msgid "Maneuvering"
+#~ msgstr "Manévrování"
+
+#~ msgctxt "system"
+#~ msgid "Impulse Engines"
+#~ msgstr "Impulzní pohon"
+
+#~ msgctxt "system"
+#~ msgid "Warp Drive"
+#~ msgstr "Warpový pohon"
+
+#~ msgctxt "system"
+#~ msgid "Jump Drive"
+#~ msgstr "Skokový pohon"
+
+#~ msgctxt "system"
+#~ msgid "Front Shield Generator"
+#~ msgstr "Přední generátor štítů"
+
+#~ msgctxt "system"
+#~ msgid "Rear Shield Generator"
+#~ msgstr "Zadní generátor štítů"
+
+#~ msgid "Next"
+#~ msgstr "Další"
+
+#~ msgid "Reset"
+#~ msgstr "Reset"
+
+#~ msgctxt "connectserver"
+#~ msgid "Connecting..."
+#~ msgstr "Připojuji se..."
+
+#~ msgctxt "button"
+#~ msgid "Cancel"
+#~ msgstr "Zrušit"
+
+#~ msgid "Please enter the server password:"
+#~ msgstr "Prosím zadejte heslo serveru:"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "still connected"
+#~ msgstr "stále připojen"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "bad credentials"
+#~ msgstr "špatné příhlašovací údaje"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "closed by server"
+#~ msgstr "odpojen serverem"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "timed out"
+#~ msgstr "vypršel čas spojení"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "unknown"
+#~ msgstr "neznámá"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "version mismatch"
+#~ msgstr "nesoulad verzí"
+
+#~ msgctxt "game_client_disconnect_reason"
+#~ msgid "unspecified error {error}"
+#~ msgstr "nespecifikovaná chyba {error}"
+
+#~ msgid "Connection error: {message}"
+#~ msgstr "Chyba připojení: {message}"
+
+#~ msgid "LAN"
+#~ msgstr "LAN"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgctxt "screenLan"
+#~ msgid "Connect"
+#~ msgstr "Připojit"
+
+#~ msgid "Last Session ({last})"
+#~ msgstr "Předchozí sezeni ({last})"
+
+#~ msgid "Version: {version}"
+#~ msgstr "Verze: {version}"
+
+#~ msgid "Your name:"
+#~ msgstr "Vaše jméno:"
+
+#~ msgid "Start server"
+#~ msgstr "Spustit server"
+
+#~ msgid "Start client"
+#~ msgstr "Spustit klienta"
+
+#~ msgid "Options"
+#~ msgstr "Nastavení"
+
+#~ msgid "Quit"
+#~ msgstr "Ukončit"
+
+#~ msgid "Tutorials"
+#~ msgstr "Výuka"
+
+#~ msgid "Server configuration"
+#~ msgstr "Nastavení serveru"
+
+#~ msgid "Server name: "
+#~ msgstr "Název serveru: "
+
+#~ msgid "Server password: "
+#~ msgstr "Heslo serveru: "
+
+#~ msgid "GM control code: "
+#~ msgstr "Kód pána hry: "
+
+#, fuzzy
+#~ msgid "No"
+#~ msgstr "Varianta"
+
+#, fuzzy
+#~ msgid "Server port: "
+#~ msgstr "Heslo serveru: "
+
+#, fuzzy
+#~ msgid "Server info"
+#~ msgstr "Název serveru: "
+
+#, fuzzy
+#~ msgid "Server IP: "
+#~ msgstr "IP adresy serveru: "
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "Zavřít"
+
+#~ msgid "Scenario"
+#~ msgstr "Scénář"
+
+#, fuzzy
+#~ msgid "Description"
+#~ msgstr "Popis - úplný sken:"
+
+#, fuzzy
+#~ msgid "Select a scenario..."
+#~ msgstr "Spustit scénář"
+
+#~ msgid "Start scenario"
+#~ msgstr "Spustit scénář"
+
+#, fuzzy
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#~ msgctxt "title"
+#~ msgid "Tutorials"
+#~ msgstr "Výukové scénáře"
+
+#~ msgid "Start Tutorial"
+#~ msgstr "Spustit výuku"
+
+#~ msgid "Graphics options"
+#~ msgstr "Nastavení zobrazení"
+
+#~ msgid "Audio options"
+#~ msgstr "Nastavení zvuku"
+
+#~ msgid "Interface options"
+#~ msgstr "Nastavení rozhraní"
+
+#~ msgid "Helms Radar Lock"
+#~ msgstr "Otáčení navigačního radaru"
+
+#~ msgid "Weapons Radar Lock"
+#~ msgstr "Otáčení zbraňového radaru"
+
+#~ msgid "Science Radar Lock"
+#~ msgstr "Otáčení vědeckého radaru"
+
+#~ msgid "Control Options"
+#~ msgstr "Nastavení ovládání"
+
+#~ msgid "Configure Keyboard"
+#~ msgstr "Nastavení kláves"
+
+#~ msgid "Language (applies on back)"
+#~ msgstr "Jazyk (použije se po zpět)"
+
+#~ msgctxt "options"
+#~ msgid "Save"
+#~ msgstr "Uložit"
+
+#~ msgid "Fullscreen toggle"
+#~ msgstr "Celá obrazovka"
+
+#~ msgid "Sound Volume: {volume}%"
+#~ msgstr "Hlasitost zvuku: {volume}%"
+
+#~ msgid "Music Playback"
+#~ msgstr "Přehrávání hudby"
+
+#~ msgid "Disabled"
+#~ msgstr "Zakázáno"
+
+#~ msgid "Enabled"
+#~ msgstr "Povoleno"
+
+#~ msgid "Main Screen only"
+#~ msgstr "Pouze hlavní obrazovka"
+
+#~ msgid "Music Volume: {volume}%"
+#~ msgstr "Hlasitost hudby: {volume}%"
+
+#~ msgid "Impulse Engine sound"
+#~ msgstr "Zvuk Impulzního Motoru"
+
+#~ msgid "Impulse Volume: {volume}%"
+#~ msgstr "Hlasitost impulz. motoru: {volume}%"
+
+#~ msgid "Preview Soundtracks"
+#~ msgstr "Náhled zvukového podkladu"
+
+#~ msgid "Enter this ship's control code:"
+#~ msgstr "Zadejte ovládací kód lodi:"
+
+#~ msgid "Ok"
+#~ msgstr "Ok"
+
+#~ msgid ""
+#~ "Control code accepted.\n"
+#~ "Granting access."
+#~ msgstr ""
+#~ "Ovládací kód přijat.\n"
+#~ "Uděluji přístup."
+
+#, fuzzy
+#~ msgid "Incorrect control code. Re-enter code:"
+#~ msgstr "Nesprávný kód. Zadejte znovu kód pána hry:"
+
+#~ msgid "OK"
+#~ msgstr "OK"
+
+#~ msgid "Game master"
+#~ msgstr "Pán hry"
+
+#~ msgid "Enter the GM control code:"
+#~ msgstr "Zadejte kód pána hry:"
+
+#~ msgid "Spectate (view all)"
+#~ msgstr "Pozorovat (zobrazit vše)"
+
+#~ msgid "Scan complexity: "
+#~ msgstr "Složitost skenu: "
+
+#~ msgctxt "scanning"
+#~ msgid "None (delay)"
+#~ msgstr "Žádná (zpoždení)"
+
+#~ msgctxt "scanning"
+#~ msgid "Simple"
+#~ msgstr "Jednoduchá"
+
+#~ msgctxt "scanning"
+#~ msgid "Normal"
+#~ msgstr "Normální"
+
+#~ msgctxt "scanning"
+#~ msgid "Advanced"
+#~ msgstr "Pokročilá"
+
+#~ msgid "Hacking difficulty: "
+#~ msgstr "Obtížnost hackování: "
+
+#~ msgctxt "hacking"
+#~ msgid "Simple"
+#~ msgstr "Jednoduchá"
+
+#~ msgctxt "hacking"
+#~ msgid "Normal"
+#~ msgstr "Normální"
+
+#~ msgctxt "hacking"
+#~ msgid "Difficult"
+#~ msgstr "Obtížná"
+
+#~ msgctxt "hacking"
+#~ msgid "Fiendish"
+#~ msgstr "Ďábelská"
+
+#~ msgid "Hacking type: "
+#~ msgstr "Typ hackovani: "
+
+#~ msgctxt "hacking"
+#~ msgid "Mine"
+#~ msgstr "Miny"
+
+#~ msgctxt "hacking"
+#~ msgid "Lights"
+#~ msgstr "Světla"
+
+#~ msgctxt "hacking"
+#~ msgid "All"
+#~ msgstr "Vše"
+
+#~ msgid "Beam/shield frequencies"
+#~ msgstr "Frekvence paprsků/štítů"
+
+#~ msgid "Per-system damage"
+#~ msgstr "Poškození systémů"
+
+#~ msgid "Select ship"
+#~ msgstr "Vyberte loď"
+
+#~ msgid "Waiting for server to spawn a ship"
+#~ msgstr "Čekám až server přidá loď"
+
+#~ msgid "Spawn player ship"
+#~ msgstr "Přidat hráčskou loď"
+
+#~ msgid "Scenario selection"
+#~ msgstr "Výběr scénáře"
+
+#~ msgid "Disconnect"
+#~ msgstr "Odpojit"
+
+#~ msgid "6/5 player crew"
+#~ msgstr "posádka: 6/5 hráčů"
+
+#~ msgid "Main screen"
+#~ msgstr "Hlavní obrazovka"
+
+#, fuzzy
+#~ msgid "4/3/1 player crew"
+#~ msgstr "posádka: 4/3 hráči"
+
+#~ msgid "Alternative options"
+#~ msgstr "Alternativní možnosti"
+
+#~ msgid "Main screen controls"
+#~ msgstr "Ovládání hlavní obrazovky"
+
+#~ msgid "Ship window"
+#~ msgstr "Okno z lodi"
+
+#~ msgid "Top-down 3D view"
+#~ msgstr "3D pohled shora"
+
+#, fuzzy
+#~ msgctxt "button"
+#~ msgid "Ready"
+#~ msgstr "Připraven"
+
+#~ msgctxt "button"
+#~ msgid "Lock camera on ship"
+#~ msgstr "Zamknout kameru na loď"
+
+#~ msgctxt "button"
+#~ msgid "Lock camera on ship's target"
+#~ msgstr "Zamknout kameru na cíl lodi"
+
+#~ msgctxt "button"
+#~ msgid "Close"
+#~ msgstr "Zavřít"
+
+#, fuzzy
+#~ msgctxt "hotkey_menu"
+#~ msgid "Main Screen"
+#~ msgstr "Hlavni obrazovka"
+
+#~ msgid "Open Comms"
+#~ msgstr "Zahájit komunikaci"
+
+#~ msgid "Place Waypoint"
+#~ msgstr "Umístit bod"
+
+#~ msgid "Delete Waypoint"
+#~ msgstr "Smazat bod"
+
+#~ msgid "Reputation"
+#~ msgstr "Reputace"
+
+#~ msgid "Clock"
+#~ msgstr "Čas"
+
+#~ msgid "Energy"
+#~ msgstr "Energie"
+
+#~ msgid "Heading"
+#~ msgstr "Směr"
+
+#~ msgid "Speed"
+#~ msgstr "Rychlost"
+
+#~ msgid "Shields"
+#~ msgstr "Štíty"
+
+#~ msgid "Beams"
+#~ msgstr "Paprskové zbraně"
+
+#~ msgid "{value} {unit}/min"
+#~ msgstr "{value} {unit}/min"
+
+#~ msgctxt "health"
+#~ msgid "Hull"
+#~ msgstr "Trup"
+
+#~ msgctxt "shields"
+#~ msgid "Front"
+#~ msgstr "Přední"
+
+#~ msgctxt "shields"
+#~ msgid "Rear"
+#~ msgstr "Zadní"
+
+#~ msgctxt "total"
+#~ msgid "Coolant"
+#~ msgstr "Chlazení"
+
+#~ msgctxt "slider"
+#~ msgid "Power"
+#~ msgstr "Výkon"
+
+#~ msgctxt "slider"
+#~ msgid "Coolant"
+#~ msgstr "Chlazení"
+
+#~ msgid "{energy}/min"
+#~ msgstr "{energy}/min"
+
+#~ msgctxt "slider"
+#~ msgid "Power: {current_level}% / {requested}%"
+#~ msgstr "Výkon: {current_level}% / {requested}%"
+
+#~ msgctxt "slider"
+#~ msgid "Coolant: {current_level}% / {requested}%"
+#~ msgstr "Chladivo: {current_level}% / {requested}%"
+
+#~ msgid "Energy production"
+#~ msgstr "Produkce energie"
+
+#~ msgid "Firing rate"
+#~ msgstr "Rychlost palby"
+
+#~ msgctxt "missile"
+#~ msgid "Reload rate"
+#~ msgstr "Rychlost přebíjení"
+
+#~ msgid "Turning speed"
+#~ msgstr "Rychlost otáčení"
+
+#~ msgid "Combat recharge rate"
+#~ msgstr "Obnova úhybných manévrů"
+
+#~ msgid "Impulse speed"
+#~ msgstr "Impulzní rychlost"
+
+#~ msgid "Warp drive speed"
+#~ msgstr "Warpová rychlost"
+
+#~ msgid "Jump drive recharge rate"
+#~ msgstr "Rychlost obnovy pohonu"
+
+#~ msgid "Jump drive jump speed"
+#~ msgstr "Rychlost provedení skoku"
+
+#~ msgctxt "shields"
+#~ msgid "Calibration speed"
+#~ msgstr "Rychlost kalibrace"
+
+#~ msgctxt "shields"
+#~ msgid "Charge rate"
+#~ msgstr "Rychlost obnovy"
+
+#~ msgid "Extra damage"
+#~ msgstr "Poškození navíc"
+
+#~ msgid "Damage negate"
+#~ msgstr "Negace poškození"
+
+#~ msgid "Callsign"
+#~ msgstr "Volací znak"
+
+#~ msgctxt "science"
+#~ msgid "Distance"
+#~ msgstr "Vzdálenost"
+
+#~ msgid "Bearing"
+#~ msgstr "Směr"
+
+#~ msgid "Rel. Speed"
+#~ msgstr "Rel. Rychlost"
+
+#~ msgid "Faction"
+#~ msgstr "Frakce"
+
+#~ msgctxt "science"
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgctxt "database"
+#~ msgid "DB"
+#~ msgstr "DB"
+
+#~ msgctxt "science"
+#~ msgid "Shields"
+#~ msgstr "Štíty"
+
+#~ msgctxt "science"
+#~ msgid "Hull"
+#~ msgstr "Trup"
+
+#~ msgctxt "button"
+#~ msgid "Probe View"
+#~ msgstr "Pohled sondy"
+
+#~ msgid "Zoom: {zoom}x"
+#~ msgstr "Přiblížení: {zoom}x"
+
+#~ msgctxt "button"
+#~ msgid "Radar"
+#~ msgstr "Radar"
+
+#~ msgctxt "button"
+#~ msgid "Database"
+#~ msgstr "Databáze"
+
+#~ msgid "Link to Comms"
+#~ msgstr "Provázat s komunikační st."
+
+#~ msgid "Start hacking"
+#~ msgstr "Zahájit hackování"
+
+#~ msgid "Link to Science"
+#~ msgstr "Propojit s vědeckou st."
+
+#~ msgid "Launch Probe"
+#~ msgstr "Vyslat sondu"
+
+#~ msgid "Alert level"
+#~ msgstr "Stupeň poplachu"
+
+#~ msgid "Beam info"
+#~ msgstr "Paprskové zbraně"
+
+#~ msgctxt "damagecontrol"
+#~ msgid "Hull"
+#~ msgstr "Trup"
+
+#~ msgid "Coolant"
+#~ msgstr "Chlazení"
+
+#~ msgctxt "button"
+#~ msgid "Power"
+#~ msgstr "Výkon"
+
+#~ msgctxt "button"
+#~ msgid "Coolant"
+#~ msgstr "Chlazení"
+
+#~ msgctxt "button"
+#~ msgid "Heat"
+#~ msgstr "Teplota"
+
+#~ msgctxt "button"
+#~ msgid "Pause"
+#~ msgstr "Pauza"
+
+#~ msgctxt "button"
+#~ msgid "Intercept all comms"
+#~ msgstr "Odposlech všech komunikací"
+
+#, fuzzy
+#~ msgctxt "button"
+#~ msgid "Global message"
+#~ msgstr "Globalní zpráva"
+
+#~ msgctxt "button"
+#~ msgid "Create..."
+#~ msgstr "Přidat..."
+
+#~ msgctxt "button"
+#~ msgid "Copy scenario"
+#~ msgstr "Kopírovat scénář"
+
+#~ msgctxt "button"
+#~ msgid "Copy selected"
+#~ msgstr "Kopírovat výběr"
+
+#~ msgctxt "button"
+#~ msgid "Tweak"
+#~ msgstr "Upravit"
+
+#~ msgctxt "button"
+#~ msgid "Hail ship"
+#~ msgstr "Volat lod"
+
+#~ msgid "Defend location"
+#~ msgstr "Bránit lokaci"
+
+#~ msgid "Stand ground"
+#~ msgstr "Zůstat na místě"
+
+#~ msgid "Roaming"
+#~ msgstr "Toulat se"
+
+#~ msgid "Idle"
+#~ msgstr "Nedělat nic"
+
+#~ msgid "Orders:"
+#~ msgstr "Rozkazy:"
+
+#~ msgid "*mixed*"
+#~ msgstr "*různé*"
+
+#~ msgctxt "create"
+#~ msgid "cpu ship"
+#~ msgstr "NPC loď"
+
+#~ msgctxt "create"
+#~ msgid "player ship"
+#~ msgstr "hráčská loď"
+
+#~ msgctxt "create"
+#~ msgid "Artifact"
+#~ msgstr "Artefakt"
+
+#~ msgctxt "create"
+#~ msgid "Warp Jammer"
+#~ msgstr "Rušička warpu"
+
+#~ msgctxt "create"
+#~ msgid "Mine"
+#~ msgstr "Mina"
+
+#~ msgctxt "create"
+#~ msgid "Asteroid"
+#~ msgstr "Asteroid"
+
+#~ msgctxt "create"
+#~ msgid "Visual Asteroid"
+#~ msgstr "Vizuálni Asteroid"
+
+#~ msgctxt "create"
+#~ msgid "Planet"
+#~ msgstr "Planeta"
+
+#~ msgctxt "create"
+#~ msgid "BlackHole"
+#~ msgstr "Černá díra"
+
+#~ msgctxt "create"
+#~ msgid "Nebula"
+#~ msgstr "Mlhovina"
+
+#~ msgctxt "create"
+#~ msgid "Worm Hole"
+#~ msgstr "Červí díra"
+
+#~ msgctxt "button"
+#~ msgid "Send"
+#~ msgstr "Odeslat"
+
+#~ msgctxt "chatGM"
+#~ msgid "Target - Destroyed"
+#~ msgstr "Cíl - Zničen"
+
+#~ msgctxt "chatGM"
+#~ msgid "Channel not open, enter name to hail as to hail target."
+#~ msgstr "Kanál neaktivní, zadej jméno za které voláš cíl."
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Inactive"
+#~ msgstr "{callsign} - Neaktivní"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Opening communications with {target}"
+#~ msgstr "{callsign} - Zahajuji komunikaci s {target}"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Hailing as {target}"
+#~ msgstr "{callsign} - Volám jako {target}"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Communicating with {target}"
+#~ msgstr "{callsign} - Komunikuji s {target}"
+
+#~ msgctxt "chatGM"
+#~ msgid "**{callsign} - Communicating as {target}**"
+#~ msgstr "**{callsign} - Kounikuji jako {target}**"
+
+#~ msgctxt "chatGM"
+#~ msgid "{callsign} - Communicating as {target}"
+#~ msgstr "{callsign} - Komunikuji jako {target}"
+
+#~ msgctxt "tab"
+#~ msgid "Base"
+#~ msgstr "Základ"
+
+#~ msgctxt "tab"
+#~ msgid "Ship"
+#~ msgstr "Loď"
+
+#~ msgctxt "tab"
+#~ msgid "Asteroid"
+#~ msgstr "Asteroid"
+
+#~ msgctxt "tab"
+#~ msgid "Jammer"
+#~ msgstr "Rušička"
+
+#~ msgctxt "tab"
+#~ msgid "Shields"
+#~ msgstr "Štíty"
+
+#~ msgctxt "tab"
+#~ msgid "Tubes"
+#~ msgstr "Torpédomety"
+
+#~ msgctxt "tab"
+#~ msgid "Missiles"
+#~ msgstr "Rakety"
+
+#~ msgctxt "tab"
+#~ msgid "Beams"
+#~ msgstr "Paprskové zbraně"
+
+#~ msgctxt "tab"
+#~ msgid "Systems"
+#~ msgstr "Systémy"
+
+#~ msgctxt "tab"
+#~ msgid "Power"
+#~ msgstr "Výkon"
+
+#~ msgctxt "tab"
+#~ msgid "Coolant Rate"
+#~ msgstr "Tempo chlazení"
+
+#~ msgctxt "tab"
+#~ msgid "Heat Rate"
+#~ msgstr "Tempo zařívání"
+
+#~ msgctxt "tab"
+#~ msgid "Power Rate"
+#~ msgstr "Tempo výkonu"
+
+#~ msgctxt "tab"
+#~ msgid "Player"
+#~ msgstr "Hráč"
+
+#~ msgctxt "tab"
+#~ msgid "Player 2"
+#~ msgstr "Hráč 2"
+
+#~ msgid "Type name:"
+#~ msgstr "Název typu:"
+
+#~ msgid "Impulse speed:"
+#~ msgstr "Impulzní rychlost:"
+
+#~ msgid "Impulse reverse speed:"
+#~ msgstr "Rychlost impulz. couvání:"
+
+#~ msgid "Turn speed:"
+#~ msgstr "Rychlost otáčení:"
+
+#~ msgid "Jump Min Distance:"
+#~ msgstr "Minimální vzdálenost skoku:"
+
+#~ msgid "Jump Max Distance:"
+#~ msgstr "Maximální vzdálenost skoku:"
+
+#~ msgid "Jump charge:"
+#~ msgstr "Náboj skokového pohonu:"
+
+#~ msgid "Hull max:"
+#~ msgstr "Maximální trup:"
+
+#~ msgid "Hull current:"
+#~ msgstr "Současný trup:"
+
+#~ msgid "Could be destroyed"
+#~ msgstr "Lze zničit"
+
+#~ msgctxt "tweak_ship"
+#~ msgid "Special drives:"
+#~ msgstr "Zvláštní pohony:"
+
+#~ msgid "Warp Drive"
+#~ msgstr "Warpový pohon"
+
+#~ msgid "Jump Drive"
+#~ msgstr "Skokový pohon"
+
+#~ msgid "Short-range radar range:"
+#~ msgstr "Dosah radaru krátkého dosahu:"
+
+#~ msgid "Long-range radar range:"
+#~ msgstr "Dosah radaru dlouhého dosahu:"
+
+#~ msgctxt "missiles"
+#~ msgid "Storage space:"
+#~ msgstr "Maximum střel:"
+
+#~ msgctxt "missiles"
+#~ msgid "Stored amount:"
+#~ msgstr "Aktuálně střel:"
+
+#~ msgid "Jammer Range:"
+#~ msgstr "Dosah rušičky:"
+
+#~ msgid "Asteroid Size:"
+#~ msgstr "Velikost asteroidu:"
+
+#~ msgid "Tube count:"
+#~ msgstr "Počet torpédometů:"
+
+#~ msgid "Tube: {id_tube}"
+#~ msgstr "Torpédomet: {id_tube}"
+
+#~ msgctxt "tube"
+#~ msgid "Direction:"
+#~ msgstr "Směr:"
+
+#~ msgctxt "tube"
+#~ msgid "Load time:"
+#~ msgstr "Doba nabíjení:"
+
+#~ msgctxt "tube"
+#~ msgid "Size:"
+#~ msgstr "Velikost:"
+
+#~ msgctxt "tube"
+#~ msgid "Small"
+#~ msgstr "Malé"
+
+#~ msgctxt "tube"
+#~ msgid "Medium"
+#~ msgstr "Střední"
+
+#~ msgctxt "tube"
+#~ msgid "large"
+#~ msgstr "velké"
+
+#~ msgctxt "tube"
+#~ msgid "Allowed use:"
+#~ msgstr "Smí použít:"
+
+#~ msgid "Shield {id_shield} max:"
+#~ msgstr "Maximum štítu {id_shield}:"
+
+#~ msgid "Shield {id_shield}:"
+#~ msgstr "Štít {id_shield}:"
+
+#~ msgid "Beam: {id_beam}"
+#~ msgstr "Paprsek: {id_beam}"
+
+#~ msgctxt "beam"
+#~ msgid "Arc:"
+#~ msgstr "Oblouk:"
+
+#~ msgctxt "beam"
+#~ msgid "Direction:"
+#~ msgstr "Směr:"
+
+#~ msgctxt "beam"
+#~ msgid "Turret arc:"
+#~ msgstr "Oblouk střelecké věže:"
+
+#~ msgctxt "beam"
+#~ msgid "Turret direction:"
+#~ msgstr "Smer střelecké věže:"
+
+#~ msgctxt "beam"
+#~ msgid "Turret rotation rate:"
+#~ msgstr "Rychlost otáčení věže:"
+
+#~ msgctxt "beam"
+#~ msgid "Range:"
+#~ msgstr "Dosah:"
+
+#~ msgctxt "beam"
+#~ msgid "Cycle time:"
+#~ msgstr "Perioda cyklu:"
+
+#~ msgctxt "beam"
+#~ msgid "Damage:"
+#~ msgstr "Poškození:"
+
+#~ msgid "{system} health"
+#~ msgstr "{system} - zdraví"
+
+#~ msgid "{system} health max"
+#~ msgstr "{system} - maximum zdraví"
+
+#~ msgid "{system} heat"
+#~ msgstr "{system} - teplota"
+
+#~ msgid "current factor"
+#~ msgstr "současný faktor"
+
+#~ msgid "desired factor"
+#~ msgstr "požadovaný faktor"
+
+#~ msgid "{system}"
+#~ msgstr "{system}"
+
+#~ msgid "Applies on [Enter]"
+#~ msgstr "Použije se po [Enter]"
+
+#~ msgid "current rate"
+#~ msgstr "současné tempo"
+
+#~ msgid "desired rate"
+#~ msgstr "požadované tempo"
+
+#~ msgid "Control code:"
+#~ msgstr "Ovládací kód:"
+
+#~ msgid "Reputation:"
+#~ msgstr "Reputace:"
+
+#~ msgid "Max energy:"
+#~ msgstr "Maximum energie:"
+
+#~ msgid "Current energy:"
+#~ msgstr "Současná energie:"
+
+#~ msgid "Boost Speed:"
+#~ msgstr "Rychlost úhybu vpřed:"
+
+#~ msgid "Strafe Speed:"
+#~ msgstr "Rychlost úhybu do boku:"
+
+#~ msgid "Positions occupied: "
+#~ msgstr "Obsazené pozice: "
+
+#~ msgid "position"
+#~ msgstr "pozice"
+
+#~ msgid "Coolant:"
+#~ msgstr "Chlazení:"
+
+#~ msgid "Max Scan Probes:"
+#~ msgstr "Maximum sond:"
+
+#~ msgid "Scan Probes:"
+#~ msgstr "Sond:"
+
+#~ msgctxt "button"
+#~ msgid "Can scan"
+#~ msgstr "Může skenovat"
+
+#~ msgctxt "button"
+#~ msgid "Can hack"
+#~ msgstr "Může hackovat"
+
+#~ msgctxt "button"
+#~ msgid "Can dock"
+#~ msgstr "Může kotvit"
+
+#~ msgctxt "button"
+#~ msgid "Can combat maneuver"
+#~ msgstr "Může dělat úhybné manévry"
+
+#~ msgctxt "button"
+#~ msgid "Can self destruct"
+#~ msgstr "Může spustit sebedestrukci"
+
+#~ msgctxt "button"
+#~ msgid "Can launch probes"
+#~ msgstr "Může vyslat sondu"
+
+#~ msgctxt "button"
+#~ msgid "Auto coolant"
+#~ msgstr "Automatické chlazení"
+
+#~ msgctxt "button"
+#~ msgid "Auto repair"
+#~ msgstr "Automatické opravy"
+
+#~ msgctxt "player_tweak"
+#~ msgid "Warp (E/s): {energy_per_second}"
+#~ msgstr "Warp (E/s): {energy_per_second}"
+
+#~ msgctxt "player_tweak"
+#~ msgid "Shields (E/s): {energy_per_second}"
+#~ msgstr "Štíty (E/s): {energy_per_second}"
+
+#~ msgid "Callsign:"
+#~ msgstr "Volací znak:"
+
+#~ msgid "Unscanned description:"
+#~ msgstr "Popis - neoskenovaný:"
+
+#~ msgid "Friend or Foe Description:"
+#~ msgstr "Popis - přítel/nepřítel:"
+
+#~ msgid "Simple Scan Description:"
+#~ msgstr "Popis - jednoduchý sken:"
+
+#~ msgid "Full Scan Description:"
+#~ msgstr "Popis - úplný sken:"
+
+#~ msgid "Heading:"
+#~ msgstr "Směr:"
+
+#~ msgid "Scanning Complexity:"
+#~ msgstr "Složitost skenu:"
+
+#~ msgid "Scanning Depth:"
+#~ msgstr "Hloubka skenu:"
+
+#~ msgctxt "missile"
+#~ msgid "Lock"
+#~ msgstr "Zaměření"
+
+#, fuzzy
+#~ msgctxt "hotkey_F1"
+#~ msgid "Close"
+#~ msgstr "Zavřít"
+
+#~ msgctxt "missile"
+#~ msgid "Load"
+#~ msgstr "Nabít"
+
+#~ msgctxt "missile"
+#~ msgid "Empty"
+#~ msgstr "Prázdné"
+
+#~ msgctxt "missile"
+#~ msgid "Unload"
+#~ msgstr "Vybít"
+
+#~ msgctxt "missile"
+#~ msgid "Loading"
+#~ msgstr "Nabíjí se"
+
+#~ msgctxt "missile"
+#~ msgid "Unloading"
+#~ msgstr "Vybíjí se"
+
+#~ msgctxt "missile"
+#~ msgid "Firing"
+#~ msgstr "Střílí"
+
+#~ msgid "SELF DESTRUCT ACTIVATED"
+#~ msgstr "SEBEDESTRUKCE AKTIVNÍ"
+
+#~ msgid "Waiting for autorization input: {codes} left"
+#~ msgstr "Čekám na zadání kódu: zbývá zadat {codes} kód(y)"
+
+#~ msgid "Have a nice day."
+#~ msgstr "Přeji pěkný den."
+
+#~ msgid "This ship will self-destruct in {seconds} seconds."
+#~ msgstr "Tato loď se sama zničí za {seconds} sekund."
+
+#~ msgid "Self destruct activated!"
+#~ msgstr "Sebedestrukce aktivována!"
+
+#~ msgid "Code [{letter}]: {self_destruct_code}"
+#~ msgstr "Kód [{letter}]: {self_destruct_code}"
+
+#~ msgctxt "selfdestruct"
+#~ msgid "Enter [{letter}]"
+#~ msgstr "Zadejte kód [{letter}]"
+
+#~ msgid "Request Dock"
+#~ msgstr "Požádat o zakotveni"
+
+#~ msgid "Cancel Docking"
+#~ msgstr "Zrušit kotvení"
+
+#~ msgid "Undock"
+#~ msgstr "Odkotvit"
+
+#~ msgctxt "shields"
+#~ msgid "Calibrating"
+#~ msgstr "Kalibruje se"
+
+#~ msgctxt "shields"
+#~ msgid "ON"
+#~ msgstr "Zdvižené"
+
+#~ msgctxt "shields"
+#~ msgid "OFF"
+#~ msgstr "Sklopené"
+
+#~ msgid "{frequency} Shields: {status}"
+#~ msgstr "{frequency} Štíty: {status}"
+
+#~ msgid "Shields: {status}"
+#~ msgstr "Štity: {status}"
+
+#~ msgid "Self destruct"
+#~ msgstr "Sebedestrukce"
+
+#~ msgctxt "selfdestruct"
+#~ msgid "Confirm!"
+#~ msgstr "Potvrdit!"
+
+#~ msgctxt "shields"
+#~ msgid "Calibrate"
+#~ msgstr "Kalibrovat"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Distance"
+#~ msgstr "Vzdálenost"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Jump"
+#~ msgstr "Skok"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Jump in"
+#~ msgstr "Skok za"
+
+#~ msgctxt "jumpcontrol"
+#~ msgid "Charging"
+#~ msgstr "Nabíjí se"
+
+#~ msgctxt "slider"
+#~ msgid "Impulse"
+#~ msgstr "Impulz"
+
+#~ msgid "Damage with your beams"
+#~ msgstr "Poškození vašimi paprsky"
+
+#~ msgid "Damage on your shields"
+#~ msgstr "Poškození vašich štítů"
+
+#~ msgctxt "scienceFrequencyGraph"
+#~ msgid "No enemy beams"
+#~ msgstr "Žádné nepříelské paprsky"
+
+#~ msgctxt "scienceFrequencyGraph"
+#~ msgid "No enemy shields"
+#~ msgstr "Žádné nepřátelské štíty"
+
+#~ msgctxt "systems"
+#~ msgid "DAMAGED"
+#~ msgstr "POŠKOZEN"
+
+#~ msgctxt "systems"
+#~ msgid "JAMMED"
+#~ msgstr "ZARUŠEN"
+
+#~ msgctxt "systems"
+#~ msgid "NO POWER"
+#~ msgstr "ŽÁDNÝ VÝKON"
+
+#~ msgctxt "systems"
+#~ msgid "LOW ENERGY"
+#~ msgstr "MÁLO ENERGIE"
+
+#~ msgctxt "systems"
+#~ msgid "LOW POWER"
+#~ msgstr "MÁLO VÝKONU"
+
+#~ msgctxt "systems"
+#~ msgid "OVERHEATING"
+#~ msgstr "PŘEHŘÍVÁ SE"
+
+#~ msgctxt "systems"
+#~ msgid "HACKED"
+#~ msgstr "HACKNUTÝ"
+
+#~ msgctxt "target"
+#~ msgid "Hull"
+#~ msgstr "Trup"
+
+#~ msgid "Game Paused"
+#~ msgstr "Hra pozastavena"
+
+#~ msgid "Unpause"
+#~ msgstr "Odpauzovat"
+
+#~ msgid "Defeat!"
+#~ msgstr "Porážka!"
+
+#~ msgid "Victory!"
+#~ msgstr "Vítězství!"
+
+#~ msgid "{faction} wins"
+#~ msgstr "Výhra frakce: {faction}"
+
+#~ msgid "Combat maneuver"
+#~ msgstr "Úhybné manévry"
+
+#~ msgid "SHIP DESTROYED!"
+#~ msgstr "LOĎ ZNIČENA!"
+
+#~ msgctxt "shipdestroyed"
+#~ msgid "Return"
+#~ msgstr "Zpět"
+
+#~ msgctxt "slider"
+#~ msgid "Warp"
+#~ msgstr "Warp"
+
+#~ msgid "Opening communications..."
+#~ msgstr "Zahajuji komunikaci..."
+
+#~ msgid "Answer"
+#~ msgstr "Odpovědět"
+
+#~ msgid "Ignore"
+#~ msgstr "Ignorovat"
+
+#~ msgid "No reply..."
+#~ msgstr "Bez odpovědi..."
+
+#~ msgid "Communications were suddenly cut"
+#~ msgstr "Komunikace byla nečekaně přerušena"
+
+#~ msgid "Communications channel closed"
+#~ msgstr "Komunikační kanál uzavřen"
+
+#~ msgid "Hailed by {name}"
+#~ msgstr "{name} nás volá"
+
+#~ msgid "Jump in: {delay}"
+#~ msgstr "Skok za: {delay}"
+
+#~ msgctxt "scanning"
+#~ msgid "Electric signature"
+#~ msgstr "Elektrická signatura"
+
+#, fuzzy
+#~ msgctxt "scanning"
+#~ msgid "LOCKED"
+#~ msgstr "ODPOVÍDÁ"
+
+#~ msgctxt "controlbutton"
+#~ msgid "Main screen"
+#~ msgstr "Hlavní obrazovka"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Front"
+#~ msgstr "Přední"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Back"
+#~ msgstr "Zadní"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Left"
+#~ msgstr "Levý"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Right"
+#~ msgstr "Pravý"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Target lock"
+#~ msgstr "Zaměřený cíl"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Tactical"
+#~ msgstr "Taktický radar"
+
+#, fuzzy
+#~ msgctxt "mainscreen"
+#~ msgid "Long Range"
+#~ msgstr "Radar dlouhého dosahu"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Show comms"
+#~ msgstr "Zobrazit komunikaci"
+
+#~ msgctxt "mainscreen"
+#~ msgid "Hide comms"
+#~ msgstr "Skrýt komunikaci"
+
+#~ msgctxt "hacking"
+#~ msgid "Reset"
+#~ msgstr "Reset"
+
+#~ msgctxt "hacking"
+#~ msgid "Target system:"
+#~ msgstr "Zacílit systém:"
+
+#~ msgctxt "hacking"
+#~ msgid "Hacking in Progress: {percent}%"
+#~ msgstr "Hackovaní probíha: {percent}%"
+
+#~ msgctxt "hacking"
+#~ msgid "{target}: hacked {percent}%"
+#~ msgstr "{target}: hacknutý na {percent}%"
+
+#~ msgid "Hacking SUCCESS!"
+#~ msgstr "Hackování ÚSPEŠNÝ!"
+
+#~ msgid "Hacking FAILURE!"
+#~ msgstr "Hackování SELHAL!"
+
+#, fuzzy
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Pause game"
+#~ msgstr "Pauza"
+
+#~ msgctxt "hotkey_Basic"
+#~ msgid "Show in-game help"
+#~ msgstr "Zobrazit nápovědu ve hře"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View forward"
+#~ msgstr "Pohled vpřed"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View left"
+#~ msgstr "Pohled vlevo"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View right"
+#~ msgstr "Pohled vpravo"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View backward"
+#~ msgstr "Pohled vzad"
+
+#, fuzzy
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "Lock view on weapons target"
+#~ msgstr "Zamknout pohled na cíl"
+
+#, fuzzy
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View tactical radar"
+#~ msgstr "Zobrazit taktický radar"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "View long-range radar"
+#~ msgstr "Zobrazit radar dlouhého dosahu"
+
+#~ msgctxt "hotkey_MainScreen"
+#~ msgid "Toggle first-person view"
+#~ msgstr "Přepnout pohled z první osoby"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Helms"
+#~ msgstr "Kormidlo"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Increase impulse"
+#~ msgstr "Zvýšit impulz"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Decrease impulse"
+#~ msgstr "Snížit impulz"
+
+#, fuzzy
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Set impulse (joystick)"
+#~ msgstr "Vybrat impulzní pohon"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Zero impulse"
+#~ msgstr "Nulový impulz"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Max impulse"
+#~ msgstr "Maximální impulz"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Max reverse impulse"
+#~ msgstr "MAximální impulz vzad"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Turn left"
+#~ msgstr "Otáčet vlevo"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Turn right"
+#~ msgstr "Otáčet vpravo"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp off"
+#~ msgstr "Zastavit warp"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 1"
+#~ msgstr "Warp 1"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 2"
+#~ msgstr "Warp 2"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 3"
+#~ msgstr "Warp 3"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Warp 4"
+#~ msgstr "Warp 4"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Increase Warp"
+#~ msgstr "Zvýšit Warp"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Decrease Warp"
+#~ msgstr "Snížit Warp"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Dock request/abort/undock"
+#~ msgstr "Kotvení - požádat/zrušit/odkotvit"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Initiate docking"
+#~ msgstr "Zahajit kotvení"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Abort docking"
+#~ msgstr "Zrušit kotvení"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Undock"
+#~ msgstr "Odkotvit"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Increase jump distance"
+#~ msgstr "Zvýšit vzdálenost skoku"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Decrease jump distance"
+#~ msgstr "Snížit vzdálenost skoku"
+
+#~ msgctxt "hotkey_Helms"
+#~ msgid "Initiate jump"
+#~ msgstr "Zahájit skok"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Weapons"
+#~ msgstr "Zbraně"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select homing"
+#~ msgstr "Vybrat naváděnou střelu"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select nuke"
+#~ msgstr "Vybrat jadernou střelu"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select mine"
+#~ msgstr "Vybrat minu"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select EMP"
+#~ msgstr "Vybrat EMP"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select HVLI"
+#~ msgstr "Vybrat HVLI"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Load tube {number}"
+#~ msgstr "Nabít torpédomet {number}"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Unload tube {number}"
+#~ msgstr "Vybít torpédomet {number}"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Fire tube {number}"
+#~ msgstr "Vystřelit z torpédometu {number}"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select next hostile target"
+#~ msgstr "Vybrat dalšího nepřítele"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Select next target (any)"
+#~ msgstr "Vybrat další cíl (libovolný)"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Toggle shields"
+#~ msgstr "Zvednout/sklopit štíty"
+
+#, fuzzy
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Enable shields"
+#~ msgstr "Zvednout štíty"
+
+#, fuzzy
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Disable shields"
+#~ msgstr "Sklopit štíty"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Increase shield frequency target"
+#~ msgstr "Zvýšit frekvenci štítů"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Decrease shield frequency target"
+#~ msgstr "Snížit frekvenci štítů"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Start shield calibration"
+#~ msgstr "Spustit kalibraci štítů"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Next beam subsystem target type"
+#~ msgstr "Zacílit paprsky další subsystém"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Previous beam subsystem target type"
+#~ msgstr "Zacílit paprsky předchozí subsystém"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Increase beam frequency"
+#~ msgstr "Zvýšit frekvenci paprsků"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Decrease beam frequency"
+#~ msgstr "Snížit frekvenci paprsků"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Toggle missile aim lock"
+#~ msgstr "Přepnout zámek zaměření raket"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Enable missile aim lock"
+#~ msgstr "Zapnout zámek zaměření raket"
+
+#, fuzzy
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Disable"
+#~ msgstr "Zakázáno"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Turn missile aim to the left"
+#~ msgstr "Posunout zaměření raket vlevo"
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Turn missile aim to the right"
+#~ msgstr "Posunout zaměření raket vpravo"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Science"
+#~ msgstr "Vedecká st."
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Scan object"
+#~ msgstr "Skenovat objekt"
+
+#~ msgctxt "hotkey_Science"
+#~ msgid "Select next scannable object"
+#~ msgstr "Vybrat další skenovatelný objekt"
+
+#~ msgctxt "hotkey_menu"
+#~ msgid "Engineering"
+#~ msgstr "Strojovna"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select reactor system"
+#~ msgstr "Vybrat systém reaktoru"
+
+#, fuzzy
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select beam weapon system"
+#~ msgstr "Vybrat paprskové zbraně"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select missile weapon system"
+#~ msgstr "Vybrat torpédomety"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select maneuvering system"
+#~ msgstr "Vybrat manévrování"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select impulse system"
+#~ msgstr "Vybrat impulzní pohon"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select warp system"
+#~ msgstr "Vybrat warp pohon"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select jump drive system"
+#~ msgstr "Vybrat skokový pohon"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select front shields system"
+#~ msgstr "Vybrat přední štíty"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Select rear shields system"
+#~ msgstr "Vybrat zadní štíty"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 0%"
+#~ msgstr "Energie do systému na 0%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 30%"
+#~ msgstr "Energie do systému na 30%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 50%"
+#~ msgstr "Energie do systému na 50%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 100%"
+#~ msgstr "Energie do systému na 100%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 150%"
+#~ msgstr "Energie do systému na 150%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 200%"
+#~ msgstr "Energie do systému na 200%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 250%"
+#~ msgstr "Energie do systému na 250%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Set system power to 300%"
+#~ msgstr "Energie do systému na 300%"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Increase system power"
+#~ msgstr "Zvýšit energii do systému"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Decrease system power"
+#~ msgstr "Snížit energii do systému"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Increase system coolant"
+#~ msgstr "Zvýšit chlazení systému"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Decrease system coolant"
+#~ msgstr "Snížit chlazení systému"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Next repair crew"
+#~ msgstr "Další tým opravářů"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move up"
+#~ msgstr "Přesun opravářů nahoru"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move down"
+#~ msgstr "Přesun opravářů dolů"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move left"
+#~ msgstr "Přesun opravářů doleva"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Crew move right"
+#~ msgstr "Přesun opravářů doprava"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Start self-destruct"
+#~ msgstr "Spustit sebedestrukci"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Confirm self-destruct"
+#~ msgstr "Potvrdit sebedestrukci"
+
+#~ msgctxt "hotkey_Engineering"
+#~ msgid "Cancel self-destruct"
+#~ msgstr "Zrušit sebedestrukci"
+
+#~ msgctxt "gm_info"
+#~ msgid "Owner"
+#~ msgstr "Majitel"
+
+#~ msgctxt "gm_info"
+#~ msgid "Target"
+#~ msgstr "Cíl"
+
+#~ msgctxt "gm_info"
+#~ msgid "Faction"
+#~ msgstr "Frakce"
+
+#~ msgctxt "gm_info"
+#~ msgid "Size"
+#~ msgstr "Velikost"
+
+#~ msgctxt "missile"
+#~ msgid "Homing"
+#~ msgstr "Naváděné"
+
+#~ msgctxt "missile"
+#~ msgid "Nuke"
+#~ msgstr "Jaderné"
+
+#~ msgctxt "missile"
+#~ msgid "Mine"
+#~ msgstr "Miny"
+
+#~ msgctxt "missile"
+#~ msgid "EMP"
+#~ msgstr "EMP"
+
+#~ msgctxt "missile"
+#~ msgid "HVLI"
+#~ msgstr "HVLI"
+
+#~ msgctxt "cpulog"
+#~ msgid "Searching for targets."
+#~ msgstr "Hledá cíle."
+
+#~ msgctxt "cpulog"
+#~ msgid "Searching for hostiles around {x},{y}."
+#~ msgstr "Hledá nepřátele kolem {x},{y}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Searching for supplies."
+#~ msgstr "Hledá zásoby."
+
+#~ msgctxt "cpulog"
+#~ msgid "Docking to {callsign}."
+#~ msgstr "Kotví k {callsign}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Standing ground for now."
+#~ msgstr "Prozatím zůstává na místě."
+
+#~ msgctxt "cpulog"
+#~ msgid "Defending {x},{y}."
+#~ msgstr "Brání {x},{y}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Defending {callsign}."
+#~ msgstr "Brání {callsign}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Following {callsign}."
+#~ msgstr "Sleduje {callsign}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Moving to {x},{y}."
+#~ msgstr "Letí na {x},{y}."
+
+#~ msgctxt "cpulog"
+#~ msgid "Moving to attack {callsign}!"
+#~ msgstr "Leti k útoku na {callsign}!"
+
+#~ msgctxt "gm_info"
+#~ msgid "Orders"
+#~ msgstr "Rozkazy"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Idle"
+#~ msgstr "Nedělat nic"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Roaming"
+#~ msgstr "Toulat se"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Retreat"
+#~ msgstr "Ustoupit"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Stand Ground"
+#~ msgstr "Zůstat na místě"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Defend Location"
+#~ msgstr "Bránit lokaci"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Defend Target"
+#~ msgstr "Bránit cíl"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Fly in formation"
+#~ msgstr "Letět ve formaci"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Fly towards"
+#~ msgstr "Letět k"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Fly towards (ignore all)"
+#~ msgstr "Letět k (ignorovat vše)"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Attack"
+#~ msgstr "Útok"
+
+#~ msgctxt "orderscpu"
+#~ msgid "Dock"
+#~ msgstr "Zadokovat"
+
+#~ msgctxt "alert"
+#~ msgid "RED ALERT"
+#~ msgstr "ČERVENÝ POPLACH"
+
+#~ msgctxt "alert"
+#~ msgid "YELLOW ALERT"
+#~ msgstr "ŽLUTÝ POPLACH"
+
+#~ msgctxt "alert"
+#~ msgid "Normal"
+#~ msgstr "Normální"
+
+#~ msgctxt "shiplog"
+#~ msgid "Start of log"
+#~ msgstr "Začátek deníku"
+
+#~ msgctxt "shiplog"
+#~ msgid "Hailed by {name}"
+#~ msgstr "Volá nás {name}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Communication channel closed by other side"
+#~ msgstr "Komunikace uzavřena protistranou"
+
+#~ msgctxt "shiplog"
+#~ msgid "Hailing from {callsign} stopped"
+#~ msgstr "Voláni od {callsign} přestalo"
+
+#~ msgctxt "shiplog"
+#~ msgid "Communication channel closed"
+#~ msgstr "Komunikačni kanál uzavřen"
+
+#~ msgctxt "chatdialog"
+#~ msgid "Opened comms with {name}"
+#~ msgstr "Zahájena komunikace s: {name}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Hailing: {name}"
+#~ msgstr "Voláme: {name}"
+
+#~ msgctxt "chatdialog"
+#~ msgid "Opened comms to {callsign}"
+#~ msgstr "Zahájena komunikace s {callsign}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Opened communication channel to {callsign}"
+#~ msgstr "Otevřen komunikační kanál s {callsign}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused communications from {callsign}"
+#~ msgstr "Komunikace od {callsign} odmítnuta"
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused communications to {callsign}"
+#~ msgstr "Komunikace s {callsign} odmítnuta"
+
+#~ msgctxt "shiplog"
+#~ msgid "Hail suddenly went dead."
+#~ msgstr "Volani náhle ustalo."
+
+#~ msgctxt "shiplog"
+#~ msgid "Accepted hail from {callsign}"
+#~ msgstr "Přijata komunikace od {callsign}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused hail from {callsign}"
+#~ msgstr "Odmítnuta komunikace od {callsign}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Opened communication channel to {name}"
+#~ msgstr "Otevřen komunikační kanál s {name}"
+
+#~ msgctxt "shiplog"
+#~ msgid "Refused hail from {name}"
+#~ msgstr "Odmítnuta komunikace od {name}"
+
+#~ msgctxt "gm_info"
+#~ msgid "CallSign"
+#~ msgstr "Volací znak"
+
+#~ msgctxt "gm_info"
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgctxt "gm_info"
+#~ msgid "Hull"
+#~ msgstr "Trup"
+
+#~ msgctxt "gm_info"
+#~ msgid "Shield"
+#~ msgstr "Štíty"
+
+#~ msgctxt "tube"
+#~ msgid "Front"
+#~ msgstr "Přední"
+
+#~ msgctxt "tube"
+#~ msgid "Right"
+#~ msgstr "Pravý"
+
+#~ msgctxt "tube"
+#~ msgid "Left"
+#~ msgstr "Levý"
+
+#~ msgctxt "tube"
+#~ msgid "Rear"
+#~ msgstr "Zadní"
+
+#~ msgid ""
+#~ "The Atlantis X23 is the smallest model of destroyer, and its combination "
+#~ "of frigate-like size and corvette-like power makes it an excellent escort "
+#~ "ship when defending larger ships against multiple smaller enemies. "
+#~ "Because the Atlantis X23 is fitted with a jump drive, it can also serve "
+#~ "as an intersystem patrol craft."
+#~ msgstr ""
+#~ "Atlantis X23 je nejmenší model torpédoborce. Velikostí fregata a silou "
+#~ "korveta tvoři výbornou doprovodnou loď pro obranu větších lodí proti více "
+#~ "menším nepřátelům. Atlantis X23 je dále vybavena skokovým pohonem takže "
+#~ "může být použita i jako hlídková loď mezi hvězdnými systémy."
+
+#~ msgid ""
+#~ "A refitted Atlantis X23 for more general tasks. The large shield system "
+#~ "has been replaced with an advanced combat maneuvering systems and "
+#~ "improved impulse engines. Its missile loadout is also more diverse. "
+#~ "Mistaking the modified Atlantis for an Atlantis X23 would be a deadly "
+#~ "mistake."
+#~ msgstr ""
+#~ "Refitovana verze Atlantis X23 pro více všeobecné úkoly. Silný systém "
+#~ "štítů byl nahrazen pokročilým manévrovacím systémem a vylepšenými "
+#~ "impulzními motory. Její torpédová výbava je taktéž více univerzální. "
+#~ "Splést si tuto upravenou Atlantis za Atlantis X23 by byla smrtelná chyba."
+
+#~ msgid ""
+#~ "Contrary to its predecessor, the Starhammer II lives up to its name. By "
+#~ "resolving the original Starhammer's power and heat management issues, the "
+#~ "updated model makes for a phenomenal frontal assault ship. Its low speed "
+#~ "makes it difficult to position, but when in the right place at the right "
+#~ "time, even the strongest shields can't withstand a Starhammer's assault "
+#~ "for long."
+#~ msgstr ""
+#~ "Oproti svému předchůdci, Starhammer II (Hvězdné kladivo) dostává svému "
+#~ "jménu. Vyrešením problému původního Starhammeru v energetice a chlazení "
+#~ "se stal tento vylepšený model fenomenální lodí pro čelní útok. Jeho nízká "
+#~ "rychlost klade sice větší nároky na pilota, ale když je ve správný čas na "
+#~ "správném místě, ani nejsilnější lodě nevydrží proti útoku Starhammeru "
+#~ "dlouho."
+
+#~ msgid ""
+#~ "A number of missile tubes range around this ship. Beams were deemed lower "
+#~ "priority, though they are still present. Stronger defenses than a "
+#~ "frigate, but not as strong as the Atlantis"
+#~ msgstr ""
+#~ "Početné torpédomety kolem lodi. Paprskové zbraně byly považovány za nižší "
+#~ "prioritu, ale stále tu nějaké jsou. Lepší obrana, nez fregaty, ale ne tak "
+#~ "silná jako Atlantis"
+
+#~ msgid ""
+#~ "A number of beams bristle from various points on this gunner. Missiles "
+#~ "were deemed lower priority, though they are still present. Stronger "
+#~ "defenses than a frigate, but not as strong as the Atlantis"
+#~ msgstr ""
+#~ "Řada paprskových zbraní ježících se z různých míst na této střelecké "
+#~ "lodi. Torpédomety byly považovány za nižší prioritu, ale stále tu nějaké "
+#~ "jsou. Lepší obrana, než fregaty, ale ne tak silná jako Atlantis"
+
+#~ msgid ""
+#~ "This stationary defense platform operates like a station, with docking "
+#~ "and resupply functions, but is armed with powerful beam weapons and can "
+#~ "slowly rotate. Larger systems often use these platforms to resupply "
+#~ "patrol ships."
+#~ msgstr ""
+#~ "Tato staticka obranná platforma funguje jako stanice, s dokováním a "
+#~ "zásobováním, ale je vyzbrojena silnými paprskovými zbraněmi a dokáže se "
+#~ "pomalu otáčet. Větší hvězdné systémy často využívají tyto platformy pro "
+#~ "zásobování hlídkových lodí."
+
+#~ msgid ""
+#~ "These freighters are designed to transport armed troops, military support "
+#~ "personnel, and combat gear."
+#~ msgstr ""
+#~ "Tyto přepravní lodě byly navrženy pro transport vojáků, podpůrného "
+#~ "armádního personálu a bojové výbavy."
+
+#~ msgid ""
+#~ "Cargo freighters haul large loads of cargo across long distances on "
+#~ "impulse power. Their cargo bays include climate control and stabilization "
+#~ "systems that keep the cargo in good condition."
+#~ msgstr ""
+#~ "Tyto přepravní lodě transportují velké množství nákladu na veliké "
+#~ "vzdálenosti impulzní rychlostí. Výbava nákladového prostoru zahrnuje "
+#~ "systémy pro ovládání a stabilizaci prostředí, které udržují náklad v "
+#~ "dobrém stavu."
+
+#~ msgid ""
+#~ "These freighters are specially designed to haul garbage and waste. They "
+#~ "are fitted with a trash compactor and fewer stabilzation systems than "
+#~ "cargo freighters."
+#~ msgstr ""
+#~ "Tyto přepravní lodě jsou speciálně navrženy pro transport odpadu. Jsou "
+#~ "vybaveny zhutňovačem odpadu a méně systémy pro stabilizaci prostředí, než "
+#~ "nákladní lodě."
+
+#~ msgid ""
+#~ "Equipment freighters have specialized environmental and stabilization "
+#~ "systems to safely carry delicate machinery and complex instruments."
+#~ msgstr ""
+#~ "Tyto přepravní lodě mají specializované systémy pro stabilizaci "
+#~ "prostředí, které zajišťují bezpečný transport choulostivých strojů a "
+#~ "složitých přístrojů."
+
+#~ msgid ""
+#~ "Fuel freighters have massive tanks for hauling fuel, and delicate "
+#~ "internal sensors that watch for any changes to their cargo's potentially "
+#~ "volatile state."
+#~ msgstr ""
+#~ "Palivové tankery mají masivní nádrže pro transport paliva a velmi jemné "
+#~ "vnitřní senzory, které hlídají jakoukoliv změnu ve stavu potenciálně "
+#~ "výbušného nákladu."
+
+#, fuzzy
+#~ msgctxt "class"
+#~ msgid "Exuari"
+#~ msgstr "Exuari"
+
+#~ msgctxt "commsStation"
+#~ msgid "We are under attack! No time for chatting!"
+#~ msgstr "Jsme pod útokem! Není čas na pokec!"
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "Good day, officer! Welcome to %s.\n"
+#~ "What can we do for you today?"
+#~ msgstr ""
+#~ "Dobrý den, důstojníku! Vítejte na stanici %s.\n"
+#~ "Co pro vás můžeme dnes udělat?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Welcome to our lovely station %s."
+#~ msgstr "Vítejte na naší krásné stanici %s."
+
+#~ msgctxt "commsStation"
+#~ msgid "Do you have spare homing missiles for us?"
+#~ msgstr "Máte navíc nějaké naváděné střely?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Can you restock us with HVLI?"
+#~ msgstr "Můžete nám doplnit zásoby HVLI?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Please re-stock our mines."
+#~ msgstr "Prosíme, doplňte naše miny."
+
+#~ msgctxt "commsStation"
+#~ msgid "Can you supply us with some nukes?"
+#~ msgstr "Můžete nám poskytnout nějaké jaderné střely?"
+
+#~ msgctxt "commsStation"
+#~ msgid "Please re-stock our EMP missiles."
+#~ msgstr "Prosím, doplňte naše EMP střely."
+
+#~ msgctxt "commsStation"
+#~ msgid "%s (%d rep each)"
+#~ msgstr "%s (%d rep každá)"
+
+#~ msgctxt "commsStation"
+#~ msgid "You need to stay docked for that action."
+#~ msgstr "Pro tuto akci musíte zůstat zadokovaní."
+
+#~ msgctxt "commsStation"
+#~ msgid "We do not deal in weapons of mass destruction."
+#~ msgstr "Neobchodujeme se zbraněmi hromadného ničení."
+
+#~ msgctxt "commsStation"
+#~ msgid "We do not deal in weapons of mass disruption."
+#~ msgstr "Neobchodujeme se zbraněmi hromadného rušení."
+
+#~ msgctxt "commsStation"
+#~ msgid "We do not deal in those weapons."
+#~ msgstr "S těmito zbraněmi neobchodujeme."
+
+#~ msgctxt "commsStation"
+#~ msgid "All nukes are charged and primed for destruction."
+#~ msgstr "Všechny jaderné střely jsou nabité a připravené k ničení."
+
+#~ msgctxt "commsStation"
+#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
+#~ msgstr "Omlouvám se, ale jste zásobeni nejvíce, jak můžu dovolit."
+
+#~ msgctxt "commsStation"
+#~ msgid "Not enough reputation."
+#~ msgstr "Nemáte dostatek reputace."
+
+#~ msgctxt "commsStation"
+#~ msgid "You are fully loaded and ready to explode things."
+#~ msgstr "Jste plně naloženi a můžete vybuchovat věci."
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+#~ msgstr ""
+#~ "Velkoryse jsme vám doplnili zásoby zbraní.\n"
+#~ "Využijte je dobře."
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "This is %s. Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+#~ msgstr ""
+#~ "Zde je %s. Dobrý den, důstojníku.\n"
+#~ "Pokud potřebujete zásoby, nejprve u nás zakotvěte."
+
+#~ msgctxt "commsStation"
+#~ msgid ""
+#~ "This is %s. Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+#~ msgstr ""
+#~ "Zde je %s. Zdravíme.\n"
+#~ "Pokud s námi chcete obchodovat, nejprve u nás zakotvěte."
+
+#~ msgctxt "commsStation"
+#~ msgid "Can you send a supply drop? (%d rep)"
+#~ msgstr "Můžete nám poslat zásobovací modul? (%d rep)"
+
+#~ msgctxt "commsStation"
+#~ msgid "Please send reinforcements! (%d rep)"
+#~ msgstr "Prosím pošlete posily! (%d rep)"
+
+#~ msgctxt "commsStation"
+#~ msgid "You need to set a waypoint before you can request backup."
+#~ msgstr "Musíte mít umístěn bod, než můžete žádat pomoc."
+
+#~ msgctxt "commsStation"
+#~ msgid "To which waypoint should we deliver your supplies?"
+#~ msgstr "Na jaký bod máme doručit zásoby?"
+
+#~ msgctxt "commsStation"
+#~ msgid "We have dispatched a supply ship toward %s."
+#~ msgstr "Vyslali jsme zásobovací loď na %s."
+
+#~ msgctxt "commsStation"
+#~ msgid "Not enough reputation!"
+#~ msgstr "Nemáte dostatek reputace!"
+
+#~ msgctxt "commsStation"
+#~ msgid "You need to set a waypoint before you can request reinforcements."
+#~ msgstr "Musíte mít umístěn bod, než můžete žádat o posily."
+
+#~ msgctxt "commsStation"
+#~ msgid "To which waypoint should we dispatch the reinforcements?"
+#~ msgstr "Na jaký bod máme vyslat posily?"
+
+#~ msgctxt "commsStation"
+#~ msgid "We have dispatched %s to assist at %s."
+#~ msgstr "Vyslali jsme %s k pomoci na %s."
+
+#~ msgctxt "commsStation"
+#~ msgid "WP %d"
+#~ msgstr "Bod %d"
+
+#~ msgctxt "commsShip"
+#~ msgid "Transporting goods."
+#~ msgstr "Převážím zboží."
+
+#~ msgctxt "commsShip"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "Nic pro vás nemáme.\n"
+#~ "Přeji dobrý den."
+
+#~ msgid "Independent"
+#~ msgstr "Nezávislí"
+
+#~ msgid "Human Navy"
+#~ msgstr "Lidské Námořnictvo"
+
+#~ msgid ""
+#~ "The remnants of the human navy.\n"
+#~ "\n"
+#~ "While all other races were driven to the stars out of greed or scientific "
+#~ "research, humans where the only race to start exploring the galaxy "
+#~ "because their homeworld could no longer sustain their population. Some "
+#~ "other races view humans as a sort of virus or plague due to the rate at "
+#~ "which they can breed and spread.\n"
+#~ "\n"
+#~ "Due to human regulations on spaceships, naval ships are the only ones "
+#~ "permitted in deep space. However, this hasn't completely prevented humans "
+#~ "outside of the navy from spacefaring, as quite a few humans sign up on "
+#~ "alien trading vessels or pirate raiders."
+#~ msgstr ""
+#~ "Zbytky pozemskeho namornictva.\n"
+#~ "\n"
+#~ "Zatím co ostatní rasy se vydaly do vesmíru ve jménu chamtivosti, nebo "
+#~ "vědeckého pokroku, lidé byli jedinou rasou, která začala prozkoumávat "
+#~ "galaxii, když jejich svět již nedokázal udržet jejich populaci. Některé "
+#~ "další rasy vidí lidstvo jako nějaký virus nebo mor, na základě rychlosti "
+#~ "s jakou se množí a rozšiřují.\n"
+#~ "\n"
+#~ "Lidské předpisy pro vesmírné lodě určují, že jen lodě námořnictva smí do "
+#~ "hlubokého vesmíru. To však úplně nezabránilo lidem mimo námořnictvo, aby "
+#~ "se vydali do vesmíru, neboť pěkných pár lidí se přihlásilo ke službě na "
+#~ "mimozemských obchodních lodích nebo pirátských nájezdnících."
+
+#~ msgid "Kraylor"
+#~ msgstr "Kraylor"
+
+#~ msgid "Arlenians"
+#~ msgstr "Arleniane"
+
+#~ msgid "Exuari"
+#~ msgstr "Exuari"
+
+#~ msgid "Ghosts"
+#~ msgstr "Duchové"
+
+#~ msgid "Ktlitans"
+#~ msgstr "Ktlitané"
+
+# Pozemske Hvezdne Namornictvo
+#~ msgid "TSN"
+#~ msgstr "PHN"
+
+# Spojene Hvezdne Namornictvo
+#~ msgid "USN"
+#~ msgstr "SHN"
+
+# Nebeska Sopojena Flotila
+#~ msgid "CUF"
+#~ msgstr "NSF"
+
+#~ msgid "Range"
+#~ msgstr "Dosah"
+
+#~ msgid "Damage"
+#~ msgstr "Poškození"
+
+#~ msgid "Blast radius"
+#~ msgstr "Poloměr výbuchu"
+
+#~ msgid "Damage at center"
+#~ msgstr "Poškození v epicentru"
+
+#~ msgid "Damage at edge"
+#~ msgstr "Poškozeni na okraji"
+
+#~ msgid "Drop distance"
+#~ msgstr "Vypouštěcí vzdálenost"
+
+#~ msgid "Trigger distance"
+#~ msgstr "Aktivační vzdálenost"
+
+#~ msgid "Burst"
+#~ msgstr "Dávka"
+
+#~ msgid "Select your station"
+#~ msgstr "Vyber stanici"
+
+#~ msgid "1 player crew/extras"
+#~ msgstr "posádka: 1 hráč/extra"
+
+#~ msgctxt "shipwindow"
+#~ msgid "{angle} degrees"
+#~ msgstr "{angle} stupňů"
+
+#~ msgctxt "shipwindow"
+#~ msgid "0 degrees"
+#~ msgstr "0 stupňů"
+
+#~ msgid "Cinematic view"
+#~ msgstr "Filmový pohled"
+
+#~ msgid "Incorrect control code. Re-enter code for {callsign}:"
+#~ msgstr "Nesprávný kód. Zadejte znovu kód pro {callsign}:"
+
+#~ msgid ""
+#~ "Control code accepted.\n"
+#~ "Granting access to {callsign}."
+#~ msgstr ""
+#~ "Ovládací kód přijat.\n"
+#~ "Uděluji přístup k lodi {callsign}."
+
+#~ msgid "Server visibility: "
+#~ msgstr "Viditelnost serveru: "
+
+#~ msgid "LAN only"
+#~ msgstr "Pouze LAN"
+
+#~ msgid ""
+#~ "Calibrate\n"
+#~ "Touchscreen"
+#~ msgstr ""
+#~ "Kalibrovat\n"
+#~ "dotykovou plochu"
+
+#~ msgid "Player ship options"
+#~ msgstr "Nastavení hráčské lodi"
+
+#~ msgid "Warp/Jump: "
+#~ msgstr "Warp/Skok: "
+
+#~ msgctxt "warp/jump"
+#~ msgid "Ship default"
+#~ msgstr "Výchozí pro loď"
+
+#~ msgctxt "warp/jump"
+#~ msgid "Warp drive"
+#~ msgstr "Warpový pohon"
+
+#~ msgctxt "warp/jump"
+#~ msgid "Jump drive"
+#~ msgstr "Skokový pohon"
+
+#~ msgctxt "warp/jump"
+#~ msgid "Both"
+#~ msgstr "Oba"
+
+#~ msgctxt "warp/jump"
+#~ msgid "Neither"
+#~ msgstr "Žádný"
+
+#~ msgid "Main screen options"
+#~ msgstr "Možnosti hlavní obrazovky"
+
+#~ msgid "Tactical radar"
+#~ msgstr "Taktický radar"
+
+#~ msgid "Long range radar"
+#~ msgstr "Radar dlouhého dosahu"
+
+#~ msgid "Game rules"
+#~ msgstr "Pravidla hry"
+
+#~ msgid "Variation: "
+#~ msgstr "Varianta: "
+
+#~ msgid "Close server"
+#~ msgstr "Vypnout server"
+
+#~ msgid "No variation selected. Play the scenario as intended."
+#~ msgstr "Nebyla vybrána varianta. Hrát scénář jak je zamýšleno."
+
+#~ msgctxt "hotkey_Weapons"
+#~ msgid "Disable missile aim lock"
+#~ msgstr "Vypnout zámek zaměření raket"
+
+#~ msgid "Graphics Options"
+#~ msgstr "Nastavení grafiky"
+
+#~ msgid "No variation."
+#~ msgstr "Žádné varianty."
+
+#~ msgctxt "selfdestruct"
+#~ msgid "Cancel"
+#~ msgstr "Zrušit"
+
+#~ msgctxt "options"
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#~ msgid "Mission Clock"
+#~ msgstr "Hodiny Mise"
+
+#~ msgctxt "position"
+#~ msgid "Occupied"
+#~ msgstr "Obsazeno"
+
+#~ msgctxt "screenLan"
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+#~ msgid "Cancel"
+#~ msgstr "Zrušit"
+
+#~ msgctxt "hacking"
+#~ msgid "Close"
+#~ msgstr "Zavřít"

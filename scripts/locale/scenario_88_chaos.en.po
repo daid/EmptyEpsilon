@@ -1,0 +1,505 @@
+# Scenario name
+msgid "Chaos of War"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Two, three or four species battle for ultimate dominion. Designed as a "
+"replayable player versus player (PVP) scenario for individuals or teams. "
+"Terrain is randomly symmetrically generated for every game.\n"
+"\n"
+"Use Gamemaster (GM) screen to adjust parameters. The GM screen covers all of "
+"the parameters on the next page plus a variety of others.\n"
+"\n"
+"Get the player ship access codes from the GM screen after you generate the "
+"terrain\n"
+"\n"
+"Version 2"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Difficulty"
+msgstr ""
+
+msgctxt "setting"
+msgid "Determines the degree the environment helps or hinders the players"
+msgstr ""
+
+msgctxt "Difficulty"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Difficulty"
+msgid "Normal difficulty"
+msgstr ""
+
+msgctxt "Difficulty"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Difficulty"
+msgid "More resources, services and reputation"
+msgstr ""
+
+msgctxt "Difficulty"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Difficulty"
+msgid "Fewer resources, services and reputation"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Teams"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Number of teams. Each team may have one or more player ships on it. Default: "
+"2 teams"
+msgstr ""
+
+msgctxt "Teams"
+msgid "2"
+msgstr ""
+
+msgctxt "Teams"
+msgid "Two teams"
+msgstr ""
+
+msgctxt "Teams"
+msgid "3"
+msgstr ""
+
+msgctxt "Teams"
+msgid "Three teams"
+msgstr ""
+
+msgctxt "Teams"
+msgid "4"
+msgstr ""
+
+msgctxt "Teams"
+msgid "Four teams"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Players"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Number of player ships per team. 32 total max. Get player ship control codes "
+"from Game master screen. Default: 2 per team"
+msgstr ""
+
+msgctxt "Players"
+msgid "1"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"One player ship per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "2"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Two player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "3"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Three player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "4"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Four player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "5"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Five player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "6"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Six player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "7"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Seven player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "8"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Eight player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "9"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Nine player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "10"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Ten player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "11"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Eleven player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "12"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Twelve player ships per team. Get player ship control codes from Game master "
+"screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "13"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Thirteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "14"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Fourteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "15"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Fifteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+
+msgctxt "Players"
+msgid "16"
+msgstr ""
+
+msgctxt "Players"
+msgid ""
+"Sixteen player ships per team. Get player ship control codes from Game "
+"master screen"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Respawn"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"How a player ship returns to the game after being destroyed. Default: "
+"Lindworm"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Lindworm"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Destroyed player returns in a weak, but fast Lindworm"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Self"
+msgstr ""
+
+msgctxt "Respawn"
+msgid ""
+"Destroyed player returns as the same type of ship they originally started in"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Station Sensors"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Determines range at which station sensors will warn friendly ships about "
+"enemy ships via messages. Default: 20U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Zero"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations don't warn friendly players of enemies"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "5U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 5 units"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "10U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 10 units"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "20U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 20 units"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "30U"
+msgstr ""
+
+msgctxt "Station Sensors"
+msgid "Stations warn friendly players of enemies within 30 units"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Time"
+msgstr ""
+
+msgctxt "setting"
+msgid "Determines how long the game will last. Default: 45 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "5"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 5 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "10"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 10 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "15"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 15 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "20"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 20 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "25"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 25 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "30"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 30 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "35"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 35 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "40"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 40 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "45"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 45 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "50"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 50 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "55"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 55 minutes"
+msgstr ""
+
+msgctxt "Time"
+msgid "60"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 60 minutes (one hour)"
+msgstr ""
+
+msgctxt "Time"
+msgid "65"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 65 minutes (one hour and 5 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "70"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 70 minutes (one hour and 10 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "75"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 75 minutes (one hour and 15 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "80"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 80 minutes (one hour and 20 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "85"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 85 minutes (one hour and 25 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "90"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 90 minutes (one hour and 30 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "95"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 95 minutes (one hour and 35 minutes)"
+msgstr ""
+
+msgctxt "Time"
+msgid "100"
+msgstr ""
+
+msgctxt "Time"
+msgid "Game ends in 100 minutes (one hour and 40 minutes)"
+msgstr ""
