@@ -525,7 +525,17 @@ REGISTER_SCRIPT_FUNCTION(unpauseGame);
 
 static int playSoundFile(lua_State* L)
 {
-    soundManager->playSound(luaL_checkstring(L, 1));
+    string filename = luaL_checkstring(L, 1);
+    int n = filename.rfind(".");
+    if (n > -1)
+    {
+        string filename_with_locale = filename.substr(0, n) + "." + PreferencesManager::get("language", "en") + filename.substr(n);
+        if (getResourceStream(filename_with_locale)) {
+            soundManager->playSound(filename_with_locale);
+            return 0;
+        }
+    }
+    soundManager->playSound(filename);
     return 0;
 }
 /// Play a sound file on the server. Will work with any file supported by SFML (.wav, .ogg, .flac)
