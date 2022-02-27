@@ -30,6 +30,7 @@ private:
     GuiSlider* power_slider;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
+    GuiProgressbar* coolant_remaining_bar;
 
     class SystemRow
     {
