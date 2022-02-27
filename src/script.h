@@ -11,6 +11,8 @@ class Script : public ScriptObject
 public:
     Script();
     virtual ~Script() = default;
+
+    bool run(string filename);
 };
 
 #endif//SCRIPT_H

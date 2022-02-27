@@ -193,6 +193,10 @@ void GameGlobalInfo::startScenario(string filename)
 
     i18n::reset();
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/comms_ship." + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/comms_station." + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/factionInfo." + PreferencesManager::get("language", "en") + ".po");
+    i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
     P<ScriptObject> factionInfoScript = new ScriptObject("factionInfo.lua");

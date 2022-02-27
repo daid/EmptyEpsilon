@@ -1,6 +1,7 @@
 #include "spaceObject.h"
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
+#include "preferenceManager.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -568,6 +569,14 @@ void SpaceObject::addReputationPoints(float amount)
     gameGlobalInfo->reputation_points[faction_id] += amount;
     if (gameGlobalInfo->reputation_points[faction_id] < 0.0f)
         gameGlobalInfo->reputation_points[faction_id] = 0.0f;
+}
+
+void SpaceObject::setCommsScript(string script_name)
+{
+    this->comms_script_name = script_name;
+    if (script_name != "")
+        i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
+    this->comms_script_callback.clear();
 }
 
 string SpaceObject::getSectorName()
