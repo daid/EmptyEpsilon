@@ -21,10 +21,11 @@ msgstr "Beacon of Light"
 msgid ""
 "The Beacon of Light scenario, built from the series at EmptyEpsilon.org.\n"
 "\n"
-"Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat "
+"Near the far outpost of Orion-5, Exuari attacks are increasing. A diplomat "
 "went missing, and your first mission is to recover him.\n"
 "\n"
-"This scenario is limited to one player ship: the Atlantis Epsilon."
+"This scenario is limited to one player ship: the Atlantis Epsilon. Estimated "
+"duration: 1 hour"
 msgstr ""
 "Das \"Beacon of Light scenario\", ursprünglich erstellt in einer Serie auf "
 "EmptyEpsilon.org. In der Nähe des Außenpostens Orion-5 nehmen Kraylor-"
@@ -55,6 +56,16 @@ msgstr ""
 "Den letzen Kontakt hatten wir bevor RT-4 den Nebel in Sektor G5 betreten "
 "hat. Der Nebel blockiert unsere Langstreckenscanner, daher bitten wir Sie, "
 "nachzuforschen und, falls möglich, RT-4 zu helfen."
+
+#: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
+msgctxt "scienceDescription-lifepod"
+msgid "Life Pod"
+msgstr ""
+
+#: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
+msgctxt "scienceDescription-lifepod"
+msgid "J. J. Johnson in Life Pod"
+msgstr ""
 
 #: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
 #, fuzzy
@@ -199,6 +210,16 @@ msgstr ""
 "\n"
 "Kehren sie zu Orion-5 zurück um die Kriminellen auszuliefern."
 
+#: scripts/scenario_05_beacon.lua:210
+msgctxt "scienceDescription-artifact"
+msgid "High powered field generator"
+msgstr ""
+
+#: scripts/scenario_05_beacon.lua:210
+msgctxt "scienceDescription-artifact"
+msgid "Warp/Jump Jammer. Radius visible if jammer visible"
+msgstr ""
+
 #: scripts/scenario_05_beacon.lua:218
 #, fuzzy
 msgctxt "incCall"
@@ -299,7 +320,7 @@ msgstr ""
 "höchstwahrscheinlich eher zerstören, als ihn in unsere Hände fallen zu "
 "lassen."
 
-#: scripts/scenario_05_beacon.lua:365
+#: scripts/scenario_05_beacon.lua:371
 #, fuzzy
 msgctxt "incCall"
 msgid ""
@@ -314,7 +335,7 @@ msgstr ""
 "nun nach Orion-5. Bitte begeben sie sich ebenfalls nach Orion-5 zur "
 "Einsatzbesprechung.\""
 
-#: scripts/scenario_05_beacon.lua:377
+#: scripts/scenario_05_beacon.lua:383
 #, fuzzy
 msgctxt "incCall"
 msgid ""

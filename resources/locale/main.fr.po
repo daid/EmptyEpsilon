@@ -857,88 +857,88 @@ msgctxt "total"
 msgid "Coolant"
 msgstr "Liq. de ref."
 
-#: src/screens/crew6/engineeringScreen.cpp:129
+#: src/screens/crew6/engineeringScreen.cpp:142
 msgctxt "slider"
 msgid "Power"
 msgstr "Puissance"
 
-#: src/screens/crew6/engineeringScreen.cpp:131
+#: src/screens/crew6/engineeringScreen.cpp:144
 msgctxt "slider"
 msgid "Coolant"
 msgstr "Liq. de refroidissement"
 
-#: src/screens/crew6/engineeringScreen.cpp:182
-#: src/screens/crew6/engineeringScreen.cpp:270
+#: src/screens/crew6/engineeringScreen.cpp:195
+#: src/screens/crew6/engineeringScreen.cpp:287
 msgid "{energy}/min"
 msgstr "{energy}/min"
 
-#: src/screens/crew6/engineeringScreen.cpp:254
+#: src/screens/crew6/engineeringScreen.cpp:271
 msgctxt "slider"
 msgid "Power: {current_level}% / {requested}%"
 msgstr "Puissance : {current_level}%/{requested}%"
 
-#: src/screens/crew6/engineeringScreen.cpp:256
+#: src/screens/crew6/engineeringScreen.cpp:273
 msgctxt "slider"
 msgid "Coolant: {current_level}% / {requested}%"
 msgstr "Liq. de refroidissement : {current_level}%/{requested}%"
 
-#: src/screens/crew6/engineeringScreen.cpp:270
+#: src/screens/crew6/engineeringScreen.cpp:287
 msgid "Energy production"
 msgstr "Production d'énergie"
 
-#: src/screens/crew6/engineeringScreen.cpp:273
+#: src/screens/crew6/engineeringScreen.cpp:290
 msgid "Firing rate"
 msgstr "Cadence de tir"
 
-#: src/screens/crew6/engineeringScreen.cpp:286
+#: src/screens/crew6/engineeringScreen.cpp:303
 msgctxt "missile"
 msgid "Reload rate"
 msgstr "Vit. de charg. des tubes"
 
-#: src/screens/crew6/engineeringScreen.cpp:289
+#: src/screens/crew6/engineeringScreen.cpp:306
 msgid "Turning speed"
 msgstr "Vitesse de rotation"
 
-#: src/screens/crew6/engineeringScreen.cpp:291
-#: src/screens/crew6/engineeringScreen.cpp:296
+#: src/screens/crew6/engineeringScreen.cpp:308
+#: src/screens/crew6/engineeringScreen.cpp:313
 msgid "Combat recharge rate"
 msgstr "Recharge man. de combat"
 
-#: src/screens/crew6/engineeringScreen.cpp:294
+#: src/screens/crew6/engineeringScreen.cpp:311
 msgid "Impulse speed"
 msgstr "Puissance des moteurs"
 
-#: src/screens/crew6/engineeringScreen.cpp:299
+#: src/screens/crew6/engineeringScreen.cpp:316
 msgid "Warp drive speed"
 msgstr "Vitesse lumière max"
 
-#: src/screens/crew6/engineeringScreen.cpp:302
+#: src/screens/crew6/engineeringScreen.cpp:319
 msgid "Jump drive recharge rate"
 msgstr "Temps de rechargement"
 
-#: src/screens/crew6/engineeringScreen.cpp:303
+#: src/screens/crew6/engineeringScreen.cpp:320
 msgid "Jump drive jump speed"
 msgstr "Délai avant le saut"
 
-#: src/screens/crew6/engineeringScreen.cpp:307
-#: src/screens/crew6/engineeringScreen.cpp:321
+#: src/screens/crew6/engineeringScreen.cpp:324
+#: src/screens/crew6/engineeringScreen.cpp:338
 msgctxt "shields"
 msgid "Calibration speed"
 msgstr "Vitesse de calibration"
 
-#: src/screens/crew6/engineeringScreen.cpp:308
-#: src/screens/crew6/engineeringScreen.cpp:322
+#: src/screens/crew6/engineeringScreen.cpp:325
+#: src/screens/crew6/engineeringScreen.cpp:339
 msgctxt "shields"
 msgid "Charge rate"
 msgstr "Régénération"
 
-#: src/screens/crew6/engineeringScreen.cpp:314
-#: src/screens/crew6/engineeringScreen.cpp:328
+#: src/screens/crew6/engineeringScreen.cpp:331
+#: src/screens/crew6/engineeringScreen.cpp:345
 msgid "Extra damage"
 msgstr "Dommages supplémentaires"
 
-#: src/screens/crew6/engineeringScreen.cpp:316
-#: src/screens/crew6/engineeringScreen.cpp:330
+#: src/screens/crew6/engineeringScreen.cpp:333
+#: src/screens/crew6/engineeringScreen.cpp:347
 msgid "Damage negate"
 msgstr "Réduction des dégâts"
 

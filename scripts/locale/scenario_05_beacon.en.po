@@ -6,10 +6,11 @@ msgstr ""
 msgid ""
 "The Beacon of Light scenario, built from the series at EmptyEpsilon.org.\n"
 "\n"
-"Near the far outpost of Orion-5, Kraylor attacks are increasing. A diplomat "
+"Near the far outpost of Orion-5, Exuari attacks are increasing. A diplomat "
 "went missing, and your first mission is to recover him.\n"
 "\n"
-"This scenario is limited to one player ship: the Atlantis Epsilon."
+"This scenario is limited to one player ship: the Atlantis Epsilon. Estimated "
+"duration: 1 hour"
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:69
@@ -24,6 +25,16 @@ msgid ""
 "Our last contact with RT-4 was before it entered the nebula at sector G5. "
 "The nebula is blocking our long-range scans, so we're asking you to "
 "investigate and recover RT-4 if possible."
+msgstr ""
+
+#: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
+msgctxt "scienceDescription-lifepod"
+msgid "Life Pod"
+msgstr ""
+
+#: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
+msgctxt "scienceDescription-lifepod"
+msgid "J. J. Johnson in Life Pod"
 msgstr ""
 
 #: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
@@ -114,6 +125,16 @@ msgid ""
 "Head back to Orion-5 to deliver the criminals."
 msgstr ""
 
+#: scripts/scenario_05_beacon.lua:210
+msgctxt "scienceDescription-artifact"
+msgid "High powered field generator"
+msgstr ""
+
+#: scripts/scenario_05_beacon.lua:210
+msgctxt "scienceDescription-artifact"
+msgid "Warp/Jump Jammer. Radius visible if jammer visible"
+msgstr ""
+
 #: scripts/scenario_05_beacon.lua:218
 msgctxt "incCall"
 msgid ""
@@ -180,7 +201,7 @@ msgid ""
 "let it fall into our hands."
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:365
+#: scripts/scenario_05_beacon.lua:371
 msgctxt "incCall"
 msgid ""
 "Transport recovery team coming in:\n"
@@ -189,7 +210,7 @@ msgid ""
 "Please head to Orion-5 for debriefing.\""
 msgstr ""
 
-#: scripts/scenario_05_beacon.lua:377
+#: scripts/scenario_05_beacon.lua:383
 msgctxt "incCall"
 msgid ""
 "Thanks to the captured Exuari death squad, we now know the location of the "

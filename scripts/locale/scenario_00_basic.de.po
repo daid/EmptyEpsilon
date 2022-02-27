@@ -167,6 +167,106 @@ msgstr ""
 "Simpleres, weniger starkes Schiff, aber einfacher zu bedienen. Für "
 "unerfahrene Crews empfohlen."
 
+#: scripts/scenario_00_basic.lua:205
+msgctxt "buttonGM"
+msgid "+Named Waves"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:206
+msgctxt "buttonGM"
+msgid "Random wave"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:217
+msgctxt "buttonGM"
+msgid "Random friendly"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:238
+msgctxt "buttonGM"
+msgid "Win"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:244
+msgctxt "buttonGM"
+msgid "Victory?"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:245
+msgctxt "buttonGM"
+msgid "Yes"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:248
+msgctxt "buttonGM"
+msgid "Players have won"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:249
+msgctxt "buttonGM"
+msgid "Scenario ended"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:251
+msgctxt "buttonGM"
+msgid "No"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:256
+msgctxt "buttonGM"
+msgid "Position: "
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:259
+msgctxt "buttonGM"
+msgid "GM"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:261
+msgctxt "buttonGM"
+msgid "Random"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:274
+msgctxt "buttonGM"
+msgid "Strikeship"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:275
+msgctxt "buttonGM"
+msgid "Fighter"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:276
+msgctxt "buttonGM"
+msgid "Gunship"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:277
+msgctxt "buttonGM"
+msgid "Dreadnought"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:278
+msgctxt "buttonGM"
+msgid "Missile Cruiser"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:279
+msgctxt "buttonGM"
+msgid "Cruiser"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:280
+msgctxt "buttonGM"
+msgid "Adv. striker"
+msgstr ""
+
+#: scripts/scenario_00_basic.lua:283
+msgctxt "buttonGM"
+msgid "-From Named Waves"
+msgstr ""
+
 #: scripts/scenario_00_basic.lua:475
 #, lua-format
 msgctxt "goal-incCall"

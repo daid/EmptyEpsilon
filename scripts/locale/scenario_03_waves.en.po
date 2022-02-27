@@ -65,18 +65,18 @@ msgctxt "shipLog"
 msgid "Wave %d"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:219
+#: scripts/scenario_03_waves.lua:220
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Wave %d"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:252
+#: scripts/scenario_03_waves.lua:253
 msgctxt "msgMainscreen"
 msgid "Wave cleared!"
 msgstr ""
 
-#: scripts/scenario_03_waves.lua:253
+#: scripts/scenario_03_waves.lua:254
 #, lua-format
 msgctxt "shipLog"
 msgid "Wave %d cleared."
