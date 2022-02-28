@@ -80,6 +80,5 @@ for script in glob.glob("scripts/**/*.lua", recursive=True):
     else:
         update_other_languages(output)
         print("Done %s" % (script))
-    print(info)
 
 update_other_languages("resources/locale/main.en.po")
