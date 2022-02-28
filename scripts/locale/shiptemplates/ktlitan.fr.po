@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2022-02-26 00:15+0100\n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: scripts/shiptemplates/ktlitan.lua:2
+msgctxt "ship"
+msgid "Ktlitan Fighter"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:9
+msgctxt "ship"
+msgid "Ktlitan Breaker"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:19
+msgctxt "ship"
+msgid "Ktlitan Worker"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:26
+msgctxt "ship"
+msgid "Ktlitan Drone"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:32
+msgctxt "ship"
+msgid "Ktlitan Feeder"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:42
+msgctxt "ship"
+msgid "Ktlitan Scout"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:48
+msgctxt "ship"
+msgid "Ktlitan Destroyer"
+msgstr ""
+#: scripts/shiptemplates/ktlitan.lua:59
+msgctxt "ship"
+msgid "Ktlitan Queen"
+msgstr ""

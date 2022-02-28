@@ -11,11 +11,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
-
 # Scenario name
 msgid "Birth of the Atlantis"
 msgstr "Die Geburt der Atlantis"
-
 # Scenario description
 #, fuzzy
 msgid ""
@@ -31,14 +29,12 @@ msgstr ""
 "sowie eine erste Mission durchführen. Dieses Szenario ist auf ein "
 "Spielerschiff beschränkt: Die Atlantis... \n"
 "Atlantis-1."
-
 #: scripts/scenario_08_atlantis.lua:158 scripts/scenario_08_atlantis.lua:174
 #: scripts/scenario_08_atlantis.lua:178
 #, fuzzy
 msgctxt "scienceDescription-artifact"
 msgid "An odd object floating in space."
 msgstr "Ein seltsames Objekt, das im Weltraum schwebt."
-
 #: scripts/scenario_08_atlantis.lua:160
 #, fuzzy, lua-format
 msgctxt "scienceDescription-artifact"
@@ -56,7 +52,6 @@ msgstr ""
 "Schwerkraftstörung: %i\n"
 "Ionische Phasenverschiebung: %i\n"
 "Doppler-Instabilität: %i"
-
 #: scripts/scenario_08_atlantis.lua:174 scripts/scenario_08_atlantis.lua:178
 #, fuzzy
 msgctxt "scienceDescription-artifact"
@@ -66,7 +61,6 @@ msgid ""
 msgstr ""
 "Dieses Objekt scheint inaktiv zu sein und keine Messwerte an Ihre Sensoren "
 "zu liefern. Das eigentliche Objekt muss sich irgendwo anders befinden."
-
 #: scripts/scenario_08_atlantis.lua:320
 #, fuzzy
 msgctxt "station-incCall"
@@ -93,7 +87,6 @@ msgstr ""
 "Informieren Sie zunächst  das Personal im Maschinenraum, das alle Systeme "
 "auf 100 % hochfahren sollen, da Sie sich derzeit im ausgeschalteten Zustand "
 "befinden."
-
 #: scripts/scenario_08_atlantis.lua:341
 #, fuzzy
 msgctxt "station-incCall"
@@ -108,7 +101,6 @@ msgstr ""
 "\n"
 "Gehen Sie zu Sektor K6, wo F-1 Raketenvorräte abgeworfen hat. Sammeln Sie "
 "sie ein, um sich mit Waffen einzudecken."
-
 #: scripts/scenario_08_atlantis.lua:359
 #, fuzzy
 msgctxt "station-incCall"
@@ -130,7 +122,6 @@ msgstr ""
 "\n"
 "Teilen Sie dem Wissenschaftspersonal mit, dass die Schiffe Dummy-1 und "
 "Dummy-2 gescannt werden sollen, um sie richtig zu identifizieren."
-
 #: scripts/scenario_08_atlantis.lua:378
 #, fuzzy
 msgctxt "station-incCall"
@@ -152,7 +143,6 @@ msgstr ""
 "\n"
 "Die Schilde von Dummy-2 sind so konfiguriert, dass Ihre Strahlenwaffen sie "
 "nicht durchdringen können."
-
 #: scripts/scenario_08_atlantis.lua:400
 #, fuzzy
 msgctxt "station-incCall"
@@ -168,13 +158,11 @@ msgstr ""
 "\n"
 "Wenn Sie bereit sind, Ihre erste Mission anzutreten, kontaktieren Sie uns. "
 "Sie können auch an Supply-6 andocken, um Nachschub zu erhalten."
-
 #: scripts/scenario_08_atlantis.lua:415
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
 msgid "Hold on tight, heading for sector B20."
 msgstr "Bereiten Sie sich vor, wir setzen Kurs zum Sektor B20."
-
 #: scripts/scenario_08_atlantis.lua:419
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -198,7 +186,6 @@ msgstr ""
 "\n"
 "Melden Sie sich, wenn Sie die Quelle der merkwürdigen Sensorwerte gefunden "
 "haben."
-
 #: scripts/scenario_08_atlantis.lua:450
 msgctxt "artifact-comms"
 msgid ""
@@ -206,7 +193,6 @@ msgid ""
 "It would be good to get some more reading a bit closer, as the nebula causes "
 "our sensor "
 msgstr ""
-
 #: scripts/scenario_08_atlantis.lua:461
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -222,7 +208,6 @@ msgstr ""
 "Machen Sie, dass Sie da wegkommen.\n"
 "\n"
 "Schnell."
-
 #: scripts/scenario_08_atlantis.lua:489
 #, fuzzy
 msgctxt "station-incCall"
@@ -240,7 +225,6 @@ msgstr ""
 "HINTER der Verteidigungslinie der Kraylor liegt.\n"
 "\n"
 "Greifen Sie die Kraylor NICHT an. Ich wiederhole: NICHT ANGREIFEN."
-
 #: scripts/scenario_08_atlantis.lua:506
 #, fuzzy
 msgctxt "station-incCall"
@@ -258,7 +242,6 @@ msgstr ""
 "\n"
 "Versuchen Sie, in den Sektor zu5 zu gelangen. Wir schicken JC88, um Sie da "
 "rauszuholen."
-
 #: scripts/scenario_08_atlantis.lua:515
 #, fuzzy
 msgctxt "station-incCall"
@@ -279,13 +262,11 @@ msgstr ""
 "Suchen Sie nach einer Lücke in der Kraylor-Verteidigung und versuchen Sie "
 "dann, in den Sektor zu5 zu gelangen. Wir schicken JC88, um euch da "
 "rauszuholen."
-
 #: scripts/scenario_08_atlantis.lua:529 scripts/scenario_08_atlantis.lua:614
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
 msgid "Hold on tight, heading for Shipyard-Gamma."
 msgstr "Festhalten, bitte! Sprung nach Shipyard-Gamma wird eingeleitet."
-
 #: scripts/scenario_08_atlantis.lua:533
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -299,7 +280,6 @@ msgstr ""
 "\n"
 "Docken Sie bei Supply-6 an, um aufzuladen und die Vorräte aufzufüllen, und "
 "melden Sie sich dann bei Shipyard-Gamma für Ihren Missionsbericht."
-
 #: scripts/scenario_08_atlantis.lua:551
 #, fuzzy
 msgctxt "station-incCall"
@@ -346,7 +326,6 @@ msgstr ""
 "\n"
 "Greifen Sie jedoch NICHT direkt eine der Kraylor-Basen an. Ihr Schiff ist "
 "nicht für einen qualifizierten Angriff ausgerüstet."
-
 #: scripts/scenario_08_atlantis.lua:576
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -354,7 +333,6 @@ msgid "Hold on tight, heading for Kraylor defense line."
 msgstr ""
 "Festhalten, bitte! Sprung in Richtung Verteidigungslinie der Kraylor wird "
 "eingeleitet."
-
 #: scripts/scenario_08_atlantis.lua:580
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -368,7 +346,6 @@ msgstr ""
 "auszuschalten, die Ladung an sich zu nehmen und dann bei uns anzudocken.\n"
 "\n"
 "Rechnen Sie mit heftiger Gegenwehr, sobald Sie den Transporter angreifen."
-
 #: scripts/scenario_08_atlantis.lua:606
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -378,7 +355,6 @@ msgid ""
 msgstr ""
 "Kehren Sie SOFORT zum Träger zurück. Die gesamte Kraylor-Flotte ist hinter "
 "Ihnen her. Was auch immer Sie eingesammelt haben, muss wertvoll sein."
-
 #: scripts/scenario_08_atlantis.lua:618
 #, fuzzy
 msgctxt "station-incCall"
@@ -392,7 +368,6 @@ msgstr ""
 "hochverschlüsselte Dokumente transportiert.\n"
 "\n"
 "Docken Sie an und wir versuchen, sie zu entschlüsseln."
-
 #: scripts/scenario_08_atlantis.lua:638
 #, fuzzy
 msgctxt "station-incCall"
@@ -408,7 +383,6 @@ msgstr ""
 "\n"
 "Es wird einige Zeit dauern, sie zu entschlüsseln, aber wir sollten "
 "erfolgreich sein."
-
 #: scripts/scenario_08_atlantis.lua:653
 #, fuzzy
 msgctxt "station-incCall"
@@ -431,7 +405,6 @@ msgstr ""
 "Dazu sind offenbar Teilchen mit negativer Masse nötig. Wir arbeiten daran, "
 "mehr Informationen aus diesen Dokumenten zu bekommen. Sie sind ein "
 "ziemliches Durcheinander."
-
 #: scripts/scenario_08_atlantis.lua:671
 #, fuzzy
 msgctxt "station-incCall"
@@ -461,7 +434,6 @@ msgstr ""
 "diesen Riss schickten.\n"
 "\n"
 "Wir werden Sie mit weiteren Informationen auf dem Laufenden halten."
-
 #: scripts/scenario_08_atlantis.lua:691
 #, fuzzy
 msgctxt "station-incCall"
@@ -488,7 +460,6 @@ msgstr ""
 "verschlüsselt worden sein, denn sie gehen reden von Entfernungen von 2000U, "
 "und gehen dann über zur Erwähnung einer undurchfürbar großen Anzahl von "
 "Truppen und Raketenlagern."
-
 #: scripts/scenario_08_atlantis.lua:709
 #, fuzzy
 msgctxt "station-incCall"
@@ -512,7 +483,6 @@ msgstr ""
 "Die Technologie hinter dem Wurmloch-Sprungantrieb ist zwar nicht stabil, "
 "aber die Kraylor sind rücksichtslos genug, dies zu tun, um sich einen "
 "enormen taktischen Vorteil zu verschaffen."
-
 #: scripts/scenario_08_atlantis.lua:724
 #, fuzzy
 msgctxt "station-incCall"
@@ -530,25 +500,21 @@ msgstr ""
 "\n"
 "Alle an Deck! Besetzen Sie alle Gefechtsstationen und evakuieren Sie alles "
 "nicht benötigte Personal! Retten Sie, was Sie können!"
-
 #: scripts/scenario_08_atlantis.lua:739
 #, fuzzy
 msgctxt "msgMainscreen"
 msgid "Bonus points for destroying the battlestation!"
 msgstr "Bonuspunkte für die Zerstörung der Kampfstation!"
-
 #: scripts/scenario_08_atlantis.lua:777
 #, fuzzy
 msgctxt "station-comms"
 msgid "Atlantis-1, are you ready for your first mission?"
 msgstr "Atlantis-1, sind Sie bereit für Ihre erste Mission?"
-
 #: scripts/scenario_08_atlantis.lua:779
 #, fuzzy
 msgctxt "station-comms"
 msgid "Yes."
 msgstr "Ja."
-
 #: scripts/scenario_08_atlantis.lua:781
 #, fuzzy
 msgctxt "station-comms"
@@ -568,19 +534,16 @@ msgstr ""
 "daher haben wir den Sprungträger JC-88 beauftragt, Sie dorthin zu bringen.\n"
 "\n"
 "Docken Sie an JC-88 an und der Sprungträger wird die Reise erledigen."
-
 #: scripts/scenario_08_atlantis.lua:790
 #, fuzzy
 msgctxt "station-comms"
 msgid "No."
 msgstr "Nein."
-
 #: scripts/scenario_08_atlantis.lua:792
 #, fuzzy
 msgctxt "station-comms"
 msgid "Then hail us again when you are ready."
 msgstr "Rufen Sie uns dann wieder, wenn Sie bereit sind."
-
 #: scripts/scenario_08_atlantis.lua:802
 #, fuzzy
 msgctxt "station-comms"
@@ -600,7 +563,6 @@ msgstr ""
 "\n"
 "Wir arbeiten die Daten durch und werden Sie kontaktieren, sobald wir mehr "
 "Details haben."
-
 #: scripts/scenario_08_atlantis.lua:812
 #, fuzzy
 msgctxt "station-comms"
@@ -612,26 +574,22 @@ msgstr ""
 "Guten Tag, Atlantis-1.\n"
 "\n"
 "Bitte machen Sie mit Ihrer derzeitigen Aufgabe weiter."
-
 #: scripts/scenario_08_atlantis.lua:826
 #, fuzzy
 msgctxt "JumpCarrier-comms"
 msgid "Jump carrier JC-88 reporting. All system nominal."
 msgstr "Hier ist Sprungträger JC-88. Alle Systeme normal."
-
 #: scripts/scenario_08_atlantis.lua:830
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "Atlantis-1, did you find the source of the odd sensor readings?"
 msgstr ""
 "Atlantis-1, haben Sie die Quelle der seltsamen Sensormesswerte gefunden?"
-
 #: scripts/scenario_08_atlantis.lua:832
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "Yes."
 msgstr "Ja."
-
 #: scripts/scenario_08_atlantis.lua:834
 #, fuzzy
 msgctxt "artifact-comms"
@@ -645,25 +603,21 @@ msgstr ""
 "Messwerte mitteilen?\n"
 "\n"
 "Erstens: Wie hoch ist der Wert der Betastrahlung?"
-
 #: scripts/scenario_08_atlantis.lua:841
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "Next, what is the ionic phase shift reading?"
 msgstr "Wie lautet nun der Wert der ionischen Phasenverschiebung?"
-
 #: scripts/scenario_08_atlantis.lua:846
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "Next, what is the gravity disruption reading?"
 msgstr "Weiter, wie hoch ist der Wert der Gravitationsstörung?"
-
 #: scripts/scenario_08_atlantis.lua:851
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "Finally, what is the doppler instability reading?"
 msgstr "Und schließlich: Wie hoch ist die Doppler-Instabilität?"
-
 #: scripts/scenario_08_atlantis.lua:858
 #, fuzzy
 msgctxt "artifact-comms"
@@ -676,7 +630,6 @@ msgstr ""
 "\n"
 "Diese Werte zeigen an, dass es sehr instabil ist! Bitte entfernen Sie sich "
 "von diesem Objekt."
-
 #: scripts/scenario_08_atlantis.lua:863
 #, fuzzy
 msgctxt "artifact-comms"
@@ -690,7 +643,6 @@ msgstr ""
 "\n"
 "Können Sie näher an das Objekt herangehen, um zu sehen, ob Sie die Werte "
 "verbessern können? Der Nebel könnte Ihre Sensoren stören."
-
 #: scripts/scenario_08_atlantis.lua:869
 #, fuzzy
 msgctxt "artifact-comms"
@@ -700,19 +652,16 @@ msgid ""
 msgstr ""
 "Können Sie Ihre Messwerte überprüfen und zurückmelden? Diese Zahlen stimmen "
 "überhaupt nicht mit unseren Messwerten überein."
-
 #: scripts/scenario_08_atlantis.lua:886
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "No."
 msgstr "Nein."
-
 #: scripts/scenario_08_atlantis.lua:888
 #, fuzzy
 msgctxt "artifact-comms"
 msgid "Then continue looking for it."
 msgstr "Dann suchen Sie weiter."
-
 #: scripts/scenario_08_atlantis.lua:910
 #, fuzzy, lua-format
 msgctxt "station-incCall"
@@ -724,7 +673,6 @@ msgstr ""
 "(Die Übertragung ist mit statischen Störgeräuschen belastet).\n"
 "\n"
 "%s"
-
 #: scripts/scenario_08_atlantis.lua:944
 #, fuzzy
 msgctxt "JumpCarrier-incCall"
@@ -737,7 +685,6 @@ msgstr ""
 "\n"
 "Das passiert manchmal. Ich bin auf dem Weg, damit wir es noch einmal "
 "versuchen können."
-
 #: scripts/scenario_08_atlantis.lua:963
 #, fuzzy
 msgctxt "shipEnemy-incCall"

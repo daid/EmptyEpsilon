@@ -11,11 +11,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 # Scenario name
 msgid "Beacon of Light series"
 msgstr "Beacon of Light"
-
 # Scenario description
 #, fuzzy
 msgid ""
@@ -32,7 +30,6 @@ msgstr ""
 "Attacken zu. Ein Diplomat wird vermisst, und eure erste Mission ist es, in "
 "zu finden. Dieses Szenario ist begrenzt auf ein einzelnes Spielerschiff: Die "
 "Atlantis Epsilon."
-
 #: scripts/scenario_05_beacon.lua:69
 #, fuzzy
 msgctxt "goal-incCall"
@@ -56,17 +53,14 @@ msgstr ""
 "Den letzen Kontakt hatten wir bevor RT-4 den Nebel in Sektor G5 betreten "
 "hat. Der Nebel blockiert unsere Langstreckenscanner, daher bitten wir Sie, "
 "nachzuforschen und, falls möglich, RT-4 zu helfen."
-
 #: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
 msgctxt "scienceDescription-lifepod"
 msgid "Life Pod"
 msgstr ""
-
 #: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
 msgctxt "scienceDescription-lifepod"
 msgid "J. J. Johnson in Life Pod"
 msgstr ""
-
 #: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
 #, fuzzy
 msgctxt "incCall"
@@ -84,13 +78,11 @@ msgstr ""
 "Lebenserhaltung offenbar beschädigt, sie haben also nicht viel Zeit. Bitte "
 "bergen Sie die Kapsel um zu sehen, ob Johnson überlebt hat. Sein Tod wäre "
 "ein großer Rückschlag für die Verhandlungen in dieser Region."
-
 #: scripts/scenario_05_beacon.lua:96
 #, fuzzy
 msgctxt "incCall"
 msgid "And destroy those Exuari scum while you are at it!"
 msgstr "Und zerstören Sie diese verdammten Exuari wenn sie dabei sind!"
-
 #: scripts/scenario_05_beacon.lua:123
 #, fuzzy
 msgctxt "incCall"
@@ -106,7 +98,6 @@ msgstr ""
 "\n"
 "Bitte bringen Sie seine Leiche zurück nach Research-1. Wir werden "
 "Vorbereitungen treffen, damit Sie seine Mission übernehmen können."
-
 #: scripts/scenario_05_beacon.lua:133
 #, fuzzy
 msgctxt "incCall"
@@ -121,7 +112,6 @@ msgstr ""
 "angelangt ist. Gute Arbeit!\n"
 "\n"
 "Bitte bringen sie den Botschafter zur Raumstation Orion-5 in Sektor G3."
-
 #: scripts/scenario_05_beacon.lua:146
 #, fuzzy
 msgctxt "incCall"
@@ -131,7 +121,6 @@ msgid ""
 msgstr ""
 "J.J.Johnson dankt Ihnen für seine Rettung und erzählt Ihnen von seiner "
 "Mission.\n"
-
 #: scripts/scenario_05_beacon.lua:148 scripts/scenario_05_beacon.lua:161
 #, fuzzy
 msgctxt "incCall"
@@ -162,7 +151,6 @@ msgstr ""
 "Um unsere friedlichen Absichten zu unterstreichen, werden wir Nukes und EMPs "
 "aus ihrer Waffenkammer entfernen lassen. Sie bekommen diese zurück, sobald  "
 "Sie die Kriminellen überstellt haben."
-
 #: scripts/scenario_05_beacon.lua:159
 #, fuzzy
 msgctxt "incCall"
@@ -172,7 +160,6 @@ msgid ""
 msgstr ""
 "J.J.Johnsons Nachricht an Orion-5 ist klar:\n"
 "\n"
-
 #: scripts/scenario_05_beacon.lua:185
 #, fuzzy
 msgctxt "incCall"
@@ -184,7 +171,6 @@ msgstr ""
 "Missionsdetails an Orion-5 senden.\n"
 "\n"
 "Begeben Sie sich zu Orion-5 um die Einzelheiten seiner Mission zu erfahren."
-
 #: scripts/scenario_05_beacon.lua:195
 #, fuzzy
 msgctxt "incCall"
@@ -209,17 +195,14 @@ msgstr ""
 "Sie fragen sich, wie freiwillig dieser Austausch tatsächlich ist...\n"
 "\n"
 "Kehren sie zu Orion-5 zurück um die Kriminellen auszuliefern."
-
 #: scripts/scenario_05_beacon.lua:210
 msgctxt "scienceDescription-artifact"
 msgid "High powered field generator"
 msgstr ""
-
 #: scripts/scenario_05_beacon.lua:210
 msgctxt "scienceDescription-artifact"
 msgid "Warp/Jump Jammer. Radius visible if jammer visible"
 msgstr ""
-
 #: scripts/scenario_05_beacon.lua:218
 #, fuzzy
 msgctxt "incCall"
@@ -235,7 +218,6 @@ msgstr ""
 "Ihr Übersetzer hat Schwierigkeiten mit dieser Nachricht. Aber letzten Endes "
 "läuft es wohl darauf hinaus, dass der feindliche Captain sie tot sehen will, "
 "und dass Ihr Tod ihm großen Spaß bereiten wird."
-
 #: scripts/scenario_05_beacon.lua:239
 #, fuzzy
 msgctxt "incCall"
@@ -255,13 +237,11 @@ msgstr ""
 "Transportconvoy nach Research-1 wird sich eine Exuari-Todesschwadron an Bord "
 "eines der Schiffe verstecken. Der Convoy befindet sich derzeit noch in "
 "Sektor D7, begeben Sie sich dorthin, um den Exuari-Transport auszumachen."
-
 #: scripts/scenario_05_beacon.lua:243 scripts/scenario_05_beacon.lua:270
 #, fuzzy
 msgctxt "incCall"
 msgid "We have refitted your nukes and EMPs."
 msgstr "Sie haben außerdem wieder ihre Nukes und EMPs zurück erhalten."
-
 #: scripts/scenario_05_beacon.lua:243
 #, fuzzy
 msgctxt "incCall"
@@ -269,13 +249,11 @@ msgid "Awesome job taking out the Exuari without those."
 msgstr ""
 "Hervorragende Leistung, wie Sie die Exuari ohne diese Waffen ausschalten "
 "konnten."
-
 #: scripts/scenario_05_beacon.lua:270
 #, fuzzy
 msgctxt "incCall"
 msgid "Now to get those Exuari!"
 msgstr "Finden Sie nun diese Exuari!"
-
 #: scripts/scenario_05_beacon.lua:280
 #, fuzzy
 msgctxt "incCall"
@@ -289,7 +267,6 @@ msgstr ""
 "aufgespürt haben, zerstören sie ihn nicht.\n"
 "\n"
 "Zielen Sie auf seinen Impulsantrieb um ihn aufzuhalten."
-
 #: scripts/scenario_05_beacon.lua:299 scripts/scenario_05_beacon.lua:316
 #: scripts/scenario_05_beacon.lua:340
 #, fuzzy
@@ -297,7 +274,6 @@ msgctxt "incCall"
 msgid "What the hell? I told you NOT to destroy the transport."
 msgstr ""
 "Was zur Hölle? Ich habe ihnen befohlen den Frachter NICHT zu zerstören."
-
 #: scripts/scenario_05_beacon.lua:305
 #, fuzzy
 msgctxt "incCall"
@@ -306,7 +282,6 @@ msgid ""
 msgstr ""
 "Transport identifiziert, schalten sie nun den Impulsantireb aus, so dass wir "
 "an Bord können."
-
 #: scripts/scenario_05_beacon.lua:322
 #, fuzzy
 msgctxt "incCall"
@@ -319,7 +294,6 @@ msgstr ""
 "losschicken. Verteidigen Sie den Transport, die Exuari werden ihn "
 "höchstwahrscheinlich eher zerstören, als ihn in unsere Hände fallen zu "
 "lassen."
-
 #: scripts/scenario_05_beacon.lua:371
 #, fuzzy
 msgctxt "incCall"
@@ -334,7 +308,6 @@ msgstr ""
 "\"Wir konnten die Exuari erfolgreich gefangen nehmen und transoportieren sie "
 "nun nach Orion-5. Bitte begeben sie sich ebenfalls nach Orion-5 zur "
 "Einsatzbesprechung.\""
-
 #: scripts/scenario_05_beacon.lua:383
 #, fuzzy
 msgctxt "incCall"

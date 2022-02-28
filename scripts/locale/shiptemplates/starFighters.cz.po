@@ -1,0 +1,184 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EmptyEpsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: hemmond\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+#: scripts/shiptemplates/starFighters.lua:13
+msgctxt "ship"
+msgid "MT52 Hornet"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starFighters.lua:65
+#: scripts/shiptemplates/starFighters.lua:121
+msgctxt "class"
+msgid "Starfighter"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:13
+msgctxt "subclass"
+msgid "Interceptor"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:15
+msgid ""
+"The MT52 Hornet is a basic interceptor found in many corners of the galaxy. "
+"It's easy to find spare parts for MT52s, not only because they are produced "
+"in large numbers, but also because they suffer high losses in combat."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:23
+msgctxt "ship"
+msgid "MU52 Hornet"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:25
+msgid ""
+"The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
+"are slightly improved over the MT52 model."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:31
+msgctxt "playerShip"
+msgid "MP52 Hornet"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:32
+msgid ""
+"The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
+"nearly twice the hull strength, nearly three times the shielding, better "
+"acceleration, impulse boosters, and a second laser cannon."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:65
+msgctxt "ship"
+msgid "Adder MK5"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:65
+msgctxt "subclass"
+msgid "Gunship"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:67
+msgid ""
+"The Adder line's fifth iteration proved to be a great success among pirates "
+"and law officers alike. It is cheap, fast, and easy to maintain, and it "
+"packs a decent punch."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:78
+msgctxt "ship"
+msgid "Adder MK4"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:80
+msgid ""
+"The mark 4 Adder is a rare sight these days due to the success its "
+"successor, the mark 5 Adder, which often replaces this model. Its similar "
+"hull, however, means careless buyers are sometimes conned into buying mark 4 "
+"models disguised as the mark 5."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:88
+msgctxt "ship"
+msgid "Adder MK3"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:89
+msgid ""
+"The Adder MK3 is one of the first of the Adder line to meet with some "
+"success. A large number of them were made before the manufacturer went "
+"through its first bankruptcy. There has been a recent surge of purchases of "
+"the Adder MK3 in the secondary market due to its low price and its "
+"similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
+"has weaker shields and hull, but a faster turn speed"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:94
+msgctxt "ship"
+msgid "Adder MK6"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:96
+msgid ""
+"The mark 6 Adder is a small upgrade compared to the highly successful mark 5 "
+"model. Since people still prefer the more familiar and reliable mark 5, the "
+"mark 6 has not seen the same level of success."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:100
+msgctxt "ship"
+msgid "Adder MK7"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:102
+msgid ""
+"The release of the Adder Mark 7 sent the manufacturer into a second "
+"bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
+"stronger shields and longer beams, but the popularity of their previous "
+"models, especially the Mark 5, prevented them from raising the purchase "
+"price enough to recoup the development and manufacturing costs of the Mark 7"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:106
+msgctxt "ship"
+msgid "Adder MK8"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:108
+msgid ""
+"New management after bankruptcy revisited their most popular Adder Mark 5 "
+"model with improvements: stronger shields, longer and stronger beams and a "
+"faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the "
+"practical but nostalgic buyer who must purchase replacements for their Adder "
+"Mark 5 fleet"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:113
+msgctxt "ship"
+msgid "Adder MK9"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:115
+msgid ""
+"Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the "
+"Adder Mark 5 as a base, the designers provided stronger shields, stronger, "
+"longer and faster beams, faster turn speed and for that extra special touch, "
+"two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
+"9.'"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:121
+msgctxt "ship"
+msgid "WX-Lindworm"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:121
+msgctxt "subclass"
+msgid "Bomber"
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:123
+msgid ""
+"The WX-Lindworm, or \"Worm\" as it's often called, is a bomber-class "
+"starfighter. While one of the least-shielded starfighters in active duty, "
+"the Worm's two launchers can pack quite a punch. Its goal is to fly in, "
+"destroy its target, and fly out or be destroyed."
+msgstr ""
+#: scripts/shiptemplates/starFighters.lua:136
+msgctxt "playerShip"
+msgid "ZX-Lindworm"
+msgstr ""
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# Pozemske Hvezdne Namornictvo
+# Spojene Hvezdne Namornictvo
+# Nebeska Sopojena Flotila

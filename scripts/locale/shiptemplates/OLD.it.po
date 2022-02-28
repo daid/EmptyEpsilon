@@ -1,0 +1,576 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+#: scripts/shiptemplates/OLD.lua:6
+#, fuzzy
+msgctxt "playerShip"
+msgid "Player Cruiser"
+msgstr "Incrociatore (Giocatore)"
+#: scripts/shiptemplates/OLD.lua:63
+#, fuzzy
+msgctxt "playerShip"
+msgid "Player Missile Cr."
+msgstr "Incr. Missilistico (Giocatore)"
+#: scripts/shiptemplates/OLD.lua:118
+#, fuzzy
+msgctxt "playerShip"
+msgid "Player Fighter"
+msgstr "Caccia (Giocatore)"
+#: scripts/shiptemplates/OLD.lua:159
+#, fuzzy
+msgctxt "ship"
+msgid "Tug"
+msgstr "Rimorchiatore"
+#: scripts/shiptemplates/OLD.lua:168
+msgid ""
+"The tugboat is a reliable, but small and un-armed transport ship. Due to "
+"it's low cost, it is a favourite ship to teach the ropes to fledgeling "
+"captains, without risking friendly fire."
+msgstr ""
+"Il rimorchiatore è una nave da trasporto affidabile ma piccola e non armata. "
+"Grazie al suo basso costo è una delle navi preferite per insegnare il "
+"mestiere ai capitani alle prime armi senza rischiare il fuoco amico."
+#: scripts/shiptemplates/OLD.lua:176
+#, fuzzy
+msgctxt "playerShip"
+msgid "Nautilus"
+msgstr "Nautilus"
+#: scripts/shiptemplates/OLD.lua:176 scripts/shiptemplates/OLD.lua:239
+#: scripts/shiptemplates/OLD.lua:264 scripts/shiptemplates/OLD.lua:275
+#: scripts/shiptemplates/OLD.lua:387 scripts/shiptemplates/OLD.lua:474
+#, fuzzy
+msgctxt "class"
+msgid "Frigate"
+msgstr "Fregata"
+#: scripts/shiptemplates/OLD.lua:176
+msgctxt "subclass"
+msgid "Mine Layer"
+msgstr ""
+#: scripts/shiptemplates/OLD.lua:177
+msgid "Small mine laying vessel with minimal armament, shields and hull"
+msgstr "Piccola nave posa mine con armamento minimo, scudi e scafo"
+#: scripts/shiptemplates/OLD.lua:223
+#, fuzzy
+msgctxt "ship"
+msgid "Fighter"
+msgstr "Caccia"
+#: scripts/shiptemplates/OLD.lua:226
+msgid ""
+"Fighters are quick agile ships that do not do a lot of damage, but usually "
+"come in larger groups. They are easy to take out, but should not be "
+"underestimated."
+msgstr ""
+"I caccia sono navi veloci e agili che non causano molti danni ma di solito "
+"vengono utilizzate in gruppo. Sono facili da distruggere ma non vanno "
+"sottovalutati."
+#: scripts/shiptemplates/OLD.lua:239
+#, fuzzy
+msgctxt "ship"
+msgid "Karnack"
+msgstr "Karnack"
+#: scripts/shiptemplates/OLD.lua:239
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser"
+msgstr "Incrociatore"
+#: scripts/shiptemplates/OLD.lua:241
+msgid ""
+"Fabricated by: Repulse shipyards. Due to it's versatility, this ship has "
+"found wide adaptation in most factions. Most factions have extensively "
+"retrofitted these ships to suit their combat doctrines. Because it's an "
+"older model, most factions have been selling stripped versions. This "
+"practice has led to this ship becoming an all time favorite with smugglers "
+"and other civilian parties. However, they have used it's adaptable nature to "
+"re-fit them with (illegal) weaponry."
+msgstr ""
+"Fabbricato dai cantieri Repulse. Grazie alla sua versatilità, questa nave ha "
+"trovato ampia adozione in quasi tutte le fazioni. Quasi tutte le fazioni "
+"hanno modificato ampiamente queste navi per adattarle alle loro dottrine di "
+"combattimento. Trattandosi di un modello vecchio, la maggior parte delle "
+"fazioni vendono versioni spogliate. Questa pratica ha portato questa nave a "
+"diventare una delle preferite di sempre dai contrabbandieri e da altri "
+"civili. Tuttavia essi usano la sua natura adattabile per riequipaggiarla con "
+"armi (illegali)."
+#: scripts/shiptemplates/OLD.lua:253
+msgctxt "ship"
+msgid "Karnack MK2"
+msgstr "Karnack MK2"
+#: scripts/shiptemplates/OLD.lua:254
+msgid ""
+"Fabricated by: Repulse shipyards. The successor to the widely successful "
+"mark I Karnack cruiser. This ship has several notable improvements over the "
+"original ship, including better armor, slightly improved weaponry and "
+"customization by the shipyards. The latter improvement was the most "
+"requested feature by several factions once they realized that their old "
+"surplus mark I ships were used for less savory purposes."
+msgstr ""
+"Fabbricata dai cantieri Repulse. Il successore dell'incrociatore di grande "
+"successo Karnack Mark 1. Questa nave ha diversi notevoli miglioramenti "
+"rispetto alla nave originale, tra cui una migliore armatura, armamento "
+"leggermente migliorato e personalizzazione da parte dei cantieri navali. "
+"Quest'ultimo miglioramento è stata la caratteristica più richiesta da "
+"diverse fazioni una volta realizzato che le loro vecchie navi Mark 1 in "
+"eccedenza erano usate per scopi meno nobili."
+#: scripts/shiptemplates/OLD.lua:264
+#, fuzzy
+msgctxt "ship"
+msgid "Missile Cruiser"
+msgstr "Incrociatore Missilistico"
+#: scripts/shiptemplates/OLD.lua:264
+#, fuzzy
+msgctxt "subclass"
+msgid "Cruiser: Missile"
+msgstr "Incrociatore: Lanciamissili"
+#: scripts/shiptemplates/OLD.lua:266
+msgid ""
+"Polaris missile cruiser mark I. Fabricated by: Repulse shipyards. This "
+"missile cruiser is a long range missile firing platform. It cannot handle a "
+"lot of damage, but can do a lot of damage if not dealt with properly."
+msgstr ""
+"Incrociatore missilistico Polaris Mark 1. Fabbricato dai cantieri Repulse. "
+"Questo incrociatore missilistico è una piattaforma lanciamissili a lungo "
+"raggio. Non può sopportare molti danni ma può causarne molti se non "
+"affrontato correttamente."
+#: scripts/shiptemplates/OLD.lua:275
+#, fuzzy
+msgctxt "ship"
+msgid "Gunship"
+msgstr "Cannoniera"
+#: scripts/shiptemplates/OLD.lua:275
+msgctxt "subclass"
+msgid "Gunship"
+msgstr "Cannoniera"
+#: scripts/shiptemplates/OLD.lua:277
+msgid ""
+"The gunship is a ship equipped with a homing missile tube to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself."
+msgstr ""
+"La Cannoniera è una nave dotata di un tubo missilistico autoguidato per "
+"infliggere il danno iniziale e poi eliminare il nemico con due cannoni a "
+"raggi frontali. È progettato per eliminare rapidamente nemici più deboli di "
+"se stessa."
+#: scripts/shiptemplates/OLD.lua:288
+#, fuzzy
+msgctxt "ship"
+msgid "Adv. Gunship"
+msgstr "Cannoniera Avanzata"
+#: scripts/shiptemplates/OLD.lua:289
+msgid ""
+"The advanced gunship is a ship equipped with 2 homing missiles to do initial "
+"damage and then take out the enemy with 2 front firing beams. It's designed "
+"to quickly take out the enemies weaker then itself."
+msgstr ""
+"La Cannoniera Avanzata è una nave equipaggiata con 2 tubi missilistici "
+"autoguidati per infliggere il danno iniziale e poi abbattere il nemico con 2 "
+"cannoni a raggi frontali. È progettata per eliminare rapidamente nemici più "
+"deboli di se stessa."
+#: scripts/shiptemplates/OLD.lua:293
+#, fuzzy
+msgctxt "ship"
+msgid "Strikeship"
+msgstr "Assaltatore"
+#: scripts/shiptemplates/OLD.lua:293 scripts/shiptemplates/OLD.lua:305
+#: scripts/shiptemplates/OLD.lua:387
+#, fuzzy
+msgctxt "class"
+msgid "Starfighter"
+msgstr "Caccia stellare"
+#: scripts/shiptemplates/OLD.lua:293
+#, fuzzy
+msgctxt "subclass"
+msgid "Strike"
+msgstr "Attacco"
+#: scripts/shiptemplates/OLD.lua:295
+msgid ""
+"The Strikeship is a warp-drive equipped fighter build for quick strikes, "
+"it's fast, it's agile, but does not do an extreme amount of damage, and "
+"lacks in rear shields."
+msgstr ""
+"L'Assaltatore è un caccia equipaggiato con motore a curvatura costruito per "
+"attacchi rapidi, è veloce, agile ma non infligge una estrema quantità di "
+"danni ed è carente di scudi posteriori."
+#: scripts/shiptemplates/OLD.lua:305
+#, fuzzy
+msgctxt "ship"
+msgid "Adv. Striker"
+msgstr "Striker Avanzato"
+#: scripts/shiptemplates/OLD.lua:305
+msgctxt "subclass"
+msgid "Patrol"
+msgstr "Pattugliatore"
+#: scripts/shiptemplates/OLD.lua:307
+msgid ""
+"The Advanced Striker is a jump-drive equipped fighter build for quick "
+"strikes, it's slow but very agile, but does not do an extreme amount of "
+"damage, and lacks in shields. However, due to the jump drive, it's quick to "
+"get into the action."
+msgstr ""
+"Lo Striker Avanzato è un caccia dotato di motore di salto costruito per "
+"attacchi rapidi, è lento ma molto agile, ma non infligge una estrema "
+"quantità di danni ed è carente di scudi. Tuttavia, grazie al motore di "
+"salto, è veloce a entrare in azione."
+#: scripts/shiptemplates/OLD.lua:316
+#, fuzzy
+msgctxt "playerShip"
+msgid "Striker"
+msgstr "Striker"
+#: scripts/shiptemplates/OLD.lua:317
+msgid ""
+"The Striker is the predecessor to the advanced striker, slow but agile, but "
+"does not do an extreme amount of damage, and lacks in shields"
+msgstr ""
+"Lo Striker è il predecessore dello Striker Avanzato, lento ma agile, non "
+"infligge una estrema quantità di danni ed è carente di scudi."
+#: scripts/shiptemplates/OLD.lua:352
+msgctxt "ship"
+msgid "Dreadnought"
+msgstr "Dreadnought"
+#: scripts/shiptemplates/OLD.lua:352 scripts/shiptemplates/OLD.lua:367
+msgctxt "class"
+msgid "Dreadnought"
+msgstr "Dreadnought"
+#: scripts/shiptemplates/OLD.lua:352
+#, fuzzy
+msgctxt "subclass"
+msgid "Assault"
+msgstr "Assalto"
+#: scripts/shiptemplates/OLD.lua:354
+msgid ""
+"The Dreadnought is a flying fortress, it's slow, slow to turn, but packs a "
+"huge amount of beam weapons in the front. Taking it head-on is suicide."
+msgstr ""
+"Il Dreadnought è una fortezza volante. È lenta, lenta a virare, ma racchiude "
+"un'enorme quantità di armi a raggi nella parte anteriore. Affrontarla "
+"frontalmente è un suicidio."
+#: scripts/shiptemplates/OLD.lua:367
+#, fuzzy
+msgctxt "ship"
+msgid "Battlestation"
+msgstr "Stazione da battaglia"
+#: scripts/shiptemplates/OLD.lua:367
+#, fuzzy
+msgctxt "subclass"
+msgid "Battlecruiser"
+msgstr "Incrociatore da battaglia"
+#: scripts/shiptemplates/OLD.lua:369
+#, fuzzy
+msgid ""
+"The battle station is a huge ship with many defensive features. It can be "
+"docked by smaller ships."
+msgstr ""
+"La stazione da battaglia è un'enorme nave con molte caratteristiche "
+"difensive. Vi possono approdare navi più piccole."
+#: scripts/shiptemplates/OLD.lua:387
+#, fuzzy
+msgctxt "class"
+msgid "Corvette"
+msgstr "Corvetta"
+#: scripts/shiptemplates/OLD.lua:390
+msgctxt "playerShip"
+msgid "Ender"
+msgstr ""
+#: scripts/shiptemplates/OLD.lua:459
+#, fuzzy
+msgctxt "ship"
+msgid "Weapons platform"
+msgstr "Piattaforma armata"
+#: scripts/shiptemplates/OLD.lua:461
+msgid ""
+"The weapons-platform is a stationary platform with beam-weapons. It's "
+"extremely slow to turn, but it's beam weapons do a huge amount of damage."
+msgstr ""
+"La piattaforma armata è una piattaforma fissa con armi a raggi. È "
+"estremamente lenta a girare, ma le sue armi a raggi fanno un'enorme quantità "
+"di danni."
+#: scripts/shiptemplates/OLD.lua:474
+#, fuzzy
+msgctxt "ship"
+msgid "Blockade Runner"
+msgstr "Violatore di blocco"
+#: scripts/shiptemplates/OLD.lua:474
+#, fuzzy
+msgctxt "subclass"
+msgid "High Punch"
+msgstr "Alto impatto"
+#: scripts/shiptemplates/OLD.lua:476
+msgid ""
+"Blockade runner is a reasonably fast, high shield, slow on weapons ship "
+"designed to break through defense lines and deliver goods."
+msgstr ""
+"La violatore di blocco è una abbastanza veloce, con scudi potenti, e con "
+"poche armi progettata per sfondare le linee di difesa e consegnare merci."
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# destroyer->incrociatore come hanno fatto per star wars
+# letteralmente sarebbe cacciatorpediniere
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy

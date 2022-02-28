@@ -1,0 +1,217 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: EmptyEpsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: hemmond\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.0\n"
+#: scripts/shiptemplates/exuari.lua:77 scripts/shiptemplates/exuari.lua:90
+#: scripts/shiptemplates/exuari.lua:97 scripts/shiptemplates/exuari.lua:112
+#: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
+#: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
+#: scripts/shiptemplates/exuari.lua:201 scripts/shiptemplates/exuari.lua:221
+#: scripts/shiptemplates/exuari.lua:250 scripts/shiptemplates/exuari.lua:270
+#, fuzzy
+msgctxt "class"
+msgid "Exuari"
+msgstr "Exuari"
+#: scripts/shiptemplates/exuari.lua:77
+msgctxt "subclass"
+msgid "Starfighter - Fighter"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:80
+msgid ""
+"The Exuari fighter 'Dagger' is a single-seated spacecraft, very quick and "
+"agile, that does not do a lot of damage, but usually comes in larger groups. "
+"They are able to dodge most missiles and attack undefended areas of their "
+"enemies ships. However most of the Exuari fighter pilots expect their own "
+"death and do not care much about the enemies weapons ranges. Fighters are "
+"easy to take out, but should not be underestimated."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:90
+msgctxt "subclass"
+msgid "Starfighter - Interceptor"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:92
+msgid ""
+"The Exuari interceptor 'Blade' is a improved fighter, originaly designed to "
+"hunt down rougue fighters. Nowadays Blades are often seen as the first "
+"attack wave of a larger assault, closely followed by Daggers. Blade pilots "
+"are often considered as fearless, but most of them are just consumed by "
+"their instinct for hunting."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:97
+msgctxt "subclass"
+msgid "Starfighter - Light Bomber"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:100
+msgid ""
+"The Exuari light bomber 'Gunner' is a single-seated spacecraft, designed to "
+"circumvent their enemies defense lines and bring its deadly load to slow "
+"moving targets. Gunners are not as agile as other fighters, but still faster "
+"than most capitol ships. A group of Gunners can do a lot of damage to a "
+"single stationary target if not destroyed before their target is inside "
+"their weapons range. Piloting a Gunner is considered to be a recreational "
+"(and often lethal) activity within the Exuari society, so don't expect "
+"experienced pilots."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:112
+msgctxt "subclass"
+msgid "Starfighter - Bomber"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:113
+msgid ""
+"The Exuari bomber 'Shooter' carries two rounds of HVLIs. To keep the vessel "
+"at low costs, it has no automatic missile recharge system, so the single "
+"pilot has to load the second round manually. Shooter pilots tend to stay on "
+"the battlefield, even without ammunition and enjoy death spreading. Due to "
+"it's long reload cycle a Shooter may easily be destroyed between its attack "
+"runs."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:118
+msgctxt "subclass"
+msgid "Starfighter - Heavy Bomber"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:119
+msgid ""
+"The Exuari heavy bomber 'Jagger' carries just a single round of improved "
+"HVLIs. Those are considered to be hull-penetrating and cause multiple times "
+"the damage of Gunner HVLIs."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:124
+msgctxt "subclass"
+msgid "Striker"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:126
+msgid ""
+"The Exuari alpha striker 'Racer' is a warp-drive equipped Figter build for "
+"quick strikes. This spacecraft runs on a small crew and is often used as "
+"scout, interceptor or to perform preemptive attacks. It's fast, it's agile, "
+"but the striker beams do not cause an extreme amount of damage. Like all "
+"strikers, it lacks in rear shields."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:137
+msgid ""
+"The Exuari beta striker 'Hunter' is a warp-drive equipped reinforement "
+"fighter. This spacecraft runs on a small crew and is often sent into battle "
+"to aid other Exuari ships when they engage in combat. It has an extra pair "
+"of striker beams and improved front shields. It's fast, it's agile, and can "
+"clean up what is left of the enemies fleet after an initial strike."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:146
+msgid ""
+"The Exuari gamma striker 'Strike' is a warp-drive equipped tactical bomber "
+"build for quick strikes against strong shielded targets. This spacecraft "
+"runs on a small crew and is equipped with HVLIs and an EMP. It's fast, it's "
+"agile, and can do a great amount of damage in short time."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:154
+msgid ""
+"The Exuari delta striker 'Dash' is a warp-drive equipped endurance bomber "
+"build for prolonged strikes. This spacecraft runs on a small crew and "
+"combines reinforced front shields with a good amount of HVLIs. It's fast, "
+"it's agile, and can take some damage."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
+#: scripts/shiptemplates/exuari.lua:201
+msgctxt "subclass"
+msgid "Frigate"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:168
+msgid ""
+"The Exuari Guard is not impressive, trying to be a alround escort or defense "
+"vessel. It has powering problems, causing the reload cycle of beams and "
+"missiles to take longer than expected. The Guard is equipped with turret "
+"beams and a large stock of different missiles, including homing missiles and "
+"mines."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:187
+msgid ""
+"The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
+"low-damage point-defense turret beams to quickly take out starfighters."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:203
+msgid ""
+"The Exuari Warden is a heavy artillery frigate, it fires bunches of missiles "
+"from forward facing tubes. Only a single point defense turret is present."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:221
+msgctxt "subclass"
+msgid "Artillery"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:223
+msgid ""
+"The Exuari Flash is a special artillery sniper, built to deal a large "
+"amounts of damage quickly and from a distance before escaping. It's a basic "
+"freighter that carries nuclear weapons. Some say, this is what happens to "
+"freighters, when they fall into the hands of the Exuari."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:234
+msgid ""
+"The Exuari Ranger is a special sniper, built to deal large amounts of damage "
+"over a large area and from a distance before escaping. It's a basic frigate "
+"that carries nuclear weapons, even though it's also one of the smallest of "
+"all frigate-class ships."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:242
+msgid ""
+"The Exuari Buster is a special sniper, built to deal a large amount of "
+"damage quickly and from a distance before escaping. It's a basic frigate "
+"that carries nuclear weapons, even though it's also one of the smallest of "
+"all frigate-class ships."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:250
+msgctxt "subclass"
+msgid "Carrier"
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:252
+msgid ""
+"The Exuari 'Ryder' is a large carrier spacecraft with many defensive "
+"features. It can be docked by smaller ships to refuel or carry them. Unlike "
+"a station it is equipped with a slow impulse drive and capable of "
+"interstellar travel. It is used as a habitation for Exuari crews and has a "
+"hangar bay. A commom Exuari assault strategy is to keep a Ryder off the "
+"sensor range of the desired target, while fighters and artillery start from "
+"the carrier."
+msgstr ""
+#: scripts/shiptemplates/exuari.lua:277
+msgid ""
+"The Exuari Fortress is a huge carrier with many defensive features. It can "
+"be docked by smaller ships to refuel or carry them. Unlike a station it is "
+"equipped with a slow impulse drive. The shields of this base carrier are "
+"saied to be undestroyable."
+msgstr ""
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# Pozemske Hvezdne Namornictvo
+# Spojene Hvezdne Namornictvo
+# Nebeska Sopojena Flotila

@@ -13,11 +13,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
 # Scenario name
 msgid "Empty space"
 msgstr "Espace vide"
-
 # Scenario description
 msgid ""
 "Empty scenario, no enemies, no friendlies. Can be used by a GM player to "

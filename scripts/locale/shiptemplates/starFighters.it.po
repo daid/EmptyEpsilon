@@ -1,0 +1,492 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+#: scripts/shiptemplates/starFighters.lua:13
+#, fuzzy
+msgctxt "ship"
+msgid "MT52 Hornet"
+msgstr "MT52 Hornet"
+#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starFighters.lua:65
+#: scripts/shiptemplates/starFighters.lua:121
+#, fuzzy
+msgctxt "class"
+msgid "Starfighter"
+msgstr "Caccia stellare"
+#: scripts/shiptemplates/starFighters.lua:13
+#, fuzzy
+msgctxt "subclass"
+msgid "Interceptor"
+msgstr "Intercettore"
+#: scripts/shiptemplates/starFighters.lua:15
+msgid ""
+"The MT52 Hornet is a basic interceptor found in many corners of the galaxy. "
+"It's easy to find spare parts for MT52s, not only because they are produced "
+"in large numbers, but also because they suffer high losses in combat."
+msgstr ""
+"L'MT52 Hornet è un intercettore di base che si trova in molti angoli della "
+"galassia. È facile trovare pezzi di ricambio per MT52, non solo perché sono "
+"prodotti in gran numero, ma anche perché subiscono perdite elevate in "
+"combattimento."
+#: scripts/shiptemplates/starFighters.lua:23
+#, fuzzy
+msgctxt "ship"
+msgid "MU52 Hornet"
+msgstr "MU52 Hornet"
+#: scripts/shiptemplates/starFighters.lua:25
+msgid ""
+"The MU52 Hornet is a new, upgraded version of the MT52. All of its systems "
+"are slightly improved over the MT52 model."
+msgstr ""
+"L'MU52 Hornet è una nuova versione aggiornata dell'MT52. Tutti i suoi "
+"sistemi sono leggermente migliorati rispetto al modello MT52."
+#: scripts/shiptemplates/starFighters.lua:31
+#, fuzzy
+msgctxt "playerShip"
+msgid "MP52 Hornet"
+msgstr "MP52 Hornet"
+#: scripts/shiptemplates/starFighters.lua:32
+msgid ""
+"The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with "
+"nearly twice the hull strength, nearly three times the shielding, better "
+"acceleration, impulse boosters, and a second laser cannon."
+msgstr ""
+"L'MP52 Hornet è una versione notevolmente migliorata dell'MU52 Hornet, con "
+"quasi il doppio della resistenza dello scafo, quasi tre volte gli scudi, "
+"migliore accelerazione, motori a impulsi e un secondo cannone laser."
+#: scripts/shiptemplates/starFighters.lua:65
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK5"
+msgstr "Adder MK5"
+#: scripts/shiptemplates/starFighters.lua:65
+msgctxt "subclass"
+msgid "Gunship"
+msgstr "Cannoniera"
+#: scripts/shiptemplates/starFighters.lua:67
+msgid ""
+"The Adder line's fifth iteration proved to be a great success among pirates "
+"and law officers alike. It is cheap, fast, and easy to maintain, and it "
+"packs a decent punch."
+msgstr ""
+"La quinta iterazione della linea Adder si è rivelata un grande successo tra "
+"i pirati e gli ufficiali della legge. È economico, veloce e di facile "
+"manutenzione e offre un impatto decente."
+#: scripts/shiptemplates/starFighters.lua:78
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK4"
+msgstr "Adder MK4"
+#: scripts/shiptemplates/starFighters.lua:80
+msgid ""
+"The mark 4 Adder is a rare sight these days due to the success its "
+"successor, the mark 5 Adder, which often replaces this model. Its similar "
+"hull, however, means careless buyers are sometimes conned into buying mark 4 "
+"models disguised as the mark 5."
+msgstr ""
+"Il Mark 4 Adder è uno spettacolo raro in questi giorni a causa della fama "
+"del suo successore, il Mark 5 Adder, che ha spesso rimpiazzato questo "
+"modello. Il suo scafo simile, tuttavia, significa che a volte acquirenti "
+"disattenti sono indotti ad acquistare modelli Mark 4 mascherati da Mark 5."
+#: scripts/shiptemplates/starFighters.lua:88
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK3"
+msgstr "Adder MK3"
+#: scripts/shiptemplates/starFighters.lua:89
+msgid ""
+"The Adder MK3 is one of the first of the Adder line to meet with some "
+"success. A large number of them were made before the manufacturer went "
+"through its first bankruptcy. There has been a recent surge of purchases of "
+"the Adder MK3 in the secondary market due to its low price and its "
+"similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 "
+"has weaker shields and hull, but a faster turn speed"
+msgstr ""
+"L'Adder MK3 è stato uno dei primi della linea Adder a riscuotere un certo "
+"successo. Molti di essi sono stati realizzati prima che il produttore "
+"andasse incontro al suo primo fallimento. C'è stata una recente ondata di "
+"acquisti di Adder MK3 nel mercato secondario a causa del suo prezzo basso e "
+"della sua somiglianza con i modelli successivi. Rispetto all'Adder MK4, "
+"l'Adder MK3 ha scudi e scafo più deboli, ma una velocità di virata maggiore."
+#: scripts/shiptemplates/starFighters.lua:94
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK6"
+msgstr "Adder MK6"
+#: scripts/shiptemplates/starFighters.lua:96
+#, fuzzy
+msgid ""
+"The mark 6 Adder is a small upgrade compared to the highly successful mark 5 "
+"model. Since people still prefer the more familiar and reliable mark 5, the "
+"mark 6 has not seen the same level of success."
+msgstr ""
+"Il Mark 6 Adder è un piccolo aggiornamento rispetto al modello Mark 5 di "
+"grande successo. Poiché le persone preferiscono ancora il più familiare e "
+"affidabile Mark 5 , il Mark 6 non ha visto lo stesso livello di successo."
+#: scripts/shiptemplates/starFighters.lua:100
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK7"
+msgstr "Adder MK7"
+#: scripts/shiptemplates/starFighters.lua:102
+msgid ""
+"The release of the Adder Mark 7 sent the manufacturer into a second "
+"bankruptcy. They made improvements to the Mark 7 over the Mark 6 like "
+"stronger shields and longer beams, but the popularity of their previous "
+"models, especially the Mark 5, prevented them from raising the purchase "
+"price enough to recoup the development and manufacturing costs of the Mark 7"
+msgstr ""
+"Il rilascio dell'Adder Mark 7 ha portato il produttore a un secondo "
+"fallimento. Sono stati apportati miglioramenti al Mark 7 rispetto al Mark 6 "
+"come scudi più forti e cannoni a raggi con gittata maggiore, ma la "
+"popolarità dei modelli precedenti, in particolare il Mark 5, ha impedito "
+"loro di aumentare il prezzo di acquisto abbastanza da recuperare i costi di "
+"sviluppo e produzione del Mark 7."
+#: scripts/shiptemplates/starFighters.lua:106
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK8"
+msgstr "Adder MK8"
+#: scripts/shiptemplates/starFighters.lua:108
+msgid ""
+"New management after bankruptcy revisited their most popular Adder Mark 5 "
+"model with improvements: stronger shields, longer and stronger beams and a "
+"faster turn speed. Thus was born the Adder Mark 8 model. Targeted to the "
+"practical but nostalgic buyer who must purchase replacements for their Adder "
+"Mark 5 fleet"
+msgstr ""
+"La nuova dirigenza dopo il fallimento ha rivisitato il loro modello più "
+"popolare, l'Adder Mark 5 con i seguenti miglioramenti: scudi più potenti, "
+"cannoni a raggi con gittata maggiore e più forti e una maggiore velocità di "
+"virata. Nasce così il modello Adder Mark 8. Destinato all'acquirente pratico "
+"ma nostalgico che deve acquistare sostituti per la propria flotta di Adder "
+"Mark 5."
+#: scripts/shiptemplates/starFighters.lua:113
+#, fuzzy
+msgctxt "ship"
+msgid "Adder MK9"
+msgstr "Adder MK9"
+#: scripts/shiptemplates/starFighters.lua:115
+msgid ""
+"Hot on the heels of the Adder Mark 8 comes the Adder Mark 9. Still using the "
+"Adder Mark 5 as a base, the designers provided stronger shields, stronger, "
+"longer and faster beams, faster turn speed and for that extra special touch, "
+"two nuclear missiles. As their ad says, 'You'll feel better in an Adder Mark "
+"9.'"
+msgstr ""
+"Sulla scia dell'Adder Mark 8 arriva l'Adder Mark 9. Usando ancora l'Adder "
+"Mark 5 come base, i progettisti hanno fornito scudi più forti, cannoni a "
+"raggi più forti, con gittata maggiore e più veloci, velocità di virata più "
+"rapida e, per quel tocco speciale in più, due missili. Come dice il loro "
+"annuncio, \"Ti sentirai meglio in un Adder Mark 9.\""
+#: scripts/shiptemplates/starFighters.lua:121
+#, fuzzy
+msgctxt "ship"
+msgid "WX-Lindworm"
+msgstr "WX-Lindworm"
+#: scripts/shiptemplates/starFighters.lua:121
+#, fuzzy
+msgctxt "subclass"
+msgid "Bomber"
+msgstr "Bombardiere"
+#: scripts/shiptemplates/starFighters.lua:123
+#, fuzzy
+msgid ""
+"The WX-Lindworm, or \"Worm\" as it's often called, is a bomber-class "
+"starfighter. While one of the least-shielded starfighters in active duty, "
+"the Worm's two launchers can pack quite a punch. Its goal is to fly in, "
+"destroy its target, and fly out or be destroyed."
+msgstr ""
+"Il WX-Lindworm, o \"Worm\" come viene spesso chiamato, è un caccia stellare "
+"di classe bombardiere. Sebbene sia uno dei caccia stellari con meno scudi in "
+"servizio attivo, i due lanciatori del Worm possono dare un bell'impatto. Il "
+"suo obiettivo è arrivare, distruggere il suo bersaglio e andare via o essere "
+"distrutto."
+#: scripts/shiptemplates/starFighters.lua:136
+#, fuzzy
+msgctxt "playerShip"
+msgid "ZX-Lindworm"
+msgstr "ZX-Lindworm"
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+# destroyer->incrociatore come hanno fatto per star wars
+# letteralmente sarebbe cacciatorpediniere
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy
+#, fuzzy

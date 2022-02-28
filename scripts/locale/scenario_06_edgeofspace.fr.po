@@ -13,11 +13,9 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
 # Scenario name
 msgid "The Edge-of-Space"
 msgstr "Aux frontières de l'espace"
-
 # Scenario description
 msgid ""
 "You command the Technician Cruiser Apollo, a repair ship on the border of "
@@ -50,37 +48,30 @@ msgstr ""
 "https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
 "https://discord.gg/2NPKyMnGwp"
-
 #: scripts/scenario_06_edgeofspace.lua:32
 msgctxt "callsign-ship"
 msgid "Technical Officer"
 msgstr "Officier technique"
-
 #: scripts/scenario_06_edgeofspace.lua:37
 msgctxt "callsign-station"
 msgid "E.O.S. scope"
 msgstr "Télescope E.O.S."
-
 #: scripts/scenario_06_edgeofspace.lua:39
 msgctxt "callsign-station"
 msgid "Midspace Support"
 msgstr "Soutien Central"
-
 #: scripts/scenario_06_edgeofspace.lua:40
 msgctxt "callsign-station"
 msgid "Central Command"
 msgstr "Quartier Général"
-
 #: scripts/scenario_06_edgeofspace.lua:43
 msgctxt "callsign-station"
 msgid "K-Endline"
 msgstr "K-Frontière"
-
 #: scripts/scenario_06_edgeofspace.lua:44
 msgctxt "callsign-station"
 msgid "K-Midline"
 msgstr "K-Centre"
-
 #: scripts/scenario_06_edgeofspace.lua:191
 msgctxt "centralcommandGoal-incCall"
 msgid ""
@@ -117,7 +108,6 @@ msgstr ""
 "standard.\n"
 "\n"
 "Réouvrez les communications si vous avez des questions."
-
 #: scripts/scenario_06_edgeofspace.lua:239
 #: scripts/scenario_06_edgeofspace.lua:368
 #: scripts/scenario_06_edgeofspace.lua:392
@@ -125,7 +115,6 @@ msgstr ""
 msgctxt "centralcommand-incCall"
 msgid "Apollo, you've incited a war! What a disaster..."
 msgstr "Apollo, vous venez de déclencher une guerre ! C'est un désastre..."
-
 #: scripts/scenario_06_edgeofspace.lua:248
 msgctxt "KraylorEndline-incCall"
 msgid ""
@@ -140,7 +129,6 @@ msgstr ""
 "Soyez prévenus : si vous vous aventurez près de nos frontières, nous "
 "n'aurons d'autre choix que de considérer vos actions comme hostiles. Notre "
 "flotte indestructible ne fera qu'une bouchée de vous."
-
 #: scripts/scenario_06_edgeofspace.lua:260
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -151,7 +139,6 @@ msgstr ""
 "La station Kraylor Endline est située tout près de notre télescope E.O.S.\n"
 "\n"
 "Ne les provoquez pas, nous ne voulons pas déclencher une guerre."
-
 #: scripts/scenario_06_edgeofspace.lua:274
 msgctxt "KraylorEndline-incCall"
 msgid ""
@@ -173,12 +160,10 @@ msgstr ""
 "\n"
 "Procédez à la maintenance nécessaire sur votre équipement, mais sachez que "
 "nous considérons votre station télescopique comme une menace potentielle."
-
 #: scripts/scenario_06_edgeofspace.lua:294
 msgctxt "msgMainscreen"
 msgid "Away Team in transit."
 msgstr "Équipe extérieure en transit."
-
 #: scripts/scenario_06_edgeofspace.lua:297
 msgctxt "technicalofficer-incCall"
 msgid ""
@@ -189,7 +174,6 @@ msgstr ""
 "Nous commençons l'inspection des installations du télescope E.O.S. \n"
 "\n"
 "Cela ne devrait pas être trop long."
-
 #: scripts/scenario_06_edgeofspace.lua:312
 msgctxt "technicalofficer-incCall"
 msgid ""
@@ -201,7 +185,6 @@ msgstr ""
 "fonctionnement.\n"
 "\n"
 "Nous allons récupérer ce que nous pouvons."
-
 #: scripts/scenario_06_edgeofspace.lua:331
 msgctxt "technicalofficer-incCall"
 msgid ""
@@ -212,12 +195,10 @@ msgstr ""
 "Quelque chose ne va pas, Apollo ? Nous sommes toujours dans le complexe.\n"
 "\n"
 "Merci de vous amarrez afin que nous puissions monter à bord."
-
 #: scripts/scenario_06_edgeofspace.lua:348
 msgctxt "msgMainscreen"
 msgid "Away Team have returned."
 msgstr "Équipe extérieure de retour."
-
 #: scripts/scenario_06_edgeofspace.lua:351
 msgctxt "technicalofficer-incCall"
 msgid ""
@@ -233,7 +214,6 @@ msgstr ""
 "\n"
 "Nous devrions nous dépêcher de retourner au Quartier Général avec ceci afin "
 "qu'ils puissent commencer à l'analyser."
-
 #: scripts/scenario_06_edgeofspace.lua:376
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -253,7 +233,6 @@ msgstr ""
 "scientifique Galileo dans le secteur C5. Nous avons passé un contrat avec "
 "cette station Arlénienne afin qu'elle puisse analyser et interpréter les "
 "données extraites de nos différentes stations télescopiques."
-
 #: scripts/scenario_06_edgeofspace.lua:400
 msgctxt "Galileo-incCall"
 msgid ""
@@ -267,7 +246,6 @@ msgstr ""
 "Des vaisseaux Kraylor se trouvent à proximité, et nous pensons qu'ils ont "
 "l'intention de nous attaquer ! Vous êtes le seul vaisseau prêt au combat "
 "proche de notre secteur. S'il vous plaît, aidez-nous !"
-
 #: scripts/scenario_06_edgeofspace.lua:427
 msgctxt "Galileo-incCall"
 msgid ""
@@ -285,7 +263,6 @@ msgstr ""
 "\n"
 "Merci de défendre notre station. Veuillez vous amarrer à nous afin que nous "
 "puissions analyser les données en votre possession."
-
 #: scripts/scenario_06_edgeofspace.lua:441
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -306,7 +283,6 @@ msgstr ""
 "H8 ! \n"
 "\n"
 "C'est-à-dire vous, Apollo ! Dépêchez-vous !"
-
 #: scripts/scenario_06_edgeofspace.lua:469
 msgctxt "human-incCall"
 msgid ""
@@ -320,7 +296,6 @@ msgstr ""
 "Le Quartier Général n'a d'autre choix que de déclarer la guerre. Nous "
 "entrons en territoire Kraylor pour une frappe de représailles. Attaquez la "
 "station Kraylor Endline !"
-
 #: scripts/scenario_06_edgeofspace.lua:490
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -333,7 +308,6 @@ msgstr ""
 "\n"
 "Nous sommes contraints de déclarer la guerre. Pénétrez en territoire Kraylor "
 "et ripostez en attaquant leur station Endline sans défense !"
-
 #: scripts/scenario_06_edgeofspace.lua:513
 #: scripts/scenario_06_edgeofspace.lua:580
 msgctxt "centralcommand-incCall"
@@ -356,7 +330,6 @@ msgstr ""
 "\n"
 "Amarrez-vous au télescope E.O.S. Nous réaménageons votre navire en vue de la "
 "guerre."
-
 #: scripts/scenario_06_edgeofspace.lua:532
 #: scripts/scenario_06_edgeofspace.lua:598
 msgctxt "KraylorMline-incCall"
@@ -369,7 +342,6 @@ msgstr ""
 "\n"
 "Vermine humaine, nous vous avions pourtant prévenu de rester en dehors du "
 "territoire Kraylor !"
-
 #: scripts/scenario_06_edgeofspace.lua:552
 #: scripts/scenario_06_edgeofspace.lua:618
 msgctxt "centralcommand-incCall"
@@ -383,7 +355,6 @@ msgstr ""
 "\n"
 "Notre cessez-le-feu avec les Kraylors touche à sa fin. Détruisez leurs "
 "derniers vaisseaux menaçant notre territoire E.O.S. !"
-
 #: scripts/scenario_06_edgeofspace.lua:648
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -403,7 +374,6 @@ msgstr ""
 "\n"
 "Amarrez-vous au télescope E.O.S. Nous réaménageons votre navire en vue de la "
 "guerre."
-
 #: scripts/scenario_06_edgeofspace.lua:688
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -429,7 +399,6 @@ msgstr ""
 "\n"
 "Quand votre navire sera fini d'être rééquipé pour le combat, dirigez-vous "
 "vers la nébuleuse, mais soyez prudent. Il peut y avoir des pièges."
-
 #: scripts/scenario_06_edgeofspace.lua:704
 msgctxt "centralcommand-incCall"
 msgid ""
@@ -445,12 +414,10 @@ msgstr ""
 "de frappe Kraylor massive est en train d'attaquer ! Passez à travers ce trou "
 "de ver et attaquez leurs rangs de l'intérieur pour les retenir autant que "
 "possible. Nous envoyons tous nos vaisseaux disponibles pour vous soutenir."
-
 #: scripts/scenario_06_edgeofspace.lua:775
 msgctxt "callsign"
 msgid "Central Command"
 msgstr "Quartier Général"
-
 #: scripts/scenario_06_edgeofspace.lua:777
 msgctxt "centralcommand-comms"
 msgid ""
@@ -462,13 +429,11 @@ msgstr ""
 "des Kraylors.\n"
 "\n"
 "Soyez prudent là-bas."
-
 #: scripts/scenario_06_edgeofspace.lua:784
 msgctxt "centralcommandOrders-comms"
 msgid "Return to Central Command with your report on the malfunction."
 msgstr ""
 "Retourner au Quartier Général avec votre rapport sur le dysfonctionnement."
-
 #: scripts/scenario_06_edgeofspace.lua:789
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -478,7 +443,6 @@ msgstr ""
 "La station scientifique Arlénienne Galileo se trouve dans le secteur C5. "
 "Suivre le cap 356 à partir du Quartier Général et livrer les données du "
 "télescope E.O.S. là-bas."
-
 #: scripts/scenario_06_edgeofspace.lua:794
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -487,7 +451,6 @@ msgid ""
 msgstr ""
 "Sauver la station Galileo en secteur C5 ! Ils sont attaqués et nous avons "
 "besoin d'eux pour analyser les données !"
-
 #: scripts/scenario_06_edgeofspace.lua:799
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -495,7 +458,6 @@ msgid ""
 msgstr ""
 "S'amarrer à la station Galileo dans le secteur C5 et délivrer les données du "
 "télescope E.O.S."
-
 #: scripts/scenario_06_edgeofspace.lua:804
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -508,7 +470,6 @@ msgstr ""
 "le plus vite possible et participer à sa défense !\n"
 "\n"
 "Si besoin de plus d'aide, la demander à la station Soutien Central."
-
 #: scripts/scenario_06_edgeofspace.lua:811
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -519,13 +480,11 @@ msgstr ""
 "\n"
 "Nous sommes contraints de déclarer la guerre. Pénétrez en territoire Kraylor "
 "et ripostez en attaquant leur station Endline sans défense !"
-
 #: scripts/scenario_06_edgeofspace.lua:816
 msgctxt "centralcommandOrders-comms"
 msgid "Destroy the remaining Kraylor ships threatening our E.O.S. scope!"
 msgstr ""
 "Détruire les vaisseaux Kraylor restants qui menacent notre télescope E.O.S. !"
-
 #: scripts/scenario_06_edgeofspace.lua:821
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -533,7 +492,6 @@ msgid ""
 msgstr ""
 "S'amarrer à la station E.O.S. afin de la réaménager pour les temps de guerre "
 "et attendre les ordres."
-
 #: scripts/scenario_06_edgeofspace.lua:826
 msgctxt "centralcommandOrders-comms"
 msgid ""
@@ -544,14 +502,12 @@ msgstr ""
 "La super-nébuleuse Kraylor cache un trou de ver qui, selon nous, sera "
 "utilisé dans une attaque au cœur de l'espace humain. Il y a une entrée dans "
 "la nébuleuse dans le secteur F10, mais attention aux pièges !"
-
 #: scripts/scenario_06_edgeofspace.lua:833
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 "Nous sommes sous le feu de l'ennemi !\n"
 "Pas le temps de bavarder !"
-
 #: scripts/scenario_06_edgeofspace.lua:837
 msgctxt "station-comms"
 msgid ""
@@ -562,24 +518,20 @@ msgstr ""
 "Bonjour, officier.\n"
 "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
 "station au préalable."
-
 #: scripts/scenario_06_edgeofspace.lua:841
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (100rep)"
 msgstr ""
 "Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (100 rép)"
-
 #: scripts/scenario_06_edgeofspace.lua:844
 #: scripts/scenario_06_edgeofspace.lua:874
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr "Vous devez définir un marqueur avant de faire une demande de renforts."
-
 #: scripts/scenario_06_edgeofspace.lua:846
 msgctxt "stationAssist-comms"
 msgid "Where do we need to drop off your supplies?"
 msgstr "Où devons-nous larguer la capsule de réapprovisionnement ?"
-
 #: scripts/scenario_06_edgeofspace.lua:858
 #, lua-format
 msgctxt "stationAssist-comms"
@@ -587,7 +539,6 @@ msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
 "réapprovisionnement au marqueur %d."
-
 #: scripts/scenario_06_edgeofspace.lua:860
 #: scripts/scenario_06_edgeofspace.lua:910
 #: scripts/scenario_06_edgeofspace.lua:931
@@ -598,7 +549,6 @@ msgstr ""
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
-
 #: scripts/scenario_06_edgeofspace.lua:862
 #: scripts/scenario_06_edgeofspace.lua:867
 #: scripts/scenario_06_edgeofspace.lua:887
@@ -619,17 +569,14 @@ msgstr "Pas assez de réputation."
 #: scripts/scenario_06_edgeofspace.lua:1053
 msgid "Back"
 msgstr "Précédent"
-
 #: scripts/scenario_06_edgeofspace.lua:871
 msgctxt "stationAssist-comms"
 msgid "Please send backup! (150rep)"
 msgstr "Merci de nous envoyer des renforts."
-
 #: scripts/scenario_06_edgeofspace.lua:876
 msgctxt "stationAssist-comms"
 msgid "Where does the backup need to go?"
 msgstr "Où les renforts doivent-ils aller ?"
-
 #: scripts/scenario_06_edgeofspace.lua:883
 #, lua-format
 msgctxt "stationAssist-comms"
@@ -637,12 +584,10 @@ msgid "We have dispatched %s to assist at WP %d."
 msgstr ""
 "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
 "marqueur %d."
-
 #: scripts/scenario_06_edgeofspace.lua:885
 msgctxt "needRep-comms"
 msgid "Not enough rep!"
 msgstr "Pas assez de réputation."
-
 #: scripts/scenario_06_edgeofspace.lua:899
 msgctxt "station-comms"
 msgid ""
@@ -652,12 +597,10 @@ msgid ""
 msgstr ""
 "Bonjour officier !\n"
 "Que pouvons-nous faire pour vous aujourd'hui ?"
-
 #: scripts/scenario_06_edgeofspace.lua:903
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (2rep each)"
 msgstr "Auriez-vous des homing missiles pour nous ? (2 rép chacun)"
-
 #: scripts/scenario_06_edgeofspace.lua:906
 #: scripts/scenario_06_edgeofspace.lua:927
 #: scripts/scenario_06_edgeofspace.lua:948
@@ -667,57 +610,46 @@ msgstr "Auriez-vous des homing missiles pour nous ? (2 rép chacun)"
 msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
-
 #: scripts/scenario_06_edgeofspace.lua:914
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are fully stocked with homing missiles."
 msgstr "Désolé, officier, mais vous êtes déjà au max en homing missiles."
-
 #: scripts/scenario_06_edgeofspace.lua:918
 msgctxt "ammo-comms"
 msgid "We have refilled your missile supply."
 msgstr "Nous avons réapprovisionné votre stock de missiles."
-
 #: scripts/scenario_06_edgeofspace.lua:924
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (2rep each)"
 msgstr "Merci de réapprovisionner notre stock de mines. (2 rép chacune)"
-
 #: scripts/scenario_06_edgeofspace.lua:935
 msgctxt "ammo-comms"
 msgid "Captain, your ship is already fully stocked with mines."
 msgstr "Capitaine, votre vaisseau est déjà chargé au max de mines."
-
 #: scripts/scenario_06_edgeofspace.lua:939
 msgctxt "ammo-comms"
 msgid "These mines are yours."
 msgstr "Ces mines sont à vous."
-
 #: scripts/scenario_06_edgeofspace.lua:945
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? (15rep each)"
 msgstr "Avez-vous des missiles nucléaires nukes ? (15 rép chacun)"
-
 #: scripts/scenario_06_edgeofspace.lua:956
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
-
 #: scripts/scenario_06_edgeofspace.lua:960
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargés au max et prêt à tout faire péter."
-
 #: scripts/scenario_06_edgeofspace.lua:966
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. (10rep each)"
 msgstr "Veuillez réapprovisionner nos missiles EMP. (10 rép chacun)"
-
 #: scripts/scenario_06_edgeofspace.lua:977
 msgctxt "ammo-comms"
 msgid "All storage for EMP missiles is filled, sir."
 msgstr "Votre espace de stockage de missiles EMP est rempli, monsieur."
-
 #: scripts/scenario_06_edgeofspace.lua:981
 msgctxt "ammo-comms"
 msgid ""
@@ -726,7 +658,6 @@ msgid ""
 msgstr ""
 "L' électronique a été recalibré et vous êtes chargé au maximum en missiles "
 "EMP."
-
 #: scripts/scenario_06_edgeofspace.lua:990
 msgctxt "station-comms"
 msgid ""
@@ -736,22 +667,18 @@ msgid ""
 msgstr ""
 "Salutations, officier.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
-
 #: scripts/scenario_06_edgeofspace.lua:997
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr "Bienvenue dans notre charmante petite station."
-
 #: scripts/scenario_06_edgeofspace.lua:999
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (5rep each)"
 msgstr "Auriez-vous des homing missiles pour nous ? (5 rép chacun)"
-
 #: scripts/scenario_06_edgeofspace.lua:1006
 msgctxt "ammo-comms"
 msgid "You seem to have more than enough missiles."
 msgstr "Vous semblez avoir plus qu'il n'en faut de missiles."
-
 #: scripts/scenario_06_edgeofspace.lua:1014
 msgctxt "ammo-comms"
 msgid ""
@@ -762,39 +689,32 @@ msgstr ""
 "Nous vous avons généreusement réapprovisionné en homing missiles gratuits.\n"
 "\n"
 "Faites-en bon usage."
-
 #: scripts/scenario_06_edgeofspace.lua:1022
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (5rep each)"
 msgstr "Merci de nous réapprovisionner en mines. (5 rép chacune)"
-
 #: scripts/scenario_06_edgeofspace.lua:1029
 msgctxt "ammo-comms"
 msgid "You are fully stocked with mines."
 msgstr "Vous êtes entièrement approvisionné en mines."
-
 #: scripts/scenario_06_edgeofspace.lua:1037
 msgctxt "ammo-comms"
 msgid "Here, have some mines. Mines are good defensive weapons."
 msgstr "Tenez, prenez des mines. Les mines sont de bonnes armes de défense."
-
 #: scripts/scenario_06_edgeofspace.lua:1043
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes?"
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ?"
-
 #: scripts/scenario_06_edgeofspace.lua:1045
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 "Nous ne fournissons pas ce type d'armes de destruction massive. \n"
 "Nous sommes pour la paix dans l'univers."
-
 #: scripts/scenario_06_edgeofspace.lua:1050
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles."
 msgstr "Avez-vous des missiles EMP ?"
-
 #: scripts/scenario_06_edgeofspace.lua:1052
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."

@@ -13,11 +13,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
 # Scenario name
 msgid "Surrounded"
 msgstr "Encerclés"
-
 # Scenario description
 msgid ""
 "You are surrounded by asteroids, enemies, and mines.\n"
