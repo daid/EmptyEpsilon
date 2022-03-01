@@ -100,9 +100,9 @@ void GuiContainer::updateLayout(const sp::Rect& rect)
                     glm::vec2 p0 = w->rect.position;
                     glm::vec2 p1 = p0 + w->rect.size;
                     content_size_min.x = std::min(content_size_min.x, p0.x - w->layout.margin.left);
-                    content_size_min.y = std::min(content_size_min.y, p0.y - w->layout.margin.bottom);
+                    content_size_min.y = std::min(content_size_min.y, p0.y - w->layout.margin.top);
                     content_size_max.x = std::max(content_size_max.x, p1.x + w->layout.margin.right);
-                    content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.top);
+                    content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.bottom);
                 }
             }
             if (content_size_max.x != std::numeric_limits<float>::min())

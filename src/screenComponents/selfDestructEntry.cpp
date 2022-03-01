@@ -15,15 +15,13 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(this, id + "_BOX");
-    box->setPosition(0, 0, sp::Alignment::Center);
-    auto layout = new GuiElement(box, id + "_LAYOUT");
-    layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    (new GuiLabel(layout, id + "_LABEL", tr("Self destruct activated!"), 50))->setSize(GuiElement::GuiSizeMax, 80);
-    code_label = new GuiLabel(layout, id + "_CODE_LABEL", "", 30);
-    code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    box->setPosition(0, 0, sp::Alignment::Center)->setAttribute("layout", "vertical");;
+    (new GuiLabel(box, id + "_LABEL", tr("Self destruct activated!"), 50))->setSize(600, 80)->layout.alignment = sp::Alignment::Center;
+    code_label = new GuiLabel(box, id + "_CODE_LABEL", "", 30);
+    code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.alignment = sp::Alignment::Center;
 
-    code_entry = new GuiElement(layout, id + "_ENTRY_ELEMENT");
-    code_entry->setSize(250, 320);
+    code_entry = new GuiElement(box, id + "_ENTRY_ELEMENT");
+    code_entry->setSize(250, 320)->setPosition(0, 0, sp::Alignment::Center);
 
     code_entry_code_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "Enter [A]", 30);
     code_entry_code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
@@ -79,13 +77,6 @@ void GuiSelfDestructEntry::onDraw(sp::RenderTarget& target)
             code_entry_code_label->setText(tr("selfdestruct", "Enter [{letter}]").format({{"letter", string(char('A' + code_entry_position))}}));
 
             code_entry->setVisible(code_entry_position > -1);
-
-            if (code_entry->isVisible())
-                box->setSize(600, code_entry->getPositionOffset().y + code_entry->getSize().y);
-            else if (code_label->isVisible())
-                box->setSize(600, code_label->getPositionOffset().y + code_label->getSize().y);
-            else
-                box->setSize(600, 80);
         }else{
             box->hide();
         }
