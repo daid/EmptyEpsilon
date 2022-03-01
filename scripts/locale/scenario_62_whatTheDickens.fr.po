@@ -12,9 +12,11 @@ msgstr ""
 "X-Generator: Poedit 2.4.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
 # Scenario name
 msgid "What the Dickens"
 msgstr "Que diable se passe t'il ?"
+
 # Scenario description
 msgid "Patrol around the London area during Christmas. Bah! Humbug!"
 msgstr ""
@@ -23,24 +25,29 @@ msgstr ""
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
 "Patrouiller autour de la région de Londres pendant Noël.\n"
-"\n"
 "Bah ! Fumisterie !\n"
+"\n"
+"Contient du texte audio (non traduit).\n"
 "\n"
 "- Titre original : What the Dickens\n"
 "- Auteur : Xansta\n"
 "https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
 "https://discord.gg/2NPKyMnGwp"
+
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
+
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
+
 msgctxt "Enemies"
 msgid "Easy"
 msgstr "Facile"
+
 msgctxt "Enemies"
 msgid ""
 "Easy goals and/or enemies. Good for solo players, short handed crews or less "
@@ -48,17 +55,21 @@ msgid ""
 msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Adapté pour les joueurs en solo, "
 "les équipages réduits ou moins expérimentés."
+
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
+
 msgctxt "Enemies"
 msgid "Normal goals and/or enemies. Good for a normal crew."
 msgstr ""
 "Objectifs et/ou quantité d'ennemis par défaut. Adapté pour un équipage "
 "standard."
+
 msgctxt "Enemies"
 msgid "Hard"
 msgstr "Difficile"
+
 msgctxt "Enemies"
 msgid ""
 "Hard goals and/or enemies. Good for experienced crews looking for a "
@@ -66,36 +77,44 @@ msgid ""
 msgstr ""
 "Objectifs et/ou quantité d'ennemis difficiles. Adapté pour les équipages "
 "expérimentés à la recherche d'un défi."
+
 #: scripts/scenario_62_whatTheDickens.lua:36
 msgctxt "scienceDescription-station"
 msgid "Medical research and support"
 msgstr "Recherche médicale et secours"
+
 #: scripts/scenario_62_whatTheDickens.lua:44
 msgctxt "scienceDescription-station"
 msgid "Hydroponics and plant life"
 msgstr "Culture hydroponique et vie végétale"
+
 #: scripts/scenario_62_whatTheDickens.lua:46
 msgctxt "scienceDescription-station"
 msgid "Cheese, food, drink"
 msgstr "Fromage, nourriture, boissons"
+
 #: scripts/scenario_62_whatTheDickens.lua:225
 #: scripts/scenario_62_whatTheDickens.lua:620
 #, lua-format
 msgctxt "orders-comms"
 msgid "Protect Somerset in %s"
 msgstr "Protéger Somerset en secteur %s."
+
 #: scripts/scenario_62_whatTheDickens.lua:232
 msgctxt "buttonGM"
 msgid "Christmas Past"
 msgstr "Noël passé"
+
 #: scripts/scenario_62_whatTheDickens.lua:234
 msgctxt "buttonGM"
 msgid "Christmas Present"
 msgstr "Noël présent"
+
 #: scripts/scenario_62_whatTheDickens.lua:236
 msgctxt "buttonGM"
 msgid "Christmas Future"
 msgstr "Noël futur"
+
 #: scripts/scenario_62_whatTheDickens.lua:294
 msgctxt "riverWarning-shipLog"
 msgid ""
@@ -106,12 +125,14 @@ msgstr ""
 "Rappel à tous les nouveaux arrivants dans la région de Londres : la zone "
 "fluviale endommage les systèmes des navires. Sautez la rivière ou utilisez "
 "les ponts fournis."
+
 #: scripts/scenario_62_whatTheDickens.lua:363
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 "Nous sommes sous le feu de l'ennemi !\n"
 "Pas le temps de bavarder !"
+
 #: scripts/scenario_62_whatTheDickens.lua:377
 msgctxt "station-comms"
 msgid ""
@@ -120,40 +141,48 @@ msgid ""
 msgstr ""
 "Bonjour officier !\n"
 "Que pouvons-nous faire pour vous aujourd'hui ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:379
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
 msgstr "Bienvenue dans notre charmante station orbitale."
+
 #: scripts/scenario_62_whatTheDickens.lua:383
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? (%d rep each)"
 msgstr "Auriez-vous des homing missiles pour nous ? (%d rép chacun)"
+
 #: scripts/scenario_62_whatTheDickens.lua:388
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you restock us with HVLI? (%d rep each)"
 msgstr "Pouvez-vous nous réapprovisionner en HVLI ? (%d rép chacun)"
+
 #: scripts/scenario_62_whatTheDickens.lua:393
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please re-stock our mines. (%d rep each)"
 msgstr "Merci de réapprovisionner notre stock de mines. (%d rép chacune)"
+
 #: scripts/scenario_62_whatTheDickens.lua:398
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? (%d rep each)"
 msgstr "Avez-vous des missiles nucléaires nukes ? (%d rép chacun)"
+
 #: scripts/scenario_62_whatTheDickens.lua:403
 #, lua-format
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. (%d rep each)"
 msgstr "Merci de recharger nos missiles EMP ? (%d rép chacun)"
+
 #: scripts/scenario_62_whatTheDickens.lua:408
 #: scripts/scenario_62_whatTheDickens.lua:488
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "Quels sont nos ordres en cours ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:411
 #: scripts/scenario_62_whatTheDickens.lua:417
 #: scripts/scenario_62_whatTheDickens.lua:421
@@ -173,18 +202,22 @@ msgstr "Quels sont nos ordres en cours ?"
 #: scripts/scenario_62_whatTheDickens.lua:566
 msgid "Back"
 msgstr "Précédent"
+
 #: scripts/scenario_62_whatTheDickens.lua:413
 msgctxt "areaDescription-comms"
 msgid "Interesting points in the area"
 msgstr "Endroits intéressants dans la région"
+
 #: scripts/scenario_62_whatTheDickens.lua:414
 msgctxt "areaDescription-comms"
 msgid "You may be interested in one or more of these:"
 msgstr "Vous pourriez être intéressé par un ou plusieurs d'entre eux :"
+
 #: scripts/scenario_62_whatTheDickens.lua:415
 msgctxt "areaDescription-comms"
 msgid "City"
 msgstr "City"
+
 #: scripts/scenario_62_whatTheDickens.lua:416
 msgctxt "areaDescription-comms"
 msgid ""
@@ -195,10 +228,12 @@ msgstr ""
 "La station City (La Ville) représente l'une des gares les plus développées "
 "de la région. En corrélant la station à l'ancienne Terre, ce serait "
 "l'endroit où la zone médiévale fortifiée de Londres aurait été située."
+
 #: scripts/scenario_62_whatTheDickens.lua:419
 msgctxt "areaDescription-comms"
 msgid "Change"
 msgstr "Change"
+
 #: scripts/scenario_62_whatTheDickens.lua:420
 msgctxt "areaDescription-comms"
 msgid ""
@@ -209,10 +244,12 @@ msgstr ""
 "Une grande partie des affaires financières de la région est gérée à la "
 "station nommée Change. Le nom de la station est une référence au Royal "
 "Exchange de Londres."
+
 #: scripts/scenario_62_whatTheDickens.lua:423
 msgctxt "areaDescription-comms"
 msgid "Foundling"
 msgstr "Foundling"
+
 #: scripts/scenario_62_whatTheDickens.lua:424
 msgctxt "areaDescription-comms"
 msgid ""
@@ -224,10 +261,12 @@ msgstr ""
 "médicale pour les enfants. Le nom de la station rend hommage au Foundling "
 "Hospital de Londres, un orphelinat créé en 1739 par le capitaine Thomas "
 "Coram, un marin à la retraite."
+
 #: scripts/scenario_62_whatTheDickens.lua:427
 msgctxt "areaDescription-comms"
 msgid "Thames"
 msgstr "Thames"
+
 #: scripts/scenario_62_whatTheDickens.lua:428
 msgctxt "areaDescription-comms"
 msgid ""
@@ -243,10 +282,12 @@ msgstr ""
 "néfastes qu'elle a sur les systèmes des navires. C'est pourquoi les systèmes "
 "de navigation affichent automatiquement cette région pour tous les navires "
 "de la zone."
+
 #: scripts/scenario_62_whatTheDickens.lua:431
 msgctxt "areaDescription-comms"
 msgid "Covent"
 msgstr "Covent"
+
 #: scripts/scenario_62_whatTheDickens.lua:432
 msgctxt "areaDescription-comms"
 msgid ""
@@ -258,10 +299,12 @@ msgstr ""
 "la gare de Covent (Couvent). Elle est spécialisée dans la culture "
 "hydroponique. La station tire son nom du Covent Garden du vieux Londres de "
 "la Terre où les fruits, les légumes et les fleurs étaient achetés et vendus."
+
 #: scripts/scenario_62_whatTheDickens.lua:435
 msgctxt "areaDescription-comms"
 msgid "Cheshire"
 msgstr "Cheshire"
+
 #: scripts/scenario_62_whatTheDickens.lua:436
 msgctxt "areaDescription-comms"
 msgid ""
@@ -271,10 +314,12 @@ msgstr ""
 "Vous pouvez trouver une cuisine et des boissons raffinées à la gare de "
 "Cheshire. Le nom fait allusion au pub Ye Olde Cheshire Cheese de Londres sur "
 "l'ancienne Terre."
+
 #: scripts/scenario_62_whatTheDickens.lua:439
 msgctxt "areaDescription-comms"
 msgid "Tower"
 msgstr "Tower"
+
 #: scripts/scenario_62_whatTheDickens.lua:440
 msgctxt "areaDescription-comms"
 msgid ""
@@ -283,42 +328,51 @@ msgid ""
 msgstr ""
 "La station Tower (La Tour) sert de résidence pour les membres les plus "
 "riches de la communauté de la région de Londres."
+
 #: scripts/scenario_62_whatTheDickens.lua:449
 msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarrés à la station pour cette action."
+
 #: scripts/scenario_62_whatTheDickens.lua:451
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr ""
 "Nous ne fournissons pas ce type d'armes de destruction massive. \n"
 "Nous sommes pour la paix dans l'univers."
+
 #: scripts/scenario_62_whatTheDickens.lua:452
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+
 #: scripts/scenario_62_whatTheDickens.lua:453
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+
 #: scripts/scenario_62_whatTheDickens.lua:460
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Officier, vos nukes sont en capacité maximale et prêtes à servir !"
+
 #: scripts/scenario_62_whatTheDickens.lua:462
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 "Désolé, officier, mais vous êtes déjà au max de ce que nous pouvons vous "
 "fournir."
+
 #: scripts/scenario_62_whatTheDickens.lua:467
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
+
 #: scripts/scenario_62_whatTheDickens.lua:472
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargés au max et prêt à tout faire péter."
+
 #: scripts/scenario_62_whatTheDickens.lua:474
 msgctxt "ammo-comms"
 msgid ""
@@ -327,6 +381,7 @@ msgid ""
 msgstr ""
 "Nous vous avons généreusement réapprovisionné en munitions.\n"
 "Faites-en bon usage."
+
 #: scripts/scenario_62_whatTheDickens.lua:483
 msgctxt "station-comms"
 msgid ""
@@ -336,6 +391,7 @@ msgstr ""
 "Bonjour, officier.\n"
 "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
 "station au préalable."
+
 #: scripts/scenario_62_whatTheDickens.lua:485
 msgctxt "station-comms"
 msgid ""
@@ -344,28 +400,33 @@ msgid ""
 msgstr ""
 "Salutations.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
 #: scripts/scenario_62_whatTheDickens.lua:523
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
 "Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+
 #: scripts/scenario_62_whatTheDickens.lua:525
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
 "Vous devez définir un marqueur avant de faire une demande de "
 "réapprovisionnement."
+
 #: scripts/scenario_62_whatTheDickens.lua:527
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:529
 #: scripts/scenario_62_whatTheDickens.lua:555
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "WP %d"
 msgstr "Marqueur %d"
+
 #: scripts/scenario_62_whatTheDickens.lua:537
 #, lua-format
 msgctxt "stationAssist-comms"
@@ -373,24 +434,29 @@ msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
 "réapprovisionnement au marqueur %d."
+
 #: scripts/scenario_62_whatTheDickens.lua:539
 #: scripts/scenario_62_whatTheDickens.lua:560
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de points de réputation !"
+
 #: scripts/scenario_62_whatTheDickens.lua:549
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
 msgstr "Merci de nous envoyer des renforts ! (%d rép)"
+
 #: scripts/scenario_62_whatTheDickens.lua:551
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Vous devez définir un marqueur avant de demander des renforts."
+
 #: scripts/scenario_62_whatTheDickens.lua:553
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:558
 #, lua-format
 msgctxt "stationAssist-comms"
@@ -398,6 +464,7 @@ msgid "We have dispatched %s to assist at WP %d "
 msgstr ""
 "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
 "marqueur %d."
+
 #: scripts/scenario_62_whatTheDickens.lua:619
 #, lua-format
 msgctxt "goal-shipLog"
@@ -410,6 +477,7 @@ msgstr ""
 "D'autres missions pourront être ajoutées. Amarrez-vous à Somerset pour "
 "définir des missions supplémentaires. Bienvenue dans la zone londonienne "
 "sous contrôle de la marine humaine."
+
 #: scripts/scenario_62_whatTheDickens.lua:621
 #: scripts/scenario_62_whatTheDickens.lua:726
 #: scripts/scenario_62_whatTheDickens.lua:938
@@ -418,6 +486,7 @@ msgstr ""
 msgctxt "orders-comms"
 msgid "Dock with Somerset"
 msgstr "Vous amarrer à Somerset."
+
 #: scripts/scenario_62_whatTheDickens.lua:629
 msgctxt "ordersAudio-shipLog"
 msgid "Investigate unusual sensor readings near station Camden in A2"
@@ -425,18 +494,22 @@ msgstr ""
 "[Ordres en cours]\n"
 "Nous avons reçu des lectures inhabituelles de capteurs se trouvant près de "
 "la station Camden dans le secteur A2. Pouvez-vous enquêter ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:631
 msgctxt "orders-comms"
 msgid "Investigate near station Camden in A2"
 msgstr "Enquêter près de la gare de Camden en secteur A2."
+
 #: scripts/scenario_62_whatTheDickens.lua:641
 msgctxt "scienceDescription-artifact"
 msgid "Rusty Chain Link"
 msgstr "Des maillons de chaîne rouillés"
+
 #: scripts/scenario_62_whatTheDickens.lua:641
 msgctxt "scienceDescription-artifact"
 msgid "Translucent but glowing rusty chain link"
 msgstr "Des maillons de chaîne rouillés translucides mais brillants"
+
 #: scripts/scenario_62_whatTheDickens.lua:649
 msgctxt "audio-shipLog"
 msgid ""
@@ -449,6 +522,7 @@ msgstr ""
 "missions précédentes ? Spécialement celle où la station Marley a été "
 "détruite ? Et bien je suis dorénavant voué à hanter cette zone de l'espace "
 "pour toujours. Faites attention ou subissez le même sort..."
+
 #: scripts/scenario_62_whatTheDickens.lua:707
 msgctxt "ordersAudio-shipLog"
 msgid ""
@@ -458,10 +532,12 @@ msgstr ""
 "[Jacob Marley]\n"
 "Vous devez vaincre les chaînes qui vous retiennent sous la forme de navires "
 "Kraylor."
+
 #: scripts/scenario_62_whatTheDickens.lua:709
 msgctxt "orders-comms"
 msgid "Defeat Kraylors"
 msgstr "Éliminer les Kraylors."
+
 #: scripts/scenario_62_whatTheDickens.lua:722
 #, lua-format
 msgctxt "ordersAudio-shipLog"
@@ -472,6 +548,7 @@ msgstr ""
 "[Jacob Marley]\n"
 "Vaincre ces Kraylors vous a donné une idée de ce qui vous attend. Retournez "
 "à Somerset en secteur %s et préparez-vous pour trois visites fantomatiques..."
+
 #: scripts/scenario_62_whatTheDickens.lua:733
 #, lua-format
 msgctxt "ordersAudio-shipLog"
@@ -485,6 +562,7 @@ msgstr ""
 "lectures inhabituelles ont disparu. Cependant, nous constatons un niveau "
 "inhabituellement élevé de particules de chroniton près de la station "
 "Millbank en %s. Je vous suggère d'aller enquêter."
+
 #: scripts/scenario_62_whatTheDickens.lua:735
 #, lua-format
 msgctxt "orders-comms"
@@ -492,18 +570,22 @@ msgid "Investigate chroniton particles near station Millbank in %s"
 msgstr ""
 "Enquêter sur les particules de chroniton près de la station Millbank en "
 "secteur %s."
+
 #: scripts/scenario_62_whatTheDickens.lua:745
 msgctxt "scienceDescription-artifact"
 msgid "Tiny escape pod"
 msgstr "Petite capsule de sauvetage"
+
 #: scripts/scenario_62_whatTheDickens.lua:745
 msgctxt "scienceDescription-artifact"
 msgid "Tiny escape pod from a previous generation"
 msgstr "Petite capsule de sauvetage d'une ancienne génération"
+
 #: scripts/scenario_62_whatTheDickens.lua:830
 msgctxt "audio-shipLog"
 msgid "Welcome to the Christmases of your past, Scrooge"
 msgstr "Bienvenue dans les Noëls de votre passé, équipage du HMS Scrooge."
+
 #: scripts/scenario_62_whatTheDickens.lua:883
 #, lua-format
 msgctxt "ordersAudio-shipLog"
@@ -511,16 +593,19 @@ msgid "Belle has come. Be sure she makes it to Fezziwig in %s"
 msgstr ""
 "[Ordres en cours]\n"
 "Belle est arrivée. Assurez-vous qu'elle arrive à Fezziwig dans le secteur %s."
+
 #: scripts/scenario_62_whatTheDickens.lua:890
 msgctxt "orders-comms"
 msgid "Protect Belle"
 msgstr "Protéger Belle."
+
 #: scripts/scenario_62_whatTheDickens.lua:935
 msgctxt "ordersAudio-shipLog"
 msgid "You protected Belle. Somerset awaits"
 msgstr ""
 "[Ordres en cours]\n"
 "Vous avez protégé Belle. Somerset vous attend."
+
 #: scripts/scenario_62_whatTheDickens.lua:953
 #, lua-format
 msgctxt "ordersAudio-shipLog"
@@ -536,12 +621,14 @@ msgstr ""
 "niveau 3 sur nos capteurs pour découvrir ce qui ne va pas. Juste avant de "
 "commencer le diagnostic, nous avons relevé des valeurs inhabituelles près de "
 "Bedlam en secteur %s. Vous devriez peut-être enquêter."
+
 #: scripts/scenario_62_whatTheDickens.lua:955
 #, lua-format
 msgctxt "orders-comms"
 msgid "Investigate unusual readings near Bedlam in %s"
 msgstr ""
 "Enquêter sur les lectures inhabituelles près de Bedlam dans le secteur %s."
+
 #: scripts/scenario_62_whatTheDickens.lua:963
 msgctxt "ordersAudio-shipLog"
 msgid ""
@@ -556,10 +643,12 @@ msgstr ""
 "sûrement décorer nos cieux avec des explosions de vaisseaux ennemis "
 "extraterrestres. Au pire des cas, nous aurions un ciel décoré par "
 "l'explosion de votre vaisseau."
+
 #: scripts/scenario_62_whatTheDickens.lua:972
 msgctxt "orders-comms"
 msgid "Destroy marauding enemies"
 msgstr "Détruire les ennemis qui rôdent."
+
 #: scripts/scenario_62_whatTheDickens.lua:1002
 msgctxt "ordersAudio-shipLog"
 msgid ""
@@ -575,10 +664,12 @@ msgstr ""
 "le diagnostiquer, et encore moins le soigner. Le navire médical Turkey "
 "Surprise devrait pouvoir nous aider. Pourriez-vous accoster rapidement à "
 "Bedlam et transporter Tim jusqu'au Turkey Surprise ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:1010
 msgctxt "orders-comms"
 msgid "Take Tim from Bedlam to Turkey Surprise"
 msgstr "Aller chercher Tim à Bedlam et l'emmener à Turkey Surprise."
+
 #: scripts/scenario_62_whatTheDickens.lua:1018
 msgctxt "msgMainscreen"
 msgid ""
@@ -593,14 +684,17 @@ msgstr ""
 "les autres à bord de la station Bedlam. Votre équipe d'ingénieurs était "
 "tellement accablée de chagrin qu'elle a négligé un cycle de maintenance de "
 "routine causant une panne de moteur sur le HMS Scrooge."
+
 #: scripts/scenario_62_whatTheDickens.lua:1088
 msgctxt "audio-shipLog"
 msgid "How dare you bring us here!"
 msgstr "Comment osez-vous nous amener ici !"
+
 #: scripts/scenario_62_whatTheDickens.lua:1099
 msgctxt "audio-shipLog"
 msgid "Silence! Since we are here, let us destroy Somerset"
 msgstr "Silence ! Puisque nous sommes ici, détruisons Somerset."
+
 #: scripts/scenario_62_whatTheDickens.lua:1111
 #, lua-format
 msgctxt "shipLog"
@@ -612,6 +706,7 @@ msgstr ""
 "Tim a été transporté à bord du %s. Dépêchez-vous de rejoindre le Turkey "
 "Surprise. Les médecins disent qu'il ne lui reste environ que %i minutes à "
 "vivre."
+
 #: scripts/scenario_62_whatTheDickens.lua:1116
 #, lua-format
 msgctxt "shipLog"
@@ -622,6 +717,7 @@ msgstr ""
 "[Bob Cratchit]\n"
 "S'il vous plaît dépêchez-vous, les médecins disent que Tim a moins de %i "
 "secondes à vivre."
+
 #: scripts/scenario_62_whatTheDickens.lua:1123
 #, lua-format
 msgctxt "shipLog"
@@ -629,6 +725,7 @@ msgid "[Sick Bay] Tim has less than %i seconds to live"
 msgstr ""
 "[Infirmerie]\n"
 "Tim a moins de %i secondes à vivre."
+
 #: scripts/scenario_62_whatTheDickens.lua:1131
 #: scripts/scenario_62_whatTheDickens.lua:1181
 msgctxt "audio-shipLog"
@@ -638,6 +735,7 @@ msgstr ""
 "[Turkey Surprise]\n"
 "Nous ne pouvons pas le transporter à travers vos boucliers. Veuillez les "
 "baisser."
+
 #: scripts/scenario_62_whatTheDickens.lua:1135
 msgctxt "ordersAudio-shipLog"
 msgid ""
@@ -645,15 +743,18 @@ msgid ""
 msgstr ""
 "[Turkey Surprise]\n"
 "Nous avons transporté Tim et nos médecins l'examinent."
+
 #: scripts/scenario_62_whatTheDickens.lua:1139
 msgctxt "orders-comms"
 msgid "Protect Turkey Surprise"
 msgstr "Protéger Turkey Surprise."
+
 #: scripts/scenario_62_whatTheDickens.lua:1146
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Tim dies. %s disabled by a broken heart (engine failure)"
 msgstr "Tim meurt. %s s'est désactivé, le cœur brisé (panne moteur)"
+
 #: scripts/scenario_62_whatTheDickens.lua:1154
 msgctxt "ordersAudio-shipLog"
 msgid ""
@@ -665,10 +766,12 @@ msgstr ""
 "Turkey Surprise nous informe que Tim va bien. En fait, il est même prêt à "
 "reprendre du service. Nous avons besoin de lui ici pour des réparations "
 "critiques. Voudriez-vous le ramener à la maison, s'il vous plaît ?"
+
 #: scripts/scenario_62_whatTheDickens.lua:1159
 msgctxt "orders-comms"
 msgid "Return Tim to Bedlam"
 msgstr "Ramener Tim à Bedlam."
+
 #: scripts/scenario_62_whatTheDickens.lua:1162
 #: scripts/scenario_62_whatTheDickens.lua:1190
 #, lua-format
@@ -678,6 +781,7 @@ msgid ""
 msgstr ""
 "Tim meurt à bord du Turkey Surprise. %s s'est désactivé, le cœur brisé "
 "(panne moteur)"
+
 #: scripts/scenario_62_whatTheDickens.lua:1170
 msgctxt "ordersAudio-shipLog"
 msgid ""
@@ -688,6 +792,7 @@ msgstr ""
 "Nous sommes tellement heureux que Tim aille mieux. Il joue ici un rôle "
 "essentiel.\n"
 "Au fait, Somerset vous cherche."
+
 #: scripts/scenario_62_whatTheDickens.lua:1185
 msgctxt "shipLog"
 msgid ""
@@ -697,6 +802,7 @@ msgstr ""
 "[Salle de téléportation]\n"
 "Tim a été transporté à bord. Bedlam attend qu'on le ramène afin qu'il se "
 "remette au travail sur les réparations."
+
 #: scripts/scenario_62_whatTheDickens.lua:1209
 #, lua-format
 msgctxt "ordersAudio-shipLog"
@@ -711,29 +817,35 @@ msgstr ""
 "impossibles même après la révision de nos capteurs. Nous menons actuellement "
 "un programme de diagnostic et de réparation de niveau 5. Gardez un œil sur "
 "la ville en %s."
+
 #: scripts/scenario_62_whatTheDickens.lua:1211
 #, lua-format
 msgctxt "orders-comms"
 msgid "Watch the City in %s"
 msgstr "Jeter un oeil à City (La Ville) en secteur %s."
+
 #: scripts/scenario_62_whatTheDickens.lua:1291
 msgctxt "shipLog"
 msgid "Face your future"
 msgstr "Affrontez votre avenir."
+
 #: scripts/scenario_62_whatTheDickens.lua:1467
 msgctxt "shipLog"
 msgid "You have faced your future"
 msgstr "Vous avez affronté votre avenir."
+
 #: scripts/scenario_62_whatTheDickens.lua:1490
 msgctxt "return-shipLog"
 msgid "Dock at Somerset for a well deserved Christmas break"
 msgstr "Amarrez-vous à Somerset pour une pause de Noël bien méritée."
+
 #: scripts/scenario_62_whatTheDickens.lua:1499
 msgctxt "returnAudio-shipLog"
 msgid "[Jacob Marley] Good to see you spreading joy and easing pain, Scrooge"
 msgstr ""
 "[Jacob Marley] C'est bon de vous voir répandre la joie et soulager la "
 "douleur, HMS Scrooge."
+
 #: scripts/scenario_62_whatTheDickens.lua:1510
 msgctxt "returnAudio-shipLog"
 msgid ""
@@ -742,6 +854,7 @@ msgid ""
 msgstr ""
 "Que les ombres des choses qui ont été continuent de vous rappeler la joie de "
 "Noël."
+
 #: scripts/scenario_62_whatTheDickens.lua:1521
 msgctxt "return-shipLog"
 msgid ""
@@ -750,6 +863,7 @@ msgid ""
 msgstr ""
 "Malgré l'ignorance et le désir, les prisons et les maisons de correction, "
 "vivez pleinement chaque journée et célébrez-là, en particulier Noël."
+
 #: scripts/scenario_62_whatTheDickens.lua:1531
 msgctxt "returnAudio-shipLog"
 msgid ""
@@ -762,6 +876,7 @@ msgstr ""
 "Joyeux Noël, monsieur !\n"
 "Joyeux Noël à vous !\n"
 "Merci pour les shillings !"
+
 #: scripts/scenario_62_whatTheDickens.lua:1542
 msgctxt "returnAudio-shipLog"
 msgid ""
@@ -770,6 +885,7 @@ msgid ""
 msgstr ""
 "[Fred de QE17] Joyeux Noël, mon oncle ! Faites donc une halte et partagez le "
 "dîner de Noël avec nous lorsque vous aurez fini votre service."
+
 #: scripts/scenario_62_whatTheDickens.lua:1553
 msgctxt "returnAudio-shipLog"
 msgid ""
@@ -778,18 +894,22 @@ msgid ""
 msgstr ""
 "[Bob à bord du Cratchit Cruiser] Joyeux Noël, équipage du HMS Scrooge. Merci "
 "pour avoir aidé le petit Tim."
+
 #: scripts/scenario_62_whatTheDickens.lua:1564
 msgctxt "returnAudio-shipLog"
 msgid "[Tim on Cratchit Cruiser] God bless us every one"
 msgstr "[Tim sur Cratchit Cruiser] Que Dieu nous bénisse tous."
+
 #: scripts/scenario_62_whatTheDickens.lua:1576
 msgctxt "returnAudio-shipLog"
 msgid "[Tim on Cratchit Cruiser] Give me some freakin' eggnog"
 msgstr "[Tim sur Cratchit Cruiser] Donne-moi un maudit lait de poule."
+
 #: scripts/scenario_62_whatTheDickens.lua:1586
 msgctxt "msgMainscreen"
 msgid "Merry Christmas!"
 msgstr "Joyeux Noël !"
+
 #: scripts/scenario_62_whatTheDickens.lua:1597
 #, lua-format
 msgctxt "msgMainscreen"
