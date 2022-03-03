@@ -190,10 +190,9 @@ msgstr ""
 "munitions. Il peut également être important de s'amarrer pour d'autres "
 "événements liés à la mission.\n"
 "Pour s'amarrer, manœuvrez à moins de 1 unité d'une station et appuyez sur le "
-"bouton \"Accostage\", à partir duquel l'amarrage est entièrement "
-"automatisé.\n"
+"bouton \"Amarrage\", à partir duquel l'amarrage est entièrement automatisé.\n"
 "\n"
-"Dirigez-vous vers la station voisine et demandez l'autorisation d'accoster. "
+"Dirigez-vous vers la station voisine et demandez l'autorisation d'amarrer. "
 "Allez-y !"
 
 #: scripts/tutorial/00_all.lua:95
