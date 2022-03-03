@@ -21,8 +21,7 @@ msgstr "Tout exécuter"
 # Scenario description
 msgid "All Station Tutorials. This cycles through all the stations."
 msgstr ""
-"Vous allez effectuer les tutoriels de chaque poste, les uns à la suite des "
-"autres."
+"Vous effectuez les tutoriels de chaque poste, les uns à la suite des autres."
 
 #: scripts/tutorial/00_all.lua:28
 msgid ""

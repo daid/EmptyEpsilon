@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-01 17:43+0100\n"
+"PO-Revision-Date: 2022-03-03 14:52+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -1570,7 +1570,7 @@ msgstr "Peut pirater"
 #: src/screens/gm/tweak.cpp:1048
 msgctxt "button"
 msgid "Can dock"
-msgstr "Peut accoster"
+msgstr "Peut amarrer"
 
 #: src/screens/gm/tweak.cpp:1054
 msgctxt "button"
@@ -1713,11 +1713,11 @@ msgstr "Entrer [{letter}]"
 
 #: src/screenComponents/dockingButton.cpp:67
 msgid "Request Dock"
-msgstr "Accostage"
+msgstr "Amarrage"
 
 #: src/screenComponents/dockingButton.cpp:76
 msgid "Cancel Docking"
-msgstr "Annuler accostage"
+msgstr "Annuler amarrage"
 
 #: src/screenComponents/dockingButton.cpp:80
 msgid "Undock"
@@ -2223,17 +2223,17 @@ msgstr "Décélérer (vitesse lumière)"
 #: src/gui/hotkeyConfig.cpp:244
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr "Accoster/désamarrer"
+msgstr "Amarrer/désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:245
 msgctxt "hotkey_Helms"
 msgid "Initiate docking"
-msgstr "Accoster"
+msgstr "Amarrer"
 
 #: src/gui/hotkeyConfig.cpp:246
 msgctxt "hotkey_Helms"
 msgid "Abort docking"
-msgstr "Annuler accostage"
+msgstr "Annuler amarrage"
 
 #: src/gui/hotkeyConfig.cpp:247
 msgctxt "hotkey_Helms"
