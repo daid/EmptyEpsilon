@@ -29,7 +29,39 @@ class ScriptFunction(object):
         self.name = name
         self.description = ""
         self.origin_class = None
+        self.return_type = None
         self.parameters = None
+
+    def get_parameters(self):
+        if self.parameters is None: return []
+
+        ret = []
+
+        current_arg = ""
+        bracket_counter = 0
+
+        for letter in self.parameters:
+            if letter == "," and bracket_counter == 0:
+                current_arg = current_arg.strip()
+                last_space = current_arg.rindex(' ')
+                name = current_arg[last_space:].strip()
+                c_type = current_arg[:(last_space + 1)].strip()
+                ret.append((translate_type(c_type, name), name))
+                current_arg = ""
+                continue
+
+            current_arg += letter
+            if letter == '<': bracket_counter += 1
+            if letter == '>': bracket_counter -= 1
+
+        current_arg = current_arg.strip()
+        if current_arg != "":
+            last_space = current_arg.rindex(' ')
+            name = current_arg[last_space:].strip()
+            c_type = current_arg[:(last_space + 1)].strip()
+            ret.append((translate_type(c_type, name), name))
+
+        return ret
 
     def __repr__(self):
         ret = self.name
@@ -80,6 +112,109 @@ class ScriptClass(object):
         return "{%s}" % (ret)
 
 
+class ClassType(object):
+    def __init__(self, name):
+        self.name = name
+
+
+class ListType(object):
+    def __init__(self, base_type):
+        self.base_type = base_type
+
+
+class TupleType(object):
+    def __init__(self, type_name_pairs):
+        self.type_name_pairs = type_name_pairs
+
+
+class OptionalType(object):
+    def __init__(self, base_type):
+        self.base_type = base_type
+
+
+class VariadicType(object):
+    def __init__(self, base_type):
+        self.base_type = base_type
+
+
+class TableType(object):
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+
+
+class EnumType(object):
+    def __init__(self, name):
+        self.name = name
+
+
+VEC2 = TupleType([("number", "x"), ("number", "y")])
+VEC3 = TupleType([("number", "x"), ("number", "y"), ("number", "z")])
+COLVEC3 = TupleType([("number", "r"), ("number", "g"), ("number", "b")])
+
+
+def translate_type(c_type, name):
+    if c_type is None: return None
+
+    c_type = c_type.replace('virtual ', '')
+    c_type = c_type.replace('unsigned ', '')
+
+    if c_type == "void": return None
+
+    # C++ doesn't really know functions with variadic return, lua does. So we use this to approximate
+    # This can only be used if an alternative parameter list is given via comments on the c++ side
+    if c_type.endswith("..."):
+        return VariadicType(translate_type(c_type[:-3].strip(), name))
+
+    if c_type.startswith("const"):
+        return translate_type(c_type[5:].strip(), name)
+
+    res = re.search("^PVector<([^>]+)>$", c_type)
+    if res is not None:
+        return ListType(translate_type("P<%s>" % (res.group(1).strip()), name))
+
+    res = re.search("^std::optional<([^>]+)>$", c_type)
+    if res is not None:
+        return OptionalType(translate_type(res.group(1).strip(), name))
+
+    res = re.search("^std::map<([^,>]+),([^,>]+)>$", c_type)
+    if res is not None:
+        return TableType(translate_type(res.group(1).strip(), name), translate_type(res.group(2).strip(), name))
+
+    res = re.search("^P<([^>]+)>$", c_type)
+    if res is not None:
+        return ClassType(res.group(1).strip())
+
+    res = re.search("^std::vector<([^>]+)>&?$", c_type)
+    if res is not None:
+        return VariadicType(translate_type(res.group(1).strip(), name))
+
+    if c_type in ('EAlertLevel', 'ECrewPosition', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EDockingState', 'ScriptSimpleCallback'):
+        return EnumType(c_type)
+
+    if c_type in ('int', 'float', 'double', 'int32_t', 'int8_t', 'uint32_t', 'uint8_t'):
+        return 'number'
+
+    if c_type == "bool":
+        return 'boolean'
+
+    if c_type == "glm::vec2" or c_type == "glm::ivec2":
+        return VEC2
+
+    if c_type == "glm::vec3":
+        if 'color' in name.lower():
+            return COLVEC3
+        return VEC3
+
+    if c_type == "glm::u8vec4":
+        return EnumType("Color")
+
+    if c_type == "std::string_view":
+        return 'string'
+
+    return c_type
+
+
 class DocumentationGenerator(object):
     def __init__(self):
         self._definitions = []
@@ -124,10 +259,10 @@ class DocumentationGenerator(object):
                 for line in f:
                     if line.startswith("#"):
                         continue
-                    res = re.search("([a-zA-Z0-9]+)::([a-zA-Z0-9]+)\(([^\)]*)\)", line)
+                    res = re.search("([a-zA-Z0-9 \:\<\>_,]+) +([a-zA-Z0-9]+)::([a-zA-Z0-9]+)\(([^\)]*)\)", line)
                     if res != None:
                         self._function_info.append(
-                            (res.group(1), res.group(2), res.group(3))
+                            (res.group(1), res.group(2), res.group(3), res.group(4))
                         )
                     res = re.search("^class ([a-zA-Z0-9]+)", line)
                     if res != None:
@@ -136,9 +271,9 @@ class DocumentationGenerator(object):
                         res = re.search(
                             "^ *([a-zA-Z0-9 \:\<\>_,]+) +([a-zA-Z0-9]+)\(([^\)]*)\)", line
                         )
-                        if res != None and res.group(2) != "":
+                        if res != None and res.group(2) != "" and res.group(1) != "return":
                             self._function_info.append(
-                                (current_class, res.group(2), res.group(3))
+                                (res.group(1), current_class, res.group(2), res.group(3))
                             )
 
     def readScriptDefinitions(self):
@@ -203,13 +338,14 @@ class DocumentationGenerator(object):
                 description = ""
 
     def linkFunctions(self):
-        for class_name, function_name, parameters in self._function_info:
+        for return_type, class_name, function_name, parameters in self._function_info:
             for definition in self._definitions:
                 if isinstance(definition, ScriptClass):
                     for func in definition.functions:
                         if (
                             func.origin_class == class_name
                         ) and func.name == function_name:
+                            func.return_type = return_type
                             func.parameters = parameters
 
     def linkParents(self):
@@ -225,6 +361,7 @@ class DocumentationGenerator(object):
                 else:
                     f = definition.addFunction("isValid")
                     f.parameters = ""
+                    f.return_type = "boolean"
                     f.description = "Check if this is still looking at a valid object. Returns false when the objects that this variable references is destroyed."
                     f = definition.addFunction("destroy")
                     f.parameters = ""
@@ -415,10 +552,16 @@ rel="stylesheet"
                 )
                 print("Failed to find parameters for %s:%s" % (scriptClass.name, func.name))
             else:
-                stream.write(
-                    "<dt>%s:%s(%s)</dt>"
-                    % (scriptClass.name, func.name, func.parameters.replace("<", "&lt;"))
-                )
+                stream.write("<dt>")
+                stream.write(self.print_type(translate_type(func.return_type, func.name), func.name, True))
+                stream.write("(")
+                first = True
+                for (type, name) in func.get_parameters():
+                    if not first:
+                        stream.write(", ")
+                    first = False
+                    stream.write(self.print_type(type, name))
+                stream.write(")</dt>")
             stream.write(
                 "<dd>%s</dd>"
                 % (func.description.replace("<", "&lt;").replace("\n", "<br>"))
@@ -436,6 +579,27 @@ rel="stylesheet"
         for c in sorted_children:
             self.outputClasses(c, stream)
 
+    def print_type(self, type, name="", return_value=False):
+        if type is None: return name
+        if isinstance(type, EnumType): return '<a href="#enum_%s">%s</a> %s' % (type.name, type.name, name)
+        if isinstance(type, ClassType): return '<a href="#class_%s">%s</a> %s' % (type.name, type.name, name)
+        if isinstance(type, ListType): return '%s[] %s' % (self.print_type(type.base_type).strip(), name)
+        if isinstance(type, TableType): return 'table<%s, %s> %s' % (self.print_type(type.key), self.print_type(type.value), name)
+        if isinstance(type, OptionalType): return '%s=nil' % (self.print_type(type.base_type, name, return_value))
+        if isinstance(type, VariadicType): return '%s...' % (self.print_type(type.base_type, name, return_value))
+        if isinstance(type, TupleType):
+            ret = ""
+            for (sub_type, sub_name) in type.type_name_pairs:
+                if return_value:
+                    ret += "%s %s, " % (self.print_type(sub_type), sub_name)
+                else:
+                    ret += "%s %s_%s, " % (self.print_type(sub_type), name, sub_name)
+
+            if return_value:
+                return ret.strip().strip(",") + " " + name
+            else:
+                return ret.strip().strip(",")
+        return ("%s %s" % (type, name)).strip()
 
 if __name__ == "__main__":
     dg = DocumentationGenerator()
