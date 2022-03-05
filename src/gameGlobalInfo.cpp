@@ -374,7 +374,7 @@ static int getPlayerShip(lua_State* L)
         return 0;
     return convert<P<PlayerSpaceship> >::returnType(L, ship);
 }
-/// P<PlayerShip> getPlayerShip(int index)
+/// P<PlayerSpaceship> getPlayerShip(int index)
 /// Return the player's ship, use -1 to get the first active player ship.
 REGISTER_SCRIPT_FUNCTION(getPlayerShip);
 
@@ -394,7 +394,7 @@ static int getActivePlayerShips(lua_State* L)
 
     return convert<PVector<PlayerSpaceship>>::returnType(L, ships);
 }
-/// PVector<PlayerShip> getActivePlayerShips()
+/// PVector<PlayerSpaceship> getActivePlayerShips()
 /// Return a list of active player ships.
 REGISTER_SCRIPT_FUNCTION(getActivePlayerShips);
 
