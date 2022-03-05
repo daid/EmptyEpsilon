@@ -580,7 +580,13 @@ rel="stylesheet"
                 print("Failed to find parameters for %s:%s" % (scriptClass.name, func.name))
             else:
                 stream.write("<dt>")
-                stream.write(self.print_type(translate_type(func.return_type, func.name), func.name, True))
+                type = translate_type(func.return_type, func.name)
+                if type is None:
+                    # Methods returning void automatically return themselves
+                    stream.write(self.print_type(ClassType(scriptClass.name), func.name, True))
+                    func.description = (func.description + "\nReturns the object it was called on.").strip()
+                else:
+                    stream.write(self.print_type(type, func.name, True))
                 stream.write("(")
                 first = True
                 for (type, name) in func.get_parameters():
