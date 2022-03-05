@@ -403,6 +403,13 @@ rel="stylesheet"
 
   h2 {
     font-size: 2em;
+    padding: 16px 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position: sticky;
+    top: 0;
+    background: rgba(16, 19, 23, 0.8);
+	scroll-margin-top: 0;
   }
 
   .ui-widget {
@@ -552,7 +559,7 @@ rel="stylesheet"
 
     def outputClasses(self, scriptClass, stream):
         stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
-        stream.write('<h2><a name="class_%s">%s</a></h2>\n' % (scriptClass.name, scriptClass.name))
+        stream.write('<a name="class_%s"></a><h2>%s</h2>\n' % (scriptClass.name, scriptClass.name))
         stream.write(
             "<div>%s</div>"
             % (scriptClass.description.replace("<", "&lt;").replace("\n", "<br>"))
@@ -586,7 +593,7 @@ rel="stylesheet"
                 % (func.description.replace("<", "&lt;").replace("\n", "<br>"))
             )
         for member in scriptClass.members:
-            stream.write("<dt>%s:%s</dt>" % (scriptClass.name, member.name))
+            stream.write("<dt>%s</dt>" % (member.name))
             stream.write(
                 "<dd>%s</dd>"
                 % (member.description.replace("<", "&lt;").replace("\n", "<br>")
