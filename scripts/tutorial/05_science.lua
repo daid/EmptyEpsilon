@@ -6,7 +6,7 @@
 --- [Station Info]
 --- -------------------
 --- Long-range Radar: 
---- -The Science station has a long-range radar that can locate ships and objects at a distance of up to 25U. The Science officer's most important task is to report the sector's status and any changes within it. On the edge of the radar are colored bands of signal interference that can vaguely suggest the presence of objects or space hazards even further from the ship, but it's up to the Science officer to interpret them.
+--- -The Science station has a long-range radar that can locate ships and objects at a great distance. The Science officer's most important task is to report the sector's status and any changes within it. On the edge of the radar are colored bands of signal interference that can vaguely suggest the presence of objects or space hazards even further from the ship, but it's up to the Science officer to interpret them.
 ---
 --- Scanning: 
 --- -You can scan ships to get more information about them. The Science officer must align two of the ship's scanning frequencies with a target to complete the scan. Most ships are unknown (gray) to your crew at the start of a scenario and must be scanned before they can be identified as a friend (green), foe (red), or neutral (blue). A scan also identifies the ship's type, which the Science officer can use to identify its capabilities in the station's database.

@@ -140,7 +140,7 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// string.
     /// Example: obj:sendCommsMessageNoLog(player, "Prepare to die")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, sendCommsMessageNoLog);
-    /// As sendCommsMessage, but sends an empty string as the message.
+    /// As sendCommsMessage, but sends an empty string as the message. This will call the object's comms function.
     /// Example: obj:openCommsTo(player)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, openCommsTo);
     /// Gets this object's callsign.

@@ -19,7 +19,7 @@
 --- -A warp drive propels the ship straight ahead several times faster than impulse engines, but drain energy at a much faster rate. A warping ship can still collide with hazards like asteroids and mines, but a ship can enter warp very quickly for rapid escapes and advanced tactical maneuvers.
 ---
 --- Combat Maneuvers: 
---- -For ships capable of performing combat maneuvers, the Helms screen includes up to two special sliders at the bottom right. The vertical slider rapidly increases the ship's forward speed above its maximum cruising speed, but generates lots of heat in the impulse engines and consumes energy quickly. The horizontal slider moves the ship laterally but can quickly overheat the maneuvering system. Combat maneuvers can be exhausted but recharge over time.
+--- -For ships capable of performing combat maneuvers, the Helms screen includes special combat maneuver controls shown at the bottom right. Vertical movement rapidly increases the ship's forward speed above its maximum cruising speed, but generates lots of heat in the impulse engines. Horizontal movement moves the ship laterally but can quickly overheat the maneuvering system. Combat maneuvers can be exhausted but recharge over time.
 ---
 --- Docking: 
 --- -The Helms officer can dock with a friendly or neutral station (or in some cases, a larger ship) when it is within 1U. While docked, the ship can't engage its engines or fire weapons, but its energy recharges faster, repairs take less time, the ship's supply of probes is replenished, and the Relay officer can request missile weapon rearmament. The Helms officer is also responsible for undocking the ship.

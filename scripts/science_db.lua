@@ -41,7 +41,7 @@ Some captains oppose the use of nuclear weapons because their large explosions c
 
 item = weapons:addEntry(_('Mine'))
 item:addKeyValue(_('Drop distance'), '1u')
-item:addKeyValue(_('Trigger distance'), '0.8u')
+item:addKeyValue(_('Trigger distance'), '0.6u')
 item:addKeyValue(_('Blast radius'), '1u')
 item:addKeyValue(_('Damage at center'), '160')
 item:addKeyValue(_('Damage at edge'), '30')

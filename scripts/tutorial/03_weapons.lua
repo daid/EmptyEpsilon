@@ -25,7 +25,7 @@
 --- High-velocity Lead Impactor (HVLI): 
 --- -A group of 5 simple lead slugs fired in a single burst at extremely high velocity. These bolts don't home in on an enemy target.
 --- Mine: 
---- -A powerful, stationary explosive that detonates when a ship moves to within 1U of it. The explosion damages all objects within a 1U radius.
+--- -A powerful, stationary explosive that detonates when a ship moves to within 0.6U of it. The explosion damages all objects within a 1U radius.
 --- Beam Weapons: 
 --- -The location and range of beam weapons are indicated by red firing arcs originating from the players' ship. After the Weapons officer selects a target, the ship's beam weapons will automatically fire at that target when it is inside a beam's firing arc. The officer can use the frequency selectors at the bottom right, along with data about a target's shield frequencies provided by the Science officer, to remodulate beams to a frequency that deals more damage. Note that you can change the beam frequency instantaneously.
 --- -Beam weapons fire at a target's hull by default, but the Weapons officer can also target specific subsystems to disable an enemy. If you simply wish to destroy an enemy, however, it's best left on hull.
