@@ -22,7 +22,7 @@ static int addGMFunction(lua_State* L)
 
     return 0;
 }
-/// addGMFunction(name, function)
+/// void addGMFunction(string name, ScriptSimpleCallback callback)
 /// Add a function that can be called from the GM console. This can be used to create helper scripts for the GM.
 /// Or to give the GM console certain control over the scenario.
 REGISTER_SCRIPT_FUNCTION(addGMFunction);
@@ -35,7 +35,7 @@ static int removeGMFunction(lua_State* L)
 
     return 0;
 }
-/// removeGMFunction(name)
+/// void removeGMFunction(string name)
 /// Remove a function from the GM console
 REGISTER_SCRIPT_FUNCTION(removeGMFunction);
 
@@ -44,7 +44,7 @@ static int clearGMFunctions(lua_State* L)
     gameGlobalInfo->gm_callback_functions.clear();
     return 0;
 }
-/// clearGMFunctions()
+/// void clearGMFunctions()
 /// Remove all the GM functions from the GM console.
 REGISTER_SCRIPT_FUNCTION(clearGMFunctions);
 
@@ -61,7 +61,7 @@ static int getGMSelection(lua_State* L)
     }
     return convert<PVector<SpaceObject> >::returnType(L, objects);
 }
-/// getGMSelection()
+/// PVector<SpaceObject> getGMSelection()
 /// Returns an list of objects that the GM currently has selected.
 REGISTER_SCRIPT_FUNCTION(getGMSelection);
 
@@ -86,7 +86,7 @@ static int onGMClick(lua_State* L)
 
     return 0;
 }
-/// onGMClick(function)
+/// void onGMClick(ScriptSimpleCallback callback)
 /// Register a callback function that is called when the gm clicks on the background of their screen.
 /// Example 1: onGMClick(function(x,y) print(x,y) end) -- print the x and y when clicked.
 /// Example 2: onGMClick(nil) -- resets to no function being called on clicks

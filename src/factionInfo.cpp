@@ -23,6 +23,7 @@ static int getFactionInfo(lua_State* L)
             return convert<P<FactionInfo>>::returnType(L, factionInfo[n]);
     return 0;
 }
+/// P<FactionInfo> getFactionInfo(string faction_name)
 /// Get a reference to a FactionInfo object, which can be used to modify faction to faction states.
 REGISTER_SCRIPT_FUNCTION(getFactionInfo);
 

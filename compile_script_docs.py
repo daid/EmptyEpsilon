@@ -333,8 +333,18 @@ class DocumentationGenerator(object):
                 res = re.search("REGISTER_SCRIPT_FUNCTION\(([^\)]*)\)", line)
                 if res != None:
                     current_class = None
-                    self._definitions.append(ScriptFunction(res.group(1).strip()))
-                    self._definitions[-1].description = description
+                    name = res.group(1).strip()
+                    func = ScriptFunction(name)
+                    self._definitions.append(func)
+
+                    first_line_break = description.index("\n")
+                    first_line = description[:first_line_break].strip()
+                    res_first = re.search("([a-zA-Z0-9 \:\<\>_,]+) " + name + " *\(([^\)]*)\)", first_line)
+                    if res_first != None:
+                        func.return_type = res_first.group(1).strip()
+                        func.parameters = res_first.group(2).strip()
+                        description = description[first_line_break:].strip()
+                    func.description = description
                 description = ""
 
     def linkFunctions(self):
@@ -505,7 +515,16 @@ rel="stylesheet"
         stream.write("<ul>")
         for d in self._definitions:
             if isinstance(d, ScriptFunction):
-                stream.write("<li>%s" % (d.name))
+                stream.write("<li>")
+                stream.write(self.print_type(translate_type(d.return_type, d.name), d.name, True))
+                stream.write("(")
+                first = True
+                for (type, name) in d.get_parameters():
+                    if not first:
+                        stream.write(", ")
+                    first = False
+                    stream.write(self.print_type(type, name))
+                stream.write(")")
                 stream.write(
                     "<dd>%s</dd>"
                     % (d.description.replace("<", "&lt;").replace("\n", "<br>"))
