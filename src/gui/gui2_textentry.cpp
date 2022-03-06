@@ -382,6 +382,10 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
         if (d.position.y > position.y)
             break;
     }
+    if (n == pfs.data.size())
+    {
+        return text.size();
+    }
     float line_y = pfs.data[n].position.y;
     for(; n<pfs.data.size(); n++)
     {
