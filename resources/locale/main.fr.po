@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-02-28 22:49+0100\n"
+"PO-Revision-Date: 2022-03-03 14:52+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -272,11 +272,11 @@ msgstr "Boucliers arrière"
 msgid "setting"
 msgstr "Réglage"
 
-#: src/tutorialGame.cpp:97
+#: src/tutorialGame.cpp:101
 msgid "Next"
 msgstr "Suivant"
 
-#: src/tutorialGame.cpp:104
+#: src/tutorialGame.cpp:108
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -286,7 +286,7 @@ msgid "Connecting..."
 msgstr "Connexion en cours..."
 
 #: src/menus/joinServerMenu.cpp:20 src/menus/shipSelectionScreen.cpp:44
-#: src/menus/shipSelectionScreen.cpp:492 src/screens/gm/gameMasterScreen.cpp:93
+#: src/menus/shipSelectionScreen.cpp:501 src/screens/gm/gameMasterScreen.cpp:93
 #: src/screens/gm/objectCreationView.cpp:136
 #: src/screens/gm/globalMessageEntryView.cpp:19
 #: src/screenComponents/selfDestructButton.cpp:25
@@ -433,7 +433,7 @@ msgid "Server IP: "
 msgstr "IP du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:83 src/menus/serverCreationScreen.cpp:118
-#: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:223
+#: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:231
 msgid "Close"
 msgstr "Retour"
 
@@ -565,7 +565,7 @@ msgstr "Volume moteur : {volume} %"
 msgid "Preview Soundtracks"
 msgstr "Écoute des bandes-son"
 
-#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:264
+#: src/menus/shipSelectionScreen.cpp:40 src/menus/shipSelectionScreen.cpp:272
 msgid "Enter this ship's control code:"
 msgstr "Veuillez saisir le code de contrôle du vaisseau :"
 
@@ -601,144 +601,148 @@ msgstr "Entrer le code de contrôle MJ :"
 msgid "Spectate (view all)"
 msgstr "Vue spectateur (carte)"
 
-#: src/menus/shipSelectionScreen.cpp:191
+#: src/menus/shipSelectionScreen.cpp:183
+msgid "Cinematic"
+msgstr "Vue cinématique"
+
+#: src/menus/shipSelectionScreen.cpp:199
 msgid "Scan complexity: "
 msgstr "Complexité du scan : "
 
-#: src/menus/shipSelectionScreen.cpp:194
+#: src/menus/shipSelectionScreen.cpp:202
 msgctxt "scanning"
 msgid "None (delay)"
 msgstr "Aucune (délai)"
 
-#: src/menus/shipSelectionScreen.cpp:194
+#: src/menus/shipSelectionScreen.cpp:202
 msgctxt "scanning"
 msgid "Simple"
 msgstr "Simple"
 
-#: src/menus/shipSelectionScreen.cpp:194
+#: src/menus/shipSelectionScreen.cpp:202
 msgctxt "scanning"
 msgid "Normal"
 msgstr "Normale"
 
-#: src/menus/shipSelectionScreen.cpp:194
+#: src/menus/shipSelectionScreen.cpp:202
 msgctxt "scanning"
 msgid "Advanced"
 msgstr "Avancée"
 
-#: src/menus/shipSelectionScreen.cpp:199
+#: src/menus/shipSelectionScreen.cpp:207
 msgid "Hacking difficulty: "
 msgstr "Difficulté de piratage : "
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:210
 msgctxt "hacking"
 msgid "Simple"
 msgstr "Simple"
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:210
 msgctxt "hacking"
 msgid "Normal"
 msgstr "Normale"
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:210
 msgctxt "hacking"
 msgid "Difficult"
 msgstr "Difficile"
 
-#: src/menus/shipSelectionScreen.cpp:202
+#: src/menus/shipSelectionScreen.cpp:210
 msgctxt "hacking"
 msgid "Fiendish"
 msgstr "Diabolique"
 
-#: src/menus/shipSelectionScreen.cpp:207
+#: src/menus/shipSelectionScreen.cpp:215
 msgid "Hacking type: "
 msgstr "Type de piratage : "
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:218
 msgctxt "hacking"
 msgid "Mine"
 msgstr "Mines"
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:218
 msgctxt "hacking"
 msgid "Lights"
 msgstr "Lumières"
 
-#: src/menus/shipSelectionScreen.cpp:210
+#: src/menus/shipSelectionScreen.cpp:218
 msgctxt "hacking"
 msgid "All"
 msgstr "Les deux"
 
-#: src/menus/shipSelectionScreen.cpp:215
+#: src/menus/shipSelectionScreen.cpp:223
 msgid "Beam/shield frequencies"
 msgstr "Fréq. faisceaux/bouclier"
 
-#: src/menus/shipSelectionScreen.cpp:219
+#: src/menus/shipSelectionScreen.cpp:227
 msgid "Per-system damage"
 msgstr "Dégâts par systèmes"
 
-#: src/menus/shipSelectionScreen.cpp:230
+#: src/menus/shipSelectionScreen.cpp:238
 msgid "Extra settings"
 msgstr "Réglages : scan, fréquences, piratage..."
 
-#: src/menus/shipSelectionScreen.cpp:245
+#: src/menus/shipSelectionScreen.cpp:253
 msgid "Select ship"
 msgstr "Sélection vaisseau"
 
-#: src/menus/shipSelectionScreen.cpp:246
+#: src/menus/shipSelectionScreen.cpp:254
 msgid "Waiting for server to spawn a ship"
 msgstr "En attente du serveur pour embarquement"
 
-#: src/menus/shipSelectionScreen.cpp:309
+#: src/menus/shipSelectionScreen.cpp:317
 msgid "Spawn player ship"
 msgstr "Créer vaisseau joueur"
 
-#: src/menus/shipSelectionScreen.cpp:330
+#: src/menus/shipSelectionScreen.cpp:338
 msgid "Scenario selection"
 msgstr "Retour scénario"
 
-#: src/menus/shipSelectionScreen.cpp:337
+#: src/menus/shipSelectionScreen.cpp:345
 msgid "Disconnect"
 msgstr "Déconnexion"
 
-#: src/menus/shipSelectionScreen.cpp:426
+#: src/menus/shipSelectionScreen.cpp:434
 msgid "6/5 player crew"
 msgstr "Équipage 5/6 joueurs"
 
-#: src/menus/shipSelectionScreen.cpp:429
+#: src/menus/shipSelectionScreen.cpp:437
 msgid "Main screen"
 msgstr "Écran principal"
 
-#: src/menus/shipSelectionScreen.cpp:451
+#: src/menus/shipSelectionScreen.cpp:459
 msgid "4/3/1 player crew"
 msgstr "Équipage 1/3/4 joueurs"
 
-#: src/menus/shipSelectionScreen.cpp:459
+#: src/menus/shipSelectionScreen.cpp:467
 msgid "Alternative options"
 msgstr "Options alternatives"
 
-#: src/menus/shipSelectionScreen.cpp:466
+#: src/menus/shipSelectionScreen.cpp:474
 msgid "Main screen controls"
 msgstr "Contrôle écran principal"
 
-#: src/menus/shipSelectionScreen.cpp:474
+#: src/menus/shipSelectionScreen.cpp:482
 msgid "Ship window"
 msgstr "Vue fenêtre"
 
-#: src/menus/shipSelectionScreen.cpp:487
+#: src/menus/shipSelectionScreen.cpp:495
 msgid "Top-down 3D view"
 msgstr "Vue de haut en 3D"
 
-#: src/menus/shipSelectionScreen.cpp:495
+#: src/menus/shipSelectionScreen.cpp:505
 msgctxt "button"
 msgid "Ready"
 msgstr "Démarrer la partie"
 
-#: src/screens/cinematicViewScreen.cpp:40 src/screens/topDownScreen.cpp:33
+#: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
 msgctxt "button"
 msgid "Lock camera on ship"
 msgstr "Verrouiller caméra vaisseau"
 
-#: src/screens/cinematicViewScreen.cpp:43
+#: src/screens/cinematicViewScreen.cpp:44
 msgctxt "button"
 msgid "Lock camera on ship's target"
 msgstr "Verrouiller caméra cible"
@@ -1566,7 +1570,7 @@ msgstr "Peut pirater"
 #: src/screens/gm/tweak.cpp:1048
 msgctxt "button"
 msgid "Can dock"
-msgstr "Peut accoster"
+msgstr "Peut amarrer"
 
 #: src/screens/gm/tweak.cpp:1054
 msgctxt "button"
@@ -1694,26 +1698,26 @@ msgstr "Yippee Ki Yay !"
 msgid "This ship will self-destruct in {seconds} seconds."
 msgstr "Ce vaisseau s'autodétruira dans {seconds} secondes."
 
-#: src/screenComponents/selfDestructEntry.cpp:21
+#: src/screenComponents/selfDestructEntry.cpp:19
 msgid "Self destruct activated!"
 msgstr "Autodestruction activée !"
 
-#: src/screenComponents/selfDestructEntry.cpp:66
+#: src/screenComponents/selfDestructEntry.cpp:64
 msgid "Code [{letter}]: {self_destruct_code}"
 msgstr "Code [{letter}] : {self_destruct_code}"
 
-#: src/screenComponents/selfDestructEntry.cpp:79
+#: src/screenComponents/selfDestructEntry.cpp:77
 msgctxt "selfdestruct"
 msgid "Enter [{letter}]"
 msgstr "Entrer [{letter}]"
 
 #: src/screenComponents/dockingButton.cpp:67
 msgid "Request Dock"
-msgstr "Accostage"
+msgstr "Amarrage"
 
 #: src/screenComponents/dockingButton.cpp:76
 msgid "Cancel Docking"
-msgstr "Annuler accostage"
+msgstr "Annuler amarrage"
 
 #: src/screenComponents/dockingButton.cpp:80
 msgid "Undock"
@@ -2219,17 +2223,17 @@ msgstr "Décélérer (vitesse lumière)"
 #: src/gui/hotkeyConfig.cpp:244
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr "Accoster/désamarrer"
+msgstr "Amarrer/désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:245
 msgctxt "hotkey_Helms"
 msgid "Initiate docking"
-msgstr "Accoster"
+msgstr "Amarrer"
 
 #: src/gui/hotkeyConfig.cpp:246
 msgctxt "hotkey_Helms"
 msgid "Abort docking"
-msgstr "Annuler accostage"
+msgstr "Annuler amarrage"
 
 #: src/gui/hotkeyConfig.cpp:247
 msgctxt "hotkey_Helms"
