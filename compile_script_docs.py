@@ -337,13 +337,20 @@ class DocumentationGenerator(object):
                     func = ScriptFunction(name)
                     self._definitions.append(func)
 
-                    first_line_break = description.index("\n")
-                    first_line = description[:first_line_break].strip()
-                    res_first = re.search("([a-zA-Z0-9 \:\<\>_,]+) " + name + " *\(([^\)]*)\)", first_line)
-                    if res_first != None:
-                        func.return_type = res_first.group(1).strip()
-                        func.parameters = res_first.group(2).strip()
+                    if "\n" in description:
+                        first_line_break = description.index("\n")
+                        first_line = description[:first_line_break].strip()
                         description = description[first_line_break:].strip()
+                    else:
+                        first_line = description
+                        description = ""
+                    res_first = re.search("([a-zA-Z0-9 \:\<\>_,]+) " + name + " *\(([^\)]*)\)", first_line)
+                    if res_first is None:
+                        raise Exception("Lua function `%s` has no parameter description in its comment.\nTry adding "
+                                        "`/// return_type %s (parameters)` as the first line of the description before\n"
+                                        "the call to `REGISTER_SCRIPT_FUNCTION(%s)` in '%s'" % (name, name, name, filename))
+                    func.return_type = res_first.group(1).strip()
+                    func.parameters = res_first.group(2).strip()
                     func.description = description
                 description = ""
 
