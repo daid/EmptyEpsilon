@@ -133,14 +133,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // If the server uses frequencies, add the Tactical sidebar page.
     if (gameGlobalInfo->use_beam_shield_frequencies)
     {
-        sidebar_pager->addEntry("Tactical", tr("scienceTab", "Tactical"));
+        sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
     }
 
     // Add sidebar page for systems.
-    sidebar_pager->addEntry("Systems", tr("scienceTab", "Systems"));
+    sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
 
     // Add sidebar page for a description.
-    sidebar_pager->addEntry("Description", tr("scienceTab", "Description"));
+    sidebar_pager->addEntry(tr("scienceTab", "Description"), "Description");
 
     // Default the pager to the first item.
     sidebar_pager->setSelectionIndex(0);
