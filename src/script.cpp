@@ -79,7 +79,7 @@ static int require(lua_State* L)
 
     return lua_gettop(L) - old_top;
 }
-/// require(filename)
+/// void require(string filename)
 /// Run the script with the given filename in the same context as the current running script.
 REGISTER_SCRIPT_FUNCTION(require);
 
@@ -93,6 +93,6 @@ static int _(lua_State* L)
         lua_pushstring(L, tr(str_1).c_str());
     return 1;
 }
-/// _(string)
+/// string _(string text, std::optional<string> default)
 /// Translate the given string with the user configured language.
 REGISTER_SCRIPT_FUNCTION(_);
