@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-01 14:08+0100\n"
+"PO-Revision-Date: 2022-03-07 00:38+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -15,8 +15,13 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: scripts/shiptemplates/satellites.lua:1
+msgctxt "ship"
+msgid "ANT 615"
+msgstr ""
+
+#: scripts/shiptemplates/satellites.lua:1
 msgctxt "class"
-msgid "Satellites"
+msgid "Satellite"
 msgstr "Satellites"
 
 #: scripts/shiptemplates/satellites.lua:1
