@@ -4,12 +4,19 @@
 --- Placement points depend on the number of racers present at the starting point when the race starts. Precise values are given to Relay at that time. Each target drone of yours shot earns one point. Shoot an opponent's drone and they get the point.
 ---
 --- Before the race starts, scope out the course, visit some stations, maybe improve your ship for the race. But, watch your time carefully. If you are not at waypoint 1 at the start of the race, your ship will be destroyed. Your competitors may also try to destroy you despite being your nominal allies, so beware
----
---- Current version updated for online event on 23Jan2021
 -- Type: Race
--- Variation[Feisty]: Target drones shoot if you get close enough
--- Variation[Raiders]: Feisty target drones *plus* enemies chase you while you race
--- Variation[Hazardous]: Feisty drones and raiders *plus* dangers along the course
+-- Setting[Shoot Back]: Configures whether the targets along the race course shoot back or not
+-- Shoot Back[No|Default]: Targets along the course do not shoot back
+-- Shoot Back[Yes]: Targets along the course shoot back
+-- Setting[Chase]: Configures whether or not random enemies will chase the racers
+-- Chase[No|Default]: Random enemies will not appear to chase the racers
+-- Chase[Yes]: Random enemies will appear to chase the racers
+-- Setting[Hazards]: Configures whether or not hazards will appear at the race point markers to impede the race
+-- Hazards[No|Default]: No hazards will appear at the race point markers to impede the race
+-- Hazards[Yes]: Hazards will appear at the race point markers to impeded the race
+-- Setting[Ship Name]: Configures whether player ship names and control codes will be predefined or random. See Game master screen to get control codes
+-- Ship Name[Predefined|Default]: Player ship names and control codes will be predefined as scripted. See Game master screen to get control codes
+-- Ship Name[Random]: Player ship names will be selected at random from a list of names and player ship control codes will be randomly generated. See Game master screen to get control codes
 
 require("utils.lua")
 
@@ -17,7 +24,7 @@ require("utils.lua")
 --	Initialization  --
 ----------------------
 function init()
-	scenario_version = "2.0.0"
+	scenario_version = "2.1.0"
 	print(string.format("     -----     Scenario: Fermi 500     -----     Version %s     -----",scenario_version))
 	print(_VERSION)
 	-- 27 types of goods so far
@@ -83,7 +90,7 @@ function init()
 	playerShipNamesFor["Player Fighter"] = {"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"}
 	playerShipNamesFor["Benedict"] = {"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"}
 	playerShipNamesFor["Kiriya"] = {"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"}
-	playerShipNamesFor["Striker"] = {"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"}
+	playerShipNamesFor["Striker"] = {"Sparrow","Sizzle","Squawk","Crow","Snowbird","Hawk"}
 	playerShipNamesFor["ZX-Lindworm"] = {"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"}
 	playerShipNamesFor["Repulse"] = {"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"}
 	playerShipNamesFor["Ender"] = {"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"}
@@ -196,7 +203,7 @@ function init()
 		"Mekong",
 		"Melbourne",
 		"Merced",
-		"Merrimack",
+		"Merrimac",
 		"Miranda",
 		"Nash",
 		"New Orleans",
@@ -428,21 +435,41 @@ function init()
 	storage.gatherStats = gatherStats
 end
 function setVariations()
-	if getScenarioVariation() == "Feisty" or getScenarioVariation() == "Raiders" or getScenarioVariation() == "Hazardous" then
-		shootBack = true
+	if getScenarioSetting == nil then
+		shootBack = false
+		chasers = false
+		hazards = false
+		predefined_player_ships = getPredefinedPlayerShipNames()
 	else
 		shootBack = false
-	end
-	if getScenarioVariation() == "Raiders" or getScenarioVariation() == "Hazardous" then
-		chasers = true
-	else
+		if getScenarioSetting("Shoot Back") == "Yes" then
+			shootBack = true
+		end
 		chasers = false
-	end
-	if getScenarioVariation() == "Hazardous" then
-		hazards = true
-	else
+		if getScenarioSetting("Chase") == "Yes" then
+			chasers = true
+		end
 		hazards = false
+		if getScenarioSetting("Hazards") == "Yes" then
+			hazards = true
+		end
+		if getScenarioSetting("Ship Name") == "Predefined" then
+			predefined_player_ships = getPredefinedPlayerShipNames()
+		else
+			predefined_player_ships = nil
+		end
 	end
+end
+function getPredefinedPlayerShipNames()
+	local predefined_player_ships = {
+		{name = "Phoenix",		control_code = "BURN265"},
+		{name = "Callisto",		control_code = "MOON558"},
+		{name = "Charybdis",	control_code = "JACKPOT777"},
+		{name = "Sentinel",		control_code = "FERENGI432"},
+		{name = "Omnivore",		control_code = "EQUILATERAL180"},
+		{name = "Tarquin",		control_code = "TIME909"},
+	}
+	return predefined_player_ships
 end
 --	GM Buttons
 function setGMButtons()
@@ -499,6 +526,94 @@ function mainGMButtonsDuringPause()
 	addGMFunction("Show control codes",showControlCodes)
 	addGMFunction(string.format("+Start Delay: %i",raceStartDelay/60),setStartDelay)
 	addGMFunction(string.format("+Patience: %i",patienceTimeLimit/60),setPatienceTimeLimit)
+	if predefined_player_ships ~= nil then
+		addGMFunction("Random PShip Names",function()
+			addGMMessage("Player ship names will be selected at random.\nControl codes will be randomly generated")
+			predefined_player_ships = nil
+			mainGMButtons()
+		end)
+	end
+	local button_label = "+Shoot Back: "
+	if shootBack then
+		button_label = string.format("%s%s",button_label,"Yes")
+	else
+		button_label = string.format("%s%s",button_label,"No")
+	end
+	addGMFunction(button_label,setShootBack)
+	button_label = "+Chase: "
+	if chasers then
+		button_label = string.format("%s%s",button_label,"Yes")
+	else
+		button_label = string.format("%s%s",button_label,"No")
+	end
+	addGMFunction(button_label,setChasers)
+	button_label = "+Hazards: "
+	if hazards then
+		button_label = string.format("%s%s",button_label,"Yes")
+	else
+		button_label = string.format("%s%s",button_label,"No")
+	end
+	addGMFunction(button_label,setHazards)
+end
+function setShootBack()
+	clearGMFunctions()
+	addGMFunction("-From Shoot Back",mainGMButtons)
+	local button_label = "Shoot Back Yes"
+	if shootBack then
+		button_label = button_label .. "*"
+	end
+	addGMFunction(button_label,function()
+		shootBack = true
+		setShootBack()
+	end)
+	button_label = "Shoot Back No"
+	if not shootBack then
+		button_label = button_label .. "*"
+	end
+	addGMFunction(button_label,function()
+		shootBack = false
+		setShootBack()
+	end)
+end
+function setChasers()
+	clearGMFunctions()
+	addGMFunction("-From Chase",mainGMButtons)
+	local button_label = "Chase Yes"
+	if chasers then
+		button_label = button_label .. "*"
+	end
+	addGMFunction(button_label,function()
+		chasers = true
+		setChasers()
+	end)
+	button_label = "Chase No"
+	if not chasers then
+		button_label = button_label .. "*"
+	end
+	addGMFunction(button_label,function()
+		chasers = false
+		setChasers()
+	end)
+end
+function setHazards()
+	clearGMFunctions()
+	addGMFunction("-From Hazards",mainGMButtons)
+	local button_label = "Hazards Yes"
+	if hazards then
+		button_label = button_label .. "*"
+	end
+	addGMFunction(button_label,function()
+		hazards = true
+		setHazards()
+	end)
+	button_label = "Hazards No"
+	if not hazards then
+		button_label = button_label .. "*"
+	end
+	addGMFunction(button_label,function()
+		hazards = false
+		setHazards()
+	end)
 end
 function setPatienceTimeLimit()
 	clearGMFunctions()
@@ -3067,18 +3182,36 @@ function update(delta)
 			if p ~= nil and p:isValid() then
 				if p.nameAssigned == nil then
 					p.nameAssigned = true
-					local control_code_index = math.random(1,#control_code_stem)
-					local stem = control_code_stem[control_code_index]
-					table.remove(control_code_stem,control_code_index)
-					local branch = math.random(100,999)
-					p.control_code = stem .. branch
-					p:setControlCode(stem .. branch)
 					tempPlayerType = p:getTypeName()
 					p.shipScore = player_ship_stats[tempPlayerType].strength
 					p.maxCargo = player_ship_stats[tempPlayerType].cargo
 					p:addReputationPoints(5)
 					goods[p] = goodsList
-					namePlayerShip(p,tempPlayerType)
+					local use_fixed = false
+					if predefined_player_ships ~= nil then
+						if pps_index == nil then
+							pps_index = 0
+						end
+						pps_index = pps_index + 1
+						if predefined_player_ships[pps_index] ~= nil then
+							use_fixed = true
+						else
+							predefined_player_ships = nil
+						end
+					end
+					if use_fixed then
+						p:setCallSign(predefined_player_ships[pps_index].name)
+						p.control_code = predefined_player_ships[pps_index].control_code
+						p:setControlCode(predefined_player_ships[pps_index].control_code)
+					else
+						namePlayerShip(p,tempPlayerType)
+						local control_code_index = math.random(1,#control_code_stem)
+						local stem = control_code_stem[control_code_index]
+						table.remove(control_code_stem,control_code_index)
+						local branch = math.random(100,999)
+						p.control_code = stem .. branch
+						p:setControlCode(stem .. branch)
+					end
 					p.name = p:getCallSign()
 					local gi = 1
 					repeat
