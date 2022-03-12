@@ -48,7 +48,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     new GuiJumpIndicator(this);
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
-    new GuiIndicatorOverlays(this);
+    (new GuiIndicatorOverlays(this))->hasGlobalMessage();
 
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
 

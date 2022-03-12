@@ -328,10 +328,10 @@ REGISTER_SCRIPT_FUNCTION(victory);
 static int globalMessage(lua_State* L)
 {
     gameGlobalInfo->global_message = luaL_checkstring(L, 1);
-    gameGlobalInfo->global_message_timeout = 5.0;
+    gameGlobalInfo->global_message_timeout = luaL_optnumber(L, 2, 5.0);
     return 0;
 }
-/// void globalMessage(string message)
+/// void globalMessage(string message, std::optional<float> timeout)
 /// Show a global message on the main screens of all active player ships.
 /// The message is shown for 5 sec; new messages replace the old immediately.
 REGISTER_SCRIPT_FUNCTION(globalMessage);

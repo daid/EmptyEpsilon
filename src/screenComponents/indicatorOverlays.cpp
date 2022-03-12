@@ -30,9 +30,10 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     }
 
     victory_overlay = new GuiOverlay(this, "VICTORY", glm::u8vec4(0, 0, 0, 128));
-    (new GuiPanel(victory_overlay, "VICTORY_BOX"))->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
-    victory_label = new GuiLabel(victory_overlay, "VICTORY_LABEL", "...", 70);
-    victory_label->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
+    victory_panel = new GuiPanel(victory_overlay, "VICTORY_BOX");
+    victory_panel->setPosition(0, 0, sp::Alignment::Center)->setSize(500, 100);
+    victory_label = new GuiLabel(victory_panel, "VICTORY_LABEL", "...", 70);
+    victory_label->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiSizeMax, GuiSizeMax);
 }
 
 GuiIndicatorOverlays::~GuiIndicatorOverlays()
@@ -115,6 +116,11 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         }else{
             pause_overlay->hide();
             victory_overlay->show();
+            if (gameGlobalInfo->global_message_timeout > 0.0f && has_global_message) {
+                victory_panel->setPosition(0, 30, sp::Alignment::TopCenter);
+            } else {
+                victory_panel->setPosition(0, 0, sp::Alignment::Center);
+            }
 
             EFactionVsFactionState fvf_state = FVF_Neutral;
             if (my_spaceship)

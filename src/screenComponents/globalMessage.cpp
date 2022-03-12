@@ -10,9 +10,9 @@ GuiGlobalMessage::GuiGlobalMessage(GuiContainer* owner)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(owner, "GLOBAL_MESSAGE_BOX");
-    box->setSize(800, 100)->setPosition(0, 250, sp::Alignment::TopCenter);
-    label = new GuiLabel(box, "GLOBAL_MESSAGE_LABEL", "...", 40);
-    label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::Center);
+    box->setPosition(0, 250, sp::Alignment::TopCenter);
+    label = new GuiAutoSizeLabel(box, "GLOBAL_MESSAGE_LABEL", "...", {760, 60}, {760, 400}, 20, 40);
+    label->setMargins(20)->setPosition(0, 0, sp::Alignment::Center);
 }
 
 void GuiGlobalMessage::onDraw(sp::RenderTarget& target)

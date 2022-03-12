@@ -29,4 +29,18 @@ public:
     GuiLabel* setVertical();
 };
 
+class GuiAutoSizeLabel : public GuiLabel
+{
+protected:
+    glm::vec2 min_size;
+    glm::vec2 max_size;
+    float min_text_size;
+    float max_text_size;
+public:
+    GuiAutoSizeLabel(GuiContainer* owner, string id, string text, glm::vec2 min_size, glm::vec2 max_size, float min_text_size, float max_text_size);
+
+    virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
+};
+
 #endif//GUI2_LABEL_H
