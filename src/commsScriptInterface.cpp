@@ -32,12 +32,12 @@ static int commsSwitchToGM(lua_State* L)
     return 0;
 }
 
-/// setCommsMessage(message)
+/// void setCommsMessage(string message)
 /// Sets the message/reply shown to the comms officer.
 /// Not setting the message leads to "no reply" (when trying to open comms)
 /// or a dialog with the message "?" (in a reply).
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
-/// addCommsReply(message, function)
+/// void addCommsReply(string message, ScriptSimpleCallback callback)
 /// Add an reply option for communications.
 /// Within the callback function, `comms_source` and `comms_target` are available.
 /// Deprecated: In a CommsScript, `player` can be used for `comms_source`.
@@ -45,6 +45,7 @@ REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// Instead of using the globals, the callback function can take two parameters.
 /// Example: addCommsReply(message, function(comms_source, comms_target) ... end)
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
+/// void commsSwitchToGM()
 /// Use this function from a communication callback function to switch the current
 /// communication from scripted to a GM based chat.
 REGISTER_SCRIPT_FUNCTION(commsSwitchToGM);

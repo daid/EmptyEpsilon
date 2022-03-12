@@ -11,7 +11,7 @@ class GuiCanvas : public Renderable, public GuiContainer
 private:
     GuiElement* click_element;
     GuiElement* focus_element;
-    glm::vec2 mouse_position;
+    glm::vec2 mouse_position{0,0};
     bool enable_debug_rendering;
 public:
     GuiCanvas(RenderLayer* renderLayer=nullptr);

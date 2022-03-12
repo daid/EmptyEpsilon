@@ -98,6 +98,7 @@ static int getScriptStorage(lua_State* L)
     return convert<P<ScriptStorage> >::returnType(L, storage);
 }
 
+/// P<ScriptStorage> getScriptStorage()
 /// Expose the ScriptStorage object, which can save and load key-value pairs
 /// These key-value pairs are permanently stored and survive server restarts.
 /// Returns a ScriptStorage object; see also ScriptStorage.get() and .set().

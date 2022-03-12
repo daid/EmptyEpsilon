@@ -15,6 +15,6 @@ static int addGMMessage(lua_State* L)
     return 0;
 }
 
-/// addGMMessage(message)
+/// void addGMMessage(string message)
 /// shows a message on the GM screen
 REGISTER_SCRIPT_FUNCTION(addGMMessage);

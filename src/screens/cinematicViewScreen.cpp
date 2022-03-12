@@ -60,40 +60,41 @@ void CinematicViewScreen::update(float delta)
         return;
     }
 
-    /* TODO hotkeys
-    switch(key.keysym.sym)
+    if (keys.cinematic.toggle_ui.getDown())
     {
-    // Toggle UI visibility with the H key.
-    case SDLK_h:
         if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
         {
             camera_lock_toggle->hide();
             camera_lock_selector->hide();
             camera_lock_tot_toggle->hide();
-        }else{
+        }
+        else {
             camera_lock_toggle->show();
             camera_lock_selector->show();
         }
-        break;
-    // Toggle camera lock with the L key.
-    case SDLK_l:
+    }
+
+    if (keys.cinematic.lock_camera.getDown())
+    {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
-        break;
-    // Cycle through player ships with the J and K keys.
-    case SDLK_j:
+    }
+
+    if (keys.cinematic.previous_player_ship.getDown())
+    {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
             camera_lock_selector->setSelectionIndex(camera_lock_selector->entryCount() - 1);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
-    case SDLK_k:
+    }
+
+    if (keys.cinematic.next_player_ship.getDown())
+    {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
             camera_lock_selector->setSelectionIndex(0);
         target = gameGlobalInfo->getPlayerShip(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()).toInt());
-        break;
+    }
     // TODO: X resets the camera to a default relative position and heading.
-    */
     if (keys.escape.getDown())
     {
         destroy();
@@ -105,45 +106,65 @@ void CinematicViewScreen::update(float delta)
             engine->setGameSpeed(0.0);
     }
 
-    /* TODO hotkeys
-    // TODO: Add mouselook.
-    if (InputHandler::keyboardIsDown(SDLK_w))
+    if (keys.cinematic.move_forward.get())
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.x;
         camera_position.y += xy_vector.y;
     }
-    if (InputHandler::keyboardIsDown(SDLK_s))
+
+    if (keys.cinematic.move_backward.get())
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.x;
         camera_position.y -= xy_vector.y;
     }
-    if (InputHandler::keyboardIsDown(SDLK_a))
+
+    if (keys.cinematic.strafe_left.get())
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x += xy_vector.y;
         camera_position.y -= xy_vector.x;
     }
-    if (InputHandler::keyboardIsDown(SDLK_d))
+
+    if (keys.cinematic.strafe_right.get())
     {
         glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
         camera_position.x -= xy_vector.y;
         camera_position.y += xy_vector.x;
     }
-    if (InputHandler::keyboardIsDown(SDLK_r))
+
+    if (keys.cinematic.move_up.get())
+    {
         camera_position.z += delta * 100.0f;
-    if (InputHandler::keyboardIsDown(SDLK_f))
+    }
+
+    if (keys.cinematic.move_down.get())
+    {
         camera_position.z -= delta * 100.0f;
-    if (InputHandler::keyboardIsDown(SDLK_LEFT))
+    }
+
+    if (keys.cinematic.rotate_left.get())
+    {
         camera_yaw -= delta * 50.0f;
-    if (InputHandler::keyboardIsDown(SDLK_RIGHT))
+    }
+
+    if (keys.cinematic.rotate_right.get())
+    {
         camera_yaw += delta * 50.0f;
-    if (InputHandler::keyboardIsDown(SDLK_UP))
+    }
+
+    if (keys.cinematic.tilt_up.get())
+    {
         camera_pitch -= delta * 50.0f;
-    if (InputHandler::keyboardIsDown(SDLK_DOWN))
+    }
+
+    if (keys.cinematic.tilt_down.get())
+    {
         camera_pitch += delta * 50.0f;
-    */
+    }
+
+    // TODO: Add mouselook.
 
     // Add and remove entries from the player ship list.
     // TODO: Allow any ship or station to be the camera target.

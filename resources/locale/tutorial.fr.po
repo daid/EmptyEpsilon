@@ -879,14 +879,14 @@ msgstr "Continuez avec le tutoriel."
 msgid ""
 "The tutorial will continue when you close communications with this station."
 msgstr ""
-"Le didacticiel se poursuivra lorsque vous fermerez les communications avec "
+"Le tutoriel se poursuivra lorsque vous fermerez les communications avec "
 "cette station."
 
 #: scripts/tutorial/00_all.lua:331 scripts/tutorial/00_all.lua:407
 msgid "Open communications with the station near you to continue the tutorial."
 msgstr ""
 "Ouvrez les communications avec cette station proche de votre position pour "
-"continuer le didacticiel."
+"continuer le tutoriel."
 
 #: scripts/tutorial/00_all.lua:333 scripts/tutorial/00_all.lua:409
 msgid "Now finish your talk with the station."

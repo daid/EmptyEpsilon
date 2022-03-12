@@ -132,6 +132,41 @@ public:
     sp::io::Keybinding engineering_self_destruct_confirm;
     sp::io::Keybinding engineering_self_destruct_cancel;
 
+    // Cinematic View
+    struct CinematicKeys {
+        CinematicKeys();
+        void init();
+        sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding lock_camera;
+        sp::io::Keybinding previous_player_ship;
+        sp::io::Keybinding next_player_ship;
+        sp::io::Keybinding move_forward;
+        sp::io::Keybinding move_backward;
+        sp::io::Keybinding strafe_left;
+        sp::io::Keybinding strafe_right;
+        sp::io::Keybinding move_up;
+        sp::io::Keybinding move_down;
+        sp::io::Keybinding rotate_left;
+        sp::io::Keybinding rotate_right;
+        sp::io::Keybinding tilt_down;
+        sp::io::Keybinding tilt_up;
+    } cinematic;
+
+    // Top-down View
+    struct TopDownKeys {
+        TopDownKeys();
+        void init();
+        sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding lock_camera;
+        sp::io::Keybinding previous_player_ship;
+        sp::io::Keybinding next_player_ship;
+        sp::io::Keybinding pan_up;
+        sp::io::Keybinding pan_down;
+        sp::io::Keybinding pan_left;
+        sp::io::Keybinding pan_right;
+    } topdown;
+   
+
     //GM
     sp::io::Keybinding gm_delete;
     sp::io::Keybinding gm_clipboardcopy;
