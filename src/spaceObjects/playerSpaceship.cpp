@@ -1637,12 +1637,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             {
                 if (csf.name == name)
                 {
-                    if (csf.type == CustomShipFunction::Type::Button || csf.type == CustomShipFunction::Type::Message)
+                    if (csf.type == CustomShipFunction::Type::Button)
                     {
-                        csf.callback.call<void>();
+                        auto cb = csf.callback;
+                        cb.call<void>();
                     }
-                    if (csf.type == CustomShipFunction::Type::Message)
+                    else if (csf.type == CustomShipFunction::Type::Message)
                     {
+                        auto cb = csf.callback;
+                        cb.call<void>();
                         removeCustom(name);
                     }
                     break;
