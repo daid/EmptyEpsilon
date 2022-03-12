@@ -18,15 +18,15 @@ mkdir -p ${TARGET_NFS_DIR}
 mkdir -p ${TARGET_TFTP_DIR}
 
 # Build a basic rootfs system (This takes a while)
-debootstrap --arch i386 jessie ${TARGET_NFS_DIR} ${MIRROR}
+debootstrap --arch i386 bullseye ${TARGET_NFS_DIR} ${MIRROR}
 
 # Setup apt-get configuration on the new rootfs.
 cat > ${TARGET_NFS_DIR}/etc/apt/sources.list <<-EOT
-deb ${MIRROR} stable main contrib non-free
-deb-src ${MIRROR} stable main contrib non-free
+deb ${MIRROR} bullseye main contrib non-free
+deb-src ${MIRROR} bullseye main contrib non-free
 
-deb http://security.debian.org/ stable/updates main contrib non-free
-deb-src http://security.debian.org/ stable/updates main contrib non-free
+deb http://security.debian.org/debian-security bullseye-security main contrib non-free
+deb-src http://security.debian.org/debian-security bullseye-security main contrib non-free
 
 EOT
 
@@ -138,18 +138,15 @@ chroot ${TARGET_NFS_DIR} systemctl disable rsyslog
 
 # Install tools in NFS root required to build EE.
 chroot ${TARGET_NFS_DIR} apt-get update
-chroot ${TARGET_NFS_DIR} apt-get -y install git build-essential libx11-dev \
-    cmake libxrandr-dev mesa-common-dev libglu1-mesa-dev libudev-dev \
-    libglew-dev libjpeg-dev libfreetype6-dev libopenal-dev libsndfile1-dev \
-    libxcb1-dev libxcb-image0-dev
+chroot ${TARGET_NFS_DIR} apt-get -y install git build-essential libsdl2-dev \
+    cmake
 # Install basic X setup in NFS root to allow us to run EE later on.
 chroot ${TARGET_NFS_DIR} apt-get -y install xserver-xorg-core \
-    xserver-xorg-input-all xserver-xorg-video-all xinit alsa-utils
+    xserver-xorg-input-all xserver-xorg-video-all xinit alsa-utils mesa-utils
 
-# Download&install SFML,EE,SP (This takes a while)
+# Download&install EE,SP (This takes a while)
 chroot ${TARGET_NFS_DIR} git clone https://github.com/daid/EmptyEpsilon.git /root/EmptyEpsilon
 chroot ${TARGET_NFS_DIR} git clone https://github.com/daid/SeriousProton.git /root/SeriousProton
-chroot ${TARGET_NFS_DIR} apt-get -y install libsfml-*
 mkdir -p ${TARGET_NFS_DIR}/root/EmptyEpsilon/_build
 chroot ${TARGET_NFS_DIR} sh -c 'cd /root/EmptyEpsilon/_build && cmake .. -DSERIOUS_PROTON_DIR=$HOME/SeriousProton/ && make -j 3'
 # Create a symlink for the final executable.
@@ -160,14 +157,16 @@ chroot ${TARGET_NFS_DIR} ln -s /tmp/options.ini /root/EmptyEpsilon/options.ini
 
 cat > ${TARGET_NFS_DIR}/root/setup_option_file.sh <<-EOT
 #!/bin/sh
-MAC=\$(cat /sys/class/net/eth0/address | sed 's/://g')
+MAC=\$(cat /sys/class/net/e*/address | head -n 1 | sed 's/://g')
 if [ -e /root/configs/\${MAC}.ini ]; then
     cp /root/configs/\${MAC}.ini /tmp/options.ini
 else
     echo "instance_name=\${MAC}" > /tmp/options.ini
+    echo "username=\${MAC}" >> /tmp/options.ini
 fi
 EOT
 chmod +x ${TARGET_NFS_DIR}/root/setup_option_file.sh
+mkdir -p ${TARGET_NFS_DIR}/root/configs
 # Create a link to our client configuration tool, which helps in setting up
 #   option files per client.
 ln -s ${TARGET_NFS_DIR}/root/EmptyEpsilon/netboot/config_manager.py ~/config_manager.py
@@ -250,6 +249,10 @@ cat > ${TARGET_NFS_DIR}/etc/avahi/services/ee.service <<-EOT
   </service>
 </service-group>
 EOT
+# Disable a few things that can cause ssh logins to be really slow
+sed -ie "s/#UseDNS no/UseDNS no/" ${TARGET_NFS_DIR}/etc/ssh/sshd_config
+sed -ie "s/ mdns4_minimal \\[NOTFOUND=return\\]//" ${TARGET_NFS_DIR}/etc/nsswitch.conf
+sed -ie "s/session\toptional\tpam_systemd.so//" ${TARGET_NFS_DIR}/etc/pam.d/common-session
 
 # Install distcc, and setup distcc per default on all our netbooted clients.
 #   Meaning we can speed up compiling of EE the more hosts we have.
