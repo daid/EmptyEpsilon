@@ -18,6 +18,7 @@ mkdir -p ${TARGET_NFS_DIR}
 mkdir -p ${TARGET_TFTP_DIR}
 
 # Build a basic rootfs system (This takes a while)
+export DEBIAN_FRONTEND=noninteractive
 debootstrap --arch i386 bullseye ${TARGET_NFS_DIR} ${MIRROR}
 
 # Setup apt-get configuration on the new rootfs.
