@@ -214,14 +214,12 @@ msgid "Yes"
 msgstr "Oui"
 
 #: scripts/scenario_00_basic.lua:248
-msgctxt "buttonGM"
-msgid "Players have won"
-msgstr "Les joueurs ont gagné"
-
-#: scripts/scenario_00_basic.lua:249
-msgctxt "buttonGM"
-msgid "Scenario ended"
-msgstr "Scénario terminé"
+msgid ""
+"Players have won.\n"
+"Scenario ended."
+msgstr ""
+"Les joueurs ont gagné.\n"
+"Scénario terminé."
 
 #: scripts/scenario_00_basic.lua:251
 msgctxt "buttonGM"
