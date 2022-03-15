@@ -52,11 +52,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldCount);
     /// Get the maxium shield level.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
-    /// Add a shield and set it's current and max amount. Up to 8 possible shields.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, addShield);
     /// Set the current amount of shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShields);
-    /// Set the maximum shield level. Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
+    /// Set the maximum shield level, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields). Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
     /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
     /// Set the icon to be used for this object on the radar.
@@ -388,16 +386,6 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
 
     //Call the virtual applyTemplateValues function so subclasses can get extra values from the ship templates.
     applyTemplateValues();
-}
-
-void ShipTemplateBasedObject::addShield(float max_shield_amount)
-{
-    if (shield_count < max_shield_count)
-    {
-        shield_max[shield_count] = max_shield_amount;
-        shield_level[shield_count] = max_shield_amount;
-        shield_count++
-    }
 }
 
 void ShipTemplateBasedObject::setShields(const std::vector<float>& amounts)
