@@ -61,7 +61,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
                 float end_y = start_y + text_size * 1.1f;
                 if (end_y < 0.0f)
                     continue;
-                if (start_y > rect.size.y)
+                if (start_y > text_rect.size.y)
                     continue;
                 start_y = std::max(0.0f, start_y);
                 end_x = std::min(text_rect.size.x, end_x);
