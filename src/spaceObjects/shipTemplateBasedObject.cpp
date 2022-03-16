@@ -54,7 +54,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getShieldMax);
     /// Set the current amount of shields.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShields);
-    /// Set the maximum shield level. Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
+    /// Set the maximum shield level, amount of parameters defines the amount of shields. (Up to a maximum of 8 shields). Note that this does low the current shield level when the max becomes lower, but it does not increase the shield level.
     /// A seperate call to setShield is needed for that.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setShieldsMax);
     /// Set the icon to be used for this object on the radar.
