@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-07 18:03+0100\n"
+"PO-Revision-Date: 2022-03-16 16:05+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -13,130 +13,130 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/scienceDatabase.cpp:300
+#: src/scienceDatabase.cpp:303
 msgctxt "database direction"
 msgid "Front"
 msgstr "Avant"
 
-#: src/scienceDatabase.cpp:302
+#: src/scienceDatabase.cpp:305
 msgctxt "database direction"
 msgid "Right"
 msgstr "Droite"
 
-#: src/scienceDatabase.cpp:304
+#: src/scienceDatabase.cpp:307
 msgctxt "database direction"
 msgid "Left"
 msgstr "Gauche"
 
-#: src/scienceDatabase.cpp:306
+#: src/scienceDatabase.cpp:309
 msgctxt "database direction"
 msgid "Rear"
 msgstr "Arrière"
 
-#: src/scienceDatabase.cpp:327
+#: src/scienceDatabase.cpp:330
 msgctxt "database"
 msgid "Factions"
 msgstr "Factions"
 
-#: src/scienceDatabase.cpp:339 src/scienceDatabase.cpp:342
+#: src/scienceDatabase.cpp:342 src/scienceDatabase.cpp:345
 msgctxt "stance"
 msgid "Neutral"
 msgstr "Neutre"
 
-#: src/scienceDatabase.cpp:343
+#: src/scienceDatabase.cpp:346
 msgctxt "stance"
 msgid "Enemy"
 msgstr "Ennemi"
 
-#: src/scienceDatabase.cpp:344
+#: src/scienceDatabase.cpp:347
 msgctxt "stance"
 msgid "Friendly"
 msgstr "Amical"
 
-#: src/scienceDatabase.cpp:352
+#: src/scienceDatabase.cpp:355
 msgctxt "database"
 msgid "Ships"
 msgstr "Vaisseaux"
 
-#: src/scienceDatabase.cpp:391
+#: src/scienceDatabase.cpp:394
 msgctxt "database"
 msgid "Class"
 msgstr "Classe"
 
-#: src/scienceDatabase.cpp:392
+#: src/scienceDatabase.cpp:395
 msgctxt "database"
 msgid "Sub-class"
 msgstr "Sous-classe"
 
-#: src/scienceDatabase.cpp:393
+#: src/scienceDatabase.cpp:396
 msgctxt "database"
 msgid "Size"
 msgstr "Taille"
 
-#: src/scienceDatabase.cpp:403
+#: src/scienceDatabase.cpp:406
 msgctxt "database"
 msgid "Shield"
 msgstr "Boucliers"
 
-#: src/scienceDatabase.cpp:405
+#: src/scienceDatabase.cpp:408
 msgid "Hull"
 msgstr "Coque"
 
-#: src/scienceDatabase.cpp:409
+#: src/scienceDatabase.cpp:412
 msgctxt "database"
 msgid "Move speed"
 msgstr "Vit. de mouvement"
 
-#: src/scienceDatabase.cpp:410
+#: src/scienceDatabase.cpp:413
 msgctxt "database"
 msgid "Reverse move speed"
 msgstr "Vit. inversion mvt :"
 
-#: src/scienceDatabase.cpp:413
+#: src/scienceDatabase.cpp:416
 msgctxt "database"
 msgid "Turn speed"
 msgstr "Vit. de rotation"
 
-#: src/scienceDatabase.cpp:417
+#: src/scienceDatabase.cpp:420
 msgctxt "database"
 msgid "Warp speed"
 msgstr "Vitesse lumière"
 
-#: src/scienceDatabase.cpp:421
+#: src/scienceDatabase.cpp:424
 msgctxt "database"
 msgid "Jump range"
 msgstr "Portée de saut"
 
-#: src/scienceDatabase.cpp:428
+#: src/scienceDatabase.cpp:431
 msgid "{direction} beam weapon"
 msgstr "Faisceau {direction}"
 
-#: src/scienceDatabase.cpp:429
+#: src/scienceDatabase.cpp:432
 msgctxt "database"
 msgid "{damage} Dmg / {interval} sec"
 msgstr "{damage} Dmg / {interval} sec"
 
-#: src/scienceDatabase.cpp:438
+#: src/scienceDatabase.cpp:441
 msgctxt "database"
 msgid "{direction} tube"
 msgstr "Tube {direction}"
 
-#: src/scienceDatabase.cpp:441
+#: src/scienceDatabase.cpp:444
 msgctxt "database"
 msgid "{direction} small tube"
 msgstr "Petit tube {direction}"
 
-#: src/scienceDatabase.cpp:445
+#: src/scienceDatabase.cpp:448
 msgctxt "database"
 msgid "{direction} large tube"
 msgstr "Grand tube {direction}"
 
-#: src/scienceDatabase.cpp:449
+#: src/scienceDatabase.cpp:452
 msgctxt "database"
 msgid "{loadtime} sec"
 msgstr "{loadtime} sec"
 
-#: src/scienceDatabase.cpp:456
+#: src/scienceDatabase.cpp:459
 msgid "Storage {weapon}"
 msgstr "Stockage {weapon}"
 
@@ -747,7 +747,7 @@ msgctxt "button"
 msgid "Lock camera on ship's target"
 msgstr "Verrouiller caméra cible"
 
-#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:222
+#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
 #: src/screens/gm/tweak.cpp:93 src/screenComponents/commsOverlay.cpp:110
 #: src/screenComponents/commsOverlay.cpp:140
 #: src/screenComponents/hackingDialog.cpp:42
@@ -1104,36 +1104,36 @@ msgctxt "button"
 msgid "Hail ship"
 msgstr "Envoyer message"
 
-#: src/screens/gm/gameMasterScreen.cpp:169
+#: src/screens/gm/gameMasterScreen.cpp:170
 msgid "Defend location"
 msgstr "Défendre son emplacement"
 
-#: src/screens/gm/gameMasterScreen.cpp:174
+#: src/screens/gm/gameMasterScreen.cpp:175
 msgid "Stand ground"
 msgstr "Tenir sa position"
 
-#: src/screens/gm/gameMasterScreen.cpp:179
+#: src/screens/gm/gameMasterScreen.cpp:180
 msgid "Roaming"
 msgstr "Errer"
 
-#: src/screens/gm/gameMasterScreen.cpp:184
+#: src/screens/gm/gameMasterScreen.cpp:185
 msgid "Idle"
 msgstr "Au repos"
 
-#: src/screens/gm/gameMasterScreen.cpp:189
+#: src/screens/gm/gameMasterScreen.cpp:190
 msgid "Orders:"
 msgstr "Ordres :"
 
-#: src/screens/gm/gameMasterScreen.cpp:349
+#: src/screens/gm/gameMasterScreen.cpp:350
 msgid "*mixed*"
 msgstr "*varié*"
 
-#: src/screens/gm/gameMasterScreen.cpp:356
+#: src/screens/gm/gameMasterScreen.cpp:357
 msgctxt "gm_info"
 msgid "Position"
 msgstr "Position"
 
-#: src/screens/gm/gameMasterScreen.cpp:368
+#: src/screens/gm/gameMasterScreen.cpp:369
 msgid "gm_info"
 msgstr "gm_info"
 
@@ -1802,10 +1802,12 @@ msgid "Impulse"
 msgstr "Moteurs"
 
 #: src/screenComponents/frequencyCurve.cpp:53
+msgctxt "scienceFrequencyGraph"
 msgid "Damage with your beams"
 msgstr "Dégâts produits par vos faisceaux"
 
 #: src/screenComponents/frequencyCurve.cpp:55
+msgctxt "scienceFrequencyGraph"
 msgid "Damage on your shields"
 msgstr "Dégâts sur vos boucliers"
 
@@ -1818,6 +1820,11 @@ msgstr "Pas de faisceaux"
 msgctxt "scienceFrequencyGraph"
 msgid "No enemy shields"
 msgstr "Pas de boucliers"
+
+#: src/screenComponents/frequencyCurve.cpp:66
+msgctxt "scienceFrequencyGraph"
+msgid "No data"
+msgstr "Aucune donnée"
 
 #: src/screenComponents/powerDamageIndicator.cpp:33
 msgctxt "systems"
@@ -1867,15 +1874,15 @@ msgstr "En pause"
 msgid "Unpause"
 msgstr "Revenir au jeu"
 
-#: src/screenComponents/indicatorOverlays.cpp:127
+#: src/screenComponents/indicatorOverlays.cpp:133
 msgid "Defeat!"
 msgstr "Défaite !"
 
-#: src/screenComponents/indicatorOverlays.cpp:130
+#: src/screenComponents/indicatorOverlays.cpp:136
 msgid "Victory!"
 msgstr "Victoire !"
 
-#: src/screenComponents/indicatorOverlays.cpp:134
+#: src/screenComponents/indicatorOverlays.cpp:140
 msgid "{faction} wins"
 msgstr "{faction} gagne"
 
