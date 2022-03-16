@@ -214,6 +214,7 @@ msgid "Yes"
 msgstr "Oui"
 
 #: scripts/scenario_00_basic.lua:248
+msgctxt "msgGM"
 msgid ""
 "Players have won.\n"
 "Scenario ended."
