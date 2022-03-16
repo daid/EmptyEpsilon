@@ -50,9 +50,9 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                     text = frequencyToString(mouse_freq_nr) + " " + string(int(frequencyVsFrequencyDamageFactor(mouse_freq_nr, frequency) * 100)) + "% dmg";
             }else{
                 if (more_damage_is_positive)
-                    text = tr("Damage with your beams");
+                    text = tr("scienceFrequencyGraph", "Damage with your beams");
                 else
-                    text = tr("Damage on your shields");
+                    text = tr("scienceFrequencyGraph", "Damage on your shields");
             }
             renderer.drawText(sp::Rect(rect.position.x, rect.position.y, rect.size.x, 40), text, sp::Alignment::Center, 20);
         } // end if enemy_has_equipment
@@ -63,7 +63,7 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                 renderer.drawText(rect, tr("scienceFrequencyGraph", "No enemy shields"), sp::Alignment::Center, 35);
         }
     }else{
-        renderer.drawText(rect, "No data", sp::Alignment::Center, 35);
+        renderer.drawText(rect, tr("scienceFrequencyGraph", "No data"), sp::Alignment::Center, 35);
     }
 }
 
