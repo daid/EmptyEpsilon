@@ -352,6 +352,8 @@ string GuiTextEntry::getText() const
 GuiTextEntry* GuiTextEntry::setText(string text)
 {
     this->text = text;
+    selection_start = std::min(selection_start, int(text.length()));
+    selection_end = std::min(selection_end, int(text.length()));
     return this;
 }
 
