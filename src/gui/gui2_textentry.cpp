@@ -45,9 +45,9 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
                     render_offset.x -= d.position.x - text_rect.size.x;
                 if (d.position.x < 0.0f)
                     render_offset.x -= d.position.x;
-                if (d.position.y > text_rect.size.y - linespacing * 0.3f)
+                if (multiline && d.position.y > text_rect.size.y - linespacing * 0.3f)
                     render_offset.y -= d.position.y - text_rect.size.y + linespacing * 0.3f;
-                if (d.position.y < linespacing)
+                if (multiline && d.position.y < linespacing)
                     render_offset.y -= d.position.y - linespacing;
             }
             if (d.string_offset == selection_min)
