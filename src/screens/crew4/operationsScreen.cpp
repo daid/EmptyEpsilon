@@ -96,6 +96,8 @@ OperationScreen::OperationScreen(GuiContainer* owner)
 
 void OperationScreen::onDraw(sp::RenderTarget& target)
 {
+    if (!my_spaceship)
+        return;
     if (science->radar_view->isVisible())
     {
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0))->show();
