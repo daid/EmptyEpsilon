@@ -145,7 +145,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     script_comms_close->setTextSize(20)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(150, 50);
 }
 
-void GuiCommsOverlay::onDraw(sp::RenderTarget& target)
+void GuiCommsOverlay::onUpdate()
 {
     // If we're on a ship, show comms activity on draw.
     if (my_spaceship)

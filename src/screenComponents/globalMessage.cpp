@@ -15,7 +15,7 @@ GuiGlobalMessage::GuiGlobalMessage(GuiContainer* owner)
     label->setMargins(20)->setPosition(0, 0, sp::Alignment::Center);
 }
 
-void GuiGlobalMessage::onDraw(sp::RenderTarget& target)
+void GuiGlobalMessage::onUpdate()
 {
     if (gameGlobalInfo->global_message_timeout > 0.0f)
     {
