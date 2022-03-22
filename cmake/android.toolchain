@@ -154,8 +154,8 @@ macro(android_apk NAME APK_WITH_PACKS)
 
     set(APK_ALIGNED "${CMAKE_CURRENT_BINARY_DIR}/${NAME}.apk")
     set(APK "${APK_ALIGNED}.unaligned")
+    file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
-    file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/resources/music/")
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/scripts" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/assets/")
     
     if(APK_WITH_PACKS)
