@@ -63,7 +63,7 @@ void MissileWeapon::update(float delta)
 
     if (!launch_sound_played)
     {
-        soundManager->playSound(data.fire_sound, getPosition(), 400.0, 60.0, (1.0f + random(-0.2f, 0.2f)) * size_speed_modifier);
+        soundManager->playSound(data.fire_sound, getPosition(), 400.0, 0.6, (1.0f + random(-0.2f, 0.2f)) * size_speed_modifier);
         launch_sound_played = true;
     }
 

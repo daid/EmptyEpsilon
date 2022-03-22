@@ -153,7 +153,7 @@ void ExplosionEffect::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position
 void ExplosionEffect::update(float delta)
 {
     if (delta > 0 && lifetime == maxLifetime)
-        soundManager->playSound(explosion_sound, getPosition(), size * 2, 60.0);
+        soundManager->playSound(explosion_sound, getPosition(), size * 2, 0.6);
     lifetime -= delta;
     if (lifetime < 0)
         destroy();
