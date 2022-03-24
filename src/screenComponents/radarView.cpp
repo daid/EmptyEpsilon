@@ -654,7 +654,11 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     {
         const auto lhsLayer = lhs->getRadarLayer();
         const auto rhsLayer = rhs->getRadarLayer();
-        return lhsLayer < rhsLayer || (lhsLayer == rhsLayer && lhs->canHideInNebula() && !rhs->canHideInNebula());
+        if (lhsLayer < rhsLayer)
+            return true;
+        if (lhsLayer == rhsLayer && lhs->canHideInNebula() && !rhs->canHideInNebula())
+            return true;
+        return std::less{}(&lhs, &rhs);
     });
 
     auto draw_object = [&renderer, this, scale](SpaceObject* obj)
