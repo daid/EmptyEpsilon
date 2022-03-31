@@ -658,7 +658,8 @@ static int onNewPlayerShip(lua_State* L)
     return 0;
 }
 /// void onNewPlayerShip(ScriptSimpleCallback callback)
-/// Register a callback function that is called when a new ship is created on the ship selection screen.
+/// Register a callback function that is called when a new ship is created (on the ship selection screen or with the constructor in a lua script).
+/// This callback function is called with the newly created ship as the only parameter.
 REGISTER_SCRIPT_FUNCTION(onNewPlayerShip);
 
 static int allowNewPlayerShips(lua_State* L)
