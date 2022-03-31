@@ -119,6 +119,7 @@ REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
 REGISTER_MULTIPLAYER_ENUM(EHackingGames);
 
 template<> int convert<EScanningComplexity>::returnType(lua_State* L, EScanningComplexity complexity);
+template<> void convert<EScanningComplexity>::param(lua_State* L, int& idx, EScanningComplexity& complexity);
 template<> int convert<EHackingGames>::returnType(lua_State* L, EHackingGames games);
-
+template<> void convert<EHackingGames>::param(lua_State* L, int& idx, EHackingGames& complexity);
 #endif//GAME_GLOBAL_INFO_H
