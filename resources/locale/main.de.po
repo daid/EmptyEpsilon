@@ -746,7 +746,7 @@ msgctxt "button"
 msgid "Lock camera on ship's target"
 msgstr "Kamera folgt Ziel"
 
-#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:222
+#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
 #: src/screens/gm/tweak.cpp:93 src/screenComponents/commsOverlay.cpp:110
 #: src/screenComponents/commsOverlay.cpp:140
 #: src/screenComponents/hackingDialog.cpp:42
@@ -1103,36 +1103,36 @@ msgctxt "button"
 msgid "Hail ship"
 msgstr "Schiff rufen"
 
-#: src/screens/gm/gameMasterScreen.cpp:169
+#: src/screens/gm/gameMasterScreen.cpp:170
 msgid "Defend location"
 msgstr "Verteitigungspunkt"
 
-#: src/screens/gm/gameMasterScreen.cpp:174
+#: src/screens/gm/gameMasterScreen.cpp:175
 msgid "Stand ground"
 msgstr "Halte Position"
 
-#: src/screens/gm/gameMasterScreen.cpp:179
+#: src/screens/gm/gameMasterScreen.cpp:180
 msgid "Roaming"
 msgstr "Patrouille"
 
-#: src/screens/gm/gameMasterScreen.cpp:184
+#: src/screens/gm/gameMasterScreen.cpp:185
 msgid "Idle"
 msgstr "Inaktiv"
 
-#: src/screens/gm/gameMasterScreen.cpp:189
+#: src/screens/gm/gameMasterScreen.cpp:190
 msgid "Orders:"
 msgstr "Befehle:"
 
-#: src/screens/gm/gameMasterScreen.cpp:349
+#: src/screens/gm/gameMasterScreen.cpp:350
 msgid "*mixed*"
 msgstr "*diverse*"
 
-#: src/screens/gm/gameMasterScreen.cpp:356
+#: src/screens/gm/gameMasterScreen.cpp:357
 msgctxt "gm_info"
 msgid "Position"
 msgstr "Position"
 
-#: src/screens/gm/gameMasterScreen.cpp:368
+#: src/screens/gm/gameMasterScreen.cpp:369
 msgid "gm_info"
 msgstr ""
 
@@ -1801,10 +1801,14 @@ msgid "Impulse"
 msgstr "Impuls"
 
 #: src/screenComponents/frequencyCurve.cpp:53
+#, fuzzy
+msgctxt "scienceFrequencyGraph"
 msgid "Damage with your beams"
 msgstr "Schaden mit Laser"
 
 #: src/screenComponents/frequencyCurve.cpp:55
+#, fuzzy
+msgctxt "scienceFrequencyGraph"
 msgid "Damage on your shields"
 msgstr "Schaden am Schild"
 
@@ -1819,6 +1823,11 @@ msgstr ""
 msgctxt "scienceFrequencyGraph"
 msgid "No enemy shields"
 msgstr "Keine gegnerischen Schilde"
+
+#: src/screenComponents/frequencyCurve.cpp:66
+msgctxt "scienceFrequencyGraph"
+msgid "No data"
+msgstr ""
 
 #: src/screenComponents/powerDamageIndicator.cpp:33
 msgctxt "systems"
@@ -1868,15 +1877,15 @@ msgstr "Spiel pausiert"
 msgid "Unpause"
 msgstr "Fortsetzen"
 
-#: src/screenComponents/indicatorOverlays.cpp:127
+#: src/screenComponents/indicatorOverlays.cpp:133
 msgid "Defeat!"
 msgstr "Verloren!"
 
-#: src/screenComponents/indicatorOverlays.cpp:130
+#: src/screenComponents/indicatorOverlays.cpp:136
 msgid "Victory!"
 msgstr "Gewonnen!"
 
-#: src/screenComponents/indicatorOverlays.cpp:134
+#: src/screenComponents/indicatorOverlays.cpp:140
 msgid "{faction} wins"
 msgstr "{faction} gewinnt"
 
