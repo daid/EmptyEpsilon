@@ -11,6 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
+
 #: scripts/shiptemplates/exuari.lua:77 scripts/shiptemplates/exuari.lua:90
 #: scripts/shiptemplates/exuari.lua:97 scripts/shiptemplates/exuari.lua:112
 #: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
@@ -20,10 +21,12 @@ msgstr ""
 msgctxt "class"
 msgid "Exuari"
 msgstr "Exuari"
+
 #: scripts/shiptemplates/exuari.lua:77
 msgctxt "subclass"
 msgid "Starfighter - Fighter"
 msgstr "Raumjäger - Jäger"
+
 #: scripts/shiptemplates/exuari.lua:80
 msgid ""
 "The Exuari fighter 'Dagger' is a single-seated spacecraft, very quick and "
@@ -41,10 +44,12 @@ msgstr ""
 "ihren eigenen Tod erwarten und sich nicht allzu sehr um die gegnerischen "
 "Waffenreichweite kümmern, lassen sich die Jäger relativ leicht ausschalten, "
 "aber sollten nicht unterschätzt werden."
+
 #: scripts/shiptemplates/exuari.lua:90
 msgctxt "subclass"
 msgid "Starfighter - Interceptor"
 msgstr "Raumjäger - Abfangjäger"
+
 #: scripts/shiptemplates/exuari.lua:92
 msgid ""
 "The Exuari interceptor 'Blade' is a improved fighter, originaly designed to "
@@ -59,10 +64,12 @@ msgstr ""
 "Daggers. Exuari am Steuer einer Blade werden oft als furchtlos angesehen, "
 "doch die meisten von ihnen werden einfach nur von ihrem Jagdinstinkt "
 "übermannt."
+
 #: scripts/shiptemplates/exuari.lua:97
 msgctxt "subclass"
 msgid "Starfighter - Light Bomber"
 msgstr "Leichter Bomber"
+
 #: scripts/shiptemplates/exuari.lua:100
 msgid ""
 "The Exuari light bomber 'Gunner' is a single-seated spacecraft, designed to "
@@ -83,10 +90,12 @@ msgstr ""
 "der Exuarigesellschaft als (oftmals tödliche) Freizeitbeschäftigung "
 "angesehen, man kann also nicht davon ausgehen, dass die Exuari an Bord über "
 "eine große Erfahrung verfügen."
+
 #: scripts/shiptemplates/exuari.lua:112
 msgctxt "subclass"
 msgid "Starfighter - Bomber"
 msgstr "Raumjäger - Bomber"
+
 #: scripts/shiptemplates/exuari.lua:113
 msgid ""
 "The Exuari bomber 'Shooter' carries two rounds of HVLIs. To keep the vessel "
@@ -101,10 +110,12 @@ msgstr ""
 "sich greifende Zerstörung zu genießen. Aufgrund des langsamen "
 "Wiederaufladezyklus ist es leicht möglich, eine \"Shooter\" zwischen zwei "
 "Attacken zu zerstören."
+
 #: scripts/shiptemplates/exuari.lua:118
 msgctxt "subclass"
 msgid "Starfighter - Heavy Bomber"
 msgstr "Schwerer Bomber"
+
 #: scripts/shiptemplates/exuari.lua:119
 msgid ""
 "The Exuari heavy bomber 'Jagger' carries just a single round of improved "
@@ -114,10 +125,12 @@ msgstr ""
 "Der schwere Exuari-Bomber 'Jagger' verfügt nur über eine einzele Ladung "
 "verbesserter HGBIs. Diese Hüllenbrechende Variante verursacht den vielfachen "
 "Schaden von 'Gunner'-HGBIs"
+
 #: scripts/shiptemplates/exuari.lua:124
 msgctxt "subclass"
 msgid "Striker"
 msgstr "Angriffs-Schiff"
+
 #: scripts/shiptemplates/exuari.lua:126
 msgid ""
 "The Exuari alpha striker 'Racer' is a warp-drive equipped Figter build for "
@@ -133,6 +146,7 @@ msgstr ""
 "aber die Laserwaffen verursachen keinen besonders hohen Schaden. Wie alle "
 "Angriffs-Schiffe sind seine Heckschilde wesentlich schwächer als die "
 "Frontschilde."
+
 #: scripts/shiptemplates/exuari.lua:137
 msgid ""
 "The Exuari beta striker 'Hunter' is a warp-drive equipped reinforement "
@@ -147,6 +161,7 @@ msgstr ""
 "Es verfügt über ein zusätzliches Paar Laserwaffen und verbesserte "
 "Frontschilde. Es ist schnell, wendig, und kann sich um den Rest kümmern, der "
 "nach dem initialen Angriff von der feindlichen Flotte übrig ist."
+
 #: scripts/shiptemplates/exuari.lua:146
 msgid ""
 "The Exuari gamma striker 'Strike' is a warp-drive equipped tactical bomber "
@@ -159,6 +174,7 @@ msgstr ""
 "betrieben und ist mit HGBIs und einem EMP ausgestattet. Es ist schnell, "
 "schnell, wendig und kann in kurzer Zeit eine große Menge an Schaden "
 "ausrichten."
+
 #: scripts/shiptemplates/exuari.lua:154
 msgid ""
 "The Exuari delta striker 'Dash' is a warp-drive equipped endurance bomber "
@@ -171,11 +187,13 @@ msgstr ""
 "Besatzung betrieben und kombiniert verstärkte Frontschilde mit einer guten "
 "Anzahl an HGBIs. Es ist schnell, wendig und kann einiges an Schaden "
 "einstecken."
+
 #: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
 #: scripts/shiptemplates/exuari.lua:201
 msgctxt "subclass"
 msgid "Frigate"
 msgstr "Fregatte"
+
 #: scripts/shiptemplates/exuari.lua:168
 msgid ""
 "The Exuari Guard is not impressive, trying to be a alround escort or defense "
@@ -190,6 +208,7 @@ msgstr ""
 "Laserwaffen und Raketen länger dauert als erwartet. Die Guard ist mit Laser-"
 "Geschütztürmen und einem großen Vorrat an verschiedenen Raketen "
 "ausgestattet, darunter auch Zielsuchraketen und Minen."
+
 #: scripts/shiptemplates/exuari.lua:187
 msgid ""
 "The Exuari Sentinel is an anti-fighter frigate. It has several rapid-firing, "
@@ -198,6 +217,7 @@ msgstr ""
 "Die 'Sentinel' der Exuari ist eine Anti-Jäger-Fregatte. Sie verfügt über "
 "mehrere leichte, Turmgestützte schnell feuernde Abwehrlaser, um Jäger "
 "schnell auszuschalten."
+
 #: scripts/shiptemplates/exuari.lua:203
 msgid ""
 "The Exuari Warden is a heavy artillery frigate, it fires bunches of missiles "
@@ -207,10 +227,12 @@ msgstr ""
 "Lage, Salven aus mehreren vorwärts gerichteten Raketenschächten  "
 "abzufeueren, verfügt allerdings nur über einen einzelnen, turmgestützten "
 "Abwehrlaser."
+
 #: scripts/shiptemplates/exuari.lua:221
 msgctxt "subclass"
 msgid "Artillery"
 msgstr "Artillerie"
+
 #: scripts/shiptemplates/exuari.lua:223
 msgid ""
 "The Exuari Flash is a special artillery sniper, built to deal a large "
@@ -221,8 +243,9 @@ msgstr ""
 "Der Flash ist ist ein besonderes Artillerieschiff, gebaut um aus großer "
 "Entfernung schnell viel Schaden zu verursachen und dann wieder zu "
 "verschwinden. Im Wesentlichen handelt es sich um einen Standard-Frachter mit "
-"Nuklearwaffen. Manche sagen, es das ist, was aus den meisten Frachtern wird, "
-"wenn sie in die Hände der Exuari fallen."
+"Nuklearwaffen. Manche sagen, dass es das ist, was aus den meisten Frachtern "
+"wird, wenn sie in die Hände der Exuari fallen."
+
 #: scripts/shiptemplates/exuari.lua:234
 msgid ""
 "The Exuari Ranger is a special sniper, built to deal large amounts of damage "
@@ -234,6 +257,7 @@ msgstr ""
 "größeren Gebiet zu verursachen und sich dann zurückzuziehen. Es ist eine "
 "Basis-Fregatte welche über Nuklearwaffen verfügt, obwohl es sich generell um "
 "eine der kleinsten Fregatte handelt."
+
 #: scripts/shiptemplates/exuari.lua:242
 msgid ""
 "The Exuari Buster is a special sniper, built to deal a large amount of "
@@ -245,10 +269,12 @@ msgstr ""
 "Entfernung viel Schaden zu verursachen und sich dann zurückzuziehen. Es ist "
 "eine Basis-Fregatte welche über Nuklearwaffen verfügt, obwohl es sich "
 "generell um eine der kleinsten Fregatte handelt."
+
 #: scripts/shiptemplates/exuari.lua:250
 msgctxt "subclass"
 msgid "Carrier"
 msgstr "Träger"
+
 #: scripts/shiptemplates/exuari.lua:252
 msgid ""
 "The Exuari 'Ryder' is a large carrier spacecraft with many defensive "
@@ -268,6 +294,7 @@ msgstr ""
 "Angriffsstrategie der Exuari besteht darin, eine Ryder außerhalb der "
 "Sensorreichweite des gewünschten Ziels zu halten, und dann Jäger und "
 "Artillerieschiffe vom Träger zu starten."
+
 #: scripts/shiptemplates/exuari.lua:277
 msgid ""
 "The Exuari Fortress is a huge carrier with many defensive features. It can "
@@ -280,4 +307,3 @@ msgstr ""
 "Vorräte aufzustocken oder um transportiert zu werden. Im Gegensatz zu "
 "Raumstationen ist sie mit einem langsamen Impulsantrieb ausgestattet. Den "
 "Schilden dieses Trägers wird nachgesagt, sie seien unzerstörbar."
-#, fuzzy
