@@ -388,8 +388,6 @@ class DocumentationGenerator(object):
 
     def generateDocs(self, stream):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
-        stream.write('<link href="http://daid.github.io/EmptyEpsilon/jquery-ui.min.css" rel="stylesheet">')
-        stream.write('<link href="http://daid.github.io/EmptyEpsilon/main.css" rel="stylesheet">')
 
         stream.write(
             """
@@ -399,34 +397,42 @@ class DocumentationGenerator(object):
 href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap"
 rel="stylesheet"
 />
+<link href="https://daid.github.io/EmptyEpsilon/bebasneue.css" rel="stylesheet" />
 
 <style>
   body {
-    background-image: none;
+    color: #ffffff;
     background-color: #050505;
     font-size: 12px;
     line-height: 1.7;
+    margin: 50px 0;
+  }
+  
+  h1, h2 {
+    margin-top: 0;
+  }
+  
+  a {
+    color: #ffffff;
   }
 
   h2 {
-    font-size: 2em;
-    padding: 16px 0px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    font: 2em bebas_neuebold, Impact, sans-serif;
+    padding: 16px 0;
+    margin-top: 0;
+    margin-bottom: 0;
     position: sticky;
     top: 0;
     background: rgba(16, 19, 23, 0.8);
-	scroll-margin-top: 0;
+    scroll-margin-top: 0;
+    font-weight: normal;
   }
 
-  .ui-widget {
+  .section {
+    font-size: 1.3em;
     font-family: "JetBrains Mono", "Courier New", Courier, monospace;
-  }
-
-  .ui-widget-content {
     background: rgba(16, 19, 23, 0.8);
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem 20px;
     margin-bottom: 2rem;
   }
 
@@ -448,7 +454,6 @@ rel="stylesheet"
   }
 
   ul > li > ul {
-    border: 0;
     background-color: rgba(255, 255, 255, 0.05);
   }
 
@@ -488,7 +493,7 @@ rel="stylesheet"
         stream.write("</head>")
         stream.write("<body>")
 
-        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<div class="section">')
         stream.write("<h1>EmptyEpsilon Scripting Reference</h1>")
         stream.write("<p>This is the EmptyEpsilon script reference for this version of EmptyEpsilon.</p>")
         stream.write('<p>By no means this is a guide to help you scripting, you should check <a href="http://emptyepsilon.org/">emptyepsilon.org</a> for the guide on scripting. ')
@@ -496,7 +501,7 @@ rel="stylesheet"
         stream.write("</div>\n")
 
         # TODO modify the script and read the constants from the cpp files
-        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<div class="section">')
         stream.write("<p>Some of the types in the parameters:</p>")
         stream.write("<ul>\n")
         stream.write('<li><a name="enum_ScriptSimpleCallback">ScriptSimpleCallback</a> / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert&lt;ScriptSimpleCallback&gt;::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
@@ -516,7 +521,7 @@ rel="stylesheet"
         stream.write("<p>Note that most <code>SpaceObject</code>s directly switch to fully scanned, only <code>SpaceShips</code>s go through all the states.</p>")
         stream.write("</div>\n")
 
-        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<div class="section">')
         stream.write("<h2>Objects</h2>\n")
         stream.write("<ul>")
         for d in self._definitions:
@@ -525,7 +530,7 @@ rel="stylesheet"
         stream.write("</ul>")
         stream.write("</div>")
 
-        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">')
+        stream.write('<div class="section">')
         stream.write("<h2>Functions</h2>\n")
         stream.write("<ul>")
         for d in self._definitions:
@@ -551,8 +556,6 @@ rel="stylesheet"
             if isinstance(d, ScriptClass) and d.parent is None:
                 self.outputClasses(d, stream)
 
-        stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery.min.js"></script>')
-        stream.write('<script src="http://daid.github.io/EmptyEpsilon/jquery-ui.min.js"></script>')
         stream.write("</body>")
         stream.write("</html>")
 
@@ -566,7 +569,7 @@ rel="stylesheet"
             stream.write("</ul>\n")
 
     def outputClasses(self, scriptClass, stream):
-        stream.write('<div class="ui-widget ui-widget-content ui-corner-all">\n')
+        stream.write('<div class="section">\n')
         stream.write('<a name="class_%s"></a><h2>%s</h2>\n' % (scriptClass.name, scriptClass.name))
         stream.write(
             "<div>%s</div>"
