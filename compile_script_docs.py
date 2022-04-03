@@ -588,12 +588,13 @@ rel="stylesheet"
             else:
                 stream.write("<dt>")
                 type = translate_type(func.return_type, func.name)
+                member_name = scriptClass.name + ":" + func.name
                 if type is None:
                     # Methods returning void automatically return themselves
-                    stream.write(self.print_type(ClassType(scriptClass.name), func.name, True))
+                    stream.write(self.print_type(ClassType(scriptClass.name), member_name, True))
                     func.description = (func.description + "\nReturns the object it was called on.").strip()
                 else:
-                    stream.write(self.print_type(type, func.name, True))
+                    stream.write(self.print_type(type, member_name, True))
                 stream.write("(")
                 first = True
                 for (type, name) in func.get_parameters():
@@ -607,7 +608,7 @@ rel="stylesheet"
                 % (func.description.replace("<", "&lt;").replace("\n", "<br>"))
             )
         for member in scriptClass.members:
-            stream.write("<dt>%s</dt>" % (member.name))
+            stream.write("<dt>%s:%s</dt>" % (scriptClass.name, member.name))
             stream.write(
                 "<dd>%s</dd>"
                 % (member.description.replace("<", "&lt;").replace("\n", "<br>")
