@@ -9,9 +9,9 @@ GUI_REGISTER_LAYOUT("default", GuiLayout);
 
 void GuiLayout::updateLoop(GuiContainer& container, const sp::Rect& rect)
 {
+    int repeat_counter = 10;
     do
     {
-        int repeat_counter = 10;
         require_repeat = false;
         update(container, rect);
         if (--repeat_counter < 1)
@@ -194,7 +194,9 @@ void GuiLayout::basicLayout(const sp::Rect& rect, GuiElement& widget)
     }
     auto pre_layout_size = widget.layout.size;
     widget.updateLayout({result_position, result_size});
-    if (pre_layout_size != widget.layout.size)
+
+    auto size_diff = pre_layout_size - widget.layout.size;
+    if (std::abs(size_diff.x) + std::abs(size_diff.y) > 0.1)
     {
         require_repeat = true;
     }
