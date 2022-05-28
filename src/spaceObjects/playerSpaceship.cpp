@@ -1000,7 +1000,7 @@ void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, strin
     csf.caption = caption;
     csf.callback = callback;
     csf.order = order.value_or(0);
-    std::sort(custom_functions.begin(), custom_functions.end());
+    std::stable_sort(custom_functions.begin(), custom_functions.end());
 }
 
 void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order)
@@ -1013,7 +1013,7 @@ void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string 
     csf.crew_position = position;
     csf.caption = caption;
     csf.order = order.value_or(0);
-    std::sort(custom_functions.begin(), custom_functions.end());
+    std::stable_sort(custom_functions.begin(), custom_functions.end());
 }
 
 void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, string caption)
@@ -1025,7 +1025,7 @@ void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, stri
     csf.name = name;
     csf.crew_position = position;
     csf.caption = caption;
-    std::sort(custom_functions.begin(), custom_functions.end());
+    std::stable_sort(custom_functions.begin(), custom_functions.end());
 }
 
 void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback)
@@ -1038,7 +1038,7 @@ void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, strin
     csf.crew_position = position;
     csf.caption = caption;
     csf.callback = callback;
-    std::sort(custom_functions.begin(), custom_functions.end());
+    std::stable_sort(custom_functions.begin(), custom_functions.end());
 }
 
 void PlayerSpaceship::removeCustom(string name)
