@@ -102,7 +102,7 @@ function finished(delta)
 Your Time: %d
 Bonus target %s
 
-If you feel ready for combat, play scenario 'quick basic'.
+If you feel ready for combat, play scenario 'Basic Battle'.
 If you want to try another ship, play the next training mission.
 
 If you need more practice, play this training again
