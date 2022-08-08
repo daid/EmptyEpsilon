@@ -322,3 +322,19 @@ function _fourArgumentsIntoCoordinates(a, b, c, d)
     end
     return x1, y1, x2, y2
 end
+
+-- Converts a number of seconds to a string in hh:mm:ss format.
+function formatTime(seconds)
+    local str = ""
+    local minutes = math.floor(seconds / 60) % 60
+    local hours = math.floor(seconds / 60 / 60)
+    seconds = math.floor(seconds % 60)
+    if hours > 0 then
+        str = string.format("%02.f:%02.f:%02.f", hours, minutes, seconds)
+    elseif minutes > 0 then
+        str = string.format("%02.f:%02.f", minutes, seconds)
+    else
+        str = string.format("%02.f", seconds)
+    end
+    return str
+end
