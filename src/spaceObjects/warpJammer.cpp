@@ -9,7 +9,16 @@
 /// A warp jammer.
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
+    /// Gets jamming range (circle with jammer in the middle inside which no warp/jump will be possible).
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, getRange);
+    /// Sets jamming range (circle with jammer in the middle inside which no warp/jump will be possible).
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
+
+    /// Gets current hull of warpJammer.
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, getHull);
+    /// Sets current hull of warpJammer.
+    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setHull);
+
     /// Set a function that will be called if the warp jammer is taking damage.
     /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject (or nil).
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onTakingDamage);

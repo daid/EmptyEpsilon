@@ -19,6 +19,9 @@ public:
     void setRange(float range) { this->range = range; }
     float getRange() { return range; }
 
+    void setHull(float hull) { this->hull = hull; }
+    float getHull() { return hull; }
+
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual bool canBeTargetedBy(P<SpaceObject> other)  override { return true; }
