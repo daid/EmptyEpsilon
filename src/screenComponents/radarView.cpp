@@ -658,7 +658,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             return true;
         if (lhsLayer == rhsLayer && lhs->canHideInNebula() && !rhs->canHideInNebula())
             return true;
-        return std::less{}(&lhs, &rhs);
+        return lhs->getMultiplayerId() < rhs->getMultiplayerId();
     });
 
     auto draw_object = [&renderer, this, scale](SpaceObject* obj)
