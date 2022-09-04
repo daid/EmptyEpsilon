@@ -46,7 +46,7 @@ float HardwareMappingEffectGlow::onActive()
         back = !back;
     float f = timer.getProgress();
     if (back)
-        return min_value * (f - 1.0f) + max_value * (2.0f - f);
+        return min_value * (f) + max_value * (1.0f - f);
     else
         return min_value * (1.0f - f) + max_value * (f);
 }
