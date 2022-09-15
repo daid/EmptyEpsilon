@@ -656,8 +656,12 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         const auto rhsLayer = rhs->getRadarLayer();
         if (lhsLayer < rhsLayer)
             return true;
-        if (lhsLayer == rhsLayer && lhs->canHideInNebula() && !rhs->canHideInNebula())
+        if (lhsLayer > rhsLayer)
+            return false;
+        if (lhs->canHideInNebula() && !rhs->canHideInNebula())
             return true;
+        if (!lhs->canHideInNebula() && rhs->canHideInNebula())
+            return false;
         return lhs->getMultiplayerId() < rhs->getMultiplayerId();
     });
 
