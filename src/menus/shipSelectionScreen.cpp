@@ -490,7 +490,13 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         });
         button->setSize(GuiElement::GuiSizeMax, 50);
         button->setIcon(getCrewPositionIcon(ECrewPosition(n)));
-        button->setValue(my_player_info->crew_position[n] & (1 << window_index));
+        if (my_player_info->crew_position[n] & (1 << window_index)) {
+            button->setValue(true);
+            my_player_info->commandSetCrewPosition(window_index, ECrewPosition(n), true);
+        } else {
+            button->setValue(false);
+            my_player_info->commandSetCrewPosition(window_index, ECrewPosition(n), false);
+        }
         crew_position_button[n] = button;
         return button;
     };
