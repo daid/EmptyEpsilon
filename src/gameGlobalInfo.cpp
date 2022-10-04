@@ -177,6 +177,7 @@ void GameGlobalInfo::reset()
     allow_new_player_ships = true;
     global_message = "";
     global_message_timeout = 0.0f;
+    banner_string = "";
 
     //Pause the game
     engine->setGameSpeed(0.0);
