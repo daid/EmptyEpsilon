@@ -33,6 +33,18 @@ enum ESystem
 /* Define script conversion function for the ESystem enum. */
 template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
 
+enum ERestockMissileBehaviour
+{
+    R_None = 0,
+    R_CpuShips,
+    R_Fighters,
+    R_PlayerShips,
+    R_All
+};
+
+/* Define script conversion function for the ERestockMissileBehaviour enum. */
+template<> void convert<ERestockMissileBehaviour>::param(lua_State* L, int& idx, ERestockMissileBehaviour& er);
+
 class ShipRoomTemplate
 {
 public:
@@ -97,7 +109,7 @@ public:
     bool shares_energy_with_docked;
     bool repair_docked;
     bool restocks_scan_probes;
-    bool restocks_missiles_docked;
+    ERestockMissileBehaviour restocks_missiles_docked;
     bool can_scan = true;
     bool can_hack = true;
     bool can_dock = true;
@@ -146,7 +158,7 @@ public:
     void setSharesEnergyWithDocked(bool enabled);
     void setRepairDocked(bool enabled);
     void setRestocksScanProbes(bool enabled);
-    void setRestocksMissilesDocked(bool enabled);
+    void setRestocksMissilesDocked(ERestockMissileBehaviour behaviour);
     void setCanScan(bool enabled) { can_scan = enabled; }
     void setCanHack(bool enabled) { can_hack = enabled; }
     void setCanDock(bool enabled) { can_dock = enabled; }
@@ -207,6 +219,7 @@ public:
 string getSystemName(ESystem system);
 string getLocaleSystemName(ESystem system);
 REGISTER_MULTIPLAYER_ENUM(ESystem);
+REGISTER_MULTIPLAYER_ENUM(ERestockMissileBehaviour);
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);

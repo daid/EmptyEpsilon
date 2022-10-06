@@ -24,7 +24,6 @@ class ShipAI;
 class CpuShip : public SpaceShip
 {
     static constexpr float auto_system_repair_per_second = 0.005f;
-    static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
     glm::vec2 order_target_location{};  //Server only
@@ -61,8 +60,6 @@ public:
     virtual std::unordered_map<string, string> getGMInfo() override;
 
     virtual string getExportLine() override;
-
-    float missile_resupply;
 };
 string getAIOrderString(EAIOrder order);
 string getLocaleAIOrderString(EAIOrder order);

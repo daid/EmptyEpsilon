@@ -41,4 +41,19 @@ template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& id
         tt = ShipTemplate::Ship;
 }
 
+/* Define script conversion function for the ERestockMissileBehaviour enum. */
+template<> void convert<ERestockMissileBehaviour>::param(lua_State* L, int& idx, ERestockMissileBehaviour& er)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "all")
+        er = R_All;
+    else if (str == "cpuships")
+        er = R_CpuShips;
+    else if (str == "fighters")
+        er = R_Fighters;
+    else if (str == "playerships")
+        er = R_PlayerShips;
+    else
+        er = R_None;
+}
 #endif /* _SHIPTEMPLATE_HPP_ */

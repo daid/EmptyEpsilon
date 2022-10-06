@@ -158,11 +158,17 @@ GuiTweakShipTemplateBasedObject::GuiTweakShipTemplateBasedObject(GuiContainer* o
     });
     restocks_scan_probes_toggle->setSize(GuiElement::GuiSizeMax, 40);
 
-    // Restocks cpuship weapons bool
-    restocks_cpuship_weapons_toggle = new GuiToggleButton(left_col, "", tr("Restocks cpuship missiles"), [this](bool value) {
-        target->setRestocksMissilesDocked(value);
+    // Restocks missiles selector 
+    restocks_cpuship_weapons_selector= new GuiSelector(left_col, "", [this](int index, string value) {
+        target->setRestocksMissilesDocked(ERestockMissileBehaviour(index));
     });
-    restocks_cpuship_weapons_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    restocks_cpuship_weapons_selector->setSize(GuiElement::GuiSizeMax, 40);
+    restocks_cpuship_weapons_selector->addEntry(tr("Does not restock missiles"),R_None);
+    restocks_cpuship_weapons_selector->addEntry(tr("Restocks cpuship missiles"),R_CpuShips);
+    restocks_cpuship_weapons_selector->addEntry(tr("Restocks fighter missiles"),R_Fighters);
+    restocks_cpuship_weapons_selector->addEntry(tr("Restocks player missiles"),R_PlayerShips);
+    restocks_cpuship_weapons_selector->addEntry(tr("Restocks missiles for all"),R_All);
+    restocks_cpuship_weapons_selector->setSelectionIndex(R_None);
 
     // Right column
     // Hull max and state sliders
@@ -205,7 +211,7 @@ void GuiTweakShipTemplateBasedObject::onDraw(sp::RenderTarget& renderer)
     shares_energy_with_docked_toggle->setValue(target->getSharesEnergyWithDocked());
     repairs_docked_toggle->setValue(target->getRepairDocked());
     restocks_scan_probes_toggle->setValue(target->getRestocksScanProbes());
-    restocks_cpuship_weapons_toggle->setValue(target->getRestocksMissilesDocked());
+    restocks_cpuship_weapons_selector->setSelectionIndex(target->getRestocksMissilesDocked());
     hull_slider->setValue(target->hull_strength);
     hull_max_slider->setValue(target->hull_max);
     can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());

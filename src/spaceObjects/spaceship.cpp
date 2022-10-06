@@ -984,8 +984,46 @@ void SpaceShip::update(float delta)
                             hull_strength = hull_max;
                     }
                 }
+
+                // restock missiles
+                if (docked_with_template_based->canRestockMissiles(this))
+                {
+                    bool needs_missile = 0;
+                    for(int n=0; n<MW_Count; n++)
+                    {
+                        if (weapon_storage[n] < weapon_storage_max[n])
+                        {
+                            if (missile_resupply_delay <= 0.0f)
+                            {
+                                weapon_storage[n] += 1;
+                                missile_resupply_delay = missile_resupply_time;
+                                break;
+                            }
+                            else
+                            {
+                                needs_missile = 1;
+                            }
+                        }
+                    }
+
+                    if (needs_missile) {
+                        P<SpaceShip> docked_with_ship = docking_target;
+                        if (docked_with_ship)
+                        {
+                            missile_resupply_delay -= delta * docked_with_ship->getSystemEffectiveness(SYS_MissileSystem);
+                        }
+                        else
+                        {
+                            missile_resupply_delay -= delta;
+                        }
+                    }
+                }
             }
             impulse_request = 0.f;
+        }
+        else
+        {
+            missile_resupply_delay = missile_resupply_time;
         }
         if ((docking_state == DS_Docked) || (docking_state == DS_Docking))
             warp_request = 0;
@@ -1578,7 +1616,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_JumpDrive:
         return has_jump_drive;
     case SYS_MissileSystem:
-        return weapon_tube_count > 0;
+        return weapon_tube_count > 0 || restocks_missiles_docked != R_None;
     case SYS_FrontShield:
         return shield_count > 0;
     case SYS_RearShield:
@@ -1586,7 +1624,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_Reactor:
         return true;
     case SYS_BeamWeapons:
-        return true;
+        return beam_weapons[0].getArc() > 0.0f;
     case SYS_Maneuver:
         return turn_speed > 0.0f;
     case SYS_Impulse:

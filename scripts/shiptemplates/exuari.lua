@@ -270,7 +270,7 @@ template:setSpeed(20, 1.5, 3)
 template:setDockClasses(_("class", "Exuari"))
 template:setSharesEnergyWithDocked(true)
 template:setRepairDocked(true)
-template:setRestocksMissilesDocked(true)
+template:setRestocksMissilesDocked("all")
 template:setRestocksScanProbes(true)
 
 variation = template:copy("Fortress")

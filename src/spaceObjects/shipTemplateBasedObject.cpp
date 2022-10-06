@@ -4,6 +4,8 @@
 
 #include "tween.h"
 #include "i18n.h"
+#include "cpuShip.h"
+#include "playerSpaceship.h"
 
 /// A ShipTemplateBasedObject (STBO) is an object class created from a ShipTemplate.
 /// This is the parent class of SpaceShip (CpuShip, PlayerSpaceship) and SpaceStation objects, which inherit all STBO functions and can be created by scripts.
@@ -128,7 +130,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, getRestocksMissilesDocked);
     /// Defines whether this STBO restocks missiles for docked CpuShips.
     /// To restock docked PlayerSpaceships' weapons, use a comms script. See ShipTemplateBasedObject:setCommsScript() and :setCommsFunction().
-    /// Example: stbo:setRestocksMissilesDocked(true)
+    /// Example: stbo:setRestocksMissilesDocked("Fighter")
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplateBasedObject, setRestocksMissilesDocked);
     /// Returns this STBO's long-range radar range.
     /// Example: stbo:getLongRangeRadarRange()
@@ -196,6 +198,7 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 
     long_range_radar_range = 30000.0f;
     short_range_radar_range = 5000.0f;
+    restocks_missiles_docked = R_None;
 
     registerMemberReplication(&template_name);
     registerMemberReplication(&type_name);
@@ -344,6 +347,29 @@ std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
         ret[trMark("gm_info", "Shield") + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
     }
     return ret;
+}
+
+bool ShipTemplateBasedObject::canRestockMissiles(P<SpaceShip> receiver) {
+    switch (restocks_missiles_docked) {
+        case R_None:
+            return false;
+        case R_All:
+            return true;
+        case R_CpuShips:
+            if (P<CpuShip>(receiver))
+                return true;
+            else
+                return false;
+        case R_PlayerShips:
+            if (P<PlayerSpaceship>(receiver))
+                return true;
+            else
+                return false;
+        case R_Fighters:
+			// assume that internal docking ships are fighters
+            return (canBeDockedBy(receiver) == DockStyle::Internal);
+    }
+    return false;
 }
 
 bool ShipTemplateBasedObject::hasShield()
