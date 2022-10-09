@@ -28,6 +28,7 @@ JoinServerScreen::JoinServerScreen(ServerBrowserMenu::SearchSource source)
     password_entry_box->hide();
     password_entry = new GuiTextEntry(password_entry_box, "PASSWORD_ENTRY", "");
     password_entry->setPosition(20, 0, sp::Alignment::CenterLeft)->setSize(400, 50);
+    password_entry->setHidePassword();
     (new GuiButton(password_entry_box, "PASSWORD_ENTRY_OK", "Ok", [this]()
     {
         password_entry_box->hide();

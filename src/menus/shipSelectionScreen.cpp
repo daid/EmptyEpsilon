@@ -41,6 +41,7 @@ public:
         label->setPosition(0, 40, sp::Alignment::TopCenter);
         entry = new GuiTextEntry(entry_box, "PASSWORD_ENTRY", "");
         entry->setPosition(20, 0, sp::Alignment::CenterLeft)->setSize(400, 50);
+        entry->setHidePassword();
         cancel = new GuiButton(entry_box, "PASSWORD_CANCEL_BUTTON", tr("button", "Cancel"), [this]() {
             // Reset the dialog.
             entry->setText("");
