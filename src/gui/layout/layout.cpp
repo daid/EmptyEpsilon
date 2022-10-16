@@ -196,7 +196,7 @@ void GuiLayout::basicLayout(const sp::Rect& rect, GuiElement& widget)
     widget.updateLayout({result_position, result_size});
 
     auto size_diff = pre_layout_size - widget.layout.size;
-    if (std::abs(size_diff.x) + std::abs(size_diff.y) > 0.1)
+    if (std::abs(size_diff.x) + std::abs(size_diff.y) > 0.1f)
     {
         require_repeat = true;
     }
