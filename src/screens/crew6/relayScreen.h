@@ -39,9 +39,6 @@ private:
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
 
-    GuiToggleButton* alert_level_button;
-    std::vector<GuiButton*> alert_level_buttons;
-
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
 

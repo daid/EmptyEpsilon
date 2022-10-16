@@ -132,6 +132,11 @@ public:
     sp::io::Keybinding engineering_self_destruct_confirm;
     sp::io::Keybinding engineering_self_destruct_cancel;
 
+    //Relay
+    sp::io::Keybinding relay_alert_level_none;
+    sp::io::Keybinding relay_alert_level_yellow;
+    sp::io::Keybinding relay_alert_level_red;
+
     // Cinematic View
     struct CinematicKeys {
         CinematicKeys();

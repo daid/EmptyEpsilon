@@ -251,6 +251,10 @@ Keys::Keys() :
     engineering_self_destruct_confirm("ENGINEERING_SELF_DESTRUCT_CONFIRM"),
     engineering_self_destruct_cancel("ENGINEERING_SELF_DESTRUCT_CANCEL"),
 
+    relay_alert_level_none("RELAY_ALERT_NONE"),
+    relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
+    relay_alert_level_red("RELAY_ALERT_RED"),
+
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
 
@@ -386,6 +390,10 @@ void Keys::init()
     engineering_self_destruct_start.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Start self-destruct"));
     engineering_self_destruct_confirm.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Confirm self-destruct"));
     engineering_self_destruct_cancel.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Cancel self-destruct"));
+
+    relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Engineering", "Alert level: Normal"));
+    relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Engineering", "Alert level: Yellow"));
+    relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Engineering", "Alert level: Red"));
 
     cinematic.init();
     topdown.init();

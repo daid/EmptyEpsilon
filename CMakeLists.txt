@@ -205,6 +205,7 @@ set(SOURCES
     src/screens/gm/chatDialog.cpp
     src/screens/gm/tweak.cpp
     src/screenComponents/aimLock.cpp
+    src/screenComponents/alertLevelButton.cpp
     src/screenComponents/alertOverlay.cpp
     src/screenComponents/helpOverlay.cpp
     src/screenComponents/missileTubeControls.cpp
@@ -415,6 +416,7 @@ set(SOURCES
     src/scenarioInfo.h
     src/scienceDatabase.h
     src/screenComponents/aimLock.h
+    src/screenComponents/alertLevelButton.h
     src/screenComponents/alertOverlay.h
     src/screenComponents/beamFrequencySelector.h
     src/screenComponents/beamTargetSelector.h
