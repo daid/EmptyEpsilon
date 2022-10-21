@@ -1,11 +1,10 @@
 #include "scriptError.h"
-#include "main.h"
 #include "scriptInterface.h"
 #include "engine.h"
 
 
-ScriptErrorRenderer::ScriptErrorRenderer()
-: Renderable(mouseLayer)
+ScriptErrorRenderer::ScriptErrorRenderer(RenderLayer* renderLayer)
+: Renderable(renderLayer)
 {
 }
 
@@ -21,6 +20,6 @@ void ScriptErrorRenderer::render(sp::RenderTarget& renderer)
     string error = script->getError();
     if (error != "")
     {
-        renderer.drawText(sp::Rect(0, 0, 0, 0), error, sp::Alignment::TopLeft, 25, bold_font, glm::u8vec4(255,0,0,255));
+        renderer.drawText(sp::Rect(0, 0, 0, 0), error, sp::Alignment::TopLeft, 25, nullptr, glm::u8vec4(255,0,0,255));
     }
 }

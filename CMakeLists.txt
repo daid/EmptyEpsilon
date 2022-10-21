@@ -139,7 +139,81 @@ if(NOT meshoptimizer_POPULATED)
   add_subdirectory(${meshoptimizer_SOURCE_DIR} ${meshoptimizer_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 
-set(SOURCES
+set(GUI_LIB_SOURCES
+    src/gui/colorConfig.cpp
+    src/gui/hotkeyBinder.cpp
+    src/gui/hotkeyConfig.cpp
+    src/gui/joystickConfig.cpp
+    src/gui/mouseRenderer.cpp
+    src/gui/scriptError.cpp
+    src/gui/gui2_slider.cpp
+    src/gui/gui2_togglebutton.cpp
+    src/gui/gui2_arrow.cpp
+    src/gui/gui2_selector.cpp
+    src/gui/gui2_canvas.cpp
+    src/gui/gui2_rotationdial.cpp
+    src/gui/gui2_textentry.cpp
+    src/gui/gui2_label.cpp
+    src/gui/gui2_image.cpp
+    src/gui/gui2_arrowbutton.cpp
+    src/gui/gui2_entrylist.cpp
+    src/gui/gui2_progressbar.cpp
+    src/gui/gui2_progressslider.cpp
+    src/gui/gui2_scrolltext.cpp
+    src/gui/gui2_advancedscrolltext.cpp
+    src/gui/gui2_button.cpp
+    src/gui/gui2_resizabledialog.cpp
+    src/gui/debugRenderer.cpp
+    src/gui/gui2_element.cpp
+    src/gui/gui2_keyvaluedisplay.cpp
+    src/gui/gui2_listbox.cpp
+    src/gui/gui2_scrollbar.cpp
+    src/gui/gui2_container.cpp
+    src/gui/gui2_panel.cpp
+    src/gui/gui2_overlay.cpp
+    src/gui/theme.cpp
+    src/gui/layout/layout.cpp
+    src/gui/layout/horizontal.cpp
+    src/gui/layout/vertical.cpp
+
+    src/gui/colorConfig.h
+    src/gui/debugRenderer.h
+    src/gui/gui2_advancedscrolltext.h
+    src/gui/gui2_arrowbutton.h
+    src/gui/gui2_arrow.h
+    src/gui/gui2_button.h
+    src/gui/gui2_canvas.h
+    src/gui/gui2_container.h
+    src/gui/gui2_element.h
+    src/gui/gui2_entrylist.h
+    src/gui/gui2_image.h
+    src/gui/gui2_keyvaluedisplay.h
+    src/gui/gui2_label.h
+    src/gui/gui2_listbox.h
+    src/gui/gui2_overlay.h
+    src/gui/gui2_panel.h
+    src/gui/gui2_progressbar.h
+    src/gui/gui2_progressslider.h
+    src/gui/gui2_resizabledialog.h
+    src/gui/gui2_rotationdial.h
+    src/gui/gui2_scrollbar.h
+    src/gui/gui2_scrolltext.h
+    src/gui/gui2_selector.h
+    src/gui/gui2_slider.h
+    src/gui/gui2_textentry.h
+    src/gui/gui2_togglebutton.h
+    src/gui/theme.h
+    src/gui/layout/layout.h
+    src/gui/layout/horizontal.h
+    src/gui/layout/vertical.h
+    src/gui/hotkeyBinder.h
+    src/gui/hotkeyConfig.h
+    src/gui/joystickConfig.h
+    src/gui/mouseRenderer.h
+    src/gui/scriptError.h
+)
+
+set(MAIN_SOURCES
     src/main.cpp
     src/threatLevelEstimate.cpp
     src/preferenceManager.cpp
@@ -252,41 +326,6 @@ set(SOURCES
     src/screenComponents/miniGame.cpp
     src/screenComponents/mineSweeper.cpp
     src/screenComponents/impulseSound.cpp
-    src/gui/colorConfig.cpp
-    src/gui/hotkeyBinder.cpp
-    src/gui/hotkeyConfig.cpp
-    src/gui/joystickConfig.cpp
-    src/gui/mouseRenderer.cpp
-    src/gui/scriptError.cpp
-    src/gui/gui2_slider.cpp
-    src/gui/gui2_togglebutton.cpp
-    src/gui/gui2_arrow.cpp
-    src/gui/gui2_selector.cpp
-    src/gui/gui2_canvas.cpp
-    src/gui/gui2_rotationdial.cpp
-    src/gui/gui2_textentry.cpp
-    src/gui/gui2_label.cpp
-    src/gui/gui2_image.cpp
-    src/gui/gui2_arrowbutton.cpp
-    src/gui/gui2_entrylist.cpp
-    src/gui/gui2_progressbar.cpp
-    src/gui/gui2_progressslider.cpp
-    src/gui/gui2_scrolltext.cpp
-    src/gui/gui2_advancedscrolltext.cpp
-    src/gui/gui2_button.cpp
-    src/gui/gui2_resizabledialog.cpp
-    src/gui/debugRenderer.cpp
-    src/gui/gui2_element.cpp
-    src/gui/gui2_keyvaluedisplay.cpp
-    src/gui/gui2_listbox.cpp
-    src/gui/gui2_scrollbar.cpp
-    src/gui/gui2_container.cpp
-    src/gui/gui2_panel.cpp
-    src/gui/gui2_overlay.cpp
-    src/gui/theme.cpp
-    src/gui/layout/layout.cpp
-    src/gui/layout/horizontal.cpp
-    src/gui/layout/vertical.cpp
     src/spaceObjects/missiles/missileWeapon.cpp
     src/spaceObjects/missiles/EMPMissile.cpp
     src/spaceObjects/missiles/homingMissile.cpp
@@ -345,41 +384,6 @@ set(SOURCES
     src/GMActions.h
     src/GMMessage.h
     src/GMScriptCallback.h
-    src/gui/colorConfig.h
-    src/gui/debugRenderer.h
-    src/gui/gui2_advancedscrolltext.h
-    src/gui/gui2_arrowbutton.h
-    src/gui/gui2_arrow.h
-    src/gui/gui2_button.h
-    src/gui/gui2_canvas.h
-    src/gui/gui2_container.h
-    src/gui/gui2_element.h
-    src/gui/gui2_entrylist.h
-    src/gui/gui2_image.h
-    src/gui/gui2_keyvaluedisplay.h
-    src/gui/gui2_label.h
-    src/gui/gui2_listbox.h
-    src/gui/gui2_overlay.h
-    src/gui/gui2_panel.h
-    src/gui/gui2_progressbar.h
-    src/gui/gui2_progressslider.h
-    src/gui/gui2_resizabledialog.h
-    src/gui/gui2_rotationdial.h
-    src/gui/gui2_scrollbar.h
-    src/gui/gui2_scrolltext.h
-    src/gui/gui2_selector.h
-    src/gui/gui2_slider.h
-    src/gui/gui2_textentry.h
-    src/gui/gui2_togglebutton.h
-    src/gui/theme.h
-    src/gui/layout/layout.h
-    src/gui/layout/horizontal.h
-    src/gui/layout/vertical.h
-    src/gui/hotkeyBinder.h
-    src/gui/hotkeyConfig.h
-    src/gui/joystickConfig.h
-    src/gui/mouseRenderer.h
-    src/gui/scriptError.h
     src/hardware/devices/dmx512SerialDevice.h
     src/hardware/devices/enttecDMXProDevice.h
     src/hardware/devices/philipsHueDevice.h
@@ -523,24 +527,27 @@ set(SOURCES
 )
 
 if (WITH_DISCORD)
-  list(APPEND SOURCES src/discord.cpp src/discord.h)
+  list(APPEND MAIN_SOURCES src/discord.cpp src/discord.h)
 endif()
 if (STEAMSDK)
-  list(APPEND SOURCES src/steamrichpresence.cpp src/steamrichpresence.h)
+  list(APPEND MAIN_SOURCES src/steamrichpresence.cpp src/steamrichpresence.h)
 endif()
 
 if (WIN32)
-  list(APPEND SOURCES EmptyEpsilon.rc)
+  list(APPEND MAIN_SOURCES EmptyEpsilon.rc)
 endif()
 
 # Config header.
 configure_file(cmake/config.h.in include/config.h)
 
+add_library(EE_GuiLIB STATIC ${GUI_LIB_SOURCES})
+target_link_libraries(EE_GuiLIB PUBLIC seriousproton meshoptimizer)
+target_include_directories(EE_GuiLIB PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src;${CMAKE_CURRENT_BINARY_DIR}/include>")
 
 if(ANDROID)
-    add_library(${PROJECT_NAME} SHARED ${SOURCES})
+    add_library(${PROJECT_NAME} SHARED ${MAIN_SOURCES})
 else()
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCES})
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${MAIN_SOURCES})
 endif()
 
 target_compile_definitions(${PROJECT_NAME}
@@ -556,9 +563,8 @@ target_include_directories(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-        seriousproton meshoptimizer
+        seriousproton meshoptimizer EE_GuiLIB
         "$<$<BOOL:${ANDROID}>:log;android>"
-        "$<$<BOOL:${WIN32}>:iphlpapi>"
         "$<$<BOOL:${WITH_DISCORD}>:discord_h>"
         "$<$<PLATFORM_ID:Darwin>:-framework Foundation>"
 )

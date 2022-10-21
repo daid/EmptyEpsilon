@@ -3,6 +3,7 @@
 #include "hotkeyMenu.h"
 #include <regex>
 #include "soundManager.h"
+#include "main.h"
 
 #include "gui/hotkeyBinder.h"
 #include "gui/gui2_selector.h"

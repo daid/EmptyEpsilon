@@ -1,5 +1,6 @@
 #include "scrollingBanner.h"
 #include "gameGlobalInfo.h"
+#include "main.h"
 
 GuiScrollingBanner::GuiScrollingBanner(GuiContainer* owner)
 : GuiElement(owner, "")

@@ -1,11 +1,10 @@
 #include "debugRenderer.h"
-#include "main.h"
 #include "multiplayer_server.h"
 #include "hotkeyConfig.h"
 
 
-DebugRenderer::DebugRenderer()
-: Renderable(mouseLayer)
+DebugRenderer::DebugRenderer(RenderLayer* renderLayer)
+: Renderable(renderLayer)
 {
     fps = 0.0;
     fps_counter = 0;
