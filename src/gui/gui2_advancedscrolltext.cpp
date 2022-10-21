@@ -1,4 +1,3 @@
-#include "main.h"
 #include "gui2_advancedscrolltext.h"
 
 GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
@@ -49,7 +48,7 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     float max_prefix_width = 0.0f;
     for(Entry& e : entries)
     {
-        auto prepared = main_font->prepare(e.prefix, 32, text_size, {0, 0}, sp::Alignment::TopLeft, 0);
+        auto prepared = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, {0, 0}, sp::Alignment::TopLeft, 0);
         max_prefix_width = std::max(max_prefix_width, prepared.getUsedAreaSize().x);
     }
 
@@ -57,8 +56,8 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     float draw_offset = -scrollbar->getValue();
     for(Entry& e : entries)
     {
-        auto prepared_prefix = main_font->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
-        auto prepared_text = main_font->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
+        auto prepared_prefix = sp::RenderTarget::getDefaultFont()->prepare(e.prefix, 32, text_size, rect.size, sp::Alignment::TopLeft);
+        auto prepared_text = sp::RenderTarget::getDefaultFont()->prepare(e.text, 32, text_size, {rect.size.x - max_prefix_width - 50, rect.size.y}, sp::Alignment::TopLeft, sp::Font::FlagLineWrap | sp::Font::FlagClip);
         auto height = prepared_text.getUsedAreaSize().y;
         if (draw_offset + height > 0)
         {

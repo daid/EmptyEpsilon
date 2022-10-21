@@ -6,7 +6,7 @@
 class ScriptErrorRenderer : public Renderable
 {
 public:
-    ScriptErrorRenderer();
+    ScriptErrorRenderer(RenderLayer* renderLayer);
 
     virtual void render(sp::RenderTarget& target) override;
 };

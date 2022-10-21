@@ -194,7 +194,7 @@ void CinematicViewScreen::update(float delta)
     if (camera_lock_cycle_toggle->getValue())
     {
         cycle_time -= delta;
-        if (cycle_time < 0.0)
+        if (cycle_time < 0.0f)
         {
             cycle_time = 30.0f;
             camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);

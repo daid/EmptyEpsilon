@@ -19,7 +19,7 @@ private:
 
     std::vector<Engine::EngineTiming> timing_graph_points;
 public:
-    DebugRenderer();
+    DebugRenderer(RenderLayer* renderLayer);
 
     virtual void render(sp::RenderTarget& target) override;
 };

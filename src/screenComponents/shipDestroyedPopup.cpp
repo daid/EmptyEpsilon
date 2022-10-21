@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "soundManager.h"
+#include "main.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_canvas.h"

@@ -7,7 +7,9 @@
 #include "hotkeyConfig.h"
 #include "gui2_container.h"
 #include "gui/layout/layout.h"
-#include "main.h"
+#include "graphics/font.h"
+#include "graphics/renderTarget.h"
+#include "io/textinput.h"
 
 
 class Layout;

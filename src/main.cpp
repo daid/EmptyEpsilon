@@ -312,7 +312,7 @@ int main(int argc, char** argv)
         }
     }
 
-    new DebugRenderer();
+    new DebugRenderer(mouseLayer);
 
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());

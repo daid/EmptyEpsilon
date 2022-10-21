@@ -2,6 +2,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "spaceObjects/warpJammer.h"
+#include "main.h"
 
 GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ESystem system, sp::Alignment icon_align)
 : GuiElement(owner, name), system(system), text_size(30), icon_align(icon_align)

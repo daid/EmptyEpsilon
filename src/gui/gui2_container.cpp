@@ -54,7 +54,7 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
 
             element->drawDebugElements(element->rect, renderer);
 
-            renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, main_font, glm::u8vec4(255, 0, 0, 255));
+            renderer.drawText(sp::Rect(element->rect.position.x, element->rect.position.y - 20, element->rect.size.x, 20), element->id, sp::Alignment::TopLeft, 20, nullptr, glm::u8vec4(255, 0, 0, 255));
         }
     }
 }

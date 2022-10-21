@@ -6,6 +6,7 @@
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_scrollbar.h"
 #include "gui/hotkeyBinder.h"
+#include "Updatable.h"
 
 class GuiArrowButton;
 class GuiOverlay;

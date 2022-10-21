@@ -3,6 +3,7 @@
 
 #include "gui/gui2_element.h"
 #include "glObjects.h"
+#include "graphics/shader.h"
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec4.hpp>

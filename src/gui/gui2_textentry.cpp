@@ -389,7 +389,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
     //if (vertical_scroll)
     //    position.y -= vertical_scroll->getValue();
 
-    auto pfs = main_font->prepare(text, 32, text_size, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
+    auto pfs = sp::RenderTarget::getDefaultFont()->prepare(text, 32, text_size, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
     unsigned int n;
     for(n=0; n<pfs.data.size(); n++)
     {

@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "main.h"
 
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
 : GuiViewport3D(owner, id)
