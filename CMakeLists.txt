@@ -540,7 +540,13 @@ endif()
 # Config header.
 configure_file(cmake/config.h.in include/config.h)
 
-add_library(EE_GuiLIB STATIC ${GUI_LIB_SOURCES})
+if (SHARED_SP)
+    set(EE_LIB_TYPE SHARED)
+else()
+    set(EE_LIB_TYPE STATIC)
+endif()
+
+add_library(EE_GuiLIB ${EE_LIB_TYPE} ${GUI_LIB_SOURCES})
 target_link_libraries(EE_GuiLIB PUBLIC seriousproton meshoptimizer)
 target_include_directories(EE_GuiLIB PUBLIC "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src;${CMAKE_CURRENT_BINARY_DIR}/include>")
 
