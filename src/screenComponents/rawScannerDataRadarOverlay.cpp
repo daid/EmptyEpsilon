@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "random.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "ecs/query.h"
 
 
 RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id, float distance)
@@ -27,10 +28,10 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     RawRadarSignatureInfo signatures[point_count];
 
     // For each SpaceObject ...
-    foreach(SpaceObject, obj, space_object_list)
+    for(auto [entity, signature, obj] : sp::ecs::Query<RawRadarSignatureInfo, SpaceObject*>())
     {
         // Don't measure our own ship.
-        if (obj == my_spaceship)
+        if (obj == *my_spaceship)
             continue;
 
         // Initialize angle, distance, and scale variables.
@@ -65,16 +66,12 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         // Get the object's radar signature.
         // If the object is a SpaceShip, adjust the signature dynamically based
         // on its current state and activity.
-        RawRadarSignatureInfo info;
-        P<SpaceShip> ship = obj;
-
+        RawRadarSignatureInfo info = signature;
+        P<SpaceShip> ship = P<SpaceObject>(obj);
         if (ship)
         {
             // Use dynamic signatures for ships.
-            info = ship->getDynamicRadarSignatureInfo();
-        } else {
-            // Otherwise, use the baseline only.
-            info = obj->getRadarSignatureInfo();
+            info += ship->getDynamicRadarSignatureInfo();
         }
 
         // For each interval determined by the level of raw data resolution,

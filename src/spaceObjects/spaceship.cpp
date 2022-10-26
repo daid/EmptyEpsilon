@@ -448,9 +448,10 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
     }
 
     // Update the signature by adding the delta to its baseline.
-    RawRadarSignatureInfo info = getRadarSignatureInfo();
-    info += signature_delta;
-    return info;
+    auto rsi = entity.getComponent<RawRadarSignatureInfo>();
+    if (rsi)
+        signature_delta += *rsi;
+    return signature_delta;
 }
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

@@ -9,6 +9,7 @@
 #include "factionInfo.h"
 #include "shipTemplate.h"
 #include "graphics/renderTarget.h"
+#include "ecs/entity.h"
 
 #include <glm/mat4x4.hpp>
 
@@ -110,7 +111,6 @@ class SpaceObject : public Collisionable, public MultiplayerObject
         string simple_scan;
         string full_scan;
     } object_description;
-    RawRadarSignatureInfo radar_signature;
 
     /*!
      * Scan state per faction. Implementation wise, this vector is resized when
@@ -121,6 +121,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
      */
     std::vector<EScannedState> scanned_by_faction;
 public:
+    sp::ecs::Entity entity;
     string comms_script_name;
     ScriptSimpleCallback comms_script_callback;
 
@@ -136,12 +137,12 @@ public:
 
     bool hasWeight() { return has_weight; }
 
-    // Return the object's raw radar signature. The default signature is 0,0,0.
-    virtual RawRadarSignatureInfo getRadarSignatureInfo() { return radar_signature; }
-    void setRadarSignatureInfo(float grav, float elec, float bio) { radar_signature = RawRadarSignatureInfo(grav, elec, bio); }
-    float getRadarSignatureGravity() { return radar_signature.gravity; }
-    float getRadarSignatureElectrical() { return radar_signature.electrical; }
-    float getRadarSignatureBiological() { return radar_signature.biological; }
+    void setRadarSignatureInfo(float grav, float elec, float bio) {
+        entity.addComponent<RawRadarSignatureInfo>(grav, elec, bio);
+    }
+    float getRadarSignatureGravity() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->gravity; }
+    float getRadarSignatureElectrical() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->electrical; }
+    float getRadarSignatureBiological() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->biological; }
     virtual ERadarLayer getRadarLayer() const { return ERadarLayer::Default; }
 
     string getDescription(EScannedState state)
