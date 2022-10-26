@@ -3,9 +3,6 @@
 #include <logging.h>
 
 
-GUI_REGISTER_LAYOUT("vertical", GuiLayoutVertical);
-GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
-
 void GuiLayoutVertical::update(GuiContainer& container, const sp::Rect& rect)
 {
     float total_height = 0.0f;

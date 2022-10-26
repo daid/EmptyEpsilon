@@ -5,8 +5,6 @@
 
 GuiLayoutClassRegistry* GuiLayoutClassRegistry::first;
 
-GUI_REGISTER_LAYOUT("default", GuiLayout);
-
 void GuiLayout::updateLoop(GuiContainer& container, const sp::Rect& rect)
 {
     int repeat_counter = 10;

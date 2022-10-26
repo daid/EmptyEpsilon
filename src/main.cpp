@@ -67,6 +67,14 @@ PostProcessor* warpPostProcessor;
 PVector<Window> windows;
 std::vector<RenderLayer*> window_render_layers;
 
+#include "gui/layout/vertical.h"
+#include "gui/layout/horizontal.h"
+GUI_REGISTER_LAYOUT("default", GuiLayout);
+GUI_REGISTER_LAYOUT("vertical", GuiLayoutVertical);
+GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
+GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
+GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
+
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__

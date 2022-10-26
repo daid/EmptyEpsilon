@@ -3,9 +3,6 @@
 #include <logging.h>
 
 
-GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
-GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
-
 void GuiLayoutHorizontal::update(GuiContainer& container, const sp::Rect& rect)
 {
     float total_width = 0.0f;
