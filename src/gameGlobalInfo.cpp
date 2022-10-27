@@ -105,6 +105,14 @@ int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
 
 void GameGlobalInfo::update(float delta)
 {
+    foreach(SpaceObject, obj, space_object_list) {
+        if (obj->entity) {
+            //Add a back reference to the SpaceObject from the ECS, we need this until we fully phased out the OOP style code (if ever...)
+            // We do this here so this is done for client and server.
+            obj->entity.addComponent<SpaceObject*>(*obj);
+        }
+    }
+
     if (global_message_timeout > 0.0f)
     {
         global_message_timeout -= delta;

@@ -148,7 +148,7 @@ public:
     bool hasWeight() { return has_weight; }
 
     void setRadarSignatureInfo(float grav, float elec, float bio) {
-        entity.addComponent<RawRadarSignatureInfo>(grav, elec, bio);
+        if (entity) entity.addComponent<RawRadarSignatureInfo>(grav, elec, bio);
     }
     float getRadarSignatureGravity() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->gravity; }
     float getRadarSignatureElectrical() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->electrical; }

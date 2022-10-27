@@ -291,8 +291,6 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 {
     if (isServer()) {
         entity = sp::ecs::Entity::create();
-        //Add a back reference to the SpaceObject from the ECS, we need this until we fully phased out the OOP style code (if ever...)
-        entity.addComponent<SpaceObject*>(this);
     }
 
     object_radius = collision_range;
