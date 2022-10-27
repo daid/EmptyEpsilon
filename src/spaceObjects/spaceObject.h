@@ -77,6 +77,9 @@ public:
         return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
     }
 };
+static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const RawRadarSignatureInfo& rrs) { return packet << rrs.gravity << rrs.electrical << rrs.biological; }
+static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, RawRadarSignatureInfo& rrs) { packet >> rrs.gravity >> rrs.electrical >> rrs.biological; return packet; }
+
 class DynamicRadarSignatureInfo
 {
 public:
@@ -128,7 +131,7 @@ class SpaceObject : public Collisionable, public MultiplayerObject
      */
     std::vector<EScannedState> scanned_by_faction;
 public:
-    sp::ecs::Entity entity;
+    sp::ecs::Entity entity; //NOTE: On clients be careful, the Entity+components might be destroyed before the SpaceObject! Always check if this exists before using it.
     string comms_script_name;
     ScriptSimpleCallback comms_script_callback;
 

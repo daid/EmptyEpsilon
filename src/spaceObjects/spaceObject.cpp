@@ -289,9 +289,11 @@ PVector<SpaceObject> space_object_list;
 SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float multiplayer_significant_range)
 : Collisionable(collision_range), MultiplayerObject(multiplayer_name)
 {
-    entity = sp::ecs::Entity::create();
-    //Add a back reference to the SpaceObject from the ECS, we need this until we fully phased out the OOP style code (if ever...)
-    entity.addComponent<SpaceObject*>(this);
+    if (isServer()) {
+        entity = sp::ecs::Entity::create();
+        //Add a back reference to the SpaceObject from the ECS, we need this until we fully phased out the OOP style code (if ever...)
+        entity.addComponent<SpaceObject*>(this);
+    }
 
     object_radius = collision_range;
     space_object_list.push_back(this);
@@ -307,10 +309,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&object_description.friend_of_foe_identified);
     registerMemberReplication(&object_description.simple_scan);
     registerMemberReplication(&object_description.full_scan);
-#warning "TODO: Replication of entity and radar signature"
-    //registerMemberReplication(&radar_signature.gravity);
-    //registerMemberReplication(&radar_signature.electrical);
-    //registerMemberReplication(&radar_signature.biological);
+    registerMemberReplication(&entity);
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
     registerCollisionableReplication(multiplayer_significant_range);

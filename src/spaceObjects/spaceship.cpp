@@ -448,7 +448,8 @@ void SpaceShip::updateDynamicRadarSignature()
     }
 
     // Update the signature by adding the delta to its baseline.
-    entity.addComponent<DynamicRadarSignatureInfo>(signature_delta);
+    if (entity)
+        entity.addComponent<DynamicRadarSignatureInfo>(signature_delta);
 }
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

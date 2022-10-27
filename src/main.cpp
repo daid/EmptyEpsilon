@@ -118,6 +118,7 @@ int main(int argc, char** argv)
         free(exe_dir);
     }
 #endif
+    MultiplayerECSComponentReplication<RawRadarSignatureInfo> rrsir;
 
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
