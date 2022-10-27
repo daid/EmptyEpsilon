@@ -77,6 +77,13 @@ public:
         return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
     }
 };
+class DynamicRadarSignatureInfo
+{
+public:
+    float gravity;
+    float electrical;
+    float biological;
+};
 
 enum EScannedState
 {

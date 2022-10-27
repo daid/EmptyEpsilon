@@ -221,10 +221,10 @@ public:
      * Get this ship's radar signature dynamically modified by the state of its
      * systems and current activity.
      */
-    virtual RawRadarSignatureInfo getDynamicRadarSignatureInfo();
-    float getDynamicRadarSignatureGravity() { return getDynamicRadarSignatureInfo().gravity; }
-    float getDynamicRadarSignatureElectrical() { return getDynamicRadarSignatureInfo().electrical; }
-    float getDynamicRadarSignatureBiological() { return getDynamicRadarSignatureInfo().biological; }
+    void updateDynamicRadarSignature();
+    float getDynamicRadarSignatureGravity() { auto radar_signature = entity.getComponent<DynamicRadarSignatureInfo>(); if (!radar_signature) return getRadarSignatureGravity(); return radar_signature->gravity + getRadarSignatureGravity(); }
+    float getDynamicRadarSignatureElectrical() { auto radar_signature = entity.getComponent<DynamicRadarSignatureInfo>(); if (!radar_signature) return getRadarSignatureElectrical(); return radar_signature->electrical + getRadarSignatureElectrical(); }
+    float getDynamicRadarSignatureBiological() { auto radar_signature = entity.getComponent<DynamicRadarSignatureInfo>(); if (!radar_signature) return getRadarSignatureBiological(); return radar_signature->biological + getRadarSignatureBiological(); }
 
     /*!
      * Draw this ship on the radar.

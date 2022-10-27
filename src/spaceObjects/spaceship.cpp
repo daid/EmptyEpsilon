@@ -383,11 +383,11 @@ void SpaceShip::draw3DTransparent()
     }
 }
 
-RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
+void SpaceShip::updateDynamicRadarSignature()
 {
     // Adjust radar_signature dynamically based on current state and activity.
     // radar_signature becomes the ship's baseline radar signature.
-    RawRadarSignatureInfo signature_delta;
+    DynamicRadarSignatureInfo signature_delta;
 
     // For each ship system ...
     for(int n = 0; n < SYS_COUNT; n++)
@@ -448,10 +448,7 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
     }
 
     // Update the signature by adding the delta to its baseline.
-    auto rsi = entity.getComponent<RawRadarSignatureInfo>();
-    if (rsi)
-        signature_delta += *rsi;
-    return signature_delta;
+    entity.addComponent<DynamicRadarSignatureInfo>(signature_delta);
 }
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -926,6 +923,8 @@ void SpaceShip::update(float delta)
         model_info.warp_scale = (10.0f - jump_delay) / 10.0f;
     else
         model_info.warp_scale = 0.f;
+    
+    updateDynamicRadarSignature();
 }
 
 float SpaceShip::getShieldRechargeRate(int shield_index)

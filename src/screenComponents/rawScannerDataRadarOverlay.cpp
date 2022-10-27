@@ -28,7 +28,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     RawRadarSignatureInfo signatures[point_count];
 
     // For each SpaceObject ...
-    for(auto [entity, signature, obj] : sp::ecs::Query<RawRadarSignatureInfo, SpaceObject*>())
+    for(auto [entity, signature, dynamic_signature, obj] : sp::ecs::Query<RawRadarSignatureInfo, sp::ecs::optional<DynamicRadarSignatureInfo>, SpaceObject*>())
     {
         // Don't measure our own ship.
         if (obj == *my_spaceship)
@@ -67,11 +67,11 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         // If the object is a SpaceShip, adjust the signature dynamically based
         // on its current state and activity.
         RawRadarSignatureInfo info = signature;
-        P<SpaceShip> ship = P<SpaceObject>(obj);
-        if (ship)
+        if (dynamic_signature)
         {
-            // Use dynamic signatures for ships.
-            info += ship->getDynamicRadarSignatureInfo();
+            info.gravity += dynamic_signature->gravity;
+            info.electrical += dynamic_signature->electrical;
+            info.biological += dynamic_signature->biological;
         }
 
         // For each interval determined by the level of raw data resolution,
