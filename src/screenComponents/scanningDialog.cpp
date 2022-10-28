@@ -93,6 +93,14 @@ void GuiScanningDialog::onUpdate()
                 sliders[n]->setValue(sliders[n]->getValue() + adjust);
                 updateSignal();
             }
+
+            float set_value = keys.science_scan_param_set[n].getValue();
+            if (set_value != sliders[n]->getValue() && (set_value != 0.0f || set_active[n]))
+            {
+                sliders[n]->setValue(set_value);
+                updateSignal();
+                set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            }
         }
     }
 }

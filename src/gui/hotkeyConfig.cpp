@@ -219,6 +219,12 @@ Keys::Keys() :
         {"SIENCE_SCAN_PARAM_DECREASE_3"},
         {"SIENCE_SCAN_PARAM_DECREASE_4"},
     }},
+    science_scan_param_set{{
+        {"SIENCE_SCAN_PARAM_SET_1"},
+        {"SIENCE_SCAN_PARAM_SET_2"},
+        {"SIENCE_SCAN_PARAM_SET_3"},
+        {"SIENCE_SCAN_PARAM_SET_4"},
+    }},
 
     //Engineering
     engineering_select_reactor("ENGINEERING_SELECT_SYSTEM_REACTOR", "1"),
@@ -358,6 +364,7 @@ void Keys::init()
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n+1)}}));
+        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter set {number}").format({{"number", string(n+1)}}));
     }
 
     //Engineering

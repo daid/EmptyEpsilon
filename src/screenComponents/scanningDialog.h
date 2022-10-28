@@ -27,6 +27,7 @@ private:
     bool locked;
     float lock_start_time;
     int scan_depth;
+    std::array<bool, max_sliders> set_active = {false, false, false, false};
 public:
     GuiScanningDialog(GuiContainer* owner, string id);
 
