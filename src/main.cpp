@@ -75,6 +75,8 @@ GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
 GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 
+MultiplayerECSComponentReplication<RawRadarSignatureInfo> rrsir;
+
 int main(int argc, char** argv)
 {
 #ifdef __APPLE__
@@ -118,7 +120,6 @@ int main(int argc, char** argv)
         free(exe_dir);
     }
 #endif
-    MultiplayerECSComponentReplication<RawRadarSignatureInfo> rrsir;
 
 #ifdef DEBUG
     Logging::setLogLevel(LOGLEVEL_DEBUG);
