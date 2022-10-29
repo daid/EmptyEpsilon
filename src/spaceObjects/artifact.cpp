@@ -61,19 +61,19 @@ Artifact::Artifact()
   current_model_data_name("artifact" + string(irandom(1, 8))),
   model_data_name(current_model_data_name),
   artifact_spin(0.0f),
-  allow_pickup(false),
-  radar_trace_icon("radar/blip.png"),
-  radar_trace_scale(0),
-  radar_trace_color(glm::u8vec4(255, 255, 255, 255))
+  allow_pickup(false)
 {
     setRotation(random(0, 360));
     model_info.setData(current_model_data_name);
 
     registerMemberReplication(&model_data_name);
     registerMemberReplication(&artifact_spin);
-    registerMemberReplication(&radar_trace_icon);
-    registerMemberReplication(&radar_trace_scale);
-    registerMemberReplication(&radar_trace_color);
+
+    if (entity) {
+        auto& trace = entity.addComponent<RadarTrace>();
+        trace.radius = getRadius();
+        trace.icon = "radar/blip.png";
+    }
 }
 
 void Artifact::update(float delta)
@@ -83,26 +83,6 @@ void Artifact::update(float delta)
         current_model_data_name = model_data_name;
         model_info.setData(current_model_data_name);
     }
-}
-
-void Artifact::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
-{
-    // radar trace scaling, via script or automatically
-    float size;
-    if (radar_trace_scale > 0)
-    {
-        if (long_range)
-            size = radar_trace_scale * 0.7f;
-        else
-            size = radar_trace_scale;
-    }
-    else
-    {
-        size = getRadius() * scale / 16;
-        if (size < 0.2f)
-            size = 0.2f;
-    }
-    renderer.drawRotatedSprite(radar_trace_icon, position, size * 32.0f, getRotation() - rotation, radar_trace_color);
 }
 
 void Artifact::collide(Collisionable* target, float force)
@@ -172,12 +152,27 @@ void Artifact::setSpin(float spin)
 
 void Artifact::setRadarTraceIcon(string icon)
 {
-    radar_trace_icon = "radar/" + icon;
+    auto trace = entity.getComponent<RadarTrace>();
+    if (trace) {
+        trace->icon = "radar/" + icon;
+    }
 }
 
 void Artifact::setRadarTraceScale(float scale)
 {
-    radar_trace_scale = scale;
+    auto trace = entity.getComponent<RadarTrace>();
+    if (trace) {
+        trace->min_size = scale * 32.0f;
+        trace->max_size = scale * 32.0f;
+    }
+}
+
+void Artifact::setRadarTraceColor(int r, int g, int b)
+{
+    auto trace = entity.getComponent<RadarTrace>();
+    if (trace) {
+        trace->color = glm::u8vec4(r, g, b, 255);
+    }
 }
 
 void Artifact::onPickUp(ScriptSimpleCallback callback)

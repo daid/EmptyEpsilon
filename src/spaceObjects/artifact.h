@@ -14,15 +14,10 @@ private:
     ScriptSimpleCallback on_collision_callback;
     ScriptSimpleCallback on_player_collision_callback;
 
-    string radar_trace_icon;
-    float radar_trace_scale;
-    glm::u8vec4 radar_trace_color;
 public:
     Artifact();
 
     virtual void update(float delta) override;
-
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual void collide(Collisionable* target, float force) override;
 
@@ -33,7 +28,7 @@ public:
 
     void setRadarTraceIcon(string icon);
     void setRadarTraceScale(float scale);
-    void setRadarTraceColor(int r, int g, int b) { radar_trace_color = glm::u8vec4(r, g, b, 255); }
+    void setRadarTraceColor(int r, int g, int b);
 
     void onPickUp(ScriptSimpleCallback callback);
     // Consistent naming workaround

@@ -1,5 +1,6 @@
 #include <graphics/opengl.h>
 
+#include "ecs/query.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
@@ -682,6 +683,18 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     for(SpaceObject* obj : objects_to_draw)
     {
         draw_object(obj);
+    }
+    
+    for(auto [entity, trace, obj] : sp::ecs::Query<RadarTrace, SpaceObject*>()) {
+        auto object_position_on_screen = worldToScreen(obj->getPosition());
+
+        auto size = trace.radius * scale * 2.0f;
+        size = std::clamp(size, trace.min_size, trace.max_size);
+
+        if (trace.rotate)
+            renderer.drawRotatedSprite(trace.icon, object_position_on_screen, size, obj->getRotation() - view_rotation, trace.color);
+        else
+            renderer.drawSprite(trace.icon, object_position_on_screen, size, trace.color);
     }
 
     if (my_spaceship)

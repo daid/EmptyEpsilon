@@ -35,6 +35,7 @@
 #include "networkRecorder.h"
 #include "tutorialGame.h"
 #include "windowManager.h"
+#include "ecs/multiplayer.h"
 
 #include "graphics/opengl.h"
 
@@ -75,7 +76,8 @@ GUI_REGISTER_LAYOUT("verticalbottom", GuiLayoutVerticalBottom);
 GUI_REGISTER_LAYOUT("horizontal", GuiLayoutHorizontal);
 GUI_REGISTER_LAYOUT("horizontalright", GuiLayoutHorizontalRight);
 
-MultiplayerECSComponentReplication<RawRadarSignatureInfo> rrsir;
+sp::ecs::ComponentReplication<RawRadarSignatureInfo> cr_RawRadarSignatureInfo;
+sp::ecs::ComponentReplication<RadarTrace> cr_RadarTrace;
 
 int main(int argc, char** argv)
 {

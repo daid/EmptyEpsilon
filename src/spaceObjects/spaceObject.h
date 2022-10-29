@@ -10,6 +10,7 @@
 #include "shipTemplate.h"
 #include "graphics/renderTarget.h"
 #include "ecs/entity.h"
+#include "components/radar.h"
 
 #include <glm/mat4x4.hpp>
 
@@ -43,49 +44,6 @@ public:
     DamageInfo(P<SpaceObject> instigator, EDamageType type, glm::vec2 location)
     : instigator(instigator), type(type), location(location), frequency(-1), system_target(SYS_None)
     {}
-};
-
-// Radar signature data, used by rawScannerDataOverlay.
-class RawRadarSignatureInfo
-{
-public:
-    float gravity;
-    float electrical;
-    float biological;
-
-    RawRadarSignatureInfo()
-    : gravity(0), electrical(0), biological(0) {}
-
-    RawRadarSignatureInfo(float gravity, float electrical, float biological)
-    : gravity(gravity), electrical(electrical), biological(biological) {}
-
-    RawRadarSignatureInfo& operator+=(const RawRadarSignatureInfo& o)
-    {
-        gravity += o.gravity;
-        electrical += o.electrical;
-        biological += o.biological;
-        return *this;
-    }
-
-    bool operator!=(const RawRadarSignatureInfo& o)
-    {
-        return gravity != o.gravity || electrical != o.electrical || biological != o.biological;
-    }
-
-    RawRadarSignatureInfo operator*(const float f) const
-    {
-        return RawRadarSignatureInfo(gravity * f, electrical * f, biological * f);
-    }
-};
-static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const RawRadarSignatureInfo& rrs) { return packet << rrs.gravity << rrs.electrical << rrs.biological; }
-static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, RawRadarSignatureInfo& rrs) { packet >> rrs.gravity >> rrs.electrical >> rrs.biological; return packet; }
-
-class DynamicRadarSignatureInfo
-{
-public:
-    float gravity;
-    float electrical;
-    float biological;
 };
 
 enum EScannedState
