@@ -749,6 +749,7 @@ msgstr ""
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
+"Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
 
 #: scripts/scenario_74_omicron.lua:3378
 #, lua-format
@@ -764,6 +765,8 @@ msgid ""
 "Good day, officer!\n"
 "What can we do for you today?"
 msgstr ""
+"Bonjour officier !\n"
+"Que pouvons-nous faire pour vous aujourd'hui ?"
 
 #: scripts/scenario_74_omicron.lua:3382
 msgctxt "station-comms"
@@ -773,7 +776,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:3385
 msgctxt "station-comms"
 msgid "Welcome to our lovely station."
-msgstr ""
+msgstr "Bienvenue dans notre charmante petite station."
 
 #: scripts/scenario_74_omicron.lua:3388
 msgctxt "station-comms"
@@ -782,6 +785,9 @@ msgid ""
 "Forgive us if we seem a little distracted. We are carefully monitoring the "
 "enemies nearby."
 msgstr ""
+"\n"
+"Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+"attentivement les ennemis à proximité."
 
 #: scripts/scenario_74_omicron.lua:3390
 #, lua-format
@@ -1170,12 +1176,12 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:3770
 msgctxt "station-comms"
 msgid "Tell me more about your station"
-msgstr ""
+msgstr "Dites m'en plus à propos de votre station."
 
 #: scripts/scenario_74_omicron.lua:3771
 msgctxt "station-comms"
 msgid "What would you like to know?"
-msgstr ""
+msgstr "Qu'aimeriez-vous savoir ?"
 
 #: scripts/scenario_74_omicron.lua:3773 scripts/scenario_74_omicron.lua:4574
 msgctxt "stationGeneralInfo-comms"
@@ -1617,6 +1623,9 @@ msgid ""
 "Good day, officer.\n"
 "If you need supplies, please dock with us first."
 msgstr ""
+"Bonjour, officier.\n"
+"Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+"station au préalable."
 
 #: scripts/scenario_74_omicron.lua:4255
 msgctxt "station-comms"
@@ -1624,6 +1633,8 @@ msgid ""
 "Greetings.\n"
 "If you want to do business, please dock with us first."
 msgstr ""
+"Salutations.\n"
+"Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
 
 #: scripts/scenario_74_omicron.lua:4258
 msgctxt "station-comms"
@@ -1632,6 +1643,9 @@ msgid ""
 "Be aware that if enemies in the area get much closer, we will be too busy to "
 "conduct business with you."
 msgstr ""
+"\n"
+"Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
+"occupés pour faire affaire avec vous."
 
 #: scripts/scenario_74_omicron.lua:4312
 msgctxt "station-comms"
@@ -1679,12 +1693,12 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4377
 msgctxt "station-comms"
 msgid "I need information"
-msgstr ""
+msgstr "j'aurai besoin d'informations."
 
 #: scripts/scenario_74_omicron.lua:4378
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
-msgstr ""
+msgstr "De quel genre d'informations avez-vous besoin ?"
 
 #: scripts/scenario_74_omicron.lua:4399
 msgctxt "ammo-comms"
@@ -1861,44 +1875,49 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4623
 msgctxt "situationReport-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_74_omicron.lua:4624
 msgctxt "situationReport-comms"
 msgid "Hull: "
-msgstr ""
+msgstr "Coque : "
 
 #: scripts/scenario_74_omicron.lua:4627
 msgctxt "situationReport-comms"
 msgid "Shield: "
-msgstr ""
+msgstr "Boucliers : "
 
 #: scripts/scenario_74_omicron.lua:4630
 msgctxt "situationReport-comms"
 msgid "Shield "
-msgstr ""
+msgstr "Boucliers "
 
 #: scripts/scenario_74_omicron.lua:4638
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
 msgstr ""
+"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
 
 #: scripts/scenario_74_omicron.lua:4640
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
+"Vous devez définir un marqueur avant de faire une demande de "
+"réapprovisionnement."
 
 #: scripts/scenario_74_omicron.lua:4642
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr ""
+msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
 
 #: scripts/scenario_74_omicron.lua:4652
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
+"Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+"réapprovisionnement au marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:4654 scripts/scenario_74_omicron.lua:4677
 #: scripts/scenario_74_omicron.lua:4729 scripts/scenario_74_omicron.lua:4776
@@ -1910,23 +1929,25 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send reinforcements! (%d rep)"
-msgstr ""
+msgstr "Merci de nous envoyer des renforts ! (%d rép)"
 
 #: scripts/scenario_74_omicron.lua:4666
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
-msgstr ""
+msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
 
 #: scripts/scenario_74_omicron.lua:4668
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
-msgstr ""
+msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
 
 #: scripts/scenario_74_omicron.lua:4675
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to assist at WP %d"
 msgstr ""
+"Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+"marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:4687
 msgctxt "stationAssist-comms"
