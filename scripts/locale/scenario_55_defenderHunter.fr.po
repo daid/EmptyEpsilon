@@ -3319,7 +3319,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quels marchandises vous intéressent ?\n"
+"Quelles marchandises vous intéressent ?\n"
 "J'ai entendu parler de ça :"
 
 #: scripts/scenario_55_defenderHunter.lua:6596
