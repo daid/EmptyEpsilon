@@ -17,7 +17,114 @@ msgid ""
 "improve your ship for the race. But, watch your time carefully. If you are "
 "not at waypoint 1 at the start of the race, your ship will be destroyed. "
 "Your competitors may also try to destroy you despite being your nominal "
-"allies, so beware\n"
-"\n"
-"Current version updated for online event on 23Jan2021"
+"allies, so beware"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Shoot Back"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures whether the targets along the race course shoot back or not"
+msgstr ""
+
+msgctxt "Shoot Back"
+msgid "No"
+msgstr ""
+
+msgctxt "Shoot Back"
+msgid "Targets along the course do not shoot back"
+msgstr ""
+
+msgctxt "Shoot Back"
+msgid "Yes"
+msgstr ""
+
+msgctxt "Shoot Back"
+msgid "Targets along the course shoot back"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Chase"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures whether or not random enemies will chase the racers"
+msgstr ""
+
+msgctxt "Chase"
+msgid "No"
+msgstr ""
+
+msgctxt "Chase"
+msgid "Random enemies will not appear to chase the racers"
+msgstr ""
+
+msgctxt "Chase"
+msgid "Yes"
+msgstr ""
+
+msgctxt "Chase"
+msgid "Random enemies will appear to chase the racers"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Hazards"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Configures whether or not hazards will appear at the race point markers to "
+"impede the race"
+msgstr ""
+
+msgctxt "Hazards"
+msgid "No"
+msgstr ""
+
+msgctxt "Hazards"
+msgid "No hazards will appear at the race point markers to impede the race"
+msgstr ""
+
+msgctxt "Hazards"
+msgid "Yes"
+msgstr ""
+
+msgctxt "Hazards"
+msgid "Hazards will appear at the race point markers to impeded the race"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Ship Name"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Configures whether player ship names and control codes will be predefined or "
+"random. See Game master screen to get control codes"
+msgstr ""
+
+msgctxt "Ship Name"
+msgid "Predefined"
+msgstr ""
+
+msgctxt "Ship Name"
+msgid ""
+"Player ship names and control codes will be predefined as scripted. See Game "
+"master screen to get control codes"
+msgstr ""
+
+msgctxt "Ship Name"
+msgid "Random"
+msgstr ""
+
+msgctxt "Ship Name"
+msgid ""
+"Player ship names will be selected at random from a list of names and player "
+"ship control codes will be randomly generated. See Game master screen to get "
+"control codes"
 msgstr ""

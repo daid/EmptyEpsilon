@@ -166,13 +166,10 @@ msgid "Yes"
 msgstr ""
 
 #: scripts/scenario_00_basic.lua:248
-msgctxt "buttonGM"
-msgid "Players have won"
-msgstr ""
-
-#: scripts/scenario_00_basic.lua:249
-msgctxt "buttonGM"
-msgid "Scenario ended"
+msgctxt "msgGM"
+msgid ""
+"Players have won.\n"
+"Scenario ended."
 msgstr ""
 
 #: scripts/scenario_00_basic.lua:251
