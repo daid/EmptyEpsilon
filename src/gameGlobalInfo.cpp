@@ -229,6 +229,16 @@ void GameGlobalInfo::destroy()
     MultiplayerObject::destroy();
 }
 
+string GameGlobalInfo::getMissionTime() {
+    unsigned int seconds = gameGlobalInfo->elapsed_time;
+    unsigned int minutes = (seconds / 60) % 60;
+    unsigned int hours = (seconds / 60 / 60) % 24;
+    seconds = seconds % 60;
+    char buf[9];
+    std::snprintf(buf, 9, "%02d:%02d:%02d", hours, minutes, seconds);
+    return string(buf);
+}
+
 string getSectorName(glm::vec2 position)
 {
     constexpr float sector_size = 20000;

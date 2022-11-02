@@ -108,6 +108,7 @@ public:
 
     virtual void update(float delta) override;
     virtual void destroy() override;
+    string getMissionTime();
 
     string getNextShipCallsign();
 };
