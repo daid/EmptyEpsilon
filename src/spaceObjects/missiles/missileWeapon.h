@@ -26,7 +26,7 @@ public:
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void update(float delta) override;
 
-    virtual void collide(Collisionable* target, float force) override;
+    virtual void collide(SpaceObject* target, float force) override;
     virtual void takeDamage(float damage_amount, DamageInfo info) override {
         // Energy and EMP damage can destroy a missile.
         if (info.type != DT_Kinetic) destroy();

@@ -1,9 +1,10 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
-#include "collisionable.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/missiles/missileWeapon.h"
+#include "systems/collision.h"
+
 
 ThreatLevelEstimate::ThreatLevelEstimate()
 {
@@ -55,9 +56,13 @@ float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
     threat += ship->hull_max - ship->hull_strength;
 
     float radius = 7000.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(ship->getPosition() - glm::vec2(radius, radius), ship->getPosition() + glm::vec2(radius, radius));
-    foreach(Collisionable, obj, objectList)
+    
+    auto ship_position = ship->getPosition();
+    for(auto entity : sp::CollisionSystem::queryArea(ship_position - glm::vec2(radius, radius), ship_position + glm::vec2(radius, radius)))
     {
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr) continue;
+        P<SpaceObject> obj = *ptr;
         P<SpaceShip> other_ship = obj;
         if (!other_ship || !ship->isEnemy(other_ship))
         {

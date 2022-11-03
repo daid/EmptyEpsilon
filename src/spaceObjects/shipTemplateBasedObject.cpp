@@ -1,6 +1,7 @@
 #include "shipTemplateBasedObject.h"
 
 #include "scriptInterface.h"
+#include "components/collision.h"
 
 #include "tween.h"
 #include "i18n.h"
@@ -108,7 +109,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(ShipTemplateBasedObject, SpaceObject)
 ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range)
 : SpaceObject(collision_range, multiplayer_name, multiplayer_significant_range)
 {
-    setCollisionPhysics(true, true);
+    entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Dynamic, collision_range);
 
     shield_count = 0;
     for(int n=0; n<max_shield_count; n++)

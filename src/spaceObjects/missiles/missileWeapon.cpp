@@ -5,6 +5,7 @@
 #include "multiplayer_server.h"
 #include "multiplayer_client.h"
 #include "soundManager.h"
+#include "components/collision.h"
 
 #include "i18n.h"
 
@@ -74,7 +75,9 @@ void MissileWeapon::update(float delta)
         lifeEnded();
         destroy();
     }
-    setVelocity(vec2FromAngle(getRotation()) * data.speed * size_speed_modifier);
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        physics->setVelocity(vec2FromAngle(getRotation()) * data.speed * size_speed_modifier);
 
     if (delta > 0)
     {
@@ -82,13 +85,13 @@ void MissileWeapon::update(float delta)
     }
 }
 
-void MissileWeapon::collide(Collisionable* target, float force)
+void MissileWeapon::collide(SpaceObject* target, float force)
 {
     if (!game_server)
     {
         return;
     }
-    P<SpaceObject> object = P<Collisionable>(target);
+    P<SpaceObject> object = target;
     if (!object || object == owner || !object->canBeTargetedBy(owner))
     {
         return;
@@ -128,12 +131,15 @@ void MissileWeapon::updateMovement()
 
         float angle_diff = angleDifference(getRotation(), target_angle);
 
-        if (angle_diff > 1.0f)
-            setAngularVelocity(data.turnrate * size_speed_modifier);
-        else if (angle_diff < -1.0f)
-            setAngularVelocity(data.turnrate * -1.0f * size_speed_modifier);
-        else
-            setAngularVelocity(angle_diff * data.turnrate * size_speed_modifier);
+        auto physics = entity.getComponent<sp::Physics>();
+        if (physics) {
+            if (angle_diff > 1.0f)
+                physics->setAngularVelocity(data.turnrate * size_speed_modifier);
+            else if (angle_diff < -1.0f)
+                physics->setAngularVelocity(data.turnrate * -1.0f * size_speed_modifier);
+            else
+                physics->setAngularVelocity(angle_diff * data.turnrate * size_speed_modifier);
+        }
     }
 }
 

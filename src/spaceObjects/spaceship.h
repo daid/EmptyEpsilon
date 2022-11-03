@@ -274,7 +274,7 @@ public:
      */
     virtual DockStyle canBeDockedBy(P<SpaceObject> obj) override;
 
-    virtual void collide(Collisionable* other, float force) override;
+    virtual void collide(SpaceObject* other, float force) override;
 
     /*!
      * Start the jumping procedure.

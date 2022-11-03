@@ -5,6 +5,7 @@
 #include "playerInfo.h"
 #include "random.h"
 #include "textureManager.h"
+#include "components/collision.h"
 
 #include "scriptInterface.h"
 
@@ -32,9 +33,7 @@ REGISTER_MULTIPLAYER_CLASS(Nebula, "Nebula")
 Nebula::Nebula()
 : SpaceObject(5000, "Nebula")
 {
-    // Nebulae need a large radius to render properly from a distance, but
-    // collision isn't important, so set the collision radius to a tiny range.
-    setCollisionRadius(1);
+    entity.removeComponent<sp::Physics>(); //TODO: Never add this in the first place.
     setRotation(random(0, 360));
     radar_visual = irandom(1, 3);
     setRadarSignatureInfo(0.0, 0.8, -1.0);

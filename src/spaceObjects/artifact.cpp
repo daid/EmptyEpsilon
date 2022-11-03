@@ -85,7 +85,7 @@ void Artifact::update(float delta)
     }
 }
 
-void Artifact::collide(Collisionable* target, float force)
+void Artifact::collide(SpaceObject* target, float force)
 {
     // Handle collisions on the server only.
     if (!isServer())
@@ -94,7 +94,7 @@ void Artifact::collide(Collisionable* target, float force)
     }
 
     // Fire collision callbacks.
-    P<SpaceObject> hit_object = P<Collisionable>(target);
+    P<SpaceObject> hit_object = target;
     P<PlayerSpaceship> player = hit_object;
 
     // Player-specific callback handling.

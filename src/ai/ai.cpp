@@ -4,6 +4,7 @@
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 #include "random.h"
+#include "systems/collision.h"
 
 REGISTER_SHIP_AI(ShipAI, "default");
 
@@ -656,12 +657,13 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
 P<SpaceObject> ShipAI::findBestTarget(glm::vec2 position, float radius)
 {
     float target_score = 0.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius));
     P<SpaceObject> target;
     auto owner_position = owner->getPosition();
-    foreach(Collisionable, obj, objectList)
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
     {
-        P<SpaceObject> space_object = obj;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr || !*ptr) continue;
+        P<SpaceObject> space_object = *ptr;
         if (!space_object || !space_object->canBeTargetedBy(owner) || !owner->isEnemy(space_object) || space_object == target)
             continue;
         if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition(), owner->getShortRangeRadarRange()))
@@ -752,10 +754,11 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
     const float search_angle = 5.0;
 
     // Verify if missle can be fired safely
-    PVector<Collisionable> objectList = CollisionManager::queryArea(owner->getPosition() - glm::vec2(search_distance, search_distance), owner->getPosition() + glm::vec2(search_distance, search_distance));
-    foreach(Collisionable, c, objectList)
+    for(auto entity : sp::CollisionSystem::queryArea(owner->getPosition() - glm::vec2(search_distance, search_distance), owner->getPosition() + glm::vec2(search_distance, search_distance)))
     {
-        P<SpaceObject> obj = c;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr || !*ptr) continue;
+        P<SpaceObject> obj = *ptr;
         if (obj && !obj->isEnemy(owner) && (P<SpaceShip>(obj) || P<SpaceStation>(obj)))
         {
             // Ship in research triangle
@@ -798,10 +801,11 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         float safety_radius = 1100;
         if (glm::length2(target_position - owner->getPosition()) < safety_radius*safety_radius)
             return std::numeric_limits<float>::infinity();
-        PVector<Collisionable> object_list = CollisionManager::queryArea(target->getPosition() - glm::vec2(safety_radius, safety_radius), target->getPosition() + glm::vec2(safety_radius, safety_radius));
-        foreach(Collisionable, c, object_list)
+        for(auto entity : sp::CollisionSystem::queryArea(target->getPosition() - glm::vec2(safety_radius, safety_radius), target->getPosition() + glm::vec2(safety_radius, safety_radius)))
         {
-            P<SpaceObject> obj = c;
+            auto ptr = entity.getComponent<SpaceObject*>();
+            if (!ptr || !*ptr) continue;
+            P<SpaceObject> obj = *ptr;
             if (obj && !obj->isEnemy(owner) && (P<SpaceShip>(obj) || P<SpaceStation>(obj)))
             {
                 if (glm::length(obj->getPosition() - owner->getPosition()) < safety_radius - obj->getRadius())
@@ -821,12 +825,13 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
     // Check each object within the given radius. If it's friendly, we can dock
     // to it, and it can restock our missiles, then select it.
     float target_score = 0.0;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius));
     P<SpaceObject> target;
     auto owner_position = owner->getPosition();
-    foreach(Collisionable, obj, objectList)
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
     {
-        P<SpaceObject> space_object = obj;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr || !*ptr) continue;
+        P<SpaceObject> space_object = *ptr;
         if (!space_object || !owner->isFriendly(space_object) || space_object == target)
             continue;
         if (space_object->canBeDockedBy(owner) == DockStyle::None || !space_object->canRestockMissiles())

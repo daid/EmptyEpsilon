@@ -6,6 +6,7 @@
 
 #include "spaceObjects/spaceObject.h"
 #include "modelData.h"
+#include "components/collision.h"
 
 #include "scriptInterface.h"
 #include "glObjects.h"
@@ -123,8 +124,10 @@ void ModelData::setSpecular(string specular_texture_name)
 void ModelData::setCollisionData(P<SpaceObject> object)
 {
     object->setRadius(radius);
-    if (collision_box.x > 0 && collision_box.y > 0)
-        object->setCollisionBox(collision_box);
+    if (collision_box.x > 0 && collision_box.y > 0) {
+        auto physics = object->entity.getOrAddComponent<sp::Physics>();
+        physics.setRectangle(physics.getType(), collision_box);
+    }
 }
 
 glm::vec3 ModelData::getBeamPosition(int index)

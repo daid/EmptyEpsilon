@@ -2,6 +2,8 @@
 #include "factionInfo.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "components/collision.h"
+#include "systems/collision.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -14,24 +16,24 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Sets this object's position on the map, in meters from the origin.
     /// Requires two numeric values.
     /// Example: obj:setPosition(x, y)
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setPosition);
     /// Gets this object's position on the map.
     /// Returns x, y as meters from the origin.
     /// Example: local x, y = obj:getPosition()
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getPosition);
     /// Sets this object's absolute rotation, in degrees.
     /// Unlike setHeading, a value of 0 points to the right of the map.
     /// The value can also be unbounded; it can be negative, or greater than
     /// 360 degrees.
     /// Requires a numeric value.
     /// Example: obj:setRotation(270)
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, setRotation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setRotation);
     /// Gets this object's absolute rotation.
     /// setHeading and setRotation do not change the target heading of
     /// PlayerSpaceships; use PlayerSpaceship's commandTargetRotation.
     /// Returns a value in degrees.
     /// Example: local rotation = obj:getRotation()
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getRotation);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getRotation);
     /// Sets this object's heading, in degrees ranging from 0 to 360.
     /// Unlike setRotation, a value of 0 points to the top of the map.
     /// Values that are negative or greater than 360 are are converted to values
@@ -48,11 +50,11 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// Gets this object's directional velocity within 2D space.
     /// Returns a pair of values x, y which are relative x, y coordinates from current position (2D velocity vector).
     /// Example: local vx, vy = obj:getVelocity()
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getVelocity);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getVelocity);
     /// Gets this object's rotational velocity within 2D space.
     /// Returns a value in degrees/second.
     /// Example: local angular_velocity = obj:getAngularVelocity()
-    REGISTER_SCRIPT_CLASS_FUNCTION(Collisionable, getAngularVelocity);
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getAngularVelocity);
     /// Sets the faction to which this object belongs, by faction name.
     /// Factions are defined by the FactionInfo() function, and default
     /// factions are defined in scripts/factionInfo.lua.
@@ -287,10 +289,13 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
 PVector<SpaceObject> space_object_list;
 
 SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float multiplayer_significant_range)
-: Collisionable(collision_range), MultiplayerObject(multiplayer_name)
+: MultiplayerObject(multiplayer_name)
 {
     if (isServer()) {
         entity = sp::ecs::Entity::create();
+        //TODO: multiplayer_significant_range
+        entity.addComponent<sp::Position>();
+        entity.addComponent<sp::Physics>().setCircle(sp::Physics::Type::Sensor, collision_range);
     }
 
     object_radius = collision_range;
@@ -310,12 +315,20 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     registerMemberReplication(&entity);
     registerMemberReplication(&scanning_complexity_value);
     registerMemberReplication(&scanning_depth_value);
-    registerCollisionableReplication(multiplayer_significant_range);
 }
 
 SpaceObject::~SpaceObject()
 {
     entity.destroy();
+}
+
+void SpaceObject::setRadius(float radius)
+{
+    object_radius = radius;
+    auto physics = entity.getComponent<sp::Physics>();
+    if (!physics)
+        physics = &entity.addComponent<sp::Physics>();
+    physics->setCircle(sp::Physics::Type::Dynamic, radius);
 }
 
 void SpaceObject::draw3D()
@@ -487,28 +500,32 @@ bool SpaceObject::isFriendly(P<SpaceObject> obj)
 
 void SpaceObject::damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
 {
-    PVector<Collisionable> hitList = CollisionManager::queryArea(position - glm::vec2(blast_range, blast_range), position + glm::vec2(blast_range, blast_range));
-    foreach(Collisionable, c, hitList)
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(blast_range, blast_range), position + glm::vec2(blast_range, blast_range)))
     {
-        P<SpaceObject> obj = c;
-        if (obj)
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr) continue;
+        auto pos = entity.getComponent<sp::Position>();
+        if (!pos) continue;
+        P<SpaceObject> obj = *ptr;
+
+        float dist = glm::length(position - pos->getPosition()) - obj->getRadius() - min_range;
+        if (dist < 0) dist = 0;
+        if (dist < blast_range - min_range)
         {
-            float dist = glm::length(position - obj->getPosition()) - obj->getRadius() - min_range;
-            if (dist < 0) dist = 0;
-            if (dist < blast_range - min_range)
-            {
-                obj->takeDamage(max_damage - (max_damage - min_damage) * dist / (blast_range - min_range), info);
-            }
+            obj->takeDamage(max_damage - (max_damage - min_damage) * dist / (blast_range - min_range), info);
         }
     }
 }
 
 bool SpaceObject::areEnemiesInRange(float range)
 {
-    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range));
-    foreach(Collisionable, c, hitList)
+    for(auto entity : sp::CollisionSystem::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range)))
     {
-        P<SpaceObject> obj = c;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr) continue;
+        auto pos = entity.getComponent<sp::Position>();
+        if (!pos) continue;
+        P<SpaceObject> obj = *ptr;
         if (obj && isEnemy(obj))
         {
             auto r = range + obj->getRadius();
@@ -522,10 +539,13 @@ bool SpaceObject::areEnemiesInRange(float range)
 PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
 {
     PVector<SpaceObject> ret;
-    PVector<Collisionable> hitList = CollisionManager::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range));
-    foreach(Collisionable, c, hitList)
+    for(auto entity : sp::CollisionSystem::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range)))
     {
-        P<SpaceObject> obj = c;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr) continue;
+        auto pos = entity.getComponent<sp::Position>();
+        if (!pos) continue;
+        P<SpaceObject> obj = *ptr;
         auto r = range + obj->getRadius();
         if (obj && glm::length2(getPosition() - obj->getPosition()) < r*r)
         {
@@ -611,6 +631,55 @@ bool SpaceObject::sendCommsMessageNoLog(P<PlayerSpaceship> target, string messag
 
     return target->hailByObject(this, message);
 }
+
+glm::vec2 SpaceObject::getPosition() const
+{
+    if (!entity) return {};
+    const auto position = entity.getComponent<sp::Position>();
+    if (!position) return {};
+    return position->getPosition();
+}
+
+void SpaceObject::setPosition(glm::vec2 p)
+{
+    if (!entity) return;
+    auto position = entity.getComponent<sp::Position>();
+    if (!position) return;
+    position->setPosition(p);
+}
+
+float SpaceObject::getRotation() const
+{
+    if (!entity) return {};
+    auto position = entity.getComponent<sp::Position>();
+    if (!position) return {};
+    return position->getRotation();
+}
+
+void SpaceObject::setRotation(float a)
+{
+    if (!entity) return;
+    auto position = entity.getComponent<sp::Position>();
+    if (!position) return;
+    position->setRotation(a);
+}
+
+glm::vec2 SpaceObject::getVelocity() const
+{
+    if (!entity) return {};
+    auto physics = entity.getComponent<sp::Physics>();
+    if (!physics) return {};
+    return physics->getVelocity();
+}
+
+float SpaceObject::getAngularVelocity() const
+{
+    if (!entity) return 0.0;
+    auto physics = entity.getComponent<sp::Physics>();
+    if (!physics) return 0.0;
+    return physics->getAngularVelocity();
+}
+
 
 glm::mat4 SpaceObject::getModelMatrix() const
 {

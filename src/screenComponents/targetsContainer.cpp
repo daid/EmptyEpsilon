@@ -1,6 +1,8 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "systems/collision.h"
+
 
 TargetsContainer::TargetsContainer()
 {
@@ -49,10 +51,11 @@ void TargetsContainer::set(PVector<SpaceObject> objs)
 void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type)
 {
     P<SpaceObject> target;
-    PVector<Collisionable> list = CollisionManager::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range));
-    foreach(Collisionable, obj, list)
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range)))
     {
-        P<SpaceObject> spaceObject = obj;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr || !*ptr) continue;
+        P<SpaceObject> spaceObject = *ptr;
         if (spaceObject && spaceObject != my_spaceship)
         {
             switch(selection_type)

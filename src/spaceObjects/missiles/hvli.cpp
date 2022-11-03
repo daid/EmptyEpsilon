@@ -1,6 +1,7 @@
 #include "hvli.h"
 #include "particleEffect.h"
 #include "spaceObjects/explosionEffect.h"
+#include "components/collision.h"
 
 /// HVLI missile
 REGISTER_SCRIPT_SUBCLASS(HVLI, MissileWeapon)
@@ -13,7 +14,8 @@ HVLI::HVLI()
 : MissileWeapon("HVLI", MissileWeaponData::getDataFor(MW_HVLI))
 {
     setRadarSignatureInfo(0.1, 0.0, 0.0);
-    setCollisionBox({10, 30}); // Make it a bit harder to the HVLI to phase trough smaller enemies
+    auto physics = entity.getOrAddComponent<sp::Physics>();
+    physics.setRectangle(sp::Physics::Type::Sensor, {10, 30}); // Make it a bit harder to the HVLI to phase trough smaller enemies
 }
 
 void HVLI::hitObject(P<SpaceObject> object)

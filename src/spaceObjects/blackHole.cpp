@@ -71,12 +71,12 @@ void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
     renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(0, 0, 0, 255));
 }
 
-void BlackHole::collide(Collisionable* target, float collision_force)
+void BlackHole::collide(SpaceObject* target, float collision_force)
 {
     if (update_delta == 0.0f)
         return;
 
-    P<SpaceObject> obj = P<Collisionable>(target);
+    P<SpaceObject> obj = target;
     if (!obj) return;
     if (!obj->hasWeight()) { return; } // the object is not affected by gravitation
 

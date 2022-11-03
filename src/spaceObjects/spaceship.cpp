@@ -16,6 +16,7 @@
 #include "textureManager.h"
 #include "multiplayer_client.h"
 #include "gameGlobalInfo.h"
+#include "components/collision.h"
 
 #include "scriptInterface.h"
 
@@ -178,8 +179,6 @@ std::array<float, SYS_COUNT> SpaceShip::default_system_power_factors{
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
-    setCollisionPhysics(true, false);
-
     target_rotation = getRotation();
     impulse_request = 0;
     current_impulse = 0;
@@ -663,12 +662,16 @@ void SpaceShip::update(float delta)
 {
     ShipTemplateBasedObject::update(delta);
 
-    if (hasCollisionShape() != (docked_style != DockStyle::Internal))
+    auto physics = entity.getComponent<sp::Physics>();
+
+    if (bool(physics) != (docked_style != DockStyle::Internal))
     {
-        if (docked_style == DockStyle::Internal)
-            setCollisionRadius(0);
-        else if (ship_template)
+        if (docked_style == DockStyle::Internal) {
+            entity.removeComponent<sp::Physics>();
+            physics = nullptr;
+        } else if (ship_template) {
             ship_template->setCollisionData(this);
+        }
     }
 
     if (game_server)
@@ -718,12 +721,14 @@ void SpaceShip::update(float delta)
         rotationDiff = turnSpeed;
     }
 
-    if (rotationDiff > 1.0f)
-        setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
-    else if (rotationDiff < -1.0f)
-        setAngularVelocity(-turn_speed * getSystemEffectiveness(SYS_Maneuver));
-    else
-        setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
+    if (physics) {
+        if (rotationDiff > 1.0f)
+            physics->setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
+        else if (rotationDiff < -1.0f)
+            physics->setAngularVelocity(-turn_speed * getSystemEffectiveness(SYS_Maneuver));
+        else
+            physics->setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
+    }
 
     //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
     float cap_speed = impulse_max_speed;
@@ -846,7 +851,8 @@ void SpaceShip::update(float delta)
 
     // Determine forward direction and velocity.
     auto forward = vec2FromAngle(getRotation());
-    setVelocity(forward * (current_impulse * cap_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
+    if (physics)
+        physics->setVelocity(forward * (current_impulse * cap_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
 
     if (combat_maneuver_boost_active > combat_maneuver_boost_request)
     {
@@ -886,10 +892,10 @@ void SpaceShip::update(float delta)
             combat_maneuver_charge = 0.0f;
             combat_maneuver_boost_request = 0.0f;
             combat_maneuver_strafe_request = 0.0f;
-        }else
+        }else if (physics)
         {
-            setVelocity(getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
-            setVelocity(getVelocity() + vec2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
+            physics->setVelocity(physics->getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
+            physics->setVelocity(physics->getVelocity() + vec2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
     // If the ship isn't making a combat maneuver, recharge its boost.
     }else if (combat_maneuver_charge < 1.0f)
@@ -979,11 +985,11 @@ DockStyle SpaceShip::canBeDockedBy(P<SpaceObject> obj)
     return DockStyle::None;
 }
 
-void SpaceShip::collide(Collisionable* other, float force)
+void SpaceShip::collide(SpaceObject* other, float force)
 {
     if (docking_state == DS_Docking && fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
     {
-        P<SpaceObject> dock_object = P<Collisionable>(other);
+        P<SpaceObject> dock_object = other;
         if (dock_object == docking_target)
         {
             docking_state = DS_Docked;

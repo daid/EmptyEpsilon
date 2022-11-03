@@ -15,7 +15,7 @@ public:
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void update(float delta) override;
-    virtual void collide(Collisionable* target, float force) override;
+    virtual void collide(SpaceObject* target, float force) override;
     virtual bool canHideInNebula()  override { return false; }
 
     float getPlanetRadius();

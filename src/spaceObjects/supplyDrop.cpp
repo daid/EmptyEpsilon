@@ -38,9 +38,9 @@ void SupplyDrop::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, flo
     renderer.drawSprite("radar/blip.png", position, 8, color);
 }
 
-void SupplyDrop::collide(Collisionable* target, float force)
+void SupplyDrop::collide(SpaceObject* target, float force)
 {
-    P<SpaceShip> ship = P<Collisionable>(target);
+    P<SpaceShip> ship = P<SpaceObject>(target);
     if (ship && isFriendly(ship))
     {
         bool picked_up = false;

@@ -81,11 +81,11 @@ void Asteroid::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float
     renderer.drawSprite("radar/blip.png", position, size * 32.0f, glm::u8vec4(255, 200, 100, 255));
 }
 
-void Asteroid::collide(Collisionable* target, float force)
+void Asteroid::collide(SpaceObject* target, float force)
 {
     if (!isServer())
         return;
-    P<SpaceObject> hit_object = P<Collisionable>(target);
+    P<SpaceObject> hit_object = target;
     if (!hit_object || !hit_object->canBeTargetedBy(nullptr))
         return;
 

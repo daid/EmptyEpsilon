@@ -16,7 +16,7 @@ public:
 
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
-    virtual void collide(Collisionable* target, float force) override;
+    virtual void collide(SpaceObject* target, float force) override;
 
     void setEnergy(float amount);
     void setWeaponStorage(EMissileWeapons weapon, int amount);

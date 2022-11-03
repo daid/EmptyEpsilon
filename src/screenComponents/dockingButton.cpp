@@ -2,6 +2,8 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
+#include "systems/collision.h"
+
 
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
 : GuiButton(owner, id, "", [this]() { click(); })
@@ -87,11 +89,12 @@ void GuiDockingButton::onDraw(sp::RenderTarget& renderer)
 
 P<SpaceObject> GuiDockingButton::findDockingTarget()
 {
-    PVector<Collisionable> obj_list = CollisionManager::queryArea(my_spaceship->getPosition() - glm::vec2(1000, 1000), my_spaceship->getPosition() + glm::vec2(1000, 1000));
     P<SpaceObject> dock_object;
-    foreach(Collisionable, obj, obj_list)
+    for(auto entity : sp::CollisionSystem::queryArea(my_spaceship->getPosition() - glm::vec2(1000, 1000), my_spaceship->getPosition() + glm::vec2(1000, 1000)))
     {
-        dock_object = obj;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr || !*ptr) continue;
+        dock_object = *ptr;
         if (dock_object && dock_object != my_spaceship && dock_object->canBeDockedBy(my_spaceship) != DockStyle::None && glm::length(dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
             break;
         dock_object = NULL;

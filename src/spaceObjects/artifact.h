@@ -19,7 +19,7 @@ public:
 
     virtual void update(float delta) override;
 
-    virtual void collide(Collisionable* target, float force) override;
+    virtual void collide(SpaceObject* target, float force) override;
 
     void setModel(string name);
     void setSpin(float spin=0.0);

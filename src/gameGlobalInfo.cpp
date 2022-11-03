@@ -6,6 +6,8 @@
 #include "soundManager.h"
 #include "random.h"
 #include "config.h"
+#include "components/collision.h"
+#include "systems/collision.h"
 #include <SDL_assert.h>
 
 P<GameGlobalInfo> gameGlobalInfo;
@@ -415,14 +417,16 @@ static int getObjectsInRadius(lua_State* L)
     glm::vec2 position(x, y);
 
     PVector<SpaceObject> objects;
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r));
-    foreach(Collisionable, obj, objectList)
-    {
-        P<SpaceObject> sobj = obj;
-        if (sobj && glm::length2(sobj->getPosition() - position) < r*r)
-            objects.push_back(sobj);
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+        auto entity_position = entity.getComponent<sp::Position>();
+        if (entity_position) {
+            if (glm::length2(entity_position->getPosition() - position) < r*r) {
+                auto obj = entity.getComponent<SpaceObject*>();
+                if (obj)
+                    objects.push_back(*obj);
+            }
+        }
     }
-
     return convert<PVector<SpaceObject> >::returnType(L, objects);
 }
 /// PVector<SpaceObject> getObjectsInRadius(float x, float y, float radius)

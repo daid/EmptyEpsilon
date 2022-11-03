@@ -11,6 +11,7 @@
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
 #include "spaceObjects/zone.h"
+#include "systems/collision.h"
 
 #include "screenComponents/radarView.h"
 
@@ -486,10 +487,11 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             //Right click
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             P<SpaceObject> target;
-            PVector<Collisionable> list = CollisionManager::queryArea(position, position);
-            foreach(Collisionable, collisionable, list)
+            for(auto entity : sp::CollisionSystem::queryArea(position, position))
             {
-                P<SpaceObject> space_object = collisionable;
+                auto ptr = entity.getComponent<SpaceObject*>();
+                if (!ptr || !*ptr) continue;
+                P<SpaceObject> space_object = *ptr;
                 if (space_object)
                 {
                     if (!target || glm::length(position - space_object->getPosition()) < glm::length(position - target->getPosition()))
@@ -550,17 +552,19 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
-            PVector<Collisionable> objects = CollisionManager::queryArea(drag_start_position, position);
             PVector<SpaceObject> space_objects;
-            foreach(Collisionable, c, objects)
+            for(auto entity : sp::CollisionSystem::queryArea(drag_start_position, position))
             {
-                if (P<Zone>(c))
+                auto ptr = entity.getComponent<SpaceObject*>();
+                if (!ptr || !*ptr) continue;
+                P<SpaceObject> obj = *ptr;
+                if (P<Zone>(obj))
                     continue;
-                if (ctrl_down && !P<ShipTemplateBasedObject>(c))
+                if (ctrl_down && !P<ShipTemplateBasedObject>(obj))
                     continue;
-                if (alt_down && (!P<SpaceObject>(c) || (int)(P<SpaceObject>(c))->getFactionId() != faction_selector->getSelectionIndex()))
+                if (alt_down && (!P<SpaceObject>(obj) || (int)(P<SpaceObject>(obj))->getFactionId() != faction_selector->getSelectionIndex()))
                     continue;
-                space_objects.push_back(c);
+                space_objects.push_back(obj);
             }
             if (shift_down)
             {

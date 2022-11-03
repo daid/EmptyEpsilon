@@ -6,6 +6,7 @@
 #include "pathPlanner.h"
 #include "random.h"
 #include "multiplayer_server.h"
+#include "components/collision.h"
 
 #include "scriptInterface.h"
 
@@ -25,7 +26,8 @@ REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
 : SpaceObject(50, "Mine"), data(MissileWeaponData::getDataFor(MW_Mine))
 {
-    setCollisionRadius(trigger_range);
+    auto physics = entity.getOrAddComponent<sp::Physics>();
+    physics.setCircle(sp::Physics::Type::Sensor, trigger_range);
     triggered = false;
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
@@ -68,12 +70,14 @@ void Mine::update(float delta)
         particleTimeout = 0.4;
     }
 
+    auto physics = entity.getComponent<sp::Physics>();
+
     if (ejectTimeout > 0.0f)
     {
         ejectTimeout -= delta;
-        setVelocity(vec2FromAngle(getRotation()) * data.speed);
+        if (physics) physics->setVelocity(vec2FromAngle(getRotation()) * data.speed);
     }else{
-        setVelocity(glm::vec2(0, 0));
+        if (physics) physics->setVelocity(glm::vec2(0, 0));
     }
     if (!triggered)
         return;
@@ -84,11 +88,11 @@ void Mine::update(float delta)
     }
 }
 
-void Mine::collide(Collisionable* target, float force)
+void Mine::collide(SpaceObject* target, float force)
 {
     if (!game_server || triggered || ejectTimeout > 0.0f)
         return;
-    P<SpaceObject> hitObject = P<Collisionable>(target);
+    P<SpaceObject> hitObject = target;
     if (!hitObject || !hitObject->canBeTargetedBy(nullptr))
         return;
 

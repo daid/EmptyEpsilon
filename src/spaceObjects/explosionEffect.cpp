@@ -7,6 +7,7 @@
 #include "random.h"
 #include "soundManager.h"
 #include "textureManager.h"
+#include "components/collision.h"
 
 /// ExplosionEffect is a visible explosion, like from nukes, missiles, ship destruction, etc
 /// Example: ExplosionEffect():setPosition(500,5000):setSize(20)
@@ -23,7 +24,7 @@ ExplosionEffect::ExplosionEffect()
     size = 1.f;
     explosion_sound = "sfx/explosion.wav";
     on_radar = false;
-    setCollisionRadius(1.0);
+    entity.removeComponent<sp::Physics>(); //TODO: Never add this in the first place.
     lifetime = maxLifetime;
     for(int n=0; n<particleCount; n++)
         particleDirections[n] = glm::normalize(glm::vec3(random(-1, 1), random(-1, 1), random(-1, 1))) * random(0.8f, 1.2f);

@@ -1,7 +1,6 @@
 #ifndef SPACE_OBJECT_H
 #define SPACE_OBJECT_H
 
-#include "collisionable.h"
 #include "multiplayer.h"
 #include "scriptInterface.h"
 #include "featureDefs.h"
@@ -68,7 +67,7 @@ class SpaceObject;
 class PlayerSpaceship;
 extern PVector<SpaceObject> space_object_list;
 
-class SpaceObject : public Collisionable, public MultiplayerObject
+class SpaceObject : public MultiplayerObject
 {
     float object_radius;
     uint8_t faction_id;
@@ -101,7 +100,7 @@ public:
     virtual ~SpaceObject();
 
     float getRadius() const { return object_radius; }
-    void setRadius(float radius) { object_radius = radius; setCollisionRadius(radius); }
+    void setRadius(float radius);
 
     bool hasWeight() { return has_weight; }
 
@@ -219,10 +218,19 @@ public:
     bool sendCommsMessage(P<PlayerSpaceship> target, string message);
     bool sendCommsMessageNoLog(P<PlayerSpaceship> target, string message);
 
+    //TODO
+    virtual void collide(SpaceObject* other, float force) {}
+
+    glm::vec2 getPosition() const;
+    void setPosition(glm::vec2 p);
+    float getRotation() const;
+    void setRotation(float a);
+    glm::vec2 getVelocity() const;
+    float getAngularVelocity() const;
+
     ScriptSimpleCallback on_destroyed;
 
     glm::mat4 getModelTransform() const { return getModelMatrix(); }
-
 protected:
     virtual glm::mat4 getModelMatrix() const;
     ModelInfo model_info;

@@ -18,7 +18,7 @@ public:
     virtual bool canHideInNebula()  override { return false; }
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundObjects; }
 
-    virtual void collide(Collisionable* target, float force) override;
+    virtual void collide(SpaceObject* target, float force) override;
 
     virtual string getExportLine() override { return "BlackHole():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };

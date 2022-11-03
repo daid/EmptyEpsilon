@@ -4,6 +4,7 @@
 #include "particleEffect.h"
 #include "explosionEffect.h"
 #include "pathPlanner.h"
+#include "components/collision.h"
 
 #include "math/triangulate.h"
 #include "math/centerOfMass.h"
@@ -88,7 +89,7 @@ void Zone::setPoints(const std::vector<glm::vec2>& points)
 
     setPosition(position);
     setRadius(radius);
-    setCollisionRadius(1);
+    entity.removeComponent<sp::Physics>(); //TODO: Never add this in the first place.
 }
 
 void Zone::setLabel(string label)

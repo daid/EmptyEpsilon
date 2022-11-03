@@ -9,6 +9,7 @@
 #include "soundManager.h"
 #include "multiplayer_server.h"
 #include "multiplayer_client.h"
+#include "components/collision.h"
 
 #include "shaderRegistry.h"
 
@@ -39,7 +40,8 @@ BeamEffect::BeamEffect()
 {
     has_weight = false;
     setRadarSignatureInfo(0.0, 0.3, 0.0);
-    setCollisionRadius(1.0);
+
+    entity.removeComponent<sp::Physics>(); //TODO: Never add this in the first place.
     lifetime = 1.0;
     sourceId = -1;
     target_id = -1;

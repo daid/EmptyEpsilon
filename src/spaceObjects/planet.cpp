@@ -9,6 +9,7 @@
 #include "textureManager.h"
 #include "multiplayer_server.h"
 #include "multiplayer_client.h"
+#include "components/collision.h"
 
 #include <glm/vec4.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -364,7 +365,7 @@ void Planet::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float
     renderer.drawCircleOutline(position, planet_size * scale, 3, glm::u8vec4(255, 255, 255, 128));
 }
 
-void Planet::collide(Collisionable* target, float collision_force)
+void Planet::collide(SpaceObject* target, float collision_force)
 {
     if (collision_size > 0)
     {
@@ -378,10 +379,10 @@ void Planet::updateCollisionSize()
     if (std::abs(distance_from_movement_plane) >= planet_size)
     {
         collision_size = -1.0;
+        entity.removeComponent<sp::Physics>();
     }else{
         collision_size = sqrt((planet_size * planet_size) - (distance_from_movement_plane * distance_from_movement_plane)) * 1.1f;
-        setCollisionRadius(collision_size);
-        setCollisionPhysics(true, true);
+        entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Static, collision_size);
     }
 }
 

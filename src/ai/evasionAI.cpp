@@ -3,6 +3,7 @@
 #include "ai/evasionAI.h"
 #include "ai/aiFactory.h"
 #include "random.h"
+#include "systems/collision.h"
 
 
 REGISTER_SHIP_AI(EvasionAI, "evasion");
@@ -77,14 +78,14 @@ bool EvasionAI::evadeIfNecessary()
     auto position = owner->getPosition();
     float scan_radius = 9000.0;
 
-    PVector<Collisionable> objectList = CollisionManager::queryArea(position - glm::vec2(scan_radius, scan_radius), position + glm::vec2(scan_radius, scan_radius));
-
     // NOT AN OBJECT ON THE PLANE, but it represents an escape vector.
     // It tracks which direction is the best to run to (angle) and the strength of the desire to go there (distance from origin)
     glm::vec2 evasion_vector = glm::vec2(0, 0);
-    foreach(Collisionable, obj, objectList)
+    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(scan_radius, scan_radius), position + glm::vec2(scan_radius, scan_radius)))
     {
-        P<SpaceShip> ship = obj;
+        auto ptr = entity.getComponent<SpaceObject*>();
+        if (!ptr || !*ptr) continue;
+        P<SpaceShip> ship = P<SpaceObject>(*ptr);
         if (!ship || !owner->isEnemy(ship))
             continue;
         if (ship->canHideInNebula() && Nebula::blockedByNebula(position, ship->getPosition(), owner->getShortRangeRadarRange()))

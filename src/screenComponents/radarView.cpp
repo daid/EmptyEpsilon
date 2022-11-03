@@ -1,6 +1,7 @@
 #include <graphics/opengl.h>
 
 #include "ecs/query.h"
+#include "systems/collision.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
@@ -623,13 +624,14 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 
             // Query for objects within short-range radar/5U of this object.
             auto position = obj->getPosition();
-            PVector<Collisionable> obj_list = CollisionManager::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r));
 
             // For each of those objects, check if it is at least partially
             // inside the revealed radius. If so, reveal the object on the map.
-            foreach(Collisionable, c_obj, obj_list)
+            for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
             {
-                P<SpaceObject> obj2 = c_obj;
+                auto ptr = entity.getComponent<SpaceObject*>();
+                if (!ptr || !*ptr) continue;
+                P<SpaceObject> obj2 = *ptr;
 
                 auto r2 = r + obj2->getRadius();
                 if (obj2 && glm::length2(obj->getPosition() - obj2->getPosition()) < r2*r2)
