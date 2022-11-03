@@ -1191,7 +1191,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:3779
 msgctxt "stationStory-comms"
 msgid "Station history"
-msgstr ""
+msgstr "L'histoire de la station"
 
 #: scripts/scenario_74_omicron.lua:3787
 msgctxt "gossip-comms"
@@ -2559,96 +2559,98 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:5028
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "Que voulez-vous ?"
 
 #: scripts/scenario_74_omicron.lua:5030
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_74_omicron.lua:5032
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Défendez un marqueur."
 
 #: scripts/scenario_74_omicron.lua:5034
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
 
 #: scripts/scenario_74_omicron.lua:5036
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_74_omicron.lua:5038
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend WP %d"
-msgstr ""
+msgstr "Défendez le marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:5040
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at WP %d."
-msgstr ""
+msgstr "Nous partons pour défendre le marqueur %d."
 
 #: scripts/scenario_74_omicron.lua:5048
 msgctxt "shipAssist-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_74_omicron.lua:5049
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_74_omicron.lua:5054
 msgctxt "shipAssist-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_74_omicron.lua:5055
 msgctxt "shipAssist-comms"
 msgid "Hull: "
-msgstr ""
+msgstr "Coque : "
 
 #: scripts/scenario_74_omicron.lua:5058
 msgctxt "shipAssist-comms"
 msgid "Shield: "
-msgstr ""
+msgstr "Boucliers : "
 
 #: scripts/scenario_74_omicron.lua:5060
 msgctxt "shipAssist-comms"
 msgid "Front Shield: "
-msgstr ""
+msgstr "Boucliers avant : "
 
 #: scripts/scenario_74_omicron.lua:5061
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: "
-msgstr ""
+msgstr "Boucliers arrière : "
 
 #: scripts/scenario_74_omicron.lua:5064
 msgctxt "shipAssist-comms"
 msgid "Shield "
-msgstr ""
+msgstr "Bouclier "
 
 #: scripts/scenario_74_omicron.lua:5070
 msgctxt "shipAssist-comms"
 msgid " Missiles: "
-msgstr ""
+msgstr " Missiles : "
 
 #: scripts/scenario_74_omicron.lua:5078
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_74_omicron.lua:5079
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_74_omicron.lua:5125
 #, lua-format
@@ -2693,17 +2695,17 @@ msgstr "Rien du tout."
 #: scripts/scenario_74_omicron.lua:5260
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
-msgstr ""
+msgstr "Nous allons vous détruire !"
 
 #: scripts/scenario_74_omicron.lua:5261
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
-msgstr ""
+msgstr "Votre race va s'éteindre ici et maintenant !"
 
 #: scripts/scenario_74_omicron.lua:5262
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
-msgstr ""
+msgstr "Vos petites menaces ne nous impressionnent pas."
 
 #: scripts/scenario_74_omicron.lua:5268
 msgctxt "shipEnemy-comms"
@@ -2711,11 +2713,14 @@ msgid ""
 "Ktzzzsss.\n"
 "You will DIEEee weaklingsss!"
 msgstr ""
+"Ktzzzsss.\n"
+"\n"
+"Vous allez mourir faibles créatures insignifiantes !"
 
 #: scripts/scenario_74_omicron.lua:5271
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
-msgstr ""
+msgstr "Nous allons vous détruire !"
 
 #: scripts/scenario_74_omicron.lua:5272
 msgctxt "shipEnemy-comms"
@@ -2725,7 +2730,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:5274
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
-msgstr ""
+msgstr "Vous n'avez aucun honneur."
 
 #: scripts/scenario_74_omicron.lua:5275
 msgctxt "shipEnemy-comms"
@@ -2758,11 +2763,16 @@ msgid ""
 "We wish you no harm, but will harm you if we must.\n"
 "End of transmission."
 msgstr ""
+"Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+"\n"
+"Fin de transmission."
 
 #: scripts/scenario_74_omicron.lua:5289
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
+"Restez en dehors de notre chemin, ou votre mort sera une amusante "
+"distraction pour nous !"
 
 #: scripts/scenario_74_omicron.lua:5293
 msgctxt "shipEnemy-comms"
@@ -2774,21 +2784,32 @@ msgid ""
 ":Do not cross us:\n"
 "Communication halted."
 msgstr ""
+"000110011010...Grzzzz..\n"
+"\n"
+"Communication binaire non détectée..Grzzz Nous passons en communication "
+"universelle..Grrzzz\n"
+"\n"
+"Générer une réponse appropriée pour la cible en langage humain à partir des "
+"archives...Grrzzzz\n"
+"\n"
+"Ne nous approchez pas! Grrzzz\n"
+"\n"
+"Communication interrompue."
 
 #: scripts/scenario_74_omicron.lua:5294
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
-msgstr ""
+msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
 
 #: scripts/scenario_74_omicron.lua:5295
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
-msgstr ""
+msgstr "Commande non autorisée reçue. Cible verrouillée."
 
 #: scripts/scenario_74_omicron.lua:5296
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
-msgstr ""
+msgstr "Ordre externe ignoré."
 
 #: scripts/scenario_74_omicron.lua:5298
 msgctxt "shipEnemy-comms"
@@ -2797,21 +2818,27 @@ msgid ""
 "all.\n"
 "Stand down or prepare to donate your corpses toward our nutrition."
 msgstr ""
+"Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+"s'opposer à nous tous.\n"
+"\n"
+"Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
 
 #: scripts/scenario_74_omicron.lua:5299
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-msgstr ""
+msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
 
 #: scripts/scenario_74_omicron.lua:5300
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
-msgstr ""
+msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
 
 #: scripts/scenario_74_omicron.lua:5301
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
+"Notre peuple a d'autres priorités que l'extermination de parasites tels que "
+"vous."
 
 #: scripts/scenario_74_omicron.lua:5305
 msgctxt "shipEnemy-comms"
@@ -2831,7 +2858,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:5315
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
-msgstr ""
+msgstr "Occupez-vous de vos affaires !"
 
 #: scripts/scenario_74_omicron.lua:5355
 msgctxt "shipEnemy-comms"
@@ -2870,6 +2897,9 @@ msgid ""
 "Sorry, we have no time to chat with you.\n"
 "We are on an important mission."
 msgstr ""
+"Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+"\n"
+"Nous sommes en mission de la plus haute importance."
 
 #: scripts/scenario_74_omicron.lua:5918
 msgctxt "ship-comms"
@@ -2877,95 +2907,100 @@ msgid ""
 "We have nothing for you.\n"
 "Good day."
 msgstr ""
+"Nous n'avons rien pour vous.\n"
+"\n"
+"Bonne journée."
 
 #: scripts/scenario_74_omicron.lua:5938 scripts/scenario_74_omicron.lua:5995
 msgctxt "ship-comms"
 msgid "What do you want?"
-msgstr ""
+msgstr "Que voulez-vous ?"
 
 #: scripts/scenario_74_omicron.lua:5940 scripts/scenario_74_omicron.lua:5997
 msgctxt "ship-comms"
 msgid "Sir, how can we assist?"
-msgstr ""
+msgstr "Monsieur, comment pouvons-nous vous assister ?"
 
 #: scripts/scenario_74_omicron.lua:5942
 msgctxt "ship-comms"
 msgid "Defend a waypoint"
-msgstr ""
+msgstr "Défendez un marqueur."
 
 #: scripts/scenario_74_omicron.lua:5944
 msgctxt "ship-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
+"Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
+"un."
 
 #: scripts/scenario_74_omicron.lua:5946
 msgctxt "ship-comms"
 msgid "Which waypoint should we defend?"
-msgstr ""
+msgstr "Quel marqueur devons-nous défendre ?"
 
 #: scripts/scenario_74_omicron.lua:5948
 #, lua-format
 msgctxt "ship-comms"
 msgid "Defend WP %i"
-msgstr ""
+msgstr "Défendez le marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:5950
 #, lua-format
 msgctxt "ship-comms"
 msgid "We are heading to assist at WP %i."
-msgstr ""
+msgstr "Nous partons pour défendre le marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:5958
 msgctxt "ship-comms"
 msgid "Assist me"
-msgstr ""
+msgstr "Aidez-nous !"
 
 #: scripts/scenario_74_omicron.lua:5959
 msgctxt "ship-comms"
 msgid "Heading toward you to assist."
-msgstr ""
+msgstr "Entendu, nous partons immédiatement vous aider."
 
 #: scripts/scenario_74_omicron.lua:5964
 msgctxt "ship-comms"
 msgid "Report status"
-msgstr ""
+msgstr "Au rapport"
 
 #: scripts/scenario_74_omicron.lua:5965 scripts/scenario_74_omicron.lua:6000
 msgctxt "ship-comms"
 msgid "Hull: "
-msgstr ""
+msgstr "Coque : "
 
 #: scripts/scenario_74_omicron.lua:5968 scripts/scenario_74_omicron.lua:6003
 msgctxt "ship-comms"
 msgid "Shield: "
-msgstr ""
+msgstr "Boucliers : "
 
 #: scripts/scenario_74_omicron.lua:5970 scripts/scenario_74_omicron.lua:6005
 msgctxt "ship-comms"
 msgid "Front Shield: "
-msgstr ""
+msgstr "Boucliers avant : "
 
 #: scripts/scenario_74_omicron.lua:5971 scripts/scenario_74_omicron.lua:6006
 msgctxt "ship-comms"
 msgid "Rear Shield: "
-msgstr ""
+msgstr "Boucliers arrière : "
 
 #: scripts/scenario_74_omicron.lua:5974 scripts/scenario_74_omicron.lua:6009
 msgctxt "ship-comms"
 msgid "Shield "
-msgstr ""
+msgstr "Bouclier "
 
 #: scripts/scenario_74_omicron.lua:5982
 #, lua-format
 msgctxt "ship-comms"
 msgid "Dock at %s"
-msgstr ""
+msgstr "Amarrez-vous à %s."
 
 #: scripts/scenario_74_omicron.lua:5983
 #, lua-format
 msgctxt "ship-comms"
 msgid "Docking at %s."
-msgstr ""
+msgstr "En cours d'amarrage à %s."
 
 #: scripts/scenario_74_omicron.lua:5999
 msgctxt "ship-comms"
@@ -2980,22 +3015,22 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:6036
 msgctxt "ship-comms"
 msgid "Repair ship system"
-msgstr ""
+msgstr "Réparer les systèmes du vaisseau."
 
 #: scripts/scenario_74_omicron.lua:6037
 msgctxt "ship-comms"
 msgid "What system would you like repaired?"
-msgstr ""
+msgstr "Quel système souhaitez-vous réparer ?"
 
 #: scripts/scenario_74_omicron.lua:6039
 msgctxt "ship-comms"
 msgid "Repair probe launch system"
-msgstr ""
+msgstr "Réparer le système de lancement de sonde"
 
 #: scripts/scenario_74_omicron.lua:6042
 msgctxt "ship-comms"
 msgid "Your probe launch system has been repaired"
-msgstr ""
+msgstr "Votre système de lancement de sonde a été réparé."
 
 #: scripts/scenario_74_omicron.lua:6044 scripts/scenario_74_omicron.lua:6055
 #: scripts/scenario_74_omicron.lua:6066 scripts/scenario_74_omicron.lua:6077
@@ -3008,42 +3043,42 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:6050
 msgctxt "ship-comms"
 msgid "Repair hacking system"
-msgstr ""
+msgstr "Réparer le système de piratage"
 
 #: scripts/scenario_74_omicron.lua:6053
 msgctxt "ship-comms"
 msgid "Your hack system has been repaired"
-msgstr ""
+msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_74_omicron.lua:6061
 msgctxt "ship-comms"
 msgid "Repair scanning system"
-msgstr ""
+msgstr "Réparer les scanners"
 
 #: scripts/scenario_74_omicron.lua:6064
 msgctxt "ship-comms"
 msgid "Your scanners have been repaired"
-msgstr ""
+msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_74_omicron.lua:6072
 msgctxt "ship-comms"
 msgid "Repair combat maneuver"
-msgstr ""
+msgstr "Réparer la manœuvre de combat"
 
 #: scripts/scenario_74_omicron.lua:6075
 msgctxt "ship-comms"
 msgid "Your combat maneuver has been repaired"
-msgstr ""
+msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_74_omicron.lua:6083
 msgctxt "ship-comms"
 msgid "Repair self destruct system"
-msgstr ""
+msgstr "Réparer le système d'autodestruction"
 
 #: scripts/scenario_74_omicron.lua:6086
 msgctxt "ship-comms"
 msgid "Your self destruct system has been repaired"
-msgstr ""
+msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_74_omicron.lua:6108
 #, lua-format
@@ -3075,7 +3110,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:6180
 msgctxt "ship-comms"
 msgid "What kind of ordnance?"
-msgstr ""
+msgstr "Quel genre de munitions ?"
 
 #: scripts/scenario_74_omicron.lua:6181
 #, lua-format

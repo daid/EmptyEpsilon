@@ -2097,7 +2097,7 @@ msgstr "Réparer le système d'autodestruction (5 rép)."
 #: scripts/scenario_55_defenderHunter.lua:5545
 msgctxt "dockingServicesStatus-comms"
 msgid "Your self destruct system has been repaired"
-msgstr "Votre système d'autodestruction a été réparé"
+msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_55_defenderHunter.lua:5557
 #: scripts/scenario_55_defenderHunter.lua:6609
