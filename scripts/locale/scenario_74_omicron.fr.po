@@ -38,254 +38,272 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
-msgstr ""
+msgstr "Ennemis"
 
 msgctxt "setting"
 msgid "Configures strength and/or number of enemies in this scenario"
-msgstr ""
+msgstr "Définit le nombre et/ou la puissance des ennemis."
 
 msgctxt "Enemies"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
 msgctxt "Enemies"
 msgid "Fewer or weaker enemies"
-msgstr ""
+msgstr "Ennemis moins nombreux et/ou plus faibles."
 
 msgctxt "Enemies"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Enemies"
 msgid "Normal number or strength of enemies"
-msgstr ""
+msgstr "Difficulté normale."
 
 msgctxt "Enemies"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
 msgctxt "Enemies"
 msgid "More or stronger enemies"
-msgstr ""
+msgstr "Ennemis plus nombreux et/ou plus puissants."
 
 msgctxt "Enemies"
 msgid "Extreme"
-msgstr ""
+msgstr "Extrême"
 
 msgctxt "Enemies"
 msgid "Much stronger, many more enemies"
-msgstr ""
+msgstr "Ennemis beaucoup plus nombreux et/ou beaucoup plus puissants."
 
 msgctxt "Enemies"
 msgid "Quixotic"
-msgstr ""
+msgstr "Chimérique"
 
 msgctxt "Enemies"
 msgid "Insanely strong and/or inordinately large numbers of enemies"
-msgstr ""
+msgstr "Ennemis en nombre démesuré et/ou incroyablement puissants."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Murphy"
-msgstr ""
+msgstr "Loi de Murphy"
 
 msgctxt "setting"
 msgid "Configures the perversity of the universe according to Murphy's law"
-msgstr ""
+msgstr "Définit la perversité de l'univers selon la loi de Murphy."
 
 msgctxt "Murphy"
 msgid "Easy"
-msgstr ""
+msgstr "Facile"
 
 msgctxt "Murphy"
 msgid "Random factors are more in your favor"
-msgstr ""
+msgstr "Les facteurs aléatoires sont plus en votre faveur."
 
 msgctxt "Murphy"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
-msgstr ""
+msgstr "Les facteurs aléatoires sont normaux."
 
 msgctxt "Murphy"
 msgid "Hard"
-msgstr ""
+msgstr "Difficile"
 
 msgctxt "Murphy"
 msgid "Random factors are more against you"
-msgstr ""
+msgstr "Les facteurs aléatoires sont plus contre vous."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Rescue"
-msgstr ""
+msgstr "Durée (sauvetage)"
 
 msgctxt "setting"
 msgid ""
 "Number of minutes given to rescue an ailing ensign. Grant more time to make "
 "it easier, less time to make it harder."
 msgstr ""
+"Nombre de minutes accordées pour secourir un officier malade. Prenez plus de "
+"temps pour vous faciliter la tâche, moins de temps pour la rendre plus "
+"difficile."
 
 msgctxt "Rescue"
 msgid "15"
-msgstr ""
+msgstr "15 mn"
 
 msgctxt "Rescue"
 msgid "Fifteen minutes to help ensign"
-msgstr ""
+msgstr "Vous avez 15 minutes pour secourir l'officier."
 
 msgctxt "Rescue"
 msgid "20"
-msgstr ""
+msgstr "20 mn"
 
 msgctxt "Rescue"
 msgid "Twenty minutes to help ensign"
-msgstr ""
+msgstr "Vous avez 20 minutes pour secourir l'officier."
 
 msgctxt "Rescue"
 msgid "25"
-msgstr ""
+msgstr "25 mn"
 
 msgctxt "Rescue"
 msgid "Twenty-five minutes to help ensign"
-msgstr ""
+msgstr "Vous avez 25 minutes pour secourir l'officier."
 
 msgctxt "Rescue"
 msgid "30"
-msgstr ""
+msgstr "30 mn"
 
 msgctxt "Rescue"
 msgid "Thirty minutes to help ensign"
-msgstr ""
+msgstr "Vous avez 30 minutes pour secourir l'officier."
 
-#, fuzzy
-#| msgctxt "msgMainscreen-bonusTarget"
-#| msgid "destroyed."
 msgctxt "setting"
 msgid "Destroy"
-msgstr "détruit."
+msgstr "Durée (destruction)"
 
 msgctxt "setting"
 msgid ""
 "Number of minutes given to destroy designated enemy base. Grant more time to "
 "make it easier, less time to make it harder."
 msgstr ""
+"Nombre de minutes accordées pour détruire la base ennemie désignée. Prenez "
+"plus de temps pour vous faciliter la tâche, moins de temps pour la rendre "
+"plus difficile."
 
 msgctxt "Destroy"
 msgid "15"
-msgstr ""
+msgstr "15 mn"
 
 msgctxt "Destroy"
 msgid "Fifteen minutes to destroy base"
-msgstr ""
+msgstr "Vous avez 15 minutes pour détruire la base."
 
 msgctxt "Destroy"
 msgid "20"
-msgstr ""
+msgstr "20 mn"
 
 msgctxt "Destroy"
 msgid "Twenty minutes to destroy base"
-msgstr ""
+msgstr "Vous avez 20 minutes pour détruire la base."
 
 msgctxt "Destroy"
 msgid "25"
-msgstr ""
+msgstr "25 mn"
 
 msgctxt "Destroy"
 msgid "Twenty-five minutes to destroy base"
-msgstr ""
+msgstr "Vous avez 25 minutes pour détruire la base."
 
 msgctxt "Destroy"
 msgid "30"
-msgstr ""
+msgstr "30 mn"
 
 msgctxt "Destroy"
 msgid "Thirty minutes to destroy base"
-msgstr ""
+msgstr "Vous avez 30 minutes pour détruire la base."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Reputation"
-msgstr ""
+msgstr "Réputation"
 
 msgctxt "setting"
 msgid "Amount of reputation to start with"
-msgstr ""
+msgstr "Définit la quantité de réputation avec laquelle vous démarrez."
 
 msgctxt "Reputation"
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 msgctxt "Reputation"
 msgid "Zero reputation - nobody knows anything about you"
-msgstr ""
+msgstr "Aucune réputation - Personne ne sait rien de vous et votre équipage."
 
 msgctxt "Reputation"
 msgid "Nice"
-msgstr ""
+msgstr "Bon"
 
 msgctxt "Reputation"
 msgid ""
 "20 reputation - you've had a small positive influence on the local community"
 msgstr ""
+"20 réputations - Vous avez eu une petite influence positive sur la "
+"communauté locale."
 
 msgctxt "Reputation"
 msgid "Hero"
-msgstr ""
+msgstr "Bienfaiteur"
 
 msgctxt "Reputation"
 msgid "50 reputation - you helped important people or lots of people"
 msgstr ""
+"50 réputation - Vous avez aidé des personnes importantes ou beaucoup de "
+"personnes."
 
 msgctxt "Reputation"
 msgid "Major Hero"
-msgstr ""
+msgstr "Héros"
 
 msgctxt "Reputation"
 msgid ""
 "100 reputation - you're well known by nearly everyone as a force for good"
 msgstr ""
+"100 réputation - Vous êtes connu de presque tout le monde comme une force du "
+"bien."
 
 msgctxt "Reputation"
 msgid "Super Hero"
-msgstr ""
+msgstr "Justicier de l'espace"
 
 msgctxt "Reputation"
 msgid "200 reputation - everyone knows you and relies on you for help"
 msgstr ""
+"200 réputation - Toute la galaxie vous connaît et compte sur vous pour "
+"obtenir de l'aide."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Unique Ship"
-msgstr ""
+msgstr "Vaisseau original"
 
 msgctxt "setting"
 msgid "Choose player ship outside of standard player ship list"
 msgstr ""
+"Vous pouvez choisir un vaisseau en dehors de la liste des vaisseaux standard."
 
 msgctxt "Unique Ship"
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 msgctxt "Unique Ship"
 msgid "None: just use standard player ship list on spawn screen"
 msgstr ""
+"Aucun : choisissez un vaisseau parmi la liste standard disponible à l'écran "
+"suivant."
 
 msgctxt "Unique Ship"
 msgid "Amalgam"
-msgstr ""
+msgstr "Amalgam"
 
 msgctxt "Unique Ship"
 msgid ""
 "Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for "
 "large homing missiles only, 2 mining tubes, weaker defenses and engines"
 msgstr ""
+"Basé sur l'Atlantis : 4 faisceaux laser au lieu de 2 ; un seul tube large de "
+"chaque côté dédié aux gros missiles à tête chercheuse 2x plus puissants mais "
+"2x plus lents ; 2 tubes lance mines à l'arrière ; des défenses et des "
+"moteurs plus faibles."
 
 msgctxt "Unique Ship"
 msgid "Midian"
-msgstr ""
+msgstr "Midian"
 
 msgctxt "Unique Ship"
 msgid ""
@@ -295,7 +313,7 @@ msgstr ""
 
 msgctxt "Unique Ship"
 msgid "Raven"
-msgstr ""
+msgstr "Raven"
 
 msgctxt "Unique Ship"
 msgid ""
@@ -305,7 +323,7 @@ msgstr ""
 
 msgctxt "Unique Ship"
 msgid "Squid"
-msgstr ""
+msgstr "Squid"
 
 msgctxt "Unique Ship"
 msgid ""
@@ -876,7 +894,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:3527
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
-msgstr ""
+msgstr "Nous avons besoin de nous réapprovisionner en munitions."
 
 #: scripts/scenario_74_omicron.lua:3529
 #, lua-format
@@ -886,16 +904,19 @@ msgid ""
 "\n"
 "Reputation: %i"
 msgstr ""
+"Quel genre de munitions ?\n"
+"\n"
+"Réputation : %i"
 
 #: scripts/scenario_74_omicron.lua:3536
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
-msgstr ""
+msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
 
 #: scripts/scenario_74_omicron.lua:3538
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
-msgstr ""
+msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke) ("
 
 #: scripts/scenario_74_omicron.lua:3541 scripts/scenario_74_omicron.lua:3554
 #: scripts/scenario_74_omicron.lua:3566 scripts/scenario_74_omicron.lua:3578
@@ -903,58 +924,58 @@ msgstr ""
 #, lua-format
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
-msgstr ""
+msgstr "%s%d rép chacun)"
 
 #: scripts/scenario_74_omicron.lua:3550
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
-msgstr ""
+msgstr "Veuillez réapprovisionner nos missiles EMP. ("
 
 #: scripts/scenario_74_omicron.lua:3552
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
-msgstr ""
+msgstr "Avez-vous des EMP ? ("
 
 #: scripts/scenario_74_omicron.lua:3562
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr ""
+msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
 
 #: scripts/scenario_74_omicron.lua:3564
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr ""
+msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
 
 #: scripts/scenario_74_omicron.lua:3574
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
-msgstr ""
+msgstr "Nous pourrions avoir besoin de quelques mines. ("
 
 #: scripts/scenario_74_omicron.lua:3576
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr ""
+msgstr "Et concernant les mines ? ("
 
 #: scripts/scenario_74_omicron.lua:3586
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
-msgstr ""
+msgstr "Concernant les HVLI ? ("
 
 #: scripts/scenario_74_omicron.lua:3588
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
-msgstr ""
+msgstr "Pourriez-vous fournir des HVLI ? ("
 
 #: scripts/scenario_74_omicron.lua:3598 scripts/scenario_74_omicron.lua:4432
 msgctxt "dockingServicesStatus-comms"
 msgid "Docking services status"
-msgstr ""
+msgstr "État des services d'accueil"
 
 #: scripts/scenario_74_omicron.lua:3599 scripts/scenario_74_omicron.lua:4433
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s docking services status:"
-msgstr ""
+msgstr "État des services d'accueil de la station %s :"
 
 #: scripts/scenario_74_omicron.lua:3601 scripts/scenario_74_omicron.lua:4435
 #, lua-format
@@ -963,16 +984,20 @@ msgid ""
 "%s\n"
 "Replenish scan probes."
 msgstr ""
+"%s\n"
+"Réapprovisionner les sondes."
 
 #: scripts/scenario_74_omicron.lua:3605 scripts/scenario_74_omicron.lua:4439
 msgctxt "dockingServicesStatus-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
+"Impossible de réapprovisionner les sondes en raison d'une défaillance de "
+"l'unité de fabrication."
 
 #: scripts/scenario_74_omicron.lua:3606 scripts/scenario_74_omicron.lua:4440
 msgctxt "dockingServicesStatus-comms"
 msgid "Parts shortage prevents scan probe replenishment."
-msgstr ""
+msgstr "Le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_74_omicron.lua:3607 scripts/scenario_74_omicron.lua:4441
 msgctxt "dockingServicesStatus-comms"
@@ -980,6 +1005,8 @@ msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
+"Les gestionnaires de la station ont réduit le réapprovisionnement des sondes "
+"pour des raisons de réduction des coûts."
 
 #: scripts/scenario_74_omicron.lua:3614 scripts/scenario_74_omicron.lua:4448
 #, lua-format
@@ -988,21 +1015,29 @@ msgid ""
 "%s\n"
 "Ship hull repair."
 msgstr ""
+"%s\n"
+"Réparation de la coque."
 
 #: scripts/scenario_74_omicron.lua:3618 scripts/scenario_74_omicron.lua:4452
 msgctxt "dockingServicesStatus-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
+"Nous n'avons plus les matériaux et fournitures nécessaires pour réparer la "
+"coque."
 
 #: scripts/scenario_74_omicron.lua:3619
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
+"L'automatisation de réparation de la coque n'est pas disponible pendant la "
+"maintenance."
 
 #: scripts/scenario_74_omicron.lua:3620 scripts/scenario_74_omicron.lua:4454
 msgctxt "dockingServicesStatus-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
+"Tous les techniciens de réparation de coque mis en quarantaine dans leur "
+"quartiers pour cause de maladie."
 
 #: scripts/scenario_74_omicron.lua:3627 scripts/scenario_74_omicron.lua:4461
 #, lua-format
@@ -1011,6 +1046,8 @@ msgid ""
 "%s\n"
 "Recharge ship energy stores."
 msgstr ""
+"%s\n"
+"Recharger les réserves d'énergie du vaisseau."
 
 #: scripts/scenario_74_omicron.lua:3631 scripts/scenario_74_omicron.lua:4465
 msgctxt "dockingServicesStatus-comms"
@@ -1018,11 +1055,14 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
+"Une récente panne de réacteur nous a mis sous tension auxiliaire, nous ne "
+"pouvons donc pas recharger les navires."
 
 #: scripts/scenario_74_omicron.lua:3632 scripts/scenario_74_omicron.lua:4466
 msgctxt "dockingServicesStatus-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
+"Un couplage électrique défectueux rend la recharge des navires trop risquée."
 
 #: scripts/scenario_74_omicron.lua:3633 scripts/scenario_74_omicron.lua:4467
 msgctxt "dockingServicesStatus-comms"
@@ -1030,6 +1070,8 @@ msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
+"Une frappe d'astéroïde a endommagé nos cellules solaires et nous manquons de "
+"puissance, nous ne pouvons donc pas recharger les navires pour le moment."
 
 #: scripts/scenario_74_omicron.lua:3640 scripts/scenario_74_omicron.lua:4474
 #, lua-format
@@ -1038,6 +1080,8 @@ msgid ""
 "%s\n"
 "May overcharge jump drive"
 msgstr ""
+"%s\n"
+"Peut booster la téléportation."
 
 #: scripts/scenario_74_omicron.lua:3643 scripts/scenario_74_omicron.lua:4477
 #, lua-format
@@ -1046,6 +1090,8 @@ msgid ""
 "%s\n"
 "May repair probe launch system"
 msgstr ""
+"%s\n"
+"Peut réparer le système de lancement de sonde."
 
 #: scripts/scenario_74_omicron.lua:3646 scripts/scenario_74_omicron.lua:4480
 #, lua-format
@@ -1054,6 +1100,8 @@ msgid ""
 "%s\n"
 "May repair hacking system"
 msgstr ""
+"%s\n"
+"Peut réparer le système de piratage."
 
 #: scripts/scenario_74_omicron.lua:3649 scripts/scenario_74_omicron.lua:4483
 #, lua-format
@@ -1062,6 +1110,8 @@ msgid ""
 "%s\n"
 "May repair scanners"
 msgstr ""
+"%s\n"
+"Peut réparer les scanners."
 
 #: scripts/scenario_74_omicron.lua:3652 scripts/scenario_74_omicron.lua:4486
 #, lua-format
@@ -1070,6 +1120,8 @@ msgid ""
 "%s\n"
 "May repair combat maneuver"
 msgstr ""
+"%s\n"
+"Peut réparer la manœuvre de combat."
 
 #: scripts/scenario_74_omicron.lua:3655 scripts/scenario_74_omicron.lua:4489
 #, lua-format
@@ -1078,17 +1130,19 @@ msgid ""
 "%s\n"
 "May repair self destruct system"
 msgstr ""
+"%s\n"
+"Peut réparer le système d'autodestruction."
 
 #: scripts/scenario_74_omicron.lua:3667
 msgctxt "dockingServicesStatus-comms"
 msgid "Overcharge Jump Drive (10 Rep)"
-msgstr ""
+msgstr "Booster la téléportation (10 rép)."
 
 #: scripts/scenario_74_omicron.lua:3670
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Your jump drive has been overcharged to %ik"
-msgstr ""
+msgstr "Votre téléportation a été boostée à %ik."
 
 #: scripts/scenario_74_omicron.lua:3672 scripts/scenario_74_omicron.lua:3705
 #: scripts/scenario_74_omicron.lua:3718 scripts/scenario_74_omicron.lua:3731
@@ -1102,12 +1156,12 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:6318 scripts/scenario_74_omicron.lua:6341
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
-msgstr ""
+msgstr "Réputation insuffisante"
 
 #: scripts/scenario_74_omicron.lua:3696
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair ship system"
-msgstr ""
+msgstr "Réparer les systèmes du vaisseau."
 
 #: scripts/scenario_74_omicron.lua:3697
 #, lua-format
@@ -1117,61 +1171,64 @@ msgid ""
 "\n"
 "Reputation: %i"
 msgstr ""
+"Quel système souhaitez-vous réparer ?\n"
+"\n"
+"Réputation : %i"
 
 #: scripts/scenario_74_omicron.lua:3700
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair probe launch system (%s Rep)"
-msgstr ""
+msgstr "Réparer le système de lancement de sonde (%s rép)."
 
 #: scripts/scenario_74_omicron.lua:3703
 msgctxt "dockingServicesStatus-comms"
 msgid "Your probe launch system has been repaired"
-msgstr ""
+msgstr "Votre système de lancement de sonde a été réparé."
 
 #: scripts/scenario_74_omicron.lua:3713
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair hacking system (%s Rep)"
-msgstr ""
+msgstr "Réparer le système de piratage (%s rép)."
 
 #: scripts/scenario_74_omicron.lua:3716
 msgctxt "dockingServicesStatus-comms"
 msgid "Your hack system has been repaired"
-msgstr ""
+msgstr "Votre système de piratage a été réparé."
 
 #: scripts/scenario_74_omicron.lua:3726
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair scanning system (%s Rep)"
-msgstr ""
+msgstr "Réparer les scanners (%s rép)."
 
 #: scripts/scenario_74_omicron.lua:3729
 msgctxt "dockingServicesStatus-comms"
 msgid "Your scanners have been repaired"
-msgstr ""
+msgstr "Vos scanners ont été réparés."
 
 #: scripts/scenario_74_omicron.lua:3739
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair combat maneuver (%s Rep)"
-msgstr ""
+msgstr "Réparer la manœuvre de combat (%s rép)."
 
 #: scripts/scenario_74_omicron.lua:3742
 msgctxt "dockingServicesStatus-comms"
 msgid "Your combat maneuver has been repaired"
-msgstr ""
+msgstr "Votre manœuvre de combat a été réparée."
 
 #: scripts/scenario_74_omicron.lua:3752
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Repair self destruct system (%s Rep)"
-msgstr ""
+msgstr "Réparer le système d'autodestruction (%s rép)."
 
 #: scripts/scenario_74_omicron.lua:3755
 msgctxt "dockingServicesStatus-comms"
 msgid "Your self destruct system has been repaired"
-msgstr ""
+msgstr "Votre système d'autodestruction a été réparé."
 
 #: scripts/scenario_74_omicron.lua:3770
 msgctxt "station-comms"
@@ -1293,6 +1350,8 @@ msgid ""
 "\n"
 "Insufficient reputation for purchase"
 msgstr ""
+"\n"
+"Réputation insuffisante pour acheter"
 
 #: scripts/scenario_74_omicron.lua:3852 scripts/scenario_74_omicron.lua:3896
 #: scripts/scenario_74_omicron.lua:3925 scripts/scenario_74_omicron.lua:3954
@@ -1562,37 +1621,38 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4192
 msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
-msgstr ""
+msgstr "Vous devez rester amarré à la station pour cette action."
 
 #: scripts/scenario_74_omicron.lua:4196
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
 
 #: scripts/scenario_74_omicron.lua:4197
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
 
 #: scripts/scenario_74_omicron.lua:4198
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
-msgstr ""
+msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
 
 #: scripts/scenario_74_omicron.lua:4205
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
-msgstr ""
+msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
 
 #: scripts/scenario_74_omicron.lua:4207
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
+"Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
 
 #: scripts/scenario_74_omicron.lua:4215 scripts/scenario_74_omicron.lua:4230
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
-msgstr ""
+msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
 
 #: scripts/scenario_74_omicron.lua:4217 scripts/scenario_74_omicron.lua:4232
 msgctxt "ammo-comms"
@@ -1600,12 +1660,14 @@ msgid ""
 "We generously resupplied you with some weapon charges.\n"
 "Put them to good use."
 msgstr ""
+"Nous vous avons généreusement réapprovisionné en munitions.\n"
+"Faites-en bon usage."
 
 #: scripts/scenario_74_omicron.lua:4220 scripts/scenario_74_omicron.lua:4235
 #: scripts/scenario_74_omicron.lua:4240
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
-msgstr ""
+msgstr "Pas assez de réputation."
 
 #: scripts/scenario_74_omicron.lua:4225
 msgctxt "ammo-comms"
@@ -1703,7 +1765,7 @@ msgstr "De quel genre d'informations avez-vous besoin ?"
 #: scripts/scenario_74_omicron.lua:4399
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
-msgstr ""
+msgstr "De quelles munitions disposez-vous ?"
 
 #: scripts/scenario_74_omicron.lua:4404
 msgctxt "ammo-comms"
@@ -1711,6 +1773,8 @@ msgid ""
 "\n"
 "   Nuke"
 msgstr ""
+"\n"
+"   Nuke"
 
 #: scripts/scenario_74_omicron.lua:4408
 msgctxt "ammo-comms"
@@ -1718,6 +1782,8 @@ msgid ""
 "\n"
 "   EMP"
 msgstr ""
+"\n"
+"   EMP"
 
 #: scripts/scenario_74_omicron.lua:4412
 msgctxt "ammo-comms"
@@ -1725,6 +1791,8 @@ msgid ""
 "\n"
 "   Homing"
 msgstr ""
+"\n"
+"   Homing"
 
 #: scripts/scenario_74_omicron.lua:4416
 msgctxt "ammo-comms"
@@ -1732,6 +1800,8 @@ msgid ""
 "\n"
 "   Mine"
 msgstr ""
+"\n"
+"   Mine"
 
 #: scripts/scenario_74_omicron.lua:4420
 msgctxt "ammo-comms"
@@ -1739,28 +1809,32 @@ msgid ""
 "\n"
 "   HVLI"
 msgstr ""
+"\n"
+"   HVLI"
 
 #: scripts/scenario_74_omicron.lua:4423
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
-msgstr ""
+msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
 
 #: scripts/scenario_74_omicron.lua:4425
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
-msgstr ""
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_74_omicron.lua:4427
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
-msgstr ""
+msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
 
 #: scripts/scenario_74_omicron.lua:4453
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable whie it is undergoing maintenance."
 msgstr ""
+"Automatisation de réparation de coque indisponible, elle est en cours de "
+"maintenance."
 
 #: scripts/scenario_74_omicron.lua:4503
 msgctxt "trade-comms"
@@ -1923,7 +1997,7 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4729 scripts/scenario_74_omicron.lua:4776
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
-msgstr ""
+msgstr "Pas assez de réputation !"
 
 #: scripts/scenario_74_omicron.lua:4664
 #, lua-format
@@ -2675,7 +2749,7 @@ msgstr "%s acheté auprès de %s"
 #: scripts/scenario_74_omicron.lua:5904
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
-msgstr ""
+msgstr "Réputation insuffisante pour acheter"
 
 #: scripts/scenario_74_omicron.lua:5231 scripts/scenario_74_omicron.lua:5752
 msgctxt "trade-comms"
@@ -3621,12 +3695,12 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:9441
 msgctxt "buttonEngineer"
 msgid "Send Repair Crew"
-msgstr ""
+msgstr "Envoyer une équipe de réparation"
 
 #: scripts/scenario_74_omicron.lua:9446
 msgctxt "buttonEngineer+"
 msgid "Send Repair Crew"
-msgstr ""
+msgstr "Envoyer une équipe de réparation"
 
 #: scripts/scenario_74_omicron.lua:9464
 #, lua-format
@@ -3757,12 +3831,12 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:9560
 msgctxt "buttonEngineer"
 msgid "Get Repair Crew"
-msgstr ""
+msgstr "Obtenir une équipe de réparation"
 
 #: scripts/scenario_74_omicron.lua:9565
 msgctxt "buttonEngineer+"
 msgid "Get Repair Crew"
-msgstr ""
+msgstr "Obtenir une équipe de réparation"
 
 #: scripts/scenario_74_omicron.lua:9572
 #, lua-format
@@ -3781,17 +3855,17 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:9589
 msgctxt "centralcommandOrders-incCall"
 msgid "unloading cargo"
-msgstr ""
+msgstr "Décharger la cargaison."
 
 #: scripts/scenario_74_omicron.lua:9591
 msgctxt "centralcommandOrders-incCall"
 msgid "picking up cargo"
-msgstr ""
+msgstr "Récupérer la cargaison."
 
 #: scripts/scenario_74_omicron.lua:9593
 msgctxt "centralcommandOrders-incCall"
 msgid "disembarking passengers"
-msgstr ""
+msgstr "Débarquer les passagers."
 
 #: scripts/scenario_74_omicron.lua:9597
 #, lua-format
