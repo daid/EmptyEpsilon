@@ -314,6 +314,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     json.write("hull", ship->hull_strength);
     if (ship->target_id > -1)
         json.write("target", ship->target_id);
+        /*
     if (ship->docking_state != DS_NotDocking && ship->docking_target)
     {
         if (ship->docking_state == DS_Docking)
@@ -321,6 +322,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         if (ship->docking_state == DS_Docked)
             json.write("docked", ship->docking_target->getMultiplayerId());
     }
+    */
     if (ship->shield_count > 0)
     {
         if (gameGlobalInfo->use_beam_shield_frequencies)

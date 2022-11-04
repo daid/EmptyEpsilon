@@ -93,7 +93,9 @@ void WeaponTube::fire(float target_angle)
 {
     parent->didAnOffensiveAction();
 
-    if (parent->docking_state != DS_NotDocking) return;
+    auto docking_port = parent->entity.getComponent<DockingPort>();
+    if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;
+
     if (parent->current_warp > 0.0f) return;
     if (state != WTS_Loaded) return;
 

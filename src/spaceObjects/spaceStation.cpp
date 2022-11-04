@@ -19,13 +19,17 @@ REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
 SpaceStation::SpaceStation()
 : ShipTemplateBasedObject(300, "SpaceStation")
 {
-    restocks_scan_probes = true;
-    restocks_missiles_docked = true;
     comms_script_name = "comms_station.lua";
     setRadarSignatureInfo(0.2, 0.5, 0.5);
 
     callsign = "DS" + string(getMultiplayerId());
-    entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Static, 300);
+
+    if (entity) {
+        entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Static, 300);
+
+        auto& bay = entity.getOrAddComponent<DockingBay>();
+        bay.flags |= DockingBay::RestockMissiles | DockingBay::RestockProbes;
+    }
 }
 
 void SpaceStation::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -68,16 +72,6 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
         else
             info.instigator->removeReputationPoints(points);
     }
-}
-
-DockStyle SpaceStation::canBeDockedBy(P<SpaceObject> obj)
-{
-    if (isEnemy(obj))
-        return DockStyle::None;
-    P<SpaceShip> ship = obj;
-    if (!ship)
-        return DockStyle::None;
-    return DockStyle::External;
 }
 
 string SpaceStation::getExportLine()

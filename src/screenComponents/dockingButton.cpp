@@ -3,6 +3,8 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 #include "systems/collision.h"
+#include "components/collision.h"
+#include "ecs/query.h"
 
 
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
@@ -13,17 +15,19 @@ GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
 
 void GuiDockingButton::click()
 {
-    if (!my_spaceship)
-        return;
-    switch(my_spaceship->docking_state)
+    if (!my_spaceship) { return; }
+    auto port = my_spaceship->entity.getComponent<DockingPort>();
+    if (!port) { return; }
+
+    switch(port->state)
     {
-    case DS_NotDocking:
+    case DockingPort::State::NotDocking:
         my_spaceship->commandDock(findDockingTarget());
         break;
-    case DS_Docking:
+    case DockingPort::State::Docking:
         my_spaceship->commandAbortDock();
         break;
-    case DS_Docked:
+    case DockingPort::State::Docked:
         my_spaceship->commandUndock();
         break;
     }
@@ -31,21 +35,23 @@ void GuiDockingButton::click()
 
 void GuiDockingButton::onUpdate()
 {
-    setVisible(my_spaceship && my_spaceship->getCanDock());
+    if (!my_spaceship) { hide(); return; }
+    auto port = my_spaceship->entity.getComponent<DockingPort>();
+    if (!port) { hide(); return; }
 
-    if (my_spaceship && isVisible())
+    if (isVisible())
     {
         if (keys.helms_dock_action.getDown())
         {
-            switch(my_spaceship->docking_state)
+            switch(port->state)
             {
-            case DS_NotDocking:
+            case DockingPort::State::NotDocking:
                 my_spaceship->commandDock(findDockingTarget());
                 break;
-            case DS_Docking:
+            case DockingPort::State::Docking:
                 my_spaceship->commandAbortDock();
                 break;
-            case DS_Docked:
+            case DockingPort::State::Docked:
                 my_spaceship->commandUndock();
                 break;
             }
@@ -61,43 +67,50 @@ void GuiDockingButton::onUpdate()
 
 void GuiDockingButton::onDraw(sp::RenderTarget& renderer)
 {
-    if (my_spaceship)
+    if (!my_spaceship) { return; }
+    auto port = my_spaceship->entity.getComponent<DockingPort>();
+    if (!port) { return; }
+
+    switch(port->state)
     {
-        switch(my_spaceship->docking_state)
+    case DockingPort::State::NotDocking:
+        setText(tr("Request Dock"));
+        if (my_spaceship->canStartDocking() && findDockingTarget())
         {
-        case DS_NotDocking:
-            setText(tr("Request Dock"));
-            if (my_spaceship->canStartDocking() && findDockingTarget())
-            {
-                enable();
-            }else{
-                disable();
-            }
-            break;
-        case DS_Docking:
-            setText(tr("Cancel Docking"));
             enable();
-            break;
-        case DS_Docked:
-            setText(tr("Undock"));
-            enable();
-            break;
+        }else{
+            disable();
         }
+        break;
+    case DockingPort::State::Docking:
+        setText(tr("Cancel Docking"));
+        enable();
+        break;
+    case DockingPort::State::Docked:
+        setText(tr("Undock"));
+        enable();
+        break;
     }
+
     GuiButton::onDraw(renderer);
 }
 
 P<SpaceObject> GuiDockingButton::findDockingTarget()
 {
+    if (!my_spaceship) { return nullptr; }
+    auto port = my_spaceship->entity.getComponent<DockingPort>();
+    if (!port) { return nullptr; }
+
     P<SpaceObject> dock_object;
-    for(auto entity : sp::CollisionSystem::queryArea(my_spaceship->getPosition() - glm::vec2(1000, 1000), my_spaceship->getPosition() + glm::vec2(1000, 1000)))
+    for(auto [entity, bay, position, physics, obj] : sp::ecs::Query<DockingBay, sp::Position, sp::Physics, SpaceObject*>())
     {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr || !*ptr) continue;
-        dock_object = *ptr;
-        if (dock_object && dock_object != my_spaceship && dock_object->canBeDockedBy(my_spaceship) != DockStyle::None && glm::length(dock_object->getPosition() - my_spaceship->getPosition()) < 1000.0f + dock_object->getRadius())
-            break;
-        dock_object = NULL;
+        if (obj == *my_spaceship) continue;
+        if (obj->isEnemy(my_spaceship)) continue;
+        if (port->canDockOn(bay) == DockingStyle::None) continue;
+        if (glm::length(position.getPosition() - my_spaceship->getPosition()) > 1000.0f + physics.getSize().x) continue;
+
+        dock_object = obj;
+        break;
     }
     return dock_object;
 }

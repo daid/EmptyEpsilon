@@ -134,8 +134,6 @@ public:
 
     // Capable of hacking a target
     bool can_hack = true;
-    // Capable of docking with a target
-    bool can_dock = true;
     // Capable of combat maneuvers
     bool can_combat_maneuver = true;
 
@@ -207,8 +205,8 @@ public:
     bool getCanScan() { return can_scan; }
     void setCanHack(bool enabled) { can_hack = enabled; }
     bool getCanHack() { return can_hack; }
-    void setCanDock(bool enabled) { can_dock = enabled; }
-    bool getCanDock() { return can_dock; }
+    void setCanDock(bool enabled);
+    bool getCanDock();
     void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
     bool getCanCombatManeuver() { return can_combat_maneuver; }
     void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }

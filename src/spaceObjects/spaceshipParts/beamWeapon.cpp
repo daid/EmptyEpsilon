@@ -199,10 +199,11 @@ void BeamWeapon::update(float delta)
         cooldown -= delta * parent->getSystemEffectiveness(SYS_BeamWeapons);
 
     P<SpaceObject> target = parent->getTarget();
+    auto docking_port = parent->entity.getComponent<DockingPort>();
 
     // Check on beam weapons only if we are on the server, have a target, and
     // not paused, and if the beams are cooled down or have a turret arc.
-    if (game_server && range > 0.0f && target && parent->isEnemy(target) && delta > 0 && parent->current_warp == 0.0f && parent->docking_state == DS_NotDocking)
+    if (game_server && range > 0.0f && target && parent->isEnemy(target) && delta > 0 && parent->current_warp == 0.0f && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
     {
         // Get the angle to the target.
         auto diff = target->getPosition() - (parent->getPosition() + rotateVec2(glm::vec2(position.x, position.y), parent->getRotation()));

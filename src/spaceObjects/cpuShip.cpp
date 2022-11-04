@@ -105,7 +105,6 @@ CpuShip::CpuShip()
     setRotation(random(0, 360));
     target_rotation = getRotation();
 
-    restocks_missiles_docked = true;
     comms_script_name = "comms_ship.lua";
 
     missile_resupply = 0.0;
@@ -139,36 +138,6 @@ void CpuShip::update(float delta)
     }
     if (ai)
         ai->run(delta);
-
-    //recharge missiles of CPU ships docked to station. Can be disabled setting the restocks_missiles_docked flag to false.
-    if (docking_state == DS_Docked)
-    {
-        P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
-        P<SpaceShip> docked_with_ship = docking_target;
-
-        if (docked_with_template_based && docked_with_template_based->restocks_missiles_docked)
-        {
-            bool needs_missile = 0;
-
-            for(int n=0; n<MW_Count; n++)
-            {
-                if  (weapon_storage[n] < weapon_storage_max[n])
-                {
-                    if (missile_resupply >= missile_resupply_time)
-                    {
-                        weapon_storage[n] += 1;
-                        missile_resupply = 0.0;
-                        break;
-                    }
-                    else
-                        needs_missile = 1;
-                }
-            }
-
-            if (needs_missile)
-                missile_resupply += delta;
-        }
-    }
 }
 
 void CpuShip::applyTemplateValues()
@@ -297,8 +266,6 @@ void CpuShip::orderDock(P<SpaceObject> object)
 
 void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (docked_style == DockStyle::Internal) return;
-
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
     if (game_server && ai)
         ai->drawOnGMRadar(renderer, position, scale);

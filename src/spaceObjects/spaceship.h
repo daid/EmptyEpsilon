@@ -10,6 +10,7 @@
 #include "spaceshipParts/beamWeapon.h"
 #include "spaceshipParts/weaponTube.h"
 #include "tween.h"
+#include "components/docking.h"
 
 
 enum EMainScreenSetting
@@ -207,15 +208,9 @@ public:
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
-    EDockingState docking_state;
-    DockStyle docked_style = DockStyle::None;
-    P<SpaceObject> docking_target; //Server only
-    glm::vec2 docking_offset{0, 0}; //Server only
-
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();
 
-    virtual void draw3D() override;
     virtual void draw3DTransparent() override;
     /*!
      * Get this ship's radar signature dynamically modified by the state of its
@@ -267,12 +262,6 @@ public:
      * \param distance Distance to jump in meters)
      */
     virtual void executeJump(float distance);
-
-    /*!
-     * Check if object can dock with this ship.
-     * \param object Object that wants to dock.
-     */
-    virtual DockStyle canBeDockedBy(P<SpaceObject> obj) override;
 
     virtual void collide(SpaceObject* other, float force) override;
 
@@ -338,10 +327,10 @@ public:
 
     virtual std::unordered_map<string, string> getGMInfo() override;
 
-    bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
-    P<SpaceObject> getDockedWith() { if (docking_state == DS_Docked) return docking_target; return NULL; }
+    bool isDocked(P<SpaceObject> target);
+    P<SpaceObject> getDockedWith();
+    DockingPort::State getDockingState();
     bool canStartDocking() { return current_warp <= 0.0f && (!has_jump_drive || jump_delay <= 0.0f); }
-    EDockingState getDockingState() { return docking_state; }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
@@ -516,7 +505,6 @@ REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EDockingState);
-REGISTER_MULTIPLAYER_ENUM(DockStyle);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
 
 string frequencyToString(int frequency);

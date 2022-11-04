@@ -526,7 +526,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         {
                             cpu_ship->orderAttack(target);
                         }else{
-                            if (!shift_down && target->canBeDockedBy(cpu_ship) != DockStyle::None)
+                            auto port = cpu_ship->entity.getComponent<DockingPort>();
+                            auto bay = target->entity.getComponent<DockingBay>();
+                            if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None)
                                 cpu_ship->orderDock(target);
                             else
                                 cpu_ship->orderDefendTarget(target);

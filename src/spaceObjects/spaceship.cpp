@@ -17,6 +17,7 @@
 #include "multiplayer_client.h"
 #include "gameGlobalInfo.h"
 #include "components/collision.h"
+#include "components/docking.h"
 
 #include "scriptInterface.h"
 
@@ -204,7 +205,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_frequency = irandom(0, max_frequency);
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
-    docking_state = DS_NotDocking;
     impulse_acceleration = 20.f;
     impulse_reverse_acceleration = 20.f;
     energy_level = 1000;
@@ -233,8 +233,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&impulse_reverse_acceleration);
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
-    registerMemberReplication(&docking_state);
-    registerMemberReplication(&docked_style);
     registerMemberReplication(&beam_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5f);
     registerMemberReplication(&combat_maneuver_boost_request);
@@ -359,16 +357,9 @@ void SpaceShip::applyTemplateValues()
     model_info.setData(ship_template->model_data);
 }
 
-void SpaceShip::draw3D()
-{
-    if (docked_style == DockStyle::Internal) return;
-    ShipTemplateBasedObject::draw3D();
-}
-
 void SpaceShip::draw3DTransparent()
 {
     if (!ship_template) return;
-    if (docked_style == DockStyle::Internal) return;
     ShipTemplateBasedObject::draw3DTransparent();
 
     if ((has_jump_drive && jump_delay > 0.0f) ||
@@ -453,8 +444,6 @@ void SpaceShip::updateDynamicRadarSignature()
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (docked_style == DockStyle::Internal) return;
-
     // Draw beam arcs on short-range radar only, and only for fully scanned
     // ships.
     if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
@@ -618,8 +607,6 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 
 void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (docked_style == DockStyle::Internal) return;
-
     if (!long_range)
     {
         renderer.fillRect(sp::Rect(position.x - 30, position.y - 30, 60 * hull_strength / hull_max, 5), glm::u8vec4(128, 255, 128, 128));
@@ -631,56 +618,6 @@ void SpaceShip::update(float delta)
     ShipTemplateBasedObject::update(delta);
 
     auto physics = entity.getComponent<sp::Physics>();
-
-    if (bool(physics) != (docked_style != DockStyle::Internal))
-    {
-        if (docked_style == DockStyle::Internal) {
-            entity.removeComponent<sp::Physics>();
-            physics = nullptr;
-        } else if (ship_template) {
-            ship_template->setCollisionData(this);
-        }
-    }
-
-    if (game_server)
-    {
-        if (docking_state == DS_Docking)
-        {
-            if (!docking_target)
-                docking_state = DS_NotDocking;
-            else
-                target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
-            if (fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
-                impulse_request = -1.f;
-            else
-                impulse_request = 0.f;
-        }
-        if (docking_state == DS_Docked)
-        {
-            if (!docking_target)
-            {
-                docking_state = DS_NotDocking;
-                docked_style = DockStyle::None;
-            }else{
-                setPosition(docking_target->getPosition() + rotateVec2(docking_offset, docking_target->getRotation()));
-                target_rotation = vec2ToAngle(getPosition() - docking_target->getPosition());
-
-                P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
-                if (docked_with_template_based && docked_with_template_based->repair_docked)  //Check if what we are docked to allows hull repairs, and if so, do it.
-                {
-                    if (hull_strength < hull_max)
-                    {
-                        hull_strength += delta;
-                        if (hull_strength > hull_max)
-                            hull_strength = hull_max;
-                    }
-                }
-            }
-            impulse_request = 0.f;
-        }
-        if ((docking_state == DS_Docked) || (docking_state == DS_Docking))
-            warp_request = 0;
-    }
 
     float rotationDiff;
     if (fabs(turnSpeed) < 0.0005f) {
@@ -906,10 +843,11 @@ float SpaceShip::getShieldRechargeRate(int shield_index)
 {
     float rate = 0.3f;
     rate *= getSystemEffectiveness(getShieldSystemForShieldIndex(shield_index));
-    if (docking_state == DS_Docked)
+    auto port = entity.getComponent<DockingPort>();
+    if (port && port->state == DockingPort::State::Docked && port->target)
     {
-        P<SpaceShip> docked_with_ship = docking_target;
-        if (!docked_with_ship)
+        auto bay = port->target.getComponent<DockingBay>();
+        if (bay && (bay->flags & DockingBay::ChargeShield))
             rate *= 4.0f;
     }
     return rate;
@@ -935,44 +873,14 @@ void SpaceShip::executeJump(float distance)
     addHeat(SYS_JumpDrive, jump_drive_heat_per_jump);
 }
 
-DockStyle SpaceShip::canBeDockedBy(P<SpaceObject> obj)
-{
-    if (isEnemy(obj) || !ship_template)
-        return DockStyle::None;
-    P<SpaceShip> ship = obj;
-    if (!ship || !ship->ship_template)
-        return DockStyle::None;
-    if (ship_template->external_dock_classes.count(ship->ship_template->getClass()) > 0)
-        return DockStyle::External;
-    if (ship_template->external_dock_classes.count(ship->ship_template->getSubClass()) > 0)
-        return DockStyle::External;
-    if (ship_template->internal_dock_classes.count(ship->ship_template->getClass()) > 0)
-        return DockStyle::Internal;
-    if (ship_template->internal_dock_classes.count(ship->ship_template->getSubClass()) > 0)
-        return DockStyle::Internal;
-    return DockStyle::None;
-}
-
 void SpaceShip::collide(SpaceObject* other, float force)
 {
-    if (docking_state == DS_Docking && fabs(angleDifference(target_rotation, getRotation())) < 10.0f)
-    {
-        P<SpaceObject> dock_object = other;
-        if (dock_object == docking_target)
-        {
-            docking_state = DS_Docked;
-            docked_style = docking_target->canBeDockedBy(this);
-            docking_offset = rotateVec2(getPosition() - other->getPosition(), -other->getRotation());
-            float length = glm::length(docking_offset);
-            docking_offset = docking_offset / length * (length + 2.0f);
-        }
-    }
 }
 
 void SpaceShip::initializeJump(float distance)
 {
-    if (docking_state != DS_NotDocking)
-        return;
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;
     if (jump_drive_charge < jump_drive_max_distance) // You can only jump when the drive is fully charged
         return;
     if (jump_delay <= 0.0f)
@@ -985,37 +893,42 @@ void SpaceShip::initializeJump(float distance)
 
 void SpaceShip::requestDock(P<SpaceObject> target)
 {
-    if (!target || docking_state != DS_NotDocking || target->canBeDockedBy(this) == DockStyle::None)
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (!docking_port || docking_port->state != DockingPort::State::NotDocking) return;
+    if (!target)
         return;
+    auto bay = target->entity.getComponent<DockingBay>();
+    if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
+
     if (glm::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
         return;
     if (!canStartDocking())
         return;
 
-    docking_state = DS_Docking;
-    docking_target = target;
+    docking_port->state = DockingPort::State::Docking;
+    docking_port->target = target->entity;
     warp_request = 0;
 }
 
 void SpaceShip::requestUndock()
 {
-    if (docking_state == DS_Docked && getSystemEffectiveness(SYS_Impulse) > 0.1f)
-    {
-        docked_style = DockStyle::None;
-        docking_state = DS_NotDocking;
-        impulse_request = 0.5;
-    }
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
+    if (getSystemEffectiveness(SYS_Impulse) < 0.1f) return;
+
+    docking_port->state = DockingPort::State::NotDocking;
+    impulse_request = 0.5;
 }
 
 void SpaceShip::abortDock()
 {
-    if (docking_state == DS_Docking)
-    {
-        docking_state = DS_NotDocking;
-        impulse_request = 0.f;
-        warp_request = 0;
-        target_rotation = getRotation();
-    }
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (!docking_port || docking_port->state != DockingPort::State::Docking) return;
+
+    docking_port->state = DockingPort::State::NotDocking;
+    impulse_request = 0.f;
+    warp_request = 0;
+    target_rotation = getRotation();
 }
 
 int SpaceShip::scanningComplexity(P<SpaceObject> other)
@@ -1441,6 +1354,32 @@ std::unordered_map<string, string> SpaceShip::getGMInfo()
     ret = ShipTemplateBasedObject::getGMInfo();
     return ret;
 }
+
+bool SpaceShip::isDocked(P<SpaceObject> target)
+{
+    if (!entity) return false; 
+    auto port = entity.getComponent<DockingPort>();
+    if (!port) return false;
+    return port->state == DockingPort::State::Docked && *port->target.getComponent<SpaceObject*>() == *target;
+}
+
+P<SpaceObject> SpaceShip::getDockedWith()
+{
+    if (!entity) return nullptr; 
+    auto port = entity.getComponent<DockingPort>();
+    if (!port) return nullptr;
+    if (port->state != DockingPort::State::Docked) return nullptr;
+    return *port->target.getComponent<SpaceObject*>();
+}
+
+DockingPort::State SpaceShip::getDockingState()
+{
+    if (!entity) return DockingPort::State::NotDocking; 
+    auto port = entity.getComponent<DockingPort>();
+    if (!port) return DockingPort::State::NotDocking;
+    return port->state;
+}
+
 
 string SpaceShip::getScriptExportModificationsOnTemplate()
 {

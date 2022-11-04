@@ -347,7 +347,6 @@ PlayerSpaceship::PlayerSpaceship()
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
-    registerMemberReplication(&can_dock);
     registerMemberReplication(&can_combat_maneuver);
     registerMemberReplication(&can_self_destruct);
     registerMemberReplication(&can_launch_probe);
@@ -456,45 +455,6 @@ void PlayerSpaceship::update(float delta)
     if (shield_calibration_delay > 0)
     {
         shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.0f;
-    }
-
-    // Docking actions.
-    if (docking_state == DS_Docked)
-    {
-        P<ShipTemplateBasedObject> docked_with_template_based = docking_target;
-        P<SpaceShip> docked_with_ship = docking_target;
-
-        // Derive a base energy request rate from the player ship's maximum
-        // energy capacity.
-        float energy_request = std::min(delta * 10.0f, max_energy_level - energy_level);
-
-        // If we're docked with a shipTemplateBasedObject, and that object is
-        // set to share its energy with docked ships, transfer energy from the
-        // mothership to docked ships until the mothership runs out of energy
-        // or the docked ship doesn't require any.
-        if (docked_with_template_based && docked_with_template_based->shares_energy_with_docked)
-        {
-            if (!docked_with_ship || docked_with_ship->useEnergy(energy_request))
-                energy_level += energy_request;
-        }
-
-        // If a shipTemplateBasedObject and is allowed to restock
-        // scan probes with docked ships.
-        if (docked_with_template_based && docked_with_template_based->restocks_scan_probes)
-        {
-            if (scan_probe_stock < max_scan_probes)
-            {
-                scan_probe_recharge += delta;
-
-                if (scan_probe_recharge > scan_probe_charge_time)
-                {
-                    scan_probe_stock += 1;
-                    scan_probe_recharge = 0.0;
-                }
-            }
-        }
-    }else{
-        scan_probe_recharge = 0.0;
     }
 
     // Automate cooling if auto_coolant_enabled is true. Distributes coolant to
@@ -749,7 +709,6 @@ void PlayerSpaceship::applyTemplateValues()
     // Set the ship's capabilities.
     can_scan = ship_template->can_scan;
     can_hack = ship_template->can_hack;
-    can_dock = ship_template->can_dock;
     can_combat_maneuver = ship_template->can_combat_maneuver;
     can_self_destruct = ship_template->can_self_destruct;
     can_launch_probe = ship_template->can_launch_probe;
@@ -2023,8 +1982,6 @@ void PlayerSpaceship::onReceiveServerCommand(sp::io::DataBuffer& packet)
 
 void PlayerSpaceship::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (docked_style == DockStyle::Internal) return;
-
     SpaceShip::drawOnGMRadar(renderer, position, scale, rotation, long_range);
 
     if (long_range)
@@ -2051,8 +2008,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setCanScan(" + string(can_scan, true) + ")";
     if (can_hack != ship_template->can_hack)
         result += ":setCanHack(" + string(can_hack, true) + ")";
-    if (can_dock != ship_template->can_dock)
-        result += ":setCanDock(" + string(can_dock, true) + ")";
+    //if (can_dock != ship_template->can_dock)
+    //    result += ":setCanDock(" + string(can_dock, true) + ")";
     if (can_combat_maneuver != ship_template->can_combat_maneuver)
         result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
     if (can_self_destruct != ship_template->can_self_destruct)

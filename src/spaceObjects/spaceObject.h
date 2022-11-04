@@ -20,13 +20,6 @@ enum EDamageType
     DT_EMP
 };
 
-enum class DockStyle
-{
-    None,
-    External,
-    Internal,
-};
-
 class DamageInfo
 {
 public:
@@ -168,8 +161,6 @@ public:
 
     virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
     virtual string getCallSign() { return callsign; }
-    virtual DockStyle canBeDockedBy(P<SpaceObject> obj) { return DockStyle::None; }
-    virtual bool canRestockMissiles() { return false; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
     virtual bool canBeTargetedBy(P<SpaceObject> other);

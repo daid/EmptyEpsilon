@@ -30,11 +30,6 @@ public:
     float shield_hit_effect[max_shield_count];
     bool can_be_destroyed;
 
-    bool shares_energy_with_docked;       //[config]
-    bool repair_docked;                   //[config]
-    bool restocks_scan_probes;
-    bool restocks_missiles_docked;        //only restocks cpuships; playerships should use comms
-
     ScriptSimpleCallback on_destruction;
     ScriptSimpleCallback on_taking_damage;
 public:
@@ -45,7 +40,6 @@ public:
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
-    virtual bool canRestockMissiles() override { return restocks_missiles_docked; }
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
     virtual bool hasShield() override;
     virtual string getCallSign() override { return callsign; }
@@ -100,14 +94,14 @@ public:
     void setRadarTrace(string trace);
     void setImpulseSoundFile(string sound) { impulse_sound_file = sound; }
 
-    bool getSharesEnergyWithDocked() { return shares_energy_with_docked; }
-    void setSharesEnergyWithDocked(bool enabled) { shares_energy_with_docked = enabled; }
-    bool getRepairDocked() { return repair_docked; }
-    void setRepairDocked(bool enabled) { repair_docked = enabled; }
-    bool getRestocksScanProbes() { return restocks_scan_probes; }
-    void setRestocksScanProbes(bool enabled) { restocks_scan_probes = enabled; }
-    bool getRestocksMissilesDocked() { return restocks_missiles_docked; }
-    void setRestocksMissilesDocked(bool enabled) { restocks_missiles_docked = enabled; }
+    bool getSharesEnergyWithDocked();
+    void setSharesEnergyWithDocked(bool enabled);
+    bool getRepairDocked();
+    void setRepairDocked(bool enabled);
+    bool getRestocksScanProbes();
+    void setRestocksScanProbes(bool enabled);
+    bool getRestocksMissilesDocked();
+    void setRestocksMissilesDocked(bool enabled);
 
     void onTakingDamage(ScriptSimpleCallback callback);
     void onDestruction(ScriptSimpleCallback callback);

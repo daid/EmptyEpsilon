@@ -4,7 +4,10 @@
 #include "ai/ai.h"
 #include "ai/aiFactory.h"
 #include "random.h"
+#include "components/docking.h"
 #include "systems/collision.h"
+#include "ecs/query.h"
+
 
 REGISTER_SHIP_AI(ShipAI, "default");
 
@@ -361,6 +364,7 @@ void ShipAI::runOrders()
     // Update ranges before calculating
     long_range = owner->getLongRangeRadarRange();
     relay_range = long_range * 2.0f;
+    auto docking_port = owner->entity.getComponent<DockingPort>();
 
     //When we are not attacking a target, follow orders
     switch(owner->getOrder())
@@ -446,24 +450,26 @@ void ShipAI::runOrders()
         pathPlanner.clear();
         break;
     case AI_Retreat:
-        if ((owner->docking_state == DS_Docked) && (owner->getOrderTarget()) && P<ShipTemplateBasedObject>(owner->getOrderTarget()))
+        if ((docking_port && docking_port->state == DockingPort::State::Docked && docking_port->target) && (owner->getOrderTarget()) && P<ShipTemplateBasedObject>(owner->getOrderTarget()))
         {
-            P<ShipTemplateBasedObject> target = owner->getOrderTarget();
+            auto bay = docking_port->target.getComponent<DockingBay>();
             bool allow_undock = true;
-            if (target->restocks_missiles_docked)
-            {
-                for(int n = 0; n < MW_Count; n++)
+            if (bay) {
+                if (bay->flags & DockingBay::RestockMissiles)
                 {
-                    if (owner->weapon_storage[n] < owner->weapon_storage_max[n])
+                    for(int n = 0; n < MW_Count; n++)
                     {
-                        allow_undock = false;
-                        break;
+                        if (owner->weapon_storage[n] < owner->weapon_storage_max[n])
+                        {
+                            allow_undock = false;
+                            break;
+                        }
                     }
                 }
-            }
-            if (allow_undock && target->repair_docked && (owner->hull_strength < owner->hull_max))
-            {
-                allow_undock = false;
+                if ((bay->flags & DockingBay::Repair) && (owner->hull_strength < owner->hull_max))
+                {
+                    allow_undock = false;
+                }
             }
             if (allow_undock)
             {
@@ -479,9 +485,9 @@ void ShipAI::runOrders()
         }
         [[fallthrough]]; // continue with docking or roaming
     case AI_Dock:            //Dock with [order_target]
-        if (owner->getOrderTarget())
+        if (owner->getOrderTarget() && docking_port)
         {
-            if (owner->docking_state == DS_NotDocking || owner->docking_target != owner->getOrderTarget())
+            if (docking_port->state == DockingPort::State::NotDocking || docking_port->target != owner->getOrderTarget()->entity)
             {
                 auto target_position = owner->getOrderTarget()->getPosition();
                 auto diff = owner->getPosition() - target_position;
@@ -557,7 +563,8 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
 
     if (pathPlanner.route.size() > 0)
     {
-        if (owner->docking_state == DS_Docked)
+        auto docking_port = owner->entity.getComponent<DockingPort>();
+        if (docking_port && docking_port->state == DockingPort::State::Docked)
             owner->requestUndock();
 
         auto diff = pathPlanner.route[0] - owner->getPosition();
@@ -617,7 +624,8 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
 
     if (pathPlanner.route.size() == 1)
     {
-        if (owner->docking_state == DS_Docked)
+        auto docking_port = owner->entity.getComponent<DockingPort>();
+        if (docking_port && docking_port->state == DockingPort::State::Docked)
             owner->requestUndock();
 
         auto diff = target_position - owner->getPosition();
@@ -822,26 +830,26 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 
 P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float radius)
 {
+    auto port = owner->entity.getComponent<DockingPort>();
+    if (!port)
+        return nullptr;
     // Check each object within the given radius. If it's friendly, we can dock
     // to it, and it can restock our missiles, then select it.
     float target_score = 0.0;
     P<SpaceObject> target;
     auto owner_position = owner->getPosition();
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
+    for(auto [entity, dockingbay, obj] : sp::ecs::Query<DockingBay, SpaceObject*>())
     {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr || !*ptr) continue;
-        P<SpaceObject> space_object = *ptr;
-        if (!space_object || !owner->isFriendly(space_object) || space_object == target)
+        if (!obj || !owner->isFriendly(obj) || obj == *target)
             continue;
-        if (space_object->canBeDockedBy(owner) == DockStyle::None || !space_object->canRestockMissiles())
+        if (port->canDockOn(dockingbay) == DockingStyle::None || !(dockingbay.flags & DockingBay::RestockMissiles))
             continue;
         //calculate score
-        auto position_difference = space_object->getPosition() - owner_position;
+        auto position_difference = obj->getPosition() - owner_position;
         float distance = glm::length(position_difference);
         float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
         float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
-        if (P<SpaceShip>(space_object))
+        if (P<SpaceShip>(P<SpaceObject>(obj)))
         {
             score -= 5000;
         }
@@ -849,7 +857,7 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
             continue;
         if (!target || score > target_score)
         {
-            target = space_object;
+            target = obj;
             target_score = score;
         }
     }

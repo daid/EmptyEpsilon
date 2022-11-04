@@ -2,6 +2,7 @@
 
 #include "scriptInterface.h"
 #include "components/collision.h"
+#include "components/docking.h"
 
 #include "tween.h"
 #include "i18n.h"
@@ -381,12 +382,30 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         trace.icon = ship_template->radar_trace;
         trace.max_size = 1024;
         trace.flags |= RadarTrace::ColorByFaction;
+
+        if (!ship_template->external_dock_classes.empty())
+            entity.getOrAddComponent<DockingBay>().external_dock_classes = ship_template->external_dock_classes;
+        if (!ship_template->internal_dock_classes.empty())
+            entity.getOrAddComponent<DockingBay>().external_dock_classes = ship_template->internal_dock_classes;
+        
+        auto bay = entity.getComponent<DockingBay>();
+        if (bay) {
+            if (ship_template->shares_energy_with_docked)
+                bay->flags |= DockingBay::ShareEnergy;
+            if (ship_template->repair_docked)
+                bay->flags |= DockingBay::Repair;
+        }
+
+        
+        if (ship_template->can_dock) {
+            if (!ship_template->getClass().empty())
+                entity.getOrAddComponent<DockingPort>().dock_class = ship_template->getClass();
+            if (!ship_template->getSubClass().empty())
+                entity.getOrAddComponent<DockingPort>().dock_subclass = ship_template->getSubClass();
+        }
     }
 
     impulse_sound_file = ship_template->impulse_sound_file;
-
-    shares_energy_with_docked = ship_template->shares_energy_with_docked;
-    repair_docked = ship_template->repair_docked;
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);

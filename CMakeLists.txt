@@ -355,6 +355,9 @@ set(MAIN_SOURCES
     src/spaceObjects/spaceshipParts/weaponTube.cpp
     src/components/radar.h
     src/components/rendering.h
+    src/components/docking.h
+    src/systems/docking.h
+    src/systems/docking.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
