@@ -2,6 +2,7 @@
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/collision.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
@@ -24,6 +25,7 @@ SpaceStation::SpaceStation()
     setRadarSignatureInfo(0.2, 0.5, 0.5);
 
     callsign = "DS" + string(getMultiplayerId());
+    entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Static, 300);
 }
 
 void SpaceStation::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

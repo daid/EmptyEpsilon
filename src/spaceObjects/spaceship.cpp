@@ -295,7 +295,7 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         setCallSign(gameGlobalInfo->getNextShipCallsign());
 
     if (entity) {
-        auto trace = entity.getOrAddComponent<RadarTrace>();
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.flags |= RadarTrace::ArrowIfNotScanned;
     }
 }

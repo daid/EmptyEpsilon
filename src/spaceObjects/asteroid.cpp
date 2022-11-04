@@ -1,5 +1,6 @@
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
+#include "components/radar.h"
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -40,6 +41,14 @@ Asteroid::Asteroid()
     registerMemberReplication(&size);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
+
+    if (entity) {
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
+        trace.icon = "radar/blip.png";
+        trace.radius = getRadius();
+        trace.color = glm::u8vec4(255, 200, 100, 255);
+        trace.flags = 0;
+    }
 }
 
 void Asteroid::draw3D()
@@ -70,17 +79,6 @@ void Asteroid::draw3D()
     glActiveTexture(GL_TEXTURE0);
 }
 
-void Asteroid::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
-{
-    if (size != getRadius())
-        setRadius(size);
-
-    float size = getRadius() * scale / 64.0f;
-    if (size < 0.2f)
-        size = 0.2f;
-    renderer.drawSprite("radar/blip.png", position, size * 32.0f, glm::u8vec4(255, 200, 100, 255));
-}
-
 void Asteroid::collide(SpaceObject* target, float force)
 {
     if (!isServer())
@@ -103,6 +101,9 @@ void Asteroid::setSize(float size)
 {
     this->size = size;
     setRadius(size);
+    auto trace = entity.getComponent<RadarTrace>();
+    if (trace)
+        trace->radius = size;
 }
 
 float Asteroid::getSize()

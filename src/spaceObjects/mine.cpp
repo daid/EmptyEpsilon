@@ -7,6 +7,7 @@
 #include "random.h"
 #include "multiplayer_server.h"
 #include "components/collision.h"
+#include "components/radar.h"
 
 #include "scriptInterface.h"
 
@@ -26,8 +27,10 @@ REGISTER_MULTIPLAYER_CLASS(Mine, "Mine");
 Mine::Mine()
 : SpaceObject(50, "Mine"), data(MissileWeaponData::getDataFor(MW_Mine))
 {
-    auto physics = entity.getOrAddComponent<sp::Physics>();
-    physics.setCircle(sp::Physics::Type::Sensor, trigger_range);
+    if (entity) {
+        auto& physics = entity.getOrAddComponent<sp::Physics>();
+        physics.setCircle(sp::Physics::Type::Sensor, trigger_range);
+    }
     triggered = false;
     triggerTimeout = triggerDelay;
     ejectTimeout = 0.0;
@@ -35,6 +38,12 @@ Mine::Mine()
     setRadarSignatureInfo(0.0, 0.05, 0.0);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, blastRange * 1.2f);
+    if (entity) {
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
+        trace.icon = "radar/blip.png";
+        trace.min_size = 10;
+        trace.max_size = 10;
+    }
 }
 
 Mine::~Mine()
@@ -47,11 +56,6 @@ void Mine::draw3D()
 
 void Mine::draw3DTransparent()
 {
-}
-
-void Mine::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
-{
-    renderer.drawSprite("radar/blip.png", position, 0.3 * 32);
 }
 
 void Mine::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

@@ -125,7 +125,7 @@ void ModelData::setCollisionData(P<SpaceObject> object)
 {
     object->setRadius(radius);
     if (collision_box.x > 0 && collision_box.y > 0) {
-        auto physics = object->entity.getOrAddComponent<sp::Physics>();
+        auto& physics = object->entity.getOrAddComponent<sp::Physics>();
         physics.setRectangle(physics.getType(), collision_box);
     }
 }

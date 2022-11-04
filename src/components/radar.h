@@ -1,6 +1,7 @@
 #pragma once
 
 #include "io/dataBuffer.h"
+#include "multiplayer.h"
 
 class RadarTrace
 {
@@ -12,7 +13,7 @@ public:
     string icon;
     float min_size = 8.0;   //Size in screen "pixels"
     float max_size = 256.0; //Size in screen "pixels"
-    float radius;           // Size in world "units"
+    float radius = 0.0;     // Size in world "units"
     glm::u8vec4 color{255,255,255,255};
 
     uint32_t flags = Rotate;

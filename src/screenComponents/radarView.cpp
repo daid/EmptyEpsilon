@@ -2,6 +2,7 @@
 
 #include "ecs/query.h"
 #include "systems/collision.h"
+#include "components/collision.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
@@ -687,8 +688,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         draw_object(obj);
     }
     
-    for(auto [entity, trace, obj] : sp::ecs::Query<RadarTrace, SpaceObject*>()) {
-        auto object_position_on_screen = worldToScreen(obj->getPosition());
+    for(auto [entity, trace, position, obj] : sp::ecs::Query<RadarTrace, sp::Position, SpaceObject*>()) {
+        auto object_position_on_screen = worldToScreen(position.getPosition());
+        //TODO: Only draw things that are in range of this radar view.
 
         auto size = trace.radius * scale * 2.0f;
         size = std::clamp(size, trace.min_size, trace.max_size);

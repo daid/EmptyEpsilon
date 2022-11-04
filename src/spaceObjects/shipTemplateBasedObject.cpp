@@ -376,9 +376,10 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     short_range_radar_range = ship_template->short_range_radar_range;
 
     if (entity) {
-        auto trace = entity.getOrAddComponent<RadarTrace>();
-        trace.radius = getRadius();
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
+        trace.radius = ship_template->model_data->getRadius() * 0.8f;
         trace.icon = ship_template->radar_trace;
+        trace.max_size = 1024;
         trace.flags |= RadarTrace::ColorByFaction;
     }
 

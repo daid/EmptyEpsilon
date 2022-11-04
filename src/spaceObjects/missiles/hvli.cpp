@@ -14,7 +14,7 @@ HVLI::HVLI()
 : MissileWeapon("HVLI", MissileWeaponData::getDataFor(MW_HVLI))
 {
     setRadarSignatureInfo(0.1, 0.0, 0.0);
-    auto physics = entity.getOrAddComponent<sp::Physics>();
+    auto& physics = entity.getOrAddComponent<sp::Physics>();
     physics.setRectangle(sp::Physics::Type::Sensor, {10, 30}); // Make it a bit harder to the HVLI to phase trough smaller enemies
 }
 
