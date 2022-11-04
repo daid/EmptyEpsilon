@@ -693,10 +693,37 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         auto size = trace.radius * scale * 2.0f;
         size = std::clamp(size, trace.min_size, trace.max_size);
 
-        if (trace.rotate)
-            renderer.drawRotatedSprite(trace.icon, object_position_on_screen, size, obj->getRotation() - view_rotation, trace.color);
+        auto color = trace.color;
+        if (trace.flags & RadarTrace::ColorByFaction) {
+            if (factionInfo[obj->getFactionId()])
+                color = factionInfo[obj->getFactionId()]->getGMColor();
+            if (my_spaceship)
+            {
+                if (obj == *my_spaceship)
+                    color = glm::u8vec4(192, 192, 255, 255);
+                else if (obj->getScannedStateFor(my_spaceship) == SS_NotScanned)
+                    color = glm::u8vec4(192, 192, 192, 255);
+                else if (obj->isEnemy(my_spaceship))
+                    color = glm::u8vec4(255, 0, 0, 255);
+                else if (obj->isFriendly(my_spaceship))
+                    color = glm::u8vec4(128, 255, 128, 255);
+                else
+                    color = glm::u8vec4(128, 128, 255, 255);
+            }
+        }
+        auto icon = trace.icon;
+        if (trace.flags & RadarTrace::ArrowIfNotScanned)
+        {
+            // If the object is a ship that hasn't been scanned, draw the default icon.
+            // Otherwise, draw the ship-specific icon.
+            if (my_spaceship && (obj->getScannedStateFor(my_spaceship) == SS_NotScanned || obj->getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
+                icon = "radar/arrow.png";
+        }
+
+        if (trace.flags & RadarTrace::Rotate)
+            renderer.drawRotatedSprite(icon, object_position_on_screen, size, obj->getRotation() - view_rotation, color);
         else
-            renderer.drawSprite(trace.icon, object_position_on_screen, size, trace.color);
+            renderer.drawSprite(icon, object_position_on_screen, size, color);
     }
 
     if (my_spaceship)

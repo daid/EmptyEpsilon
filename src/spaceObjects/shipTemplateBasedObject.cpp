@@ -132,7 +132,6 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_max[n]);
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
-    registerMemberReplication(&radar_trace);
     registerMemberReplication(&impulse_sound_file);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
@@ -376,7 +375,13 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     long_range_radar_range = ship_template->long_range_radar_range;
     short_range_radar_range = ship_template->short_range_radar_range;
 
-    radar_trace = ship_template->radar_trace;
+    if (entity) {
+        auto trace = entity.getOrAddComponent<RadarTrace>();
+        trace.radius = getRadius();
+        trace.icon = ship_template->radar_trace;
+        trace.flags |= RadarTrace::ColorByFaction;
+    }
+
     impulse_sound_file = ship_template->impulse_sound_file;
 
     shares_energy_with_docked = ship_template->shares_energy_with_docked;
@@ -415,6 +420,12 @@ ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
     if (std::abs(angleDifference(angle, 0.0f)) < 90)
         return SYS_FrontShield;
     return SYS_RearShield;
+}
+
+void ShipTemplateBasedObject::setRadarTrace(string trace)
+{
+    if (!entity) return;
+    entity.getOrAddComponent<RadarTrace>().icon = "radar/" + trace;
 }
 
 void ShipTemplateBasedObject::onTakingDamage(ScriptSimpleCallback callback)

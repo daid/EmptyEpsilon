@@ -147,10 +147,6 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     // Sets the load time for a tube
     // Example ship:setTubeLoadTime(0, 15)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setTubeLoadTime);
-    /// Set the icon to be used for this ship on the radar.
-    /// For example, ship:setRadarTrace("blip.png") will show a dot instead of an arrow for this ship.
-    /// Note: Icon is only shown after scanning, before the ship is scanned it is always shown as an arrow.
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setRadarTrace);
     /// Get the dynamic radar signature values for each component band.
     /// Returns a float.
     /// Example: obj:getDynamicRadarSignatureGravity()
@@ -247,7 +243,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&combat_maneuver_strafe_active, 0.2f);
     registerMemberReplication(&combat_maneuver_boost_speed);
     registerMemberReplication(&combat_maneuver_strafe_speed);
-    registerMemberReplication(&radar_trace);
 
     for(unsigned int n=0; n<SYS_COUNT; n++)
     {
@@ -298,6 +293,11 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     if (game_server)
         setCallSign(gameGlobalInfo->getNextShipCallsign());
+
+    if (entity) {
+        auto trace = entity.getOrAddComponent<RadarTrace>();
+        trace.flags |= RadarTrace::ArrowIfNotScanned;
+    }
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -614,38 +614,6 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
             drawShieldsOnRadar(renderer, position, scale, rotation, 1.f, false);
         }
     }
-
-    // Set up the radar sprite for objects.
-    string object_sprite = radar_trace;
-    // If the object is a ship that hasn't been scanned, draw the default icon.
-    // Otherwise, draw the ship-specific icon.
-    if (my_spaceship && (getScannedStateFor(my_spaceship) == SS_NotScanned || getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
-    {
-        object_sprite = "radar/arrow.png";
-    }
-
-    glm::u8vec4 color;
-    if (my_spaceship == this)
-    {
-        color = glm::u8vec4(192, 192, 255, 255);
-    }else if (my_spaceship)
-    {
-        if (getScannedStateFor(my_spaceship) != SS_NotScanned)
-        {
-            if (isEnemy(my_spaceship))
-                color = glm::u8vec4(255, 0, 0, 255);
-            else if (isFriendly(my_spaceship))
-                color = glm::u8vec4(128, 255, 128, 255);
-            else
-                color = glm::u8vec4(128, 128, 255, 255);
-        }else{
-            color = glm::u8vec4(192, 192, 192, 255);
-        }
-    }else{
-        if (factionInfo[getFactionId()])
-            color = factionInfo[getFactionId()]->getGMColor();
-    }
-    renderer.drawRotatedSprite(object_sprite, position, long_range ? 22.f : 32.f, getRotation() - rotation, color);
 }
 
 void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
