@@ -30,6 +30,7 @@ void EvasionAI::run(float delta)
 // @TODO: consider jump drives
 void EvasionAI::runOrders()
 {
+    auto docking_port = owner->entity.getComponent<DockingPort>();
     //When we are not attacking a target, follow orders
     switch(owner->getOrder())
     {
@@ -40,7 +41,7 @@ void EvasionAI::runOrders()
         }
         break;
     case AI_Dock:
-        if (owner->getOrderTarget() && owner->docking_state == DS_NotDocking)
+        if (owner->getOrderTarget() && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
         {
             auto target_position = owner->getOrderTarget()->getPosition();
             auto diff = owner->getPosition() - target_position;

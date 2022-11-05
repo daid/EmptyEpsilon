@@ -1131,6 +1131,23 @@ void PlayerSpaceship::closeComms()
     }
 }
 
+void PlayerSpaceship::setCanDock(bool enabled)
+{
+    if (!enabled) {
+        //TODO: Undock first!
+        entity.removeComponent<DockingPort>();
+    } else {
+        auto port = entity.getOrAddComponent<DockingPort>();
+        port.dock_class = ship_template->getClass();
+        port.dock_subclass = ship_template->getSubClass();
+    }
+}
+
+bool PlayerSpaceship::getCanDock()
+{
+    return entity.hasComponent<DockingPort>();
+}
+
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     // Receive a command from a client. Code in this function is executed on

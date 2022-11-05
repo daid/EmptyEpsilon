@@ -35,7 +35,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockingState);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockingState);
     /// Returns gets this ship target.
     /// For example enemy targetted by player ship's weapons.
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getTarget);

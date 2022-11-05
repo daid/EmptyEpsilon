@@ -448,6 +448,27 @@ void ShipTemplateBasedObject::setRadarTrace(string trace)
     entity.getOrAddComponent<RadarTrace>().icon = "radar/" + trace;
 }
 
+bool ShipTemplateBasedObject::getSharesEnergyWithDocked()
+{
+    return false;//TODO
+}
+void ShipTemplateBasedObject::setSharesEnergyWithDocked(bool enabled) { /*TODO*/ }
+bool ShipTemplateBasedObject::getRepairDocked()
+{
+    return false;//TODO
+}
+void ShipTemplateBasedObject::setRepairDocked(bool enabled) { /*TODO*/ }
+bool ShipTemplateBasedObject::getRestocksScanProbes()
+{
+    return false;//TODO
+}
+void ShipTemplateBasedObject::setRestocksScanProbes(bool enabled) { /*TODO*/ }
+bool ShipTemplateBasedObject::getRestocksMissilesDocked()
+{
+    return false;//TODO
+}
+void ShipTemplateBasedObject::setRestocksMissilesDocked(bool enabled) { /*TODO*/ }
+
 void ShipTemplateBasedObject::onTakingDamage(ScriptSimpleCallback callback)
 {
     this->on_taking_damage = callback;

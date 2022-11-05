@@ -32,13 +32,6 @@ enum EMainScreenOverlay
 };
 template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMainScreenOverlay& mso);
 
-enum EDockingState
-{
-    DS_NotDocking = 0,
-    DS_Docking,
-    DS_Docked
-};
-
 struct Speeds
 {
     float forward;
@@ -504,7 +497,6 @@ REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
 REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
-REGISTER_MULTIPLAYER_ENUM(EDockingState);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
 
 string frequencyToString(int frequency);
