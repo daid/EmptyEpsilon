@@ -593,7 +593,7 @@ msgstr ""
 #, lua-format
 msgctxt "orders-comms"
 msgid "Protect freighter %s"
-msgstr "Protéger le cargo %s."
+msgstr "Escorter le cargo %s jusqu'à sa destination."
 
 #: scripts/scenario_74_omicron.lua:2383
 #, lua-format
@@ -605,7 +605,7 @@ msgstr "Enregistrement du capteur : station %s %s en secteur %s "
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s, %s station %s in %s"
-msgstr ""
+msgstr "%s, %s station %s en secteur %s "
 
 #: scripts/scenario_74_omicron.lua:2415
 #, lua-format
@@ -618,7 +618,7 @@ msgstr ""
 #, lua-format
 msgctxt "scienceDescription-buoy"
 msgid "%s; %s %s %s in %s carrying %s"
-msgstr ""
+msgstr "%s; %s %s %s en secteur %s transportant %s "
 
 #: scripts/scenario_74_omicron.lua:2425
 msgctxt "scienceDescription-buoy"
@@ -1531,18 +1531,18 @@ msgstr "Recruter un membre de l'équipe de réparation"
 #: scripts/scenario_74_omicron.lua:4026
 msgctxt "trade-comms"
 msgid "We have a repair crew candidate for you to consider"
-msgstr "Nous avons un candidat de l'équipe de réparation à évaluer."
+msgstr "Nous avons une nouvelle recrue à vous proposer au poste de réparateur."
 
 #: scripts/scenario_74_omicron.lua:4027
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation"
+msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
 
 #: scripts/scenario_74_omicron.lua:4036
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
-msgstr "Réparateur embauché"
+msgstr "Réparateur embauché."
 
 #: scripts/scenario_74_omicron.lua:4042 scripts/scenario_74_omicron.lua:4066
 #, fuzzy
@@ -1790,12 +1790,12 @@ msgstr ""
 #: scripts/scenario_74_omicron.lua:4312
 msgctxt "station-comms"
 msgid "Connect to warp jammer"
-msgstr "Se connecter au brouilleur de vitesse lumière."
+msgstr "Se connecter aux brouilleurs de téléportation et vitesse lumière."
 
 #: scripts/scenario_74_omicron.lua:4313
 msgctxt "station-comms"
 msgid "Which one would you like to connect to?"
-msgstr "Auquel souhaitez-vous vous connecter ?"
+msgstr "A quel brouilleur souhaitez-vous vous connecter ?"
 
 #: scripts/scenario_74_omicron.lua:4349
 #, lua-format
@@ -1807,7 +1807,7 @@ msgstr "(%i réputation)"
 #, lua-format
 msgctxt "station-comms"
 msgid "%s Automated warp jammer access menu"
-msgstr "Menu d'accès au brouilleur de vitesse lumière %s."
+msgstr "Menu d'accès au brouilleur de téléportation et vitesse lumière %s."
 
 #: scripts/scenario_74_omicron.lua:4354
 #, fuzzy
@@ -1820,7 +1820,9 @@ msgstr "Réduire la portée à 1 unité pendant 1 minute."
 msgctxt "station-comms"
 msgid "Acknowledged. Range adjusted. Reset timer engaged."
 msgstr ""
-"Brouilleur activé. Portée ajustée. Minuterie de réinitialisation engagée."
+"Paramètres du brouilleur modifiés : \n"
+"- Portée ajustée\n"
+"- Minuterie de réinitialisation engagée."
 
 #: scripts/scenario_74_omicron.lua:4359
 #, fuzzy
@@ -2147,13 +2149,13 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Rendezvous at waypoint %i"
-msgstr "Rendez-vous au waypoint %i."
+msgstr "Rendez-vous au marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:4774
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to rendezvous at waypoint %i"
-msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au waypoint %i."
+msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 
 #: scripts/scenario_74_omicron.lua:4800
 #, lua-format
@@ -2270,8 +2272,9 @@ msgid ""
 "vaguely resembling a heartbeat."
 msgstr ""
 "L'entité utilisée pour produire le traitement est également probablement "
-"celle utilisée pour créer le virus Omicron. Elle dégage une puissante bio-"
-"signature de nature périodique, ressemblant vaguement à un battement de cœur."
+"celle utilisée pour créer le virus de la peste Omicron. Elle dégage une "
+"puissante bio-signature de nature périodique, ressemblant vaguement à un "
+"battement de cœur."
 
 #: scripts/scenario_74_omicron.lua:4813
 msgctxt "orders-comms"
@@ -2314,13 +2317,13 @@ msgstr ""
 "L'officier Fargalli, l'un des ingénieurs de maintenance à bord du cargo %s, "
 "vient de se présenter à l'infirmerie ici sur %s. Nous pouvons traiter ses "
 "symptômes, mais nous n'avons pas de traitement pour la cause profonde de sa "
-"maladie. C'est le troisième cas de ce type que nous avons depuis la semaine "
-"dernière. Les deux derniers ont fini par être fatals."
+"maladie. C'est déjà le troisième cas de ce genre que nous enregistrons en "
+"une semaine. Les deux derniers n'ont pas survécus."
 
 #: scripts/scenario_74_omicron.lua:4825
 msgctxt "orders-comms"
 msgid "Why are you telling me this?"
-msgstr "Pourquoi me dites-vous ça ?"
+msgstr "Pourquoi nous dites-vous cela ?"
 
 #: scripts/scenario_74_omicron.lua:4826
 #, lua-format
@@ -2330,16 +2333,14 @@ msgid ""
 "research into this malady and may have more information, maybe even a remedy."
 msgstr ""
 "Nous avons appris que la station indépendante %s mène actuellement des "
-"recherches sur cette maladie et pourrait avoir plus d'informations, peut-"
-"être même un remède."
+"recherches sur cette maladie et pourrait avoir plus d'informations à ce "
+"sujet, peut-être même un remède."
 
 #: scripts/scenario_74_omicron.lua:4827
 #, lua-format
 msgctxt "orders-comms"
 msgid "Then you should get that treatment from %s to save Fargalli"
-msgstr ""
-"Vous devez, par conséquent, récupérer ce traitement de %s pour sauver "
-"Fargalli."
+msgstr "Vous pourriez récupérer ce traitement sur %s pour sauver Fargalli."
 
 #: scripts/scenario_74_omicron.lua:4828
 #, lua-format
@@ -2348,13 +2349,13 @@ msgid ""
 "We can't contact %s directly since they are not on our communications "
 "network."
 msgstr ""
-"Nous ne pouvons contacter %s directement car ils ne sont pas sur notre "
-"réseau de communication."
+"Malheureusement nous ne pouvons contacter la station %s directement car ils "
+"ne sont pas sur notre réseau de communication."
 
 #: scripts/scenario_74_omicron.lua:4829
 msgctxt "orders-comms"
 msgid "A courier could get it"
-msgstr "Un coursier pourrait les contacter."
+msgstr "Un coursier pourrait y aller ?"
 
 #: scripts/scenario_74_omicron.lua:4830
 #, lua-format
@@ -2365,14 +2366,14 @@ msgid ""
 "medical research or treatment or medicine they may have"
 msgstr ""
 "Nous avons essayé d'envoyer des coursiers. Ils ont tous été abattus. Nous "
-"vous disons tout cela car nous avons besoin que vous vous rendiez sur %s et "
-"rapportiez toute recherche médicale ou traitement ou médicament qu'ils "
+"vous disons tout cela car nous aurions besoin que vous vous rendiez sur %s "
+"et rapportiez toute recherche médicale ou traitement ou médicament qu'ils "
 "pourraient avoir."
 
 #: scripts/scenario_74_omicron.lua:4831
 msgctxt "orders-comms"
 msgid "Now I understand"
-msgstr "Maintenant, je comprends."
+msgstr "Je comprends mieux maintenant."
 
 #: scripts/scenario_74_omicron.lua:4832
 #, lua-format
@@ -2381,14 +2382,14 @@ msgid ""
 "There is some urgency. Based on the previous cases, Fargalli has about %i "
 "minutes to live"
 msgstr ""
-"Il y a urgence. Si on se base sur les 2 cas précédents, Fargalli a environ "
-"%i minutes à vivre."
+"Il y a urgence. Si on se base sur les 2 cas précédents, il reste à "
+"l'officier Fargalli environ %i minutes à vivre."
 
 #: scripts/scenario_74_omicron.lua:4833
 #, lua-format
 msgctxt "orders-comms"
 msgid "Where is station %s?"
-msgstr "Où se situe la station %s ?"
+msgstr "Entendu. Où se situe la station %s ?"
 
 #: scripts/scenario_74_omicron.lua:4835
 #, lua-format
@@ -2396,7 +2397,7 @@ msgctxt "orders-comms"
 msgid "%s is in sector %s. Good luck"
 msgstr ""
 "%s se trouve dans le secteur %s.\n"
-"Bonne chance."
+"Bonne chance à vous."
 
 #: scripts/scenario_74_omicron.lua:4837
 #, lua-format
@@ -2648,11 +2649,14 @@ msgid "They're everywhere"
 msgstr "Ils sont partout."
 
 #: scripts/scenario_74_omicron.lua:4917
+#, fuzzy
 msgctxt "orders-comms"
 msgid ""
 "This batch is in our back yard. If you're going to be in the neighborhood "
 "already, could you help us out?"
 msgstr ""
+"Ce groupe se trouve juste derrière notre station. Si vous êtes déjà dans le "
+"coin, pourriez-vous nous aider ?"
 
 #: scripts/scenario_74_omicron.lua:4918
 msgctxt "orders-comms"
@@ -2668,7 +2672,7 @@ msgstr "Génial. Nous sommes dans le secteur %s."
 #: scripts/scenario_74_omicron.lua:4922
 msgctxt "orders-comms"
 msgid "We're really only coming to get medical research"
-msgstr "Nous venons uniquement pour récupérer les recherches médicales."
+msgstr "Nous venons uniquement pour récupérer des recherches médicales."
 
 #: scripts/scenario_74_omicron.lua:4923
 msgctxt "orders-comms"
@@ -2681,15 +2685,15 @@ msgid "Identify your sector and we'll help"
 msgstr "Indiquez-nous votre secteur et nous vous aiderons."
 
 #: scripts/scenario_74_omicron.lua:4927
-#, lua-format
+#, fuzzy, lua-format
 msgctxt "orders-comms"
 msgid "Fair enough. We're in sector %s"
-msgstr ""
+msgstr "Tout de suite. Nous sommes dans le secteur %s."
 
 #: scripts/scenario_74_omicron.lua:4931
 msgctxt "orders-comms"
 msgid "We might be. Why do you ask?"
-msgstr ""
+msgstr "Ca se pourrait. Pourquoi demandez-vous ?"
 
 #: scripts/scenario_74_omicron.lua:4932
 msgctxt "orders-comms"
@@ -2697,75 +2701,83 @@ msgid ""
 "Well, we've observed some Exuari headed our way. We don't think they're "
 "making a courtesy call"
 msgstr ""
+"Eh bien, nous avons vu des Éxuaris se diriger vers nous. Ca ne ressemble pas "
+"à une visite de courtoisie."
 
 #: scripts/scenario_74_omicron.lua:4933
 msgctxt "orders-comms"
 msgid "They never do. Would you like our help?"
-msgstr ""
+msgstr "Ils n'en font jamais. Souhaitez-vous notre aide ?"
 
 #: scripts/scenario_74_omicron.lua:4934
 #, lua-format
 msgctxt "orders-comms"
 msgid "Yes, please. We're in sector %s"
-msgstr "Oui s'il vous plaît. Nous nous tronvons dans le secteur %s."
+msgstr "Oui s'il vous plaît. Nous nous trouvons dans le secteur %s."
 
 #: scripts/scenario_74_omicron.lua:4937
 msgctxt "orders-comms"
 msgid "Where exactly is 'your way?'"
-msgstr ""
+msgstr "Et où se situe exactement 'vers vous' ?"
 
 #: scripts/scenario_74_omicron.lua:4938
 #, lua-format
 msgctxt "orders-comms"
 msgid "Our station is located in sector %s. We hope to see you soon."
 msgstr ""
+"Notre station est située dans le secteur %s. Nous espérons vous voir très "
+"vite."
 
 #: scripts/scenario_74_omicron.lua:4940
 msgctxt "orders-comms"
 msgid "We'd like to help, but we're having a hard time finding you"
-msgstr ""
+msgstr "Nous aimerions vous aider, mais nous avons du mal à vous trouver."
 
 #: scripts/scenario_74_omicron.lua:4941
 #, lua-format
 msgctxt "orders-comms"
 msgid "We're in sector %s. Please hurry, the Exuari look dangerous."
 msgstr ""
+"Nous sommes dans le secteur %s. Dépêchez-vous, les Exuari ont l'air "
+"dangereux."
 
 #: scripts/scenario_74_omicron.lua:4944
 msgctxt "orders-comms"
 msgid "Technically, our mission does not cover protection from Exuari"
 msgstr ""
+"Techniquement, notre mission ne couvre pas la protection contre les Éxuaris."
 
 #: scripts/scenario_74_omicron.lua:4945
 msgctxt "orders-comms"
 msgid "Drat"
-msgstr ""
+msgstr "Formidable..."
 
 #: scripts/scenario_74_omicron.lua:4949
 msgctxt "orders-comms"
 msgid "Where are you located?"
-msgstr ""
+msgstr "Où êtes-vous situés ?"
 
 #: scripts/scenario_74_omicron.lua:4950
 #, lua-format
 msgctxt "orders-comms"
 msgid "We are in sector %s. Please hurry, the Exuari are approaching."
 msgstr ""
+"Nous nous trouvons dans le secteur %s. Dépêchez-vous, les Éxuaris approchent."
 
 #: scripts/scenario_74_omicron.lua:4952
 msgctxt "orders-comms"
 msgid "We are glad you contacted us"
-msgstr ""
+msgstr "Nous sommes heureux que vous nous ayez contacté."
 
 #: scripts/scenario_74_omicron.lua:4953
 msgctxt "orders-comms"
 msgid "Coincidentally, we are glad to be in contact with you, too."
-msgstr ""
+msgstr "Nous sommes également heureux d'être en contact avec vous."
 
 #: scripts/scenario_74_omicron.lua:4954
 msgctxt "orders-comms"
 msgid "Why is that?"
-msgstr ""
+msgstr "Pourquoi donc ?"
 
 #: scripts/scenario_74_omicron.lua:4955
 #, lua-format
@@ -2774,21 +2786,24 @@ msgid ""
 "We are in need of some assistance with Exuari that are approaching our "
 "station, %s."
 msgstr ""
+"Nous aurions besoin d'aide avec des Éxuaris qui se rapprochent de notre "
+"station %s."
 
 #: scripts/scenario_74_omicron.lua:4956
 msgctxt "orders-comms"
 msgid "We can help"
-msgstr ""
+msgstr "Nous pouvons vous aider."
 
 #: scripts/scenario_74_omicron.lua:4957
 msgctxt "orders-comms"
 msgid "That's so good to hear. You may want to hurry, though."
 msgstr ""
+"C'est si bon à entendre. Vous voudriez peut-être vous dépêcher, cependant."
 
 #: scripts/scenario_74_omicron.lua:4958
 msgctxt "orders-comms"
 msgid "Why the rush?"
-msgstr ""
+msgstr "Pourquoi cette précipitation ?"
 
 #: scripts/scenario_74_omicron.lua:4960
 #, lua-format
@@ -2797,6 +2812,8 @@ msgid ""
 "The Exuari! They're getting closer! Please come to us in sector %s as soon "
 "as you can."
 msgstr ""
+"Les Éxuaris ! Ils se rapprochent dangereusement ! S'il vous plaît, venez "
+"nous aider dans le secteur %s dès que possible."
 
 #: scripts/scenario_74_omicron.lua:4964
 #, lua-format
@@ -2805,20 +2822,23 @@ msgid ""
 "The Exuari! They're getting closer! I'm adding waypoint %i into your system "
 "for our station. Please get here as soon as you can."
 msgstr ""
+"Les Exuaris ! Ils se rapprochent dangereusement ! J'ajoute le marqueur %i "
+"sur votre radar pour vous indiquer l'emplacement de notre station. Venez dès "
+"que possible, je vous en supplie."
 
 #: scripts/scenario_74_omicron.lua:4968 scripts/scenario_74_omicron.lua:4971
 #: scripts/scenario_74_omicron.lua:4975 scripts/scenario_74_omicron.lua:4978
 #, lua-format
 msgctxt "orders-comms"
 msgid "In what sector is %s located?"
-msgstr ""
+msgstr "Dans quel secteur se situe %s ?"
 
 #: scripts/scenario_74_omicron.lua:4969 scripts/scenario_74_omicron.lua:4972
 #: scripts/scenario_74_omicron.lua:4979
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s is located in sector %s."
-msgstr ""
+msgstr "%s se situe dans le secteur %s."
 
 #: scripts/scenario_74_omicron.lua:5028
 msgctxt "shipAssist-comms"
@@ -3105,19 +3125,20 @@ msgstr ""
 "vous."
 
 #: scripts/scenario_74_omicron.lua:5305
+#, fuzzy
 msgctxt "shipEnemy-comms"
 msgid "State your business"
-msgstr ""
+msgstr "Mêlez-vous de vos affaires !"
 
 #: scripts/scenario_74_omicron.lua:5309
 msgctxt "shipEnemy-comms"
 msgid "What do you want? (not that we care)"
-msgstr ""
+msgstr "Qu'est-ce que vous voulez ? (non pas que ça nous intéresse)"
 
 #: scripts/scenario_74_omicron.lua:5313
 msgctxt "shipEnemy-comms"
 msgid "Don't waste our time"
-msgstr ""
+msgstr "Ne perdons pas notre temps."
 
 #: scripts/scenario_74_omicron.lua:5315
 msgctxt "shipEnemy-comms"
@@ -3620,6 +3641,9 @@ msgid ""
 "the Farco 3, the beams are longer and faster and the shields are slightly "
 "stronger."
 msgstr ""
+"Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+"cas du Farco 3, les faisceaux laser sont plus longs et plus rapides et les "
+"boucliers sont légèrement plus solides."
 
 #: scripts/scenario_74_omicron.lua:7980
 msgctxt "scienceDB"
@@ -3627,6 +3651,9 @@ msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 5, the tubes load faster and the shields are slightly stronger."
 msgstr ""
+"Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+"cas du Farco 5, les tubes se chargent plus rapidement et les blindages sont "
+"légèrement plus solides."
 
 #: scripts/scenario_74_omicron.lua:8017
 msgctxt "scienceDB"
@@ -3635,6 +3662,9 @@ msgid ""
 "the Farco 8, the beams are longer and faster, the tubes load faster and the "
 "shields are stronger."
 msgstr ""
+"Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+"cas du Farco 8, les faisceaux laser sont plus longs et plus rapides, les "
+"tubes se chargent plus vite et les blindages sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8054
 msgctxt "scienceDB"
@@ -3643,6 +3673,10 @@ msgid ""
 "the Farco 11, the maneuver speed is faster, the beams are longer and faster, "
 "there's an added longer sniping beam and the shields are stronger."
 msgstr ""
+"Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+"cas du Farco 11, la vitesse de manœuvre est plus rapide, les faisceaux laser "
+"sont plus longs et plus rapides, il y a un faisceau \"sniper\" plus long et "
+"les boucliers sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8097
 msgctxt "scienceDB"
@@ -3652,6 +3686,11 @@ msgid ""
 "there's an added longer sniping beam, the tubes load faster, there are more "
 "missiles and the shields are stronger."
 msgstr ""
+"Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+"cas du Farco 13, la vitesse de manœuvre est plus rapide, les faisceaux laser "
+"sont plus longs et plus rapides, il y a un faisceau \"sniper\" plus long, "
+"les tubes se chargent plus rapidement, il y a plus de missiles et les "
+"boucliers sont plus solides."
 
 #: scripts/scenario_74_omicron.lua:8141
 msgctxt "scienceDB"
@@ -3660,6 +3699,10 @@ msgid ""
 "tubes and missiles. It's as if the Storm swallowed a Pirahna and grew gills. "
 "Expect to see missiles, lots of missiles"
 msgstr ""
+"Le Whirlwind, un autre croiseur d'artillerie lourde, provient du Tempête "
+"(Storm) auquel ont été ajoutés des tubes et missiles. C'est comme si le "
+"Tempête avait avalé un Piranha et développé des branchies. Attendez-vous à "
+"voir des missiles, beaucoup de missiles."
 
 #: scripts/scenario_74_omicron.lua:8182
 msgctxt "scienceDB"
@@ -3667,6 +3710,8 @@ msgid ""
 "The Phobos R2 model is very similar to the Phobos T3. It's got a faster turn "
 "speed, but only one missile tube"
 msgstr ""
+"Le modèle Phobos R2 est très similaire au Phobos T3. Il a une vitesse de "
+"rotation plus rapide, mais un seul tube de missile."
 
 #: scripts/scenario_74_omicron.lua:8214
 msgctxt "scienceDB"
@@ -3676,6 +3721,9 @@ msgid ""
 "faster than both of the other Hornet models, it turns faster than the MT52, "
 "but slower than the MU52"
 msgstr ""
+"Le Frelon MV52 (Hornet MV52) est très similaire aux modèles MT52 et MU52. "
+"Les faisceaux laser font plus de dégâts, ses moteurs sont plus rapide, il "
+"tourne plus vite que le MT52, mais plus lentement que le MU52."
 
 #: scripts/scenario_74_omicron.lua:8238
 msgctxt "scienceDB"
@@ -3684,6 +3732,9 @@ msgid ""
 "Ktlitan Fighters. Comparatively, it's got beams that cycle faster, but the "
 "hull is a bit weaker."
 msgstr ""
+"Des concepteurs créatifs ont conçu cette variante basée sur des chasseurs "
+"Ktlitan récupérés. Comparativement, ce modèle a des faisceaux laser qui se "
+"rechargent plus rapidement, mais la coque est un peu plus faible."
 
 #: scripts/scenario_74_omicron.lua:8262
 msgctxt "scienceDB"
@@ -3692,6 +3743,10 @@ msgid ""
 "Ktlitan Fighters. Comparatively, it's got beams that are stronger and that "
 "cycle faster, but the hull is weaker."
 msgstr ""
+"Des concepteurs créatifs ont conçu cette variante basée sur des chasseurs "
+"Ktlitan récupérés. Comparativement, ce modèle a des faisceaux laser qui se "
+"rechargent plus rapidement et sont plus solides, mais la coque est plus "
+"faible."
 
 #: scripts/scenario_74_omicron.lua:8292
 msgctxt "scienceDB"
@@ -3699,6 +3754,9 @@ msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
 "warp drives to them to produce the Waddle 5"
 msgstr ""
+"Conversions R Us a acheté un certain nombre de vaisseaux Vipère MK5 (Adder "
+"MK5) aux enchères et leur a ajouté des moteurs à vitesse lumière pour "
+"produire le Waddle 5."
 
 #: scripts/scenario_74_omicron.lua:8325
 msgctxt "scienceDB"
@@ -3706,6 +3764,9 @@ msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
 "jump drives to them to produce the Jade 5"
 msgstr ""
+"Conversions R Us a acheté un certain nombre de vaisseaux Vipère MK5 (Adder "
+"MK5) aux enchères et leur a ajouté des moteurs de téléportation pour "
+"produire le Jade 5."
 
 #: scripts/scenario_74_omicron.lua:8353
 msgctxt "scienceDB"
@@ -3714,6 +3775,10 @@ msgid ""
 "Ktlitan drones. Compared to the Ktlitan drone, the lite drone has a weaker "
 "hull, and a weaker beam, but a faster turn and impulse speed"
 msgstr ""
+"Le drone léger a été assemblé à partir de pièces récupérées de divers drones "
+"Ktlitan endommagés. Comparé au drones Ktlitan, le drone léger a une coque et "
+"un faisceau laser plus faibles, mais une manœuvre et des moteurs plus "
+"rapides."
 
 #: scripts/scenario_74_omicron.lua:8378
 msgctxt "scienceDB"
@@ -3721,6 +3786,8 @@ msgid ""
 "The heavy drone has a stronger hull and a stronger beam than the normal "
 "Ktlitan Drone, but it also moves slower"
 msgstr ""
+"Le drone lourd a une coque plus solide et un faisceau plus puissant que le "
+"drone Ktlitan classique, mais il se déplace également plus lentement."
 
 #: scripts/scenario_74_omicron.lua:8409
 msgctxt "scienceDB"
@@ -3729,6 +3796,9 @@ msgid ""
 "and has a slightly weaker beam due to the energy requirements of the added "
 "shield"
 msgstr ""
+"Le drone Jacket est un drone Ktlitan possédant un bouclier. Il est également "
+"légèrement plus lent et a un faisceau légèrement plus faible en raison des "
+"besoins énergétiques du bouclier ajouté."
 
 #: scripts/scenario_74_omicron.lua:8439
 msgctxt "scienceDB"
@@ -3960,7 +4030,7 @@ msgstr ""
 #, lua-format
 msgctxt "msgEngineer"
 msgid "Repair crew member retrieved from %s"
-msgstr "Membre de l'équipe de réparation téléporté depuis %s."
+msgstr "Membre de l'équipe de réparation rapatrié depuis %s."
 
 #: scripts/scenario_74_omicron.lua:9499
 #, lua-format
@@ -4066,6 +4136,8 @@ msgid ""
 "%s has transported one of her repair crew to %s. They report that the "
 "engines should be fixed in a minute or two."
 msgstr ""
+"%s a téléporté un membre de son équipe de réparation sur %s. Ils nous "
+"signalent que les moteurs devraient être réparés d'ici une minute ou deux."
 
 #: scripts/scenario_74_omicron.lua:9560
 msgctxt "buttonEngineer"
@@ -4134,6 +4206,7 @@ msgstr ""
 msgctxt "orders-comms"
 msgid "Protect station %s and other friendly stations and ships"
 msgstr ""
+"Protéger la station %s ainsi que les autres stations et vaisseaux amis."
 
 #: scripts/scenario_74_omicron.lua:9624
 #, lua-format
@@ -4142,11 +4215,14 @@ msgid ""
 "Gather medical details and possible treatment from %s in roughly direction "
 "%i and return to %s"
 msgstr ""
+"Rassembler tous les dossiers médicaux et les traitements que vous trouverez "
+"sur la station %s en direction approximative de %i et retournez à la station "
+"%s."
 
 #: scripts/scenario_74_omicron.lua:9642
 msgctxt "msgMainscreen"
 msgid "Fargalli died. Omicron plague destroyed humanity"
-msgstr "Fargalli est mort. La peste d'Omicron va détruire la race humaine"
+msgstr "Fargalli est mort. La peste Omicron va détruire la race humaine"
 
 #: scripts/scenario_74_omicron.lua:9646
 msgctxt "tabRelay&Operations"
@@ -4156,23 +4232,25 @@ msgstr "Mort de l'officier"
 #: scripts/scenario_74_omicron.lua:9660
 msgctxt "msgMainscreen"
 msgid "HQ destroyed. Omicron plague destroyed humainty"
-msgstr "QG détruit. La peste d'Omicron va détruire l'humanité"
+msgstr "QG détruit. La peste Omicron va détruire l'humanité"
 
 #: scripts/scenario_74_omicron.lua:9676
 msgctxt "msgMainscreen"
 msgid "Station destroyed. Omicron plague destroyed humanity"
-msgstr "Station détruite. La peste d'Omicron va détruire l'humanité"
+msgstr "Station détruite. La peste Omicron va détruire l'humanité"
 
 #: scripts/scenario_74_omicron.lua:9678
 msgctxt "msgMainscreen"
 msgid "HQ destroyed. Omicron plague destroyed humanity"
-msgstr "QG détruit. La peste d'Omicron va détruire l'humanité"
+msgstr "QG détruit. La peste Omicron va détruire l'humanité"
 
 #: scripts/scenario_74_omicron.lua:9808
 #, lua-format
 msgctxt "orders-comms"
 msgid "Destroy Exuari Omicron plague research station in roughly direction %i"
 msgstr ""
+"Détruire la station de recherche Éxuarie sur la peste Omicron au cap "
+"approximatif %i."
 
 #: scripts/scenario_74_omicron.lua:9825
 msgctxt "msgMainscreen"
@@ -4182,7 +4260,7 @@ msgstr "Les Exuari ont déployé la peste Omicron. L'humanité est condamnée"
 #: scripts/scenario_74_omicron.lua:9829
 msgctxt "tabRelay&Operations"
 msgid "Omicron Broadcast"
-msgstr "Diffusion du virus Omicron"
+msgstr "Diffusion de la peste Omicron"
 
 #: scripts/scenario_74_omicron.lua:9848
 #, lua-format
@@ -4191,12 +4269,15 @@ msgid ""
 "[%s] Our analysis of your routine ship telemetry indicates that you passed "
 "the Exuari plague station, %s."
 msgstr ""
+"[%s] Notre analyse de la télémétrie de routine de votre vaisseau nous "
+"indique que vous avez dépassé la station Exuari %s qui fabrique le virus de "
+"la peste."
 
 #: scripts/scenario_74_omicron.lua:9865 scripts/scenario_74_omicron.lua:9867
 msgctxt "msgMainscreen"
 msgid "Exuari Omicron plague station destroyed. Humanity saved"
 msgstr ""
-"Station contaminée par la peste Éxuari Omicron détruite. L'humanité est "
+"Station contaminée par la peste Éxuarie Omicron détruite. L'humanité est "
 "sauvée"
 
 #: scripts/scenario_74_omicron.lua:9877 scripts/scenario_74_omicron.lua:9899
