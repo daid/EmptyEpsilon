@@ -80,13 +80,16 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     });
     delete_waypoint_button->setPosition(-270, -120, sp::Alignment::BottomRight)->setSize(200, 50);
 
+    auto stats = new GuiElement(this, "OPERATIONS_STATS");
+    stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 80)->setAttribute("layout", "vertical");
+
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(this, "INFO_REPUTATION", 0.7, tr("Reputation") + ":", "");
-    info_reputation->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(175, 30);
+    info_reputation = new GuiKeyValueDisplay(stats, "INFO_REPUTATION", 0.45f, tr("Reputation") + ":", "");
+    info_reputation->setTextSize(20)->setSize(240, 40);
 
     // Scenario clock display.
-    info_clock = new GuiKeyValueDisplay(this, "INFO_CLOCK", 0.7, tr("Clock") + ":", "");
-    info_clock->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(175, 30);
+    info_clock = new GuiKeyValueDisplay(stats, "INFO_CLOCK", 0.45f, tr("Clock") + ":", "");
+    info_clock->setTextSize(20)->setSize(240, 40);
 
     mode = TargetSelection;
 

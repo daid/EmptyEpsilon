@@ -47,6 +47,10 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
 
         string luaCode;
         string objectId = "getPlayerShip(-1)";
+        if (my_spaceship) {
+            int index = gameGlobalInfo->findPlayerShip(my_spaceship);
+            objectId = "getPlayerShip("+std::to_string(index+1)+")";
+        }
         std::unordered_map<string, string>::const_iterator i;
         P<ScriptObject> script;
         string output;
@@ -114,6 +118,10 @@ EEHttpServer::EEHttpServer(int port, string static_file_path)
 
         string luaCode;
         string objectId = "getPlayerShip(-1)";
+        if (my_spaceship) {
+            int index = gameGlobalInfo->findPlayerShip(my_spaceship);
+            objectId = "getPlayerShip("+std::to_string(index+1)+")";
+        }
         std::unordered_map<string, string>::const_iterator i;
         P<ScriptObject> script;
         string output;

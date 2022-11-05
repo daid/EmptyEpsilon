@@ -336,7 +336,7 @@ msgid "unspecified error {error}"
 msgstr "Erreur non spécifiée {error}"
 
 #: src/menus/serverBrowseMenu.cpp:51 src/menus/tutorialMenu.cpp:65
-#: src/menus/optionsMenu.cpp:134 src/menus/hotkeyMenu.cpp:68
+#: src/menus/optionsMenu.cpp:134 src/menus/hotkeyMenu.cpp:69
 #: src/screenComponents/databaseView.cpp:102
 #: src/screenComponents/databaseView.cpp:106
 msgctxt "button"
@@ -508,7 +508,7 @@ msgstr "Radar Science verrouillé"
 msgid "Control Options"
 msgstr "Options de controle"
 
-#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:36
+#: src/menus/optionsMenu.cpp:100 src/menus/hotkeyMenu.cpp:37
 msgid "Configure Keyboard"
 msgstr "Configuration Clavier"
 
@@ -747,6 +747,12 @@ msgctxt "button"
 msgid "Lock camera on ship's target"
 msgstr "Verrouiller caméra cible"
 
+#: src/screens/cinematicViewScreen.cpp:47
+#, fuzzy
+msgctxt "button"
+msgid "Cycle trough ships"
+msgstr "Basculer vaisseau joueur suivant"
+
 #: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
 #: src/screens/gm/tweak.cpp:93 src/screenComponents/commsOverlay.cpp:110
 #: src/screenComponents/commsOverlay.cpp:140
@@ -765,38 +771,38 @@ msgctxt "hotkey_F1"
 msgid "{label}:\t{button}\n"
 msgstr "{label} : \t {button}\n"
 
-#: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:282
-#: src/gui/hotkeyConfig.cpp:283 src/gui/hotkeyConfig.cpp:284
-#: src/gui/hotkeyConfig.cpp:285 src/gui/hotkeyConfig.cpp:286
-#: src/gui/hotkeyConfig.cpp:287 src/gui/hotkeyConfig.cpp:288
-#: src/gui/hotkeyConfig.cpp:289
+#: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:296
+#: src/gui/hotkeyConfig.cpp:297 src/gui/hotkeyConfig.cpp:298
+#: src/gui/hotkeyConfig.cpp:299 src/gui/hotkeyConfig.cpp:300
+#: src/gui/hotkeyConfig.cpp:301 src/gui/hotkeyConfig.cpp:302
+#: src/gui/hotkeyConfig.cpp:303
 msgctxt "hotkey_menu"
 msgid "Main Screen"
 msgstr "Écran principal"
 
 #: src/screens/crew4/operationsScreen.cpp:67
-#: src/screens/crew6/relayScreen.cpp:100
+#: src/screens/crew6/relayScreen.cpp:101
 #: src/screens/crew1/singlePilotScreen.cpp:102
 msgid "Open Comms"
 msgstr "Ouvrir Comm."
 
 #: src/screens/crew4/operationsScreen.cpp:70
-#: src/screens/crew6/relayScreen.cpp:129
+#: src/screens/crew6/relayScreen.cpp:130
 msgid "Place Waypoint"
 msgstr "Placer marqueur"
 
 #: src/screens/crew4/operationsScreen.cpp:75
-#: src/screens/crew6/relayScreen.cpp:134
+#: src/screens/crew6/relayScreen.cpp:135
 msgid "Delete Waypoint"
 msgstr "Suppr. marqueur"
 
-#: src/screens/crew4/operationsScreen.cpp:84
-#: src/screens/crew6/relayScreen.cpp:150
+#: src/screens/crew4/operationsScreen.cpp:87
+#: src/screens/crew6/relayScreen.cpp:151
 msgid "Reputation"
 msgstr "Rép. actuelle "
 
-#: src/screens/crew4/operationsScreen.cpp:88
-#: src/screens/crew6/relayScreen.cpp:154
+#: src/screens/crew4/operationsScreen.cpp:91
+#: src/screens/crew6/relayScreen.cpp:155
 #: src/screens/gm/gameMasterScreen.cpp:147
 msgid "Clock"
 msgstr "Temps écoulé "
@@ -830,6 +836,7 @@ msgstr "Faisceaux"
 
 #: src/screens/crew4/tacticalScreen.cpp:121
 #: src/screens/crew6/helmsScreen.cpp:99
+#: src/screens/crew1/singlePilotScreen.cpp:120
 msgid "{value} {unit}/min"
 msgstr "{value} {unit}/min"
 
@@ -940,7 +947,7 @@ msgstr "Dommages supplémentaires"
 msgid "Damage negate"
 msgstr "Réduction des dégâts"
 
-#: src/screens/crew6/scienceScreen.cpp:96 src/screens/crew6/relayScreen.cpp:80
+#: src/screens/crew6/scienceScreen.cpp:96 src/screens/crew6/relayScreen.cpp:81
 msgid "Callsign"
 msgstr "Nom"
 
@@ -957,7 +964,7 @@ msgstr "Cap"
 msgid "Rel. Speed"
 msgstr "Vit. relative"
 
-#: src/screens/crew6/scienceScreen.cpp:104 src/screens/crew6/relayScreen.cpp:83
+#: src/screens/crew6/scienceScreen.cpp:104 src/screens/crew6/relayScreen.cpp:84
 msgid "Faction"
 msgstr "Faction"
 
@@ -1002,7 +1009,7 @@ msgid "Probe View"
 msgstr "Vue sonde"
 
 #: src/screens/crew6/scienceScreen.cpp:204
-#: src/screens/crew6/scienceScreen.cpp:246 src/screens/crew6/relayScreen.cpp:87
+#: src/screens/crew6/scienceScreen.cpp:246 src/screens/crew6/relayScreen.cpp:88
 msgid "Zoom: {zoom}x"
 msgstr "Zoom : {zoom}x"
 
@@ -1016,25 +1023,21 @@ msgctxt "button"
 msgid "Database"
 msgstr "Base de données"
 
-#: src/screens/crew6/relayScreen.cpp:102
+#: src/screens/crew6/relayScreen.cpp:103
 msgid "Link to Comms"
 msgstr "Lier a Communications"
 
-#: src/screens/crew6/relayScreen.cpp:106
+#: src/screens/crew6/relayScreen.cpp:107
 msgid "Start hacking"
 msgstr "Démarrer piratage"
 
-#: src/screens/crew6/relayScreen.cpp:116
+#: src/screens/crew6/relayScreen.cpp:117
 msgid "Link to Science"
 msgstr "Lier a Science"
 
-#: src/screens/crew6/relayScreen.cpp:143 src/screens/crew6/relayScreen.cpp:322
+#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:297
 msgid "Launch Probe"
 msgstr "Largage sonde"
-
-#: src/screens/crew6/relayScreen.cpp:162
-msgid "Alert level"
-msgstr "Niveau d'alerte"
 
 #: src/screens/crew6/weaponsScreen.cpp:65
 msgid "Beam info"
@@ -1659,6 +1662,10 @@ msgctxt "missile"
 msgid "Lock"
 msgstr "Verrou"
 
+#: src/screenComponents/alertLevelButton.cpp:13
+msgid "Alert level"
+msgstr "Niveau d'alerte"
+
 #: src/screenComponents/helpOverlay.cpp:24
 msgctxt "hotkey_F1"
 msgid "Close"
@@ -1802,11 +1809,13 @@ msgid "Impulse"
 msgstr "Moteurs"
 
 #: src/screenComponents/frequencyCurve.cpp:53
+#, fuzzy
 msgctxt "scienceFrequencyGraph"
 msgid "Damage with your beams"
 msgstr "Dégâts produits par vos faisceaux"
 
 #: src/screenComponents/frequencyCurve.cpp:55
+#, fuzzy
 msgctxt "scienceFrequencyGraph"
 msgid "Damage on your shields"
 msgstr "Dégâts sur vos boucliers"
@@ -1826,37 +1835,37 @@ msgctxt "scienceFrequencyGraph"
 msgid "No data"
 msgstr "Aucune donnée"
 
-#: src/screenComponents/powerDamageIndicator.cpp:33
+#: src/screenComponents/powerDamageIndicator.cpp:34
 msgctxt "systems"
 msgid "DAMAGED"
 msgstr "ENDOMMAGÉ"
 
-#: src/screenComponents/powerDamageIndicator.cpp:37
+#: src/screenComponents/powerDamageIndicator.cpp:38
 msgctxt "systems"
 msgid "JAMMED"
 msgstr "BLOQUÉ"
 
-#: src/screenComponents/powerDamageIndicator.cpp:41
+#: src/screenComponents/powerDamageIndicator.cpp:42
 msgctxt "systems"
 msgid "NO POWER"
 msgstr "AUCUNE ÉNERGIE"
 
-#: src/screenComponents/powerDamageIndicator.cpp:45
+#: src/screenComponents/powerDamageIndicator.cpp:46
 msgctxt "systems"
 msgid "LOW ENERGY"
 msgstr "ÉNERGIE FAIBLE"
 
-#: src/screenComponents/powerDamageIndicator.cpp:49
+#: src/screenComponents/powerDamageIndicator.cpp:50
 msgctxt "systems"
 msgid "LOW POWER"
 msgstr "PUISSANCE FAIBLE"
 
-#: src/screenComponents/powerDamageIndicator.cpp:53
+#: src/screenComponents/powerDamageIndicator.cpp:54
 msgctxt "systems"
 msgid "OVERHEATING"
 msgstr "SURCHAUFFE"
 
-#: src/screenComponents/powerDamageIndicator.cpp:57
+#: src/screenComponents/powerDamageIndicator.cpp:58
 msgctxt "systems"
 msgid "HACKED"
 msgstr "PIRATÉ"
@@ -1890,11 +1899,11 @@ msgstr "{faction} gagne"
 msgid "Combat maneuver"
 msgstr "Manoeuvre de combat"
 
-#: src/screenComponents/shipDestroyedPopup.cpp:19
+#: src/screenComponents/shipDestroyedPopup.cpp:20
 msgid "SHIP DESTROYED!"
 msgstr "VAISSEAU DÉTRUIT !"
 
-#: src/screenComponents/shipDestroyedPopup.cpp:20
+#: src/screenComponents/shipDestroyedPopup.cpp:21
 msgctxt "shipdestroyed"
 msgid "Return"
 msgstr "Retour"
@@ -2024,762 +2033,6 @@ msgstr "Piratage RÉUSSI !"
 msgid "Hacking FAILURE!"
 msgstr "Piratage ÉCHOUÉ !"
 
-#: src/gui/hotkeyConfig.cpp:29
-msgctxt "hotkey_menu"
-msgid "Cinematic View"
-msgstr "Vue cinématique"
-
-#: src/gui/hotkeyConfig.cpp:30
-msgctxt "hotkey_Cinematic"
-msgid "Toggle UI"
-msgstr "Activer/désactiver boutons"
-
-#: src/gui/hotkeyConfig.cpp:31
-msgctxt "hotkey_Cinematic"
-msgid "Camera lock"
-msgstr "Verrouillage caméra"
-
-#: src/gui/hotkeyConfig.cpp:32
-msgctxt "hotkey_Cinematic"
-msgid "Cycle previous player ship"
-msgstr "Basculer vaisseau joueur précédent"
-
-#: src/gui/hotkeyConfig.cpp:33
-msgctxt "hotkey_Cinematic"
-msgid "Cycle next player ship"
-msgstr "Basculer vaisseau joueur suivant"
-
-#: src/gui/hotkeyConfig.cpp:34
-msgctxt "hotkey_Cinematic"
-msgid "Move forward"
-msgstr "Avancer"
-
-#: src/gui/hotkeyConfig.cpp:35
-msgctxt "hotkey_Cinematic"
-msgid "Move backward"
-msgstr "Reculer"
-
-#: src/gui/hotkeyConfig.cpp:36
-msgctxt "hotkey_Cinematic"
-msgid "Strafe left"
-msgstr "Straffer à gauche"
-
-#: src/gui/hotkeyConfig.cpp:37
-msgctxt "hotkey_Cinematic"
-msgid "Strafe right"
-msgstr "Straffer à droite"
-
-#: src/gui/hotkeyConfig.cpp:38
-msgctxt "hotkey_Cinematic"
-msgid "Move up"
-msgstr "Monter"
-
-#: src/gui/hotkeyConfig.cpp:39
-msgctxt "hotkey_Cinematic"
-msgid "Move down"
-msgstr "Descendre"
-
-#: src/gui/hotkeyConfig.cpp:40
-msgctxt "hotkey_Cinematic"
-msgid "Rotate left"
-msgstr "Pivoter à gauche"
-
-#: src/gui/hotkeyConfig.cpp:41
-msgctxt "hotkey_Cinematic"
-msgid "Rotate right"
-msgstr "Pivoter à droite"
-
-#: src/gui/hotkeyConfig.cpp:42
-msgctxt "hotkey_Cinematic"
-msgid "Tilt down"
-msgstr "Incliner vers le bas"
-
-#: src/gui/hotkeyConfig.cpp:43
-msgctxt "hotkey_Cinematic"
-msgid "Tilt up"
-msgstr "Incliner vers le haut"
-
-#: src/gui/hotkeyConfig.cpp:59
-msgctxt "hotkey_menu"
-msgid "Top-down View"
-msgstr "Vue de haut en 3D"
-
-#: src/gui/hotkeyConfig.cpp:60
-msgctxt "hotkey_Topdown"
-msgid "Toggle UI"
-msgstr "Activer/désactiver boutons"
-
-#: src/gui/hotkeyConfig.cpp:61
-msgctxt "hotkey_Topdown"
-msgid "Camera lock"
-msgstr "Verrouillage caméra"
-
-#: src/gui/hotkeyConfig.cpp:62
-msgctxt "hotkey_Topdown"
-msgid "Cycle previous player ship"
-msgstr "Basculer vaisseau joueur précédent"
-
-#: src/gui/hotkeyConfig.cpp:63
-msgctxt "hotkey_Topdown"
-msgid "Cycle next player ship"
-msgstr "Basculer vaisseau joueur suivant"
-
-#: src/gui/hotkeyConfig.cpp:64
-msgctxt "hotkey_Topdown"
-msgid "Pan up"
-msgstr "Défiler vers le haut"
-
-#: src/gui/hotkeyConfig.cpp:65
-msgctxt "hotkey_Topdown"
-msgid "Pan down"
-msgstr "Défiler vers le bas"
-
-#: src/gui/hotkeyConfig.cpp:66
-msgctxt "hotkey_Topdown"
-msgid "Pan left"
-msgstr "Défiler vers la gauche"
-
-#: src/gui/hotkeyConfig.cpp:67
-msgctxt "hotkey_Topdown"
-msgid "Pan right"
-msgstr "Défiler vers la droite"
-
-#: src/gui/hotkeyConfig.cpp:264 src/gui/hotkeyConfig.cpp:265
-#: src/gui/hotkeyConfig.cpp:266 src/gui/hotkeyConfig.cpp:267
-#: src/gui/hotkeyConfig.cpp:268 src/gui/hotkeyConfig.cpp:269
-#: src/gui/hotkeyConfig.cpp:270
-msgctxt "hotkey_menu"
-msgid "Basic"
-msgstr "Basique"
-
-#: src/gui/hotkeyConfig.cpp:264
-msgctxt "hotkey_Basic"
-msgid "Pause game"
-msgstr "Mettre le jeu en pause"
-
-#: src/gui/hotkeyConfig.cpp:265
-msgctxt "hotkey_Basic"
-msgid "Show in-game help"
-msgstr "Afficher l'aide en jeu"
-
-#: src/gui/hotkeyConfig.cpp:266
-msgctxt "hotkey_Basic"
-msgid "Return to ship options menu"
-msgstr "Retourner au menu vaisseau/postes"
-
-#: src/gui/hotkeyConfig.cpp:267
-msgctxt "hotkey_Basic"
-msgid "Zoom in on zoomable stations"
-msgstr "Zoomer sur les stations zoomables"
-
-#: src/gui/hotkeyConfig.cpp:268
-msgctxt "hotkey_Basic"
-msgid "Zoom out on zoomable stations"
-msgstr "Dézoomer sur les stations zoomables"
-
-#: src/gui/hotkeyConfig.cpp:269
-msgctxt "hotkey_Basic"
-msgid "Broadcast voice chat to server"
-msgstr "Diffuser le chat vocal sur le serveur"
-
-#: src/gui/hotkeyConfig.cpp:270
-msgctxt "hotkey_Basic"
-msgid "Broadcast voice chat to ship"
-msgstr "Diffuser le chat vocal sur le navire"
-
-#: src/gui/hotkeyConfig.cpp:273 src/gui/hotkeyConfig.cpp:274
-#: src/gui/hotkeyConfig.cpp:275 src/gui/hotkeyConfig.cpp:276
-#: src/gui/hotkeyConfig.cpp:277 src/gui/hotkeyConfig.cpp:278
-#: src/gui/hotkeyConfig.cpp:279
-msgctxt "hotkey_menu"
-msgid "General"
-msgstr "Général"
-
-#: src/gui/hotkeyConfig.cpp:273
-msgctxt "hotkey_General"
-msgid "Switch to next crew station"
-msgstr "Switcher sur le poste suivant"
-
-#: src/gui/hotkeyConfig.cpp:274
-msgctxt "hotkey_General"
-msgid "Switch to previous crew station"
-msgstr "Switcher sur le poste précèdent"
-
-#: src/gui/hotkeyConfig.cpp:275
-msgctxt "hotkey_General"
-msgid "Switch to helms station"
-msgstr "Switcher sur le poste Navigation"
-
-#: src/gui/hotkeyConfig.cpp:276
-msgctxt "hotkey_General"
-msgid "Switch to weapons station"
-msgstr "Switcher sur le poste Armement"
-
-#: src/gui/hotkeyConfig.cpp:277
-msgctxt "hotkey_General"
-msgid "Switch to engineering station"
-msgstr "Switcher sur le poste Ingénierie"
-
-#: src/gui/hotkeyConfig.cpp:278
-msgctxt "hotkey_General"
-msgid "Switch to science station"
-msgstr "Switcher sur le poste Science"
-
-#: src/gui/hotkeyConfig.cpp:279
-msgctxt "hotkey_General"
-msgid "Switch to relay station"
-msgstr "Switcher sur le poste Communications"
-
-#: src/gui/hotkeyConfig.cpp:282
-msgctxt "hotkey_MainScreen"
-msgid "View forward"
-msgstr "Vue avant"
-
-#: src/gui/hotkeyConfig.cpp:283
-msgctxt "hotkey_MainScreen"
-msgid "View left"
-msgstr "Vue gauche"
-
-#: src/gui/hotkeyConfig.cpp:284
-msgctxt "hotkey_MainScreen"
-msgid "View right"
-msgstr "Vue droite"
-
-#: src/gui/hotkeyConfig.cpp:285
-msgctxt "hotkey_MainScreen"
-msgid "View backward"
-msgstr "Vue arrière"
-
-#: src/gui/hotkeyConfig.cpp:286
-msgctxt "hotkey_MainScreen"
-msgid "Lock view on weapons target"
-msgstr "Vue verrouillée sur cible Armement"
-
-#: src/gui/hotkeyConfig.cpp:287
-msgctxt "hotkey_MainScreen"
-msgid "View tactical radar"
-msgstr "Vue radar tactique"
-
-#: src/gui/hotkeyConfig.cpp:288
-msgctxt "hotkey_MainScreen"
-msgid "View long-range radar"
-msgstr "Vue radar longue portée"
-
-#: src/gui/hotkeyConfig.cpp:289
-msgctxt "hotkey_MainScreen"
-msgid "Toggle first-person view"
-msgstr "Vue à la 1ère personne"
-
-#: src/gui/hotkeyConfig.cpp:292 src/gui/hotkeyConfig.cpp:293
-#: src/gui/hotkeyConfig.cpp:294 src/gui/hotkeyConfig.cpp:295
-#: src/gui/hotkeyConfig.cpp:296 src/gui/hotkeyConfig.cpp:297
-#: src/gui/hotkeyConfig.cpp:298 src/gui/hotkeyConfig.cpp:299
-#: src/gui/hotkeyConfig.cpp:300 src/gui/hotkeyConfig.cpp:301
-#: src/gui/hotkeyConfig.cpp:302 src/gui/hotkeyConfig.cpp:303
-#: src/gui/hotkeyConfig.cpp:304 src/gui/hotkeyConfig.cpp:305
-#: src/gui/hotkeyConfig.cpp:306 src/gui/hotkeyConfig.cpp:307
-#: src/gui/hotkeyConfig.cpp:308 src/gui/hotkeyConfig.cpp:309
-#: src/gui/hotkeyConfig.cpp:310 src/gui/hotkeyConfig.cpp:311
-#: src/gui/hotkeyConfig.cpp:312 src/gui/hotkeyConfig.cpp:313
-#: src/gui/hotkeyConfig.cpp:314 src/gui/hotkeyConfig.cpp:315
-#: src/gui/hotkeyConfig.cpp:316
-msgctxt "hotkey_menu"
-msgid "Helms"
-msgstr "Navigation"
-
-#: src/gui/hotkeyConfig.cpp:292
-msgctxt "hotkey_Helms"
-msgid "Increase impulse"
-msgstr "Accélérer (moteurs principaux)"
-
-#: src/gui/hotkeyConfig.cpp:293
-msgctxt "hotkey_Helms"
-msgid "Decrease impulse"
-msgstr "Décélérer (moteurs principaux)"
-
-#: src/gui/hotkeyConfig.cpp:294
-msgctxt "hotkey_Helms"
-msgid "Set impulse (joystick)"
-msgstr "Activer les moteurs (joystick)"
-
-#: src/gui/hotkeyConfig.cpp:295
-msgctxt "hotkey_Helms"
-msgid "Zero impulse"
-msgstr "Eteindre les moteurs"
-
-#: src/gui/hotkeyConfig.cpp:296
-msgctxt "hotkey_Helms"
-msgid "Max impulse"
-msgstr "Puissance des moteurs avant max"
-
-#: src/gui/hotkeyConfig.cpp:297
-msgctxt "hotkey_Helms"
-msgid "Max reverse impulse"
-msgstr "Puissance des moteurs arrière max"
-
-#: src/gui/hotkeyConfig.cpp:298
-msgctxt "hotkey_Helms"
-msgid "Turn left"
-msgstr "Tourner à gauche"
-
-#: src/gui/hotkeyConfig.cpp:299
-msgctxt "hotkey_Helms"
-msgid "Turn right"
-msgstr "Tourner à droite"
-
-#: src/gui/hotkeyConfig.cpp:300
-msgctxt "hotkey_Helms"
-msgid "Warp off"
-msgstr "Vitesse lumière Off"
-
-#: src/gui/hotkeyConfig.cpp:301
-msgctxt "hotkey_Helms"
-msgid "Warp 1"
-msgstr "Vitesse lumière niveau 1"
-
-#: src/gui/hotkeyConfig.cpp:302
-msgctxt "hotkey_Helms"
-msgid "Warp 2"
-msgstr "Vitesse lumière niveau 2"
-
-#: src/gui/hotkeyConfig.cpp:303
-msgctxt "hotkey_Helms"
-msgid "Warp 3"
-msgstr "Vitesse lumière niveau 3"
-
-#: src/gui/hotkeyConfig.cpp:304
-msgctxt "hotkey_Helms"
-msgid "Warp 4"
-msgstr "Vitesse lumière niveau 4"
-
-#: src/gui/hotkeyConfig.cpp:305
-msgctxt "hotkey_Helms"
-msgid "Increase Warp"
-msgstr "Accélérer (vitesse lumière)"
-
-#: src/gui/hotkeyConfig.cpp:306
-msgctxt "hotkey_Helms"
-msgid "Decrease Warp"
-msgstr "Décélérer (vitesse lumière)"
-
-#: src/gui/hotkeyConfig.cpp:307
-msgctxt "hotkey_Helms"
-msgid "Dock request/abort/undock"
-msgstr "Amarrer/désamarrer"
-
-#: src/gui/hotkeyConfig.cpp:308
-msgctxt "hotkey_Helms"
-msgid "Initiate docking"
-msgstr "Amarrer"
-
-#: src/gui/hotkeyConfig.cpp:309
-msgctxt "hotkey_Helms"
-msgid "Abort docking"
-msgstr "Annuler amarrage"
-
-#: src/gui/hotkeyConfig.cpp:310
-msgctxt "hotkey_Helms"
-msgid "Undock"
-msgstr "Désamarrer"
-
-#: src/gui/hotkeyConfig.cpp:311
-msgctxt "hotkey_Helms"
-msgid "Increase jump distance"
-msgstr "Augmenter la distance de saut"
-
-#: src/gui/hotkeyConfig.cpp:312
-msgctxt "hotkey_Helms"
-msgid "Decrease jump distance"
-msgstr "Diminuer la distance de saut"
-
-#: src/gui/hotkeyConfig.cpp:313
-msgctxt "hotkey_Helms"
-msgid "Initiate jump"
-msgstr "Activer le saut (téléportation)"
-
-#: src/gui/hotkeyConfig.cpp:314
-msgctxt "hotkey_Helms"
-msgid "Combat boost left"
-msgstr "Manœuvre de combat gauche"
-
-#: src/gui/hotkeyConfig.cpp:315
-msgctxt "hotkey_Helms"
-msgid "Combat boost right"
-msgstr "Manœuvre de combat droite"
-
-#: src/gui/hotkeyConfig.cpp:316
-msgctxt "hotkey_Helms"
-msgid "Combat boost forwards"
-msgstr "Manœuvre de combat avant"
-
-#: src/gui/hotkeyConfig.cpp:319 src/gui/hotkeyConfig.cpp:320
-#: src/gui/hotkeyConfig.cpp:321 src/gui/hotkeyConfig.cpp:322
-#: src/gui/hotkeyConfig.cpp:323 src/gui/hotkeyConfig.cpp:326
-#: src/gui/hotkeyConfig.cpp:327 src/gui/hotkeyConfig.cpp:328
-#: src/gui/hotkeyConfig.cpp:330 src/gui/hotkeyConfig.cpp:331
-#: src/gui/hotkeyConfig.cpp:332 src/gui/hotkeyConfig.cpp:333
-#: src/gui/hotkeyConfig.cpp:334 src/gui/hotkeyConfig.cpp:335
-#: src/gui/hotkeyConfig.cpp:336 src/gui/hotkeyConfig.cpp:337
-#: src/gui/hotkeyConfig.cpp:338 src/gui/hotkeyConfig.cpp:339
-#: src/gui/hotkeyConfig.cpp:340 src/gui/hotkeyConfig.cpp:341
-#: src/gui/hotkeyConfig.cpp:342 src/gui/hotkeyConfig.cpp:343
-#: src/gui/hotkeyConfig.cpp:344 src/gui/hotkeyConfig.cpp:345
-#: src/gui/hotkeyConfig.cpp:346
-msgctxt "hotkey_menu"
-msgid "Weapons"
-msgstr "Armement"
-
-#: src/gui/hotkeyConfig.cpp:319
-msgctxt "hotkey_Weapons"
-msgid "Select homing"
-msgstr "Sélectionner homing"
-
-#: src/gui/hotkeyConfig.cpp:320
-msgctxt "hotkey_Weapons"
-msgid "Select nuke"
-msgstr "Sélectionner nuke"
-
-#: src/gui/hotkeyConfig.cpp:321
-msgctxt "hotkey_Weapons"
-msgid "Select mine"
-msgstr "Sélectionner mine"
-
-#: src/gui/hotkeyConfig.cpp:322
-msgctxt "hotkey_Weapons"
-msgid "Select EMP"
-msgstr "Sélectionner EMP"
-
-#: src/gui/hotkeyConfig.cpp:323
-msgctxt "hotkey_Weapons"
-msgid "Select HVLI"
-msgstr "Sélectionner HVLI"
-
-#: src/gui/hotkeyConfig.cpp:326
-msgctxt "hotkey_Weapons"
-msgid "Load tube {number}"
-msgstr "Charger le tube {number}"
-
-#: src/gui/hotkeyConfig.cpp:327
-msgctxt "hotkey_Weapons"
-msgid "Unload tube {number}"
-msgstr "Décharger le tube {number}"
-
-#: src/gui/hotkeyConfig.cpp:328
-msgctxt "hotkey_Weapons"
-msgid "Fire tube {number}"
-msgstr "Lancer le tube {number}"
-
-#: src/gui/hotkeyConfig.cpp:330
-msgctxt "hotkey_Weapons"
-msgid "Select next hostile target"
-msgstr "Sélectionner la cible hostile suivante"
-
-#: src/gui/hotkeyConfig.cpp:331
-msgctxt "hotkey_Weapons"
-msgid "Select next target (any)"
-msgstr "Sélectionner la cible suivante"
-
-#: src/gui/hotkeyConfig.cpp:332
-msgctxt "hotkey_Weapons"
-msgid "Toggle shields"
-msgstr "Activer/désactiver les boucliers"
-
-#: src/gui/hotkeyConfig.cpp:333
-msgctxt "hotkey_Weapons"
-msgid "Enable shields"
-msgstr "Activer les boucliers"
-
-#: src/gui/hotkeyConfig.cpp:334
-msgctxt "hotkey_Weapons"
-msgid "Disable shields"
-msgstr "Désactiver les boucliers"
-
-#: src/gui/hotkeyConfig.cpp:335
-msgctxt "hotkey_Weapons"
-msgid "Increase shield frequency target"
-msgstr "Augmenter la fréquence des boucliers"
-
-#: src/gui/hotkeyConfig.cpp:336
-msgctxt "hotkey_Weapons"
-msgid "Decrease shield frequency target"
-msgstr "Réduire la fréquence des boucliers"
-
-#: src/gui/hotkeyConfig.cpp:337
-msgctxt "hotkey_Weapons"
-msgid "Start shield calibration"
-msgstr "Démarrer le calibrage des boucliers"
-
-#: src/gui/hotkeyConfig.cpp:338
-msgctxt "hotkey_Weapons"
-msgid "Next beam subsystem target type"
-msgstr "Sous-système ciblé suivant (faisceaux)"
-
-#: src/gui/hotkeyConfig.cpp:339
-msgctxt "hotkey_Weapons"
-msgid "Previous beam subsystem target type"
-msgstr "Sous-système ciblé préc. (faisceaux)"
-
-#: src/gui/hotkeyConfig.cpp:340
-msgctxt "hotkey_Weapons"
-msgid "Increase beam frequency"
-msgstr "Augmenter la fréquence des faisceaux"
-
-#: src/gui/hotkeyConfig.cpp:341
-msgctxt "hotkey_Weapons"
-msgid "Decrease beam frequency"
-msgstr "Réduire la fréquence des faisceaux"
-
-#: src/gui/hotkeyConfig.cpp:342
-msgctxt "hotkey_Weapons"
-msgid "Toggle missile aim lock"
-msgstr "Activer/désact. verrouillage missiles"
-
-#: src/gui/hotkeyConfig.cpp:343
-msgctxt "hotkey_Weapons"
-msgid "Enable missile aim lock"
-msgstr "Activer le verrouillage des missiles"
-
-#: src/gui/hotkeyConfig.cpp:344
-msgctxt "hotkey_Weapons"
-msgid "Disable"
-msgstr "Désactiver le verrouillage des missiles"
-
-#: src/gui/hotkeyConfig.cpp:345
-msgctxt "hotkey_Weapons"
-msgid "Turn missile aim to the left"
-msgstr "Verrouillage missiles vers la gauche"
-
-#: src/gui/hotkeyConfig.cpp:346
-msgctxt "hotkey_Weapons"
-msgid "Turn missile aim to the right"
-msgstr "Verrouillage missiles vers la droite"
-
-#: src/gui/hotkeyConfig.cpp:349 src/gui/hotkeyConfig.cpp:350
-#: src/gui/hotkeyConfig.cpp:353 src/gui/hotkeyConfig.cpp:354
-msgctxt "hotkey_menu"
-msgid "Science"
-msgstr "Science"
-
-#: src/gui/hotkeyConfig.cpp:349
-msgctxt "hotkey_Science"
-msgid "Scan object"
-msgstr "Scanner l'objet"
-
-#: src/gui/hotkeyConfig.cpp:350
-msgctxt "hotkey_Science"
-msgid "Select next scannable object"
-msgstr "Sélectionner l'objet suivant à scanner"
-
-#: src/gui/hotkeyConfig.cpp:353
-msgctxt "hotkey_Science"
-msgid "Scanning parameter {number} increase"
-msgstr "Scan niveau {number} vers la droite"
-
-#: src/gui/hotkeyConfig.cpp:354
-msgctxt "hotkey_Science"
-msgid "Scanning parameter {number} decrease"
-msgstr "Scan niveau {number} vers la gauche"
-
-#: src/gui/hotkeyConfig.cpp:358 src/gui/hotkeyConfig.cpp:359
-#: src/gui/hotkeyConfig.cpp:360 src/gui/hotkeyConfig.cpp:361
-#: src/gui/hotkeyConfig.cpp:362 src/gui/hotkeyConfig.cpp:363
-#: src/gui/hotkeyConfig.cpp:364 src/gui/hotkeyConfig.cpp:365
-#: src/gui/hotkeyConfig.cpp:366 src/gui/hotkeyConfig.cpp:367
-#: src/gui/hotkeyConfig.cpp:368 src/gui/hotkeyConfig.cpp:369
-#: src/gui/hotkeyConfig.cpp:370 src/gui/hotkeyConfig.cpp:371
-#: src/gui/hotkeyConfig.cpp:372 src/gui/hotkeyConfig.cpp:373
-#: src/gui/hotkeyConfig.cpp:374 src/gui/hotkeyConfig.cpp:375
-#: src/gui/hotkeyConfig.cpp:376 src/gui/hotkeyConfig.cpp:377
-#: src/gui/hotkeyConfig.cpp:378 src/gui/hotkeyConfig.cpp:379
-#: src/gui/hotkeyConfig.cpp:380 src/gui/hotkeyConfig.cpp:381
-#: src/gui/hotkeyConfig.cpp:382 src/gui/hotkeyConfig.cpp:383
-#: src/gui/hotkeyConfig.cpp:384 src/gui/hotkeyConfig.cpp:385
-#: src/gui/hotkeyConfig.cpp:386
-msgctxt "hotkey_menu"
-msgid "Engineering"
-msgstr "Ingénierie"
-
-#: src/gui/hotkeyConfig.cpp:358
-msgctxt "hotkey_Engineering"
-msgid "Select reactor system"
-msgstr "Sélectionner le réacteur"
-
-#: src/gui/hotkeyConfig.cpp:359
-msgctxt "hotkey_Engineering"
-msgid "Select beam weapon system"
-msgstr "Sélectionner les faisceaux laser"
-
-#: src/gui/hotkeyConfig.cpp:360
-msgctxt "hotkey_Engineering"
-msgid "Select missile weapon system"
-msgstr "Sélectionner le système de missiles"
-
-#: src/gui/hotkeyConfig.cpp:361
-msgctxt "hotkey_Engineering"
-msgid "Select maneuvering system"
-msgstr "Sélectionner la manoeuvre"
-
-#: src/gui/hotkeyConfig.cpp:362
-msgctxt "hotkey_Engineering"
-msgid "Select impulse system"
-msgstr "Sélectionner les moteurs à impulsion"
-
-#: src/gui/hotkeyConfig.cpp:363
-msgctxt "hotkey_Engineering"
-msgid "Select warp system"
-msgstr "Sélectionner la vitesse lumière"
-
-#: src/gui/hotkeyConfig.cpp:364
-msgctxt "hotkey_Engineering"
-msgid "Select jump drive system"
-msgstr "Sélectionner la téléportation"
-
-#: src/gui/hotkeyConfig.cpp:365
-msgctxt "hotkey_Engineering"
-msgid "Select front shields system"
-msgstr "Sélectionner les boucliers avant"
-
-#: src/gui/hotkeyConfig.cpp:366
-msgctxt "hotkey_Engineering"
-msgid "Select rear shields system"
-msgstr "Sélectionner les boucliers arrière"
-
-#: src/gui/hotkeyConfig.cpp:367
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 0%"
-msgstr "Régler la puissance du système à 0%"
-
-#: src/gui/hotkeyConfig.cpp:368
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 30%"
-msgstr "Régler la puissance du système à 30%"
-
-#: src/gui/hotkeyConfig.cpp:369
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 50%"
-msgstr "Régler la puissance du système à 50%"
-
-#: src/gui/hotkeyConfig.cpp:370
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 100%"
-msgstr "Régler la puissance du système à 100%"
-
-#: src/gui/hotkeyConfig.cpp:371
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 150%"
-msgstr "Régler la puissance du système à 150%"
-
-#: src/gui/hotkeyConfig.cpp:372
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 200%"
-msgstr "Régler la puissance du système à 200%"
-
-#: src/gui/hotkeyConfig.cpp:373
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 250%"
-msgstr "Régler la puissance du système à 250%"
-
-#: src/gui/hotkeyConfig.cpp:374
-msgctxt "hotkey_Engineering"
-msgid "Set system power to 300%"
-msgstr "Régler la puissance du système à 300%"
-
-#: src/gui/hotkeyConfig.cpp:375
-msgctxt "hotkey_Engineering"
-msgid "Increase system power"
-msgstr "Augmenter la puissance du système"
-
-#: src/gui/hotkeyConfig.cpp:376
-msgctxt "hotkey_Engineering"
-msgid "Decrease system power"
-msgstr "Réduire la puissance du système"
-
-#: src/gui/hotkeyConfig.cpp:377
-msgctxt "hotkey_Engineering"
-msgid "Increase system coolant"
-msgstr "Augmenter le liquide de refroidissement"
-
-#: src/gui/hotkeyConfig.cpp:378
-msgctxt "hotkey_Engineering"
-msgid "Decrease system coolant"
-msgstr "Réduire le liquide de refroidissement"
-
-#: src/gui/hotkeyConfig.cpp:379
-msgctxt "hotkey_Engineering"
-msgid "Next repair crew"
-msgstr "Sélectionner le réparateur suivant"
-
-#: src/gui/hotkeyConfig.cpp:380
-msgctxt "hotkey_Engineering"
-msgid "Crew move up"
-msgstr "Déplacer le réparateur en haut"
-
-#: src/gui/hotkeyConfig.cpp:381
-msgctxt "hotkey_Engineering"
-msgid "Crew move down"
-msgstr "Déplacer le réparateur en bas"
-
-#: src/gui/hotkeyConfig.cpp:382
-msgctxt "hotkey_Engineering"
-msgid "Crew move left"
-msgstr "Déplacer le réparateur à gauche"
-
-#: src/gui/hotkeyConfig.cpp:383
-msgctxt "hotkey_Engineering"
-msgid "Crew move right"
-msgstr "Déplacer le réparateur à droite"
-
-#: src/gui/hotkeyConfig.cpp:384
-msgctxt "hotkey_Engineering"
-msgid "Start self-destruct"
-msgstr "Activer l'autodestruction"
-
-#: src/gui/hotkeyConfig.cpp:385
-msgctxt "hotkey_Engineering"
-msgid "Confirm self-destruct"
-msgstr "Confirmer l'autodestruction"
-
-#: src/gui/hotkeyConfig.cpp:386
-msgctxt "hotkey_Engineering"
-msgid "Cancel self-destruct"
-msgstr "Annuler l'autodestruction"
-
-#: src/gui/hotkeyConfig.cpp:391 src/gui/hotkeyConfig.cpp:392
-msgctxt "hotkey_menu"
-msgid "GM"
-msgstr "Maître de jeu"
-
-#: src/gui/hotkeyConfig.cpp:391
-msgctxt "hotkey_GM"
-msgid "Delete"
-msgstr "Supprimer"
-
-#: src/gui/hotkeyConfig.cpp:392
-msgctxt "hotkey_GM"
-msgid "Copy to clipboard"
-msgstr "Copier dans le presse-papier"
-
-#: src/gui/hotkeyConfig.cpp:395 src/gui/hotkeyConfig.cpp:398
-#: src/gui/hotkeyConfig.cpp:399
-msgctxt "hotkey_menu"
-msgid "Various"
-msgstr "Divers"
-
-#: src/gui/hotkeyConfig.cpp:395
-msgctxt "hotkey_various"
-msgid "Show callsigns (spectator)"
-msgstr "Afficher noms des vaisseaux (spectateurs)"
-
-#: src/gui/hotkeyConfig.cpp:398
-msgctxt "hotkey_debug"
-msgid "Show FPS"
-msgstr "Afficher les FPS"
-
-#: src/gui/hotkeyConfig.cpp:399
-msgctxt "hotkey_debug"
-msgid "Show debug timing"
-msgstr "Afficher le graphique de débogage"
-
 #: src/spaceObjects/missiles/missileWeapon.cpp:194
 #: src/spaceObjects/mine.cpp:148
 msgctxt "gm_info"
@@ -2807,27 +2060,27 @@ msgctxt "gm_info"
 msgid "Size"
 msgstr "Taille"
 
-#: src/spaceObjects/spaceship.cpp:1622
+#: src/spaceObjects/spaceship.cpp:1624
 msgctxt "missile"
 msgid "Homing"
 msgstr "Homing"
 
-#: src/spaceObjects/spaceship.cpp:1624
+#: src/spaceObjects/spaceship.cpp:1626
 msgctxt "missile"
 msgid "Nuke"
 msgstr "Nuke"
 
-#: src/spaceObjects/spaceship.cpp:1626
+#: src/spaceObjects/spaceship.cpp:1628
 msgctxt "missile"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/spaceObjects/spaceship.cpp:1628
+#: src/spaceObjects/spaceship.cpp:1630
 msgctxt "missile"
 msgid "EMP"
 msgstr "EMP"
 
-#: src/spaceObjects/spaceship.cpp:1630
+#: src/spaceObjects/spaceship.cpp:1632
 msgctxt "missile"
 msgid "HVLI"
 msgstr "HVLI"
@@ -2942,100 +2195,100 @@ msgctxt "orderscpu"
 msgid "Dock"
 msgstr "À quai"
 
-#: src/spaceObjects/playerSpaceship.cpp:308
+#: src/spaceObjects/playerSpaceship.cpp:309
 msgctxt "alert"
 msgid "RED ALERT"
 msgstr "ALERTE ROUGE"
 
-#: src/spaceObjects/playerSpaceship.cpp:309
+#: src/spaceObjects/playerSpaceship.cpp:310
 msgctxt "alert"
 msgid "YELLOW ALERT"
 msgstr "ALERTE JAUNE"
 
-#: src/spaceObjects/playerSpaceship.cpp:310
+#: src/spaceObjects/playerSpaceship.cpp:311
 msgctxt "alert"
 msgid "Normal"
 msgstr "Normal"
 
-#: src/spaceObjects/playerSpaceship.cpp:431
+#: src/spaceObjects/playerSpaceship.cpp:432
 msgctxt "shiplog"
 msgid "Start of log"
 msgstr "Début du journal de bord :"
 
-#: src/spaceObjects/playerSpaceship.cpp:1098
+#: src/spaceObjects/playerSpaceship.cpp:1099
 msgctxt "shiplog"
 msgid "Hailed by {name}"
 msgstr "Appel provenant de {name}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1152
+#: src/spaceObjects/playerSpaceship.cpp:1153
 msgctxt "shiplog"
 msgid "Communication channel closed by other side"
 msgstr "Communication interrompue de l'extérieur."
 
-#: src/spaceObjects/playerSpaceship.cpp:1162
+#: src/spaceObjects/playerSpaceship.cpp:1163
 msgctxt "shiplog"
 msgid "Hailing from {callsign} stopped"
 msgstr "Appel provenant de {callsign} interrompu."
 
-#: src/spaceObjects/playerSpaceship.cpp:1166
+#: src/spaceObjects/playerSpaceship.cpp:1167
 msgctxt "shiplog"
 msgid "Communication channel closed"
 msgstr "Fin de transmission."
 
-#: src/spaceObjects/playerSpaceship.cpp:1337
-#: src/spaceObjects/playerSpaceship.cpp:1414
+#: src/spaceObjects/playerSpaceship.cpp:1338
+#: src/spaceObjects/playerSpaceship.cpp:1415
 msgctxt "chatdialog"
 msgid "Opened comms with {name}"
 msgstr "Communication établie avec {name}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1338
+#: src/spaceObjects/playerSpaceship.cpp:1339
 msgctxt "shiplog"
 msgid "Hailing: {name}"
 msgstr "Salutations : {name}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1361
 #: src/spaceObjects/playerSpaceship.cpp:1362
+#: src/spaceObjects/playerSpaceship.cpp:1363
 msgctxt "chatdialog"
 msgid "Opened comms to {callsign}"
 msgstr "Communication établie avec {callsign}"
 
-#: src/spaceObjects/playerSpaceship.cpp:1363
 #: src/spaceObjects/playerSpaceship.cpp:1364
+#: src/spaceObjects/playerSpaceship.cpp:1365
 msgctxt "shiplog"
 msgid "Opened communication channel to {callsign}"
 msgstr "Communication établie avec {callsign}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1366
+#: src/spaceObjects/playerSpaceship.cpp:1367
 msgctxt "shiplog"
 msgid "Refused communications from {callsign}"
 msgstr "Communication en provenance de {callsign} refusée."
 
-#: src/spaceObjects/playerSpaceship.cpp:1367
+#: src/spaceObjects/playerSpaceship.cpp:1368
 msgctxt "shiplog"
 msgid "Refused communications to {callsign}"
 msgstr "Communication vers {callsign} refusée."
 
-#: src/spaceObjects/playerSpaceship.cpp:1376
+#: src/spaceObjects/playerSpaceship.cpp:1377
 msgctxt "shiplog"
 msgid "Hail suddenly went dead."
 msgstr "Communication brusquement interrompue."
 
-#: src/spaceObjects/playerSpaceship.cpp:1379
+#: src/spaceObjects/playerSpaceship.cpp:1380
 msgctxt "shiplog"
 msgid "Accepted hail from {callsign}"
 msgstr "Appel provenant de {callsign} accepté."
 
-#: src/spaceObjects/playerSpaceship.cpp:1399
+#: src/spaceObjects/playerSpaceship.cpp:1400
 msgctxt "shiplog"
 msgid "Refused hail from {callsign}"
 msgstr "Appel provenant de {callsign} refusé."
 
-#: src/spaceObjects/playerSpaceship.cpp:1413
+#: src/spaceObjects/playerSpaceship.cpp:1414
 msgctxt "shiplog"
 msgid "Opened communication channel to {name}"
 msgstr "Canal de communication ouvert avec {name}."
 
-#: src/spaceObjects/playerSpaceship.cpp:1416
+#: src/spaceObjects/playerSpaceship.cpp:1417
 msgctxt "shiplog"
 msgid "Refused hail from {name}"
 msgstr "Appel provenant de {name} refusé."
@@ -3079,3 +2332,803 @@ msgstr "Gauche"
 msgctxt "tube"
 msgid "Rear"
 msgstr "Arrière"
+
+#: src/gui/hotkeyConfig.cpp:31
+msgctxt "hotkey_menu"
+msgid "Cinematic View"
+msgstr "Vue cinématique"
+
+#: src/gui/hotkeyConfig.cpp:32
+msgctxt "hotkey_Cinematic"
+msgid "Toggle UI"
+msgstr "Activer/désactiver boutons"
+
+#: src/gui/hotkeyConfig.cpp:33
+msgctxt "hotkey_Cinematic"
+msgid "Camera lock"
+msgstr "Verrouillage caméra"
+
+#: src/gui/hotkeyConfig.cpp:34
+#, fuzzy
+msgctxt "hotkey_Cinematic"
+msgid "Camera cycle"
+msgstr "Verrouillage caméra"
+
+#: src/gui/hotkeyConfig.cpp:35
+msgctxt "hotkey_Cinematic"
+msgid "Cycle previous player ship"
+msgstr "Basculer vaisseau joueur précédent"
+
+#: src/gui/hotkeyConfig.cpp:36
+msgctxt "hotkey_Cinematic"
+msgid "Cycle next player ship"
+msgstr "Basculer vaisseau joueur suivant"
+
+#: src/gui/hotkeyConfig.cpp:37
+msgctxt "hotkey_Cinematic"
+msgid "Move forward"
+msgstr "Avancer"
+
+#: src/gui/hotkeyConfig.cpp:38
+msgctxt "hotkey_Cinematic"
+msgid "Move backward"
+msgstr "Reculer"
+
+#: src/gui/hotkeyConfig.cpp:39
+msgctxt "hotkey_Cinematic"
+msgid "Strafe left"
+msgstr "Straffer à gauche"
+
+#: src/gui/hotkeyConfig.cpp:40
+msgctxt "hotkey_Cinematic"
+msgid "Strafe right"
+msgstr "Straffer à droite"
+
+#: src/gui/hotkeyConfig.cpp:41
+msgctxt "hotkey_Cinematic"
+msgid "Move up"
+msgstr "Monter"
+
+#: src/gui/hotkeyConfig.cpp:42
+msgctxt "hotkey_Cinematic"
+msgid "Move down"
+msgstr "Descendre"
+
+#: src/gui/hotkeyConfig.cpp:43
+msgctxt "hotkey_Cinematic"
+msgid "Rotate left"
+msgstr "Pivoter à gauche"
+
+#: src/gui/hotkeyConfig.cpp:44
+msgctxt "hotkey_Cinematic"
+msgid "Rotate right"
+msgstr "Pivoter à droite"
+
+#: src/gui/hotkeyConfig.cpp:45
+msgctxt "hotkey_Cinematic"
+msgid "Tilt down"
+msgstr "Incliner vers le bas"
+
+#: src/gui/hotkeyConfig.cpp:46
+msgctxt "hotkey_Cinematic"
+msgid "Tilt up"
+msgstr "Incliner vers le haut"
+
+#: src/gui/hotkeyConfig.cpp:62
+msgctxt "hotkey_menu"
+msgid "Top-down View"
+msgstr "Vue de haut en 3D"
+
+#: src/gui/hotkeyConfig.cpp:63
+msgctxt "hotkey_Topdown"
+msgid "Toggle UI"
+msgstr "Activer/désactiver boutons"
+
+#: src/gui/hotkeyConfig.cpp:64
+msgctxt "hotkey_Topdown"
+msgid "Camera lock"
+msgstr "Verrouillage caméra"
+
+#: src/gui/hotkeyConfig.cpp:65
+msgctxt "hotkey_Topdown"
+msgid "Cycle previous player ship"
+msgstr "Basculer vaisseau joueur précédent"
+
+#: src/gui/hotkeyConfig.cpp:66
+msgctxt "hotkey_Topdown"
+msgid "Cycle next player ship"
+msgstr "Basculer vaisseau joueur suivant"
+
+#: src/gui/hotkeyConfig.cpp:67
+msgctxt "hotkey_Topdown"
+msgid "Pan up"
+msgstr "Défiler vers le haut"
+
+#: src/gui/hotkeyConfig.cpp:68
+msgctxt "hotkey_Topdown"
+msgid "Pan down"
+msgstr "Défiler vers le bas"
+
+#: src/gui/hotkeyConfig.cpp:69
+msgctxt "hotkey_Topdown"
+msgid "Pan left"
+msgstr "Défiler vers la gauche"
+
+#: src/gui/hotkeyConfig.cpp:70
+msgctxt "hotkey_Topdown"
+msgid "Pan right"
+msgstr "Défiler vers la droite"
+
+#: src/gui/hotkeyConfig.cpp:277 src/gui/hotkeyConfig.cpp:278
+#: src/gui/hotkeyConfig.cpp:279 src/gui/hotkeyConfig.cpp:280
+#: src/gui/hotkeyConfig.cpp:281 src/gui/hotkeyConfig.cpp:282
+#: src/gui/hotkeyConfig.cpp:283 src/gui/hotkeyConfig.cpp:284
+msgctxt "hotkey_menu"
+msgid "Basic"
+msgstr "Basique"
+
+#: src/gui/hotkeyConfig.cpp:277
+msgctxt "hotkey_Basic"
+msgid "Pause game"
+msgstr "Mettre le jeu en pause"
+
+#: src/gui/hotkeyConfig.cpp:278
+msgctxt "hotkey_Basic"
+msgid "Show in-game help"
+msgstr "Afficher l'aide en jeu"
+
+#: src/gui/hotkeyConfig.cpp:279
+msgctxt "hotkey_Basic"
+msgid "Return to ship options menu"
+msgstr "Retourner au menu vaisseau/postes"
+
+#: src/gui/hotkeyConfig.cpp:280
+msgctxt "hotkey_Basic"
+msgid "Zoom in on zoomable stations"
+msgstr "Zoomer sur les stations zoomables"
+
+#: src/gui/hotkeyConfig.cpp:281
+msgctxt "hotkey_Basic"
+msgid "Zoom out on zoomable stations"
+msgstr "Dézoomer sur les stations zoomables"
+
+#: src/gui/hotkeyConfig.cpp:282
+msgctxt "hotkey_Basic"
+msgid "Broadcast voice chat to server"
+msgstr "Diffuser le chat vocal sur le serveur"
+
+#: src/gui/hotkeyConfig.cpp:283
+msgctxt "hotkey_Basic"
+msgid "Broadcast voice chat to ship"
+msgstr "Diffuser le chat vocal sur le navire"
+
+#: src/gui/hotkeyConfig.cpp:284
+#, fuzzy
+msgctxt "hotkey_Basic"
+msgid "Fullscreen toggle"
+msgstr "Activer plein écran"
+
+#: src/gui/hotkeyConfig.cpp:287 src/gui/hotkeyConfig.cpp:288
+#: src/gui/hotkeyConfig.cpp:289 src/gui/hotkeyConfig.cpp:290
+#: src/gui/hotkeyConfig.cpp:291 src/gui/hotkeyConfig.cpp:292
+#: src/gui/hotkeyConfig.cpp:293
+msgctxt "hotkey_menu"
+msgid "General"
+msgstr "Général"
+
+#: src/gui/hotkeyConfig.cpp:287
+msgctxt "hotkey_General"
+msgid "Switch to next crew station"
+msgstr "Switcher sur le poste suivant"
+
+#: src/gui/hotkeyConfig.cpp:288
+msgctxt "hotkey_General"
+msgid "Switch to previous crew station"
+msgstr "Switcher sur le poste précèdent"
+
+#: src/gui/hotkeyConfig.cpp:289
+msgctxt "hotkey_General"
+msgid "Switch to helms station"
+msgstr "Switcher sur le poste Navigation"
+
+#: src/gui/hotkeyConfig.cpp:290
+msgctxt "hotkey_General"
+msgid "Switch to weapons station"
+msgstr "Switcher sur le poste Armement"
+
+#: src/gui/hotkeyConfig.cpp:291
+msgctxt "hotkey_General"
+msgid "Switch to engineering station"
+msgstr "Switcher sur le poste Ingénierie"
+
+#: src/gui/hotkeyConfig.cpp:292
+msgctxt "hotkey_General"
+msgid "Switch to science station"
+msgstr "Switcher sur le poste Science"
+
+#: src/gui/hotkeyConfig.cpp:293
+msgctxt "hotkey_General"
+msgid "Switch to relay station"
+msgstr "Switcher sur le poste Communications"
+
+#: src/gui/hotkeyConfig.cpp:296
+msgctxt "hotkey_MainScreen"
+msgid "View forward"
+msgstr "Vue avant"
+
+#: src/gui/hotkeyConfig.cpp:297
+msgctxt "hotkey_MainScreen"
+msgid "View left"
+msgstr "Vue gauche"
+
+#: src/gui/hotkeyConfig.cpp:298
+msgctxt "hotkey_MainScreen"
+msgid "View right"
+msgstr "Vue droite"
+
+#: src/gui/hotkeyConfig.cpp:299
+msgctxt "hotkey_MainScreen"
+msgid "View backward"
+msgstr "Vue arrière"
+
+#: src/gui/hotkeyConfig.cpp:300
+msgctxt "hotkey_MainScreen"
+msgid "Lock view on weapons target"
+msgstr "Vue verrouillée sur cible Armement"
+
+#: src/gui/hotkeyConfig.cpp:301
+msgctxt "hotkey_MainScreen"
+msgid "View tactical radar"
+msgstr "Vue radar tactique"
+
+#: src/gui/hotkeyConfig.cpp:302
+msgctxt "hotkey_MainScreen"
+msgid "View long-range radar"
+msgstr "Vue radar longue portée"
+
+#: src/gui/hotkeyConfig.cpp:303
+msgctxt "hotkey_MainScreen"
+msgid "Toggle first-person view"
+msgstr "Vue à la 1ère personne"
+
+#: src/gui/hotkeyConfig.cpp:306 src/gui/hotkeyConfig.cpp:307
+#: src/gui/hotkeyConfig.cpp:308 src/gui/hotkeyConfig.cpp:309
+#: src/gui/hotkeyConfig.cpp:310 src/gui/hotkeyConfig.cpp:311
+#: src/gui/hotkeyConfig.cpp:312 src/gui/hotkeyConfig.cpp:313
+#: src/gui/hotkeyConfig.cpp:314 src/gui/hotkeyConfig.cpp:315
+#: src/gui/hotkeyConfig.cpp:316 src/gui/hotkeyConfig.cpp:317
+#: src/gui/hotkeyConfig.cpp:318 src/gui/hotkeyConfig.cpp:319
+#: src/gui/hotkeyConfig.cpp:320 src/gui/hotkeyConfig.cpp:321
+#: src/gui/hotkeyConfig.cpp:322 src/gui/hotkeyConfig.cpp:323
+#: src/gui/hotkeyConfig.cpp:324 src/gui/hotkeyConfig.cpp:325
+#: src/gui/hotkeyConfig.cpp:326 src/gui/hotkeyConfig.cpp:327
+#: src/gui/hotkeyConfig.cpp:328 src/gui/hotkeyConfig.cpp:329
+#: src/gui/hotkeyConfig.cpp:330
+msgctxt "hotkey_menu"
+msgid "Helms"
+msgstr "Navigation"
+
+#: src/gui/hotkeyConfig.cpp:306
+msgctxt "hotkey_Helms"
+msgid "Increase impulse"
+msgstr "Accélérer (moteurs principaux)"
+
+#: src/gui/hotkeyConfig.cpp:307
+msgctxt "hotkey_Helms"
+msgid "Decrease impulse"
+msgstr "Décélérer (moteurs principaux)"
+
+#: src/gui/hotkeyConfig.cpp:308
+msgctxt "hotkey_Helms"
+msgid "Set impulse (joystick)"
+msgstr "Activer les moteurs (joystick)"
+
+#: src/gui/hotkeyConfig.cpp:309
+msgctxt "hotkey_Helms"
+msgid "Zero impulse"
+msgstr "Eteindre les moteurs"
+
+#: src/gui/hotkeyConfig.cpp:310
+msgctxt "hotkey_Helms"
+msgid "Max impulse"
+msgstr "Puissance des moteurs avant max"
+
+#: src/gui/hotkeyConfig.cpp:311
+msgctxt "hotkey_Helms"
+msgid "Max reverse impulse"
+msgstr "Puissance des moteurs arrière max"
+
+#: src/gui/hotkeyConfig.cpp:312
+msgctxt "hotkey_Helms"
+msgid "Turn left"
+msgstr "Tourner à gauche"
+
+#: src/gui/hotkeyConfig.cpp:313
+msgctxt "hotkey_Helms"
+msgid "Turn right"
+msgstr "Tourner à droite"
+
+#: src/gui/hotkeyConfig.cpp:314
+msgctxt "hotkey_Helms"
+msgid "Warp off"
+msgstr "Vitesse lumière Off"
+
+#: src/gui/hotkeyConfig.cpp:315
+msgctxt "hotkey_Helms"
+msgid "Warp 1"
+msgstr "Vitesse lumière niveau 1"
+
+#: src/gui/hotkeyConfig.cpp:316
+msgctxt "hotkey_Helms"
+msgid "Warp 2"
+msgstr "Vitesse lumière niveau 2"
+
+#: src/gui/hotkeyConfig.cpp:317
+msgctxt "hotkey_Helms"
+msgid "Warp 3"
+msgstr "Vitesse lumière niveau 3"
+
+#: src/gui/hotkeyConfig.cpp:318
+msgctxt "hotkey_Helms"
+msgid "Warp 4"
+msgstr "Vitesse lumière niveau 4"
+
+#: src/gui/hotkeyConfig.cpp:319
+msgctxt "hotkey_Helms"
+msgid "Increase Warp"
+msgstr "Accélérer (vitesse lumière)"
+
+#: src/gui/hotkeyConfig.cpp:320
+msgctxt "hotkey_Helms"
+msgid "Decrease Warp"
+msgstr "Décélérer (vitesse lumière)"
+
+#: src/gui/hotkeyConfig.cpp:321
+msgctxt "hotkey_Helms"
+msgid "Dock request/abort/undock"
+msgstr "Amarrer/désamarrer"
+
+#: src/gui/hotkeyConfig.cpp:322
+msgctxt "hotkey_Helms"
+msgid "Initiate docking"
+msgstr "Amarrer"
+
+#: src/gui/hotkeyConfig.cpp:323
+msgctxt "hotkey_Helms"
+msgid "Abort docking"
+msgstr "Annuler amarrage"
+
+#: src/gui/hotkeyConfig.cpp:324
+msgctxt "hotkey_Helms"
+msgid "Undock"
+msgstr "Désamarrer"
+
+#: src/gui/hotkeyConfig.cpp:325
+msgctxt "hotkey_Helms"
+msgid "Increase jump distance"
+msgstr "Augmenter la distance de saut"
+
+#: src/gui/hotkeyConfig.cpp:326
+msgctxt "hotkey_Helms"
+msgid "Decrease jump distance"
+msgstr "Diminuer la distance de saut"
+
+#: src/gui/hotkeyConfig.cpp:327
+msgctxt "hotkey_Helms"
+msgid "Initiate jump"
+msgstr "Activer le saut (téléportation)"
+
+#: src/gui/hotkeyConfig.cpp:328
+msgctxt "hotkey_Helms"
+msgid "Combat boost left"
+msgstr "Manœuvre de combat gauche"
+
+#: src/gui/hotkeyConfig.cpp:329
+msgctxt "hotkey_Helms"
+msgid "Combat boost right"
+msgstr "Manœuvre de combat droite"
+
+#: src/gui/hotkeyConfig.cpp:330
+msgctxt "hotkey_Helms"
+msgid "Combat boost forwards"
+msgstr "Manœuvre de combat avant"
+
+#: src/gui/hotkeyConfig.cpp:333 src/gui/hotkeyConfig.cpp:334
+#: src/gui/hotkeyConfig.cpp:335 src/gui/hotkeyConfig.cpp:336
+#: src/gui/hotkeyConfig.cpp:337 src/gui/hotkeyConfig.cpp:340
+#: src/gui/hotkeyConfig.cpp:341 src/gui/hotkeyConfig.cpp:342
+#: src/gui/hotkeyConfig.cpp:344 src/gui/hotkeyConfig.cpp:345
+#: src/gui/hotkeyConfig.cpp:346 src/gui/hotkeyConfig.cpp:347
+#: src/gui/hotkeyConfig.cpp:348 src/gui/hotkeyConfig.cpp:349
+#: src/gui/hotkeyConfig.cpp:350 src/gui/hotkeyConfig.cpp:351
+#: src/gui/hotkeyConfig.cpp:352 src/gui/hotkeyConfig.cpp:353
+#: src/gui/hotkeyConfig.cpp:354 src/gui/hotkeyConfig.cpp:355
+#: src/gui/hotkeyConfig.cpp:356 src/gui/hotkeyConfig.cpp:357
+#: src/gui/hotkeyConfig.cpp:358 src/gui/hotkeyConfig.cpp:359
+#: src/gui/hotkeyConfig.cpp:360
+msgctxt "hotkey_menu"
+msgid "Weapons"
+msgstr "Armement"
+
+#: src/gui/hotkeyConfig.cpp:333
+msgctxt "hotkey_Weapons"
+msgid "Select homing"
+msgstr "Sélectionner homing"
+
+#: src/gui/hotkeyConfig.cpp:334
+msgctxt "hotkey_Weapons"
+msgid "Select nuke"
+msgstr "Sélectionner nuke"
+
+#: src/gui/hotkeyConfig.cpp:335
+msgctxt "hotkey_Weapons"
+msgid "Select mine"
+msgstr "Sélectionner mine"
+
+#: src/gui/hotkeyConfig.cpp:336
+msgctxt "hotkey_Weapons"
+msgid "Select EMP"
+msgstr "Sélectionner EMP"
+
+#: src/gui/hotkeyConfig.cpp:337
+msgctxt "hotkey_Weapons"
+msgid "Select HVLI"
+msgstr "Sélectionner HVLI"
+
+#: src/gui/hotkeyConfig.cpp:340
+msgctxt "hotkey_Weapons"
+msgid "Load tube {number}"
+msgstr "Charger le tube {number}"
+
+#: src/gui/hotkeyConfig.cpp:341
+msgctxt "hotkey_Weapons"
+msgid "Unload tube {number}"
+msgstr "Décharger le tube {number}"
+
+#: src/gui/hotkeyConfig.cpp:342
+msgctxt "hotkey_Weapons"
+msgid "Fire tube {number}"
+msgstr "Lancer le tube {number}"
+
+#: src/gui/hotkeyConfig.cpp:344
+msgctxt "hotkey_Weapons"
+msgid "Select next hostile target"
+msgstr "Sélectionner la cible hostile suivante"
+
+#: src/gui/hotkeyConfig.cpp:345
+msgctxt "hotkey_Weapons"
+msgid "Select next target (any)"
+msgstr "Sélectionner la cible suivante"
+
+#: src/gui/hotkeyConfig.cpp:346
+msgctxt "hotkey_Weapons"
+msgid "Toggle shields"
+msgstr "Activer/désactiver les boucliers"
+
+#: src/gui/hotkeyConfig.cpp:347
+msgctxt "hotkey_Weapons"
+msgid "Enable shields"
+msgstr "Activer les boucliers"
+
+#: src/gui/hotkeyConfig.cpp:348
+msgctxt "hotkey_Weapons"
+msgid "Disable shields"
+msgstr "Désactiver les boucliers"
+
+#: src/gui/hotkeyConfig.cpp:349
+msgctxt "hotkey_Weapons"
+msgid "Increase shield frequency target"
+msgstr "Augmenter la fréquence des boucliers"
+
+#: src/gui/hotkeyConfig.cpp:350
+msgctxt "hotkey_Weapons"
+msgid "Decrease shield frequency target"
+msgstr "Réduire la fréquence des boucliers"
+
+#: src/gui/hotkeyConfig.cpp:351
+msgctxt "hotkey_Weapons"
+msgid "Start shield calibration"
+msgstr "Démarrer le calibrage des boucliers"
+
+#: src/gui/hotkeyConfig.cpp:352
+msgctxt "hotkey_Weapons"
+msgid "Next beam subsystem target type"
+msgstr "Sous-système ciblé suivant (faisceaux)"
+
+#: src/gui/hotkeyConfig.cpp:353
+msgctxt "hotkey_Weapons"
+msgid "Previous beam subsystem target type"
+msgstr "Sous-système ciblé préc. (faisceaux)"
+
+#: src/gui/hotkeyConfig.cpp:354
+msgctxt "hotkey_Weapons"
+msgid "Increase beam frequency"
+msgstr "Augmenter la fréquence des faisceaux"
+
+#: src/gui/hotkeyConfig.cpp:355
+msgctxt "hotkey_Weapons"
+msgid "Decrease beam frequency"
+msgstr "Réduire la fréquence des faisceaux"
+
+#: src/gui/hotkeyConfig.cpp:356
+msgctxt "hotkey_Weapons"
+msgid "Toggle missile aim lock"
+msgstr "Activer/désact. verrouillage missiles"
+
+#: src/gui/hotkeyConfig.cpp:357
+msgctxt "hotkey_Weapons"
+msgid "Enable missile aim lock"
+msgstr "Activer le verrouillage des missiles"
+
+#: src/gui/hotkeyConfig.cpp:358
+msgctxt "hotkey_Weapons"
+msgid "Disable"
+msgstr "Désactiver le verrouillage des missiles"
+
+#: src/gui/hotkeyConfig.cpp:359
+msgctxt "hotkey_Weapons"
+msgid "Turn missile aim to the left"
+msgstr "Verrouillage missiles vers la gauche"
+
+#: src/gui/hotkeyConfig.cpp:360
+msgctxt "hotkey_Weapons"
+msgid "Turn missile aim to the right"
+msgstr "Verrouillage missiles vers la droite"
+
+#: src/gui/hotkeyConfig.cpp:363 src/gui/hotkeyConfig.cpp:364
+#: src/gui/hotkeyConfig.cpp:367 src/gui/hotkeyConfig.cpp:368
+#: src/gui/hotkeyConfig.cpp:369
+msgctxt "hotkey_menu"
+msgid "Science"
+msgstr "Science"
+
+#: src/gui/hotkeyConfig.cpp:363
+msgctxt "hotkey_Science"
+msgid "Scan object"
+msgstr "Scanner l'objet"
+
+#: src/gui/hotkeyConfig.cpp:364
+msgctxt "hotkey_Science"
+msgid "Select next scannable object"
+msgstr "Sélectionner l'objet suivant à scanner"
+
+#: src/gui/hotkeyConfig.cpp:367
+msgctxt "hotkey_Science"
+msgid "Scanning parameter {number} increase"
+msgstr "Scan niveau {number} vers la droite"
+
+#: src/gui/hotkeyConfig.cpp:368
+msgctxt "hotkey_Science"
+msgid "Scanning parameter {number} decrease"
+msgstr "Scan niveau {number} vers la gauche"
+
+#: src/gui/hotkeyConfig.cpp:369
+#, fuzzy
+msgctxt "hotkey_Science"
+msgid "Scanning parameter set {number}"
+msgstr "Scan niveau {number} vers la droite"
+
+#: src/gui/hotkeyConfig.cpp:373 src/gui/hotkeyConfig.cpp:374
+#: src/gui/hotkeyConfig.cpp:375 src/gui/hotkeyConfig.cpp:376
+#: src/gui/hotkeyConfig.cpp:377 src/gui/hotkeyConfig.cpp:378
+#: src/gui/hotkeyConfig.cpp:379 src/gui/hotkeyConfig.cpp:380
+#: src/gui/hotkeyConfig.cpp:381 src/gui/hotkeyConfig.cpp:382
+#: src/gui/hotkeyConfig.cpp:383 src/gui/hotkeyConfig.cpp:384
+#: src/gui/hotkeyConfig.cpp:385 src/gui/hotkeyConfig.cpp:386
+#: src/gui/hotkeyConfig.cpp:387 src/gui/hotkeyConfig.cpp:388
+#: src/gui/hotkeyConfig.cpp:389 src/gui/hotkeyConfig.cpp:390
+#: src/gui/hotkeyConfig.cpp:391 src/gui/hotkeyConfig.cpp:392
+#: src/gui/hotkeyConfig.cpp:393 src/gui/hotkeyConfig.cpp:394
+#: src/gui/hotkeyConfig.cpp:395 src/gui/hotkeyConfig.cpp:396
+#: src/gui/hotkeyConfig.cpp:397 src/gui/hotkeyConfig.cpp:398
+#: src/gui/hotkeyConfig.cpp:399 src/gui/hotkeyConfig.cpp:400
+#: src/gui/hotkeyConfig.cpp:401
+msgctxt "hotkey_menu"
+msgid "Engineering"
+msgstr "Ingénierie"
+
+#: src/gui/hotkeyConfig.cpp:373
+msgctxt "hotkey_Engineering"
+msgid "Select reactor system"
+msgstr "Sélectionner le réacteur"
+
+#: src/gui/hotkeyConfig.cpp:374
+msgctxt "hotkey_Engineering"
+msgid "Select beam weapon system"
+msgstr "Sélectionner les faisceaux laser"
+
+#: src/gui/hotkeyConfig.cpp:375
+msgctxt "hotkey_Engineering"
+msgid "Select missile weapon system"
+msgstr "Sélectionner le système de missiles"
+
+#: src/gui/hotkeyConfig.cpp:376
+msgctxt "hotkey_Engineering"
+msgid "Select maneuvering system"
+msgstr "Sélectionner la manoeuvre"
+
+#: src/gui/hotkeyConfig.cpp:377
+msgctxt "hotkey_Engineering"
+msgid "Select impulse system"
+msgstr "Sélectionner les moteurs à impulsion"
+
+#: src/gui/hotkeyConfig.cpp:378
+msgctxt "hotkey_Engineering"
+msgid "Select warp system"
+msgstr "Sélectionner la vitesse lumière"
+
+#: src/gui/hotkeyConfig.cpp:379
+msgctxt "hotkey_Engineering"
+msgid "Select jump drive system"
+msgstr "Sélectionner la téléportation"
+
+#: src/gui/hotkeyConfig.cpp:380
+msgctxt "hotkey_Engineering"
+msgid "Select front shields system"
+msgstr "Sélectionner les boucliers avant"
+
+#: src/gui/hotkeyConfig.cpp:381
+msgctxt "hotkey_Engineering"
+msgid "Select rear shields system"
+msgstr "Sélectionner les boucliers arrière"
+
+#: src/gui/hotkeyConfig.cpp:382
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 0%"
+msgstr "Régler la puissance du système à 0%"
+
+#: src/gui/hotkeyConfig.cpp:383
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 30%"
+msgstr "Régler la puissance du système à 30%"
+
+#: src/gui/hotkeyConfig.cpp:384
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 50%"
+msgstr "Régler la puissance du système à 50%"
+
+#: src/gui/hotkeyConfig.cpp:385
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 100%"
+msgstr "Régler la puissance du système à 100%"
+
+#: src/gui/hotkeyConfig.cpp:386
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 150%"
+msgstr "Régler la puissance du système à 150%"
+
+#: src/gui/hotkeyConfig.cpp:387
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 200%"
+msgstr "Régler la puissance du système à 200%"
+
+#: src/gui/hotkeyConfig.cpp:388
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 250%"
+msgstr "Régler la puissance du système à 250%"
+
+#: src/gui/hotkeyConfig.cpp:389
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 300%"
+msgstr "Régler la puissance du système à 300%"
+
+#: src/gui/hotkeyConfig.cpp:390
+msgctxt "hotkey_Engineering"
+msgid "Increase system power"
+msgstr "Augmenter la puissance du système"
+
+#: src/gui/hotkeyConfig.cpp:391
+msgctxt "hotkey_Engineering"
+msgid "Decrease system power"
+msgstr "Réduire la puissance du système"
+
+#: src/gui/hotkeyConfig.cpp:392
+msgctxt "hotkey_Engineering"
+msgid "Increase system coolant"
+msgstr "Augmenter le liquide de refroidissement"
+
+#: src/gui/hotkeyConfig.cpp:393
+msgctxt "hotkey_Engineering"
+msgid "Decrease system coolant"
+msgstr "Réduire le liquide de refroidissement"
+
+#: src/gui/hotkeyConfig.cpp:394
+msgctxt "hotkey_Engineering"
+msgid "Next repair crew"
+msgstr "Sélectionner le réparateur suivant"
+
+#: src/gui/hotkeyConfig.cpp:395
+msgctxt "hotkey_Engineering"
+msgid "Crew move up"
+msgstr "Déplacer le réparateur en haut"
+
+#: src/gui/hotkeyConfig.cpp:396
+msgctxt "hotkey_Engineering"
+msgid "Crew move down"
+msgstr "Déplacer le réparateur en bas"
+
+#: src/gui/hotkeyConfig.cpp:397
+msgctxt "hotkey_Engineering"
+msgid "Crew move left"
+msgstr "Déplacer le réparateur à gauche"
+
+#: src/gui/hotkeyConfig.cpp:398
+msgctxt "hotkey_Engineering"
+msgid "Crew move right"
+msgstr "Déplacer le réparateur à droite"
+
+#: src/gui/hotkeyConfig.cpp:399
+msgctxt "hotkey_Engineering"
+msgid "Start self-destruct"
+msgstr "Activer l'autodestruction"
+
+#: src/gui/hotkeyConfig.cpp:400
+msgctxt "hotkey_Engineering"
+msgid "Confirm self-destruct"
+msgstr "Confirmer l'autodestruction"
+
+#: src/gui/hotkeyConfig.cpp:401
+msgctxt "hotkey_Engineering"
+msgid "Cancel self-destruct"
+msgstr "Annuler l'autodestruction"
+
+#: src/gui/hotkeyConfig.cpp:403 src/gui/hotkeyConfig.cpp:404
+#: src/gui/hotkeyConfig.cpp:405
+#, fuzzy
+msgctxt "hotkey_menu"
+msgid "Relay"
+msgstr "Communications"
+
+#: src/gui/hotkeyConfig.cpp:403
+#, fuzzy
+msgctxt "hotkey_Engineering"
+msgid "Alert level: Normal"
+msgstr "Niveau d'alerte"
+
+#: src/gui/hotkeyConfig.cpp:404
+#, fuzzy
+msgctxt "hotkey_Engineering"
+msgid "Alert level: Yellow"
+msgstr "Niveau d'alerte"
+
+#: src/gui/hotkeyConfig.cpp:405
+#, fuzzy
+msgctxt "hotkey_Engineering"
+msgid "Alert level: Red"
+msgstr "Niveau d'alerte"
+
+#: src/gui/hotkeyConfig.cpp:410 src/gui/hotkeyConfig.cpp:411
+msgctxt "hotkey_menu"
+msgid "GM"
+msgstr "Maître de jeu"
+
+#: src/gui/hotkeyConfig.cpp:410
+msgctxt "hotkey_GM"
+msgid "Delete"
+msgstr "Supprimer"
+
+#: src/gui/hotkeyConfig.cpp:411
+msgctxt "hotkey_GM"
+msgid "Copy to clipboard"
+msgstr "Copier dans le presse-papier"
+
+#: src/gui/hotkeyConfig.cpp:414 src/gui/hotkeyConfig.cpp:417
+#: src/gui/hotkeyConfig.cpp:418
+msgctxt "hotkey_menu"
+msgid "Various"
+msgstr "Divers"
+
+#: src/gui/hotkeyConfig.cpp:414
+msgctxt "hotkey_various"
+msgid "Show callsigns (spectator)"
+msgstr "Afficher noms des vaisseaux (spectateurs)"
+
+#: src/gui/hotkeyConfig.cpp:417
+msgctxt "hotkey_debug"
+msgid "Show FPS"
+msgstr "Afficher les FPS"
+
+#: src/gui/hotkeyConfig.cpp:418
+msgctxt "hotkey_debug"
+msgid "Show debug timing"
+msgstr "Afficher le graphique de débogage"

@@ -647,7 +647,7 @@ if(PYTHONINTERP_FOUND)
 endif()
 
 add_custom_target(update_locale
-    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -d resources/locale/main.en ${SOURCES}
+    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
     COMMAND python3 update_locale.py
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
