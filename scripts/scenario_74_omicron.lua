@@ -3409,13 +3409,13 @@ function handleDockedState()
 						if comms_source.medical_station_upgrade == "impulse" then
 							comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.25)
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = "We also upgraded your impulse engines."
+							upgrade_msg = _("medical-comms","We also upgraded your impulse engines.")
 							if medical_message_diagnostic then print("impulse upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "transit" then
 							comms_source.rapid_return_transit = "ready"
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = string.format("The technicians are standing by to transport you back to %s.",station_regional_hq:getCallSign())
+							upgrade_msg = string.format(_("medical-comms","The technicians are standing by to transport you back to %s."),station_regional_hq:getCallSign())
 							if medical_message_diagnostic then print("transit upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "beam" then
@@ -3430,7 +3430,7 @@ function handleDockedState()
 								bi = bi + 1
 							until(comms_source:getBeamWeaponRange(bi) < 1)
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = "We also upgrded the damage your beams inflict."
+							upgrade_msg = _("medical-comms","We also upgrded the damage your beams inflict.")
 							if medical_message_diagnostic then print("beam upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "missile" then
@@ -3440,7 +3440,7 @@ function handleDockedState()
 							comms_source:setWeaponStorage("Mine",comms_source:getWeaponStorageMax("Mine"))
 							comms_source:setWeaponStorage("HVLI",comms_source:getWeaponStorageMax("HVLI"))
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = "We also replenished your ordnance."
+							upgrade_msg = _("medical-comms","We also replenished your ordnance.")
 							if medical_message_diagnostic then print("ordnance upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "shield" then
@@ -3452,7 +3452,7 @@ function handleDockedState()
 								else
 									comms_source:setShieldsMax(front_shield_max*1.25)
 								end
-								upgrade_msg = "We also increased your shield charge capacity."
+								upgrade_msg = _("medical-comms","We also increased your shield charge capacity.")
 								if medical_message_diagnostic then print("shield upgrade message:",upgrade_msg) end
 							else
 								comms_source:addReputationPoints(50)
@@ -3462,13 +3462,13 @@ function handleDockedState()
 						if comms_source.medical_station_upgrade == "maneuver" then
 							comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*1.25)
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = "We also upgraded your maneuvering system."
+							upgrade_msg = _("medical-comms","We also upgraded your maneuvering system.")
 							if medical_message_diagnostic then print("maneuver upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "ftl" then
 							if comms_source:hasSystem("warp") then
 								comms_source:setWarpSpeed(comms_source:getWarpSpeed()*1.25)
-								upgrade_msg = "We also upgraded your base warp speed."
+								upgrade_msg = _("medical-comms","We also upgraded your base warp speed.")
 								if medical_message_diagnostic then print("warp ftl upgrade message:",upgrade_msg) end
 							elseif comms_source:hasSystem("jumpdrive") then
 								local max_charge = comms_source.max_jump_range
@@ -3476,7 +3476,7 @@ function handleDockedState()
 									max_charge = 50000
 								end
 								comms_source:setJumpDriveCharge(max_charge*3)
-								upgrade_msg = "We also overcharged your jump drive to three times your maximum range."
+								upgrade_msg = _("medical-comms","We also overcharged your jump drive to three times your maximum range.")
 								if medical_message_diagnostic then print("jump ftl upgrade message:",upgrade_msg) end
 							else
 								comms_source:addReputationPoints(50)
@@ -3490,13 +3490,13 @@ function handleDockedState()
 				if medical_message_diagnostic then print("upgrade message after fleet count check and process:",upgrade_msg) end
 			end
 			if medical_message_diagnostic then print("upgrade message outside of medical station upgrade available check and process:",upgrade_msg) end
-			setCommsMessage(_("medical-comms",string.format("We have transmitted all of our current research on the Omicron plague including treatment fabrication instructions. We have also transported what we believe will cure any victims of the plague along with unique raw materials required to manufacture more of the treatment. I hope you are able get this to Ensign Fargalli in time. %s",upgrade_msg)))
+			setCommsMessage(string.format(_("medical-comms","We have transmitted all of our current research on the Omicron plague including treatment fabrication instructions. We have also transported what we believe will cure any victims of the plague along with unique raw materials required to manufacture more of the treatment. I hope you are able get this to Ensign Fargalli in time. %s"),upgrade_msg))
 			if comms_source.rapid_return_transit ~= nil then
-				addCommsReply(string.format("Take return transit from %s to %s",station_medical_research:getCallSign(),station_regional_hq:getCallSign()),function()
+				addCommsReply(string.format(_("medical-comms","Take return transit from %s to %s"),station_medical_research:getCallSign(),station_regional_hq:getCallSign()),function()
 					comms_source:commandUndock()
 					local s_x, s_y = station_regional_hq:getPosition()
 					comms_source:setPosition(s_x, s_y)
-					setCommsMessage("Thanks for your help")
+					setCommsMessage(_("medical-comms","Thanks for your help"))
 				end)
 			end
 			addCommsReply(_("Back"), commsStation)
@@ -4131,7 +4131,7 @@ function getCoolantFromStation(relationship)
 					else
 						local delay_seconds = math.random(3,20)
 						comms_target.comms_data.coolant_packaging_delay = getScenarioTime() + delay_seconds
-						setCommsMessage(string.format(_("trade-comms","The coolant preparation facility is having difficulty packaging the coolant for transport. They say thay should have it working in about %i seconds"),delay_seconds))
+						setCommsMessage(string.format(_("trade-comms","The coolant preparation facility is having difficulty packaging the coolant for transport. They say they should have it working in about %i seconds"),delay_seconds))
 					end
 				else	--delay in progress
 					local delay_seconds = math.floor(comms_target.comms_data.coolant_packaging_delay - getScenarioTime())
@@ -4685,7 +4685,7 @@ function handleUndockedState()
     end
     if isAllowedTo(comms_target.comms_data.services.servicejonque) then
     	addCommsReply(_("stationAssist-comms","Please send a service jonque for repairs"), function()
-    		local out = string.format(_("stationAssist-comms","Would you like the service jonque to come to you directly or would you prefer to set up a rendezvous via a waypoint? Either way, you will need %.1f reputation."),getServiceCost("servicejonque"))
+    		local out = string.format(_("stationAssist-comms","Would you like the service jonque to come to you directly or would you prefer to set up a rendez-vous via a waypoint? Either way, you will need %.1f reputation."),getServiceCost("servicejonque"))
     		addCommsReply("Direct",function()
     			if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
 					ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendTarget(comms_source)
@@ -4733,7 +4733,7 @@ function handleUndockedState()
     			out = out .. _("stationAssist-comms","\n\nNote: if you want to use a waypoint, you will have to back out and set one and come back.")
     		else
     			for n=1,comms_source:getWaypointCount() do
-    				addCommsReply(string.format(_("stationAssist-comms","Rendezvous at waypoint %i"),n),function()
+    				addCommsReply(string.format(_("stationAssist-comms","Rendez-vous at waypoint %i"),n),function()
     					if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
     						ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 							ship.comms_data = {
@@ -4771,7 +4771,7 @@ function handleUndockedState()
 									neutral = math.max(comms_target.comms_data.reputation_cost_multipliers.friend,comms_target.comms_data.reputation_cost_multipliers.neutral/2)
 								},
 							}
-    						setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to rendezvous at waypoint %i"),ship:getCallSign(),n))
+    						setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to rendez-vous at waypoint %i"),ship:getCallSign(),n))
     					else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"));
     					end
@@ -9657,7 +9657,7 @@ function saveEnsign(delta)
 		end
 		if medical_research_obtained then
 			if station_regional_hq == nil then
-				loseGame(_("msgMainscreen","HQ destroyed. Omicron plague destroyed humainty"))
+				loseGame(_("msgMainscreen","HQ destroyed. Omicron plague destroyed humanity"))
 			else
 				if plague_victim_treated then
 					for index, p in ipairs(getActivePlayerShips()) do
