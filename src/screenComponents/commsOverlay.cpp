@@ -15,7 +15,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
 : GuiElement(owner, "COMMS_OVERLAY")
 {
     // Panel for reporting outgoing hails.
-    opening_box = new GuiPanel(owner, "COMMS_OPENING_BOX");
+    opening_box = new GuiPanel(this, "COMMS_OPENING_BOX");
     opening_box->hide()->setSize(800, 100)->setPosition(0, -250, sp::Alignment::BottomCenter);
     (new GuiLabel(opening_box, "COMMS_OPENING_LABEL", tr("Opening communications..."), 40))->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 0, sp::Alignment::TopCenter);
     opening_progress = new GuiProgressbar(opening_box, "COMMS_OPENING_PROGRESS", PlayerSpaceship::comms_channel_open_time, 0.0, 0.0);
@@ -30,7 +30,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     opening_cancel->setSize(200, 40)->setPosition(-50, -10, sp::Alignment::BottomRight);
 
     // Panel for reporting incoming hails.
-    hailed_box = new GuiPanel(owner, "COMMS_BEING_HAILED_BOX");
+    hailed_box = new GuiPanel(this, "COMMS_BEING_HAILED_BOX");
     hailed_box->hide()->setSize(800, 140)->setPosition(0, -250, sp::Alignment::BottomCenter);
     hailed_label = new GuiLabel(hailed_box, "COMMS_BEING_HAILED_LABEL", "..", 40);
     hailed_label->setSize(GuiElement::GuiSizeMax, 50)->setPosition(0, 20, sp::Alignment::TopCenter);
@@ -49,7 +49,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     hailed_ignore->setSize(300, 50)->setPosition(-20, -20, sp::Alignment::BottomRight);
 
     // Panel for unresponsive hails.
-    no_response_box = new GuiPanel(owner, "COMMS_OPENING_BOX");
+    no_response_box = new GuiPanel(this, "COMMS_OPENING_BOX");
     no_response_box->hide()->setSize(800, 70)->setPosition(0, -250, sp::Alignment::BottomCenter);
     (new GuiLabel(no_response_box, "COMMS_NO_REPONSE_LABEL", tr("No reply..."), 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
 
@@ -60,7 +60,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for broken communications.
-    broken_box = new GuiPanel(owner, "COMMS_BROKEN_BOX");
+    broken_box = new GuiPanel(this, "COMMS_BROKEN_BOX");
     broken_box->hide()->setSize(800, 70)->setPosition(0, -250, sp::Alignment::BottomCenter);
     (new GuiLabel(broken_box, "COMMS_BROKEN_LABEL", tr("Communications were suddenly cut"), 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
 
@@ -71,7 +71,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for communications closed by the other object.
-    closed_box = new GuiPanel(owner, "COMMS_CLOSED_BOX");
+    closed_box = new GuiPanel(this, "COMMS_CLOSED_BOX");
     closed_box->hide()->setSize(800, 70)->setPosition(0, -250, sp::Alignment::BottomCenter);
     (new GuiLabel(closed_box, "COMMS_BROKEN_LABEL", tr("Communications channel closed"), 40))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft);
 
@@ -82,7 +82,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     }))->setSize(100, 50)->setPosition(-20, -10, sp::Alignment::BottomRight);
 
     // Panel for chat communications with GMs and other player ships.
-    chat_comms_box = new GuiPanel(owner, "COMMS_CHAT_BOX");
+    chat_comms_box = new GuiPanel(this, "COMMS_CHAT_BOX");
     chat_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, sp::Alignment::BottomCenter);
 
     // Message entry field for chat.
@@ -123,7 +123,7 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     }
 
     // Panel for scripted comms with objects.
-    script_comms_box = new GuiPanel(owner, "COMMS_SCRIPT_BOX");
+    script_comms_box = new GuiPanel(this, "COMMS_SCRIPT_BOX");
     script_comms_box->hide()->setSize(800, 600)->setPosition(0, -100, sp::Alignment::BottomCenter);
 
     script_comms_text = new GuiScrollText(script_comms_box, "COMMS_SCRIPT_TEXT", "");
