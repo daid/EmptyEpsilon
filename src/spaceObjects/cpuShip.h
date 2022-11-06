@@ -24,7 +24,6 @@ class ShipAI;
 class CpuShip : public SpaceShip
 {
     static constexpr float auto_system_repair_per_second = 0.005f;
-    static constexpr float missile_resupply_time = 10.0f;
 
     EAIOrder orders;                    //Server only
     glm::vec2 order_target_location{};  //Server only
@@ -33,6 +32,8 @@ class CpuShip : public SpaceShip
 
     string new_ai_name;
 public:
+    static constexpr float missile_resupply_time = 10.0f;
+
     CpuShip();
     virtual ~CpuShip();
 

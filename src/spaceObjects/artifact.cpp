@@ -70,7 +70,7 @@ Artifact::Artifact()
     registerMemberReplication(&artifact_spin);
 
     if (entity) {
-        auto& trace = entity.addComponent<RadarTrace>();
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.radius = getRadius();
         trace.icon = "radar/blip.png";
     }
