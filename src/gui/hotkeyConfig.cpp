@@ -400,9 +400,9 @@ void Keys::init()
     engineering_self_destruct_confirm.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Confirm self-destruct"));
     engineering_self_destruct_cancel.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Cancel self-destruct"));
 
-    relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Engineering", "Alert level: Normal"));
-    relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Engineering", "Alert level: Yellow"));
-    relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Engineering", "Alert level: Red"));
+    relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
+    relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
+    relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
 
     cinematic.init();
     topdown.init();
