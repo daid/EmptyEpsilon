@@ -950,44 +950,44 @@ function mainGMButtonsAfterPause()
 	addGMFunction(_("buttonGM","+Test Non-DB Ships"),testNonDBShips)
 end
 function setEnemyPower()
-	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Enemy Power"),mainGMButtons)
-	local powers = {
-		{val = .5,	desc = "Easy"},
-		{val = 1,	desc = "Normal"},
-		{val = 2,	desc = "Hard"},
-		{val = 3,	desc = "Extreme"},
-		{val = 5,	desc = "Quixotic"},
-	}
-	for index, power in ipairs(powers) do
-		local button_label = string.format("%s %.1f",power.desc,power.val)
-		if power.val == enemy_power then
-			button_label = button_label .. "*"
-		end
-		addGMFunction(button_label,function()
-			enemy_power = power.val
-			setEnemyPower()
-		end)
-	end
+    clearGMFunctions()
+    addGMFunction(_("buttonGM","-From Enemy Power"),mainGMButtons)
+    local powers = {
+        {val = .5,    desc = _("buttonGM","Easy")},
+        {val = 1,    desc = _("buttonGM","Normal")},
+        {val = 2,    desc = _("buttonGM","Hard")},
+        {val = 3,    desc = _("buttonGM","Extreme")},
+        {val = 5,    desc = _("buttonGM","Quixotic")},
+    }
+    for index, power in ipairs(powers) do
+        local button_label = string.format("%s %.1f",power.desc,power.val)
+        if power.val == enemy_power then
+            button_label = button_label .. "*"
+        end
+        addGMFunction(button_label,function()
+            enemy_power = power.val
+            setEnemyPower()
+        end)
+    end
 end
 function setDifficulty()
-	clearGMFunctions()
-	addGMFunction(_("buttonGM","-From Difficulty"),mainGMButtons)
-	local difficulties = {
-		{val = .5,	desc = "Easy"},
-		{val = 1,	desc = "Normal"},
-		{val = 2,	desc = "Hard"},
-	}
-	for index, diff in ipairs(difficulties) do
-		local button_label = string.format("%s %.1f",diff.desc,diff.val)
-		if diff.val == difficulty then
-			button_label = button_label .. "*"
-		end
-		addGMFunction(button_label,function()
-			difficulty = diff.val
-			setDifficulty()
-		end)
-	end
+    clearGMFunctions()
+    addGMFunction(_("buttonGM","-From Difficulty"),mainGMButtons)
+    local difficulties = {
+        {val = .5,    desc = _("buttonGM","Easy")},
+        {val = 1,    desc = _("buttonGM","Normal")},
+        {val = 2,    desc = _("buttonGM","Hard")},
+    }
+    for index, diff in ipairs(difficulties) do
+        local button_label = string.format("%s %.1f",diff.desc,diff.val)
+        if diff.val == difficulty then
+            button_label = button_label .. "*"
+        end
+        addGMFunction(button_label,function()
+            difficulty = diff.val
+            setDifficulty()
+        end)
+    end
 end
 function setDestroyTime()
 	clearGMFunctions()
