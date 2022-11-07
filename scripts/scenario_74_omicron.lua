@@ -3390,7 +3390,7 @@ function handleDockedState()
 	oMsg = string.format(_("station-comms","%s\n\nReputation: %i"),oMsg,math.floor(comms_source:getReputationPoints()))
 	setCommsMessage(oMsg)
 	if comms_target == station_medical_research and comms_source.medical_research == nil then
-		addCommsReply(_("medical-comms","Request medical research for Fargalli"), function()
+		addCommsReply(_("mission2nd-comms","Request medical research for Fargalli"), function()
 			comms_source.medical_research = true
 			medical_research_obtained = true
 			local upgrade_msg = ""
@@ -3409,13 +3409,13 @@ function handleDockedState()
 						if comms_source.medical_station_upgrade == "impulse" then
 							comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.25)
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = _("medical-comms","We also upgraded your impulse engines.")
+							upgrade_msg = _("mission3th-comms","We also upgraded your impulse engines.")
 							if medical_message_diagnostic then print("impulse upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "transit" then
 							comms_source.rapid_return_transit = "ready"
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = string.format(_("medical-comms","The technicians are standing by to transport you back to %s."),station_regional_hq:getCallSign())
+							upgrade_msg = string.format(_("mission3th-comms","The technicians are standing by to transport you back to %s."),station_regional_hq:getCallSign())
 							if medical_message_diagnostic then print("transit upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "beam" then
@@ -3430,7 +3430,7 @@ function handleDockedState()
 								bi = bi + 1
 							until(comms_source:getBeamWeaponRange(bi) < 1)
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = _("medical-comms","We also upgrded the damage your beams inflict.")
+							upgrade_msg = _("mission3th-comms","We also upgrded the damage your beams inflict.")
 							if medical_message_diagnostic then print("beam upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "missile" then
@@ -3440,7 +3440,7 @@ function handleDockedState()
 							comms_source:setWeaponStorage("Mine",comms_source:getWeaponStorageMax("Mine"))
 							comms_source:setWeaponStorage("HVLI",comms_source:getWeaponStorageMax("HVLI"))
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = _("medical-comms","We also replenished your ordnance.")
+							upgrade_msg = _("mission3th-comms","We also replenished your ordnance.")
 							if medical_message_diagnostic then print("ordnance upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "shield" then
@@ -3452,7 +3452,7 @@ function handleDockedState()
 								else
 									comms_source:setShieldsMax(front_shield_max*1.25)
 								end
-								upgrade_msg = _("medical-comms","We also increased your shield charge capacity.")
+								upgrade_msg = _("mission3th-comms","We also increased your shield charge capacity.")
 								if medical_message_diagnostic then print("shield upgrade message:",upgrade_msg) end
 							else
 								comms_source:addReputationPoints(50)
@@ -3462,13 +3462,13 @@ function handleDockedState()
 						if comms_source.medical_station_upgrade == "maneuver" then
 							comms_source:setRotationMaxSpeed(comms_source:getRotationMaxSpeed()*1.25)
 							comms_source.medical_station_upgrade = "done"
-							upgrade_msg = _("medical-comms","We also upgraded your maneuvering system.")
+							upgrade_msg = _("mission3th-comms","We also upgraded your maneuvering system.")
 							if medical_message_diagnostic then print("maneuver upgrade message:",upgrade_msg) end
 						end
 						if comms_source.medical_station_upgrade == "ftl" then
 							if comms_source:hasSystem("warp") then
 								comms_source:setWarpSpeed(comms_source:getWarpSpeed()*1.25)
-								upgrade_msg = _("medical-comms","We also upgraded your base warp speed.")
+								upgrade_msg = _("mission3th-comms","We also upgraded your base warp speed.")
 								if medical_message_diagnostic then print("warp ftl upgrade message:",upgrade_msg) end
 							elseif comms_source:hasSystem("jumpdrive") then
 								local max_charge = comms_source.max_jump_range
@@ -3476,7 +3476,7 @@ function handleDockedState()
 									max_charge = 50000
 								end
 								comms_source:setJumpDriveCharge(max_charge*3)
-								upgrade_msg = _("medical-comms","We also overcharged your jump drive to three times your maximum range.")
+								upgrade_msg = _("mission3th-comms","We also overcharged your jump drive to three times your maximum range.")
 								if medical_message_diagnostic then print("jump ftl upgrade message:",upgrade_msg) end
 							else
 								comms_source:addReputationPoints(50)
@@ -3490,25 +3490,25 @@ function handleDockedState()
 				if medical_message_diagnostic then print("upgrade message after fleet count check and process:",upgrade_msg) end
 			end
 			if medical_message_diagnostic then print("upgrade message outside of medical station upgrade available check and process:",upgrade_msg) end
-			setCommsMessage(string.format(_("medical-comms","We have transmitted all of our current research on the Omicron plague including treatment fabrication instructions. We have also transported what we believe will cure any victims of the plague along with unique raw materials required to manufacture more of the treatment. I hope you are able get this to Ensign Fargalli in time. %s"),upgrade_msg))
+			setCommsMessage(string.format(_("mission2ndBis-comms","We have transmitted all of our current research on the Omicron plague including treatment fabrication instructions. We have also transported what we believe will cure any victims of the plague along with unique raw materials required to manufacture more of the treatment. I hope you are able get this to Ensign Fargalli in time. %s"),upgrade_msg))
 			if comms_source.rapid_return_transit ~= nil then
-				addCommsReply(string.format(_("medical-comms","Take return transit from %s to %s"),station_medical_research:getCallSign(),station_regional_hq:getCallSign()),function()
+				addCommsReply(string.format(_("mission3th-comms","Take return transit from %s to %s"),station_medical_research:getCallSign(),station_regional_hq:getCallSign()),function()
 					comms_source:commandUndock()
 					local s_x, s_y = station_regional_hq:getPosition()
 					comms_source:setPosition(s_x, s_y)
-					setCommsMessage(_("medical-comms","Thanks for your help"))
+					setCommsMessage(_("mission3th-comms","Thanks for your help"))
 				end)
 			end
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end 
-	if comms_target == station_regional_hq and medical_research_obtained then
-		addCommsReply(_("medical-comms","Give medical treatment and research to sickbay"), function()
+	if comms_target == station_regional_hq and medical_research_obtained and not plague_victim_treated then
+		addCommsReply(_("mission2ndBis-comms","Give medical treatment and research to sickbay"), function()
 			if comms_source.medical_research then
-				setCommsMessage(_("medical-comms","Treatment received. Fargalli is expected to live. We are beginning to conduct in depth analysis of the research material with an eye to prevention of future infection."))
+				setCommsMessage(_("mission2ndBis-comms","Treatment received. Fargalli is expected to live. We are beginning to conduct in depth analysis of the research material with an eye to prevention of future infection."))
 				plague_victim_treated = true
 			else
-				setCommsMessage(_("medical-comms","The medical research and treatment is not aboard your ship"))
+				setCommsMessage(_("mission2ndBis-comms","The medical research and treatment is not aboard your ship"))
 			end
 			addCommsReply(_("Back"), commsStation)
 		end)
@@ -4388,11 +4388,11 @@ function handleUndockedState()
 		end)
 		local comms_distance = distance(comms_target,comms_source)
 		if comms_distance > average_station_circle_distance then
-			addCommsReply("Where am I?",function()
+			addCommsReply(_("station-comms", "Where am I?"),function()
 				local s_x, s_y = comms_target:getPosition()
 				local p_x, p_y = comms_source:getPosition()
 				local comms_bearing = angleFromVectorNorth(p_x, p_y, s_x, s_y)
-				setCommsMessage(string.format("Based on triangulation and signal strength, our communications software says you're on a bearing of %.1f from us at a distance of %.1f units",comms_bearing,comms_distance/1000))
+				setCommsMessage(string.format(_("Based on triangulation and signal strength, our communications software says you're on a bearing of %.1f from us at a distance of %.1f units",comms_bearing,comms_distance/1000)))
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
@@ -4797,21 +4797,21 @@ function getFriendStatus()
     end
 end
 function destroyPlagueComms()
-	setCommsMessage(string.format(_("orders-comms","To: %s\nFrom: %s\n\nAfter treating Ensign Fargalli, we took a closer look at the accompanying research. Analysis of the research material, the telemetry from your ship, and recent reports from intelligence brings us to an ominous conclusion."),comms_source:getCallSign(),comms_target:getCallSign()))
-	addCommsReply(_("orders-comms","What have you concluded?"), function()
-		setCommsMessage(_("orders-comms","Fargalli's illness and the previous similar cases experienced were not accidental. They were deliberately infected."))
-		addCommsReply(_("orders-comms","What? Who infected them?"), function()
-			setCommsMessage(_("orders-comms","The Exuari. Fargalli and others are apparently the victims of a preliminary experimental biological attack. The Exuari have code named this biological agent Omicron after the early 21st century pandemic virus variant on Earth which was highly contagious."))
-			addCommsReply(_("orders-comms","That's sobering. Do we have more information?"),function()
-				setCommsMessage(_("orders-comms","Indeed we do. It looks like Omicron might be transmitted via subspace. We believe the Exuari plan to 'broadcast' Omicron to every known human location. Needless to say, this would have extinction level consequences."))
-				addCommsReply(_("orders-comms","Ouch. Is there a planned response?"), function()
-					setCommsMessage(_("orders-comms","Destruction of the Exuari Omicron production and broadcast facility is the best thing we can think of."))
-					addCommsReply(_("orders-comms","Can we help?"),function()
-						setCommsMessage(_("orders-comms","We hope that you can. We don't know the precise location of the Exuari facility, just a general direction. However, when we examined the telemetry from your science officer's console when you were near the independent medical research facility, we noticed something interesting."))
-						addCommsReply(_("orders-comms","What did you notice?"),function()
-							setCommsMessage(_("orders-comms","The entity used to produce the treatment is also likely to be used to create Omicron. It gives off a powerful bio-signature that is periodic in nature, vaguely resembling a heartbeat."))
-							addCommsReply(_("orders-comms","This signature can identify the Exuari Omicron facility?"), function()
-								setCommsMessage(string.format(_("orders-comms","Yes, but if you're unsure, you are authorized to destroy every Exuari facility. You will need to travel into Exuari infested space along bearing %i from station %s to find the Omicron facility and destroy it. Our best intelligence estimates that deployment will occur within the next %i minutes. Happy hunting!"),math.floor(plague_axis),station_regional_hq:getCallSign(),destroy_time_limit))
+	setCommsMessage(string.format(_("mission4th-comms","To: %s\nFrom: %s\n\nAfter treating Ensign Fargalli, we took a closer look at the accompanying research. Analysis of the research material, the telemetry from your ship, and recent reports from intelligence brings us to an ominous conclusion."),comms_source:getCallSign(),comms_target:getCallSign()))
+	addCommsReply(_("mission4th-comms","What have you concluded?"), function()
+		setCommsMessage(_("mission4th-comms","Fargalli's illness and the previous similar cases experienced were not accidental. They were deliberately infected."))
+		addCommsReply(_("mission4th-comms","What? Who infected them?"), function()
+			setCommsMessage(_("mission4th-comms","The Exuari. Fargalli and others are apparently the victims of a preliminary experimental biological attack. The Exuari have code named this biological agent Omicron after the early 21st century pandemic virus variant on Earth which was highly contagious."))
+			addCommsReply(_("mission4th-comms","That's sobering. Do we have more information?"),function()
+				setCommsMessage(_("mission4th-comms","Indeed we do. It looks like Omicron might be transmitted via subspace. We believe the Exuari plan to 'broadcast' Omicron to every known human location. Needless to say, this would have extinction level consequences."))
+				addCommsReply(_("mission4th-comms","Ouch. Is there a planned response?"), function()
+					setCommsMessage(_("mission4th-comms","Destruction of the Exuari Omicron production and broadcast facility is the best thing we can think of."))
+					addCommsReply(_("mission4th-comms","Can we help?"),function()
+						setCommsMessage(_("mission4th-comms","We hope that you can. We don't know the precise location of the Exuari facility, just a general direction. However, when we examined the telemetry from your science officer's console when you were near the independent medical research facility, we noticed something interesting."))
+						addCommsReply(_("mission4th-comms","What did you notice?"),function()
+							setCommsMessage(_("mission4th-comms","The entity used to produce the treatment is also likely to be used to create Omicron. It gives off a powerful bio-signature that is periodic in nature, vaguely resembling a heartbeat."))
+							addCommsReply(_("mission4th-comms","This signature can identify the Exuari Omicron facility?"), function()
+								setCommsMessage(string.format(_("mission4th-comms","Yes, but if you're unsure, you are authorized to destroy every Exuari facility. You will need to travel into Exuari infested space along bearing %i from station %s to find the Omicron facility and destroy it. Our best intelligence estimates that deployment will occur within the next %i minutes. Happy hunting!"),math.floor(plague_axis),station_regional_hq:getCallSign(),destroy_time_limit))
 							end)
 						end)
 					end)
@@ -4821,24 +4821,24 @@ function destroyPlagueComms()
 	end)
 end
 function medicalAttentionComms()
-	setCommsMessage(string.format(_("orders-comms","To %s\nFrom: %s\n\nEnsign Fargalli, one of the maintenance engineers aboard the freighter %s, just reported to sickbay here on %s. We can treat his symptoms, but don't have a treatment for the root cause of his illness. This is the third case of this type we've seen in the last week. The last two ended up being fatal."),comms_source:getCallSign(),comms_target:getCallSign(),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
-	addCommsReply(_("orders-comms","Why are you telling me this?"),function()
-		setCommsMessage(string.format(_("orders-comms","We've received word that Independent station %s is conducting ongoing research into this malady and may have more information, maybe even a remedy."),station_medical_research:getCallSign()))
-		addCommsReply(string.format(_("orders-comms","Then you should get that treatment from %s to save Fargalli"),station_medical_research:getCallSign()), function()
-			setCommsMessage(string.format(_("orders-comms","We can't contact %s directly since they are not on our communications network."),station_medical_research:getCallSign()))
-			addCommsReply(_("orders-comms","A courier could get it"), function()
-				setCommsMessage(string.format(_("orders-comms","We tried sending couriers. All of our couriers were shot down. We are telling you all this because we need you to go to %s and bring back any medical research or treatment or medicine they may have"),station_medical_research:getCallSign()))
-				addCommsReply(_("orders-comms","Now I understand"),function()
-					setCommsMessage(string.format(_("orders-comms","There is some urgency. Based on the previous cases, Fargalli has about %i minutes to live"),rescue_time_limit))
-					addCommsReply(string.format(_("orders-comms","Where is station %s?"),station_medical_research:getCallSign()), function()
+	setCommsMessage(string.format(_("mission2nd-comms","To %s\nFrom: %s\n\nEnsign Fargalli, one of the maintenance engineers aboard the freighter %s, just reported to sickbay here on %s. We can treat his symptoms, but don't have a treatment for the root cause of his illness. This is the third case of this type we've seen in the last week. The last two ended up being fatal."),comms_source:getCallSign(),comms_target:getCallSign(),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
+	addCommsReply(_("mission2nd-comms","Why are you telling me this?"),function()
+		setCommsMessage(string.format(_("mission2nd-comms","We've received word that Independent station %s is conducting ongoing research into this malady and may have more information, maybe even a remedy."),station_medical_research:getCallSign()))
+		addCommsReply(string.format(_("mission2nd-comms","Then you should get that treatment from %s to save Fargalli"),station_medical_research:getCallSign()), function()
+			setCommsMessage(string.format(_("mission2nd-comms","We can't contact %s directly since they are not on our communications network."),station_medical_research:getCallSign()))
+			addCommsReply(_("mission2nd-comms","A courier could get it"), function()
+				setCommsMessage(string.format(_("mission2nd-comms","We tried sending couriers. All of our couriers were shot down. We are telling you all this because we need you to go to %s and bring back any medical research or treatment or medicine they may have"),station_medical_research:getCallSign()))
+				addCommsReply(_("mission2nd-comms","Now I understand"),function()
+					setCommsMessage(string.format(_("mission2nd-comms","There is some urgency. Based on the previous cases, Fargalli has about %i minutes to live"),rescue_time_limit))
+					addCommsReply(string.format(_("mission2nd-comms","Where is station %s?"),station_medical_research:getCallSign()), function()
 						if difficulty < 1 then
-							setCommsMessage(string.format(_("orders-comms","%s is in sector %s. Good luck"),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
+							setCommsMessage(string.format(_("mission2nd-comms","%s is in sector %s. Good luck"),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
 						elseif difficulty > 1 then
-							setCommsMessage(string.format(_("orders-comms","%s is on an approximate bearing of %i from %s. Distance is greater than %.1f units."),station_medical_research:getCallSign(),math.floor(research_axis),station_regional_hq:getCallSign(),average_station_circle_distance/1000))
+							setCommsMessage(string.format(_("mission2nd-comms","%s is on an approximate bearing of %i from %s. Distance is greater than %.1f units."),station_medical_research:getCallSign(),math.floor(research_axis),station_regional_hq:getCallSign(),average_station_circle_distance/1000))
 						else
 							local med_x, med_y = station_medical_research:getPosition()
 							local precise_bearing = angleFromVectorNorth(med_x, med_y, center_x, center_y)
-							setCommsMessage(string.format(_("orders-comms","%s is on a precise bearing of %.1f from %s. Distance is greater than %.1f units."),station_medical_research:getCallSign(),precise_bearing,station_regional_hq:getCallSign(),average_station_circle_distance/1000))
+							setCommsMessage(string.format(_("mission2nd-comms","%s is on a precise bearing of %.1f from %s. Distance is greater than %.1f units."),station_medical_research:getCallSign(),precise_bearing,station_regional_hq:getCallSign(),average_station_circle_distance/1000))
 						end
 					end)
 				end)
@@ -4847,136 +4847,136 @@ function medicalAttentionComms()
 	end)
 end
 function medicalBaseLocationAssistanceComms()
-	setCommsMessage(string.format(_("orders-comms","To: %s\nFrom: %s\n\nHello, %s"),comms_source:getCallSign(),station_medical_research:getCallSign(),comms_source:getCallSign()))
-	addCommsReply(string.format(_("orders-comms","Hello, %s"),comms_target:getCallSign()),function()
-		setCommsMessage(_("orders-comms","One of the commercial freighters just docked up and their personnel inferred that you might be traveling in our direction."))
-		addCommsReply(_("orders-comms","Those are well informed personnel"), function()
-			setCommsMessage(_("orders-comms","It's amazing what commercial freighters learn and how quickly they learn it."))
-			addCommsReply(_("orders-comms","Indeed. Why are you contacting us?"), function()
-				setCommsMessage(_("orders-comms","We were wondering how soon you might get here. You see, there's this group of Exuari approaching and they don't look terribly friendly."))
-				addCommsReply(_("orders-comms","We intend to get medical research, not necessarily engage Exuari"),function()
-					setCommsMessage(_("orders-comms","We could make it worth your while if you were to protect our station from these Exuari."))
-					addCommsReply(_("orders-comms","How so?"),function()
-						setCommsMessage(_("orders-comms","If you were to destroy the attacking Exuari, we could offer you one of these:"))
-						addCommsReply(_("orders-comms","25% faster impulse speed"), function()
+	setCommsMessage(string.format(_("mission3th-comms","To: %s\nFrom: %s\n\nHello, %s"),comms_source:getCallSign(),station_medical_research:getCallSign(),comms_source:getCallSign()))
+	addCommsReply(string.format(_("mission3th-comms","Hello, %s"),comms_target:getCallSign()),function()
+		setCommsMessage(_("mission3th-comms","One of the commercial freighters just docked up and their personnel inferred that you might be traveling in our direction."))
+		addCommsReply(_("mission3th-comms","Those are well informed personnel"), function()
+			setCommsMessage(_("mission3th-comms","It's amazing what commercial freighters learn and how quickly they learn it."))
+			addCommsReply(_("mission3th-comms","Indeed. Why are you contacting us?"), function()
+				setCommsMessage(_("mission3th-comms","We were wondering how soon you might get here. You see, there's this group of Exuari approaching and they don't look terribly friendly."))
+				addCommsReply(_("mission3th-comms","We intend to get medical research, not necessarily engage Exuari"),function()
+					setCommsMessage(_("mission3th-comms","We could make it worth your while if you were to protect our station from these Exuari."))
+					addCommsReply(_("mission3th-comms","How so?"),function()
+						setCommsMessage(_("mission3th-comms","If you were to destroy the attacking Exuari, we could offer you one of these:"))
+						addCommsReply(_("mission3th-comms","25% faster impulse speed"), function()
 							comms_source.medical_station_upgrade = "impulse"
-							setCommsMessage(string.format(_("orders-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
+							setCommsMessage(string.format(_("mission3th-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
 						end)
-						addCommsReply(string.format(_("orders-comms","Rapid transit back to %s"),station_regional_hq:getCallSign()), function()
+						addCommsReply(string.format(_("mission3th-comms","Rapid transit back to %s"),station_regional_hq:getCallSign()), function()
 							comms_source.medical_station_upgrade = "transit"
-							setCommsMessage(string.format(_("orders-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
+							setCommsMessage(string.format(_("mission3th-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
 						end)
 						if comms_source:hasSystem("beamweapons") then
-							addCommsReply(_("orders-comms","25% stronger beam weapons"),function()
+							addCommsReply(_("mission3th-comms","25% stronger beam weapons"),function()
 								comms_source.medical_station_upgrade = "beam"
-								setCommsMessage(string.format(_("orders-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
+								setCommsMessage(string.format(_("mission3th-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
 							end)
 						end
 						if comms_source:hasSystem("missilesystem") then
-							addCommsReply(_("orders-comms","Replenish all your ordnance"), function()
+							addCommsReply(_("mission3th-comms","Replenish all your ordnance"), function()
 								comms_source.medical_station_upgrade = "missile"
-								setCommsMessage(string.format(_("orders-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
+								setCommsMessage(string.format(_("mission3th-comms","You got it. We're in sector %s"),station_medical_research:getSectorName()))
 							end)
 						end
 					end)
-					addCommsReply(_("orders-comms","We just need to know where you are located"),function()
+					addCommsReply(_("mission3th-comms","We just need to know where you are located"),function()
 						if difficulty < 1 then
 							local dsx, dsy = station_medical_research:getPosition()
 							comms_source:commandAddWaypoint(dsx,dsy)
-							setCommsMessage(string.format(_("orders-comms","We added paypoint %i to your system which identifies our station. We may or may not be able to provide what you request depending on how busy we are fighting off Exuari."),comms_source:getWaypointCount()))
+							setCommsMessage(string.format(_("mission3th-comms","We added paypoint %i to your system which identifies our station. We may or may not be able to provide what you request depending on how busy we are fighting off Exuari."),comms_source:getWaypointCount()))
 						else
-							setCommsMessage(string.format(_("orders-comms","We are in sector %s. We may or may not be able to provide what you request depending on how busy we are fighting off Exuari."),station_medical_research:getSectorName()))
+							setCommsMessage(string.format(_("mission3th-comms","We are in sector %s. We may or may not be able to provide what you request depending on how busy we are fighting off Exuari."),station_medical_research:getSectorName()))
 						end
 					end)
 				end)
-				addCommsReply(_("orders-comms","Sounds bad. Do you need help?"), function()
-					setCommsMessage(_("orders-comms","We welcome any help you might provide. It would facilitate our survival."))
-					addCommsReply(_("orders-comms","Could you provide us with your location?"), function()
-						setCommsMessage(string.format(_("orders-comms","You mean %s did not tell you where to find us?"),station_regional_hq:getCallSign()))
+				addCommsReply(_("mission3th-comms","Sounds bad. Do you need help?"), function()
+					setCommsMessage(_("mission3th-comms","We welcome any help you might provide. It would facilitate our survival."))
+					addCommsReply(_("mission3th-comms","Could you provide us with your location?"), function()
+						setCommsMessage(string.format(_("mission3th-comms","You mean %s did not tell you where to find us?"),station_regional_hq:getCallSign()))
 						if difficulty < 1 then
-							addCommsReply(_("orders-comms","They did, but we prefer greater precision"),function()
+							addCommsReply(_("mission3th-comms","They did, but we prefer greater precision"),function()
 								local dsx, dsy = station_medical_research:getPosition()
 								comms_source:commandAddWaypoint(dsx,dsy)
-								setCommsMessage(string.format(_("orders-comms","We added waypoint %i to your system for our station. Your timely arrival would be greatly appreciated."),comms_source:getWaypointCount()))
+								setCommsMessage(string.format(_("mission3th-comms","We added waypoint %i to your system for our station. Your timely arrival would be greatly appreciated."),comms_source:getWaypointCount()))
 							end)
 						else
-							addCommsReply(string.format(_("orders-comms","%s provided a bearing, but we prefer greater precision"),station_regional_hq:getCallSign()),function()
-								setCommsMessage(string.format(_("orders-comms","We are in sector %s. Your timely arrival would be greatly appreciated."),station_medical_research:getSectorName()))
+							addCommsReply(string.format(_("mission3th-comms","%s provided a bearing, but we prefer greater precision"),station_regional_hq:getCallSign()),function()
+								setCommsMessage(string.format(_("mission3th-comms","We are in sector %s. Your timely arrival would be greatly appreciated."),station_medical_research:getSectorName()))
 							end)
 						end
 					end)
 				end)
 			end)
 		end)
-		addCommsReply(_("orders-comms","Your information is correct"), function()
-			setCommsMessage(_("orders-comms","That's great news. We've got some pesky Exuari in the area."))
-			addCommsReply(_("orders-comms","Let me guess, you want our help with the Exuari?"), function()
-				setCommsMessage(string.format(_("orders-comms","Got it in one. We're in sector %s. Please don't dawdle"),station_medical_research:getSectorName()))
+		addCommsReply(_("mission3th-comms","Your information is correct"), function()
+			setCommsMessage(_("mission3th-comms","That's great news. We've got some pesky Exuari in the area."))
+			addCommsReply(_("mission3th-comms","Let me guess, you want our help with the Exuari?"), function()
+				setCommsMessage(string.format(_("mission3th-comms","Got it in one. We're in sector %s. Please don't dawdle"),station_medical_research:getSectorName()))
 			end)
-			addCommsReply(_("orders-comms","They're everywhere"), function()
-				setCommsMessage(_("orders-comms","This batch is in our back yard. If you're going to be in the neighborhood already, could you help us out?"))
-				addCommsReply(_("orders-comms","Sure"), function()
-					setCommsMessage(string.format(_("orders-comms","Great. We're in sector %s"),station_medical_research:getSectorName()))
+			addCommsReply(_("mission3th-comms","They're everywhere"), function()
+				setCommsMessage(_("mission3th-comms","This batch is in our back yard. If you're going to be in the neighborhood already, could you help us out?"))
+				addCommsReply(_("mission3th-comms","Sure"), function()
+					setCommsMessage(string.format(_("mission3th-comms","Great. We're in sector %s"),station_medical_research:getSectorName()))
 					comms_source.medical_station_upgrade = "shield"
 				end)
-				addCommsReply(_("orders-comms","We're really only coming to get medical research"), function()
-					setCommsMessage(_("orders-comms","Understood."))
+				addCommsReply(_("mission3th-comms","We're really only coming to get medical research"), function()
+					setCommsMessage(_("mission3th-comms","Understood."))
 				end)
 			end)
-			addCommsReply(_("orders-comms","Identify your sector and we'll help"), function()
-				setCommsMessage(string.format(_("orders-comms","Fair enough. We're in sector %s"),station_medical_research:getSectorName()))
+			addCommsReply(_("mission3th-comms","Identify your sector and we'll help"), function()
+				setCommsMessage(string.format(_("mission3th-comms","Fair enough. We're in sector %s"),station_medical_research:getSectorName()))
 				comms_source.medical_station_upgrade = "maneuver"
 			end)
 		end)
-		addCommsReply(_("orders-comms","We might be. Why do you ask?"), function()
-			setCommsMessage(_("orders-comms","Well, we've observed some Exuari headed our way. We don't think they're making a courtesy call"))
-			addCommsReply(_("orders-comms","They never do. Would you like our help?"),function()
-				setCommsMessage(string.format(_("orders-comms","Yes, please. We're in sector %s"),station_medical_research:getSectorName()))
+		addCommsReply(_("mission3th-comms","We might be. Why do you ask?"), function()
+			setCommsMessage(_("mission3th-comms","Well, we've observed some Exuari headed our way. We don't think they're making a courtesy call"))
+			addCommsReply(_("mission3th-comms","They never do. Would you like our help?"),function()
+				setCommsMessage(string.format(_("mission3th-comms","Yes, please. We're in sector %s"),station_medical_research:getSectorName()))
 				comms_source.medical_station_upgrade = "ftl"
 			end)
-			addCommsReply(_("orders-comms","Where exactly is 'your way?'"),function()
-				setCommsMessage(string.format(_("orders-comms","Our station is located in sector %s. We hope to see you soon."),station_medical_research:getSectorName()))
+			addCommsReply(_("mission3th-comms","Where exactly is 'your way?'"),function()
+				setCommsMessage(string.format(_("mission3th-comms","Our station is located in sector %s. We hope to see you soon."),station_medical_research:getSectorName()))
 			end)
-			addCommsReply(_("orders-comms","We'd like to help, but we're having a hard time finding you"), function()
-				setCommsMessage(string.format(_("orders-comms","We're in sector %s. Please hurry, the Exuari look dangerous."),station_medical_research:getSectorName()))
+			addCommsReply(_("mission3th-comms","We'd like to help, but we're having a hard time finding you"), function()
+				setCommsMessage(string.format(_("mission3th-comms","We're in sector %s. Please hurry, the Exuari look dangerous."),station_medical_research:getSectorName()))
 				comms_source.medical_station_upgrade = "impulse"
 			end)
-			addCommsReply(_("orders-comms","Technically, our mission does not cover protection from Exuari"), function()
-				setCommsMessage(_("orders-comms","Drat"))
+			addCommsReply(_("mission3th-comms","Technically, our mission does not cover protection from Exuari"), function()
+				setCommsMessage(_("mission3th-comms","Drat"))
 			end)
 		end)
 	end)
-	addCommsReply(_("orders-comms","Where are you located?"),function()
-		setCommsMessage(string.format(_("orders-comms","We are in sector %s. Please hurry, the Exuari are approaching."),station_medical_research:getSectorName()))
+	addCommsReply(_("mission3th-comms","Where are you located?"),function()
+		setCommsMessage(string.format(_("mission3th-comms","We are in sector %s. Please hurry, the Exuari are approaching."),station_medical_research:getSectorName()))
 	end)
-	addCommsReply(_("orders-comms","We are glad you contacted us"),function()
-		setCommsMessage(_("orders-comms","Coincidentally, we are glad to be in contact with you, too."))
-		addCommsReply(_("orders-comms","Why is that?"),function()
-			setCommsMessage(string.format(_("orders-comms","We are in need of some assistance with Exuari that are approaching our station, %s."),station_medical_research:getCallSign()))
-			addCommsReply(_("orders-comms","We can help"),function()
-				setCommsMessage(_("orders-comms","That's so good to hear. You may want to hurry, though."))
-				addCommsReply(_("orders-comms","Why the rush?"),function()
+	addCommsReply(_("mission3th-comms","We are glad you contacted us"),function()
+		setCommsMessage(_("mission3th-comms","Coincidentally, we are glad to be in contact with you, too."))
+		addCommsReply(_("mission3th-comms","Why is that?"),function()
+			setCommsMessage(string.format(_("mission3th-comms","We are in need of some assistance with Exuari that are approaching our station, %s."),station_medical_research:getCallSign()))
+			addCommsReply(_("mission3th-comms","We can help"),function()
+				setCommsMessage(_("mission3th-comms","That's so good to hear. You may want to hurry, though."))
+				addCommsReply(_("mission3th-comms","Why the rush?"),function()
 					if comms_source:getWaypointCount() >= 9 then
-						setCommsMessage(string.format(_("orders-comms","The Exuari! They're getting closer! Please come to us in sector %s as soon as you can."),station_medical_research:getSectorName()))
+						setCommsMessage(string.format(_("mission3th-comms","The Exuari! They're getting closer! Please come to us in sector %s as soon as you can."),station_medical_research:getSectorName()))
 					else
 						local dsx, dsy = station_medical_research:getPosition()
 						comms_source:commandAddWaypoint(dsx,dsy)								
-						setCommsMessage(string.format(_("orders-comms","The Exuari! They're getting closer! I'm adding waypoint %i into your system for our station. Please get here as soon as you can."),comms_source:getWaypointCount()))
+						setCommsMessage(string.format(_("mission3th-comms","The Exuari! They're getting closer! I'm adding waypoint %i into your system for our station. Please get here as soon as you can."),comms_source:getWaypointCount()))
 					end
 				end)
 				if random(1,100) < 50 then
-					addCommsReply(string.format(_("orders-comms","In what sector is %s located?"),station_medical_research:getCallSign()), function()
-						setCommsMessage(string.format(_("orders-comms","%s is located in sector %s."),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
+					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_medical_research:getCallSign()), function()
+						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
 					end)
-					addCommsReply(string.format(_("orders-comms","In what sector is %s located?"),station_regional_hq:getCallSign()), function()
-						setCommsMessage(string.format(_("orders-comms","%s is located in sector %s."),station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
+					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_regional_hq:getCallSign()), function()
+						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
 					end)
 				else
-					addCommsReply(string.format(_("orders-comms","In what sector is %s located?"),station_regional_hq:getCallSign()), function()
+					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_regional_hq:getCallSign()), function()
 						setCommsMessage(string.format("%s is located in sector %s.",station_regional_hq:getCallSign(),station_regional_hq:getSectorName()))
 					end)
-					addCommsReply(string.format(_("orders-comms","In what sector is %s located?"),station_medical_research:getCallSign()), function()
-						setCommsMessage(string.format(_("orders-comms","%s is located in sector %s."),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
+					addCommsReply(string.format(_("mission3th-comms","In what sector is %s located?"),station_medical_research:getCallSign()), function()
+						setCommsMessage(string.format(_("mission3th-comms","%s is located in sector %s."),station_medical_research:getCallSign(),station_medical_research:getSectorName()))
 					end)
 				end
 			end)
