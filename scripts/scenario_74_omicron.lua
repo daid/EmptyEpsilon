@@ -9838,29 +9838,31 @@ function eliminatePlague(delta)
 			p.omicron_broadcast_timer_ops = "omicron_broadcast_timer_ops"
 			p:addCustomInfo("Operations",p.omicron_broadcast_timer_ops,timer_status,4)
 		end
-		if difficulty < 2 then	--hint if science heartbeat masked
-			for pidx,p in ipairs(getActivePlayerShips()) do
-				if p.plague_station_hint == nil then
-					local current_approach = distance(p,station_plague)
-					if p.proximity_hint_timer ~= nil then
-						if p.proximity_hint_timer > getScenarioTime() then
-							if current_approach > (p:getShortRangeRadarRange() * 3) then
-								p:addToShipLog(string.format(_("shipLog","[%s] Our analysis of your routine ship telemetry indicates that you passed the Exuari plague station, %s."),station_regional_hq:getCallSign(),station_plague:getCallSign()),"Magenta")
-								p.plague_station_hint = "sent"
-							end
-						end
-					else
-						if p.closest_approach == nil then
-							p.closest_approach = current_approach
-						end
-						p.closest_approach = math.min(p.closest_approach,current_approach)
-						if p.closest_approach < p:getShortRangeRadarRange() then
-							p.proximity_hint_timer = getScenarioTime() + 60
-						end
-					end
-				end
-			end
-		end
+		if station_plague ~= nil and station_plague:isValid() then
+    if difficulty < 2 then    --hint if science heartbeat masked
+        for pidx,p in ipairs(getActivePlayerShips()) do
+            if p.plague_station_hint == nil then
+                local current_approach = distance(p,station_plague)
+                if p.proximity_hint_timer ~= nil then
+                    if p.proximity_hint_timer > getScenarioTime() then
+                        if current_approach > (p:getShortRangeRadarRange() * 3) then
+                            p:addToShipLog(string.format(_("shipLog","[%s] Our analysis of your routine ship telemetry indicates that you passed the Exuari plague station, %s."),station_regional_hq:getCallSign(),station_plague:getCallSign()),"Magenta")
+                            p.plague_station_hint = "sent"
+                        end
+                    end
+                else
+                    if p.closest_approach == nil then
+                        p.closest_approach = current_approach
+                    end
+                    p.closest_approach = math.min(p.closest_approach,current_approach)
+                    if p.closest_approach < p:getShortRangeRadarRange() then
+                        p.proximity_hint_timer = getScenarioTime() + 60
+                    end
+                end
+            end
+        end
+    end
+end
 		if station_plague == nil then
 			winGame(_("msgMainscreen","Exuari Omicron plague station destroyed. Humanity saved"))
 		elseif not station_plague:isValid() then
