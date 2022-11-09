@@ -2539,7 +2539,8 @@ function placeEnvironmentStation(axis)
 		end
 		tsa:destroy()
 		tpa:destroy()
-		local station = placeStation(eo_x, eo_y, name_group, selected_faction, s_size)
+	local station = placeStation(eo_x, eo_y, name_group, selected_faction, s_size)
+	if station ~= nil then
 		table.insert(place_space,{obj=station,dist=station_defend_dist[s_size],shape="circle"})
 		table.insert(station_list,station)
 		--defense fleet
@@ -2551,7 +2552,8 @@ function placeEnvironmentStation(axis)
 			ship:setCallSign(generateCallSign(nil,selected_faction))
 		end
 		station.defense_fleet = fleet
-		return station
+	end
+	return station
 	end
 end
 function placeMineField(axis)
