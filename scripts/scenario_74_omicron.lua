@@ -1802,7 +1802,7 @@ function constructEnvironment()
 	critical_transport:orderDock(station_regional_hq)
 	critical_transport:setFaction(player_faction):setCommsScript(""):setCommsFunction(commsShip)
 	table.insert(place_space,{obj=critical_transport,dist=600,shape="circle"})
-	primary_orders = string.format(_("orders-comms","Protect freighter %s"),critical_transport:getCallSign())
+	primary_orders = string.format(_("orders-comms","Protect freighter %s until they dock at %s"),critical_transport:getCallSign(),station_regional_hq:getCallSign())
 	--	freighter attackers
 	local attack_angle = initial_angle + 180
 	local l1_x, l1_y = vectorFromAngleNorth(initial_angle, 25000)
@@ -3390,7 +3390,7 @@ function handleDockedState()
 	oMsg = string.format(_("station-comms","%s\n\nReputation: %i"),oMsg,math.floor(comms_source:getReputationPoints()))
 	setCommsMessage(oMsg)
 	if comms_target == station_medical_research and comms_source.medical_research == nil then
-		addCommsReply(_("mission2nd-comms","Request medical research for Fargalli"), function()
+		addCommsReply(_("mission2ndBis-comms","Request medical research for Fargalli"), function()
 			comms_source.medical_research = true
 			medical_research_obtained = true
 			local upgrade_msg = ""
@@ -4392,7 +4392,7 @@ function handleUndockedState()
 				local s_x, s_y = comms_target:getPosition()
 				local p_x, p_y = comms_source:getPosition()
 				local comms_bearing = angleFromVectorNorth(p_x, p_y, s_x, s_y)
-				setCommsMessage(string.format(_("Based on triangulation and signal strength, our communications software says you're on a bearing of %.1f from us at a distance of %.1f units",comms_bearing,comms_distance/1000)))
+				setCommsMessage(string.format(_("station-comms", "Based on triangulation and signal strength, our communications software says you're on a bearing of %.1f from us at a distance of %.1f units",comms_bearing,comms_distance/1000)))
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
@@ -9411,7 +9411,7 @@ function freighterMessage()
 		local player_list = getActivePlayerShips()
 		for index, p in ipairs(player_list) do
 			if p.protect_freighter_message == nil then
-				station_regional_hq:sendCommsMessage(p,string.format(_("centralcommandOrders-incCall","To: %s\nFrom: %s\n\nGreetings %s,\n\nPlease ensure the safe arrival of freighter %s at %s. Looks like the Exuari might attack them."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
+				station_regional_hq:sendCommsMessage(p,string.format(_("mission1st-comms","To: %s\nFrom: %s\n\nGreetings %s,\n\nPlease ensure the safe arrival of freighter %s at %s. Looks like the Exuari might attack them."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
 				p.protect_freighter_message = "sent"
 			end
 		end
@@ -9586,15 +9586,15 @@ end
 function freighterSafeMessage()
 	local player_list = getActivePlayerShips()
 	local ship_type = critical_transport:getTypeName()
-	local activity = _("centralcommandOrders-incCall","unloading cargo")
+	local activity = _("mission1st-comms","unloading cargo")
 	if ship_type:find("Garbage") ~= nil then
-		activity = _("centralcommandOrders-incCall","picking up cargo")
+		activity = _("mission1st-comms","picking up cargo")
 	elseif ship_type:find("Personnel") ~= nil then
-		activity = _("centralcommandOrders-incCall","disembarking passengers")
+		activity = _("mission1st-comms","disembarking passengers")
 	end
 	for index, p in ipairs(player_list) do
 		if p.freighter_safe_message == nil then
-			station_regional_hq:sendCommsMessage(p,string.format(_("centralcommandOrders-incCall","To: %s\nFrom: %s\n\nHello %s,\n\nFreighter %s has safely docked and is %s. Thanks for your assistance."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),activity))
+			station_regional_hq:sendCommsMessage(p,string.format(_("mission1st-comms","To: %s\nFrom: %s\n\nHello %s,\n\nFreighter %s has safely docked and is %s. Thanks for your assistance."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),activity))
 			p.freighter_safe_message = "sent"
 		end
 	end
