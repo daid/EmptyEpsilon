@@ -4386,9 +4386,9 @@ if #accessible_warp_jammers > 0 then
 				end)
 			end
 			if pay_rep then
-				addCommsReply(_("station_comms","Why do I have to pay reputation to log in to some of these warp jammers?"),function()
-					setCommsMessage(string.format(_("It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"),comms_target:getCallSign(),comms_source:getCallSign()))
-					addCommsReply("Yes, please provide more details",function()
+				addCommsReply(_("station-comms", "Why do I have to pay reputation to log in to some of these warp jammers?"),function()
+					setCommsMessage(string.format(_("station-comms", "It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"),comms_target:getCallSign(),comms_source:getCallSign()))
+					addCommsReply("station-comms", "Yes, please provide more details",function()
 						local out = _("station-comms","These are the cases and their reputation costs:")
 						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
 						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
