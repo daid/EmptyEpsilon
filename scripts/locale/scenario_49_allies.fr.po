@@ -13,9 +13,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
 # Scenario name
 msgid "Allies and Enemies"
 msgstr "Alliés et ennemis"
+
 # Scenario description
 msgid ""
 "The Arlenians are your allies. The Kraylors and Exuari are your enemies and "
@@ -43,34 +45,44 @@ msgstr ""
 "https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
 "https://discord.gg/2NPKyMnGwp"
+
 # Scenario setting
 msgctxt "setting"
 msgid "Enemies"
 msgstr "Ennemis"
+
 msgctxt "setting"
 msgid "Configures the amount of enemies spawned in the scenario."
 msgstr "Définit le nombre d'ennemis générés dans le scénario."
+
 msgctxt "Enemies"
 msgid "Easy"
 msgstr "Facile"
+
 msgctxt "Enemies"
 msgid "Easy goals and/or enemies"
 msgstr "Objectifs et/ou quantité d'ennemis faciles."
+
 msgctxt "Enemies"
 msgid "Normal"
 msgstr "Normal"
+
 msgctxt "Enemies"
 msgid "Normal amount of enemies. Recommended for a normal crew."
 msgstr "Quantité d'ennemis par défaut. Recommandé pour un équipage standard."
+
 msgctxt "Enemies"
 msgid "Hard"
 msgstr "Difficile"
+
 msgctxt "Enemies"
 msgid "Hard goals and/or enemies"
 msgstr "Objectifs et/ou quantité d'ennemis difficiles."
+
 msgctxt "Enemies"
 msgid "One"
 msgstr "Mission unique"
+
 msgctxt "Enemies"
 msgid ""
 "Only one mission randomly chosen from several possible missions (Default is "
@@ -78,9 +90,11 @@ msgid ""
 msgstr ""
 "Une seule mission choisie au hasard parmi 3 (par défaut c'est les 3 missions "
 "dans un ordre aléatoire)."
+
 msgctxt "Enemies"
 msgid "Easy One"
 msgstr "Mission unique facile"
+
 msgctxt "Enemies"
 msgid ""
 "Easy goals and/or enemies, only one mission randomly chosen from several "
@@ -88,9 +102,11 @@ msgid ""
 msgstr ""
 "Objectifs et/ou quantité d'ennemis faciles. Une seule mission choisie au "
 "hasard parmi 3 (par défaut c'est les 3 missions dans un ordre aléatoire)."
+
 msgctxt "Enemies"
 msgid "Hard One"
 msgstr "Mission unique difficile"
+
 msgctxt "Enemies"
 msgid ""
 "Hard goals and/or enemies, only one mission randomly chosen from several "
@@ -98,18 +114,22 @@ msgid ""
 msgstr ""
 "Objectifs et/ou quantité d'ennemis difficiles. Une seule mission choisie au "
 "hasard parmi 3 (par défaut c'est les 3 missions dans un ordre aléatoire)."
+
 #: scripts/scenario_49_allies.lua:64
 msgctxt "buttonGM"
 msgid "Mining"
 msgstr "Exploitation minière"
+
 #: scripts/scenario_49_allies.lua:66
 msgctxt "buttonGM"
 msgid "Admiral"
 msgstr "Amiral Koshenz"
+
 #: scripts/scenario_49_allies.lua:68
 msgctxt "buttonGM"
 msgid "Doomsday"
 msgstr "Arme apocalyptique"
+
 #: scripts/scenario_49_allies.lua:408
 msgctxt "gossip-comms"
 msgid ""
@@ -117,12 +137,14 @@ msgid ""
 msgstr ""
 "J'ai entendu dire que le chef des opérations avait un faible pour son "
 "adjointe administrative."
+
 #: scripts/scenario_49_allies.lua:409
 msgctxt "gossip-comms"
 msgid "My mining friends tell me Krak or Kruk is about to strike it rich"
 msgstr ""
 "Mes amis mineurs m'ont dit que Krak or Kruk était sur le point de devenir "
 "riche."
+
 #: scripts/scenario_49_allies.lua:410
 msgctxt "gossip-comms"
 msgid ""
@@ -131,6 +153,7 @@ msgid ""
 msgstr ""
 "Savez-vous que vous pouvez généralement embaucher une équipe de réparation "
 "de remplacement moins cher dans les stations amies ?"
+
 #: scripts/scenario_49_allies.lua:411
 msgctxt "gossip-comms"
 msgid ""
@@ -139,6 +162,7 @@ msgid ""
 msgstr ""
 "Sous leur uniforme, les Kraylors ont un appendice supplémentaire. Je me "
 "demande à quoi ça leur sert."
+
 #: scripts/scenario_49_allies.lua:412
 msgctxt "gossip-comms"
 msgid ""
@@ -147,6 +171,7 @@ msgid ""
 msgstr ""
 "Les Kraylors sont peut-être les ennemis de la marine humaine, mais ils "
 "fabriquent de très bons BBQ Mynock, On peut au moins leur accorder ça."
+
 #: scripts/scenario_49_allies.lua:413
 msgctxt "gossip-comms"
 msgid ""
@@ -155,6 +180,7 @@ msgid ""
 msgstr ""
 "Les Kraylors et les Ktlitiens se rapprocheraient d'un cessez-le-feu d'après "
 "ce que j'ai entendu. Ce ne serait pas vraiment une bonne nouvelle pour nous."
+
 #: scripts/scenario_49_allies.lua:414
 msgctxt "gossip-comms"
 msgid ""
@@ -163,6 +189,7 @@ msgid ""
 msgstr ""
 "La baie d'amarrage n°7 proposerait des substances psychotropes intéressantes "
 "à vendre, mais elles seraient surveillées entre 19h00 et 23h00."
+
 #: scripts/scenario_49_allies.lua:415
 msgctxt "gossip-comms"
 msgid ""
@@ -170,6 +197,7 @@ msgid ""
 msgstr ""
 "Regardez le ciel ce soir dans le quadrant J vers 22h43. Ça devrait être "
 "spectaculaire."
+
 #: scripts/scenario_49_allies.lua:416
 msgctxt "gossip-comms"
 msgid ""
@@ -178,6 +206,7 @@ msgid ""
 msgstr ""
 "Je pense que le pilote de la navette a un Ktlitien miniature apprivoisé en "
 "cage dans ses quartiers. Parfois je l'entends la nuit."
+
 #: scripts/scenario_49_allies.lua:417
 msgctxt "gossip-comms"
 msgid ""
@@ -186,6 +215,7 @@ msgid ""
 msgstr ""
 "Avez-vous entendu la poursuite et les hurlements dans les couloirs du niveau "
 "4 la nuit dernière ? Trois Kraylors ont été capturés et mis en prison."
+
 #: scripts/scenario_49_allies.lua:418
 msgctxt "gossip-comms"
 msgid ""
@@ -194,26 +224,32 @@ msgid ""
 msgstr ""
 "La rumeur veut que les deux frères Lichten soient sur le point de faire une "
 "nouvelle découverte. Et ce n'est pas une autre saveur de vin non plus."
+
 #: scripts/scenario_49_allies.lua:799
 msgctxt "ZoneLabelDescription-faction"
 msgid "Human"
 msgstr "Humains"
+
 #: scripts/scenario_49_allies.lua:800
 msgctxt "ZoneLabelDescription-faction"
 msgid "Arlenian"
 msgstr "Arléniens"
+
 #: scripts/scenario_49_allies.lua:801
 msgctxt "ZoneLabelDescription-faction"
 msgid "Kraylor"
 msgstr "Kraylors"
+
 #: scripts/scenario_49_allies.lua:802
 msgctxt "ZoneLabelDescription-faction"
 msgid "Exuari"
 msgstr "Éxuaris"
+
 #: scripts/scenario_49_allies.lua:1512
 msgctxt "scienceDescription-station"
 msgid "Optical Components"
 msgstr "Composants optiques"
+
 #: scripts/scenario_49_allies.lua:1526
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -221,6 +257,7 @@ msgid ""
 msgstr ""
 "Nous fabriquons et fournissons des composants optiques pour divers systèmes "
 "de stations et de navires."
+
 #: scripts/scenario_49_allies.lua:1527
 msgctxt "stationStory-comms"
 msgid ""
@@ -232,10 +269,12 @@ msgstr ""
 "plusieurs sociétés, dont Leica de Suisse, le fabricant de lentilles et la "
 "société japonaise de recherche et de développement électronique et optique à "
 "faible émission de carbone."
+
 #: scripts/scenario_49_allies.lua:1533
 msgctxt "scienceDescription-station"
 msgid "Battery and software engineering"
 msgstr "Ingénierie en batteries et logiciels"
+
 #: scripts/scenario_49_allies.lua:1545
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -244,6 +283,7 @@ msgid ""
 msgstr ""
 "Nous fournissons des batteries haute capacité de haute qualité et des "
 "logiciels spécialisés pour tous les systèmes de bord."
+
 #: scripts/scenario_49_allies.lua:1546
 msgctxt "stationStory-comms"
 msgid ""
@@ -254,14 +294,17 @@ msgstr ""
 "La station porte le nom d'un ingénieur logiciel fictif dans un film de la "
 "fin du 20e siècle dépeignant l'humanité inconsciemment conquise par des "
 "extraterrestres et maintenue docile par une illusion générée par un logiciel."
+
 #: scripts/scenario_49_allies.lua:1552
 msgctxt "scienceDescription-station"
 msgid "Shield and Armor Research"
 msgstr "Recherche sur les boucliers et armures"
+
 #: scripts/scenario_49_allies.lua:1566
 msgctxt "stationGeneralInfo-comms"
 msgid "The finest shield and armor manufacturer in the quadrant"
 msgstr "Le meilleur fabricant de boucliers et d'armures du quadrant."
+
 #: scripts/scenario_49_allies.lua:1567
 msgctxt "stationStory-comms"
 msgid ""
@@ -270,16 +313,19 @@ msgid ""
 msgstr ""
 "Nous avons nommé cette station en mémoire à l'esprit pionnier de "
 "l'explorateur du Starfleet du 22ème siècle, le capitaine Jonathan Archer."
+
 #: scripts/scenario_49_allies.lua:1573
 msgctxt "scienceDescription-station"
 msgid "Energy and particle beam components"
 msgstr "Composants de faisceau d'énergie et de particules"
+
 #: scripts/scenario_49_allies.lua:1587
 msgctxt "stationGeneralInfo-comms"
 msgid "We fabricate general and specialized components for ship beam systems"
 msgstr ""
 "Nous fabriquons des composants généraux et spécialisés pour les faisceaux "
 "des navires."
+
 #: scripts/scenario_49_allies.lua:1588
 msgctxt "stationStory-comms"
 msgid ""
@@ -290,10 +336,12 @@ msgstr ""
 "Cette station porte le nom d'Archimède qui, selon la légende, a utilisé une "
 "série de miroirs à focale réglable pour concentrer la lumière du soleil sur "
 "une flotte navale romaine envahissant Syracuse, y mettant le feu."
+
 #: scripts/scenario_49_allies.lua:1594
 msgctxt "scienceDescription-station"
 msgid "Warp and Impulse engine manufacturing"
 msgstr "Fabrication de moteurs à impulsions et à vitesse lumière"
+
 #: scripts/scenario_49_allies.lua:1606
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -303,6 +351,7 @@ msgstr ""
 "Nous fabriquons des moteurs à impulsions, à vitesse lumière et pour "
 "téléporteurs pour la flotte de la marine humaine ainsi que pour d'autres "
 "clients indépendants sur une base contractuelle."
+
 #: scripts/scenario_49_allies.lua:1607
 msgctxt "stationStory-comms"
 msgid ""
@@ -315,10 +364,12 @@ msgstr ""
 "des stations fictives qui ont suivi. La station a initialement construit des "
 "navires dignes de tout l'espace. Avec le temps, elle s'est spécialisée dans "
 "les systèmes de propulsion."
+
 #: scripts/scenario_49_allies.lua:1613
 msgctxt "scienceDescription-station"
 msgid "Training and Coordination"
 msgstr "Formation et coordination"
+
 #: scripts/scenario_49_allies.lua:1624
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -328,6 +379,7 @@ msgstr ""
 "Nous formons des élèves-officiers de la marine aux fonctions routinières et "
 "spécialisées à bord de vaisseaux spatiaux et coordonnons l'activité navale "
 "de l'ensemble du secteur."
+
 #: scripts/scenario_49_allies.lua:1625
 msgctxt "stationStory-comms"
 msgid ""
@@ -343,10 +395,12 @@ msgstr ""
 "Elle a commencé comme observatoire stellaire, puis est devenue une station "
 "d'approvisionnement et au fur et à mesure qu'elle s'est développée, elle est "
 "devenue un centre d'éducation et de coordination pour la région."
+
 #: scripts/scenario_49_allies.lua:1631
 msgctxt "scienceDescription-station"
 msgid "Communication components"
 msgstr "Composants pour systèmes de communication"
+
 #: scripts/scenario_49_allies.lua:1644
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -355,6 +409,7 @@ msgid ""
 msgstr ""
 "Nous fournissons toute une gamme d'équipements et de logiciels de "
 "communication à utiliser à bord des navires."
+
 #: scripts/scenario_49_allies.lua:1645
 msgctxt "stationStory-comms"
 msgid ""
@@ -367,14 +422,17 @@ msgstr ""
 "communication transgalactique grâce à une application créative de "
 "singularité quantique. Le personnel de la station se réfère souvent à la "
 "station comme étant la station de brocoli."
+
 #: scripts/scenario_49_allies.lua:1651
 msgctxt "scienceDescription-station"
 msgid "Medical research"
 msgstr "Recherche médicale"
+
 #: scripts/scenario_49_allies.lua:1654
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and treat exotic medical conditions"
 msgstr "Nous recherchons et traitons des conditions médicales exotiques."
+
 #: scripts/scenario_49_allies.lua:1655
 msgctxt "stationStory-comms"
 msgid ""
@@ -385,16 +443,19 @@ msgstr ""
 "La station porte le nom du centre national de recherche médicale des États-"
 "Unis situé à Bethesda, dans le Maryland sur terre et qui a fût créé au "
 "milieu du 20e siècle."
+
 #: scripts/scenario_49_allies.lua:1661
 msgctxt "scienceDescription-station"
 msgid "Warp drive components"
 msgstr "Composants pour système de vitesse lumière"
+
 #: scripts/scenario_49_allies.lua:1678
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide warp drive engines and components"
 msgstr ""
 "Nous fournissons des moteurs et des composants pour système de vitesse "
 "lumière."
+
 #: scripts/scenario_49_allies.lua:1679
 msgctxt "stationStory-comms"
 msgid ""
@@ -404,21 +465,25 @@ msgstr ""
 "Cette station porte le nom de Chris Van Den Broeck qui a initialement fait "
 "des recherches sur la possibilité de distorsion de l'espace et du temps à la "
 "fin du 20e siècle sur Terre."
+
 #: scripts/scenario_49_allies.lua:1685 scripts/scenario_49_allies.lua:2090
 #: scripts/scenario_49_allies.lua:2130 scripts/scenario_49_allies.lua:2776
 msgctxt "scienceDescription-station"
 msgid "Mining station"
 msgstr "Station minière"
+
 #: scripts/scenario_49_allies.lua:1700
 msgctxt "scienceDescription-station"
 msgid "Robotic research"
 msgstr "Recherche robotique"
+
 #: scripts/scenario_49_allies.lua:1713
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and provide robotic systems and components"
 msgstr ""
 "Nous faisons de la recherche et fournissons des systèmes et composants "
 "robotiques."
+
 #: scripts/scenario_49_allies.lua:1714
 msgctxt "stationStory-comms"
 msgid ""
@@ -427,10 +492,12 @@ msgid ""
 msgstr ""
 "Cette station porte le nom du Dr Susan Calvin, pionnière de la recherche et "
 "de la programmation comportementales robotique."
+
 #: scripts/scenario_49_allies.lua:1720
 msgctxt "scienceDescription-station"
 msgid "Advanced Material components"
 msgstr "Composants de matériaux avancés"
+
 #: scripts/scenario_49_allies.lua:1745
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -440,6 +507,7 @@ msgstr ""
 "Nous fabriquons plusieurs types de matériaux essentiels à diverses "
 "industries spatiales telles que la construction navale, la construction de "
 "stations et l'extraction de minéraux."
+
 #: scripts/scenario_49_allies.lua:1746
 msgctxt "stationStory-comms"
 msgid ""
@@ -448,10 +516,12 @@ msgid ""
 msgstr ""
 "Nous avons nommé notre station d'après le Dr Cavor, le physicien qui a "
 "inventé un matériau de confinage pour les ondes de gravité - Cavorite."
+
 #: scripts/scenario_49_allies.lua:1752 scripts/scenario_49_allies.lua:2280
 msgctxt "scienceDescription-station"
 msgid "Trading station"
 msgstr "Station de commerce"
+
 #: scripts/scenario_49_allies.lua:1763
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -460,6 +530,7 @@ msgid ""
 msgstr ""
 "Tout simplement le plus grand marché et lieu de négoce sur vingt secteurs à "
 "la ronde. Vous pouvez y trouver l'objet de tous vos désirs ici."
+
 #: scripts/scenario_49_allies.lua:1764
 msgctxt "stationStory-comms"
 msgid ""
@@ -469,10 +540,12 @@ msgstr ""
 "Inspiré du bazar du début du 21e siècle sur Terre à Bangkok, en Thaïlande. "
 "Conçu et construit dans l'unique but de développer le commerce et les "
 "affaires."
+
 #: scripts/scenario_49_allies.lua:1770
 msgctxt "scienceDescription-station"
 msgid "Shielded circuitry fabrication"
 msgstr "Fabrication de circuits blindés"
+
 #: scripts/scenario_49_allies.lua:1785
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -482,6 +555,7 @@ msgstr ""
 "Nous fabriquons une grande variété de circuits pour de nombreux systèmes de "
 "navires, blindés et protégés de la détection des capteurs et des "
 "interférences de contrôle externes."
+
 #: scripts/scenario_49_allies.lua:1786
 msgctxt "stationStory-comms"
 msgid ""
@@ -493,16 +567,19 @@ msgstr ""
 "avec laquelle les particules stationnaires chargées électriquement se "
 "repoussent ou s'attaquent - un principe fondamental dans la conception de "
 "nos circuits."
+
 #: scripts/scenario_49_allies.lua:1792 scripts/scenario_49_allies.lua:2553
 msgctxt "scienceDescription-station"
 msgid "Impulse engine components"
 msgstr "Composants de moteurs à impulsions"
+
 #: scripts/scenario_49_allies.lua:1807
 msgctxt "stationGeneralInfo-comms"
 msgid "We supply high quality impulse engines and parts for use aboard ships"
 msgstr ""
 "Nous fournissons des moteurs à impulsions et des pièces de haute qualité "
 "pour une utilisation à bord des navires."
+
 #: scripts/scenario_49_allies.lua:1808
 msgctxt "stationStory-comms"
 msgid ""
@@ -511,16 +588,19 @@ msgid ""
 msgstr ""
 "Cette station a été nommée d'après l'ingénieur fictif Cyrus Smith créé par "
 "l'auteur du 19ème siècle Jules Verne."
+
 #: scripts/scenario_49_allies.lua:1814 scripts/scenario_49_allies.lua:2298
 #: scripts/scenario_49_allies.lua:2596
 msgctxt "scienceDescription-station"
 msgid "Android components"
 msgstr "Composants pour androïdes"
+
 #: scripts/scenario_49_allies.lua:1827
 msgctxt "stationGeneralInfo-comms"
 msgid "Supplier of android components, programming and service"
 msgstr ""
 "Fournisseur de composants pour androïdes, de programmation et de service."
+
 #: scripts/scenario_49_allies.lua:1828
 msgctxt "stationStory-comms"
 msgid ""
@@ -529,10 +609,12 @@ msgid ""
 msgstr ""
 "Nommé en l'honneur de Richard Deckard qui a inspiré de nombreux algorithmes "
 "sophistiqués de sécurité désormais requis pour tous les androïdes."
+
 #: scripts/scenario_49_allies.lua:1834
 msgctxt "scienceDescription-station"
 msgid "Repulsor and Tractor Beam Components"
 msgstr "Composants de faisceaux répulseur et tracteur"
+
 #: scripts/scenario_49_allies.lua:1849
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -541,6 +623,7 @@ msgid ""
 msgstr ""
 "Nous pouvons répondre à tous vos besoins de poussée et de traction avec des "
 "équipements spécialisés fabriqués sur mesure."
+
 #: scripts/scenario_49_allies.lua:1850
 msgctxt "stationStory-comms"
 msgid ""
@@ -552,10 +635,12 @@ msgstr ""
 "Clifford D. Simak ainsi que du développeur du 19e siècle John Deere qui a "
 "inspiré une entreprise qui fabrique des équivalents terrestres de nos "
 "produits."
+
 #: scripts/scenario_49_allies.lua:1856 scripts/scenario_49_allies.lua:2318
 msgctxt "scienceDescription-station"
 msgid "Transporter components"
 msgstr "Composants de transporteur"
+
 #: scripts/scenario_49_allies.lua:1871
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -564,6 +649,7 @@ msgid ""
 msgstr ""
 "Nous fournissons des transporteurs utilisés à bord des navires ainsi que des "
 "composants pour la réparation et l'entretien."
+
 #: scripts/scenario_49_allies.lua:1872
 msgctxt "stationStory-comms"
 msgid ""
@@ -574,15 +660,18 @@ msgstr ""
 "La station porte le nom de l'inventeur du transporteur au début du 22e "
 "siècle, le Dr Emory Erickson. Cette station est fière d'avoir reçu "
 "l'approbation de l'amiral Leonard McCoy."
+
 #: scripts/scenario_49_allies.lua:1878 scripts/scenario_49_allies.lua:2170
 msgctxt "scienceDescription-station"
 msgid "Autodoc components"
 msgstr "Composants Autodoc"
+
 #: scripts/scenario_49_allies.lua:1892
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide components for automated medical machinery"
 msgstr ""
 "Nous fournissons des composants pour des machines médicales automatisées."
+
 #: scripts/scenario_49_allies.lua:1893
 msgctxt "stationStory-comms"
 msgid ""
@@ -592,16 +681,19 @@ msgstr ""
 "Cette station est l'évolution de l'entreprise qui a commencé la distribution "
 "automatisée de produits pharmaceutiques au début du 21e siècle sur Terre en "
 "Finlande."
+
 #: scripts/scenario_49_allies.lua:1899
 msgctxt "scienceDescription-station"
 msgid "Nanotechnology research"
 msgstr "Recherche en nanotechnologie"
+
 #: scripts/scenario_49_allies.lua:1913
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites and software for a variety of ship-board systems"
 msgstr ""
 "Nous fournissons des nanites et des logiciels pour une variété de systèmes "
 "embarqués."
+
 #: scripts/scenario_49_allies.lua:1914
 msgctxt "stationStory-comms"
 msgid ""
@@ -610,10 +702,12 @@ msgid ""
 msgstr ""
 "Le nom de cette station rend hommage à l'un des premiers chercheurs "
 "scientifiques en nanotechnologie, le physicien Richard Feynman."
+
 #: scripts/scenario_49_allies.lua:1921 scripts/scenario_49_allies.lua:2024
 msgctxt "scienceDescription-station"
 msgid "Mining"
 msgstr "Exploitation minière"
+
 #: scripts/scenario_49_allies.lua:1923
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -621,6 +715,7 @@ msgid ""
 msgstr ""
 "Nous extrayons des astéroïdes à proximité à la recherche de minéraux "
 "précieux et les traitons pour les vendre."
+
 #: scripts/scenario_49_allies.lua:1924
 msgctxt "stationStory-comms"
 msgid ""
@@ -631,10 +726,12 @@ msgstr ""
 "Le nom de cette station est inspiré d'une grande mine d'or sur Terre en "
 "Indonésie. Les constructeurs de la station espéraient trouver une quantité "
 "similaire de minéraux parmi ces astéroïdes."
+
 #: scripts/scenario_49_allies.lua:1965
 msgctxt "scienceDescription-station"
 msgid "Observatory and stellar mapping"
 msgstr "Observatoire et cartographie stellaire"
+
 #: scripts/scenario_49_allies.lua:1976
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -643,16 +740,19 @@ msgid ""
 msgstr ""
 "Nous étudions le cosmos et cartographions les phénomènes stellaires. Nous "
 "suivons également les astéroïdes en mouvement. Attention ! Je rigole."
+
 #: scripts/scenario_49_allies.lua:1982 scripts/scenario_49_allies.lua:2714
 msgctxt "scienceDescription-station"
 msgid "Sensor components"
 msgstr "Composants de capteurs"
+
 #: scripts/scenario_49_allies.lua:1994
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture sensor components and systems"
 msgstr ""
 "Nous faisons de la rechercher et fabriquons des composants et des systèmes "
 "de capteurs."
+
 #: scripts/scenario_49_allies.lua:1995
 msgctxt "stationStory-comms"
 msgid ""
@@ -663,16 +763,19 @@ msgstr ""
 "La station porte le nom de Tony Heyes, l'inventeur de certains des premiers "
 "capteurs électromagnétiques du milieu du 20e siècle sur Terre au Royaume-Uni "
 "pour aider à la mobilité des humains non voyants."
+
 #: scripts/scenario_49_allies.lua:2001
 msgctxt "scienceDescription-station"
 msgid "Nanite supplier"
 msgstr "Fournisseur de nanites"
+
 #: scripts/scenario_49_allies.lua:2016
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide nanites for various organic and non-organic systems"
 msgstr ""
 "Nous fournissons des nanites pour divers systèmes organiques et non "
 "organiques."
+
 #: scripts/scenario_49_allies.lua:2017
 msgctxt "stationStory-comms"
 msgid ""
@@ -681,16 +784,19 @@ msgid ""
 msgstr ""
 "Cette station porte le nom du nanotechnologue Hossam Haick du début du 21e "
 "siècle sur Terre en Israël."
+
 #: scripts/scenario_49_allies.lua:2028
 msgctxt "stationGeneralInfo-comms"
 msgid "We mine nearby asteroids for precious minerals"
 msgstr ""
 "Nous extrayons des astéroïdes à proximité à la recherche de minéraux "
 "précieux."
+
 #: scripts/scenario_49_allies.lua:2069
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology training"
 msgstr "Formation en xénopsychologie"
+
 #: scripts/scenario_49_allies.lua:2083
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -699,6 +805,7 @@ msgid ""
 msgstr ""
 "Nous proposons des cours et des simulations pour aider à former diverses "
 "espèces sur la façon de les relier les unes aux autres."
+
 #: scripts/scenario_49_allies.lua:2084
 msgctxt "stationStory-comms"
 msgid ""
@@ -708,6 +815,7 @@ msgid ""
 msgstr ""
 "Poursuite des recherches initialement menées par le Dr Gennady Komov au "
 "début du 22ème siècle sur Vénus, appuyées par l'application de ces principes."
+
 #: scripts/scenario_49_allies.lua:2183
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -718,6 +826,7 @@ msgstr ""
 "Nous construisons, réparons et fournissons des composants et des mises à "
 "niveau pour des installations automatisées conçues pour les navires où un "
 "médecin ne peut pas être membre d'équipage (communément appelé autodocs)."
+
 #: scripts/scenario_49_allies.lua:2184
 msgctxt "stationStory-comms"
 msgid ""
@@ -729,14 +838,17 @@ msgstr ""
 "recherches et applications autour de la chirurgie assistée par robot dans le "
 "domaine de la néphrectomie partielle pour les tumeurs rénales au début du "
 "21e siècle sur Terre."
+
 #: scripts/scenario_49_allies.lua:2190
 msgctxt "scienceDescription-station"
 msgid "Zero gravity sports and entertainment"
 msgstr "Sports et divertissement en apesanteur"
+
 #: scripts/scenario_49_allies.lua:2203
 msgctxt "stationGeneralInfo-comms"
 msgid "Come take in a game or two or perhaps see a show"
 msgstr "Venez assister à un match ou deux et peut-être voir un spectacle."
+
 #: scripts/scenario_49_allies.lua:2204
 msgctxt "stationStory-comms"
 msgid ""
@@ -747,16 +859,19 @@ msgstr ""
 "Nommée d'après le Madison Square Garden de la Terre du 21e siècle, cette "
 "station a été conçue pour servir des objectifs similaires dans l'espace - un "
 "lieu de sport et de divertissement."
+
 #: scripts/scenario_49_allies.lua:2210
 msgctxt "scienceDescription-station"
 msgid "Energy beam components"
 msgstr "Composants de faisceau d'énergie"
+
 #: scripts/scenario_49_allies.lua:2223
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture energy beam components and systems"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des composants et des systèmes de "
 "faisceaux d'énergie."
+
 #: scripts/scenario_49_allies.lua:2224
 msgctxt "stationStory-comms"
 msgid ""
@@ -765,14 +880,17 @@ msgid ""
 msgstr ""
 "La station porte le nom de Theodore Maiman qui a fait des recherches et "
 "construit le premier laser au milieu du 20e siècle sur Terre."
+
 #: scripts/scenario_49_allies.lua:2230
 msgctxt "scienceDescription-station"
 msgid "Energy Beam Components"
 msgstr "Composants de faisceau d'énergie"
+
 #: scripts/scenario_49_allies.lua:2245
 msgctxt "stationGeneralInfo-comms"
 msgid "We manufacture energy beam components"
 msgstr "Nous fabriquons des composants de faisceaux d'énergie."
+
 #: scripts/scenario_49_allies.lua:2246
 msgctxt "stationStory-comms"
 msgid ""
@@ -783,16 +901,19 @@ msgstr ""
 "Station nommée d'après Guglielmo Marconi, un inventeur italien de la Terre "
 "du début du XXe siècle qui, avec Nicolo Tesla, a prétendu avoir inventé une "
 "arme à rayon de la mort ou à faisceau de particules."
+
 #: scripts/scenario_49_allies.lua:2252
 msgctxt "scienceDescription-station"
 msgid "Medical Research"
 msgstr "Recherche médicale"
+
 #: scripts/scenario_49_allies.lua:2255
 msgctxt "stationGeneralInfo-comms"
 msgid "We research exotic diseases and other human medical conditions"
 msgstr ""
 "Nous faisons des recherches sur des maladies exotiques et d'autres "
 "conditions médicales humaines."
+
 #: scripts/scenario_49_allies.lua:2256
 msgctxt "stationStory-comms"
 msgid ""
@@ -801,16 +922,19 @@ msgid ""
 msgstr ""
 "Nous poursuivons le travail médical commencé par William Worrall Mayo à la "
 "fin du 19ème siècle sur Terre."
+
 #: scripts/scenario_49_allies.lua:2262
 msgctxt "scienceDescription-station"
 msgid "Exobiology research"
 msgstr "Recherche en exobiologie"
+
 #: scripts/scenario_49_allies.lua:2273
 msgctxt "stationGeneralInfo-comms"
 msgid "We study recently discovered life forms not native to Earth"
 msgstr ""
 "Nous étudions des formes de vie récemment découvertes et non originaires de "
 "la Terre."
+
 #: scripts/scenario_49_allies.lua:2274
 msgctxt "stationStory-comms"
 msgid ""
@@ -819,10 +943,12 @@ msgid ""
 msgstr ""
 "Cette station porte le nom d'un des premiers exobiologistes de la Terre du "
 "milieu du 20e siècle, le Dr Stanley Miller."
+
 #: scripts/scenario_49_allies.lua:2291
 msgctxt "stationGeneralInfo-comms"
 msgid "Come to Muddvile for all your trade and commerce needs and desires"
 msgstr "Venez à Muddvile pour tous vos besoins et désirs d'achats."
+
 #: scripts/scenario_49_allies.lua:2292
 msgctxt "stationStory-comms"
 msgid ""
@@ -833,6 +959,7 @@ msgstr ""
 "À la retraite, Harry Mudd a lancé cette entreprise commerciale en utilisant "
 "son stock restant et ses nombreuses relations obtenues alors qu'il "
 "parcourait les étoiles en tant que vendeur."
+
 #: scripts/scenario_49_allies.lua:2311
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -842,6 +969,7 @@ msgstr ""
 "Nous faisons de la recherche et fabriquons des composants et des systèmes "
 "pour androïdes. Nous concevons nos androïdes pour maximiser leur "
 "ressemblance avec les humains."
+
 #: scripts/scenario_49_allies.lua:2312
 msgctxt "stationStory-comms"
 msgid ""
@@ -850,6 +978,7 @@ msgid ""
 msgstr ""
 "La station porte le nom du modèle révolutionnaire d'androïde produit par la "
 "société Tyrell."
+
 #: scripts/scenario_49_allies.lua:2334
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -859,6 +988,7 @@ msgstr ""
 "Nous faisons de la recherche et fabriquons des transporteurs et des "
 "composants de transporteur de haute qualité pour une utilisation à bord des "
 "navires."
+
 #: scripts/scenario_49_allies.lua:2335
 msgctxt "stationStory-comms"
 msgid ""
@@ -867,10 +997,12 @@ msgid ""
 msgstr ""
 "Miles O'Brien a démarré cette entreprise après son expérience en tant que "
 "chef de transporteur."
+
 #: scripts/scenario_49_allies.lua:2341
 msgctxt "scienceDescription-station"
 msgid "Optical components"
 msgstr "Composants optiques"
+
 #: scripts/scenario_49_allies.lua:2355
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -879,6 +1011,7 @@ msgid ""
 msgstr ""
 "Nous fabriquons des lentilles optiques et équipements associés ainsi que des "
 "câbles et composants en fibres optiques."
+
 #: scripts/scenario_49_allies.lua:2356
 msgctxt "stationStory-comms"
 msgid ""
@@ -889,10 +1022,12 @@ msgstr ""
 "Cette station est née de la société Olympus basée sur la terre au début du "
 "21e siècle. Elle a fusionné avec Infinera, puis a racheté plusieurs sociétés "
 "de logiciels avant de se lancer dans l'industrie spatiale."
+
 #: scripts/scenario_49_allies.lua:2362
 msgctxt "scienceDescription-station"
 msgid "Diplomatic training"
 msgstr "Formation diplomatique"
+
 #: scripts/scenario_49_allies.lua:2365
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -900,6 +1035,7 @@ msgid ""
 msgstr ""
 "L'académie de premier plan pour la formation au leadership et à la "
 "diplomatie dans la région."
+
 #: scripts/scenario_49_allies.lua:2366
 msgctxt "stationStory-comms"
 msgid ""
@@ -907,24 +1043,29 @@ msgid ""
 msgstr ""
 "Établie par la famille royale si critique à l'époque des bouleversements "
 "politiques."
+
 #: scripts/scenario_49_allies.lua:2372
 msgctxt "scienceDescription-station"
 msgid "Mining and trade"
 msgstr "Exploitation minière et commerce"
+
 #: scripts/scenario_49_allies.lua:2415
 msgctxt "scienceDescription-station"
 msgid "Mining and gambling"
 msgstr "Exploitation minière et jeux de hasard"
+
 #: scripts/scenario_49_allies.lua:2460 scripts/scenario_49_allies.lua:2502
 msgctxt "scienceDescription-station"
 msgid "Load lifters and components"
 msgstr "Élévateurs de charge et composants"
+
 #: scripts/scenario_49_allies.lua:2473
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components for various ship systems"
 msgstr ""
 "Nous fournissons des élévateurs de charge et des composants pour divers "
 "systèmes de navires."
+
 #: scripts/scenario_49_allies.lua:2474
 msgctxt "stationStory-comms"
 msgid ""
@@ -940,15 +1081,18 @@ msgstr ""
 "ajoutant des innovations basées sur ses années d'expérience dans "
 "l'utilisation d'élévateurs de charge et de leurs cousins les vaporisateurs "
 "d'humidité."
+
 #: scripts/scenario_49_allies.lua:2480
 msgctxt "scienceDescription-station"
 msgid "Optic components"
 msgstr "Composants optiques"
+
 #: scripts/scenario_49_allies.lua:2495
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide optic components for various ship systems"
 msgstr ""
 "Nous fournissons des composants optiques pour divers systèmes de navires."
+
 #: scripts/scenario_49_allies.lua:2496
 msgctxt "stationStory-comms"
 msgid ""
@@ -957,10 +1101,12 @@ msgid ""
 msgstr ""
 "Cette station est une excroissance de la société Panduit créée au milieu du "
 "20e siècle sur Terre aux États-Unis."
+
 #: scripts/scenario_49_allies.lua:2517
 msgctxt "stationGeneralInfo-comms"
 msgid "We provide load lifters and components"
 msgstr "Nous fournissons des élévateurs de charge et des composants."
+
 #: scripts/scenario_49_allies.lua:2518
 msgctxt "stationStory-comms"
 msgid ""
@@ -970,16 +1116,19 @@ msgstr ""
 "La station porte le nom d'Ellen Ripley qui a fait un usage créatif et "
 "efficace de l'un de nos élévateurs de charge lors de la défense de son "
 "vaisseau."
+
 #: scripts/scenario_49_allies.lua:2524
 msgctxt "scienceDescription-station"
 msgid "Shield components and research"
 msgstr "Composants et recherche sur les boucliers"
+
 #: scripts/scenario_49_allies.lua:2539
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and fabricate components for ship shield systems"
 msgstr ""
 "Nous effectuons des recherches et fabriquons des composants pour les "
 "systèmes de boucliers de vaisseaux."
+
 #: scripts/scenario_49_allies.lua:2540
 msgctxt "stationStory-comms"
 msgid ""
@@ -991,16 +1140,19 @@ msgstr ""
 "Cette station porte le nom de l'institut de recherche national Rutherford "
 "Appleton Laboratory au Royaume-Uni, qui a mené des recherches préliminaires "
 "sur la faisabilité de générer un bouclier énergétique à la fin du 20e siècle."
+
 #: scripts/scenario_49_allies.lua:2546 scripts/scenario_49_allies.lua:2984
 msgctxt "scienceDescription-station"
 msgid "Observatory"
 msgstr "Observatoire"
+
 #: scripts/scenario_49_allies.lua:2567
 msgctxt "stationGeneralInfo-comms"
 msgid "We research and manufacture impulse engine components and systems"
 msgstr ""
 "Nous faisons de la recherche et fabriquons des composants et systèmes pour "
 "moteurs à impulsion."
+
 #: scripts/scenario_49_allies.lua:2568
 msgctxt "stationStory-comms"
 msgid ""
@@ -1009,10 +1161,12 @@ msgid ""
 msgstr ""
 "La station porte le nom de Roger Shawyer qui a construit le premier "
 "prototype de moteur à impulsion au début du 21e siècle."
+
 #: scripts/scenario_49_allies.lua:2574
 msgctxt "scienceDescription-station"
 msgid "Repulsor and tractor beam components"
 msgstr "Composants de faisceaux répulseur et tracteur"
+
 #: scripts/scenario_49_allies.lua:2589
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1020,6 +1174,7 @@ msgid ""
 msgstr ""
 "Nous fabriquons des systèmes pour vaisseaux conçus pour pousser ou tirer "
 "d'autres objets dans l'espace."
+
 #: scripts/scenario_49_allies.lua:2590
 msgctxt "stationStory-comms"
 msgid ""
@@ -1032,10 +1187,12 @@ msgstr ""
 "remorqueurs du début du 21e siècle sur Terre en Inde. Les remorqueurs sur "
 "terre er sur les océans ont une fonction similaire aux navires spatiaux avec "
 "leur faisceaux tracteurs et répulseurs."
+
 #: scripts/scenario_49_allies.lua:2609
 msgctxt "stationGeneralInfo-comms"
 msgid "We create androids and android components"
 msgstr "Nous créons des androïdes et des composants pour androïdes."
+
 #: scripts/scenario_49_allies.lua:2610
 msgctxt "stationStory-comms"
 msgid ""
@@ -1044,10 +1201,12 @@ msgid ""
 msgstr ""
 "La station porte le nom du Dr Noonian Soong, le célèbre chercheur et "
 "créateur d'androïdes."
+
 #: scripts/scenario_49_allies.lua:2616
 msgctxt "scienceDescription-station"
 msgid "Logistics coordination"
 msgstr "Coordination logistique"
+
 #: scripts/scenario_49_allies.lua:2619
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1056,6 +1215,7 @@ msgid ""
 msgstr ""
 "Nous soutenons les stations et les vaisseaux de la région avec des services "
 "de planification et de communication."
+
 #: scripts/scenario_49_allies.lua:2620
 msgctxt "stationStory-comms"
 msgid ""
@@ -1064,10 +1224,12 @@ msgid ""
 msgstr ""
 "Nous reconnaissons l'influence du capitaine du Starfleet James Tiberius Kirk "
 "au 23e siècle dans le nom de notre station."
+
 #: scripts/scenario_49_allies.lua:2626
 msgctxt "scienceDescription-station"
 msgid "Advanced material components"
 msgstr "Composants de matériaux avancés"
+
 #: scripts/scenario_49_allies.lua:2651
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1076,6 +1238,7 @@ msgid ""
 msgstr ""
 "Nous fabriquons plusieurs types de composants de matériaux avancés. Nos "
 "produits les plus populaires sont nos filaments."
+
 #: scripts/scenario_49_allies.lua:2652
 msgctxt "stationStory-comms"
 msgid ""
@@ -1084,10 +1247,12 @@ msgid ""
 msgstr ""
 "Nous avons développé plusieurs de nos processus industriels grâce à la race "
 "Tokra, nous honorons donc notre succès en donnant leur nom à la station."
+
 #: scripts/scenario_49_allies.lua:2658
 msgctxt "scienceDescription-station"
 msgid "Shield and armor components and research"
 msgstr "Boucliers et armures : Composants et recherche"
+
 #: scripts/scenario_49_allies.lua:2672
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1096,6 +1261,7 @@ msgid ""
 msgstr ""
 "Nous faisons de la recherche et fabriquons des composants généraux et "
 "spécialisés pour les systèmes de bouclier et d'armures de vaisseaux."
+
 #: scripts/scenario_49_allies.lua:2673
 msgctxt "stationStory-comms"
 msgid ""
@@ -1107,10 +1273,12 @@ msgstr ""
 "technologie de boucliers, Alexander Toohie, à l'époque où il était considéré "
 "comme impossible de construire des boucliers en raison de la physique "
 "impliquée."
+
 #: scripts/scenario_49_allies.lua:2679 scripts/scenario_49_allies.lua:3028
 msgctxt "scienceDescription-station"
 msgid "Ship building and maintenance facility"
 msgstr "Construction de navires et établissement d'entretien"
+
 #: scripts/scenario_49_allies.lua:2690
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1124,10 +1292,12 @@ msgstr ""
 "construits ici même sur cette station. Nos objectifs de conception visent à "
 "rendre l'expérience de navigation spatiale aussi simple que possible compte "
 "tenu des capacités extraordinaires du vaisseau spatial moderne."
+
 #: scripts/scenario_49_allies.lua:2696
 msgctxt "scienceDescription-station"
 msgid "Shielded Circuitry Fabrication"
 msgstr "Fabrication de circuits blindés"
+
 #: scripts/scenario_49_allies.lua:2707
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1136,6 +1306,7 @@ msgid ""
 msgstr ""
 "Nous nous spécialisons dans les circuits protégés contre le piratage externe "
 "et adaptés aux systèmes de navires."
+
 #: scripts/scenario_49_allies.lua:2708
 msgctxt "stationStory-comms"
 msgid ""
@@ -1144,6 +1315,7 @@ msgid ""
 msgstr ""
 "Nous avons commencé comme succursale du fabricant de puces électroniques "
 "lunaires Intel, héritées de la Terre."
+
 #: scripts/scenario_49_allies.lua:2728
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1153,6 +1325,7 @@ msgstr ""
 "Nous faisons de la recherche et construisons des composants pour les "
 "capteurs les plus puissants et les plus précis utilisés à bord des navires "
 "ainsi que le logiciel pour les rendre faciles à utiliser."
+
 #: scripts/scenario_49_allies.lua:2729
 msgctxt "stationStory-comms"
 msgid ""
@@ -1169,10 +1342,12 @@ msgstr ""
 "inclure divers capteurs pour les véhicules spatiaux. Veloquan est le "
 "résultat de nombreuses fusions et acquisitions de plusieurs sociétés dont "
 "Velodyne et Quanergy."
+
 #: scripts/scenario_49_allies.lua:2735
 msgctxt "scienceDescription-station"
 msgid "Warp engine components"
 msgstr "Composants pour moteurs à vitesse lumière"
+
 #: scripts/scenario_49_allies.lua:2750
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1181,6 +1356,7 @@ msgid ""
 msgstr ""
 "Nous nous spécialisons dans les composants ésotériques nécessaires au bon "
 "fonctionnement des moteurs à vitesse lumière."
+
 #: scripts/scenario_49_allies.lua:2751
 msgctxt "stationStory-comms"
 msgid ""
@@ -1191,69 +1367,85 @@ msgstr ""
 "l'histoire de l'humanité. Nous avons nommé notre station en son honneur en "
 "raison du travail spécialisé que nous effectuons sur les systèmes de vitesse "
 "lumière."
+
 #: scripts/scenario_49_allies.lua:2760
 msgctxt "scienceDescription-station"
 msgid "Commerce and gambling"
 msgstr "Commerce et jeux d'argent"
+
 #: scripts/scenario_49_allies.lua:2770
 msgctxt "stationGeneralInfo-comms"
 msgid "Come play some games and shop. House take does not exceed 4 percent"
 msgstr ""
 "Venez jouer à quelques jeux et faire du shopping. La taxe maison ne dépasse "
 "pas 4%."
+
 #: scripts/scenario_49_allies.lua:2816
 msgctxt "scienceDescription-station"
 msgid "Casino and Gambling"
 msgstr "Casino et jeux d'argent"
+
 #: scripts/scenario_49_allies.lua:2830
 msgctxt "scienceDescription-station"
 msgid "Gambling and resupply"
 msgstr "Jeu d'argent et réapprovisionnement"
+
 #: scripts/scenario_49_allies.lua:2840
 msgctxt "stationGeneralInfo-comms"
 msgid "Relax and meet some interesting players"
 msgstr "Détendez-vous et rencontrez des joueurs intéressants."
+
 #: scripts/scenario_49_allies.lua:2846
 msgctxt "scienceDescription-station"
 msgid "Commerce and recreation"
 msgstr "Commerce et loisirs"
+
 #: scripts/scenario_49_allies.lua:2853
 msgctxt "scienceDescription-station"
 msgid "Xenopsychology research"
 msgstr "Recherche en xénopsychologie"
+
 #: scripts/scenario_49_allies.lua:2867 scripts/scenario_49_allies.lua:2888
 #: scripts/scenario_49_allies.lua:2937 scripts/scenario_49_allies.lua:3035
 msgctxt "scienceDescription-station"
 msgid "Resupply"
 msgstr "Ravitaillement"
+
 #: scripts/scenario_49_allies.lua:2895
 msgctxt "scienceDescription-station"
 msgid "Textiles and fashion"
 msgstr "Mode et textile"
+
 #: scripts/scenario_49_allies.lua:2909
 msgctxt "scienceDescription-station"
 msgid "Stress Psychology Research"
 msgstr "Recherche en psychologie du stress"
+
 #: scripts/scenario_49_allies.lua:2923
 msgctxt "scienceDescription-station"
 msgid "Low gravity research"
 msgstr "Recherche sur la basse gravité"
+
 #: scripts/scenario_49_allies.lua:2940
 msgctxt "stationGeneralInfo-comms"
 msgid "Get your energy here! Grab a drink before you go!"
 msgstr "Obtenez votre énergie ici ! Prenez un verre avant de partir !"
+
 #: scripts/scenario_49_allies.lua:2946
 msgctxt "scienceDescription-station"
 msgid "Research Lab and Observatory"
 msgstr "Laboratoire de recherche et observatoire"
+
 #: scripts/scenario_49_allies.lua:2960
 msgctxt "scienceDescription-station"
 msgid "Biotech research"
 msgstr "Recherche en biotechnologie"
+
 #: scripts/scenario_49_allies.lua:2974
 msgctxt "scienceDescription-station"
 msgid "Routine maintenance and entertainment"
 msgstr "Maintenance courante et divertissement"
+
 #: scripts/scenario_49_allies.lua:2977
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1262,6 +1454,7 @@ msgid ""
 msgstr ""
 "Faites une halte pour vos réparations. Assistez à l'un de nos spectacles de "
 "jonglage mettant en vedette les Skandars à quatre bras."
+
 #: scripts/scenario_49_allies.lua:2978
 msgctxt "stationStory-comms"
 msgid ""
@@ -1272,10 +1465,12 @@ msgstr ""
 "Les nomades Skandars se sont installés dans cette station pour mettre en "
 "pratique leurs compétences en matière de divertissement et d'entretien, "
 "ainsi que pour créer une communauté où les Skandars peuvent se détendre."
+
 #: scripts/scenario_49_allies.lua:2998
 msgctxt "scienceDescription-station"
 msgid "Automated weapons systems"
 msgstr "Systèmes d'armes automatisées"
+
 #: scripts/scenario_49_allies.lua:3008
 msgctxt "stationGeneralInfo-comms"
 msgid ""
@@ -1284,15 +1479,18 @@ msgid ""
 msgstr ""
 "Nous faisons de la recherche et créons des systèmes d'armes automatisés pour "
 "améliorer la capacité de combat des navires."
+
 #: scripts/scenario_49_allies.lua:3014
 msgctxt "scienceDescription-station"
 msgid "Biotechnology research"
 msgstr "Recherche en biotechnologie"
+
 #: scripts/scenario_49_allies.lua:3549
 msgctxt "station-comms"
 msgid "We are under attack! No time for chatting!"
 msgstr ""
 "Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
+
 #: scripts/scenario_49_allies.lua:3561
 msgctxt "station-comms"
 msgid ""
@@ -1301,10 +1499,12 @@ msgid ""
 msgstr ""
 "Bonjour officier !\n"
 "Que pouvons-nous faire pour vous aujourd'hui ?\n"
+
 #: scripts/scenario_49_allies.lua:3563
 msgctxt "station-comms"
 msgid "Welcome to our lovely station.\n"
 msgstr "Bienvenue dans notre charmante petite station.\n"
+
 #: scripts/scenario_49_allies.lua:3566
 msgctxt "station-comms"
 msgid ""
@@ -1313,22 +1513,27 @@ msgid ""
 msgstr ""
 "Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
 "attentivement les ennemis à proximité."
+
 #: scripts/scenario_49_allies.lua:3603
 msgctxt "ammo-comms"
 msgid "I need ordnance restocked"
 msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+
 #: scripts/scenario_49_allies.lua:3604
 msgctxt "ammo-comms"
 msgid "What type of ordnance?"
 msgstr "Quel genre de munitions ?"
+
 #: scripts/scenario_49_allies.lua:3608
 msgctxt "ammo-comms"
 msgid "Can you supply us with some nukes? ("
 msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
+
 #: scripts/scenario_49_allies.lua:3610
 msgctxt "ammo-comms"
 msgid "We really need some nukes ("
 msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
+
 #: scripts/scenario_49_allies.lua:3612 scripts/scenario_49_allies.lua:3624
 #: scripts/scenario_49_allies.lua:3636 scripts/scenario_49_allies.lua:3648
 #: scripts/scenario_49_allies.lua:3660
@@ -1336,50 +1541,62 @@ msgstr "Nous avons vraiment besoin d'armes nucléaires (nuke). ("
 msgctxt "ammo-comms"
 msgid "%s%d rep each)"
 msgstr "%s%d rép chacun)"
+
 #: scripts/scenario_49_allies.lua:3620
 msgctxt "ammo-comms"
 msgid "Please re-stock our EMP missiles. ("
 msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+
 #: scripts/scenario_49_allies.lua:3622
 msgctxt "ammo-comms"
 msgid "Got any EMPs? ("
 msgstr "Avez-vous des EMP ? ("
+
 #: scripts/scenario_49_allies.lua:3632
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
 msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
+
 #: scripts/scenario_49_allies.lua:3634
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
 msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+
 #: scripts/scenario_49_allies.lua:3644
 msgctxt "ammo-comms"
 msgid "We could use some mines. ("
 msgstr "Nous pourrions avoir besoin de quelques mines. ("
+
 #: scripts/scenario_49_allies.lua:3646
 msgctxt "ammo-comms"
 msgid "How about mines? ("
 msgstr "Et concernant les mines ? ("
+
 #: scripts/scenario_49_allies.lua:3656
 msgctxt "ammo-comms"
 msgid "What about HVLI? ("
 msgstr "Concernant les HVLI ? ("
+
 #: scripts/scenario_49_allies.lua:3658
 msgctxt "ammo-comms"
 msgid "Could you provide HVLI? ("
 msgstr "Pourriez-vous fournir des HVLI ? ("
+
 #: scripts/scenario_49_allies.lua:3669 scripts/scenario_49_allies.lua:4568
 msgctxt "station-comms"
 msgid "Tell me more about your station"
 msgstr "Dites m'en plus à propos de votre station"
+
 #: scripts/scenario_49_allies.lua:3670 scripts/scenario_49_allies.lua:4569
 msgctxt "station-comms"
 msgid "What would you like to know?"
 msgstr "Qu'aimeriez-vous savoir ?"
+
 #: scripts/scenario_49_allies.lua:3671 scripts/scenario_49_allies.lua:4570
 msgctxt "stationGeneralInfo-comms"
 msgid "General information"
 msgstr "Informations générales"
+
 #: scripts/scenario_49_allies.lua:3673 scripts/scenario_49_allies.lua:3678
 #: scripts/scenario_49_allies.lua:3686 scripts/scenario_49_allies.lua:3832
 #: scripts/scenario_49_allies.lua:3950 scripts/scenario_49_allies.lua:3952
@@ -1417,38 +1634,46 @@ msgstr "Informations générales"
 #: scripts/scenario_49_allies.lua:5218
 msgid "Back"
 msgstr "Précédent"
+
 #: scripts/scenario_49_allies.lua:3676 scripts/scenario_49_allies.lua:4575
 msgctxt "stationStory-comms"
 msgid "Station history"
 msgstr "L'histoire de la station"
+
 #: scripts/scenario_49_allies.lua:3684 scripts/scenario_49_allies.lua:4583
 msgctxt "gossip-comms"
 msgid "Gossip"
 msgstr "Rumeurs"
+
 #: scripts/scenario_49_allies.lua:3695 scripts/scenario_49_allies.lua:4429
 msgctxt "doomsday-comms"
 msgid "Tell me about Gregory Unruh"
 msgstr "Parlez-moi de Gregory Unruh."
+
 #: scripts/scenario_49_allies.lua:3696
 msgctxt "doomsday-comms"
 msgid "He's a retired scientist here. He's on C deck if you'd like to visit"
 msgstr ""
 "Eh bien, c'est un scientifique à la retraite ici. Ses quartiers se trouvent "
 "sur le pont C si vous souhaitez le rencontrer."
+
 #: scripts/scenario_49_allies.lua:3697
 msgctxt "doomsday-comms"
 msgid "Visit Gregory Unruh on C deck"
 msgstr "Rendre visite à Gregory Unruh sur le pont C."
+
 #: scripts/scenario_49_allies.lua:3698
 msgctxt "doomsday-comms"
 msgid "[Gregory Unruh] What can I do for you?"
 msgstr "[Gregory Unruh] Que puis-je faire pour vous ?"
+
 #: scripts/scenario_49_allies.lua:3699
 msgctxt "doomsday-comms"
 msgid "We need your plans for a doomsday device defense mechanism"
 msgstr ""
 "Nous avons besoin de vos plans pour construire un système de défense contre "
 "une arme apocalyptique."
+
 #: scripts/scenario_49_allies.lua:3700
 msgctxt "doomsday-comms"
 msgid ""
@@ -1459,18 +1684,22 @@ msgstr ""
 "Ah, je vois que quelqu'un prend mes recherches au sérieux. Voici mon "
 "prototype incomplet accompagné des plans. Vous remarquerez que certains "
 "composants sont encore requis."
+
 #: scripts/scenario_49_allies.lua:3710 scripts/scenario_49_allies.lua:4439
 msgctxt "doctor-comms"
 msgid "Tell me about Morrigan Thultris"
 msgstr "Parlez-moi de Morrigan Thultris."
+
 #: scripts/scenario_49_allies.lua:3711
 msgctxt "doctor-comms"
 msgid "She does medical research here"
 msgstr "Elle fait des recherches médicales ici."
+
 #: scripts/scenario_49_allies.lua:3712
 msgctxt "doctor-comms"
 msgid "May I speak with her?"
 msgstr "Puis-je lui parler ?"
+
 #: scripts/scenario_49_allies.lua:3713
 msgctxt "doctor-comms"
 msgid ""
@@ -1479,10 +1708,12 @@ msgid ""
 msgstr ""
 "Elle ne viendra pas au poste de communication, mais vous pouvez lui rendre "
 "visite dans ses quartiers."
+
 #: scripts/scenario_49_allies.lua:3714
 msgctxt "doctor-comms"
 msgid "Visit Dr. Thultris"
 msgstr "Aller chez le Dr Thultris."
+
 #: scripts/scenario_49_allies.lua:3715
 msgctxt "doctor-comms"
 msgid ""
@@ -1491,6 +1722,7 @@ msgid ""
 msgstr ""
 "[Dr. Thultris derrière la porte fermée de ses quartiers]\n"
 "Oui c'est pour quoi ?"
+
 #: scripts/scenario_49_allies.lua:3716
 #, lua-format
 msgctxt "doctor-comms"
@@ -1498,6 +1730,7 @@ msgid "I am an officer from the Human Navy ship, %s"
 msgstr ""
 "Bonjour,\n"
 "Je suis officier de vaisseau de la Marine humaine, %s."
+
 #: scripts/scenario_49_allies.lua:3717
 msgctxt "doctor-comms"
 msgid ""
@@ -1506,10 +1739,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris derrière la porte fermée de ses quartiers]\n"
 "Que me voulez-vous ?"
+
 #: scripts/scenario_49_allies.lua:3718
 msgctxt "doctor-comms"
 msgid "We need your help"
 msgstr "Nous avons besoin de votre aide."
+
 #: scripts/scenario_49_allies.lua:3720
 msgctxt "doctor-comms"
 msgid ""
@@ -1518,12 +1753,14 @@ msgid ""
 msgstr ""
 "[Dr. Thultris ouvre sa porte]\n"
 "A quel sujet ?"
+
 #: scripts/scenario_49_allies.lua:3721 scripts/scenario_49_allies.lua:3797
 #: scripts/scenario_49_allies.lua:3839 scripts/scenario_49_allies.lua:3877
 #: scripts/scenario_49_allies.lua:3915
 msgctxt "doctor-comms"
 msgid "Grab Dr. Thultris"
 msgstr "Saisir le Dr Thultris"
+
 #: scripts/scenario_49_allies.lua:3723 scripts/scenario_49_allies.lua:3761
 #: scripts/scenario_49_allies.lua:3799 scripts/scenario_49_allies.lua:3841
 #: scripts/scenario_49_allies.lua:3879 scripts/scenario_49_allies.lua:3917
@@ -1536,16 +1773,19 @@ msgstr ""
 "Alors que vous la tirez dans le couloir jusqu'au vaisseau, lui expliquant "
 "pourquoi vous êtes venu la chercher, elle proteste d'abord puis vient "
 "finalement avec vous, convaincue de l'urgence de la situation."
+
 #: scripts/scenario_49_allies.lua:3727 scripts/scenario_49_allies.lua:3765
 #: scripts/scenario_49_allies.lua:3803 scripts/scenario_49_allies.lua:3845
 #: scripts/scenario_49_allies.lua:3883 scripts/scenario_49_allies.lua:3921
 msgctxt "doctor-comms"
 msgid "She slams the door in your face as you reach for her"
 msgstr "Elle vous claque la porte au nez alors que vous essayez de l'attraper."
+
 #: scripts/scenario_49_allies.lua:3731
 msgctxt "doctor-comms"
 msgid "A dying patient needs your expertise"
 msgstr "Un patient mourant a besoin de votre expertise."
+
 #: scripts/scenario_49_allies.lua:3733
 msgctxt "doctor-comms"
 msgid ""
@@ -1556,6 +1796,7 @@ msgstr ""
 "[Dr. Thultris] Alors dépêchons-nous d'aller voir ce patient.\n"
 "\n"
 "En revenant tous les deux, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3737
 msgctxt "doctor-comms"
 msgid ""
@@ -1564,12 +1805,14 @@ msgid ""
 msgstr ""
 "Des gens meurent tout le temps.\n"
 "[Dr. Thultris vous claque sa porte au nez]"
+
 #: scripts/scenario_49_allies.lua:3741
 msgctxt "doctor-comms"
 msgid "An Arlenian Admiral shows symptoms like those you published"
 msgstr ""
 "Un amiral Arlénien présente des symptômes similaires à ceux que vous avez "
 "publiés."
+
 #: scripts/scenario_49_allies.lua:3743
 msgctxt "doctor-comms"
 msgid ""
@@ -1581,6 +1824,7 @@ msgstr ""
 "\n"
 "Lorsque vous retournez tous les deux au vaisseau, vous lui expliquez la "
 "situation."
+
 #: scripts/scenario_49_allies.lua:3747
 msgctxt "doctor-comms"
 msgid ""
@@ -1589,6 +1833,7 @@ msgid ""
 msgstr ""
 "Un amiral Arlénien ? Qui s'en soucie !\n"
 "[Dr. Thultris referme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3752
 msgctxt "doctor-comms"
 msgid ""
@@ -1597,11 +1842,13 @@ msgid ""
 msgstr ""
 "[Dr. Thultris à travers sa porte]\n"
 "Allez-vous en, je suis occupé."
+
 #: scripts/scenario_49_allies.lua:3756
 msgctxt "doctor-comms"
 msgid "Medical team suggested your research for a patient"
 msgstr ""
 "L'équipe médicale a cité vos recherches concernant un patient très malade."
+
 #: scripts/scenario_49_allies.lua:3758
 msgctxt "doctor-comms"
 msgid ""
@@ -1610,14 +1857,17 @@ msgid ""
 msgstr ""
 "[Dr. Thultris ouvre sa porte]\n"
 "En quoi mes recherches ont-elles à voir avec ce patient ?"
+
 #: scripts/scenario_49_allies.lua:3759
 msgctxt "Doctor-comms"
 msgid "Grab Dr. Thultris"
 msgstr "Saisir le Dr Thultris"
+
 #: scripts/scenario_49_allies.lua:3769
 msgctxt "doctor-comms"
 msgid "The symptoms closely correlate to your research"
 msgstr "Ses symptômes sont étroitement liés à vos recherches."
+
 #: scripts/scenario_49_allies.lua:3771
 msgctxt "doctor-comms"
 msgid ""
@@ -1628,6 +1878,7 @@ msgstr ""
 "[Dr. Thultris] Je pense que je peux vous aider.\n"
 "\n"
 "Lorsque vous revenez tous les deux, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3775
 msgctxt "doctor-comms"
 msgid ""
@@ -1636,10 +1887,12 @@ msgid ""
 msgstr ""
 "Tenez-moi au courant pour ce patient.\n"
 "[Dr. Thultris ferme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3779
 msgctxt "doctor-comms"
 msgid "Your research may save an Arlenian Admiral's life"
 msgstr "Vos recherches peuvent sauver la vie d'un amiral Arlénien."
+
 #: scripts/scenario_49_allies.lua:3781
 msgctxt "doctor-comms"
 msgid ""
@@ -1650,6 +1903,7 @@ msgstr ""
 "[Dr. Thultris] C'est l'occasion de mettre en pratique mes recherches.\n"
 "\n"
 "Lorsque vous revenez tous les deux, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3785
 msgctxt "doctor-comms"
 msgid ""
@@ -1658,6 +1912,7 @@ msgid ""
 msgstr ""
 "La diplomatie et les affaires militaires m'ennuient.\n"
 "[Dr. Thultris referme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3790
 msgctxt "doctor-comms"
 msgid ""
@@ -1666,11 +1921,13 @@ msgid ""
 msgstr ""
 "[Dr. Thultris derrière la porte fermée]\n"
 "C'est bien. Laissez-moi tranquille."
+
 #: scripts/scenario_49_allies.lua:3794
 msgctxt "doctor-comms"
 msgid "Arlenian with an unusual disease is near death"
 msgstr ""
 "Un Arlénien est atteint d'une maladie inhabituelle et est proche de la mort."
+
 #: scripts/scenario_49_allies.lua:3796
 msgctxt "doctor-comms"
 msgid ""
@@ -1679,10 +1936,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris ouvre sa porte]\n"
 "Pourquoi venir me voir moi ?"
+
 #: scripts/scenario_49_allies.lua:3807
 msgctxt "doctor-comms"
 msgid "The Arlenian medical team referred us to you"
 msgstr "L'équipe médicale Arlénienne nous a envoyé vers vous."
+
 #: scripts/scenario_49_allies.lua:3809
 msgctxt "doctor-comms"
 msgid ""
@@ -1695,6 +1954,7 @@ msgstr ""
 "\n"
 "Lorsque vous revenez tous les deux au vaisseau, vous lui expliquez la "
 "situation."
+
 #: scripts/scenario_49_allies.lua:3813
 msgctxt "doctor-comms"
 msgid ""
@@ -1703,10 +1963,12 @@ msgid ""
 msgstr ""
 "Que savent les Arléniens ?\n"
 "[Dr. Thultris ferme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3817
 msgctxt "doctor-comms"
 msgid "Your research accurately describes the symptoms"
 msgstr "Vos recherches décrivent avec précision les symptômes."
+
 #: scripts/scenario_49_allies.lua:3819
 msgctxt "doctor-comms"
 msgid ""
@@ -1718,6 +1980,7 @@ msgstr ""
 "\n"
 "Lorsque vous revenez tous les deux au vaisseau, vous lui expliquez la "
 "situation."
+
 #: scripts/scenario_49_allies.lua:3823
 msgctxt "doctor-comms"
 msgid ""
@@ -1726,6 +1989,7 @@ msgid ""
 msgstr ""
 "Coïncidence, j'en suis sûr.\n"
 "[Dr. Thultris vous claque sa porte au nez]"
+
 #: scripts/scenario_49_allies.lua:3828
 msgctxt "doctor-comms"
 msgid ""
@@ -1734,10 +1998,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris derrière sa porte fermée]\n"
 "Mes condoléances. Au revoir."
+
 #: scripts/scenario_49_allies.lua:3834
 msgctxt "doctor-comms"
 msgid "I am an admirer of your research and have questions"
 msgstr "Je suis un admirateur de vos recherches et j'aurai des questions."
+
 #: scripts/scenario_49_allies.lua:3835
 msgctxt "doctor-comms"
 msgid ""
@@ -1746,10 +2012,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris derrière la porte de ses quartiers]\n"
 "Ah bon ? Et qu'est-ce que vous admirez dans mes recherches ?"
+
 #: scripts/scenario_49_allies.lua:3836
 msgctxt "doctor-comms"
 msgid "The depth of your most recent publication"
 msgstr "La profondeur de votre publication la plus récente."
+
 #: scripts/scenario_49_allies.lua:3838
 msgctxt "doctor-comms"
 msgid ""
@@ -1758,10 +2026,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris ouvre sa porte]\n"
 "Pourquoi cette recherche vous intéresse-t-elle ?"
+
 #: scripts/scenario_49_allies.lua:3849
 msgctxt "doctor-comms"
 msgid "I know of a patient that might benefit"
 msgstr "Je connais un patient qui pourrait en bénéficier."
+
 #: scripts/scenario_49_allies.lua:3851
 msgctxt "doctor-comms"
 msgid ""
@@ -1772,6 +2042,7 @@ msgstr ""
 "[Dr. Thultris] C'est rare. Puis-je voir le patient ?\n"
 "\n"
 "En revenant tous les deux au vaisseau, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3855
 msgctxt "doctor-comms"
 msgid ""
@@ -1780,10 +2051,12 @@ msgid ""
 msgstr ""
 "Ma recherche est peu susceptible de s'appliquer.\n"
 "[Dr. Thultris ferme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3859
 msgctxt "doctor-comms"
 msgid "Your research could help a sick Arlenian Admiral"
 msgstr "Vos recherches pourraient aider un amiral Arlénien très malade."
+
 #: scripts/scenario_49_allies.lua:3861
 msgctxt "doctor-comms"
 msgid ""
@@ -1795,6 +2068,7 @@ msgstr ""
 "Arlénien.\n"
 "\n"
 "En revenant tous les deux au vaisseau, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3865
 msgctxt "doctor-comms"
 msgid ""
@@ -1803,6 +2077,7 @@ msgid ""
 msgstr ""
 "Je ne pense pas que cela puisse s'appliquer aux Arléniens. Je suis désolée.\n"
 "[Dr. Thultris ferme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3870
 msgctxt "doctor-comms"
 msgid ""
@@ -1811,10 +2086,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris derrière la porte de ses quartiers]\n"
 "Publiez un avis et nous en reparlerons."
+
 #: scripts/scenario_49_allies.lua:3874
 msgctxt "doctor-comms"
 msgid "The breadth of knowledge you demonstrate"
 msgstr "L'étendue des connaissances dont vous faites preuve."
+
 #: scripts/scenario_49_allies.lua:3876
 msgctxt "doctor-comms"
 msgid ""
@@ -1823,10 +2100,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris ouvre sa porte]\n"
 "J'en doute. Pourquoi êtes-vous *vraiment* ici ?"
+
 #: scripts/scenario_49_allies.lua:3887
 msgctxt "doctor-comms"
 msgid "We need your help with a dying Arlenian Admiral"
 msgstr "Nous avons besoin de votre aide avec un amiral Arlénien mourant."
+
 #: scripts/scenario_49_allies.lua:3889 scripts/scenario_49_allies.lua:3927
 msgctxt "doctor-comms"
 msgid ""
@@ -1838,6 +2117,7 @@ msgstr ""
 "aider.\n"
 "\n"
 "En revenant tous les deux au vaisseau, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3893
 msgctxt "doctor-comms"
 msgid ""
@@ -1846,12 +2126,14 @@ msgid ""
 msgstr ""
 "Votre premier mensonge était meilleur.\n"
 "[Dr. Thultris claque sa porte]"
+
 #: scripts/scenario_49_allies.lua:3897
 msgctxt "doctor-comms"
 msgid "An Arlenian medical team thinks you can help a dying patient"
 msgstr ""
 "Une équipe médicale Arlénienne pense que vous pouvez aider un patient "
 "mourant."
+
 #: scripts/scenario_49_allies.lua:3899
 msgctxt "doctor-comms"
 msgid ""
@@ -1862,6 +2144,7 @@ msgstr ""
 "[Dr. Thultris] Ca me semble raisonnable. Allons-y.\n"
 "\n"
 "En revenant tous les deux au vaisseau, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3903
 msgctxt "doctor-comms"
 msgid ""
@@ -1870,6 +2153,7 @@ msgid ""
 msgstr ""
 "Les patients Arléniens ne sont pas mon problème.\n"
 "[Dr. Thultris referme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3908
 msgctxt "doctor-comms"
 msgid ""
@@ -1879,10 +2163,12 @@ msgstr ""
 "[Dr. Thultris à travers la porte de ses quartiers]\n"
 "Vos compliments hypocrites sont une insulte à mon intelligence. Allez-vous-"
 "en."
+
 #: scripts/scenario_49_allies.lua:3912
 msgctxt "doctor-comms"
 msgid "Your superb publication presentation"
 msgstr "Votre superbe présentation de publication."
+
 #: scripts/scenario_49_allies.lua:3914
 msgctxt "doctor-comms"
 msgid ""
@@ -1891,10 +2177,12 @@ msgid ""
 msgstr ""
 "[Dr. Thultris ouvre sa porte]\n"
 "Ha ! C'est pour ça que vous êtes là ?"
+
 #: scripts/scenario_49_allies.lua:3925
 msgctxt "doctor-comms"
 msgid "Not really. We need your help"
 msgstr "Pas vraiment. Nous avons besoin de votre aide."
+
 #: scripts/scenario_49_allies.lua:3931
 msgctxt "doctor-comms"
 msgid ""
@@ -1903,10 +2191,12 @@ msgid ""
 msgstr ""
 "Je suis désolé, mais je suis trop occupée en ce moment.\n"
 "[Dr. Thultris referme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3935
 msgctxt "doctor-comms"
 msgid "Of course! I've got a case study for you to examine"
 msgstr "Bien sûr ! J'ai un cas d'école pour vous à examiner."
+
 #: scripts/scenario_49_allies.lua:3937
 msgctxt "doctor-comms"
 msgid ""
@@ -1917,6 +2207,7 @@ msgstr ""
 "[Dr. Thultris] Une application pour mes recherches ?! Bien, bien !\n"
 "\n"
 "En rejoignant le vaisseau avec le docteur, vous lui expliquez la situation."
+
 #: scripts/scenario_49_allies.lua:3941
 msgctxt "doctor-comms"
 msgid ""
@@ -1925,6 +2216,7 @@ msgid ""
 msgstr ""
 "Cela semble intéressant, mais pas pour le moment, merci.\n"
 "[Dr. Thultris referme sa porte]"
+
 #: scripts/scenario_49_allies.lua:3946
 msgctxt "doctor-comms"
 msgid ""
@@ -1933,40 +2225,48 @@ msgid ""
 msgstr ""
 "[Dr. Thultris à travers la porte de ses quartiers]\n"
 "Prenez un conseiller en rédaction et sortez d'ici."
+
 #: scripts/scenario_49_allies.lua:3961 scripts/scenario_49_allies.lua:4453
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Tell me about %s"
 msgstr "Parlez-moi de %s."
+
 #: scripts/scenario_49_allies.lua:3968 scripts/scenario_49_allies.lua:4460
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "Never heard of %s"
 msgstr "Jamais entendu parler de %s."
+
 #: scripts/scenario_49_allies.lua:3970 scripts/scenario_49_allies.lua:4462
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s died last week. The funeral was yesterday"
 msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
+
 #: scripts/scenario_49_allies.lua:3972 scripts/scenario_49_allies.lua:4464
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "%s? Who's %s? There's nobody here named %s"
 msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
+
 #: scripts/scenario_49_allies.lua:3974 scripts/scenario_49_allies.lua:4466
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "We don't talk about %s. They are gone and good riddance"
 msgstr "On ne parle pas de %s. Ils sont partis et bon débarras."
+
 #: scripts/scenario_49_allies.lua:3976 scripts/scenario_49_allies.lua:4468
 #, lua-format
 msgctxt "characterInfo-comms"
 msgid "I think %s moved away"
 msgstr "Je pense que %s a déménagé."
+
 #: scripts/scenario_49_allies.lua:3985 scripts/scenario_49_allies.lua:4477
 msgctxt "orders-comms"
 msgid "What are my current orders?"
 msgstr "Ordres en cours"
+
 #: scripts/scenario_49_allies.lua:3990 scripts/scenario_49_allies.lua:4482
 #, lua-format
 msgctxt "orders-comms"
@@ -1976,41 +2276,49 @@ msgid ""
 msgstr ""
 "\n"
 "   %i minutes restantes "
+
 #: scripts/scenario_49_allies.lua:4001 scripts/scenario_49_allies.lua:4017
 #, lua-format
 msgctxt "trade-comms"
 msgid "Recruit repair crew member for %i reputation"
 msgstr "Recruter un membre de l'équipe de réparation pour %i rép."
+
 #: scripts/scenario_49_allies.lua:4003 scripts/scenario_49_allies.lua:4019
 #: scripts/scenario_49_allies.lua:5133
 msgctxt "needRep-comms"
 msgid "Insufficient reputation"
 msgstr "Réputation insuffisante."
+
 #: scripts/scenario_49_allies.lua:4006 scripts/scenario_49_allies.lua:4022
 msgctxt "trade-comms"
 msgid "Repair crew member hired"
 msgstr "Réparateur embauché."
+
 #: scripts/scenario_49_allies.lua:4029 scripts/scenario_49_allies.lua:4422
 #: scripts/scenario_49_allies.lua:5052
 msgctxt "path-comms"
 msgid "Where is Bespin?"
 msgstr "Où se trouve Bespin ?"
+
 #: scripts/scenario_49_allies.lua:4031
 #, lua-format
 msgctxt "path-comms"
 msgid "Bespin is in %s and enemies are within 30U of Cloud City"
 msgstr ""
 "Bespin se trouve dans %s et des ennemis sont à moins de 30U de Cloud City."
+
 #: scripts/scenario_49_allies.lua:4033 scripts/scenario_49_allies.lua:4423
 #: scripts/scenario_49_allies.lua:5053
 #, lua-format
 msgctxt "path-comms"
 msgid "Bespin is in %s"
 msgstr "Bespin se trouve dans %s."
+
 #: scripts/scenario_49_allies.lua:4040
 msgctxt "explainGoods-comms"
 msgid "No tutorial covered goods or cargo. Explain"
 msgstr "Explications sur les marchandises et cargaisons"
+
 #: scripts/scenario_49_allies.lua:4041
 msgctxt "explainGoods-comms"
 msgid ""
@@ -2030,22 +2338,27 @@ msgstr ""
 "Les marchandises peuvent être obtenues en dépensant des points de réputation "
 "ou en échangeant d'autres types de marchandises (généralement de la "
 "nourriture, des médicaments ou des produits de luxe)."
+
 #: scripts/scenario_49_allies.lua:4042
 msgctxt "explainGoodsComponent-comms"
 msgid "Explain the component goods"
 msgstr "Composants"
+
 #: scripts/scenario_49_allies.lua:4043
 msgctxt "explainGoodsMineral-comms"
 msgid "Explain the mineral goods"
 msgstr "Biens minéraux"
+
 #: scripts/scenario_49_allies.lua:4044
 msgctxt "explainGoodsTrade-comms"
 msgid "Explain the trade goods"
 msgstr "Marchandises commerciales"
+
 #: scripts/scenario_49_allies.lua:4045
 msgctxt "explainGoodsVapor-comms"
 msgid "Explain vapor goods"
 msgstr "Marchandises \"vapeur\""
+
 #: scripts/scenario_49_allies.lua:4046
 msgctxt "explainGoodsVapor-comms"
 msgid ""
@@ -2065,10 +2378,12 @@ msgstr ""
 "Si vous en voyez une, cela signifie que le bien n'est pas disponible. Le "
 "besoin de ce bien ne sera pas satisfait et/ou la mission devra être "
 "satisfaite d'une autre manière."
+
 #: scripts/scenario_49_allies.lua:4051
 msgctxt "trade-comms"
 msgid "Buy, sell, trade"
 msgstr "Acheter, vendre, échanger"
+
 #: scripts/scenario_49_allies.lua:4052 scripts/scenario_49_allies.lua:4531
 #, lua-format
 msgctxt "trade-comms"
@@ -2078,29 +2393,35 @@ msgid ""
 msgstr ""
 "Station %s :\n"
 "Marchandises ou composants disponibles : (quantité, coût en réputation)\n"
+
 #: scripts/scenario_49_allies.lua:4058
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i, %i\n"
 msgstr "     %s: %i, %i\n"
+
 #: scripts/scenario_49_allies.lua:4061
 msgctxt "trade-comms"
 msgid "Current Cargo:\n"
 msgstr "Cargaison actuelle\n"
+
 #: scripts/scenario_49_allies.lua:4068
 #, lua-format
 msgctxt "trade-comms"
 msgid "     %s: %i\n"
 msgstr "     %s: %i\n"
+
 #: scripts/scenario_49_allies.lua:4074
 msgctxt "trade-comms"
 msgid "     Empty\n"
 msgstr "     Vide\n"
+
 #: scripts/scenario_49_allies.lua:4077
 #, lua-format
 msgctxt "trade-comms"
 msgid "Available Space: %i, Available Reputation: %i\n"
 msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+
 #: scripts/scenario_49_allies.lua:4085 scripts/scenario_49_allies.lua:4888
 #: scripts/scenario_49_allies.lua:4918 scripts/scenario_49_allies.lua:4943
 #: scripts/scenario_49_allies.lua:4973 scripts/scenario_49_allies.lua:5106
@@ -2110,11 +2431,13 @@ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
 msgctxt "trade-comms"
 msgid "Buy one %s for %i reputation"
 msgstr "Achetez 1 %s pour %i rép"
+
 #: scripts/scenario_49_allies.lua:4086
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s, Quantity: %i, Rep: %i"
 msgstr "Type : %s, Quantité : %i, Rép : %i"
+
 #: scripts/scenario_49_allies.lua:4088
 msgctxt "trade-comms"
 msgid ""
@@ -2123,6 +2446,7 @@ msgid ""
 msgstr ""
 "\n"
 "Espace de chargement insuffisant pour acheter"
+
 #: scripts/scenario_49_allies.lua:4090 scripts/scenario_49_allies.lua:4095
 msgctxt "needRep-comms"
 msgid ""
@@ -2131,6 +2455,7 @@ msgid ""
 msgstr ""
 "\n"
 "Réputation insuffisante pour acheter."
+
 #: scripts/scenario_49_allies.lua:4092 scripts/scenario_49_allies.lua:4126
 #: scripts/scenario_49_allies.lua:4158 scripts/scenario_49_allies.lua:4190
 msgctxt "trade-comms"
@@ -2140,6 +2465,7 @@ msgid ""
 msgstr ""
 "\n"
 "Stock insuffisant dans la station"
+
 #: scripts/scenario_49_allies.lua:4100
 msgctxt "trade-comms"
 msgid ""
@@ -2148,17 +2474,20 @@ msgid ""
 msgstr ""
 "\n"
 "Acheté"
+
 #: scripts/scenario_49_allies.lua:4123
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade food for %s"
 msgstr "Échanger de la Nourriture (food) contre %s"
+
 #: scripts/scenario_49_allies.lua:4124 scripts/scenario_49_allies.lua:4156
 #: scripts/scenario_49_allies.lua:4188
 #, lua-format
 msgctxt "trade-comms"
 msgid "Type: %s,  Quantity: %i"
 msgstr "Type : %s, Quantité : %i"
+
 #: scripts/scenario_49_allies.lua:4131 scripts/scenario_49_allies.lua:4163
 #: scripts/scenario_49_allies.lua:4195
 msgctxt "trade-comms"
@@ -2168,21 +2497,25 @@ msgid ""
 msgstr ""
 "\n"
 "Échangé"
+
 #: scripts/scenario_49_allies.lua:4155 scripts/scenario_49_allies.lua:4868
 #: scripts/scenario_49_allies.lua:5083
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade luxury for %s"
 msgstr "Échanger des produits de luxe (luxury) contre %s"
+
 #: scripts/scenario_49_allies.lua:4187
 #, lua-format
 msgctxt "trade-comms"
 msgid "Trade medicine for %s"
 msgstr "Échanger des Médicaments (medicine) contre %s"
+
 #: scripts/scenario_49_allies.lua:4217
 msgctxt "trade-comms"
 msgid "Jettison cargo"
 msgstr "Larguer la cargaison"
+
 #: scripts/scenario_49_allies.lua:4218
 #, lua-format
 msgctxt "trade-comms"
@@ -2192,11 +2525,13 @@ msgid ""
 msgstr ""
 "Espace disponible : %i\n"
 "Que voudriez-vous larguer ?"
+
 #: scripts/scenario_49_allies.lua:4227
 #, lua-format
 msgctxt "trade-comms"
 msgid "One %s jettisoned"
 msgstr "Un %s largué"
+
 #: scripts/scenario_49_allies.lua:4240
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2205,6 +2540,7 @@ msgid ""
 msgstr ""
 "Les techniciens utilisent des composants d'impulsion pour réparer ou "
 "améliorer les moteurs à impulsion et les systèmes d'impulsion associés."
+
 #: scripts/scenario_49_allies.lua:4241
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2214,6 +2550,7 @@ msgstr ""
 "Les ingénieurs utilisent des composants de distorsion pour réparer ou "
 "améliorer les moteurs à vitesse lumière, les noyaux de distorsion et/ou "
 "d'autres systèmes basés sur la technologie de distorsion (vitesse lumière)."
+
 #: scripts/scenario_49_allies.lua:4242
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2223,6 +2560,7 @@ msgstr ""
 "Les techniciens utilisent des composants de blindage pour améliorer ou "
 "réparer les condensateurs de blindage, les systèmes de charge de blindage et "
 "d'autres systèmes de génération de champ d'énergie ou de blindage."
+
 #: scripts/scenario_49_allies.lua:4243
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2232,6 +2570,7 @@ msgstr ""
 "Les ingénieurs et les techniciens utilisent des composants de traction pour "
 "réparer ou améliorer des systèmes conçus pour tirer des objets vers le "
 "vaisseau."
+
 #: scripts/scenario_49_allies.lua:4244
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2240,6 +2579,7 @@ msgid ""
 msgstr ""
 "Les techniciens utilisent des composants de répulseur pour réparer ou "
 "améliorer les systèmes conçus pour repousser les objets du vaisseau."
+
 #: scripts/scenario_49_allies.lua:4245
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2249,6 +2589,7 @@ msgstr ""
 "Les ingénieurs et les spécialistes de la réparation de systèmes d'armement "
 "utilisent des composants de faisceau pour réparer, améliorer et/ou régler "
 "les faisceaux laser et les systèmes associés."
+
 #: scripts/scenario_49_allies.lua:4246
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2259,6 +2600,7 @@ msgstr ""
 "L'équipe de réparation utilise des composants optiques dans de nombreux "
 "systèmes de vaisseaux. Les composants optiques servent de voies "
 "d'information et de liens entre de nombreux systèmes de navires."
+
 #: scripts/scenario_49_allies.lua:4247
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2270,6 +2612,7 @@ msgstr ""
 "chargement des missiles. D'autres systèmes classiques nécessitent des "
 "composants robotiques : les baies médicales, la préparation des aliments, "
 "les systèmes de réparation automatisés, etc."
+
 #: scripts/scenario_49_allies.lua:4248
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2279,6 +2622,7 @@ msgstr ""
 "Certains des systèmes de vaisseaux ésotériques ont des exigences matérielles "
 "spécialisées. Ceux-ci se contentent généralement d'un composant de filament "
 "quelconque."
+
 #: scripts/scenario_49_allies.lua:4249
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2290,6 +2634,7 @@ msgstr ""
 "systèmes conçus pour déplacer des objets d'un endroit à un autre. Les "
 "méthodes de mouvement vont des simples rouleaux de courroie au démontage et "
 "remontage atomique."
+
 #: scripts/scenario_49_allies.lua:4250
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2300,6 +2645,7 @@ msgstr ""
 "L'équipe de réparation utilise des composants de capteur pour réparer les "
 "systèmes qui prennent en charge la console Science dans la collecte "
 "d'informations sur l'univers autour du vaisseau."
+
 #: scripts/scenario_49_allies.lua:4251
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2310,6 +2656,7 @@ msgstr ""
 "Les techniciens utilisent des composants de communication pour réparer les "
 "différents systèmes utilisés pour connecter le vaisseau à d'autres "
 "vaisseaux, stations et/ou entités extraterrestres sur la console Relay."
+
 #: scripts/scenario_49_allies.lua:4252
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2320,6 +2667,7 @@ msgstr ""
 "Les techniciens utilisent des composants autodoc pour réparer ou entretenir "
 "les installations médicales automatisées utilisées sur de nombreux vaisseaux "
 "à la place d'un médecin ou d'un personnel médical."
+
 #: scripts/scenario_49_allies.lua:4253
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2330,6 +2678,7 @@ msgstr ""
 "Les ingénieurs ont besoin de composants d'élévateur pour une variété de "
 "systèmes devant déplacer temporairement des mécanismes ou des parties de "
 "mécanismes contre l'accélération ou la gravité à bord d'un vaisseau."
+
 #: scripts/scenario_49_allies.lua:4254
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2340,6 +2689,7 @@ msgstr ""
 "entretenir les androïdes qui servent sur les vaisseaux. Les équipes de "
 "réparation sur de nombreux vaisseaux se composent en grande partie "
 "d'androïdes."
+
 #: scripts/scenario_49_allies.lua:4255
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2353,6 +2703,7 @@ msgstr ""
 "impulsion, les téléporteurs et les moteurs à vitesse lumière. Les nanites "
 "sont programmées pour réparer les choses au niveau moléculaire, souvent dans "
 "des conditions dangereuses pour les êtres organiques tels que les humains."
+
 #: scripts/scenario_49_allies.lua:4256
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2362,6 +2713,7 @@ msgstr ""
 "Avec tous les systèmes automatisés d'un vaisseau, les techniciens ont "
 "souvent besoin de composants logiciels pour mettre à niveau ou ajuster les "
 "systèmes."
+
 #: scripts/scenario_49_allies.lua:4257
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2370,6 +2722,7 @@ msgid ""
 msgstr ""
 "De nombreux systèmes ont des circuits spécialisés qui doivent être mis à "
 "niveau ou remplacés via un ou plusieurs composants de circuit."
+
 #: scripts/scenario_49_allies.lua:4258
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2381,6 +2734,7 @@ msgstr ""
 "fournissent la majeure partie de l'énergie pour faire fonctionner le "
 "vaisseau aux plus petites utilisées dans les combinaisons spatiales EVA. Les "
 "composants de batterie aident à maintenir et à améliorer ces systèmes."
+
 #: scripts/scenario_49_allies.lua:4260
 msgctxt "explainGoodsComponent-comms"
 msgid ""
@@ -2389,6 +2743,7 @@ msgid ""
 msgstr ""
 "Ce sont les composants classiques disponibles. Sur lequel aimeriez-vous une "
 "plus grande explication ?"
+
 #: scripts/scenario_49_allies.lua:4269
 msgctxt "explainGoodsTrade-comms"
 msgid ""
@@ -2397,6 +2752,7 @@ msgid ""
 msgstr ""
 "Ce sont les marchandises commerciales classiques disponibles. Sur laquelle "
 "aimeriez-vous une plus grande explication ?"
+
 #: scripts/scenario_49_allies.lua:4271
 msgctxt "explainGoodsTrade-comms"
 msgid ""
@@ -2408,6 +2764,7 @@ msgstr ""
 "besoins ou pour s'amuser. Un bon officier de relai essaiera de garder au "
 "moins un aliment à bord pour le bénéfice commercial potentiel.\n"
 "Lorsqu'il est proposé à la vente, il est généralement très bon marché."
+
 #: scripts/scenario_49_allies.lua:4272
 msgctxt "explainGoodsTrade-comms"
 msgid ""
@@ -2422,6 +2779,7 @@ msgstr ""
 "Les avantages commerciaux sont généralement très élevés. Un bon officier de "
 "relai essaiera de garder au moins quelques médicaments à bord pour le "
 "bénéfice commercial potentiel."
+
 #: scripts/scenario_49_allies.lua:4273
 msgctxt "explainGoodsTrade-comms"
 msgid ""
@@ -2440,6 +2798,7 @@ msgstr ""
 "Un bon officier de relai surveillera les produits de luxe à prix "
 "relativement bas qui peuvent être utilisés en échange avec des composants ou "
 "des minéraux à prix plus élevé."
+
 #: scripts/scenario_49_allies.lua:4283
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2448,6 +2807,7 @@ msgid ""
 msgstr ""
 "Ce sont les produits minéraux typiques disponibles. Sur lequel aimeriez-vous "
 "une plus grande explication ?"
+
 #: scripts/scenario_49_allies.lua:4285
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2457,6 +2817,7 @@ msgstr ""
 "Le nickel est l'un des métaux les plus courants extrait des astéroïdes. En "
 "tant que tel, il est devenu le métal standard de référence pour la plupart "
 "des structures de vaisseaux."
+
 #: scripts/scenario_49_allies.lua:4286
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2466,6 +2827,7 @@ msgstr ""
 "Le platine a des applications électroniques, explosives et médicales, si "
 "bien que les techniciens l'utilisent pour réparer et mettre à niveau bon "
 "nombre de systèmes de vaisseaux."
+
 #: scripts/scenario_49_allies.lua:4287
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2474,6 +2836,7 @@ msgid ""
 msgstr ""
 "Les techniciens civils et militaires apprécient l'or pour une multitude de "
 "raisons, notamment son utilisation dans la joaillerie et l'électronique."
+
 #: scripts/scenario_49_allies.lua:4288
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2482,6 +2845,7 @@ msgid ""
 msgstr ""
 "En raison de son potentiel élevé de stockage d'énergie, les ingénieurs "
 "apprécient le dilithium dans les moteurs et les boucliers des vaisseaux."
+
 #: scripts/scenario_49_allies.lua:4289
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2491,6 +2855,7 @@ msgstr ""
 "Les concepteurs et ingénieurs utilisent le tritanium dans de nombreux "
 "aspects de la construction navale spatiale en raison de la façon dont il "
 "interagit avec les champs de distorsion et la mécanique des sauts."
+
 #: scripts/scenario_49_allies.lua:4290
 msgctxt "explainGoodsMineral-comms"
 msgid ""
@@ -2499,22 +2864,27 @@ msgid ""
 msgstr ""
 "Les ingénieurs apprécient le cobalt en raison de ses applications "
 "magnétiques, d'alliage et de stockage d'énergie."
+
 #: scripts/scenario_49_allies.lua:4316
 msgctxt "ammo-comms"
 msgid "You need to stay docked for that action."
 msgstr "Vous devez rester amarré à la station pour cette action."
+
 #: scripts/scenario_49_allies.lua:4320
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass destruction."
 msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+
 #: scripts/scenario_49_allies.lua:4321
 msgctxt "ammo-comms"
 msgid "We do not deal in weapons of mass disruption."
 msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+
 #: scripts/scenario_49_allies.lua:4322
 msgctxt "ammo-comms"
 msgid "We do not deal in those weapons."
 msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+
 #: scripts/scenario_49_allies.lua:4327
 msgctxt "ammo-comms"
 msgid ""
@@ -2522,19 +2892,23 @@ msgid ""
 msgstr ""
 " La menace Kraylor pesant sur les ressources minérales a réduit la "
 "disponibilité des munitions."
+
 #: scripts/scenario_49_allies.lua:4335
 msgctxt "ammo-comms"
 msgid "All nukes are charged and primed for destruction."
 msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
+
 #: scripts/scenario_49_allies.lua:4337
 msgctxt "ammo-comms"
 msgid "Sorry, sir, but you are as fully stocked as I can allow."
 msgstr ""
 "Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
+
 #: scripts/scenario_49_allies.lua:4345 scripts/scenario_49_allies.lua:4360
 msgctxt "ammo-comms"
 msgid "You are fully loaded and ready to explode things."
 msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
+
 #: scripts/scenario_49_allies.lua:4347
 msgctxt "ammo-comms"
 msgid ""
@@ -2543,19 +2917,23 @@ msgid ""
 msgstr ""
 "Nous vous avons généreusement réapprovisionné en munitions.\n"
 "Faites-en bon usage."
+
 #: scripts/scenario_49_allies.lua:4350 scripts/scenario_49_allies.lua:4365
 #: scripts/scenario_49_allies.lua:4370
 msgctxt "needRep-comms"
 msgid "Not enough reputation."
 msgstr "Pas assez de réputation."
+
 #: scripts/scenario_49_allies.lua:4355
 msgctxt "ammo-comms"
 msgid "You can't afford as much as I'd like to give you"
 msgstr "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+
 #: scripts/scenario_49_allies.lua:4356
 msgctxt "ammo-comms"
 msgid "Get just one"
 msgstr "Prendre juste celui-là."
+
 #: scripts/scenario_49_allies.lua:4362
 msgctxt "ammo-comms"
 msgid ""
@@ -2564,6 +2942,7 @@ msgid ""
 msgstr ""
 "Nous vous avons généreusement réapprovisionné en munitions.\n"
 "Faites-en bon usage."
+
 #: scripts/scenario_49_allies.lua:4383
 msgctxt "station-comms"
 msgid ""
@@ -2573,6 +2952,7 @@ msgstr ""
 "Bonjour, officier.\n"
 "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
 "station au préalable."
+
 #: scripts/scenario_49_allies.lua:4385
 msgctxt "station-comms"
 msgid ""
@@ -2581,6 +2961,7 @@ msgid ""
 msgstr ""
 "Salutations.\n"
 "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
 #: scripts/scenario_49_allies.lua:4388
 msgctxt "station-comms"
 msgid ""
@@ -2591,22 +2972,27 @@ msgstr ""
 "\n"
 "Sachez que si les ennemis de la zone se rapprochent encore, nous serons trop "
 "occupés pour faire affaire avec vous."
+
 #: scripts/scenario_49_allies.lua:4418
 msgctxt "station-comms"
 msgid "I need information"
 msgstr "j'aurai besoin d'informations"
+
 #: scripts/scenario_49_allies.lua:4419
 msgctxt "station-comms"
 msgid "What kind of information do you need?"
 msgstr "De quel genre d'informations avez-vous besoin ?"
+
 #: scripts/scenario_49_allies.lua:4430
 msgctxt "doomsday-comms"
 msgid "He's got nice retirement quarters here"
 msgstr "Il y a de beaux quartiers de retraite ici."
+
 #: scripts/scenario_49_allies.lua:4431
 msgctxt "doomsday-comms"
 msgid "May we speak with him?"
 msgstr "Pouvons-nous lui parler ?"
+
 #: scripts/scenario_49_allies.lua:4432
 msgctxt "doomsday-comms"
 msgid ""
@@ -2616,14 +3002,17 @@ msgstr ""
 "Il ne parlera à personne de la marine humaine. Il est toujours amer au sujet "
 "de sa retraite anticipée. Vous devrez vous rendre sur place en personne si "
 "vous tenez tant à lui parler."
+
 #: scripts/scenario_49_allies.lua:4440
 msgctxt "doctor-comms"
 msgid "She does research here"
 msgstr "Elle effectue des recherches ici."
+
 #: scripts/scenario_49_allies.lua:4441
 msgctxt "doctor-comms"
 msgid "We need her skills. May I speak with her?"
 msgstr "Nous avons besoin de ses compétences. Puis-je lui parler ?"
+
 #: scripts/scenario_49_allies.lua:4442
 msgctxt "doctor-comms"
 msgid ""
@@ -2637,10 +3026,12 @@ msgstr ""
 "très courte liste de contacts auxquels elle répondra et vous n'êtes pas sur "
 "cette liste. Si vous souhaitez lui parler, vous devrez accoster et lui "
 "rendre visite en personne."
+
 #: scripts/scenario_49_allies.lua:4443
 msgctxt "doctor-comms"
 msgid "The Arlenian Admiral is critically ill and she could help"
 msgstr "L'amiral Arlénien est gravement malade et elle pourrait aider."
+
 #: scripts/scenario_49_allies.lua:4444
 msgctxt "doctor-comms"
 msgid ""
@@ -2656,10 +3047,12 @@ msgstr ""
 "personnel de la station. Alors mêmes, cela pourrait lui prendre quelques "
 "jours encore pour réaliser que tout le monde est mort. Vous aurez vraiment "
 "besoin d'accoster pour lui parler."
+
 #: scripts/scenario_49_allies.lua:4488
 msgctxt "ammo-comms"
 msgid "What ordnance do you have available for restock?"
 msgstr "De quelles munitions disposez-vous ?"
+
 #: scripts/scenario_49_allies.lua:4493
 msgctxt "ammo-comms"
 msgid ""
@@ -2668,6 +3061,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Nuke"
+
 #: scripts/scenario_49_allies.lua:4497
 msgctxt "ammo-comms"
 msgid ""
@@ -2676,6 +3070,7 @@ msgid ""
 msgstr ""
 "\n"
 "   EMP"
+
 #: scripts/scenario_49_allies.lua:4501
 msgctxt "ammo-comms"
 msgid ""
@@ -2684,6 +3079,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Homing"
+
 #: scripts/scenario_49_allies.lua:4505
 msgctxt "ammo-comms"
 msgid ""
@@ -2692,6 +3088,7 @@ msgid ""
 msgstr ""
 "\n"
 "   Mine"
+
 #: scripts/scenario_49_allies.lua:4509
 msgctxt "ammo-comms"
 msgid ""
@@ -2700,33 +3097,40 @@ msgid ""
 msgstr ""
 "\n"
 "   HVLI"
+
 #: scripts/scenario_49_allies.lua:4512
 msgctxt "ammo-comms"
 msgid "We have no ordnance available for restock"
 msgstr "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
+
 #: scripts/scenario_49_allies.lua:4514
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following type of ordnance available for restock:%s"
 msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
 #: scripts/scenario_49_allies.lua:4516
 #, lua-format
 msgctxt "ammo-comms"
 msgid "We have the following types of ordnance available for restock:%s"
 msgstr "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
 #: scripts/scenario_49_allies.lua:4530
 msgctxt "trade-comms"
 msgid "What goods do you have available for sale or trade?"
 msgstr "Qu'avez-vous comme marchandises à vendre ou à échanger ?"
+
 #: scripts/scenario_49_allies.lua:4537
 #, lua-format
 msgctxt "trade-comms"
 msgid "   %14s: %2i, %3i\n"
 msgstr "   %14s: %2i, %3i\n"
+
 #: scripts/scenario_49_allies.lua:4544
 msgctxt "trade-comms"
 msgid "Where can I find particular goods?"
 msgstr "Où puis-je trouver des marchandises particulières ?"
+
 #: scripts/scenario_49_allies.lua:4545
 msgctxt "trade-comms"
 msgid ""
@@ -2736,6 +3140,7 @@ msgstr ""
 "Les stations amicales ont souvent de la nourriture ou des médicaments ou les "
 "deux. Les stations neutres peuvent échanger leurs marchandises contre de la "
 "nourriture, des médicaments ou du luxe."
+
 #: scripts/scenario_49_allies.lua:4547
 msgctxt "trade-comms"
 msgid ""
@@ -2746,10 +3151,12 @@ msgstr ""
 " A part ça, je n'ai pas connaissance de stations spécifiques.\n"
 "\n"
 "Revenez plus tard, quelqu'un d'autre en saura peut-être plus que moi."
+
 #: scripts/scenario_49_allies.lua:4553
 msgctxt "trade-comms"
 msgid " Beyond that, I have no knowledge of specific stations"
 msgstr " A part ça, je n'ai pas connaissance de stations spécifiques."
+
 #: scripts/scenario_49_allies.lua:4555
 msgctxt "trade-comms"
 msgid ""
@@ -2760,54 +3167,64 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Quels marchandises vous intéressent ?\n"
+"Quelles marchandises vous intéressent ?\n"
 "J'ai entendu parler de ça :"
+
 #: scripts/scenario_49_allies.lua:4558
 #, lua-format
 msgctxt "trade-comms"
 msgid "Station %s in sector %s has %s%s"
 msgstr "La station %s dans le secteur %s a %s%s"
+
 #: scripts/scenario_49_allies.lua:4592
 msgctxt "station-comms"
 msgid "Report status"
 msgstr "Au rapport"
+
 #: scripts/scenario_49_allies.lua:4593
 #, lua-format
 msgctxt "station-comms"
 msgid "Hull: %d%%\n"
 msgstr "Coque : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4596
 #, lua-format
 msgctxt "station-comms"
 msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4599
 #, lua-format
 msgctxt "station-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Bouclier %s : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4607
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%.1f rep)"
 msgstr ""
 "Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%.1f rep)"
+
 #: scripts/scenario_49_allies.lua:4609
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request supplies."
 msgstr ""
 "Vous devez définir un marqueur avant de faire une demande de "
 "réapprovisionnement."
+
 #: scripts/scenario_49_allies.lua:4611
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
 msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+
 #: scripts/scenario_49_allies.lua:4613 scripts/scenario_49_allies.lua:4639
 #: scripts/scenario_49_allies.lua:4660 scripts/scenario_49_allies.lua:4681
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Waypoint %i"
 msgstr "Marqueur %i"
+
 #: scripts/scenario_49_allies.lua:4621
 #, lua-format
 msgctxt "stationAssist-comms"
@@ -2815,26 +3232,31 @@ msgid "We have dispatched a supply ship toward waypoint %i"
 msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
 "réapprovisionnement au marqueur %i."
+
 #: scripts/scenario_49_allies.lua:4623 scripts/scenario_49_allies.lua:4646
 #: scripts/scenario_49_allies.lua:4667 scripts/scenario_49_allies.lua:4688
 msgctxt "needRep-comms"
 msgid "Not enough reputation!"
 msgstr "Pas assez de réputation !"
+
 #: scripts/scenario_49_allies.lua:4633
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Adder MK5 reinforcements! (%.1f rep)"
 msgstr "Merci de nous envoyer un Adder MK5 en renforts ! (%.1f rep)"
+
 #: scripts/scenario_49_allies.lua:4635 scripts/scenario_49_allies.lua:4656
 #: scripts/scenario_49_allies.lua:4677
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request reinforcements."
 msgstr "Vous devez définir un marqueur avant de pouvoir demander des renforts."
+
 #: scripts/scenario_49_allies.lua:4637 scripts/scenario_49_allies.lua:4658
 #: scripts/scenario_49_allies.lua:4679
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we dispatch the reinforcements?"
 msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
 #: scripts/scenario_49_allies.lua:4644 scripts/scenario_49_allies.lua:4665
 #: scripts/scenario_49_allies.lua:4686
 #, lua-format
@@ -2843,128 +3265,156 @@ msgid "We have dispatched %s to assist at waypoint %i"
 msgstr ""
 "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
 "marqueur %i."
+
 #: scripts/scenario_49_allies.lua:4654
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Phobos T3 reinforcements! (%.1f rep)"
 msgstr "Merci de nous envoyer un Phobos T3 en renforts ! (%.1f rep)"
+
 #: scripts/scenario_49_allies.lua:4675
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Please send Stalker Q7 reinforcements! (%.1f rep)"
 msgstr "Merci de nous envoyer un Stalker Q7 en renforts ! (%.1f rep)"
+
 #: scripts/scenario_49_allies.lua:4725
 msgctxt "trade-comms"
 msgid " and will trade it for medicine"
 msgstr " et va l'échanger contre des Médicaments (medicine)"
+
 #: scripts/scenario_49_allies.lua:4730
 msgctxt "trade-comms"
 msgid " or food"
 msgstr " ou de la Nourriture (food)"
+
 #: scripts/scenario_49_allies.lua:4732
 msgctxt "trade-comms"
 msgid " and will trade it for food"
 msgstr " et va l'échanger contre de la Nourriture (food)"
+
 #: scripts/scenario_49_allies.lua:4738
 msgctxt "trade-comms"
 msgid " or luxury"
 msgstr " ou des Produits de luxe (luxury)"
+
 #: scripts/scenario_49_allies.lua:4740
 msgctxt "trade-comms"
 msgid " and will trade it for luxury"
 msgstr " et va l'échanger contre des Produits de luxe (luxury)"
+
 #: scripts/scenario_49_allies.lua:4790
 msgctxt "shipAssist-comms"
 msgid "What do you want?"
 msgstr "Que voulez-vous ?"
+
 #: scripts/scenario_49_allies.lua:4792
 msgctxt "shipAssist-comms"
 msgid "Sir, how can we assist?"
 msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
 #: scripts/scenario_49_allies.lua:4794
 msgctxt "shipAssist-comms"
 msgid "Defend a waypoint"
 msgstr "Défendez un marqueur."
+
 #: scripts/scenario_49_allies.lua:4796
 msgctxt "shipAssist-comms"
 msgid "No waypoints set. Please set a waypoint first."
 msgstr ""
 "Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en placer "
 "un."
+
 #: scripts/scenario_49_allies.lua:4799
 msgctxt "shipAssist-comms"
 msgid "Which waypoint should we defend?"
 msgstr "Quel marqueur devons-nous défendre ?"
+
 #: scripts/scenario_49_allies.lua:4801
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Defend waypoint %i"
 msgstr "Défendez le marqueur %i."
+
 #: scripts/scenario_49_allies.lua:4803
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "We are heading to assist at waypoint %i."
 msgstr "Nous partons pour défendre le marqueur %i."
+
 #: scripts/scenario_49_allies.lua:4810
 msgctxt "shipAssist-comms"
 msgid "Assist me"
 msgstr "Aidez-nous !"
+
 #: scripts/scenario_49_allies.lua:4811
 msgctxt "shipAssist-comms"
 msgid "Heading toward you to assist."
 msgstr "Entendu, nous partons immédiatement vous aider."
+
 #: scripts/scenario_49_allies.lua:4816
 msgctxt "shipAssist-comms"
 msgid "Report status"
 msgstr "Au rapport"
+
 #: scripts/scenario_49_allies.lua:4817
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Hull: %d%%\n"
 msgstr "Coque : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4820
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield: %d%%\n"
 msgstr "Boucliers : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4822
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Front Shield: %d%%\n"
 msgstr "Boucliers avant : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4823
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Rear Shield: %d%%\n"
 msgstr "Boucliers arrière : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4826
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Shield %s: %d%%\n"
 msgstr "Bouclier %s : %d%%\n"
+
 #: scripts/scenario_49_allies.lua:4833
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s Missiles: %d/%d\n"
 msgstr "%s Missiles : %d/%d\n"
+
 #: scripts/scenario_49_allies.lua:4842
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Dock at %s"
 msgstr "Amarrez-vous à %s."
+
 #: scripts/scenario_49_allies.lua:4843
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "Docking at %s."
 msgstr "En cours d'amarrage à %s."
+
 #: scripts/scenario_49_allies.lua:4870 scripts/scenario_49_allies.lua:5085
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter for trade"
 msgstr "Stock insuffisant sur le cargo pour commercer"
+
 #: scripts/scenario_49_allies.lua:4875 scripts/scenario_49_allies.lua:5090
 msgctxt "trade-comms"
 msgid "Traded"
 msgstr "Échangé"
+
 #: scripts/scenario_49_allies.lua:4890 scripts/scenario_49_allies.lua:4920
 #: scripts/scenario_49_allies.lua:4945 scripts/scenario_49_allies.lua:4975
 #: scripts/scenario_49_allies.lua:5108 scripts/scenario_49_allies.lua:5149
@@ -2972,6 +3422,7 @@ msgstr "Échangé"
 msgctxt "trade-comms"
 msgid "Insufficient cargo space for purchase"
 msgstr "Espace de chargement insuffisant pour acheter"
+
 #: scripts/scenario_49_allies.lua:4892 scripts/scenario_49_allies.lua:4922
 #: scripts/scenario_49_allies.lua:4947 scripts/scenario_49_allies.lua:4977
 #: scripts/scenario_49_allies.lua:5110 scripts/scenario_49_allies.lua:5151
@@ -2979,6 +3430,7 @@ msgstr "Espace de chargement insuffisant pour acheter"
 msgctxt "trade-comms"
 msgid "Insufficient inventory on freighter"
 msgstr "Stock insuffisant sur le cargo"
+
 #: scripts/scenario_49_allies.lua:4895 scripts/scenario_49_allies.lua:4925
 #: scripts/scenario_49_allies.lua:4950 scripts/scenario_49_allies.lua:4980
 #: scripts/scenario_49_allies.lua:5113 scripts/scenario_49_allies.lua:5154
@@ -2986,6 +3438,7 @@ msgstr "Stock insuffisant sur le cargo"
 msgctxt "needRep-comms"
 msgid "Insufficient reputation for purchase"
 msgstr "Réputation insuffisante pour acheter."
+
 #: scripts/scenario_49_allies.lua:4900 scripts/scenario_49_allies.lua:4930
 #: scripts/scenario_49_allies.lua:4955 scripts/scenario_49_allies.lua:4985
 #: scripts/scenario_49_allies.lua:5118 scripts/scenario_49_allies.lua:5159
@@ -2993,18 +3446,22 @@ msgstr "Réputation insuffisante pour acheter."
 msgctxt "trade-comms"
 msgid "Purchased"
 msgstr "Acheté"
+
 #: scripts/scenario_49_allies.lua:5001
 msgctxt "shipEnemy-comms"
 msgid "We will see to your destruction!"
 msgstr "Nous allons vous détruire !"
+
 #: scripts/scenario_49_allies.lua:5002
 msgctxt "shipEnemy-comms"
 msgid "Your bloodline will end here!"
 msgstr "Votre race va s'éteindre ici et maintenant !"
+
 #: scripts/scenario_49_allies.lua:5003
 msgctxt "shipEnemy-comms"
 msgid "Your feeble threats are meaningless."
 msgstr "Vos petites menaces ne nous impressionnent pas."
+
 #: scripts/scenario_49_allies.lua:5005
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -3014,38 +3471,47 @@ msgstr ""
 "Ktzzzsss.\n"
 "\n"
 "Vous allez mourir faibles créatures insignifiantes !"
+
 #: scripts/scenario_49_allies.lua:5008
 msgctxt "shipEnemy-comms"
 msgid "We will destroy you"
 msgstr "Nous allons vous détruire !"
+
 #: scripts/scenario_49_allies.lua:5009
 msgctxt "shipEnemy-comms"
 msgid "We think not. It is you who will experience destruction!"
 msgstr "Nous ne pensons pas. C'est vous qui subirez la destruction !"
+
 #: scripts/scenario_49_allies.lua:5011
 msgctxt "shipEnemy-comms"
 msgid "You have no honor"
 msgstr "Vous n'avez pas aucun honneur."
+
 #: scripts/scenario_49_allies.lua:5012
 msgctxt "shipEnemy-comms"
 msgid "Your insult has brought our wrath upon you. Prepare to die."
 msgstr "Vos insultes ont attiré sur vous notre colère. Préparez-vous à mourir."
+
 #: scripts/scenario_49_allies.lua:5013
 msgctxt "shipEnemy-comms"
 msgid "Your comments about honor have no meaning to us"
 msgstr "Vos commentaires sur l'honneur ne signifient rien pour nous."
+
 #: scripts/scenario_49_allies.lua:5015
 msgctxt "shipEnemy-comms"
 msgid "We pity your pathetic race"
 msgstr "Nous avons pitié de votre race pathétique."
+
 #: scripts/scenario_49_allies.lua:5016
 msgctxt "shipEnemy-comms"
 msgid "Pathetic? You will regret your disparagement!"
 msgstr "Pathétique? Vous allez regretter votre dénigrement !"
+
 #: scripts/scenario_49_allies.lua:5017
 msgctxt "shipEnemy-comms"
 msgid "We don't care what you think of us"
 msgstr "Nous ne nous soucions guère de ce que vous pensez de nous"
+
 #: scripts/scenario_49_allies.lua:5020
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -3055,12 +3521,14 @@ msgstr ""
 "Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
 "\n"
 "Fin de transmission."
+
 #: scripts/scenario_49_allies.lua:5022
 msgctxt "shipEnemy-comms"
 msgid "Stay out of our way, or your death will amuse us extremely!"
 msgstr ""
 "Restez en dehors de notre chemin, ou votre mort sera une amusante "
 "distraction pour nous !"
+
 #: scripts/scenario_49_allies.lua:5024
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -3082,18 +3550,22 @@ msgstr ""
 "Ne nous approchez pas! Grrzzz\n"
 "\n"
 "Communication interrompue."
+
 #: scripts/scenario_49_allies.lua:5025
 msgctxt "shipEnemy-comms"
 msgid "EXECUTE: SELFDESTRUCT"
 msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+
 #: scripts/scenario_49_allies.lua:5026
 msgctxt "shipEnemy-comms"
 msgid "Rogue command received. Targeting source."
 msgstr "Commande non autorisée reçue. Cible verrouillée."
+
 #: scripts/scenario_49_allies.lua:5027
 msgctxt "shipEnemy-comms"
 msgid "External command ignored."
 msgstr "Ordre externe ignoré."
+
 #: scripts/scenario_49_allies.lua:5029
 msgctxt "shipEnemy-comms"
 msgid ""
@@ -3105,49 +3577,60 @@ msgstr ""
 "s'opposer à nous tous.\n"
 "\n"
 "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
 #: scripts/scenario_49_allies.lua:5030
 msgctxt "shipEnemy-comms"
 msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
 msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+
 #: scripts/scenario_49_allies.lua:5031
 msgctxt "shipEnemy-comms"
 msgid "We do not need permission to pluck apart such an insignificant threat."
 msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+
 #: scripts/scenario_49_allies.lua:5032
 msgctxt "shipEnemy-comms"
 msgid "The hive has greater priorities than exterminating pests."
 msgstr ""
 "Notre peuple a d'autres priorités que l'extermination de parasites tels que "
 "vous."
+
 #: scripts/scenario_49_allies.lua:5034
 msgctxt "shipEnemy-comms"
 msgid "Mind your own business!"
 msgstr "Occupez-vous de vos affaires !"
+
 #: scripts/scenario_49_allies.lua:5061
 msgctxt "trade-comms"
 msgid "Yes?"
 msgstr "Oui ?"
+
 #: scripts/scenario_49_allies.lua:5063
 msgctxt "trade-comms"
 msgid "Where are you headed?"
 msgstr "Où allez-vous ?"
+
 #: scripts/scenario_49_allies.lua:5097
 msgctxt "trade-comms"
 msgid "Insufficient luxury to trade"
 msgstr "Luxe insuffisant pour commercer"
+
 #: scripts/scenario_49_allies.lua:5128
 msgctxt "trade-comms"
 msgid "What do you want?"
 msgstr "Que voulez-vous ?"
+
 #: scripts/scenario_49_allies.lua:5131
 #, lua-format
 msgctxt "trade-comms"
 msgid "Where are you headed? (cost: %.1f reputation)"
 msgstr "Où allez-vous? (coût : %.1f réputation)"
+
 #: scripts/scenario_49_allies.lua:5194
 msgctxt "trade-comms"
 msgid "Why are you bothering me?"
 msgstr "Pourquoi me dérangez-vous ?"
+
 #: scripts/scenario_49_allies.lua:5227
 msgctxt "ship-comms"
 msgid ""
@@ -3157,6 +3640,7 @@ msgstr ""
 "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
 "\n"
 "Nous sommes en mission de la plus haute importance."
+
 #: scripts/scenario_49_allies.lua:5229
 msgctxt "ship-comms"
 msgid ""
@@ -3166,14 +3650,17 @@ msgstr ""
 "Nous n'avons rien pour vous.\n"
 "\n"
 "Bonne journée."
+
 #: scripts/scenario_49_allies.lua:5459
 msgctxt "inventory-buttonRelay"
 msgid "Inventory"
 msgstr "Stock"
+
 #: scripts/scenario_49_allies.lua:5466
 msgctxt "inventory-buttonOperations"
 msgid "Inventory"
 msgstr "Stock"
+
 #: scripts/scenario_49_allies.lua:5476 scripts/scenario_49_allies.lua:5495
 #: scripts/scenario_49_allies.lua:5514 scripts/scenario_49_allies.lua:5533
 #: scripts/scenario_49_allies.lua:5552 scripts/scenario_49_allies.lua:5571
@@ -3182,6 +3669,7 @@ msgstr "Stock"
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr "%s Cargaison en cours :"
+
 #: scripts/scenario_49_allies.lua:5483 scripts/scenario_49_allies.lua:5502
 #: scripts/scenario_49_allies.lua:5521 scripts/scenario_49_allies.lua:5540
 #: scripts/scenario_49_allies.lua:5559 scripts/scenario_49_allies.lua:5578
@@ -3190,6 +3678,7 @@ msgstr "%s Cargaison en cours :"
 msgctxt "inventory-shipLog"
 msgid "     %s: %i"
 msgstr "     %s: %i"
+
 #: scripts/scenario_49_allies.lua:5489 scripts/scenario_49_allies.lua:5508
 #: scripts/scenario_49_allies.lua:5527 scripts/scenario_49_allies.lua:5546
 #: scripts/scenario_49_allies.lua:5565 scripts/scenario_49_allies.lua:5584
@@ -3197,6 +3686,7 @@ msgstr "     %s: %i"
 msgctxt "inventory-shipLog"
 msgid "     Empty\n"
 msgstr "     Vide\n"
+
 #: scripts/scenario_49_allies.lua:5491 scripts/scenario_49_allies.lua:5510
 #: scripts/scenario_49_allies.lua:5529 scripts/scenario_49_allies.lua:5548
 #: scripts/scenario_49_allies.lua:5567 scripts/scenario_49_allies.lua:5586
@@ -3205,41 +3695,50 @@ msgstr "     Vide\n"
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr "Espace disponible : %i"
+
 #: scripts/scenario_49_allies.lua:5652
 msgctxt "coolant-buttonEngineer"
 msgid "Get Coolant"
 msgstr "Obtenir liq. de ref."
+
 #: scripts/scenario_49_allies.lua:5657
 msgctxt "coolant-buttonEngineer+"
 msgid "Get Coolant"
 msgstr "Obtenir liq. de ref."
+
 #: scripts/scenario_49_allies.lua:5701
 msgctxt "coolant-tabEngineer"
 msgid "Gathering Coolant"
 msgstr "Collecte du liq. de ref."
+
 #: scripts/scenario_49_allies.lua:5704
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Deploying Collectors %i"
 msgstr "Déploiement des collecteurs %i"
+
 #: scripts/scenario_49_allies.lua:5707
 #, lua-format
 msgctxt "coolant-tabEngineer"
 msgid "Configuring Collectors %i"
 msgstr "Configuration des collecteurs %i"
+
 #: scripts/scenario_49_allies.lua:5772
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Player survived for %i minutes"
 msgstr "Le joueur a survécu pendant %i minutes"
+
 #: scripts/scenario_49_allies.lua:5797
 msgctxt "msgMainscreen"
 msgid "Single selected mission completed"
 msgstr "Mission unique sélectionnée terminée"
+
 #: scripts/scenario_49_allies.lua:5809
 msgctxt "msgMainscreen"
 msgid "All missions completed"
 msgstr "Toutes les missions terminées"
+
 #: scripts/scenario_49_allies.lua:5844
 msgctxt "doomsdayGoal-shipLog"
 msgid ""
@@ -3257,17 +3756,20 @@ msgstr ""
 "Trouvez le professeur Unruh le plus rapidement possible et obtenez les plans "
 "de son mécanisme de défense.\n"
 "Ne trainez pas, il en va de notre survie !"
+
 #: scripts/scenario_49_allies.lua:5847
 msgctxt "doomsdayOrders-comms"
 msgid "Find professor Unruh for doomsday defense mechanism plans"
 msgstr ""
 "Trouver le professeur Unruh pour récupérer les plans de son mécanisme de "
 "défense contre l'arme apocalyptique."
+
 #: scripts/scenario_49_allies.lua:5873
 #, lua-format
 msgctxt "doomsday-comms"
 msgid "Gregory Unruh resides on station %s"
 msgstr "Gregory Unruh réside à la station %s."
+
 #: scripts/scenario_49_allies.lua:5947
 #, lua-format
 msgctxt "doomsday-shipLog"
@@ -3278,6 +3780,7 @@ msgstr ""
 "Les services de renseignement estiment qu'il reste environ %i minutes avant "
 "que les Exuari ne déploient l'appareil apocalyptique. Les Éxuaris et les "
 "Kraylors semblent tous deux piller la région massivement."
+
 #: scripts/scenario_49_allies.lua:5954
 #, lua-format
 msgctxt "doomsdayOrders-comms"
@@ -3285,11 +3788,13 @@ msgid "Get %s, %s and %s to build doomsday defense mechanism"
 msgstr ""
 "Obtenir %s, %s et %s pour finaliser le mécanisme de défense contre l'arme "
 "apocalyptique."
+
 #: scripts/scenario_49_allies.lua:5960
 #, lua-format
 msgctxt "doomsday-shipLog"
 msgid "The instructions list %s, %s and %s as necessary components"
 msgstr "Les instructions indiquent %s, %s et %s comme composants nécessaires."
+
 #: scripts/scenario_49_allies.lua:5970
 #, lua-format
 msgctxt "doomsday-shipLog"
@@ -3299,6 +3804,7 @@ msgid ""
 msgstr ""
 "Une inspection plus approfondie des plans de Gregory Unruh révèle des notes "
 "dans la marge : %s sur %s, %s sur %s, %s sur %s."
+
 #: scripts/scenario_49_allies.lua:5999
 msgctxt "doomsday-shipLog"
 msgid ""
@@ -3308,18 +3814,22 @@ msgstr ""
 "Avec les trois composants ainsi récupérés, l'ingénierie et la science "
 "finalisent et déploient rapidement le système de défense contre l'arme "
 "apocalyptique."
+
 #: scripts/scenario_49_allies.lua:6051 scripts/scenario_49_allies.lua:6057
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device:"
 msgstr "Arme apocalyptique :"
+
 #: scripts/scenario_49_allies.lua:6053
 msgctxt "doomsday-tabEngineer&Engineer+"
 msgid "Doomsday Device Built"
 msgstr "Arme apocalyptique activée"
+
 #: scripts/scenario_49_allies.lua:6089
 msgctxt "doomsday-msgMainscreen"
 msgid "All human stations destroyed"
 msgstr "Toutes les stations humaines détruites"
+
 #: scripts/scenario_49_allies.lua:6185
 msgctxt "doctorGoal-shipLog"
 msgid ""
@@ -3349,21 +3859,25 @@ msgstr ""
 "Fouillez les stations de la marine humaine, trouvez-la et demandez son aide, "
 "le cas échéant.\n"
 "Faites-le vite, l'amiral Koshenz n'a plus longtemps à vivre."
+
 #: scripts/scenario_49_allies.lua:6188
 msgctxt "doctorOrders-comms"
 msgid "Find Dr. Thultris for help with Arlenian Admiral Koshenz"
 msgstr ""
 "Trouver le Dr Thultris afin d'obtenir son aide auprès de l'amiral Arlénien "
 "Koshenz."
+
 #: scripts/scenario_49_allies.lua:6212
 #, lua-format
 msgctxt "doctor-comms"
 msgid "Dr. Thultris resides on station %s"
 msgstr "Le Dr Thultris réside à la station %s."
+
 #: scripts/scenario_49_allies.lua:6228
 msgctxt "doctor-msgMainscreen"
 msgid "Arlenian Admiral Koshenz dies"
 msgstr "Décès de l'amiral Arlénien Koshenz."
+
 #: scripts/scenario_49_allies.lua:6238
 msgctxt "doctor-shipLog"
 msgid ""
@@ -3372,6 +3886,7 @@ msgid ""
 msgstr ""
 "Les Arléniens disent qu'ils pensent que l'amiral a moins de 3 minutes à "
 "vivre."
+
 #: scripts/scenario_49_allies.lua:6256
 #, lua-format
 msgctxt "doctor-shipLog"
@@ -3381,26 +3896,31 @@ msgid ""
 msgstr ""
 "Les Kraylors semblent avoir découvert l'emplacement de l'Amiral Koshenz. "
 "Nous détectons des navires Kraylor en route vers %s."
+
 #: scripts/scenario_49_allies.lua:6274
 #, lua-format
 msgctxt "doctor-shipLog"
 msgid "Admiral Koshenz is on %s in %s"
 msgstr "L'amiral Koshenz se trouve sur %s en %s."
+
 #: scripts/scenario_49_allies.lua:6277
 #, lua-format
 msgctxt "doctorOrders-comms"
 msgid "Take Dr. Thultris to %s in %s"
 msgstr "Emmener le Dr Thultris à %s en %s."
+
 #: scripts/scenario_49_allies.lua:6284
 msgctxt "doctor-shipLog"
 msgid "Dr. Thultris applied her knowledge and Admiral Koshenz is improving"
 msgstr ""
 "Le Dr Thultris a appliqué ses connaissances et l'état de l'amiral Koshenz "
 "s'améliore."
+
 #: scripts/scenario_49_allies.lua:6302
 msgctxt "doctor-tabScience&Operations"
 msgid "Koshenz Death:"
 msgstr "Décès de l'amiral :"
+
 #: scripts/scenario_49_allies.lua:6331
 msgctxt "BespinGoal-shipLog"
 msgid ""
@@ -3413,19 +3933,23 @@ msgstr ""
 "attaquent l'installation minière autour de la planète Bespin. Nous dépendons "
 "fortement de cet approvisionnement en minéraux pour le commerce et les "
 "opérations militaires. Contactez les Arléniens et apportez-leur votre aide."
+
 #: scripts/scenario_49_allies.lua:6334
 msgctxt "BespinOrders-comms"
 msgid "Contact Arlenians and render assistance with Kraylor attack"
 msgstr ""
 "Contacter les Arléniens et leur apporter votre aide contre l'attaque Kraylor."
+
 #: scripts/scenario_49_allies.lua:6337
 msgctxt "scienceDescription-planet"
 msgid "Gas giant suitable for mining"
 msgstr "Gazeuse géante propice à l'exploitation minière"
+
 #: scripts/scenario_49_allies.lua:6339
 msgctxt "scienceDescription-station"
 msgid "Bespin Gas Mining"
 msgstr "Mine de gaz Bespin"
+
 #: scripts/scenario_49_allies.lua:6416
 msgctxt "Bespin-shipLog"
 msgid ""
@@ -3434,6 +3958,7 @@ msgid ""
 msgstr ""
 "Il semblerait que les Éxuaris profitent de l'incident minier Kraylor pour "
 "envoyer des forces d'attaque contre nous et les Arléniens."
+
 #: scripts/scenario_49_allies.lua:6432
 msgctxt "Bespin-shipLog"
 msgid ""
@@ -3441,22 +3966,27 @@ msgid ""
 msgstr ""
 "Les Arléniens nous ont remercié pour l'aide apportée contre les Kraylors "
 "autour de Cloud City."
+
 #: scripts/scenario_49_allies.lua:6440
 msgctxt "Bespin-msgMainscreen"
 msgid "Mining station Cloud City destroyed"
 msgstr "Station minière Cloud City détruite"
+
 #: scripts/scenario_49_allies.lua:6548
 msgctxt "msgEngineer"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
+
 #: scripts/scenario_49_allies.lua:6552
 msgctxt "msgEngineer+"
 msgid "One of your repair crew has perished"
 msgstr "Un de vos réparateurs a péri."
+
 #: scripts/scenario_49_allies.lua:6970
 msgctxt "msgMainscreen"
 msgid "statistics unavailable"
 msgstr "statistiques indisponibles"
+
 #: scripts/scenario_49_allies.lua:6976
 #, lua-format
 msgctxt "msgMainscreen"
@@ -3466,6 +3996,7 @@ msgid ""
 msgstr ""
 "Stations alliées : Humain : survivants : %.1f%%, force : %.1f%% ; Arlénien : "
 "survivants : %.1f%%, force : %.1f%%\n"
+
 #: scripts/scenario_49_allies.lua:6978
 #, lua-format
 msgctxt "msgMainscreen"
@@ -3475,62 +4006,73 @@ msgid ""
 msgstr ""
 "Stations ennemies : Kraylor : survivant : %.1f%%, force : %.1f%% ; Éxuari : "
 "%.1f%%, force : %.1f%%\n"
+
 #: scripts/scenario_49_allies.lua:6981
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Neutral stations: survived: %.1f%%, strength: %.1f%%"
 msgstr "Stations neutres : %.1f%%, force : %.1f%%"
+
 #: scripts/scenario_49_allies.lua:6986
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied ships: Human: strength: %.1f%%, Arlenian: strength: %.1f%%\n"
 msgstr ""
 "Vaisseaux alliés : Humain : force : %.1f%%, Arlénien : force : %.1f%%\n"
+
 #: scripts/scenario_49_allies.lua:6988
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Enemy ships: Kraylor: strength: %.1f%%, Exuari: strength: %.1f%%\n"
 msgstr ""
 "Vaisseaux ennemis : Kraylor : force : %.1f%%, Éxuari : force : %.1f%%\n"
+
 #: scripts/scenario_49_allies.lua:6993
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Allied value: %.2f, Enemy value: %.2f"
 msgstr "Rang allié : %.2f, rang ennemi : %.2f"
+
 #: scripts/scenario_49_allies.lua:6997
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Mission ended because %s\n"
 msgstr "Mission terminée car %s\n"
+
 #: scripts/scenario_49_allies.lua:7003 scripts/scenario_49_allies.lua:7018
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Officier"
+
 #: scripts/scenario_49_allies.lua:7005 scripts/scenario_49_allies.lua:7020
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
 msgstr "Lieutenant"
+
 #: scripts/scenario_49_allies.lua:7007 scripts/scenario_49_allies.lua:7022
 msgctxt "msgMainscreen"
 msgid "Commander"
 msgstr "Commandant"
+
 #: scripts/scenario_49_allies.lua:7009 scripts/scenario_49_allies.lua:7024
 msgctxt "msgMainscreen"
 msgid "Captain"
 msgstr "Capitaine"
+
 #: scripts/scenario_49_allies.lua:7011 scripts/scenario_49_allies.lua:7026
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr "Amiral"
+
 #: scripts/scenario_49_allies.lua:7013
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Earned rank: %s"
 msgstr "Rang obtenu : %s"
+
 #: scripts/scenario_49_allies.lua:7028
 #, lua-format
 msgctxt "msgMainscreen"
 msgid "Rank after military reductions due to ignominious defeat: %s"
 msgstr ""
 "Rang après les réductions militaires dues à une défaite ignominieuse : %s"
-# Scenario description

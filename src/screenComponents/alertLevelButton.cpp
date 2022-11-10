@@ -6,9 +6,6 @@
 GuiAlertLevelSelect::GuiAlertLevelSelect(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-        auto layout = new GuiElement(this, "");
-    layout->setPosition(-20, -70, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
-
     // Alert level buttons.
     auto alert_level_button = new GuiToggleButton(this, "", tr("Alert level"), [this](bool value)
     {
@@ -20,7 +17,7 @@ GuiAlertLevelSelect::GuiAlertLevelSelect(GuiContainer* owner, string id)
 
     for(int level=AL_Normal; level < AL_MAX; level++)
     {
-        GuiButton* alert_button = new GuiButton(layout, "", alertLevelToLocaleString(EAlertLevel(level)), [this, level, alert_level_button]()
+        GuiButton* alert_button = new GuiButton(this, "", alertLevelToLocaleString(EAlertLevel(level)), [this, level, alert_level_button]()
         {
             if (my_spaceship)
                 my_spaceship->commandSetAlertLevel(EAlertLevel(level));
