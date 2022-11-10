@@ -4,6 +4,8 @@
 #include "singlePilotScreen.h"
 #include "preferenceManager.h"
 
+#include "components/reactor.h"
+
 #include "screenComponents/viewport3d.h"
 
 #include "screenComponents/alertOverlay.h"
@@ -114,7 +116,10 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        energy_display->setValue(string(int(my_spaceship->energy_level)));
+        auto reactor = my_spaceship->entity.getComponent<Reactor>();
+        energy_display->setVisible(reactor);
+        if (reactor)
+            energy_display->setValue(string(int(reactor->energy)));
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
         float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));

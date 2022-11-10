@@ -134,13 +134,13 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 
     (new GuiLabel(left_col, "", tr("Impulse speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
-        target->impulse_max_speed = value;
+        //TODO: target->impulse_max_speed = value;
     });
     impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", tr("Impulse reverse speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     impulse_reverse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
-        target->impulse_max_reverse_speed = value;
+        //TODO: target->impulse_max_reverse_speed = value;
     });
     impulse_reverse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -223,9 +223,9 @@ void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
     jump_max_distance_slider->setValue(target->jump_drive_max_distance);
     type_name->setText(target->getTypeName());
     warp_toggle->setValue(target->has_warp_drive);
-    jump_toggle->setValue(target->hasJumpDrive());
-    impulse_speed_slider->setValue(target->impulse_max_speed);
-    impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
+    jump_toggle->setValue(target->hasJumpDrive());\
+    //TODO: impulse_speed_slider->setValue(target->impulse_max_speed);
+    //TODO: impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
     turn_speed_slider->setValue(target->turn_speed);
     hull_max_slider->setValue(target->hull_max);
     can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
@@ -860,15 +860,15 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     (new GuiLabel(left_col, "", tr("Max energy:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     max_energy_level_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
-        target->max_energy_level = value;
-        target->energy_level = std::min(target->energy_level, target->max_energy_level);
+        //TODO: target->max_energy_level = value;
+        //TODO: target->energy_level = std::min(target->energy_level, target->max_energy_level);
     });
     max_energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", tr("Current energy:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     energy_level_slider = new GuiSlider(left_col, "", 0.0, 2000, 0.0, [this](float value) {
-        target->energy_level = std::min(value, target->max_energy_level);
+        //TODO: target->energy_level = std::min(value, target->max_energy_level);
     });
     energy_level_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -932,8 +932,8 @@ void GuiShipTweakPlayer::onDraw(sp::RenderTarget& renderer)
     position_count->setText(tr("Positions occupied: ") + string(position_counter));
 
     // Update the ship's energy level.
-    energy_level_slider->setValue(target->energy_level);
-    max_energy_level_slider->setValue(target->max_energy_level);
+    //TODO: energy_level_slider->setValue(target->energy_level);
+    //TODO: max_energy_level_slider->setValue(target->max_energy_level);
 
     // Update reputation points.
     reputation_point_slider->setValue(target->getReputationPoints());

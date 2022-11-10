@@ -1,6 +1,8 @@
 #include "systems/docking.h"
 #include "components/docking.h"
 #include "components/collision.h"
+#include "components/impulse.h"
+#include "components/reactor.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/cpuShip.h"
@@ -17,7 +19,7 @@ void DockingSystem::update(float delta)
 {
     if (!game_server) return;
 
-    for(auto [entity, docking_port, position, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Position>, SpaceObject*>()) {
+    for(auto [entity, docking_port, position, engine, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Position>, sp::ecs::optional<ImpulseEngine>, SpaceObject*>()) {
         SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(obj);
         if (!ship) continue;
@@ -30,10 +32,12 @@ void DockingSystem::update(float delta)
                 docking_port.state = DockingPort::State::NotDocking;
             } else {
                 ship->target_rotation = vec2ToAngle(position->getPosition() - target_position->getPosition());
-                if (fabs(angleDifference(ship->target_rotation, position->getRotation())) < 10.0f)
-                    ship->impulse_request = -1.f;
-                else
-                    ship->impulse_request = 0.f;
+                if (engine) {
+                    if (fabs(angleDifference(ship->target_rotation, position->getRotation())) < 10.0f)
+                        engine->request = -1.f;
+                    else
+                        engine->request = 0.f;
+                }
                 ship->warp_request = 0.f;
             }
             break;
@@ -62,17 +66,20 @@ void DockingSystem::update(float delta)
                 }
 
                 if (bay && (bay->flags & DockingBay::ShareEnergy)) {
-                    auto target_ship = dynamic_cast<SpaceShip*>(*docking_port.target.getComponent<SpaceObject*>());
-                    // Derive a base energy request rate from the player ship's maximum
-                    // energy capacity.
-                    float energy_request = std::min(delta * 10.0f, player->max_energy_level - player->energy_level);
+                    auto my_reactor = entity.getComponent<Reactor>();
+                    if (my_reactor) {
+                        auto other_reactor = docking_port.target.getComponent<Reactor>();
+                        // Derive a base energy request rate from the player ship's maximum
+                        // energy capacity.
+                        float energy_request = std::min(delta * 10.0f, my_reactor->max_energy - my_reactor->energy);
 
-                    // If we're docked with a shipTemplateBasedObject, and that object is
-                    // set to share its energy with docked ships, transfer energy from the
-                    // mothership to docked ships until the mothership runs out of energy
-                    // or the docked ship doesn't require any.
-                    if (!target_ship || target_ship->useEnergy(energy_request))
-                        ship->energy_level += energy_request;
+                        // If we're docked with a shipTemplateBasedObject, and that object is
+                        // set to share its energy with docked ships, transfer energy from the
+                        // mothership to docked ships until the mothership runs out of energy
+                        // or the docked ship doesn't require any.
+                        if (!other_reactor || other_reactor->use_energy(energy_request))
+                            my_reactor->energy += energy_request;
+                    }
                 }
 
                 if (player && bay && (bay->flags & DockingBay::RestockProbes)) {
@@ -116,7 +123,9 @@ void DockingSystem::update(float delta)
                     }
                 }
             }
-            ship->impulse_request = 0.f;
+
+            if (engine)
+                engine->request = 0.f;
             ship->warp_request = 0.f;
             break;
         }

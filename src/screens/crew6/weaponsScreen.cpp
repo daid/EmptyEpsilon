@@ -4,6 +4,8 @@
 #include "weaponsScreen.h"
 #include "preferenceManager.h"
 
+#include "components/reactor.h"
+
 #include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
 #include "screenComponents/beamFrequencySelector.h"
@@ -99,7 +101,10 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        energy_display->setValue(string(int(my_spaceship->energy_level)));
+        auto reactor = my_spaceship->entity.getComponent<Reactor>();
+        energy_display->setVisible(reactor);
+        if (reactor)
+            energy_display->setValue(string(int(reactor->energy)));
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
         if (my_spaceship->hasSystem(SYS_FrontShield))
         {

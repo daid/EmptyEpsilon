@@ -28,6 +28,7 @@
 #include "gameGlobalInfo.h"
 #include "spaceObjects/spaceObject.h"
 #include "systems/docking.h"
+#include "systems/impulse.h"
 #include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
@@ -135,6 +136,7 @@ int main(int argc, char** argv)
     LOG(Info, "Starting...");
     new Engine();
     engine->registerSystem<DockingSystem>();
+    engine->registerSystem<ImpulseSystem>();
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";

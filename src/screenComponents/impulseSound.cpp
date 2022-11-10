@@ -1,6 +1,7 @@
 #include "impulseSound.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/impulse.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
 
@@ -12,8 +13,9 @@ ImpulseSound::ImpulseSound(bool enabled)
     impulse_sound_volume = PreferencesManager::get("impulse_sound_volume", "50").toInt();
 
     // If defined, use this ship's impulse sound file.
-    if (my_spaceship)
-        impulse_sound_file = my_spaceship->impulse_sound_file;
+    ImpulseEngine* engine;
+    if (my_spaceship && (engine = my_spaceship->entity.getComponent<ImpulseEngine>()))
+        impulse_sound_file = engine->sound;
     else
         impulse_sound_file = "sfx/engine.wav";
 
@@ -57,14 +59,16 @@ void ImpulseSound::update(float delta)
     // Update only if an impulse sound is defined.
     if (impulse_sound_id > -1)
     {
+        if (!my_spaceship) return;
+        auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
         // Get whether the ship's impulse engines are functional.
         float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
 
         // If so, update their pitch and volume.
-        if (impulse_ability > 0.0f)
+        if (impulse_ability > 0.0f && engine)
         {
-            soundManager->setSoundVolume(impulse_sound_id, (std::max(10.0f * impulse_ability, fabsf(my_spaceship->current_impulse) * 10.0f * std::max(0.1f, impulse_ability))) * (impulse_sound_volume / 100.0f));
-            soundManager->setSoundPitch(impulse_sound_id, std::max(0.7f * impulse_ability, fabsf(my_spaceship->current_impulse) + 0.2f * std::max(0.1f, impulse_ability)));
+            soundManager->setSoundVolume(impulse_sound_id, (std::max(10.0f * impulse_ability, fabsf(engine->actual) * 10.0f * std::max(0.1f, impulse_ability))) * (impulse_sound_volume / 100.0f));
+            soundManager->setSoundPitch(impulse_sound_id, std::max(0.7f * impulse_ability, fabsf(engine->actual) + 0.2f * std::max(0.1f, impulse_ability)));
         } else {
             // If not, silence the impulse sound.
             // TODO: Play an engine failure sound.

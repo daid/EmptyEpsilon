@@ -3,10 +3,13 @@
 #include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
+#include "components/impulse.h"
 #include "main.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "random.h"
+
+#include "components/reactor.h"
 
 #include "scriptInterface.h"
 
@@ -352,10 +355,8 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&can_launch_probe);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&jump_indicator, 0.5);
-    registerMemberReplication(&energy_level, 0.1);
     registerMemberReplication(&energy_warp_per_second, .5f);
     registerMemberReplication(&energy_shield_use_per_second, .5f);
-    registerMemberReplication(&max_energy_level);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
     registerMemberReplication(&scanning_delay, 0.5);
@@ -401,12 +402,12 @@ PlayerSpaceship::PlayerSpaceship()
         SDL_assert(n < default_system_power_factors.size());
         systems[n].health = 1.0f;
         systems[n].power_level = 1.0f;
-        systems[n].power_rate_per_second = ShipSystem::default_power_rate_per_second;
+        systems[n].power_rate_per_second = ShipSystemLegacy::default_power_rate_per_second;
         systems[n].power_request = 1.0f;
         systems[n].coolant_level = 0.0f;
-        systems[n].coolant_rate_per_second = ShipSystem::default_coolant_rate_per_second;
+        systems[n].coolant_rate_per_second = ShipSystemLegacy::default_coolant_rate_per_second;
         systems[n].heat_level = 0.0f;
-        systems[n].heat_rate_per_second = ShipSystem::default_heat_rate_per_second;
+        systems[n].heat_rate_per_second = ShipSystemLegacy::default_heat_rate_per_second;
         systems[n].power_factor = default_system_power_factors[n];
 
         registerMemberReplication(&systems[n].power_level);
@@ -530,7 +531,12 @@ void PlayerSpaceship::update(float delta)
             useEnergy(delta * getEnergyShieldUsePerSecond());
 
         // Consume power based on subsystem requests and state.
-        energy_level += delta * getNetSystemEnergyUsage();
+        auto reactor = entity.getComponent<Reactor>();
+        if (reactor) {
+            reactor->energy += delta * getNetSystemEnergyUsage();
+            // Cap energy at the max_energy_level.
+            reactor->energy = std::clamp(reactor->energy, 0.0f, reactor->max_energy);
+        }
 
         // Check how much coolant we have requested in total, and if that's beyond the
         //  amount of coolant we have, see how much we need to adjust our request.
@@ -595,11 +601,8 @@ void PlayerSpaceship::update(float delta)
             return;
         }
 
-        if (energy_level < 0.0f)
-            energy_level = 0.0f;
-
         // If the ship has less than 10 energy, drop shields automatically.
-        if (energy_level < 10.0f)
+        if (reactor && reactor->energy < 10.0f)
         {
             shields_active = false;
         }
@@ -691,10 +694,6 @@ void PlayerSpaceship::update(float delta)
 
     // Perform all other ship update actions.
     SpaceShip::update(delta);
-
-    // Cap energy at the max_energy_level.
-    if (energy_level > max_energy_level)
-        energy_level = max_energy_level;
 }
 
 void PlayerSpaceship::applyTemplateValues()
@@ -747,18 +746,6 @@ void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
 {
     request = std::max(0.0f, std::min(request, std::min((float) max_coolant_per_system, max_coolant)));
     systems[system].coolant_request = request;
-}
-
-bool PlayerSpaceship::useEnergy(float amount)
-{
-    // Try to consume an amount of energy. If it works, return true.
-    // If it doesn't, return false.
-    if (energy_level >= amount)
-    {
-        energy_level -= amount;
-        return true;
-    }
-    return false;
 }
 
 void PlayerSpaceship::addHeat(ESystem system, float amount)
@@ -1131,6 +1118,11 @@ void PlayerSpaceship::closeComms()
     }
 }
 
+void PlayerSpaceship::setEnergyLevel(float amount) {} //TODO
+void PlayerSpaceship::setEnergyLevelMax(float amount) {} //TODO
+float PlayerSpaceship::getEnergyLevel() { return 0.0f; } //TODO
+float PlayerSpaceship::getEnergyLevelMax() { return 0.0f; } //TODO
+
 void PlayerSpaceship::setCanDock(bool enabled)
 {
     if (!enabled) {
@@ -1165,9 +1157,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         target_rotation = getRotation();
         packet >> turnSpeed;
         break;
-    case CMD_IMPULSE:
-        packet >> impulse_request;
-        break;
+    case CMD_IMPULSE:{
+        auto engine = entity.getComponent<ImpulseEngine>();
+        if (engine)
+            packet >> engine->request;
+        else {
+            float f;
+            packet >> f;
+        }
+        } break;
     case CMD_WARP:
         packet >> warp_request;
         break;
@@ -2053,17 +2051,17 @@ string PlayerSpaceship::getExportLine()
                 result += ":setSystemPowerFactor(" + string(system) + ", " + string(current_factor, 1) + ")";
             }
 
-            if (std::fabs(getSystemCoolantRate(system) - ShipSystem::default_coolant_rate_per_second) > std::numeric_limits<float>::epsilon())
+            if (std::fabs(getSystemCoolantRate(system) - ShipSystemLegacy::default_coolant_rate_per_second) > std::numeric_limits<float>::epsilon())
             {
                 result += ":setSystemCoolantRate(" + string(system) + ", " + string(getSystemCoolantRate(system), 2) + ")";
             }
 
-            if (std::fabs(getSystemHeatRate(system) - ShipSystem::default_heat_rate_per_second) > std::numeric_limits<float>::epsilon())
+            if (std::fabs(getSystemHeatRate(system) - ShipSystemLegacy::default_heat_rate_per_second) > std::numeric_limits<float>::epsilon())
             {
                 result += ":setSystemHeatRate(" + string(system) + ", " + string(getSystemHeatRate(system), 2) + ")";
             }
 
-            if (std::fabs(getSystemPowerRate(system) - ShipSystem::default_power_rate_per_second) > std::numeric_limits<float>::epsilon())
+            if (std::fabs(getSystemPowerRate(system) - ShipSystemLegacy::default_power_rate_per_second) > std::numeric_limits<float>::epsilon())
             {
                 result += ":setSystemPowerRate(" + string(system) + ", " + string(getSystemPowerRate(system), 2) + ")";
             }

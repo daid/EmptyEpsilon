@@ -2,6 +2,8 @@
 #include "gameGlobalInfo.h"
 #include "engineeringScreen.h"
 
+#include "components/reactor.h"
+
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
 #include "screenComponents/alertOverlay.h"
@@ -174,29 +176,31 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        // Update the energy usage.
-        if (previous_energy_measurement == 0.0f)
-        {
-            previous_energy_level = my_spaceship->energy_level;
-            previous_energy_measurement = engine->getElapsedTime();
-        }else{
-            if (previous_energy_measurement != engine->getElapsedTime())
+        auto reactor = my_spaceship->entity.getComponent<Reactor>();
+        if (reactor) {
+            // Update the energy usage.
+            if (previous_energy_measurement == 0.0f)
             {
-                float delta_t = engine->getElapsedTime() - previous_energy_measurement;
-                float delta_e = my_spaceship->energy_level - previous_energy_level;
-                float delta_e_per_second = delta_e / delta_t;
-                average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
-
-                previous_energy_level = my_spaceship->energy_level;
+                previous_energy_level = reactor->energy;
                 previous_energy_measurement = engine->getElapsedTime();
-            }
-        }
+            }else{
+                if (previous_energy_measurement != engine->getElapsedTime())
+                {
+                    float delta_t = engine->getElapsedTime() - previous_energy_measurement;
+                    float delta_e = reactor->energy - previous_energy_level;
+                    float delta_e_per_second = delta_e / delta_t;
+                    average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
 
-        energy_display->setValue(toNearbyIntString(my_spaceship->energy_level) + " (" + tr("{energy}/min").format({{"energy", toNearbyIntString(average_energy_delta * 60.0f)}}) + ")");
-        if (my_spaceship->energy_level < 100.0f)
-            energy_display->setColor(glm::u8vec4(255, 0, 0, 255));
-        else
-            energy_display->setColor(glm::u8vec4{255,255,255,255});
+                    previous_energy_level = reactor->energy;
+                    previous_energy_measurement = engine->getElapsedTime();
+                }
+            }
+            energy_display->setValue(toNearbyIntString(reactor->energy) + " (" + tr("{energy}/min").format({{"energy", toNearbyIntString(average_energy_delta * 60.0f)}}) + ")");
+            if (reactor->energy < 100.0f)
+                energy_display->setColor(glm::u8vec4(255, 0, 0, 255));
+            else
+                energy_display->setColor(glm::u8vec4{255,255,255,255});
+        }
         hull_display->setValue(toNearbyIntString(100.0f * my_spaceship->hull_strength / my_spaceship->hull_max) + "%");
         if (my_spaceship->hull_strength < my_spaceship->hull_max / 4.0f)
             hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
@@ -267,7 +271,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 
         if (selected_system != SYS_None)
         {
-            ShipSystem& system = my_spaceship->systems[selected_system];
+            auto& system = my_spaceship->systems[selected_system];
             power_label->setText(tr("slider", "Power: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system.power_level * 100)}, {"requested", toNearbyIntString(system.power_request * 100)}}));
             power_slider->setValue(system.power_request);
             coolant_label->setText(tr("slider", "Coolant: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)}, {"requested", toNearbyIntString(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)}}));

@@ -3,6 +3,7 @@
 #include "scriptInterface.h"
 #include "components/collision.h"
 #include "components/docking.h"
+#include "components/impulse.h"
 
 #include "tween.h"
 #include "i18n.h"
@@ -133,7 +134,6 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_max[n]);
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
-    registerMemberReplication(&impulse_sound_file);
     registerMemberReplication(&hull_strength, 0.5);
     registerMemberReplication(&hull_max);
     registerMemberReplication(&long_range_radar_range, 0.5);
@@ -405,8 +405,6 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
         }
     }
 
-    impulse_sound_file = ship_template->impulse_sound_file;
-
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
 
@@ -446,6 +444,11 @@ void ShipTemplateBasedObject::setRadarTrace(string trace)
 {
     if (!entity) return;
     entity.getOrAddComponent<RadarTrace>().icon = "radar/" + trace;
+}
+
+void ShipTemplateBasedObject::setImpulseSoundFile(string sound)
+{
+    //TODO
 }
 
 bool ShipTemplateBasedObject::getSharesEnergyWithDocked()
