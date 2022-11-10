@@ -40,7 +40,7 @@ struct Speeds
 template<> int convert<Speeds>::returnType(lua_State* L, const Speeds &speeds);
 
 
-class ShipSystem
+class ShipSystemLegacy
 {
 public:
     static constexpr float power_factor_rate = 0.08f;
@@ -88,9 +88,7 @@ public:
     constexpr static float heat_per_warp = 0.02f;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
-    float energy_level;
-    float max_energy_level;
-    ShipSystem systems[SYS_COUNT];
+    ShipSystemLegacy systems[SYS_COUNT];
     static std::array<float, SYS_COUNT> default_system_power_factors;
     /*!
      *[input] Ship will try to aim to this rotation. (degrees)
@@ -103,39 +101,9 @@ public:
     float turnSpeed;
 
     /*!
-     * [input] Amount of impulse requested from the user (-1.0 to 1.0)
-     */
-    float impulse_request;
-
-    /*!
-     * [output] Amount of actual impulse from the engines (-1.0 to 1.0)
-     */
-    float current_impulse;
-
-    /*!
      * [config] Speed of rotation, in deg/second
      */
     float turn_speed;
-
-    /*!
-     * [config] Max speed of the impulse engines, in m/s
-     */
-    float impulse_max_speed;
-
-    /*!
-     * [config] Max speed of the reverse impulse engines, in m/s
-     */
-    float impulse_max_reverse_speed;
-
-    /*!
-     * [config] Impulse engine acceleration, in (m/s)/s
-     */
-    float impulse_acceleration;
-
-    /*!
-     * [config] Impulse engine acceleration in reverse, in (m/s)/s
-     */
-    float impulse_reverse_acceleration;
 
     /*!
      * [config] True if we have a warpdrive.
@@ -278,8 +246,8 @@ public:
      */
     void abortDock();
 
-    /// Dummy virtual function to use energy. Only player ships currently model energy use.
-    virtual bool useEnergy(float amount) { return true; }
+    /// Function to use energy. Only player ships currently model energy use.
+    bool useEnergy(float amount);
 
     /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
     virtual void addHeat(ESystem system, float amount) {}
@@ -328,10 +296,10 @@ public:
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
     void setWeaponStorageMax(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage_max[weapon] = amount; weapon_storage[weapon] = std::min(int(weapon_storage[weapon]), amount); }
-    float getMaxEnergy() { return max_energy_level; }
-    void setMaxEnergy(float amount) { if (amount > 0.0f) { max_energy_level = amount;} }
-    float getEnergy() { return energy_level; }
-    void setEnergy(float amount) { if ( (amount > 0.0f) && (amount <= max_energy_level)) { energy_level = amount; } }
+    float getMaxEnergy();
+    void setMaxEnergy(float amount);
+    float getEnergy();
+    void setEnergy(float amount);
     float getSystemHackedLevel(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].hacked_level; }
     void setSystemHackedLevel(ESystem system, float hacked_level) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].hacked_level = std::min(1.0f, std::max(0.0f, hacked_level)); }
     float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
@@ -352,22 +320,14 @@ public:
     void setSystemPowerFactor(ESystem system, float factor) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_factor = factor; }
     float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
     void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
-    Speeds getImpulseMaxSpeed() {return {impulse_max_speed, impulse_max_reverse_speed};}
-    void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed) 
-    { 
-        impulse_max_speed = forward_speed; 
-        impulse_max_reverse_speed = reverse_speed.value_or(forward_speed);
-    }
+    Speeds getImpulseMaxSpeed();
+    void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed);
     float getSystemCoolantRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].coolant_rate_per_second; }
     void setSystemCoolantRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_rate_per_second = rate; }
     float getRotationMaxSpeed() { return turn_speed; }
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
-    Speeds getAcceleration() { return {impulse_acceleration, impulse_reverse_acceleration};}
-    void setAcceleration(float acceleration, std::optional<float> reverse_acceleration) 
-    { 
-        impulse_acceleration = acceleration; 
-        impulse_reverse_acceleration = reverse_acceleration.value_or(acceleration);
-    }
+    Speeds getAcceleration();
+    void setAcceleration(float acceleration, std::optional<float> reverse_acceleration);
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }

@@ -356,8 +356,12 @@ set(MAIN_SOURCES
     src/components/radar.h
     src/components/rendering.h
     src/components/docking.h
+    src/components/shipsystem.h
+    src/components/impulse.h
     src/systems/docking.h
     src/systems/docking.cpp
+    src/systems/impulse.h
+    src/systems/impulse.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

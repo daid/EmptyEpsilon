@@ -1,5 +1,6 @@
 #include "powerManagement.h"
 #include "missileWeaponData.h"
+#include "components/reactor.h"
 
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
@@ -76,24 +77,27 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
     if (my_spaceship)
     {
-        //Update the energy usage.
-        if (previous_energy_measurement == 0.0f)
-        {
-            previous_energy_level = my_spaceship->energy_level;
-            previous_energy_measurement = engine->getElapsedTime();
-        }else{
-            if (previous_energy_measurement != engine->getElapsedTime())
+        auto reactor = my_spaceship->entity.getComponent<Reactor>();
+        if (reactor) {
+            //Update the energy usage.
+            if (previous_energy_measurement == 0.0f)
             {
-                float delta_t = engine->getElapsedTime() - previous_energy_measurement;
-                float delta_e = my_spaceship->energy_level - previous_energy_level;
-                float delta_e_per_second = delta_e / delta_t;
-                average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
-
-                previous_energy_level = my_spaceship->energy_level;
+                previous_energy_level = reactor->energy;
                 previous_energy_measurement = engine->getElapsedTime();
+            }else{
+                if (previous_energy_measurement != engine->getElapsedTime())
+                {
+                    float delta_t = engine->getElapsedTime() - previous_energy_measurement;
+                    float delta_e = reactor->energy - previous_energy_level;
+                    float delta_e_per_second = delta_e / delta_t;
+                    average_energy_delta = average_energy_delta * 0.99f + delta_e_per_second * 0.01f;
+
+                    previous_energy_level = reactor->energy;
+                    previous_energy_measurement = engine->getElapsedTime();
+                }
             }
+            energy_display->setValue(string(int(reactor->energy)) + " (" + string(int(average_energy_delta * 60.0f)) + "/m)");
         }
-        energy_display->setValue(string(int(my_spaceship->energy_level)) + " (" + string(int(average_energy_delta * 60.0f)) + "/m)");
         coolant_display->setValue(string(int(my_spaceship->max_coolant * 10)) + "%");
 
         for(int n=0; n<SYS_COUNT; n++)

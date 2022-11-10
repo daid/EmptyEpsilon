@@ -196,10 +196,11 @@ public:
     void switchCommsToGM();
     void closeComms();
 
-    void setEnergyLevel(float amount) { energy_level = std::max(0.0f, std::min(max_energy_level, amount)); }
-    void setEnergyLevelMax(float amount) { max_energy_level = std::max(0.0f, amount); energy_level = std::min(energy_level, max_energy_level); }
-    float getEnergyLevel() { return energy_level; }
-    float getEnergyLevelMax() { return max_energy_level; }
+    //Spaceship also has functions for these?!?
+    void setEnergyLevel(float amount);
+    void setEnergyLevelMax(float amount);
+    float getEnergyLevel();
+    float getEnergyLevelMax();
 
     void setCanScan(bool enabled) { can_scan = enabled; }
     bool getCanScan() { return can_scan; }
@@ -307,7 +308,6 @@ public:
 
     // Ship update functions
     virtual void update(float delta) override;
-    virtual bool useEnergy(float amount) override;
     virtual void addHeat(ESystem system, float amount) override;
 
     // Call on the server to play a sound on the main screen.

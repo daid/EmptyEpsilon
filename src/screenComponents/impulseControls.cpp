@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "impulseControls.h"
+#include "components/impulse.h"
 #include "powerDamageIndicator.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_slider.h"
@@ -25,8 +26,11 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        label->setValue(string(int(my_spaceship->current_impulse * 100)) + "%");
-        slider->setValue(my_spaceship->impulse_request);
+        auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
+        if (engine) {
+            label->setValue(string(int(engine->actual * 100)) + "%");
+            slider->setValue(engine->request);
+        }
     }
 }
 
@@ -34,21 +38,24 @@ void GuiImpulseControls::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
-        if (change != 0.0f)
-            my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
-        if (keys.helms_zero_impulse.getDown())
-            my_spaceship->commandImpulse(0.0f);
-        if (keys.helms_max_impulse.getDown())
-            my_spaceship->commandImpulse(1.0f);
-        if (keys.helms_min_impulse.getDown())
-            my_spaceship->commandImpulse(-1.0f);
-        
-        float set_value = keys.helms_set_impulse.getValue();
-        if (set_value != my_spaceship->impulse_request && (set_value != 0.0f || set_active))
-        {
-            my_spaceship->commandImpulse(set_value);
-            set_active = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+        auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
+        if (engine) {
+            float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
+            if (change != 0.0f)
+                my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
+            if (keys.helms_zero_impulse.getDown())
+                my_spaceship->commandImpulse(0.0f);
+            if (keys.helms_max_impulse.getDown())
+                my_spaceship->commandImpulse(1.0f);
+            if (keys.helms_min_impulse.getDown())
+                my_spaceship->commandImpulse(-1.0f);
+            
+            float set_value = keys.helms_set_impulse.getValue();
+            if (set_value != engine->request && (set_value != 0.0f || set_active))
+            {
+                my_spaceship->commandImpulse(set_value);
+                set_active = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+            }
         }
     }
 }

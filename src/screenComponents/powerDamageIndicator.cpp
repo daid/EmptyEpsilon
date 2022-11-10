@@ -2,6 +2,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "spaceObjects/warpJammer.h"
+#include "components/reactor.h"
 #include "main.h"
 
 GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ESystem system, sp::Alignment icon_align)
@@ -13,6 +14,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
+    auto reactor = my_spaceship->entity.getComponent<Reactor>();
 
     glm::u8vec4 color;
     string display_text;
@@ -40,7 +42,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         color = colorConfig.overlay_no_power;
         display_text = tr("systems", "NO POWER");
-    }else if (my_spaceship->energy_level < 10)
+    }else if (reactor && reactor->energy < 10.0f)
     {
         color = colorConfig.overlay_low_energy;
         display_text = tr("systems", "LOW ENERGY");
@@ -124,7 +126,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_low_power", colorConfig.overlay_low_power);
     }
-    if (my_spaceship->energy_level < 10)
+    if (reactor && reactor->energy < 10.0f)
     {
         drawIcon(renderer, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
     }

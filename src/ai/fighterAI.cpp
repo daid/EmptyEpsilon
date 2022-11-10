@@ -1,4 +1,5 @@
 #include "spaceObjects/cpuShip.h"
+#include "components/impulse.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
 #include "random.h"
@@ -93,7 +94,9 @@ void FighterAI::runAttack(P<SpaceObject> target)
         else
         {
             owner->target_rotation = evade_direction;
-            owner->impulse_request = 1.0;
+            auto impulse = owner->entity.getComponent<ImpulseEngine>();
+            if (impulse)
+                impulse->request = 1.0;
         }
         break;
     case recharge:

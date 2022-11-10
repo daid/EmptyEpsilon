@@ -5,6 +5,7 @@
 #include "ai/aiFactory.h"
 #include "random.h"
 #include "components/docking.h"
+#include "components/impulse.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
 
@@ -56,7 +57,9 @@ void ShipAI::run(float delta)
 {
     owner->target_rotation = owner->getRotation();
     owner->warp_request = 0.0;
-    owner->impulse_request = 0.0f;
+    auto impulse = owner->entity.getComponent<ImpulseEngine>();
+    if (impulse)
+        impulse->request = 0.0f;
 
     updateWeaponState(delta);
     if (update_target_delay > 0.0f)
@@ -606,14 +609,17 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         if (pathPlanner.route.size() > 1)
             keep_distance = 0.0;
 
-        if (distance > keep_distance + owner->impulse_max_speed * 5.0f)
-            owner->impulse_request = 1.0f;
-        else
-            owner->impulse_request = (distance - keep_distance) / owner->impulse_max_speed * 5.0f;
-        if (rotation_diff > 90)
-            owner->impulse_request = -owner->impulse_request;
-        else if (rotation_diff < 45)
-            owner->impulse_request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
+        auto impulse = owner->entity.getComponent<ImpulseEngine>();
+        if (impulse) {
+            if (distance > keep_distance + impulse->max_speed_forward * 5.0f)
+                impulse->request = 1.0f;
+            else
+                impulse->request = (distance - keep_distance) / impulse->max_speed_forward * 5.0f;
+            if (rotation_diff > 90)
+                impulse->request = -impulse->request;
+            else if (rotation_diff < 45)
+                impulse->request *= 1.0f - ((rotation_diff - 45.0f) / 45.0f);
+        }
     }
 }
 
@@ -621,6 +627,9 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
 {
     auto target_position = target->getPosition() + rotateVec2(owner->getOrderTargetLocation(), target->getRotation());
     pathPlanner.plan(owner->getPosition(), target_position);
+
+    auto impulse = owner->entity.getComponent<ImpulseEngine>();
+    if (!impulse) return;
 
     if (pathPlanner.route.size() == 1)
     {
@@ -642,19 +651,19 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         {
             float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
             if (angle_diff > 10.0f)
-                owner->impulse_request = 0.0f;
+                impulse->request = 0.0f;
             else if (angle_diff > 5.0f)
-                owner->impulse_request = (10.0f - angle_diff) / 5.0f;
+                impulse->request = (10.0f - angle_diff) / 5.0f;
             else
-                owner->impulse_request = 1.0f;
+                impulse->request = 1.0f;
         }else{
             if (distance > r / 2.0f)
             {
                 owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0f - distance / r);
-                owner->impulse_request = distance / r;
+                impulse->request = distance / r;
             }else{
                 owner->target_rotation = target->getRotation();
-                owner->impulse_request = 0.0f;
+                impulse->request = 0.0f;
             }
         }
     }else{
@@ -690,12 +699,13 @@ P<SpaceObject> ShipAI::findBestTarget(glm::vec2 position, float radius)
 
 float ShipAI::targetScore(P<SpaceObject> target)
 {
+    auto impulse = owner->entity.getComponent<ImpulseEngine>();
     auto position_difference = target->getPosition() - owner->getPosition();
     float distance = glm::length(position_difference);
     //auto position_difference_normal = position_difference / distance;
     //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
     float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
-    float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
+    float score = -distance - std::abs(angle_difference / owner->turn_speed * (impulse ? impulse->max_speed_forward : 0.0f)) * 1.5f;
     if (P<SpaceStation>(target))
     {
         score -= 5000;
@@ -838,7 +848,7 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
     float target_score = 0.0;
     P<SpaceObject> target;
     auto owner_position = owner->getPosition();
-    for(auto [entity, dockingbay, obj] : sp::ecs::Query<DockingBay, SpaceObject*>())
+    for(auto [entity, dockingbay, impulse, obj] : sp::ecs::Query<DockingBay, ImpulseEngine, SpaceObject*>())
     {
         if (!obj || !owner->isFriendly(obj) || obj == *target)
             continue;
@@ -848,7 +858,7 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
         auto position_difference = obj->getPosition() - owner_position;
         float distance = glm::length(position_difference);
         float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
-        float score = -distance - std::abs(angle_difference / owner->turn_speed * owner->impulse_max_speed) * 1.5f;
+        float score = -distance - std::abs(angle_difference / owner->turn_speed * impulse.max_speed_forward) * 1.5f;
         if (P<SpaceShip>(P<SpaceObject>(obj)))
         {
             score -= 5000;

@@ -2,6 +2,7 @@
 #include "spaceship.h"
 #include "playerInfo.h"
 #include "playerSpaceship.h"
+#include "components/reactor.h"
 #include "main.h"
 
 #include "scriptInterface.h"
@@ -44,10 +45,10 @@ void SupplyDrop::collide(SpaceObject* target, float force)
     if (ship && isFriendly(ship))
     {
         bool picked_up = false;
-        P<PlayerSpaceship> player = ship;
-        if (player)
+        auto reactor = ship->entity.getComponent<Reactor>();
+        if (reactor)
         {
-            player->energy_level += energy;
+            reactor->energy += energy;
             picked_up = true;
         }
         for(int n=0; n<MW_Count; n++)
@@ -62,7 +63,7 @@ void SupplyDrop::collide(SpaceObject* target, float force)
         }
         if (on_pickup_callback.isSet())
         {
-            on_pickup_callback.call<void>(P<SupplyDrop>(this), player);
+            on_pickup_callback.call<void>(P<SupplyDrop>(this), ship);
             picked_up = true;
         }
 

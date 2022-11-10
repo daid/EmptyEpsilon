@@ -18,6 +18,8 @@
 #include "gameGlobalInfo.h"
 #include "components/collision.h"
 #include "components/docking.h"
+#include "components/impulse.h"
+#include "components/reactor.h"
 
 #include "scriptInterface.h"
 
@@ -177,8 +179,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
     target_rotation = getRotation();
-    impulse_request = 0;
-    current_impulse = 0;
     has_warp_drive = true;
     warp_request = 0;
     current_warp = 0;
@@ -192,8 +192,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     wormhole_alpha = 0.f;
     weapon_tube_count = 0;
     turn_speed = 10.f;
-    impulse_max_speed = 600.f;
-    impulse_max_reverse_speed = 600.f;
     combat_maneuver_charge = 1.f;
     combat_maneuver_boost_request = 0.f;
     combat_maneuver_boost_active = 0.f;
@@ -205,16 +203,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     beam_frequency = irandom(0, max_frequency);
     beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
-    impulse_acceleration = 20.f;
-    impulse_reverse_acceleration = 20.f;
-    energy_level = 1000;
-    max_energy_level = 1000;
     turnSpeed = 0.0f;
 
     registerMemberReplication(&target_rotation, 1.5f);
     registerMemberReplication(&turnSpeed, 0.1f);
-    registerMemberReplication(&impulse_request, 0.1f);
-    registerMemberReplication(&current_impulse, 0.5f);
     registerMemberReplication(&has_warp_drive);
     registerMemberReplication(&warp_request, 0.1f);
     registerMemberReplication(&current_warp, 0.1f);
@@ -227,10 +219,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
     registerMemberReplication(&turn_speed);
-    registerMemberReplication(&impulse_max_speed);
-    registerMemberReplication(&impulse_max_reverse_speed);
-    registerMemberReplication(&impulse_acceleration);
-    registerMemberReplication(&impulse_reverse_acceleration);
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
     registerMemberReplication(&beam_frequency);
@@ -248,13 +236,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         systems[n].health = 1.0f;
         systems[n].health_max = 1.0f;
         systems[n].power_level = 1.0f;
-        systems[n].power_rate_per_second = ShipSystem::default_power_rate_per_second;
+        systems[n].power_rate_per_second = ShipSystemLegacy::default_power_rate_per_second;
         systems[n].power_request = 1.0f;
         systems[n].coolant_level = 0.0f;
-        systems[n].coolant_rate_per_second = ShipSystem::default_coolant_rate_per_second;
+        systems[n].coolant_rate_per_second = ShipSystemLegacy::default_coolant_rate_per_second;
         systems[n].coolant_request = 0.0f;
         systems[n].heat_level = 0.0f;
-        systems[n].heat_rate_per_second = ShipSystem::default_heat_rate_per_second;
+        systems[n].heat_rate_per_second = ShipSystemLegacy::default_heat_rate_per_second;
         systems[n].hacked_level = 0.0f;
         systems[n].power_factor = default_system_power_factors[n];
 
@@ -321,12 +309,21 @@ void SpaceShip::applyTemplateValues()
         beam_weapons[n].setHeatPerFire(ship_template->beams[n].getHeatPerFire());
     }
     weapon_tube_count = ship_template->weapon_tube_count;
-    energy_level = max_energy_level = ship_template->energy_storage_amount;
 
-    impulse_max_speed = ship_template->impulse_speed;
-    impulse_max_reverse_speed = ship_template->impulse_reverse_speed;
-    impulse_acceleration = ship_template->impulse_acceleration;
-    impulse_reverse_acceleration = ship_template->impulse_reverse_acceleration;
+    if (ship_template->energy_storage_amount) {
+        auto& reactor = entity.getOrAddComponent<Reactor>();
+        reactor.energy = reactor.max_energy = ship_template->energy_storage_amount;
+    }
+    
+
+    if (ship_template->impulse_speed) {
+        auto& engine = entity.getOrAddComponent<ImpulseEngine>();
+        engine.max_speed_forward = ship_template->impulse_speed;
+        engine.max_speed_reverse = ship_template->impulse_reverse_speed;
+        engine.acceleration_forward = ship_template->impulse_acceleration;
+        engine.acceleration_reverse = ship_template->impulse_reverse_acceleration;
+        engine.sound = ship_template->impulse_sound_file;
+    }
     
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
@@ -635,130 +632,6 @@ void SpaceShip::update(float delta)
             physics->setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
     }
 
-    //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
-    float cap_speed = impulse_max_speed;
-    
-    if(current_impulse < 0 && impulse_max_reverse_speed <= 0.01f)
-    {
-        current_impulse = 0; //we could get stuck with a ship with no reverse speed, not being able to accelerate
-    }
-    if(current_impulse < 0) 
-    {
-        cap_speed = impulse_max_reverse_speed;
-    }
-    if ((has_jump_drive && jump_delay > 0) || (has_warp_drive && warp_request > 0))
-    {
-        if (WarpJammer::isWarpJammed(getPosition()))
-        {
-            jump_delay = 0;
-            warp_request = 0;
-        }
-    }
-    if (has_jump_drive && jump_delay > 0)
-    {
-        if (current_impulse > 0.0f)
-        {
-            if (cap_speed > 0)
-                current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
-            if (current_impulse < 0.0f)
-                current_impulse = 0.f;
-        }
-        if (current_impulse < 0.0f)
-        {
-            if (cap_speed > 0)
-                current_impulse += delta * (impulse_acceleration / cap_speed);
-            if (current_impulse > 0.0f)
-                current_impulse = 0.f;
-        }
-        if (current_warp > 0.0f)
-        {
-            current_warp -= delta;
-            if (current_warp < 0.0f)
-                current_warp = 0.f;
-        }
-        jump_delay -= delta * getSystemEffectiveness(SYS_JumpDrive);
-        if (jump_delay <= 0.0f)
-        {
-            executeJump(jump_distance);
-            jump_delay = 0.f;
-        }
-    }else if (has_warp_drive && (warp_request > 0 || current_warp > 0))
-    {
-        if (current_impulse > 0.0f)
-        {
-            if (cap_speed > 0)
-                current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
-            if (current_impulse < 0.0f)
-                current_impulse = 0.0f;
-        }else if (current_impulse < 0.0f)
-        {
-            if (cap_speed > 0)
-                current_impulse += delta * (impulse_acceleration / cap_speed);
-            if (current_impulse > 0.0f)
-                current_impulse = 0.0f;
-        }else{
-            if (current_warp < warp_request)
-            {
-                current_warp += delta / warp_charge_time;
-                if (current_warp > warp_request)
-                    current_warp = warp_request;
-            }else if (current_warp > warp_request)
-            {
-                current_warp -= delta / warp_decharge_time;
-                if (current_warp < warp_request)
-                    current_warp = warp_request;
-            }
-        }
-    }else{
-        if (has_jump_drive)
-        {
-            float f = getJumpDriveRechargeRate();
-            if (f > 0)
-            {
-                if (jump_drive_charge < jump_drive_max_distance)
-                {
-                    float extra_charge = (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
-                    if (useEnergy(extra_charge * jump_drive_energy_per_km_charge / 1000.0f))
-                    {
-                        jump_drive_charge += extra_charge;
-                        if (jump_drive_charge >= jump_drive_max_distance)
-                            jump_drive_charge = jump_drive_max_distance;
-                    }
-                }
-            }else{
-                jump_drive_charge += (delta / jump_drive_charge_time * jump_drive_max_distance) * f;
-                if (jump_drive_charge < 0.0f)
-                    jump_drive_charge = 0.0f;
-            }
-        }
-        current_warp = 0.f;
-        if (impulse_request > 1.0f)
-            impulse_request = 1.0f;
-        if (impulse_request < -1.0f)
-            impulse_request = -1.0f;
-        if (current_impulse < impulse_request)
-        {
-            if (cap_speed > 0)
-                current_impulse += delta * (impulse_acceleration / cap_speed);
-            if (current_impulse > impulse_request)
-                current_impulse = impulse_request;
-        }else if (current_impulse > impulse_request)
-        {
-            if (cap_speed > 0)
-                current_impulse -= delta * (impulse_reverse_acceleration / cap_speed);
-            if (current_impulse < impulse_request)
-                current_impulse = impulse_request;
-        }
-    }
-
-    // Add heat based on warp factor.
-    addHeat(SYS_Warp, current_warp * delta * heat_per_warp * getSystemEffectiveness(SYS_Warp));
-
-    // Determine forward direction and velocity.
-    auto forward = vec2FromAngle(getRotation());
-    if (physics)
-        physics->setVelocity(forward * (current_impulse * cap_speed * getSystemEffectiveness(SYS_Impulse) + current_warp * warp_speed_per_warp_level * getSystemEffectiveness(SYS_Warp)));
-
     if (combat_maneuver_boost_active > combat_maneuver_boost_request)
     {
         combat_maneuver_boost_active -= delta;
@@ -799,6 +672,7 @@ void SpaceShip::update(float delta)
             combat_maneuver_strafe_request = 0.0f;
         }else if (physics)
         {
+            auto forward = vec2FromAngle(getRotation());
             physics->setVelocity(physics->getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
             physics->setVelocity(physics->getVelocity() + vec2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
         }
@@ -830,7 +704,11 @@ void SpaceShip::update(float delta)
         systems[n].health = std::min(systems[n].health,systems[n].health_max);
     }
 
-    model_info.engine_scale = std::min(1.0f, (float) std::max(fabs(getAngularVelocity() / turn_speed), fabs(current_impulse)));
+    model_info.engine_scale = std::abs(getAngularVelocity() / turn_speed);
+    auto impulse = entity.getComponent<ImpulseEngine>();
+    if (impulse)
+        model_info.engine_scale = std::max(model_info.engine_scale, std::abs(impulse->actual));
+    model_info.engine_scale = std::min(1.0f, model_info.engine_scale);
     if (has_jump_drive && jump_delay > 0.0f)
         model_info.warp_scale = (10.0f - jump_delay) / 10.0f;
     else
@@ -917,7 +795,8 @@ void SpaceShip::requestUndock()
     if (getSystemEffectiveness(SYS_Impulse) < 0.1f) return;
 
     docking_port->state = DockingPort::State::NotDocking;
-    impulse_request = 0.5;
+    auto engine = entity.getComponent<ImpulseEngine>();
+    if (engine) engine->request = 0.5;
 }
 
 void SpaceShip::abortDock()
@@ -926,10 +805,22 @@ void SpaceShip::abortDock()
     if (!docking_port || docking_port->state != DockingPort::State::Docking) return;
 
     docking_port->state = DockingPort::State::NotDocking;
-    impulse_request = 0.f;
+    auto engine = entity.getComponent<ImpulseEngine>();
+    if (engine) engine->request = 0.f;
     warp_request = 0;
     target_rotation = getRotation();
 }
+
+bool SpaceShip::useEnergy(float amount)
+{
+    // Try to consume an amount of energy. If it works, return true.
+    // If it doesn't, return false.
+    auto reactor = entity.getComponent<Reactor>();
+    if (reactor)
+        return reactor->use_energy(amount);
+    return true;
+}
+
 
 int SpaceShip::scanningComplexity(P<SpaceObject> other)
 {
@@ -1194,7 +1085,7 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_Maneuver:
         return turn_speed > 0.0f;
     case SYS_Impulse:
-        return impulse_max_speed > 0.0f;
+        return entity.hasComponent<ImpulseEngine>();
     }
     return true;
 }
@@ -1209,10 +1100,13 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     // Degrade all systems except the reactor once energy level drops below 10.
     if (system != SYS_Reactor)
     {
-        if (energy_level < 10.0f && energy_level > 0.0f && power > 0.0f)
-            power = std::min(power * energy_level / 10.0f, power);
-        else if (energy_level <= 0.0f || power <= 0.0f)
-            power = 0.0f;
+        auto reactor = entity.getComponent<Reactor>();
+        if (reactor) {
+            if (reactor->energy < 10.0f && reactor->energy > 0.0f && power > 0.0f)
+                power = std::min(power * reactor->energy / 10.0f, power);
+            else if (reactor->energy <= 0.0f || power <= 0.0f)
+                power = 0.0f;
+        }
     }
 
     // Degrade damaged systems.
@@ -1380,6 +1274,32 @@ DockingPort::State SpaceShip::getDockingState()
     return port->state;
 }
 
+float SpaceShip::getMaxEnergy() { return 0.0f; } // TODO
+void SpaceShip::setMaxEnergy(float amount) {} // TODO
+float SpaceShip::getEnergy() { return 0.0f; } // TODO
+void SpaceShip::setEnergy(float amount) {} // TODO
+
+Speeds SpaceShip::getAcceleration()
+{
+    //TODO
+    return {0.0f, 0.0f};
+}
+
+void SpaceShip::setAcceleration(float acceleration, std::optional<float> reverse_acceleration)
+{
+    //TODO
+}
+
+Speeds SpaceShip::getImpulseMaxSpeed()
+{
+    //TODO
+    return {0.0f, 0.0f};
+}
+void SpaceShip::setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed)
+{
+    //TODO
+}
+
 
 string SpaceShip::getScriptExportModificationsOnTemplate()
 {
@@ -1395,10 +1315,10 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         ret += ":setHullMax(" + string(hull_max, 0) + ")";
     if (hull_strength != ship_template->hull)
         ret += ":setHull(" + string(hull_strength, 0) + ")";
-    if (impulse_max_speed != ship_template->impulse_speed)
-        ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
-    if (impulse_max_reverse_speed != ship_template->impulse_reverse_speed)
-        ret += ":setImpulseMaxReverseSpeed(" + string(impulse_max_reverse_speed, 1) + ")";
+    //if (impulse_max_speed != ship_template->impulse_speed)
+    //    ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
+    //if (impulse_max_reverse_speed != ship_template->impulse_reverse_speed)
+    //    ret += ":setImpulseMaxReverseSpeed(" + string(impulse_max_reverse_speed, 1) + ")";
     if (turn_speed != ship_template->turn_speed)
         ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
     if (has_jump_drive != ship_template->has_jump_drive)
