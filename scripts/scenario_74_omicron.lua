@@ -4310,9 +4310,10 @@ function handleUndockedState()
 			end
 		end
 	end
-	if #accessible_warp_jammers > 0 then
+if #accessible_warp_jammers > 0 then
 		addCommsReply(_("station-comms","Connect to warp jammer"),function()
 			setCommsMessage(_("station-comms","Which one would you like to connect to?"))
+			local pay_rep = false
 			for index, wj in ipairs(accessible_warp_jammers) do
 				local wj_rep = 0
 				if wj:isFriendly(comms_target) then
@@ -4321,28 +4322,36 @@ function handleUndockedState()
 					else
 						if wj:isEnemy(comms_source) then
 							wj_rep = 10
+							pay_rep = true
 						else
 							wj_rep = 5
+							pay_rep = true
 						end
 					end
 				elseif wj:isEnemy(comms_target) then
 					if wj:isFriendly(comms_source) then
 						wj_rep = 15
+						pay_rep = true
 					else
 						if wj:isEnemy(comms_source) then
 							wj_rep = 100
+							pay_rep = true
 						else
 							wj_rep = 20
+							pay_rep = true
 						end
 					end
 				else
 					if wj:isFriendly(comms_source) then
 						wj_rep = 10
+						pay_rep = true
 					else
 						if wj:isEnemy(comms_source) then
 							wj_rep = 25
+							pay_rep = true
 						else
 							wj_rep = 20
+							pay_rep = true
 						end
 					end
 				end
@@ -4374,6 +4383,26 @@ function handleUndockedState()
 					else
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
+				end)
+			end
+			if pay_rep then
+				addCommsReply(_("station_comms","Why do I have to pay reputation to log in to some of these warp jammers?"),function()
+					setCommsMessage(string.format(_("It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"),comms_target:getCallSign(),comms_source:getCallSign()))
+					addCommsReply("Yes, please provide more details",function()
+						local out = _("station-comms","These are the cases and their reputation costs:")
+						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is neutral to %s = 5 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ enemy to %s and WJ is friendly to %s = 15 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ enemy to %s and WJ is enemy to %s = 100 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ enemy to %s and WJ is neutral to %s = 20 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ neutral to %s and WJ is friendly to %s = 10 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ neutral to %s and WJ is enemy to %s = 25 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ neutral to %s and WJ is neutral to %s = 20 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						setCommsMessage(out)
+						addCommsReply(_("Back"), commsStation)
+					end)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			addCommsReply(_("Back"), commsStation)
