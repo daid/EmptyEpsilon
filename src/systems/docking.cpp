@@ -12,7 +12,6 @@ DockingSystem::DockingSystem()
     sp::CollisionSystem::addHandler(this);
 }
 
-//TODO: Handle internal docking.
 void DockingSystem::update(float delta)
 {
     if (!game_server) return;
