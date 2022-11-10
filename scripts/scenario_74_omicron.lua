@@ -4357,16 +4357,19 @@ function handleUndockedState()
 							wj:setRange(1000)
 							wj.reset_time = getScenarioTime() + 60
 							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("station-comms","Reduce range by 50% for 2 minutes"),function()
 							wj:setRange(wj.range/2)
 							wj.reset_time = getScenarioTime() + 120
 							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("station-comms","Reduce range by 25% for 3 minutes"),function()
 							wj:setRange(wj.range*.75)
 							wj.reset_time = getScenarioTime() + 180
 							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							addCommsReply(_("Back"), commsStation)
 						end)
 					else
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
