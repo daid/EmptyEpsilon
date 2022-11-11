@@ -3138,47 +3138,66 @@ function updatePlayerDangerZone(p)
 	if danger_zones ~= nil then
 		for index, zone in ipairs(danger_zones) do
 			if zone:isInside(p) then
-				local hit_list = {}
-				if p:hasSystem("beamweapons") then
-					table.insert(hit_list,"beamweapons")
+				if p.danger_zone == nil then
+					p.danger_zone = {}
 				end
-				if p:hasSystem("missilesystem") then
-					table.insert(hit_list,"missilesystem")
+				if p.danger_zone[zone] == nil then
+					p.danger_zone[zone] = 0
 				end
-				if p:hasSystem("frontshield") then
-					table.insert(hit_list,"frontshield")
-				end
-				if p:hasSystem("rearshield") then
-					table.insert(hit_list,"rearshield")
-				end
-				local hit_system = hit_list[math.random(1,#hit_list)]
-				if zone.player_message_list == nil then
-					zone.player_message_list = {}
-				end
-				local long_system = {
-					["beamweapons"] =	_("msgScience","beam weapons"),
-					["missilesystem"] =	_("msgScience","missile weapons system"),
-					["frontshield"] =	_("msgScience","front shield"),
-					["rearshield"] =	_("msgScience","rear shield"),
-				}
-				if zone.player_message_list[p] == nil then
-					local hit_msg = string.format(_("msgScience","Sensors just picked up an energy field. The ship must have triggered it. It seems to impact our %s and possibly other ship systems. The ship computers have plotted it on Science and Relay."),long_system[hit_system])
-					p.hit_msg_science = "hit_msg_science"
-					p:addCustomMessage("Science",p.hit_msg_science,hit_msg)
-					p.hit_msg_ops = "hit_msg_ops"
-					p:addCustomMessage("Operations",p.hit_msg_ops,hit_msg)
-					zone.player_message_list[p] = "sent"
-				end
-				if p:getSystemHealth(hit_system) < p:getSystemHealthMax(hit_system) then
-					if random(1,100) < 20 then
-						p:setSystemHealthMax(hit_system,p:getSystemHealthMax(hit_system)*adverseEffect)
+				p.danger_zone[zone] = p.danger_zone[zone] + 1
+				if p.danger_zone[zone] > 3 then
+					p.danger_zone["verified"] = true
+					local hit_list = {}
+					if p:hasSystem("beamweapons") then
+						table.insert(hit_list,"beamweapons")
+					end
+					if p:hasSystem("missilesystem") then
+						table.insert(hit_list,"missilesystem")
+					end
+					if p:hasSystem("frontshield") then
+						table.insert(hit_list,"frontshield")
+					end
+					if p:hasSystem("rearshield") then
+						table.insert(hit_list,"rearshield")
+					end
+					local hit_system = hit_list[math.random(1,#hit_list)]
+					if zone.player_message_list == nil then
+						zone.player_message_list = {}
+					end
+					local long_system = {
+						["beamweapons"] =	_("msgScience","beam weapons"),
+						["missilesystem"] =	_("msgScience","missile weapons system"),
+						["frontshield"] =	_("msgScience","front shield"),
+						["rearshield"] =	_("msgScience","rear shield"),
+					}
+					if zone.player_message_list[p] == nil then
+						local hit_msg = string.format(_("msgScience","Sensors just picked up an energy field. The ship must have triggered it. It seems to impact our %s and possibly other ship systems. The ship computers have plotted it on Science and Relay."),long_system[hit_system])
+						p.hit_msg_science = "hit_msg_science"
+						p:addCustomMessage("Science",p.hit_msg_science,hit_msg)
+						p.hit_msg_ops = "hit_msg_ops"
+						p:addCustomMessage("Operations",p.hit_msg_ops,hit_msg)
+						zone.player_message_list[p] = "sent"
+					end
+					if p:getSystemHealth(hit_system) < p:getSystemHealthMax(hit_system) then
+						if random(1,100) < 20 then
+							p:setSystemHealthMax(hit_system,p:getSystemHealthMax(hit_system)*adverseEffect)
+						else
+							p:setSystemHealth(hit_system,p:getSystemHealth(hit_system)*adverseEffect)
+						end
 					else
 						p:setSystemHealth(hit_system,p:getSystemHealth(hit_system)*adverseEffect)
 					end
-				else
-					p:setSystemHealth(hit_system,p:getSystemHealth(hit_system)*adverseEffect)
+					zone:setColor(128,0,0)
 				end
-				zone:setColor(128,0,0)
+			else
+				if p.danger_zone ~= nil then
+					if p.danger_zone[zone] ~= nil then
+						if not p.danger_zone["verified"] then
+							print(p:getCallSign(),"did not reach verification threshold. Count:",p.danger_zone[zone],"zone:",zone)
+						end
+						p.danger_zone[zone] = 0
+					end
+				end
 			end
 		end
 	end
@@ -4388,7 +4407,7 @@ if #accessible_warp_jammers > 0 then
 			if pay_rep then
 				addCommsReply(_("station-comms", "Why do I have to pay reputation to log in to some of these warp jammers?"),function()
 					setCommsMessage(string.format(_("station-comms", "It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"),comms_target:getCallSign(),comms_source:getCallSign()))
-					addCommsReply("station-comms", "Yes, please provide more details",function()
+					addCommsReply(_("station-comms", "Yes, please provide more details"),function()
 						local out = _("station-comms","These are the cases and their reputation costs:")
 						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
 						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
