@@ -2539,7 +2539,8 @@ function placeEnvironmentStation(axis)
 		end
 		tsa:destroy()
 		tpa:destroy()
-		local station = placeStation(eo_x, eo_y, name_group, selected_faction, s_size)
+	local station = placeStation(eo_x, eo_y, name_group, selected_faction, s_size)
+	if station ~= nil then
 		table.insert(place_space,{obj=station,dist=station_defend_dist[s_size],shape="circle"})
 		table.insert(station_list,station)
 		--defense fleet
@@ -2551,7 +2552,8 @@ function placeEnvironmentStation(axis)
 			ship:setCallSign(generateCallSign(nil,selected_faction))
 		end
 		station.defense_fleet = fleet
-		return station
+	end
+	return station
 	end
 end
 function placeMineField(axis)
@@ -3136,47 +3138,66 @@ function updatePlayerDangerZone(p)
 	if danger_zones ~= nil then
 		for index, zone in ipairs(danger_zones) do
 			if zone:isInside(p) then
-				local hit_list = {}
-				if p:hasSystem("beamweapons") then
-					table.insert(hit_list,"beamweapons")
+				if p.danger_zone == nil then
+					p.danger_zone = {}
 				end
-				if p:hasSystem("missilesystem") then
-					table.insert(hit_list,"missilesystem")
+				if p.danger_zone[zone] == nil then
+					p.danger_zone[zone] = 0
 				end
-				if p:hasSystem("frontshield") then
-					table.insert(hit_list,"frontshield")
-				end
-				if p:hasSystem("rearshield") then
-					table.insert(hit_list,"rearshield")
-				end
-				local hit_system = hit_list[math.random(1,#hit_list)]
-				if zone.player_message_list == nil then
-					zone.player_message_list = {}
-				end
-				local long_system = {
-					["beamweapons"] =	_("msgScience","beam weapons"),
-					["missilesystem"] =	_("msgScience","missile weapons system"),
-					["frontshield"] =	_("msgScience","front shield"),
-					["rearshield"] =	_("msgScience","rear shield"),
-				}
-				if zone.player_message_list[p] == nil then
-					local hit_msg = string.format(_("msgScience","Sensors just picked up an energy field. The ship must have triggered it. It seems to impact our %s and possibly other ship systems. The ship computers have plotted it on Science and Relay."),long_system[hit_system])
-					p.hit_msg_science = "hit_msg_science"
-					p:addCustomMessage("Science",p.hit_msg_science,hit_msg)
-					p.hit_msg_ops = "hit_msg_ops"
-					p:addCustomMessage("Operations",p.hit_msg_ops,hit_msg)
-					zone.player_message_list[p] = "sent"
-				end
-				if p:getSystemHealth(hit_system) < p:getSystemHealthMax(hit_system) then
-					if random(1,100) < 20 then
-						p:setSystemHealthMax(hit_system,p:getSystemHealthMax(hit_system)*adverseEffect)
+				p.danger_zone[zone] = p.danger_zone[zone] + 1
+				if p.danger_zone[zone] > 3 then
+					p.danger_zone["verified"] = true
+					local hit_list = {}
+					if p:hasSystem("beamweapons") then
+						table.insert(hit_list,"beamweapons")
+					end
+					if p:hasSystem("missilesystem") then
+						table.insert(hit_list,"missilesystem")
+					end
+					if p:hasSystem("frontshield") then
+						table.insert(hit_list,"frontshield")
+					end
+					if p:hasSystem("rearshield") then
+						table.insert(hit_list,"rearshield")
+					end
+					local hit_system = hit_list[math.random(1,#hit_list)]
+					if zone.player_message_list == nil then
+						zone.player_message_list = {}
+					end
+					local long_system = {
+						["beamweapons"] =	_("msgScience","beam weapons"),
+						["missilesystem"] =	_("msgScience","missile weapons system"),
+						["frontshield"] =	_("msgScience","front shield"),
+						["rearshield"] =	_("msgScience","rear shield"),
+					}
+					if zone.player_message_list[p] == nil then
+						local hit_msg = string.format(_("msgScience","Sensors just picked up an energy field. The ship must have triggered it. It seems to impact our %s and possibly other ship systems. The ship computers have plotted it on Science and Relay."),long_system[hit_system])
+						p.hit_msg_science = "hit_msg_science"
+						p:addCustomMessage("Science",p.hit_msg_science,hit_msg)
+						p.hit_msg_ops = "hit_msg_ops"
+						p:addCustomMessage("Operations",p.hit_msg_ops,hit_msg)
+						zone.player_message_list[p] = "sent"
+					end
+					if p:getSystemHealth(hit_system) < p:getSystemHealthMax(hit_system) then
+						if random(1,100) < 20 then
+							p:setSystemHealthMax(hit_system,p:getSystemHealthMax(hit_system)*adverseEffect)
+						else
+							p:setSystemHealth(hit_system,p:getSystemHealth(hit_system)*adverseEffect)
+						end
 					else
 						p:setSystemHealth(hit_system,p:getSystemHealth(hit_system)*adverseEffect)
 					end
-				else
-					p:setSystemHealth(hit_system,p:getSystemHealth(hit_system)*adverseEffect)
+					zone:setColor(128,0,0)
 				end
-				zone:setColor(128,0,0)
+			else
+				if p.danger_zone ~= nil then
+					if p.danger_zone[zone] ~= nil then
+						if not p.danger_zone["verified"] then
+							print(p:getCallSign(),"did not reach verification threshold. Count:",p.danger_zone[zone],"zone:",zone)
+						end
+						p.danger_zone[zone] = 0
+					end
+				end
 			end
 		end
 	end
@@ -4308,9 +4329,10 @@ function handleUndockedState()
 			end
 		end
 	end
-	if #accessible_warp_jammers > 0 then
+if #accessible_warp_jammers > 0 then
 		addCommsReply(_("station-comms","Connect to warp jammer"),function()
 			setCommsMessage(_("station-comms","Which one would you like to connect to?"))
+			local pay_rep = false
 			for index, wj in ipairs(accessible_warp_jammers) do
 				local wj_rep = 0
 				if wj:isFriendly(comms_target) then
@@ -4319,28 +4341,36 @@ function handleUndockedState()
 					else
 						if wj:isEnemy(comms_source) then
 							wj_rep = 10
+							pay_rep = true
 						else
 							wj_rep = 5
+							pay_rep = true
 						end
 					end
 				elseif wj:isEnemy(comms_target) then
 					if wj:isFriendly(comms_source) then
 						wj_rep = 15
+						pay_rep = true
 					else
 						if wj:isEnemy(comms_source) then
 							wj_rep = 100
+							pay_rep = true
 						else
 							wj_rep = 20
+							pay_rep = true
 						end
 					end
 				else
 					if wj:isFriendly(comms_source) then
 						wj_rep = 10
+						pay_rep = true
 					else
 						if wj:isEnemy(comms_source) then
 							wj_rep = 25
+							pay_rep = true
 						else
 							wj_rep = 20
+							pay_rep = true
 						end
 					end
 				end
@@ -4355,20 +4385,43 @@ function handleUndockedState()
 							wj:setRange(1000)
 							wj.reset_time = getScenarioTime() + 60
 							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("station-comms","Reduce range by 50% for 2 minutes"),function()
 							wj:setRange(wj.range/2)
 							wj.reset_time = getScenarioTime() + 120
 							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							addCommsReply(_("Back"), commsStation)
 						end)
 						addCommsReply(_("station-comms","Reduce range by 25% for 3 minutes"),function()
 							wj:setRange(wj.range*.75)
 							wj.reset_time = getScenarioTime() + 180
 							setCommsMessage(_("station-comms","Acknowledged. Range adjusted. Reset timer engaged."))
+							addCommsReply(_("Back"), commsStation)
 						end)
 					else
 						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
+				end)
+			end
+			if pay_rep then
+				addCommsReply(_("station-comms", "Why do I have to pay reputation to log in to some of these warp jammers?"),function()
+					setCommsMessage(string.format(_("station-comms", "It's complicated. It depends on the relationships between the warp jammer owner, us, station %s and you, %s. The farther apart the relationship, the more reputation it costs to gain access. Do you want more details?"),comms_target:getCallSign(),comms_source:getCallSign()))
+					addCommsReply(_("station-comms", "Yes, please provide more details"),function()
+						local out = _("station-comms","These are the cases and their reputation costs:")
+						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is friendly to %s = no reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is neutral to %s = 5 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ friendly to %s and WJ is enemy to %s = 10 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ neutral to %s and WJ is friendly to %s = 10 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ enemy to %s and WJ is friendly to %s = 15 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ neutral to %s and WJ is neutral to %s = 20 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ enemy to %s and WJ is neutral to %s = 20 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ neutral to %s and WJ is enemy to %s = 25 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						out = string.format(_("station-comms","%s\n    WJ enemy to %s and WJ is enemy to %s = 100 reputation."),out,comms_target:getCallSign(),comms_source:getCallSign())
+						setCommsMessage(out)
+						addCommsReply(_("Back"), commsStation)
+					end)
+					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			addCommsReply(_("Back"), commsStation)
@@ -9838,29 +9891,31 @@ function eliminatePlague(delta)
 			p.omicron_broadcast_timer_ops = "omicron_broadcast_timer_ops"
 			p:addCustomInfo("Operations",p.omicron_broadcast_timer_ops,timer_status,4)
 		end
-		if difficulty < 2 then	--hint if science heartbeat masked
-			for pidx,p in ipairs(getActivePlayerShips()) do
-				if p.plague_station_hint == nil then
-					local current_approach = distance(p,station_plague)
-					if p.proximity_hint_timer ~= nil then
-						if p.proximity_hint_timer > getScenarioTime() then
-							if current_approach > (p:getShortRangeRadarRange() * 3) then
-								p:addToShipLog(string.format(_("shipLog","[%s] Our analysis of your routine ship telemetry indicates that you passed the Exuari plague station, %s."),station_regional_hq:getCallSign(),station_plague:getCallSign()),"Magenta")
-								p.plague_station_hint = "sent"
-							end
-						end
-					else
-						if p.closest_approach == nil then
-							p.closest_approach = current_approach
-						end
-						p.closest_approach = math.min(p.closest_approach,current_approach)
-						if p.closest_approach < p:getShortRangeRadarRange() then
-							p.proximity_hint_timer = getScenarioTime() + 60
-						end
-					end
-				end
-			end
-		end
+		if station_plague ~= nil and station_plague:isValid() then
+    if difficulty < 2 then    --hint if science heartbeat masked
+        for pidx,p in ipairs(getActivePlayerShips()) do
+            if p.plague_station_hint == nil then
+                local current_approach = distance(p,station_plague)
+                if p.proximity_hint_timer ~= nil then
+                    if p.proximity_hint_timer > getScenarioTime() then
+                        if current_approach > (p:getShortRangeRadarRange() * 3) then
+                            p:addToShipLog(string.format(_("shipLog","[%s] Our analysis of your routine ship telemetry indicates that you passed the Exuari plague station, %s."),station_regional_hq:getCallSign(),station_plague:getCallSign()),"Magenta")
+                            p.plague_station_hint = "sent"
+                        end
+                    end
+                else
+                    if p.closest_approach == nil then
+                        p.closest_approach = current_approach
+                    end
+                    p.closest_approach = math.min(p.closest_approach,current_approach)
+                    if p.closest_approach < p:getShortRangeRadarRange() then
+                        p.proximity_hint_timer = getScenarioTime() + 60
+                    end
+                end
+            end
+        end
+    end
+end
 		if station_plague == nil then
 			winGame(_("msgMainscreen","Exuari Omicron plague station destroyed. Humanity saved"))
 		elseif not station_plague:isValid() then
