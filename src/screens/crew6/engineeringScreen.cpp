@@ -3,6 +3,7 @@
 #include "engineeringScreen.h"
 
 #include "components/reactor.h"
+#include "components/beamweapon.h"
 
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
@@ -294,12 +295,12 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100) + "%");
                 // If the ship has a turret, also note that the rotation rate
                 // is affected.
-                for(int n = 0; n < max_beam_weapons; n++)
-                {
-                    if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
-                    {
-                        addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
-                        break;
+                if (auto beamweapons = my_spaceship->entity.getComponent<BeamWeaponSys>()) {
+                    for(int n = 0; n < max_beam_weapons; n++) {
+                        if (beamweapons->mounts[n].turret_arc > 0) {
+                            addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
+                            break;
+                        }
                     }
                 }
                 break;

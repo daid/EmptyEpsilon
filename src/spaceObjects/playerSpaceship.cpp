@@ -10,6 +10,7 @@
 #include "random.h"
 
 #include "components/reactor.h"
+#include "components/beamweapon.h"
 
 #include "scriptInterface.h"
 
@@ -367,7 +368,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&auto_repair_enabled);
     registerMemberReplication(&max_coolant);
     registerMemberReplication(&auto_coolant_enabled);
-    registerMemberReplication(&beam_system_target);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
     registerMemberReplication(&comms_reply_message);
@@ -1140,6 +1140,9 @@ bool PlayerSpaceship::getCanDock()
     return entity.hasComponent<DockingPort>();
 }
 
+ESystem PlayerSpaceship::getBeamSystemTarget() { return SYS_None; /* TODO */ }
+string PlayerSpaceship::getBeamSystemTargetName() { return ""; /* TODO */ }
+
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
 {
     // Receive a command from a client. Code in this function is executed on
@@ -1429,22 +1432,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            beam_frequency = new_frequency;
-            if (beam_frequency < 0)
-                beam_frequency = 0;
-            if (beam_frequency > SpaceShip::max_frequency)
-                beam_frequency = SpaceShip::max_frequency;
+            auto beamweapons = entity.getComponent<BeamWeaponSys>();
+            if (beamweapons)
+                beamweapons->frequency = std::clamp(new_frequency, 0, SpaceShip::max_frequency);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
         {
             ESystem system;
             packet >> system;
-            beam_system_target = system;
-            if (beam_system_target < SYS_None)
-                beam_system_target = SYS_None;
-            if (beam_system_target > ESystem(int(SYS_COUNT) - 1))
-                beam_system_target = ESystem(int(SYS_COUNT) - 1);
+            auto beamweapons = entity.getComponent<BeamWeaponSys>();
+            if (beamweapons)
+                beamweapons->system_target = (ESystem)std::clamp((int)system, 0, (int)(SYS_COUNT - 1));
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:

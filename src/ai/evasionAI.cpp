@@ -4,6 +4,7 @@
 #include "ai/aiFactory.h"
 #include "random.h"
 #include "systems/collision.h"
+#include "components/beamweapon.h"
 
 
 REGISTER_SHIP_AI(EvasionAI, "evasion");
@@ -143,15 +144,14 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
         }
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
-    {
-        BeamWeapon& beam = ship->beam_weapons[n];
-        if (beam.getRange() > 0)
-        {
-            if (beam.getRange() > enemy_max_beam_range)
-                enemy_max_beam_range = beam.getRange();
-            if (beam.getCycleTime() > 0.0f)
-                enemy_beam_dps += beam.getDamage() / beam.getCycleTime();
+    auto beamsystem = ship->entity.getComponent<BeamWeaponSys>();
+    if (beamsystem) {
+        for(auto& mount : beamsystem->mounts) {
+            if (mount.range > 0.0f) {
+                enemy_max_beam_range = std::max(enemy_max_beam_range, mount.range);
+                if (mount.cycle_time > 0.0f)
+                    enemy_beam_dps += mount.damage / mount.cycle_time;
+            }
         }
     }
 

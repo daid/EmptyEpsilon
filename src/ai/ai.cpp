@@ -6,6 +6,7 @@
 #include "random.h"
 #include "components/docking.h"
 #include "components/impulse.h"
+#include "components/beamweapon.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
 
@@ -130,15 +131,13 @@ void ShipAI::updateWeaponState(float delta)
         }
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
-    {
-        BeamWeapon& beam = owner->beam_weapons[n];
-        if (beam.getRange() > 0)
-        {
-            int index = getDirectionIndex(beam.getDirection(), beam.getArc());
-            if (index >= 0)
-            {
-                beam_strength_per_direction[index] += beam.getDamage() / beam.getCycleTime();
+    auto beamsystem = owner->entity.getComponent<BeamWeaponSys>();
+    if (beamsystem) {
+        for(auto& mount : beamsystem->mounts) {
+            if (mount.range > 0.0f) {
+                int index = getDirectionIndex(mount.direction, mount.arc);
+                if (index >= 0 && mount.cycle_time > 0.0f)
+                    beam_strength_per_direction[index] += mount.damage / mount.cycle_time;
             }
         }
     }
@@ -164,19 +163,14 @@ void ShipAI::updateWeaponState(float delta)
     has_beams = best_beam_index > -1;
     has_missiles = best_tube_index > -1;
 
-    if (has_beams)
+    if (has_beams && beamsystem)
     {
         //Figure out our beam weapon range.
-        for(int n=0; n<max_beam_weapons; n++)
-        {
-            BeamWeapon& beam = owner->beam_weapons[n];
-            if (beam.getRange() > 0)
-            {
-                int index = getDirectionIndex(beam.getDirection(), beam.getArc());
-                if (index == best_beam_index)
-                {
-                    beam_weapon_range += beam.getRange() * (beam.getDamage() / beam.getCycleTime()) / beam_strength_per_direction[index];
-                }
+        for(auto& mount : beamsystem->mounts) {
+            if (mount.range > 0.0f) {
+                int index = getDirectionIndex(mount.direction, mount.arc);
+                if (index == best_beam_index && mount.cycle_time > 0.0f)
+                    beam_weapon_range += mount.range * (mount.damage / mount.cycle_time) / beam_strength_per_direction[index];
             }
         }
     }
@@ -721,12 +715,13 @@ float ShipAI::targetScore(P<SpaceObject> target)
 
     if (distance < beam_weapon_range)
     {
-        for(int n=0; n<max_beam_weapons; n++)
-        {
-            if (distance < owner->beam_weapons[n].getRange())
-            {
-                if (fabs(angleDifference(angle_difference, owner->beam_weapons[n].getDirection())) < owner->beam_weapons[n].getArc() / 2.0f)
-                    score += 1000;
+        auto beamsystem = owner->entity.getComponent<BeamWeaponSys>();
+        if (beamsystem) {
+            for(auto& mount : beamsystem->mounts) {
+                if (distance < mount.range) {
+                    if (fabs(angleDifference(angle_difference, mount.direction)) < mount.arc / 2.0f)
+                        score += 1000;
+                }
             }
         }
     }

@@ -2,6 +2,8 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
+#include "components/beamweapon.h"
+
 
 GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)
 : GuiPanel(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
@@ -17,6 +19,17 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
     {
         if (enemy_has_equipment) {
             float w = (rect.size.x - 40) / (SpaceShip::max_frequency + 1);
+            int arrow_index = -1;
+            if (frequency_is_beam)
+            {
+                if (my_spaceship)
+                    arrow_index = my_spaceship->getShieldsFrequency();
+            } else if (my_spaceship) {
+                auto beamsystem = my_spaceship->entity.getComponent<BeamWeaponSys>();
+                if (beamsystem)
+                    arrow_index = beamsystem->frequency;
+            }
+
             for(int n=0; n<=SpaceShip::max_frequency; n++)
             {
                 float x = rect.position.x + 20 + w * n;
@@ -33,10 +46,8 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                 else
                     renderer.fillRect(bar_rect, glm::u8vec4(255 * f, 255 * (1.0f - f), 0, 255));
 
-                if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
-                {
+                if (n == arrow_index)
                     renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", glm::vec2(x + w * 0.5f, rect.position.y + rect.size.y - 20 - h), w, -90);
-                }
             }
 
             int mouse_freq_nr = int((mouse_position.x - rect.position.x - 20) / w);

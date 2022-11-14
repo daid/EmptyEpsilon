@@ -7,6 +7,8 @@
 #include "shipTemplate.h"
 #include "multiplayer_client.h"
 
+#include "components/beamweapon.h"
+
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
 #include "screenComponents/scanTargetButton.h"
@@ -402,21 +404,15 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 if (gameGlobalInfo->use_beam_shield_frequencies)
                 {
                     info_shield_frequency->setFrequency(ship->shield_frequency);
-                    info_beam_frequency->setFrequency(ship->beam_frequency);
+                    auto beamsystem = ship->entity.getComponent<BeamWeaponSys>();
+                    if (beamsystem)
+                        info_beam_frequency->setFrequency(beamsystem->frequency);
 
                     // Show on graph information that target has no shields instead of frequencies. 
                     info_shield_frequency->setEnemyHasEquipment(ship->getShieldCount() > 0);
 
                     // Show on graph information that target has no beams instad of frequencies. 
-                    bool has_beams = false;
-                    for(int n = 0; n < max_beam_weapons; n++)
-                    {
-                        if (ship->beam_weapons[n].getRange() > 0.0f) {
-                            has_beams = true;
-                            break;
-                        }
-                    }
-                    info_beam_frequency->setEnemyHasEquipment(has_beams);
+                    info_beam_frequency->setEnemyHasEquipment(beamsystem);
                 }
 
                 // Show the status of each subsystem.

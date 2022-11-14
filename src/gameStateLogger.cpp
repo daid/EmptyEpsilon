@@ -479,7 +479,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 json.arrayWrite(ship->shield_max[n]);
             config.endArray();
         }
-
+/*
         has_beam_weapons = false;
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -502,7 +502,9 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         {
             config.endArray();
         }
+        */
     }
+    /*
     if (has_beam_weapons)
     {
         if (gameGlobalInfo->use_beam_shield_frequencies)
@@ -510,6 +512,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         if (ship->beam_system_target != SYS_None)
             json.write("beam_system_target", getSystemName(ship->beam_system_target));
     }
+    */
 }
 
 void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> station)

@@ -20,6 +20,7 @@
 #include "components/docking.h"
 #include "components/impulse.h"
 #include "components/reactor.h"
+#include "components/beamweapon.h"
 
 #include "scriptInterface.h"
 
@@ -200,8 +201,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
     target_id = -1;
-    beam_frequency = irandom(0, max_frequency);
-    beam_system_target = SYS_None;
     shield_frequency = irandom(0, max_frequency);
     turnSpeed = 0.0f;
 
@@ -221,7 +220,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     registerMemberReplication(&turn_speed);
     registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
-    registerMemberReplication(&beam_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5f);
     registerMemberReplication(&combat_maneuver_boost_request);
     registerMemberReplication(&combat_maneuver_boost_active, 0.2f);
@@ -249,11 +247,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&systems[n].health, 0.1f);
         registerMemberReplication(&systems[n].health_max, 0.1f);
         registerMemberReplication(&systems[n].hacked_level, 0.1f);
-    }
-
-    for(int n = 0; n < max_beam_weapons; n++)
-    {
-        beam_weapons[n].setParent(this);
     }
 
     for(int n = 0; n < max_weapon_tubes; n++)
@@ -295,18 +288,22 @@ void SpaceShip::applyTemplateValues()
 {
     for(int n=0; n<max_beam_weapons; n++)
     {
-        beam_weapons[n].setPosition(ship_template->model_data->getBeamPosition(n));
-        beam_weapons[n].setArc(ship_template->beams[n].getArc());
-        beam_weapons[n].setDirection(ship_template->beams[n].getDirection());
-        beam_weapons[n].setRange(ship_template->beams[n].getRange());
-        beam_weapons[n].setTurretArc(ship_template->beams[n].getTurretArc());
-        beam_weapons[n].setTurretDirection(ship_template->beams[n].getTurretDirection());
-        beam_weapons[n].setTurretRotationRate(ship_template->beams[n].getTurretRotationRate());
-        beam_weapons[n].setCycleTime(ship_template->beams[n].getCycleTime());
-        beam_weapons[n].setDamage(ship_template->beams[n].getDamage());
-        beam_weapons[n].setBeamTexture(ship_template->beams[n].getBeamTexture());
-        beam_weapons[n].setEnergyPerFire(ship_template->beams[n].getEnergyPerFire());
-        beam_weapons[n].setHeatPerFire(ship_template->beams[n].getHeatPerFire());
+        if (ship_template->beams[n].getRange() > 0.0f) {
+            auto& beamweaponsystem = entity.getOrAddComponent<BeamWeaponSys>();
+            auto& mount = beamweaponsystem.mounts[n];
+            mount.position = ship_template->model_data->getBeamPosition(n);
+            mount.arc = ship_template->beams[n].getArc();
+            mount.direction = ship_template->beams[n].getDirection();
+            mount.range = ship_template->beams[n].getRange();
+            mount.turret_arc = ship_template->beams[n].getTurretArc();
+            mount.turret_direction = ship_template->beams[n].getTurretDirection();
+            mount.turret_rotation_rate = ship_template->beams[n].getTurretRotationRate();
+            mount.cycle_time = ship_template->beams[n].getCycleTime();
+            mount.damage = ship_template->beams[n].getDamage();
+            mount.texture = ship_template->beams[n].getBeamTexture();
+            mount.energy_per_beam_fire = ship_template->beams[n].getEnergyPerFire();
+            mount.heat_per_beam_fire = ship_template->beams[n].getHeatPerFire();
+        }
     }
     weapon_tube_count = ship_template->weapon_tube_count;
 
@@ -441,151 +438,6 @@ void SpaceShip::updateDynamicRadarSignature()
 
 void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    // Draw beam arcs on short-range radar only, and only for fully scanned
-    // ships.
-    if (!long_range && (!my_spaceship || (getScannedStateFor(my_spaceship) == SS_FullScan)))
-    {
-        auto draw_arc = [&renderer](auto arc_center, auto angle0, auto arc_angle, auto arc_radius, auto color)
-        {
-            // Initialize variables from the beam's data.
-            float beam_arc = arc_angle;
-            float beam_range = arc_radius;
-
-            // Set the beam's origin on radar to its relative position on the mesh.
-            float outline_thickness = std::min(20.0f, beam_range * 0.2f);
-            float beam_arc_curve_length = beam_range * beam_arc / 180.0f * glm::pi<float>();
-            outline_thickness = std::min(outline_thickness, beam_arc_curve_length * 0.25f);
-
-            size_t curve_point_count = 0;
-            if (outline_thickness > 0.f)
-                curve_point_count = static_cast<size_t>(beam_arc_curve_length / (outline_thickness * 0.9f));
-
-            struct ArcPoint {
-                glm::vec2 point;
-                glm::vec2 normal; // Direction towards the center.
-            };
-
-            //Arc points
-            std::vector<ArcPoint> arc_points;
-            arc_points.reserve(curve_point_count + 1);
-            
-            for (size_t i = 0; i < curve_point_count; i++)
-            {
-                auto angle = vec2FromAngle(angle0 + i * beam_arc / curve_point_count) * beam_range;
-                arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
-            }
-            {
-                auto angle = vec2FromAngle(angle0 + beam_arc) * beam_range;
-                arc_points.emplace_back(ArcPoint{ arc_center + angle, glm::normalize(angle) });
-            }
-
-            for (size_t n = 0; n < arc_points.size() - 1; n++)
-            {
-                const auto& p0 = arc_points[n].point;
-                const auto& p1 = arc_points[n + 1].point;
-                const auto& n0 = arc_points[n].normal;
-                const auto& n1 = arc_points[n + 1].normal;
-                renderer.drawTexturedQuad("gradient.png",
-                    p0, p0 - n0 * outline_thickness,
-                    p1 - n1 * outline_thickness, p1,
-                    { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-                    color);
-            }
-
-            if (beam_arc < 360.f)
-            {
-                // Arc bounds.
-                // We use the left- and right-most edges as lines, going inwards, parallel to the center.
-                const auto left_edge = vec2FromAngle(angle0) * beam_range;
-                const auto right_edge = vec2FromAngle(angle0 + beam_arc) * beam_range;
-            
-                // Compute the half point, always going clockwise from the left edge.
-                // This makes sure the algorithm never takes the short road.
-                auto halfway_angle = vec2FromAngle(angle0 + beam_arc / 2.f) * beam_range;
-                auto middle = glm::normalize(halfway_angle);
-
-                // Edge vectors.
-                const auto left_edge_vector = glm::normalize(left_edge);
-                const auto right_edge_vector = glm::normalize(right_edge);
-
-                // Edge normals, inwards.
-                auto left_edge_normal = glm::vec2{ left_edge_vector.y, -left_edge_vector.x };
-                const auto right_edge_normal = glm::vec2{ -right_edge_vector.y, right_edge_vector.x };
-
-                // Initial offset, follow along the edges' normals, inwards.
-                auto left_inner_offset = -left_edge_normal * outline_thickness;
-                auto right_inner_offset = -right_edge_normal * outline_thickness;
-
-                if (beam_arc < 180.f)
-                {
-                    // The thickness being perpendicular from the edges,
-                    // the inner lines just crosses path on the height,
-                    // so just use that point.
-                    left_inner_offset = middle * outline_thickness / sinf(glm::radians(beam_arc / 2.f));
-                    right_inner_offset = left_inner_offset;
-                }
-                else
-                {
-                    // Make it shrink nicely as it grows up to 360 deg.
-                    // For that, we use the edge's normal against the height which will change from 0 to 90deg.
-                    // Also flip the direction so our points stay inside the beam.
-                    auto thickness_scale = -glm::dot(middle, right_edge_normal);
-                    left_inner_offset *= thickness_scale;
-                    right_inner_offset *= thickness_scale;
-                }
-
-                renderer.drawTexturedQuad("gradient.png",
-                    arc_center, arc_center + left_inner_offset,
-                    arc_center + left_edge - left_edge_normal * outline_thickness, arc_center + left_edge,
-                    { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-                    color);
-
-                renderer.drawTexturedQuad("gradient.png",
-                    arc_center, arc_center + right_inner_offset,
-                    arc_center + right_edge - right_edge_normal * outline_thickness, arc_center + right_edge,
-                    { 0.f, 0.5f }, { 1.f, 0.5f }, { 1.f, 0.5f }, { 0.f, 0.5f },
-                    color);
-            }
-        };
-
-        // For each beam ...
-        for(int n = 0; n < max_beam_weapons; n++)
-        {
-            // Draw beam arcs only if the beam has a range. A beam with range 0
-            // effectively doesn't exist; exit if that's the case.
-            if (beam_weapons[n].getRange() == 0.0f) continue;
-
-            // If the beam is cooling down, flash and fade the arc color.
-            glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, beam_weapons[n].getCooldown()), 0, beam_weapons[n].getCycleTime(), beam_weapons[n].getArcColor(), beam_weapons[n].getArcFireColor());
-
-            
-            // Initialize variables from the beam's data.
-            float beam_direction = beam_weapons[n].getDirection();
-            float beam_arc = beam_weapons[n].getArc();
-            float beam_range = beam_weapons[n].getRange();
-
-            // Set the beam's origin on radar to its relative position on the mesh.
-            auto beam_offset = rotateVec2(ship_template->model_data->getBeamPosition2D(n) * scale, getRotation()-rotation);
-            auto arc_center = beam_offset + position;
-
-            draw_arc(arc_center, getRotation() - rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
-           
-
-            // If the beam is turreted, draw the turret's arc. Otherwise, exit.
-            if (beam_weapons[n].getTurretArc() == 0.0f)
-                continue;
-
-            // Initialize variables from the turret data.
-            float turret_arc = beam_weapons[n].getTurretArc();
-            float turret_direction = beam_weapons[n].getTurretDirection();
-
-            // Draw the turret's bounds, at half the transparency of the beam's.
-            // TODO: Make this color configurable.
-            color.a /= 4;
-
-            draw_arc(arc_center, getRotation() - rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
-        }
-    }
     // If not on long-range radar ...
     if (!long_range)
     {
@@ -687,11 +539,6 @@ void SpaceShip::update(float delta)
     // Add heat to systems consuming combat maneuver boost.
     addHeat(SYS_Impulse, fabs(combat_maneuver_boost_active) * delta * heat_per_combat_maneuver_boost);
     addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
-
-    for(int n = 0; n < max_beam_weapons; n++)
-    {
-        beam_weapons[n].update(delta);
-    }
 
     for(int n=0; n<max_weapon_tubes; n++)
     {
@@ -1117,6 +964,35 @@ float SpaceShip::getSystemEffectiveness(ESystem system)
     return std::max(0.0f, power * (1.0f - systems[system].heat_level));
 }
 
+float SpaceShip::getBeamWeaponArc(int index) { return 0.0f; /* TODO */ }
+float SpaceShip::getBeamWeaponDirection(int index) { return 0.0f; /* TODO */ }
+float SpaceShip::getBeamWeaponRange(int index) { return 0.0f; /* TODO */ }
+
+float SpaceShip::getBeamWeaponTurretArc(int index) { return 0.0f; /* TODO */ }
+
+float SpaceShip::getBeamWeaponTurretDirection(int index) { return 0.0f; /* TODO */ }
+
+float SpaceShip::getBeamWeaponTurretRotationRate(int index) { return 0.0f; /* TODO */ }
+
+float SpaceShip::getBeamWeaponCycleTime(int index) { return 0.0f; /* TODO */ }
+float SpaceShip::getBeamWeaponDamage(int index) { return 0.0f; /* TODO */ }
+float SpaceShip::getBeamWeaponEnergyPerFire(int index) { return 0.0f; /* TODO */ }
+float SpaceShip::getBeamWeaponHeatPerFire(int index) { return 0.0f; /* TODO */ }
+
+int SpaceShip::getBeamFrequency() { return 0; /* TODO */ }
+
+void SpaceShip::setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage) { /* TODO */ }
+
+void SpaceShip::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate) { /* TODO */ }
+
+void SpaceShip::setBeamWeaponTexture(int index, string texture) { /* TODO */ }
+
+void SpaceShip::setBeamWeaponEnergyPerFire(int index, float energy) { /* TODO */ }
+void SpaceShip::setBeamWeaponHeatPerFire(int index, float heat) { /* TODO */ }
+void SpaceShip::setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b) { /* TODO */ }
+void SpaceShip::setBeamWeaponDamageType(int index, EDamageType type) { /* TODO */ }
+
+
 void SpaceShip::setWeaponTubeCount(int amount)
 {
     weapon_tube_count = std::max(0, std::min(amount, max_weapon_tubes));
@@ -1408,6 +1284,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     }
 
     // Beam weapon data
+    /*
     for(int n=0; n<max_beam_weapons; n++)
     {
         if (beam_weapons[n].getArc() != ship_template->beams[n].getArc()
@@ -1423,7 +1300,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
             ret += ":setBeamWeaponTurret(" + string(n) + ", " + string(beam_weapons[n].getTurretArc(), 0) + ", " + string(beam_weapons[n].getTurretDirection(), 0) + ", " + string(beam_weapons[n].getTurretRotationRate(), 0) + ")";
         }
     }
-
+*/
     return ret;
 }
 

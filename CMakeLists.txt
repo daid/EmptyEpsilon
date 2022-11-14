@@ -351,17 +351,20 @@ set(MAIN_SOURCES
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
     src/spaceObjects/zone.cpp
-    src/spaceObjects/spaceshipParts/beamWeapon.cpp
     src/spaceObjects/spaceshipParts/weaponTube.cpp
     src/components/radar.h
     src/components/rendering.h
     src/components/docking.h
     src/components/shipsystem.h
+    src/components/shipsystem.cpp
     src/components/impulse.h
+    src/components/reactor.h
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/impulse.h
     src/systems/impulse.cpp
+    src/systems/beamweapon.h
+    src/systems/beamweapon.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -524,7 +527,6 @@ set(MAIN_SOURCES
     src/spaceObjects/shipTemplateBasedObject.h
     src/spaceObjects/spaceObject.h
     src/spaceObjects/spaceship.h
-    src/spaceObjects/spaceshipParts/beamWeapon.h
     src/spaceObjects/spaceshipParts/weaponTube.h
     src/spaceObjects/spaceStation.h
     src/spaceObjects/supplyDrop.h

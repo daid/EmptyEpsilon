@@ -154,13 +154,6 @@ public:
     int8_t weapon_tube_count;
     WeaponTube weapon_tube[max_weapon_tubes];
 
-    /*!
-     * [output] Frequency of beam weapons
-     */
-    int beam_frequency;
-    ESystem beam_system_target;
-    BeamWeapon beam_weapons[max_beam_weapons];
-
     /**
      * Frequency setting of the shields.
      */
@@ -357,76 +350,36 @@ public:
     void setJumpDriveCharge(float charge) { jump_drive_charge = charge; }
     float getJumpDelay() { return jump_delay; }
 
-    float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
-    float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
-    float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getRange(); }
+    float getBeamWeaponArc(int index);
+    float getBeamWeaponDirection(int index);
+    float getBeamWeaponRange(int index);
 
-    float getBeamWeaponTurretArc(int index)
-    {
-        if (index < 0 || index >= max_beam_weapons)
-            return 0.0;
-        return beam_weapons[index].getTurretArc();
-    }
+    float getBeamWeaponTurretArc(int index);
 
-    float getBeamWeaponTurretDirection(int index)
-    {
-        if (index < 0 || index >= max_beam_weapons)
-            return 0.0;
-        return beam_weapons[index].getTurretDirection();
-    }
+    float getBeamWeaponTurretDirection(int index);
 
-    float getBeamWeaponTurretRotationRate(int index)
-    {
-        if (index < 0 || index >= max_beam_weapons)
-            return 0.0;
-        return beam_weapons[index].getTurretRotationRate();
-    }
+    float getBeamWeaponTurretRotationRate(int index);
 
-    float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getCycleTime(); }
-    float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDamage(); }
-    float getBeamWeaponEnergyPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getEnergyPerFire(); }
-    float getBeamWeaponHeatPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getHeatPerFire(); }
+    float getBeamWeaponCycleTime(int index);
+    float getBeamWeaponDamage(int index);
+    float getBeamWeaponEnergyPerFire(int index);
+    float getBeamWeaponHeatPerFire(int index);
 
     int getShieldsFrequency(){ return shield_frequency; }
     void setShieldsFrequency(int freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
-    int getBeamFrequency(){ return beam_frequency; }
+    int getBeamFrequency();
 
-    void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
-    {
-        if (index < 0 || index >= max_beam_weapons)
-            return;
-        beam_weapons[index].setArc(arc);
-        beam_weapons[index].setDirection(direction);
-        beam_weapons[index].setRange(range);
-        beam_weapons[index].setCycleTime(cycle_time);
-        beam_weapons[index].setDamage(damage);
-    }
+    void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
 
-    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
-    {
-        if (index < 0 || index >= max_beam_weapons)
-            return;
-        beam_weapons[index].setTurretArc(arc);
-        beam_weapons[index].setTurretDirection(direction);
-        beam_weapons[index].setTurretRotationRate(rotation_rate);
-    }
+    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate);
 
-    void setBeamWeaponTexture(int index, string texture)
-    {
-        if (index < 0 || index >= max_beam_weapons)
-            return;
-        beam_weapons[index].setBeamTexture(texture);
-    }
+    void setBeamWeaponTexture(int index, string texture);
 
-    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; beam_weapons[index].setEnergyPerFire(energy); }
-    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; beam_weapons[index].setHeatPerFire(heat); }
-    void setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b) {
-        if (index < 0 || index >= max_beam_weapons) return;
-        beam_weapons[index].setArcColor(glm::u8vec4(r * 255, g * 255, b * 255, 128));
-        beam_weapons[index].setArcFireColor(glm::u8vec4(fire_r * 255, fire_g * 255, fire_b * 255, 255));
-    }
-    void setBeamWeaponDamageType(int index, EDamageType type) { if (index < 0 || index >= max_beam_weapons) return; beam_weapons[index].setDamageType(type); }
+    void setBeamWeaponEnergyPerFire(int index, float energy);
+    void setBeamWeaponHeatPerFire(int index, float heat);
+    void setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b);
+    void setBeamWeaponDamageType(int index, EDamageType type);
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();

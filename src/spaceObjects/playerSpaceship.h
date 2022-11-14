@@ -235,8 +235,8 @@ public:
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
-    ESystem getBeamSystemTarget(){ return beam_system_target; }
-    string getBeamSystemTargetName(){ return getSystemName(beam_system_target); }
+    ESystem getBeamSystemTarget();
+    string getBeamSystemTargetName();
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
     void commandTargetRotation(float target);

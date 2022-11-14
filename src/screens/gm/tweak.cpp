@@ -523,25 +523,25 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 
     (new GuiLabel(right_col, "", tr("beam", "Arc:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setArc(roundf(value));
+        //TODO target->beam_weapons[beam_index].setArc(roundf(value));
     });
     arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Direction:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setDirection(roundf(value));
+        //TODO target->beam_weapons[beam_index].setDirection(roundf(value));
     });
     direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Turret arc:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setTurretArc(roundf(value));
+        //TODO target->beam_weapons[beam_index].setTurretArc(roundf(value));
     });
     turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Turret direction:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setTurretDirection(roundf(value));
+        //TODO target->beam_weapons[beam_index].setTurretDirection(roundf(value));
     });
     turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
@@ -550,10 +550,10 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     // result in practicaly instantaneous turret rotation anyway.
     turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
         // Divide a large value for granularity.
-        if (value > 0)
+        /*TODO if (value > 0)
             target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0f);
         else
-            target->beam_weapons[beam_index].setTurretRotationRate(0.0);
+            target->beam_weapons[beam_index].setTurretRotationRate(0.0);*/
     });
     turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
@@ -562,19 +562,19 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 
     (new GuiLabel(right_col, "", tr("beam", "Range:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
+        //TODO target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
     });
     range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Cycle time:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setCycleTime(value);
+        //TODO target->beam_weapons[beam_index].setCycleTime(value);
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", tr("beam", "Damage:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setDamage(value);
+        //TODO target->beam_weapons[beam_index].setDamage(value);
     });
     damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 }
@@ -583,15 +583,15 @@ void GuiShipTweakBeamweapons::onDraw(sp::RenderTarget& renderer)
 {
     target->drawOnRadar(renderer, glm::vec2(rect.position.x - 150.0f + rect.size.x / 2.0f, rect.position.y + rect.size.y * 0.66f), 300.0f / 5000.0f, 0, false);
 
-    arc_slider->setValue(target->beam_weapons[beam_index].getArc());
-    direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
-    range_slider->setValue(target->beam_weapons[beam_index].getRange());
-    turret_arc_slider->setValue(target->beam_weapons[beam_index].getTurretArc());
-    turret_direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getTurretDirection()));
-    turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
-    turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
-    cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
-    damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
+    //TODO arc_slider->setValue(target->beam_weapons[beam_index].getArc());
+    //TODO direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
+    //TODO range_slider->setValue(target->beam_weapons[beam_index].getRange());
+    //TODO turret_arc_slider->setValue(target->beam_weapons[beam_index].getTurretArc());
+    //TODO turret_direction_slider->setValue(angleDifference(0.0f, target->beam_weapons[beam_index].getTurretDirection()));
+    //TODO turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
+    //TODO turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
+    //TODO cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
+    //TODO damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
 }
 
 void GuiShipTweakBeamweapons::open(P<SpaceObject> target)
