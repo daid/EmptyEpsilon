@@ -4,6 +4,7 @@
 #include "systems/collision.h"
 #include "components/collision.h"
 #include "components/beamweapon.h"
+#include "components/hull.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
@@ -897,6 +898,14 @@ void GuiRadarView::drawObjectsGM(sp::RenderTarget& renderer)
         if (rect.overlaps(object_rect))
         {
             obj->drawOnGMRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
+        }
+
+        if (!long_range)
+        {
+            auto hull = obj->entity.getComponent<Hull>();
+            if (hull) {
+                renderer.fillRect(sp::Rect(object_position_on_screen.x - 30, object_position_on_screen.y - 30, 60 * hull->current / hull->max, 5), glm::u8vec4(128, 255, 128, 128));
+            }
         }
     }
 }

@@ -353,6 +353,7 @@ set(MAIN_SOURCES
     src/spaceObjects/zone.cpp
     src/spaceObjects/spaceshipParts/weaponTube.cpp
     src/components/radar.h
+    src/components/hull.h
     src/components/rendering.h
     src/components/docking.h
     src/components/shipsystem.h

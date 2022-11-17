@@ -4,6 +4,7 @@
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/impulse.h"
+#include "components/hull.h"
 
 #include "tween.h"
 #include "i18n.h"
@@ -120,7 +121,6 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         shield_max[n] = 0.0;
         shield_hit_effect[n] = 0.0;
     }
-    hull_strength = hull_max = 100.0;
 
     long_range_radar_range = 30000.0f;
     short_range_radar_range = 5000.0f;
@@ -134,15 +134,10 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
         registerMemberReplication(&shield_max[n]);
         registerMemberReplication(&shield_hit_effect[n], 0.5);
     }
-    registerMemberReplication(&hull_strength, 0.5);
-    registerMemberReplication(&hull_max);
     registerMemberReplication(&long_range_radar_range, 0.5);
     registerMemberReplication(&short_range_radar_range, 0.5);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
-
-    can_be_destroyed = true;
-    registerMemberReplication(&can_be_destroyed);
 }
 
 void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels)
@@ -262,7 +257,7 @@ std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
     std::unordered_map<string, string> ret;
     ret[trMark("gm_info", "CallSign")] = callsign;
     ret[trMark("gm_info", "Type")] = type_name;
-    ret[trMark("gm_info", "Hull")] = string(hull_strength) + "/" + string(hull_max);
+    //ret[trMark("gm_info", "Hull")] = string(hull_strength) + "/" + string(hull_max);
     for(int n=0; n<shield_count; n++)
     {
         // Note, translators: this is a compromise.
@@ -313,15 +308,16 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
         takeHullDamage(damage_amount, info);
     }
 
-    if (hull_strength > 0)
+    auto hull = entity.getComponent<Hull>();
+    if (hull && hull->current > 0)
     {
-        if (on_taking_damage.isSet())
+        if (hull->on_taking_damage.isSet())
         {
             if (info.instigator)
             {
-                on_taking_damage.call<void>(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
+                hull->on_taking_damage.call<void>(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_taking_damage.call<void>(P<ShipTemplateBasedObject>(this));
+                hull->on_taking_damage.call<void>(P<ShipTemplateBasedObject>(this));
             }
         }
     }
@@ -329,21 +325,24 @@ void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 
 void ShipTemplateBasedObject::takeHullDamage(float damage_amount, DamageInfo& info)
 {
-    hull_strength -= damage_amount;
-    if (hull_strength <= 0.0f && !can_be_destroyed)
+    auto hull = entity.getComponent<Hull>();
+    if (!hull)
+        return;
+    hull->current -= damage_amount;
+    if (hull->current <= 0.0f && !hull->allow_destruction)
     {
-        hull_strength = 1;
+        hull->current = 1;
     }
-    if (hull_strength <= 0.0f)
+    if (hull->current <= 0.0f)
     {
         destroyedByDamage(info);
-        if (on_destruction.isSet())
+        if (hull->on_destruction.isSet())
         {
             if (info.instigator)
             {
-                on_destruction.call<void>(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
+                hull->on_destruction.call<void>(P<ShipTemplateBasedObject>(this), P<SpaceObject>(info.instigator));
             } else {
-                on_destruction.call<void>(P<ShipTemplateBasedObject>(this));
+                hull->on_destruction.call<void>(P<ShipTemplateBasedObject>(this));
             }
         }
         destroy();
@@ -360,6 +359,14 @@ float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
     return 0.3;
 }
 
+void ShipTemplateBasedObject::setCanBeDestroyed(bool enabled) { /*TODO*/ }
+bool ShipTemplateBasedObject::getCanBeDestroyed() { return true; }
+
+float ShipTemplateBasedObject::getHull() { return 0.0f; /*TODO*/ }
+float ShipTemplateBasedObject::getHullMax() { return 0.0f; /*TODO*/ }
+void ShipTemplateBasedObject::setHull(float amount) { /*TODO*/ }
+void ShipTemplateBasedObject::setHullMax(float amount) { /*TODO*/ }
+
 void ShipTemplateBasedObject::setTemplate(string template_name)
 {
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
@@ -367,7 +374,6 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     ship_template = new_ship_template;
     type_name = template_name;
 
-    hull_strength = hull_max = ship_template->hull;
     shield_count = ship_template->shield_count;
     for(int n=0; n<shield_count; n++)
         shield_level[n] = shield_max[n] = ship_template->shield_level[n];
@@ -377,6 +383,9 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     short_range_radar_range = ship_template->short_range_radar_range;
 
     if (entity) {
+        auto hull = entity.getOrAddComponent<Hull>();
+        hull.current = hull.max = ship_template->hull;
+
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.radius = ship_template->model_data->getRadius() * 0.8f;
         trace.icon = ship_template->radar_trace;
@@ -474,12 +483,16 @@ void ShipTemplateBasedObject::setRestocksMissilesDocked(bool enabled) { /*TODO*/
 
 void ShipTemplateBasedObject::onTakingDamage(ScriptSimpleCallback callback)
 {
-    this->on_taking_damage = callback;
+    auto hull = entity.getComponent<Hull>();
+    if (hull)
+        hull->on_taking_damage = callback;
 }
 
 void ShipTemplateBasedObject::onDestruction(ScriptSimpleCallback callback)
 {
-    this->on_destruction = callback;
+    auto hull = entity.getComponent<Hull>();
+    if (hull)
+        hull->on_destruction = callback;
 }
 
 string ShipTemplateBasedObject::getShieldDataString()

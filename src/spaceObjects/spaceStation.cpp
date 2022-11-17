@@ -3,6 +3,7 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "components/collision.h"
+#include "components/hull.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
@@ -66,7 +67,9 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
             }
             points /= shield_count;
         }
-        points += hull_max * 0.1f;
+        auto hull = entity.getComponent<Hull>();
+        if (hull)
+            points += hull->max * 0.1f;
         if (isEnemy(info.instigator))
             info.instigator->addReputationPoints(points);
         else

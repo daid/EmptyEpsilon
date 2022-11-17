@@ -311,7 +311,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     json.write("faction", ship->getFaction());
     json.write("ship_type", ship->type_name);
     //json.write("energy_level", ship->energy_level);
-    json.write("hull", ship->hull_strength);
+    //json.write("hull", ship->hull_strength);
     if (ship->target_id > -1)
         json.write("target", ship->target_id);
         /*
@@ -440,7 +440,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         //config.write("impulse_acceleration", ship->impulse_acceleration);
         //config.write("impulse_reverse_speed", ship->impulse_max_reverse_speed);
         //config.write("impulse_reverse_acceleration", ship->impulse_reverse_acceleration);
-        config.write("hull", ship->hull_max);
+        //config.write("hull", ship->hull_max);
         if (ship->has_warp_drive)
             config.write("warp", ship->warp_speed_per_warp_level);
         if (ship->combat_maneuver_boost_speed > 0)
@@ -520,7 +520,7 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
     json.write("callsign", station->getCallSign());
     json.write("faction", station->getFaction());
     json.write("station_type", station->type_name);
-    json.write("hull", station->hull_strength);
+    //json.write("hull", station->hull_strength);
     if (station->shield_count > 0)
     {
         json.startArray("shields");
@@ -530,7 +530,7 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
     }
     {
         JSONGenerator config = json.createDict("config");
-        config.write("hull", station->hull_max);
+        //config.write("hull", station->hull_max);
         if (station->shield_count > 0)
         {
             config.startArray("shields");

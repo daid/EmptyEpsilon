@@ -6,6 +6,7 @@
 #include "random.h"
 #include "components/docking.h"
 #include "components/impulse.h"
+#include "components/hull.h"
 #include "components/beamweapon.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
@@ -463,9 +464,11 @@ void ShipAI::runOrders()
                         }
                     }
                 }
-                if ((bay->flags & DockingBay::Repair) && (owner->hull_strength < owner->hull_max))
+                if (bay->flags & DockingBay::Repair)
                 {
-                    allow_undock = false;
+                    auto hull = owner->entity.getComponent<Hull>();
+                    if (hull && hull->current < hull->max)
+                        allow_undock = false;
                 }
             }
             if (allow_undock)

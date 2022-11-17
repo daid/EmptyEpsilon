@@ -5,6 +5,7 @@
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/customShipFunctions.h"
+#include "components/hull.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
 
@@ -35,11 +36,14 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        hull_display->setValue(string(int(100 * my_spaceship->hull_strength / my_spaceship->hull_max)) + "%");
-        if (my_spaceship->hull_strength < my_spaceship->hull_max / 4.0f)
-            hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
-        else
-            hull_display->setColor(glm::u8vec4{255,255,255,255});
+        auto hull = my_spaceship->entity.getComponent<Hull>();
+        if (hull) {
+            hull_display->setValue(string(int(100 * hull->current / hull->max)) + "%");
+            if (hull->current < hull->max / 4.0f)
+                hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
+            else
+                hull_display->setColor(glm::u8vec4{255,255,255,255});
+        }
 
         for(unsigned int n=0; n<SYS_COUNT; n++)
         {

@@ -4,6 +4,7 @@
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
 #include "components/impulse.h"
+#include "components/hull.h"
 #include "main.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
@@ -587,7 +588,8 @@ void PlayerSpaceship::update(float delta)
 
         // If reactor health is worse than -90% and overheating, it explodes,
         // destroying the ship and damaging a 0.5U radius.
-        if (can_be_destroyed && systems[SYS_Reactor].health < -0.9f && systems[SYS_Reactor].heat_level == 1.0f)
+        auto hull = entity.getComponent<Hull>();
+        if (hull && hull->allow_destruction && systems[SYS_Reactor].health < -0.9f && systems[SYS_Reactor].heat_level == 1.0f)
         {
             ExplosionEffect* e = new ExplosionEffect();
             e->setSize(1000.0f);

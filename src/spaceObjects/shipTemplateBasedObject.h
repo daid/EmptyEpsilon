@@ -25,12 +25,8 @@ public:
     int shield_count;
     float shield_level[max_shield_count];
     float shield_max[max_shield_count];
-    float hull_strength, hull_max;
     float shield_hit_effect[max_shield_count];
-    bool can_be_destroyed;
 
-    ScriptSimpleCallback on_destruction;
-    ScriptSimpleCallback on_taking_damage;
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
@@ -47,8 +43,8 @@ public:
     virtual void destroyedByDamage(DamageInfo& info) = 0;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index);
 
-    void setCanBeDestroyed(bool enabled) { can_be_destroyed = enabled; }
-    bool getCanBeDestroyed(){ return can_be_destroyed; }
+    void setCanBeDestroyed(bool enabled);
+    bool getCanBeDestroyed();
 
     virtual void applyTemplateValues() = 0;
     virtual float getShieldRechargeRate(int shield_index);
@@ -58,10 +54,10 @@ public:
     void setTypeName(string type_name) { this->type_name = type_name; }
     string getTypeName() { return type_name; }
 
-    float getHull() { return hull_strength; }
-    float getHullMax() { return hull_max; }
-    void setHull(float amount) { if (amount < 0) return; hull_strength = amount; }
-    void setHullMax(float amount) { if (amount < 0) return; hull_max = amount; hull_strength = std::max(hull_strength, hull_max); }
+    float getHull();
+    float getHullMax();
+    void setHull(float amount);
+    void setHullMax(float amount);
     virtual bool getShieldsActive() { return true; }
 
     ///Shield script binding functions

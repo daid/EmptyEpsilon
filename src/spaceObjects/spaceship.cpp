@@ -21,6 +21,7 @@
 #include "components/impulse.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/hull.h"
 
 #include "scriptInterface.h"
 
@@ -456,10 +457,6 @@ void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 
 void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    if (!long_range)
-    {
-        renderer.fillRect(sp::Rect(position.x - 30, position.y - 30, 60 * hull_strength / hull_max, 5), glm::u8vec4(128, 255, 128, 128));
-    }
 }
 
 void SpaceShip::update(float delta)
@@ -848,12 +845,13 @@ void SpaceShip::didAnOffensiveAction()
 
 void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
 {
-    if (gameGlobalInfo->use_system_damage)
+    auto hull = entity.getComponent<Hull>();
+    if (gameGlobalInfo->use_system_damage && hull)
     {
         if (info.system_target != SYS_None)
         {
             //Target specific system
-            float system_damage = (damage_amount / hull_max) * 2.0f;
+            float system_damage = (damage_amount / hull->max) * 2.0f;
             if (info.type == DT_Energy)
                 system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[info.system_target].health -= system_damage;
@@ -864,7 +862,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             {
                 ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
                 //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull_max) * 1.0f;
+                float system_damage = (damage_amount / hull->max) * 1.0f;
                 systems[random_system].health -= system_damage;
                 if (systems[random_system].health < -1.0f)
                     systems[random_system].health = -1.0f;
@@ -877,7 +875,7 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
         }else{
             ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
             //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-            float system_damage = (damage_amount / hull_max) * 3.0f;
+            float system_damage = (damage_amount / hull->max) * 3.0f;
             if (info.type == DT_Energy)
                 system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
             systems[random_system].health -= system_damage;
@@ -898,7 +896,10 @@ void SpaceShip::destroyedByDamage(DamageInfo& info)
 
     if (info.instigator)
     {
-        float points = hull_max * 0.1f;
+        float points = 0.0f;
+        auto hull = entity.getComponent<Hull>();
+        if (hull)
+            points += hull->max * 0.1f;
         for(int n=0; n<shield_count; n++)
             points += shield_max[n] * 0.1f;
         if (isEnemy(info.instigator))
@@ -1187,10 +1188,10 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     // them.
     if (getTypeName() != ship_template->getName())
         ret += ":setTypeName(\"" + getTypeName() + "\")";
-    if (hull_max != ship_template->hull)
-        ret += ":setHullMax(" + string(hull_max, 0) + ")";
-    if (hull_strength != ship_template->hull)
-        ret += ":setHull(" + string(hull_strength, 0) + ")";
+    //if (hull_max != ship_template->hull)
+    //    ret += ":setHullMax(" + string(hull_max, 0) + ")";
+    //if (hull_strength != ship_template->hull)
+    //    ret += ":setHull(" + string(hull_strength, 0) + ")";
     //if (impulse_max_speed != ship_template->impulse_speed)
     //    ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
     //if (impulse_max_reverse_speed != ship_template->impulse_reverse_speed)

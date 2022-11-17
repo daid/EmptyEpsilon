@@ -172,14 +172,14 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
     // Hull max and state sliders
     (new GuiLabel(right_col, "", tr("Hull max:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     hull_max_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->hull_max = round(value);
-        target->hull_strength = std::min(target->hull_strength, target->hull_max);
+        //target->hull_max = round(value);
+        //target->hull_strength = std::min(target->hull_strength, target->hull_max);
     });
     hull_max_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(right_col, "", tr("Hull current:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     hull_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
-        target->hull_strength = std::min(roundf(value), target->hull_max);
+        //target->hull_strength = std::min(roundf(value), target->hull_max);
     });
     hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -217,7 +217,7 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 
 void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
 {
-    hull_slider->setValue(target->hull_strength);
+    //TODO: hull_slider->setValue(target->hull_strength);
     jump_charge_slider->setValue(target->getJumpDriveCharge());
     jump_min_distance_slider->setValue(target->jump_drive_min_distance);
     jump_max_distance_slider->setValue(target->jump_drive_max_distance);
@@ -227,7 +227,7 @@ void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
     //TODO: impulse_speed_slider->setValue(target->impulse_max_speed);
     //TODO: impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
     turn_speed_slider->setValue(target->turn_speed);
-    hull_max_slider->setValue(target->hull_max);
+    //TODO: hull_max_slider->setValue(target->hull_max);
     can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
     long_range_radar_slider->setValue(target->getLongRangeRadarRange());

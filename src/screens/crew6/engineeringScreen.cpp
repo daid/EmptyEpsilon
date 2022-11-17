@@ -4,6 +4,7 @@
 
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/hull.h"
 
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
@@ -202,11 +203,15 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             else
                 energy_display->setColor(glm::u8vec4{255,255,255,255});
         }
-        hull_display->setValue(toNearbyIntString(100.0f * my_spaceship->hull_strength / my_spaceship->hull_max) + "%");
-        if (my_spaceship->hull_strength < my_spaceship->hull_max / 4.0f)
-            hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
-        else
-            hull_display->setColor(glm::u8vec4{255,255,255,255});
+
+        auto hull = my_spaceship->entity.getComponent<Hull>();
+        if (hull) {
+            hull_display->setValue(toNearbyIntString(100.0f * hull->current / hull->max) + "%");
+            if (hull->current < hull->max / 4.0f)
+                hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
+            else
+                hull_display->setColor(glm::u8vec4{255,255,255,255});
+        }
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
         if (my_spaceship->hasSystem(SYS_FrontShield))
         {

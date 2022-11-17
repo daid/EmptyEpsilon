@@ -3,6 +3,7 @@
 #include "components/collision.h"
 #include "components/impulse.h"
 #include "components/reactor.h"
+#include "components/hull.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/cpuShip.h"
@@ -56,11 +57,12 @@ void DockingSystem::update(float delta)
                 auto bay = docking_port.target.getComponent<DockingBay>();
                 if (bay && (bay->flags & DockingBay::Repair))  //Check if what we are docked to allows hull repairs, and if so, do it.
                 {
-                    if (ship->hull_strength < ship->hull_max)
+                    auto hull = entity.getComponent<Hull>();
+                    if (hull && hull->current < hull->max)
                     {
-                        ship->hull_strength += delta;
-                        if (ship->hull_strength > ship->hull_max)
-                            ship->hull_strength = ship->hull_max;
+                        hull->current += delta;
+                        if (hull->current > hull->max)
+                            hull->current = hull->max;
                     }
                 }
 
