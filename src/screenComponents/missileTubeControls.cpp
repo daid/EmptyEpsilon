@@ -2,6 +2,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "missileTubeControls.h"
 #include "powerDamageIndicator.h"
+#include "components/warpdrive.h"
 
 #include "gui/gui2_button.h"
 #include "gui/gui2_progressbar.h"
@@ -144,7 +145,8 @@ void GuiMissileTubeControls::onUpdate()
             rows[n].loading_bar->hide();
         }
 
-        if (my_spaceship->current_warp > 0.0f)
+        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        if (warp && warp->current > 0.0f)
         {
             rows[n].fire_button->disable();
         }

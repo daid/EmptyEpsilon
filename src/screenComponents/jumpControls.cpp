@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "jumpControls.h"
 #include "powerDamageIndicator.h"
+#include "components/jumpdrive.h"
 
 #include "gui/gui2_slider.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -34,26 +35,33 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->jump_delay > 0.0f)
-        {
-            label->setKey(tr("jumpcontrol","Jump in"));
-            label->setValue(string(int(ceilf(my_spaceship->jump_delay))));
+        auto jump = my_spaceship->entity.getComponent<JumpDrive>();
+        if (!jump) {
+            label->setKey("");
+            label->setValue("");
             slider->disable();
             button->disable();
             charge_bar->hide();
-        }else if (my_spaceship->jump_drive_charge < my_spaceship->jump_drive_max_distance)
+        } else if (jump->delay > 0.0f)
+        {
+            label->setKey(tr("jumpcontrol","Jump in"));
+            label->setValue(string(int(ceilf(jump->delay))));
+            slider->disable();
+            button->disable();
+            charge_bar->hide();
+        }else if (jump->charge < jump->max_distance)
         {
             label->setKey(tr("jumpcontrol", "Charging"));
             label->setValue("...");
             slider->hide();
             button->disable();
-            charge_bar->setRange(0.0, my_spaceship->jump_drive_max_distance);
-            charge_bar->setValue(my_spaceship->jump_drive_charge)->show();
+            charge_bar->setRange(0.0, jump->max_distance);
+            charge_bar->setValue(jump->charge)->show();
         }else{
             label->setKey(tr("jumpcontrol", "Distance"));
             label->setValue(string(slider->getValue() / 1000.0f, 1) + DISTANCE_UNIT_1K);
             slider->enable()->show();
-            slider->setRange(my_spaceship->jump_drive_max_distance, my_spaceship->jump_drive_min_distance);
+            slider->setRange(jump->max_distance, jump->min_distance);
             button->enable();
             charge_bar->hide();
         }

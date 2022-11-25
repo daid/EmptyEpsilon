@@ -29,6 +29,7 @@
 #include "spaceObjects/spaceObject.h"
 #include "systems/docking.h"
 #include "systems/impulse.h"
+#include "systems/warpsystem.h"
 #include "systems/beamweapon.h"
 #include "packResourceProvider.h"
 #include "main.h"
@@ -138,6 +139,7 @@ int main(int argc, char** argv)
     new Engine();
     engine->registerSystem<DockingSystem>();
     engine->registerSystem<ImpulseSystem>();
+    engine->registerSystem<WarpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
     string configuration_path = ".";
     if (getenv("HOME"))

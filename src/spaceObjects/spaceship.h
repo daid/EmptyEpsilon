@@ -77,14 +77,8 @@ public:
     constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
     constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
-    constexpr static float warp_charge_time = 4.0f;
-    constexpr static float warp_decharge_time = 2.0f;
-    constexpr static float jump_drive_charge_time = 90.0f;   /*<Total charge time for the jump drive after a max range jump */
-    constexpr static float jump_drive_energy_per_km_charge = 2.0f;
-    constexpr static float jump_drive_heat_per_jump = 0.35f;
     constexpr static float heat_per_combat_maneuver_boost = 0.2f;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2f;
-    constexpr static float heat_per_warp = 0.02f;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
     ShipSystemLegacy systems[SYS_COUNT];
@@ -105,26 +99,6 @@ public:
     float turn_speed;
 
     /*!
-     * [config] True if we have a warpdrive.
-     */
-    bool has_warp_drive;
-
-    /*!
-     * [input] Level of warp requested, from 0 to 4
-     */
-    int8_t warp_request;
-
-    /*!
-     * [output] Current active warp amount, from 0.0 to 4.0
-     */
-    float current_warp;
-
-    /*!
-     * [config] Amount of speed per warp level, in m/s
-     */
-    float warp_speed_per_warp_level;
-
-    /*!
      * [output] How much charge there is in the combat maneuvering system (0.0-1.0)
      */
     float combat_maneuver_charge;
@@ -140,12 +114,6 @@ public:
     float combat_maneuver_boost_speed; /*< [config] Speed to indicate how fast we will fly forwards with a full boost */
     float combat_maneuver_strafe_speed; /*< [config] Speed to indicate how fast we will fly sideways with a full strafe */
 
-    bool has_jump_drive;      //[config]
-    float jump_drive_charge; //[output]
-    float jump_distance;     //[output]
-    float jump_delay;        //[output]
-    float jump_drive_min_distance; //[config]
-    float jump_drive_max_distance; //[config]
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
     int weapon_storage[MW_Count];
@@ -210,33 +178,7 @@ public:
      */
     virtual void destroyedByDamage(DamageInfo& info) override;
 
-    /*!
-     * Jump in current direction
-     * \param distance Distance to jump in meters)
-     */
-    virtual void executeJump(float distance);
-
     virtual void collide(SpaceObject* other, float force) override;
-
-    /*!
-     * Start the jumping procedure.
-     */
-    void initializeJump(float distance);
-
-    /*!
-     * Request to dock with target.
-     */
-    void requestDock(P<SpaceObject> target);
-
-    /*!
-     * Request undock with current docked object
-     */
-    void requestUndock();
-
-    /*!
-     * Abort the current dock request
-     */
-    void abortDock();
 
     /// Function to use energy. Only player ships currently model energy use.
     bool useEnergy(float amount);
@@ -283,7 +225,6 @@ public:
     bool isDocked(P<SpaceObject> target);
     P<SpaceObject> getDockedWith();
     DockingPort::State getDockingState();
-    bool canStartDocking() { return current_warp <= 0.0f && (!has_jump_drive || jump_delay <= 0.0f); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
@@ -321,33 +262,16 @@ public:
     Speeds getAcceleration();
     void setAcceleration(float acceleration, std::optional<float> reverse_acceleration);
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
-    bool hasJumpDrive() { return has_jump_drive; }
-    void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
-    void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
-    bool hasWarpDrive() { return has_warp_drive; }
-    void setWarpDrive(bool has_warp)
-    {
-        has_warp_drive = has_warp;
-        if (has_warp_drive)
-        {
-            if (warp_speed_per_warp_level < 100.0f)
-                warp_speed_per_warp_level = 1000.0f;
-        }else{
-            warp_request = 0;
-            warp_speed_per_warp_level = 0;
-        }
-    }
-    void setWarpSpeed(float speed) { warp_speed_per_warp_level = std::max(0.0f, speed); }
-    float getWarpSpeed() {
-        if (has_warp_drive) {
-            return warp_speed_per_warp_level;
-        } else {
-            return 0.0f;
-        }
-     }
-    float getJumpDriveCharge() { return jump_drive_charge; }
-    void setJumpDriveCharge(float charge) { jump_drive_charge = charge; }
-    float getJumpDelay() { return jump_delay; }
+    bool hasJumpDrive() { return false; } //TODO
+    void setJumpDrive(bool has_jump) {} //TODO
+    void setJumpDriveRange(float min, float max) {} //TODO
+    bool hasWarpDrive() { return false; } //TODO
+    void setWarpDrive(bool has_warp) {} //TODO
+    void setWarpSpeed(float speed) {} //TODO
+    float getWarpSpeed() { return 1000.0f; } //TODO
+    float getJumpDriveCharge() { return 0.0f; } //TODO
+    void setJumpDriveCharge(float charge) {} //TODO
+    float getJumpDelay() { return 0.0f; } //TODO
 
     float getBeamWeaponArc(int index);
     float getBeamWeaponDirection(int index);

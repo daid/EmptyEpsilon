@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "jumpIndicator.h"
+#include "components/jumpdrive.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -18,10 +19,15 @@ GuiJumpIndicator::GuiJumpIndicator(GuiContainer* owner)
 
 void GuiJumpIndicator::onDraw(sp::RenderTarget& target)
 {
-    if (my_spaceship && my_spaceship->jump_delay > 0.0f)
+    if (my_spaceship)
     {
-        box->show();
-        label->setText(tr("Jump in: {delay}").format({{"delay", string(int(ceilf(my_spaceship->jump_delay)))}}));
+        auto jump = my_spaceship->entity.getComponent<JumpDrive>();
+        if (jump && jump->delay > 0.0f) {
+            box->show();
+            label->setText(tr("Jump in: {delay}").format({{"delay", string(int(ceilf(jump->delay)))}}));
+        } else {
+            box->hide();
+        }
     }else{
         box->hide();
     }

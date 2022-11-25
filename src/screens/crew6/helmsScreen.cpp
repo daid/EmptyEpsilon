@@ -5,6 +5,8 @@
 #include "preferenceManager.h"
 
 #include "components/reactor.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
 
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
@@ -103,8 +105,8 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
         float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
 
-        warp_controls->setVisible(my_spaceship->has_warp_drive);
-        jump_controls->setVisible(my_spaceship->has_jump_drive);
+        warp_controls->setVisible(my_spaceship->entity.hasComponent<WarpDrive>());
+        jump_controls->setVisible(my_spaceship->entity.hasComponent<JumpDrive>());
     }
     GuiOverlay::onDraw(renderer);
 }

@@ -4,6 +4,8 @@
 #include "components/impulse.h"
 #include "components/reactor.h"
 #include "components/hull.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/cpuShip.h"
@@ -19,7 +21,7 @@ void DockingSystem::update(float delta)
 {
     if (!game_server) return;
 
-    for(auto [entity, docking_port, position, engine, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Position>, sp::ecs::optional<ImpulseEngine>, SpaceObject*>()) {
+    for(auto [entity, docking_port, position, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Position>, SpaceObject*>()) {
         SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(obj);
         if (!ship) continue;
@@ -31,6 +33,8 @@ void DockingSystem::update(float delta)
             if (!docking_port.target || !(target_position = docking_port.target.getComponent<sp::Position>())) {
                 docking_port.state = DockingPort::State::NotDocking;
             } else {
+                auto engine = entity.getComponent<ImpulseEngine>();
+                auto warp = entity.getComponent<WarpDrive>();
                 ship->target_rotation = vec2ToAngle(position->getPosition() - target_position->getPosition());
                 if (engine) {
                     if (fabs(angleDifference(ship->target_rotation, position->getRotation())) < 10.0f)
@@ -38,7 +42,8 @@ void DockingSystem::update(float delta)
                     else
                         engine->request = 0.f;
                 }
-                ship->warp_request = 0.f;
+                if (warp)
+                    warp->request = 0;
             }
             break;
         case DockingPort::State::Docked:
@@ -125,12 +130,27 @@ void DockingSystem::update(float delta)
                 }
             }
 
+            auto engine = entity.getComponent<ImpulseEngine>();
             if (engine)
                 engine->request = 0.f;
-            ship->warp_request = 0.f;
+            auto warp = entity.getComponent<WarpDrive>();
+            if (warp)
+                warp->request = 0;
             break;
         }
     }
+}
+
+bool DockingSystem::canStartDocking(sp::ecs::Entity entity)
+{
+    auto port = entity.getComponent<DockingPort>();
+    if (!port) return false;
+    if (port->state != DockingPort::State::NotDocking) return false;
+    auto warp = entity.getComponent<WarpDrive>();
+    if (warp && warp->current > 0.0f) return false;
+    auto jump = entity.getComponent<JumpDrive>();
+    if (jump && jump->delay > 0.0f) return false;
+    return true;
 }
 
 void DockingSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
@@ -152,5 +172,62 @@ void DockingSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
             if (bay && port->canDockOn(*bay) == DockingStyle::Internal)
                 a.removeComponent<sp::Position>();
         }
+    }
+}
+
+
+void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
+{
+    if (!canStartDocking(entity))
+        return;
+
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (!docking_port || docking_port->state != DockingPort::State::NotDocking) return;
+    if (!target) return;
+    auto bay = target.getComponent<DockingBay>();
+    if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
+    auto position = entity.getComponent<sp::Position>();
+    if (position) return;
+    auto target_position = target.getComponent<sp::Position>();
+    if (target_position) return;
+    auto target_physics = target.getComponent<sp::Physics>();
+    if (target_physics) return;
+
+    if (glm::length(position->getPosition() - target_position->getPosition()) > 1000.0f + target_physics->getSize().x)
+        return;
+
+    docking_port->state = DockingPort::State::Docking;
+    docking_port->target = target;
+    auto warp = entity.getComponent<WarpDrive>();
+    if (warp) warp->request = 0;
+}
+
+void DockingSystem::requestUndock(sp::ecs::Entity entity)
+{
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
+    auto impulse = entity.getComponent<ImpulseEngine>();
+    if (impulse && impulse->get_system_effectiveness() < 0.1f) return;
+
+    docking_port->state = DockingPort::State::NotDocking;
+    if (impulse) impulse->request = 0.5;
+}
+
+void DockingSystem::abortDock(sp::ecs::Entity entity)
+{
+    auto docking_port = entity.getComponent<DockingPort>();
+    if (!docking_port || docking_port->state != DockingPort::State::Docking) return;
+
+    docking_port->state = DockingPort::State::NotDocking;
+    auto engine = entity.getComponent<ImpulseEngine>();
+    if (engine) engine->request = 0.f;
+    auto warp = entity.getComponent<WarpDrive>();
+    if (warp) warp->request = 0;
+
+    auto obj = entity.getComponent<SpaceObject*>();
+    if (obj && *obj) {
+        auto ship = dynamic_cast<SpaceShip*>(*obj);
+        if (ship)
+            ship->target_rotation = ship->getRotation();
     }
 }

@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
+#include "components/warpdrive.h"
 
 #include "gui/gui2_slider.h"
 #include "gui/gui2_keyvaluedisplay.h"
@@ -33,8 +34,10 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 
     if (my_spaceship)
     {
+        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
         // Set the slider's value to the current warp request.
-        slider->setValue(my_spaceship->warp_request);
+        if (warp)
+            slider->setValue(warp->request);
     }
 
     // Label the warp slider.
@@ -49,8 +52,11 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
 {
     // Update the label with the current warp factor.
     if (my_spaceship) {
-        label->setValue(string(my_spaceship->current_warp, 1));
-        slider->setValue(my_spaceship->warp_request);
+        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        if (warp) {
+            label->setValue(string(warp->current, 1));
+            slider->setValue(warp->request);
+        }
     }
 }
 
@@ -59,6 +65,9 @@ void GuiWarpControls::onUpdate()
     // Handle hotkey input. Warp is a HELMS-category shortcut.
     if (my_spaceship && isVisible())
     {
+        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        if (!warp)
+            return;
         if (keys.helms_warp0.getDown())
         {
             my_spaceship->commandWarp(0);
@@ -86,16 +95,16 @@ void GuiWarpControls::onUpdate()
         }
         if (keys.helms_increase_warp.getDown())
         {
-            if (my_spaceship->warp_request < 4) {
-                my_spaceship->commandWarp(my_spaceship->warp_request+1);
-                slider->setValue(my_spaceship->warp_request+1);
+            if (warp->request < 4) {
+                my_spaceship->commandWarp(warp->request+1);
+                slider->setValue(warp->request+1);
             }
         }
         else if (keys.helms_decrease_warp.getDown())
         {
-            if (my_spaceship->warp_request > 0) {
-                my_spaceship->commandWarp(my_spaceship->warp_request-1);
-                slider->setValue(my_spaceship->warp_request-1);
+            if (warp->request > 0) {
+                my_spaceship->commandWarp(warp->request-1);
+                slider->setValue(warp->request-1);
             }
         }
     }

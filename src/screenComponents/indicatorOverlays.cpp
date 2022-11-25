@@ -5,6 +5,8 @@
 #include "main.h"
 #include "random.h"
 #include "preferenceManager.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
@@ -88,14 +90,16 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->current_warp > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        auto jump = my_spaceship->entity.getComponent<JumpDrive>();
+        if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01f);
-        }else if (my_spaceship->jump_delay > 0.0f && my_spaceship->jump_delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+            warpPostProcessor->setUniform("amount", warp->current * 0.01f);
+        }else if (jump && jump->delay > 0.0f && jump->delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0f - my_spaceship->jump_delay) * 0.1f);
+            warpPostProcessor->setUniform("amount", (2.0f - jump->delay) * 0.1f);
         }else{
             warpPostProcessor->enabled = false;
         }

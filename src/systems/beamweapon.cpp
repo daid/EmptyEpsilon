@@ -4,6 +4,7 @@
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/reactor.h"
+#include "components/warpdrive.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
@@ -17,6 +18,7 @@ void BeamWeaponSystem::update(float delta)
     for(auto [entity, beamsys, position, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, sp::Position, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
         if (!beamsys.target) continue;
         P<SpaceShip> ship = P<SpaceObject>(obj);
+        auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {
             if (mount.cooldown > 0.0f)
@@ -26,7 +28,7 @@ void BeamWeaponSystem::update(float delta)
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && target && obj->isEnemy(target) && delta > 0.0f && (!ship || ship->current_warp == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+            if (mount.range > 0.0f && target && obj->isEnemy(target) && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
             {
                 // Get the angle to the target.
                 auto diff = target->getPosition() - (position.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), position.getRotation()));

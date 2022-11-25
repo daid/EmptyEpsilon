@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "dockingButton.h"
 #include "systems/collision.h"
+#include "systems/docking.h"
 #include "components/collision.h"
 #include "ecs/query.h"
 
@@ -75,7 +76,7 @@ void GuiDockingButton::onDraw(sp::RenderTarget& renderer)
     {
     case DockingPort::State::NotDocking:
         setText(tr("Request Dock"));
-        if (my_spaceship->canStartDocking() && findDockingTarget())
+        if (DockingSystem::canStartDocking(my_spaceship->entity) && findDockingTarget())
         {
             enable();
         }else{

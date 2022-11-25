@@ -359,6 +359,8 @@ set(MAIN_SOURCES
     src/components/shipsystem.h
     src/components/shipsystem.cpp
     src/components/impulse.h
+    src/components/warpdrive.h
+    src/components/jumpdrive.h
     src/components/reactor.h
     src/systems/docking.h
     src/systems/docking.cpp
@@ -366,6 +368,10 @@ set(MAIN_SOURCES
     src/systems/impulse.cpp
     src/systems/beamweapon.h
     src/systems/beamweapon.cpp
+    src/systems/warpsystem.h
+    src/systems/warpsystem.cpp
+    src/systems/jumpsystem.h
+    src/systems/jumpsystem.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

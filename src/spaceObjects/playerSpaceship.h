@@ -36,7 +36,6 @@ class PlayerSpaceship : public SpaceShip
 public:
     // Power consumption and generation base rates
     constexpr static float default_energy_shield_use_per_second = 1.5f;
-    constexpr static float default_energy_warp_per_second = 1.7f;
     // Total coolant
     constexpr static float max_coolant_per_system = 10.0f;
     float max_coolant;
@@ -113,7 +112,6 @@ private:
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
     float energy_shield_use_per_second = default_energy_shield_use_per_second;
-    float energy_warp_per_second = default_energy_warp_per_second;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -290,7 +288,6 @@ public:
     virtual void applyTemplateValues() override;
 
     // Ship status functions
-    virtual void executeJump(float distance) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolantRequest(ESystem system, float request);
     void setMaxCoolant(float coolant);
@@ -303,8 +300,8 @@ public:
     // Flow rate controls.
     float getEnergyShieldUsePerSecond() const { return energy_shield_use_per_second; }
     void setEnergyShieldUsePerSecond(float rate) { energy_shield_use_per_second = rate; }
-    float getEnergyWarpPerSecond() const { return energy_warp_per_second; }
-    void setEnergyWarpPerSecond(float rate) { energy_warp_per_second = rate; }
+    float getEnergyWarpPerSecond() const { return 0.0f; } //TODO
+    void setEnergyWarpPerSecond(float rate) {} //TODO
 
     // Ship update functions
     virtual void update(float delta) override;

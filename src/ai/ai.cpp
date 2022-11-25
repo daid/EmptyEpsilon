@@ -6,9 +6,13 @@
 #include "random.h"
 #include "components/docking.h"
 #include "components/impulse.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
 #include "components/hull.h"
 #include "components/beamweapon.h"
 #include "systems/collision.h"
+#include "systems/jumpsystem.h"
+#include "systems/docking.h"
 #include "ecs/query.h"
 
 
@@ -58,10 +62,12 @@ void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, 
 void ShipAI::run(float delta)
 {
     owner->target_rotation = owner->getRotation();
-    owner->warp_request = 0.0;
     auto impulse = owner->entity.getComponent<ImpulseEngine>();
     if (impulse)
         impulse->request = 0.0f;
+    auto warp = owner->entity.getComponent<WarpDrive>();
+    if (warp)
+        warp->request = 0;
 
     updateWeaponState(delta);
     if (update_target_delay > 0.0f)
@@ -494,7 +500,7 @@ void ShipAI::runOrders()
                 float dist = glm::length(diff);
                 if (dist < 600 + owner->getOrderTarget()->getRadius())
                 {
-                    owner->requestDock(owner->getOrderTarget());
+                    DockingSystem::requestDock(owner->entity, owner->getOrderTarget()->entity);
                 }else{
                     target_position += (diff / dist) * 500.0f;
                     flyTowards(target_position);
@@ -565,7 +571,7 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
     {
         auto docking_port = owner->entity.getComponent<DockingPort>();
         if (docking_port && docking_port->state == DockingPort::State::Docked)
-            owner->requestUndock();
+            DockingSystem::requestUndock(owner->entity);
 
         auto diff = pathPlanner.route[0] - owner->getPosition();
         float distance = glm::length(diff);
@@ -574,33 +580,35 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         owner->target_rotation = vec2ToAngle(diff);
         float rotation_diff = fabs(angleDifference(owner->target_rotation, owner->getRotation()));
 
-        if (owner->has_warp_drive && rotation_diff < 30.0f && distance > 2000.0f)
+        auto warp = owner->entity.getComponent<WarpDrive>();
+        if (warp && rotation_diff < 30.0f && distance > 2000.0f)
         {
-            owner->warp_request = 1.0;
+            warp->request = 1.0;
         }else{
-            owner->warp_request = 0.0;
+            warp->request = 0.0;
         }
-        if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0f && owner->jump_drive_charge >= owner->jump_drive_max_distance)
+        auto jump = owner->entity.getComponent<JumpDrive>();
+        if (distance > 10000 && jump && jump->delay <= 0.0f && jump->charge >= jump->max_distance)
         {
             if (rotation_diff < 1.0f)
             {
-                float jump = distance;
+                float jump_distance = distance;
                 if (pathPlanner.route.size() < 2)
                 {
-                    jump -= 3000;
+                    jump_distance -= 3000;
                     if (has_missiles)
-                        jump -= 5000;
+                        jump_distance -= 5000;
                 }
-                if (owner->jump_drive_max_distance == 50000)
+                if (jump->max_distance == 50000)
                 {   //If the ship has the default max jump drive distance of 50k, then limit our jumps to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
-                    if (jump > 15000)
-                        jump = 15000;
+                    if (jump_distance > 15000)
+                        jump_distance = 15000;
                 }else{
-                    if (jump > owner->jump_drive_max_distance - 2000)
-                        jump = owner->jump_drive_max_distance - 2000;
+                    if (jump_distance > jump->max_distance - 2000)
+                        jump_distance = jump->max_distance - 2000;
                 }
-                jump += random(-1500, 1500);
-                owner->initializeJump(jump);
+                jump_distance += random(-1500, 1500);
+                JumpSystem::initializeJump(owner->entity, jump_distance);
             }
         }
         if (pathPlanner.route.size() > 1)
@@ -632,7 +640,7 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
     {
         auto docking_port = owner->entity.getComponent<DockingPort>();
         if (docking_port && docking_port->state == DockingPort::State::Docked)
-            owner->requestUndock();
+            DockingSystem::requestUndock(owner->entity);
 
         auto diff = target_position - owner->getPosition();
         float distance = glm::length(diff);

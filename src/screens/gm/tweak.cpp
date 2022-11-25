@@ -152,13 +152,13 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 
     (new GuiLabel(left_col, "", tr("Jump Min Distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     jump_min_distance_slider= new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
-        target->setJumpDriveRange(value,target->jump_drive_max_distance);
+        //target->setJumpDriveRange(value,target->jump_drive_max_distance);
     });
     jump_min_distance_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", tr("Jump Max Distance:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     jump_max_distance_slider= new GuiSlider(left_col, "", 0.0, 100000, 0.0, [this](float value) {
-        target->setJumpDriveRange(target->jump_drive_min_distance,value);
+        //target->setJumpDriveRange(target->jump_drive_min_distance,value);
     });
     jump_max_distance_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -219,11 +219,11 @@ void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
 {
     //TODO: hull_slider->setValue(target->hull_strength);
     jump_charge_slider->setValue(target->getJumpDriveCharge());
-    jump_min_distance_slider->setValue(target->jump_drive_min_distance);
-    jump_max_distance_slider->setValue(target->jump_drive_max_distance);
+    //jump_min_distance_slider->setValue(target->jump_drive_min_distance);
+    //jump_max_distance_slider->setValue(target->jump_drive_max_distance);
     type_name->setText(target->getTypeName());
-    warp_toggle->setValue(target->has_warp_drive);
-    jump_toggle->setValue(target->hasJumpDrive());\
+    //warp_toggle->setValue(target->has_warp_drive);
+    jump_toggle->setValue(target->hasJumpDrive());
     //TODO: impulse_speed_slider->setValue(target->impulse_max_speed);
     //TODO: impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
     turn_speed_slider->setValue(target->turn_speed);

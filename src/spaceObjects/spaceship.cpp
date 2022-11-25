@@ -19,6 +19,8 @@
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/impulse.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
 #include "components/hull.h"
@@ -181,16 +183,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
     target_rotation = getRotation();
-    has_warp_drive = true;
-    warp_request = 0;
-    current_warp = 0;
-    warp_speed_per_warp_level = 1000.f;
-    has_jump_drive = true;
-    jump_drive_min_distance = 5000.f;
-    jump_drive_max_distance = 50000.f;
-    jump_drive_charge = jump_drive_max_distance;
-    jump_distance = 0.f;
-    jump_delay = 0.f;
     wormhole_alpha = 0.f;
     weapon_tube_count = 0;
     turn_speed = 10.f;
@@ -207,19 +199,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     registerMemberReplication(&target_rotation, 1.5f);
     registerMemberReplication(&turnSpeed, 0.1f);
-    registerMemberReplication(&has_warp_drive);
-    registerMemberReplication(&warp_request, 0.1f);
-    registerMemberReplication(&current_warp, 0.1f);
-    registerMemberReplication(&has_jump_drive);
-    registerMemberReplication(&jump_drive_charge, 0.5f);
-    registerMemberReplication(&jump_delay, 0.5f);
-    registerMemberReplication(&jump_drive_min_distance);
-    registerMemberReplication(&jump_drive_max_distance);
     registerMemberReplication(&wormhole_alpha, 0.5f);
     registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
     registerMemberReplication(&turn_speed);
-    registerMemberReplication(&warp_speed_per_warp_level);
     registerMemberReplication(&shield_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5f);
     registerMemberReplication(&combat_maneuver_boost_request);
@@ -326,11 +309,16 @@ void SpaceShip::applyTemplateValues()
     turn_speed = ship_template->turn_speed;
     combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
     combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
-    has_warp_drive = ship_template->warp_speed > 0.0f;
-    warp_speed_per_warp_level = ship_template->warp_speed;
-    has_jump_drive = ship_template->has_jump_drive;
-    jump_drive_min_distance = ship_template->jump_drive_min_distance;
-    jump_drive_max_distance = ship_template->jump_drive_max_distance;
+
+    if (ship_template->warp_speed > 0.0f) {
+        auto& warp = entity.getOrAddComponent<WarpDrive>();
+        warp.speed_per_level = ship_template->warp_speed;
+    }
+    if (ship_template->has_jump_drive) {
+        auto& jump = entity.getOrAddComponent<JumpDrive>();
+        jump.min_distance = ship_template->jump_drive_min_distance;
+        jump.max_distance = ship_template->jump_drive_max_distance;
+    }
     for(int n=0; n<max_weapon_tubes; n++)
     {
         weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
@@ -357,10 +345,11 @@ void SpaceShip::draw3DTransparent()
     if (!ship_template) return;
     ShipTemplateBasedObject::draw3DTransparent();
 
-    if ((has_jump_drive && jump_delay > 0.0f) ||
+    auto jump = entity.getComponent<JumpDrive>();
+    if ((jump && jump->delay > 0.0f) ||
         (wormhole_alpha > 0.0f))
     {
-        float delay = jump_delay;
+        float delay = jump ? jump->delay : 0.0f;
         if (wormhole_alpha > 0.0f)
             delay = wormhole_alpha;
         float alpha = 1.0f - (delay / 10.0f);
@@ -389,19 +378,14 @@ void SpaceShip::updateDynamicRadarSignature()
             )
         );
 
-        // ... adjust the electrical band if system power allocation is not
-        // 100%.
-        if (ship_system == SYS_JumpDrive && jump_drive_charge < jump_drive_max_distance)
+        // ... adjust the electrical band if system power allocation is not 100%.
+        if (ship_system == SYS_JumpDrive)
         {
-            // ... elevate electrical after a jump, since recharging jump
-            // consumes energy.
-            signature_delta.electrical += std::max(
-                0.0f,
-                std::min(
-                    1.0f,
-                    getSystemPower(ship_system) * (jump_drive_charge + 0.01f / jump_drive_max_distance)
-                )
-            );
+            auto jump = entity.getComponent<JumpDrive>();
+            if (jump && jump->charge < jump->max_distance) {
+                // ... elevate electrical after a jump, since recharging jump consumes energy.
+                signature_delta.electrical += std::clamp(getSystemPower(ship_system) * (jump->charge + 0.01f / jump->max_distance), 0.0f, 1.0f);
+            }
         } else if (getSystemPower(ship_system) != 1.0f)
         {
             // For non-Jump systems, allow underpowered systems to reduce the
@@ -418,18 +402,15 @@ void SpaceShip::updateDynamicRadarSignature()
 
     // Increase the gravitational band if the ship is about to jump, or is
     // actively warping.
-    if (jump_delay > 0.0f)
+    auto jump = entity.getComponent<JumpDrive>();
+    if (jump && jump->delay > 0.0f)
     {
-        signature_delta.gravity += std::max(
-            0.0f,
-            std::min(
-                (1.0f / jump_delay + 0.01f) + 0.25f,
-                10.0f
-            )
-        );
-    } else if (current_warp > 0.0f)
+        signature_delta.gravity += std::clamp((1.0f / jump->delay + 0.01f) + 0.25f, 0.0f, 1.0f);
+    }
+    auto warp = entity.getComponent<WarpDrive>();
+    if (warp && warp->current > 0.0f)
     {
-        signature_delta.gravity += current_warp;
+        signature_delta.gravity += warp->current;
     }
 
     // Update the signature by adding the delta to its baseline.
@@ -553,8 +534,10 @@ void SpaceShip::update(float delta)
     if (impulse)
         model_info.engine_scale = std::max(model_info.engine_scale, std::abs(impulse->actual));
     model_info.engine_scale = std::min(1.0f, model_info.engine_scale);
-    if (has_jump_drive && jump_delay > 0.0f)
-        model_info.warp_scale = (10.0f - jump_delay) / 10.0f;
+
+    auto jump = entity.getComponent<JumpDrive>();
+    if (jump && jump->delay > 0.0f)
+        model_info.warp_scale = (10.0f - jump->delay) / 10.0f;
     else
         model_info.warp_scale = 0.f;
     
@@ -582,77 +565,8 @@ P<SpaceObject> SpaceShip::getTarget()
     return game_client->getObjectById(target_id);
 }
 
-void SpaceShip::executeJump(float distance)
-{
-    float f = systems[SYS_JumpDrive].health;
-    if (f <= 0.0f)
-        return;
-
-    distance = (distance * f) + (distance * (1.0f - f) * random(0.5, 1.5));
-    auto target_position = getPosition() + vec2FromAngle(getRotation()) * distance;
-    target_position = WarpJammer::getFirstNoneJammedPosition(getPosition(), target_position);
-    setPosition(target_position);
-    addHeat(SYS_JumpDrive, jump_drive_heat_per_jump);
-}
-
 void SpaceShip::collide(SpaceObject* other, float force)
 {
-}
-
-void SpaceShip::initializeJump(float distance)
-{
-    auto docking_port = entity.getComponent<DockingPort>();
-    if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;
-    if (jump_drive_charge < jump_drive_max_distance) // You can only jump when the drive is fully charged
-        return;
-    if (jump_delay <= 0.0f)
-    {
-        jump_distance = distance;
-        jump_delay = 10.f;
-        jump_drive_charge -= distance;
-    }
-}
-
-void SpaceShip::requestDock(P<SpaceObject> target)
-{
-    auto docking_port = entity.getComponent<DockingPort>();
-    if (!docking_port || docking_port->state != DockingPort::State::NotDocking) return;
-    if (!target)
-        return;
-    auto bay = target->entity.getComponent<DockingBay>();
-    if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
-
-    if (glm::length(getPosition() - target->getPosition()) > 1000 + target->getRadius())
-        return;
-    if (!canStartDocking())
-        return;
-
-    docking_port->state = DockingPort::State::Docking;
-    docking_port->target = target->entity;
-    warp_request = 0;
-}
-
-void SpaceShip::requestUndock()
-{
-    auto docking_port = entity.getComponent<DockingPort>();
-    if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
-    if (getSystemEffectiveness(SYS_Impulse) < 0.1f) return;
-
-    docking_port->state = DockingPort::State::NotDocking;
-    auto engine = entity.getComponent<ImpulseEngine>();
-    if (engine) engine->request = 0.5;
-}
-
-void SpaceShip::abortDock()
-{
-    auto docking_port = entity.getComponent<DockingPort>();
-    if (!docking_port || docking_port->state != DockingPort::State::Docking) return;
-
-    docking_port->state = DockingPort::State::NotDocking;
-    auto engine = entity.getComponent<ImpulseEngine>();
-    if (engine) engine->request = 0.f;
-    warp_request = 0;
-    target_rotation = getRotation();
 }
 
 bool SpaceShip::useEnergy(float amount)
@@ -917,9 +831,9 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_COUNT:
         return false;
     case SYS_Warp:
-        return has_warp_drive;
+        return entity.hasComponent<WarpDrive>();
     case SYS_JumpDrive:
-        return has_jump_drive;
+        return entity.hasComponent<JumpDrive>();
     case SYS_MissileSystem:
         return weapon_tube_count > 0;
     case SYS_FrontShield:
@@ -927,9 +841,9 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_RearShield:
         return shield_count > 1;
     case SYS_Reactor:
-        return true;
+        return entity.hasComponent<Reactor>();
     case SYS_BeamWeapons:
-        return true;
+        return entity.hasComponent<BeamWeaponSys>();
     case SYS_Maneuver:
         return turn_speed > 0.0f;
     case SYS_Impulse:
@@ -1198,15 +1112,15 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     //    ret += ":setImpulseMaxReverseSpeed(" + string(impulse_max_reverse_speed, 1) + ")";
     if (turn_speed != ship_template->turn_speed)
         ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
-    if (has_jump_drive != ship_template->has_jump_drive)
-        ret += ":setJumpDrive(" + string(has_jump_drive ? "true" : "false") + ")";
-    if (jump_drive_min_distance != ship_template->jump_drive_min_distance
-        || jump_drive_max_distance != ship_template->jump_drive_max_distance)
-        ret += ":setJumpDriveRange(" + string(jump_drive_min_distance) + ", " + string(jump_drive_max_distance) + ")";
-    if (has_warp_drive != (ship_template->warp_speed > 0))
-        ret += ":setWarpDrive(" + string(has_warp_drive ? "true" : "false") + ")";
-    if (warp_speed_per_warp_level != ship_template->warp_speed)
-        ret += ":setWarpSpeed(" + string(warp_speed_per_warp_level) + ")";
+    //if (has_jump_drive != ship_template->has_jump_drive)
+    //    ret += ":setJumpDrive(" + string(has_jump_drive ? "true" : "false") + ")";
+    //if (jump_drive_min_distance != ship_template->jump_drive_min_distance
+    //    || jump_drive_max_distance != ship_template->jump_drive_max_distance)
+    //    ret += ":setJumpDriveRange(" + string(jump_drive_min_distance) + ", " + string(jump_drive_max_distance) + ")";
+    //if (has_warp_drive != (ship_template->warp_speed > 0))
+    //    ret += ":setWarpDrive(" + string(has_warp_drive ? "true" : "false") + ")";
+    //if (warp_speed_per_warp_level != ship_template->warp_speed)
+    //    ret += ":setWarpSpeed(" + string(warp_speed_per_warp_level) + ")";
 
     // Shield data
     // Determine whether to export shield data.

@@ -12,6 +12,10 @@
 
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/warpdrive.h"
+#include "components/jumpdrive.h"
+#include "systems/jumpsystem.h"
+#include "systems/docking.h"
 
 #include "scriptInterface.h"
 
@@ -357,7 +361,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&can_launch_probe);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&jump_indicator, 0.5);
-    registerMemberReplication(&energy_warp_per_second, .5f);
     registerMemberReplication(&energy_shield_use_per_second, .5f);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
@@ -609,16 +612,6 @@ void PlayerSpaceship::update(float delta)
             shields_active = false;
         }
 
-        // If a ship is jumping or warping, consume additional energy.
-        if (has_warp_drive && warp_request > 0 && !(has_jump_drive && jump_delay > 0))
-        {
-            // If warping, consume energy at a rate of 120% the warp request.
-            // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(getEnergyWarpPerSecond() * delta * getSystemEffectiveness(SYS_Warp) * powf(current_warp, 1.3f) * (shields_active ? 1.7f : 1.0f)))
-                // If there's not enough energy, fall out of warp.
-                warp_request = 0;
-        }
-
         if (scanning_target)
         {
             // If the scan setting or a target's scan complexity is none/0,
@@ -718,13 +711,6 @@ void PlayerSpaceship::applyTemplateValues()
         on_new_player_ship_called = true;
         gameGlobalInfo->on_new_player_ship.call<void>(P<PlayerSpaceship>(this));
     }
-}
-
-void PlayerSpaceship::executeJump(float distance)
-{
-    // When jumping, reset the jump effect and move the ship.
-    jump_indicator = 2.0;
-    SpaceShip::executeJump(distance);
 }
 
 void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
@@ -1171,14 +1157,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             packet >> f;
         }
         } break;
-    case CMD_WARP:
-        packet >> warp_request;
-        break;
+    case CMD_WARP:{
+        auto warp = entity.getComponent<WarpDrive>();
+        if (warp)
+            packet >> warp->request;
+        else {
+            uint8_t i;
+            packet >> i;
+        }
+        } break;
     case CMD_JUMP:
         {
             float distance;
             packet >> distance;
-            initializeJump(distance);
+            JumpSystem::initializeJump(my_spaceship->entity, distance);
         }
         break;
     case CMD_SET_TARGET:
@@ -1293,14 +1285,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             int32_t id;
             packet >> id;
-            requestDock(game_server->getObjectById(id));
+            P<SpaceObject> obj = game_server->getObjectById(id);
+            if (obj)
+                DockingSystem::requestDock(entity, obj->entity);
         }
         break;
     case CMD_UNDOCK:
-        requestUndock();
+        DockingSystem::requestUndock(entity);
         break;
     case CMD_ABORT_DOCK:
-        abortDock();
+        DockingSystem::abortDock(entity);
         break;
     case CMD_OPEN_TEXT_COMM:
         if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
@@ -2074,10 +2068,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setEnergyShieldUsePerSecond(" + string(getEnergyShieldUsePerSecond(), 2) + ")";
     }
 
-    if (std::fabs(getEnergyWarpPerSecond() - default_energy_warp_per_second) > std::numeric_limits<float>::epsilon())
-    {
-        result += ":setEnergyWarpPerSecond(" + string(getEnergyWarpPerSecond(), 2) + ")";
-    }
+    //if (std::fabs(getEnergyWarpPerSecond() - default_energy_warp_per_second) > std::numeric_limits<float>::epsilon())
+    //    result += ":setEnergyWarpPerSecond(" + string(getEnergyWarpPerSecond(), 2) + ")";
     return result;
 }
 

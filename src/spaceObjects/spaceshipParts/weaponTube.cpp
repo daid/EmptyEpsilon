@@ -6,6 +6,7 @@
 #include "spaceObjects/missiles/hvli.h"
 #include "spaceObjects/spaceship.h"
 #include "multiplayer_server.h"
+#include "components/warpdrive.h"
 #include <SDL_assert.h>
 
 
@@ -96,7 +97,8 @@ void WeaponTube::fire(float target_angle)
     auto docking_port = parent->entity.getComponent<DockingPort>();
     if (docking_port && docking_port->state != DockingPort::State::NotDocking) return;
 
-    if (parent->current_warp > 0.0f) return;
+    auto warp = parent->entity.getComponent<WarpDrive>();
+    if (warp && warp->current > 0.0f) return;
     if (state != WTS_Loaded) return;
 
     if (type_loaded == MW_HVLI)
