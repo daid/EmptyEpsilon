@@ -294,7 +294,7 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
     if (isServer()) {
         entity = sp::ecs::Entity::create();
         //TODO: multiplayer_significant_range
-        entity.addComponent<sp::Position>();
+        entity.addComponent<sp::Transform>();
         entity.addComponent<sp::Physics>().setCircle(sp::Physics::Type::Sensor, collision_range);
     }
 
@@ -504,11 +504,11 @@ void SpaceObject::damageArea(glm::vec2 position, float blast_range, float min_da
     {
         auto ptr = entity.getComponent<SpaceObject*>();
         if (!ptr) continue;
-        auto pos = entity.getComponent<sp::Position>();
-        if (!pos) continue;
+        auto transform = entity.getComponent<sp::Transform>();
+        if (!transform) continue;
         P<SpaceObject> obj = *ptr;
 
-        float dist = glm::length(position - pos->getPosition()) - obj->getRadius() - min_range;
+        float dist = glm::length(position - transform->getPosition()) - obj->getRadius() - min_range;
         if (dist < 0) dist = 0;
         if (dist < blast_range - min_range)
         {
@@ -523,7 +523,7 @@ bool SpaceObject::areEnemiesInRange(float range)
     {
         auto ptr = entity.getComponent<SpaceObject*>();
         if (!ptr) continue;
-        auto pos = entity.getComponent<sp::Position>();
+        auto pos = entity.getComponent<sp::Transform>();
         if (!pos) continue;
         P<SpaceObject> obj = *ptr;
         if (obj && isEnemy(obj))
@@ -543,7 +543,7 @@ PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
     {
         auto ptr = entity.getComponent<SpaceObject*>();
         if (!ptr) continue;
-        auto pos = entity.getComponent<sp::Position>();
+        auto pos = entity.getComponent<sp::Transform>();
         if (!pos) continue;
         P<SpaceObject> obj = *ptr;
         auto r = range + obj->getRadius();
@@ -635,7 +635,7 @@ bool SpaceObject::sendCommsMessageNoLog(P<PlayerSpaceship> target, string messag
 glm::vec2 SpaceObject::getPosition() const
 {
     if (!entity) return {};
-    const auto position = entity.getComponent<sp::Position>();
+    const auto position = entity.getComponent<sp::Transform>();
     if (!position) return {};
     return position->getPosition();
 }
@@ -643,7 +643,7 @@ glm::vec2 SpaceObject::getPosition() const
 void SpaceObject::setPosition(glm::vec2 p)
 {
     if (!entity) return;
-    auto position = entity.getComponent<sp::Position>();
+    auto position = entity.getComponent<sp::Transform>();
     if (!position) return;
     position->setPosition(p);
 }
@@ -651,7 +651,7 @@ void SpaceObject::setPosition(glm::vec2 p)
 float SpaceObject::getRotation() const
 {
     if (!entity) return {};
-    auto position = entity.getComponent<sp::Position>();
+    auto position = entity.getComponent<sp::Transform>();
     if (!position) return {};
     return position->getRotation();
 }
@@ -659,7 +659,7 @@ float SpaceObject::getRotation() const
 void SpaceObject::setRotation(float a)
 {
     if (!entity) return;
-    auto position = entity.getComponent<sp::Position>();
+    auto position = entity.getComponent<sp::Transform>();
     if (!position) return;
     position->setRotation(a);
 }

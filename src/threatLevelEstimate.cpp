@@ -4,6 +4,7 @@
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/missiles/missileWeapon.h"
 #include "components/hull.h"
+#include "components/shields.h"
 #include "systems/collision.h"
 
 
@@ -52,11 +53,13 @@ float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
     if (ship->getShieldsActive())
         threat += 200;
 
-    for(int n=0; n<ship->shield_count; n++)
-        threat += ship->shield_max[n] - ship->shield_level[n];
     auto hull = ship->entity.getComponent<Hull>();
     if (hull)
         threat += hull->max - hull->current;
+    auto shields = ship->entity.getComponent<Shields>();
+    if (shields)
+        for(int n=0; n<shields->count; n++)
+            threat += shields->entry[n].max - shields->entry[n].level;
 
     float radius = 7000.0;
     
@@ -81,11 +84,13 @@ float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
         float score = 200.0f;
         if (hull)
             score += hull->max;
-        for(int n=0; n<other_ship->shield_count; n++)
-        {
-            score += other_ship->shield_max[n] * 2.0f / float(other_ship->shield_count);
-            if (other_ship->shield_hit_effect[n] > 0.0f)
-                is_being_attacked = true;
+        auto shields = entity.getComponent<Shields>();
+        if (shields) {
+            for(int n=0; n<shields->count; n++) {
+                score += shields->entry[n].max * 2.0f / float(shields->count);
+                if (shields->entry[n].hit_effect > 0.0f)
+                    is_being_attacked = true;
+            }
         }
         if (is_being_attacked)
             score += 500.0f;

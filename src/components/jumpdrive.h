@@ -2,6 +2,7 @@
 
 #include "stringImproved.h"
 #include "shipsystem.h"
+#include "tween.h"
 
 // Impulse engine component, indicate that this entity can move under impulse control.
 class JumpDrive : public ShipSystem {
@@ -18,4 +19,6 @@ public:
     float charge = 50000.0f; //[output]
     float distance = 0.0f;     //[output]
     float delay = 0.0f;        //[output]
+
+    float get_recharge_rate() { return Tween<float>::linear(getSystemEffectiveness(), 0.0, 1.0, -0.25, 1.0); }
 };

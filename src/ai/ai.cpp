@@ -10,9 +10,11 @@
 #include "components/jumpdrive.h"
 #include "components/hull.h"
 #include "components/beamweapon.h"
+#include "components/missiletubes.h"
 #include "systems/collision.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
+#include "systems/missilesystem.h"
 #include "ecs/query.h"
 
 
@@ -115,25 +117,26 @@ void ShipAI::updateWeaponState(float delta)
     float beam_strength_per_direction[4] = {0, 0, 0, 0};
 
     //If we have weapon tubes, load them with torpedoes
-    for(int n=0; n<owner->weapon_tube_count; n++)
-    {
-        WeaponTube& tube = owner->weapon_tube[n];
-        if (tube.isEmpty() && owner->weapon_storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
-            tube.startLoad(MW_EMP);
-        else if (tube.isEmpty() && owner->weapon_storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
-            tube.startLoad(MW_Nuke);
-        else if (tube.isEmpty() && owner->weapon_storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
-            tube.startLoad(MW_Homing);
-        else if (tube.isEmpty() && owner->weapon_storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
-            tube.startLoad(MW_HVLI);
-
-        //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
-        if (tube.isLoading() || tube.isLoaded())
+    auto tubes = owner->entity.getComponent<MissileTubes>();
+    if (tubes) {
+        for(int n=0; n<tubes->count; n++)
         {
-            int index = getDirectionIndex(tube.getDirection(), 90);
-            if (index >= 0)
+            auto& tube = tubes->mounts[n];
+            if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
+                MissileSystem::startLoad(owner->entity, tube, MW_EMP);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
+                MissileSystem::startLoad(owner->entity, tube, MW_Nuke);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
+                MissileSystem::startLoad(owner->entity, tube, MW_Homing);
+            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
+                MissileSystem::startLoad(owner->entity, tube, MW_HVLI);
+
+            //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
+            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded)
             {
-                tube_strength_per_direction[index] += getMissileWeaponStrength(tube.getLoadType()) / tube.getLoadTimeConfig();
+                int index = getDirectionIndex(tube.direction, 90);
+                if (index >= 0)
+                    tube_strength_per_direction[index] += getMissileWeaponStrength(tube.type_loaded) / tube.load_time;
             }
         }
     }
@@ -181,18 +184,16 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
-    if (has_missiles)
+    if (has_missiles && tubes)
     {
         float best_missile_strength = 0.0;
-        for(int n=0; n<owner->weapon_tube_count; n++)
+        for(int n=0; n<tubes->count; n++)
         {
-            WeaponTube& tube = owner->weapon_tube[n];
-            if (tube.isLoading() || tube.isLoaded())
-            {
-                int index = getDirectionIndex(tube.getDirection(), 90);
-                if (index == best_tube_index)
-                {
-                    EMissileWeapons type = tube.getLoadType();
+            auto& tube = tubes->mounts[n];
+            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded) {
+                int index = getDirectionIndex(tube.direction, 90);
+                if (index == best_tube_index) {
+                    EMissileWeapons type = tube.type_loaded;
                     float strenght = getMissileWeaponStrength(type);
                     if (strenght > best_missile_strength)
                     {
@@ -393,21 +394,24 @@ void ShipAI::runOrders()
                     owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
                 flyTowards(owner->getOrderTargetLocation());
             }
-        }else if (owner->weapon_tube_count > 0)
-        {
-            // Find a station which can re-stock our weapons.
-            P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), long_range);
-            if (new_target)
-            {
-                owner->orderRetreat(new_target);
-            }else{
-                auto diff = owner->getOrderTargetLocation() - owner->getPosition();
-                if (glm::length2(diff) < 1000.0f*1000.0f)
-                    owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
-                flyTowards(owner->getOrderTargetLocation());
-            }
         }else{
-            pathPlanner.clear();
+            auto tubes = owner->entity.getComponent<MissileTubes>();
+            if (tubes && tubes->count > 0)
+            {
+                // Find a station which can re-stock our weapons.
+                P<SpaceObject> new_target = findBestMissileRestockTarget(owner->getPosition(), long_range);
+                if (new_target)
+                {
+                    owner->orderRetreat(new_target);
+                }else{
+                    auto diff = owner->getOrderTargetLocation() - owner->getPosition();
+                    if (glm::length2(diff) < 1000.0f*1000.0f)
+                        owner->orderRoamingAt(glm::vec2(random(-long_range, long_range), random(-long_range, long_range)));
+                    flyTowards(owner->getOrderTargetLocation());
+                }
+            }else{
+                pathPlanner.clear();
+            }
         }
         break;
     case AI_StandGround:     //Keep current position, do not fly away, but attack nearby targets.
@@ -461,12 +465,15 @@ void ShipAI::runOrders()
             if (bay) {
                 if (bay->flags & DockingBay::RestockMissiles)
                 {
-                    for(int n = 0; n < MW_Count; n++)
-                    {
-                        if (owner->weapon_storage[n] < owner->weapon_storage_max[n])
+                    auto tubes = owner->entity.getComponent<MissileTubes>();
+                    if (tubes) {
+                        for(int n = 0; n < MW_Count; n++)
                         {
-                            allow_undock = false;
-                            break;
+                            if (tubes->storage[n] < tubes->storage_max[n])
+                            {
+                                allow_undock = false;
+                                break;
+                            }
                         }
                     }
                 }
@@ -527,15 +534,16 @@ void ShipAI::runAttack(P<SpaceObject> target)
     // missile attack
     if (distance < 4500 && has_missiles)
     {
-        for(int n=0; n<owner->weapon_tube_count; n++)
+        auto tubes = owner->entity.getComponent<MissileTubes>();
+        for(int n=0; tubes && n<tubes->count; n++)
         {
-            if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0f)
+            if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
             {
-                float target_angle = calculateFiringSolution(target, n);
+                float target_angle = calculateFiringSolution(target, tubes->mounts[n]);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
-                    owner->weapon_tube[n].fire(target_angle);
-                    missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0f;
+                    MissileSystem::fire(owner->entity, tubes->mounts[n], target_angle, target->entity);
+                    missile_fire_delay = tubes->mounts[n].load_time / tubes->count / 2.0f;
                 }
             }
         }
@@ -756,7 +764,7 @@ bool ShipAI::betterTarget(P<SpaceObject> new_target, P<SpaceObject> current_targ
     return false;
 }
 
-float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
+float ShipAI::calculateFiringSolution(P<SpaceObject> target, const MissileTubes::MountPoint& tube)
 {
     // Update ranges before calculating
     short_range = owner->getShortRangeRadarRange();
@@ -767,7 +775,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         return std::numeric_limits<float>::infinity();
     }
 
-    EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
+    EMissileWeapons type = tube.type_loaded;
 
     // Search if a non-enemy ship might be damaged by a missile attack on a
     // line of fire within our short-range radar range.
@@ -801,7 +809,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 
         auto target_position = target->getPosition();
         float target_angle = vec2ToAngle(target_position - owner->getPosition());
-        float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
+        float fire_angle = owner->getRotation() + tube.direction;
 
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = angleDifference(target_angle, fire_angle);
@@ -841,7 +849,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
     }
 
     //Use the general weapon tube targeting to get the final firing solution.
-    return owner->weapon_tube[tube_index].calculateFiringSolution(target);
+    return MissileSystem::calculateFiringSolution(owner->entity, tube, target->entity);
 }
 
 P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float radius)
@@ -879,4 +887,3 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
     }
     return target;
 }
-

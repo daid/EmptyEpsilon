@@ -3,6 +3,7 @@
 
 #include "nonCopyable.h"
 #include "pathPlanner.h"
+#include "components/missiletubes.h"
 
 ///Forward declaration
 class CpuShip;
@@ -80,7 +81,7 @@ protected:
     /**!
      * Used for missiles, as they require some intelligence to fire.
      */
-    float calculateFiringSolution(P<SpaceObject> target, int tube_index);
+    float calculateFiringSolution(P<SpaceObject> target, const MissileTubes::MountPoint& tube);
     P<SpaceObject> findBestMissileRestockTarget(glm::vec2 position, float radius);
 
     static float getMissileWeaponStrength(EMissileWeapons type)

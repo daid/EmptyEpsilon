@@ -5,6 +5,9 @@
 #include "components/collision.h"
 #include "components/beamweapon.h"
 #include "components/hull.h"
+#include "components/shields.h"
+#include "components/missiletubes.h"
+#include "systems/missilesystem.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/nebula.h"
@@ -462,72 +465,75 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
     const float seconds_per_distance_tick = 5.0f;
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    if (my_spaceship && missile_tube_controls)
-    {
-        for(int n=0; n<my_spaceship->weapon_tube_count; n++)
-        {
-            if (!my_spaceship->weapon_tube[n].isLoaded())
-                continue;
-            auto fire_position = my_spaceship->getPosition() + rotateVec2(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
-
-            const MissileWeaponData& data = MissileWeaponData::getDataFor(my_spaceship->weapon_tube[n].getLoadType());
-            float fire_angle = my_spaceship->weapon_tube[n].getDirection() + (my_spaceship->getRotation());
-            float missile_target_angle = fire_angle;
-            if (data.turnrate > 0.0f)
+    if (my_spaceship && missile_tube_controls) {
+        auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+        if (tubes) {
+            for(int n=0; n<tubes->count; n++)
             {
-                if (missile_tube_controls->getManualAim())
+                if (tubes->mounts[n].state != MissileTubes::MountPoint::State::Loaded)
+                    continue;
+                auto& mount = tubes->mounts[n];
+                auto fire_position = my_spaceship->getPosition() + rotateVec2(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+
+                const MissileWeaponData& data = MissileWeaponData::getDataFor(mount.type_loaded);
+                float fire_angle = mount.direction + (my_spaceship->getRotation());
+                float missile_target_angle = fire_angle;
+                if (data.turnrate > 0.0f)
                 {
-                    missile_target_angle = missile_tube_controls->getMissileTargetAngle();
-                }else{
-                    float firing_solution = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
-                    if (firing_solution != std::numeric_limits<float>::infinity())
-                        missile_target_angle = firing_solution;
+                    if (missile_tube_controls->getManualAim())
+                    {
+                        missile_target_angle = missile_tube_controls->getMissileTargetAngle();
+                    }else if (my_spaceship->getTarget()) {
+                        float firing_solution = MissileSystem::calculateFiringSolution(my_spaceship->entity, mount, my_spaceship->getTarget()->entity);
+                        if (firing_solution != std::numeric_limits<float>::infinity())
+                            missile_target_angle = firing_solution;
+                    }
                 }
-            }
 
-            float angle_diff = angleDifference(missile_target_angle, fire_angle);
-            float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
-            if (data.turnrate == 0.0f)
-                turn_radius = 0.0f;
+                float angle_diff = angleDifference(missile_target_angle, fire_angle);
+                float turn_radius = ((360.0f / data.turnrate) * data.speed) / (2.0f * float(M_PI));
+                if (data.turnrate == 0.0f)
+                    turn_radius = 0.0f;
 
-            float left_or_right = 90;
-            if (angle_diff > 0)
-                left_or_right = -90;
+                float left_or_right = 90;
+                if (angle_diff > 0)
+                    left_or_right = -90;
 
-            auto turn_center = vec2FromAngle(fire_angle + left_or_right) * turn_radius;
-            auto turn_exit = turn_center + vec2FromAngle(missile_target_angle - left_or_right) * turn_radius;
+                auto turn_center = vec2FromAngle(fire_angle + left_or_right) * turn_radius;
+                auto turn_exit = turn_center + vec2FromAngle(missile_target_angle - left_or_right) * turn_radius;
 
-            float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * float(M_PI));
-            float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
-            float length_after_turn = data.speed * lifetime_after_turn;
+                float turn_distance = fabs(angle_diff) / 360.0f * (turn_radius * 2.0f * float(M_PI));
+                float lifetime_after_turn = data.lifetime - turn_distance / data.speed;
+                float length_after_turn = data.speed * lifetime_after_turn;
 
-            std::vector<glm::vec2> missile_path;
-            missile_path.push_back(worldToScreen(fire_position));
-            for(int cnt=0; cnt<10; cnt++)
-                missile_path.push_back(worldToScreen(fire_position + (turn_center + vec2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius)));
-            missile_path.push_back(worldToScreen(fire_position + turn_exit));
-            missile_path.push_back(worldToScreen(fire_position + (turn_exit + vec2FromAngle(missile_target_angle) * length_after_turn)));
-            renderer.drawLine(missile_path, glm::u8vec4(255, 255, 255, 128));
+                std::vector<glm::vec2> missile_path;
+                missile_path.push_back(worldToScreen(fire_position));
+                for(int cnt=0; cnt<10; cnt++)
+                    missile_path.push_back(worldToScreen(fire_position + (turn_center + vec2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius)));
+                missile_path.push_back(worldToScreen(fire_position + turn_exit));
+                missile_path.push_back(worldToScreen(fire_position + (turn_exit + vec2FromAngle(missile_target_angle) * length_after_turn)));
+                renderer.drawLine(missile_path, glm::u8vec4(255, 255, 255, 128));
 
-            float offset = seconds_per_distance_tick * data.speed;
-            for(int cnt=0; cnt<floor(data.lifetime / seconds_per_distance_tick); cnt++)
-            {
-                glm::vec2 p;
-                glm::vec2 n{};
-                if (offset < turn_distance)
+                float offset = seconds_per_distance_tick * data.speed;
+                for(int cnt=0; cnt<floor(data.lifetime / seconds_per_distance_tick); cnt++)
                 {
-                    n = vec2FromAngle(fire_angle - (angle_diff * offset / turn_distance) - left_or_right);
-                    p = worldToScreen(fire_position + (turn_center + n * turn_radius));
-                }else{
-                    p = worldToScreen(fire_position + (turn_exit + vec2FromAngle(missile_target_angle) * (offset - turn_distance)));
-                    n = vec2FromAngle(missile_target_angle + 90.0f);
+                    glm::vec2 p;
+                    glm::vec2 n{};
+                    if (offset < turn_distance)
+                    {
+                        n = vec2FromAngle(fire_angle - (angle_diff * offset / turn_distance) - left_or_right);
+                        p = worldToScreen(fire_position + (turn_center + n * turn_radius));
+                    }else{
+                        p = worldToScreen(fire_position + (turn_exit + vec2FromAngle(missile_target_angle) * (offset - turn_distance)));
+                        n = vec2FromAngle(missile_target_angle + 90.0f);
+                    }
+                    n = rotateVec2(n, -view_rotation);
+                    n = glm::normalize(n);
+
+                    renderer.drawLine(p - glm::vec2(n.x, n.y) * 10.0f, p + glm::vec2(n.x, n.y) * 10.0f, glm::u8vec4{255,255,255,255});
+
+                    offset += seconds_per_distance_tick * data.speed;
                 }
-                n = rotateVec2(n, -view_rotation);
-                n = glm::normalize(n);
-
-                renderer.drawLine(p - glm::vec2(n.x, n.y) * 10.0f, p + glm::vec2(n.x, n.y) * 10.0f, glm::u8vec4{255,255,255,255});
-
-                offset += seconds_per_distance_tick * data.speed;
             }
         }
     }
@@ -555,17 +561,17 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
 {
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    if (my_spaceship)
+    if (!my_spaceship) return;
+    auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+    if (!tubes) return;
+    for(int n=0; n<tubes->count; n++)
     {
-        for(int n=0; n<my_spaceship->weapon_tube_count; n++)
-        {
-            auto fire_position = my_spaceship->getPosition() + rotateVec2(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
-            auto fire_draw_position = worldToScreen(fire_position);
+        auto fire_position = my_spaceship->getPosition() + rotateVec2(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+        auto fire_draw_position = worldToScreen(fire_position);
 
-            float fire_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection() - view_rotation;
+        float fire_angle = my_spaceship->getRotation() + tubes->mounts[n].direction - view_rotation;
 
-            renderer.drawLine(fire_draw_position, fire_draw_position + (vec2FromAngle(fire_angle) * 1000.0f * scale), glm::u8vec4(128, 128, 128, 128), glm::u8vec4(128, 128, 128, 0));
-        }
+        renderer.drawLine(fire_draw_position, fire_draw_position + (vec2FromAngle(fire_angle) * 1000.0f * scale), glm::u8vec4(128, 128, 128, 128), glm::u8vec4(128, 128, 128, 0));
     }
 }
 
@@ -796,8 +802,8 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     // Draw beam arcs on short-range radar only, and only for fully scanned
     // ships.
     if (!long_range) {
-        for(auto [entity, beamsystem, position, obj] : sp::ecs::Query<BeamWeaponSys, sp::Position, SpaceObject*>()) {
-            auto object_position_on_screen = worldToScreen(position.getPosition());
+        for(auto [entity, beamsystem, transform, obj] : sp::ecs::Query<BeamWeaponSys, sp::Transform, SpaceObject*>()) {
+            auto object_position_on_screen = worldToScreen(transform.getPosition());
             if (!obj || (my_spaceship && (obj->getScannedStateFor(my_spaceship) != SS_FullScan)))
                 continue;
 
@@ -817,10 +823,10 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
                 float beam_range = mount.range;
 
                 // Set the beam's origin on radar to its relative position on the mesh.
-                auto beam_offset = rotateVec2(glm::vec2(mount.position.x, mount.position.y) * scale, position.getRotation() - view_rotation);
+                auto beam_offset = rotateVec2(glm::vec2(mount.position.x, mount.position.y) * scale, transform.getRotation() - view_rotation);
                 auto arc_center = beam_offset + object_position_on_screen;
 
-                draw_arc(arc_center, position.getRotation() - view_rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
+                draw_arc(arc_center, transform.getRotation() - view_rotation + (beam_direction - beam_arc / 2.0f), beam_arc, beam_range * scale, color);
             
 
                 // If the beam is turreted, draw the turret's arc. Otherwise, exit.
@@ -835,13 +841,13 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
                 // TODO: Make this color configurable.
                 color.a /= 4;
 
-                draw_arc(arc_center, position.getRotation() - view_rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
+                draw_arc(arc_center, transform.getRotation() - view_rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
             }
         }
     }
     
-    for(auto [entity, trace, position, obj] : sp::ecs::Query<RadarTrace, sp::Position, SpaceObject*>()) {
-        auto object_position_on_screen = worldToScreen(position.getPosition());
+    for(auto [entity, trace, transform, obj] : sp::ecs::Query<RadarTrace, sp::Transform, SpaceObject*>()) {
+        auto object_position_on_screen = worldToScreen(transform.getPosition());
         //TODO: Only draw things that are in range of this radar view.
 
         auto size = trace.radius * scale * 2.0f;
@@ -879,6 +885,68 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         else
             renderer.drawSprite(icon, object_position_on_screen, size, color);
     }
+
+    if (!long_range) {
+        for(auto [entity, shields, transform, obj] : sp::ecs::Query<Shields, sp::Transform, SpaceObject*>()) {
+            //TODO: Only draw things that are in range of this radar view.
+            if (!shields.active)
+                continue;
+            auto object_position_on_screen = worldToScreen(transform.getPosition());
+            bool show_levels = (!my_spaceship || obj->getScannedStateFor(my_spaceship) >= SS_SimpleScan);
+            float sprite_scale = scale * obj->getRadius() * 1.5f / 32;
+
+            if (shields.count == 1)
+            {
+                glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
+                if (show_levels)
+                {
+                    float level = shields.entry[0].level / shields.entry[0].max;
+                    color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
+                }
+                if (shields.entry[0].hit_effect > 0.0f)
+                {
+                    color = Tween<glm::u8vec4>::linear(shields.entry[0].hit_effect, 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
+                }
+                renderer.drawSprite("shield_circle.png", object_position_on_screen, sprite_scale * 0.25f * 1.5f * 256.0f, color);
+            }else if (shields.count > 1) {
+                float direction = transform.getRotation() - view_rotation;
+                float arc = 360.0f / float(shields.count);
+
+                for(int n=0; n<shields.count; n++)
+                {
+                    auto& shield = shields.entry[n];
+                    glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
+                    if (show_levels)
+                    {
+                        float level = shield.level / shield.max;
+                        color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
+                    }
+                    if (shield.hit_effect > 0.0f)
+                    {
+                        color = Tween<glm::u8vec4>::linear(shield.hit_effect, 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
+                    }
+
+                    glm::vec2 delta_a = vec2FromAngle(direction - arc / 2.0f);
+                    glm::vec2 delta_b = vec2FromAngle(direction);
+                    glm::vec2 delta_c = vec2FromAngle(direction + arc / 2.0f);
+                    
+                    auto p0 = object_position_on_screen + delta_b * sprite_scale * 32.0f * 0.05f;
+                    renderer.drawTexturedQuad("shield_circle.png",
+                        p0,
+                        p0 + delta_a * sprite_scale * 32.0f * 1.5f,
+                        p0 + delta_b * sprite_scale * 32.0f * 1.5f,
+                        p0 + delta_c * sprite_scale * 32.0f * 1.5f,
+                        glm::vec2(0.5, 0.5),
+                        glm::vec2(0.5, 0.5) + delta_a * 0.5f,
+                        glm::vec2(0.5, 0.5) + delta_b * 0.5f,
+                        glm::vec2(0.5, 0.5) + delta_c * 0.5f,
+                        color);
+                    direction += arc;
+                }
+            }
+        }
+    }
+
 
     if (my_spaceship)
     {

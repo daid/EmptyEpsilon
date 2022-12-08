@@ -5,7 +5,7 @@
 constexpr static float damage_per_second_on_overheat = 0.08f;
 
 
-float ShipSystem::get_system_effectiveness()
+float ShipSystem::getSystemEffectiveness()
 {
     float power = power_level;
 
@@ -33,7 +33,7 @@ float ShipSystem::get_system_effectiveness()
     return std::max(0.0f, power * (1.0f - heat_level));
 }
 
-void ShipSystem::add_heat(float amount)
+void ShipSystem::addHeat(float amount)
 {
     heat_level += amount;
 

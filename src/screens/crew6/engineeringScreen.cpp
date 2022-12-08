@@ -5,6 +5,8 @@
 #include "components/reactor.h"
 #include "components/beamweapon.h"
 #include "components/hull.h"
+#include "components/jumpdrive.h"
+#include "components/shields.h"
 
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
@@ -325,38 +327,47 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             case SYS_Warp:
                 addSystemEffect(tr("Warp drive speed"), toNearbyIntString(effectiveness * 100) + "%");
                 break;
-            case SYS_JumpDrive:
-                addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(my_spaceship->getJumpDriveRechargeRate() * 100) + "%");
-                addSystemEffect(tr("Jump drive jump speed"), toNearbyIntString(effectiveness * 100) + "%");
-                break;
-            case SYS_FrontShield:
-                if (gameGlobalInfo->use_beam_shield_frequencies)
-                    addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0f * 100) + "%");
-                addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
-                {
-                    DamageInfo di;
-                    di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, 0);
-                    if (damage_negate < 0.0f)
-                        addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
-                    else
-                        addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
+            case SYS_JumpDrive:{
+                auto jump = my_spaceship->entity.getComponent<JumpDrive>();
+                if (jump) {
+                    addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(jump->get_recharge_rate() * 100) + "%");
+                    addSystemEffect(tr("Jump drive jump speed"), toNearbyIntString(effectiveness * 100) + "%");
                 }
-                break;
-            case SYS_RearShield:
-                if (gameGlobalInfo->use_beam_shield_frequencies)
-                    addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0f * 100) + "%");
-                addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
-                {
-                    DamageInfo di;
-                    di.type = DT_Kinetic;
-                    float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, my_spaceship->shield_count - 1);
-                    if (damage_negate < 0.0f)
-                        addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
-                    else
-                        addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
+                }break;
+            case SYS_FrontShield:{
+                auto shields = my_spaceship->entity.getComponent<Shields>();
+                if (shields) {
+                    if (gameGlobalInfo->use_beam_shield_frequencies)
+                        addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((shields->front_system.getSystemEffectiveness() + shields->rear_system.getSystemEffectiveness()) / 2.0f * 100) + "%");
+                    addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
+                    {
+                        DamageInfo di;
+                        di.type = DT_Kinetic;
+                        float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, 0);
+                        if (damage_negate < 0.0f)
+                            addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
+                        else
+                            addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
+                    }
                 }
-                break;
+                }break;
+            case SYS_RearShield:{
+                auto shields = my_spaceship->entity.getComponent<Shields>();
+                if (shields) {
+                    if (gameGlobalInfo->use_beam_shield_frequencies)
+                        addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((shields->front_system.getSystemEffectiveness() + shields->rear_system.getSystemEffectiveness()) / 2.0f * 100) + "%");
+                    addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
+                    {
+                        DamageInfo di;
+                        di.type = DT_Kinetic;
+                        float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, shields->count - 1);
+                        if (damage_negate < 0.0f)
+                            addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
+                        else
+                            addSystemEffect(tr("Damage negate"), toNearbyIntString(damage_negate * 100) + "%");
+                    }
+                }
+                }break;
             default:
                 break;
             }

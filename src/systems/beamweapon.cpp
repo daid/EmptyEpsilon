@@ -15,14 +15,14 @@ void BeamWeaponSystem::update(float delta)
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
-    for(auto [entity, beamsys, position, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, sp::Position, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
+    for(auto [entity, beamsys, transform, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
         if (!beamsys.target) continue;
         P<SpaceShip> ship = P<SpaceObject>(obj);
         auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {
             if (mount.cooldown > 0.0f)
-                mount.cooldown -= delta * beamsys.get_system_effectiveness();
+                mount.cooldown -= delta * beamsys.getSystemEffectiveness();
 
             P<SpaceObject> target = *beamsys.target.getComponent<SpaceObject*>();
 
@@ -31,7 +31,7 @@ void BeamWeaponSystem::update(float delta)
             if (mount.range > 0.0f && target && obj->isEnemy(target) && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
             {
                 // Get the angle to the target.
-                auto diff = target->getPosition() - (position.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), position.getRotation()));
+                auto diff = target->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
                 float distance = glm::length(diff) - target->getRadius() / 2.0f;
 
                 // We also only care if the target is within no more than its
@@ -40,12 +40,12 @@ void BeamWeaponSystem::update(float delta)
                 if (distance < mount.range * 1.3f)
                 {
                     float angle = vec2ToAngle(diff);
-                    float angle_diff = angleDifference(mount.direction + position.getRotation(), angle);
+                    float angle_diff = angleDifference(mount.direction + transform.getRotation(), angle);
 
                     if (mount.turret_arc > 0)
                     {
                         // Get the target's angle relative to the turret's direction.
-                        float turret_angle_diff = angleDifference(mount.turret_direction + position.getRotation(), angle);
+                        float turret_angle_diff = angleDifference(mount.turret_direction + transform.getRotation(), angle);
 
                         // If the turret can rotate ...
                         if (mount.turret_rotation_rate > 0)
@@ -56,7 +56,7 @@ void BeamWeaponSystem::update(float delta)
                                 // ... rotate the turret's beam toward the target.
                                 if (fabsf(angle_diff) > 0)
                                 {
-                                    mount.direction += (angle_diff / fabsf(angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.get_system_effectiveness(), fabsf(angle_diff));
+                                    mount.direction += (angle_diff / fabsf(angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.getSystemEffectiveness(), fabsf(angle_diff));
                                 }
                             // If the target is outside of the turret's arc ...
                             } else {
@@ -66,7 +66,7 @@ void BeamWeaponSystem::update(float delta)
 
                                 if (fabsf(reset_angle_diff) > 0)
                                 {
-                                    mount.direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.get_system_effectiveness(), fabsf(reset_angle_diff));
+                                    mount.direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.getSystemEffectiveness(), fabsf(reset_angle_diff));
                                 }
                             }
                         }
@@ -77,7 +77,7 @@ void BeamWeaponSystem::update(float delta)
                     if (distance < mount.range && mount.cooldown <= 0.0f && fabsf(angle_diff) < mount.arc / 2.0f && (!reactor || reactor->use_energy(mount.energy_per_beam_fire)))
                     {
                         // ... add heat to the beam and zap the target.
-                        beamsys.add_heat(mount.heat_per_beam_fire);
+                        beamsys.addHeat(mount.heat_per_beam_fire);
 
                         //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
                         //  we now know if this ship is an enemy or friend.
@@ -86,7 +86,7 @@ void BeamWeaponSystem::update(float delta)
 
                         mount.cooldown = mount.cycle_time; // Reset time of weapon
 
-                        auto hit_location = target->getPosition() - glm::normalize(target->getPosition() - position.getPosition()) * target->getRadius();
+                        auto hit_location = target->getPosition() - glm::normalize(target->getPosition() - transform.getPosition()) * target->getRadius();
                         P<BeamEffect> effect = new BeamEffect();
                         effect->setSource(obj, mount.position);
                         effect->setTarget(target, hit_location);
@@ -107,7 +107,7 @@ void BeamWeaponSystem::update(float delta)
 
                 if (fabsf(reset_angle_diff) > 0)
                 {
-                    mount.direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.get_system_effectiveness(), fabsf(reset_angle_diff));
+                    mount.direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(mount.turret_rotation_rate * beamsys.getSystemEffectiveness(), fabsf(reset_angle_diff));
                 }
             }
         }

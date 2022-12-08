@@ -15,7 +15,7 @@ protected:
 
 public:
     P<SpaceObject> owner; //Only valid on server.
-    int32_t target_id;
+    sp::ecs::Entity target;
     float target_angle;
     // Damage modifier for this missile which indicates it's size. (eg; Missiles by fighters have a low modifier), missiles from
     // capital ships have a high modifier.

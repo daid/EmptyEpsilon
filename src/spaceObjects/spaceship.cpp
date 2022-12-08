@@ -23,7 +23,9 @@
 #include "components/jumpdrive.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
+#include "components/shields.h"
 #include "components/hull.h"
+#include "components/missiletubes.h"
 
 #include "scriptInterface.h"
 
@@ -184,7 +186,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 {
     target_rotation = getRotation();
     wormhole_alpha = 0.f;
-    weapon_tube_count = 0;
     turn_speed = 10.f;
     combat_maneuver_charge = 1.f;
     combat_maneuver_boost_request = 0.f;
@@ -194,16 +195,13 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
     target_id = -1;
-    shield_frequency = irandom(0, max_frequency);
     turnSpeed = 0.0f;
 
     registerMemberReplication(&target_rotation, 1.5f);
     registerMemberReplication(&turnSpeed, 0.1f);
     registerMemberReplication(&wormhole_alpha, 0.5f);
-    registerMemberReplication(&weapon_tube_count);
     registerMemberReplication(&target_id);
     registerMemberReplication(&turn_speed);
-    registerMemberReplication(&shield_frequency);
     registerMemberReplication(&combat_maneuver_charge, 0.5f);
     registerMemberReplication(&combat_maneuver_boost_request);
     registerMemberReplication(&combat_maneuver_boost_active, 0.2f);
@@ -233,20 +231,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
         registerMemberReplication(&systems[n].hacked_level, 0.1f);
     }
 
-    for(int n = 0; n < max_weapon_tubes; n++)
-    {
-        weapon_tube[n].setParent(this);
-        weapon_tube[n].setIndex(n);
-    }
-
-    for(int n = 0; n < MW_Count; n++)
-    {
-        weapon_storage[n] = 0;
-        weapon_storage_max[n] = 0;
-        registerMemberReplication(&weapon_storage[n]);
-        registerMemberReplication(&weapon_storage_max[n]);
-    }
-
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
 
@@ -260,6 +244,10 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
     if (entity) {
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.flags |= RadarTrace::ArrowIfNotScanned;
+
+        auto shields = entity.getComponent<Shields>();
+        if (shields)
+            shields->frequency = irandom(0, max_frequency);
     }
 }
 
@@ -289,7 +277,6 @@ void SpaceShip::applyTemplateValues()
             mount.heat_per_beam_fire = ship_template->beams[n].getHeatPerFire();
         }
     }
-    weapon_tube_count = ship_template->weapon_tube_count;
 
     if (ship_template->energy_storage_amount) {
         auto& reactor = entity.getOrAddComponent<Reactor>();
@@ -319,22 +306,20 @@ void SpaceShip::applyTemplateValues()
         jump.min_distance = ship_template->jump_drive_min_distance;
         jump.max_distance = ship_template->jump_drive_max_distance;
     }
-    for(int n=0; n<max_weapon_tubes; n++)
-    {
-        weapon_tube[n].setLoadTimeConfig(ship_template->weapon_tube[n].load_time);
-        weapon_tube[n].setDirection(ship_template->weapon_tube[n].direction);
-        weapon_tube[n].setSize(ship_template->weapon_tube[n].size);
-        for(int m=0; m<MW_Count; m++)
+    if (ship_template->weapon_tube_count) {
+        auto& tubes = entity.getOrAddComponent<MissileTubes>();
+        tubes.count = ship_template->weapon_tube_count;
+        for(int n=0; n<ship_template->weapon_tube_count; n++)
         {
-            if (ship_template->weapon_tube[n].type_allowed_mask & (1 << m))
-                weapon_tube[n].allowLoadOf(EMissileWeapons(m));
-            else
-                weapon_tube[n].disallowLoadOf(EMissileWeapons(m));
+            auto& tube = tubes.mounts[n];
+            tube.load_time = ship_template->weapon_tube[n].load_time;
+            tube.direction = ship_template->weapon_tube[n].direction;
+            tube.size = ship_template->weapon_tube[n].size;
+            tube.type_allowed_mask = ship_template->weapon_tube[n].type_allowed_mask;
         }
+        for(int n=0; n<MW_Count; n++)
+            tubes.storage[n] = tubes.storage_max[n] = ship_template->weapon_storage[n];
     }
-    //shipTemplate->has_cloaking;
-    for(int n=0; n<MW_Count; n++)
-        weapon_storage[n] = weapon_storage_max[n] = ship_template->weapon_storage[n];
 
     ship_template->setCollisionData(this);
     model_info.setData(ship_template->model_data);
@@ -416,24 +401,6 @@ void SpaceShip::updateDynamicRadarSignature()
     // Update the signature by adding the delta to its baseline.
     if (entity)
         entity.addComponent<DynamicRadarSignatureInfo>(signature_delta);
-}
-
-void SpaceShip::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
-{
-    // If not on long-range radar ...
-    if (!long_range)
-    {
-        // ... and the ship being drawn is either not our ship or has been
-        // scanned ...
-        if (!my_spaceship || getScannedStateFor(my_spaceship) >= SS_SimpleScan)
-        {
-            // ... draw and show shield indicators on our radar.
-            drawShieldsOnRadar(renderer, position, scale, rotation, 1.f, true);
-        } else {
-            // Otherwise, draw the indicators, but don't show them.
-            drawShieldsOnRadar(renderer, position, scale, rotation, 1.f, false);
-        }
-    }
 }
 
 void SpaceShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
@@ -518,11 +485,6 @@ void SpaceShip::update(float delta)
     addHeat(SYS_Impulse, fabs(combat_maneuver_boost_active) * delta * heat_per_combat_maneuver_boost);
     addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
 
-    for(int n=0; n<max_weapon_tubes; n++)
-    {
-        weapon_tube[n].update(delta);
-    }
-
     for(int n=0; n<SYS_COUNT; n++)
     {
         systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
@@ -542,20 +504,6 @@ void SpaceShip::update(float delta)
         model_info.warp_scale = 0.f;
     
     updateDynamicRadarSignature();
-}
-
-float SpaceShip::getShieldRechargeRate(int shield_index)
-{
-    float rate = 0.3f;
-    rate *= getSystemEffectiveness(getShieldSystemForShieldIndex(shield_index));
-    auto port = entity.getComponent<DockingPort>();
-    if (port && port->state == DockingPort::State::Docked && port->target)
-    {
-        auto bay = port->target.getComponent<DockingBay>();
-        if (bay && (bay->flags & DockingBay::ChargeShield))
-            rate *= 4.0f;
-    }
-    return rate;
 }
 
 P<SpaceObject> SpaceShip::getTarget()
@@ -727,18 +675,22 @@ void SpaceShip::hackFinished(P<SpaceObject> source, string target)
 
 float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
 {
+    auto shields = entity.getComponent<Shields>();
+    if (!shields)
+        return 1.0f;
+
     float frequency_damage_factor = 1.f;
     if (info.type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
     {
-        frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shield_frequency);
+        frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shields->frequency);
     }
-    ESystem system = getShieldSystemForShieldIndex(shield_index);
+    auto system = shields->getSystemForIndex(shield_index);
 
     //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
     // This also greatly reduces the ineffectiveness at low power situations.
     float shield_damage_exponent = 1.6f;
     float shield_damage_divider = 7.0f;
-    float shield_damage_factor = 1.0f + powf(1.0f, shield_damage_exponent) / shield_damage_divider-powf(getSystemEffectiveness(system), shield_damage_exponent) / shield_damage_divider;
+    float shield_damage_factor = 1.0f + powf(1.0f, shield_damage_exponent) / shield_damage_divider-powf(system.getSystemEffectiveness(), shield_damage_exponent) / shield_damage_divider;
 
     return shield_damage_factor * frequency_damage_factor;
 }
@@ -814,8 +766,13 @@ void SpaceShip::destroyedByDamage(DamageInfo& info)
         auto hull = entity.getComponent<Hull>();
         if (hull)
             points += hull->max * 0.1f;
-        for(int n=0; n<shield_count; n++)
-            points += shield_max[n] * 0.1f;
+
+        auto shields = entity.getComponent<Shields>();
+        if (shields)
+        {
+            for(int n=0; n<shields->count; n++)
+                points += shields->entry[n].max * 0.1f;
+        }
         if (isEnemy(info.instigator))
             info.instigator->addReputationPoints(points);
         else
@@ -835,11 +792,16 @@ bool SpaceShip::hasSystem(ESystem system)
     case SYS_JumpDrive:
         return entity.hasComponent<JumpDrive>();
     case SYS_MissileSystem:
-        return weapon_tube_count > 0;
+        return entity.hasComponent<MissileTubes>();
     case SYS_FrontShield:
-        return shield_count > 0;
+        return entity.hasComponent<Shields>();
     case SYS_RearShield:
-        return shield_count > 1;
+        {
+            auto shields = entity.getComponent<Shields>();
+            if (shields && shields->count > 1)
+                return true;
+            return false;
+        }
     case SYS_Reactor:
         return entity.hasComponent<Reactor>();
     case SYS_BeamWeapons:
@@ -910,85 +872,66 @@ void SpaceShip::setBeamWeaponDamageType(int index, EDamageType type) { /* TODO *
 
 void SpaceShip::setWeaponTubeCount(int amount)
 {
-    weapon_tube_count = std::max(0, std::min(amount, max_weapon_tubes));
-    for(int n=weapon_tube_count; n<max_weapon_tubes; n++)
-    {
-        weapon_tube[n].forceUnload();
-    }
+    //TODO
 }
 
 int SpaceShip::getWeaponTubeCount()
 {
-    return weapon_tube_count;
+    //TODO
+    return 0;
 }
 
 EMissileWeapons SpaceShip::getWeaponTubeLoadType(int index)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return MW_None;
-    if (!weapon_tube[index].isLoaded())
-        return MW_None;
-    return weapon_tube[index].getLoadType();
+    //TODO
+    return MW_None;
 }
 
 void SpaceShip::weaponTubeAllowMissle(int index, EMissileWeapons type)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].allowLoadOf(type);
+    //TODO
+    return;
 }
 
 void SpaceShip::weaponTubeDisallowMissle(int index, EMissileWeapons type)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].disallowLoadOf(type);
+    //TODO
+    return;
 }
 
 void SpaceShip::setWeaponTubeExclusiveFor(int index, EMissileWeapons type)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    for(int n=0; n<MW_Count; n++)
-        weapon_tube[index].disallowLoadOf(EMissileWeapons(n));
-    weapon_tube[index].allowLoadOf(type);
+    //TODO
+    return;
 }
 
 void SpaceShip::setWeaponTubeDirection(int index, float direction)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].setDirection(direction);
+    //TODO
+    return;
 }
 
 void SpaceShip::setTubeSize(int index, EMissileSizes size)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return;
-    weapon_tube[index].setSize(size);
+    //TODO
+    return;
 }
 
 EMissileSizes SpaceShip::getTubeSize(int index)
 {
-    if (index < 0 || index >= weapon_tube_count)
-        return MS_Medium;
-    return weapon_tube[index].getSize();
+    //TODO
+    return MS_Medium;
 }
 
 float SpaceShip::getTubeLoadTime(int index)
 {
-    if (index < 0 || index >= weapon_tube_count) {
-        return 0;
-    }
-    return weapon_tube[index].getLoadTimeConfig();
+    //TODO
+    return 0;
 }
 
 void SpaceShip::setTubeLoadTime(int index, float time)
 {
-    if (index < 0 || index >= weapon_tube_count) {
-        return;
-    }
-    weapon_tube[index].setLoadTimeConfig(time);
+    return;
 }
 
 void SpaceShip::addBroadcast(int threshold, string message)
@@ -1172,6 +1115,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     }
 
     // Missile weapon data
+    /*
     if (weapon_tube_count != ship_template->weapon_tube_count)
         ret += ":setWeaponTubeCount(" + string(weapon_tube_count) + ")";
 
@@ -1197,7 +1141,7 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
         if (weapon_storage[n] != ship_template->weapon_storage[n])
             ret += ":setWeaponStorage(\"" + getMissileWeaponName(EMissileWeapons(n)) + "\", " + string(weapon_storage[n]) + ")";
     }
-
+    */
     // Beam weapon data
     /*
     for(int n=0; n<max_beam_weapons; n++)

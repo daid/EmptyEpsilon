@@ -36,12 +36,11 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& data)
 : SpaceObject(10, multiplayer_name), data(data)
 {
-    target_id = -1;
     target_angle = 0;
     category_modifier = 1;
     lifetime = data.lifetime;
 
-    registerMemberReplication(&target_id);
+    registerMemberReplication(&target);
     registerMemberReplication(&target_angle);
     registerMemberReplication(&category_modifier);
 
@@ -107,15 +106,7 @@ void MissileWeapon::updateMovement()
     {
         if (data.homing_range > 0)
         {
-            P<SpaceObject> target;
-            if (game_server)
-            {
-                target = game_server->getObjectById(target_id);
-            }
-            else
-            {
-                target = game_client->getObjectById(target_id);
-            }
+            P<SpaceObject> target = getTarget();
 
             if (target)
             {
@@ -157,9 +148,9 @@ P<SpaceObject> MissileWeapon::getOwner()
 
 P<SpaceObject> MissileWeapon::getTarget()
 {
-    if (game_server)
-        return game_server->getObjectById(target_id);
-    return game_client->getObjectById(target_id);
+    auto obj = this->target.getComponent<SpaceObject*>();
+    if (obj) return *obj;
+    return nullptr;
 }
 
 void MissileWeapon::setTarget(P<SpaceObject> target)
@@ -168,7 +159,7 @@ void MissileWeapon::setTarget(P<SpaceObject> target)
     {
         return;
     }
-    target_id = target->getMultiplayerId();
+    this->target = target->entity;
 }
 
 float MissileWeapon::getLifetime()
@@ -200,12 +191,12 @@ std::unordered_map<string, string> MissileWeapon::getGMInfo()
         ret[trMark("gm_info", "Owner")] = owner->getCallSign();
     }
 
-    P<SpaceObject> target = game_server->getObjectById(target_id);
+    /*P<SpaceObject> target = game_server->getObjectById(target_id);
 
     if (target)
     {
         ret[trMark("gm_info", "Target")] = target->getCallSign();
-    }
+    }*/
 
     ret[trMark("gm_info", "Faction")] = getLocaleFaction();
     ret[trMark("gm_info", "Lifetime")] = lifetime;

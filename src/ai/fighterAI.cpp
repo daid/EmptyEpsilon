@@ -1,5 +1,8 @@
 #include "spaceObjects/cpuShip.h"
 #include "components/impulse.h"
+#include "components/shields.h"
+#include "components/missiletubes.h"
+#include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
 #include "random.h"
@@ -43,21 +46,24 @@ void FighterAI::runAttack(P<SpaceObject> target)
 {
     auto position_diff = target->getPosition() - owner->getPosition();
     float distance = glm::length(position_diff);
+    auto shields = owner->entity.getComponent<Shields>();
 
     switch(attack_state)
     {
     case dive:
         if (distance < 2500 + target->getRadius() && has_missiles)
         {
-            for(int n=0; n<owner->weapon_tube_count; n++)
+            auto tubes = owner->entity.getComponent<MissileTubes>();
+            for(int n=0; n<tubes->count; n++)
             {
-                if (owner->weapon_tube[n].isLoaded() && missile_fire_delay <= 0.0f)
+                auto& tube = tubes->mounts[n];
+                if (tube.state == MissileTubes::MountPoint::State::Loaded && missile_fire_delay <= 0.0f)
                 {
-                    float target_angle = calculateFiringSolution(target, owner->weapon_tube[n].getLoadType());
+                    float target_angle = calculateFiringSolution(target, tube);
                     if (target_angle != std::numeric_limits<float>::infinity())
                     {
-                        owner->weapon_tube[n].fire(target_angle);
-                        missile_fire_delay = owner->weapon_tube[n].getLoadTimeConfig() / owner->weapon_tube_count / 2.0f;
+                        MissileSystem::fire(owner->entity, tube, target_angle, target->entity);
+                        missile_fire_delay = tube.load_time / tubes->count / 2.0f;
                     }
                 }
             }
@@ -79,7 +85,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
             else
                 evade_direction = target_dir + random(25, 40);
         }
-        if (owner->shield_level[0] < owner->shield_max[0] * (1.0f - aggression))
+        if (shields && shields->entry[0].level < shields->entry[0].max * (1.0f - aggression))
         {
             attack_state = recharge;
             aggression += random(0.1, 0.25);
@@ -100,7 +106,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         break;
     case recharge:
-        if (owner->shield_level[0] > owner->shield_max[0] * 0.9f || timeout <= 0.0f)
+        if ((shields && shields->entry[0].level < shields->entry[0].max * 0.9f) || timeout <= 0.0f)
         {
             attack_state = dive;
         }else{

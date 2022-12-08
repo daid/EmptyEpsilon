@@ -13,7 +13,7 @@
 
 void WarpSystem::update(float delta)
 {
-    for(auto [entity, warp, impulse, position, physics, obj] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Position, sp::Physics, SpaceObject*>())
+    for(auto [entity, warp, impulse, position, physics, obj] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics, SpaceObject*>())
     {
         if (warp.request > 0 || warp.current > 0)
         {
@@ -44,7 +44,7 @@ void WarpSystem::update(float delta)
             if (reactor) {
                 // If warping, consume energy at a rate of 120% the warp request.
                 // If shields are up, that rate is increased by an additional 50%.
-                auto energy_use = warp.energy_warp_per_second * delta * warp.get_system_effectiveness() * powf(warp.current, 1.3f);
+                auto energy_use = warp.energy_warp_per_second * delta * warp.getSystemEffectiveness() * powf(warp.current, 1.3f);
                 auto ship = dynamic_cast<SpaceShip*>(obj);
                 if (ship && ship->getShieldsActive())
                     energy_use *= 1.7f;
@@ -54,13 +54,13 @@ void WarpSystem::update(float delta)
         }
 
         // Add heat based on warp factor.
-        warp.add_heat(warp.current * delta * warp.heat_per_warp * warp.get_system_effectiveness());
+        warp.addHeat(warp.current * delta * warp.heat_per_warp * warp.getSystemEffectiveness());
 
         // Determine forward direction and velocity.
         auto forward = vec2FromAngle(position.getRotation());
         auto current_velocity = physics.getVelocity();
         if (!impulse)
             current_velocity = glm::vec2{0, 0};
-        physics.setVelocity(current_velocity + forward * (warp.current * warp.speed_per_level * warp.get_system_effectiveness()));
+        physics.setVelocity(current_velocity + forward * (warp.current * warp.speed_per_level * warp.getSystemEffectiveness()));
     }
 }

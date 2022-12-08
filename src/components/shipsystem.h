@@ -22,6 +22,6 @@ public:
     float heat_add_rate_per_second = default_add_heat_rate_per_second;
     float power_change_rate_per_second = default_power_rate_per_second;
 
-    float get_system_effectiveness();
-    void add_heat(float amount);
+    float getSystemEffectiveness();
+    void addHeat(float amount);
 };

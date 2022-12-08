@@ -4,6 +4,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "powerDamageIndicator.h"
 #include "gameGlobalInfo.h"
+#include "components/shields.h"
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_progressbar.h"
@@ -29,7 +30,12 @@ void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->shield_calibration_delay > 0.0f)
+        auto shields = my_spaceship->entity.getComponent<Shields>();
+        if (!shields) {
+            button->hide();
+            bar->hide();
+        }
+        else if (my_spaceship->shield_calibration_delay > 0.0f)
         {
             button->hide();
             bar->show();
@@ -38,11 +44,11 @@ void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
         else
         {
             button->show();
-            button->setValue(my_spaceship->shields_active);
+            button->setValue(shields->active);
             bar->hide();
-            string shield_status=my_spaceship->shields_active ? tr("shields","ON") : tr("shields","OFF");
-            if (gameGlobalInfo->use_beam_shield_frequencies)
-                button->setText(tr("{frequency} Shields: {status}").format({{"frequency", frequencyToString(my_spaceship->shield_frequency)}, {"status", shield_status}}));
+            string shield_status=shields->active ? tr("shields","ON") : tr("shields","OFF");
+            if (gameGlobalInfo->use_beam_shield_frequencies && shields->frequency != -1)
+                button->setText(tr("{frequency} Shields: {status}").format({{"frequency", frequencyToString(shields->frequency)}, {"status", shield_status}}));
             else
                 button->setText(tr("Shields: {status}").format({{"status", shield_status}}));
         }

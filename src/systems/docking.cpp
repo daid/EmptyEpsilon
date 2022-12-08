@@ -6,6 +6,7 @@
 #include "components/hull.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
+#include "components/missiletubes.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/cpuShip.h"
@@ -21,23 +22,23 @@ void DockingSystem::update(float delta)
 {
     if (!game_server) return;
 
-    for(auto [entity, docking_port, position, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Position>, SpaceObject*>()) {
+    for(auto [entity, docking_port, transform, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>, SpaceObject*>()) {
         SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(obj);
         if (!ship) continue;
-        sp::Position* target_position;
+        sp::Transform* target_transform;
         switch(docking_port.state) {
         case DockingPort::State::NotDocking:
             break;
         case DockingPort::State::Docking:
-            if (!docking_port.target || !(target_position = docking_port.target.getComponent<sp::Position>())) {
+            if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>())) {
                 docking_port.state = DockingPort::State::NotDocking;
             } else {
                 auto engine = entity.getComponent<ImpulseEngine>();
                 auto warp = entity.getComponent<WarpDrive>();
-                ship->target_rotation = vec2ToAngle(position->getPosition() - target_position->getPosition());
+                ship->target_rotation = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
                 if (engine) {
-                    if (fabs(angleDifference(ship->target_rotation, position->getRotation())) < 10.0f)
+                    if (fabs(angleDifference(ship->target_rotation, transform->getRotation())) < 10.0f)
                         engine->request = -1.f;
                     else
                         engine->request = 0.f;
@@ -47,16 +48,16 @@ void DockingSystem::update(float delta)
             }
             break;
         case DockingPort::State::Docked:
-            if (!docking_port.target || !(target_position = docking_port.target.getComponent<sp::Position>()))
+            if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>()))
             {
                 docking_port.state = DockingPort::State::NotDocking;
-                if (!position) { // Internal docking and our bay is destroyed. So, destroy ourselves as well.
+                if (!transform) { // Internal docking and our bay is destroyed. So, destroy ourselves as well.
                     entity.destroy();
                 }
             }else{
-                if (position) {
-                    position->setPosition(target_position->getPosition() + rotateVec2(docking_port.docked_offset, target_position->getRotation()));
-                    ship->target_rotation = vec2ToAngle(position->getPosition() - target_position->getPosition());
+                if (transform) {
+                    transform->setPosition(target_transform->getPosition() + rotateVec2(docking_port.docked_offset, target_transform->getRotation()));
+                    ship->target_rotation = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
                 }
 
                 auto bay = docking_port.target.getComponent<DockingBay>();
@@ -107,25 +108,27 @@ void DockingSystem::update(float delta)
                 if (!player && bay && (bay->flags & DockingBay::RestockMissiles)) {
                     auto cpu = dynamic_cast<CpuShip*>(ship);
                     if (cpu) {
-                        bool needs_missile = false;
-
-                        for(int n=0; n<MW_Count; n++)
-                        {
-                            if  (ship->weapon_storage[n] < ship->weapon_storage_max[n])
+                        auto tubes = entity.getComponent<MissileTubes>();
+                        if (tubes) {
+                            bool needs_missile = false;
+                            for(int n=0; n<MW_Count; n++)
                             {
-                                if (cpu->missile_resupply >= cpu->missile_resupply_time)
+                                if  (tubes->storage[n] < tubes->storage_max[n])
                                 {
-                                    cpu->weapon_storage[n] += 1;
-                                    cpu->missile_resupply = 0.0;
-                                    break;
+                                    if (cpu->missile_resupply >= cpu->missile_resupply_time)
+                                    {
+                                        tubes->storage[n] += 1;
+                                        cpu->missile_resupply = 0.0;
+                                        break;
+                                    }
+                                    else
+                                        needs_missile = true;
                                 }
-                                else
-                                    needs_missile = true;
                             }
-                        }
 
-                        if (needs_missile)
-                            cpu->missile_resupply += delta;
+                            if (needs_missile)
+                                cpu->missile_resupply += delta;
+                        }
                     }
                 }
             }
@@ -157,8 +160,8 @@ void DockingSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
 {
     auto port = a.getComponent<DockingPort>();
     if (port && port->state == DockingPort::State::Docking && port->target == b) {
-        auto position = a.getComponent<sp::Position>();
-        auto other_position = b.getComponent<sp::Position>();
+        auto position = a.getComponent<sp::Transform>();
+        auto other_position = b.getComponent<sp::Transform>();
         auto ship = dynamic_cast<SpaceShip*>(*a.getComponent<SpaceObject*>());
 
         if (ship && position && other_position && fabs(angleDifference(ship->target_rotation, position->getRotation())) < 10.0f)
@@ -170,7 +173,7 @@ void DockingSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
             port->docked_offset = port->docked_offset / length * (length + 2.0f);
 
             if (bay && port->canDockOn(*bay) == DockingStyle::Internal)
-                a.removeComponent<sp::Position>();
+                a.removeComponent<sp::Transform>();
         }
     }
 }
@@ -186,9 +189,9 @@ void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
     if (!target) return;
     auto bay = target.getComponent<DockingBay>();
     if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
-    auto position = entity.getComponent<sp::Position>();
+    auto position = entity.getComponent<sp::Transform>();
     if (position) return;
-    auto target_position = target.getComponent<sp::Position>();
+    auto target_position = target.getComponent<sp::Transform>();
     if (target_position) return;
     auto target_physics = target.getComponent<sp::Physics>();
     if (target_physics) return;
@@ -207,7 +210,7 @@ void DockingSystem::requestUndock(sp::ecs::Entity entity)
     auto docking_port = entity.getComponent<DockingPort>();
     if (!docking_port || docking_port->state != DockingPort::State::Docked) return;
     auto impulse = entity.getComponent<ImpulseEngine>();
-    if (impulse && impulse->get_system_effectiveness() < 0.1f) return;
+    if (impulse && impulse->getSystemEffectiveness() < 0.1f) return;
 
     docking_port->state = DockingPort::State::NotDocking;
     if (impulse) impulse->request = 0.5;

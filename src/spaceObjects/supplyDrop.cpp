@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "playerSpaceship.h"
 #include "components/reactor.h"
+#include "components/missiletubes.h"
 #include "main.h"
 
 #include "scriptInterface.h"
@@ -51,14 +52,17 @@ void SupplyDrop::collide(SpaceObject* target, float force)
             reactor->energy += energy;
             picked_up = true;
         }
-        for(int n=0; n<MW_Count; n++)
-        {
-            uint8_t delta = std::min(int(weapon_storage[n]), ship->weapon_storage_max[n] - ship->weapon_storage[n]);
-            if (delta > 0)
+        auto missiletubes = ship->entity.getComponent<MissileTubes>();
+        if (missiletubes) {
+            for(int n=0; n<MW_Count; n++)
             {
-                ship->weapon_storage[n] += delta;
-                weapon_storage[n] -= delta;
-                picked_up = true;
+                uint8_t delta = std::min(int(missiletubes->storage[n]), missiletubes->storage_max[n] - missiletubes->storage[n]);
+                if (delta > 0)
+                {
+                    missiletubes->storage[n] += delta;
+                    weapon_storage[n] -= delta;
+                    picked_up = true;
+                }
             }
         }
         if (on_pickup_callback.isSet())

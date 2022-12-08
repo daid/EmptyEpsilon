@@ -3,6 +3,8 @@
 #include "missileTubeControls.h"
 #include "powerDamageIndicator.h"
 #include "components/warpdrive.h"
+#include "components/missiletubes.h"
+#include "systems/missilesystem.h"
 
 #include "gui/gui2_button.h"
 #include "gui/gui2_progressbar.h"
@@ -23,9 +25,10 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         row.layout = new GuiElement(this, id + "_ROW_" + string(n));
         row.layout->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         row.load_button = new GuiButton(row.layout, id + "_" + string(n) + "_LOAD_BUTTON", "Load", [this, n]() {
-            if (!my_spaceship)
-                return;
-            if (my_spaceship->weapon_tube[n].isEmpty())
+            if (!my_spaceship) return;
+            auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+            if (!tubes) return;
+            if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Empty)
             {
                 if (load_type != MW_None)
                 {
@@ -39,16 +42,16 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         });
         row.load_button->setSize(130, 50);
         row.fire_button = new GuiButton(row.layout, id + "_" + string(n) + "_FIRE_BUTTON", "Fire", [this, n]() {
-            if (!my_spaceship)
-                return;
-            if (my_spaceship->weapon_tube[n].isLoaded())
+            if (!my_spaceship) return;
+            auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+            if (!tubes) return;
+            if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Loaded)
             {
                 float target_angle = missile_target_angle;
-                if (!manual_aim)
-                {
-                    target_angle = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
+                if (!manual_aim) {
+                    target_angle = MissileSystem::calculateFiringSolution(my_spaceship->entity, tubes->mounts[n], my_spaceship->getTarget()->entity);
                     if (target_angle == std::numeric_limits<float>::infinity())
-                        target_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
+                        target_angle = my_spaceship->getRotation() + tubes->mounts[n].direction;
                 }
                 my_spaceship->commandFireTube(n, target_angle);
             }
@@ -86,58 +89,74 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
     load_type_rows[MW_HVLI].button->setIcon("gui/icons/weapon-hvli.png");
 }
 
+static string getTubeName(float direction)
+{
+    if (std::abs(angleDifference(0.0f, direction)) <= 45)
+        return tr("tube","Front");
+    if (std::abs(angleDifference(90.0f, direction)) < 45)
+        return tr("tube","Right");
+    if (std::abs(angleDifference(-90.0f, direction)) < 45)
+        return tr("tube","Left");
+    if (std::abs(angleDifference(180.0f, direction)) <= 45)
+        return tr("tube","Rear");
+    return "?" + string(direction);
+}
+
 void GuiMissileTubeControls::onUpdate()
 {
     if (!my_spaceship || !isVisible())
         return;
+    auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+    if (!tubes) return;
     for (int n = 0; n < MW_Count; n++)
     {
-        load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(my_spaceship->weapon_storage[n]) + "/" + string(my_spaceship->weapon_storage_max[n]) + "]");
-        load_type_rows[n].layout->setVisible(my_spaceship->weapon_storage_max[n] > 0);
+        load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
+        load_type_rows[n].layout->setVisible(tubes->storage_max[n] > 0);
     }
 
-    for (int n = 0; n < my_spaceship->weapon_tube_count; n++)
+    for (int n = 0; n < tubes->count; n++)
     {
-        WeaponTube& tube = my_spaceship->weapon_tube[n];
+        auto& tube = tubes->mounts[n];
         rows[n].layout->show();
         if (tube.canOnlyLoad(MW_Mine))
             rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
         else
-            rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.getDirection());
-        if(tube.isEmpty())
+            rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
+        switch(tube.state)
         {
+        case MissileTubes::MountPoint::State::Empty:
             rows[n].load_button->setEnable(tube.canLoad(load_type));
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + tr("missile","Empty"));
+            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + tr("missile","Empty"));
             rows[n].loading_bar->hide();
-        }else if(tube.isLoaded())
-        {
+            break;
+        case MissileTubes::MountPoint::State::Loaded:
             rows[n].load_button->enable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->enable()->show();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + getLocaleMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->hide();
-        }else if(tube.isLoading())
-        {
+            break;
+        case MissileTubes::MountPoint::State::Loading:
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(tube.getTubeName() + ": " + getLocaleMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->show();
-            rows[n].loading_bar->setValue(tube.getLoadProgress());
+            rows[n].loading_bar->setValue(1.0f - tube.delay / tube.load_time);
             rows[n].loading_label->setText(tr("missile","Loading"));
-        }else if(tube.isUnloading())
-        {
+            break;
+        case MissileTubes::MountPoint::State::Unloading:
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Unload"));
             rows[n].fire_button->hide();
-            rows[n].fire_button->setText(getLocaleMissileWeaponName(tube.getLoadType()));
+            rows[n].fire_button->setText(getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->show();
-            rows[n].loading_bar->setValue(tube.getUnloadProgress());
+            rows[n].loading_bar->setValue(tube.delay / tube.load_time);
             rows[n].loading_label->setText(tr("missile","Unloading"));
-        }else if(tube.isFiring())
-        {
+            break;
+        case MissileTubes::MountPoint::State::Firing:
             rows[n].load_button->disable();
             rows[n].load_button->setText(tr("missile","Load"));
             rows[n].fire_button->disable()->show();
@@ -151,7 +170,7 @@ void GuiMissileTubeControls::onUpdate()
             rows[n].fire_button->disable();
         }
     }
-    for(int n=my_spaceship->weapon_tube_count; n<max_weapon_tubes; n++)
+    for(int n=tubes->count; n<max_weapon_tubes; n++)
         rows[n].layout->hide();
 
     if (keys.weapons_select_homing.getDown())
@@ -165,7 +184,7 @@ void GuiMissileTubeControls::onUpdate()
     if (keys.weapons_select_hvli.getDown())
         selectMissileWeapon(MW_HVLI);
 
-    for(int n=0; n<my_spaceship->weapon_tube_count; n++)
+    for(int n=0; n<tubes->count; n++)
     {
         if (keys.weapons_load_tube[n].getDown())
             my_spaceship->commandLoadTube(n, load_type);
@@ -176,9 +195,9 @@ void GuiMissileTubeControls::onUpdate()
             float target_angle = missile_target_angle;
             if (!manual_aim)
             {
-                target_angle = my_spaceship->weapon_tube[n].calculateFiringSolution(my_spaceship->getTarget());
+                target_angle = MissileSystem::calculateFiringSolution(my_spaceship->entity, tubes->mounts[n], my_spaceship->getTarget()->entity);
                 if (target_angle == std::numeric_limits<float>::infinity())
-                    target_angle = my_spaceship->getRotation() + my_spaceship->weapon_tube[n].getDirection();
+                    target_angle = my_spaceship->getRotation() + tubes->mounts[n].direction;
             }
             my_spaceship->commandFireTube(n, target_angle);
         }

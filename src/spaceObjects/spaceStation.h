@@ -8,7 +8,6 @@ class SpaceStation : public ShipTemplateBasedObject
 public:
     SpaceStation();
 
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void destroyedByDamage(DamageInfo& info) override;
     virtual void applyTemplateValues() override;
 

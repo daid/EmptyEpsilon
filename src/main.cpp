@@ -31,6 +31,7 @@
 #include "systems/impulse.h"
 #include "systems/warpsystem.h"
 #include "systems/beamweapon.h"
+#include "systems/shieldsystem.h"
 #include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
@@ -141,6 +142,7 @@ int main(int argc, char** argv)
     engine->registerSystem<ImpulseSystem>();
     engine->registerSystem<WarpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
+    engine->registerSystem<ShieldSystem>();
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";

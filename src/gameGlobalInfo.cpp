@@ -419,9 +419,9 @@ static int getObjectsInRadius(lua_State* L)
 
     PVector<SpaceObject> objects;
     for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
-        auto entity_position = entity.getComponent<sp::Position>();
-        if (entity_position) {
-            if (glm::length2(entity_position->getPosition() - position) < r*r) {
+        auto entity_transform = entity.getComponent<sp::Transform>();
+        if (entity_transform) {
+            if (glm::length2(entity_transform->getPosition() - position) < r*r) {
                 auto obj = entity.getComponent<SpaceObject*>();
                 if (obj)
                     objects.push_back(*obj);

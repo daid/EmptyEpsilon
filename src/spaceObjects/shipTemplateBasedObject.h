@@ -22,16 +22,10 @@ public:
     string type_name;
     P<ShipTemplate> ship_template;
 
-    int shield_count;
-    float shield_level[max_shield_count];
-    float shield_max[max_shield_count];
-    float shield_hit_effect[max_shield_count];
-
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
     virtual void draw3DTransparent() override;
-    virtual void drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels);
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
@@ -47,7 +41,6 @@ public:
     bool getCanBeDestroyed();
 
     virtual void applyTemplateValues() = 0;
-    virtual float getShieldRechargeRate(int shield_index);
 
     void setTemplate(string template_name);
     void setShipTemplate(string template_name) { LOG(WARNING) << "Deprecated \"setShipTemplate\" function called."; setTemplate(template_name); }
@@ -61,24 +54,23 @@ public:
     virtual bool getShieldsActive() { return true; }
 
     ///Shield script binding functions
-    float getShieldLevel(int index) { if (index < 0 || index >= shield_count) return 0; return shield_level[index]; }
-    float getShieldMax(int index) { if (index < 0 || index >= shield_count) return 0; return shield_max[index]; }
-    int getShieldCount() { return shield_count; }
+    float getShieldLevel(int index) { /*TODO*/ return 0.0f; }
+    float getShieldMax(int index) { /*TODO*/ return 0.0f; }
+    int getShieldCount() { /*TODO*/ return 0; }
     void setShields(const std::vector<float>& amounts);
     void setShieldsMax(const std::vector<float>& amounts);
 
-    int getShieldPercentage(int index) { if (index < 0 || index >= shield_count || shield_max[index] <= 0.0f) return 0; return int(100 * shield_level[index] / shield_max[index]); }
-    ESystem getShieldSystemForShieldIndex(int index);
+    int getShieldPercentage(int index) { /*TODO*/ return 0; }
 
     ///Deprecated old script functions for shields
-    float getFrontShield() { return shield_level[0]; }
-    float getFrontShieldMax() { return shield_max[0]; }
-    void setFrontShield(float amount) { if (amount < 0) return; shield_level[0] = amount; }
-    void setFrontShieldMax(float amount) { if (amount < 0) return; shield_level[0] = amount; shield_level[0] = std::min(shield_level[0], shield_max[0]); }
-    float getRearShield() { return shield_level[1]; }
-    float getRearShieldMax() { return shield_max[1]; }
-    void setRearShield(float amount) { if (amount < 0) return; shield_level[1] = amount; }
-    void setRearShieldMax(float amount) { if (amount < 0) return; shield_max[1] = amount; shield_level[1] = std::min(shield_level[1], shield_max[1]); }
+    float getFrontShield() { /*TODO*/ return 0.0f; }
+    float getFrontShieldMax() { /*TODO*/ return 0.0f; }
+    void setFrontShield(float amount) { } //TODO
+    void setFrontShieldMax(float amount) { } //TODO
+    float getRearShield() { /*TODO*/ return 0.0f; }
+    float getRearShieldMax() { /*TODO*/ return 0.0f; }
+    void setRearShield(float amount) { } //TODO
+    void setRearShieldMax(float amount) { } //TODO
 
     // Radar range
     float getLongRangeRadarRange() { return long_range_radar_range; }

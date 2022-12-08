@@ -14,7 +14,7 @@
 
 void JumpSystem::update(float delta)
 {
-    for(auto [entity, jump, position, physics, obj] : sp::ecs::Query<JumpDrive, sp::Position, sp::Physics, SpaceObject*>())
+    for(auto [entity, jump, position, physics, obj] : sp::ecs::Query<JumpDrive, sp::Transform, sp::Physics, SpaceObject*>())
     {
         SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         if (jump.delay > 0.0f)
@@ -33,7 +33,7 @@ void JumpSystem::update(float delta)
             if (warp)
                 warp->request = 0;
 
-            jump.delay -= delta * jump.get_system_effectiveness();
+            jump.delay -= delta * jump.getSystemEffectiveness();
             if (jump.delay <= 0.0f)
             {
                 float f = jump.health;
@@ -49,12 +49,12 @@ void JumpSystem::update(float delta)
                 auto target_position = position.getPosition() + vec2FromAngle(position.getRotation()) * distance;
                 target_position = WarpJammer::getFirstNoneJammedPosition(position.getPosition(), target_position);
                 position.setPosition(target_position);
-                jump.add_heat(jump.heat_per_jump);
+                jump.addHeat(jump.heat_per_jump);
 
                 jump.delay = 0.f;
             }
         } else {
-            float f = ship->getJumpDriveRechargeRate();
+            float f = jump.get_recharge_rate();
             if (f > 0)
             {
                 if (jump.charge < jump.max_distance)

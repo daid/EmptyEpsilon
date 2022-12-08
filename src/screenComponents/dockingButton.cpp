@@ -103,12 +103,12 @@ P<SpaceObject> GuiDockingButton::findDockingTarget()
     if (!port) { return nullptr; }
 
     P<SpaceObject> dock_object;
-    for(auto [entity, bay, position, physics, obj] : sp::ecs::Query<DockingBay, sp::Position, sp::Physics, SpaceObject*>())
+    for(auto [entity, bay, transform, physics, obj] : sp::ecs::Query<DockingBay, sp::Transform, sp::Physics, SpaceObject*>())
     {
         if (obj == *my_spaceship) continue;
         if (obj->isEnemy(my_spaceship)) continue;
         if (port->canDockOn(bay) == DockingStyle::None) continue;
-        if (glm::length(position.getPosition() - my_spaceship->getPosition()) > 1000.0f + physics.getSize().x) continue;
+        if (glm::length(transform.getPosition() - my_spaceship->getPosition()) > 1000.0f + physics.getSize().x) continue;
 
         dock_object = obj;
         break;

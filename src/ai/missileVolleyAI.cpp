@@ -1,4 +1,6 @@
 #include "spaceObjects/cpuShip.h"
+#include "components/missiletubes.h"
+#include "systems/missilesystem.h"
 #include "ai/missileVolleyAI.h"
 #include "ai/aiFactory.h"
 
@@ -28,8 +30,12 @@ void MissileVolleyAI::runOrders()
 
 void MissileVolleyAI::runAttack(P<SpaceObject> target)
 {
-    if (!has_missiles)
-    {
+    if (!has_missiles) {
+        ShipAI::runAttack(target);
+        return;
+    }
+    auto tubes = owner->entity.getComponent<MissileTubes>();
+    if (!tubes) {
         ShipAI::runAttack(target);
         return;
     }
@@ -51,15 +57,15 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         }
     }
 
-    if (distance < 4500 && has_missiles)
+    if (distance < 4500)
     {
         bool all_possible_loaded = true;
-        for(int n=0; n<owner->weapon_tube_count; n++)
+        for(int n=0; n<tubes->count; n++)
         {
-            WeaponTube& weapon_tube = owner->weapon_tube[n];
+            auto& tube = tubes->mounts[n];
             //Base AI class already loads the tubes with available missiles.
             //If a tube is not loaded, but is currently being load with a new missile, then we still have missiles to load before we want to fire.
-            if (weapon_tube.isLoading())
+            if (tube.state == MissileTubes::MountPoint::State::Loading)
             {
                 all_possible_loaded = false;
                 break;
@@ -69,27 +75,27 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
         if (all_possible_loaded)
         {
             int can_fire_count = 0;
-            for(int n=0; n<owner->weapon_tube_count; n++)
+            for(int n=0; n<tubes->count; n++)
             {
-                float target_angle = calculateFiringSolution(target, n);
+                float target_angle = calculateFiringSolution(target, tubes->mounts[n]);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     can_fire_count++;
                 }
             }
 
-            for(int n=0; n<owner->weapon_tube_count; n++)
+            for(int n=0; n<tubes->count; n++)
             {
-                float target_angle = calculateFiringSolution(target, n);
+                float target_angle = calculateFiringSolution(target, tubes->mounts[n]);
                 if (target_angle != std::numeric_limits<float>::infinity())
                 {
                     can_fire_count--;
                     if (can_fire_count == 0)
-                        owner->weapon_tube[n].fire(target_angle);
+                        MissileSystem::fire(owner->entity, tubes->mounts[n], target_angle, target->entity);
                     else if ((can_fire_count % 2) == 0)
-                        owner->weapon_tube[n].fire(target_angle + 20.0f * (can_fire_count / 2));
+                        MissileSystem::fire(owner->entity, tubes->mounts[n], target_angle + 20.0f * (can_fire_count / 2), target->entity);
                     else
-                        owner->weapon_tube[n].fire(target_angle - 20.0f * ((can_fire_count + 1) / 2));
+                        MissileSystem::fire(owner->entity, tubes->mounts[n], target_angle - 20.0f * ((can_fire_count + 1) / 2), target->entity);
                 }
             }
         }

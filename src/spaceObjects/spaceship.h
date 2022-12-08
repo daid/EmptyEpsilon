@@ -7,7 +7,6 @@
 
 #include "shipTemplateBasedObject.h"
 #include "spaceStation.h"
-#include "spaceshipParts/weaponTube.h"
 #include "tween.h"
 #include "components/docking.h"
 
@@ -116,16 +115,6 @@ public:
 
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
-    int weapon_storage[MW_Count];
-    int weapon_storage_max[MW_Count];
-    int8_t weapon_tube_count;
-    WeaponTube weapon_tube[max_weapon_tubes];
-
-    /**
-     * Frequency setting of the shields.
-     */
-    int shield_frequency;
-
     /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
     int32_t target_id;
 
@@ -145,13 +134,10 @@ public:
     /*!
      * Draw this ship on the radar.
      */
-    virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual void update(float delta) override;
-    virtual float getShieldRechargeRate(int shield_index) override;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index) override;
-    float getJumpDriveRechargeRate() { return Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0); }
 
     /*!
      * Check if the ship can be targeted.
@@ -225,10 +211,10 @@ public:
     bool isDocked(P<SpaceObject> target);
     P<SpaceObject> getDockedWith();
     DockingPort::State getDockingState();
-    int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
-    int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
-    void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
-    void setWeaponStorageMax(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage_max[weapon] = amount; weapon_storage[weapon] = std::min(int(weapon_storage[weapon]), amount); }
+    int getWeaponStorage(EMissileWeapons weapon) { return 0; } //TODO
+    int getWeaponStorageMax(EMissileWeapons weapon) { return 0; } //TODO
+    void setWeaponStorage(EMissileWeapons weapon, int amount) { } //TODO
+    void setWeaponStorageMax(EMissileWeapons weapon, int amount) { } //TODO
     float getMaxEnergy();
     void setMaxEnergy(float amount);
     float getEnergy();
@@ -288,8 +274,8 @@ public:
     float getBeamWeaponEnergyPerFire(int index);
     float getBeamWeaponHeatPerFire(int index);
 
-    int getShieldsFrequency(){ return shield_frequency; }
-    void setShieldsFrequency(int freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
+    int getShieldsFrequency() { return 0.0; } //TODO
+    void setShieldsFrequency(int freq) { return; } //TODO
 
     int getBeamFrequency();
 
@@ -330,7 +316,6 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 string getMissileWeaponName(EMissileWeapons missile);
 string getLocaleMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
-REGISTER_MULTIPLAYER_ENUM(EWeaponTubeState);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
 REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);

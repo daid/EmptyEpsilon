@@ -14,8 +14,11 @@
 #include "components/beamweapon.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
+#include "components/shields.h"
+#include "components/missiletubes.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
+#include "systems/missilesystem.h"
 
 #include "scriptInterface.h"
 
@@ -1184,8 +1187,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             EMissileWeapons type;
             packet >> tube_nr >> type;
 
-            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
-                weapon_tube[tube_nr].startLoad(type);
+            auto missiletubes = entity.getComponent<MissileTubes>();
+            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->count)
+                MissileSystem::startLoad(entity, missiletubes->mounts[tube_nr], type);
         }
         break;
     case CMD_UNLOAD_TUBE:
@@ -1193,10 +1197,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             int8_t tube_nr;
             packet >> tube_nr;
 
-            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
-            {
-                weapon_tube[tube_nr].startUnload();
-            }
+            auto missiletubes = entity.getComponent<MissileTubes>();
+            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->count)
+                MissileSystem::startUnload(entity, missiletubes->mounts[tube_nr]);
         }
         break;
     case CMD_FIRE_TUBE:
@@ -1205,8 +1208,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             float missile_target_angle;
             packet >> tube_nr >> missile_target_angle;
 
-            if (tube_nr >= 0 && tube_nr < max_weapon_tubes)
-                weapon_tube[tube_nr].fire(missile_target_angle);
+            auto missiletubes = entity.getComponent<MissileTubes>();
+            if (missiletubes && tube_nr >= 0 && tube_nr < missiletubes->count)
+                MissileSystem::fire(entity, missiletubes->mounts[tube_nr], missile_target_angle, getTarget() ? getTarget()->entity : sp::ecs::Entity{});
         }
         break;
     case CMD_SET_SHIELDS:
@@ -1447,15 +1451,16 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            if (new_frequency != shield_frequency)
+            auto shields = entity.getComponent<Shields>();
+            if (shields && new_frequency != shields->frequency)
             {
-                shield_frequency = new_frequency;
+                shields->frequency = new_frequency;
                 shield_calibration_delay = shield_calibration_time;
-                shields_active = false;
-                if (shield_frequency < 0)
-                    shield_frequency = 0;
-                if (shield_frequency > SpaceShip::max_frequency)
-                    shield_frequency = SpaceShip::max_frequency;
+                shields->active = false;
+                if (shields->frequency < 0)
+                    shields->frequency = 0;
+                if (shields->frequency > SpaceShip::max_frequency)
+                    shields->frequency = SpaceShip::max_frequency;
             }
         }
         break;
@@ -1696,14 +1701,14 @@ void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_an
 void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
 {
   float targetAngle = 0.0;
+  auto missiletubes = entity.getComponent<MissileTubes>();
 
-  if (!target || tubeNumber < 0 || tubeNumber >= getWeaponTubeCount())
+  if (!target || !missiletubes || tubeNumber < 0 || tubeNumber >= missiletubes->count)
     return;
 
-  targetAngle = weapon_tube[tubeNumber].calculateFiringSolution(target);
-
+  targetAngle = MissileSystem::calculateFiringSolution(entity, missiletubes->mounts[tubeNumber], target->entity);
   if (targetAngle == std::numeric_limits<float>::infinity())
-      targetAngle = getRotation() + weapon_tube[tubeNumber].getDirection();
+      targetAngle = getRotation() + missiletubes->mounts[tubeNumber].direction;
 
   commandFireTube(tubeNumber, targetAngle);
 }

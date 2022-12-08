@@ -7,6 +7,7 @@
 #include "preferenceManager.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
+#include "components/shields.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
@@ -57,11 +58,14 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
         float shield_hit = 0.0;
         bool low_shields = false;
-        for(int n=0; n<my_spaceship->shield_count; n++)
-        {
-            shield_hit = std::max(shield_hit, my_spaceship->shield_hit_effect[n]);
-            if (my_spaceship->shield_level[n] < my_spaceship->shield_max[n] / 10.0f)
-                low_shields = true;
+        auto shields = my_spaceship->entity.getComponent<Shields>();
+        if (shields) {
+            for(int n=0; n<shields->count; n++)
+            {
+                shield_hit = std::max(shield_hit, shields->entry[n].hit_effect);
+                if (shields->entry[n].level < shields->entry[n].max / 10.0f)
+                    low_shields = true;
+            }
         }
         shield_hit = (shield_hit - 0.5f) / 0.5f;
         shield_hit_overlay->setAlpha(32 * shield_hit);

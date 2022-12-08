@@ -4,6 +4,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "components/collision.h"
 #include "components/hull.h"
+#include "components/shields.h"
 #include "shipTemplate.h"
 #include "playerInfo.h"
 #include "factionInfo.h"
@@ -33,17 +34,6 @@ SpaceStation::SpaceStation()
     }
 }
 
-void SpaceStation::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
-{
-    float sprite_scale = scale * getRadius() * 1.5f / 32;
-
-    if (!long_range)
-    {
-        sprite_scale *= 0.7f;
-        drawShieldsOnRadar(renderer, position, scale, rotation, sprite_scale, true);
-    }
-}
-
 void SpaceStation::applyTemplateValues()
 {
     PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
@@ -59,13 +49,14 @@ void SpaceStation::destroyedByDamage(DamageInfo& info)
     if (info.instigator)
     {
         float points = 0;
-        if (shield_count > 0)
+        auto shields = entity.getComponent<Shields>();
+        if (shields)
         {
-            for(int n=0; n<shield_count; n++)
+            for(int n=0; n<shields->count; n++)
             {
-                points += shield_max[n] * 0.1f;
+                points += shields->entry[n].max * 0.1f;
             }
-            points /= shield_count;
+            points /= shields->count;
         }
         auto hull = entity.getComponent<Hull>();
         if (hull)

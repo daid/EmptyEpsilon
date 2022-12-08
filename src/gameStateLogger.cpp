@@ -321,8 +321,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
             json.write("docking", ship->docking_target->getMultiplayerId());
         if (ship->docking_state == DS_Docked)
             json.write("docked", ship->docking_target->getMultiplayerId());
-    }
-    */
+    } 
     if (ship->shield_count > 0)
     {
         if (gameGlobalInfo->use_beam_shield_frequencies)
@@ -379,6 +378,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         }
         json.endArray();
     }
+    */
     {
         JSONGenerator systems = json.createDict("systems");
         for(int n=0; n<SYS_COUNT; n++)
@@ -449,6 +449,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
             config.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_speed);
         //if (ship->has_jump_drive)
         //    config.write("jumpdrive", true);
+        /*
         if (ship->weapon_tube_count > 0)
         {
             JSONGenerator missiles = config.createDict("missiles");
@@ -479,7 +480,6 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
                 json.arrayWrite(ship->shield_max[n]);
             config.endArray();
         }
-/*
         has_beam_weapons = false;
         for(int n=0; n<max_beam_weapons; n++)
         {
@@ -521,6 +521,7 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
     json.write("faction", station->getFaction());
     json.write("station_type", station->type_name);
     //json.write("hull", station->hull_strength);
+    /*
     if (station->shield_count > 0)
     {
         json.startArray("shields");
@@ -539,6 +540,7 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
             config.endArray();
         }
     }
+    */
 }
 
 void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile)
@@ -552,10 +554,10 @@ void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> mi
     }
 
     // Don't bother writing a target ID if it's unguided or targetless.
-    if (missile->target_id != -1)
-    {
-        json.write("target_id", missile->target_id);
-    }
+    //if (missile->target_id != -1)
+    //{
+    //    json.write("target_id", missile->target_id);
+    //}
 }
 
 void GameStateLogger::writePlanetEntry(JSONGenerator& json, P<Planet> planet)

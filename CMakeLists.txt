@@ -351,7 +351,6 @@ set(MAIN_SOURCES
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
     src/spaceObjects/zone.cpp
-    src/spaceObjects/spaceshipParts/weaponTube.cpp
     src/components/radar.h
     src/components/hull.h
     src/components/rendering.h
@@ -362,16 +361,24 @@ set(MAIN_SOURCES
     src/components/warpdrive.h
     src/components/jumpdrive.h
     src/components/reactor.h
+    src/components/shields.h
+    src/components/shields.cpp
+    src/components/beamweapon.h
+    src/components/missiletubes.h
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/impulse.h
     src/systems/impulse.cpp
     src/systems/beamweapon.h
     src/systems/beamweapon.cpp
+    src/systems/missilesystem.h
+    src/systems/missilesystem.cpp
     src/systems/warpsystem.h
     src/systems/warpsystem.cpp
     src/systems/jumpsystem.h
     src/systems/jumpsystem.cpp
+    src/systems/shieldsystem.h
+    src/systems/shieldsystem.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp
@@ -534,7 +541,6 @@ set(MAIN_SOURCES
     src/spaceObjects/shipTemplateBasedObject.h
     src/spaceObjects/spaceObject.h
     src/spaceObjects/spaceship.h
-    src/spaceObjects/spaceshipParts/weaponTube.h
     src/spaceObjects/spaceStation.h
     src/spaceObjects/supplyDrop.h
     src/spaceObjects/warpJammer.h

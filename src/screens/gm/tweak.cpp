@@ -260,8 +260,8 @@ GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
     {
         (new GuiLabel(left_col, "", getLocaleMissileWeaponName(EMissileWeapons(n)) + ":", 20))->setSize(GuiElement::GuiSizeMax, 30);
         missile_storage_amount_slider[n] = new GuiSlider(left_col, "", 0.0, 50, 0.0, [this, n](float value) {
-            target->weapon_storage_max[n] = int(round(value));
-            target->weapon_storage[n] = std::min(target->weapon_storage[n], target->weapon_storage_max[n]);
+            //target->weapon_storage_max[n] = int(round(value));
+            //target->weapon_storage[n] = std::min(target->weapon_storage[n], target->weapon_storage_max[n]);
         });
         missile_storage_amount_slider[n]->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
     }
@@ -273,7 +273,7 @@ GuiShipTweakMissileWeapons::GuiShipTweakMissileWeapons(GuiContainer* owner)
     {
         (new GuiLabel(right_col, "", getLocaleMissileWeaponName(EMissileWeapons(n)) + ":", 20))->setSize(GuiElement::GuiSizeMax, 30);
         missile_current_amount_slider[n] = new GuiSlider(right_col, "", 0.0, 50, 0.0, [this, n](float value) {
-            target->weapon_storage[n] = std::min(int(round(value)), target->weapon_storage_max[n]);
+            //target->weapon_storage[n] = std::min(int(round(value)), target->weapon_storage_max[n]);
         });
         missile_current_amount_slider[n]->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
     }
@@ -337,8 +337,8 @@ void GuiShipTweakMissileWeapons::onDraw(sp::RenderTarget& renderer)
 {
     for(int n=0; n<MW_Count; n++)
     {
-        if (target->weapon_storage[n] != int(missile_current_amount_slider[n]->getValue()))
-            missile_current_amount_slider[n]->setValue(float(target->weapon_storage[n]));
+        //if (target->weapon_storage[n] != int(missile_current_amount_slider[n]->getValue()))
+        //    missile_current_amount_slider[n]->setValue(float(target->weapon_storage[n]));
     }
 }
 
@@ -347,8 +347,8 @@ void GuiShipTweakMissileWeapons::open(P<SpaceObject> target)
     P<SpaceShip> ship = target;
     this->target = ship;
 
-    for(int n = 0; n < MW_Count; n++)
-        missile_storage_amount_slider[n]->setValue(float(ship->weapon_storage_max[n]));
+    //for(int n = 0; n < MW_Count; n++)
+    //    missile_storage_amount_slider[n]->setValue(float(ship->weapon_storage_max[n]));
 }
 
 GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
@@ -363,7 +363,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     // Left column
     (new GuiLabel(left_col, "", tr("Tube count:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     missile_tube_amount_selector = new GuiSelector(left_col, "", [this](int index, string value) {
-        target->weapon_tube_count = index;
+        //target->weapon_tube_count = index;
     });
     for(int n=0; n<max_weapon_tubes; n++)
         missile_tube_amount_selector->addEntry(string(n), "");
@@ -373,6 +373,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     tube_index = 0;
     index_selector = new GuiSelector(right_col, "", [this](int index, string value)
     {
+        /*
         if (index >= target->weapon_tube_count)
         {
             if (index == max_weapon_tubes - 1)
@@ -381,6 +382,7 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
                 index = 0;
             index_selector->setSelectionIndex(index);
         }
+        */
         tube_index = index;
     });
     index_selector->setSize(GuiElement::GuiSizeMax, 40);
@@ -390,20 +392,20 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
 
     (new GuiLabel(right_col, "", tr("tube", "Direction:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     direction_slider = new GuiSlider(right_col, "", -180.0, 180, 0.0, [this](float value) {
-        target->weapon_tube[tube_index].setDirection(roundf(value));
+        //target->weapon_tube[tube_index].setDirection(roundf(value));
     });
     direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(right_col, "", tr("tube", "Load time:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     load_time_slider = new GuiSlider(right_col, "", 0.0, 60.0, 0.0, [this](float value) {
-        target->weapon_tube[tube_index].setLoadTimeConfig(roundf(value * 10) / 10);
+        //target->weapon_tube[tube_index].setLoadTimeConfig(roundf(value * 10) / 10);
     });
     load_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(right_col, "", tr("tube", "Size:"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     size_selector=new GuiSelector(right_col, "", [this](int index, string value)
     {
-        target->weapon_tube[tube_index].setSize(EMissileSizes(index));
+        //target->weapon_tube[tube_index].setSize(EMissileSizes(index));
     });
     size_selector->addEntry(tr("tube", "Small"),MS_Small);
     size_selector->addEntry(tr("tube", "Medium"),MS_Medium);
@@ -415,10 +417,10 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
     for(int n=0; n<MW_Count; n++)
     {
         allowed_use[n] = new GuiToggleButton(right_col, "", getLocaleMissileWeaponName(EMissileWeapons(n)), [this, n](bool value) {
-            if (value)
-                target->weapon_tube[tube_index].allowLoadOf(EMissileWeapons(n));
-            else
-                target->weapon_tube[tube_index].disallowLoadOf(EMissileWeapons(n));
+            //if (value)
+            //    target->weapon_tube[tube_index].allowLoadOf(EMissileWeapons(n));
+            //else
+            //    target->weapon_tube[tube_index].disallowLoadOf(EMissileWeapons(n));
         });
         allowed_use[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
@@ -426,13 +428,13 @@ GuiShipTweakMissileTubes::GuiShipTweakMissileTubes(GuiContainer* owner)
 
 void GuiShipTweakMissileTubes::onDraw(sp::RenderTarget& renderer)
 {
-    direction_slider->setValue(angleDifference(0.0f, target->weapon_tube[tube_index].getDirection()));
-    load_time_slider->setValue(target->weapon_tube[tube_index].getLoadTimeConfig());
+    //direction_slider->setValue(angleDifference(0.0f, target->weapon_tube[tube_index].getDirection()));
+    //load_time_slider->setValue(target->weapon_tube[tube_index].getLoadTimeConfig());
     for(int n=0; n<MW_Count; n++)
     {
-        allowed_use[n]->setValue(target->weapon_tube[tube_index].canLoad(EMissileWeapons(n)));
+        //allowed_use[n]->setValue(target->weapon_tube[tube_index].canLoad(EMissileWeapons(n)));
     }
-    size_selector->setSelectionIndex(target->weapon_tube[tube_index].getSize());
+    //size_selector->setSelectionIndex(target->weapon_tube[tube_index].getSize());
 }
 
 void GuiShipTweakMissileTubes::open(P<SpaceObject> target)
@@ -440,7 +442,7 @@ void GuiShipTweakMissileTubes::open(P<SpaceObject> target)
     P<SpaceShip> ship = target;
     this->target = ship;
 
-    missile_tube_amount_selector->setSelectionIndex(ship->weapon_tube_count);
+    //missile_tube_amount_selector->setSelectionIndex(ship->weapon_tube_count);
 }
 
 GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
@@ -456,8 +458,8 @@ GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
     {
         (new GuiLabel(left_col, "", tr("Shield {id_shield} max:").format({{"id_shield", string(n + 1)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         shield_max_slider[n] = new GuiSlider(left_col, "", 0.0, 500, 0.0, [this, n](float value) {
-            target->shield_max[n] = round(value);
-            target->shield_level[n] = std::min(target->shield_level[n], target->shield_max[n]);
+            //target->shield_max[n] = round(value);
+            //target->shield_level[n] = std::min(target->shield_level[n], target->shield_max[n]);
         });
         shield_max_slider[n]->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
     }
@@ -466,7 +468,7 @@ GuiShipTweakShields::GuiShipTweakShields(GuiContainer* owner)
     {
         (new GuiLabel(right_col, "", tr("Shield {id_shield}:").format({{"id_shield", string(n + 1)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         shield_slider[n] = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this, n](float value) {
-            target->shield_level[n] = std::min(roundf(value), target->shield_max[n]);
+            //target->shield_level[n] = std::min(roundf(value), target->shield_max[n]);
         });
         shield_slider[n]->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
     }
@@ -476,10 +478,11 @@ void GuiShipTweakShields::onDraw(sp::RenderTarget& renderer)
 {
     for(int n=0; n<max_shield_count; n++)
     {
-        shield_slider[n]->setValue(target->shield_level[n]);
-        shield_max_slider[n]->setValue(target->shield_max[n]);
+        //shield_slider[n]->setValue(target->shield_level[n]);
+        //shield_max_slider[n]->setValue(target->shield_max[n]);
 
         // Set range to 0 on all unused shields, since values set there by GM are not reflected by the game anyways.
+        /*
         if(target->shield_count>n) {
             shield_slider[n]->setRange(0.0, 500);
             shield_max_slider[n]->setRange(0.0, 500);
@@ -488,6 +491,7 @@ void GuiShipTweakShields::onDraw(sp::RenderTarget& renderer)
             shield_slider[n]->setRange(0.0, 0);
             shield_max_slider[n]->setRange(0.0, 0);
         }
+        */
     }
 }
 

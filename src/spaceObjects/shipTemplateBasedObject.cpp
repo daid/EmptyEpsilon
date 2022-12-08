@@ -5,6 +5,7 @@
 #include "components/docking.h"
 #include "components/impulse.h"
 #include "components/hull.h"
+#include "components/shields.h"
 
 #include "tween.h"
 #include "i18n.h"
@@ -114,103 +115,35 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 {
     entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Dynamic, collision_range);
 
-    shield_count = 0;
-    for(int n=0; n<max_shield_count; n++)
-    {
-        shield_level[n] = 0.0;
-        shield_max[n] = 0.0;
-        shield_hit_effect[n] = 0.0;
-    }
-
     long_range_radar_range = 30000.0f;
     short_range_radar_range = 5000.0f;
 
     registerMemberReplication(&template_name);
     registerMemberReplication(&type_name);
-    registerMemberReplication(&shield_count);
-    for(int n=0; n<max_shield_count; n++)
-    {
-        registerMemberReplication(&shield_level[n], 0.5);
-        registerMemberReplication(&shield_max[n]);
-        registerMemberReplication(&shield_hit_effect[n], 0.5);
-    }
     registerMemberReplication(&long_range_radar_range, 0.5);
     registerMemberReplication(&short_range_radar_range, 0.5);
 
     callsign = "[" + string(getMultiplayerId()) + "]";
 }
 
-void ShipTemplateBasedObject::drawShieldsOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, float sprite_scale, bool show_levels)
-{
-    if (!getShieldsActive())
-        return;
-    if (shield_count == 1)
-    {
-        glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
-        if (show_levels)
-        {
-            float level = shield_level[0] / shield_max[0];
-            color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
-        }
-        if (shield_hit_effect[0] > 0.0f)
-        {
-            color = Tween<glm::u8vec4>::linear(shield_hit_effect[0], 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
-        }
-        renderer.drawSprite("shield_circle.png", position, sprite_scale * 0.25f * 1.5f * 256.0f, color);
-    }else if (shield_count > 1) {
-        float direction = getRotation()-rotation;
-        float arc = 360.0f / float(shield_count);
-
-        for(int n=0; n<shield_count; n++)
-        {
-            glm::u8vec4 color = glm::u8vec4(255, 255, 255, 64);
-            if (show_levels)
-            {
-                float level = shield_level[n] / shield_max[n];
-                color = Tween<glm::u8vec4>::linear(level, 1.0f, 0.0f, glm::u8vec4(128, 128, 255, 128), glm::u8vec4(255, 0, 0, 64));
-            }
-            if (shield_hit_effect[n] > 0.0f)
-            {
-                color = Tween<glm::u8vec4>::linear(shield_hit_effect[n], 0.0f, 1.0f, color, glm::u8vec4(255, 0, 0, 128));
-            }
-
-            glm::vec2 delta_a = vec2FromAngle(direction - arc / 2.0f);
-            glm::vec2 delta_b = vec2FromAngle(direction);
-            glm::vec2 delta_c = vec2FromAngle(direction + arc / 2.0f);
-            
-            auto p0 = position + delta_b * sprite_scale * 32.0f * 0.05f;
-            renderer.drawTexturedQuad("shield_circle.png",
-                p0,
-                p0 + delta_a * sprite_scale * 32.0f * 1.5f,
-                p0 + delta_b * sprite_scale * 32.0f * 1.5f,
-                p0 + delta_c * sprite_scale * 32.0f * 1.5f,
-                glm::vec2(0.5, 0.5),
-                glm::vec2(0.5, 0.5) + delta_a * 0.5f,
-                glm::vec2(0.5, 0.5) + delta_b * 0.5f,
-                glm::vec2(0.5, 0.5) + delta_c * 0.5f,
-                color);
-            direction += arc;
-        }
-    }
-}
-
 void ShipTemplateBasedObject::draw3DTransparent()
 {
-    if (shield_count < 1)
+    auto shields = entity.getComponent<Shields>();
+    if (!shields)
         return;
 
     float angle = 0.0;
-    float arc = 360.0f / shield_count;
+    float arc = 360.0f / shields->count;
     const auto model_matrix = getModelMatrix();
-    for(int n = 0; n<shield_count; n++)
+    for(int n = 0; n<shields->count; n++)
     {
-        if (shield_hit_effect[n] > 0)
+        if (shields->entry[n].hit_effect > 0)
         {
-            if (shield_count > 1)
+            if (shields->count > 1)
             {
-                model_info.renderShield(model_matrix, (shield_level[n] / shield_max[n]) * shield_hit_effect[n], angle);
+                model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect, angle);
             }else{
-                model_info.renderShield(model_matrix, (shield_level[n] / shield_max[n]) * shield_hit_effect[n]);
+                model_info.renderShield(model_matrix, (shields->entry[n].level / shields->entry[n].max) * shields->entry[n].hit_effect);
             }
         }
         angle += arc;
@@ -238,18 +171,6 @@ void ShipTemplateBasedObject::update(float delta)
         ship_template->setCollisionData(this);
         model_info.setData(ship_template->model_data);
     }
-
-    for(int n=0; n<shield_count; n++)
-    {
-        if (shield_level[n] < shield_max[n])
-        {
-            shield_level[n] = std::min(shield_max[n], shield_level[n] + delta * getShieldRechargeRate(n));
-        }
-        if (shield_hit_effect[n] > 0)
-        {
-            shield_hit_effect[n] -= delta;
-        }
-    }
 }
 
 std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
@@ -258,44 +179,39 @@ std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
     ret[trMark("gm_info", "CallSign")] = callsign;
     ret[trMark("gm_info", "Type")] = type_name;
     //ret[trMark("gm_info", "Hull")] = string(hull_strength) + "/" + string(hull_max);
-    for(int n=0; n<shield_count; n++)
-    {
+    //for(int n=0; n<shield_count; n++) {
         // Note, translators: this is a compromise.
         // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.
-        ret[trMark("gm_info", "Shield") + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
-    }
+    //    ret[trMark("gm_info", "Shield") + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
+    //}
     return ret;
 }
 
 bool ShipTemplateBasedObject::hasShield()
 {
-    for(int n=0; n<shield_count; n++)
-    {
-        if (shield_level[n] < shield_max[n] / 50)
-            return false;
-    }
-    return true;
+    return entity.hasComponent<Shields>();
 }
 
 void ShipTemplateBasedObject::takeDamage(float damage_amount, DamageInfo info)
 {
-    if (shield_count > 0 && getShieldsActive())
-    {
+    auto shields = entity.getComponent<Shields>();
+    if (shields && shields->active) {
         float angle = angleDifference(getRotation(), vec2ToAngle(info.location - getPosition()));
         if (angle < 0)
             angle += 360.0f;
-        float arc = 360.0f / float(shield_count);
+        float arc = 360.0f / float(shields->count);
         int shield_index = int((angle + arc / 2.0f) / arc);
-        shield_index %= shield_count;
+        shield_index %= shields->count;
+        auto& shield = shields->entry[shield_index];
 
         float shield_damage = damage_amount * getShieldDamageFactor(info, shield_index);
-        damage_amount -= shield_level[shield_index];
-        shield_level[shield_index] -= shield_damage;
-        if (shield_level[shield_index] < 0)
+        damage_amount -= shield.level;
+        shield.level -= shield_damage;
+        if (shield.level < 0)
         {
-            shield_level[shield_index] = 0.0;
+            shield.level = 0.0;
         } else {
-            shield_hit_effect[shield_index] = 1.0;
+            shield.hit_effect = 1.0;
         }
         if (damage_amount < 0.0f)
         {
@@ -354,11 +270,6 @@ float ShipTemplateBasedObject::getShieldDamageFactor(DamageInfo& info, int shiel
     return 1.0f;
 }
 
-float ShipTemplateBasedObject::getShieldRechargeRate(int shield_index)
-{
-    return 0.3;
-}
-
 void ShipTemplateBasedObject::setCanBeDestroyed(bool enabled) { /*TODO*/ }
 bool ShipTemplateBasedObject::getCanBeDestroyed() { return true; }
 
@@ -374,17 +285,20 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     ship_template = new_ship_template;
     type_name = template_name;
 
-    shield_count = ship_template->shield_count;
-    for(int n=0; n<shield_count; n++)
-        shield_level[n] = shield_max[n] = ship_template->shield_level[n];
-
     // Set the ship's radar ranges.
     long_range_radar_range = ship_template->long_range_radar_range;
     short_range_radar_range = ship_template->short_range_radar_range;
 
     if (entity) {
-        auto hull = entity.getOrAddComponent<Hull>();
+        auto& hull = entity.getOrAddComponent<Hull>();
         hull.current = hull.max = ship_template->hull;
+
+        if (ship_template->shield_count) {
+            auto& shields = entity.getOrAddComponent<Shields>();
+            shields.count = ship_template->shield_count;
+            for(int n=0; n<shields.count; n++)
+                shields.entry[n].max = shields.entry[n].level = ship_template->shield_level[n];
+        }
 
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.radius = ship_template->model_data->getRadius() * 0.8f;
@@ -404,7 +318,6 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
             if (ship_template->repair_docked)
                 bay->flags |= DockingBay::Repair;
         }
-
         
         if (ship_template->can_dock) {
             if (!ship_template->getClass().empty())
@@ -423,30 +336,12 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
 
 void ShipTemplateBasedObject::setShields(const std::vector<float>& amounts)
 {
-    for(int n=0; n<std::min(int(amounts.size()), shield_count); n++)
-    {
-        shield_level[n] = amounts[n];
-    }
+    //TODO
 }
 
 void ShipTemplateBasedObject::setShieldsMax(const std::vector<float>& amounts)
 {
-    shield_count = std::min(max_shield_count, int(amounts.size()));
-    for(int n=0; n<shield_count; n++)
-    {
-        shield_max[n] = amounts[n];
-        shield_level[n] = std::min(shield_level[n], shield_max[n]);
-    }
-}
-
-ESystem ShipTemplateBasedObject::getShieldSystemForShieldIndex(int index)
-{
-    if (shield_count < 2)
-        return SYS_FrontShield;
-    float angle = index * 360.0f / shield_count;
-    if (std::abs(angleDifference(angle, 0.0f)) < 90)
-        return SYS_FrontShield;
-    return SYS_RearShield;
+    //TODO
 }
 
 void ShipTemplateBasedObject::setRadarTrace(string trace)
@@ -498,11 +393,13 @@ void ShipTemplateBasedObject::onDestruction(ScriptSimpleCallback callback)
 string ShipTemplateBasedObject::getShieldDataString()
 {
     string data = "";
+    /* TODO
     for(int n=0; n<shield_count; n++)
     {
         if (n > 0)
             data += ":";
         data += string(int(shield_level[n]));
     }
+    */
     return data;
 }

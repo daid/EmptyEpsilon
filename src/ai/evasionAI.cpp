@@ -4,6 +4,7 @@
 #include "ai/aiFactory.h"
 #include "random.h"
 #include "systems/collision.h"
+#include "components/missiletubes.h"
 #include "components/beamweapon.h"
 
 
@@ -135,12 +136,13 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
     float enemy_beam_dps = 0.0;
     float enemy_missile_strength = 0.0;
 
-    for(int n=0; n<ship->weapon_tube_count; n++)
-    {
-        WeaponTube& tube = ship->weapon_tube[n];
-        if (!tube.isEmpty())
+    auto tubes = ship->entity.getComponent<MissileTubes>();
+    if (tubes) {
+        for(int n=0; n<tubes->count; n++)
         {
-            enemy_missile_strength += getMissileWeaponStrength(tube.getLoadType());
+            auto& tube = tubes->mounts[n];
+            if (tube.state != MissileTubes::MountPoint::State::Empty)
+                enemy_missile_strength += getMissileWeaponStrength(tube.type_loaded);
         }
     }
 
