@@ -2,6 +2,7 @@
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
+#include "components/maneuveringthrusters.h"
 #include "components/reactor.h"
 #include "components/hull.h"
 #include "components/warpdrive.h"
@@ -25,7 +26,6 @@ void DockingSystem::update(float delta)
     for(auto [entity, docking_port, transform, obj] : sp::ecs::Query<DockingPort, sp::ecs::optional<sp::Transform>, SpaceObject*>()) {
         SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(obj);
-        if (!ship) continue;
         sp::Transform* target_transform;
         switch(docking_port.state) {
         case DockingPort::State::NotDocking:
@@ -36,9 +36,11 @@ void DockingSystem::update(float delta)
             } else {
                 auto engine = entity.getComponent<ImpulseEngine>();
                 auto warp = entity.getComponent<WarpDrive>();
-                ship->target_rotation = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
+                auto thrusters = entity.getComponent<ManeuveringThrusters>();
+                if (thrusters)
+                    thrusters->target = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
                 if (engine) {
-                    if (fabs(angleDifference(ship->target_rotation, transform->getRotation())) < 10.0f)
+                    if (thrusters && fabs(angleDifference(thrusters->target, transform->getRotation())) < 10.0f)
                         engine->request = -1.f;
                     else
                         engine->request = 0.f;
@@ -57,7 +59,8 @@ void DockingSystem::update(float delta)
             }else{
                 if (transform) {
                     transform->setPosition(target_transform->getPosition() + rotateVec2(docking_port.docked_offset, target_transform->getRotation()));
-                    ship->target_rotation = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
+                    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+                    if (thrusters) thrusters->target = vec2ToAngle(transform->getPosition() - target_transform->getPosition());
                 }
 
                 auto bay = docking_port.target.getComponent<DockingBay>();
@@ -162,9 +165,9 @@ void DockingSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
     if (port && port->state == DockingPort::State::Docking && port->target == b) {
         auto position = a.getComponent<sp::Transform>();
         auto other_position = b.getComponent<sp::Transform>();
-        auto ship = dynamic_cast<SpaceShip*>(*a.getComponent<SpaceObject*>());
+        auto thrusters = a.getComponent<ManeuveringThrusters>();
 
-        if (ship && position && other_position && fabs(angleDifference(ship->target_rotation, position->getRotation())) < 10.0f)
+        if (position && other_position && thrusters && fabs(angleDifference(thrusters->target, position->getRotation())) < 10.0f)
         {
             port->state = DockingPort::State::Docked;
             auto bay = b.getComponent<DockingBay>();
@@ -226,11 +229,6 @@ void DockingSystem::abortDock(sp::ecs::Entity entity)
     if (engine) engine->request = 0.f;
     auto warp = entity.getComponent<WarpDrive>();
     if (warp) warp->request = 0;
-
-    auto obj = entity.getComponent<SpaceObject*>();
-    if (obj && *obj) {
-        auto ship = dynamic_cast<SpaceShip*>(*obj);
-        if (ship)
-            ship->target_rotation = ship->getRotation();
-    }
+    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
 }
