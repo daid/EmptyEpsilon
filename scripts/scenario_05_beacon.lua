@@ -1,5 +1,5 @@
 -- Name: Beacon of Light series
--- Description: The Beacon of Light scenario, built from the series at EmptyEpsilon.org.
+-- Description: The Beacon of Light scenario, based on the tutorial from https://daid.github.io/EmptyEpsilon/#tabs=4.
 ---
 --- Near the far outpost of Orion-5, Exuari attacks are increasing. A diplomat went missing, and your first mission is to recover him.
 ---

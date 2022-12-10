@@ -3368,6 +3368,11 @@ function commsStation()
             supplydrop = math.random(80,120),
             reinforcements = math.random(125,175),
             activatedefensefleet = 20,
+            probe_launch_repair = math.random(5,10),
+            hack_repair = math.random(5,10),
+            scan_repair = math.random(5,10),
+            combat_maneuver_repair = math.random(5,10),
+            self_destruct_repair = 1
         },
         reputation_cost_multipliers = {
             friend = 1.0,
