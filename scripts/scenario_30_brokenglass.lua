@@ -1419,7 +1419,7 @@ We need you to patrol the area. It's not exciting work, but it's got to be done.
     if Defence_station.tier2_mission_state == "pre-start" then
       setCommsMessage(_("defence-comms", [[Welcome back, Captain.
 
-We'be tracked that convoy to a huge nest of drone stations in the west. The stations all form part of one proximity defence grid, and we have identified some beacons that appear to be related to its operation. We're hoping that if we can get a closer look at them, we might be able to figure out how to knock out the central control.
+We've tracked that convoy to a huge nest of drone stations in the west. The stations all form part of one proximity defence grid, and we have identified some beacons that appear to be related to its operation. We're hoping that if we can get a closer look at them, we might be able to figure out how to knock out the central control.
 
 There is a drone ship docked here which you can use to infiltrate the nests. If you arrive with a convoy, you should automatically be granted access and we think the proximity defences will remain disabled while you stay in the area. Of course, if you start firing, then all bets are probably off.
 
