@@ -1349,7 +1349,7 @@ The good news is that it's easy to swap these out, the tech at the wormhole stat
 
 I've put in a requisition for one in your name. If you can find one in a Navy storehouse, bring it to the wormhole station and they should be good to go.]]))
           Player:addToShipLog("Find a Graviton Lens", "Green")
-          Player.req_lens = true
+          Admin_station.req_lens = true
           end)
         end
       end
@@ -1650,7 +1650,7 @@ It's not for sale, as such. You'll need to get a requisition from the Admin Stat
       addCommsReply(_("drone-comms", "<- Back"), CommsDroneStation)
     end)
     addCommsReply(_("drone-comms", "Graviton Lens"), function ()
-      if Player.req_lens == true then
+      if Admin_station.req_lens == true then
         Wormhole_station.tier2_mission_state = "fixed"
         setCommsMessage(_("drone-comms", [[Ooooh, a requisition!
 
