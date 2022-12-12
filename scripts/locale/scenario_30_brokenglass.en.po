@@ -1,0 +1,1062 @@
+# Scenario name
+msgid "Broken Glass"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Support research activities in the Zeta Belt and keep the researchers safe. "
+"Difficulty balances and 10 achievements to complete.\n"
+"\n"
+"Plan for 3+ hours on Easy, with harder difficulties taking longer"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:313
+msgctxt "lost-comms"
+msgid ""
+"We're pretty busy scanning for treasure... I mean, conducting research in "
+"this nebula. Can we call you back?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:333
+msgctxt "scienceArtifactDescription"
+msgid ""
+"Just a hollow spherical apparition. Kinda looks like it's hiding something."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:333
+msgctxt "scienceArtifactDescription"
+msgid "It seems to have changed shape."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:867
+msgctxt "wormhole-comms"
+msgid ""
+"Captain, Stop!\r\n"
+"\r\n"
+"Don't waste your time shooting at that station. It has an Exuari emergency "
+"integrity field that will prevent catastrophic hull breach. Just a waste of "
+"energy, I promise you."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1013
+msgctxt "defence-comms"
+msgid ""
+"RED ALERT!\r\n"
+"\r\n"
+"The SW Checkpoint is under attack. Don't mess around, get down there and "
+"help them!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1049
+msgid ""
+"It looks like you've aggro'd the convoy.\r\n"
+"\r\n"
+"Good luck to you! Try to keep them from destroying our stations!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1142
+msgctxt "drone-comms"
+msgid "Do not communicate on this channel."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1146
+msgctxt "drone-comms"
+msgid ""
+"DISENGAGE!\r\n"
+"\r\n"
+"Captain, it's not what it looks like. Please dock with us and we will "
+"explain everything."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1163
+msgctxt "wormhole-comms"
+msgid ""
+"RED ALERT!\r\n"
+"\r\n"
+"Captain, a bomb has just gone off on our station and we are under attack "
+"from the Kraylor. We need your help immediately!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1209
+msgctxt "wormhole-comms"
+msgid ""
+"\r\n"
+"Hello Captain. Have you noticed our cool wormhole?\r\n"
+"\r\n"
+"We're studying the energy radiating from the wormhole, and the similarities "
+"to black holes are astonishing. Please drop by if you'd like to help out."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1214
+msgctxt "wormhole-comms"
+msgid "Please bring us the spare parts!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1216
+msgctxt "wormhole-comms"
+msgid "Thanks so much for your help!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1223
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks for dropping by, Captain.\r\n"
+"\r\n"
+"Our research is going well, but we could use some spare stabilizers for our "
+"Hawking Scanner. Would you mind salvaging some for us from the other side of "
+"the wormhole?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1226
+msgctxt "wormhole-comms"
+msgid "Okay, we can help with that."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1227
+msgctxt "wormhole-comms"
+msgid "Do you pay tips?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1228
+msgctxt "wormhole-comms"
+msgid "Maybe later, then. Goodbye."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1236
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks for your help, Captain!\r\n"
+"\r\n"
+"These spare parts will really help with the program budget."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1239
+msgctxt "wormhole-comms"
+msgid "What do we get for being your errand boy?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1240
+msgctxt "wormhole-comms"
+msgid "You get half of what would have with a smarter attitude! So rude."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1245
+msgctxt "wormhole-comms"
+msgid "We're so glad we could help"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1246
+msgctxt "wormhole-comms"
+msgid "We are too. Thanks a bunch."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1251
+msgctxt "wormhole-comms"
+msgid ""
+"We still need those spare parts from X472 on the other side of the wormhole!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1254
+msgctxt "wormhole-comms"
+msgid "Thanks that was awesome"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1263
+msgctxt "wormhole-comms"
+msgid "We're under attack. Help us!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1269
+msgctxt "wormhole-comms"
+msgid "Come pick up our Hawking Scanner for repairs."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1271
+msgctxt "wormhole-comms"
+msgid "Please find someone to repair our Hawking Scanner."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1277
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks again, Captain.\r\n"
+"\r\n"
+"We need you to find someone to repair this Hawking Scanner. Please bring it "
+"back once it's working again."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1280
+msgctxt "wormhole-comms"
+msgid "Any idea where we should take it?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1281
+msgctxt "wormhole-comms"
+msgid ""
+"One of the nebula researchers should be able to point you in the right "
+"direction.\r\n"
+"\r\n"
+"If you're not sure where to find them, ask for directions at the Admin "
+"Station"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1285
+msgctxt "wormhole-comms"
+msgid "Have you considered shoving it where the sun don't shine?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1286
+msgctxt "wormhole-comms"
+msgid "What is it with you, anyways?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1292
+msgctxt "wormhole-comms"
+msgid ""
+"You got it fixed?\r\n"
+"\r\n"
+"That's amazing, Captain. Thank you so much! You and your crew are true heros "
+"of our system; may your names live on through history.\r\n"
+"\r\n"
+"Glory to you and your kin."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1297
+msgctxt "wormhole-comms"
+msgid "You're very welcome."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1298
+msgctxt "wormhole-comms"
+msgid "Goodbye captain. May peace be with you."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1301
+msgctxt "wormhole-comms"
+msgid "Kiss my feet!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1305
+msgctxt "wormhole-comms"
+msgid ""
+"I was about to call this in to Admin and have them declare you victorious, "
+"but I've had enough of you.\r\n"
+"\r\n"
+"YOU MAY BE A HERO, BUT YOU'RE ALSO A JERK!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1309
+msgctxt "wormhole-comms"
+msgid "A real peach, you are."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1318
+msgctxt "colony-comms"
+msgid "Well, what I can do for you?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1321
+msgctxt "colony-comms"
+msgid "We're looking for Dr. Hendrix"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1325
+msgid "colony-comms"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1328
+msgctxt "colony-comms"
+msgid ""
+"I.....zzzZ\r\n"
+"Hello?\r\n"
+"...\r\n"
+"The nearby NeZula somzzzzzzimes messssssses with our long range "
+"commcommcommcomm somet...\r\n"
+"\r\n"
+"...\r\n"
+"\r\n"
+"....dock...pr...b..\r\n"
+"...r"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1338
+msgctxt "colony-comms"
+msgid ""
+"I am Dr. Hendrix.\r\n"
+"\r\n"
+"If I remember that voice correctly, you are the crew from the Navy ship that "
+"saved me when I was stranded in the nebula!\r\n"
+"\r\n"
+"What can I do for you?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1343
+msgctxt "colony-comms"
+msgid "Can you fix this Hawking Scanner?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1344
+msgctxt "colony-comms"
+msgid ""
+"Let me have a look...\r\n"
+"\r\n"
+"Ah, I see why it's giving you trouble. Everything reads as okay, but the "
+"Graviton Lens is mis-calibrated somehow so it's throwing off the whole "
+"system.\r\n"
+"\r\n"
+"The good news is that it's easy to swap these out, the tech at the wormhole "
+"station should be able to do it. The bad news is that we have a shortage of "
+"Graviton Lenses right now because of those drone convoys.\r\n"
+"\r\n"
+"I've put in a requisition for one in your name. If you can find one in a "
+"Navy storehouse, bring it to the wormhole station and they should be good to "
+"go."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1359
+msgctxt "colony-comms"
+msgid "Some filler text and whatever. What are we even doing here?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1360
+msgctxt "colony-comms"
+msgid "Dude, where even ARE we?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1366
+msgid "Not much here bud, just doing checkpoint kinda things, ya know?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1373
+msgctxt "defence-comms"
+msgid "Defend the SW Checkpoint now!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1376
+msgid "defence-comms"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1381
+msgctxt "defence-comms"
+msgid "Your orders are to follow the convoy to see where it goes"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1384
+msgctxt "defence-comms"
+msgid "Your orders are to join a convoy and infiltrate the drone nests."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1387
+msgctxt "defence-comms"
+msgid ""
+"Your orders are to scan those beacons and find the defence grid controller"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1393
+msgctxt "defence-comms"
+msgid ""
+"We are keeping the 007, and you can continue to fly it, or switch back to "
+"the Propitious 1 at any time. We'll keep it docked here at the station for "
+"you."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1395
+msgctxt "defence-comms"
+msgid ""
+"Great work, Captain!\r\n"
+"\r\n"
+"Destroying the central control eliminated all the other drone stations and "
+"stopped the convoys in their tracks! Of course, you are authorized to mop up "
+"any resistance that might remain, but we're calling this a job well done.\r\n"
+"\r\n"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1407
+msgctxt "defence-comms"
+msgid ""
+"Good day, soldier.\r\n"
+"\r\n"
+"We shouldn't talk over this channel, please dock to the station when you "
+"have a chance."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1413
+msgctxt "defence-comms"
+msgid ""
+"Welcome aboard.\r\n"
+"\r\n"
+"We need you to patrol the area. It's not exciting work, but it's got to be "
+"done. No rush, just make sure you visit each checkpoint in order, and we'll "
+"let you know if anything more pressing comes up."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1416
+msgctxt "defence-comms"
+msgid "Okay. We're ready to start the patrol"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1420
+msgctxt "defence-comms"
+msgid ""
+"Welcome back, Captain.\r\n"
+"\r\n"
+"We've tracked that convoy to a huge nest of drone stations in the west. The "
+"stations all form part of one proximity defence grid, and we have identified "
+"some beacons that appear to be related to its operation. We're hoping that "
+"if we can get a closer look at them, we might be able to figure out how to "
+"knock out the central control.\r\n"
+"\r\n"
+"There is a drone ship docked here which you can use to infiltrate the nests. "
+"If you arrive with a convoy, you should automatically be granted access and "
+"we think the proximity defences will remain disabled while you stay in the "
+"area. Of course, if you start firing, then all bets are probably off.\r\n"
+"\r\n"
+"Hop in that drone ship, find the beacons, and get close enough to scan them "
+"- EASY!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1427
+msgctxt "defence-comms"
+msgid "We're ready to infiltrate the drone nest"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1428
+msgctxt "defence-comms"
+msgid "(Object) Isn't that a treaty violation!?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1429
+msgctxt "defence-comms"
+msgid ""
+"(Objecting)\r\n"
+"Sir, decoding the communications of alien defence systems is a violation of "
+"the Deepspace Militarized Citizenry Accord (DMCA).\r\n"
+"[...]\r\n"
+"Captain, are you angling for a good samaritan's award or something? Get out "
+"of here with that legal mumbo-jumbo.\r\n"
+"\r\n"
+"However you want to do it, you need to find that central control. Get on it!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1435
+msgctxt "defence-comms"
+msgid "Okay, we'll figure it out."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1440
+msgctxt "defence-comms"
+msgid ""
+"Great job on that drone nest, Captain.\r\n"
+"\r\n"
+"Remember, your primary orders are to support the research facilities in the "
+"area. See to it that they all get the assistance they need."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1445
+msgctxt "defence-comms"
+msgid "We'd rather crew the Propitious 1"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1448
+#: scripts/scenario_30_brokenglass.lua:1456
+msgctxt "defence-comms"
+msgid "Very well. Good Hunting."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1452
+msgctxt "defence-comms"
+msgid "We'd rather crew the DD007"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1469
+msgctxt "admin-comms"
+msgid ""
+"VICTORY!\r\n"
+"\r\n"
+"Your tour of duty is complete and your accomplishments will be the talk of "
+"legends.\r\n"
+"\r\n"
+"CHEEVOS!\r\n"
+"\r\n"
+"* Experienced treasure hunter - "
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1496
+msgctxt "admin-comms"
+msgid "Hints for each CHEEVO"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1497
+msgctxt "admin-comms"
+msgid "Select the achievement for a hint"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1498
+msgctxt "admin-comms"
+msgid "Experienced treasure hunter"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1499
+msgctxt "admin-comms"
+msgid "The locals are known to hunt treasure in the nebula"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1500
+#: scripts/scenario_30_brokenglass.lua:1504
+#: scripts/scenario_30_brokenglass.lua:1508
+#: scripts/scenario_30_brokenglass.lua:1512
+#: scripts/scenario_30_brokenglass.lua:1516
+#: scripts/scenario_30_brokenglass.lua:1520
+#: scripts/scenario_30_brokenglass.lua:1524
+#: scripts/scenario_30_brokenglass.lua:1528
+#: scripts/scenario_30_brokenglass.lua:1532
+#: scripts/scenario_30_brokenglass.lua:1536
+#: scripts/scenario_30_brokenglass.lua:1540
+#: scripts/scenario_30_brokenglass.lua:1580
+#: scripts/scenario_30_brokenglass.lua:1584
+#: scripts/scenario_30_brokenglass.lua:1590
+#: scripts/scenario_30_brokenglass.lua:1594
+#: scripts/scenario_30_brokenglass.lua:1598
+msgctxt "admin-comms"
+msgid "<- Back"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1502
+msgctxt "admin-comms"
+msgid "Clean up the space junk"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1503
+msgctxt "admin-comms"
+msgid "So many long abandoned stations"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1506
+msgctxt "admin-comms"
+msgid "Historical relic preservation"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1507
+msgctxt "admin-comms"
+msgid "Destroying that old station might spook the Kraylor"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1510
+msgctxt "admin-comms"
+msgid "Social distancing"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1511
+msgctxt "admin-comms"
+msgid "Don't get too proximate"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1514
+msgctxt "admin-comms"
+msgid "Our ship is all we need"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1515
+msgctxt "admin-comms"
+msgid "We'll stick with the ship we know, thanks"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1518
+msgctxt "admin-comms"
+msgid "No DMCA violations"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1519
+msgctxt "admin-comms"
+msgid "Hacking alien defense systems is illegal"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1522
+msgctxt "admin-comms"
+msgid "I ain't afraid of no ghosts"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1523
+msgctxt "admin-comms"
+msgid "No one is afraid if there are NO GHOSTS"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1526
+msgctxt "admin-comms"
+msgid "Keep an eye on that doctor"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1527
+msgctxt "admin-comms"
+msgid "Do we really need to ask for directions?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1530
+msgctxt "admin-comms"
+msgid "Ban wormhole research"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1531
+msgctxt "admin-comms"
+msgid "I just can't stand wormholes, or their researchers!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1534
+msgctxt "admin-comms"
+msgid "Heros for the ages"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1535
+msgctxt "admin-comms"
+msgid "Their reputation is unmatched"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1538
+msgctxt "admin-comms"
+msgid "Grand Slam"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1539
+msgctxt "admin-comms"
+msgid "You can do it, but can you do it ALL?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1543
+msgctxt "admin-comms"
+msgid "Click here to lance the champagne!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1544
+msgctxt "admin-comms"
+msgid "Booyah!!!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1552
+msgctxt "admin-comms"
+msgid ""
+"We are the station that co-ordinates research activities in the nearby "
+"nebulae.\r\n"
+"\r\n"
+"If you're not busy, please drop by to learn more about our projects."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1556
+#: scripts/scenario_30_brokenglass.lua:1570
+msgctxt "admin-comms"
+msgid "Please bring our researchers home!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1558
+msgctxt "admin-comms"
+msgid ""
+"Thanks so much for finding our researchers! Dock with us if you'd like to "
+"chat."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1563
+msgctxt "admin-comms"
+msgid "We are so glad to have you aboard. What can we help you with?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1564
+#: scripts/scenario_30_brokenglass.lua:1578
+msgctxt "admin-comms"
+msgid "How long have you been operating in this system?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1565
+#: scripts/scenario_30_brokenglass.lua:1582
+msgctxt "admin-comms"
+msgid "Where is the colony where your researchers live?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1566
+#: scripts/scenario_30_brokenglass.lua:1586
+msgctxt "admin-comms"
+msgid "Tell us about the nearby nebulae."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1567
+#: scripts/scenario_30_brokenglass.lua:1592
+msgctxt "admin-comms"
+msgid "Are there any Kraylor in the area?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1568
+#: scripts/scenario_30_brokenglass.lua:1596
+msgctxt "admin-comms"
+msgid "Are there any Exuari in the area?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1572
+msgctxt "admin-comms"
+msgid "Always a pleasure to have you as our honoured guests."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1574
+msgctxt "admin-comms"
+msgid "Any idea where we can get a Hawking Scanner fixed?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1575
+msgctxt "admin-comms"
+msgid ""
+"Dr. Hendrix, who you rescued earlier, is the leading expert on those "
+"scanners."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1579
+msgctxt "admin-comms"
+msgid "We have been operating here for about 50 years"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1583
+msgctxt "admin-comms"
+msgid "You'll find it to the east of the nebulae"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1587
+msgctxt "admin-comms"
+msgid ""
+"Well I suppose you already know about the nebulae. They are to the north.\r\n"
+"\r\n"
+"Did you know that it's a popular place to hunt for treasure?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1593
+msgctxt "admin-comms"
+msgid ""
+"We see some from time to time, but with the non-aggression treaty, they "
+"haven't been too much trouble."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1597
+msgctxt "admin-comms"
+msgid ""
+"Old space junk, mostly. We haven't seen any real Exauri activity in decades."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1606
+msgctxt "found-comms"
+msgid ""
+"Come in? Dr. Hendrix here... Come in?\r\n"
+"\r\n"
+"Oh thank heavens, we're found! We thought we might be stuck here for good!"
+"\r\n"
+"\r\n"
+"We need to install a new hyperplasma full bridge rectifier, but our plasma "
+"conduit driver has gone missing. You must have one in your engine room? If "
+"you let us borrow it, we will upgrade your sensors with our new experimental "
+"modifications."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1611
+msgctxt "found-comms"
+msgid "Sure, you can borrow our conduit driver!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1612
+msgctxt "found-comms"
+msgid ""
+"Great. Your sensors are upgraded. We'll get this rectifier installed and be "
+"on our way.\r\n"
+"\r\n"
+"Thanks again, Captain. If you ever need some help with your Hawking "
+"Scanners, look me up!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1620
+msgctxt "found-comms"
+msgid "Thanks so much for finding us!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1625
+msgctxt "investigate-comms"
+msgid "What do you have to say for yourself?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1626
+msgctxt "investigate-comms"
+msgid "We're just running a salvage mission."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1627
+msgctxt "investigate-comms"
+msgid "Carry on, then, we're keeping our eye on you."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1629
+msgctxt "investigate-comms"
+msgid "Back off, this is a special military operation"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1630
+msgctxt "investigate-comms"
+msgid "You want to back up that escalation with some weapons fire?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1636
+msgctxt "drone-comms"
+msgid ""
+"We oversee the B-3 liquidation of the Ghosts assets.\r\n"
+"\r\n"
+"Dock with us to check out what we've got."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1640
+msgctxt "drone-comms"
+msgid ""
+"You need any of this stuff?\r\n"
+"\r\n"
+"It's not for sale, as such. You'll need to get a requisition from the Admin "
+"Station in order to carry anything out.\r\n"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1644
+msgctxt "drone-comms"
+msgid "Proximity Sensor"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1645
+msgctxt "drone-comms"
+msgid "Activates when ships get too close"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1646
+#: scripts/scenario_30_brokenglass.lua:1650
+#: scripts/scenario_30_brokenglass.lua:1660
+#: scripts/scenario_30_brokenglass.lua:1665
+msgctxt "drone-comms"
+msgid "<- Back"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1648
+msgctxt "drone-comms"
+msgid "Intelligence Accelerator"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1649
+msgctxt "drone-comms"
+msgid "Too expensive to use for video games."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1652
+msgctxt "drone-comms"
+msgid "Graviton Lens"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1655
+msgctxt "drone-comms"
+msgid ""
+"Ooooh, a requisition!\r\n"
+"\r\n"
+"Alright, enjoy... focusing your gravitons, I guess!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1659
+msgctxt "drone-comms"
+msgid "For focusing the gravitational field."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1663
+msgctxt "drone-comms"
+msgid "Holographic Projector"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1664
+msgctxt "drone-comms"
+msgid "Shows very convincing drone stations"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1673
+msgctxt "attack-messages"
+msgid ""
+"HELP!\r\n"
+"\r\n"
+"We are taking damage from "
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1675
+msgctxt "attack-messages"
+msgid " and might need assistance."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1679
+msgctxt "attack-messages"
+msgid " is taking damage!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1706
+msgctxt "admin-comms"
+msgid ""
+"Sorry to interrupt, but we've just recieved an urgent call.\r\n"
+"\r\n"
+"It seems one of our researchers, Dr. Hendrix, and her crew have lost their "
+"way in a nearby nebula and need our help. They were running experiments in "
+"the nebula when their engines and transponder went offline. Please follow "
+"our scout vessel, SR7, to the nebula and search for them."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1713
+msgctxt "admin-comms"
+msgid "Meet me at the edge of the nebula"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1801
+msgctxt "defence-comms"
+msgid ""
+"Great!\r\n"
+"\r\n"
+"Start at the checkpoint in the North West. You'll need to dock at each "
+"station before proceeding to the next."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1832
+msgctxt "defence-comms"
+msgid "Please proceed to "
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1852
+msgctxt "defence-comms"
+msgid ""
+"Great work captain!\r\n"
+"\r\n"
+"You have repelled the attackers and the SW Checkpoint is safe for now, but "
+"intelligence reports show a huge drone convoy in your vicinity to the NW.\r\n"
+"\r\n"
+"INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this "
+"convoy is extremely risky. Keep your distance, but we'd like to know where "
+"they are going."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1887
+msgctxt "defence-comms"
+msgid ""
+"Come in, Captain.\r\n"
+"\r\n"
+"We have the info we need about that convoy and strongly discourage any "
+"further engagement.\r\n"
+"\r\n"
+"Your assistance is required with a secret mission. Dock with us to receive "
+"further instructions when you're ready."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1943
+msgctxt "wormhole-comms"
+msgid ""
+"Great!\r\n"
+"\r\n"
+"There is an old Exuari station, callsign X472, to the SE on the other side "
+"of the wormhole. It used to study the planet forming nearby, but it's been "
+"abandoned for over a century now, no one aboard and no weapons, a historical "
+"relic, really. We need you to demolish it and bring us the stabilizers from "
+"its jump drive which we can use to maintain our Hawking Scanners.\r\n"
+"\r\n"
+"We have hacked the emergency integrity field so that the station can be "
+"destroyed, but there were strange disturbances when we deactivated it. We're "
+"not sure what it means, but we advise you to exercise caution...\r\n"
+"\r\n"
+"..."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1966
+msgctxt "kw-comms"
+msgid ""
+"Ugh, humans.\r\n"
+"\r\n"
+"This is the Kraylor Advanced \"Reasearch\" Project Agency (KARPA), we have "
+"detected your suspicious activity in the vicinity.\r\n"
+"\r\n"
+"We are sending a team to investigate what you are up to. If you fire on us, "
+"there will be trouble!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1977
+msgctxt "wormhole-comms"
+msgid ""
+"Great, you got the parts!\r\n"
+"\r\n"
+"You'd better hurry back, we've seen some Kraylor activity in the area. "
+"Hopefully your salvage mission didn't attract the wrong sort of attention."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2054
+msgctxt "defence-comms"
+msgid "Good luck"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2211
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks so much, captain!\r\n"
+"\r\n"
+"You really saved our ass there. Unfortunately our Hawking Scanner was "
+"damaged by the bomb, and we haven't been able to get it back online. Do you "
+"think you could get it fixed for us?\r\n"
+"\r\n"
+"Please dock with us to pick up the scanner."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2271
+msgctxt "drone-ship"
+msgid ""
+"This ship will not activate the drone station proximity defences as long as "
+"you arrive with a convoy."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2275
+msgctxt "drone-ship"
+msgid "It's nice to be back aboard the Propitious 1"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2328
+#: scripts/scenario_30_brokenglass.lua:2332
+msgid "security-beacons"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2328
+msgctxt "security-beacons"
+msgid ""
+"The beamforming configuration from this beacon will help the boffins "
+"triangulate the location of the central control."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2337
+msgctxt "defence-comms"
+msgid ""
+"Great work!\r\n"
+"\r\n"
+"  Our boffins were able to piece together the data and figure out where the "
+"commands are coming from.\r\n"
+"\r\n"
+"  You must destroy station "
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2411
+msgid "Too busy to talk today, Captain."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2420
+msgctxt "hendrix-hints"
+msgid "Sorry, I don't know where Dr. Hendrix lives"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2428
+msgctxt "hendrix-hints"
+msgid "Dr. Hendrix, of course! I'm pretty sure she was on a "
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2430
+msgctxt "hendrix-hints"
+msgid ""
+"Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her "
+"address definitely has a '"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2437
+msgid "DEFEAT - A Patrol Station has been destroyed"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2444
+msgid "DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"
+msgstr ""
