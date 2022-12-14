@@ -330,7 +330,7 @@ function init()
     surprise_attack = Artifact():setRadarSignatureInfo(0,0.8,0)
   }
   for i, bonus in pairs(Admin_station.nebula_bonuses) do
-    bonus:setModel("artifact2"):setDescriptions(_("scienceArtifactDescription", "Just a hollow spherical apparition. Kinda looks like it's hiding something."),_("scienceArtifactDescription", "It seems to have changed shape.")):setScanningParameters(1,1):setRadarSignatureInfo(0.25,0,0):setPosition(northNebulaTLx + irandom(0, 80000), northNebulaTLy + irandom(0,60000))
+    bonus:setModel("artifact2"):setDescriptions(_("nebula-bonuses", "Just a hollow spherical apparition. Kinda looks like it's hiding something."),_("nebula-bonuses", "It seems to have changed shape.")):setScanningParameters(1,1):setRadarSignatureInfo(0.25,0,0):setPosition(northNebulaTLx + irandom(0, 80000), northNebulaTLy + irandom(0,60000))
   end
 
   Admin_station.nebula_bonuses.nuke.onFullScan = function (self)
@@ -338,7 +338,7 @@ function init()
       self.wasFound = true
       Player:setWeaponStorageMax("Nuke", Player:getWeaponStorageMax("Nuke") + 1)
       Player:setWeaponStorage("Nuke", Player:getWeaponStorage("Nuke") + 1)
-      Player:addToShipLog("A Nuke and additional nuke storage have been added to our arsenal","Green")
+      Player:addToShipLog(_("nebula-bonuses", "A Nuke and additional nuke storage have been added to our arsenal"),"Green")
     end)
   end
 
@@ -346,7 +346,7 @@ function init()
     self:setModel("artifact1"):allowPickup(true):onPickUp(function ()
       self.wasFound = true
       Player:setRepairCrewCount(Player:getRepairCrewCount() + 1)
-      Player:addToShipLog("A stranded repair crew has been rescued","Green")
+      Player:addToShipLog(_("nebula-bonuses", "A stranded repair crew has been rescued"),"Green")
     end)
   end
 
@@ -354,22 +354,22 @@ function init()
     self:setModel("artifact3"):allowPickup(true):onPickUp(function ()
       self.wasFound = true
       Player:addReputationPoints(5)
-      Player:addToShipLog("This scientific data is sure to raise our reputation with the eggheads.","Green")
+      Player:addToShipLog(_("nebula-bonuses", "This scientific data is sure to raise our reputation with the eggheads."),"Green")
     end)
   end
 
   Admin_station.nebula_bonuses.surprise_attack.onFullScan = function (self)
     self:setModel("artifact8"):allowPickup(false)
     self:setCallSign("DD Alpha")
-    self:sendCommsMessage(Player, "DRONE SELF DEFENCE SYSTEM ACTIVATED")
-    Player:addToShipLog("DRONE SELF DEFENCE SYSTEM ACTIVATED", "Red")
+    self:sendCommsMessage(Player, _("nebula-bonuses", "DRONE SELF DEFENCE SYSTEM ACTIVATED"))
+    Player:addToShipLog(_("nebula-bonuses", "DRONE SELF DEFENCE SYSTEM ACTIVATED"), "Red")
     self:setCallSign("")
     local x, y = self:getPosition()
     local defenders = SpawnEnemies(x + irandom(-5000, 5000), y + irandom(-5000, 5000), random(.6,1), "Ghosts")
     for _, ship in ipairs(defenders) do
       table.insert(Defence_station.ghost_defenders, ship)
     end
-    Player:addToShipLog("We have activated a drone defence system!","Red")
+    Player:addToShipLog(_("nebula-bonuses", "We have activated a drone defence system!"),"Red")
   end
 
   -- == Drone area
@@ -787,7 +787,7 @@ function init()
   InitCheevos()
   InitTraffic()
 
-  Defence_station:sendCommsMessage(Player, [[Greetings, Captain.
+  Defence_station:sendCommsMessage(Player, _("defence-comms", [[Greetings, Captain.
 
 You've been assigned a tour of duty in the Zeta Belt. It's neutral territory with a bit of everything... nebulae, asteroids, baby planets, and dangerous old scrap.
 
@@ -796,7 +796,7 @@ We don't see many Kraylor around here, but we have a non-aggression treaty with 
 Your primary orders are to support all the research facilities in the area, both Human and Independent. Their safety must be guaranteed, including helping them with dangerous operations. If you can't find anything to do, check in here and we can set you up with a patrol route.
 
 Your ship, the Propitious 1, is well equipped but not exactly a war vessel, so conduct yourself carefully and try not to breach the peace tumultuously.
-]])
+]]))
 
 end
 
@@ -861,7 +861,7 @@ function InitPartsStation()
   Parts_station:setShieldsMax(1)
   Parts_station:setShields(1)
   Parts_station:onTakingDamage(function()
-    Player:addToShipLog("Firing on invulnerable target", "Yellow")
+    Player:addToShipLog(_("wormhole-comms", "Firing on invulnerable target"), "Yellow")
     if Parts_station.warned == nil then
      Parts_station.warned = true
       Wormhole_station:sendCommsMessage(Player, _("wormhole-comms", [[Captain, Stop!
@@ -1046,7 +1046,7 @@ function ConvoyGoAggro(__, instigator)
   if instigator ~= Player then return end
 
   if #Defence_station.convoy_enemies > 0 then
-    Defence_station:sendCommsMessage(Player, _([[It looks like you've aggro'd the convoy.
+    Defence_station:sendCommsMessage(Player, _("defence-comms", [[It looks like you've aggro'd the convoy.
 
 Good luck to you! Try to keep them from destroying our stations!]]))
   end
@@ -1079,7 +1079,7 @@ function DroneStationGoAggro(self, instigator)
   if not self:getCanBeDestroyed() then
     self:setShields(self:getShieldMax(0))
     self:setHull(self:getHullMax(0))
-    Player:addToShipLog("This station appears immune to our attacks", "Yellow")
+    Player:addToShipLog(_("This station appears immune to our attacks"), "Yellow")
   end
 
   ConvoyGoAggro(nil, instigator)
@@ -1128,9 +1128,9 @@ function KWGoAggro(self, instigator)
   local repToLose = 10 * Difficulty
   Player:takeReputationPoints(repToLose)
   Player:addToShipLog("We have lost "..repToLose.." reputation for breaking the treaty", "Red")
-  Kw_mainStation:sendCommsMessage(Player, [[You will regret this!
+  Kw_mainStation:sendCommsMessage(Player, _([[You will regret this!
 
-You have violated our non-aggression treaty, and will soon regret your actions.]])
+You have violated our non-aggression treaty, and will soon regret your actions.]]))
   StartMissionRepair()
 end
 
@@ -1348,7 +1348,7 @@ Ah, I see why it's giving you trouble. Everything reads as okay, but the Gravito
 The good news is that it's easy to swap these out, the tech at the wormhole station should be able to do it. The bad news is that we have a shortage of Graviton Lenses right now because of those drone convoys.
 
 I've put in a requisition for one in your name. If you can find one in a Navy storehouse, bring it to the wormhole station and they should be good to go.]]))
-          Player:addToShipLog("Find a Graviton Lens", "Green")
+          Player:addToShipLog(_("colony-comms", "Find a Graviton Lens"), "Green")
           Admin_station.req_lens = true
           end)
         end
@@ -1728,12 +1728,12 @@ function UpdateMissionLost()
   end
 
   if Admin_station.assist_ship.state == "waiting" and distance(Admin_station.assist_ship, Player) <= 20000 then
-    Admin_station.assist_ship:sendCommsMessage(Player, [[Ready to head in?
+    Admin_station.assist_ship:sendCommsMessage(Player, _("admin-comms", [[Ready to head in?
 
 The nebula is very thick, so we will need to get close to find a ship with no transponder. Probes won't show the ship, but your relay station should be able to pick it up at 20U or less. There may be hazards, so be careful.
 
-I'll follow you. Let's find Dr. Hendrix and bring her crew home.]])
-    Player:addToShipLog("Fly into the Nebula and find Dr. Hendrix", "Green")
+I'll follow you. Let's find Dr. Hendrix and bring her crew home.]]))
+    Player:addToShipLog(_("admin-comms", "Fly into the Nebula and find Dr. Hendrix"), "Green")
     Admin_station.assist_ship:orderFlyFormation(Player, 2300, 1700)
     Admin_station.assist_ship.state = "done"
     Admin_station.assist_ship:setCommsScript("comms_ship.lua")
@@ -1756,7 +1756,7 @@ end
 
 function FinishMissionLost()
   Player:setLongRangeRadarRange(35000)
-  Player:addToShipLog("Sensors have been upgraded.","Green")
+  Player:addToShipLog(_("Sensors have been upgraded."),"Green")
   Player:addReputationPoints(5)
 
   -- Send to a random colony station
@@ -1830,7 +1830,7 @@ function UpdateMissionPatrol()
         SpawnPatrolEnemies()
       else
         Defence_station:sendCommsMessage(Player, _("defence-comms","Please proceed to "..Defence_station.next_station))
-        Player:addToShipLog("Proceed to "..Defence_station.next_station, "Green")
+        Player:addToShipLog(_("defence-comms", "Proceed to ")..Defence_station.next_station, "Green")
       end
       Player:addReputationPoints(2)
     end
@@ -1932,12 +1932,12 @@ function StartMissionSpareParts()
   end
 
   if missiles >= 6 or Difficulty == 5 then
-    lastpart = "and when in doubt - apply missiles."
+    lastpart = _("wormhole-comms", "and when in doubt - apply missiles.")
   elseif Difficulty == 1 then
-    lastpart = "and we've given you some extra missiles to help get the job done."
+    lastpart = _("wormhole-comms", "and we've given you some extra missiles to help get the job done.")
     Player:setWeaponStorage("Homing", 6 - missiles + Player:getWeaponStorage("Homing"))
   elseif Difficulty == 3 then
-    lastpart = "and go find some extra missiles to help get the job done."
+    lastpart = _("wormhole-comms", "and go find some extra missiles to help get the job done.")
   end
 
   setCommsMessage(_("wormhole-comms", [[Great!
@@ -1968,7 +1968,7 @@ We have hacked the emergency integrity field so that the station can be destroye
 This is the Kraylor Advanced "Reasearch" Project Agency (KARPA), we have detected your suspicious activity in the vicinity.
 
 We are sending a team to investigate what you are up to. If you fire on us, there will be trouble!]]))
-      Player:addToShipLog("The Kraylor are investigating our activities and have warned us not to escalate", "Yellow")
+      Player:addToShipLog(_("kw-comms", "The Kraylor are investigating our activities and have warned us not to escalate"), "Yellow")
       SpawnKWEnemies(false)
     else
       SpawnKWEnemies(true) -- If not alive, make all reinforcements immediately aggro
@@ -1978,7 +1978,7 @@ We are sending a team to investigate what you are up to. If you fire on us, ther
 
 You'd better hurry back, we've seen some Kraylor activity in the area. Hopefully your salvage mission didn't attract the wrong sort of attention.]]
       ))
-      Player:addToShipLog("Return the spare parts to the Wormhole Station", "Green")
+      Player:addToShipLog(_("wormhole-comms", "Return the spare parts to the Wormhole Station"), "Green")
       Player.hasSpareParts = true
     end)
 
@@ -1990,7 +1990,7 @@ You'd better hurry back, we've seen some Kraylor activity in the area. Hopefully
     local y_d = y - (2 * (y - y_t)) + irandom(-1000, 1000)
     Parts_station:setPosition(x_d, y_d)
     Player:addReputationPoints(1)
-    Player:addToShipLog("Jump Defence Activated","Yellow")
+    Player:addToShipLog(_("wormhole-comms", "Jump Defence Activated"),"Yellow")
   end)
 end
 
@@ -2015,12 +2015,12 @@ function UpdateMissionSpareParts()
 
       if distance(Player, Wormhole_station) < 5000 and Player.hasSpareParts == true then
         Investigator.warned = true
-        Investigator:sendCommsMessage(Player, [[Watch your back, Hugh Mon!
+        Investigator:sendCommsMessage(Player, _("kw-comms", [[Watch your back, Hugh Mon!
 
 We don't know what you're up to, but we don't like the look of it. Keep your distance and maybe we'll leave you alone.
 
-<The Kraylor Vessel jumps back through the wormhole>]])
-        Player:addToShipLog("The Kraylor seem hostile and have warned us to keep our distance", "Yellow")
+<The Kraylor Vessel jumps back through the wormhole>]]))
+        Player:addToShipLog(_("kw-comms", "The Kraylor seem hostile and have warned us to keep our distance"), "Yellow")
         Investigator:setPosition(377672, 540642)
         Investigator:orderStandGround()
         StartMissionRepair()
@@ -2082,17 +2082,17 @@ function UpdateMissionDroneNest()
       if with_convoy and Player:getFaction() == "Ghosts" and not Defence_station.cover_blown then
         Defence_station.tier2_mission_state = "arrived"
         Defence_station.drones_think_were_friendly = true
-        Defence_station:sendCommsMessage(Player, [[Arrived, scan the security beacons]])
+        Defence_station:sendCommsMessage(Player, _("defence-comms", [[Arrived, scan the security beacons]]))
       else
         if not Defence_station.cover_blown then
           Defence_station.cover_blown = true
-          Defence_station:sendCommsMessage(Player, [[Your cover has been blown and the proximity defence system remains active. We suggest leaving and trying again to arrive with a future convoy.]])
-          Player:addToShipLog("Our cover has been blown", "Red")
+          Defence_station:sendCommsMessage(Player, _("defence-comms", [[Your cover has been blown and the proximity defence system remains active. We suggest leaving and trying again to arrive with a future convoy.]]))
+          Player:addToShipLog(_("defence-comms", "Our cover has been blown"), "Red")
         end
       end
     else
       if Defence_station.cover_blown then
-        Player:addToShipLog("We should be good to try again", "Green")
+        Player:addToShipLog(_("defence-comms", "We should be good to try again"), "Green")
         Defence_station.cover_blown = false
       end
     end
@@ -2126,10 +2126,10 @@ function FinishMissionDroneNest ()
   end
   Player:setFaction("Human Navy")
   Liquidation_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):onTakingDamage(CommsBeingAttacked):setCallSign("DB-3"):setPosition(Drone_control_station.x, Drone_control_station.y):setCommsFunction(CommsDroneStation)
-  Liquidation_station:sendCommsMessage(Player, [[Great work, Captain!
+  Liquidation_station:sendCommsMessage(Player, _("drone-comms", [[Great work, Captain!
 
-We have taken control of this station and will be liquidating spare parts from the wreckage.]])
-  Player:addToShipLog("DB-3 has a collection of spare parts", "Green")
+We have taken control of this station and will be liquidating spare parts from the wreckage.]]))
+  Player:addToShipLog(_("drone-comms", "DB-3 has a collection of spare parts"), "Green")
   Player:addReputationPoints(20)
 
   -- If all other discoverable missions are done, shorten the fuze on the repair mission start
@@ -2213,7 +2213,7 @@ function UpdateMissionRepair(delta)
 You really saved our ass there. Unfortunately our Hawking Scanner was damaged by the bomb, and we haven't been able to get it back online. Do you think you could get it fixed for us?
 
 Please dock with us to pick up the scanner.]]))
-      Player:addToShipLog("Get the Hawking Scanner from the Wormhole Station", "Green")
+      Player:addToShipLog(_("wormhole-comms", "Get the Hawking Scanner from the Wormhole Station"), "Green")
     end
   end
 
@@ -2305,8 +2305,8 @@ function UpdateDroneStations()
             d:orderAttack(Player)
             table.insert(Defence_station.ghost_defenders, d)
           end
-          stn:sendCommsMessage(Player, [[PROXIMITY DEFENCE SYSTEM ACTIVATED]])
-          Player:addToShipLog("We got too close to a drone station and it launched defences.", "Red")
+          stn:sendCommsMessage(Player, _("drone-comms", [[PROXIMITY DEFENCE SYSTEM ACTIVATED]]))
+          Player:addToShipLog(_("drone-comms", "We got too close to a drone station and it launched defences."), "Red")
           CHEEVOS["distancing"] = false
         end
       end
@@ -2317,7 +2317,7 @@ function UpdateDroneStations()
   if Defence_station.tier2_mission_state ~= nil then
     if Defence_station.all_beacons_scanned ~= true then
       local scanned = 0
-      local desc = "The Ghosts drone security beacons. If we scan them all, we should be able to find the control station. We'll need to get pretty close."
+      local desc = _("security-beacons", "The Ghosts drone security beacons. If we scan them all, we should be able to find the control station. We'll need to get pretty close.")
       for __, a in ipairs(Drone_artifacts) do
         if a:isScannedBy(Player) then
           CHEEVOS["DMCA"] = false
@@ -2325,11 +2325,11 @@ function UpdateDroneStations()
         elseif distance(Player, a) < 2500 then
           if a.close_latch ~= true then
             a.close_latch = true
-            a:setDescriptions(_("security-beacons", desc), _("security-beacons", "The beamforming configuration from this beacon will help the boffins triangulate the location of the central control.")):setScanningParameters(1,1)
+            a:setDescriptions(desc, _("security-beacons", "The beamforming configuration from this beacon will help the boffins triangulate the location of the central control.")):setScanningParameters(1,1)
           end
         else
             a.close_latch = false
-            a:setDescriptions(_("security-beacons", desc), ""):setScanningParameters(0,0)
+            a:setDescriptions(desc, ""):setScanningParameters(0,0)
         end
       end
       if scanned >= #Drone_artifacts then
@@ -2339,7 +2339,7 @@ function UpdateDroneStations()
   Our boffins were able to piece together the data and figure out where the commands are coming from.
 
   You must destroy station ]]..Drone_control_station:getCallSign()))
-        Player:addToShipLog("The drone control station is "..Drone_control_station:getCallSign(), "Green")
+        Player:addToShipLog(_("defence-comms", "The drone control station is ")..Drone_control_station:getCallSign(), "Green")
       end
     end
   end
@@ -2448,7 +2448,7 @@ function CheckDefeatConditions()
 
   if Defence_station.tier2_mission_state == "done" then
     if not Liquidation_station:isValid() then
-      Player:addToShipLog("DEFEAT - Station B-3 has been destroyed", "Red")
+      Player:addToShipLog(_("DEFEAT - Station B-3 has been destroyed"), "Red")
       victory("Exuari")
     end
   end
