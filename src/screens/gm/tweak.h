@@ -181,9 +181,9 @@ class GuiShipTweakSystems : public GuiTweakPage
 private:
     P<SpaceShip> target;
 
-    GuiSlider* system_damage[SYS_COUNT];
-    GuiSlider* system_health_max[SYS_COUNT];
-    GuiSlider* system_heat[SYS_COUNT];
+    GuiSlider* system_damage[ShipSystem::COUNT];
+    GuiSlider* system_health_max[ShipSystem::COUNT];
+    GuiSlider* system_heat[ShipSystem::COUNT];
 
 public:
     GuiShipTweakSystems(GuiContainer* owner);
@@ -197,8 +197,8 @@ class GuiShipTweakSystemPowerFactors : public GuiTweakPage
 {
 private:
     P<SpaceShip> target;
-    GuiLabel* system_current_power_factor[SYS_COUNT];
-    GuiTextEntry* system_power_factor[SYS_COUNT];
+    GuiLabel* system_current_power_factor[ShipSystem::COUNT];
+    GuiTextEntry* system_power_factor[ShipSystem::COUNT];
 
     static string powerFactorToText(float);
 public:
@@ -223,10 +223,10 @@ public:
     void open(P<SpaceObject> target) override;
     void onDraw(sp::RenderTarget& target) override;
 private:
-    float getRateValue(ESystem system, Type type) const;
-    void setRateValue(ESystem system, Type type, float value);
-    std::array<GuiLabel*, SYS_COUNT> current_rates;
-    std::array<GuiTextEntry*, SYS_COUNT> desired_rates;
+    float getRateValue(ShipSystem::Type system, Type type) const;
+    void setRateValue(ShipSystem::Type system, Type type, float value);
+    std::array<GuiLabel*, ShipSystem::COUNT> current_rates;
+    std::array<GuiTextEntry*, ShipSystem::COUNT> desired_rates;
 
     P<SpaceShip> target;
     Type type;

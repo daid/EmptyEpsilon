@@ -32,7 +32,7 @@ public:
     };
 
     int frequency = 0;
-    ESystem system_target = SYS_None;
+    ShipSystem::Type system_target = ShipSystem::Type::None;
     sp::ecs::Entity target;
 
     MountPoint mounts[max_beam_weapons];

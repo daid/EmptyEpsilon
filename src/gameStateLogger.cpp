@@ -379,6 +379,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         json.endArray();
     }
     */
+    /*
     {
         JSONGenerator systems = json.createDict("systems");
         for(int n=0; n<SYS_COUNT; n++)
@@ -399,28 +400,29 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
             }
         }
     }
+    */
     {
         JSONGenerator input = json.createDict("input");
-        input.write("rotation", ship->target_rotation);
+        //input.write("rotation", ship->target_rotation);
         //input.write("impulse", ship->impulse_request);
         //if (ship->has_warp_drive)
         //    input.write("warp", ship->warp_request);
-        if (ship->combat_maneuver_boost_speed > 0)
-            input.write("combat_maneuver_boost", ship->combat_maneuver_boost_request);
-        if (ship->combat_maneuver_strafe_speed > 0)
-            input.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_request);
+        //if (ship->combat_maneuver_boost_speed > 0)
+        //    input.write("combat_maneuver_boost", ship->combat_maneuver_boost_request);
+        //if (ship->combat_maneuver_strafe_speed > 0)
+        //    input.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_request);
     }
     {
         JSONGenerator output = json.createDict("output");
         //output.write("impulse", ship->current_impulse);
         //if (ship->has_warp_drive)
         //    output.write("warp", ship->current_warp);
-        if (ship->combat_maneuver_boost_speed > 0 || ship->combat_maneuver_strafe_speed > 0)
-            output.write("combat_maneuver_charge", ship->combat_maneuver_charge);
-        if (ship->combat_maneuver_boost_speed > 0)
-            output.write("combat_maneuver_boost", ship->combat_maneuver_boost_active);
-        if (ship->combat_maneuver_strafe_speed > 0)
-            output.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_active);
+        //if (ship->combat_maneuver_boost_speed > 0 || ship->combat_maneuver_strafe_speed > 0)
+        //    output.write("combat_maneuver_charge", ship->combat_maneuver_charge);
+        //if (ship->combat_maneuver_boost_speed > 0)
+        //    output.write("combat_maneuver_boost", ship->combat_maneuver_boost_active);
+        //if (ship->combat_maneuver_strafe_speed > 0)
+        //    output.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_active);
         /*if (ship->has_jump_drive)
         {
             JSONGenerator jump = output.createDict("jump");
@@ -435,7 +437,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     }
     {
         JSONGenerator config = json.createDict("config");
-        config.write("turn_speed", ship->turn_speed);
+        //config.write("turn_speed", ship->turn_speed);
         //config.write("impulse_speed", ship->impulse_max_speed);
         //config.write("impulse_acceleration", ship->impulse_acceleration);
         //config.write("impulse_reverse_speed", ship->impulse_max_reverse_speed);
@@ -443,10 +445,10 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         //config.write("hull", ship->hull_max);
         //if (ship->has_warp_drive)
         //    config.write("warp", ship->warp_speed_per_warp_level);
-        if (ship->combat_maneuver_boost_speed > 0)
-            config.write("combat_maneuver_boost", ship->combat_maneuver_boost_speed);
-        if (ship->combat_maneuver_strafe_speed > 0)
-            config.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_speed);
+        //if (ship->combat_maneuver_boost_speed > 0)
+        //    config.write("combat_maneuver_boost", ship->combat_maneuver_boost_speed);
+        //if (ship->combat_maneuver_strafe_speed > 0)
+        //    config.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_speed);
         //if (ship->has_jump_drive)
         //    config.write("jumpdrive", true);
         /*

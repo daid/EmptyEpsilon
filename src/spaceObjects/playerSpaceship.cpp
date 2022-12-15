@@ -11,11 +11,13 @@
 #include "random.h"
 
 #include "components/reactor.h"
+#include "components/coolant.h"
 #include "components/beamweapon.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
+#include "components/maneuveringthrusters.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
@@ -343,8 +345,6 @@ PlayerSpaceship::PlayerSpaceship()
     comms_open_delay = 0.0;
     shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
-    auto_coolant_enabled = false;
-    max_coolant = max_coolant_per_system;
     scan_probe_stock = max_scan_probes;
     alert_level = AL_Normal;
     shields_active = false;
@@ -356,7 +356,6 @@ PlayerSpaceship::PlayerSpaceship()
     for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
         setScannedStateForFaction(faction_id, SS_FullScan);
 
-    updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
     registerMemberReplication(&can_combat_maneuver);
@@ -373,8 +372,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shields_active);
     registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
-    registerMemberReplication(&max_coolant);
-    registerMemberReplication(&auto_coolant_enabled);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
     registerMemberReplication(&comms_reply_message);
@@ -401,31 +398,6 @@ PlayerSpaceship::PlayerSpaceship()
         registerMemberReplication(&self_destruct_code_confirmed[n]);
         registerMemberReplication(&self_destruct_code_entry_position[n]);
         registerMemberReplication(&self_destruct_code_show_position[n]);
-    }
-
-    // Initialize each subsystem to be powered with no coolant or heat.
-    for(unsigned int n = 0; n < SYS_COUNT; n++)
-    {
-        SDL_assert(n < default_system_power_factors.size());
-        systems[n].health = 1.0f;
-        systems[n].power_level = 1.0f;
-        systems[n].power_rate_per_second = ShipSystemLegacy::default_power_rate_per_second;
-        systems[n].power_request = 1.0f;
-        systems[n].coolant_level = 0.0f;
-        systems[n].coolant_rate_per_second = ShipSystemLegacy::default_coolant_rate_per_second;
-        systems[n].heat_level = 0.0f;
-        systems[n].heat_rate_per_second = ShipSystemLegacy::default_heat_rate_per_second;
-        systems[n].power_factor = default_system_power_factors[n];
-
-        registerMemberReplication(&systems[n].power_level);
-        registerMemberReplication(&systems[n].power_rate_per_second, .5f);
-        registerMemberReplication(&systems[n].power_request);
-        registerMemberReplication(&systems[n].coolant_level);
-        registerMemberReplication(&systems[n].coolant_rate_per_second, .5f);
-        registerMemberReplication(&systems[n].coolant_request);
-        registerMemberReplication(&systems[n].heat_level, 1.0);
-        registerMemberReplication(&systems[n].heat_rate_per_second, .5f);
-        registerMemberReplication(&systems[n].power_factor);
     }
 
     if (game_server)
@@ -462,28 +434,9 @@ void PlayerSpaceship::update(float delta)
     // subsystem effectiveness when determining the tick rate.
     if (shield_calibration_delay > 0)
     {
-        shield_calibration_delay -= delta * (getSystemEffectiveness(SYS_FrontShield) + getSystemEffectiveness(SYS_RearShield)) / 2.0f;
-    }
-
-    // Automate cooling if auto_coolant_enabled is true. Distributes coolant to
-    // subsystems proportionally to their share of the total generated heat.
-    if (auto_coolant_enabled)
-    {
-        float total_heat = 0.0;
-
-        for(int n = 0; n < SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-            total_heat += systems[n].heat_level;
-        }
-        if (total_heat > 0.0f)
-        {
-            for(int n = 0; n < SYS_COUNT; n++)
-            {
-                if (!hasSystem(ESystem(n))) continue;
-                systems[n].coolant_request = max_coolant * systems[n].heat_level / total_heat;
-            }
-        }
+        auto front = ShipSystem::get(entity, ShipSystem::Type::FrontShield);
+        auto rear = ShipSystem::get(entity, ShipSystem::Type::RearShield);
+        shield_calibration_delay -= delta * ((front ? front->getSystemEffectiveness() : 0) + (rear ? rear->getSystemEffectiveness() : 0)) / 2.0f;
     }
 
     // Actions performed on the server only.
@@ -539,75 +492,6 @@ void PlayerSpaceship::update(float delta)
 
         // Consume power based on subsystem requests and state.
         auto reactor = entity.getComponent<Reactor>();
-        if (reactor) {
-            reactor->energy += delta * getNetSystemEnergyUsage();
-            // Cap energy at the max_energy_level.
-            reactor->energy = std::clamp(reactor->energy, 0.0f, reactor->max_energy);
-        }
-
-        // Check how much coolant we have requested in total, and if that's beyond the
-        //  amount of coolant we have, see how much we need to adjust our request.
-        float total_coolant_request = 0.0f;
-        for(int n = 0; n < SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-            total_coolant_request += systems[n].coolant_request;
-        }
-        float coolant_request_factor = 1.0f;
-        if (total_coolant_request > max_coolant)
-            coolant_request_factor = max_coolant / total_coolant_request;
-
-        for(int n = 0; n < SYS_COUNT; n++)
-        {
-            if (!hasSystem(ESystem(n))) continue;
-
-            if (systems[n].power_request > systems[n].power_level)
-            {
-                systems[n].power_level += delta * systems[n].power_rate_per_second;
-                if (systems[n].power_level > systems[n].power_request)
-                    systems[n].power_level = systems[n].power_request;
-            }
-            else if (systems[n].power_request < systems[n].power_level)
-            {
-                systems[n].power_level -= delta * systems[n].power_rate_per_second;
-                if (systems[n].power_level < systems[n].power_request)
-                    systems[n].power_level = systems[n].power_request;
-            }
-
-            float coolant_request = systems[n].coolant_request * coolant_request_factor;
-            if (coolant_request > systems[n].coolant_level)
-            {
-                systems[n].coolant_level += delta * systems[n].coolant_rate_per_second;
-                if (systems[n].coolant_level > coolant_request)
-                    systems[n].coolant_level = coolant_request;
-            }
-            else if (coolant_request < systems[n].coolant_level)
-            {
-                systems[n].coolant_level -= delta * systems[n].coolant_rate_per_second;
-                if (systems[n].coolant_level < coolant_request)
-                    systems[n].coolant_level = coolant_request;
-            }
-
-            // Add heat to overpowered subsystems.
-            addHeat(ESystem(n), delta * systems[n].getHeatingDelta() * systems[n].heat_rate_per_second);
-        }
-
-        // If reactor health is worse than -90% and overheating, it explodes,
-        // destroying the ship and damaging a 0.5U radius.
-        auto hull = entity.getComponent<Hull>();
-        if (hull && hull->allow_destruction && systems[SYS_Reactor].health < -0.9f && systems[SYS_Reactor].heat_level == 1.0f)
-        {
-            ExplosionEffect* e = new ExplosionEffect();
-            e->setSize(1000.0f);
-            e->setPosition(getPosition());
-            e->setRadarSignatureInfo(0.0, 0.4, 0.4);
-
-            DamageInfo info(this, DT_Kinetic, getPosition());
-            SpaceObject::damageArea(getPosition(), 500, 30, 60, info, 0.0);
-
-            destroy();
-            return;
-        }
 
         // If the ship has less than 10 energy, drop shields automatically.
         if (reactor && reactor->energy < 10.0f)
@@ -730,41 +614,17 @@ void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
 
 void PlayerSpaceship::setMaxCoolant(float coolant)
 {
-    max_coolant = std::max(coolant, 0.0f);
+    //TODO
 }
 
-void PlayerSpaceship::setSystemCoolantRequest(ESystem system, float request)
+void PlayerSpaceship::setSystemCoolantRequest(ShipSystem::Type system, float request)
 {
-    request = std::max(0.0f, std::min(request, std::min((float) max_coolant_per_system, max_coolant)));
-    systems[system].coolant_request = request;
-}
-
-void PlayerSpaceship::addHeat(ESystem system, float amount)
-{
-    // Add heat to a subsystem if it's present.
-    if (!hasSystem(system)) return;
-
-    systems[system].heat_level += amount;
-
-    if (systems[system].heat_level > 1.0f)
-    {
-        float overheat = systems[system].heat_level - 1.0f;
-        systems[system].heat_level = 1.0f;
-
-        if (gameGlobalInfo->use_system_damage)
-        {
-            // Heat damage is specified as damage per second while overheating.
-            // Calculate the amount of overheat back to a time, and use that to
-            // calculate the actual damage taken.
-            systems[system].health -= overheat / systems[system].heat_rate_per_second * damage_per_second_on_overheat;
-
-            if (systems[system].health < -1.0f)
-                systems[system].health = -1.0f;
-        }
-    }
-
-    if (systems[system].heat_level < 0.0f)
-        systems[system].heat_level = 0.0f;
+    auto coolant = entity.getComponent<Coolant>();
+    if (!coolant) return;
+    request = std::clamp(request, 0.0f, std::min((float) coolant->max_coolant_per_system, coolant->max));
+    auto sys = ShipSystem::get(entity, system);
+    if (sys)
+        sys->coolant_request = request;
 }
 
 void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
@@ -774,37 +634,6 @@ void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
     packet << max_crew_positions;
     packet << sound_name;
     broadcastServerCommand(packet);
-}
-
-float PlayerSpaceship::getNetSystemEnergyUsage()
-{
-    // Get the net delta of energy draw for subsystems.
-    float net_power = 0.0;
-
-    // Determine each subsystem's energy draw.
-    for(int n = 0; n < SYS_COUNT; n++)
-    {
-        
-        if (!hasSystem(ESystem(n))) continue;
-
-        const auto& system = systems[n];
-        // Factor the subsystem's health into energy generation.
-        auto power_user_factor = system.getPowerUserFactor();
-        if (power_user_factor < 0)
-        {
-            float f = getSystemEffectiveness(ESystem(n));
-            if (f > 1.0f)
-                f = (1.0f + f) / 2.0f;
-            net_power -= power_user_factor * f;
-        }
-        else
-        {
-            net_power -= power_user_factor * system.power_level;
-        }
-    }
-
-    // Return the net subsystem energy draw.
-    return net_power;
 }
 
 int PlayerSpaceship::getRepairCrewCount()
@@ -1131,7 +960,7 @@ bool PlayerSpaceship::getCanDock()
     return entity.hasComponent<DockingPort>();
 }
 
-ESystem PlayerSpaceship::getBeamSystemTarget() { return SYS_None; /* TODO */ }
+ShipSystem::Type PlayerSpaceship::getBeamSystemTarget() { return ShipSystem::Type::None; /* TODO */ }
 string PlayerSpaceship::getBeamSystemTargetName() { return ""; /* TODO */ }
 
 void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet)
@@ -1143,14 +972,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
 
     switch(command)
     {
-    case CMD_TARGET_ROTATION:
-        turnSpeed = 0;
-        packet >> target_rotation;
-        break;
-    case CMD_TURN_SPEED:
-        target_rotation = getRotation();
-        packet >> turnSpeed;
-        break;
+    case CMD_TARGET_ROTATION:{
+        float f;
+        packet >> f;
+        auto thrusters = entity.getComponent<ManeuveringThrusters>();
+        if (thrusters) { thrusters->stop(); thrusters->target = f; }
+        }break;
+    case CMD_TURN_SPEED:{
+        float f;
+        packet >> f;
+        auto thrusters = entity.getComponent<ManeuveringThrusters>();
+        if (thrusters) { thrusters->stop(); thrusters->rotation_request = f; }
+        }break;
     case CMD_IMPULSE:{
         auto engine = entity.getComponent<ImpulseEngine>();
         if (engine)
@@ -1269,20 +1102,20 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_SET_SYSTEM_POWER_REQUEST:
         {
-            ESystem system;
+            ShipSystem::Type system;
             float request;
             packet >> system >> request;
-            if (system < SYS_COUNT && request >= 0.0f && request <= 3.0f)
-                systems[system].power_request = request;
+            auto sys = ShipSystem::get(entity, system);
+            if (sys && request >= 0.0f && request <= 3.0f)
+                sys->power_request = request;
         }
         break;
     case CMD_SET_SYSTEM_COOLANT_REQUEST:
         {
-            ESystem system;
+            ShipSystem::Type system;
             float request;
             packet >> system >> request;
-            if (system < SYS_COUNT && request >= 0.0f && request <= 10.0f)
-                setSystemCoolantRequest(system, request);
+            setSystemCoolantRequest(system, request);
         }
         break;
     case CMD_DOCK:
@@ -1439,11 +1272,11 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
         {
-            ESystem system;
+            ShipSystem::Type system;
             packet >> system;
             auto beamweapons = entity.getComponent<BeamWeaponSys>();
             if (beamweapons)
-                beamweapons->system_target = (ESystem)std::clamp((int)system, 0, (int)(SYS_COUNT - 1));
+                beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, 0, (int)(ShipSystem::COUNT - 1));
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
@@ -1534,16 +1367,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             float request_amount;
             packet >> request_amount;
-            if (request_amount >= 0.0f && request_amount <= 1.0f)
-                combat_maneuver_boost_request = request_amount;
+            auto combat = entity.getComponent<CombatManeuveringThrusters>();
+            if (combat)
+                combat->boost.request = request_amount;
         }
         break;
     case CMD_COMBAT_MANEUVER_STRAFE:
         {
             float request_amount;
             packet >> request_amount;
-            if (request_amount >= -1.0f && request_amount <= 1.0f)
-                combat_maneuver_strafe_request = request_amount;
+            auto combat = entity.getComponent<CombatManeuveringThrusters>();
+            if (combat)
+                combat->strafe.request = request_amount;
         }
         break;
     case CMD_LAUNCH_PROBE:
@@ -1597,7 +1432,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
     case CMD_HACKING_FINISHED:
         {
             int32_t id;
-            string target_system;
+            ShipSystem::Type target_system;
             packet >> id >> target_system;
             P<SpaceObject> obj = game_server->getObjectById(id);
             if (obj)
@@ -1741,18 +1576,20 @@ void PlayerSpaceship::commandScan(P<SpaceObject> object)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetSystemPowerRequest(ESystem system, float power_request)
+void PlayerSpaceship::commandSetSystemPowerRequest(ShipSystem::Type system, float power_request)
 {
     sp::io::DataBuffer packet;
-    systems[system].power_request = power_request;
+    auto sys = ShipSystem::get(entity, system);
+    if (sys) sys->power_request = power_request;
     packet << CMD_SET_SYSTEM_POWER_REQUEST << system << power_request;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetSystemCoolantRequest(ESystem system, float coolant_request)
+void PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_request)
 {
     sp::io::DataBuffer packet;
-    systems[system].coolant_request = coolant_request;
+    auto sys = ShipSystem::get(entity, system);
+    if (sys) sys->coolant_request = coolant_request;
     packet << CMD_SET_SYSTEM_COOLANT_REQUEST << system << coolant_request;
     sendClientCommand(packet);
 }
@@ -1829,7 +1666,7 @@ void PlayerSpaceship::commandSetBeamFrequency(int32_t frequency)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetBeamSystemTarget(ESystem system)
+void PlayerSpaceship::commandSetBeamSystemTarget(ShipSystem::Type system)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_BEAM_SYSTEM_TARGET << system;
@@ -1887,7 +1724,9 @@ void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
 
 void PlayerSpaceship::commandCombatManeuverBoost(float amount)
 {
-    combat_maneuver_boost_request = amount;
+    auto combat = entity.getComponent<CombatManeuveringThrusters>();
+    if (!combat) return;
+    combat->boost.request = amount;
     sp::io::DataBuffer packet;
     packet << CMD_COMBAT_MANEUVER_BOOST << amount;
     sendClientCommand(packet);
@@ -1895,7 +1734,9 @@ void PlayerSpaceship::commandCombatManeuverBoost(float amount)
 
 void PlayerSpaceship::commandCombatManeuverStrafe(float amount)
 {
-    combat_maneuver_strafe_request = amount;
+    auto combat = entity.getComponent<CombatManeuveringThrusters>();
+    if (!combat) return;
+    combat->strafe.request = amount;
     sp::io::DataBuffer packet;
     packet << CMD_COMBAT_MANEUVER_STRAFE << amount;
     sendClientCommand(packet);
@@ -1930,7 +1771,7 @@ void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, string target_system)
+void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, ShipSystem::Type target_system)
 {
     sp::io::DataBuffer packet;
     packet << CMD_HACKING_FINISHED;
@@ -2031,12 +1872,13 @@ string PlayerSpaceship::getExportLine()
         result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
     if (can_launch_probe != ship_template->can_launch_probe)
         result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
-    if (auto_coolant_enabled)
-        result += ":setAutoCoolant(true)";
+    //if (auto_coolant_enabled)
+    //    result += ":setAutoCoolant(true)";
     if (auto_repair_enabled)
         result += ":commandSetAutoRepair(true)";
 
     // Update power factors, only for the systems where it changed.
+    /*
     for (unsigned int sys_index = 0; sys_index < SYS_COUNT; ++sys_index)
     {
         auto system = static_cast<ESystem>(sys_index);
@@ -2067,6 +1909,7 @@ string PlayerSpaceship::getExportLine()
             }
         }
     }
+    */
 
     if (std::fabs(getEnergyShieldUsePerSecond() - default_energy_shield_use_per_second) > std::numeric_limits<float>::epsilon())
     {

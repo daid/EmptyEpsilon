@@ -36,9 +36,6 @@ class PlayerSpaceship : public SpaceShip
 public:
     // Power consumption and generation base rates
     constexpr static float default_energy_shield_use_per_second = 1.5f;
-    // Total coolant
-    constexpr static float max_coolant_per_system = 10.0f;
-    float max_coolant;
     // Overheat subsystem damage rate
     constexpr static float damage_per_second_on_overheat = 0.08f;
     // Base time it takes to perform an action
@@ -92,7 +89,6 @@ public:
     float shield_calibration_delay;
     // Ship automation features, mostly for single-person ships like fighters
     bool auto_repair_enabled;
-    bool auto_coolant_enabled;
     // Whether shields are up (true) or down
     bool shields_active;
     // Password to join a ship. Default is empty.
@@ -233,7 +229,7 @@ public:
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
-    ESystem getBeamSystemTarget();
+    ShipSystem::Type getBeamSystemTarget();
     string getBeamSystemTargetName();
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
@@ -253,8 +249,8 @@ public:
     void commandMainScreenSetting(EMainScreenSetting mainScreen);
     void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
     void commandScan(P<SpaceObject> object);
-    void commandSetSystemPowerRequest(ESystem system, float power_level);
-    void commandSetSystemCoolantRequest(ESystem system, float coolant_level);
+    void commandSetSystemPowerRequest(ShipSystem::Type system, float power_level);
+    void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
     void commandDock(P<SpaceObject> station);
     void commandUndock();
     void commandAbortDock();
@@ -265,7 +261,7 @@ public:
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
     void commandSetBeamFrequency(int32_t frequency);
-    void commandSetBeamSystemTarget(ESystem system);
+    void commandSetBeamSystemTarget(ShipSystem::Type system);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(glm::vec2 position);
     void commandRemoveWaypoint(int32_t index);
@@ -279,7 +275,7 @@ public:
     void commandScanDone();
     void commandScanCancel();
     void commandSetAlertLevel(EAlertLevel level);
-    void commandHackingFinished(P<SpaceObject> target, string target_system);
+    void commandHackingFinished(P<SpaceObject> target, ShipSystem::Type target_system);
     void commandCustomFunction(string name);
 
     virtual void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
@@ -289,10 +285,10 @@ public:
 
     // Ship status functions
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
-    void setSystemCoolantRequest(ESystem system, float request);
+    void setSystemCoolantRequest(ShipSystem::Type system, float request);
     void setMaxCoolant(float coolant);
-    float getMaxCoolant() { return max_coolant; }
-    void setAutoCoolant(bool active) { auto_coolant_enabled = active; }
+    float getMaxCoolant() { return 10.0f; } //TODO
+    void setAutoCoolant(bool active) {} //TODO
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
     EAlertLevel getAlertLevel() { return alert_level; }
@@ -305,12 +301,9 @@ public:
 
     // Ship update functions
     virtual void update(float delta) override;
-    virtual void addHeat(ESystem system, float amount) override;
 
     // Call on the server to play a sound on the main screen.
     void playSoundOnMainScreen(string sound_name);
-
-    float getNetSystemEnergyUsage();
 
     // Ship's log functions
     void addToShipLog(string message, glm::u8vec4 color);

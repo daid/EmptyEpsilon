@@ -382,12 +382,12 @@ bool SpaceObject::canBeHackedBy(P<SpaceObject> other)
     return false;
 }
 
-std::vector<std::pair<ESystem, float> > SpaceObject::getHackingTargets()
+std::vector<std::pair<ShipSystem::Type, float> > SpaceObject::getHackingTargets()
 {
-    return std::vector<std::pair<ESystem, float> >();
+    return std::vector<std::pair<ShipSystem::Type, float> >();
 }
 
-void SpaceObject::hackFinished(P<SpaceObject> source, string target)
+void SpaceObject::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
 {
 }
 
@@ -729,7 +729,7 @@ template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& d
     if (!lua_isstring(L, idx))
         return;
 
-    convert<ESystem>::param(L, idx, di.system_target);
+    convert<ShipSystem::Type>::param(L, idx, di.system_target);
 }
 
 template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedState& ss)

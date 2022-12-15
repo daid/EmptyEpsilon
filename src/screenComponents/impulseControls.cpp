@@ -19,7 +19,7 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
     label = new GuiKeyValueDisplay(this, id, 0.5, tr("slider", "Impulse"), "0%");
     label->setTextSize(30)->setPosition(50, 0, sp::Alignment::TopLeft)->setSize(40, GuiElement::GuiSizeMax);
 
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Impulse, sp::Alignment::TopCenter))->setSize(50, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", ShipSystem::Type::Impulse, sp::Alignment::TopCenter))->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiImpulseControls::onDraw(sp::RenderTarget& target)

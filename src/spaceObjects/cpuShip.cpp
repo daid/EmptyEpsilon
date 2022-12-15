@@ -10,6 +10,7 @@
 #include "nebula.h"
 #include "random.h"
 #include "multiplayer_server.h"
+#include "components/maneuveringthrusters.h"
 
 #include "scriptInterface.h"
 
@@ -103,7 +104,6 @@ CpuShip::CpuShip()
     orders = AI_Idle;
 
     setRotation(random(0, 360));
-    target_rotation = getRotation();
 
     comms_script_name = "comms_ship.lua";
 
@@ -125,9 +125,6 @@ void CpuShip::update(float delta)
 
     if (!game_server)
         return;
-
-    for(int n=0; n<SYS_COUNT; n++)
-        systems[n].health = std::min(1.0f, systems[n].health + delta * auto_system_repair_per_second);
 
     if (new_ai_name.length() && (!ai || ai->canSwitchAI()))
     {
@@ -161,7 +158,8 @@ void CpuShip::orderIdle()
 
 void CpuShip::orderRoaming()
 {
-    target_rotation = getRotation();
+    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = glm::vec2(0, 0);
@@ -170,7 +168,8 @@ void CpuShip::orderRoaming()
 
 void CpuShip::orderRoamingAt(glm::vec2 position)
 {
-    target_rotation = getRotation();
+    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = position;
@@ -193,7 +192,8 @@ void CpuShip::orderRetreat(P<SpaceObject> object)
 
 void CpuShip::orderStandGround()
 {
-    target_rotation = getRotation();
+    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
     orders = AI_StandGround;
     order_target = NULL;
     order_target_location = glm::vec2(0, 0);

@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/maneuveringthrusters.h"
 #include "combatManeuver.h"
 #include "powerDamageIndicator.h"
 #include "snapSlider.h"
@@ -24,8 +25,8 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     });
     slider->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
 
-    (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", SYS_Maneuver, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", SYS_Impulse, sp::Alignment::BottomLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiPowerDamageIndicator(slider, id + "_STRAFE_INDICATOR", ShipSystem::Type::Maneuver, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiPowerDamageIndicator(slider, id + "_BOOST_INDICATOR", ShipSystem::Type::Impulse, sp::Alignment::BottomLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
 }
 
 void GuiCombatManeuver::onUpdate()
@@ -49,13 +50,13 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->combat_maneuver_boost_speed <= 0.0f && my_spaceship->combat_maneuver_strafe_speed <= 0.0f)
-        {
+        auto thrusters = my_spaceship->entity.getComponent<CombatManeuveringThrusters>();
+        if (thrusters) {
+            charge_bar->setValue(thrusters->charge)->show();
+            slider->show();
+        } else {
             charge_bar->hide();
             slider->hide();
-        }else{
-            charge_bar->setValue(my_spaceship->combat_maneuver_charge)->show();
-            slider->show();
         }
     }
 }

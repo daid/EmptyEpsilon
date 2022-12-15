@@ -130,12 +130,12 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
         jump_controls->setVisible(my_spaceship->entity.hasComponent<JumpDrive>());
 
         string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
-        if (my_spaceship->hasSystem(SYS_RearShield))
+        if (my_spaceship->hasSystem(ShipSystem::Type::RearShield))
         {
             shields_value += " " + string(my_spaceship->getShieldPercentage(1)) + "%";
         }
         shields_display->setValue(shields_value);
-        if (my_spaceship->hasSystem(SYS_FrontShield) || my_spaceship->hasSystem(SYS_RearShield))
+        if (my_spaceship->hasSystem(ShipSystem::Type::FrontShield) || my_spaceship->hasSystem(ShipSystem::Type::RearShield))
         {
             shields_display->show();
         } else {

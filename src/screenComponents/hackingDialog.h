@@ -2,6 +2,7 @@
 #define HACKING_DIALOG_H
 
 #include "gui/gui2_overlay.h"
+#include "components/shipsystem.h"
 #include <memory>
 
 class GuiPanel;
@@ -25,8 +26,7 @@ public:
 
 private:
     P<SpaceObject> target;
-    string target_system;
-    string locale_target_system;
+    ShipSystem::Type target_system = ShipSystem::Type::None;
     float reset_time;
     static constexpr float auto_reset_time = 2.0f;
     bool last_game_success;

@@ -28,7 +28,7 @@ GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
     });
     button->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(GuiElement::GuiSizeMax, 50);
 
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_JumpDrive, sp::Alignment::TopCenter))->setPosition(0, -50, sp::Alignment::BottomLeft)->setSize(50, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", ShipSystem::Type::JumpDrive, sp::Alignment::TopCenter))->setPosition(0, -50, sp::Alignment::BottomLeft)->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiJumpControls::onDraw(sp::RenderTarget& target)

@@ -45,7 +45,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
     label->setTextSize(30)->setPosition(50, 0, sp::Alignment::TopLeft)->setSize(40, GuiElement::GuiSizeMax);
 
     // Prep the alert overlay.
-    (new GuiPowerDamageIndicator(this, id + "_DPI", SYS_Warp, sp::Alignment::TopCenter))->setSize(50, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(this, id + "_DPI", ShipSystem::Type::Warp, sp::Alignment::TopCenter))->setSize(50, GuiElement::GuiSizeMax);
 }
 
 void GuiWarpControls::onDraw(sp::RenderTarget& target)

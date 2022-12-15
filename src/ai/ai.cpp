@@ -11,6 +11,7 @@
 #include "components/hull.h"
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
+#include "components/maneuveringthrusters.h"
 #include "systems/collision.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
@@ -63,7 +64,9 @@ void ShipAI::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 draw_position, 
 
 void ShipAI::run(float delta)
 {
-    owner->target_rotation = owner->getRotation();
+    auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) thrusters->stop();
+
     auto impulse = owner->entity.getComponent<ImpulseEngine>();
     if (impulse)
         impulse->request = 0.0f;
@@ -551,7 +554,8 @@ void ShipAI::runAttack(P<SpaceObject> target)
 
     if (owner->getOrder() == AI_StandGround)
     {
-        owner->target_rotation = vec2ToAngle(position_diff);
+        auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = vec2ToAngle(position_diff);
     }else{
         if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
         {
@@ -585,8 +589,10 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         float distance = glm::length(diff);
 
         //Normal flying towards target code
-        owner->target_rotation = vec2ToAngle(diff);
-        float rotation_diff = fabs(angleDifference(owner->target_rotation, owner->getRotation()));
+        auto target_rotation = vec2ToAngle(diff);
+        auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = target_rotation;
+        float rotation_diff = fabs(angleDifference(target_rotation, owner->getRotation()));
 
         auto warp = owner->entity.getComponent<WarpDrive>();
         if (warp && rotation_diff < 30.0f && distance > 2000.0f)
@@ -646,6 +652,7 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
 
     if (pathPlanner.route.size() == 1)
     {
+        auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
         auto docking_port = owner->entity.getComponent<DockingPort>();
         if (docking_port && docking_port->state == DockingPort::State::Docked)
             DockingSystem::requestUndock(owner->entity);
@@ -655,14 +662,14 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
 
         //Formation flying code
         float r = owner->getRadius() * 5.0f;
-        owner->target_rotation = vec2ToAngle(diff);
+        auto target_rotation = vec2ToAngle(diff);
         if (distance > r * 3)
         {
             flyTowards(target_position);
         }
         else if (distance > r)
         {
-            float angle_diff = angleDifference(owner->target_rotation, owner->getRotation());
+            float angle_diff = angleDifference(target_rotation, owner->getRotation());
             if (angle_diff > 10.0f)
                 impulse->request = 0.0f;
             else if (angle_diff > 5.0f)
@@ -672,13 +679,14 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         }else{
             if (distance > r / 2.0f)
             {
-                owner->target_rotation += angleDifference(owner->target_rotation, target->getRotation()) * (1.0f - distance / r);
+                target_rotation += angleDifference(target_rotation, target->getRotation()) * (1.0f - distance / r);
                 impulse->request = distance / r;
             }else{
-                owner->target_rotation = target->getRotation();
+                target_rotation = target->getRotation();
                 impulse->request = 0.0f;
             }
         }
+        if (thrusters) thrusters->target = target_rotation;
     }else{
         flyTowards(target_position);
     }
@@ -718,7 +726,8 @@ float ShipAI::targetScore(P<SpaceObject> target)
     //auto position_difference_normal = position_difference / distance;
     //float rel_velocity = dot(target->getVelocity(), position_difference_normal) - dot(getVelocity(), position_difference_normal);
     float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
-    float score = -distance - std::abs(angle_difference / owner->turn_speed * (impulse ? impulse->max_speed_forward : 0.0f)) * 1.5f;
+    auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+    float score = -distance - std::abs(angle_difference / (thrusters ? thrusters->speed : 10.0f) * (impulse ? impulse->max_speed_forward : 0.0f)) * 1.5f;
     if (P<SpaceStation>(target))
     {
         score -= 5000;
@@ -872,7 +881,8 @@ P<SpaceObject> ShipAI::findBestMissileRestockTarget(glm::vec2 position, float ra
         auto position_difference = obj->getPosition() - owner_position;
         float distance = glm::length(position_difference);
         float angle_difference = angleDifference(owner->getRotation(), vec2ToAngle(position_difference));
-        float score = -distance - std::abs(angle_difference / owner->turn_speed * impulse.max_speed_forward) * 1.5f;
+        auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+        float score = -distance - std::abs(angle_difference / (thrusters ? thrusters->speed : 10.0f) * impulse.max_speed_forward) * 1.5f;
         if (P<SpaceShip>(P<SpaceObject>(obj)))
         {
             score -= 5000;

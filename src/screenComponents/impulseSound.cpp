@@ -62,7 +62,7 @@ void ImpulseSound::update(float delta)
         if (!my_spaceship) return;
         auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
         // Get whether the ship's impulse engines are functional.
-        float impulse_ability = std::max(0.0f, std::min(my_spaceship->getSystemEffectiveness(SYS_Impulse), my_spaceship->getSystemPower(SYS_Impulse)));
+        float impulse_ability = std::max(0.0f, std::min(engine->getSystemEffectiveness(), engine->power_level));
 
         // If so, update their pitch and volume.
         if (impulse_ability > 0.0f && engine)

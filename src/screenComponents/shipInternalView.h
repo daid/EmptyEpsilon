@@ -45,7 +45,7 @@ public:
     typedef std::function<void(glm::ivec2 room_position)> func_t;
 private:
     P<SpaceShip> ship;
-    ESystem system;
+    ShipSystem::Type system;
     float room_size;
     func_t func;
 public:
@@ -53,7 +53,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    GuiShipRoom* setSystem(P<SpaceShip> ship, ESystem system) { this->ship = ship; this->system = system; return this; }
+    GuiShipRoom* setSystem(P<SpaceShip> ship, ShipSystem::Type system) { this->ship = ship; this->system = system; return this; }
 
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;

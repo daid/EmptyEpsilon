@@ -2,29 +2,29 @@
 #define _SHIPTEMPLATE_HPP_
 
 /* Define script conversion function for the ESystem enum. */
-template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
+template<> void convert<ShipSystem::Type>::param(lua_State* L, int& idx, ShipSystem::Type& es)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "reactor")
-        es = SYS_Reactor;
+        es = ShipSystem::Type::Reactor;
     else if (str == "beamweapons")
-        es = SYS_BeamWeapons;
+        es = ShipSystem::Type::BeamWeapons;
     else if (str == "missilesystem")
-        es = SYS_MissileSystem;
+        es = ShipSystem::Type::MissileSystem;
     else if (str == "maneuver")
-        es = SYS_Maneuver;
+        es = ShipSystem::Type::Maneuver;
     else if (str == "impulse")
-        es = SYS_Impulse;
+        es = ShipSystem::Type::Impulse;
     else if (str == "warp")
-        es = SYS_Warp;
+        es = ShipSystem::Type::Warp;
     else if (str == "jumpdrive")
-        es = SYS_JumpDrive;
+        es = ShipSystem::Type::JumpDrive;
     else if (str == "frontshield")
-        es = SYS_FrontShield;
+        es = ShipSystem::Type::FrontShield;
     else if (str == "rearshield")
-        es = SYS_RearShield;
+        es = ShipSystem::Type::RearShield;
     else
-        es = SYS_None;
+        es = ShipSystem::Type::None;
 }
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */

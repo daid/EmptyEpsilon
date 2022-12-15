@@ -1,5 +1,6 @@
 #include "spaceObjects/cpuShip.h"
 #include "components/missiletubes.h"
+#include "components/maneuveringthrusters.h"
 #include "systems/missilesystem.h"
 #include "ai/missileVolleyAI.h"
 #include "ai/aiFactory.h"
@@ -111,7 +112,8 @@ void MissileVolleyAI::runAttack(P<SpaceObject> target)
 
     if (owner->getOrder() == AI_StandGround)
     {
-        owner->target_rotation = vec2ToAngle(target_position - owner->getPosition());
+        auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+        if (thrusters) thrusters->target = vec2ToAngle(target_position - owner->getPosition());
     }else{
         flyTowards(target_position, 0.0f);
     }

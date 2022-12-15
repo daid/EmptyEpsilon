@@ -10,6 +10,7 @@
 #include "graphics/renderTarget.h"
 #include "ecs/entity.h"
 #include "components/radar.h"
+#include "components/shipsystem.h"
 
 #include <glm/mat4x4.hpp>
 
@@ -27,14 +28,14 @@ public:
     EDamageType type;
     glm::vec2 location{0, 0};
     int frequency;
-    ESystem system_target;
+    ShipSystem::Type system_target;
 
     DamageInfo()
-    : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(SYS_None)
+    : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(ShipSystem::Type::None)
     {}
 
     DamageInfo(P<SpaceObject> instigator, EDamageType type, glm::vec2 location)
-    : instigator(instigator), type(type), location(location), frequency(-1), system_target(SYS_None)
+    : instigator(instigator), type(type), location(location), frequency(-1), system_target(ShipSystem::Type::None)
     {}
 };
 
@@ -180,8 +181,8 @@ public:
     void setScannedByFaction(string faction_name, bool scanned);
     virtual void scannedBy(P<SpaceObject> other);
     virtual bool canBeHackedBy(P<SpaceObject> other);
-    virtual std::vector<std::pair<ESystem, float> > getHackingTargets();
-    virtual void hackFinished(P<SpaceObject> source, string target);
+    virtual std::vector<std::pair<ShipSystem::Type, float> > getHackingTargets();
+    virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target);
     virtual void takeDamage(float damage_amount, DamageInfo info) {}
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
     virtual string getExportLine() { return ""; }

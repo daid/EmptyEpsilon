@@ -6,11 +6,10 @@
 class Reactor : public ShipSystem {
 public:
     // Config
+    float max_energy = 1000.0f;
 
     // Runtime
     float energy = 1000.0f;
-    float max_energy = 1000.0f;
-
 
     bool use_energy(float amount) { if (amount > energy) return false; energy -= amount; return true; }
 };

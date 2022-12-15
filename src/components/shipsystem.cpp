@@ -1,5 +1,27 @@
 #include "shipsystem.h"
 #include "gameGlobalInfo.h"
+#include "components/reactor.h"
+#include "components/beamweapon.h"
+#include "components/missiletubes.h"
+#include "components/shields.h"
+#include "components/impulse.h"
+#include "components/maneuveringthrusters.h"
+#include "components/jumpdrive.h"
+#include "components/warpdrive.h"
+
+// TODO
+static std::array<float, ShipSystem::COUNT> default_system_power_factors{
+    /*ShipSystem::Type::Reactor*/     -25.f,
+    /*ShipSystem::Type::BeamWeapons*/   3.f,
+    /*ShipSystem::Type::MissileSystem*/ 1.f,
+    /*ShipSystem::Type::Maneuver*/      2.f,
+    /*ShipSystem::Type::Impulse*/       4.f,
+    /*ShipSystem::Type::Warp*/          5.f,
+    /*ShipSystem::Type::JumpDrive*/     5.f,
+    /*ShipSystem::Type::FrontShield*/   5.f,
+    /*ShipSystem::Type::RearShield*/    5.f,
+};
+
 
 // Overheat subsystem damage rate
 constexpr static float damage_per_second_on_overheat = 0.08f;
@@ -56,4 +78,43 @@ void ShipSystem::addHeat(float amount)
 
     if (heat_level < 0.0f)
         heat_level = 0.0f;
+}
+
+ShipSystem* ShipSystem::get(sp::ecs::Entity entity, Type type)
+{
+    switch(type)
+    {
+    case Type::None:
+    case Type::COUNT:
+        return nullptr;
+    case Type::Reactor:
+        return entity.getComponent<Reactor>();
+    case Type::BeamWeapons:
+        return entity.getComponent<BeamWeaponSys>();
+    case Type::MissileSystem:
+        return entity.getComponent<MissileTubes>();
+    case Type::Maneuver:
+        return entity.getComponent<ManeuveringThrusters>();
+    case Type::Impulse:
+        return entity.getComponent<ImpulseEngine>();
+    case Type::Warp:
+        return entity.getComponent<WarpDrive>();
+    case Type::JumpDrive:
+        return entity.getComponent<JumpDrive>();
+    case Type::FrontShield:
+        {
+            auto shields = entity.getComponent<Shields>();
+            if (shields)
+                return &shields->front_system;
+            return nullptr;
+        }
+    case Type::RearShield:
+        {
+            auto shields = entity.getComponent<Shields>();
+            if (shields && shields->count > 1)
+                return &shields->rear_system;
+            return nullptr;
+        }
+    }
+    return nullptr;
 }

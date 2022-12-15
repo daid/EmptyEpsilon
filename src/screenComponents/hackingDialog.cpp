@@ -58,8 +58,7 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
 
     target_list = new GuiListbox(target_selection_box, "", [this](int index, string value)
     {
-        target_system = value;
-        locale_target_system = target_list->getEntryName(index);
+        target_system = ShipSystem::Type(value.toInt());
         getNewGame();
     });
     target_list->setPosition(25, 75, sp::Alignment::TopLeft);
@@ -74,16 +73,15 @@ void GuiHackingDialog::open(P<SpaceObject> target)
     show();
     while(target_list->entryCount() > 0)
         target_list->removeEntry(0);
-    std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
-    for(std::pair<ESystem, float>& target : targets)
+    std::vector<std::pair<ShipSystem::Type, float> > targets = target->getHackingTargets();
+    for(auto& target : targets)
     {
-        target_list->addEntry(getLocaleSystemName(target.first), getSystemName(target.first));
+        target_list->addEntry(getLocaleSystemName(target.first), string(int(target.first)));
     }
     if (targets.size() == 1)
     {
         target_selection_box->hide();
-        target_system = getSystemName(targets[0].first);
-        locale_target_system = getLocaleSystemName(targets[0].first);
+        target_system = targets[0].first;
         getNewGame();
     } else {
         target_selection_box->show();
@@ -115,14 +113,14 @@ void GuiHackingDialog::onDraw(sp::RenderTarget& renderer)
         progress_bar->setValue(game->getProgress());
         status_label->setText(tr("hacking", "Hacking in Progress: {percent}%").format({{"percent", string(int(100 * game->getProgress()))}}));
     }
-    if (target_system != "")
+    if (target_system != ShipSystem::Type::None)
     {
-        std::vector<std::pair<ESystem, float> > targets = target->getHackingTargets();
-        for(std::pair<ESystem, float>& target : targets)
+        auto targets = target->getHackingTargets();
+        for(auto& target : targets)
         {
-            if (getSystemName(target.first) == target_system)
+            if (target.first == target_system)
             {
-                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", locale_target_system}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
+                hacking_status_label->setText(tr("hacking", "{target}: hacked {percent}%").format({{"target", getLocaleSystemName(target_system)}, {"percent", string(int(target.second * 100.0f + 0.5f))}}));
                 break;
             }
         }

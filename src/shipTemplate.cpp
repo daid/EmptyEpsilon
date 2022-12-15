@@ -319,14 +319,14 @@ glm::ivec2 ShipTemplate::interiorSize()
     return max_pos;
 }
 
-ESystem ShipTemplate::getSystemAtRoom(glm::ivec2 position)
+ShipSystem::Type ShipTemplate::getSystemAtRoom(glm::ivec2 position)
 {
     for(unsigned int n=0; n<rooms.size(); n++)
     {
         if (rooms[n].position.x <= position.x && rooms[n].position.x + rooms[n].size.x > position.x && rooms[n].position.y <= position.y && rooms[n].position.y + rooms[n].size.y > position.y)
             return rooms[n].system;
     }
-    return SYS_None;
+    return ShipSystem::Type::None;
 }
 
 void ShipTemplate::setCollisionData(P<SpaceObject> object)
@@ -371,37 +371,37 @@ std::vector<string> ShipTemplate::getTemplateNameList(TemplateType type)
     return ret;
 }
 
-string getSystemName(ESystem system)
+string getSystemName(ShipSystem::Type system)
 {
     switch(system)
     {
-    case SYS_Reactor: return "Reactor";
-    case SYS_BeamWeapons: return "Beam Weapons";
-    case SYS_MissileSystem: return "Missile System";
-    case SYS_Maneuver: return "Maneuvering";
-    case SYS_Impulse: return "Impulse Engines";
-    case SYS_Warp: return "Warp Drive";
-    case SYS_JumpDrive: return "Jump Drive";
-    case SYS_FrontShield: return "Front Shield Generator";
-    case SYS_RearShield: return "Rear Shield Generator";
+    case ShipSystem::Type::Reactor: return "Reactor";
+    case ShipSystem::Type::BeamWeapons: return "Beam Weapons";
+    case ShipSystem::Type::MissileSystem: return "Missile System";
+    case ShipSystem::Type::Maneuver: return "Maneuvering";
+    case ShipSystem::Type::Impulse: return "Impulse Engines";
+    case ShipSystem::Type::Warp: return "Warp Drive";
+    case ShipSystem::Type::JumpDrive: return "Jump Drive";
+    case ShipSystem::Type::FrontShield: return "Front Shield Generator";
+    case ShipSystem::Type::RearShield: return "Rear Shield Generator";
     default:
         return "UNKNOWN";
     }
 }
 
-string getLocaleSystemName(ESystem system)
+string getLocaleSystemName(ShipSystem::Type system)
 {
     switch(system)
     {
-    case SYS_Reactor: return tr("system", "Reactor");
-    case SYS_BeamWeapons: return tr("system", "Beam Weapons");
-    case SYS_MissileSystem: return tr("system", "Missile System");
-    case SYS_Maneuver: return tr("system", "Maneuvering");
-    case SYS_Impulse: return tr("system", "Impulse Engines");
-    case SYS_Warp: return tr("system", "Warp Drive");
-    case SYS_JumpDrive: return tr("system", "Jump Drive");
-    case SYS_FrontShield: return tr("system", "Front Shield Generator");
-    case SYS_RearShield: return tr("system", "Rear Shield Generator");
+    case ShipSystem::Type::Reactor: return tr("system", "Reactor");
+    case ShipSystem::Type::BeamWeapons: return tr("system", "Beam Weapons");
+    case ShipSystem::Type::MissileSystem: return tr("system", "Missile System");
+    case ShipSystem::Type::Maneuver: return tr("system", "Maneuvering");
+    case ShipSystem::Type::Impulse: return tr("system", "Impulse Engines");
+    case ShipSystem::Type::Warp: return tr("system", "Warp Drive");
+    case ShipSystem::Type::JumpDrive: return tr("system", "Jump Drive");
+    case ShipSystem::Type::FrontShield: return tr("system", "Front Shield Generator");
+    case ShipSystem::Type::RearShield: return tr("system", "Rear Shield Generator");
     default:
         return "UNKNOWN";
     }
@@ -498,10 +498,10 @@ void ShipTemplate::setWeaponStorage(EMissileWeapons weapon, int amount)
 
 void ShipTemplate::addRoom(glm::ivec2 position, glm::ivec2 size)
 {
-    rooms.push_back(ShipRoomTemplate(position, size, SYS_None));
+    rooms.push_back(ShipRoomTemplate(position, size, ShipSystem::Type::None));
 }
 
-void ShipTemplate::addRoomSystem(glm::ivec2 position, glm::ivec2 size, ESystem system)
+void ShipTemplate::addRoomSystem(glm::ivec2 position, glm::ivec2 size, ShipSystem::Type system)
 {
     rooms.push_back(ShipRoomTemplate(position, size, system));
 }

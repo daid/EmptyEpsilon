@@ -48,6 +48,6 @@ void ImpulseSystem::update(float delta)
 
         // Determine forward direction and velocity.
         auto forward = vec2FromAngle(ship->getRotation());
-        physics.setVelocity(forward * (impulse.actual * cap_speed * ship->getSystemEffectiveness(SYS_Impulse)));
+        physics.setVelocity(forward * (impulse.actual * cap_speed * impulse.getSystemEffectiveness()));
     }
 }

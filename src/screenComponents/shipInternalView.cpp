@@ -161,7 +161,7 @@ void GuiShipRoomContainer::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 }
 
 GuiShipRoom::GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::ivec2 dimensions, func_t func)
-: GuiElement(owner, id), system(SYS_None), room_size(room_size), func(func)
+: GuiElement(owner, id), system(ShipSystem::Type::None), room_size(room_size), func(func)
 {
     setSize(glm::vec2(dimensions) * room_size);
 }
@@ -169,40 +169,43 @@ GuiShipRoom::GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::i
 void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
 {
     float f = 1.0;
-    if (ship && ship->hasSystem(system))
-        f = std::max(0.0f, ship->systems[system].health);
+    ShipSystem* sys = nullptr;
+    if (ship)
+        sys = ShipSystem::get(ship->entity, system);
+    if (sys)
+        f = std::max(0.0f, sys->health);
     renderer.drawStretchedHV(rect, rect.size.x * 0.25f, "room_background", glm::u8vec4(255, 255 * f, 255 * f, 255));
 
-    if (system != SYS_None && ship && ship->hasSystem(system))
+    if (system != ShipSystem::Type::None && ship && ship->hasSystem(system))
     {
         std::string_view icon;
         switch(system)
         {
-        case SYS_Reactor:
+        case ShipSystem::Type::Reactor:
             icon = "gui/icons/system_reactor.png";
             break;
-        case SYS_BeamWeapons:
+        case ShipSystem::Type::BeamWeapons:
             icon = "gui/icons/system_beam";
             break;
-        case SYS_MissileSystem:
+        case ShipSystem::Type::MissileSystem:
             icon = "gui/icons/system_missile";
             break;
-        case SYS_Maneuver:
+        case ShipSystem::Type::Maneuver:
             icon = "gui/icons/system_maneuver";
             break;
-        case SYS_Impulse:
+        case ShipSystem::Type::Impulse:
             icon = "gui/icons/system_impulse";
             break;
-        case SYS_Warp:
+        case ShipSystem::Type::Warp:
             icon = "gui/icons/system_warpdrive";
             break;
-        case SYS_JumpDrive:
+        case ShipSystem::Type::JumpDrive:
             icon = "gui/icons/system_jumpdrive";
             break;
-        case SYS_FrontShield:
+        case ShipSystem::Type::FrontShield:
             icon = "gui/icons/shields-fore";
             break;
-        case SYS_RearShield:
+        case ShipSystem::Type::RearShield:
             icon = "gui/icons/shields-aft";
             break;
         default:

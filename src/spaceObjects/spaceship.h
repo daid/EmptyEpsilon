@@ -38,80 +38,10 @@ struct Speeds
 template<> int convert<Speeds>::returnType(lua_State* L, const Speeds &speeds);
 
 
-class ShipSystemLegacy
-{
-public:
-    static constexpr float power_factor_rate = 0.08f;
-    static constexpr float default_heat_rate_per_second = 0.05f;
-    static constexpr float default_power_rate_per_second = 0.3f;
-    static constexpr float default_coolant_rate_per_second = 1.2f;
-    float health; //1.0-0.0, where 0.0 is fully broken.
-    float health_max; //1.0-0.0, where 0.0 is fully broken.
-    float power_level; //0.0-3.0, default 1.0
-    float power_request;
-    float heat_level; //0.0-1.0, system will damage at 1.0
-    float coolant_level; //0.0-10.0
-    float coolant_request;
-    float hacked_level; //0.0-1.0
-    float power_factor;
-    float coolant_rate_per_second{};
-    float heat_rate_per_second{};
-    float power_rate_per_second{};
-
-    float getHeatingDelta() const
-    {
-        return powf(1.7f, power_level - 1.0f) - (1.01f + coolant_level * 0.1f);
-    }
-
-    float getPowerUserFactor() const
-    {
-        return power_factor * power_factor_rate;
-    }
-};
-
 class SpaceShip : public ShipTemplateBasedObject
 {
 public:
     constexpr static int max_frequency = 20;
-    constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
-    constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
-    constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
-    constexpr static float heat_per_combat_maneuver_boost = 0.2f;
-    constexpr static float heat_per_combat_maneuver_strafe = 0.2f;
-    constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
-
-    ShipSystemLegacy systems[SYS_COUNT];
-    static std::array<float, SYS_COUNT> default_system_power_factors;
-    /*!
-     *[input] Ship will try to aim to this rotation. (degrees)
-     */
-    float target_rotation;
-
-    /*!
-     *[input] Ship will rotate in this velocity. ([-1,1], overrides target_rotation)
-     */
-    float turnSpeed;
-
-    /*!
-     * [config] Speed of rotation, in deg/second
-     */
-    float turn_speed;
-
-    /*!
-     * [output] How much charge there is in the combat maneuvering system (0.0-1.0)
-     */
-    float combat_maneuver_charge;
-    /*!
-     * [input] How much boost we want at this moment (0.0-1.0)
-     */
-    float combat_maneuver_boost_request;
-    float combat_maneuver_boost_active;
-
-    float combat_maneuver_strafe_request;
-    float combat_maneuver_strafe_active;
-
-    float combat_maneuver_boost_speed; /*< [config] Speed to indicate how fast we will fly forwards with a full boost */
-    float combat_maneuver_strafe_speed; /*< [config] Speed to indicate how fast we will fly sideways with a full strafe */
 
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
@@ -169,9 +99,6 @@ public:
     /// Function to use energy. Only player ships currently model energy use.
     bool useEnergy(float amount);
 
-    /// Dummy virtual function to add heat on a system. The player ship class has an actual implementation of this as only player ships model heat right now.
-    virtual void addHeat(ESystem system, float amount) {}
-
     virtual bool canBeScannedBy(P<SpaceObject> other) override { return getScannedStateFor(other) != SS_FullScan; }
     virtual int scanningComplexity(P<SpaceObject> other) override;
     virtual int scanningChannelDepth(P<SpaceObject> other) override;
@@ -187,20 +114,13 @@ public:
     bool isFullyScannedByFaction(int faction_id);
 
     virtual bool canBeHackedBy(P<SpaceObject> other) override;
-    virtual std::vector<std::pair<ESystem, float> > getHackingTargets() override;
-    virtual void hackFinished(P<SpaceObject> source, string target) override;
+    virtual std::vector<std::pair<ShipSystem::Type, float> > getHackingTargets() override;
+    virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target) override;
 
     /*!
      * Check if ship has certain system
      */
-    bool hasSystem(ESystem system);
-
-    /*!
-     * Check effectiveness of system.
-     * If system has more / less power or is damages, this can influence the effectiveness.
-     * \return float 0. to 1.
-     */
-    float getSystemEffectiveness(ESystem system);
+    bool hasSystem(ShipSystem::Type system);
 
     virtual void applyTemplateValues() override;
 
@@ -219,35 +139,35 @@ public:
     void setMaxEnergy(float amount);
     float getEnergy();
     void setEnergy(float amount);
-    float getSystemHackedLevel(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].hacked_level; }
-    void setSystemHackedLevel(ESystem system, float hacked_level) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].hacked_level = std::min(1.0f, std::max(0.0f, hacked_level)); }
-    float getSystemHealth(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health; }
-    void setSystemHealth(ESystem system, float health) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health = std::min(1.0f, std::max(-1.0f, health)); }
-    float getSystemHealthMax(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].health_max; }
-    void setSystemHealthMax(ESystem system, float health_max) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].health_max = std::min(1.0f, std::max(-1.0f, health_max)); }
-    float getSystemHeat(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].heat_level; }
-    void setSystemHeat(ESystem system, float heat) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_level = std::min(1.0f, std::max(0.0f, heat)); }
-    float getSystemHeatRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].heat_rate_per_second; }
-    void setSystemHeatRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].heat_rate_per_second = rate; }
+    float getSystemHackedLevel(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemHackedLevel(ShipSystem::Type system, float hacked_level) {} //TODO
+    float getSystemHealth(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemHealth(ShipSystem::Type system, float health) {} //TODO
+    float getSystemHealthMax(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemHealthMax(ShipSystem::Type system, float health_max) {} //TODO
+    float getSystemHeat(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemHeat(ShipSystem::Type system, float heat) {} //TODO
+    float getSystemHeatRate(ShipSystem::Type system) const { return 0.0f; } //TODO
+    void setSystemHeatRate(ShipSystem::Type system, float rate) {} //TODO
 
-    float getSystemPower(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].power_level; }
-    void setSystemPower(ESystem system, float power) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_level = std::min(3.0f, std::max(0.0f, power)); }
-    float getSystemPowerRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].power_rate_per_second; }
-    void setSystemPowerRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_rate_per_second = rate; }
-    float getSystemPowerUserFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].getPowerUserFactor(); }
-    float getSystemPowerFactor(ESystem system) { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].power_factor; }
-    void setSystemPowerFactor(ESystem system, float factor) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].power_factor = factor; }
-    float getSystemCoolant(ESystem system) { if (system >= SYS_COUNT) return 0.0; if (system <= SYS_None) return 0.0; return systems[system].coolant_level; }
-    void setSystemCoolant(ESystem system, float coolant) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_level = std::min(1.0f, std::max(0.0f, coolant)); }
+    float getSystemPower(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemPower(ShipSystem::Type system, float power) {} //TODO
+    float getSystemPowerRate(ShipSystem::Type system) const { return 0.0f; } //TODO
+    void setSystemPowerRate(ShipSystem::Type system, float rate) {} //TODO
+    float getSystemPowerUserFactor(ShipSystem::Type system) { return 0.0f; } //TODO
+    float getSystemPowerFactor(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemPowerFactor(ShipSystem::Type system, float factor) {} //TODO
+    float getSystemCoolant(ShipSystem::Type system) { return 0.0f; } //TODO
+    void setSystemCoolant(ShipSystem::Type system, float coolant) {} //TODO
     Speeds getImpulseMaxSpeed();
     void setImpulseMaxSpeed(float forward_speed, std::optional<float> reverse_speed);
-    float getSystemCoolantRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].coolant_rate_per_second; }
-    void setSystemCoolantRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_rate_per_second = rate; }
-    float getRotationMaxSpeed() { return turn_speed; }
-    void setRotationMaxSpeed(float speed) { turn_speed = speed; }
+    float getSystemCoolantRate(ShipSystem::Type system) const { return 0.0f; } //TODO
+    void setSystemCoolantRate(ShipSystem::Type system, float rate) {} //TODO
+    float getRotationMaxSpeed() { return 0.0f; } //TODO
+    void setRotationMaxSpeed(float speed) { } //TODO
     Speeds getAcceleration();
     void setAcceleration(float acceleration, std::optional<float> reverse_acceleration);
-    void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
+    void setCombatManeuver(float boost, float strafe) { } //TODO
     bool hasJumpDrive() { return false; } //TODO
     void setJumpDrive(bool has_jump) {} //TODO
     void setJumpDriveRange(float min, float max) {} //TODO

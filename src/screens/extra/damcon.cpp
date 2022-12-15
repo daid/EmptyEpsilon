@@ -21,9 +21,9 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
     hull_display = new GuiKeyValueDisplay(system_health_layout, "HULL", 0.8, tr("damagecontrol", "Hull"), "0%");
     hull_display->setSize(GuiElement::GuiSizeMax, 40);
 
-    for(unsigned int n=0; n<SYS_COUNT; n++)
+    for(unsigned int n=0; n<ShipSystem::COUNT; n++)
     {
-        system_health[n] = new GuiKeyValueDisplay(system_health_layout, "DAMCON_HEALTH_" + string(n), 0.8, getLocaleSystemName(ESystem(n)), "0%");
+        system_health[n] = new GuiKeyValueDisplay(system_health_layout, "DAMCON_HEALTH_" + string(n), 0.8, getLocaleSystemName(ShipSystem::Type(n)), "0%");
         system_health[n]->setSize(GuiElement::GuiSizeMax, 40);
     }
 
@@ -45,16 +45,20 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
                 hull_display->setColor(glm::u8vec4{255,255,255,255});
         }
 
-        for(unsigned int n=0; n<SYS_COUNT; n++)
+        for(unsigned int n=0; n<ShipSystem::COUNT; n++)
         {
-            system_health[n]->setVisible(my_spaceship->hasSystem(ESystem(n)));
-            system_health[n]->setValue(string(int(my_spaceship->systems[n].health * 100)) + "%");
-            if (my_spaceship->systems[n].health < 0)
-                system_health[n]->setColor(glm::u8vec4(255, 0, 0, 255));
-            else if (my_spaceship->systems[n].health_max < 1.0f)
-                system_health[n]->setColor(glm::u8vec4(255, 255, 0, 255));
-            else
-                system_health[n]->setColor(glm::u8vec4{255,255,255,255});
+            auto sys = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+            system_health[n]->setVisible(sys);
+            if (sys) {
+                system_health[n]->setValue(string(int(sys->health * 100)) + "%");
+                if (sys->health < 0)
+                    system_health[n]->setColor(glm::u8vec4(255, 0, 0, 255));
+                else if (sys->health_max < 1.0f)
+                    system_health[n]->setColor(glm::u8vec4(255, 255, 0, 255));
+                else
+                    system_health[n]->setColor(glm::u8vec4{255,255,255,255});
+            }
+            
         }
     }
 }

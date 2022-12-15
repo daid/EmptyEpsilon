@@ -8,6 +8,7 @@
 #include "modelData.h"
 #include "scriptInterfaceMagic.h"
 #include "multiplayer.h"
+#include "components/shipsystem.h"
 
 #include "beamTemplate.h"
 #include "missileWeaponData.h"
@@ -15,32 +16,18 @@ constexpr static int max_beam_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
 
-enum ESystem
-{
-    SYS_None = -1,
-    SYS_Reactor = 0,
-    SYS_BeamWeapons,
-    SYS_MissileSystem,
-    SYS_Maneuver,
-    SYS_Impulse,
-    SYS_Warp,
-    SYS_JumpDrive,
-    SYS_FrontShield,
-    SYS_RearShield,
-    SYS_COUNT
-};
 
 /* Define script conversion function for the ESystem enum. */
-template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es);
+template<> void convert<ShipSystem::Type>::param(lua_State* L, int& idx, ShipSystem::Type& es);
 
 class ShipRoomTemplate
 {
 public:
     glm::ivec2 position;
     glm::ivec2 size;
-    ESystem system;
+    ShipSystem::Type system;
 
-    ShipRoomTemplate(glm::ivec2 position, glm::ivec2 size, ESystem system) : position(position), size(size), system(system) {}
+    ShipRoomTemplate(glm::ivec2 position, glm::ivec2 size, ShipSystem::Type system) : position(position), size(size), system(system) {}
 };
 class ShipDoorTemplate
 {
@@ -186,7 +173,7 @@ public:
     void setCloaking(bool enabled);
     void setWeaponStorage(EMissileWeapons weapon, int amount);
     void addRoom(glm::ivec2 position, glm::ivec2 size);
-    void addRoomSystem(glm::ivec2 position, glm::ivec2 size, ESystem system);
+    void addRoomSystem(glm::ivec2 position, glm::ivec2 size, ShipSystem::Type system);
     void addDoor(glm::ivec2 position, bool horizontal);
     void setRadarTrace(string trace);
     void setLongRangeRadarRange(float range);
@@ -196,7 +183,7 @@ public:
     P<ShipTemplate> copy(string new_name);
 
     glm::ivec2 interiorSize();
-    ESystem getSystemAtRoom(glm::ivec2 position);
+    ShipSystem::Type getSystemAtRoom(glm::ivec2 position);
 
     void setCollisionData(P<SpaceObject> object);
 public:
@@ -204,9 +191,9 @@ public:
     static std::vector<string> getAllTemplateNames();
     static std::vector<string> getTemplateNameList(TemplateType type);
 };
-string getSystemName(ESystem system);
-string getLocaleSystemName(ESystem system);
-REGISTER_MULTIPLAYER_ENUM(ESystem);
+string getSystemName(ShipSystem::Type system);
+string getLocaleSystemName(ShipSystem::Type system);
+REGISTER_MULTIPLAYER_ENUM(ShipSystem::Type);
 
 /* Define script conversion function for the ShipTemplate::TemplateType enum. */
 template<> void convert<ShipTemplate::TemplateType>::param(lua_State* L, int& idx, ShipTemplate::TemplateType& tt);

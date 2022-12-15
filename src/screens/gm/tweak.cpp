@@ -146,7 +146,7 @@ GuiTweakShip::GuiTweakShip(GuiContainer* owner)
 
     (new GuiLabel(left_col, "", tr("Turn speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     turn_speed_slider = new GuiSlider(left_col, "", 0.0, 35, 0.0, [this](float value) {
-        target->turn_speed = value;
+        //TODO: target->turn_speed = value;
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -226,7 +226,7 @@ void GuiTweakShip::onDraw(sp::RenderTarget& renderer)
     jump_toggle->setValue(target->hasJumpDrive());
     //TODO: impulse_speed_slider->setValue(target->impulse_max_speed);
     //TODO: impulse_reverse_speed_slider->setValue(target->impulse_max_reverse_speed);
-    turn_speed_slider->setValue(target->turn_speed);
+    //TODO: turn_speed_slider->setValue(target->turn_speed);
     //TODO: hull_max_slider->setValue(target->hull_max);
     can_be_destroyed_toggle->setValue(target->getCanBeDestroyed());
     short_range_radar_slider->setValue(target->getShortRangeRadarRange());
@@ -614,12 +614,12 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
     auto right_col = new GuiElement(this, "RIGHT_LAYOUT");
     right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(200, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    for(int n=0; n<SYS_COUNT; n++)
+    for(int n=0; n<ShipSystem::COUNT; n++)
     {
-        ESystem system = ESystem(n);
+        auto system = ShipSystem::Type(n);
         (new GuiLabel(left_col, "", tr("{system} health").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_damage[n] = new GuiSlider(left_col, "", -1.0, 1.0, 0.0, [this, n](float value) {
-            target->systems[n].health = std::min(value,target->systems[n].health_max);
+            //TODO target->systems[n].health = std::min(value,target->systems[n].health_max);
         });
         system_damage[n]->setSize(GuiElement::GuiSizeMax, 30);
         system_damage[n]->addSnapValue(-1.0, 0.01);
@@ -628,8 +628,8 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
 
         (new GuiLabel(center_col, "", tr("{system} health max").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_health_max[n] = new GuiSlider(center_col, "", -1.0, 1.0, 1.0, [this, n](float value) {
-            target->systems[n].health_max = value;
-            target->systems[n].health = std::min(value,target->systems[n].health);
+            //TODO target->systems[n].health_max = value;
+            //TODO target->systems[n].health = std::min(value,target->systems[n].health);
         });
         system_health_max[n]->setSize(GuiElement::GuiSizeMax, 30);
         system_health_max[n]->addSnapValue(-1.0, 0.01);
@@ -638,7 +638,7 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
 
         (new GuiLabel(right_col, "", tr("{system} heat").format({{"system", getLocaleSystemName(system)}}), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_heat[n] = new GuiSlider(right_col, "", 0.0, 1.0, 0.0, [this, n](float value) {
-            target->systems[n].heat_level = value;
+            //TODO target->systems[n].heat_level = value;
         });
         system_heat[n]->setSize(GuiElement::GuiSizeMax, 30);
         system_heat[n]->addSnapValue( 0.0, 0.01);
@@ -648,11 +648,11 @@ GuiShipTweakSystems::GuiShipTweakSystems(GuiContainer* owner)
 
 void GuiShipTweakSystems::onDraw(sp::RenderTarget& renderer)
 {
-    for(int n=0; n<SYS_COUNT; n++)
+    for(int n=0; n<ShipSystem::COUNT; n++)
     {
-        system_damage[n]->setValue(target->systems[n].health);
-        system_health_max[n]->setValue(target->systems[n].health_max);
-        system_heat[n]->setValue(target->systems[n].heat_level);
+        //TODO system_damage[n]->setValue(target->systems[n].health);
+        //TODO system_health_max[n]->setValue(target->systems[n].health_max);
+        //TODO system_heat[n]->setValue(target->systems[n].heat_level);
     }
 }
 
@@ -682,9 +682,9 @@ GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* own
     (new GuiLabel(center_col, "", tr("current factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(right_col, "", tr("desired factor"), 20))->setSize(GuiElement::GuiSizeMax, 30);
 
-    for (int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        ESystem system = ESystem(n);
+        ShipSystem::Type system = ShipSystem::Type(n);
         (new GuiLabel(left_col, "", tr("{system}").format({ {"system", getLocaleSystemName(system)} }), 20))->setSize(GuiElement::GuiSizeMax, 30);
         system_current_power_factor[n] = new GuiLabel(center_col, "", "", 20);
         system_current_power_factor[n]->setSize(GuiElement::GuiSizeMax, 30);
@@ -699,12 +699,12 @@ GuiShipTweakSystemPowerFactors::GuiShipTweakSystemPowerFactors(GuiContainer* own
                 if (converted == 0.f && end == text.c_str())
                 {
                     // failed - reset text to current value.
-                    system_power_factor[n]->setText(string(target->systems[n].power_factor, 1));
+                    //TODO system_power_factor[n]->setText(string(target->systems[n].power_factor, 1));
                 }
                 else
                 {
                     // apply!
-                    target->systems[n].power_factor = converted;
+                    //TODO target->systems[n].power_factor = converted;
                 }
             });
     }
@@ -716,17 +716,17 @@ void GuiShipTweakSystemPowerFactors::open(P<SpaceObject> target)
 {
     P<SpaceShip> ship = target;
     this->target = ship;
-    for (int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        system_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
+        //TODO system_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
     }
 }
 
 void GuiShipTweakSystemPowerFactors::onDraw(sp::RenderTarget& target)
 {
-    for (int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        system_current_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
+        //TODO system_current_power_factor[n]->setText(string(this->target->systems[n].power_factor, 1));
     }
 }
 
@@ -745,16 +745,16 @@ GuiShipTweakSystemRates::GuiShipTweakSystemRates(GuiContainer* owner, Type type)
     (new GuiLabel(center_col, "", tr("current rate"), 20))->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(right_col, "", tr("desired rate"), 20))->setSize(GuiElement::GuiSizeMax, 30);
 
-    for (int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        ESystem system = ESystem(n);
+        auto system = ShipSystem::Type(n);
         (new GuiLabel(left_col, "", tr("{system}").format({ {"system", getLocaleSystemName(system)} }), 20))->setSize(GuiElement::GuiSizeMax, 30);
         current_rates[n] = new GuiLabel(center_col, "", "", 20);
         current_rates[n]->setSize(GuiElement::GuiSizeMax, 30);
 
         desired_rates[n] = new GuiTextEntry(right_col, "", "");
         desired_rates[n]->setSize(GuiElement::GuiSizeMax, 30);
-        desired_rates[n]->enterCallback([this, n](const string& text)
+        desired_rates[n]->enterCallback([this, system](const string& text)
             {
                 // Perform safe conversion (typos can happen).
                 char* end = nullptr;
@@ -762,12 +762,12 @@ GuiShipTweakSystemRates::GuiShipTweakSystemRates(GuiContainer* owner, Type type)
                 if (converted == 0.f && end == text.c_str())
                 {
                     // failed - reset text to current value.
-                    desired_rates[n]->setText(string(getRateValue(ESystem(n), this->type), 2));
+                    desired_rates[int(system)]->setText(string(getRateValue(system, this->type), 2));
                 }
                 else
                 {
                     // apply!
-                    setRateValue(ESystem(n), this->type, converted);
+                    setRateValue(system, this->type, converted);
                 }
             });
     }
@@ -779,22 +779,22 @@ void GuiShipTweakSystemRates::open(P<SpaceObject> target)
 {
     P<SpaceShip> ship = target;
     this->target = ship;
-    for (int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        current_rates[n]->setText(string(getRateValue(ESystem(n), type), 2));
+        current_rates[n]->setText(string(getRateValue(ShipSystem::Type(n), type), 2));
     }
 }
 
 void GuiShipTweakSystemRates::onDraw(sp::RenderTarget& target)
 {
-    for (int n = 0; n < SYS_COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        current_rates[n]->setText(string(getRateValue(ESystem(n), type), 2));
+        current_rates[n]->setText(string(getRateValue(ShipSystem::Type(n), type), 2));
     }
 }
 
 
-float GuiShipTweakSystemRates::getRateValue(ESystem system, Type type) const
+float GuiShipTweakSystemRates::getRateValue(ShipSystem::Type system, Type type) const
 {
     switch (type)
     {
@@ -810,7 +810,7 @@ float GuiShipTweakSystemRates::getRateValue(ESystem system, Type type) const
     return 0.f;
 }
 
-void GuiShipTweakSystemRates::setRateValue(ESystem system, Type type, float value)
+void GuiShipTweakSystemRates::setRateValue(ShipSystem::Type system, Type type, float value)
 {
     switch (type)
     {
@@ -879,13 +879,13 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     // Display Boost/Strafe speed sliders
     (new GuiLabel(left_col, "", tr("Boost Speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     combat_maneuver_boost_speed_slider = new GuiSlider(left_col, "", 0.0, 1000, 0.0, [this](float value) {
-        target->combat_maneuver_boost_speed = value;
+        //TODO: target->combat_maneuver_boost_speed = value;
     });
     combat_maneuver_boost_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
     (new GuiLabel(left_col, "", tr("Strafe Speed:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     combat_maneuver_strafe_speed_slider = new GuiSlider(left_col, "", 0.0, 1000, 0.0, [this](float value) {
-        target->combat_maneuver_strafe_speed = value;
+        //TODO: target->combat_maneuver_strafe_speed = value;
     });
     combat_maneuver_strafe_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -954,12 +954,12 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
         control_code->setText(player->control_code);
 
         // Set and snap boost speed slider to current value
-        combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
-        combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
+        //TODO: combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);
+        //TODO: combat_maneuver_boost_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_boost_speed, 20.0f);
 
         // Set and snap strafe speed slider to current value
-        combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
-        combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
+        //TODO: combat_maneuver_strafe_speed_slider->setValue(player->combat_maneuver_strafe_speed);
+        //TODO: combat_maneuver_strafe_speed_slider->clearSnapValues()->addSnapValue(player->combat_maneuver_strafe_speed, 20.0f);
     }
 }
 
@@ -1085,7 +1085,7 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 
 void GuiShipTweakPlayer2::onDraw(sp::RenderTarget& renderer)
 {
-    coolant_slider->setValue(target->max_coolant);
+    //coolant_slider->setValue(target->max_coolant);
     max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
     scan_probes_slider->setValue(target->getScanProbeCount());
     can_scan->setValue(target->getCanScan());
@@ -1094,7 +1094,7 @@ void GuiShipTweakPlayer2::onDraw(sp::RenderTarget& renderer)
     can_combat_maneuver->setValue(target->getCanCombatManeuver());
     can_self_destruct->setValue(target->getCanSelfDestruct());
     can_launch_probe->setValue(target->getCanLaunchProbe());
-    auto_coolant_enabled->setValue(target->auto_coolant_enabled);
+    //auto_coolant_enabled->setValue(target->auto_coolant_enabled);
     auto_repair_enabled->setValue(target->auto_repair_enabled);
     
     energy_warp_per_second->setText(tr("player_tweak", "Warp (E/s): {energy_per_second}").format({ {"energy_per_second", string(target->getEnergyWarpPerSecond())} }));

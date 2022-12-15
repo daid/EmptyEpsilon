@@ -65,7 +65,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
         beam_info_box->setPosition(-20, -120, sp::Alignment::BottomRight)->setSize(280, 150);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, -50, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -106,14 +106,14 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         if (reactor)
             energy_display->setValue(string(int(reactor->energy)));
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
-        if (my_spaceship->hasSystem(SYS_FrontShield))
+        if (my_spaceship->hasSystem(ShipSystem::Type::FrontShield))
         {
             front_shield_display->show();
         } else {
             front_shield_display->hide();
         }
         rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
-        if (my_spaceship->hasSystem(SYS_RearShield))
+        if (my_spaceship->hasSystem(ShipSystem::Type::RearShield))
         {
             rear_shield_display->show();
         } else {

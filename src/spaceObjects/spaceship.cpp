@@ -19,6 +19,7 @@
 #include "components/collision.h"
 #include "components/docking.h"
 #include "components/impulse.h"
+#include "components/maneuveringthrusters.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/reactor.h"
@@ -169,67 +170,14 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setScanStateByFaction);
 }
 
-std::array<float, SYS_COUNT> SpaceShip::default_system_power_factors{
-    /*SYS_Reactor*/     -25.f,
-    /*SYS_BeamWeapons*/   3.f,
-    /*SYS_MissileSystem*/ 1.f,
-    /*SYS_Maneuver*/      2.f,
-    /*SYS_Impulse*/       4.f,
-    /*SYS_Warp*/          5.f,
-    /*SYS_JumpDrive*/     5.f,
-    /*SYS_FrontShield*/   5.f,
-    /*SYS_RearShield*/    5.f,
-};
-
 SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_range)
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
-    target_rotation = getRotation();
     wormhole_alpha = 0.f;
-    turn_speed = 10.f;
-    combat_maneuver_charge = 1.f;
-    combat_maneuver_boost_request = 0.f;
-    combat_maneuver_boost_active = 0.f;
-    combat_maneuver_strafe_request = 0.f;
-    combat_maneuver_strafe_active = 0.f;
-    combat_maneuver_boost_speed = 0.0f;
-    combat_maneuver_strafe_speed = 0.0f;
     target_id = -1;
-    turnSpeed = 0.0f;
 
-    registerMemberReplication(&target_rotation, 1.5f);
-    registerMemberReplication(&turnSpeed, 0.1f);
     registerMemberReplication(&wormhole_alpha, 0.5f);
     registerMemberReplication(&target_id);
-    registerMemberReplication(&turn_speed);
-    registerMemberReplication(&combat_maneuver_charge, 0.5f);
-    registerMemberReplication(&combat_maneuver_boost_request);
-    registerMemberReplication(&combat_maneuver_boost_active, 0.2f);
-    registerMemberReplication(&combat_maneuver_strafe_request);
-    registerMemberReplication(&combat_maneuver_strafe_active, 0.2f);
-    registerMemberReplication(&combat_maneuver_boost_speed);
-    registerMemberReplication(&combat_maneuver_strafe_speed);
-
-    for(unsigned int n=0; n<SYS_COUNT; n++)
-    {
-        SDL_assert(n < default_system_power_factors.size());
-        systems[n].health = 1.0f;
-        systems[n].health_max = 1.0f;
-        systems[n].power_level = 1.0f;
-        systems[n].power_rate_per_second = ShipSystemLegacy::default_power_rate_per_second;
-        systems[n].power_request = 1.0f;
-        systems[n].coolant_level = 0.0f;
-        systems[n].coolant_rate_per_second = ShipSystemLegacy::default_coolant_rate_per_second;
-        systems[n].coolant_request = 0.0f;
-        systems[n].heat_level = 0.0f;
-        systems[n].heat_rate_per_second = ShipSystemLegacy::default_heat_rate_per_second;
-        systems[n].hacked_level = 0.0f;
-        systems[n].power_factor = default_system_power_factors[n];
-
-        registerMemberReplication(&systems[n].health, 0.1f);
-        registerMemberReplication(&systems[n].health_max, 0.1f);
-        registerMemberReplication(&systems[n].hacked_level, 0.1f);
-    }
 
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
@@ -293,9 +241,15 @@ void SpaceShip::applyTemplateValues()
         engine.sound = ship_template->impulse_sound_file;
     }
     
-    turn_speed = ship_template->turn_speed;
-    combat_maneuver_boost_speed = ship_template->combat_maneuver_boost_speed;
-    combat_maneuver_strafe_speed = ship_template->combat_maneuver_strafe_speed;
+    if (ship_template->turn_speed) {
+        auto& thrusters = entity.getOrAddComponent<ManeuveringThrusters>();
+        thrusters.speed = ship_template->turn_speed;
+    }
+    if (ship_template->combat_maneuver_boost_speed || ship_template->combat_maneuver_strafe_speed) {
+        auto& thrusters = entity.getOrAddComponent<CombatManeuveringThrusters>();
+        thrusters.boost.speed = ship_template->combat_maneuver_boost_speed;
+        thrusters.strafe.speed = ship_template->combat_maneuver_strafe_speed;
+    }
 
     if (ship_template->warp_speed > 0.0f) {
         auto& warp = entity.getOrAddComponent<WarpDrive>();
@@ -349,9 +303,9 @@ void SpaceShip::updateDynamicRadarSignature()
     DynamicRadarSignatureInfo signature_delta;
 
     // For each ship system ...
-    for(int n = 0; n < SYS_COUNT; n++)
+    for(int n = 0; n < ShipSystem::COUNT; n++)
     {
-        ESystem ship_system = static_cast<ESystem>(n);
+        auto ship_system = static_cast<ShipSystem::Type>(n);
 
         // ... increase the biological band based on system heat, offset by
         // coolant.
@@ -364,7 +318,7 @@ void SpaceShip::updateDynamicRadarSignature()
         );
 
         // ... adjust the electrical band if system power allocation is not 100%.
-        if (ship_system == SYS_JumpDrive)
+        if (ship_system == ShipSystem::Type::JumpDrive)
         {
             auto jump = entity.getComponent<JumpDrive>();
             if (jump && jump->charge < jump->max_distance) {
@@ -411,87 +365,9 @@ void SpaceShip::update(float delta)
 {
     ShipTemplateBasedObject::update(delta);
 
-    auto physics = entity.getComponent<sp::Physics>();
-
-    float rotationDiff;
-    if (fabs(turnSpeed) < 0.0005f) {
-        rotationDiff = angleDifference(getRotation(), target_rotation);
-    } else {
-        rotationDiff = turnSpeed;
-    }
-
-    if (physics) {
-        if (rotationDiff > 1.0f)
-            physics->setAngularVelocity(turn_speed * getSystemEffectiveness(SYS_Maneuver));
-        else if (rotationDiff < -1.0f)
-            physics->setAngularVelocity(-turn_speed * getSystemEffectiveness(SYS_Maneuver));
-        else
-            physics->setAngularVelocity(rotationDiff * turn_speed * getSystemEffectiveness(SYS_Maneuver));
-    }
-
-    if (combat_maneuver_boost_active > combat_maneuver_boost_request)
-    {
-        combat_maneuver_boost_active -= delta;
-        if (combat_maneuver_boost_active < combat_maneuver_boost_request)
-            combat_maneuver_boost_active = combat_maneuver_boost_request;
-    }
-    if (combat_maneuver_boost_active < combat_maneuver_boost_request)
-    {
-        combat_maneuver_boost_active += delta;
-        if (combat_maneuver_boost_active > combat_maneuver_boost_request)
-            combat_maneuver_boost_active = combat_maneuver_boost_request;
-    }
-    if (combat_maneuver_strafe_active > combat_maneuver_strafe_request)
-    {
-        combat_maneuver_strafe_active -= delta;
-        if (combat_maneuver_strafe_active < combat_maneuver_strafe_request)
-            combat_maneuver_strafe_active = combat_maneuver_strafe_request;
-    }
-    if (combat_maneuver_strafe_active < combat_maneuver_strafe_request)
-    {
-        combat_maneuver_strafe_active += delta;
-        if (combat_maneuver_strafe_active > combat_maneuver_strafe_request)
-            combat_maneuver_strafe_active = combat_maneuver_strafe_request;
-    }
-
-    // If the ship is making a combat maneuver ...
-    if (combat_maneuver_boost_active != 0.0f || combat_maneuver_strafe_active != 0.0f)
-    {
-        // ... consume its combat maneuver boost.
-        combat_maneuver_charge -= fabs(combat_maneuver_boost_active) * delta / combat_maneuver_boost_max_time;
-        combat_maneuver_charge -= fabs(combat_maneuver_strafe_active) * delta / combat_maneuver_strafe_max_time;
-
-        // Use boost only if we have boost available.
-        if (combat_maneuver_charge <= 0.0f)
-        {
-            combat_maneuver_charge = 0.0f;
-            combat_maneuver_boost_request = 0.0f;
-            combat_maneuver_strafe_request = 0.0f;
-        }else if (physics)
-        {
-            auto forward = vec2FromAngle(getRotation());
-            physics->setVelocity(physics->getVelocity() + forward * combat_maneuver_boost_speed * combat_maneuver_boost_active);
-            physics->setVelocity(physics->getVelocity() + vec2FromAngle(getRotation() + 90) * combat_maneuver_strafe_speed * combat_maneuver_strafe_active);
-        }
-    // If the ship isn't making a combat maneuver, recharge its boost.
-    }else if (combat_maneuver_charge < 1.0f)
-    {
-        combat_maneuver_charge += (delta / combat_maneuver_charge_time) * (getSystemEffectiveness(SYS_Maneuver) + getSystemEffectiveness(SYS_Impulse)) / 2.0f;
-        if (combat_maneuver_charge > 1.0f)
-            combat_maneuver_charge = 1.0f;
-    }
-
-    // Add heat to systems consuming combat maneuver boost.
-    addHeat(SYS_Impulse, fabs(combat_maneuver_boost_active) * delta * heat_per_combat_maneuver_boost);
-    addHeat(SYS_Maneuver, fabs(combat_maneuver_strafe_active) * delta * heat_per_combat_maneuver_strafe);
-
-    for(int n=0; n<SYS_COUNT; n++)
-    {
-        systems[n].hacked_level = std::max(0.0f, systems[n].hacked_level - delta / unhack_time);
-        systems[n].health = std::min(systems[n].health,systems[n].health_max);
-    }
-
-    model_info.engine_scale = std::abs(getAngularVelocity() / turn_speed);
+    model_info.engine_scale = 0.0f;
+    auto thrusters = entity.getComponent<ManeuveringThrusters>();
+    if (thrusters) model_info.engine_scale = std::abs(getAngularVelocity() / thrusters->speed);
     auto impulse = entity.getComponent<ImpulseEngine>();
     if (impulse)
         model_info.engine_scale = std::max(model_info.engine_scale, std::abs(impulse->actual));
@@ -644,33 +520,24 @@ bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
     return (!(this->isFriendly(other)) && this->isFriendOrFoeIdentifiedBy(other)) ;
 }
 
-std::vector<std::pair<ESystem, float>> SpaceShip::getHackingTargets()
+std::vector<std::pair<ShipSystem::Type, float>> SpaceShip::getHackingTargets()
 {
-    std::vector<std::pair<ESystem, float>> results;
-    for(unsigned int n=0; n<SYS_COUNT; n++)
+    std::vector<std::pair<ShipSystem::Type, float>> results;
+    for(unsigned int n=0; n<ShipSystem::COUNT; n++)
     {
-        if (n != SYS_Reactor && hasSystem(ESystem(n)))
-        {
-            results.emplace_back(ESystem(n), systems[n].hacked_level);
-        }
+        if (ShipSystem::Type(n) == ShipSystem::Type::Reactor) continue;
+        auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
+        if (sys)
+            results.emplace_back(ShipSystem::Type(n), sys->hacked_level);
     }
     return results;
 }
 
-void SpaceShip::hackFinished(P<SpaceObject> source, string target)
+void SpaceShip::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
 {
-    for(unsigned int n=0; n<SYS_COUNT; n++)
-    {
-        if (hasSystem(ESystem(n)))
-        {
-            if (target == getSystemName(ESystem(n)))
-            {
-                systems[n].hacked_level = std::min(1.0f, systems[n].hacked_level + 0.5f);
-                return;
-            }
-        }
-    }
-    LOG(WARNING) << "Unknown hacked target: " << target;
+    auto sys = ShipSystem::get(entity, target);
+    if (sys)
+        sys->hacked_level = std::min(1.0f, sys->hacked_level + 0.5f);
 }
 
 float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
@@ -714,24 +581,27 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
     auto hull = entity.getComponent<Hull>();
     if (gameGlobalInfo->use_system_damage && hull)
     {
-        if (info.system_target != SYS_None)
+        if (auto sys = ShipSystem::get(entity, info.system_target))
         {
             //Target specific system
             float system_damage = (damage_amount / hull->max) * 2.0f;
             if (info.type == DT_Energy)
                 system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
-            systems[info.system_target].health -= system_damage;
-            if (systems[info.system_target].health < -1.0f)
-                systems[info.system_target].health = -1.0f;
+            sys->health -= system_damage;
+            if (sys->health < -1.0f)
+                sys->health = -1.0f;
 
             for(int n=0; n<2; n++)
             {
-                ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
+                auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
                 //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
                 float system_damage = (damage_amount / hull->max) * 1.0f;
-                systems[random_system].health -= system_damage;
-                if (systems[random_system].health < -1.0f)
-                    systems[random_system].health = -1.0f;
+                sys = ShipSystem::get(entity, random_system);
+                if (sys) {
+                    sys->health -= system_damage;
+                    if (sys->health < -1.0f)
+                        sys->health = -1.0f;
+                }
             }
 
             if (info.type == DT_Energy)
@@ -739,14 +609,18 @@ void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
             else
                 damage_amount *= 0.5f;
         }else{
-            ESystem random_system = ESystem(irandom(0, SYS_COUNT - 1));
             //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
             float system_damage = (damage_amount / hull->max) * 3.0f;
             if (info.type == DT_Energy)
                 system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
-            systems[random_system].health -= system_damage;
-            if (systems[random_system].health < -1.0f)
-                systems[random_system].health = -1.0f;
+
+            auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
+            sys = ShipSystem::get(entity, random_system);
+            if (sys) {
+                sys->health -= system_damage;
+                if (sys->health < -1.0f)
+                    sys->health = -1.0f;
+            }
         }
     }
 
@@ -780,65 +654,9 @@ void SpaceShip::destroyedByDamage(DamageInfo& info)
     }
 }
 
-bool SpaceShip::hasSystem(ESystem system)
+bool SpaceShip::hasSystem(ShipSystem::Type system)
 {
-    switch(system)
-    {
-    case SYS_None:
-    case SYS_COUNT:
-        return false;
-    case SYS_Warp:
-        return entity.hasComponent<WarpDrive>();
-    case SYS_JumpDrive:
-        return entity.hasComponent<JumpDrive>();
-    case SYS_MissileSystem:
-        return entity.hasComponent<MissileTubes>();
-    case SYS_FrontShield:
-        return entity.hasComponent<Shields>();
-    case SYS_RearShield:
-        {
-            auto shields = entity.getComponent<Shields>();
-            if (shields && shields->count > 1)
-                return true;
-            return false;
-        }
-    case SYS_Reactor:
-        return entity.hasComponent<Reactor>();
-    case SYS_BeamWeapons:
-        return entity.hasComponent<BeamWeaponSys>();
-    case SYS_Maneuver:
-        return turn_speed > 0.0f;
-    case SYS_Impulse:
-        return entity.hasComponent<ImpulseEngine>();
-    }
-    return true;
-}
-
-float SpaceShip::getSystemEffectiveness(ESystem system)
-{
-    float power = systems[system].power_level;
-
-    // Substract the hacking from the power, making double hacked systems run at 25% efficiency.
-    power = std::max(0.0f, power - systems[system].hacked_level * 0.75f);
-
-    // Degrade all systems except the reactor once energy level drops below 10.
-    if (system != SYS_Reactor)
-    {
-        auto reactor = entity.getComponent<Reactor>();
-        if (reactor) {
-            if (reactor->energy < 10.0f && reactor->energy > 0.0f && power > 0.0f)
-                power = std::min(power * reactor->energy / 10.0f, power);
-            else if (reactor->energy <= 0.0f || power <= 0.0f)
-                power = 0.0f;
-        }
-    }
-
-    // Degrade damaged systems.
-    if (gameGlobalInfo && gameGlobalInfo->use_system_damage)
-        return std::max(0.0f, power * systems[system].health);
-
-    // If a system cannot be damaged, excessive heat degrades it.
-    return std::max(0.0f, power * (1.0f - systems[system].heat_level));
+    return ShipSystem::get(entity, system) != nullptr;
 }
 
 float SpaceShip::getBeamWeaponArc(int index) { return 0.0f; /* TODO */ }
@@ -1053,8 +871,8 @@ string SpaceShip::getScriptExportModificationsOnTemplate()
     //    ret += ":setImpulseMaxSpeed(" + string(impulse_max_speed, 1) + ")";
     //if (impulse_max_reverse_speed != ship_template->impulse_reverse_speed)
     //    ret += ":setImpulseMaxReverseSpeed(" + string(impulse_max_reverse_speed, 1) + ")";
-    if (turn_speed != ship_template->turn_speed)
-        ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
+    //if (turn_speed != ship_template->turn_speed)
+    //    ret += ":setRotationMaxSpeed(" + string(turn_speed, 1) + ")";
     //if (has_jump_drive != ship_template->has_jump_drive)
     //    ret += ":setJumpDrive(" + string(has_jump_drive ? "true" : "false") + ")";
     //if (jump_drive_min_distance != ship_template->jump_drive_min_distance

@@ -355,9 +355,11 @@ set(MAIN_SOURCES
     src/components/hull.h
     src/components/rendering.h
     src/components/docking.h
+    src/components/coolant.h
     src/components/shipsystem.h
     src/components/shipsystem.cpp
     src/components/impulse.h
+    src/components/maneuveringthrusters.h
     src/components/warpdrive.h
     src/components/jumpdrive.h
     src/components/reactor.h
@@ -367,8 +369,16 @@ set(MAIN_SOURCES
     src/components/missiletubes.h
     src/systems/docking.h
     src/systems/docking.cpp
+    src/systems/shipsystemssystem.h
+    src/systems/shipsystemssystem.cpp
+    src/systems/coolantsystem.h
+    src/systems/coolantsystem.cpp
+    src/systems/energysystem.h
+    src/systems/energysystem.cpp
     src/systems/impulse.h
     src/systems/impulse.cpp
+    src/systems/maneuvering.h
+    src/systems/maneuvering.cpp
     src/systems/beamweapon.h
     src/systems/beamweapon.cpp
     src/systems/missilesystem.h

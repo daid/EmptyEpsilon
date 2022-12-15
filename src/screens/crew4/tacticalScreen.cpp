@@ -91,7 +91,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         beam_info_box->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(500, 50);
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(80, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, sp::Alignment::BottomLeft)->setSize(132, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
+        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
         (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(288, 50);
     }
 
@@ -131,12 +131,12 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         jump_controls->setVisible(my_spaceship->entity.hasComponent<JumpDrive>());
 
         string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
-        if (my_spaceship->hasSystem(SYS_RearShield))
+        if (my_spaceship->hasSystem(ShipSystem::Type::RearShield))
         {
             shields_value += " " + string(my_spaceship->getShieldPercentage(1)) + "%";
         }
         shields_display->setValue(shields_value);
-        if (my_spaceship->hasSystem(SYS_FrontShield) || my_spaceship->hasSystem(SYS_RearShield))
+        if (my_spaceship->hasSystem(ShipSystem::Type::FrontShield) || my_spaceship->hasSystem(ShipSystem::Type::RearShield))
         {
             shields_display->show();
         } else {

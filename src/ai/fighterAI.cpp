@@ -2,6 +2,7 @@
 #include "components/impulse.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
+#include "components/maneuveringthrusters.h"
 #include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
@@ -99,7 +100,8 @@ void FighterAI::runAttack(P<SpaceObject> target)
         }
         else
         {
-            owner->target_rotation = evade_direction;
+            auto thrusters = owner->entity.getComponent<ManeuveringThrusters>();
+            if (thrusters) thrusters->target = evade_direction;
             auto impulse = owner->entity.getComponent<ImpulseEngine>();
             if (impulse)
                 impulse->request = 1.0;

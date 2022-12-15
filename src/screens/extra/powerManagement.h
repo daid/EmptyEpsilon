@@ -18,7 +18,7 @@ private:
     float previous_energy_measurement;
     float previous_energy_level;
     float average_energy_delta;
-    ESystem selected_system = SYS_None;
+    ShipSystem::Type selected_system = ShipSystem::Type::None;
 
     class SystemRow
     {
@@ -30,7 +30,7 @@ private:
         GuiProgressbar* power_bar;
         GuiProgressbar* coolant_bar;
     };
-    SystemRow systems[SYS_COUNT];
+    SystemRow systems[ShipSystem::COUNT];
 public:
     PowerManagementScreen(GuiContainer* owner);
 

@@ -190,25 +190,26 @@ void RepairCrew::update(float delta)
             }
             position = glm::vec2{pos.x, pos.y};
 
-            ESystem system = ship->ship_template->getSystemAtRoom(pos);
-            if (system != SYS_None)
+            auto system = ShipSystem::get(ship->entity, ship->ship_template->getSystemAtRoom(pos));
+            if (system)
             {
-                ship->systems[system].health += repair_per_second * delta;
-                if (ship->systems[system].health > 1.0f)
-                    ship->systems[system].health = 1.0;
-                ship->systems[system].hacked_level -= repair_per_second * delta;
-                if (ship->systems[system].hacked_level < 0.0f)
-                    ship->systems[system].hacked_level = 0.0;
+                system->health += repair_per_second * delta;
+                if (system->health > 1.0f)
+                    system->health = 1.0;
+                system->hacked_level -= repair_per_second * delta;
+                if (system->hacked_level < 0.0f)
+                    system->hacked_level = 0.0;
             }
-            if (ship->auto_repair_enabled && pos == target_position && (system == SYS_None || !ship->hasSystem(system) || ship->systems[system].health == 1.0f))
+            if (ship->auto_repair_enabled && pos == target_position && (!system || system->health == 1.0f))
             {
-                int n=irandom(0, SYS_COUNT - 1);
+                int n=irandom(0, ShipSystem::COUNT - 1);
 
-                if (ship->hasSystem(ESystem(n)) && ship->systems[n].health < 1.0f)
+                system = ShipSystem::get(ship->entity, ShipSystem::Type(n));
+                if (system && system->health < 1.0f)
                 {
                     for(unsigned int idx=0; idx<ship->ship_template->rooms.size(); idx++)
                     {
-                        if (ship->ship_template->rooms[idx].system == ESystem(n))
+                        if (ship->ship_template->rooms[idx].system == ShipSystem::Type(n))
                         {
                             target_position = ship->ship_template->rooms[idx].position + glm::ivec2(irandom(0, ship->ship_template->rooms[idx].size.x - 1), irandom(0, ship->ship_template->rooms[idx].size.y - 1));
                         }

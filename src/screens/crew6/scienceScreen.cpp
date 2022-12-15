@@ -162,9 +162,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     }
 
     // List each system's status.
-    for(int n = 0; n < SYS_COUNT; n++)
+    for(int n = 0; n < ShipSystem::COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getLocaleSystemName(ESystem(n)), "-");
+        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getLocaleSystemName(ShipSystem::Type(n)), "-");
         info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
         info_system[n]->hide();
     }
@@ -279,7 +279,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_type_button->hide();
     sidebar_pager->hide();
 
-    for(int n = 0; n < SYS_COUNT; n++)
+    for(int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
     if (probe)
@@ -364,7 +364,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                     info_shield_frequency->show();
                     info_beam_frequency->show();
 
-                    for(int n = 0; n < SYS_COUNT; n++)
+                    for(int n = 0; n < ShipSystem::COUNT; n++)
                     {
                         info_system[n]->hide();
                     }
@@ -376,7 +376,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                     info_shield_frequency->hide();
                     info_beam_frequency->hide();
 
-                    for(int n = 0; n < SYS_COUNT; n++)
+                    for(int n = 0; n < ShipSystem::COUNT; n++)
                     {
                         info_system[n]->show();
                     }
@@ -388,7 +388,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                     info_shield_frequency->hide();
                     info_beam_frequency->hide();
 
-                    for(int n = 0; n < SYS_COUNT; n++)
+                    for(int n = 0; n < ShipSystem::COUNT; n++)
                     {
                         info_system[n]->hide();
                     }
@@ -417,10 +417,13 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 }
 
                 // Show the status of each subsystem.
-                for(int n = 0; n < SYS_COUNT; n++)
+                for(int n = 0; n < ShipSystem::COUNT; n++)
                 {
-                    float system_health = ship->systems[n].health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    auto sys = ShipSystem::get(ship->entity, ShipSystem::Type(n));
+                    if (sys) {
+                        float system_health = sys->health;
+                        info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    }
                 }
             }
         }

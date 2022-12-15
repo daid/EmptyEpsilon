@@ -10,7 +10,7 @@ class DamageControlScreen : public GuiOverlay
 {
 private:
     GuiKeyValueDisplay* hull_display;
-    GuiKeyValueDisplay* system_health[SYS_COUNT];
+    GuiKeyValueDisplay* system_health[ShipSystem::COUNT];
 public:
     DamageControlScreen(GuiContainer* owner);
 
