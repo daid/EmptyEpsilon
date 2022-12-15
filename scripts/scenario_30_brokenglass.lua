@@ -3,15 +3,16 @@
 ---
 ---Plan for 3+ hours on Easy, with harder difficulties taking longer
 -- Type: Replayable Mission
--- Variation[Easy]: Minor enemy resistance and easier missions (Default)
--- Variation[Medium]: More robust resistance w/ more risk (takes longer)
--- Variation[Hard]: Significant enemy resistance
+-- Setting[Difficulty]: Configures the difficulty in the scenario.
+-- Difficulty[Easy|Default]: Minor enemy resistance and easier missions.
+-- Difficulty[Medium]: More robust resistance with more risk (takes longer).
+-- Difficulty[Hard]: Significant enemy resistance.
 
 require("utils.lua")
 
 function init()
 
-  SetVariations()
+  SetSettings()
 
   -- == Core area
   Coreplanet = Planet():setPosition(29855, -4285):setPlanetRadius(3000):setPlanetAtmosphereColor(0.20,0.20,1.00):setDistanceFromMovementPlane(-2000.00):setPlanetAtmosphereTexture("planets/atmosphere.png"):setPlanetSurfaceTexture("planets/planet-1.png"):setPlanetCloudTexture("planets/clouds-1.png"):setPlanetCloudRadius(3150.00)
@@ -902,12 +903,12 @@ function InitTraffic()
 end
 
 --translate variations into a numeric Difficulty value
-function SetVariations()
-  if string.find(getScenarioVariation(),"Easy") then
+function SetSettings()
+  if string.find(getScenarioSetting("Difficulty"),"Easy") then
     Difficulty = 1
-  elseif string.find(getScenarioVariation(),"Medium") then
+  elseif string.find(getScenarioSetting("Difficulty"),"Medium") then
     Difficulty = 3
-  elseif string.find(getScenarioVariation(),"Hard") then
+  elseif string.find(getScenarioSetting("Difficulty"),"Hard") then
     Difficulty = 5
   else
     Difficulty = 1    --default (Easy)
