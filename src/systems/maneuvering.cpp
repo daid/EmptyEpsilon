@@ -12,8 +12,8 @@ void ManeuveringSystem::update(float delta)
         float rotationDiff = 0.0f;
         if (thrusters.rotation_request != std::numeric_limits<float>::min())
             rotationDiff = thrusters.rotation_request;
-        if (thrusters.rotation_request)
-            rotationDiff = angleDifference(transform.getRotation(), thrusters.rotation_request);
+        if (thrusters.target != std::numeric_limits<float>::min())
+            rotationDiff = angleDifference(transform.getRotation(), thrusters.target);
 
         if (rotationDiff > 1.0f)
             physics.setAngularVelocity(thrusters.speed * thrusters.getSystemEffectiveness());

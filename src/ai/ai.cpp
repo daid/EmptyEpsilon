@@ -595,12 +595,8 @@ void ShipAI::flyTowards(glm::vec2 target, float keep_distance)
         float rotation_diff = fabs(angleDifference(target_rotation, owner->getRotation()));
 
         auto warp = owner->entity.getComponent<WarpDrive>();
-        if (warp && rotation_diff < 30.0f && distance > 2000.0f)
-        {
-            warp->request = 1.0;
-        }else{
-            warp->request = 0.0;
-        }
+        if (warp)
+            warp->request = (rotation_diff < 30.0f && distance > 2000.0f) ? 1.0f : 0.0f;
         auto jump = owner->entity.getComponent<JumpDrive>();
         if (distance > 10000 && jump && jump->delay <= 0.0f && jump->charge >= jump->max_distance)
         {

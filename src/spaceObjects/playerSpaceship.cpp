@@ -587,6 +587,10 @@ void PlayerSpaceship::applyTemplateValues()
     // template.
     setRepairCrewCount(ship_template->repair_crew_count);
 
+    if (entity) {
+        entity.getOrAddComponent<Coolant>();
+    }
+
     // Set the ship's capabilities.
     can_scan = ship_template->can_scan;
     can_hack = ship_template->can_hack;
