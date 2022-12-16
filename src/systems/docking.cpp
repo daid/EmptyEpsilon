@@ -87,7 +87,7 @@ void DockingSystem::update(float delta)
                         // set to share its energy with docked ships, transfer energy from the
                         // mothership to docked ships until the mothership runs out of energy
                         // or the docked ship doesn't require any.
-                        if (!other_reactor || other_reactor->use_energy(energy_request))
+                        if (!other_reactor || other_reactor->useEnergy(energy_request))
                             my_reactor->energy += energy_request;
                     }
                 }

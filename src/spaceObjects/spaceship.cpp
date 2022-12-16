@@ -399,7 +399,7 @@ bool SpaceShip::useEnergy(float amount)
     // If it doesn't, return false.
     auto reactor = entity.getComponent<Reactor>();
     if (reactor)
-        return reactor->use_energy(amount);
+        return reactor->useEnergy(amount);
     return true;
 }
 

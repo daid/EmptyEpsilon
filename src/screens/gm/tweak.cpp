@@ -1056,7 +1056,7 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 
     // Can combat maneuver bool
     can_combat_maneuver = new GuiToggleButton(right_col, "", tr("button", "Can combat maneuver"), [this](bool value) {
-        target->setCanCombatManeuver(value);
+        //target->setCanCombatManeuver(value);
     });
     can_combat_maneuver->setSize(GuiElement::GuiSizeMax, 40);
 
@@ -1091,7 +1091,7 @@ void GuiShipTweakPlayer2::onDraw(sp::RenderTarget& renderer)
     can_scan->setValue(target->getCanScan());
     can_hack->setValue(target->getCanHack());
     can_dock->setValue(target->getCanDock());
-    can_combat_maneuver->setValue(target->getCanCombatManeuver());
+    //can_combat_maneuver->setValue(target->getCanCombatManeuver());
     can_self_destruct->setValue(target->getCanSelfDestruct());
     can_launch_probe->setValue(target->getCanLaunchProbe());
     //auto_coolant_enabled->setValue(target->auto_coolant_enabled);

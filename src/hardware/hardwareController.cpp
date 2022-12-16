@@ -370,7 +370,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("Shield6", ship->getShieldPercentage(6));
     SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
     //SHIP_VARIABLE("Energy", ship->energy_level * 100 / ship->max_energy_level);
-    SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
+    //SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
     //SHIP_VARIABLE("Impulse", ship->current_impulse * ship->getSystemEffectiveness(SYS_Impulse));
     //SHIP_VARIABLE("Warp", ship->current_warp * ship->getSystemEffectiveness(SYS_Warp));
     //SHIP_VARIABLE("Docking", ship->docking_state == DS_Docking ? 1.0f : 0.0f);

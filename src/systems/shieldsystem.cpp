@@ -2,13 +2,25 @@
 
 #include "components/shields.h"
 #include "components/docking.h"
+#include "components/reactor.h"
 #include "ecs/query.h"
 
 
 void ShieldSystem::update(float delta)
 {
-    for(auto [entity, shields] : sp::ecs::Query<Shields>())
+    for(auto [entity, shields, reactor] : sp::ecs::Query<Shields, sp::ecs::optional<Reactor>>())
     {
+        // If shields are calibrating, tick the calibration delay. Factor shield
+        // subsystem effectiveness when determining the tick rate.
+        if (shields.calibration_delay > 0.0) {
+            shields.calibration_delay -= delta * (shields.front_system.getSystemEffectiveness() * shields.rear_system.getSystemEffectiveness()) * 0.5f;
+            shields.active = false;
+        }
+        if (shields.active && reactor) {
+            // Consume power if shields are enabled.
+            if (!reactor->useEnergy(delta * shields.energy_use_per_second))
+                shields.active = false;
+        }
         for(int n=0; n<shields.count; n++)
         {
             auto& shield = shields.entry[n];

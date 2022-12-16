@@ -4,16 +4,14 @@
 #include "components/impulse.h"
 #include "components/warpdrive.h"
 #include "components/reactor.h"
-#include "spaceObjects/spaceship.h"
-#include "spaceObjects/playerSpaceship.h"
-#include "spaceObjects/cpuShip.h"
+#include "components/shields.h"
 #include "spaceObjects/warpjammer.h"
 #include "ecs/query.h"
 
 
 void WarpSystem::update(float delta)
 {
-    for(auto [entity, warp, impulse, position, physics, obj] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics, SpaceObject*>())
+    for(auto [entity, warp, impulse, position, physics] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics>())
     {
         if (warp.request > 0 || warp.current > 0)
         {
@@ -45,10 +43,10 @@ void WarpSystem::update(float delta)
                 // If warping, consume energy at a rate of 120% the warp request.
                 // If shields are up, that rate is increased by an additional 50%.
                 auto energy_use = warp.energy_warp_per_second * delta * warp.getSystemEffectiveness() * powf(warp.current, 1.3f);
-                auto ship = dynamic_cast<SpaceShip*>(obj);
-                if (ship && ship->getShieldsActive())
+                auto shields = entity.getComponent<Shields>();
+                if (shields && shields->active)
                     energy_use *= 1.7f;
-                if (!reactor->use_energy(energy_use))
+                if (!reactor->useEnergy(energy_use))
                     warp.request = 0;
             }
         }

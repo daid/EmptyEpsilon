@@ -11,5 +11,5 @@ public:
     // Runtime
     float energy = 1000.0f;
 
-    bool use_energy(float amount) { if (amount > energy) return false; energy -= amount; return true; }
+    bool useEnergy(float amount) { if (amount > energy) return false; energy -= amount; return true; }
 };

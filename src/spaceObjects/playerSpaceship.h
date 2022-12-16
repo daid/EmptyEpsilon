@@ -34,12 +34,9 @@ enum EAlertLevel
 class PlayerSpaceship : public SpaceShip
 {
 public:
-    // Power consumption and generation base rates
-    constexpr static float default_energy_shield_use_per_second = 1.5f;
     // Overheat subsystem damage rate
     constexpr static float damage_per_second_on_overheat = 0.08f;
     // Base time it takes to perform an action
-    constexpr static float shield_calibration_time = 25.0f;
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;
@@ -85,12 +82,8 @@ public:
     // Visual indicators of hull damage and in-progress jumps
     float hull_damage_indicator;
     float jump_indicator;
-    // Time in seconds it takes to recalibrate shields
-    float shield_calibration_delay;
     // Ship automation features, mostly for single-person ships like fighters
     bool auto_repair_enabled;
-    // Whether shields are up (true) or down
-    bool shields_active;
     // Password to join a ship. Default is empty.
     string control_code;
 
@@ -107,7 +100,6 @@ private:
     CommsScriptInterface comms_script_interface; // Server only
     // Ship's log container
     std::vector<ShipLogEntry> ships_log;
-    float energy_shield_use_per_second = default_energy_shield_use_per_second;
 public:
     std::vector<CustomShipFunction> custom_functions;
 
@@ -128,8 +120,6 @@ public:
 
     // Capable of hacking a target
     bool can_hack = true;
-    // Capable of combat maneuvers
-    bool can_combat_maneuver = true;
 
     // Capable of self-destruction
     bool can_self_destruct = true;
@@ -202,8 +192,8 @@ public:
     bool getCanHack() { return can_hack; }
     void setCanDock(bool enabled);
     bool getCanDock();
-    void setCanCombatManeuver(bool enabled) { can_combat_maneuver = enabled; }
-    bool getCanCombatManeuver() { return can_combat_maneuver; }
+    void setCanCombatManeuver(bool enabled) { } //TODO
+    bool getCanCombatManeuver() { return true; } // TODO
     void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
     bool getCanSelfDestruct() { return can_self_destruct && self_destruct_size > 0 && self_destruct_damage > 0; }
     void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
@@ -294,8 +284,8 @@ public:
     EAlertLevel getAlertLevel() { return alert_level; }
 
     // Flow rate controls.
-    float getEnergyShieldUsePerSecond() const { return energy_shield_use_per_second; }
-    void setEnergyShieldUsePerSecond(float rate) { energy_shield_use_per_second = rate; }
+    float getEnergyShieldUsePerSecond() const { return 0.0f; } //TODO
+    void setEnergyShieldUsePerSecond(float rate) { } //TODO
     float getEnergyWarpPerSecond() const { return 0.0f; } //TODO
     void setEnergyWarpPerSecond(float rate) {} //TODO
 
@@ -316,8 +306,8 @@ public:
     bool hasPlayerAtPosition(ECrewPosition position);
 
     // Ship shields functions
-    virtual bool getShieldsActive() override { return shields_active; }
-    void setShieldsActive(bool active) { shields_active = active; }
+    virtual bool getShieldsActive() override { return true; } //TODO
+    void setShieldsActive(bool active) { }
 
     // Waypoint functions
     int getWaypointCount() { return waypoints.size(); }

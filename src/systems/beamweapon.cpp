@@ -74,7 +74,7 @@ void BeamWeaponSystem::update(float delta)
 
                     // If the target is in the beam's arc and range, the beam has cooled
                     // down, and the beam can consume enough energy to fire ...
-                    if (distance < mount.range && mount.cooldown <= 0.0f && fabsf(angle_diff) < mount.arc / 2.0f && (!reactor || reactor->use_energy(mount.energy_per_beam_fire)))
+                    if (distance < mount.range && mount.cooldown <= 0.0f && fabsf(angle_diff) < mount.arc / 2.0f && (!reactor || reactor->useEnergy(mount.energy_per_beam_fire)))
                     {
                         // ... add heat to the beam and zap the target.
                         beamsys.addHeat(mount.heat_per_beam_fire);

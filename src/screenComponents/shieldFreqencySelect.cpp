@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "shieldFreqencySelect.h"
 #include "playerInfo.h"
+#include "components/shields.h"
 #include "spaceObjects/playerSpaceship.h"
 
 #include "screenComponents/shieldsEnableButton.h"
@@ -36,8 +37,9 @@ void GuiShieldFrequencySelect::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        calibrate_button->setEnable(my_spaceship->shield_calibration_delay <= 0.0f);
-        new_frequency->setEnable(my_spaceship->shield_calibration_delay <= 0.0f);
+        auto shields = my_spaceship->entity.getComponent<Shields>();
+        calibrate_button->setEnable(shields && shields->calibration_delay <= 0.0f);
+        new_frequency->setEnable(shields && shields->calibration_delay <= 0.0f);
     }
     GuiElement::onDraw(renderer);
 }

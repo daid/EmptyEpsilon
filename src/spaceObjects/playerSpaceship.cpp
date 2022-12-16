@@ -343,11 +343,9 @@ PlayerSpaceship::PlayerSpaceship()
     jump_indicator = 0.0;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
-    shield_calibration_delay = 0.0;
     auto_repair_enabled = false;
     scan_probe_stock = max_scan_probes;
     alert_level = AL_Normal;
-    shields_active = false;
     control_code = "";
 
     setFactionId(1);
@@ -358,19 +356,15 @@ PlayerSpaceship::PlayerSpaceship()
 
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
-    registerMemberReplication(&can_combat_maneuver);
     registerMemberReplication(&can_self_destruct);
     registerMemberReplication(&can_launch_probe);
     registerMemberReplication(&hull_damage_indicator, 0.5);
     registerMemberReplication(&jump_indicator, 0.5);
-    registerMemberReplication(&energy_shield_use_per_second, .5f);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
     registerMemberReplication(&scanning_delay, 0.5);
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&scanning_depth);
-    registerMemberReplication(&shields_active);
-    registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
@@ -430,15 +424,6 @@ void PlayerSpaceship::update(float delta)
     if (jump_indicator > 0)
         jump_indicator -= delta;
 
-    // If shields are calibrating, tick the calibration delay. Factor shield
-    // subsystem effectiveness when determining the tick rate.
-    if (shield_calibration_delay > 0)
-    {
-        auto front = ShipSystem::get(entity, ShipSystem::Type::FrontShield);
-        auto rear = ShipSystem::get(entity, ShipSystem::Type::RearShield);
-        shield_calibration_delay -= delta * ((front ? front->getSystemEffectiveness() : 0) + (rear ? rear->getSystemEffectiveness() : 0)) / 2.0f;
-    }
-
     // Actions performed on the server only.
     if (game_server)
     {
@@ -484,19 +469,6 @@ void PlayerSpaceship::update(float delta)
         {
             if (!comms_target)
                 comms_state = CS_ChannelBroken;
-        }
-
-        // Consume power if shields are enabled.
-        if (shields_active)
-            useEnergy(delta * getEnergyShieldUsePerSecond());
-
-        // Consume power based on subsystem requests and state.
-        auto reactor = entity.getComponent<Reactor>();
-
-        // If the ship has less than 10 energy, drop shields automatically.
-        if (reactor && reactor->energy < 10.0f)
-        {
-            shields_active = false;
         }
 
         if (scanning_target)
@@ -589,12 +561,13 @@ void PlayerSpaceship::applyTemplateValues()
 
     if (entity) {
         entity.getOrAddComponent<Coolant>();
+        if (!ship_template->can_combat_maneuver)
+            entity.removeComponent<CombatManeuveringThrusters>();
     }
 
     // Set the ship's capabilities.
     can_scan = ship_template->can_scan;
     can_hack = ship_template->can_hack;
-    can_combat_maneuver = ship_template->can_combat_maneuver;
     can_self_destruct = ship_template->can_self_destruct;
     can_launch_probe = ship_template->can_launch_probe;
     if (!on_new_player_ship_called)
@@ -1055,16 +1028,15 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             bool active;
             packet >> active;
 
-            if (shield_calibration_delay <= 0.0f && active != shields_active)
-            {
-                shields_active = active;
-                if (active)
+            auto shields = entity.getComponent<Shields>();
+            if (shields) {
+                if (shields->calibration_delay <= 0.0f && active != shields->active)
                 {
-                    playSoundOnMainScreen("sfx/shield_up.wav");
-                }
-                else
-                {
-                    playSoundOnMainScreen("sfx/shield_down.wav");
+                    shields->active = active;
+                    if (active)
+                        playSoundOnMainScreen("sfx/shield_up.wav");
+                    else
+                        playSoundOnMainScreen("sfx/shield_down.wav");
                 }
             }
         }
@@ -1284,15 +1256,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
-        if (shield_calibration_delay <= 0.0f)
         {
             int32_t new_frequency;
             packet >> new_frequency;
             auto shields = entity.getComponent<Shields>();
-            if (shields && new_frequency != shields->frequency)
+            if (shields && shields->calibration_delay <= 0.0f && new_frequency != shields->frequency)
             {
                 shields->frequency = new_frequency;
-                shield_calibration_delay = shield_calibration_time;
+                shields->calibration_delay = shields->calibration_time;
                 shields->active = false;
                 if (shields->frequency < 0)
                     shields->frequency = 0;
@@ -1870,8 +1841,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setCanHack(" + string(can_hack, true) + ")";
     //if (can_dock != ship_template->can_dock)
     //    result += ":setCanDock(" + string(can_dock, true) + ")";
-    if (can_combat_maneuver != ship_template->can_combat_maneuver)
-        result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
+    //if (can_combat_maneuver != ship_template->can_combat_maneuver)
+    //    result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
     if (can_self_destruct != ship_template->can_self_destruct)
         result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
     if (can_launch_probe != ship_template->can_launch_probe)
@@ -1915,10 +1886,8 @@ string PlayerSpaceship::getExportLine()
     }
     */
 
-    if (std::fabs(getEnergyShieldUsePerSecond() - default_energy_shield_use_per_second) > std::numeric_limits<float>::epsilon())
-    {
-        result += ":setEnergyShieldUsePerSecond(" + string(getEnergyShieldUsePerSecond(), 2) + ")";
-    }
+    //if (std::fabs(getEnergyShieldUsePerSecond() - default_energy_shield_use_per_second) > std::numeric_limits<float>::epsilon())
+    //    result += ":setEnergyShieldUsePerSecond(" + string(getEnergyShieldUsePerSecond(), 2) + ")";
 
     //if (std::fabs(getEnergyWarpPerSecond() - default_energy_warp_per_second) > std::numeric_limits<float>::epsilon())
     //    result += ":setEnergyWarpPerSecond(" + string(getEnergyWarpPerSecond(), 2) + ")";

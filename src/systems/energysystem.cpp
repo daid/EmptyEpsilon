@@ -5,6 +5,7 @@
 #include "components/hull.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/explosionEffect.h"
+#include "multiplayer_server.h"
 
 
 void EnergySystem::update(float delta)
@@ -39,7 +40,7 @@ void EnergySystem::update(float delta)
 
         // If reactor health is worse than -90% and overheating, it explodes,
         // destroying the ship and damaging a 0.5U radius.
-        if (reactor.health < -0.9f && reactor.heat_level == 1.0f)
+        if (reactor.health < -0.9f && reactor.heat_level == 1.0f && game_server)
         {
             auto hull = entity.getComponent<Hull>();
             if (hull && hull->allow_destruction) {

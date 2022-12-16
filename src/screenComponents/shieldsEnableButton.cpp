@@ -15,11 +15,14 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
     button = new GuiToggleButton(this, id + "_BUTTON", "Shields: ON", [](bool value) {
-        if (my_spaceship)
-            my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        if (my_spaceship) {
+            auto shields = my_spaceship->entity.getComponent<Shields>();
+            if (shields)
+                my_spaceship->commandSetShields(!shields->active);
+        }
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    bar = new GuiProgressbar(this, id + "_BAR", 0.0, PlayerSpaceship::shield_calibration_time, 0);
+    bar = new GuiProgressbar(this, id + "_BAR", 0.0, 25.0f, 0.0f);
     bar->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiLabel(bar, id + "_CALIBRATING_LABEL", tr("shields","Calibrating"), 30))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -35,11 +38,12 @@ void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
             button->hide();
             bar->hide();
         }
-        else if (my_spaceship->shield_calibration_delay > 0.0f)
+        else if (shields->calibration_delay > 0.0f)
         {
             button->hide();
             bar->show();
-            bar->setValue(my_spaceship->shield_calibration_delay);
+            bar->setRange(0, shields->calibration_time);
+            bar->setValue(shields->calibration_delay);
         }
         else
         {
@@ -59,8 +63,11 @@ void GuiShieldsEnableButton::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        if (keys.weapons_toggle_shields.getDown())
-            my_spaceship->commandSetShields(!my_spaceship->shields_active);
+        if (keys.weapons_toggle_shields.getDown()) {
+            auto shields = my_spaceship->entity.getComponent<Shields>();
+            if (shields)
+                my_spaceship->commandSetShields(!shields->active);
+        }
         if (keys.weapons_enable_shields.getDown())
             my_spaceship->commandSetShields(true);
         if (keys.weapons_disable_shields.getDown())
