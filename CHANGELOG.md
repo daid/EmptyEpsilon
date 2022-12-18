@@ -120,7 +120,7 @@
 - New settings
   - Hotkeys for top-down view (`TOPDOWN_`...) #1593
   - Hotkeys for cinematic view (`CINEMATIC_`...) #1593
-  - GUI theme file `resources/gui/default.theme.txt` 79b7dde
+  - `guitheme` and default GUI theme file `resources/gui/default.theme.txt` 79b7dde
   - `script_cycle_limit` to limit loop execution in scripts #1678
   - `multimonitor` to toggle experimental multi-monitor mode 7d5309b
 
