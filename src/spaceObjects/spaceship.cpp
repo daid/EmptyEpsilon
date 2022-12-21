@@ -27,6 +27,7 @@
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/missiletubes.h"
+#include "ecs/query.h"
 
 #include "scriptInterface.h"
 
@@ -40,8 +41,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScanned);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedBy);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedBy);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
+    //TODO?: REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFriendOrFoeIdentifiedByFaction);
+    //TODO?: REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isFullyScannedByFaction);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, isDocked);
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockedWith);
     //REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getDockingState);
@@ -462,23 +463,21 @@ void SpaceShip::scannedBy(P<SpaceObject> other)
 
 void SpaceShip::setScanState(EScannedState state)
 {
-    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
-    {
-        setScannedStateForFaction(faction_id, state);
+    for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
+        setScannedStateForFaction(faction_entity, state);
     }
 }
 
 void SpaceShip::setScanStateByFaction(string faction_name, EScannedState state)
 {
-    setScannedStateForFaction(FactionInfo::findFactionId(faction_name), state);
+    setScannedStateForFaction(Faction::find(faction_name), state);
 }
 
 bool SpaceShip::isFriendOrFoeIdentified()
 {
     LOG(WARNING) << "Deprecated \"isFriendOrFoeIdentified\" function called, use isFriendOrFoeIdentifiedBy or isFriendOrFoeIdentifiedByFaction.";
-    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
-    {
-        if (getScannedStateForFaction(faction_id) > SS_NotScanned)
+    for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
+        if (getScannedStateForFaction(faction_entity) > SS_NotScanned)
             return true;
     }
     return false;
@@ -487,9 +486,8 @@ bool SpaceShip::isFriendOrFoeIdentified()
 bool SpaceShip::isFullyScanned()
 {
     LOG(WARNING) << "Deprecated \"isFullyScanned\" function called, use isFullyScannedBy or isFullyScannedByFaction.";
-    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
-    {
-        if (getScannedStateForFaction(faction_id) >= SS_FullScan)
+    for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
+        if (getScannedStateForFaction(faction_entity) >= SS_FullScan)
             return true;
     }
     return false;
@@ -505,14 +503,14 @@ bool SpaceShip::isFullyScannedBy(P<SpaceObject> other)
     return getScannedStateFor(other) >= SS_FullScan;
 }
 
-bool SpaceShip::isFriendOrFoeIdentifiedByFaction(int faction_id)
+bool SpaceShip::isFriendOrFoeIdentifiedByFaction(sp::ecs::Entity faction_entity)
 {
-    return getScannedStateForFaction(faction_id) >= SS_FriendOrFoeIdentified;
+    return getScannedStateForFaction(faction_entity) >= SS_FriendOrFoeIdentified;
 }
 
-bool SpaceShip::isFullyScannedByFaction(int faction_id)
+bool SpaceShip::isFullyScannedByFaction(sp::ecs::Entity faction_entity)
 {
-    return getScannedStateForFaction(faction_id) >= SS_FullScan;
+    return getScannedStateForFaction(faction_entity) >= SS_FullScan;
 }
 
 bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
@@ -566,12 +564,11 @@ void SpaceShip::didAnOffensiveAction()
 {
     //We did an offensive action towards our target.
     // Check for each faction. If this faction knows if the target is an enemy or a friendly, it now knows if this object is an enemy or a friendly.
-    for(unsigned int faction_id=0; faction_id<factionInfo.size(); faction_id++)
-    {
-        if (getScannedStateForFaction(faction_id) == SS_NotScanned)
+    for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
+        if (getScannedStateForFaction(faction_entity) == SS_NotScanned)
         {
-            if (getTarget() && getTarget()->getScannedStateForFaction(faction_id) != SS_NotScanned)
-                setScannedStateForFaction(faction_id, SS_FriendOrFoeIdentified);
+            if (getTarget() && getTarget()->getScannedStateForFaction(faction_entity) != SS_NotScanned)
+                setScannedStateForFaction(faction_entity, SS_FriendOrFoeIdentified);
         }
     }
 }
@@ -752,12 +749,12 @@ void SpaceShip::setTubeLoadTime(int index, float time)
     return;
 }
 
-void SpaceShip::addBroadcast(int threshold, string message)
+void SpaceShip::addBroadcast(FactionRelation threshold, string message)
 {
-    if ((threshold < 0) || (threshold > 2))     //if an invalid threshold is defined, alert and default to ally only
+    if ((int(threshold) < 0) || (int(threshold) > 2))     //if an invalid threshold is defined, alert and default to ally only
     {
-        LOG(ERROR) << "Invalid threshold: " << threshold;
-        threshold = 0;
+        LOG(Error, "Invalid threshold: ", int(threshold));
+        threshold = FactionRelation::Enemy;
     }
 
     message = this->getCallSign() + " : " + message; //append the callsign at the start of broadcast
@@ -775,12 +772,12 @@ void SpaceShip::addBroadcast(int threshold, string message)
                 color = glm::u8vec4(154, 255, 154, 255); //ally = light green
                 addtolog = 1;
             }
-            else if ((FactionInfo::getState(this->getFactionId(), ship->getFactionId()) == FVF_Neutral) && ((threshold >= FVF_Neutral)))
+            else if (Faction::getRelation(this->entity, ship->entity) == FactionRelation::Neutral && int(threshold) >= int(FactionRelation::Neutral))
             {
                 color = glm::u8vec4(128,128,128, 255); //neutral = grey
                 addtolog = 1;
             }
-            else if ((this->isEnemy(ship)) && (threshold == FVF_Enemy))
+            else if ((this->isEnemy(ship)) && (threshold == FactionRelation::Enemy))
             {
                 color = glm::u8vec4(255,102,102, 255); //enemy = light red
                 addtolog = 1;

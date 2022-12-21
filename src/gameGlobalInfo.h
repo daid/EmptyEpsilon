@@ -43,7 +43,7 @@ public:
      */
     static const int max_player_ships = 32;
 private:
-    int victory_faction;
+    sp::ecs::Entity victory_faction;
     int32_t playerShipId[max_player_ships];
     int callsign_counter;
     /*!
@@ -56,7 +56,6 @@ public:
 
     string banner_string;
 
-    std::vector<float> reputation_points;
     EScanningComplexity scanning_complexity;
     //Hacking difficulty ranges from 0 to 3
     int hacking_difficulty;
@@ -94,12 +93,12 @@ public:
      * \brief Set a faction to victorious.
      * \param string Name of the faction that won.
      */
-    void setVictory(string faction_name) { victory_faction = FactionInfo::findFactionId(faction_name); }
+    void setVictory(string faction_name) { victory_faction = Faction::find(faction_name); }
     /*!
      * \brief Get ID of faction that won.
      * \param int
      */
-    int getVictoryFactionId() { return victory_faction; }
+    FactionInfo* getVictoryFaction() { if (!victory_faction) return nullptr; return victory_faction.getComponent<FactionInfo>(); }
 
     void addScript(P<Script> script);
     //Reset the global game state (called when we want to load a new scenario, and clear out this one)

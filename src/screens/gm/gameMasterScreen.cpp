@@ -11,7 +11,9 @@
 #include "spaceObjects/spaceStation.h"
 #include "spaceObjects/wormHole.h"
 #include "spaceObjects/zone.h"
+#include "components/faction.h"
 #include "systems/collision.h"
+#include "ecs/query.h"
 
 #include "screenComponents/radarView.h"
 
@@ -54,12 +56,11 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
         {
-            obj->setFactionId(index);
+            obj->setFaction(value);
         }
     });
-    for(P<FactionInfo> info : factionInfo)
-        if (info)
-            faction_selector->addEntry(info->getLocaleName(), info->getName());
+    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+        faction_selector->addEntry(info.locale_name, info.name);
     faction_selector->setPosition(20, 70, sp::Alignment::TopLeft)->setSize(250, 50);
 
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
@@ -564,7 +565,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                     continue;
                 if (ctrl_down && !P<ShipTemplateBasedObject>(obj))
                     continue;
-                if (alt_down && (!P<SpaceObject>(obj) || (int)(P<SpaceObject>(obj))->getFactionId() != faction_selector->getSelectionIndex()))
+                if (alt_down && (!P<SpaceObject>(obj) || (P<SpaceObject>(obj))->getFaction() != faction_selector->getSelectionValue()))
                     continue;
                 space_objects.push_back(obj);
             }
@@ -579,8 +580,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             }
 
 
-            if (space_objects.size() > 0)
-                faction_selector->setSelectionIndex(space_objects[0]->getFactionId());
+            if (space_objects.size() > 0) {
+                //TODO: faction_selector->setSelectionIndex(space_objects[0]->getFactionId());
+            }
         }
         break;
     default:

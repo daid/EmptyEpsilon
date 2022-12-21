@@ -9,6 +9,7 @@
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "random.h"
+#include "ecs/query.h"
 
 #include "components/reactor.h"
 #include "components/coolant.h"
@@ -348,11 +349,9 @@ PlayerSpaceship::PlayerSpaceship()
     alert_level = AL_Normal;
     control_code = "";
 
-    setFactionId(1);
-
     // For now, set player ships to always be fully scanned to all other ships
-    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
-        setScannedStateForFaction(faction_id, SS_FullScan);
+    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+        setScannedStateForFaction(entity, SS_FullScan);
 
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
@@ -407,6 +406,9 @@ PlayerSpaceship::PlayerSpaceship()
 
     // Initialize player ship callsigns with a "PL" designation.
     setCallSign("PL" + string(getMultiplayerId()));
+
+    if (entity)
+        setFaction("Human Navy");
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined

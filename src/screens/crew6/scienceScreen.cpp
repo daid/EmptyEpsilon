@@ -345,7 +345,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             // hull integrity, and database reference button.
             if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
             {
-                info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+                auto faction = Faction::getInfo(obj->entity);
+                info_faction->setValue(faction.locale_name);
                 info_type->setValue(ship->getTypeName());
                 info_type_button->show();
                 info_shields->setValue(ship->getShieldDataString());
@@ -432,7 +433,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         else
         {
             sidebar_pager->hide();
-            info_faction->setValue(factionInfo[obj->getFactionId()]->getLocaleName());
+            auto faction = Faction::getInfo(obj->entity);
+            info_faction->setValue(faction.locale_name);
 
             // If the target is a station, show basic tactical info.
             if (station)

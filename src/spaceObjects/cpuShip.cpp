@@ -100,7 +100,6 @@ REGISTER_MULTIPLAYER_CLASS(CpuShip, "CpuShip");
 CpuShip::CpuShip()
 : SpaceShip("CpuShip")
 {
-    setFactionId(2);
     orders = AI_Idle;
 
     setRotation(random(0, 360));
@@ -111,6 +110,9 @@ CpuShip::CpuShip()
 
     new_ai_name = "default";
     ai = nullptr;
+
+    if (entity)
+        setFaction("Kraylor");
 }
 
 CpuShip::~CpuShip()
@@ -163,7 +165,7 @@ void CpuShip::orderRoaming()
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for targets."));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for targets."));
 }
 
 void CpuShip::orderRoamingAt(glm::vec2 position)
@@ -173,7 +175,7 @@ void CpuShip::orderRoamingAt(glm::vec2 position)
     orders = AI_Roaming;
     order_target = NULL;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for hostiles around {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
 }
 
 void CpuShip::orderRetreat(P<SpaceObject> object)
@@ -182,10 +184,10 @@ void CpuShip::orderRetreat(P<SpaceObject> object)
     if (!object)
     {
         order_target = NULL;
-        this->addBroadcast(FVF_Friendly, tr("cpulog", "Searching for supplies."));
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Searching for supplies."));
     }else{
         order_target = object;
-        this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+        this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
     }
     order_target_location = glm::vec2(0, 0);
 }
@@ -197,7 +199,7 @@ void CpuShip::orderStandGround()
     orders = AI_StandGround;
     order_target = NULL;
     order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Standing ground for now."));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Standing ground for now."));
 }
 
 void CpuShip::orderDefendLocation(glm::vec2 position)
@@ -205,7 +207,7 @@ void CpuShip::orderDefendLocation(glm::vec2 position)
     orders = AI_DefendLocation;
     order_target = NULL;
     order_target_location = position;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Defending {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Defending {x},{y}.").format({{"x", string(position.x)}, {"y", string(position.y)}}));
 }
 
 void CpuShip::orderDefendTarget(P<SpaceObject> object)
@@ -215,7 +217,7 @@ void CpuShip::orderDefendTarget(P<SpaceObject> object)
     orders = AI_DefendTarget;
     order_target = object;
     order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Defending {callsign}.").format({{"callsign", object->getCallSign()}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Defending {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
 void CpuShip::orderFlyFormation(P<SpaceObject> object, glm::vec2 offset)
@@ -225,7 +227,7 @@ void CpuShip::orderFlyFormation(P<SpaceObject> object, glm::vec2 offset)
     orders = AI_FlyFormation;
     order_target = object;
     order_target_location = offset;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Following {callsign}.").format({{"callsign", object->getCallSign()}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Following {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
 void CpuShip::orderFlyTowards(glm::vec2 target)
@@ -233,7 +235,7 @@ void CpuShip::orderFlyTowards(glm::vec2 target)
     orders = AI_FlyTowards;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
 }
 
 void CpuShip::orderFlyTowardsBlind(glm::vec2 target)
@@ -241,7 +243,7 @@ void CpuShip::orderFlyTowardsBlind(glm::vec2 target)
     orders = AI_FlyTowardsBlind;
     order_target = NULL;
     order_target_location = target;
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to {x},{y}.").format({{"x", string(target.x)}, {"y", string(target.y)}}));
 }
 
 void CpuShip::orderAttack(P<SpaceObject> object)
@@ -251,7 +253,7 @@ void CpuShip::orderAttack(P<SpaceObject> object)
     orders = AI_Attack;
     order_target = object;
     order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
 }
 
 void CpuShip::orderDock(P<SpaceObject> object)
@@ -261,7 +263,7 @@ void CpuShip::orderDock(P<SpaceObject> object)
     orders = AI_Dock;
     order_target = object;
     order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
+    this->addBroadcast(FactionRelation::Friendly, tr("cpulog", "Docking to {callsign}.").format({{"callsign", object->getCallSign()}}));
 }
 
 void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

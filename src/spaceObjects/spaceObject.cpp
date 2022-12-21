@@ -4,6 +4,7 @@
 #include "preferenceManager.h"
 #include "components/collision.h"
 #include "systems/collision.h"
+#include "ecs/query.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -71,12 +72,12 @@ REGISTER_SCRIPT_CLASS_NO_CREATE(SpaceObject)
     /// in the faction list.
     /// Requires the index of a faction in the faction list.
     /// Example: local faction_id = obj:getFactionId()
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFactionId);
+    //TODO: REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, setFactionId);
     /// Gets the faction list index for the faction to which this object
     /// belongs. Can be used in combination with setFactionId() to ensure that
     /// two objects have the same faction.
     /// Example: other:setFactionId(obj:getFactionId())
-    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFactionId);
+    //TODO: REGISTER_SCRIPT_CLASS_FUNCTION(SpaceObject, getFactionId);
     /// Gets the friend-or-foe status of the parameter's faction relative to
     /// this object's faction.
     /// Requires a SpaceObject.
@@ -300,14 +301,12 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     object_radius = collision_range;
     space_object_list.push_back(this);
-    faction_id = 0;
 
     scanning_complexity_value = 0;
     scanning_depth_value = 0;
 
     registerMemberReplication(&callsign);
-    registerMemberReplication(&faction_id);
-    registerMemberReplication(&scanned_by_faction);
+    //registerMemberReplication(&scanned_by_faction);
     registerMemberReplication(&object_description.not_scanned);
     registerMemberReplication(&object_description.friend_of_foe_identified);
     registerMemberReplication(&object_description.simple_scan);
@@ -394,10 +393,11 @@ void SpaceObject::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
 EScannedState SpaceObject::getScannedStateFor(P<SpaceObject> other)
 {
     if (!other)
-    {
         return SS_NotScanned;
-    }
-    return getScannedStateForFaction(other->getFactionId());
+    auto f = other->entity.getComponent<Faction>();
+    if (!f)
+        return SS_NotScanned;
+    return getScannedStateForFaction(f->entity);
 }
 
 void SpaceObject::setScannedStateFor(P<SpaceObject> other, EScannedState state)
@@ -407,29 +407,38 @@ void SpaceObject::setScannedStateFor(P<SpaceObject> other, EScannedState state)
         LOG(ERROR) << "setScannedStateFor called with no other";
         return;
     }
-    setScannedStateForFaction(other->getFactionId(), state);
+    auto f = other->entity.getComponent<Faction>();
+    if (f)
+        setScannedStateForFaction(f->entity, state);
+    else
+        setScannedStateForFaction({}, state);
 }
 
-EScannedState SpaceObject::getScannedStateForFaction(int faction_id)
+EScannedState SpaceObject::getScannedStateForFaction(sp::ecs::Entity faction_entity)
 {
-    if (int(scanned_by_faction.size()) <= faction_id)
-        return SS_NotScanned;
-    return scanned_by_faction[faction_id];
+    for(auto& it : scanned_by_faction) {
+        if (it.first == faction_entity)
+            return it.second;
+    }
+    return SS_NotScanned;
 }
 
-void SpaceObject::setScannedStateForFaction(int faction_id, EScannedState state)
+void SpaceObject::setScannedStateForFaction(sp::ecs::Entity faction_entity, EScannedState state)
 {
-    while (int(scanned_by_faction.size()) <= faction_id)
-        scanned_by_faction.push_back(SS_NotScanned);
-    scanned_by_faction[faction_id] = state;
+    for(auto& it : scanned_by_faction) {
+        if (it.first == faction_entity) {
+            it.second = state;
+            return;
+        }
+    }
+    scanned_by_faction.push_back({faction_entity, state});
 }
 
 bool SpaceObject::isScanned()
 {
     LOG(WARNING) << "Depricated \"isScanned\" function called, use isScannedBy or isScannedByFaction.";
-    for(unsigned int faction_id = 0; faction_id < scanned_by_faction.size(); faction_id++)
-    {
-        if (scanned_by_faction[faction_id] > SS_FriendOrFoeIdentified)
+    for(auto& it : scanned_by_faction) {
+        if (it.second > SS_FriendOrFoeIdentified)
             return true;
     }
     return false;
@@ -437,21 +446,20 @@ bool SpaceObject::isScanned()
 
 void SpaceObject::setScanned(bool scanned)
 {
-    for(unsigned int faction_id = 0; faction_id < factionInfo.size(); faction_id++)
-    {
+    for(auto [entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
         if (!scanned)
-            setScannedStateForFaction(faction_id, SS_NotScanned);
+            setScannedStateForFaction(entity, SS_NotScanned);
         else
-            setScannedStateForFaction(faction_id, SS_FullScan);
+            setScannedStateForFaction(entity, SS_FullScan);
     }
 }
 
 void SpaceObject::setScannedByFaction(string faction_name, bool scanned)
 {
     if (!scanned)
-        setScannedStateForFaction(FactionInfo::findFactionId(faction_name), SS_NotScanned);
+        setScannedStateForFaction(Faction::find(faction_name), SS_NotScanned);
     else
-        setScannedStateForFaction(FactionInfo::findFactionId(faction_name), SS_FullScan);
+        setScannedStateForFaction(Faction::find(faction_name), SS_FullScan);
 }
 
 bool SpaceObject::isScannedBy(P<SpaceObject> obj)
@@ -459,9 +467,9 @@ bool SpaceObject::isScannedBy(P<SpaceObject> obj)
     return getScannedStateFor(obj) > SS_FriendOrFoeIdentified;
 }
 
-bool SpaceObject::isScannedByFaction(string faction)
+bool SpaceObject::isScannedByFaction(string faction_name)
 {
-    int faction_id = FactionInfo::findFactionId(faction);
+    auto faction_id = Faction::find(faction_name);
     return getScannedStateForFaction(faction_id) > SS_FriendOrFoeIdentified;
 }
 
@@ -482,7 +490,7 @@ bool SpaceObject::isEnemy(P<SpaceObject> obj)
 {
     if (obj)
     {
-        return FactionInfo::getState(faction_id, obj->faction_id) == FVF_Enemy;
+        return Faction::getRelation(entity, obj->entity) == FactionRelation::Enemy;
     } else {
         return false;
     }
@@ -492,10 +500,19 @@ bool SpaceObject::isFriendly(P<SpaceObject> obj)
 {
     if (obj)
     {
-        return FactionInfo::getState(faction_id, obj->faction_id) == FVF_Friendly;
+        return Faction::getRelation(entity, obj->entity) == FactionRelation::Friendly;
     } else {
         return false;
     }
+}
+
+void SpaceObject::setFaction(string faction_name)
+{
+    auto faction = Faction::find(faction_name);
+    if (faction)
+        entity.addComponent<Faction>(faction);
+    else
+        entity.removeComponent<Faction>();
 }
 
 void SpaceObject::damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
@@ -557,25 +574,22 @@ PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
 
 void SpaceObject::setReputationPoints(float amount)
 {
-    if (gameGlobalInfo->reputation_points.size() < faction_id)
-        return;
-    gameGlobalInfo->reputation_points[faction_id] = amount;
+    auto faction = Faction::getInfo(entity);
+    faction.reputation_points = amount;
 }
 
 int SpaceObject::getReputationPoints()
 {
-    if (gameGlobalInfo->reputation_points.size() < faction_id)
-        return 0;
-    return gameGlobalInfo->reputation_points[faction_id];
+    auto faction = Faction::getInfo(entity);
+    return faction.reputation_points;
 }
 
 bool SpaceObject::takeReputationPoints(float amount)
 {
-    if (gameGlobalInfo->reputation_points.size() < faction_id)
+    auto faction = Faction::getInfo(entity);
+    if (faction.reputation_points < amount)
         return false;
-     if (gameGlobalInfo->reputation_points[faction_id] < amount)
-        return false;
-    gameGlobalInfo->reputation_points[faction_id] -= amount;
+    faction.reputation_points -= amount;
     return true;
 }
 
@@ -586,11 +600,10 @@ void SpaceObject::removeReputationPoints(float amount)
 
 void SpaceObject::addReputationPoints(float amount)
 {
-    if (gameGlobalInfo->reputation_points.size() < faction_id)
+    auto faction = Faction::getInfo(entity);
+    if (faction.reputation_points < amount)
         return;
-    gameGlobalInfo->reputation_points[faction_id] += amount;
-    if (gameGlobalInfo->reputation_points[faction_id] < 0.0f)
-        gameGlobalInfo->reputation_points[faction_id] = 0.0f;
+    faction.reputation_points = std::max(0.0f, faction.reputation_points + amount);
 }
 
 void SpaceObject::setCommsScript(string script_name)

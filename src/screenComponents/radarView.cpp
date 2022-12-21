@@ -855,8 +855,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 
         auto color = trace.color;
         if (trace.flags & RadarTrace::ColorByFaction) {
-            if (factionInfo[obj->getFactionId()])
-                color = factionInfo[obj->getFactionId()]->getGMColor();
+            color = Faction::getInfo(obj->entity).gm_color;
             if (my_spaceship)
             {
                 if (obj == *my_spaceship)

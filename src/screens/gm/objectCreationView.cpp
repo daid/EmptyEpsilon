@@ -1,6 +1,7 @@
 #include "objectCreationView.h"
 #include "GMActions.h"
-#include "factionInfo.h"
+#include "components/faction.h"
+#include "ecs/query.h"
 #include "shipTemplate.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
@@ -14,9 +15,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     box->setPosition(0, 0, sp::Alignment::Center)->setSize(1000, 500);
 
     faction_selector = new GuiSelector(box, "FACTION_SELECTOR", nullptr);
-    for(P<FactionInfo> info : factionInfo)
-        if (info)
-            faction_selector->addEntry(info->getLocaleName(), info->getName());
+    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+        faction_selector->addEntry(info.locale_name, info.name);
     faction_selector->setSelectionIndex(0);
     faction_selector->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(300, 50);
 

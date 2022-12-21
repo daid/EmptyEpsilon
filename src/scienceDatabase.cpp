@@ -2,6 +2,8 @@
 #include "factionInfo.h"
 #include "shipTemplate.h"
 #include "spaceObjects/spaceship.h"
+#include "components/faction.h"
+#include "ecs/query.h"
 
 #include "scriptInterface.h"
 
@@ -328,27 +330,21 @@ void fillDefaultDatabaseData()
 {
     P<ScienceDatabase> factionDatabase = new ScienceDatabase();
     factionDatabase->setName(tr("database", "Factions"));
-    for(unsigned int n=0; n<factionInfo.size(); n++)
-    {
-        if (!factionInfo[n])
-            continue;
-        P<ScienceDatabase> entry = factionDatabase->addEntry(factionInfo[n]->getLocaleName());
-        for(unsigned int m=0; m<factionInfo.size(); m++)
-        {
-            if (n == m) continue;
-            if (!factionInfo[m])
-                continue;
+    for(auto [entity, info] : sp::ecs::Query<FactionInfo>()) {
+        P<ScienceDatabase> entry = factionDatabase->addEntry(info.locale_name);
+        for(auto [entity2, info2] : sp::ecs::Query<FactionInfo>()) {
+            if (info.name == info2.name) continue;
 
             string stance = tr("stance", "Neutral");
-            switch(FactionInfo::getState(n, m))
+            switch(info.getRelation(entity2))
             {
-                case FVF_Neutral: stance = tr("stance", "Neutral"); break;
-                case FVF_Enemy: stance = tr("stance", "Enemy"); break;
-                case FVF_Friendly: stance = tr("stance", "Friendly"); break;
+                case FactionRelation::Neutral: stance = tr("stance", "Neutral"); break;
+                case FactionRelation::Enemy: stance = tr("stance", "Enemy"); break;
+                case FactionRelation::Friendly: stance = tr("stance", "Friendly"); break;
             }
-            entry->addKeyValue(factionInfo[m]->getLocaleName(), stance);
+            entry->addKeyValue(info2.locale_name, stance);
         }
-        entry->setLongDescription(factionInfo[n]->getDescription());
+        entry->setLongDescription(info.description);
     }
 
     P<ScienceDatabase> shipDatabase = new ScienceDatabase();

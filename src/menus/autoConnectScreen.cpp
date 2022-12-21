@@ -154,7 +154,7 @@ bool AutoConnectScreen::isValidShip(int index)
         }
         else if (it.first == "faction")
         {
-            if (ship->getFactionId() != FactionInfo::findFactionId(it.second))
+            if (&Faction::getInfo(ship->entity) != FactionInfo::find(it.second))
                 return false;
         }
         else if (it.first == "callsign")

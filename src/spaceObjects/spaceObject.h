@@ -64,7 +64,6 @@ extern PVector<SpaceObject> space_object_list;
 class SpaceObject : public MultiplayerObject
 {
     float object_radius;
-    uint8_t faction_id;
     struct
     {
         string not_scanned;
@@ -74,13 +73,11 @@ class SpaceObject : public MultiplayerObject
     } object_description;
 
     /*!
-     * Scan state per faction. Implementation wise, this vector is resized when
-     * a scan is done. The vector is indexed by faction ID, which means the
-     * vector can be smaller than the number of available factions.
-     * When the vector is smaller then the required faction ID, the scan state
+     * Scan state per faction.
+     * When the required faction is not in the vector, the scan state
      * is SS_NotScanned
      */
-    std::vector<EScannedState> scanned_by_faction;
+    std::vector<std::pair<sp::ecs::Entity, EScannedState>> scanned_by_faction;
 public:
     sp::ecs::Entity entity; //NOTE: On clients be careful, the Entity+components might be destroyed before the SpaceObject! Always check if this exists before using it.
     string comms_script_name;
@@ -172,8 +169,8 @@ public:
     void setScanningParameters(int complexity, int depth);
     EScannedState getScannedStateFor(P<SpaceObject> other);
     void setScannedStateFor(P<SpaceObject> other, EScannedState state);
-    EScannedState getScannedStateForFaction(int faction_id);
-    void setScannedStateForFaction(int faction_id, EScannedState state);
+    EScannedState getScannedStateForFaction(sp::ecs::Entity faction);
+    void setScannedStateForFaction(sp::ecs::Entity faction, EScannedState state);
     bool isScanned();
     bool isScannedBy(P<SpaceObject> obj);
     bool isScannedByFaction(string faction);
@@ -191,11 +188,11 @@ public:
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
-    void setFaction(string faction_name) { this->faction_id = FactionInfo::findFactionId(faction_name); }
-    string getFaction() { if (factionInfo[faction_id]) return factionInfo[this->faction_id]->getName(); return ""; }
-    string getLocaleFaction() { if (factionInfo[faction_id]) return factionInfo[this->faction_id]->getLocaleName(); return ""; }
-    void setFactionId(unsigned int faction_id) { this->faction_id = faction_id; }
-    unsigned int getFactionId() { return faction_id; }
+    void setFaction(string faction_name);
+    string getFaction() { return Faction::getInfo(entity).name; }
+    string getLocaleFaction() { return Faction::getInfo(entity).locale_name; }
+    void setFactionId(sp::ecs::Entity faction_id) { entity.addComponent<Faction>(faction_id); }
+    sp::ecs::Entity getFactionId() { auto f = entity.getComponent<Faction>(); if (f) return f->entity; return {}; }
     void setReputationPoints(float amount);
     int getReputationPoints();
     bool takeReputationPoints(float amount);

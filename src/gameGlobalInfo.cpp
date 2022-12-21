@@ -19,7 +19,6 @@ GameGlobalInfo::GameGlobalInfo()
     SDL_assert(!gameGlobalInfo);
 
     callsign_counter = 0;
-    victory_faction = -1;
     gameGlobalInfo = this;
 
     for(int n=0; n<max_player_ships; n++)
@@ -54,10 +53,6 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
-
-    for(unsigned int n=0; n<factionInfo.size(); n++)
-        reputation_points.push_back(0);
-    registerMemberReplication(&reputation_points, 1.0);
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -168,7 +163,7 @@ void GameGlobalInfo::reset()
     on_gm_click = nullptr;
 
     flushDatabaseData();
-    FactionInfo::reset();
+    FactionInfoLegacy::reset();
 
     foreach(SpaceObject, o, space_object_list)
         o->destroy();
@@ -176,14 +171,9 @@ void GameGlobalInfo::reset()
         engine->getObject("scenario")->destroy();
 
     foreach(Script, s, script_list)
-    {
         s->destroy();
-    }
-    for(unsigned int n=0; n<reputation_points.size(); n++)
-        reputation_points[n] = 0;
     elapsed_time = 0.0f;
     callsign_counter = 0;
-    victory_faction = -1;
     allow_new_player_ships = true;
     global_message = "";
     global_message_timeout = 0.0f;

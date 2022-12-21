@@ -351,6 +351,8 @@ set(MAIN_SOURCES
     src/spaceObjects/shipTemplateBasedObject.cpp
     src/spaceObjects/planet.cpp
     src/spaceObjects/zone.cpp
+    src/components/faction.h
+    src/components/faction.cpp
     src/components/radar.h
     src/components/hull.h
     src/components/rendering.h

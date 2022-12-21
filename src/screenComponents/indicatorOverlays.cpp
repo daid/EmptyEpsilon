@@ -117,7 +117,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         warpPostProcessor->enabled = false;
         glitchPostProcessor->enabled = false;
 
-        if (gameGlobalInfo->getVictoryFactionId() < 0)
+        if (!gameGlobalInfo->getVictoryFaction())
         {
             pause_overlay->show();
             victory_overlay->hide();
@@ -130,22 +130,23 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
                 victory_panel->setPosition(0, 0, sp::Alignment::Center);
             }
 
-            EFactionVsFactionState fvf_state = FVF_Neutral;
+            auto fvf_state = FactionRelation::Neutral;
             if (my_spaceship)
             {
-                fvf_state = FactionInfo::getState(gameGlobalInfo->getVictoryFactionId(), my_spaceship->getFactionId());
+                auto my_faction = my_spaceship->entity.getComponent<Faction>();
+                if (my_faction)
+                    fvf_state = gameGlobalInfo->getVictoryFaction()->getRelation(my_faction->entity);
             }
             switch(fvf_state)
             {
-            case FVF_Enemy:
+            case FactionRelation::Enemy:
                 victory_label->setText(tr("Defeat!"));
                 break;
-            case FVF_Friendly:
+            case FactionRelation::Friendly:
                 victory_label->setText(tr("Victory!"));
                 break;
-            case FVF_Neutral:
-                if (factionInfo[gameGlobalInfo->getVictoryFactionId()])
-                    victory_label->setText(tr("{faction} wins").format({{"faction", factionInfo[gameGlobalInfo->getVictoryFactionId()]->getLocaleName()}}));
+            case FactionRelation::Neutral:
+                victory_label->setText(tr("{faction} wins").format({{"faction", gameGlobalInfo->getVictoryFaction()->locale_name}}));
                 break;
             }
         }

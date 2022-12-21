@@ -110,8 +110,8 @@ public:
     bool isFullyScanned();//[DEPRICATED]
     bool isFriendOrFoeIdentifiedBy(P<SpaceObject> other);
     bool isFullyScannedBy(P<SpaceObject> other);
-    bool isFriendOrFoeIdentifiedByFaction(int faction_id);
-    bool isFullyScannedByFaction(int faction_id);
+    bool isFriendOrFoeIdentifiedByFaction(sp::ecs::Entity faction_entity);
+    bool isFullyScannedByFaction(sp::ecs::Entity faction_entity);
 
     virtual bool canBeHackedBy(P<SpaceObject> other) override;
     virtual std::vector<std::pair<ShipSystem::Type, float> > getHackingTargets() override;
@@ -223,7 +223,7 @@ public:
     void setTubeLoadTime(int index, float time);
     float getTubeLoadTime(int index);
 
-    void addBroadcast(int threshold, string message);
+    void addBroadcast(FactionRelation threshold, string message);
 
     // Return a string that can be appended to an object create function in the lua scripting.
     // This function is used in getScriptExport calls to adjust for tweaks done in the GM screen.
