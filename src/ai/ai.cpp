@@ -12,6 +12,7 @@
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
+#include "components/target.h"
 #include "systems/collision.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
@@ -358,12 +359,12 @@ void ShipAI::updateTarget()
     // If we still don't have a target, set that on the owner.
     if (!target)
     {
-        owner->target_id = -1;
+        owner->entity.getComponent<Target>()->target = {};
     }
     // Otherwise, set the new target on the owner.
     else
     {
-        owner->target_id = target->getMultiplayerId();
+        owner->entity.getComponent<Target>()->target = target->entity;
     }
 }
 
@@ -390,7 +391,7 @@ void ShipAI::runOrders()
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), relay_range);
             if (new_target)
             {
-                owner->target_id = new_target->getMultiplayerId();
+                owner->entity.getOrAddComponent<Target>().target = new_target->entity;
             }else{
                 auto diff = owner->getOrderTargetLocation() - owner->getPosition();
                 if (glm::length2(diff) < 1000.0f*1000.0f)

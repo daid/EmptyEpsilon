@@ -5,6 +5,7 @@
 #include "components/docking.h"
 #include "components/reactor.h"
 #include "components/warpdrive.h"
+#include "components/target.h"
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
@@ -15,8 +16,8 @@ void BeamWeaponSystem::update(float delta)
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
-    for(auto [entity, beamsys, transform, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
-        if (!beamsys.target) continue;
+    for(auto [entity, beamsys, target, transform, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
+        if (!target.target) continue;
         P<SpaceShip> ship = P<SpaceObject>(obj);
         auto warp = entity.getComponent<WarpDrive>();
 
@@ -24,15 +25,15 @@ void BeamWeaponSystem::update(float delta)
             if (mount.cooldown > 0.0f)
                 mount.cooldown -= delta * beamsys.getSystemEffectiveness();
 
-            P<SpaceObject> target = *beamsys.target.getComponent<SpaceObject*>();
+            P<SpaceObject> target_obj = *target.target.getComponent<SpaceObject*>();
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && target && obj->isEnemy(target) && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+            if (mount.range > 0.0f && target_obj && obj->isEnemy(target_obj) && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
             {
                 // Get the angle to the target.
-                auto diff = target->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
-                float distance = glm::length(diff) - target->getRadius() / 2.0f;
+                auto diff = target_obj->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
+                float distance = glm::length(diff) - target_obj->getRadius() / 2.0f;
 
                 // We also only care if the target is within no more than its
                 // range * 1.3, which is when we want to start rotating the turret.
@@ -86,18 +87,18 @@ void BeamWeaponSystem::update(float delta)
 
                         mount.cooldown = mount.cycle_time; // Reset time of weapon
 
-                        auto hit_location = target->getPosition() - glm::normalize(target->getPosition() - transform.getPosition()) * target->getRadius();
+                        auto hit_location = target_obj->getPosition() - glm::normalize(target_obj->getPosition() - transform.getPosition()) * target_obj->getRadius();
                         P<BeamEffect> effect = new BeamEffect();
                         effect->setSource(obj, mount.position);
-                        effect->setTarget(target, hit_location);
+                        effect->setTarget(target_obj, hit_location);
                         effect->beam_texture = mount.texture;
                         effect->beam_fire_sound = "sfx/laser_fire.wav";
                         effect->beam_fire_sound_power = mount.damage / 6.0f;
 
-                        DamageInfo info(obj, mount.damage_type, hit_location);
+                        DamageInfo info(entity, mount.damage_type, hit_location);
                         info.frequency = beamsys.frequency;
                         info.system_target = beamsys.system_target;
-                        target->takeDamage(mount.damage, info);
+                        target_obj->takeDamage(mount.damage, info);
                     }
                 }
             // If the beam is turreted and can move, but doesn't have a target, reset it

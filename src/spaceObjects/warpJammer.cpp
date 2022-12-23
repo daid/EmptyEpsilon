@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "explosionEffect.h"
+#include "components/hull.h"
 #include "main.h"
 
 #include "scriptInterface.h"
@@ -35,7 +36,6 @@ WarpJammer::WarpJammer()
 : SpaceObject(100, "WarpJammer")
 {
     range = 7000.0;
-    hull = 50;
 
     jammer_list.push_back(this);
     setRadarSignatureInfo(0.05, 0.5, 0.0);
@@ -43,6 +43,11 @@ WarpJammer::WarpJammer()
     registerMemberReplication(&range);
 
     model_info.setData("shield_generator");
+
+    if (entity) {
+        auto hull = entity.addComponent<Hull>();
+        hull.max = hull.current = 50.0;
+    }
 }
 
 // Due to a suspected compiler bug this desconstructor needs to be explicity defined
@@ -63,42 +68,6 @@ void WarpJammer::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, flo
         if (my_spaceship && my_spaceship->isEnemy(this))
             color = glm::u8vec4(255, 0, 0, 64);
         renderer.drawCircleOutline(position, range*scale, 2.0, color);
-    }
-}
-
-void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
-{
-    if (info.type == DT_EMP)
-        return;
-    hull -= damage_amount;
-    if (hull <= 0)
-    {
-        P<ExplosionEffect> e = new ExplosionEffect();
-        e->setSize(getRadius());
-        e->setPosition(getPosition());
-        e->setRadarSignatureInfo(0.5, 0.5, 0.1);
-
-        if (on_destruction.isSet())
-        {
-            if (info.instigator)
-            {
-                on_destruction.call<void>(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
-            } else {
-                on_destruction.call<void>(P<WarpJammer>(this));
-            }
-        }
-
-        destroy();
-    } else {
-        if (on_taking_damage.isSet())
-        {
-            if (info.instigator)
-            {
-                on_taking_damage.call<void>(P<WarpJammer>(this), P<SpaceObject>(info.instigator));
-            } else {
-                on_taking_damage.call<void>(P<WarpJammer>(this));
-            }
-        }
     }
 }
 
@@ -143,12 +112,12 @@ glm::vec2 WarpJammer::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
 
 void WarpJammer::onTakingDamage(ScriptSimpleCallback callback)
 {
-    this->on_taking_damage = callback;
+    //TODO
 }
 
 void WarpJammer::onDestruction(ScriptSimpleCallback callback)
 {
-    this->on_destruction = callback;
+    //TODO
 }
 
 string WarpJammer::getExportLine()

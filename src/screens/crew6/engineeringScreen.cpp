@@ -377,8 +377,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                         addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
                         {
                             DamageInfo di;
-                            di.type = DT_Kinetic;
-                            float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, 0);
+                            di.type = DamageType::Kinetic;
+                            float damage_negate = 1.0f - shields->getDamageFactor(0);
                             if (damage_negate < 0.0f)
                                 addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                             else
@@ -394,8 +394,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                         addSystemEffect(tr("shields","Charge rate"), toNearbyIntString(effectiveness * 100) + "%");
                         {
                             DamageInfo di;
-                            di.type = DT_Kinetic;
-                            float damage_negate = 1.0f - my_spaceship->getShieldDamageFactor(di, shields->count - 1);
+                            di.type = DamageType::Kinetic;
+                            float damage_negate = 1.0f - shields->getDamageFactor(shields->count - 1);
                             if (damage_negate < 0.0f)
                                 addSystemEffect(tr("Extra damage"), toNearbyIntString(-damage_negate * 100) + "%");
                             else

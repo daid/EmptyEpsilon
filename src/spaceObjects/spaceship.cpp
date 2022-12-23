@@ -27,6 +27,7 @@
 #include "components/shields.h"
 #include "components/hull.h"
 #include "components/missiletubes.h"
+#include "components/target.h"
 #include "ecs/query.h"
 
 #include "scriptInterface.h"
@@ -175,10 +176,8 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 : ShipTemplateBasedObject(50, multiplayerClassName, multiplayer_significant_range)
 {
     wormhole_alpha = 0.f;
-    target_id = -1;
 
     registerMemberReplication(&wormhole_alpha, 0.5f);
-    registerMemberReplication(&target_id);
 
     scanning_complexity_value = -1;
     scanning_depth_value = -1;
@@ -385,9 +384,13 @@ void SpaceShip::update(float delta)
 
 P<SpaceObject> SpaceShip::getTarget()
 {
-    if (game_server)
-        return game_server->getObjectById(target_id);
-    return game_client->getObjectById(target_id);
+    auto target = entity.getComponent<Target>();
+    if (!target)
+        return nullptr;
+    auto obj = target->target.getComponent<SpaceObject*>();
+    if (!obj)
+        return nullptr;
+    return *obj;
 }
 
 void SpaceShip::collide(SpaceObject* other, float force)
@@ -538,28 +541,6 @@ void SpaceShip::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
         sys->hacked_level = std::min(1.0f, sys->hacked_level + 0.5f);
 }
 
-float SpaceShip::getShieldDamageFactor(DamageInfo& info, int shield_index)
-{
-    auto shields = entity.getComponent<Shields>();
-    if (!shields)
-        return 1.0f;
-
-    float frequency_damage_factor = 1.f;
-    if (info.type == DT_Energy && gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        frequency_damage_factor = frequencyVsFrequencyDamageFactor(info.frequency, shields->frequency);
-    }
-    auto system = shields->getSystemForIndex(shield_index);
-
-    //Shield damage reduction curve. Damage reduction gets slightly exponetial effective with power.
-    // This also greatly reduces the ineffectiveness at low power situations.
-    float shield_damage_exponent = 1.6f;
-    float shield_damage_divider = 7.0f;
-    float shield_damage_factor = 1.0f + powf(1.0f, shield_damage_exponent) / shield_damage_divider-powf(system.getSystemEffectiveness(), shield_damage_exponent) / shield_damage_divider;
-
-    return shield_damage_factor * frequency_damage_factor;
-}
-
 void SpaceShip::didAnOffensiveAction()
 {
     //We did an offensive action towards our target.
@@ -570,84 +551,6 @@ void SpaceShip::didAnOffensiveAction()
             if (getTarget() && getTarget()->getScannedStateForFaction(faction_entity) != SS_NotScanned)
                 setScannedStateForFaction(faction_entity, SS_FriendOrFoeIdentified);
         }
-    }
-}
-
-void SpaceShip::takeHullDamage(float damage_amount, DamageInfo& info)
-{
-    auto hull = entity.getComponent<Hull>();
-    if (gameGlobalInfo->use_system_damage && hull)
-    {
-        if (auto sys = ShipSystem::get(entity, info.system_target))
-        {
-            //Target specific system
-            float system_damage = (damage_amount / hull->max) * 2.0f;
-            if (info.type == DT_Energy)
-                system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
-            sys->health -= system_damage;
-            if (sys->health < -1.0f)
-                sys->health = -1.0f;
-
-            for(int n=0; n<2; n++)
-            {
-                auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
-                //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (damage_amount / hull->max) * 1.0f;
-                sys = ShipSystem::get(entity, random_system);
-                if (sys) {
-                    sys->health -= system_damage;
-                    if (sys->health < -1.0f)
-                        sys->health = -1.0f;
-                }
-            }
-
-            if (info.type == DT_Energy)
-                damage_amount *= 0.02f;
-            else
-                damage_amount *= 0.5f;
-        }else{
-            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-            float system_damage = (damage_amount / hull->max) * 3.0f;
-            if (info.type == DT_Energy)
-                system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
-
-            auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
-            sys = ShipSystem::get(entity, random_system);
-            if (sys) {
-                sys->health -= system_damage;
-                if (sys->health < -1.0f)
-                    sys->health = -1.0f;
-            }
-        }
-    }
-
-    ShipTemplateBasedObject::takeHullDamage(damage_amount, info);
-}
-
-void SpaceShip::destroyedByDamage(DamageInfo& info)
-{
-    ExplosionEffect* e = new ExplosionEffect();
-    e->setSize(getRadius() * 1.5f);
-    e->setPosition(getPosition());
-    e->setRadarSignatureInfo(0.f, 0.2f, 0.2f);
-
-    if (info.instigator)
-    {
-        float points = 0.0f;
-        auto hull = entity.getComponent<Hull>();
-        if (hull)
-            points += hull->max * 0.1f;
-
-        auto shields = entity.getComponent<Shields>();
-        if (shields)
-        {
-            for(int n=0; n<shields->count; n++)
-                points += shields->entry[n].max * 0.1f;
-        }
-        if (isEnemy(info.instigator))
-            info.instigator->addReputationPoints(points);
-        else
-            info.instigator->removeReputationPoints(points);
     }
 }
 
@@ -682,7 +585,7 @@ void SpaceShip::setBeamWeaponTexture(int index, string texture) { /* TODO */ }
 void SpaceShip::setBeamWeaponEnergyPerFire(int index, float energy) { /* TODO */ }
 void SpaceShip::setBeamWeaponHeatPerFire(int index, float heat) { /* TODO */ }
 void SpaceShip::setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b) { /* TODO */ }
-void SpaceShip::setBeamWeaponDamageType(int index, EDamageType type) { /* TODO */ }
+void SpaceShip::setBeamWeaponDamageType(int index, DamageType type) { /* TODO */ }
 
 
 void SpaceShip::setWeaponTubeCount(int amount)

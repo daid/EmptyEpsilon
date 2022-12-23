@@ -52,8 +52,8 @@ void EnergySystem::update(float delta)
                     e->setPosition(obj->getPosition());
                     e->setRadarSignatureInfo(0.0, 0.4, 0.4);
 
-                    DamageInfo info(obj, DT_Kinetic, obj->getPosition());
-                    SpaceObject::damageArea(obj->getPosition(), 500, 30, 60, info, 0.0);
+                    DamageInfo info(entity, DamageType::Kinetic, obj->getPosition());
+                    DamageSystem::damageArea(obj->getPosition(), 500, 30, 60, info, 0.0);
 
                     obj->destroy();
                 }

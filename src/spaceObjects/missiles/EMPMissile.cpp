@@ -18,8 +18,8 @@ EMPMissile::EMPMissile()
 
 void EMPMissile::explode()
 {
-    DamageInfo info(owner, DT_EMP, getPosition());
-    SpaceObject::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, getRadius());
+    DamageInfo info(owner ? owner->entity : sp::ecs::Entity(), DamageType::EMP, getPosition());
+    DamageSystem::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, getRadius());
 
     P<ElectricExplosionEffect> e = new ElectricExplosionEffect();
     e->setSize(category_modifier * blast_range);

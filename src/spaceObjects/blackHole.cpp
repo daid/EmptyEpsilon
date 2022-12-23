@@ -83,7 +83,7 @@ void BlackHole::collide(SpaceObject* target, float collision_force)
     auto diff = getPosition() - target->getPosition();
     float distance = glm::length(diff);
     float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
-    DamageInfo info(NULL, DT_Kinetic, getPosition());
+    DamageInfo info({}, DamageType::Kinetic, getPosition());
     if (force > 10000.0f)
     {
         force = 10000.0f;

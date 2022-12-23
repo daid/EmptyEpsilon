@@ -87,7 +87,7 @@ void Asteroid::collide(SpaceObject* target, float force)
     if (!hit_object || !hit_object->canBeTargetedBy(nullptr))
         return;
 
-    DamageInfo info(nullptr, DT_Kinetic, getPosition());
+    DamageInfo info({}, DamageType::Kinetic, getPosition());
     hit_object->takeDamage(35, info);
 
     P<ExplosionEffect> e = new ExplosionEffect();

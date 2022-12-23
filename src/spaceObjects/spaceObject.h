@@ -11,33 +11,9 @@
 #include "ecs/entity.h"
 #include "components/radar.h"
 #include "components/shipsystem.h"
+#include "systems/damage.h"
 
 #include <glm/mat4x4.hpp>
-
-enum EDamageType
-{
-    DT_Energy,
-    DT_Kinetic,
-    DT_EMP
-};
-
-class DamageInfo
-{
-public:
-    P<SpaceObject> instigator;
-    EDamageType type;
-    glm::vec2 location{0, 0};
-    int frequency;
-    ShipSystem::Type system_target;
-
-    DamageInfo()
-    : instigator(), type(DT_Energy), location(0, 0), frequency(-1), system_target(ShipSystem::Type::None)
-    {}
-
-    DamageInfo(P<SpaceObject> instigator, EDamageType type, glm::vec2 location)
-    : instigator(instigator), type(type), location(location), frequency(-1), system_target(ShipSystem::Type::None)
-    {}
-};
 
 enum EScannedState
 {
@@ -180,11 +156,9 @@ public:
     virtual bool canBeHackedBy(P<SpaceObject> other);
     virtual std::vector<std::pair<ShipSystem::Type, float> > getHackingTargets();
     virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target);
-    virtual void takeDamage(float damage_amount, DamageInfo info) {}
+    void takeDamage(float damage_amount, DamageInfo info) { DamageSystem::applyDamage(entity, damage_amount, info); }
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
     virtual string getExportLine() { return ""; }
-
-    static void damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range);
 
     bool isEnemy(P<SpaceObject> obj);
     bool isFriendly(P<SpaceObject> obj);
@@ -226,7 +200,7 @@ protected:
     bool has_weight = true;
 };
 
-template<> void convert<EDamageType>::param(lua_State* L, int& idx, EDamageType& dt);
+template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt);
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
 // Function to convert a lua parameter to a scan state.

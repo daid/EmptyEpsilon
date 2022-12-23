@@ -110,8 +110,8 @@ void Mine::eject()
 
 void Mine::explode()
 {
-    DamageInfo info(owner, DT_Kinetic, getPosition());
-    SpaceObject::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, blastRange / 2.0f);
+    DamageInfo info(owner ? owner->entity : sp::ecs::Entity{}, DamageType::Kinetic, getPosition());
+    DamageSystem::damageArea(getPosition(), blastRange, damageAtEdge, damageAtCenter, info, blastRange / 2.0f);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(blastRange);
@@ -123,7 +123,7 @@ void Mine::explode()
     {
         if (info.instigator)
         {
-            on_destruction.call<void>(P<Mine>(this), P<SpaceObject>(info.instigator));
+            on_destruction.call<void>(P<Mine>(this), info.instigator);
         }else{
             on_destruction.call<void>(P<Mine>(this));
         }

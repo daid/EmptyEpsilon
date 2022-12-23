@@ -28,4 +28,5 @@ public:
     ShipSystem rear_system;
 
     ShipSystem& getSystemForIndex(int index);
+    float getDamageFactor(int index);
 };

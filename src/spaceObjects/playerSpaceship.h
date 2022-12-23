@@ -274,7 +274,6 @@ public:
     virtual void applyTemplateValues() override;
 
     // Ship status functions
-    virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolantRequest(ShipSystem::Type system, float request);
     void setMaxCoolant(float coolant);
     float getMaxCoolant() { return 10.0f; } //TODO

@@ -6,6 +6,7 @@
 #include "multiplayer_client.h"
 #include "soundManager.h"
 #include "components/collision.h"
+#include "components/hull.h"
 
 #include "i18n.h"
 
@@ -45,6 +46,11 @@ MissileWeapon::MissileWeapon(string multiplayer_name, const MissileWeaponData& d
     registerMemberReplication(&category_modifier);
 
     launch_sound_played = false;
+    if (entity) {
+        auto hull = entity.addComponent<Hull>();
+        hull.max = hull.current = 1;
+        hull.damaged_by_flags = (1 << int(DamageType::EMP)) | (1 << int(DamageType::Energy));
+    }
 }
 
 void MissileWeapon::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

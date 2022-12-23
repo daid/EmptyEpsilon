@@ -2,8 +2,12 @@
 
 #include "ecs/entity.h"
 #include "shipsystem.h"
-#include "spaceObjects/spaceObject.h"
+#include "systems/damage.h"
+#include "glm/vec3.hpp"
+#include "glm/gtc/type_precision.hpp"
 
+
+constexpr static int max_beam_weapons = 16;
 
 class BeamWeaponSys : public ShipSystem {
 public:
@@ -24,7 +28,7 @@ public:
         float heat_per_beam_fire = 0.02f;//Server side only
         glm::u8vec4 arc_color{255, 0, 0, 128};
         glm::u8vec4 arc_color_fire{255, 255, 0, 128};
-        EDamageType damage_type = DT_Energy;
+        DamageType damage_type = DamageType::Energy;
 
         //Beam runtime state
         float cooldown = 0.0f;
@@ -33,7 +37,6 @@ public:
 
     int frequency = 0;
     ShipSystem::Type system_target = ShipSystem::Type::None;
-    sp::ecs::Entity target;
 
     MountPoint mounts[max_beam_weapons];
 };

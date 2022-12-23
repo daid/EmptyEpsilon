@@ -3,6 +3,7 @@
 #include "explosionEffect.h"
 #include "main.h"
 #include "random.h"
+#include "components/hull.h"
 
 #include "scriptInterface.h"
 
@@ -91,6 +92,11 @@ ScanProbe::ScanProbe()
 
     // Assign a generic callsign.
     setCallSign(string(getMultiplayerId()) + "P");
+
+    if (entity) {
+        auto hull = entity.addComponent<Hull>();
+        hull.max = hull.current = 1;
+    }
 }
 
 // Due to a suspected compiler bug, this deconstructor must be explicitly
@@ -182,26 +188,6 @@ bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
     return glm::length2(getTarget() - getPosition()) < getRadius()*getRadius();
 }
 
-void ScanProbe::takeDamage(float damage_amount, DamageInfo info)
-{
-    // Fire the onDestruction callback, if set. Pass the damage instigator if
-    // there was one.
-    if (on_destruction.isSet())
-    {
-        if (info.instigator)
-        {
-            on_destruction.call<void>(P<ScanProbe>(this), P<SpaceObject>(info.instigator));
-        }
-        else
-        {
-            on_destruction.call<void>(P<ScanProbe>(this));
-        }
-    }
-
-    // Any amount of damage instantly destroys the probe.
-    destroy();
-}
-
 void ScanProbe::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     // All probes use the same green icon on radar.
@@ -239,7 +225,7 @@ void ScanProbe::onArrival(ScriptSimpleCallback callback)
 
 void ScanProbe::onDestruction(ScriptSimpleCallback callback)
 {
-    this->on_destruction = callback;
+    //TODO
 }
 
 void ScanProbe::onExpiration(ScriptSimpleCallback callback)

@@ -20,7 +20,6 @@ public:
 
     ScriptSimpleCallback on_arrival;
     ScriptSimpleCallback on_expiration;
-    ScriptSimpleCallback on_destruction;
 
     ScanProbe();
     virtual ~ScanProbe();
@@ -32,7 +31,6 @@ public:
 
     virtual void update(float delta) override;
     virtual bool canBeTargetedBy(P<SpaceObject> other) override;
-    virtual void takeDamage(float damage_amount, DamageInfo info) override;
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 

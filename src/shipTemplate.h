@@ -9,10 +9,11 @@
 #include "scriptInterfaceMagic.h"
 #include "multiplayer.h"
 #include "components/shipsystem.h"
+#include "components/beamweapon.h"
 
 #include "beamTemplate.h"
 #include "missileWeaponData.h"
-constexpr static int max_beam_weapons = 16;
+
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
 

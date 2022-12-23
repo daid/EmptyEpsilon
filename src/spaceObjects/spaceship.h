@@ -45,9 +45,6 @@ public:
 
     float wormhole_alpha;    //Used for displaying the Warp-postprocessor
 
-    /// MultiplayerObjectID of the targeted object, or -1 when no target is selected.
-    int32_t target_id;
-
     SpaceShip(string multiplayerClassName, float multiplayer_significant_range=-1);
     virtual ~SpaceShip();
 
@@ -67,7 +64,6 @@ public:
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     virtual void update(float delta) override;
-    virtual float getShieldDamageFactor(DamageInfo& info, int shield_index) override;
 
     /*!
      * Check if the ship can be targeted.
@@ -79,20 +75,6 @@ public:
      * this can identify the ship as friend or foe.
      */
     void didAnOffensiveAction();
-
-    /*!
-     * Spaceship takes damage directly on hull.
-     * This is used when shields are down or by weapons that ignore shields.
-     * \param damage_amount Damage to be delt.
-     * \param info Information about damage type (usefull for damage reduction, etc)
-     */
-    virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
-
-    /*!
-     * Spaceship is destroyed by damage.
-     * \param info Information about damage type
-     */
-    virtual void destroyedByDamage(DamageInfo& info) override;
 
     virtual void collide(SpaceObject* other, float force) override;
 
@@ -208,7 +190,7 @@ public:
     void setBeamWeaponEnergyPerFire(int index, float energy);
     void setBeamWeaponHeatPerFire(int index, float heat);
     void setBeamWeaponArcColor(int index, float r, float g, float b, float fire_r, float fire_g, float fire_b);
-    void setBeamWeaponDamageType(int index, EDamageType type);
+    void setBeamWeaponDamageType(int index, DamageType type);
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();

@@ -32,10 +32,6 @@ public:
     virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
     virtual bool hasShield() override;
     virtual string getCallSign() override { return callsign; }
-    virtual void takeDamage(float damage_amount, DamageInfo info) override;
-    virtual void takeHullDamage(float damage_amount, DamageInfo& info);
-    virtual void destroyedByDamage(DamageInfo& info) = 0;
-    virtual float getShieldDamageFactor(DamageInfo& info, int shield_index);
 
     void setCanBeDestroyed(bool enabled);
     bool getCanBeDestroyed();

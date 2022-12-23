@@ -368,6 +368,7 @@ set(MAIN_SOURCES
     src/components/shields.h
     src/components/shields.cpp
     src/components/beamweapon.h
+    src/components/target.h
     src/components/missiletubes.h
     src/systems/docking.h
     src/systems/docking.cpp
@@ -391,6 +392,8 @@ set(MAIN_SOURCES
     src/systems/jumpsystem.cpp
     src/systems/shieldsystem.h
     src/systems/shieldsystem.cpp
+    src/systems/damage.h
+    src/systems/damage.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

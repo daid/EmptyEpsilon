@@ -515,25 +515,6 @@ void SpaceObject::setFaction(string faction_name)
         entity.removeComponent<Faction>();
 }
 
-void SpaceObject::damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, DamageInfo info, float min_range)
-{
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(blast_range, blast_range), position + glm::vec2(blast_range, blast_range)))
-    {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr) continue;
-        auto transform = entity.getComponent<sp::Transform>();
-        if (!transform) continue;
-        P<SpaceObject> obj = *ptr;
-
-        float dist = glm::length(position - transform->getPosition()) - obj->getRadius() - min_range;
-        if (dist < 0) dist = 0;
-        if (dist < blast_range - min_range)
-        {
-            obj->takeDamage(max_damage - (max_damage - min_damage) * dist / (blast_range - min_range), info);
-        }
-    }
-}
-
 bool SpaceObject::areEnemiesInRange(float range)
 {
     for(auto entity : sp::CollisionSystem::queryArea(getPosition() - glm::vec2(range, range), getPosition() + glm::vec2(range, range)))
@@ -702,15 +683,15 @@ glm::mat4 SpaceObject::getModelMatrix() const
     return glm::rotate(model_matrix, glm::radians(rotation), glm::vec3{ 0.f, 0.f, 1.f });
 }
 
-template<> void convert<EDamageType>::param(lua_State* L, int& idx, EDamageType& dt)
+template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& dt)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "energy")
-        dt = DT_Energy;
+        dt = DamageType::Energy;
     else if (str == "kinetic")
-        dt = DT_Kinetic;
+        dt = DamageType::Kinetic;
     else if (str == "emp")
-        dt = DT_EMP;
+        dt = DamageType::EMP;
 }
 
 // Define a script conversion function for the DamageInfo structure.
@@ -720,11 +701,11 @@ template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& d
         return;
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "energy")
-        di.type = DT_Energy;
+        di.type = DamageType::Energy;
     else if (str == "kinetic")
-        di.type = DT_Kinetic;
+        di.type = DamageType::Kinetic;
     else if (str == "emp")
-        di.type = DT_EMP;
+        di.type = DamageType::EMP;
 
     if (!lua_isnumber(L, idx))
         return;

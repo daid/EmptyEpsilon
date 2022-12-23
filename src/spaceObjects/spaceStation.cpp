@@ -39,35 +39,6 @@ void SpaceStation::applyTemplateValues()
     PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
 }
 
-void SpaceStation::destroyedByDamage(DamageInfo& info)
-{
-    ExplosionEffect* e = new ExplosionEffect();
-    e->setSize(getRadius());
-    e->setPosition(getPosition());
-    e->setRadarSignatureInfo(0.0, 0.4, 0.4);
-
-    if (info.instigator)
-    {
-        float points = 0;
-        auto shields = entity.getComponent<Shields>();
-        if (shields)
-        {
-            for(int n=0; n<shields->count; n++)
-            {
-                points += shields->entry[n].max * 0.1f;
-            }
-            points /= shields->count;
-        }
-        auto hull = entity.getComponent<Hull>();
-        if (hull)
-            points += hull->max * 0.1f;
-        if (isEnemy(info.instigator))
-            info.instigator->addReputationPoints(points);
-        else
-            info.instigator->removeReputationPoints(points);
-    }
-}
-
 string SpaceStation::getExportLine()
 {
     string ret = "SpaceStation()";

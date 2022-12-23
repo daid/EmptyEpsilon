@@ -17,6 +17,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
+#include "components/target.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "systems/jumpsystem.h"
@@ -524,8 +525,8 @@ void PlayerSpaceship::update(float delta)
                         e->setRadarSignatureInfo(0.0, 0.6, 0.6);
                     }
 
-                    DamageInfo info(this, DT_Kinetic, getPosition());
-                    SpaceObject::damageArea(getPosition(), self_destruct_size, self_destruct_damage - (self_destruct_damage / 3.0f), self_destruct_damage + (self_destruct_damage / 3.0f), info, 0.0);
+                    DamageInfo info(entity, DamageType::Kinetic, getPosition());
+                    DamageSystem::damageArea(getPosition(), self_destruct_size, self_destruct_damage - (self_destruct_damage / 3.0f), self_destruct_damage + (self_destruct_damage / 3.0f), info, 0.0);
 
                     destroy();
                     return;
@@ -577,18 +578,6 @@ void PlayerSpaceship::applyTemplateValues()
         on_new_player_ship_called = true;
         gameGlobalInfo->on_new_player_ship.call<void>(P<PlayerSpaceship>(this));
     }
-}
-
-void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
-{
-    // If taking non-EMP damage, light up the hull damage overlay.
-    if (info.type != DT_EMP)
-    {
-        hull_damage_indicator = 1.5;
-    }
-
-    // Take hull damage like any other ship.
-    SpaceShip::takeHullDamage(damage_amount, info);
 }
 
 void PlayerSpaceship::setMaxCoolant(float coolant)
@@ -990,7 +979,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_SET_TARGET:
         {
-            packet >> target_id;
+            sp::ecs::Entity target;
+            packet >> target;
+            entity.getOrAddComponent<Target>().target = target;
         }
         break;
     case CMD_LOAD_TUBE:
@@ -1483,9 +1474,9 @@ void PlayerSpaceship::commandSetTarget(P<SpaceObject> target)
 {
     sp::io::DataBuffer packet;
     if (target)
-        packet << CMD_SET_TARGET << target->getMultiplayerId();
+        packet << CMD_SET_TARGET << target->entity;
     else
-        packet << CMD_SET_TARGET << int32_t(-1);
+        packet << CMD_SET_TARGET << sp::ecs::Entity();
     sendClientCommand(packet);
 }
 

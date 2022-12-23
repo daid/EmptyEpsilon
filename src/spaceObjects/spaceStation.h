@@ -8,7 +8,6 @@ class SpaceStation : public ShipTemplateBasedObject
 public:
     SpaceStation();
 
-    virtual void destroyedByDamage(DamageInfo& info) override;
     virtual void applyTemplateValues() override;
 
     virtual string getExportLine() override;

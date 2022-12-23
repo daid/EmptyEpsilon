@@ -312,8 +312,8 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     json.write("ship_type", ship->type_name);
     //json.write("energy_level", ship->energy_level);
     //json.write("hull", ship->hull_strength);
-    if (ship->target_id > -1)
-        json.write("target", ship->target_id);
+    //if (ship->target_id > -1)
+    //    json.write("target", ship->target_id);
         /*
     if (ship->docking_state != DS_NotDocking && ship->docking_target)
     {
