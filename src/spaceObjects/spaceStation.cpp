@@ -36,7 +36,9 @@ SpaceStation::SpaceStation()
 
 void SpaceStation::applyTemplateValues()
 {
-    PathPlannerManager::getInstance()->addAvoidObject(this, getRadius() * 1.5f);
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        PathPlannerManager::getInstance()->addAvoidObject(this, physics->getSize().x * 1.5f);
 }
 
 string SpaceStation::getExportLine()

@@ -121,12 +121,13 @@ void ModelData::setSpecular(string specular_texture_name)
 {
      this->specular_texture_name = specular_texture_name;
 }
+
 void ModelData::setCollisionData(P<SpaceObject> object)
 {
-    object->setRadius(radius);
+    auto& physics = object->entity.getOrAddComponent<sp::Physics>();
+    physics.setCircle(sp::Physics::Type::Dynamic, radius);
     if (collision_box.x > 0 && collision_box.y > 0) {
-        auto& physics = object->entity.getOrAddComponent<sp::Physics>();
-        physics.setRectangle(physics.getType(), collision_box);
+        physics.setRectangle(sp::Physics::Type::Dynamic, collision_box);
     }
 }
 

@@ -375,7 +375,6 @@ void Planet::collide(SpaceObject* target, float collision_force)
 
 void Planet::updateCollisionSize()
 {
-    setRadius(planet_size);
     if (std::abs(distance_from_movement_plane) >= planet_size)
     {
         collision_size = -1.0;

@@ -2,6 +2,7 @@
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/collision.h"
 #include "main.h"
 
 GuiViewportMainScreen::GuiViewportMainScreen(GuiContainer* owner, string id)
@@ -45,8 +46,12 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
         float camera_ship_height = 420.0f;
         if (first_person)
         {
-            camera_ship_distance = -my_spaceship->getRadius();
-            camera_ship_height = my_spaceship->getRadius() / 10.f;
+            float radius = 300.0f;
+            auto physics = my_spaceship->entity.getComponent<sp::Physics>();
+            if (physics)
+                radius = physics->getSize().x;
+            camera_ship_distance = -radius;
+            camera_ship_height = radius / 10.f;
             camera_pitch = 0;
         }
         auto cameraPosition2D = my_spaceship->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;

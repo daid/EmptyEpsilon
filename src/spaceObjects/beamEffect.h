@@ -7,8 +7,8 @@
 class BeamEffect : public SpaceObject, public Updatable
 {
     float lifetime;
-    int32_t sourceId;
-    int32_t target_id;
+    sp::ecs::Entity source;
+    sp::ecs::Entity target;
     glm::vec3 sourceOffset{};
     glm::vec3 targetOffset{};
     glm::vec2 targetLocation{};
@@ -24,8 +24,8 @@ public:
     virtual void draw3DTransparent() override;
     virtual void update(float delta) override;
 
-    void setSource(P<SpaceObject> source, glm::vec3 offset);
-    void setTarget(P<SpaceObject> target, glm::vec2 hitLocation);
+    void setSource(sp::ecs::Entity source, glm::vec3 offset);
+    void setTarget(sp::ecs::Entity target, glm::vec2 hitLocation);
 
     ///Set the texture used for this beam. Default is texture/beam_orange.png
     void setTexture(string texture) {this->beam_texture = texture;}

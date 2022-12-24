@@ -443,7 +443,7 @@ void ShipAI::runOrders()
         if (owner->getOrderTarget())
         {
             auto target_position = owner->getOrderTarget()->getPosition();
-            float circle_distance = 2000.0f + owner->getOrderTarget()->getRadius() * 2.0f + owner->getRadius() * 2.0f;
+            float circle_distance = 3000.0f;
             target_position += vec2FromAngle(vec2ToAngle(target_position - owner->getPosition()) + 170.0f) * circle_distance;
             flyTowards(target_position);
         }else{

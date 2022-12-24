@@ -39,7 +39,6 @@ extern PVector<SpaceObject> space_object_list;
 
 class SpaceObject : public MultiplayerObject
 {
-    float object_radius;
     struct
     {
         string not_scanned;
@@ -65,9 +64,6 @@ public:
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
     virtual ~SpaceObject();
-
-    float getRadius() const { return object_radius; }
-    void setRadius(float radius);
 
     bool hasWeight() { return has_weight; }
 

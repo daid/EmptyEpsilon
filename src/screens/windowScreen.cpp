@@ -4,6 +4,7 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "multiplayer_client.h"
+#include "components/collision.h"
 
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/indicatorOverlays.h"
@@ -54,7 +55,11 @@ void WindowScreen::update(float delta)
         camera_yaw = my_spaceship->getRotation() + angle;
         camera_pitch = 0.0f;
 
-        auto position = my_spaceship->getPosition() + rotateVec2(glm::vec2(my_spaceship->getRadius(), 0), camera_yaw);
+        auto physics = my_spaceship->entity.getComponent<sp::Physics>();
+        auto radius = 300.0f;
+        if (physics)
+            radius = physics->getSize().x;
+        auto position = my_spaceship->getPosition() + rotateVec2(glm::vec2(radius, 0), camera_yaw);
 
         camera_position.x = position.x;
         camera_position.y = position.y;

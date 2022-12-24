@@ -4,6 +4,7 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "multiplayer_client.h"
+#include "components/collision.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
@@ -242,8 +243,12 @@ void CinematicViewScreen::update(float delta)
         // float target_velocity = glm::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        max_camera_distance = 1000.0f + target->getRadius() + glm::length(target->getVelocity());
-        min_camera_distance = target->getRadius() * 2.0f;
+        auto physics = target->entity.getComponent<sp::Physics>();
+        auto radius = 300.0f;
+        if (physics)
+            radius = physics->getSize().x;
+        max_camera_distance = 1000.0f + radius + glm::length(target->getVelocity());
+        min_camera_distance = radius * 2.0f;
 
         // Check if our selected ship has a weapons target.
         target_of_target = target->getTarget();
@@ -272,7 +277,7 @@ void CinematicViewScreen::update(float delta)
             if (std::abs(angleDifference(angle_yaw, tot_angle)) > 40.0f)
             {
                 //The target of target is not really in view, so re-position the camera.
-                camera_position_2D = target_position_2D - vec2FromAngle(vec2ToAngle(tot_position_2D - target_position_2D) + 20) * target->getRadius() * 2.0f;
+                camera_position_2D = target_position_2D - vec2FromAngle(vec2ToAngle(tot_position_2D - target_position_2D) + 20) * radius * 2.0f;
                 camera_position.x = camera_position_2D.x;
                 camera_position.y = camera_position_2D.y;
             }

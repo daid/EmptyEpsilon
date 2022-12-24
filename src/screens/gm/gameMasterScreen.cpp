@@ -437,7 +437,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 
             for(P<SpaceObject> obj : targets.getTargets())
             {
-                if (glm::length(obj->getPosition() - position) < std::max(min_drag_distance, obj->getRadius()))
+                if (glm::length(obj->getPosition() - position) < min_drag_distance)
                     click_and_drag_state = CD_DragObjects;
             }
         }

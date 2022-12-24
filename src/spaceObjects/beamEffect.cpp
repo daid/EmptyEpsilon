@@ -10,6 +10,7 @@
 #include "multiplayer_server.h"
 #include "multiplayer_client.h"
 #include "components/collision.h"
+#include "components/shields.h"
 
 #include "shaderRegistry.h"
 
@@ -43,16 +44,14 @@ BeamEffect::BeamEffect()
 
     entity.removeComponent<sp::Physics>(); //TODO: Never add this in the first place.
     lifetime = 1.0;
-    sourceId = -1;
-    target_id = -1;
     beam_texture = "texture/beam_orange.png";
     beam_fire_sound = "sfx/laser_fire.wav";
     beam_fire_sound_power = 1;
     beam_sound_played = false;
     fire_ring = true;
     registerMemberReplication(&lifetime, 0.1);
-    registerMemberReplication(&sourceId);
-    registerMemberReplication(&target_id);
+    registerMemberReplication(&source);
+    registerMemberReplication(&target);
     registerMemberReplication(&sourceOffset);
     registerMemberReplication(&targetOffset);
     registerMemberReplication(&targetLocation, 1.0);
@@ -141,25 +140,23 @@ void BeamEffect::draw3DTransparent()
 
 void BeamEffect::update(float delta)
 {
-    P<SpaceObject> source, target;
-    if (game_server)
-    {
-        source = game_server->getObjectById(sourceId);
-        target = game_server->getObjectById(target_id);
-    }else{
-        source = game_client->getObjectById(sourceId);
-        target = game_client->getObjectById(target_id);
+    if (source) {
+        if (auto transform = source.getComponent<sp::Transform>())
+            setPosition(transform->getPosition() + rotateVec2(glm::vec2(sourceOffset.x, sourceOffset.y), transform->getRotation()));
     }
-    if (source)
-        setPosition(source->getPosition() + rotateVec2(glm::vec2(sourceOffset.x, sourceOffset.y), source->getRotation()));
-    if (target)
-        targetLocation = target->getPosition() + glm::vec2(targetOffset.x, targetOffset.y);
+    if (target) {
+        if (auto transform = target.getComponent<sp::Transform>())
+            targetLocation = transform->getPosition() + glm::vec2(targetOffset.x, targetOffset.y);
+    }
 
     if (source && delta > 0 && !beam_sound_played)
     {
         float volume = 50.0f + (beam_fire_sound_power * 75.0f);
         float pitch = (1.0f / beam_fire_sound_power) + random(-0.1f, 0.1f);
-        soundManager->playSound(beam_fire_sound, source->getPosition(), 400.0, 0.6, pitch, volume);
+        if (source) {
+            if (auto transform = source.getComponent<sp::Transform>())
+               soundManager->playSound(beam_fire_sound, transform->getPosition(), 400.0, 0.6, pitch, volume);
+        }
         beam_sound_played = true;
     }
 
@@ -168,29 +165,39 @@ void BeamEffect::update(float delta)
         destroy();
 }
 
-void BeamEffect::setSource(P<SpaceObject> source, glm::vec3 offset)
+void BeamEffect::setSource(sp::ecs::Entity source, glm::vec3 offset)
 {
-    sourceId = source->getMultiplayerId();
+    this->source = source;
     sourceOffset = offset;
     update(0);
 }
 
-void BeamEffect::setTarget(P<SpaceObject> target, glm::vec2 hitLocation)
+void BeamEffect::setTarget(sp::ecs::Entity target, glm::vec2 hitLocation)
 {
-    target_id = target->getMultiplayerId();
-    float r = target->getRadius();
-    hitLocation -= target->getPosition();
-    targetOffset = glm::vec3(hitLocation.x + random(-r/2.0f, r/2.0f), hitLocation.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
+    this->target = target;
+    float r = 100.0f;
+    if (auto physics = target.getComponent<sp::Physics>()) {
+        r = physics->getSize().x;
+    }
+    if (auto transform = target.getComponent<sp::Transform>()) {
+        hitLocation -= transform->getPosition();
+        targetOffset = glm::vec3(hitLocation.x + random(-r/2.0f, r/2.0f), hitLocation.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
+    }
 
-    if (target->hasShield())
+    auto shield = target.getComponent<Shields>();
+    if (shield && shield->active)
         targetOffset = glm::normalize(targetOffset) * r;
     else
         targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0f);
     update(0);
 
-    glm::vec3 hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
-    glm::vec3 targetPos(target->getPosition().x, target->getPosition().y, 0);
-    hitNormal = glm::normalize(targetPos - hitPos);
+    if (auto transform = target.getComponent<sp::Transform>()) {
+        glm::vec3 hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
+        glm::vec3 targetPos(transform->getPosition().x, transform->getPosition().y, 0);
+        hitNormal = glm::normalize(targetPos - hitPos);
+    } else {
+        hitNormal = glm::vec3{0, 0, 1};
+    }
 }
 
 glm::mat4 BeamEffect::getModelMatrix() const

@@ -20,7 +20,7 @@ Nuke::Nuke()
 void Nuke::explode()
 {
     DamageInfo info(owner ? owner->entity : sp::ecs::Entity(), DamageType::Kinetic, getPosition());
-    DamageSystem::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, getRadius());
+    DamageSystem::damageArea(getPosition(), category_modifier * blast_range, category_modifier * damage_at_edge, category_modifier * damage_at_center, info, 10.0f);
 
     P<ExplosionEffect> e = new ExplosionEffect();
     e->setSize(category_modifier * blast_range);

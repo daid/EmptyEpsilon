@@ -71,7 +71,7 @@ Artifact::Artifact()
 
     if (entity) {
         auto& trace = entity.getOrAddComponent<RadarTrace>();
-        trace.radius = getRadius();
+        trace.radius = 120.0f;
         trace.icon = "radar/blip.png";
     }
 }
@@ -135,7 +135,7 @@ void Artifact::setModel(string model_name)
 void Artifact::explode()
 {
     P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(getRadius());
+    e->setSize(120);
     e->setPosition(getPosition());
     destroy();
 }

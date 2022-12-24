@@ -148,7 +148,7 @@ void ScanProbe::update(float delta)
     float distance = glm::length(diff);
 
     // If the probe's outer radius hasn't reached the target position ...
-    if (distance > getRadius())
+    if (distance > 100.0f)
     {
         // The probe is still in transit.
         has_arrived = false;
@@ -185,7 +185,7 @@ void ScanProbe::update(float delta)
 bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
 {
     // The probe cannot be targeted until it reaches its destination.
-    return glm::length2(getTarget() - getPosition()) < getRadius()*getRadius();
+    return glm::length2(getTarget() - getPosition()) < 100.0f*100.0f;
 }
 
 void ScanProbe::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)

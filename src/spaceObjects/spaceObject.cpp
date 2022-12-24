@@ -299,7 +299,6 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
         entity.addComponent<sp::Physics>().setCircle(sp::Physics::Type::Sensor, collision_range);
     }
 
-    object_radius = collision_range;
     space_object_list.push_back(this);
 
     scanning_complexity_value = 0;
@@ -319,15 +318,6 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 SpaceObject::~SpaceObject()
 {
     entity.destroy();
-}
-
-void SpaceObject::setRadius(float radius)
-{
-    object_radius = radius;
-    auto physics = entity.getComponent<sp::Physics>();
-    if (!physics)
-        physics = &entity.addComponent<sp::Physics>();
-    physics->setCircle(sp::Physics::Type::Dynamic, radius);
 }
 
 void SpaceObject::draw3D()
@@ -526,7 +516,9 @@ bool SpaceObject::areEnemiesInRange(float range)
         P<SpaceObject> obj = *ptr;
         if (obj && isEnemy(obj))
         {
-            auto r = range + obj->getRadius();
+            auto r = range;
+            auto physics = entity.getComponent<sp::Physics>();
+            if (physics) r += physics->getSize().x;
             if (glm::length2(getPosition() - obj->getPosition()) < r*r)
                 return true;
         }
@@ -544,7 +536,9 @@ PVector<SpaceObject> SpaceObject::getObjectsInRange(float range)
         auto pos = entity.getComponent<sp::Transform>();
         if (!pos) continue;
         P<SpaceObject> obj = *ptr;
-        auto r = range + obj->getRadius();
+        auto r = range;
+        auto physics = entity.getComponent<sp::Physics>();
+        if (physics) r += physics->getSize().x;
         if (obj && glm::length2(getPosition() - obj->getPosition()) < r*r)
         {
             ret.push_back(obj);

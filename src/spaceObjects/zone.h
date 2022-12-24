@@ -27,6 +27,7 @@ private:
     std::vector<glm::vec2> outline;
     std::vector<uint16_t> triangles;
     string label;
+    float radius;
 };
 
 #endif//ZONE_H

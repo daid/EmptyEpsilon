@@ -116,7 +116,7 @@ void MissileWeapon::updateMovement()
 
             if (target)
             {
-                float r = data.homing_range + target->getRadius();
+                float r = data.homing_range + 10.0f;
                 if (glm::length2(target->getPosition() - getPosition()) < r*r)
                 {
                     target_angle = vec2ToAngle(target->getPosition() - getPosition());

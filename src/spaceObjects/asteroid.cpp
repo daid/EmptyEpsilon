@@ -1,6 +1,7 @@
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "components/radar.h"
+#include "components/collision.h"
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -33,7 +34,7 @@ Asteroid::Asteroid()
     setRotation(random(0, 360));
     rotation_speed = random(0.1f, 0.8f);
     z = random(-50, 50);
-    size = getRadius();
+    size = 120;
     model_number = irandom(1, 10);
     setRadarSignatureInfo(0.05f, 0, 0);
 
@@ -43,9 +44,13 @@ Asteroid::Asteroid()
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 
     if (entity) {
+        auto physics = entity.getComponent<sp::Physics>();
+        if (physics)
+            size = physics->getSize().x;
+
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.icon = "radar/blip.png";
-        trace.radius = getRadius();
+        trace.radius = size;
         trace.color = glm::u8vec4(255, 200, 100, 255);
         trace.flags = 0;
     }
@@ -53,9 +58,6 @@ Asteroid::Asteroid()
 
 void Asteroid::draw3D()
 {
-    if (size != getRadius())
-        setRadius(size);
-
     auto model_matrix = getModelMatrix();
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
 
@@ -91,7 +93,7 @@ void Asteroid::collide(SpaceObject* target, float force)
     hit_object->takeDamage(35, info);
 
     P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(getRadius());
+    e->setSize(size);
     e->setPosition(getPosition());
     e->setRadarSignatureInfo(0.f, 0.1f, 0.2f);
     destroy();
@@ -100,10 +102,12 @@ void Asteroid::collide(SpaceObject* target, float force)
 void Asteroid::setSize(float size)
 {
     this->size = size;
-    setRadius(size);
     auto trace = entity.getComponent<RadarTrace>();
     if (trace)
         trace->radius = size;
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        physics->setCircle(physics->getType(), size);
 }
 
 float Asteroid::getSize()
@@ -115,7 +119,7 @@ glm::mat4 Asteroid::getModelMatrix() const
 {
     auto asteroid_matrix = glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, z));
     asteroid_matrix = glm::rotate(asteroid_matrix, glm::radians(engine->getElapsedTime() * rotation_speed), glm::vec3(0.f, 0.f, 1.f));
-    return glm::scale(asteroid_matrix, glm::vec3(getRadius()));
+    return glm::scale(asteroid_matrix, glm::vec3(size));
 }
 
 /// An asteroid in space. Outside of hit range, just for visuals.
@@ -140,18 +144,20 @@ VisualAsteroid::VisualAsteroid()
     if (random(0, 100) < 50)
         z = -z;
 
-    size = getRadius();
     model_number = irandom(1, 10);
 
     registerMemberReplication(&z);
     registerMemberReplication(&size);
+
+    if (entity) {
+        auto physics = entity.getComponent<sp::Physics>();
+        if (physics)
+            size = physics->getSize().x;
+    }
 }
 
 void VisualAsteroid::draw3D()
 {
-    if (size != getRadius())
-        setRadius(size);
-
     auto model_matrix = getModelMatrix();
 
     ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
@@ -178,7 +184,6 @@ void VisualAsteroid::draw3D()
 void VisualAsteroid::setSize(float size)
 {
     this->size = size;
-    setRadius(size);
     while(fabs(z) < size * 2)
         z *= random(1.2f, 2.f);
 }
@@ -192,5 +197,5 @@ glm::mat4 VisualAsteroid::getModelMatrix() const
 {
     auto asteroid_matrix = glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, z));
     asteroid_matrix = glm::rotate(asteroid_matrix, glm::radians(engine->getElapsedTime() * rotation_speed), glm::vec3(0.f, 0.f, 1.f));
-    return glm::scale(asteroid_matrix, glm::vec3(getRadius()));
+    return glm::scale(asteroid_matrix, glm::vec3(size));
 }

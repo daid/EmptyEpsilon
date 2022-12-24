@@ -45,7 +45,7 @@ Nebula::Nebula()
         clouds[n].size = random(512, 1024 * 2);
         clouds[n].texture = irandom(1, 3);
         float dist_min = clouds[n].size / 2.0f;
-        float dist_max = getRadius() - clouds[n].size;
+        float dist_max = 5000.0f - clouds[n].size;
         clouds[n].offset = vec2FromAngle(float(n * 360 / cloud_count)) * random(dist_min, dist_max);
     }
 
@@ -98,19 +98,19 @@ void Nebula::draw3DTransparent()
 
 void Nebula::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0f, getRotation()-rotation);
+    renderer.drawRotatedSpriteBlendAdd("Nebula" + string(radar_visual) + ".png", position, 5000.0f * scale * 3.0f, getRotation()-rotation);
 }
 
 void Nebula::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, glm::u8vec4(255, 255, 255, 64));
+    renderer.drawCircleOutline(position, 5000.0f * scale, 2.0, glm::u8vec4(255, 255, 255, 64));
 }
 
 bool Nebula::inNebula(glm::vec2 position)
 {
     foreach(Nebula, n, nebula_list)
     {
-        if (glm::length2(n->getPosition() - position) < n->getRadius() * n->getRadius())
+        if (glm::length2(n->getPosition() - position) < 5000.0f * 5000.0f)
             return true;
     }
     return false;
@@ -132,7 +132,7 @@ bool Nebula::blockedByNebula(glm::vec2 start, glm::vec2 end, float radar_short_r
         if (f > startEndLength)
             f = startEndLength;
         auto q = start + startEndDiff / startEndLength * f;
-        if (glm::length2(q - n->getPosition()) < n->getRadius()*n->getRadius())
+        if (glm::length2(q - n->getPosition()) < 5000.0f*5000.0f)
         {
             return true;
         }
@@ -153,7 +153,7 @@ glm::vec2 Nebula::getFirstBlockedPosition(glm::vec2 start, glm::vec2 end)
         if (f < 0.0f)
             f = 0;
         glm::vec2 q = start + startEndDiff / startEndLength * f;
-        if (glm::length2(q - n->getPosition()) < n->getRadius() * n->getRadius())
+        if (glm::length2(q - n->getPosition()) < 5000.0f * 5000.0f)
         {
             if (!first_nebula || f < first_nebula_f)
             {
@@ -167,7 +167,7 @@ glm::vec2 Nebula::getFirstBlockedPosition(glm::vec2 start, glm::vec2 end)
         return end;
 
     float d = glm::length(first_nebula_q - first_nebula->getPosition());
-    return first_nebula_q + glm::normalize(start - end) * sqrtf(first_nebula->getRadius() * first_nebula->getRadius() - d * d);
+    return first_nebula_q + glm::normalize(start - end) * sqrtf(5000.0f * 5000.0f - d * d);
 }
 
 PVector<Nebula> Nebula::getNebulas()

@@ -100,7 +100,7 @@ void WormHole::draw3DTransparent()
 
 void WormHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, getRadius() * scale * 3.0f, getRotation() - rotation);
+    renderer.drawRotatedSpriteBlendAdd("wormHole" + string(radar_visual) + ".png", position, 5000.0f * scale * 3.0f, getRotation() - rotation);
 }
 
 // Draw a line toward the target position
@@ -109,7 +109,7 @@ void WormHole::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, flo
     auto offset = target_position - getPosition();
     renderer.drawLine(position, position + glm::vec2(offset.x, offset.y) * scale, glm::u8vec4(255, 255, 255, 32));
 
-    renderer.drawCircleOutline(position, getRadius() * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
+    renderer.drawCircleOutline(position, 5000.0f * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
 }
 
 
@@ -129,13 +129,13 @@ void WormHole::collide(SpaceObject* target, float collision_force)
 
     auto diff = getPosition() - target->getPosition();
     float distance = glm::length(diff);
-    float force = (getRadius() * getRadius() * FORCE_MULTIPLIER) / (distance * distance);
+    float force = (5000.0f * 5000.0f * FORCE_MULTIPLIER) / (distance * distance);
 
     P<SpaceShip> spaceship = obj;
 
     // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
     if (spaceship)
-        spaceship->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
+        spaceship->wormhole_alpha = ((distance / 5000.0f) * ALPHA_MULTIPLIER);
 
     if (force > FORCE_MAX)
     {

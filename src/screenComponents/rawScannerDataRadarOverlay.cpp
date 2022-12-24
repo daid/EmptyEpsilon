@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "random.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/collision.h"
 #include "ecs/query.h"
 
 
@@ -28,15 +29,15 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     RawRadarSignatureInfo signatures[point_count];
 
     // For each SpaceObject ...
-    for(auto [entity, signature, dynamic_signature, obj] : sp::ecs::Query<RawRadarSignatureInfo, sp::ecs::optional<DynamicRadarSignatureInfo>, SpaceObject*>())
+    for(auto [entity, signature, dynamic_signature, transform] : sp::ecs::Query<RawRadarSignatureInfo, sp::ecs::optional<DynamicRadarSignatureInfo>, sp::Transform>())
     {
         // Don't measure our own ship.
-        if (obj == *my_spaceship)
+        if (entity == my_spaceship->entity)
             continue;
 
         // Initialize angle, distance, and scale variables.
         float a_0, a_1;
-        float dist = glm::length(obj->getPosition() - view_position);
+        float dist = glm::length(transform.getPosition() - view_position);
         float scale = 1.0;
 
         // If the object is more than twice as far away as the maximum radar
@@ -48,8 +49,9 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         if (dist > distance)
             scale = 1.0f - ((dist - distance) / distance);
 
+        auto physics = entity.getComponent<sp::Physics>();
         // If we're adjacent to the object ...
-        if (dist <= obj->getRadius())
+        if (physics && dist <= physics->getSize().x)
         {
             // ... affect all angles of the radar.
             a_0 = 0.0f;
@@ -57,8 +59,8 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
         }else{
             // Otherwise, measure the affected range of angles by the object's
             // distance and radius.
-            float a_diff = glm::degrees(asinf(obj->getRadius() / dist));
-            float a_center = vec2ToAngle(obj->getPosition() - view_position);
+            float a_diff = glm::degrees(asinf((physics ? physics->getSize().x : 300.0f) / dist));
+            float a_center = vec2ToAngle(transform.getPosition() - view_position);
             a_0 = a_center - a_diff;
             a_1 = a_center + a_diff;
         }

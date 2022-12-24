@@ -66,7 +66,7 @@ void BlackHole::draw3DTransparent()
 
 void BlackHole::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
-    float size = getRadius() * scale * 2;
+    float size = 5000.0f * scale * 2;
     renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(64, 64, 255, 255));
     renderer.drawSprite("radar/blackHole.png", position, size, glm::u8vec4(0, 0, 0, 255));
 }
@@ -82,7 +82,7 @@ void BlackHole::collide(SpaceObject* target, float collision_force)
 
     auto diff = getPosition() - target->getPosition();
     float distance = glm::length(diff);
-    float force = (getRadius() * getRadius() * 50.0f) / (distance * distance);
+    float force = (5000.0f * 5000.0f * 50.0f) / (distance * distance);
     DamageInfo info({}, DamageType::Kinetic, getPosition());
     if (force > 10000.0f)
     {
