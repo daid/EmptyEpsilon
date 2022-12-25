@@ -16,5 +16,6 @@ static int addGMMessage(lua_State* L)
 }
 
 /// void addGMMessage(string message)
-/// shows a message on the GM screen
+/// Displays a dismissable message on the GM console.
+/// Example: addGMMessage("Five minutes remaining!")
 REGISTER_SCRIPT_FUNCTION(addGMMessage);
