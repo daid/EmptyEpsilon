@@ -19,6 +19,8 @@ class Nebula : public SpaceObject
     NebulaCloud clouds[cloud_count];
 
 public:
+    float radius = 5000.0;
+
     Nebula();
 
     virtual void draw3DTransparent() override;

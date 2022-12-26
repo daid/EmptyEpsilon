@@ -3,6 +3,7 @@
 #include "components/shields.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
+#include "components/collision.h"
 #include "systems/missilesystem.h"
 #include "ai/fighterAI.h"
 #include "ai/aiFactory.h"
@@ -48,11 +49,12 @@ void FighterAI::runAttack(P<SpaceObject> target)
     auto position_diff = target->getPosition() - owner->getPosition();
     float distance = glm::length(position_diff);
     auto shields = owner->entity.getComponent<Shields>();
+    auto target_physics = target->entity.getComponent<sp::Physics>();
 
     switch(attack_state)
     {
     case dive:
-        if (distance < 2500 + target->getRadius() && has_missiles)
+        if (distance < 2500 + (target_physics ? target_physics->getSize().x : 0.0f) && has_missiles)
         {
             auto tubes = owner->entity.getComponent<MissileTubes>();
             for(int n=0; n<tubes->count; n++)
@@ -72,7 +74,7 @@ void FighterAI::runAttack(P<SpaceObject> target)
 
         flyTowards(target->getPosition(), 500.0);
 
-        if (distance < 500 + target->getRadius())
+        if (distance < 500 + (target_physics ? target_physics->getSize().x : 0.0f))
         {
             aggression += random(0, 0.05);
 

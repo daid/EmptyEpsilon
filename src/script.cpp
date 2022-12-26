@@ -13,7 +13,7 @@ REGISTER_SCRIPT_CLASS(Script)
     /// Run a script with a certain filename
     REGISTER_SCRIPT_CLASS_FUNCTION(Script, run);
     /// Set a global variable in this script instance, this variable can be accessed in the main script.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ScriptObject, setVariable);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScriptObject, setVariable<string>);
 }
 
 Script::Script()

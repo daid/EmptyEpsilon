@@ -376,9 +376,9 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
         auto diff = n->getPosition() - scan_center;
         float diff_len = glm::length(diff);
 
-        if (diff_len < n->getRadius() + distance)
+        if (diff_len < n->radius + distance)
         {
-            if (diff_len < n->getRadius())
+            if (diff_len < n->radius)
             {
                 // Inside a nebula - everything is blocked out.
                 renderer.fillRect(rect, glm::u8vec4(0, 0, 0, 255));
@@ -386,14 +386,14 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
                 // Leave the loop here: there's no point adding more blocked areas.
                 break;
             }else{
-                float r = n->getRadius() * scale;
+                float r = n->radius * scale;
                 renderer.fillCircle(worldToScreen(n->getPosition()), r, glm::u8vec4(0, 0, 0, 255));
 
                 float diff_angle = vec2ToAngle(diff);
-                float angle = glm::degrees(acosf(n->getRadius() / diff_len));
+                float angle = glm::degrees(acosf(n->radius / diff_len));
 
-                auto pos_a = n->getPosition() - vec2FromAngle(diff_angle + angle) * n->getRadius();
-                auto pos_b = n->getPosition() - vec2FromAngle(diff_angle - angle) * n->getRadius();
+                auto pos_a = n->getPosition() - vec2FromAngle(diff_angle + angle) * n->radius;
+                auto pos_b = n->getPosition() - vec2FromAngle(diff_angle - angle) * n->radius;
                 auto pos_c = scan_center + glm::normalize(pos_a - scan_center) * distance * 3.0f;
                 auto pos_d = scan_center + glm::normalize(pos_b - scan_center) * distance * 3.0f;
                 auto pos_e = scan_center + diff / diff_len * distance * 3.0f;
@@ -642,7 +642,8 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
                 if (!ptr || !*ptr) continue;
                 P<SpaceObject> obj2 = *ptr;
 
-                auto r2 = r + obj2->getRadius();
+                auto trace = obj2->entity.getComponent<RadarTrace>();
+                float r2 = trace ? trace->radius * scale : 0.0f;
                 if (obj2 && glm::length2(obj->getPosition() - obj2->getPosition()) < r2*r2)
                 {
                     visible_objects.emplace(*obj2);
@@ -680,7 +681,8 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     auto draw_object = [&renderer, this, scale](SpaceObject* obj)
     {
         auto object_position_on_screen = worldToScreen(obj->getPosition());
-        float r = obj->getRadius() * scale;
+        auto trace = obj->entity.getComponent<RadarTrace>();
+        float r = trace ? trace->radius * scale : 0.0f;
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != *my_spaceship && rect.overlaps(object_rect))
         {
@@ -886,13 +888,13 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     }
 
     if (!long_range) {
-        for(auto [entity, shields, transform, obj] : sp::ecs::Query<Shields, sp::Transform, SpaceObject*>()) {
+        for(auto [entity, shields, trace, transform, obj] : sp::ecs::Query<Shields, RadarTrace, sp::Transform, SpaceObject*>()) {
             //TODO: Only draw things that are in range of this radar view.
             if (!shields.active)
                 continue;
             auto object_position_on_screen = worldToScreen(transform.getPosition());
             bool show_levels = (!my_spaceship || obj->getScannedStateFor(my_spaceship) >= SS_SimpleScan);
-            float sprite_scale = scale * obj->getRadius() * 1.5f / 32;
+            float sprite_scale = scale * trace.radius * 1.5f / 32;
 
             if (shields.count == 1)
             {
@@ -960,7 +962,8 @@ void GuiRadarView::drawObjectsGM(sp::RenderTarget& renderer)
     foreach(SpaceObject, obj, space_object_list)
     {
         auto object_position_on_screen = worldToScreen(obj->getPosition());
-        float r = obj->getRadius() * scale;
+        auto trace = obj->entity.getComponent<RadarTrace>();
+        float r = trace ? trace->radius * scale : 0.0f;
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (rect.overlaps(object_rect))
         {
@@ -987,7 +990,8 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
     for(P<SpaceObject> obj : targets->getTargets())
     {
         auto object_position_on_screen = worldToScreen(obj->getPosition());
-        float r = obj->getRadius() * scale;
+        auto trace = obj->entity.getComponent<RadarTrace>();
+        float r = trace ? trace->radius * scale : 0.0f;
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.overlaps(object_rect))
         {

@@ -26,8 +26,8 @@ struct VertexAndTexCoords
 /// Example: BeamEffect():setSource(player, 0, 0, 0):setTarget(enemy_ship, 0, 0)
 REGISTER_SCRIPT_SUBCLASS(BeamEffect, SpaceObject)
 {
-    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
-    REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
+    //TODO: REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setSource);
+    //TODO: REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setTexture);
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSound);
     REGISTER_SCRIPT_CLASS_FUNCTION(BeamEffect, setBeamFireSoundPower);

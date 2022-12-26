@@ -6,6 +6,7 @@
 #include "systems/collision.h"
 #include "components/missiletubes.h"
 #include "components/beamweapon.h"
+#include "components/collision.h"
 
 
 REGISTER_SHIP_AI(EvasionAI, "evasion");
@@ -48,7 +49,8 @@ void EvasionAI::runOrders()
             auto target_position = owner->getOrderTarget()->getPosition();
             auto diff = owner->getPosition() - target_position;
             float dist = glm::length(diff);
-            if (dist < 3000 + owner->getOrderTarget()->getRadius())
+            auto physics = owner->getOrderTarget()->entity.getComponent<sp::Physics>();
+            if (dist < 3000 + (physics ? physics->getSize().x : 0.0f))
             {
                 // if close to the docking target: make a run for it
                 return ShipAI::runOrders();
@@ -165,7 +167,10 @@ float EvasionAI::evasionDangerScore(P<SpaceShip> ship, float scan_radius)
 
     auto position_difference = ship->getPosition() - owner->getPosition();
     float distance = glm::length(position_difference);
-    enemy_max_beam_range += ship->getRadius() + owner->getRadius();
+    auto physics = owner->entity.getComponent<sp::Physics>();
+    if (physics) enemy_max_beam_range += physics->getSize().x;
+    physics = ship->entity.getComponent<sp::Physics>();
+    if (physics) enemy_max_beam_range += physics->getSize().x;
 
     float danger = 0.0;
     if (enemy_missile_strength > 0.0f)

@@ -13,6 +13,7 @@
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/target.h"
+#include "components/collision.h"
 #include "systems/collision.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
@@ -23,7 +24,7 @@
 REGISTER_SHIP_AI(ShipAI, "default");
 
 ShipAI::ShipAI(CpuShip* owner)
-: pathPlanner(owner->getRadius()), owner(owner)
+: pathPlanner(300.0f/*TODO*/), owner(owner)
 {
     missile_fire_delay = 0.0;
 
@@ -374,6 +375,9 @@ void ShipAI::runOrders()
     long_range = owner->getLongRangeRadarRange();
     relay_range = long_range * 2.0f;
     auto docking_port = owner->entity.getComponent<DockingPort>();
+    auto radius = 0.0f;
+    if (auto physics = owner->entity.getComponent<sp::Physics>())
+        radius = physics->getSize().x;
 
     //When we are not attacking a target, follow orders
     switch(owner->getOrder())
@@ -424,7 +428,7 @@ void ShipAI::runOrders()
     case AI_FlyTowards:      //Fly towards [order_target_location], attacking enemies that get too close, but disengage and continue when enemy is too far.
     case AI_FlyTowardsBlind: //Fly towards [order_target_location], not attacking anything
         flyTowards(owner->getOrderTargetLocation());
-        if (glm::length2(owner->getPosition() - owner->getOrderTargetLocation()) < owner->getRadius()*owner->getRadius())
+        if (glm::length2(owner->getPosition() - owner->getOrderTargetLocation()) < radius*radius)
         {
             if (owner->getOrder() == AI_FlyTowards)
                 owner->orderDefendLocation(owner->getOrderTargetLocation());
@@ -509,7 +513,10 @@ void ShipAI::runOrders()
                 auto target_position = owner->getOrderTarget()->getPosition();
                 auto diff = owner->getPosition() - target_position;
                 float dist = glm::length(diff);
-                if (dist < 600 + owner->getOrderTarget()->getRadius())
+                auto target_radius = 0.0f;
+                if (auto physics = owner->getOrderTarget()->entity.getComponent<sp::Physics>())
+                    target_radius = physics->getSize().x;
+                if (dist < 600 + target_radius)
                 {
                     DockingSystem::requestDock(owner->entity, owner->getOrderTarget()->entity);
                 }else{
@@ -568,7 +575,10 @@ void ShipAI::runAttack(P<SpaceObject> target)
                 angle += 160;
             else
                 angle -= 160;
-            target_position += vec2FromAngle(angle) * (attack_distance + target->getRadius());
+            auto target_radius = 0.0f;
+            if (auto physics = target->entity.getComponent<sp::Physics>())
+                target_radius = physics->getSize().x;
+            target_position += vec2FromAngle(angle) * (attack_distance + target_radius);
             flyTowards(target_position, 0);
         }else{
             flyTowards(target->getPosition(), attack_distance);
@@ -658,7 +668,9 @@ void ShipAI::flyFormation(P<SpaceObject> target, glm::vec2 offset)
         float distance = glm::length(diff);
 
         //Formation flying code
-        float r = owner->getRadius() * 5.0f;
+        float r = 100.0f;
+        if (auto physics = owner->entity.getComponent<sp::Physics>())
+            r = physics->getSize().x * 5.0f;
         auto target_rotation = vec2ToAngle(diff);
         if (distance > r * 3)
         {
@@ -825,7 +837,10 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, const MissileTubes:
         target_position += target->getVelocity() * fly_time;
 
         //If our "error" of hitting is less then double the radius of the target, fire.
-        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target->getRadius() * 2.0f)
+        auto target_radius = 100.0f;
+        if (auto physics = target->entity.getComponent<sp::Physics>())
+            target_radius = physics->getSize().x;
+        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target_radius * 2.0f)
             return fire_angle;
 
         return std::numeric_limits<float>::infinity();
@@ -846,7 +861,8 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, const MissileTubes:
             P<SpaceObject> obj = *ptr;
             if (obj && !obj->isEnemy(owner) && (P<SpaceShip>(obj) || P<SpaceStation>(obj)))
             {
-                if (glm::length(obj->getPosition() - owner->getPosition()) < safety_radius - obj->getRadius())
+                auto physics = obj->entity.getComponent<sp::Physics>();
+                if (physics && glm::length(obj->getPosition() - owner->getPosition()) < safety_radius - physics->getSize().x)
                 {
                     return std::numeric_limits<float>::infinity();
                 }

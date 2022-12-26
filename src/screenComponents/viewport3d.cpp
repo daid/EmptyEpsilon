@@ -12,6 +12,7 @@
 #include "particleEffect.h"
 #include "glObjects.h"
 #include "shaderRegistry.h"
+#include "components/collision.h"
 
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
@@ -259,13 +260,16 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     foreach(SpaceObject, obj, space_object_list)
     {
         float depth = glm::dot(viewVector, obj->getPosition() - glm::vec2(camera_position.x, camera_position.y));
-        if (depth + obj->getRadius() < depth_cutoff_back)
+        float radius = 300.0f;
+        if (auto physics = obj->entity.getComponent<sp::Physics>())
+            radius = physics->getSize().x;
+        if (depth + radius < depth_cutoff_back)
             continue;
-        if (depth - obj->getRadius() > depth_cutoff_front)
+        if (depth - radius > depth_cutoff_front)
             continue;
-        if (depth > 0 && obj->getRadius() / depth < 1.0f / 500)
+        if (depth > 0 && radius / depth < 1.0f / 500)
             continue;
-        int render_list_index = std::max(0, int((depth + obj->getRadius()) / 25000));
+        int render_list_index = std::max(0, int((depth + radius) / 25000));
         while(render_list_index >= int(render_lists.size()))
             render_lists.emplace_back();
         render_lists[render_list_index].emplace_back(*obj, depth);
@@ -364,7 +368,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
 
         textureManager.getTexture("redicule2.png")->bind();
         glUniformMatrix4fv(billboard.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-        glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, target->getRadius() * 2.5f);
+        float radius = 300.0f;
+        if (auto physics = target->entity.getComponent<sp::Physics>())
+            radius = physics->getSize().x;
+        glUniform4f(billboard.get().uniform(ShaderRegistry::Uniforms::Color), .5f, .5f, .5f, radius * 2.5f);
         {
             gl::ScopedVertexAttribArray positions(billboard.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(billboard.get().attribute(ShaderRegistry::Attributes::Texcoords));
@@ -448,7 +455,10 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
             if (call_sign == "")
                 continue;
 
-            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(obj->getPosition().x, obj->getPosition().y, obj->getRadius()));
+            float radius = 300.0f;
+            if (auto physics = obj->entity.getComponent<sp::Physics>())
+                radius = physics->getSize().x;
+            glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(obj->getPosition().x, obj->getPosition().y, radius));
             if (screen_position.z < 0.0f)
                 continue;
             if (screen_position.z > 10000.0f)
