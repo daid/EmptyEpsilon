@@ -189,7 +189,7 @@ def translate_type(c_type, name):
     if res is not None:
         return VariadicType(translate_type(res.group(1).strip(), name))
 
-    if c_type in ('EAlertLevel', 'ECrewPosition', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EDockingState', 'ScriptSimpleCallback'):
+    if c_type in ('EAlertLevel', 'ECrewPosition', 'EMissileSizes', 'EMissileWeapons', 'EScannedState', 'ESystem', 'EMainScreenSetting', 'EMainScreenOverlay', 'EDockingState', 'ScriptSimpleCallback'):
         return EnumType(c_type)
 
     if c_type in ('int', 'float', 'double', 'int32_t', 'int8_t', 'uint32_t', 'uint8_t'):
@@ -504,19 +504,17 @@ rel="stylesheet"
         stream.write('<div class="section">')
         stream.write("<p>Some of the types in the parameters:</p>")
         stream.write("<ul>\n")
-        stream.write('<li><a name="enum_ScriptSimpleCallback">ScriptSimpleCallback</a> / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert&lt;ScriptSimpleCallback&gt;::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
+        stream.write('<li><a name="enum_Color">Color</a>: A string that can either be a hex color code (#rrggbb), three comma-separated rgb integers (rrr,ggg,bbb), or one of the following: "black", "white", "red", "green", "blue", "yellow", "magenta", "cyan". Invalid values default to white.</li>\n')
         stream.write('<li><a name="enum_EAlertLevel">EAlertLevel<a/>: "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
-        stream.write('<li><a name="enum_ECrewPosition">ECrewPosition</a>: "Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", "Database", "AltRelay", "CommsOnly", "ShipLog", (<code>playerInfo.cpp</code>)</li>\n')
-        stream.write('<li><a name="enum_EMissileSizes">EMissileSizes</a>: "small", "medium", "large"</li>\n')
-        stream.write('<li><a name="enum_EMissileWeapons">EMissileWeapons</a>: "Homing", "Nuke", "Mine", "EMP", "HVLI" (<code>spaceship.cpp</code>)</li>\n')
+        stream.write('<li><a name="enum_ECrewPosition">ECrewPosition</a>: "Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", "Database", "AltRelay", "CommsOnly", "ShipLog" (<code>playerInfo.cpp</code>)</li>\n')
+        stream.write('<li><a name="enum_EMainScreenOverlay">EMainScreenOverlay</a>: "hidecomms", "showcomms" (<code>spaceship.hpp</code>)</li>\n')
+        stream.write('<li><a name="enum_EMainScreenSetting">EMainScreenSetting</a>: "front", "back", "left", "right", "target", "tactical", "longrange" (<code>spaceship.hpp</code>)</li>\n')
+        stream.write('<li><a name="enum_EMissileSizes">EMissileSizes</a>: "small", "medium", "large" (<code>missileWeaponData.hpp</code>)</li>\n')
+        stream.write('<li><a name="enum_EMissileWeapons">EMissileWeapons</a>: "Homing", "Nuke", "Mine", "EMP", "HVLI" (<code>missileWeaponData.hpp</code>)</li>\n')
         stream.write('<li><a name="enum_EScannedState">EScannedState</a>: "notscanned", "friendorfoeidentified", "simplescan", "fullscan" (<code>spaceObject.h</code>)</li>\n')
         stream.write('<li><a name="enum_ESystem">ESystem</a>: "reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"</li>\n')
-        stream.write("<!--\n")
-        stream.write("<li>EMainScreenOverlay: TODO</li>\n")
-        stream.write("<li>EMainScreenSetting: TODO</li>\n")
-        stream.write("-->\n")
         stream.write('<li><a name="enum_Factions">Factions</a>: "Independent", "Kraylor", "Arlenians", "Exuari", "Ghosts", "Ktlitans", "TSN", "USN", "CUF" (<code>factionInfo.lua</code>)</li>\n')
-        stream.write('<li><a name="enum_Color">Color</a>: A string that can either be a hex color code (#rrggbb), three comma seperated rgb integers (rrr,ggg,bbb) or one of the following: "black", "white", "red", "green", "blue", "yellow", "magenta" or "cyan". Invalid values default to white.</li>\n')
+        stream.write('<li><a name="enum_ScriptSimpleCallback">ScriptSimpleCallback</a> / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert&lt;ScriptSimpleCallback&gt;::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
         stream.write("</ul>\n")
         stream.write("<p>Note that most <code>SpaceObject</code>s directly switch to fully scanned, only <code>SpaceShips</code>s go through all the states.</p>")
         stream.write("</div>\n")
