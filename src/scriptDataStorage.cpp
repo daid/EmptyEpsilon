@@ -72,20 +72,25 @@ private:
     std::unordered_map<std::string, std::string> data;
 };
 
+/// The ScriptStorage persistently saves key/value pairs to a file.
+/// These key/value pairs are permanently stored and survive server restarts.
+/// Its default file path is $HOME/.emptyepsilon/scriptstorage.json.
+/// See getScriptStorage().
 REGISTER_SCRIPT_CLASS(ScriptStorage)
 {
-    /// Get a value from persistent script storage.
-    /// Requires the key as a string.
-    /// Returns the value as a JSON string.
+    /// Returns the value for the given key from the persistent ScriptStorage as a JSON string.
     /// Returns nothing if the key is not found.
-    /// Example: storage = getScriptStorage()
-    ///          storage:get('key')
+    /// Example:
+    ///   storage = getScriptStorage()
+    ///   storage:set('key', 'value')
+    ///   storage:get('key') -- returns "value"
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, get);
-    /// Set a value in persistent script storage.
-    /// Requires the key and value as strings.
-    /// Creates scriptstorage.json if it doesn't exist.
-    /// Example: storage = getScriptStorage()
-    ///          storage:set('key', 'value')
+    /// Sets a key/value pair in the persistent ScriptStorage file.
+    /// If the scriptstorage.json file doesn't exist, this function creates it.
+    /// If the given key already exists, this function overwrites its value.
+    /// Example:
+    ///   storage = getScriptStorage()
+    ///   storage:set('key', 'value') -- writes {"key":"value"} to scriptstorage.json
     REGISTER_SCRIPT_CLASS_FUNCTION(ScriptStorage, set);
 }
 
@@ -99,8 +104,8 @@ static int getScriptStorage(lua_State* L)
 }
 
 /// P<ScriptStorage> getScriptStorage()
-/// Expose the ScriptStorage object, which can save and load key-value pairs
-/// These key-value pairs are permanently stored and survive server restarts.
-/// Returns a ScriptStorage object; see also ScriptStorage.get() and .set().
+/// Returns the ScriptStorage object, which can save and load key/value pairs.
+/// These key/value pairs are permanently stored and survive server restarts.
+/// To use this object, see ScriptStorage:get() and :set().
 /// Example: storage = getScriptStorage();
 REGISTER_SCRIPT_FUNCTION(getScriptStorage);
