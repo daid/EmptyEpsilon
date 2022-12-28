@@ -6,24 +6,36 @@
 
 #include "scriptInterface.h"
 
-/// A warp jammer.
+/// A WarpJammer restricts the ability of any SpaceShips to use warp or jump drives within its radius.
+/// WarpJammers can be targeted, damaged, and destroyed.
+/// Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
 REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
 {
-    /// Gets jamming range (circle with jammer in the middle inside which no warp/jump will be possible).
+    /// Returns this WarpJammer's jamming range, represented on radar as a circle with jammer in the middle.
+    /// No warp/jump travel is possible within this radius.
+    /// Example: jammer:getRange()
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, getRange);
-    /// Sets jamming range (circle with jammer in the middle inside which no warp/jump will be possible).
+    /// Sets this WarpJammer's jamming radius.
+    /// No warp/jump travel is possible within this radius.
+    /// Defaults to 7000.0.
+    /// Example: jammer:setRange(10000) -- sets a 10U jamming radius 
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
 
-    /// Gets current hull of warpJammer.
+    /// Returns this WarpJammer's hull points.
+    /// Example: jammer:getHull()
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, getHull);
-    /// Sets current hull of warpJammer.
+    /// Sets this WarpJammer's hull points.
+    /// Defaults to 50
+    /// Example: jammer:setHull(20)
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setHull);
 
-    /// Set a function that will be called if the warp jammer is taking damage.
-    /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject (or nil).
+    /// Defines a function to call when this WarpJammer takes damage.
+    /// Passes the WarpJammer object and the damage instigator SpaceObject (or nil if none).
+    /// Example: jammer:onTakingDamage(function(this_jammer,instigator) print("Jammer damaged!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onTakingDamage);
-    /// Set a function that will be called if the warp jammer is destroyed by taking damage.
-    /// First argument given to the function will be the warp jammer, the second the instigator SpaceObject that gave the final blow (or nil).
+    /// Defines a function to call when the WarpJammer is destroyed by taking damage.
+    /// Passes the WarpJammer object and the damage instigator SpaceObject (or nil if none).
+    /// Example: jammer:onDestruction(function(this_jammer,instigator) print("Jammer destroyed!") end)
     REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, onDestruction);
 }
 

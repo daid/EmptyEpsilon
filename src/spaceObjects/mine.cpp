@@ -11,13 +11,22 @@
 
 #include "i18n.h"
 
-/// A mine object. Simple, effective, deadly.
+/// A Mine is an explosive weapon that detonates and deals kinetic damage when a SpaceObject collides with its trigger range.
+/// Mines can be owned by factions but are triggered by SpaceObjects of any faction can trigger them.
+/// Mines can be launched from a SpaceShip's weapon tube or added by a GM or scenario script.
+/// When launched from a SpaceShip, the mine has an eject timeout, during which its trigger range is inactive.
+/// In 3D views, mines are represented by a particle effect at the center of its trigger range.
+/// To create objects with more complex collision mechanics, use an Artifact.
+/// Example: mine = Mine():setPosition(1000,1000):onDestruction(this_mine, instigator) print("Tripped a mine!") end)
 REGISTER_SCRIPT_SUBCLASS(Mine, SpaceObject)
 {
-  // Get the mine's owner's object.
+  /// Returns this Mine owner's SpaceObject.
+  /// Works only on the server; mine ownership isn't replicated to clients.
+  /// Example: mine:getOwner()
   REGISTER_SCRIPT_CLASS_FUNCTION(Mine, getOwner);
-  // Set a function that will be called if the mine explodes.
-  // First argument is the mine, second argument is the mine's owner/instigator (or nil).
+  /// Defines a function to call when this Mine is destroyed.
+  /// Passes the mine object and the object of the mine's owner/instigator (or nil if there isn't one) to the function.
+  /// Example: mine:onDestruction(function(this_mine, instigator) print("Tripped a mine!") end)
   REGISTER_SCRIPT_CLASS_FUNCTION(Mine, onDestruction);
 }
 
