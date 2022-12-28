@@ -33,21 +33,47 @@ static int commsSwitchToGM(lua_State* L)
 }
 
 /// void setCommsMessage(string message)
-/// Sets the message/reply shown to the comms officer.
-/// Not setting the message leads to "no reply" (when trying to open comms)
-/// or a dialog with the message "?" (in a reply).
+/// Sets the content of an accepted hail, or in a comms reply.
+/// If no message is set, attempting to open comms results in "no reply", or a dialogue with the message "?" in a reply.
+/// Use this only in replies (addCommsReply()), comms scripts (SpaceObject:setCommsScript()), or comms functions (SpaceObject:setCommsFunction()).
+/// When used in the callback function of addCommsReply(), this clears all existing replies.
+/// Example:
+/// -- Send a greeting upon hail if the player is friendly with the comms target
+/// function friendlyComms()
+///   if comms_source:isFriendly(comms_target) then
+///     setCommsMessage("Hello, friend!")
+///   else
+///     setCommsMessage("Who are you?")
+///   end
+/// end
+/// -- When some_ship is hailed, run friendlyComms() with some_ship as the comms_target and the player as the comms_source
+/// some_ship:setCommsFunction(friendlyComms)
 REGISTER_SCRIPT_FUNCTION(setCommsMessage);
 /// void addCommsReply(string message, ScriptSimpleCallback callback)
-/// Add an reply option for communications.
-/// Within the callback function, `comms_source` and `comms_target` are available.
-/// Deprecated: In a CommsScript, `player` can be used for `comms_source`.
-/// (In a CommsFunction, only `comms_source` is provided.)
-/// Instead of using the globals, the callback function can take two parameters.
-/// Example: addCommsReply(message, function(comms_source, comms_target) ... end)
+/// Adds a selectable reply option to a communications dialogue as a button with the given text.
+/// When clicked, the button calls the given function.
+/// Use this only after comms messages (setCommsMessage() in comms scripts (SpaceObject:setCommsScript()), or comms functions (SpaceObject:setCommsFunction()).
+/// Comms scripts pass global variables `comms_target` and `comms_source`. See SpaceObject:setCommsScript().
+/// Comms functions pass only `comms_source`. See SpaceObject:setCommsFunction().
+/// Instead of using these globals, the callback function can take two parameters.
+/// To present multiple options in one comms message, call addCommsReply() for each option.
+/// To create a dialogue tree, run setCommsMessage() inside the addCommsReply() callback, then add new comms replies.
+/// Example:
+/// if comms_source:isFriendly(comms_target) then
+///   setCommsMessage("Hello, friend!")
+///   addCommsReply("Can you send a supply drop?", function(comms_source, comms_target) ... end) -- runs the given function when selected
+///   ...
+/// Deprecated: In a comms script, `player` can also be used for `comms_source`.
 REGISTER_SCRIPT_FUNCTION(addCommsReply);
 /// void commsSwitchToGM()
-/// Use this function from a communication callback function to switch the current
-/// communication from scripted to a GM based chat.
+/// Switches a PlayerSpaceship communications dialogue from a comms script/function to interactive chat with the GM.
+/// When triggered, this opens a comms chat window on both the player crew's screen and GM console.
+/// Use this in a communication callback function, such as addCommsReply() or SpaceObject:setCommsFunction().
+/// Example:
+/// if comms_source:isFriendly(comms_target) then
+///   setCommsMessage("Hello, friend!")
+///   addCommsReply("I want to speak to your manager!", function() commsSwitchToGM() end) -- launches a GM chat when selected
+///   ...
 REGISTER_SCRIPT_FUNCTION(commsSwitchToGM);
 
 bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObject> target)
