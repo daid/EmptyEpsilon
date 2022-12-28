@@ -26,15 +26,23 @@ struct VertexAndTexCoords
     glm::vec2 texcoords;
 };
 
-/// A wormhole object that drags objects toward it like a black hole, and then
-/// teleports them to another point when they reach its center.
+/// A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
+/// Any SpaceObject that reaches its center is teleported to another point in space.
+/// AI behaviors avoid WormHoles by a 2U margin.
+/// Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 REGISTER_SCRIPT_SUBCLASS(WormHole, SpaceObject)
 {
-    /// Set the target of this wormhole
+    /// Sets the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+    /// Example: wormhole:setTargetPosition(10000,10000)
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, setTargetPosition);
+    /// Returns the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+    /// Example: wormhole:getTargetPosition()
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, getTargetPosition);
-    /// Set a function that will be called if a SpaceObject is teleported.
-    /// First argument given to the function will be the WormHole, the second the SpaceObject that has been teleported.
+    /// Defines a function to call when this WormHole teleports a SpaceObject.
+    /// Passes the WormHole object and the teleported SpaceObject.
+    /// Example:
+    /// -- Outputs teleportation details to the console window and logging file
+    /// wormhole:onTeleportation(function(this_wormhole,teleported_object) print(teleported_object:getCallSign() .. " teleported to " .. this_wormhole:getTargetPosition()) end)
     REGISTER_SCRIPT_CLASS_FUNCTION(WormHole, onTeleportation);
 }
 
