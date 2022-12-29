@@ -562,7 +562,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     for(int n=0; n<max_beam_weapons; n++)
         result->beams[n] = beams[n];
     result->weapon_tube_count = weapon_tube_count;
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n=0; n<max_weapon_tubes; n++)
         result->weapon_tube[n] = weapon_tube[n];
     result->hull = hull;
     result->shield_count = shield_count;
