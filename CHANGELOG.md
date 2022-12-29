@@ -23,6 +23,7 @@
 
 ### Fixed
 
+- ShipTemplate:copy() respects tube count limit for tubes, instead of beam count limit #1810
 - URL for EmptyEpsilon website in scripting reference fixed #1791
 - Relay can once again select alert level buttons #1786
 - Main screen comms info no longer persists after it should be closed
