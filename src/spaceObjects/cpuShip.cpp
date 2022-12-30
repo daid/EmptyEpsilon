@@ -279,10 +279,19 @@ void CpuShip::orderAttack(P<SpaceObject> object)
 {
     if (!object)
         return;
-    orders = AI_Attack;
-    order_target = object;
-    order_target_location = glm::vec2(0, 0);
-    this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
+    
+    // Attack only if the target is hostile.
+    // Otherwise we just chase the target without firing on it.
+    if (this->isEnemy(object))
+    {
+        orders = AI_Attack;
+        order_target = object;
+        order_target_location = glm::vec2(0, 0);
+        this->addBroadcast(FVF_Friendly, tr("cpulog", "Moving to attack {callsign}!").format({{"callsign", object->getCallSign()}}));
+    } else {
+        LOG(WARNING) << "Tried to give " + this->getCallSign() + " an order to attack a non-hostile target";
+        return;
+    }
 }
 
 void CpuShip::orderDock(P<SpaceObject> object)
