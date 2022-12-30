@@ -23,6 +23,7 @@
 
 ### Fixed
 
+- ShipTemplate:setHull() and ShipTemplateBasedObject:setHull() respect limits #1811
 - ShipTemplate:copy() respects tube count limit for tubes, instead of beam count limit #1810
 - URL for EmptyEpsilon website in scripting reference fixed #1791
 - Relay can once again select alert level buttons #1786
