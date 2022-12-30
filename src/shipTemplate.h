@@ -176,7 +176,7 @@ public:
     void setTubeSize(int index, EMissileSizes size);
 
     void setTubeDirection(int index, float direction);
-    void setHull(float amount) { hull = amount; }
+    void setHull(float amount) { if (amount < 0) return; hull = amount; };
     void setShields(const std::vector<float>& values);
     void setSpeed(float impulse, float turn, float acceleration, std::optional<float> reverse_speed, std::optional<float> reverse_acceleration);
     void setCombatManeuver(float boost, float strafe);
