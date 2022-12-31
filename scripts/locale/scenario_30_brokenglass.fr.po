@@ -91,6 +91,7 @@ msgctxt "nebula-bonuses"
 msgid ""
 "Just a hollow spherical apparition. Kinda looks like it's hiding something."
 msgstr ""
+"Juste une sphère d'apparence creuse. On dirait que ça cache quelque chose."
 
 #: scripts/scenario_30_brokenglass.lua:334
 msgctxt "nebula-bonuses"
@@ -103,10 +104,9 @@ msgid "A Nuke and additional nuke storage have been added to our arsenal"
 msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:350
-#, fuzzy
 msgctxt "nebula-bonuses"
 msgid "A stranded repair crew has been rescued"
-msgstr "Un de vos réparateurs a péri."
+msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:358
 msgctxt "nebula-bonuses"
@@ -150,13 +150,14 @@ msgstr ""
 "\n"
 "Vous venez d'être affecté à un tour de garde dans la ceinture Zeta.\n"
 "C'est un territoire neutre avec un peu de tout... des nébuleuses, des "
-"astéroïdes, des planètes naissantes et de vieux débris dangereux.\n"
+"astéroïdes, des planètes naissantes et de vieux débris errants donc "
+"dangereux.\n"
 "\n"
 "Nous ne rencontrons pas beaucoup de Kraylors par ici. Sachez que nous avons "
 "un traité de non-agression avec eux, donc si vous en rencontrez, "
-"réfléchissez-y à deux fois avant d'engager le combat. Le principal risque "
-"pour la sécurité vient surtout de ces maudits drones Ghost et Éxuari qui "
-"volent sans cesse dans le coin.\n"
+"réfléchissez-y à deux fois avant d'engager le combat.\n"
+"Le principal risque pour la sécurité vient surtout de ces maudits drones "
+"Ghost et Éxuari qui volent sans cesse dans le coin.\n"
 "\n"
 "Vos ordres sont les suivants : soutenir toutes les installations de "
 "recherche de la région, humaines et indépendantes. Leur sécurité doit être "
@@ -166,7 +167,7 @@ msgstr ""
 "\n"
 "Votre vaisseau, le Propitious 1, est bien équipé mais ce n'est pas non plus "
 "un vaisseau de guerre, alors conduisez-vous prudemment et essayez de ne pas "
-"rompre la paix tumultueusement.\n"
+"rompre la paix inutilement.\n"
 
 #: scripts/scenario_30_brokenglass.lua:865
 msgctxt "wormhole-comms"
@@ -490,7 +491,7 @@ msgid "Not much here bud, just doing checkpoint kinda things, ya know?"
 msgstr ""
 "Salut,\n"
 "Ya pas grand-chose ici, mon pote, jfais juste des trucs de poste de "
-"contrôle, tu vois?"
+"contrôle, tu vois !"
 
 #: scripts/scenario_30_brokenglass.lua:1374
 msgctxt "defence-comms"
@@ -547,7 +548,7 @@ msgstr ""
 "Bonjour soldat,\n"
 "\n"
 "Nous ne devrions pas communiquer sur ce canal, veuillez plutôt vous amarrer "
-"à la station lorsque vous le pourrez."
+"à notre station lorsque vous le pourrez."
 
 #: scripts/scenario_30_brokenglass.lua:1414
 msgctxt "defence-comms"
@@ -686,7 +687,6 @@ msgstr ""
 #: scripts/scenario_30_brokenglass.lua:1591
 #: scripts/scenario_30_brokenglass.lua:1595
 #: scripts/scenario_30_brokenglass.lua:1599
-#, fuzzy
 msgctxt "admin-comms"
 msgid "<- Back"
 msgstr "<- Précédent"
@@ -931,8 +931,8 @@ msgctxt "admin-comms"
 msgid ""
 "Old space junk, mostly. We haven't seen any real Exauri activity in decades."
 msgstr ""
-"Uniquement de vieux débris de leurs vaisseaux spatiaux, principalement. Nous "
-"n'avons pas vu de véritable activité Éxuarie depuis des décennies."
+"De vieux débris de leurs vaisseaux spatiaux, principalement . Nous n'avons "
+"pas observé de véritable activité Éxuarie depuis des décennies par ici."
 
 #: scripts/scenario_30_brokenglass.lua:1607
 msgctxt "found-comms"
@@ -1072,16 +1072,19 @@ msgid ""
 "\n"
 "We are taking damage from "
 msgstr ""
+"AU SECOURS !\n"
+"\n"
+"Nous subissons des dégâts de la part du vaisseau "
 
 #: scripts/scenario_30_brokenglass.lua:1676
 msgctxt "attack-messages"
 msgid " and might need assistance."
-msgstr ""
+msgstr " et demandons votre assistance !"
 
 #: scripts/scenario_30_brokenglass.lua:1680
 msgctxt "attack-messages"
 msgid " is taking damage!"
-msgstr ""
+msgstr " est en train de subir des dégâts !"
 
 #: scripts/scenario_30_brokenglass.lua:1707
 msgctxt "admin-comms"
@@ -1093,6 +1096,14 @@ msgid ""
 "the nebula when their engines and transponder went offline. Please follow "
 "our scout vessel, SR7, to the nebula and search for them."
 msgstr ""
+"Désolé de vous interrompre, mais nous venons de recevoir un appel urgent.\n"
+"\n"
+"Il semble qu'un de nos chercheurs, le Dr Hendrix, et son équipe se soient "
+"égarés dans une nébuleuse voisine et aient besoin de notre aide. Ils "
+"menaient des expériences dans la nébuleuse lorsque leurs moteurs et leur "
+"transpondeur ont arrêtés d'émettre. Veuillez suivre notre vaisseau "
+"éclaireur, SR7, jusqu'à la nébuleuse afin de les retrouver.\n"
+"Nous comptons sur vous."
 
 #: scripts/scenario_30_brokenglass.lua:1714
 msgctxt "admin-comms"
@@ -1110,6 +1121,16 @@ msgid ""
 "\n"
 "I'll follow you. Let's find Dr. Hendrix and bring her crew home."
 msgstr ""
+"Prêt à y aller ?\n"
+"\n"
+"La nébuleuse est très épaisse, nous devrons donc nous rapprocher pour "
+"trouver un vaisseau sans transpondeur. Les sondes ne permettront pas de "
+"localiser le vaisseau, mais votre carte des communications devrait pouvoir "
+"nous le signaler dans un rayon de 20 unités. Il peut y avoir du danger, "
+"alors soyez prudent.\n"
+"\n"
+"Je vous suivrai. Trouvons le Dr Hendrix et son équipage et ramenons-les sain "
+"et sauf."
 
 #: scripts/scenario_30_brokenglass.lua:1737
 msgctxt "admin-comms"
@@ -1365,7 +1386,7 @@ msgstr "Entendu. Où se situe la station %s ?"
 
 #: scripts/scenario_30_brokenglass.lua:2412
 msgid "Too busy to talk today, Captain."
-msgstr "Trop occupé pour parler aujourd'hui, capitaine."
+msgstr "Trop occupé pour dicutailler aujourd'hui, cap'taine."
 
 #: scripts/scenario_30_brokenglass.lua:2421
 msgctxt "hendrix-hints"
