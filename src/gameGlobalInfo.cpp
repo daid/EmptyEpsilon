@@ -468,6 +468,23 @@ static int getScenarioSetting(lua_State* L)
 /// Returns a scenario setting, or an empty string if the setting is not found.
 REGISTER_SCRIPT_FUNCTION(getScenarioSetting);
 
+static int getAllScenarioSettings(lua_State* L)
+{
+    // Convert to an ordered map to avoid an infinite loop when converting to a Lua table
+    std::map<string,string> scenario_settings_map;
+    for (const auto& setting : gameGlobalInfo->scenario_settings)
+        scenario_settings_map.insert(std::make_pair(setting.first, setting.second));
+
+    return convert<std::map<string,string>>::returnType(L, scenario_settings_map);
+}
+/// PVector<string> getAllScenarioSettings()
+/// Return a table of all scenario setting keys and values.
+/// If none are set, returns an empty table.
+/// Example:
+/// settings = getAllScenarioSettings()
+/// if (settings["Enemies"]) ...
+REGISTER_SCRIPT_FUNCTION(getAllScenarioSettings);
+
 static int getGameLanguage(lua_State* L)
 {
     lua_pushstring(L, PreferencesManager::get("language", "en").c_str());
