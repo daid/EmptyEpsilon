@@ -33,6 +33,7 @@
 - Build fixes
   - `update_locale` script target fixed
 - Scenario fixes
+  - _Basic_ now applies default scenario settings when using headless, server_scenario options #1829
   - _The Omicron Plague_ bugs fixed #1783, #1784, #1785, #1787, #1794
 - Translation fixes
   - Translation hooks #1780
