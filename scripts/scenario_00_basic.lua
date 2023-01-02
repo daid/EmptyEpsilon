@@ -291,8 +291,22 @@ end
 
 --- Initialize scenario.
 function init()
-    -- Spawn a player Atlantis.
-    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(getScenarioSetting("PlayerShip"))
+    -- Initialize scenario setting defaults.
+    setting_playership = "Atlantis"
+    setting_enemies = "Normal"
+    setting_time = "Unlimited"
+    if not getScenarioSetting("PlayerShip") == "" then
+        setting_playership = getScenarioSetting("PlayerShip")
+    end
+    if not getScenarioSetting("Enemies") == "" then
+        setting_enemies = getScenarioSetting("Enemies")
+    end
+    if not getScenarioSetting("Time") == "" then
+        setting_time = getScenarioSetting("Time")
+    end
+
+    -- Spawn a player ship.
+    player = PlayerSpaceship():setFaction("Human Navy"):setTemplate(setting_playership)
     player:setCallSign(ship_names[irandom(1, #ship_names)])
     if not player:hasWarpDrive() and not player:hasJumpDrive() then
         player:setWarpDrive(true)
@@ -369,8 +383,8 @@ function init()
         ["Easy"] = 3,
         ["Empty"] = 0
     }
-    local enemy_group_count = counts[getScenarioSetting("Enemies")]
-    assert(enemy_group_count, "unknown enemies setting: " .. getScenarioSetting("Enemies") .. " could not set enemy_group_count")
+    local enemy_group_count = counts[setting_enemies]
+    assert(enemy_group_count, "unknown enemies setting: " .. setting_enemies .. " could not set enemy_group_count")
 
     local timesetting = {
         ["Unlimited"] = nil,
@@ -378,7 +392,7 @@ function init()
         ["30min"] = 30 * 60,
         ["60min"] = 60 * 60,
     }
-    gametimeleft = timesetting[getScenarioSetting("Time")]
+    gametimeleft = timesetting[setting_time]
     if gametimeleft ~= nil then
         timewarning = gametimeleft - 5 * 60
     end
