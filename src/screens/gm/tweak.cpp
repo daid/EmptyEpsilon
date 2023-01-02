@@ -293,6 +293,12 @@ GuiJammerTweak::GuiJammerTweak(GuiContainer* owner)
         target->setRange(round(value/100)*100);
     });
     jammer_range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
+
+    (new GuiLabel(right_col, "", tr("Hull current:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    hull_slider = new GuiSlider(right_col, "", 0.0, 500, 0.0, [this](float value) {
+        target->setHull(roundf(value));
+    });
+    hull_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiJammerTweak::open(P<SpaceObject> target)
@@ -304,6 +310,7 @@ void GuiJammerTweak::open(P<SpaceObject> target)
 void GuiJammerTweak::onDraw(sp::RenderTarget& renderer)
 {
     jammer_range_slider->setValue(target->getRange());
+    hull_slider->setValue(target->getHull());
 }
 
 GuiAsteroidTweak::GuiAsteroidTweak(GuiContainer* owner)

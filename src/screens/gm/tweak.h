@@ -81,6 +81,7 @@ private:
     P<WarpJammer> target;
 
     GuiSlider* jammer_range_slider;
+    GuiSlider* hull_slider;
 public:
     GuiJammerTweak(GuiContainer* owner);
 
