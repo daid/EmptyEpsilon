@@ -298,7 +298,10 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getJumpDelay()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDelay);
     /// Returns the currently set jump distance.
-    /// Example: ship:getJumpDistance()
+    /// Returns 0 if the ship hasn't yet initiated a jump.
+    /// Example: 
+    /// -- Ship has initiated a 10U jump
+    /// ship:getJumpDistance() -- returns 10000
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDistance);
     /// Returns whether this SpaceShip has a warp drive.
     /// Example: ship:hasWarpDrive()
