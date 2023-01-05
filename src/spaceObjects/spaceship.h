@@ -375,6 +375,8 @@ public:
         impulse_max_speed = forward_speed; 
         impulse_max_reverse_speed = reverse_speed.value_or(forward_speed);
     }
+    float getImpulseRequest() { return impulse_request; }
+    float getImpulseActive() { return current_impulse; }
     float getSystemCoolantRate(ESystem system) const { if (system >= SYS_COUNT) return 0.f; if (system <= SYS_None) return 0.f; return systems[system].coolant_rate_per_second; }
     void setSystemCoolantRate(ESystem system, float rate) { if (system >= SYS_COUNT) return; if (system <= SYS_None) return; systems[system].coolant_rate_per_second = rate; }
     float getRotationMaxSpeed() { return turn_speed; }
@@ -386,9 +388,17 @@ public:
         impulse_reverse_acceleration = reverse_acceleration.value_or(acceleration);
     }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
+    float getCombatManeuverBoostRequest() { return combat_maneuver_boost_request; }
+    float getCombatManeuverBoostActive() { return combat_maneuver_boost_active; }
+    float getCombatManeuverStrafeRequest() { return combat_maneuver_strafe_request; }
+    float getCombatManeuverStrafeActive() { return combat_maneuver_strafe_active; }
     bool hasJumpDrive() { return has_jump_drive; }
     void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
     void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
+    float getJumpDriveCharge() { return jump_drive_charge; }
+    void setJumpDriveCharge(float charge) { jump_drive_charge = charge; }
+    float getJumpDelay() { return jump_delay; }
+    float getJumpDistance() { return jump_distance; }
     bool hasWarpDrive() { return has_warp_drive; }
     void setWarpDrive(bool has_warp)
     {
@@ -409,10 +419,9 @@ public:
         } else {
             return 0.0f;
         }
-     }
-    float getJumpDriveCharge() { return jump_drive_charge; }
-    void setJumpDriveCharge(float charge) { jump_drive_charge = charge; }
-    float getJumpDelay() { return jump_delay; }
+    }
+    float getWarpRequest() { return warp_request; }
+    float getWarpActive() { return current_warp; }
 
     float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
     float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }

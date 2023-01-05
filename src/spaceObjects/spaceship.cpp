@@ -225,6 +225,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// ship:setImpulseMaxSpeed(30,20) -- sets the max forward speed to 30 and reverse to 20
     /// ship:setImpulseMaxSpeed(30) -- sets the max forward and reverse speed to 30
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setImpulseMaxSpeed);
+    /// Returns the requested impulse percentage, as a value between -1.0 (full reverse) and 1.0 (full ahead).
+    /// Example: ship:getImpulseCurrent()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseRequest);
+    /// Returns the current impulse percentage, as a value between -1.0 (full reverse) and 1.0 (full ahead).
+    /// When this value differs from the requested value, the ship is accelerating or decelerating toward the requested value.
+    /// Example: ship:getImpulseActive()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getImpulseActive);
     /// Returns this SpaceShip's maximum rotational speed, in degrees per second?
     /// Example: ship:getRotationMaxSpeed()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getRotationMaxSpeed);
@@ -247,6 +254,20 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
     /// Example: ship:setCombatManeuver(400,250) -- sets boost capacity to 400 and lateral to 250
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setCombatManeuver);
+    /// Returns the requested combat maneuver boost value.
+    /// Example: ship:getCombatManeuverBoostRequest()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getCombatManeuverBoostRequest);
+    /// Returns the requested combat maneuver strafe value.
+    /// Example: ship:getCombatManeuverStrafeRequest()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getCombatManeuverStrafeRequest);
+    /// Returns the current combat maneuver boost value.
+    /// When this value differs from the requested value, the ship is accelerating or decelerating toward the requested value.
+    /// Example: ship:getCombatManeuverBoostActive()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getCombatManeuverBoostActive);
+    /// Returns the current combat maneuver strafe value.
+    /// When this value differs from the requested value, the ship is accelerating or decelerating toward the requested value.
+    /// Example: ship:getCombatManeuverStrafeActive()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getCombatManeuverStrafeActive);
     /// Returns whether the SpaceShip has a jump drive.
     /// Example: ship:hasJumpDrive()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasJumpDrive);
@@ -276,6 +297,9 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// System effectiveness can modify this delay.
     /// Example: ship:getJumpDelay()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDelay);
+    /// Returns the currently set jump distance.
+    /// Example: ship:getJumpDistance()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getJumpDistance);
     /// Returns whether this SpaceShip has a warp drive.
     /// Example: ship:hasWarpDrive()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, hasWarpDrive);
@@ -292,6 +316,13 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Actual warp speed can be modified by "warp" system effectiveness.
     /// Example: ship:getWarpSpeed();
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWarpSpeed);
+    /// Returns the requested warp level.
+    /// Example: ship:getWarpRequest()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWarpRequest);
+    /// Returns the current warp level.
+    /// When this value differs from the requested value, the ship is accelerating or decelerating toward the requested value.
+    /// Example: ship:getWarpActive()
+    REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getWarpActive);
     /// Returns the arc, in degrees, for the BeamWeapon with the given index on this SpaceShip.
     /// Example: ship:getBeamWeaponArc(0); -- returns beam weapon 0's arc
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getBeamWeaponArc);
