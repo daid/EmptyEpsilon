@@ -490,7 +490,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
     (new GuiLabel(three, "CREW_POSITION_SELECT_LABEL", tr("Alternative options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setMargins(15, 0);
     layout = new GuiElement(three, "");
     layout->setMargins(25, 50)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    for(int n=int(singlePilot) + 1; n<int(max_crew_positions); n++)
+    for(int n=int(singlePilot) + 1; n<int(shipWindow); n++)
         create_crew_position_button(layout, n);
 
     // Main screen controls button
@@ -534,7 +534,7 @@ void CrewPositionSelection::onUpdate()
     bool any_selected = main_screen_button->getValue() || window_button->getValue() || topdown_button->getValue();
     // If a position already has a player on the currently selected player ship,
     // indicate that on the button.
-    for(int n = 0; n < max_crew_positions; n++)
+    for(int n = 0; n < shipWindow; n++)
     {
         string button_text = getCrewPositionName(ECrewPosition(n));
         if (my_spaceship)
@@ -565,7 +565,7 @@ void CrewPositionSelection::onUpdate()
 
 void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
 {
-    for(int n = 0; n < max_crew_positions; n++)
+    for(int n = 0; n < shipWindow; n++)
     {
         if (crew_position_button[n] != button)
         {
