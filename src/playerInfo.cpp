@@ -1,6 +1,8 @@
 #include <i18n.h>
 #include "playerInfo.h"
+#include "preferenceManager.h"
 #include "screens/mainScreen.h"
+#include "screens/windowScreen.h"
 #include "screens/crewStationScreen.h"
 
 #include "screens/crew6/helmsScreen.h"
@@ -177,6 +179,12 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
     {
         new ScreenMainScreen(render_layer);
     }
+    else if (crew_position[shipWindow] & (1 << monitor_index))
+    {
+        uint8_t window_flags = PreferencesManager::get("ship_window_flags", "1").toInt();
+        float window_angle = PreferencesManager::get("ship_window_angle", "0").toFloat();
+        new WindowScreen(render_layer, window_angle, window_flags);
+    }
     else
     {
         CrewStationScreen* screen = new CrewStationScreen(render_layer, bool(main_screen & (1 << monitor_index)));
@@ -265,6 +273,7 @@ string getCrewPositionName(ECrewPosition position)
     case altRelay: return tr("station","Strategic Map");
     case commsOnly: return tr("station","Comms");
     case shipLog: return tr("station","Ship's Log");
+    case shipWindow: return tr("station","Ship Window");
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -288,6 +297,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case altRelay: return "";
     case commsOnly: return "";
     case shipLog: return "";
+    case shipWindow: return "";
     default: return "ErrUnk: " + string(position);
     }
 }
@@ -334,6 +344,8 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = commsOnly;
     else if (str == "shiplog")
         cp = shipLog;
+    else if (str == "shipwindow")
+        cp = shipWindow;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
 }
