@@ -28,6 +28,8 @@ msgstr ""
 "- Difficulté : … (variable)\n"
 "- Vaisseaux joueurs : 1\n"
 "\n"
+"TRADUCTION EN COURS 32%\n"
+"\n"
 "Mission : Soutenez les activités de recherche dans la ceinture Zeta et "
 "protégez les chercheurs qui y travaillent.\n"
 "\n"
@@ -83,8 +85,8 @@ msgid ""
 msgstr ""
 "Bonjour,\n"
 "Écoutez, nous sommes pas mal occupés à rechercher des trés…..Euh je veux "
-"dire, à mener des recherches dans cette nébuleuse. Pouvons-nous vous "
-"rappeler ?"
+"dire, à mener des recherches dans cette nébuleuse.\n"
+"Pouvez-vous nous rappeler ?"
 
 #: scripts/scenario_30_brokenglass.lua:334
 msgctxt "nebula-bonuses"
@@ -96,7 +98,7 @@ msgstr ""
 #: scripts/scenario_30_brokenglass.lua:334
 msgctxt "nebula-bonuses"
 msgid "It seems to have changed shape."
-msgstr ""
+msgstr "Elle semble avoir changé de forme."
 
 #: scripts/scenario_30_brokenglass.lua:342
 msgctxt "nebula-bonuses"
@@ -192,6 +194,10 @@ msgid ""
 "The SW Checkpoint is under attack. Don't mess around, get down there and "
 "help them!"
 msgstr ""
+"ALERTE ROUGE!\n"
+"\n"
+"Le point de contrôle SW est attaqué. Ceci n'est pas un exercice.\n"
+"Arrêtez ce que vous faites et partez immédiatement les aider !"
 
 #: scripts/scenario_30_brokenglass.lua:1050
 msgctxt "defence-comms"
@@ -505,18 +511,21 @@ msgstr ""
 #: scripts/scenario_30_brokenglass.lua:1382
 msgctxt "defence-comms"
 msgid "Your orders are to follow the convoy to see where it goes"
-msgstr ""
+msgstr "Vos ordres sont de suivre l'essaim afin de voir où il va."
 
 #: scripts/scenario_30_brokenglass.lua:1385
 msgctxt "defence-comms"
 msgid "Your orders are to join a convoy and infiltrate the drone nests."
 msgstr ""
+"Vos ordres sont de rejoindre une escorte et d'infiltrer le nid de drones."
 
 #: scripts/scenario_30_brokenglass.lua:1388
 msgctxt "defence-comms"
 msgid ""
 "Your orders are to scan those beacons and find the defence grid controller"
 msgstr ""
+"Vos ordres sont de scanner ces balises et de trouver le contrôleur de la "
+"grille de défense."
 
 #: scripts/scenario_30_brokenglass.lua:1394
 msgctxt "defence-comms"
@@ -536,6 +545,12 @@ msgid ""
 "any resistance that might remain, but we're calling this a job well done.\n"
 "\n"
 msgstr ""
+"Excellent travail, capitaine !\n"
+"\n"
+"La destruction du contrôle central a éliminé toutes les autres stations de "
+"drones et arrêté les escortes dans leur élan ! Bien sûr, vous êtes autorisé "
+"à nettoyer toute résistance qui pourrait subsister. Nous appelons cela un "
+"travail bien fait.\n"
 
 #: scripts/scenario_30_brokenglass.lua:1408
 msgctxt "defence-comms"
@@ -545,7 +560,7 @@ msgid ""
 "We shouldn't talk over this channel, please dock to the station when you "
 "have a chance."
 msgstr ""
-"Bonjour soldat,\n"
+"Bonjour officier,\n"
 "\n"
 "Nous ne devrions pas communiquer sur ce canal, veuillez plutôt vous amarrer "
 "à notre station lorsque vous le pourrez."
@@ -559,11 +574,17 @@ msgid ""
 "done. No rush, just make sure you visit each checkpoint in order, and we'll "
 "let you know if anything more pressing comes up."
 msgstr ""
+"Bienvenue à bord.\n"
+"\n"
+"Nous avons besoin de vous pour patrouiller dans la zone. Ce n'est pas un "
+"travail passionnant, mais il faut le faire. Pas de précipitation, assurez-"
+"vous simplement de visiter chaque point de contrôle dans l'ordre, et nous "
+"vous ferons savoir si quelque chose de plus pressant se présente."
 
 #: scripts/scenario_30_brokenglass.lua:1417
 msgctxt "defence-comms"
 msgid "Okay. We're ready to start the patrol"
-msgstr ""
+msgstr "Bien reçu. Nous sommes prêts à commencer la patrouille"
 
 #: scripts/scenario_30_brokenglass.lua:1421
 msgctxt "defence-comms"
@@ -584,16 +605,33 @@ msgid ""
 "Hop in that drone ship, find the beacons, and get close enough to scan them "
 "- EASY!"
 msgstr ""
+"Bienvenue à bord, capitaine.\n"
+"\n"
+"Nous avons suivi cet essaim jusqu'à un énorme nid de stations de drones à "
+"l'ouest. Ces stations font toutes partie d'une grille de défense Fantôme de "
+"proximité. Nous avons réussi à identifier certaines balises qui semblent "
+"être liées à son fonctionnement. Nous espérons qu'en pouvant les examiner de "
+"plus près, nous pourrions peut-être trouver comment désactiver le contrôle "
+"central de la grille.\n"
+"\n"
+"Il y a un drone Fantôme amarré ici que vous pourrez utiliser pour infiltrer "
+"le nid. Si vous arrivez avec une escorte, l'accès devrait vous être "
+"automatiquement accordé et nous pensons que les défenses de proximité "
+"resteront désactivées tant que vous resterez dans la zone. Bien sûr, si vous "
+"commencez à tirer, toutes nos hypothèses voleront en éclats.\n"
+"\n"
+"Montez à bord de ce drone, trouvez ces balises et rapprochez-vous "
+"suffisamment pour les scanner - FACILE !"
 
 #: scripts/scenario_30_brokenglass.lua:1428
 msgctxt "defence-comms"
 msgid "We're ready to infiltrate the drone nest"
-msgstr ""
+msgstr "Nous sommes prêts à infiltrer le nid de drones Monsieur"
 
 #: scripts/scenario_30_brokenglass.lua:1429
 msgctxt "defence-comms"
 msgid "(Object) Isn't that a treaty violation!?"
-msgstr ""
+msgstr "[Objection] Monsieur, n'est-ce pas une violation du traité !? ..."
 
 #: scripts/scenario_30_brokenglass.lua:1430
 msgctxt "defence-comms"
@@ -607,11 +645,19 @@ msgid ""
 "\n"
 "However you want to do it, you need to find that central control. Get on it!"
 msgstr ""
+"… Il me semble que décoder des communications des systèmes de défense "
+"extraterrestres est une violation de l'accord de citoyenneté militarisée de "
+"l'espace profond (DMCA), Monsieur !?\n"
+"[...]\n"
+"Capitaine, êtes-vous à la recherche d'un prix de bon samaritain ou quelque "
+"chose du genre ??? SORTEZ D'ICI AVEC CE CHARABIA LÉGAL.\n"
+"Peu importe la façon dont vous souhaitez procéder, vous devez trouver ce "
+"contrôle central. OCCUPEZ-VOUS EN !!!"
 
 #: scripts/scenario_30_brokenglass.lua:1436
 msgctxt "defence-comms"
 msgid "Okay, we'll figure it out."
-msgstr ""
+msgstr "Entendu Monsieur, Nous y allons de ce pas"
 
 #: scripts/scenario_30_brokenglass.lua:1441
 msgctxt "defence-comms"
@@ -817,7 +863,7 @@ msgid ""
 "If you're not busy, please drop by to learn more about our projects."
 msgstr ""
 "Bonjour,\n"
-"Nous sommes la station qui coordonne les activités de recherche dans les "
+"Sur cette station nous coordonnons les activités de recherche dans les "
 "nébuleuses voisines.\n"
 "\n"
 "Si vous n'êtes pas occupé, s'il vous plaît passez nous voir pour en savoir "
@@ -1138,9 +1184,8 @@ msgid "Fly into the Nebula and find Dr. Hendrix"
 msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:1760
-#, fuzzy
 msgid "Sensors have been upgraded."
-msgstr "Les moteurs de %s ont été réparés."
+msgstr ""
 
 #: scripts/scenario_30_brokenglass.lua:1802
 msgctxt "defence-comms"
@@ -1150,11 +1195,16 @@ msgid ""
 "Start at the checkpoint in the North West. You'll need to dock at each "
 "station before proceeding to the next."
 msgstr ""
+"Formidable !\n"
+"\n"
+"Commencez donc par le point de contrôle au nord-ouest. Vous devrez vous "
+"amarrer à chaque station avant de passer à la suivante afin de vous assurer "
+"qu'il n'y a aucun problème à bord."
 
 #: scripts/scenario_30_brokenglass.lua:1833
 msgctxt "defence-comms"
 msgid "Please proceed to "
-msgstr ""
+msgstr "Veuillez maintenant procéder à l'inspection du point de contrôle :  "
 
 #: scripts/scenario_30_brokenglass.lua:1834
 msgctxt "defence-comms"
@@ -1173,6 +1223,16 @@ msgid ""
 "convoy is extremely risky. Keep your distance, but we'd like to know where "
 "they are going."
 msgstr ""
+"Beau boulot capitaine !\n"
+"\n"
+"Vous avez repoussé les attaques et le point de contrôle sud-ouest, SW "
+"Checkpoint, est en sécurité pour le moment, mais les services de "
+"renseignement nous rapportent à l'instant qu'un énorme essaim de drones "
+"Fantômes se trouvant dans vos environs se dirigent en direction du nord-"
+"ouest.\n"
+"\n"
+"ENQUÊTEZ MAIS N'ENGAGEZ PAS LE COMBAT ! Attaquer cet essaim est extrêmement "
+"risqué. Gardez vos distances, mais nous aimerions savoir où ils vont."
 
 #: scripts/scenario_30_brokenglass.lua:1888
 msgctxt "defence-comms"
@@ -1185,6 +1245,13 @@ msgid ""
 "Your assistance is required with a secret mission. Dock with us to receive "
 "further instructions when you're ready."
 msgstr ""
+"Salutations capitaine.\n"
+"\n"
+"Grâce à vous nous avons les informations dont nous avions besoin sur cet "
+"essaim. Nous vous déconseillons fortement de vous rapprocher plus avant.\n"
+"\n"
+"Votre aide est maintenant requise pour une mission classée secret défense. "
+"Quand vous serez prêt, amarrez-vous à nous pour recevoir vos instructions."
 
 #: scripts/scenario_30_brokenglass.lua:1936
 msgctxt "wormhole-comms"
@@ -1289,16 +1356,20 @@ msgid ""
 "Your cover has been blown and the proximity defence system remains active. "
 "We suggest leaving and trying again to arrive with a future convoy."
 msgstr ""
+"ATTENTION,\n"
+"Votre couverture est grillée et le système de défense de proximité reste "
+"actif. Nous vous suggérons de quitter les lieux et d'essayer à nouveau "
+"d'arriver avec une future escorte."
 
 #: scripts/scenario_30_brokenglass.lua:2091
 msgctxt "defence-comms"
 msgid "Our cover has been blown"
-msgstr ""
+msgstr "Notre couverture a été grillée."
 
 #: scripts/scenario_30_brokenglass.lua:2096
 msgctxt "defence-comms"
 msgid "We should be good to try again"
-msgstr ""
+msgstr "Nous sommes bons pour essayer à nouveau."
 
 #: scripts/scenario_30_brokenglass.lua:2130
 msgctxt "drone-comms"
@@ -1337,6 +1408,8 @@ msgid ""
 "This ship will not activate the drone station proximity defences as long as "
 "you arrive with a convoy."
 msgstr ""
+"Ce vaisseau n'activera pas les défenses de proximité des stations de drones "
+"tant que vous serez avec une escorte."
 
 #: scripts/scenario_30_brokenglass.lua:2276
 msgctxt "drone-ship"
@@ -1359,6 +1432,10 @@ msgid ""
 "The Ghosts drone security beacons. If we scan them all, we should be able to "
 "find the control station. We'll need to get pretty close."
 msgstr ""
+"Une balise de sécurité des drones Fantômes.\n"
+"En les scannant toutes, nous devrions pouvoir trouver la station de "
+"contrôle.\n"
+"Il faut s'en approcher."
 
 #: scripts/scenario_30_brokenglass.lua:2329
 msgctxt "security-beacons"
@@ -1366,6 +1443,8 @@ msgid ""
 "The beamforming configuration from this beacon will help the boffins "
 "triangulate the location of the central control."
 msgstr ""
+"La configuration de formation de faisceaux de cette balise aidera nos "
+"scientifiques à trianguler l'emplacement du contrôle central."
 
 #: scripts/scenario_30_brokenglass.lua:2338
 msgctxt "defence-comms"
@@ -1377,12 +1456,17 @@ msgid ""
 "\n"
 "  You must destroy station "
 msgstr ""
+"Excellent travail !\n"
+"\n"
+"Nos scientifiques ont pu rassembler les données et déterminer d'où viennent "
+"les commandes.\n"
+"\n"
+"  Vous devez détruire la station "
 
 #: scripts/scenario_30_brokenglass.lua:2343
-#, fuzzy
 msgctxt "defence-comms"
 msgid "The drone control station is "
-msgstr "Entendu. Où se situe la station %s ?"
+msgstr "La station de contrôle des drones est"
 
 #: scripts/scenario_30_brokenglass.lua:2412
 msgid "Too busy to talk today, Captain."
