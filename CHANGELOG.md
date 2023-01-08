@@ -16,6 +16,8 @@
 
 - Mission time clock now uses `hh:mm:ss`-formatted time #1773
 - Stats on Operations screen resized to match other screens #1774
+- Build changes
+  - RPM CPack builds with `-DCPACK_GENERATOR="RPM"` now set resource paths #1840
 - API changes
   - HTTP script access now uses the server-selected player ship as the default #1776
 - Translation updates
