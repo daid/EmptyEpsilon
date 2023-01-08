@@ -1,4 +1,4 @@
-if(CPACK_GENERATOR MATCHES "DEB")
+if(CPACK_GENERATOR MATCHES "DEB" OR CPACK_GENERATOR MATCHES "RPM")
     # On UNIX, the CMAKE_INSTALL_PREFIX will default to /usr/local.
     # But the debian *package* will default to put everything under /usr.
     # Since the resource path are hardcoded inside EE, make sure they line up.
