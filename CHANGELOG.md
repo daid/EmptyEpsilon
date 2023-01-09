@@ -14,6 +14,7 @@
 
 ### Changed
 
+- Added and edited scripting docs for SpaceShips #1820
 - Mission time clock now uses `hh:mm:ss`-formatted time #1773
 - Stats on Operations screen resized to match other screens #1774
 - Build changes
