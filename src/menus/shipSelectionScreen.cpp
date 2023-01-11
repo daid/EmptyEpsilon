@@ -41,6 +41,18 @@ public:
         label->setPosition(0, 40, sp::Alignment::TopCenter);
         entry = new GuiTextEntry(entry_box, "PASSWORD_ENTRY", "");
         entry->setPosition(20, 0, sp::Alignment::CenterLeft)->setSize(400, 50);
+        entry->setHidePassword();
+        entry->enterCallback([this](string text) {
+            if (confirmation->isVisible())
+            {
+                hide();
+                on_ready();
+            }
+            if (text != "")
+            {
+                checkPassword();
+            }
+        });
         cancel = new GuiButton(entry_box, "PASSWORD_CANCEL_BUTTON", tr("button", "Cancel"), [this]() {
             // Reset the dialog.
             entry->setText("");
@@ -52,22 +64,7 @@ public:
 
         entry_ok = new GuiButton(entry_box, "PASSWORD_ENTRY_OK", tr("Ok"), [this]()
         {
-            string password = entry->getText().upper();
-            if (this->on_password_check(password))
-            {
-                // Notify the player.
-                label->setText(tr("Control code accepted.\nGranting access."));
-                // Reset and hide the password field.
-                entry->setText("");
-                entry->hide();
-                cancel->hide();
-                entry_ok->hide();
-                // Show a confirmation button.
-                confirmation->show();
-            } else {
-                label->setText(tr("Incorrect control code. Re-enter code:"));
-                entry->setText("");
-            }
+            checkPassword();
         });
         entry_ok->setPosition(420, 0, sp::Alignment::CenterLeft)->setSize(160, 50);
 
@@ -80,13 +77,14 @@ public:
         confirmation->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(250, 50)->hide();
     }
 
-    void open(string label, std::function<bool(string)> on_password_check, std::function<void()> on_ready, std::function<void()> on_cancel)
+    void open(string label, string preset_password, std::function<bool(string)> on_password_check, std::function<void()> on_ready, std::function<void()> on_cancel)
     {
         this->label->setText(label);
         this->on_password_check = on_password_check;
         this->on_ready = on_ready;
         this->on_cancel = on_cancel;
 
+        entry->setText(preset_password);
         entry->show();
         cancel->show();
         entry_ok->show();
@@ -98,11 +96,32 @@ private:
     std::function<void()> on_ready;
     std::function<void()> on_cancel;
 
+    void checkPassword() {
+        string password = entry->getText().upper();
+        if (this->on_password_check(password))
+        {
+            // Notify the player.
+            label->setText(tr("Control code accepted.\nGranting access."));
+            // Reset and hide the password field.
+            entry->setText("");
+            entry->hide();
+            cancel->hide();
+            entry_ok->hide();
+            // Show a confirmation button.
+            confirmation->show();
+        } else {
+            label->setText(tr("Incorrect control code. Re-enter code:"));
+            entry->setText("");
+        }
+    }
+
     GuiLabel* label;
-    GuiTextEntry* entry;
     GuiButton* cancel;
     GuiButton* entry_ok;
     GuiButton* confirmation;
+
+public:
+    GuiTextEntry* entry;
 };
 
 ShipSelectionScreen::ShipSelectionScreen()
@@ -133,7 +152,8 @@ ShipSelectionScreen::ShipSelectionScreen()
             if (gameGlobalInfo->gm_control_code.length() > 0)
             {
                 LOG(INFO) << "Player selected gm mode, which has a control code.";
-                password_dialog->open(tr("Enter the GM control code:"), [this](string code) {
+                focus(password_dialog->entry);
+                password_dialog->open(tr("Enter the GM control code:"), "", [this](string code) {
                     return code == gameGlobalInfo->gm_control_code;
                 }, [this](){
                     my_player_info->commandSetShipId(-1);
@@ -159,7 +179,8 @@ ShipSelectionScreen::ShipSelectionScreen()
         if (gameGlobalInfo->gm_control_code.length() > 0)
         {
             LOG(INFO) << "Player selected Spectate mode, which has a control code.";
-            password_dialog->open(tr("Enter the GM control code:"), [this](string code) {
+            focus(password_dialog->entry);
+            password_dialog->open(tr("Enter the GM control code:"), "", [this](string code) {
                 return code == gameGlobalInfo->gm_control_code;
             }, [this](){
                 my_player_info->commandSetShipId(-1);
@@ -269,11 +290,13 @@ ShipSelectionScreen::ShipSelectionScreen()
                 left_container->hide();
                 right_container->hide();
                 // Show the control code entry dialog.
-                password_dialog->open(tr("Enter this ship's control code:"), [this, ship](string code) {
+                focus(password_dialog->entry);
+                password_dialog->open(tr("Enter this ship's control code:"), my_player_info->last_ship_password, [this, ship](string code) {
                     return ship && ship->control_code == code;
                 }, [this, ship](){
                     my_player_info->commandSetShipId(ship->getMultiplayerId());
                     crew_position_selection_overlay->show();
+                    my_player_info->last_ship_password = ship->control_code;
                     left_container->show();
                     right_container->show();
                 }, [this](){

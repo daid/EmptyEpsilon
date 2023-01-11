@@ -41,6 +41,7 @@ PlayerInfo::PlayerInfo()
     ship_id = -1;
     client_id = -1;
     main_screen_control = 0;
+    last_ship_password = "";
     registerMemberReplication(&client_id);
 
     for(int n=0; n<max_crew_positions; n++)
@@ -60,6 +61,7 @@ void PlayerInfo::reset()
 {
     ship_id = -1;
     main_screen_control = 0;
+    last_ship_password = "";
 
     for(int n=0; n<max_crew_positions; n++)
         crew_position[n] = 0;

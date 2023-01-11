@@ -45,6 +45,7 @@ public:
     uint32_t main_screen_control = 0;
     int32_t ship_id;
     string name;
+    string last_ship_password;
 
     PlayerInfo();
 
