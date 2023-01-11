@@ -3203,20 +3203,18 @@ msgstr "Bouclier %s : %d%%\n"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%.1f rep)"
-msgstr ""
-"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%.1f rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%.1f rep)"
 
 #: scripts/scenario_49_allies.lua:4609
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request supplies."
 msgstr ""
-"Vous devez définir un marqueur avant de faire une demande de "
-"réapprovisionnement."
+"Vous devez définir un marqueur avant de faire une demande de ravitaillement."
 
 #: scripts/scenario_49_allies.lua:4611
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_49_allies.lua:4613 scripts/scenario_49_allies.lua:4639
 #: scripts/scenario_49_allies.lua:4660 scripts/scenario_49_allies.lua:4681
@@ -3231,7 +3229,7 @@ msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward waypoint %i"
 msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
-"réapprovisionnement au marqueur %i."
+"ravitaillement au marqueur %i."
 
 #: scripts/scenario_49_allies.lua:4623 scripts/scenario_49_allies.lua:4646
 #: scripts/scenario_49_allies.lua:4667 scripts/scenario_49_allies.lua:4688

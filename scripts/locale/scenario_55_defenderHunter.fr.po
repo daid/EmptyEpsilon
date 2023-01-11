@@ -3336,20 +3336,18 @@ msgstr "Informations générales sur la station"
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr ""
-"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
 
 #: scripts/scenario_55_defenderHunter.lua:6687
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
-"Vous devez définir un marqueur avant de faire une demande de "
-"réapprovisionnement."
+"Vous devez définir un marqueur avant de faire une demande de ravitaillement."
 
 #: scripts/scenario_55_defenderHunter.lua:6689
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_55_defenderHunter.lua:6691
 #: scripts/scenario_55_defenderHunter.lua:6717
@@ -3364,7 +3362,7 @@ msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
-"réapprovisionnement au marqueur %d."
+"ravitaillement au marqueur %d."
 
 #: scripts/scenario_55_defenderHunter.lua:6701
 #: scripts/scenario_55_defenderHunter.lua:6722
