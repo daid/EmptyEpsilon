@@ -3,7 +3,7 @@
 ---
 ---Plan for 3+ hours on Easy, with harder difficulties taking longer
 ---
----Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2022
+---Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2023
 -- Type: Replayable Mission
 -- Setting[Difficulty]: Configures the difficulty in the scenario. Default is Easy
 -- Difficulty[Easy|Default]: Minor enemy resistance and easier missions.
