@@ -1,9 +1,12 @@
 -- Name: Broken Glass
 -- Description: Support research activities in the Zeta Belt and keep the researchers safe. Difficulty balances and 10 achievements to complete.
 ---
----Plan for 3+ hours on Easy, with harder difficulties taking longer
+---Duration: Plan for 3+ hours on Easy, with harder difficulties taking longer
+---Player ships: 1
 ---
 ---Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2023
+---Created: Dec2022
+---Feedback: USN Discord: https://discord.gg/7Kr32ezJFF in the #ee-scenario-feedback channel
 -- Type: Replayable Mission
 -- Setting[Difficulty]: Configures the difficulty in the scenario. Default is Easy
 -- Difficulty[Easy|Default]: Minor enemy resistance and easier missions.
