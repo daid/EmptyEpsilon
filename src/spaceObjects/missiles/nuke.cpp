@@ -3,7 +3,11 @@
 #include "spaceObjects/explosionEffect.h"
 #include "pathPlanner.h"
 
-/// Nuke missile
+/// A HomingMissile is a MissileWeapon that pursues a target and, upon explosion, deals a base of 30-160 kinetic damage to all SpaceObjects within its 1U base blast radius.
+/// It inherits functions and behaviors from its parent MissileWeapon class.
+/// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
+/// AI behaviors attempt to avoid EMPMissiles.
+/// Example: nuke_missile = Nuke:setPosition(1000,1000):setTarget(enemy):setLifetime(40):setMissileSize("large")
 REGISTER_SCRIPT_SUBCLASS(Nuke, MissileWeapon)
 {
   //registered for typeName and creation

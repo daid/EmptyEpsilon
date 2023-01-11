@@ -9,26 +9,37 @@
 #include "i18n.h"
 
 
-/// Base class for every missile (mines are not missiles)
-/// You cannot create a missile in script with this class, use derived classes
-/// like HomingMissile, HVLI etc.
+/// A MissileWeapon is a self-propelled weapon that can be fired from a WeaponTube at either a target SpaceObject or on a trajectory.
+/// MissileWeapons that can explode detonate with a blast radius at either the end of its lifetime or upon collision with another collisionable SpaceObject.
+/// MissileWeapon-class objects can't be created directly. Use these functions with subclasses derived from MissileWeapon, such as HomingMissile, HVLI, etc.
+/// (While also launchable from WeaponTubes, Mines are not MissileWeapons. See the Mine class.)
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(MissileWeapon, SpaceObject)
 {
-  /// Get the missile's owner's object.
+  /// Returns this MissileWeapon owner's SpaceObject.
+  /// Example: missile:getOwner()
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getOwner);
-  /// Get the missile's target object.
+  /// Returns this MissileWeapon's target.
+  /// Example: missile:getTarget()
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getTarget);
-  /// Must be an existing target, else does nothing. It does not check if really targetable or not.
+  /// Sets this MissileWeapon's target.
+  /// The target must already exist. If it does not, this has no effect.
+  /// MissileWeapon:setTarget() does NOT check whether the target can be targeted by a player.
+  /// Example: missile:setTarget(enemy)
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setTarget);
-  /// Lifetime is a number in seconds
+  /// Returns this MissileWeapon's lifetime, in seconds.
+  /// Example: missile:getLifetime()
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getLifetime);
-  /// Lifetime is a number in seconds
+  /// Sets this MissileWeapon's lifetime, in seconds.
+  /// A missile that can explode does so at the end of its lifetime if it don't hit another collisionable SpaceObject first.
+  /// Example: missile:setLifetime(5.0)
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setLifetime);
-  /// Set the missile size as for tube size.
-  /// Valid sizes: see EMissileSizes
+  /// Returns this MissileWeapon's size as an EMissileSizes string.
+  /// Example: missile:getMissileSize()
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, getMissileSize);
-  /// Get the missile size as for tube size.
-  /// Valid sizes: see EMissileSizes
+  /// Sets this MissileWeapon's size.
+  /// Size modifies a missile's maneuverability, speed, blast radius, lifetime, and damage.
+  /// Smaller missiles are weaker, faster, and more nimble. Larger missiles are more powerful, slower, and have a longer lifetime.
+  /// Example: missile:setMissileSize("large") -- sets this missile to be large
   REGISTER_SCRIPT_CLASS_FUNCTION(MissileWeapon, setMissileSize);
 }
 
