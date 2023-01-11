@@ -1,9 +1,14 @@
 -- Name: Broken Glass
 -- Description: Support research activities in the Zeta Belt and keep the researchers safe. Difficulty balances and 10 achievements to complete.
 ---
----Plan for 3+ hours on Easy, with harder difficulties taking longer
+---Duration: Plan for 3+ hours on Easy, with harder difficulties taking longer
+---Player ships: 1
+---
+---Author: Chris Sibbit. Revisions: Xansta, Muerte Jan2023
+---Created: Dec2022
+---Feedback: USN Discord: https://discord.gg/7Kr32ezJFF in the #ee-scenario-feedback channel
 -- Type: Replayable Mission
--- Setting[Difficulty]: Configures the difficulty in the scenario.
+-- Setting[Difficulty]: Configures the difficulty in the scenario. Default is Easy
 -- Difficulty[Easy|Default]: Minor enemy resistance and easier missions.
 -- Difficulty[Medium]: More robust resistance with more risk (takes longer).
 -- Difficulty[Hard]: Significant enemy resistance.
@@ -817,25 +822,40 @@ function InitPlayer()
 end
 
 function InitGM ()
-  addGMFunction("StartMissionLost", StartMissionLost)
-  addGMFunction("FinishMissionLost",FinishMissionLost)
-  addGMFunction("StartMissionPatrol",function ()
-    Defence_station.mission_state = "patrol attack"
-    SpawnPatrolEnemies()
-  end)
-  addGMFunction("StartMissionSpareParts",StartMissionSpareParts)
-  addGMFunction("FinishMissionSpareParts",FinishMissionSpareParts)
-  addGMFunction("StartMissionDroneNest", StartMissionDroneNest)
-  addGMFunction("SpawnConvoyEnemies", SpawnConvoyEnemies)
-  addGMFunction("FinishMissionDroneNest",FinishMissionDroneNest)
-  addGMFunction("StartMissionRepair", function ()
-    Wormhole_station.tier2_attack_countdown = 0
-    Wormhole_station.tier2_mission_state = "wait for attack"
-  end)
-  addGMFunction("FinishMissionRepair",FinishMissionRepair)
-  addGMFunction("SpawnHarrasment", SpawnHarrasment)
+	clearGMFunctions()
+	addGMFunction(_("buttonGM","+Start Mission"),gmStartMission)
+	addGMFunction(_("buttonGM","+Finish Mission"),gmFinishMission)
+	addGMFunction(_("buttonGM","+Spawn Stuff"),gmSpawnStuff)
 end
-
+function gmSpawnStuff()
+	clearGMFunctions()
+	addGMFunction(_("buttonGM","-From Spawn Stuff"),InitGM)
+	addGMFunction(_("buttonGM","Convoy Enemies"), SpawnConvoyEnemies)
+	addGMFunction(_("buttonGM","Harrasment"), SpawnHarrasment)
+end
+function gmFinishMission()
+	clearGMFunctions()
+	addGMFunction(_("buttonGM","-From Finish Mission"),InitGM)
+	addGMFunction(_("buttonGM","Lost"),FinishMissionLost)
+	addGMFunction(_("buttonGM","Spare Parts"),FinishMissionSpareParts)
+	addGMFunction(_("buttonGM","Drone Nest"),FinishMissionDroneNest)
+	addGMFunction(_("buttonGM","Repair"),FinishMissionRepair)
+end
+function gmStartMission()
+	clearGMFunctions()
+	addGMFunction(_("buttonGM","-From Start Mission"),InitGM)
+	addGMFunction(_("buttonGM","Lost"), StartMissionLost)
+	addGMFunction(_("buttonGM","Patrol"),function ()
+		Defence_station.mission_state = "patrol attack"
+		SpawnPatrolEnemies()
+	end)
+	addGMFunction(_("buttonGM","Spare Parts"),StartMissionSpareParts)
+	addGMFunction(_("buttonGM","Drone Nest"), StartMissionDroneNest)
+	addGMFunction(_("buttonGM","Repair"), function ()
+		Wormhole_station.tier2_attack_countdown = 0
+		Wormhole_station.tier2_mission_state = "wait for attack"
+	end)
+end
 function InitDroneStations()
   Defence_station.drones_think_were_friendly = false
   Defence_station.convoy_enemies = {}
@@ -1014,7 +1034,7 @@ function SpawnPatrolEnemies()
   Defence_station:sendCommsMessage(Player, _("defence-comms",[[RED ALERT!
 
 The SW Checkpoint is under attack. Don't mess around, get down there and help them!]]))
-  Player:addToShipLog("Defend the SW checkpoint", "Red")
+  Player:addToShipLog(_("shipLog","Defend the SW checkpoint"), "Red")
 end
 
 function SpawnConvoyEnemies()
@@ -1047,9 +1067,10 @@ function ConvoyGoAggro(__, instigator)
   if instigator ~= Player then return end
 
   if #Defence_station.convoy_enemies > 0 then
-    Defence_station:sendCommsMessage(Player, _("defence-comms", [[It looks like you've aggro'd the convoy.
-
-Good luck to you! Try to keep them from destroying our stations!]]))
+  	if Player.aggro_message == nil then
+	    Defence_station:sendCommsMessage(Player, _("defence-comms", "It looks like you've aggro'd the convoy.\nGood luck to you! Try to keep them from destroying our stations!"))
+	    Player.aggro_message = "sent"
+	end
   end
 
   Player:setFaction("Human Navy")
@@ -1128,7 +1149,7 @@ function KWGoAggro(self, instigator)
   end
   local repToLose = 10 * Difficulty
   Player:takeReputationPoints(repToLose)
-  Player:addToShipLog("We have lost "..repToLose.." reputation for breaking the treaty", "Red")
+  Player:addToShipLog(string.format(_("shipLog","We have lost %s reputation for breaking the treaty"),repToLose), "Red")
   Kw_mainStation:sendCommsMessage(Player, _([[You will regret this!
 
 You have violated our non-aggression treaty, and will soon regret your actions.]]))
@@ -1164,7 +1185,7 @@ function SpawnRepairEnemies()
   Wormhole_station:sendCommsMessage(Player, _("wormhole-comms",[[RED ALERT!
 
 Captain, a bomb has just gone off on our station and we are under attack from the Kraylor. We need your help immediately!]]))
-  Player:addToShipLog("Defend the Wormhole Station", "Red")
+  Player:addToShipLog(_("shipLog","Defend the Wormhole Station"), "Red")
 end
 
 function SpawnHarrasment()
@@ -1323,7 +1344,7 @@ function CommsColonyStation(comms_source, comms_target)
       if comms_target ~= Admin_station.hendrix_station then
         CHEEVOS["eyeondr"] = false
         HendrixHints(comms_target)
-        setCommsMessage(_("colony-comms", comms_target.hendrix_hint))
+        setCommsMessage(comms_target.hendrix_hint)
       else
         if not comms_source:isDocked(comms_target) then
           setCommsMessage(_("colony-comms", [[I.....zzzZ
@@ -1374,9 +1395,7 @@ function CommsDefenceStation(comms_source, comms_target)
     setCommsMessage(_("defence-comms", "Defend the SW Checkpoint now!"))
     return
   elseif Defence_station.mission_state == "patrolling" then
-    setCommsMessage(_("defence-comms", string.format([[You are on "patrol".
-
-See that you make it to %s next.]], Defence_station.next_station)))
+    setCommsMessage(string.format(_("defence-comms","You are on 'patrol'.\nSee that you make it to %s next."), Defence_station.next_station))
     return
   elseif Defence_station.mission_state == "drone convoy" and Defence_station.tier2_mission_state == nil then
     setCommsMessage(_("defence-comms", [[Your orders are to follow the convoy to see where it goes]]))
@@ -1393,12 +1412,7 @@ See that you make it to %s next.]], Defence_station.next_station)))
     if DroneShip ~= nil then
       extra_string = _("defence-comms", "We are keeping the 007, and you can continue to fly it, or switch back to the Propitious 1 at any time. We'll keep it docked here at the station for you.")
     end
-    setCommsMessage(_("defence-comms", [[Great work, Captain!
-
-Destroying the central control eliminated all the other drone stations and stopped the convoys in their tracks! Of course, you are authorized to mop up any resistance that might remain, but we're calling this a job well done.
-
-]])..extra_string)
-
+    setCommsMessage(string.format(_("defence-comms","Great work, Captain!\nDestroying the central control eliminated all the other drone stations and stopped the convoys in their tracks! Of course, you are authorized to mop up any resistance that might remain, but we're calling this a job well done.\n%s"),extra_string))
     return
   end
 
@@ -1467,33 +1481,7 @@ function CommsAdminStation(comms_source, comms_target)
   if Wormhole_station.tier2_mission_state == "done" then
     CheckCheevos()
     -- Does the _() translation work here?
-    setCommsMessage(_("admin-comms",[[VICTORY!
-
-Your tour of duty is complete and your accomplishments will be the talk of legends.
-
-CHEEVOS!
-
-* Experienced treasure hunter - ]]..CheevoString("treasure")..[[
-
-* Clean up the useless space junk - ]]..CheevoString("junk")..[[
-
-* Historical relic preservation - ]]..CheevoString("relic")..[[
-
-* Social distancing - ]]..CheevoString("distancing")..[[
-
-* Our ship is all we need - ]]..CheevoString("ourship")..[[
-
-* No DMCA violations - ]]..CheevoString("DMCA")..[[
-
-* I ain't afraid of no ghosts - ]]..CheevoString("noghosts")..[[
-
-* Keep an eye on that doctor - ]]..CheevoString("eyeondr")..[[
-
-* Ban wormhole research - ]]..CheevoString("nowormhole")..[[
-
-* Heros for the ages - ]]..CheevoString("heros")..[[
-
-* Grand slam - ]]..CheevoString("grandslam")))
+    setCommsMessage(string.format(_("admin-comms","VICTORY!\nYour tour of duty is complete and your accomplishments will be the talk of legends.\nCHEEVOS!\n* Experienced treasure hunter - %s\n* Clean up the useless space junk - %s\n* Historical relic preservation - %s\n* Social distancing - %s\n* Our ship is all we need - %s\n* No DMCA violations - %s\n* I ain't afraid of no ghosts - %s\n* Keep an eye on that doctor - %s\n* Ban wormhole research - %s\n* Heros for the ages - %s\n* Grand slam - %s"),CheevoString("treasure"),CheevoString("junk"),CheevoString("relic"),CheevoString("distancing"),CheevoString("ourship"),CheevoString("DMCA"),CheevoString("noghosts"),CheevoString("eyeondr"),CheevoString("nowormhole"),CheevoString("heros"),CheevoString("grandslam")))
     addCommsReply(_("admin-comms", "Hints for each CHEEVO"), function ()
       setCommsMessage(_("admin-comms", "Select the achievement for a hint"))
       addCommsReply(_("admin-comms", "Experienced treasure hunter"), function ()
@@ -1671,13 +1659,11 @@ end
 
 function CommsBeingAttacked (self, instigator)
   if self.lastAttackedComms == nil or ((getScenarioTime() - self.lastAttackedComms) > 300) then
-    self:sendCommsMessage(Player, _("attack-messages", [[HELP!
-
-We are taking damage from ]]) .. instigator:getCallSign() .. _("attack-messages", " and might need assistance."))
+    self:sendCommsMessage(Player,string.format(_("attack-messages","HELP!\nWe are taking damage from %s and might need assistance."),instigator:getCallSign()))
     self.lastAttackedComms = getScenarioTime()
   end
   if self.lastAttackedLog == nil or ((getScenarioTime() - self.lastAttackedLog) > 30) then
-    Player:addToShipLog(self:getCallSign() .. _("attack-messages", " is taking damage!"), "RED")
+    Player:addToShipLog(string.format(_("attack-messages","%s is taking damage!"),self:getCallSign()), "RED")
     self.lastAttackedLog = getScenarioTime()
   end
 end
@@ -1709,7 +1695,7 @@ function StartMissionLost()
 It seems one of our researchers, Dr. Hendrix, and her crew have lost their way in a nearby nebula and need our help. They were running experiments in the nebula when their engines and transponder went offline. Please follow our scout vessel, SR7, to the nebula and search for them.]]))
 
   Admin_station.x, Admin_station.y = Admin_station:getPosition()
-  Admin_station.assist_ship = CpuShip():setCallSign("SR7"):setPosition(Admin_station.x + 200, Admin_station.y):orderFlyTowardsBlind(sectorToXY("D6")):setFaction("Human Navy"):setTemplate("Ktlitan Scout"):setWarpDrive(true):setCommsFunction(function ()
+  Admin_station.assist_ship = CpuShip():setCallSign("SR7"):setPosition(Admin_station.x + 200, Admin_station.y):orderFlyTowardsBlind(sectorToXY("D6")):setFaction("Human Navy"):setTemplate("Ktlitan Scout"):setWarpDrive(true):setCommsScript(""):setCommsFunction(function ()
     if Admin_station.assist_ship.state == "flyToNebula" or Admin_station.assist_ship.state == "waiting" then
       setCommsMessage(_("admin-comms", "Meet me at the edge of the nebula"))
     end
@@ -1830,8 +1816,8 @@ function UpdateMissionPatrol()
         Defence_station.mission_state = "patrol attack"
         SpawnPatrolEnemies()
       else
-        Defence_station:sendCommsMessage(Player, _("defence-comms","Please proceed to "..Defence_station.next_station))
-        Player:addToShipLog(_("defence-comms", "Proceed to ")..Defence_station.next_station, "Green")
+        Defence_station:sendCommsMessage(Player, string.format(_("defence-comms","Please proceed to %s"),Defence_station.next_station))
+        Player:addToShipLog(string.format(_("defence-comms","Please proceed to %s"),Defence_station.next_station), "Green")
       end
       Player:addReputationPoints(2)
     end
@@ -1885,12 +1871,8 @@ function CheckConvoyArrived()
   -- Wait for half the convites to arrive during first tier patrol mission
   if Defence_station.convites_arrived > (#Defence_station.convoy_enemies / 2) and Defence_station.tier2_mission_state == nil then
     Defence_station.tier2_mission_state = "pre-start"
-    Defence_station:sendCommsMessage(Player, _("defence-comms",[[Come in, Captain.
-
-We have the info we need about that convoy and strongly discourage any further engagement.
-
-Your assistance is required with a secret mission. Dock with us to receive further instructions when you're ready.]]))
-    Player:addToShipLog("Dock with the Defence Station to start another mission", "Green")
+    Defence_station:sendCommsMessage(Player, _("defence-comms","Come in, Captain.\nWe have the info we need about that convoy and strongly discourage any further engagement.\nYour assistance is required with a secret mission. Dock with us to receive further instructions when you're ready."))
+    Player:addToShipLog(_("shipLog","Dock with the Defence Station to start another mission"), "Green")
     SpawnMockDroneShip()
   end
 
@@ -1941,13 +1923,7 @@ function StartMissionSpareParts()
     lastpart = _("wormhole-comms", "and go find some extra missiles to help get the job done.")
   end
 
-  setCommsMessage(_("wormhole-comms", [[Great!
-
-There is an old Exuari station, callsign X472, to the SE on the other side of the wormhole. It used to study the planet forming nearby, but it's been abandoned for over a century now, no one aboard and no weapons, a historical relic, really. We need you to demolish it and bring us the stabilizers from its jump drive which we can use to maintain our Hawking Scanners.
-
-We have hacked the emergency integrity field so that the station can be destroyed, but there were strange disturbances when we deactivated it. We're not sure what it means, but we advise you to exercise caution...
-
-...]]..lastpart))
+  setCommsMessage(string.format(_("wormhole-comms","Great!\nThere is an old Exuari station, callsign X472, to the SE on the other side of the wormhole. It used to study the planet forming nearby, but it's been abandoned for over a century now, no one aboard and no weapons, a historical relic, really. We need you to demolish it and bring us the stabilizers from its jump drive which we can use to maintain our Hawking Scanners.\nWe have hacked the emergency integrity field so that the station can be destroyed, but there were strange disturbances when we deactivated it. We're not sure what it means, but we advise you to exercise caution...\n%s"),lastpart))
 
   Wormhole_station.mission_state = "get parts"
 
@@ -2335,12 +2311,8 @@ function UpdateDroneStations()
       end
       if scanned >= #Drone_artifacts then
         Defence_station.all_beacons_scanned = true
-        Defence_station:sendCommsMessage(Player,_("defence-comms", [[Great work!
-
-  Our boffins were able to piece together the data and figure out where the commands are coming from.
-
-  You must destroy station ]]..Drone_control_station:getCallSign()))
-        Player:addToShipLog(_("defence-comms", "The drone control station is ")..Drone_control_station:getCallSign(), "Green")
+        Defence_station:sendCommsMessage(Player,string.format(_("defence-comms","Great work!\nOur boffins were able to piece together the data and figure out where the commands are coming from.\nYou must destroy station %s"),Drone_control_station:getCallSign()))
+        Player:addToShipLog(string.format(_("defence-comms","The drone control station is %s"),Drone_control_station:getCallSign()), "Green")
       end
     end
   end
@@ -2426,9 +2398,9 @@ function HendrixHints(stn)
   local char = irandom(1,4)
   local hint = hendrix_callsign:sub(char,char)
   if char == 1 then
-    stn.hendrix_hint = _("hendrix-hints", "Dr. Hendrix, of course! I'm pretty sure she was on a "..hint.."-class station, but darned if I can remember which one.")
+    stn.hendrix_hint = string.format(_("hendrix-hints","Dr. Hendrix, of course! I'm pretty sure she was on a %s-class station, but darned if I can remember which one."),hint)
   else
-    stn.hendrix_hint = _("hendrix-hints", "Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her address definitely has a '"..hint.."' in it.")
+    stn.hendrix_hint = string.format(_("hendrix-hints","Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her address definitely has a '%s' in it."),hint)
   end
 end
 
@@ -2537,9 +2509,9 @@ end
 
 function CheevoString(name)
   if CHEEVOS[name] then
-    return "SUCCESS!!!"
+    return _("admin-comms","SUCCESS!!!")
   else
-    return "INCOMPLETE"
+    return _("admin-comms","INCOMPLETE")
   end
 end
 
