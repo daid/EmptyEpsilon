@@ -652,7 +652,7 @@ void PlayerSpaceship::addToShipLog(string message, glm::u8vec4 color)
         ships_log.erase(ships_log.begin());
 
     // Timestamp a log entry, color it, and add it to the end of the log.
-    ships_log.emplace_back(string(gameGlobalInfo->elapsed_time, 1) + string(": "), message, color);
+    ships_log.emplace_back(gameGlobalInfo->getMissionTime() + string(": "), message, color);
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)

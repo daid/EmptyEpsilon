@@ -19,6 +19,7 @@ protected:
     float text_size;
     bool multiline = false;
     bool readonly = false;
+    bool hide_password = false;
     const GuiThemeStyle* front_style;
     const GuiThemeStyle* back_style;
     func_t func;
@@ -45,6 +46,7 @@ public:
     GuiTextEntry* setText(string text);
     GuiTextEntry* setTextSize(float size);
     GuiTextEntry* setMultiline(bool enabled=true);
+    GuiTextEntry* setHidePassword(bool enabled=true);
     GuiTextEntry* callback(func_t func);
     GuiTextEntry* enterCallback(func_t func);
 

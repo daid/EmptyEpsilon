@@ -1,0 +1,5779 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Empty Epsilon\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: muerteFR\n"
+"Language-Team: muerteFR\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+# Scenario name
+msgid "Broken Glass"
+msgstr "Verre brisé"
+
+# Scenario description
+msgid ""
+"Support research activities in the Zeta Belt and keep the researchers safe. "
+"Difficulty balances and 10 achievements to complete.\n"
+"\n"
+"Plan for 3+ hours on Easy, with harder difficulties taking longer"
+msgstr ""
+"- Durée approx. : 3h et plus (variable)\n"
+"- Difficulté : Moyenne (variable)\n"
+"- Vaisseaux joueurs : 1\n"
+"\n"
+"TRADUCTION EN COURS 88%\n"
+"\n"
+"Mission : Soutenez les activités de recherche dans la ceinture Zeta et "
+"protégez les chercheurs qui y travaillent.\n"
+"\n"
+"Difficulté variable ; 10 objectifs variés à accomplir.\n"
+"Prévoir plus de 3 heures en mode Facile, les modes les plus difficiles "
+"prenant plus de temps\n"
+"\n"
+"Version 1 - décembre 2022\n"
+"\n"
+"- Titre original : Broken Glass\n"
+"- Auteur : Csibbitt\n"
+"https://discord.gg/GjqM9Y9yBe\n"
+"- Traduction FR : Muerte\n"
+"https://discord.gg/2NPKyMnGwp"
+
+msgctxt "setting"
+msgid "Difficulty"
+msgstr "Difficulté"
+
+msgctxt "setting"
+msgid "Configures the difficulty in the scenario."
+msgstr "Définit le nombre et/ou la puissance des ennemis."
+
+msgctxt "Difficulty"
+msgid "Easy"
+msgstr "Facile"
+
+msgctxt "Difficulty"
+msgid "Minor enemy resistance and easier missions."
+msgstr "Missions plus faciles. Faible résistance ennemie."
+
+msgctxt "Difficulty"
+msgid "Medium"
+msgstr "Normal"
+
+msgctxt "Difficulty"
+msgid "More robust resistance with more risk (takes longer)."
+msgstr "Plus de résistance ennemie et plus de risques. Prend plus de temps."
+
+msgctxt "Difficulty"
+msgid "Hard"
+msgstr "Difficile"
+
+msgctxt "Difficulty"
+msgid "Significant enemy resistance."
+msgstr "Résistance ennemie importante. Durée plus longue."
+
+#: scripts/scenario_30_brokenglass.lua:314
+msgctxt "lost-comms"
+msgid ""
+"We're pretty busy scanning for treasure... I mean, conducting research in "
+"this nebula. Can we call you back?"
+msgstr ""
+"Bonjour,\n"
+"Écoutez, nous sommes pas mal occupés à rechercher des trés…..Euh je veux "
+"dire, à mener des recherches dans cette nébuleuse.\n"
+"Pouvez-vous nous rappeler ?"
+
+#: scripts/scenario_30_brokenglass.lua:334
+msgctxt "nebula-bonuses"
+msgid ""
+"Just a hollow spherical apparition. Kinda looks like it's hiding something."
+msgstr ""
+"Une sphère d'apparence creuse.\n"
+"On dirait que ça cache quelque chose."
+
+#: scripts/scenario_30_brokenglass.lua:334
+msgctxt "nebula-bonuses"
+msgid "It seems to have changed shape."
+msgstr "La sphère semble avoir changé de forme."
+
+#: scripts/scenario_30_brokenglass.lua:342
+msgctxt "nebula-bonuses"
+msgid "A Nuke and additional nuke storage have been added to our arsenal"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:350
+msgctxt "nebula-bonuses"
+msgid "A stranded repair crew has been rescued"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:358
+msgctxt "nebula-bonuses"
+msgid "This scientific data is sure to raise our reputation with the eggheads."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:365
+#: scripts/scenario_30_brokenglass.lua:366
+msgctxt "nebula-bonuses"
+msgid "DRONE SELF DEFENCE SYSTEM ACTIVATED"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:373
+msgctxt "nebula-bonuses"
+msgid "We have activated a drone defence system!"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:791
+msgctxt "defence-comms"
+msgid ""
+"Greetings, Captain.\n"
+"\n"
+"You've been assigned a tour of duty in the Zeta Belt. It's neutral territory "
+"with a bit of everything... nebulae, asteroids, baby planets, and dangerous "
+"old scrap.\n"
+"\n"
+"We don't see many Kraylor around here, but we have a non-aggression treaty "
+"with them, so should you encounter any, think twice before engaging. The "
+"main security risk is from those damned Ghost and Exuari drones and that "
+"keep flying around.\n"
+"\n"
+"Your primary orders are to support all the research facilities in the area, "
+"both Human and Independent. Their safety must be guaranteed, including "
+"helping them with dangerous operations. If you can't find anything to do, "
+"check in here and we can set you up with a patrol route.\n"
+"\n"
+"Your ship, the Propitious 1, is well equipped but not exactly a war vessel, "
+"so conduct yourself carefully and try not to breach the peace tumultuously.\n"
+msgstr ""
+"Salutations, capitaine.\n"
+"\n"
+"Vous venez d'être affecté à un service de garde dans la ceinture Zeta.\n"
+"C'est un territoire neutre avec un peu de tout... des nébuleuses, des "
+"astéroïdes, des planètes naissantes et de vieux débris errants qui peuvent "
+"se révéler dangereux.\n"
+"\n"
+"Nous ne rencontrons pas beaucoup de Kraylors par ici. Sachez qu'il existe un "
+"traité de non-agression avec eux, donc si vous en rencontrez, réfléchissez-y "
+"à deux fois avant d'engager le combat.\n"
+"Le principal risque pour la sécurité vient surtout de ces maudits drones "
+"Fantômes et Éxuaris qui volent sans cesse dans le coin.\n"
+"\n"
+"Vos ordres sont les suivants : soutenir toutes les installations de "
+"recherche de la région, humaines et indépendantes. Leur sécurité doit être "
+"assurée, notamment en les aidant dans les opérations dangereuses. Si vous "
+"n'avez rien à faire, pointez ici avec votre vaisseau et nous vous "
+"proposerons un itinéraire de patrouille.\n"
+"\n"
+"Votre vaisseau, le Propitious 1, est bien équipé mais ce n'est pas non plus "
+"un vaisseau de guerre, alors conduisez-vous prudemment et essayez de ne pas "
+"rompre la paix inutilement.\n"
+
+#: scripts/scenario_30_brokenglass.lua:865
+msgctxt "wormhole-comms"
+msgid "Firing on invulnerable target"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:868
+msgctxt "wormhole-comms"
+msgid ""
+"Captain, Stop!\n"
+"\n"
+"Don't waste your time shooting at that station. It has an Exuari emergency "
+"integrity field that will prevent catastrophic hull breach. Just a waste of "
+"energy, I promise you."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1014
+msgctxt "defence-comms"
+msgid ""
+"RED ALERT!\n"
+"\n"
+"The SW Checkpoint is under attack. Don't mess around, get down there and "
+"help them!"
+msgstr ""
+"ALERTE ROUGE !\n"
+"\n"
+"Le poste de contrôle SW Checkpoint est attaqué. Ceci n'est pas un exercice.\n"
+"Arrêtez ce que vous faites et partez immédiatement les aider !"
+
+#: scripts/scenario_30_brokenglass.lua:1050
+msgctxt "defence-comms"
+msgid ""
+"It looks like you've aggro'd the convoy.\n"
+"\n"
+"Good luck to you! Try to keep them from destroying our stations!"
+msgstr ""
+"On dirait que vous avez énervé l'essaim.\n"
+"\n"
+"Bonne chance à vous ! Essayez de les empêcher de détruire nos stations !"
+
+#: scripts/scenario_30_brokenglass.lua:1083
+msgid "This station appears immune to our attacks"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1132
+msgid ""
+"You will regret this!\n"
+"\n"
+"You have violated our non-aggression treaty, and will soon regret your "
+"actions."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1143
+msgctxt "drone-comms"
+msgid "Do not communicate on this channel."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1147
+msgctxt "drone-comms"
+msgid ""
+"DISENGAGE!\n"
+"\n"
+"Captain, it's not what it looks like. Please dock with us and we will "
+"explain everything."
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1164
+msgctxt "wormhole-comms"
+msgid ""
+"RED ALERT!\n"
+"\n"
+"Captain, a bomb has just gone off on our station and we are under attack "
+"from the Kraylor. We need your help immediately!"
+msgstr ""
+"ALERTE ROUGE !\n"
+"\n"
+"Capitaine, une bombe vient d'exploser sur notre station et nous sommes "
+"attaqués par les Kraylors. Nous avons besoin de votre aide immédiatement !"
+
+#: scripts/scenario_30_brokenglass.lua:1210
+msgctxt "wormhole-comms"
+msgid ""
+"Hello Captain. Have you noticed our cool wormhole?\n"
+"\n"
+"We're studying the energy radiating from the wormhole, and the similarities "
+"to black holes are astonishing. Please drop by if you'd like to help out."
+msgstr ""
+"Bonjour Capitaine.\n"
+"Avez-vous remarqué notre trou de ver ? Cool hein ?\n"
+"\n"
+"Nous étudions l'énergie émanant du trou de ver, et les similitudes avec les "
+"trous noirs sont étonnantes. N'hésitez pas à passer si vous souhaitez aider."
+
+#: scripts/scenario_30_brokenglass.lua:1215
+msgctxt "wormhole-comms"
+msgid "Please bring us the spare parts!"
+msgstr "Veuillez nous apporter les pièces de rechange !"
+
+#: scripts/scenario_30_brokenglass.lua:1217
+msgctxt "wormhole-comms"
+msgid "Thanks so much for your help!"
+msgstr "Merci beaucoup pour votre aide !"
+
+#: scripts/scenario_30_brokenglass.lua:1224
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks for dropping by, Captain.\n"
+"\n"
+"Our research is going well, but we could use some spare stabilizers for our "
+"Hawking Scanner. Would you mind salvaging some for us from the other side of "
+"the wormhole?"
+msgstr ""
+"Merci d'être passé, capitaine.\n"
+"\n"
+"Nos recherches avancent bien, mais en utilisant des stabilisateurs de "
+"rechange pour notre Hawking Scanner nous serions plus efficaces.\n"
+"Cela vous dérangerait-il d'en récupérer pour nous de l'autre côté du trou de "
+"ver ?"
+
+#: scripts/scenario_30_brokenglass.lua:1227
+msgctxt "wormhole-comms"
+msgid "Okay, we can help with that."
+msgstr "D'accord, nous allons vous aider."
+
+#: scripts/scenario_30_brokenglass.lua:1228
+msgctxt "wormhole-comms"
+msgid "Do you pay tips?"
+msgstr "Aura t'on droit à un pourboire ?"
+
+#: scripts/scenario_30_brokenglass.lua:1229
+msgctxt "wormhole-comms"
+msgid "Maybe later, then. Goodbye."
+msgstr ""
+"Heu...Peut-être plus tard.\n"
+"Alors merci et au revoir."
+
+#: scripts/scenario_30_brokenglass.lua:1237
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks for your help, Captain!\n"
+"\n"
+"These spare parts will really help with the program budget."
+msgstr ""
+"Merci pour votre aide, capitaine !\n"
+"\n"
+"Ces pièces de rechange vont vraiment nous aider vu le budget du programme."
+
+#: scripts/scenario_30_brokenglass.lua:1240
+msgctxt "wormhole-comms"
+msgid "What do we get for being your errand boy?"
+msgstr "Que gagne t'on à avoir été votre coursier ?"
+
+#: scripts/scenario_30_brokenglass.lua:1241
+msgctxt "wormhole-comms"
+msgid "You get half of what would have with a smarter attitude! So rude."
+msgstr ""
+"Vous obtenez la moitié de ce que vous auriez du recevoir avec une attitude "
+"plus intelligente et respectueuse !\n"
+"Tellement grossier."
+
+#: scripts/scenario_30_brokenglass.lua:1246
+msgctxt "wormhole-comms"
+msgid "We're so glad we could help"
+msgstr "Nous sommes ravis d'avoir pu aider."
+
+#: scripts/scenario_30_brokenglass.lua:1247
+msgctxt "wormhole-comms"
+msgid "We are too. Thanks a bunch."
+msgstr "Nous aussi. Merci beaucoup."
+
+#: scripts/scenario_30_brokenglass.lua:1252
+msgctxt "wormhole-comms"
+msgid ""
+"We still need those spare parts from X472 on the other side of the wormhole!"
+msgstr ""
+"Nous avons toujours besoin de ces pièces de rechange se trouvant sur X472, "
+"de l'autre côté du trou de ver !"
+
+#: scripts/scenario_30_brokenglass.lua:1255
+msgctxt "wormhole-comms"
+msgid "Thanks that was awesome"
+msgstr "Merci encore, c'est formidable pour nous."
+
+#: scripts/scenario_30_brokenglass.lua:1264
+msgctxt "wormhole-comms"
+msgid "We're under attack. Help us!"
+msgstr "Nous sommes attaqués. Aidez nous !"
+
+#: scripts/scenario_30_brokenglass.lua:1270
+msgctxt "wormhole-comms"
+msgid "Come pick up our Hawking Scanner for repairs."
+msgstr "Merci de venir récupérer notre scanner Hawking pour les réparations."
+
+#: scripts/scenario_30_brokenglass.lua:1272
+msgctxt "wormhole-comms"
+msgid "Please find someone to repair our Hawking Scanner."
+msgstr "Merci de trouver quelqu'un pour réparer notre scanner Hawking."
+
+#: scripts/scenario_30_brokenglass.lua:1278
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks again, Captain.\n"
+"\n"
+"We need you to find someone to repair this Hawking Scanner. Please bring it "
+"back once it's working again."
+msgstr ""
+"Merci encore, capitaine.\n"
+"\n"
+"Nous avons besoin que vous trouviez quelqu'un pour réparer ce scanner "
+"Hawking. Veuillez nous le ramener une fois qu'il fonctionnera à nouveau."
+
+#: scripts/scenario_30_brokenglass.lua:1281
+msgctxt "wormhole-comms"
+msgid "Any idea where we should take it?"
+msgstr "Une idée de l'endroit où nous pourrions l'emmener ?"
+
+#: scripts/scenario_30_brokenglass.lua:1282
+msgctxt "wormhole-comms"
+msgid ""
+"One of the nebula researchers should be able to point you in the right "
+"direction.\n"
+"\n"
+"If you're not sure where to find them, ask for directions at the Admin "
+"Station"
+msgstr ""
+"L'un des chercheurs de la nébuleuse devrait pouvoir vous orienter dans la "
+"bonne direction.\n"
+"\n"
+"Si vous ne savez pas où les trouver, demandez votre chemin à la station "
+"Admin Stn."
+
+#: scripts/scenario_30_brokenglass.lua:1286
+msgctxt "wormhole-comms"
+msgid "Have you considered shoving it where the sun don't shine?"
+msgstr "Avez-vous pensé à le \"ranger\" là où le soleil ne brille pas ?"
+
+#: scripts/scenario_30_brokenglass.lua:1287
+msgctxt "wormhole-comms"
+msgid "What is it with you, anyways?"
+msgstr ""
+"Qu'est ce qui ne va pas avec vous ?\n"
+"Peu importe !"
+
+#: scripts/scenario_30_brokenglass.lua:1293
+msgctxt "wormhole-comms"
+msgid ""
+"You got it fixed?\n"
+"\n"
+"That's amazing, Captain. Thank you so much! You and your crew are true heros "
+"of our system; may your names live on through history.\n"
+"\n"
+"Glory to you and your kin."
+msgstr ""
+"Vous avez réussi ?\n"
+"\n"
+"C'est incroyable, capitaine. Merci beaucoup! Vous et votre équipage êtes de "
+"véritables héros de notre système ; que vos noms vivent à travers "
+"l'histoire.\n"
+"\n"
+"Gloire à vous et à vos proches."
+
+#: scripts/scenario_30_brokenglass.lua:1298
+msgctxt "wormhole-comms"
+msgid "You're very welcome."
+msgstr "Ce fut un plaisir de pouvoir vous aider."
+
+#: scripts/scenario_30_brokenglass.lua:1299
+msgctxt "wormhole-comms"
+msgid "Goodbye captain. May peace be with you."
+msgstr "Au revoir capitaine. Que la paix soit avec vous."
+
+#: scripts/scenario_30_brokenglass.lua:1302
+msgctxt "wormhole-comms"
+msgid "Kiss my feet!"
+msgstr "Tu peux embrasser mes pieds !"
+
+#: scripts/scenario_30_brokenglass.lua:1306
+msgctxt "wormhole-comms"
+msgid ""
+"I was about to call this in to Admin and have them declare you victorious, "
+"but I've had enough of you.\n"
+"\n"
+"YOU MAY BE A HERO, BUT YOU'RE ALSO A JERK!"
+msgstr ""
+"J'étais sur le point d'informer le haut commandement et de leur demander de "
+"vous déclarer victorieux, mais j'en ai assez de vous.\n"
+"\n"
+"VOUS ÊTES PEUT-ÊTRE UN HÉROS, MAIS VOUS ÊTES AUSSI ET SURTOUT UN ABRUTI "
+"HAUTAIN ET SUFFISANT !\n"
+"\n"
+"Je ne sais pas comment votre équipage réussit à vous supporter."
+
+#: scripts/scenario_30_brokenglass.lua:1310
+msgctxt "wormhole-comms"
+msgid "A real peach, you are."
+msgstr "Vous ne vous prenez vraiment pas pour de la crotte !"
+
+#: scripts/scenario_30_brokenglass.lua:1319
+msgctxt "colony-comms"
+msgid "Well, what I can do for you?"
+msgstr ""
+"Bien le bonjour capitaine,\n"
+"Eh bien, que puis-je faire pour vous ?"
+
+#: scripts/scenario_30_brokenglass.lua:1322
+msgctxt "colony-comms"
+msgid "We're looking for Dr. Hendrix"
+msgstr "Nous recherchons le Dr Hendrix."
+
+#: scripts/scenario_30_brokenglass.lua:1326
+msgid "colony-comms"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1329
+msgctxt "colony-comms"
+msgid ""
+"I.....zzzZ\n"
+"Hello?\n"
+"...\n"
+"The nearby NeZula somzzzzzzimes messssssses with our long range "
+"commcommcommcomm somet...\n"
+"\n"
+"...\n"
+"\n"
+"....dock...pr...b..\n"
+"...r"
+msgstr ""
+"Je.....zzzZ\n"
+"Allo ?\n"
+"...\n"
+"Les Nebzzzuleeeeuses à proximité parffffffois...perturrrrrrrrb…. avec notre "
+"commcommcommcomm à longue portée...ZzzzzzzGrrrrrzzzzzz\n"
+"\n"
+"...\n"
+"\n"
+"....amarrzzzzézzzz...pr...b..\n"
+"...r"
+
+#: scripts/scenario_30_brokenglass.lua:1339
+msgctxt "colony-comms"
+msgid ""
+"I am Dr. Hendrix.\n"
+"\n"
+"If I remember that voice correctly, you are the crew from the Navy ship that "
+"saved me when I was stranded in the nebula!\n"
+"\n"
+"What can I do for you?"
+msgstr ""
+"Bonjour,\n"
+"Je suis le Dr Hendrix.\n"
+"\n"
+"Si je me rappelle bien de cette voix, vous êtes l'équipage du vaisseau de la "
+"Marine qui m'a secouru quand j'étais bloqué dans la nébuleuse !\n"
+"\n"
+"Que puis-je faire pour vous?"
+
+#: scripts/scenario_30_brokenglass.lua:1344
+msgctxt "colony-comms"
+msgid "Can you fix this Hawking Scanner?"
+msgstr "Sauriez-vous réparer ce scanner Hawking ?"
+
+#: scripts/scenario_30_brokenglass.lua:1345
+msgctxt "colony-comms"
+msgid ""
+"Let me have a look...\n"
+"\n"
+"Ah, I see why it's giving you trouble. Everything reads as okay, but the "
+"Graviton Lens is mis-calibrated somehow so it's throwing off the whole "
+"system.\n"
+"\n"
+"The good news is that it's easy to swap these out, the tech at the wormhole "
+"station should be able to do it. The bad news is that we have a shortage of "
+"Graviton Lenses right now because of those drone convoys.\n"
+"\n"
+"I've put in a requisition for one in your name. If you can find one in a "
+"Navy storehouse, bring it to the wormhole station and they should be good to "
+"go."
+msgstr ""
+"Laissez moi jeter un oeil...\n"
+"\n"
+"...Après quelques minutes à observer l'engin…\n"
+"\n"
+"Ah, je vois ce qui ne vas pas. Tout se passe bien, mais la lentille Graviton "
+"est mal calibrée, ce qui, d'une manière ou d'une autre, perturbe l'ensemble "
+"de l'appareil.\n"
+"\n"
+"La bonne nouvelle est qu'il est facile de la remplacer, la technologie de la "
+"station Wormhole Stn devrait pouvoir le faire. La mauvaise nouvelle est que "
+"nous sommes en pénurie de lentilles Graviton actuellement à cause de ces "
+"convois de drones.\n"
+"\n"
+"Attendez, j'ai une idée!...\n"
+"...Après encore quelques minutes…\n"
+"\n"
+"Je viens de créer un bon de réquisition de surplus militaire pour une "
+"lentille en votre nom. Si vous arrivez à en trouver une dans un entrepôt de "
+"la Marine, apportez-la à la station Wormhole Stn avec leur scanner et ils "
+"devraient pouvoir s'en sortir."
+
+#: scripts/scenario_30_brokenglass.lua:1352
+msgctxt "colony-comms"
+msgid "Find a Graviton Lens"
+msgstr "Trouver une lentille Graviton."
+
+#: scripts/scenario_30_brokenglass.lua:1360
+msgctxt "colony-comms"
+msgid "Some filler text and whatever. What are we even doing here?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1361
+msgctxt "colony-comms"
+msgid "Dude, where even ARE we?"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1367
+msgid "Not much here bud, just doing checkpoint kinda things, ya know?"
+msgstr ""
+"Salut,\n"
+"Ya pas grand-chose ici, mon pote, jfais juste des trucs de poste de "
+"contrôle, tu vois !"
+
+#: scripts/scenario_30_brokenglass.lua:1374
+msgctxt "defence-comms"
+msgid "Defend the SW Checkpoint now!"
+msgstr "Défendre le poste de contrôle sud-ouest, SW Checkpoint, maintenant !"
+
+#: scripts/scenario_30_brokenglass.lua:1377
+msgid "defence-comms"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:1382
+msgctxt "defence-comms"
+msgid "Your orders are to follow the convoy to see where it goes"
+msgstr "Vos ordres sont de suivre l'essaim afin de voir où il va."
+
+#: scripts/scenario_30_brokenglass.lua:1385
+msgctxt "defence-comms"
+msgid "Your orders are to join a convoy and infiltrate the drone nests."
+msgstr ""
+"Vos ordres sont de rejoindre une escorte et d'infiltrer le nid de drones."
+
+#: scripts/scenario_30_brokenglass.lua:1388
+msgctxt "defence-comms"
+msgid ""
+"Your orders are to scan those beacons and find the defence grid controller"
+msgstr ""
+"Vos ordres sont de scanner ces balises et de trouver le contrôleur de la "
+"grille de défense."
+
+#: scripts/scenario_30_brokenglass.lua:1394
+msgctxt "defence-comms"
+msgid ""
+"We are keeping the 007, and you can continue to fly it, or switch back to "
+"the Propitious 1 at any time. We'll keep it docked here at the station for "
+"you."
+msgstr ""
+"Le drone 007 nous appartient. Vous pouvez continuer à le piloter, ou revenir "
+"à bord du Propitious 1 à tout moment. Nous le garderons amarré ici pour vous."
+
+#: scripts/scenario_30_brokenglass.lua:1396
+msgctxt "defence-comms"
+msgid ""
+"Great work, Captain!\n"
+"\n"
+"Destroying the central control eliminated all the other drone stations and "
+"stopped the convoys in their tracks! Of course, you are authorized to mop up "
+"any resistance that might remain, but we're calling this a job well done.\n"
+"\n"
+msgstr ""
+"Excellent travail, capitaine !\n"
+"\n"
+"La destruction du contrôle central a éliminé toutes les autres stations de "
+"drones et arrêté les escortes dans leur élan ! Bien sûr, vous êtes autorisé "
+"à nettoyer toute résistance qui pourrait subsister. Nous appelons cela du "
+"travail bien fait.\n"
+"\n"
+
+#: scripts/scenario_30_brokenglass.lua:1408
+msgctxt "defence-comms"
+msgid ""
+"Good day, soldier.\n"
+"\n"
+"We shouldn't talk over this channel, please dock to the station when you "
+"have a chance."
+msgstr ""
+"Bonjour officier,\n"
+"\n"
+"Nous ne devrions pas communiquer sur ce canal, veuillez plutôt vous amarrer "
+"à notre station lorsque vous le pourrez."
+
+#: scripts/scenario_30_brokenglass.lua:1414
+msgctxt "defence-comms"
+msgid ""
+"Welcome aboard.\n"
+"\n"
+"We need you to patrol the area. It's not exciting work, but it's got to be "
+"done. No rush, just make sure you visit each checkpoint in order, and we'll "
+"let you know if anything more pressing comes up."
+msgstr ""
+"Bienvenue à bord.\n"
+"\n"
+"Nous avons besoin de vous pour patrouiller dans la zone. Ce n'est pas un "
+"travail passionnant, mais il faut le faire. Pas de précipitation, assurez-"
+"vous simplement de visiter chacun des 4 postes de contrôle dans l'ordre, et "
+"nous vous ferons savoir si quelque chose de plus pressant se présente."
+
+#: scripts/scenario_30_brokenglass.lua:1417
+msgctxt "defence-comms"
+msgid "Okay. We're ready to start the patrol"
+msgstr "Bien reçu. Nous sommes prêts à patrouiller."
+
+#: scripts/scenario_30_brokenglass.lua:1421
+msgctxt "defence-comms"
+msgid ""
+"Welcome back, Captain.\n"
+"\n"
+"We've tracked that convoy to a huge nest of drone stations in the west. The "
+"stations all form part of one proximity defence grid, and we have identified "
+"some beacons that appear to be related to its operation. We're hoping that "
+"if we can get a closer look at them, we might be able to figure out how to "
+"knock out the central control.\n"
+"\n"
+"There is a drone ship docked here which you can use to infiltrate the nests. "
+"If you arrive with a convoy, you should automatically be granted access and "
+"we think the proximity defences will remain disabled while you stay in the "
+"area. Of course, if you start firing, then all bets are probably off.\n"
+"\n"
+"Hop in that drone ship, find the beacons, and get close enough to scan them "
+"- EASY!"
+msgstr ""
+"Bienvenue à bord, capitaine.\n"
+"\n"
+"Nous avons suivi cet essaim jusqu'à un énorme nid de stations de drones à "
+"l'ouest. Ces stations font toutes partie d'une grille de défense Fantômes de "
+"proximité. Nous avons réussi à identifier certaines balises qui semblent "
+"être liées à son fonctionnement. Si nous arrivons à les examiner de plus "
+"près, nous pourrions peut-être trouver comment désactiver le contrôle "
+"central de la grille.\n"
+"\n"
+"Il y a un drone Fantôme amarré ici. Vous allez vous en servir pour infiltrer "
+"le nid. Si vous arrivez avec une escorte, l'accès devrait vous être "
+"automatiquement accordé et nous pensons que les défenses de proximité "
+"resteront inactives tant que vous resterez dans la zone. Bien sûr, si vous "
+"commencez à tirer, toutes nos hypothèses voleront en éclats.\n"
+"\n"
+"Montez à bord de ce drone, trouvez ces balises et rapprochez-vous "
+"suffisamment pour les scanner. Rien de plus facile pour vous !"
+
+#: scripts/scenario_30_brokenglass.lua:1428
+msgctxt "defence-comms"
+msgid "We're ready to infiltrate the drone nest"
+msgstr "Nous sommes prêts à infiltrer le nid de drones Monsieur."
+
+#: scripts/scenario_30_brokenglass.lua:1429
+msgctxt "defence-comms"
+msgid "(Object) Isn't that a treaty violation!?"
+msgstr "[Objection] Monsieur, n'est-ce pas une violation du traité !? ..."
+
+#: scripts/scenario_30_brokenglass.lua:1430
+msgctxt "defence-comms"
+msgid ""
+"(Objecting)\n"
+"Sir, decoding the communications of alien defence systems is a violation of "
+"the Deepspace Militarized Citizenry Accord (DMCA).\n"
+"[...]\n"
+"Captain, are you angling for a good samaritan's award or something? Get out "
+"of here with that legal mumbo-jumbo.\n"
+"\n"
+"However you want to do it, you need to find that central control. Get on it!"
+msgstr ""
+"… Il me semble, Monsieur, que décoder des communications des systèmes de "
+"défense extraterrestres est une violation de l'accord de citoyenneté "
+"militarisée de l'espace profond (DMCA)... Monsieur !?\n"
+"[...]\n"
+"CAPITAINE, êtes-vous à la recherche d'une médaille de bon samaritain ou "
+"quelque chose du genre ??? SORTEZ D'ICI AVEC CE CHARABIA LÉGAL.\n"
+"Peu importe la façon dont vous souhaitez procéder, vous devez trouver ce "
+"contrôle central.\n"
+"\n"
+"OCCUPEZ-VOUS EN !!!"
+
+#: scripts/scenario_30_brokenglass.lua:1436
+msgctxt "defence-comms"
+msgid "Okay, we'll figure it out."
+msgstr "Entendu Monsieur, Nous y allons de ce pas."
+
+#: scripts/scenario_30_brokenglass.lua:1441
+msgctxt "defence-comms"
+msgid ""
+"Great job on that drone nest, Captain.\n"
+"\n"
+"Remember, your primary orders are to support the research facilities in the "
+"area. See to it that they all get the assistance they need."
+msgstr ""
+"Excellent travail avec ce nid de drones, capitaine.\n"
+"\n"
+"Cependant n'oubliez pas, vos ordres prioritaires restent de soutenir et de "
+"protéger les installations de recherche dans la région. Veillez à ce qu'ils "
+"reçoivent toute l'aide dont ils ont besoin."
+
+#: scripts/scenario_30_brokenglass.lua:1446
+msgctxt "defence-comms"
+msgid "We'd rather crew the Propitious 1"
+msgstr "Bien reçu ! Nous souhaitons réintégrer le Propitious 1."
+
+#: scripts/scenario_30_brokenglass.lua:1449
+#: scripts/scenario_30_brokenglass.lua:1457
+msgctxt "defence-comms"
+msgid "Very well. Good Hunting."
+msgstr "Très bien. Bonne chasse."
+
+#: scripts/scenario_30_brokenglass.lua:1453
+msgctxt "defence-comms"
+msgid "We'd rather crew the DD007"
+msgstr "Bien reçu ! Nous souhaitons naviguer à bord du DD007."
+
+#: scripts/scenario_30_brokenglass.lua:1470
+msgctxt "admin-comms"
+msgid ""
+"VICTORY!\n"
+"\n"
+"Your tour of duty is complete and your accomplishments will be the talk of "
+"legends.\n"
+"\n"
+"CHEEVOS!\n"
+"\n"
+"* Experienced treasure hunter - "
+msgstr ""
+"VICTOIRE !\n"
+"\n"
+"Votre service de garde est terminé et vos exploits deviendront des histoires "
+"légendaires.\n"
+"\n"
+"OBJECTIFS !\n"
+"\n"
+"* Chasseur de trésors expérimenté -"
+
+#: scripts/scenario_30_brokenglass.lua:1497
+msgctxt "admin-comms"
+msgid "Hints for each CHEEVO"
+msgstr "Conseils pour chaque objectif"
+
+#: scripts/scenario_30_brokenglass.lua:1498
+msgctxt "admin-comms"
+msgid "Select the achievement for a hint"
+msgstr "Sélectionnez un objectif pour obtenir un conseil"
+
+#: scripts/scenario_30_brokenglass.lua:1499
+msgctxt "admin-comms"
+msgid "Experienced treasure hunter"
+msgstr "Chasseur de trésor expérimenté"
+
+#: scripts/scenario_30_brokenglass.lua:1500
+msgctxt "admin-comms"
+msgid "The locals are known to hunt treasure in the nebula"
+msgstr ""
+"Les habitants de la région sont connus pour chasser le trésor dans la grande "
+"nébuleuse."
+
+#: scripts/scenario_30_brokenglass.lua:1501
+#: scripts/scenario_30_brokenglass.lua:1505
+#: scripts/scenario_30_brokenglass.lua:1509
+#: scripts/scenario_30_brokenglass.lua:1513
+#: scripts/scenario_30_brokenglass.lua:1517
+#: scripts/scenario_30_brokenglass.lua:1521
+#: scripts/scenario_30_brokenglass.lua:1525
+#: scripts/scenario_30_brokenglass.lua:1529
+#: scripts/scenario_30_brokenglass.lua:1533
+#: scripts/scenario_30_brokenglass.lua:1537
+#: scripts/scenario_30_brokenglass.lua:1541
+#: scripts/scenario_30_brokenglass.lua:1581
+#: scripts/scenario_30_brokenglass.lua:1585
+#: scripts/scenario_30_brokenglass.lua:1591
+#: scripts/scenario_30_brokenglass.lua:1595
+#: scripts/scenario_30_brokenglass.lua:1599
+msgctxt "admin-comms"
+msgid "<- Back"
+msgstr "<- Précédent"
+
+#: scripts/scenario_30_brokenglass.lua:1503
+msgctxt "admin-comms"
+msgid "Clean up the space junk"
+msgstr "Nettoyer les débris spatiaux"
+
+#: scripts/scenario_30_brokenglass.lua:1504
+msgctxt "admin-comms"
+msgid "So many long abandoned stations"
+msgstr "Tant de stations abandonnées depuis si longtemps."
+
+#: scripts/scenario_30_brokenglass.lua:1507
+msgctxt "admin-comms"
+msgid "Historical relic preservation"
+msgstr "Préservation de reliques historiques"
+
+#: scripts/scenario_30_brokenglass.lua:1508
+msgctxt "admin-comms"
+msgid "Destroying that old station might spook the Kraylor"
+msgstr "Détruire cette ancienne station pourrait effrayer les Kraylors."
+
+#: scripts/scenario_30_brokenglass.lua:1511
+msgctxt "admin-comms"
+msgid "Social distancing"
+msgstr "Distanciation sociale"
+
+#: scripts/scenario_30_brokenglass.lua:1512
+msgctxt "admin-comms"
+msgid "Don't get too proximate"
+msgstr "Ne vous approchez pas trop prêt."
+
+#: scripts/scenario_30_brokenglass.lua:1515
+msgctxt "admin-comms"
+msgid "Our ship is all we need"
+msgstr "Notre vaisseau est tout ce dont nous avons besoin"
+
+#: scripts/scenario_30_brokenglass.lua:1516
+msgctxt "admin-comms"
+msgid "We'll stick with the ship we know, thanks"
+msgstr "Nous resterons sur le vaisseau que nous connaissons, merci."
+
+#: scripts/scenario_30_brokenglass.lua:1519
+msgctxt "admin-comms"
+msgid "No DMCA violations"
+msgstr "Aucune violation du DMCA"
+
+#: scripts/scenario_30_brokenglass.lua:1520
+msgctxt "admin-comms"
+msgid "Hacking alien defense systems is illegal"
+msgstr "Le piratage des systèmes de défense extraterrestres est illégal."
+
+#: scripts/scenario_30_brokenglass.lua:1523
+msgctxt "admin-comms"
+msgid "I ain't afraid of no ghosts"
+msgstr "Je n'ai pas peur des Fantômes"
+
+#: scripts/scenario_30_brokenglass.lua:1524
+msgctxt "admin-comms"
+msgid "No one is afraid if there are NO GHOSTS"
+msgstr "Personne n'a peur s'il n'y a PAS DE FANTÔMES."
+
+#: scripts/scenario_30_brokenglass.lua:1527
+msgctxt "admin-comms"
+msgid "Keep an eye on that doctor"
+msgstr "Gardez un oeil sur ce docteur"
+
+#: scripts/scenario_30_brokenglass.lua:1528
+msgctxt "admin-comms"
+msgid "Do we really need to ask for directions?"
+msgstr "Avons-nous vraiment besoin de demander un cap ?"
+
+#: scripts/scenario_30_brokenglass.lua:1531
+msgctxt "admin-comms"
+msgid "Ban wormhole research"
+msgstr "Interdire la recherche sur les trous de ver"
+
+#: scripts/scenario_30_brokenglass.lua:1532
+msgctxt "admin-comms"
+msgid "I just can't stand wormholes, or their researchers!"
+msgstr ""
+"Je ne supporte tout simplement pas les trous de ver, ni leurs chercheurs."
+
+#: scripts/scenario_30_brokenglass.lua:1535
+msgctxt "admin-comms"
+msgid "Heros for the ages"
+msgstr "Héros pour les âges"
+
+#: scripts/scenario_30_brokenglass.lua:1536
+msgctxt "admin-comms"
+msgid "Their reputation is unmatched"
+msgstr "Leur réputation est inégalée."
+
+#: scripts/scenario_30_brokenglass.lua:1539
+msgctxt "admin-comms"
+msgid "Grand Slam"
+msgstr "Grand Chelem"
+
+#: scripts/scenario_30_brokenglass.lua:1540
+msgctxt "admin-comms"
+msgid "You can do it, but can you do it ALL?"
+msgstr "Vous pouvez le faire, mais pouvez-vous TOUT faire ?"
+
+#: scripts/scenario_30_brokenglass.lua:1544
+msgctxt "admin-comms"
+msgid "Click here to lance the champagne!"
+msgstr "Cliquer ici pour sabrer le champagne !"
+
+#: scripts/scenario_30_brokenglass.lua:1545
+msgctxt "admin-comms"
+msgid "Booyah!!!"
+msgstr "Yippee-ki-yay !!!"
+
+#: scripts/scenario_30_brokenglass.lua:1553
+msgctxt "admin-comms"
+msgid ""
+"We are the station that co-ordinates research activities in the nearby "
+"nebulae.\n"
+"\n"
+"If you're not busy, please drop by to learn more about our projects."
+msgstr ""
+"Bonjour,\n"
+"Sur cette station nous coordonnons les activités de recherche dans les "
+"nébuleuses voisines.\n"
+"\n"
+"Si vous n'êtes pas occupé, s'il vous plaît passez nous voir pour en savoir "
+"plus sur nos projets."
+
+#: scripts/scenario_30_brokenglass.lua:1557
+#: scripts/scenario_30_brokenglass.lua:1571
+msgctxt "admin-comms"
+msgid "Please bring our researchers home!"
+msgstr "Veuillez ramener nos chercheurs à la maison !"
+
+#: scripts/scenario_30_brokenglass.lua:1559
+msgctxt "admin-comms"
+msgid ""
+"Thanks so much for finding our researchers! Dock with us if you'd like to "
+"chat."
+msgstr ""
+"Merci infiniment d'avoir retrouvé nos chercheurs ! Amarrez-vous à nous si "
+"vous souhaitez discuter."
+
+#: scripts/scenario_30_brokenglass.lua:1564
+msgctxt "admin-comms"
+msgid "We are so glad to have you aboard. What can we help you with?"
+msgstr ""
+"Bonjour,\n"
+"Nous sommes ravis de vous avoir avec nous. En quoi pouvons-nous vous aider ?"
+
+#: scripts/scenario_30_brokenglass.lua:1565
+#: scripts/scenario_30_brokenglass.lua:1579
+msgctxt "admin-comms"
+msgid "How long have you been operating in this system?"
+msgstr "Depuis combien de temps travaillez-vous dans ce système ?"
+
+#: scripts/scenario_30_brokenglass.lua:1566
+#: scripts/scenario_30_brokenglass.lua:1583
+msgctxt "admin-comms"
+msgid "Where is the colony where your researchers live?"
+msgstr "Où se trouve la colonie où vivent vos chercheurs ?"
+
+#: scripts/scenario_30_brokenglass.lua:1567
+#: scripts/scenario_30_brokenglass.lua:1587
+msgctxt "admin-comms"
+msgid "Tell us about the nearby nebulae."
+msgstr "Parlez-nous des nébuleuses environnantes."
+
+#: scripts/scenario_30_brokenglass.lua:1568
+#: scripts/scenario_30_brokenglass.lua:1593
+msgctxt "admin-comms"
+msgid "Are there any Kraylor in the area?"
+msgstr "Y a-t-il des Kraylors dans le coin ?"
+
+#: scripts/scenario_30_brokenglass.lua:1569
+#: scripts/scenario_30_brokenglass.lua:1597
+msgctxt "admin-comms"
+msgid "Are there any Exuari in the area?"
+msgstr "Y a-t-il des Éxuaris dans le coin ?"
+
+#: scripts/scenario_30_brokenglass.lua:1573
+msgctxt "admin-comms"
+msgid "Always a pleasure to have you as our honoured guests."
+msgstr "Toujours un plaisir de vous avoir comme invités d'honneur."
+
+#: scripts/scenario_30_brokenglass.lua:1575
+msgctxt "admin-comms"
+msgid "Any idea where we can get a Hawking Scanner fixed?"
+msgstr ""
+"Une idée de l'endroit où nous pourrions faire réparer un scanner Hawking ?"
+
+#: scripts/scenario_30_brokenglass.lua:1576
+msgctxt "admin-comms"
+msgid ""
+"Dr. Hendrix, who you rescued earlier, is the leading expert on those "
+"scanners."
+msgstr ""
+"Le Dr Hendrix, que vous avez sauvé plus tôt, est le principal expert de ces "
+"scanners."
+
+#: scripts/scenario_30_brokenglass.lua:1580
+msgctxt "admin-comms"
+msgid "We have been operating here for about 50 years"
+msgstr "Nous opérons ici depuis environ 50 ans."
+
+#: scripts/scenario_30_brokenglass.lua:1584
+msgctxt "admin-comms"
+msgid "You'll find it to the east of the nebulae"
+msgstr "Vous la trouverez à l'est des nébuleuses."
+
+#: scripts/scenario_30_brokenglass.lua:1588
+msgctxt "admin-comms"
+msgid ""
+"Well I suppose you already know about the nebulae. They are to the north.\n"
+"\n"
+"Did you know that it's a popular place to hunt for treasure?"
+msgstr ""
+"Eh bien, je suppose que vous les avez déjà aperçues. Elles se trouvent au "
+"nord.\n"
+"C'est un endroit assez populaire pour la chasse au trésor."
+
+#: scripts/scenario_30_brokenglass.lua:1594
+msgctxt "admin-comms"
+msgid ""
+"We see some from time to time, but with the non-aggression treaty, they "
+"haven't been too much trouble."
+msgstr ""
+"On en voit de temps en temps, mais avec le traité de non-agression, ils ne "
+"posent pas trop de problèmes."
+
+#: scripts/scenario_30_brokenglass.lua:1598
+msgctxt "admin-comms"
+msgid ""
+"Old space junk, mostly. We haven't seen any real Exauri activity in decades."
+msgstr ""
+"De vieux débris de leurs vaisseaux spatiaux, principalement.\n"
+"Nous n'avons pas observé de véritable activité Éxuarie depuis des décennies "
+"par ici."
+
+#: scripts/scenario_30_brokenglass.lua:1607
+msgctxt "found-comms"
+msgid ""
+"Come in? Dr. Hendrix here... Come in?\n"
+"\n"
+"Oh thank heavens, we're found! We thought we might be stuck here for good!\n"
+"\n"
+"We need to install a new hyperplasma full bridge rectifier, but our plasma "
+"conduit driver has gone missing. You must have one in your engine room? If "
+"you let us borrow it, we will upgrade your sensors with our new experimental "
+"modifications."
+msgstr ""
+"Allo ? Ici le Dr Hendrix... Allo ? Nous sommes ici !\n"
+"\n"
+"Oh Dieu merci, nous sommes sauvés ! Nous pensions être coincés ici pour de "
+"bon !\n"
+"\n"
+"Nous devions installer un nouveau redresseur de pont en hyperplasma, mais "
+"notre driver de conduit plasma a disparu. Vous devez bien en avoir un dans "
+"votre salle des machines ? Si vous nous laissez vous l'empruntez, nous "
+"améliorerons vos capteurs avec nos nouvelles modifications expérimentales."
+
+#: scripts/scenario_30_brokenglass.lua:1612
+msgctxt "found-comms"
+msgid "Sure, you can borrow our conduit driver!"
+msgstr "Bien sûr, vous pouvez emprunter notre driver de conduit !"
+
+#: scripts/scenario_30_brokenglass.lua:1613
+msgctxt "found-comms"
+msgid ""
+"Great. Your sensors are upgraded. We'll get this rectifier installed and be "
+"on our way.\n"
+"\n"
+"Thanks again, Captain. If you ever need some help with your Hawking "
+"Scanners, look me up!"
+msgstr ""
+"Formidable ! \n"
+"Après plusieurs minutes d'attente…\n"
+"\n"
+"Vos capteurs sont mis à jour. Le temps d'installer ce redresseur de pont et "
+"nous reprenons la route.\n"
+"\n"
+"Merci encore, capitaine. Si jamais vous avez besoin d'aide avec vos scanners "
+"Hawking, Venez me chercher !"
+
+#: scripts/scenario_30_brokenglass.lua:1621
+msgctxt "found-comms"
+msgid "Thanks so much for finding us!"
+msgstr "Encore merci de nous avoir retrouvé !"
+
+#: scripts/scenario_30_brokenglass.lua:1626
+#, fuzzy
+msgctxt "investigate-comms"
+msgid "What do you have to say for yourself?"
+msgstr "Qu'avez-vous à dire pour votre défense ?"
+
+#: scripts/scenario_30_brokenglass.lua:1627
+#, fuzzy
+msgctxt "investigate-comms"
+msgid "We're just running a salvage mission."
+msgstr "Nous venons juste de lancer une opération de sauvetage."
+
+#: scripts/scenario_30_brokenglass.lua:1628
+#, fuzzy
+msgctxt "investigate-comms"
+msgid "Carry on, then, we're keeping our eye on you."
+msgstr ""
+"Continuez, alors. \n"
+"Nous gardons un œil sur vous."
+
+#: scripts/scenario_30_brokenglass.lua:1630
+#, fuzzy
+msgctxt "investigate-comms"
+msgid "Back off, this is a special military operation"
+msgstr "Éloignez-vous, ceci est une opération militaire spéciale."
+
+#: scripts/scenario_30_brokenglass.lua:1631
+#, fuzzy
+msgctxt "investigate-comms"
+msgid "You want to back up that escalation with some weapons fire?"
+msgstr "Vous voulez que l'on règle ça avec des missiles ?"
+
+#: scripts/scenario_30_brokenglass.lua:1637
+msgctxt "drone-comms"
+msgid ""
+"We oversee the B-3 liquidation of the Ghosts assets.\n"
+"\n"
+"Dock with us to check out what we've got."
+msgstr ""
+"Bienvenue chez nous,\n"
+"\n"
+"Nous liquidons actuellement des B-3 Fantômes.\n"
+"\n"
+"Amarrez-vous à nous si vous voulez voir tout ce que nous avons en stock."
+
+#: scripts/scenario_30_brokenglass.lua:1641
+msgctxt "drone-comms"
+msgid ""
+"You need any of this stuff?\n"
+"\n"
+"It's not for sale, as such. You'll need to get a requisition from the Admin "
+"Station in order to carry anything out.\n"
+msgstr ""
+"Avez-vous besoin de quelque chose parmi ce matériel ?\n"
+"\n"
+"Ce n'est pas à vendre, en tant que tel. Vous devez au préalable obtenir un "
+"bon de réquisition de la station d'administration pour récupérer quoi que ce "
+"soit.\n"
+
+#: scripts/scenario_30_brokenglass.lua:1645
+msgctxt "drone-comms"
+msgid "Proximity Sensor"
+msgstr "Capteur de proximité"
+
+#: scripts/scenario_30_brokenglass.lua:1646
+msgctxt "drone-comms"
+msgid "Activates when ships get too close"
+msgstr ""
+"Se déclenche et vous alerte lorsque les vaisseaux se rapprochent trop près."
+
+#: scripts/scenario_30_brokenglass.lua:1647
+#: scripts/scenario_30_brokenglass.lua:1651
+#: scripts/scenario_30_brokenglass.lua:1661
+#: scripts/scenario_30_brokenglass.lua:1666
+msgctxt "drone-comms"
+msgid "<- Back"
+msgstr "Précédent"
+
+#: scripts/scenario_30_brokenglass.lua:1649
+msgctxt "drone-comms"
+msgid "Intelligence Accelerator"
+msgstr "Accélérateur d'intelligence"
+
+#: scripts/scenario_30_brokenglass.lua:1650
+msgctxt "drone-comms"
+msgid "Too expensive to use for video games."
+msgstr "Trop cher pour utiliser avec des jeux vidéo."
+
+#: scripts/scenario_30_brokenglass.lua:1653
+msgctxt "drone-comms"
+msgid "Graviton Lens"
+msgstr "Lentille Graviton"
+
+#: scripts/scenario_30_brokenglass.lua:1656
+msgctxt "drone-comms"
+msgid ""
+"Ooooh, a requisition!\n"
+"\n"
+"Alright, enjoy... focusing your gravitons, I guess!"
+msgstr ""
+"Ooooh, une réquisition !\n"
+"\n"
+"Très bien, amusez-vous bien avec... en concentrant vos gravitons, je "
+"suppose !"
+
+#: scripts/scenario_30_brokenglass.lua:1660
+msgctxt "drone-comms"
+msgid "For focusing the gravitational field."
+msgstr "Pour focaliser le champ gravitationnel."
+
+#: scripts/scenario_30_brokenglass.lua:1664
+msgctxt "drone-comms"
+msgid "Holographic Projector"
+msgstr "Projecteur holographique"
+
+#: scripts/scenario_30_brokenglass.lua:1665
+msgctxt "drone-comms"
+msgid "Shows very convincing drone stations"
+msgstr "Diffuse des hologrammes de stations de drones très convaincants."
+
+#: scripts/scenario_30_brokenglass.lua:1674
+msgctxt "attack-messages"
+msgid ""
+"HELP!\n"
+"\n"
+"We are taking damage from "
+msgstr ""
+"AU SECOURS !\n"
+"\n"
+"Nous subissons des dégâts de la part du vaisseau "
+
+#: scripts/scenario_30_brokenglass.lua:1676
+msgctxt "attack-messages"
+msgid " and might need assistance."
+msgstr " et demandons votre assistance !"
+
+#: scripts/scenario_30_brokenglass.lua:1680
+msgctxt "attack-messages"
+msgid " is taking damage!"
+msgstr " est en train de subir des dégâts !"
+
+#: scripts/scenario_30_brokenglass.lua:1707
+msgctxt "admin-comms"
+msgid ""
+"Sorry to interrupt, but we've just recieved an urgent call.\n"
+"\n"
+"It seems one of our researchers, Dr. Hendrix, and her crew have lost their "
+"way in a nearby nebula and need our help. They were running experiments in "
+"the nebula when their engines and transponder went offline. Please follow "
+"our scout vessel, SR7, to the nebula and search for them."
+msgstr ""
+"Désolé de vous interrompre, mais nous venons de recevoir un appel urgent.\n"
+"\n"
+"Il semble qu'un de nos chercheurs, le Dr Hendrix, et son équipe se soient "
+"égarés dans une nébuleuse voisine et aient besoin de notre aide. Ils "
+"menaient des expériences dans la nébuleuse lorsque leurs moteurs et leur "
+"transpondeur ont arrêtés d'émettre. Veuillez suivre notre vaisseau "
+"éclaireur, SR7, jusqu'à la nébuleuse afin de les retrouver.\n"
+"Nous comptons sur vous."
+
+#: scripts/scenario_30_brokenglass.lua:1714
+#, fuzzy
+msgctxt "admin-comms"
+msgid "Meet me at the edge of the nebula"
+msgstr "Retrouvez-moi au à la lisière de la nébuleuse."
+
+#: scripts/scenario_30_brokenglass.lua:1732
+msgctxt "admin-comms"
+msgid ""
+"Ready to head in?\n"
+"\n"
+"The nebula is very thick, so we will need to get close to find a ship with "
+"no transponder. Probes won't show the ship, but your relay station should be "
+"able to pick it up at 20U or less. There may be hazards, so be careful.\n"
+"\n"
+"I'll follow you. Let's find Dr. Hendrix and bring her crew home."
+msgstr ""
+"Bonjour Propitious 1, prêt à y aller ?\n"
+"\n"
+"La nébuleuse est très épaisse, les sondes ne permettront pas de localiser le "
+"vaisseau sans son transpondeur. Nous devrons donc nous rapprocher pour "
+"trouver le vaisseau, votre carte des communications devrait pouvoir nous le "
+"signaler dans un rayon de 20 unités. \n"
+"\n"
+"Il peut y avoir du danger, alors soyez prudent. Nous vous suivrons. Trouvons "
+"le Dr Hendrix et son équipage et ramenons-les sain et sauf."
+
+#: scripts/scenario_30_brokenglass.lua:1737
+msgctxt "admin-comms"
+msgid "Fly into the Nebula and find Dr. Hendrix"
+msgstr "Naviguer dans la nébuleuse et retrouver le Dr Hendrix."
+
+#: scripts/scenario_30_brokenglass.lua:1760
+msgid "Sensors have been upgraded."
+msgstr "Les capteurs ont été améliorés."
+
+#: scripts/scenario_30_brokenglass.lua:1802
+msgctxt "defence-comms"
+msgid ""
+"Great!\n"
+"\n"
+"Start at the checkpoint in the North West. You'll need to dock at each "
+"station before proceeding to the next."
+msgstr ""
+"Formidable !\n"
+"\n"
+"Commencez donc par le poste de contrôle au nord-ouest. Vous devrez vous "
+"amarrer à chaque station avant de passer à la suivante afin de vous assurer "
+"qu'il n'y a aucun problème à bord."
+
+#: scripts/scenario_30_brokenglass.lua:1833
+msgctxt "defence-comms"
+msgid "Please proceed to "
+msgstr "Veuillez maintenant procéder à l'inspection du poste de contrôle :  "
+
+#: scripts/scenario_30_brokenglass.lua:1834
+msgctxt "defence-comms"
+msgid "Proceed to "
+msgstr "Procéder à l'inspection du poste de contrôle :  "
+
+#: scripts/scenario_30_brokenglass.lua:1853
+msgctxt "defence-comms"
+msgid ""
+"Great work captain!\n"
+"\n"
+"You have repelled the attackers and the SW Checkpoint is safe for now, but "
+"intelligence reports show a huge drone convoy in your vicinity to the NW.\n"
+"\n"
+"INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this "
+"convoy is extremely risky. Keep your distance, but we'd like to know where "
+"they are going."
+msgstr ""
+"Beau boulot capitaine !\n"
+"\n"
+"Vous avez su repousser les attaques et le poste de contrôle sud-ouest, SW "
+"Checkpoint, est en sécurité pour le moment.\n"
+"Mais les services de renseignement nous rapportent à l'instant qu'un énorme "
+"essaim de drones Fantômes se trouvant dans vos environs se dirigent en "
+"direction du nord-ouest.\n"
+"\n"
+"Nous vous demandons d'enquêter. N'ENGAGEZ PAS LE COMBAT ! Attaquer cet "
+"essaim serait extrêmement risqué. Gardez vos distances, Nous voulons juste "
+"savoir où ils vont."
+
+#: scripts/scenario_30_brokenglass.lua:1888
+msgctxt "defence-comms"
+msgid ""
+"Come in, Captain.\n"
+"\n"
+"We have the info we need about that convoy and strongly discourage any "
+"further engagement.\n"
+"\n"
+"Your assistance is required with a secret mission. Dock with us to receive "
+"further instructions when you're ready."
+msgstr ""
+"Salutations capitaine.\n"
+"\n"
+"Grâce à vous et votre équipage, nous avons les informations que nous "
+"voulions sur cet essaim. Nous vous déconseillons fortement de vous "
+"rapprocher plus avant.\n"
+"\n"
+"Votre aide est maintenant requise pour une mission classée secret défense. "
+"Veuillez rejoindre la base au plus vite afin de recevoir votre ordre de "
+"mission."
+
+#: scripts/scenario_30_brokenglass.lua:1936
+msgctxt "wormhole-comms"
+msgid "and when in doubt - apply missiles."
+msgstr "et en cas de doute - utilisez vos missiles."
+
+#: scripts/scenario_30_brokenglass.lua:1938
+#, fuzzy
+msgctxt "wormhole-comms"
+msgid "and we've given you some extra missiles to help get the job done."
+msgstr ""
+"et nous vous avons fourni des missiles supplémentaires pour vous aider à "
+"accomplir votre mission."
+
+#: scripts/scenario_30_brokenglass.lua:1941
+#, fuzzy
+msgctxt "wormhole-comms"
+msgid "and go find some extra missiles to help get the job done."
+msgstr ""
+"et allez chercher des missiles supplémentaires pour vous aider à faire ce "
+"travail."
+
+#: scripts/scenario_30_brokenglass.lua:1944
+msgctxt "wormhole-comms"
+msgid ""
+"Great!\n"
+"\n"
+"There is an old Exuari station, callsign X472, to the SE on the other side "
+"of the wormhole. It used to study the planet forming nearby, but it's been "
+"abandoned for over a century now, no one aboard and no weapons, a historical "
+"relic, really. We need you to demolish it and bring us the stabilizers from "
+"its jump drive which we can use to maintain our Hawking Scanners.\n"
+"\n"
+"We have hacked the emergency integrity field so that the station can be "
+"destroyed, but there were strange disturbances when we deactivated it. We're "
+"not sure what it means, but we advise you to exercise caution...\n"
+"\n"
+"..."
+msgstr ""
+"Génial!\n"
+"\n"
+"Il existe une ancienne station Éxuarie, indicatif X472, au sud-est de "
+"l'autre côté du trou de ver. À l'époque ils étudiaient la planète qui se "
+"formait à proximité, mais la station est désormais abandonnée depuis près "
+"d'un siècle : pas âme qui vive à bord et aucune arme en état de "
+"fonctionnement, une relique historique, vraiment. Nous avons besoin que vous "
+"la démolissiez et que vous nous rapportiez les stabilisateurs de son moteur "
+"de téléportation que nous pourrons utiliser pour améliorer nos scanners "
+"Hawking.\n"
+"\n"
+"Nous avons piraté le bouclier d'intégrité d'urgence afin que la station "
+"puisse être détruite, mais nous avons perçu d'étranges perturbations lorsque "
+"nous l'avons désactivé. Nous ne savons pas ce que cela signifie, mais nous "
+"vous conseillons de faire acte de prudence...\n"
+"\n"
+"..."
+
+#: scripts/scenario_30_brokenglass.lua:1967
+msgctxt "kw-comms"
+msgid ""
+"Ugh, humans.\n"
+"\n"
+"This is the Kraylor Advanced \"Reasearch\" Project Agency (KARPA), we have "
+"detected your suspicious activity in the vicinity.\n"
+"\n"
+"We are sending a team to investigate what you are up to. If you fire on us, "
+"there will be trouble!"
+msgstr ""
+"Eh, les humains !\n"
+"\n"
+"Ici l'agence de projet Kraylor Advanced \"Reasearch\" (KARPA), nous "
+"détectons votre activité suspecte dans les environs.\n"
+"\n"
+"Nous envoyons une équipe pour enquêter sur ce que vous faites. Si vous "
+"ouvrez le feu, vous aurez de sérieux ennuis !"
+
+#: scripts/scenario_30_brokenglass.lua:1972
+msgctxt "kw-comms"
+msgid ""
+"The Kraylor are investigating our activities and have warned us not to "
+"escalate"
+msgstr ""
+"Les Kraylors enquêtent actuellement sur nos activités et nous avertissent de "
+"ne pas aggraver la situation."
+
+#: scripts/scenario_30_brokenglass.lua:1978
+msgctxt "wormhole-comms"
+msgid ""
+"Great, you got the parts!\n"
+"\n"
+"You'd better hurry back, we've seen some Kraylor activity in the area. "
+"Hopefully your salvage mission didn't attract the wrong sort of attention."
+msgstr ""
+"Super, vous avez récupéré les pièces !\n"
+"\n"
+"Vous feriez mieux de vous dépêcher, nous observons de l'agitation Kraylor "
+"dans la région. J'espère que votre mission de récupération n'a pas été "
+"détectée."
+
+#: scripts/scenario_30_brokenglass.lua:1982
+msgctxt "wormhole-comms"
+msgid "Return the spare parts to the Wormhole Station"
+msgstr "Rapporter les pièces de rechange à la station Wormhole."
+
+#: scripts/scenario_30_brokenglass.lua:1994
+msgctxt "wormhole-comms"
+msgid "Jump Defence Activated"
+msgstr "Défense de téléportation activée."
+
+#: scripts/scenario_30_brokenglass.lua:2019
+msgctxt "kw-comms"
+msgid ""
+"Watch your back, Hugh Mon!\n"
+"\n"
+"We don't know what you're up to, but we don't like the look of it. Keep your "
+"distance and maybe we'll leave you alone.\n"
+"\n"
+"<The Kraylor Vessel jumps back through the wormhole>"
+msgstr ""
+
+#: scripts/scenario_30_brokenglass.lua:2024
+msgctxt "kw-comms"
+msgid "The Kraylor seem hostile and have warned us to keep our distance"
+msgstr ""
+"Les Kraylors semblent hostiles et nous ont avertis de garder nos distances."
+
+#: scripts/scenario_30_brokenglass.lua:2055
+msgctxt "defence-comms"
+msgid "Good luck"
+msgstr "Bonne chance."
+
+#: scripts/scenario_30_brokenglass.lua:2086
+msgctxt "defence-comms"
+msgid "Arrived, scan the security beacons"
+msgstr ""
+"Bien, vous voilà arrivés.\n"
+"Maintenant, cherchez et scannez les balises de sécurité."
+
+#: scripts/scenario_30_brokenglass.lua:2090
+msgctxt "defence-comms"
+msgid ""
+"Your cover has been blown and the proximity defence system remains active. "
+"We suggest leaving and trying again to arrive with a future convoy."
+msgstr ""
+"ATTENTION,\n"
+"Votre couverture est grillée et le système de défense de proximité reste "
+"actif. Nous vous suggérons de quitter les lieux et d'essayer à nouveau "
+"d'arriver avec une future escorte."
+
+#: scripts/scenario_30_brokenglass.lua:2091
+msgctxt "defence-comms"
+msgid "Our cover has been blown"
+msgstr "Notre couverture a été grillée."
+
+#: scripts/scenario_30_brokenglass.lua:2096
+msgctxt "defence-comms"
+msgid "We should be good to try again"
+msgstr "Nous sommes bons pour essayer à nouveau."
+
+#: scripts/scenario_30_brokenglass.lua:2130
+msgctxt "drone-comms"
+msgid ""
+"Great work, Captain!\n"
+"\n"
+"We have taken control of this station and will be liquidating spare parts "
+"from the wreckage."
+msgstr ""
+"Excellent travail, capitaine !\n"
+"\n"
+"Nous avons pris le contrôle de cette station et allons liquider les pièces "
+"de rechange de l'épave."
+
+#: scripts/scenario_30_brokenglass.lua:2133
+msgctxt "drone-comms"
+msgid "DB-3 has a collection of spare parts"
+msgstr "DB-3 a toute une collection de pièces de rechange."
+
+#: scripts/scenario_30_brokenglass.lua:2212
+msgctxt "wormhole-comms"
+msgid ""
+"Thanks so much, captain!\n"
+"\n"
+"You really saved our ass there. Unfortunately our Hawking Scanner was "
+"damaged by the bomb, and we haven't been able to get it back online. Do you "
+"think you could get it fixed for us?\n"
+"\n"
+"Please dock with us to pick up the scanner."
+msgstr ""
+"Merci beaucoup, capitaine !\n"
+"\n"
+"Vous nous avez vraiment sauvé la peau. Malheureusement, notre scanner "
+"Hawking a été endommagé par la bombe et nous n'avons pas réussi à le "
+"remettre en état de fonctionnement. Pensez-vous que vous pourriez nous le "
+"faire réparer ?\n"
+"\n"
+"Veuillez vous amarrer à nous pour récupérer le scanner."
+
+#: scripts/scenario_30_brokenglass.lua:2217
+msgctxt "wormhole-comms"
+msgid "Get the Hawking Scanner from the Wormhole Station"
+msgstr "Récupérer le scanner Hawking de la station Wormhole Stn."
+
+#: scripts/scenario_30_brokenglass.lua:2272
+msgctxt "drone-ship"
+msgid ""
+"This ship will not activate the drone station proximity defences as long as "
+"you arrive with a convoy."
+msgstr ""
+"Ce vaisseau n'activera pas les défenses de proximité des stations de drones "
+"tant que vous serez avec une escorte."
+
+#: scripts/scenario_30_brokenglass.lua:2276
+msgctxt "drone-ship"
+msgid "It's nice to be back aboard the Propitious 1"
+msgstr "C'est agréable d'être de retour à bord du Propitious 1."
+
+#: scripts/scenario_30_brokenglass.lua:2309
+msgctxt "drone-comms"
+msgid "PROXIMITY DEFENCE SYSTEM ACTIVATED"
+msgstr "- SYSTÈME DE DÉFENSE DE PROXIMITÉ ACTIVÉ -"
+
+#: scripts/scenario_30_brokenglass.lua:2310
+msgctxt "drone-comms"
+msgid "We got too close to a drone station and it launched defences."
+msgstr ""
+"Nous nous sommes trop approchés d'une station de drones et elle a activé ses "
+"défenses."
+
+#: scripts/scenario_30_brokenglass.lua:2321
+msgctxt "security-beacons"
+msgid ""
+"The Ghosts drone security beacons. If we scan them all, we should be able to "
+"find the control station. We'll need to get pretty close."
+msgstr ""
+"Une balise de sécurité des drones Fantômes.\n"
+"En les scannant toutes, nous devrions pouvoir trouver la station de "
+"contrôle.\n"
+"Il faut s'en rapprocher."
+
+#: scripts/scenario_30_brokenglass.lua:2329
+msgctxt "security-beacons"
+msgid ""
+"The beamforming configuration from this beacon will help the boffins "
+"triangulate the location of the central control."
+msgstr ""
+"La configuration de formation de faisceaux de cette balise aidera nos "
+"scientifiques à trianguler l'emplacement du contrôle central."
+
+#: scripts/scenario_30_brokenglass.lua:2338
+msgctxt "defence-comms"
+msgid ""
+"Great work!\n"
+"\n"
+"  Our boffins were able to piece together the data and figure out where the "
+"commands are coming from.\n"
+"\n"
+"  You must destroy station "
+msgstr ""
+"Excellent travail !\n"
+"\n"
+"Nos scientifiques ont pu rassembler les données que vous nous avez "
+"transmises. Ils ont réussis à déterminer l'origine des commandes.\n"
+"\n"
+" Vous devez détruire la station "
+
+#: scripts/scenario_30_brokenglass.lua:2343
+msgctxt "defence-comms"
+msgid "The drone control station is "
+msgstr "La station de contrôle des drones est"
+
+#: scripts/scenario_30_brokenglass.lua:2412
+msgid "Too busy to talk today, Captain."
+msgstr "Trop occupé pour discutailler aujourd'hui, cap'taine."
+
+#: scripts/scenario_30_brokenglass.lua:2421
+msgctxt "hendrix-hints"
+msgid "Sorry, I don't know where Dr. Hendrix lives"
+msgstr ""
+"Désolé, je ne sais pas où vit le Dr Hendrix.\n"
+"Au revoir."
+
+#: scripts/scenario_30_brokenglass.lua:2429
+msgctxt "hendrix-hints"
+msgid "Dr. Hendrix, of course! I'm pretty sure she was on a "
+msgstr "Dr Hendrix, bien sûr ! Je suis sûr qu'elle était sur un "
+
+#: scripts/scenario_30_brokenglass.lua:2431
+msgctxt "hendrix-hints"
+msgid ""
+"Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her "
+"address definitely has a '"
+msgstr ""
+"Eh bien, laissez moi réfléchir...Dr Hendrix, hum... Désolé, mais "
+"honnêtement, tout ce dont je me souviens, c'est que son adresse comportait "
+"un '"
+
+#: scripts/scenario_30_brokenglass.lua:2438
+msgid "DEFEAT - A Patrol Station has been destroyed"
+msgstr "DÉFAITE - Une station de point de contrôle a été détruite."
+
+#: scripts/scenario_30_brokenglass.lua:2445
+msgid "DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"
+msgstr ""
+"DÉFAITE - Une station importante : Admin Stn, Defence Stn, Wormhole Stn) a "
+"été détruite."
+
+#: scripts/scenario_30_brokenglass.lua:2452
+msgid "DEFEAT - Station B-3 has been destroyed"
+msgstr "DÉFAITE - La station B-3 a été détruite."
+
+# Scenario name
+#~ msgid "The Omicron Plague"
+#~ msgstr "La peste Omicron"
+
+# Scenario description
+#~ msgid ""
+#~ "A routine patrol mission turns into a desperate attempt to save humanity "
+#~ "from an Exuari biological weapon\n"
+#~ "\n"
+#~ "Designed to run in a limited time with different terrain each time. "
+#~ "Multiple player ships may join\n"
+#~ "\n"
+#~ "Duration: approximately 45 minutes depending on the configuration options "
+#~ "chosen\n"
+#~ "\n"
+#~ "Version 1\n"
+#~ "\n"
+#~ "USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+#~ "There's one every Saturday at 1600 UTC (aka GMT or Zulu). All experience "
+#~ "levels are welcome."
+#~ msgstr ""
+#~ "- Durée approx. : 1h30mn (variable)\n"
+#~ "- Difficulté : Difficile (variable)\n"
+#~ "- Vaisseaux joueurs : 1 à plusieurs\n"
+#~ "\n"
+#~ "Une mission de patrouille de routine se transforme en une tentative "
+#~ "désespérée de sauver l'humanité d'une arme biologique Exuari.\n"
+#~ "\n"
+#~ "Scenario conçu pour être joué en un temp limité et sur un terrain "
+#~ "différent à chaque fois.\n"
+#~ "De nombreux réglages disponibles pour varier les parties.\n"
+#~ "\n"
+#~ "Version 1 - mars 2022\n"
+#~ "\n"
+#~ "Sur le Discord USN : https://discord.gg/PntGG3a vous pouvez rejoindre la "
+#~ "communauté anglophone et jouer des parties en ligne. Il y en a tous les "
+#~ "samedis à 17h00 heure française. Tous les niveaux d'expérience sont les "
+#~ "bienvenus.\n"
+#~ "\n"
+#~ "\n"
+#~ "- Titre original : The Omicron Plague\n"
+#~ "- Auteur : Xansta\n"
+#~ "https://discord.gg/GjqM9Y9yBe\n"
+#~ "- Traduction FR : Muerte\n"
+#~ "https://discord.gg/2NPKyMnGwp"
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Enemies"
+#~ msgstr "Puissance ennemie"
+
+#~ msgctxt "Enemies"
+#~ msgid "Fewer or weaker enemies"
+#~ msgstr "Ennemis moins nombreux et/ou plus faibles."
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgctxt "Enemies"
+#~ msgid "Normal number or strength of enemies"
+#~ msgstr "Difficulté normale."
+
+#~ msgctxt "Enemies"
+#~ msgid "More or stronger enemies"
+#~ msgstr "Ennemis plus nombreux et/ou plus puissants."
+
+#~ msgctxt "Enemies"
+#~ msgid "Extreme"
+#~ msgstr "Extrême"
+
+#~ msgctxt "Enemies"
+#~ msgid "Much stronger, many more enemies"
+#~ msgstr "Ennemis beaucoup plus nombreux et/ou beaucoup plus puissants."
+
+#~ msgctxt "Enemies"
+#~ msgid "Quixotic"
+#~ msgstr "Chimérique"
+
+#~ msgctxt "Enemies"
+#~ msgid "Insanely strong and/or inordinately large numbers of enemies"
+#~ msgstr "Ennemis en nombre démesuré et/ou incroyablement puissants."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Murphy"
+#~ msgstr "Loi de Murphy"
+
+#~ msgctxt "setting"
+#~ msgid "Configures the perversity of the universe according to Murphy's law"
+#~ msgstr "Définit la perversité de l'univers selon la loi de Murphy."
+
+#~ msgctxt "Murphy"
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are more in your favor"
+#~ msgstr "Les facteurs aléatoires sont plus en votre faveur."
+
+#~ msgctxt "Murphy"
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are normal"
+#~ msgstr "Les facteurs aléatoires sont normaux."
+
+#~ msgctxt "Murphy"
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "Murphy"
+#~ msgid "Random factors are more against you"
+#~ msgstr "Les facteurs aléatoires sont plus contre vous."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Rescue"
+#~ msgstr "Durée (sauvetage)"
+
+#~ msgctxt "setting"
+#~ msgid ""
+#~ "Number of minutes given to rescue an ailing ensign. Grant more time to "
+#~ "make it easier, less time to make it harder."
+#~ msgstr ""
+#~ "Nombre de minutes accordées pour secourir un officier malade. Prenez plus "
+#~ "de temps pour vous faciliter la tâche, moins de temps pour la rendre plus "
+#~ "difficile."
+
+#~ msgctxt "Rescue"
+#~ msgid "15"
+#~ msgstr "15 mn"
+
+#~ msgctxt "Rescue"
+#~ msgid "Fifteen minutes to help ensign"
+#~ msgstr "Vous avez 15 minutes pour secourir l'officier."
+
+#~ msgctxt "Rescue"
+#~ msgid "20"
+#~ msgstr "20 mn"
+
+#~ msgctxt "Rescue"
+#~ msgid "Twenty minutes to help ensign"
+#~ msgstr "Vous avez 20 minutes pour secourir l'officier."
+
+#~ msgctxt "Rescue"
+#~ msgid "25"
+#~ msgstr "25 mn"
+
+#~ msgctxt "Rescue"
+#~ msgid "Twenty-five minutes to help ensign"
+#~ msgstr "Vous avez 25 minutes pour secourir l'officier."
+
+#~ msgctxt "Rescue"
+#~ msgid "30"
+#~ msgstr "30 mn"
+
+#~ msgctxt "Rescue"
+#~ msgid "Thirty minutes to help ensign"
+#~ msgstr "Vous avez 30 minutes pour secourir l'officier."
+
+#~ msgctxt "setting"
+#~ msgid "Destroy"
+#~ msgstr "Durée (destruction)"
+
+#~ msgctxt "setting"
+#~ msgid ""
+#~ "Number of minutes given to destroy designated enemy base. Grant more time "
+#~ "to make it easier, less time to make it harder."
+#~ msgstr ""
+#~ "Nombre de minutes accordées pour détruire la base ennemie désignée. "
+#~ "Prenez plus de temps pour vous faciliter la tâche, moins de temps pour la "
+#~ "rendre plus difficile."
+
+#~ msgctxt "Destroy"
+#~ msgid "15"
+#~ msgstr "15 mn"
+
+#~ msgctxt "Destroy"
+#~ msgid "Fifteen minutes to destroy base"
+#~ msgstr "Vous avez 15 minutes pour détruire la base."
+
+#~ msgctxt "Destroy"
+#~ msgid "20"
+#~ msgstr "20 mn"
+
+#~ msgctxt "Destroy"
+#~ msgid "Twenty minutes to destroy base"
+#~ msgstr "Vous avez 20 minutes pour détruire la base."
+
+#~ msgctxt "Destroy"
+#~ msgid "25"
+#~ msgstr "25 mn"
+
+#~ msgctxt "Destroy"
+#~ msgid "Twenty-five minutes to destroy base"
+#~ msgstr "Vous avez 25 minutes pour détruire la base."
+
+#~ msgctxt "Destroy"
+#~ msgid "30"
+#~ msgstr "30 mn"
+
+#~ msgctxt "Destroy"
+#~ msgid "Thirty minutes to destroy base"
+#~ msgstr "Vous avez 30 minutes pour détruire la base."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Reputation"
+#~ msgstr "Réputation"
+
+#~ msgctxt "setting"
+#~ msgid "Amount of reputation to start with"
+#~ msgstr "Définit la quantité de réputation avec laquelle vous démarrez."
+
+#~ msgctxt "Reputation"
+#~ msgid "Unknown"
+#~ msgstr "Inconnu"
+
+#~ msgctxt "Reputation"
+#~ msgid "Zero reputation - nobody knows anything about you"
+#~ msgstr ""
+#~ "Aucune réputation - Personne ne sait rien de vous et votre équipage."
+
+#~ msgctxt "Reputation"
+#~ msgid "Nice"
+#~ msgstr "Bon"
+
+#~ msgctxt "Reputation"
+#~ msgid ""
+#~ "20 reputation - you've had a small positive influence on the local "
+#~ "community"
+#~ msgstr ""
+#~ "Réputation 20 - Vous avez eu une petite influence positive sur la "
+#~ "communauté locale."
+
+#~ msgctxt "Reputation"
+#~ msgid "Hero"
+#~ msgstr "Bienfaiteur"
+
+#~ msgctxt "Reputation"
+#~ msgid "50 reputation - you helped important people or lots of people"
+#~ msgstr ""
+#~ "Réputation 50 - Vous avez aidé beaucoup de personnes dont des personnes "
+#~ "importantes."
+
+#~ msgctxt "Reputation"
+#~ msgid "Major Hero"
+#~ msgstr "Héros"
+
+#~ msgctxt "Reputation"
+#~ msgid ""
+#~ "100 reputation - you're well known by nearly everyone as a force for good"
+#~ msgstr ""
+#~ "Réputation 100 - Vous êtes connu de presque tout le monde comme une force "
+#~ "du bien."
+
+#~ msgctxt "Reputation"
+#~ msgid "Super Hero"
+#~ msgstr "Justicier de l'espace"
+
+#~ msgctxt "Reputation"
+#~ msgid "200 reputation - everyone knows you and relies on you for help"
+#~ msgstr ""
+#~ "Réputation 200 - Toute la galaxie vous connaît et compte sur vous pour "
+#~ "obtenir de l'aide."
+
+# Scenario setting
+#~ msgctxt "setting"
+#~ msgid "Unique Ship"
+#~ msgstr "Vaisseau original"
+
+#~ msgctxt "setting"
+#~ msgid "Choose player ship outside of standard player ship list"
+#~ msgstr ""
+#~ "Vous pouvez choisir un vaisseau en dehors de la liste des vaisseaux "
+#~ "standard."
+
+#~ msgctxt "Unique Ship"
+#~ msgid "None"
+#~ msgstr "Aucun"
+
+#~ msgctxt "Unique Ship"
+#~ msgid "None: just use standard player ship list on spawn screen"
+#~ msgstr ""
+#~ "Aucun : choisissez un vaisseau parmi la liste standard disponible à "
+#~ "l'écran suivant."
+
+#~ msgctxt "Unique Ship"
+#~ msgid "Amalgam"
+#~ msgstr "Amalgam"
+
+#~ msgctxt "Unique Ship"
+#~ msgid ""
+#~ "Based on Atlantis, 4 beams (vs 2), single broadside tube on each side for "
+#~ "large homing missiles only, 2 mining tubes, weaker defenses and engines"
+#~ msgstr ""
+#~ "Basé sur l'Atlantis : 1 seul tube large de chaque côté dédié aux gros "
+#~ "homing missiles 2x plus lents et puissants ; 4 faisceaux laser au lieu de "
+#~ "2 ; 2 tubes lance mines à l'arrière ; défenses et moteurs plus faibles."
+
+#~ msgctxt "Unique Ship"
+#~ msgid "Midian"
+#~ msgstr "Midian"
+
+#~ msgctxt "Unique Ship"
+#~ msgid ""
+#~ "Based on missile cruiser, reduced tubes, missiles and base warp speed to "
+#~ "get beam weapons and HVLI"
+#~ msgstr ""
+#~ "Basé sur un Croiseur de missiles : missiles, tubes et vitesse lumière "
+#~ "réduits afin d'installer plus de faisceaux laser ainsi que des HVLI."
+
+#~ msgctxt "Unique Ship"
+#~ msgid "Raven"
+#~ msgstr "Raven"
+
+#~ msgctxt "Unique Ship"
+#~ msgid ""
+#~ "Based on Cruiser, stronger shields, weaker hull, broadside beams, tweaked "
+#~ "tubes and missiles, low powered warp drive, tweaked sensor ranges"
+#~ msgstr ""
+#~ "Basé sur un Croiseur : boucliers plus solides ; coque plus faible ; "
+#~ "Faisceaux laser latéraux ; tubes et missiles modifiés ; vitesse lumière "
+#~ "plus faible ; portée des capteurs améliorée."
+
+#~ msgctxt "Unique Ship"
+#~ msgid "Squid"
+#~ msgstr "Squid"
+
+#~ msgctxt "Unique Ship"
+#~ msgid ""
+#~ "Based on Piranha, stronger defenses, added a beam weapon, reduced missile "
+#~ "load, large homing missiles, reconfigured tubes, shorter jump and sensor "
+#~ "ranges"
+#~ msgstr ""
+#~ "Basé sur le Piranha : ajout d'un faisceau laser ; gros homing 2x plus "
+#~ "puissants et lents ; défenses renforcées ; portée de la téléportation et "
+#~ "des capteurs réduite ; chargement de missiles plus rapide ; tubes "
+#~ "reconfigurés."
+
+#~ msgctxt "orders-comms"
+#~ msgid "Contact regional headquarters"
+#~ msgstr "Contacter le Quartier Général régional."
+
+#, lua-format
+#~ msgctxt "buttonGM"
+#~ msgid "Version %s"
+#~ msgstr "Version %s"
+
+#, lua-format
+#~ msgctxt "buttonGM"
+#~ msgid ""
+#~ "Scenario version %s\n"
+#~ " LUA version %s"
+#~ msgstr ""
+#~ "Version de scénario %s\n"
+#~ "Version LUA %s"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Station Reports"
+#~ msgstr "+ Rapports de stations"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Rescue Time"
+#~ msgstr "+ Durée sauvetage"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Destroy Time"
+#~ msgstr "+ Durée destruction"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Enemy Power"
+#~ msgstr "+ Puissance ennemie"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Reputation"
+#~ msgstr "+ Réputation"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Mission Stations"
+#~ msgstr "Stations de la mission"
+
+#, lua-format
+#~ msgctxt "buttonGM"
+#~ msgid ""
+#~ "This is spoiler information. Consider carefully before you reveal this to "
+#~ "the rest of the players. If you feel you have to reveal this information, "
+#~ "I suggest you select the player ship using the widget to the right of the "
+#~ "'Global message' button, then click the 'Hail ship' button, identify "
+#~ "yourself as a character in game like the regional headquarters stellar "
+#~ "cartography technician, then type the information as if you were that "
+#~ "character helping them out on their mission.\n"
+#~ "\n"
+#~ "Medical research station: %s in sector %s\n"
+#~ "Plague station %s in %s"
+#~ msgstr ""
+#~ "Ce sont des informations \"spoiler\" de la mission. Réfléchissez bien "
+#~ "avant de les révéler au joueurs. Si vous pensez tout de même devoir le "
+#~ "faire, je vous suggère de sélectionner le vaisseau joueurs en utilisant "
+#~ "le widget à droite du bouton \"Message général\", puis de cliquer sur le "
+#~ "bouton \"Envoyer message\", de vous identifier en tant que personnage "
+#~ "dans le jeu comme le technicien en cartographie stellaire du quartier "
+#~ "général de la région, puis de saisir les informations comme si vous étiez "
+#~ "ce personnage qui les aide dans leur mission.\n"
+#~ "\n"
+#~ "Station de recherche médicale : %s dans le secteur %s\n"
+#~ "Station usine de production de la peste %s en %s"
+
+#~ msgctxt "buttonGM"
+#~ msgid "+Test Non-DB Ships"
+#~ msgstr "+Test vaisseaux non BD"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Enemy Power"
+#~ msgstr "- Précedent"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Extreme"
+#~ msgstr "Extrême"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Quixotic"
+#~ msgstr "Chimérique"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Difficulty"
+#~ msgstr "- Précedent"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Destroy Time"
+#~ msgstr "- Précedent"
+
+#, lua-format
+#~ msgctxt "buttonGM"
+#~ msgid "%i minutes"
+#~ msgstr "%i minutes"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Rescue Time"
+#~ msgstr "- Précedent"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-From Reputation"
+#~ msgstr "- Précedent"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Unknown"
+#~ msgstr "Inconnu"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Nice"
+#~ msgstr "Bon"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Hero"
+#~ msgstr "Bienfaiteur"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Major Hero"
+#~ msgstr "Héros"
+
+#~ msgctxt "buttonGM"
+#~ msgid "Super Hero"
+#~ msgstr "Justicier de l'espace"
+
+#~ msgctxt "buttonGM"
+#~ msgid "-Main"
+#~ msgstr "- Précedent"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid "%s %s  %s  %s  Friendliness:%s"
+#~ msgstr "%s %s  %s  %s  Bienveillance :%s"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "Shares Energy: %s,  Repairs Hull: %s,  Restocks Scan Probes: %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Répartition d'énergie : %s, coque réparée : %s, sondes "
+#~ "réapprovisionnées : %s"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "Fix Probes: %s,  Fix Hack: %s,  Fix Scan: %s,  Fix Combat Maneuver: %s,  "
+#~ "Fix Destruct: %s, Fix Slow Tube: %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Sondes réparées : %s, piratage réparé : %s, scanner réparé : %s, manœuvre "
+#~ "réparée : %s, autodestruction réparée :%s, tubes lents réparés : %s"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "Homing: %s %s,   Nuke: %s %s,   Mine: %s %s,   EMP: %s %s,   HVLI: %s %s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Homing : %s %s, Nuke : %s %s, Mine : %s %s, EMP : %s %s, HVLI : %s %s"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "Services and their costs:"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Services et leurs coûts :"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "      jump overcharge: 10"
+#~ msgstr ""
+#~ "%s\n"
+#~ "      Boost téléportation : 10"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "Goods:"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Marchandises :"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "    Sell:"
+#~ msgstr ""
+#~ "%s\n"
+#~ "    Vendre :"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "        %s: Cost:%s   Quantity:%s"
+#~ msgstr ""
+#~ "%s\n"
+#~ "        %s : Coût : %s Quantité : %s"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "    Trade:"
+#~ msgstr ""
+#~ "%s\n"
+#~ "    Échanger :"
+
+#, lua-format
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid ""
+#~ "%s\n"
+#~ "    Buy:"
+#~ msgstr ""
+#~ "%s\n"
+#~ "    Acheter :"
+
+#~ msgctxt "stationReport-buttonGM"
+#~ msgid "No applicable stations. Reports useless. No action taken"
+#~ msgstr "Aucune station applicable. Rapports inutiles. Pas d'action prise."
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid "Protect freighter %s until they dock at %s"
+#~ msgstr "Escorter le cargo %s jusqu'à ce qu'il s'amarre à %s."
+
+#, lua-format
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Sensor Record: %s station %s in %s"
+#~ msgstr "Enregistrement du capteur : station %s %s en secteur %s "
+
+#, lua-format
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "%s, %s station %s in %s"
+#~ msgstr "%s, %s station %s en secteur %s "
+
+#, lua-format
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Sensor Record: %s %s %s in %s carrying %s"
+#~ msgstr ""
+#~ "Enregistrement du capteur : vaisseau %s %s %s en secteur %s transportant "
+#~ "%s "
+
+#, lua-format
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "%s; %s %s %s in %s carrying %s"
+#~ msgstr "%s; %s %s %s en secteur %s transportant %s "
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "No data recorded"
+#~ msgstr "Aucune donnée enregistrée"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Automated data gathering device"
+#~ msgstr "Dispositif automatisé de collecte de données"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Come to Billy Bob's for the best food in the sector"
+#~ msgstr "Venez chez Billy Bob's goûter la meilleure cuisine du secteur"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "It's never too late to buy life insurance"
+#~ msgstr "Il n'est jamais trop tard pour souscrire une assurance vie"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "You'll feel better in an Adder Mark 9"
+#~ msgstr "Vous vous sentirez mieux dans un Adder Mark 9"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Visit Repulse shipyards for the best deals"
+#~ msgstr ""
+#~ "Visitez les chantiers navals Repulse pour faire les meilleures affaires"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Fresh fish! We catch, you buy!"
+#~ msgstr "Poisson frais ! Nous l'attrapons, vous l'achetez !"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Get your fuel cells at Melinda's Market"
+#~ msgstr "Obtenez vos piles à combustible au marché de Melinda"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Find a companion. All species available"
+#~ msgstr "Trouvez un compagnon. Toutes les espèces disponibles"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Feeling down? Robotherapist is there for you"
+#~ msgstr "Vous vous sentez mal ? Robothérapeute est là pour vous"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "30 days, 30 kilograms, guaranteed"
+#~ msgstr "30 jours, 30 kg en moins, garanti"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Try our asteroid dust diet weight loss program"
+#~ msgstr ""
+#~ "Essayez notre programme de perte de poids avec un régime de poussière "
+#~ "d'astéroïdes"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Best tasting water in the quadrant"
+#~ msgstr "L'eau la plus savoureuse du quadrant"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Amazing shows every night at Lenny's Lounge"
+#~ msgstr "Spectacles incroyables tous les soirs au Lenny's Lounge"
+
+#~ msgctxt "scienceDescription-buoy"
+#~ msgid "Tip: make lemons an integral part of your diet"
+#~ msgstr ""
+#~ "Astuce : faites du citron une partie intégrante de votre alimentation"
+
+#~ msgctxt "msgScience"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr ""
+#~ "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
+
+#~ msgctxt "msgOperations"
+#~ msgid "The unscanned artifact we just picked up has fried our scanners"
+#~ msgstr ""
+#~ "L'artefact non scanné que nous venons de récupérer a grillé nos scanners."
+
+#, lua-format
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid ""
+#~ "Source of emanations interfering with long range sensors. Range:%.1fu "
+#~ "Impact:%.1fu"
+#~ msgstr ""
+#~ "Source d'émanations interférant avec les capteurs longue portée. Portée : "
+#~ "%.1fu ; Impact : %.1fu"
+
+#~ msgctxt "scienceDescription-artifact"
+#~ msgid "Source of unusual emanations"
+#~ msgstr "Source d'émanations inhabituelles"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "With the %s just acquired, you improve your impulse engine top speed by "
+#~ "13%%"
+#~ msgstr ""
+#~ "Avec les %s que vous venez d'acquérir, vous améliorez la vitesse de "
+#~ "pointe de vos moteurs à impulsion de 13 %%."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "With the %s just acquired, you improve your shield charge capacity top "
+#~ "speed by 11%%"
+#~ msgstr ""
+#~ "Avec les %s que vous venez d'acquérir, vous augmentez la vitesse de "
+#~ "rechargement de vos boucliers de 11 %%."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "With the %s just acquired, you improve your weapon tube load time by 33%%"
+#~ msgstr ""
+#~ "Avec les %s que vous venez d'acquérir, vous améliorez le temps de "
+#~ "chargement de vos tubes d'arme de 33 %%."
+
+#~ msgctxt "msgScience"
+#~ msgid "beam weapons"
+#~ msgstr "faisceaux laser"
+
+#~ msgctxt "msgScience"
+#~ msgid "missile weapons system"
+#~ msgstr "systèmes de missiles"
+
+#~ msgctxt "msgScience"
+#~ msgid "front shield"
+#~ msgstr "boucliers avant"
+
+#~ msgctxt "msgScience"
+#~ msgid "rear shield"
+#~ msgstr "boucliers arrière"
+
+#, lua-format
+#~ msgctxt "msgScience"
+#~ msgid ""
+#~ "Sensors just picked up an energy field. The ship must have triggered it. "
+#~ "It seems to impact our %s and possibly other ship systems. The ship "
+#~ "computers have plotted it on Science and Relay."
+#~ msgstr ""
+#~ "Attention !\n"
+#~ "Nos capteurs viennent de détecter un champ d'énergie. Le vaisseau a dû le "
+#~ "déclencher. Cela semble avoir un impact sur nos %s et peut-être sur "
+#~ "d'autres de nos systèmes. Il faut être prudent. Nos ordinateurs de bord "
+#~ "l'ont affiché sur les écrans Science et Communications."
+
+#, lua-format
+#~ msgctxt "tabWeapons"
+#~ msgid "%s tubes: %s"
+#~ msgstr "%s tubes : %s"
+
+#, lua-format
+#~ msgctxt "tabWeapons"
+#~ msgid "%s tube: %s"
+#~ msgstr "%s tube : %s"
+
+#~ msgctxt "station-comms"
+#~ msgid "We are under attack! No time for chatting!"
+#~ msgstr ""
+#~ "Nous sommes en train de nous faire attaquer ! Pas le temps de discuter !"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings %s!\n"
+#~ "How may we help you today?"
+#~ msgstr ""
+#~ "Salutations %s !\n"
+#~ "Comment pouvons-nous vous aider aujourd'hui ?"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer!\n"
+#~ "What can we do for you today?"
+#~ msgstr ""
+#~ "Bonjour officier !\n"
+#~ "Que pouvons-nous faire pour vous aujourd'hui ?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Hello, may I help you?"
+#~ msgstr "Bonjour, puis-je vous aider ?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Welcome to our lovely station."
+#~ msgstr "Bienvenue dans notre charmante petite station."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Forgive us if we seem a little distracted. We are carefully monitoring "
+#~ "the enemies nearby."
+#~ msgstr ""
+#~ "\n"
+#~ "Veuillez nous excuser si nous semblons un peu distraits. Nous surveillons "
+#~ "attentivement les ennemis à proximité."
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "\n"
+#~ "Reputation: %i"
+#~ msgstr ""
+#~ "%s\n"
+#~ "\n"
+#~ "Réputation : %i"
+
+#~ msgctxt "mission2ndBis-comms"
+#~ msgid "Request medical research for Fargalli"
+#~ msgstr "Demander les recherches médicales pour Fargalli"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We also upgraded your impulse engines."
+#~ msgstr "Nous avons également amélioré vos moteurs à impulsion."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "The technicians are standing by to transport you back to %s."
+#~ msgstr "Les techniciens sont là pour vous ramener sur %s."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We also upgrded the damage your beams inflict."
+#~ msgstr "Nous avons également amélioré la puissance de vos faisceaux laser."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We also replenished your ordnance."
+#~ msgstr "Nous avons également réapprovisionné vos munitions."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We also increased your shield charge capacity."
+#~ msgstr ""
+#~ "Nous avons également augmenté la capacité de charge de votre bouclier."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We also upgraded your maneuvering system."
+#~ msgstr "Nous avons également amélioré votre système de manœuvre."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We also upgraded your base warp speed."
+#~ msgstr "Nous avons également amélioré votre vitesse lumière."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We also overcharged your jump drive to three times your maximum range."
+#~ msgstr ""
+#~ "Nous avons également multiplié par 3 la portée maximale de votre "
+#~ "téléportation."
+
+#, lua-format
+#~ msgctxt "mission2ndBis-comms"
+#~ msgid ""
+#~ "We have transmitted all of our current research on the Omicron plague "
+#~ "including treatment fabrication instructions. We have also transported "
+#~ "what we believe will cure any victims of the plague along with unique raw "
+#~ "materials required to manufacture more of the treatment. I hope you are "
+#~ "able get this to Ensign Fargalli in time. %s"
+#~ msgstr ""
+#~ "Après plusieurs minutes d'attente…\n"
+#~ "\n"
+#~ "Désolé pour l'attente. Nous vous avons transmis toutes nos recherches "
+#~ "actuelles sur ce virus de peste, y compris les instructions de "
+#~ "fabrication d'un traitement.\n"
+#~ "Nous avons également chargé sur votre vaisseau tout ce que nous pensons "
+#~ "utile à la guérison des victimes de la peste ainsi que des matières "
+#~ "premières uniques nécessaires à la fabrication d'une plus grande partie "
+#~ "du traitement.\n"
+#~ "J'espère que vous pourrez apporter tout ceci à temps à l'officier "
+#~ "Fargalli. %s\n"
+#~ "Bon retour !"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Take return transit from %s to %s"
+#~ msgstr "Prendre le transport de retour de %s à %s"
+
+#~ msgctxt "mission2ndBis-comms"
+#~ msgid "Give medical treatment and research to sickbay"
+#~ msgstr "Donner le traitement et les recherches à l'infirmerie"
+
+#~ msgctxt "mission2ndBis-comms"
+#~ msgid ""
+#~ "Treatment received. Fargalli is expected to live. We are beginning to "
+#~ "conduct in depth analysis of the research material with an eye to "
+#~ "prevention of future infection."
+#~ msgstr ""
+#~ "Après plusieurs minutes d'attente…\n"
+#~ "\n"
+#~ "On vient d' administrer le traitement à l'officier Fargalli, il devrait "
+#~ "s'en sortir, c'est grâce à vous.\n"
+#~ "Nous commençons immédiatement un examen approfondi du matériel de "
+#~ "recherche que vous nous avez ramené en vue de prévenir de futures "
+#~ "infections."
+
+#~ msgctxt "mission2ndBis-comms"
+#~ msgid "The medical research and treatment is not aboard your ship"
+#~ msgstr ""
+#~ "???\n"
+#~ "Il n'y a aucun traitement ou matériel médical à bord de votre vaisseau. "
+#~ "Nous ne pouvons rien faire !"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "I need ordnance restocked"
+#~ msgstr "Nous avons besoin de nous réapprovisionner en munitions"
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "What type of ordnance?\n"
+#~ "\n"
+#~ "Reputation: %i"
+#~ msgstr ""
+#~ "Quel genre de munitions ?\n"
+#~ "\n"
+#~ "Réputation : %i"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Can you supply us with some nukes? ("
+#~ msgstr "Pouvez-vous nous fournir des armes nucléaires (nuke) ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We really need some nukes ("
+#~ msgstr "Nous avons vraiment besoin d'armes nucléaires. (nuke) ("
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "%s%d rep each)"
+#~ msgstr "%s%d rép chacun)"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Please re-stock our EMP missiles. ("
+#~ msgstr "Veuillez réapprovisionner nos missiles EMP. ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Got any EMPs? ("
+#~ msgstr "Avez-vous des EMP ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Do you have spare homing missiles for us? ("
+#~ msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Do you have extra homing missiles? ("
+#~ msgstr ""
+#~ "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We could use some mines. ("
+#~ msgstr "Nous pourrions avoir besoin de quelques mines. ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "How about mines? ("
+#~ msgstr "Et concernant les mines ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What about HVLI? ("
+#~ msgstr "Concernant les HVLI ? ("
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Could you provide HVLI? ("
+#~ msgstr "Pourriez-vous fournir des HVLI ? ("
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Docking services status"
+#~ msgstr "État des services d'accueil"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Station %s docking services status:"
+#~ msgstr "État des services d'accueil de la station %s :"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Replenish scan probes."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Réapprovisionner les sondes."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Cannot replenish scan probes due to fabrication unit failure."
+#~ msgstr ""
+#~ "Impossible de réapprovisionner les sondes en raison d'une défaillance de "
+#~ "l'unité de fabrication."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Parts shortage prevents scan probe replenishment."
+#~ msgstr "Le manque de pièces empêche le réapprovisionnement des sondes."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "Station management has curtailed scan probe replenishment for cost "
+#~ "cutting reasons."
+#~ msgstr ""
+#~ "Les gestionnaires de la station ont réduit le réapprovisionnement des "
+#~ "sondes pour des raisons de réduction des coûts."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Ship hull repair."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Réparation de la coque."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "We're out of the necessary materials and supplies for hull repair."
+#~ msgstr ""
+#~ "Nous n'avons plus les matériaux et fournitures nécessaires pour réparer "
+#~ "la coque."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "Hull repair automation unavailable while it is undergoing maintenance."
+#~ msgstr ""
+#~ "L'automatisation de réparation de la coque n'est pas disponible pendant "
+#~ "la maintenance."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "All hull repair technicians quarantined to quarters due to illness."
+#~ msgstr ""
+#~ "Tous les techniciens de réparation de coque sont en quarantaine dans leur "
+#~ "quartiers pour cause de maladie."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "Recharge ship energy stores."
+#~ msgstr ""
+#~ "%s\n"
+#~ "Recharger les réserves d'énergie du vaisseau."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "A recent reactor failure has put us on auxiliary power, so we cannot "
+#~ "recharge ships."
+#~ msgstr ""
+#~ "Une récente panne de réacteur nous a mis sous tension auxiliaire, nous ne "
+#~ "pouvons donc pas recharger les vaisseaux."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "A damaged power coupling makes it too dangerous to recharge ships."
+#~ msgstr ""
+#~ "Un couplage électrique défectueux rend la recharge des vaisseaux trop "
+#~ "risquée."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "An asteroid strike damaged our solar cells and we are short on power, so "
+#~ "we can't recharge ships right now."
+#~ msgstr ""
+#~ "Une frappe d'astéroïde a endommagé nos cellules solaires et nous manquons "
+#~ "de puissance, nous ne pouvons donc pas recharger les vaisseaux pour le "
+#~ "moment."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May overcharge jump drive"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Peut booster la téléportation."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair probe launch system"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Peut réparer le système de lancement de sonde."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair hacking system"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Peut réparer le système de piratage."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair scanners"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Peut réparer les scanners."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair combat maneuver"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Peut réparer la manœuvre de combat."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "May repair self destruct system"
+#~ msgstr ""
+#~ "%s\n"
+#~ "Peut réparer le système d'autodestruction."
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Overcharge Jump Drive (10 Rep)"
+#~ msgstr "Booster la téléportation (10 rép)"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your jump drive has been overcharged to %ik"
+#~ msgstr "Votre téléportation a été boostée à %ik."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation"
+#~ msgstr "Réputation insuffisante"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair ship system"
+#~ msgstr "Réparer les systèmes du vaisseau"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "What system would you like repaired?\n"
+#~ "\n"
+#~ "Reputation: %i"
+#~ msgstr ""
+#~ "Quel système souhaitez-vous réparer ?\n"
+#~ "\n"
+#~ "Réputation : %i"
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair probe launch system (%s Rep)"
+#~ msgstr "Réparer le système de lancement de sonde (%s rép)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your probe launch system has been repaired"
+#~ msgstr "Votre système de lancement de sonde a été réparé."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair hacking system (%s Rep)"
+#~ msgstr "Réparer le système de piratage (%s rép)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your hack system has been repaired"
+#~ msgstr "Votre système de piratage a été réparé."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair scanning system (%s Rep)"
+#~ msgstr "Réparer les scanners (%s rép)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your scanners have been repaired"
+#~ msgstr "Vos scanners ont été réparés."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair combat maneuver (%s Rep)"
+#~ msgstr "Réparer la manœuvre de combat (%s rép)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your combat maneuver has been repaired"
+#~ msgstr "Votre manœuvre de combat a été réparée."
+
+#, lua-format
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Repair self destruct system (%s Rep)"
+#~ msgstr "Réparer le système d'autodestruction (%s rép)"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid "Your self destruct system has been repaired"
+#~ msgstr "Votre système d'autodestruction a été réparé."
+
+#~ msgctxt "station-comms"
+#~ msgid "Tell me more about your station"
+#~ msgstr "Dites m'en plus à propos de votre station"
+
+#~ msgctxt "station-comms"
+#~ msgid "What would you like to know?"
+#~ msgstr "Qu'aimeriez-vous savoir ?"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "General information"
+#~ msgstr "Informations générales"
+
+#~ msgctxt "stationStory-comms"
+#~ msgid "Station history"
+#~ msgstr "L'histoire de la station"
+
+#~ msgctxt "gossip-comms"
+#~ msgid "Gossip"
+#~ msgstr "Rumeurs"
+
+#~ msgctxt "orders-comms"
+#~ msgid "What are my current orders?"
+#~ msgstr "Quels sont nos ordres en cours ?"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   %i Minutes remain in game"
+#~ msgstr ""
+#~ "\n"
+#~ "   %i minutes restantes dans le jeu."
+
+#~ msgctxt "trade-comms"
+#~ msgid "Buy, sell, trade"
+#~ msgstr "Acheter, vendre, échanger"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Station %s:\n"
+#~ "Goods or components available for sale: quantity, cost in reputation\n"
+#~ msgstr ""
+#~ "Station %s :\n"
+#~ "Marchandises ou composants disponibles à la vente : quantité, coût en "
+#~ "réputation :\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "     %s: %i, %i\n"
+#~ msgstr "     %s: %i, %i\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Goods or components station will buy: price in reputation\n"
+#~ msgstr ""
+#~ "Marchandises ou composants que la station achètera : (prix en "
+#~ "réputation)\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "     %s: %i\n"
+#~ msgstr "     %s : %i\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Current cargo aboard %s:\n"
+#~ msgstr "Cargaison actuelle à bord de %s :\n"
+
+#~ msgctxt "trade-comms"
+#~ msgid "     Empty\n"
+#~ msgstr "     Vide\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Available Space: %i, Available Reputation: %i\n"
+#~ msgstr "Espace disponible : %i, Réputation disponible : %i\n"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Buy one %s for %i reputation"
+#~ msgstr "Achetez 1 %s pour %i rép"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s, Quantity: %i, Rep: %i"
+#~ msgstr "Type : %s, Quantité : %i, Rép : %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient cargo space for purchase"
+#~ msgstr ""
+#~ "\n"
+#~ "Espace de chargement insuffisant pour acheter"
+
+#~ msgctxt "needRep-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient reputation for purchase"
+#~ msgstr ""
+#~ "\n"
+#~ "Réputation insuffisante pour acheter"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Insufficient station inventory"
+#~ msgstr ""
+#~ "\n"
+#~ "Stock insuffisant dans la station"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "purchased"
+#~ msgstr ""
+#~ "\n"
+#~ "Acheté"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Sell one %s for %i reputation"
+#~ msgstr "Vendre 1 %s pour %i rép"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s,  Reputation price: %i"
+#~ msgstr "Type : %s, Coût en rép : %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "One sold"
+#~ msgstr ""
+#~ "\n"
+#~ "1 vendu"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade food for %s"
+#~ msgstr "Échanger de la Nourriture (food) contre %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Type: %s,  Quantity: %i"
+#~ msgstr "Type : %s, Quantité : %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Traded"
+#~ msgstr ""
+#~ "\n"
+#~ "Échangé"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade medicine for %s"
+#~ msgstr "Échanger des Médicaments (medicine) contre %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Trade luxury for %s"
+#~ msgstr "Échanger des produits de luxe (luxury) contre %s"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Jettison cargo"
+#~ msgstr "Larguer la cargaison"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Available space: %i\n"
+#~ "What would you like to jettison?"
+#~ msgstr ""
+#~ "Espace disponible : %i\n"
+#~ "Que voudriez-vous larguer ?"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "One %s jettisoned"
+#~ msgstr "Un %s largué"
+
+#~ msgctxt "explainGoods-comms"
+#~ msgid "No tutorial covered goods or cargo. Explain"
+#~ msgstr "Explications sur les marchandises et cargaisons"
+
+#~ msgctxt "explainGoods-comms"
+#~ msgid ""
+#~ "Different types of cargo or goods may be obtained from stations, "
+#~ "freighters or other sources. They go by one word descriptions such as "
+#~ "dilithium, optic, warp, etc. Certain mission goals may require a "
+#~ "particular type or types of cargo. Each player ship differs in cargo "
+#~ "carrying capacity. Goods may be obtained by spending reputation points or "
+#~ "by trading other types of cargo (typically food, medicine or luxury)"
+#~ msgstr ""
+#~ "Différents types de marchandises ou cargaisons peuvent être obtenus "
+#~ "auprès des stations, des cargos ou d'autres sources. Ces ressources "
+#~ "peuvent être du dilithium, de l'optique, des moteurs de vitesse lumière, "
+#~ "etc. Certains objectifs de mission peuvent nécessiter un ou plusieurs "
+#~ "types de marchandises particulières. Chaque vaisseau joueur diffère par "
+#~ "sa capacité de transport de marchandises. Les marchandises peuvent être "
+#~ "obtenues en dépensant des points de réputation ou en échangeant d'autres "
+#~ "types de marchandises (généralement de la nourriture, des médicaments ou "
+#~ "des produits de luxe)."
+
+#~ msgctxt "trade-comms"
+#~ msgid "Recruit repair crew member"
+#~ msgstr "Recruter un membre de l'équipe de réparation"
+
+#~ msgctxt "trade-comms"
+#~ msgid "We have a repair crew candidate for you to consider"
+#~ msgstr ""
+#~ "Nous avons une nouvelle recrue à vous proposer au poste de réparateur."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Recruit repair crew member for %i reputation"
+#~ msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+
+#~ msgctxt "trade-comms"
+#~ msgid "Repair crew member hired"
+#~ msgstr "Réparateur embauché."
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "A possible repair recruit is awaiting final certification. They should be "
+#~ "available in "
+#~ msgstr ""
+#~ "Une potentielle recrue pour l'équipe de réparation attend sa "
+#~ "certification. Elle devrait être validée dans "
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "There's one repair crew candidate completing their license application. "
+#~ "They should be available in "
+#~ msgstr ""
+#~ "Il y a un candidat à l'équipe de réparation qui remplit actuellement sa "
+#~ "demande de licence. Il devrait être certifié dans "
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "One repair crew should be getting here from their medical checkout in "
+#~ msgstr "Une réparatrice devrait revenir de sa visite médicale dans"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%s %i seconds"
+#~ msgstr "%s %i secondes."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%s a second"
+#~ msgstr "%s une seconde."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Several arrived on station earlier. %s %i seconds"
+#~ msgstr "Plusieurs sont arrivés à la station plus tôt. %s %i secondes."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%i seconds"
+#~ msgstr "%i secondes."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%i second"
+#~ msgstr "%i seconde."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%i minutes and %s"
+#~ msgstr "%i minutes et %s."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "%i minute and %s"
+#~ msgstr "%i minute et %s."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "There are some repair crew recruits in route for %s. Travel time "
+#~ "remaining is %s."
+#~ msgstr ""
+#~ "Des recrues de l'équipe de réparation sont en route pour %s. Le temps de "
+#~ "trajet restant est de %s."
+
+#~ msgctxt "trade-comms"
+#~ msgid "Purchase Coolant"
+#~ msgstr "Acheter du liquide de refroidissement"
+
+#~ msgctxt "trade-comms"
+#~ msgid "We've got some coolant available for you"
+#~ msgstr "Nous avons du liquide de refroidissement disponible pour vous."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Purchase coolant for %i reputation"
+#~ msgstr "Acheter du liquide de refroidissement pour %i de réputation"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Additional coolant purchased"
+#~ msgstr "Liquide de refroidissement supplémentaire acheté"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "The coolant preparation facility is having difficulty packaging the "
+#~ "coolant for transport. They say they should have it working in about %i "
+#~ "seconds"
+#~ msgstr ""
+#~ "L'usine de préparation de liquide de refroidissement a des difficultés à "
+#~ "le conditionner pour le transport. Ils disent qu'ils devraient y arriver "
+#~ "dans environ %i secondes."
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "The coolant preparation facility is having difficulty packaging the "
+#~ "coolant for transportation. They say they should have it working in a "
+#~ "second"
+#~ msgstr ""
+#~ "L'usine de préparation de liquide de refroidissement a des difficultés à "
+#~ "le conditionner pour le transport. Ils disent qu'ils devraient y arriver "
+#~ "dans environ 1 seconde."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Our coolant production facility just made some, but it's not quite ready "
+#~ "to be transported. The preparation facility says it should take about %i "
+#~ "seconds"
+#~ msgstr ""
+#~ "Notre usine de production de liquide de refroidissement vient d'en "
+#~ "fabriquer, mais il n'est pas tout à fait prêt à être transporté. A "
+#~ "l'usine on nous dit que cela devrait prendre environ %i secondes."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Our coolant production facility is making more right now. Coolant "
+#~ "manufacturing time remaining is %s."
+#~ msgstr ""
+#~ "Notre usine de production de liquide de refroidissement en produit plus "
+#~ "en ce moment. Le temps de fabrication est de %s."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You need to stay docked for that action."
+#~ msgstr "Vous devez rester amarré à la station pour cette action."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass destruction."
+#~ msgstr "Nous ne fournissons pas ce type d'armes de destruction massive."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in weapons of mass disruption."
+#~ msgstr "Nous ne fournissons pas ce type d'armes de perturbation massive."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We do not deal in those weapons."
+#~ msgstr "Nous ne fournissons pas ce type d'armes. Trop dangereux."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "All nukes are charged and primed for destruction."
+#~ msgstr "Toutes les nukes sont chargées et préparées pour la destruction."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Sorry, sir, but you are as fully stocked as I can allow."
+#~ msgstr ""
+#~ "Désolé, officier, mais vous êtes au maximum de ce que vous pouvez stocker."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You are fully loaded and ready to explode things."
+#~ msgstr "Vous êtes chargé au max et prêt à tout faire exploser."
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "We generously resupplied you with some weapon charges.\n"
+#~ "Put them to good use."
+#~ msgstr ""
+#~ "Nous vous avons généreusement réapprovisionné en munitions.\n"
+#~ "Faites-en bon usage."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation."
+#~ msgstr "Pas assez de réputation."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "You can't afford as much as I'd like to give you"
+#~ msgstr ""
+#~ "Vous ne pouvez pas en recevoir autant que je voudrais vous en donner."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "Get just one"
+#~ msgstr "Prendre juste celui-là."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Good day, officer.\n"
+#~ "If you need supplies, please dock with us first."
+#~ msgstr ""
+#~ "Bonjour, officier.\n"
+#~ "Si vous souhaitez vous réapprovisionner, veuillez vous amarrer à notre "
+#~ "station au préalable."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Greetings.\n"
+#~ "If you want to do business, please dock with us first."
+#~ msgstr ""
+#~ "Salutations.\n"
+#~ "Si vous souhaitez faire affaire, merci de vous amarrer à notre station."
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "\n"
+#~ "Be aware that if enemies in the area get much closer, we will be too busy "
+#~ "to conduct business with you."
+#~ msgstr ""
+#~ "\n"
+#~ "Sachez que si les ennemis de la zone se rapprochent encore, nous serons "
+#~ "trop occupés pour faire affaire avec vous."
+
+#~ msgctxt "station-comms"
+#~ msgid "Connect to warp jammer"
+#~ msgstr "Se connecter aux brouilleurs de téléportation et vitesse lumière"
+
+#~ msgctxt "station-comms"
+#~ msgid "Which one would you like to connect to?"
+#~ msgstr "A quel brouilleur souhaitez-vous vous connecter ?"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid "(%i reputation)"
+#~ msgstr "(%i réputation)"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid "%s Automated warp jammer access menu"
+#~ msgstr "Menu d'accès au brouilleur de téléportation et vitesse lumière %s."
+
+#~ msgctxt "station-comms"
+#~ msgid "Reduce range to 1 unit for 1 minute"
+#~ msgstr "Réduire la portée à 1 unité pendant 1 minute"
+
+#~ msgctxt "station-comms"
+#~ msgid "Acknowledged. Range adjusted. Reset timer engaged."
+#~ msgstr ""
+#~ "Paramètres du brouilleur modifiés : \n"
+#~ "- Portée ajustée\n"
+#~ "- Minuterie de réinitialisation engagée."
+
+#~ msgctxt "station-comms"
+#~ msgid "Reduce range by 50% for 2 minutes"
+#~ msgstr "Réduire la portée de 50 % pendant 2 minutes"
+
+#~ msgctxt "station-comms"
+#~ msgid "Reduce range by 25% for 3 minutes"
+#~ msgstr "Réduire la portée de 25 % pendant 3 minutes"
+
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Why do I have to pay reputation to log in to some of these warp jammers?"
+#~ msgstr "L'accès à certains brouilleurs est payant : explications"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "It's complicated. It depends on the relationships between the warp jammer "
+#~ "owner, us, station %s and you, %s. The farther apart the relationship, "
+#~ "the more reputation it costs to gain access. Do you want more details?"
+#~ msgstr ""
+#~ "Certains accès sont payants et d'autres gratuits, cela dépend des "
+#~ "relations entre le propriétaire du brouilleur, par exemple nous, la "
+#~ "station %s et vous, le vaisseau %s. Plus les relations diplomatiques sont "
+#~ "éloignées et plus il vous en coûtera de réputation pour y accéder. Voulez-"
+#~ "vous plus de détails ?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Yes, please provide more details"
+#~ msgstr "Oui je veux bien"
+
+#~ msgctxt "station-comms"
+#~ msgid "These are the cases and their reputation costs:"
+#~ msgstr ""
+#~ "Voici les différents cas et leurs coûts en réputation :\n"
+#~ "\n"
+#~ "Le brouilleur est :"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is friendly to %s = no reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Ami avec nous (%s) et avec vous (%s) : gratuit"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Ami avec nous (%s) et neutre avec vous (%s) : 5 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Ami avec nous (%s) et ennemi avec vous (%s) : 10 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Neutre avec nous (%s) et ami avec vous (%s) : 10 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Ennemi avec nous (%s) et ami avec vous (%s) : 15 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Neutre avec nous (%s) et avec vous (%s) : 20 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Ennemi avec nous (%s) et neutre avec vous (%s) : 20 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Neutre avec nous (%s) et ennemi avec vous (%s) : 25 rép"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "%s\n"
+#~ "    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+#~ msgstr ""
+#~ "%s\n"
+#~ "   Ennemi avec nous (%s) et avec vous (%s) : 100 rép"
+
+#~ msgctxt "station-comms"
+#~ msgid "I need information"
+#~ msgstr "j'aurai besoin d'informations"
+
+#~ msgctxt "station-comms"
+#~ msgid "What kind of information do you need?"
+#~ msgstr "De quel genre d'informations avez-vous besoin ?"
+
+#~ msgctxt "station-comms"
+#~ msgid "Where am I?"
+#~ msgstr "Où sommes-nous ?"
+
+#, lua-format
+#~ msgctxt "station-comms"
+#~ msgid ""
+#~ "Based on triangulation and signal strength, our communications software "
+#~ "says you're on a bearing of %.1f from us at a distance of %.1f units"
+#~ msgstr ""
+#~ "Sur la base de la triangulation et de la force du signal, notre logiciel "
+#~ "de communication indique que, par rapport à nous, vous vous trouvez au "
+#~ "cap %.1f et à une distance de %.1f unités."
+
+#~ msgctxt "ammo-comms"
+#~ msgid "What ordnance do you have available for restock?"
+#~ msgstr "De quelles munitions disposez-vous ?"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   Nuke"
+#~ msgstr ""
+#~ "\n"
+#~ "   Nuke"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   EMP"
+#~ msgstr ""
+#~ "\n"
+#~ "   EMP"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   Homing"
+#~ msgstr ""
+#~ "\n"
+#~ "   Homing"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   Mine"
+#~ msgstr ""
+#~ "\n"
+#~ "   Mine"
+
+#~ msgctxt "ammo-comms"
+#~ msgid ""
+#~ "\n"
+#~ "   HVLI"
+#~ msgstr ""
+#~ "\n"
+#~ "   HVLI"
+
+#~ msgctxt "ammo-comms"
+#~ msgid "We have no ordnance available for restock"
+#~ msgstr ""
+#~ "Nous n'avons pas de munitions disponibles pour vous réapprovisionner."
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "We have the following type of ordnance available for restock:%s"
+#~ msgstr ""
+#~ "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
+#, lua-format
+#~ msgctxt "ammo-comms"
+#~ msgid "We have the following types of ordnance available for restock:%s"
+#~ msgstr ""
+#~ "Pour vous réapprovisionner nous disposons des munitions suivantes : %s"
+
+#~ msgctxt "dockingServicesStatus-comms"
+#~ msgid ""
+#~ "Hull repair automation unavailable whie it is undergoing maintenance."
+#~ msgstr ""
+#~ "Automatisation de réparation de coque indisponible, elle est en cours de "
+#~ "maintenance."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Station %s:\n"
+#~ "Goods or components available: quantity, cost in reputation"
+#~ msgstr ""
+#~ "Station %s :\n"
+#~ "Marchandises ou composants disponibles : (quantité, coût en réputation)"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Where can I find particular goods?"
+#~ msgstr "Où puis-je trouver des marchandises particulières ?"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "Friendly stations often have food or medicine or both. Neutral stations "
+#~ "may trade their goods for food, medicine or luxury."
+#~ msgstr ""
+#~ "Les stations amicales ont souvent de la nourriture (food) ou des "
+#~ "médicaments (medicine) ou les deux. Les stations neutres peuvent échanger "
+#~ "leurs marchandises contre de la nourriture, des médicaments ou du luxe "
+#~ "(luxury)."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Station %s in sector %s has %s for %i reputation"
+#~ msgstr "La station %s dans le secteur %s possède du %s pour %i rép."
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "What goods are you interested in?\n"
+#~ "I've heard about these:"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Quelles marchandises vous intéressent ?\n"
+#~ "J'ai entendu parler de ça :"
+
+#~ msgctxt "trade-comms"
+#~ msgid " Beyond that, I have no knowledge of specific stations"
+#~ msgstr "A part ça, je n'ai pas connaissance de stations spécifiques."
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Tell me more about your station"
+#~ msgstr "Dites m'en plus à propos de votre station"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "What would you like to know?"
+#~ msgstr "Qu'aimeriez-vous savoir ?"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Station history"
+#~ msgstr "L'histoire de la station"
+
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Gossip"
+#~ msgstr "Rumeurs"
+
+#, lua-format
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Tell me about %s"
+#~ msgstr "Parlez-moi de %s."
+
+#, lua-format
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "Never heard of %s"
+#~ msgstr "Jamais entendu parler de %s."
+
+#, lua-format
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "%s died last week. The funeral was yesterday"
+#~ msgstr "%s est décédé la semaine dernière. L'enterrement a eu lieu hier."
+
+#, lua-format
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "%s? Who's %s? There's nobody here named %s"
+#~ msgstr "%s ? Qui est %s ? Il n'y a personne ici qui s'appelle %s."
+
+#, lua-format
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "We don't talk about %s. They are gone and good riddance"
+#~ msgstr "Pas envie de parler de %s. Ils sont partis et bon débarras."
+
+#, lua-format
+#~ msgctxt "stationGeneralInfo-comms"
+#~ msgid "I think %s moved away"
+#~ msgstr "Je pense que %s a déménagé."
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Report status"
+#~ msgstr "Au rapport"
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Hull: "
+#~ msgstr "Coque : "
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Shield: "
+#~ msgstr "Boucliers : "
+
+#~ msgctxt "situationReport-comms"
+#~ msgid "Shield "
+#~ msgstr "Boucliers "
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Can you send a supply drop? (%d rep)"
+#~ msgstr ""
+#~ "Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "You need to set a waypoint before you can request backup."
+#~ msgstr ""
+#~ "Vous devez définir un marqueur avant de faire une demande de "
+#~ "réapprovisionnement."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "To which waypoint should we deliver your supplies?"
+#~ msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched a supply ship toward WP %d"
+#~ msgstr ""
+#~ "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
+#~ "réapprovisionnement au marqueur %d."
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Not enough reputation!"
+#~ msgstr "Pas assez de réputation !"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Please send reinforcements! (%d rep)"
+#~ msgstr "Merci de nous envoyer des renforts ! (%d rép)"
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "You need to set a waypoint before you can request reinforcements."
+#~ msgstr ""
+#~ "Vous devez définir un marqueur avant de pouvoir demander des renforts."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "To which waypoint should we dispatch the reinforcements?"
+#~ msgstr "À quel marqueur souhaitez-vous recevoir les renforts ?"
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched %s to assist at WP %d"
+#~ msgstr ""
+#~ "Nous venons de déployer le vaisseau de combat %s pour vous soutenir au "
+#~ "marqueur %d."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Please send a service jonque for repairs"
+#~ msgstr "Merci de nous envoyer une jonque de service pour les réparations."
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid ""
+#~ "Would you like the service jonque to come to you directly or would you "
+#~ "prefer to set up a rendez-vous via a waypoint? Either way, you will need "
+#~ "%.1f reputation."
+#~ msgstr ""
+#~ "Souhaitez-vous qu'une jonque de service vienne directement à vous ou "
+#~ "préférez-vous fixer un rendez-vous via un marqueur ? Dans tous les cas, "
+#~ "vous aurez besoin de %1f de réputation."
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched %s to come to you to help with repairs"
+#~ msgstr ""
+#~ "Nous vous envoyons le vaisseau %s pour vous aider dans vos réparations."
+
+#~ msgctxt "stationAssist-comms"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Note: if you want to use a waypoint, you will have to back out and set "
+#~ "one and come back."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Note : si vous souhaitez utiliser un marqueur, vous devrez revenir au "
+#~ "menu précédent, en définir un puis revenir sur cette page."
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "Rendez-vous at waypoint %i"
+#~ msgstr "Rendez-vous au marqueur %i."
+
+#, lua-format
+#~ msgctxt "stationAssist-comms"
+#~ msgid "We have dispatched %s to rendez-vous at waypoint %i"
+#~ msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
+
+#, lua-format
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "To: %s\n"
+#~ "From: %s\n"
+#~ "\n"
+#~ "After treating Ensign Fargalli, we took a closer look at the accompanying "
+#~ "research. Analysis of the research material, the telemetry from your "
+#~ "ship, and recent reports from intelligence brings us to an ominous "
+#~ "conclusion."
+#~ msgstr ""
+#~ "À : %s\n"
+#~ "De : %s\n"
+#~ "\n"
+#~ "Après avoir traité l'officier Fargalli, nous avons examiné de plus près "
+#~ "les recherches qui l'accompagnent.\n"
+#~ "\n"
+#~ "L'analyse du matériel de recherche, la télémétrie de votre vaisseau et "
+#~ "les récents rapports du renseignement nous amènent à une conclusion "
+#~ "inquiétante."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "What have you concluded?"
+#~ msgstr "Qu'en avez-vous conclu ?"
+
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "Fargalli's illness and the previous similar cases experienced were not "
+#~ "accidental. They were deliberately infected."
+#~ msgstr ""
+#~ "La maladie de Fargalli et les cas similaires précédents n'étaient pas "
+#~ "accidentels. Ils ont été délibérément infectés."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "What? Who infected them?"
+#~ msgstr "Qu'est ce que vous dites ??? Qui les a infectés ?"
+
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "The Exuari. Fargalli and others are apparently the victims of a "
+#~ "preliminary experimental biological attack. The Exuari have code named "
+#~ "this biological agent Omicron after the early 21st century pandemic virus "
+#~ "variant on Earth which was highly contagious."
+#~ msgstr ""
+#~ "Les Éxuaris !\n"
+#~ "Fargalli et d'autres sont apparemment les victimes d'une attaque "
+#~ "biologique expérimentale préliminaire.\n"
+#~ "Les Éxuaris ont nommé cet agent biologique Omicron d'après la variante du "
+#~ "virus pandémique du début du 21e siècle sur Terre qui était hautement "
+#~ "contagieuse."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "That's sobering. Do we have more information?"
+#~ msgstr "Cela donne à réfléchir. Avons-nous plus d'informations ?"
+
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "Indeed we do. It looks like Omicron might be transmitted via subspace. We "
+#~ "believe the Exuari plan to 'broadcast' Omicron to every known human "
+#~ "location. Needless to say, this would have extinction level consequences."
+#~ msgstr ""
+#~ "En effet, nous en avons.\n"
+#~ "Il semble que ce virus de la peste Omicron puisse être transmis via le "
+#~ "sous-espace. Nous pensons que les Éxuaris prévoient de \"diffuser\" "
+#~ "Omicron dans tous les lieux humains connus.\n"
+#~ "Inutile de préciser que cela aurait des conséquences dramatiques pour la "
+#~ "survie de la race humaine."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "Ouch. Is there a planned response?"
+#~ msgstr "Non d'un androïde ! Y a-t-il une solution envisagée ?"
+
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "Destruction of the Exuari Omicron production and broadcast facility is "
+#~ "the best thing we can think of."
+#~ msgstr ""
+#~ "La destruction de l'usine de production de ce virus Omicron reste la "
+#~ "meilleure chose à faire."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "Can we help?"
+#~ msgstr "Pouvons-nous vous aider ?"
+
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "We hope that you can. We don't know the precise location of the Exuari "
+#~ "facility, just a general direction. However, when we examined the "
+#~ "telemetry from your science officer's console when you were near the "
+#~ "independent medical research facility, we noticed something interesting."
+#~ msgstr ""
+#~ "Nous l'espérons. Nous ne connaissons pas l'emplacement précis de cette "
+#~ "usine Éxuarie, juste un cap approximatif.\n"
+#~ "\n"
+#~ "Cependant, lorsque nous avons examiné la télémétrie depuis le poste de "
+#~ "votre officier scientifique lorsque vous étiez près du centre de "
+#~ "recherche médicale indépendant, nous avons remarqué quelque chose "
+#~ "d'intéressant."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "What did you notice?"
+#~ msgstr "Quoi donc ?"
+
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "The entity used to produce the treatment is also likely to be used to "
+#~ "create Omicron. It gives off a powerful bio-signature that is periodic in "
+#~ "nature, vaguely resembling a heartbeat."
+#~ msgstr ""
+#~ "L'entité utilisée pour produire le traitement est également probablement "
+#~ "celle utilisée pour créer le virus de la peste Omicron.\n"
+#~ "Elle dégage une puissante bio-signature de nature périodique, ressemblant "
+#~ "vaguement à un battement de cœur."
+
+#~ msgctxt "mission4th-comms"
+#~ msgid "This signature can identify the Exuari Omicron facility?"
+#~ msgstr ""
+#~ "Cette signature peut-elle nous permettre de localiser l'usine Éxuarie ?"
+
+#, lua-format
+#~ msgctxt "mission4th-comms"
+#~ msgid ""
+#~ "Yes, but if you're unsure, you are authorized to destroy every Exuari "
+#~ "facility. You will need to travel into Exuari infested space along "
+#~ "bearing %i from station %s to find the Omicron facility and destroy it. "
+#~ "Our best intelligence estimates that deployment will occur within the "
+#~ "next %i minutes. Happy hunting!"
+#~ msgstr ""
+#~ "Oui, mais si vous avez un doute, vous avez l'autorisation de détruire "
+#~ "toutes les installations Éxuaries que vous trouverez.\n"
+#~ "\n"
+#~ "Vous devrez traverser un espace infesté d'Éxuaris en suivant le cap %i "
+#~ "depuis la station %s pour trouver l'usine d'Omicron et la détruire. Nos "
+#~ "services de renseignement estiment que la diffusion du virus commencera "
+#~ "dans les prochaines %i minutes.\n"
+#~ "Bonne chasse !"
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "To %s\n"
+#~ "From: %s\n"
+#~ "\n"
+#~ "Ensign Fargalli, one of the maintenance engineers aboard the freighter "
+#~ "%s, just reported to sickbay here on %s. We can treat his symptoms, but "
+#~ "don't have a treatment for the root cause of his illness. This is the "
+#~ "third case of this type we've seen in the last week. The last two ended "
+#~ "up being fatal."
+#~ msgstr ""
+#~ "À : %s\n"
+#~ "De : %s\n"
+#~ "\n"
+#~ "L'officier Fargalli, l'un des ingénieurs de maintenance à bord du cargo "
+#~ "%s, vient de se présenter à l'infirmerie ici sur %s. Nous pouvons traiter "
+#~ "ses symptômes, mais nous n'avons pas de traitement pour la cause profonde "
+#~ "de sa maladie.\n"
+#~ "C'est déjà le troisième cas de ce genre que nous enregistrons en une "
+#~ "semaine. Les deux derniers n'ont pas survécus."
+
+#~ msgctxt "mission2nd-comms"
+#~ msgid "Why are you telling me this?"
+#~ msgstr "Pourquoi nous dites-vous cela ?"
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "We've received word that Independent station %s is conducting ongoing "
+#~ "research into this malady and may have more information, maybe even a "
+#~ "remedy."
+#~ msgstr ""
+#~ "Nous avons appris que la station indépendante %s mène actuellement des "
+#~ "recherches sur cette maladie et pourrait avoir plus d'informations à ce "
+#~ "sujet, peut-être même un remède."
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid "Then you should get that treatment from %s to save Fargalli"
+#~ msgstr "Vous pourriez récupérer ce traitement sur %s pour sauver Fargalli"
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "We can't contact %s directly since they are not on our communications "
+#~ "network."
+#~ msgstr ""
+#~ "Malheureusement nous ne pouvons contacter la station %s directement car "
+#~ "ils ne sont pas sur notre réseau de communication."
+
+#~ msgctxt "mission2nd-comms"
+#~ msgid "A courier could get it"
+#~ msgstr "Un coursier pourrait y aller ?"
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "We tried sending couriers. All of our couriers were shot down. We are "
+#~ "telling you all this because we need you to go to %s and bring back any "
+#~ "medical research or treatment or medicine they may have"
+#~ msgstr ""
+#~ "Nous avons essayé d'envoyer des coursiers. Ils ont tous été abattus.\n"
+#~ "Nous vous disons tout cela car nous aurions besoin que vous vous rendiez "
+#~ "sur %s pour rapportez toute recherche médicale, traitement ou médicament "
+#~ "qui pourraient s'y trouver."
+
+#~ msgctxt "mission2nd-comms"
+#~ msgid "Now I understand"
+#~ msgstr "Je comprends mieux"
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "There is some urgency. Based on the previous cases, Fargalli has about %i "
+#~ "minutes to live"
+#~ msgstr ""
+#~ "Il y a urgence.\n"
+#~ "Si on se base sur les 2 cas précédents, il reste à l'officier Fargalli "
+#~ "environ %i minutes à vivre."
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid "%s is in sector %s. Good luck"
+#~ msgstr ""
+#~ "%s se trouve dans le secteur %s.\n"
+#~ "Bonne chance à vous."
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "%s is on an approximate bearing of %i from %s. Distance is greater than "
+#~ "%.1f units."
+#~ msgstr ""
+#~ "%s est située sur un cap approximatif de %i depuis %s. La distance est "
+#~ "supérieure à %.1f unités."
+
+#, lua-format
+#~ msgctxt "mission2nd-comms"
+#~ msgid ""
+#~ "%s is on a precise bearing of %.1f from %s. Distance is greater than %.1f "
+#~ "units."
+#~ msgstr ""
+#~ "%s est sur un cap précis de %.1f depuis la station %s. La distance est "
+#~ "supérieure à %.1f unités."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "To: %s\n"
+#~ "From: %s\n"
+#~ "\n"
+#~ "Hello, %s"
+#~ msgstr ""
+#~ "À : %s\n"
+#~ "De : %s\n"
+#~ "\n"
+#~ "Bonjour %s,"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Hello, %s"
+#~ msgstr "Bonjour %s,"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "One of the commercial freighters just docked up and their personnel "
+#~ "inferred that you might be traveling in our direction."
+#~ msgstr ""
+#~ "Un cargo commercial vient d'accoster et leur personnel pense que vous "
+#~ "pourriez voyager dans notre direction."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Those are well informed personnel"
+#~ msgstr "Ces employés semblent bien informés"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "It's amazing what commercial freighters learn and how quickly they learn "
+#~ "it."
+#~ msgstr ""
+#~ "C'est incroyable ce que les cargos commerciaux apprennent et à quelle "
+#~ "vitesse ils l'apprennent."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Indeed. Why are you contacting us?"
+#~ msgstr "En effet ! Pourquoi nous contactez-vous ?"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We were wondering how soon you might get here. You see, there's this "
+#~ "group of Exuari approaching and they don't look terribly friendly."
+#~ msgstr ""
+#~ "Nous nous demandions dans combien de temps vous pourriez arriver ici. "
+#~ "Voyez-vous, il y a ce groupe d'Éxuaris qui approche et ils n'ont pas "
+#~ "l'air très amicaux."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We intend to get medical research, not necessarily engage Exuari"
+#~ msgstr "Nous venons récupérer des recherches médicales, pas se battre"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We could make it worth your while if you were to protect our station from "
+#~ "these Exuari."
+#~ msgstr ""
+#~ "Nous pourrions faire en sorte que cela en vaille la peine si vous "
+#~ "protégiez notre station de ces Éxuaris."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "How so?"
+#~ msgstr "Comment ?"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "If you were to destroy the attacking Exuari, we could offer you one of "
+#~ "these:"
+#~ msgstr ""
+#~ "Si vous nous protégez des attaques Éxuaries, nous pourrions vous proposer "
+#~ "une de ces choses au choix :"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "25% faster impulse speed"
+#~ msgstr "Vos moteurs à impulsion 25 % plus rapide"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "You got it. We're in sector %s"
+#~ msgstr ""
+#~ "Marché conclu.\n"
+#~ "Nous vous attendons dans le secteur %s."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Rapid transit back to %s"
+#~ msgstr "Retourner rapidement à %s"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "25% stronger beam weapons"
+#~ msgstr "Vos faisceaux laser 25 % plus puissants"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Replenish all your ordnance"
+#~ msgstr "Faire le plein en munitions"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We just need to know where you are located"
+#~ msgstr "Nous avons juste besoin de savoir où vous vous trouvez"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We added paypoint %i to your system which identifies our station. We may "
+#~ "or may not be able to provide what you request depending on how busy we "
+#~ "are fighting off Exuari."
+#~ msgstr ""
+#~ "Nous avons ajouté notre programme de paiement sans contact %i à votre "
+#~ "système, le reliant à notre station. Nous pouvons désormais être en "
+#~ "mesure de fournir ce que vous nous demandez si nous ne sommes pas trop "
+#~ "occupés à combattre les Éxuaris."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We are in sector %s. We may or may not be able to provide what you "
+#~ "request depending on how busy we are fighting off Exuari."
+#~ msgstr ""
+#~ "Nous sommes situés dans le secteur %s. Nous pouvons être en mesure de "
+#~ "fournir ce que vous nous demandez si nous ne sommes pas trop occupés à "
+#~ "combattre les Éxuaris."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Sounds bad. Do you need help?"
+#~ msgstr "Ca sent pas bon. Avez-vous besoin d'aide ?"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We welcome any help you might provide. It would facilitate our survival."
+#~ msgstr ""
+#~ "Nous nous félicitons de toute aide que vous pourriez nous apporter. Cela "
+#~ "faciliterait notre survie."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Could you provide us with your location?"
+#~ msgstr "Pourriez-vous nous indiquer votre emplacement ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "You mean %s did not tell you where to find us?"
+#~ msgstr "Vous voulez dire que %s ne vous a pas dit où nous trouver ?"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "They did, but we prefer greater precision"
+#~ msgstr "Ils l'ont fait, mais pas précisément"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We added waypoint %i to your system for our station. Your timely arrival "
+#~ "would be greatly appreciated."
+#~ msgstr ""
+#~ "Nous avons ajouté le marqueur %i sur votre radar pour vous indiquer notre "
+#~ "emplacement. Votre arrivée dans les plus brefs délais serait grandement "
+#~ "appréciée."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "%s provided a bearing, but we prefer greater precision"
+#~ msgstr "%s nous a fourni un cap, nous aimerions une position plus précise"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We are in sector %s. Your timely arrival would be greatly appreciated."
+#~ msgstr ""
+#~ "Nous sommes dans le secteur %s. Votre arrivée dans les plus bref délais "
+#~ "serait grandement appréciée."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Your information is correct"
+#~ msgstr "Vos informations sont correctes"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "That's great news. We've got some pesky Exuari in the area."
+#~ msgstr ""
+#~ "Ce sont de bonnes nouvelles. Nous avons des Éxuaris un peu trop "
+#~ "envahissants dans le coin."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Let me guess, you want our help with the Exuari?"
+#~ msgstr "Laissez-moi deviner, vous souhaitez notre aide avec les Éxuaris ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Got it in one. We're in sector %s. Please don't dawdle"
+#~ msgstr ""
+#~ "Vous avez vu juste.\n"
+#~ "Nous sommes dans le secteur %s. S'il vous plaît dépêchez-vous."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "They're everywhere"
+#~ msgstr "Ils sont partout."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "This batch is in our back yard. If you're going to be in the neighborhood "
+#~ "already, could you help us out?"
+#~ msgstr ""
+#~ "Ce groupe se trouve juste derrière notre station. Si vous êtes déjà dans "
+#~ "le coin, pourriez-vous nous aider ?"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Sure"
+#~ msgstr "Bien sûr"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Great. We're in sector %s"
+#~ msgstr "Génial. Nous sommes dans le secteur %s."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We're really only coming to get medical research"
+#~ msgstr "Désolé, nous venons uniquement récupérer des recherches médicales"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Understood."
+#~ msgstr "Entendu."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Identify your sector and we'll help"
+#~ msgstr "Indiquez-nous votre secteur et nous vous aiderons"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Fair enough. We're in sector %s"
+#~ msgstr "Tout de suite. Nous sommes dans le secteur %s."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We might be. Why do you ask?"
+#~ msgstr "Ca se pourrait. Pourquoi demandez-vous ?"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "Well, we've observed some Exuari headed our way. We don't think they're "
+#~ "making a courtesy call"
+#~ msgstr ""
+#~ "Eh bien, nous avons vu des Éxuaris se diriger vers nous. Ca ne ressemble "
+#~ "pas à une visite de courtoisie."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "They never do. Would you like our help?"
+#~ msgstr "Ils n'en font jamais. Souhaitez-vous notre aide ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Yes, please. We're in sector %s"
+#~ msgstr "Oui s'il vous plaît. Nous nous trouvons dans le secteur %s."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Where exactly is 'your way?'"
+#~ msgstr "Et où se situe exactement 'vers vous' ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "Our station is located in sector %s. We hope to see you soon."
+#~ msgstr ""
+#~ "Notre station est située dans le secteur %s. Nous espérons vous voir très "
+#~ "vite."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We'd like to help, but we're having a hard time finding you"
+#~ msgstr "Nous aimerions vous aider, mais nous avons du mal à vous trouver"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "We're in sector %s. Please hurry, the Exuari look dangerous."
+#~ msgstr ""
+#~ "Nous sommes dans le secteur %s. Dépêchez-vous, les Exuari ont l'air "
+#~ "dangereux."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Technically, our mission does not cover protection from Exuari"
+#~ msgstr ""
+#~ "Techniquement, notre mission ne couvre pas la protection contre les "
+#~ "Éxuaris"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Drat"
+#~ msgstr "Formidable..."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Where are you located?"
+#~ msgstr "Où êtes-vous situés ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "We are in sector %s. Please hurry, the Exuari are approaching."
+#~ msgstr ""
+#~ "Nous nous trouvons dans le secteur %s. Dépêchez-vous, les Éxuaris "
+#~ "approchent."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We are glad you contacted us"
+#~ msgstr "Nous sommes heureux que vous nous ayez contacté"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Coincidentally, we are glad to be in contact with you, too."
+#~ msgstr "Nous sommes également heureux d'être en contact avec vous."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Why is that?"
+#~ msgstr "Pourquoi donc ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "We are in need of some assistance with Exuari that are approaching our "
+#~ "station, %s."
+#~ msgstr ""
+#~ "Nous aurions besoin d'aide avec des Éxuaris qui se rapprochent de notre "
+#~ "station %s."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "We can help"
+#~ msgstr "Nous pouvons vous aider"
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "That's so good to hear. You may want to hurry, though."
+#~ msgstr ""
+#~ "C'est si bon à entendre. Vous voudriez peut-être vous dépêcher, cependant."
+
+#~ msgctxt "mission3th-comms"
+#~ msgid "Why the rush?"
+#~ msgstr "Pourquoi cette précipitation ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "The Exuari! They're getting closer! Please come to us in sector %s as "
+#~ "soon as you can."
+#~ msgstr ""
+#~ "Les Éxuaris ! Ils se rapprochent dangereusement ! S'il vous plaît, venez "
+#~ "nous aider dans le secteur %s dès que possible."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid ""
+#~ "The Exuari! They're getting closer! I'm adding waypoint %i into your "
+#~ "system for our station. Please get here as soon as you can."
+#~ msgstr ""
+#~ "Les Exuaris ! Ils se rapprochent dangereusement ! J'ajoute le marqueur %i "
+#~ "sur votre radar pour vous indiquer l'emplacement de notre station. Venez "
+#~ "dès que possible, je vous en supplie."
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "In what sector is %s located?"
+#~ msgstr "Dans quel secteur se situe %s ?"
+
+#, lua-format
+#~ msgctxt "mission3th-comms"
+#~ msgid "%s is located in sector %s."
+#~ msgstr "%s se situe dans le secteur %s."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "What do you want?"
+#~ msgstr "Que voulez-vous ?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Sir, how can we assist?"
+#~ msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend a waypoint"
+#~ msgstr "Défendez un marqueur"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "No waypoints set. Please set a waypoint first."
+#~ msgstr ""
+#~ "Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en "
+#~ "placer un."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Which waypoint should we defend?"
+#~ msgstr "Quel marqueur devons-nous défendre ?"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Defend WP %d"
+#~ msgstr "Défendez le marqueur %d"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "We are heading to assist at WP %d."
+#~ msgstr "Nous partons pour défendre le marqueur %d."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Assist me"
+#~ msgstr "Aidez-nous"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Heading toward you to assist."
+#~ msgstr "Entendu, nous partons immédiatement vous aider."
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Report status"
+#~ msgstr "Au rapport"
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Hull: "
+#~ msgstr "Coque : "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shield: "
+#~ msgstr "Boucliers : "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Front Shield: "
+#~ msgstr "Boucliers avant : "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Rear Shield: "
+#~ msgstr "Boucliers arrière : "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Shield "
+#~ msgstr "Bouclier "
+
+#~ msgctxt "shipAssist-comms"
+#~ msgid " Missiles: "
+#~ msgstr " Missiles : "
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Dock at %s"
+#~ msgstr "Amarrez-vous à %s"
+
+#, lua-format
+#~ msgctxt "shipAssist-comms"
+#~ msgid "Docking at %s."
+#~ msgstr "En cours d'amarrage à %s."
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Traded luxury for %s"
+#~ msgstr "Échanger Produits de luxe (luxury) contre %s"
+
+#, lua-format
+#~ msgctxt "trade-comms"
+#~ msgid "Purchased %s from %s"
+#~ msgstr "%s acheté auprès de %s"
+
+#~ msgctxt "needRep-comms"
+#~ msgid "Insufficient reputation for purchase"
+#~ msgstr "Réputation insuffisante pour acheter"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Do you have cargo you might sell?"
+#~ msgstr "Auriez-vous de la cargaison à vendre ?"
+
+#~ msgctxt "trade-comms"
+#~ msgid "We've got "
+#~ msgstr "Nous avons "
+
+#~ msgctxt "trade-comms"
+#~ msgid "nothing"
+#~ msgstr "Rien du tout."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will see to your destruction!"
+#~ msgstr "Nous allons vous détruire !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your bloodline will end here!"
+#~ msgstr "Votre race va s'éteindre ici et maintenant !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your feeble threats are meaningless."
+#~ msgstr "Vos petites menaces ne nous impressionnent pas."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "Ktzzzsss.\n"
+#~ "You will DIEEee weaklingsss!"
+#~ msgstr ""
+#~ "Ktzzzsss.\n"
+#~ "\n"
+#~ "Vous allez mourir faibles créatures insignifiantes !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We will destroy you"
+#~ msgstr "Nous allons vous détruire !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We think not. It is you who will experience destruction!"
+#~ msgstr ""
+#~ "Nous pensons le contraire. C'est vous qui allez subir la destruction !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "You have no honor"
+#~ msgstr "Vous n'avez aucun honneur."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your insult has brought our wrath upon you. Prepare to die."
+#~ msgstr ""
+#~ "Votre insulte a attiré notre colère sur vous. Préparez-vous à mourir !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Your comments about honor have no meaning to us"
+#~ msgstr ""
+#~ "Vos commentaires sur l'honneur n'ont aucune signification pour nous."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We pity your pathetic race"
+#~ msgstr "Nous plaignons votre race pathétique."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Pathetic? You will regret your disparagement!"
+#~ msgstr "Pathétique ? Vous allez regretter votre insolence !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "We don't care what you think of us"
+#~ msgstr "Peu importe ce que vous pensez de nous."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We wish you no harm, but will harm you if we must.\n"
+#~ "End of transmission."
+#~ msgstr ""
+#~ "Nous ne vous voulons aucun mal, mais nous le ferons si nécessaire.\n"
+#~ "\n"
+#~ "Fin de transmission."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Stay out of our way, or your death will amuse us extremely!"
+#~ msgstr ""
+#~ "Restez en dehors de notre chemin, ou votre mort sera une amusante "
+#~ "distraction pour nous !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "One zero one.\n"
+#~ "No binary communication detected.\n"
+#~ "Switching to universal speech.\n"
+#~ "Generating appropriate response for target from human language archives.\n"
+#~ ":Do not cross us:\n"
+#~ "Communication halted."
+#~ msgstr ""
+#~ "000110011010...Grzzzz..\n"
+#~ "\n"
+#~ "Communication binaire non détectée..Grzzz Nous passons en communication "
+#~ "universelle..Grrzzz\n"
+#~ "\n"
+#~ "Générer une réponse appropriée pour la cible en langage humain à partir "
+#~ "des archives...Grrzzzz\n"
+#~ "\n"
+#~ "Ne nous approchez pas! Grrzzz\n"
+#~ "\n"
+#~ "Communication interrompue."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "EXECUTE: SELFDESTRUCT"
+#~ msgstr "EXECUTER A DISTANCE : AUTODESTRUCTION"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Rogue command received. Targeting source."
+#~ msgstr "Commande non autorisée reçue. Cible verrouillée."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "External command ignored."
+#~ msgstr "Ordre externe ignoré."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "The hive suffers no threats. Opposition to any of us is opposition to us "
+#~ "all.\n"
+#~ "Stand down or prepare to donate your corpses toward our nutrition."
+#~ msgstr ""
+#~ "Notre peuple ne tolère aucune menace. S'opposer à l'un d'entre nous c'est "
+#~ "s'opposer à nous tous.\n"
+#~ "\n"
+#~ "Fuyez ou préparez-vous à faire don de vos cadavres pour nos repas."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
+#~ msgstr "<Diffuser la chanson de Spiderman sur toutes les ondes>"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid ""
+#~ "We do not need permission to pluck apart such an insignificant threat."
+#~ msgstr "Vous osez vous moquer de nous ? En avez-vous marre de vivre ?"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "The hive has greater priorities than exterminating pests."
+#~ msgstr ""
+#~ "Notre peuple a d'autres priorités que l'extermination de parasites tels "
+#~ "que vous."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "State your business"
+#~ msgstr "Qu'est ce que vous voulez ?"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "What do you want? (not that we care)"
+#~ msgstr "Qu'est-ce que vous voulez ? (non pas que ça nous intéresse)"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Mind your own business!"
+#~ msgstr "Occupez-vous de vos affaires !"
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Subspace and time continuum disruption authorized"
+#~ msgstr "Interruption du sous-espace et du continuum temporel autorisée."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "Just this once, we'll take your advice"
+#~ msgstr "Juste pour cette fois, nous suivrons vos conseils."
+
+#~ msgctxt "shipEnemy-comms"
+#~ msgid "No"
+#~ msgstr "Non"
+
+#, lua-format
+#~ msgctxt "tabRelay"
+#~ msgid "Disruption %i"
+#~ msgstr "Perturbation %i"
+
+#~ msgctxt "trade-comms"
+#~ msgid "Yes?"
+#~ msgstr "Oui ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "Sorry, we have no time to chat with you.\n"
+#~ "We are on an important mission."
+#~ msgstr ""
+#~ "Désolé, nous n'avons pas le temps de discuter avec vous.\n"
+#~ "\n"
+#~ "Nous sommes en mission de la plus haute importance."
+
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "We have nothing for you.\n"
+#~ "Good day."
+#~ msgstr ""
+#~ "Nous n'avons rien pour vous.\n"
+#~ "\n"
+#~ "Bonne journée."
+
+#~ msgctxt "ship-comms"
+#~ msgid "What do you want?"
+#~ msgstr "Que voulez-vous ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Sir, how can we assist?"
+#~ msgstr "Monsieur, comment pouvons-nous vous assister ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Defend a waypoint"
+#~ msgstr "Défendez un marqueur"
+
+#~ msgctxt "ship-comms"
+#~ msgid "No waypoints set. Please set a waypoint first."
+#~ msgstr ""
+#~ "Monsieur, nous ne détectons aucun marqueur. Veuillez commencer par en "
+#~ "placer un."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Which waypoint should we defend?"
+#~ msgstr "Quel marqueur devons-nous défendre ?"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Defend WP %i"
+#~ msgstr "Défendez le marqueur %i."
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "We are heading to assist at WP %i."
+#~ msgstr "Nous partons pour défendre le marqueur %i."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Assist me"
+#~ msgstr "Aidez-nous !"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Heading toward you to assist."
+#~ msgstr "Entendu, nous partons immédiatement vous aider."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Report status"
+#~ msgstr "Au rapport"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Hull: "
+#~ msgstr "Coque : "
+
+#~ msgctxt "ship-comms"
+#~ msgid "Shield: "
+#~ msgstr "Boucliers : "
+
+#~ msgctxt "ship-comms"
+#~ msgid "Front Shield: "
+#~ msgstr "Boucliers avant : "
+
+#~ msgctxt "ship-comms"
+#~ msgid "Rear Shield: "
+#~ msgstr "Boucliers arrière : "
+
+#~ msgctxt "ship-comms"
+#~ msgid "Shield "
+#~ msgstr "Bouclier "
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Dock at %s"
+#~ msgstr "Amarrez-vous à %s"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Docking at %s."
+#~ msgstr "En cours d'amarrage à %s."
+
+#~ msgctxt "ship-comms"
+#~ msgid "How are you doing?"
+#~ msgstr "Comment allez-vous?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Service options"
+#~ msgstr "Options des services proposés :"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repair ship system"
+#~ msgstr "Réparer les systèmes du vaisseau."
+
+#~ msgctxt "ship-comms"
+#~ msgid "What system would you like repaired?"
+#~ msgstr "Quel système souhaitez-vous réparer ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repair probe launch system"
+#~ msgstr "Réparer le système de lancement de sonde"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Your probe launch system has been repaired"
+#~ msgstr "Votre système de lancement de sonde a été réparé."
+
+#~ msgctxt "ship-comms"
+#~ msgid "You need to stay close if you want me to fix your ship"
+#~ msgstr ""
+#~ "Vous devez rester près de nous si vous voulez que l'on puisse réparer "
+#~ "votre vaisseau."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repair hacking system"
+#~ msgstr "Réparer le système de piratage"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Your hack system has been repaired"
+#~ msgstr "Votre système de piratage a été réparé."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repair scanning system"
+#~ msgstr "Réparer les scanners"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Your scanners have been repaired"
+#~ msgstr "Vos scanners ont été réparés."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repair combat maneuver"
+#~ msgstr "Réparer la manœuvre de combat"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Your combat maneuver has been repaired"
+#~ msgstr "Votre manœuvre de combat a été réparée."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repair self destruct system"
+#~ msgstr "Réparer le système d'autodestruction"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Your self destruct system has been repaired"
+#~ msgstr "Votre système d'autodestruction a été réparé."
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Full hull repair (%i reputation)"
+#~ msgstr "Réparation complète de la coque (%i rép)"
+
+#~ msgctxt "ship-comms"
+#~ msgid "All fixed up and ready to go"
+#~ msgstr "Tout est réparé et prêt à fonctionner."
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Add %i%% to hull (%i reputation)"
+#~ msgstr "Ajouter %i%% à la coque (%i rép)"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Repairs completed as requested"
+#~ msgstr "Réparations effectuées comme demandé."
+
+#~ msgctxt "ship-comms"
+#~ msgid "Restock ordnance"
+#~ msgstr "Réapprovisionner en munitions"
+
+#~ msgctxt "ship-comms"
+#~ msgid "What kind of ordnance?"
+#~ msgstr "Quel genre de munitions ?"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Restocked your %s type ordnance"
+#~ msgstr "Vos munitions de type %s sont réapprovisionnées."
+
+#, lua-format
+#~ msgctxt "needRep-comms"
+#~ msgid ""
+#~ "You don't have enough reputation to fully replenish your %s type "
+#~ "ordnance. You need %i and you only have %i. How would you like to proceed?"
+#~ msgstr ""
+#~ "Vous n'avez pas assez de réputation pour vous réapprovisionner "
+#~ "complètement en munitions de type %s. Vous avez besoin de %i et vous "
+#~ "n'avez que %i. Comment voulez-vous procéder?"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Get one (%i reputation)"
+#~ msgstr "En acheter un (%i rép)"
+
+#~ msgctxt "ship-comms"
+#~ msgid "You need to stay close if you want me to restock your ordnance"
+#~ msgstr ""
+#~ "Vous devez rester à proximité si vous voulez que je vous réapprovisionne "
+#~ "en munitions."
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Get %i (%i reputation)"
+#~ msgstr "Acheter %i (%i rép)"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "%i %ss provided"
+#~ msgstr "%i %ss fourni"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid ""
+#~ "I don't have enough %s type ordnance to fully restock you. How would you "
+#~ "like to proceed?"
+#~ msgstr ""
+#~ "Nous n'avons pas assez de munitions de type %s pour vous réapprovisionner "
+#~ "entièrement. Que voulez-vous faire ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "We'll take all you've got"
+#~ msgstr "Nous prendrons tout ce qu'il vous reste"
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "One %s provided"
+#~ msgstr "Un %s fourni."
+
+#, lua-format
+#~ msgctxt "needRep-comms"
+#~ msgid ""
+#~ "You don't have enough reputation to get all of our %s type ordnance. You "
+#~ "need %i and you only have %i. How would you like to proceed?"
+#~ msgstr ""
+#~ "Vous n'avez pas assez de réputation pour obtenir toutes nos munitions de "
+#~ "type %s. Vous avez besoin de %i et vous n'avez que %i. Comment voulez-"
+#~ "vous procéder?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Restock scan probes (5 reputation)"
+#~ msgstr "Réapprovisionner les sondes (5 rép)"
+
+#~ msgctxt "ship-comms"
+#~ msgid "I replenished your probes for you."
+#~ msgstr "Nous avons rechargé votre stock de sondes."
+
+#~ msgctxt "ship-comms"
+#~ msgid "You need to stay close if you want me to restock your probes"
+#~ msgstr ""
+#~ "Vous devez rester à proximité si vous voulez que je réapprovisionne vos "
+#~ "sondes."
+
+#, lua-format
+#~ msgctxt "ship-comms"
+#~ msgid "Quick charge the main batteries (%i reputation)"
+#~ msgstr "Charge rapide des batteries principales (%i rép)"
+
+#~ msgctxt "ship-comms"
+#~ msgid "Your batteries have been charged"
+#~ msgstr "Vos batteries ont été chargées."
+
+#~ msgctxt "ship-comms"
+#~ msgid "You need to stay close if you want your batteries charged quickly"
+#~ msgstr ""
+#~ "Vous devez rester à proximité si vous voulez que vos batteries soient "
+#~ "chargées rapidement."
+
+#~ msgctxt "ship-comms"
+#~ msgid "How can I help you get your ship in good running order?"
+#~ msgstr ""
+#~ "Comment pouvons-nous vous aider à remettre votre vaisseau en bon état de "
+#~ "marche ?"
+
+#~ msgctxt "ship-comms"
+#~ msgid "There's nothing on your ship that I can help you fix. Sorry."
+#~ msgstr ""
+#~ "Il n'y a rien sur votre vaisseau que nous puissions vous aider à réparer. "
+#~ "Désolé."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "Medical team has revived one of your repair crew"
+#~ msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Medical team has revived one of your repair crew"
+#~ msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "Automated systems have recovered some coolant"
+#~ msgstr ""
+#~ "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Automated systems have recovered some coolant"
+#~ msgstr ""
+#~ "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "One of your repair crew has perished"
+#~ msgstr "Un de vos réparateurs a péri."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "Damage has caused a loss of coolant"
+#~ msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Damage has caused a loss of coolant"
+#~ msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "The probe launch system has been damaged"
+#~ msgstr "Le système de lancement des sondes a été endommagé."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "The probe launch system has been damaged"
+#~ msgstr "Le système de lancement des sondes a été endommagé."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "The hacking system has been damaged"
+#~ msgstr "Le système de piratage a été endommagé."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "The hacking system has been damaged"
+#~ msgstr "Le système de piratage a été endommagé."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "The scanners have been damaged"
+#~ msgstr "Les scanners ont été endommagés."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "The scanners have been damaged"
+#~ msgstr "Les scanners ont été endommagés."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "Combat maneuver has been damaged"
+#~ msgstr "La manœuvre de combat a été endommagée."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Combat maneuver has been damaged"
+#~ msgstr "La manœuvre de combat a été endommagée."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "Self destruct system has been damaged"
+#~ msgstr "Le système d'autodestruction a été endommagé."
+
+#~ msgctxt "msgEngineer+"
+#~ msgid "Self destruct system has been damaged"
+#~ msgstr "Le système d'autodestruction a été endommagé."
+
+#~ msgctxt "tabRelay"
+#~ msgid "Inventory"
+#~ msgstr "Inventaire"
+
+#, lua-format
+#~ msgctxt "inventory-shipLog"
+#~ msgid "%s Current cargo:"
+#~ msgstr "%s Cargaison actuelle :"
+
+#~ msgctxt "inventory-shipLog"
+#~ msgid "     Empty"
+#~ msgstr "     Vide"
+
+#, lua-format
+#~ msgctxt "inventory-shipLog"
+#~ msgid "Available space: %i"
+#~ msgstr "Espace disponible : %i"
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Farco models are evolutionary changes to the Phobos T3. In the case "
+#~ "of the Farco 3, the beams are longer and faster and the shields are "
+#~ "slightly stronger."
+#~ msgstr ""
+#~ "Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+#~ "cas du Farco 3, les faisceaux laser sont plus longs et plus rapides et "
+#~ "les boucliers sont légèrement plus solides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Farco models are evolutionary changes to the Phobos T3. In the case "
+#~ "of the Farco 5, the tubes load faster and the shields are slightly "
+#~ "stronger."
+#~ msgstr ""
+#~ "Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+#~ "cas du Farco 5, les tubes se chargent plus rapidement et les blindages "
+#~ "sont légèrement plus solides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Farco models are evolutionary changes to the Phobos T3. In the case "
+#~ "of the Farco 8, the beams are longer and faster, the tubes load faster "
+#~ "and the shields are stronger."
+#~ msgstr ""
+#~ "Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+#~ "cas du Farco 8, les faisceaux laser sont plus longs et plus rapides, les "
+#~ "tubes se chargent plus vite et les blindages sont plus solides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Farco models are evolutionary changes to the Phobos T3. In the case "
+#~ "of the Farco 11, the maneuver speed is faster, the beams are longer and "
+#~ "faster, there's an added longer sniping beam and the shields are stronger."
+#~ msgstr ""
+#~ "Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+#~ "cas du Farco 11, la vitesse de manœuvre est plus rapide, les faisceaux "
+#~ "laser sont plus longs et plus rapides, il y a un faisceau \"sniper\" plus "
+#~ "long et les boucliers sont plus solides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Farco models are evolutionary changes to the Phobos T3. In the case "
+#~ "of the Farco 13, the maneuver speed is faster, the beams are longer and "
+#~ "faster, there's an added longer sniping beam, the tubes load faster, "
+#~ "there are more missiles and the shields are stronger."
+#~ msgstr ""
+#~ "Les modèles Farco sont des modifications évolutives du Phobos T3. Dans le "
+#~ "cas du Farco 13, la vitesse de manœuvre est plus rapide, les faisceaux "
+#~ "laser sont plus longs et plus rapides, il y a un faisceau \"sniper\" plus "
+#~ "long, les tubes se chargent plus rapidement, il y a plus de missiles et "
+#~ "les boucliers sont plus solides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Whirlwind, another heavy artillery cruiser, takes the Storm and adds "
+#~ "tubes and missiles. It's as if the Storm swallowed a Pirahna and grew "
+#~ "gills. Expect to see missiles, lots of missiles"
+#~ msgstr ""
+#~ "Le Whirlwind, un autre croiseur d'artillerie lourde, provient du Tempête "
+#~ "(Storm) auquel ont été ajoutés des tubes et missiles. C'est comme si le "
+#~ "Tempête avait avalé un Piranha et développé des branchies. Attendez-vous "
+#~ "à voir des missiles, beaucoup de missiles."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Phobos R2 model is very similar to the Phobos T3. It's got a faster "
+#~ "turn speed, but only one missile tube"
+#~ msgstr ""
+#~ "Le modèle Phobos R2 est très similaire au Phobos T3. Il a une vitesse de "
+#~ "rotation plus rapide, mais un seul tube de missile."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The MV52 Hornet is very similar to the MT52 and MU52 models. The beam "
+#~ "does more damage than both of the other Hornet models, it's max impulse "
+#~ "speed is faster than both of the other Hornet models, it turns faster "
+#~ "than the MT52, but slower than the MU52"
+#~ msgstr ""
+#~ "Le Frelon MV52 (Hornet MV52) est très similaire aux modèles MT52 et MU52. "
+#~ "Les faisceaux laser font plus de dégâts, ses moteurs sont plus rapide, il "
+#~ "tourne plus vite que le MT52, mais plus lentement que le MU52."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "Enterprising designers published this design specification based on "
+#~ "salvaged Ktlitan Fighters. Comparatively, it's got beams that cycle "
+#~ "faster, but the hull is a bit weaker."
+#~ msgstr ""
+#~ "Des concepteurs créatifs ont conçu cette variante basée sur des chasseurs "
+#~ "Ktlitan récupérés. Comparativement, ce modèle a des faisceaux laser qui "
+#~ "se rechargent plus rapidement, mais la coque est un peu plus faible."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "Enterprising designers published this design specification based on "
+#~ "salvaged Ktlitan Fighters. Comparatively, it's got beams that are "
+#~ "stronger and that cycle faster, but the hull is weaker."
+#~ msgstr ""
+#~ "Des concepteurs créatifs ont conçu cette variante basée sur des chasseurs "
+#~ "Ktlitan récupérés. Comparativement, ce modèle a des faisceaux laser qui "
+#~ "se rechargent plus rapidement et sont plus solides, mais la coque est "
+#~ "plus faible."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "Conversions R Us purchased a number of Adder MK 5 ships at auction and "
+#~ "added warp drives to them to produce the Waddle 5"
+#~ msgstr ""
+#~ "Conversions R Us a acheté un certain nombre de vaisseaux Vipère MK5 "
+#~ "(Adder MK5) aux enchères et leur a ajouté des moteurs à vitesse lumière "
+#~ "pour produire le Waddle 5."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "Conversions R Us purchased a number of Adder MK 5 ships at auction and "
+#~ "added jump drives to them to produce the Jade 5"
+#~ msgstr ""
+#~ "Conversions R Us a acheté un certain nombre de vaisseaux Vipère MK5 "
+#~ "(Adder MK5) aux enchères et leur a ajouté des moteurs de téléportation "
+#~ "pour produire le Jade 5."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The light drone was pieced together from scavenged parts of various "
+#~ "damaged Ktlitan drones. Compared to the Ktlitan drone, the lite drone has "
+#~ "a weaker hull, and a weaker beam, but a faster turn and impulse speed"
+#~ msgstr ""
+#~ "Le drone léger a été assemblé à partir de pièces récupérées de divers "
+#~ "drones Ktlitan endommagés. Comparé au drones Ktlitan, le drone léger a "
+#~ "une coque et un faisceau laser plus faibles, mais une manœuvre et des "
+#~ "moteurs plus rapides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The heavy drone has a stronger hull and a stronger beam than the normal "
+#~ "Ktlitan Drone, but it also moves slower"
+#~ msgstr ""
+#~ "Le drone lourd a une coque plus solide et un faisceau plus puissant que "
+#~ "le drone Ktlitan classique, mais il se déplace également plus lentement."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly "
+#~ "slower and has a slightly weaker beam due to the energy requirements of "
+#~ "the added shield"
+#~ msgstr ""
+#~ "Le drone Jacket est un drone Ktlitan possédant un bouclier. Il est "
+#~ "également légèrement plus lent et a un faisceau légèrement plus faible en "
+#~ "raison des besoins énergétiques du bouclier ajouté."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The WZ-Lindworm is essentially the stock WX-Lindworm with more HVLIs, "
+#~ "more homing missiles and added nukes. They had to remove some of the "
+#~ "armor to get the additional missiles to fit, so the hull is weaker. Also, "
+#~ "the WZ turns a little more slowly than the WX. This little bomber packs "
+#~ "quite a whallop."
+#~ msgstr ""
+#~ "Le Dragon-WZ (WZ-Lindworm) est essentiellement un Dragon-WX (WX-Lindworm) "
+#~ "de série possédant plus de HVLI, de missiles à tête chercheuse (Homing) "
+#~ "et des armes nucléaires supplémentaires (Nuke). Ils ont dû retirer une "
+#~ "partie de l'armure pour que les missiles supplémentaires s'adaptent, du "
+#~ "coup la coque est plus vulnérable. Le WZ tourne un peu plus lentement que "
+#~ "le WX. Ce petit bombardier a du punch."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "Loosely based on the Piranha F12 model, the Tempest adds four more "
+#~ "broadside tubes (two on each side), more HVLIs, more Homing missiles and "
+#~ "8 Nukes. The Tempest can strike fear into the hearts of your enemies. Get "
+#~ "yourself one today!"
+#~ msgstr ""
+#~ "Librement basé sur le modèle Piranha F12, le Tempête (Tempest) possède "
+#~ "quatre autres tubes latéraux (deux de chaque côté), plus de HVLI, plus de "
+#~ "Homing missiles et 8 Nukes. Le tempête peut semer la peur dans le cœur de "
+#~ "vos ennemis. Procurez-vous-en un aujourd'hui !"
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Enforcer is a highly modified Blockade Runner. A warp drive was added "
+#~ "and impulse engines boosted along with turning speed. Three missile tubes "
+#~ "were added to shoot homing missiles, large ones straight ahead. Stronger "
+#~ "shields and hull. Removed rear facing beams and strengthened front beams."
+#~ msgstr ""
+#~ "L'Enforcer est un Coursier (Blockade Runner) hautement modifié. La "
+#~ "vitesse lumière a été ajouté et les moteurs à impulsion ont été boostés "
+#~ "ainsi que la manœuvre. Trois tubes lance-missile ont été ajoutés pour "
+#~ "tirer des missiles à tête chercheuse (homing) dont des gros tubes à "
+#~ "l'avant. >Boucliers et coque plus solides. Suppression des faisceaux "
+#~ "laser arrières et renforcement des faisceaux laser à l'avant."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Predator is a significantly improved Piranha F8. Stronger shields and "
+#~ "hull, faster impulse and turning speeds, a jump drive, beam weapons, "
+#~ "eight missile tubes pointing in six directions and a large number of "
+#~ "homing missiles to shoot."
+#~ msgstr ""
+#~ "Le Predator est un Piranha F8 considérablement amélioré. Des boucliers et "
+#~ "une coque plus solides, des vitesses d'impulsion et de rotation plus "
+#~ "rapides, un téléporteur, des faisceaux laser, huit tubes lance-missile "
+#~ "pointant dans six directions et un grand nombre de missiles à tête "
+#~ "chercheuse (homing) à tirer."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, "
+#~ "faster impulse and turn speeds, an extra beam in back and a larger "
+#~ "missile stock"
+#~ msgstr ""
+#~ "L'Atlantis Y42 améliore l'Atlantis X23 avec des boucliers plus solides, "
+#~ "des vitesses d'impulsion et de rotation plus rapides, un faisceau laser "
+#~ "supplémentaire à l'arrière et un plus grand stock de missiles."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Starhammer V recognizes common modifications made in the field to the "
+#~ "Starhammer II: stronger shields, faster impulse and turning speeds, "
+#~ "additional rear beam and more missiles to shoot. These changes make the "
+#~ "Starhammer V a force to be reckoned with."
+#~ msgstr ""
+#~ "Le Starhammer V propose des modifications courantes apportées sur le "
+#~ "Starhammer II : des boucliers plus solides, des vitesses d'impulsion et "
+#~ "de rotation plus rapides, un faisceau laser arrière supplémentaire et "
+#~ "plus de missiles à tirer. Ces changements font du Starhammer V une force "
+#~ "avec laquelle il faut compter."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Tyr is the shipyard's answer to admiral Konstatz' casual statement "
+#~ "that the Battlestation model was too slow to be effective. The shipyards "
+#~ "improved on the Battlestation by fitting the Tyr with more than twice the "
+#~ "impulse speed and more than six times the turn speed. They threw in "
+#~ "stronger shields and hull and wider beam coverage just to show that they "
+#~ "could"
+#~ msgstr ""
+#~ "Le Tyr est la réponse du chantier naval à la déclaration désinvolte de "
+#~ "l'amiral Konstatz selon laquelle le modèle Station de combat "
+#~ "(Battlestation) était trop lent pour être efficace. Les chantiers navals "
+#~ "ont amélioré la Station de combat en boostant le Tyr par plus de deux "
+#~ "fois la vitesse d'impulsion et par plus de six fois la vitesse de "
+#~ "manoeuvre. Ils ont ajouté des boucliers et une coque plus solides et une "
+#~ "couverture de faisceaux laser plus large. Juste pour montrer qu'ils en "
+#~ "étaient capable."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Gnat is a nimbler version of the Ktlitan Drone. It's got half the "
+#~ "hull, but it moves and turns faster"
+#~ msgstr ""
+#~ "Le Gnat est une version plus agile du drone Ktlitan. Il a une coque 2 "
+#~ "fois moins épaisse, mais il bouge et tourne plus vite."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Cucaracha is a quick ship built around the Tug model with heavy "
+#~ "shields and a heavy beam designed to be difficult to squash"
+#~ msgstr ""
+#~ "Le Cucaracha est un vaisseau rapide construit autour du modèle Tug avec "
+#~ "de lourds boucliers et un faisceau laser large conçu pour être difficile "
+#~ "à éviter."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The designers of the Starhammer III took the Starhammer II and added a "
+#~ "rear facing beam, enlarged one of the missile tubes and added more "
+#~ "missiles to fire"
+#~ msgstr ""
+#~ "Les concepteurs du Starhammer III ont pris le Starhammer II et y ont "
+#~ "ajouté un faisceau laser orienté vers l'arrière, agrandi l'un des tubes "
+#~ "lance-missile et ajouté plus de missiles à tirer."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, "
+#~ "added two bracketing tubes, enlarged the center tube and added more "
+#~ "missiles to shoot. Should be good for a couple of enemy ships"
+#~ msgstr ""
+#~ "Les concepteurs du K2 Breaker ont pris le Ktlitan Breaker et renforcé sa "
+#~ "coque, ajouté deux tubes lance-missile, agrandi le tube central et ajouté "
+#~ "plus de missiles à tirer. Devrait être adapté contre quelques vaisseaux "
+#~ "ennemis."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Hurricane is designed to jump in and shower the target with missiles. "
+#~ "It is based on the Piranha F8, but with a jump drive, five more tubes in "
+#~ "various directions and sizes and lots more missiles to shoot"
+#~ msgstr ""
+#~ "L'Ouragan (Hurricane) est conçu pour se téléporter au cœur de l'action et "
+#~ "inonder la cible de missiles. Il est basé sur le Piranha F8, mais avec un "
+#~ "téléporteur, 5 tubes lance-missile supplémentaires dans différentes "
+#~ "directions et tailles et beaucoup plus de missiles à tirer."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Phobos T4 makes some simple improvements on the Phobos T3: faster "
+#~ "maneuver, stronger front shields, though weaker rear shields and longer "
+#~ "and faster beam weapons"
+#~ msgstr ""
+#~ "Le Phobos T4 apporte quelques améliorations simples au Phobos T3 : une "
+#~ "manœuvre plus rapide, des boucliers avant plus solides mais des boucliers "
+#~ "arrière plus faibles et des faisceaux laser plus longs et plus rapides."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "Small, medium and large scale transport ships. These are the working "
+#~ "ships that keep commerce going in any sector. They may carry personnel, "
+#~ "goods, cargo, equipment, garbage, fuel, research material, etc."
+#~ msgstr ""
+#~ "Vaisseaux de transport de petite, moyenne et grande envergure. Ce sont "
+#~ "les vaisseaux de travail qui maintiennent le commerce dans n'importe quel "
+#~ "secteur. Ils peuvent transporter du personnel, des marchandises, de "
+#~ "l'équipement, des ordures, du carburant, du matériel de recherche, etc."
+
+#~ msgctxt "scienceDB"
+#~ msgid ""
+#~ "The Service Jonque is a modified Equipment Jump Freighter 4. It's "
+#~ "designed to carry spare parts and equipment as well as the necessary "
+#~ "repair personnel to where it's needed to repair stations and ships"
+#~ msgstr ""
+#~ "Le Service Jonque est un transport d'équipement 4 avec saut (Equipement "
+#~ "Jump Freighter 4) modifié. Il est conçu pour transporter des pièces de "
+#~ "rechange et de l'équipement ainsi que du personnel de réparation là où il "
+#~ "est nécessaire de réparer les stations et vaisseaux."
+
+#, lua-format
+#~ msgctxt "mission1st-comms"
+#~ msgid ""
+#~ "To: %s\n"
+#~ "From: %s\n"
+#~ "\n"
+#~ "Greetings %s,\n"
+#~ "\n"
+#~ "Please ensure the safe arrival of freighter %s at %s. Looks like the "
+#~ "Exuari might attack them."
+#~ msgstr ""
+#~ "À : %s\n"
+#~ "De : %s\n"
+#~ "\n"
+#~ "Salutations %s,\n"
+#~ "\n"
+#~ "Veuillez escorter immédiatement le cargo %s jusqu'à %s. Il semblerait que "
+#~ "les Exuari envisagent de les attaquer."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "The freighter blew up"
+#~ msgstr "Le cargo a explosé"
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "Regional headquarters blew up"
+#~ msgstr "Le quartier général régional a explosé"
+
+#, lua-format
+#~ msgctxt "incCall"
+#~ msgid ""
+#~ "To: %s\n"
+#~ "From: %s\n"
+#~ "\n"
+#~ "%s,\n"
+#~ "\n"
+#~ "Our engines just conked out and the only person we have that can fix them "
+#~ "is too sick to work on them. Can you send over one of you repair crew to "
+#~ "help us, please?"
+#~ msgstr ""
+#~ "À : %s\n"
+#~ "De : %s\n"
+#~ "\n"
+#~ "Salutation %s,\n"
+#~ "\n"
+#~ "Nos moteurs sont tombés en panne et la seule personne à bord qui puisse "
+#~ "les réparer est bien trop malade pour travailler dessus. Pourriez-vous "
+#~ "nous envoyer un de vos techniciens de réparation pour nous aider, s'il "
+#~ "vous plaît ?"
+
+#~ msgctxt "buttonEngineer"
+#~ msgid "Send Repair Crew"
+#~ msgstr "Envoyer un réparateur"
+
+#~ msgctxt "buttonEngineer+"
+#~ msgid "Send Repair Crew"
+#~ msgstr "Envoyer un réparateur"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "We cannot transport a repair crew member from %s while the shields are up."
+#~ msgstr ""
+#~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation depuis "
+#~ "%s tant que les boucliers sont activés."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "We cannot transport a repair crew member from %s while the shields are up."
+#~ msgstr ""
+#~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation depuis "
+#~ "%s tant que les boucliers sont activés."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid "%s is moving too fast to transport a repair crew member from %s."
+#~ msgstr ""
+#~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
+#~ "l'équipe de réparation depuis %s."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid "%s is moving too fast to transport a repair crew member from %s."
+#~ msgstr ""
+#~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
+#~ "l'équipe de réparation depuis %s."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid "Repair crew member retrieved from %s"
+#~ msgstr "Membre de l'équipe de réparation rapatrié depuis %s."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid "Repair crew member retrieved from %s"
+#~ msgstr "Membre de l'équipe de réparation téléporté depuis %s."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "%s is too far from %s to transport a repair crew member. Functional "
+#~ "transport may occur at or under 3 units"
+#~ msgstr ""
+#~ "Notre vaisseau %s est trop loin de %s pour pouvoir téléporter un membre "
+#~ "de l'équipe de réparation. Le téléporteur n'est fonctionnel qu'à 3 unités "
+#~ "de distance ou moins."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "%s is too far from %s to transport a repair crew member. Functional "
+#~ "transport may occur at or under 3 units"
+#~ msgstr ""
+#~ "Notre vaisseau %s est trop loin de %s pour pouvoir téléporter un membre "
+#~ "de l'équipe de réparation. Le téléporteur n'est fonctionnel qu'à 3 unités "
+#~ "de distance ou moins."
+
+#~ msgctxt "msgEngineer"
+#~ msgid "Estimated time remaining on repairs: "
+#~ msgstr "Estimation du temps restant pour les réparations :"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid "%s %i seconds"
+#~ msgstr "%s %i secondes"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid "%s %i minutes and %i seconds"
+#~ msgstr "%s %i minutes et %i secondes"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid "%s %i minute and %i seconds"
+#~ msgstr "%s %i minute et %i secondes"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "[Repair Crewmember on %s]\n"
+#~ "We're not done with engine repairs on %s yet.\n"
+#~ "%s."
+#~ msgstr ""
+#~ "[Réparateur sur %s]\n"
+#~ "Nous n'avons pas encore terminé les réparations du moteur sur %s.\n"
+#~ "%s."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "We cannot transport a repair crew member to %s while the shields are up."
+#~ msgstr ""
+#~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation sur %s "
+#~ "tant que nos boucliers sont activés."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "We cannot transport a repair crew member to %s while the shields are up."
+#~ msgstr ""
+#~ "Nous ne pouvons pas téléporter un membre de l'équipe de réparation sur %s "
+#~ "tant que les boucliers sont activés."
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid "%s is moving too fast to transport a repair crew member to %s."
+#~ msgstr ""
+#~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
+#~ "l'équipe de réparation sur %s. Les moteurs doivent être à l'arrêt."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid "%s is moving too fast to transport a repair crew member to %s."
+#~ msgstr ""
+#~ "%s se déplace trop vite pour que l'on puisse téléporter un membre de "
+#~ "l'équipe de réparation sur %s."
+
+#, lua-format
+#~ msgctxt "shipLog"
+#~ msgid ""
+#~ "%s has transported one of her repair crew to %s. They report that the "
+#~ "engines should be fixed in a minute or two."
+#~ msgstr ""
+#~ "%s a téléporté un membre de son équipe de réparation sur %s. Ils nous "
+#~ "signalent que les moteurs devraient être réparés d'ici une minute ou deux."
+
+#~ msgctxt "buttonEngineer"
+#~ msgid "Get Repair Crew"
+#~ msgstr "Obtenir un réparateur"
+
+#~ msgctxt "buttonEngineer+"
+#~ msgid "Get Repair Crew"
+#~ msgstr "Obtenir un réparateur"
+
+#, lua-format
+#~ msgctxt "msgEngineer"
+#~ msgid ""
+#~ "We don't have any repair crew to send over to %s. We might get one from %s"
+#~ msgstr ""
+#~ "Nous n'avons aucun réparateur à envoyer sur %s. Nous pourrions en "
+#~ "récupérer un à %s."
+
+#, lua-format
+#~ msgctxt "msgEngineer+"
+#~ msgid ""
+#~ "We don't have any repair crew to send over to %s. We might get one from %s"
+#~ msgstr ""
+#~ "Nous n'avons aucun réparateur à envoyer sur %s. Nous pourrions en "
+#~ "récupérer un à %s."
+
+#~ msgctxt "mission1st-comms"
+#~ msgid "unloading cargo"
+#~ msgstr "décharger sa cargaison"
+
+#~ msgctxt "mission1st-comms"
+#~ msgid "picking up cargo"
+#~ msgstr "charger une cargaison"
+
+#~ msgctxt "mission1st-comms"
+#~ msgid "disembarking passengers"
+#~ msgstr "débarquer les passagers"
+
+#, lua-format
+#~ msgctxt "mission1st-comms"
+#~ msgid ""
+#~ "To: %s\n"
+#~ "From: %s\n"
+#~ "\n"
+#~ "Hello %s,\n"
+#~ "\n"
+#~ "Freighter %s has safely docked and is %s. Thanks for your assistance."
+#~ msgstr ""
+#~ "À : %s\n"
+#~ "De : %s\n"
+#~ "\n"
+#~ "Bonjour %s,\n"
+#~ "\n"
+#~ "Le cargo %s a pu accoster en toute sécurité et est en train de %s. Merci "
+#~ "pour votre aide."
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid "Protect station %s and other friendly stations and ships"
+#~ msgstr ""
+#~ "Protéger la station %s ainsi que les autres stations et vaisseaux amis."
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "Gather medical details and possible treatment from %s in roughly "
+#~ "direction %i and return to %s"
+#~ msgstr ""
+#~ "Rassembler tous les dossiers médicaux et les traitements que vous "
+#~ "trouverez sur la station %s au cap approximatif %i et retournez à la "
+#~ "station %s."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "Fargalli died. Omicron plague destroyed humanity"
+#~ msgstr ""
+#~ "L'officier Fargalli vient de mourir. La peste Omicron va se répandre et "
+#~ "anéantir la race humaine"
+
+#~ msgctxt "tabRelay&Operations"
+#~ msgid "Ensign Death"
+#~ msgstr "Mort de l'officier"
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "HQ destroyed. Omicron plague destroyed humanity"
+#~ msgstr ""
+#~ "Notre Quartier Général a été détruit. La peste Omicron va anéantir "
+#~ "l'humanité"
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "Station destroyed. Omicron plague destroyed humanity"
+#~ msgstr ""
+#~ "La station médicale a été détruite. La peste Omicron va désormais se "
+#~ "répandre et anéantir l'humanité"
+
+#, lua-format
+#~ msgctxt "orders-comms"
+#~ msgid ""
+#~ "Destroy Exuari Omicron plague research station in roughly direction %i"
+#~ msgstr ""
+#~ "Détruire la station de recherche Éxuarie sur la peste Omicron au cap "
+#~ "approximatif %i."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "The Exuari deployed the Omicron plague. Humanity destroyed"
+#~ msgstr ""
+#~ "Vous arrivez trop tard. Les Éxuaris ont diffusé la peste Omicron. "
+#~ "L'humanité va disparaitre"
+
+#~ msgctxt "tabRelay&Operations"
+#~ msgid "Omicron Broadcast"
+#~ msgstr "Diffusion peste Omicron"
+
+#, lua-format
+#~ msgctxt "shipLog"
+#~ msgid ""
+#~ "[%s] Our analysis of your routine ship telemetry indicates that you "
+#~ "passed the Exuari plague station, %s."
+#~ msgstr ""
+#~ "[%s] Notre analyse de la télémétrie de routine de votre vaisseau nous "
+#~ "indique que vous avez dépassé la station Exuari %s qui fabrique le virus "
+#~ "de la peste."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "Exuari Omicron plague station destroyed. Humanity saved"
+#~ msgstr ""
+#~ "L'usine Éxuarie de fabrication de la peste Omicron est détruite. "
+#~ "L'humanité est sauvée"
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "Duration"
+#~ msgstr "Durée"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "%s.\n"
+#~ "Score: %i. %s"
+#~ msgstr ""
+#~ "%s.\n"
+#~ "Score : %i. %s"
+
+#, lua-format
+#~ msgctxt "msgMainscreen"
+#~ msgid "%s. Score: %i. %s"
+#~ msgstr "%s. Score : %i. %s"
+
+#~ msgctxt "trade-comms"
+#~ msgid ""
+#~ "The coolant preparation facility is having difficulty packaging the "
+#~ "coolant for transport. They say thay should have it working in about %i "
+#~ "seconds"
+#~ msgstr ""
+#~ "L'usine de préparation de liquide de refroidissement a des difficultés à "
+#~ "le conditionner pour le transport. Ils disent qu'il devrait être prêt "
+#~ "dans environ %i secondes."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid "HQ destroyed. Omicron plague destroyed humainty"
+#~ msgstr "QG détruit. La peste Omicron va détruire l'humanité"
+
+# Scenario name
+#~ msgid "Training: Cruiser"
+#~ msgstr "Entrainement : Croiseur"
+
+# Scenario description
+#~ msgid ""
+#~ "Basic Training Cource\n"
+#~ "\n"
+#~ "Objective: Destroy all enemy ships in the area.\n"
+#~ "\n"
+#~ "Description:\n"
+#~ "During this training your will learn to coordinate the actions of your "
+#~ "crew and destoy an Exuari training ground.\n"
+#~ "\n"
+#~ "Your ship is a Phobos light cruiser - the most common vessel in the "
+#~ "navy.\n"
+#~ "\n"
+#~ "This is a short mission for inexperienced players."
+#~ msgstr ""
+#~ "- Durée approx. : 1h\n"
+#~ "- Difficulté : Facile\n"
+#~ "- Vaisseaux joueurs : 1 à plusieurs\n"
+#~ "\n"
+#~ "Cours d'initiation\n"
+#~ "\n"
+#~ "Objectif : Détruire tous les vaisseaux ennemis de la zone.\n"
+#~ "\n"
+#~ "Description:\n"
+#~ "Au cours de ce tout 1er entraînement, vous apprendrez à coordonner les "
+#~ "actions de votre équipage et à détruire une flotte d'entraînement "
+#~ "Exuari.\n"
+#~ "\n"
+#~ "Votre vaisseau est un croiseur léger Phobos - le navire le plus courant "
+#~ "de la marine.\n"
+#~ "\n"
+#~ "Cet entrainement est parfaitement adapté aux joueurs inexpérimentés.\n"
+#~ "\n"
+#~ "- Titre original : Training: Cruiser\n"
+#~ "- Auteur : Piglit\n"
+#~ "https://discord.gg/GjqM9Y9yBe\n"
+#~ "- Traduction FR : Muerte\n"
+#~ "https://discord.gg/2NPKyMnGwp"
+
+#~ msgctxt "goal-incCall"
+#~ msgid ""
+#~ "This is Commander Saberhagen.\n"
+#~ "\n"
+#~ "In this training mission you will practice the basic controls of a Phobos "
+#~ "light cruiser.\n"
+#~ "Since this is not a tutorial, you will be on your own to decide how to "
+#~ "destroy all enemy targets in an Exuari training ground.\n"
+#~ "There will be not much resistance, so you can try different approaches "
+#~ "and tactics savely.\n"
+#~ "\n"
+#~ "Here's your chance to beat up some helpless opponents.\n"
+#~ "Commander Saberhagen out."
+#~ msgstr ""
+#~ "Ici le commandant Saberhagen.\n"
+#~ "\n"
+#~ "Dans cet exercice d'entrainement, vous pratiquerez les commandes de base "
+#~ "d'un croiseur léger, le Phobos.\n"
+#~ "\n"
+#~ "Comme il ne s'agit pas d'un didacticiel, vous serez seul à décider "
+#~ "comment détruire toutes les cibles ennemies sur un terrain d'entraînement "
+#~ "Exuari.\n"
+#~ "Il n'y aura pas beaucoup de résistance, vous pouvez donc essayer "
+#~ "différentes approches et tactiques en toute sécurité.\n"
+#~ "\n"
+#~ "Voici votre chance de battre des adversaires impuissants.\n"
+#~ "Briefing terminé."
+
+#~ msgctxt "msgMainscreen-bonusTarget"
+#~ msgid "escaped."
+#~ msgstr "échappé."
+
+#~ msgctxt "msgMainscreen"
+#~ msgid ""
+#~ "Mission Complete.\n"
+#~ "Your Time: %d\n"
+#~ "Bonus target %s\n"
+#~ "\n"
+#~ "If you feel ready for combat, play scenario 'Basic Battle'.\n"
+#~ "If you want to try another ship, play the next training mission.\n"
+#~ "\n"
+#~ "If you need more practice, play this training again\n"
+#~ "with different stations assigned to your crew members."
+#~ msgstr ""
+#~ "Mission accomplie.\n"
+#~ "Votre temps : %d\n"
+#~ "Bonus cible %s\n"
+#~ "\n"
+#~ "Si vous vous sentez prêt pour le combat, jouez le scénario 'Bataille "
+#~ "simple'.\n"
+#~ "Si vous voulez essayer un autre vaisseau, jouez la prochaine mission "
+#~ "d'entraînement.\n"
+#~ "\n"
+#~ "Si vous avez besoin de plus de pratique, rejouez cet entrainement\n"
+#~ "avec différentes consoles attribuées aux membres de votre équipage."

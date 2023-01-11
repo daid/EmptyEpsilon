@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-02-25 23:59+0100\n"
+"PO-Revision-Date: 2022-12-01 19:33+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -13,9 +13,11 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
 # Scenario name
 msgid "Beacon of Light series"
 msgstr "Balise lumineuse"
+
 # Scenario description
 msgid ""
 "The Beacon of Light scenario, built from the series at EmptyEpsilon.org.\n"
@@ -36,10 +38,12 @@ msgstr ""
 "Ce scénario est limité à un seul vaisseau joueur : l'Atlantis Epsilon.\n"
 "\n"
 "- Titre original : Beacon of Light series\n"
-"- Auteur : créé à partir de la série sur EmptyEpsilon.org.\n"
+"- Auteur : créé à partir du tutoriel sur https://daid.github.io/EmptyEpsilon/"
+"#tabs=4e.\n"
 "https://discord.gg/GjqM9Y9yBe\n"
 "- Traduction FR : Muerte\n"
 "https://discord.gg/2NPKyMnGwp"
+
 #: scripts/scenario_05_beacon.lua:69
 msgctxt "goal-incCall"
 msgid ""
@@ -63,14 +67,17 @@ msgstr ""
 "nébuleuse en secteur G5. La nébuleuse bloquant nos scanners longue portée, "
 "nous vous demandons d'enquêter et de récupérer RT-4 dans la mesure du "
 "possible."
+
 #: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
 msgctxt "scienceDescription-lifepod"
 msgid "Life Pod"
 msgstr "Capsule de survie"
+
 #: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
 msgctxt "scienceDescription-lifepod"
 msgid "J. J. Johnson in Life Pod"
 msgstr "J.J. Johnson dans sa capsule de survie"
+
 #: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
 msgctxt "incCall"
 msgid ""
@@ -85,10 +92,12 @@ msgstr ""
 "Nous détectons des signes de vie dans la capsule. Veuillez la récupérer pour "
 "vérifier si J.J. Johnson est toujours en vie. Sa mort porterait un terrible "
 "coup dur pour les négociations de paix dans la région."
+
 #: scripts/scenario_05_beacon.lua:96
 msgctxt "incCall"
 msgid "And destroy those Exuari scum while you are at it!"
 msgstr "Et éliminez ces ordures d'Exuari pendant que vous y êtes !"
+
 #: scripts/scenario_05_beacon.lua:123
 msgctxt "incCall"
 msgid ""
@@ -103,6 +112,7 @@ msgstr ""
 "\n"
 "Veuillez ramener son corps sur Research-1. Nous ferons le nécessaire afin "
 "que vous puissiez prendre en charge sa mission."
+
 #: scripts/scenario_05_beacon.lua:133
 msgctxt "incCall"
 msgid ""
@@ -117,6 +127,7 @@ msgstr ""
 "\n"
 "Veuillez escorter le diplomate vers Orion-5 dans le secteur G3. Pour ce "
 "faire, amarrez-vous à la station."
+
 #: scripts/scenario_05_beacon.lua:146
 msgctxt "incCall"
 msgid ""
@@ -126,6 +137,7 @@ msgstr ""
 "J.J. Johnson vous remercie de l'avoir sauvé, et commence à vous briefer sur "
 "sa mission :\n"
 "\n"
+
 #: scripts/scenario_05_beacon.lua:148 scripts/scenario_05_beacon.lua:161
 msgctxt "incCall"
 msgid ""
@@ -158,6 +170,7 @@ msgstr ""
 "Afin de s'assurer que Refugee-X ne se méprenne quand à vos intentions "
 "pacifiques, nous vous avons délesté de votre arsenal nucléaire et de vos "
 "EMP. Vous les récupérerez une fois les criminels livrés."
+
 #: scripts/scenario_05_beacon.lua:159
 msgctxt "incCall"
 msgid ""
@@ -166,6 +179,7 @@ msgid ""
 msgstr ""
 "Le message de J.J. Johnson à l'égard d'Orion-5 est clair :\n"
 "\n"
+
 #: scripts/scenario_05_beacon.lua:185
 msgctxt "incCall"
 msgid ""
@@ -176,6 +190,7 @@ msgstr ""
 "concernant sa mission à Orion-5.\n"
 "\n"
 "Rendez-vous sur Orion-5 pour en recevoir les détails."
+
 #: scripts/scenario_05_beacon.lua:195
 msgctxt "incCall"
 msgid ""
@@ -200,16 +215,19 @@ msgstr ""
 "Vous vous demandez si leur échange est vraiment volontaire.\n"
 "\n"
 "Retournez sur Orion-5 pour leur livrer les criminels."
+
 #: scripts/scenario_05_beacon.lua:210
 msgctxt "scienceDescription-artifact"
 msgid "High powered field generator"
 msgstr "Générateur de champ haute puissance"
+
 #: scripts/scenario_05_beacon.lua:210
 msgctxt "scienceDescription-artifact"
 msgid "Warp/Jump Jammer. Radius visible if jammer visible"
 msgstr ""
 "Brouilleur de vitesse lumière/téléportation. Rayon visible si brouilleur "
 "visible."
+
 #: scripts/scenario_05_beacon.lua:218
 msgctxt "incCall"
 msgid ""
@@ -224,6 +242,7 @@ msgstr ""
 "Votre traducteur éprouve des difficultés à traduire le message, mais cela "
 "semble se résumer au fait qu'ils veuillent vous éliminer et que votre mort "
 "leur apportera beaucoup de satisfaction."
+
 #: scripts/scenario_05_beacon.lua:239
 msgctxt "incCall"
 msgid ""
@@ -244,18 +263,22 @@ msgstr ""
 "du prochain convoi de transports en partance pour Research-1. Le détachement "
 "du convoi partira du secteur D7. Partez à leur recherche et scannez les "
 "vaisseaux pour trouver le transport Exuari."
+
 #: scripts/scenario_05_beacon.lua:243 scripts/scenario_05_beacon.lua:270
 msgctxt "incCall"
 msgid "We have refitted your nukes and EMPs."
 msgstr "Nous avons réinstallé vos armes nucléaires et vos EMP."
+
 #: scripts/scenario_05_beacon.lua:243
 msgctxt "incCall"
 msgid "Awesome job taking out the Exuari without those."
 msgstr "Excellent travail pour avoir su extraire l'Exuari sans ceux-ci."
+
 #: scripts/scenario_05_beacon.lua:270
 msgctxt "incCall"
 msgid "Now to get those Exuari!"
 msgstr "Maintenant allons nous occuper de ces Exuaris !"
+
 #: scripts/scenario_05_beacon.lua:280
 msgctxt "incCall"
 msgid ""
@@ -268,6 +291,7 @@ msgstr ""
 "l'aurez identifié, NE le détruisez PAS.\n"
 "\n"
 "Ciblez ses moteurs à impulsion avec vos faisceaux laser pour l'immobiliser."
+
 #: scripts/scenario_05_beacon.lua:299 scripts/scenario_05_beacon.lua:316
 #: scripts/scenario_05_beacon.lua:340
 msgctxt "incCall"
@@ -275,6 +299,7 @@ msgid "What the hell? I told you NOT to destroy the transport."
 msgstr ""
 "Bon sang, qu'avez-vous fait? Je vous avais pourtant bien dit de NE PAS "
 "détruire le transport."
+
 #: scripts/scenario_05_beacon.lua:305
 msgctxt "incCall"
 msgid ""
@@ -282,6 +307,7 @@ msgid ""
 msgstr ""
 "Le transport Exuari est identifié. Neutralisez ses moteurs à impulsion afin "
 "que nous puissions le capturer."
+
 #: scripts/scenario_05_beacon.lua:322
 msgctxt "incCall"
 msgid ""
@@ -292,6 +318,7 @@ msgstr ""
 "Ok, le transport est immobilisé. Nous vous envoyons une équipe de "
 "récupération. Protégez le transport, les Exuari vont probablement essayer de "
 "le détruire plutôt que de le laisser tomber entre nos mains."
+
 #: scripts/scenario_05_beacon.lua:371
 msgctxt "incCall"
 msgid ""
@@ -304,6 +331,7 @@ msgstr ""
 "\n"
 "\"Nous avons capturé avec succès le transport Exuari et le ramenons sur "
 "Orion-5. Veuillez vous y rendre pour le débriefing.\""
+
 #: scripts/scenario_05_beacon.lua:383
 msgctxt "incCall"
 msgid ""

@@ -333,7 +333,7 @@ void GameMasterScreen::update(float delta)
     player_comms_hail->setVisible(has_player_ship);
 
     // Update mission clock
-    info_clock->setValue(string(gameGlobalInfo->elapsed_time, 0));
+    info_clock->setValue(gameGlobalInfo->getMissionTime());
 
     std::unordered_map<string, string> selection_info;
 
