@@ -60,9 +60,18 @@ void SupplyDrop::collide(Collisionable* target, float force)
                 picked_up = true;
             }
         }
+
+        // If a callback is set, pick up the drop and pass the ship.
         if (on_pickup_callback.isSet())
         {
-            on_pickup_callback.call<void>(P<SupplyDrop>(this), player);
+            if (player)
+            {
+                on_pickup_callback.call<void>(P<SupplyDrop>(this), player);
+            }
+            else
+            {
+                on_pickup_callback.call<void>(P<SupplyDrop>(this), ship);
+            }
             picked_up = true;
         }
 
