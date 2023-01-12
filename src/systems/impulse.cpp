@@ -5,7 +5,7 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/cpuShip.h"
-#include "spaceObjects/warpjammer.h"
+#include "spaceObjects/warpJammer.h"
 #include "ecs/query.h"
 
 
