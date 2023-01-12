@@ -505,7 +505,7 @@ rel="stylesheet"
         stream.write("<p>Some of the types in the parameters:</p>")
         stream.write("<ul>\n")
         stream.write('<li><a name="enum_Color">Color</a>: A string that can either be a hex color code (#rrggbb), three comma-separated rgb integers (rrr,ggg,bbb), or one of the following: "black", "white", "red", "green", "blue", "yellow", "magenta", "cyan". Invalid values default to white.</li>\n')
-        stream.write('<li><a name="enum_EAlertLevel">EAlertLevel<a/>: "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
+        stream.write('<li><a name="enum_EAlertLevel">EAlertLevel<a/>: sets "normal", "yellow", "red" (<code>playerSpaceship.hpp</code>), returns "Normal", "YELLOW ALERT", "RED ALERT" (<code>playerSpaceship.cpp</code>)</li>\n')
         stream.write('<li><a name="enum_ECrewPosition">ECrewPosition</a>: "Helms", "Weapons", "Engineering", "Science", "Relay", "Tactical", "Engineering+", "Operations", "Single", "DamageControl", "PowerManagement", "Database", "AltRelay", "CommsOnly", "ShipLog" (<code>playerInfo.cpp</code>)</li>\n')
         stream.write('<li><a name="enum_EMainScreenOverlay">EMainScreenOverlay</a>: "hidecomms", "showcomms" (<code>spaceship.hpp</code>)</li>\n')
         stream.write('<li><a name="enum_EMainScreenSetting">EMainScreenSetting</a>: "front", "back", "left", "right", "target", "tactical", "longrange" (<code>spaceship.hpp</code>)</li>\n')
