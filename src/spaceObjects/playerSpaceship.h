@@ -40,8 +40,6 @@ public:
     constexpr static float comms_channel_open_time = 2.0;
     constexpr static float scan_probe_charge_time = 10.0f;
     constexpr static float max_scanning_delay = 6.0;
-    // Maximum number of self-destruction confirmation codes
-    constexpr static int max_self_destruct_codes = 3;
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
 
@@ -118,17 +116,6 @@ public:
     // Capable of hacking a target
     bool can_hack = true;
 
-    // Capable of self-destruction
-    bool can_self_destruct = true;
-    bool activate_self_destruct = false;
-    uint32_t self_destruct_code[max_self_destruct_codes];
-    bool self_destruct_code_confirmed[max_self_destruct_codes];
-    ECrewPosition self_destruct_code_entry_position[max_self_destruct_codes];
-    ECrewPosition self_destruct_code_show_position[max_self_destruct_codes];
-    float self_destruct_countdown = 0.0;
-    float self_destruct_damage = 150.0;
-    float self_destruct_size = 1500.0;
-
     // Capable of probe launches
     bool can_launch_probe = true;
     int max_scan_probes = 8;
@@ -191,15 +178,15 @@ public:
     bool getCanDock();
     void setCanCombatManeuver(bool enabled) { } //TODO
     bool getCanCombatManeuver() { return true; } // TODO
-    void setCanSelfDestruct(bool enabled) { can_self_destruct = enabled; }
-    bool getCanSelfDestruct() { return can_self_destruct && self_destruct_size > 0 && self_destruct_damage > 0; }
+    void setCanSelfDestruct(bool enabled) { }  // TODO
+    bool getCanSelfDestruct() { return false; } // TODO
     void setCanLaunchProbe(bool enabled) { can_launch_probe = enabled; }
     bool getCanLaunchProbe() { return can_launch_probe; }
 
-    void setSelfDestructDamage(float amount) { self_destruct_damage = std::max(0.0f, amount); }
-    float getSelfDestructDamage() { return self_destruct_damage; }
-    void setSelfDestructSize(float size) { self_destruct_size = std::max(0.0f, size); }
-    float getSelfDestructSize() { return self_destruct_size; }
+    void setSelfDestructDamage(float amount) { }  // TODO
+    float getSelfDestructDamage() { return 0.0f; }  // TODO
+    void setSelfDestructSize(float size) { } // TODO
+    float getSelfDestructSize() { return 0.0f; } // TODO
 
     void setScanProbeCount(int amount) { scan_probe_stock = std::max(0, std::min(amount, max_scan_probes)); }
     int getScanProbeCount() { return scan_probe_stock; }

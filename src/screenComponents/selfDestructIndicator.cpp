@@ -1,6 +1,7 @@
 #include "selfDestructIndicator.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/selfdestruct.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -19,28 +20,30 @@ GuiSelfDestructIndicator::GuiSelfDestructIndicator(GuiContainer* owner)
 
 void GuiSelfDestructIndicator::onDraw(sp::RenderTarget& target)
 {
-    if (my_spaceship && my_spaceship->activate_self_destruct)
-    {
-        box->show();
+    box->hide();
+    if (!my_spaceship)
+        return;
+    auto self_destruct = my_spaceship->entity.getComponent<SelfDestruct>();
+    if (!self_destruct || !self_destruct->active)
+        return;
 
-        if (my_spaceship->self_destruct_countdown <= 0.0f)
-        {
-            int todo = 0;
-            for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
-                if (!my_spaceship->self_destruct_code_confirmed[n])
-                    todo++;
-            label->setText(tr("Waiting for autorization input: {codes} left").format({{"codes", string(todo)}}));
-        }else{
-            if (my_spaceship->self_destruct_countdown <= 3.0f)
-            {
-                label->setText(tr("Have a nice day."));
-            }
-            else
-            {
-                label->setText(tr("This ship will self-destruct in {seconds} seconds.").format({{"seconds", string(int(std::nearbyint(my_spaceship->self_destruct_countdown)))}}));
-            }
-        }
+    box->show();
+
+    if (self_destruct->countdown <= 0.0f)
+    {
+        int todo = 0;
+        for(int n=0; n<SelfDestruct::max_codes; n++)
+            if (!self_destruct->confirmed[n])
+                todo++;
+        label->setText(tr("Waiting for autorization input: {codes} left").format({{"codes", string(todo)}}));
     }else{
-        box->hide();
+        if (self_destruct->countdown <= 3.0f)
+        {
+            label->setText(tr("Have a nice day."));
+        }
+        else
+        {
+            label->setText(tr("This ship will self-destruct in {seconds} seconds.").format({{"seconds", string(int(std::nearbyint(self_destruct->countdown)))}}));
+        }
     }
 }

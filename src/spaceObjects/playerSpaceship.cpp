@@ -20,9 +20,11 @@
 #include "components/target.h"
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
+#include "components/selfdestruct.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
+#include "systems/selfdestruct.h"
 
 #include "scriptInterface.h"
 
@@ -354,7 +356,6 @@ PlayerSpaceship::PlayerSpaceship()
 
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
-    registerMemberReplication(&can_self_destruct);
     registerMemberReplication(&can_launch_probe);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
@@ -370,25 +371,10 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&ships_log);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
-    registerMemberReplication(&activate_self_destruct);
-    registerMemberReplication(&self_destruct_countdown, 0.2);
     registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
     registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
-
-    // Determine which stations must provide self-destruct confirmation codes.
-    for(int n = 0; n < max_self_destruct_codes; n++)
-    {
-        self_destruct_code[n] = 0;
-        self_destruct_code_confirmed[n] = false;
-        self_destruct_code_entry_position[n] = helmsOfficer;
-        self_destruct_code_show_position[n] = helmsOfficer;
-        registerMemberReplication(&self_destruct_code[n]);
-        registerMemberReplication(&self_destruct_code_confirmed[n]);
-        registerMemberReplication(&self_destruct_code_entry_position[n]);
-        registerMemberReplication(&self_destruct_code_show_position[n]);
-    }
 
     if (game_server)
     {
@@ -404,8 +390,9 @@ PlayerSpaceship::PlayerSpaceship()
     // Initialize player ship callsigns with a "PL" designation.
     setCallSign("PL" + string(getMultiplayerId()));
 
-    if (entity)
+    if (entity) {
         setFaction("Human Navy");
+    }
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
@@ -480,47 +467,6 @@ void PlayerSpaceship::update(float delta)
             scanning_delay = 0.0;
         }
 
-        if (activate_self_destruct)
-        {
-            // If self-destruct has been activated but not started ...
-            if (self_destruct_countdown <= 0.0f)
-            {
-                bool do_self_destruct = true;
-                // ... wait until the confirmation codes are entered.
-                for(int n = 0; n < max_self_destruct_codes; n++)
-                    if (!self_destruct_code_confirmed[n])
-                        do_self_destruct = false;
-
-                // Then start and announce the countdown.
-                if (do_self_destruct)
-                {
-                    self_destruct_countdown = PreferencesManager::get("self_destruct_countdown", "10").toFloat();
-                    playSoundOnMainScreen("sfx/vocal_self_destruction.wav");
-                }
-            }else{
-                // If the countdown has started, tick the clock.
-                self_destruct_countdown -= delta;
-
-                // When time runs out, blow up the ship and damage a
-                // configurable radius.
-                if (self_destruct_countdown <= 0.0f)
-                {
-                    for(int n = 0; n < 5; n++)
-                    {
-                        ExplosionEffect* e = new ExplosionEffect();
-                        e->setSize(self_destruct_size * 0.67f);
-                        e->setPosition(getPosition() + rotateVec2(glm::vec2(0, random(0, self_destruct_size * 0.33f)), random(0, 360)));
-                        e->setRadarSignatureInfo(0.0, 0.6, 0.6);
-                    }
-
-                    DamageInfo info(entity, DamageType::Kinetic, getPosition());
-                    DamageSystem::damageArea(getPosition(), self_destruct_size, self_destruct_damage - (self_destruct_damage / 3.0f), self_destruct_damage + (self_destruct_damage / 3.0f), info, 0.0);
-
-                    destroy();
-                    return;
-                }
-            }
-        }
     }else{
         // Actions performed on the client-side only.
 
@@ -554,12 +500,13 @@ void PlayerSpaceship::applyTemplateValues()
         entity.getOrAddComponent<Coolant>();
         if (!ship_template->can_combat_maneuver)
             entity.removeComponent<CombatManeuveringThrusters>();
+        if (ship_template->can_self_destruct)
+            entity.getOrAddComponent<SelfDestruct>();
     }
 
     // Set the ship's capabilities.
     can_scan = ship_template->can_scan;
     can_hack = ship_template->can_hack;
-    can_self_destruct = ship_template->can_self_destruct;
     can_launch_probe = ship_template->can_launch_probe;
     if (!on_new_player_ship_called)
     {
@@ -1279,35 +1226,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
-        activate_self_destruct = true;
-        for(int n=0; n<max_self_destruct_codes; n++)
-        {
-            self_destruct_code[n] = irandom(0, 99999);
-            self_destruct_code_confirmed[n] = false;
-            self_destruct_code_entry_position[n] = max_crew_positions;
-            while(self_destruct_code_entry_position[n] == max_crew_positions)
-            {
-                self_destruct_code_entry_position[n] = ECrewPosition(irandom(0, relayOfficer));
-                for(int i=0; i<n; i++)
-                    if (self_destruct_code_entry_position[n] == self_destruct_code_entry_position[i])
-                        self_destruct_code_entry_position[n] = max_crew_positions;
-            }
-            self_destruct_code_show_position[n] = max_crew_positions;
-            while(self_destruct_code_show_position[n] == max_crew_positions)
-            {
-                self_destruct_code_show_position[n] = ECrewPosition(irandom(0, relayOfficer));
-                if (self_destruct_code_show_position[n] == self_destruct_code_entry_position[n])
-                    self_destruct_code_show_position[n] = max_crew_positions;
-                for(int i=0; i<n; i++)
-                    if (self_destruct_code_show_position[n] == self_destruct_code_show_position[i])
-                        self_destruct_code_show_position[n] = max_crew_positions;
-            }
-        }
+        SelfDestructSystem::activate(entity);
         break;
     case CMD_CANCEL_SELF_DESTRUCT:
-        if (self_destruct_countdown <= 0.0f)
-        {
-            activate_self_destruct = false;
+        if (auto self_destruct = entity.getComponent<SelfDestruct>()) {
+            if (self_destruct->countdown <= 0.0f) {
+                self_destruct->active = false;
+            }
         }
         break;
     case CMD_CONFIRM_SELF_DESTRUCT:
@@ -1315,8 +1240,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             int8_t index;
             uint32_t code;
             packet >> index >> code;
-            if (index >= 0 && index < max_self_destruct_codes && self_destruct_code[index] == code)
-                self_destruct_code_confirmed[index] = true;
+            if (auto self_destruct = entity.getComponent<SelfDestruct>()) {
+                if (index >= 0 && index < SelfDestruct::max_codes && self_destruct->code[index] == code && self_destruct->active)
+                    self_destruct->confirmed[index] = true;
+            }
         }
         break;
     case CMD_COMBAT_MANEUVER_BOOST:
@@ -1824,8 +1751,8 @@ string PlayerSpaceship::getExportLine()
     //    result += ":setCanDock(" + string(can_dock, true) + ")";
     //if (can_combat_maneuver != ship_template->can_combat_maneuver)
     //    result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
-    if (can_self_destruct != ship_template->can_self_destruct)
-        result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
+    //if (can_self_destruct != ship_template->can_self_destruct)
+    //    result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
     if (can_launch_probe != ship_template->can_launch_probe)
         result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
     //if (auto_coolant_enabled)

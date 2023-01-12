@@ -38,6 +38,7 @@
 #include "systems/missilesystem.h"
 #include "systems/maneuvering.h"
 #include "systems/energysystem.h"
+#include "systems/selfdestruct.h"
 #include "packResourceProvider.h"
 #include "main.h"
 #include "epsilonServer.h"
@@ -153,6 +154,7 @@ int main(int argc, char** argv)
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();
     engine->registerSystem<ShipSystemsSystem>();
+    engine->registerSystem<SelfDestructSystem>();
     string configuration_path = ".";
     if (getenv("HOME"))
         configuration_path = string(getenv("HOME")) + "/.emptyepsilon";

@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "playerInfo.h"
 #include "selfDestructEntry.h"
+#include "components/selfdestruct.h"
 
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
@@ -49,23 +50,24 @@ void GuiSelfDestructEntry::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        if (my_spaceship->activate_self_destruct)
+        auto self_destruct = my_spaceship->entity.getComponent<SelfDestruct>();
+        if (self_destruct && self_destruct->active)
         {
             box->show();
             string codes = "";
             int lines = 0;
             code_entry_position = -1;
-            for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
+            for(int n=0; n<SelfDestruct::max_codes; n++)
             {
-                if (has_position[my_spaceship->self_destruct_code_show_position[n]])
+                if (has_position[self_destruct->show_position[n]])
                 {
                     if (lines > 0)
                         codes = codes + "\n";
-                    codes = codes + tr("Code [{letter}]: {self_destruct_code}").format({{"letter", string(char('A' + n))}, {"self_destruct_code", string(my_spaceship->self_destruct_code[n])}});
+                    codes = codes + tr("Code [{letter}]: {self_destruct_code}").format({{"letter", string(char('A' + n))}, {"self_destruct_code", string(self_destruct->code[n])}});
 
                     lines++;
                 }
-                if (has_position[my_spaceship->self_destruct_code_entry_position[n]] && !my_spaceship->self_destruct_code_confirmed[n] && code_entry_position < 0)
+                if (has_position[self_destruct->entry_position[n]] && !self_destruct->confirmed[n] && code_entry_position < 0)
                 {
                     code_entry_position = n;
                 }
