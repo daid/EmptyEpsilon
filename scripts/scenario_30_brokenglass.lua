@@ -336,7 +336,7 @@ function init()
     surprise_attack = Artifact():setRadarSignatureInfo(0,0.8,0)
   }
   for i, bonus in pairs(Admin_station.nebula_bonuses) do
-    bonus:setModel("artifact2"):setDescriptions(_("nebula-bonuses", "Just a hollow spherical apparition. Kinda looks like it's hiding something."),_("nebula-bonuses", "It seems to have changed shape.")):setScanningParameters(1,1):setRadarSignatureInfo(0.25,0,0):setPosition(northNebulaTLx + irandom(0, 80000), northNebulaTLy + irandom(0,60000))
+    bonus:setModel("artifact2"):setDescriptions(_("scienceDescription-artifact", "Just a hollow spherical apparition. Kinda looks like it's hiding something."),_("scienceDescription-artifact", "It seems to have changed shape.")):setScanningParameters(1,1):setRadarSignatureInfo(0.25,0,0):setPosition(northNebulaTLx + irandom(0, 80000), northNebulaTLy + irandom(0,60000))
   end
 
   Admin_station.nebula_bonuses.nuke.onFullScan = function (self)
@@ -344,7 +344,7 @@ function init()
       self.wasFound = true
       Player:setWeaponStorageMax("Nuke", Player:getWeaponStorageMax("Nuke") + 1)
       Player:setWeaponStorage("Nuke", Player:getWeaponStorage("Nuke") + 1)
-      Player:addToShipLog(_("nebula-bonuses", "A Nuke and additional nuke storage have been added to our arsenal"),"Green")
+      Player:addToShipLog(_("nebulaBonuses-shipLog", "A Nuke and additional nuke storage have been added to our arsenal"),"Green")
     end)
   end
 
@@ -352,7 +352,7 @@ function init()
     self:setModel("artifact1"):allowPickup(true):onPickUp(function ()
       self.wasFound = true
       Player:setRepairCrewCount(Player:getRepairCrewCount() + 1)
-      Player:addToShipLog(_("nebula-bonuses", "A stranded repair crew has been rescued"),"Green")
+      Player:addToShipLog(_("nebulaBbonuses-shipLog", "A stranded repair crew has been rescued"),"Green")
     end)
   end
 
@@ -360,22 +360,22 @@ function init()
     self:setModel("artifact3"):allowPickup(true):onPickUp(function ()
       self.wasFound = true
       Player:addReputationPoints(5)
-      Player:addToShipLog(_("nebula-bonuses", "This scientific data is sure to raise our reputation with the eggheads."),"Green")
+      Player:addToShipLog(_("nebulaBonuses-shipLog", "This scientific data is sure to raise our reputation with the eggheads."),"Green")
     end)
   end
 
   Admin_station.nebula_bonuses.surprise_attack.onFullScan = function (self)
     self:setModel("artifact8"):allowPickup(false)
     self:setCallSign("DD Alpha")
-    self:sendCommsMessage(Player, _("nebula-bonuses", "DRONE SELF DEFENCE SYSTEM ACTIVATED"))
-    Player:addToShipLog(_("nebula-bonuses", "DRONE SELF DEFENCE SYSTEM ACTIVATED"), "Red")
+    self:sendCommsMessage(Player, _("nebulaBonuses-incCall", "DRONE SELF DEFENCE SYSTEM ACTIVATED"))
+    Player:addToShipLog(_("nebulaBonuses-shipLog", "DRONE SELF DEFENCE SYSTEM ACTIVATED"), "Red")
     self:setCallSign("")
     local x, y = self:getPosition()
     local defenders = SpawnEnemies(x + irandom(-5000, 5000), y + irandom(-5000, 5000), random(.6,1), "Ghosts")
     for _, ship in ipairs(defenders) do
       table.insert(Defence_station.ghost_defenders, ship)
     end
-    Player:addToShipLog(_("nebula-bonuses", "We have activated a drone defence system!"),"Red")
+    Player:addToShipLog(_("nebulaBonuses-shipLog", "We have activated a drone defence system!"),"Red")
   end
 
   -- == Drone area
@@ -793,7 +793,7 @@ function init()
   InitCheevos()
   InitTraffic()
 
-  Defence_station:sendCommsMessage(Player, _("defence-comms", [[Greetings, Captain.
+  Defence_station:sendCommsMessage(Player, _("defenceStn-incCall", [[Greetings, Captain.
 
 You've been assigned a tour of duty in the Zeta Belt. It's neutral territory with a bit of everything... nebulae, asteroids, baby planets, and dangerous old scrap.
 
@@ -882,10 +882,10 @@ function InitPartsStation()
   Parts_station:setShieldsMax(1)
   Parts_station:setShields(1)
   Parts_station:onTakingDamage(function()
-    Player:addToShipLog(_("wormhole-comms", "Firing on invulnerable target"), "Yellow")
+    Player:addToShipLog(_("wormhole-shipLog", "Firing on invulnerable target"), "Yellow")
     if Parts_station.warned == nil then
      Parts_station.warned = true
-      Wormhole_station:sendCommsMessage(Player, _("wormhole-comms", [[Captain, Stop!
+      Wormhole_station:sendCommsMessage(Player, _("wormhole-incCall", [[Captain, Stop!
 
 Don't waste your time shooting at that station. It has an Exuari emergency integrity field that will prevent catastrophic hull breach. Just a waste of energy, I promise you.]]))
     end
@@ -1031,10 +1031,10 @@ function SpawnPatrolEnemies()
   for _, enemy in ipairs(Defence_station.patrol_enemies) do
     enemy:orderAttack(Patrol_stations[2])
   end
-  Defence_station:sendCommsMessage(Player, _("defence-comms",[[RED ALERT!
+  Defence_station:sendCommsMessage(Player, _("defenceStnCheckpoint-IncCall",[[RED ALERT!
 
 The SW Checkpoint is under attack. Don't mess around, get down there and help them!]]))
-  Player:addToShipLog(_("shipLog","Defend the SW checkpoint"), "Red")
+  Player:addToShipLog(_("defenceStnCheckpoint-shipLog","Defend the SW checkpoint"), "Red")
 end
 
 function SpawnConvoyEnemies()
@@ -1068,7 +1068,7 @@ function ConvoyGoAggro(__, instigator)
 
   if #Defence_station.convoy_enemies > 0 then
   	if Player.aggro_message == nil then
-	    Defence_station:sendCommsMessage(Player, _("defence-comms", "It looks like you've aggro'd the convoy.\nGood luck to you! Try to keep them from destroying our stations!"))
+	    Defence_station:sendCommsMessage(Player, _("defenceStn-incCall", "It looks like you've aggro'd the convoy.\nGood luck to you! Try to keep them from destroying our stations!"))
 	    Player.aggro_message = "sent"
 	end
   end
@@ -1101,7 +1101,7 @@ function DroneStationGoAggro(self, instigator)
   if not self:getCanBeDestroyed() then
     self:setShields(self:getShieldMax(0))
     self:setHull(self:getHullMax(0))
-    Player:addToShipLog(_("This station appears immune to our attacks"), "Yellow")
+    Player:addToShipLog(_("warning-shipLog", "This station appears immune to our attacks"), "Yellow")
   end
 
   ConvoyGoAggro(nil, instigator)
@@ -1149,8 +1149,8 @@ function KWGoAggro(self, instigator)
   end
   local repToLose = 10 * Difficulty
   Player:takeReputationPoints(repToLose)
-  Player:addToShipLog(string.format(_("shipLog","We have lost %s reputation for breaking the treaty"),repToLose), "Red")
-  Kw_mainStation:sendCommsMessage(Player, _([[You will regret this!
+  Player:addToShipLog(string.format(_("KraylorWarning-shipLog", "We have lost %s reputation for breaking the treaty"),repToLose), "Red")
+  Kw_mainStation:sendCommsMessage(Player, _("KraylorWarning-IncCall",[[You will regret this!
 
 You have violated our non-aggression treaty, and will soon regret your actions.]]))
   StartMissionRepair()
@@ -1165,7 +1165,7 @@ function SpawnMockDroneShip()
     end)
     MockDroneShip:setCanBeDestroyed(false)
     MockDroneShip:onTakingDamage(function ()
-      Defence_station:sendCommsMessage(Player, _("drone-comms",[[DISENGAGE!
+      Defence_station:sendCommsMessage(Player, _("drone-incCall",[[DISENGAGE!
 
 Captain, it's not what it looks like. Please dock with us and we will explain everything.]]))
     end)
@@ -1182,10 +1182,10 @@ function SpawnRepairEnemies()
   for _, enemy in ipairs(Wormhole_station.repair_enemies) do
     enemy:orderAttack(Wormhole_station)
   end
-  Wormhole_station:sendCommsMessage(Player, _("wormhole-comms",[[RED ALERT!
+  Wormhole_station:sendCommsMessage(Player, _("wormhole-incCall",[[RED ALERT!
 
 Captain, a bomb has just gone off on our station and we are under attack from the Kraylor. We need your help immediately!]]))
-  Player:addToShipLog(_("shipLog","Defend the Wormhole Station"), "Red")
+  Player:addToShipLog(_("wormhole-shipLog","Defend the Wormhole Station"), "Red")
 end
 
 function SpawnHarrasment()
@@ -1370,7 +1370,7 @@ Ah, I see why it's giving you trouble. Everything reads as okay, but the Gravito
 The good news is that it's easy to swap these out, the tech at the wormhole station should be able to do it. The bad news is that we have a shortage of Graviton Lenses right now because of those drone convoys.
 
 I've put in a requisition for one in your name. If you can find one in a Navy storehouse, bring it to the wormhole station and they should be good to go.]]))
-          Player:addToShipLog(_("colony-comms", "Find a Graviton Lens"), "Green")
+          Player:addToShipLog(_("colony-shipLog", "Find a Graviton Lens"), "Green")
           Admin_station.req_lens = true
           end)
         end
@@ -1385,90 +1385,90 @@ I've put in a requisition for one in your name. If you can find one in a Navy st
 end
 
 function CommsPatrolStation(comms_source, comms_target)
-  setCommsMessage(_("Not much here bud, just doing checkpoint kinda things, ya know?"))
+  setCommsMessage(_("checkpointsStn-comms", "Not much here bud, just doing checkpoint kinda things, ya know?"))
 end
 
 function CommsDefenceStation(comms_source, comms_target)
 
   -- DOCKED or UNDOCKED
   if Defence_station.mission_state == "patrol attack" then
-    setCommsMessage(_("defence-comms", "Defend the SW Checkpoint now!"))
+    setCommsMessage(_("defenceStn-comms", "Defend the SW Checkpoint now!"))
     return
   elseif Defence_station.mission_state == "patrolling" then
-    setCommsMessage(string.format(_("defence-comms","You are on 'patrol'.\nSee that you make it to %s next."), Defence_station.next_station))
+    setCommsMessage(string.format(_("defenceStn-comms","You are on 'patrol'.\nSee that you make it to %s next."), Defence_station.next_station))
     return
   elseif Defence_station.mission_state == "drone convoy" and Defence_station.tier2_mission_state == nil then
-    setCommsMessage(_("defence-comms", [[Your orders are to follow the convoy to see where it goes]]))
+    setCommsMessage(_("defenceStn-comms", [[Your orders are to follow the convoy to see where it goes]]))
     return
   elseif Defence_station.tier2_mission_state == "joinconvoy" then
-    setCommsMessage(_("defence-comms", [[Your orders are to join a convoy and infiltrate the drone nests.]]))
+    setCommsMessage(_("defenceStn-comms", [[Your orders are to join a convoy and infiltrate the drone nests.]]))
     return
   elseif Defence_station.tier2_mission_state == "arrived" then
-    setCommsMessage(_("defence-comms", [[Your orders are to scan those beacons and find the defence grid controller]]))
+    setCommsMessage(_("defenceStn-comms", [[Your orders are to scan those beacons and find the defence grid controller]]))
     return
   elseif Defence_station.tier2_mission_state == "done" and Defence_station.tier2_final_comms == nil then
     Defence_station.tier2_final_comms = "done"
     local extra_string = ""
     if DroneShip ~= nil then
-      extra_string = _("defence-comms", "We are keeping the 007, and you can continue to fly it, or switch back to the Propitious 1 at any time. We'll keep it docked here at the station for you.")
+      extra_string = _("defenceStn-comms", "We are keeping the 007, and you can continue to fly it, or switch back to the Propitious 1 at any time. We'll keep it docked here at the station for you.")
     end
-    setCommsMessage(string.format(_("defence-comms","Great work, Captain!\nDestroying the central control eliminated all the other drone stations and stopped the convoys in their tracks! Of course, you are authorized to mop up any resistance that might remain, but we're calling this a job well done.\n%s"),extra_string))
+    setCommsMessage(string.format(_("defenceStn-comms","Great work, Captain!\nDestroying the central control eliminated all the other drone stations and stopped the convoys in their tracks! Of course, you are authorized to mop up any resistance that might remain, but we're calling this a job well done.\n%s"),extra_string))
     return
   end
 
 
   -- UNDOCKED
   if not comms_source:isDocked(comms_target) then
-    setCommsMessage(_("defence-comms", [[Good day, soldier.
+    setCommsMessage(_("defenceStn-comms", [[Good day, soldier.
 
 We shouldn't talk over this channel, please dock to the station when you have a chance.]]))
   else
     -- DOCKED
     if Defence_station.mission_state == nil then
-      setCommsMessage(_("defence-comms", [[Welcome aboard.
+      setCommsMessage(_("defenceStn-comms", [[Welcome aboard.
 
 We need you to patrol the area. It's not exciting work, but it's got to be done. No rush, just make sure you visit each checkpoint in order, and we'll let you know if anything more pressing comes up.]]))
-      addCommsReply(_("defence-comms", "Okay. We're ready to start the patrol"), StartMissionPatrol)
+      addCommsReply(_("defenceStn-comms", "Okay. We're ready to start the patrol"), StartMissionPatrol)
     end
 
     if Defence_station.tier2_mission_state == "pre-start" then
-      setCommsMessage(_("defence-comms", [[Welcome back, Captain.
+      setCommsMessage(_("defenceStn-comms", [[Welcome back, Captain.
 
 We've tracked that convoy to a huge nest of drone stations in the west. The stations all form part of one proximity defence grid, and we have identified some beacons that appear to be related to its operation. We're hoping that if we can get a closer look at them, we might be able to figure out how to knock out the central control.
 
 There is a drone ship docked here which you can use to infiltrate the nests. If you arrive with a convoy, you should automatically be granted access and we think the proximity defences will remain disabled while you stay in the area. Of course, if you start firing, then all bets are probably off.
 
 Hop in that drone ship, find the beacons, and get close enough to scan them - EASY!]]))
-      addCommsReply(_("defence-comms", "We're ready to infiltrate the drone nest"), StartMissionDroneNest)
-      addCommsReply(_("defence-comms", "(Object) Isn't that a treaty violation!?"), function ()
-        setCommsMessage(_("defence-comms", [[(Objecting)
+      addCommsReply(_("defenceStn-comms", "We're ready to infiltrate the drone nest"), StartMissionDroneNest)
+      addCommsReply(_("defenceStn-comms", "(Object) Isn't that a treaty violation!?"), function ()
+        setCommsMessage(_("defenceStn-comms", [[(Objecting)
 Sir, decoding the communications of alien defence systems is a violation of the Deepspace Militarized Citizenry Accord (DMCA).
 [...]
 Captain, are you angling for a good samaritan's award or something? Get out of here with that legal mumbo-jumbo.
 
 However you want to do it, you need to find that central control. Get on it!]]))
-        addCommsReply(_("defence-comms", "Okay, we'll figure it out."), StartMissionDroneNest)
+        addCommsReply(_("defenceStn-comms", "Okay, we'll figure it out."), StartMissionDroneNest)
       end)
     end
 
     if Defence_station.tier2_mission_state == "done" then
-      setCommsMessage(_("defence-comms", [[Great job on that drone nest, Captain.
+      setCommsMessage(_("defenceStn-comms", [[Great job on that drone nest, Captain.
 
 Remember, your primary orders are to support the research facilities in the area. See to it that they all get the assistance they need.]]))
 
       if Player:getCallSign() == "DD007" then
-        addCommsReply(_("defence-comms",  "We'd rather crew the Propitious 1"), function ()
+        addCommsReply(_("defenceStn-comms",  "We'd rather crew the Propitious 1"), function ()
           Player:transferPlayersToShip(PP1)
           Player = PP1
-          setCommsMessage(_("defence-comms", [[Very well. Good Hunting.]]))
+          setCommsMessage(_("defenceStn-comms", [[Very well. Good Hunting.]]))
         end)
       else
         if DroneShip ~= nil then
-          addCommsReply(_("defence-comms", "We'd rather crew the DD007"), function ()
+          addCommsReply(_("defenceStn-comms", "We'd rather crew the DD007"), function ()
             Player:transferPlayersToShip(DroneShip)
             CHEEVOS["ourship"] = false
             Player = DroneShip
-            setCommsMessage(_("defence-comms", [[Very well. Good Hunting.]]))
+            setCommsMessage(_("defenceStn-comms", [[Very well. Good Hunting.]]))
           end)
         end
       end
@@ -1481,56 +1481,56 @@ function CommsAdminStation(comms_source, comms_target)
   if Wormhole_station.tier2_mission_state == "done" then
     CheckCheevos()
     -- Does the _() translation work here?
-    setCommsMessage(string.format(_("admin-comms","VICTORY!\nYour tour of duty is complete and your accomplishments will be the talk of legends.\nCHEEVOS!\n* Experienced treasure hunter - %s\n* Clean up the useless space junk - %s\n* Historical relic preservation - %s\n* Social distancing - %s\n* Our ship is all we need - %s\n* No DMCA violations - %s\n* I ain't afraid of no ghosts - %s\n* Keep an eye on that doctor - %s\n* Ban wormhole research - %s\n* Heros for the ages - %s\n* Grand slam - %s"),CheevoString("treasure"),CheevoString("junk"),CheevoString("relic"),CheevoString("distancing"),CheevoString("ourship"),CheevoString("DMCA"),CheevoString("noghosts"),CheevoString("eyeondr"),CheevoString("nowormhole"),CheevoString("heros"),CheevoString("grandslam")))
-    addCommsReply(_("admin-comms", "Hints for each CHEEVO"), function ()
-      setCommsMessage(_("admin-comms", "Select the achievement for a hint"))
-      addCommsReply(_("admin-comms", "Experienced treasure hunter"), function ()
-        setCommsMessage(_("admin-comms", "The locals are known to hunt treasure in the nebula"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+    setCommsMessage(string.format(_("adminStnEndTips-comms","VICTORY!\nYour tour of duty is complete and your accomplishments will be the talk of legends.\nCHEEVOS!\n* Experienced treasure hunter - %s\n* Clean up the useless space junk - %s\n* Historical relic preservation - %s\n* Social distancing - %s\n* Our ship is all we need - %s\n* No DMCA violations - %s\n* I ain't afraid of no ghosts - %s\n* Keep an eye on that doctor - %s\n* Ban wormhole research - %s\n* Heros for the ages - %s\n* Grand slam - %s"),CheevoString("treasure"),CheevoString("junk"),CheevoString("relic"),CheevoString("distancing"),CheevoString("ourship"),CheevoString("DMCA"),CheevoString("noghosts"),CheevoString("eyeondr"),CheevoString("nowormhole"),CheevoString("heros"),CheevoString("grandslam")))
+    addCommsReply(_("adminStnEndTips-comms", "Hints for each CHEEVO"), function ()
+      setCommsMessage(_("adminStnEndTips-comms", "Select the achievement for a hint"))
+      addCommsReply(_("adminStnEndTips-comms", "Experienced treasure hunter"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "The locals are known to hunt treasure in the nebula"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Clean up the space junk"), function ()
-        setCommsMessage(_("admin-comms", "So many long abandoned stations"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Clean up the space junk"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "So many long abandoned stations"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Historical relic preservation"), function ()
-        setCommsMessage(_("admin-comms", "Destroying that old station might spook the Kraylor"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Historical relic preservation"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "Destroying that old station might spook the Kraylor"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Social distancing"), function ()
-        setCommsMessage(_("admin-comms", "Don't get too proximate"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Social distancing"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "Don't get too proximate"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Our ship is all we need"), function ()
-        setCommsMessage(_("admin-comms", "We'll stick with the ship we know, thanks"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Our ship is all we need"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "We'll stick with the ship we know, thanks"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "No DMCA violations"), function ()
-        setCommsMessage(_("admin-comms", "Hacking alien defense systems is illegal"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "No DMCA violations"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "Hacking alien defense systems is illegal"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "I ain't afraid of no ghosts"), function ()
-        setCommsMessage(_("admin-comms", "No one is afraid if there are NO GHOSTS"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "I ain't afraid of no ghosts"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "No one is afraid if there are NO GHOSTS"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Keep an eye on that doctor"), function ()
-        setCommsMessage(_("admin-comms", "Do we really need to ask for directions?"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Keep an eye on that doctor"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "Do we really need to ask for directions?"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Ban wormhole research"), function ()
-        setCommsMessage(_("admin-comms", "I just can't stand wormholes, or their researchers!"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Ban wormhole research"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "I just can't stand wormholes, or their researchers!"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Heros for the ages"), function ()
-        setCommsMessage(_("admin-comms", "Their reputation is unmatched"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Heros for the ages"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "Their reputation is unmatched"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
-      addCommsReply(_("admin-comms", "Grand Slam"), function ()
-        setCommsMessage(_("admin-comms", "You can do it, but can you do it ALL?"))
-        addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+      addCommsReply(_("adminStnEndTips-comms", "Grand Slam"), function ()
+        setCommsMessage(_("adminStnEndTips-comms", "You can do it, but can you do it ALL?"))
+        addCommsReply(_("<- Back"), CommsAdminStation)
       end)
     end)
-    addCommsReply(_("admin-comms", "Click here to lance the champagne!"), function ()
-      setCommsMessage(_("admin-comms", "Booyah!!!"))
+    addCommsReply(_("adminStnEnd-comms", "Click here to lance the champagne!"), function ()
+      setCommsMessage(_("adminStnEnd-comms", "Booyah!!!"))
       victory("Human Navy")
     end)
     return
@@ -1538,53 +1538,53 @@ function CommsAdminStation(comms_source, comms_target)
 
   if not comms_source:isDocked(comms_target) then
     if Admin_station.mission_state == nil then
-      setCommsMessage(_("admin-comms", [[We are the station that co-ordinates research activities in the nearby nebulae.
+      setCommsMessage(_("adminStn-comms", [[We are the station that co-ordinates research activities in the nearby nebulae.
 
 If you're not busy, please drop by to learn more about our projects.]]))
     elseif Admin_station.mission_state == "lost" then
-        setCommsMessage(_("admin-comms", "Please bring our researchers home!"))
+        setCommsMessage(_("adminStn-comms", "Please bring our researchers home!"))
     elseif Admin_station.mission_state == "found" or Admin_station.mission_state == "done" then
-        setCommsMessage(_("admin-comms", "Thanks so much for finding our researchers! Dock with us if you'd like to chat."))
+        setCommsMessage(_("adminStn-comms", "Thanks so much for finding our researchers! Dock with us if you'd like to chat."))
     end
   else
     -- Docked comms
     if Admin_station.mission_state == nil then
-      setCommsMessage(_("admin-comms", [[We are so glad to have you aboard. What can we help you with?]]))
-      addCommsReply(_("admin-comms", "How long have you been operating in this system?"), StartMissionLost)
-      addCommsReply(_("admin-comms", "Where is the colony where your researchers live?"), StartMissionLost)
-      addCommsReply(_("admin-comms", "Tell us about the nearby nebulae."), StartMissionLost)
-      addCommsReply(_("admin-comms", "Are there any Kraylor in the area?"), StartMissionLost)
-      addCommsReply(_("admin-comms", "Are there any Exuari in the area?"), StartMissionLost)
+      setCommsMessage(_("adminStn-comms", [[We are so glad to have you aboard. What can we help you with?]]))
+      addCommsReply(_("adminStn-comms", "How long have you been operating in this system?"), StartMissionLost)
+      addCommsReply(_("adminStn-comms", "Where is the colony where your researchers live?"), StartMissionLost)
+      addCommsReply(_("adminStn-comms", "Tell us about the nearby nebulae."), StartMissionLost)
+      addCommsReply(_("adminStn-comms", "Are there any Kraylor in the area?"), StartMissionLost)
+      addCommsReply(_("adminStn-comms", "Are there any Exuari in the area?"), StartMissionLost)
     elseif Admin_station.mission_state == "lost" then
-        setCommsMessage(_("admin-comms", "Please bring our researchers home!"))
+        setCommsMessage(_("adminStn-comms", "Please bring our researchers home!"))
     elseif Admin_station.mission_state == "found" or Admin_station.mission_state == "done" then
-        setCommsMessage(_("admin-comms", [[Always a pleasure to have you as our honoured guests.]]))
+        setCommsMessage(_("adminStn-comms", [[Always a pleasure to have you as our honoured guests.]]))
         if Wormhole_station.tier2_mission_state == "rma" then
-          addCommsReply(_("admin-comms", "Any idea where we can get a Hawking Scanner fixed?"), function ()
-            setCommsMessage(_("admin-comms", [[Dr. Hendrix, who you rescued earlier, is the leading expert on those scanners.]]))
+          addCommsReply(_("adminStn-comms", "Any idea where we can get a Hawking Scanner fixed?"), function ()
+            setCommsMessage(_("adminStn-comms", [[Dr. Hendrix, who you rescued earlier, is the leading expert on those scanners.]]))
           end)
         end
-        addCommsReply(_("admin-comms", "How long have you been operating in this system?"), function ()
-          setCommsMessage(_("admin-comms", [[We have been operating here for about 50 years]]))
-          addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+        addCommsReply(_("adminStn-comms", "How long have you been operating in this system?"), function ()
+          setCommsMessage(_("adminStn-comms", [[We have been operating here for about 50 years]]))
+          addCommsReply(_("<- Back"), CommsAdminStation)
         end)
-        addCommsReply(_("admin-comms", "Where is the colony where your researchers live?"), function ()
-          setCommsMessage(_("admin-comms", [[You'll find it to the east of the nebulae]]))
-          addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+        addCommsReply(_("adminStn-comms", "Where is the colony where your researchers live?"), function ()
+          setCommsMessage(_("adminStn-comms", [[You'll find it to the east of the nebulae]]))
+          addCommsReply(_("<- Back"), CommsAdminStation)
         end)
-        addCommsReply(_("admin-comms", "Tell us about the nearby nebulae."), function ()
-          setCommsMessage(_("admin-comms", [[Well I suppose you already know about the nebulae. They are to the north.
+        addCommsReply(_("adminStn-comms", "Tell us about the nearby nebulae."), function ()
+          setCommsMessage(_("adminStn-comms", [[Well I suppose you already know about the nebulae. They are to the north.
 
 Did you know that it's a popular place to hunt for treasure?]]))
-          addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+          addCommsReply(_("<- Back"), CommsAdminStation)
         end)
-        addCommsReply(_("admin-comms", "Are there any Kraylor in the area?"), function ()
-          setCommsMessage(_("admin-comms", [[We see some from time to time, but with the non-aggression treaty, they haven't been too much trouble.]]))
-          addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+        addCommsReply(_("adminStn-comms", "Are there any Kraylor in the area?"), function ()
+          setCommsMessage(_("adminStn-comms", [[We see some from time to time, but with the non-aggression treaty, they haven't been too much trouble.]]))
+          addCommsReply(_("<- Back"), CommsAdminStation)
         end)
-        addCommsReply(_("admin-comms", "Are there any Exuari in the area?"), function ()
-          setCommsMessage(_("admin-comms", [[Old space junk, mostly. We haven't seen any real Exauri activity in decades.]]))
-          addCommsReply(_("admin-comms", "<- Back"), CommsAdminStation)
+        addCommsReply(_("adminStn-comms", "Are there any Exuari in the area?"), function ()
+          setCommsMessage(_("adminStn-comms", [[Old space junk, mostly. We haven't seen any real Exauri activity in decades.]]))
+          addCommsReply(_("<- Back"), CommsAdminStation)
         end)
     end
   end
@@ -1632,11 +1632,11 @@ It's not for sale, as such. You'll need to get a requisition from the Admin Stat
 ]]))
     addCommsReply(_("drone-comms", "Proximity Sensor"), function ()
       setCommsMessage(_("drone-comms", "Activates when ships get too close"))
-      addCommsReply(_("drone-comms", "<- Back"), CommsDroneStation)
+      addCommsReply(_("<- Back"), CommsDroneStation)
     end)
     addCommsReply(_("drone-comms", "Intelligence Accelerator"), function ()
       setCommsMessage(_("drone-comms", "Too expensive to use for video games."))
-      addCommsReply(_("drone-comms", "<- Back"), CommsDroneStation)
+      addCommsReply(_("<- Back"), CommsDroneStation)
     end)
     addCommsReply(_("drone-comms", "Graviton Lens"), function ()
       if Admin_station.req_lens == true then
@@ -1646,12 +1646,12 @@ It's not for sale, as such. You'll need to get a requisition from the Admin Stat
 Alright, enjoy... focusing your gravitons, I guess!]]))
       else
         setCommsMessage(_("drone-comms", "For focusing the gravitational field."))
-        addCommsReply(_("drone-comms", "<- Back"), CommsDroneStation)
+        addCommsReply(_("<- Back"), CommsDroneStation)
       end
     end)
     addCommsReply(_("drone-comms", "Holographic Projector"), function ()
       setCommsMessage(_("drone-comms", "Shows very convincing drone stations"))
-      addCommsReply(_("drone-comms", "<- Back"), CommsDroneStation)
+      addCommsReply(_("<- Back"), CommsDroneStation)
     end)
   end
 end
@@ -1659,11 +1659,11 @@ end
 
 function CommsBeingAttacked (self, instigator)
   if self.lastAttackedComms == nil or ((getScenarioTime() - self.lastAttackedComms) > 300) then
-    self:sendCommsMessage(Player,string.format(_("attack-messages","HELP!\nWe are taking damage from %s and might need assistance."),instigator:getCallSign()))
+    self:sendCommsMessage(Player,string.format(_("attack-incCall","HELP!\nWe are taking damage from %s and might need assistance."),instigator:getCallSign()))
     self.lastAttackedComms = getScenarioTime()
   end
   if self.lastAttackedLog == nil or ((getScenarioTime() - self.lastAttackedLog) > 30) then
-    Player:addToShipLog(string.format(_("attack-messages","%s is taking damage!"),self:getCallSign()), "RED")
+    Player:addToShipLog(string.format(_("attack-shipLog","%s is taking damage!"),self:getCallSign()), "RED")
     self.lastAttackedLog = getScenarioTime()
   end
 end
@@ -1689,7 +1689,7 @@ function StartMissionLost()
   --   local nx, ny = art:getPosition()
   --   Player:addToShipLog("DEBUG: "..bonus.." @ "..nx..", "..ny, "Blue")
   -- end
-  setCommsMessage(_("admin-comms",
+  setCommsMessage(_("adminStn-comms",
 [[Sorry to interrupt, but we've just recieved an urgent call.
 
 It seems one of our researchers, Dr. Hendrix, and her crew have lost their way in a nearby nebula and need our help. They were running experiments in the nebula when their engines and transponder went offline. Please follow our scout vessel, SR7, to the nebula and search for them.]]))
@@ -1697,7 +1697,7 @@ It seems one of our researchers, Dr. Hendrix, and her crew have lost their way i
   Admin_station.x, Admin_station.y = Admin_station:getPosition()
   Admin_station.assist_ship = CpuShip():setCallSign("SR7"):setPosition(Admin_station.x + 200, Admin_station.y):orderFlyTowardsBlind(sectorToXY("D6")):setFaction("Human Navy"):setTemplate("Ktlitan Scout"):setWarpDrive(true):setCommsScript(""):setCommsFunction(function ()
     if Admin_station.assist_ship.state == "flyToNebula" or Admin_station.assist_ship.state == "waiting" then
-      setCommsMessage(_("admin-comms", "Meet me at the edge of the nebula"))
+      setCommsMessage(_("adminStn-comms", "Meet me at the edge of the nebula"))
     end
   end) -- Rand Nebula location
   Admin_station.assist_ship.state = "flyToNebula"
@@ -1715,12 +1715,12 @@ function UpdateMissionLost()
   end
 
   if Admin_station.assist_ship.state == "waiting" and distance(Admin_station.assist_ship, Player) <= 20000 then
-    Admin_station.assist_ship:sendCommsMessage(Player, _("admin-comms", [[Ready to head in?
+    Admin_station.assist_ship:sendCommsMessage(Player, _("adminStn-incCall", [[Ready to head in?
 
 The nebula is very thick, so we will need to get close to find a ship with no transponder. Probes won't show the ship, but your relay station should be able to pick it up at 20U or less. There may be hazards, so be careful.
 
 I'll follow you. Let's find Dr. Hendrix and bring her crew home.]]))
-    Player:addToShipLog(_("admin-comms", "Fly into the Nebula and find Dr. Hendrix"), "Green")
+    Player:addToShipLog(_("adminStn-shipLog", "Fly into the Nebula and find Dr. Hendrix"), "Green")
     Admin_station.assist_ship:orderFlyFormation(Player, 2300, 1700)
     Admin_station.assist_ship.state = "done"
     Admin_station.assist_ship:setCommsScript("comms_ship.lua")
@@ -1743,7 +1743,7 @@ end
 
 function FinishMissionLost()
   Player:setLongRangeRadarRange(35000)
-  Player:addToShipLog(_("Sensors have been upgraded."),"Green")
+  Player:addToShipLog(_("finishMissionNebulae-shipLog","Sensors have been upgraded."),"Green")
   Player:addReputationPoints(5)
 
   -- Send to a random colony station
@@ -1785,7 +1785,7 @@ end
 --==================================================
 
 function StartMissionPatrol()
-  setCommsMessage(_("defence-comms", [[Great!
+  setCommsMessage(_("defenceStn-comms", [[Great!
 
 Start at the checkpoint in the North West. You'll need to dock at each station before proceeding to the next.]]))
   Defence_station.patrol_index = 1
@@ -1816,8 +1816,8 @@ function UpdateMissionPatrol()
         Defence_station.mission_state = "patrol attack"
         SpawnPatrolEnemies()
       else
-        Defence_station:sendCommsMessage(Player, string.format(_("defence-comms","Please proceed to %s"),Defence_station.next_station))
-        Player:addToShipLog(string.format(_("defence-comms","Please proceed to %s"),Defence_station.next_station), "Green")
+        Defence_station:sendCommsMessage(Player, string.format(_("defenceStn-incCall","Please proceed to %s"),Defence_station.next_station))
+        Player:addToShipLog(string.format(_("defenceStn-shipLog","Please proceed to %s"),Defence_station.next_station), "Green")
       end
       Player:addReputationPoints(2)
     end
@@ -1836,12 +1836,12 @@ function UpdateMissionPatrol()
       end
     end
     if allDestroyed then
-      Defence_station:sendCommsMessage(Player, _("defence-comms",[[Great work captain!
+      Defence_station:sendCommsMessage(Player, _("defenceStn-incCall",[[Great work captain!
 
 You have repelled the attackers and the SW Checkpoint is safe for now, but intelligence reports show a huge drone convoy in your vicinity to the NW.
 
 INVESTIGATE BUT DO NOT ENGAGE! We have it on good word that attacking this convoy is extremely risky. Keep your distance, but we'd like to know where they are going.]]))
-      Player:addToShipLog("Investigte the convoy, but DO NOT ENGAGE", "Red")
+      Player:addToShipLog("defenceStn-shipLog","Investigte the convoy, but DO NOT ENGAGE", "Red")
 
       Defence_station.mission_state = "drone convoy"
       SpawnConvoyEnemies()
@@ -1871,8 +1871,8 @@ function CheckConvoyArrived()
   -- Wait for half the convites to arrive during first tier patrol mission
   if Defence_station.convites_arrived > (#Defence_station.convoy_enemies / 2) and Defence_station.tier2_mission_state == nil then
     Defence_station.tier2_mission_state = "pre-start"
-    Defence_station:sendCommsMessage(Player, _("defence-comms","Come in, Captain.\nWe have the info we need about that convoy and strongly discourage any further engagement.\nYour assistance is required with a secret mission. Dock with us to receive further instructions when you're ready."))
-    Player:addToShipLog(_("shipLog","Dock with the Defence Station to start another mission"), "Green")
+    Defence_station:sendCommsMessage(Player, _("defenceStn-incCall","Come in, Captain.\nWe have the info we need about that convoy and strongly discourage any further engagement.\nYour assistance is required with a secret mission. Dock with us to receive further instructions when you're ready."))
+    Player:addToShipLog(_("defenceStn-shipLog","Dock with the Defence Station to start another mission"), "Green")
     SpawnMockDroneShip()
   end
 
@@ -1940,22 +1940,22 @@ function StartMissionSpareParts()
     end
 
     if hailer ~= nil then -- If is alive, give a warning
-      hailer:sendCommsMessage(Player, _("kw-comms", [[Ugh, humans.
+      hailer:sendCommsMessage(Player, _("KraylorWarning-incCall", [[Ugh, humans.
 
 This is the Kraylor Advanced "Reasearch" Project Agency (KARPA), we have detected your suspicious activity in the vicinity.
 
 We are sending a team to investigate what you are up to. If you fire on us, there will be trouble!]]))
-      Player:addToShipLog(_("kw-comms", "The Kraylor are investigating our activities and have warned us not to escalate"), "Yellow")
+      Player:addToShipLog(_("KraylorWarning-shipLog", "The Kraylor are investigating our activities and have warned us not to escalate"), "Yellow")
       SpawnKWEnemies(false)
     else
       SpawnKWEnemies(true) -- If not alive, make all reinforcements immediately aggro
     end
     SupplyDrop():setFaction("Human Navy"):setPosition(Parts_station:getPosition()):setEnergy(200):onPickUp(function ()
-      Wormhole_station:sendCommsMessage(Player, _("wormhole-comms", [[Great, you got the parts!
+      Wormhole_station:sendCommsMessage(Player, _("wormhole-incCall", [[Great, you got the parts!
 
 You'd better hurry back, we've seen some Kraylor activity in the area. Hopefully your salvage mission didn't attract the wrong sort of attention.]]
       ))
-      Player:addToShipLog(_("wormhole-comms", "Return the spare parts to the Wormhole Station"), "Green")
+      Player:addToShipLog(_("wormhole-shipLog", "Return the spare parts to the Wormhole Station"), "Green")
       Player.hasSpareParts = true
     end)
 
@@ -1967,7 +1967,7 @@ You'd better hurry back, we've seen some Kraylor activity in the area. Hopefully
     local y_d = y - (2 * (y - y_t)) + irandom(-1000, 1000)
     Parts_station:setPosition(x_d, y_d)
     Player:addReputationPoints(1)
-    Player:addToShipLog(_("wormhole-comms", "Jump Defence Activated"),"Yellow")
+    Player:addToShipLog(_("wormhole-shipLog", "Jump Defence Activated"),"Yellow")
   end)
 end
 
@@ -1992,12 +1992,12 @@ function UpdateMissionSpareParts()
 
       if distance(Player, Wormhole_station) < 5000 and Player.hasSpareParts == true then
         Investigator.warned = true
-        Investigator:sendCommsMessage(Player, _("kw-comms", [[Watch your back, Hugh Mon!
+        Investigator:sendCommsMessage(Player, _("KraylorWarning-incCall", [[Watch your back, Hugh Mon!
 
 We don't know what you're up to, but we don't like the look of it. Keep your distance and maybe we'll leave you alone.
 
 <The Kraylor Vessel jumps back through the wormhole>]]))
-        Player:addToShipLog(_("kw-comms", "The Kraylor seem hostile and have warned us to keep our distance"), "Yellow")
+        Player:addToShipLog(_("KraylorWarning-shipLog", "The Kraylor seem hostile and have warned us to keep our distance"), "Yellow")
         Investigator:setPosition(377672, 540642)
         Investigator:orderStandGround()
         StartMissionRepair()
@@ -2028,7 +2028,7 @@ end
 --==================================================
 
 function StartMissionDroneNest()
-  setCommsMessage(_("defence-comms", [[Good luck]]))
+  setCommsMessage(_("defenceStn-comms", [[Good luck]]))
   SpawnMockDroneShip()
   TransferToDrone()
   Defence_station.convoy_timer = getScenarioTime()
@@ -2059,17 +2059,17 @@ function UpdateMissionDroneNest()
       if with_convoy and Player:getFaction() == "Ghosts" and not Defence_station.cover_blown then
         Defence_station.tier2_mission_state = "arrived"
         Defence_station.drones_think_were_friendly = true
-        Defence_station:sendCommsMessage(Player, _("defence-comms", [[Arrived, scan the security beacons]]))
+        Defence_station:sendCommsMessage(Player, _("defenceStn-incCall", [[Arrived, scan the security beacons]]))
       else
         if not Defence_station.cover_blown then
           Defence_station.cover_blown = true
-          Defence_station:sendCommsMessage(Player, _("defence-comms", [[Your cover has been blown and the proximity defence system remains active. We suggest leaving and trying again to arrive with a future convoy.]]))
-          Player:addToShipLog(_("defence-comms", "Our cover has been blown"), "Red")
+          Defence_station:sendCommsMessage(Player, _("defenceStn-incCall", [[Your cover has been blown and the proximity defence system remains active. We suggest leaving and trying again to arrive with a future convoy.]]))
+          Player:addToShipLog(_("defenceStn-shipLog", "Our cover has been blown"), "Red")
         end
       end
     else
       if Defence_station.cover_blown then
-        Player:addToShipLog(_("defence-comms", "We should be good to try again"), "Green")
+        Player:addToShipLog(_("defenceStn-shipLog", "We should be good to try again"), "Green")
         Defence_station.cover_blown = false
       end
     end
@@ -2103,10 +2103,10 @@ function FinishMissionDroneNest ()
   end
   Player:setFaction("Human Navy")
   Liquidation_station = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):onTakingDamage(CommsBeingAttacked):setCallSign("DB-3"):setPosition(Drone_control_station.x, Drone_control_station.y):setCommsFunction(CommsDroneStation)
-  Liquidation_station:sendCommsMessage(Player, _("drone-comms", [[Great work, Captain!
+  Liquidation_station:sendCommsMessage(Player, _("drone-incCall", [[Great work, Captain!
 
 We have taken control of this station and will be liquidating spare parts from the wreckage.]]))
-  Player:addToShipLog(_("drone-comms", "DB-3 has a collection of spare parts"), "Green")
+  Player:addToShipLog(_("drone-shipLog", "DB-3 has a collection of spare parts"), "Green")
   Player:addReputationPoints(20)
 
   -- If all other discoverable missions are done, shorten the fuze on the repair mission start
@@ -2185,12 +2185,12 @@ function UpdateMissionRepair(delta)
     if allDestroyed then
       Player:addReputationPoints(20)
       Wormhole_station.tier2_mission_state = "damaged"
-      Wormhole_station:sendCommsMessage(Player, _("wormhole-comms",[[Thanks so much, captain!
+      Wormhole_station:sendCommsMessage(Player, _("wormhole-incCall",[[Thanks so much, captain!
 
 You really saved our ass there. Unfortunately our Hawking Scanner was damaged by the bomb, and we haven't been able to get it back online. Do you think you could get it fixed for us?
 
 Please dock with us to pick up the scanner.]]))
-      Player:addToShipLog(_("wormhole-comms", "Get the Hawking Scanner from the Wormhole Station"), "Green")
+      Player:addToShipLog(_("wormhole-shipLog", "Get the Hawking Scanner from the Wormhole Station"), "Green")
     end
   end
 
@@ -2245,11 +2245,11 @@ function TransferToDrone()
   CHEEVOS["ourship"] = false
   Player = DroneShip
 
-  Player:addToShipLog(_("drone-ship", "This ship will not activate the drone station proximity defences as long as you arrive with a convoy."),"Yellow")
+  Player:addToShipLog(_("drone-shipLog", "This ship will not activate the drone station proximity defences as long as you arrive with a convoy."),"Yellow")
 end
 
 function TransferToPP1()
-  Player:addToShipLog(_("drone-ship", "It's nice to be back aboard the Propitious 1"),"Yellow")
+  Player:addToShipLog(_("drone-shipLog", "It's nice to be back aboard the Propitious 1"),"Yellow")
   Player:transferPlayersToShip(PP1)
 end
 
@@ -2282,8 +2282,8 @@ function UpdateDroneStations()
             d:orderAttack(Player)
             table.insert(Defence_station.ghost_defenders, d)
           end
-          stn:sendCommsMessage(Player, _("drone-comms", [[PROXIMITY DEFENCE SYSTEM ACTIVATED]]))
-          Player:addToShipLog(_("drone-comms", "We got too close to a drone station and it launched defences."), "Red")
+          stn:sendCommsMessage(Player, _("drone-incCall", [[PROXIMITY DEFENCE SYSTEM ACTIVATED]]))
+          Player:addToShipLog(_("drone-shipLog", "We got too close to a drone station and it launched defences."), "Red")
           CHEEVOS["distancing"] = false
         end
       end
@@ -2294,7 +2294,7 @@ function UpdateDroneStations()
   if Defence_station.tier2_mission_state ~= nil then
     if Defence_station.all_beacons_scanned ~= true then
       local scanned = 0
-      local desc = _("security-beacons", "The Ghosts drone security beacons. If we scan them all, we should be able to find the control station. We'll need to get pretty close.")
+      local desc = _("scienceDescription-beacons", "The Ghosts drone security beacons. If we scan them all, we should be able to find the control station. We'll need to get pretty close.")
       for __, a in ipairs(Drone_artifacts) do
         if a:isScannedBy(Player) then
           CHEEVOS["DMCA"] = false
@@ -2302,7 +2302,7 @@ function UpdateDroneStations()
         elseif distance(Player, a) < 2500 then
           if a.close_latch ~= true then
             a.close_latch = true
-            a:setDescriptions(desc, _("security-beacons", "The beamforming configuration from this beacon will help the boffins triangulate the location of the central control.")):setScanningParameters(1,1)
+            a:setDescriptions(desc, _("scienceDescription-beacons", "The beamforming configuration from this beacon will help the boffins triangulate the location of the central control.")):setScanningParameters(1,1)
           end
         else
             a.close_latch = false
@@ -2311,8 +2311,8 @@ function UpdateDroneStations()
       end
       if scanned >= #Drone_artifacts then
         Defence_station.all_beacons_scanned = true
-        Defence_station:sendCommsMessage(Player,string.format(_("defence-comms","Great work!\nOur boffins were able to piece together the data and figure out where the commands are coming from.\nYou must destroy station %s"),Drone_control_station:getCallSign()))
-        Player:addToShipLog(string.format(_("defence-comms","The drone control station is %s"),Drone_control_station:getCallSign()), "Green")
+        Defence_station:sendCommsMessage(Player,string.format(_("defenceStn-incCall","Great work!\nOur boffins were able to piece together the data and figure out where the commands are coming from.\nYou must destroy station %s"),Drone_control_station:getCallSign()))
+        Player:addToShipLog(string.format(_("defenceStn-shipLog","The drone control station is %s"),Drone_control_station:getCallSign()), "Green")
       end
     end
   end
@@ -2381,7 +2381,7 @@ function UpdateTraffic()
   local station = Traffic.stations[irandom(1,#Traffic.stations)]
   local new_ship = CpuShip():setFaction(faction):setTemplate(type):setPosition(sectorToXY(src)):orderDock(station)
   if faction == "TSN" then
-    new_ship:setCommsFunction(function () setCommsMessage(_("Too busy to talk today, Captain.")) end)
+    new_ship:setCommsFunction(function () setCommsMessage(_("newShip-comms", "Too busy to talk today, Captain.")) end)
   end
   table.insert(Traffic.new_ships, new_ship)
 end
@@ -2390,7 +2390,7 @@ function HendrixHints(stn)
   if stn.hendrix_hint ~= nil then return end
 
   if Difficulty ~= 1 and irandom(1,13 - Difficulty) == 1 then -- Hints every time on easy, but unhelpful 1/10 on med and 1/8 on hard
-    stn.hendrix_hint = _("hendrix-hints", "Sorry, I don't know where Dr. Hendrix lives")
+    stn.hendrix_hint = _("hendrixHints-comms", "Sorry, I don't know where Dr. Hendrix lives")
     return
   end
 
@@ -2398,30 +2398,30 @@ function HendrixHints(stn)
   local char = irandom(1,4)
   local hint = hendrix_callsign:sub(char,char)
   if char == 1 then
-    stn.hendrix_hint = string.format(_("hendrix-hints","Dr. Hendrix, of course! I'm pretty sure she was on a %s-class station, but darned if I can remember which one."),hint)
+    stn.hendrix_hint = string.format(_("hendrixHints-comms","Dr. Hendrix, of course! I'm pretty sure she was on a %s-class station, but darned if I can remember which one."),hint)
   else
-    stn.hendrix_hint = string.format(_("hendrix-hints","Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her address definitely has a '%s' in it."),hint)
+    stn.hendrix_hint = string.format(_("hendrixHints-comms","Gosh, Dr. Hendrix. Okay. Sorry, but honestly all I remember is that her address definitely has a '%s' in it."),hint)
   end
 end
 
 function CheckDefeatConditions()
   for _, stn in ipairs(Patrol_stations) do
     if not stn:isValid() then
-      Player:addToShipLog(_("DEFEAT - A Patrol Station has been destroyed"), "Red")
+      Player:addToShipLog(_("defeat-shipLog","DEFEAT - A Patrol Station has been destroyed"), "Red")
       victory("Exuari")
     end
   end
 
   for _, stn in ipairs({Admin_station, Defence_station, Wormhole_station}) do
     if not stn:isValid() then
-      Player:addToShipLog(_("DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"), "Red")
+      Player:addToShipLog(_("defeat-shipLog","DEFEAT - A Core station (Admin, Defence, Wormhole) has been destroyed"), "Red")
       victory("Exuari")
     end
   end
 
   if Defence_station.tier2_mission_state == "done" then
     if not Liquidation_station:isValid() then
-      Player:addToShipLog(_("DEFEAT - Station B-3 has been destroyed"), "Red")
+      Player:addToShipLog(_("defeat-shipLog","DEFEAT - Station B-3 has been destroyed"), "Red")
       victory("Exuari")
     end
   end
@@ -2509,9 +2509,9 @@ end
 
 function CheevoString(name)
   if CHEEVOS[name] then
-    return _("admin-comms","SUCCESS!!!")
+    return _("adminStn-comms","SUCCESS!!!")
   else
-    return _("admin-comms","INCOMPLETE")
+    return _("adminStn-comms","INCOMPLETE")
   end
 end
 
