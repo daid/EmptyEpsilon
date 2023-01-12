@@ -104,6 +104,7 @@ public:
     void addScript(P<Script> script);
     //Reset the global game state (called when we want to load a new scenario, and clear out this one)
     void reset();
+    void initializeScenarioSettings(string filename);
     void startScenario(string filename);
 
     virtual void update(float delta) override;

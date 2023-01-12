@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
+#include "scenarioInfo.h"
 #include "scienceDatabase.h"
 #include "multiplayer_client.h"
 #include "soundManager.h"
@@ -186,6 +187,24 @@ void GameGlobalInfo::reset()
     {
         p->reset();
     }
+}
+
+void GameGlobalInfo::initializeScenarioSettings(string filename)
+{
+    // Parse the scenario metadata for default settings.
+    // Use this for non-interactive scenario loading, like headless and
+    // server_scenario game preferences.
+    ScenarioInfo info(filename);
+    LOG(INFO) << "Initializing settings for scenario " << info.name;
+
+    for(auto& setting : info.settings)
+    {
+        LOG(INFO) << setting.key << " scenario setting set to " << setting.default_option;
+        gameGlobalInfo->scenario_settings[setting.key] = setting.default_option;
+    }
+
+    // Set the scenario name.
+    gameGlobalInfo->scenario = info.name;
 }
 
 void GameGlobalInfo::startScenario(string filename)
