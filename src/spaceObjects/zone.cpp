@@ -10,17 +10,31 @@
 
 #include "scriptInterface.h"
 
-/// A zone area
+/// A Zone is a polygonal area of space defined by a series of coordinates.
+/// Although a Zone is a SpaceObject, it isn't affected by physics and isn't rendered in 3D.
+/// Zones are drawn on GM, comms, and long-range radar screens, can have a text label, and can return whether a SpaceObject is within their bounds.
+/// New Zones can't be created via the exec.lua HTTP API.
+/// Example:
+/// -- Defines a blue rectangular 200sqU zone labeled "Home" around 0,0
+/// zone = Zone():setColor(0,0,255):setPoints(-100000,100000, -100000,-100000, 100000,-100000, 100000,100000):setLabel("Home")
 REGISTER_SCRIPT_SUBCLASS(Zone, SpaceObject)
 {
-    /// Set corners of n-gon to x_1, y_1, x_2, y_2, ..., x_n, y_n.
-    /// Recall that x goes right and y goes down.
-    /// Example: zone = Zone():setPoints(2000, 0, 0, 3000, -2000, 0)
+    /// Sets the corners of this Zone n-gon to x_1, y_1, x_2, y_2, ... x_n, y_n.
+    /// Positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
+    /// Example: zone:setPoints(2000,0, 0,3000, -2000,0) -- defines a triangular zone
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setPoints);
-    /// Example: zone:setColor(255, 140, 0)
+    /// Sets this Zone's color when drawn on radar.
+    /// Defaults to white (255,255,255).
+    /// Example: zone:setColor(255,140,0)
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setColor);
+    /// Sets this Zone's text label, rendered at the zone's center point.
+    /// Example: zone:setLabel("Hostile space")
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setLabel);
+    /// Returns this Zone's text label.
+    /// Example: zone:getLabel()
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, getLabel);
+    /// Returns whether the given SpaceObject is inside this Zone.
+    /// Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, isInside);
 }
 
