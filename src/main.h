@@ -18,7 +18,6 @@ extern PostProcessor* warpPostProcessor;
 extern PVector<Window> windows;
 extern std::vector<RenderLayer*> window_render_layers;
 
-void startScenarioWithoutInteraction(string filename);
 void returnToMainMenu(RenderLayer*);
 void returnToShipSelection(RenderLayer*);
 void returnToOptionMenu();
