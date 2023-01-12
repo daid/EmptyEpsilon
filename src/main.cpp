@@ -399,7 +399,7 @@ int main(int argc, char** argv)
         new EpsilonServer(defaultServerPort);
 
         // Load the scenario and open the ship selection screen.
-        startScenarioWithoutInteraction(PreferencesManager::get("server_scenario"));
+        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"));
         new ShipSelectionScreen();
     }
 
@@ -440,15 +440,6 @@ int main(int argc, char** argv)
     return 0;
 }
 
-void startScenarioWithoutInteraction(string filename)
-{
-    // Initialize scenario settings to defaults.
-    gameGlobalInfo->initializeScenarioSettings(filename);
-
-    // Load the scenario.
-    gameGlobalInfo->startScenario(filename);
-}
-
 void returnToMainMenu(RenderLayer* render_layer)
 {
     if (render_layer != defaultRenderLayer) // Handle secondary monitors
@@ -463,7 +454,7 @@ void returnToMainMenu(RenderLayer* render_layer)
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        startScenarioWithoutInteraction(PreferencesManager::get("headless"));
+        gameGlobalInfo->startScenario(PreferencesManager::get("headless"));
 
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
