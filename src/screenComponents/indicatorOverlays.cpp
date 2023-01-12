@@ -8,6 +8,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
+#include "components/hull.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_label.h"
@@ -77,7 +78,8 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             shield_low_warning_overlay->setAlpha(0);
         }
 
-        hull_hit_overlay->setAlpha(128 * (my_spaceship->hull_damage_indicator / 1.5f));
+        if (auto hull = my_spaceship->entity.getComponent<Hull>())
+            hull_hit_overlay->setAlpha(128 * (hull->damage_indicator / 1.5f));
     }else{
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);
@@ -86,16 +88,16 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        if (my_spaceship->jump_indicator > 0.0f)
+        auto jump = my_spaceship->entity.getComponent<JumpDrive>();
+        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        if (jump && jump->just_jumped > 0.0f)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0f);
+            glitchPostProcessor->setUniform("magtitude", jump->just_jumped * 10.0f);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
         }
-        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
-        auto jump = my_spaceship->entity.getComponent<JumpDrive>();
         if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;

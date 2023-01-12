@@ -20,10 +20,10 @@ void JumpSystem::update(float delta)
         if (jump.delay > 0.0f)
         {
             if (WarpJammer::isWarpJammed(position.getPosition()))
-            {
                 jump.delay = 0.0f;
-            }
         }
+        if (jump.just_jumped > 0.0f)
+            jump.just_jumped -= delta;
         if (jump.delay > 0.0f)
         {
             auto impulse = entity.getComponent<ImpulseEngine>();
@@ -41,9 +41,7 @@ void JumpSystem::update(float delta)
                     return;
 
                 // When jumping, reset the jump effect and move the ship.
-                PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(ship);
-                if (player)
-                    player->jump_indicator = 2.0;
+                jump.just_jumped = 2.0f;
 
                 auto distance = (jump.distance * f) + (jump.distance * (1.0f - f) * random(0.5, 1.5));
                 auto target_position = position.getPosition() + vec2FromAngle(position.getRotation()) * distance;

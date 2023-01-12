@@ -13,6 +13,7 @@ public:
     float max = 100.0f;
     bool allow_destruction = true;
     int damaged_by_flags = (1 << int(DamageType::Energy)) | (1 << int(DamageType::Kinetic));
+    float damage_indicator = 0.0f;
 
     ScriptSimpleCallback on_destruction;
     ScriptSimpleCallback on_taking_damage;

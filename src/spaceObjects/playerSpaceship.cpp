@@ -341,8 +341,6 @@ PlayerSpaceship::PlayerSpaceship()
     // Initialize ship settings
     main_screen_setting = MSS_Front;
     main_screen_overlay = MSO_HideComms;
-    hull_damage_indicator = 0.0;
-    jump_indicator = 0.0;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     auto_repair_enabled = false;
@@ -358,8 +356,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&can_hack);
     registerMemberReplication(&can_self_destruct);
     registerMemberReplication(&can_launch_probe);
-    registerMemberReplication(&hull_damage_indicator, 0.5);
-    registerMemberReplication(&jump_indicator, 0.5);
     registerMemberReplication(&main_screen_setting);
     registerMemberReplication(&main_screen_overlay);
     registerMemberReplication(&scanning_delay, 0.5);
@@ -419,14 +415,6 @@ PlayerSpaceship::~PlayerSpaceship()
 
 void PlayerSpaceship::update(float delta)
 {
-    // If we're flashing the screen for hull damage, tick the fade-out.
-    if (hull_damage_indicator > 0)
-        hull_damage_indicator -= delta;
-
-    // If we're jumping, tick the countdown timer.
-    if (jump_indicator > 0)
-        jump_indicator -= delta;
-
     // Actions performed on the server only.
     if (game_server)
     {

@@ -19,6 +19,7 @@ public:
     float charge = 50000.0f; //[output]
     float distance = 0.0f;     //[output]
     float delay = 0.0f;        //[output]
+    float just_jumped = 0.0f; //[output] used for visual effect after jumping.
 
     float get_recharge_rate() { return Tween<float>::linear(getSystemEffectiveness(), 0.0, 1.0, -0.25, 1.0); }
 };

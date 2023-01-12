@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ecs/entity.h"
+#include "ecs/system.h"
 #include "components/shipsystem.h"
 
 
@@ -30,9 +31,10 @@ public:
 };
 
 
-class DamageSystem
+class DamageSystem : public sp::ecs::System
 {
 public:
+    void update(float delta) override;
 
     static void damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, const DamageInfo& info, float min_range);
     static void applyDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info);

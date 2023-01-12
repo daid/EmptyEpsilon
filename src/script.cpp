@@ -16,7 +16,7 @@ REGISTER_SCRIPT_CLASS(Script)
     /// Example: script = Script():run("script.lua")
     REGISTER_SCRIPT_CLASS_FUNCTION(Script, run);
     /// Sets a global variable in this Script instance that is accessible from the main Script.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ScriptObject, setVariable);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ScriptObject, setVariable<string>);
 }
 
 Script::Script()

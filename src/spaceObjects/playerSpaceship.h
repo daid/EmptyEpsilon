@@ -79,9 +79,6 @@ public:
         bool operator!=(const CustomShipFunction& csf) { return type != csf.type || name != csf.name || caption != csf.caption || crew_position != csf.crew_position; }
     };
 
-    // Visual indicators of hull damage and in-progress jumps
-    float hull_damage_indicator;
-    float jump_indicator;
     // Ship automation features, mostly for single-person ships like fighters
     bool auto_repair_enabled;
     // Password to join a ship. Default is empty.

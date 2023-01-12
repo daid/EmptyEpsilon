@@ -1,5 +1,6 @@
 #include "systems/damage.h"
 #include "systems/collision.h"
+#include "ecs/query.h"
 #include "components/collision.h"
 #include "components/hull.h"
 #include "components/shields.h"
@@ -10,6 +11,14 @@
 #include "spaceObjects/spaceObject.h"
 #include "spaceObjects/explosionEffect.h"
 
+
+void DamageSystem::update(float delta)
+{
+    for(auto [entity, hull] : sp::ecs::Query<Hull>()) {
+        if (hull.damage_indicator > 0.0f)
+            hull.damage_indicator -= delta;
+    }
+}
 
 void DamageSystem::damageArea(glm::vec2 position, float blast_range, float min_damage, float max_damage, const DamageInfo& info, float min_range)
 {
@@ -85,15 +94,7 @@ void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const Da
         return;
 
     // If taking non-EMP damage, light up the hull damage overlay.
-    if (info.type != DamageType::EMP)
-    {
-        auto obj_ptr = entity.getComponent<SpaceObject*>();
-        if (obj_ptr) {
-            PlayerSpaceship* player = dynamic_cast<PlayerSpaceship*>(*obj_ptr);
-            if (player)
-                player->hull_damage_indicator = 1.5;
-        }
-    }
+    hull->damage_indicator = 1.5f;
 
     if (gameGlobalInfo->use_system_damage && hull)
     {
