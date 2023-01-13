@@ -4,6 +4,8 @@
 #include "playerSpaceship.h"
 #include "main.h"
 #include "random.h"
+#include "components/pickup.h"
+#include "components/spin.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -59,15 +61,12 @@ REGISTER_MULTIPLAYER_CLASS(Artifact, "Artifact");
 Artifact::Artifact()
 : SpaceObject(120, "Artifact"),
   current_model_data_name("artifact" + string(irandom(1, 8))),
-  model_data_name(current_model_data_name),
-  artifact_spin(0.0f),
-  allow_pickup(false)
+  model_data_name(current_model_data_name)
 {
     setRotation(random(0, 360));
     model_info.setData(current_model_data_name);
 
     registerMemberReplication(&model_data_name);
-    registerMemberReplication(&artifact_spin);
 
     if (entity) {
         auto& trace = entity.getOrAddComponent<RadarTrace>();
@@ -82,48 +81,6 @@ void Artifact::update(float delta)
     {
         current_model_data_name = model_data_name;
         model_info.setData(current_model_data_name);
-    }
-}
-
-void Artifact::collide(SpaceObject* target, float force)
-{
-    // Handle collisions on the server only.
-    if (!isServer())
-    {
-        return;
-    }
-
-    // Fire collision callbacks.
-    P<SpaceObject> hit_object = target;
-    P<PlayerSpaceship> player = hit_object;
-
-    // Player-specific callback handling.
-    if (player)
-    {
-        if (allow_pickup)
-        {
-            // If the artifact is collectible, pick it up.
-            if (on_pickup_callback.isSet())
-            {
-                on_pickup_callback.call<void>(P<Artifact>(this), player);
-            }
-
-            destroy();
-        }
-        else
-        {
-            // If the artifact isn't collectible, fire the collision callback.
-            if (on_player_collision_callback.isSet())
-            {
-                on_player_collision_callback.call<void>(P<Artifact>(this), player);
-            }
-        }
-    }
-
-    // Fire the SpaceObject collision callback, if set.
-    if (hit_object && on_collision_callback.isSet())
-    {
-        on_collision_callback.call<void>(P<Artifact>(this), hit_object);
     }
 }
 
@@ -142,12 +99,18 @@ void Artifact::explode()
 
 void Artifact::allowPickup(bool allow)
 {
-    allow_pickup = allow;
+    if (allow)
+        entity.getOrAddComponent<PickupCallback>();
+    else
+        entity.removeComponent<PickupCallback>();
 }
 
 void Artifact::setSpin(float spin)
 {
-    artifact_spin = spin;
+    if (spin == 0.0f)
+        entity.removeComponent<Spin>();
+    else
+        entity.getOrAddComponent<Spin>().rate = spin;
 }
 
 void Artifact::setRadarTraceIcon(string icon)
@@ -177,34 +140,29 @@ void Artifact::setRadarTraceColor(int r, int g, int b)
 
 void Artifact::onPickUp(ScriptSimpleCallback callback)
 {
-    this->allow_pickup = 1;
-    this->on_pickup_callback = callback;
+    auto pickup = entity.getOrAddComponent<PickupCallback>();
+    pickup.callback = callback;
 }
 
 void Artifact::onCollision(ScriptSimpleCallback callback)
 {
-    this->on_collision_callback = callback;
+    auto cb = entity.getOrAddComponent<CollisionCallback>();
+    cb.player = false;
+    cb.callback = callback;
 }
 
 void Artifact::onPlayerCollision(ScriptSimpleCallback callback)
 {
-    this->on_player_collision_callback = callback;
+    auto cb = entity.getOrAddComponent<CollisionCallback>();
+    cb.player = true;
+    cb.callback = callback;
 }
 
 string Artifact::getExportLine()
 {
     string ret = "Artifact():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
     ret += ":setModel(\"" + model_data_name + "\")";
-    if (allow_pickup)
-        ret += ":allowPickup(true)";
+    //if (allow_pickup)
+    //    ret += ":allowPickup(true)";
     return ret;
-}
-
-glm::mat4 Artifact::getModelMatrix() const
-{
-    auto matrix = SpaceObject::getModelMatrix();
-
-    if (artifact_spin != 0.f)
-        matrix = glm::rotate(matrix, glm::radians(engine->getElapsedTime() * artifact_spin), glm::vec3(0.f, 0.f, 1.f));
-    return matrix;
 }

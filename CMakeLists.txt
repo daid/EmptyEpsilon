@@ -373,6 +373,8 @@ set(MAIN_SOURCES
     src/components/selfdestruct.h
     src/components/player.h
     src/components/player.cpp
+    src/components/pickup.h
+    src/components/spin.h
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/shipsystemssystem.h
@@ -399,6 +401,10 @@ set(MAIN_SOURCES
     src/systems/damage.cpp
     src/systems/selfdestruct.h
     src/systems/selfdestruct.cpp
+    src/systems/pickup.h
+    src/systems/pickup.cpp
+    src/systems/basicmovement.h
+    src/systems/basicmovement.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

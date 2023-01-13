@@ -8,18 +8,11 @@ class Artifact : public SpaceObject, public Updatable
 private:
     string current_model_data_name;
     string model_data_name;
-    float artifact_spin;
-    bool allow_pickup;
-    ScriptSimpleCallback on_pickup_callback;
-    ScriptSimpleCallback on_collision_callback;
-    ScriptSimpleCallback on_player_collision_callback;
 
 public:
     Artifact();
 
     virtual void update(float delta) override;
-
-    virtual void collide(SpaceObject* target, float force) override;
 
     void setModel(string name);
     void setSpin(float spin=0.0);
@@ -37,9 +30,6 @@ public:
     void onPlayerCollision(ScriptSimpleCallback callback);
 
     virtual string getExportLine() override;
-
-protected:
-    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//ARTIFACT_H
