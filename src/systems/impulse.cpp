@@ -2,20 +2,13 @@
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
-#include "spaceObjects/spaceship.h"
-#include "spaceObjects/playerSpaceship.h"
-#include "spaceObjects/cpuShip.h"
-#include "spaceObjects/warpJammer.h"
 #include "ecs/query.h"
 
 
 void ImpulseSystem::update(float delta)
 {
-    //TODO: Turn this into better individual systems
-    //TODO: This crashes if the object is not a ship
-    for(auto [entity, impulse, physics, obj] : sp::ecs::Query<ImpulseEngine, sp::Physics, SpaceObject*>())
+    for(auto [entity, impulse, physics, transform] : sp::ecs::Query<ImpulseEngine, sp::Physics, sp::Transform>())
     {
-        SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         //Here we want to have max speed at 100% impulse, and max reverse speed at -100% impulse
         float cap_speed = impulse.max_speed_forward;
         
@@ -47,7 +40,7 @@ void ImpulseSystem::update(float delta)
         }
 
         // Determine forward direction and velocity.
-        auto forward = vec2FromAngle(ship->getRotation());
+        auto forward = vec2FromAngle(transform.getRotation());
         physics.setVelocity(forward * (impulse.actual * cap_speed * impulse.getSystemEffectiveness()));
     }
 }

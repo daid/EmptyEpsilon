@@ -282,8 +282,9 @@ ShipSelectionScreen::ShipSelectionScreen()
         // If the selected item is a ship ...
         if (ship)
         {
+            auto pc = ship->entity.getComponent<PlayerControl>();
             // ... and it has a control code, ask the player for it.
-            if (ship->control_code.length() > 0)
+            if (pc && pc->control_code.length() > 0)
             {
                 LOG(INFO) << "Player selected " << ship->getCallSign() << ", which has a control code.";
                 // Hide the ship selection UI temporarily to deter sneaky ship thieves.
@@ -291,12 +292,12 @@ ShipSelectionScreen::ShipSelectionScreen()
                 right_container->hide();
                 // Show the control code entry dialog.
                 focus(password_dialog->entry);
-                password_dialog->open(tr("Enter this ship's control code:"), my_player_info->last_ship_password, [this, ship](string code) {
-                    return ship && ship->control_code == code;
-                }, [this, ship](){
+                password_dialog->open(tr("Enter this ship's control code:"), my_player_info->last_ship_password, [this, ship, pc](string code) {
+                    return ship && pc->control_code == code;
+                }, [this, ship, pc](){
                     my_player_info->commandSetShipId(ship->getMultiplayerId());
                     crew_position_selection_overlay->show();
-                    my_player_info->last_ship_password = ship->control_code;
+                    my_player_info->last_ship_password = pc->control_code;
                     left_container->show();
                     right_container->show();
                 }, [this](){

@@ -11,25 +11,6 @@
 #include "components/docking.h"
 
 
-enum EMainScreenSetting
-{
-    MSS_Front = 0,
-    MSS_Back,
-    MSS_Left,
-    MSS_Right,
-    MSS_Target,
-    MSS_Tactical,
-    MSS_LongRange
-};
-template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss);
-
-enum EMainScreenOverlay
-{
-    MSO_HideComms = 0,
-    MSO_ShowComms
-};
-template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMainScreenOverlay& mso);
-
 struct Speeds
 {
     float forward;
@@ -218,8 +199,6 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 string getMissileWeaponName(EMissileWeapons missile);
 string getLocaleMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
-REGISTER_MULTIPLAYER_ENUM(EMainScreenSetting);
-REGISTER_MULTIPLAYER_ENUM(EMainScreenOverlay);
 REGISTER_MULTIPLAYER_ENUM(EScannedState);
 
 string frequencyToString(int frequency);

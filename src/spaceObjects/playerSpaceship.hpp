@@ -1,23 +1,23 @@
 #ifndef _PLAYERSPACESHIP_HPP_
 #define _PLAYERSPACESHIP_HPP_
 
-template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l)
+template<> int convert<AlertLevel>::returnType(lua_State* L, AlertLevel l)
 {
     lua_pushstring(L, alertLevelToString(l).c_str());
     return 1;
 }
 
-template<> void convert<EAlertLevel>::param(lua_State* L, int& idx, EAlertLevel& al)
+template<> void convert<AlertLevel>::param(lua_State* L, int& idx, AlertLevel& al)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "normal")
-        al = AL_Normal;
+        al = AlertLevel::Normal;
     else if (str == "yellow")
-        al = AL_YellowAlert;
+        al = AlertLevel::YellowAlert;
     else if (str == "red")
-        al = AL_RedAlert;
+        al = AlertLevel::RedAlert;
     else
-        al = AL_Normal;
+        al = AlertLevel::Normal;
 }
 
 #endif /* _H_PLAYERSPACESHIP_ */

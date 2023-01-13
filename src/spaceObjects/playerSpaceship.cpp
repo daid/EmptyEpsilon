@@ -306,32 +306,6 @@ static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
 
-string alertLevelToString(EAlertLevel level)
-{
-    // Convert an EAlertLevel to a string.
-    switch(level)
-    {
-    case AL_RedAlert: return "RED ALERT";
-    case AL_YellowAlert: return "YELLOW ALERT";
-    case AL_Normal: return "Normal";
-    default:
-        return "???";
-    }
-}
-
-string alertLevelToLocaleString(EAlertLevel level)
-{
-    // Convert an EAlertLevel to a translated string.
-    switch(level)
-    {
-    case AL_RedAlert: return tr("alert","RED ALERT");
-    case AL_YellowAlert: return tr("alert","YELLOW ALERT");
-    case AL_Normal: return tr("alert","Normal");
-    default:
-        return "???";
-    }
-}
-
 // Configure ship's log packets.
 static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
 static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
@@ -341,14 +315,10 @@ PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship", 5000)
 {
     // Initialize ship settings
-    main_screen_setting = MSS_Front;
-    main_screen_overlay = MSO_HideComms;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     auto_repair_enabled = false;
     scan_probe_stock = max_scan_probes;
-    alert_level = AL_Normal;
-    control_code = "";
 
     // For now, set player ships to always be fully scanned to all other ships
     for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
@@ -357,8 +327,6 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
     registerMemberReplication(&can_launch_probe);
-    registerMemberReplication(&main_screen_setting);
-    registerMemberReplication(&main_screen_overlay);
     registerMemberReplication(&scanning_delay, 0.5);
     registerMemberReplication(&scanning_complexity);
     registerMemberReplication(&scanning_depth);
@@ -371,9 +339,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&ships_log);
     registerMemberReplication(&waypoints);
     registerMemberReplication(&scan_probe_stock);
-    registerMemberReplication(&alert_level);
     registerMemberReplication(&linked_science_probe_id);
-    registerMemberReplication(&control_code);
     registerMemberReplication(&custom_functions);
 
     if (game_server)
@@ -969,11 +935,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             }
         }
         break;
-    case CMD_SET_MAIN_SCREEN_SETTING:
-        packet >> main_screen_setting;
-        break;
-    case CMD_SET_MAIN_SCREEN_OVERLAY:
-        packet >> main_screen_overlay;
+    case CMD_SET_MAIN_SCREEN_SETTING:{
+        MainScreenSetting mss;
+        packet >> mss;
+        if (auto pc = entity.getComponent<PlayerControl>())
+            pc->main_screen_setting = mss;
+        }break;
+    case CMD_SET_MAIN_SCREEN_OVERLAY:{
+        MainScreenOverlay mso;
+        packet >> mso;
+        if (auto pc = entity.getComponent<PlayerControl>())
+            pc->main_screen_overlay = mso;
+        }break;
         break;
     case CMD_SCAN_OBJECT:
         {
@@ -1280,11 +1253,12 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             scan_probe_stock--;
         }
         break;
-    case CMD_SET_ALERT_LEVEL:
-        {
-            packet >> alert_level;
-        }
-        break;
+    case CMD_SET_ALERT_LEVEL:{
+        AlertLevel al;
+        packet >> al;
+        if (auto ps = entity.getComponent<PlayerControl>())
+            ps->alert_level = al;
+        }break;
     case CMD_SET_SCIENCE_LINK:
         {
             // Capture previously linked probe, if there is one.
@@ -1438,14 +1412,14 @@ void PlayerSpaceship::commandSetShields(bool enabled)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandMainScreenSetting(EMainScreenSetting mainScreen)
+void PlayerSpaceship::commandMainScreenSetting(MainScreenSetting mainScreen)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandMainScreenOverlay(EMainScreenOverlay mainScreen)
+void PlayerSpaceship::commandMainScreenOverlay(MainScreenOverlay mainScreen)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_MAIN_SCREEN_OVERLAY << mainScreen;
@@ -1646,7 +1620,7 @@ void PlayerSpaceship::commandScanCancel()
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetAlertLevel(EAlertLevel level)
+void PlayerSpaceship::commandSetAlertLevel(AlertLevel level)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_ALERT_LEVEL;

@@ -1,36 +1,37 @@
 #ifndef _SPACESHIP_HPP_
 #define _SPACESHIP_HPP_
+
 /* Define script conversion function for the EMainScreenSetting enum. */
-template<> void convert<EMainScreenSetting>::param(lua_State* L, int& idx, EMainScreenSetting& mss)
+template<> void convert<MainScreenSetting>::param(lua_State* L, int& idx, MainScreenSetting& mss)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "front")
-        mss = MSS_Front;
+        mss = MainScreenSetting::Front;
     else if (str == "back")
-        mss = MSS_Back;
+        mss = MainScreenSetting::Back;
     else if (str == "left")
-        mss = MSS_Left;
+        mss = MainScreenSetting::Left;
     else if (str == "right")
-        mss = MSS_Right;
+        mss = MainScreenSetting::Right;
     else if (str == "target")
-        mss = MSS_Target;
+        mss = MainScreenSetting::Target;
     else if (str == "tactical")
-        mss = MSS_Tactical;
+        mss = MainScreenSetting::Tactical;
     else if (str == "longrange")
-        mss = MSS_LongRange;
+        mss = MainScreenSetting::LongRange;
     else
-        mss = MSS_Front;
+        mss = MainScreenSetting::Front;
 }
 
-template<> void convert<EMainScreenOverlay>::param(lua_State* L, int& idx, EMainScreenOverlay& mso)
+template<> void convert<MainScreenOverlay>::param(lua_State* L, int& idx, MainScreenOverlay& mso)
 {
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "hidecomms")
-        mso = MSO_HideComms;
+        mso = MainScreenOverlay::HideComms;
     else if (str == "showcomms")
-        mso = MSO_ShowComms;
+        mso = MainScreenOverlay::ShowComms;
     else
-        mso = MSO_HideComms;
+        mso = MainScreenOverlay::HideComms;
 }
 
 template<> int convert<Speeds>::returnType(lua_State* L,const Speeds &speeds)

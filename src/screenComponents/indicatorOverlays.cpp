@@ -169,15 +169,18 @@ void GuiIndicatorOverlays::drawAlertLevel(sp::RenderTarget& renderer)
 {
     glm::u8vec4 multiply_color{255,255,255,255};
 
-    switch(my_spaceship->alert_level)
+    auto pc = my_spaceship->entity.getComponent<PlayerControl>();
+    if (!pc) return;
+
+    switch(pc->alert_level)
     {
-    case AL_RedAlert:
+    case AlertLevel::RedAlert:
         multiply_color = glm::u8vec4(255, 192, 192, 255);
         break;
-    case AL_YellowAlert:
+    case AlertLevel::YellowAlert:
         multiply_color = glm::u8vec4(255, 255, 192, 255);
         break;
-    case AL_Normal:
+    case AlertLevel::Normal:
     default:
         return;
     }

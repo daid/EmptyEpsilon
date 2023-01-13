@@ -33,7 +33,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Front);
+            my_spaceship->commandMainScreenSetting(MainScreenSetting::Front);
         }
         closePopup();
     }));
@@ -41,7 +41,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Back);
+            my_spaceship->commandMainScreenSetting(MainScreenSetting::Back);
         }
         closePopup();
     }));
@@ -49,7 +49,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Left);
+            my_spaceship->commandMainScreenSetting(MainScreenSetting::Left);
         }
         closePopup();
     }));
@@ -57,7 +57,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Right);
+            my_spaceship->commandMainScreenSetting(MainScreenSetting::Right);
         }
         closePopup();
     }));
@@ -70,7 +70,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenSetting(MSS_Target);
+                my_spaceship->commandMainScreenSetting(MainScreenSetting::Target);
             }
             closePopup();
         }));
@@ -82,7 +82,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_Tactical);
+            my_spaceship->commandMainScreenSetting(MainScreenSetting::Tactical);
         }
         closePopup();
     }));
@@ -93,7 +93,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
     {
         if (my_spaceship)
         {
-            my_spaceship->commandMainScreenSetting(MSS_LongRange);
+            my_spaceship->commandMainScreenSetting(MainScreenSetting::LongRange);
         }
         closePopup();
     }));
@@ -107,7 +107,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenOverlay(MSO_ShowComms);
+                my_spaceship->commandMainScreenOverlay(MainScreenOverlay::ShowComms);
                 onscreen_comms_active = true;
             }
             closePopup();
@@ -118,7 +118,7 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         {
             if (my_spaceship)
             {
-                my_spaceship->commandMainScreenOverlay(MSO_HideComms);
+                my_spaceship->commandMainScreenOverlay(MainScreenOverlay::HideComms);
                 onscreen_comms_active = false;
             }
             closePopup();

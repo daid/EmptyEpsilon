@@ -371,6 +371,8 @@ set(MAIN_SOURCES
     src/components/target.h
     src/components/missiletubes.h
     src/components/selfdestruct.h
+    src/components/player.h
+    src/components/player.cpp
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/shipsystemssystem.h

@@ -5,6 +5,7 @@
 #include "scanProbe.h"
 #include "commsScriptInterface.h"
 #include "playerInfo.h"
+#include "components/player.h"
 #include <iostream>
 
 class ScanProbe;
@@ -21,14 +22,6 @@ enum ECommsState
     CS_ChannelFailed,     // Comms failed to connect
     CS_ChannelBroken,     // Comms broken by other side
     CS_ChannelClosed      // Comms manually closed
-};
-
-enum EAlertLevel
-{
-    AL_Normal,      // No alert state
-    AL_YellowAlert, // Yellow
-    AL_RedAlert,    // Red
-    AL_MAX          // ?
 };
 
 class PlayerSpaceship : public SpaceShip
@@ -79,8 +72,6 @@ public:
 
     // Ship automation features, mostly for single-person ships like fighters
     bool auto_repair_enabled;
-    // Password to join a ship. Default is empty.
-    string control_code;
 
 private:
     bool on_new_player_ship_called=false;
@@ -124,13 +115,6 @@ public:
     ScriptSimpleCallback on_probe_launch;
     ScriptSimpleCallback on_probe_link;
     ScriptSimpleCallback on_probe_unlink;
-
-    // Main screen content
-    EMainScreenSetting main_screen_setting;
-    // Content overlaid on the main screen, such as comms
-    EMainScreenOverlay main_screen_overlay;
-
-    EAlertLevel alert_level;
 
     int32_t linked_science_probe_id = -1;
 
@@ -220,8 +204,8 @@ public:
     void commandFireTube(int8_t tubeNumber, float missile_target_angle);
     void commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target);
     void commandSetShields(bool enabled);
-    void commandMainScreenSetting(EMainScreenSetting mainScreen);
-    void commandMainScreenOverlay(EMainScreenOverlay mainScreen);
+    void commandMainScreenSetting(MainScreenSetting mainScreen);
+    void commandMainScreenOverlay(MainScreenOverlay mainScreen);
     void commandScan(P<SpaceObject> object);
     void commandSetSystemPowerRequest(ShipSystem::Type system, float power_level);
     void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
@@ -248,7 +232,7 @@ public:
     void commandLaunchProbe(glm::vec2 target_position);
     void commandScanDone();
     void commandScanCancel();
-    void commandSetAlertLevel(EAlertLevel level);
+    void commandSetAlertLevel(AlertLevel level);
     void commandHackingFinished(P<SpaceObject> target, ShipSystem::Type target_system);
     void commandCustomFunction(string name);
 
@@ -264,7 +248,7 @@ public:
     void setAutoCoolant(bool active) {} //TODO
     int getRepairCrewCount();
     void setRepairCrewCount(int amount);
-    EAlertLevel getAlertLevel() { return alert_level; }
+    AlertLevel getAlertLevel() { return AlertLevel::Normal; } // TODO
 
     // Flow rate controls.
     float getEnergyShieldUsePerSecond() const { return 0.0f; } //TODO
@@ -297,7 +281,7 @@ public:
     glm::vec2 getWaypoint(int index) { if (index > 0 && index <= int(waypoints.size())) return waypoints[index - 1]; return glm::vec2(0, 0); }
 
     // Ship control code/password setter
-    void setControlCode(string code) { control_code = code.upper(); }
+    void setControlCode(string code) { } // TODO
 
     // Radar function
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
@@ -306,15 +290,10 @@ public:
     virtual string getExportLine() override;
 };
 REGISTER_MULTIPLAYER_ENUM(ECommsState);
-template<> int convert<EAlertLevel>::returnType(lua_State* L, EAlertLevel l);
-template<> void convert<EAlertLevel>::param(lua_State* L, int& idx, EAlertLevel& al);
-REGISTER_MULTIPLAYER_ENUM(EAlertLevel);
 
 static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const PlayerSpaceship::CustomShipFunction& csf) { return packet << uint8_t(csf.type) << uint8_t(csf.crew_position) << csf.name << csf.caption; } \
 static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, PlayerSpaceship::CustomShipFunction& csf) { int8_t tmp; packet >> tmp; csf.type = PlayerSpaceship::CustomShipFunction::Type(tmp); packet >> tmp; csf.crew_position = ECrewPosition(tmp); packet >> csf.name >> csf.caption; return packet; }
 
-string alertLevelToString(EAlertLevel level);
-string alertLevelToLocaleString(EAlertLevel level);
-
 static inline bool operator < (const PlayerSpaceship::CustomShipFunction& a, const PlayerSpaceship::CustomShipFunction& b) {return (a.order < b.order);}
+
 #endif//PLAYER_SPACESHIP_H

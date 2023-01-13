@@ -4,9 +4,7 @@
 #include "components/impulse.h"
 #include "components/jumpdrive.h"
 #include "components/warpdrive.h"
-#include "spaceObjects/spaceship.h"
-#include "spaceObjects/playerSpaceship.h"
-#include "spaceObjects/cpuShip.h"
+#include "components/reactor.h"
 #include "spaceObjects/warpJammer.h"
 #include "ecs/query.h"
 #include "random.h"
@@ -14,9 +12,8 @@
 
 void JumpSystem::update(float delta)
 {
-    for(auto [entity, jump, position, physics, obj] : sp::ecs::Query<JumpDrive, sp::Transform, sp::Physics, SpaceObject*>())
+    for(auto [entity, jump, position, physics] : sp::ecs::Query<JumpDrive, sp::Transform, sp::Physics>())
     {
-        SpaceShip* ship = dynamic_cast<SpaceShip*>(obj);
         if (jump.delay > 0.0f)
         {
             if (WarpJammer::isWarpJammed(position.getPosition()))
@@ -58,7 +55,8 @@ void JumpSystem::update(float delta)
                 if (jump.charge < jump.max_distance)
                 {
                     float extra_charge = (delta / jump.charge_time * jump.max_distance) * f;
-                    if (ship->useEnergy(extra_charge * jump.energy_per_km_charge / 1000.0f))
+                    auto reactor = entity.getComponent<Reactor>();
+                    if (!reactor || reactor->useEnergy(extra_charge * jump.energy_per_km_charge / 1000.0f))
                     {
                         jump.charge += extra_charge;
                         if (jump.charge >= jump.max_distance)

@@ -849,7 +849,7 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     control_code = new GuiTextEntry(left_col, "", "");
     control_code->setSize(GuiElement::GuiSizeMax, 50);
     control_code->callback([this](string text) {
-        target->control_code = text.upper();
+        //TODO: target->control_code = text.upper();
     });
 
     // Edit reputation.
@@ -951,7 +951,7 @@ void GuiShipTweakPlayer::open(P<SpaceObject> target)
     if (player)
     {
         // Read ship's control code.
-        control_code->setText(player->control_code);
+        //TODO: control_code->setText(player->control_code);
 
         // Set and snap boost speed slider to current value
         //TODO: combat_maneuver_boost_speed_slider->setValue(player->combat_maneuver_boost_speed);

@@ -24,14 +24,15 @@ void GuiViewportMainScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
+        auto pc = my_spaceship->entity.getComponent<PlayerControl>();
         P<SpaceObject> target_ship = my_spaceship->getTarget();
         float target_camera_yaw = my_spaceship->getRotation();
-        switch(my_spaceship->main_screen_setting)
+        switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
-        case MSS_Back: target_camera_yaw += 180; break;
-        case MSS_Left: target_camera_yaw -= 90; break;
-        case MSS_Right: target_camera_yaw += 90; break;
-        case MSS_Target:
+        case MainScreenSetting::Back: target_camera_yaw += 180; break;
+        case MainScreenSetting::Left: target_camera_yaw -= 90; break;
+        case MainScreenSetting::Right: target_camera_yaw += 90; break;
+        case MainScreenSetting::Target:
             if (target_ship)
             {
                 auto target_camera_diff = my_spaceship->getPosition() - target_ship->getPosition();

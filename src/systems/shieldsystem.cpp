@@ -12,7 +12,7 @@ void ShieldSystem::update(float delta)
     {
         // If shields are calibrating, tick the calibration delay. Factor shield
         // subsystem effectiveness when determining the tick rate.
-        if (shields.calibration_delay > 0.0) {
+        if (shields.calibration_delay > 0.0f) {
             shields.calibration_delay -= delta * (shields.front_system.getSystemEffectiveness() * shields.rear_system.getSystemEffectiveness()) * 0.5f;
             shields.active = false;
         }
