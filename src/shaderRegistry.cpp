@@ -41,6 +41,7 @@ namespace ShaderRegistry
             "view",
             "camera_position",
             "atmosphereColor",
+            "illuminationModulation",
             
             "textureMap",
             "baseMap",

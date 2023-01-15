@@ -18,6 +18,7 @@ REGISTER_SCRIPT_CLASS(ModelData)
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setSpecular);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setIllumination);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setRenderOffset);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, modulateIllumination);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setScale);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setCollisionBox);
@@ -68,6 +69,11 @@ void ModelData::setTexture(string texture_name)
 void ModelData::setIllumination(string illumination_texture_name)
 {
     this->illumination_texture_name = illumination_texture_name;
+}
+
+void ModelData::modulateIllumination(const glm::vec4& modulation)
+{
+    illumination_modulation = modulation;
 }
 
 void ModelData::setRenderOffset(glm::vec3 mesh_offset)
@@ -231,6 +237,7 @@ void ModelData::render(const glm::mat4& model_matrix)
     {
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
         illumination_texture->bind();
+        glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::IlluminationModulation), 1, glm::value_ptr(illumination_modulation));
     }
 
     // Draw

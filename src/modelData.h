@@ -40,6 +40,7 @@ private:
 
     Mesh* mesh;
     glm::vec3 mesh_offset{};
+    glm::vec4 illumination_modulation{ 1.f, 1.f, 1.f, 1.f };
     sp::Texture* texture;
     sp::Texture* specular_texture;
     sp::Texture* illumination_texture;
@@ -79,6 +80,11 @@ public:
      * Set the Illumination texture (by name)
      */
     void setIllumination(string illumination_texture_name);
+
+    /*! Set the illumination modulation.
+    * To achieve blinking effects, color shifting etc.
+    */
+    void modulateIllumination(const glm::vec4& modulation);
 
     /*!
      * \brief Set the offset by which this model data needs to be rendered.
