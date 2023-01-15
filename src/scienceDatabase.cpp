@@ -15,7 +15,7 @@
 /// Each child ScienceDatabase entry is displayed only when its parent entry is selected.
 ///
 /// By default, EmptyEpsilon creates parentless entries for Factions, "Natural" (terrain), Ships, and Weapons.
-/// Their child entries are populated by EmptyEpsilon, or by the contents of script-defined objects such as ShipTemplates and FactionInfo.
+/// Their child entries are populated by EmptyEpsilon upon launching a scenario, either with hardcoded details or the contents of script-defined objects such as ShipTemplates and FactionInfo.
 /// Entries for ShipTemplates are also linked to from Science radar info of scanned ships of that template.
 ///
 /// Each ScienceDatabase entry has a unique identifier regardless of its displayed order, and multiple entries can have the same name.
@@ -336,9 +336,9 @@ static int queryScienceDatabaseById(lua_State* L)
 }
 
 /// P<ScienceDatabase> queryScienceDatabaseById(int id)
-/// Return a ScienceDatabase entry by its unique multiplayer_id.
+/// Returns the ScienceDatabase entry with the given unique multiplayer_id.
 /// Returns nil if no entry is found.
-/// Example: local mine_db = queryScienceDatabaseById(4);
+/// Example: queryScienceDatabaseById(4) -- returns the entry with ID 4
 REGISTER_SCRIPT_FUNCTION(queryScienceDatabaseById);
 
 static int queryScienceDatabase(lua_State* L)
@@ -361,9 +361,10 @@ static int queryScienceDatabase(lua_State* L)
 }
 
 /// P<ScienceDatabase> queryScienceDatabase(std::vector<string> path)
-/// finds a ScienceDatabase entry by its case-insensitive name. You have to give the full path to the entry by using multiple arguments.
+/// Returns the first ScienceDatabase entry with a matching case-insensitive name within the ScienceDatabase hierarchy.
+/// You must provide the full path to the entry by using multiple arguments, starting with the top-level entry.
 /// Returns nil if no entry is found.
-/// e.g. local mine_db = queryScienceDatabase("Natural", "Mine")
+/// Example: queryScienceDatabase("natural", "mine") -- returns the entry named "Mine" with the parent named "Natural"
 REGISTER_SCRIPT_FUNCTION(queryScienceDatabase);
 
 static int getScienceDatabases(lua_State* L)
@@ -381,7 +382,12 @@ static int getScienceDatabases(lua_State* L)
 }
 
 /// PVector<ScienceDatabase> getScienceDatabases()
-/// get all ScienceDatabases that do not have a parent. Use getEntries() or getEntryByName() to navigate.
+/// Returns a 1-indexed table of all ScienceDatabase entries that don't have a parent entry.
+/// Use ScienceDatabase:getEntries() or ScienceDatabase:getEntryByName() to inspect the result.
+/// See also queryScienceDatabase().
+/// Example:
+/// sdbs = getScienceDatabases() -- returns all top-level science databases
+/// entry = sdbs[1] -- returns the first top-level entry
 REGISTER_SCRIPT_FUNCTION(getScienceDatabases);
 
 static string directionLabel(float direction)
