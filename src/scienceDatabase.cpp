@@ -15,7 +15,7 @@
 /// Each child ScienceDatabase entry is displayed only when its parent entry is selected.
 ///
 /// By default, EmptyEpsilon creates parentless entries for Factions, "Natural" (terrain), Ships, and Weapons.
-/// Their child entries are populated by EmptyEpsilon, or by the contents of script-defined objects such as ShipTemplates and FactionInfo.
+/// Their child entries are populated by EmptyEpsilon upon launching a scenario, either with hardcoded details or the contents of script-defined objects such as ShipTemplates and FactionInfo.
 /// Entries for ShipTemplates are also linked to from Science radar info of scanned ships of that template.
 ///
 /// Each ScienceDatabase entry has a unique identifier regardless of its displayed order, and multiple entries can have the same name.
