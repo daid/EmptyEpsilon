@@ -379,12 +379,12 @@ class DocumentationGenerator(object):
                     f = definition.addFunction("isValid")
                     f.parameters = ""
                     f.return_type = "boolean"
-                    f.description = "Check if this is still looking at a valid object. Returns false when the objects that this variable references is destroyed."
+                    f.description = "Returns whether this object is still valid. Returns false if this object was destroyed or doesn't exist."
                     f = definition.addFunction("destroy")
                     f.parameters = ""
                     f.description = "Removes this object from the game."
                     f = definition.addMember("typeName")
-                    f.description = 'Returns the class name of this object, this is not a function, but a direct member: if object.typeName == "Mine" then print("MINE!") end'
+                    f.description = 'Returns the class name of this object. This is not a function, but a direct member. Example: if object.typeName == "Mine" then print("MINE!") end'
 
     def generateDocs(self, stream):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
@@ -516,7 +516,7 @@ rel="stylesheet"
         stream.write('<li><a name="enum_Factions">Factions</a>: "Independent", "Kraylor", "Arlenians", "Exuari", "Ghosts", "Ktlitans", "TSN", "USN", "CUF" (<code>factionInfo.lua</code>)</li>\n')
         stream.write('<li><a name="enum_ScriptSimpleCallback">ScriptSimpleCallback</a> / function: Note that the callback function must reference something global, otherwise you get an error like "??[convert&lt;ScriptSimpleCallback&gt;::param] Upvalue 1 of function is not a table...". Use e.g. `math.abs(0) -- Provides global context for SeriousProton` to do nothing.</li>\n')
         stream.write("</ul>\n")
-        stream.write("<p>Note that most <code>SpaceObject</code>s directly switch to fully scanned, only <code>SpaceShips</code>s go through all the states.</p>")
+        stream.write("<p>Note that most <code>SpaceObject</code>s directly switch to fully scanned, only <code>SpaceShip</code>s go through all the states.</p>")
         stream.write("</div>\n")
 
         stream.write('<div class="section">')

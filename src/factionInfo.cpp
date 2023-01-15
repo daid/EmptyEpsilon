@@ -43,12 +43,12 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction.
     /// Defaults to no hostile factions.
     /// Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
-    /// Example: faction;setEnemy("Exuari") -- sets the Exuari to appear as hostile to this faction
+    /// Example: faction:setEnemy("Exuari") -- sets the Exuari to appear as hostile to this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
     /// Sets the given faction to appear as friendly to SpaceObjects of this faction.
     /// For example, PlayerSpaceships of this faction can gain reputation with it.
     /// Defaults to no friendly factions.
-    /// Example: faction;setFriendly("Human Navy") -- sets the Human Navy to appear as friendly to this faction
+    /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to appear as friendly to this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
 }
 
