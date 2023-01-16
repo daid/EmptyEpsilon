@@ -15,7 +15,7 @@
 /// Each child ScienceDatabase entry is displayed only when its parent entry is selected.
 ///
 /// By default, EmptyEpsilon creates parentless entries for Factions, "Natural" (terrain), Ships, and Weapons.
-/// Their child entries are populated by EmptyEpsilon upon launching a scenario, either with hardcoded details or the contents of script-defined objects such as ShipTemplates and FactionInfo.
+/// Their child entries are populated by EmptyEpsilon upon launching a scenario, either with hardcoded details, entries loaded from scripts/science_db.lua, or the contents of script-defined objects such as ShipTemplates and FactionInfo.
 /// Entries for ShipTemplates are also linked to from Science radar info of scanned ships of that template.
 ///
 /// Each ScienceDatabase entry has a unique identifier regardless of its displayed order, and multiple entries can have the same name.
@@ -418,10 +418,13 @@ void flushDatabaseData()
     }
 }
 
+// Populate default ScienceDatabase entries.
 void fillDefaultDatabaseData()
 {
+    // Populate the Factions top-level entry.
     P<ScienceDatabase> factionDatabase = new ScienceDatabase();
     factionDatabase->setName(tr("database", "Factions"));
+
     for(unsigned int n=0; n<factionInfo.size(); n++)
     {
         if (!factionInfo[n])
@@ -445,21 +448,28 @@ void fillDefaultDatabaseData()
         entry->setLongDescription(factionInfo[n]->getDescription());
     }
 
-    P<ScienceDatabase> shipDatabase = new ScienceDatabase();
-    shipDatabase->setName(tr("database", "Ships"));
+    // Populate the Ships top-level entry.
+    P<ScienceDatabase> ship_database = new ScienceDatabase();
+    ship_database->setName(tr("database", "Ships"));
+    ship_database->setLongDescription(tr("Spaceships are vessels capable of withstanding the dangers of travel through deep space. They can fill many functions and vary broadly in size, from small tugs to massive dreadnoughts."));
 
     std::vector<string> template_names = ShipTemplate::getTemplateNameList(ShipTemplate::Ship);
     std::sort(template_names.begin(), template_names.end());
 
     std::vector<string> class_list;
     std::set<string> class_set;
+
+    // Populate list of ship hull classes
     for(string& template_name : template_names)
     {
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
+
         if (!ship_template->visible)
             continue;
+
         string class_name = ship_template->getClass();
         string subclass_name = ship_template->getSubClass();
+
         if (class_set.find(class_name) == class_set.end())
         {
             class_list.push_back(class_name);
@@ -468,13 +478,15 @@ void fillDefaultDatabaseData()
     }
 
     std::sort(class_list.begin(), class_list.end());
-
     std::map<string, P<ScienceDatabase> > class_database_entries;
+
+    // Populate each ship hull class with members
     for(string& class_name : class_list)
     {
-        class_database_entries[class_name] = shipDatabase->addEntry(class_name);
+        class_database_entries[class_name] = ship_database->addEntry(class_name);
     }
 
+    // Populate each ship's entry
     for(string& template_name : template_names)
     {
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
@@ -488,6 +500,7 @@ void fillDefaultDatabaseData()
         entry->addKeyValue(tr("database", "Class"), ship_template->getClass());
         entry->addKeyValue(tr("database", "Sub-class"), ship_template->getSubClass());
         entry->addKeyValue(tr("database", "Size"), string(int(ship_template->model_data->getRadius())));
+
         if (ship_template->shield_count > 0)
         {
             string shield_info = "";
@@ -499,6 +512,7 @@ void fillDefaultDatabaseData()
             }
             entry->addKeyValue(tr("database", "Shield"), shield_info);
         }
+
         entry->addKeyValue(tr("Hull"), string(int(ship_template->hull)));
 
         if (ship_template->impulse_speed > 0.0f)
@@ -517,6 +531,7 @@ void fillDefaultDatabaseData()
         {
             entry->addKeyValue(tr("database", "Jump range"), string(ship_template->jump_drive_min_distance / 1000, 0) + " - " + string(ship_template->jump_drive_max_distance / 1000, 0) + " u");
         }
+
         for(int n=0; n<max_beam_weapons; n++)
         {
             if (ship_template->beams[n].getRange() > 0)
@@ -530,6 +545,7 @@ void fillDefaultDatabaseData()
                 );
             }
         }
+
         for(int n=0; n<ship_template->weapon_tube_count; n++)
         {
             string key = tr("database", "{direction} tube");
@@ -546,6 +562,7 @@ void fillDefaultDatabaseData()
                 tr("database", "{loadtime} sec").format({{"loadtime", string(int(ship_template->weapon_tube[n].load_time))}})
             );
         }
+
         for(int n=0; n < MW_Count; n++)
         {
             if (ship_template->weapon_storage[n] > 0)
@@ -553,10 +570,60 @@ void fillDefaultDatabaseData()
                 entry->addKeyValue(tr("Storage {weapon}").format({{"weapon", getLocaleMissileWeaponName(EMissileWeapons(n))}}), string(ship_template->weapon_storage[n]));
             }
         }
+
         if (ship_template->getDescription().length() > 0)
             entry->setLongDescription(ship_template->getDescription());
     }
+
+    // Populate the Stations top-level entry.
+    P<ScienceDatabase> stations_database = new ScienceDatabase();
+    stations_database->setName(tr("database", "Stations"));
+    stations_database->setLongDescription(tr("Space stations are permanent, immobile structures ranging in scale from small outposts to city-sized communities. Many provide restocking and repair services to neutral and friendly ships."));
+
+    std::vector<string> station_names = ShipTemplate::getTemplateNameList(ShipTemplate::Station);
+    std::sort(template_names.begin(), template_names.end());
+
+    // Populate each station's entry
+    for(string& station_name : station_names)
+    {
+        P<ShipTemplate> station_template = ShipTemplate::getTemplate(station_name);
+
+        if (!station_template->visible)
+        {
+            continue;
+        }
+
+        P<ScienceDatabase> entry = stations_database->addEntry(station_template->getLocaleName());
+
+        entry->setModelData(station_template->model_data);
+        entry->setImage(station_template->radar_trace);
+
+        if (station_template->shield_count > 0)
+        {
+            string shield_info = "";
+
+            for(int n = 0; n < station_template->shield_count; n++)
+            {
+                if (n > 0)
+                {
+                    shield_info += "/";
+                }
+
+                shield_info += string(int(station_template->shield_level[n]));
+            }
+
+            entry->addKeyValue(tr("database", "Shield"), shield_info);
+        }
+
+        entry->addKeyValue(tr("Hull"), string(int(station_template->hull)));
+
+        if (station_template->getDescription().length() > 0)
+        {
+            entry->setLongDescription(station_template->getDescription());
+        }
+    }
 #ifdef DEBUG
+    // If debug mode is enabled, populate the ModelData entry.
     P<ScienceDatabase> models_database = new ScienceDatabase();
     models_database->setName("Models (debug)");
     for(string name : ModelData::getModelDataNames())
