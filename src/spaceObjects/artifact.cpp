@@ -146,20 +146,20 @@ void Artifact::setRadarTraceColor(int r, int g, int b)
 
 void Artifact::onPickUp(ScriptSimpleCallback callback)
 {
-    auto pickup = entity.getOrAddComponent<PickupCallback>();
+    auto& pickup = entity.getOrAddComponent<PickupCallback>();
     pickup.callback = callback;
 }
 
 void Artifact::onCollision(ScriptSimpleCallback callback)
 {
-    auto cb = entity.getOrAddComponent<CollisionCallback>();
+    auto& cb = entity.getOrAddComponent<CollisionCallback>();
     cb.player = false;
     cb.callback = callback;
 }
 
 void Artifact::onPlayerCollision(ScriptSimpleCallback callback)
 {
-    auto cb = entity.getOrAddComponent<CollisionCallback>();
+    auto& cb = entity.getOrAddComponent<CollisionCallback>();
     cb.player = true;
     cb.callback = callback;
 }

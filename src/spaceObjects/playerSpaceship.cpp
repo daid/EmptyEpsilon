@@ -1023,7 +1023,7 @@ void PlayerSpaceship::setCanDock(bool enabled)
         //TODO: Undock first!
         entity.removeComponent<DockingPort>();
     } else {
-        auto port = entity.getOrAddComponent<DockingPort>();
+        auto& port = entity.getOrAddComponent<DockingPort>();
         port.dock_class = ship_template->getClass();
         port.dock_subclass = ship_template->getSubClass();
     }

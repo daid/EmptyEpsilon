@@ -98,26 +98,26 @@ void FactionInfoLegacy::setDescription(string description) { entity.getOrAddComp
 
 void FactionInfoLegacy::setEnemy(P<FactionInfoLegacy> other)
 {
-    auto mine = entity.getOrAddComponent<FactionInfo>();
+    auto& mine = entity.getOrAddComponent<FactionInfo>();
     if (!other)
     {
         LOG(WARNING) << "Tried to set an undefined faction to be an enemy of " << mine.name;
         return;
     }
-    auto their = other->entity.getOrAddComponent<FactionInfo>();
+    auto& their = other->entity.getOrAddComponent<FactionInfo>();
     mine.setRelation(other->entity, FactionRelation::Enemy);
     their.setRelation(entity, FactionRelation::Enemy);
 }
 
 void FactionInfoLegacy::setFriendly(P<FactionInfoLegacy> other)
 {
-    auto mine = entity.getOrAddComponent<FactionInfo>();
+    auto& mine = entity.getOrAddComponent<FactionInfo>();
     if (!other)
     {
         LOG(WARNING) << "Tried to set an undefined faction to be friendly with " << mine.name;
         return;
     }
-    auto their = other->entity.getOrAddComponent<FactionInfo>();
+    auto& their = other->entity.getOrAddComponent<FactionInfo>();
     mine.setRelation(other->entity, FactionRelation::Friendly);
     their.setRelation(entity, FactionRelation::Friendly);
 }

@@ -360,12 +360,12 @@ void ShipAI::updateTarget()
     // If we still don't have a target, set that on the owner.
     if (!target)
     {
-        owner->entity.getComponent<Target>()->target = {};
+        owner->entity.removeComponent<Target>();
     }
     // Otherwise, set the new target on the owner.
     else
     {
-        owner->entity.getComponent<Target>()->target = target->entity;
+        owner->entity.getOrAddComponent<Target>().target = target->entity;
     }
 }
 
