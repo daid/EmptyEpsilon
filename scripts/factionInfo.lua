@@ -1,6 +1,6 @@
 -- A FactionInfo object contains presentation details and faction relationships for member SpaceObjects.
 -- This file is loaded upon launching a scenario.
--- For details, see the FactionInfo class and and getFactionInfo() global function in the scripting reference.
+-- For details, see the FactionInfo class and getFactionInfo() global function in the scripting reference.
 neutral = FactionInfo():setName("Independent"):setLocaleName(_("Independent"))
 neutral:setGMColor(128, 128, 128)
 neutral:setDescription(_([[Despite appearing as a faction, independents are distinguished primarily by having no strong affiliation with any faction at all. Most traders consider themselves independent, though certain voices have started to speak up about creating a merchant faction.]]))
