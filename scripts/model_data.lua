@@ -1,3 +1,6 @@
+-- A ModelData object contains 3D appearance and SeriousProton physics collision details.
+-- This file is loaded when EmptyEpsilon is launched.
+-- For details, see the ModelData class in the scripting reference.
 model = ModelData()
 model:setName("space_station_4")
 model:setMesh("space_station_4/space_station_4.model")

@@ -17,8 +17,12 @@ struct VertexAndTexCoords
     glm::vec2 texcoords;
 };
 
-/// A blackhole has a 5km radius where it pulls in all near objects. At the center of the black hole everything gets a lot of damage.
-/// Which will lead to the eventual destruction of said object.
+/// A BlackHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
+/// A SpaceObject capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
+/// Upon reaching the center, any SpaceObject is instantly destroyed even if it's otherwise incapable of taking damage.
+/// AI behaviors avoid BlackHoles by a 2U margin.
+/// In 3D space, a BlackHole resembles a black sphere with blue horizon.
+/// Example: black_hole = BlackHole():setPosition(1000,2000)
 REGISTER_SCRIPT_SUBCLASS(BlackHole, SpaceObject)
 {
 }

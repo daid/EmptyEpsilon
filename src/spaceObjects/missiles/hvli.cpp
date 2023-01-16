@@ -3,7 +3,11 @@
 #include "spaceObjects/explosionEffect.h"
 #include "components/collision.h"
 
-/// HVLI missile
+/// An HVLI is a high-velocity lead impactor, a fancy name for an unguided bullet MissileWeapon that deals kinetic damage upon impact.
+/// Damage is reduced if the HVLI has been alive for less than 2 seconds.
+/// It inherits functions and behaviors from its parent MissileWeapon class.
+/// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
+/// Example: hvli = HVLI:setPosition(1000,1000):setRotation(90):setLifetime(40):setMissileSize("large")
 REGISTER_SCRIPT_SUBCLASS(HVLI, MissileWeapon)
 {
   //registered for typeName and creation

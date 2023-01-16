@@ -2435,20 +2435,18 @@ msgstr ""
 #, lua-format
 msgctxt "stationAssist-comms"
 msgid "Can you send a supply drop? (%d rep)"
-msgstr ""
-"Pouvez-vous nous envoyer une cargaison de réapprovisionnement ? (%d rep)"
+msgstr "Pouvez-vous nous envoyer une cargaison de ravitaillement ? (%d rep)"
 
 #: scripts/scenario_50_gaps.lua:3126
 msgctxt "stationAssist-comms"
 msgid "You need to set a waypoint before you can request backup."
 msgstr ""
-"Vous devez définir un marqueur avant de faire une demande de "
-"réapprovisionnement."
+"Vous devez définir un marqueur avant de faire une demande de ravitaillement."
 
 #: scripts/scenario_50_gaps.lua:3128
 msgctxt "stationAssist-comms"
 msgid "To which waypoint should we deliver your supplies?"
-msgstr "À quel marqueur devons-nous envoyer le réapprovisionnement ?"
+msgstr "À quel marqueur devons-nous envoyer le ravitaillement ?"
 
 #: scripts/scenario_50_gaps.lua:3130 scripts/scenario_50_gaps.lua:3156
 #, lua-format
@@ -2462,7 +2460,7 @@ msgctxt "stationAssist-comms"
 msgid "We have dispatched a supply ship toward WP %d"
 msgstr ""
 "Nous venons de déployer un vaisseau qui vous déposera la capsule de "
-"réapprovisionnement au marqueur %d."
+"ravitaillement au marqueur %d."
 
 #: scripts/scenario_50_gaps.lua:3140 scripts/scenario_50_gaps.lua:3161
 msgctxt "needRep-comms"

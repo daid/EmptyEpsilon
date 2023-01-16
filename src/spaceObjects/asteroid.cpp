@@ -15,15 +15,20 @@
 
 #include <glm/ext/matrix_transform.hpp>
 
-/// An asteroid in space. Which you can fly into and hit. Will do damage.
+/// An Asteroid is an inert piece of space terrain.
+/// Upon collision with another SpaceObject, it deals damage and is destroyed.
+/// It has a default rotation speed, random z-offset, and model, and AI behaviors attempt to avoid hitting them.
+/// To create a customizable object with more complex actions upon collisions, use an Artifact or SupplyDrop.
+/// For a purely decorative asteroid positioned outside of the movement plane, use a VisualAsteroid.
+/// Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
 REGISTER_SCRIPT_SUBCLASS(Asteroid, SpaceObject)
 {
-    /// Set the radius of this asteroid
-    /// The default radius for an asteroid is between 110 and 130
-    /// Example: Asteroid():setSize(50)
+    /// Sets this Asteroid's radius.
+    /// Defaults to a random value between 110 and 130.
+    /// Example: asteroid:setSize(150)
     REGISTER_SCRIPT_CLASS_FUNCTION(Asteroid, setSize);
-    /// Gets the current radius of this asteroid
-    /// Example: local size=Asteroid():getSize()
+    /// Returns this Asteroid's radius.
+    /// Example: asteroid:getSize()
     REGISTER_SCRIPT_CLASS_FUNCTION(Asteroid, getSize);
 }
 
@@ -122,15 +127,17 @@ glm::mat4 Asteroid::getModelMatrix() const
     return glm::scale(asteroid_matrix, glm::vec3(size));
 }
 
-/// An asteroid in space. Outside of hit range, just for visuals.
+/// A VisualAsteroid is an inert piece of space terrain positioned above or below the movement plane.
+/// For an asteroid that ships might collide with, use an Asteroid.
+/// Example: vasteroid = VisualAsteroid():setSize(150):setPosition(1000,2000)
 REGISTER_SCRIPT_SUBCLASS(VisualAsteroid, SpaceObject)
 {
-    /// Set the radius of this asteroid
-    /// The default radius for an VisualAsteroid is between 110 and 130
-    /// Example: VisualAsteroid():setSize(50)
+    /// Sets this VisualAsteroid's radius.
+    /// Defaults to a random value between 110 and 130.
+    /// Example: vasteroid:setSize(150)
     REGISTER_SCRIPT_CLASS_FUNCTION(VisualAsteroid, setSize);
-    /// Gets the current radius of this asteroid
-    /// Example: local size=VisualAsteroid():getSize()
+    /// Returns this VisualAsteroid's radius.
+    /// Example: vasteroid():getSize()
     REGISTER_SCRIPT_CLASS_FUNCTION(VisualAsteroid, getSize);
 }
 

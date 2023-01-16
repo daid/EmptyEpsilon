@@ -3,7 +3,11 @@
 #include "spaceObjects/electricExplosionEffect.h"
 #include "pathPlanner.h"
 
-/// EMP missile
+/// An EMPMissile is an electromagnetic pulse MissileWeapon that pursues a target and, upon explosion, deals a base of 30-160 EMP damage to shields within its 1U base blast radius.
+/// It inherits functions and behaviors from its parent MissileWeapon class.
+/// Missiles can be fired by SpaceShips or created by scripts, and their damage and blast radius can be modified by missile size.
+/// AI behaviors attempt to avoid EMPMissiles.
+/// Example: emp_missile = EMPMissile:setPosition(1000,1000):setTarget(enemy):setLifetime(40):setMissileSize("large")
 REGISTER_SCRIPT_SUBCLASS(EMPMissile, MissileWeapon)
 {
   //registered for typeName and creation
