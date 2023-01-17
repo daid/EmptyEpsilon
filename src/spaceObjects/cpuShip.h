@@ -65,6 +65,7 @@ public:
     float missile_resupply;
 };
 string getAIOrderString(EAIOrder order);
+string getLocaleAIOrderString(EAIOrder order);
 
 template<> int convert<EAIOrder>::returnType(lua_State* L, EAIOrder o);
 
