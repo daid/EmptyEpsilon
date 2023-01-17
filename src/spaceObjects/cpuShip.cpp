@@ -323,7 +323,7 @@ void CpuShip::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, floa
 std::unordered_map<string, string> CpuShip::getGMInfo()
 {
     std::unordered_map<string, string> ret = SpaceShip::getGMInfo();
-    ret[trMark("gm_info", "Orders")] = getAIOrderString(orders);
+    ret[trMark("gm_info", "Orders")] = getLocaleAIOrderString(orders);
     return ret;
 }
 
