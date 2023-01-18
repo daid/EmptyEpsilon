@@ -23,7 +23,7 @@
 
 /// A SpaceShip is a ShipTemplateBasedObject controlled by either the AI (CpuShip) or players (PlayerSpaceship).
 /// It can carry and deploy weapons, dock with or carry docked ships, and move using impulse, jump, or warp drives.
-/// It's also subject to collision physics, unlike SpaceStations.
+/// It's also subject to being moved by collision physics, unlike SpaceStations, which remain stationary.
 /// This is the parent class of CpuShip and PlayerSpaceship objects, which inherit all STBO and SpaceShip functions.
 /// Objects of this class can't be created by scripts, but its child classes can.
 REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
@@ -115,7 +115,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getMaxEnergy()
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getMaxEnergy);
     /// Sets this SpaceShip's energy capacity.
-    /// CpuShips and SpaceStations don't consume energy. Setting this has no effect on them.
+    /// CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
+    /// For PlayerSpaceships, see PlayerSpaceship:setEnergyLevelMax().
     /// Example: ship:setMaxEnergy(800)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setMaxEnergy);
     /// Returns this SpaceShip's energy level.
@@ -124,6 +125,8 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Sets this SpaceShip's energy level.
     /// Valid values are any greater than 0 and less than the energy capacity (getMaxEnergy()).
     /// Invalid values are ignored.
+    /// CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
+    /// For PlayerSpaceships, see PlayerSpaceship:setEnergyLevel().
     /// Example: ship:setEnergy(1000) -- sets the ship's energy to 1000 if its capacity is 1000 or more
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setEnergy);
     /// Returns whether this SpaceShip has the given system.
@@ -160,7 +163,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getSystemHeat("impulse")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeat);
     /// Sets the given system's heat level on this SpaceShip.
-    /// CpuShips and SpaceStations don't generate or manage heat. Setting this has no effect on them.
+    /// CpuShips don't generate or manage heat. Setting this has no effect on them.
     /// Valid range is 0.0 (fully disabled) to 1.0 (undamaged).
     /// Example: ship:setSystemHeat("impulse", 0.5) -- sets the ship's impulse drive heat to half of capacity
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeat);
@@ -168,7 +171,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getSystemHeatRate("impulse")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemHeatRate);
     /// Sets the given system's rate of heating or cooling, in percent (0.01 = 1%) per second?, on this SpaceShip.
-    /// CpuShips and SpaceStations don't generate or manage heat. Setting this has no effect on them.
+    /// CpuShips don't generate or manage heat. Setting this has no effect on them.
     /// Example: ship:setSystemHeatRate("impulse", 0.05)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemHeatRate);
     /// Returns the given system's power level on this SpaceShip.
@@ -183,7 +186,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getSystemPowerRate("impulse")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerRate);
     /// Sets the given system's rate of consuming power, in points per second?, in this SpaceShip.
-    /// CpuShips and SpaceStations don't consume energy. Setting this has no effect.
+    /// CpuShips don't consume energy. Setting this has no effect.
     /// Example: ship:setSystemPowerRate("impulse", 0.4)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerRate);
     /// Returns the relative power drain factor for the given system.
@@ -191,7 +194,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemPowerFactor);
     /// Sets the relative power drain factor? for the given system in this SpaceShip.
     /// "reactor" has a negative value because it generates power rather than draining it.
-    /// CpuShips and SpaceStations don't consume energy. Setting this has no effect.
+    /// CpuShips don't consume energy. Setting this has no effect.
     /// Example: ship:setSystemPowerFactor("impulse", 4)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemPowerFactor);
     /// Returns the coolant distribution for the given system in this SpaceShip.
@@ -199,7 +202,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getSystemCoolant("impulse")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolant);
     /// Sets the coolant quantity for the given system in this SpaceShip.
-    /// CpuShips and SpaceStations don't generate or manage heat. Setting this has no effect on them.
+    /// CpuShips don't generate or manage heat. Setting this has no effect on them.
     /// Valid range is 0.0 (none) to 1.0 (capacity).
     /// Example: ship:setSystemPowerFactor("impulse", 4)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolant);
@@ -207,7 +210,7 @@ REGISTER_SCRIPT_SUBCLASS_NO_CREATE(SpaceShip, ShipTemplateBasedObject)
     /// Example: ship:getSystemCoolantRate("impulse")
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, getSystemCoolantRate);
     /// Sets the rate at which the given system in this SpaceShip takes coolant, in points per second?
-    /// CpuShips and SpaceStations don't generate or manage heat. Setting this has no effect on them.
+    /// CpuShips don't generate or manage heat. Setting this has no effect on them.
     /// Example: ship:setSystemCoolantRate("impulse", 1.2)
     REGISTER_SCRIPT_CLASS_FUNCTION(SpaceShip, setSystemCoolantRate);
     /// Returns this SpaceShip's forward and reverse impulse speed limits.
