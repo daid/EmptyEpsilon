@@ -84,20 +84,17 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Example: player:isCommsScriptOpen()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, isCommsScriptOpen);
 
-    /// Sets this PlayerSpaceship's energy level.
-    /// Values are limited from 0 to the energy level max. Negative or excess values are capped to the limits.
-    /// Example: player:setEnergyLevel(1000) -- sets the ship's energy to either 1000 or the max limit, whichever is lower
+    /// [DEPRECATED]
+    /// As SpaceShip:setEnergy()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevel);
-    /// Sets this PlayerSpaceship's energy capacity.
-    /// Valid values are 0 or any positive number.
-    /// If the new limit is lower than the ship's current energy level, this also reduces the energy level.
-    /// Example: player:setEnergyLevelMax(1000) -- sets the ship's energy limit to 1000
+    /// [DEPRECATED]
+    /// As SpaceShip:setMaxEnergy()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevelMax);
-    /// Returns this PlayerSpaceship's energy level.
-    /// Example: player:getEnergyLevel()
+    /// [DEPRECATED]
+    /// As SpaceShip:getEnergy()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
-    /// Returns this PlayerSpaceship's energy capacity.
-    /// Example: player:getEnergyLevelMax()
+    /// [DEPRECATED]
+    /// As SpaceShip:getMaxEnergy()
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
 
     /// Returns how much energy is consumed per second by this PlayerSpaceship's shields while active.
