@@ -5,7 +5,7 @@
 ---
 --- Get the player ship access codes from the GM screen after you generate the terrain
 ---
---- Version 2
+--- Version 2.1
 -- Type: PvP
 -- Setting[Difficulty]: Determines the degree the environment helps or hinders the players
 -- Difficulty[Normal|Default]: Normal difficulty
@@ -157,7 +157,7 @@ function getFilenameCompatible(new_filename)
 end
 
 function init()
-	scenario_version = "1.0.2"
+	scenario_version = "2.1"
 	print(string.format("Scenario version %s",scenario_version))
 	print(_VERSION)
 	setVariations()
@@ -975,25 +975,45 @@ function setStaticScienceDatabase()
 --	Template ship category descriptions: text from other shipTemplates... files  --
 -----------------------------------------------------------------------------------
 	local ships_db = queryScienceDatabase("Ships")
+	if ships_db == nil then
+		ships_db = ScienceDatabase():setName("Ships")
+	end
 	local fighter_db = queryScienceDatabase("Ships","Starfighter")
+	if fighter_db == nil then
+		ships_db:addEntry("Starfighter")
+		fighter_db = queryScienceDatabase("Ships","Starfighter")
+	end
 	local generic_starfighter_description = "Starfighters are single to 3 person small ships. These are most commonly used as light firepower roles.\nThey are common in larger groups, and need a close by station or support ship, as they lack long time life support.\nIt's rare to see starfighters with more then one shield section.\n\nOne of the most well known starfighters is the X-Wing.\n\nStarfighters come in 3 subclasses:\n* Interceptors: Fast, low on firepower, high on manouverability\n* Gunship: Equipped with more weapons, but trades in manouverability because of it.\n* Bomber: Slowest of all starfighters, but pack a large punch in a small package. Usually come without any lasers, but the largers bombers have been known to deliver nukes."
 	fighter_db:setLongDescription(generic_starfighter_description)
 	local frigate_db = queryScienceDatabase("Ships","Frigate")
+	if frigate_db == nil then
+		ships_db:addEntry("Frigate")
+		frigate_db = queryScienceDatabase("Ships","Frigate")
+	end
 	local generic_frigate_description = "Frigates are one size up from starfighters. They require a crew from 3 to 20 people.\nThink, Firefly, millennium falcon, slave I (Boba fett's ship).\n\nThey generally have 2 or more shield sections, but hardly ever more than 4.\n\nThis class of ships is normally not fitted with jump or warp drives. But in some cases ships are modified to include these, or for certain roles it is built in.\n\nThey are divided in 3 different sub-classes:\n* Cruiser: Weaponized frigates, focused on combat. These come in various roles.\n* Light transport: Small transports, like transporting up to 50 soldiers in spartan conditions or a few diplomats in luxury. Depending on the role it can have some weaponry.\n* Support: Support types come in many varieties. They are simply a frigate hull fitted with whatever was needed. Anything from mine-layers to science vessels."
 	frigate_db:setLongDescription(generic_frigate_description)
 	local corvette_db = queryScienceDatabase("Ships","Corvette")
+	if corvette_db == nil then
+		ships_db:addEntry("Corvette")
+		corvette_db = queryScienceDatabase("Ships","Corvette")
+	end
 	local generic_corvette_description = "Corvettes are the common large ships. Larger then a frigate, smaller then a dreadnaught.\nThey generally have 4 or more shield sections. Run with a crew of 20 to 250.\nThis class generally has jumpdrives or warpdrives. But lack the maneuverability that is seen in frigates.\n\nThey come in 3 different subclasses:\n* Destroyer: Combat oriented ships. No science, no transport. Just death in a large package.\n* Support: Large scale support roles. Drone carriers fall in this category, as well as mobile repair centers.\n* Freighter: Large scale transport ships. Most common here are the jump freighters, using specialized jumpdrives to cross large distances with large amounts of cargo."
 	corvette_db:setLongDescription(generic_corvette_description)
 	local dreadnought_db = queryScienceDatabase("Ships","Dreadnought")
+	if dreadnought_db == nil then
+		ships_db:addEntry("Dreadnought")
+		dreadnought_db = queryScienceDatabase("Ships","Dreadnought")
+	end
 	dreadnought_db:setLongDescription("Dreadnoughts are the largest ships.\nThey are so large and uncommon that every type is pretty much their own subclass.\nThey usually come with 6 or more shield sections, require a crew of 250+ to operate.\n\nThink: Stardestroyer.")
 --------------------------
 --	Stock player ships  --
 --------------------------
-	local stock_db = ships_db:addEntry("Mainstream")
-	stock_db = queryScienceDatabase("Ships","Mainstream")
+	ships_db:addEntry("Mainstream")
+	local stock_db = queryScienceDatabase("Ships","Mainstream")
 	stock_db:setLongDescription("Mainstream ships are those ship types that are commonly available to crews serving on the front lines or in well established areas")
 ----	Starfighters
-	local fighter_stock_db = stock_db:addEntry("Starfighter")
+	stock_db:addEntry("Starfighter")
+	local fighter_stock_db = queryScienceDatabase("Ships","Mainstream","Starfighter")
 	fighter_stock_db:setLongDescription(generic_starfighter_description)
 --	MP52 Hornet
 	fighter_stock_db:addEntry("MP52 Hornet")
@@ -1073,7 +1093,8 @@ function setStaticScienceDatabase()
 	zx_lindworm_db:setKeyValue("Storage HVLI","12")
 	zx_lindworm_db:setImage(getFilenameCompatible("radar/fighter.png"))
 ----	Frigates
-	local frigate_stock_db = stock_db:addEntry("Frigate")
+	stock_db:addEntry("Frigate")
+	local frigate_stock_db = queryScienceDatabase("Ships","Mainstream","Frigate")
 	frigate_stock_db:setLongDescription(generic_frigate_description)
 --	Flavia P.Falcon
 	frigate_stock_db:addEntry("Flavia P.Falcon")
@@ -1217,7 +1238,8 @@ function setStaticScienceDatabase()
 	repulse_db:setKeyValue("Storage HVLI","6")
 	repulse_db:setImage(getFilenameCompatible("radar/tug.png"))
 ----	Corvettes
-	local corvette_stock_db = stock_db:addEntry("Corvette")
+	stock_db:addEntry("Corvette")
+	local corvette_stock_db = queryScienceDatabase("Ships","Mainstream","Corvette")
 	corvette_stock_db:setLongDescription(generic_corvette_description)
 --	Atlantis
 	corvette_stock_db:addEntry("Atlantis")
@@ -1380,12 +1402,13 @@ function setStaticScienceDatabase()
 ---------------------------
 --	Custom player ships  --
 ---------------------------
-	local prototype_db = ships_db:addEntry("Prototype")
-	prototype_db = queryScienceDatabase("Ships","Prototype")
+	ships_db:addEntry("Prototype")
+	local prototype_db = queryScienceDatabase("Ships","Prototype")
 	prototype_db:setLongDescription("Prototype ships are those that are under development or are otherwise considered experimental. Some have been through several iterations after being tested in the field. Many have been scrapped due to poor design, the ravages of space or perhaps the simple passage of time.")
 	prototype_db:setImage("gui/icons/station-engineering.png")
 ----	Starfighters
-	local fighter_prototype_db = prototype_db:addEntry("Starfighter")
+	prototype_db:addEntry("Starfighter")
+	local fighter_prototype_db = queryScienceDatabase("Ships","Prototype","Starfighter")
 	fighter_prototype_db:setLongDescription(generic_starfighter_description)
 --	Striker LX
 	fighter_prototype_db:addEntry("Striker LX")
@@ -1413,7 +1436,8 @@ function setStaticScienceDatabase()
 	striker_lx_db:setKeyValue("Storage HVLI","6")
 	striker_lx_db:setImage(getFilenameCompatible("radar/adv_striker.png"))
 ----	Frigates
-	local frigate_prototype_db = prototype_db:addEntry("Frigate")
+	prototype_db:addEntry("Frigate")
+	local frigate_prototype_db = queryScienceDatabase("Ships","Prototype","Frigate")
 	frigate_prototype_db:setLongDescription(generic_frigate_description)
 --	Phobos T2
 	frigate_prototype_db:addEntry("Phobos T2")
@@ -1441,7 +1465,8 @@ function setStaticScienceDatabase()
 	phobos_t2_db:setKeyValue("Storage HVLI",16)
 	phobos_t2_db:setImage(getFilenameCompatible("radar/cruiser.png"))
 ----	Corvettes
-	local corvette_prototype_db = prototype_db:addEntry("Corvette")
+	prototype_db:addEntry("Corvette")
+	local corvette_prototype_db = queryScienceDatabase("Ships","Prototype","Corvette")
 	corvette_prototype_db:setLongDescription(generic_corvette_description)
 --	Focus
 	corvette_prototype_db:addEntry("Focus")
@@ -1518,7 +1543,6 @@ function setStaticScienceDatabase()
 	maverick_xp_db:setKeyValue("Storage EMP",4)
 	maverick_xp_db:setKeyValue("Storage HVLI",10)
 	maverick_xp_db:setImage(getFilenameCompatible("radar/laser.png"))
-	
 end
 ------------------
 --	GM Buttons  --
