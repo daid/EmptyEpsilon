@@ -43,7 +43,7 @@ item = technologies:addEntry(_('Beam/shield frequencies'))
 item:addKeyValue(_('Unit'), _('Terahertz'))
 item:setLongDescription(_([[Ships with shield and beam systems can often configure their terahertz-frequency radiation. By manipulating these frequencies, savvy ship crews can maximize their beam weapon efficiency while reducing their enemies'.
 
-A beam frequency that's resonant with a target's shield frequency can do considerably more damage, and beam frequencies can be quickly modulated. On the opposite effect, a fully dissonant shield frequency can negate considerably more beam energy per unit of energy, but requires several seconds of shield downtime to recalibrate.
+A beam frequency that's resonant with a target's shield frequency can do considerably more damage, and beam frequencies can be quickly modulated. Shield frequencies require time to recalibrate.
 
 If your Science officer fully scans a target, your ship's computer presents them with a detailed analysis of beam and shield frequencies and suggests optimal values for each.]]))
 
