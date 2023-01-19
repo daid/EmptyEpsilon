@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-01-19 00:44+0100\n"
+"PO-Revision-Date: 2023-01-19 20:11+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -2043,7 +2043,7 @@ msgstr "Réinitialiser"
 #: src/screenComponents/hackingDialog.cpp:56
 msgctxt "hacking"
 msgid "Target system:"
-msgstr "Système cible :"
+msgstr "Système ciblé :"
 
 #: src/screenComponents/hackingDialog.cpp:116
 msgctxt "hacking"
