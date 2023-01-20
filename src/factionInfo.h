@@ -77,11 +77,18 @@ public:
      * \brief Reverts all of this faction's relationships with other factions to neutrality.
      */
     void resetAllRelationships();
-
+    /*!
+     * \brief Sets this faction's relationship using EFactionVsFactionState
+     * \param faction state enum value
+     */
     void setRelationship(P<FactionInfo> other, EFactionVsFactionState state);
+    /*!
+     * \brief Returns this faction's relationship using EFactionVsFactionState
+     * \return Enum state value
+     */
     EFactionVsFactionState getRelationship(P<FactionInfo> other);
-    EFactionVsFactionState getState(P<FactionInfo> other);
 
+    EFactionVsFactionState getState(P<FactionInfo> other);
     static EFactionVsFactionState getState(uint8_t idx0, uint8_t idx1);
     static unsigned int findFactionId(string name);
 
