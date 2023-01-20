@@ -75,15 +75,15 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, resetAllRelationships);
 }
 
-std::array<P<FactionInfo>, 32> factionInfo;
+std::array<P<FactionInfo>, MAX_FACTIONS> factionInfo;
 
 static int getFactions(lua_State* L)
 {
     PVector<FactionInfo> factions;
-    factions.reserve(32);
-    for (auto index = 0; index < 32; ++index)
+    factions.reserve(MAX_FACTIONS);
+    for (auto i = 0; i < MAX_FACTIONS; ++i)
     {
-        auto faction = factionInfo[index];
+        auto faction = factionInfo[i];
 
         if (faction)
         {
