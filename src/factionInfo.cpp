@@ -39,15 +39,21 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Wrap the string in the _() function to make it available for translation.
     /// Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setDescription);
-    /// Sets the given faction to appear as hostile to SpaceObjects of this faction.
-    /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction.
-    /// Defaults to no hostile factions.
+    /// Returns this faction's relationship with the given faction.
+    /// Example: faction:getRelationship() -- returns "enemy" if hostile
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, getRelationship);
+    /// Sets this faction's relationship with the given faction to the given state.
+    /// Example:
+    /// other_faction = getFactionInfo("Exuari")
+    /// faction:setRelationship(other_faction,"enemy") -- sets a hostile relationship with Exuari
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setRelationship);
+    /// Sets the given faction to be hostile to SpaceObjects of this faction.
+    /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction, and vice versa.
     /// Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
     /// Example: faction:setEnemy("Exuari") -- sets the Exuari to appear as hostile to this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
     /// Sets the given faction to appear as friendly to SpaceObjects of this faction.
     /// For example, PlayerSpaceships of this faction can gain reputation with it.
-    /// Defaults to no friendly factions.
     /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to appear as friendly to this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
 }
@@ -138,6 +144,38 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     other->enemy_mask &=~(1 << index);
 }
 
+void FactionInfo::setRelationship(P<FactionInfo> other, EFactionVsFactionState state)
+{
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to change faction relationship state with an undefined faction";
+        return;
+    }
+
+    if (state == FVF_Enemy)
+    {
+        setEnemy(other);
+    }
+    else if (state == FVF_Friendly)
+    {
+        setFriendly(other);
+    }
+    else if (state == FVF_Neutral)
+    {
+        setNeutral(other);
+    }
+    else
+    {
+        LOG(WARNING) << "Tried to set an incorrect faction relationship state";
+    }
+}
+
+// Avoid Lua engine errors from trying to register overloaded getState()
+EFactionVsFactionState FactionInfo::getRelationship(P<FactionInfo> other)
+{
+    return this->getState(other);
+}
+
 EFactionVsFactionState FactionInfo::getState(P<FactionInfo> other)
 {
     if (!other) return FVF_Neutral;
@@ -168,4 +206,36 @@ void FactionInfo::reset()
     for(unsigned int n = 0; n < factionInfo.size(); n++)
         if (factionInfo[n])
             factionInfo[n]->destroy();
+}
+
+/* Define script conversion function for the EFactionVsFactionState enum. */
+template<> void convert<EFactionVsFactionState>::param(lua_State* L, int& idx, EFactionVsFactionState& efvfs)
+{
+    string str = string(luaL_checkstring(L, idx++)).lower();
+    if (str == "friendly")
+        efvfs = FVF_Friendly;
+    else if (str == "neutral")
+        efvfs = FVF_Neutral;
+    else if (str == "enemy" || str == "hostile")
+        efvfs = FVF_Enemy;
+    else
+        efvfs = FVF_Neutral;
+}
+
+template<> int convert<EFactionVsFactionState>::returnType(lua_State* L, EFactionVsFactionState efvfs)
+{
+    switch(efvfs)
+    {
+    case FVF_Friendly:
+        lua_pushstring(L, "friendly");
+        return 1;
+    case FVF_Neutral:
+        lua_pushstring(L, "neutral");
+        return 1;
+    case FVF_Enemy:
+        lua_pushstring(L, "enemy");
+        return 1;
+    default:
+        return 0;
+    }
 }

@@ -68,6 +68,8 @@ public:
      */
     void setFriendly(P<FactionInfo> other);
 
+    void setRelationship(P<FactionInfo> other, EFactionVsFactionState state);
+    EFactionVsFactionState getRelationship(P<FactionInfo> other);
     EFactionVsFactionState getState(P<FactionInfo> other);
 
     static EFactionVsFactionState getState(uint8_t idx0, uint8_t idx1);
