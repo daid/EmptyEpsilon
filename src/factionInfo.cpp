@@ -7,8 +7,9 @@
 ///
 /// SpaceObjects belong to a faction that determines which objects are friendly, neutral, or hostile toward them.
 /// For example, these relationships determine whether a SpaceObject can be targeted by weapons, docked with, or receive comms from another SpaceObject.
-/// If a faction doesn't have a relationship with another faction, it treats those factions as neutral.
-/// Friendly and hostile faction relationships are automatically reciprocated when set with setEnemy() and setFriendly().
+/// If a faction doesn't have a relationship with another faction, it treats those factions as neutral by default.
+/// Therefore, new factions are neutral toward all other factions by default.
+/// Faction relationships set via setEnemy(), setFriendly(), and setNeutral() are are automatically reciprocated.
 ///
 /// If this faction consideres another faction to be hostile, it can target and fire weapons at it, and CpuShips with certain orders might pursue it.
 /// If neutral, this faction can't target and fire weapons at the other faction, and other factions can dock with its stations or dockable ships.
@@ -50,12 +51,19 @@ REGISTER_SCRIPT_CLASS(FactionInfo)
     /// Sets the given faction to be hostile to SpaceObjects of this faction.
     /// For example, Spaceships of this faction can target and fire at SpaceShips of the given faction, and vice versa.
     /// Warning: A faction can be designated as hostile to itself, but the behavior is not well-defined.
-    /// Example: faction:setEnemy("Exuari") -- sets the Exuari to appear as hostile to this faction
+    /// Example: faction:setEnemy("Exuari") -- sets the Exuari to be hostile toward this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setEnemy);
-    /// Sets the given faction to appear as friendly to SpaceObjects of this faction.
+    /// Sets the given faction to be friendly to SpaceObjects of this faction.
     /// For example, PlayerSpaceships of this faction can gain reputation with it.
-    /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to appear as friendly to this faction
+    /// Example: faction:setFriendly("Human Navy") -- sets the Human Navy to be friendly toward this faction
     REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setFriendly);
+    /// Sets the given faction to be neutral toward SpaceObjects of this faction.
+    /// This resets any existing faction relationship between this faction and the given faction.
+    /// Example: faction:setNeutral("Human Navy") -- sets the Human Navy to be neutral toward this faction
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, setNeutral);
+    /// Resets all relationships that this faction has with other factions to neutrality.
+    /// Example: faction:resetAllRelationships() -- removes all existing faction relationships
+    REGISTER_SCRIPT_CLASS_FUNCTION(FactionInfo, resetAllRelationships);
 }
 
 std::array<P<FactionInfo>, 32> factionInfo;
@@ -116,6 +124,20 @@ void FactionInfo::update(float delta)
         factionInfo[index] = this;
 }
 
+void FactionInfo::setNeutral(P<FactionInfo> other)
+{
+    if (!other)
+    {
+        LOG(WARNING) << "Tried to set an undefined faction to be an enemy of " << name;
+        return;
+    }
+
+    friend_mask &=~(1U << other->index);
+    other->friend_mask &=~(1U << index);
+    enemy_mask &=~(1 << other->index);
+    other->enemy_mask &=~(1 << index);
+}
+
 void FactionInfo::setEnemy(P<FactionInfo> other)
 {
     if (!other)
@@ -142,6 +164,30 @@ void FactionInfo::setFriendly(P<FactionInfo> other)
     other->friend_mask |= (1U << index);
     enemy_mask &=~(1 << other->index);
     other->enemy_mask &=~(1 << index);
+}
+
+void FactionInfo::resetAllRelationships()
+{
+    // Reset this faction's masks.
+    enemy_mask = 0;
+    friend_mask = 0;
+
+    // Reset each other faction's relationship with this faction.
+    for (auto faction : factionInfo)
+    {
+        if (faction)
+        {
+            if (faction != this)
+            {
+                faction->friend_mask &=~(1U << index);
+                faction->enemy_mask &=~(1 << index);
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
 }
 
 void FactionInfo::setRelationship(P<FactionInfo> other, EFactionVsFactionState state)

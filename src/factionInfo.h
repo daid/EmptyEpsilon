@@ -67,6 +67,15 @@ public:
      * \param faction info object.
      */
     void setFriendly(P<FactionInfo> other);
+    /*!
+     * \brief Reverts this faction to neutrality with the given faction.
+     * \param faction info object.
+     */
+    void setNeutral(P<FactionInfo> other);
+    /*!
+     * \brief Reverts all of this faction's relationships with other factions to neutrality.
+     */
+    void resetAllRelationships();
 
     void setRelationship(P<FactionInfo> other, EFactionVsFactionState state);
     EFactionVsFactionState getRelationship(P<FactionInfo> other);
