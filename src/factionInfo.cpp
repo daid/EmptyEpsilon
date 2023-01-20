@@ -8,7 +8,7 @@
 /// SpaceObjects belong to a faction that determines which objects are friendly, neutral, or hostile toward them.
 /// For example, these relationships determine whether a SpaceObject can be targeted by weapons, docked with, or receive comms from another SpaceObject.
 /// If a faction doesn't have a relationship with another faction, it treats those factions as neutral.
-/// Faction relationships can be one-sided; a faction can consider another faction as hostile without the other faction reciprocating hostility.
+/// Friendly and hostile faction relationships are automatically reciprocated when set with setEnemy() and setFriendly().
 ///
 /// If this faction consideres another faction to be hostile, it can target and fire weapons at it, and CpuShips with certain orders might pursue it.
 /// If neutral, this faction can't target and fire weapons at the other faction, and other factions can dock with its stations or dockable ships.
