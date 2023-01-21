@@ -43,9 +43,9 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS 39%\n"
+"TRADUCTION EN COURS 50%\n"
 "\n"
-"Loin de chez lui, un avant-poste isolé tente de survivre dans un "
+"Loin des siens, un avant-poste isolé de la marine tente de survivre dans un "
 "environnement hostile.\n"
 "L'histoire commence simplement mais le défi est de taille.\n"
 "\n"
@@ -148,7 +148,7 @@ msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
-msgstr "Les facteurs aléatoires sont normaux."
+msgstr "Les facteurs aléatoires sont équilibrés."
 
 msgctxt "Murphy"
 msgid "Hard"
@@ -161,65 +161,59 @@ msgstr "Les facteurs aléatoires sont plus contre vous."
 # Scenario setting
 msgctxt "setting"
 msgid "Pace"
-msgstr ""
+msgstr "Rythme"
 
 msgctxt "setting"
 msgid "How slow or fast do the enemies get more powerful"
-msgstr ""
+msgstr "Vitesse à laquelle les ennemis deviennent plus puissants."
 
 msgctxt "Pace"
 msgid "Snail"
-msgstr ""
+msgstr "Escargot"
 
 msgctxt "Pace"
 msgid "Slower than slow pacing"
-msgstr ""
+msgstr "Plus lent que lent."
 
 msgctxt "Pace"
 msgid "Slow"
-msgstr ""
+msgstr "Lent"
 
 msgctxt "Pace"
 msgid "Slower than normal pacing"
-msgstr ""
+msgstr "Plus lent que la normale."
 
-#, fuzzy
-#| msgctxt "Enemies"
-#| msgid "Normal"
 msgctxt "Pace"
 msgid "Normal"
 msgstr "Normal"
 
-#, fuzzy
-#| msgctxt "Enemies"
-#| msgid "Normal"
 msgctxt "Pace"
 msgid "Normal pacing"
-msgstr "Normal"
+msgstr "Rythme normal."
 
 msgctxt "Pace"
 msgid "Fast"
-msgstr ""
+msgstr "Rapide"
 
 msgctxt "Pace"
 msgid "Faster than normal pacing"
-msgstr ""
+msgstr "Plus rapide que la normale."
 
 msgctxt "Pace"
 msgid "Impatient"
-msgstr ""
+msgstr "Impatient"
 
 msgctxt "Pace"
 msgid "Faster than fast pacing"
-msgstr ""
+msgstr "Plus rapide que rapide."
 
 msgctxt "Pace"
 msgid "Blitz"
-msgstr ""
+msgstr "Éclair"
 
 msgctxt "Pace"
 msgid "Fastest pace"
-msgstr ""
+msgstr "Vraiment très rapide."
 
 # Scenario setting
 msgctxt "setting"
@@ -283,54 +277,51 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Upgrade"
-msgstr ""
+msgstr "Coût upgrade des vaisseaux"
 
 msgctxt "setting"
 msgid "General price of upgrades to player ships"
-msgstr ""
+msgstr "Coût général pour améliorer son ou ses vaisseaux joueurs."
 
 msgctxt "Upgrade"
 msgid "Cheap"
-msgstr ""
+msgstr "Bon marché"
 
 msgctxt "Upgrade"
 msgid "Lower priced player ship upgrades"
-msgstr ""
+msgstr "Upgrade à moindre coût."
 
-#, fuzzy
-#| msgctxt "Enemies"
-#| msgid "Normal"
 msgctxt "Upgrade"
 msgid "Normal"
 msgstr "Normal"
 
 msgctxt "Upgrade"
 msgid "Normal price for player ship upgrades"
-msgstr ""
+msgstr "Tarif normal."
 
 msgctxt "Upgrade"
 msgid "Expensive"
-msgstr ""
+msgstr "Coûteux"
 
 msgctxt "Upgrade"
 msgid "Higher priced player ship upgrades"
-msgstr ""
+msgstr "Des prix élevés."
 
 msgctxt "Upgrade"
 msgid "Luxurious"
-msgstr ""
+msgstr "Luxueux"
 
 msgctxt "Upgrade"
 msgid "Very high prices for player ship upgrades"
-msgstr ""
+msgstr "Des prix très élevés."
 
 msgctxt "Upgrade"
 msgid "Monopolistic"
-msgstr ""
+msgstr "Prohibitif"
 
 msgctxt "Upgrade"
 msgid "Extremely high prices for player ship upgrades"
-msgstr ""
+msgstr "Des prix extrêmement élevés."
 
 # Scenario setting
 msgctxt "setting"
@@ -407,7 +398,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:155
 msgctxt "orders-comms"
 msgid "Survive"
-msgstr ""
+msgstr "Survivre"
 
 #: scripts/scenario_44_outpost.lua:790 scripts/scenario_44_outpost.lua:4156
 #: scripts/scenario_44_outpost.lua:4889 scripts/scenario_44_outpost.lua:5668
@@ -417,20 +408,20 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8474 scripts/scenario_44_outpost.lua:8792
 msgctxt "upgrade-comms"
 msgid "increase range by 25%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser de 25%"
 
 #: scripts/scenario_44_outpost.lua:795 scripts/scenario_44_outpost.lua:4160
 #: scripts/scenario_44_outpost.lua:4533 scripts/scenario_44_outpost.lua:8110
 #: scripts/scenario_44_outpost.lua:8514 scripts/scenario_44_outpost.lua:8800
 msgctxt "upgrade-comms"
 msgid "increase arc by 1/3"
-msgstr ""
+msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 1/3"
 
 #: scripts/scenario_44_outpost.lua:800 scripts/scenario_44_outpost.lua:4899
 #: scripts/scenario_44_outpost.lua:6029
 msgctxt "upgrade-comms"
 msgid "increase damage by 1/3"
-msgstr ""
+msgstr "augmenter les dégâts des faisceaux laser de 1/3"
 
 #: scripts/scenario_44_outpost.lua:807 scripts/scenario_44_outpost.lua:1638
 #: scripts/scenario_44_outpost.lua:2115 scripts/scenario_44_outpost.lua:2540
@@ -439,79 +430,76 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7827 scripts/scenario_44_outpost.lua:8116
 msgctxt "upgrade-comms"
 msgid "add beams"
-msgstr ""
+msgstr "ajouter des faisceaux laser"
 
 #: scripts/scenario_44_outpost.lua:814 scripts/scenario_44_outpost.lua:1631
 #: scripts/scenario_44_outpost.lua:4894 scripts/scenario_44_outpost.lua:8134
 msgctxt "upgrade-comms"
 msgid "increase arc by 25%"
-msgstr ""
+msgstr "augmenter l'amplitude de l'arc de 25%"
 
 #: scripts/scenario_44_outpost.lua:821 scripts/scenario_44_outpost.lua:4172
 #: scripts/scenario_44_outpost.lua:4528 scripts/scenario_44_outpost.lua:4924
 #: scripts/scenario_44_outpost.lua:6019
 msgctxt "upgrade-comms"
 msgid "increase range by 20%"
-msgstr ""
+msgstr "augmenter la portée de 20%"
 
 #: scripts/scenario_44_outpost.lua:828
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 1/6"
-msgstr ""
+msgstr "réduire le temps de cycle de 1/6"
 
 #: scripts/scenario_44_outpost.lua:837
 msgctxt "upgrade-comms"
 msgid "increase missile stock capacity"
-msgstr ""
+msgstr "augmenter la capacité du stock de missiles"
 
 #: scripts/scenario_44_outpost.lua:838
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase homing missile capacity"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité des missiles à tête chercheuse (homing)"
 
 #: scripts/scenario_44_outpost.lua:839
 msgctxt "upgrade-comms"
 msgid "add a mine tube"
-msgstr ""
+msgstr "ajouter un tube de mine"
 
 #: scripts/scenario_44_outpost.lua:840 scripts/scenario_44_outpost.lua:1245
 #: scripts/scenario_44_outpost.lua:1250
 msgctxt "upgrade-comms"
 msgid "decrease tube load times"
-msgstr ""
+msgstr "réduire les temps de chargement des tubes"
 
 #: scripts/scenario_44_outpost.lua:841
 msgctxt "upgrade-comms"
 msgid "add mines, emps and nukes"
-msgstr ""
+msgstr "ajouter des mines, EMP et armes nucléaires (nuke)"
 
 #: scripts/scenario_44_outpost.lua:842
 msgctxt "upgrade-comms"
 msgid "add two medium sized side tubes"
-msgstr ""
+msgstr "ajouter deux tubes latéraux de taille moyenne"
 
 #: scripts/scenario_44_outpost.lua:843
 msgctxt "upgrade-comms"
 msgid "increase EMP capacity"
-msgstr ""
+msgstr "augmenter la capacité de stockage des EMP"
 
 #: scripts/scenario_44_outpost.lua:844
 msgctxt "upgrade-comms"
 msgid "increase nuke capacity"
-msgstr ""
+msgstr "augmenter la capacité de stockage des armes nucléaires (nuke)"
 
 #: scripts/scenario_44_outpost.lua:845
 msgctxt "upgrade-comms"
 msgid "increase tube sizes"
-msgstr ""
+msgstr "augmenter la taille des tubes"
 
 #: scripts/scenario_44_outpost.lua:846
 msgctxt "upgrade-comms"
 msgid "decrease mine load speed, add front tube"
-msgstr ""
+msgstr "réduire la vitesse de chargement des mines, ajouter un tube avant"
 
 #: scripts/scenario_44_outpost.lua:909 scripts/scenario_44_outpost.lua:1328
 #: scripts/scenario_44_outpost.lua:1352 scripts/scenario_44_outpost.lua:1795
@@ -529,22 +517,16 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8620 scripts/scenario_44_outpost.lua:8630
 #: scripts/scenario_44_outpost.lua:8914 scripts/scenario_44_outpost.lua:8928
 #: scripts/scenario_44_outpost.lua:8938
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 25%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 25%"
 
 #: scripts/scenario_44_outpost.lua:913 scripts/scenario_44_outpost.lua:933
 #: scripts/scenario_44_outpost.lua:1357 scripts/scenario_44_outpost.lua:1824
 #: scripts/scenario_44_outpost.lua:6902 scripts/scenario_44_outpost.lua:7611
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 50%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 50%"
 
 #: scripts/scenario_44_outpost.lua:918 scripts/scenario_44_outpost.lua:1337
 #: scripts/scenario_44_outpost.lua:1804 scripts/scenario_44_outpost.lua:2237
@@ -554,34 +536,25 @@ msgstr "Nous avons également augmenté la capacité de charge de votre bouclier
 #: scripts/scenario_44_outpost.lua:5015 scripts/scenario_44_outpost.lua:5443
 #: scripts/scenario_44_outpost.lua:7936 scripts/scenario_44_outpost.lua:8297
 #: scripts/scenario_44_outpost.lua:8615 scripts/scenario_44_outpost.lua:8923
-#, fuzzy
-#| msgctxt "msgScience"
-#| msgid "rear shield"
 msgctxt "upgrade-comms"
 msgid "add rear shield arc"
-msgstr "boucliers arrière"
+msgstr "ajouter un arc de bouclier arrière"
 
 #: scripts/scenario_44_outpost.lua:923 scripts/scenario_44_outpost.lua:3088
 #: scripts/scenario_44_outpost.lua:3103 scripts/scenario_44_outpost.lua:3505
 #: scripts/scenario_44_outpost.lua:4307 scripts/scenario_44_outpost.lua:4672
 #: scripts/scenario_44_outpost.lua:5020 scripts/scenario_44_outpost.lua:6477
 #: scripts/scenario_44_outpost.lua:8312
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 25%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers avant de 25%"
 
 #: scripts/scenario_44_outpost.lua:928 scripts/scenario_44_outpost.lua:3520
 #: scripts/scenario_44_outpost.lua:4297 scripts/scenario_44_outpost.lua:4667
 #: scripts/scenario_44_outpost.lua:5025 scripts/scenario_44_outpost.lua:8307
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 25%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière de 25%"
 
 #: scripts/scenario_44_outpost.lua:938 scripts/scenario_44_outpost.lua:2247
 #: scripts/scenario_44_outpost.lua:2672 scripts/scenario_44_outpost.lua:3073
@@ -592,28 +565,19 @@ msgstr "Nous avons également augmenté la capacité de charge de votre bouclier
 #: scripts/scenario_44_outpost.lua:7607 scripts/scenario_44_outpost.lua:7615
 #: scripts/scenario_44_outpost.lua:7625 scripts/scenario_44_outpost.lua:7931
 #: scripts/scenario_44_outpost.lua:8302
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 1/3"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 1/3"
 
 #: scripts/scenario_44_outpost.lua:943
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 15%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 15%"
 
 #: scripts/scenario_44_outpost.lua:948
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~13%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers d'environ 13%"
 
 #: scripts/scenario_44_outpost.lua:957 scripts/scenario_44_outpost.lua:962
 #: scripts/scenario_44_outpost.lua:1376 scripts/scenario_44_outpost.lua:1843
@@ -635,7 +599,7 @@ msgstr "Nous avons également augmenté la capacité de charge de votre bouclier
 #: scripts/scenario_44_outpost.lua:8646 scripts/scenario_44_outpost.lua:8648
 msgctxt "upgrade-comms"
 msgid "increase hull max by 20%"
-msgstr ""
+msgstr "renforcer la solidité de la coque de 20%"
 
 #: scripts/scenario_44_outpost.lua:958 scripts/scenario_44_outpost.lua:1377
 #: scripts/scenario_44_outpost.lua:1844 scripts/scenario_44_outpost.lua:3532
@@ -645,12 +609,12 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8331 scripts/scenario_44_outpost.lua:8649
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~17%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:959
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~29%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 29%"
 
 #: scripts/scenario_44_outpost.lua:960 scripts/scenario_44_outpost.lua:1380
 #: scripts/scenario_44_outpost.lua:1847 scripts/scenario_44_outpost.lua:2279
@@ -659,7 +623,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8644
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~11%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:961 scripts/scenario_44_outpost.lua:2277
 #: scripts/scenario_44_outpost.lua:2702 scripts/scenario_44_outpost.lua:3118
@@ -678,28 +642,27 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8947
 msgctxt "upgrade-comms"
 msgid "increase hull max by 25%"
-msgstr ""
+msgstr "renforcer la solidité de la coque de 25%"
 
 #: scripts/scenario_44_outpost.lua:977
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~14%"
 msgstr ""
+"augmenter la vitesse maximale des moteurs à impulsion avant d'environ 14%"
 
 #: scripts/scenario_44_outpost.lua:984 scripts/scenario_44_outpost.lua:1403
 #: scripts/scenario_44_outpost.lua:1870 scripts/scenario_44_outpost.lua:2303
 #: scripts/scenario_44_outpost.lua:2728
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "add combat maneuver forward boost"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:991 scripts/scenario_44_outpost.lua:1410
 #: scripts/scenario_44_outpost.lua:1877 scripts/scenario_44_outpost.lua:7985
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse speed by ~14%"
 msgstr ""
+"augmenter la vitesse maximale des moteurs à impulsion arrière d'environ 14%"
 
 #: scripts/scenario_44_outpost.lua:998 scripts/scenario_44_outpost.lua:1417
 #: scripts/scenario_44_outpost.lua:1884 scripts/scenario_44_outpost.lua:2317
@@ -707,12 +670,9 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4027 scripts/scenario_44_outpost.lua:4365
 #: scripts/scenario_44_outpost.lua:4751 scripts/scenario_44_outpost.lua:5104
 #: scripts/scenario_44_outpost.lua:5532 scripts/scenario_44_outpost.lua:6218
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "add combat maneuver strafe"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1005 scripts/scenario_44_outpost.lua:3221
 #: scripts/scenario_44_outpost.lua:3640 scripts/scenario_44_outpost.lua:4041
@@ -721,12 +681,12 @@ msgstr "Réparer la manœuvre de combat"
 #: scripts/scenario_44_outpost.lua:7048 scripts/scenario_44_outpost.lua:8699
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 20%"
-msgstr ""
+msgstr "augmenter la manœuvre de 20%"
 
 #: scripts/scenario_44_outpost.lua:1012
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by 12.5%"
-msgstr ""
+msgstr "augmenter la vitesse maximale des moteurs à impulsion avant de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:1019
 msgctxt "upgrade-comms"
@@ -741,12 +701,10 @@ msgid "increase impulse forward acceleration by 25%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1033
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 60%"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
+"augmenter la vitesse de déplacement latéral des manœuvres de combat de 60%"
 
 #: scripts/scenario_44_outpost.lua:1040 scripts/scenario_44_outpost.lua:1459
 #: scripts/scenario_44_outpost.lua:1926 scripts/scenario_44_outpost.lua:2359
@@ -761,50 +719,48 @@ msgstr "Réparer la manœuvre de combat (%s rép)"
 #: scripts/scenario_44_outpost.lua:9007
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 25%"
-msgstr ""
+msgstr "augmenter la manœuvre de 25%"
 
 #: scripts/scenario_44_outpost.lua:1047 scripts/scenario_44_outpost.lua:2338
 #: scripts/scenario_44_outpost.lua:2763
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver forward boost by 1/3"
-msgstr ""
+msgstr "augmenter la manœuvre de combat vers l'avant de 1/3"
 
 #: scripts/scenario_44_outpost.lua:1054
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~11%"
 msgstr ""
+"augmenter la vitesse maximale des moteurs à impulsion avant d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:1061 scripts/scenario_44_outpost.lua:2352
 #: scripts/scenario_44_outpost.lua:2777
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 25%"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
+"augmenter la vitesse de déplacement latéral des manœuvres de combat de 25%"
 
 #: scripts/scenario_44_outpost.lua:1068 scripts/scenario_44_outpost.lua:1487
 #: scripts/scenario_44_outpost.lua:1954
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse speed by 12.5%"
-msgstr ""
+msgstr "augmenter la vitesse maximale des moteurs à impulsion arrière de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:1075 scripts/scenario_44_outpost.lua:1473
 #: scripts/scenario_44_outpost.lua:1940 scripts/scenario_44_outpost.lua:2373
 #: scripts/scenario_44_outpost.lua:2798
 msgctxt "upgrade-comms"
 msgid "increase impulse forward acceleration by 20%"
-msgstr ""
+msgstr "augmenter l'accélération des moteurs à impulsion avant de 20%"
 
 #: scripts/scenario_44_outpost.lua:1082 scripts/scenario_44_outpost.lua:1501
 #: scripts/scenario_44_outpost.lua:1968 scripts/scenario_44_outpost.lua:2380
 #: scripts/scenario_44_outpost.lua:2805
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 20%"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
+"augmenter la vitesse de déplacement latéral des manœuvres de combat de 20%"
 
 #: scripts/scenario_44_outpost.lua:1089 scripts/scenario_44_outpost.lua:1424
 #: scripts/scenario_44_outpost.lua:1891 scripts/scenario_44_outpost.lua:6560
@@ -812,7 +768,7 @@ msgstr "Réparer la manœuvre de combat (%s rép)"
 #: scripts/scenario_44_outpost.lua:7999 scripts/scenario_44_outpost.lua:8365
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 1/3"
-msgstr ""
+msgstr "augmenter la manœuvre de 1/3"
 
 #: scripts/scenario_44_outpost.lua:1101 scripts/scenario_44_outpost.lua:2869
 #: scripts/scenario_44_outpost.lua:3244 scripts/scenario_44_outpost.lua:3652
@@ -823,7 +779,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8046
 msgctxt "upgrade-comms"
 msgid "add 20k jump drive"
-msgstr ""
+msgstr "ajouter un moteur de téléportation de 20 unités de distance"
 
 #: scripts/scenario_44_outpost.lua:1105 scripts/scenario_44_outpost.lua:1117
 #: scripts/scenario_44_outpost.lua:1548 scripts/scenario_44_outpost.lua:2015
@@ -839,7 +795,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8062 scripts/scenario_44_outpost.lua:9027
 msgctxt "upgrade-comms"
 msgid "increase jump range by 25%"
-msgstr ""
+msgstr "augmenter la portée de saut de 25%"
 
 #: scripts/scenario_44_outpost.lua:1109 scripts/scenario_44_outpost.lua:1556
 #: scripts/scenario_44_outpost.lua:2023 scripts/scenario_44_outpost.lua:2428
@@ -853,7 +809,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8054 scripts/scenario_44_outpost.lua:9031
 msgctxt "upgrade-comms"
 msgid "increase jump range by 20%"
-msgstr ""
+msgstr "augmenter la portée de saut de 20%"
 
 #: scripts/scenario_44_outpost.lua:1113 scripts/scenario_44_outpost.lua:3664
 #: scripts/scenario_44_outpost.lua:4072 scripts/scenario_44_outpost.lua:4799
@@ -862,13 +818,13 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:9023
 msgctxt "upgrade-comms"
 msgid "increase jump range by 1/3"
-msgstr ""
+msgstr "augmenter la portée de saut de 1/3"
 
 #: scripts/scenario_44_outpost.lua:1121 scripts/scenario_44_outpost.lua:5164
 #: scripts/scenario_44_outpost.lua:6271
 msgctxt "upgrade-comms"
 msgid "increase jump range by 10%"
-msgstr ""
+msgstr "augmenter la portée de saut de 10%"
 
 #: scripts/scenario_44_outpost.lua:1125 scripts/scenario_44_outpost.lua:1520
 #: scripts/scenario_44_outpost.lua:1987 scripts/scenario_44_outpost.lua:2444
@@ -883,7 +839,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:9035
 msgctxt "upgrade-comms"
 msgid "add warp drive"
-msgstr ""
+msgstr "ajouter un moteur de vitesse lumière"
 
 #: scripts/scenario_44_outpost.lua:1129 scripts/scenario_44_outpost.lua:1524
 #: scripts/scenario_44_outpost.lua:1991 scripts/scenario_44_outpost.lua:2456
@@ -895,7 +851,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7728 scripts/scenario_44_outpost.lua:8748
 msgctxt "upgrade-comms"
 msgid "increase warp speed by 25%"
-msgstr ""
+msgstr "augmenter la vitesse lumière de 25%"
 
 #: scripts/scenario_44_outpost.lua:1133 scripts/scenario_44_outpost.lua:5176
 #: scripts/scenario_44_outpost.lua:6283
@@ -914,7 +870,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8740
 msgctxt "upgrade-comms"
 msgid "increase warp speed by 20%"
-msgstr ""
+msgstr "augmenter la vitesse lumière de 20%"
 
 #: scripts/scenario_44_outpost.lua:1149 scripts/scenario_44_outpost.lua:1572
 #: scripts/scenario_44_outpost.lua:2039 scripts/scenario_44_outpost.lua:3284
@@ -1069,8 +1025,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1243
 #, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase HVLI missile capacity"
 msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
@@ -1082,8 +1036,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1246
 #, fuzzy
-#| msgctxt "ammo-comms"
-#| msgid "Do you have extra homing missiles? ("
 msgctxt "upgrade-comms"
 msgid "add broadside tubes and homing missiles"
 msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
@@ -1102,16 +1054,12 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1249
 #, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase heavy missile capacity"
 msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
 
 #: scripts/scenario_44_outpost.lua:1251
 #, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase missile capacity"
 msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
@@ -1132,52 +1080,40 @@ msgstr "Nous avons également augmenté la capacité de charge de votre bouclier
 #: scripts/scenario_44_outpost.lua:7325 scripts/scenario_44_outpost.lua:7956
 #: scripts/scenario_44_outpost.lua:8317 scripts/scenario_44_outpost.lua:8625
 #: scripts/scenario_44_outpost.lua:8635 scripts/scenario_44_outpost.lua:8933
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 20%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 20%"
 
 #: scripts/scenario_44_outpost.lua:1342 scripts/scenario_44_outpost.lua:1809
 #: scripts/scenario_44_outpost.lua:3500 scripts/scenario_44_outpost.lua:6487
 #: scripts/scenario_44_outpost.lua:7320
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 1/3"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers avant de 1/3"
 
 #: scripts/scenario_44_outpost.lua:1347 scripts/scenario_44_outpost.lua:1814
 #: scripts/scenario_44_outpost.lua:3510 scripts/scenario_44_outpost.lua:6150
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 1/3"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:1367 scripts/scenario_44_outpost.lua:1834
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~11%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:1378 scripts/scenario_44_outpost.lua:1845
 #: scripts/scenario_44_outpost.lua:3533 scripts/scenario_44_outpost.lua:3976
 #: scripts/scenario_44_outpost.lua:8332 scripts/scenario_44_outpost.lua:8950
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~14%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 14%"
 
 #: scripts/scenario_44_outpost.lua:1379 scripts/scenario_44_outpost.lua:1846
 #: scripts/scenario_44_outpost.lua:8333
 msgctxt "upgrade-comms"
 msgid "increase hull max by 12.5%"
-msgstr ""
+msgstr "renforcer la solidité de la coque de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:1381 scripts/scenario_44_outpost.lua:1848
 #: scripts/scenario_44_outpost.lua:2280 scripts/scenario_44_outpost.lua:2705
@@ -1188,7 +1124,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8336
 msgctxt "upgrade-comms"
 msgid "increase hull max by 10%"
-msgstr ""
+msgstr "renforcer la solidité de la coque de 10%"
 
 #: scripts/scenario_44_outpost.lua:1396 scripts/scenario_44_outpost.lua:1431
 #: scripts/scenario_44_outpost.lua:1863 scripts/scenario_44_outpost.lua:1898
@@ -1208,12 +1144,10 @@ msgid "increase impulse forward acceleration by 6.25%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1452 scripts/scenario_44_outpost.lua:1919
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 1/3"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
+"augmenter la vitesse de déplacement latéral des manœuvres de combat de 1/3"
 
 #: scripts/scenario_44_outpost.lua:1466 scripts/scenario_44_outpost.lua:1933
 msgctxt "upgrade-comms"
@@ -1221,9 +1155,12 @@ msgid "increase combat maneuver forward boost by 60%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1480 scripts/scenario_44_outpost.lua:1947
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 25% and boost by ~14%"
 msgstr ""
+"augmenter la vitesse de déplacement latéral des manœuvres de combat de 25% "
+"et "
 
 #: scripts/scenario_44_outpost.lua:1494 scripts/scenario_44_outpost.lua:1961
 msgctxt "upgrade-comms"
@@ -1336,7 +1273,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4204
 msgctxt "upgrade-comms"
 msgid "add homing"
-msgstr ""
+msgstr "ajouter des missiles à tête chercheuse (homing)"
 
 #: scripts/scenario_44_outpost.lua:1720 scripts/scenario_44_outpost.lua:2160
 #: scripts/scenario_44_outpost.lua:2585
@@ -1359,7 +1296,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:1724 scripts/scenario_44_outpost.lua:3000
 msgctxt "upgrade-comms"
 msgid "add EMPs"
-msgstr ""
+msgstr "ajouter des EMP"
 
 #: scripts/scenario_44_outpost.lua:1725
 msgctxt "upgrade-comms"
@@ -1375,25 +1312,22 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:1727
 msgctxt "upgrade-comms"
 msgid "more homing, nuke and EMP missiles"
-msgstr ""
+msgstr "plus de missiles à tête chercheuse (homing), mines et EMP"
 
 #: scripts/scenario_44_outpost.lua:1728
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "25% faster impulse speed"
 msgctxt "upgrade-comms"
 msgid "25% faster mine loading"
-msgstr "Vos moteurs à impulsion 25 % plus rapide"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1729 scripts/scenario_44_outpost.lua:3418
 msgctxt "upgrade-comms"
 msgid "more homing, mine and HVLI missiles"
-msgstr ""
+msgstr "plus de missiles à tête chercheuse (homing), mines et HVLI"
 
 #: scripts/scenario_44_outpost.lua:1730
 msgctxt "upgrade-comms"
 msgid "more mine and HVLI missiles"
-msgstr ""
+msgstr "plus de mines et HVLI"
 
 #: scripts/scenario_44_outpost.lua:2093 scripts/scenario_44_outpost.lua:2518
 #: scripts/scenario_44_outpost.lua:3779 scripts/scenario_44_outpost.lua:7471
@@ -1428,12 +1362,9 @@ msgid "increase turret speed by 20%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:2152 scripts/scenario_44_outpost.lua:2577
-#, fuzzy
-#| msgctxt "buttonGM"
-#| msgid "%i minutes"
 msgctxt "upgrade-comms"
 msgid "add mines"
-msgstr "%i minutes"
+msgstr "ajouter des mines"
 
 #: scripts/scenario_44_outpost.lua:2153 scripts/scenario_44_outpost.lua:2578
 msgctxt "upgrade-comms"
@@ -1470,12 +1401,9 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:2159 scripts/scenario_44_outpost.lua:2584
 #: scripts/scenario_44_outpost.lua:2995 scripts/scenario_44_outpost.lua:4936
-#, fuzzy
-#| msgctxt "ammo-comms"
-#| msgid "Do you have extra homing missiles? ("
 msgctxt "upgrade-comms"
 msgid "add homing missiles"
-msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+msgstr "ajouter des missiles à tête chercheuse (homing)"
 
 #: scripts/scenario_44_outpost.lua:2161 scripts/scenario_44_outpost.lua:2586
 msgctxt "upgrade-comms"
@@ -1499,47 +1427,35 @@ msgid "increase mine capacity by 20%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:2232 scripts/scenario_44_outpost.lua:2657
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~17%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:2257 scripts/scenario_44_outpost.lua:2682
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 50%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière de 50%"
 
 #: scripts/scenario_44_outpost.lua:2262 scripts/scenario_44_outpost.lua:2687
 #: scripts/scenario_44_outpost.lua:3098 scripts/scenario_44_outpost.lua:3108
 #: scripts/scenario_44_outpost.lua:4302 scripts/scenario_44_outpost.lua:4312
 #: scripts/scenario_44_outpost.lua:4677 scripts/scenario_44_outpost.lua:6140
 #: scripts/scenario_44_outpost.lua:6497 scripts/scenario_44_outpost.lua:6936
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by 20%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière de 20%"
 
 #: scripts/scenario_44_outpost.lua:2267 scripts/scenario_44_outpost.lua:2692
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~11%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:2281 scripts/scenario_44_outpost.lua:2706
 #: scripts/scenario_44_outpost.lua:3122 scripts/scenario_44_outpost.lua:4335
 #: scripts/scenario_44_outpost.lua:8948
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~9%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 9%"
 
 #: scripts/scenario_44_outpost.lua:2296 scripts/scenario_44_outpost.lua:2721
 msgctxt "upgrade-comms"
@@ -1554,7 +1470,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:2324 scripts/scenario_44_outpost.lua:2749
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 60%"
-msgstr ""
+msgstr "augmenter la manœuvre de 60%"
 
 #: scripts/scenario_44_outpost.lua:2331 scripts/scenario_44_outpost.lua:2756
 msgctxt "upgrade-comms"
@@ -1576,7 +1492,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7387
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 10%"
-msgstr ""
+msgstr "augmenter la manœuvre de 10%"
 
 #: scripts/scenario_44_outpost.lua:2420
 msgctxt "upgrade-comms"
@@ -1657,7 +1573,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7488 scripts/scenario_44_outpost.lua:8809
 msgctxt "upgrade-comms"
 msgid "add beam"
-msgstr ""
+msgstr "ajouter des faisceaux laser"
 
 #: scripts/scenario_44_outpost.lua:2985
 msgctxt "upgrade-comms"
@@ -1700,26 +1616,20 @@ msgid "more homing, nuke, EMP and mine missiles"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3069
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 12.5%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:3093 scripts/scenario_44_outpost.lua:3515
 #: scripts/scenario_44_outpost.lua:5030
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 20%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers avant de 20%"
 
 #: scripts/scenario_44_outpost.lua:3137
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 12.5%"
-msgstr ""
+msgstr "augmenter la manœuvre de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:3144
 msgctxt "upgrade-comms"
@@ -1731,12 +1641,9 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:5090 scripts/scenario_44_outpost.lua:5518
 #: scripts/scenario_44_outpost.lua:5861 scripts/scenario_44_outpost.lua:6204
 #: scripts/scenario_44_outpost.lua:7373
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "add combat maneuver boost"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3158
 msgctxt "upgrade-comms"
@@ -1751,15 +1658,12 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3179
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by ~11%"
-msgstr ""
+msgstr "augmenter la manœuvre d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:3186 scripts/scenario_44_outpost.lua:3598
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "double combat maneuverability"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3193
 msgctxt "upgrade-comms"
@@ -1781,12 +1685,9 @@ msgid "increase reverse impulse max speed by 10%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3214 scripts/scenario_44_outpost.lua:3626
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver boost by 25%"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3268 scripts/scenario_44_outpost.lua:5929
 #: scripts/scenario_44_outpost.lua:7427 scripts/scenario_44_outpost.lua:7748
@@ -1854,12 +1755,9 @@ msgid "speed up missile load time by 10%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3413
-#, fuzzy
-#| msgctxt "trade-comms"
-#| msgid "%i minutes and %s"
 msgctxt "upgrade-comms"
 msgid "add nukes and EMPs"
-msgstr "%i minutes et %s."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:3414 scripts/scenario_44_outpost.lua:6405
 msgctxt "upgrade-comms"
@@ -1905,18 +1803,15 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8393
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by 50%"
-msgstr ""
+msgstr "augmenter la manœuvre de 50%"
 
 #: scripts/scenario_44_outpost.lua:3570 scripts/scenario_44_outpost.lua:6553
 #: scripts/scenario_44_outpost.lua:7673 scripts/scenario_44_outpost.lua:8006
 #: scripts/scenario_44_outpost.lua:8351 scripts/scenario_44_outpost.lua:8685
 #: scripts/scenario_44_outpost.lua:8979
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "add combat maneuver"
-msgstr "Réparer la manœuvre de combat"
+msgstr "ajouter la manœuvre de combat"
 
 #: scripts/scenario_44_outpost.lua:3577
 msgctxt "upgrade-comms"
@@ -2044,12 +1939,9 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3963 scripts/scenario_44_outpost.lua:4317
 #: scripts/scenario_44_outpost.lua:4682 scripts/scenario_44_outpost.lua:5035
 #: scripts/scenario_44_outpost.lua:5813 scripts/scenario_44_outpost.lua:8322
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 10%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 10%"
 
 #: scripts/scenario_44_outpost.lua:3992 scripts/scenario_44_outpost.lua:4351
 #: scripts/scenario_44_outpost.lua:6183 scripts/scenario_44_outpost.lua:7041
@@ -2074,12 +1966,9 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:5118 scripts/scenario_44_outpost.lua:6232
 #: scripts/scenario_44_outpost.lua:6574 scripts/scenario_44_outpost.lua:8020
 #: scripts/scenario_44_outpost.lua:9000
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver by 50%"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4164 scripts/scenario_44_outpost.lua:4538
 #: scripts/scenario_44_outpost.lua:4904 scripts/scenario_44_outpost.lua:6720
@@ -2090,7 +1979,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4183
 msgctxt "upgrade-comms"
 msgid "add front beam"
-msgstr ""
+msgstr "ajouter un faisceau laser à l'avant"
 
 #: scripts/scenario_44_outpost.lua:4189
 msgctxt "upgrade-comms"
@@ -2168,12 +2057,9 @@ msgid "increase homing, mine and HVLI capacity"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4322
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~21%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière d'environ 21%"
 
 #: scripts/scenario_44_outpost.lua:4379 scripts/scenario_44_outpost.lua:4744
 #: scripts/scenario_44_outpost.lua:6525
@@ -2278,18 +2164,15 @@ msgid "increase homing mine and HVLI capacity"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4687 scripts/scenario_44_outpost.lua:5468
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~14%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière d'environ 14%"
 
 #: scripts/scenario_44_outpost.lua:4701 scripts/scenario_44_outpost.lua:5053
 #: scripts/scenario_44_outpost.lua:5481
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~19%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 19%"
 
 #: scripts/scenario_44_outpost.lua:4758
 msgctxt "upgrade-comms"
@@ -2330,12 +2213,9 @@ msgid "increase homing capacity by 50%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4940
-#, fuzzy
-#| msgctxt "trade-comms"
-#| msgid "%i minute and %s"
 msgctxt "upgrade-comms"
 msgid "add nuke and EMPs"
-msgstr "%i minute et %s."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:4942
 msgctxt "upgrade-comms"
@@ -2353,12 +2233,9 @@ msgid "increase capacity: nuke:100%, EMP:100%, mine:1/3"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5040
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by ~14%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers avant d'environ 14%"
 
 #: scripts/scenario_44_outpost.lua:5069
 msgctxt "upgrade-comms"
@@ -2462,33 +2339,24 @@ msgid "increase capacity by ~14% on average"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5448
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by ~11%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers avant d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:5453
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~17%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers arrière d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:5458 scripts/scenario_44_outpost.lua:5463
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase front shield charge capacity by 10%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers avant de 10%"
 
 #: scripts/scenario_44_outpost.lua:5511
 msgctxt "upgrade-comms"
 msgid "increase maneuverability by ~14%"
-msgstr ""
+msgstr "augmenter la manœuvre d'environ 14%"
 
 #: scripts/scenario_44_outpost.lua:5525 scripts/scenario_44_outpost.lua:7652
 msgctxt "upgrade-comms"
@@ -2497,12 +2365,9 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5546 scripts/scenario_44_outpost.lua:7687
 #: scripts/scenario_44_outpost.lua:8400
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver by 20%"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5560
 msgctxt "upgrade-comms"
@@ -2586,7 +2451,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7334 scripts/scenario_44_outpost.lua:7634
 msgctxt "upgrade-comms"
 msgid "increase hull max by 1/3"
-msgstr ""
+msgstr "renforcer la solidité de la coque de 1/3"
 
 #: scripts/scenario_44_outpost.lua:5840
 msgctxt "upgrade-comms"
@@ -2594,12 +2459,9 @@ msgid "increase max impulse speed by ~11%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5875
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver by ~17%"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:5957 scripts/scenario_44_outpost.lua:6311
 #: scripts/scenario_44_outpost.lua:6626 scripts/scenario_44_outpost.lua:7111
@@ -3100,17 +2962,14 @@ msgid "increase missile capacity by 25%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:7927
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by ~28%"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers d'environ 28%"
 
 #: scripts/scenario_44_outpost.lua:7969
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~39%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 39%"
 
 #: scripts/scenario_44_outpost.lua:7992
 msgctxt "upgrade-comms"
@@ -3200,12 +3059,9 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8292 scripts/scenario_44_outpost.lua:8610
 #: scripts/scenario_44_outpost.lua:8918
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also increased your shield charge capacity."
 msgctxt "upgrade-comms"
 msgid "increase shield charge capacity by 25"
-msgstr "Nous avons également augmenté la capacité de charge de votre bouclier."
+msgstr "augmenter la capacité de charge des boucliers de 25"
 
 #: scripts/scenario_44_outpost.lua:8358 scripts/scenario_44_outpost.lua:8671
 #: scripts/scenario_44_outpost.lua:8965
@@ -3214,12 +3070,9 @@ msgid "increase acceleration by 1/3"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8372
-#, fuzzy
-#| msgctxt "ship-comms"
-#| msgid "Repair combat maneuver"
 msgctxt "upgrade-comms"
 msgid "increase add combat maneuver by 50%"
-msgstr "Réparer la manœuvre de combat"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8524
 msgctxt "upgrade-comms"
@@ -3264,7 +3117,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8647
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~4%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 4%"
 
 #: scripts/scenario_44_outpost.lua:8664
 msgctxt "upgrade-comms"
@@ -3277,20 +3130,15 @@ msgid "increase max rear impulse speed by ~11%"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8713
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver boost by 1/3"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8720
-#, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair combat maneuver (%s Rep)"
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 50%"
-msgstr "Réparer la manœuvre de combat (%s rép)"
+msgstr ""
+"augmenter la vitesse de déplacement latéral des manœuvres de combat de 50%"
 
 #: scripts/scenario_44_outpost.lua:8796
 msgctxt "upgrade-comms"
@@ -3340,7 +3188,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8949
 msgctxt "upgrade-comms"
 msgid "increase hull max by ~8%"
-msgstr ""
+msgstr "renforcer la solidité de la coque d'environ 8%"
 
 #: scripts/scenario_44_outpost.lua:8986
 msgctxt "upgrade-comms"
@@ -3548,18 +3396,14 @@ msgstr ""
 "Homing : %s %s, Nuke : %s %s, Mine : %s %s, EMP : %s %s, HVLI : %s %s"
 
 #: scripts/scenario_44_outpost.lua:9249
-#, fuzzy, lua-format
-#| msgctxt "stationReport-buttonGM"
-#| msgid ""
-#| "%s\n"
-#| "Services and their costs:"
+#, lua-format
 msgctxt "stationReport-buttonGM"
 msgid ""
 "%s\n"
 "Services and their costs and availability:"
 msgstr ""
 "%s\n"
-"Services et leurs coûts :"
+"Services et leurs coûts et disponibilité :"
 
 #: scripts/scenario_44_outpost.lua:9255
 #, lua-format
@@ -3660,16 +3504,16 @@ msgid ""
 "Posthumous rank: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:9650 scripts/scenario_44_outpost.lua:18458
+#: scripts/scenario_44_outpost.lua:9650 scripts/scenario_44_outpost.lua:18595
 msgctxt "msgMainscreen"
 msgid "Cadet"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:9652 scripts/scenario_44_outpost.lua:9656
 #: scripts/scenario_44_outpost.lua:9664 scripts/scenario_44_outpost.lua:9672
-#: scripts/scenario_44_outpost.lua:9680 scripts/scenario_44_outpost.lua:18475
-#: scripts/scenario_44_outpost.lua:18481 scripts/scenario_44_outpost.lua:18487
-#: scripts/scenario_44_outpost.lua:18493 scripts/scenario_44_outpost.lua:18499
+#: scripts/scenario_44_outpost.lua:9680 scripts/scenario_44_outpost.lua:18612
+#: scripts/scenario_44_outpost.lua:18618 scripts/scenario_44_outpost.lua:18624
+#: scripts/scenario_44_outpost.lua:18630 scripts/scenario_44_outpost.lua:18636
 msgctxt "msgMainscreen"
 msgid "Admiral"
 msgstr ""
@@ -3677,10 +3521,10 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:9653 scripts/scenario_44_outpost.lua:9657
 #: scripts/scenario_44_outpost.lua:9658 scripts/scenario_44_outpost.lua:9665
 #: scripts/scenario_44_outpost.lua:9673 scripts/scenario_44_outpost.lua:9681
-#: scripts/scenario_44_outpost.lua:9688 scripts/scenario_44_outpost.lua:18470
-#: scripts/scenario_44_outpost.lua:18476 scripts/scenario_44_outpost.lua:18482
-#: scripts/scenario_44_outpost.lua:18488 scripts/scenario_44_outpost.lua:18494
-#: scripts/scenario_44_outpost.lua:18500
+#: scripts/scenario_44_outpost.lua:9688 scripts/scenario_44_outpost.lua:18607
+#: scripts/scenario_44_outpost.lua:18613 scripts/scenario_44_outpost.lua:18619
+#: scripts/scenario_44_outpost.lua:18625 scripts/scenario_44_outpost.lua:18631
+#: scripts/scenario_44_outpost.lua:18637
 msgctxt "msgMainscreen"
 msgid "Captain"
 msgstr ""
@@ -3689,10 +3533,10 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:9660 scripts/scenario_44_outpost.lua:9666
 #: scripts/scenario_44_outpost.lua:9667 scripts/scenario_44_outpost.lua:9674
 #: scripts/scenario_44_outpost.lua:9682 scripts/scenario_44_outpost.lua:9689
-#: scripts/scenario_44_outpost.lua:9693 scripts/scenario_44_outpost.lua:18466
-#: scripts/scenario_44_outpost.lua:18471 scripts/scenario_44_outpost.lua:18477
-#: scripts/scenario_44_outpost.lua:18483 scripts/scenario_44_outpost.lua:18489
-#: scripts/scenario_44_outpost.lua:18495 scripts/scenario_44_outpost.lua:18501
+#: scripts/scenario_44_outpost.lua:9693 scripts/scenario_44_outpost.lua:18603
+#: scripts/scenario_44_outpost.lua:18608 scripts/scenario_44_outpost.lua:18614
+#: scripts/scenario_44_outpost.lua:18620 scripts/scenario_44_outpost.lua:18626
+#: scripts/scenario_44_outpost.lua:18632 scripts/scenario_44_outpost.lua:18638
 msgctxt "msgMainscreen"
 msgid "Commander"
 msgstr ""
@@ -3702,10 +3546,10 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:9675 scripts/scenario_44_outpost.lua:9676
 #: scripts/scenario_44_outpost.lua:9683 scripts/scenario_44_outpost.lua:9690
 #: scripts/scenario_44_outpost.lua:9694 scripts/scenario_44_outpost.lua:9697
-#: scripts/scenario_44_outpost.lua:18463 scripts/scenario_44_outpost.lua:18467
-#: scripts/scenario_44_outpost.lua:18472 scripts/scenario_44_outpost.lua:18478
-#: scripts/scenario_44_outpost.lua:18484 scripts/scenario_44_outpost.lua:18490
-#: scripts/scenario_44_outpost.lua:18496 scripts/scenario_44_outpost.lua:18502
+#: scripts/scenario_44_outpost.lua:18600 scripts/scenario_44_outpost.lua:18604
+#: scripts/scenario_44_outpost.lua:18609 scripts/scenario_44_outpost.lua:18615
+#: scripts/scenario_44_outpost.lua:18621 scripts/scenario_44_outpost.lua:18627
+#: scripts/scenario_44_outpost.lua:18633 scripts/scenario_44_outpost.lua:18639
 msgctxt "msgMainscreen"
 msgid "Lieutenant"
 msgstr ""
@@ -3715,14 +3559,12 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:9678 scripts/scenario_44_outpost.lua:9684
 #: scripts/scenario_44_outpost.lua:9691 scripts/scenario_44_outpost.lua:9695
 #: scripts/scenario_44_outpost.lua:9698 scripts/scenario_44_outpost.lua:9700
-#: scripts/scenario_44_outpost.lua:18461 scripts/scenario_44_outpost.lua:18464
-#: scripts/scenario_44_outpost.lua:18468 scripts/scenario_44_outpost.lua:18473
-#: scripts/scenario_44_outpost.lua:18479 scripts/scenario_44_outpost.lua:18485
-#: scripts/scenario_44_outpost.lua:18491 scripts/scenario_44_outpost.lua:18497
-#: scripts/scenario_44_outpost.lua:18503
+#: scripts/scenario_44_outpost.lua:18598 scripts/scenario_44_outpost.lua:18601
+#: scripts/scenario_44_outpost.lua:18605 scripts/scenario_44_outpost.lua:18610
+#: scripts/scenario_44_outpost.lua:18616 scripts/scenario_44_outpost.lua:18622
+#: scripts/scenario_44_outpost.lua:18628 scripts/scenario_44_outpost.lua:18634
+#: scripts/scenario_44_outpost.lua:18640
 #, fuzzy
-#| msgctxt "tabRelay&Operations"
-#| msgid "Ensign Death"
 msgctxt "msgMainscreen"
 msgid "Ensign"
 msgstr "Mort de l'officier"
@@ -3732,91 +3574,71 @@ msgstr "Mort de l'officier"
 #: scripts/scenario_44_outpost.lua:9687 scripts/scenario_44_outpost.lua:9692
 #: scripts/scenario_44_outpost.lua:9696 scripts/scenario_44_outpost.lua:9699
 #: scripts/scenario_44_outpost.lua:9701 scripts/scenario_44_outpost.lua:9702
-#: scripts/scenario_44_outpost.lua:18460 scripts/scenario_44_outpost.lua:18462
-#: scripts/scenario_44_outpost.lua:18465 scripts/scenario_44_outpost.lua:18469
-#: scripts/scenario_44_outpost.lua:18474 scripts/scenario_44_outpost.lua:18480
-#: scripts/scenario_44_outpost.lua:18486 scripts/scenario_44_outpost.lua:18492
-#: scripts/scenario_44_outpost.lua:18498 scripts/scenario_44_outpost.lua:18504
+#: scripts/scenario_44_outpost.lua:18597 scripts/scenario_44_outpost.lua:18599
+#: scripts/scenario_44_outpost.lua:18602 scripts/scenario_44_outpost.lua:18606
+#: scripts/scenario_44_outpost.lua:18611 scripts/scenario_44_outpost.lua:18617
+#: scripts/scenario_44_outpost.lua:18623 scripts/scenario_44_outpost.lua:18629
+#: scripts/scenario_44_outpost.lua:18635 scripts/scenario_44_outpost.lua:18641
 msgctxt "msgMainscreen"
 msgid "Acting Ensign"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:9731
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minutes and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s seconds"
 msgstr "%s %i minutes et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9733
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minutes and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minutes and %s second"
 msgstr "%s %i minutes et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9737
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minute and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s seconds"
 msgstr "%s %i minute et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9739
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minute and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hours, %s minute and %s second"
 msgstr "%s %i minute et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9745
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minutes and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s seconds"
 msgstr "%s %i minutes et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9747
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minutes and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minutes and %s second"
 msgstr "%s %i minutes et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9751
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minute and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s seconds"
 msgstr "%s %i minute et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9753
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minute and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s hour, %s minute and %s second"
 msgstr "%s %i minute et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9759
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minutes and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s seconds"
 msgstr "%s %i minutes et %i secondes"
 
 #: scripts/scenario_44_outpost.lua:9761
 #, fuzzy, lua-format
-#| msgctxt "msgEngineer"
-#| msgid "%s %i minutes and %i seconds"
 msgctxt "msgMainscreen"
 msgid "%s minutes and %s second"
 msgstr "%s %i minutes et %i secondes"
@@ -3888,12 +3710,9 @@ msgid "Get your fuel cells at Melinda's Market"
 msgstr "Obtenez vos piles à combustible au marché de Melinda"
 
 #: scripts/scenario_44_outpost.lua:10874
-#, fuzzy
-#| msgctxt "scienceDescription-buoy"
-#| msgid "Find a companion. All species available"
 msgctxt "scienceDescription-buoy"
 msgid "Find a special companion. All species available"
-msgstr "Trouvez un compagnon. Toutes les espèces disponibles"
+msgstr "Trouvez un compagnon spécial. Toutes les espèces disponibles"
 
 #: scripts/scenario_44_outpost.lua:10875
 msgctxt "scienceDescription-buoy"
@@ -3913,12 +3732,9 @@ msgstr ""
 "d'astéroïdes"
 
 #: scripts/scenario_44_outpost.lua:10878
-#, fuzzy
-#| msgctxt "scienceDescription-buoy"
-#| msgid "Best tasting water in the quadrant"
 msgctxt "scienceDescription-buoy"
 msgid "Best tasting water in the quadrant at Willy's Waterway"
-msgstr "L'eau la plus savoureuse du quadrant"
+msgstr "L'eau la plus savoureuse du quadrant chez Willy's Waterway"
 
 #: scripts/scenario_44_outpost.lua:10879
 msgctxt "scienceDescription-buoy"
@@ -4016,12 +3832,10 @@ msgstr ""
 "Réputation : %i"
 
 #: scripts/scenario_44_outpost.lua:11537
-#, fuzzy, lua-format
-#| msgctxt "stationGeneralInfo-comms"
-#| msgid "Never heard of %s"
+#, lua-format
 msgctxt "station-comms"
 msgid "Deliver %s to %s"
-msgstr "Jamais entendu parler de %s."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:11539 scripts/scenario_44_outpost.lua:11721
 #: scripts/scenario_44_outpost.lua:11749 scripts/scenario_44_outpost.lua:11768
@@ -4135,12 +3949,10 @@ msgid "Transport Passenger"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:11715
-#, fuzzy, lua-format
-#| msgctxt "scienceDescription-buoy"
-#| msgid "Sensor Record: %s station %s in %s"
+#, lua-format
 msgctxt "station-comms"
 msgid "%s wishes to be transported to %s station %s in sector %s."
-msgstr "Enregistrement du capteur : station %s %s en secteur %s "
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:11716
 #, lua-format
@@ -4204,12 +4016,10 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:11766
-#, fuzzy, lua-format
-#| msgctxt "mission1st-comms"
-#| msgid "picking up cargo"
+#, lua-format
 msgctxt "station-comms"
 msgid "Pick up cargo for %s"
-msgstr "charger une cargaison"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:11771
 #, lua-format
@@ -4656,8 +4466,6 @@ msgstr "j'aurai besoin d'informations"
 
 #: scripts/scenario_44_outpost.lua:12290
 #, fuzzy
-#| msgctxt "station-comms"
-#| msgid "What would you like to know?"
 msgctxt "station-comms"
 msgid "What do you need to know?"
 msgstr "Qu'aimeriez-vous savoir ?"
@@ -5166,8 +4974,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:12801
 #, fuzzy, lua-format
-#| msgctxt "scienceDescription-buoy"
-#| msgid "Sensor Record: %s station %s in %s"
 msgctxt "orders-comms"
 msgid ""
 "%s\n"
@@ -5184,8 +4990,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:12809
 #, fuzzy, lua-format
-#| msgctxt "scienceDescription-buoy"
-#| msgid "Sensor Record: %s station %s in %s"
 msgctxt "orders-comms"
 msgid ""
 "%s\n"
@@ -5202,8 +5006,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:12815
 #, fuzzy, lua-format
-#| msgctxt "scienceDescription-buoy"
-#| msgid "%s, %s station %s in %s"
 msgctxt "orders-comms"
 msgid ""
 "%s\n"
@@ -5450,22 +5252,13 @@ msgid "Reduce range by 25% for 3 minutes"
 msgstr "Réduire la portée de 25 % pendant 3 minutes"
 
 #: scripts/scenario_44_outpost.lua:13113
-#, fuzzy
-#| msgctxt "station-comms"
-#| msgid ""
-#| "Why do I have to pay reputation to log in to some of these warp jammers?"
 msgctxt "station_comms"
 msgid ""
 "Why do I have to pay reputation to log in to some of these warp jammers?"
 msgstr "L'accès à certains brouilleurs est payant : explications"
 
 #: scripts/scenario_44_outpost.lua:13114
-#, fuzzy, lua-format
-#| msgctxt "station-comms"
-#| msgid ""
-#| "It's complicated. It depends on the relationships between the warp jammer "
-#| "owner, us, station %s and you, %s. The farther apart the relationship, "
-#| "the more reputation it costs to gain access. Do you want more details?"
+#, lua-format
 msgid ""
 "It's complicated. It depends on the relationships between the warp jammer "
 "owner, us, station %s and you, %s. The farther apart the relationship, the "
@@ -5697,8 +5490,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13204
 #, fuzzy, lua-format
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Station %s docking services status:"
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s primary docking services status:"
 msgstr "État des services d'accueil de la station %s :"
@@ -5717,24 +5508,18 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13248
 #, fuzzy, lua-format
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Station %s docking services status:"
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s docking repair services status:"
 msgstr "État des services d'accueil de la station %s :"
 
 #: scripts/scenario_44_outpost.lua:13270
 #, fuzzy
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Repair ship system"
 msgctxt "dockingServicesStatus-comms"
 msgid "Upgrade ship systems"
 msgstr "Réparer les systèmes du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:13271
 #, fuzzy, lua-format
-#| msgctxt "dockingServicesStatus-comms"
-#| msgid "Station %s docking services status:"
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s docking upgrade services:"
 msgstr "État des services d'accueil de la station %s :"
@@ -5745,6 +5530,8 @@ msgid ""
 "We can provide the following upgrades:\n"
 "    system: description (reputation cost)"
 msgstr ""
+"Nous pouvons fournir les mises à niveau suivantes :\n"
+"    système : description (coût en réputation)"
 
 #: scripts/scenario_44_outpost.lua:13287
 msgctxt "dockingServicesStatus-comms"
@@ -5773,17 +5560,15 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13315
-#, fuzzy, lua-format
-#| msgctxt "mission3th-comms"
-#| msgid "Your information is correct"
+#, lua-format
 msgctxt "station-comms"
 msgid "Goods information at %s or near %s"
-msgstr "Vos informations sont correctes"
+msgstr "Informations sur les marchandises sur %s ou à proximité de %s."
 
 #: scripts/scenario_44_outpost.lua:13316
 msgctxt "station-comms"
 msgid "Always good to get some goods"
-msgstr ""
+msgstr "Toujours bon d'obtenir des marchandises"
 
 #: scripts/scenario_44_outpost.lua:13326
 msgctxt "trade-comms"
@@ -5976,12 +5761,7 @@ msgid "Please send a service jonque for repairs"
 msgstr "Merci de nous envoyer une jonque de service pour les réparations."
 
 #: scripts/scenario_44_outpost.lua:13512
-#, fuzzy, lua-format
-#| msgctxt "stationAssist-comms"
-#| msgid ""
-#| "Would you like the service jonque to come to you directly or would you "
-#| "prefer to set up a rendez-vous via a waypoint? Either way, you will need "
-#| "%.1f reputation."
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid ""
 "Would you like the service jonque to come to you directly or would you "
@@ -6013,17 +5793,13 @@ msgstr ""
 "précédent, en définir un puis revenir sur cette page."
 
 #: scripts/scenario_44_outpost.lua:13560
-#, fuzzy, lua-format
-#| msgctxt "stationAssist-comms"
-#| msgid "Rendez-vous at waypoint %i"
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "Rendezvous at waypoint %i"
 msgstr "Rendez-vous au marqueur %i."
 
 #: scripts/scenario_44_outpost.lua:13598
-#, fuzzy, lua-format
-#| msgctxt "stationAssist-comms"
-#| msgid "We have dispatched %s to rendez-vous at waypoint %i"
+#, lua-format
 msgctxt "stationAssist-comms"
 msgid "We have dispatched %s to rendezvous at waypoint %i"
 msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
@@ -6057,8 +5833,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13737
 #, fuzzy
-#| msgctxt "shipAssist-comms"
-#| msgid " Missiles: "
 msgctxt "dockingServicesStatus-comms"
 msgid "missiles"
 msgstr " Missiles : "
@@ -6073,8 +5847,6 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13742
 #, fuzzy
-#| msgctxt "situationReport-comms"
-#| msgid "Shield "
 msgctxt "dockingServicesStatus-comms"
 msgid "shield"
 msgstr "Boucliers "
@@ -6206,12 +5978,10 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13795
-#, fuzzy, lua-format
-#| msgctxt "scienceDescription-buoy"
-#| msgid "%s, %s station %s in %s"
+#, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s"
-msgstr "%s, %s station %s en secteur %s "
+msgstr "%s station %s en secteur %s"
 
 #: scripts/scenario_44_outpost.lua:13804
 #, lua-format
@@ -6286,12 +6056,9 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13848
-#, fuzzy
-#| msgctxt "stationGeneralInfo-comms"
-#| msgid "Tell me about %s"
 msgctxt "orders-comms"
 msgid "Yes, tell me about this idea"
-msgstr "Parlez-moi de %s."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13849
 msgctxt "orders-comms"
@@ -6416,36 +6183,24 @@ msgid "Suit yourself"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13943
-#, fuzzy
-#| msgctxt "station-comms"
-#| msgid "What would you like to know?"
 msgctxt "ship-comms"
 msgid "Would you like another crewmember?"
-msgstr "Qu'aimeriez-vous savoir ?"
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13944
-#, fuzzy
-#| msgctxt "ammo-comms"
-#| msgid "We really need some nukes ("
 msgctxt "ship-comms"
 msgid "We don't really need one"
-msgstr "Nous avons vraiment besoin d'armes nucléaires. (nuke) ("
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13945
-#, fuzzy
-#| msgctxt "msgEngineer"
-#| msgid "One of your repair crew has perished"
 msgctxt "ship-comms"
 msgid "This one's got repair crew experience"
-msgstr "Un de vos réparateurs a péri."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13949
-#, fuzzy
-#| msgctxt "trade-comms"
-#| msgid "Recruit repair crew member for %i reputation"
 msgctxt "ship-comms"
 msgid "Take on crewmember as a favor (50 reputation)?"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:13962 scripts/scenario_44_outpost.lua:14121
 msgctxt "ship-comms"
@@ -6463,12 +6218,9 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:13972 scripts/scenario_44_outpost.lua:14007
 #: scripts/scenario_44_outpost.lua:14051 scripts/scenario_44_outpost.lua:14087
 #: scripts/scenario_44_outpost.lua:14131 scripts/scenario_44_outpost.lua:14166
-#, fuzzy
-#| msgctxt "msgEngineer"
-#| msgid "One of your repair crew has perished"
 msgctxt "ship-comms"
 msgid "No repair crew to send"
-msgstr "Un de vos réparateurs a péri."
+msgstr "Aucun réparateur de disponible à vous envoyer"
 
 #: scripts/scenario_44_outpost.lua:13988 scripts/scenario_44_outpost.lua:14067
 #: scripts/scenario_44_outpost.lua:14147
@@ -6503,20 +6255,14 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:14023
-#, fuzzy
-#| msgctxt "mission3th-comms"
-#| msgid "We also upgraded your impulse engines."
 msgctxt "ship-comms"
 msgid "This one can upgrade your impulse engines"
-msgstr "Nous avons également amélioré vos moteurs à impulsion."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:14027
-#, fuzzy
-#| msgctxt "trade-comms"
-#| msgid "Recruit repair crew member for %i reputation"
 msgctxt "ship-comms"
 msgid "Take on crewmember as a favor (25 reputation)?"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:14041
 msgctxt "ship-comms"
@@ -6550,12 +6296,10 @@ msgid "This one wants civilian experience"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:14108
-#, fuzzy, lua-format
-#| msgctxt "trade-comms"
-#| msgid "Recruit repair crew member for %i reputation"
+#, lua-format
 msgctxt "ship-comms"
 msgid "Take on crewmember as a favor (%i reputation)?"
-msgstr "Recruter un membre de l'équipe de réparation pour %i réputation."
+msgstr ""
 
 #: scripts/scenario_44_outpost.lua:14177
 #, lua-format
@@ -7260,7 +7004,50 @@ msgstr ""
 "Il n'y a rien sur votre vaisseau que nous puissions vous aider à réparer. "
 "Désolé."
 
-#: scripts/scenario_44_outpost.lua:16810
+#: scripts/scenario_44_outpost.lua:16800 scripts/scenario_44_outpost.lua:16838
+#: scripts/scenario_44_outpost.lua:16879 scripts/scenario_44_outpost.lua:16920
+#: scripts/scenario_44_outpost.lua:16967 scripts/scenario_44_outpost.lua:17015
+#: scripts/scenario_44_outpost.lua:17060 scripts/scenario_44_outpost.lua:17096
+#: scripts/scenario_44_outpost.lua:17124 scripts/scenario_44_outpost.lua:17152
+#: scripts/scenario_44_outpost.lua:17186 scripts/scenario_44_outpost.lua:17223
+#: scripts/scenario_44_outpost.lua:17255 scripts/scenario_44_outpost.lua:17284
+#: scripts/scenario_44_outpost.lua:17319 scripts/scenario_44_outpost.lua:17353
+#: scripts/scenario_44_outpost.lua:17405 scripts/scenario_44_outpost.lua:17470
+#: scripts/scenario_44_outpost.lua:17539 scripts/scenario_44_outpost.lua:17590
+#: scripts/scenario_44_outpost.lua:17636 scripts/scenario_44_outpost.lua:17689
+#: scripts/scenario_44_outpost.lua:17720 scripts/scenario_44_outpost.lua:17759
+#: scripts/scenario_44_outpost.lua:17825 scripts/scenario_44_outpost.lua:17874
+#: scripts/scenario_44_outpost.lua:17919 scripts/scenario_44_outpost.lua:17973
+#: scripts/scenario_44_outpost.lua:18019 scripts/scenario_44_outpost.lua:18088
+#: scripts/scenario_44_outpost.lua:18101
+msgctxt "scienceDB"
+msgid "Ships"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16801 scripts/scenario_44_outpost.lua:16839
+#: scripts/scenario_44_outpost.lua:16880 scripts/scenario_44_outpost.lua:16921
+#: scripts/scenario_44_outpost.lua:16968 scripts/scenario_44_outpost.lua:17016
+#: scripts/scenario_44_outpost.lua:17061 scripts/scenario_44_outpost.lua:17406
+#: scripts/scenario_44_outpost.lua:17471 scripts/scenario_44_outpost.lua:17540
+#: scripts/scenario_44_outpost.lua:17974 scripts/scenario_44_outpost.lua:18020
+msgctxt "scienceDB"
+msgid "Frigate"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16802
+msgctxt "scienceDB"
+msgid "Farco 3"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16803 scripts/scenario_44_outpost.lua:16841
+#: scripts/scenario_44_outpost.lua:16882 scripts/scenario_44_outpost.lua:16923
+#: scripts/scenario_44_outpost.lua:16970 scripts/scenario_44_outpost.lua:17063
+#: scripts/scenario_44_outpost.lua:18022
+msgctxt "scienceDB"
+msgid "Phobos T3"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16814
 msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
@@ -7271,7 +7058,12 @@ msgstr ""
 "cas du Farco 3, les faisceaux laser sont plus longs et plus rapides et les "
 "boucliers sont légèrement plus solides."
 
-#: scripts/scenario_44_outpost.lua:16844
+#: scripts/scenario_44_outpost.lua:16840
+msgctxt "scienceDB"
+msgid "Farco 5"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16852
 msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
@@ -7283,6 +7075,11 @@ msgstr ""
 
 #: scripts/scenario_44_outpost.lua:16881
 msgctxt "scienceDB"
+msgid "Farco 8"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16893
+msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
 "the Farco 8, the beams are longer and faster, the tubes load faster and the "
@@ -7292,7 +7089,12 @@ msgstr ""
 "cas du Farco 8, les faisceaux laser sont plus longs et plus rapides, les "
 "tubes se chargent plus vite et les blindages sont plus solides."
 
-#: scripts/scenario_44_outpost.lua:16918
+#: scripts/scenario_44_outpost.lua:16922
+msgctxt "scienceDB"
+msgid "Farco 11"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16934
 msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
@@ -7304,7 +7106,12 @@ msgstr ""
 "sont plus longs et plus rapides, il y a un faisceau \"sniper\" plus long et "
 "les boucliers sont plus solides."
 
-#: scripts/scenario_44_outpost.lua:16961
+#: scripts/scenario_44_outpost.lua:16969
+msgctxt "scienceDB"
+msgid "Farco 13"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:16981
 msgctxt "scienceDB"
 msgid ""
 "The Farco models are evolutionary changes to the Phobos T3. In the case of "
@@ -7318,7 +7125,17 @@ msgstr ""
 "les tubes se chargent plus rapidement, il y a plus de missiles et les "
 "boucliers sont plus solides."
 
-#: scripts/scenario_44_outpost.lua:17005
+#: scripts/scenario_44_outpost.lua:17017
+msgctxt "scienceDB"
+msgid "Whirlwind"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17018
+msgctxt "scienceDB"
+msgid "Storm"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17029
 msgctxt "scienceDB"
 msgid ""
 "The Whirlwind, another heavy artillery cruiser, takes the Storm and adds "
@@ -7330,7 +7147,12 @@ msgstr ""
 "Tempête avait avalé un Piranha et développé des branchies. Attendez-vous à "
 "voir des missiles, beaucoup de missiles."
 
-#: scripts/scenario_44_outpost.lua:17046
+#: scripts/scenario_44_outpost.lua:17062
+msgctxt "scienceDB"
+msgid "Phobos R2"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17074
 msgctxt "scienceDB"
 msgid ""
 "The Phobos R2 model is very similar to the Phobos T3. It's got a faster turn "
@@ -7339,7 +7161,24 @@ msgstr ""
 "Le modèle Phobos R2 est très similaire au Phobos T3. Il a une vitesse de "
 "rotation plus rapide, mais un seul tube de missile."
 
-#: scripts/scenario_44_outpost.lua:17078
+#: scripts/scenario_44_outpost.lua:17097 scripts/scenario_44_outpost.lua:17187
+#: scripts/scenario_44_outpost.lua:17224 scripts/scenario_44_outpost.lua:17354
+#: scripts/scenario_44_outpost.lua:17826
+msgctxt "scienceDB"
+msgid "Starfighter"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17098
+msgctxt "scienceDB"
+msgid "MV52 Hornet"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17099
+msgctxt "scienceDB"
+msgid "MT52 Hornet"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17110
 msgctxt "scienceDB"
 msgid ""
 "The MV52 Hornet is very similar to the MT52 and MU52 models. The beam does "
@@ -7351,7 +7190,25 @@ msgstr ""
 "Les faisceaux laser font plus de dégâts, ses moteurs sont plus rapide, il "
 "tourne plus vite que le MT52, mais plus lentement que le MU52."
 
-#: scripts/scenario_44_outpost.lua:17102
+#: scripts/scenario_44_outpost.lua:17125 scripts/scenario_44_outpost.lua:17153
+#: scripts/scenario_44_outpost.lua:17256 scripts/scenario_44_outpost.lua:17285
+#: scripts/scenario_44_outpost.lua:17320 scripts/scenario_44_outpost.lua:17721
+#: scripts/scenario_44_outpost.lua:17760 scripts/scenario_44_outpost.lua:17920
+msgctxt "scienceDB"
+msgid "No Class"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17126
+msgctxt "scienceDB"
+msgid "K2 Fighter"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17127 scripts/scenario_44_outpost.lua:17155
+msgctxt "scienceDB"
+msgid "Ktlitan Fighter"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17138
 msgctxt "scienceDB"
 msgid ""
 "Enterprising designers published this design specification based on salvaged "
@@ -7362,7 +7219,12 @@ msgstr ""
 "Ktlitan récupérés. Comparativement, ce modèle a des faisceaux laser qui se "
 "rechargent plus rapidement, mais la coque est un peu plus faible."
 
-#: scripts/scenario_44_outpost.lua:17126
+#: scripts/scenario_44_outpost.lua:17154
+msgctxt "scienceDB"
+msgid "K3 Fighter"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17166
 msgctxt "scienceDB"
 msgid ""
 "Enterprising designers published this design specification based on salvaged "
@@ -7374,7 +7236,18 @@ msgstr ""
 "rechargent plus rapidement et sont plus solides, mais la coque est plus "
 "faible."
 
-#: scripts/scenario_44_outpost.lua:17156
+#: scripts/scenario_44_outpost.lua:17188
+msgctxt "scienceDB"
+msgid "Waddle 5"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17189 scripts/scenario_44_outpost.lua:17226
+#: scripts/scenario_44_outpost.lua:17828
+msgctxt "scienceDB"
+msgid "Adder MK5"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17200
 msgctxt "scienceDB"
 msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
@@ -7384,7 +7257,12 @@ msgstr ""
 "MK5) aux enchères et leur a ajouté des moteurs à vitesse lumière pour "
 "produire le Waddle 5."
 
-#: scripts/scenario_44_outpost.lua:17189
+#: scripts/scenario_44_outpost.lua:17225
+msgctxt "scienceDB"
+msgid "Jade 5"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17237
 msgctxt "scienceDB"
 msgid ""
 "Conversions R Us purchased a number of Adder MK 5 ships at auction and added "
@@ -7394,7 +7272,18 @@ msgstr ""
 "MK5) aux enchères et leur a ajouté des moteurs de téléportation pour "
 "produire le Jade 5."
 
-#: scripts/scenario_44_outpost.lua:17217
+#: scripts/scenario_44_outpost.lua:17257
+msgctxt "scienceDB"
+msgid "Lite Drone"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17258 scripts/scenario_44_outpost.lua:17287
+#: scripts/scenario_44_outpost.lua:17322 scripts/scenario_44_outpost.lua:17723
+msgctxt "scienceDB"
+msgid "Ktlitan Drone"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17269
 msgctxt "scienceDB"
 msgid ""
 "The light drone was pieced together from scavenged parts of various damaged "
@@ -7406,7 +7295,12 @@ msgstr ""
 "un faisceau laser plus faibles, mais une manœuvre et des moteurs plus "
 "rapides."
 
-#: scripts/scenario_44_outpost.lua:17242
+#: scripts/scenario_44_outpost.lua:17286
+msgctxt "scienceDB"
+msgid "Heavy Drone"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17298
 msgctxt "scienceDB"
 msgid ""
 "The heavy drone has a stronger hull and a stronger beam than the normal "
@@ -7415,7 +7309,12 @@ msgstr ""
 "Le drone lourd a une coque plus solide et un faisceau plus puissant que le "
 "drone Ktlitan classique, mais il se déplace également plus lentement."
 
-#: scripts/scenario_44_outpost.lua:17273
+#: scripts/scenario_44_outpost.lua:17321
+msgctxt "scienceDB"
+msgid "Jacket Drone"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17333
 msgctxt "scienceDB"
 msgid ""
 "The Jacket Drone is a Ktlitan Drone with a shield. It's also slightly slower "
@@ -7426,7 +7325,17 @@ msgstr ""
 "légèrement plus lent et a un faisceau légèrement plus faible en raison des "
 "besoins énergétiques du bouclier ajouté."
 
-#: scripts/scenario_44_outpost.lua:17303
+#: scripts/scenario_44_outpost.lua:17355
+msgctxt "scienceDB"
+msgid "WZ-Lindworm"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17356
+msgctxt "scienceDB"
+msgid "WX-Lindworm"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17367
 msgctxt "scienceDB"
 msgid ""
 "The WZ-Lindworm is essentially the stock WX-Lindworm with more HVLIs, more "
@@ -7441,7 +7350,17 @@ msgstr ""
 "est plus vulnérable. Le WZ tourne un peu plus lentement que le WX. Ce petit "
 "bombardier a du punch."
 
-#: scripts/scenario_44_outpost.lua:17351
+#: scripts/scenario_44_outpost.lua:17407
+msgctxt "scienceDB"
+msgid "Tempest"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17408
+msgctxt "scienceDB"
+msgid "Piranha F12"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17419
 msgctxt "scienceDB"
 msgid ""
 "Loosely based on the Piranha F12 model, the Tempest adds four more broadside "
@@ -7454,7 +7373,17 @@ msgstr ""
 "Homing missiles et 8 Nukes. Le tempête peut semer la peur dans le cœur de "
 "vos ennemis. Procurez-vous-en un aujourd'hui !"
 
-#: scripts/scenario_44_outpost.lua:17412
+#: scripts/scenario_44_outpost.lua:17472
+msgctxt "scienceDB"
+msgid "Enforcer"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17473
+msgctxt "scienceDB"
+msgid "Blockade Runner"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17484
 msgctxt "scienceDB"
 msgid ""
 "The Enforcer is a highly modified Blockade Runner. A warp drive was added "
@@ -7469,7 +7398,17 @@ msgstr ""
 "coque plus solides. Suppression des faisceaux laser arrières et renforcement "
 "des faisceaux laser à l'avant."
 
-#: scripts/scenario_44_outpost.lua:17477
+#: scripts/scenario_44_outpost.lua:17541
+msgctxt "scienceDB"
+msgid "Predator"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17542 scripts/scenario_44_outpost.lua:17976
+msgctxt "scienceDB"
+msgid "Piranha F8"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17553
 msgctxt "scienceDB"
 msgid ""
 "The Predator is a significantly improved Piranha F8. Stronger shields and "
@@ -7483,7 +7422,23 @@ msgstr ""
 "pointant dans six directions et un grand nombre de missiles à tête "
 "chercheuse (homing) à tirer."
 
-#: scripts/scenario_44_outpost.lua:17524
+#: scripts/scenario_44_outpost.lua:17591 scripts/scenario_44_outpost.lua:17637
+#: scripts/scenario_44_outpost.lua:17875 scripts/scenario_44_outpost.lua:18103
+msgctxt "scienceDB"
+msgid "Corvette"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17592
+msgctxt "scienceDB"
+msgid "Atlantis Y42"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17593
+msgctxt "scienceDB"
+msgid "Atlantis X23"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17604
 msgctxt "scienceDB"
 msgid ""
 "The Atlantis Y42 improves on the Atlantis X23 with stronger shields, faster "
@@ -7493,7 +7448,17 @@ msgstr ""
 "vitesses d'impulsion et de rotation plus rapides, un faisceau laser "
 "supplémentaire à l'arrière et un plus grand stock de missiles."
 
-#: scripts/scenario_44_outpost.lua:17566
+#: scripts/scenario_44_outpost.lua:17638
+msgctxt "scienceDB"
+msgid "Starhammer V"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17639 scripts/scenario_44_outpost.lua:17877
+msgctxt "scienceDB"
+msgid "Starhammer II"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17650
 msgctxt "scienceDB"
 msgid ""
 "The Starhammer V recognizes common modifications made in the field to the "
@@ -7507,7 +7472,23 @@ msgstr ""
 "missiles à tirer. Ces changements font du Starhammer V une force avec "
 "laquelle il faut compter."
 
-#: scripts/scenario_44_outpost.lua:17615
+#: scripts/scenario_44_outpost.lua:17690
+msgctxt "scienceDB"
+msgid "Dreadnought"
+msgstr "Cuirassé"
+
+#: scripts/scenario_44_outpost.lua:17691
+msgctxt "scienceDB"
+msgid "Tyr"
+msgstr ""
+
+# Scenario setting
+#: scripts/scenario_44_outpost.lua:17692
+msgctxt "scienceDB"
+msgid "Battlestation"
+msgstr "Station de combat"
+
+#: scripts/scenario_44_outpost.lua:17703
 msgctxt "scienceDB"
 msgid ""
 "The Tyr is the shipyard's answer to admiral Konstatz' casual statement that "
@@ -7524,7 +7505,12 @@ msgstr ""
 "des boucliers et une coque plus solides et une couverture de faisceaux laser "
 "plus large. Juste pour montrer qu'ils en étaient capable."
 
-#: scripts/scenario_44_outpost.lua:17642
+#: scripts/scenario_44_outpost.lua:17722
+msgctxt "scienceDB"
+msgid "Gnat"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17734
 msgctxt "scienceDB"
 msgid ""
 "The Gnat is a nimbler version of the Ktlitan Drone. It's got half the hull, "
@@ -7533,7 +7519,17 @@ msgstr ""
 "Le Gnat est une version plus agile du drone Ktlitan. Il a une coque 2 fois "
 "moins épaisse, mais il bouge et tourne plus vite."
 
-#: scripts/scenario_44_outpost.lua:17677
+#: scripts/scenario_44_outpost.lua:17761
+msgctxt "scienceDB"
+msgid "Cucaracha"
+msgstr "Cucaracha"
+
+#: scripts/scenario_44_outpost.lua:17762
+msgctxt "scienceDB"
+msgid "Tug"
+msgstr "Remorqueur"
+
+#: scripts/scenario_44_outpost.lua:17773
 msgctxt "scienceDB"
 msgid ""
 "The Cucaracha is a quick ship built around the Tug model with heavy shields "
@@ -7543,7 +7539,12 @@ msgstr ""
 "lourds boucliers et un faisceau laser large conçu pour être difficile à "
 "éviter."
 
-#: scripts/scenario_44_outpost.lua:17738
+#: scripts/scenario_44_outpost.lua:17827
+msgctxt "scienceDB"
+msgid "Maniapak"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:17838
 msgctxt "scienceDB"
 msgid ""
 "The Maniapak is an extreme modification of an Adder MK5 and a Blade. A "
@@ -7552,7 +7553,12 @@ msgid ""
 "Unfortunately, this ship is often a danger to friends as well as foes."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:17784
+#: scripts/scenario_44_outpost.lua:17876
+msgctxt "scienceDB"
+msgid "Starhammer III"
+msgstr "Starhammer III"
+
+#: scripts/scenario_44_outpost.lua:17888
 msgctxt "scienceDB"
 msgid ""
 "The designers of the Starhammer III took the Starhammer II and added a rear "
@@ -7563,7 +7569,17 @@ msgstr ""
 "un faisceau laser orienté vers l'arrière, agrandi l'un des tubes lance-"
 "missile et ajouté plus de missiles à tirer."
 
-#: scripts/scenario_44_outpost.lua:17825
+#: scripts/scenario_44_outpost.lua:17921
+msgctxt "scienceDB"
+msgid "K2 Breaker"
+msgstr "K2 Breaker"
+
+#: scripts/scenario_44_outpost.lua:17922
+msgctxt "scienceDB"
+msgid "Ktlitan Breaker"
+msgstr "Ktlitan Breaker"
+
+#: scripts/scenario_44_outpost.lua:17933
 msgctxt "scienceDB"
 msgid ""
 "The K2 Breaker designers took the Ktlitan Breaker and beefed up the hull, "
@@ -7575,7 +7591,12 @@ msgstr ""
 "plus de missiles à tirer. Devrait être adapté contre quelques vaisseaux "
 "ennemis."
 
-#: scripts/scenario_44_outpost.lua:17875
+#: scripts/scenario_44_outpost.lua:17975
+msgctxt "scienceDB"
+msgid "Hurricane"
+msgstr "L'Ouragan"
+
+#: scripts/scenario_44_outpost.lua:17987
 msgctxt "scienceDB"
 msgid ""
 "The Hurricane is designed to jump in and shower the target with missiles. It "
@@ -7587,7 +7608,12 @@ msgstr ""
 "téléporteur, 5 tubes lance-missile supplémentaires dans différentes "
 "directions et tailles et beaucoup plus de missiles à tirer."
 
-#: scripts/scenario_44_outpost.lua:17917
+#: scripts/scenario_44_outpost.lua:18021
+msgctxt "scienceDB"
+msgid "Phobos T4"
+msgstr "Phobos T4"
+
+#: scripts/scenario_44_outpost.lua:18033
 msgctxt "scienceDB"
 msgid ""
 "The Phobos T4 makes some simple improvements on the Phobos T3: faster "
@@ -7598,7 +7624,18 @@ msgstr ""
 "manœuvre plus rapide, des boucliers avant plus solides mais des boucliers "
 "arrière plus faibles et des faisceaux laser plus longs et plus rapides."
 
-#: scripts/scenario_44_outpost.lua:17976
+#: scripts/scenario_44_outpost.lua:18049 scripts/scenario_44_outpost.lua:18106
+msgctxt "scienceDB"
+msgid "Service Jonque"
+msgstr "Service Jonque"
+
+#: scripts/scenario_44_outpost.lua:18056 scripts/scenario_44_outpost.lua:18089
+#: scripts/scenario_44_outpost.lua:18102
+msgctxt "scienceDB"
+msgid "Freighter"
+msgstr "Cargo"
+
+#: scripts/scenario_44_outpost.lua:18096
 msgctxt "scienceDB"
 msgid ""
 "Small, medium and large scale transport ships. These are the working ships "
@@ -7610,7 +7647,68 @@ msgstr ""
 "secteur. Ils peuvent transporter du personnel, des marchandises, de "
 "l'équipement, des ordures, du carburant, du matériel de recherche, etc."
 
-#: scripts/scenario_44_outpost.lua:18008
+#: scripts/scenario_44_outpost.lua:18104
+msgctxt "scienceDB"
+msgid "Space Sedan"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18105
+msgctxt "scienceDB"
+msgid "Omnibus"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18107
+msgctxt "scienceDB"
+msgid "Courier"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18108
+msgctxt "scienceDB"
+msgid "Work Wagon"
+msgstr "Wagon Bosseur"
+
+#: scripts/scenario_44_outpost.lua:18109
+msgctxt "scienceDB"
+msgid "Laden Lorry"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18110
+msgctxt "scienceDB"
+msgid "Physics Research"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18116
+msgctxt "scienceDB"
+msgid "Personnel Jump Freighter 3"
+msgstr "Navette 3 (avec téléportation)"
+
+#: scripts/scenario_44_outpost.lua:18121
+msgctxt "scienceDB"
+msgid ""
+"The Space Sedan was built around a surplus Personnel Jump Freighter 3. It's "
+"designed to provide relatively low cost transportation primarily for people, "
+"but there is also a limited amount of cargo space available"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18126
+msgctxt "scienceDB"
+msgid "Personnel Jump Freighter 5"
+msgstr "Navette 5 (avec téléportation)"
+
+#: scripts/scenario_44_outpost.lua:18131
+msgctxt "scienceDB"
+msgid ""
+"The Omnibus was designed from the Personnel Jump Freighter 5. It's made to "
+"transport large numbers of passengers of various types along with their "
+"luggage and any associated cargo"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18136
+msgctxt "scienceDB"
+msgid "Equipment Jump Freighter 4"
+msgstr "Transport d'équipement 4 (avec téléportation)"
+
+#: scripts/scenario_44_outpost.lua:18141
 msgctxt "scienceDB"
 msgid ""
 "The Service Jonque is a modified Equipment Jump Freighter 4. It's designed "
@@ -7622,7 +7720,61 @@ msgstr ""
 "et de l'équipement ainsi que du personnel de réparation là où il est "
 "nécessaire de réparer les stations et vaisseaux."
 
-#: scripts/scenario_44_outpost.lua:18514
+#: scripts/scenario_44_outpost.lua:18146
+msgctxt "scienceDB"
+msgid "Personnel Freighter 1"
+msgstr "Navette 1"
+
+#: scripts/scenario_44_outpost.lua:18151
+msgctxt "scienceDB"
+msgid ""
+"The Courier is a souped up Personnel Freighter 1. It's made to deliver "
+"people and messages fast. Very fast"
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18156
+msgctxt "scienceDB"
+msgid "Equipment Freighter 2"
+msgstr "Transport d'équipement 2"
+
+#: scripts/scenario_44_outpost.lua:18161
+msgctxt "scienceDB"
+msgid ""
+"The Work Wagon is a conversion of an Equipment Freighter 2 designed to carry "
+"equipment and parts where they are needed for repair or construction."
+msgstr ""
+"Le Wagon Bosseur (Work Wagon) est un transport d'équipement 4 (Equipment "
+"Freighter 4) modifié. Il est conçu pour transporter de l'équipement et des "
+"pièces là où elles sont demandées pour la réparation ou la construction de "
+"vaisseaux."
+
+#: scripts/scenario_44_outpost.lua:18166
+msgctxt "scienceDB"
+msgid "Goods Freighter 3"
+msgstr "Transport de marchandises 3"
+
+#: scripts/scenario_44_outpost.lua:18171
+msgctxt "scienceDB"
+msgid ""
+"As a side contract, Conversion R Us put together the Laden Lorry from some "
+"recently acquired Goods Freighter 3 hulls. The added warp drive makes for a "
+"more versatile goods carrying vessel."
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18176
+msgctxt "scienceDB"
+msgid "Garbage Freighter 3"
+msgstr "Transport de déchets 3"
+
+#: scripts/scenario_44_outpost.lua:18181
+msgctxt "scienceDB"
+msgid ""
+"Conversion R Us cleaned up and converted excess freighter hulls into Physics "
+"Research vessels. The reduced weight improved the impulse speed and "
+"maneuverability."
+msgstr ""
+
+#: scripts/scenario_44_outpost.lua:18651
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
@@ -7630,141 +7782,141 @@ msgid ""
 "Outpost survived for %s. Posthumous rank: %s"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:18639
+#: scripts/scenario_44_outpost.lua:18776
 #, lua-format
 msgctxt "tabWeapons"
 msgid "%s tubes: %s"
 msgstr "%s tubes : %s"
 
-#: scripts/scenario_44_outpost.lua:18641
+#: scripts/scenario_44_outpost.lua:18778
 #, lua-format
 msgctxt "tabWeapons"
 msgid "%s tube: %s"
 msgstr "%s tube : %s"
 
-#: scripts/scenario_44_outpost.lua:18696
+#: scripts/scenario_44_outpost.lua:18833
 msgctxt "shipLog"
 msgid "Encrypted Exuari communications traffic observed"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:18784
+#: scripts/scenario_44_outpost.lua:18921
 msgctxt "msgEngineer"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
 
-#: scripts/scenario_44_outpost.lua:18788
+#: scripts/scenario_44_outpost.lua:18925
 msgctxt "msgEngineer+"
 msgid "Medical team has revived one of your repair crew"
 msgstr "L'équipe médicale a réanimé l'un de vos réparateurs."
-
-#: scripts/scenario_44_outpost.lua:18806
-msgctxt "msgEngineer"
-msgid "Automated systems have recovered some coolant"
-msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
-
-#: scripts/scenario_44_outpost.lua:18809
-msgctxt "msgEngineer+"
-msgid "Automated systems have recovered some coolant"
-msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
-
-#: scripts/scenario_44_outpost.lua:18849 scripts/scenario_44_outpost.lua:18884
-msgctxt "msgEngineer"
-msgid "One of your repair crew has perished"
-msgstr "Un de vos réparateurs a péri."
-
-#: scripts/scenario_44_outpost.lua:18853 scripts/scenario_44_outpost.lua:18888
-msgctxt "msgEngineer+"
-msgid "One of your repair crew has perished"
-msgstr "Un de vos réparateurs a péri."
-
-#: scripts/scenario_44_outpost.lua:18905
-msgctxt "msgEngineer"
-msgid "Damage has caused a loss of coolant"
-msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
-
-#: scripts/scenario_44_outpost.lua:18909
-msgctxt "msgEngineer+"
-msgid "Damage has caused a loss of coolant"
-msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
-
-#: scripts/scenario_44_outpost.lua:18916
-msgctxt "msgEngineer"
-msgid "The probe launch system has been damaged"
-msgstr "Le système de lancement des sondes a été endommagé."
-
-#: scripts/scenario_44_outpost.lua:18919
-msgctxt "msgEngineer+"
-msgid "The probe launch system has been damaged"
-msgstr "Le système de lancement des sondes a été endommagé."
-
-#: scripts/scenario_44_outpost.lua:18924
-msgctxt "msgEngineer"
-msgid "The hacking system has been damaged"
-msgstr "Le système de piratage a été endommagé."
-
-#: scripts/scenario_44_outpost.lua:18927
-msgctxt "msgEngineer+"
-msgid "The hacking system has been damaged"
-msgstr "Le système de piratage a été endommagé."
-
-#: scripts/scenario_44_outpost.lua:18932
-msgctxt "msgEngineer"
-msgid "The scanners have been damaged"
-msgstr "Les scanners ont été endommagés."
-
-#: scripts/scenario_44_outpost.lua:18935
-msgctxt "msgEngineer+"
-msgid "The scanners have been damaged"
-msgstr "Les scanners ont été endommagés."
-
-#: scripts/scenario_44_outpost.lua:18940
-msgctxt "msgEngineer"
-msgid "Combat maneuver has been damaged"
-msgstr "La manœuvre de combat a été endommagée."
 
 #: scripts/scenario_44_outpost.lua:18943
+msgctxt "msgEngineer"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_44_outpost.lua:18946
+msgctxt "msgEngineer+"
+msgid "Automated systems have recovered some coolant"
+msgstr "Les systèmes automatisés ont récupéré du liquide de refroidissement."
+
+#: scripts/scenario_44_outpost.lua:18986 scripts/scenario_44_outpost.lua:19021
+msgctxt "msgEngineer"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_44_outpost.lua:18990 scripts/scenario_44_outpost.lua:19025
+msgctxt "msgEngineer+"
+msgid "One of your repair crew has perished"
+msgstr "Un de vos réparateurs a péri."
+
+#: scripts/scenario_44_outpost.lua:19042
+msgctxt "msgEngineer"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_44_outpost.lua:19046
+msgctxt "msgEngineer+"
+msgid "Damage has caused a loss of coolant"
+msgstr "Les dégâts ont causé une perte de liquide de refroidissement."
+
+#: scripts/scenario_44_outpost.lua:19053
+msgctxt "msgEngineer"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_44_outpost.lua:19056
+msgctxt "msgEngineer+"
+msgid "The probe launch system has been damaged"
+msgstr "Le système de lancement des sondes a été endommagé."
+
+#: scripts/scenario_44_outpost.lua:19061
+msgctxt "msgEngineer"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_44_outpost.lua:19064
+msgctxt "msgEngineer+"
+msgid "The hacking system has been damaged"
+msgstr "Le système de piratage a été endommagé."
+
+#: scripts/scenario_44_outpost.lua:19069
+msgctxt "msgEngineer"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_44_outpost.lua:19072
+msgctxt "msgEngineer+"
+msgid "The scanners have been damaged"
+msgstr "Les scanners ont été endommagés."
+
+#: scripts/scenario_44_outpost.lua:19077
+msgctxt "msgEngineer"
+msgid "Combat maneuver has been damaged"
+msgstr "La manœuvre de combat a été endommagée."
+
+#: scripts/scenario_44_outpost.lua:19080
 msgctxt "msgEngineer+"
 msgid "Combat maneuver has been damaged"
 msgstr "La manœuvre de combat a été endommagée."
 
-#: scripts/scenario_44_outpost.lua:18948
+#: scripts/scenario_44_outpost.lua:19085
 msgctxt "msgEngineer"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
-#: scripts/scenario_44_outpost.lua:18951
+#: scripts/scenario_44_outpost.lua:19088
 msgctxt "msgEngineer+"
 msgid "Self destruct system has been damaged"
 msgstr "Le système d'autodestruction a été endommagé."
 
-#: scripts/scenario_44_outpost.lua:18976 scripts/scenario_44_outpost.lua:18983
+#: scripts/scenario_44_outpost.lua:19113 scripts/scenario_44_outpost.lua:19120
 msgctxt "tabRelay"
 msgid "Inventory"
 msgstr "Inventaire"
 
-#: scripts/scenario_44_outpost.lua:18992
+#: scripts/scenario_44_outpost.lua:19129
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "%s Current cargo:"
 msgstr "%s Cargaison actuelle :"
 
-#: scripts/scenario_44_outpost.lua:19001
+#: scripts/scenario_44_outpost.lua:19138
 msgctxt "inventory-shipLog"
 msgid "     Empty"
 msgstr "     Vide"
 
-#: scripts/scenario_44_outpost.lua:19003
+#: scripts/scenario_44_outpost.lua:19140
 #, lua-format
 msgctxt "inventory-shipLog"
 msgid "Available space: %i"
 msgstr "Espace disponible : %i"
 
-#: scripts/scenario_44_outpost.lua:19018
+#: scripts/scenario_44_outpost.lua:19155
 msgctxt "msgMainscreen"
 msgid "Scenario needs the 'Per-system damage' option under 'Extra settings'"
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:19054
+#: scripts/scenario_44_outpost.lua:19191
 msgctxt "shipLog"
 msgid ""
 "You've been assigned to this outpost for what seems like an eternity. "
@@ -7777,16 +7929,26 @@ msgid ""
 "hard, too. Do your best to protect this remote outpost consisting of the "
 "following stations:"
 msgstr ""
+"Vous êtes affecté à cet avant-poste depuis ce qui vous semble être une "
+"éternité.\n"
+"Les forces hostiles de la région vous ont attaqué vague après vague. Il ne "
+"reste désormais plus qu'une plate-forme de défense. Les plus puissants "
+"vaisseaux chargés de la protection de cet avant-poste ont été détruits.\n"
+"En se servant de vaisseaux récupérés de-ci de-là, le chantier naval interne "
+"vous a concocté un vaisseau pour vous et votre équipage. Avec une réputation "
+"suffisante, vous pouvez l'améliorer sur des stations amies et neutres. Ces "
+"stations peuvent vous aider à défendre votre avant-poste si vous le leur "
+"demandez, mais elles aussi ont été durement touchées par l'ennemi.\n"
+"Faites de votre mieux pour protéger cet avant-poste éloigné composé des "
+"stations suivantes :"
 
-#: scripts/scenario_44_outpost.lua:19057
-#, fuzzy, lua-format
-#| msgctxt "mission3th-comms"
-#| msgid "%s is located in sector %s."
+#: scripts/scenario_44_outpost.lua:19194
+#, lua-format
 msgctxt "shipLog"
 msgid "%s (%s) in sector %s"
-msgstr "%s se situe dans le secteur %s."
+msgstr "%s (%s) en secteur %s."
 
-#: scripts/scenario_44_outpost.lua:19067
+#: scripts/scenario_44_outpost.lua:19204
 msgctxt "shipLog"
 msgid ""
 "Intelligence operatives tell us they monitored Exuari communication traffic "
@@ -7797,7 +7959,7 @@ msgid ""
 "eye out."
 msgstr ""
 
-#: scripts/scenario_44_outpost.lua:19089
+#: scripts/scenario_44_outpost.lua:19226
 #, lua-format
 msgctxt "msgMainscreen"
 msgid ""
