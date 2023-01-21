@@ -9,7 +9,7 @@
 /// For example, these relationships determine whether a SpaceObject can be targeted by weapons, docked with, or receive comms from another SpaceObject.
 /// If a faction doesn't have a relationship with another faction, it treats those factions as neutral by default.
 /// Therefore, new factions are neutral toward all other factions by default.
-/// Faction relationships set via setEnemy(), setFriendly(), and setNeutral() are are automatically reciprocated.
+/// Faction relationships set via setEnemy(), setFriendly(), and setNeutral() are automatically reciprocated.
 ///
 /// If this faction consideres another faction to be hostile, it can target and fire weapons at it, and CpuShips with certain orders might pursue it.
 /// If neutral, this faction can't target and fire weapons at the other faction, and other factions can dock with its stations or dockable ships.
