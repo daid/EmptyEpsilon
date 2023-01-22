@@ -53,10 +53,10 @@ private:
     string keyboard_general = "";
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
+    string populateShortcutsList(ECrewPosition position);
 
     GuiElement* findTab(string name);
 
-    string listHotkeysLimited(string station);
     void tileViewport();
 };
 
