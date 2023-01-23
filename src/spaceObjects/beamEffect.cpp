@@ -194,27 +194,41 @@ void BeamEffect::update(float delta)
 
 void BeamEffect::setSource(P<SpaceObject> source, glm::vec3 offset)
 {
-    sourceId = source->getMultiplayerId();
-    sourceOffset = offset;
-    update(0);
+    if (source)
+    {
+        sourceId = source->getMultiplayerId();
+        sourceOffset = offset;
+        update(0);
+    }
+    else
+    {
+        LOG(DEBUG) << "BeamEffect attempted with no target";
+    }
 }
 
 void BeamEffect::setTarget(P<SpaceObject> target, glm::vec2 hitLocation)
 {
-    target_id = target->getMultiplayerId();
-    float r = target->getRadius();
-    hitLocation -= target->getPosition();
-    targetOffset = glm::vec3(hitLocation.x + random(-r/2.0f, r/2.0f), hitLocation.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
+    if (target)
+    {
+        target_id = target->getMultiplayerId();
+        float r = target->getRadius();
+        hitLocation -= target->getPosition();
+        targetOffset = glm::vec3(hitLocation.x + random(-r/2.0f, r/2.0f), hitLocation.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
 
-    if (target->hasShield())
-        targetOffset = glm::normalize(targetOffset) * r;
+        if (target->hasShield())
+            targetOffset = glm::normalize(targetOffset) * r;
+        else
+            targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0f);
+        update(0);
+
+        glm::vec3 hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
+        glm::vec3 targetPos(target->getPosition().x, target->getPosition().y, 0);
+        hitNormal = glm::normalize(targetPos - hitPos);
+    }
     else
-        targetOffset = glm::normalize(targetOffset) * random(0, r / 2.0f);
-    update(0);
-
-    glm::vec3 hitPos(targetLocation.x, targetLocation.y, targetOffset.z);
-    glm::vec3 targetPos(target->getPosition().x, target->getPosition().y, 0);
-    hitNormal = glm::normalize(targetPos - hitPos);
+    {
+        LOG(DEBUG) << "BeamEffect attempted with no target";
+    }
 }
 
 glm::mat4 BeamEffect::getModelMatrix() const
