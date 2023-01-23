@@ -1,8 +1,7 @@
 #include <memory>
 #include <time.h>
-
-//We need a really fast float to string conversion. dtoa from milo does this very well.
-#include "dtoa/dtoa_milo.h"
+#include <charconv>
+#include <system_error>
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
@@ -94,8 +93,28 @@ private:
         while(*c)
             *ptr++ = *c++;
     }
-    void writeValue(int i) { ptr += sprintf(ptr, "%d", i); }
-    void writeValue(float _f) { dtoa_milo(_f, ptr); ptr += strlen(ptr); }
+    void writeValue(int i) {
+        char buf[15] = {};
+        const std::to_chars_result res = std::to_chars(buf, buf + 15, i);
+
+        if (res.ec == std::errc{}) // no error
+        {
+            const char* b = buf;
+            while(*b)
+                *ptr++ = *b++;
+        }
+    }
+    void writeValue(float _f) {
+        char buf[24] = {};
+        const std::to_chars_result res = std::to_chars(buf, buf + 24, _f, std::chars_format::fixed);
+
+        if (res.ec == std::errc{}) // no error
+        {
+            const char* b = buf;
+            while(*b)
+                *ptr++ = *b++;
+        }
+    }
     void writeValue(const char* value)
     { /*ptr += sprintf(ptr, "\"%s\"", value);*/
         *ptr++ = '"';
