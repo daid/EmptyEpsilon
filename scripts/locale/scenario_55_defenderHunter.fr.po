@@ -210,7 +210,7 @@ msgstr "Normal"
 
 msgctxt "Murphy"
 msgid "Random factors are normal"
-msgstr "Les facteurs aléatoires sont normaux."
+msgstr "Les facteurs aléatoires sont équilibrés."
 
 msgctxt "Murphy"
 msgid "Hard"
