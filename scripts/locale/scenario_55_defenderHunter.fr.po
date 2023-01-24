@@ -1700,12 +1700,12 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_55_defenderHunter.lua:5352
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
+msgstr "Des missiles homing de rechange pour nous ? ("
 
 #: scripts/scenario_55_defenderHunter.lua:5354
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+msgstr "Avez-vous des missiles homing supplémentaires ? ("
 
 #: scripts/scenario_55_defenderHunter.lua:5364
 msgctxt "ammo-comms"
