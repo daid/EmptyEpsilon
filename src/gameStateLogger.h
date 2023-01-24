@@ -8,6 +8,7 @@ class SpaceShip;
 class SpaceStation;
 class MissileWeapon;
 class Planet;
+class Zone;
 class JSONGenerator;
 /*
  * The GameStateLogger logs the current state of the game to a log file.
@@ -43,6 +44,7 @@ private:
     void writeStationEntry(JSONGenerator& json, P<SpaceStation> obj);
     void writeMissileEntry(JSONGenerator& json, P<MissileWeapon> missile);
     void writePlanetEntry(JSONGenerator& json, P<Planet> obj);
+    void writeZoneEntry(JSONGenerator& json, P<Zone> obj);
 };
 
 #endif//GAME_STATE_LOGGER_H

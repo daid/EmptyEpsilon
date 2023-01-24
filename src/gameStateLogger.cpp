@@ -14,6 +14,7 @@
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/missiles/missileWeapon.h"
 #include "spaceObjects/planet.h"
+#include "spaceObjects/zone.h"
 
 class JSONGenerator
 {
@@ -256,6 +257,8 @@ bool GameStateLogger::isStatic(P<SpaceObject> obj)
         return true;
     if (P<Planet>(obj))
         return true;
+    if (P<Zone>(obj))
+        return true;
     return false;
 }
 
@@ -268,39 +271,17 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
     json.arrayWrite(obj->getPosition().y);
     json.endArray();
     json.write("rotation", obj->getRotation());
-    P<SpaceShip> ship = obj;
 
-    if (ship)
-    {
-        writeShipEntry(json, ship);
-    }
-    else
-    {
-        P<SpaceStation> station = obj;
-
-        if (station)
-        {
-            writeStationEntry(json, station);
-        }
-        else
-        {
-            P<MissileWeapon> missile = obj;
-
-            if (missile)
-            {
-                writeMissileEntry(json, missile);
-            }
-            else
-            {
-                P<Planet> planet = obj;
-
-                if (planet)
-                {
-                    writePlanetEntry(json, planet);
-                }
-            }
-        }
-    }
+    if (P<SpaceShip>(obj))
+        writeShipEntry(json, obj);
+    if (P<SpaceStation>(obj))
+        writeStationEntry(json, obj);
+    if (P<MissileWeapon>(obj))
+        writeMissileEntry(json, obj);
+    if (P<Planet>(obj))
+        writePlanetEntry(json, obj);
+    if (P<Zone>(obj))
+        writeZoneEntry(json, obj);
 }
 
 void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
@@ -555,6 +536,27 @@ void GameStateLogger::writeMissileEntry(JSONGenerator& json, P<MissileWeapon> mi
 
 void GameStateLogger::writePlanetEntry(JSONGenerator& json, P<Planet> planet)
 {
+    json.write("callsign", planet->getCallSign());
     json.write("planet_radius", planet->getPlanetRadius());
     json.write("collision_size", planet->getCollisionSize());
+}
+
+void GameStateLogger::writeZoneEntry(JSONGenerator& json, P<Zone> zone)
+{
+    json.write("label", zone->getLabel());
+
+    glm::u8vec4 color = zone->getColor();
+    json.startArray("color");
+    json.arrayWrite(color.r);
+    json.arrayWrite(color.g);
+    json.arrayWrite(color.b);
+    json.endArray();
+
+    json.startArray("outline");
+    for (glm::vec2 point : zone->getPoints())
+    {
+        json.arrayWrite(point.x);
+        json.arrayWrite(point.y);
+    }
+    json.endArray();
 }
