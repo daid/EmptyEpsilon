@@ -1135,12 +1135,12 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_74_omicron.lua:3588
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
+msgstr "Des missiles homing de rechange pour nous ? ("
 
 #: scripts/scenario_74_omicron.lua:3590
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+msgstr "Avez-vous des missiles homing supplémentaires ? ("
 
 #: scripts/scenario_74_omicron.lua:3600
 msgctxt "ammo-comms"
@@ -1181,8 +1181,7 @@ msgid ""
 "Replenish scan probes."
 msgstr ""
 "%s\n"
-"\n"
-"Réapprovisionner les sondes."
+"Réapprovisionnement des sondes."
 
 #: scripts/scenario_74_omicron.lua:3631 scripts/scenario_74_omicron.lua:4497
 msgctxt "dockingServicesStatus-comms"
@@ -1214,7 +1213,6 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 "%s\n"
-"\n"
 "Réparation de la coque."
 
 #: scripts/scenario_74_omicron.lua:3644 scripts/scenario_74_omicron.lua:4510
@@ -1246,8 +1244,7 @@ msgid ""
 "Recharge ship energy stores."
 msgstr ""
 "%s\n"
-"\n"
-"Recharger les réserves d'énergie du vaisseau."
+"Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_74_omicron.lua:3657 scripts/scenario_74_omicron.lua:4523
 msgctxt "dockingServicesStatus-comms"
@@ -1255,8 +1252,8 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
-"Batteries une récente panne de réacteur nous a mis sous tension auxiliaire, "
-"nous ne pouvons donc pas recharger les vaisseaux."
+"Batteries : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_74_omicron.lua:3658 scripts/scenario_74_omicron.lua:4524
 msgctxt "dockingServicesStatus-comms"

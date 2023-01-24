@@ -4102,7 +4102,7 @@ msgstr "Par quel service de notre station êtes-vous intéressé ?"
 #: scripts/scenario_44_outpost.lua:11982
 msgctxt "upgrade-comms"
 msgid "Upgrade ship"
-msgstr "Mise à niveau du vaisseau"
+msgstr "Mises à niveau du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:11995
 msgctxt "upgrade-comms"
@@ -4132,9 +4132,9 @@ msgid ""
 "upgrades\n"
 "system: description (reputation cost)"
 msgstr ""
-"Par quel type de mise à niveau êtes-vous intéressé ?\n"
+"Par quel type d'amélioration êtes-vous intéressé ?\n"
 "Nous pouvons fournir les mises à niveau suivantes :\n"
-"système : description (coût en réputation)\n"
+"système : description (coût en réputation)"
 
 #: scripts/scenario_44_outpost.lua:12005
 msgctxt "upgrade-comms"
@@ -4189,12 +4189,12 @@ msgstr "Avez-vous des EMP ? ("
 #: scripts/scenario_44_outpost.lua:12058
 msgctxt "ammo-comms"
 msgid "Do you have spare homing missiles for us? ("
-msgstr "Des missiles à tête chercheuse (homing) de rechange pour nous ? ("
+msgstr "Des missiles homing de rechange pour nous ? ("
 
 #: scripts/scenario_44_outpost.lua:12060
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+msgstr "Avez-vous des missiles homing supplémentaires ? ("
 
 #: scripts/scenario_44_outpost.lua:12070
 msgctxt "ammo-comms"
@@ -4235,21 +4235,20 @@ msgid ""
 "Replenish scan probes."
 msgstr ""
 "%s\n"
-"\n"
-"Réapprovisionner les sondes."
+"- Réapprovisionnement des sondes."
 
 #: scripts/scenario_44_outpost.lua:12101 scripts/scenario_44_outpost.lua:13210
 msgctxt "dockingServicesStatus-comms"
 msgid "Cannot replenish scan probes due to fabrication unit failure."
 msgstr ""
-"Sondes : impossible de réapprovisionner les sondes en raison d'une "
+"- Sondes : impossible de réapprovisionner les sondes en raison d'une "
 "défaillance de l'unité de fabrication."
 
 #: scripts/scenario_44_outpost.lua:12102 scripts/scenario_44_outpost.lua:13211
 msgctxt "dockingServicesStatus-comms"
 msgid "Parts shortage prevents scan probe replenishment."
 msgstr ""
-"Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
+"- Sondes : le manque de pièces empêche le réapprovisionnement des sondes."
 
 #: scripts/scenario_44_outpost.lua:12103 scripts/scenario_44_outpost.lua:13212
 msgctxt "dockingServicesStatus-comms"
@@ -4257,7 +4256,7 @@ msgid ""
 "Station management has curtailed scan probe replenishment for cost cutting "
 "reasons."
 msgstr ""
-"Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
+"- Sondes : les gestionnaires de la station ont réduit le réapprovisionnement "
 "des sondes pour des raisons de réduction des coûts."
 
 #: scripts/scenario_44_outpost.lua:12110 scripts/scenario_44_outpost.lua:13219
@@ -4268,29 +4267,28 @@ msgid ""
 "Ship hull repair."
 msgstr ""
 "%s\n"
-"\n"
-"Réparation de la coque."
+"- Réparation de la coque."
 
 #: scripts/scenario_44_outpost.lua:12114 scripts/scenario_44_outpost.lua:13223
 msgctxt "dockingServicesStatus-comms"
 msgid "We're out of the necessary materials and supplies for hull repair."
 msgstr ""
-"Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
+"- Coque : nous n'avons plus les matériaux et fournitures nécessaires pour "
 "réparer la coque."
 
 #: scripts/scenario_44_outpost.lua:12115
 msgctxt "dockingServicesStatus-comms"
 msgid "Hull repair automation unavailable while it is undergoing maintenance."
 msgstr ""
-"Coque : l'automatisation de réparation de la coque n'est pas disponible "
+"- Coque : l'automatisation de réparation de la coque n'est pas disponible "
 "pendant la maintenance."
 
 #: scripts/scenario_44_outpost.lua:12116 scripts/scenario_44_outpost.lua:13225
 msgctxt "dockingServicesStatus-comms"
 msgid "All hull repair technicians quarantined to quarters due to illness."
 msgstr ""
-"Coque : tous les techniciens de réparation de coque sont en quarantaine dans "
-"leur quartiers pour cause de maladie."
+"- Coque : tous les techniciens de réparation de coque sont en quarantaine "
+"dans leur quartiers pour cause de maladie."
 
 #: scripts/scenario_44_outpost.lua:12123 scripts/scenario_44_outpost.lua:13232
 #, lua-format
@@ -4300,8 +4298,7 @@ msgid ""
 "Recharge ship energy stores."
 msgstr ""
 "%s\n"
-"\n"
-"Recharger les réserves d'énergie du vaisseau."
+"- Recharge des réserves d'énergie du vaisseau."
 
 #: scripts/scenario_44_outpost.lua:12127 scripts/scenario_44_outpost.lua:13236
 msgctxt "dockingServicesStatus-comms"
@@ -4309,14 +4306,14 @@ msgid ""
 "A recent reactor failure has put us on auxiliary power, so we cannot "
 "recharge ships."
 msgstr ""
-"Batteries une récente panne de réacteur nous a mis sous tension auxiliaire, "
-"nous ne pouvons donc pas recharger les vaisseaux."
+"- Énergie : une récente panne de réacteur nous a mis sous tension "
+"auxiliaire, nous ne pouvons donc pas recharger les vaisseaux."
 
 #: scripts/scenario_44_outpost.lua:12128 scripts/scenario_44_outpost.lua:13237
 msgctxt "dockingServicesStatus-comms"
 msgid "A damaged power coupling makes it too dangerous to recharge ships."
 msgstr ""
-"Batteries : un couplage électrique défectueux rend la recharge des vaisseaux "
+"- Énergie : un couplage électrique défectueux rend la recharge des vaisseaux "
 "trop risquée."
 
 #: scripts/scenario_44_outpost.lua:12129 scripts/scenario_44_outpost.lua:13238
@@ -4325,7 +4322,7 @@ msgid ""
 "An asteroid strike damaged our solar cells and we are short on power, so we "
 "can't recharge ships right now."
 msgstr ""
-"Batteries : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
+"- Énergie : une frappe d'astéroïde a endommagé nos cellules solaires et nous "
 "manquons de puissance, nous ne pouvons donc pas recharger les vaisseaux pour "
 "le moment."
 
@@ -4337,7 +4334,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"Peut booster la téléportation."
+"- Peut booster la téléportation."
 
 #: scripts/scenario_44_outpost.lua:12139 scripts/scenario_44_outpost.lua:13253
 #, lua-format
@@ -4347,7 +4344,7 @@ msgid ""
 "May repair probe launch system"
 msgstr ""
 "%s\n"
-"Peut réparer le système de lancement de sonde."
+"- Peut réparer le système de lancement de sonde."
 
 #: scripts/scenario_44_outpost.lua:12142 scripts/scenario_44_outpost.lua:13256
 #, lua-format
@@ -4357,7 +4354,7 @@ msgid ""
 "May repair hacking system"
 msgstr ""
 "%s\n"
-"Peut réparer le système de piratage."
+"- Peut réparer le système de piratage."
 
 #: scripts/scenario_44_outpost.lua:12145 scripts/scenario_44_outpost.lua:13259
 #, lua-format
@@ -4367,7 +4364,7 @@ msgid ""
 "May repair scanners"
 msgstr ""
 "%s\n"
-"Peut réparer les scanners."
+"- Peut réparer les scanners."
 
 #: scripts/scenario_44_outpost.lua:12148 scripts/scenario_44_outpost.lua:13262
 #, lua-format
@@ -4377,7 +4374,7 @@ msgid ""
 "May repair combat maneuver"
 msgstr ""
 "%s\n"
-"Peut réparer la manœuvre de combat."
+"- Peut réparer la manœuvre de combat."
 
 #: scripts/scenario_44_outpost.lua:12151 scripts/scenario_44_outpost.lua:13265
 #, lua-format
@@ -4387,7 +4384,7 @@ msgid ""
 "May repair self destruct system"
 msgstr ""
 "%s\n"
-"Peut réparer le système d'autodestruction."
+"- Peut réparer le système d'autodestruction."
 
 #: scripts/scenario_44_outpost.lua:12163
 msgctxt "dockingServicesStatus-comms"
@@ -5503,7 +5500,7 @@ msgstr ""
 "- Réparation des systèmes secondaires :\n"
 "Scanners, piratage, lancement de sondes, manœuvre de combat, "
 "autodestruction.\n"
-"- Mise à niveau des systèmes du vaisseau :\n"
+"- Amélioration des systèmes du vaisseau :\n"
 "Faisceaux laser, missiles, boucliers, coque, moteurs à impulsion, FTL, "
 "capteurs."
 
@@ -5539,7 +5536,7 @@ msgstr "État des services de réparation de la station %s :\n"
 #: scripts/scenario_44_outpost.lua:13270
 msgctxt "dockingServicesStatus-comms"
 msgid "Upgrade ship systems"
-msgstr "Mise à niveau des systèmes du vaisseau"
+msgstr "Amélioration des systèmes du vaisseau"
 
 #: scripts/scenario_44_outpost.lua:13271
 #, lua-format
@@ -5559,17 +5556,17 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:13287
 msgctxt "dockingServicesStatus-comms"
 msgid "No more ship upgrades available for your ship"
-msgstr "Plus de mise à niveau disponible pour votre vaisseau"
+msgstr "Plus de mise à niveau disponible pour votre vaisseau."
 
 #: scripts/scenario_44_outpost.lua:13290
 msgctxt "dockingServicesStatus-comms"
 msgid "No ship upgrades available for your ship"
-msgstr "Aucune mise à niveau disponible pour votre vaisseau"
+msgstr "Aucune mise à niveau disponible pour votre vaisseau."
 
 #: scripts/scenario_44_outpost.lua:13293
 msgctxt "dockingServicesStatus-comms"
 msgid "No ship upgrades available"
-msgstr "Aucune mise à niveau disponible"
+msgstr "Aucune mise à niveau disponible."
 
 #: scripts/scenario_44_outpost.lua:13309
 msgctxt "station-comms"
@@ -5830,7 +5827,8 @@ msgstr "Nous venons de déployer le vaisseau %s. Rendez-vous au marqueur %i."
 #: scripts/scenario_44_outpost.lua:13730
 msgctxt "dockingServicesStatus-comms"
 msgid "Which ship system upgrade category are you wondering about?"
-msgstr "Sur quelle catégorie de mise à niveau voulez-vous des explications ?"
+msgstr ""
+"Sur quelle catégorie de mises à niveau souhaitez-vous des explications ?"
 
 #: scripts/scenario_44_outpost.lua:13732
 msgctxt "dockingServicesStatus-comms"
@@ -5850,7 +5848,7 @@ msgstr ""
 "- Une portée plus longue.\n"
 "- Des temps de recharge ou de cycle plus rapides.\n"
 "- Des dégâts accrus.\n"
-"- Des arcs de tir plus larges\n"
+"- Des arcs de tir plus larges.\n"
 "- Ou bien une vitesse de rotation de la tourelle à faisceaux laser plus "
 "rapide."
 
@@ -5929,7 +5927,6 @@ msgstr ""
 "Les mises à niveau FTL : abréviation de \"plus rapide que la lumière"
 "\" (Faster Than Light), font référence aux améliorations des moteurs de "
 "téléportation et vitesse lumière. Ils peuvent inclure :\n"
-"\n"
 "- L'ajout d'un moteur FTL.\n"
 "- La modification de la plage de saut de la téléportation.\n"
 "- Ou une augmentation de la vitesse maximale de la vitesse lumière."
@@ -5947,11 +5944,10 @@ msgid ""
 "automated proximity scanners for ships or improved range for automated "
 "proximity scanners."
 msgstr ""
-"Les capteurs d'un vaisseau permettent de détecter des objets dans l'espace.\n"
+"Les capteurs d'un vaisseau permettent de détecter des objets dans l'espace. "
 "La mise à niveau des capteurs peut inclure :\n"
 "- Une portée de detection accrue des capteurs à courte et à longue portée.\n"
-"- Une installation de scanners de proximité automatisés (1er niveau) pour "
-"les vaisseaux.\n"
+"- Une installation de scanners de proximité automatisés (1er niveau).\n"
 "- Ou bien une portée améliorée pour ces scanners de proximité automatisés."
 
 #: scripts/scenario_44_outpost.lua:13771

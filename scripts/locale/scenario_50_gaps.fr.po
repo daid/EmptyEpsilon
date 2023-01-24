@@ -1464,7 +1464,7 @@ msgstr "Des missiles à tête chercheuse (homing) pour nous ? ("
 #: scripts/scenario_50_gaps.lua:2321
 msgctxt "ammo-comms"
 msgid "Do you have extra homing missiles? ("
-msgstr "Avez-vous des missiles à tête chercheuse (homing) supplémentaires ? ("
+msgstr "Avez-vous des missiles homing supplémentaires ? ("
 
 #: scripts/scenario_50_gaps.lua:2332
 msgctxt "ammo-comms"
