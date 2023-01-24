@@ -1534,7 +1534,7 @@ msgstr "Nous pourrions avoir besoin de quelques mines. ("
 #: scripts/scenario_53_escape.lua:3396
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr "Et concernant les mines ? ("
+msgstr "Concernant les mines ? ("
 
 #: scripts/scenario_53_escape.lua:3406
 msgctxt "ammo-comms"
