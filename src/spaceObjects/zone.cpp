@@ -19,6 +19,10 @@
 /// zone = Zone():setColor(0,0,255):setPoints(-100000,100000, -100000,-100000, 100000,-100000, 100000,100000):setLabel("Home")
 REGISTER_SCRIPT_SUBCLASS(Zone, SpaceObject)
 {
+    /// Returns the corners of this Zone n-gon to x_1, y_1, x_2, y_2, ... x_n, y_n.
+    /// Positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
+    /// Example: zone:getPoints() -- returns a triangular zone
+    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, getPoints);
     /// Sets the corners of this Zone n-gon to x_1, y_1, x_2, y_2, ... x_n, y_n.
     /// Positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
     /// Example: zone:setPoints(2000,0, 0,3000, -2000,0) -- defines a triangular zone
@@ -27,12 +31,12 @@ REGISTER_SCRIPT_SUBCLASS(Zone, SpaceObject)
     /// Defaults to white (255,255,255).
     /// Example: zone:setColor(255,140,0)
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setColor);
-    /// Sets this Zone's text label, rendered at the zone's center point.
-    /// Example: zone:setLabel("Hostile space")
-    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setLabel);
     /// Returns this Zone's text label.
     /// Example: zone:getLabel()
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, getLabel);
+    /// Sets this Zone's text label, rendered at the zone's center point.
+    /// Example: zone:setLabel(_("Hostile space")) -- write the zone name as a translatable string
+    REGISTER_SCRIPT_CLASS_FUNCTION(Zone, setLabel);
     /// Returns whether the given SpaceObject is inside this Zone.
     /// Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
     REGISTER_SCRIPT_CLASS_FUNCTION(Zone, isInside);

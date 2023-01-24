@@ -14,10 +14,13 @@ public:
     virtual bool canHideInNebula()  override { return false; }
     virtual ERadarLayer getRadarLayer() const override { return ERadarLayer::BackgroundZone; }
 
+    glm::u8vec4 getColor() { return color; }
     void setColor(int r, int g, int b);
+    std::vector<glm::vec2> getPoints() { return outline; }
     void setPoints(const std::vector<glm::vec2>& points);
-    void setLabel(string label);
     string getLabel();
+    void setLabel(string label);
+
     bool isInside(P<SpaceObject> obj);
 
     //virtual string getExportLine() override { return "Zone():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
