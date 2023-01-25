@@ -1715,7 +1715,7 @@ msgstr "Nous pourrions avoir besoin de quelques mines. ("
 #: scripts/scenario_55_defenderHunter.lua:5366
 msgctxt "ammo-comms"
 msgid "How about mines? ("
-msgstr "Et concernant les mines ? ("
+msgstr "Concernant les mines ? ("
 
 #: scripts/scenario_55_defenderHunter.lua:5376
 msgctxt "ammo-comms"
@@ -1738,7 +1738,7 @@ msgstr "État des services d'accueil"
 #, lua-format
 msgctxt "dockingServicesStatus-comms"
 msgid "Station %s docking services status:"
-msgstr "État des services d'accueil de la station %s :"
+msgstr "État des services d'accueil de la station %s :\n"
 
 #: scripts/scenario_55_defenderHunter.lua:5391
 #: scripts/scenario_55_defenderHunter.lua:6464
@@ -1871,7 +1871,7 @@ msgid ""
 "May overcharge jump drive"
 msgstr ""
 "%s\n"
-"Peut booster la téléportation."
+"- Peut booster la téléportation."
 
 #: scripts/scenario_55_defenderHunter.lua:5433
 #: scripts/scenario_55_defenderHunter.lua:6506
@@ -1882,7 +1882,7 @@ msgid ""
 "May repair probe launch system"
 msgstr ""
 "%s\n"
-"Peut réparer le système de lancement de sonde."
+"- Peut réparer le système de lancement de sonde."
 
 #: scripts/scenario_55_defenderHunter.lua:5436
 #: scripts/scenario_55_defenderHunter.lua:6509
@@ -1893,7 +1893,7 @@ msgid ""
 "May repair hacking system"
 msgstr ""
 "%s\n"
-"Peut réparer le système de piratage."
+"- Peut réparer le système de piratage."
 
 #: scripts/scenario_55_defenderHunter.lua:5439
 #: scripts/scenario_55_defenderHunter.lua:6512
@@ -1904,7 +1904,7 @@ msgid ""
 "May repair scanners"
 msgstr ""
 "%s\n"
-"Peut réparer les scanners."
+"- Peut réparer les scanners."
 
 #: scripts/scenario_55_defenderHunter.lua:5442
 #: scripts/scenario_55_defenderHunter.lua:6515
@@ -1915,7 +1915,7 @@ msgid ""
 "May repair combat maneuver"
 msgstr ""
 "%s\n"
-"Peut réparer la manœuvre de combat."
+"- Peut réparer la manœuvre de combat."
 
 #: scripts/scenario_55_defenderHunter.lua:5445
 #: scripts/scenario_55_defenderHunter.lua:6518
@@ -1926,7 +1926,7 @@ msgid ""
 "May repair self destruct system"
 msgstr ""
 "%s\n"
-"Peut réparer le système d'autodestruction."
+"- Peut réparer le système d'autodestruction."
 
 #: scripts/scenario_55_defenderHunter.lua:5448
 #: scripts/scenario_55_defenderHunter.lua:5464
