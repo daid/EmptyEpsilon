@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-01-19 20:11+0100\n"
+"PO-Revision-Date: 2023-01-26 20:33+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -102,7 +102,7 @@ msgstr "Vit. de mouvement"
 #: src/scienceDatabase.cpp:521
 msgctxt "database"
 msgid "Reverse move speed"
-msgstr "Vit. inversion mvt :"
+msgstr "Vit. inversion mvt"
 
 #: src/scienceDatabase.cpp:524
 msgctxt "database"
@@ -136,12 +136,12 @@ msgstr "Tube {direction}"
 #: src/scienceDatabase.cpp:554
 msgctxt "database"
 msgid "{direction} small tube"
-msgstr "Petit tube {direction}"
+msgstr "Tube léger {direction}"
 
 #: src/scienceDatabase.cpp:558
 msgctxt "database"
 msgid "{direction} large tube"
-msgstr "Grand tube {direction}"
+msgstr "Tube large {direction}"
 
 #: src/scienceDatabase.cpp:562
 msgctxt "database"
@@ -1454,7 +1454,7 @@ msgstr "Taille :"
 #: src/screens/gm/tweak.cpp:408
 msgctxt "tube"
 msgid "Small"
-msgstr "Petit"
+msgstr "Léger"
 
 #: src/screens/gm/tweak.cpp:409
 msgctxt "tube"
@@ -1464,7 +1464,7 @@ msgstr "Moyen"
 #: src/screens/gm/tweak.cpp:410
 msgctxt "tube"
 msgid "large"
-msgstr "Grand"
+msgstr "Large"
 
 #: src/screens/gm/tweak.cpp:414
 msgctxt "tube"
