@@ -258,6 +258,7 @@ class GuiShipTweakPlayer2 : public GuiTweakPage
 private:
     P<PlayerSpaceship> target;
 
+    GuiSlider* repair_crew_count_slider;
     GuiSlider* coolant_slider;
     GuiSlider* max_scan_probes_slider;
     GuiSlider* scan_probes_slider;

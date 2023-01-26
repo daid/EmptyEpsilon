@@ -974,8 +974,13 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
     right_col->setPosition(-25, 25, sp::Alignment::TopRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
     // Left column
-    (new GuiLabel(left_col, "", tr("Coolant:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", tr("Repair Crews:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
+    repair_crew_count_slider = new GuiSlider(left_col, "", 0, 10.0, 0.0, [this](float value) {
+        target->setRepairCrewCount(value);
+    });
+    repair_crew_count_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
+    (new GuiLabel(left_col, "", tr("Coolant:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     coolant_slider = new GuiSlider(left_col, "", 0.0, 50.0, 0.0, [this](float value) {
         target->setMaxCoolant(value);
     });
@@ -1085,6 +1090,7 @@ GuiShipTweakPlayer2::GuiShipTweakPlayer2(GuiContainer* owner)
 
 void GuiShipTweakPlayer2::onDraw(sp::RenderTarget& renderer)
 {
+    repair_crew_count_slider->setValue(target->getRepairCrewCount());
     //coolant_slider->setValue(target->max_coolant);
     max_scan_probes_slider->setValue(target->getMaxScanProbeCount());
     scan_probes_slider->setValue(target->getScanProbeCount());
