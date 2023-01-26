@@ -3,16 +3,10 @@
 
 #include "spaceObject.h"
 
-class Artifact : public SpaceObject, public Updatable
+class Artifact : public SpaceObject
 {
-private:
-    string current_model_data_name;
-    string model_data_name;
-
 public:
     Artifact();
-
-    virtual void update(float delta) override;
 
     void setModel(string name);
     void setSpin(float spin=0.0);

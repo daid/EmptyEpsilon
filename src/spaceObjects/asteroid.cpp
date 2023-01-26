@@ -2,6 +2,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "components/radar.h"
 #include "components/collision.h"
+#include "components/rendering.h"
+#include "components/spin.h"
 #include "asteroid.h"
 #include "explosionEffect.h"
 #include "main.h"
@@ -37,53 +39,35 @@ Asteroid::Asteroid()
 : SpaceObject(random(110, 130), "Asteroid")
 {
     setRotation(random(0, 360));
-    rotation_speed = random(0.1f, 0.8f);
-    z = random(-50, 50);
-    size = 120;
-    model_number = irandom(1, 10);
     setRadarSignatureInfo(0.05f, 0, 0);
-
-    registerMemberReplication(&z);
-    registerMemberReplication(&size);
 
     PathPlannerManager::getInstance()->addAvoidObject(this, 300);
 
     if (entity) {
+        auto z = random(-50, 50);
+        auto size = random(110, 130);
+
+        auto model_number = irandom(1, 10);
+        auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+        mrc.mesh = "Astroid_" + string(model_number) + ".model";
+        mrc.mesh_offset = {0, 0, z};
+        mrc.texture = "Astroid_" + string(model_number) + "_d.png";
+        mrc.specular_texture = "Astroid_" + string(model_number) + "_s.png";
+        mrc.scale = size;
+
         auto physics = entity.getComponent<sp::Physics>();
         if (physics)
-            size = physics->getSize().x;
+            physics->setCircle(sp::Physics::Type::Static, size);
 
         auto& trace = entity.getOrAddComponent<RadarTrace>();
         trace.icon = "radar/blip.png";
         trace.radius = size;
         trace.color = glm::u8vec4(255, 200, 100, 255);
         trace.flags = 0;
+
+        auto& spin = entity.getOrAddComponent<Spin>();
+        spin.rate = random(0.1f, 0.8f);
     }
-}
-
-void Asteroid::draw3D()
-{
-    auto model_matrix = getModelMatrix();
-    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
-
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-
-    textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
-
-    glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-    textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->bind();
-
-    Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
-
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-
-    ShaderRegistry::setupLights(shader.get(), model_matrix);
-    m->render(positions.get(), texcoords.get(), normals.get());
-
-
-    glActiveTexture(GL_TEXTURE0);
 }
 
 void Asteroid::collide(SpaceObject* target, float force)
@@ -97,16 +81,21 @@ void Asteroid::collide(SpaceObject* target, float force)
     DamageInfo info({}, DamageType::Kinetic, getPosition());
     hit_object->takeDamage(35, info);
 
-    P<ExplosionEffect> e = new ExplosionEffect();
-    e->setSize(size);
-    e->setPosition(getPosition());
-    e->setRadarSignatureInfo(0.f, 0.1f, 0.2f);
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics) {
+        P<ExplosionEffect> e = new ExplosionEffect();
+        e->setSize(physics->getSize().x);
+        e->setPosition(getPosition());
+        e->setRadarSignatureInfo(0.f, 0.1f, 0.2f);
+    }
     destroy();
 }
 
 void Asteroid::setSize(float size)
 {
-    this->size = size;
+    auto mrc = entity.getComponent<MeshRenderComponent>();
+    if (mrc)
+        mrc->scale = size;
     auto trace = entity.getComponent<RadarTrace>();
     if (trace)
         trace->radius = size;
@@ -117,14 +106,10 @@ void Asteroid::setSize(float size)
 
 float Asteroid::getSize()
 {
-    return size;
-}
-
-glm::mat4 Asteroid::getModelMatrix() const
-{
-    auto asteroid_matrix = glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, z));
-    asteroid_matrix = glm::rotate(asteroid_matrix, glm::radians(engine->getElapsedTime() * rotation_speed), glm::vec3(0.f, 0.f, 1.f));
-    return glm::scale(asteroid_matrix, glm::vec3(size));
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        return physics->getSize().x;
+    return 120.0;
 }
 
 /// A VisualAsteroid is an inert piece of space terrain positioned above or below the movement plane.
@@ -146,63 +131,62 @@ VisualAsteroid::VisualAsteroid()
 : SpaceObject(random(110, 130), "VisualAsteroid")
 {
     setRotation(random(0, 360));
-    rotation_speed = random(0.1f, 0.8f);
-    z = random(300, 800);
-    if (random(0, 100) < 50)
-        z = -z;
-
-    model_number = irandom(1, 10);
-
-    registerMemberReplication(&z);
-    registerMemberReplication(&size);
 
     if (entity) {
-        auto physics = entity.getComponent<sp::Physics>();
-        if (physics)
-            size = physics->getSize().x;
+        auto z = random(300, 800);
+        if (random(0, 100) < 50)
+            z = -z;
+
+        auto size = random(110, 130);
+
+        auto model_number = irandom(1, 10);
+        auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+        mrc.mesh = "Astroid_" + string(model_number) + ".model";
+        mrc.mesh_offset = {0, 0, z};
+        mrc.texture = "Astroid_" + string(model_number) + "_d.png";
+        mrc.specular_texture = "Astroid_" + string(model_number) + "_s.png";
+        mrc.scale = size;
+
+        auto& trace = entity.getOrAddComponent<RadarTrace>();
+        trace.icon = "radar/blip.png";
+        trace.radius = size;
+        trace.color = glm::u8vec4(255, 200, 100, 255);
+        trace.flags = 0;
+
+        auto& spin = entity.getOrAddComponent<Spin>();
+        spin.rate = random(0.1f, 0.8f);
+
+        entity.removeComponent<sp::Physics>();
     }
+
 }
 
-void VisualAsteroid::draw3D()
-{
-    auto model_matrix = getModelMatrix();
-
-    ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::ObjectSpecular);
-
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
-
-    textureManager.getTexture("Astroid_" + string(model_number) + "_d.png")->bind();
-
-    glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
-    textureManager.getTexture("Astroid_" + string(model_number) + "_s.png")->bind();
-
-    Mesh* m = Mesh::getMesh("Astroid_" + string(model_number) + ".model");
-
-    gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
-    gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
-    gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
-
-    ShaderRegistry::setupLights(shader.get(), model_matrix);
-    m->render(positions.get(), texcoords.get(), normals.get());
-
-    glActiveTexture(GL_TEXTURE0);
-}
 
 void VisualAsteroid::setSize(float size)
 {
-    this->size = size;
-    while(fabs(z) < size * 2)
-        z *= random(1.2f, 2.f);
+    auto mrc = entity.getComponent<MeshRenderComponent>();
+    if (mrc)
+        mrc->scale = size;
+    auto trace = entity.getComponent<RadarTrace>();
+    if (trace)
+        trace->radius = size;
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        physics->setCircle(physics->getType(), size);
+
+    if (mrc) {
+        while(fabs(mrc->mesh_offset.z) < size * 2)
+            mrc->mesh_offset.z *= random(1.2f, 2.f);
+    }
 }
 
 float VisualAsteroid::getSize()
 {
-    return size;
-}
-
-glm::mat4 VisualAsteroid::getModelMatrix() const
-{
-    auto asteroid_matrix = glm::translate(SpaceObject::getModelMatrix(), glm::vec3(0.f, 0.f, z));
-    asteroid_matrix = glm::rotate(asteroid_matrix, glm::radians(engine->getElapsedTime() * rotation_speed), glm::vec3(0.f, 0.f, 1.f));
-    return glm::scale(asteroid_matrix, glm::vec3(size));
+    auto physics = entity.getComponent<sp::Physics>();
+    if (physics)
+        return physics->getSize().x;
+    auto mrc = entity.getComponent<MeshRenderComponent>();
+    if (mrc)
+        return mrc->scale;
+    return 120.0;
 }

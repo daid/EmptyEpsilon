@@ -6,6 +6,7 @@
 #include "random.h"
 #include "components/pickup.h"
 #include "components/spin.h"
+#include "components/rendering.h"
 
 #include <glm/ext/matrix_transform.hpp>
 
@@ -65,14 +66,10 @@ REGISTER_SCRIPT_SUBCLASS(Artifact, SpaceObject)
 
 REGISTER_MULTIPLAYER_CLASS(Artifact, "Artifact");
 Artifact::Artifact()
-: SpaceObject(120, "Artifact"),
-  current_model_data_name("artifact" + string(irandom(1, 8))),
-  model_data_name(current_model_data_name)
+: SpaceObject(120, "Artifact")
 {
     setRotation(random(0, 360));
-    model_info.setData(current_model_data_name);
-
-    registerMemberReplication(&model_data_name);
+    setModel("artifact" + string(irandom(1, 8)));
 
     if (entity) {
         auto& trace = entity.getOrAddComponent<RadarTrace>();
@@ -81,18 +78,17 @@ Artifact::Artifact()
     }
 }
 
-void Artifact::update(float delta)
-{
-    if (current_model_data_name != model_data_name)
-    {
-        current_model_data_name = model_data_name;
-        model_info.setData(current_model_data_name);
-    }
-}
-
 void Artifact::setModel(string model_name)
 {
-    model_data_name = model_name;
+    if (!entity) return;
+    auto model = ModelData::getModel(model_name);
+    auto& mrc = entity.getOrAddComponent<MeshRenderComponent>();
+    mrc.mesh = model->mesh_name;
+    mrc.mesh_offset = model->mesh_offset;
+    mrc.texture = model->texture_name;
+    mrc.specular_texture = model->specular_texture_name;
+    mrc.illumination_texture = model->illumination_texture_name;
+    mrc.scale = model->scale;
 }
 
 void Artifact::explode()
@@ -167,7 +163,7 @@ void Artifact::onPlayerCollision(ScriptSimpleCallback callback)
 string Artifact::getExportLine()
 {
     string ret = "Artifact():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")";
-    ret += ":setModel(\"" + model_data_name + "\")";
+    //ret += ":setModel(\"" + model_data_name + "\")";
     //if (allow_pickup)
     //    ret += ":allowPickup(true)";
     return ret;

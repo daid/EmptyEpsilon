@@ -29,7 +29,7 @@ public:
     static P<ModelData> getModel(string name);
     static std::vector<string> getModelDataNames();
 
-private:
+public:
     string name;
     string mesh_name;
     string texture_name;

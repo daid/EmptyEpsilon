@@ -10,10 +10,23 @@
 class MeshRenderComponent
 {
 public:
-    string mesh_name;
-    string texture_name;
-    string specular_texture_name;
-    string illumination_texture_name;
+    string mesh;
+    string texture;
+    string specular_texture;
+    string illumination_texture;
     glm::vec3 mesh_offset{};
     float scale;
+};
+
+class EngineEmitter
+{
+public:
+    float last_engine_particle_time = 0.0f;
+
+    struct Emitter {
+        glm::vec3 position{};
+        glm::vec3 color{};
+        float scale;
+    };
+    std::vector<Emitter> emitters;
 };

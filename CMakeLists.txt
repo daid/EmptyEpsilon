@@ -375,6 +375,7 @@ set(MAIN_SOURCES
     src/components/player.cpp
     src/components/pickup.h
     src/components/spin.h
+    src/components/rendering.h
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/shipsystemssystem.h

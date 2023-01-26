@@ -6,14 +6,7 @@
 class Asteroid : public SpaceObject
 {
 public:
-    float rotation_speed;
-    float z;
-    float size;
-    int model_number;
-
     Asteroid();
-
-    virtual void draw3D() override;
 
     virtual void collide(SpaceObject* target, float force) override;
 
@@ -21,30 +14,17 @@ public:
     float getSize();
 
     virtual string getExportLine() override { return "Asteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" + ":setSize(" + string(getSize(),0) + ")"; }
-
-protected:
-    glm::mat4 getModelMatrix() const override;
 };
 
 class VisualAsteroid : public SpaceObject
 {
 public:
-    float rotation_speed;
-    float z;
-    float size;
-    int model_number;
-
     VisualAsteroid();
-
-    virtual void draw3D() override;
 
     void setSize(float size);
     float getSize();
 
     virtual string getExportLine() override { return "VisualAsteroid():setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")" ":setSize(" + string(getSize(),0) + ")"; }
-
-protected:
-    glm::mat4 getModelMatrix() const override;
 };
 
 #endif//ASTEROID_H
