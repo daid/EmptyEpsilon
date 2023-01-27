@@ -43,7 +43,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS 75% 323 entrées restantes\n"
+"TRADUCTION EN COURS 80% 253 entrées restantes\n"
 "\n"
 "Loin des siens, un avant-poste isolé de la marine tente de survivre dans un "
 "environnement hostile.\n"
@@ -443,12 +443,12 @@ msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 25%"
 #: scripts/scenario_44_outpost.lua:6019
 msgctxt "upgrade-comms"
 msgid "increase range by 20%"
-msgstr "augmenter la portée de 20%"
+msgstr "augmenter la portée des faisceaux laser de 20%"
 
 #: scripts/scenario_44_outpost.lua:828
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 1/6"
-msgstr "réduire le temps de cycle de 1/6"
+msgstr "réduire le temps de cycle des faisceaux laser de 1/6"
 
 #: scripts/scenario_44_outpost.lua:837
 msgctxt "upgrade-comms"
@@ -648,7 +648,7 @@ msgstr "renforcer la solidité de la coque de 25%"
 #: scripts/scenario_44_outpost.lua:977
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~14%"
-msgstr "augmenter la vitesse max des moteurs avant d'environ 14%"
+msgstr "augmenter la vitesse maximale des moteurs avant ~14%"
 
 #: scripts/scenario_44_outpost.lua:984 scripts/scenario_44_outpost.lua:1403
 #: scripts/scenario_44_outpost.lua:1870 scripts/scenario_44_outpost.lua:2303
@@ -661,7 +661,7 @@ msgstr "ajouter une manœuvre de combat vers l'avant"
 #: scripts/scenario_44_outpost.lua:1877 scripts/scenario_44_outpost.lua:7985
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse speed by ~14%"
-msgstr "augmenter la vitesse max des moteurs arrière d'environ 14%"
+msgstr "augmenter la vitesse maximale des moteurs arrière ~14%"
 
 #: scripts/scenario_44_outpost.lua:998 scripts/scenario_44_outpost.lua:1417
 #: scripts/scenario_44_outpost.lua:1884 scripts/scenario_44_outpost.lua:2317
@@ -685,7 +685,7 @@ msgstr "augmenter la manœuvre de 20%"
 #: scripts/scenario_44_outpost.lua:1012
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by 12.5%"
-msgstr "augmenter la vitesse max des moteurs avant de 12,5%"
+msgstr "augmenter la vitesse maximale des moteurs avant de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:1019
 msgctxt "upgrade-comms"
@@ -728,7 +728,7 @@ msgstr "augmenter la manœuvre de combat vers l'avant de 1/3"
 #: scripts/scenario_44_outpost.lua:1054
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse speed by ~11%"
-msgstr "augmenter la vitesse max des moteurs avant d'environ 11%"
+msgstr "augmenter la vitesse maximale des moteurs avant ~11%"
 
 #: scripts/scenario_44_outpost.lua:1061 scripts/scenario_44_outpost.lua:2352
 #: scripts/scenario_44_outpost.lua:2777
@@ -754,7 +754,7 @@ msgstr "augmenter l'accélération des moteurs avant de 20%"
 #: scripts/scenario_44_outpost.lua:2805
 msgctxt "upgrade-comms"
 msgid "increase combat maneuver strafe by 20%"
-msgstr "augmenter la vitesse latérale des manœuvres de combat de 20%"
+msgstr "augmenter la vitesse latérale des manœuvres de combat 20%"
 
 #: scripts/scenario_44_outpost.lua:1089 scripts/scenario_44_outpost.lua:1424
 #: scripts/scenario_44_outpost.lua:1891 scripts/scenario_44_outpost.lua:6560
@@ -972,12 +972,12 @@ msgstr "augmenter le scanner de proximité automatisé de 50%"
 #: scripts/scenario_44_outpost.lua:1203
 msgctxt "upgrade-comms"
 msgid "increase range by ~6%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser d'environ 6%"
 
 #: scripts/scenario_44_outpost.lua:1208
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~7%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser ~7%"
 
 #: scripts/scenario_44_outpost.lua:1213 scripts/scenario_44_outpost.lua:2143
 #: scripts/scenario_44_outpost.lua:2568 scripts/scenario_44_outpost.lua:3383
@@ -993,18 +993,18 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:1218
 msgctxt "upgrade-comms"
 msgid "increase range by ~5%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser d'environ 5%"
 
 #: scripts/scenario_44_outpost.lua:1223
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~8%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser ~8%"
 
 #: scripts/scenario_44_outpost.lua:1228 scripts/scenario_44_outpost.lua:2953
 #: scripts/scenario_44_outpost.lua:5717
 msgctxt "upgrade-comms"
 msgid "increase range by 10%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser de 10%"
 
 #: scripts/scenario_44_outpost.lua:1233 scripts/scenario_44_outpost.lua:1661
 #: scripts/scenario_44_outpost.lua:2958 scripts/scenario_44_outpost.lua:6004
@@ -1032,7 +1032,8 @@ msgstr "ajouter un tube large, augmenter la capacité de stockage HVLI"
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "add broadside tubes and homing missiles"
-msgstr "ajouter des tubes latéraux et augmenter le stockage homing -?"
+msgstr ""
+"ajouter des tubes latéraux homing ou pas? et augmenter le stockage homing -?"
 
 #: scripts/scenario_44_outpost.lua:1247 scripts/scenario_44_outpost.lua:1723
 #: scripts/scenario_44_outpost.lua:2998 scripts/scenario_44_outpost.lua:3789
@@ -1217,14 +1218,14 @@ msgstr "augmenter les capteurs courte portée de 10%"
 #: scripts/scenario_44_outpost.lua:2547
 msgctxt "upgrade-comms"
 msgid "increase range by 50%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser de 50%"
 
 #: scripts/scenario_44_outpost.lua:1645 scripts/scenario_44_outpost.lua:2108
 #: scripts/scenario_44_outpost.lua:2533 scripts/scenario_44_outpost.lua:3774
 #: scripts/scenario_44_outpost.lua:5692 scripts/scenario_44_outpost.lua:6014
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~14%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser ~14%"
 
 #: scripts/scenario_44_outpost.lua:1653
 msgctxt "upgrade-comms"
@@ -1242,9 +1243,10 @@ msgid "increase primary damage by 1/3"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:1688
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "decrease secondary cycle time by 1/3"
-msgstr ""
+msgstr "réduire le temps de cycle des seconds faisceaux de 1/3 ???"
 
 #: scripts/scenario_44_outpost.lua:1697 scripts/scenario_44_outpost.lua:5687
 msgctxt "upgrade-comms"
@@ -1274,7 +1276,7 @@ msgstr "doubler la capacité de stockage des missiles homing"
 #: scripts/scenario_44_outpost.lua:1721
 msgctxt "upgrade-comms"
 msgid "decrease tube load speed by 20%"
-msgstr ""
+msgstr "diminuer le temps de chargement des tubes de 20%"
 
 #: scripts/scenario_44_outpost.lua:1722 scripts/scenario_44_outpost.lua:4941
 #: scripts/scenario_44_outpost.lua:5731 scripts/scenario_44_outpost.lua:6052
@@ -1359,7 +1361,7 @@ msgstr "ajouter des mines"
 #: scripts/scenario_44_outpost.lua:2153 scripts/scenario_44_outpost.lua:2578
 msgctxt "upgrade-comms"
 msgid "speed up tube load speed by 25%"
-msgstr ""
+msgstr "accélérer la vitesse de chargement des tubes de 25%"
 
 #: scripts/scenario_44_outpost.lua:2154 scripts/scenario_44_outpost.lua:2579
 #: scripts/scenario_44_outpost.lua:4592 scripts/scenario_44_outpost.lua:6046
@@ -1371,7 +1373,7 @@ msgstr "augmenter la capacité de stockage des mines de 50%"
 #: scripts/scenario_44_outpost.lua:2155 scripts/scenario_44_outpost.lua:2580
 msgctxt "upgrade-comms"
 msgid "speed up tube load speed by 1/3"
-msgstr ""
+msgstr "accélérer la vitesse de chargement des tubes de 1/3"
 
 #: scripts/scenario_44_outpost.lua:2156 scripts/scenario_44_outpost.lua:2581
 #: scripts/scenario_44_outpost.lua:6043
@@ -1455,7 +1457,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:2310 scripts/scenario_44_outpost.lua:2735
 msgctxt "upgrade-comms"
 msgid "increase max forward acceleration by 1/3"
-msgstr ""
+msgstr "augmenter l'accélération maximale vers l'avant de 1/3"
 
 #: scripts/scenario_44_outpost.lua:2324 scripts/scenario_44_outpost.lua:2749
 msgctxt "upgrade-comms"
@@ -1476,7 +1478,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:2401 scripts/scenario_44_outpost.lua:2826
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by 20% and reverse acceleration by 1/3"
-msgstr ""
+msgstr "augmenter les moteurs arrière de 20% et l'accélération arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:2408 scripts/scenario_44_outpost.lua:2833
 #: scripts/scenario_44_outpost.lua:7387
@@ -1540,17 +1542,17 @@ msgstr "augmenter la vitesse lumière d'environ 14%"
 #: scripts/scenario_44_outpost.lua:2943
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 10%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser de 10%"
 
 #: scripts/scenario_44_outpost.lua:2963
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~11%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser ~11%"
 
 #: scripts/scenario_44_outpost.lua:2973
 msgctxt "upgrade-comms"
 msgid "increase range by ~9%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser d'environ 9%"
 
 #: scripts/scenario_44_outpost.lua:2979 scripts/scenario_44_outpost.lua:3357
 #: scripts/scenario_44_outpost.lua:3376 scripts/scenario_44_outpost.lua:3769
@@ -1570,7 +1572,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:2994
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by ~17%"
-msgstr ""
+msgstr "augmenter la vitesse de chargement des tubes ~17%"
 
 #: scripts/scenario_44_outpost.lua:2997
 msgctxt "upgrade-comms"
@@ -1640,7 +1642,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3165
 msgctxt "upgrade-comms"
 msgid "increase forward impulse speed and acceleration"
-msgstr ""
+msgstr "augmenter la vitesse des moteurs vers l'avant et l'accélération"
 
 #: scripts/scenario_44_outpost.lua:3179
 msgctxt "upgrade-comms"
@@ -1655,7 +1657,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3193
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse speed and acceleration"
-msgstr ""
+msgstr "augmenter la vitesse des moteurs vers l'avant et l'accélération"
 
 #: scripts/scenario_44_outpost.lua:3200 scripts/scenario_44_outpost.lua:4358
 #: scripts/scenario_44_outpost.lua:4723 scripts/scenario_44_outpost.lua:5076
@@ -1695,12 +1697,12 @@ msgstr "augmenter les capteurs courte portée d'environ 9%"
 #: scripts/scenario_44_outpost.lua:5989
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 12.5%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:3363
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~14%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser ~14%"
 
 #: scripts/scenario_44_outpost.lua:3369
 msgctxt "upgrade-comms"
@@ -1710,14 +1712,14 @@ msgstr "augmenter la largeur de l'arc des faisceaux laser de 12,5%"
 #: scripts/scenario_44_outpost.lua:3390
 msgctxt "upgrade-comms"
 msgid "increase range by ~9.5%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser d'environ 9,5%"
 
 #: scripts/scenario_44_outpost.lua:3397 scripts/scenario_44_outpost.lua:4573
 #: scripts/scenario_44_outpost.lua:5712 scripts/scenario_44_outpost.lua:6369
 #: scripts/scenario_44_outpost.lua:6780 scripts/scenario_44_outpost.lua:8152
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by ~17%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser ~17%"
 
 #: scripts/scenario_44_outpost.lua:3410
 msgctxt "upgrade-comms"
@@ -1777,7 +1779,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3556
 msgctxt "upgrade-comms"
 msgid "increase reverse acceleration by 50%"
-msgstr ""
+msgstr "augmenter l'accélération arrière de 50%"
 
 #: scripts/scenario_44_outpost.lua:3563 scripts/scenario_44_outpost.lua:6978
 #: scripts/scenario_44_outpost.lua:8393
@@ -1801,7 +1803,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3584 scripts/scenario_44_outpost.lua:4779
 msgctxt "upgrade-comms"
 msgid "increase forward impulse acceleration by 50%"
-msgstr ""
+msgstr "augmenter l'accélération des moteurs avant de 50%"
 
 #: scripts/scenario_44_outpost.lua:3591
 msgctxt "upgrade-comms"
@@ -1811,13 +1813,13 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3605 scripts/scenario_44_outpost.lua:5889
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse acceleration by 20%"
-msgstr ""
+msgstr "augmenter l'accélération des moteurs arrière de 20%"
 
 #: scripts/scenario_44_outpost.lua:3612 scripts/scenario_44_outpost.lua:3999
 #: scripts/scenario_44_outpost.lua:8386
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by 1/3"
-msgstr ""
+msgstr "augmenter l'accélération avant de 1/3"
 
 #: scripts/scenario_44_outpost.lua:3619
 msgctxt "upgrade-comms"
@@ -1832,7 +1834,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3748 scripts/scenario_44_outpost.lua:5270
 msgctxt "upgrade-comms"
 msgid "increase range by 12.5%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:3752 scripts/scenario_44_outpost.lua:7803
 #: scripts/scenario_44_outpost.lua:8484 scripts/scenario_44_outpost.lua:8494
@@ -1843,13 +1845,13 @@ msgstr "augmenter l'amplitude de l'arc des faisceaux laser de 50%"
 #: scripts/scenario_44_outpost.lua:3756 scripts/scenario_44_outpost.lua:5277
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 12.5%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser de 12,5%"
 
 #: scripts/scenario_44_outpost.lua:3764 scripts/scenario_44_outpost.lua:5298
 #: scripts/scenario_44_outpost.lua:8504
 msgctxt "upgrade-comms"
 msgid "increase range by ~11%"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:3787
 msgctxt "upgrade-comms"
@@ -1874,7 +1876,7 @@ msgstr "ajouter la capacité de tir de homing aux tubes larges"
 #: scripts/scenario_44_outpost.lua:3793
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by 20%"
-msgstr ""
+msgstr "augmenter la vitesse de chargement des tubes de 20%"
 
 #: scripts/scenario_44_outpost.lua:3794
 msgctxt "upgrade-comms"
@@ -1899,7 +1901,7 @@ msgstr "ajouter des tubes larges, augmenter la capacité de stockage homing"
 #: scripts/scenario_44_outpost.lua:3798
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by 25%"
-msgstr ""
+msgstr "augmenter la vitesse de chargement des tubes de 25%"
 
 #: scripts/scenario_44_outpost.lua:3799
 msgctxt "upgrade-comms"
@@ -1941,7 +1943,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4034
 msgctxt "upgrade-comms"
 msgid "double impulse acceleration"
-msgstr ""
+msgstr "doubler l'accélération des moteurs"
 
 #: scripts/scenario_44_outpost.lua:4048 scripts/scenario_44_outpost.lua:4765
 #: scripts/scenario_44_outpost.lua:5118 scripts/scenario_44_outpost.lua:6232
@@ -1955,7 +1957,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4904 scripts/scenario_44_outpost.lua:6720
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 25%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser de 25%"
 
 #: scripts/scenario_44_outpost.lua:4183
 msgctxt "upgrade-comms"
@@ -1970,7 +1972,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4195 scripts/scenario_44_outpost.lua:4919
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by 1/3"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser de 1/3"
 
 #: scripts/scenario_44_outpost.lua:4205
 msgctxt "upgrade-comms"
@@ -2026,7 +2028,7 @@ msgstr "augmenter la capacité de stockage des homing de 20%"
 #: scripts/scenario_44_outpost.lua:4215
 msgctxt "upgrade-comms"
 msgid "reduce tube loading time by 25%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 25%"
 
 #: scripts/scenario_44_outpost.lua:4216
 msgctxt "upgrade-comms"
@@ -2041,7 +2043,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4322
 msgctxt "upgrade-comms"
 msgid "increase rear shield charge capacity by ~21%"
-msgstr "augmenter la capacité de charge des boucliers arrière d'environ 21%"
+msgstr "augmenter la capacité de charge des boucliers arrière ~21%"
 
 #: scripts/scenario_44_outpost.lua:4379 scripts/scenario_44_outpost.lua:4744
 #: scripts/scenario_44_outpost.lua:6525
@@ -2052,17 +2054,17 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4393
 msgctxt "upgrade-comms"
 msgid "increase rear impulse max speed by 20%"
-msgstr ""
+msgstr "augmenter la vitesse maximale des moteurs arrière de 20%"
 
 #: scripts/scenario_44_outpost.lua:4400
 msgctxt "upgrade-comms"
 msgid "increase forward impulse acceleration by 30%"
-msgstr ""
+msgstr "augmenter l'accélération des moteurs avant de 30%"
 
 #: scripts/scenario_44_outpost.lua:4414
 msgctxt "upgrade-comms"
 msgid "increase reverse impulse acceleration by 25%"
-msgstr ""
+msgstr "augmenter l'accélération des moteurs arrière de 25%"
 
 #: scripts/scenario_44_outpost.lua:4442 scripts/scenario_44_outpost.lua:4454
 msgctxt "upgrade-comms"
@@ -2138,7 +2140,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4593
 msgctxt "upgrade-comms"
 msgid "decrease tube load speed by 25%"
-msgstr ""
+msgstr "diminuer le temps de chargement des tubes de 25%"
 
 #: scripts/scenario_44_outpost.lua:4594
 msgctxt "upgrade-comms"
@@ -2159,7 +2161,7 @@ msgstr "renforcer la solidité de la coque d'environ 19%"
 #: scripts/scenario_44_outpost.lua:4758
 msgctxt "upgrade-comms"
 msgid "increase rear impulse acceleration by 25%"
-msgstr ""
+msgstr "booster l'accélération des moteurs arrière de 25%"
 
 #: scripts/scenario_44_outpost.lua:4791
 msgctxt "upgrade-comms"
@@ -2393,12 +2395,13 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:5726
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed by 1/3"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 1/3"
 
 #: scripts/scenario_44_outpost.lua:5728
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make tube medium sized"
-msgstr "monter un tube moyen"
+msgstr "agrandir les tubes légers en taille moyenne ?"
 
 #: scripts/scenario_44_outpost.lua:5729
 msgctxt "upgrade-comms"
@@ -2425,7 +2428,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:5735
 msgctxt "upgrade-comms"
 msgid "reduce mine tube load time by 1/3"
-msgstr ""
+msgstr "réduire le temps de chargement des mines de 1/3"
 
 #: scripts/scenario_44_outpost.lua:5798 scripts/scenario_44_outpost.lua:6135
 #: scripts/scenario_44_outpost.lua:6472 scripts/scenario_44_outpost.lua:6911
@@ -2466,7 +2469,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:6034 scripts/scenario_44_outpost.lua:8489
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~17%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser ~17%"
 
 #: scripts/scenario_44_outpost.lua:6044 scripts/scenario_44_outpost.lua:6048
 msgctxt "upgrade-comms"
@@ -2476,12 +2479,12 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:6045 scripts/scenario_44_outpost.lua:7232
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 25%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 25%"
 
 #: scripts/scenario_44_outpost.lua:6047
 msgctxt "upgrade-comms"
 msgid "reduce load speed by 1/3"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 1/3"
 
 #: scripts/scenario_44_outpost.lua:6049
 msgctxt "upgrade-comms"
@@ -2496,12 +2499,12 @@ msgstr "ajouter la capacité de tir de homing au 2ème tube de mines"
 #: scripts/scenario_44_outpost.lua:6051
 msgctxt "upgrade-comms"
 msgid "make first tube a lerge tube"
-msgstr ""
+msgstr "faire du 1er tube un tube large"
 
 #: scripts/scenario_44_outpost.lua:6053
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed time by 20%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 20%"
 
 #: scripts/scenario_44_outpost.lua:6054
 msgctxt "upgrade-comms"
@@ -2522,7 +2525,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:6354 scripts/scenario_44_outpost.lua:7483
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 25%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser de 25%"
 
 #: scripts/scenario_44_outpost.lua:6359
 msgctxt "upgrade-comms"
@@ -2553,12 +2556,12 @@ msgstr "ajouter des HVLI légers latéraux"
 #: scripts/scenario_44_outpost.lua:6396 scripts/scenario_44_outpost.lua:6831
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 10%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 10%"
 
 #: scripts/scenario_44_outpost.lua:6398
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 1/3"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 1/3"
 
 #: scripts/scenario_44_outpost.lua:6399
 msgctxt "upgrade-comms"
@@ -2573,12 +2576,12 @@ msgstr "augmenter la capacité de stockage : homing : 100%, HVLI : 50%"
 #: scripts/scenario_44_outpost.lua:6403
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed by 25%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 25%"
 
 #: scripts/scenario_44_outpost.lua:6404
 msgctxt "upgrade-comms"
 msgid "make broadside tubes medium size"
-msgstr "monter des tubes moyens latéraux"
+msgstr "agrandir les tubes latéraux en taille moyenne"
 
 #: scripts/scenario_44_outpost.lua:6546
 msgctxt "upgrade-comms"
@@ -2606,7 +2609,7 @@ msgstr "augmenter les capteurs longue portée de 50%"
 #: scripts/scenario_44_outpost.lua:6690
 msgctxt "upgrade-comms"
 msgid "increase range by 1/3"
-msgstr ""
+msgstr "augmenter la portée des faisceaux laser de 1/3"
 
 #: scripts/scenario_44_outpost.lua:6795
 msgctxt "upgrade-comms"
@@ -2641,7 +2644,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:6834
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by ~17%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:6835
 msgctxt "upgrade-comms"
@@ -2651,7 +2654,7 @@ msgstr "augmenter la capacité de stockage de 1/3"
 #: scripts/scenario_44_outpost.lua:6836
 msgctxt "upgrade-comms"
 msgid "make two lower tubes large"
-msgstr "agrandir 2 tubes inférieurs"
+msgstr "agrandir 2 tubes inférieurs en taille large"
 
 #: scripts/scenario_44_outpost.lua:6837
 msgctxt "upgrade-comms"
@@ -2661,17 +2664,17 @@ msgstr "augmenter la capacité de stockage de 25%"
 #: scripts/scenario_44_outpost.lua:6838
 msgctxt "upgrade-comms"
 msgid "reduce tube load times by 20%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 20%"
 
 #: scripts/scenario_44_outpost.lua:6839
 msgctxt "upgrade-comms"
 msgid "reduce medium tube load times by 25%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes moyens de 25%"
 
 #: scripts/scenario_44_outpost.lua:6971
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by 50%"
-msgstr ""
+msgstr "augmenter l'accélération avant de 50%"
 
 #: scripts/scenario_44_outpost.lua:6985
 msgctxt "upgrade-comms"
@@ -2686,17 +2689,17 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7013
 msgctxt "upgrade-comms"
 msgid "increase acceleration by 50%"
-msgstr ""
+msgstr "augmenter l'accélération de 50%"
 
 #: scripts/scenario_44_outpost.lua:7034 scripts/scenario_44_outpost.lua:7359
 msgctxt "upgrade-comms"
 msgid "increase forward acceleration by ~17%"
-msgstr ""
+msgstr "augmenter l'accélération avant d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:7055
 msgctxt "upgrade-comms"
 msgid "increase acceleration by ~24%"
-msgstr ""
+msgstr "augmenter l'accélération d'environ 24%"
 
 #: scripts/scenario_44_outpost.lua:7079
 msgctxt "upgrade-comms"
@@ -2736,7 +2739,7 @@ msgstr "augmenter le scanner longue portée d'environ 14%"
 #: scripts/scenario_44_outpost.lua:7170
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 20%"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser de 20%"
 
 #: scripts/scenario_44_outpost.lua:7197
 msgctxt "upgrade-comms"
@@ -2771,7 +2774,7 @@ msgstr "agrandir un tube léger en tube moyen"
 #: scripts/scenario_44_outpost.lua:7234
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by 20%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes de 20%"
 
 #: scripts/scenario_44_outpost.lua:7235
 msgctxt "upgrade-comms"
@@ -2786,7 +2789,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7238
 msgctxt "upgrade-comms"
 msgid "reduce small tube load time by ~17%"
-msgstr "réduire le temps de chargement des tubes légers d'environ 17%"
+msgstr "réduire le temps de chargement des tubes légers ~17%"
 
 #: scripts/scenario_44_outpost.lua:7241
 msgctxt "upgrade-comms"
@@ -2801,9 +2804,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7498
 msgctxt "upgrade-comms"
 msgid "increase range by ~14%, decrease arc width by ~26%"
-msgstr ""
-"augmenter la portée d'environ 14%, réduire la largeur de l'arc des faisceaux "
-"laser d'environ 26%"
+msgstr "réduire la largeur des faisceaux ~26%, augmenter leur portée ~14%"
 
 #: scripts/scenario_44_outpost.lua:7512
 msgctxt "upgrade-comms"
@@ -2823,7 +2824,7 @@ msgstr "ajouter 2 tubes légers HVLI, augmenter le stockage HVLI de 1/3"
 #: scripts/scenario_44_outpost.lua:7515
 msgctxt "upgrade-comms"
 msgid "reduce tube load speed by ~17%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:7517 scripts/scenario_44_outpost.lua:7524
 msgctxt "upgrade-comms"
@@ -2853,7 +2854,7 @@ msgstr "augmenter la capacité de stockage : homing : 50%, HVLI : 20%"
 #: scripts/scenario_44_outpost.lua:7522
 msgctxt "upgrade-comms"
 msgid "reduce tube load time by ~23%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes d'environ 23%"
 
 #: scripts/scenario_44_outpost.lua:7523
 msgctxt "upgrade-comms"
@@ -2873,7 +2874,7 @@ msgstr "augmenter la capacité de stockage : homing : 1/3, HVLI : 25%"
 #: scripts/scenario_44_outpost.lua:7659
 msgctxt "upgrade-comms"
 msgid "increase rear acceleration by 25%"
-msgstr ""
+msgstr "booster l'accélération arrière de 25%"
 
 #: scripts/scenario_44_outpost.lua:7666
 msgctxt "upgrade-comms"
@@ -2888,7 +2889,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7701 scripts/scenario_44_outpost.lua:8027
 msgctxt "upgrade-comms"
 msgid "increase acceleration by 20%"
-msgstr ""
+msgstr "augmenter l'accélération de 20%"
 
 #: scripts/scenario_44_outpost.lua:7780 scripts/scenario_44_outpost.lua:8444
 #: scripts/scenario_44_outpost.lua:8764
@@ -2909,22 +2910,24 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7847
 msgctxt "upgrade-comms"
 msgid "decrease cycle time by ~24%"
-msgstr ""
+msgstr "réduire le temps de cycle des faisceaux laser ~24%"
 
 #: scripts/scenario_44_outpost.lua:7858 scripts/scenario_44_outpost.lua:8171
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make broadside tubes medium sized"
-msgstr "monter des tubes moyens latéraux"
+msgstr "monter des tubes moyens latéraux -?"
 
 #: scripts/scenario_44_outpost.lua:7860
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add a mine tube and mine"
-msgstr "ajouter un tube de mine et augmenter le stockage mine"
+msgstr "ajouter un tube de mine -??c'est tout?"
 
 #: scripts/scenario_44_outpost.lua:7861
 msgctxt "upgrade-comms"
 msgid "decrease broadside load times by ~17%"
-msgstr "réduire le temps de chargement des tubes latéraux d'environ 17%"
+msgstr "réduire le temps de chargement des tubes latéraux de ~17%"
 
 #: scripts/scenario_44_outpost.lua:7862
 msgctxt "upgrade-comms"
@@ -2964,7 +2967,7 @@ msgstr "renforcer la solidité de la coque d'environ 39%"
 #: scripts/scenario_44_outpost.lua:7992
 msgctxt "upgrade-comms"
 msgid "increase rear acceleration by 1/3"
-msgstr ""
+msgstr "booster l'accélération arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:8122
 msgctxt "upgrade-comms"
@@ -2979,7 +2982,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8140
 msgctxt "upgrade-comms"
 msgid "increase rear arc by 1/3"
-msgstr "augmenter l'amplitude de l'arc des faisceaux laser arrière de 1/3"
+msgstr "augmenter l'amplitude des arcs des faisceaux arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:8158
 msgctxt "upgrade-comms"
@@ -2989,7 +2992,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:8169
 msgctxt "upgrade-comms"
 msgid "add broadsides for nukes, EMPs and HVLIs"
-msgstr ""
+msgstr "ajouter des tubes latéraux pour les nuke, EMP et HVLI"
 
 #: scripts/scenario_44_outpost.lua:8170
 msgctxt "upgrade-comms"
@@ -2999,19 +3002,18 @@ msgstr "augmenter la capacité de stockage des EMP de 25%"
 #: scripts/scenario_44_outpost.lua:8172
 msgctxt "upgrade-comms"
 msgid "reduce front tubes' load time by 20%"
-msgstr ""
+msgstr "réduire le temps de chargement des tubes avant de 20%"
 
 #: scripts/scenario_44_outpost.lua:8174 scripts/scenario_44_outpost.lua:8523
 #: scripts/scenario_44_outpost.lua:8824
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "add mining tube and mines"
-msgstr "ajouter un tube de mine et des mines -?"
+msgstr "ajouter un tube de mine"
 
 #: scripts/scenario_44_outpost.lua:8175
 msgctxt "upgrade-comms"
 msgid "reduce mine load time by ~17%"
-msgstr ""
+msgstr "réduire le temps de chargement des mines d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:8176
 msgctxt "upgrade-comms"
@@ -3041,8 +3043,7 @@ msgstr "augmenter la capacité de stockage : nuke : 50%, EMP : 20%, HVLI : 1/3"
 #: scripts/scenario_44_outpost.lua:8182
 msgctxt "upgrade-comms"
 msgid "reduce load time on broadside and rear tubes by ~18%"
-msgstr ""
-"réduire le temps de chargement des tubes latéraux et arrière d'environ 18%"
+msgstr "réduire le temps de charge des tubes latéraux et arrière ~18%"
 
 #: scripts/scenario_44_outpost.lua:8183
 msgctxt "upgrade-comms"
@@ -3053,27 +3054,28 @@ msgstr "ajouter la capacité de tir de HVLI au tube arrière"
 #: scripts/scenario_44_outpost.lua:8965
 msgctxt "upgrade-comms"
 msgid "increase acceleration by 1/3"
-msgstr ""
+msgstr "augmenter l'accélération de 1/3"
 
 #: scripts/scenario_44_outpost.lua:8524
 msgctxt "upgrade-comms"
 msgid "increase tube load speed by ~23%"
-msgstr ""
+msgstr "augmenter la vitesse de chargement des tubes ~23%"
 
 #: scripts/scenario_44_outpost.lua:8525
 msgctxt "upgrade-comms"
 msgid "add small nuke tubes and nukes"
-msgstr "ajouter des tubes légers pour nuke et des nuke"
+msgstr "ajouter un espace de stockage et des tubes légers pour nuke"
 
 #: scripts/scenario_44_outpost.lua:8526
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make homing tube medium sized"
-msgstr "monter un tube moyen pour homing"
+msgstr "agrandir un tube pour homing en taille moyenne"
 
 #: scripts/scenario_44_outpost.lua:8527
 msgctxt "upgrade-comms"
 msgid "add small EMP tubes and EMPs"
-msgstr "ajouter des tubes légers pour EMP et des EMP"
+msgstr "ajouter un espace de stockage et des tubes légers pour EMP"
 
 #: scripts/scenario_44_outpost.lua:8528
 msgctxt "upgrade-comms"
@@ -3104,7 +3106,7 @@ msgstr "renforcer la solidité de la coque d'environ 4%"
 #: scripts/scenario_44_outpost.lua:8664
 msgctxt "upgrade-comms"
 msgid "increase impulse max speed by 20%"
-msgstr "augmenter la vitesse max des moteurs de 20%"
+msgstr "augmenter la vitesse maximale des moteurs de 20%"
 
 #: scripts/scenario_44_outpost.lua:8706
 msgctxt "upgrade-comms"
@@ -3124,7 +3126,7 @@ msgstr "augmenter la vitesse latérale des manœuvres de combat de 50%"
 #: scripts/scenario_44_outpost.lua:8796
 msgctxt "upgrade-comms"
 msgid "reduce cycle time by 1/3"
-msgstr ""
+msgstr "diminuer le temps de cycle des faisceaux laser de 1/3"
 
 #: scripts/scenario_44_outpost.lua:8822
 msgctxt "upgrade-comms"
@@ -5240,12 +5242,12 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:13094
 msgctxt "station-comms"
 msgid "Reduce range by 50% for 2 minutes"
-msgstr "Réduire la portée de 50 % pendant 2 minutes"
+msgstr "Réduire la portée de 50% pendant 2 minutes"
 
 #: scripts/scenario_44_outpost.lua:13100
 msgctxt "station-comms"
 msgid "Reduce range by 25% for 3 minutes"
-msgstr "Réduire la portée de 25 % pendant 3 minutes"
+msgstr "Réduire la portée de 25% pendant 3 minutes"
 
 #: scripts/scenario_44_outpost.lua:13113
 msgctxt "station_comms"

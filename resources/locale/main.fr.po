@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-01-26 20:33+0100\n"
+"PO-Revision-Date: 2023-01-27 19:32+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -459,7 +459,7 @@ msgstr "Infos du serveur"
 
 #: src/menus/serverCreationScreen.cpp:71
 msgid "Server IP: "
-msgstr "IP du serveur : "
+msgstr "Adresse IP du serveur : "
 
 #: src/menus/serverCreationScreen.cpp:83 src/menus/serverCreationScreen.cpp:118
 #: src/menus/serverCreationScreen.cpp:197 src/menus/shipSelectionScreen.cpp:252
