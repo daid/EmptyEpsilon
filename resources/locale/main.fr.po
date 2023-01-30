@@ -399,32 +399,32 @@ msgid "Version: {version}"
 msgstr "Version : {version}"
 
 #: src/menus/mainMenus.cpp:74
-msgctxt "mainPage"
+msgctxt "mainMenu"
 msgid "Your name:"
 msgstr "Votre nom :"
 
 #: src/menus/mainMenus.cpp:79
-msgctxt "mainPage"
+msgctxt "mainMenu"
 msgid "Start server"
 msgstr "Démarrer le serveur"
 
 #: src/menus/mainMenus.cpp:84
-msgctxt "mainPage"
+msgctxt "mainMenu"
 msgid "Start client"
 msgstr "Démarrer le client"
 
 #: src/menus/mainMenus.cpp:89
-msgctxt "mainPage"
+msgctxt "mainMenu"
 msgid "Options"
 msgstr "Options"
 
 #: src/menus/mainMenus.cpp:94
-msgctxt "mainPage"
+msgctxt "mainMenu"
 msgid "Quit"
 msgstr "Quitter"
 
 #: src/menus/mainMenus.cpp:98
-msgctxt "mainPage"
+msgctxt "mainMenu"
 msgid "Tutorials"
 msgstr "Tutoriels"
 

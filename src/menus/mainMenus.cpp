@@ -71,31 +71,31 @@ MainMenu::MainMenu()
     (new GuiImage(this, "LOGO", "logo_full.png"))->setPosition(0, title_y, sp::Alignment::TopCenter)->setSize(logo_size_x, logo_size_y);
     (new GuiLabel(this, "VERSION", tr("Credits", "Version: {version}").format({{"version", string(VERSION_NUMBER)}}), 20))->setPosition(0, title_y + logo_size, sp::Alignment::TopCenter)->setSize(0, 20);
 
-    (new GuiLabel(this, "", tr("mainPage", "Your name:"), 30))->setAlignment(sp::Alignment::CenterLeft)->setPosition({50, -400}, sp::Alignment::BottomLeft)->setSize(300, 50);
+    (new GuiLabel(this, "", tr("mainMenu", "Your name:"), 30))->setAlignment(sp::Alignment::CenterLeft)->setPosition({50, -400}, sp::Alignment::BottomLeft)->setSize(300, 50);
     (new GuiTextEntry(this, "USERNAME", PreferencesManager::get("username")))->callback([](string text) {
         PreferencesManager::set("username", text);
     })->setPosition({50, -350}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_SERVER", tr("mainPage", "Start server"), [this]() {
+    (new GuiButton(this, "START_SERVER", tr("mainMenu", "Start server"), [this]() {
         new ServerSetupScreen();
         destroy();
     }))->setPosition({50, -230}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_CLIENT", tr("mainPage", "Start client"), [this]() {
+    (new GuiButton(this, "START_CLIENT", tr("mainMenu", "Start client"), [this]() {
         new ServerBrowserMenu(ServerBrowserMenu::Local);
         destroy();
     }))->setPosition({50, -170}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "OPEN_OPTIONS", tr("mainPage", "Options"), [this]() {
+    (new GuiButton(this, "OPEN_OPTIONS", tr("mainMenu", "Options"), [this]() {
         new OptionsMenu();
         destroy();
     }))->setPosition({50, -110}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "QUIT", tr("mainPage", "Quit"), []() {
+    (new GuiButton(this, "QUIT", tr("mainMenu", "Quit"), []() {
         engine->shutdown();
     }))->setPosition({50, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    (new GuiButton(this, "START_TUTORIAL", tr("mainPage", "Tutorials"), [this]() {
+    (new GuiButton(this, "START_TUTORIAL", tr("mainMenu", "Tutorials"), [this]() {
         new TutorialMenu();
         destroy();
     }))->setPosition({370, -50}, sp::Alignment::BottomLeft)->setSize(300, 50);
