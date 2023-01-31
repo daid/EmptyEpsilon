@@ -1,8 +1,14 @@
 #include <memory>
 #include <time.h>
 
-//We need a really fast float to string conversion. dtoa from milo does this very well.
-#include "dtoa/dtoa_milo.h"
+// std::to_chars for integers, and someday floats
+#include <charconv>
+#include <system_error>
+
+// Until std::to_chars float support is more broadly available,
+// nlohmann::detail::to_chars implements a Grisu2 double-to-char method for
+// fast float-to-string conversions.
+#include "nlohmann/json.hpp"
 
 #include "gameStateLogger.h"
 #include "gameGlobalInfo.h"
@@ -94,8 +100,30 @@ private:
         while(*c)
             *ptr++ = *c++;
     }
-    void writeValue(int i) { ptr += sprintf(ptr, "%d", i); }
-    void writeValue(float _f) { dtoa_milo(_f, ptr); ptr += strlen(ptr); }
+    void writeValue(int i) {
+        char buf[15] = {};
+        // std::to_chars returns an error and a one-past-end pointer.
+        const std::to_chars_result res = std::to_chars(buf, buf + 15, i);
+
+        if (res.ec == std::errc{}) // no error
+        {
+            const char* b = buf;
+            while(*b)
+                *ptr++ = *b++;
+        }
+    }
+    void writeValue(float _f) {
+        char buf[24] = {};
+
+        // nlohmann::detail::to_chars returns end-of-chars. Unlike
+        // std::to_chars,  we have to reserve our own terminator.
+        const auto last = nlohmann::detail::to_chars(buf, buf + 23, _f);
+        *last = '\0';
+
+        char* b = buf;
+        while(*b)
+            *ptr++ = *b++;
+    }
     void writeValue(const char* value)
     { /*ptr += sprintf(ptr, "\"%s\"", value);*/
         *ptr++ = '"';
