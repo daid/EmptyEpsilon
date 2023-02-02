@@ -24,8 +24,8 @@ function MicroMeteorites:init(player_ship)
 	player_ship.micrometeorite_phase = 1
 
 	player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-	player_ship:addCustomButton("Weapons","point_defense_btn_left","« LEFT",function () MicroMeteorites:fired(1,player_ship) end,11)
-	player_ship:addCustomButton("Weapons","point_defense_btn_right","» Right",function () MicroMeteorites:fired(2,player_ship) end,12)
+	player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« LEFT"),function () MicroMeteorites:fired(1,player_ship) end,11)
+	player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
 end
 
 function MicroMeteorites:remove(player_ship)
@@ -51,7 +51,7 @@ function MicroMeteorites:timer(delta,player_ship)
         if player_ship.micrometeorite_time <= 0 then
             player_ship.micrometeorite_direction = math.random(1,2)
             player_ship.micrometeorite_phase = 2
-            player_ship:addCustomInfo("Weapons","point_defense_info","!!! IMPACT IMMINENT !!!",10)
+            player_ship:addCustomInfo("Weapons","point_defense_info",_("!!! IMPACT IMMINENT !!!"),10)
         end
     end
     
@@ -65,9 +65,9 @@ function MicroMeteorites:incoming(delta,player_ship)
         player_ship.micrometeorite_impact_countdown=player_ship.micrometeorite_impact_countdown-1
         print (player_ship.micrometeorite_impact_countdown)
         if player_ship.micrometeorite_direction==1 then
-            player_ship:addCustomButton("Weapons","point_defense_btn_left","« ".."Left in".." "..(player_ship.micrometeorite_impact_countdown),function () MicroMeteorites:fired(1,player_ship) end,11)          			
+            player_ship:addCustomButton("Weapons","point_defense_btn_left","« ".._("Left in").." "..(player_ship.micrometeorite_impact_countdown),function () MicroMeteorites:fired(1,player_ship) end,11)          			
         else
-            player_ship:addCustomButton("Weapons","point_defense_btn_right","« ".."Right in".." "..(player_ship.micrometeorite_impact_countdown),function () MicroMeteorites:fired(2,player_ship) end,12)
+            player_ship:addCustomButton("Weapons","point_defense_btn_right","« ".._("Right in").." "..(player_ship.micrometeorite_impact_countdown),function () MicroMeteorites:fired(2,player_ship) end,12)
         end
     end    
     
@@ -89,8 +89,8 @@ function MicroMeteorites:incoming(delta,player_ship)
         
         --reset info and buttons
         player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-		player_ship:addCustomButton("Weapons","point_defense_btn_left","« LEFT",function () MicroMeteorites:fired(1,player_ship) end,11)
-		player_ship:addCustomButton("Weapons","point_defense_btn_right","» Right",function () MicroMeteorites:fired(2,player_ship) end,12)
+		player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« LEFT"),function () MicroMeteorites:fired(1,player_ship) end,11)
+		player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
         
         player_ship.micrometeorite_phase=1
     end
@@ -116,8 +116,8 @@ function MicroMeteorites:fired(button_direction,player_ship)
 			
 			--reset info and buttons
 			player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-			player_ship:addCustomButton("Weapons","point_defense_btn_left","« LEFT",function () MicroMeteorites:fired(1,player_ship) end,11)
-			player_ship:addCustomButton("Weapons","point_defense_btn_right","» Right",function () MicroMeteorites:fired(2,player_ship) end,12)
+			player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« LEFT"),function () MicroMeteorites:fired(1,player_ship) end,11)
+			player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
         
 			player_ship.micrometeorite_phase=1
 			BeamEffect():setSource(player_ship, 0, 0, 0):setTarget(debris, 0, 0):setDuration(0.5):setRing(false):setTexture("texture/beam_blue.png")
