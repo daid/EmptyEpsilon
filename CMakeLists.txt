@@ -376,6 +376,17 @@ set(MAIN_SOURCES
     src/components/pickup.h
     src/components/spin.h
     src/components/rendering.h
+    src/components/name.h
+    src/components/customshipfunction.h
+    src/components/shiplog.h
+    src/components/shiplog.cpp
+    src/components/comms.h
+    src/components/scanning.h
+    src/components/scanning.cpp
+    src/components/internalrooms.h
+    src/components/internalrooms.cpp
+    src/components/probe.h
+    src/components/hacking.h
     src/systems/docking.h
     src/systems/docking.cpp
     src/systems/shipsystemssystem.h
@@ -406,6 +417,8 @@ set(MAIN_SOURCES
     src/systems/pickup.cpp
     src/systems/basicmovement.h
     src/systems/basicmovement.cpp
+    src/systems/comms.h
+    src/systems/comms.cpp
     src/ai/fighterAI.cpp
     src/ai/ai.cpp
     src/ai/aiFactory.cpp

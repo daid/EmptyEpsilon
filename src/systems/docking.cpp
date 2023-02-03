@@ -8,6 +8,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/missiletubes.h"
+#include "components/probe.h"
 #include "spaceObjects/spaceship.h"
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/cpuShip.h"
@@ -92,17 +93,19 @@ void DockingSystem::update(float delta)
                     }
                 }
 
-                if (player && bay && (bay->flags & DockingBay::RestockProbes)) {
+                if (bay && (bay->flags & DockingBay::RestockProbes)) {
                     // If a shipTemplateBasedObject and is allowed to restock
                     // scan probes with docked ships.
-                    if (player->scan_probe_stock < player->max_scan_probes)
-                    {
-                        player->scan_probe_recharge += delta;
-
-                        if (player->scan_probe_recharge > player->scan_probe_charge_time)
+                    if (auto spl = entity.getComponent<ScanProbeLauncher>()) {
+                        if (spl->stock < spl->max)
                         {
-                            player->scan_probe_stock += 1;
-                            player->scan_probe_recharge = 0.0;
+                            spl->recharge += delta;
+
+                            if (spl->recharge > spl->charge_time)
+                            {
+                                spl->stock += 1;
+                                spl->recharge = 0.0;
+                            }
                         }
                     }
                 }

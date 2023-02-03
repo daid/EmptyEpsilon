@@ -75,7 +75,7 @@ void Asteroid::collide(SpaceObject* target, float force)
     if (!isServer())
         return;
     P<SpaceObject> hit_object = target;
-    if (!hit_object || !hit_object->canBeTargetedBy(nullptr))
+    if (!hit_object || !hit_object->canBeTargetedBy({}))
         return;
 
     DamageInfo info({}, DamageType::Kinetic, getPosition());

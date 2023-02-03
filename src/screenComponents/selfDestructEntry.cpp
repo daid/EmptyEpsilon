@@ -41,7 +41,7 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     (new GuiButton(code_entry, id + "_BUTTON_0", "0", [this]() {code_entry_label->setText(code_entry_label->getText() + "0");}))->setSize(50, 50)->setPosition(100, 250, sp::Alignment::TopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_OK", "OK", [this]() {
         if (my_spaceship)
-            my_spaceship->commandConfirmDestructCode(code_entry_position, code_entry_label->getText().toInt());
+            PlayerSpaceship::commandConfirmDestructCode(code_entry_position, code_entry_label->getText().toInt());
         code_entry_label->setText("");
     }))->setSize(50, 50)->setPosition(150, 250, sp::Alignment::TopLeft);
 }
@@ -50,7 +50,7 @@ void GuiSelfDestructEntry::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        auto self_destruct = my_spaceship->entity.getComponent<SelfDestruct>();
+        auto self_destruct = my_spaceship.getComponent<SelfDestruct>();
         if (self_destruct && self_destruct->active)
         {
             box->show();

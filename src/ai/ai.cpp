@@ -365,7 +365,7 @@ void ShipAI::updateTarget()
     // Otherwise, set the new target on the owner.
     else
     {
-        owner->entity.getOrAddComponent<Target>().target = target->entity;
+        owner->entity.getOrAddComponent<Target>().entity = target->entity;
     }
 }
 
@@ -395,7 +395,7 @@ void ShipAI::runOrders()
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), relay_range);
             if (new_target)
             {
-                owner->entity.getOrAddComponent<Target>().target = new_target->entity;
+                owner->entity.getOrAddComponent<Target>().entity = new_target->entity;
             }else{
                 auto diff = owner->getOrderTargetLocation() - owner->getPosition();
                 if (glm::length2(diff) < 1000.0f*1000.0f)
@@ -711,7 +711,7 @@ P<SpaceObject> ShipAI::findBestTarget(glm::vec2 position, float radius)
         auto ptr = entity.getComponent<SpaceObject*>();
         if (!ptr || !*ptr) continue;
         P<SpaceObject> space_object = *ptr;
-        if (!space_object || !space_object->canBeTargetedBy(owner) || !owner->isEnemy(space_object) || space_object == target)
+        if (!space_object || !space_object->canBeTargetedBy(owner->entity) || !owner->isEnemy(space_object) || space_object == target)
             continue;
         if (space_object->canHideInNebula() && Nebula::blockedByNebula(owner_position, space_object->getPosition(), owner->getShortRangeRadarRange()))
             continue;

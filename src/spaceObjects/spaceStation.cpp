@@ -29,16 +29,15 @@ REGISTER_MULTIPLAYER_CLASS(SpaceStation, "SpaceStation");
 SpaceStation::SpaceStation()
 : ShipTemplateBasedObject(300, "SpaceStation")
 {
-    comms_script_name = "comms_station.lua";
     setRadarSignatureInfo(0.2, 0.5, 0.5);
-
-    callsign = "DS" + string(getMultiplayerId());
 
     if (entity) {
         entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Static, 300);
 
         auto& bay = entity.getOrAddComponent<DockingBay>();
         bay.flags |= DockingBay::RestockMissiles | DockingBay::RestockProbes;
+
+        entity.getOrAddComponent<CallSign>().callsign = "DS" + string(getMultiplayerId());
     }
 }
 

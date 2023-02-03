@@ -28,6 +28,7 @@
 #include "components/hull.h"
 #include "components/missiletubes.h"
 #include "components/target.h"
+#include "components/shiplog.h"
 #include "ecs/query.h"
 
 #include "scriptInterface.h"
@@ -462,9 +463,6 @@ SpaceShip::SpaceShip(string multiplayerClassName, float multiplayer_significant_
 
     registerMemberReplication(&wormhole_alpha, 0.5f);
 
-    scanning_complexity_value = -1;
-    scanning_depth_value = -1;
-
     // Ships can have dynamic signatures. Initialize a default baseline value
     // from which clients derive the dynamic signature on update.
     setRadarSignatureInfo(0.05f, 0.2f, 0.2f);
@@ -670,7 +668,7 @@ P<SpaceObject> SpaceShip::getTarget()
     auto target = entity.getComponent<Target>();
     if (!target)
         return nullptr;
-    auto obj = target->target.getComponent<SpaceObject*>();
+    auto obj = target->entity.getComponent<SpaceObject*>();
     if (!obj)
         return nullptr;
     return *obj;
@@ -690,71 +688,14 @@ bool SpaceShip::useEnergy(float amount)
     return true;
 }
 
-
-int SpaceShip::scanningComplexity(P<SpaceObject> other)
-{
-    if (scanning_complexity_value > -1)
-        return scanning_complexity_value;
-    switch(gameGlobalInfo->scanning_complexity)
-    {
-    case SC_None:
-        return 0;
-    case SC_Simple:
-        return 1;
-    case SC_Normal:
-        if (getScannedStateFor(other) == SS_SimpleScan)
-            return 2;
-        return 1;
-    case SC_Advanced:
-        if (getScannedStateFor(other) == SS_SimpleScan)
-            return 3;
-        return 2;
-    }
-    return 0;
-}
-
-int SpaceShip::scanningChannelDepth(P<SpaceObject> other)
-{
-    if (scanning_depth_value > -1)
-        return scanning_depth_value;
-    switch(gameGlobalInfo->scanning_complexity)
-    {
-    case SC_None:
-        return 0;
-    case SC_Simple:
-        return 1;
-    case SC_Normal:
-        return 2;
-    case SC_Advanced:
-        return 2;
-    }
-    return 0;
-}
-
-void SpaceShip::scannedBy(P<SpaceObject> other)
-{
-    switch(getScannedStateFor(other))
-    {
-    case SS_NotScanned:
-    case SS_FriendOrFoeIdentified:
-        setScannedStateFor(other, SS_SimpleScan);
-        break;
-    case SS_SimpleScan:
-        setScannedStateFor(other, SS_FullScan);
-        break;
-    case SS_FullScan:
-        break;
-    }
-}
-
-void SpaceShip::setScanState(EScannedState state)
+void SpaceShip::setScanState(ScanState::State state)
 {
     for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
         setScannedStateForFaction(faction_entity, state);
     }
 }
 
-void SpaceShip::setScanStateByFaction(string faction_name, EScannedState state)
+void SpaceShip::setScanStateByFaction(string faction_name, ScanState::State state)
 {
     setScannedStateForFaction(Faction::find(faction_name), state);
 }
@@ -763,7 +704,7 @@ bool SpaceShip::isFriendOrFoeIdentified()
 {
     LOG(WARNING) << "Deprecated \"isFriendOrFoeIdentified\" function called, use isFriendOrFoeIdentifiedBy or isFriendOrFoeIdentifiedByFaction.";
     for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
-        if (getScannedStateForFaction(faction_entity) > SS_NotScanned)
+        if (getScannedStateForFaction(faction_entity) > ScanState::State::NotScanned)
             return true;
     }
     return false;
@@ -773,7 +714,7 @@ bool SpaceShip::isFullyScanned()
 {
     LOG(WARNING) << "Deprecated \"isFullyScanned\" function called, use isFullyScannedBy or isFullyScannedByFaction.";
     for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
-        if (getScannedStateForFaction(faction_entity) >= SS_FullScan)
+        if (getScannedStateForFaction(faction_entity) >= ScanState::State::FullScan)
             return true;
     }
     return false;
@@ -781,40 +722,22 @@ bool SpaceShip::isFullyScanned()
 
 bool SpaceShip::isFriendOrFoeIdentifiedBy(P<SpaceObject> other)
 {
-    return getScannedStateFor(other) >= SS_FriendOrFoeIdentified;
+    return getScannedStateFor(other->entity) >= ScanState::State::FriendOrFoeIdentified;
 }
 
 bool SpaceShip::isFullyScannedBy(P<SpaceObject> other)
 {
-    return getScannedStateFor(other) >= SS_FullScan;
+    return getScannedStateFor(other->entity) >= ScanState::State::FullScan;
 }
 
 bool SpaceShip::isFriendOrFoeIdentifiedByFaction(sp::ecs::Entity faction_entity)
 {
-    return getScannedStateForFaction(faction_entity) >= SS_FriendOrFoeIdentified;
+    return getScannedStateForFaction(faction_entity) >= ScanState::State::FriendOrFoeIdentified;
 }
 
 bool SpaceShip::isFullyScannedByFaction(sp::ecs::Entity faction_entity)
 {
-    return getScannedStateForFaction(faction_entity) >= SS_FullScan;
-}
-
-bool SpaceShip::canBeHackedBy(P<SpaceObject> other)
-{
-    return (!(this->isFriendly(other)) && this->isFriendOrFoeIdentifiedBy(other)) ;
-}
-
-std::vector<std::pair<ShipSystem::Type, float>> SpaceShip::getHackingTargets()
-{
-    std::vector<std::pair<ShipSystem::Type, float>> results;
-    for(unsigned int n=0; n<ShipSystem::COUNT; n++)
-    {
-        if (ShipSystem::Type(n) == ShipSystem::Type::Reactor) continue;
-        auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
-        if (sys)
-            results.emplace_back(ShipSystem::Type(n), sys->hacked_level);
-    }
-    return results;
+    return getScannedStateForFaction(faction_entity) >= ScanState::State::FullScan;
 }
 
 void SpaceShip::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
@@ -829,10 +752,10 @@ void SpaceShip::didAnOffensiveAction()
     //We did an offensive action towards our target.
     // Check for each faction. If this faction knows if the target is an enemy or a friendly, it now knows if this object is an enemy or a friendly.
     for(auto [faction_entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
-        if (getScannedStateForFaction(faction_entity) == SS_NotScanned)
+        if (getScannedStateForFaction(faction_entity) == ScanState::State::NotScanned)
         {
-            if (getTarget() && getTarget()->getScannedStateForFaction(faction_entity) != SS_NotScanned)
-                setScannedStateForFaction(faction_entity, SS_FriendOrFoeIdentified);
+            if (getTarget() && getTarget()->getScannedStateForFaction(faction_entity) != ScanState::State::NotScanned)
+                setScannedStateForFaction(faction_entity, ScanState::State::FriendOrFoeIdentified);
         }
     }
 }
@@ -950,20 +873,20 @@ void SpaceShip::addBroadcast(FactionRelation threshold, string message)
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
         bool addtolog = 0;
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        auto ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
-            if (this->isFriendly(ship))
+            if (Faction::getRelation(entity, ship) == FactionRelation::Friendly)
             {
                 color = glm::u8vec4(154, 255, 154, 255); //ally = light green
                 addtolog = 1;
             }
-            else if (Faction::getRelation(this->entity, ship->entity) == FactionRelation::Neutral && int(threshold) >= int(FactionRelation::Neutral))
+            else if (Faction::getRelation(entity, ship) == FactionRelation::Neutral && int(threshold) >= int(FactionRelation::Neutral))
             {
                 color = glm::u8vec4(128,128,128, 255); //neutral = grey
                 addtolog = 1;
             }
-            else if ((this->isEnemy(ship)) && (threshold == FactionRelation::Enemy))
+            else if (Faction::getRelation(entity, ship) == FactionRelation::Enemy && threshold == FactionRelation::Enemy)
             {
                 color = glm::u8vec4(255,102,102, 255); //enemy = light red
                 addtolog = 1;
@@ -971,7 +894,9 @@ void SpaceShip::addBroadcast(FactionRelation threshold, string message)
 
             if (addtolog)
             {
-                ship->addToShipLog(message, color);
+                auto logs = entity.getComponent<ShipLog>();
+                if (logs)
+                    logs->entries.push_back({gameGlobalInfo->getMissionTime() + string(": "), message, color});
             }
         }
     }

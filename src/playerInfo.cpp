@@ -31,14 +31,13 @@ static const int16_t CMD_UPDATE_MAIN_SCREEN_CONTROL = 0x0004;
 static const int16_t CMD_UPDATE_NAME = 0x0005;
 
 P<PlayerInfo> my_player_info;
-P<PlayerSpaceship> my_spaceship;
+sp::ecs::Entity my_spaceship;
 PVector<PlayerInfo> player_info_list;
 
 REGISTER_MULTIPLAYER_CLASS(PlayerInfo, "PlayerInfo");
 PlayerInfo::PlayerInfo()
 : MultiplayerObject("PlayerInfo")
 {
-    ship_id = -1;
     client_id = -1;
     main_screen_control = 0;
     last_ship_password = "";
@@ -49,7 +48,7 @@ PlayerInfo::PlayerInfo()
         crew_position[n] = 0;
         registerMemberReplication(&crew_position[n]);
     }
-    registerMemberReplication(&ship_id);
+    registerMemberReplication(&ship);
     registerMemberReplication(&name);
     registerMemberReplication(&main_screen);
     registerMemberReplication(&main_screen_control);
@@ -59,7 +58,7 @@ PlayerInfo::PlayerInfo()
 
 void PlayerInfo::reset()
 {
-    ship_id = -1;
+    ship = {};
     main_screen_control = 0;
     last_ship_password = "";
 
@@ -89,10 +88,10 @@ void PlayerInfo::commandSetCrewPosition(int monitor_index, ECrewPosition positio
         crew_position[position] &=~(1 << monitor_index);
 }
 
-void PlayerInfo::commandSetShipId(int32_t id)
+void PlayerInfo::commandSetShip(sp::ecs::Entity entity)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_UPDATE_SHIP_ID << id;
+    packet << CMD_UPDATE_SHIP_ID << entity;
     sendClientCommand(packet);
 }
 
@@ -149,7 +148,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_UPDATE_SHIP_ID:
-        packet >> ship_id;
+        packet >> ship;
         break;
     case CMD_UPDATE_MAIN_SCREEN:
         packet >> monitor_index >> active;
@@ -336,4 +335,16 @@ template<> void convert<ECrewPosition>::param(lua_State* L, int& idx, ECrewPosit
         cp = shipLog;
     else
         luaL_error(L, "Unknown value for crew position: %s", str.c_str());
+}
+
+bool PlayerInfo::hasPlayerAtPosition(sp::ecs::Entity entity, ECrewPosition position)
+{
+    foreach(PlayerInfo, i, player_info_list)
+    {
+        if (i->ship == entity && i->crew_position[position])
+        {
+            return true;
+        }
+    }
+    return false;
 }

@@ -108,7 +108,7 @@ void MissileWeapon::collide(SpaceObject* target, float force)
         return;
     }
     P<SpaceObject> object = target;
-    if (!object || object == owner || !object->canBeTargetedBy(owner))
+    if (!object || object == owner || !object->canBeTargetedBy(owner->entity))
     {
         return;
     }

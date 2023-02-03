@@ -111,8 +111,6 @@ CpuShip::CpuShip()
 
     setRotation(random(0, 360));
 
-    comms_script_name = "comms_ship.lua";
-
     missile_resupply = 0.0;
 
     new_ai_name = "default";

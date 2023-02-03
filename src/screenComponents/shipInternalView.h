@@ -11,7 +11,7 @@ class GuiShipCrew;
 class GuiShipInternalView : public GuiElement
 {
 private:
-    P<SpaceShip> viewing_ship;
+    sp::ecs::Entity viewing_ship;
     float room_size;
     GuiShipRoomContainer* room_container;
     P<RepairCrew> selected_crew_member;
@@ -19,7 +19,7 @@ private:
 public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
 
-    GuiShipInternalView* setShip(P<SpaceShip> ship);
+    GuiShipInternalView* setShip(sp::ecs::Entity ship);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
@@ -44,7 +44,7 @@ class GuiShipRoom : public GuiElement
 public:
     typedef std::function<void(glm::ivec2 room_position)> func_t;
 private:
-    P<SpaceShip> ship;
+    sp::ecs::Entity ship;
     ShipSystem::Type system;
     float room_size;
     func_t func;
@@ -53,7 +53,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 
-    GuiShipRoom* setSystem(P<SpaceShip> ship, ShipSystem::Type system) { this->ship = ship; this->system = system; return this; }
+    GuiShipRoom* setSystem(sp::ecs::Entity ship, ShipSystem::Type system) { this->ship = ship; this->system = system; return this; }
 
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;

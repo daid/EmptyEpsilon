@@ -29,10 +29,9 @@ enum ECrewPosition
 };
 
 class PlayerInfo;
-class PlayerSpaceship;
 class RenderLayer;
 extern P<PlayerInfo> my_player_info;
-extern P<PlayerSpaceship> my_spaceship;
+extern sp::ecs::Entity my_spaceship;
 extern PVector<PlayerInfo> player_info_list;
 
 class PlayerInfo : public MultiplayerObject
@@ -43,7 +42,7 @@ public:
     uint32_t crew_position[max_crew_positions];
     uint32_t main_screen = 0;
     uint32_t main_screen_control = 0;
-    int32_t ship_id;
+    sp::ecs::Entity ship;
     string name;
     string last_ship_password;
 
@@ -54,13 +53,15 @@ public:
     bool isOnlyMainScreen(int monitor_index);
 
     void commandSetCrewPosition(int monitor_index, ECrewPosition position, bool active);
-    void commandSetShipId(int32_t id);
+    void commandSetShip(sp::ecs::Entity entity);
     void commandSetMainScreen(int monitor_index, bool enabled);
     void commandSetMainScreenControl(int monitor_index, bool control);
     void commandSetName(const string& name);
     virtual void onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& packet) override;
 
     void spawnUI(int monitor_index, RenderLayer* render_layer);
+
+    static bool hasPlayerAtPosition(sp::ecs::Entity entity, ECrewPosition position);
 };
 
 REGISTER_MULTIPLAYER_ENUM(ECrewPosition);

@@ -59,7 +59,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
         float shield_hit = 0.0;
         bool low_shields = false;
-        auto shields = my_spaceship->entity.getComponent<Shields>();
+        auto shields = my_spaceship.getComponent<Shields>();
         if (shields) {
             for(int n=0; n<shields->count; n++)
             {
@@ -78,7 +78,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             shield_low_warning_overlay->setAlpha(0);
         }
 
-        if (auto hull = my_spaceship->entity.getComponent<Hull>())
+        if (auto hull = my_spaceship.getComponent<Hull>())
             hull_hit_overlay->setAlpha(128 * (hull->damage_indicator / 1.5f));
     }else{
         shield_hit_overlay->setAlpha(0);
@@ -88,8 +88,8 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        auto jump = my_spaceship->entity.getComponent<JumpDrive>();
-        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        auto jump = my_spaceship.getComponent<JumpDrive>();
+        auto warp = my_spaceship.getComponent<WarpDrive>();
         if (jump && jump->just_jumped > 0.0f)
         {
             glitchPostProcessor->enabled = true;
@@ -135,7 +135,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             auto fvf_state = FactionRelation::Neutral;
             if (my_spaceship)
             {
-                auto my_faction = my_spaceship->entity.getComponent<Faction>();
+                auto my_faction = my_spaceship.getComponent<Faction>();
                 if (my_faction)
                     fvf_state = gameGlobalInfo->getVictoryFaction()->getRelation(my_faction->entity);
             }
@@ -169,7 +169,7 @@ void GuiIndicatorOverlays::drawAlertLevel(sp::RenderTarget& renderer)
 {
     glm::u8vec4 multiply_color{255,255,255,255};
 
-    auto pc = my_spaceship->entity.getComponent<PlayerControl>();
+    auto pc = my_spaceship.getComponent<PlayerControl>();
     if (!pc) return;
 
     switch(pc->alert_level)

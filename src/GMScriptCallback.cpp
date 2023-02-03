@@ -54,7 +54,7 @@ REGISTER_SCRIPT_FUNCTION(clearGMFunctions);
 
 static int getGMSelection(lua_State* L)
 {
-    PVector<SpaceObject> objects;
+    std::vector<sp::ecs::Entity> objects;
     foreach(Updatable, u, updatableList)
     {
         P<GameMasterScreen> game_master_screen = u;
@@ -63,7 +63,7 @@ static int getGMSelection(lua_State* L)
             objects = game_master_screen->getSelection();
         }
     }
-    return convert<PVector<SpaceObject> >::returnType(L, objects);
+    return convert<std::vector<sp::ecs::Entity>>::returnType(L, objects);
 }
 /// PVector<SpaceObject> getGMSelection()
 /// Returns a list of SpaceObjects selected on the GM console.

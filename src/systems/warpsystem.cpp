@@ -15,7 +15,7 @@ void WarpSystem::update(float delta)
     {
         if (warp.request > 0 || warp.current > 0)
         {
-            if (WarpJammer::isWarpJammed(position.getPosition()))
+            if (WarpJammer::isWarpJammed(entity))
                 warp.request = 0;
         }
         if (warp.request > 0 || warp.current > 0)

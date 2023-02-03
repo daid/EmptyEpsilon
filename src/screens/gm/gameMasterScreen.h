@@ -26,7 +26,7 @@ class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
     TargetsContainer targets;
-    P<SpaceObject> target;
+    sp::ecs::Entity target;
     GuiRadarView* main_radar;
     GuiOverlay* box_selection_overlay;
     GuiSelector* faction_selector;
@@ -84,7 +84,7 @@ public:
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
 
-    PVector<SpaceObject> getSelection();
+    std::vector<sp::ecs::Entity> getSelection();
 
     string getScriptExport(bool selected_only);
 };

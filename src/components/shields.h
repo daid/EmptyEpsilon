@@ -22,6 +22,8 @@ public:
         float level = 0.0f;
         float max = 0.0f;
         float hit_effect = 0.0f;
+
+        int percentage() { return int(100.0f * level / max); }
     };
     Shield entry[max_count];
     ShipSystem front_system;

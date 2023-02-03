@@ -1,6 +1,9 @@
 #include "chatDialog.h"
 #include "gameGlobalInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/comms.h"
+#include "components/collision.h"
+#include "systems/comms.h"
 
 #include "screenComponents/radarView.h"
 
@@ -18,10 +21,11 @@ GameMasterChatDialog::GameMasterChatDialog(GuiContainer* owner, GuiRadarView* ra
     text_entry->enterCallback([this](string text){
         if (this->player)
         {
-            if (this->player->isCommsChatOpenToGM())
-                this->player->addCommsIncommingMessage(text_entry->getText());
+            auto transmitter = player.getComponent<CommsTransmitter>();
+            if (transmitter && transmitter->state == CommsTransmitter::State::ChannelOpenGM)
+                CommsSystem::addCommsIncommingMessage(player, text_entry->getText());
             else
-                this->player->hailCommsByGM(text_entry->getText());
+                CommsSystem::hailByGM(player, text_entry->getText());
         }
         text_entry->setText("");
     });
@@ -41,52 +45,61 @@ void GameMasterChatDialog::onDraw(sp::RenderTarget& renderer)
     if (!player)
         player = gameGlobalInfo->getPlayerShip(player_index);
 
+    auto transmitter = player.getComponent<CommsTransmitter>();
     if (!player)
     {
         disableComms(tr("chatGM", "Target - Destroyed"));
         return;
     }
+    if (!transmitter)
+    {
+        disableComms(tr("chatGM", "Target - No Transmitter"));
+        return;
+    }
 
     if (!isMinimized())
         notification = false;
+    auto callsign_comp = player.getComponent<CallSign>();
+    auto callsign = callsign_comp ? callsign_comp->callsign : string("");
 
-    switch(player->getCommsState())
+    switch(transmitter->state)
     {
-    case CS_Inactive:
-    case CS_ChannelFailed:
-    case CS_ChannelBroken:
-    case CS_ChannelClosed:
+    case CommsTransmitter::State::Inactive:
+    case CommsTransmitter::State::ChannelFailed:
+    case CommsTransmitter::State::ChannelBroken:
+    case CommsTransmitter::State::ChannelClosed:
         chat_text->setText(tr("chatGM", "Channel not open, enter name to hail as to hail target."));
-        disableComms(tr("chatGM", "{callsign} - Inactive").format({{"callsign", player->getCallSign()}}));
+        disableComms(tr("chatGM", "{callsign} - Inactive").format({{"callsign", callsign}}));
         break;
-    case CS_OpeningChannel:
-    case CS_BeingHailed:
-        disableComms(tr("chatGM", "{callsign} - Opening communications with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
+    case CommsTransmitter::State::OpeningChannel:
+    case CommsTransmitter::State::BeingHailed:
+        disableComms(tr("chatGM", "{callsign} - Opening communications with {target}").format({{"callsign", callsign}, {"target", transmitter->target_name}}));
         break;
-    case CS_BeingHailedByGM:
-        disableComms(tr("chatGM", "{callsign} - Hailing as {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
+    case CommsTransmitter::State::BeingHailedByGM:
+        disableComms(tr("chatGM", "{callsign} - Hailing as {target}").format({{"callsign", callsign}, {"target", transmitter->target_name}}));
         break;
-    case CS_ChannelOpen:
-    case CS_ChannelOpenPlayer:
-        disableComms(tr("chatGM", "{callsign} - Communicating with {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
+    case CommsTransmitter::State::ChannelOpen:
+    case CommsTransmitter::State::ChannelOpenPlayer:
+        disableComms(tr("chatGM", "{callsign} - Communicating with {target}").format({{"callsign", callsign}, {"target", transmitter->target_name}}));
         break;
-    case CS_ChannelOpenGM:
+    case CommsTransmitter::State::ChannelOpenGM:
         if (notification)
-            setTitle(tr("chatGM", "**{callsign} - Communicating as {target}**").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
+            setTitle(tr("chatGM", "**{callsign} - Communicating as {target}**").format({{"callsign", callsign}, {"target", transmitter->target_name}}));
         else
-            setTitle(tr("chatGM", "{callsign} - Communicating as {target}").format({{"callsign", player->getCallSign()}, {"target", player->getCommsTargetName()}}));
+            setTitle(tr("chatGM", "{callsign} - Communicating as {target}").format({{"callsign", callsign}, {"target", transmitter->target_name}}));
         chat_text->enable();
         text_entry->enable();
-        if (chat_text->getText() != player->getCommsIncommingMessage())
+        if (chat_text->getText() != transmitter->incomming_message)
         {
-            chat_text->setText(player->getCommsIncommingMessage());
+            chat_text->setText(transmitter->incomming_message);
             notification = true;
         }
-        if (player->getCommsTarget())
-            renderer.drawLine(rect.center(), radar->worldToScreen(player->getCommsTarget()->getPosition()), glm::u8vec4(128, 255, 128, 128));
+        if (auto transform = transmitter->target.getComponent<sp::Transform>())
+            renderer.drawLine(rect.center(), radar->worldToScreen(transform->getPosition()), glm::u8vec4(128, 255, 128, 128));
         break;
     }
-    renderer.drawLine(rect.center(), radar->worldToScreen(player->getPosition()), glm::u8vec4(128, 255, 128, 128));
+    if (auto transform = player.getComponent<sp::Transform>())
+        renderer.drawLine(rect.center(), radar->worldToScreen(transform->getPosition()), glm::u8vec4(128, 255, 128, 128));
 }
 
 void GameMasterChatDialog::disableComms(string title)
@@ -100,9 +113,10 @@ void GameMasterChatDialog::disableComms(string title)
 
 void GameMasterChatDialog::onClose()
 {
-    if (player && (player->isCommsChatOpenToGM() || player->isCommsBeingHailedByGM()))
+    auto transmitter = player.getComponent<CommsTransmitter>();
+    if (transmitter && (transmitter->state == CommsTransmitter::State::ChannelOpenGM || transmitter->state == CommsTransmitter::State::BeingHailedByGM))
     {
-        player->closeComms();
+        CommsSystem::close(player);
     }
     hide();
 }

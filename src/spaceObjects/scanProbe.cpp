@@ -66,7 +66,7 @@ ScanProbe::ScanProbe()
     // Probe has not arrived yet.
     has_arrived = false;
 
-    registerMemberReplication(&owner_id, 0.5);
+    registerMemberReplication(&owner, 0.5);
     registerMemberReplication(&probe_speed, 0.1);
     registerMemberReplication(&target_position, 0.1);
     registerMemberReplication(&lifetime, 60.0);
@@ -185,7 +185,7 @@ void ScanProbe::update(float delta)
     }
 }
 
-bool ScanProbe::canBeTargetedBy(P<SpaceObject> other)
+bool ScanProbe::canBeTargetedBy(sp::ecs::Entity other)
 {
     // The probe cannot be targeted until it reaches its destination.
     return glm::length2(getTarget() - getPosition()) < 100.0f*100.0f;
@@ -209,7 +209,7 @@ void ScanProbe::drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, fl
     }
 }
 
-void ScanProbe::setOwner(P<SpaceObject> owner)
+void ScanProbe::setOwner(sp::ecs::Entity owner)
 {
     if (!owner)
     {
@@ -217,8 +217,10 @@ void ScanProbe::setOwner(P<SpaceObject> owner)
     }
 
     // Set the probe's faction and ship ownership based on the passed object.
-    setFactionId(owner->getFactionId());
-    owner_id = owner->getMultiplayerId();
+    auto f = owner.getComponent<Faction>();
+    if (f)
+        entity.getOrAddComponent<Faction>().entity = f->entity;
+    this->owner = owner;
 }
 
 void ScanProbe::onArrival(ScriptSimpleCallback callback)

@@ -4,13 +4,16 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_progressbar.h"
+#include "components/scanning.h"
+#include "components/target.h"
+
 
 GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id), targets(targets)
 {
     button = new GuiButton(this, id + "_BUTTON", "Scan", [this]() {
         if (my_spaceship && this->targets && this->targets->get())
-            my_spaceship->commandScan(this->targets->get());
+            PlayerSpaceship::commandScan(this->targets->get());
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     progress = new GuiProgressbar(this, id + "_PROGRESS", 0, PlayerSpaceship::max_scanning_delay, 0.0);
@@ -19,28 +22,30 @@ GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, Targets
 
 void GuiScanTargetButton::onUpdate()
 {
-    setVisible(my_spaceship && my_spaceship->getCanScan());
+    setVisible(my_spaceship.hasComponent<ScienceScanner>());
 }
 
 void GuiScanTargetButton::onDraw(sp::RenderTarget& target)
 {
-    if (!my_spaceship)
+    auto ss = my_spaceship.getComponent<ScienceScanner>();
+    if (!ss)
         return;
 
-    if (my_spaceship->scanning_delay > 0.0f)
+    if (ss->delay > 0.0f)
     {
         progress->show();
-        progress->setValue(my_spaceship->scanning_delay);
+        progress->setValue(ss->delay);
         button->hide();
     }
     else
     {
-        P<SpaceObject> obj;
+        sp::ecs::Entity obj;
         if (targets)
             obj = targets->get();
 
         button->show();
-        if (obj && obj->canBeScannedBy(my_spaceship))
+        auto scanstate = obj.getComponent<ScanState>();
+        if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             button->enable();
         else
             button->disable();

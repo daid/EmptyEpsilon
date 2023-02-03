@@ -35,7 +35,7 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     }
     cancel_button = new GuiButton(box, id + "_CANCEL", tr("button", "Cancel"), []() {
         if (my_spaceship)
-            my_spaceship->commandScanCancel();
+            PlayerSpaceship::commandScanCancel();
     });
     cancel_button->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(300, 50);
 
@@ -46,38 +46,38 @@ void GuiScanningDialog::onDraw(sp::RenderTarget& target)
 {
     updateSignal();
 
-    if (my_spaceship)
+    auto ss = my_spaceship.getComponent<ScienceScanner>();
+    if (!ss) return;
+    auto scanstate = ss->target.getComponent<ScanState>();
+    if (scanstate && scanstate->complexity > 0)
     {
-        if (my_spaceship->scanning_delay > 0.0f && my_spaceship->scanning_complexity > 0)
+        if (!box->isVisible())
         {
-            if (!box->isVisible())
+            box->show();
+            scan_depth = 0;
+            setupParameters();
+        }
+
+        if (locked && engine->getElapsedTime() - lock_start_time > lock_delay)
+        {
+            scan_depth += 1;
+            if (scan_depth >= scanstate->depth)
             {
-                box->show();
-                scan_depth = 0;
+                PlayerSpaceship::commandScanDone();
+                lock_start_time = engine->getElapsedTime() - 1.0f;
+            }else{
                 setupParameters();
             }
-
-            if (locked && engine->getElapsedTime() - lock_start_time > lock_delay)
-            {
-                scan_depth += 1;
-                if (scan_depth >= my_spaceship->scanning_depth)
-                {
-                    my_spaceship->commandScanDone();
-                    lock_start_time = engine->getElapsedTime() - 1.0f;
-                }else{
-                    setupParameters();
-                }
-            }
-
-            if (locked && engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
-            {
-                locked_label->show();
-            }else{
-                locked_label->hide();
-            }
-        }else{
-            box->hide();
         }
+
+        if (locked && engine->getElapsedTime() - lock_start_time > lock_delay / 2.0f)
+        {
+            locked_label->show();
+        }else{
+            locked_label->hide();
+        }
+    }else{
+        box->hide();
     }
 }
 
@@ -107,17 +107,23 @@ void GuiScanningDialog::onUpdate()
 
 void GuiScanningDialog::setupParameters()
 {
-    if (!my_spaceship)
+    auto ss = my_spaceship.getComponent<ScienceScanner>();
+    if (!ss)
+        return;
+    if (!ss->target)
+        return;
+    auto scanstate = ss->target.getComponent<ScanState>();
+    if (!scanstate)
         return;
 
     for(int n=0; n<max_sliders; n++)
     {
-        if (n < my_spaceship->scanning_complexity)
+        if (n < scanstate->complexity)
             sliders[n]->show();
         else
             sliders[n]->hide();
     }
-    box->setSize(500, 265 + 70 * my_spaceship->scanning_complexity);
+    box->setSize(500, 265 + 70 * scanstate->complexity);
 
     for(int n=0; n<max_sliders; n++)
     {
@@ -128,7 +134,7 @@ void GuiScanningDialog::setupParameters()
     }
     updateSignal();
 
-    string label = "[" + string(scan_depth + 1) + "/" + string(my_spaceship->scanning_depth) + "] ";
+    string label = "[" + string(scan_depth + 1) + "/" + string(scanstate->depth) + "] ";
     switch(irandom(0, 10))
     {
     default:

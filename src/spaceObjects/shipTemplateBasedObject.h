@@ -14,12 +14,8 @@
 */
 class ShipTemplateBasedObject : public SpaceObject, public Updatable
 {
-private:
-    float long_range_radar_range;
-    float short_range_radar_range;
 public:
     string template_name;
-    string type_name;
     P<ShipTemplate> ship_template;
 
 public:
@@ -29,9 +25,8 @@ public:
     virtual void update(float delta) override;
 
     virtual std::unordered_map<string, string> getGMInfo() override;
-    virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
+    virtual bool canBeTargetedBy(sp::ecs::Entity other) override { return true; }
     virtual bool hasShield() override;
-    virtual string getCallSign() override { return callsign; }
 
     void setCanBeDestroyed(bool enabled);
     bool getCanBeDestroyed();
@@ -40,8 +35,8 @@ public:
 
     void setTemplate(string template_name);
     void setShipTemplate(string template_name) { LOG(WARNING) << "Deprecated \"setShipTemplate\" function called."; setTemplate(template_name); }
-    void setTypeName(string type_name) { this->type_name = type_name; }
-    string getTypeName() { return type_name; }
+    void setTypeName(string type_name) { entity.getOrAddComponent<TypeName>().type_name = type_name; }
+    string getTypeName() { auto tn = entity.getComponent<TypeName>(); if (tn) return tn->type_name; return ""; }
 
     float getHull();
     float getHullMax();
@@ -69,10 +64,10 @@ public:
     void setRearShieldMax(float amount) { } //TODO
 
     // Radar range
-    float getLongRangeRadarRange() { return long_range_radar_range; }
-    float getShortRangeRadarRange() { return short_range_radar_range; }
-    void setLongRangeRadarRange(float range) { range = std::max(range, 100.0f); long_range_radar_range = range; short_range_radar_range = std::min(short_range_radar_range, range); }
-    void setShortRangeRadarRange(float range) { range = std::max(range, 100.0f); short_range_radar_range = range; long_range_radar_range = std::max(long_range_radar_range, range); }
+    float getLongRangeRadarRange() { return 30000.0f; } //TODO
+    float getShortRangeRadarRange() { return 5000.0f; } //TODO
+    void setLongRangeRadarRange(float range) { } //TODO
+    void setShortRangeRadarRange(float range) { } //TODO
 
     void setRadarTrace(string trace);
     void setImpulseSoundFile(string sound);

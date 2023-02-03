@@ -112,7 +112,7 @@ void ScreenMainScreen::update(float delta)
 
     if (my_spaceship)
     {
-        if (auto pc = my_spaceship->entity.getComponent<PlayerControl>()) {
+        if (auto pc = my_spaceship.getComponent<PlayerControl>()) {
             switch(pc->main_screen_setting)
             {
             case MainScreenSetting::Front:
@@ -160,19 +160,19 @@ void ScreenMainScreen::update(float delta)
     if (my_spaceship)
     {
         if (keys.mainscreen_forward.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::Front);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front);
         if (keys.mainscreen_left.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::Left);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Left);
         if (keys.mainscreen_right.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::Right);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Right);
         if (keys.mainscreen_back.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::Back);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Back);
         if (keys.mainscreen_target.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::Target);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Target);
         if (keys.mainscreen_tactical_radar.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::Tactical);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Tactical);
         if (keys.mainscreen_long_range_radar.getDown())
-            my_spaceship->commandMainScreenSetting(MainScreenSetting::LongRange);
+            PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::LongRange);
         if (keys.mainscreen_first_person.getDown())
             viewport->first_person = !viewport->first_person;
     }
@@ -185,7 +185,7 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     if (!my_spaceship)
         return false;
 
-    auto pc = my_spaceship->entity.getComponent<PlayerControl>();
+    auto pc = my_spaceship.getComponent<PlayerControl>();
     if (!pc)
         return false;
 
@@ -233,21 +233,21 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
     case sp::io::Pointer::Button::Touch:
         switch(pc->main_screen_setting)
         {
-        case MainScreenSetting::Front: my_spaceship->commandMainScreenSetting(MainScreenSetting::Left); break;
-        case MainScreenSetting::Left: my_spaceship->commandMainScreenSetting(MainScreenSetting::Back); break;
-        case MainScreenSetting::Back: my_spaceship->commandMainScreenSetting(MainScreenSetting::Right); break;
-        case MainScreenSetting::Right: my_spaceship->commandMainScreenSetting(MainScreenSetting::Front); break;
-        default: my_spaceship->commandMainScreenSetting(MainScreenSetting::Front); break;
+        case MainScreenSetting::Front: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Left); break;
+        case MainScreenSetting::Left: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Back); break;
+        case MainScreenSetting::Back: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Right); break;
+        case MainScreenSetting::Right: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
+        default: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
         }
         break;
     case sp::io::Pointer::Button::Right:
         switch(pc->main_screen_setting)
         {
-        case MainScreenSetting::Front: my_spaceship->commandMainScreenSetting(MainScreenSetting::Right); break;
-        case MainScreenSetting::Right: my_spaceship->commandMainScreenSetting(MainScreenSetting::Back); break;
-        case MainScreenSetting::Back: my_spaceship->commandMainScreenSetting(MainScreenSetting::Left); break;
-        case MainScreenSetting::Left: my_spaceship->commandMainScreenSetting(MainScreenSetting::Front); break;
-        default: my_spaceship->commandMainScreenSetting(MainScreenSetting::Front); break;
+        case MainScreenSetting::Front: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Right); break;
+        case MainScreenSetting::Right: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Back); break;
+        case MainScreenSetting::Back: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Left); break;
+        case MainScreenSetting::Left: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
+        default: PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Front); break;
         }
         break;
     case sp::io::Pointer::Button::Middle:
@@ -255,17 +255,17 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
         {
         default:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                my_spaceship->commandMainScreenSetting(MainScreenSetting::Tactical);
+                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                my_spaceship->commandMainScreenSetting(MainScreenSetting::LongRange);
+                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::LongRange);
             break;
         case MainScreenSetting::Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
-                my_spaceship->commandMainScreenSetting(MainScreenSetting::LongRange);
+                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::LongRange);
             break;
         case MainScreenSetting::LongRange:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
-                my_spaceship->commandMainScreenSetting(MainScreenSetting::Tactical);
+                PlayerSpaceship::commandMainScreenSetting(MainScreenSetting::Tactical);
             break;
         }
         break;

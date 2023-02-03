@@ -23,8 +23,7 @@ GameGlobalInfo::GameGlobalInfo()
 
     for(int n=0; n<max_player_ships; n++)
     {
-        playerShipId[n] = -1;
-        registerMemberReplication(&playerShipId[n]);
+        registerMemberReplication(&playerShip[n]);
     }
 
     global_message_timeout = 0.0;
@@ -60,26 +59,21 @@ GameGlobalInfo::~GameGlobalInfo()
 {
 }
 
-P<PlayerSpaceship> GameGlobalInfo::getPlayerShip(int index)
+sp::ecs::Entity GameGlobalInfo::getPlayerShip(int index)
 {
     SDL_assert(index >= 0 && index < max_player_ships);
-    if (game_server)
-        return game_server->getObjectById(playerShipId[index]);
-    return game_client->getObjectById(playerShipId[index]);
+    return playerShip[index];
 }
 
-void GameGlobalInfo::setPlayerShip(int index, P<PlayerSpaceship> ship)
+void GameGlobalInfo::setPlayerShip(int index, sp::ecs::Entity ship)
 {
     SDL_assert(index >= 0 && index < max_player_ships);
     SDL_assert(game_server);
 
-    if (ship)
-        playerShipId[index] = ship->getMultiplayerId();
-    else
-        playerShipId[index] = -1;
+    playerShip[index] = ship;
 }
 
-int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
+int GameGlobalInfo::findPlayerShip(sp::ecs::Entity ship)
 {
     for(int n=0; n<max_player_ships; n++)
         if (getPlayerShip(n) == ship)
@@ -87,7 +81,7 @@ int GameGlobalInfo::findPlayerShip(P<PlayerSpaceship> ship)
     return -1;
 }
 
-int GameGlobalInfo::insertPlayerShip(P<PlayerSpaceship> ship)
+int GameGlobalInfo::insertPlayerShip(sp::ecs::Entity ship)
 {
     for(int n=0; n<max_player_ships; n++)
     {
@@ -117,13 +111,8 @@ void GameGlobalInfo::update(float delta)
     if (my_player_info)
     {
         //Set the my_spaceship variable based on the my_player_info->ship_id
-        if ((my_spaceship && my_spaceship->getMultiplayerId() != my_player_info->ship_id) || (my_spaceship && my_player_info->ship_id == -1) || (!my_spaceship && my_player_info->ship_id != -1))
-        {
-            if (game_server)
-                my_spaceship = game_server->getObjectById(my_player_info->ship_id);
-            else
-                my_spaceship = game_client->getObjectById(my_player_info->ship_id);
-        }
+        if (my_spaceship != my_player_info->ship)
+            my_spaceship = my_player_info->ship;
     }
     elapsed_time += delta;
 }
@@ -383,18 +372,18 @@ static int getPlayerShip(lua_State* L)
     {
         for(index = 0; index<GameGlobalInfo::max_player_ships; index++)
         {
-            P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
+            auto ship = gameGlobalInfo->getPlayerShip(index);
             if (ship)
-                return convert<P<PlayerSpaceship> >::returnType(L, ship);
+                return convert<sp::ecs::Entity>::returnType(L, ship);
         }
         return 0;
     }
     if (index < 1 || index > GameGlobalInfo::max_player_ships)
         return 0;
-    P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index - 1);
+    auto ship = gameGlobalInfo->getPlayerShip(index - 1);
     if (!ship)
         return 0;
-    return convert<P<PlayerSpaceship> >::returnType(L, ship);
+    return convert<sp::ecs::Entity>::returnType(L, ship);
 }
 /// P<PlayerSpaceship> getPlayerShip(int index)
 /// Returns the PlayerSpaceship with the given index.
@@ -406,19 +395,17 @@ REGISTER_SCRIPT_FUNCTION(getPlayerShip);
 
 static int getActivePlayerShips(lua_State* L)
 {
-    PVector<PlayerSpaceship> ships;
+    std::vector<sp::ecs::Entity> ships;
     ships.reserve(GameGlobalInfo::max_player_ships);
     for (auto index = 0; index < GameGlobalInfo::max_player_ships; ++index)
     {
         auto ship = gameGlobalInfo->getPlayerShip(index);
         
         if (ship)
-        {
-            ships.emplace_back(std::move(ship));
-        }
+            ships.emplace_back(ship);
     }
 
-    return convert<PVector<PlayerSpaceship>>::returnType(L, ships);
+    return convert<std::vector<sp::ecs::Entity>>::returnType(L, ships);
 }
 /// PVector<PlayerSpaceship> getActivePlayerShips()
 /// Returns a 1-indexed list of active PlayerSpaceships.

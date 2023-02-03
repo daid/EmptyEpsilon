@@ -3,11 +3,13 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/comms.h"
+
 
 GuiOpenCommsButton::GuiOpenCommsButton(GuiContainer* owner, string id, string name, TargetsContainer* targets)
 : GuiButton(owner, id, name, [this]() {
     if (my_spaceship && this->targets->get())
-        my_spaceship->commandOpenTextComm(this->targets->get());
+        PlayerSpaceship::commandOpenTextComm(this->targets->get());
 }), targets(targets)
 {
 }
@@ -15,9 +17,11 @@ GuiOpenCommsButton::GuiOpenCommsButton(GuiContainer* owner, string id, string na
 void GuiOpenCommsButton::onDraw(sp::RenderTarget& renderer)
 {
     disable();
-    if (targets->get() && my_spaceship && my_spaceship->isCommsInactive())
+    auto transmitter = my_spaceship.getComponent<CommsTransmitter>();
+    if (transmitter && transmitter->state == CommsTransmitter::State::Inactive)
     {
-        if (P<SpaceShip>(targets->get()) || P<SpaceStation>(targets->get()))
+        auto receiver = targets->get().getComponent<CommsReceiver>();
+        if (receiver)
             enable();
     }
     GuiButton::onDraw(renderer);

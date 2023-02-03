@@ -50,16 +50,16 @@ void WindowScreen::update(float delta)
         return;
     }
 
-    if (my_spaceship)
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
     {
-        camera_yaw = my_spaceship->getRotation() + angle;
+        camera_yaw = transform->getRotation() + angle;
         camera_pitch = 0.0f;
 
-        auto physics = my_spaceship->entity.getComponent<sp::Physics>();
+        auto physics = my_spaceship.getComponent<sp::Physics>();
         auto radius = 300.0f;
         if (physics)
             radius = physics->getSize().x;
-        auto position = my_spaceship->getPosition() + rotateVec2(glm::vec2(radius, 0), camera_yaw);
+        auto position = transform->getPosition() + rotateVec2(glm::vec2(radius, 0), camera_yaw);
 
         camera_position.x = position.x;
         camera_position.y = position.y;

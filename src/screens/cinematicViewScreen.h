@@ -15,7 +15,7 @@ private:
     const double pi = M_PI;
 
     GuiViewport3D* viewport;
-    P<PlayerSpaceship> target;
+    sp::ecs::Entity target;
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;

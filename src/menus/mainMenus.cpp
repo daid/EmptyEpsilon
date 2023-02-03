@@ -154,7 +154,7 @@ MainMenu::MainMenu()
         {
             gameGlobalInfo->startScenario("scenario_10_empty.lua");
 
-            my_player_info->commandSetShipId(-1);
+            my_player_info->commandSetShip({});
             destroy();
             new GameMasterScreen(nullptr);
         }

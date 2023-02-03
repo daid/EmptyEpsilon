@@ -36,7 +36,7 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        auto hull = my_spaceship->entity.getComponent<Hull>();
+        auto hull = my_spaceship.getComponent<Hull>();
         if (hull) {
             hull_display->setValue(string(int(100 * hull->current / hull->max)) + "%");
             if (hull->current < hull->max / 4.0f)
@@ -47,7 +47,7 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 
         for(unsigned int n=0; n<ShipSystem::COUNT; n++)
         {
-            auto sys = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+            auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
             system_health[n]->setVisible(sys);
             if (sys) {
                 system_health[n]->setValue(string(int(sys->health * 100)) + "%");

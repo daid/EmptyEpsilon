@@ -2,6 +2,7 @@
 #include "random.h"
 #include "multiplayer_client.h"
 #include "multiplayer_server.h"
+#include "components/internalrooms.h"
 #include <SDL_assert.h>
 
 const static int16_t CMD_SET_TARGET_POSITION = 0x0000;
@@ -12,7 +13,6 @@ REGISTER_MULTIPLAYER_CLASS(RepairCrew, "RepairCrew");
 RepairCrew::RepairCrew()
 : MultiplayerObject("RepairCrew")
 {
-    ship_id = -1;
     position = {-1, -1};
     target_position = {0, 0};
     action = RC_Idle;
@@ -20,7 +20,7 @@ RepairCrew::RepairCrew()
 
     selected = false;
 
-    registerMemberReplication(&ship_id);
+    registerMemberReplication(&ship);
     registerMemberReplication(&position, 1.0);
     registerMemberReplication(&target_position);
 
@@ -68,13 +68,13 @@ public:
     }
 };
 
-ERepairCrewDirection pathFind(glm::ivec2 start_pos, glm::ivec2 target_pos, P<ShipTemplate> t)
+ERepairCrewDirection pathFind(glm::ivec2 start_pos, glm::ivec2 target_pos, InternalRooms* t)
 {
-    PathMap map(t->interiorSize());
+    auto room_min = t->roomMin();
+    PathMap map(t->roomMax() - room_min);
 
-    for(unsigned int n=0; n<t->rooms.size(); n++)
+    for(const auto& room : t->rooms)
     {
-        const ShipRoomTemplate &room = t->rooms[n];
         for(int x=0; x<room.size.x; x++)
         {
             map.Node(room.position.x + x,room.position.y - 1).down = false;
@@ -86,9 +86,8 @@ ERepairCrewDirection pathFind(glm::ivec2 start_pos, glm::ivec2 target_pos, P<Shi
             map.Node(room.position.x + room.size.x - 1,room.position.y + y).right = false;
         }
     }
-    for(unsigned int n=0; n<t->doors.size(); n++)
+    for(const auto& door : t->doors)
     {
-        const ShipDoorTemplate &door = t->doors[n];
         if (door.horizontal)
         {
             map.Node(door.position.x,door.position.y - 1).down = true;
@@ -137,27 +136,16 @@ ERepairCrewDirection pathFind(glm::ivec2 start_pos, glm::ivec2 target_pos, P<Shi
 
 void RepairCrew::update(float delta)
 {
-    P<PlayerSpaceship> ship;
-    if (game_server)
-        ship = game_server->getObjectById(ship_id);
-    else if (game_client)
-        ship = game_client->getObjectById(ship_id);
-    else
-    {
-        destroy();
-        return;
-    }
-
-
     if (game_server && !ship)
     {
         destroy();
         return;
     }
-    if (!ship || !ship->ship_template)
+    auto ir = ship.getComponent<InternalRooms>();
+    if (!ir)
         return;
 
-    if (ship->ship_template->rooms.size() == 0)
+    if (ir->rooms.size() == 0)
     {
         destroy();
         return;
@@ -165,10 +153,9 @@ void RepairCrew::update(float delta)
 
     if (position.x < -0.5f)
     {
-        ship->ship_template->interiorSize();
-        int n=irandom(0, ship->ship_template->rooms.size() - 1);
-        position.x = ship->ship_template->rooms[n].position.x + irandom(0, ship->ship_template->rooms[n].size.x - 1);
-        position.y = ship->ship_template->rooms[n].position.y + irandom(0, ship->ship_template->rooms[n].size.y - 1);
+        int n=irandom(0, ir->rooms.size() - 1);
+        position.x = ir->rooms[n].position.x + irandom(0, ir->rooms[n].size.x - 1);
+        position.y = ir->rooms[n].position.y + irandom(0, ir->rooms[n].size.y - 1);
         target_position = glm::ivec2(position.x, position.y);
     }
 
@@ -181,7 +168,7 @@ void RepairCrew::update(float delta)
             action_delay = 1.0f / move_speed;
             if (pos != target_position)
             {
-                ERepairCrewDirection new_direction = pathFind(pos, target_position, ship->ship_template);
+                ERepairCrewDirection new_direction = pathFind(pos, target_position, ir);
                 if (new_direction != RC_None)
                 {
                     action = RC_Move;
@@ -190,7 +177,7 @@ void RepairCrew::update(float delta)
             }
             position = glm::vec2{pos.x, pos.y};
 
-            auto system = ShipSystem::get(ship->entity, ship->ship_template->getSystemAtRoom(pos));
+            auto system = ShipSystem::get(ship, ir->getSystemAtRoom(pos));
             if (system)
             {
                 system->health += repair_per_second * delta;
@@ -200,18 +187,18 @@ void RepairCrew::update(float delta)
                 if (system->hacked_level < 0.0f)
                     system->hacked_level = 0.0;
             }
-            if (ship->auto_repair_enabled && pos == target_position && (!system || system->health == 1.0f))
+            if (ir->auto_repair_enabled && pos == target_position && (!system || system->health == 1.0f))
             {
                 int n=irandom(0, ShipSystem::COUNT - 1);
 
-                system = ShipSystem::get(ship->entity, ShipSystem::Type(n));
+                system = ShipSystem::get(ship, ShipSystem::Type(n));
                 if (system && system->health < 1.0f)
                 {
-                    for(unsigned int idx=0; idx<ship->ship_template->rooms.size(); idx++)
+                    for(unsigned int idx=0; idx<ir->rooms.size(); idx++)
                     {
-                        if (ship->ship_template->rooms[idx].system == ShipSystem::Type(n))
+                        if (ir->rooms[idx].system == ShipSystem::Type(n))
                         {
-                            target_position = ship->ship_template->rooms[idx].position + glm::ivec2(irandom(0, ship->ship_template->rooms[idx].size.x - 1), irandom(0, ship->ship_template->rooms[idx].size.y - 1));
+                            target_position = ir->rooms[idx].position + glm::ivec2(irandom(0, ir->rooms[idx].size.x - 1), irandom(0, ir->rooms[idx].size.y - 1));
                         }
                     }
                 }
@@ -263,20 +250,20 @@ bool RepairCrew::isTargetPositionTaken(glm::ivec2 pos)
 {
     foreach(RepairCrew, c, repairCrewList)
     {
-        if (c->ship_id == ship_id && c->target_position == pos)
+        if (c->ship == ship && c->target_position == pos)
             return true;
     }
     return false;
 }
 
-PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship)
+PVector<RepairCrew> getRepairCrewFor(sp::ecs::Entity ship)
 {
     PVector<RepairCrew> ret;
     if (!ship)
         return ret;
 
     foreach(RepairCrew, c, repairCrewList)
-        if (c->ship_id == ship->getMultiplayerId())
+        if (c->ship == ship)
             ret.push_back(c);
     return ret;
 }

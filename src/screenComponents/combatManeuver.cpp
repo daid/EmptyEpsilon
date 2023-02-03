@@ -19,8 +19,8 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
     slider = new GuiSnapSlider2D(this, id + "_STRAFE", glm::vec2(-1.0, 1.0), glm::vec2(1.0, 0.0), glm::vec2(0.0, 0.0), [](glm::vec2 value) {
         if (my_spaceship)
         {
-            my_spaceship->commandCombatManeuverBoost(value.y);
-            my_spaceship->commandCombatManeuverStrafe(value.x);
+            PlayerSpaceship::commandCombatManeuverBoost(value.y);
+            PlayerSpaceship::commandCombatManeuverStrafe(value.x);
         }
     });
     slider->setPosition(0, -50, sp::Alignment::BottomCenter)->setSize(GuiElement::GuiSizeMax, 165);
@@ -31,7 +31,7 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 
 void GuiCombatManeuver::onUpdate()
 {
-    setVisible(my_spaceship && my_spaceship->getCanCombatManeuver());
+    setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
 
     if (isVisible())
     {
@@ -50,7 +50,7 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        auto thrusters = my_spaceship->entity.getComponent<CombatManeuveringThrusters>();
+        auto thrusters = my_spaceship.getComponent<CombatManeuveringThrusters>();
         if (thrusters) {
             charge_bar->setValue(thrusters->charge)->show();
             slider->show();
@@ -64,11 +64,11 @@ void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 void GuiCombatManeuver::setBoostValue(float value)
 {
     slider->setValue(glm::vec2(slider->getValue().x, value));
-    my_spaceship->commandCombatManeuverBoost(value);
+    PlayerSpaceship::commandCombatManeuverBoost(value);
 }
 
 void GuiCombatManeuver::setStrafeValue(float value)
 {
     slider->setValue(glm::vec2(value, slider->getValue().y));
-    my_spaceship->commandCombatManeuverStrafe(value);
+    PlayerSpaceship::commandCombatManeuverStrafe(value);
 }

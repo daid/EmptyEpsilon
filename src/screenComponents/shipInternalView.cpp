@@ -1,6 +1,7 @@
 #include "playerInfo.h"
 #include "repairCrew.h"
 #include "shipInternalView.h"
+#include "components/internalrooms.h"
 
 
 GuiShipInternalView::GuiShipInternalView(GuiContainer* owner, string id, float room_size)
@@ -8,7 +9,7 @@ GuiShipInternalView::GuiShipInternalView(GuiContainer* owner, string id, float r
 {
 }
 
-GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
+GuiShipInternalView* GuiShipInternalView::setShip(sp::ecs::Entity ship)
 {
     if (viewing_ship == ship)
         return this;
@@ -20,36 +21,38 @@ GuiShipInternalView* GuiShipInternalView::setShip(P<SpaceShip> ship)
     }
     if (!ship)
         return this;
-
-    P<ShipTemplate> st = ship->ship_template;
+    auto ir = ship.getComponent<InternalRooms>();
+    if (!ir)
+        return this;
 
     room_container = new GuiShipRoomContainer(this, id + "_ROOM_CONTAINER", room_size, [this](glm::ivec2 position) {
         if (selected_crew_member)
             selected_crew_member->commandSetTargetPosition(position);
     });
     room_container->setPosition(0, 0, sp::Alignment::Center);
-    glm::ivec2 max_size = st->interiorSize();
+    auto room_min = ir->roomMin();
+    auto max_size = ir->roomMax() - room_min;
 
-    for(unsigned int n=0; n<st->rooms.size(); n++)
+    for(unsigned int n=0; n<ir->rooms.size(); n++)
     {
-        ShipRoomTemplate& rt = st->rooms[n];
+        auto& rt = ir->rooms[n];
         GuiShipRoom* room = new GuiShipRoom(room_container, id + "_ROOM_" + string(n), room_size, rt.size, nullptr);
-        room->setPosition(glm::vec2(rt.position) * room_size, sp::Alignment::TopLeft);
+        room->setPosition(glm::vec2(rt.position - room_min) * room_size, sp::Alignment::TopLeft);
         room->setSystem(ship, rt.system);
     }
 
-    for(unsigned int n=0; n<st->doors.size(); n++)
+    for(unsigned int n=0; n<ir->doors.size(); n++)
     {
-        ShipDoorTemplate& dt = st->doors[n];
+        auto& dt = ir->doors[n];
 
         GuiShipDoor* door = new GuiShipDoor(room_container, id + "_DOOR_" + string(n), nullptr);
         door->setSize(room_size, room_size);
         if (dt.horizontal)
         {
             door->setHorizontal();
-            door->setPosition(glm::vec2(dt.position) * room_size - glm::vec2(0, room_size / 2.0f));
+            door->setPosition(glm::vec2(dt.position - room_min) * room_size - glm::vec2(0, room_size / 2.0f));
         }else{
-            door->setPosition(glm::vec2(dt.position) * room_size - glm::vec2(room_size / 2.0f, 0));
+            door->setPosition(glm::vec2(dt.position - room_min) * room_size - glm::vec2(room_size / 2.0f, 0));
         }
     }
     room_container->setSize(glm::vec2(max_size) * room_size);
@@ -171,12 +174,12 @@ void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
     float f = 1.0;
     ShipSystem* sys = nullptr;
     if (ship)
-        sys = ShipSystem::get(ship->entity, system);
+        sys = ShipSystem::get(ship, system);
     if (sys)
         f = std::max(0.0f, sys->health);
     renderer.drawStretchedHV(rect, rect.size.x * 0.25f, "room_background", glm::u8vec4(255, 255 * f, 255 * f, 255));
 
-    if (system != ShipSystem::Type::None && ship && ship->hasSystem(system))
+    if (system != ShipSystem::Type::None && ship && sys)
     {
         std::string_view icon;
         switch(system)

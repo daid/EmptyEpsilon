@@ -17,7 +17,7 @@ void BeamWeaponSystem::update(float delta)
     if (delta <= 0.0f) return;
 
     for(auto [entity, beamsys, target, transform, reactor, docking_port, obj] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>, SpaceObject*>()) {
-        if (!target.target) continue;
+        if (!target.entity) continue;
         P<SpaceShip> ship = P<SpaceObject>(obj);
         auto warp = entity.getComponent<WarpDrive>();
 
@@ -27,13 +27,13 @@ void BeamWeaponSystem::update(float delta)
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && Faction::getRelation(entity, target.target) == FactionRelation::Enemy && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+            if (mount.range > 0.0f && Faction::getRelation(entity, target.entity) == FactionRelation::Enemy && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
             {
-                if (auto target_transform = target.target.getComponent<sp::Transform>()) {
+                if (auto target_transform = target.entity.getComponent<sp::Transform>()) {
                     // Get the angle to the target.
                     auto diff = target_transform->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
                     float distance = glm::length(diff);
-                    if (auto physics = target.target.getComponent<sp::Physics>())
+                    if (auto physics = target.entity.getComponent<sp::Physics>())
                         distance += physics->getSize().x;
 
                     // We also only care if the target is within no more than its
@@ -89,11 +89,11 @@ void BeamWeaponSystem::update(float delta)
                             mount.cooldown = mount.cycle_time; // Reset time of weapon
 
                             auto hit_location = target_transform->getPosition();
-                            if (auto physics = target.target.getComponent<sp::Physics>())
+                            if (auto physics = target.entity.getComponent<sp::Physics>())
                                 hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * physics->getSize().x;
                             P<BeamEffect> effect = new BeamEffect();
                             effect->setSource(entity, mount.position);
-                            effect->setTarget(target.target, hit_location);
+                            effect->setTarget(target.entity, hit_location);
                             effect->beam_texture = mount.texture;
                             effect->beam_fire_sound = "sfx/laser_fire.wav";
                             effect->beam_fire_sound_power = mount.damage / 6.0f;

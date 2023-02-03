@@ -4,6 +4,7 @@
 #include "preferenceManager.h"
 #include "components/collision.h"
 #include "systems/collision.h"
+#include "systems/comms.h"
 #include "ecs/query.h"
 
 #include <glm/ext/matrix_transform.hpp>
@@ -248,18 +249,11 @@ SpaceObject::SpaceObject(float collision_range, string multiplayer_name, float m
 
     space_object_list.push_back(this);
 
-    scanning_complexity_value = 0;
-    scanning_depth_value = 0;
-
-    registerMemberReplication(&callsign);
-    //registerMemberReplication(&scanned_by_faction);
     registerMemberReplication(&object_description.not_scanned);
     registerMemberReplication(&object_description.friend_of_foe_identified);
     registerMemberReplication(&object_description.simple_scan);
     registerMemberReplication(&object_description.full_scan);
     registerMemberReplication(&entity);
-    registerMemberReplication(&scanning_complexity_value);
-    registerMemberReplication(&scanning_depth_value);
 }
 
 SpaceObject::~SpaceObject()
@@ -286,12 +280,12 @@ void SpaceObject::destroy()
     MultiplayerObject::destroy();
 }
 
-bool SpaceObject::canBeTargetedBy(P<SpaceObject> other)
+bool SpaceObject::canBeTargetedBy(sp::ecs::Entity other)
 {
     return false;
 }
 
-bool SpaceObject::canBeSelectedBy(P<SpaceObject> other)
+bool SpaceObject::canBeSelectedBy(sp::ecs::Entity other)
 {
     if (getDescriptionFor(other).length() > 0)
         return true;
@@ -302,42 +296,32 @@ bool SpaceObject::canBeSelectedBy(P<SpaceObject> other)
     return false;
 }
 
-bool SpaceObject::canBeScannedBy(P<SpaceObject> other)
+bool SpaceObject::canBeScannedBy(sp::ecs::Entity other)
 {
-    if (getScannedStateFor(other) == SS_FullScan)
-        return false;
-    if (scanning_complexity_value > 0)
+    auto scanstate = entity.getComponent<ScanState>();
+    if (scanstate) {
+        if (getScannedStateFor(other) == ScanState::State::FullScan)
+            return false;
         return true;
-    if (scanning_depth_value > 0)
-        return true;
+    }
     return false;
-}
-
-bool SpaceObject::canBeHackedBy(P<SpaceObject> other)
-{
-    return false;
-}
-
-std::vector<std::pair<ShipSystem::Type, float> > SpaceObject::getHackingTargets()
-{
-    return std::vector<std::pair<ShipSystem::Type, float> >();
 }
 
 void SpaceObject::hackFinished(P<SpaceObject> source, ShipSystem::Type target)
 {
 }
 
-EScannedState SpaceObject::getScannedStateFor(P<SpaceObject> other)
+ScanState::State SpaceObject::getScannedStateFor(sp::ecs::Entity other)
 {
     if (!other)
-        return SS_NotScanned;
-    auto f = other->entity.getComponent<Faction>();
+        return ScanState::State::NotScanned;
+    auto f = other.getComponent<Faction>();
     if (!f)
-        return SS_NotScanned;
+        return ScanState::State::NotScanned;
     return getScannedStateForFaction(f->entity);
 }
 
-void SpaceObject::setScannedStateFor(P<SpaceObject> other, EScannedState state)
+void SpaceObject::setScannedStateFor(P<SpaceObject> other, ScanState::State state)
 {
     if (!other)
     {
@@ -351,31 +335,40 @@ void SpaceObject::setScannedStateFor(P<SpaceObject> other, EScannedState state)
         setScannedStateForFaction({}, state);
 }
 
-EScannedState SpaceObject::getScannedStateForFaction(sp::ecs::Entity faction_entity)
+ScanState::State SpaceObject::getScannedStateForFaction(sp::ecs::Entity faction_entity)
 {
-    for(auto& it : scanned_by_faction) {
+    auto scanstate = entity.getComponent<ScanState>();
+    if (!scanstate) return ScanState::State::FullScan;
+
+    for(auto& it : scanstate->per_faction) {
         if (it.first == faction_entity)
             return it.second;
     }
-    return SS_NotScanned;
+    return ScanState::State::NotScanned;
 }
 
-void SpaceObject::setScannedStateForFaction(sp::ecs::Entity faction_entity, EScannedState state)
+void SpaceObject::setScannedStateForFaction(sp::ecs::Entity faction_entity, ScanState::State state)
 {
-    for(auto& it : scanned_by_faction) {
+    auto scanstate = entity.getComponent<ScanState>();
+    if (!scanstate) return;
+
+    for(auto& it : scanstate->per_faction) {
         if (it.first == faction_entity) {
             it.second = state;
             return;
         }
     }
-    scanned_by_faction.push_back({faction_entity, state});
+    scanstate->per_faction.push_back({faction_entity, state});
 }
 
 bool SpaceObject::isScanned()
 {
     LOG(WARNING) << "Depricated \"isScanned\" function called, use isScannedBy or isScannedByFaction.";
-    for(auto& it : scanned_by_faction) {
-        if (it.second > SS_FriendOrFoeIdentified)
+
+    auto scanstate = entity.getComponent<ScanState>();
+    if (!scanstate) return true;
+    for(auto& it : scanstate->per_faction) {
+        if (it.second > ScanState::State::FriendOrFoeIdentified)
             return true;
     }
     return false;
@@ -385,42 +378,37 @@ void SpaceObject::setScanned(bool scanned)
 {
     for(auto [entity, faction_info] : sp::ecs::Query<FactionInfo>()) {
         if (!scanned)
-            setScannedStateForFaction(entity, SS_NotScanned);
+            setScannedStateForFaction(entity, ScanState::State::NotScanned);
         else
-            setScannedStateForFaction(entity, SS_FullScan);
+            setScannedStateForFaction(entity, ScanState::State::FullScan);
     }
 }
 
 void SpaceObject::setScannedByFaction(string faction_name, bool scanned)
 {
     if (!scanned)
-        setScannedStateForFaction(Faction::find(faction_name), SS_NotScanned);
+        setScannedStateForFaction(Faction::find(faction_name), ScanState::State::NotScanned);
     else
-        setScannedStateForFaction(Faction::find(faction_name), SS_FullScan);
+        setScannedStateForFaction(Faction::find(faction_name), ScanState::State::FullScan);
 }
 
 bool SpaceObject::isScannedBy(P<SpaceObject> obj)
 {
-    return getScannedStateFor(obj) > SS_FriendOrFoeIdentified;
+    return getScannedStateFor(obj->entity) > ScanState::State::FriendOrFoeIdentified;
 }
 
 bool SpaceObject::isScannedByFaction(string faction_name)
 {
     auto faction_id = Faction::find(faction_name);
-    return getScannedStateForFaction(faction_id) > SS_FriendOrFoeIdentified;
-}
-
-void SpaceObject::scannedBy(P<SpaceObject> other)
-{
-    setScannedStateFor(other, SS_FullScan);
+    return getScannedStateForFaction(faction_id) > ScanState::State::FriendOrFoeIdentified;
 }
 
 void SpaceObject::setScanningParameters(int complexity, int depth)
 {
-    scanning_complexity_value = std::min(4, std::max(0, complexity));
-    scanning_depth_value = std::max(0, depth);
-
-    scanned_by_faction.clear();
+    auto& scanstate = entity.getOrAddComponent<ScanState>();
+    scanstate.complexity = std::min(4, std::max(0, complexity));
+    scanstate.depth = std::max(0, depth);
+    scanstate.per_faction.clear();
 }
 
 bool SpaceObject::isEnemy(P<SpaceObject> obj)
@@ -530,10 +518,12 @@ void SpaceObject::addReputationPoints(float amount)
 
 void SpaceObject::setCommsScript(string script_name)
 {
+    /*TODO
     this->comms_script_name = script_name;
     if (script_name != "")
         i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
     this->comms_script_callback.clear();
+    */
 }
 
 string SpaceObject::getSectorName()
@@ -551,7 +541,7 @@ bool SpaceObject::sendCommsMessage(P<PlayerSpaceship> target, string message)
     if (!target)
         return false;
 
-    bool result = target->hailByObject(this, message);
+    bool result = CommsSystem::hailByObject(target->entity, entity, message);
     if (!result && message != "")
     {
         target->addToShipLogBy(message, this);
@@ -564,7 +554,7 @@ bool SpaceObject::sendCommsMessageNoLog(P<PlayerSpaceship> target, string messag
     if (!target)
         return false;
 
-    return target->hailByObject(this, message);
+    return CommsSystem::hailByObject(target->entity, entity, message);
 }
 
 glm::vec2 SpaceObject::getPosition() const
@@ -667,18 +657,18 @@ template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& d
     convert<ShipSystem::Type>::param(L, idx, di.system_target);
 }
 
-template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedState& ss)
+template<> void convert<ScanState::State>::param(lua_State* L, int& idx, ScanState::State& ss)
 {
-    ss = SS_NotScanned;
+    ss = ScanState::State::NotScanned;
     if (!lua_isstring(L, idx))
         return;
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "notscanned" || str == "not")
-        ss = SS_NotScanned;
+        ss = ScanState::State::NotScanned;
     else if (str == "friendorfoeidentified")
-        ss = SS_FriendOrFoeIdentified;
+        ss = ScanState::State::FriendOrFoeIdentified;
     else if (str == "simple" || str == "simplescan")
-        ss = SS_SimpleScan;
+        ss = ScanState::State::SimpleScan;
     else if (str == "full" || str == "fullscan")
-        ss = SS_FullScan;
+        ss = ScanState::State::FullScan;
 }

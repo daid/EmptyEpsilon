@@ -9,6 +9,7 @@
 
 #include "components/beamweapon.h"
 #include "components/shields.h"
+#include "components/collision.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
@@ -30,6 +31,7 @@
 ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 : GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
 {
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     targets.setAllowWaypointSelection();
 
     // Render the radar shadow and background decorations.
@@ -47,19 +49,20 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", lrr ? lrr->long_range : 30000.0f, &targets);
     science_radar->setPosition(-270, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
-            if (!my_spaceship || my_spaceship->scanning_delay > 0.0f)
-                return;
+            if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
+                if (scanner->delay > 0.0f)
+                    return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
-    new RawScannerDataRadarOverlay(science_radar, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f);
+    new RawScannerDataRadarOverlay(science_radar, "", lrr ? lrr->long_range : 30000.0f);
 
     // Draw and hide the probe radar.
     probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
@@ -67,8 +70,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
-            if (!my_spaceship || my_spaceship->scanning_delay > 0.0f)
-                return;
+            if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
+                if (scanner->delay > 0.0f)
+                    return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr
@@ -93,7 +97,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Scan button.
     scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
-    scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanScan());
+    scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScienceScanner>());
 
     // Simple scan data.
     info_callsign = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_CALLSIGN", 0.4, tr("Callsign"), "");
@@ -109,10 +113,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science","Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("database", "DB"), [this]() {
-        P<SpaceShip> ship = targets.get();
-        if (ship)
+        auto ship = targets.get();
+        if (auto tn = ship.getComponent<TypeName>())
         {
-            if (database_view->findAndDisplayEntry(ship->getTypeName()))
+            if (database_view->findAndDisplayEntry(tn->type_name))
             {
                 view_mode_selection->setSelectionIndex(1);
                 radar_view->hide();
@@ -179,19 +183,15 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 
     // Probe view button
     probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("button", "Probe View"), [this](bool value){
-        P<ScanProbe> probe;
-
-        if (game_server)
-            probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
-        else
-            probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
-
-        if (value && probe)
+        auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+        if (value && lrr && lrr->linked_probe)
         {
-            auto probe_position = probe->getPosition();
-            science_radar->hide();
-            probe_radar->show();
-            probe_radar->setViewPosition(probe_position)->show();
+            auto transform = lrr->linked_probe.getComponent<sp::Transform>();
+            if (transform) {
+                science_radar->hide();
+                probe_radar->show();
+                probe_radar->setViewPosition(transform->getPosition())->show();
+            }
         }else{
             probe_view_button->setValue(false);
             science_radar->show();
@@ -201,10 +201,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     probe_view_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(200, 50)->disable();
 
     // Draw the zoom slider.
-    zoom_slider = new GuiSlider(radar_view, "", my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, my_spaceship ? my_spaceship->getShortRangeRadarRange() : 5000.0f, my_spaceship ? my_spaceship->getLongRangeRadarRange() : 30000.0f, [this](float value)
+    zoom_slider = new GuiSlider(radar_view, "", lrr ? lrr->long_range : 30000.0f, lrr ? lrr->short_range : 5000.0f, lrr ? lrr->long_range : 30000.0f, [this](float value)
     {
-        if (my_spaceship)
-            zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / value, 1)}}));
+        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+            zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / value, 1)}}));
         science_radar->setDistance(value);
     });
     zoom_slider->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(250, 50);
@@ -226,9 +226,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
     GuiOverlay::onDraw(renderer);
-    P<ScanProbe> probe;
 
-    if (!my_spaceship || !isVisible())
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+    if (!lrr || !isVisible())
         return;
 
     float view_distance = science_radar->getDistance();
@@ -237,29 +237,28 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     {
         view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
     }
-    view_distance = std::min(view_distance,my_spaceship->getLongRangeRadarRange());
-    view_distance = std::max(view_distance,my_spaceship->getShortRangeRadarRange());
-    if (view_distance!=science_radar->getDistance() || previous_long_range_radar != my_spaceship->getLongRangeRadarRange() || previous_short_range_radar != my_spaceship->getShortRangeRadarRange())
+    view_distance = std::min(view_distance, lrr->long_range);
+    view_distance = std::max(view_distance, lrr->short_range);
+    if (view_distance!=science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
     {
-        previous_short_range_radar=my_spaceship->getShortRangeRadarRange();
-        previous_long_range_radar=my_spaceship->getLongRangeRadarRange();
+        previous_short_range_radar = lrr->long_range;
+        previous_long_range_radar = lrr->short_range;
         science_radar->setDistance(view_distance);
         // Keep the zoom slider in sync.
-        zoom_slider->setValue(view_distance)->setRange(my_spaceship->getLongRangeRadarRange(),my_spaceship->getShortRangeRadarRange());
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(my_spaceship->getLongRangeRadarRange() / view_distance, 1)}}));
+        zoom_slider->setValue(view_distance)->setRange(lrr->long_range, lrr->short_range);
+        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / view_distance, 1)}}));
     }
 
-    if (game_server)
-        probe = game_server->getObjectById(my_spaceship->linked_science_probe_id);
-    else
-        probe = game_client->getObjectById(my_spaceship->linked_science_probe_id);
-
-    if (probe_view_button->getValue() && probe)
+    if (probe_view_button->getValue() && lrr->linked_probe)
     {
-        if (targets.get() && glm::length2(probe->getPosition() - targets.get()->getPosition()) > 5000.0f * 5000.0f)
+        auto probe_transform = lrr->linked_probe.getComponent<sp::Transform>();
+        auto target_transform = targets.get().getComponent<sp::Transform>();
+        if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
     }else{
-        if (targets.get() && Nebula::blockedByNebula(my_spaceship->getPosition(), targets.get()->getPosition(), my_spaceship->getShortRangeRadarRange()))
+        auto my_transform = my_spaceship.getComponent<sp::Transform>();
+        auto target_transform = targets.get().getComponent<sp::Transform>();
+        if (!my_transform || !target_transform || Nebula::blockedByNebula(my_transform->getPosition(), target_transform->getPosition(), lrr->short_range))
             targets.clear();
     }
 
@@ -282,10 +281,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     for(int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
-    if (probe)
+    if (lrr->linked_probe)
     {
         probe_view_button->enable();
-        probe_radar->setViewPosition(probe->getPosition());
+        auto probe_transform = lrr->linked_probe.getComponent<sp::Transform>();
+        if (probe_transform)
+            probe_radar->setViewPosition(probe_transform->getPosition());
     }
     else
     {
@@ -297,17 +298,20 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
     if (targets.get())
     {
-        P<SpaceObject> obj = targets.get();
+        auto target_ptr = targets.get().getComponent<SpaceObject*>();
+        P<SpaceObject> obj = target_ptr ? *target_ptr : nullptr;
         P<SpaceShip> ship = obj;
         P<SpaceStation> station = obj;
 
-        auto position_diff = obj->getPosition() - my_spaceship->getPosition();
+        auto transform = my_spaceship.getComponent<sp::Transform>();
+        auto position_diff = obj->getPosition() - (transform ? transform->getPosition() : glm::vec2{0, 0});
         float distance = glm::length(position_diff);
         float heading = vec2ToAngle(position_diff) - 270;
 
         while(heading < 0) heading += 360;
 
-        float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(my_spaceship->getVelocity(), position_diff / distance);
+        auto physics = my_spaceship.getComponent<sp::Physics>();
+        float rel_velocity = dot(obj->getVelocity(), position_diff / distance) - dot(physics ? physics->getVelocity() : glm::vec2{0, 0}, position_diff / distance);
 
         if (std::abs(rel_velocity) < 0.01f)
             rel_velocity = 0.0f;
@@ -341,9 +345,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // deeply we've scanned it.
         if (ship)
         {
+            auto scanstate = targets.get().getComponent<ScanState>();
             // On a simple scan or deeper, show the faction, ship type, shields,
             // hull integrity, and database reference button.
-            if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+            if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::SimpleScan)
             {
                 auto faction = Faction::getInfo(obj->entity);
                 info_faction->setValue(faction.locale_name);
@@ -355,7 +360,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
             // On a full scan, show tactical and systems data (if any), and its
             // description (if one is set).
-            if (ship->getScannedStateFor(my_spaceship) >= SS_FullScan)
+            if (!scanstate || scanstate->getStateFor(my_spaceship) >= ScanState::State::FullScan)
             {
                 sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
@@ -451,20 +456,26 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     else if (targets.getWaypointIndex() >= 0)
     {
         sidebar_pager->hide();
-        auto position_diff = my_spaceship->waypoints[targets.getWaypointIndex()] - my_spaceship->getPosition();
-        float distance = glm::length(position_diff);
-        float heading = vec2ToAngle(position_diff) - 270;
+        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+                auto position_diff = lrr->waypoints[targets.getWaypointIndex()] - transform->getPosition();
+                float distance = glm::length(position_diff);
+                float heading = vec2ToAngle(position_diff) - 270;
 
-        while(heading < 0) heading += 360;
+                while(heading < 0) heading += 360;
 
-        float rel_velocity = -dot(my_spaceship->getVelocity(), position_diff / distance);
+                float rel_velocity = 0.0;
+                if (auto physics = my_spaceship.getComponent<sp::Physics>())
+                    rel_velocity = -dot(physics->getVelocity(), position_diff / distance);
 
-        if (std::abs(rel_velocity) < 0.01f)
-            rel_velocity = 0.0;
+                if (std::abs(rel_velocity) < 0.01f)
+                    rel_velocity = 0.0;
 
-        info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-        info_heading->setValue(string(int(heading)));
-        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+                info_heading->setValue(string(int(heading)));
+                info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+            }
+        }
     }
 }
 
@@ -474,30 +485,34 @@ void ScienceScreen::onUpdate()
     {
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
-            my_spaceship->getCanScan() &&
-            my_spaceship->scanning_delay == 0.0f)
+            my_spaceship.hasComponent<ScienceScanner>() &&
+            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            P<SpaceObject> obj = targets.get();
+            auto obj = targets.get();
 
             // Allow scanning only if the object is scannable, and if the player
             // isn't already scanning something.
-            if (obj &&
-                obj->canBeScannedBy(my_spaceship))
+            auto scanstate = obj.getComponent<ScanState>();
+            if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             {
-                my_spaceship->commandScan(obj);
+                PlayerSpaceship::commandScan(obj);
                 return;
             }
         }
 
         // Cycle selection through scannable objects.
         if (keys.science_select_next_scannable.getDown() &&
-            my_spaceship->scanning_delay == 0.0f)
+            my_spaceship.hasComponent<ScienceScanner>() &&
+            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
+            auto my_transform = my_spaceship.getComponent<sp::Transform>();
+            auto my_position = my_transform ? my_transform->getPosition() : glm::vec2{0,0};
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
             bool current_found = false;
             for (P<SpaceObject> obj : space_object_list)
             {
                 // If this object is the current object, flag and skip it.
-                if (obj == targets.get())
+                if (obj->entity == targets.get())
                 {
                     current_found = true;
                     continue;
@@ -505,17 +520,17 @@ void ScienceScreen::onUpdate()
 
                 // If this object is my ship or not visible due to a Nebula,
                 // skip it.
-                if (obj == my_spaceship ||
-                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
+                if (obj->entity == my_spaceship ||
+                    Nebula::blockedByNebula(my_position, obj->getPosition(), lrr ? lrr->short_range : 5000.0f))
                     continue;
 
                 // If this is a scannable object and the currently selected
                 // object, and it remains in radar range, continue to set it.
                 if (current_found &&
-                    glm::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                    glm::length(obj->getPosition() - my_position) < science_radar->getDistance() &&
                     obj->canBeScannedBy(my_spaceship))
                 {
-                    targets.set(obj);
+                    targets.set(obj->entity);
                     return;
                 }
             }
@@ -523,15 +538,15 @@ void ScienceScreen::onUpdate()
             // Advance to the next object.
             for (P<SpaceObject> obj : space_object_list)
             {
-                if (obj == targets.get() ||
-                    obj == my_spaceship ||
-                    Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
+                if (obj->entity == targets.get() ||
+                    obj->entity == my_spaceship ||
+                    Nebula::blockedByNebula(my_position, obj->getPosition(), lrr ? lrr->short_range : 5000.0f))
                     continue;
 
-                if (glm::length(obj->getPosition() - my_spaceship->getPosition()) < science_radar->getDistance() &&
+                if (glm::length(obj->getPosition() - my_position) < science_radar->getDistance() &&
                     obj->canBeScannedBy(my_spaceship))
                 {
-                    targets.set(obj);
+                    targets.set(obj->entity);
                     return;
                 }
             }

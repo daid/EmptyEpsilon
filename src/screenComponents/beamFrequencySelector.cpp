@@ -5,12 +5,12 @@
 #include "components/beamweapon.h"
 
 GuiBeamFrequencySelector::GuiBeamFrequencySelector(GuiContainer* owner, string id)
-: GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) my_spaceship->commandSetBeamFrequency(index); })
+: GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) PlayerSpaceship::commandSetBeamFrequency(index); })
 {
     for(int n=0; n<=SpaceShip::max_frequency; n++)
         addEntry(frequencyToString(n), frequencyToString(n));
     if (my_spaceship) {
-        auto beamweapons = my_spaceship->entity.getComponent<BeamWeaponSys>();
+        auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>();
         if (beamweapons)
             setSelectionIndex(beamweapons->frequency);
     }

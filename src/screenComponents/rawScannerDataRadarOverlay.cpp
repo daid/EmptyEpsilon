@@ -32,7 +32,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     for(auto [entity, signature, dynamic_signature, transform] : sp::ecs::Query<RawRadarSignatureInfo, sp::ecs::optional<DynamicRadarSignatureInfo>, sp::Transform>())
     {
         // Don't measure our own ship.
-        if (entity == my_spaceship->entity)
+        if (entity == my_spaceship)
             continue;
 
         // Initialize angle, distance, and scale variables.

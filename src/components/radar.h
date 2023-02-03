@@ -2,6 +2,8 @@
 
 #include "io/dataBuffer.h"
 #include "multiplayer.h"
+#include "scriptInterface.h"
+
 
 class RadarTrace
 {
@@ -67,7 +69,21 @@ static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, RawRa
 class DynamicRadarSignatureInfo
 {
 public:
-    float gravity;
-    float electrical;
-    float biological;
+    float gravity = 0.0f;
+    float electrical = 0.0f;
+    float biological = 0.0f;
+};
+
+
+class LongRangeRadar
+{
+public:
+    float short_range = 5000.0f;
+    float long_range = 30000.0f;
+
+    std::vector<glm::vec2> waypoints;
+    sp::ecs::Entity linked_probe;
+
+    ScriptSimpleCallback on_probe_link;
+    ScriptSimpleCallback on_probe_unlink;
 };

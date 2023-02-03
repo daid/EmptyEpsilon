@@ -5,5 +5,5 @@
 class Target
 {
 public:
-    sp::ecs::Entity target;
+    sp::ecs::Entity entity;
 };

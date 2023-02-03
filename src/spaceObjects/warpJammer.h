@@ -20,9 +20,9 @@ public:
 
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
-    virtual bool canBeTargetedBy(P<SpaceObject> other)  override { return true; }
+    virtual bool canBeTargetedBy(sp::ecs::Entity other)  override { return true; }
 
-    static bool isWarpJammed(glm::vec2 position);
+    static bool isWarpJammed(sp::ecs::Entity);
     static glm::vec2 getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end);
 
     void onTakingDamage(ScriptSimpleCallback callback);

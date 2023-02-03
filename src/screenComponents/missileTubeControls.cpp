@@ -4,6 +4,8 @@
 #include "powerDamageIndicator.h"
 #include "components/warpdrive.h"
 #include "components/missiletubes.h"
+#include "components/collision.h"
+#include "components/target.h"
 #include "systems/missilesystem.h"
 
 #include "gui/gui2_button.h"
@@ -26,34 +28,37 @@ GuiMissileTubeControls::GuiMissileTubeControls(GuiContainer* owner, string id)
         row.layout->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("layout", "horizontal");
         row.load_button = new GuiButton(row.layout, id + "_" + string(n) + "_LOAD_BUTTON", "Load", [this, n]() {
             if (!my_spaceship) return;
-            auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+            auto tubes = my_spaceship.getComponent<MissileTubes>();
             if (!tubes) return;
             if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Empty)
             {
                 if (load_type != MW_None)
                 {
-                    my_spaceship->commandLoadTube(n, load_type);
+                    PlayerSpaceship::commandLoadTube(n, load_type);
                 }
             }
             else
             {
-                my_spaceship->commandUnloadTube(n);
+                PlayerSpaceship::commandUnloadTube(n);
             }
         });
         row.load_button->setSize(130, 50);
         row.fire_button = new GuiButton(row.layout, id + "_" + string(n) + "_FIRE_BUTTON", "Fire", [this, n]() {
             if (!my_spaceship) return;
-            auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+            auto tubes = my_spaceship.getComponent<MissileTubes>();
             if (!tubes) return;
             if (tubes->mounts[n].state == MissileTubes::MountPoint::State::Loaded)
             {
                 float target_angle = missile_target_angle;
                 if (!manual_aim) {
-                    target_angle = MissileSystem::calculateFiringSolution(my_spaceship->entity, tubes->mounts[n], my_spaceship->getTarget()->entity);
-                    if (target_angle == std::numeric_limits<float>::infinity())
-                        target_angle = my_spaceship->getRotation() + tubes->mounts[n].direction;
+                    auto target = my_spaceship.getComponent<Target>();
+                    target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
+                    if (target_angle == std::numeric_limits<float>::infinity()) {
+                        auto transform = my_spaceship.getComponent<sp::Transform>();
+                        target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;
+                    }
                 }
-                my_spaceship->commandFireTube(n, target_angle);
+                PlayerSpaceship::commandFireTube(n, target_angle);
             }
         });
         row.fire_button->setSize(200, 50);
@@ -106,7 +111,7 @@ void GuiMissileTubeControls::onUpdate()
 {
     if (!my_spaceship || !isVisible())
         return;
-    auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+    auto tubes = my_spaceship.getComponent<MissileTubes>();
     if (!tubes) return;
     for (int n = 0; n < MW_Count; n++)
     {
@@ -164,7 +169,7 @@ void GuiMissileTubeControls::onUpdate()
             rows[n].loading_bar->hide();
         }
 
-        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        auto warp = my_spaceship.getComponent<WarpDrive>();
         if (warp && warp->current > 0.0f)
         {
             rows[n].fire_button->disable();
@@ -187,19 +192,22 @@ void GuiMissileTubeControls::onUpdate()
     for(int n=0; n<tubes->count; n++)
     {
         if (keys.weapons_load_tube[n].getDown())
-            my_spaceship->commandLoadTube(n, load_type);
+            PlayerSpaceship::commandLoadTube(n, load_type);
         if (keys.weapons_unload_tube[n].getDown())
-            my_spaceship->commandUnloadTube(n);
+            PlayerSpaceship::commandUnloadTube(n);
         if (keys.weapons_fire_tube[n].getDown())
         {
             float target_angle = missile_target_angle;
             if (!manual_aim)
             {
-                target_angle = MissileSystem::calculateFiringSolution(my_spaceship->entity, tubes->mounts[n], my_spaceship->getTarget()->entity);
-                if (target_angle == std::numeric_limits<float>::infinity())
-                    target_angle = my_spaceship->getRotation() + tubes->mounts[n].direction;
+                auto target = my_spaceship.getComponent<Target>();
+                target_angle = MissileSystem::calculateFiringSolution(my_spaceship, tubes->mounts[n], target ? target->entity : sp::ecs::Entity{});
+                if (target_angle == std::numeric_limits<float>::infinity()) {
+                    auto transform = my_spaceship.getComponent<sp::Transform>();
+                    target_angle = (transform ? transform->getRotation() : 0.0f) + tubes->mounts[n].direction;
+                }
             }
-            my_spaceship->commandFireTube(n, target_angle);
+            PlayerSpaceship::commandFireTube(n, target_angle);
         }
     }
 }

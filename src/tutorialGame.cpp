@@ -6,6 +6,8 @@
 #include "preferenceManager.h"
 #include "main.h"
 
+#include "components/collision.h"
+
 #include "screenComponents/viewport3d.h"
 #include "screenComponents/radarView.h"
 
@@ -121,8 +123,9 @@ void TutorialGame::update(float delta)
         finish();
     if (my_spaceship)
     {
-        auto pc = my_spaceship->entity.getComponent<PlayerControl>();
-        float target_camera_yaw = my_spaceship->getRotation();
+        auto pc = my_spaceship.getComponent<PlayerControl>();
+        auto physics = my_spaceship.getComponent<sp::Transform>();
+        float target_camera_yaw = physics ? physics->getRotation() : 0.0f;
         switch(pc ? pc->main_screen_setting : MainScreenSetting::Front)
         {
         case MainScreenSetting::Back: target_camera_yaw += 180; break;
@@ -134,7 +137,7 @@ void TutorialGame::update(float delta)
 
         const float camera_ship_distance = 420.0f;
         const float camera_ship_height = 420.0f;
-        glm::vec2 cameraPosition2D = my_spaceship->getPosition() + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
+        glm::vec2 cameraPosition2D = (physics ? physics->getPosition() : glm::vec2{0, 0}) + vec2FromAngle(target_camera_yaw) * -camera_ship_distance;
         glm::vec3 targetCameraPosition(cameraPosition2D.x, cameraPosition2D.y, camera_ship_height);
 
         camera_position = camera_position * 0.9f + targetCameraPosition * 0.1f;
@@ -142,9 +145,9 @@ void TutorialGame::update(float delta)
     }
 }
 
-void TutorialGame::setPlayerShip(P<PlayerSpaceship> ship)
+void TutorialGame::setPlayerShip(sp::ecs::Entity ship)
 {
-    my_player_info->commandSetShipId(ship->getMultiplayerId());
+    my_player_info->commandSetShip(ship);
 
     if (viewport == nullptr)
         createScreens();

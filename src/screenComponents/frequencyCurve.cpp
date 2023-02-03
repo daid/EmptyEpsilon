@@ -3,6 +3,7 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
 #include "components/beamweapon.h"
+#include "components/shields.h"
 
 
 GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)
@@ -22,10 +23,10 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
             int arrow_index = -1;
             if (frequency_is_beam)
             {
-                if (my_spaceship)
-                    arrow_index = my_spaceship->getShieldsFrequency();
+                if (auto shields = my_spaceship.getComponent<Shields>())
+                    arrow_index = shields->frequency;
             } else if (my_spaceship) {
-                auto beamsystem = my_spaceship->entity.getComponent<BeamWeaponSys>();
+                auto beamsystem = my_spaceship.getComponent<BeamWeaponSys>();
                 if (beamsystem)
                     arrow_index = beamsystem->frequency;
             }

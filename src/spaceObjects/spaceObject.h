@@ -11,17 +11,11 @@
 #include "ecs/entity.h"
 #include "components/radar.h"
 #include "components/shipsystem.h"
+#include "components/name.h"
+#include "components/scanning.h"
 #include "systems/damage.h"
 
 #include <glm/mat4x4.hpp>
-
-enum EScannedState
-{
-    SS_NotScanned,
-    SS_FriendOrFoeIdentified,
-    SS_SimpleScan,
-    SS_FullScan
-};
 
 /*! Radar rendering layer.
 * Allow relative ordering of objects for drawing
@@ -47,20 +41,8 @@ class SpaceObject : public MultiplayerObject
         string full_scan;
     } object_description;
 
-    /*!
-     * Scan state per faction.
-     * When the required faction is not in the vector, the scan state
-     * is SS_NotScanned
-     */
-    std::vector<std::pair<sp::ecs::Entity, EScannedState>> scanned_by_faction;
 public:
     sp::ecs::Entity entity; //NOTE: On clients be careful, the Entity+components might be destroyed before the SpaceObject! Always check if this exists before using it.
-    string comms_script_name;
-    ScriptSimpleCallback comms_script_callback;
-
-    int scanning_complexity_value;
-    int scanning_depth_value;
-    string callsign;
 
     SpaceObject(float collisionRange, string multiplayerName, float multiplayer_significant_range=-1);
     virtual ~SpaceObject();
@@ -75,26 +57,26 @@ public:
     float getRadarSignatureBiological() { auto radar_signature = entity.getComponent<RawRadarSignatureInfo>(); if (!radar_signature) return 0.0; return radar_signature->biological; }
     virtual ERadarLayer getRadarLayer() const { return ERadarLayer::Default; }
 
-    string getDescription(EScannedState state)
+    string getDescription(ScanState::State state)
     {
         switch(state)
         {
-        case SS_NotScanned: return object_description.not_scanned;
-        case SS_FriendOrFoeIdentified: return object_description.friend_of_foe_identified;
-        case SS_SimpleScan: return object_description.simple_scan;
-        case SS_FullScan: return object_description.full_scan;
+        case ScanState::State::NotScanned: return object_description.not_scanned;
+        case ScanState::State::FriendOrFoeIdentified: return object_description.friend_of_foe_identified;
+        case ScanState::State::SimpleScan: return object_description.simple_scan;
+        case ScanState::State::FullScan: return object_description.full_scan;
         }
         return object_description.full_scan;
     }
 
-    void setDescriptionForScanState(EScannedState state, string description)
+    void setDescriptionForScanState(ScanState::State state, string description)
     {
         switch(state)
         {
-        case SS_NotScanned: object_description.not_scanned = description; break;
-        case SS_FriendOrFoeIdentified: object_description.friend_of_foe_identified = description; break;
-        case SS_SimpleScan: object_description.simple_scan = description; break;
-        case SS_FullScan: object_description.full_scan = description; break;
+        case ScanState::State::NotScanned: object_description.not_scanned = description; break;
+        case ScanState::State::FriendOrFoeIdentified: object_description.friend_of_foe_identified = description; break;
+        case ScanState::State::SimpleScan: object_description.simple_scan = description; break;
+        case ScanState::State::FullScan: object_description.full_scan = description; break;
         }
     }
     void setDescription(string description)
@@ -110,9 +92,9 @@ public:
         object_description.full_scan = scanned_description;
     }
 
-    string getDescriptionFor(P<SpaceObject> obj)
+    string getDescriptionFor(sp::ecs::Entity other)
     {
-        return getDescription(getScannedStateFor(obj));
+        return getDescription(getScannedStateFor(other));
     }
 
     float getHeading() { float ret = getRotation() - 270; while(ret < 0) ret += 360.0f; while(ret > 360.0f) ret -= 360.0f; return ret; }
@@ -129,28 +111,25 @@ public:
     virtual void drawOnGMRadar(sp::RenderTarget& window, glm::vec2 position, float scale, float rotation, bool longRange);
     virtual void destroy() override;
 
-    virtual void setCallSign(string new_callsign) { callsign = new_callsign; }
-    virtual string getCallSign() { return callsign; }
+    virtual void setCallSign(string new_callsign) { entity.getOrAddComponent<CallSign>().callsign = new_callsign; }
+    virtual string getCallSign() { auto cs = entity.getComponent<CallSign>(); if (cs) return cs->callsign; return ""; }
     virtual bool hasShield() { return false; }
     virtual bool canHideInNebula() { return true; }
-    virtual bool canBeTargetedBy(P<SpaceObject> other);
-    virtual bool canBeSelectedBy(P<SpaceObject> other);
-    virtual bool canBeScannedBy(P<SpaceObject> other);
-    virtual int scanningComplexity(P<SpaceObject> target) { return scanning_complexity_value; }
-    virtual int scanningChannelDepth(P<SpaceObject> target) { return scanning_depth_value; }
+    virtual bool canBeTargetedBy(sp::ecs::Entity other);
+    virtual bool canBeSelectedBy(sp::ecs::Entity other);
+    virtual bool canBeScannedBy(sp::ecs::Entity other);
+    virtual int scanningComplexity(P<SpaceObject> target) { return -1; } //TODO
+    virtual int scanningChannelDepth(P<SpaceObject> target) { return -1; } //TODO
     void setScanningParameters(int complexity, int depth);
-    EScannedState getScannedStateFor(P<SpaceObject> other);
-    void setScannedStateFor(P<SpaceObject> other, EScannedState state);
-    EScannedState getScannedStateForFaction(sp::ecs::Entity faction);
-    void setScannedStateForFaction(sp::ecs::Entity faction, EScannedState state);
+    ScanState::State getScannedStateFor(sp::ecs::Entity other);
+    void setScannedStateFor(P<SpaceObject> other, ScanState::State state);
+    ScanState::State getScannedStateForFaction(sp::ecs::Entity faction);
+    void setScannedStateForFaction(sp::ecs::Entity faction, ScanState::State state);
     bool isScanned();
     bool isScannedBy(P<SpaceObject> obj);
     bool isScannedByFaction(string faction);
     void setScanned(bool scanned);
     void setScannedByFaction(string faction_name, bool scanned);
-    virtual void scannedBy(P<SpaceObject> other);
-    virtual bool canBeHackedBy(P<SpaceObject> other);
-    virtual std::vector<std::pair<ShipSystem::Type, float> > getHackingTargets();
     virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target);
     void takeDamage(float damage_amount, DamageInfo info) { DamageSystem::applyDamage(entity, damage_amount, info); }
     virtual std::unordered_map<string, string> getGMInfo() { return std::unordered_map<string, string>(); }
@@ -169,7 +148,7 @@ public:
     void removeReputationPoints(float amount);
     void addReputationPoints(float amount);
     void setCommsScript(string script_name);
-    void setCommsFunction(ScriptSimpleCallback callback) { this->comms_script_name = ""; this->comms_script_callback = callback; }
+    void setCommsFunction(ScriptSimpleCallback callback) { } //TODO
     bool areEnemiesInRange(float range);
     PVector<SpaceObject> getObjectsInRange(float range);
     string getSectorName();
@@ -200,6 +179,6 @@ template<> void convert<DamageType>::param(lua_State* L, int& idx, DamageType& d
 // Define a script conversion function for the DamageInfo structure.
 template<> void convert<DamageInfo>::param(lua_State* L, int& idx, DamageInfo& di);
 // Function to convert a lua parameter to a scan state.
-template<> void convert<EScannedState>::param(lua_State* L, int& idx, EScannedState& ss);
+template<> void convert<ScanState::State>::param(lua_State* L, int& idx, ScanState::State& ss);
 
 #endif//SPACE_OBJECT_H

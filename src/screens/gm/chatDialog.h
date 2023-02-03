@@ -2,8 +2,8 @@
 #define CHAT_DIALOG_H
 
 #include "gui/gui2_resizabledialog.h"
+#include "ecs/entity.h"
 
-class PlayerSpaceship;
 class GuiTextEntry;
 class GuiScrollText;
 class GuiRadarView;
@@ -16,7 +16,7 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
 private:
     int player_index;
-    P<PlayerSpaceship> player;
+    sp::ecs::Entity player;
     GuiRadarView* radar;
 
     bool notification;

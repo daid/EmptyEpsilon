@@ -106,7 +106,7 @@ void Mine::collide(SpaceObject* target, float force)
     if (!game_server || triggered || ejectTimeout > 0.0f)
         return;
     P<SpaceObject> hitObject = target;
-    if (!hitObject || !hitObject->canBeTargetedBy(nullptr))
+    if (!hitObject || !hitObject->canBeTargetedBy({}))
         return;
 
     triggered = true;

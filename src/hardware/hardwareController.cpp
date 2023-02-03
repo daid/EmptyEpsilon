@@ -344,7 +344,7 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
 #define SHIP_VARIABLE(name, formula) if (variable_name == name) { if (ship) { value = (formula); return true; } return false; }
 bool HardwareController::getVariableValue(string variable_name, float& value)
 {
-    P<PlayerSpaceship> ship = my_spaceship;
+    auto ship = my_spaceship;
     if (!ship && gameGlobalInfo)
         ship = gameGlobalInfo->getPlayerShip(0);
 
@@ -359,24 +359,24 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         return true;
     }
     //SHIP_VARIABLE("Hull", 100.0f * ship->hull_strength / ship->hull_max);
-    SHIP_VARIABLE("FrontShield", ship->getShieldPercentage(0));
-    SHIP_VARIABLE("RearShield", ship->getShieldPercentage(1));
-    SHIP_VARIABLE("Shield0", ship->getShieldPercentage(0));
-    SHIP_VARIABLE("Shield1", ship->getShieldPercentage(1));
-    SHIP_VARIABLE("Shield2", ship->getShieldPercentage(2));
-    SHIP_VARIABLE("Shield3", ship->getShieldPercentage(3));
-    SHIP_VARIABLE("Shield4", ship->getShieldPercentage(4));
-    SHIP_VARIABLE("Shield5", ship->getShieldPercentage(5));
-    SHIP_VARIABLE("Shield6", ship->getShieldPercentage(6));
-    SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
+    //SHIP_VARIABLE("FrontShield", ship->getShieldPercentage(0));
+    //SHIP_VARIABLE("RearShield", ship->getShieldPercentage(1));
+    //SHIP_VARIABLE("Shield0", ship->getShieldPercentage(0));
+    //SHIP_VARIABLE("Shield1", ship->getShieldPercentage(1));
+    //SHIP_VARIABLE("Shield2", ship->getShieldPercentage(2));
+    //SHIP_VARIABLE("Shield3", ship->getShieldPercentage(3));
+    //SHIP_VARIABLE("Shield4", ship->getShieldPercentage(4));
+    //SHIP_VARIABLE("Shield5", ship->getShieldPercentage(5));
+    //SHIP_VARIABLE("Shield6", ship->getShieldPercentage(6));
+    //SHIP_VARIABLE("Shield7", ship->getShieldPercentage(7));
     //SHIP_VARIABLE("Energy", ship->energy_level * 100 / ship->max_energy_level);
     //SHIP_VARIABLE("ShieldsUp", ship->shields_active ? 1.0f : 0.0f);
     //SHIP_VARIABLE("Impulse", ship->current_impulse * ship->getSystemEffectiveness(SYS_Impulse));
     //SHIP_VARIABLE("Warp", ship->current_warp * ship->getSystemEffectiveness(SYS_Warp));
     //SHIP_VARIABLE("Docking", ship->docking_state == DS_Docking ? 1.0f : 0.0f);
     //SHIP_VARIABLE("Docked", ship->docking_state == DS_Docked ? 1.0f : 0.0f);
-    SHIP_VARIABLE("InNebula", Nebula::inNebula(ship->getPosition()) ? 1.0f : 0.0f);
-    SHIP_VARIABLE("IsJammed", WarpJammer::isWarpJammed(ship->getPosition()) ? 1.0f : 0.0f);
+    //SHIP_VARIABLE("InNebula", Nebula::inNebula(ship->getPosition()) ? 1.0f : 0.0f);
+    //SHIP_VARIABLE("IsJammed", WarpJammer::isWarpJammed(ship->getPosition()) ? 1.0f : 0.0f);
     //SHIP_VARIABLE("Jumping", ship->jump_delay > 0.0f ? 1.0f : 0.0f);
     //SHIP_VARIABLE("Jumped", ship->jump_indicator > 0.0f ? 1.0f : 0.0f);
     //SHIP_VARIABLE("Alert", ship->getAlertLevel() != AL_Normal ? 1.0f : 0.0f);

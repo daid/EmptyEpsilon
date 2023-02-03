@@ -10,6 +10,7 @@
 #include "components/shields.h"
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
+#include "components/selfdestruct.h"
 
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/selfDestructButton.h"
@@ -51,7 +52,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setSize(240, 40);
 
     self_destruct_button = new GuiSelfDestructButton(this, "SELF_DESTRUCT");
-    self_destruct_button->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(240, 100)->setVisible(my_spaceship && my_spaceship->getCanSelfDestruct());
+    self_destruct_button->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(240, 100)->setVisible(my_spaceship && my_spaceship.hasComponent<SelfDestruct>());
 
     GuiElement* system_config_container = new GuiElement(this, "");
     system_config_container->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(750 + 300, GuiElement::GuiSizeMax);
@@ -85,12 +86,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
         info.heat_icon->setColor(colorConfig.overlay_overheating)->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.power_bar = new GuiProgressSlider(info.row, id + "_POWER", 0.0f, 3.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
-                my_spaceship->commandSetSystemPowerRequest(ShipSystem::Type(n), value);
+                PlayerSpaceship::commandSetSystemPowerRequest(ShipSystem::Type(n), value);
         });
         info.power_bar->setColor(glm::u8vec4(192, 192, 32, 128))->setSize(column_width, GuiElement::GuiSizeMax);
         info.coolant_bar = new GuiProgressSlider(info.row, id + "_COOLANT", 0.0f, 10.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
-                my_spaceship->commandSetSystemCoolantRequest(ShipSystem::Type(n), value);
+                PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), value);
         });
         info.coolant_bar->setColor(glm::u8vec4(32, 128, 128, 128))->setSize(column_width, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage)
@@ -114,30 +115,30 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     coolant_remaining_bar = new GuiProgressSlider(icon_layout, "", 0, 10.0, 10.0, [](float requested_unused_coolant)
     {
         float total_requested = 0.0f;
-        auto coolant = my_spaceship->entity.getComponent<Coolant>();
+        auto coolant = my_spaceship.getComponent<Coolant>();
         if (!coolant) return;
         float new_max_total = coolant->max - requested_unused_coolant;
         for(int n=0; n<ShipSystem::COUNT; n++) {
-            auto sys = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+            auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
             if (sys)
                 total_requested += sys->coolant_request;
         }
         if (new_max_total < total_requested) { // Drain systems
             for(int n=0; n<ShipSystem::COUNT; n++) {
-                auto sys = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+                auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
                 if (sys)
-                    my_spaceship->commandSetSystemCoolantRequest(ShipSystem::Type(n), sys->coolant_request * new_max_total / total_requested);
+                    PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), sys->coolant_request * new_max_total / total_requested);
             }
         } else { // Put coolant into systems
             int system_count = 0;
             for(int n=0; n<ShipSystem::COUNT; n++)
-                if (my_spaceship->hasSystem(ShipSystem::Type(n)))
+                if (ShipSystem::get(my_spaceship, ShipSystem::Type(n)))
                     system_count += 1;
             float add = (new_max_total - total_requested) / float(system_count);
             for(int n=0; n<ShipSystem::COUNT; n++) {
-                auto sys = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+                auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
                 if (sys)
-                    my_spaceship->commandSetSystemCoolantRequest(ShipSystem::Type(n), std::min(sys->coolant_request + add, 10.0f));
+                    PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), std::min(sys->coolant_request + add, 10.0f));
             }
         }
     });
@@ -165,7 +166,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
         if (my_spaceship && selected_system != ShipSystem::Type::None)
-            my_spaceship->commandSetSystemPowerRequest(selected_system, value);
+            PlayerSpaceship::commandSetSystemPowerRequest(selected_system, value);
     });
     power_slider->setPosition(50, 20, sp::Alignment::TopLeft)->setSize(60, 360);
     for(float snap_point = 0.0f; snap_point <= 3.0f; snap_point += 0.5f)
@@ -173,7 +174,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     power_slider->disable();
     coolant_slider = new GuiSlider(box, "COOLANT_SLIDER", 10.0, 0.0, 0.0, [this](float value) {
         if (my_spaceship && selected_system != ShipSystem::Type::None)
-            my_spaceship->commandSetSystemCoolantRequest(selected_system, value);
+            PlayerSpaceship::commandSetSystemCoolantRequest(selected_system, value);
     });
     coolant_slider->setPosition(140, 20, sp::Alignment::TopLeft)->setSize(60, 360);
     for(float snap_point = 0.0f; snap_point <= 10.0f; snap_point += 2.5f)
@@ -193,7 +194,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto reactor = my_spaceship->entity.getComponent<Reactor>();
+        auto reactor = my_spaceship.getComponent<Reactor>();
         if (reactor) {
             // Update the energy usage.
             if (previous_energy_measurement == 0.0f)
@@ -219,7 +220,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 energy_display->setColor(glm::u8vec4{255,255,255,255});
         }
 
-        auto hull = my_spaceship->entity.getComponent<Hull>();
+        auto hull = my_spaceship.getComponent<Hull>();
         if (hull) {
             hull_display->setValue(toNearbyIntString(100.0f * hull->current / hull->max) + "%");
             if (hull->current < hull->max / 4.0f)
@@ -227,16 +228,17 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             else
                 hull_display->setColor(glm::u8vec4{255,255,255,255});
         }
-        front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
-        if (my_spaceship->hasSystem(ShipSystem::Type::FrontShield))
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (shields)
         {
+            front_shield_display->setValue(string(shields->entry[0].percentage()) + "%");
             front_shield_display->show();
         } else {
             front_shield_display->hide();
         }
-        rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
-        if (my_spaceship->hasSystem(ShipSystem::Type::RearShield))
+        if (shields->count > 1)
         {
+            rear_shield_display->setValue(string(shields->entry[1].percentage()) + "%");
             rear_shield_display->show();
         } else {
             rear_shield_display->hide();
@@ -245,7 +247,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
         for(int n=0; n<ShipSystem::COUNT; n++)
         {
             SystemRow info = system_rows[n];
-            auto system = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+            auto system = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
             info.row->setVisible(system);
             if (!system)
                 continue;
@@ -288,7 +290,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             total_coolant_used += system->coolant_level;
         }
 
-        auto coolant = my_spaceship->entity.getComponent<Coolant>();
+        auto coolant = my_spaceship.getComponent<Coolant>();
         coolant_display->setVisible(coolant);
         coolant_remaining_bar->setVisible(coolant);
         if (coolant) {
@@ -299,7 +301,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 
         if (selected_system != ShipSystem::Type::None)
         {
-            auto system = ShipSystem::get(my_spaceship->entity, selected_system);
+            auto system = ShipSystem::get(my_spaceship, selected_system);
             if (system) {
                 power_label->setText(tr("slider", "Power: {current_level}% / {requested}%").format({{"current_level", toNearbyIntString(system->power_level * 100)}, {"requested", toNearbyIntString(system->power_request * 100)}}));
                 power_slider->setValue(system->power_request);
@@ -321,13 +323,13 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 case ShipSystem::Type::Reactor:
                     if (effectiveness > 1.0f)
                         effectiveness = (1.0f + effectiveness) / 2.0f;
-                    addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * - my_spaceship->getSystemPowerUserFactor(selected_system) * 60.0f, 1)}}));
+                    addSystemEffect(tr("Energy production"),  tr("{energy}/min").format({{"energy", string(effectiveness * -system->power_factor * 60.0f, 1)}}));
                     break;
                 case ShipSystem::Type::BeamWeapons:
                     addSystemEffect(tr("Firing rate"), toNearbyIntString(effectiveness * 100) + "%");
                     // If the ship has a turret, also note that the rotation rate
                     // is affected.
-                    if (auto beamweapons = my_spaceship->entity.getComponent<BeamWeaponSys>()) {
+                    if (auto beamweapons = my_spaceship.getComponent<BeamWeaponSys>()) {
                         for(int n = 0; n < max_beam_weapons; n++) {
                             if (beamweapons->mounts[n].turret_arc > 0) {
                                 addSystemEffect("Turret rotation rate", toNearbyIntString(effectiveness * 100) + "%");
@@ -341,20 +343,20 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     break;
                 case ShipSystem::Type::Maneuver:{
                     addSystemEffect(tr("Turning speed"), toNearbyIntString(effectiveness * 100) + "%");
-                    auto combat = my_spaceship->entity.getComponent<CombatManeuveringThrusters>();
+                    auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
                     if (combat) {
-                        auto impulse = my_spaceship->entity.getComponent<ImpulseEngine>();
-                        auto thrusters = my_spaceship->entity.getComponent<ManeuveringThrusters>();
+                        auto impulse = my_spaceship.getComponent<ImpulseEngine>();
+                        auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
                         if (impulse && thrusters)
                             addSystemEffect(tr("Combat recharge rate"), toNearbyIntString(((impulse->getSystemEffectiveness() + thrusters->getSystemEffectiveness()) / 2.0f) * 100) + "%");
                     }
                     }break;
                 case ShipSystem::Type::Impulse:{
                     addSystemEffect(tr("Impulse speed"), toNearbyIntString(effectiveness * 100) + "%");
-                    auto combat = my_spaceship->entity.getComponent<CombatManeuveringThrusters>();
+                    auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
                     if (combat) {
-                        auto impulse = my_spaceship->entity.getComponent<ImpulseEngine>();
-                        auto thrusters = my_spaceship->entity.getComponent<ManeuveringThrusters>();
+                        auto impulse = my_spaceship.getComponent<ImpulseEngine>();
+                        auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
                         if (impulse && thrusters)
                             addSystemEffect(tr("Combat recharge rate"), toNearbyIntString(((impulse->getSystemEffectiveness() + thrusters->getSystemEffectiveness()) / 2.0f) * 100) + "%");
                     }
@@ -363,14 +365,14 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     addSystemEffect(tr("Warp drive speed"), toNearbyIntString(effectiveness * 100) + "%");
                     break;
                 case ShipSystem::Type::JumpDrive:{
-                    auto jump = my_spaceship->entity.getComponent<JumpDrive>();
+                    auto jump = my_spaceship.getComponent<JumpDrive>();
                     if (jump) {
                         addSystemEffect(tr("Jump drive recharge rate"), toNearbyIntString(jump->get_recharge_rate() * 100) + "%");
                         addSystemEffect(tr("Jump drive jump speed"), toNearbyIntString(effectiveness * 100) + "%");
                     }
                     }break;
                 case ShipSystem::Type::FrontShield:{
-                    auto shields = my_spaceship->entity.getComponent<Shields>();
+                    auto shields = my_spaceship.getComponent<Shields>();
                     if (shields) {
                         if (gameGlobalInfo->use_beam_shield_frequencies)
                             addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((shields->front_system.getSystemEffectiveness() + shields->rear_system.getSystemEffectiveness()) / 2.0f * 100) + "%");
@@ -387,7 +389,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                     }
                     }break;
                 case ShipSystem::Type::RearShield:{
-                    auto shields = my_spaceship->entity.getComponent<Shields>();
+                    auto shields = my_spaceship.getComponent<Shields>();
                     if (shields) {
                         if (gameGlobalInfo->use_beam_shield_frequencies)
                             addSystemEffect(tr("shields","Calibration speed"), toNearbyIntString((shields->front_system.getSystemEffectiveness() + shields->rear_system.getSystemEffectiveness()) / 2.0f * 100) + "%");
@@ -434,60 +436,60 @@ void EngineeringScreen::onUpdate()
             if (keys.engineering_set_power_000.getDown())
             {
                 power_slider->setValue(0.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_030.getDown())
             {
                 power_slider->setValue(0.3f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_050.getDown())
             {
                 power_slider->setValue(0.5f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_100.getDown())
             {
                 power_slider->setValue(1.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_150.getDown())
             {
                 power_slider->setValue(1.5f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_200.getDown())
             {
                 power_slider->setValue(2.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_250.getDown())
             {
                 power_slider->setValue(2.5f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_300.getDown())
             {
                 power_slider->setValue(3.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
             auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
             if (power_adjust != 0.0f)
             {
-                auto sys = ShipSystem::get(my_spaceship->entity, selected_system);
+                auto sys = ShipSystem::get(my_spaceship, selected_system);
                 if (sys) {
                     power_slider->setValue(sys->power_request + power_adjust);
-                    my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                    PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
                 }
             }
             auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
             if (coolant_adjust != 0.0f)
             {
-                auto sys = ShipSystem::get(my_spaceship->entity, selected_system);
+                auto sys = ShipSystem::get(my_spaceship, selected_system);
                 if (sys) {
                     coolant_slider->setValue(sys->coolant_request + coolant_adjust);
-                    my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                    PlayerSpaceship::commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
                 }
             }
         }
@@ -496,7 +498,7 @@ void EngineeringScreen::onUpdate()
 
 void EngineeringScreen::selectSystem(ShipSystem::Type system)
 {
-    if (my_spaceship && !my_spaceship->hasSystem(system))
+    if (!my_spaceship || !ShipSystem::get(my_spaceship, system))
         return;
 
     for(int idx=0; idx<ShipSystem::COUNT; idx++)
@@ -507,7 +509,7 @@ void EngineeringScreen::selectSystem(ShipSystem::Type system)
     power_slider->enable();
     if (my_spaceship)
     {
-        auto sys = ShipSystem::get(my_spaceship->entity, system);
+        auto sys = ShipSystem::get(my_spaceship, system);
         if (sys) {
             power_slider->setValue(sys->power_request);
             coolant_slider->setValue(sys->coolant_request);

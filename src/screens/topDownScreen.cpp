@@ -4,6 +4,7 @@
 #include "epsilonServer.h"
 #include "main.h"
 #include "multiplayer_client.h"
+#include "components/collision.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
@@ -23,7 +24,7 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (ship)
             target = ship;
     });
@@ -143,11 +144,17 @@ void TopDownScreen::update(float delta)
     // Add and remove entries from the player ship list.
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        auto ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
-            if (camera_lock_selector->indexByValue(string(n)) == -1)
-                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+            if (camera_lock_selector->indexByValue(string(n)) == -1) {
+                string label;
+                if (auto tn = ship.getComponent<TypeName>())
+                    label = tn->type_name;
+                if (auto cs = ship.getComponent<CallSign>())
+                    label += " " + cs->callsign;
+                camera_lock_selector->addEntry(label, string(n));
+            }
         }else{
             if (camera_lock_selector->indexByValue(string(n)) != -1)
                 camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
@@ -161,9 +168,11 @@ void TopDownScreen::update(float delta)
     // If locked onto a player ship, move the camera along with it.
     if (camera_lock_toggle->getValue() && target)
     {
-        auto target_position = target->getPosition();
+        if (auto transform = target.getComponent<sp::Transform>()) {
+            auto target_position = transform->getPosition();
 
-        camera_position.x = target_position.x;
-        camera_position.y = target_position.y;
+            camera_position.x = target_position.x;
+            camera_position.y = target_position.y;
+        }
     }
 }

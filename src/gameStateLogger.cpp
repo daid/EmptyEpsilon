@@ -309,7 +309,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
 
     json.write("callsign", ship->getCallSign());
     json.write("faction", ship->getFaction());
-    json.write("ship_type", ship->type_name);
+    //json.write("ship_type", ship->type_name);
     //json.write("energy_level", ship->energy_level);
     //json.write("hull", ship->hull_strength);
     //if (ship->target_id > -1)
@@ -521,7 +521,7 @@ void GameStateLogger::writeStationEntry(JSONGenerator& json, P<SpaceStation> sta
 {
     json.write("callsign", station->getCallSign());
     json.write("faction", station->getFaction());
-    json.write("station_type", station->type_name);
+    //json.write("station_type", station->type_name);
     //json.write("hull", station->hull_strength);
     /*
     if (station->shield_count > 0)

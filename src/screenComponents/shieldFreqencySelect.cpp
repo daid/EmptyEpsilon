@@ -22,7 +22,7 @@ GuiShieldFrequencySelect::GuiShieldFrequencySelect(GuiContainer* owner, string i
 
     calibrate_button = new GuiButton(calibration_row, "", tr("shields","Calibrate"), [this]() {
         if (my_spaceship)
-            my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
+            PlayerSpaceship::commandSetShieldFrequency(new_frequency->getSelectionIndex());
     });
     calibrate_button->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -37,7 +37,7 @@ void GuiShieldFrequencySelect::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto shields = my_spaceship->entity.getComponent<Shields>();
+        auto shields = my_spaceship.getComponent<Shields>();
         calibrate_button->setEnable(shields && shields->calibration_delay <= 0.0f);
         new_frequency->setEnable(shields && shields->calibration_delay <= 0.0f);
     }
@@ -74,7 +74,7 @@ void GuiShieldFrequencySelect::onUpdate()
 
         if (keys.weapons_shield_calibration_start.getDown())
         {
-            my_spaceship->commandSetShieldFrequency(new_frequency->getSelectionIndex());
+            PlayerSpaceship::commandSetShieldFrequency(new_frequency->getSelectionIndex());
         }
     }
 }

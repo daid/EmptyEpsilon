@@ -3,14 +3,18 @@
 #include "repairCrew.h"
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
-#include "components/impulse.h"
-#include "components/hull.h"
 #include "main.h"
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "random.h"
 #include "ecs/query.h"
 
+#include "components/collision.h"
+#include "components/impulse.h"
+#include "components/hull.h"
+#include "components/customshipfunction.h"
+#include "components/shiplog.h"
+#include "components/probe.h"
 #include "components/reactor.h"
 #include "components/coolant.h"
 #include "components/beamweapon.h"
@@ -25,6 +29,7 @@
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
 #include "systems/selfdestruct.h"
+#include "systems/comms.h"
 
 #include "scriptInterface.h"
 
@@ -205,32 +210,32 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Examples:
     /// player:commandTargetRotation(0) -- command the ship toward a heading of 90 degrees
     /// heading = 180; player:commandTargetRotation(heading - 90) -- command the ship toward a heading of 180 degrees
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     /// Commands this PlayerSpaceship to request a new impulse speed.
     /// Valid values are -1.0 (-100%; full reverse) to 1.0 (100%; full forward).
     /// The ship's impulse value remains bound by its impulse acceleration rates.
     /// Example: player:commandImpulse(0.5) -- command this ship to engage forward half impulse
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
     /// Commands this PlayerSpaceship to request a new warp level.
     /// Valid values are any positive integer, or 0.
     /// Warp controls on crew position screens are limited to 4.
     /// Example: player:commandWarp(2) -- activate the warp drive at level 2
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandWarp);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandWarp);
     /// Commands this PlayerSpaceship to request a jump of the given distance.
     /// Valid values are any positive number, or 0, including values outside of the ship's minimum and maximum jump ranges.
     /// A jump of a greater distance than the ship's maximum jump range results in a negative jump drive charge.
     /// Example: player:commandJump(25000) -- initiate a 25U jump on the current heading
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandJump);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandJump);
     /// Commands this PlayerSpaceship to set its weapons target to the given SpaceObject.
     /// Example: player:commandSetTarget(enemy)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTarget);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTarget);
     /// Commands this PlayerSpaceship to load the WeaponTube with the given index with the given weapon type.
     /// This command respects tube allow/disallow limits.
     /// Example: player:commandLoadTube(0,"HVLI")
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
     /// Commands this PlayerSpaceship to unload the WeaponTube with the given index.
     /// Example: player:commandUnloadTube(0)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
     /// Commands this PlayerSpaceship to fire the WeaponTube with the given index at the given missile target angle in degrees, without a weapons target.
     /// The target angle behaves as if the Weapons crew had unlocked targeting and manually aimed its trajectory.
     /// A target angle value of 0 is equivalent to a heading of 90 degrees ("east").
@@ -238,122 +243,122 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     /// Examples:
     /// player:commandFireTube(0,0) -- command firing tube 0 at a heading 90
     /// target_heading = 180; player:commandFireTube(0,target_heading - 90) -- command firing tube 0 at a heading 180
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTube);
     /// Commands this PlayerSpaceship to fire the given weapons tube with the given SpaceObject as its target.
     /// Example: player:commandFireTubeAtTarget(0,enemy) -- command firing tube 0 at target `enemy`
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtTarget);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandFireTubeAtTarget);
     /// Commands this PlayerSpaceship to raise (true) or lower (false) its shields.
     /// Example: player:commandSetShields(true) -- command raising shields
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShields);
     /// Commands this PlayerSpaceship to change its Main Screen view to the given setting.
     /// Example: player:commandMainScreenSetting("tactical") -- command setting the main screen view to tactical radar
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenSetting);
     /// Commands this PlayerSpaceship to change its Main Screen comms overlay to the given setting.
     /// Example: player:commandMainScreenOverlay("hidecomms") -- command setting the main screen view to hide the comms overlay
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMainScreenOverlay);
     /// Commands this PlayerSpaceship to initiate a scan of the given SpaceObject.
     /// If the scanning mini-game is enabled, this opens it on the relevant crew screens.
     /// This command does NOT respect the player's ability to select the object for scanning, whether due to it being out of radar range or otherwise untargetable.
     /// Example: player:commandScan(enemy)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandScan);
     /// Commands this PlayerSpaceship to set the power level of the given system.
     /// Valid values are 0 or greater, with 1.0 equivalent to 100 percent. Values greater than 1.0 are allowed.
     /// Example: player:commandSetSystemPowerRequest("impulse",1.0) -- command setting the impulse drive power to 100%
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPowerRequest);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemPowerRequest);
     /// Commands this PlayerSpaceship to set the coolant level of the given system.
     /// Valid values are from 0 to 10.0, with 10.0 equivalent to 100 percent.
     /// Values greater than 10.0 are allowed if the ship's coolant max is greater than 10.0, but controls on crew position screens are limited to 10.0 (100%).
     /// Example: player:commandSetSystemCoolantRequest("impulse",10.0) -- command setting the impulse drive coolant to 100%
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolantRequest);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetSystemCoolantRequest);
     /// Commands this PlayerSpaceship to initiate docking with the given SpaceObject.
     /// This initiates docking only if the target is dockable and within docking range.
     /// Example: player:commandDock(base)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandDock);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandDock);
     /// Commands this PlayerSpaceship to undock from any SpaceObject it's docked with.
     /// Example: player:commandUndock()
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUndock);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUndock);
     /// Commands this PlayerSpaceship to abort an in-progress docking operation.
     /// Example: player:commandAbortDock()
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAbortDock);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAbortDock);
     /// Commands this PlayerSpaceship to hail the given SpaceObject.
     /// If the target object is a PlayerSpaceship or the GM is intercepting all comms, open text chat comms.
     /// Example: player:commandOpenTextComm(base)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandOpenTextComm);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandOpenTextComm);
     /// Commands this PlayerSpaceship to close comms.
     /// Example: player:commandCloseTextComm()
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCloseTextComm);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCloseTextComm);
     /// Commands whether this PlayerSpaceship answers (true) or rejects (false) an incoming hail.
     /// Example: player:commandAnswerCommHail(false) -- commands to reject an active incoming hail
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAnswerCommHail);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAnswerCommHail);
     /// Commands this PlayerSpaceship to select the reply with the given index during a comms dialogue.
     /// Example: player:commandSendComm(0) -- commands to select the first option in a comms dialogue
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendComm);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendComm);
     /// Commands this PlayerSpaceship to send the given message to the active text comms chat.
     /// This works whether the chat is with another PlayerSpaceship or the GM.
     /// Example: player:commandSendCommPlayer("I will destroy you!") -- commands to send this message in the active text chat
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendCommPlayer);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSendCommPlayer);
     /// Commands whether repair crews on this PlayerSpaceship automatically move to rooms of damaged systems.
     /// Use this command to reduce the need for player interaction in Engineering, especially when combined with setAutoCoolant/auto_coolant_enabled.
     /// Crews set to move automatically don't respect crew collisions, allowing multiple crew to occupy a single space.
     /// Example: player:commandSetAutoRepair(true)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAutoRepair);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAutoRepair);
     /// Commands this PlayerSpaceship to set its beam frequency to the given value.
     /// Valid values are 0 to 20, which map to 400THz to 800THz at 20THz increments. (spaceship.cpp frequencyToString())
     /// Example: player:commandSetAutoRepair(true)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
     /// Commands this PlayerSpaceship to target the given ship system with its beam weapons.
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamSystemTarget);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamSystemTarget);
     /// Sets this SpaceShip's shield frequency index.
     /// To convert the index to the value used by players, multiply it by 20, then add 400.
     /// Valid values are 0 (400THz) to 20 (800THz).
     /// Unlike SpaceShip:setShieldsFrequency(), this initiates shield calibration to change the frequency, which disables shields for a period.
     /// Example:
     /// frequency = ship:setShieldsFrequency(10) -- frequency is 600THz
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShieldFrequency);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShieldFrequency);
     /// Commands this PlayerSpaceship to add a waypoint at the given coordinates.
     /// This respects the 9-waypoint limit and won't add more waypoints if 9 already exist.
     /// Example: player:commandAddWaypoint(1000,2000)
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAddWaypoint);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAddWaypoint);
     /// Commands this PlayerSpaceship to remove the waypoint with the given index.
     /// This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
     /// Example: player:commandRemoveWaypoint(0) -- removes waypoint 1
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRemoveWaypoint);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRemoveWaypoint);
     /// Commands this PlayerSpaceship to move the waypoint with the given index to the given coordinates.
     /// This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
     /// Example: player:commandMoveWaypoint(0,-1000,-2000) -- moves waypoint 1 to -1000,-2000
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMoveWaypoint);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandMoveWaypoint);
     /// Commands this PlayerSpaceship to activate its self-destruct sequence.
     /// Example: player:commandActivateSelfDestruct()
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandActivateSelfDestruct);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandActivateSelfDestruct);
     /// Commands this PlayerSpaceship to cancel its self-destruct sequence.
     /// Example: player:commandCancelSelfDestruct()
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCancelSelfDestruct);
     /// Commands this PlayerSpaceship to submit the given self-destruct authorization code for the code request with the given index.
     /// Codes are 0-indexed. Index 0 corresponds to code A, 1 to B, etc.
     /// Example: player:commandConfirmDestructCode(0,46223) -- commands submitting 46223 as self-destruct confirmation code A
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandConfirmDestructCode);
     /// Commands this PlayerSpaceship to set its forward combat maneuver to the given value.
     /// Valid values are any from -1.0 (full reverse) to 1.0 (full forward).
     /// The maneuver continues until the ship's combat maneuver reserves are depleted.
     /// Crew screens allow only forward combat maneuvers, and the combat maneuver controls do not reflect a boost set via this command.
     /// Example: player:commandCombatManeuverBoost(0.5) -- commands boosting forward at half combat maneuver capacity
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandCombatManeuverBoost);
     /// Commands this PlayerSpaceship to launch a ScanProbe to the given coordinates.
     /// Example: player:commandLaunchProbe(1000,2000) -- commands launching a scan probe to 1000,2000
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLaunchProbe);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLaunchProbe);
     /// Commands this PlayerSpaceship to link the science screen to the given ScanProbe.
     /// This is equivalent to selecting a probe on Relay and clicking "Link to Science".
     /// Unlike "Link to Science", this function can link science to any given probe, regardless of which ship launched it or what faction it belongs to.
     /// Example: player:commandSetScienceLink(probe_object) -- link ScanProbe `probe` to this ship's science
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetScienceLink);
     /// Commands this PlayerSpaceship to unlink the science screen from any ScanProbe.
     /// This is equivalent to clicking "Link to Science" on Relay when a link is already active.
     /// Example: player:commandClearScienceLink()
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandClearScienceLink);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandClearScienceLink);
     /// Commands this PlayerSpaceship to set the given alert level.
     /// Valid values are "normal", "yellow", "red", which differ from the values returned by PlayerSpaceship:getAlertLevel().
     /// Example: player:commandSetAlertLevel("red") -- commands red alert
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
+    //REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAlertLevel);
 
     /// Returns the number of repair crews on this PlayerSpaceship.
     /// Example: player:getRepairCrewCount()
@@ -511,45 +516,24 @@ static const int16_t CMD_HACKING_FINISHED = 0x0028;
 static const int16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const int16_t CMD_TURN_SPEED = 0x002A;
 
-// Configure ship's log packets.
-static inline sp::io::DataBuffer& operator << (sp::io::DataBuffer& packet, const PlayerSpaceship::ShipLogEntry& e) { return packet << e.prefix << e.text << e.color.r << e.color.g << e.color.b << e.color.a; }
-static inline sp::io::DataBuffer& operator >> (sp::io::DataBuffer& packet, PlayerSpaceship::ShipLogEntry& e) { packet >> e.prefix >> e.text >> e.color.r >> e.color.g >> e.color.b >> e.color.a; return packet; }
 
 REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship", 5000)
 {
     // Initialize ship settings
-    comms_state = CS_Inactive;
-    comms_open_delay = 0.0;
     auto_repair_enabled = false;
-    scan_probe_stock = max_scan_probes;
-
+    
     // For now, set player ships to always be fully scanned to all other ships
     for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
-        setScannedStateForFaction(entity, SS_FullScan);
+        setScannedStateForFaction(entity, ScanState::State::FullScan);
 
-    registerMemberReplication(&can_scan);
     registerMemberReplication(&can_hack);
-    registerMemberReplication(&can_launch_probe);
-    registerMemberReplication(&scanning_delay, 0.5);
-    registerMemberReplication(&scanning_complexity);
-    registerMemberReplication(&scanning_depth);
     registerMemberReplication(&auto_repair_enabled);
-    registerMemberReplication(&comms_state);
-    registerMemberReplication(&comms_open_delay, 1.0);
-    registerMemberReplication(&comms_reply_message);
-    registerMemberReplication(&comms_target_name);
-    registerMemberReplication(&comms_incomming_message);
-    registerMemberReplication(&ships_log);
-    registerMemberReplication(&waypoints);
-    registerMemberReplication(&scan_probe_stock);
-    registerMemberReplication(&linked_science_probe_id);
-    registerMemberReplication(&custom_functions);
 
     if (game_server)
     {
-        if (gameGlobalInfo->insertPlayerShip(this) < 0)
+        if (gameGlobalInfo->insertPlayerShip(entity) < 0)
         {
             destroy();
         }
@@ -571,93 +555,6 @@ PlayerSpaceship::~PlayerSpaceship()
 {
 }
 
-void PlayerSpaceship::update(float delta)
-{
-    // Actions performed on the server only.
-    if (game_server)
-    {
-        // Comms actions
-        if (comms_state == CS_OpeningChannel)
-        {
-            if (comms_open_delay > 0)
-            {
-                comms_open_delay -= delta;
-            }else{
-                if (!comms_target)
-                {
-                    comms_state = CS_ChannelBroken;
-                }else{
-                    comms_reply_id.clear();
-                    comms_reply_message.clear();
-                    P<PlayerSpaceship> playerShip = comms_target;
-                    if (playerShip)
-                    {
-                        comms_open_delay = PlayerSpaceship::comms_channel_open_time;
-
-                        if (playerShip->comms_state == CS_Inactive || playerShip->comms_state == CS_ChannelFailed || playerShip->comms_state == CS_ChannelBroken || playerShip->comms_state == CS_ChannelClosed)
-                        {
-                            playerShip->comms_state = CS_BeingHailed;
-                            playerShip->comms_target = this;
-                            playerShip->comms_target_name = getCallSign();
-                        }
-                    }else{
-                        if (gameGlobalInfo->intercept_all_comms_to_gm)
-                        {
-                            comms_state = CS_ChannelOpenGM;
-                        }else{
-                            if (comms_script_interface.openCommChannel(this, comms_target))
-                                comms_state = CS_ChannelOpen;
-                            else
-                                comms_state = CS_ChannelFailed;
-                        }
-                    }
-                }
-            }
-        }
-        if (comms_state == CS_ChannelOpen || comms_state == CS_ChannelOpenPlayer)
-        {
-            if (!comms_target)
-                comms_state = CS_ChannelBroken;
-        }
-
-        if (scanning_target)
-        {
-            // If the scan setting or a target's scan complexity is none/0,
-            // complete the scan after a delay.
-            if (scanning_complexity < 1)
-            {
-                scanning_delay -= delta;
-                if (scanning_delay < 0)
-                {
-                    scanning_target->scannedBy(this);
-                    scanning_target = NULL;
-                }
-            }
-        }else{
-            // Otherwise, ignore the scanning_delay setting.
-            scanning_delay = 0.0;
-        }
-
-    }else{
-        // Actions performed on the client-side only.
-
-        // If scan settings or the scan target's complexity is 0/none, tick
-        // the scan delay timer.
-        if (scanning_complexity < 1)
-        {
-            if (scanning_delay > 0.0f)
-                scanning_delay -= delta;
-        }
-
-        // If opening comms, tick the comms open delay timer.
-        if (comms_open_delay > 0)
-            comms_open_delay -= delta;
-    }
-
-    // Perform all other ship update actions.
-    SpaceShip::update(delta);
-}
-
 void PlayerSpaceship::applyTemplateValues()
 {
     // Apply default spaceship object values first.
@@ -673,12 +570,14 @@ void PlayerSpaceship::applyTemplateValues()
             entity.removeComponent<CombatManeuveringThrusters>();
         if (ship_template->can_self_destruct)
             entity.getOrAddComponent<SelfDestruct>();
+        if (ship_template->can_scan)
+            entity.getOrAddComponent<ScienceScanner>();
+        if (ship_template->can_launch_probe)
+            entity.getOrAddComponent<ScanProbeLauncher>();
     }
 
     // Set the ship's capabilities.
-    can_scan = ship_template->can_scan;
     can_hack = ship_template->can_hack;
-    can_launch_probe = ship_template->can_launch_probe;
     if (!on_new_player_ship_called)
     {
         on_new_player_ship_called = true;
@@ -713,7 +612,7 @@ void PlayerSpaceship::playSoundOnMainScreen(string sound_name)
 int PlayerSpaceship::getRepairCrewCount()
 {
     // Count and return the number of repair crews on this ship.
-    return getRepairCrewFor(this).size();
+    return getRepairCrewFor(entity).size();
 }
 
 void PlayerSpaceship::setRepairCrewCount(int amount)
@@ -727,7 +626,7 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     amount = std::max(0, amount);
 
     // Get the number of repair crews for this ship.
-    PVector<RepairCrew> crew = getRepairCrewFor(this);
+    PVector<RepairCrew> crew = getRepairCrewFor(entity);
 
     // Remove excess crews by shifting them out of the array.
     while(int(crew.size()) > amount)
@@ -738,7 +637,7 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
 
     if (ship_template->rooms.size() == 0 && amount != 0)
     {
-        LOG(WARNING) << "Not adding repair crew to ship \"" << callsign << "\", because it has no rooms. Fix this by adding rooms to the ship template \"" << template_name << "\".";
+        LOG(WARNING) << "Not adding repair crew to ship \"" << getCallSign() << "\", because it has no rooms. Fix this by adding rooms to the ship template \"" << template_name << "\".";
         return;
     }
 
@@ -746,19 +645,14 @@ void PlayerSpaceship::setRepairCrewCount(int amount)
     for(int create_amount = amount - crew.size(); create_amount > 0; create_amount--)
     {
         P<RepairCrew> rc = new RepairCrew();
-        rc->ship_id = getMultiplayerId();
+        rc->ship = entity;
     }
 }
 
 void PlayerSpaceship::addToShipLog(string message, glm::u8vec4 color)
 {
-    // Cap the ship's log size to 100 entries. If it exceeds that limit,
-    // start erasing entries from the beginning.
-    if (ships_log.size() > 100)
-        ships_log.erase(ships_log.begin());
-
-    // Timestamp a log entry, color it, and add it to the end of the log.
-    ships_log.emplace_back(gameGlobalInfo->getMissionTime() + string(": "), message, color);
+    auto& log = entity.getOrAddComponent<ShipLog>();
+    log.add(message, color);
 }
 
 void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
@@ -775,12 +669,6 @@ void PlayerSpaceship::addToShipLogBy(string message, P<SpaceObject> target)
         addToShipLog(message, colorConfig.log_receive_neutral);
 }
 
-const std::vector<PlayerSpaceship::ShipLogEntry>& PlayerSpaceship::getShipsLog() const
-{
-    // Return the ship's log.
-    return ships_log;
-}
-
 void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
 {
     // Don't do anything without a valid target. The target must be a
@@ -791,9 +679,9 @@ void PlayerSpaceship::transferPlayersToShip(P<PlayerSpaceship> other_ship)
     // For each player, move them to the same station on the target.
     foreach(PlayerInfo, i, player_info_list)
     {
-        if (i->ship_id == getMultiplayerId())
+        if (i->ship == entity)
         {
-            i->ship_id = other_ship->getMultiplayerId();
+            i->ship = other_ship->entity;
         }
     }
 }
@@ -809,85 +697,82 @@ void PlayerSpaceship::transferPlayersAtPositionToShip(ECrewPosition position, P<
     // the requested position, move that player. Otherwise, ignore them.
     foreach(PlayerInfo, i, player_info_list)
     {
-        if (i->ship_id == getMultiplayerId() && i->crew_position[position])
+        if (i->ship == entity && i->crew_position[position])
         {
-            i->ship_id = other_ship->getMultiplayerId();
+            i->ship = other_ship->entity;
         }
     }
 }
 
 bool PlayerSpaceship::hasPlayerAtPosition(ECrewPosition position)
 {
-    // If a position is occupied by a player, return true.
-    // Otherwise, return false.
-    foreach(PlayerInfo, i, player_info_list)
-    {
-        if (i->ship_id == getMultiplayerId() && i->crew_position[position])
-        {
-            return true;
-        }
-    }
-    return false;
+    return PlayerInfo::hasPlayerAtPosition(entity, position);
 }
 
 void PlayerSpaceship::addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback, std::optional<int> order)
 {
     removeCustom(name);
-    custom_functions.emplace_back();
-    CustomShipFunction& csf = custom_functions.back();
-    csf.type = CustomShipFunction::Type::Button;
-    csf.name = name;
-    csf.crew_position = position;
-    csf.caption = caption;
-    csf.callback = callback;
-    csf.order = order.value_or(0);
-    std::stable_sort(custom_functions.begin(), custom_functions.end());
+    auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
+    csf.functions.emplace_back();
+    auto f = csf.functions.back();
+    f.type = CustomShipFunctions::Function::Type::Button;
+    f.name = name;
+    f.crew_position = position;
+    f.caption = caption;
+    f.callback = callback;
+    f.order = order.value_or(0);
+    std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
 void PlayerSpaceship::addCustomInfo(ECrewPosition position, string name, string caption, std::optional<int> order)
 {
     removeCustom(name);
-    custom_functions.emplace_back();
-    CustomShipFunction& csf = custom_functions.back();
-    csf.type = CustomShipFunction::Type::Info;
-    csf.name = name;
-    csf.crew_position = position;
-    csf.caption = caption;
-    csf.order = order.value_or(0);
-    std::stable_sort(custom_functions.begin(), custom_functions.end());
+    auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
+    csf.functions.emplace_back();
+    auto& f = csf.functions.back();
+    f.type = CustomShipFunctions::Function::Type::Info;
+    f.name = name;
+    f.crew_position = position;
+    f.caption = caption;
+    f.order = order.value_or(0);
+    std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
 void PlayerSpaceship::addCustomMessage(ECrewPosition position, string name, string caption)
 {
     removeCustom(name);
-    custom_functions.emplace_back();
-    CustomShipFunction& csf = custom_functions.back();
-    csf.type = CustomShipFunction::Type::Message;
-    csf.name = name;
-    csf.crew_position = position;
-    csf.caption = caption;
-    std::stable_sort(custom_functions.begin(), custom_functions.end());
+    auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
+    csf.functions.emplace_back();
+    auto& f = csf.functions.back();
+    f.type = CustomShipFunctions::Function::Type::Message;
+    f.name = name;
+    f.crew_position = position;
+    f.caption = caption;
+    std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
 void PlayerSpaceship::addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback)
 {
     removeCustom(name);
-    custom_functions.emplace_back();
-    CustomShipFunction& csf = custom_functions.back();
-    csf.type = CustomShipFunction::Type::Message;
-    csf.name = name;
-    csf.crew_position = position;
-    csf.caption = caption;
-    csf.callback = callback;
-    std::stable_sort(custom_functions.begin(), custom_functions.end());
+    auto& csf = entity.getOrAddComponent<CustomShipFunctions>();
+    csf.functions.emplace_back();
+    auto& f = csf.functions.back();
+    f.type = CustomShipFunctions::Function::Type::Message;
+    f.name = name;
+    f.crew_position = position;
+    f.caption = caption;
+    f.callback = callback;
+    std::stable_sort(csf.functions.begin(), csf.functions.end());
 }
 
 void PlayerSpaceship::removeCustom(string name)
 {
-    for(auto it = custom_functions.begin(); it != custom_functions.end();)
+    auto csf = entity.getComponent<CustomShipFunctions>();
+    if (!csf) return;
+    for(auto it = csf->functions.begin(); it != csf->functions.end();)
     {
         if (it->name == name)
-            it = custom_functions.erase(it);
+            it = csf->functions.erase(it);
         else
             it++;
     }
@@ -895,120 +780,12 @@ void PlayerSpaceship::removeCustom(string name)
 
 void PlayerSpaceship::setCommsMessage(string message)
 {
-    // Record a new comms message to the ship's log.
-    for(string line : message.split("\n"))
-        addToShipLog(line, glm::u8vec4(192, 192, 255, 255));
-    // Display the message in the messaging window.
-    comms_incomming_message = message;
-}
-
-void PlayerSpaceship::addCommsIncommingMessage(string message)
-{
-    // Record incoming comms messages to the ship's log.
-    for(string line : message.split("\n"))
-        addToShipLog(line, glm::u8vec4(192, 192, 255, 255));
-    // Add the message to the messaging window.
-    comms_incomming_message = comms_incomming_message + "\n> " + message;
-}
-
-void PlayerSpaceship::addCommsOutgoingMessage(string message)
-{
-    // Record outgoing comms messages to the ship's log.
-    for(string line : message.split("\n"))
-        addToShipLog(line, colorConfig.log_send);
-    // Add the message to the messaging window.
-    comms_incomming_message = comms_incomming_message + "\n< " + message;
-}
-
-void PlayerSpaceship::addCommsReply(int32_t id, string message)
-{
-    if (comms_reply_id.size() >= 200)
-        return;
-    comms_reply_id.push_back(id);
-    comms_reply_message.push_back(message);
-}
-
-bool PlayerSpaceship::hailCommsByGM(string target_name)
-{
-    // If a ship's comms aren't engaged, receive the GM's hail.
-    // Otherwise, return false.
-    if (!isCommsInactive() && !isCommsFailed() && !isCommsBroken() && !isCommsClosed())
-        return false;
-
-    // Log the hail.
-    addToShipLog(tr("shiplog", "Hailed by {name}").format({{"name", target_name}}), colorConfig.log_generic);
-
-    // Set comms to the hail state and notify Relay/comms.
-    comms_state = CS_BeingHailedByGM;
-    comms_target_name = target_name;
-    comms_target = nullptr;
-    return true;
-}
-
-bool PlayerSpaceship::hailByObject(P<SpaceObject> object, string opening_message)
-{
-    // If trying to open comms with a non-object, return false.
-    if (isCommsOpening() || isCommsBeingHailed())
-    {
-        if (comms_target != object)
-        {
-            return false;
-        }
-    }
-
-    // If comms are engaged, return false.
-    if (isCommsBeingHailedByGM())
-    {
-        return false;
-    }
-    if (isCommsChatOpen() || isCommsScriptOpen())
-    {
-        return false;
-    }
-
-    // Receive a hail from the object.
-    comms_target = object;
-    comms_target_name = object->getCallSign();
-    comms_state = CS_BeingHailed;
-    comms_incomming_message = opening_message;
-    return true;
-}
-
-void PlayerSpaceship::switchCommsToGM()
-{
-    comms_state = CS_ChannelOpenGM;
-    if (comms_incomming_message == "?")
-        comms_incomming_message = "";
-}
-
-void PlayerSpaceship::closeComms()
-{
-    // If comms are closed, state it and log it to the ship's log.
-    if (comms_state != CS_Inactive)
-    {
-        if (comms_state == CS_ChannelOpenPlayer && comms_target)
-        {
-            P<PlayerSpaceship> player_ship = comms_target;
-            player_ship->comms_state = CS_ChannelClosed;
-            player_ship->addToShipLog(tr("shiplog", "Communication channel closed by other side"), colorConfig.log_generic);
-        }
-        if (comms_state == CS_OpeningChannel && comms_target)
-        {
-            P<PlayerSpaceship> player_ship = comms_target;
-            if (player_ship)
-            {
-                if (player_ship->comms_state == CS_BeingHailed && player_ship->comms_target == this)
-                {
-                    player_ship->comms_state = CS_Inactive;
-                    player_ship->addToShipLog(tr("shiplog", "Hailing from {callsign} stopped").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
-                }
-            }
-        }
-        addToShipLog(tr("shiplog", "Communication channel closed"), colorConfig.log_generic);
-        if (comms_state == CS_ChannelOpenGM)
-            comms_state = CS_ChannelClosed;
-        else
-            comms_state = CS_Inactive;
+    if (auto transmitter = entity.getComponent<CommsTransmitter>()) {
+        // Record a new comms message to the ship's log.
+        for(string line : message.split("\n"))
+            addToShipLog(line, glm::u8vec4(192, 192, 255, 255));
+        // Display the message in the messaging window.
+        transmitter->incomming_message = message;
     }
 }
 
@@ -1080,14 +857,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             float distance;
             packet >> distance;
-            JumpSystem::initializeJump(my_spaceship->entity, distance);
+            JumpSystem::initializeJump(my_spaceship, distance);
         }
         break;
     case CMD_SET_TARGET:
         {
             sp::ecs::Entity target;
             packet >> target;
-            entity.getOrAddComponent<Target>().target = target;
+            entity.getOrAddComponent<Target>().entity = target;
         }
         break;
     case CMD_LOAD_TUBE:
@@ -1155,31 +932,40 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         break;
     case CMD_SCAN_OBJECT:
         {
-            int32_t id;
-            packet >> id;
+            sp::ecs::Entity e;
+            packet >> e;
 
-            P<SpaceObject> obj = game_server->getObjectById(id);
-            if (obj)
+            if (auto scanner = entity.getComponent<ScienceScanner>())
             {
-                scanning_target = obj;
-                scanning_complexity = obj->scanningComplexity(this);
-                scanning_depth = obj->scanningChannelDepth(this);
-                scanning_delay = max_scanning_delay;
+                scanner->delay = max_scanning_delay;
+                scanner->target = e;
             }
         }
         break;
     case CMD_SCAN_DONE:
-        if (scanning_target && scanning_complexity > 0)
-        {
-            if (scanning_complexity == scanning_target->scanningComplexity(this) && scanning_depth == scanning_target->scanningChannelDepth(this))
-                scanning_target->scannedBy(this);
-            scanning_target = nullptr;
+        if (auto ss = entity.getComponent<ScienceScanner>()) {
+            if (auto scanstate = ss->target.getComponent<ScanState>()) {
+                switch(scanstate->getStateFor(entity)) {
+                case ScanState::State::NotScanned:
+                case ScanState::State::FriendOrFoeIdentified:
+                    if (scanstate->allow_simple_scan)
+                        scanstate->setStateFor(entity, ScanState::State::SimpleScan);
+                    else
+                        scanstate->setStateFor(entity, ScanState::State::FullScan);
+                    break;
+                case ScanState::State::SimpleScan:
+                    scanstate->setStateFor(entity, ScanState::State::FullScan);
+                    break;
+                case ScanState::State::FullScan:
+                    break;
+                }
+            }
+            ss->target = {};
         }
         break;
     case CMD_SCAN_CANCEL:
-        if (scanning_target && scanning_complexity > 0)
-        {
-            scanning_target = nullptr;
+        if (auto ss = entity.getComponent<ScienceScanner>()) {
+            ss->target = {};
         }
         break;
     case CMD_SET_SYSTEM_POWER_REQUEST:
@@ -1216,128 +1002,35 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         DockingSystem::abortDock(entity);
         break;
     case CMD_OPEN_TEXT_COMM:
-        if (comms_state == CS_Inactive || comms_state == CS_BeingHailed || comms_state == CS_BeingHailedByGM || comms_state == CS_ChannelClosed)
         {
-            int32_t id;
-            packet >> id;
-            comms_target = game_server->getObjectById(id);
-            if (comms_target)
-            {
-                P<PlayerSpaceship> player = comms_target;
-                comms_state = CS_OpeningChannel;
-                comms_open_delay = comms_channel_open_time;
-                comms_target_name = comms_target->getCallSign();
-                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
-                addToShipLog(tr("shiplog", "Hailing: {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
-            }else{
-                comms_state = CS_Inactive;
-            }
+            sp::ecs::Entity target;
+            packet >> target;
+            CommsSystem::openTo(entity, target);
         }
         break;
     case CMD_CLOSE_TEXT_COMM:
-        closeComms();
+        CommsSystem::close(entity);
         break;
-    case CMD_ANSWER_COMM_HAIL:
-        if (comms_state == CS_BeingHailed)
+    case CMD_ANSWER_COMM_HAIL: 
         {
-            bool anwser;
-            packet >> anwser;
-            P<PlayerSpaceship> playerShip = comms_target;
-
-            if (playerShip)
-            {
-                if (anwser)
-                {
-                    comms_state = CS_ChannelOpenPlayer;
-                    playerShip->comms_state = CS_ChannelOpenPlayer;
-
-                    comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", playerShip->getCallSign()}});
-                    playerShip->comms_incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", getCallSign()}});
-                    addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
-                    playerShip->addToShipLog(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
-                }else{
-                    addToShipLog(tr("shiplog", "Refused communications from {callsign}").format({{"callsign", playerShip->getCallSign()}}), colorConfig.log_generic);
-                    playerShip->addToShipLog(tr("shiplog", "Refused communications to {callsign}").format({{"callsign", getCallSign()}}), colorConfig.log_generic);
-                    comms_state = CS_Inactive;
-                    playerShip->comms_state = CS_ChannelFailed;
-                }
-            }else{
-                if (anwser)
-                {
-                    if (!comms_target)
-                    {
-                        addToShipLog(tr("shiplog", "Hail suddenly went dead."), colorConfig.log_generic);
-                        comms_state = CS_ChannelBroken;
-                    }else{
-                        addToShipLog(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
-                        comms_reply_id.clear();
-                        comms_reply_message.clear();
-                        if (comms_incomming_message == "")
-                        {
-                            if (comms_script_interface.openCommChannel(this, comms_target))
-                                comms_state = CS_ChannelOpen;
-                            else
-                                comms_state = CS_ChannelFailed;
-                        }else{
-                            // Set the comms message again, so it ends up in
-                            // the ship's log.
-                            // comms_incomming_message was set by
-                            // "hailByObject", without ending up in the log.
-                            setCommsMessage(comms_incomming_message);
-                            comms_state = CS_ChannelOpen;
-                        }
-                    }
-                }else{
-                    if (comms_target)
-                        addToShipLog(tr("shiplog", "Refused hail from {callsign}").format({{"callsign", comms_target->getCallSign()}}), colorConfig.log_generic);
-                    comms_state = CS_Inactive;
-                }
-            }
-        }
-        if (comms_state == CS_BeingHailedByGM)
-        {
-            bool anwser;
-            packet >> anwser;
-
-            if (anwser)
-            {
-                comms_state = CS_ChannelOpenGM;
-
-                addToShipLog(tr("shiplog", "Opened communication channel to {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
-                comms_incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", comms_target_name}});
-            }else{
-                addToShipLog(tr("shiplog", "Refused hail from {name}").format({{"name", comms_target_name}}), colorConfig.log_generic);
-                comms_state = CS_Inactive;
-            }
+            bool answer = false;
+            packet >> answer;
+            CommsSystem::answer(entity, answer);
         }
         break;
     case CMD_SEND_TEXT_COMM:
-        if (comms_state == CS_ChannelOpen && comms_target)
         {
             uint8_t index;
             packet >> index;
-            if (index < comms_reply_id.size())
-            {
-                addToShipLog(comms_reply_message[index], colorConfig.log_send);
-
-                comms_incomming_message = "?";
-                int id = comms_reply_id[index];
-                comms_reply_id.clear();
-                comms_reply_message.clear();
-                comms_script_interface.commChannelMessage(id);
-            }
+            CommsSystem::selectScriptReply(entity, index);
         }
         break;
     case CMD_SEND_TEXT_COMM_PLAYER:
-        if (comms_state == CS_ChannelOpenPlayer || comms_state == CS_ChannelOpenGM)
         {
             string message;
             packet >> message;
 
-            addCommsOutgoingMessage(message);
-            P<PlayerSpaceship> playership = comms_target;
-            if (comms_state == CS_ChannelOpenPlayer && playership)
-                playership->addCommsIncommingMessage(message);
+            CommsSystem::textReply(entity, message);
         }
         break;
     case CMD_SET_AUTO_REPAIR:
@@ -1382,16 +1075,18 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             glm::vec2 position{};
             packet >> position;
-            if (waypoints.size() < 9)
-                waypoints.push_back(position);
+            auto lrr = entity.getComponent<LongRangeRadar>();
+            if (lrr && lrr->waypoints.size() < 9)
+                lrr->waypoints.push_back(position);
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
             int32_t index;
             packet >> index;
-            if (index >= 0 && index < int(waypoints.size()))
-                waypoints.erase(waypoints.begin() + index);
+            auto lrr = entity.getComponent<LongRangeRadar>();
+            if (lrr && index >= 0 && index < int(lrr->waypoints.size()))
+                lrr->waypoints.erase(lrr->waypoints.begin() + index);
         }
         break;
     case CMD_MOVE_WAYPOINT:
@@ -1399,8 +1094,9 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
             int32_t index;
             glm::vec2 position{};
             packet >> index >> position;
-            if (index >= 0 && index < int(waypoints.size()))
-                waypoints[index] = position;
+            auto lrr = entity.getComponent<LongRangeRadar>();
+            if (lrr && index >= 0 && index < int(lrr->waypoints.size()))
+                lrr->waypoints[index] = position;
         }
         break;
     case CMD_ACTIVATE_SELF_DESTRUCT:
@@ -1443,19 +1139,21 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         }
         break;
     case CMD_LAUNCH_PROBE:
-        if (scan_probe_stock > 0)
+        if (auto spl = entity.getComponent<ScanProbeLauncher>())
         {
-            glm::vec2 target{};
-            packet >> target;
-            P<ScanProbe> p = new ScanProbe();
-            p->setPosition(getPosition());
-            p->setTarget(target);
-            p->setOwner(this);
-            if (on_probe_launch.isSet())
-            {
-                on_probe_launch.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+            if (spl->stock > 0) {
+                glm::vec2 target{};
+                packet >> target;
+                P<ScanProbe> p = new ScanProbe();
+                p->setPosition(getPosition());
+                p->setTarget(target);
+                p->setOwner(entity);
+                if (spl->on_launch.isSet())
+                {
+                    spl->on_launch.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(p));
+                }
+                spl->stock--;
             }
-            scan_probe_stock--;
         }
         break;
     case CMD_SET_ALERT_LEVEL:{
@@ -1467,27 +1165,17 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
     case CMD_SET_SCIENCE_LINK:
         {
             // Capture previously linked probe, if there is one.
-            P<ScanProbe> old_linked_probe;
+            sp::ecs::Entity target;
+            packet >> target;
 
-            if (linked_science_probe_id != -1)
-            {
-                old_linked_probe = game_server->getObjectById(linked_science_probe_id);
-            }
-
-            packet >> linked_science_probe_id;
-
-            if (linked_science_probe_id != -1 && on_probe_link.isSet())
-            {
-                P<ScanProbe> new_linked_probe = game_server->getObjectById(linked_science_probe_id);
-
-                if (new_linked_probe)
-                {
-                    on_probe_link.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(new_linked_probe));
-                }
-            }
-            else if (linked_science_probe_id == -1 && on_probe_unlink.isSet())
-            {
-                on_probe_unlink.call<void>(P<PlayerSpaceship>(this), P<ScanProbe>(old_linked_probe));
+            // TODO: Check if this probe is ours
+            if (auto lrr = entity.getComponent<LongRangeRadar>()) {
+                auto old = lrr->linked_probe;
+                if (lrr->on_probe_link.isSet() && target)
+                    lrr->on_probe_link.call<void>(entity, target);
+                lrr->linked_probe = target;
+                if (lrr->on_probe_unlink.isSet() && old)
+                    lrr->on_probe_unlink.call<void>(entity, old);
             }
         }
         break;
@@ -1505,22 +1193,24 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         {
             string name;
             packet >> name;
-            for(CustomShipFunction& csf : custom_functions)
-            {
-                if (csf.name == name)
+            if (auto csf = entity.getComponent<CustomShipFunctions>()) {
+                for(auto& f : csf->functions)
                 {
-                    if (csf.type == CustomShipFunction::Type::Button)
+                    if (f.name == name)
                     {
-                        auto cb = csf.callback;
-                        cb.call<void>();
+                        if (f.type == CustomShipFunctions::Function::Type::Button)
+                        {
+                            auto cb = f.callback;
+                            cb.call<void>();
+                        }
+                        else if (f.type == CustomShipFunctions::Function::Type::Message)
+                        {
+                            auto cb = f.callback;
+                            cb.call<void>();
+                            removeCustom(name);
+                        }
+                        break;
                     }
-                    else if (csf.type == CustomShipFunction::Type::Message)
-                    {
-                        auto cb = csf.callback;
-                        cb.call<void>();
-                        removeCustom(name);
-                    }
-                    break;
                 }
             }
         }
@@ -1533,296 +1223,298 @@ void PlayerSpaceship::commandTargetRotation(float target)
 {
     sp::io::DataBuffer packet;
     packet << CMD_TARGET_ROTATION << target;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandTurnSpeed(float turnSpeed)
 {
     sp::io::DataBuffer packet;
     packet << CMD_TURN_SPEED << turnSpeed;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandImpulse(float target)
 {
     sp::io::DataBuffer packet;
     packet << CMD_IMPULSE << target;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandWarp(int8_t target)
 {
     sp::io::DataBuffer packet;
     packet << CMD_WARP << target;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandJump(float distance)
 {
     sp::io::DataBuffer packet;
     packet << CMD_JUMP << distance;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetTarget(P<SpaceObject> target)
+void PlayerSpaceship::commandSetTarget(sp::ecs::Entity target)
 {
     sp::io::DataBuffer packet;
     if (target)
-        packet << CMD_SET_TARGET << target->entity;
+        packet << CMD_SET_TARGET << target;
     else
         packet << CMD_SET_TARGET << sp::ecs::Entity();
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType)
 {
     sp::io::DataBuffer packet;
     packet << CMD_LOAD_TUBE << tubeNumber << missileType;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandUnloadTube(int8_t tubeNumber)
 {
     sp::io::DataBuffer packet;
     packet << CMD_UNLOAD_TUBE << tubeNumber;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandFireTube(int8_t tubeNumber, float missile_target_angle)
 {
     sp::io::DataBuffer packet;
     packet << CMD_FIRE_TUBE << tubeNumber << missile_target_angle;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, P<SpaceObject> target)
+void PlayerSpaceship::commandFireTubeAtTarget(int8_t tubeNumber, sp::ecs::Entity target)
 {
-  float targetAngle = 0.0;
-  auto missiletubes = entity.getComponent<MissileTubes>();
+    float targetAngle = 0.0;
+    auto missiletubes = my_spaceship.getComponent<MissileTubes>();
 
-  if (!target || !missiletubes || tubeNumber < 0 || tubeNumber >= missiletubes->count)
-    return;
+    if (!target || !missiletubes || tubeNumber < 0 || tubeNumber >= missiletubes->count)
+        return;
 
-  targetAngle = MissileSystem::calculateFiringSolution(entity, missiletubes->mounts[tubeNumber], target->entity);
-  if (targetAngle == std::numeric_limits<float>::infinity())
-      targetAngle = getRotation() + missiletubes->mounts[tubeNumber].direction;
+    targetAngle = MissileSystem::calculateFiringSolution(my_spaceship, missiletubes->mounts[tubeNumber], target);
+    if (targetAngle == std::numeric_limits<float>::infinity()) {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            targetAngle = transform->getRotation() + missiletubes->mounts[tubeNumber].direction;
+    }
 
-  commandFireTube(tubeNumber, targetAngle);
+    commandFireTube(tubeNumber, targetAngle);
 }
 
 void PlayerSpaceship::commandSetShields(bool enabled)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_SHIELDS << enabled;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandMainScreenSetting(MainScreenSetting mainScreen)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_MAIN_SCREEN_SETTING << mainScreen;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandMainScreenOverlay(MainScreenOverlay mainScreen)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_MAIN_SCREEN_OVERLAY << mainScreen;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandScan(P<SpaceObject> object)
+void PlayerSpaceship::commandScan(sp::ecs::Entity object)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_SCAN_OBJECT << object->getMultiplayerId();
-    sendClientCommand(packet);
+    packet << CMD_SCAN_OBJECT << object;
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetSystemPowerRequest(ShipSystem::Type system, float power_request)
 {
     sp::io::DataBuffer packet;
-    auto sys = ShipSystem::get(entity, system);
+    auto sys = ShipSystem::get(my_spaceship, system);
     if (sys) sys->power_request = power_request;
     packet << CMD_SET_SYSTEM_POWER_REQUEST << system << power_request;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_request)
 {
     sp::io::DataBuffer packet;
-    auto sys = ShipSystem::get(entity, system);
+    auto sys = ShipSystem::get(my_spaceship, system);
     if (sys) sys->coolant_request = coolant_request;
     packet << CMD_SET_SYSTEM_COOLANT_REQUEST << system << coolant_request;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandDock(P<SpaceObject> object)
+void PlayerSpaceship::commandDock(sp::ecs::Entity object)
 {
     if (!object) return;
     sp::io::DataBuffer packet;
-    packet << CMD_DOCK << object->getMultiplayerId();
-    sendClientCommand(packet);
+    packet << CMD_DOCK << object;
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandUndock()
 {
     sp::io::DataBuffer packet;
     packet << CMD_UNDOCK;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandAbortDock()
 {
     sp::io::DataBuffer packet;
     packet << CMD_ABORT_DOCK;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandOpenTextComm(P<SpaceObject> obj)
+void PlayerSpaceship::commandOpenTextComm(sp::ecs::Entity obj)
 {
     if (!obj) return;
     sp::io::DataBuffer packet;
-    packet << CMD_OPEN_TEXT_COMM << obj->getMultiplayerId();
-    sendClientCommand(packet);
+    packet << CMD_OPEN_TEXT_COMM << obj;
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCloseTextComm()
 {
     sp::io::DataBuffer packet;
     packet << CMD_CLOSE_TEXT_COMM;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandAnswerCommHail(bool awnser)
 {
     sp::io::DataBuffer packet;
     packet << CMD_ANSWER_COMM_HAIL << awnser;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSendComm(uint8_t index)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SEND_TEXT_COMM << index;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSendCommPlayer(string message)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SEND_TEXT_COMM_PLAYER << message;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetAutoRepair(bool enabled)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_AUTO_REPAIR << enabled;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetBeamFrequency(int32_t frequency)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_BEAM_FREQUENCY << frequency;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetBeamSystemTarget(ShipSystem::Type system)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_BEAM_SYSTEM_TARGET << system;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetShieldFrequency(int32_t frequency)
 {
     sp::io::DataBuffer packet;
     packet << CMD_SET_SHIELD_FREQUENCY << frequency;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandAddWaypoint(glm::vec2 position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_ADD_WAYPOINT << position;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandRemoveWaypoint(int32_t index)
 {
     sp::io::DataBuffer packet;
     packet << CMD_REMOVE_WAYPOINT << index;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandMoveWaypoint(int32_t index, glm::vec2 position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_MOVE_WAYPOINT << index << position;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandActivateSelfDestruct()
 {
     sp::io::DataBuffer packet;
     packet << CMD_ACTIVATE_SELF_DESTRUCT;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCancelSelfDestruct()
 {
     sp::io::DataBuffer packet;
     packet << CMD_CANCEL_SELF_DESTRUCT;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandConfirmDestructCode(int8_t index, uint32_t code)
 {
     sp::io::DataBuffer packet;
     packet << CMD_CONFIRM_SELF_DESTRUCT << index << code;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCombatManeuverBoost(float amount)
 {
-    auto combat = entity.getComponent<CombatManeuveringThrusters>();
+    auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
     if (!combat) return;
     combat->boost.request = amount;
     sp::io::DataBuffer packet;
     packet << CMD_COMBAT_MANEUVER_BOOST << amount;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCombatManeuverStrafe(float amount)
 {
-    auto combat = entity.getComponent<CombatManeuveringThrusters>();
+    auto combat = my_spaceship.getComponent<CombatManeuveringThrusters>();
     if (!combat) return;
     combat->strafe.request = amount;
     sp::io::DataBuffer packet;
     packet << CMD_COMBAT_MANEUVER_STRAFE << amount;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandLaunchProbe(glm::vec2 target_position)
 {
     sp::io::DataBuffer packet;
     packet << CMD_LAUNCH_PROBE << target_position;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandScanDone()
 {
     sp::io::DataBuffer packet;
     packet << CMD_SCAN_DONE;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandScanCancel()
 {
     sp::io::DataBuffer packet;
     packet << CMD_SCAN_CANCEL;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandSetAlertLevel(AlertLevel level)
@@ -1830,16 +1522,16 @@ void PlayerSpaceship::commandSetAlertLevel(AlertLevel level)
     sp::io::DataBuffer packet;
     packet << CMD_SET_ALERT_LEVEL;
     packet << level;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandHackingFinished(P<SpaceObject> target, ShipSystem::Type target_system)
+void PlayerSpaceship::commandHackingFinished(sp::ecs::Entity target, ShipSystem::Type target_system)
 {
     sp::io::DataBuffer packet;
     packet << CMD_HACKING_FINISHED;
-    packet << target->getMultiplayerId();
+    packet << target;
     packet << target_system;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::commandCustomFunction(string name)
@@ -1847,10 +1539,10 @@ void PlayerSpaceship::commandCustomFunction(string name)
     sp::io::DataBuffer packet;
     packet << CMD_CUSTOM_FUNCTION;
     packet << name;
-    sendClientCommand(packet);
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
+void PlayerSpaceship::commandSetScienceLink(sp::ecs::Entity probe)
 {
     sp::io::DataBuffer packet;
 
@@ -1858,8 +1550,8 @@ void PlayerSpaceship::commandSetScienceLink(P<ScanProbe> probe)
     if (probe)
     {
         packet << CMD_SET_SCIENCE_LINK;
-        packet << probe->getMultiplayerId();
-        sendClientCommand(packet);
+        packet << probe;
+        dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
     }
     // Otherwise, it's invalid. Warn and do nothing.
     else
@@ -1873,8 +1565,8 @@ void PlayerSpaceship::commandClearScienceLink()
     sp::io::DataBuffer packet;
 
     packet << CMD_SET_SCIENCE_LINK;
-    packet << int32_t(-1);
-    sendClientCommand(packet);
+    packet << sp::ecs::Entity{};
+    dynamic_cast<PlayerSpaceship*>(*my_spaceship.getComponent<SpaceObject*>())->sendClientCommand(packet);
 }
 
 void PlayerSpaceship::onReceiveServerCommand(sp::io::DataBuffer& packet)
@@ -1884,7 +1576,7 @@ void PlayerSpaceship::onReceiveServerCommand(sp::io::DataBuffer& packet)
     switch(command)
     {
     case CMD_PLAY_CLIENT_SOUND:
-        if (my_spaceship == this && my_player_info)
+        if (my_spaceship == entity && my_player_info)
         {
             ECrewPosition position;
             string sound_name;
@@ -1922,8 +1614,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setShortRangeRadarRange(" + string(getShortRangeRadarRange(), 0) + ")";
     if (getLongRangeRadarRange() != ship_template->long_range_radar_range)
         result += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
-    if (can_scan != ship_template->can_scan)
-        result += ":setCanScan(" + string(can_scan, true) + ")";
+    //if (can_scan != ship_template->can_scan)
+    //    result += ":setCanScan(" + string(can_scan, true) + ")";
     if (can_hack != ship_template->can_hack)
         result += ":setCanHack(" + string(can_hack, true) + ")";
     //if (can_dock != ship_template->can_dock)
@@ -1932,8 +1624,8 @@ string PlayerSpaceship::getExportLine()
     //    result += ":setCanCombatManeuver(" + string(can_combat_maneuver, true) + ")";
     //if (can_self_destruct != ship_template->can_self_destruct)
     //    result += ":setCanSelfDestruct(" + string(can_self_destruct, true) + ")";
-    if (can_launch_probe != ship_template->can_launch_probe)
-        result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
+    //if (can_launch_probe != ship_template->can_launch_probe)
+    //    result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
     //if (auto_coolant_enabled)
     //    result += ":setAutoCoolant(true)";
     if (auto_repair_enabled)
@@ -1983,17 +1675,17 @@ string PlayerSpaceship::getExportLine()
 
 void PlayerSpaceship::onProbeLaunch(ScriptSimpleCallback callback)
 {
-    this->on_probe_launch = callback;
+    //TODO this->on_probe_launch = callback;
 }
 
 void PlayerSpaceship::onProbeLink(ScriptSimpleCallback callback)
 {
-    this->on_probe_link = callback;
+    //TODO this->on_probe_link = callback;
 }
 
 void PlayerSpaceship::onProbeUnlink(ScriptSimpleCallback callback)
 {
-    this->on_probe_unlink = callback;
+    //TODO this->on_probe_unlink = callback;
 }
 
 #include "playerSpaceship.hpp"

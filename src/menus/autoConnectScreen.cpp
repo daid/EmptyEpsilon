@@ -114,7 +114,7 @@ void AutoConnectScreen::update(float delta)
                             }
                         }
                     } else {
-                        if (my_spaceship->getMultiplayerId() == my_player_info->ship_id && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
+                        if (my_spaceship == my_player_info->ship && (crew_position == max_crew_positions || my_player_info->crew_position[crew_position]))
                         {
                             destroy();
                             my_player_info->spawnUI(0, getRenderLayer());
@@ -131,9 +131,9 @@ void AutoConnectScreen::update(float delta)
 
 bool AutoConnectScreen::isValidShip(int index)
 {
-    P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
+    auto ship = gameGlobalInfo->getPlayerShip(index);
 
-    if (!ship || !ship->ship_template)
+    if (!ship)
         return false;
 
     for(auto it : ship_filters)
@@ -143,7 +143,7 @@ bool AutoConnectScreen::isValidShip(int index)
             int crew_at_position = 0;
             foreach(PlayerInfo, i, player_info_list)
             {
-                if (i->ship_id == ship->getMultiplayerId())
+                if (i->ship == ship)
                 {
                     if (crew_position != max_crew_positions && i->crew_position[crew_position])
                         crew_at_position++;
@@ -154,17 +154,19 @@ bool AutoConnectScreen::isValidShip(int index)
         }
         else if (it.first == "faction")
         {
-            if (&Faction::getInfo(ship->entity) != FactionInfo::find(it.second))
+            if (&Faction::getInfo(ship) != FactionInfo::find(it.second))
                 return false;
         }
         else if (it.first == "callsign")
         {
-            if (ship->getCallSign().lower() != it.second.lower())
+            auto cs = ship.getComponent<CallSign>();
+            if (!cs || cs->callsign.lower() != it.second.lower())
                 return false;
         }
         else if (it.first == "type")
         {
-            if (ship->getTypeName().lower() != it.second.lower())
+            auto tn = ship.getComponent<TypeName>();
+            if (!tn || tn->type_name.lower() != it.second.lower())
                 return false;
         }
         else
@@ -177,7 +179,7 @@ bool AutoConnectScreen::isValidShip(int index)
 
 void AutoConnectScreen::connectToShip(int index)
 {
-    P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(index);
+    auto ship = gameGlobalInfo->getPlayerShip(index);
 
     if (crew_position != max_crew_positions)    //If we are not the main screen, setup the right crew position.
     {
@@ -186,5 +188,5 @@ void AutoConnectScreen::connectToShip(int index)
     } else {
         my_player_info->commandSetMainScreen(0, true);
     }
-    my_player_info->commandSetShipId(ship->getMultiplayerId());
+    my_player_info->commandSetShip(ship);
 }

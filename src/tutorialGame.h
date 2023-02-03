@@ -31,7 +31,7 @@ public:
 
     virtual void update(float delta) override;
 
-    void setPlayerShip(P<PlayerSpaceship> ship);
+    void setPlayerShip(sp::ecs::Entity ship);
 
     void showMessage(string message, bool show_next);
     void switchViewToMainScreen();

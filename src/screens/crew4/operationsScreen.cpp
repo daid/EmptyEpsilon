@@ -5,6 +5,8 @@
 
 #include "gui/gui2_keyvaluedisplay.h"
 
+#include "components/scanning.h"
+
 #include "screens/crew6/scienceScreen.h"
 
 #include "screenComponents/radarView.h"
@@ -22,19 +24,22 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     science->science_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { // Down
             // If not our ship, or if we're scanning, ignore clicks.
-            if (!my_spaceship || my_spaceship->scanning_delay > 0.0f)
+            auto science_scanner = my_spaceship.getComponent<ScienceScanner>();
+            if (science_scanner && science_scanner->delay > 0.0f)
                 return;
 
             // If we're in target selection mode, there's a waypoint, and this
             // is our ship...
             if (mode == TargetSelection && science->targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                // ... and we select something near a waypoint, switch to move
-                // waypoint mode.
-                if (glm::length(my_spaceship->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0f)
-                {
-                    mode = MoveWaypoint;
-                    drag_waypoint_index = science->targets.getWaypointIndex();
+                if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+                    // ... and we select something near a waypoint, switch to move
+                    // waypoint mode.
+                    if (glm::length(lrr->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0f)
+                    {
+                        mode = MoveWaypoint;
+                        drag_waypoint_index = science->targets.getWaypointIndex();
+                    }
                 }
             }
             mouse_down_position = position;
@@ -42,7 +47,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
         [this](glm::vec2 position) { // Drag
             // If we're dragging a waypoint, move it.
             if (mode == MoveWaypoint && my_spaceship)
-                my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
+                PlayerSpaceship::commandMoveWaypoint(drag_waypoint_index, position);
         },
         [this](glm::vec2 position) { // Up
             switch(mode)
@@ -52,7 +57,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
-                    my_spaceship->commandAddWaypoint(position);
+                    PlayerSpaceship::commandAddWaypoint(position);
                 mode = TargetSelection;
                 break;
             case MoveWaypoint:
@@ -75,7 +80,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
         {
-            my_spaceship->commandRemoveWaypoint(science->targets.getWaypointIndex());
+            PlayerSpaceship::commandRemoveWaypoint(science->targets.getWaypointIndex());
         }
     });
     delete_waypoint_button->setPosition(-270, -120, sp::Alignment::BottomRight)->setSize(200, 50);
@@ -103,7 +108,7 @@ void OperationScreen::onDraw(sp::RenderTarget& target)
         return;
     if (science->radar_view->isVisible())
     {
-        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0))->show();
+        info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0))->show();
 
         // Update mission clock
         info_clock->setValue(gameGlobalInfo->getMissionTime())->show();

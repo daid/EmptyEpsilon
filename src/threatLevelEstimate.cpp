@@ -1,9 +1,9 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
-#include "spaceObjects/spaceship.h"
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/missiles/missileWeapon.h"
 #include "components/hull.h"
+#include "components/collision.h"
 #include "components/shields.h"
 #include "systems/collision.h"
 
@@ -44,58 +44,62 @@ void ThreatLevelEstimate::update(float delta)
     }
 }
 
-float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
+float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
 {
     if (!ship)
         return 0.0;
 
     float threat = 0.0;
-    if (ship->getShieldsActive())
-        threat += 200;
 
-    auto hull = ship->entity.getComponent<Hull>();
+    auto hull = ship.getComponent<Hull>();
     if (hull)
         threat += hull->max - hull->current;
-    auto shields = ship->entity.getComponent<Shields>();
-    if (shields)
+    auto shields = ship.getComponent<Shields>();
+    if (shields) {
+        if (shields->active)
+            threat += 200;
         for(int n=0; n<shields->count; n++)
             threat += shields->entry[n].max - shields->entry[n].level;
+    }
 
     float radius = 7000.0;
     
-    auto ship_position = ship->getPosition();
-    for(auto entity : sp::CollisionSystem::queryArea(ship_position - glm::vec2(radius, radius), ship_position + glm::vec2(radius, radius)))
-    {
-        auto ptr = entity.getComponent<SpaceObject*>();
-        if (!ptr) continue;
-        P<SpaceObject> obj = *ptr;
-        P<SpaceShip> other_ship = obj;
-        if (!other_ship || !ship->isEnemy(other_ship))
+    auto transform = ship.getComponent<sp::Transform>();
+    if (transform) {
+        auto ship_position = transform->getPosition();
+        for(auto entity : sp::CollisionSystem::queryArea(ship_position - glm::vec2(radius, radius), ship_position + glm::vec2(radius, radius)))
         {
-            if (P<MissileWeapon>(obj))
-                threat += 5000.0f;
-            if (P<BeamEffect>(obj))
-                threat += 5000.0f;
-            continue;
-        }
-
-        bool is_being_attacked = false;
-        hull = entity.getComponent<Hull>();
-        float score = 200.0f;
-        if (hull)
-            score += hull->max;
-        auto shields = entity.getComponent<Shields>();
-        if (shields) {
-            for(int n=0; n<shields->count; n++) {
-                score += shields->entry[n].max * 2.0f / float(shields->count);
-                if (shields->entry[n].hit_effect > 0.0f)
-                    is_being_attacked = true;
+            auto ptr = entity.getComponent<SpaceObject*>();
+            if (!ptr) continue;
+            P<SpaceObject> obj = *ptr;
+            P<SpaceShip> other_ship = obj;
+            if (!other_ship || Faction::getRelation(ship, entity) == FactionRelation::Enemy)
+            {
+                if (P<MissileWeapon>(obj))
+                    threat += 5000.0f;
+                if (P<BeamEffect>(obj))
+                    threat += 5000.0f;
+                continue;
             }
-        }
-        if (is_being_attacked)
-            score += 500.0f;
 
-        threat += score;
+            bool is_being_attacked = false;
+            hull = entity.getComponent<Hull>();
+            float score = 200.0f;
+            if (hull)
+                score += hull->max;
+            auto shields = entity.getComponent<Shields>();
+            if (shields) {
+                for(int n=0; n<shields->count; n++) {
+                    score += shields->entry[n].max * 2.0f / float(shields->count);
+                    if (shields->entry[n].hit_effect > 0.0f)
+                        is_being_attacked = true;
+                }
+            }
+            if (is_being_attacked)
+                score += 500.0f;
+
+            threat += score;
+        }
     }
 
     return threat;

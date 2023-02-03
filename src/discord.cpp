@@ -63,7 +63,11 @@ void DiscordRichPresence::update(float delta)
 
     if (my_spaceship && my_player_info)
     {
-        auto name = my_spaceship->getCallSign() + " [" + my_spaceship->getTypeName() + "]";
+        string name;
+        if (auto callsign = my_spaceship.getComponent<CallSign>())
+            name = callsign->callsign;
+        if (auto type_name = my_spaceship.getComponent<TypeName>())
+            name += " [" + type_name->type_name + "]";
         strncpy(activity.details, name.c_str(), sizeof(activity.details));
 
         for(int idx=0; idx<max_crew_positions; idx++)

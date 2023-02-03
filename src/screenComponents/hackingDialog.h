@@ -19,13 +19,13 @@ class GuiHackingDialog : public GuiOverlay
 public:
     GuiHackingDialog(GuiContainer* owner, string id);
 
-    void open(P<SpaceObject> target);
+    void open(sp::ecs::Entity target);
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     void onMiniGameComplete(bool success);
 
 private:
-    P<SpaceObject> target;
+    sp::ecs::Entity target;
     ShipSystem::Type target_system = ShipSystem::Type::None;
     float reset_time;
     static constexpr float auto_reset_time = 2.0f;

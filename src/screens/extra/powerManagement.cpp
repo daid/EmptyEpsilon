@@ -46,8 +46,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].power_bar->setDrawBackground(false)->setPosition(52.5, 60, sp::Alignment::TopLeft)->setSize(50, 320);
 
         systems[n].power_slider = new GuiSlider(box, "", 3.0, 0.0, 1.0, [n](float value) {
-            if (my_spaceship)
-                my_spaceship->commandSetSystemPowerRequest(ShipSystem::Type(n), value);
+            PlayerSpaceship::commandSetSystemPowerRequest(ShipSystem::Type(n), value);
         });
         systems[n].power_slider->addSnapValue(1.0, 0.1)->setPosition(50, 50, sp::Alignment::TopLeft)->setSize(55, 340);
 
@@ -55,8 +54,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
         systems[n].coolant_bar->setDrawBackground(false)->setPosition(132.5, 60, sp::Alignment::TopLeft)->setSize(50, 320);
 
         systems[n].coolant_slider = new GuiSlider(box, "", 10.0, 0.0, 0.0, [n](float value) {
-            if (my_spaceship)
-                my_spaceship->commandSetSystemCoolantRequest(ShipSystem::Type(n), value);
+            PlayerSpaceship::commandSetSystemCoolantRequest(ShipSystem::Type(n), value);
         });
         systems[n].coolant_slider->setPosition(130, 50, sp::Alignment::TopLeft)->setSize(55, 340);
 
@@ -78,8 +76,8 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     GuiOverlay::onDraw(renderer);
     if (my_spaceship)
     {
-        auto reactor = my_spaceship->entity.getComponent<Reactor>();
-        auto coolant = my_spaceship->entity.getComponent<Coolant>();
+        auto reactor = my_spaceship.getComponent<Reactor>();
+        auto coolant = my_spaceship.getComponent<Coolant>();
         if (reactor) {
             //Update the energy usage.
             if (previous_energy_measurement == 0.0f)
@@ -106,7 +104,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
         for(int n=0; n<ShipSystem::COUNT; n++)
         {
-            auto sys = ShipSystem::get(my_spaceship->entity, ShipSystem::Type(n));
+            auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
             systems[n].box->setVisible(sys);
             if (sys) {
                 systems[n].power_slider->setValue(sys->power_request);
@@ -142,7 +140,7 @@ void PowerManagementScreen::onUpdate()
         if (keys.engineering_select_rear_shield_system.getDown()) selected_system = ShipSystem::Type::RearShield;
 
         // Don't act if the selected system doesn't exist.
-        if (!my_spaceship->hasSystem(selected_system))
+        if (!ShipSystem::get(my_spaceship, selected_system))
             return;
 
         // If we selected a system, check for the power/coolant modifier.
@@ -154,51 +152,51 @@ void PowerManagementScreen::onUpdate()
             if (keys.engineering_set_power_000.getDown())
             {
                 power_slider->setValue(0.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_030.getDown())
             {
                 power_slider->setValue(0.3f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_050.getDown())
             {
                 power_slider->setValue(0.5f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_100.getDown())
             {
                 power_slider->setValue(1.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_150.getDown())
             {
                 power_slider->setValue(1.5f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_200.getDown())
             {
                 power_slider->setValue(2.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_250.getDown())
             {
                 power_slider->setValue(2.5f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
             if (keys.engineering_set_power_300.getDown())
             {
                 power_slider->setValue(3.0f);
-                my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
             auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
             if (power_adjust != 0.0f)
             {
-                auto sys = ShipSystem::get(my_spaceship->entity, selected_system);
+                auto sys = ShipSystem::get(my_spaceship, selected_system);
                 if (sys) {
                     power_slider->setValue(sys->power_request + power_adjust);
-                    my_spaceship->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
+                    PlayerSpaceship::commandSetSystemPowerRequest(selected_system, power_slider->getValue());
                 }
             }
 
@@ -206,10 +204,10 @@ void PowerManagementScreen::onUpdate()
             auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
             if (coolant_adjust != 0.0f)
             {
-                auto sys = ShipSystem::get(my_spaceship->entity, selected_system);
+                auto sys = ShipSystem::get(my_spaceship, selected_system);
                 if (sys) {
                     coolant_slider->setValue(sys->coolant_request + coolant_adjust);
-                    my_spaceship->commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
+                    PlayerSpaceship::commandSetSystemCoolantRequest(selected_system, coolant_slider->getValue());
                 }
             }
         }

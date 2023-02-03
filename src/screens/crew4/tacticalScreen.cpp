@@ -7,6 +7,9 @@
 #include "components/reactor.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
+#include "components/collision.h"
+#include "components/shields.h"
+#include "components/target.h"
 
 #include "screenComponents/combatManeuver.h"
 #include "screenComponents/radarView.h"
@@ -51,17 +54,17 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         [this](sp::io::Pointer::Button button, glm::vec2 position) {
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
-                my_spaceship->commandSetTarget(targets.get());
-            else if (my_spaceship)
-                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
+                PlayerSpaceship::commandSetTarget(targets.get());
+            else if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
         [this](glm::vec2 position) {
-            if (my_spaceship)
-                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         },
         [this](glm::vec2 position) {
-            if (my_spaceship)
-                my_spaceship->commandTargetRotation(vec2ToAngle(position - my_spaceship->getPosition()));
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                PlayerSpaceship::commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
         }
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
@@ -119,31 +122,33 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        auto reactor = my_spaceship->entity.getComponent<Reactor>();
+        auto reactor = my_spaceship.getComponent<Reactor>();
         energy_display->setVisible(reactor);
         if (reactor)
             energy_display->setValue(string(int(reactor->energy)));
-        heading_display->setValue(string(my_spaceship->getHeading(), 1));
-        float velocity = glm::length(my_spaceship->getVelocity()) / 1000 * 60;
-        velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
-
-        warp_controls->setVisible(my_spaceship->entity.hasComponent<WarpDrive>());
-        jump_controls->setVisible(my_spaceship->entity.hasComponent<JumpDrive>());
-
-        string shields_value = string(my_spaceship->getShieldPercentage(0)) + "%";
-        if (my_spaceship->hasSystem(ShipSystem::Type::RearShield))
-        {
-            shields_value += " " + string(my_spaceship->getShieldPercentage(1)) + "%";
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            heading_display->setValue(string(transform->getRotation() - 270.0f, 1));
+        if (auto physics = my_spaceship.getComponent<sp::Physics>()) {
+            float velocity = glm::length(physics->getVelocity()) / 1000 * 60;
+            velocity_display->setValue(tr("{value} {unit}/min").format({{"value", string(velocity, 1)}, {"unit", DISTANCE_UNIT_1K}}));
         }
-        shields_display->setValue(shields_value);
-        if (my_spaceship->hasSystem(ShipSystem::Type::FrontShield) || my_spaceship->hasSystem(ShipSystem::Type::RearShield))
-        {
+
+        warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
+        jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
+
+        auto shields = my_spaceship.getComponent<Shields>();
+        if (shields) {
+            string shields_value = string(shields->entry[0].percentage()) + "%";
+            if (shields->count > 1)
+                shields_value += " " + string(shields->entry[1].percentage()) + "%";
+            shields_display->setValue(shields_value);
             shields_display->show();
         } else {
             shields_display->hide();
         }
 
-        targets.set(my_spaceship->getTarget());
+        auto target = my_spaceship.getComponent<Target>();
+        targets.set(target ? target->entity : sp::ecs::Entity{});
     }
     GuiOverlay::onDraw(renderer);
 }
@@ -155,72 +160,21 @@ void TacticalScreen::onUpdate()
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
         if (angle != 0.0f)
         {
-            my_spaceship->commandTargetRotation(my_spaceship->getRotation() + angle);
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                PlayerSpaceship::commandTargetRotation(transform->getRotation() + angle);
         }
 
         if (keys.weapons_enemy_next_target.getDown())
         {
-            bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj == my_spaceship)
-                    continue;
-                if (obj == targets.get())
-                {
-                    current_found = true;
-                    continue;
-                }
-                if (current_found && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->isEnemy(obj) && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
-                }
-            }
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj == targets.get())
-                {
-                    continue;
-                }
-                if (my_spaceship->isEnemy(obj) && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && my_spaceship->getScannedStateFor(obj) >= SS_FriendOrFoeIdentified && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
-                }
-            }
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
+            PlayerSpaceship::commandSetTarget(targets.get());
         }
         if (keys.weapons_next_target.getDown())
         {
-            bool current_found = false;
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj == targets.get())
-                {
-                    current_found = true;
-                    continue;
-                }
-                if (obj == my_spaceship)
-                    continue;
-                if (current_found && glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
-                }
-            }
-            foreach(SpaceObject, obj, space_object_list)
-            {
-                if (obj == targets.get() || obj == my_spaceship)
-                    continue;
-                if (glm::length(obj->getPosition() - my_spaceship->getPosition()) < my_spaceship->getShortRangeRadarRange() && obj->canBeTargetedBy(my_spaceship))
-                {
-                    targets.set(obj);
-                    my_spaceship->commandSetTarget(targets.get());
-                    return;
-                }
-            }
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            targets.setNext(lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
+            PlayerSpaceship::commandSetTarget(targets.get());
         }
 
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();

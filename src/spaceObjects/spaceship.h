@@ -49,7 +49,7 @@ public:
     /*!
      * Check if the ship can be targeted.
      */
-    virtual bool canBeTargetedBy(P<SpaceObject> other) override { return true; }
+    virtual bool canBeTargetedBy(sp::ecs::Entity other) override { return true; }
 
     /*!
      * didAnOffensiveAction is called whenever this ship does something offesive towards an other object
@@ -62,12 +62,9 @@ public:
     /// Function to use energy. Only player ships currently model energy use.
     bool useEnergy(float amount);
 
-    virtual bool canBeScannedBy(P<SpaceObject> other) override { return getScannedStateFor(other) != SS_FullScan; }
-    virtual int scanningComplexity(P<SpaceObject> other) override;
-    virtual int scanningChannelDepth(P<SpaceObject> other) override;
-    virtual void scannedBy(P<SpaceObject> other) override;
-    void setScanState(EScannedState scanned);
-    void setScanStateByFaction(string faction_name, EScannedState scanned);
+    virtual bool canBeScannedBy(sp::ecs::Entity other) override { return getScannedStateFor(other) != ScanState::State::FullScan; }
+    void setScanState(ScanState::State scanned);
+    void setScanStateByFaction(string faction_name, ScanState::State scanned);
 
     bool isFriendOrFoeIdentified();//[DEPRICATED]
     bool isFullyScanned();//[DEPRICATED]
@@ -76,8 +73,6 @@ public:
     bool isFriendOrFoeIdentifiedByFaction(sp::ecs::Entity faction_entity);
     bool isFullyScannedByFaction(sp::ecs::Entity faction_entity);
 
-    virtual bool canBeHackedBy(P<SpaceObject> other) override;
-    virtual std::vector<std::pair<ShipSystem::Type, float> > getHackingTargets() override;
     virtual void hackFinished(P<SpaceObject> source, ShipSystem::Type target) override;
 
     /*!
@@ -199,7 +194,6 @@ float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 string getMissileWeaponName(EMissileWeapons missile);
 string getLocaleMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);
-REGISTER_MULTIPLAYER_ENUM(EScannedState);
 
 string frequencyToString(int frequency);
 

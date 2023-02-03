@@ -4,6 +4,9 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "spaceObjects/scanProbe.h"
 #include "scriptInterface.h"
+#include "components/collision.h"
+#include "components/probe.h"
+#include "components/hacking.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
@@ -19,6 +22,15 @@
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
+//TODO: This function does not belong here.
+static bool canHack(sp::ecs::Entity entity)
+{
+    auto scanstate = entity.getComponent<ScanState>();
+    //TODO: Check if there are actually hackable systems.
+    if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
+        return true;
+    return Faction::getRelation(entity, my_spaceship) != FactionRelation::Friendly;
+}
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
@@ -30,12 +42,14 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { //down
-            if (mode == TargetSelection && targets.getWaypointIndex() > -1 && my_spaceship)
+            if (mode == TargetSelection && targets.getWaypointIndex() > -1)
             {
-                if (glm::length(my_spaceship->waypoints[targets.getWaypointIndex()] - position) < 1000.0f)
-                {
-                    mode = MoveWaypoint;
-                    drag_waypoint_index = targets.getWaypointIndex();
+                if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+                    if (glm::length(lrr->waypoints[targets.getWaypointIndex()] - position) < 1000.0f)
+                    {
+                        mode = MoveWaypoint;
+                        drag_waypoint_index = targets.getWaypointIndex();
+                    }
                 }
             }
             mouse_down_position = position;
@@ -44,7 +58,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             if (mode == TargetSelection)
                 radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
             if (mode == MoveWaypoint && my_spaceship)
-                my_spaceship->commandMoveWaypoint(drag_waypoint_index, position);
+                PlayerSpaceship::commandMoveWaypoint(drag_waypoint_index, position);
         },
         [this](glm::vec2 position) { //up
             switch(mode)
@@ -54,7 +68,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 break;
             case WaypointPlacement:
                 if (my_spaceship)
-                    my_spaceship->commandAddWaypoint(position);
+                    PlayerSpaceship::commandAddWaypoint(position);
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
@@ -64,7 +78,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 break;
             case LaunchProbe:
                 if (my_spaceship)
-                    my_spaceship->commandLaunchProbe(position);
+                    PlayerSpaceship::commandLaunchProbe(position);
                 mode = TargetSelection;
                 option_buttons->show();
                 break;
@@ -72,8 +86,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         }
     );
 
-    if (my_spaceship)
-        radar->setViewPosition(my_spaceship->getPosition());
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+        radar->setViewPosition(transform->getPosition());
 
     auto sidebar = new GuiElement(this, "SIDE_BAR");
     sidebar->setPosition(-20, 150, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
@@ -105,9 +119,8 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
-        P<SpaceObject> target = targets.get();
-        if (my_spaceship && target && target->canBeHackedBy(my_spaceship))
-        {
+        auto target = targets.get();
+        if (canHack(target)) {
             hacking_dialog->open(target);
         }
     });
@@ -117,14 +130,14 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to Science"), [this](bool value){
         if (value)
         {
-            my_spaceship->commandSetScienceLink(targets.get());
+            PlayerSpaceship::commandSetScienceLink(targets.get());
         }
         else
         {
-            my_spaceship->commandClearScienceLink();
+            PlayerSpaceship::commandClearScienceLink();
         }
     });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
+    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
@@ -135,7 +148,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
         {
-            my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
+            PlayerSpaceship::commandRemoveWaypoint(targets.getWaypointIndex());
         }
     });
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
@@ -145,7 +158,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         mode = LaunchProbe;
         option_buttons->hide();
     });
-    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship && my_spaceship->getCanLaunchProbe());
+    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation") + ":", "");
@@ -195,7 +208,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     {
         // Check each object to determine whether the target is still within
         // shared radar range of a friendly object.
-        P<SpaceObject> target = targets.get();
+        auto target = targets.get();
         bool near_friendly = false;
 
         // For each SpaceObject on the map...
@@ -209,12 +222,11 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             // This check is duplicated from GuiRadarView::drawObjects.
             P<ShipTemplateBasedObject> stb_obj = obj;
 
-            if (!stb_obj
-                || (!obj->isFriendly(my_spaceship) && obj != my_spaceship))
+            if (!stb_obj || (Faction::getRelation(my_spaceship, obj->entity) != FactionRelation::Friendly && obj->entity != my_spaceship))
             {
                 P<ScanProbe> sp = obj;
 
-                if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
+                if (!sp || sp->owner != my_spaceship)
                 {
                     continue;
                 }
@@ -226,10 +238,12 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
             // If the target is within the short-range radar range/5U of the
             // object, consider it near a friendly object.
-            if (glm::length2(obj->getPosition() - target->getPosition()) < r * r)
-            {
-                near_friendly = true;
-                break;
+            if (auto target_transform = target.getComponent<sp::Transform>()) {
+                if (glm::length2(obj->getPosition() - target_transform->getPosition()) < r * r)
+                {
+                    near_friendly = true;
+                    break;
+                }
             }
         }
 
@@ -244,7 +258,9 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
     if (targets.get())
     {
-        P<SpaceObject> obj = targets.get();
+        auto entity = targets.get();
+        auto obj_ptr = entity.getComponent<SpaceObject*>();
+        P<SpaceObject> obj = obj_ptr ? *obj_ptr : nullptr;
         P<SpaceShip> ship = obj;
         P<SpaceStation> station = obj;
         P<ScanProbe> probe = obj;
@@ -254,7 +270,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         auto faction = Faction::getInfo(obj->entity);
         if (ship)
         {
-            if (ship->getScannedStateFor(my_spaceship) >= SS_SimpleScan)
+            if (ship->getScannedStateFor(my_spaceship) >= ScanState::State::SimpleScan)
             {
                 info_faction->setValue(faction.locale_name);
             }
@@ -262,9 +278,11 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             info_faction->setValue(faction.locale_name);
         }
 
-        if (probe && my_spaceship && probe->owner_id == my_spaceship->getMultiplayerId() && probe->canBeTargetedBy(my_spaceship))
+        if (probe && my_spaceship && probe->owner == my_spaceship && probe->canBeTargetedBy(my_spaceship))
         {
-            link_to_science_button->setValue(my_spaceship->linked_science_probe_id == probe->getMultiplayerId());
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            if (lrr)
+                link_to_science_button->setValue(lrr->linked_probe == probe->entity);
             link_to_science_button->enable();
         }
         else
@@ -272,7 +290,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
-        if (my_spaceship && obj->canBeHackedBy(my_spaceship))
+        if (canHack(obj->entity))
         {
             hack_target_button->enable();
         }else{
@@ -287,16 +305,17 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         // Toggle ship capabilities.
-        launch_probe_button->setVisible(my_spaceship->getCanLaunchProbe());
-        link_to_science_button->setVisible(my_spaceship->getCanLaunchProbe());
-        hack_target_button->setVisible(my_spaceship->getCanHack());
+        launch_probe_button->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
+        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
+        hack_target_button->setVisible(my_spaceship.hasComponent<HackingDevice>());
 
-        info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
+        info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0));
 
         // Update mission clock
         info_clock->setValue(gameGlobalInfo->getMissionTime());
 
-        launch_probe_button->setText(tr("Launch Probe") + " (" + string(my_spaceship->scan_probe_stock) + ")");
+        if (auto spl = my_spaceship.getComponent<ScanProbeLauncher>())
+            launch_probe_button->setText(tr("Launch Probe") + " (" + string(spl->stock) + ")");
     }
 
     if (targets.getWaypointIndex() >= 0)

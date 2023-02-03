@@ -16,7 +16,7 @@ private:
     // Whether the probe has arrived to the target_position.
     bool has_arrived;
 public:
-    int owner_id;
+    sp::ecs::Entity owner;
 
     ScriptSimpleCallback on_arrival;
     ScriptSimpleCallback on_expiration;
@@ -30,15 +30,15 @@ public:
     float getLifetime();
 
     virtual void update(float delta) override;
-    virtual bool canBeTargetedBy(P<SpaceObject> other) override;
+    virtual bool canBeTargetedBy(sp::ecs::Entity other) override;
     virtual void drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
     virtual void drawOnGMRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range) override;
 
     bool hasArrived() { return has_arrived; }
     void setTarget(glm::vec2 target) { target_position = target; }
     glm::vec2 getTarget() { return target_position; }
-    P<SpaceObject> getOwner() { return game_server ? game_server->getObjectById(owner_id) : nullptr; }
-    void setOwner(P<SpaceObject> owner);
+    P<SpaceObject> getOwner() { return nullptr; } //TODO
+    void setOwner(sp::ecs::Entity owner);
 
     void onArrival(ScriptSimpleCallback callback);
     void onExpiration(ScriptSimpleCallback callback);

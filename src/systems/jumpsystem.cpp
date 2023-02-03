@@ -16,7 +16,7 @@ void JumpSystem::update(float delta)
     {
         if (jump.delay > 0.0f)
         {
-            if (WarpJammer::isWarpJammed(position.getPosition()))
+            if (WarpJammer::isWarpJammed(entity))
                 jump.delay = 0.0f;
         }
         if (jump.just_jumped > 0.0f)

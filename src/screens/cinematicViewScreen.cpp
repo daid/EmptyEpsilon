@@ -5,6 +5,7 @@
 #include "main.h"
 #include "multiplayer_client.h"
 #include "components/collision.h"
+#include "components/target.h"
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
@@ -32,7 +33,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer, int32_t play
 
     // Let the screen operator select a player ship to lock the camera onto.
     camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (ship)
             target = ship;
     });
@@ -180,11 +181,17 @@ void CinematicViewScreen::update(float delta)
     // TODO: Allow any ship or station to be the camera target.
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        auto ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
-            if (camera_lock_selector->indexByValue(string(n)) == -1)
-                camera_lock_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+            if (camera_lock_selector->indexByValue(string(n)) == -1) {
+                string label;
+                if (auto tn = ship.getComponent<TypeName>())
+                    label = tn->type_name;
+                if (auto cs = ship.getComponent<CallSign>())
+                    label += " " + cs->callsign;
+                camera_lock_selector->addEntry(label, string(n));
+            }
         }else{
             if (camera_lock_selector->indexByValue(string(n)) != -1)
                 camera_lock_selector->removeEntry(camera_lock_selector->indexByValue(string(n)));
@@ -218,8 +225,10 @@ void CinematicViewScreen::update(float delta)
             camera_lock_cycle_toggle->show();
         }
 
+        auto transform = target.getComponent<sp::Transform>();
         // Get the selected ship's current position.
-        target_position_2D = target->getPosition();
+        if (transform)
+            target_position_2D = transform->getPosition();
         // Copy the selected ship's position into a Vector3 for camera angle
         // calculations.
         target_position_3D.x = target_position_2D.x;
@@ -239,27 +248,29 @@ void CinematicViewScreen::update(float delta)
         distance_3D = glm::length(diff_3D);
 
         // Get the ship's current heading and velocity.
-        target_rotation = target->getRotation();
+        if (transform)
+            target_rotation = transform->getRotation();
         // float target_velocity = glm::length(target->getVelocity());
 
         // We want the camera to always be less than 1U from the selected ship.
-        auto physics = target->entity.getComponent<sp::Physics>();
+        auto physics = target.getComponent<sp::Physics>();
         auto radius = 300.0f;
         if (physics)
             radius = physics->getSize().x;
-        max_camera_distance = 1000.0f + radius + glm::length(target->getVelocity());
+        max_camera_distance = 1000.0f + radius + glm::length(physics->getVelocity());
         min_camera_distance = radius * 2.0f;
 
         // Check if our selected ship has a weapons target.
-        target_of_target = target->getTarget();
-        if (target_of_target && glm::length(target_of_target->getPosition() - target_position_2D) > 10000.0f)
-            target_of_target = nullptr;
+        auto target_of_target = target.getComponent<Target>() ? target.getComponent<Target>()->entity : sp::ecs::Entity{};
+        auto target_of_target_transform = target_of_target.getComponent<sp::Transform>();
+        if (target_of_target && glm::length(target_of_target_transform->getPosition() - target_position_2D) > 10000.0f)
+            target_of_target_transform = nullptr;
 
         // If it does, lock the camera onto that target.
-        if (camera_lock_tot_toggle->getValue() && target_of_target)
+        if (camera_lock_tot_toggle->getValue() && target_of_target_transform)
         {
             // Get the position of the selected ship's target.
-            tot_position_2D = target_of_target->getPosition();
+            tot_position_2D = target_of_target_transform->getPosition();
             // Convert it to a 3D vector.
             tot_position_3D.x = tot_position_2D.x;
             tot_position_3D.y = tot_position_3D.y;

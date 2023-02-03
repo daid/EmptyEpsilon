@@ -12,6 +12,7 @@
 #include "spaceObjects/wormHole.h"
 #include "spaceObjects/zone.h"
 #include "components/faction.h"
+#include "components/collision.h"
 #include "systems/collision.h"
 #include "ecs/query.h"
 
@@ -54,9 +55,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for(P<SpaceObject> obj : targets.getTargets())
+        for(auto obj : targets.getTargets())
         {
-            obj->setFaction(value);
+            obj.getOrAddComponent<Faction>().entity = Faction::find(value);
         }
     });
     for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
@@ -69,10 +70,11 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     global_message_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(250, 50);
 
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
-        P<SpaceObject> ship = gameGlobalInfo->getPlayerShip(value.toInt());
+        auto ship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (ship)
             target = ship;
-        main_radar->setViewPosition(ship->getPosition());
+        if (auto transform = target.getComponent<sp::Transform>())
+            main_radar->setViewPosition(transform->getPosition());
         targets.set(ship);
     });
     player_ship_selector->setPosition(270, -20, sp::Alignment::BottomLeft)->setSize(350, 50);
@@ -98,8 +100,11 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     cancel_action_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", tr("button", "Tweak"), [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
+        for(auto entity : targets.getTargets())
         {
+            auto obj_ptr = entity.getComponent<SpaceObject*>();
+            if (!obj_ptr) continue;
+            P<SpaceObject> obj = *obj_ptr;
             if (P<PlayerSpaceship>(obj))
             {
                 player_tweak_dialog->open(obj);
@@ -132,12 +137,13 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     tweak_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", tr("button", "Hail ship"), [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
+        for(auto obj : targets.getTargets())
         {
-            if (P<PlayerSpaceship>(obj))
+            if (obj.hasComponent<CommsTransmitter>())
             {
                 int idx = gameGlobalInfo->findPlayerShip(obj);
-                chat_dialog_per_ship[idx]->show()->setPosition(main_radar->worldToScreen(obj->getPosition()))->setSize(300, 300);
+                if (auto transform = obj.getComponent<sp::Transform>())
+                    chat_dialog_per_ship[idx]->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
             }
         }
     });
@@ -170,24 +176,32 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
+        for(auto obj : targets.getTargets()) {
+            auto obj_ptr = obj.getComponent<SpaceObject*>();
+            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderDefendLocation(P<SpaceObject>(*obj_ptr)->getPosition());
+        }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_STAND_GROUND", tr("Stand ground"), [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderStandGround();
+        for(auto obj : targets.getTargets()) {
+            auto obj_ptr = obj.getComponent<SpaceObject*>();
+            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderStandGround();
+        }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_ROAMING", tr("Roaming"), [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderRoaming();
+        for(auto obj : targets.getTargets()) {
+            auto obj_ptr = obj.getComponent<SpaceObject*>();
+            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderRoaming();
+        }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiButton(order_layout, "ORDER_IDLE", tr("Idle"), [this]() {
-        for(P<SpaceObject> obj : targets.getTargets())
-            if (P<CpuShip>(obj))
-                P<CpuShip>(obj)->orderIdle();
+        for(auto obj : targets.getTargets()) {
+            auto obj_ptr = obj.getComponent<SpaceObject*>();
+            if (obj_ptr && P<CpuShip>(P<SpaceObject>(*obj_ptr)))
+                P<CpuShip>(P<SpaceObject>(*obj_ptr))->orderIdle();
+        }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders:"), 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
 
@@ -256,11 +270,8 @@ void GameMasterScreen::update(float delta)
 
     if (keys.gm_delete.getDown())
     {
-        for(P<SpaceObject> obj : targets.getTargets())
-        {
-            if (obj)
-                obj->destroy();
-        }
+        for(auto obj : targets.getTargets())
+            obj.destroy();
     }
     if (keys.gm_clipboardcopy.getDown())
     {
@@ -290,21 +301,29 @@ void GameMasterScreen::update(float delta)
     // Add and remove entries from the player ship list.
     for(int n=0; n<GameGlobalInfo::max_player_ships; n++)
     {
-        P<PlayerSpaceship> ship = gameGlobalInfo->getPlayerShip(n);
+        auto ship = gameGlobalInfo->getPlayerShip(n);
         if (ship)
         {
+            string ship_name;
+            if (auto tn = ship.getComponent<TypeName>())
+                ship_name += " " + tn->type_name;
+            if (auto cs = ship.getComponent<CallSign>())
+                ship_name += " " + cs->callsign;
             if (player_ship_selector->indexByValue(string(n)) == -1)
             {
-                player_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+                player_ship_selector->addEntry(ship_name, string(n));
             } else {
-                player_ship_selector->setEntryName(player_ship_selector->indexByValue(string(n)),ship->getCallSign());
+                player_ship_selector->setEntryName(player_ship_selector->indexByValue(string(n)), ship_name);
             }
 
-            if (ship->isCommsBeingHailedByGM() || ship->isCommsChatOpenToGM())
+            auto transmitter = ship.getComponent<CommsTransmitter>();
+            if (transmitter && (transmitter->state == CommsTransmitter::State::BeingHailedByGM || transmitter->state == CommsTransmitter::State::ChannelOpenGM))
             {
                 if (!chat_dialog_per_ship[n]->isVisible())
                 {
-                    chat_dialog_per_ship[n]->show()->setPosition(main_radar->worldToScreen(ship->getPosition()))->setSize(300, 300);
+                    auto transform = ship.getComponent<sp::Transform>();
+                    if (transform)
+                        chat_dialog_per_ship[n]->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
                 }
             }
         }else{
@@ -314,13 +333,17 @@ void GameMasterScreen::update(float delta)
     }
 
     // Record object type.
-    for(P<SpaceObject> obj : targets.getTargets())
+    for(auto obj : targets.getTargets())
     {
-        has_object = true;
-        if (P<CpuShip>(obj))
-            has_cpu_ship = true;
-        else if (P<PlayerSpaceship>(obj))
-            has_player_ship = true;
+        auto obj_ptr = obj.getComponent<SpaceObject*>();
+        if (obj_ptr && *obj_ptr) {
+            P<SpaceObject> obj = *obj_ptr;
+            has_object = true;
+            if (P<CpuShip>(obj))
+                has_cpu_ship = true;
+            else if (P<PlayerSpaceship>(obj))
+                has_player_ship = true;
+        }
     }
 
     // Show player ship selector only if there are player ships.
@@ -338,8 +361,9 @@ void GameMasterScreen::update(float delta)
     std::unordered_map<string, string> selection_info;
 
     // For each selected object, determine and report their type.
-    for(P<SpaceObject> obj : targets.getTargets())
+    for(auto obj : targets.getTargets())
     {
+        /*TODO
         std::unordered_map<string, string> info = obj->getGMInfo();
         for(std::unordered_map<string, string>::iterator i = info.begin(); i != info.end(); i++)
         {
@@ -352,11 +376,12 @@ void GameMasterScreen::update(float delta)
                 selection_info[i->first] = tr("*mixed*");
             }
         }
+        */
     }
 
     if (targets.getTargets().size() == 1)
     {
-        selection_info[trMark("gm_info", "Position")] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
+        //TODO selection_info[trMark("gm_info", "Position")] = string(targets.getTargets()[0]->getPosition().x, 0) + "," + string(targets.getTargets()[0]->getPosition().y, 0);
     }
 
     unsigned int cnt = 0;
@@ -435,10 +460,11 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
 
-            for(P<SpaceObject> obj : targets.getTargets())
+            for(auto obj : targets.getTargets())
             {
-                if (glm::length(obj->getPosition() - position) < min_drag_distance)
-                    click_and_drag_state = CD_DragObjects;
+                if (auto transform = obj.getComponent<sp::Transform>())
+                    if (glm::length(transform->getPosition() - position) < min_drag_distance)
+                        click_and_drag_state = CD_DragObjects;
             }
         }
     }
@@ -457,9 +483,10 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
         position -= (position - drag_previous_position);
         break;
     case CD_DragObjects:
-        for(P<SpaceObject> obj : targets.getTargets())
+        for(auto obj : targets.getTargets())
         {
-            obj->setPosition(obj->getPosition() + (position - drag_previous_position));
+            if (auto transform = obj.getComponent<sp::Transform>())
+                transform->setPosition(transform->getPosition() + (position - drag_previous_position));
         }
         break;
     case CD_BoxSelect:
@@ -502,28 +529,32 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 
             glm::vec2 upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
             glm::vec2 lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
-            for(P<SpaceObject> obj : targets.getTargets())
+            for(auto obj : targets.getTargets())
             {
-                P<CpuShip> cpu_ship = obj;
+                auto obj_ptr = obj.getComponent<SpaceObject*>();
+                if (!obj_ptr) continue;
+                P<CpuShip> cpu_ship = P<SpaceObject>(*obj_ptr);
                 if (!cpu_ship)
                     continue;
 
-                lower_bound.x = std::min(lower_bound.x, obj->getPosition().x);
-                lower_bound.y = std::min(lower_bound.y, obj->getPosition().y);
-                upper_bound.x = std::max(upper_bound.x, obj->getPosition().x);
-                upper_bound.y = std::max(upper_bound.y, obj->getPosition().y);
+                lower_bound.x = std::min(lower_bound.x, cpu_ship->getPosition().x);
+                lower_bound.y = std::min(lower_bound.y, cpu_ship->getPosition().y);
+                upper_bound.x = std::max(upper_bound.x, cpu_ship->getPosition().x);
+                upper_bound.y = std::max(upper_bound.y, cpu_ship->getPosition().y);
             }
             glm::vec2 objects_center = (upper_bound + lower_bound) / 2.0f;
 
-            for(P<SpaceObject> obj : targets.getTargets())
+            for(auto obj : targets.getTargets())
             {
-                P<CpuShip> cpu_ship = obj;
-                P<WormHole> wormhole = obj;
+                auto obj_ptr = obj.getComponent<SpaceObject*>();
+                if (!obj_ptr) continue;
+                P<CpuShip> cpu_ship = P<SpaceObject>(*obj_ptr);
+                P<WormHole> wormhole = P<SpaceObject>(*obj_ptr);
                 if (cpu_ship)
                 {
-                    if (target && target != obj && target->canBeTargetedBy(obj))
+                    if (target && target != cpu_ship && target->canBeTargetedBy(obj))
                     {
-                        if (obj->isEnemy(target))
+                        if (cpu_ship->isEnemy(target))
                         {
                             cpu_ship->orderAttack(target);
                         }else{
@@ -536,17 +567,15 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         }
                     }else{
                         if (shift_down)
-                            cpu_ship->orderFlyTowardsBlind(position + (obj->getPosition() - objects_center));
+                            cpu_ship->orderFlyTowardsBlind(position + (cpu_ship->getPosition() - objects_center));
                         else
-                            cpu_ship->orderFlyTowards(position + (obj->getPosition() - objects_center));
+                            cpu_ship->orderFlyTowards(position + (cpu_ship->getPosition() - objects_center));
                     }
                 }
                 else if (wormhole)
                 {
                     wormhole->setTargetPosition(position);
                 }
-
-
             }
         }
         break;
@@ -555,7 +584,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
-            PVector<SpaceObject> space_objects;
+            std::vector<sp::ecs::Entity> space_objects;
             for(auto entity : sp::CollisionSystem::queryArea(drag_start_position, position))
             {
                 auto ptr = entity.getComponent<SpaceObject*>();
@@ -567,14 +596,12 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                     continue;
                 if (alt_down && (!P<SpaceObject>(obj) || (P<SpaceObject>(obj))->getFaction() != faction_selector->getSelectionValue()))
                     continue;
-                space_objects.push_back(obj);
+                space_objects.push_back(entity);
             }
             if (shift_down)
             {
-                foreach(SpaceObject, s, space_objects)
-                {
-                    targets.add(s);
-                }
+                for(auto e : space_objects)
+                    targets.add(e);
             } else {
                 targets.set(space_objects);
             }
@@ -592,7 +619,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     box_selection_overlay->hide();
 }
 
-PVector<SpaceObject> GameMasterScreen::getSelection()
+std::vector<sp::ecs::Entity> GameMasterScreen::getSelection()
 {
     return targets.getTargets();
 }
@@ -600,17 +627,18 @@ PVector<SpaceObject> GameMasterScreen::getSelection()
 string GameMasterScreen::getScriptExport(bool selected_only)
 {
     string output;
-    PVector<SpaceObject> objs;
+    std::vector<sp::ecs::Entity> objs;
     if (selected_only)
     {
         objs = targets.getTargets();
     }else{
-        objs = space_object_list;
+        foreach(SpaceObject, obj, space_object_list)
+            objs.push_back(obj->entity);
     }
 
-    foreach(SpaceObject, obj, objs)
+    for(auto e : objs)
     {
-        string line = obj->getExportLine();
+        string line; //TODO = obj->getExportLine();
         if (line == "")
             continue;
         output += "    " + line + "\n";

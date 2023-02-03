@@ -23,7 +23,7 @@ void GuiSelfDestructIndicator::onDraw(sp::RenderTarget& target)
     box->hide();
     if (!my_spaceship)
         return;
-    auto self_destruct = my_spaceship->entity.getComponent<SelfDestruct>();
+    auto self_destruct = my_spaceship.getComponent<SelfDestruct>();
     if (!self_destruct || !self_destruct->active)
         return;
 

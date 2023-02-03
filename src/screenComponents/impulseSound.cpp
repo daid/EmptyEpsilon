@@ -14,7 +14,7 @@ ImpulseSound::ImpulseSound(bool enabled)
 
     // If defined, use this ship's impulse sound file.
     ImpulseEngine* engine;
-    if (my_spaceship && (engine = my_spaceship->entity.getComponent<ImpulseEngine>()))
+    if (my_spaceship && (engine = my_spaceship.getComponent<ImpulseEngine>()))
         impulse_sound_file = engine->sound;
     else
         impulse_sound_file = "sfx/engine.wav";
@@ -60,7 +60,7 @@ void ImpulseSound::update(float delta)
     if (impulse_sound_id > -1)
     {
         if (!my_spaceship) return;
-        auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
+        auto engine = my_spaceship.getComponent<ImpulseEngine>();
         // Get whether the ship's impulse engines are functional.
         float impulse_ability = std::max(0.0f, std::min(engine->getSystemEffectiveness(), engine->power_level));
 

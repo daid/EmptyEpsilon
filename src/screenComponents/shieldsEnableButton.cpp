@@ -16,9 +16,9 @@ GuiShieldsEnableButton::GuiShieldsEnableButton(GuiContainer* owner, string id)
 {
     button = new GuiToggleButton(this, id + "_BUTTON", "Shields: ON", [](bool value) {
         if (my_spaceship) {
-            auto shields = my_spaceship->entity.getComponent<Shields>();
+            auto shields = my_spaceship.getComponent<Shields>();
             if (shields)
-                my_spaceship->commandSetShields(!shields->active);
+                PlayerSpaceship::commandSetShields(!shields->active);
         }
     });
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -33,7 +33,7 @@ void GuiShieldsEnableButton::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        auto shields = my_spaceship->entity.getComponent<Shields>();
+        auto shields = my_spaceship.getComponent<Shields>();
         if (!shields) {
             button->hide();
             bar->hide();
@@ -64,13 +64,13 @@ void GuiShieldsEnableButton::onUpdate()
     if (my_spaceship && isVisible())
     {
         if (keys.weapons_toggle_shields.getDown()) {
-            auto shields = my_spaceship->entity.getComponent<Shields>();
+            auto shields = my_spaceship.getComponent<Shields>();
             if (shields)
-                my_spaceship->commandSetShields(!shields->active);
+                PlayerSpaceship::commandSetShields(!shields->active);
         }
         if (keys.weapons_enable_shields.getDown())
-            my_spaceship->commandSetShields(true);
+            PlayerSpaceship::commandSetShields(true);
         if (keys.weapons_disable_shields.getDown())
-            my_spaceship->commandSetShields(false);
+            PlayerSpaceship::commandSetShields(false);
     }
 }

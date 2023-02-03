@@ -15,8 +15,8 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
-    auto reactor = my_spaceship->entity.getComponent<Reactor>();
-    auto sys = ShipSystem::get(my_spaceship->entity, system);
+    auto reactor = my_spaceship.getComponent<Reactor>();
+    auto sys = ShipSystem::get(my_spaceship, system);
     if (!sys)
         return;
 
@@ -29,7 +29,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     float hacked_level = sys->hacked_level;
     if (system == ShipSystem::Type::FrontShield)
     {
-        auto rear = ShipSystem::get(my_spaceship->entity, ShipSystem::Type::RearShield);
+        auto rear = ShipSystem::get(my_spaceship, ShipSystem::Type::RearShield);
         if (rear) {
             power = std::max(power, rear->power_level);
             health = std::max(health, rear->health);
@@ -41,7 +41,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         color = colorConfig.overlay_damaged;
         display_text = tr("systems", "DAMAGED");
-    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpJammer::isWarpJammed(my_spaceship))
     {
         color = colorConfig.overlay_jammed;
         display_text = tr("systems", "JAMMED");
@@ -121,7 +121,7 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
-    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpJammer::isWarpJammed(my_spaceship))
     {
         drawIcon(renderer, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }

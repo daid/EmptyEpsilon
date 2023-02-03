@@ -36,6 +36,7 @@ public:
     float heat_level = 0.0f; //0.0-1.0, system will damage at 1.0
     float coolant_level = 0.0f; //0.0-10.0
     float coolant_request = 0.0f;
+    bool can_be_hacked = true;
     float hacked_level = 0.0f; //0.0-1.0
     float power_factor = 1.0f;
     float coolant_change_rate_per_second = default_coolant_rate_per_second;

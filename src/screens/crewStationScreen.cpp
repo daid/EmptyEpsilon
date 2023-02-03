@@ -7,6 +7,8 @@
 #include "multiplayer_client.h"
 #include "soundManager.h"
 
+#include "components/customshipfunction.h"
+
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/noiseOverlay.h"
 #include "screenComponents/shipDestroyedPopup.h"
@@ -52,13 +54,13 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     message_text = new GuiScrollText(message_frame, "", "");
     message_text->setTextSize(20)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(900 - 40, 200 - 40);
     message_close_button = new GuiButton(message_frame, "", tr("button", "Close"), [this]() {
-        if (my_spaceship)
+        if (auto csf = my_spaceship.getComponent<CustomShipFunctions>())
         {
-            for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+            for(auto& f : csf->functions)
             {
-                if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
+                if (f.crew_position == current_position && f.type == CustomShipFunctions::Function::Type::Message)
                 {
-                    my_spaceship->commandCustomFunction(csf.name);
+                    PlayerSpaceship::commandCustomFunction(f.name);
                     break;
                 }
             }
@@ -205,21 +207,22 @@ void CrewStationScreen::update(float delta)
     }
     
 
-    if (my_spaceship)
+    message_frame->hide();
+    if (auto csf = my_spaceship.getComponent<CustomShipFunctions>())
     {
         // Show custom ship function messages.
-        message_frame->hide();
-
-        for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
+        for(auto& f : csf->functions)
         {
-            if (csf.crew_position == current_position && csf.type == PlayerSpaceship::CustomShipFunction::Type::Message)
+            if (f.crew_position == current_position && f.type == CustomShipFunctions::Function::Type::Message)
             {
                 message_frame->show();
-                message_text->setText(csf.caption);
+                message_text->setText(f.caption);
                 break;
             }
         }
+    }
 
+    if (my_spaceship) {
         // Update the impulse engine sound.
         impulse_sound->update(delta);
     } else {

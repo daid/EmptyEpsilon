@@ -28,7 +28,7 @@ public:
     ERepairCrewAction action;
     ERepairCrewDirection direction;
     float action_delay;
-    int32_t ship_id;
+    sp::ecs::Entity ship;
 
     bool selected; //TODO: This should not be tracked here but in the GUI.
 
@@ -42,6 +42,6 @@ public:
 private:
     bool isTargetPositionTaken(glm::ivec2 position);
 };
-PVector<RepairCrew> getRepairCrewFor(P<PlayerSpaceship> ship);
+PVector<RepairCrew> getRepairCrewFor(sp::ecs::Entity ship);
 
 #endif//REPAIR_CREW_H

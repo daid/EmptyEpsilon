@@ -6,7 +6,7 @@
 class TargetsContainer
 {
 private:
-    PVector<SpaceObject> entries;
+    std::vector<sp::ecs::Entity> entries;
     bool allow_waypoint_selection;
     int waypoint_selection_index;
     glm::vec2 waypoint_selection_position{};
@@ -22,15 +22,17 @@ public:
     void setAllowWaypointSelection() { allow_waypoint_selection = true; }
 
     void clear();
-    void add(P<SpaceObject> obj);
-    void set(P<SpaceObject> obj);
-    void set(PVector<SpaceObject> objs);
-    PVector<SpaceObject> getTargets() { entries.update(); return entries; }
-    P<SpaceObject> get() { entries.update(); if (entries.size() > 0) return entries[0]; return nullptr; }
+    void add(sp::ecs::Entity obj);
+    void set(sp::ecs::Entity obj);
+    void set(const std::vector<sp::ecs::Entity>& objs);
+    std::vector<sp::ecs::Entity> getTargets();
+    sp::ecs::Entity get();
     int getWaypointIndex();
     void setWaypointIndex(int index);
 
     void setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type);
+    void setNext(float max_range, ESelectionType selection_type);
+    void setNext(float max_range, ESelectionType selection_type, FactionRelation relation);
 };
 
 #endif//TARGETS_CONTAINER_H

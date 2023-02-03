@@ -13,7 +13,7 @@ void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
 {
     if (!my_spaceship)
         return;
-    auto pc = my_spaceship->entity.getComponent<PlayerControl>();
+    auto pc = my_spaceship.getComponent<PlayerControl>();
     if (!pc)
         return;
 

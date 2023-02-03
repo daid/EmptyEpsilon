@@ -190,15 +190,9 @@ ShipTemplateBasedObject::ShipTemplateBasedObject(float collision_range, string m
 {
     entity.getOrAddComponent<sp::Physics>().setCircle(sp::Physics::Type::Dynamic, collision_range);
 
-    long_range_radar_range = 30000.0f;
-    short_range_radar_range = 5000.0f;
-
     registerMemberReplication(&template_name);
-    registerMemberReplication(&type_name);
-    registerMemberReplication(&long_range_radar_range, 0.5);
-    registerMemberReplication(&short_range_radar_range, 0.5);
 
-    callsign = "[" + string(getMultiplayerId()) + "]";
+    setCallSign("[" + string(getMultiplayerId()) + "]");
 }
 
 void ShipTemplateBasedObject::draw3DTransparent()
@@ -251,8 +245,8 @@ void ShipTemplateBasedObject::update(float delta)
 std::unordered_map<string, string> ShipTemplateBasedObject::getGMInfo()
 {
     std::unordered_map<string, string> ret;
-    ret[trMark("gm_info", "CallSign")] = callsign;
-    ret[trMark("gm_info", "Type")] = type_name;
+    //ret[trMark("gm_info", "CallSign")] = callsign;
+    //ret[trMark("gm_info", "Type")] = type_name;
     //ret[trMark("gm_info", "Hull")] = string(hull_strength) + "/" + string(hull_max);
     //for(int n=0; n<shield_count; n++) {
         // Note, translators: this is a compromise.
@@ -280,13 +274,14 @@ void ShipTemplateBasedObject::setTemplate(string template_name)
     P<ShipTemplate> new_ship_template = ShipTemplate::getTemplate(template_name);
     this->template_name = template_name;
     ship_template = new_ship_template;
-    type_name = template_name;
-
-    // Set the ship's radar ranges.
-    long_range_radar_range = ship_template->long_range_radar_range;
-    short_range_radar_range = ship_template->short_range_radar_range;
+    setTypeName(template_name);
 
     if (entity) {
+        auto& lrr = entity.getOrAddComponent<LongRangeRadar>();
+        // Set the ship's radar ranges.
+        lrr.long_range = ship_template->long_range_radar_range;
+        lrr.short_range = ship_template->short_range_radar_range;
+
         auto& hull = entity.getOrAddComponent<Hull>();
         hull.current = hull.max = ship_template->hull;
 

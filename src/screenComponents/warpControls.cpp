@@ -18,7 +18,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 
         // Send a warp request command to our ship.
         if (my_spaceship)
-            my_spaceship->commandWarp(warp_level);
+            PlayerSpaceship::commandWarp(warp_level);
 
         // Set the slider value to the warp level.
         slider->setValue(warp_level);
@@ -34,7 +34,7 @@ GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 
     if (my_spaceship)
     {
-        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        auto warp = my_spaceship.getComponent<WarpDrive>();
         // Set the slider's value to the current warp request.
         if (warp)
             slider->setValue(warp->request);
@@ -52,7 +52,7 @@ void GuiWarpControls::onDraw(sp::RenderTarget& target)
 {
     // Update the label with the current warp factor.
     if (my_spaceship) {
-        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        auto warp = my_spaceship.getComponent<WarpDrive>();
         if (warp) {
             label->setValue(string(warp->current, 1));
             slider->setValue(warp->request);
@@ -65,45 +65,45 @@ void GuiWarpControls::onUpdate()
     // Handle hotkey input. Warp is a HELMS-category shortcut.
     if (my_spaceship && isVisible())
     {
-        auto warp = my_spaceship->entity.getComponent<WarpDrive>();
+        auto warp = my_spaceship.getComponent<WarpDrive>();
         if (!warp)
             return;
         if (keys.helms_warp0.getDown())
         {
-            my_spaceship->commandWarp(0);
+            PlayerSpaceship::commandWarp(0);
             slider->setValue(0);
         }
         if (keys.helms_warp1.getDown())
         {
-            my_spaceship->commandWarp(1);
+            PlayerSpaceship::commandWarp(1);
             slider->setValue(1);
         }
         if (keys.helms_warp2.getDown())
         {
-            my_spaceship->commandWarp(2);
+            PlayerSpaceship::commandWarp(2);
             slider->setValue(2);
         }
         if (keys.helms_warp3.getDown())
         {
-            my_spaceship->commandWarp(3);
+            PlayerSpaceship::commandWarp(3);
             slider->setValue(3);
         }
         if (keys.helms_warp4.getDown())
         {
-            my_spaceship->commandWarp(4);
+            PlayerSpaceship::commandWarp(4);
             slider->setValue(4);
         }
         if (keys.helms_increase_warp.getDown())
         {
             if (warp->request < 4) {
-                my_spaceship->commandWarp(warp->request+1);
+                PlayerSpaceship::commandWarp(warp->request+1);
                 slider->setValue(warp->request+1);
             }
         }
         else if (keys.helms_decrease_warp.getDown())
         {
             if (warp->request > 0) {
-                my_spaceship->commandWarp(warp->request-1);
+                PlayerSpaceship::commandWarp(warp->request-1);
                 slider->setValue(warp->request-1);
             }
         }

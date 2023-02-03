@@ -1,6 +1,7 @@
 #include "warpJammer.h"
 #include "playerInfo.h"
 #include "spaceObjects/playerSpaceship.h"
+#include "components/collision.h"
 #include "explosionEffect.h"
 #include "components/hull.h"
 #include "main.h"
@@ -70,25 +71,28 @@ WarpJammer::~WarpJammer()
 void WarpJammer::drawOnRadar(sp::RenderTarget& renderer, glm::vec2 position, float scale, float rotation, bool long_range)
 {
     glm::u8vec4 color(200, 150, 100, 255);
-    if (my_spaceship && my_spaceship->isEnemy(this))
+    if (my_spaceship && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy)
         color = glm::u8vec4(255, 0, 0, 255);
     renderer.drawSprite("radar/blip.png", position, 20, color);
 
     if (long_range)
     {
         color = glm::u8vec4(200, 150, 100, 64);
-        if (my_spaceship && my_spaceship->isEnemy(this))
+        if (my_spaceship && Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy)
             color = glm::u8vec4(255, 0, 0, 64);
         renderer.drawCircleOutline(position, range*scale, 2.0, color);
     }
 }
 
-bool WarpJammer::isWarpJammed(glm::vec2 position)
+bool WarpJammer::isWarpJammed(sp::ecs::Entity entity)
 {
-    foreach(WarpJammer, wj, jammer_list)
-    {
-        if (glm::length2(wj->getPosition() - position) < wj->range * wj->range)
-            return true;
+    if (auto transform = entity.getComponent<sp::Transform>()) {
+        auto position = transform->getPosition();
+        foreach(WarpJammer, wj, jammer_list)
+        {
+            if (glm::length2(wj->getPosition() - position) < wj->range * wj->range)
+                return true;
+        }
     }
     return false;
 }

@@ -14,7 +14,7 @@ public:
 private:
     void click();
 
-    P<SpaceObject> findDockingTarget();
+    sp::ecs::Entity findDockingTarget();
 };
 
 #endif//DOCKING_BUTTON_H

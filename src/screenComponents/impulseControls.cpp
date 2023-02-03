@@ -12,7 +12,7 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
 {
     slider = new GuiSlider(this, id + "_SLIDER", 1.0, -1.0, 0.0, [](float value) {
         if (my_spaceship)
-            my_spaceship->commandImpulse(value);
+            PlayerSpaceship::commandImpulse(value);
     });
     slider->addSnapValue(0.0, 0.1)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(50, GuiElement::GuiSizeMax);
 
@@ -26,7 +26,7 @@ void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 {
     if (my_spaceship)
     {
-        auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
+        auto engine = my_spaceship.getComponent<ImpulseEngine>();
         if (engine) {
             label->setValue(string(int(engine->actual * 100)) + "%");
             slider->setValue(engine->request);
@@ -38,22 +38,22 @@ void GuiImpulseControls::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto engine = my_spaceship->entity.getComponent<ImpulseEngine>();
+        auto engine = my_spaceship.getComponent<ImpulseEngine>();
         if (engine) {
             float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
             if (change != 0.0f)
-                my_spaceship->commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
+                PlayerSpaceship::commandImpulse(std::min(1.0f, slider->getValue() + change * 0.1f));
             if (keys.helms_zero_impulse.getDown())
-                my_spaceship->commandImpulse(0.0f);
+                PlayerSpaceship::commandImpulse(0.0f);
             if (keys.helms_max_impulse.getDown())
-                my_spaceship->commandImpulse(1.0f);
+                PlayerSpaceship::commandImpulse(1.0f);
             if (keys.helms_min_impulse.getDown())
-                my_spaceship->commandImpulse(-1.0f);
+                PlayerSpaceship::commandImpulse(-1.0f);
             
             float set_value = keys.helms_set_impulse.getValue();
             if (set_value != engine->request && (set_value != 0.0f || set_active))
             {
-                my_spaceship->commandImpulse(set_value);
+                PlayerSpaceship::commandImpulse(set_value);
                 set_active = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }

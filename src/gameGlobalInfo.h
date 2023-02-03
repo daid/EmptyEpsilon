@@ -44,7 +44,7 @@ public:
     static const int max_player_ships = 32;
 private:
     sp::ecs::Entity victory_faction;
-    int32_t playerShipId[max_player_ships];
+    sp::ecs::Entity playerShip[max_player_ships];
     int callsign_counter;
     /*!
      * \brief List of known scripts
@@ -84,11 +84,11 @@ public:
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
 
-    P<PlayerSpaceship> getPlayerShip(int index);
-    void setPlayerShip(int index, P<PlayerSpaceship> ship);
+    sp::ecs::Entity getPlayerShip(int index);
+    void setPlayerShip(int index, sp::ecs::Entity ship);
 
-    int findPlayerShip(P<PlayerSpaceship> ship);
-    int insertPlayerShip(P<PlayerSpaceship> ship);
+    int findPlayerShip(sp::ecs::Entity ship);
+    int insertPlayerShip(sp::ecs::Entity ship);
     /*!
      * \brief Set a faction to victorious.
      * \param string Name of the faction that won.

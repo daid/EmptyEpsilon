@@ -7,6 +7,7 @@
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
+#include "components/target.h"
 #include "systems/missilesystem.h"
 #include "main.h"
 #include "gameGlobalInfo.h"
@@ -94,22 +95,20 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
     //Hacky, when not relay and we have a ship, center on it.
-    if (my_spaceship && auto_center_on_my_ship) {
-        view_position = my_spaceship->getPosition();
-    }
-    if (my_spaceship && auto_rotate_on_my_ship) {
-        view_rotation = my_spaceship->getRotation() + 90;
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (transform) {
+        if (auto_center_on_my_ship) {
+            view_position = transform->getPosition();
+        }
+        if (auto_rotate_on_my_ship) {
+            view_rotation = transform->getRotation() + 90;
+        }
     }
     if (auto_distance)
     {
         distance = long_range ? 30000.0f : 5000.0f;
-        if (my_spaceship)
-        {
-            if (long_range)
-                distance = my_spaceship->getLongRangeRadarRange();
-            else
-                distance = my_spaceship->getShortRangeRadarRange();
-        }
+        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
+            distance = long_range ? lrr->long_range : lrr->short_range;
     }
 
     // Make sure all the drawing up till now is no longer queued and passed to the GPU.
@@ -227,9 +226,9 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         drawHeadingIndicators(renderer);
     drawTargets(renderer);
 
-    if (style == Rectangular && my_spaceship)
+    if (style == Rectangular && transform)
     {
-        auto ship_offset = (my_spaceship->getPosition() - view_position) / distance * std::min(rect.size.x, rect.size.y) / 2.0f;
+        auto ship_offset = (transform->getPosition() - view_position) / distance * std::min(rect.size.x, rect.size.y) / 2.0f;
         if (ship_offset.x < -rect.size.x / 2.0f || ship_offset.x > rect.size.x / 2.0f || ship_offset.y < -rect.size.y / 2.0f || ship_offset.y > rect.size.y / 2.0f)
         {
             glm::vec2 position(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
@@ -292,7 +291,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
         {
             P<ShipTemplateBasedObject> stb_obj = obj;
 
-            if (stb_obj && (obj->isFriendly(my_spaceship) || obj == my_spaceship))
+            if (stb_obj && (Faction::getRelation(my_spaceship, obj->entity) == FactionRelation::Friendly || obj->entity == my_spaceship))
             {
                 auto r = stb_obj->getShortRangeRadarRange() * scale;
                 renderer.fillCircle(worldToScreen(obj->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
@@ -300,7 +299,7 @@ void GuiRadarView::drawNoneFriendlyBlockedAreas(sp::RenderTarget& renderer)
 
             P<ScanProbe> sp = obj;
 
-            if (sp && sp->owner_id == my_spaceship->getMultiplayerId())
+            if (sp && sp->owner == my_spaceship)
             {
                 auto r = 5000.f * scale;
                 renderer.fillCircle(worldToScreen(obj->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
@@ -365,9 +364,10 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
 {
-    if (!my_spaceship)
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (!transform)
         return;
-    auto scan_center = my_spaceship->getPosition();
+    auto scan_center = transform->getPosition();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
     PVector<Nebula> nebulas = Nebula::getNebulas();
@@ -404,11 +404,12 @@ void GuiRadarView::drawNebulaBlockedAreas(sp::RenderTarget& renderer)
     }
 
     // ship's short radar range is always visible.
+    if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
     {
         float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-        auto r = my_spaceship->getShortRangeRadarRange() * scale;
-        renderer.fillCircle(worldToScreen(my_spaceship->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
+        auto r = lrr->short_range * scale;
+        renderer.fillCircle(worldToScreen(transform->getPosition()), r, glm::u8vec4{ 20, 20, 20, background_alpha });
     }
 }
 
@@ -422,14 +423,15 @@ void GuiRadarView::drawGhostDots(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
 {
-    if (!my_spaceship)
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+    if (!lrr)
         return;
 
     glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
 
-    for(unsigned int n=0; n<my_spaceship->waypoints.size(); n++)
+    for(unsigned int n=0; n<lrr->waypoints.size(); n++)
     {
-        auto screen_position = worldToScreen(my_spaceship->waypoints[n]);
+        auto screen_position = worldToScreen(lrr->waypoints[n]);
 
         renderer.drawSprite("waypoint.png", screen_position - glm::vec2(0, 10), 20, colorConfig.ship_waypoint_background);
         renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
@@ -465,26 +467,27 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
     const float seconds_per_distance_tick = 5.0f;
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    if (my_spaceship && missile_tube_controls) {
-        auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (transform && missile_tube_controls) {
+        auto tubes = my_spaceship.getComponent<MissileTubes>();
         if (tubes) {
             for(int n=0; n<tubes->count; n++)
             {
                 if (tubes->mounts[n].state != MissileTubes::MountPoint::State::Loaded)
                     continue;
                 auto& mount = tubes->mounts[n];
-                auto fire_position = my_spaceship->getPosition() + rotateVec2(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+                auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
 
                 const MissileWeaponData& data = MissileWeaponData::getDataFor(mount.type_loaded);
-                float fire_angle = mount.direction + (my_spaceship->getRotation());
+                float fire_angle = mount.direction + (transform->getRotation());
                 float missile_target_angle = fire_angle;
                 if (data.turnrate > 0.0f)
                 {
                     if (missile_tube_controls->getManualAim())
                     {
                         missile_target_angle = missile_tube_controls->getMissileTargetAngle();
-                    }else if (my_spaceship->getTarget()) {
-                        float firing_solution = MissileSystem::calculateFiringSolution(my_spaceship->entity, mount, my_spaceship->getTarget()->entity);
+                    }else if (auto target = my_spaceship.getComponent<Target>()) {
+                        float firing_solution = MissileSystem::calculateFiringSolution(my_spaceship, mount, target->entity);
                         if (firing_solution != std::numeric_limits<float>::infinity())
                             missile_target_angle = firing_solution;
                     }
@@ -540,17 +543,21 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
 
     if (targets)
     {
-        for(P<SpaceObject> obj : targets->getTargets())
+        for(auto obj : targets->getTargets())
         {
-            if (glm::length2(obj->getVelocity()) < 1.0f)
+            auto physics = obj.getComponent<sp::Physics>();
+            if (!physics || glm::length2(physics->getVelocity()) < 1.0f)
+                continue;
+            auto transform = obj.getComponent<sp::Transform>();
+            if (!transform)
                 continue;
 
-            auto start = worldToScreen(obj->getPosition());
-            renderer.drawLine(start, worldToScreen(obj->getPosition() + obj->getVelocity() * 60.0f), glm::u8vec4(255, 255, 255, 128), glm::u8vec4(255, 255, 255, 0));
-            glm::vec2 n = glm::normalize(rotateVec2(glm::vec2(-obj->getVelocity().y, obj->getVelocity().x), -view_rotation)) * 10.0f;
+            auto start = worldToScreen(transform->getPosition());
+            renderer.drawLine(start, worldToScreen(transform->getPosition() + physics->getVelocity() * 60.0f), glm::u8vec4(255, 255, 255, 128), glm::u8vec4(255, 255, 255, 0));
+            glm::vec2 n = glm::normalize(rotateVec2(glm::vec2(-physics->getVelocity().y, physics->getVelocity().x), -view_rotation)) * 10.0f;
             for(int cnt=0; cnt<5; cnt++)
             {
-                auto p = rotateVec2(obj->getVelocity() * (seconds_per_distance_tick * (cnt + 1.0f) * scale), -view_rotation);
+                auto p = rotateVec2(physics->getVelocity() * (seconds_per_distance_tick * (cnt + 1.0f) * scale), -view_rotation);
                 renderer.drawLine(start + p + n, start + p - n, glm::u8vec4(255, 255, 255, 128 - cnt * 20));
             }
         }
@@ -561,15 +568,17 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
 {
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    if (!my_spaceship) return;
-    auto tubes = my_spaceship->entity.getComponent<MissileTubes>();
+    auto tubes = my_spaceship.getComponent<MissileTubes>();
     if (!tubes) return;
+    auto transform = my_spaceship.getComponent<sp::Transform>();
+    if (!transform) return;
     for(int n=0; n<tubes->count; n++)
     {
-        auto fire_position = my_spaceship->getPosition() + rotateVec2(my_spaceship->ship_template->model_data->getTubePosition2D(n), my_spaceship->getRotation());
+        auto& mount = tubes->mounts[n];
+        auto fire_position = transform->getPosition() + rotateVec2(glm::vec2(mount.position), transform->getRotation());
         auto fire_draw_position = worldToScreen(fire_position);
 
-        float fire_angle = my_spaceship->getRotation() + tubes->mounts[n].direction - view_rotation;
+        float fire_angle = transform->getRotation() + mount.direction - view_rotation;
 
         renderer.drawLine(fire_draw_position, fire_draw_position + (vec2FromAngle(fire_angle) * 1000.0f * scale), glm::u8vec4(128, 128, 128, 128), glm::u8vec4(128, 128, 128, 0));
     }
@@ -616,12 +625,11 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
             // This check is duplicated in RelayScreen::onDraw.
             P<ShipTemplateBasedObject> stb_obj = obj;
 
-            if (!stb_obj
-                || (!obj->isFriendly(my_spaceship) && obj != my_spaceship))
+            if (!stb_obj || (Faction::getRelation(my_spaceship, obj->entity) != FactionRelation::Friendly && obj->entity != my_spaceship))
             {
                 P<ScanProbe> sp = obj;
 
-                if (!sp || sp->owner_id != my_spaceship->getMultiplayerId())
+                if (!sp || sp->owner != my_spaceship)
                 {
                     continue;
                 }
@@ -653,11 +661,16 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 
         break;
     case NebulaFogOfWar:
-        foreach(SpaceObject, obj, space_object_list)
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
-            if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(my_spaceship->getPosition(), obj->getPosition(), my_spaceship->getShortRangeRadarRange()))
-                continue;
-            visible_objects.emplace(*obj);
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            auto short_range = lrr ? lrr->short_range : 5000.0f;
+            foreach(SpaceObject, obj, space_object_list)
+            {
+                if (obj->canHideInNebula() && my_spaceship && Nebula::blockedByNebula(transform->getPosition(), obj->getPosition(), short_range))
+                    continue;
+                visible_objects.emplace(*obj);
+            }
         }
         break;
     }
@@ -684,7 +697,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         auto trace = obj->entity.getComponent<RadarTrace>();
         float r = trace ? trace->radius * scale : 0.0f;
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
-        if (obj != *my_spaceship && rect.overlaps(object_rect))
+        if (obj->entity != my_spaceship && rect.overlaps(object_rect))
         {
             obj->drawOnRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
             if (show_callsigns && obj->getCallSign() != "")
@@ -804,9 +817,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     // Draw beam arcs on short-range radar only, and only for fully scanned
     // ships.
     if (!long_range) {
-        for(auto [entity, beamsystem, transform, obj] : sp::ecs::Query<BeamWeaponSys, sp::Transform, SpaceObject*>()) {
+        for(auto [entity, beamsystem, transform, scanstate] : sp::ecs::Query<BeamWeaponSys, sp::Transform, sp::ecs::optional<ScanState>>()) {
             auto object_position_on_screen = worldToScreen(transform.getPosition());
-            if (!obj || (my_spaceship && (obj->getScannedStateFor(my_spaceship) != SS_FullScan)))
+            if (scanstate && my_spaceship && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
                 continue;
 
             // For each beam ...
@@ -848,7 +861,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         }
     }
     
-    for(auto [entity, trace, transform, obj] : sp::ecs::Query<RadarTrace, sp::Transform, SpaceObject*>()) {
+    for(auto [entity, trace, transform, scanstate] : sp::ecs::Query<RadarTrace, sp::Transform, sp::ecs::optional<ScanState>>()) {
         auto object_position_on_screen = worldToScreen(transform.getPosition());
         //TODO: Only draw things that are in range of this radar view.
 
@@ -857,43 +870,49 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 
         auto color = trace.color;
         if (trace.flags & RadarTrace::ColorByFaction) {
-            color = Faction::getInfo(obj->entity).gm_color;
+            color = Faction::getInfo(entity).gm_color;
             if (my_spaceship)
             {
-                if (obj == *my_spaceship)
+                if (entity == my_spaceship)
                     color = glm::u8vec4(192, 192, 255, 255);
-                else if (obj->getScannedStateFor(my_spaceship) == SS_NotScanned)
+                else if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
                     color = glm::u8vec4(192, 192, 192, 255);
-                else if (obj->isEnemy(my_spaceship))
+                else if (Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy)
                     color = glm::u8vec4(255, 0, 0, 255);
-                else if (obj->isFriendly(my_spaceship))
+                else if (Faction::getRelation(my_spaceship, entity) == FactionRelation::Friendly)
                     color = glm::u8vec4(128, 255, 128, 255);
                 else
                     color = glm::u8vec4(128, 128, 255, 255);
             }
         }
         auto icon = trace.icon;
-        if (trace.flags & RadarTrace::ArrowIfNotScanned)
+        if (trace.flags & RadarTrace::ArrowIfNotScanned && scanstate && my_spaceship)
         {
             // If the object is a ship that hasn't been scanned, draw the default icon.
             // Otherwise, draw the ship-specific icon.
-            if (my_spaceship && (obj->getScannedStateFor(my_spaceship) == SS_NotScanned || obj->getScannedStateFor(my_spaceship) == SS_FriendOrFoeIdentified))
+            switch(scanstate->getStateFor(my_spaceship)) {
+            case ScanState::State::NotScanned:
+            case ScanState::State::FriendOrFoeIdentified:
                 icon = "radar/arrow.png";
+                break;
+            default:
+                break;
+            }
         }
 
         if (trace.flags & RadarTrace::Rotate)
-            renderer.drawRotatedSprite(icon, object_position_on_screen, size, obj->getRotation() - view_rotation, color);
+            renderer.drawRotatedSprite(icon, object_position_on_screen, size, transform.getRotation() - view_rotation, color);
         else
             renderer.drawSprite(icon, object_position_on_screen, size, color);
     }
 
     if (!long_range) {
-        for(auto [entity, shields, trace, transform, obj] : sp::ecs::Query<Shields, RadarTrace, sp::Transform, SpaceObject*>()) {
+        for(auto [entity, shields, trace, transform, scanstate] : sp::ecs::Query<Shields, RadarTrace, sp::Transform, sp::ecs::optional<ScanState>>()) {
             //TODO: Only draw things that are in range of this radar view.
             if (!shields.active)
                 continue;
             auto object_position_on_screen = worldToScreen(transform.getPosition());
-            bool show_levels = (!my_spaceship || obj->getScannedStateFor(my_spaceship) >= SS_SimpleScan);
+            bool show_levels = (!my_spaceship || !scanstate || scanstate->getStateFor(my_spaceship) == ScanState::State::FullScan);
             float sprite_scale = scale * trace.radius * 1.5f / 32;
 
             if (shields.count == 1)
@@ -949,10 +968,12 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
     }
 
 
-    if (my_spaceship)
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
     {
-        auto object_position_on_screen = worldToScreen(my_spaceship->getPosition());
-        my_spaceship->drawOnRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
+        auto object_position_on_screen = worldToScreen(transform->getPosition());
+        auto obj_ptr = my_spaceship.getComponent<SpaceObject*>();
+        if (obj_ptr)
+            (*obj_ptr)->drawOnRadar(renderer, object_position_on_screen, scale, view_rotation, long_range);
     }
 }
 
@@ -987,10 +1008,12 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
     if (!targets)
         return;
 
-    for(P<SpaceObject> obj : targets->getTargets())
+    for(auto obj : targets->getTargets())
     {
-        auto object_position_on_screen = worldToScreen(obj->getPosition());
-        auto trace = obj->entity.getComponent<RadarTrace>();
+        auto transform = obj.getComponent<sp::Transform>();
+        if (!transform) continue;
+        auto object_position_on_screen = worldToScreen(transform->getPosition());
+        auto trace = obj.getComponent<RadarTrace>();
         float r = trace ? trace->radius * scale : 0.0f;
         sp::Rect object_rect(object_position_on_screen.x - r, object_position_on_screen.y - r, r * 2, r * 2);
         if (obj != my_spaceship && rect.overlaps(object_rect))
@@ -999,9 +1022,10 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
         }
     }
 
-    if (my_spaceship && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < my_spaceship->getWaypointCount())
+    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+    if (my_spaceship && lrr && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < int(lrr->waypoints.size()))
     {
-        auto object_position_on_screen = worldToScreen(my_spaceship->waypoints[targets->getWaypointIndex()]);
+        auto object_position_on_screen = worldToScreen(lrr->waypoints[targets->getWaypointIndex()]);
 
         renderer.drawSprite("redicule.png", object_position_on_screen - glm::vec2{0, 10}, 48);
     }

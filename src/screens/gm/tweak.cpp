@@ -917,7 +917,7 @@ void GuiShipTweakPlayer::onDraw(sp::RenderTarget& renderer)
         std::vector<string> players;
         foreach(PlayerInfo, i, player_info_list)
         {
-            if (i->ship_id == target->getMultiplayerId() && i->crew_position[n])
+            if (i->ship == target->entity && i->crew_position[n])
             {
                 players.push_back(i->name);
             }
@@ -1134,7 +1134,7 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     callsign = new GuiTextEntry(left_col, "", "");
     callsign->setSize(GuiElement::GuiSizeMax, 50);
     callsign->callback([this](string text) {
-        target->callsign = text;
+        target->setCallSign(text);
     });
 
     // Edit object's description.
@@ -1144,28 +1144,28 @@ GuiObjectTweakBase::GuiObjectTweakBase(GuiContainer* owner)
     unscanned_description = new GuiTextEntry(left_col, "", "");
     unscanned_description->setSize(GuiElement::GuiSizeMax, 50);
     unscanned_description->callback([this](string text) {
-        target->setDescriptionForScanState(SS_NotScanned,text);
+        //TODO: target->setDescriptionForScanState(SS_NotScanned,text);
     });
 
     (new GuiLabel(left_col, "", tr("Friend or Foe Description:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     friend_or_foe_description = new GuiTextEntry(left_col, "", "");
     friend_or_foe_description->setSize(GuiElement::GuiSizeMax, 50);
     friend_or_foe_description->callback([this](string text) {
-        target->setDescriptionForScanState(SS_FriendOrFoeIdentified,text);
+        //TODO: target->setDescriptionForScanState(SS_FriendOrFoeIdentified,text);
     });
 
     (new GuiLabel(left_col, "", tr("Simple Scan Description:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     simple_scan_description = new GuiTextEntry(left_col, "", "");
     simple_scan_description->setSize(GuiElement::GuiSizeMax, 50);
     simple_scan_description->callback([this](string text) {
-        target->setDescriptionForScanState(SS_SimpleScan,text);
+        //TODO: target->setDescriptionForScanState(SS_SimpleScan,text);
     });
 
     (new GuiLabel(left_col, "", tr("Full Scan Description:"), 30))->setSize(GuiElement::GuiSizeMax, 50);
     full_scan_description = new GuiTextEntry(left_col, "", "");
     full_scan_description->setSize(GuiElement::GuiSizeMax, 50);
     full_scan_description->callback([this](string text) {
-        target->setDescriptionForScanState(SS_FullScan,text);
+        //TODO: target->setDescriptionForScanState(SS_FullScan,text);
     });
 
     // Right column
@@ -1194,13 +1194,13 @@ void GuiObjectTweakBase::onDraw(sp::RenderTarget& renderer)
 {
     heading_slider->setValue(target->getHeading());
 
-    callsign->setText(target->callsign);
+    callsign->setText(target->getCallSign());
     // TODO: Fix long strings in GuiTextEntry, or make a new GUI element for
     // editing long strings.
-    unscanned_description->setText(target->getDescription(SS_NotScanned));
-    friend_or_foe_description->setText(target->getDescription(SS_FriendOrFoeIdentified));
-    simple_scan_description->setText(target->getDescription(SS_SimpleScan));
-    full_scan_description->setText(target->getDescription(SS_FullScan));
+    //TODO: unscanned_description->setText(target->getDescription(SS_NotScanned));
+    //TODO: friend_or_foe_description->setText(target->getDescription(SS_FriendOrFoeIdentified));
+    //TODO: simple_scan_description->setText(target->getDescription(SS_SimpleScan));
+    //TODO: full_scan_description->setText(target->getDescription(SS_FullScan));
 
     // we probably dont need to set these each onDraw
     // but doing it forces the slider to round to a integer
