@@ -24,7 +24,7 @@ function MicroMeteorites:init(player_ship)
 	player_ship.micrometeorite_phase = 1
 
 	player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-	player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« LEFT"),function () MicroMeteorites:fired(1,player_ship) end,11)
+	player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
 	player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
 end
 
@@ -89,7 +89,7 @@ function MicroMeteorites:incoming(delta,player_ship)
         
         --reset info and buttons
         player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-		player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« LEFT"),function () MicroMeteorites:fired(1,player_ship) end,11)
+		player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
 		player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
         
         player_ship.micrometeorite_phase=1
@@ -116,7 +116,7 @@ function MicroMeteorites:fired(button_direction,player_ship)
 			
 			--reset info and buttons
 			player_ship:addCustomInfo("Weapons","point_defense_info",_("MicroMeteorite Defense"),10)
-			player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« LEFT"),function () MicroMeteorites:fired(1,player_ship) end,11)
+			player_ship:addCustomButton("Weapons","point_defense_btn_left",_("« Left"),function () MicroMeteorites:fired(1,player_ship) end,11)
 			player_ship:addCustomButton("Weapons","point_defense_btn_right",_("» Right"),function () MicroMeteorites:fired(2,player_ship) end,12)
         
 			player_ship.micrometeorite_phase=1
