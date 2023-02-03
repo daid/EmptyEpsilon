@@ -43,7 +43,7 @@ msgstr ""
 "- Difficulté : Difficile (variable)\n"
 "- Vaisseaux joueurs : 1 à plusieurs\n"
 "\n"
-"TRADUCTION EN COURS 82% 233 entrées restantes\n"
+"TRADUCTION EN COURS 88% 157 entrées restantes\n"
 "\n"
 "Loin des siens, un avant-poste isolé de la marine tente de survivre dans un "
 "environnement hostile.\n"
@@ -988,7 +988,7 @@ msgstr "réduire le temps de cycle des faisceaux laser ~7%"
 #: scripts/scenario_44_outpost.lua:8499
 msgctxt "upgrade-comms"
 msgid "increase damage by 25%"
-msgstr ""
+msgstr "augmenter les dégâts des faisceaux laser de 25%"
 
 #: scripts/scenario_44_outpost.lua:1218
 msgctxt "upgrade-comms"
@@ -1011,7 +1011,7 @@ msgstr "augmenter la portée des faisceaux laser de 10%"
 #: scripts/scenario_44_outpost.lua:7185
 msgctxt "upgrade-comms"
 msgid "increase damage by 20%"
-msgstr ""
+msgstr "augmenter les dégâts des faisceaux laser de 20%"
 
 #: scripts/scenario_44_outpost.lua:1242
 msgctxt "upgrade-comms"
@@ -1040,7 +1040,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:4934
 msgctxt "upgrade-comms"
 msgid "add mining tube"
-msgstr ""
+msgstr "ajouter un tube pour les mines"
 
 #: scripts/scenario_44_outpost.lua:1248
 msgctxt "upgrade-comms"
@@ -1478,7 +1478,7 @@ msgstr "augmenter la vitesse maximale des moteurs avant de 10%"
 #: scripts/scenario_44_outpost.lua:2401 scripts/scenario_44_outpost.lua:2826
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by 20% and reverse acceleration by 1/3"
-msgstr "augmenter les moteurs arrière de 20% et l'accélération arrière de 1/3"
+msgstr "booster les moteurs arrière de 20% et l'accélération arrière de 1/3"
 
 #: scripts/scenario_44_outpost.lua:2408 scripts/scenario_44_outpost.lua:2833
 #: scripts/scenario_44_outpost.lua:7387
@@ -1623,7 +1623,7 @@ msgstr "augmenter la manœuvre de 12,5%"
 #: scripts/scenario_44_outpost.lua:3144
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse by ~7%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs avant d'environ 7%"
 
 #: scripts/scenario_44_outpost.lua:3151 scripts/scenario_44_outpost.lua:4013
 #: scripts/scenario_44_outpost.lua:4386 scripts/scenario_44_outpost.lua:4737
@@ -1637,7 +1637,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:3158
 msgctxt "upgrade-comms"
 msgid "increase max reverse impulse by ~17%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs arrière d'environ 17%"
 
 #: scripts/scenario_44_outpost.lua:3165
 msgctxt "upgrade-comms"
@@ -2284,9 +2284,10 @@ msgid "add more broadside tubes"
 msgstr "ajouter plus de tubes latéraux"
 
 #: scripts/scenario_44_outpost.lua:5314
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make second broadside tubes large"
-msgstr "monter des seconds tubes larges latéraux"
+msgstr "monter des seconds tubes larges latéraux ?-?"
 
 #: scripts/scenario_44_outpost.lua:5315
 msgctxt "upgrade-comms"
@@ -2401,7 +2402,7 @@ msgstr "réduire le temps de chargement des tubes de 1/3"
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "make tube medium sized"
-msgstr "agrandir les tubes légers en taille moyenne ?"
+msgstr "agrandir un tube léger en taille moyenne ?Singulier?"
 
 #: scripts/scenario_44_outpost.lua:5729
 msgctxt "upgrade-comms"
@@ -2586,7 +2587,7 @@ msgstr "agrandir les tubes latéraux en taille moyenne"
 #: scripts/scenario_44_outpost.lua:6546
 msgctxt "upgrade-comms"
 msgid "increase forward max impulse by 20%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs avant de 20%"
 
 #: scripts/scenario_44_outpost.lua:6567 scripts/scenario_44_outpost.lua:7027
 #: scripts/scenario_44_outpost.lua:8379
@@ -2679,7 +2680,7 @@ msgstr "augmenter l'accélération avant de 50%"
 #: scripts/scenario_44_outpost.lua:6985
 msgctxt "upgrade-comms"
 msgid "increase max impulse by ~11%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs d'environ 11%"
 
 #: scripts/scenario_44_outpost.lua:6992
 msgctxt "upgrade-comms"
@@ -2769,7 +2770,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:7233
 msgctxt "upgrade-comms"
 msgid "make small tube medium sized"
-msgstr "agrandir un tube léger en tube moyen"
+msgstr "agrandir un tube léger en taille moyenne"
 
 #: scripts/scenario_44_outpost.lua:7234
 msgctxt "upgrade-comms"
@@ -2839,7 +2840,7 @@ msgstr "augmenter la capacité de stockage : homing : 100%, HVLI : 25%"
 #: scripts/scenario_44_outpost.lua:7519
 msgctxt "upgrade-comms"
 msgid "make central tube medium sized"
-msgstr "monter un tube moyen central"
+msgstr "agrandir un tube central en taille moyenne"
 
 #: scripts/scenario_44_outpost.lua:7520
 msgctxt "upgrade-comms"
@@ -2879,12 +2880,12 @@ msgstr "booster l'accélération arrière de 25%"
 #: scripts/scenario_44_outpost.lua:7666
 msgctxt "upgrade-comms"
 msgid "increase max rear impulse by ~15%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs arrière d'environ 15%"
 
 #: scripts/scenario_44_outpost.lua:7694
 msgctxt "upgrade-comms"
 msgid "increase max impulse by 20%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs de 20%"
 
 #: scripts/scenario_44_outpost.lua:7701 scripts/scenario_44_outpost.lua:8027
 msgctxt "upgrade-comms"
@@ -2916,7 +2917,7 @@ msgstr "réduire le temps de cycle des faisceaux laser ~24%"
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "make broadside tubes medium sized"
-msgstr "monter des tubes moyens latéraux -?"
+msgstr "agrandir les tubes latéraux en taille moyenne ??Pluriel??"
 
 #: scripts/scenario_44_outpost.lua:7860
 #, fuzzy
@@ -2935,9 +2936,10 @@ msgid "double missile capacity"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:7863
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make broadside tubes large sized"
-msgstr "monter des tubes larges latéraux"
+msgstr "agrandir les tubes latéraux en taille large ??Pluriel??"
 
 #: scripts/scenario_44_outpost.lua:7865
 msgctxt "upgrade-comms"
@@ -3026,14 +3028,15 @@ msgid "increase capacity: homing:1/3, HVLI:50%"
 msgstr "augmenter la capacité de stockage : homing : 1/3, HVLI : 50%"
 
 #: scripts/scenario_44_outpost.lua:8178
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make forward tubes medium sized"
-msgstr "monter des tubes moyens à l'avant"
+msgstr "agrandir les tubes avant en taille moyenne ??Pluriel??"
 
 #: scripts/scenario_44_outpost.lua:8180
 msgctxt "upgrade-comms"
 msgid "make rear mine tube large sized"
-msgstr "monter 1 tube large arrière pour les mines"
+msgstr "agrandir un tube arrière pour mine en taille large"
 
 #: scripts/scenario_44_outpost.lua:8181
 msgctxt "upgrade-comms"
@@ -3067,10 +3070,9 @@ msgid "add small nuke tubes and nukes"
 msgstr "ajouter un espace de stockage et des tubes légers pour nuke"
 
 #: scripts/scenario_44_outpost.lua:8526
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make homing tube medium sized"
-msgstr "agrandir un tube pour homing en taille moyenne ?-?"
+msgstr "agrandir un tube pour homing en taille moyenne"
 
 #: scripts/scenario_44_outpost.lua:8527
 msgctxt "upgrade-comms"
@@ -3085,7 +3087,7 @@ msgstr "augmenter la capacité de stockage : nuke : 50%, EMP : 1/3, mine : 50%"
 #: scripts/scenario_44_outpost.lua:8529
 msgctxt "upgrade-comms"
 msgid "make homing tube large sized"
-msgstr "monter un tube large pour homing"
+msgstr "agrandir un tube pour homing en taille large"
 
 #: scripts/scenario_44_outpost.lua:8530
 #, fuzzy
@@ -3150,9 +3152,10 @@ msgid "double capacity: nuke, EMP, mine"
 msgstr ""
 
 #: scripts/scenario_44_outpost.lua:8827
+#, fuzzy
 msgctxt "upgrade-comms"
 msgid "make front and broadside homing tubes large"
-msgstr "monter des tubes larges latéraux et à l'avant pour homing"
+msgstr "monter des tubes larges latéraux et à l'avant pour homing ?-?"
 
 #: scripts/scenario_44_outpost.lua:8828
 msgctxt "upgrade-comms"
@@ -3178,7 +3181,7 @@ msgstr "renforcer la solidité de la coque d'environ 8%"
 #: scripts/scenario_44_outpost.lua:8986
 msgctxt "upgrade-comms"
 msgid "increase max forward impulse by 25%"
-msgstr ""
+msgstr "augmenter la vitesse max des moteurs avant de 25%"
 
 #: scripts/scenario_44_outpost.lua:9019
 msgctxt "upgrade-comms"
@@ -3220,6 +3223,28 @@ msgid ""
 "    L = Large\n"
 "These letters describe the tube sizes in order from top to bottom."
 msgstr ""
+"Cette base de données ne couvre que les versions de base des missiles "
+"utilisés dans toute la galaxie.\n"
+"\n"
+"Il a été rapporté que certains cuirassés auraient commencé à utiliser de "
+"plus grandes variations de ces missiles. Les petits chasseurs et même les "
+"frégates ne devraient pas avoir trop de mal à les esquiver, mais les "
+"capitaines de plus gros vaisseaux devraient se méfier de leur potentiel de "
+"dégâts double. \n"
+"\n"
+"De plus petites variations de ces missiles sont également devenues courantes "
+"dans la galaxie. Les pilotes de chasseurs louent leur vitesse et leur "
+"maniabilité, car cela leur donne un avantage contre des cibles petites et "
+"rapides. Ils n'infligent que la moitié des dégâts de leurs version de base, "
+"mais à quoi sert un missile s'il n'atteint pas sa cible ?\n"
+"\n"
+"Certains vaisseaux de votre flotte ont été équipés de ces tubes d'armes de "
+"tailles différentes. Dans certains cas, l'officier des armes peut voir un "
+"bandeau avec des lettres sur sa console indiquant la taille des tubes "
+"installés sur le vaisseau :\n"
+"    S = Petit (Small)\n"
+"    M = Moyen (Medium) (tube de taille classique)\n"
+"    L = Grand (Large)"
 
 #: scripts/scenario_44_outpost.lua:9118 scripts/scenario_44_outpost.lua:9127
 #: scripts/scenario_44_outpost.lua:9139
@@ -4528,19 +4553,20 @@ msgstr "Rumeurs"
 #: scripts/scenario_44_outpost.lua:12337
 msgctxt "station-comms"
 msgid "Explain sensor jammers"
-msgstr ""
+msgstr "Expliquez-nous les brouilleurs de capteur"
 
 #: scripts/scenario_44_outpost.lua:12338
 msgctxt "station-comms"
 msgid "You mean those things that have a call sign that starts with SJ?"
-msgstr ""
+msgstr "Vous parlez de ces choses qui ont un nom commençant par SJ ?"
 
 #: scripts/scenario_44_outpost.lua:12339
 msgctxt "station-comms"
 msgid "Yes. Why so many?"
-msgstr ""
+msgstr "Oui. Pourquoi autant ?"
 
 #: scripts/scenario_44_outpost.lua:12340
+#, fuzzy
 msgctxt "station-comms"
 msgid ""
 "They were made during a big technological arms race. All the factions tried "
@@ -4549,11 +4575,18 @@ msgid ""
 "closest thing to clean up done by the factions is to give them all SJ call "
 "signs to make ships aware of the potential navigation hazard."
 msgstr ""
+"Ils ont été conçus lors d'une grande course à l'armement technologique.\n"
+"Toutes les factions essayaient de les obliger à gêner leurs ennemis à leur "
+"approche. La plupart des navires ont maintenant des moyens de les "
+"contourner, mais personne n'est sorti pour nettoyer les restes. La chose la "
+"plus proche du nettoyage faite par les factions est de leur donner tous les "
+"indicatifs d'appel SJ pour informer les navires du danger potentiel de "
+"navigation."
 
 #: scripts/scenario_44_outpost.lua:12343
 msgctxt "station-comms"
 msgid "Yes. What do they do?"
-msgstr ""
+msgstr "Oui. A quoi servent-ils?"
 
 #: scripts/scenario_44_outpost.lua:12344
 msgctxt "station-comms"
@@ -4567,7 +4600,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:12347
 msgctxt "station-comms"
 msgid "Yes. How do I get rid of them?"
-msgstr ""
+msgstr "Oui. Comment puis-je m'en débarrasser ?"
 
 #: scripts/scenario_44_outpost.lua:12348
 msgctxt "station-comms"
@@ -4575,6 +4608,8 @@ msgid ""
 "Just pick them up. You'll want to scan them first if you don't want your "
 "scanners fried."
 msgstr ""
+"Il suffit de les ramasser. Vous voudrez d'abord les scanner si vous ne "
+"voulez pas griller vos scanners."
 
 #: scripts/scenario_44_outpost.lua:12354 scripts/scenario_44_outpost.lua:13146
 msgctxt "orders-comms"
@@ -4988,11 +5023,12 @@ msgstr ""
 msgctxt "orders-comms"
 msgid "Destroy aggressive enemy bases including %s station %s in %s."
 msgstr ""
+"Détruire les bases ennemies agressives, y compris la station %s %s en %s."
 
 #: scripts/scenario_44_outpost.lua:12798
 msgctxt "orders-comms"
 msgid "Destroy aggressive enemy bases."
-msgstr ""
+msgstr "Détruire les bases ennemies agressives."
 
 #: scripts/scenario_44_outpost.lua:12806
 msgctxt "orders-comms"
@@ -5000,6 +5036,8 @@ msgid ""
 "\n"
 "Optional:"
 msgstr ""
+"\n"
+"Facultatif :"
 
 #: scripts/scenario_44_outpost.lua:12810
 #, lua-format
@@ -5008,6 +5046,8 @@ msgid ""
 "%s\n"
 "Transport %s to %s station %s in %s"
 msgstr ""
+"%s\n"
+"Transporter %s vers %s station %s en %s."
 
 #: scripts/scenario_44_outpost.lua:12812
 #, lua-format
@@ -5016,6 +5056,8 @@ msgid ""
 "%s\n"
 "Transport %s to station %s (defunct)"
 msgstr ""
+"%s\n"
+"Transporter %s à la station %s (défunt)."
 
 #: scripts/scenario_44_outpost.lua:12818
 #, lua-format
@@ -5024,6 +5066,8 @@ msgid ""
 "%s\n"
 "Deliver cargo for %s to station %s in %s"
 msgstr ""
+"%s\n"
+"Livrer la cargaison pour %s à la station %s en %s."
 
 #: scripts/scenario_44_outpost.lua:12820
 #, lua-format
@@ -5032,6 +5076,8 @@ msgid ""
 "%s\n"
 "Deliver cargo for %s to station %s (defunct)"
 msgstr ""
+"%s\n"
+"Livrer la cargaison pour %s à la station %s (défunt)."
 
 #: scripts/scenario_44_outpost.lua:12824
 #, lua-format
@@ -5040,6 +5086,8 @@ msgid ""
 "%s\n"
 "Pick up cargo for %s at station %s in %s"
 msgstr ""
+"%s\n"
+"Récupérer la cargaison pour %s à la station %s en %s."
 
 #: scripts/scenario_44_outpost.lua:12826
 #, lua-format
@@ -5048,6 +5096,8 @@ msgid ""
 "%s\n"
 "Pick up cargo for %s at station %s (defunct)"
 msgstr ""
+"%s\n"
+"Récupérer la cargaison pour %s à la station %s (défunt)."
 
 #: scripts/scenario_44_outpost.lua:12863
 #, lua-format
@@ -5057,6 +5107,9 @@ msgid ""
 "Explosives planted on aggressive %s station %s. Expect detonation in %s "
 "seconds"
 msgstr ""
+"%s\n"
+"Explosifs posés sur la station agressive %s %s. Attendez-vous à une "
+"détonation dans %s secondes."
 
 #: scripts/scenario_44_outpost.lua:12865
 #, lua-format
@@ -5067,6 +5120,10 @@ msgid ""
 "identified as an aggressive station. Explosives have been planted. Expect "
 "detonation in %s seconds"
 msgstr ""
+"%s\n"
+"Le vaisseau du saboteur, %s, est amarré à la station %s %s dans le secteur "
+"%s. %s a été identifié comme une station agressive. Des explosifs ont été "
+"posés. Attendez-vous à une détonation dans %s secondes."
 
 #: scripts/scenario_44_outpost.lua:12868
 #, lua-format
@@ -5075,12 +5132,16 @@ msgid ""
 "%s\n"
 "Sabotage target station has been destroyed"
 msgstr ""
+"%s\n"
+"La station ciblée par le saboteur a été détruite."
 
 #: scripts/scenario_44_outpost.lua:12886
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s's destination station, %s in %s, is not an aggressive enemy station."
 msgstr ""
+"La station de destination de %s, %s en %s, n'est pas une station ennemie "
+"agressive."
 
 #: scripts/scenario_44_outpost.lua:12888
 #, lua-format
@@ -5089,6 +5150,8 @@ msgid ""
 "%s's destination station, %s in %s, has been identified as an aggressive "
 "enemy station."
 msgstr ""
+"La station de destination de %s, %s en %s, a été identifiée comme une "
+"station ennemie agressive."
 
 #: scripts/scenario_44_outpost.lua:12891
 #, lua-format
@@ -5097,6 +5160,8 @@ msgid ""
 "%s\n"
 "Saboteur's ship, %s, is in transit in sector %s. %s"
 msgstr ""
+"%s\n"
+"Le vaisseau du saboteur, %s, est en transit dans le secteur %s. %s"
 
 #: scripts/scenario_44_outpost.lua:12902
 #, lua-format
@@ -5106,6 +5171,10 @@ msgid ""
 "Saboteur's ship, %s, docked with %s station %s in sector %s. %s has been "
 "identified as an aggressive station"
 msgstr ""
+"%s\n"
+"Le vaisseau du saboteur, %s, est amarré à la station %s %s dans le secteur "
+"%s.\n"
+"%s a été identifié comme une station agressive."
 
 #: scripts/scenario_44_outpost.lua:12904
 #, lua-format
@@ -5115,6 +5184,10 @@ msgid ""
 "Saboteur's ship, %s, docked with %s station %s in sector %s. %s is not an "
 "aggressive station"
 msgstr ""
+"%s\n"
+"Le vaisseau du saboteur, %s, est amarré à la station %s %s dans le secteur "
+"%s.\n"
+"%s n'est pas une station agressive."
 
 #: scripts/scenario_44_outpost.lua:12907
 #, lua-format
@@ -5123,6 +5196,9 @@ msgid ""
 "%s\n"
 "Saboteur's ship, %s, docked with %s station %s in sector %s."
 msgstr ""
+"%s\n"
+"Le vaisseau du saboteur, %s, est amarré à la station %s %s dans le secteur "
+"%s."
 
 #: scripts/scenario_44_outpost.lua:12912
 #, lua-format
@@ -5131,6 +5207,8 @@ msgid ""
 "%s\n"
 "Saboteur successfully destroyed aggressive enemy station %s"
 msgstr ""
+"%s\n"
+"Le saboteur a réussi à détruire la station ennemie agressive %s."
 
 #: scripts/scenario_44_outpost.lua:12915
 #, lua-format
@@ -5139,6 +5217,8 @@ msgid ""
 "%s\n"
 "Saboteur's ship, %s, has been destroyed"
 msgstr ""
+"%s\n"
+"Le vaisseau du saboteur, %s, a été détruit."
 
 #: scripts/scenario_44_outpost.lua:12918
 #, lua-format
@@ -5147,6 +5227,8 @@ msgid ""
 "%s\n"
 "Plant saboteur on freighter"
 msgstr ""
+"%s\n"
+"Saboteur introduit sur le cargo."
 
 #: scripts/scenario_44_outpost.lua:12937
 msgctxt "ammo-comms"
@@ -6003,7 +6085,7 @@ msgstr ""
 #: scripts/scenario_44_outpost.lua:13780
 msgctxt "orders-comms"
 msgid "Is there any chance at victory for this outpost?"
-msgstr ""
+msgstr "Y a-t-il la moindre chance de victoire pour cet avant-poste ?"
 
 #: scripts/scenario_44_outpost.lua:13781
 msgctxt "orders-comms"
@@ -6012,11 +6094,15 @@ msgid ""
 "options. They think there's an off chance for long term viability for the "
 "outpost."
 msgstr ""
+"Les dirigeants de l'avant-poste ont déploré leur sort et discuté de diverses "
+"options.\n"
+"Ils pensent qu'il y a une faible chance de survie à long terme pour l'avant-"
+"poste."
 
 #: scripts/scenario_44_outpost.lua:13782
 msgctxt "orders-comms"
 msgid "Don't keep me in suspense"
-msgstr ""
+msgstr "Bon, ne me faites pas languir."
 
 #: scripts/scenario_44_outpost.lua:13783
 msgctxt "orders-comms"
@@ -6024,11 +6110,14 @@ msgid ""
 "It's a low probability scenario, but if we destroyed the most aggressive "
 "enemy stations in the area, we might get the rest to agree to a truce."
 msgstr ""
+"C'est un scénario peu probable, mais si nous détruisions les stations "
+"ennemies les plus agressives de cette zone, nous pourrions amener les autres "
+"à discuter d'une trêve."
 
 #: scripts/scenario_44_outpost.lua:13784
 msgctxt "orders-comms"
 msgid "Which ones are the aggressive ones?"
-msgstr ""
+msgstr "Lesquelles d'entre elles sont les plus agressives ?"
 
 #: scripts/scenario_44_outpost.lua:13786
 msgctxt "orders-comms"
@@ -6036,11 +6125,14 @@ msgid ""
 "The ones that keep sending attacking ships. You can just track back along "
 "the attacking ships' approach vector to find their home base."
 msgstr ""
+"Celles qui continuent à envoyer des vaisseaux nous attaquer.\n"
+"En remontant simplement le long de l'angle d'approche de ces vaisseaux vous "
+"trouverez leur base d'attache."
 
 #: scripts/scenario_44_outpost.lua:13787
 msgctxt "orders-comms"
 msgid "Have you tracked any based on approach vector?"
-msgstr ""
+msgstr "En avez-vous déjà trouvé une en remontant leurs trajet ?"
 
 #: scripts/scenario_44_outpost.lua:13795
 #, lua-format
@@ -6050,11 +6142,14 @@ msgid ""
 "\n"
 "One more thing about this plan..."
 msgstr ""
+"D'après nos observations, la station %s %s en %s en fait partie.\n"
+"\n"
+"Encore une chose à propos de ce plan..."
 
 #: scripts/scenario_44_outpost.lua:13796
 msgctxt "orders-comms"
 msgid "Just one? What is it?"
-msgstr ""
+msgstr "Juste une ? Quoi donc ?"
 
 #: scripts/scenario_44_outpost.lua:13797
 msgctxt "orders-comms"
@@ -6064,23 +6159,28 @@ msgid ""
 "truce benefits them, too, assuming you succeed. The help they provide in "
 "protecting the outpost can free you up to destroy the aggressive stations."
 msgstr ""
+"S'il y a des stations amies ou neutres que vous n'avez pas encore contactées "
+"pour leur demander leur aide, faites-le dès que possible. Une trêve leur "
+"serait bénéfique à elles aussi, en supposant que vous réussissiez.\n"
+"L'aide qu'elles apportent pour protéger l'avant-poste peut vous libérer pour "
+"détruire les stations agressives."
 
 #: scripts/scenario_44_outpost.lua:13804
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s"
-msgstr "%s station %s en secteur %s"
+msgstr "%s station %s en secteur %s."
 
 #: scripts/scenario_44_outpost.lua:13813
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s is probably another aggressive station"
-msgstr ""
+msgstr "La station %s %s en %s est probablement une autre station agressive."
 
 #: scripts/scenario_44_outpost.lua:13823
 msgctxt "orders-comms"
 msgid "Any better chance at victory for this outpost?"
-msgstr ""
+msgstr "Une meilleure chance de survie pour cet avant-poste ?"
 
 #: scripts/scenario_44_outpost.lua:13826
 #, lua-format
@@ -6089,17 +6189,19 @@ msgid ""
 "%s station %s in %s is still the one station we've been able to track the "
 "attacking ships back to."
 msgstr ""
+"La station %s %s en %s est encore la seule station vers laquelle nous avons "
+"pu suivre les vaisseaux qui nous attaquent."
 
 #: scripts/scenario_44_outpost.lua:13835
 #, lua-format
 msgctxt "orders-comms"
 msgid "%s station %s in %s is probably another aggressive station."
-msgstr ""
+msgstr "La station %s %s en %s est probablement une autre station agressive."
 
 #: scripts/scenario_44_outpost.lua:13839
 msgctxt "orders-comms"
 msgid "Remind me about the saboteur plan"
-msgstr ""
+msgstr "Explication du plan Saboteur"
 
 #: scripts/scenario_44_outpost.lua:13840
 msgctxt "orders-comms"
@@ -6108,6 +6210,9 @@ msgid ""
 "freighter. Convince them to take on a new crewmember. From there it's up to "
 "the saboteur."
 msgstr ""
+"Résumé : s'assurer d'avoir au moins une mine à bord. Trouver un cargo "
+"neutre. Les convaincre d'embaucher un nouveau membre d'équipage.\n"
+"A partir de là, c'est au saboteur de jouer."
 
 #: scripts/scenario_44_outpost.lua:13842
 #, lua-format
@@ -6116,6 +6221,8 @@ msgid ""
 "%s\n"
 "You have already planted the saboteur on %s"
 msgstr ""
+"%s\n"
+"Vous avez déjà introduit le saboteur à bord de la station %s."
 
 #: scripts/scenario_44_outpost.lua:13845
 #, lua-format
@@ -6125,6 +6232,10 @@ msgid ""
 "You need to replace one or more of your repair crew. We'll be sure the first "
 "one you get also has saboteur training."
 msgstr ""
+"%s\n"
+"Vous devez remplacer un ou plusieurs membres de votre équipe de réparation.\n"
+"Nous nous assurerons que le premier que vous obtiendrez aura également reçu "
+"la formation de saboteur."
 
 #: scripts/scenario_44_outpost.lua:13848
 #, lua-format
@@ -6133,6 +6244,8 @@ msgid ""
 "%s\n"
 "You need a mine to give to the saboteur."
 msgstr ""
+"%s\n"
+"Vous avez besoin d'une mine à donner au saboteur."
 
 #: scripts/scenario_44_outpost.lua:13856
 #, lua-format
@@ -6142,21 +6255,28 @@ msgid ""
 "might be destroyed. It differs from the confrontational solution of "
 "attacking an aggressive enemy station directly. Interested?"
 msgstr ""
+"%s Les dirigeants de l'avant-poste ont une idée de la façon dont une station "
+"ennemie agressive pourrait être détruite.\n"
+"C'est une alternative à la solution militaire consistant à attaquer "
+"frontalement la station à éliminer.\n"
+"Intéressé?"
 
 #: scripts/scenario_44_outpost.lua:13857
 msgctxt "orders-comms"
 msgid "Yes, tell me about this idea"
-msgstr ""
+msgstr "Oui, parlez-moi de cette idée"
 
 #: scripts/scenario_44_outpost.lua:13858
 msgctxt "orders-comms"
 msgid "The idea is to sneak a saboteur aboard an aggressive enemy station."
 msgstr ""
+"Et bien, l'idée consisterait à introduire un saboteur à bord d'une station "
+"ennemie agressive."
 
 #: scripts/scenario_44_outpost.lua:13859
 msgctxt "orders-comms"
 msgid "We can't dock with an enemy station"
-msgstr ""
+msgstr "On ne peut pas s'amarrer à une station ennemie"
 
 #: scripts/scenario_44_outpost.lua:13860
 msgctxt "orders-comms"
@@ -6164,11 +6284,14 @@ msgid ""
 "That's true. However, commercial freighters dock with those stations all the "
 "time. Commerce must go on despite the hostilities."
 msgstr ""
+"C'est exact. Néanmoins, les cargos commerciaux accostent régulièrement sur "
+"ces stations.\n"
+"Eh oui, le commerce ne s'arrête jamais malgré les hostilités."
 
 #: scripts/scenario_44_outpost.lua:13861
 msgctxt "orders-comms"
 msgid "Put a saboteur on a freighter?"
-msgstr ""
+msgstr "Placer un saboteur sur un cargo ?"
 
 #: scripts/scenario_44_outpost.lua:13862
 msgctxt "orders-comms"
@@ -6177,11 +6300,15 @@ msgid ""
 "aggressive enemy station. The saboteur then plants explosives on the station "
 "at a vulnerable point."
 msgstr ""
+"Exact.\n"
+"Le saboteur reste sur le cargo jusqu'à ce que ce dernier s'amarre à une "
+"station ennemie agressive. Le saboteur place alors des explosifs à un "
+"endroit vulnérable sur la station."
 
 #: scripts/scenario_44_outpost.lua:13863
 msgctxt "orders-comms"
 msgid "I see problems with this idea"
-msgstr ""
+msgstr "Je vois plusieurs problèmes avec cette stratégie"
 
 #: scripts/scenario_44_outpost.lua:13864
 msgctxt "orders-comms"
@@ -6192,11 +6319,16 @@ msgid ""
 "measures on the station may prevent the saboteur from planting the "
 "explosives."
 msgstr ""
+"Oh oui, il y a plusieurs points critiques où le plan pourrait échouer.\n"
+"Le cargo que vous choisissez pourrait ne pas accepter le saboteur. Le cargo "
+"pourrait être détruit avant d'accoster une station ennemie agressive. Le "
+"système de sécurité de la station pourrait empêcher le saboteur de placer "
+"les explosifs."
 
 #: scripts/scenario_44_outpost.lua:13865
 msgctxt "orders-comms"
 msgid "Another point: we don't have a saboteur"
-msgstr ""
+msgstr "Autre point : nous n'avons pas de saboteur"
 
 #: scripts/scenario_44_outpost.lua:13866
 msgctxt "orders-comms"
@@ -6205,11 +6337,15 @@ msgid ""
 "correspondence course in espionage and sabotage and thus could be deployed "
 "as the saboteur for this plan."
 msgstr ""
+"En fait, ce n'est pas vrai.\n"
+"L'un des membres de votre équipe de réparation a récemment suivi un cours "
+"par correspondance sur l'espionnage et le sabotage et pourrait donc être "
+"déployé en tant que saboteur pour ce plan."
 
 #: scripts/scenario_44_outpost.lua:13867
 msgctxt "orders-comms"
 msgid "Does graduation come with complimentary explosives?"
-msgstr ""
+msgstr "L'obtention du diplôme est-elle accompagnée d'explosifs gratuits ?"
 
 #: scripts/scenario_44_outpost.lua:13868
 msgctxt "orders-comms"
@@ -6219,11 +6355,16 @@ msgid ""
 "causing distressful mayhem. However, your repair crew now has the training "
 "to adapt one of your mines into the appropriate explosives for the plan."
 msgstr ""
+"Non. Nous avons supprimé la traditionnelle cérémonie de remise des diplômes. "
+"Trop de nos diplômés voulaient tester leurs nouvelles compétences en faisant "
+"des farces pendant la remise des diplômes, provoquant un chaos affligeant. "
+"Cependant, votre équipe de réparation a maintenant la formation nécessaire "
+"pour modifier l'une de vos mines en explosif approprié pour le plan."
 
 #: scripts/scenario_44_outpost.lua:13869
 msgctxt "orders-comms"
 msgid "Isn't it illegal?"
-msgstr ""
+msgstr "N'est-ce pas illégal ?"
 
 #: scripts/scenario_44_outpost.lua:13870
 #, lua-format
@@ -6237,11 +6378,21 @@ msgid ""
 "this and the formal sanctioning of the action by the outpost leadership are "
 "in your secure databanks."
 msgstr ""
+"Le saboteur de votre équipe de réparation a l'approbation et le plein "
+"soutien du commandement de l'avant-poste.\n"
+"\n"
+"Le sabotage est sanctionné selon les règles décrites dans la charte %s en "
+"supposant que le saboteur connaisse les risques et se porte volontaire.\n"
+"Nous avons pris la liberté de fournir un aperçu du plan au saboteur de votre "
+"équipe et avons déjà obtenu son accord par écrit pour mener à bien cette "
+"mission. Des copies de ceci et de la sanction officielle de l'action par la "
+"direction de l'avant-poste se trouvent dans vos banques de données "
+"sécurisées."
 
 #: scripts/scenario_44_outpost.lua:13871
 msgctxt "orders-comms"
 msgid "How do we know if this plan succeeds or fails?"
-msgstr ""
+msgstr "Comment savoir si ce plan réussit ou échoue ?"
 
 #: scripts/scenario_44_outpost.lua:13872
 msgctxt "orders-comms"
@@ -6251,11 +6402,16 @@ msgid ""
 "training. When you check on your orders, updates will be shown on the plan "
 "progress in that report."
 msgstr ""
+"Chaque saboteur est formé pour envoyer des rapports d'état simples via le "
+"transmetteur subspatial microscopique implanté chirurgicalement en lui "
+"pendant sa formation.\n"
+"Lorsque vous checkez vos ordres en cours, des mises à jour seront affichées "
+"sur la progression du plan dans ce rapport."
 
 #: scripts/scenario_44_outpost.lua:13873
 msgctxt "orders-comms"
 msgid "That's a convoluted plan. Can you summarize what we need to do?"
-msgstr ""
+msgstr "C'est un plan compliqué. Pouvez-vous résumer ce que nous devons faire?"
 
 #: scripts/scenario_44_outpost.lua:13874
 msgctxt "orders-comms"
@@ -6264,11 +6420,18 @@ msgid ""
 "Convince them to take on a new crewmember. From there it's up to the "
 "saboteur."
 msgstr ""
+"Oui bien sûr !\n"
+"\n"
+"- Assurez-vous d'avoir au moins une mine à bord.\n"
+"- Trouvez un cargo neutre.\n"
+"- Incitez-les à embaucher un nouveau membre d'équipage.\n"
+"\n"
+" A partir de là, c'est au saboteur de jouer."
 
 #: scripts/scenario_44_outpost.lua:13895
 msgctxt "orders-comms"
 msgid "Suit yourself"
-msgstr ""
+msgstr "Comme vous voudrez"
 
 #: scripts/scenario_44_outpost.lua:13952
 msgctxt "ship-comms"
@@ -7952,7 +8115,7 @@ msgstr "Stock missiles"
 #: scripts/scenario_44_outpost.lua:17931
 msgctxt "scienceDB"
 msgid "H:27 E:18 N:27 L:36"
-msgstr ""
+msgstr "H:27 E:18 N:27 L:36"
 
 #: scripts/scenario_44_outpost.lua:17936
 msgctxt "scienceDB"
@@ -8324,7 +8487,7 @@ msgstr "%.1f Dmg / %.1f sec"
 #, lua-format
 msgctxt "scienceDB"
 msgid "Storage %s"
-msgstr ""
+msgstr "Stockage %s"
 
 #: scripts/scenario_44_outpost.lua:18786
 #, lua-format
