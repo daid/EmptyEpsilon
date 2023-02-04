@@ -17,7 +17,7 @@
 set(ANDROID_SDK_PATH "" CACHE PATH "Location of the android SDK installation.")
 set(ANDROID_API_MIN "16" CACHE STRING "Minimal API version for android build, any device below this version is not supported.")
 set(ANDROID_API_TARGET "26" CACHE STRING "Targeting API version for android, any features above this version cannot be used.")
-set(ANDROID_NDK_VERSION "19.2.5345600" CACHE STRING "NDK version to use. Be mindful, this is brittle across SDL2/CMake/NDK configurations.")
+set(ANDROID_NDK_VERSION "23.2.8568313" CACHE STRING "NDK version to use. Be mindful, this is brittle across SDL2/CMake/NDK configurations.")
 set(ANDROID_ABI "armeabi-v7a" CACHE STRING "Target ABI")
 
 # Signing key to use to sign the APK. You can generate one with:
