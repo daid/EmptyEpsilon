@@ -8542,7 +8542,7 @@ msgstr "Vitesse lumière"
 #, lua-format
 msgctxt "scienceDB"
 msgid "Beam weapon %i:%i"
-msgstr "faisceaux laser (-%i : %i°)"
+msgstr "Faisceaux (-%i : %i°)"
 
 #: scripts/scenario_44_outpost.lua:18370
 #, lua-format
