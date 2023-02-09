@@ -4461,12 +4461,12 @@ function handleDockedState()
 				else
 					hireCost = math.random(45,90)
 				end
-				addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
+				addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 					if not comms_source:takeReputationPoints(hireCost) then
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
 						comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-						setCommsMessage("Repair crew member hired")
+						setCommsMessage(_("trade-comms", "Repair crew member hired"))
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
@@ -4474,12 +4474,12 @@ function handleDockedState()
 			if random(1,10) <= (6 - difficulty) then
 				if comms_target == stationAsimov or comms_target == stationUtopiaPlanitia or comms_target == stationArmstrong then
 					if comms_target.telemetry == nil then
-						addCommsReply(string.format("Establish defensive telemetry link (%i rep)",10*difficulty),function()
+						addCommsReply(string.format(_("trade-comms", "Establish defensive telemetry link (%i rep)"),10*difficulty),function()
 							if comms_source:takeReputationPoints(10*difficulty) then
 								comms_target.telemetry = true
-								setCommsMessage("Automated telemetry for shields and hull established.\nDamage summary should appear on Relay when damage taken")
+								setCommsMessage(_("trade-comms", "Automated telemetry for shields and hull established.\nDamage summary should appear on Relay when damage taken"))
 							else
-								setCommsMessage("Insufficient reputation")
+								setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 							end
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -4493,12 +4493,12 @@ function handleDockedState()
 				else
 					hireCost = math.random(60,120)
 				end
-				addCommsReply(string.format("Recruit repair crew member for %i reputation",hireCost), function()
+				addCommsReply(string.format(_("trade-comms", "Recruit repair crew member for %i reputation"),hireCost), function()
 					if not comms_source:takeReputationPoints(hireCost) then
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					else
 						comms_source:setRepairCrewCount(comms_source:getRepairCrewCount() + 1)
-						setCommsMessage("Repair crew member hired")
+						setCommsMessage(_("trade-comms", "Repair crew member hired"))
 					end
 				end)
 			end
@@ -4507,14 +4507,14 @@ function handleDockedState()
 		if (ctd.general ~= nil and ctd.general ~= "") or 
 			(ctd.history ~= nil and ctd.history ~= "") or 
 			(comms_source:isFriendly(comms_target) and ctd.gossip ~= nil and has_gossip) then
-			addCommsReply("Tell me more about your station", function()
-				setCommsMessage("What would you like to know?")
-				addCommsReply("General information", function()
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
+				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(ctd.general)
 					addCommsReply(_("Back"), commsStation)
 				end)
 				if ctd.history ~= nil then
-					addCommsReply("Station history", function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(ctd.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -4522,7 +4522,7 @@ function handleDockedState()
 				if comms_source:isFriendly(comms_target) then
 					if ctd.gossip ~= nil then
 						if has_gossip then
-							addCommsReply("Gossip", function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(ctd.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
@@ -4531,9 +4531,9 @@ function handleDockedState()
 				end
 			end)	--end station info comms reply branch
 		end
-		addCommsReply("Where can I find particular goods?", function()
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -4573,40 +4573,40 @@ function handleDockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
 		end)
 		addCommsReply(_("Back"), commsStation)
 	end)
-	addCommsReply("Visit cartography office", function()
+	addCommsReply(_("cartographyOffice-comms", "Visit cartography office"), function()
 		if comms_target.cartographer_description == nil then
 			local clerk_choice = math.random(1,3)
 			if clerk_choice == 1 then
-				comms_target.cartographer_description = "The clerk behind the desk looks up briefly at you then goes back to filing her nails."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk looks up briefly at you then goes back to filing her nails.")
 			elseif clerk_choice == 2 then
-				comms_target.cartographer_description = "The clerk behind the desk examines you then returns to grooming her tentacles."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk examines you then returns to grooming her tentacles.")
 			else
-				comms_target.cartographer_description = "The clerk behind the desk glances at you then returns to preening her feathers."
+				comms_target.cartographer_description = _("cartographyOffice-comms", "The clerk behind the desk glances at you then returns to preening her feathers.")
 			end
 		end
-		setCommsMessage(string.format("%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer",comms_target.cartographer_description))
-		addCommsReply("What's the difference between the apprentice and the master?", function()
-			setCommsMessage("The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'")
+		setCommsMessage(string.format(_("cartographyOffice-comms", "%s\n\nYou can examine the brochure on the coffee table, talk to the apprentice cartographer or talk to the master cartographer"),comms_target.cartographer_description))
+		addCommsReply(_("cartographyOffice-comms", "What's the difference between the apprentice and the master?"), function()
+			setCommsMessage(_("cartographyOffice-comms", "The clerk responds in a bored voice, 'The apprentice knows the local area and is learning the broader area. The master knows the local and the broader area but can't be bothered with the local area'"))
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Examine brochure (%i rep)",getCartographerCost()),function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Examine brochure (%i rep)"),getCartographerCost()),function()
 			if comms_source:takeReputationPoints(1) then
-				setCommsMessage("The brochure has a list of nearby stations and has a list of goods nearby")
-				addCommsReply(string.format("Examine station list (%i rep)",getCartographerCost()), function()
+				setCommsMessage(_("cartographyOffice-comms", "The brochure has a list of nearby stations and has a list of goods nearby"))
+				addCommsReply(string.format(_("cartographyOffice-comms", "Examine station list (%i rep)"),getCartographerCost()), function()
 					if comms_source:takeReputationPoints(1) then
 						local brochure_stations = ""
 						local sx, sy = comms_target:getPosition()
@@ -4615,20 +4615,20 @@ function handleDockedState()
 							if obj.typeName == "SpaceStation" then
 								if not obj:isEnemy(comms_target) then
 									if brochure_stations == "" then
-										brochure_stations = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									else
-										brochure_stations = string.format("%s\n%s %s %s",brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+										brochure_stations = string.format(_("cartographyOffice-comms", "%s\n%s %s %s"),brochure_stations,obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									end
 								end
 							end
 						end
 						setCommsMessage(brochure_stations)
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply(string.format("Examine goods list (%i rep)",getCartographerCost()), function()
+				addCommsReply(string.format(_("cartographyOffice-comms", "Examine goods list (%i rep)"),getCartographerCost()), function()
 					if comms_source:takeReputationPoints(1) then
 						local brochure_goods = ""
 						local sx, sy = comms_target:getPosition()
@@ -4639,9 +4639,9 @@ function handleDockedState()
 									if obj.comms_data.goods ~= nil then
 										for good, good_data in pairs(obj.comms_data.goods) do
 											if brochure_goods == "" then
-												brochure_goods = string.format("Good, quantity, cost, station:\n%s, %i, %i, %s",good,good_data["quantity"],good_data["cost"],obj:getCallSign())
+												brochure_goods = string.format(_("cartographyOffice-comms", "Good, quantity, cost, station:\n%s, %i, %i, %s"),good,good_data["quantity"],good_data["cost"],obj:getCallSign())
 											else
-												brochure_goods = string.format("%s\n%s, %i, %i, %s",brochure_goods,good,good_data["quantity"],good_data["cost"],obj:getCallSign())
+												brochure_goods = string.format(_("cartographyOffice-comms", "%s\n%s, %i, %i, %s"),brochure_goods,good,good_data["quantity"],good_data["cost"],obj:getCallSign())
 											end
 										end
 									end
@@ -4650,20 +4650,20 @@ function handleDockedState()
 						end
 						setCommsMessage(brochure_goods)
 					else
-						setCommsMessage("Insufficient reputation")
+						setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Talk to apprentice cartographer (%i rep)",getCartographerCost("apprentice")), function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Talk to apprentice cartographer (%i rep)"),getCartographerCost("apprentice")), function()
 			if comms_source:takeReputationPoints(1) then
-				setCommsMessage("Hi, would you like for me to locate a station or some goods for you?")
-				addCommsReply("Locate station", function()
-					setCommsMessage("These are stations I have learned")
+				setCommsMessage(_("cartographyOffice-comms", "Hi, would you like for me to locate a station or some goods for you?"))
+				addCommsReply(_("cartographyOffice-comms", "Locate station"), function()
+					setCommsMessage(_("cartographyOffice-comms", "These are stations I have learned"))
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local stations_known = 0
@@ -4672,21 +4672,21 @@ function handleDockedState()
 							if not obj:isEnemy(comms_target) then
 								stations_known = stations_known + 1
 								addCommsReply(obj:getCallSign(),function()
-									local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+									local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 									if obj.comms_data.goods ~= nil then
-										station_details = string.format("%s\nGood, quantity, cost",station_details)
+										station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 										for good, good_data in pairs(obj.comms_data.goods) do
-											station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+											station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 										end
 									end
 									if obj.comms_data.general_information ~= nil then
-										station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+										station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 									end
 									if obj.comms_data.history ~= nil then
-										station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+										station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 									end
 									if obj.comms_data.gossip ~= nil then
-										station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+										station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 									end
 									setCommsMessage(station_details)
 									addCommsReply(_("Back"),commsStation)
@@ -4695,12 +4695,12 @@ function handleDockedState()
 						end
 					end
 					if stations_known == 0 then
-						setCommsMessage("I have learned of no stations yet")
+						setCommsMessage(_("cartographyOffice-comms", "I have learned of no stations yet"))
 					end
 					addCommsReply(_("Back"),commsStation)
 				end)
-				addCommsReply("Locate goods", function()
-					setCommsMessage("These are the goods I know about")
+				addCommsReply(_("cartographyOffice-comms", "Locate goods"), function()
+					setCommsMessage(_("cartographyOffice-comms", "These are the goods I know about"))
 					local sx, sy = comms_target:getPosition()
 					local nearby_objects = getObjectsInRadius(sx,sy,50000)
 					local button_count = 0
@@ -4718,21 +4718,21 @@ function handleDockedState()
 					end
 					for good, obj in pairs(by_goods) do
 						addCommsReply(good, function()
-							local station_details = string.format("%s %s %s",obj:getSectorName(),obj:getFaction(),obj:getCallSign())
+							local station_details = string.format(_("cartographyOffice-comms", "%s %s %s"),obj:getSectorName(),obj:getFaction(),obj:getCallSign())
 							if obj.comms_data.goods ~= nil then
-								station_details = string.format("%s\nGood, quantity, cost",station_details)
+								station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 								for good, good_data in pairs(obj.comms_data.goods) do
-									station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+									station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 								end
 							end
 							if obj.comms_data.general_information ~= nil then
-								station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+								station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 							end
 							if obj.comms_data.history ~= nil then
-								station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+								station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 							end
 							if obj.comms_data.gossip ~= nil then
-								station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+								station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 							end
 							setCommsMessage(station_details)
 							addCommsReply(_("Back"),commsStation)
@@ -4745,14 +4745,14 @@ function handleDockedState()
 					addCommsReply(_("Back"),commsStation)
 				end)
 			else
-				setCommsMessage("Insufficient reputation")
+				setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply(string.format("Talk to master cartographer (%i rep)",getCartographerCost("master")), function()
+		addCommsReply(string.format(_("cartographyOffice-comms", "Talk to master cartographer (%i rep)"),getCartographerCost("master")), function()
 			if comms_source:getWaypointCount() >= 9 then
-				setCommsMessage("The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him")
-				addCommsReply("Continue to Master Cartographer", masterCartographer)
+				setCommsMessage(_("cartographyOffice-comms", "The clerk clears her throat:\n\nMy indicators show you have zero available waypoints. To get the most from the master cartographer, you should delete one or more so that he can update your systems appropriately.\n\nI just want you to get the maximum benefit for the time you spend with him"))
+				addCommsReply(_("cartographyOffice-comms", "Continue to Master Cartographer"), masterCartographer)
 			else
 				masterCartographer()
 			end
@@ -4765,41 +4765,41 @@ function handleDockedState()
 		goodCount = goodCount + 1
 	end
 	if goodCount > 0 then
-		addCommsReply("Buy, sell, trade", function()
+		addCommsReply(_("trade-comms", "Buy, sell, trade"), function()
 			local ctd = comms_target.comms_data
-			local goodsReport = string.format("Station %s:\nGoods or components available for sale: quantity, cost in reputation\n",comms_target:getCallSign())
+			local goodsReport = string.format(_("trade-comms", "Station %s:\nGoods or components available for sale: quantity, cost in reputation\n"),comms_target:getCallSign())
 			for good, goodData in pairs(ctd.goods) do
-				goodsReport = goodsReport .. string.format("     %s: %i, %i\n",good,goodData["quantity"],goodData["cost"])
+				goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i, %i\n"),good,goodData["quantity"],goodData["cost"])
 			end
 			if ctd.buy ~= nil then
-				goodsReport = goodsReport .. "Goods or components station will buy: price in reputation\n"
+				goodsReport = goodsReport .. _("trade-comms", "Goods or components station will buy: price in reputation\n")
 				for good, price in pairs(ctd.buy) do
-					goodsReport = goodsReport .. string.format("     %s: %i\n",good,price)
+					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,price)
 				end
 			end
-			goodsReport = goodsReport .. string.format("Current cargo aboard %s:\n",comms_source:getCallSign())
+			goodsReport = goodsReport .. string.format(_("trade-comms", "Current cargo aboard %s:\n"),comms_source:getCallSign())
 			local cargoHoldEmpty = true
 			local player_good_count = 0
 			if comms_source.goods ~= nil then
 				for good, goodQuantity in pairs(comms_source.goods) do
 					player_good_count = player_good_count + 1
-					goodsReport = goodsReport .. string.format("     %s: %i\n",good,goodQuantity)
+					goodsReport = goodsReport .. string.format(_("trade-comms", "     %s: %i\n"),good,goodQuantity)
 				end
 			end
 			if player_good_count < 1 then
-				goodsReport = goodsReport .. "     Empty\n"
+				goodsReport = goodsReport .. _("trade-comms", "     Empty\n")
 			end
-			goodsReport = goodsReport .. string.format("Available Space: %i, Available Reputation: %i\n",comms_source.cargo,math.floor(comms_source:getReputationPoints()))
+			goodsReport = goodsReport .. string.format(_("trade-comms", "Available Space: %i, Available Reputation: %i\n"),comms_source.cargo,math.floor(comms_source:getReputationPoints()))
 			setCommsMessage(goodsReport)
 			for good, goodData in pairs(ctd.goods) do
-				addCommsReply(string.format("Buy one %s for %i reputation",good,goodData["cost"]), function()
-					local goodTransactionMessage = string.format("Type: %s, Quantity: %i, Rep: %i",good,goodData["quantity"],goodData["cost"])
+				addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,goodData["cost"]), function()
+					local goodTransactionMessage = string.format(_("trade-comms", "Type: %s, Quantity: %i, Rep: %i"),good,goodData["quantity"],goodData["cost"])
 					if comms_source.cargo < 1 then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient cargo space for purchase"
+						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient cargo space for purchase")
 					elseif goodData["cost"] > math.floor(comms_source:getReputationPoints()) then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+						goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 					elseif goodData["quantity"] < 1 then
-						goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+						goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 					else
 						if comms_source:takeReputationPoints(goodData["cost"]) then
 							comms_source.cargo = comms_source.cargo - 1
@@ -4811,9 +4811,9 @@ function handleDockedState()
 								comms_source.goods[good] = 0
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
-							goodTransactionMessage = goodTransactionMessage .. "\npurchased"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\npurchased")
 						else
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient reputation for purchase"
+							goodTransactionMessage = goodTransactionMessage .. _("needRep-comms", "\nInsufficient reputation for purchase")
 						end
 					end
 					setCommsMessage(goodTransactionMessage)
@@ -4823,11 +4823,11 @@ function handleDockedState()
 			if ctd.buy ~= nil then
 				for good, price in pairs(ctd.buy) do
 					if comms_source.goods ~= nil and comms_source.goods[good] ~= nil and comms_source.goods[good] > 0 then
-						addCommsReply(string.format("Sell one %s for %i reputation",good,price), function()
-							local goodTransactionMessage = string.format("Type: %s,  Reputation price: %i",good,price)
+						addCommsReply(string.format(_("trade-comms", "Sell one %s for %i reputation"),good,price), function()
+							local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Reputation price: %i"),good,price)
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source:addReputationPoints(price)
-							goodTransactionMessage = goodTransactionMessage .. "\nOne sold"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nOne sold")
 							comms_source.cargo = comms_source.cargo + 1
 							setCommsMessage(goodTransactionMessage)
 							addCommsReply(_("Back"), commsStation)
@@ -4837,10 +4837,10 @@ function handleDockedState()
 			end
 			if ctd.trade.food and comms_source.goods ~= nil and comms_source.goods["food"] ~= nil and comms_source.goods["food"] > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format("Trade food for %s",good), function()
-						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade food for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -4851,7 +4851,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["food"] = comms_source.goods["food"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -4860,10 +4860,10 @@ function handleDockedState()
 			end
 			if ctd.trade.medicine and comms_source.goods ~= nil and comms_source.goods["medicine"] ~= nil and comms_source.goods["medicine"] > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format("Trade medicine for %s",good), function()
-						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade medicine for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData["quantity"] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -4874,7 +4874,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["medicine"] = comms_source.goods["medicine"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -4883,10 +4883,10 @@ function handleDockedState()
 			end
 			if ctd.trade.luxury and comms_source.goods ~= nil and comms_source.goods["luxury"] ~= nil and comms_source.goods["luxury"] > 0 then
 				for good, goodData in pairs(ctd.goods) do
-					addCommsReply(string.format("Trade luxury for %s",good), function()
-						local goodTransactionMessage = string.format("Type: %s,  Quantity: %i",good,goodData["quantity"])
+					addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
+						local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
 						if goodData[quantity] < 1 then
-							goodTransactionMessage = goodTransactionMessage .. "\nInsufficient station inventory"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 						else
 							goodData["quantity"] = goodData["quantity"] - 1
 							if comms_source.goods == nil then
@@ -4897,7 +4897,7 @@ function handleDockedState()
 							end
 							comms_source.goods[good] = comms_source.goods[good] + 1
 							comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
-							goodTransactionMessage = goodTransactionMessage .. "\nTraded"
+							goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nTraded")
 						end
 						setCommsMessage(goodTransactionMessage)
 						addCommsReply(_("Back"), commsStation)
@@ -4913,14 +4913,14 @@ function handleDockedState()
 			end
 		end
 		if player_good_count > 0 then
-			addCommsReply("Jettison cargo", function()
-				setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+			addCommsReply(_("trade-comms", "Jettison cargo"), function()
+				setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 				for good, good_quantity in pairs(comms_source.goods) do
 					if good_quantity > 0 then
 						addCommsReply(good, function()
 							comms_source.goods[good] = comms_source.goods[good] - 1
 							comms_source.cargo = comms_source.cargo + 1
-							setCommsMessage(string.format("One %s jettisoned",good))
+							setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 							addCommsReply(_("Back"), commsStation)
 						end)
 					end
@@ -4928,8 +4928,8 @@ function handleDockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("No tutorial covered goods or cargo. Explain", function()
-			setCommsMessage("Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)")
+		addCommsReply(_("explainGoods-comms", "No tutorial covered goods or cargo. Explain"), function()
+			setCommsMessage(_("explainGoods-comms", "Different types of cargo or goods may be obtained from stations, freighters or other sources. They go by one word descriptions such as dilithium, optic, warp, etc. Certain mission goals may require a particular type or types of cargo. Each player ship differs in cargo carrying capacity. Goods may be obtained by spending reputation points or by trading other types of cargo (typically food, medicine or luxury)"))
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
@@ -5186,9 +5186,9 @@ function handleDockedState()
 end
 function masterCartographer()
 	if comms_source:takeReputationPoints(getCartographerCost("master")) then
-		setCommsMessage("Greetings,\nMay I help you find a station or goods?")
-		addCommsReply("Find station",function()
-			setCommsMessage("What station?")
+		setCommsMessage(_("cartographyOffice-comms", "Greetings,\nMay I help you find a station or goods?"))
+		addCommsReply(_("cartographyOffice-comms", "Find station"),function()
+			setCommsMessage(_("cartographyOffice-comms", "What station?"))
 			local nearby_objects = getAllObjects()
 			local stations_known = 0
 			for _, obj in ipairs(nearby_objects) do
@@ -5198,25 +5198,25 @@ function masterCartographer()
 						if station_distance > 50000 then
 							stations_known = stations_known + 1
 							addCommsReply(obj:getCallSign(),function()
-								local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+								local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 								if obj.comms_data.goods ~= nil then
-									station_details = string.format("%s\nGood, quantity, cost",station_details)
+									station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 									for good, good_data in pairs(obj.comms_data.goods) do
-										station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+										station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 									end
 								end
 								if obj.comms_data.general_information ~= nil then
-									station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+									station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 								end
 								if obj.comms_data.history ~= nil then
-									station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+									station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 								end
 								if obj.comms_data.gossip ~= nil then
-									station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+									station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 								end
 								local dsx, dsy = obj:getPosition()
 								comms_source:commandAddWaypoint(dsx,dsy)
-								station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+								station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 								setCommsMessage(station_details)
 								addCommsReply(_("Back"),commsStation)
 							end)
@@ -5225,12 +5225,12 @@ function masterCartographer()
 				end
 			end
 			if stations_known == 0 then
-				setCommsMessage("Try the apprentice, I'm tired")
+				setCommsMessage(_("cartographyOffice-comms", "Try the apprentice, I'm tired"))
 			end
 			addCommsReply(_("Back"),commsStation)
 		end)
-		addCommsReply("Find Goods", function()
-			setCommsMessage("What goods are you looking for?")
+		addCommsReply(_("cartographyOffice-comms", "Find Goods"), function()
+			setCommsMessage(_("cartographyOffice-comms", "What goods are you looking for?"))
 			local nearby_objects = getAllObjects()
 			local by_goods = {}
 			for _, obj in ipairs(nearby_objects) do
@@ -5250,25 +5250,25 @@ function masterCartographer()
 			for good, obj in pairs(by_goods) do
 				addCommsReply(good, function()
 					local station_distance = distance(comms_target,obj)
-					local station_details = string.format("%s %s %s Distance:%.1fU",obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
+					local station_details = string.format(_("cartographyOffice-comms", "%s %s %s Distance:%.1fU"),obj:getSectorName(),obj:getFaction(),obj:getCallSign(),station_distance/1000)
 					if obj.comms_data.goods ~= nil then
-						station_details = string.format("%s\nGood, quantity, cost",station_details)
+						station_details = string.format(_("cartographyOffice-comms", "%s\nGood, quantity, cost"),station_details)
 						for good, good_data in pairs(obj.comms_data.goods) do
-							station_details = string.format("%s\n   %s, %i, %i",station_details,good,good_data["quantity"],good_data["cost"])
+							station_details = string.format(_("cartographyOffice-comms", "%s\n   %s, %i, %i"),station_details,good,good_data["quantity"],good_data["cost"])
 						end
 					end
 					if obj.comms_data.general_information ~= nil then
-						station_details = string.format("%s\nGeneral Information:\n   %s",station_details,obj.comms_data.general_information)
+						station_details = string.format(_("stationGeneralInfo-comms", "%s\nGeneral Information:\n   %s"),station_details,obj.comms_data.general_information)
 					end
 					if obj.comms_data.history ~= nil then
-						station_details = string.format("%s\nHistory:\n   %s",station_details,obj.comms_data.history)
+						station_details = string.format(_("stationStory-comms", "%s\nHistory:\n   %s"),station_details,obj.comms_data.history)
 					end
 					if obj.comms_data.gossip ~= nil then
-						station_details = string.format("%s\nGossip:\n   %s",station_details,obj.comms_data.gossip)
+						station_details = string.format(_("gossip-comms", "%s\nGossip:\n   %s"),station_details,obj.comms_data.gossip)
 					end
 					local dsx, dsy = obj:getPosition()
 					comms_source:commandAddWaypoint(dsx,dsy)
-					station_details = string.format("%s\nAdded waypoint %i to your navigation system for %s",station_details,comms_source:getWaypointCount(),obj:getCallSign())
+					station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
 					setCommsMessage(station_details)
 					addCommsReply(_("Back"),commsStation)
 				end)
@@ -5276,7 +5276,7 @@ function masterCartographer()
 			addCommsReply(_("Back"),commsStation)
 		end)
 	else
-		setCommsMessage("Insufficient Reputation")
+		setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 	end
 end
 function artifactUpgrade()
@@ -5352,7 +5352,7 @@ function handleWeaponRestock(weapon)
         addCommsReply(_("Back"), commsStation)
     else
         if not comms_source:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage("Not enough reputation.")
+            setCommsMessage(_("needRep-comms", "Not enough reputation."))
             return
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
@@ -5433,11 +5433,11 @@ function handleUndockedState()
 			end
 		end
 		if goodsAvailable then
-			addCommsReply("What goods do you have available for sale or trade?", function()
+			addCommsReply(_("trade-comms", "What goods do you have available for sale or trade?"), function()
 				local ctd = comms_target.comms_data
-				local goodsAvailableMsg = string.format("Station %s:\nGoods or components available: quantity, cost in reputation",comms_target:getCallSign())
+				local goodsAvailableMsg = string.format(_("trade-comms", "Station %s:\nGoods or components available: quantity, cost in reputation"),comms_target:getCallSign())
 				for good, goodData in pairs(ctd.goods) do
-					goodsAvailableMsg = goodsAvailableMsg .. string.format("\n   %14s: %2i, %3i",good,goodData["quantity"],goodData["cost"])
+					goodsAvailableMsg = goodsAvailableMsg .. string.format(_("trade-comms", "\n   %14s: %2i, %3i"),good,goodData["quantity"],goodData["cost"])
 				end
 				setCommsMessage(goodsAvailableMsg)
 				addCommsReply(_("Back"), commsStation)
@@ -5469,9 +5469,9 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end
 		end)
-		addCommsReply("Where can I find particular goods?", function()
+		addCommsReply(_("trade-comms", "Where can I find particular goods?"), function()
 			local ctd = comms_target.comms_data
-			gkMsg = "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury."
+			gkMsg = _("trade-comms", "Friendly stations often have food or medicine or both. Neutral stations may trade their goods for food, medicine or luxury.")
 			if ctd.goodsKnowledge == nil then
 				ctd.goodsKnowledge = {}
 				local knowledgeCount = 0
@@ -5511,14 +5511,14 @@ function handleUndockedState()
 					local sectorName = ctd.goodsKnowledge[good]["sector"]
 					local goodName = good
 					local goodCost = ctd.goodsKnowledge[good]["cost"]
-					setCommsMessage(string.format("Station %s in sector %s has %s for %i reputation",stationName,sectorName,goodName,goodCost))
+					setCommsMessage(string.format(_("trade-comms", "Station %s in sector %s has %s for %i reputation"),stationName,sectorName,goodName,goodCost))
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if goodsKnowledgeCount > 0 then
-				gkMsg = gkMsg .. "\n\nWhat goods are you interested in?\nI've heard about these:"
+				gkMsg = gkMsg .. _("trade-comms", "\n\nWhat goods are you interested in?\nI've heard about these:")
 			else
-				gkMsg = gkMsg .. " Beyond that, I have no knowledge of specific stations"
+				gkMsg = gkMsg .. _("trade-comms", " Beyond that, I have no knowledge of specific stations")
 			end
 			setCommsMessage(gkMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -5527,14 +5527,14 @@ function handleUndockedState()
 		if (ctd.general ~= nil and ctd.general ~= "") or 
 			(ctd.history ~= nil and ctd.history ~= "") or 
 			(comms_source:isFriendly(comms_target) and ctd.gossip ~= nil and has_gossip) then
-			addCommsReply("Tell me more about your station", function()
-				setCommsMessage("What would you like to know?")
-				addCommsReply("General information", function()
+			addCommsReply(_("station-comms", "Tell me more about your station"), function()
+				setCommsMessage(_("station-comms", "What would you like to know?"))
+				addCommsReply(_("stationGeneralInfo-comms", "General information"), function()
 					setCommsMessage(ctd.general)
 					addCommsReply(_("Back"), commsStation)
 				end)
 				if ctd.history ~= nil then
-					addCommsReply("Station history", function()
+					addCommsReply(_("stationStory-comms", "Station history"), function()
 						setCommsMessage(ctd.history)
 						addCommsReply(_("Back"), commsStation)
 					end)
@@ -5542,7 +5542,7 @@ function handleUndockedState()
 				if comms_source:isFriendly(comms_target) then
 					if ctd.gossip ~= nil then
 						if has_gossip then
-							addCommsReply("Gossip", function()
+							addCommsReply(_("gossip-comms", "Gossip"), function()
 								setCommsMessage(ctd.gossip)
 								addCommsReply(_("Back"), commsStation)
 							end)
@@ -5553,7 +5553,7 @@ function handleUndockedState()
 		end
 	end)
 	if comms_source:isFriendly(comms_target) then
-		addCommsReply("What are my current orders?", function()
+		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			setOptionalOrders()
 			ordMsg = primaryOrders .. secondaryOrders .. optionalOrders
 			if playWithTimeLimit then
@@ -5593,13 +5593,13 @@ function handleUndockedState()
 		end)
 	end
 	if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
+        addCommsReply(string.format(_("stationAssist-comms", "Can you send a supply drop? (%d rep)"), getServiceCost("supplydrop")), function()
             if comms_source:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request backup."));
             else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = comms_source:getWaypoint(n)
@@ -5607,9 +5607,9 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -5619,18 +5619,18 @@ function handleUndockedState()
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
+        addCommsReply(string.format(_("stationAssist-comms", "Please send reinforcements! (%d rep)"), getServiceCost("reinforcements")), function()
             if comms_source:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
+                setCommsMessage(_("stationAssist-comms", "You need to set a waypoint before you can request reinforcements."));
             else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
+                setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
                         if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"), ship:getCallSign(), n));
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
                         addCommsReply(_("Back"), commsStation)
                     end)
@@ -5896,7 +5896,7 @@ function neutralComms(comms_data)
 								comms_source.cargo = comms_source.cargo - 1
 								setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
 							else
-								setCommsMessage("Insufficient reputation for purchase")
+								setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 							end
 							addCommsReply(_("Back"), commsShip)
 						end)
@@ -5909,7 +5909,7 @@ function neutralComms(comms_data)
 			destRep = random(1,5)
 			addCommsReply(string.format("Where are you headed? (cost: %f reputation)",destRep), function()
 				if not comms_source:takeReputationPoints(destRep) then
-					setCommsMessage("Insufficient reputation")
+					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
 					setCommsMessage(comms_target.target:getCallSign())
 				end
@@ -5959,7 +5959,7 @@ function neutralComms(comms_data)
 								comms_source.cargo = comms_source.cargo - 1
 								setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
 							else
-								setCommsMessage("Insufficient reputation for purchase")
+								setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 							end
 							addCommsReply(_("Back"), commsShip)
 						end)
@@ -5987,7 +5987,7 @@ function neutralComms(comms_data)
 									comms_source.cargo = comms_source.cargo - 1
 									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
 								else
-									setCommsMessage("Insufficient reputation for purchase")
+									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
 								addCommsReply(_("Back"), commsShip)
 							end)
