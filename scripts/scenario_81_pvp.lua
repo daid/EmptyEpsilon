@@ -338,7 +338,7 @@ function update(delta)
     if (not gallipoli:isValid()) then
         shipyard_kraylor:sendCommsMessage(
             crusader,
-            _([[Well done, Crusader!
+            _("incCall", [[Well done, Crusader!
 
 The pathetic Human flagship has been disabled. Go for the victory!]])
         )
@@ -350,7 +350,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
     if (not crusader:isValid()) then
         shipyard_human:sendCommsMessage(
             gallipoli,
-            _([[Good job, Captain!
+            _("incCall", [[Good job, Captain!
 
 With the Kraylor flagship out of the way, we can land the final blow!]])
         )

@@ -4933,16 +4933,16 @@ function handleDockedState()
 			addCommsReply(_("Back"), commsStation)
 		end)
 	end
-	if comms_target:getCallSign() == "Utopia Planitia" and (minerUpgrade or nabbitUpgrade or lisbonUpgrade or artAnchorUpgrade or addTubeUpgrade) then
-		addCommsReply("Check maintenance bay for ship upgrade", function()
+	if comms_target:getCallSign() == _("upgrade-comms", "Utopia Planitia") and (minerUpgrade or nabbitUpgrade or lisbonUpgrade or artAnchorUpgrade or addTubeUpgrade) then
+		addCommsReply(_("upgrade-comms", "Check maintenance bay for ship upgrade"), function()
 			setCommsMessage(string.format("Greetings %s,\nWelcome to the ship maintenance bay of %s. What can we do for you?",comms_source:getCallSign(),comms_target:getCallSign()))
 			if minerUpgrade then
-				addCommsReply("Upgrade beam weapons with Joshua Kojak's research", function()
+				addCommsReply(_("upgrade-comms", "Upgrade beam weapons with Joshua Kojak's research"), function()
 					if comms_source.kojakUpgrade then
-						setCommsMessage("You already have the upgrade.")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade."))
 					else
 						if comms_source:getBeamWeaponRange(0) < 1 then
-							setCommsMessage("Your ship type does not support a beam weapon upgrade.")
+							setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))
 						else
 							if missionLength >= 3 then
 								if comms_source.kojakPart == nil then
@@ -4968,13 +4968,13 @@ function handleDockedState()
 									comms_source.goods[comms_source.kojakPart] = comms_source.goods[comms_source.kojakPart] - 1
 									comms_source.cargo = comms_source.cargo + 1
 									comms_source.kojakUpgrade = true
-									setCommsMessage(string.format("Thanks for the %s. Your beam weapons now have improved range, cycle time and damage.",comms_source.kojakPart))
+									setCommsMessage(string.format(_("upgrade-comms", "Thanks for the %s. Your beam weapons now have improved range, cycle time and damage."),comms_source.kojakPart))
 								else
-									setCommsMessage(string.format("We find ourselves short of %s. Please bring us some of that kind of cargo and we can upgrade your beams",comms_source.kojakPart))
+									setCommsMessage(string.format(_("upgrade-comms", "We find ourselves short of %s. Please bring us some of that kind of cargo and we can upgrade your beams"),comms_source.kojakPart))
 								end
 							else
 								kojakBeamUpgrade()
-								setCommsMessage("Your beam weapons now have improved range, cycle time and damage.")
+								setCommsMessage(_("upgrade-comms", "Your beam weapons now have improved range, cycle time and damage."))
 								comms_source.kojakUpgrade = true
 							end
 						end
@@ -4983,9 +4983,9 @@ function handleDockedState()
 				end)
 			end
 			if nabbitUpgrade then
-				addCommsReply("Upgrade impulse engines with Dan McNabbit's tuning parameters", function()
+				addCommsReply(_("upgrade-comms", "Upgrade impulse engines with Dan McNabbit's tuning parameters"), function()
 					if comms_source.nabbitUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						if missionLength >= 3 then
 							if comms_source.nabbitPart == nil then
@@ -5014,10 +5014,10 @@ function handleDockedState()
 									playSoundFile("audio/scenario/54/sa_54_UTImpulse.ogg")
 									impulseDone = "played"
 								end
-								setCommsMessage(string.format("Thanks for the %s. Your impulse engines now have improved speed",comms_source.nabbitPart))
+								setCommsMessage(string.format(_("upgrade-comms", "Thanks for the %s. Your impulse engines now have improved speed"),comms_source.nabbitPart))
 								comms_source.nabbitUpgrade = true
 							else
-								setCommsMessage(string.format("We're short of %s. Please bring us some of that kind of cargo and we can upgrade your impulse engines",comms_source.nabbitPart))
+								setCommsMessage(string.format(_("upgrade-comms", "We're short of %s. Please bring us some of that kind of cargo and we can upgrade your impulse engines"),comms_source.nabbitPart))
 							end
 						else
 							comms_source:setImpulseMaxSpeed(comms_source:getImpulseMaxSpeed()*1.2)
@@ -5025,7 +5025,7 @@ function handleDockedState()
 								playSoundFile("audio/scenario/54/sa_54_UTImpulse.ogg")
 								impulseDone = "played"
 							end
-							setCommsMessage("Your impulse engines now have improved speed")
+							setCommsMessage(_("upgrade-comms", "Your impulse engines now have improved speed"))
 							comms_source.nabbitUpgrade = true
 						end
 					end
@@ -5033,12 +5033,12 @@ function handleDockedState()
 				end)
 			end
 			if lisbonUpgrade then
-				addCommsReply("Apply Commander Lisbon's beam cooling algorithm", function()
+				addCommsReply(_("upgrade-comms", "Apply Commander Lisbon's beam cooling algorithm"), function()
 					if comms_source.lisbonUpgrade then
 						setCommsMessage("You already have the upgrade.")
 					else
 						if comms_source:getBeamWeaponRange(0) < 1 then
-							setCommsMessage("Your ship type does not support a beam weapon upgrade.")
+							setCommsMessage(_("upgrade-comms", "Your ship type does not support a beam weapon upgrade."))
 						else
 							if missionLength >= 3 then
 								if comms_source.lisbonPart == nil then
@@ -5063,13 +5063,13 @@ function handleDockedState()
 									lisbonBeamUpgrade()
 									comms_source.goods[comms_source.lisbonPart] = comms_source.goods[comms_source.lisbonPart] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format("Thanks for bringing us %s. Your beam weapons now generate less heat when firing",comms_source.lisbonPart))
+									setCommsMessage(string.format(_("upgrade-comms", "Thanks for bringing us %s. Your beam weapons now generate less heat when firing"),comms_source.lisbonPart))
 								else
-									setCommsMessage(string.format("The algorithm requires components we don't have right now. Please bring us some %s and we can apply the upgrade",comms_source.lisbonPart))
+									setCommsMessage(string.format(_("upgrade-comms", "The algorithm requires components we don't have right now. Please bring us some %s and we can apply the upgrade"),comms_source.lisbonPart))
 								end
 							else
 								lisbonBeamUpgrade()
-								setCommsMessage("Your beam weapons now generate less heat when firing.")
+								setCommsMessage(_("upgrade-comms", "Your beam weapons now generate less heat when firing."))
 							end
 						end
 					end
@@ -5077,9 +5077,9 @@ function handleDockedState()
 				end)
 			end
 			if artAnchorUpgrade then
-				addCommsReply("Upgrade maneuverability", function()
+				addCommsReply(_("upgrade-comms", "Upgrade maneuverability"), function()
 					if comms_source.artAnchorUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						if missionLength >= 3 then
 							if comms_source.artifactUpgradePart == nil then
@@ -5104,22 +5104,22 @@ function handleDockedState()
 								comms_source.goods[comms_source.artifactUpgradePart] = comms_source.goods[comms_source.artifactUpgradePart] - 1
 								comms_source.cargo = comms_source.cargo + 1
 								artifactUpgrade()
-								setCommsMessage(string.format("We needed that %s, thanks. Your maneuverability has been significantly improved",comms_source.artifactUpgradePart))
+								setCommsMessage(string.format(_("upgrade-comms", "We needed that %s, thanks. Your maneuverability has been significantly improved"),comms_source.artifactUpgradePart))
 							else
-								setCommsMessage(string.format("To upgrade, we need you to bring us some %s",comms_source.artifactUpgradePart))
+								setCommsMessage(string.format(_("upgrade-comms", "To upgrade, we need you to bring us some %s"),comms_source.artifactUpgradePart))
 							end
 						else
 							artifactUpgrade()
-							setCommsMessage("Your maneuverability has been significantly improved")
+							setCommsMessage(_("upgrade-comms", "Your maneuverability has been significantly improved"))
 						end
 					end
 					addCommsReply(_("Back"), commsStation)
 				end)
 			end
 			if addTubeUpgrade then
-				addCommsReply("Add homing missile tube upgrade", function()
+				addCommsReply(_("upgrade-comms", "Add homing missile tube upgrade"), function()
 					if comms_source.addTubeUpgrade then
-						setCommsMessage("You already have the upgrade")
+						setCommsMessage(_("upgrade-comms", "You already have the upgrade"))
 					else
 						if comms_source.addTubeUpgradePart1 == nil then
 							randomTubeAddCargo = math.random(1,5)
@@ -5166,7 +5166,7 @@ function handleDockedState()
 							comms_source:setWeaponTubeExclusiveFor(originalTubes, "Homing")
 							comms_source:setWeaponStorageMax("Homing", comms_source:getWeaponStorageMax("Homing") + 2)
 							comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorage("Homing") + 2)
-							setCommsMessage(string.format("Thanks for the %s and %s. You now have an additional homing torpedo tube",comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))
+							setCommsMessage(string.format(_("upgrade-comms", "Thanks for the %s and %s. You now have an additional homing torpedo tube"),comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))
 							comms_source.flakyTubeCount = 0
 							comms_source.tubeFixed = true
 							if plot8 ~= flakyTube then
@@ -5174,7 +5174,7 @@ function handleDockedState()
 								flakyTubeTimer = 300
 							end
 						else
-							setCommsMessage(string.format("We're running short of supplies. To add the homing torpedo tube, we need you to bring us %s and %s",comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))				
+							setCommsMessage(string.format(_("upgrade-comms", "We're running short of supplies. To add the homing torpedo tube, we need you to bring us %s and %s"),comms_source.addTubeUpgradePart1,comms_source.addTubeUpgradePart2))				
 						end
 					end
 					addCommsReply(_("Back"), commsStation)
@@ -5332,22 +5332,22 @@ function isAllowedTo(state)
 end
 function handleWeaponRestock(weapon)
     if not comms_source:isDocked(comms_target) then 
-		setCommsMessage("You need to stay docked for that action.")
+		setCommsMessage(_("ammo-comms", "You need to stay docked for that action."))
 		return
 	end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
+        elseif weapon == "EMP" then setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
+        else setCommsMessage(_("ammo-comms", "We do not deal in those weapons.")) end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(comms_source:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - comms_source:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."));
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage(_("ammo-comms", "Sorry, sir, but you are as fully stocked as I can allow."));
         end
         addCommsReply(_("Back"), commsStation)
     else
@@ -5357,9 +5357,9 @@ function handleWeaponRestock(weapon)
         end
         comms_source:setWeaponStorage(weapon, comms_source:getWeaponStorage(weapon) + item_amount)
         if comms_source:getWeaponStorage(weapon) == comms_source:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+            setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            setCommsMessage(_("ammo-comms", "We generously resupplied you with some weapon charges.\nPut them to good use."))
         end
         addCommsReply(_("Back"), commsStation)
     end
@@ -5380,46 +5380,46 @@ function handleUndockedState()
     --Handle communications when we are not docked with the station.
 	local ctd = comms_target.comms_data
     if comms_source:isFriendly(comms_target) then
-        oMsg = "Good day, officer.\nIf you need supplies, please dock with us first."
+        oMsg = _("station-comms", "Good day, officer.\nIf you need supplies, please dock with us first.")
     else
-        oMsg = "Greetings.\nIf you want to do business, please dock with us first."
+        oMsg = _("station-comms", "Greetings.\nIf you want to do business, please dock with us first.")
     end
     if comms_target:areEnemiesInRange(20000) then
-		oMsg = oMsg .. "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you."
+		oMsg = oMsg .. _("station-comms", "\nBe aware that if enemies in the area get much closer, we will be too busy to conduct business with you.")
 	end
 	setCommsMessage(oMsg)
- 	addCommsReply("I need information", function()
-		setCommsMessage("What kind of information do you need?")
-		addCommsReply("What ordnance do you have available for restock?", function()
+ 	addCommsReply(_("station-comms", "I need information"), function()
+		setCommsMessage(_("station-comms", "What kind of information do you need?"))
+		addCommsReply(_("ammo-comms", "What ordnance do you have available for restock?"), function()
 			local ctd = comms_target.comms_data
 			local missileTypeAvailableCount = 0
 			local ordnanceListMsg = ""
 			if ctd.weapon_available.Nuke then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Nuke"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Nuke")
 			end
 			if ctd.weapon_available.EMP then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   EMP"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   EMP")
 			end
 			if ctd.weapon_available.Homing then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Homing"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Homing")
 			end
 			if ctd.weapon_available.Mine then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   Mine"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   Mine")
 			end
 			if ctd.weapon_available.HVLI then
 				missileTypeAvailableCount = missileTypeAvailableCount + 1
-				ordnanceListMsg = ordnanceListMsg .. "\n   HVLI"
+				ordnanceListMsg = ordnanceListMsg .. _("ammo-comms", "\n   HVLI")
 			end
 			if missileTypeAvailableCount == 0 then
-				ordnanceListMsg = "We have no ordnance available for restock"
+				ordnanceListMsg = _("ammo-comms", "We have no ordnance available for restock")
 			elseif missileTypeAvailableCount == 1 then
-				ordnanceListMsg = "We have the following type of ordnance available for restock:" .. ordnanceListMsg
+				string.format(_("ammo-comms", "We have the following type of ordnance available for restock:%s"), ordnanceListMsg)
 			else
-				ordnanceListMsg = "We have the following types of ordnance available for restock:" .. ordnanceListMsg
+				string.format(_("ammo-comms", "We have the following types of ordnance available for restock:%s"), ordnanceListMsg)
 			end
 			setCommsMessage(ordnanceListMsg)
 			addCommsReply(_("Back"), commsStation)
@@ -5443,7 +5443,7 @@ function handleUndockedState()
 				addCommsReply(_("Back"), commsStation)
 			end)
 		end
-		addCommsReply("See any enemies in your area?", function()
+		addCommsReply(_("helpfullWarning-comms", "See any enemies in your area?"), function()
 			if comms_source:isFriendly(comms_target) then
 				enemiesInRange = 0
 				for _, obj in ipairs(comms_target:getObjectsInRange(30000)) do
@@ -5453,18 +5453,18 @@ function handleUndockedState()
 				end
 				if enemiesInRange > 0 then
 					if enemiesInRange > 1 then
-						setCommsMessage(string.format("Yes, we see %i enemies within 30U",enemiesInRange))
+						setCommsMessage(string.format(_("helpfullWarning-comms", "Yes, we see %i enemies within 30U"),enemiesInRange))
 					else
-						setCommsMessage("Yes, we see one enemy within 30U")						
+						setCommsMessage(_("helpfullWarning-comms", "Yes, we see one enemy within 30U"))						
 					end
 					comms_source:addReputationPoints(2.0)					
 				else
-					setCommsMessage("No enemies within 30U")
+					setCommsMessage(_("helpfullWarning-comms", "No enemies within 30U"))
 					comms_source:addReputationPoints(1.0)
 				end
 				addCommsReply(_("Back"), commsStation)
 			else
-				setCommsMessage("Not really")
+				setCommsMessage(_("helpfullWarning-comms", "Not really"))
 				comms_source:addReputationPoints(1.0)
 				addCommsReply(_("Back"), commsStation)
 			end
@@ -5706,50 +5706,50 @@ function commsShip()
 end
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage("What do you want?");
+		setCommsMessage(_("shipAssist-comms", "What do you want?"));
 	else
-		setCommsMessage("Sir, how can we assist?");
+		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
-	addCommsReply("Defend a waypoint", function()
+	addCommsReply(_("shipAssist-comms", "Defend a waypoint", function()
 		if comms_source:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
+			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), commsShip)
 		else
-			setCommsMessage("Which waypoint should we defend?");
+			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply("Defend WP" .. n, function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage("We are heading to assist at WP" .. n ..".");
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
 		end
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply("Assist me", function()
-			setCommsMessage("Heading toward you to assist.");
+		addCommsReply(_("shipAssist-comms", "Assist me"), function()
+			setCommsMessage(_("shipAssist-comms", "Heading toward you to assist."));
 			comms_target:orderDefendTarget(comms_source)
 			addCommsReply(_("Back"), commsShip)
 		end)
 	end
-	addCommsReply("Report status", function()
-		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+	addCommsReply(_("shipAssist-comms", "Report status"), function()
+		msg = string.format(_("shipAssist-comms", "Hull: %d%%\n"), math.floor(comms_target:getHull() / comms_target:getHullMax() * 100))
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
-			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			msg = msg .. string.format(_("shipAssist-comms", "Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
 		elseif shields == 2 then
-			msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-			msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+			msg = msg .. string.format(_("shipAssist-comms", "Front Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100))
+			msg = msg .. string.format(_("shipAssist-comms", "Rear Shield: %d%%\n"), math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100))
 		else
 			for n=0,shields-1 do
-				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+				msg = msg .. string.format(_("shipAssist-comms", "Shield %s: %d%%\n"), n, math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100))
 			end
 		end
 
 		local missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
 		for i, missile_type in ipairs(missile_types) do
 			if comms_target:getWeaponStorageMax(missile_type) > 0 then
-					msg = msg .. missile_type .. " Missiles: " .. math.floor(comms_target:getWeaponStorage(missile_type)) .. "/" .. math.floor(comms_target:getWeaponStorageMax(missile_type)) .. "\n"
+					msg = msg .. string.format(_("shipAssist-comms", "%s Missiles: %d/%d\n"), missile_type, math.floor(comms_target:getWeaponStorage(missile_type)), math.floor(comms_target:getWeaponStorageMax(missile_type)))
 			end
 		end
 		
@@ -5758,8 +5758,8 @@ function friendlyComms(comms_data)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply("Dock at " .. obj:getCallSign(), function()
-				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
+			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
+				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -5770,27 +5770,27 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = "We will see to your destruction!"
-		taunt_success_reply = "Your bloodline will end here!"
-		taunt_failed_reply = "Your feeble threats are meaningless."
+		taunt_option = _("shipEnemy-comms", "We will see to your destruction!")
+		taunt_success_reply = _("shipEnemy-comms", "Your bloodline will end here!")
+		taunt_failed_reply = _("shipEnemy-comms", "Your feeble threats are meaningless.")
 		if faction == "Kraylor" then
-			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
+			setCommsMessage(_("shipEnemy-comms", "Ktzzzsss.\nYou will DIEEee weaklingsss!"));
 		elseif faction == "Arlenians" then
-			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
+			setCommsMessage(_("shipEnemy-comms", "We wish you no harm, but will harm you if we must.\nEnd of transmission."));
 		elseif faction == "Exuari" then
-			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
+			setCommsMessage(_("shipEnemy-comms", "Stay out of our way, or your death will amuse us extremely!"));
 		elseif faction == "Ghosts" then
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-			taunt_option = "EXECUTE: SELFDESTRUCT"
-			taunt_success_reply = "Rogue command received. Targeting source."
-			taunt_failed_reply = "External command ignored."
+			setCommsMessage(_("shipEnemy-comms", "One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted."));
+			taunt_option = _("shipEnemy-comms", "EXECUTE: SELFDESTRUCT")
+			taunt_success_reply = _("shipEnemy-comms", "Rogue command received. Targeting source.")
+			taunt_failed_reply = _("shipEnemy-comms", "External command ignored.")
 		elseif faction == "Ktlitans" then
-			setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-			taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-			taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-			taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+			setCommsMessage(_("shipEnemy-comms", "The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition."));
+			taunt_option = _("shipEnemy-comms", "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>")
+			taunt_success_reply = _("shipEnemy-comms", "We do not need permission to pluck apart such an insignificant threat.")
+			taunt_failed_reply = _("shipEnemy-comms", "The hive has greater priorities than exterminating pests.")
 		else
-			setCommsMessage("Mind your own business!");
+			setCommsMessage(_("shipEnemy-comms", "Mind your own business!"));
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -5808,10 +5808,10 @@ end
 function neutralComms(comms_data)
 	shipType = comms_target:getTypeName()
 	if shipType:find("Freighter") ~= nil then
-		setCommsMessage("Yes?")
-		addCommsReply("Do you have cargo you might sell?", function()
+		setCommsMessage(_("trade-comms", "Yes?"))
+		addCommsReply(_("trade-comms", "Do you have cargo you might sell?"), function()
 			local goodCount = 0
-			local cargoMsg = "We've got "
+			local cargoMsg = _("trade-comms", "We've got ")
 			for good, goodData in pairs(comms_data.goods) do
 				if goodData.quantity > 0 then
 					if goodCount > 0 then
@@ -5823,15 +5823,15 @@ function neutralComms(comms_data)
 				goodCount = goodCount + goodData.quantity
 			end
 			if goodCount == 0 then
-				cargoMsg = cargoMsg .. "nothing"
+				cargoMsg = cargoMsg .. _("trade-comms", "nothing")
 			end
 			setCommsMessage(cargoMsg)
 		end)
 		local freighter_multiplier = 1
 		if comms_data.friendlyness > 66 then
-			setCommsMessage("Yes?")
+			setCommsMessage(_("trade-comms", "Yes?"))
 			-- Offer destination information
-			addCommsReply("Where are you headed?", function()
+			addCommsReply(_("trade-comms", "Where are you headed?"), function()
 				setCommsMessage(comms_target.target:getCallSign())
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -5844,14 +5844,14 @@ function neutralComms(comms_data)
 					end
 				end
 				if goodCount > 0 then
-					addCommsReply("Jettison cargo", function()
-						setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+					addCommsReply(_("trade-comms", "Jettison cargo"), function()
+						setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then
 								addCommsReply(good, function()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format("One %s jettisoned",good))
+									setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -5868,11 +5868,11 @@ function neutralComms(comms_data)
 						if luxuryQuantity > 0 then
 							for good, goodData in pairs(comms_data.goods) do
 								if goodData.quantity > 0 then
-									addCommsReply(string.format("Trade luxury for %s",good), function()
+									addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 										comms_source.goods["luxury"] = comms_source.goods["luxury"] - 1
 										if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 										comms_source.goods[good] = comms_source.goods[good] + 1
-										setCommsMessage("Traded")
+										setCommsMessage(_("trade-comms", "Traded"))
 										addCommsReply(_("Back"), commsShip)
 									end)
 								end
@@ -5887,14 +5887,14 @@ function neutralComms(comms_data)
 				end
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
-						addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 							if comms_source:takeReputationPoints(goodData.cost) then
 								goodData.quantity = goodData.quantity - 1
 								if comms_source.goods == nil then comms_source.goods = {} end
 								if comms_source.goods[good] == nil then comms_source.goods[good] = 0 end
 								comms_source.goods[good] = comms_source.goods[good] + 1
 								comms_source.cargo = comms_source.cargo - 1
-								setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+								setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 							else
 								setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 							end
@@ -5925,13 +5925,13 @@ function neutralComms(comms_data)
 				end
 				if goodCount > 0 then
 					addCommsReply("Jettison cargo", function()
-						setCommsMessage(string.format("Available space: %i\nWhat would you like to jettison?",comms_source.cargo))
+						setCommsMessage(string.format(_("trade-comms", "Available space: %i\nWhat would you like to jettison?"),comms_source.cargo))
 						for good, good_quantity in pairs(comms_source.goods) do
 							if good_quantity > 0 then
 								addCommsReply(good, function()
 									comms_source.goods[good] = comms_source.goods[good] - 1
 									comms_source.cargo = comms_source.cargo + 1
-									setCommsMessage(string.format("One %s jettisoned",good))
+									setCommsMessage(string.format(_("trade-comms", "One %s jettisoned"),good))
 									addCommsReply(_("Back"), commsShip)
 								end)
 							end
@@ -5946,7 +5946,7 @@ function neutralComms(comms_data)
 				end
 				for good, goodData in pairs(comms_data.goods) do
 					if goodData.quantity > 0 then
-						addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+						addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 							if comms_source:takeReputationPoints(goodData.cost*freighter_multiplier) then
 								goodData.quantity = goodData.quantity - 1
 								if comms_source.goods == nil then
@@ -5957,7 +5957,7 @@ function neutralComms(comms_data)
 								end
 								comms_source.goods[good] = comms_source.goods[good] + 1
 								comms_source.cargo = comms_source.cargo - 1
-								setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+								setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 							else
 								setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 							end
@@ -5967,14 +5967,14 @@ function neutralComms(comms_data)
 				end	--freighter goods loop
 			end
 		else	--least friendly
-			setCommsMessage("Why are you bothering me?")
+			setCommsMessage(_("trade-comms", "Why are you bothering me?"))
 			-- Offer to sell goods if goods or equipment freighter double price
 			if distance(comms_source,comms_target) < 5000 then
 				if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 					freighter_multiplier = 3
 					for good, goodData in pairs(comms_data.goods) do
 						if goodData.quantity > 0 then
-							addCommsReply(string.format("Buy one %s for %i reputation",good,math.floor(goodData.cost*freighter_multiplier)), function()
+							addCommsReply(string.format(_("trade-comms", "Buy one %s for %i reputation"),good,math.floor(goodData.cost*freighter_multiplier)), function()
 								if comms_source:takeReputationPoints(goodData.cost*freighter_multiplier) then
 									goodData.quantity = goodData.quantity - 1
 									if comms_source.goods == nil then
@@ -5985,7 +5985,7 @@ function neutralComms(comms_data)
 									end
 									comms_source.goods[good] = comms_source.goods[good] + 1
 									comms_source.cargo = comms_source.cargo - 1
-									setCommsMessage(string.format("Purchased %s from %s",good,comms_target:getCallSign()))
+									setCommsMessage(string.format(_("trade-comms", "Purchased %s from %s"),good,comms_target:getCallSign()))
 								else
 									setCommsMessage(_("needRep-comms", "Insufficient reputation for purchase"))
 								end
@@ -5998,9 +5998,9 @@ function neutralComms(comms_data)
 		end
 	else
 		if comms_data.friendlyness > 50 then
-			setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+			setCommsMessage(_("ship-comms", "Sorry, we have no time to chat with you.\nWe are on an important mission."));
 		else
-			setCommsMessage("We have nothing for you.\nGood day.");
+			setCommsMessage(_("ship-comms", "We have nothing for you.\nGood day."));
 		end
 	end
 	return true
@@ -6515,8 +6515,8 @@ function initialOrderMessage(delta)
 	for pidx=1,8 do
 		p = getPlayerShip(pidx)
 		if p ~= nil and p:isValid() then
-			p:addToShipLog(string.format("Welcome to the delta quadrant, %s. The independent stations in the area outnumber the human naval stations, but they all rely on us to protect them.",p:getCallSign()),"Magenta")
-			p:addToShipLog("Your job is to patrol between the three major human naval stations: Asimov, Utopia Planitia and Armstrong. You'll need to dock with each of these stations. Automated systems will extract your routes and track your progress on patrolling between these stations. The primary objective of your patrol is to watch for enemy ships and intercept them, prevent them from destroying the three bases mentioned as your patrol endpoints. Enemies in the area may harass other stations in the area. Protecting the other stations is your secondary objective. Spread goodwill in this high growth, high value quadrant. Our enemies dearly wish to give us a black eye here and claim it for their own.","Magenta")
+			p:addToShipLog(string.format(_("goal-shipLog", "Welcome to the delta quadrant, %s. The independent stations in the area outnumber the human naval stations, but they all rely on us to protect them."),p:getCallSign()),"Magenta")
+			p:addToShipLog(_("goal-shipLog", "Your job is to patrol between the three major human naval stations: Asimov, Utopia Planitia and Armstrong. You'll need to dock with each of these stations. Automated systems will extract your routes and track your progress on patrolling between these stations. The primary objective of your patrol is to watch for enemy ships and intercept them, prevent them from destroying the three bases mentioned as your patrol endpoints. Enemies in the area may harass other stations in the area. Protecting the other stations is your secondary objective. Spread goodwill in this high growth, high value quadrant. Our enemies dearly wish to give us a black eye here and claim it for their own."),"Magenta")
 		end
 	end
 end
@@ -6525,17 +6525,17 @@ function patrolAsimovUtopiaPlanitiaArmstrong(delta)
 	plot1name = "patrol asimov Utopia Planitia armstrong"
 	if highestConcurrentPlayerCount > 0 then
 		if not stationAsimov:isValid() then
-			globalMessage("Asimov station destroyed")
+			globalMessage(_("msgMainscreen", "Asimov station destroyed"))
 			defeatTimer = 15
 			plot1 = defeated
 		end
 		if not stationUtopiaPlanitia:isValid() then
-			globalMessage("Utopia Planitia station destroyed")
+			globalMessage(_("msgMainscreen", "Utopia Planitia station destroyed"))
 			defeatTimer = 15
 			plot1 = defeated
 		end
 		if not stationArmstrong:isValid() then
-			globalMessage("Armstrong station destroyed")
+			globalMessage(_("msgMainscreen", "Armstrong station destroyed"))
 			defeatTimer = 15
 			plot1 = defeated
 		end
@@ -6693,17 +6693,17 @@ end
 function afterPatrol(delta)
 	plot1name = "afterPatrol"
 	if not stationAsimov:isValid() then
-		globalMessage("Asimov station destroyed")
+		globalMessage(_("msgMainscreen", "Asimov station destroyed"))
 		defeatTimer = 15
 		plot1 = defeated
 	end
 	if not stationUtopiaPlanitia:isValid() then
-		globalMessage("Utopia Planitia station destroyed")
+		globalMessage(_("msgMainscreen", "Utopia Planitia station destroyed"))
 		defeatTimer = 15
 		plot1 = defeated
 	end
 	if not stationArmstrong:isValid() then
-		globalMessage("Armstrong station destroyed")
+		globalMessage(_("msgMainscreen", "Armstrong station destroyed"))
 		defeatTimer = 15
 		plot1 = defeated
 	end
@@ -6743,7 +6743,7 @@ function afterPatrol(delta)
 		for pidx=1,32 do
 			local p = getPlayerShip(pidx)
 			if p ~= nil and p:isValid() then
-				p:addToShipLog(string.format("You completed your patrol docking duties, but enemy ships still pollute the area. Be sure to clean those up. Combined sensor readings from area stations put the current count at %i enemy ships. Feel free to continue to dock to repair and replenish if desired. Oh yes, I almost forgot, you're still responsible for protecting stations Asimov, Armstrong and Utopia Planitia",enemy_ships),"Magenta")
+				p:addToShipLog(string.format(_("orders-shipLog", "You completed your patrol docking duties, but enemy ships still pollute the area. Be sure to clean those up. Combined sensor readings from area stations put the current count at %i enemy ships. Feel free to continue to dock to repair and replenish if desired. Oh yes, I almost forgot, you're still responsible for protecting stations Asimov, Armstrong and Utopia Planitia"),enemy_ships),"Magenta")
 			end
 		end
 		patrol_complete_message = "sent"
@@ -6753,23 +6753,23 @@ function afterPatrol(delta)
 			for pidx=1,8 do
 				p = getPlayerShip(pidx)
 				if p ~= nil and p:isValid() then
-					p:addToShipLog("Stop patrol and Defend Utopia Planitia","Magenta")
+					p:addToShipLog(_("orders-shipLog", "Stop patrol and Defend Utopia Planitia"),"Magenta")
 				end
 			end
 			closestUtopiaPlayer = closestPlayerTo(stationUtopiaPlanitia)
 			if closestUtopiaPlayer ~= nil then
 				closestUtopiaPlayer_timer = play_button_expire_time
-				stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, "Audio message received, auto-transcribed to log, stored for playback: UTPLNT441")
-				closestUtopiaPlayer:addToShipLog("[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia","Yellow")
+				stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, _("audioUPlanitiaDefend-incCall", "Audio message received, auto-transcribed to log, stored for playback: UTPLNT441"))
+				closestUtopiaPlayer:addToShipLog(_("audioUPlanitiaDefend-shipLog", "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia","Yellow"))
 				if defendUtopiaMsgButton == nil then
 					defendUtopiaMsgButton = "defendUtopiaMsgButton"
-					closestUtopiaPlayer:addCustomButton("Relay",defendUtopiaMsgButton,"|> UTPLNT441",playDefendUtopiaMsg)
+					closestUtopiaPlayer:addCustomButton("Relay",defendUtopiaMsgButton,_("audioUPlanitiaDefend-buttonRelay", "|> UTPLNT441"),playDefendUtopiaMsg)
 					defendUtopiaMsgButtonOps = "defendUtopiaMsgButtonOps"
-					closestUtopiaPlayer:addCustomButton("Operations",defendUtopiaMsgButtonOps,"|> UTPLNT441",playDefendUtopiaMsg)
+					closestUtopiaPlayer:addCustomButton(_("Operations"),defendUtopiaMsgButtonOps,_("audioUPlanitiaDefend-buttonOperations", "|> UTPLNT441"),playDefendUtopiaMsg)
 				end
 			end
-			stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, "Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia")
-			primaryOrders = _("orders-comms", "Defend Utopia Planitia")
+			stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, _("audioUPlanitiaDefend-incCall", "Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"))
+			primaryOrders = _("audioUPlanitiaDefendOrders-comms", "Defend Utopia Planitia")
 			waveDelayTimer = 120
 			longWave = 0
 			plot1 = defendUtopia
@@ -6791,7 +6791,7 @@ end
 function defendUtopia(delta)
 	plot1name = "defendUtopia"
 	if not stationUtopiaPlanitia:isValid() then
-		globalMessage("Utopia Planitia station destroyed")
+		globalMessage(_("msgMainscreen", "Utopia Planitia station destroyed"))
 		defeatTimer = 15
 		plot1 = defeated
 	end
@@ -6834,13 +6834,13 @@ function defendUtopia(delta)
 				closestMidWaveUtopiaPlayer = closestPlayerTo(stationUtopiaPlanitia)
 				if closestMidWaveUtopiaPlayer ~= nil then
 					closestMidWaveUtopiaPlayer_timer = play_button_expire_time
-					stationUtopiaPlanitia:sendCommsMessage(closestMidWaveUtopiaPlayer, "Audio message received, auto-transcribed to log, stored for playback: UTPLNT477")
-					closestMidWaveUtopiaPlayer:addToShipLog("[UTPLNT477](Utopia Planitia) You have taken care of the closest enemies. Our extreme range sensors show more, but they should not arrive for a couple of minutes","Yellow")
+					stationUtopiaPlanitia:sendCommsMessage(closestMidWaveUtopiaPlayer, _("audioUPlanitiaEnnemies-incCall", "Audio message received, auto-transcribed to log, stored for playback: UTPLNT477"))
+					closestMidWaveUtopiaPlayer:addToShipLog(_("audioUPlanitiaEnnemies-shipLog", "[UTPLNT477](Utopia Planitia) You have taken care of the closest enemies. Our extreme range sensors show more, but they should not arrive for a couple of minutes"),"Yellow")
 					if utopiaBreakMsgButton == nil then
 						utopiaBreakMsgButton = "utopiaBreakMsgButton"
-						closestMidWaveUtopiaPlayer:addCustomButton("Relay",utopiaBreakMsgButton,"|> UTPLNT477",playUtopiaBreakMsg)
+						closestMidWaveUtopiaPlayer:addCustomButton("Relay",utopiaBreakMsgButton,_("audioUPlanitiaEnnemies-buttonRelay", "|> UTPLNT477"),playUtopiaBreakMsg)
 						utopiaBreakMsgButtonOps = "utopiaBreakMsgButtonOps"
-						closestMidWaveUtopiaPlayer:addCustomButton("Operations",utopiaBreakMsgButtonOps,"|> UTPLNT477",playUtopiaBreakMsg)
+						closestMidWaveUtopiaPlayer:addCustomButton("Operations",utopiaBreakMsgButtonOps,_("audioUPlanitiaEnnemies-buttonOperations", "|> UTPLNT477"),playUtopiaBreakMsg)
 					end
 				end
 				for pidx=1,8 do
@@ -7027,7 +7027,7 @@ function nuisance(delta)
 			closestPlayer = closestPlayerTo(stationAsimov)
 			if closestPlayer ~= nil then
 				closestPlayer_timer = play_button_expire_time
-				stationAsimov:sendCommsMessage(closestPlayer, "Audio message received, auto-transcribed into log, stored for playback: ASMVSNSR003")
+				stationAsimov:sendCommsMessage(closestPlayer, _("audioAsimov-incCall", "Audio message received, auto-transcribed into log, stored for playback: ASMVSNSR003"))
 				closestPlayer:addToShipLog("[ASMVSNSR003](Asimov sensor technician) Our long range sensors show enemies approaching","Yellow")
 				if playMsgFromAsimovButton == nil then
 					playMsgFromAsimovButton = "playMsgFromAsimovButton"
@@ -7084,7 +7084,7 @@ function sickMiner(delta)
 			closestSickMinerPlayer = closestPlayerTo(sickMinerStation)
 			if closestSickMinerPlayer ~= nil then
 				closestSickMinerPlayer_timer = play_button_expire_time
-				sickMinerStation:sendCommsMessage(closestSickMinerPlayer, "Audio message received, auto-transcribed into log, stored for playback: MINSTN014")
+				sickMinerStation:sendCommsMessage(closestSickMinerPlayer, _("audioSickMiner-incCall", "Audio message received, auto-transcribed into log, stored for playback: MINSTN014"))
 				closestSickMinerPlayer:addToShipLog(string.format("[MINSTN014](%s in sector %s) Joshua Kojak has come down with something our autodoc can't handle. He's supposed to be helping us mine these asteroids, but he can't do us any good while he's sick. Can you transport him to Bethesda station? I hear they've got some clever doctors there that might help.",sickMinerStation:getCallSign(),sickMinerStation:getSectorName()),"Yellow")
 				if playMsgFromSickStationButton == nil then
 					playMsgFromSickStationButton = "playMsgFromSickStationButton"
@@ -7113,7 +7113,7 @@ function getSickMinerFromStation(delta)
 			if p ~= nil and p:isValid() and p:isDocked(sickMinerStation) then
 				p.sickMinerAboard = true
 				sickMinerState = "aboard player ship"
-				sickMinerStation:sendCommsMessage(p,"Audio message received, auto-transcribed into log, stored for playback: MINSTN019")
+				sickMinerStation:sendCommsMessage(p,_("audioSickMiner-incCall", "Audio message received, auto-transcribed into log, stored for playback: MINSTN019"))
 				p:addToShipLog("[MINSTN019]Thanks for getting Joshua aboard. Please take him to Bethesda","Yellow")
 				sickMinerShip = p
 				if playMsg2FromSickStationButton == nil then
@@ -7140,7 +7140,7 @@ function takeSickMinerToBethesda(delta)
 	if sickMinerState == "aboard player ship" then
 		if sickMinerShip:isDocked(stationBethesda) then
 			sickMinerState = "at Bethesda"
-			stationBethesda:sendCommsMessage(sickMinerShip,"Audio message received, auto-transcribed into log, stored for playback: BTHSDA002")
+			stationBethesda:sendCommsMessage(sickMinerShip,_("audioBethesda-incCall", "Audio message received, auto-transcribed into log, stored for playback: BTHSDA002"))
 			sickMinerShip:addToShipLog("[BTHSDA002] Joshua Kojak is being treated. He shows every sign of recovering","Yellow")
 			if playMsgFromBethesdaButton == nil then
 				playMsgFromBethesdaButton = "playMsgFromBethesdaButton"
@@ -7171,7 +7171,7 @@ function minerRecovering(delta)
 			if closestBethesdaPlayer == nil then
 				closestBethesdaPlayer = getPlayerShip(-1)
 			end
-			stationBethesda:sendCommsMessage(closestBethesdaPlayer, "Audio message received, auto-transcribed into log, stored for playback: BTHSDA034")
+			stationBethesda:sendCommsMessage(closestBethesdaPlayer, _("audioBethesda-incCall", "Audio message received, auto-transcribed into log, stored for playback: BTHSDA034"))
 			closestBethesdaPlayer:addToShipLog("[BTHSDA034](Joshua Kojak) Thanks for bringing me to Bethesda. I'm feeling much better. I'm transmitting my research on power systems and exotic metals. You may find it interesting. Mining leaves me lots of time for thinking","Yellow")
 			if playMsgKojakButton == nil then
 				closestBethesdaPlayer_timer = play_button_expire_time
@@ -7288,8 +7288,8 @@ function minerWeaponsDecide(delta)
 	end
 	if sickMinerState == "base processed" then
 		if closestBethesdaPlayer:isValid() and closestBethesdaPlayer.receivedMinerResearch then
-			stationUtopiaPlanitia:sendCommsMessage(closestBethesdaPlayer,"Thanks for the information. We can upgrade you next time you dock.")
-			closestBethesdaPlayer:addToShipLog("[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock","Magenta")
+			stationUtopiaPlanitia:sendCommsMessage(closestBethesdaPlayer,_("UtopiaPlanitia-incCall", "Thanks for the information. We can upgrade you next time you dock."))
+			closestBethesdaPlayer:addToShipLog(_("UtopiaPlanitia-shipLog", "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock","Magenta"))
 		end
 		plot2 = nil
 		minerUpgrade = true
@@ -7330,14 +7330,14 @@ function incursion(delta)
 			if closestIncursionPlayer == nil then
 				closestIncursionPlayer = getPlayerShip(-1)
 			end
-			stationUtopiaPlanitia:sendCommsMessage(closestIncursionPlayer, "Audio message received, auto-transcribed into log, stored for playback: UTPLNT103")
-			closestIncursionPlayer:addToShipLog("[UTPLNT103](Utopia Planitia sensor technician) Our long range sensors show enemies approaching","Yellow")
+			stationUtopiaPlanitia:sendCommsMessage(closestIncursionPlayer, _("audioUPlanitiaIncursion-incCall", "Audio message received, auto-transcribed into log, stored for playback: UTPLNT103"))
+			closestIncursionPlayer:addToShipLog(_("audioUPlanitiaIncursion-shipLog", "[UTPLNT103](Utopia Planitia sensor technician) Our long range sensors show enemies approaching"),"Yellow")
 			if playUtopiaPlanitiaSensorMsgButton == nil then
 				closestIncursionPlayer_timer = play_button_expire_time
 				playUtopiaPlanitiaSensorMsgButton = "playUtopiaPlanitiaSensorMsgButton"
-				closestIncursionPlayer:addCustomButton("Relay",playUtopiaPlanitiaSensorMsgButton,"|> UTPLNT103",playUtopiaPlanitiaSensorTechMessage)
+				closestIncursionPlayer:addCustomButton("Relay",playUtopiaPlanitiaSensorMsgButton,_("audioUPlanitiaIncursion-buttonRelay", "|> UTPLNT103"),playUtopiaPlanitiaSensorTechMessage)
 				playUtopiaPlanitiaSensorMsgButtonOps = "playUtopiaPlanitiaSensorMsgButtonOps"
-				closestIncursionPlayer:addCustomButton("Operations",playUtopiaPlanitiaSensorMsgButtonOps,"|> UTPLNT103",playUtopiaPlanitiaSensorTechMessage)
+				closestIncursionPlayer:addCustomButton("Operations",playUtopiaPlanitiaSensorMsgButtonOps,_("audioUPlanitiaIncursion-buttonOperations", "|> UTPLNT103"),playUtopiaPlanitiaSensorTechMessage)
 			end
 		end
 	end
@@ -7416,8 +7416,8 @@ function dropNabbit(delta)
 	plot3name = "dropNabbit"
 	if nabbitShip:isValid() and nabbitShip.nabbitAboard and stationArmstrong:isValid() then
 		if nabbitShip:isDocked(stationArmstrong) then
-			stationArmstrong:sendCommsMessage(nabbitShip,"Audio message received, auto-transcribed into log, stored for playback: ASTGDN038")
-			nabbitShip:addToShipLog("[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds","Yellow")
+			stationArmstrong:sendCommsMessage(nabbitShip,_("audioArmstrong-incCall", "Audio message received, auto-transcribed into log, stored for playback: ASTGDN038"))
+			nabbitShip:addToShipLog(_("audioArmstrong-shipLog", "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds","Yellow"))
 			nabbitShip:setImpulseMaxSpeed(nabbitShip:getImpulseMaxSpeed()*1.2)
 			nabbitShip.nabbitUpgrade = true
 			nabbitUpgrade = true
@@ -7427,9 +7427,9 @@ function dropNabbit(delta)
 			removeGMFunction("Start p 3 McNabbit ride")
 			if playNabbitTuneMsgButton == nil then
 				playNabbitTuneMsgButton = "playNabbitTuneMsgButton"
-				nabbitShip:addCustomButton("Relay",playNabbitTuneMsgButton,"|> ASTGDN038",playNabbitTune)
+				nabbitShip:addCustomButton("Relay",playNabbitTuneMsgButton,_("audioArmstrong-buttonRelay", "|> ASTGDN038"),playNabbitTune)
 				playNabbitTuneMsgButtonOps = "playNabbitTuneMsgButtonOps"
-				nabbitShip:addCustomButton("Operations",playNabbitTuneMsgButtonOps,"|> ASTGDN038",playNabbitTune)
+				nabbitShip:addCustomButton("Operations",playNabbitTuneMsgButtonOps,_("audioArmstrong-buttonOperations", "|> ASTGDN038"),playNabbitTune)
 			end
 		end
 	end
@@ -7496,14 +7496,14 @@ function stowawayMessage()
 		end
 		stowawayTransport = farthestTransport
 		stowawayName = stowawayTransport:getCallSign()
-		stationBethesda:sendCommsMessage(closestLisbonPlayer,"Audio message received, auto-transcribed into log, stored for playback: BTHSDA271")
-		closestLisbonPlayer:addToShipLog(string.format("[BTHSDA271] Commander Lisbon reports her child stowed away on a freighter. After extensive investigation, she believes Francis is aboard %s currently in sector %s\nShe requests a rendezvous with the freighter to bring back her child",stowawayName,stowawayTransport:getSectorName()),"Yellow")
+		stationBethesda:sendCommsMessage(closestLisbonPlayer,_("audioBethesda-incCall", "Audio message received, auto-transcribed into log, stored for playback: BTHSDA271"))
+		closestLisbonPlayer:addToShipLog(string.format(_("audioBethesda-shipLog", "[BTHSDA271] Commander Lisbon reports her child stowed away on a freighter. After extensive investigation, she believes Francis is aboard %s currently in sector %s\nShe requests a rendezvous with the freighter to bring back her child"),stowawayName,stowawayTransport:getSectorName()),"Yellow")
 		if playLisbonMsgButton == nil then
 			closestLisbonPlayer_timer = play_button_expire_time
 			playLisbonMsgButton = "playLisbonMsgButton"
-			closestLisbonPlayer:addCustomButton("Relay",playLisbonMsgButton,"|> BTHSDA271",playLisbonRequestMessage)
+			closestLisbonPlayer:addCustomButton("Relay",playLisbonMsgButton,_("audioBethesda-buttonRelay", "|> BTHSDA271"),playLisbonRequestMessage)
 			playLisbonMsgButtonOps = "playLisbonMsgButtonOps"
-			closestLisbonPlayer:addCustomButton("Operations",playLisbonMsgButtonOps,"|> BTHSDA271",playLisbonRequestMessage)
+			closestLisbonPlayer:addCustomButton("Operations",playLisbonMsgButtonOps,_("audioBethesda-buttonOperations", "|> BTHSDA271"),playLisbonRequestMessage)
 		end
 		plot4 = getStowaway
 		plot4reminder = string.format("Retrieve Francis from freighter %s last reported in sector %s and return child to station Bethesda",stowawayName,stowawayTransport:getSectorName())
@@ -8013,15 +8013,15 @@ function scannedAnchors(delta)
 		p = getPlayerShip(pidx)
 		if p ~= nil and p:isValid() then
 			if p.artAnchor1 or p.artAnchor2 then
-				p:addToShipLog("[UTPLNT116](Utopia Planitia) Scanned artifacts show promise for ship systems improvement. Recommend retrieval","Yellow")
+				p:addToShipLog(_("audioUPlanitiaArtifact-shipLog", "[UTPLNT116](Utopia Planitia) Scanned artifacts show promise for ship systems improvement. Recommend retrieval"),"Yellow")
 				plotArt = suggestRetrieveAnchors
 				if artSoundButton == nil then
 					artSoundButton = "artSoundButton"
 					artSoundShip = p
-					stationUtopiaPlanitia:sendCommsMessage(artSoundShip,"Audio message received, stored for playback: UTPLNT116")
-					artSoundShip:addCustomButton("Relay",artSoundButton,"|> UTPLNT116",playArtSound)
+					stationUtopiaPlanitia:sendCommsMessage(artSoundShip,_("audioUPlanitiaArtifact-incCall", "Audio message received, stored for playback: UTPLNT116"))
+					artSoundShip:addCustomButton("Relay",artSoundButton,_("audioUPlanitiaArtifact-buttonRelay", "|> UTPLNT116"),playArtSound)
 					artSoundButtonOps = "artSoundButtonOps"
-					artSoundShip:addCustomButton("Operations",artSoundButtonOps,"|> UTPLNT116",playArtSound)
+					artSoundShip:addCustomButton("Operations",artSoundButtonOps,_("audioUPlanitiaArtifact-buttonOperations", "|> UTPLNT116"),playArtSound)
 				end
 			end
 		end
