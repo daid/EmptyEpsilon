@@ -5710,7 +5710,7 @@ function friendlyComms(comms_data)
 	else
 		setCommsMessage(_("shipAssist-comms", "Sir, how can we assist?"));
 	end
-	addCommsReply(_("shipAssist-comms", "Defend a waypoint", function()
+	addCommsReply(_("shipAssist-comms", "Defend a waypoint"), function()
 		if comms_source:getWaypointCount() == 0 then
 			setCommsMessage(_("shipAssist-comms", "No waypoints set. Please set a waypoint first."));
 			addCommsReply(_("Back"), commsShip)
