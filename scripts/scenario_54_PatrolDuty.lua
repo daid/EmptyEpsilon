@@ -7376,7 +7376,7 @@ function nabbitRideRequest()
 			closestNabbitPlayer = getPlayerShip(-1)
 		end
 		closestNabbitPlayer:addToShipLog(string.format(_("nabbit-shipLog", "[%s in sector %s] Engineer Dan McNabbit requests a ride to Armstrong"),nabbitStation:getCallSign(),nabbitStation:getSectorName()),"Magenta")
-		plot3reminder = string.format(_(_("nabbit-comms", "Pick up Dan McNabbit from %s in sector %s and take him to Armstrong"),nabbitStation:getCallSign(),nabbitStation:getSectorName())
+		plot3reminder = string.format(_("nabbit-comms", "Pick up Dan McNabbit from %s in sector %s and take him to Armstrong"),nabbitStation:getCallSign(),nabbitStation:getSectorName())
 		plot3 = getNabbit
 	else
 		plot3 = nil
