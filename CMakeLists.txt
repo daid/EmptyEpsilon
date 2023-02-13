@@ -224,7 +224,6 @@ set(MAIN_SOURCES
     src/modelInfo.cpp
     src/packResourceProvider.cpp
     src/scienceDatabase.cpp
-    src/commsScriptInterface.cpp
     src/modelData.cpp
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
@@ -440,7 +439,6 @@ set(MAIN_SOURCES
     src/ai/fighterAI.h
     src/ai/missileVolleyAI.h
     src/beamTemplate.h
-    src/commsScriptInterface.h
     src/epsilonServer.h
     src/factionInfo.h
     src/featureDefs.h

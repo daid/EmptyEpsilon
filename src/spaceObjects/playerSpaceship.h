@@ -3,7 +3,6 @@
 
 #include "spaceship.h"
 #include "scanProbe.h"
-#include "commsScriptInterface.h"
 #include "playerInfo.h"
 #include "components/player.h"
 #include "components/comms.h"
@@ -19,17 +18,10 @@ public:
     constexpr static float max_scanning_delay = 6.0;
 
     constexpr static int16_t CMD_PLAY_CLIENT_SOUND = 0x0001;
-
-    // Ship automation features, mostly for single-person ships like fighters
-    bool auto_repair_enabled;
-
 private:
     bool on_new_player_ship_called=false;
 
 public:
-    // Capable of hacking a target
-    bool can_hack = true;
-
     PlayerSpaceship();
     virtual ~PlayerSpaceship();
 
@@ -57,8 +49,8 @@ public:
 
     void setCanScan(bool enabled) {} //TODO
     bool getCanScan() { return true; } //TODO
-    void setCanHack(bool enabled) { can_hack = enabled; }
-    bool getCanHack() { return can_hack; }
+    void setCanHack(bool enabled) { } //TODO
+    bool getCanHack() { return true; }
     void setCanDock(bool enabled);
     bool getCanDock();
     void setCanCombatManeuver(bool enabled) { } //TODO

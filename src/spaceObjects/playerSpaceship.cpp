@@ -25,6 +25,7 @@
 #include "components/missiletubes.h"
 #include "components/maneuveringthrusters.h"
 #include "components/selfdestruct.h"
+#include "components/hacking.h"
 #include "systems/jumpsystem.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
@@ -521,15 +522,9 @@ REGISTER_MULTIPLAYER_CLASS(PlayerSpaceship, "PlayerSpaceship");
 PlayerSpaceship::PlayerSpaceship()
 : SpaceShip("PlayerSpaceship", 5000)
 {
-    // Initialize ship settings
-    auto_repair_enabled = false;
-    
     // For now, set player ships to always be fully scanned to all other ships
     for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
         setScannedStateForFaction(entity, ScanState::State::FullScan);
-
-    registerMemberReplication(&can_hack);
-    registerMemberReplication(&auto_repair_enabled);
 
     if (game_server)
     {
@@ -574,10 +569,10 @@ void PlayerSpaceship::applyTemplateValues()
             entity.getOrAddComponent<ScienceScanner>();
         if (ship_template->can_launch_probe)
             entity.getOrAddComponent<ScanProbeLauncher>();
+        if (ship_template->can_hack)
+            entity.getOrAddComponent<HackingDevice>();
     }
 
-    // Set the ship's capabilities.
-    can_hack = ship_template->can_hack;
     if (!on_new_player_ship_called)
     {
         on_new_player_ship_called = true;
@@ -1034,7 +1029,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sp::io::DataBuff
         }
         break;
     case CMD_SET_AUTO_REPAIR:
-        packet >> auto_repair_enabled;
+        {
+            bool auto_repair_enabled = false;
+            packet >> auto_repair_enabled;
+        }
         break;
     case CMD_SET_BEAM_FREQUENCY:
         {
@@ -1616,8 +1614,8 @@ string PlayerSpaceship::getExportLine()
         result += ":setLongRangeRadarRange(" + string(getLongRangeRadarRange(), 0) + ")";
     //if (can_scan != ship_template->can_scan)
     //    result += ":setCanScan(" + string(can_scan, true) + ")";
-    if (can_hack != ship_template->can_hack)
-        result += ":setCanHack(" + string(can_hack, true) + ")";
+    //if (can_hack != ship_template->can_hack)
+    //    result += ":setCanHack(" + string(can_hack, true) + ")";
     //if (can_dock != ship_template->can_dock)
     //    result += ":setCanDock(" + string(can_dock, true) + ")";
     //if (can_combat_maneuver != ship_template->can_combat_maneuver)
@@ -1628,8 +1626,8 @@ string PlayerSpaceship::getExportLine()
     //    result += ":setCanLaunchProbe(" + string(can_launch_probe, true) + ")";
     //if (auto_coolant_enabled)
     //    result += ":setAutoCoolant(true)";
-    if (auto_repair_enabled)
-        result += ":commandSetAutoRepair(true)";
+    //if (auto_repair_enabled)
+    //    result += ":commandSetAutoRepair(true)";
 
     // Update power factors, only for the systems where it changed.
     /*
