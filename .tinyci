@@ -36,7 +36,14 @@ directory = _build_android
 commands =
     cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain -DCMAKE_BUILD_TYPE=Release
     ninja -j 2
-artifacts = EmptyEpsilon.apk
+artifacts = EmptyEpsilon-armeabi-v7a.apk
+
+[build-android]
+directory = _build_android64
+commands =
+    cmake .. -G Ninja -DSERIOUS_PROTON_DIR=../../SeriousProton -DCMAKE_TOOLCHAIN_FILE=../cmake/android.toolchain -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI=arm64-v8a
+    ninja -j 2
+artifacts = EmptyEpsilon-arm64-v8a.apk
 
 [repos-daid/SeriousProton]
 required = True

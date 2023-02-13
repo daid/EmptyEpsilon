@@ -172,7 +172,7 @@ Mesh* Mesh::getMesh(const string& filename)
                     continue;
                 if (parts[0] == "v")
                 {
-                    if (parts.size() == 4)
+                    if (parts.size() >= 4)
                     {
                         vertices.emplace_back(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat());
                     }
@@ -184,7 +184,7 @@ Mesh* Mesh::getMesh(const string& filename)
 
                 }else if (parts[0] == "vn")
                 {
-                    if (parts.size() == 4)
+                    if (parts.size() >= 4)
                     {
                         normals.push_back(glm::normalize(glm::vec3(parts[1].toFloat(), parts[2].toFloat(), parts[3].toFloat())));
                     }
@@ -196,7 +196,7 @@ Mesh* Mesh::getMesh(const string& filename)
                     
                 }else if (parts[0] == "vt")
                 {
-                    if (parts.size() == 3)
+                    if (parts.size() >= 3)
                     {
                         texCoords.push_back(glm::vec2(parts[1].toFloat(), parts[2].toFloat()));
                     }

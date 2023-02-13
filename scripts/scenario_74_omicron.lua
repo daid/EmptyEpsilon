@@ -9469,7 +9469,7 @@ function freighterMessage()
 		local player_list = getActivePlayerShips()
 		for index, p in ipairs(player_list) do
 			if p.protect_freighter_message == nil then
-				station_regional_hq:sendCommsMessage(p,string.format(_("mission1st-comms","To: %s\nFrom: %s\n\nGreetings %s,\n\nPlease ensure the safe arrival of freighter %s at %s. Looks like the Exuari might attack them."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
+				station_regional_hq:sendCommsMessage(p,string.format(_("mission1st-incCall","To: %s\nFrom: %s\n\nGreetings %s,\n\nPlease ensure the safe arrival of freighter %s at %s. Looks like the Exuari might attack them."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),station_regional_hq:getCallSign()))
 				p.protect_freighter_message = "sent"
 			end
 		end
@@ -9652,7 +9652,7 @@ function freighterSafeMessage()
 	end
 	for index, p in ipairs(player_list) do
 		if p.freighter_safe_message == nil then
-			station_regional_hq:sendCommsMessage(p,string.format(_("mission1st-comms","To: %s\nFrom: %s\n\nHello %s,\n\nFreighter %s has safely docked and is %s. Thanks for your assistance."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),activity))
+			station_regional_hq:sendCommsMessage(p,string.format(_("mission1st-incCall","To: %s\nFrom: %s\n\nHello %s,\n\nFreighter %s has safely docked and is %s. Thanks for your assistance."),p:getCallSign(),station_regional_hq:getCallSign(),p:getCallSign(),critical_transport:getCallSign(),activity))
 			p.freighter_safe_message = "sent"
 		end
 	end
