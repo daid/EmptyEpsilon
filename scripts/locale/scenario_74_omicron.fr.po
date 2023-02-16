@@ -4302,7 +4302,7 @@ msgstr ""
 
 #: scripts/scenario_74_omicron.lua:9472
 #, lua-format
-msgctxt "mission1st-comms"
+msgctxt "mission1st-incCall"
 msgid ""
 "To: %s\n"
 "From: %s\n"
@@ -4561,7 +4561,7 @@ msgstr "débarquer les passagers"
 
 #: scripts/scenario_74_omicron.lua:9655
 #, lua-format
-msgctxt "mission1st-comms"
+msgctxt "mission1st-incCall"
 msgid ""
 "To: %s\n"
 "From: %s\n"
