@@ -10342,7 +10342,7 @@ function sporiskyQuestioned(delta)
 								p17:addToShipLog(string.format(_("orders-shipLog", "Spy identified enemy base in sector %s"), sporiskyTarget:getSectorName()),"Magenta") 
 								secondaryOrders = string.format(_("orders-comms", "\nDestroy enemy base in sector %s"),sporiskyTarget:getSectorName())
 							else
-								p17:addToShipLog(string.format(_("orders-shipLog", "The enemy base identified has already been destroyed"),"Magenta")
+								p17:addToShipLog(string.format(_("orders-shipLog", "The enemy base identified has already been destroyed")),"Magenta")
 							end
 						end
 						plotR = sporiskyEnemyBase
