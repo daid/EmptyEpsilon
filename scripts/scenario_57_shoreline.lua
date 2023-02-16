@@ -2915,7 +2915,7 @@ function populateStationPool()
 				},
 				description = _("scienceDescription-station", "Shield and armor components and research"), 
 				general = _("stationGeneralInfo-comms", "We research and make general and specialized components for ship shield and ship armor systems"), 
-				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved."),
+				history = _("stationStory-comms", "This station was named after one of the earliest researchers in shield technology, Alexander Toohie back when it was considered impractical to construct shields due to the physics involved.")},
 		},
 		["Pop Sci Fi"] = {
 			["Anderson"] = {
